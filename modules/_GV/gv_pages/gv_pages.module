@@ -1,0 +1,198 @@
+<?php
+// $Id: gv_pages.module
+
+
+/**
+ * Implements hook_menu().
+ */
+function gv_pages_menu() {
+
+   $items['home'] = array(
+    'title' => 'Home page',
+    'description' => 'Home page',
+    //'page callback' => 'drupal_get_form',
+    'page callback' => 'gv_pages_showPage',
+    'page arguments' => array('gv_pages_home'/*$name*/, 'via_function'/* $call_type: direct_theme OR via_function */, 'gv_pages_buildHome' /*$build_function*/), //array(1),
+    'access callback' => 'gv_pages_access',
+    'access arguments' => array('home'),
+    'type' => MENU_CALLBACK,
+  );   
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_access().
+ */
+function gv_pages_access($type = null) {
+  switch ($type) {
+    default:
+      if (arg(1) == 'edit') {
+        if(!user_access('administer site configuration')) {
+          return false;
+        }
+      }
+    break;
+  }
+  return true;
+}
+
+/**
+ * Prepare data for output it via theme function
+ */
+function gv_pages_buildHome($name, $data) {
+  return theme($name, array('data' => $data));
+}
+
+/**
+ * Show themed page for users or edit page for admins (with  argument /edit in url)
+ */
+function gv_pages_showPage($name, $call_type = 'direct_theme', $build_function = NULL) {
+  if (arg(1) == 'edit') {
+    return drupal_get_form($name . '_form');
+  }
+  else {
+    $data = variable_get($name . '_form', null);
+    if ($call_type == 'direct_theme') {
+      return theme($name, array('data' => $data));
+    }
+    else {
+      return $build_function($name, $data);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_form() for editing home page content.
+ */
+function gv_pages_home_form() {
+    
+  $data = variable_get('gv_pages_home_form');
+    
+  $form['home_backend'] = array(
+  '#type' => 'markup',
+  '#title' => t('Explain'),
+  '#markup' => '<div>Some text</div>',  
+  ); 
+    
+  $form['fieldsetblock1_title'] = array(
+  '#type' => 'fieldset',
+  '#title' => t('Title'),
+  '#collapsible' => true,
+  '#collapsed' => true,  
+  ); 
+    
+  $form['fieldsetblock1_title']['gv_block1_title'] = array(
+  '#type' => 'textfield',
+  '#title' => t('Title 1'),
+  '#maxlength' => 40,   
+  '#description' => t('Max length of the string: 40 symbols'),    
+  '#default_value' => isset($data['gv_block1_title']) ? $data['gv_block1_title'] : 'some default title',
+  );
+  
+  $form['goto_view'] = array(
+        '#markup' => '<div><a href="/">View the page</a></div>', // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  );
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#weight' => 40,
+  );
+
+  $form['#redirect'] = ''; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  
+  $form['#submit'][0] = 'gv_pages_forms_submit'; // process all gv_pages forms with a single function
+  $form['#validate'][0] = 'gv_pages_forms_validate';
+  return $form;
+}
+
+
+/**
+ * Custom form validating function for a submitted form data.
+ */
+function gv_pages_forms_validate($form, &$form_state) {
+    
+  foreach ($form_state['values'] as $key => $url) {
+    if (preg_match('/.*_link.*_url.*/i', $key)) {
+      $url = trim($url, '/');
+      if (!$results = db_query("SELECT pid FROM {url_alias} WHERE (LOWER(alias) = LOWER('" . $url . "')) OR (LOWER(source) = LOWER('" . $url . "'))")->fetchField()) {
+        if (!$results = db_query("SELECT path FROM {menu_router} WHERE (LOWER(path) = LOWER('" . $url . "'))")->fetchField()) {
+          form_set_error($key, t('No such link on the site: ' . $url));
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Custom dispatching form sumbitting function for a submitted form data.
+ */
+function gv_pages_forms_submit($form, &$form_state) {
+  gv_pages_process_form_data($form, $form_state);
+  $form_state['redirect'] = $form['#redirect'];
+  drupal_set_message(t('The changes have been saved.'));
+}
+
+
+/**
+ * Custom helper form sumbitting function for a submitted form data.
+ */
+function gv_pages_process_form_data($form, $form_state) {
+    
+  $data = array();
+  foreach ($form_state['values'] as $key => $value) {
+    $pos = strpos($key, 'gv_');
+    if ($pos !== false AND $pos == 0) {
+      if (!is_array($value)) {
+        $data[$key] = strip_tags($value);
+      }
+      else {
+        $data[$key] = $value;
+      }
+    }
+  }
+ 
+  if (isset($_FILES['files'])) {
+    $default_file_path = variable_get('file_public_path', conf_path() . '/files');
+    $uploaddir = $_SERVER['DOCUMENT_ROOT'] . $default_file_path;
+
+    foreach ($_FILES['files']['name'] as $var_name => $file_name) {
+      $setToDelete = (isset($form_state['values']['del_' . $var_name]) AND $form_state['values']['del_' . $var_name]);
+      if(!$file_name OR $setToDelete) {
+        if ($setToDelete) {
+            if ($form_state['values']['_' . $var_name]) {
+              unlink($uploaddir . '/' . basename($form_state['values']['_' . $var_name]));
+            }
+            $data[$var_name] = '';
+        }
+        else {
+          $data[$var_name] = isset($form_state['values']['_' . $var_name])?$form_state['values']['_' . $var_name]:''; // leave the old file
+        }  
+        continue;
+      }
+
+      $basename = basename($_FILES['files']['name'][$var_name]);
+      move_uploaded_file($_FILES['files']['tmp_name'][$var_name], $uploaddir . '/' . $basename);
+      $data[$var_name] = $default_file_path . '/' . $basename;
+    }
+  }
+  variable_set($form['#form_id'], $data);
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function gv_pages_theme($existing, $type, $theme, $path) {
+  return array(
+     'gv_pages_home' => array(
+          'variables' => array('data' => null),
+          'template' => 'gv_pages_home',
+        ),
+  );
+}
