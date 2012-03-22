@@ -46,16 +46,10 @@ function gv_blocks_get_omMenuBlock_News() {
   // Get main menu wireframe menu
   $menu = menu_build_tree('menu-main-menu');
   dpm($menu);
+  $menu = menu_build_tree('main-menu');
+  dpm($menu);
   return 'News menu block xxx';
 }
-
-function gv_blocks_get_footerLinks()
-{
-    
-    return theme('wdg_misc_footerLinks', $links);
-}
-
-
 
 
 /**
