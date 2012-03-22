@@ -5,17 +5,14 @@
  * Implements hook_block_info().
  */
 function gv_blocks_block_info() {
-  
   $blocks['main_menu_om_news'] = array(
     'info' => t('Main menu om News'), 
     'cache' => DRUPAL_NO_CACHE,
   );
-
   $blocks['main_menu_om_providers'] = array(
     'info' => t('Main menu om Providers'),
     'cache' => DRUPAL_CACHE_GLOBAL, //DRUPAL_NO_CACHE,
   );
-  
   return $blocks;
 }
 
@@ -24,13 +21,15 @@ function gv_blocks_block_info() {
  * Implements hook_block_view().
  */
 function gv_blocks_block_view($delta = '') {
-  
   $block = array();
-
   switch ($delta) {      
     case 'main_menu_om_news':
       $block['subject'] = t('Main menu om News');
       $block['content'] = gv_blocks_get_omMenuBlock_News();
+      break;
+    case 'main_menu_om_providers':
+      $block['subject'] = t('Main menu om Providers');
+      $block['content'] = gv_blocks_get_omMenuBlock_Providers();
       break;
   }
   return $block;
@@ -49,6 +48,18 @@ function gv_blocks_get_omMenuBlock_News() {
   return theme('gv_blocks_submenu', array('submenu' => $submenu)); //'News menu block xxx';
 }
 
+
+/**
+ * Returns themed News block content for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_Providers() {
+  // Get main menu wireframe menu
+  $submenu = gv_blocks_getSubmenuByTitle('main-menu', 'Providers');
+  if (!$submenu) {
+    return NULL;
+  }
+  return theme('gv_blocks_submenu', array('submenu' => $submenu)); //'News menu block xxx';
+}
 /**
  * Returns submenu from menu
  */
@@ -67,7 +78,7 @@ function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
  */
 function gv_blocks_theme($existing, $type, $theme, $path) {
   return array(
-     'gv_blocks_submenu' => array(
+     'gv_blocks_submenuSimple' => array(
           'variables' => array('vars' => null),
           //'template' => 'gv_blocks_home',
         ),
@@ -75,17 +86,25 @@ function gv_blocks_theme($existing, $type, $theme, $path) {
 }
 
 
-function theme_gv_blocks_submenu($vars) {
-  dpm($vars['submenu']);
+/**
+ * Simple theming of nested submenu.
+ */
+function theme_gv_blocks_submenuSimple($vars) {
+  $level = isset($vars['level']) ? $vars['level'] : 0;
   $out = '<ul>';
   foreach ($vars['submenu']['below'] as $submenu) {
-    $out .= '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
+    $out .= '<li>';
+    if($level) {
+      for ($i = 0; $i <= $level; $i++ ) {
+        $out .= '--';
+      }
+    }
+    $out .= l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
     if (isset($submenu['below'])) {
       // Recursion call.
-      $out .= theme('gv_blocks_submenu', array('submenu' => $submenu));
+      $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1) ));
     }
   }
   $out .= '</ul>';
-  dpm($out);
   return $out;
 }
