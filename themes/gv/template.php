@@ -3,7 +3,7 @@
  * Implements hook_html_head_alter().
  * We are overwriting the default meta character type tag with HTML5 version.
  */
-function framework_html_head_alter(&$head_elements) {
+function gv_html_head_alter(&$head_elements) {
   $head_elements['system_meta_content_type']['#attributes'] = array(
     'charset' => 'utf-8'
   );
@@ -16,7 +16,7 @@ function framework_html_head_alter(&$head_elements) {
  *   An array containing the breadcrumb links.
  * @return a string containing the breadcrumb output.
  */
-function framework_breadcrumb($variables) {
+function gv_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
 
   if (!empty($breadcrumb)) {
@@ -32,7 +32,7 @@ function framework_breadcrumb($variables) {
 /**
  * Duplicate of theme_menu_local_tasks() but adds clearfix to tabs.
  */
-function framework_menu_local_tasks(&$variables) {
+function gv_menu_local_tasks(&$variables) {
   $output = '';
 
   if (!empty($variables['primary'])) {
@@ -53,7 +53,7 @@ function framework_menu_local_tasks(&$variables) {
 /**
  * Override or insert variables into the node template.
  */
-function framework_preprocess_node(&$variables) {
+function gv_preprocess_node(&$variables) {
   $variables['submitted'] = t('Published by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
   if ($variables['view_mode'] == 'full' && node_is_page($variables['node'])) {
     $variables['classes_array'][] = 'node-full';
@@ -68,7 +68,7 @@ function framework_preprocess_node(&$variables) {
  * @param $hook
  *   The name of the template being rendered ("region" in this case.)
  */
-function framework_preprocess_region(&$variables, $hook) {
+function gv_preprocess_region(&$variables, $hook) {
   // Use a bare template for the content region.
   if ($variables['region'] == 'content') {
     $variables['theme_hook_suggestions'][] = 'region__bare';
@@ -83,7 +83,7 @@ function framework_preprocess_region(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-function framework_preprocess_block(&$variables, $hook) {
+function gv_preprocess_block(&$variables, $hook) {
   // Use a bare template for the page's main content.
   if ($variables['block_html_id'] == 'block-system-main') {
     $variables['theme_hook_suggestions'][] = 'block__bare';
@@ -99,7 +99,7 @@ function framework_preprocess_block(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-function framework_process_block(&$variables, $hook) {
+function gv_process_block(&$variables, $hook) {
   // Drupal 7 should use a $title variable instead of $block->subject.
   $variables['title'] = $variables['block']->subject;
 }
@@ -107,6 +107,6 @@ function framework_process_block(&$variables, $hook) {
 /**
  * Changes the search form to use the "search" input element of HTML5.
  */
-function framework_preprocess_search_block_form(&$vars) {
+function gv_preprocess_search_block_form(&$vars) {
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
