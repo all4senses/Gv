@@ -4,7 +4,7 @@
 /**
  * Implements hook_block_info().
  */
-function gv_block_info() {
+function gv_blocks_block_info() {
   
   $blocks['main_menu_om_news'] = array(
     'info' => t('Main menu om News'), 
@@ -23,7 +23,7 @@ function gv_block_info() {
 /**
  * Implements hook_block_view().
  */
-function gv_block_view($delta = '') {
+function gv_blocks_block_view($delta = '') {
   
   $block = array();
 
@@ -31,7 +31,7 @@ function gv_block_view($delta = '') {
         
     case 'main_menu_om_news':
       $block['subject'] = t('Main menu om News');
-      $block['content'] = gv_get_omMenuBlock_News();
+      $block['content'] = gv_blocks_get_omMenuBlock_News();
       break;
 
   }
@@ -42,7 +42,7 @@ function gv_block_view($delta = '') {
 /**
  * Returns themed News block content for MegaMenu.
  */
-function gv_get_omMenuBlock_News() {
+function gv_blocks_get_omMenuBlock_News() {
   return 'News menu block';
 }
 
