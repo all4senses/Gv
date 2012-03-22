@@ -28,12 +28,10 @@ function gv_blocks_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {      
-        
     case 'main_menu_om_news':
       $block['subject'] = t('Main menu om News');
       $block['content'] = gv_blocks_get_omMenuBlock_News();
       break;
-
   }
   return $block;
 }
@@ -48,7 +46,6 @@ function gv_blocks_get_omMenuBlock_News() {
   if (!$submenu) {
     return NULL;
   }
-  dpm($submenu);
   return theme('gv_blocks_submenu', $submenu); //'News menu block xxx';
 }
 
@@ -78,6 +75,7 @@ function gv_blocks_theme($existing, $type, $theme, $path) {
 }
 
 
-function theme_gv_blocks_submenu($data) {
+function theme_gv_blocks_submenu($submenu) {
+  dpm($submenu);
   return 'xxxxxxxxx xxxxx';
 }
