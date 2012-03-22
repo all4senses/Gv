@@ -7,11 +7,15 @@
 function gv_blocks_block_info() {
   $blocks['main_menu_om_news'] = array(
     'info' => t('Main menu om News'), 
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_NO_CACHE, // DRUPAL_CACHE_GLOBAL
   );
   $blocks['main_menu_om_providers'] = array(
     'info' => t('Main menu om Providers'),
-    'cache' => DRUPAL_CACHE_GLOBAL, //DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['main_menu_om_blog'] = array(
+    'info' => t('Main menu om Blog'),
+    'cache' => DRUPAL_NO_CACHE,
   );
   return $blocks;
 }
@@ -25,11 +29,15 @@ function gv_blocks_block_view($delta = '') {
   switch ($delta) {      
     case 'main_menu_om_news':
       $block['subject'] = t('Main menu om News');
-      $block['content'] = gv_blocks_get_omMenuBlock_News();
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('News', 'gv_blocks_get_omMenuBlock_News');
       break;
     case 'main_menu_om_providers':
       $block['subject'] = t('Main menu om Providers');
-      $block['content'] = gv_blocks_get_omMenuBlock_Providers();
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Providers', 'gv_blocks_get_omMenuBlock_Providers');
+      break;
+    case 'main_menu_om_blog':
+      $block['subject'] = t('Main menu om Blog');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Blog', 'gv_blocks_get_omMenuBlock_Blog');
       break;
   }
   return $block;
@@ -37,31 +45,47 @@ function gv_blocks_block_view($delta = '') {
 
 
 /**
- * Returns themed News block content for MegaMenu.
+ * Dispatcher for getting themed block for MegaMenu by a block title.
  */
-function gv_blocks_get_omMenuBlock_News() {
-  // Get main menu wireframe menu
-  $submenu = gv_blocks_getSubmenuByTitle('main-menu', 'News');
+function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
+// Get main menu wireframe menu
+  $submenu = gv_blocks_getSubmenuByTitle('main-menu', $title);
   if (!$submenu) {
     return NULL;
   }
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu)); //'News menu block xxx';
+  return $function($submenu);
 }
 
 
 /**
- * Returns themed News block content for MegaMenu.
+ * Returns a themed News block content for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_News($submenu) {
+
+  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+}
+
+
+/**
+ * Returns a themed VoIP Providers block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Providers() {
-  // Get main menu wireframe menu
-  $submenu = gv_blocks_getSubmenuByTitle('main-menu', 'VoIP Providers');
-  if (!$submenu) {
-    return NULL;
-  }
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu)); //'News menu block xxx';
+
+  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
+
+
 /**
- * Returns submenu from menu
+ * Returns a themed VoIP Blog block content for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_Blog() {
+
+  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+}
+
+
+/**
+ * Returns a submenu from a menu.
  */
 function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
   $menu = menu_build_tree($menu_name);
@@ -95,7 +119,7 @@ function theme_gv_blocks_submenuSimple($vars) {
   foreach ($vars['submenu']['below'] as $submenu) {
     $out .= '<li>';
     if($level) {
-      for ($i = 0; $i <= $level; $i++ ) {
+      for ($i = 0; $i < $level; $i++ ) {
         $out .= '--';
       }
     }
