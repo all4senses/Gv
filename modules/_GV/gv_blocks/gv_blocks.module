@@ -49,7 +49,7 @@ function gv_blocks_get_omMenuBlock_News() {
     return NULL;
   }
   dpm($submenu);
-  return render($submenu); //'News menu block xxx';
+  return theme('gv_blocks_submenu', $submenu); //'News menu block xxx';
 }
 
 /**
@@ -70,9 +70,14 @@ function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
  */
 function gv_blocks_theme($existing, $type, $theme, $path) {
   return array(
-     'gv_blocks_home' => array(
-          'variables' => array('data' => null),
+     'gv_blocks_submenu' => array(
+          'variables' => array('submenu' => null),
           //'template' => 'gv_blocks_home',
         ),
   );
+}
+
+
+function theme_gv_blocks_submenu($data) {
+  return 'xxxxxxxxx xxxxx';
 }
