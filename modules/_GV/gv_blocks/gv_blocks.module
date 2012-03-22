@@ -53,7 +53,7 @@ function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
   if (!$submenu) {
     return NULL;
   }
-  return $function($submenu);
+  return '<div class="om-btitle">' . $title . '</div>' . $function($submenu);
 }
 
 
