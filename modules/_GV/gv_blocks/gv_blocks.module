@@ -81,6 +81,12 @@ function gv_blocks_get_footerMenu() {
  * Dispatcher for getting themed block for MegaMenu by a block title.
  */
 function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
+
+  // global $language;
+  // $types = cache_get('types_' . $language->language);
+  // Expire = current time + 2 hours.
+  // cache_set('types_' . $language->language, $types, 'cache', time() + 7200);
+  
   // Get main menu wireframe menu.
   $submenu = gv_blocks_getSubmenuByTitle('main-menu', $title);
   if (!$submenu) {
