@@ -189,10 +189,13 @@ function gv_pages_process_form_data($form, $form_state) {
  * Implements hook_theme().
  */
 function gv_pages_theme($existing, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'gv_pages') . '/tpl';
+  
   return array(
-     'gv_pages_home' => array(
-          'variables' => array('data' => null),
-          'template' => 'gv_pages_home',
-        ),
+    'gv_pages_home' => array(
+      'variables' => array('data' => null),
+      'template' => 'gv_pages_home',
+      'path' => $path,
+    ),
   );
 }

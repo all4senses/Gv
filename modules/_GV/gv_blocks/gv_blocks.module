@@ -115,7 +115,7 @@ function gv_blocks_theme($existing, $type, $theme, $path) {
  */
 function theme_gv_blocks_submenuSimple($vars) {
   $level = isset($vars['level']) ? $vars['level'] : 0;
-  $out = '<ul>';
+  $out = '<ul class="' . 'om-links lvl-' . $level . '">';
   foreach ($vars['submenu']['below'] as $submenu) {
     $out .= '<li>';
     if($level) {
