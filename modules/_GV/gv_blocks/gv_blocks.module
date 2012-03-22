@@ -179,7 +179,7 @@ function theme_gv_blocks_submenuSimple($vars) {
     $out .= l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
     if (isset($submenu['below'])) {
       // Recursion call.
-      $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'delimiter' => $delimiter ));
+      $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter ));
     }
     $count++;
   }
