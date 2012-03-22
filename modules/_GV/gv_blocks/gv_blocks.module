@@ -21,6 +21,10 @@ function gv_blocks_block_info() {
     'info' => t('Main menu om About Us'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['main_menu_om_allaboutvoip'] = array(
+    'info' => t('Main menu om About Us'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
   return $blocks;
 }
 
@@ -47,6 +51,10 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Main menu om About Us');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('About Us', 'gv_blocks_get_omMenuBlock_AboutUs');
       break;    
+    case 'main_menu_om_allaboutvoip':
+      $block['subject'] = t('Main menu om About Us');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('All About VoIP', 'gv_blocks_get_omMenuBlock_AllAboutVoIP');
+      break; 
   }
   return $block;
 }
@@ -96,6 +104,15 @@ function gv_blocks_get_omMenuBlock_Blog($submenu) {
  * Returns a themed VoIP Blog block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
+
+  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+}
+
+
+/**
+ * Returns a themed All About VoIP block content for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_AllAboutVoIP($submenu) {
 
   return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
