@@ -67,14 +67,15 @@ function gv_blocks_block_view($delta = '') {
   return $block;
 }
 
+
 /**
  * Returns a themed Footer menu.
  */
 function gv_blocks_get_footerMenu() {
   $menu = menu_build_tree('menu-footer-menu');
-  dpm($menu);
   return '<span class="copyright">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
 }
+
 
 /**
  * Dispatcher for getting themed block for MegaMenu by a block title.
@@ -146,6 +147,7 @@ function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
   }
   return NULL;
 }
+
 
 /**
  * Implements hook_theme().
