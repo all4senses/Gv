@@ -8,59 +8,16 @@
   </div>
 
   <header id="header" role="banner" class="clearfix">
-	<?php if ($logo): ?>
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo">
-        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-      </a>
-    <?php endif; ?>
-    <?php if ($site_name || $site_slogan): ?>
-      <hgroup id="site-name-slogan">
-        <?php if ($site_name): ?>
-          <h1 id="site-name">
-            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><span><?php print $site_name; ?></span></a>
-          </h1>
-        <?php endif; ?>
-        <?php if ($site_slogan): ?>
-          <h2 id="site-slogan"><?php print $site_slogan; ?></h2>
-        <?php endif; ?>
-      </hgroup>
-    <?php endif; ?>
 
-    <?php print render($page['header']); ?>
+    <nav id="navigation" role="navigation" class="clearfix">
+      <?php if ($logo): ?>
+        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo">
+          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+        </a>
+      <?php endif; ?>
+      <?php print render($page['header']); ?>
+    </nav> <!-- /#navigation -->
 
-    <?php if ($main_menu || $secondary_menu || !empty($page['navigation'])): ?>
-      <nav id="navigation" role="navigation" class="clearfix">
-        <?php if (!empty($page['navigation'])): ?> <!--if block in navigation region, override $main_menu and $secondary_menu-->
-          <?php print render($page['navigation']); ?>
-        <?php endif; ?>
-        <?php if (empty($page['navigation'])): ?>
-		  <?php print theme('links__system_main_menu', array(
-            'links' => $main_menu,
-            'attributes' => array(
-              'id' => 'main-menu',
-              'class' => array('links', 'clearfix'),
-            ),
-            'heading' => array(
-              'text' => t('Main menu'),
-              'level' => 'h2',
-              'class' => array('element-invisible'),
-            ),
-          )); ?>
-		  <?php print theme('links__system_secondary_menu', array(
-            'links' => $secondary_menu,
-            'attributes' => array(
-              'id' => 'secondary-menu',
-              'class' => array('links', 'clearfix'),
-            ),
-            'heading' => array(
-              'text' => t('Secondary menu'),
-              'level' => 'h2',
-              'class' => array('element-invisible'),
-            ),
-          )); ?>
-        <?php endif; ?>
-      </nav> <!-- /#navigation -->
-    <?php endif; ?>
     <?php if ($breadcrumb): print $breadcrumb; endif;?>
   </header> <!-- /#header -->
 
