@@ -1,0 +1,60 @@
+<?php
+// $Id: gv_blocks.module
+
+/**
+ * Implements hook_block_info().
+ */
+function gv_block_info() {
+  
+  $blocks['main_menu_om_news'] = array(
+    'info' => t('Main menu om News'), 
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $blocks['main_menu_om_providers'] = array(
+    'info' => t('Main menu om Providers'),
+    'cache' => DRUPAL_CACHE_GLOBAL, //DRUPAL_NO_CACHE,
+  );
+  
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function gv_block_view($delta = '') {
+  
+  $block = array();
+
+  switch ($delta) {      
+        
+    case 'main_menu_om_news':
+      $block['subject'] = t('Main menu om News');
+      $block['content'] = gv_get_omMenuBlock_News();
+      break;
+
+  }
+  return $block;
+}
+
+
+/**
+ * Returns themed News block content for MegaMenu.
+ */
+function gv_get_omMenuBlock_News() {
+  return 'News menu block';
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function gv_blocks_theme($existing, $type, $theme, $path) {
+  return array(
+     'gv_blocks_home' => array(
+          'variables' => array('data' => null),
+          //'template' => 'gv_blocks_home',
+        ),
+  );
+}
