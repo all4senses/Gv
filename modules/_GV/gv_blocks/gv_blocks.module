@@ -68,14 +68,14 @@ function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
 function gv_blocks_theme($existing, $type, $theme, $path) {
   return array(
      'gv_blocks_submenu' => array(
-          'variables' => array('submenu' => null),
+          'variables' => array('vars' => null),
           //'template' => 'gv_blocks_home',
         ),
   );
 }
 
 
-function theme_gv_blocks_submenu($submenu) {
-  dpm($submenu);
+function theme_gv_blocks_submenu($vars) {
+  dpm($vars['submenu']);
   return 'xxxxxxxxx xxxxx';
 }
