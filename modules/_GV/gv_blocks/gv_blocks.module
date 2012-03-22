@@ -73,7 +73,7 @@ function gv_blocks_block_view($delta = '') {
 function gv_blocks_get_footerMenu() {
   $menu = menu_build_tree('menu-footer-menu');
   dpm($menu);
-  return '<span class="copyright">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'delimiter' => ' | '));
+  return '<span class="copyright">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => ' | '));
 }
 
 /**
@@ -165,8 +165,9 @@ function gv_blocks_theme($existing, $type, $theme, $path) {
  */
 function theme_gv_blocks_submenuSimple($vars) {
   $level = isset($vars['level']) ? $vars['level'] : 0;
+  $class = isset($vars['class']) ? $vars['class'] : 'om-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
-  $out = '<ul class="' . 'om-links lvl-' . $level . '">';
+  $out = '<ul class="' . $class . ' lvl-' . $level . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
     $out .= ($count ? $delimiter : '') . '<li>';
