@@ -6,23 +6,27 @@
  */
 function gv_blocks_block_info() {
   $blocks['main_menu_om_news'] = array(
-    'info' => t('Main menu om News'), 
+    'info' => t('OM News'), 
     'cache' => DRUPAL_NO_CACHE, // DRUPAL_CACHE_GLOBAL
   );
   $blocks['main_menu_om_providers'] = array(
-    'info' => t('Main menu om Providers'),
+    'info' => t('OM Providers'),
     'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['main_menu_om_blog'] = array(
-    'info' => t('Main menu om Blog'),
+    'info' => t('OM Blog'),
     'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['main_menu_om_aboutus'] = array(
-    'info' => t('Main menu om About Us'),
+    'info' => t('OM About Us'),
     'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['main_menu_om_allaboutvoip'] = array(
-    'info' => t('Main menu om All About VoIP'),
+    'info' => t('OM All About VoIP'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['footer_menu'] = array(
+    'info' => t('Footer menu'),
     'cache' => DRUPAL_NO_CACHE,
   );
   return $blocks;
@@ -36,35 +40,47 @@ function gv_blocks_block_view($delta = '') {
   $block = array();
   switch ($delta) {      
     case 'main_menu_om_news':
-      $block['subject'] = t('Main menu om News');
+      $block['subject'] = t('OM News');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('News', 'gv_blocks_get_omMenuBlock_News');
       break;
     case 'main_menu_om_providers':
-      $block['subject'] = t('Main menu om Providers');
+      $block['subject'] = t('OM Providers');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Providers', 'gv_blocks_get_omMenuBlock_Providers');
       break;
     case 'main_menu_om_blog':
-      $block['subject'] = t('Main menu om Blog');
+      $block['subject'] = t('OM Blog');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Blog', 'gv_blocks_get_omMenuBlock_Blog');
       break;
     case 'main_menu_om_aboutus':
-      $block['subject'] = t('Main menu om About Us');
+      $block['subject'] = t('OM About Us');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('About Us', 'gv_blocks_get_omMenuBlock_AboutUs');
-      break;    
+      break;
     case 'main_menu_om_allaboutvoip':
-      $block['subject'] = t('Main menu om All About VoIP');
+      $block['subject'] = t('OM All About VoIP');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('All About VoIP', 'gv_blocks_get_omMenuBlock_AllAboutVoIP');
+      break;
+    case 'footer_menu':
+      $block['subject'] = t('Footer menu');
+      $block['content'] = gv_blocks_get_footerMenu();
       break; 
   }
   return $block;
 }
 
+/**
+ * Returns a themed Footer menu.
+ */
+function gv_blocks_get_footerMenu() {
+  $menu = menu_build_tree('footer-menu');
+  dpm($menu);
+  return '<span class="copyright">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'delimiter' => ' | '));
+}
 
 /**
  * Dispatcher for getting themed block for MegaMenu by a block title.
  */
 function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
-// Get main menu wireframe menu
+  // Get main menu wireframe menu.
   $submenu = gv_blocks_getSubmenuByTitle('main-menu', $title);
   if (!$submenu) {
     return NULL;
@@ -149,9 +165,11 @@ function gv_blocks_theme($existing, $type, $theme, $path) {
  */
 function theme_gv_blocks_submenuSimple($vars) {
   $level = isset($vars['level']) ? $vars['level'] : 0;
+  $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
   $out = '<ul class="' . 'om-links lvl-' . $level . '">';
+  $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
-    $out .= '<li>';
+    $out .= ($count ? $delimiter : '') . '<li>';
     if($level) {
       for ($i = 0; $i < $level; $i++ ) {
         $out .= '--';
@@ -160,8 +178,9 @@ function theme_gv_blocks_submenuSimple($vars) {
     $out .= l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
     if (isset($submenu['below'])) {
       // Recursion call.
-      $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1) ));
+      $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'delimiter' => $delimiter ));
     }
+    $count++;
   }
   $out .= '</ul>';
   return $out;
