@@ -77,5 +77,15 @@ function gv_blocks_theme($existing, $type, $theme, $path) {
 
 function theme_gv_blocks_submenu($vars) {
   dpm($vars['submenu']);
-  return 'xxxxxxxxx xxxxx';
+  $out = '<ul>';
+  foreach ($vars['submenu']['below'] as $submenu) {
+    $out .= '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
+    if (isset($submenu['below'])) {
+      // Recursion call.
+      $out .= theme('gv_blocks_submenu', array('submenu' => $submenu));
+    }
+  }
+  $out .= '</ul>';
+  dpm($out);
+  return $out;
 }
