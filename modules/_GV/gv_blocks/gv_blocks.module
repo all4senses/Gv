@@ -73,7 +73,7 @@ function gv_blocks_block_view($delta = '') {
 function gv_blocks_get_footerMenu() {
   $menu = menu_build_tree('menu-footer-menu');
   dpm($menu);
-  return '<span class="copyright">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span>|</span>'));
+  return '<span class="copyright">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
 }
 
 /**
