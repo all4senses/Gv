@@ -17,15 +17,8 @@
  *   Return nothing.
  */
 function gv_misc_form_alter(&$form, &$form_state, $form_id) {
-  dpm($form_id);dpm($form);
-  /*
-  switch ($form_id) {
-    // Unlink Ckeditor from the comment input form.
-    case 'comment_node_provider_form':
-    case 'comment_node_review_form':
-      $form['comment_body']['und'][0]['#type'] = 'textarea';
-  }
-  */
+  // dpm($form_id);dpm($form);
+  // Unlink Ckeditor from the comment input form.
   if($form['#id'] == 'comment-form') {
     $form['comment_body']['und'][0]['#type'] = 'textarea';
   }
