@@ -1,0 +1,22 @@
+<?php
+// $Id: gv_misc.module
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+ *
+ * @param string $form_id
+ *   Form ID.
+ *
+ * @return void
+ *   Return nothing.
+ */
+function gv_misc_form_alter(&$form, &$form_state, $form_id) {
+  dpm($form_id);
+
+}
