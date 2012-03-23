@@ -187,13 +187,22 @@ function theme_gv_blocks_submenuSimple($vars) {
   $out = '<ul class="' . $class . ' lvl-' . $level . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
+    if ($submenu['link']['hidden']) {
+      continue;
+    }
     $out .= ($count ? $delimiter : '') . '<li>';
     if($level) {
       for ($i = 0; $i < $level; $i++ ) {
         $out .= '--';
       }
     }
-    $out .= l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
+    // If the field Description has '<nolink>' don't show link for this item
+    if(strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
+      $out .= t($submenu['link']['link_title']) . '</li>';
+    }
+    else {
+      $out .= l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
+    }
     if (!empty($submenu['below'])) {
       // Recursion call.
       $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter ));
