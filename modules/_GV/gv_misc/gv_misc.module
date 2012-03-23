@@ -19,5 +19,9 @@
 function gv_misc_form_alter(&$form, &$form_state, $form_id) {
   dpm($form_id);
   dpm($form);
-
+  switch ($form_id) {
+    case 'comment_node_provider_form':
+      global $language;
+      $form['comment_body'][$language->language][0]['#type'] = 'textarea';
+  }
 }
