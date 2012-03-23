@@ -25,6 +25,10 @@ function gv_blocks_block_info() {
     'info' => t('OM All About VoIP'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['main_menu_om_editor'] = array(
+    'info' => t('OM Editor'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
   $blocks['footer_menu'] = array(
     'info' => t('Footer menu'),
     'cache' => DRUPAL_NO_CACHE,
@@ -59,6 +63,10 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('OM All About VoIP');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('All About VoIP', 'gv_blocks_get_omMenuBlock_AllAboutVoIP');
       break;
+    case 'main_menu_om_editor':
+      $block['subject'] = t('OM Editor');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Editor', 'gv_blocks_get_omMenuBlock_Editor');
+      break;     
     case 'footer_menu':
       $block['subject'] = t('Footer menu');
       $block['content'] = gv_blocks_get_footerMenu();
@@ -100,7 +108,6 @@ function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
  * Returns a themed News block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_News($submenu) {
-
   return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
 
@@ -109,7 +116,6 @@ function gv_blocks_get_omMenuBlock_News($submenu) {
  * Returns a themed VoIP Providers block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Providers($submenu) {
-
   return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
 
@@ -118,7 +124,6 @@ function gv_blocks_get_omMenuBlock_Providers($submenu) {
  * Returns a themed VoIP Blog block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Blog($submenu) {
-
   return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
 
@@ -127,7 +132,6 @@ function gv_blocks_get_omMenuBlock_Blog($submenu) {
  * Returns a themed VoIP Blog block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
-
   return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
 
@@ -136,7 +140,14 @@ function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
  * Returns a themed All About VoIP block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_AllAboutVoIP($submenu) {
+  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+}
 
+
+/**
+ * Returns a themed Editor block content for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_Editor($submenu) {
   return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
 }
 
