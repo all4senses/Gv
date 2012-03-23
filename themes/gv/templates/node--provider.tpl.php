@@ -1,5 +1,6 @@
+<div>11111111111111111111111111111</div>
 <?php if (!$page): ?>
-  <div>11111111111111111111111111111</div><article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
 
   <?php if ($user_picture || $display_submitted || !$page): ?>
