@@ -17,7 +17,7 @@
  *   Return nothing.
  */
 function gv_misc_form_alter(&$form, &$form_state, $form_id) {
-  //dpm($form_id);dpm($form);
+  dpm($form_id);dpm($form);
   switch ($form_id) {
     // Unlink Ckeditor from the comment input form.
     case 'comment_node_provider_form':
