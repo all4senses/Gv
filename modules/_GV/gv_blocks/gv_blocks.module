@@ -1,6 +1,8 @@
 <?php
 // $Id: gv_blocks.module
 
+module_load_include('inc', 'vg_blocks', 'inc/constants');
+
 /**
  * Implements hook_block_info().
  */
@@ -40,6 +42,10 @@ function gv_blocks_block_info() {
   $blocks['request_quote'] = array(
     'info' => t('Request a quote'),
     'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['news_topics'] = array(
+    'info' => t('News topics'),
+    'cache' => DRUPAL_NO_CACHE,
   );
   return $blocks;
 }
@@ -87,10 +93,36 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Request a quote');
       $block['content'] = gv_blocks_get_requestQuote();
       break; 
+    case 'news_topics':
+      $block['subject'] = t('News topics');
+      $block['content'] = gv_blocks_get_newsTopics();
+      break;
   }
   return $block;
 }
 
+
+/**
+ * Returns a themed News topics block. 
+ * 
+ * Allows to use same topics for News, articles, etc.
+ */
+function gv_blocks_get_newsTopics() {
+  // global $language;
+  // $types = cache_get('types_' . $language->language);
+  // Expire = current time + 2 hours.
+  // cache_set('types_' . $language->language, $types, 'cache', time() + 7200);
+
+  $voc = taxonomy_vocabulary_machine_name_load(TOPICS);
+  $results = db_query("SELECT name FROM {taxonomy_term_data} WHERE vid = :vid", array(':vid' => $voc->vid));
+  foreach($results as $term) {
+    $topics[] = $term;
+  }
+  dpm($topics);
+  //$out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
+  return 'topics...';//gv_blocks_wrapInBlockThemed($block_data, $block);
+  
+}
 
 /**
  * Returns a themed Follow Us links block.
