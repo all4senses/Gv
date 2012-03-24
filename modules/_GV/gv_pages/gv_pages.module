@@ -47,7 +47,8 @@ function gv_pages_buildHome($name, $data) {
   
   // Get block for Top pick business providers.
   $block = module_invoke('views', 'block_view', 'providers-block');
-  $out .= render($block);
+  dpm($block);
+  $out .= render($block); //gv_blocks_wrapInBlockThemed($block_data, $block);
   
   return $out;
 }

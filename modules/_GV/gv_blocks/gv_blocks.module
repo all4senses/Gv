@@ -100,6 +100,17 @@ function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
   return '<div class="om-btitle">' . $title . '</div>' . $function($submenu);
 }
 
+/**
+ * Returns a content of a block wrapped in proper divs.
+ */
+function gv_blocks_wrapInBlockThemed($block_data, $block)
+{
+  if(!$block['content']) {
+      return null;
+  }
+  return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
+}
+
 
 /**
  * Returns a themed News block content for MegaMenu.
