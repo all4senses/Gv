@@ -108,7 +108,8 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   if(!$block['content']) {
       return null;
   }
-  return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
+  //return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
+  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
 }
 
 

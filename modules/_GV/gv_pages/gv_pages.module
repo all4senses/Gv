@@ -46,10 +46,12 @@ function gv_pages_buildHome($name, $data) {
   $out = theme($name, array('data' => $data));
   
   // Get block for Top pick business providers.
-  $block = module_invoke('views', 'block_view', 'providers-block');
+  $block_data = array('module' => 'views', 'delta' => 'providers-block');
+  $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
   dpm($block);
-  $out .= render($block); //gv_blocks_wrapInBlockThemed($block_data, $block);
-  
+  $block['content'] = render($block);
+  $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+ 
   return $out;
 }
 
