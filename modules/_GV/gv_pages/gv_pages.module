@@ -43,7 +43,8 @@ function gv_pages_access($type = null) {
  */
 function gv_pages_buildHome($name, $data) {
   $block = module_invoke('views', 'block_view', 'views-providers-block');
-  dpm(render($block));
+  //render($block);
+  dpm($block);
   return theme($name, array('data' => $data));
 }
 
