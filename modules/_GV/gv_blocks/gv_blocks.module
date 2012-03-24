@@ -37,6 +37,10 @@ function gv_blocks_block_info() {
     'info' => t('Follow us links'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['request_quote'] = array(
+    'info' => t('Request a quote'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -78,6 +82,10 @@ function gv_blocks_block_view($delta = '') {
     case 'followus_links':
       $block['subject'] = t('Follow us links');
       $block['content'] = gv_blocks_get_followUsLinks();
+      break; 
+    case 'request_quote':
+      $block['subject'] = t('Request a quote');
+      $block['content'] = gv_blocks_get_requestQuote();
       break; 
   }
   return $block;
