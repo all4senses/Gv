@@ -42,7 +42,7 @@ function gv_pages_access($type = null) {
  * Prepare data for output it via theme function
  */
 function gv_pages_buildHome($name, $data) {
-  $block_top_pick_business_providers = module_invoke('views', 'block_view', 'block-views-providers-block');
+  $block = module_invoke('views', 'block_view', 'views-providers-block');
   dpm(render($block));
   return theme($name, array('data' => $data));
 }
