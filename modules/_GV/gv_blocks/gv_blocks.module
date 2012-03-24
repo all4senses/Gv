@@ -33,6 +33,10 @@ function gv_blocks_block_info() {
     'info' => t('Footer menu'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['followus_links'] = array(
+    'info' => t('Follow us links'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
   return $blocks;
 }
 
@@ -71,8 +75,21 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Footer menu');
       $block['content'] = gv_blocks_get_footerMenu();
       break; 
+    case 'followus_links':
+      $block['subject'] = t('Follow us links');
+      $block['content'] = gv_blocks_get_followUsLinks();
+      break; 
   }
   return $block;
+}
+
+
+/**
+ * Returns a themed Follow Us links block.
+ */
+function gv_blocks_get_followUsLinks() {
+  $menu = menu_build_tree('menu-follow-us-links');
+  return '<span class="follow">Follow Us:</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
 }
 
 
