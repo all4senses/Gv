@@ -42,10 +42,14 @@ function gv_pages_access($type = null) {
  * Prepare data for output it via theme function
  */
 function gv_pages_buildHome($name, $data) {
+  $out = NULL;
+  $out = theme($name, array('data' => $data));
+  
+  // Get block for Top pick business providers.
   $block = module_invoke('views', 'block_view', 'providers-block');
-  //render($block);
-  dpm(render($block));
-  return theme($name, array('data' => $data));
+  $out .= render($block);
+  
+  return $out;
 }
 
 /**
