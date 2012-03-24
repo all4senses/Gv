@@ -50,6 +50,11 @@ function gv_pages_buildHome($name, $data) {
   $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
   $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
  
+  // Get block for Top pick residential providers.
+  $block_data = array('module' => 'views', 'delta' => 'providers-block-1');
+  $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
+  $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+  
   return $out;
 }
 
