@@ -134,6 +134,7 @@ function gv_blocks_block_view($delta = '') {
  */
 function gv_blocks_get_topicsBlock($content_type) {
   global $language;
+  $topics = NULL;
   //$topics = cache_get($content_type . '_topics_block' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     // Key = url_argument, used in building the url, 
