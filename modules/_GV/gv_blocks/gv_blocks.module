@@ -58,7 +58,7 @@ function gv_blocks_block_info() {
   $content_types = array('blog_post', 'news_post', 'article');
   foreach ($content_types as $content_type) {
     $blocks[$content_type . '_topics'] = array(
-      'info' => t(drupal_ucfirst(str_replace('_', ' ')) . ' topics'),
+      'info' => t(drupal_ucfirst(str_replace('_', ' ', $content_type)) . ' topics'),
       'cache' => DRUPAL_NO_CACHE,
     );
   }
