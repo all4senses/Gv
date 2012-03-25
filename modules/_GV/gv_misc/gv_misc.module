@@ -47,10 +47,9 @@ function gv_misc_getTopics($content_type, $limit = NULL) {
         ->fields('td', array('name', 'tid'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');
-  
   $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
-        ->addExpression('COUNT(n.nid)', 'count')
-        ->groupBy('td.name');
+        ->addExpression('COUNT(n.nid)', 'count');
+  $query->groupBy('td.name');
   if ($limit) {
     $query->range(0, $limit);
   }
