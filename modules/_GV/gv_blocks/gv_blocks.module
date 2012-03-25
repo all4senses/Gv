@@ -117,8 +117,8 @@ function gv_blocks_get_newsTopics() {
     //cache_set('news_topics_' . $language->language, $topics, 'cache', time() + 14400);
   }
   dpm($topics);
-  //$out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
-  return 'topics...';//gv_blocks_wrapInBlockThemed($block_data, $block);
+  $out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+  return 'topics...' . $out;
   
 }
 
