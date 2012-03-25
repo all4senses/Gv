@@ -106,18 +106,15 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Request a quote');
       $block['content'] = gv_blocks_get_requestQuote();
       break; 
-//    case 'news_topics':
-//      $block['subject'] = t('News topics');
-//      $block['content'] = gv_blocks_get_newsTopics();
-//      break;
+
     default:
       // Get blocks for topics for a specific content type.
       if (strpos($delta, '_topics')) {
         $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
         $content_type = str_replace('_topics', '', $delta);
-//        if(!isset($content_types[$content_type])) {
-//          continue;
-//        }
+        if(!isset($content_types[$content_type])) {
+          continue;
+        }
         $block['subject'] = t(drupal_ucfirst($content_types[$content_type]) . ' topics');
         $block['content'] = gv_blocks_get_topicsBlock($content_type);
       }
