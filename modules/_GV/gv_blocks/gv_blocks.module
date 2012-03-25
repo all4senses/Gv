@@ -119,7 +119,7 @@ function gv_blocks_block_view($delta = '') {
       if (strpos($delta, '_topics')) {
         $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
         $content_type = str_replace('_topics', '', $delta);
-        if(!$content_types[$content_type]) {
+        if(!isset($content_types[$content_type])) {
           continue;
         }
         $block['subject'] = t(drupal_ucfirst($content_types[$content_type]) . ' topics');
