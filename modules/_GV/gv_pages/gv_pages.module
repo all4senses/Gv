@@ -55,9 +55,10 @@ function gv_pages_buildTopicsPage($content_type_label) {
     if (!$topics) {
       return NULL;
     }
+    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
     $page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' topics</h1>';
-    $topics = $page_title . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
-
+    $show_all_url = '<div class="more-link">' . l(t('Show all posts', $content_type_label)) . '</div>';
+    $topics = $page_title . $topics . $show_all_url;
     // Expire = current time + 4 hours.
     cache_set($content_type . '_topics_page' . $language->language, $topics, 'cache', time() + 14400);
   }
