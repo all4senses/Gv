@@ -46,13 +46,18 @@ function gv_pages_menu() {
 function gv_pages_buildTopicsPage($content_type_label) {
   global $language;
   //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
-  // Iverted...
+  // Inverted...
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   $topics = cache_get($content_type . '_topics_page' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics = gv_misc_getTopics($content_type, $content_type_label);
-    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    if (!$topics) {
+      return NULL;
+    }
+    $page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' topics</h1>';
+    $topics = $page_title . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+
     // Expire = current time + 4 hours.
     cache_set($content_type . '_topics_page' . $language->language, $topics, 'cache', time() + 14400);
   }
