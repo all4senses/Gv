@@ -49,7 +49,8 @@ function gv_pages_buildTopicsPage($content_type_label) {
   // Inverted...
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
-  $topics = cache_get($content_type . '_topics_page' . $language->language);
+  
+  //$topics = cache_get($content_type . '_topics_page' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics = gv_misc_getTopics($content_type, $content_type_label);
     if (!$topics) {
