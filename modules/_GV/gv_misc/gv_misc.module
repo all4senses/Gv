@@ -44,7 +44,6 @@ function gv_misc_getTopics($content_type, $limit = NULL) {
 
     $query = db_select('taxonomy_term_data', 'td');
     $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
-    $query->leftJoin('field_data_field_transport_type_sprite', 's', 's.entity_id = td.tid');
     $query->leftJoin('node', 'n', 'n.nid = ti.nid');
     $query->fields('td', array('name', 'tid'));
     $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type));
