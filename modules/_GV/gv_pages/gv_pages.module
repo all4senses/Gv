@@ -1,6 +1,9 @@
 <?php
-// $Id: gv_pages.module
 
+/**
+ * @file
+ * Module for building and managing site's pages.
+ */
 
 /**
  * Implements hook_menu().
@@ -29,19 +32,23 @@ function gv_pages_menu() {
 
 
 /**
- * Implements hook_access().
+ * Returns a themed News topics page.
+ * 
+ * Allows to use same topics for News, Articles, Blog posts, etc.
  */
-function gv_pages_access($type = null) {
-  switch ($type) {
-    default:
-      if (arg(1) == 'edit') {
-        if(!user_access('administer site configuration')) {
-          return false;
-        }
-      }
-    break;
+function gv_pages_buildTopicsPage($content_type) {
+  global $language;
+  $topics = cache_get('news_topics_page' . $language->language);
+  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+    $topics = gv_misc_getTopics('news_post', 'news');
+    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    // Expire = current time + 4 hours.
+    cache_set('news_topics_page' . $language->language, $topics, 'cache', time() + 14400);
   }
-  return true;
+  else {
+    $topics = $topics->data;
+  }
+  return $topics; 
 }
 
 
@@ -55,7 +62,7 @@ function gv_pages_buildNewsTopics() {
   $topics = cache_get('news_topics_page' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics = gv_misc_getTopics('news_post', 'news');
-    $topics = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
     // Expire = current time + 4 hours.
     cache_set('news_topics_page' . $language->language, $topics, 'cache', time() + 14400);
   }
@@ -63,6 +70,23 @@ function gv_pages_buildNewsTopics() {
     $topics = $topics->data;
   }
   return $topics; 
+}
+
+
+/**
+ * Implements hook_access().
+ */
+function gv_pages_access($type = null) {
+  switch ($type) {
+    default:
+      if (arg(1) == 'edit') {
+        if(!user_access('administer site configuration')) {
+          return false;
+        }
+      }
+    break;
+  }
+  return true;
 }
 
 
@@ -90,6 +114,7 @@ function gv_pages_buildHome($name, $data) {
   
   return $out;
 }
+
 
 /**
  * Show themed page for users or edit page for admins (with  argument /edit in url)

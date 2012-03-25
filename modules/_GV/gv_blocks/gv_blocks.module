@@ -1,7 +1,13 @@
 <?php
-// $Id: gv_blocks.module
+
+/**
+ * @file
+ * Module for building and managing site's blocks.
+ */
+
 
 module_load_include('inc', 'gv_blocks', 'inc/constants');
+
 
 /**
  * Implements hook_block_info().
@@ -43,10 +49,20 @@ function gv_blocks_block_info() {
     'info' => t('Request a quote'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['news_topics'] = array(
-    'info' => t('News topics'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
+//  $blocks['news_topics'] = array(
+//    'info' => t('News topics'),
+//    'cache' => DRUPAL_NO_CACHE,
+//  );
+  
+  // Topics block for different content types.
+  $content_types = array('blog_post', 'news_post', 'article');
+  foreach ($content_types as $content_type) {
+    $blocks[$content_type . '_topics'] = array(
+      'info' => t(drupal_ucfirst(str_replace('_', ' ')) . ' topics'),
+      'cache' => DRUPAL_NO_CACHE,
+    );
+  }
+  
   return $blocks;
 }
 
@@ -93,12 +109,49 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Request a quote');
       $block['content'] = gv_blocks_get_requestQuote();
       break; 
-    case 'news_topics':
-      $block['subject'] = t('News topics');
-      $block['content'] = gv_blocks_get_newsTopics();
-      break;
+//    case 'news_topics':
+//      $block['subject'] = t('News topics');
+//      $block['content'] = gv_blocks_get_newsTopics();
+//      break;
+    default:
+      // Get blocks for topics for a specific content type.
+      if (strpos($delta, '_topics')) {
+        $content_type = str_replace('_topics', '', $delta);
+        $content_type_humanName = drupal_ucfirst(str_replace('_', ' ', $content_type));
+        $block['subject'] = t($content_type_humanName . ' topics');
+        $block['content'] = gv_blocks_get_topicsBlock($content_type);
+      }
   }
+
   return $block;
+}
+
+
+/**
+ * Returns a themed topics block for a specific content type.
+ * 
+ * Allows to use same topics for News, Articles, Blog posts, etc.
+ */
+function gv_blocks_get_topicsBlock($content_type) {
+  global $language;
+  //$topics = cache_get($content_type . '_topics_block' . $language->language);
+  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+    // Key = url_argument, used in building the url, 
+    // for example,
+    // topics/news for topics list for news 
+    // OR blog/provider for show all blog posts tagged with 'provider' topic.
+    $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+    $url_argument = $content_types[$content_type];
+    $topics = gv_misc_getTopics($content_type, $url_argument, 2);
+    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    $topics .= '<div class="more-link">' . l(t('More'), 'topics/' . $url_argument) . '</div>';
+    // Expire = current time + 4 hours.
+    cache_set($content_type . '_topics_block' . $language->language, $topics, 'cache', time() + 14400);
+  }
+  else {
+    $topics = $topics->data;
+  }
+  return $topics; 
 }
 
 
@@ -112,7 +165,7 @@ function gv_blocks_get_newsTopics() {
   $topics = cache_get('news_topics_block' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics = gv_misc_getTopics('news_post', 'news', 2);
-    $topics = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
     $topics .= '<div class="more-link">' . l(t('More'), 'news-topics'). '</div>';
     // Expire = current time + 4 hours.
     cache_set('news_topics_block' . $language->language, $topics, 'cache', time() + 14400);
@@ -129,7 +182,7 @@ function gv_blocks_get_newsTopics() {
  */
 function gv_blocks_get_followUsLinks() {
   $menu = menu_build_tree('menu-follow-us-links');
-  return '<span class="menu-preface">Follow Us:</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu'));
+  return '<span class="menu-preface">Follow Us:</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu'));
 }
 
 
@@ -138,7 +191,7 @@ function gv_blocks_get_followUsLinks() {
  */
 function gv_blocks_get_footerMenu() {
   $menu = menu_build_tree('menu-footer-menu');
-  return '<span class="menu-preface">(c) GetVoIP.com</span>' . theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
+  return '<span class="menu-preface">(c) GetVoIP.com</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
 }
 
 
@@ -175,7 +228,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
  * Returns a themed News block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_News($submenu) {
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
@@ -183,7 +236,7 @@ function gv_blocks_get_omMenuBlock_News($submenu) {
  * Returns a themed VoIP Providers block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Providers($submenu) {
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
@@ -191,7 +244,7 @@ function gv_blocks_get_omMenuBlock_Providers($submenu) {
  * Returns a themed VoIP Blog block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Blog($submenu) {
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
@@ -199,7 +252,7 @@ function gv_blocks_get_omMenuBlock_Blog($submenu) {
  * Returns a themed VoIP Blog block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
@@ -207,7 +260,7 @@ function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
  * Returns a themed All About VoIP block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_AllAboutVoIP($submenu) {
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
@@ -215,7 +268,7 @@ function gv_blocks_get_omMenuBlock_AllAboutVoIP($submenu) {
  * Returns a themed Editor block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Editor($submenu) {
-  return theme('gv_blocks_submenuSimple', array('submenu' => $submenu));
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
@@ -230,59 +283,4 @@ function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
     }
   }
   return NULL;
-}
-
-
-/**
- * Implements hook_theme().
- */
-function gv_blocks_theme($existing, $type, $theme, $path) {
-  return array(
-     'gv_blocks_submenuSimple' => array(
-          'variables' => array('vars' => null),
-          //'template' => 'gv_blocks_home',
-        ),
-  );
-}
-
-
-/**
- * Simple theming of nested submenu.
- */
-function theme_gv_blocks_submenuSimple($vars) {
-  $level = isset($vars['level']) ? $vars['level'] : 0;
-  $class = isset($vars['class']) ? $vars['class'] : 'om-links';
-  $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
-  $out = '<ul class="' . $class . ' lvl-' . $level . '">';
-  $count = 0;
-  foreach ($vars['submenu']['below'] as $submenu) {
-    if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
-      continue;
-    }
-    $out .= ($count ? $delimiter : '') . '<li>';
-    if($level) {
-      for ($i = 0; $i < $level; $i++ ) {
-        $out .= '--';
-      }
-    }
-    $title = t($submenu['link']['link_title']);
-    if(isset($submenu['count']) && $submenu['count']) {
-      $title .= ' (' . $submenu['count'] . ')';
-    }
-    // If the field Description has '<nolink>' don't show link for this item
-    if(isset($submenu['link']['localized_options']['attributes']['title']) && strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
-      $out .= $title;
-    }
-    else {
-      $out .= l($title, $submenu['link']['href']);
-    }
-    $out .= '</li>';
-    if (!empty($submenu['below'])) {
-      // Recursion call.
-      $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter ));
-    }
-    $count++;
-  }
-  $out .= '</ul>';
-  return $out;
 }
