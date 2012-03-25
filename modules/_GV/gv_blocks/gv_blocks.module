@@ -270,7 +270,10 @@ function theme_gv_blocks_submenuSimple($vars) {
       $title .= ' (' . $submenu['count'] . ')';
     }
     // If the field Description has '<nolink>' don't show link for this item
-    if(!isset($submenu['link']['localized_options']['attributes']['title']) || strtolower($submenu['link']['localized_options']['attributes']['title']) != '<nolink>') {
+    if(isset($submenu['link']['localized_options']['attributes']['title']) && strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
+      $out .= $title;
+    }
+    else {
       $out .= l($title, $submenu['link']['href']);
     }
     $out .= '</li>';
