@@ -7,7 +7,7 @@
  */
 function gv_pages_menu() {
 
-   $items['home'] = array(
+  $items['home'] = array(
     'title' => 'Home page',
     'description' => 'Home page',
     //'page callback' => 'drupal_get_form',
@@ -16,7 +16,13 @@ function gv_pages_menu() {
     'access callback' => 'gv_pages_access',
     'access arguments' => array('home'),
     'type' => MENU_CALLBACK,
-  );   
+  );  
+  $items['news-topics'] = array(
+    'title' => 'News topics',
+    'page callback' => 'gv_pages_buildNewsTopics',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
 
   return $items;
 }
@@ -37,6 +43,28 @@ function gv_pages_access($type = null) {
   }
   return true;
 }
+
+
+/**
+ * Returns a themed News topics page.
+ * 
+ * Allows to use same topics for News, Articles, Blog posts, etc.
+ */
+function gv_pages_buildNewsTopics() {
+  global $language;
+  $topics = cache_get('news_topics_page' . $language->language);
+  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+    $topics = gv_misc_getTopics('news_post', 'news');
+    $topics = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    // Expire = current time + 4 hours.
+    cache_set('news_topics_page' . $language->language, $topics, 'cache', time() + 14400);
+  }
+  else {
+    $topics = $topics->data;
+  }
+  return $topics; 
+}
+
 
 /**
  * Prepare data for output it via theme function
