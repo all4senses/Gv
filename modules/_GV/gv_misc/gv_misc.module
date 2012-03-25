@@ -34,7 +34,7 @@ function gv_misc_form_alter(&$form, &$form_state, $form_id) {
  * 
  * Allows to use same topics for News, articles, etc.
  */
-function gv_misc_getTopics($content_type, $limit = NULL) {
+function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $topics = NULL;
   $voc = taxonomy_vocabulary_machine_name_load(TOPICS);
   
@@ -58,6 +58,8 @@ function gv_misc_getTopics($content_type, $limit = NULL) {
   foreach($results as $result) {
     // Translate terms to current language
     // $result->name = i18n_string_translate(array('taxonomy', 'term', $result->tid, 'name'), $result->name);
+    $base_url = trim($base_url, '/');
+    $result->href = $base_url . '/' . urldecode(drupal_strtolower($result->name));
     $topics[] = $result;
   }
   return $topics;

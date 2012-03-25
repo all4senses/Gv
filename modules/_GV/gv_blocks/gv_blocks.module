@@ -112,7 +112,7 @@ function gv_blocks_get_newsTopics() {
   $topics = NULL;
   //$topics = cache_get('news_topics_' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
-    $topics = gv_misc_getTopics('news_post', 2);
+    $topics = gv_misc_getTopics('news_post', 'news', 2);
     // Expire = current time + 4 hours.
     //cache_set('news_topics_' . $language->language, $topics, 'cache', time() + 14400);
   }
