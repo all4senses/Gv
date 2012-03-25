@@ -254,7 +254,7 @@ function theme_gv_blocks_submenuSimple($vars) {
   $out = '<ul class="' . $class . ' lvl-' . $level . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
-    if ($submenu['link']['hidden']) {
+    if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
     $out .= ($count ? $delimiter : '') . '<li>';
@@ -264,7 +264,7 @@ function theme_gv_blocks_submenuSimple($vars) {
       }
     }
     // If the field Description has '<nolink>' don't show link for this item
-    if(strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
+    if(isset($submenu['link']['localized_options']['attributes']['title']) && strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
       $out .= t($submenu['link']['link_title']) . '</li>';
     }
     else {
