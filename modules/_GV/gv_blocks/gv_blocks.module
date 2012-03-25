@@ -108,36 +108,14 @@ function gv_blocks_block_view($delta = '') {
  * Allows to use same topics for News, articles, etc.
  */
 function gv_blocks_get_newsTopics() {
-  // global $language;
-  // $types = cache_get('types_' . $language->language);
-  // Expire = current time + 2 hours.
-  // cache_set('types_' . $language->language, $types, 'cache', time() + 7200);
-
-
   global $language;
-
-  $types = cache_get('news_types_' . $language->language);
-
-  if (!$types || empty($types->data) || $types->expire < time()) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Expire = current time + 2 hours.
-    cache_set('o_' . $language->language, $types, 'cache', time() + 7200);
+  $topics = NULL;
+  //$topics = cache_get('news_topics_' . $language->language);
+  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+    $topics = gv_misc_getTopics('news_post', 2);
+    // Expire = current time + 4 hours.
+    //cache_set('news_topics_' . $language->language, $topics, 'cache', time() + 14400);
   }
-  
-  $topics = gv_misc_getTopics('news_post', 2);
   dpm($topics);
   //$out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
   return 'topics...';//gv_blocks_wrapInBlockThemed($block_data, $block);

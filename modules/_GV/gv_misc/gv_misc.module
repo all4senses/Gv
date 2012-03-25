@@ -39,7 +39,7 @@ function gv_misc_getTopics($content_type, $limit = NULL) {
   $voc = taxonomy_vocabulary_machine_name_load(TOPICS);
   
   // Old style query.
-  //$results = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name LIMIT $limit", array(':vid' => $voc->vid, ':type' => $content_type));
+  // $results = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name LIMIT $limit", array(':vid' => $voc->vid, ':type' => $content_type));
     
   $types = array();
 
