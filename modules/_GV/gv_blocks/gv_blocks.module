@@ -113,6 +113,30 @@ function gv_blocks_get_newsTopics() {
   // Expire = current time + 2 hours.
   // cache_set('types_' . $language->language, $types, 'cache', time() + 7200);
 
+
+  global $language;
+
+  $types = cache_get('news_types_' . $language->language);
+
+  if (!$types || empty($types->data) || $types->expire < time()) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Expire = current time + 2 hours.
+    cache_set('o_' . $language->language, $types, 'cache', time() + 7200);
+  }
+  
   $topics = gv_misc_getTopics('news_post', 2);
   dpm($topics);
   //$out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
