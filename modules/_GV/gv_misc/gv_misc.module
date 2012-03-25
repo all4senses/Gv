@@ -88,6 +88,7 @@ function gv_misc_theme($existing, $type, $theme, $path) {
  * Simple theming of nested submenu.
  */
 function theme_gv_misc_submenuSimple($vars) {
+  dpm($vars);
   $level = isset($vars['level']) ? $vars['level'] : 0;
   $class = isset($vars['class']) ? $vars['class'] : 'om-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
