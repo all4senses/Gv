@@ -118,7 +118,7 @@ function gv_blocks_get_newsTopics() {
   }
   dpm($topics);
   $out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
-  return 'topics...' . $out;
+  return $out . '<div class="more-link">' . l(t('More'), 'news-topics'). '</div>';
   
 }
 
