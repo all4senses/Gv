@@ -263,13 +263,15 @@ function theme_gv_blocks_submenuSimple($vars) {
         $out .= '--';
       }
     }
+    $title .= t($submenu['link']['link_title']);
+    if(isset($submenu['count']) && $submenu['count']) {
+      $title .= '(' . $submenu['count'] . ')';
+    }
     // If the field Description has '<nolink>' don't show link for this item
-    if(isset($submenu['link']['localized_options']['attributes']['title']) && strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
-      $out .= t($submenu['link']['link_title']) . '</li>';
+    if(!isset($submenu['link']['localized_options']['attributes']['title']) || strtolower($submenu['link']['localized_options']['attributes']['title']) != '<nolink>') {
+      $out .= l($title, $submenu['link']['href']);
     }
-    else {
-      $out .= l(t($submenu['link']['link_title']), $submenu['link']['href']) . '</li>';
-    }
+    $out .= '</li>';
     if (!empty($submenu['below'])) {
       // Recursion call.
       $out .= theme('gv_blocks_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter ));
