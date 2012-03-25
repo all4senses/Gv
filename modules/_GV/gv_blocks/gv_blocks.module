@@ -49,10 +49,6 @@ function gv_blocks_block_info() {
     'info' => t('Request a quote'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-//  $blocks['news_topics'] = array(
-//    'info' => t('News topics'),
-//    'cache' => DRUPAL_NO_CACHE,
-//  );
   
   // Topics block for different content types.
   $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
@@ -125,6 +121,7 @@ function gv_blocks_block_view($delta = '') {
         $block['subject'] = t(drupal_ucfirst($content_types[$content_type]) . ' topics');
         $block['content'] = gv_blocks_get_topicsBlock($content_type);
       }
+      break;
   }
 
   return $block;
@@ -148,6 +145,9 @@ function gv_blocks_get_topicsBlock($content_type) {
     $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
     $url_argument = $content_types[$content_type];
     $topics = gv_misc_getTopics($content_type, $url_argument, 2);
+    if(!$topics) {
+      return NULL;
+    }
     $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
     $topics .= '<div class="more-link">' . l(t('More'), 'topics/' . $url_argument) . '</div>';
     // Expire = current time + 4 hours.
@@ -165,21 +165,21 @@ function gv_blocks_get_topicsBlock($content_type) {
  * 
  * Allows to use same topics for News, Articles, Blog posts, etc.
  */
-function gv_blocks_get_newsTopics() {
-  global $language;
-  $topics = cache_get('news_topics_block' . $language->language);
-  if (!$topics || empty($topics->data) || $topics->expire < time()) {
-    $topics = gv_misc_getTopics('news_post', 'news', 2);
-    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
-    $topics .= '<div class="more-link">' . l(t('More'), 'news-topics'). '</div>';
-    // Expire = current time + 4 hours.
-    cache_set('news_topics_block' . $language->language, $topics, 'cache', time() + 14400);
-  }
-  else {
-    $topics = $topics->data;
-  }
-  return $topics; 
-}
+//function gv_blocks_get_newsTopics() {
+//  global $language;
+//  $topics = cache_get('news_topics_block' . $language->language);
+//  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+//    $topics = gv_misc_getTopics('news_post', 'news', 2);
+//    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+//    $topics .= '<div class="more-link">' . l(t('More'), 'news-topics'). '</div>';
+//    // Expire = current time + 4 hours.
+//    cache_set('news_topics_block' . $language->language, $topics, 'cache', time() + 14400);
+//  }
+//  else {
+//    $topics = $topics->data;
+//  }
+//  return $topics; 
+//}
 
 
 /**
