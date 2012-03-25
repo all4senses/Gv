@@ -109,8 +109,8 @@ function gv_blocks_block_view($delta = '') {
  */
 function gv_blocks_get_newsTopics() {
   global $language;
-  $topics = NULL;
-  //$topics = cache_get('news_topics_' . $language->language);
+  //$topics = NULL;
+  $topics = cache_get('news_topics_' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics = gv_misc_getTopics('news_post', 'news', 2);
     $topics = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
