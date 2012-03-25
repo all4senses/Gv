@@ -55,10 +55,11 @@ function gv_blocks_block_info() {
 //  );
   
   // Topics block for different content types.
-  $content_types = array('blog_post', 'news_post', 'article');
-  foreach ($content_types as $content_type) {
+  $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
+  foreach ($content_types as $content_type => $label) {
+    
     $blocks[$content_type . '_topics'] = array(
-      'info' => t(drupal_ucfirst(str_replace('_', ' ', $content_type)) . ' topics'),
+      'info' => t(drupal_ucfirst($label) . ' topics'),
       'cache' => DRUPAL_NO_CACHE,
     );
   }
@@ -116,9 +117,9 @@ function gv_blocks_block_view($delta = '') {
     default:
       // Get blocks for topics for a specific content type.
       if (strpos($delta, '_topics')) {
+        $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
         $content_type = str_replace('_topics', '', $delta);
-        $content_type_humanName = drupal_ucfirst(str_replace('_', ' ', $content_type));
-        $block['subject'] = t($content_type_humanName . ' topics');
+        $block['subject'] = t(drupal_ucfirst($content_types[$content_type]) . ' topics');
         $block['content'] = gv_blocks_get_topicsBlock($content_type);
       }
   }
