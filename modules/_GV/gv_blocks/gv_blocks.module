@@ -118,6 +118,9 @@ function gv_blocks_get_newsTopics() {
     // Expire = current time + 4 hours.
     cache_set('news_topics_' . $language->language, $topics, 'cache', time() + 14400);
   }
+  else {
+    $topics = $topics->data;
+  }
   return $topics; 
 }
 
