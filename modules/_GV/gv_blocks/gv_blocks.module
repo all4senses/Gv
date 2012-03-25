@@ -113,13 +113,7 @@ function gv_blocks_get_newsTopics() {
   // Expire = current time + 2 hours.
   // cache_set('types_' . $language->language, $types, 'cache', time() + 7200);
 
-  $voc = taxonomy_vocabulary_machine_name_load(TOPICS);
-  //$results = db_query("SELECT td.name FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name", array(':vid' => $voc->vid, ':type' => 'news_post'));
-  $results = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name LIMIT 2", array(':vid' => $voc->vid, ':type' => 'news_post'));
-  //$results = db_query("SELECT td.name FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid", array(':vid' => $voc->vid, ':type' => 'news_post'));
-  foreach($results as $term) {
-    $topics[] = $term;
-  }
+  $topics = gv_misc_getTopics('news_post', 2);
   dpm($topics);
   //$out = theme('gv_blocks_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
   return 'topics...';//gv_blocks_wrapInBlockThemed($block_data, $block);

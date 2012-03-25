@@ -27,3 +27,24 @@ function gv_misc_form_alter(&$form, &$form_state, $form_id) {
     //$form['field_custom_php_code']['und']['0']['#format'] = "php_code";
   }
 }
+
+
+/**
+ * Returns topics list for a specific content type. 
+ * 
+ * Allows to use same topics for News, articles, etc.
+ */
+function gv_misc_getTopics($content_type, $limit = NULL) {
+  $topics = NULL;
+  $voc = taxonomy_vocabulary_machine_name_load(TOPICS);
+  if($limit) {
+    $results = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name LIMIT :limit", array(':vid' => $voc->vid, ':type' => $content_type, ':limit' => $limit));
+  }
+  else {
+    $results = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name", array(':vid' => $voc->vid, ':type' => $content_type));
+  }
+  foreach($results as $term) {
+    $topics[] = $term;
+  }
+  return $topics;
+}
