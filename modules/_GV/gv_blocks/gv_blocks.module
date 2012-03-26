@@ -292,15 +292,19 @@ function gv_blocks_get_omMenuBlock_Editor($submenu) {
  */
 function gv_blocks_get_omMenuBlock_User($submenu) {
   
-   // Get block for User login (if any).
-  $block_data = array('module' => 'user', 'delta' => 'login');
-  $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
-  dpm($block);
-  
-  $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+   // Build block for User login/logout.
+  global $user;
+  if($user->uid) {
+    $block_data = array('module' => 'user', 'delta' => 'login');
+    $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
+    $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+  }
+  else {
+    $out .= '<div class="title">' . t('You are logged in as ') . $user->name . '</div>';
+    $out .= '<div class="logout">' . l(t('Logout'), 'user/logout') . '</div>';
+  }
   
   return $out; 
-  //return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
 }
 
 
