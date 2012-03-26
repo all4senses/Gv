@@ -296,8 +296,12 @@ function gv_blocks_get_omMenuBlock_User($submenu) {
   // Build block for User login/logout.
   global $user;
   if($user->uid) {
-    $out = '<div class="title">' . t('You are logged in as ') . $user->name . '</div>';
-    $out .= '<div class="logout">' . l(t('Logout'), 'user/logout') . '</div>';
+    $out .= '<div class="title">' . t('You are logged in as ') . '<b>' . $user->name . '</b></div>';
+    
+    $block_data = array('module' => 'system', 'delta' => 'user-menu');
+    $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
+    $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+    //$out .= '<div class="logout">' . l(t('Logout'), 'user/logout') . '</div>';
   }
   else {
     $block_data = array('module' => 'user', 'delta' => 'login');
