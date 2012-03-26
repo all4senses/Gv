@@ -127,3 +127,8 @@ function theme_gv_misc_submenuSimple($vars) {
   $out .= '</ul>';
   return $out;
 }
+
+function gv_misc_dpm($var) {
+  echo '<PRE>' . print_r($var, true) . '</PRE>';
+  drupal_set_message('<PRE>' . print_r($var, true) . '</PRE>');
+}
