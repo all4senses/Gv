@@ -246,7 +246,11 @@ function gv_blocks_get_omMenuBlock_Providers($submenu) {
  * Returns a themed VoIP Blog block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_Blog($submenu) {
-  return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
+  
+  $block_data = array('module' => 'gv_blocks', 'delta' => 'blog-post-topics', 'subject_visible' => FALSE);
+  $out .= gv_blocks_getBlockThemed($block_data);
+  return $out;  
+  //return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
 }
 
 
@@ -285,7 +289,7 @@ function gv_blocks_get_omMenuBlock_User($submenu) {
   if($user->uid) {
     $out .= '<div class="title">' . t('You are logged in as ') . '<b>' . $user->name . '</b></div>';
     
-    $block_data = array('module' => 'system', 'delta' => 'user-menu', 'visible' => FALSE);
+    $block_data = array('module' => 'system', 'delta' => 'user-menu', 'subject_visible' => FALSE);
     $out .= gv_blocks_getBlockThemed($block_data);
   }
   else {
@@ -324,7 +328,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   }
   $block['content'] = render($block);
   //return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
-  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . '">' . ( ($block['subject'] && (!isset($block_data['visible']) || $block_data['visible']) )? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
+  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . '">' . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
 }
 
 
