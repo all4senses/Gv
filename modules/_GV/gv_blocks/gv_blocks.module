@@ -225,19 +225,6 @@ function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
   return '<div class="om-btitle">' . $title . '</div>' . $function($submenu);
 }
 
-/**
- * Returns a content of a block wrapped in proper divs.
- */
-function gv_blocks_wrapInBlockThemed($block_data, $block)
-{
-  if(!isset($block['content']) || !$block['content']) {
-      return null;
-  }
-  $block['content'] = render($block);
-  //return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
-  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ( ($block['subject'] && (!$isset($block_data['visible']) || $block_data['visible']) )? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
-}
-
 
 /**
  * Returns a themed News block content for MegaMenu.
@@ -299,14 +286,11 @@ function gv_blocks_get_omMenuBlock_User($submenu) {
     $out .= '<div class="title">' . t('You are logged in as ') . '<b>' . $user->name . '</b></div>';
     
     $block_data = array('module' => 'system', 'delta' => 'user-menu', 'visible' => FALSE);
-    $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
-    $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
-    //$out .= '<div class="logout">' . l(t('Logout'), 'user/logout') . '</div>';
+    $out .= gv_blocks_getBlockThemed($block_data);
   }
   else {
     $block_data = array('module' => 'user', 'delta' => 'login');
-    $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
-    $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+    $out .= gv_blocks_getBlockThemed($block_data);
   }
   
   return $out; 
@@ -328,3 +312,30 @@ function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
   }
   return NULL;
 }
+
+
+/**
+ * Wrap a block content in proper block's divs.
+ */
+function gv_blocks_wrapInBlockThemed($block_data, $block)
+{
+  if(!isset($block['content']) || !$block['content']) {
+      return null;
+  }
+  $block['content'] = render($block);
+  //return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
+  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ( ($block['subject'] && (!$isset($block_data['visible']) || $block_data['visible']) )? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
+}
+
+
+/**
+ * Returns a content of a block wrapped in proper divs.
+ */
+function gv_blocks_getBlockThemed($block_data)
+{
+  $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
+  if ($block) {
+    return gv_blocks_wrapInBlockThemed($block_data, $block);
+  }
+  return NULL;
+ }
