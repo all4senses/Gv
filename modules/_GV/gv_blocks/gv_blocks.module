@@ -235,7 +235,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   }
   $block['content'] = render($block);
   //return '<div id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></div>';
-  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ($block['subject'] ? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
+  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block block-' . $block_data['module'] . '">' . ( ($block['subject'] && (!$block_data['visible'] || $block_data['visible']))? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
 }
 
 
@@ -298,7 +298,7 @@ function gv_blocks_get_omMenuBlock_User($submenu) {
   if($user->uid) {
     $out .= '<div class="title">' . t('You are logged in as ') . '<b>' . $user->name . '</b></div>';
     
-    $block_data = array('module' => 'system', 'delta' => 'user-menu');
+    $block_data = array('module' => 'system', 'delta' => 'user-menu', 'visible' => FALSE);
     $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
     $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
     //$out .= '<div class="logout">' . l(t('Logout'), 'user/logout') . '</div>';
