@@ -37,6 +37,11 @@ function gv_blocks_block_info() {
     'info' => t('OM Editor'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['main_menu_om_user'] = array(
+    'info' => t('OM User'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['footer_menu'] = array(
     'info' => t('Footer menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -94,6 +99,11 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('OM Editor');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Editor', 'gv_blocks_get_omMenuBlock_Editor');
       break;     
+    case 'main_menu_om_user':
+      $block['subject'] = t('OM User');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('User', 'gv_blocks_get_omMenuBlock_User');
+      break; 
+    
     case 'footer_menu':
       $block['subject'] = t('Footer menu');
       $block['content'] = gv_blocks_get_footerMenu();
@@ -134,7 +144,7 @@ function gv_blocks_get_topicsBlock($content_type) {
   
   global $language;
   $topics = NULL;
-  //$topics = cache_get($content_type . '_topics_block' . $language->language);
+  $topics = cache_get($content_type . '_topics_block' . $language->language);
   if (!$topics || empty($topics->data) || $topics->expire < time()) {
     // Key = url_argument, used in building the url, 
     // for example,
@@ -163,21 +173,23 @@ function gv_blocks_get_topicsBlock($content_type) {
  * 
  * Allows to use same topics for News, Articles, Blog posts, etc.
  */
-//function gv_blocks_get_newsTopics() {
-//  global $language;
-//  $topics = cache_get('news_topics_block' . $language->language);
-//  if (!$topics || empty($topics->data) || $topics->expire < time()) {
-//    $topics = gv_misc_getTopics('news_post', 'news', 2);
-//    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
-//    $topics .= '<div class="more-link">' . l(t('More'), 'news-topics'). '</div>';
-//    // Expire = current time + 4 hours.
-//    cache_set('news_topics_block' . $language->language, $topics, 'cache', time() + 14400);
-//  }
-//  else {
-//    $topics = $topics->data;
-//  }
-//  return $topics; 
-//}
+/*
+function gv_blocks_get_newsTopics() {
+  global $language;
+  $topics = cache_get('news_topics_block' . $language->language);
+  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+    $topics = gv_misc_getTopics('news_post', 'news', 2);
+    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    $topics .= '<div class="more-link">' . l(t('More'), 'news-topics'). '</div>';
+    // Expire = current time + 4 hours.
+    cache_set('news_topics_block' . $language->language, $topics, 'cache', time() + 14400);
+  }
+  else {
+    $topics = $topics->data;
+  }
+  return $topics; 
+}
+*/
 
 
 /**
@@ -276,10 +288,28 @@ function gv_blocks_get_omMenuBlock_Editor($submenu) {
 
 
 /**
+ * Returns a themed custiom User block content (which contains several blocks and contents) for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_User($submenu) {
+  
+   // Get block for User login (if any).
+  $block_data = array('module' => 'user', 'delta' => 'login');
+  $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
+  $out .= gv_blocks_wrapInBlockThemed($block_data, $block);
+  
+  return $out; 
+  //return theme('gv_misc_submenuSimple', array('submenu' => $submenu));
+}
+
+
+/**
  * Returns a submenu from a menu.
  */
 function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
   $menu = menu_build_tree($menu_name);
+  if(!$menu) {
+    return NULL;
+  }
   foreach ($menu as $submenu) {
     if ($submenu['link']['link_title'] == $submenu_title) {
       return $submenu;
