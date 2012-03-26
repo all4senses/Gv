@@ -292,10 +292,11 @@ function gv_blocks_get_omMenuBlock_Editor($submenu) {
  */
 function gv_blocks_get_omMenuBlock_User($submenu) {
   
+  $out = NULL;
   // Build block for User login/logout.
   global $user;
   if($user->uid) {
-    $out .= '<div class="title">' . t('You are logged in as ') . $user->name . '</div>';
+    $out = '<div class="title">' . t('You are logged in as ') . $user->name . '</div>';
     $out .= '<div class="logout">' . l(t('Logout'), 'user/logout') . '</div>';
   }
   else {
