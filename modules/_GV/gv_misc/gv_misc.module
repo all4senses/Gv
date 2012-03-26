@@ -94,7 +94,7 @@ function theme_gv_misc_submenuSimple($vars) {
   $level = isset($vars['level']) ? $vars['level'] : 0;
   $class = isset($vars['class']) ? $vars['class'] : 'om-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
-  $out = '<ul class="' . $class . ' lvl-' . $level . '">';
+  $out = '<ul class="gv ' . $class . ' lvl-' . $level . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
