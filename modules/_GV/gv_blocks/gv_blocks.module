@@ -230,7 +230,7 @@ function gv_blocks_get_omMenuBlock_byTitle($title, $function) {
  * Returns a themed News block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_News($submenu) {
-  $block_data = array('module' => 'gv_blocks', 'delta' => 'news_topics', 'subject_visible' => FALSE);
+  $block_data = array('module' => 'gv_blocks', 'delta' => 'news_post_topics', 'subject_visible' => FALSE);
   $out = gv_blocks_getBlockThemed($block_data);
   return $out;  
   //return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
@@ -268,7 +268,7 @@ function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
  * Returns a themed All About VoIP block content for MegaMenu.
  */
 function gv_blocks_get_omMenuBlock_AllAboutVoIP($submenu) {
-  $block_data = array('module' => 'gv_blocks', 'delta' => 'articles_topics', 'subject_visible' => FALSE);
+  $block_data = array('module' => 'gv_blocks', 'delta' => 'article_topics', 'subject_visible' => FALSE);
   $out = gv_blocks_getBlockThemed($block_data);
   return $out;   
   //return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
