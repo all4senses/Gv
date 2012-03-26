@@ -285,3 +285,24 @@ function gv_pages_theme($existing, $type, $theme, $path) {
     ),
   );
 } 
+
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+ *
+ * @param string $form_id
+ *   Form ID.
+ *
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_form_alter(&$form, &$form_state, $form_id) {
+  dpm($form_id);
+  dpm($form);
+}
