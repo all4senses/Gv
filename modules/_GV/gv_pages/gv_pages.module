@@ -344,8 +344,11 @@ function gv_pages_node_presave($node) {
 function gv_pages_node_view($node) {
   if ($node->type == 'review') {
     dpm($node);
-//    if ($node->field_ref_provider['und'][0]['target_id'] == 7) {
-//      $node->field_ref_provider['und'][0]['target_id'] = 0;
-//    }
+    if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
+      $node->content['field_r_oprovider']['#title'] = t('Your VoIP Service Provider');
+    }
+    else {
+      unset($node->content['field_r_oprovider']);
+    }
   }
 }
