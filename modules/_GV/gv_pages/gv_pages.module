@@ -306,6 +306,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   //dpm($form_id);  dpm($form);
   switch ($form_id) {
     case 'review_node_form':
+      dpm($_POST);
+      
       $providers = array('_none' => t('- Select a value -'));
       $data = db_select('node', 'n')
         ->fields('n', array('nid', 'title'))
@@ -375,7 +377,6 @@ function gv_pages_node_presave($node) {
 function gv_pages_node_view($node) {
   switch ($node->type) {
     case 'review':
-      dpm($_POST);
       // Show data from field_r_oprovider, if is not set field_ref_provider
       if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
         $node->content['field_r_oprovider']['#title'] = t('Your VoIP Service Provider');
