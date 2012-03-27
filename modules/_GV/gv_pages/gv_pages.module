@@ -404,6 +404,7 @@ function gv_pages_node_view($node) {
     break;
     
     case 'provider':
+      dpm($node);
       $node->content['add_review'] = drupal_get_form('gv_pages_addReviewButton_form', $node->nid);
       
     break;
@@ -421,7 +422,9 @@ function gv_pages_node_view($node) {
  * @return $form
  *   Return nothing.
  */
-function gv_pages_addReviewButton_form($provider_nid) {
+function gv_pages_addReviewButton_form($provider_nid, $xxx) {
+  dpm($provider_nid);
+  dpm($xxx);
   $form['provider_nid'] = array(
       '#type' => 'hidden',
       '#value' => $provider_nid,
