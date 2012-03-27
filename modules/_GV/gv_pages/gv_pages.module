@@ -322,9 +322,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_ref_provider']['und']['#default_value'][0] = 7;
         }
       }
-      $form['field_ref_provider']['und']['#default_value'][0] = '_none';
+      //$form['field_ref_provider']['und']['#default_value'][0] = '_none';
       
       $form['#validate'][] = 'gv_pages_validateForm_review';
+      
+      dpm($form);
       break;
   }
 }
