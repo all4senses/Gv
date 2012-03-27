@@ -375,6 +375,7 @@ function gv_pages_node_presave($node) {
 function gv_pages_node_view($node) {
   switch ($node->type) {
     case 'review':
+      dpm($_POST);
       // Show data from field_r_oprovider, if is not set field_ref_provider
       if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
         $node->content['field_r_oprovider']['#title'] = t('Your VoIP Service Provider');
@@ -385,7 +386,7 @@ function gv_pages_node_view($node) {
     break;
     
     case 'provider':
-      $node->content['add_review'] = drupal_get_form('gv_pages_addReview_form');
+      $node->content['add_review'] = drupal_get_form('gv_pages_addReviewButton_form', $node->nid);
       
     break;
     
@@ -393,9 +394,20 @@ function gv_pages_node_view($node) {
   }
 }
 
-function gv_pages_addReview_form() {
-    
-  
+
+/**
+ * Implements hook_form().
+ *
+ * Button for submit a review for the current provider.
+ * 
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_addReviewButton_form($provider_nid) {
+  $form['provider_nid'] = array(
+      '#type' => 'hidden',
+      '#value' => $provider_nid,
+  );
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
