@@ -373,13 +373,25 @@ function gv_pages_node_presave($node) {
  *   Return nothing.
  */
 function gv_pages_node_view($node) {
-  if ($node->type == 'review') {
-    // Show data from field_r_oprovider, if is not set field_ref_provider
-    if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
-      $node->content['field_r_oprovider']['#title'] = t('Your VoIP Service Provider');
-    }
-    else {
-      unset($node->content['field_r_oprovider']);
-    }
+  switch ($node->type) {
+    case 'review':
+      // Show data from field_r_oprovider, if is not set field_ref_provider
+      if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
+        $node->content['field_r_oprovider']['#title'] = t('Your VoIP Service Provider');
+      }
+      else {
+        unset($node->content['field_r_oprovider']);
+      }
+    break;
+    
+    case 'provider':
+      $node->content['add_review'] = array(
+          '#type' => 'submit',
+          '#title' => 'Add a review'
+      );
+      
+    break;
+    
+  
   }
 }
