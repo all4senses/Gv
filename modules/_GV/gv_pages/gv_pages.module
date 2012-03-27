@@ -326,8 +326,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 function gv_pages_validateForm_review(&$form, &$form_state) {
   dpm($form_state['values']);
-//     if ($form_state['values']['field_ref_provider'] < $form_state['values']['field_promo_code_value']){
-//        form_set_error('field_promo_code_value','The price of the video must be higher than the value of the promo code !');
-//    }
+  if ($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 0 AND !$form_state['values']['field_r_oprovider']['und'][0]['value']){
+    form_set_error('field_r_oprovider',t('Please write in the name of a Provider'));
+  }
      
 }
