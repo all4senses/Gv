@@ -315,7 +315,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       foreach($data as $provider) {
         $providers[$provider->nid] = $provider->title;
       }
-      $providers = array('0' => t('OTHER SP'));
+      $providers[0] = t('OTHER SP');
       $form['field_ref_provider']['und']['#options'] = $providers;
       break;
   }
