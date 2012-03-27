@@ -401,6 +401,7 @@ function gv_pages_addReview_form() {
     '#type' => 'submit',
     '#value' => t('Add a review'),
   ); 
+  $form['#action'] = url('node/add/review');
   
   return $form;
 }
