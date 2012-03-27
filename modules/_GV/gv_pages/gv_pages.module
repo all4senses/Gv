@@ -318,6 +318,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $providers[0] = t('OTHER SP');
       $form['field_ref_provider']['und']['#options'] = $providers;
       $form['field_ref_provider']['und']['#default_value'][0] = '_none';
+      $form['#validate'][] = 'gv_pages_validateForm_review';
       break;
   }
+}
+
+
+function gv_pages_validateForm_review(&$form, &$form_state) {
+  dpm($form_state['values']);
+//     if ($form_state['values']['field_ref_provider'] < $form_state['values']['field_promo_code_value']){
+//        form_set_error('field_promo_code_value','The price of the video must be higher than the value of the promo code !');
+//    }
+     
 }
