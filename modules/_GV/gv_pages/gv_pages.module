@@ -307,7 +307,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'review_node_form':
       dpm($form);
-      $providers = array('' => t('- Select a value -'));
+      $providers = array('_none' => t('- Select a value -'));
       $data = db_select('node', 'n')
         ->fields('n', array('nid', 'title'))
         ->condition('type', 'provider')
