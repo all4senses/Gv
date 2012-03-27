@@ -309,7 +309,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       dpm($form);
       $data = db_select('node', 'n')
         ->fields('n', array('nid', 'title'))
-        ->condition('type', 'profider')
+        ->condition('type', 'provider')
         ->execute();
       foreach($data as $provider) {
         $providers[$provider->nid] = $provider->title;
