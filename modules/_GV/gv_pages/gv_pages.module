@@ -385,13 +385,22 @@ function gv_pages_node_view($node) {
     break;
     
     case 'provider':
-      $node->content['add_review'] = array(
-          '#type' => 'submit',
-          '#title' => 'Add a review'
-      );
+      $node->content['add_review'] = drupal_get_form('gv_pages_addReview_form');
       
     break;
     
   
   }
+}
+
+function gv_pages_addReview_form() {
+    
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add a review'),
+  ); 
+  
+  return $form;
 }
