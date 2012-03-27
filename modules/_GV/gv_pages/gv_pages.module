@@ -307,6 +307,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'review_node_form':
       dpm($form);
+      $data = db_select('node', 'n')
+        ->fields('n', array('nid', 'title'))
+        ->condition('type', 'profider')
+        ->execute();
+      foreach($data as $provider) {
+        $providers[$provider->nid] = $provider->title;
+      }
+      $form['field_ref_provider']['und']['#options'] = $providers;
       break;
   }
 }
