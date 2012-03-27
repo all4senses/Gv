@@ -306,8 +306,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   //dpm($form_id);  dpm($form);
   switch ($form_id) {
     case 'review_node_form':
-      dpm($_POST);
-      
       $providers = array('_none' => t('- Select a value -'));
       $data = db_select('node', 'n')
         ->fields('n', array('nid', 'title'))
@@ -316,14 +314,32 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       foreach($data as $provider) {
         $providers[$provider->nid] = $provider->title;
       }
-      $providers[7] = t('OTHER SP');
-      $form['field_ref_provider']['und']['#options'] = $providers;
-      // If set field_r_oprovider, set default for field_ref_provider as OTHER SP.
-      if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
-        if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
-          $form['field_ref_provider']['und']['#default_value'][0] = 7;
+      
+      // Check if the review is added via a button on a provider's page.
+      $provider_nid = NULL;
+      if (isset($_POST['provider_nid'])) {
+        $provider_nid = check_plain($_POST['provider_nid']);
+        if(!isset($providers[$provider->nid])) {
+          $provider_nid = NULL;
         }
       }
+      
+      if($provider_nid) {
+        $form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
+        $form['field_r_oprovider']['und'][0]['value']['#default_value'] = $provider_nid;
+        $form['field_r_oprovider']['#access'] = FALSE;
+      }
+      else {
+        $providers[7] = t('OTHER SP');
+        $form['field_ref_provider']['und']['#options'] = $providers;
+        // If set field_r_oprovider, set default for field_ref_provider as OTHER SP.
+        if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
+          if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
+            $form['field_ref_provider']['und']['#default_value'][0] = 7;
+          }
+        }  
+      }
+      
       $form['#validate'][] = 'gv_pages_validateForm_review';
     break;
   }
