@@ -315,11 +315,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $providers[$provider->nid] = $provider->title;
       }
       
+      dpm($_POST);
       // Check if the review is added via a button on a provider's page.
       $provider_nid = NULL;
       if (isset($_POST['provider_nid'])) {
         $provider_nid = check_plain($_POST['provider_nid']);
-        if(!isset($providers[$provider->nid])) {
+        if(!isset($providers[$provider_nid])) {
           $provider_nid = NULL;
         }
       }
