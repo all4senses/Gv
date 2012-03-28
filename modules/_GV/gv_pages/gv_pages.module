@@ -414,11 +414,8 @@ function gv_pages_node_view($node, $view_mode) {
     case 'review':
       // Show preview of the provider (as a teaser)
       if ($view_mode == 'full') {
-        dpm($node);
         if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
           $provider_node = node_load($node->field_ref_provider['und'][0]['target_id']);
-          dpm($provider_node);
-          //$node->content['p_provider'] = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $node->content['p_provider'] = node_view($provider_node, 'teaser');
         }
       }
