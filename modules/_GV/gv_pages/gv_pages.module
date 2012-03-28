@@ -326,7 +326,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       if($provider_nid) {
         $provider_node = node_load($provider_nid);
-        $provider_preview = '<div>' . node_view($provider_node, 'full') . '</div>';
+        $provider_preview = '<div>' . render(node_view($provider_node, 'teaser')) . '</div>';
         dpm($provider_node);
         dpm($provider_preview);
         $form['provider_preview'] = array(
