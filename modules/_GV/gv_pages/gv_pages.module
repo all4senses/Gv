@@ -287,6 +287,9 @@ function gv_pages_theme($existing, $type, $theme, $path) {
 } 
 
 
+
+
+
 /**
  * Implements hook_form_alter().
  *
@@ -309,14 +312,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
       if(arg(1) == 'add') {
         
-        $providers = array('_none' => t('- Select a value -'));
-        $data = db_select('node', 'n')
-          ->fields('n', array('nid', 'title'))
-          ->condition('type', 'provider')
-          ->execute();
-        foreach($data as $provider) {
-          $providers[$provider->nid] = $provider->title;
-        }
+        $providers = gv_misc_getProviders();
+        $providers['_none'] = t('- Select a value -');
+        $providers[7] = t('OTHER SP');
+        //$providers = array('_none' => t('- Select a value -'));
+//        $data = db_select('node', 'n')
+//          ->fields('n', array('nid', 'title'))
+//          ->condition('type', 'provider')
+//          ->execute();
+//        foreach($data as $provider) {
+//          $providers[$provider->nid] = $provider->title;
+//        }
 
         // Check if the review is added via a button on a provider's page.
         $provider_nid = NULL;
@@ -340,7 +346,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_r_oprovider']['#access'] = FALSE;
         }
         else {
-          $providers[7] = t('OTHER SP');
           $form['field_ref_provider']['und']['#options'] = $providers;
           // If set field_r_oprovider, set default for field_ref_provider as OTHER SP.
           if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
@@ -351,8 +356,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       else {
-        dpm($form);
         if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
+          dpm($form);
+          $providers = gv_misc_getProviders();
+          $providers['_none'] = t('- Select a value -');
+          $providers[7] = t('OTHER SP');
+          
           if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
             $form['field_ref_provider']['und']['#default_value'][0] = 7;
           }
