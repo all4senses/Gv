@@ -311,6 +311,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'review_node_form':
 
       if(arg(1) == 'add') {
+        // Add a review page.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
         $providers[7] = t('OTHER SP');
@@ -342,12 +343,32 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       else {
+        // Edit a review page.
         if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
+          // If a provider has not been selected from a list,
+          // then it has been set manually in the field field_r_oprovider
+          
           $providers = array();
           gv_misc_getProviders($providers);
           $providers[7] = t('OTHER SP');
+          
           $form['field_ref_provider']['und']['#options'] = $providers;
           $form['field_ref_provider']['und']['#default_value'][0] = 7;
+          
+          // Should we allow to a regular user to edit the name in the text field / reselect from the list?
+          // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
+          // Let's choose the second variant.
+          global $user;
+          if(!in_array('administrator', $user->roles)) {
+            $form['field_ref_provider']['#access'] = FALSE;
+            $form['field_r_oprovider']['#access'] = FALSE;  
+            $form['other_provider_noedit'] = array(
+              '#type' => 'item',
+              '#title' => t('Your VoIP Service Provider') . ' (*)',
+              '#value' => $form['field_r_oprovider']['und'][0]['value'],
+              //'#weight' => -100,
+            ); 
+          }
         }
         else {
           // Show preview of the provider (as a teaser)
