@@ -177,14 +177,13 @@ function gv_misc_tokens($type, $tokens, array $data = array(), array $options = 
         case 'provider-name-for-current-review':
           if ($node->type == 'review') {
             if (isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
-              $provider_node = node_load($node->field_ref_provider['und'][0]['target_id']);
-              $replacements[$original] = $provider_node->title;
               
-              $data = db_select('node', 'n')
+              $provider_title = db_select('node', 'n')
                 ->fields('n', array('title'))
                 ->condition('nid', $node->field_ref_provider['und'][0]['target_id'])
                 ->execute()->fetchField();
-              dpm($data);
+              
+              $replacements[$original] = $provider_title;
             }
             else {
               $replacements[$original] = check_plain($node->field_r_oprovider['und'][0]['value']);
