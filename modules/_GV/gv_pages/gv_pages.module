@@ -311,11 +311,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'review_node_form':
       
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '1' => 'Really Bad', '2' => 'Bad', '3' => 'OK', '4' => 'Good', '5' => 'Really Good');
+      $weight = 8;
       $form['rating_features'] = array(
           '#type' => 'select',
           '#title' => t('Features Rating'),
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
+          '#weight' => $weight++,
           '#required' => TRUE,
       );
       $form['rating_sound'] = array(
@@ -323,6 +325,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#title' => t('Sound Quality Rating'),
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
+          '#weight' => $weight++,
           '#required' => TRUE,
       );
       $form['rating_rely'] = array(
@@ -330,6 +333,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#title' => t('Reliability Rating'),
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
+          '#weight' => $weight++,
           '#required' => TRUE,
       );
       $form['rating_customer'] = array(
@@ -337,6 +341,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#title' => t('Customer Service Rating'),
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
+          '#weight' => $weight++,
           '#required' => TRUE,
       );
       $form['rating_customer'] = array(
@@ -344,14 +349,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#title' => t('Value for Money Rating'),
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
+          '#weight' => $weight++,
           '#required' => TRUE,
       );
-      $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '0' => 'No', '1' => 'Yes');
+      $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '1' => 'Yes', '0' => 'No');
       $form['rating_recommend'] = array(
           '#type' => 'select',
           '#title' => t('Would you recommend this VoIP provider'),
           '#options' => $rating_recommend_options,
           '#default_value' => $rating_recommend_options[''],
+          '#weight' => $weight++,
           '#required' => TRUE,
       );
       
