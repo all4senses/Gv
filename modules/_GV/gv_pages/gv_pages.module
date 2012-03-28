@@ -326,9 +326,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       if($provider_nid) {
         $provider_node = node_load($provider_nid);
-        $form['provider'] = array(
-            '#markup' => node_view($provider_node, 'teaser'),
-            '#weight' => -100,
+        $provider_preview = '<div>' . node_view($provider_node, 'full') . '</div>';
+        dpm($provider_node);
+        dpm($provider_preview);
+        $form['provider_preview'] = array(
+            '#markup' => $provider_preview,
+            //'#weight' => -100,
         ); 
         $form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
         $form['field_r_oprovider']['und'][0]['value']['#default_value'] = $provider_nid;
@@ -435,5 +438,6 @@ function gv_pages_addReviewButton_form($node, &$form_state, $provider_nid) {
     '#value' => t('Add a review'),
   ); 
   $form['#action'] = url('node/add/review', array('query' => array('id' => $provider_nid)));
+  dpm(url('node/add/review', array('query' => array('id' => $provider_nid))));
   return $form;
 }
