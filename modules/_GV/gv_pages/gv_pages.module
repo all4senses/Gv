@@ -447,5 +447,5 @@ function gv_pages_addReviewButton_form($node, &$form_state, $provider_nid) {
 function gv_pages_addReviewButton_form_submit(&$form, &$form_state, $form_id) {
   $provider_nid = $form_state['values']['provider_nid'];
   dpm(url('node/add/review', array('query' => array('id' => $provider_nid))));
-  drupal_goto(url('node/add/review', array('query' => array('id' => $provider_nid))));
+  drupal_goto('node/add/review', array('query' => array('id' => $provider_nid)));
 }
