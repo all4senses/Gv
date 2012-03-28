@@ -306,6 +306,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   //dpm($form_id);  dpm($form);
   switch ($form_id) {
     case 'review_node_form':
+      dpm(arg());
       $providers = array('_none' => t('- Select a value -'));
       $data = db_select('node', 'n')
         ->fields('n', array('nid', 'title'))
@@ -410,12 +411,10 @@ function gv_pages_node_view($node, $view_mode) {
     break;
     
     case 'provider':
-      dpm($node);
       if ($view_mode == 'full') {
         $node->content['add_review'] = drupal_get_form('gv_pages_addReviewButton_form', $node->nid);
       }
     break;
-    
   
   }
 }
