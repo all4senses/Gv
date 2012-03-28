@@ -315,7 +315,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $providers[$provider->nid] = $provider->title;
       }
       
-      dpm($_POST);
       // Check if the review is added via a button on a provider's page.
       $provider_nid = NULL;
       if (isset($_POST['provider_nid'])) {
@@ -326,6 +325,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       if($provider_nid) {
+        $provider_node = node_load($provider_nid);
+        $form['provider'] = array(
+            '#markup' => node_view($provider_node, 'teaser'),
+            '#weight' => -100,
+        ); 
         $form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
         $form['field_r_oprovider']['und'][0]['value']['#default_value'] = $provider_nid;
         $form['field_r_oprovider']['#access'] = FALSE;
@@ -404,9 +408,7 @@ function gv_pages_node_view($node) {
     break;
     
     case 'provider':
-      dpm($node);
       $node->content['add_review'] = drupal_get_form('gv_pages_addReviewButton_form', $node->nid);
-      
     break;
     
   
@@ -423,8 +425,6 @@ function gv_pages_node_view($node) {
  *   Return nothing.
  */
 function gv_pages_addReviewButton_form($node, &$form_state, $provider_nid) {
-  dpm($provider_nid);
-  dpm($xxx);
   $form['provider_nid'] = array(
       '#type' => 'hidden',
       '#value' => $provider_nid,
@@ -435,6 +435,5 @@ function gv_pages_addReviewButton_form($node, &$form_state, $provider_nid) {
     '#value' => t('Add a review'),
   ); 
   $form['#action'] = url('node/add/review');
-  dpm($form);
   return $form;
 }
