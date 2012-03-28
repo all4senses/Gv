@@ -321,14 +321,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       if (isset($_POST['id'])) {
         $provider_nid = check_plain($_POST['id']);
       }
-      elseif (isset($_GET['id'])) {
-        $provider_nid = check_plain($_GET['id']);
-      }
-      if ($provider_nid) {
-        if(!isset($providers[$provider_nid])) {
-          $provider_nid = NULL;
-        }
-      }
+//      elseif (isset($_GET['id'])) {
+//        $provider_nid = check_plain($_GET['id']);
+//      }
+//      if ($provider_nid) {
+//        if(!isset($providers[$provider_nid])) {
+//          $provider_nid = NULL;
+//        }
+//      }
       dpm($provider_nid);
       if($provider_nid) {
         $provider_node = node_load($provider_nid);
