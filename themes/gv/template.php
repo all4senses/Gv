@@ -50,6 +50,16 @@ function gv_menu_local_tasks(&$variables) {
   return $output;
 }
 
+
+/**
+ * Override or insert variables into the page template.
+ */
+function gv_process_page(&$variables) {
+    $variables['theme_hook_suggestions'][] = 'page__'. $variables['node']->type;
+}
+
+
+
 /**
  * Override or insert variables into the node template.
  */
