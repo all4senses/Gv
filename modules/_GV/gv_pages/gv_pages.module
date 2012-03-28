@@ -346,25 +346,27 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_ref_provider']['#access'] = FALSE;
           $form['field_r_oprovider']['#access'] = FALSE;
         }
-        else {
-          // If set field_r_oprovider, set default for field_ref_provider as OTHER SP.
-          if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
-            if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
-              $form['field_ref_provider']['und']['#default_value'][0] = 7;
-            }
-          }  
-        }
+//        else {
+//          // If set field_r_oprovider, set default for field_ref_provider as OTHER SP.
+//          if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
+//            if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
+//              $form['field_ref_provider']['und']['#default_value'][0] = 7;
+//            }
+//          }  
+//        }
       }
       else {
         if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
           dpm($form);
           $providers = gv_misc_getProviders();
-          $providers['_none'] = t('- Select a value -');
           $providers[7] = t('OTHER SP');
           $form['field_ref_provider']['und']['#options'] = $providers;
           
           if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
             $form['field_ref_provider']['und']['#default_value'][0] = 7;
+          }
+          else{
+            $providers['_none'] = t('- Select a value -');
           }
         }
         else {
