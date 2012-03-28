@@ -161,12 +161,14 @@ function gv_misc_token_info() {
 
 /**
  * Implements hook_tokens().
+ * 
+ * Provides token for a current review's provider name. It set to selected from a list or from a manually filled field (if not selected from a list).
  */
 function gv_misc_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   $sanitize = !empty($options['sanitize']);
 
-  // Node tokens.
+  // Add new token 'provider-name-for-current-review' to a 'node' tokens group.
   if ($type == 'node' && !empty($data['node'])) {
     $node = $data['node'];
 
@@ -174,11 +176,18 @@ function gv_misc_tokens($type, $tokens, array $data = array(), array $options = 
       switch ($name) {
         case 'provider-name-for-current-review':
           if ($node->type == 'review') {
-            dpm($node);
             if (isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
               $provider_node = node_load($node->field_ref_provider['und'][0]['target_id']);
-              dpm($provider_node);
               $replacements[$original] = $provider_node->title;
+              
+              $data = db_select('node', 'n')
+                ->fields('n', array('title'))
+                ->condition('nid', $node->field_ref_provider['und'][0]['target_id'])
+                ->execute()->fetchField();
+              dpm($data);
+            }
+            else {
+              $replacements[$original] = check_plain($node->field_r_oprovider['und'][0]['value']);
             }
 
           }
