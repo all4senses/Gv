@@ -410,6 +410,7 @@ function gv_pages_node_view($node) {
     break;
     
     case 'provider':
+      dpm($node);
       $node->content['add_review'] = drupal_get_form('gv_pages_addReviewButton_form', $node->nid);
     break;
     
