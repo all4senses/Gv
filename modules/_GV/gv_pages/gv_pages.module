@@ -311,10 +311,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'review_node_form':
 
       if(arg(1) == 'add') {
-        
-        $providers = gv_misc_getProviders();
         $providers['_none'] = t('- Select a value -');
+        gv_misc_getProviders($providers);
         $providers[7] = t('OTHER SP');
+        
         $form['field_ref_provider']['und']['#options'] = $providers;
         $form['field_ref_provider']['und']['#default_value'][0] = '_none';
 
@@ -343,7 +343,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       else {
         if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
-          $providers = gv_misc_getProviders();
+          $providers = array();
+          gv_misc_getProviders($providers);
           $providers[7] = t('OTHER SP');
           $form['field_ref_provider']['und']['#options'] = $providers;
           $form['field_ref_provider']['und']['#default_value'][0] = 7;
