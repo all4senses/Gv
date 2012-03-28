@@ -365,7 +365,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $form['other_provider_noedit'] = array(
               '#type' => 'item',
               '#title' => t('Your VoIP Service Provider') . ' (*)',
-              '#value' => $form['field_r_oprovider']['und'][0]['value'],
+              '#markup' => $form['field_r_oprovider']['und'][0]['value'],
               //'#weight' => -100,
             ); 
           }
