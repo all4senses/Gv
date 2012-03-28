@@ -351,6 +351,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       else {
+        dpm($form);
         if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
           if($form['field_r_oprovider']['und'][0]['value']['#default_value']) {
             $form['field_ref_provider']['und']['#default_value'][0] = 7;
