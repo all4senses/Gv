@@ -389,6 +389,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#title' => t('Features rating (*)'),
           '#options' => $rating_options,
           '#default_value' => $rating_options['_none'],
+          '#required' => TRUE,
       );
       
       $form['#validate'][] = 'gv_pages_validateForm_review';
