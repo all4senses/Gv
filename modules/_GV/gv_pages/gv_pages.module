@@ -383,12 +383,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       
-      $rating_options = array('_none' => '- ' . t('Select a value') . ' -', '1' => 'Really Bad', '2' => 'Bad', '3' => 'OK', '4' => 'Good', '5' => 'Really Good');
+      $rating_options = array('' => '- ' . t('Select a value') . ' -', '1' => 'Really Bad', '2' => 'Bad', '3' => 'OK', '4' => 'Good', '5' => 'Really Good');
       $form['gv_p_rating_features'] = array(
           '#type' => 'select',
           '#title' => t('Features rating (*)'),
           '#options' => $rating_options,
-          '#default_value' => $rating_options['_none'],
+          '#default_value' => $rating_options[''],
           '#required' => TRUE,
       );
       
