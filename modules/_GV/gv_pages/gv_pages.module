@@ -437,8 +437,15 @@ function gv_pages_addReviewButton_form($node, &$form_state, $provider_nid) {
     '#type' => 'submit',
     '#value' => t('Add a review'),
   ); 
-  $form['#action'] = url('node/add/review', array('query' => array('id' => $provider_nid)));
+  //$form['#action'] = url('node/add/review', array('query' => array('id' => $provider_nid)));
   dpm(url('node/add/review', array('query' => array('id' => $provider_nid))));
   dpm($form);
   return $form;
+}
+
+
+function gv_pages_addReviewButton_form_submit(&$form, &$form_state, $form_id) {
+  $provider_nid = $form_state['values']['provider_nid'];
+  dpm(url('node/add/review', array('query' => array('id' => $provider_nid))));
+  drupal_goto(url('node/add/review', array('query' => array('id' => $provider_nid))));
 }
