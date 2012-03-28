@@ -347,6 +347,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_ref_provider']['und']['#default_value'][0] = 7;
         }
         else {
+          // Show preview of the provider (as a teaser)
           $provider_node = node_load($form['field_ref_provider']['und']['#default_value'][0]);
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider_preview'] = array(
@@ -411,6 +412,14 @@ function gv_pages_node_presave($node) {
 function gv_pages_node_view($node, $view_mode) {
   switch ($node->type) {
     case 'review':
+      // Show preview of the provider (as a teaser)
+      if ($view_mode == 'full') {
+        dpm($node);
+        if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
+          $provider_node = node_load($node->field_ref_provider['und'][0]['target_id']);
+          $node->content['p_provider'] = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
+        }
+      }
       // Show data from field_r_oprovider, if is not set field_ref_provider
       if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
         $node->content['field_r_oprovider']['#title'] = t('Your VoIP Service Provider');
