@@ -159,7 +159,12 @@ function gv_token_info() {
   // Tokens for the Title token type.
   $info['tokens']['provider']['title'] = array(
     'name' => t('Title'),
-    'description' => t("Title of the provide chosen from select list or from a custom field if its provided."),
+    'description' => t("Title of the provider chosen from select list or from a custom field if its provided."),
+  );
+  
+  $info['tokens']['node']['provider'] = array(
+    'name' => t('Provider title'),
+    'description' => t('Title of the provider chosen from select list or from a custom field if its provided...'),
   );
 
   return $info;
@@ -184,6 +189,31 @@ function gv_tokens($type, $tokens, array $data = array(), array $options = array
           break;
       }
     }
+  }
+  
+  // Node tokens.
+  if ($type == 'node' && !empty($data['node'])) {
+    $node = $data['node'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'provider':
+          //$type_name = node_type_get_name($node);
+          $replacements[$original] = 'pro';//$sanitize ? check_plain($type_name) : $type_name;
+          break;
+      }
+    }
+
+    // Chained token relationships.
+//    if (!empty($node->tnid) && ($source_tokens = token_find_with_prefix($tokens, 'source')) && $source_node = node_load($node->tnid)) {
+//      $replacements += token_generate('node', $source_tokens, array('node' => $source_node), $options);
+//    }
+//    if (($node_type_tokens = token_find_with_prefix($tokens, 'content-type')) && $node_type = node_type_load($node->type)) {
+//      $replacements += token_generate('content-type', $node_type_tokens, array('node_type' => $node_type), $options);
+//    }
+//    if (($url_tokens = token_find_with_prefix($tokens, 'url'))) {
+//      $replacements += token_generate('url', $url_tokens, entity_uri('node', $node), $options);
+//    }
   }
   
   return $replacements;
