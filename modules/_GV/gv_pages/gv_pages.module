@@ -401,14 +401,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // A provider has been selected from a list.
           
           
-          dpm($form);
+          // Lead saved votes for a provider of this review.
           $criteria = array(
             'entity_type' => 'node',
             'entity_id' => $form['field_ref_provider']['und']['#default_value'][0],
             'uid' => $form['uid']['#value'],
           );
-          $votes = votingapi_select_votes($criteria);
-          dpm($votes);
+          if ($votes = votingapi_select_votes($criteria)) {
+            dpm($votes);
+            foreach ($votes as $vote) {
+              $form['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+            }
+          }
+          
           
           // Show preview of the provider (as a teaser) on the edit form.
           $provider_node = node_load($form['field_ref_provider']['und']['#default_value'][0]);
