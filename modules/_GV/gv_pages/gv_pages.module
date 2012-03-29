@@ -405,7 +405,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $criteria = array(
             'entity_type' => 'node',
             'entity_id' => $form['field_ref_provider']['und']['#default_value'][0],
-            'uid' => $node->uid,
+            'uid' => $form['uid']['#value'],
           );
           $votes = votingapi_select_votes($criteria);
           dpm($votes);
