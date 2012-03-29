@@ -371,15 +371,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       else {
         // Edit a review page.
         
-        dpm($form);
-//        $criteria = array(
-//          'entity_type' => 'node',
-//          'entity_id' =>
-//          'uid' =>
-//        );
-//        $votes = votingapi_select_votes($criteria);
-//        dpm($votes);
-        
         if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
           // If a provider has not been selected from a list,
           // then it has been set manually in the field field_r_oprovider
@@ -407,7 +398,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           }
         }
         else {
-          // Show preview of the provider (as a teaser)
+          // A provider has been selected from a list.
+          
+          
+          dpm($form);
+          $criteria = array(
+            'entity_type' => 'node',
+            'entity_id' => $form['field_ref_provider']['und']['#default_value'][0],
+            'uid' => $node->uid,
+          );
+          $votes = votingapi_select_votes($criteria);
+          dpm($votes);
+          
+          // Show preview of the provider (as a teaser) on the edit form.
           $provider_node = node_load($form['field_ref_provider']['und']['#default_value'][0]);
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider_preview'] = array(
