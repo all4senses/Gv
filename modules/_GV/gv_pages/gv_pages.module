@@ -310,49 +310,23 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'review_node_form':
       
-      $rating_options = array('' => '- ' . t('Select a value') . ' -', '1' => 'Really Bad', '2' => 'Bad', '3' => 'OK', '4' => 'Good', '5' => 'Really Good');
+      $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
-      $form['rating_features'] = array(
+     
+      $vote_keys = array('features', 'sound', 'rely', 'money', 'service');
+      $votes = array();
+      foreach ($vote_keys as $vote_key) {
+        $form['rating_' . $vote_key] = array(
           '#type' => 'select',
-          '#title' => t('Features Rating'),
+          '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
           '#weight' => $weight++,
-          //'#required' => TRUE,
-      );
-      $form['rating_sound'] = array(
-          '#type' => 'select',
-          '#title' => t('Sound Quality Rating'),
-          '#options' => $rating_options,
-          '#default_value' => $rating_options[''],
-          '#weight' => $weight++,
-          //'#required' => TRUE,
-      );
-      $form['rating_rely'] = array(
-          '#type' => 'select',
-          '#title' => t('Reliability Rating'),
-          '#options' => $rating_options,
-          '#default_value' => $rating_options[''],
-          '#weight' => $weight++,
-          //'#required' => TRUE,
-      );
-      $form['rating_customer'] = array(
-          '#type' => 'select',
-          '#title' => t('Customer Service Rating'),
-          '#options' => $rating_options,
-          '#default_value' => $rating_options[''],
-          '#weight' => $weight++,
-          //'#required' => TRUE,
-      );
-      $form['rating_customer'] = array(
-          '#type' => 'select',
-          '#title' => t('Value for Money Rating'),
-          '#options' => $rating_options,
-          '#default_value' => $rating_options[''],
-          '#weight' => $weight++,
-          //'#required' => TRUE,
-      );
-      $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '1' => 'Yes', '0' => 'No');
+          '#required' => TRUE,
+        );
+      }
+      
+      $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
       $form['rating_recommend'] = array(
           '#type' => 'select',
           '#title' => t('Would you recommend this VoIP provider'),
@@ -462,7 +436,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
 }
 
 
-
 /**
  * Custom additional submit of review type form.
  *
@@ -477,8 +450,35 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
  */
 function gv_pages_submitForm_review(&$form, &$form_state) {
   dpm($form_state);
-  $data = votingapi_metadata();
-  dpm($data);
+  
+//  $vote['entity_type']  (Optional, defaults to 'node')
+// *   $vote['entity_id']    (Required)
+// *   $vote['value_type']    (Optional, defaults to 'percent')
+// *   $vote['value']         (Required)
+// *   $vote['tag']           (Optional, defaults to 'vote')
+// *   $vote['uid']           (Optional, defaults to current user)
+// *   $vote['vote_source']   (Optional, defaults to current IP)
+// *   $vote['timestamp']     (Optional, defaults to REQUEST_TIME)
+  
+  if(isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id'] != 7) {
+    $provider_nid = $form_state['values']['field_ref_provider']['und'][0]['target_id'];
+    
+    $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+    $votes = array();
+    foreach ($vote_keys as $vote_key) {
+      $votes[] = array(
+        'tag' => $vote_key,
+        'entity_type' => 'node',
+        'entity_id' => $provider_nid,
+        'value_type' => 'percent',
+        'value' => $form_state['values']['rating_' . $vote_key],
+        'uid' => $form_state['values']['uid'],
+      );
+    }
+    dpm($votes);
+    //votingapi_set_votes($votes);
+  }
+  
 }
 
 
