@@ -575,7 +575,7 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       if ($votes) {
-        $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'));
+        $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'), 'recommend' => t('Would you recommend this VoIP provider'));
         $node->content['gv_ratings'] = array(
             '#markup' => '',
             //'#prefix' => '<div class="gv_votes">',
@@ -587,7 +587,7 @@ function gv_pages_node_view($node, $view_mode) {
             $recommend_vote = $vote;
             continue;
           }
-          $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . '</div>' 
+          $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . ':</div>' 
             // Using own theming function for fivestar (replicate of the original fivestar theme function).
             . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
             // Using the original fivestar theme function.
@@ -596,7 +596,7 @@ function gv_pages_node_view($node, $view_mode) {
         }
         // Recommend vote.
         $node->content['gv_recommend'] = array(
-            '#markup' => '<div class="title">' . $rating_titles['recommend'] . '</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
+            '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
         );
       }
 
