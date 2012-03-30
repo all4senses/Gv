@@ -459,7 +459,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   }
   
   // If OTHER SP has been set.
-  if(isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
+  if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
     // Save votes to the temporary votes field.
     $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
     $votes = array();
@@ -469,6 +469,10 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
       }
     }
     form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
+  }
+  else {
+    // Or else reset the the temporary votes field.
+    form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
   }
 }
 
@@ -486,7 +490,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_submitForm_review(&$form, &$form_state) {
-  dpm($form_state);
   
   if(isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id'] != 7) {
 
