@@ -400,10 +400,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Load saved votes from this node's field_ratings_oprovider
           dpm($form);
           
-//          $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
-//          foreach ($field_ratings_oprovider as $tag => $value) {
-//            $form['rating_' . $tag] = $value;
-//          }
+          $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
+          foreach ($field_ratings_oprovider as $tag => $value) {
+            $form['rating_' . $tag]['#default_value'] = $value;
+          }
           
         }
         else {
