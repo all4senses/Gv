@@ -396,11 +396,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               //'#weight' => -100,
             ); 
           }
+          
+          // Load saved votes from this node's field_ratings_oprovider
+          dpm($form);
+          
         }
         else {
           // A provider has been selected from a list.
           
-          // Lead saved votes for a provider of this review.
+          // Load saved votes for a provider of this review.
           $criteria = array(
             'entity_type' => 'node',
             'entity_id' => $form['field_ref_provider']['und']['#default_value'][0],
