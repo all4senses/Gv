@@ -555,20 +555,24 @@ function gv_pages_node_view($node, $view_mode) {
         unset($node->content['field_r_oprovider']);
       }
       
-      // Show fivestar themed voting choice for this review.
-//      'fivestar_static' => array(
-//        'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
-//        'file' => 'includes/fivestar.theme.inc',
-//      ),
-
+      // Using own theming function for fivestar (replicate of the original fivestar theme function).
       $node->content['fivestar_featuress'] = array(
-        '#markup' => 'testttt' . theme('fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css'))),
+        '#markup' => theme('gv_misc_fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css'))),
       );
-      dpm($node->content['fivestar_featuress']);
+      
+      // Using the original fivestar theme function.
+      /*
+      $node->content['fivestar_featuress'] = array(
+        '#markup' => theme('fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css'))),
+      );
+      
       $path = drupal_get_path('module', 'fivestar');
-      //drupal_add_css($path . '/css/fivestar.css');
+      drupal_add_css($path . '/css/fivestar.css');
       drupal_add_css($path . '/widgets/hearts/hearts.css');
+      */
+      
     break;
+    
     
     case 'provider':
       if ($view_mode == 'full') {
