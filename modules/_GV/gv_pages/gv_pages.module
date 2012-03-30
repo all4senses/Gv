@@ -560,11 +560,9 @@ function gv_pages_node_view($node, $view_mode) {
 //        'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
 //        'file' => 'includes/fivestar.theme.inc',
 //      ),
-      $current_rating = votingapi_get_voting_result('node', 12, 'percent', 'features', 'average');
-      //print theme('fivestar_static', $current_rating->value);
 
       $node->content['fivestar_featuress'] = array(
-        '#markup' => 'testttt' . theme('fivestar_static', $current_rating->value), //theme('fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'default', 'css' => ''))),
+        '#markup' => 'testttt' . theme('fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css'))),
       );
       dpm($node->content['fivestar_featuress']);
       
