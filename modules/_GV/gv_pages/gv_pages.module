@@ -554,6 +554,15 @@ function gv_pages_node_view($node, $view_mode) {
       else {
         unset($node->content['field_r_oprovider']);
       }
+      
+      // Show fivestar themed voting choice for this review.
+//      'fivestar_static' => array(
+//        'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
+//        'file' => 'includes/fivestar.theme.inc',
+//      ),
+              
+      $node->content['fivestar_features'] = theme('fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'default', 'css' => '')));
+      
     break;
     
     case 'provider':
