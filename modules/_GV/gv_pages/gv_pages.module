@@ -521,6 +521,9 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  */
 function gv_pages_node_presave($node) {
   if ($node->type == 'review') {
+    // If chosen OTHER SP (and dummy nid), replace a dummy nid with 0, 
+    // as we don't want to associate this review with that dummy nid node, of course.
+    // Or clear OTHER SP field.
     if ($node->field_ref_provider['und'][0]['target_id'] == 7) {
       $node->field_ref_provider['und'][0]['target_id'] = 0;
     }
@@ -557,19 +560,40 @@ function gv_pages_node_view($node, $view_mode) {
       
       dpm($node);
       // Show voting results for this provider and user (author of this review).
+      
+      if (!empty($node->field_ratings_oprovider)) {
+        // $votes = ...
+      }
+      else {
+        // Load saved votes for a provider of this review.
+        $criteria = array(
+          'entity_type' => 'node',
+          'entity_id' => $node->field_ref_provider['und'][0]['target_id'],
+          'uid' => $node->uid,
+        );
+        $votes = votingapi_select_votes($criteria);
+      }
+      
+      if ($votes) {
+        $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'));
+        $node->content['gv_ratings'] = array(
+            '#markup' => '',
+            '#prefix' => '<div class="gv_votes">',
+            '#suffix' => '</div>',
+        );
+      
+        foreach ($votes as $vote) {
+          $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . '</div>' 
+            // Using own theming function for fivestar (replicate of the original fivestar theme function).
+            . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+            // Using the original fivestar theme function.
+            //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+            . '</div>';
+        }
+      }
 
-      // Using own theming function for fivestar (replicate of the original fivestar theme function).
-      $node->content['fivestar_features'] = array(
-        '#markup' => theme('gv_misc_fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css'))),
-        //'#markup' => theme('gv_misc_fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'default', 'css' => ''))),
-      );
-      
-      // Using the original fivestar theme function.
+      // If case of using the original fivestar theme function there should be connected original fivestar's css
       /*
-      $node->content['fivestar_featuress'] = array(
-        '#markup' => theme('fivestar_static', array('rating' => 40, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css'))),
-      );
-      
       $path = drupal_get_path('module', 'fivestar');
       drupal_add_css($path . '/css/fivestar.css');
       drupal_add_css($path . '/widgets/hearts/hearts.css');
