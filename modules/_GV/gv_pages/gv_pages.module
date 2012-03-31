@@ -311,6 +311,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
   switch ($form_id) {
     
+    case 'provider_node_form':
+      dpm($form);
+      
+      $form['#validate'][] = 'gv_pages_validateForm_provider';
+      
+    break;
+    
+  
+  
     case 'preface_node_form':
       
       // Deny to editing titles for everyone except the root.
@@ -471,6 +480,25 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['#validate'][] = 'gv_pages_submitForm_review';
     break;
   }
+}
+
+
+
+
+/**
+ * Custom validate of provider type form.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_provider(&$form, &$form_state) {
+  dpm($form_alter);
 }
 
 
