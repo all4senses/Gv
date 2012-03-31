@@ -474,8 +474,15 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   else {
     // Or else reset the the temporary votes field.
     form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
+    
     dpm($form); dpm($form_state);
-    //if (gv_misc_userHasSubmittedReview())
+    $author_uid = isset($form_state['values']['uid']) ? $form_state['values']['uid'] : NULL;
+    dpm($author_uid);
+    dpm(gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid));
+    
+    if ($review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid)) {
+      form_set_error('field_ref_provider', t('You have already submitted a review for this provider') . ':' . l($review->title, 'node/' . $review->nid) );
+    }
   }
 }
 
