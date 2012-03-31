@@ -316,6 +316,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Deny to editing titles for everyone except the root.
       if(arg(1) != 'add') {
         dpm($form);
+        global $user;
+        if($user->uid == 1) {
+          //$form['title']['#access'] = FALSE;
+          $form['title'] = array(
+              '#type' => 'item',
+              '#markup' => '<div class="title">' . $form['title']['#default_value'] . '</div>',
+              '#description' => t('This fiels can be edited only by the Root administrator.'),
+          );
+        }
       }
       
     break;
