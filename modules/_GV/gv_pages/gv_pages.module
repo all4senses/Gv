@@ -462,14 +462,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
  *   Return nothing.
  */
 function gv_pages_validateForm_review(&$form, &$form_state) {
+  
+  // Don't check anything if we delete the node.
+  if ($form_state['submit_handlers'][0] == 'node_form_delete_submit') {
+    return;
+  }
+  
   // If field_ref_provider is choosen as OTHER SP, the field_r_oprovider should be set as well
   if ($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && !$form_state['values']['field_r_oprovider']['und'][0]['value']) {
     form_set_error('field_r_oprovider',t('Please write in the name of a Provider'));  
   }
-  
-  dpm($form_state['submit_handlers'][0]);
-  dpm($form_state);
-  
+
   // Current review data and uid for defining (see below) if the author of this review has already submitted a review for a selected provider.
   $author_uid = isset($form_state['values']['uid']) ? $form_state['values']['uid'] : NULL;
   $current_review_nid = isset($form_state['values']['nid']) ? $form_state['values']['nid'] : NULL;
