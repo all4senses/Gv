@@ -392,7 +392,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           if(!in_array('administrator', $user->roles)) {
             $form['field_ref_provider']['#access'] = FALSE;
             $form['field_r_oprovider']['#access'] = FALSE;  
-            $form['other_provider_noedit'] = array(
+            $form['provider_title_noedit'] = array(
               '#type' => 'item',
               '#title' => t('Your VoIP Service Provider') . ' (*)',
               '#markup' => '<div class="text">' . $form['field_r_oprovider']['und'][0]['value']['#default_value'] . '</div>',
@@ -431,6 +431,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           ); 
           $form['field_ref_provider']['#access'] = FALSE;
           $form['field_r_oprovider']['#access'] = FALSE;
+          $form['provider_title_noedit'] = array(
+            '#type' => 'item',
+            '#title' => t('Your VoIP Service Provider'),
+            '#markup' => '<div class="text">' . $provider_node->title . '</div>',
+            //'#weight' => -100,
+          );
+
+                      
         }
       }
       
@@ -460,7 +468,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   }
   
   
-  // dpm($form); dpm($form_state);
   // Current review data and uid for defining (see below) if the author of this review has already submitted a review for a selected provider.
   $author_uid = isset($form_state['values']['uid']) ? $form_state['values']['uid'] : NULL;
   $current_review_nid = isset($form_state['values']['nid']) ? $form_state['values']['nid'] : NULL;
@@ -478,7 +485,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
     
     // Check if author of this review has already submitted a review for a selected provider.
-    dpm(gv_misc_userHasSubmittedReview(NULL, $author_uid, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid));
     if ($review = gv_misc_userHasSubmittedReview(NULL, $author_uid, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid)) {
       form_set_error('field_r_oprovider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
     }
@@ -488,7 +494,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
     
     // Check if author of this review has already submitted a review for a selected provider.
-    //dpm(gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid));
     if ($review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, NULL, $current_review_nid)) {
       form_set_error('field_ref_provider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
     }
