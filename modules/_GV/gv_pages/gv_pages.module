@@ -562,7 +562,8 @@ function gv_pages_node_view($node, $view_mode) {
       // Show voting results for this provider and user (author of this review).
       
       if (!empty($node->field_ratings_oprovider)) {
-        // $votes = ...
+        $votes = unserialize($node->field_ratings_oprovider['und'][0]['value']);
+        dpm($votes);
       }
       else {
         // Load saved votes for a provider of this review.
