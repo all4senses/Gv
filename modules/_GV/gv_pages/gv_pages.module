@@ -558,12 +558,10 @@ function gv_pages_node_view($node, $view_mode) {
         unset($node->content['field_r_oprovider']);
       }
       
-      dpm($node);
       // Show voting results for this provider and user (author of this review).
       
       if (!empty($node->field_ratings_oprovider)) {
         $votes_simple_format = unserialize($node->field_ratings_oprovider['und'][0]['value']);
-        dpm($votes);
         // Rebuild the array to the votes api format
         foreach ($votes_simple_format as $tag => $value) {
           $votes[] = array('tag' => $tag, 'value' => $value);
@@ -579,31 +577,33 @@ function gv_pages_node_view($node, $view_mode) {
         $votes = votingapi_select_votes($criteria);
       }
       
-      if ($votes) {
-        $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'), 'recommend' => t('Would you recommend this VoIP provider'));
-        $node->content['gv_ratings'] = array(
-            '#markup' => '',
-            //'#prefix' => '<div class="gv_votes">',
-            //'#suffix' => '</div>',
-        );
+      gv_pages_addRatingsToNodeThemed($node, $votes);
       
-        foreach ($votes as $vote) {
-          if ($vote['tag'] == 'recommend') {
-            $recommend_vote = $vote;
-            continue;
-          }
-          $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . ':</div>' 
-            // Using own theming function for fivestar (replicate of the original fivestar theme function).
-            . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
-            // Using the original fivestar theme function.
-            //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
-            . '</div>';
-        }
-        // Recommend vote.
-        $node->content['gv_recommend'] = array(
-            '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
-        );
-      }
+//      if ($votes) {
+//        $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'), 'recommend' => t('Would you recommend this VoIP provider'));
+//        $node->content['gv_ratings'] = array(
+//            '#markup' => '',
+//            //'#prefix' => '<div class="gv_votes">',
+//            //'#suffix' => '</div>',
+//        );
+//      
+//        foreach ($votes as $vote) {
+//          if ($vote['tag'] == 'recommend') {
+//            $recommend_vote = $vote;
+//            continue;
+//          }
+//          $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . ':</div>' 
+//            // Using own theming function for fivestar (replicate of the original fivestar theme function).
+//            . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+//            // Using the original fivestar theme function.
+//            //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+//            . '</div>';
+//        }
+//        // Recommend vote.
+//        $node->content['gv_recommend'] = array(
+//            '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
+//        );
+//      }
 
       // If case of using the original fivestar theme function there should be connected original fivestar's css
       /*
@@ -624,6 +624,35 @@ function gv_pages_node_view($node, $view_mode) {
   }
 }
 
+
+function gv_pages_addRatingsToNodeThemed($node, $votes) {
+  
+  if ($votes) {
+    $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'), 'recommend' => t('Would you recommend this VoIP provider'));
+    $node->content['gv_ratings'] = array(
+        '#markup' => '',
+        //'#prefix' => '<div class="gv_votes">',
+        //'#suffix' => '</div>',
+    );
+
+    foreach ($votes as $vote) {
+      if ($vote['tag'] == 'recommend') {
+        $recommend_vote = $vote;
+        continue;
+      }
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . ':</div>' 
+        // Using own theming function for fivestar (replicate of the original fivestar theme function).
+        . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+        // Using the original fivestar theme function.
+        //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+        . '</div>';
+    }
+    // Recommend vote.
+    $node->content['gv_recommend'] = array(
+        '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
+    );
+  }
+}
 
 /**
  * Implements hook_form().
