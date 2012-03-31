@@ -313,6 +313,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     case 'review_node_form':
       
+      // Deny to editing titles for everyone except the root.
+      if(arg(1) != 'add') {
+        dpm($form);
+      }
+      
+    break;
+  
+  
+  
+    case 'review_node_form':
+      
+      // Control the editing of review pages.
+      
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
      
