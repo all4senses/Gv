@@ -593,16 +593,12 @@ function gv_pages_node_view($node, $view_mode) {
         $criteria = array(
           'entity_type' => 'node',
           'entity_id' => $node->nid,
-          //'function' => 'average',
+          'function' => 'average',
         );
         
-        $votes = votingapi_select_votes($criteria);
-        dpm($votes);
-        $criteria['function'] = 'average';
         $votes = votingapi_select_results($criteria);
         dpm($votes);
         $criteria['function'] = 'count';
-        $criteria['value_type'] = 'count';
         $counts = votingapi_select_results($criteria);
         dpm($counts);
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
