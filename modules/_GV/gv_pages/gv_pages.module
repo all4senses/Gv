@@ -593,7 +593,9 @@ function gv_pages_node_view($node, $view_mode) {
           $node->content['add_review'] = drupal_get_form('gv_pages_addReviewButton_form', $node->nid);
         }
         else {
-          
+          $node->content['user_review'] = array(
+              '#markup' => t('You have already submitted a review for this provider:') . ' ' . l('"' . $review->title . '"', 'node/' . $review->nid),
+          );
         }
         
         // Load saved votes for a provider of this review.
