@@ -628,10 +628,19 @@ function gv_pages_node_view($node, $view_mode) {
  *   Return nothing.
  */
 function gv_pages_node_delete($node) {
-  dpm($node);
   switch ($node->type) {
     case 'review':
       dpm($node);
+      // Delete vote of this user for this provider, if it exists.
+      if (isset($node->field_ref_provider['und'][0]['target_id'])) {
+        $criteria = array(
+          'entity_type' => 'node',
+          'entity_id' => $node->field_ref_provider['und'][0]['target_id'],
+          'uid' => $node->uid,
+        );
+        votingapi_delete_votes(votingapi_select_votes($criteria));
+        votingapi_recalculate_results('node', $node->field_ref_provider['und'][0]['target_id']);
+      }
   }
 }
       
