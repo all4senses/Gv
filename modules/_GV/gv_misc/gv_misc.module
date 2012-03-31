@@ -222,11 +222,11 @@ function gv_misc_userHasSubmittedReview($provider_nid, $user_uid = null) {
   }
   $data = db_select('node', 'n')
         ->fields('n', array('nid', 'title'));
-  $data->leftJoin('field_data_field_ref_provider', 'rp', "rp.entity_id = n.nid AND rp.field_ref_provider_target_id = $provider_nid");
-  $data->condition('type', 'review')
-        ->condition('uid', $user_uid)
-        ->execute()->fetchObject();
-  
+  //$data->leftJoin('field_data_field_ref_provider', 'rp', "rp.entity_id = n.nid AND rp.field_ref_provider_target_id = $provider_nid");
+  $data->condition('n.type', 'review')
+        ->condition('n.uid', $user_uid)
+        ->execute();
+  $data = $data->fetchObject();
   dpm($data);
   
   if (empty($data)) {
