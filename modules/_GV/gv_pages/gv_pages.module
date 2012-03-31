@@ -474,6 +474,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   else {
     // Or else reset the the temporary votes field.
     form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
+    dpm($form); dpm($form_state);
+    //if (gv_misc_userHasSubmittedReview())
   }
 }
 
