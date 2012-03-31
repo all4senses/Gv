@@ -590,8 +590,8 @@ function gv_pages_node_view($node, $view_mode) {
           'entity_type' => 'node',
           'entity_id' => $node->nid,
         );
-        $votes = votingapi_select_votes($criteria);
-        dpm($votes);
+        //$votes = votingapi_select_votes($criteria);
+        //dpm($votes);
         
         $votes = votingapi_select_results($criteria);
         dpm($votes);
