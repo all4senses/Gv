@@ -225,7 +225,7 @@ function gv_misc_userHasSubmittedReview($provider_nid, $user_uid = null) {
   $data->leftJoin('field_data_field_ref_provider', 'rp', "rp.entity_id = n.nid AND rp.field_ref_provider_target_id = $provider_nid");
   $data->condition('type', 'review')
         ->condition('uid', $user_uid)
-        ->execute()->fetchAllAssoc('nid');
+        ->execute()->fetchObject('nid');
   
   dpm($data);
   
