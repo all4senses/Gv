@@ -306,8 +306,11 @@ function gv_pages_theme($existing, $type, $theme, $path) {
  *   Return nothing.
  */
 function gv_pages_form_alter(&$form, &$form_state, $form_id) {
+  
   //dpm($form_id);  dpm($form);
+  
   switch ($form_id) {
+    
     case 'review_node_form':
       
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
@@ -369,8 +372,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_ref_provider']['und']['#default_value'][0] = $provider_nid;
           $form['field_ref_provider']['#access'] = FALSE;
           $form['field_r_oprovider']['#access'] = FALSE;
-        }
-      }
+        } // End of if($provider_nid) {
+      } // End of if(arg(1) == 'add') {
       else {
         // Edit a review page.
         
@@ -406,7 +409,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $form['rating_' . $tag]['#default_value'] = $value;
           }
           
-        }
+        } // End of if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
         else {
           // A provider has been selected from a list.
           
@@ -437,10 +440,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#markup' => '<div class="text">' . $provider_node->title . '</div>',
             //'#weight' => -100,
           );
-
-                      
-        }
-      }
+        } // End of A provider has been selected from a list.
+      } // End of Edit a review page.
       
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#validate'][] = 'gv_pages_submitForm_review';
@@ -493,7 +494,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     if ($review = gv_misc_userHasSubmittedReview(NULL, $author_uid, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid)) {
       form_set_error('field_r_oprovider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
     }
-  }
+  } // End of if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
   else {
     // Or else reset the the temporary votes field.
     form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
@@ -502,7 +503,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     if ($review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, NULL, $current_review_nid)) {
       form_set_error('field_ref_provider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
     }
-  }
+  } // End of Or else reset the the temporary votes field.
 }
 
 
@@ -572,7 +573,9 @@ function gv_pages_node_presave($node) {
  *   Return nothing.
  */
 function gv_pages_node_view($node, $view_mode) {
+
   switch ($node->type) {
+    
     case 'review':
       // Show preview of the provider (as a teaser)
       if ($view_mode == 'full') {
@@ -634,19 +637,14 @@ function gv_pages_node_view($node, $view_mode) {
         );
         
         $votes = votingapi_select_results($criteria);
-        dpm($votes);
         $criteria['function'] = 'count';
         $counts = votingapi_select_results($criteria);
-        dpm($counts);
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
       }
       
-      
     break;
-  
   }
 }
-
 
 
 /**
@@ -714,6 +712,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
     */
   }
 }
+
 
 /**
  * Implements hook_form().
