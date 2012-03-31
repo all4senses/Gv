@@ -350,10 +350,15 @@ function gv_misc_votingapi_metadata_alter(&$data) {
  * Implements hook_views_pre_render().
  */
 function gv_misc_views_pre_render(&$view) {
-  dpm($view->name);
-//  if ($view->name == 'my_contracts') {
-//
-//    // Show contract to Driver and Cutomer.
-//    $view->attachment_before = theme('od_add_contract_my_contracts_submenu');
-//  }
+  
+  //dpm($view->name);
+  
+  switch ($view->name) {
+    
+    case 'providers':
+      dpm($view);
+      //$view->attachment_before = '';
+    break;
+    
+  }
 } 
