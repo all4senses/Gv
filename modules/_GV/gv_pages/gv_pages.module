@@ -467,6 +467,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     form_set_error('field_r_oprovider',t('Please write in the name of a Provider'));  
   }
   
+  dpm($form_state);
   
   // Current review data and uid for defining (see below) if the author of this review has already submitted a review for a selected provider.
   $author_uid = isset($form_state['values']['uid']) ? $form_state['values']['uid'] : NULL;
