@@ -620,6 +620,27 @@ function gv_pages_node_view($node, $view_mode) {
 }
 
 
+
+/**
+ * Implements hook_node_delete().
+ *
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_node_delete($node) {
+  switch ($node->type) {
+    case 'review':
+      dpm($node);
+  }
+}
+      
+
+/**
+ * Append to a node (for a hook node_view) a themed set of rating votes.
+ *
+ * @return void
+ *   Return nothing.
+ */
 function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
   
   if ($votes) {
