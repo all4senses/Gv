@@ -589,14 +589,15 @@ function gv_pages_node_view($node, $view_mode) {
         $criteria = array(
           'entity_type' => 'node',
           'entity_id' => $node->nid,
+          'function' => 'average',
         );
-        //$votes = votingapi_select_votes($criteria);
-        //dpm($votes);
         
         $votes = votingapi_select_results($criteria);
         dpm($votes);
-        
-        gv_pages_addRatingsToNodeThemed($node, $votes);
+        $criteria['function'] = 'count';
+        $counts = votingapi_select_results($criteria);
+        dpm($votes);
+        gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
       }
       
       
@@ -606,7 +607,7 @@ function gv_pages_node_view($node, $view_mode) {
 }
 
 
-function gv_pages_addRatingsToNodeThemed($node, $votes) {
+function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
   
   if ($votes) {
     $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'), 'recommend' => t('Would you recommend this VoIP provider'));
@@ -616,7 +617,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes) {
         //'#suffix' => '</div>',
     );
 
-    foreach ($votes as $vote) {
+    foreach ($votes as $key => $vote) {
       if ($vote['tag'] == 'recommend') {
         $recommend_vote = $vote;
         continue;
@@ -626,6 +627,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes) {
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
         //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+        . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
         . '</div>';
     }
     // Recommend vote.
