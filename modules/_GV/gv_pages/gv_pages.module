@@ -324,9 +324,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#description' => t('This field can be edited only by the Root administrator. Used only as id for loading to the listing page and will be hidden on the page.'),
           );
         }
-      }
+      } // End of if(arg(1) != 'add') {
       
-    break;
+      // Deny to change the status of the node (it should always be unpublished).
+      dpm($form);
+      
+    break; // End of case 'preface_node_form':
   
   
   
