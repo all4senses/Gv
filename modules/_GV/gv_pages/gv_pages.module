@@ -321,7 +321,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'item',
               '#title' => t('Title'),
               '#markup' => '<div class="title">' . $form['title']['#default_value'] . '</div>',
-              '#description' => t('This fiels can be edited only by the Root administrator.'),
+              '#description' => t('This field can be edited only by the Root administrator. Used only as id for loading to the listing page and will be hidden on the page.'),
           );
         }
       }
