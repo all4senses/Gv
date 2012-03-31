@@ -211,6 +211,34 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
 }
 
 
+
+/**
+ * Check if a current user already submitted a review for a specific Provider.
+ */
+function gv_misc_userHasSubmittedReview($provider_nid, $user_uid = null) {
+  if (!$user_uid) {
+    global $user;
+    $user_uid = $user->uid;
+  }
+  $data = db_select('node', 'n')
+        ->fields('n', array('nid', 'title'));
+  $data->leftJoin('field_data_field_ref_provider', 'rp', "rp.entity_id = n.nid AND rp.field_ref_provider_target_id = $provider_nid");
+  $data->condition('type', 'review')
+        ->condition('uid', $user_uid)
+        ->execute()->fetchAllAssoc('nid');
+  
+  dpm($data);
+  
+  if (empty($data)) {
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+  
+}
+
+
 /**
  * Implements hook_token_info().
  */
