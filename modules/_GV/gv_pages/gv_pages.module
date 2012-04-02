@@ -372,7 +372,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
       $form['services'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Provider servises'),
+        '#title' => t('Provider services'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         //'#description' => t(''),
@@ -381,7 +381,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'fieldset',
               '#title' => t('Residential serviсes'),
               '#collapsible' => TRUE,
-              '#collapsed' => FALSE,
+              '#collapsed' => TRUE,
               //'#description' => t(''),
             );
                   $form['services']['s_residential']['re_preface_title'] = array(
@@ -432,7 +432,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'fieldset',
               '#title' => t('Business serviсes'),
               '#collapsible' => TRUE,
-              '#collapsed' => FALSE,
+              '#collapsed' => TRUE,
               //'#description' => t(''),
             );
                   $form['services']['s_business']['bu_preface_title'] = array(
