@@ -321,7 +321,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
       // Fix Ckeditor intrusion results.
-      if ($form['body']['und'][0]['summary']['#default_value'] == '<br />') {
+      if (trim($form['body']['und'][0]['summary']['#default_value'] == '<br />')) {
         $form['body']['und'][0]['summary']['#default_value'] = '';
       }
       // Doesn't work.
