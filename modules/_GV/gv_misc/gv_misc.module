@@ -386,3 +386,16 @@ function wdg_misc_elementValidate_email($element, &$form_state) {
 //    form_error($element, t('This field is required.'));
 //  }
 }  
+
+
+/**
+ * Forms API validation function for url.
+ */
+function wdg_misc_elementValidate_url($element, &$form_state) {
+  if (!valid_url($element['#value'])) {
+    form_error($element, t('Please enter a valid url address.'));
+  }
+//  if (empty($element['#value'])) {
+//    form_error($element, t('This field is required.'));
+//  }
+}
