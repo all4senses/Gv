@@ -384,7 +384,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => FALSE,
               //'#description' => t(''),
             );
-                  // Move a defined via admin panel field with a taxonomy autocomplete for Features Residential to the corresponding fieldset.
+                  // Move defined via admin panel fields with a taxonomy autocomplete for Features Residential tags to the corresponding fieldset.
                   $form['services']['s_residential']['field_p_re_features'] = $form['field_p_re_features'];
                   unset($form['field_p_re_features']);
             
@@ -396,9 +396,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => FALSE,
               //'#description' => t(''),
             );
-                  // Move a defined via admin panel field with a taxonomy autocomplete for Features Residential to the corresponding fieldset.
+                  // Move defined via admin panel fields with a taxonomy autocomplete for Features Business tags to the corresponding fieldset.
                   $form['services']['s_business']['field_p_bu_features'] = $form['field_p_bu_features'];
-                  unset($form['field_p_re_features']);
+                  unset($form['field_p_bu_features']);
+                  $form['services']['s_business']['field_p_bu_features_pbx'] = $form['field_p_bu_features_pbx'];
+                  unset($form['field_p_bu_features_pbx']);
+                  $form['services']['s_business']['field_p_bu_features_sip'] = $form['field_p_bu_features_sip'];
+                  unset($form['field_p_bu_features_sip']);
+                  
+                  
                   
       
       $form['#validate'][] = 'gv_pages_validateForm_provider';
