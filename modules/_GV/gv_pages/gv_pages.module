@@ -315,8 +315,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       dpm($form);
       global $language;
       // Fix weights of some fields
-      $form['title']['#weight'] = '-4';
-      $form['body']['#weight'] = '-5';
+      $form['title']['#weight'] = -4;
+      $form['body']['#weight'] = 0;
       
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       $form['data_info'] = array(
