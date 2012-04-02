@@ -321,7 +321,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
       // Fix Ckeditor intrusion results.
-      dpm($form['body']['und'][0]['summary']['#default_value']);
       if (trim($form['body']['und'][0]['summary']['#default_value']) == '<br />') {
         $form['body']['und'][0]['summary']['#default_value'] = '';
       }
@@ -376,7 +375,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //'#description' => t(''),
       );
             $form['data_quote']['q_text'] = array(
-              '#type' => 'textarea',
+              //'#type' => 'textarea',
+              '#type' => 'text_format',
+              '#format' => 'full_html',
+                
               '#title' => t('Quote text'),
               //'#description' => t(''),
               '#default_value' => isset($p_data['quote']['q_text']) ? $p_data['quote']['q_text'] : '',
