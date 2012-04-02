@@ -344,6 +344,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'textfield',
               '#title' => t('Email'),
               //'#description' => t(''),
+              '#element_validate' => array('wdg_misc_elementValidate_email'),
               '#default_value' => '',
             );
         
@@ -361,7 +362,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#default_value' => '',
             );
             $form['data_quote']['q_author'] = array(
-              '#type' => 'textarea',
+              '#type' => 'textfield',
               '#title' => t('Quote author'),
               //'#description' => t(''),
               '#default_value' => '',
