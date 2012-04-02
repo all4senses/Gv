@@ -320,8 +320,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
-      $form['body']['und'][0]['summary']['#format'] = 'plain_text';
-      $form['body']['und'][0]['summary']['#rows'] = 3;
+      // Fix Ckeditor intrusion results.
+      if ($form['body']['und'][0]['summary']['#default_value'] == '<br />') {
+        $form['body']['und'][0]['summary']['#default_value'] = '';
+      }
+      // Doesn't work.
+      //$form['body']['und'][0]['summary']['#format'] = 'plain_text';
+      // Doesn't work.
+      //$form['body']['und'][0]['summary']['#rows'] = 3;
       
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       
