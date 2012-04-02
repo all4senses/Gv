@@ -508,6 +508,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   $form['services']['s_business']['field_p_bu_features_sip'] = $form['field_p_bu_features_sip'];
                   unset($form['field_p_bu_features_sip']);
                   
+            $form['services']['s_international'] = array(
+              '#type' => 'fieldset',
+              '#title' => t('International serviсes'),
+              '#collapsible' => TRUE,
+              '#collapsed' => TRUE,
+              //'#description' => t(''),
+            );
                   
                   
       
