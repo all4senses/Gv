@@ -317,6 +317,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#weight'] = -4;
       $form['body']['#weight'] = 0;
       unset($form['body']['und'][0]['summary']['#attached']['js']);
+      $form['body']['und'][0]['summary']['#format'] = 'plain_text';
+      //$form['summary']['s_residential']['field_p_re_features'] = $form['field_p_re_features'];
+      //unset($form['field_p_re_features']);
       
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       
