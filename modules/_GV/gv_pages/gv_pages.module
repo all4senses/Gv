@@ -333,19 +333,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'textfield',
               '#title' => t('Founded in'),
               //'#description' => t(''),
-              '#default_value' => $p_data['i_founded'],
+              '#default_value' => $p_data['info']['i_founded'],
             );
             $form['data_info']['i_availability'] = array(
               '#type' => 'textfield',
               '#title' => t('Availability'),
               //'#description' => t(''),
-              '#default_value' => $p_data['i_availability'],
+              '#default_value' => $p_data['info']['i_availability'],
             );
             $form['data_info']['i_web'] = array(
               '#type' => 'textfield',
               '#title' => t('Web address'),
               //'#description' => t(''),
-              '#default_value' => $p_data['i_web'],
+              '#default_value' => $p_data['info']['i_web'],
               '#element_validate' => array('wdg_misc_elementValidate_url'),
             );
             $form['data_info']['i_email'] = array(
@@ -353,7 +353,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Email'),
               //'#description' => t(''),
               '#element_validate' => array('wdg_misc_elementValidate_email'),
-              '#default_value' => $p_data['i_url'],
+              '#default_value' => $p_data['info']['i_url'],
             );
         
       $form['data_quote'] = array(
@@ -367,13 +367,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'textarea',
               '#title' => t('Quote text'),
               //'#description' => t(''),
-              '#default_value' => $p_data['q_text'],
+              '#default_value' => $p_data['quote']['q_text'],
             );
             $form['data_quote']['q_author'] = array(
               '#type' => 'textfield',
               '#title' => t('Quote author'),
               //'#description' => t(''),
-              '#default_value' => $p_data['q_author'],
+              '#default_value' => $p_data['quote']['q_author'],
             );
         
             
