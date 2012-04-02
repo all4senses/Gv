@@ -317,6 +317,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#weight'] = -4;
       $form['body']['#weight'] = 0;
       
+      // Hide a placeholder field field_p_data
+      $form['field_p_data']['#access'] = FALSE;
       
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
@@ -375,9 +377,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //'#description' => t(''),
       );
             $form['data_quote']['q_text'] = array(
-              //'#type' => 'textarea',
-              '#type' => 'text_format',
-              '#format' => 'full_html',
+              '#type' => 'textarea',
+              //'#type' => 'text_format',
+              //'#format' => 'full_html',
                 
               '#title' => t('Quote text'),
               //'#description' => t(''),
