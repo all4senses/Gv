@@ -711,16 +711,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 function gv_pages_validateForm_provider(&$form, &$form_state) {
   dpm($form_state);
   foreach ($form_state['values'] as $field => $value) {
-    $prefix = array();
-    preg_match('|(.*)_.*|', $field, $prefix);
-    dpm($prefix);
-    switch ($prefix) {
+    
+    $prefix = explode('_', $field);
+    switch ($prefix[0]) {
       case 're':
-        
+          dpm('re');
+          dpm($field);
         break;
-      
+
       case 'bu':
-        
+          dpm('bu');
+          dpm($field);
         break;
     }
     
