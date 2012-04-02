@@ -333,19 +333,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'textfield',
               '#title' => t('Founded in'),
               //'#description' => t(''),
-              '#default_value' => $p_data['info']['i_founded'],
+              '#default_value' => isset($p_data['info']['i_founded']) ? $p_data['info']['i_founded'] : '',
             );
             $form['data_info']['i_availability'] = array(
               '#type' => 'textfield',
               '#title' => t('Availability'),
               //'#description' => t(''),
-              '#default_value' => $p_data['info']['i_availability'],
+              '#default_value' => isset($p_data['info']['i_availability']) ? $p_data['info']['i_availability'] : '',
             );
             $form['data_info']['i_web'] = array(
               '#type' => 'textfield',
               '#title' => t('Web address'),
               //'#description' => t(''),
-              '#default_value' => $p_data['info']['i_web'],
+              '#default_value' => isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
             );
             $form['data_info']['i_email'] = array(
@@ -353,7 +353,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Email'),
               //'#description' => t(''),
               '#element_validate' => array('wdg_misc_elementValidate_email'),
-              '#default_value' => $p_data['info']['i_url'],
+              '#default_value' => isset($p_data['info']['i_email']) ? $p_data['info']['i_email'] : '',
             );
         
       $form['data_quote'] = array(
@@ -367,13 +367,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#type' => 'textarea',
               '#title' => t('Quote text'),
               //'#description' => t(''),
-              '#default_value' => $p_data['quote']['q_text'],
+              '#default_value' => isset($p_data['quote']['q_text']) ? $p_data['quote']['q_text'] : '',
             );
             $form['data_quote']['q_author'] = array(
               '#type' => 'textfield',
               '#title' => t('Quote author'),
               //'#description' => t(''),
-              '#default_value' => $p_data['quote']['q_author'],
+              '#default_value' => isset($p_data['quote']['q_author']) ? $p_data['quote']['q_author'] : '',
             );
         
             
@@ -396,39 +396,39 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#type' => 'textfield',
                     '#title' => t('Preface title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_residential']['re_preface_title'],
+                    '#default_value' => isset($p_data['services']['s_residential']['re_preface_title']) ? $p_data['services']['s_residential']['re_preface_title'] : '',
                   );
                   $form['services']['s_residential']['re_preface_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('Preface text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_residential']['re_preface_text'],
+                    '#default_value' => isset($p_data['services']['s_residential']['re_preface_text']) ? $p_data['services']['s_residential']['re_preface_text'] : '',
                   );
                   
                   $form['services']['s_residential']['re_basicinfo_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('Basic info title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_residential']['re_basicinfo_title'],
+                    '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_title']) ? $p_data['services']['s_residential']['re_basicinfo_title'] : '',
                   );
                   $form['services']['s_residential']['re_basicinfo_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('Basic info text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_residential']['re_basicinfo_text'],
+                    '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_text']) ? $p_data['services']['s_residential']['re_basicinfo_text'] : '',
                   );
             
                   $form['services']['s_residential']['re_specialnotes_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('Special notes title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_residential']['re_specialnotes_title'],
+                    '#default_value' => isset($p_data['services']['s_residential']['re_specialnotes_title']) ? $p_data['services']['s_residential']['re_specialnotes_title'] : '',
                   );
                   $form['services']['s_residential']['re_specialnotes_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('Special notes text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_residential']['re_specialnotes_text'],
+                    '#default_value' => isset($p_data['services']['s_residential']['re_specialnotes_text']) ? $p_data['services']['s_residential']['re_specialnotes_text'] : '',
                   );
                   
                   // Move defined via admin panel fields with a taxonomy autocomplete for Features Residential tags to the corresponding fieldset.
@@ -447,65 +447,65 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#type' => 'textfield',
                     '#title' => t('Preface title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_preface_title'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_preface_title']) ? $p_data['services']['s_business']['bu_preface_title'] : '',
                   );
                   $form['services']['s_business']['bu_preface_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('Preface text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_preface_text'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_preface_text']) ? $p_data['services']['s_business']['bu_preface_text'] : '',
                   );
                   
                   $form['services']['s_business']['bu_basicinfo_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('Basic info title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_basicinfo_title'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_title']) ? $p_data['services']['s_business']['bu_basicinfo_title'] : '',
                   );
                   $form['services']['s_business']['bu_basicinfo_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('Basic info text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_basicinfo_text'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_text']) ? $p_data['services']['s_business']['bu_basicinfo_text'] : '',
                   );
             
                   $form['services']['s_business']['bu_specialnotes_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('Special notes title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_specialnotes_title'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_specialnotes_title']) ? $p_data['services']['s_business']['bu_specialnotes_title'] : '',
                   );
                   $form['services']['s_business']['bu_specialnotes_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('Special notes text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_specialnotes_text'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_specialnotes_text']) ? $p_data['services']['s_business']['bu_specialnotes_text'] : '',
                   );
                   
                   $form['services']['s_business']['bu_pbxpreface_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('PBX preface title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_pbxpreface_title'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_pbxpreface_title']) ? $p_data['services']['s_business']['bu_pbxpreface_title'] : '',
                   );
                   $form['services']['s_business']['bu_pbxpreface_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('PBX preface text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_pbxpreface_text'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_pbxpreface_text']) ? $p_data['services']['s_business']['bu_pbxpreface_text'] : '',
                   );
                   
                   $form['services']['s_business']['bu_sippreface_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('SIP preface title'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_sippreface_title'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_sippreface_title']) ? $p_data['services']['s_business']['bu_sippreface_title'] : '',
                   );
                   $form['services']['s_business']['bu_sippreface_text'] = array(
                     '#type' => 'textarea',
                     '#title' => t('SIP preface text'),
                     //'#description' => t(''),
-                    '#default_value' => $p_data['services']['s_business']['bu_sippreface_text'],
+                    '#default_value' => isset($p_data['services']['s_business']['bu_sippreface_text']) ? $p_data['services']['s_business']['bu_sippreface_text'] : '',
                   );
                   
                   // Move defined via admin panel fields with a taxonomy autocomplete for Features Business tags to the corresponding fieldset.
