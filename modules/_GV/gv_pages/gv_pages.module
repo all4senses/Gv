@@ -313,7 +313,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     case 'provider_node_form':
       dpm($form);
-      global $language;
       // Fix weights of some fields
       $form['title']['#weight'] = -4;
       $form['body']['#weight'] = 0;
@@ -321,7 +320,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       
-      $p_data = $form['field_p_data'][$language->language][0]['value']['#default_value'];
+      $p_data = $form['field_p_data']['und'][0]['value']['#default_value'];
       
       $form['data_info'] = array(
         '#type' => 'fieldset',
@@ -714,7 +713,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
   
-  global $language;
   $p_data = array();
   
   dpm($form_state);
@@ -741,7 +739,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   dpm($p_data);
-  form_set_value($form['field_p_data'], array($language->language => array(0 => array('value' => serialize($p_data)))), $form_state);
+  form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
 }
 
 
