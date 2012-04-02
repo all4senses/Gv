@@ -316,7 +316,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Fix weights of some fields
       $form['title']['#weight'] = -4;
       $form['body']['#weight'] = 0;
-      
+      unset($form['body']['und'][0]['summary']['#attached']['js']);
       
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       
