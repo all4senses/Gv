@@ -314,6 +314,61 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'provider_node_form':
       dpm($form);
       
+      // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
+      $form['data_info'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('General info'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        //'#description' => t(''),
+      );
+            $form['data_info']['i_founded'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Founded in'),
+              //'#description' => t(''),
+              '#default_value' => '',
+            );
+            $form['data_info']['i_availability'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Availability'),
+              //'#description' => t(''),
+              '#default_value' => '',
+            );
+            $form['data_info']['i_web'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Web address'),
+              //'#description' => t(''),
+              '#default_value' => '',
+            );
+            $form['data_info']['i_email'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Email'),
+              //'#description' => t(''),
+              '#default_value' => '',
+            );
+        
+      $form['data_quote'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Quote and its author'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        //'#description' => t(''),
+      );
+            $form['data_quote']['q_text'] = array(
+              '#type' => 'textarea',
+              '#title' => t('Quote text'),
+              //'#description' => t(''),
+              '#default_value' => '',
+            );
+            $form['data_quote']['q_author'] = array(
+              '#type' => 'textarea',
+              '#title' => t('Quote author'),
+              //'#description' => t(''),
+              '#default_value' => '',
+            );
+            
+            
+      
       $form['#validate'][] = 'gv_pages_validateForm_provider';
       
     break;
@@ -322,15 +377,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
     case 'preface_node_form':
       
-      // Deny to editing titles for everyone except the root.
+      // Deny editing titles for everyone except the root.
       if(arg(1) != 'add') {
         global $user;
         if($user->uid == 1) {
           $form['title'] = array(
-              '#type' => 'item',
-              '#title' => t('Title'),
-              '#markup' => '<div class="title">' . $form['title']['#default_value'] . '</div>',
-              '#description' => t('This field can be edited only by the Root administrator. Used only as id for loading to the listing page and will be hidden on the page.'),
+            '#type' => 'item',
+            '#title' => t('Title'),
+            '#markup' => '<div class="title">' . $form['title']['#default_value'] . '</div>',
+            '#description' => t('This field can be edited only by the Root administrator. Used only as id for loading to the listing page and will be hidden on the page.'),
           );
         }
       } // End of if(arg(1) != 'add') {
