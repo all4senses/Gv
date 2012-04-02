@@ -318,7 +318,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#weight'] = -4;
       $form['body']['#weight'] = 0;
       
+      
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
+      
+      $p_data = $form['field_p_data'][$language->language][0]['value']['#default_value'];
+      
       $form['data_info'] = array(
         '#type' => 'fieldset',
         '#title' => t('General info'),
@@ -709,23 +713,35 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
  *   Return nothing.
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
+  
+  global $language;
+  $p_data = array();
+  
   dpm($form_state);
+  
   foreach ($form_state['values'] as $field => $value) {
     
     $prefix = explode('_', $field);
     switch ($prefix[0]) {
+      case 'i':
+          $p_data['info'][$field] = $value;
+        break;
+      
+      case 'q':
+          $p_data['quote'][$field] = $value;
+        break;
+
       case 're':
-          dpm('re');
-          dpm($field);
+          $p_data['services']['residential'][$field] = $value;
         break;
 
       case 'bu':
-          dpm('bu');
-          dpm($field);
+          $p_data['services']['business'][$field] = $value;
         break;
     }
-    
   }
+  dpm($p_data);
+  form_set_value($form['field_p_data'], array($language->language => array(0 => array('value' => serialize($p_data)))), $form_state);
 }
 
 
