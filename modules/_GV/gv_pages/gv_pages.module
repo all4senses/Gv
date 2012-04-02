@@ -314,6 +314,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'provider_node_form':
       dpm($form);
       
+      // Fix weights of some fields
+      $form['title']['#weight'] = -2;
+      $form['body']['#weight'] = -1;
+      
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       $form['data_info'] = array(
         '#type' => 'fieldset',
