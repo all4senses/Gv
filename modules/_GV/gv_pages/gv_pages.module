@@ -368,11 +368,28 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               //'#description' => t(''),
               '#default_value' => '',
             );
+        
             
-            
+      $form['services'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Provider servises'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        //'#description' => t(''),
+      );
+            $form['services']['s_residential'] = array(
+              '#type' => 'fieldset',
+              '#title' => t('Residential servises'),
+              '#collapsible' => TRUE,
+              '#collapsed' => FALSE,
+              //'#description' => t(''),
+            );  
       
       $form['#validate'][] = 'gv_pages_validateForm_provider';
       
+      
+    dpm($form);
+    
     break;
     
   
