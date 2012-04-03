@@ -309,7 +309,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     
     case 'provider_node_form':
+      
       // dpm($form);
+
       // Fix weights of some fields.
       $form['title']['#weight'] = -4;
       $form['body']['#weight'] = 0;
@@ -1066,6 +1068,9 @@ function gv_pages_node_view($node, $view_mode) {
     case 'provider':
       
       if ($view_mode == 'full') {
+        
+        dpm($node);
+        
         // Add a "Add a review" button to the Provider's page 
         // OR link to review of the current user if he has already submitted a review for this Provider.
         if (!$review = gv_misc_userHasSubmittedReview($node->nid)) {
