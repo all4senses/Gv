@@ -751,7 +751,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   foreach ($form_state['values']['field_p_re_features']['und'] as $term) {
     $p_data['services']['s_residential']['field_p_re_features'][$term['tid']] = array('name' => $term['name'], 'weight' => 0);
     if(isset($old_p_data['services']['s_residential']['field_p_re_features'][$term['tid']]['weight'])) {
-      $p_data['services']['s_residential']['field_p_re_features'][$term['tid']]['name']['weight'] = $old_p_data['services']['s_residential']['field_p_re_features'][$term['tid']]['weight'];
+      $p_data['services']['s_residential']['field_p_re_features'][$term['tid']]['weight'] = $old_p_data['services']['s_residential']['field_p_re_features'][$term['tid']]['weight'];
     }
   }
    
