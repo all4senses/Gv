@@ -1069,9 +1069,6 @@ function gv_pages_node_view($node, $view_mode) {
       
       if ($view_mode == 'full') {
         
-        $p_data = unserialize($node->field_p_data['und'][0]['value']);
-        dpm($p_data);
-        
         // Add a "Add a review" button to the Provider's page 
         // OR link to review of the current user if he has already submitted a review for this Provider.
         if (!$review = gv_misc_userHasSubmittedReview($node->nid)) {
@@ -1079,7 +1076,7 @@ function gv_pages_node_view($node, $view_mode) {
         }
         else {
           $node->content['user_review'] = array(
-              '#markup' => t('You have already submitted a review for this provider:') . ' ' . l('"' . $review->title . '"', 'node/' . $review->nid),
+            '#markup' => t('You have already submitted a review for this provider:') . ' ' . l('"' . $review->title . '"', 'node/' . $review->nid),
           );
         }
         
@@ -1089,11 +1086,24 @@ function gv_pages_node_view($node, $view_mode) {
           'entity_id' => $node->nid,
           'function' => 'average',
         );
-        
         $votes = votingapi_select_results($criteria);
         $criteria['function'] = 'count';
         $counts = votingapi_select_results($criteria);
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
+        
+        // Load and show all the data from placeholder field field_p_data serialized data
+        $p_data = unserialize($node->field_p_data['und'][0]['value']);
+        dpm($p_data);
+        $node->content['i_founded'] = array(
+          '#type' => 'item',
+          '#title' => t('Founded'),
+          '#markup' => $p_data['info']['i_founded'],
+        );
+        $node->content['i_availability'] = array(
+          '#type' => 'item',
+          '#title' => t('Availability'),
+          '#markup' => $p_data['info']['i_availability'],
+        );
         
       } // End of if ($view_mode == 'full') {
       
