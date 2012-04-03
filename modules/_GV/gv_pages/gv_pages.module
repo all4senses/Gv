@@ -1091,24 +1091,93 @@ function gv_pages_node_view($node, $view_mode) {
         $counts = votingapi_select_results($criteria);
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
         
-        // Load and show all the data from placeholder field field_p_data serialized data
-        $p_data = unserialize($node->field_p_data['und'][0]['value']);
-        dpm($p_data);
-        $node->content['i_founded'] = array(
-          '#type' => 'item',
-          '#title' => t('Founded'),
-          '#markup' => $p_data['info']['i_founded'],
-        );
-        $node->content['i_availability'] = array(
-          '#type' => 'item',
-          '#title' => t('Availability'),
-          '#markup' => $p_data['info']['i_availability'],
-        );
+        
+        
+        // Load and show all the data from the placeholder field field_p_data serialized data
+        if (isset($node->field_p_data['und'][0]['value'])) {
+              $p_data = unserialize($node->field_p_data['und'][0]['value']);
+              dpm($p_data);
+
+              // General info.
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_founded', 'Founded'));
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_availability', 'Availability'));
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_web', 'Web address'));
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_email', 'Email'));
+              // Quote.
+              gv_pages_addFieldToNode($node, $p_data, array('quote', 'q_text', 'q_author'));
+              
+              // Services
+              // Residential
+              if (isset($p_data['services']['s_residential'])) {
+                // Preface.
+                gv_pages_addFieldToNode($node, $p_data, array('s_residential', 're_preface'));
+                // Basic info.
+                gv_pages_addFieldToNode($node, $p_data, array('s_residential', 're_basicinfo'));
+                // Special notes.
+                gv_pages_addFieldToNode($node, $p_data, array('s_residential', 're_specialnotes'));
+                
+              } // End of if (isset($p_data['services']['s_residential'])) {
+        
+              
+        } // End of if (isset($node->field_p_data['und'][0]['value'])) {
+        
         
       } // End of if ($view_mode == 'full') {
       
     break;
   }
+}
+
+
+/**
+ * Implements hook_node_delete().
+ *
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') {
+
+  switch ($node->type) {
+    case 'provider':
+      if ($options[0] == 's_residential') {
+        switch ($field_type) {
+          case 'item':
+            if (isset($data['services']['s_residential'][$options[1] . '_title']) && isset($data['services']['s_residential'][$options[1] . '_text'])) {
+              $node->content[$options[1]] = array(
+                '#type' => 'item',
+                '#title' => $data['services']['s_residential'][$options[1] . '_title'],
+                '#markup' => $data['services']['s_residential'][$options[1] . '_text'],
+              );
+            }
+          break;
+        }
+        
+      }
+      elseif ($options[0] == 'info') {
+        if (isset($data['info'][$options[1]])) {
+          $node->content[$options[1]] = array(
+            '#type' => 'item',
+            '#title' => t($options[2]),
+            '#markup' => $data['info'][$options[1]],
+          );
+        }
+      }
+      elseif ($options[0] == 'quote') {
+        if (isset($data['quote'][$options[1]]) && isset($p_data['quote'][$options[2]])) {
+          $node->content[$options[1]] = array(
+            '#markup' => $p_data['quote'][$options[2]],
+          );
+          $node->content[$options[2]] = array(
+            '#markup' => $p_data['quote'][$options[2]],
+          );
+        }
+      }
+      
+      break; // End of case 'provider':
+      
+  } // End of switch ($node->type) {
+  
+  
 }
 
 
