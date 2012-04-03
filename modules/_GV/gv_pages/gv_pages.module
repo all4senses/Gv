@@ -452,17 +452,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   unset($form['field_p_re_features']);
                   
                   // Add tags weights editing window for residential features.
-                  $form['services']['s_residential']['weights_re_features'] = array(
-                    '#type' => 'fieldset',
-                    '#title' => t('Features tags weights'),
-                    '#collapsible' => TRUE,
-                    '#collapsed' => TRUE,
-                    '#tree' => TRUE,
-                    //'#description' => t(''),
-                    '#weight' => $form['services']['s_residential']['field_p_re_features']['#weight'] + 1,
-                  );
+                  if(isset($p_data['services']['s_residential']['weights_re_features']) && !empty($p_data['services']['s_residential']['weights_re_features'])) {
                   
-                        if(isset($p_data['services']['s_residential']['weights_re_features'])) {
+                    $form['services']['s_residential']['weights_re_features'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      '#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_residential']['field_p_re_features']['#weight'] + 1,
+                    );
+
                           foreach($p_data['services']['s_residential']['weights_re_features'] as $tid => $term) {
                             $form['services']['s_residential']['weights_re_features'][$tid] = array(
                               '#type' => 'textfield',
@@ -471,7 +472,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                               '#default_value' => $term['weight'],
                             );
                           }
-                        }
+                  }
                     
                   
             $form['services']['s_business'] = array(
@@ -555,17 +556,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   unset($form['field_p_bu_features_sip']);
                   
                   // Add tags weights editing window for residential features.
-                  $form['services']['s_business']['weights_re_features'] = array(
-                    '#type' => 'fieldset',
-                    '#title' => t('Features tags weights'),
-                    '#collapsible' => TRUE,
-                    '#collapsed' => TRUE,
-                    '#tree' => TRUE,
-                    //'#description' => t(''),
-                    '#weight' => $form['services']['s_business']['field_p_bu_features']['#weight'] + 1,
-                  );
-                  
-                        if(isset($p_data['services']['s_business']['weights_bu_features'])) {
+                  if(isset($p_data['services']['s_business']['weights_bu_features']) && !empty($p_data['services']['s_business']['weights_bu_features'])) {
+                    
+                    $form['services']['s_business']['weights_re_features'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      '#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_business']['field_p_bu_features']['#weight'] + 1,
+                    );
+
                           foreach($p_data['services']['s_business']['weights_bu_features'] as $tid => $term) {
                             $form['services']['s_business']['weights_bu_features'][$tid] = array(
                               '#type' => 'textfield',
@@ -574,20 +576,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                               '#default_value' => $term['weight'],
                             );
                           }
-                        }
+                  }
                   
                   // Add tags weights editing window for PBX residential features.
-                  $form['services']['s_business']['weights_re_features_pbx'] = array(
-                    '#type' => 'fieldset',
-                    '#title' => t('PBX Features tags weights'),
-                    '#collapsible' => TRUE,
-                    '#collapsed' => TRUE,
-                    '#tree' => TRUE,
-                    //'#description' => t(''),
-                    '#weight' => $form['services']['s_business']['field_p_bu_features_pbx']['#weight'] + 1,
-                  );
-                  
-                        if(isset($p_data['services']['s_business']['weights_bu_features_pbx'])) {
+                  if(isset($p_data['services']['s_business']['weights_bu_features_pbx']) && !empty($p_data['services']['s_business']['weights_bu_features_pbx'])) {
+                    
+                    $form['services']['s_business']['weights_re_features_pbx'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('PBX Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      '#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_business']['field_p_bu_features_pbx']['#weight'] + 1,
+                    );
+
                           foreach($p_data['services']['s_business']['weights_bu_features_pbx'] as $tid => $term) {
                             $form['services']['s_business']['weights_bu_features_pbx'][$tid] = array(
                               '#type' => 'textfield',
@@ -596,21 +599,22 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                               '#default_value' => $term['weight'],
                             );
                           }
-                        }
+                  }
                   
                         
                   // Add tags weights editing window for SIP residential features.
-                  $form['services']['s_business']['weights_re_features_sip'] = array(
-                    '#type' => 'fieldset',
-                    '#title' => t('SIP Features tags weights'),
-                    '#collapsible' => TRUE,
-                    '#collapsed' => TRUE,
-                    '#tree' => TRUE,
-                    //'#description' => t(''),
-                    '#weight' => $form['services']['s_business']['field_p_bu_features_sip']['#weight'] + 1,
-                  );
-                  
-                        if(isset($p_data['services']['s_business']['weights_bu_features_sip'])) {
+                  if(isset($p_data['services']['s_business']['weights_bu_features_sip']) && !empty($p_data['services']['s_business']['weights_bu_features_sip'])) {
+                    
+                    $form['services']['s_business']['weights_re_features_sip'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('SIP Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      '#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_business']['field_p_bu_features_sip']['#weight'] + 1,
+                    );
+
                           foreach($p_data['services']['s_business']['weights_bu_features_sip'] as $tid => $term) {
                             $form['services']['s_business']['weights_bu_features_sip'][$tid] = array(
                               '#type' => 'textfield',
@@ -619,8 +623,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                               '#default_value' => $term['weight'],
                             );
                           }
-                        }
-                  
+                  }
+
                   
             $form['services']['s_international'] = array(
               '#type' => 'fieldset',
