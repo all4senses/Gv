@@ -1172,7 +1172,20 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
                 $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . $term['name'] . '</li>';
               }
               $node->content[$options[1] .'_features_key']['#markup'] = '<ul>' . $node->content[$options[1] .'_features_key']['#markup'] . '</ul>';
-            }
+              
+              // The rest of features (if any) go to Available Features
+              if(!empty($data['services'][$options[1]][$options[2]])) {
+                $node->content[$options[1] .'_features'] = array(
+                  '#type' => 'item',
+                  '#title' => t('Available Features'),
+                  '#markup' => '',
+                );
+                foreach ($data['services'][$options[1]][$options[2]] as $tid => $term) {
+                  $node->content[$options[1] .'_features']['#markup'] .= '<li>' . $term['name'] . '</li>';
+                }
+              } // End of if(!empty($data['services'][$options[1]][$options[2]])) {
+            } // end of if (isset($data['services'][$options[1]][$options[2]]) && !empty($data['services'][$options[1]][$options[2]])) {
+            
           break; // End of case 'key_and_normal_features_blocks':
         
         } // End of switch ($field_type) {
