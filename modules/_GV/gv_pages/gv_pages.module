@@ -1121,7 +1121,20 @@ function gv_pages_node_view($node, $view_mode) {
                 gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_features'), 'key_and_normal_features_blocks');
                 // Remove the original taxonomy field.
                 unset($node->content['field_p_re_features']);
+              } // End of if (isset($p_data['services']['s_residential'])) {
+              // Business
+              if (isset($p_data['services']['s_business'])) {
+                // Preface.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_preface'));
+                // Basic info.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_basicinfo'));
+                // Special notes.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_specialnotes'));
                 
+                // Key and normal features blocks.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features'), 'key_and_normal_features_blocks');
+                // Remove the original taxonomy field.
+                unset($node->content['field_p_bu_features']);
               } // End of if (isset($p_data['services']['s_residential'])) {
         
               
