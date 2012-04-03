@@ -849,10 +849,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       $p_data['services']['s_residential']['weights_re_features'][$term['tid']]['weight'] = $form_state['values']['weights_re_features'][$term['tid']];
     }
   }
-  
-  dpm($p_data['services']['s_residential']['weights_re_features']);
+  // Sort tags by weights.
   uasort($p_data['services']['s_residential']['weights_re_features'], 'wdg_misc_sortArrayByWeight');
-  dpm($p_data['services']['s_residential']['weights_re_features']);
   
   // Save weights for Bu Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features']['und'] as $term) {
@@ -863,6 +861,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       $p_data['services']['s_business']['weights_bu_features'][$term['tid']]['weight'] = $form_state['values']['weights_bu_features'][$term['tid']];
     }
   }
+  // Sort tags by weights.
+  uasort($p_data['services']['s_business']['weights_bu_features'], 'wdg_misc_sortArrayByWeight');
+  
   // Save weights for Bu PBX Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features_pbx']['und'] as $term) {
     // Choose every selected (with autoselect) tag.
@@ -872,6 +873,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       $p_data['services']['s_business']['weights_bu_features_pbx'][$term['tid']]['weight'] = $form_state['values']['weights_bu_features_pbx'][$term['tid']];
     }
   }
+  // Sort tags by weights.
+  uasort($p_data['services']['s_business']['weights_bu_features_pbx'], 'wdg_misc_sortArrayByWeight');
+  
   // Save weights for Bu SIP Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features_sip']['und'] as $term) {
     // Choose every selected (with autoselect) tag.
@@ -881,6 +885,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       $p_data['services']['s_business']['weights_bu_features_sip'][$term['tid']]['weight'] = $form_state['values']['weights_bu_features_sip'][$term['tid']];
     }
   }
+  // Sort tags by weights.
+  uasort($p_data['services']['s_business']['weights_bu_features_sip'], 'wdg_misc_sortArrayByWeight');
   
   //dpm($p_data);
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
