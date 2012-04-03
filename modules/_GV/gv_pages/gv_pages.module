@@ -1119,7 +1119,8 @@ function gv_pages_node_view($node, $view_mode) {
                 
                 // Key and normal features blocks.
                 gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_features'), 'key_and_normal_features_blocks');
-                
+                // Remove the original taxonomy field.
+                unset($node->field_p_re_features);
                 
               } // End of if (isset($p_data['services']['s_residential'])) {
         
@@ -1172,13 +1173,6 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
                 }
                 $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . l(t($term['name']), 'taxonomy/term/' . $tid) . '</li>';
                 unset($weights[$tid]);
-//              for ($i = 0; $i < 3; $i++) {
-//                if(empty($weights)) {
-//                  break;
-//                }
-//                $term = array_shift($weights);
-//                $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . l(t($term['name']), '' . $term['name']) . '</li>';
-//              }
               }
               $node->content[$options[1] .'_features_key']['#markup'] = '<ul>' . $node->content[$options[1] .'_features_key']['#markup'] . '</ul>';
               
