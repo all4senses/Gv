@@ -1167,7 +1167,7 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
               );
               $count = 0;
               foreach ($weights as $tid => $term) {
-                if ($count++ > 3) {
+                if ($count++ > 2) {
                   break;
                 }
                 $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . l(t($term['name']), 'taxonomy/term/' . $tid) . '</li>';
