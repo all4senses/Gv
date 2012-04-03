@@ -850,6 +850,10 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   
+  dpm($p_data['services']['s_residential']['weights_re_features']);
+  uasort($p_data['services']['s_residential']['weights_re_features'], 'wdg_misc_sortArrayByWeight');
+  dpm($p_data['services']['s_residential']['weights_re_features']);
+  
   // Save weights for Bu Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features']['und'] as $term) {
     // Choose every selected (with autoselect) tag.

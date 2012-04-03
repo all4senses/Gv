@@ -399,3 +399,20 @@ function wdg_misc_elementValidate_url($element, &$form_state) {
 //    form_error($element, t('This field is required.'));
 //  }
 }
+
+
+/**
+ * Helper function for sorting by weight with uasort function.
+ * 
+ * Example of using:
+ * 
+ * uasort($array_with_elements_contained_key_weight, 'wdg_misc_sortArrayByWeight');
+ */
+function wdg_misc_sortArrayByWeight($a, $b) 
+{
+    if ($a['weight'] == $b['weight']) {
+        return 0;
+    }
+    return ($a['weight'] < $b['weight']) ? -1 : 1;
+}
+  
