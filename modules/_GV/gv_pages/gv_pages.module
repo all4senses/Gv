@@ -850,7 +850,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   // Sort tags by weights.
-  uasort($p_data['services']['s_residential']['weights_re_features'], 'wdg_misc_sortArrayByWeight');
+  if (isset($p_data['services']['s_residential']['weights_re_features'])) {
+    uasort($p_data['services']['s_residential']['weights_re_features'], 'wdg_misc_sortArrayByWeight');
+  }
   
   // Save weights for Bu Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features']['und'] as $term) {
@@ -862,7 +864,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   // Sort tags by weights.
-  uasort($p_data['services']['s_business']['weights_bu_features'], 'wdg_misc_sortArrayByWeight');
+  if (isset($p_data['services']['s_business']['weights_bu_features'])) {
+    uasort($p_data['services']['s_business']['weights_bu_features'], 'wdg_misc_sortArrayByWeight');
+  }
   
   // Save weights for Bu PBX Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features_pbx']['und'] as $term) {
@@ -874,7 +878,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   // Sort tags by weights.
-  uasort($p_data['services']['s_business']['weights_bu_features_pbx'], 'wdg_misc_sortArrayByWeight');
+  if (isset($p_data['services']['s_business']['weights_bu_features_pbx'])) {
+    uasort($p_data['services']['s_business']['weights_bu_features_pbx'], 'wdg_misc_sortArrayByWeight');
+  }
   
   // Save weights for Bu SIP Features (on the next editing).
   foreach ($form_state['values']['field_p_bu_features_sip']['und'] as $term) {
@@ -886,7 +892,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   // Sort tags by weights.
-  uasort($p_data['services']['s_business']['weights_bu_features_sip'], 'wdg_misc_sortArrayByWeight');
+  if (isset($p_data['services']['s_business']['weights_bu_features_sip'])) {
+    uasort($p_data['services']['s_business']['weights_bu_features_sip'], 'wdg_misc_sortArrayByWeight');
+  }
   
   //dpm($p_data);
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
