@@ -558,7 +558,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   // Add tags weights editing window for residential features.
                   if(isset($p_data['services']['s_business']['weights_bu_features']) && !empty($p_data['services']['s_business']['weights_bu_features'])) {
                     
-                    $form['services']['s_business']['weights_re_features'] = array(
+                    $form['services']['s_business']['weights_bu_features'] = array(
                       '#type' => 'fieldset',
                       '#title' => t('Features tags weights'),
                       '#collapsible' => TRUE,
@@ -581,7 +581,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   // Add tags weights editing window for PBX residential features.
                   if(isset($p_data['services']['s_business']['weights_bu_features_pbx']) && !empty($p_data['services']['s_business']['weights_bu_features_pbx'])) {
                     
-                    $form['services']['s_business']['weights_re_features_pbx'] = array(
+                    $form['services']['s_business']['weights_bu_features_pbx'] = array(
                       '#type' => 'fieldset',
                       '#title' => t('PBX Features tags weights'),
                       '#collapsible' => TRUE,
@@ -605,7 +605,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   // Add tags weights editing window for SIP residential features.
                   if(isset($p_data['services']['s_business']['weights_bu_features_sip']) && !empty($p_data['services']['s_business']['weights_bu_features_sip'])) {
                     
-                    $form['services']['s_business']['weights_re_features_sip'] = array(
+                    $form['services']['s_business']['weights_bu_features_sip'] = array(
                       '#type' => 'fieldset',
                       '#title' => t('SIP Features tags weights'),
                       '#collapsible' => TRUE,
