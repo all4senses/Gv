@@ -462,8 +462,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   );
                   
                   if(isset($p_data['services']['s_residential']['re_features_weights'])) {
-                    foreach($p_data['services']['s_residential']['re_features_weights'] as $key => $term) {
-                      $form['services']['s_residential']['re_features_weights'][$term['tid']] = array(
+                    foreach($p_data['services']['s_residential']['re_features_weights'] as $tid => $term) {
+                      $form['services']['s_residential']['re_features_weights'][$tid] = array(
                           '#type' => 'textarea',
                           '#title' => t($term['name']),
                           '#default_value' => $term['weight'],
