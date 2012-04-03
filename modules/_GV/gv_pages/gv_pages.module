@@ -1118,7 +1118,7 @@ function gv_pages_node_view($node, $view_mode) {
                 gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_specialnotes'));
                 
                 // Key and normal features blocks.
-                gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 'weights_re_features'), 'key_and_normal_features_blocks');
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_features'), 'key_and_normal_features_blocks');
                 
                 
               } // End of if (isset($p_data['services']['s_residential'])) {
@@ -1135,10 +1135,7 @@ function gv_pages_node_view($node, $view_mode) {
 
 
 /**
- * Implements hook_node_delete().
- *
- * @return void
- *   Return nothing.
+ * Adds field to a node from the saved data.
  */
 function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') {
 
@@ -1157,35 +1154,47 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
           break; // End of case 'item':
           
           case 'key_and_normal_features_blocks':
-            // $options[2] - Weights field.
-            if (isset($data['services'][$options[1]][$options[2]]) && !empty($data['services'][$options[1]][$options[2]])) {
+            // $options[1] - something like 's_residential'
+            // $options[2] - something like 're_features', add here weights_ and you'll get the field in the array $data['weights_re_features']
+            if (isset($data['services'][$options[1]]['weights_' . $options[2]]) && !empty($data['services'][$options[1]]['weights_' . $options[2]])) {
+              $weights = $data['services'][$options[1]]['weights_' . $options[2]];
+              
               // First 3 tags go to Key Features
               $node->content[$options[1] .'_features_key'] = array(
                 '#type' => 'item',
                 '#title' => t('Key Features'),
                 '#markup' => '',
               );
-              for ($i = 0; $i < 3; $i++) {
-                if(empty($data['services'][$options[1]][$options[2]])) {
+              $count = 0;
+              foreach ($weights as $tid => $term) {
+                if ($count++ > 3) {
                   break;
                 }
-                $term = array_shift($data['services'][$options[1]][$options[2]]);
-                $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . $term['name'] . '</li>';
+                $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . l(t($term['name']), 'taxonomy/term/' . $tid) . '</li>';
+                unset($weights[$tid]);
+//              for ($i = 0; $i < 3; $i++) {
+//                if(empty($weights)) {
+//                  break;
+//                }
+//                $term = array_shift($weights);
+//                $node->content[$options[1] .'_features_key']['#markup'] .= '<li>' . l(t($term['name']), '' . $term['name']) . '</li>';
+//              }
               }
               $node->content[$options[1] .'_features_key']['#markup'] = '<ul>' . $node->content[$options[1] .'_features_key']['#markup'] . '</ul>';
               
               // The rest of features (if any) go to Available Features
-              if(!empty($data['services'][$options[1]][$options[2]])) {
+              if(!empty($weights)) {
                 $node->content[$options[1] .'_features'] = array(
                   '#type' => 'item',
                   '#title' => t('Available Features'),
                   '#markup' => '',
                 );
-                foreach ($data['services'][$options[1]][$options[2]] as $tid => $term) {
-                  $node->content[$options[1] .'_features']['#markup'] .= '<li>' . $term['name'] . '</li>';
+                foreach ($weights as $tid => $term) {
+                  $node->content[$options[1] .'_features']['#markup'] .= '<li>' . l(t($term['name']), 'taxonomy/term/' . $tid) . '</li>';
                 }
-              } // End of if(!empty($data['services'][$options[1]][$options[2]])) {
-            } // end of if (isset($data['services'][$options[1]][$options[2]]) && !empty($data['services'][$options[1]][$options[2]])) {
+                $node->content[$options[1] .'_features']['#markup'] = '<ul>' . $node->content[$options[1] .'_features']['#markup'] . '</ul>';
+              } // End of if(!empty($weights)) {
+            } // end of if (isset($data['services'][$options[1]]['weights_' . $options[2]]) && !empty($data['services'][$options[1]]['weights_' . $options[2]])) {
             
           break; // End of case 'key_and_normal_features_blocks':
         
