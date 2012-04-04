@@ -356,7 +356,7 @@ function gv_blocks_getBlockThemed($block_data)
 function gv_blocks_get_requestQuote() {
 
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path . '/js/gv_requestquote.js');
+  drupal_add_js($path_to_custom_js . '/js/gv_requestquote.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
