@@ -5,7 +5,7 @@
        
         $("#demoForm").formwizard({ 
 				 	formPluginEnabled: true,
-				 	validationEnabled: true,
+				 	validationEnabled: false,
 				 	focusFirstInput : true,
 				 	formOptions :{
 						success: function(data){$("#status").fadeTo(500,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
