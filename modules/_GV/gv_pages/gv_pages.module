@@ -696,6 +696,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
       if(arg(1) == 'add') {
+        dpm($form);
         // Add a review page.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
