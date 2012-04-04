@@ -14,6 +14,11 @@
               else
                 error.insertAfter(element);
             },
+            showErrors: function(errorMap, errorList) {
+              alert("Your form contains " + this.numberOfInvalids());
+              
+              this.defaultShowErrors();
+            },
             rules: {
               
 //              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
