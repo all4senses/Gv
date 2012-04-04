@@ -1335,16 +1335,25 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         . '</div>';
     }
-    // Recommend vote.
-    $node->content['gv_recommend'] = array(
-        '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
-    );
     // Voters count.
     $node->content['gv_voters'] = array(
         '#markup' => t('Voters') . ': ' . $counts[0]['value'], // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
     );
+    // Recommend vote.
     
-    // If case of using the original fivestar theme function there should be connected original fivestar's css
+    if (isset($recommend_vote['function'])) {
+      // If it's agregated cached results (calculated via function)
+      // we'll show percent of voters recomendations.
+      $node->content['gv_recommend'] = array(
+          '#markup' => '<div class="title">' . t('Would recommend this VoIP provider') . ': </div><div class="text">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div>',
+      );
+    }
+    else {
+      $node->content['gv_recommend'] = array(
+          '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('Yes'):t('No')) . '</div>',
+      );
+    }
+    // In case of using the original fivestar theme function there should be connected original fivestar's css
     /*
     $path = drupal_get_path('module', 'fivestar');
     drupal_add_css($path . '/css/fivestar.css');
