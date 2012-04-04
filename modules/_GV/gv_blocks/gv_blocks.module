@@ -382,9 +382,9 @@ function gv_blocks_get_requestQuote() {
 
                 <div id="fieldWrapper">
                     
-                    <span class="step" id="first">
+                    <div class="step" id="first">
                         
-                            <span class="font_normal_07em_black">How many phones do you have?</span><br />
+                            <div class="font_normal_07em_black">How many phones do you have?</div>
                             
                             <input type="radio" name="phones_amt" value="1 - 2">1 - 2<br>
                             <input type="radio" name="phones_amt" value="3 - 5">3 - 5<br>
@@ -393,12 +393,23 @@ function gv_blocks_get_requestQuote() {
                             <input type="radio" name="phones_amt" value="21 - 50">21 - 50<br>
                             <input type="radio" name="phones_amt" value="50+" id="last_phones_amt">50+<br>
                             
-                    </span>
+                    </div>
                     
-                    <span class="step" id="finland">
+                    <div class="step" id="quote_for">
                         
-                            <span class="font_normal_07em_black">Step 2 - Personal information</span><br />
+                            <span class="font_normal_07em_black">Are you looking for a quote for:</span><br />
                             
+                            <input type="radio" name="quote_for" value="Home">Home<br>
+                            <input type="radio" name="quote_for" value="Home-based Business">Home-based Business<br>
+                            <input type="radio" name="phones_amt" value="Business" id="last_phones_amt">Business<br>
+                         
+                    </div>
+                    
+                    <span class="step" id="confirmation">
+                        
+                            <span class="font_normal_07em_black">Last step - Username</span><br />
+                         
+                               
                             <label for="day_fi">Social Security Number</label><br />
                                 <input class="input_field_25em" name="day" id="day_fi" value="DD" />
                                 <input class="input_field_25em" name="month" id="month_fi" value="MM" />
@@ -412,12 +423,7 @@ function gv_blocks_get_requestQuote() {
                                 
                             <label for="email">*Email</label><br />
                                 <input class="input_field_12em email" name="myemail" id="myemail" /><br />	 						
-                    </span>
-                    
-                    <span class="step" id="confirmation">
-                        
-                            <span class="font_normal_07em_black">Last step - Username</span><br />
-                            
+                                
                             <label for="username">User name</label><br />
                                 <input class="input_field_12em" name="username" id="username" /><br />
                             

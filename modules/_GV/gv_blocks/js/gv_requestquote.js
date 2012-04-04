@@ -9,6 +9,7 @@
 				 	focusFirstInput: true,
           validationOptions: {
             errorPlacement: function(error, element) {
+              console.log(this);
               if (element.attr("name") == "phones_amt")
                 error.insertAfter("#last_phones_amt");
               else
@@ -39,6 +40,7 @@
 //                creditcard: {creditcard: true}
 //              },
               phones_amt: "required",
+              quote_for: "required",
 							surname: "required",
 							myemail: {
 								required: true,
