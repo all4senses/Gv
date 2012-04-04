@@ -8,6 +8,13 @@
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
           validationOptions: {
+            rules: {
+							surname: "required",
+							myemail: {
+								required: true,
+								email: true
+							}
+						},
 						messages: {
               surname: "Please specify your nameeee",
               myemail: {
