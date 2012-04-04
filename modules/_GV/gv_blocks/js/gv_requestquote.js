@@ -6,10 +6,10 @@
         $("#demoForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
-				 	focusFirstInput : true,
-          validationOptions :{
+				 	focusFirstInput: true,
+          validationOptions: {
 						messages: {
-              name: "Please specify your nameeee",
+              surname: "Please specify your nameeee",
               email: "Please specify your nameeee"
 //              email: {
 //                required: "Weeeee need your email address to contact you",
