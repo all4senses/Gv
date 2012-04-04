@@ -42,6 +42,7 @@
               phones_amt: "required",
               quote_for: "required",
               buying_time: "required",
+              connection: "required",
               
 							surname: "required",
 							myemail: {
