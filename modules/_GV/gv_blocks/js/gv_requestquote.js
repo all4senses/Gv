@@ -9,10 +9,6 @@
 				 	focusFirstInput: true,
           validationOptions: {
             errorPlacement: function(error, element) {
-              console.log(this);
-              console.log(element);
-              console.log(error);
-              console.log(error.html());
               if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time")
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 alert(error.html() +  ': ' + $(".question", element.parent()).html() );
@@ -45,6 +41,8 @@
 //              },
               phones_amt: "required",
               quote_for: "required",
+              buying_time: "required",
+              
 							surname: "required",
 							myemail: {
 								required: true,
