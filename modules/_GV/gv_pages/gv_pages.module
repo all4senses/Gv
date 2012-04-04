@@ -1097,12 +1097,12 @@ function gv_pages_node_view($node, $view_mode) {
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
         
         
-        dpm($node);
+        //dpm($node);
         
         // Load and show all the data from the placeholder field field_p_data serialized data
         if (isset($node->field_p_data['und'][0]['value'])) {
               $p_data = unserialize($node->field_p_data['und'][0]['value']);
-              dpm($p_data);
+              //dpm($p_data);
 
               // General info.
               gv_pages_addFieldToNode($node, $p_data, array('info', 'i_founded', 'Founded'));
@@ -1112,7 +1112,10 @@ function gv_pages_node_view($node, $view_mode) {
               // Quote.
               gv_pages_addFieldToNode($node, $p_data, array('quote', 'q_text', 'q_author'));
               
+              
+              
               // Services
+             
               // Residential
               if (isset($p_data['services']['s_residential'])) {
                 // Preface.
