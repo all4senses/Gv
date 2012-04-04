@@ -701,8 +701,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         // Add a review page.
         
-        dpm($form);
-        
         // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
@@ -1332,12 +1330,15 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
         //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
-        . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
         . '</div>';
     }
     // Recommend vote.
     $node->content['gv_recommend'] = array(
         '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('No'):t('Yes')) . '</div>',
+    );
+    // Voters count.
+    $node->content['gv_voters'] = array(
+        '#markup' => t('Voters') . ': ' . $counts[0]['value'], // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
     );
     
     // If case of using the original fivestar theme function there should be connected original fivestar's css
