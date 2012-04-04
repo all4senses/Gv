@@ -10,6 +10,8 @@
           validationOptions: {
             errorPlacement: function(error, element) {
               console.log(this);
+              console.log(element);
+              
               if (element.attr("name") == "phones_amt")
                 error.insertAfter(".last.phones_amt");
               else if (element.attr("name") == "quote_for")
