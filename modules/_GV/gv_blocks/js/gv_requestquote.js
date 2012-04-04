@@ -25,7 +25,7 @@
 //                digits: {digits: true},
 //                creditcard: {creditcard: true}
 //              },
-              //phones_amt: "required",
+              phones_amt: "required",
 							surname: "required",
 							myemail: {
 								required: true,
