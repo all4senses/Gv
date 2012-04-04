@@ -11,7 +11,9 @@
             errorPlacement: function(error, element) {
               console.log(this);
               if (element.attr("name") == "phones_amt")
-                error.insertAfter("#last_phones_amt");
+                error.insertAfter(".last.phones_amt");
+              else if (element.attr("name") == "quote_for")
+                error.insertAfter(".last.quote_for");
               else
                 error.insertAfter(element);
             },
