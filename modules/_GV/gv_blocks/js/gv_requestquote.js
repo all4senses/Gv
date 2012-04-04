@@ -8,6 +8,12 @@
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
           validationOptions: {
+            errorPlacement: function(error, element) {
+              if (element.attr("name") == "phones_amt")
+                error.insertAfter("#last_phones_amt");
+              else
+                error.insertAfter(element);
+            },
             rules: {
               
 //              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
