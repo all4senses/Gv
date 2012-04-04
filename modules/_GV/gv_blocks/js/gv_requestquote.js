@@ -9,17 +9,35 @@
 				 	focusFirstInput: true,
           validationOptions: {
             rules: {
+              
+//              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
+//                        
+//              // Rules from jquery.validate.js              
+//              classRuleSettings: {
+//                required: {required: true},
+//                email: {email: true},
+//                url: {url: true},
+//                date: {date: true},
+//                dateISO: {dateISO: true},
+//                dateDE: {dateDE: true},
+//                number: {number: true},
+//                numberDE: {numberDE: true},
+//                digits: {digits: true},
+//                creditcard: {creditcard: true}
+//              },
+  
 							surname: "required",
 							myemail: {
 								required: true,
-								email: true
+								email: false,
+                number: true
 							}
 						},
 						messages: {
-              surname: "Please specify your nameeee",
+              surname: Drupal.t("Please specify your nameeee"),
               myemail: {
-                required: "Weeeee need your email address to contact you",
-                email: "Your email address must be in the format of name@domain.com"
+                required: Drupal.t("Weeeee need your email address to contact you"),
+                email: Drupal.t("Your email address must be in the format of name@domain.com")
               }
             }
           },
