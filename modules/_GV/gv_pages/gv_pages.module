@@ -780,7 +780,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             'uid' => $form['uid']['#value'],
           );
           if ($votes = votingapi_select_votes($criteria)) {
-            dpm($votes);
             foreach ($votes as $vote) {
               $form['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
             }
@@ -1322,7 +1321,6 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         //'#suffix' => '</div>',
     );
 
-    dpm($votes);
     foreach ($votes as $key => $vote) {
       if ($vote['tag'] == 'recommend') {
         $recommend_vote = $vote;
