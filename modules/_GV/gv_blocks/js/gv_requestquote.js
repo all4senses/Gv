@@ -10,10 +10,11 @@
           validationOptions :{
 						messages: {
               name: "Please specify your nameeee",
-              email: {
-                required: "Weeeee need your email address to contact you",
-                email: "Your email address must be in the format of name@domain.com"
-              }
+              email: "Please specify your nameeee"
+//              email: {
+//                required: "Weeeee need your email address to contact you",
+//                email: "Your email address must be in the format of name@domain.com"
+//              }
             }
           },
 				 	formOptions :{
