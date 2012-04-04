@@ -15,7 +15,7 @@
               console.log(error.html());
               if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for")
                 //error.insertAfter( $(".last_radio", element.parent()) );
-                alert($(".question", element.parent()).html() + ': ' + error.html()); //question
+                alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else
                 error.insertAfter(element);
             },
