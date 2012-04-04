@@ -11,11 +11,10 @@
             errorPlacement: function(error, element) {
               console.log(this);
               console.log(element);
+              console.log(error);
               
-              if (element.attr("name") == "phones_amt")
-                error.insertAfter(".last.phones_amt");
-              else if (element.attr("name") == "quote_for")
-                error.insertAfter( $(".last", element.parent()) );
+              if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for")
+                error.insertAfter( $(".last_radio", element.parent()) );
               else
                 error.insertAfter(element);
             },
