@@ -376,7 +376,7 @@ function gv_blocks_get_requestQuote() {
         <ul>
             <li>Three steps.</li>
         </ul>
-        <hr />
+
         <h5 id="status"></h5>
         <form id="requestQuoteForm" method="post" action="json.html" class="bbq">
 
@@ -432,39 +432,31 @@ function gv_blocks_get_requestQuote() {
                          
                     </div>
                     
-                    <span class="step" id="confirmation">
+                    
+                    <div class="step" id="personal_info">
                         
-                            <span class="font_normal_07em_black">Last step - Username</span><br />
-                         
-                               
-                            <label for="day_fi">Social Security Number</label><br />
-                                <input class="input_field_25em" name="day" id="day_fi" value="DD" />
-                                <input class="input_field_25em" name="month" id="month_fi" value="MM" />
-                                <input class="input_field_3em" name="year" id="year_fi" value="YYYY" /> - 
-                                <input class="input_field_3em" name="lastFour" id="lastFour_fi" value="XXXX" /><br />
-                                
-                            <label for="countryPrefix_fi">Phone number</label><br />
-                                <input class="input_field_35em" name="countryPrefix" id="countryPrefix_fi" value="+358" /> - 
-                                <input class="input_field_3em" name="areaCode" id="areaCode_fi" /> - 
-                                <input class="input_field_12em" name="phoneNumber" id="phoneNumber_fi" /><br />
-                                
-                            <label for="email">*Email</label><br />
-                                <input class="input_field_12em email" name="myemail" id="myemail" /><br />	 						
-                                
-                            <label for="username">User name</label><br />
-                                <input class="input_field_12em" name="username" id="username" /><br />
+                            <span class="question font_normal_07em_black">Fill out the form below:</span><br />
                             
-                            <label for="password">Password</label><br />
-                                <input class="input_field_12em" name="password" id="password" type="password" /><br />
-                            
-                            <label for="retypePassword">Retype password</label><br />
-                                <input class="input_field_12em" name="retypePassword" id="retypePassword" type="password" /><br />
-                                
-                            <label for="firstname">First name</label><br />
+                            <label for="firstname">First Name</label>
                                 <input class="input_field_12em" name="firstname" id="firstname" /><br />
-                            <label for="surname">Surname</label><br />
-                                <input class="input_field_12em name required" name="surname" id="surname" /><br />
-                    </span>
+                            <label for="lastname">Last Name</label>
+                                <input class="input_field_12em name required" name="lastname" id="lastname" /><br />
+                                
+                            <label for="company">Company*</label><br />
+                                <input class="input_field_12em required" name="company" id="company" /><br />
+                                
+                            <label for="email">Email*</label><br />
+                                <input class="input_field_12em email required" name="email" id="email" /><br />
+                                
+                            <label for="phone">Phone*</label><br />
+                                <input class="input_field_25em required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="input_field_25em required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="input_field_3em required phone" name="phone_3" id="phone_3" value="" />
+                                
+                            <label for="notes">Notes</label>
+                                <input class="input_field_12em" name="notes" id="notes" /><br />
+                         
+                    </div>
                     
                 </div>
             
@@ -473,7 +465,6 @@ function gv_blocks_get_requestQuote() {
                         <input class="navigation_button" id="next" value="Next" type="submit" />
                 </div>
         </form>
-        <hr />
 
         <p id="data"></p>
 </div>
