@@ -17,6 +17,8 @@
             showErrors: function(errorMap, errorList) {
               alert("Your form contains " + this.numberOfInvalids());
               console.log(this);
+              console.log(this.invalidElements());
+              
               this.defaultShowErrors();
             },
             rules: {
