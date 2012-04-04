@@ -3,7 +3,7 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
-        $("#demoForm").formwizard({ 
+        $("#requestQuoteForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,

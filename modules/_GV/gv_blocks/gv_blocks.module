@@ -360,7 +360,7 @@ function gv_blocks_get_requestQuote() {
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
-  // drupal_add_js($path_to_custom_js . 'bbq.js');
+  drupal_add_js($path_to_custom_js . 'bbq.js');
   // drupal_add_js($path_to_custom_js . 'jquery.form.wizard.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
@@ -371,16 +371,14 @@ function gv_blocks_get_requestQuote() {
   
   
   $out = '
-   <div id="demoWrapper">
-			<h3>Example of a straight wizard</h3>
+   <div id="formWrapper">
+			<h3>Request a Quote</h3>
 			<ul>
-			<li>Straight wizard with three steps.</li>
-			<li>Validation plugin enabled for the email field on the second step.</li>
-			<li>Form plugin enabled and beforeSubmit and success callbacks are used.</li>
+        <li>Three steps.</li>
 			</ul>
 			<hr />
 			<h5 id="status"></h5>
-			<form id="demoForm" method="post" action="json.html" class="bbq">
+			<form id="requestQuoteForm" method="post" action="json.html" class="bbq">
 				<div id="fieldWrapper">
 				<span class="step" id="first">
 					<span class="font_normal_07em_black">First step - Name</span><br />
