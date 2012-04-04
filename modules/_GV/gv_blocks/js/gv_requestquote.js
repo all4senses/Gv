@@ -12,9 +12,10 @@
               console.log(this);
               console.log(element);
               console.log(error);
-              
+              console.log(error.html());
               if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for")
-                error.insertAfter( $(".last_radio", element.parent()) );
+                //error.insertAfter( $(".last_radio", element.parent()) );
+                alert(error.html());
               else
                 error.insertAfter(element);
             },
