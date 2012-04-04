@@ -354,9 +354,6 @@ function gv_blocks_getBlockThemed($block_data)
  * Block Request a quote with a multistep form.
  */
 function gv_blocks_get_requestQuote() {
-  $block_data = array('module' => 'gv_blocks', 'delta' => 'request-quote', 'subject_visible' => FALSE);
-  $block_data['subject'] = NULL;
-  $block_data['content'] = 'Test block';
 
-  return gv_blocks_wrapInBlockThemed($block_data, $block_data);
+  return 'Test block request a quote';
 }
