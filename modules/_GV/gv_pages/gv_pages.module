@@ -666,6 +666,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Control the editing of review pages.
       
+      global $user;
+      
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
      
@@ -696,12 +698,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
       if(arg(1) == 'add') {
-        dpm($form);
+        
         // Add a review page.
+        
+        dpm($form);
+        
+        // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
         $providers[7] = t('OTHER SP');
-        
         $form['field_ref_provider']['und']['#options'] = $providers;
         $form['field_ref_provider']['und']['#default_value'][0] = '_none';
 
@@ -713,7 +718,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $provider_nid = NULL;
           }
         }
-
         if($provider_nid) {
           $provider_node = node_load($provider_nid);
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
@@ -728,6 +732,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_r_oprovider']['#access'] = FALSE;
         } // End of if($provider_nid) {
         
+        // Autofill the email field.
+        $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+                
       } // End of if(arg(1) == 'add') {
       else {
         // Edit a review page.
@@ -746,7 +753,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Should we allow to a regular user to edit the name in the text field / reselect from the list?
           // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
           // Let's choose the second variant.
-          global $user;
           if(!in_array('administrator', $user->roles)) {
             $form['field_ref_provider']['#access'] = FALSE;
             $form['field_r_oprovider']['#access'] = FALSE;  
