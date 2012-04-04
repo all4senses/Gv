@@ -1168,7 +1168,7 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
       if ($options[0] == 'services') {
         switch ($field_type) {
           case 'item':
-            if (isset($data['services'][$options[1]][$options[2] . '_title']) && isset($data['services'][$options[1]][$options[2] . '_text'])) {
+            if (isset($data['services'][$options[1]][$options[2] . '_title']) && isset($data['services'][$options[1]][$options[2] . '_text']) && $data['services'][$options[1]][$options[2] . '_title'] && $data['services'][$options[1]][$options[2] . '_text']) {
               $node->content[$options[2]] = array(
                 '#type' => 'item',
                 '#title' => $data['services'][$options[1]][$options[2] . '_title'],
@@ -1241,7 +1241,7 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
         
       } // End of if ($options[0] == 'services') {
       elseif ($options[0] == 'info') {
-        if (isset($data['info'][$options[1]])) {
+        if (isset($data['info'][$options[1]]) && $data['info'][$options[1]]) {
           $node->content[$options[1]] = array(
             '#type' => 'item',
             '#title' => t($options[2]),
@@ -1250,7 +1250,7 @@ function gv_pages_addFieldToNode($node, &$data, $options, $field_type = 'item') 
         }
       } // End of elseif ($options[0] == 'info') {
       elseif ($options[0] == 'quote') {
-        if (isset($data['quote'][$options[1]]) && isset($p_data['quote'][$options[2]])) {
+        if (isset($data['quote'][$options[1]]) && isset($p_data['quote'][$options[2]]) && $data['quote'][$options[1]] && $p_data['quote'][$options[2]]) {
           $node->content[$options[1]] = array(
             '#markup' => $p_data['quote'][$options[2]],
           );
