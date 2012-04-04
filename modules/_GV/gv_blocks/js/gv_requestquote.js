@@ -15,7 +15,7 @@
               if (element.attr("name") == "phones_amt")
                 error.insertAfter(".last.phones_amt");
               else if (element.attr("name") == "quote_for")
-                error.insertAfter(".last.quote_for");
+                error.insertAfter( $(".last", element.parent()) );
               else
                 error.insertAfter(element);
             },
