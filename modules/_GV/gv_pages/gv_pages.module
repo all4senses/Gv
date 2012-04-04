@@ -1320,6 +1320,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         //'#suffix' => '</div>',
     );
 
+    dpm($votes);
     foreach ($votes as $key => $vote) {
       if ($vote['tag'] == 'recommend') {
         $recommend_vote = $vote;
