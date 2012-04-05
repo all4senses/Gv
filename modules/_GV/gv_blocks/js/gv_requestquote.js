@@ -12,10 +12,10 @@
               if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time")
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 alert(error.html() +  ': ' + $(".question", element.parent()).html() );
-              else if (element.attr("name") == "firstname" || element.attr("name") == "lastname")
-                error.insertAfter("#lastname");
-              else
-                error.insertAfter(element);
+              else (element.attr("name") == "firstname" || element.attr("name") == "lastname")
+                alert(error.html() +  ': ' + element.prev().html());
+              //else
+              //  error.insertAfter(element);
             },
 //            showErrors: function(errorMap, errorList) {
 //              alert("Your form contains " + this.numberOfInvalids());
