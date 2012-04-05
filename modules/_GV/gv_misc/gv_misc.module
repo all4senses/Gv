@@ -7,6 +7,33 @@
 
 
 /**
+ * Implements hook_menu().
+ */
+function gv_misc_menu() {
+ 
+  $items['request'] = array(
+    'title' => 'Make a request',
+    'page callback' => 'gv_misc_makeRequest_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  
+  return $items;
+}
+
+
+/**
+ * Implements requests from users.
+ * 
+ * Returns json result data with OK or error.
+ */
+function gv_misc_makeRequest_ajax() {
+  $output = 'test';
+  drupal_json_output(array('status' => TRUE, 'data' => $output, 'post' => $_POST, 'get' => $_GET));
+}
+
+
+/**
  * Implements hook_form_alter().
  *
  * @param array &$form

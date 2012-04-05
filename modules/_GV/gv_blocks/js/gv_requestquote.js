@@ -43,19 +43,21 @@
               
 //              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
 //                        
-//              // Rules from jquery.validate.js              
-//              classRuleSettings: {
-//                required: {required: true},
-//                email: {email: true},
-//                url: {url: true},
-//                date: {date: true},
-//                dateISO: {dateISO: true},
-//                dateDE: {dateDE: true},
-//                number: {number: true},
-//                numberDE: {numberDE: true},
-//                digits: {digits: true},
-//                creditcard: {creditcard: true}
-//              },
+              // Rules from jquery.validate.js              
+              /*
+              classRuleSettings: {
+                required: {required: true},
+                email: {email: true},
+                url: {url: true},
+                date: {date: true},
+                dateISO: {dateISO: true},
+                dateDE: {dateDE: true},
+                number: {number: true},
+                numberDE: {numberDE: true},
+                digits: {digits: true},
+                creditcard: {creditcard: true}
+              },
+              */
               phones_amt: "required",
               quote_for: "required",
               buying_time: "required",
