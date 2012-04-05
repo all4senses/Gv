@@ -122,7 +122,7 @@
           },
 				 	formOptions :{
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
-            success: function(data){$(".success").fadeTo(50,1)},
+            success: function(data){$('#requestQuoteFormWrapper .multipartForm').fadeTo(50,0); $(".success").fadeTo(50,1);},
 						beforeSubmit: function(data){alert('Data sent: ' + $.param(data));},//function(data){$("#data").html("data sent to the server: " + $.param(data));},
 						dataType: 'json',
 						resetForm: false//true
