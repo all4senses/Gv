@@ -12,7 +12,7 @@
               username: "firstname lastname company email phone_1 phone_2 phone_3"
             },
             errorPlacement: function(error, element) {
-              if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time")
+              if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time" || element.attr("name") == "connection" )
                 error.insertAfter( $(".last_radio", element.parent()) );
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
@@ -51,12 +51,15 @@
               buying_time: "required",
               connection: "required",
               
-							surname: "required",
+							surname: "required"
+              // works
+              /* 
 							myemail: {
 								required: true,
 								email: false,
                 number: true
 							}
+              */
 						},
 						messages: {
               
@@ -83,6 +86,11 @@
               },   
               */
               required: Drupal.t('All fields with * are required'),
+              phones_amt: Drupal.t('Make your choice!'),
+              quote_for: Drupal.t('Make your choice!'),
+              buying_time: Drupal.t('Make your choice!'),
+              connection: Drupal.t('Make your choice!'),
+              
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
                 email: Drupal.t("Your email address must be in the format of name@domain.com")
