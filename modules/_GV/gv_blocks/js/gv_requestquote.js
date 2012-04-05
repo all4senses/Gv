@@ -8,9 +8,9 @@
             required: Drupal.t('All fields with * are required')
         });
 
-        $("label").click(function(){
-          alert('Click');
-        });
+//        $("label").click(function(){
+//          alert('Click');
+//        });
         
         $("#requestQuoteForm").formwizard({ 
 				 	formPluginEnabled: true,
