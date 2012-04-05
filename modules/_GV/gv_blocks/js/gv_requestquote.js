@@ -56,7 +56,15 @@
               buying_time: "required",
               connection: "required",
               
-							surname: "required"
+              phone_1: {
+                number: true
+							},
+              phone_2: {
+                number: true
+							},
+              phone_3: {
+                number: true
+							}
               // works
               /* 
 							myemail: {
