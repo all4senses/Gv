@@ -8,9 +8,9 @@
             required: Drupal.t('All fields with * are required')
         });
 
+        // Click on a label will click on a radio button.
         $(".label_after").click(function(){
           $(this).prev().click();
-          //alert('Click');
         });
         
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
@@ -122,7 +122,7 @@
           },
 				 	formOptions :{
 						success: function(data){$("#status").fadeTo(500,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
-						beforeSubmit: function(data){$("#data").html("data sent to the server: " + $.param(data));},
+						beforeSubmit: function(data){alert('Data sent: ' + $.param(data));},//function(data){$("#data").html("data sent to the server: " + $.param(data));},
 						dataType: 'json',
 						resetForm: true
 				 	}	
