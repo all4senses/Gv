@@ -27,7 +27,7 @@
           //easing: 'slide',// 'easeOutBounce',
           //easing: 'easeOutBounce',
           //easing: 'slide',
-          easing: 'easeOutExpo',
+          //easing: 'easeOutExpo',
           
           
           validationOptions: {
