@@ -3,6 +3,10 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
+        jQuery.extend(jQuery.validator.messages, {
+            required: 'l,dkfj'
+        });
+
         $("#requestQuoteForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
