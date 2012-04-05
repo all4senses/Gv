@@ -3,8 +3,9 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
+        // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
-            required: 'l,dkfj'
+            required: Drupal.t('All fields with * are required')
         });
 
         $("#requestQuoteForm").formwizard({ 
@@ -89,7 +90,9 @@
                 min: $.validator.format("Please enter a value greater than or equal to {0}.")
               },   
               */
-              required: Drupal.t('All fields with * are required'),
+             
+              // Doesn't work... Used snipped above for it.
+              //required: Drupal.t('All fields with * are required'),
               
               phones_amt: Drupal.t('Make your choice!'),
               quote_for: Drupal.t('Make your choice!'),
