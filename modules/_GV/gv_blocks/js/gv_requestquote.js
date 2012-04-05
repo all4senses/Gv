@@ -22,7 +22,7 @@
               username: "firstname lastname company email phone_1 phone_2 phone_3"
             },
             errorPlacement: function(error, element) {
-              if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time" || element.attr("name") == "connection" )
+              if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "connection" )
                 error.insertAfter( $(".last_radio", element.parent()) );
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
@@ -59,7 +59,7 @@
               },
               */
               phones_amt: "required",
-              quote_for: "required",
+              q_for: "required",
               buying_time: "required",
               connection: "required",
               
@@ -110,7 +110,7 @@
               //required: Drupal.t('All fields with * are required'),
               
               phones_amt: Drupal.t('Make your choice!'),
-              quote_for: Drupal.t('Make your choice!'),
+              q_for: Drupal.t('Make your choice!'),
               buying_time: Drupal.t('Make your choice!'),
               connection: Drupal.t('Make your choice!'),
               
