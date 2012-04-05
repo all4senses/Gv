@@ -17,7 +17,13 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
+          
+          inAnimation : {height: 'show'},
+          outAnimation: {height: 'hide'},
+					inDuration : 700,
+					outDuration: 700,
           easing: 'easeOutBounce',
+          
           validationOptions: {
             groups: {
               username: "firstname lastname company email phone_1 phone_2 phone_3"
