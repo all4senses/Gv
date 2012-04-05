@@ -17,7 +17,7 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          easing: 'clip',
+          easing: clip,
           validationOptions: {
             groups: {
               username: "firstname lastname company email phone_1 phone_2 phone_3"
