@@ -355,6 +355,8 @@ function gv_blocks_getBlockThemed($block_data)
  */
 function gv_blocks_get_requestQuote() {
 
+  drupal_add_library('system', 'ui.core');
+  
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_requestquote.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
@@ -438,7 +440,7 @@ function gv_blocks_get_requestQuote() {
                             <span class="question font_normal_07em_black">Fill out the form below:</span><br />
                             
                             <label for="firstname">First Name*</label>
-                                <input class="input_field_12em required" name="firstname" id="firstname" /><br />
+                                <input class="input_field_12em required name" name="firstname" id="firstname" /><br />
                             <label for="lastname">Last Name*</label>
                                 <input class="input_field_12em name required" name="lastname" id="lastname" /><br />
                                 
