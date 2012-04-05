@@ -122,7 +122,7 @@
           },
 				 	formOptions :{
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
-            success: function(data){$('#requestQuoteFormWrapper .sending').hide(500); $("#requestQuoteFormWrapper .success").show(500,1);},
+            success: function(data){$('#requestQuoteFormWrapper .sending').hide(500); $("#requestQuoteFormWrapper .success").show(500);},
 						beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide(500); $("#requestQuoteFormWrapper .sending").show(500); alert('Data sent: ' + $.param(data)); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
 						dataType: 'json',
 						resetForm: true
