@@ -122,8 +122,8 @@
           },
 				 	formOptions :{
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
-            success: function(data){$('#requestQuoteFormWrapper .sending').fadeTo(500,0); $("#requestQuoteFormWrapper .success").fadeTo(500,1);},
-						beforeSubmit: function(data){alert('Data sent: ' + $.param(data)); $('#requestQuoteFormWrapper .multipartForm').fadeTo(500,0); $("#requestQuoteFormWrapper .sending").fadeTo(500,1);},//function(data){$("#data").html("data sent to the server: " + $.param(data));},
+            success: function(data){$('#requestQuoteFormWrapper .sending').hide(500); $("#requestQuoteFormWrapper .success").show(500,1);},
+						beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide(500); $("#requestQuoteFormWrapper .sending").show(500); alert('Data sent: ' + $.param(data)); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
 						dataType: 'json',
 						resetForm: true
 				 	}	
