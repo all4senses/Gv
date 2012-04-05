@@ -18,14 +18,16 @@
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
           
-          inAnimation : {height: 'show'},
-          outAnimation: {height: 'hide'},
-					inDuration : 700,
-					outDuration: 700,
+          //inAnimation : {height: 'show'},
+          //outAnimation: {height: 'hide'},
+          inAnimation : {height: 'drop'},
+          outAnimation: {height: 'drop'},
+//					inDuration : 700,
+//					outDuration: 700,
           //easing: 'slide',// 'easeOutBounce',
           //easing: 'easeOutBounce',
           //easing: 'slide',
-          easing: 'drop',
+          //easing: 'drop',
           
           
           validationOptions: {
