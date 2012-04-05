@@ -18,7 +18,7 @@
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
                 //alert(error.html() +  ': ' + element.prev().html());
                 //error.insertAfter("#lastname");
-                alert(Drupal,t('All fields with * are required'));
+                alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
             },
