@@ -13,11 +13,11 @@
             },
             errorPlacement: function(error, element) {
               if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time")
-                //error.insertAfter( $(".last_radio", element.parent()) );
-                alert(error.html() +  ': ' + $(".question", element.parent()).html() );
+                error.insertAfter( $(".last_radio", element.parent()) );
+                //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
                 //alert(error.html() +  ': ' + element.prev().html());
-                error.insertAfter("#phone_3");
+                error.insertAfter("#notes");
                 //alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
@@ -82,9 +82,9 @@
                 min: $.validator.format("Please enter a value greater than or equal to {0}.")
               },   
               */
-              surname: Drupal.t("Please specify your nameeee"),
-              myemail: {
-                required: Drupal.t("Weeeee need your email address to contact you"),
+              required: Drupal.t('All fields with * are required'),
+              email: {
+                //required: Drupal.t("We need your email address to contact you"),
                 email: Drupal.t("Your email address must be in the format of name@domain.com")
               }
             }
