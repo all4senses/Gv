@@ -373,14 +373,14 @@ function gv_blocks_get_requestQuote() {
   
   
   $out = '
-   <div id="formWrapper">
+   <div id="requestQuoteFormWrapper">
         <h3>Request a Quote</h3>
         <ul>
             <li>Three steps.</li>
         </ul>
 
         <h5 id="status"></h5>
-        <form id="requestQuoteForm" method="post" action="json.html" class="bbq">
+        <form class="multipartForm" method="post" action="json.html" class="bbq">
 
                 <div id="fieldWrapper">
                     
@@ -390,10 +390,10 @@ function gv_blocks_get_requestQuote() {
                             
                             <input type="radio" name="phones_amt" value="1 - 2"><div class="label_after">1 - 2</div>
                             <input type="radio" name="phones_amt" value="3 - 5"><div class="label_after">3 - 5</div>
-                            <input type="radio" name="phones_amt" value="6 - 10"><span class="label_after">6 - 10</span>
-                            <input type="radio" name="phones_amt" value="11 - 20"><span class="label_after">11 - 20</span><br>
-                            <input type="radio" name="phones_amt" value="21 - 50"><span class="label_after">21 - 50</span><br>
-                            <input type="radio" name="phones_amt" value="50+"><span class="last_radio label_after">50+</span><br>
+                            <input type="radio" name="phones_amt" value="6 - 10"><div class="label_after">6 - 10</div>
+                            <input type="radio" name="phones_amt" value="11 - 20"><div class="label_after">11 - 20</div>
+                            <input type="radio" name="phones_amt" value="21 - 50"><div class="label_after">21 - 50</div>
+                            <input type="radio" name="phones_amt" value="50+"><div class="last_radio label_after">50+</div>
                             
                     </div>
                     
@@ -401,9 +401,9 @@ function gv_blocks_get_requestQuote() {
                         
                             <div class="question">You are looking for a quote for...</div>
                             
-                            <input type="radio" name="quote_for" value="Home"><span class="label_after">Home</span>
-                            <input type="radio" name="quote_for" value="Home-based Business"><span class="label_after">Home-based Business</span>
-                            <input type="radio" name="quote_for" value="Business"><span class="last_radio label_after">Business</span><br>
+                            <input type="radio" name="quote_for" value="Home"><div class="label_after">Home</div>
+                            <input type="radio" name="quote_for" value="Home-based Business"><div class="label_after">Home-based Business</div>
+                            <input type="radio" name="quote_for" value="Business"><div class="last_radio label_after">Business</div>
                          
                     </div>
                     
@@ -412,51 +412,51 @@ function gv_blocks_get_requestQuote() {
                         
                             <div class="question">What is your buying time frame?</div>
                             
-                            <input type="radio" name="buying_time" value="ASAP">ASAP<br>
-                            <input type="radio" name="buying_time" value="Less Than 1 Month">Less Than 1 Month<br>
-                            <input type="radio" name="buying_time" value="1 - 3 Months">1 - 3 Months<br>
-                            <input type="radio" name="buying_time" value="3 - 6 Months">3 - 6 Months<br>
-                            <input type="radio" name="buying_time" value="More Than 6 Months"><span class="last_radio">More Than 6 Months</span><br>
+                            <input type="radio" name="buying_time" value="ASAP"><div class="label_after">ASAP</div>
+                            <input type="radio" name="buying_time" value="Less Than 1 Month"><div class="label_after">Less Than 1 Month</div>
+                            <input type="radio" name="buying_time" value="1 - 3 Months"><div class="label_after">1 - 3 Months</div>
+                            <input type="radio" name="buying_time" value="3 - 6 Months"><div class="label_after">3 - 6 Months</div>
+                            <input type="radio" name="buying_time" value="More Than 6 Months"><div class="last_radio label_after">More Than 6 Months</div>
                          
                     </div>
                     
 
                     <div class="step" id="connection">
                         
-                            <span class="question">What is your data connection?</span><br />
+                            <div class="question">What is your data connection?</div>
                             
-                            <input type="radio" name="connection" value="DSL">DSL<br>
-                            <input type="radio" name="connection" value="Cable">Cable<br>
-                            <input type="radio" name="connection" value="T1">T1<br>
-                            <input type="radio" name="connection" value="Fiber">Fiber<br>
-                            <input type="radio" name="connection" value="Other">Other<br>
-                            <input type="radio" name="connection" value="Need New Connection"><span class="last_radio">Need New Connection</span><br>
+                            <input type="radio" name="connection" value="DSL" /><div class="label_after">DSL</div>
+                            <input type="radio" name="connection" value="Cable" /><div class="label_after">Cable</div>
+                            <input type="radio" name="connection" value="T1" /><div class="label_after">T1</div>
+                            <input type="radio" name="connection" value="Fiber" /><div class="label_after">Fiber</div>
+                            <input type="radio" name="connection" value="Other" /><div class="label_after">Other</div>
+                            <input type="radio" name="connection" value="Need New Connection" /><div class="last_radio label_after">Need New Connection</div>
                          
                     </div>
                     
                     
                     <div class="step" id="personal_info">
                         
-                            <span class="question">Fill out the form below:</span><br />
+                            <div class="question">Fill out the form below:</div>
                             
-                            <label for="firstname">First Name*</label>
-                                <input class="input_field_12em required name" name="firstname" id="firstname" /><br />
-                            <label for="lastname">Last Name*</label>
-                                <input class="input_field_12em name required" name="lastname" id="lastname" /><br />
+                            <span class="label_before">First Name*</span>
+                                <input class="after required name" name="firstname" id="firstname" />
+                            <span class="label_before">Last Name*</span>
+                                <input class="after required" name="lastname" id="lastname" />
                                 
-                            <label for="company">Company*</label>
-                                <input class="input_field_12em required" name="company" id="company" /><br />
+                            <span class="label_before">Company*</span>
+                                <input class="after required" name="company" id="company" />
                                 
-                            <label for="email">Email*</label>
-                                <input class="input_field_12em email required" name="email" id="email" /><br />
+                            <span class="label_before">Email*</span>
+                                <input class="after email required" name="email" id="email" />
                                 
-                            <label for="phone">Phone*</label>
-                                <input class="input_field_25em required phone" name="phone_1" id="phone_1" value="" />
-                                <input class="input_field_25em required phone" name="phone_2" id="phone_2" value="" />
-                                <input class="input_field_3em required phone" name="phone_3" id="phone_3" value="" />
+                            <span class="label_before">Phone*</span>
+                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
                                 
-                            <label for="notes">Notes</label>
-                                <input class="input_field_12em" name="notes" id="notes" /><br />
+                            <span class="label_before">Notes</span>
+                                <input class="after" name="notes" id="notes" />
                          
                     </div>
                     

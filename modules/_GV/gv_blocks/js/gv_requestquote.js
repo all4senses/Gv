@@ -13,7 +13,7 @@
           //alert('Click');
         });
         
-        $("#requestQuoteForm").formwizard({ 
+        $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
