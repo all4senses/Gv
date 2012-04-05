@@ -121,7 +121,7 @@
             }
           },
 				 	formOptions :{
-						success: function(data){$("#status").fadeTo(500,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
+						success: function(data){alert('Success!'); $("#status").fadeTo(5000,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
 						beforeSubmit: function(data){alert('Data sent: ' + $.param(data));},//function(data){$("#data").html("data sent to the server: " + $.param(data));},
 						dataType: 'json',
 						resetForm: true
