@@ -357,10 +357,10 @@ function gv_blocks_get_requestQuote() {
 
   drupal_add_library('system', 'ui.widget');
 
-  //drupal_add_library('system', 'effects');
-  drupal_add_library('system', 'effects.slide');
+  //drupal_add_library('system', 'effects.slide');
+  //drupal_add_library('system', 'effects.drop');
   drupal_add_library('system', 'effects.bounce');
-  drupal_add_library('system', 'effects.drop');
+
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_requestquote.js');
@@ -368,14 +368,9 @@ function gv_blocks_get_requestQuote() {
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
   drupal_add_js($path_to_custom_js . 'bbq.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.form.wizard.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
-  
-// <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>		
-// <script type="text/javascript" src="../js/jquery-ui-1.8.5.custom.min.js"></script>
-  
-  
+  $token = drupal_get_token();
   
   $out = '
    <div id="requestQuoteFormWrapper">
@@ -391,11 +386,12 @@ function gv_blocks_get_requestQuote() {
         
         <form class="multipartForm" method="post" action="/request" class="bbq">
 
+                
                 <div id="fieldWrapper">
                     
                     <div class="step" id="phones_amt">
                         
-                            <div class="question">How many phones do you have?</div>
+                            <div class="question">' . t('How many phones do you have?') . '</div>
                             
                             <input type="radio" name="phones_amt" value="1 - 2" /><div class="label_after">1 - 2</div>
                             <input type="radio" name="phones_amt" value="3 - 5" /><div class="label_after">3 - 5</div>
@@ -408,63 +404,63 @@ function gv_blocks_get_requestQuote() {
                     
                     <div class="step" id="q_for">
                         
-                            <div class="question">You are looking for a quote for...</div>
+                            <div class="question">' . t('You are looking for a quote for...') . '</div>
                             
-                            <input type="radio" name="q_for" value="Home" /><div class="label_after">Home</div>
-                            <input type="radio" name="q_for" value="Home-based Business" /><div class="label_after">Home-based Business</div>
-                            <input type="radio" name="q_for" value="Business" /><div class="last_radio label_after">Business</div>
+                            <input type="radio" name="q_for" value="Home" /><div class="label_after">' . t('Home') .'</div>
+                            <input type="radio" name="q_for" value="Home-based Business" /><div class="label_after">' . t('Home-based Business') . '</div>
+                            <input type="radio" name="q_for" value="Business" /><div class="last_radio label_after">' . t('Business') . '</div>
                          
                     </div>
                     
 
                     <div class="step" id="buying_time">
                         
-                            <div class="question">What is your buying time frame?</div>
+                            <div class="question">' . t('What is your buying time frame?') . '</div>
                             
-                            <input type="radio" name="buying_time" value="ASAP" /><div class="label_after">ASAP</div>
-                            <input type="radio" name="buying_time" value="Less Than 1 Month" /><div class="label_after">Less Than 1 Month</div>
-                            <input type="radio" name="buying_time" value="1 - 3 Months" /><div class="label_after">1 - 3 Months</div>
-                            <input type="radio" name="buying_time" value="3 - 6 Months" /><div class="label_after">3 - 6 Months</div>
-                            <input type="radio" name="buying_time" value="More Than 6 Months" /><div class="last_radio label_after">More Than 6 Months</div>
+                            <input type="radio" name="buying_time" value="ASAP" /><div class="label_after">' . t('ASAP') . '</div>
+                            <input type="radio" name="buying_time" value="Less Than 1 Month" /><div class="label_after">' . t('Less Than 1 Month') . '</div>
+                            <input type="radio" name="buying_time" value="1 - 3 Months" /><div class="label_after">' . t('1 - 3 Months') . '</div>
+                            <input type="radio" name="buying_time" value="3 - 6 Months" /><div class="label_after">' . t('3 - 6 Months') . '</div>
+                            <input type="radio" name="buying_time" value="More Than 6 Months" /><div class="last_radio label_after">' . t('More Than 6 Months') . '</div>
                          
                     </div>
                     
 
                     <div class="step" id="connection">
                         
-                            <div class="question">What is your data connection?</div>
+                            <div class="question">' . t('What is your data connection?') . '</div>
                             
-                            <input type="radio" name="connection" value="DSL" /><div class="label_after">DSL</div>
-                            <input type="radio" name="connection" value="Cable" /><div class="label_after">Cable</div>
-                            <input type="radio" name="connection" value="T1" /><div class="label_after">T1</div>
-                            <input type="radio" name="connection" value="Fiber" /><div class="label_after">Fiber</div>
-                            <input type="radio" name="connection" value="Other" /><div class="label_after">Other</div>
-                            <input type="radio" name="connection" value="Need New Connection" /><div class="last_radio label_after">Need New Connection</div>
+                            <input type="radio" name="connection" value="DSL" /><div class="label_after">' . t('DSL') . '</div>
+                            <input type="radio" name="connection" value="Cable" /><div class="label_after">' . t('Cable') . '</div>
+                            <input type="radio" name="connection" value="T1" /><div class="label_after">' . t('T1') . '</div>
+                            <input type="radio" name="connection" value="Fiber" /><div class="label_after">' . t('Fiber') . '</div>
+                            <input type="radio" name="connection" value="Other" /><div class="label_after">' . t('Other') . '</div>
+                            <input type="radio" name="connection" value="Need New Connection" /><div class="last_radio label_after">' . t('Need New Connection') . '</div>
                          
                     </div>
                     
                     
                     <div class="step" id="personal_info">
                         
-                            <div class="question">Fill out the form below:</div>
+                            <div class="question">' . t('Fill out the form below:') . '</div>
                             
-                            <div class="label_before">First Name*</div>
+                            <div class="label_before required">' . t('First Name*') . '</div>
                                 <input class="after required name" name="firstname" id="firstname" />
-                            <div class="label_before">Last Name*</div>
+                            <div class="label_before required">' . t('Last Name*') . '</div>
                                 <input class="after required" name="lastname" id="lastname" />
                                 
-                            <div class="label_before">Company*</div>
+                            <div class="label_before required">' . t('Company*') . '</div>
                                 <input class="after required" name="company" id="company" />
                                 
-                            <div class="label_before">Email*</div>
+                            <div class="label_before required">' . t('Email*') . '</div>
                                 <input class="after email required" name="email" id="email" />
                                 
-                            <div class="label_before">Phone*</div>
+                            <div class="label_before required">' . t('Phone') . '</div>
                                 <input class="after required phone" name="phone_1" id="phone_1" value="" />
                                 <input class="after required phone" name="phone_2" id="phone_2" value="" />
                                 <input class="after required phone" name="phone_3" id="phone_3" value="" />
                                 
-                            <div class="label_before">Notes</div>
+                            <div class="label_before">' . t('Notes') . '</div>
                                 <input class="after" name="notes" id="notes" />
                          
                     </div>
@@ -475,11 +471,15 @@ function gv_blocks_get_requestQuote() {
                         <input class="navigation_button" id="back" value="Back" type="reset" />
                         <input class="navigation_button" id="next" value="Next" type="submit" />
                 </div>
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                
         </form>
 
         <p id="data"></p>
 </div>
   
   ';
+  
   return $out;
 }
