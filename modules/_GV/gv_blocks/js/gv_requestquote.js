@@ -86,6 +86,7 @@
               },   
               */
               required: Drupal.t('All fields with * are required'),
+              
               phones_amt: Drupal.t('Make your choice!'),
               quote_for: Drupal.t('Make your choice!'),
               buying_time: Drupal.t('Make your choice!'),
