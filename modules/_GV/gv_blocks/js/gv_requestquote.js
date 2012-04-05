@@ -9,7 +9,7 @@
 				 	focusFirstInput: true,
           validationOptions: {
             groups: {
-              username: "firstname lastname"
+              username: "firstname lastname company email phone_1 phone_2 phone_3"
             },
             errorPlacement: function(error, element) {
               if (element.attr("name") == "phones_amt" || element.attr("name") == "quote_for" || element.attr("name") == "buying_time")
