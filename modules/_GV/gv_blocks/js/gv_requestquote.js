@@ -20,8 +20,8 @@
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
-          inAnimation : {slide: 'show'},
-          outAnimation: {drop: 'hide'},
+          inAnimation : {width: 'show'},
+          outAnimation: {width: 'hide'},
 				inDuration : 700,
 					outDuration: 700,
           //easing: 'slide',// 'easeOutBounce',
