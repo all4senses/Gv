@@ -24,7 +24,9 @@
 //					outDuration: 700,
           //easing: 'slide',// 'easeOutBounce',
           //easing: 'easeOutBounce',
-          easing: 'slide',
+          //easing: 'slide',
+          easing: 'drop',
+          
           
           validationOptions: {
             groups: {
