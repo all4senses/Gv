@@ -74,7 +74,7 @@ function gv_misc_makeRequest_ajax() {
     $status = TRUE;
     $output = t('Your request has been sent. You will be notified as soon as possible!'); 
   }
-  $letter = theme('gv_misc_requestQuote_mail', $params['request_data']);
+  $letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
   drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST, 'letter' => $letter));
 }
 
