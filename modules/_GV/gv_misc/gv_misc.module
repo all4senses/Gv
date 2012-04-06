@@ -12,15 +12,15 @@
 function gv_misc_menu() {
  
   $items['request'] = array(
-    'title' => 'Test page',
-    'page callback' => 'gv_misc_test',
+    'title' => 'Make a request',
+    'page callback' => 'gv_misc_makeRequest_ajax',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
   
   $items['test'] = array(
-    'title' => 'Make a request',
-    'page callback' => 'gv_misc_makeRequest_ajax',
+    'title' => 'Test page',
+    'page callback' => 'gv_misc_testPage',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -31,7 +31,7 @@ function gv_misc_menu() {
 /**
  * Test page function for url /test.
  */
-function gv_misc_test() {
+function gv_misc_testPage() {
   
 //  
 //  $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
