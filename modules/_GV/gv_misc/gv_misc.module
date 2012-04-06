@@ -56,7 +56,7 @@ function gv_misc_makeRequest_ajax() {
   $status = FALSE;
   $output = '';
   $post = $_POST;
-  
+  $valid_token = drupal_valid_token($post['token']);
   if (empty($post)) {
     $output = t('The form is not filled!'); 
   }
@@ -75,7 +75,7 @@ function gv_misc_makeRequest_ajax() {
     $output = t('Your request has been sent. You will be notified as soon as possible!'); 
   }
   $letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
-  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST, 'letter' => $letter));
+  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST, 'valid_token' => $valid_token, 'letter' => $letter));
 }
 
 
