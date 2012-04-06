@@ -370,7 +370,8 @@ function gv_blocks_get_requestQuote() {
   drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
-  $token = drupal_get_token('test');
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
   dpm($token);
   
   $out = '
