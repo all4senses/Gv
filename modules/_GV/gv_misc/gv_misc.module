@@ -57,7 +57,7 @@ function gv_misc_makeRequest_ajax() {
   $output = '';
   $post = $_POST;
   
-  if (!empty($post)) {
+  if (empty($post)) {
     $output = t('The form is not filled!'); 
   }
   elseif (!isset($post['token']) || !drupal_valid_token($post['token'])){
