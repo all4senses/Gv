@@ -12,13 +12,37 @@
 function gv_misc_menu() {
  
   $items['request'] = array(
-    'title' => 'Make a request',
-    'page callback' => 'gv_misc_makeRequest_ajax',
+    'title' => 'Test page',
+    'page callback' => 'gv_misc_test',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
   
+  $items['test'] = array(
+    'title' => 'Make a request',
+    'page callback' => 'gv_misc_makeRequest_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
+}
+
+
+/**
+ * Test page function for url /test.
+ */
+function gv_misc_test() {
+  
+  
+  $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
+    foreach ($admins as $admin) {
+      dpm($admin);
+      //$recipient = user_load($admin->uid);
+      //$params['recipient'] = $admin;
+      //dpm(theme('gv_misc_requestQuote_mail', $params['request_data']));
+      //drupal_mail('gv_misc', 'request_quote', $recipient->mail, user_preferred_language($recipient), $params);
+    }
+    
 }
 
 
@@ -28,8 +52,68 @@ function gv_misc_menu() {
  * Returns json result data with OK or error.
  */
 function gv_misc_makeRequest_ajax() {
-  $output = 'test';
-  drupal_json_output(array('status' => FALSE, 'data' => $output, 'post' => $_POST, 'get' => $_GET));
+  $status = FALSE;
+  $output = '';
+  $post = $_POST;
+  
+  if (!empty($post)) {
+    $output = t('The form is not filled!'); 
+  }
+  elseif (!isset($post['token']) || !drupal_valid_token($post['token'])){
+    $output = t('The form is outdated or broken.'); 
+  }
+  else {
+    $params['request_data'] = $post;
+    $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
+    foreach ($admins as $admin) {
+      $recipient = user_load($admin->uid);
+      $params['recipient'] = $admin;
+      drupal_mail('gv_misc', 'request_quote', $recipient->mail, user_preferred_language($recipient), $params);
+    }
+    
+  }
+  
+  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST));
+}
+
+
+/**
+ * Implements hook_mail().
+ */
+function gv_misc_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'request_quote':
+      /*  
+      $data = array( 
+        'privatemsg_message' => $params['message'],
+        'privatemsg_recipient' => $params['recipient'],
+      );
+      $options = array(
+        'language' => user_preferred_language($params['recipient']),
+        // Don't sanitize output since this is used in an email, not a browser.
+        'sanitize' => FALSE,
+        // Custom token to avoid custom token handling.
+        'privatemsg-display-invalid' => FALSE,
+      );
+      
+      $message['subject'] = trim(token_replace(variable_get('pm_email_notify_subject', 'New private message at [site:name].'), $data, $options));
+      $message['body'][] = trim(token_replace(variable_get('pm_email_notify_body', _pm_email_notify_default_body()), $data, $options));
+      */
+      $message['subject'] = t('New request for a quote');
+      $message['body'][] = theme('gv_misc_requestQuote_mail', $params['request_data']);
+      break;
+  }
+}  
+
+
+
+/**
+ * Simple theming of a Request for quote mail content.
+ */
+function theme_gv_misc_requestQuote_mail($vars) {
+  
+    
+ return '<pre>' . print_r($vars, true) . '</PRE>';
 }
 
 
@@ -111,9 +195,13 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_fivestar_static' => array(
       'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
     ),
+    // Compose a mail with a Request for a quote.
+    'gv_misc_requestQuote_mail' => array(
+      'variables' => array(),
+    ),
   );
 }
-
+  
 
 /**
  * Simple theming of nested submenu.
