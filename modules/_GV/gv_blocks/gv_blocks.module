@@ -371,6 +371,7 @@ function gv_blocks_get_requestQuote() {
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
   $token = drupal_get_token();
+  dpm($token);
   
   $out = '
    <div id="requestQuoteFormWrapper">
