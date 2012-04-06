@@ -37,9 +37,10 @@ function gv_misc_testPage() {
   $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
     foreach ($admins as $admin) {
       dpm($admin);
-      //$recipient = user_load($admin->uid);
-      //$params['recipient'] = $admin;
+      $recipient = user_load($admin->uid);
+      $params['recipient'] = $recipient;
       //dpm(theme('gv_misc_requestQuote_mail', $params['request_data']));
+      dpm(theme('gv_misc_requestQuote_mail', $params));
       //drupal_mail('gv_misc', 'request_quote', $recipient->mail, user_preferred_language($recipient), $params);
     }
     
