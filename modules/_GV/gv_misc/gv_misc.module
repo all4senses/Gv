@@ -217,7 +217,7 @@ function theme_gv_misc_followUsMenu($vars) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
-    //$out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => $submenu['link']['link_title']))) . '</li>';
+    $out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']) ))) . '</li>';
     $count++;
   }
   $out .= '</ul>';
