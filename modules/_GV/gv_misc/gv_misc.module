@@ -186,7 +186,9 @@ function gv_misc_theme($existing, $type, $theme, $path) {
   return array(
     'gv_misc_submenuSimple' => array(
       'variables' => array('vars' => null),
-      //'template' => 'gv_misc_home',
+    ),
+    'gv_misc_followUsMenu' => array(
+      'variables' => array('vars' => null),
     ),
     // Fivestar REPLACING theme functions.
     'gv_misc_fivestar_static' => array(
@@ -199,6 +201,29 @@ function gv_misc_theme($existing, $type, $theme, $path) {
   );
 }
   
+
+/**
+ * Simple theming of nested submenu.
+ */
+function theme_gv_misc_followUsMenu($vars) {
+  if(empty($vars['submenu']['below'])) {
+    return NULL;
+  }
+  $class = isset($vars['class']) ? $vars['class'] : 'follow-us';
+  $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
+  $out = '<ul class="' . $class . '"><span class="menu-preface">' . t('Follow Us:') . '</span>';
+  $count = 0;
+  foreach ($vars['submenu']['below'] as $submenu) {
+    if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
+      continue;
+    }
+    $out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => $submenu['link']['link_title']))) . '</li>';
+    $count++;
+  }
+  $out .= '</ul>';
+  return $out;
+}
+
 
 /**
  * Simple theming of nested submenu.
