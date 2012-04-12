@@ -10,11 +10,9 @@
   <header id="header" role="banner" class="clearfix">
 
     <nav id="navigation" role="navigation" class="clearfix">
-      <?php if ($logo): ?>
-        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-        </a>
-      <?php endif; ?>
+      
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a>
+
       <?php print render($page['header']); ?>
     </nav> <!-- /#navigation -->
 
