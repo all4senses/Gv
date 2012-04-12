@@ -11,7 +11,7 @@
 
     <nav id="navigation" role="navigation" class="clearfix">
       
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a>
+      <div id="header-menu-back"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a></div>
 
       <?php print render($page['header']); ?>
     </nav> <!-- /#navigation -->
