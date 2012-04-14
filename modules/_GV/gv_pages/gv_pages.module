@@ -421,6 +421,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#default_value' => isset($p_data['services']['s_residential']['re_preface_text']) ? $p_data['services']['s_residential']['re_preface_text'] : '',
                   );
                   
+                  
+                  
                   $form['services']['s_residential']['re_basicinfo_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('Basic info title'),
@@ -433,6 +435,30 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     //'#description' => t(''),
                     '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_text']) ? $p_data['services']['s_residential']['re_basicinfo_text'] : '',
                   );
+                  $form['services']['s_residential']['re_basicinfo_fees'] = array(
+                    '#type' => 'fieldset',
+                    '#collapsible' => TRUE,
+                    '#collapsed' => FALSE,
+                    '#title' => t('Fees'),
+                    '#description' => t('Residential service fees'),
+                    '#tree' => TRUE,
+                  );
+                      $form['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Monthly fees'),
+                        //'#description' => t(''),
+                        '#prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['setup_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Setup fees'),
+                        //'#description' => t(''),
+                        '#prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees'] : '',
+                      );
+                  
+                  
             
                   $form['services']['s_residential']['re_specialnotes_title'] = array(
                     '#type' => 'textfield',
