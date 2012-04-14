@@ -22,17 +22,27 @@
 ?>  
 <?php if (!empty($content)): ?>
   <div class="om-maximenu-content om-maximenu-content-nofade closed">
+    <!--
     <div class="om-maximenu-top">
       <div class="om-maximenu-top-left"></div>
       <div class="om-maximenu-top-right"></div>
-    </div><!-- /.om-maximenu-top --> 
+    </div>
+    -->
+    <!-- /.om-maximenu-top --> 
+    
     <div class="om-maximenu-middle">
+      
+      <!--
       <div class="om-maximenu-middle-left">
         <div class="om-maximenu-middle-right">
+      -->    
           <?php print om_maximenu_content_render($content); ?>
           <div class="om-clearfix"></div>
-        </div><!-- /.om-maximenu-middle-right --> 
-      </div><!-- /.om-maximenu-middle-left --> 
+      <!--    
+        </div>
+      </div>
+      -->
+      
     </div><!-- /.om-maximenu-middle --> 
     
     <!--
