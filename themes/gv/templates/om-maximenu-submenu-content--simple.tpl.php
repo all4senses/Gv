@@ -52,11 +52,18 @@
     </div>
     -->
     <!-- /.om-maximenu-bottom -->  
+    
     <div class="om-maximenu-arrow"></div>
+    
+    <!--
     <div class="om-maximenu-open">
       <input type="checkbox" value="" />
-      <?php print t('Stay'); ?>
-    </div><!-- /.om-maximenu-open -->  
+      <?php ////print t('Stay'); ?>
+    </div>
+    -->
+    <!-- /.om-maximenu-open -->  
+    
+    
   </div><!-- /.om-maximenu-content -->  
 <?php endif; ?> 
 
