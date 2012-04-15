@@ -545,6 +545,7 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
                 
         return '<div class="rating">' . $data['data']->votingapi_cache_node_percent_features_average_value . '%</div>'
+              . theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_features_average_value, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
               . '<div class="voters">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . t('reviews') . '</div>';
       }
       break;
