@@ -595,6 +595,22 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       dpm($data['data']);
       dpm($p_fees);
       
+      
+      
+      switch($data['exposed_raw_input']['type']) {
+        case 'business':
+          if (isset($p_fees['bu'][$target]) && $p_fees['bu'][$target]) {
+            return '$' . $p_fees['bu'][$target];
+          }
+          break;
+        case 'residential':
+          if (isset($p_fees['re'][$target]) && $p_fees['re'][$target]) {
+            return '$' . $p_fees['re'][$target];
+          }
+          break;
+      }
+      
+      /*
       if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
         return NULL;
       }
@@ -610,6 +626,7 @@ function wdg_misc_getProviderData_fromView($target, $data) {
           }
           break;
       }
+      */
       break; // End of case 'monthly_fees':
     
       
