@@ -540,7 +540,9 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       dpm($data);
       //dpm($data['data']->votingapi_cache_node_percent_features_average_value);
       if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
-        return $data['data']->votingapi_cache_node_percent_features_average_value . '%';
+                
+        return '<div class="rating">' . $data['data']->votingapi_cache_node_percent_features_average_value . '%</div>'
+              . '<div class="voters">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . t('reviews') . '</div>';
       }
       break;
     
