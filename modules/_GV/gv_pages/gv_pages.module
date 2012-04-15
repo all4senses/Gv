@@ -481,7 +481,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       $form['services']['s_residential']['re_basicinfo_fees']['other_fees'] = array(
                         '#type' => 'textarea',
                         '#title' => t('Other fees'),
-                        '#description' => t('Please set other fees in the format <Fee title>: $<price> <optional definition, for example, "per hour"> '),
+                        '#description' => t('Please set other fees (one per line) in the format "Fee 1 title: $0.5/hour"'),
                         //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] : '',
                       );
