@@ -559,10 +559,11 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       } // End of switch($data['exposed_raw_input']['type']) {
       
       if (is_array($features)) {
+        $out .= '<div class="features">';
         foreach ($features as $feature) {
           $out .= '<div class="feature">' . $feature['name'] . '</div>';
         }
-        $out .= '<div class="features">' . $out . '</div>';
+        $out .= '</div>';
       }
       break; // End of case 'features':
   }
