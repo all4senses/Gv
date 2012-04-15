@@ -1025,6 +1025,10 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   }
   if(isset($p_fees_save)) {
     form_set_value($form['field_p_fees_save'], array('und' => array(0 => array('value' => serialize($p_fees_save)))), $form_state);
+    // Reset a helper session var with all fees.
+    if (isset($_SESSION['all_fees'])) {
+      unset($_SESSION['all_fees']);
+    }
   }
 }
 
