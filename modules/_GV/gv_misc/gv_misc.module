@@ -533,9 +533,9 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       dpm($provider_data);
       switch($data['exposed_raw_input']['type']) {
         case '1':
-          return 1;
+          return $provider_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees'];
         case '2':
-          return 2;
+          return $provider_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees'];
       }
       
       return 6;
