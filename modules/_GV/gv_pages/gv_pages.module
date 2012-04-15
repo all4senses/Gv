@@ -1021,7 +1021,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     $p_fees_save['re'] = $p_data['services']['s_residential']['re_basicinfo_fees'];
   }
   if (isset($p_data['services']['s_business']['bu_basicinfo_fees'])) {
-    $p_fees_save['re'] = $p_data['services']['s_business']['bu_basicinfo_fees'];
+    $p_fees_save['bu'] = $p_data['services']['s_business']['bu_basicinfo_fees'];
   }
   if(isset($p_fees_save)) {
     form_set_value($form['field_p_fees_save'], array('und' => array(0 => array('value' => serialize($p_fees_save)))), $form_state);
