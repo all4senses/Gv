@@ -560,14 +560,18 @@ function wdg_misc_getProviderData_fromView($target, $data) {
           if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
             $features = $provider_data['services']['s_business']['weights_bu_features'];
           }
-          $out = '<div class="plan">' . $provider_data['services']['s_business']['BU_preface_title'] . '</div>';
+          if (isset($provider_data['services']['s_business']['BU_preface_title'])) {
+            $out = '<div class="plan">' . $provider_data['services']['s_business']['bu_preface_title'] . '</div>';
+          }
           break;
         
         case '2':
           if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
             $features = $provider_data['services']['s_business']['weights_bu_features'];
           }
-          $out = '<div class="plan">' . $provider_data['services']['s_residential']['re_preface_title'] . '</div>';
+          if (isset($provider_data['services']['s_residential']['re_preface_title'])) {
+            $out = '<div class="plan">' . $provider_data['services']['s_residential']['re_preface_title'] . '</div>';
+          }
           break;
       } // End of switch($data['exposed_raw_input']['type']) {
       
