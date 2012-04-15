@@ -559,12 +559,12 @@ function wdg_misc_getProviderData_fromView($target, $data) {
         return NULL;
       }
       switch($data['exposed_raw_input']['type']) {
-        case 'residential':
+        case 'business':
           if (isset($provider_data['services']['s_business']['bu_basicinfo_fees'][$target]) && $provider_data['services']['s_business']['bu_basicinfo_fees'][$target]) {
             return '$' . $provider_data['services']['s_business']['bu_basicinfo_fees'][$target];
           }
           break;
-        case 'business':
+        case 'residential':
           if (isset($provider_data['services']['s_residential']['re_basicinfo_fees'][$target]) && $provider_data['services']['s_residential']['re_basicinfo_fees'][$target]) {
             return '$' . $provider_data['services']['s_residential']['re_basicinfo_fees'][$target];
           }
@@ -578,7 +578,7 @@ function wdg_misc_getProviderData_fromView($target, $data) {
         return NULL;
       }
       switch($data['exposed_raw_input']['type']) {
-        case 'residential':
+        case 'business':
           if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
             $features = $provider_data['services']['s_business']['weights_bu_features'];
           }
@@ -587,7 +587,7 @@ function wdg_misc_getProviderData_fromView($target, $data) {
           }
           break;
         
-        case 'business':
+        case 'residential':
           if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
             $features = $provider_data['services']['s_business']['weights_bu_features'];
           }
