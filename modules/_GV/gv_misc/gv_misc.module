@@ -348,6 +348,21 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
 }
 
 
+/**
+ * Returns all fees for available providers.
+ */
+function gv_misc_getProvidersFees($scope = 'all') {
+  if ($scope == 'all') {
+    $data = db_select('field_revision_field_p_fees_save', 'f')
+          ->fields('f', array('entity_id', 'field_p_fees_save_value'))
+          ->execute();
+    foreach($data as $fee) {
+      $fees[$fee->entity_id] = unserialize($fee->field_p_fees_save_value);
+    }
+  }
+  return $fees;
+}
+
 
 /**
  * Check if a current user already submitted a review for a specific Provider and return it if it exists.
@@ -570,6 +585,15 @@ function wdg_misc_getProviderData_fromView($target, $data) {
     case 'monthly_fees':
     case 'longdistance_fees':
     case 'setup_fees':
+      
+      if (!$p_fees = @$_SESSION['p_fees']) {
+        $p_fees = gv_misc_getProvidersFees();
+        $_SESSION['p_fees'] = $p_fees;
+      }
+      
+      //dpm($data['data']);
+      dpm($p_fees);
+      
       if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
         return NULL;
       }
