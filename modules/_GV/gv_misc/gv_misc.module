@@ -591,7 +591,7 @@ function wdg_misc_getProviderData_fromView($target, $data) {
         $_SESSION['p_fees'] = $p_fees;
       }
       
-      //dpm($data['data']);
+      dpm($data['data']);
       dpm($p_fees);
       
       if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
