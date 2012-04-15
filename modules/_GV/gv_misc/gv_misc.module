@@ -538,9 +538,9 @@ function wdg_misc_getProviderData_fromView($target, $data) {
     
     case 'user_rating':
       dpm($data);
-      if (isset($data->votingapi_cache_node_percent_features_average_value) && $data->votingapi_cache_node_percent_features_average_value) {
+      //if (isset($data->votingapi_cache_node_percent_features_average_value) && $data->votingapi_cache_node_percent_features_average_value) {
         return $data->votingapi_cache_node_percent_features_average_value . '%';
-      }
+      //}
       break;
     
       
