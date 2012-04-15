@@ -530,15 +530,18 @@ function wdg_misc_getProviderData_fromView($target, $data) {
   
   $out = '';
   
-  if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
-    return NULL;
-  }
-  
   switch($target) {
     
     case 'user_rating':
       dpm($data);
-      //dpm($data['data']->votingapi_cache_node_percent_features_average_value);
+      $service_types = $data['data']->_field_data['nid']['entity']->field_p_type['und'];
+      dpm($service_types);
+      dpm($data['exposed_raw_input']['type']);
+      break;
+    
+      
+      
+    case 'user_rating':
       if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
                 
         return '<div class="rating">' . $data['data']->votingapi_cache_node_percent_features_average_value . '%</div>'
@@ -547,10 +550,13 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       break;
     
       
+      
     case 'monthly_fees':
     case 'longdistance_fees':
     case 'setup_fees':
-      
+      if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
+        return NULL;
+      }
       switch($data['exposed_raw_input']['type']) {
         case '1':
           if (isset($provider_data['services']['s_business']['bu_basicinfo_fees'][$target]) && $provider_data['services']['s_business']['bu_basicinfo_fees'][$target]) {
@@ -567,6 +573,9 @@ function wdg_misc_getProviderData_fromView($target, $data) {
     
       
     case 'plan':
+      if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
+        return NULL;
+      }
       switch($data['exposed_raw_input']['type']) {
         case '1':
           if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
