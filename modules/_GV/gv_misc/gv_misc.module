@@ -570,8 +570,12 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       
       if (is_array($features)) {
         $out .= '<div class="features">';
+        $cont = 0;
         foreach ($features as $feature) {
           $out .= '<div class="feature">' . $feature['name'] . '</div>';
+          if ($count++ > 2) {
+            break;
+          }
         }
         $out .= '</div>';
       }
