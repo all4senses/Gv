@@ -536,8 +536,13 @@ function wdg_misc_getProviderData_fromView($target, $data) {
   
   switch($target) {
     
+    case 'user_rating':
+      dpm($data);
+      break;
+    
     case 'monthly_fees':
     case 'longdistance_fees':
+    case 'setup_fees':
       
       switch($data['exposed_raw_input']['type']) {
         case '1':
