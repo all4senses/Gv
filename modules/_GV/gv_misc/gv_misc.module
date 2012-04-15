@@ -586,11 +586,12 @@ function wdg_misc_getProviderData_fromView($target, $data) {
     case 'longdistance_fees':
     case 'setup_fees':
       
-      if (!$p_fees = @$_SESSION['p_fees']) {
-        $p_fees = gv_misc_getProvidersFees();
-        $_SESSION['p_fees'] = $p_fees;
+      if (!$all_fees = @$_SESSION['all_fees']) {
+        $all_fees = gv_misc_getProvidersFees();
+        $_SESSION['all_fees'] = $all_fees;
       }
       
+      $p_fees = $all_fees[$data['data']->nid];
       dpm($data['data']);
       dpm($p_fees);
       
