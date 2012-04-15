@@ -439,8 +439,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#type' => 'fieldset',
                     '#collapsible' => TRUE,
                     '#collapsed' => FALSE,
-                    '#title' => t('Fees'),
-                    '#description' => t('Residential service fees'),
+                    '#title' => t('Residential service fees'),
+                    //'#description' => t('Residential service fees'),
                     '#tree' => TRUE,
                   );
                       $form['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] = array(
@@ -457,8 +457,35 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees'] : '',
                       );
-                  
-                  
+                      $form['services']['s_residential']['re_basicinfo_fees']['shipping_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Shipping fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['shipping_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['shipping_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['cancel_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Cancellation fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['cancel_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['cancel_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Long distance fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['other_fees'] = array(
+                        '#type' => 'textarea',
+                        '#title' => t('Other fees'),
+                        '#description' => t('Please set other fees in the format <Fee title>: $<price> <optional definition, for example, "per hour"> '),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] : '',
+                      );
+                      
             
                   $form['services']['s_residential']['re_specialnotes_title'] = array(
                     '#type' => 'textfield',
