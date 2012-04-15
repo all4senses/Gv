@@ -532,7 +532,7 @@ function wdg_misc_getProviderData_fromView($target, $data) {
   
   switch($target) {
     
-    case 'user_rating':
+    case 'service_types':
       dpm($data);
       $service_types = $data['data']->_field_data['nid']['entity']->field_p_type['und'];
       dpm($service_types);
