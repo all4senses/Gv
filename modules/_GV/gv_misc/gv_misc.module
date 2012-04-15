@@ -533,10 +533,22 @@ function wdg_misc_getProviderData_fromView($target, $data) {
   switch($target) {
     
     case 'service_types':
-      dpm($data);
+      
       $service_types = $data['data']->_field_data['nid']['entity']->field_p_types['und'];
+      dpm($data);
       dpm($service_types);
       dpm($data['exposed_raw_input']['type']);
+      $types = '';
+      foreach ($service_types as $service_type) {
+        if ($service_type == $data['exposed_raw_input']['type']) {
+          $current_type = '<div class="type main">' . $service_type . '</div><div class="descr">' . t('(currently exposed)') . '</div>';
+        }
+        else {
+          $types .= '<div class="type">' . $service_type . '</div>';
+        }
+      }
+      $types = $current_type . $types;
+      
       break;
     
       
