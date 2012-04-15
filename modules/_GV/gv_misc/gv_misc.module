@@ -508,7 +508,7 @@ function gv_misc_views_pre_render(&$view) {
         // $view->build_info['title'] = "My custom title!";
         
         // Works, but it's shown after exposed filters.
-        ////////$view->attachment_before = '<div class="preface">' . render(node_view($preface_node)) . '</div>';
+        $view->attachment_before = '<div class="preface">' . render(node_view($preface_node)) . '</div>';
         
         // DOesn't work.
         /*
