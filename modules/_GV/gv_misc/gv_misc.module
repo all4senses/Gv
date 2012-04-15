@@ -550,11 +550,15 @@ function wdg_misc_getProviderData_fromView($target, $data) {
         case '1':
           $features = $provider_data['services']['s_business']['weights_bu_features'];
           $out = '<div class="plan">' . $provider_data['services']['s_business']['BU_preface_title'] . '</div>';
+          break;
+        
         case '2':
           $features = $provider_data['services']['s_business']['weights_bu_features'];
           $out = '<div class="plan">' . $provider_data['services']['s_residential']['re_preface_title'] . '</div>';
-      }
-      if (!is_array($features)) {
+          break;
+      } // End of switch($data['exposed_raw_input']['type']) {
+      
+      if (is_array($features)) {
         foreach ($features as $feature) {
           $out .= '<div class="feature">' . $feature['name'] . '</div>';
         }
