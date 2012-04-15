@@ -523,6 +523,20 @@ function gv_misc_views_pre_render(&$view) {
 } 
 
 
+/**
+ * Return specific variable value for a provider depending on the filter value (business OR residential, etc)
+ */
+function wdg_misc_getProviderData_fromView($target, $data) {
+  switch($target) {
+    case 'monthly_fees':
+      dpm($data);
+      return 2;
+    
+    default:
+      return 7;
+  }
+}
+
 
 /**
  * Forms API validation function for email.
