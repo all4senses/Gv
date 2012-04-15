@@ -528,7 +528,7 @@ function gv_misc_views_pre_render(&$view) {
  */
 function wdg_misc_getProviderData_fromView($target, $data) {
   
-  $out = NULL;
+  $out = '';
   
   if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
     return NULL;
@@ -537,20 +537,23 @@ function wdg_misc_getProviderData_fromView($target, $data) {
   switch($target) {
     
     case 'monthly_fees':
+    case 'longdistance_fees':
+      
       switch($data['exposed_raw_input']['type']) {
         case '1':
-          if (isset($provider_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees'])) {
-            $out = $provider_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees'];
+          if (isset($provider_data['services']['s_business']['bu_basicinfo_fees'][$target]) && $provider_data['services']['s_business']['bu_basicinfo_fees'][$target]) {
+            return '$' . $provider_data['services']['s_business']['bu_basicinfo_fees'][$target];
           }
           break;
         case '2':
-          if (isset($provider_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees'])) {
-            $out = $provider_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees'];
+          if (isset($provider_data['services']['s_residential']['re_basicinfo_fees'][$target]) && $provider_data['services']['s_residential']['re_basicinfo_fees'][$target]) {
+            return '$' . $provider_data['services']['s_residential']['re_basicinfo_fees'][$target];
           }
           break;
       }
       break; // End of case 'monthly_fees':
     
+      
     case 'plan':
       switch($data['exposed_raw_input']['type']) {
         case '1':
