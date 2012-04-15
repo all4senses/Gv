@@ -509,7 +509,10 @@ function gv_misc_views_pre_render(&$view) {
         
         $view->attachment_before = '<div class="preface">' . render(node_view($preface_node)) . '</div>';
         
-        //$view->header = '<div class="preface">Heeeeadeeer</div>';
+        $view->header = array(
+            '#type' => 'item',
+            '#markup' => '<div class="preface">Heeeeadeeer</div>',
+        );
         dpm($view->header);
                 
       } // End of if($preface_nid = $data->execute()->fetchField()) {
