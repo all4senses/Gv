@@ -483,7 +483,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#title' => t('Other fees'),
                         '#description' => t('Please set other fees (one per line) in the format "Fee 1 title: $0.5/hour"'),
                         //'#field_prefix' => '$',
-                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] : '',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['other_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['other_fees'] : '',
                       );
                       
             
@@ -548,6 +548,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#default_value' => isset($p_data['services']['s_business']['bu_preface_text']) ? $p_data['services']['s_business']['bu_preface_text'] : '',
                   );
                   
+                  
+                  
                   $form['services']['s_business']['bu_basicinfo_title'] = array(
                     '#type' => 'textfield',
                     '#title' => t('Basic info title'),
@@ -560,6 +562,59 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     //'#description' => t(''),
                     '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_text']) ? $p_data['services']['s_business']['bu_basicinfo_text'] : '',
                   );
+                  $form['services']['s_business']['bu_basicinfo_fees'] = array(
+                    '#type' => 'fieldset',
+                    '#collapsible' => TRUE,
+                    '#collapsed' => FALSE,
+                    '#title' => t('Business service fees'),
+                    //'#description' => t('Business service fees'),
+                    '#tree' => TRUE,
+                  );
+                      $form['services']['s_business']['bu_basicinfo_fees']['monthly_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Monthly fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['setup_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Setup fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['shipping_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Shipping fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['shipping_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['shipping_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['cancel_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Cancellation fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['cancel_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['cancel_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['longdistance_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Long distance fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['longdistance_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['other_fees'] = array(
+                        '#type' => 'textarea',
+                        '#title' => t('Other fees'),
+                        '#description' => t('Please set other fees (one per line) in the format "Fee 1 title: $0.5/hour"'),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['other_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['other_fees'] : '',
+                      );
+                      
+                  
+                  
             
                   $form['services']['s_business']['bu_specialnotes_title'] = array(
                     '#type' => 'textfield',
