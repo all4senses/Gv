@@ -318,6 +318,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Hide a placeholder field field_p_data
       $form['field_p_data']['#access'] = FALSE;
+      $form['field_p_fees_save']['#access'] = FALSE;
       
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
@@ -333,7 +334,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Add temporary fields which will be saved as aggregated data in a one real field field_p_data
       
       $p_data = unserialize($form['field_p_data']['und'][0]['value']['#default_value']);
-      dpm($p_data);
+      $p_fees_save = unserialize($form['field_p_fees_save']['und'][0]['value']['#default_value']);
+      //dpm($p_data);
+      dpm($p_fees_save);
       
       $form['data_info'] = array(
         '#type' => 'fieldset',
@@ -1012,6 +1015,17 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
+  
+  // Save collected FEES data from temporary fields to a excessive field for using it from views
+  if (isset($p_data['services']['s_residential']['re_basicinfo_fees'])) {
+    $p_fees_save['re'] = $p_data['services']['s_residential']['re_basicinfo_fees'];
+  }
+  if (isset($p_data['services']['s_business']['bu_basicinfo_fees'])) {
+    $p_fees_save['re'] = $p_data['services']['s_business']['bu_basicinfo_fees'];
+  }
+  if(isset($p_fees_save)) {
+    form_set_value($form['field_p_fees_save'], array('und' => array(0 => array('value' => serialize($p_fees_save)))), $form_state);
+  }
 }
 
 
