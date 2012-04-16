@@ -40,6 +40,17 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
 
 
 /**
+ * Implements hook_url_outbound_alter().
+ */
+function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
+  // Create the path /contact-us from /contact
+  if (preg_match('|^contact$|', $path, $matches)) {
+    $path = 'contact-us';
+  }
+}
+
+
+/**
  * Test page function for url /test.
  */
 function gv_misc_testPage() {
