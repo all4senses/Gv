@@ -1461,11 +1461,13 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         . '</div>';
     }
     // Voters count.
-    $node->content['gv_voters'] = array(
-        '#markup' => t('Voters') . ': ' . $counts[0]['value'], // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
-    );
-    // Recommend vote.
+    if ($counts) {
+      $node->content['gv_voters'] = array(
+          '#markup' => t('Voters') . ': ' . $counts[0]['value'], // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
+      );
+    }
     
+    // Recommend vote.
     if (isset($recommend_vote['function'])) {
       // If it's agregated cached results (calculated via function)
       // we'll show percent of voters recomendations.
