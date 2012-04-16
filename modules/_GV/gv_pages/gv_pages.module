@@ -1167,8 +1167,8 @@ function gv_pages_node_view($node, $view_mode) {
           $node->content['provider_set'] = array(
               '#type' => 'fieldset',
               '#title' => t('Provider description (for a quick reference)'),
-              '#collapsible' => TRUE,
-              '#collapsed' => TRUE,
+              '#collapsible' => true,
+              '#collapsed' => true,
               '#weight' => -100,
           );
           $node->content['provider_set']['provider'] = node_view($provider_node, 'teaser');
