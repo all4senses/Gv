@@ -28,6 +28,13 @@ function gv_misc_menu() {
 }
 
 
+function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
+  // Create the path /contact-us from /contact
+  if (preg_match('|^contact-us$|', $path, $matches)) {
+    $path = 'contact';
+  }
+}
+
 /**
  * Test page function for url /test.
  */
