@@ -1149,6 +1149,35 @@ function gv_pages_node_presave($node) {
 }
 
 
+
+
+
+/**
+ * Implements hook_form().
+ *
+ * Provider preview form for a Review page.
+ * 
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_addProviderPreview_form($node, &$form_state, $provider_nid) {
+  
+  $provider_node = node_load($provider_nid);
+  $form = array(
+      '#type' => 'fieldset',
+      '#title' => t('Provider description (for a quick reference)'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#weight' => -100,
+  );
+  $form['provider'] = node_view($provider_node, 'teaser');
+  
+          
+  return $form;
+}
+
+
+
 /**
  * Implements hook_node_view().
  *
@@ -1163,16 +1192,21 @@ function gv_pages_node_view($node, $view_mode) {
       // Show preview of the provider (as a teaser)
       if ($view_mode == 'full') {
         if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
+          $node->content['provider_set'] = drupal_get_form('gv_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
+            
+          /*
           $provider_node = node_load($node->field_ref_provider['und'][0]['target_id']);
           $node->content['provider_set'] = array(
               '#type' => 'fieldset',
               '#title' => t('Provider description (for a quick reference)'),
-              '#collapsible' => true,
-              '#collapsed' => true,
+              '#collapsible' => TRUE,
+              '#collapsed' => TRUE,
               '#weight' => -100,
           );
           $node->content['provider_set']['provider'] = node_view($provider_node, 'teaser');
+          */
         }
+        
       }
       // Show data from field_r_oprovider, if is not set field_ref_provider
       if ( !isset($node->field_ref_provider['und'][0]['target_id']) && isset($node->field_r_oprovider['und'][0]['value']) ) {
