@@ -10,17 +10,15 @@
   <header id="header" role="banner" class="clearfix">
 
     <nav id="navigation" role="navigation" class="clearfix">
-      <?php if ($logo): ?>
-        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-        </a>
-      <?php endif; ?>
+      
+      <div id="header-menu-back"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a></div>
+
       <?php print render($page['header']); ?>
     </nav> <!-- /#navigation -->
 
-    <?php if ($breadcrumb): print $breadcrumb; endif;?>
+    <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
   </header> <!-- /#header -->
-<div>222222222222 222222222222222222222 22222222222222 2222222222</div>
+
   <section id="main" role="main" class="clearfix">
     <?php print $messages; ?>
     <a id="main-content"></a>
@@ -40,7 +38,7 @@
     </aside>  <!-- /#sidebar-first -->
   <?php endif; ?>
 
-  <?php if ($page['sidebar_second']): ?>
+  <?php if (0)/*($page['sidebar_second'])*/: ?>
     <aside id="sidebar-second" role="complementary" class="sidebar clearfix">
       <?php print render($page['sidebar_second']); ?>
     </aside>  <!-- /#sidebar-second -->
