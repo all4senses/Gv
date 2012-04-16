@@ -28,12 +28,16 @@ function gv_misc_menu() {
 }
 
 
+/**
+ * Implements hook_url_inbound_alter().
+ */
 function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
   // Create the path /contact-us from /contact
   if (preg_match('|^contact-us$|', $path, $matches)) {
     $path = 'contact';
   }
 }
+
 
 /**
  * Test page function for url /test.
@@ -194,7 +198,7 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_submenuSimple' => array(
       'variables' => array('vars' => null),
     ),
-    'gv_misc_followUsMenu' => array(
+    'gv_misc_headerLinks' => array(
       'variables' => array('vars' => null),
     ),
     // Fivestar REPLACING theme functions.
@@ -212,11 +216,11 @@ function gv_misc_theme($existing, $type, $theme, $path) {
 /**
  * Simple theming of nested submenu.
  */
-function theme_gv_misc_followUsMenu($vars) {
+function theme_gv_misc_headerLinks($vars) {
   if(empty($vars['submenu']['below'])) {
     return NULL;
   }
-  $class = isset($vars['class']) ? $vars['class'] : 'follow-us';
+  $class = isset($vars['class']) ? $vars['class'] : 'header-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
   $out = '<ul class="' . $class . '"><span class="menu-preface">' . t('Follow Us:') . '</span>';
   $count = 0;

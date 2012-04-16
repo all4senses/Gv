@@ -46,8 +46,8 @@ function gv_blocks_block_info() {
     'info' => t('Footer menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['followus_links'] = array(
-    'info' => t('Follow us links'),
+  $blocks['header_links'] = array(
+    'info' => t('Header links'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['request_quote'] = array(
@@ -108,9 +108,9 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Footer menu');
       $block['content'] = gv_blocks_get_footerMenu();
       break; 
-    case 'followus_links':
-      $block['subject'] = t('Follow us links');
-      $block['content'] = gv_blocks_get_followUsLinks();
+    case 'header_links':
+      $block['subject'] = t('Header links');
+      $block['content'] = gv_blocks_get_headerLinks();
       break; 
     case 'request_quote':
       $block['subject'] = t('Request a quote');
@@ -193,13 +193,13 @@ function gv_blocks_get_newsTopics() {
 
 
 /**
- * Returns a themed Follow Us links block.
+ * Returns a themed Header links block.
  */
-function gv_blocks_get_followUsLinks() {
-  $menu = menu_build_tree('menu-follow-us-links');
+function gv_blocks_get_headerLinks() {
+  $menu = menu_build_tree('menu-header-links');
   
-  //return '<span class="menu-preface">Follow Us:</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu'));
-  return theme('gv_misc_followUsMenu', array('submenu' => array('below' => $menu)));
+  //return '<span class="menu-preface">Header:</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu'));
+  return theme('gv_misc_headerMenu', array('submenu' => array('below' => $menu)));
 }
 
 
