@@ -1163,14 +1163,14 @@ function gv_pages_node_presave($node) {
 function gv_pages_addProviderPreview_form($node, &$form_state, $provider_nid) {
   
   $provider_node = node_load($provider_nid);
-  $form = array(
+  $form['provider_set'] = array(
       '#type' => 'fieldset',
       '#title' => t('Provider description (for a quick reference)'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#weight' => -100,
   );
-  $form['provider'] = node_view($provider_node, 'teaser');
+  $form['provider_set']['provider'] = node_view($provider_node, 'teaser');
   
           
   return $form;
