@@ -197,7 +197,7 @@ function gv_blocks_get_newsTopics() {
  */
 function gv_blocks_get_headerLinks() {
   $menu = menu_build_tree('menu-header-links');
-  
+  dpm($menu);
   //return '<span class="menu-preface">Header:</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu'));
   return theme('gv_misc_headerMenu', array('submenu' => array('below' => $menu)));
 }
