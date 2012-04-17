@@ -780,9 +780,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      dpm($form);
-      dpm($user);
-      dpm($_SERVER);
+      //dpm($form);
+      //dpm($user);
+      //dpm($_SERVER);
       
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
@@ -818,8 +818,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Add a review page.
         
         
-        $form['#prefix'] = '<fieldset class="collapsible"><legend>Submit as guest</legend>';
-        $form['#suffix'] = '</fieldset>';
+        //$form['#prefix'] = '<fieldset class="collapsible"><legend>Submit as guest</legend>';
+        //$form['#suffix'] = '</fieldset>';
         
         $form['test'] = array(
           '#type' => 'fieldset',
@@ -827,6 +827,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => -100,
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,
+        );
+        $form['test']['txt'] = array(
+          '#type' => 'txtfield',
+          '#title' => t('temp'),
         );
         
         if ($user->uid) {
