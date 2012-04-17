@@ -821,6 +821,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['#prefix'] = '<fieldset class="collapsible"><legend>Submit as guest</legend>';
         $form['#suffix'] = '</fieldset>';
         
+        $form['test'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('temp'),
+          '#weight' => -100,
+          '#collapsible' => TRUE,
+          '#collapsed' => TRUE,
+        );
+        
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
