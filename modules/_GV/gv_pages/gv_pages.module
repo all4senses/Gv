@@ -780,6 +780,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
+      dpm($user);
+      dpm($_SERVER);
+      dpm($_REQUEST);
+      
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
      
@@ -843,7 +847,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         } // End of if($provider_nid) {
         
         // Autofill the email field.
-        $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+        if ($user->uid) {
+          $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+        }
                 
       } // End of if(arg(1) == 'add') {
       else {
