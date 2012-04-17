@@ -818,8 +818,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Add a review page.
         
         
-        //$form['#prefix'] = '<fieldset class="collapsible"><legend>Submit as guest</legend>';
-        //$form['#suffix'] = '</fieldset>';
+        $form['#prefix'] = '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">Submit as a guest</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
+        $form['#suffix'] = '</div></fieldset>';
+        
+        
+
+        
         
         $form['test'] = array(
           '#type' => 'fieldset',
