@@ -783,7 +783,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       dpm($form);
       dpm($user);
       dpm($_SERVER);
-      dpm($_REQUEST);
       
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
@@ -819,16 +818,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Add a review page.
         
         
-        $form['#prefix'] = '<fieldset class="collapsible"><legend></legend>';
+        $form['#prefix'] = '<fieldset class="collapsible collapsed"><legend>Submit as guest</legend>';
         $form['#suffix'] = '</fieldset>';
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
-          dpm($user);
           // Autofill the email field.
           $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
-          
           // Autofill first/last names.
           $form['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
           $form['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
