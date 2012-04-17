@@ -882,6 +882,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
         if($provider_nid) {
           $provider_node = node_load($provider_nid);
+          $form['provider']['provider_title'] = array(
+                '#type' => 'item',
+                '#title' => t('A provider You have chosen'),
+                '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
+              ); 
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider']['preview'] = array(
             '#type' => 'fieldset',
@@ -889,11 +894,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#collapsible' => TRUE,
             '#collapsed' => TRUE,
           );
-              $form['provider']['preview']['provider_title'] = array(
-                '#type' => 'item',
-                '#title' => t('A provider You have chosen'),
-                '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
-              ); 
               $form['provider']['preview']['provider_preview'] = array(
                 '#markup' => $provider_preview,
                 '#weight' => -100,
