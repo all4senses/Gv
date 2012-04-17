@@ -784,8 +784,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       //dpm($user);
       //dpm($_SERVER);
       
-      $form['title']['#weight'] = -9;
-      $form['body']['#weight'] = -8;
+      $form['title']['#weight'] = -8;
+      $form['body']['#weight'] = -5;
+      
+      dpm($form);
       
       // Group fields
       $form['provider'] = array(
