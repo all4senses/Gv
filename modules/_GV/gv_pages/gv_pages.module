@@ -878,9 +878,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#collapsible' => TRUE,
             '#collapsed' => TRUE,
           );
+              $form['provider']['preview']['provider_title'] = array(
+                '#type' => 'item',
+                '#title' => t('A provider You have chosen'),
+                '#value' => l($provider_node->title, 'node/' . $provider_node->nid),
+              ); 
               $form['provider']['preview']['provider_preview'] = array(
-                  '#markup' => $provider_preview,
-                  '#weight' => -100,
+                '#markup' => $provider_preview,
+                '#weight' => -100,
               ); 
               
           //$form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
