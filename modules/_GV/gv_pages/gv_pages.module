@@ -819,6 +819,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
+      
+      // Group fields
+      $form['provider'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Selected provider'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+          $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
+          $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
+          unset($form['field_ref_provider'], $form['field_r_oprovider']);
+      
+      
+      
       if(arg(1) == 'add') {
         
         // Add a review page.
@@ -835,23 +849,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         else {
           // Options for not logged in users.
           $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user", array('query' => array('destination' => $_GET['q'])) ), '!register' => l(t('register'), "user/register", array('query' => array('destination' => $_GET['q'])) )) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
-          
           $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
           $form['#suffix'] = '</div></fieldset>';
-          
-        
-          //dpm($form);
-
-          
-        } // End of else {// Options for not logged in users.
+        }
         
         
         // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
         $providers[7] = t('OTHER SP');
-        $form['field_ref_provider']['und']['#options'] = $providers;
-        $form['field_ref_provider']['und']['#default_value'][0] = '_none';
+        $form['provider']['field_ref_provider']['und']['#options'] = $providers;
+        $form['provider']['field_ref_provider']['und']['#default_value'][0] = '_none';
 
         // Check if the review is added via a button on a provider's page.
         $provider_nid = NULL;
@@ -864,22 +872,29 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if($provider_nid) {
           $provider_node = node_load($provider_nid);
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
-          $form['provider_preview'] = array(
-              '#markup' => $provider_preview,
-              '#weight' => -100,
-          ); 
+          $form['provider']['preview'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Provider preview') . ': ' . $provider_node->title,
+            '#collapsible' => TRUE,
+            '#collapsed' => TRUE,
+          );
+              $form['provider']['preview']['provider_preview'] = array(
+                  '#markup' => $provider_preview,
+                  '#weight' => -100,
+              ); 
+              
           //$form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
           //$form['field_r_oprovider']['und'][0]['value']['#default_value'] = $provider_nid;
-          $form['field_ref_provider']['und']['#default_value'][0] = $provider_nid;
-          $form['field_ref_provider']['#access'] = FALSE;
-          $form['field_r_oprovider']['#access'] = FALSE;
+          $form['provider']['field_ref_provider']['und']['#default_value'][0] = $provider_nid;
+          $form['provider']['field_ref_provider']['#access'] = FALSE;
+          $form['provider']['field_r_oprovider']['#access'] = FALSE;
         } // End of if($provider_nid) {
         
       } // End of if(arg(1) == 'add') {
       else {
         // Edit a review page.
         
-        if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
+        if(!isset($form['provider']['field_ref_provider']['und']['#default_value'][0]) || $form['provider']['field_ref_provider']['und']['#default_value'][0] == '_none') {
           // If a provider has not been selected from a list,
           // then it has been set manually in the field field_r_oprovider
           
@@ -887,19 +902,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           gv_misc_getProviders($providers);
           $providers[7] = t('OTHER SP');
           
-          $form['field_ref_provider']['und']['#options'] = $providers;
-          $form['field_ref_provider']['und']['#default_value'][0] = 7;
+          $form['provider']['field_ref_provider']['und']['#options'] = $providers;
+          $form['provider']['field_ref_provider']['und']['#default_value'][0] = 7;
           
           // Should we allow to a regular user to edit the name in the text field / reselect from the list?
           // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
           // Let's choose the second variant.
           if(!in_array('administrator', $user->roles)) {
-            $form['field_ref_provider']['#access'] = FALSE;
-            $form['field_r_oprovider']['#access'] = FALSE;  
-            $form['provider_title_noedit'] = array(
+            $form['provider']['field_ref_provider']['#access'] = FALSE;
+            $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+            $form['provider']['provider_title_noedit'] = array(
               '#type' => 'item',
               '#title' => t('Your VoIP Service Provider') . ' (*)',
-              '#markup' => '<div class="text">' . $form['field_r_oprovider']['und'][0]['value']['#default_value'] . '</div>',
+              '#markup' => '<div class="text">' . $form['provider']['field_r_oprovider']['und'][0]['value']['#default_value'] . '</div>',
               //'#weight' => -100,
             ); 
           }
@@ -918,7 +933,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Load saved votes for a provider of this review.
           $criteria = array(
             'entity_type' => 'node',
-            'entity_id' => $form['field_ref_provider']['und']['#default_value'][0],
+            'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
             'uid' => $form['uid']['#value'],
           );
           if ($votes = votingapi_select_votes($criteria)) {
@@ -928,15 +943,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           }
           
           // Show preview of the provider (as a teaser) on the edit form.
-          $provider_node = node_load($form['field_ref_provider']['und']['#default_value'][0]);
+          $provider_node = node_load($form['provider']['field_ref_provider']['und']['#default_value'][0]);
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
-          $form['provider_preview'] = array(
+          $form['provider']['provider_preview'] = array(
               '#markup' => $provider_preview,
               '#weight' => -100,
           ); 
-          $form['field_ref_provider']['#access'] = FALSE;
-          $form['field_r_oprovider']['#access'] = FALSE;
-          $form['provider_title_noedit'] = array(
+          $form['provider']['field_ref_provider']['#access'] = FALSE;
+          $form['provider']['field_r_oprovider']['#access'] = FALSE;
+          $form['provider']['provider_title_noedit'] = array(
             '#type' => 'item',
             '#title' => t('Your VoIP Service Provider'),
             '#markup' => '<div class="text">' . $provider_node->title . '</div>',
