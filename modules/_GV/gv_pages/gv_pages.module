@@ -817,6 +817,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         // Add a review page.
         
+        if ($user->uid) {
+          // Get all additional data for first/last names extraction.
+          $user = user_load($user->uid);
+          dpm($user);
+          // Autofill the email field.
+          $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+        }
+        
         // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
@@ -845,12 +853,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_ref_provider']['#access'] = FALSE;
           $form['field_r_oprovider']['#access'] = FALSE;
         } // End of if($provider_nid) {
+
         
-        // Autofill the email field.
-        if ($user->uid) {
-          $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
-        }
-                
       } // End of if(arg(1) == 'add') {
       else {
         // Edit a review page.
