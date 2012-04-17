@@ -828,35 +828,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
         else {
           // Options for not logged in users.
-          //$form['#prefix'] = '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">Submit as a guest</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
-          //$form['#suffix'] = '</div></fieldset>';
+          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may log in or register to have a full control over your submitted reviews...') . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
+          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible collapsed form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
+          $form['#suffix'] = '</div></fieldset>';
           
-          $form_temp = $form;
-          
-          
-          $form = array();
-        
-          $form['login_info'] = array(
-            '#type' => 'fieldset',
-            '#title' => t('temp'),
-            '#weight' => -100,
-            '#collapsible' => FALSE,
-            '#collapsed' => FALSE,
-          );
-          $form['login_info']['info'] = array(
-            '#markup' => '<div>' . t('You are not logged in.') . '<div>',
-          );
-          
-          $form['general'] = array(
-            '#type' => 'fieldset',
-            '#title' => t('Submit as a guest'),
-            '#weight' => -100,
-            '#collapsible' => TRUE,
-            '#collapsed' => TRUE,
-          );
-          $form['general']['all'] = $form_temp;
-        
-     
         } // End of else {// Options for not logged in users.
         
         
