@@ -959,7 +959,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
           
           foreach ($field_ratings_oprovider as $tag => $value) {
-            $form['rating_' . $tag]['#default_value'] = $value;
+            $form['votes']['rating_' . $tag]['#default_value'] = $value;
           }
           
         } // End of if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
@@ -974,7 +974,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
           if ($votes = votingapi_select_votes($criteria)) {
             foreach ($votes as $vote) {
-              $form['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+              $form['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
             }
           }
           
