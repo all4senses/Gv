@@ -826,7 +826,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
           
           // Autofill first/last names.
-          $form['field_r_email']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          $form['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          $form['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
         }
         
         // Set a select of available providers.
