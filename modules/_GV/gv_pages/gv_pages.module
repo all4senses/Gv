@@ -780,10 +780,39 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      //dpm($form);
+      dpm($form);
       //dpm($user);
       //dpm($_SERVER);
       
+      $form['title']['#weight'] = -9;
+      $form['body']['#weight'] = -8;
+      
+      // Group fields
+      $form['provider'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Provider, which you are reviewing'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#weight' => -10,
+      );
+          $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
+          $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
+          unset($form['field_ref_provider'], $form['field_r_oprovider']);
+      $form['about_you'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('About You'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#weight' => 5,
+      );
+          $form['about_you']['field_r_fname'] = $form['field_r_fname'];
+          $form['about_you']['field_r_lname'] = $form['field_r_lname'];
+          $form['about_you']['field_r_email'] = $form['field_r_email'];
+          unset($form['field_r_fname'], $form['field_r_lname'], $form['field_r_email']);
+          
+          
+          
+      // Rate and vote group.
       $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
      
@@ -794,6 +823,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Vote for this provider'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
+        '#weight' => 4,
       );
       foreach ($vote_keys as $vote_key) {
         $form['votes']['rating_' . $vote_key] = array(
@@ -820,27 +850,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
       
-      // Group fields
-      $form['provider'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Selected provider'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
-      );
-          $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
-          $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
-          unset($form['field_ref_provider'], $form['field_r_oprovider']);
-      $form['about_you'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('About You'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
-      );
-          $form['about_you']['field_r_fname'] = $form['field_r_fname'];
-          $form['about_you']['field_r_lname'] = $form['field_r_lname'];
-          $form['about_you']['field_r_email'] = $form['field_r_email'];
-          unset($form['field_r_fname'], $form['field_r_lname'], $form['field_r_email']);
-          
           
           
       
