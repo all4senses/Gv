@@ -834,7 +834,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //$form['#suffix'] = '</div></fieldset>';
           
           
-          
+          dpm($form);
+          return;
           $form['submit_guest'] = array(
             '#type' => 'fieldset',
             '#title' => t('Submit a review as a guest'),
