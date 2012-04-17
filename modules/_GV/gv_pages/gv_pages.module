@@ -785,7 +785,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       //dpm($_SERVER);
       
       $form['title']['#weight'] = -8;
-      $form['body']['#weight'] = -5;
+      $form['title']['#title'] = t('Your review title');
+      $form['body']['#weight'] = 2;
       
       
       
