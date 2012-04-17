@@ -789,8 +789,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
      
       $vote_keys = array('features', 'sound', 'rely', 'money', 'service');
       $votes = array();
+      $form['votes'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Vote for this provider'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
       foreach ($vote_keys as $vote_key) {
-        $form['rating_' . $vote_key] = array(
+        $form['votes']['rating_' . $vote_key] = array(
           '#type' => 'select',
           '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
           '#options' => $rating_options,
@@ -801,7 +807,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
-      $form['rating_recommend'] = array(
+      $form['votes']['rating_recommend'] = array(
           '#type' => 'select',
           '#title' => t('Would you recommend this VoIP provider'),
           '#options' => $rating_recommend_options,
