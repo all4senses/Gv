@@ -834,7 +834,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form_temp = $form;
           
           
-          unset($form);
+          $form = array();
         
           $form['login_info'] = array(
             '#type' => 'fieldset',
