@@ -834,37 +834,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
         else {
           // Options for not logged in users.
-          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may log in or register to have a full control over your submitted reviews...') . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
+          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user"), '!register' => l(t('register'), "user/register")) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
           
           $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
           $form['#suffix'] = '</div></fieldset>';
           
-//          
-//          dpm($form);
-//          return;
-//          $form['submit_guest'] = array(
-//            '#type' => 'fieldset',
-//            '#title' => t('Submit a review as a guest'),
-//            '#collapsible' => TRUE,
-//            '#collapsed' => TRUE,
-//          );
-//              foreach($form as $key => $value) {
-//                if(strpos($key, '#') === FALSE && $key != 'submit_guest') {
-//                  $form['submit_guest'][$key] = $value;
-//                  unset($form[$key]);
-//
-//                }
-//              }
-//          
-//          $form['info_notlogged'] = array(
-//            '#type' => 'fieldset',
-//            '#title' => t('You are not logged in...'),
-//            '#collapsible' => TRUE,
-//            '#collapsed' => FALSE,
-//          );
-//              $form['info_notlogged']['info'] = array(
-//                '#markup' => '<div>' . t('You may log in or register to have a full control over your submitted reviews...') . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div>',
-//              );
+        
+          //dpm($form);
+
           
         } // End of else {// Options for not logged in users.
         
