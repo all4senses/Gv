@@ -830,8 +830,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
-      
-      
+      $form['about_you'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('About You'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+          $form['about_you']['field_r_fname'] = $form['field_r_fname'];
+          $form['about_you']['field_r_lname'] = $form['field_r_lname'];
+          $form['about_you']['field_r_email'] = $form['field_r_email'];
+          unset($form['field_r_fname'], $form['field_r_lname'], $form['field_r_email']);
+          
+          
+          
       
       if(arg(1) == 'add') {
         
@@ -840,11 +851,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
-          // Autofill the email field.
-          $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
           // Autofill first/last names.
-          $form['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          $form['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          $form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          $form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          // Autofill the email field.
+          $form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
         }
         else {
           // Options for not logged in users.
@@ -881,7 +892,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               $form['provider']['preview']['provider_title'] = array(
                 '#type' => 'item',
                 '#title' => t('A provider You have chosen'),
-                '#value' => l($provider_node->title, 'node/' . $provider_node->nid),
+                '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
               ); 
               $form['provider']['preview']['provider_preview'] = array(
                 '#markup' => $provider_preview,
