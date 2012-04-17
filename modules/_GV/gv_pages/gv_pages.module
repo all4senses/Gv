@@ -780,6 +780,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
+      dpm($form);
       dpm($user);
       dpm($_SERVER);
       dpm($_REQUEST);
@@ -823,6 +824,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           dpm($user);
           // Autofill the email field.
           $form['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+          
+          // Autofill first/last names.
+          $form['field_r_email']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
         }
         
         // Set a select of available providers.
