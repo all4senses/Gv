@@ -818,6 +818,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         // Add a review page.
         
+        
+        $form['#prefix'] = '<fieldset class="collapsible"><legend></legend>';
+        $form['#suffix'] = '</fieldset>';
+        
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
@@ -858,7 +862,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_ref_provider']['#access'] = FALSE;
           $form['field_r_oprovider']['#access'] = FALSE;
         } // End of if($provider_nid) {
-
         
       } // End of if(arg(1) == 'add') {
       else {
