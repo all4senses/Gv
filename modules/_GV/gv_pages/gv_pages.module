@@ -791,6 +791,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Convert the field_r_notapproved to a checkbox temporarily.
       $form['field_r_notapproved']['#type'] = 'checkbox';
+      $form['field_r_notapproved']['#title'] = $form['field_r_notapproved']['und'][0]['value']['#title'];
+      $form['field_r_notapproved']['#default_value'] = $form['field_r_notapproved']['und'][0]['value']['#default_value'];
       
       // Unset some fields, so that even super admin could not see and change it.
       $form['options']['promote']['#access'] = FALSE;
