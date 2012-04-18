@@ -789,10 +789,23 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#weight'] = -8;
       $form['body']['#weight'] = 2;
       
-      // Convert the field_r_notapproved to a checkbox temporarily.
-      $form['field_r_notapproved']['#type'] = 'checkbox';
-      $form['field_r_notapproved']['#title'] = $form['field_r_notapproved']['und'][0]['value']['#title'];
-      $form['field_r_notapproved']['#default_value'] = $form['field_r_notapproved']['und'][0]['value']['#default_value'];
+      // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
+      if (isset($form['field_r_notapproved'])) {
+        // Only admin can approve it.
+        if (in_array('administrator', $user->roles)) {
+          $form['field_r_notapproved']['#type'] = 'checkbox';
+          $form['field_r_notapproved']['#title'] = $form['field_r_notapproved']['und'][0]['value']['#title'];
+          $form['field_r_notapproved']['#default_value'] = $form['field_r_notapproved']['und'][0]['value']['#default_value'];
+        }
+        else {
+          $form['field_r_notapproved']['#access'] = FALSE;
+          $form['field_r_notapproved_info'] = array(
+            '#type' => 'item',
+            '#title' => t('Approval status for this review'),
+            '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
+          );
+        }
+      }
       
       // Unset some fields, so that even super admin could not see and change it.
       $form['options']['promote']['#access'] = FALSE;
