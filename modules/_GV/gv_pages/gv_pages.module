@@ -792,14 +792,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
         // Only admin can approve it.
+        $form['field_r_notapproved']['#access'] = FALSE;
         if (in_array('administrator', $user->roles)) {
-          $form['field_r_notapproved']['#type'] = 'checkbox';
-          $form['field_r_notapproved']['#title'] = $form['field_r_notapproved']['und'][0]['value']['#title'];
-          $form['field_r_notapproved']['#default_value'] = $form['field_r_notapproved']['und'][0]['value']['#default_value'];
+          $form['field_r_notapproved_temp'] = array(
+            '#type' => 'checkbox',
+            '#title' => $form['field_r_notapproved']['und'][0]['value']['#title'],
+            '#default_value' => $form['field_r_notapproved']['und'][0]['value']['#default_value'],
+          );
         }
         else {
-          $form['field_r_notapproved']['#access'] = FALSE;
-          $form['field_r_notapproved_info'] = array(
+          $form['field_r_notapproved_temp'] = array(
             '#type' => 'item',
             '#title' => t('Approval status for this review:'),
             '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
@@ -1149,7 +1151,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   //dpm($form);
   dpm($form_state);
-  return;
+
   // Don't check anything if we delete the node.
   if ($form_state['submit_handlers'][0] == 'node_form_delete_submit') {
     return;
