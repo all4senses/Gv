@@ -1234,7 +1234,9 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_node_presave($node) {
+  
   if ($node->type == 'review') {
+    
     // If chosen OTHER SP (and dummy nid), replace a dummy nid with 0, 
     // as we don't want to associate this review with that dummy nid node, of course.
     // Or clear OTHER SP field.
@@ -1244,7 +1246,10 @@ function gv_pages_node_presave($node) {
     else {
       $node->field_r_oprovider['und'][0]['value'] = '';
     }
-  }
+    
+    dpm($node);
+    
+  } // End of if ($node->type == 'review') {
 }
 
 
