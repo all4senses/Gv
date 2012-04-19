@@ -881,9 +881,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
-      // This TEMPORARY title will see only Administrators.
-      $form['title']['#default_value'] = 'Unapproved review';
-      
       if(arg(1) == 'add') {
         
         // Add a review page.
@@ -891,6 +888,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //dpm($user);
         //dpm($_SERVER);
         
+        // This TEMPORARY title will see only Administrators.
+        $form['title']['#default_value'] = 'Unapproved review';
+      
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
