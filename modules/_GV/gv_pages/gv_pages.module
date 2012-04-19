@@ -887,24 +887,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Add a review page.
       
         //dpm($user);
-        dpm($_SERVER);
-        if ($_SERVER['HTTP_REFERER']) {
-          $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
-          if (isset($refferer[1]) && $refferer[1]) {
-            dpm($refferer[1]);
-            
-            $query = db_select('url_alias', 'ua')
-              ->fields('ua', array('source'))
-              ->condition('alias', $refferer[1]);
-            $source = $query->execute()->fetchField();
-            $source = str_replace('node/', '', $source);
-            if (is_numeric($source)) {
-              dpm($source);
-            }
-            
-  
-          }
-        }
+        //dpm($_SERVER);
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
@@ -938,6 +921,26 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $provider_nid = NULL;
           }
         }
+        elseif ($_SERVER['HTTP_REFERER']) {
+          $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
+          if (isset($refferer[1]) && $refferer[1]) {
+            $query = db_select('url_alias', 'ua')
+              ->fields('ua', array('source'))
+              ->condition('alias', $refferer[1]);
+            $source = $query->execute()->fetchField();
+            $source = str_replace('node/', '', $source);
+            if (is_numeric($source)) {
+              $query = db_select('node', 'n')
+                ->fields('n', array('type'))
+                ->condition('nid', $source);
+              $type = $query->execute()->fetchField();
+              if ($type == 'provider') {
+                $provider_nid = $source;
+              }
+            }
+          } // End of if (isset($refferer[1]) && $refferer[1]) {
+        } // End of elseif ($_SERVER['HTTP_REFERER']) {
+        
         if($provider_nid) {
           $provider_node = node_load($provider_nid);
           $form['provider']['provider_title'] = array(
