@@ -1271,8 +1271,8 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  */
 function gv_pages_node_presave($node) {
   //dpm($node);
-  dpr($node);
-  die;
+  //dpr($node);
+  //die;
   
   if ($node->type == 'review') {
     
@@ -1284,16 +1284,13 @@ function gv_pages_node_presave($node) {
     
     // Extract votes data from the local saved field.
     $saved_ratings = unserialize($node->field_ratings_oprovider['und'][0]['value']);
+    $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
     
-   
-    
-    if (isset($node->field_ref_provider['und'][0]['value']) && $node->field_ref_provider['und'][0]['value'] && $node->field_ref_provider['und'][0]['value'] != 7) {
+    if ($provider_nid && $provider_nid != 7) {
       
         $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
         $votes = array();
-
-        $provider_nid = $node->field_ref_provider['und'][0]['value'];
-
+        
         foreach ($vote_keys as $vote_key) {
           $votes[] = array(
             'tag' => $vote_key,
@@ -1304,11 +1301,7 @@ function gv_pages_node_presave($node) {
             'uid' => $node->uid,
           );
         }
-        
-        dpr($saved_ratings);
-        dpr($votes);
-        die;
-    
+   
         // If approved and published.
         if ($is_approved && $node->status) {
           // Count this review vote in a target provider overall rating calculation.
