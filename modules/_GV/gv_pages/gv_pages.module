@@ -888,11 +888,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         //dpm($user);
         dpm($_SERVER);
-        
-        if (is_array($refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']))) {
-          dpm($refferer);
+        if ($_SERVER['HTTP_REFERER']) {
+          $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
+          if (isset($refferer[1]) && $refferer[1]) {
+            dpm($refferer[1]);
+          }
         }
-        
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
