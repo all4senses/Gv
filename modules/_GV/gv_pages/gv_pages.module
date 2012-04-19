@@ -988,7 +988,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           // If this review is not approved
           // Load votes data from a local field_ratings_oprovider, not from Voting api tables.
-          if ($form['field_r_notapproved']['und'][0]['#default_value']) {
+          if ($form['field_r_notapproved']['und'][0]['value']['#default_value']) {
             $saved_ratings = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
             foreach ($saved_ratings as $tag => $value) {
               $form['votes']['rating_' . $tag]['#default_value'] = $value;
