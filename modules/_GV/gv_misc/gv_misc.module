@@ -24,7 +24,26 @@ function gv_misc_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  
+  $items['approve/%/%'] = array(
+    'title' => 'Approve content',
+    'page callback' => 'gv_misc_approveContent',
+    'page arguments' => array(1,2),
+    'access arguments' => array('administer content'),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
+}
+
+
+/**
+ * Approve content by type and nid.
+ */
+function gv_misc_approveContent($type, $nid) {
+  dpm($type);
+  dpm($nid);
+
+  return 'Ok!';
 }
 
 
