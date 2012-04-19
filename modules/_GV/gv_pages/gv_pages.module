@@ -796,8 +796,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if (in_array('administrator', $user->roles)) {
           $form['field_r_notapproved_checkbox'] = array(
             '#type' => 'checkbox',
-            '#title' => $form['field_r_notapproved']['und'][0]['value']['#title'],
-            '#default_value' => $form['field_r_notapproved']['und'][0]['value']['#default_value'],
+            '#title' => t('This review is approved'),
+            '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
           );
         }
         else {
@@ -1169,7 +1169,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   // Rebuild field_r_notapproved from the temp field field_r_notapproved_checkbox.
   if (!isset($form_state['values']['field_r_notapproved_info'])) {
-    $field_r_notapproved = (isset($form_state['values']['field_r_notapproved_checkbox']) && $form_state['values']['field_r_notapproved_checkbox']) ? 1 : 0;
+    $field_r_notapproved = (isset($form_state['values']['field_r_notapproved_checkbox']) && $form_state['values']['field_r_notapproved_checkbox']) ? 0 : 1;
     form_set_value($form['field_r_notapproved'], array('und' => array(0 => array('value' => $field_r_notapproved))), $form_state);
   }
   
