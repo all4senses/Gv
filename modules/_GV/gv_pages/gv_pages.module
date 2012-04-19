@@ -1184,6 +1184,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   }
   // Save votes to the temporary votes field.
   // It maybe reset later on. But just for the sake of a code simplifying.
+  // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
+  // OR it its data may remain, if the review is not approved OR it's for not listed provider
   form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
     
     
@@ -1198,9 +1200,9 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     // Reset the the temporary votes field.
     // BUT! Only if this review is approved (the field_r_notapproved is undefined or set to "0").
     // For not approved reviews the votes data remains in this temporary field and is not pushed in the general votes results tables of Voting API.
-    if ($is_approved) {
-      form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
-    }
+//    if ($is_approved) {
+//      form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
+//    }
     
     // Check if author of this review has already submitted a review for a selected provider.
     if ($review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, $author_email, NULL, $current_review_nid)) {
@@ -1224,30 +1226,30 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
  */
 function gv_pages_submitForm_review(&$form, &$form_state) {
   
-  $is_approved = !isset($form_state['values']['field_r_notapproved']['und'][0]['value']) || !$form_state['values']['field_r_notapproved']['und'][0]['value'];
-  
-  // If this review is approved
-  // And If a provider has been selected from the list
-  // Save votes to the votes api tables for this provider.
-  if ($is_approved && isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id'] != 7) {
-
-    $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
-    $votes = array();
-
-    $provider_nid = $form_state['values']['field_ref_provider']['und'][0]['target_id'];
-      
-    foreach ($vote_keys as $vote_key) {
-      $votes[] = array(
-        'tag' => $vote_key,
-        'entity_type' => 'node',
-        'entity_id' => $provider_nid,
-        'value_type' => 'percent',
-        'value' => $form_state['values']['rating_' . $vote_key],
-        'uid' => $form_state['values']['uid'],
-      );
-    }
-    votingapi_set_votes($votes, $votes);
-  }
+//  $is_approved = !isset($form_state['values']['field_r_notapproved']['und'][0]['value']) || !$form_state['values']['field_r_notapproved']['und'][0]['value'];
+//  
+//  // If this review is approved
+//  // And If a provider has been selected from the list
+//  // Save votes to the votes api tables for this provider.
+//  if ($is_approved && isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id'] != 7) {
+//
+//    $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+//    $votes = array();
+//
+//    $provider_nid = $form_state['values']['field_ref_provider']['und'][0]['target_id'];
+//      
+//    foreach ($vote_keys as $vote_key) {
+//      $votes[] = array(
+//        'tag' => $vote_key,
+//        'entity_type' => 'node',
+//        'entity_id' => $provider_nid,
+//        'value_type' => 'percent',
+//        'value' => $form_state['values']['rating_' . $vote_key],
+//        'uid' => $form_state['values']['uid'],
+//      );
+//    }
+//    votingapi_set_votes($votes, $votes);
+//  }
 }
 
 
@@ -1264,14 +1266,49 @@ function gv_pages_node_presave($node) {
   
   if ($node->type == 'review') {
     
-    // Update "Published" status.
-    $is_notapproved = (isset($node->field_r_notapproved['und'][0]['value']) && $node->field_r_notapproved['und'][0]['value']) ? 1 : 0;
-    if ($is_notapproved) {
-      $node->status = 0;
-    }
-    else {
+    // Unpublish, if not approved.
+    $is_approved = (isset($node->field_r_notapproved['und'][0]['value']) && $node->field_r_notapproved['und'][0]['value']) ? 0 : 1;
+    if ($is_approved) {
       $node->status = 1;
     }
+    else {
+      $node->status = 0;
+    }
+    
+    // Extract votes data from the local saved field.
+    $saved_ratings = unserialize($node->field_ratings_oprovider['und'][0]['value']);
+    
+    if (isset($node->field_ref_provider['und'][0]['value']) && $node->field_ref_provider['und'][0]['value'] && $node->field_ref_provider['und'][0]['value'] != 7) {
+      
+        $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+        $votes = array();
+
+        $provider_nid = $node->field_ref_provider['und'][0]['value'];
+
+        foreach ($vote_keys as $vote_key) {
+          $votes[] = array(
+            'tag' => $vote_key,
+            'entity_type' => 'node',
+            'entity_id' => $provider_nid,
+            'value_type' => 'percent',
+            'value' => $saved_ratings[$vote_key],//$form_state['values']['rating_' . $vote_key],
+            'uid' => $node->uid,
+          );
+        }
+        
+        if ($is_approved) {
+          // Count this review vote in a target provider overall rating calculation.
+          votingapi_set_votes($votes, $votes);
+        }
+        else {
+          // Remove this review's votes from a target provider calculation set.
+          foreach ($votes as $c) {
+            votingapi_delete_votes(votingapi_select_votes($c));
+          }
+        }
+      
+    } // End of if ($is_approved && isset($node->field_ref_provider['und'][0]['value']) && $node->field_ref_provider['und'][0]['value'] && $node->field_ref_provider['und'][0]['value'] != 7) {
+    
     
     // If chosen OTHER SP (and dummy nid), replace a dummy nid with 0, 
     // as we don't want to associate this review with that dummy nid node, of course.
@@ -1282,12 +1319,6 @@ function gv_pages_node_presave($node) {
     else {
       $node->field_r_oprovider['und'][0]['value'] = '';
     }
-    
-    // Unpublish if not approved.
-//    if (!$is_approved) {
-//
-//    }
-    
     
   } // End of if ($node->type == 'review') {
   
