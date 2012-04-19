@@ -1168,11 +1168,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   $author_email = isset($form_state['values']['field_r_email']['und'][0]['value']) ? $form_state['values']['field_r_email']['und'][0]['value'] : NULL;
   $is_approved = !isset($form_state['values']['field_r_notapproved']['und'][0]['value']) || !$form_state['values']['field_r_notapproved']['und'][0]['value'];
   
-  // Unpublish if not approved.
-  if (!$is_approved) {
-    
-  }
-  
   // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
   $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
   $votes = array();
@@ -1245,7 +1240,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
         'uid' => $form_state['values']['uid'],
       );
     }
-    votingapi_set_votes($votes);
+    votingapi_set_votes($votes, $votes);
   }
 }
 
@@ -1257,6 +1252,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_node_presave($node) {
+  dpm($node);
   
   if ($node->type == 'review') {
     
@@ -1270,9 +1266,14 @@ function gv_pages_node_presave($node) {
       $node->field_r_oprovider['und'][0]['value'] = '';
     }
     
-    dpm($node);
+    // Unpublish if not approved.
+//    if (!$is_approved) {
+//
+//    }
+    
     
   } // End of if ($node->type == 'review') {
+  
 }
 
 
