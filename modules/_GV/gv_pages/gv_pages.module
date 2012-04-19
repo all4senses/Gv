@@ -1306,7 +1306,9 @@ function gv_pages_node_presave($node) {
         // If approved and published.
         if ($is_approved && $node->status) {
           // Count this review vote in a target provider overall rating calculation.
-          votingapi_set_votes($votes, $votes);
+          $votes_return = votingapi_set_votes($votes, $votes);
+          dpr($votes_return);
+          die;
         }
         else {
           // Remove this review's votes from a target provider calculation set.
