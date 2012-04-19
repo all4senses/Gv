@@ -794,14 +794,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Only admin can approve it.
         $form['field_r_notapproved']['#access'] = FALSE;
         if (in_array('administrator', $user->roles)) {
-          $form['field_r_notapproved_temp'] = array(
+          $form['field_r_notapproved_checkbox'] = array(
             '#type' => 'checkbox',
             '#title' => $form['field_r_notapproved']['und'][0]['value']['#title'],
             '#default_value' => $form['field_r_notapproved']['und'][0]['value']['#default_value'],
           );
         }
         else {
-          $form['field_r_notapproved_temp'] = array(
+          $form['field_r_notapproved_info'] = array(
             '#type' => 'item',
             '#title' => t('Approval status for this review:'),
             '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
@@ -1253,8 +1253,8 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  */
 function gv_pages_node_presave($node) {
   //dpm($node);
-  dpr($node);
-  die;
+  //dpr($node);
+  //die;
   
   if ($node->type == 'review') {
     
