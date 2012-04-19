@@ -1157,6 +1157,12 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     return;
   }
   
+  // Rebuild field_r_notapproved from the temp field field_r_notapproved_checkbox.
+  if (!isset($form_state['values']['field_r_notapproved_info'])) {
+    $field_r_notapproved = (isset($form_state['values']['field_r_notapproved_checkbox']) && $form_state['values']['field_r_notapproved_checkbox']) ? 1 : 0;
+    form_set_value($form['field_r_notapproved'], array('und' => array(0 => array('value' => $field_r_notapproved))), $form_state);
+  }
+  
   // If field_ref_provider is choosen as OTHER SP, the field_r_oprovider should be set as well
   if ($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && !$form_state['values']['field_r_oprovider']['und'][0]['value']) {
     form_set_error('field_r_oprovider',t('Please write in the name of a Provider'));  
