@@ -986,17 +986,27 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         else {
           // A provider has been selected from a list.
           
-          // Load saved votes for a provider of this review.
-          $criteria = array(
-            'entity_type' => 'node',
-            'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
-            'uid' => $form['uid']['#value'],
-          );
-          if ($votes = votingapi_select_votes($criteria)) {
-            foreach ($votes as $vote) {
-              $form['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+          // If this review is not approved
+          // Load votes data from a local field_ratings_oprovider, not from Voting api tables.
+          if ($form['field_r_notapproved']['und'][0]['#default_value']) {
+            $saved_ratings = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
+            foreach ($saved_ratings as $tag => $value) {
+              $form['votes']['rating_' . $tag]['#default_value'] = $value;
             }
           }
+          else {
+            // Else load saved votes for a provider of this review.
+            $criteria = array(
+              'entity_type' => 'node',
+              'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
+              'uid' => $form['uid']['#value'],
+            );
+            if ($votes = votingapi_select_votes($criteria)) {
+              foreach ($votes as $vote) {
+                $form['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+              }
+            }
+          } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
           
           // Show preview of the provider (as a teaser) on the edit form.
           $provider_node = node_load($form['provider']['field_ref_provider']['und']['#default_value'][0]);
