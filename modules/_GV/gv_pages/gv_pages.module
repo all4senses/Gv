@@ -892,6 +892,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
           if (isset($refferer[1]) && $refferer[1]) {
             dpm($refferer[1]);
+            
+            $query = db_select('url_alias', 'ua')
+              ->fields('ua', array('source'))
+              ->condition('alias', $refferer[1]);
+            $results = $query->execute()->fetchField();
+            dpm($results);
+  
           }
         }
         
