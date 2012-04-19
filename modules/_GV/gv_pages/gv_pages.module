@@ -1268,10 +1268,7 @@ function gv_pages_node_presave($node) {
     
     // Unpublish, if not approved.
     $is_approved = (isset($node->field_r_notapproved['und'][0]['value']) && $node->field_r_notapproved['und'][0]['value']) ? 0 : 1;
-    if ($is_approved) {
-      $node->status = 1;
-    }
-    else {
+    if (!$is_approved) {
       $node->status = 0;
     }
     
@@ -1296,7 +1293,8 @@ function gv_pages_node_presave($node) {
           );
         }
         
-        if ($is_approved) {
+        // If approved and published.
+        if ($is_approved && $node->status) {
           // Count this review vote in a target provider overall rating calculation.
           votingapi_set_votes($votes, $votes);
         }
