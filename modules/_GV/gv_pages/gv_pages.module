@@ -1312,6 +1312,7 @@ function gv_pages_node_presave($node) {
           foreach ($votes as $c) {
             votingapi_delete_votes(votingapi_select_votes($c));
           }
+          votingapi_recalculate_results('node', $provider_nid);
         }
       
     } // End of if ($is_approved && isset($node->field_ref_provider['und'][0]['value']) && $node->field_ref_provider['und'][0]['value'] && $node->field_ref_provider['und'][0]['value'] != 7) {
