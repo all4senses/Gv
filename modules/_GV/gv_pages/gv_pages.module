@@ -986,9 +986,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         else {
           // A provider has been selected from a list.
           
-          // If this review is not approved
+          // If this review is not approved OR this review is NOT published.
           // Load votes data from a local field_ratings_oprovider, not from Voting api tables.
-          if ($form['field_r_notapproved']['und'][0]['value']['#default_value']) {
+          if ($form['field_r_notapproved']['und'][0]['value']['#default_value'] || !$form['options']['status']['#default_value']) {
             $saved_ratings = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
             foreach ($saved_ratings as $tag => $value) {
               $form['votes']['rating_' . $tag]['#default_value'] = $value;
@@ -1236,30 +1236,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
  */
 function gv_pages_submitForm_review(&$form, &$form_state) {
   
-//  $is_approved = !isset($form_state['values']['field_r_notapproved']['und'][0]['value']) || !$form_state['values']['field_r_notapproved']['und'][0]['value'];
-//  
-//  // If this review is approved
-//  // And If a provider has been selected from the list
-//  // Save votes to the votes api tables for this provider.
-//  if ($is_approved && isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id'] != 7) {
-//
-//    $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
-//    $votes = array();
-//
-//    $provider_nid = $form_state['values']['field_ref_provider']['und'][0]['target_id'];
-//      
-//    foreach ($vote_keys as $vote_key) {
-//      $votes[] = array(
-//        'tag' => $vote_key,
-//        'entity_type' => 'node',
-//        'entity_id' => $provider_nid,
-//        'value_type' => 'percent',
-//        'value' => $form_state['values']['rating_' . $vote_key],
-//        'uid' => $form_state['values']['uid'],
-//      );
-//    }
-//    votingapi_set_votes($votes, $votes);
-//  }
 }
 
 
