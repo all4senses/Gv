@@ -1285,8 +1285,7 @@ function gv_pages_node_presave($node) {
     // Extract votes data from the local saved field.
     $saved_ratings = unserialize($node->field_ratings_oprovider['und'][0]['value']);
     
-    dpr($saved_ratings);
-    die;
+   
     
     if (isset($node->field_ref_provider['und'][0]['value']) && $node->field_ref_provider['und'][0]['value'] && $node->field_ref_provider['und'][0]['value'] != 7) {
       
@@ -1306,6 +1305,10 @@ function gv_pages_node_presave($node) {
           );
         }
         
+        dpr($saved_ratings);
+        dpr($votes);
+        die;
+    
         // If approved and published.
         if ($is_approved && $node->status) {
           // Count this review vote in a target provider overall rating calculation.
