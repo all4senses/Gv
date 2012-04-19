@@ -783,8 +783,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       dpm($form);
       
       // Make some small corrections.
-      $form['title']['#title'] = t('Your review title');
+      $form['title']['#title'] = t('Review title');
       $form['title']['#weight'] = -8;
+      if (!in_array('administrator', $user->roles)) {
+        $form['title']['#access'] = FALSE;
+      }
       $form['body']['#weight'] = 2;
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
@@ -878,9 +881,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
-      
-          
-          
+      // This TEMPORARY title will see only Administrators.
+      $form['title']['#default_value'] = 'Unapproved review';
       
       if(arg(1) == 'add') {
         
@@ -922,6 +924,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           }
         }
         elseif ($_SERVER['HTTP_REFERER']) {
+          // If a user has clicked "Submit a review" on the Provider's page, treat it as choice of that provider.
           $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
           if (isset($refferer[1]) && $refferer[1]) {
             $query = db_select('url_alias', 'ua')
@@ -1187,6 +1190,12 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   if ($form_state['submit_handlers'][0] == 'node_form_delete_submit') {
     return;
   }
+ 
+  // An Administrator MUST set the real title for the review.
+  global $user;
+  if (in_array('administrator', $user->roles) && $form_state['values']['title'] == 'Unapproved review') {
+    form_set_error('title',t('Please set a new title for this review'));
+  }
   
   // Rebuild field_r_notapproved from the temp field field_r_notapproved_checkbox.
   if (!isset($form_state['values']['field_r_notapproved_info'])) {
@@ -1219,7 +1228,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // OR it its data may remain, if the review is not approved OR it's for not listed provider
   form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
     
-    
   // If OTHER SP has been set.
   if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
     // Check if author of this review has already submitted a review for a selected provider.
@@ -1228,13 +1236,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     }
   } // End of if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
   else {
-    // Reset the the temporary votes field.
-    // BUT! Only if this review is approved (the field_r_notapproved is undefined or set to "0").
-    // For not approved reviews the votes data remains in this temporary field and is not pushed in the general votes results tables of Voting API.
-//    if ($is_approved) {
-//      form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => ''))), $form_state);
-//    }
-    
     // Check if author of this review has already submitted a review for a selected provider.
     if ($review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, $author_email, NULL, $current_review_nid)) {
       form_set_error('field_ref_provider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
@@ -1273,9 +1274,12 @@ function gv_pages_node_presave($node) {
   
   if ($node->type == 'review') {
     
-    // Unpublish, if not approved.
+    // Unpublish, if not approved... and publish if approved.
     $is_approved = (isset($node->field_r_notapproved['und'][0]['value']) && $node->field_r_notapproved['und'][0]['value']) ? 0 : 1;
-    if (!$is_approved) {
+    if ($is_approved) {
+      $node->status = 1;
+    }
+    else {
       $node->status = 0;
     }
     
