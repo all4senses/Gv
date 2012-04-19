@@ -781,8 +781,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       global $user;
       
       dpm($form);
-      //dpm($user);
-      //dpm($_SERVER);
       
       // Make some small corrections.
       $form['title']['#title'] = t('Your review title');
@@ -887,6 +885,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       if(arg(1) == 'add') {
         
         // Add a review page.
+      
+        //dpm($user);
+        dpm($_SERVER);
+      
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
@@ -923,10 +925,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if($provider_nid) {
           $provider_node = node_load($provider_nid);
           $form['provider']['provider_title'] = array(
-                '#type' => 'item',
-                '#title' => t('A provider You have chosen'),
-                '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
-              ); 
+            '#type' => 'item',
+            '#title' => t('A provider You have chosen'),
+            '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
+          ); 
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider']['preview'] = array(
             '#type' => 'fieldset',
