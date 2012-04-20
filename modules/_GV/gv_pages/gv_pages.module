@@ -1314,20 +1314,22 @@ function gv_pages_node_presave($node) {
             'vote_source' => $node->field_r_email['und'][0]['value'],
           );
         }
+        
+        
+        // Remove (clear) this review's previous votes from a target provider calculation set.
+        foreach ($votes as $c) {
+          unset($c['value_type'], $c['value']);
+          votingapi_delete_votes(votingapi_select_votes($c));
+        }
    
         // If approved and published.
         if ($is_approved && $node->status) {
           // Count this review vote in a target provider overall rating calculation.
           $votes_return = votingapi_set_votes($votes, $votes);
-          //dpr($votes_return);
-          //die;
         }
         else {
-          // Remove this review's votes from a target provider calculation set.
-          foreach ($votes as $c) {
-            unset($c['value_type'], $c['value'], $c['vote_source']);
-            votingapi_delete_votes(votingapi_select_votes($c));
-          }
+          // Recalculate results after deleting this preview votings (above).
+          // (Adding voting (above), if approved, call this function itself).
           votingapi_recalculate_results('node', $provider_nid);
         }
       
