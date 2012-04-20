@@ -882,10 +882,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
+      // Hide author IP field.
+      $form['field_r_author_ip']['#access'] = FALSE;
       
-      // REMOVE IT!
-      // Save author's IP.
-      $form['field_r_author_ip']['und'][0]['value']['#default_value'] = $user->hostname;
+      
       
       if(arg(1) == 'add') {
         
@@ -1280,8 +1280,8 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  */
 function gv_pages_node_presave($node) {
   //dpm($node);
-  //dpr($node);
-  //die;
+  dpr($node);
+  die;
   
   if ($node->type == 'review') {
     
