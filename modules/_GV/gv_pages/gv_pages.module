@@ -1318,8 +1318,8 @@ function gv_pages_node_presave($node) {
         if ($is_approved && $node->status) {
           // Count this review vote in a target provider overall rating calculation.
           $votes_return = votingapi_set_votes($votes, $votes);
-          dpr($votes_return);
-          die;
+          //dpr($votes_return);
+          //die;
         }
         else {
           // Remove this review's votes from a target provider calculation set.
