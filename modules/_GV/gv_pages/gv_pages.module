@@ -795,6 +795,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Only admin can approve it.
         $form['field_r_notapproved']['#access'] = FALSE;
         if (in_array('administrator', $user->roles)) {
+          $current_user_is_admin = TRUE;
           $form['field_r_notapproved_checkbox'] = array(
             '#type' => 'checkbox',
             '#title' => t('This review is approved'),
@@ -802,6 +803,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
         }
         else {
+          $current_user_is_admin = FALSE;
           $form['field_r_notapproved_info'] = array(
             '#type' => 'item',
             '#title' => t('Approval status for this review:'),
@@ -889,8 +891,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //dpm($_SERVER);
         
         // This TEMPORARY title will see only Administrators.
-        $form['title']['#default_value'] = 'Unapproved review';
-      
+        if ($current_user_is_admin) {
+          $form['title']['#default_value'] = 'Unapproved review';
+        }
+        
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
