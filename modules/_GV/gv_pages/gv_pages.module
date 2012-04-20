@@ -1322,9 +1322,9 @@ function gv_pages_node_presave($node) {
           votingapi_delete_votes(votingapi_select_votes($c));
         }
    
-        // If approved and published.
+        // If approved and published,
+        // Add this review's votes to a target provider overall rating calculation.
         if ($is_approved && $node->status) {
-          // Count this review vote in a target provider overall rating calculation.
           $votes_return = votingapi_set_votes($votes, $votes);
         }
         else {
