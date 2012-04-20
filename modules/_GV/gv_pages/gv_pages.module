@@ -1221,7 +1221,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // Check if an authorized user entered an email which is already is taken with one of our registered user.
   if (!$form_state['values']['uid']) {
     if (gv_misc_emailIsRegistered($form_state['values']['field_r_email']['und'][0]['value'])) {
-      form_set_error('field_r_email',t('Sorry, an email You have entered is already registered in our system. If it is your email, please !login and proceed with submitting this review as a logged in user.', array('!login' => l('Log in', 'user/login'))));
+      form_set_error('field_r_email',t('Sorry, an email You have entered is already registered in our system. If it is your email, please !login and proceed with submitting this review as a logged in user.', array('!login' => l('Log in', 'user/login', array('query' => array('destination' => $_GET['q']))))));
       return;
     }
   }
