@@ -1325,7 +1325,7 @@ function gv_pages_node_presave($node) {
         else {
           // Remove this review's votes from a target provider calculation set.
           foreach ($votes as $c) {
-            unset($c['vote_source']);
+            unset($c['value_type'], $c['value'], $c['vote_source']);
             votingapi_delete_votes(votingapi_select_votes($c));
           }
           votingapi_recalculate_results('node', $provider_nid);
