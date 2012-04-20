@@ -1280,8 +1280,8 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
  */
 function gv_pages_node_presave($node) {
   //dpm($node);
-  dpr($node);
-  die;
+  //dpr($node);
+  //die;
   
   if ($node->type == 'review') {
     
@@ -1311,6 +1311,7 @@ function gv_pages_node_presave($node) {
             'value_type' => 'percent',
             'value' => $saved_ratings[$vote_key],//$form_state['values']['rating_' . $vote_key],
             'uid' => $node->uid,
+            'vote_source' => $node->field_r_email['und'][0]['value'],
           );
         }
    
@@ -1324,6 +1325,7 @@ function gv_pages_node_presave($node) {
         else {
           // Remove this review's votes from a target provider calculation set.
           foreach ($votes as $c) {
+            unset($c['vote_source']);
             votingapi_delete_votes(votingapi_select_votes($c));
           }
           votingapi_recalculate_results('node', $provider_nid);
