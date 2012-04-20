@@ -883,6 +883,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
+      // REMOVE IT!
+      // Save author's IP.
+      $form['field_r_author_ip']['und'][0]['value']['#default_value'] = $user->hostname;
+      
       if(arg(1) == 'add') {
         
         // Add a review page.
@@ -894,6 +898,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if (!$current_user_is_admin) {
           $form['title']['#default_value'] = 'Unapproved review';
         }
+        
+        // Save author's IP.
+        $form['field_r_author_ip']['und'][0]['value']['#default_value'] = $user->hostname;
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
