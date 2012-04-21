@@ -237,7 +237,7 @@ function theme_gv_misc_requestQuote_mail($data) {
 /**
  * Helper function to send preset messages.
  */
-function gv_misc_sendMessagePresets($preset, $data) {
+function gv_misc_sendMessagePresets($preset, $data = NULL) {
   switch ($preset) {
     case 'new_review_admin_notify':
       
@@ -246,6 +246,16 @@ function gv_misc_sendMessagePresets($preset, $data) {
         $params['recipient'] = $recipient;
         drupal_mail('gv_misc', 'new_review_admin_notify', $recipient->mail, user_preferred_language($recipient), $params);
       }
+      
+      break;
+  
+
+      
+  case 'email_verification':
+      
+      global $language;
+      $params['verification_code'] = $data['verification_code'];
+      drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params);
       
       break;
   }
