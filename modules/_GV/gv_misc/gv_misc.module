@@ -116,9 +116,9 @@ function gv_misc_approveContent($type, $id) {
       
       // We are ready to approve the email now.
       $review = node_load($review_nid);
-      dpm($review);
-      
-      return 'Ok!';
+      $review->field_r_approvecode['und'][0]['value'] = '';
+      node_save($review);
+      return t('Thank you! Your email has been successfully verified! After approving by our administrators your review will be published on our site.');
   }
   
   drupal_access_denied();
