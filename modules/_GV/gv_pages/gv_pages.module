@@ -1094,8 +1094,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#validate'][] = 'gv_pages_submitForm_review';
-      $form['#redirect'] = 'home';
-      $_GET['destination'] = 'home';
+      //$form['#redirect'] = 'home';
+      //$_GET['destination'] = 'home';
     break;
   }
 }
@@ -1308,7 +1308,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_submitForm_review(&$form, &$form_state) {
-  $form_state['redirect'] = '/';
+  //$form_state['redirect'] = '/';
   $_GET['destination'] = 'home';
 }
 
