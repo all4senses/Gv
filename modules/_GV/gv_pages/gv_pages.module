@@ -975,7 +975,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // set this provider as selected by default and show its info and preview.
         if ($provider_nid) {
           $form['provider']['id_source'] = array(
-            '#markup' => '<div class="id-source">' . t('A taget provider has been chosen based on !source.', array('!source' => $provider_id_source)) . '<div>' . t('If You want to chose an other provider, please click !here.', array('!here' => l(t('here'), url('/node/add/review')))) . '</div></div>',
+            '#markup' => '<div class="id-source">' . t('A taget provider has been chosen based on !source.', array('!source' => $provider_id_source)) . '<div>' . t('If You want to chose an other provider, please click !here.', array('!here' => l(t('here'), url('node/add/review')))) . '</div></div>',
           ); 
           
           $provider_node = node_load($provider_nid);
