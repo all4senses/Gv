@@ -1450,7 +1450,7 @@ function gv_pages_node_view($node, $view_mode) {
         unset($node->content['field_r_oprovider']);
       }
       
-      
+      dpm($node);
       // Show voting results for this provider and user (author of this review).
       // Take votes from a local ratings field if it's not empty.
       if (!empty($node->field_ratings_oprovider)) {
