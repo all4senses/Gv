@@ -250,7 +250,7 @@ function gv_misc_getAdmins() {
   $query = db_select('users', 'u')
         ->fields('u');
   $query->leftJoin('users_roles', 'ur', 'ur.uid = u.uid');
-  $query->leftJoin('roles', 'r', 'r.rid = ur.rid');
+  $query->leftJoin('role', 'r', 'r.rid = ur.rid');
   $query->condition('r.name', 'administrator');
   $results = $query->execute();
 
