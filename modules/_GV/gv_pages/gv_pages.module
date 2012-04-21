@@ -1323,12 +1323,12 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     $text = t('Thank You for submitting a review! It will be published as soon as our administrators have approved it.');
     // Send verification code to approve email for an unregistered user.
     if (!$form_state['values']['uid']) {
-      gv_misc_sendMessagePresets('email_verification', array('verification_code' => $form_state['values']['field_r_approvecode']['und'][0]['value'], 'email' => $form_state['values']['field_r_email']['und'][0]['value']));
+      gv_misc_sendMessage('email_verification', array('verification_code' => $form_state['values']['field_r_approvecode']['und'][0]['value'], 'email' => $form_state['values']['field_r_email']['und'][0]['value']));
       $text .= '<br>' . t('We have also sent a instructions to your email as for how to make a publishing of your review more faster.');
     }
     drupal_set_message($text);
     // Notify all admins.
-    gv_misc_sendMessagePresets('new_review_admin_notify');
+    gv_misc_sendMessage('new_review_admin_notify');
   }
   
   // Redirect doesn't work this way!
