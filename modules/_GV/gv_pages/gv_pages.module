@@ -1317,7 +1317,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   
   // Just submitted new review.
   if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
-    $text = t('Thank You for submitting a review! It will be published as soon as our administrators will approve it.');
+    $text = t('Thank You for submitting a review! It will be published as soon as our administrators have approved it.');
     if (!$form_state['values']['uid']) {
       $text .= '<br>' . t('We have also sent a instructions to your email as for how to make a publishing of your review more faster.');
     }
