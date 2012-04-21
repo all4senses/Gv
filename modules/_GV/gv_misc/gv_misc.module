@@ -109,6 +109,7 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
 function gv_misc_testPage() {
   
   $admins = gv_misc_getAdmins();
+  dpm($admins);
   foreach ($admins as $admin) {
     dpm($admin);
   }
