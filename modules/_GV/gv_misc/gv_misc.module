@@ -79,10 +79,10 @@ function gv_misc_approveContent($type, $id) {
     
     case 'email':
       
-      $approve = explode('=', $id);
-      dpm($approve);
+      list($code, $email) = explode('=', $id);
+      dpm($code);
+      dpm($email);
       return 'Ok!';
-      break;
   }
   
   return 'Nothing Done!';
