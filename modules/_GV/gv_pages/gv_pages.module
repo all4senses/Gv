@@ -1281,16 +1281,23 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // If OTHER SP has been set.
   if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
     // Check if author of this review has already submitted a review for a selected provider.
-    if ($review = gv_misc_userHasSubmittedReview(NULL, $author_uid, $author_email, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid)) {
-      form_set_error('field_r_oprovider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
-    }
+    $review = gv_misc_userHasSubmittedReview(NULL, $author_uid, $author_email, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid);
   } // End of if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
   else {
     // Check if author of this review has already submitted a review for a selected provider.
-    if ($review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, $author_email, NULL, $current_review_nid)) {
-      form_set_error('field_ref_provider', t('You have already submitted a review for this provider') . ': ' . l($review->title, 'node/' . $review->nid) );
-    }
+    $review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, $author_email, NULL, $current_review_nid);
   } // End of Or else reset the the temporary votes field.
+  if ($review) {
+    $text =  t('You have already submitted a review for this provider');
+    if($user->uid) {
+      $text .= ': ' . l($review->title, 'node/' . $review->nid);
+    }
+    if($review->field_r_notapproved_value) {
+      $text .= '. ' . t('But it\'s not yet approved by our administrators.');
+    }
+    form_set_error('field_ref_provider', $text);
+  } // End of if ($review) {
+  
 }
 
 
