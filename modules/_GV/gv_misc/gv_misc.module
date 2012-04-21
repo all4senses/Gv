@@ -82,6 +82,7 @@ function gv_misc_approveContent($type, $id) {
       $approve = explode('=', $id);
       if(count($approve) != 2 ) {
         drupal_access_denied();
+        return;
       }
       $code = $approve[0];
       $email = $approve[1];
