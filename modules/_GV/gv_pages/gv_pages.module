@@ -773,6 +773,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     break; // End of case 'preface_node_form':
   
   
+    
+    
   
     case 'review_node_form':
       
@@ -882,8 +884,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
-      // Hide author IP field.
-      $form['field_r_author_ip']['#access'] = FALSE;
+      
+      // Hide approvecode field (used for unauthorized user email approve).
+      // It should be empty if a user has approved email.
+      $form['field_r_approvecode']['#access'] = FALSE;
       
       
       
@@ -891,16 +895,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         // Add a review page.
       
-        dpm($user);
-        dpm($_SERVER);
-        
         // This TEMPORARY title will see only Administrators.
         if (!$current_user_is_admin) {
           $form['title']['#default_value'] = 'Unapproved review';
         }
         
         // Save author's IP.
-        $form['field_r_author_ip']['und'][0]['value']['#default_value'] = $user->hostname;
+        if (!$user->uid) {
+          $form['field_r_approvecode']['und'][0]['value']['#default_value'] = md5(time());
+        }
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
@@ -941,6 +944,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           if(!isset($providers[$provider_nid])) {
             $provider_nid = NULL;
           }
+          else {
+            $provider_id_source = t('your choice while viewing this provider\'s page');
+          }
         }
         elseif ($_SERVER['HTTP_REFERER']) {
           // If a user has clicked "Submit a review" on the Provider's page, treat it as choice of that provider.
@@ -958,12 +964,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               $type = $query->execute()->fetchField();
               if ($type == 'provider') {
                 $provider_nid = $source;
+                $provider_id_source = t('the page you have been viewing when clicked a Submit review button');
               }
             }
           } // End of if (isset($refferer[1]) && $refferer[1]) {
         } // End of elseif ($_SERVER['HTTP_REFERER']) {
         
-        if($provider_nid) {
+        
+        // If a target provider has been defined by id from url or by referrer (previous) page,
+        // set this provider as selected by default and show its info and preview.
+        if ($provider_nid) {
+          $form['provider']['id_source'] = array(
+            '#markup' => '<div class="id-source">' . t('A taget provider has been chosen based on !source.', array('!source' => $provider_id_source)) . '<div>' . t('If You want to chose an oter provider, please click button Submit a review on the right top corner of this page.') . '</div></div>',
+          ); 
+          
           $provider_node = node_load($provider_nid);
           $form['provider']['provider_title'] = array(
             '#type' => 'item',
@@ -987,7 +1001,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['field_ref_provider']['und']['#default_value'][0] = $provider_nid;
           $form['provider']['field_ref_provider']['#access'] = FALSE;
           $form['provider']['field_r_oprovider']['#access'] = FALSE;
-        } // End of if($provider_nid) {
+          
+        } // End of if($provider_nid) { // // If a target provider has been defined by id from url or by referrer (previous) page,
         
       } // End of if(arg(1) == 'add') {
       else {
