@@ -1317,13 +1317,19 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   
   global $user;
   // Just submitted new review.
-  //if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
+  if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
+    
     $text = t('Thank You for submitting a review! It will be published as soon as our administrators have approved it.');
     if (!$form_state['values']['uid']) {
+      global $language;
+      $params['verification_code'] = $form_state['values']['field_r_approvecode']['und'][0]['value'];
+      drupal_mail('gv_misc', 'email_verification', $form_state['values']['field_r_email']['und'][0]['value'], $language, $params);
+      
       $text .= '<br>' . t('We have also sent a instructions to your email as for how to make a publishing of your review more faster.');
     }
     drupal_set_message($text);
-  //}
+    gv_misc_sendMessagePresets('new_review_admin_notify');
+  }
   
   // Redirect doesn't work this way!
   //$form_state['redirect'] = '/'; 
@@ -1332,7 +1338,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   // Unregistered user cannot view any unpublished content, including just submitted (and not yet approved and not published) review.
   // So we have to redirect it to a target provider page if it's set OR to the home page.
   
-  if ($user->uid) {
+  if (!$user->uid) {
     if (isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id']) {
       // Redirect to a target provider page, if it's set.
       $_GET['destination'] = ltrim(url('node/' . $form_state['values']['field_ref_provider']['und'][0]['target_id']), '/');
