@@ -82,15 +82,9 @@ function gv_misc_approveContent($type, $id) {
       $approve = explode('=', $id);
       if(count($approve) != 2 ) {
         drupal_access_denied();
-        return;
       }
-      else {
-        $code = $approve[0];
-        $email = $approve[1];
-      }
-      
-      dpm($code);
-      dpm($email);
+      $code = $approve[0];
+      $email = $approve[1];
       
       $query = db_select('field_data_field_r_email', 're')
         ->fields('re', array('entity_id'));
