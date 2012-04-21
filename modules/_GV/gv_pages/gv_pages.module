@@ -1453,7 +1453,7 @@ function gv_pages_node_view($node, $view_mode) {
       dpm($node);
       // Show voting results for this provider and user (author of this review).
       // Take votes from a local ratings field if it's not empty.
-      if (!empty($node->field_ratings_oprovider)) {
+      if (!empty($node->field_ratings_oprovider['und'][0]['value'])) {
         $votes_simple_format = unserialize($node->field_ratings_oprovider['und'][0]['value']);
         // Rebuild the array to the votes api format
         foreach ($votes_simple_format as $tag => $value) {
