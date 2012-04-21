@@ -36,7 +36,7 @@ function gv_misc_menu() {
     'title' => 'Approve content',
     'page callback' => 'gv_misc_approveContent',
     'page arguments' => array(1,2),
-    'access arguments' => array('administer content'),
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
   return $items;
@@ -57,7 +57,14 @@ function gv_misc_gotoReviewsToApprove() {
 function gv_misc_approveContent($type, $id) {
 
   switch ($type) {
+    
     case 'review':
+      
+      global $user;
+      if (!in_array('administrator', $user->roles)) {
+        drupal_access_denied();
+        return;
+      }
       /*
       if (!$id || !$node = node_load($id)) {
         return t('Wrong Review Id');
