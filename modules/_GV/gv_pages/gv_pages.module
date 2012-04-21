@@ -1332,7 +1332,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   // Unregistered user cannot view any unpublished content, including just submitted (and not yet approved and not published) review.
   // So we have to redirect it to a target provider page if it's set OR to the home page.
   
-  if (!$user->uid) {
+  if ($user->uid) {
     if (isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) && $form_state['values']['field_ref_provider']['und'][0]['target_id']) {
       // Redirect to a target provider page, if it's set.
       $_GET['destination'] = ltrim(url('node/' . $form_state['values']['field_ref_provider']['und'][0]['target_id']), '/');
