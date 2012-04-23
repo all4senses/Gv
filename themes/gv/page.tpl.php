@@ -1,4 +1,4 @@
-<div id="container" class="clearfix">
+<!-- <div id="container" class="clearfix"> -->
 
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
@@ -19,7 +19,7 @@
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
   </header> <!-- /#header -->
 
-  <div id="all-content">
+  <div id="all-content" class="clearfix">
     
       <section id="main" role="main" class="clearfix">
 
@@ -53,10 +53,10 @@
   
   
   <footer id="footer" role="contentinfo" class="clearfix">
-    <div class="inside">
+    <div id="footer-inside">
       <?php print render($page['footer']) ?>
       <?php print $feed_icons ?>
     </div> <!-- /.inside -->
   </footer> <!-- /#footer -->
 
-</div> <!-- /#container -->
+<!-- </div> --> <!-- /#container -->
