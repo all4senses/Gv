@@ -426,7 +426,7 @@ function theme_gv_misc_headerLinks($vars) {
   }
   $class = isset($vars['class']) ? $vars['class'] : 'header-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
-  $out = '<ul class="' . $class . '">;
+  $out = '<ul class="' . $class . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
