@@ -10,9 +10,8 @@
   <header id="header" role="banner" class="clearfix">
 
     <nav id="navigation" role="navigation" class="clearfix">
-      
-      <div id="header-menu-back"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a></div>
-
+      <div id="header-menu-back"></div>
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a>
       <?php print render($page['header']); ?>
     </nav> <!-- /#navigation -->
 
