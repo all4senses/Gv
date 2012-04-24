@@ -11,13 +11,14 @@
 function gv_pages_menu() {
 
   $items['home'] = array(
-    'title' => 'Home page',
-    'description' => 'Home page',
+    //'title' => 'Home page',
+    //'description' => 'Home page',
     //'page callback' => 'drupal_get_form',
     'page callback' => 'gv_pages_showPage',
     'page arguments' => array('gv_pages_home'/*$name*/, 'via_function'/* $call_type: direct_theme OR via_function */, 'gv_pages_buildHome' /*$build_function*/), //array(1),
-    'access callback' => 'gv_pages_access',
-    'access arguments' => array('home'),
+    //'access callback' => 'gv_pages_access',
+    //'access arguments' => array('home'),
+    'access arguments' => array('access content'),  
     'type' => MENU_CALLBACK,
   );  
   $items['news-topics'] = array(
@@ -118,7 +119,7 @@ function gv_pages_buildHome($name, $data) {
   $out .= render(node_view($seo_welcome_node));
   
   // Content of a home page saved in db as a var.
-  $out .= theme($name, array('data' => $data));
+  ////$out .= theme($name, array('data' => $data));
   
   // Get block for Latest VoIP articles (+ news, blog posts, etc).
   $block_data = array('module' => 'views', 'delta' => 'articles-block');
