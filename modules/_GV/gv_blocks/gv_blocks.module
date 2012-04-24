@@ -362,10 +362,7 @@ function gv_blocks_getBlockThemed($block_data)
  * Returns a content of a block Get access to the VoIP footprint... Banner.
  */
 function gv_blocks_get_accessToFootprintBanner() {
-  $block_data = array('module' => 'gv_blocks', 'delta' => 'get-access-banner', 'subject_visible' => FALSE);
-  $block = array();
-  $block['content'] = '<div class="title">' . t('GET ACCESS TO THE LARGEST VOIP FOOTPRINT IN THE NATION') . '</div><div class="link">' . l(t('Learn more'), '/') . '</div>';
-  return gv_blocks_wrapInBlockThemed($block_data, $block);
+  return '<div class="title">' . t('GET ACCESS TO THE LARGEST VOIP FOOTPRINT IN THE NATION') . '</div><div class="link">' . l(t('Learn more'), '/') . '</div>';
 }
 
 
