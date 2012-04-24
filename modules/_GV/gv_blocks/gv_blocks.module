@@ -54,7 +54,10 @@ function gv_blocks_block_info() {
     'info' => t('Request a quote'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+  $blocks['get_access_banner'] = array(
+    'info' => t('Get access... Banner'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   // Topics block for different content types.
   $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
   foreach ($content_types as $content_type => $label) {
@@ -116,7 +119,11 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Request a quote');
       $block['content'] = gv_blocks_get_requestQuote();
       break; 
-
+    case 'get_access_banner':
+      $block['subject'] = t('Get access... Banner');
+      $block['content'] = gv_blocks_get_accessToFootprintBanner();
+      break;         
+        
     default:
       // Get blocks for topics for a specific content type.
       if (strpos($delta, '_topics')) {
@@ -348,6 +355,17 @@ function gv_blocks_getBlockThemed($block_data)
     return gv_blocks_wrapInBlockThemed($block_data, $block);
   }
   return NULL;
+}
+
+
+/**
+ * Returns a content of a block Get access to the VoIP footprint... Banner.
+ */
+function gv_blocks_get_accessToFootprintBanner() {
+  $block_data = array('module' => 'gv_blocks', 'delta' => 'get-access-banner', 'subject_visible' => FALSE);
+  $block = array();
+  $block['content'] = '<div class="title">' . t('GET ACCESS TO THE LARGEST VOIP FOOTPRINT IN THE NATION') . '</div><div class="link">' . l(t('Learn more'), '/') . '</div>';
+  return gv_blocks_wrapInBlockThemed($block_data, $block);
 }
 
 
