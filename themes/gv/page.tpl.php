@@ -18,13 +18,23 @@
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
   </header> <!-- /#header -->
 
+  
+  <?php if ($page['highlighted']): ?>
+    <section id="highlighted" class="clearfix">
+      <?php print render($page['highlighted']); ?>
+    </section>
+  <?php endif; ?>
+  
+  
   <div id="all-content" class="clearfix">
+      
+      
     
       <section id="main" role="main" class="clearfix">
 
           <?php print $messages; ?>
           <a id="main-content"></a>
-          <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
+          
           <?php print render($title_prefix); ?>
           <?php if ($title): ?><h1 class="title" id="page-title"><?php print $title; ?></h1><?php endif; ?>
           <?php print render($title_suffix); ?>
@@ -48,7 +58,7 @@
         </aside>  <!-- /#sidebar-second -->
       <?php endif; ?>
 
-  </div> <!-- /#content -->
+  </div> <!-- /#all-content -->
   
   
   <footer id="footer" role="contentinfo" class="clearfix">
