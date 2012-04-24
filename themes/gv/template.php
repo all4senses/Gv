@@ -97,7 +97,7 @@ function gv_preprocess_block(&$variables, $hook) {
   if ($variables['block_html_id'] == 'block-system-main') {
     $variables['theme_hook_suggestions'][] = 'block__bare';
   }
-  dpm($variables);
+//dpm($variables);
   $variables['title_attributes_array']['class'][] = 'block-title';
 }
 
