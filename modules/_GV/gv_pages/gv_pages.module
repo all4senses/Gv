@@ -1261,9 +1261,17 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       }
     }
   }
-  
-  $p_data_quick['re']['fees']['money_back'] = isset($p_data['services']['s_residential']['re_money_back_guarantee']) ? $p_data['services']['s_residential']['re_money_back_guarantee'] : '';
-  //$p_data_quick['re']['fees']['money_back']
+  $p_data_quick['re']['fees'] = array(
+    'back' => isset($p_data['services']['s_residential']['re_money_back_guarantee']) ? $p_data['services']['s_residential']['re_money_back_guarantee'] : '',
+    'monthly' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] : '',
+    'setup' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees'] : '',
+  );
+  $p_data_quick['bu']['fees'] = array(
+    'back' => isset($p_data['services']['s_business']['bu_money_back_guarantee']) ? $p_data['services']['s_business']['bu_money_back_guarantee'] : '',
+    'monthly' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees'] : '',
+    'setup' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees'] : '',
+  );
+  $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
   
   dpm($p_data_quick);
   dpm($p_data);
