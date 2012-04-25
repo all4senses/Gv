@@ -808,7 +808,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
     case 'longdistance_fees':
     case 'setup_fees':
       
-      return '123';
+      
       
       dpm($data);
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
@@ -816,6 +816,9 @@ function wdg_misc_getProviderQuickData($target, $data) {
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
       dpm($all_data_quick);
+      
+      return '123';
+      
 //      
 //      $p_fees = $all_fees[$data['data']->nid];
 //      //dpm($data['data']);
