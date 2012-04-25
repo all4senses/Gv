@@ -815,7 +815,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
               //. '<div class="voters">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . t('reviews') . '</div>'
               ;
         
-        $out = '<div class="details">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . $data['data']->node_title . '<br>' . t('Reviews') . '</div>' . $out . ' (' . $data['data']->votingapi_cache_node_percent_features_average_value . ')';
+        $out = '<div class="details">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . $data['data']->node_title . '<br>' . t('Reviews') . '</div>' . $out . ' (' . (0.05 * $data['data']->votingapi_cache_node_percent_features_average_value) . ')';
       }
       return $out;
       
