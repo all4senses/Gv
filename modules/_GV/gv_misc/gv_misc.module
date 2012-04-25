@@ -804,9 +804,8 @@ function wdg_misc_getProviderQuickData($target, $data) {
   
   switch($target) {
     
-    case 'monthly':
-    case 'back':
-    case 'setup':
+    
+    case 'plan':
       
       dpm($data);
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
@@ -814,6 +813,20 @@ function wdg_misc_getProviderQuickData($target, $data) {
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
       dpm($all_data_quick);
+      
+      return $all_data_quick[$data['data']->nid][$target];
+      
+      
+      
+      
+    case 'monthly':
+    case 'back':
+    case 'setup':
+      
+      if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
+        $all_data_quick = gv_misc_getProvidersDataQuick();
+        $_SESSION['p_all_data_quick'] = $all_data_quick;
+      }
       
       return $all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target];
       
@@ -821,12 +834,10 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
     case 'i_web':
       
-      dpm($data);
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
-      dpm($all_data_quick);
       
       return $all_data_quick[$data['data']->nid][$target];
       
