@@ -806,7 +806,6 @@ function wdg_misc_getProviderQuickData($target, $data) {
     
     case 'rating':
     
-      dpm($data);
       $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
                 
@@ -825,7 +824,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
     case 'plan':
       
-      
+      //dpm($data);
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
