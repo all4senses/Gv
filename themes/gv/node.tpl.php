@@ -11,7 +11,15 @@
   
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
-        <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+        <h2<?php print $title_attributes; ?>>
+          <?php if (!isset($node->title_no_link)): ?>
+            <a href="<?php print $node_url; ?>">
+              <?php print $title; ?>
+            </a>
+          <?php else: ?>
+            <?php print $title; ?>
+          <?php endif; ?>
+        </h2>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
   
