@@ -326,6 +326,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Hide a placeholder field field_p_data
       $form['field_p_data']['#access'] = FALSE;
       $form['field_p_fees_save']['#access'] = FALSE;
+      $form['field_p_data_quick']['#access'] = FALSE;
       
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
