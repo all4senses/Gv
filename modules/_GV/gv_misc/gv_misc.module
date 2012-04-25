@@ -804,9 +804,9 @@ function wdg_misc_getProviderQuickData($target, $data) {
   
   switch($target) {
     
-    case 'monthly_fees':
-    case 'longdistance_fees':
-    case 'setup_fees':
+    case 'monthly':
+    case 'back':
+    case 'setup':
       
       
       
@@ -817,7 +817,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       }
       dpm($all_data_quick);
       
-      return '123';
+      return $all_data_quick[$data['data']->nid][$data['service_type']][$target];
       
 //      
 //      $p_fees = $all_fees[$data['data']->nid];
