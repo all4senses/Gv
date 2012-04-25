@@ -1233,6 +1233,35 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       unset($_SESSION['all_fees']);
     }
   }
+  
+  
+  
+  
+  // Second trial... 
+  // Save some more aggregated data to other field
+  // Save collected FEES data from temporary fields to a excessive field for using it from views
+  if (isset($p_data['services']['s_residential']['weights_re_features'])) {
+    $count = 0;
+    foreach ($p_data['services']['s_residential']['weights_re_features'] as $term_id => $term_data) {
+      $p_data_quick['re']['fees'][$term_id] = $term_data;
+      if ($count++ > 2) {
+        break;
+      }
+    }
+  }
+  if (isset($p_data['services']['s_business']['weights_bu_features'])) {
+    $count = 0;
+    foreach ($p_data['services']['s_business']['weights_bu_features'] as $term_id => $term_data) {
+      $p_data_quick['bu']['fees'][$term_id] = $term_data;
+      if ($count++ > 2) {
+        break;
+      }
+    }
+  }
+  dpm($p_data_quick);
+  
+  
+  
 }
 
 
