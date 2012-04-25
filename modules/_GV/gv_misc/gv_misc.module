@@ -804,15 +804,31 @@ function wdg_misc_getProviderQuickData($target, $data) {
   
   switch($target) {
     
+    case 'rating':
     
+      dpm($data);
+      $out = '';
+      if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
+                
+        $out = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_features_average_value, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+              //. '<div class="rating">' . $data['data']->votingapi_cache_node_percent_features_average_value . '%</div>'
+              . '<div class="voters">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . t('reviews') . '</div>'
+              ;
+      }
+      return $out . '<div class="details">' . l(t('Details'), 'node/' . $data['data']->nid) . '</div>';
+      
+      
+      
+      
+      
     case 'plan':
       
-      dpm($data);
+      
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
-      dpm($all_data_quick);
+      //dpm($all_data_quick);
       
       return $all_data_quick[$data['data']->nid][$target];
       
