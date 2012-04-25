@@ -495,7 +495,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['other_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['other_fees'] : '',
                       );
-                      
+                    
+                  
+                  $form['services']['s_residential']['re_money_back_guarantee'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Money Back Guarentee'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_money_back_guarantee']) ? $p_data['services']['s_residential']['re_money_back_guarantee'] : '',
+                  );
+                  
             
                   $form['services']['s_residential']['re_specialnotes_title'] = array(
                     '#type' => 'textfield',
@@ -573,6 +581,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     //'#description' => t(''),
                     '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_text']) ? $p_data['services']['s_business']['bu_basicinfo_text'] : '',
                   );
+                  
+                  
+                  
+                  
                   $form['services']['s_business']['bu_basicinfo_fees'] = array(
                     '#type' => 'fieldset',
                     '#collapsible' => TRUE,
@@ -625,6 +637,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       );
                       
                   
+                  $form['services']['s_business']['bu_money_back_guarantee'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Money Back Guarentee'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_money_back_guarantee']) ? $p_data['services']['s_residential']['bu_money_back_guarantee'] : '',
+                  );
                   
             
                   $form['services']['s_business']['bu_specialnotes_title'] = array(
