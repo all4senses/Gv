@@ -777,6 +777,50 @@ function gv_misc_views_pre_render(&$view) {
 } 
 
 
+
+/**
+ * Return specific variable value from p_data_quick for a provider depending on the filter value (business OR residential, etc)
+ */
+function wdg_misc_getProviderQuickData($target, $data) {
+  
+  $out = '';
+  
+  switch($target) {
+    
+    case 'monthly_fees':
+    case 'longdistance_fees':
+    case 'setup_fees':
+      
+      dpm($data);
+//      if (!$all_fees = @$_SESSION['all_fees']) {
+//        $all_fees = gv_misc_getProvidersFees();
+//        $_SESSION['all_fees'] = $all_fees;
+//      }
+//      
+//      $p_fees = $all_fees[$data['data']->nid];
+//      //dpm($data['data']);
+//      //dpm($p_fees);
+//      
+//       switch($data['exposed_raw_input']['type']) {
+//        case 'business':
+//          if (isset($p_fees['bu'][$target]) && $p_fees['bu'][$target]) {
+//            return '$' . $p_fees['bu'][$target];
+//          }
+//          break;
+//        case 'residential':
+//          if (isset($p_fees['re'][$target]) && $p_fees['re'][$target]) {
+//            return '$' . $p_fees['re'][$target];
+//          }
+//          break;
+//       }
+      
+      break;
+    
+    
+  }
+}
+
+
 /**
  * Return specific variable value for a provider depending on the filter value (business OR residential, etc)
  */
