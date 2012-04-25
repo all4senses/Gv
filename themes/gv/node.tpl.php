@@ -1,5 +1,6 @@
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <div class="inside">
 <?php endif; ?>
 
   <?php if ($user_picture || $display_submitted || !$page): ?>
@@ -42,7 +43,7 @@
     ?>
   </div>
     
-  <div class="shadow"></div>
+  
        
   <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
     <footer>
@@ -54,5 +55,8 @@
   <?php print render($content['comments']); ?>
 
 <?php if (!$page): ?>
+  </div> <!-- /.inside -->
+  <div class="shadow"></div>
   </article> <!-- /.node -->
+  
 <?php endif; ?>
