@@ -11,7 +11,7 @@
 function gv_pages_menu() {
 
   $items['home'] = array(
-    'title' => 'A',
+    'title' => 'Home page',
     //'description' => 'Home page',
     //'page callback' => 'drupal_get_form',
     'page callback' => 'gv_pages_showPage',
@@ -122,8 +122,8 @@ function gv_pages_buildHome($name, $data) {
   ////$out .= theme($name, array('data' => $data));
   
   // Get block for Latest VoIP articles (+ news, blog posts, etc).
-  $block_data = array('module' => 'views', 'delta' => 'articles-block');
-  $out .= gv_blocks_getBlockThemed($block_data);
+//  $block_data = array('module' => 'views', 'delta' => 'articles-block');
+//  $out .= gv_blocks_getBlockThemed($block_data);
   
   // Get block for Top pick business providers.
   $block_data = array('module' => 'views', 'delta' => 'providers-block');
