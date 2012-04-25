@@ -1216,6 +1216,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     uasort($p_data['services']['s_business']['weights_bu_features_sip'], 'wdg_misc_sortArrayByWeight');
   }
   
+  
+  
+  
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
   
@@ -1243,8 +1246,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   if (isset($p_data['services']['s_residential']['weights_re_features'])) {
     $count = 0;
     foreach ($p_data['services']['s_residential']['weights_re_features'] as $term_id => $term_data) {
-      $p_data_quick['re']['fees'][$term_id] = $term_data;
-      if ($count++ > 2) {
+      $p_data_quick['re']['feat'][$term_id] = $term_data;
+      if ($count++ > 1) {
         break;
       }
     }
@@ -1252,14 +1255,14 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   if (isset($p_data['services']['s_business']['weights_bu_features'])) {
     $count = 0;
     foreach ($p_data['services']['s_business']['weights_bu_features'] as $term_id => $term_data) {
-      $p_data_quick['bu']['fees'][$term_id] = $term_data;
-      if ($count++ > 2) {
+      $p_data_quick['bu']['feat'][$term_id] = $term_data;
+      if ($count++ > 1) {
         break;
       }
     }
   }
   dpm($p_data_quick);
-  
+  dpm($form_state['values']['weights_re_features']);
   
   
 }
