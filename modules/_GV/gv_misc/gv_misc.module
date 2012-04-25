@@ -806,15 +806,22 @@ function wdg_misc_getProviderQuickData($target, $data) {
     
     case 'features':
       
+      $out = '';
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
       //dpm($all_data_quick);
       
-      $ratings = $all_data_quick[$data['data']->nid][$data['service_type']]['feat'];
-      dpm($ratings);
-      return; // $all_data_quick[$data['data']->nid][$target];
+      $features = $all_data_quick[$data['data']->nid][$data['service_type']]['feat'];
+      dpm($features);
+      if (!empty($features)) {
+        foreach($features as $tid => $term) {
+          $out .= '<div class="feature">' . t($term) . '</div>';
+        }
+      }
+      
+      return $out; // $all_data_quick[$data['data']->nid][$target];
       
       
       
