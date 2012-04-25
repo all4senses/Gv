@@ -117,7 +117,6 @@ function gv_pages_buildHome($name, $data) {
   
   $seo_welcome_node = node_load(55);
   $seo_welcome_node->title_no_link = TRUE;
-  dpm($seo_welcome_node);
   $out .= render(node_view($seo_welcome_node, 'full'));
   
   // Content of a home page saved in db as a var.
