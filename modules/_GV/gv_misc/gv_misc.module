@@ -810,12 +810,12 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       return '123';
       
-      //dpm($data);
+      dpm($data);
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
-      //dpm($all_data_quick);
+      dpm($all_data_quick);
 //      
 //      $p_fees = $all_fees[$data['data']->nid];
 //      //dpm($data['data']);
