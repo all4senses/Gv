@@ -1246,7 +1246,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   if (isset($p_data['services']['s_residential']['weights_re_features'])) {
     $count = 0;
     foreach ($p_data['services']['s_residential']['weights_re_features'] as $term_id => $term_data) {
-      $p_data_quick['re']['feat'][$term_id] = $term_data;
+      $p_data_quick['re']['feat'][$term_id] = $term_data['name'];
       if ($count++ > 1) {
         break;
       }
@@ -1255,14 +1255,18 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   if (isset($p_data['services']['s_business']['weights_bu_features'])) {
     $count = 0;
     foreach ($p_data['services']['s_business']['weights_bu_features'] as $term_id => $term_data) {
-      $p_data_quick['bu']['feat'][$term_id] = $term_data;
+      $p_data_quick['bu']['feat'][$term_id] = $term_data['name'];
       if ($count++ > 1) {
         break;
       }
     }
   }
+  
+  $p_data_quick['re']['fees']['money_back'] = isset($p_data['services']['s_residential']['re_money_back_guarantee']) ? $p_data['services']['s_residential']['re_money_back_guarantee'] : '';
+  //$p_data_quick['re']['fees']['money_back']
+  
   dpm($p_data_quick);
-  dpm($form_state['values']['weights_re_features']);
+  dpm($p_data);
   
   
 }
