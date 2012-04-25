@@ -804,6 +804,64 @@ function wdg_misc_getProviderQuickData($target, $data) {
   
   switch($target) {
     
+    case 'features':
+      
+      if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
+        $all_data_quick = gv_misc_getProvidersDataQuick();
+        $_SESSION['p_all_data_quick'] = $all_data_quick;
+      }
+      //dpm($all_data_quick);
+      
+      $ratings = $all_data_quick[$data['data']->nid][$data['service_type']]['feat'];
+      dpm($ratings);
+      return; // $all_data_quick[$data['data']->nid][$target];
+      
+      
+      
+      
+      
+      if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
+        return NULL;
+      }
+      switch($data['exposed_raw_input']['type']) {
+        case 'business':
+          if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
+            $features = $provider_data['services']['s_business']['weights_bu_features'];
+          }
+          if (isset($provider_data['services']['s_business']['BU_preface_title'])) {
+            $out = '<div class="plan">' . $provider_data['services']['s_business']['bu_preface_title'] . '</div>';
+          }
+          break;
+        
+        case 'residential':
+          if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
+            $features = $provider_data['services']['s_business']['weights_bu_features'];
+          }
+          if (isset($provider_data['services']['s_residential']['re_preface_title'])) {
+            $out = '<div class="plan">' . $provider_data['services']['s_residential']['re_preface_title'] . '</div>';
+          }
+          break;
+      } // End of switch($data['exposed_raw_input']['type']) {
+      
+      if (is_array($features)) {
+        $out .= '<div class="features">';
+        $count = 0;
+        foreach ($features as $feature) {
+          $out .= '<div class="feature">' . $feature['name'] . '</div>';
+          if ($count++ > 1) {
+            break;
+          }
+        }
+        $out .= '</div>';
+      }
+      
+      
+      break;
+    
+    
+    
+    
+    
     case 'rating':
     
       $out = '';
