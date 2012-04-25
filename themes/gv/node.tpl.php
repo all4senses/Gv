@@ -41,7 +41,9 @@
       print render($content);
     ?>
   </div>
-
+    
+  <div class="shadow"></div>
+       
   <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
     <footer>
       <?php print render($content['field_tags']); ?>
