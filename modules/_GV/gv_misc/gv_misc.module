@@ -808,8 +808,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       $out = '';
       // If data is not in the Session or its age more than 5 hours, reset it.
-      //if (!$all_data_quick = @$_SESSION['p_all_data_quick'] || time() > ($all_data_quick['timestamp'] + 18000) ) {
-      if (1) {
+      if (!$all_data_quick = @$_SESSION['p_all_data_quick'] || time() > ($all_data_quick['timestamp'] + 18000) ) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $all_data_quick['timestamp'] = time();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
