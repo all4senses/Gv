@@ -851,7 +851,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
     case 'plan':
       
-      //dpm($data);
+      dpm($data);
       if (!$all_data_quick = @$_SESSION['p_all_data_quick']) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
