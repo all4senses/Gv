@@ -341,7 +341,32 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   if (is_array($block['content'])) {
     $block['content'] = render($block);
   }
-  return '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . '">' . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )? '<h2 class="block-title">' . $block['subject'] . '</h2>':'') . '<div class="content">' . $block['content'] . '</div></section>';
+  
+  if (isset($block_data['shadow']) && $block_data['shadow']) {
+    return 
+      '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . '">' 
+        . '<div class="inside">'
+            . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )
+                ? 
+                '<h2 class="block-title">' . $block['subject'] . '</h2>'
+                :
+                '') 
+            . '<div class="content">' . $block['content'] . '</div>
+          </div> <!-- /.inside -->
+          <div class="shadow"></div>
+      </section>';
+  }
+  else {
+    return 
+      '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . '">' 
+         . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )
+            ? 
+            '<h2 class="block-title">' . $block['subject'] . '</h2>'
+            :
+            '') 
+         . '<div class="content">' . $block['content'] . '</div>
+      </section>';
+  }
 }
 
 
