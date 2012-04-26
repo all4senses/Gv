@@ -858,7 +858,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       }
       //dpm($all_data_quick);
       
-      return $all_data_quick[$data['data']->nid][$target];
+      return isset($all_data_quick[$data['data']->nid][$target]) ? $all_data_quick[$data['data']->nid][$target] : '';
       
       
       
@@ -871,8 +871,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
         $all_data_quick = gv_misc_getProvidersDataQuick();
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
-      
-      return $all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target];
+      return isset($all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target]) ? $all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target] : '';
       
     
       
@@ -883,7 +882,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
         $_SESSION['p_all_data_quick'] = $all_data_quick;
       }
       
-      return $all_data_quick[$data['data']->nid][$target];
+      return isset($all_data_quick[$data['data']->nid][$target]) ? $all_data_quick[$data['data']->nid][$target] : '';
 
   }
 }
