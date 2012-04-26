@@ -813,8 +813,8 @@ function wdg_misc_getProviderQuickData($target, $data) {
       }
       //dpm($all_data_quick);
       
-      $plan_title = $all_data_quick[$data['data']->nid][$data['service_type']]['plan'];
-      $features = $all_data_quick[$data['data']->nid][$data['service_type']]['feat'];
+      $plan_title = isset($all_data_quick[$data['data']->nid][$data['service_type']]['plan']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['plan'] : '';
+      $features = isset($all_data_quick[$data['data']->nid][$data['service_type']]['feat']) ?  $all_data_quick[$data['data']->nid][$data['service_type']]['feat'] : '';
       //dpm($features);
       if ($plan_title) {
         $out .= '<div class="plan">' . $plan_title . '</div>';
@@ -827,48 +827,6 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       return $out; // $all_data_quick[$data['data']->nid][$target];
       
-      
-      
-      
-      
-      if (!$provider_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
-        return NULL;
-      }
-      switch($data['exposed_raw_input']['type']) {
-        case 'business':
-          if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
-            $features = $provider_data['services']['s_business']['weights_bu_features'];
-          }
-          if (isset($provider_data['services']['s_business']['BU_preface_title'])) {
-            $out = '<div class="plan">' . $provider_data['services']['s_business']['bu_preface_title'] . '</div>';
-          }
-          break;
-        
-        case 'residential':
-          if (isset($provider_data['services']['s_business']['weights_bu_features'])) {
-            $features = $provider_data['services']['s_business']['weights_bu_features'];
-          }
-          if (isset($provider_data['services']['s_residential']['re_preface_title'])) {
-            $out = '<div class="plan">' . $provider_data['services']['s_residential']['re_preface_title'] . '</div>';
-          }
-          break;
-      } // End of switch($data['exposed_raw_input']['type']) {
-      
-      if (is_array($features)) {
-        $out .= '<div class="features">';
-        $count = 0;
-        foreach ($features as $feature) {
-          $out .= '<div class="feature">' . $feature['name'] . '</div>';
-          if ($count++ > 1) {
-            break;
-          }
-        }
-        $out .= '</div>';
-      }
-      
-      
-      break;
-    
     
     
     
@@ -926,29 +884,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       }
       
       return $all_data_quick[$data['data']->nid][$target];
-      
-      
-//      
-//      $p_fees = $all_fees[$data['data']->nid];
-//      //dpm($data['data']);
-//      //dpm($p_fees);
-//      
-//       switch($data['exposed_raw_input']['type']) {
-//        case 'business':
-//          if (isset($p_fees['bu'][$target]) && $p_fees['bu'][$target]) {
-//            return '$' . $p_fees['bu'][$target];
-//          }
-//          break;
-//        case 'residential':
-//          if (isset($p_fees['re'][$target]) && $p_fees['re'][$target]) {
-//            return '$' . $p_fees['re'][$target];
-//          }
-//          break;
-//       }
-      
-      break;
-    
-    
+
   }
 }
 
