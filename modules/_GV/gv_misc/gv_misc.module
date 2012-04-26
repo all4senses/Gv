@@ -833,6 +833,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
     
     case 'rating':
     
+      dpm($data); 
       $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
                 
