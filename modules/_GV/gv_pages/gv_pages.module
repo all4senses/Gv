@@ -901,6 +901,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         );
         $form['votes']['rating_' . $vote_key . '_choice'] = array(
           '#type' => 'container',
+          '#default_value' => 'test',
           '#weight' => $weight++,
           
         );
