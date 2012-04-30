@@ -899,12 +899,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => $weight++,
           '#required' => TRUE,
         );
-        $form['votes']['rating_' . $vote_key . '_choice'] = array(
-          '#type' => 'container',
-          '#default_value' => 'test',
+        $form['votes']['rating_' . $vote_key . '_choice1'] = array(
+          //'#type' => 'container',
+          '#markup' => '<div id="rating_' . $vote_key . '_choice">test</div>',
           '#weight' => $weight++,
-          
-        );
+         );
       }
       
       $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
