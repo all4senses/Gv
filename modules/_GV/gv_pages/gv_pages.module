@@ -811,7 +811,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      //dpm($form);
+      dpm($form);
       
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
@@ -879,7 +879,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
       // Rate and vote group.
       //$rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
-      $rating_options = array('' => FALSE, '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
+      $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
       $weight = 8;
      
       $vote_keys = array('features', 'sound', 'rely', 'money', 'service');
@@ -911,7 +911,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['votes']['rating_recommend'] = array(
           //'#type' => 'select',
           '#type' => 'radios',
-          '#title' => t('Would you recommend this VoIP provider'),
+          '#title' => t('Would you recommend this VoIP provider?'),
           '#options' => $rating_recommend_options,
           '#default_value' => FALSE,
           '#weight' => $weight++,
@@ -1350,7 +1350,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   }
   
   
-  $rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider');
+  $rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
   foreach ($rating_options as $rating_option => $rating_option_title) {
     if ($form_state['values'][$rating_option] === FALSE) {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
