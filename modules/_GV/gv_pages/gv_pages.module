@@ -898,7 +898,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#options' => $rating_options,
           '#default_value' => $rating_options['0'],
           '#weight' => $weight++,
-          '#required' => TRUE,
+          //'#required' => TRUE,
         );
         $form['votes']['rating_' . $vote_key . '_choice1'] = array(
           //'#type' => 'container',
