@@ -913,7 +913,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'radios',
           '#title' => t('Would you recommend this VoIP provider'),
           '#options' => $rating_recommend_options,
-          '#default_value' => NULL,
+          '#default_value' => 2,
           '#weight' => $weight++,
           '#required' => TRUE,
       );
