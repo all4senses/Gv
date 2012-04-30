@@ -879,7 +879,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
       // Rate and vote group.
       //$rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
-      $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
+      $rating_options = array('0' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
      
       $vote_keys = array('features', 'sound', 'rely', 'money', 'service');
@@ -896,7 +896,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'select',
           '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
           '#options' => $rating_options,
-          '#default_value' => $rating_options[''],
+          '#default_value' => $rating_options['0'],
           '#weight' => $weight++,
           '#required' => TRUE,
         );
