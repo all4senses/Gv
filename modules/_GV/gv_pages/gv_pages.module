@@ -1121,6 +1121,31 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         } // End of A provider has been selected from a list.
       } // End of Edit a review page.
       
+      
+      
+      
+      
+      
+      
+      
+      
+      $module_path = drupal_get_path('module', 'gv_pages');
+  
+      $form['#attached']['css'] = array(
+      //  $module_path . '/css/gv_pages.css',
+        '/sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+      );
+      $form['#attached']['js'] = array(
+        $module_path . '/js/gv_review_stars.js',
+        '/sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+      );
+      $form['#attached']['library'][] = array('system', 'ui.widget');
+
+  
+  
+  
+  
+  
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#submit'][] = 'gv_pages_submitForm_review';
       
