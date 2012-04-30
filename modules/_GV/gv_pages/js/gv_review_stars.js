@@ -5,7 +5,7 @@
        
        $('.form-item-rating-features').stars({
           inputType: "select",
-          captionEl: $('#edit-rating-features-choice'),
+          captionEl: $('#edit_rating_features_choice'),
           //captionEl: 'edit-rating-features-choice',
           cancelShow: false
         });
