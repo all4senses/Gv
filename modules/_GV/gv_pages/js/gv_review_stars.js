@@ -5,6 +5,7 @@
        
        $('.form-item-rating-features').stars({
           inputType: "select",
+          captionEl: $('#rating_features_choice'),
           cancelShow: false
         });
       
