@@ -909,7 +909,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
       $form['votes']['rating_recommend'] = array(
           //'#type' => 'select',
-          '#type' => 'radio',
+          '#type' => 'radios',
           '#title' => t('Would you recommend this VoIP provider'),
           '#options' => $rating_recommend_options,
           '#default_value' => $rating_recommend_options[''],
