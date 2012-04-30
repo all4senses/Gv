@@ -4,6 +4,7 @@
     attach: function (context, settings) {
        
        $('#edit-rating-features').stars({
+          inputType: "select",
           cancelShow: false
         });
       
