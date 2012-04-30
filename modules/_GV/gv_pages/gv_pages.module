@@ -913,9 +913,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'radios',
           '#title' => t('Would you recommend this VoIP provider'),
           '#options' => $rating_recommend_options,
-          //'#default_value' => $rating_recommend_options[''],
+          '#default_value' => '',
           '#weight' => $weight++,
-          //'#required' => TRUE,
+          '#required' => TRUE,
       );
       
       // Hide helper hidden field (for saving temporary serialized ratings data)
