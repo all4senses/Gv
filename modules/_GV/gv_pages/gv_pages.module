@@ -1349,6 +1349,16 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     }
   }
   
+  
+  $rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider');
+  foreach ($rating_options as $rating_option => $rating_option_title) {
+    if ($form_state['values'][$rating_option] === FALSE) {
+      form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
+    }
+  }
+  
+  
+  
   // An Administrator MUST set the real title for the review.
   global $user;
   if (in_array('administrator', $user->roles) && $form_state['values']['title'] == 'Unapproved review') {
