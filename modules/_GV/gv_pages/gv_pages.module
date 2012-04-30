@@ -812,6 +812,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       global $user;
       
       dpm($form);
+      return;
       
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
