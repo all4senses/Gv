@@ -879,7 +879,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
       // Rate and vote group.
       //$rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
-      $rating_options = array('0' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
+      $rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $weight = 8;
      
       $vote_keys = array('features', 'sound', 'rely', 'money', 'service');
@@ -896,7 +896,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#type' => 'select',
           '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
           '#options' => $rating_options,
-          '#default_value' => $rating_options['0'],
+          '#default_value' => $rating_options[''],
           '#weight' => $weight++,
           '#required' => TRUE,
         );
@@ -907,14 +907,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
          );
       }
       
-      $rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
-      //$rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+      //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
+      $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
       $form['votes']['rating_recommend'] = array(
           //'#type' => 'select',
           '#type' => 'radios',
           '#title' => t('Would you recommend this VoIP provider'),
           '#options' => $rating_recommend_options,
-          '#default_value' => -5,
+          '#default_value' => FALSE,
           '#weight' => $weight++,
           '#required' => TRUE,
       );
