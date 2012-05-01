@@ -811,7 +811,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      dpm($form);
+      //dpm($form);
       
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
@@ -1411,6 +1411,16 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     }
   }
   
+  
+  
+  if (!$form_state['values']['lines']) {
+    form_set_error('lines',t('Please set a numbers of lines'));
+  }
+  else {
+    // Save several vars in the field
+    $field_r_data = serialize(array('lines' => $form_state['values']['lines'], 'pros' => $form_state['values']['pros'], 'cons' => $form_state['values']['cons']));
+    form_set_value($form['field_r_data'], array('und' => array(0 => array('value' => $field_r_data))), $form_state);
+  }
   
   
   // An Administrator MUST set the real title for the review.
