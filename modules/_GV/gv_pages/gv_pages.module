@@ -821,7 +821,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
-      $fields_to_rebuild = array('field_r_fname' => 'First', 'field_r_lname' => 'Second', 'field_r_email' => 'Enter valid email');
+      $fields_to_rebuild = array('field_r_fname' => 'First', 'field_r_lname' => 'Last', 'field_r_email' => 'Enter valid email');
       foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
         $temp_field = $form[$field_to_rebuild]['und'][0];
         $form[$field_to_rebuild] = array(
