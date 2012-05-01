@@ -820,13 +820,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['title']['#access'] = FALSE;
       }
       
+      $temp_fname = $form['field_r_fname']['und'][0];
+      $form['field_r_fname'] = array(
+          '#type' => 'textfield',
+          '#title' => t($temp_fname['#title']),
+          '#default_value' => $temp_fname['value']['#default_value'],
+          '#description' => $temp_fname['#description'],
+          '#attributes' => array('title' => t('First')),
+      );
       
       // Add hints to some fields.
 //      $form['field_r_fname']['#attributes']['title'] = t('First');
 //      $form['field_r_lname']['#attributes']['title'] = t('Last');
       
-      $form['field_r_fname']['und'][0]['#attributes']['title'] = t('First');
-      $form['field_r_lname']['und'][0]['#attributes']['title'] = t('Last');
+      //$form['field_r_fname']['und'][0]['#attributes']['title'] = t('First');
+      //$form['field_r_lname']['und'][0]['#attributes']['title'] = t('Last');
       
 //      $form['field_r_fname']['und']['#attributes']['title'] = t('First');
 //      $form['field_r_lname']['und']['#attributes']['title'] = t('Last');
