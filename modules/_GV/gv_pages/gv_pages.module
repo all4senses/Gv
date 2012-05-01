@@ -943,7 +943,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Would you recommend this VoIP provider?'),
               '#options' => $rating_recommend_options,
               '#default_value' => FALSE,
-              '#weight' => $weight++,
+              //'#weight' => $weight++,
               '#required' => TRUE,
           );
       
@@ -954,7 +954,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
           $form['votes']['cons'] = array(
             '#type' => 'textfield',
-            '#title' => t('Pros'),
+            '#title' => t('Cons'),
             '#default_value' => '',
           );
           
