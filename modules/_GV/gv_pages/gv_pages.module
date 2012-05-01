@@ -951,11 +951,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#type' => 'textfield',
             '#title' => t('Pros'),
             '#default_value' => '',
+            '#attributes' => array('title' => 'Optional'),
           );
           $form['votes']['cons'] = array(
             '#type' => 'textfield',
             '#title' => t('Cons'),
             '#default_value' => '',
+            '#attributes' => array('title' => 'Optional'),
           );
           
           //$form['body']['#weight'] = 2;
@@ -1185,22 +1187,27 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       
       
-      
-      
-      
-      
-      
+      // Add stars widgeys to a Rating block
       $module_path = drupal_get_path('module', 'gv_pages');
-  
-      $form['#attached']['css'] = array(
-      //  $module_path . '/css/gv_pages.css',
-        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-      );
+      
       $form['#attached']['js'] = array(
+          
+        // Add hints inside some fields
+        $module_path . '/js/gv_review_fieldHints.js',
+        'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
+          
+        // Add stars widgeys to a Rating block
         $module_path . '/js/gv_review_stars.js',
         'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
       );
+      
       $form['#attached']['library'][] = array('system', 'ui.widget');
+      
+      $form['#attached']['css'] = array(
+        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+      );
+      
+
 
   
   
