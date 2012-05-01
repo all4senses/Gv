@@ -897,7 +897,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('About You'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
-        '#weight' => 5,
+        '#weight' => -15,
       );
           $form['about_you']['field_r_fname'] = $form['field_r_fname'];
           $form['about_you']['field_r_lname'] = $form['field_r_lname'];
@@ -947,6 +947,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#required' => TRUE,
           );
       
+          $form['provider']['pros'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Pros'),
+            '#default_value' => '',
+          );
+          $form['provider']['cons'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Pros'),
+            '#default_value' => '',
+          );
+          
           //$form['body']['#weight'] = 2;
           $form['votes']['body'] = $form['body'];
           unset($form['body']);
