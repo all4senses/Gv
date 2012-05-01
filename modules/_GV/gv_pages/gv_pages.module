@@ -821,6 +821,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       
+      // Add hints to some fields.
+      $form['field_r_fname']['#attributes']['title'] = t('First');
+      $form['field_r_lname']['#attributes']['title'] = t('Last');
+      
+      
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
         // Only admin can approve it.
@@ -951,13 +956,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#type' => 'textfield',
             '#title' => t('Pros'),
             '#default_value' => '',
-            '#attributes' => array('title' => 'Optional'),
+            '#attributes' => array('title' => t('Optional')),
           );
           $form['votes']['cons'] = array(
             '#type' => 'textfield',
             '#title' => t('Cons'),
             '#default_value' => '',
-            '#attributes' => array('title' => 'Optional'),
+            '#attributes' => array('title' => t('Optional')),
           );
           
           //$form['body']['#weight'] = 2;
