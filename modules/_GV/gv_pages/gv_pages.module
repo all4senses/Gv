@@ -811,7 +811,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      dpm($form);
+      //dpm($form);
       
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
@@ -832,7 +832,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#attributes' => array('title' => t($field_hint)),
         );
       }
-      
+      $form['field_r_fname']['#title'] = t('Your name');
+      $form['field_r_lname']['#title'] = '';
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
