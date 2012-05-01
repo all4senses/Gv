@@ -825,6 +825,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_r_fname']['#attributes']['title'] = t('First');
       $form['field_r_lname']['#attributes']['title'] = t('Last');
       
+      //'#attributes' => array('title' => t('Optional')),
+      dpm($form);
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
