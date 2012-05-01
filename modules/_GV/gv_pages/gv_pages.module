@@ -820,27 +820,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['title']['#access'] = FALSE;
       }
       
-      $temp_fname = $form['field_r_fname']['und'][0];
-      $form['field_r_fname'] = array(
-          '#type' => 'textfield',
-          '#title' => t($temp_fname['#title']),
-          '#default_value' => $temp_fname['value']['#default_value'],
-          '#description' => $temp_fname['#description'],
-          '#attributes' => array('title' => t('First')),
-      );
+      // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
+      $fields_to_rebuild = array('field_r_fname' => 'First', 'field_r_lname' => 'Second', 'field_r_email' => 'Enter valid email');
+      foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
+        $temp_field = $form[$field_to_rebuild]['und'][0];
+        $form[$field_to_rebuild] = array(
+            '#type' => 'textfield',
+            '#title' => t($temp_field['#title']),
+            '#default_value' => $temp_field['value']['#default_value'],
+            '#description' => $temp_field['#description'],
+            '#attributes' => array('title' => t($field_hint)),
+        );
+      }
       
-      // Add hints to some fields.
-//      $form['field_r_fname']['#attributes']['title'] = t('First');
-//      $form['field_r_lname']['#attributes']['title'] = t('Last');
-      
-      //$form['field_r_fname']['und'][0]['#attributes']['title'] = t('First');
-      //$form['field_r_lname']['und'][0]['#attributes']['title'] = t('Last');
-      
-//      $form['field_r_fname']['und']['#attributes']['title'] = t('First');
-//      $form['field_r_lname']['und']['#attributes']['title'] = t('Last');
-      
-      //'#attributes' => array('title' => t('Optional')),
-      dpm($form);
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
@@ -1011,17 +1003,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
           $user = user_load($user->uid);
-          // Autofill first/last names.
-          $form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          $form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
-          // Autofill the email field.
-          $form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+          // Autofill first/last names and email.
+          //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+          $form['about_you']['field_r_fname']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          $form['about_you']['field_r_lname']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          $form['about_you']['field_r_email']['#default_value'] = $user->mail;
+          
           // Disallow to choose another email for a registered user.
           $form['about_you']['field_r_email']['#access'] = FALSE;
           $form['about_you']['email_autofilled'] = array(
               '#type' => 'item',
               '#title' => t('Your email'),
-              '#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
+              '#markup' => $user->mail,
           );
 
         }
@@ -1126,7 +1121,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['about_you']['email_autofilled'] = array(
             '#type' => 'item',
             '#title' => t('Your email'),
-            '#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
+            //'#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
+            '#markup' => $form['about_you']['field_r_email']['#default_value'],
         );
 
         if(!isset($form['provider']['field_ref_provider']['und']['#default_value'][0]) || $form['provider']['field_ref_provider']['und']['#default_value'][0] == '_none') {
