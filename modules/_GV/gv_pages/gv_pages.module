@@ -847,15 +847,32 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['options']['promote']['#access'] = FALSE;
       $form['options']['sticky']['#access'] = FALSE;
       $form['revision_information']['#access'] = FALSE;
-      //$form['author']['#access'] = FALSE;
       $form['comment_settings']['#access'] = FALSE;
+      
+      // Show authoring info (including a date) only for administrator.
+      if (!in_array('administrator', $user->roles)) {
+        $form['author']['#access'] = FALSE;
+      }
+//      else {
+//        // Or connect datepicker to a post date field
+//        $module_path = drupal_get_path('module', 'gv_pages');
+//  
+//        //$form['#attached']['css'] = array(
+//        //  $module_path . '/css/gv_pages.css',
+//        //);
+//        $form['#attached']['js'] = array(
+//          $module_path . '/js/gv_review_datepicker.js',
+//        );
+//        $form['#attached']['library'][] = array('system', 'ui.datepicker');
+//      }
+      
       
       
       
       // Group fields
       $form['provider'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Provider, which you are reviewing'),
+        '#title' => t('Yout VoIP Service Provider Details'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         '#weight' => -10,
@@ -863,6 +880,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
+      
+          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
+          $form['provider']['lines'] = array(
+            '#type' => 'radios',
+            '#options' => $lines_options,
+            '#default_value' => FALSE,
+          );
+          
+          
       $form['about_you'] = array(
         '#type' => 'fieldset',
         '#title' => t('About You'),
@@ -936,7 +962,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['title']['#default_value'] = 'Unapproved review';
         }
         
-        // Save author's IP.
+        // Generate an approval code for email verification.
         if (!$user->uid) {
           $form['field_r_approvecode']['und'][0]['value']['#default_value'] = md5(time());
         }
@@ -1044,6 +1070,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       else {
         // Edit a review page.
         
+        
+        
+        // Show saved it a hidden field other data
+        if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
+          $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
+          $form['provider']['lines']['#default_value'] = $lines_options[$other_data['lines']];
+          $form['provider']['pros']['#default_value'] = $lines_options[$other_data['pros']];
+          $form['provider']['cons']['#default_value'] = $lines_options[$other_data['cons']];
+        }
+
         // Disallow to choose another email for a registered user.
         $form['about_you']['field_r_email']['#access'] = FALSE;
         $form['about_you']['email_autofilled'] = array(
