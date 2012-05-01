@@ -914,38 +914,41 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $votes = array();
       $form['votes'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Vote for this provider'),
+        '#title' => t('Rate and Review Your Service Provider'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         '#weight' => 4,
       );
-      foreach ($vote_keys as $vote_key) {
-        $form['votes']['rating_' . $vote_key] = array(
-          '#type' => 'select',
-          '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
-          '#options' => $rating_options,
-          '#default_value' => $rating_options[''],
-          '#weight' => $weight++,
-          //'#required' => TRUE,
-        );
-        $form['votes']['rating_' . $vote_key . '_choice1'] = array(
-          '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">test</div>',
-          '#weight' => $weight++,
-         );
-      }
+          foreach ($vote_keys as $vote_key) {
+            $form['votes']['rating_' . $vote_key] = array(
+              '#type' => 'select',
+              '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
+              '#options' => $rating_options,
+              '#default_value' => $rating_options[''],
+              '#weight' => $weight++,
+              //'#required' => TRUE,
+            );
+            $form['votes']['rating_' . $vote_key . '_choice1'] = array(
+              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">test</div>',
+              '#weight' => $weight++,
+            );
+          }
       
-      //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
-      $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
-      $form['votes']['rating_recommend'] = array(
-          //'#type' => 'select',
-          '#type' => 'radios',
-          '#title' => t('Would you recommend this VoIP provider?'),
-          '#options' => $rating_recommend_options,
-          '#default_value' => FALSE,
-          '#weight' => $weight++,
-          '#required' => TRUE,
-      );
+          //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
+          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+          $form['votes']['rating_recommend'] = array(
+              //'#type' => 'select',
+              '#type' => 'radios',
+              '#title' => t('Would you recommend this VoIP provider?'),
+              '#options' => $rating_recommend_options,
+              '#default_value' => FALSE,
+              '#weight' => $weight++,
+              '#required' => TRUE,
+          );
       
+          $form['votes']['body'] = $form['body'];
+          unset($form['body']);
+          
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
