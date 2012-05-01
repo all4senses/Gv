@@ -872,7 +872,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Group fields
       $form['provider'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Yout VoIP Service Provider Details'),
+        '#title' => t('Your VoIP Service Provider Details'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         '#weight' => -10,
@@ -947,12 +947,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#required' => TRUE,
           );
       
-          $form['provider']['pros'] = array(
+          $form['votes']['pros'] = array(
             '#type' => 'textfield',
             '#title' => t('Pros'),
             '#default_value' => '',
           );
-          $form['provider']['cons'] = array(
+          $form['votes']['cons'] = array(
             '#type' => 'textfield',
             '#title' => t('Pros'),
             '#default_value' => '',
