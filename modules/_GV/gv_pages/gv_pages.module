@@ -819,7 +819,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       if (!in_array('administrator', $user->roles)) {
         $form['title']['#access'] = FALSE;
       }
-      $form['body']['#weight'] = 2;
+      
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
@@ -881,6 +881,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
+          $form['field_r_data']['#access'] = FALSE;
           $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
           $form['provider']['lines'] = array(
             '#type' => 'radios',
@@ -946,6 +947,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#required' => TRUE,
           );
       
+          //$form['body']['#weight'] = 2;
           $form['votes']['body'] = $form['body'];
           unset($form['body']);
           
