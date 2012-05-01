@@ -1094,8 +1094,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
           $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
           $form['provider']['lines']['#default_value'] = $lines_options[$other_data['lines']];
-          $form['provider']['pros']['#default_value'] = $lines_options[$other_data['pros']];
-          $form['provider']['cons']['#default_value'] = $lines_options[$other_data['cons']];
+          $form['votes']['pros']['#default_value'] = $lines_options[$other_data['pros']];
+          $form['votes']['cons']['#default_value'] = $lines_options[$other_data['cons']];
         }
 
         // Disallow to choose another email for a registered user.
