@@ -926,12 +926,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
               '#options' => $rating_options,
               '#default_value' => $rating_options[''],
-              '#weight' => $weight++,
+              //'#weight' => $weight++,
               //'#required' => TRUE,
             );
             $form['votes']['rating_' . $vote_key . '_choice1'] = array(
               '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">test</div>',
-              '#weight' => $weight++,
+              //'#weight' => $weight++,
             );
           }
       
