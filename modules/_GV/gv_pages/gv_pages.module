@@ -1655,7 +1655,7 @@ function gv_pages_node_presave($node) {
         // If approved and published,
         // Add this review's votes to a target provider overall rating calculation in Voting API tables.
         if ($is_approved && $node->status) {
-          ////votingapi_set_votes($votes, $votes);
+          votingapi_set_votes($votes, $votes);
           // Clear temporary field votes.
           $node->field_ratings_oprovider['und'][0]['value'] = '';
         }
