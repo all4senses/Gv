@@ -43,20 +43,16 @@ function gv_misc_menu() {
 }
 
 
+/**
+ * Returns votes ids for a specific criteria.
+ */
 function gv_misc_getVotesIDs($criteria) {
-        
     $query = db_select('votingapi_vote', 'v')
       ->fields('v', array('vote_id'));
-//    $query->condition('tag', 'overall');
     foreach ($criteria as $field => $value) {
       $query->condition($field, $value);
     }
-
-    dpr($query);
-    $votes = $query->execute()->fetchAll();
-    dpr($votes);
-    return;
-    return $votes;
+    return $query->execute()->fetchAll();
 }
 
 
