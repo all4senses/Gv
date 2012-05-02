@@ -318,6 +318,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     case 'user_profile_form':
       
+      // Disallow edit own profile for a Guest user.
       global $user;
       if($user->name == 'guest') {
         drupal_goto('');
