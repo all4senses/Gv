@@ -834,20 +834,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['title']['#access'] = FALSE;
       }
       
-      // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
-      $fields_to_rebuild = array('field_r_fname' => 'First', 'field_r_lname' => 'Last', 'field_r_email' => 'Enter valid email');
-      foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
-        $temp_field = $form[$field_to_rebuild]['und'][0];
-        $form[$field_to_rebuild . '_temp'] = array(
-            '#type' => 'textfield',
-            '#title' => t($temp_field['#title']),
-            '#default_value' => $temp_field['value']['#default_value'],
-            '#description' => $temp_field['#description'],
-            '#required' => $temp_field['value']['#required'],
-            '#attributes' => array('title' => t($field_hint)),
-        );
-        $form[$field_to_rebuild]['#access'] = FALSE;
-      }
+      
       $form['field_r_fname']['#title'] = t('Your name');
       $form['field_r_lname']['#title'] = '';
       
@@ -925,10 +912,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#collapsed' => FALSE,
         '#weight' => -15,
       );
-          $form['about_you']['field_r_fname'] = $form['field_r_fname'];
-          $form['about_you']['field_r_lname'] = $form['field_r_lname'];
-          $form['about_you']['field_r_email'] = $form['field_r_email'];
-          unset($form['field_r_fname'], $form['field_r_lname'], $form['field_r_email']);
+          // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
+          $fields_to_rebuild = array('field_r_fname' => 'First', 'field_r_lname' => 'Last', 'field_r_email' => 'Enter valid email');
+          foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
+            $temp_field = $form[$field_to_rebuild]['und'][0];
+            $form['about_you'][$field_to_rebuild . '_temp'] = array(
+                '#type' => 'textfield',
+                '#title' => t($temp_field['#title']),
+                '#default_value' => $temp_field['value']['#default_value'],
+                '#description' => $temp_field['#description'],
+                '#required' => $temp_field['value']['#required'],
+                '#attributes' => array('title' => t($field_hint)),
+            );
+            $form[$field_to_rebuild]['#access'] = FALSE;
+          }
+    
           
           
           
@@ -1020,12 +1018,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
           //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
           //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
-          $form['about_you']['field_r_fname']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          $form['about_you']['field_r_lname']['#default_value'] = $user->field_u_lname['und'][0]['value'];
-          $form['about_you']['field_r_email']['#default_value'] = $user->mail;
+          $form['about_you']['field_r_fname_temp']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          $form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
           
           // Disallow to choose another email for a registered user.
-          $form['about_you']['field_r_email']['#access'] = FALSE;
+          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
           $form['about_you']['email_autofilled'] = array(
               '#type' => 'item',
               '#title' => t('Your email'),
@@ -1130,12 +1128,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
 
         // Disallow to choose another email for a registered user.
-        $form['about_you']['field_r_email']['#access'] = FALSE;
+        $form['about_you']['field_r_email_temp']['#access'] = FALSE;
         $form['about_you']['email_autofilled'] = array(
             '#type' => 'item',
             '#title' => t('Your email'),
             //'#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
-            '#markup' => $form['about_you']['field_r_email']['#default_value'],
+            '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
         );
 
         if(!isset($form['provider']['field_ref_provider']['und']['#default_value'][0]) || $form['provider']['field_ref_provider']['und']['#default_value'][0] == '_none') {
@@ -1494,7 +1492,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   $is_approved = !isset($form_state['values']['field_r_notapproved']['und'][0]['value']) || !$form_state['values']['field_r_notapproved']['und'][0]['value'];
   
   //$author_email = isset($form_state['values']['field_r_email']['und'][0]['value']) ? $form_state['values']['field_r_email']['und'][0]['value'] : NULL;
-  $author_email = isset($form_state['values']['field_r_email']) ? $form_state['values']['field_r_email'] : NULL;
+  $author_email = isset($form_state['values']['field_r_email_temp']) ? $form_state['values']['field_r_email_temp'] : NULL;
   
   
   // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
