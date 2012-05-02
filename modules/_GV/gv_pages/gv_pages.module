@@ -1604,6 +1604,8 @@ function gv_pages_node_presave($node) {
         $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
         $votes = array();
         
+        $overall_count = 0;
+        $overall_summ = 0;
         foreach ($vote_keys as $vote_key) {
           $votes[] = array(
             'tag' => $vote_key,
@@ -1614,7 +1616,20 @@ function gv_pages_node_presave($node) {
             'uid' => $node->uid,
             'vote_source' => $node->field_r_email['und'][0]['value'],
           );
+          $overall_count++;
+          $overall_summ += $saved_ratings[$vote_key];
         }
+        
+        // Calculate overall average rating.
+        $votes[] = array(
+          'tag' => 'overall',
+          'entity_type' => 'node',
+          'entity_id' => $provider_nid,
+          'value_type' => 'percent',
+          'value' => $overall_summ / $overall_count,
+          'uid' => $node->uid,
+          'vote_source' => $node->field_r_email['und'][0]['value'],
+        );
         
         
         // Remove (clear) this review's previous votes from a target provider calculation set.
