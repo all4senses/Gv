@@ -1651,7 +1651,9 @@ function gv_pages_node_presave($node) {
         foreach ($votes as $c) {
           unset($c['value_type'], $c['value']);
           dpr($c);
-          votingapi_delete_votes(votingapi_select_votes($c));
+          $select_votes = votingapi_select_votes($c);
+          dpr($select_votes);
+          votingapi_delete_votes($select_votes);
         }
         die;
    
