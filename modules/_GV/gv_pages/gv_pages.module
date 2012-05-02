@@ -1483,8 +1483,11 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // Current review data and uid for defining (see below) if the author of this review has already submitted a review for a selected provider.
   $author_uid = isset($form_state['values']['uid']) ? $form_state['values']['uid'] : NULL;
   $current_review_nid = isset($form_state['values']['nid']) ? $form_state['values']['nid'] : NULL;
-  $author_email = isset($form_state['values']['field_r_email']['und'][0]['value']) ? $form_state['values']['field_r_email']['und'][0]['value'] : NULL;
   $is_approved = !isset($form_state['values']['field_r_notapproved']['und'][0]['value']) || !$form_state['values']['field_r_notapproved']['und'][0]['value'];
+  
+  //$author_email = isset($form_state['values']['field_r_email']['und'][0]['value']) ? $form_state['values']['field_r_email']['und'][0]['value'] : NULL;
+  $author_email = isset($form_state['values']['field_r_email']) ? $form_state['values']['field_r_email'] : NULL;
+  
   
   // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
   $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
