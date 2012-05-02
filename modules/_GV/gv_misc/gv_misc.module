@@ -43,6 +43,18 @@ function gv_misc_menu() {
 }
 
 
+function gv_misc_getVotesIDs($criteria) {
+        
+    $query = db_select('votingapi_vote', 'v')
+      ->fields('v', array('vote_id'));
+    foreach ($criteria as $field => $value) {
+      $query->condition($field, $value);
+    }
+
+    return $query->execute()->fetchAllAssoc();
+}
+
+
 /**
  * Helper function to for administer menu.
  */
