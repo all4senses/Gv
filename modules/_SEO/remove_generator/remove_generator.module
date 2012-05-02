@@ -23,7 +23,14 @@ function remove_generator_disable() {
  */
 function remove_generator_html_head_alter(&$head_elements) {
   // Remove Generator META tag.
+ 
   if (isset($head_elements['system_meta_generator'])) {
     unset($head_elements['system_meta_generator']);
   }
+ 
+  // a4s change to make it work
+  if (isset($head_elements['meta_generator'])) {
+    unset($head_elements['meta_generator']);
+  }
+  
 }
