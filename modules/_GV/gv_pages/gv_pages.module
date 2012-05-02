@@ -835,8 +835,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       
-      $form['field_r_fname']['#title'] = t('Your name');
-      $form['field_r_lname']['#title'] = '';
+      
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
@@ -926,7 +925,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             $form[$field_to_rebuild]['#access'] = FALSE;
           }
-    
+          $form['field_r_fname_temp']['#title'] = t('Your name');
+          $form['field_r_lname_temp']['#title'] = '';
           
           
           
