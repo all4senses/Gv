@@ -1646,7 +1646,8 @@ function gv_pages_node_presave($node) {
         
         
         // Remove (clear) this review's previous votes from a target provider calculation set.
-        dpm($votes);
+        dpr($votes);
+        die;
         foreach ($votes as $c) {
           unset($c['value_type'], $c['value']);
           votingapi_delete_votes(votingapi_select_votes($c));
