@@ -52,7 +52,11 @@ function gv_misc_getVotesIDs($criteria) {
     foreach ($criteria as $field => $value) {
       $query->condition($field, $value);
     }
-    $votes = $query->execute()->fetchAllAssoc('vote_id');
+    $results = $query->execute()->fetchAllAssoc('vote_id');
+    foreach ($results as $result) {
+      $votes[] = array('vote_id' => $result->vote_id);
+    }
+      
     dpr($votes);
     die;
     return $votes;
