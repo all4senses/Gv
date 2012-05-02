@@ -860,14 +860,14 @@ function wdg_misc_getProviderQuickData($target, $data) {
     case 'rating':
     
       $out = '';
-      if (isset($data['data']->votingapi_cache_node_percent_features_average_value) && $data['data']->votingapi_cache_node_percent_features_average_value) {
+      if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
                 
-        $out = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_features_average_value, 'stars' => 5, 'tag' => 'features', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
-              //. '<div class="rating">' . $data['data']->votingapi_cache_node_percent_features_average_value . '%</div>'
-              //. '<div class="voters">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . t('reviews') . '</div>'
+        $out = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+              //. '<div class="rating">' . $data['data']->votingapi_cache_node_percent_overall_average_value . '%</div>'
+              //. '<div class="voters">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . t('reviews') . '</div>'
               ;
         
-        $out = '<div class="details"><a href="' . url('node/' . $data['data']->nid) . '">' . $data['data']->votingapi_cache_node_percent_features_count_value . ' ' . $data['data']->node_title . '<br>' . t('Reviews') . '</a></div>' . $out . ' <div class="count">(' . (0.05 * $data['data']->votingapi_cache_node_percent_features_average_value) . ')</div>';
+        $out = '<div class="details"><a href="' . url('node/' . $data['data']->nid) . '">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . $data['data']->node_title . '<br>' . t('Reviews') . '</a></div>' . $out . ' <div class="count">(' . (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value) . ')</div>';
       }
       return $out;
       
