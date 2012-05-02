@@ -1804,7 +1804,6 @@ function gv_pages_node_view($node, $view_mode) {
         $criteria['function'] = 'count';
         $counts = votingapi_select_results($criteria);
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
-        dpm($votes);
         
         
         // Load and show all the data from the placeholder field field_p_data serialized data
