@@ -47,12 +47,13 @@ function gv_misc_getVotesIDs($criteria) {
         
     $query = db_select('votingapi_vote', 'v')
       ->fields('v', array('vote_id'));
-    foreach ($criteria as $field => $value) {
-      $query->condition($field, $value);
-    }
+    $query->condition('tag', 'overall');
+//    foreach ($criteria as $field => $value) {
+//      $query->condition($field, $value);
+//    }
 
     dpr($query);
-    $votes = $query->execute()->fetchAllAssoc();
+    $votes = $query->execute()->fetchAll();
     dpr($votes);
     return;
     return $votes;
