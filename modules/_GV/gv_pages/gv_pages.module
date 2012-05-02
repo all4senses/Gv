@@ -885,12 +885,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //        // Or connect datepicker to a post date field
 //        $module_path = drupal_get_path('module', 'gv_pages');
 //  
-//        //$form['#attached']['css'] = array(
-//        //  $module_path . '/css/gv_pages.css',
-//        //);
-//        $form['#attached']['js'] = array(
-//          $module_path . '/js/gv_review_datepicker.js',
-//        );
+//        $form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
+//        $form['#attached']['js'][] = $module_path . '/js/gv_review_datepicker.js';
 //        $form['#attached']['library'][] = array('system', 'ui.datepicker');
 //      }
       
@@ -1221,8 +1217,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Add stars widgeys to a Rating block
       $module_path = drupal_get_path('module', 'gv_pages');
+      $module_misc_path = drupal_get_path('module', 'gv_misc');
       
       $form['#attached']['js'] = array(
+        
+        // Add a characters counter.
+        $module_misc_path . '/js/gv_misc_charCount.js',
+        'sites/all/libraries/jquery.plugins/charCount.js',
           
         // Add hints inside some fields
         $module_path . '/js/gv_review_fieldHints.js',
