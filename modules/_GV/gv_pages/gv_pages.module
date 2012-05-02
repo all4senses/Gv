@@ -311,10 +311,23 @@ function gv_pages_theme($existing, $type, $theme, $path) {
  */
 function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
-  dpm($form_id);  dpm($form);
+  //dpm($form_id);  dpm($form);
   
   switch ($form_id) {
     
+    
+    case 'user_profile_form':
+      
+      global $user;
+      if($user->name == 'guest') {
+        drupal_goto('');
+      }
+      
+      break;
+      
+      
+      
+      
     case 'provider_node_form':
       
       // dpm($form);
