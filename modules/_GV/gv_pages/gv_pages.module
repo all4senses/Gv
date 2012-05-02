@@ -2019,6 +2019,9 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
     );
 
     foreach ($votes as $key => $vote) {
+      if ($vote['tag'] == 'overall') {
+        continue;
+      }
       if ($vote['tag'] == 'recommend') {
         $recommend_vote = $vote;
         continue;
