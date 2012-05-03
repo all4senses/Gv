@@ -1457,7 +1457,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     
     if ($form_state['values'][$fname] == t($fdata['hint'])) {
       form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
-      form_set_value($form[$fdata['set']][$fname], array('#default_value' => NULL), $form_state);
+      //form_set_value($form[$fdata['set']][$fname], array('#default_value' => NULL), $form_state);
       //form_set_value($form[$fdata['set']][$fname], array('und' => array(0 => array('value' => NULL))), $form_state);
       $form_state['values'][$fname] = NULL;
       
