@@ -942,7 +942,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $weight = 8;
      
       //$vote_keys = array('features', 'sound', 'rely', 'money', 'service');
-      $vote_keys = array('features' => FEATURES, 'sound' => SOUND, 'rely' => RELY, 'money' => PRICE, 'service' => CUSTOMER);
+      $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, );
       $votes = array();
       $form['votes'] = array(
         '#type' => 'fieldset',
@@ -1481,9 +1481,11 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   
   //$rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
-  $rating_options = array('rating_features' => FEATURES, 'rating_sound' => SOUND, 'rating_rely' => RELY, 'rating_money' => PRICE, 'rating_service' => CUSTOMER, 'rating_recommend' => RECOMMEND);
+  //$rating_options = array('rating_features' => FEATURES, 'rating_sound' => SOUND, 'rating_rely' => RELY, 'rating_money' => PRICE, 'rating_service' => CUSTOMER, 'rating_recommend' => RECOMMEND);
+  $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
+  
   foreach ($rating_options as $rating_option => $rating_option_title) {
-    if ($form_state['values'][$rating_option] === FALSE) {
+    if ($form_state['values']['rating_' . $rating_option] === FALSE) {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
     }
   }
@@ -1527,9 +1529,9 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   
   // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
-  $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+  //$rating_options = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
   $votes = array();
-  foreach ($vote_keys as $vote_key) {
+  foreach ($rating_options as $vote_key => $vote_title) {
     if(isset($form_state['values']['rating_' . $vote_key])) {
       $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
     }
@@ -1641,12 +1643,13 @@ function gv_pages_node_presave($node) {
     // If a provider was chosen from a list, save voting results to Voting API tables.
     if ($provider_nid && $provider_nid != 7) {
       
-        $vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+        //$vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+        $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
         $votes = array();
         
         $overall_count = 0;
         $overall_summ = 0;
-        foreach ($vote_keys as $vote_key) {
+        foreach ($vote_keys as $vote_key => $vote_title) {
           $votes[] = array(
             'tag' => $vote_key,
             'entity_type' => 'node',

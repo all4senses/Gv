@@ -6,9 +6,9 @@
  */
 
 // Ratings titles.
-define('SOUND', 'Sound Quality');
+define('SOUND', 'Sound/Call Quality');
 define('INSTALL', 'Installation Process');
-define('CUSTOMER', 'Customer Service');
+define('CUSTOMER', 'Customer Experience');
 define('RELY', 'Service Reliability');
 define('FEATURES', 'Features');
 define('PRICE', 'Price');
