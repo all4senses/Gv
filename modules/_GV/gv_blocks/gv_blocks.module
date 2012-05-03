@@ -215,7 +215,7 @@ function gv_blocks_get_headerLinks() {
 function gv_blocks_get_footerMenu() {
   $menu = menu_build_tree('menu-footer-menu');
   //return '<span class="menu-preface">(c) GetVoIP.com</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
-  return '<div class="menu">' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')) . '</div><div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>';
+  return theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')) . '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>';
 }
 
 
