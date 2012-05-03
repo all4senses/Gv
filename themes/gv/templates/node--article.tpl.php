@@ -32,7 +32,13 @@
         
         
       <?php if ($display_submitted): ?>
-        dpm($node);
+        
+        <?php 
+        
+        dpm($node); 
+        
+        ?>
+        
         <span class="submitted"><?php print $submitted; ?></span>
       <?php endif; ?>
 
