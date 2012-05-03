@@ -961,7 +961,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#required' => TRUE,
             );
             $form['votes']['rating_' . $vote_key . '_choice1'] = array(
-              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">test</div>',
+              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
               //'#weight' => $weight++,
             );
           }
@@ -2045,7 +2045,8 @@ function gv_pages_node_delete($node) {
 function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
   
   if ($votes) {
-    $rating_titles = array('features' => FEATURES, 'sound' => SOUND, 'service' => CUSTOMER, 'money' => PRICE, 'rely' => RELY, 'recommend' => RECOMMEND);
+    //$rating_titles = array('features' => FEATURES, 'sound' => SOUND, 'service' => CUSTOMER, 'money' => PRICE, 'rely' => RELY, 'recommend' => RECOMMEND);
+    $rating_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
     $node->content['gv_ratings'] = array(
         '#markup' => '',
         //'#prefix' => '<div class="gv_votes">',
@@ -2054,6 +2055,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
 
     foreach ($votes as $key => $vote) {
       if ($vote['tag'] == 'overall') {
+        $overall_vote = $vote;
         continue;
       }
       if ($vote['tag'] == 'recommend') {
@@ -2061,6 +2063,14 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         continue;
       }
       $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . t($rating_titles[$vote['tag']]) . ':</div>' 
+        // Using own theming function for fivestar (replicate of the original fivestar theme function).
+        . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+        // Using the original fivestar theme function.
+        //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+        . '</div>';
+    }
+    if ($overall_vote) {
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . t(OVERALL) . ':</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
