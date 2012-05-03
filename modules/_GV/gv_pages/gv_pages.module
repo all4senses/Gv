@@ -1451,15 +1451,16 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   }
   
   // Clear hints, if any.
-  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you'), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'votes'), 'cons' => array('hint' => CONS_HINT, 'set' => 'votes'));
+  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'votes'), 'cons' => array('hint' => CONS_HINT, 'set' => 'votes'));
   foreach ($fields_to_clear_hints as $fname => $fdata) {
     dpm($fname . ' = ' . $form[$fdata['set']][$fname]['#attributes']['title']);
     if ($form[$fdata['set']][$fname]['#attributes']['title'] == t($fdata['hint'])) {
       //form_set_value($form[$fdata['set']][$fname], array('und' => array(0 => array('value' => NULL))), $form_state);
-      $form_state['values'][$fname] = 'xxx';
-      form_set_value($form[$fdata['set']][$fname], array('value' => NULL), $form_state);
+      //$form_state['values'][$fname] = 'xxx';
+      form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
+      form_set_value($form[$fdata['set']][$fname], array('#default_value' => NULL), $form_state);
       if ($form[$fdata['set']][$fname]['#required']) {
-        form_set_error($fname, t('Please fill the field "' . $form[$fdata['set']][$fname]['#title'] . '"'));
+        form_set_error($fname, t('Please fill the field "' . ($form[$fdata['set']][$fname]['#title'] ? $form[$fdata['set']][$fname]['#title'] : $fdata['title'] ) . '"'));
       }
     }
   }
