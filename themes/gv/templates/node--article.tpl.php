@@ -35,7 +35,8 @@
         
         <?php 
         
-        dpm($node); 
+        dpm($node);
+        dpm($content);
         
         ?>
         
