@@ -65,10 +65,10 @@
   
   
   <footer id="footer" role="contentinfo" class="clearfix">
-    <div id="footer-inside">
+    <!-- <div id="footer-inside"> -->
       <?php print render($page['footer']) ?>
-      <?php print $feed_icons ?>
-    </div> <!-- /.inside -->
+      <?php //print $feed_icons ?>
+    <!-- </div> --> <!-- /.inside -->
   </footer> <!-- /#footer -->
 
 <!-- </div> --> <!-- /#container -->
