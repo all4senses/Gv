@@ -7,6 +7,12 @@
 
 
 /**
+ * Constants for ratins titles, etc.
+ */
+module_load_include('inc', 'gv_misc', 'inc/constants');
+
+
+/**
  * Implements hook_menu().
  */
 function gv_misc_menu() {
@@ -712,31 +718,31 @@ function gv_misc_tokens($type, $tokens, array $data = array(), array $options = 
 function gv_misc_votingapi_metadata_alter(&$data) {
   $data['tags'] += array(
     'features' => array(
-      'name' => t('Features Rating'),
+      'name' => t(FEATURES),
       'description' => t('Features Rating for a provider.'),
     ),
     'sound' => array(
-      'name' => t('Sound Quality Rating'),
+      'name' => t(SOUND),
       'description' => t('Sound Quality Rating for a provider.'),
     ),
     'rely' => array(
-      'name' => t('Reliability Rating'),
+      'name' => t(RELY),
       'description' => t('Reliability Rating for a provider.'),
     ),
     'money' => array(
-      'name' => t('Value for Money Rating'),
+      'name' => t(PRICE),
       'description' => t('Value for Money Rating for a provider.'),
     ),
     'service' => array(
-      'name' => t('Value for Customer Service Rating'),
+      'name' => t(CUSTOMER),
       'description' => t('Value for Customer Service Rating for a provider.'),
     ),
     'recommend' => array(
-      'name' => t('Value for Would you recommend this VoIP provider'),
+      'name' => t(RECOMMEND),
       'description' => t('Value for Would you recommend this VoIP provider. Yes or No.'),
     ),
     'overall' => array(
-      'name' => t('Overall rating'),
+      'name' => t(OVERALL),
       'description' => t('Average overall value for all providers rates.'),
     ),
   );

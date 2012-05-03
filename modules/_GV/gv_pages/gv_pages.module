@@ -6,6 +6,12 @@
  */
 
 /**
+ * Constants for ratins titles, etc.
+ */
+module_load_include('inc', 'gv_misc', 'inc/constants');
+
+
+/**
  * Implements hook_menu().
  */
 function gv_pages_menu() {
@@ -935,7 +941,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
       $weight = 8;
      
-      $vote_keys = array('features', 'sound', 'rely', 'money', 'service');
+      //$vote_keys = array('features', 'sound', 'rely', 'money', 'service');
+      $vote_keys = array('features' => FEATURES, 'sound' => SOUND, 'rely' => RELY, 'money' => PRICE, 'service' => CUSTOMER);
       $votes = array();
       $form['votes'] = array(
         '#type' => 'fieldset',
@@ -944,10 +951,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#collapsed' => FALSE,
         '#weight' => 4,
       );
-          foreach ($vote_keys as $vote_key) {
+          foreach ($vote_keys as $vote_key => $vote_title) {
             $form['votes']['rating_' . $vote_key] = array(
               '#type' => 'select',
-              '#title' => t(drupal_ucfirst($vote_key) . ' Rating'),
+              '#title' => t($vote_title), //t(drupal_ucfirst($vote_key) . ' Rating'),
               '#options' => $rating_options,
               '#default_value' => $rating_options[''],
               //'#weight' => $weight++,
@@ -1454,7 +1461,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   
   
-  $rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
+  //$rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
+  $rating_options = array('rating_features' => FEATURES, 'rating_sound' => SOUND, 'rating_rely' => RELY, 'rating_money' => PRICE, 'rating_service' => CUSTOMER, 'rating_recommend' => RECOMMEND);
   foreach ($rating_options as $rating_option => $rating_option_title) {
     if ($form_state['values'][$rating_option] === FALSE) {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
@@ -2015,7 +2023,7 @@ function gv_pages_node_delete($node) {
 function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
   
   if ($votes) {
-    $rating_titles = array('features' => t('Features rating'), 'sound' => t('Sound quality Rating'), 'service' => t('Customer service Rating'), 'service' => t('Customer service Rating'), 'money' => t('Value for Money Rating'), 'rely' => t('Reliability Rating'), 'recommend' => t('Would you recommend this VoIP provider'));
+    $rating_titles = array('features' => FEATURES, 'sound' => SOUND, 'service' => CUSTOMER, 'money' => PRICE, 'rely' => RELY, 'recommend' => RECOMMEND);
     $node->content['gv_ratings'] = array(
         '#markup' => '',
         //'#prefix' => '<div class="gv_votes">',
@@ -2030,7 +2038,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         $recommend_vote = $vote;
         continue;
       }
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . $rating_titles[$vote['tag']] . ':</div>' 
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . t($rating_titles[$vote['tag']]) . ':</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
@@ -2054,7 +2062,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
     }
     else {
       $node->content['gv_recommend'] = array(
-          '#markup' => '<div class="title">' . $rating_titles['recommend'] . ':</div><div class="text">' . ($recommend_vote['value']?t('Yes'):t('No')) . '</div>',
+          '#markup' => '<div class="title">' . t($rating_titles['recommend']) . ':</div><div class="text">' . ($recommend_vote['value']?t('Yes'):t('No')) . '</div>',
       );
     }
     // In case of using the original fivestar theme function there should be connected original fivestar's css
