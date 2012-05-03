@@ -33,14 +33,27 @@
         
       <?php if ($display_submitted): ?>
         
-        <?php 
+        <span class="submitted">
+          <?php 
+            
+            print $submitted;
+            dpm($node);
+            dpm($content);
+            
+            
+          dpm(preg_replace('/(<span.*>)(.*)(<a.*) /', "$1By$2", $submitted));   
+              
+          ?>
+          
+          
+          <span rel="sioc:has_creator" datatype="xsd:dateTime" content="2012-04-12T12:57:09-04:00" property="dc:date dc:created">
+          Published by
+          <a class="username" property="foaf:name" typeof="sioc:UserAccount" about="/users/root" xml:lang="" title="View user profile." href="/users/root">Super Boss</a>
+          on Thu, 04/12/2012 - 12:57
+          </span>
+          
+        </span>
         
-        dpm($node);
-        dpm($content);
-        
-        ?>
-        
-        <span class="submitted"><?php print $submitted; ?></span>
       <?php endif; ?>
 
     <?php if (!$page): ?>
