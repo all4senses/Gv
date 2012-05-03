@@ -1453,21 +1453,23 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // Clear hints, if any.
   $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'votes'), 'cons' => array('hint' => CONS_HINT, 'set' => 'votes'));
   foreach ($fields_to_clear_hints as $fname => $fdata) {
-    dpm($fname . ' = ' . $form[$fdata['set']][$fname]['#attributes']['title']);
-    
+   
     if ($form_state['values'][$fname] == t($fdata['hint'])) {
+      
+      // This clear the field.
+      $form[$fdata['set']][$fname]['#value'] = NULL;
+      // Just in case.
       form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
-      $form[$fdata['set']][$fname]['#value'] = 'xxx';
-      //$form_state['complete form'][$fdata['set']][$fname]['#value'] = 'xxx';
-      //form_set_value($form[$fdata['set']][$fname], array('#default_value' => NULL), $form_state);
-      //form_set_value($form[$fdata['set']][$fname], array('und' => array(0 => array('value' => NULL))), $form_state);
+      // Just in case on more.
       $form_state['values'][$fname] = NULL;
       
       if ($form[$fdata['set']][$fname]['#required']) {
         form_set_error($fname, t('Please fill the field "' . ($form[$fdata['set']][$fname]['#title'] ? $form[$fdata['set']][$fname]['#title'] : $fdata['title'] ) . '"'));
       }
     }
+    
   }
+  // Doesnot affect the for after errors
   //$form_state['rebuild'] = TRUE;
   
   // Rebuild original fields field_r_fname, field_r_lname, field_r_email from temporary fields fields field_r_fname_temp, field_r_lname_temp, field_r_email_temp
