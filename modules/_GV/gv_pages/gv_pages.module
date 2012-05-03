@@ -958,7 +958,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#options' => $rating_options,
               '#default_value' => $rating_options[''],
               //'#weight' => $weight++,
-              //'#required' => TRUE,
+              '#required' => TRUE,
             );
             $form['votes']['rating_' . $vote_key . '_choice1'] = array(
               '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">test</div>',
@@ -971,7 +971,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['votes']['rating_recommend'] = array(
               //'#type' => 'select',
               '#type' => 'radios',
-              '#title' => t('Would you recommend this VoIP provider?'),
+              '#title' => t(RECOMMEND),
               '#options' => $rating_recommend_options,
               '#default_value' => FALSE,
               //'#weight' => $weight++,
