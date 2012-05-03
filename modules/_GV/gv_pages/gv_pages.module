@@ -1456,6 +1456,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     dpm($fname . ' = ' . $form[$fdata['set']][$fname]['#attributes']['title']);
     if ($form[$fdata['set']][$fname]['#attributes']['title'] == t($fdata['hint'])) {
       //form_set_value($form[$fdata['set']][$fname], array('und' => array(0 => array('value' => NULL))), $form_state);
+      $form_state['values'][$fname] = 'xxx';
       form_set_value($form[$fdata['set']][$fname], array('value' => NULL), $form_state);
       if ($form[$fdata['set']][$fname]['#required']) {
         form_set_error($fname, t('Please fill the field "' . $form[$fdata['set']][$fname]['#title'] . '"'));
