@@ -108,7 +108,7 @@
               var js, fjs = d.getElementsByTagName(s)[0];
               if (d.getElementById(id)) return;
               js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=138241656284512";
+              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
             <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false"></div>
