@@ -150,7 +150,7 @@
         <?php 
           $tags = NULL;
           foreach (element_children($content['field_topics']) as $key) {
-            $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/topic/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+            $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
           }
           if ($tags) {
             echo '<div class="topics"><span class="title">' . t('TAGS:') . '</span>' . $tags . '</div>';
