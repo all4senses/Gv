@@ -86,7 +86,7 @@
           
           <div class="main">
             <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-            <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="TRUE"></script>
+            <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
           </div>
           
           
