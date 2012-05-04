@@ -84,8 +84,11 @@
           
           
           <div class="main">
+            <?php 
+            dpm('http://getvoip.com'. url('node/' . $node->nid));
+            ?>
             <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-            <script type="IN/Share" data-url="http://getvoip.com<?php echo url('node/' . $node->nid) ?>" data-counter="right"></script>
+            <script type="IN/Share" data-url="" data-counter="right"></script>
           </div>
           Share
         
