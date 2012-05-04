@@ -21,7 +21,7 @@
           <?php print render($title_prefix); ?>
           
             <?php if (!$page): ?>
-            <h2
+            <h2>
             <?php else: ?>
             <h1>
             <?php endif; ?>
