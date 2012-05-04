@@ -86,11 +86,15 @@
         
         </div>
         
+        
         <?php 
           print render($content['field_topics']); 
           
           foreach (element_children($content['field_topics']) as $key) {
-            echo l(t($content['field_topics'][$key]['#title']), $content['field_topics'][$key]['#href']);
+            $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/topic/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+          }
+          if ($tags) {
+            echo '<span class="topics title"><' . t('TAGS:') . '</span><span class="topics">' . $tags . '</span>';
           }
         ?>
         <?php //print render($content['links']); ?>
