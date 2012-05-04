@@ -40,8 +40,8 @@
             dpm($node);
             dpm($content);
             
-            
-          dpm(preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3xxx$5", $submitted));   
+            $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
+          dpm(preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted));   
               
           ?>
           
