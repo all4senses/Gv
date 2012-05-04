@@ -53,8 +53,8 @@
               <?php 
                 $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
                 print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
-                dpm($node);
-                dpm($content);
+                //dpm($node);
+                //dpm($content);
               ?>
             </span>
 
@@ -89,7 +89,7 @@
             <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right"></script>
           </div>
           
-          <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+          
           <script type="text/javascript">
             (function() {
               var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -97,10 +97,18 @@
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
             })();
           </script>
-
-
-
-          Share
+          <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+          
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=138241656284512";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+          <div class="fb-like" data-href="<?php echo $url?>" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+          
         
         </div>
         
