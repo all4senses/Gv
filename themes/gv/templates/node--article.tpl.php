@@ -78,12 +78,23 @@
 
 
 
-      <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
-        <footer>
-          <?php print render($content['field_tags']); ?>
-          <?php print render($content['links']); ?>
-        </footer>
-      <?php endif; ?>
+      <footer>
+        
+        <div class="share">
+          
+          Share
+        
+        </div
+        
+        <?php 
+          print render($content['field_tags']); 
+          
+          foreach (element_children($content['field_tags']) as $key) {
+            echo l(t($content['field_tags'][$key]['#title']), $content['field_tags'][$key]['#href']);
+          }
+        ?>
+        <?php //print render($content['links']); ?>
+      </footer>
 
   </div> <!-- main-content -->
  
