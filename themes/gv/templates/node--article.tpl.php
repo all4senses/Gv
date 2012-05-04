@@ -88,14 +88,14 @@
             <!-- ADDTHIS BUTTON BEGIN -->
             <script type="text/javascript">
             var addthis_config = {
-                pubid: "all4senses"
+                //pubid: "all4senses"
             }
             </script>
 
             <div class="addthis_toolbox addthis_default_style">
-            <a href="http://addthis.com/bookmark.php?v=250&amp;pub=all4senses" class="addthis_button_compact"></a>
-            <a class="addthis_button_email" title="E-mail this page link"></a>
-            <a class="addthis_button_print" title="Print this page"></a>
+              <a href="http://addthis.com/bookmark.php?v=250&amp;pub=all4senses"></a>
+              <a class="addthis_button_email" title="E-mail this page link"><?php echo t('Email This Post'); ?></a>
+              <a class="addthis_button_compact"></a>
             </div>
             <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=all4senses"></script>
             <!-- ADDTHIS BUTTON END -->
