@@ -79,87 +79,91 @@
 
 
 
-      <footer>
-        
-        <div class="share">
-          
-          <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
-          
-          <div class="others">
-            <!-- ADDTHIS BUTTON BEGIN -->
-            <script type="text/javascript">
-            var addthis_config = {
-                //pubid: "all4senses"
-            }
-            var addthis_share =
-            {
-              // ... members go here
-              url: "<?php echo $url?>"
-            }
-            </script>
+      <?php if ($page): ?>
+    
+                  <footer>
 
-            <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $url?>">
-              <a href="http://addthis.com/bookmark.php?v=250&amp;pub=all4senses"></a>
-              <a class="addthis_button_email" title="E-mail this page link"><?php echo t('Email This Post'); ?></a>
-              <a class="addthis_button_tumblr"></a>
-              <a class="addthis_button_hackernews"></a>
-              <a class="addthis_button_digg"></a>
-              <a class="addthis_button_reddit"></a>
-              <a class="addthis_button_stumbleupon"></a>
-              
-              <a class="addthis_button_compact"></a>
-            </div>
-            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=all4senses"></script>
-            <!-- ADDTHIS BUTTON END -->
+                    <div class="share">
 
-          </div>
-          
-          <div class="main">
-            <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-            <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
-          
-          
-          
-            <script type="text/javascript">
-              (function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-              })();
-            </script>
-            <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+                      <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
 
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
+                      <div class="others">
+                        <!-- ADDTHIS BUTTON BEGIN -->
+                        <script type="text/javascript">
+                        var addthis_config = {
+                            //pubid: "all4senses"
+                        }
+                        var addthis_share =
+                        {
+                          // ... members go here
+                          url: "<?php echo $url?>"
+                        }
+                        </script>
 
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            
-          </div> <!-- main share buttons -->
-          
-        </div>
-        
-        
-        <?php 
-          $tags = NULL;
-          foreach (element_children($content['field_topics']) as $key) {
-            $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
-          }
-          if ($tags) {
-            echo '<div class="topics"><span class="title">' . t('TAGS:') . '</span>' . $tags . '</div>';
-          }
-          //print render($content['field_topics']); 
-          //print render($content['links']);
-        ?>
-      </footer>
+                        <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $url?>">
+                          <a href="http://addthis.com/bookmark.php?v=250&amp;pub=all4senses"></a>
+                          <a class="addthis_button_email" title="E-mail this page link"><?php echo t('Email This Post'); ?></a>
+                          <a class="addthis_button_tumblr"></a>
+                          <a class="addthis_button_hackernews"></a>
+                          <a class="addthis_button_digg"></a>
+                          <a class="addthis_button_reddit"></a>
+                          <a class="addthis_button_stumbleupon"></a>
 
+                          <a class="addthis_button_compact"></a>
+                        </div>
+                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=all4senses"></script>
+                        <!-- ADDTHIS BUTTON END -->
+
+                      </div>
+
+                      <div class="main">
+                        <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+                        <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
+
+
+
+                        <script type="text/javascript">
+                          (function() {
+                            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                            po.src = 'https://apis.google.com/js/plusone.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                          })();
+                        </script>
+                        <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+
+                        <div id="fb-root"></div>
+                        <script>(function(d, s, id) {
+                          var js, fjs = d.getElementsByTagName(s)[0];
+                          if (d.getElementById(id)) return;
+                          js = d.createElement(s); js.id = id;
+                          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+                        <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
+
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+                      </div> <!-- main share buttons -->
+
+                    </div>
+
+
+                    <?php 
+                      $tags = NULL;
+                      foreach (element_children($content['field_topics']) as $key) {
+                        $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+                      }
+                      if ($tags) {
+                        echo '<div class="topics"><span class="title">' . t('TAGS:') . '</span>' . $tags . '</div>';
+                      }
+                      //print render($content['field_topics']); 
+                      //print render($content['links']);
+                    ?>
+                  </footer>
+    
+      <?php endif; ?>
+    
   </div> <!-- main-content -->
  
   <div class="providers">
