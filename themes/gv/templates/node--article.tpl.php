@@ -21,9 +21,9 @@
           <?php print render($title_prefix); ?>
           
             <?php if (!$page): ?>
-            <h2>
+            <h2
             <?php else: ?>
-            <h1>
+            <h1
             <?php endif; ?>
               
               <?php print $title_attributes; ?>>
