@@ -71,7 +71,7 @@
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
           hide($content['links']);
-          hide($content['field_tags']);
+          hide($content['field_topics']);
           print render($content);
         ?>
       </div>
@@ -87,10 +87,10 @@
         </div
         
         <?php 
-          print render($content['field_tags']); 
+          print render($content['field_topics']); 
           
-          foreach (element_children($content['field_tags']) as $key) {
-            echo l(t($content['field_tags'][$key]['#title']), $content['field_tags'][$key]['#href']);
+          foreach (element_children($content['field_topics']) as $key) {
+            echo l(t($content['field_topics'][$key]['#title']), $content['field_topics'][$key]['#href']);
           }
         ?>
         <?php //print render($content['links']); ?>
