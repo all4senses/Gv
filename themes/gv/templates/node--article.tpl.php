@@ -92,12 +92,12 @@
             }
             </script>
 
-            <a href="http://www.addthis.com/bookmark.php?v=250" 
-                    class="addthis_button"><img 
-                    src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" 
-                    width="125" height="16" border="0" alt="Share" /></a>
-
-            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
+            <div class="addthis_toolbox addthis_default_style">
+            <a href="http://addthis.com/bookmark.php?v=250&amp;pub=all4senses" class="addthis_button_compact"></a>
+            <a class="addthis_button_email" title="E-mail this page link"></a>
+            <a class="addthis_button_print" title="Print this page"></a>
+            </div>
+            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=all4senses"></script>
             <!-- ADDTHIS BUTTON END -->
 
           </div>
