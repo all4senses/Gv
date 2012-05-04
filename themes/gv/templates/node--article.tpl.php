@@ -86,7 +86,7 @@
           
           <div class="main">
             <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-            <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right"></script>
+            <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="TRUE"></script>
           </div>
           
           
@@ -107,7 +107,7 @@
             js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=138241656284512";
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));</script>
-          <div class="fb-like" data-href="<?php echo $url?>" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+          <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
           
         
         </div>
