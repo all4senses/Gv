@@ -94,7 +94,7 @@
             $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/topic/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
           }
           if ($tags) {
-            echo '<span class="topics title"><' . t('TAGS:') . '</span><span class="topics">' . $tags . '</span>';
+            echo '<span class="topics"><span class="title">' . t('TAGS:') . '</span>' . $tags . '</span>';
           }
         ?>
         <?php //print render($content['links']); ?>
