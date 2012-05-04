@@ -11,14 +11,12 @@
 
         <?php if (!$page): ?>
           <header>
-        <?php else: ?>
-            <div class="main-content">
         <?php endif; ?>
 
           <?php print $user_picture; ?>
 
 
-
+ 
 
           <?php print render($title_prefix); ?>
           <?php if (!$page): ?>
