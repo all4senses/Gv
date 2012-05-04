@@ -84,7 +84,7 @@
           
           Share
         
-        </div
+        </div>
         
         <?php 
           print render($content['field_topics']); 
