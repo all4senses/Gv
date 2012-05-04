@@ -41,7 +41,7 @@
             dpm($content);
             
             
-          dpm(preg_replace('/(<span.*>)(.*)(<a.*/a>)(.*)(</spam>)/', "$1By$3xxx$5", $submitted));   
+          dpm(preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3xxx$5", $submitted));   
               
           ?>
           
