@@ -41,7 +41,7 @@
             dpm($content);
             
             
-          dpm(preg_replace('/(<span.*>)(.*)(<a.*) /', "$1By$2", $submitted));   
+          dpm(preg_replace('/(<span.*>)(.*)(<a.*) /', "$1By$3", $submitted));   
               
           ?>
           
