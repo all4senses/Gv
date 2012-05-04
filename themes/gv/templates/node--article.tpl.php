@@ -90,6 +90,11 @@
             var addthis_config = {
                 //pubid: "all4senses"
             }
+            var addthis_share =
+            {
+              // ... members go here
+              url: "<?php echo $url?>"
+            }
             </script>
 
             <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $url?>">
