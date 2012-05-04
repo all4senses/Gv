@@ -163,7 +163,7 @@
  
   <div class="providers">
     <?php 
-      $block_data = array('module' => 'views', 'delta' => 'providers-block-pick-bu', 'shadow' => TRUE);
+      $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_bu', 'shadow' => TRUE);
       echo gv_blocks_getBlockThemed($block_data);
       
     ?>
