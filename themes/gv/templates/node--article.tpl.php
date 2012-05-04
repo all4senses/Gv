@@ -161,6 +161,13 @@
 
   </div> <!-- main-content -->
  
+  <div class="providers">
+    <?php 
+      $block_data = array('module' => 'views', 'delta' => 'providers-block-pick-bu', 'shadow' => TRUE);
+      echo gv_blocks_getBlockThemed($block_data);
+      
+    ?>
+  </div>
   
   <?php print render($content['comments']); ?>
 
