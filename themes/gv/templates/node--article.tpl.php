@@ -82,14 +82,24 @@
         
         <div class="share">
           
+          <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
           
           <div class="main">
-            <?php 
-            dpm('http://getvoip.com'. url('node/' . $node->nid));
-            ?>
             <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-            <script type="IN/Share" data-url="" data-counter="right"></script>
+            <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right"></script>
           </div>
+          
+          <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+          <script type="text/javascript">
+            (function() {
+              var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+              po.src = 'https://apis.google.com/js/plusone.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+          </script>
+
+
+
           Share
         
         </div>
