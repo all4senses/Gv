@@ -20,7 +20,13 @@
           <?php //if (!$page): ?>
           <?php print render($title_prefix); ?>
           
-            <h2<?php print $title_attributes; ?>>
+            <?php if (!$page): ?>
+            <h2
+            <?php else: ?>
+            <h1>
+            <?php endif; ?>
+              
+              <?php print $title_attributes; ?>>
               <?php if (!isset($node->title_no_link) && !$page): ?>
                 <a href="<?php print $node_url; ?>">
                   <?php print $title; ?>
@@ -28,7 +34,13 @@
               <?php else: ?>
                 <?php print $title; ?>
               <?php endif; ?>
+              
+            <?php if (!$page): ?>
             </h2>
+            <?php else: ?>
+            </h1>
+            <?php endif; ?> 
+            
           
           <?php print render($title_suffix); ?>
           <?php //endif; ?>
