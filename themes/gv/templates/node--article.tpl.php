@@ -170,6 +170,7 @@
       
     ?>
   </div>
+  <div id="providers-bottom"></div>
   
   <?php print render($content['comments']); ?>
 
