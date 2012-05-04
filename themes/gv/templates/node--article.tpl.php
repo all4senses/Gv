@@ -89,7 +89,7 @@
         
         <?php 
           print render($content['field_topics']); 
-          
+          $tags = NULL;
           foreach (element_children($content['field_topics']) as $key) {
             $tags .= ($tags ? '<div class="delim>|</div>"' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/topic/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
           }
