@@ -35,23 +35,11 @@
         
         <span class="submitted">
           <?php 
-            
-            print $submitted;
+            $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
+            print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
             dpm($node);
             dpm($content);
-            
-            $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
-          dpm(preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted));   
-              
           ?>
-          
-          
-          <span rel="sioc:has_creator" datatype="xsd:dateTime" content="2012-04-12T12:57:09-04:00" property="dc:date dc:created">
-          Published by
-          <a class="username" property="foaf:name" typeof="sioc:UserAccount" about="/users/root" xml:lang="" title="View user profile." href="/users/root">Super Boss</a>
-          on Thu, 04/12/2012 - 12:57
-          </span>
-          
         </span>
         
       <?php endif; ?>
