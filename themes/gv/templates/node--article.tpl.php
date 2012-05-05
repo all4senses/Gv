@@ -45,7 +45,11 @@
           <?php print render($title_suffix); ?>
           <?php //endif; ?>
 
-
+<?php
+dpm($node);
+dpm($content);
+dpm($content['comments']);
+?>
 
           <?php if ($display_submitted): ?>
 
@@ -53,9 +57,6 @@
               <?php 
                 $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
                 print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
-                //dpm($node);
-                //dpm($content);
-                //dpm($content['comments']);
               ?>
             </span>
 
