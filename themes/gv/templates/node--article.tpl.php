@@ -56,6 +56,10 @@
                 if ($user->uid && $node->uid) {
                   print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
                 }
+                elseif (!$node->uid) {
+                  print preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
+                }
+                // Make a link for an authors profile from just a Name.
                 else {
                   print preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                 }
