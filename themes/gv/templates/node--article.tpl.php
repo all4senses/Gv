@@ -59,7 +59,7 @@
                 else {
                   print preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                 }
-                dpm($node);
+                //dpm($node);
                 //dpm($content);
                 //dpm($content['comments']);
               ?>
