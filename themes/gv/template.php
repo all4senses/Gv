@@ -126,6 +126,6 @@ function gv_preprocess_search_block_form(&$vars) {
 }
 
 
-function phptemplate_username($object) {
+function gv_username($object) {
   return str_replace(' ('. t('not verified') .')', '', theme_username($object));
 }
