@@ -1,11 +1,14 @@
 <section id="comments" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
-  <?php
-  dpm($content['comment_form']);
-  ?>
+  
     <?php if ($content['comment_form']): ?>
     <section id="comment-form-wrapper">
-      <h2 class="title"><?php print t('Add new comment'); ?></h2>
+      <h2 class="title"><?php print t('Add your comment'); ?></h2>
+      
+      <?php
+      $content['comment_form']['actions']['submit']['#value'] = t('Submit');
+      ?>
+      
       <?php print render($content['comment_form']); ?>
     </section> <!-- /#comment-form-wrapper -->
   <?php endif; ?>
