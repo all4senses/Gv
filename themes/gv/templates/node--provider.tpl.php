@@ -2,6 +2,13 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
 
+    
+<?php
+
+dpm($content);
+
+?>
+    
   <?php if ($user_picture || $display_submitted || !$page): ?>
     <?php if (!$page): ?>
       <header>
