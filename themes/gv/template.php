@@ -124,3 +124,8 @@ function gv_process_block(&$variables, $hook) {
 function gv_preprocess_search_block_form(&$vars) {
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
+
+
+function phptemplate_username($object) {
+  return str_replace(' ('. t('not verified') .')', '', theme_username($object));
+}
