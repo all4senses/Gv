@@ -53,7 +53,7 @@
               <?php 
                 $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
                 global $user;
-                if ($user->uid) {
+                if ($user->uid && $node->uid) {
                   print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
                 }
                 else {
