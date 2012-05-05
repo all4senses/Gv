@@ -52,7 +52,13 @@
             <span class="submitted">
               <?php 
                 $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
-                print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
+                global $user;
+                if ($user->uid) {
+                  print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
+                }
+                else {
+                  print preg_replace('/(<span.*>)(.*)<span(.*)>(.*)<\/span>(.*)(<\/span>)/', "$1By<a href='#' $3>$4</a>$created_str$5", $submitted);
+                }
                 dpm($node);
                 //dpm($content);
                 //dpm($content['comments']);
