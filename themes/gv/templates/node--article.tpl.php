@@ -57,7 +57,7 @@
                   print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
                 }
                 else {
-                  print preg_replace('/(<span.*>)(.*)<span(.*)>(.*)<\/span>(.*)(<\/span>)/', "$1By<a href='#' $3>$4</a>$created_str$5", $submitted);
+                  print preg_replace('/(<span.*>)(.*)<span(.*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href='#' $3>$4</a>$created_str$5", $submitted);
                 }
                 dpm($node);
                 //dpm($content);
