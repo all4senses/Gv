@@ -68,7 +68,7 @@ function gv_preprocess_node(&$variables) {
     $variables['classes_array'][] = 'node-full';
   }
   
-  if(isset($variables['node']) && $variables['node']->type == 'blog_post') {
+  if(isset($variables['node']) && ($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post')) {
     $variables['theme_hook_suggestions'][] = 'node__article';
   }
 }
