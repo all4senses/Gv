@@ -14,7 +14,7 @@ dpm($content);
         <?php if ($user_picture || $display_submitted || !$page): ?>
           <?php if (!$page): ?>
             <header>
-        <?php endif; ?>
+          <?php endif; ?>
 
 
             
@@ -51,6 +51,7 @@ dpm($content);
           <?php if (!$page): ?>
             </header>
           <?php endif; ?>
+    
         <?php endif; ?>
 
         <div class="content"<?php print $content_attributes; ?>>
@@ -71,15 +72,18 @@ dpm($content);
                   <footer>
 
                     <?php 
-                      $tags = NULL;
-                      foreach (element_children($content['field_topics']) as $key) {
-                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
-                      }
-                      if ($tags) {
-                        echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
+                      if (isset($content['field_topics'])) {
+                        $tags = NULL;
+                        foreach (element_children($content['field_topics']) as $key) {
+                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+                        }
+                        if ($tags) {
+                          echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
+                        }
                       }
                       //print render($content['field_topics']); 
                       //print render($content['links']);
+                      
                     ?>
                   </footer>
     
