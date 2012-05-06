@@ -152,19 +152,19 @@ function gv_blocks_get_topicsBlock($content_type) {
   global $language;
   $topics = NULL;
   $topics = cache_get($content_type . '_topics_block' . $language->language);
-  if (!$topics || empty($topics->data) || $topics->expire < time()) {
+  if (1) {// (!$topics || empty($topics->data) || $topics->expire < time()) {
     // Key = url_argument, used in building the url, 
     // for example,
     // topics/news for topics list for news 
     // OR blog/provider for show all blog posts tagged with 'provider' topic.
     $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
     $url_argument = $content_types[$content_type];
-    $topics = gv_misc_getTopics($content_type, $url_argument . '/topic', 2);
+    $topics = gv_misc_getTopics($content_type, $url_argument, 2);
     if(!$topics) {
       return NULL;
     }
     $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
-    $topics .= '<div class="more-link">' . l(t('More'), 'topics/' . $url_argument) . '</div>';
+    $topics .= '<div class="more-link">' . l(t('More'), 'tags/' . $url_argument) . '</div>';
     // Expire = current time + 4 hours.
     cache_set($content_type . '_topics_block' . $language->language, $topics, 'cache', time() + 14400);
   }
