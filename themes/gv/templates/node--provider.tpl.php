@@ -96,9 +96,16 @@ dpm($content);
                       
                       
               <div class="data tabs">
-                
-                
-                
+                <ul>
+                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : t(' provider') )); ?></a></li>
+                  <li><a href="#tabs-2"><?php echo t('Features & Pricing'); ?></a></li>
+                </ul>
+                <div id="tabs-1">
+                  <?php echo render($content['body']); ?>
+                </div>
+                <div id="tabs-2">
+                  <?php echo render($content['s_business_features_key']); ?>
+                </div>
               </div>
                       
           
