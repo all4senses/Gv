@@ -188,6 +188,8 @@ dpm($content);
         </footer>
     
       <?php endif; ?>
+        
+      <div class="shadow"></div>
 
   </div> <!-- main-content -->
   
