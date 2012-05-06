@@ -9,9 +9,9 @@ dpm($content);
 
 ?>
 
-        <?php if ($page): ?>
-          <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : '' )) ?></div>
-        <?php endif; ?>
+  <?php if ($page): ?>
+    <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : '' )) ?></div>
+  <?php endif; ?>
 
         
   <div class="main-content">
@@ -19,41 +19,15 @@ dpm($content);
     
         <?php if (!$page): ?>
           <header>
-        <?php endif; ?>
-
         
-
-        <?php //if (!$page): ?>
-        <?php print render($title_prefix); ?>
-
-          <?php if (!$page): ?>
-          <h2
-          <?php else: ?>
-          <h1
-          <?php endif; ?>
-
-            <?php print $title_attributes; ?>>
-            <?php if (!isset($node->title_no_link) && !$page): ?>
-              <a href="<?php print $node_url; ?>">
-                <?php print $title; ?>
-              </a>
-            <?php else: ?>
-              <?php print $title; ?>
-            <?php endif; ?>
-
-          <?php if (!$page): ?>
-          </h2>
-          <?php else: ?>
-          </h1>
-          <?php endif; ?> 
-
-
-        <?php print render($title_suffix); ?>
-        <?php //endif; ?>
-
-
-
-        <?php if (!$page): ?>
+            <?php print render($title_prefix); ?>
+            <h2<?php print $title_attributes; ?>>
+                <a href="<?php print $node_url; ?>">
+                  <?php print $title; ?>
+                </a>
+            </h2>
+            <?php print render($title_suffix); ?>
+        
           </header>
         <?php endif; ?>
     
@@ -67,6 +41,8 @@ dpm($content);
             hide($content['field_tags']);
             hide($content['reviews_entity_view_1']);
             
+            
+            echo theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')); 
             print render($content);
           ?>
         </div>
