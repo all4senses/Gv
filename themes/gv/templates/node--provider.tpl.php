@@ -59,18 +59,8 @@ dpm($content);
           
               <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
               <div class="share main">
-                <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-                <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
-
-                <script type="text/javascript">
-                  (function() {
-                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                    po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                  })();
-                </script>
-                <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
-
+               
+                <div>
                 <div id="fb-root"></div>
                 <script>(function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0];
@@ -80,9 +70,28 @@ dpm($content);
                   fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));</script>
                 <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
+                </div>
+                
+                <div>
+                <script type="text/javascript">
+                  (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                </script>
+                <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+                </div>
 
+                <div>
+                <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+                <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
+                </div>
+                
+                <div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
               </div> <!-- main share buttons -->
                       
                       
