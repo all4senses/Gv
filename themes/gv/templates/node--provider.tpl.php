@@ -9,13 +9,16 @@ dpm($content);
 
 ?>
 
+        <?php if ($page): ?>
+          <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup'])) ?></div>
+        <?php endif; ?>
+
+        
   <div class="main-content">
     
     
         <?php if (!$page): ?>
           <header>
-        <?php else: ?>
-            <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup'])) ?></div>
         <?php endif; ?>
 
         
