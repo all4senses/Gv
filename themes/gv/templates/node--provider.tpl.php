@@ -53,6 +53,7 @@ dpm($content);
                 <div><?php echo $content['i_availability']['#markup']; ?></div>
                 <div><?php echo $content['i_web']['#markup']; ?></div>
                 <div><?php echo $content['i_founded']['#markup']; ?></div>
+                <?php echo isset($content['i_email']['#markup']) ? ('<div>' . $content['i_email']['#markup'] . '</div>') : ''; ?>
               </div>
           
           
@@ -100,6 +101,7 @@ dpm($content);
             hide($content['field_p_logo']);
             hide($content['i_availability']);
             hide($content['i_web']);
+            hide($content['i_email']);
             hide($content['i_founded']);
             
             hide($content['reviews_entity_view_1']);
