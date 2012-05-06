@@ -217,7 +217,7 @@ dpm($content);
       <?php 
         // Hide Sort be Select element.
       //<div class="form-item form-type-select form-item-sort-by">
-        $content['reviews_entity_view_1'] = preg_replace('/(.*<div.*form-item-sort-by.*")(>.*)/', "$1 style=" . '"display: none;"' . "$2", $submitted);
+        $content['reviews_entity_view_1'] = preg_replace('/(.*<div.*form-item-sort-by.*\")(>.*)/', "$1 style=" . '"display: none;"' . "$2", $submitted);
         echo render($content['reviews_entity_view_1']); 
       ?>
       
