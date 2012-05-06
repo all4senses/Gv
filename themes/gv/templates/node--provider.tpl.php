@@ -138,6 +138,12 @@ dpm($content);
             hide($content['i_email']);
             hide($content['i_founded']);
             
+            hide($content['field_p_name']);
+            hide($content['field_p_erating']);
+            hide($content['field_p_erating']);
+            hide($content['field_p_types']);
+            
+            
             hide($content['reviews_entity_view_1']);
 
             echo render($content);
