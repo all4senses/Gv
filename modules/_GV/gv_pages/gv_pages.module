@@ -2114,7 +2114,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     }
     else {
       $node->content['gv_recommend'] = array(
-          '#markup' => '<div class="title">' . t($rating_titles['recommend']) . ':</div><div class="text">' . ($recommend_vote['value']?t('Yes'):t('No')) . '</div>',
+          '#markup' => '<div class="title">' . t($rating_titles['recommend']) . ':</div><div class="data">' . ($recommend_vote['value']?t('Yes'):t('No')) . '</div>',
       );
     }
     // In case of using the original fivestar theme function there should be connected original fivestar's css
