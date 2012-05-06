@@ -156,6 +156,7 @@ dpm($content);
             hide($content['field_p_erating']);
             hide($content['field_p_erating']);
             hide($content['field_p_types']);
+            hide($content['add_review']);
             
             
             hide($content['reviews_entity_view_1']);
