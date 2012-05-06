@@ -2084,21 +2084,26 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
           '#markup' => '<div class="title">' . t('Number of Reviews') . '</div><div class="count">' . $counts[0]['value'] . '</div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
       );
     }
-    dpm($node);
+    
+//    if ($overall_vote) {
+//      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . t(OVERALL) . $semicolon . '</div>' 
+//        // Using own theming function for fivestar (replicate of the original fivestar theme function).
+//        . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+//        // Using the original fivestar theme function.
+//        //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+//        . '</div>';
+//    }
     if ($overall_vote) {
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . t(OVERALL) . $semicolon . '</div>' 
-        // Using own theming function for fivestar (replicate of the original fivestar theme function).
-        . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
-        // Using the original fivestar theme function.
-        //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
-        . '</div>';
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . $node->field_p_name['und'][0]['safe_value'] . t('Overall Rated') . ':</div><div>' . $vote['value'] . '</div></div>';
     }
+    
+    
     // Recommend vote.
     if (isset($recommend_vote['function'])) {
       // If it's agregated cached results (calculated via function)
       // we'll show percent of voters recomendations.
       $node->content['gv_recommend'] = array(
-          '#markup' => '<div class="title">' . t('Would recommend this VoIP provider') . ': </div><div class="text">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div>',
+          '#markup' => '<div class="title">' . t('Would recommend') . ': </div><div class="text">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div>',
       );
     }
     else {
