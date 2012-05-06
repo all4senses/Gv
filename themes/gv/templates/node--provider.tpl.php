@@ -16,7 +16,7 @@ dpm($content);
           <header>
         <?php endif; ?>
 
-            <h1>sdfsdfsdf</h1>
+            
 
         <?php //if (!$page): ?>
         <?php print render($title_prefix); ?>
