@@ -86,7 +86,11 @@ dpm($content);
               </div> <!-- main share buttons -->
                       
                       
-                      
+              <div class="data tabs">
+                
+                
+                
+              </div>
                       
           
           <?php endif; ?>  
