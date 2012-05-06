@@ -99,7 +99,7 @@ dpm($content);
               <div class="data tabs">
                 
                 <ul>
-                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : t(' provider') )); ?></a></li>
+                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : t(' Provider') )); ?></a></li>
                   <li><a href="#tabs-2"><?php echo t('Features & Pricing'); ?></a></li>
                 </ul>
                 <div id="tabs-1">
@@ -121,9 +121,21 @@ dpm($content);
                 </div>
                 
               </div>
-                      
-          
-          <?php endif; ?>  
+              
+              
+              <?php echo render($content['gv_ratings']); ?>
+              <div class="overall"> 
+                <div class="text">
+                  <?php echo render($content['gv_voters']); ?>
+                  <?php echo render($content['gv_recommend']); ?>
+                  <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?>
+                </div>
+                <div class="star">
+                  <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 star') . '</div>'; ?>
+                </div>
+              </div>
+              
+          <?php endif; ?>  <!-- if ($page): -->
            
               
           <?php
