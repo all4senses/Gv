@@ -128,7 +128,7 @@ dpm($content);
                 <div class="text">
                   <?php echo render($content['gv_voters']); ?>
                   <?php echo render($content['gv_recommend']); ?>
-                  <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?>
+                  <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?></div>
                 </div>
               </div>
               <div class="star-big">
