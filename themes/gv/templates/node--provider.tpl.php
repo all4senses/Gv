@@ -189,10 +189,11 @@ dpm($content);
     
       <?php endif; ?>
         
-      <div class="shadow"></div>
+      
 
   </div> <!-- main-content -->
   
+  <div class="shadow"></div>
   
   
 
