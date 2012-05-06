@@ -10,7 +10,7 @@
 ?>
 
   <?php if ($page): ?>
-    <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : '' )) ?></div>
+    <div class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></div>
   <?php endif; ?>
 
         
@@ -45,7 +45,8 @@
                   echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>'; 
                 }
                 else {
-                  echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
+                  //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
+                  echo render($title_prefix), '<h1', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h1>', render($title_suffix);
                 }
               ?>
               <div class="basic-info">

@@ -2050,7 +2050,7 @@ function gv_pages_node_delete($node) {
  * @return void
  *   Return nothing.
  */
-function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
+function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicolon = '') {
   
   if ($votes) {
     //$rating_titles = array('features' => FEATURES, 'sound' => SOUND, 'service' => CUSTOMER, 'money' => PRICE, 'rely' => RELY, 'recommend' => RECOMMEND);
@@ -2070,7 +2070,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         $recommend_vote = $vote;
         continue;
       }
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . t($rating_titles[$vote['tag']]) . ':</div>' 
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
@@ -2078,7 +2078,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
         . '</div>';
     }
     if ($overall_vote) {
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . t(OVERALL) . ':</div>' 
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . t(OVERALL) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
@@ -2088,7 +2088,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL) {
     // Voters count.
     if ($counts) {
       $node->content['gv_voters'] = array(
-          '#markup' => t('Voters') . ': ' . $counts[0]['value'], // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
+          '#markup' => '<div class="title">' . t('Voters') . '</div><div class="count">' . $counts[0]['value'] . '</div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
       );
     }
     
