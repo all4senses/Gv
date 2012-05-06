@@ -135,6 +135,8 @@ dpm($content);
                 </div>
               </div>
               
+              <?php echo render($content['add_review']); ?>
+                
           <?php endif; ?>  <!-- if ($page): -->
            
               
