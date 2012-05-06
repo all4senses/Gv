@@ -196,6 +196,24 @@ dpm($content);
   <div class="shadow"></div>
   
   
+  
+  <div class="reviews">
+    <div class="header">
+      <div class="button"><?php echo t('User reviews'); ?></div>
+      <div class="button">
+        <?php 
+          if (isset($node->current_user_has_review)) {
+            echo l(t('Your Review'), $node->current_user_has_review); 
+          }
+          else {
+            echo l(t('Submit Your Review'), 'node/add/review'); 
+          }
+        ?>
+      </div>
+    </div>
+    
+  </div>
+  
 
 <?php if (!$page): ?>
   </article> <!-- /.node -->
