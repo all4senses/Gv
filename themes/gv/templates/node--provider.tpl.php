@@ -133,7 +133,7 @@ dpm($content);
               </div>
               <div class="star-big">
                 <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 star') . '</div>'; ?>
-              </div
+              </div>
               
               <?php echo render($content['add_review']); ?>
                 
