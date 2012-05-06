@@ -42,10 +42,10 @@ dpm($content);
              
               <?php
                 if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                  echo theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')); 
+                  echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>'; 
                 }
                 else {
-                  echo render($title_prefix), '<h2', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h2>', render($title_suffix);
+                  echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
                 }
               ?>
               <div class="basic-info">
