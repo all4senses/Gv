@@ -203,7 +203,7 @@ dpm($content);
       <div class="button">
         <?php 
           if (isset($node->current_user_has_review)) {
-            echo l(t('Your Review'), $node->current_user_has_review); 
+            echo l(t('Your Review'), $node->current_user_has_review, array('attributes' => array('title' => t('You have already submitted a review for this provider: "' . $node->current_user_has_review_title . '"')))); 
           }
           else {
             echo l(t('Submit Your Review'), 'node/add/review'); 

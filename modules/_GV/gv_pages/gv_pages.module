@@ -1818,6 +1818,7 @@ function gv_pages_node_view($node, $view_mode) {
               '#markup' => '<div class="add_review">' . t('You have already submitted a review for this provider:') . ' ' . l('"' . $review->title . '"', 'node/' . $review->nid) . '</div>',
             );
             $node->current_user_has_review = url('node/' . $review->nid);
+            $node->current_user_has_review_title = $review->title;
           }
         }
         else {
