@@ -11,48 +11,48 @@ dpm($content);
 
   <div class="main-content">
     
-        <?php if ($user_picture || $display_submitted || !$page): ?>
-          <?php if (!$page): ?>
-            <header>
-          <?php endif; ?>
-
-
-            
-          <?php //if (!$page): ?>
-          <?php print render($title_prefix); ?>
-          
-            <?php if (!$page): ?>
-            <h2
-            <?php else: ?>
-            <h1
-            <?php endif; ?>
-              
-              <?php print $title_attributes; ?>>
-              <?php if (!isset($node->title_no_link) && !$page): ?>
-                <a href="<?php print $node_url; ?>">
-                  <?php print $title; ?>
-                </a>
-              <?php else: ?>
-                <?php print $title; ?>
-              <?php endif; ?>
-              
-            <?php if (!$page): ?>
-            </h2>
-            <?php else: ?>
-            </h1>
-            <?php endif; ?> 
-            
-          
-          <?php print render($title_suffix); ?>
-          <?php //endif; ?>
-              
-              
-
-          <?php if (!$page): ?>
-            </header>
-          <?php endif; ?>
     
+        <?php if (!$page): ?>
+          <header>
         <?php endif; ?>
+
+            <h1>sdfsdfsdf</h1>
+
+        <?php //if (!$page): ?>
+        <?php print render($title_prefix); ?>
+
+          <?php if (!$page): ?>
+          <h2
+          <?php else: ?>
+          <h1
+          <?php endif; ?>
+
+            <?php print $title_attributes; ?>>
+            <?php if (!isset($node->title_no_link) && !$page): ?>
+              <a href="<?php print $node_url; ?>">
+                <?php print $title; ?>
+              </a>
+            <?php else: ?>
+              <?php print $title; ?>
+            <?php endif; ?>
+
+          <?php if (!$page): ?>
+          </h2>
+          <?php else: ?>
+          </h1>
+          <?php endif; ?> 
+
+
+        <?php print render($title_suffix); ?>
+        <?php //endif; ?>
+
+
+
+        <?php if (!$page): ?>
+          </header>
+        <?php endif; ?>
+    
+
 
         <div class="content"<?php print $content_attributes; ?>>
           <?php

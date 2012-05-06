@@ -7,75 +7,74 @@
   <div class="main-content">
  
           
-      <?php if ($user_picture || $display_submitted || !$page): ?>
 
-        <?php if (!$page): ?>
-          <header>
-        <?php endif; ?>
+      <?php if (!$page): ?>
+        <header>
+      <?php endif; ?>
 
-          <?php print $user_picture; ?>
-
-
- 
-          <?php //if (!$page): ?>
-          <?php print render($title_prefix); ?>
-          
-            <?php if (!$page): ?>
-            <h2
-            <?php else: ?>
-            <h1
-            <?php endif; ?>
-              
-              <?php print $title_attributes; ?>>
-              <?php if (!isset($node->title_no_link) && !$page): ?>
-                <a href="<?php print $node_url; ?>">
-                  <?php print $title; ?>
-                </a>
-              <?php else: ?>
-                <?php print $title; ?>
-              <?php endif; ?>
-              
-            <?php if (!$page): ?>
-            </h2>
-            <?php else: ?>
-            </h1>
-            <?php endif; ?> 
-            
-          
-          <?php print render($title_suffix); ?>
-          <?php //endif; ?>
+        <?php print $user_picture; ?>
 
 
 
-          <?php if ($display_submitted): ?>
+        <?php //if (!$page): ?>
+        <?php print render($title_prefix); ?>
 
-            <span class="submitted">
-              <?php 
-                $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
-                global $user;
-                if ($user->uid && $node->uid) {
-                  print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
-                }
-                elseif (!$node->uid) {
-                  print preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1By $3 $created_str$5", $submitted);
-                }
-                // Make a link for an authors profile from just a Name.
-                else {
-                  print preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
-                }
-                //dpm($node);
-                //dpm($content);
-                //dpm($content['comments']);
-              ?>
-            </span>
-
+          <?php if (!$page): ?>
+          <h2
+          <?php else: ?>
+          <h1
           <?php endif; ?>
 
-        <?php if (!$page): ?>
-          </header>
+            <?php print $title_attributes; ?>>
+            <?php if (!isset($node->title_no_link) && !$page): ?>
+              <a href="<?php print $node_url; ?>">
+                <?php print $title; ?>
+              </a>
+            <?php else: ?>
+              <?php print $title; ?>
+            <?php endif; ?>
+
+          <?php if (!$page): ?>
+          </h2>
+          <?php else: ?>
+          </h1>
+          <?php endif; ?> 
+
+
+        <?php print render($title_suffix); ?>
+        <?php //endif; ?>
+
+
+
+        <?php if ($display_submitted): ?>
+
+          <span class="submitted">
+            <?php 
+              $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
+              global $user;
+              if ($user->uid && $node->uid) {
+                print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
+              }
+              elseif (!$node->uid) {
+                print preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1By $3 $created_str$5", $submitted);
+              }
+              // Make a link for an authors profile from just a Name.
+              else {
+                print preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
+              }
+              //dpm($node);
+              //dpm($content);
+              //dpm($content['comments']);
+            ?>
+          </span>
+
         <?php endif; ?>
 
+      <?php if (!$page): ?>
+        </header>
       <?php endif; ?>
+
+
 
       <div class="content"<?php print $content_attributes; ?>>
         <?php
