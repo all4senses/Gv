@@ -2084,7 +2084,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     // Voters count.
     if ($counts) {
       $node->content['gv_voters'] = array(
-          '#markup' => '<div class="title">' . t('Number of Reviews') . '</div><div class="count">' . $counts[0]['value'] . '</div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
+          '#markup' => '<div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $counts[0]['value'] . '</div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
       );
     }
     
@@ -2109,7 +2109,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
       // If it's agregated cached results (calculated via function)
       // we'll show percent of voters recomendations.
       $node->content['gv_recommend'] = array(
-          '#markup' => '<div class="title">' . t('Would recommend') . ': </div><div class="data">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div>',
+          '#markup' => '<div class="recommend"><div class="title">' . t('Would recommend') . ': </div><div class="data">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div></div>',
       );
     }
     else {
