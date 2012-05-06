@@ -41,6 +41,12 @@ dpm($content);
             hide($content['comments']);
             hide($content['links']);
             hide($content['field_tags']);
+            
+            hide($content['field_p_logo']);
+            hide($content['i_availability']);
+            hide($content['i_web']);
+            hide($content['i_founded']);
+            
             hide($content['reviews_entity_view_1']);
            ?>
           
