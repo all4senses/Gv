@@ -2084,7 +2084,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     // Voters count.
     if ($counts) {
       $node->content['gv_voters'] = array(
-          '#markup' => '<div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $counts[0]['value'] . '</div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
+          '#markup' => '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $counts[0]['value'] . '</div></div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
       );
     }
     
