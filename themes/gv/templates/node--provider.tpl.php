@@ -60,7 +60,7 @@ dpm($content);
               <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
               <div class="share main">
                
-                <div class="s">
+                <div>
                 <div id="fb-root"></div>
                 <script>(function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0];
