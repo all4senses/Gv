@@ -2073,7 +2073,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
         $recommend_vote = $vote;
         continue;
       }
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote ' . (in_array($zebra, $zebra_ood) ? 'odd' : 'even') .'"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote ' . (in_array($zebra, $zebra_odd) ? 'odd' : 'even') .'"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
