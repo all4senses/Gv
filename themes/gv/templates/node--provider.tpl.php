@@ -135,6 +135,8 @@ dpm($content);
                 </div>
               </div>
               
+              <div class="bottom"></div>
+              
           <?php endif; ?>  <!-- if ($page): -->
            
               
