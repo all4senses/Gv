@@ -36,19 +36,7 @@ dpm($content);
 
         <div class="content"<?php print $content_attributes; ?>>
           
-          <?php
-            // Hide comments, tags, and links now so that we can render them later.
-            hide($content['comments']);
-            hide($content['links']);
-            hide($content['field_tags']);
-            
-            hide($content['field_p_logo']);
-            hide($content['i_availability']);
-            hide($content['i_web']);
-            hide($content['i_founded']);
-            
-            hide($content['reviews_entity_view_1']);
-           ?>
+          
           
            <?php if ($page): ?>
              
@@ -100,9 +88,22 @@ dpm($content);
                       
           
           <?php endif; ?>  
-            
+           
+              
           <?php
-            print render($content);
+            // Hide already shown anr render the rest.
+            hide($content['comments']);
+            hide($content['links']);
+            hide($content['field_tags']);
+            
+            hide($content['field_p_logo']);
+            hide($content['i_availability']);
+            hide($content['i_web']);
+            hide($content['i_founded']);
+            
+            hide($content['reviews_entity_view_1']);
+
+            echo render($content);
           ?>
           
         </div> <!-- content -->
