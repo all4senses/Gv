@@ -10,7 +10,7 @@ dpm($content);
 ?>
 
         <?php if ($page): ?>
-          <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup'])) ?></div>
+          <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : '' )) ?></div>
         <?php endif; ?>
 
         
