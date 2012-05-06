@@ -130,10 +130,10 @@ dpm($content);
                   <?php echo render($content['gv_recommend']); ?>
                   <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?>
                 </div>
-                <div class="star">
-                  <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 star') . '</div>'; ?>
-                </div>
               </div>
+              <div class="star-big">
+                <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 star') . '</div>'; ?>
+              </div
               
               <?php echo render($content['add_review']); ?>
                 
