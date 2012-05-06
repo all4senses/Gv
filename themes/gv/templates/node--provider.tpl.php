@@ -14,9 +14,11 @@ dpm($content);
     
         <?php if (!$page): ?>
           <header>
+        <?php else: ?>
+            <div class="supertitle"><?php echo t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup'])) ?></div>
         <?php endif; ?>
 
-            
+        
 
         <?php //if (!$page): ?>
         <?php print render($title_prefix); ?>
