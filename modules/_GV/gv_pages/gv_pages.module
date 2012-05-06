@@ -2061,7 +2061,10 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
         '#suffix' => '</div>',
     );
 
+    $zebra = 0;
+    $zebra_odd = array(1,3,5,7,9);
     foreach ($votes as $key => $vote) {
+      $zebra++;
       if ($vote['tag'] == 'overall') {
         $overall_vote = $vote;
         continue;
@@ -2070,7 +2073,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
         $recommend_vote = $vote;
         continue;
       }
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote ' . (in_array($zebra, $zebra_ood) ? 'odd' : 'even') .'"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         // Using the original fivestar theme function.
@@ -2094,6 +2097,8 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
 //        . '</div>';
 //    }
     if ($overall_vote) {
+      // Add a caption.
+      $node->content['gv_ratings']['#markup'] = '<div class="caption">' . t('Average Customer Rating') . '</div>' . $node->content['gv_ratings']['#markup'];
       //$node->content['gv_rating_overall']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . $node->field_p_name['und'][0]['safe_value'] . ' ' . t('Overall Rated') . ':</div><div>' . $overall_vote['value'] . '</div></div>';
       $node->content['gv_rating_overall']['#markup'] = '<div class="count">' . number_format($overall_vote['value'] * 0.05, 1) . '</div>';
     }
