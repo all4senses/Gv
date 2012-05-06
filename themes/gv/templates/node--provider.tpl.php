@@ -107,12 +107,12 @@ dpm($content);
                 <div id="tabs-2">
                   <?php 
                   foreach($content as $field_title => $value) {
-                    if (strpos($field_title, 'bu_') !== FALSE) {
+                    if (strpos($field_title, 'bu_') === 0) {
                       echo render($content[$field_title]);
                     }
                   }
                   foreach($content as $field_title => $value) {
-                    if (strpos($field_title, 's_') !== FALSE) {
+                    if (strpos($field_title, 's_') === 0) {
                       echo render($content[$field_title]);
                     }
                   }
