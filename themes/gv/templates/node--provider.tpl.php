@@ -15,7 +15,7 @@
       <h1<?php print ' class="supertitle" ' . $title_attributes; ?>>
           <a href="<?php print $node_url; ?>">
             <?php 
-              print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></h2>
+              print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
             ?>
           </a>
       </h1>
