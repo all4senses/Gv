@@ -2,7 +2,6 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <div class="inside">
 <?php endif; ?>
-<div>xxxxxxxxxxxxxxxxxxxx</div>
   <?php if ($user_picture || $display_submitted || !$page): ?>
     <?php if (!$page): ?>
       <header>
