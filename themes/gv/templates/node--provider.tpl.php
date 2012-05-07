@@ -12,13 +12,13 @@
   <?php if ($page): ?>
       
       <?php print render($title_prefix); ?>
-      <h1<?php print ' class="supertitle" ' . $title_attributes; ?>>
+      <div class="supertitle"><h1<?php print $title_attributes; ?>>
           <a href="<?php print $node_url; ?>">
             <?php 
               print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
             ?>
           </a>
-      </h1>
+      </h1></div>
       <?php print render($title_suffix); ?>
 
   <?php endif; ?>
@@ -145,7 +145,7 @@
                 </div>
               </div>
               
-              <div class="bottom"></div>
+              <div class="bottom-clear"></div>
               
           <?php endif; ?>  <!-- if ($page): -->
            

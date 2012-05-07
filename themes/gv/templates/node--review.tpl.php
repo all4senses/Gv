@@ -12,32 +12,32 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-    
-          <?php print render($title_prefix); ?>
+          <div class="supertitle">
+            <?php print render($title_prefix); ?>
 
-          <?php if (!$page): ?>
-          <h2
-          <?php else: ?>
-          <h1
-          <?php endif; ?>
-
-            <?php print ' class="supertitle" ' . $title_attributes; ?>>
-            <?php if (!isset($node->title_no_link) && !$page): ?>
-              <a href="<?php print $node_url; ?>">
-                <?php print $title; ?>
-              </a>
+            <?php if (!$page): ?>
+            <h2
             <?php else: ?>
-              <?php print $title; ?>
+            <h1
             <?php endif; ?>
 
-          <?php if (!$page): ?>
-          </h2>
-          <?php else: ?>
-          </h1>
-          <?php endif; ?> 
+              <?php print $title_attributes; ?>>
+              <?php if (!isset($node->title_no_link) && !$page): ?>
+                <a href="<?php print $node_url; ?>">
+                  <?php print $title; ?>
+                </a>
+              <?php else: ?>
+                <?php print $title; ?>
+              <?php endif; ?>
 
-          <?php print render($title_suffix); ?>    
-
+            <?php if (!$page): ?>
+            </h2>
+            <?php else: ?>
+            </h1>
+            <?php endif; ?> 
+          
+            <?php print render($title_suffix); ?>    
+          </div>
 
     
         
@@ -53,7 +53,7 @@
           <?php echo render($content['gv_ratings']); ?>
               
               
-          <div class="bottom"></div>
+          <div class="bottom-clear"></div>
           
            
               
