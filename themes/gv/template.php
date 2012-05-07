@@ -75,6 +75,7 @@ function gv_preprocess_node(&$variables) {
     else {
       $variables['theme_hook_suggestions'][] = 'node__' . $variables['node']->type;
     }
+    dpm($variables['theme_hook_suggestions']);
   }
   
 }
