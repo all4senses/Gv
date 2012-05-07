@@ -11,8 +11,14 @@ dpm($content);
 
   <?php if ($page): ?>
     <div class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></div>
+    <?php
+       if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
+          echo drupal_get_form('gv_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
+        }
+     ?>
   <?php endif; ?>
 
+    
         
   <div class="main-content">
     
