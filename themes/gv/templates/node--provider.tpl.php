@@ -9,7 +9,12 @@
 
 ?>
 
-  <?php if ($page): ?>
+
+
+        
+  <div class="main-content">
+
+      <?php if ($page): ?>
       
       <div class="supertitle">
       <?php print render($title_prefix); ?>
@@ -21,10 +26,6 @@
       <?php print render($title_suffix); ?>
       </div>
   <?php endif; ?>
-
-        
-  <div class="main-content">
-    
     
         <?php if (!$page): ?>
           <header>
