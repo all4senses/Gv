@@ -72,12 +72,6 @@ function gv_preprocess_node(&$variables) {
     if($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post') {
       $variables['theme_hook_suggestions'][] = 'node__article';
     }
-    else {
-      $variables['theme_hook_suggestions'][] = 'node__' . $variables['node']->type;
-    }
-    
-    //dpm($variables['theme_hook_suggestions']);
-    //dpm($variables);
   }
   
 }
