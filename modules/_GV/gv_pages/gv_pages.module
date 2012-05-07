@@ -33,10 +33,10 @@ function gv_pages_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
-  $items['%/tags'] = array(
+  $items['articles/tags'] = array(
     //'title' => 'Topics page',
     'page callback' => 'gv_pages_buildTopicsPage',
-    'page arguments' => array(1),
+    'page arguments' => aray('articles'),//array(1),
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
