@@ -67,10 +67,16 @@ function gv_preprocess_node(&$variables) {
   if ($variables['view_mode'] == 'full' && node_is_page($variables['node'])) {
     $variables['classes_array'][] = 'node-full';
   }
-  
-  if(isset($variables['node']) && ($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post')) {
-    $variables['theme_hook_suggestions'][] = 'node__article';
+  if(isset($variables['node'])) {
+    
+    if($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post') {
+      $variables['theme_hook_suggestions'][] = 'node__article';
+    }
+    else {
+      $variables['theme_hook_suggestions'][] = 'node__' . $variables['node']->type;
+    }
   }
+  
 }
 
 /**
