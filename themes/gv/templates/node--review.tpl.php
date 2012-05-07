@@ -12,34 +12,29 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-          <div class="supertitle">
-            <?php print render($title_prefix); ?>
-
-            <?php if (!$page): ?>
-            <h2
-            <?php else: ?>
-            <h1
+            <?php if ($page): ?>
+                <?php print render($title_prefix); ?>
+                <h1<?php print $title_attributes; ?>>
+                      <?php 
+                        print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
+                      ?>
+                </h1>
+                <?php print render($title_suffix); ?>
             <?php endif; ?>
 
-              <?php print $title_attributes; ?>>
-              <?php if (!isset($node->title_no_link) && !$page): ?>
-                <a href="<?php print $node_url; ?>">
-                  <?php print $title; ?>
-                </a>
-              <?php else: ?>
-                <?php print $title; ?>
-              <?php endif; ?>
-
             <?php if (!$page): ?>
-            </h2>
-            <?php else: ?>
-            </h1>
-            <?php endif; ?> 
-          
-            <?php print render($title_suffix); ?>    
-          </div>
+              <header>
 
-    
+                <?php print render($title_prefix); ?>
+                <h2<?php print $title_attributes; ?>>
+                    <a href="<?php print $node_url; ?>">
+                      <?php print $title; ?>
+                    </a>
+                </h2>
+                <?php print render($title_suffix); ?>
+
+              </header>
+            <?php endif; ?>
         
   <div class="main-content">
     

@@ -10,8 +10,6 @@
 ?>
 
   <?php if ($page): ?>
-      
-      <div class="supertitle">
       <?php print render($title_prefix); ?>
       <h1<?php print $title_attributes; ?>>
             <?php 
@@ -19,7 +17,6 @@
             ?>
       </h1>
       <?php print render($title_suffix); ?>
-      </div>
   <?php endif; ?>
 
         
