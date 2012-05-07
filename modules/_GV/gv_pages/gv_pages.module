@@ -40,6 +40,20 @@ function gv_pages_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
+  $items['blog/tags'] = array(
+    //'title' => 'Topics page',
+    'page callback' => 'gv_pages_buildTopicsPage',
+    'page arguments' => array('articles'),//array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  $items['news/tags'] = array(
+    //'title' => 'Topics page',
+    'page callback' => 'gv_pages_buildTopicsPage',
+    'page arguments' => array('articles'),//array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
   
   return $items;
 }
