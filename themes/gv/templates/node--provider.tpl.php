@@ -11,16 +11,17 @@
 
   <?php if ($page): ?>
       
+      <div class="supertitle">
       <?php print render($title_prefix); ?>
-      <div class="supertitle"><h1<?php print $title_attributes; ?>>
+      <h1<?php print $title_attributes; ?>>
           <a href="<?php print $node_url; ?>">
             <?php 
               print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
             ?>
           </a>
-      </h1></div>
+      </h1>
       <?php print render($title_suffix); ?>
-
+      </div>
   <?php endif; ?>
 
         
