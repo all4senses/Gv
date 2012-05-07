@@ -10,7 +10,17 @@
 ?>
 
   <?php if ($page): ?>
-    <h2 class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></h2>
+      
+      <?php print render($title_prefix); ?>
+      <h1<?php print ' class="supertitle" ' . $title_attributes; ?>>
+          <a href="<?php print $node_url; ?>">
+            <?php 
+              print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></h2>
+            ?>
+          </a>
+      </h1>
+      <?php print render($title_suffix); ?>
+
   <?php endif; ?>
 
         

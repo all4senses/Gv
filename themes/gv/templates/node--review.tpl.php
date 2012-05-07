@@ -1,35 +1,42 @@
 <div>RRR</div>
 <?php
 
-//dpm($content);
-dpm($title_attributes);
+  if ($node->nid == 12) {
+    dpm($content);
+  }
+
 
 ?>
 
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
+   
+    
+          <?php print render($title_prefix); ?>
 
-<?php if ($page): ?>
-    <h2 class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></h2>
-<?php endif; ?>
-    
-        <?php if (!$page): ?>
-          <header>
-           
-            <?php print render($title_prefix); ?>
-            <div class="supertitle"><h2
-              <?php print $title_attributes; ?>>
-                <a href="<?php print $node_url; ?>">
-                  <?php print $title; ?>
-                </a>
-            </h2></div>
-            <?php print render($title_suffix); ?>
-        
-          </header>
-        <?php endif; ?>
-    
-  
+          <?php if (!$page): ?>
+          <h2
+          <?php else: ?>
+          <h1
+          <?php endif; ?>
+
+            <?php print ' class="supertitle" ' . $title_attributes; ?>>
+            <?php if (!isset($node->title_no_link) && !$page): ?>
+              <a href="<?php print $node_url; ?>">
+                <?php print $title; ?>
+              </a>
+            <?php else: ?>
+              <?php print $title; ?>
+            <?php endif; ?>
+
+          <?php if (!$page): ?>
+          </h2>
+          <?php else: ?>
+          </h1>
+          <?php endif; ?> 
+
+          <?php print render($title_suffix); ?>    
 
 
     
