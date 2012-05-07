@@ -37,17 +37,11 @@ dpm($content);
 
         <div class="content"<?php print $content_attributes; ?>>
           
+          <?php echo render($content['gv_ratings']); ?>
+              
+              
+          <div class="bottom"></div>
           
-          
-           <?php if ($page): ?>
-             
-              
-              <?php echo render($content['gv_ratings']); ?>
-              
-              
-              <div class="bottom"></div>
-              
-          <?php endif; ?>  <!-- if ($page): -->
            
               
           <?php
