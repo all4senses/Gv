@@ -10,7 +10,7 @@
 ?>
 
   <?php if ($page): ?>
-    <div class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></div>
+    <h2 class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></h2>
   <?php endif; ?>
 
         

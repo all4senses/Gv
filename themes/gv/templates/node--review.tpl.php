@@ -1,7 +1,8 @@
 <div>RRR</div>
 <?php
 
-dpm($content);
+//dpm($content);
+dpm($title_attributes);
 
 ?>
 
@@ -9,28 +10,33 @@ dpm($content);
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
 
-  <?php if ($page): ?>
-    <div class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></div>
-  <?php endif; ?>
+<?php if ($page): ?>
+    <h2 class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></h2>
+<?php endif; ?>
+    
+        <?php if (!$page): ?>
+          <header>
+           
+            <?php print render($title_prefix); ?>
+            <div class="supertitle"><h2
+              <?php print $title_attributes; ?>>
+                <a href="<?php print $node_url; ?>">
+                  <?php print $title; ?>
+                </a>
+            </h2></div>
+            <?php print render($title_suffix); ?>
+        
+          </header>
+        <?php endif; ?>
+    
+  
+
 
     
         
   <div class="main-content">
     
     
-        <?php if (!$page): ?>
-          <header>
-        
-            <?php print render($title_prefix); ?>
-            <h2<?php print $title_attributes; ?>>
-                <a href="<?php print $node_url; ?>">
-                  <?php print $title; ?>
-                </a>
-            </h2>
-            <?php print render($title_suffix); ?>
-        
-          </header>
-        <?php endif; ?>
     
 
     
