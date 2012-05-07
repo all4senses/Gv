@@ -164,7 +164,7 @@ function gv_blocks_get_topicsBlock($content_type) {
       return NULL;
     }
     $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
-    $topics .= '<div class="more-link">' . l(t('More'), 'tags/' . $url_argument) . '</div>';
+    $topics .= '<div class="more-link">' . l(t('More'), $url_argument . '/tags') . '</div>';
     // Expire = current time + 4 hours.
     cache_set($content_type . '_topics_block' . $language->language, $topics, 'cache', time() + 14400);
   }
