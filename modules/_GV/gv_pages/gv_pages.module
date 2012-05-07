@@ -1772,7 +1772,7 @@ function gv_pages_node_view($node, $view_mode) {
       // Show preview of the provider (as a teaser)
       if ($view_mode == 'full') {
         if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
-          $node->content += drupal_get_form('gv_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
+          //////$node->content += drupal_get_form('gv_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
         }
       }
       
