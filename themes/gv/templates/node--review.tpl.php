@@ -1,14 +1,14 @@
-<?php if (!$page): ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-<?php endif; ?>
-
-    
 <?php
 
 dpm($content);
 
 ?>
 
+<?php if (!$page): ?>
+  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<?php endif; ?>
+
+    
   <?php if ($page): ?>
     <div class="supertitle"><?php echo $title;//t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) ) ?></div>
   <?php endif; ?>
