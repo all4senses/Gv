@@ -1680,16 +1680,17 @@ function gv_pages_node_presave($node) {
         }
         
         // Calculate overall average rating.
+        $rating_overall = $overall_summ / $overall_count;
         $votes[] = array(
           'tag' => 'overall',
           'entity_type' => 'node',
           'entity_id' => $provider_nid,
           'value_type' => 'percent',
-          'value' => $overall_summ / $overall_count,
+          'value' => $rating_overall,
           'uid' => $node->uid,
           'vote_source' => $node->field_r_email['und'][0]['value'],
         );
-        
+        $node->field_r_rating_overall['und'][0]['value'] = number_format($rating_overall * 0.05, 1);
         
         // Remove (clear) this review's previous votes from a target provider calculation set.
         foreach ($votes as $c) {
