@@ -2090,9 +2090,9 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     );
 
     //Sort votes.
-    foreach ($rating_titles as $rating_titles) {
+    foreach ($rating_titles as $rating_tag => $rating_title) {
       foreach ($votes as $vote) {
-        if($vote['tag'] == $rating_titles) {
+        if($vote['tag'] == $rating_tag) {
           $votes_sorted[] = $vote;
         }
       }
