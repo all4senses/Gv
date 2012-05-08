@@ -870,6 +870,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
     
     case 'rating':
     
+      $all_data_quick = gv_misc_getProvidersDataQuick();
       $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
                 
@@ -878,7 +879,8 @@ function wdg_misc_getProviderQuickData($target, $data) {
               //. '<div class="voters">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . t('reviews') . '</div>'
               ;
         
-        $out = '<div class="details"><a href="' . url('node/' . $data['data']->nid) . '">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . $data['data']->node_title . '<br>' . t('Reviews') . '</a></div>' . $out . ' <div class="count">(' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ')</div>';
+        //$out = '<div class="details"><a href="' . url('node/' . $data['data']->nid) . '">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . $data['data']->node_title . '<br>' . t('Reviews') . '</a></div>' . $out . ' <div class="count">(' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ')</div>';
+        $out = '<div class="details"><a href="' . url('node/' . $data['data']->nid) . '">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . $all_data_quick[$data['data']->nid]['name'] . '<br>' . t('Reviews') . '</a></div>' . $out . ' <div class="count">(' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ')</div>';
       }
       return $out;
       
