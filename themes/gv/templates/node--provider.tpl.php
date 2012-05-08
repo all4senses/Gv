@@ -129,7 +129,7 @@
               </div>
               
               
-              <?php echo render($content['gv_ratings']); ?>
+              <div class="gv_votes"><?php echo render($content['gv_ratings']); ?></div>
               <div class="overall"> 
                 <div class="text">
                   <?php echo render($content['gv_voters']); ?>

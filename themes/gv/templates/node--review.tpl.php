@@ -1,7 +1,7 @@
 <div>RRR</div>
 <?php
 
-  if ($node->nid == 12) {
+  if ($node->nid == 48) {
     dpm($content);
   }
 
@@ -45,7 +45,7 @@
 
         <div class="content"<?php print $content_attributes; ?>>
           
-          <?php echo render($content['gv_ratings']); ?>
+          <div class="gv_votes"><?php echo render($content['gv_ratings']); ?></div>
               
               
           <div class="bottom-clear"></div>
