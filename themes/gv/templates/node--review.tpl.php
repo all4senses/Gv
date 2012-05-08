@@ -59,13 +59,13 @@
             <div class="pros-cons">
               <?php
                 if ($content['r_data']['pros']) {
-                  echo '<div class="pros frame"><div class="caption">' . t('Pros:') . '</div><text>' . $content['r_data']['pros'] . '</div></div>';
+                  echo '<div class="pros frame"><div class="caption">' . t('Pros:') . '</div><div class="text">' . $content['r_data']['pros'] . '</div></div>';
                 }
                 if($content['r_data']['pros'] && $content['r_data']['pros']) {
                   echo '<div class="vs">' . t('VS') . '</div>';
                 }
                 if ($content['r_data']['cons']) {
-                  echo '<div class="cons frame"><div class="caption">' . t('Cons:') . '</div><text>' . $content['r_data']['cons'] . '</div></div>';
+                  echo '<div class="cons frame"><div class="caption">' . t('Cons:') . '</div><div class="text">' . $content['r_data']['cons'] . '</div></div>';
                 }
               ?>
             </div>
