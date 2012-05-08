@@ -48,7 +48,7 @@
           <div class="gv_votes">
             <?php echo render($content['gv_ratings']); ?>
             <div class="rate-other">
-              <div class="text"><?php echo '<div class="title">' , t('Rating:') , '</div>' , render($content['gv_ratings']); ?></div>
+              <div class="text"><?php echo '<div class="title">' , t('Rating:') , '</div>' , render($content['gv_rating_overall']); ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('d Y', $node->created) , '</div>'; ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' . $node->name , '</div>'; ?></div>
               <div class="text"><?php echo render($content['gv_recommend']); ?></div>
