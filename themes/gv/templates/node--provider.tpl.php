@@ -5,7 +5,8 @@
     
 <?php
 
-//dpm($content);
+dpm($content);
+dpm($node);
 
 ?>
 
