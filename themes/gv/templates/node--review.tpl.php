@@ -1,4 +1,3 @@
-<div>RRR</div>
 <?php
 
   if ($node->nid == 48) {

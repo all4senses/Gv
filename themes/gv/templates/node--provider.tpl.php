@@ -67,7 +67,7 @@
               <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
               <div class="share main">
                
-                <div>
+                <div id="fb">
                 <div id="fb-root"></div>
                 <script>(function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0];
