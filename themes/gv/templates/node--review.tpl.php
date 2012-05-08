@@ -61,7 +61,7 @@
             <?php echo render($content['body']); ?>
           </div>
           <div class="bottom-clear"></div>
-          <div class="links"><?php echo l(t('Visit Just Host'), ''); ?><span class="delim">|</span><?php echo l(t('Write a Review'), 'node/add/review'); ?></div>
+          <div class="links"><?php echo l(t('Visit Just Host'), $content['provider_url']); ?><span class="delim">|</span><?php echo l(t('Write a Review'), 'node/add/review'); ?></div>
            
               
           <?php

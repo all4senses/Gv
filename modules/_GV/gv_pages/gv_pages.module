@@ -1780,11 +1780,10 @@ function gv_pages_node_view($node, $view_mode) {
         global $provider_url;
         if (!$provider_url) {
           $provider = node_load($node->field_ref_provider['und'][0]['target_id']);
-          dpm($provider);
           $p_data = unserialize($provider->field_p_data['und'][0]['value']);
-          $provider_url = $p_data['info']['i_web'];
-          dpm($provider_url);
+          $provider_url = 'http://' . $p_data['info']['i_web'];
         }
+        $node->content['provider_url'] = $provider_url;
       }
       
       // Show data from field_r_oprovider, if is not set field_ref_provider
