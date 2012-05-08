@@ -52,7 +52,7 @@
                 }
                 else {
                   //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
-                  echo render($title_prefix), '<h1', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h1>', render($title_suffix);
+                  echo render($title_prefix), '<h2', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h2>', render($title_suffix);
                 }
               ?>
               <div class="basic-info">
