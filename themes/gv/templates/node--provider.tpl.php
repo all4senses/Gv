@@ -5,8 +5,8 @@
     
 <?php
 
-dpm($content);
-dpm($node->p_data);
+//dpm($content);
+//dpm($node->p_data);
 
 ?>
 
@@ -128,7 +128,7 @@ dpm($node->p_data);
                     $prefix = 're';
                   }
                   
-                  echo  '<div class="f caption">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
+                  echo  '<div class="f caption plan">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>',
                           
                           '<div class="f caption">' , t('Pricing') , ':</div>',
@@ -142,7 +142,7 @@ dpm($node->p_data);
                           '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] : t('N/A') ) , '</div></div>',
                           '</div>',
                             
-                          '<div class="f caption">' , t('Money Back Guarantee') , ':</div>',
+                          '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_money_back_guarantee']) , '</div>';
                           
                           if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
@@ -192,26 +192,26 @@ dpm($node->p_data);
               
           <?php
             // Hide already shown anr render the rest.
-            hide($content['comments']);
-            hide($content['links']);
-            hide($content['field_tags']);
-            
-            hide($content['field_p_logo']);
-            hide($content['i_availability']);
-            hide($content['i_web']);
-            hide($content['i_email']);
-            hide($content['i_founded']);
-            
-            hide($content['field_p_name']);
-            hide($content['field_p_erating']);
-            hide($content['field_p_erating']);
-            hide($content['field_p_types']);
-            hide($content['add_review']);
-            
-            
-            hide($content['reviews_entity_view_1']);
-
-            //echo render($content);
+//            hide($content['comments']);
+//            hide($content['links']);
+//            hide($content['field_tags']);
+//            
+//            hide($content['field_p_logo']);
+//            hide($content['i_availability']);
+//            hide($content['i_web']);
+//            hide($content['i_email']);
+//            hide($content['i_founded']);
+//            
+//            hide($content['field_p_name']);
+//            hide($content['field_p_erating']);
+//            hide($content['field_p_erating']);
+//            hide($content['field_p_types']);
+//            hide($content['add_review']);
+//            
+//            
+//            hide($content['reviews_entity_view_1']);
+//
+//            echo render($content);
           ?>
           
         </div> <!-- content -->
