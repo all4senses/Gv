@@ -3,7 +3,7 @@
 
   if ($node->nid == 48) {
     dpm($content);
-    //dpm($node);
+    dpm($node);
   }
 
 
@@ -56,9 +56,12 @@
             </div>
           </div>
               
-              
+          <div class="right-content">
+            
+            <?php echo render($content['body']); ?>
+          </div>
           <div class="bottom-clear"></div>
-          
+          <div class="links"><?php echo l(t('Visit Just Host'), ''); ?><class="delim">|</div><?php echo l(t('Write a Review'), 'node/add/review'); ?></div>
            
               
           <?php
