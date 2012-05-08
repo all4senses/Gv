@@ -128,17 +128,17 @@
                     $prefix = 're';
                   }
                   
-                  echo  '<div class="f caption plan">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
+                  echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>',
                           
                           '<div class="f caption">' , t('Pricing') , ':</div>',
                           '<div class="block-1">',
-                          '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] , '</div></div>',
-                          '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] , '</div></div>',
-                          '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] , '</div></div>',
+                          '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] : t('N/A') ) , '</div></div>',
+                          '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] : t('N/A') ), '</div></div>',
+                          '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] : t('N/A') ) , '</div></div>',
                           '</div>',
                           '<div class="block-2">',
-                          '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] , '</div></div>',
+                          '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] : t('N/A') ), '</div></div>',
                           '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] : t('N/A') ) , '</div></div>',
                           '</div>',
                             
