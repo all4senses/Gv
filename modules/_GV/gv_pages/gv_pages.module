@@ -2089,9 +2089,17 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
         //'#suffix' => '</div>',
     );
 
+    //Sort votes.
+    foreach ($rating_titles as $rating_titles) {
+      foreach ($votes as $vote) {
+        if($vote['tag'] == $rating_titles) {
+          $votes_sorted[] = $vote;
+        }
+      }
+    }
     $zebra = 0;
     $zebra_odd = array(1,3,5,7,9);
-    foreach ($votes as $key => $vote) {
+    foreach ($votes_sorted as $key => $vote) {
       $zebra++;
       if ($vote['tag'] == 'overall') {
         $overall_vote = $vote;
