@@ -114,6 +114,48 @@ dpm($node->p_data);
                 </div>
                 <div id="tabs-2">
                   <?php 
+                  
+                  if ($node->p_type == 'bu') {
+                    $key = 's_business';
+                    $prefix = 'bu';
+                  
+                    
+                  
+                  
+                  }
+                  else {
+                    $key = 's_residential';
+                    $prefix = 're';
+                  }
+                  
+                  echo  '<div class="title">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
+                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>',
+                          
+                          '<div class="title">' , t('Pricing') , ':</div>',
+                          '<div class="block-1">',
+                          '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] , '</div></div>',
+                          '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] , '</div></div>',
+                          '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] , '</div></div>',
+                          '</div>',
+                          '<div class="block-2">',
+                          '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] , '</div></div>',
+                          '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] : t('N/A') ) , '</div></div>',
+                          '</div>',
+                            
+                          '<div class="title">' , t('Money Back Guarantee') , ':</div>',
+                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_money_back_guarantee']) , '</div>';
+                          
+                          if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
+                            echo '<div class="title">' , t('Available Features') , ':</div>';
+                            foreach ($node->p_data['services'][$key]['weights_' . $prefix . '_features'] as $tid => $term) {
+                              echo '<div class="tag">' , l(t($term), 'taxonomy/term/' . $tid ) , '</div>';
+                            }
+                            
+                          }
+                          
+                          
+                  
+                  /*
                   foreach($content as $field_title => $value) {
                     if (strpos($field_title, 'bu_') === 0) {
                       echo render($content[$field_title]);
@@ -124,6 +166,7 @@ dpm($node->p_data);
                       echo render($content[$field_title]);
                     }
                   }
+                  */
                   ?>
                 </div>
                 
