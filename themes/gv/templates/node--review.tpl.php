@@ -3,6 +3,7 @@
 
   if ($node->nid == 48) {
     dpm($content);
+    dpm($node);
   }
 
 
