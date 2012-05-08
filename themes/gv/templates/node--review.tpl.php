@@ -66,11 +66,10 @@
                   echo '<div class="vs">' . t('VS') . '</div>';
                 }
                 if ($content['r_data']['cons']) {
-                  echo '<div class="cons frame"><div class="caption">' . t('Cons:') . '</div><div class="text">' . $content['r_data']['cons'] . '</div></div>';
+                  echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="caption">' . t('Cons:') . '</div><div class="text">' . $content['r_data']['cons'] . '</div></div>';
                 }
               ?>
             </div>
-            <div class="bottom-clear"></div>
             <?php } ?>
             <?php echo render($content['body']); ?>
           </div>
