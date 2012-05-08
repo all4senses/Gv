@@ -148,7 +148,7 @@ dpm($node->p_data);
                           if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
                             echo '<div class="title">' , t('Available Features') , ':</div>';
                             foreach ($node->p_data['services'][$key]['weights_' . $prefix . '_features'] as $tid => $term) {
-                              echo '<div class="tag">' , l(t($term), 'taxonomy/term/' . $tid ) , '</div>';
+                              echo '<div class="tag">' , l(t($term['name']), 'taxonomy/term/' . $tid ) , '</div>';
                             }
                             
                           }
