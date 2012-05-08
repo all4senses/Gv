@@ -271,6 +271,17 @@
         // Hide Sort be Select element.
         //<div class="form-item form-type-select form-item-sort-by">
         ////$content['reviews_entity_view_1'] = preg_replace('/(.*<div.*views-widget-sort-by.*\")(>.*)/', "$1 style=" . '"display: none;"' . "$2", $content['reviews_entity_view_1']);
+      
+      
+//      <div class="views-exposed-widget views-widget-sort-order">
+//        <div class="form-item form-type-select form-item-sort-order">
+//          <label for="edit-sort-order">Order </label>
+//          <select class="form-select" name="sort_order" id="edit-sort-order"><option value="ASC">Asc</option><option selected="selected" value="DESC">Desc</option></select>
+//        </div>
+//      </div>
+    
+      
+        $content['reviews_entity_view_1'] = preg_replace('/(.*<div class="views-exposed-widget views-widget-sort-order">.*<option value="ASC">)(.*)(<.*)/', "$1xxx$3", $content['reviews_entity_view_1']);
         echo render($content['reviews_entity_view_1']); 
       ?>
       
