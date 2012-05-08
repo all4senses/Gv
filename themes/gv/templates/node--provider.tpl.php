@@ -79,7 +79,7 @@
                 <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
                 </div>
                 
-                <div class="s">
+                <div class="s" id="gplus">
                 <script type="text/javascript">
                   (function() {
                     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
