@@ -211,7 +211,7 @@ dpm($node->p_data);
             
             hide($content['reviews_entity_view_1']);
 
-            echo render($content);
+            //echo render($content);
           ?>
           
         </div> <!-- content -->
