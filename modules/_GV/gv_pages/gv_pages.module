@@ -2116,7 +2116,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
 //    }
 
     // Add a caption.
-    $node->content['gv_ratings']['#markup'] = '<div class="caption">' . t('Average Customer Rating') . '</div><div class="data">' . $node->content['gv_ratings']['#markup'] . '</div>';
+    $node->content['gv_ratings']['#markup'] = '<div class="data">' . $node->content['gv_ratings']['#markup'] . '</div>';
     
     if ($overall_vote) {
       //$node->content['gv_rating_overall']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . $node->field_p_name['und'][0]['safe_value'] . ' ' . t('Overall Rated') . ':</div><div>' . $overall_vote['value'] . '</div></div>';

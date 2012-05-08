@@ -47,7 +47,7 @@
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption">' . t('Customer Rating') . '</div>' . render($content['gv_ratings']); ?>
             <div class="rate-other">
               <div class="text"><?php echo '<div class="title">' , t('Rating:') , '</div>' , render($content['gv_rating_overall']); ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('d Y', $node->created) , '</div>'; ?></div>
