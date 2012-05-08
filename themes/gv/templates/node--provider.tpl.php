@@ -173,7 +173,7 @@
               </div>
               
               
-              <div class="gv_votes"><?php echo '<div class="caption">' . t('Average Customer Rating') . '</div>' . render($content['gv_ratings']); ?></div>
+              <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
               <div class="overall"> 
                 <div class="text">
                   <?php echo render($content['gv_voters']); ?>
@@ -181,7 +181,7 @@
                   <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?></div>
                 </div>
                 <div class="star-big">
-                  <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 star') . '</div>'; ?>
+                  <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 stars') . '</div>'; ?>
                 </div>
               </div>
               
@@ -269,8 +269,8 @@
       
       <?php 
         // Hide Sort be Select element.
-      //<div class="form-item form-type-select form-item-sort-by">
-        $content['reviews_entity_view_1'] = preg_replace('/(.*<div.*views-widget-sort-by.*\")(>.*)/', "$1 style=" . '"display: none;"' . "$2", $content['reviews_entity_view_1']);
+        //<div class="form-item form-type-select form-item-sort-by">
+        ////$content['reviews_entity_view_1'] = preg_replace('/(.*<div.*views-widget-sort-by.*\")(>.*)/', "$1 style=" . '"display: none;"' . "$2", $content['reviews_entity_view_1']);
         echo render($content['reviews_entity_view_1']); 
       ?>
       

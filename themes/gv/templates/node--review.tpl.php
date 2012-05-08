@@ -46,9 +46,8 @@
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption">' . t('Customer Rating') . '</div>' . render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , render($content['gv_rating_overall']) , '</div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
-              <div class="text"><?php echo '<div class="title">' , t('Rating:') , '</div>' , render($content['gv_rating_overall']); ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
               <div class="text"><?php echo render($content['gv_recommend']); ?></div>
