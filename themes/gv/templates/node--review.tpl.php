@@ -22,6 +22,10 @@
                 <?php print render($title_suffix); ?>
             <?php endif; ?>
 
+            
+        
+  <div class="main-content">
+    
             <?php if (!$page): ?>
               <header>
 
@@ -35,10 +39,6 @@
 
               </header>
             <?php endif; ?>
-        
-  <div class="main-content">
-    
-    
     
 
     
