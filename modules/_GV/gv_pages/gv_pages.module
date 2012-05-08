@@ -1394,7 +1394,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   // Second trial... 
   // Save some more aggregated data to other field
   
-  $p_data_quick['name'] = $form_state['values']['field_p_name'];
+  $p_data_quick['name'] = $form_state['values']['field_p_name']['und'][0]['value'];
   // Save collected Features and FEES data from temporary fields to a excessive field for using it from views
   $p_data_quick['re']['plan'] = isset($p_data['services']['s_residential']['re_preface_title']) ? $p_data['services']['s_residential']['re_preface_title'] : '';
   if (isset($p_data['services']['s_residential']['weights_re_features'])) {
