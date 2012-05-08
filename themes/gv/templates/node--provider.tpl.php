@@ -173,7 +173,7 @@
               </div>
               
               
-              <div class="gv_votes"><?php echo '<div class="caption">' . t('Average Customer Rating') . '</div>' . render($content['gv_ratings']); ?></div>
+              <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
               <div class="overall"> 
                 <div class="text">
                   <?php echo render($content['gv_voters']); ?>
