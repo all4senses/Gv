@@ -49,7 +49,7 @@
             <?php echo '<div class="caption">' . t('Customer Rating') . '</div>' . render($content['gv_ratings']); ?>
             <div class="rate-other">
               <div class="text"><?php echo '<div class="title">' , t('Rating:') , '</div>' , render($content['gv_rating_overall']); ?></div>
-              <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('d Y', $node->created) , '</div>'; ?></div>
+              <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
               <div class="text"><?php echo render($content['gv_recommend']); ?></div>
             </div>
@@ -74,7 +74,11 @@
             <?php echo render($content['body']); ?>
           </div>
           <div class="bottom-clear"></div>
-          <div class="links"><?php echo l(t('Visit Just Host'), $content['provider_url']); ?><span class="delim">|</span><?php echo l(t('Write a Review'), 'node/add/review'); ?></div>
+          <div class="links">
+            <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
+            <!--<span class="delim">|</span> -->
+            <?php echo l(t('Write a Review'), 'node/add/review'); ?>
+          </div>
            
               
           <?php
@@ -116,7 +120,7 @@
 
   </div> <!-- main-content -->
   
-  <div class="shadow"></div>
+  <!--<div class="shadow"></div> -->
   
 
 <?php if (!$page): ?>

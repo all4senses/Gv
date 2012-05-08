@@ -206,17 +206,20 @@
   <?php if ($page): ?>
     <div class="reviews">
       <div class="header">
-        <div class="button"><?php echo t('User reviews'); ?></div>
-        <div class="button">
+        <div class="button"><?php echo t('User Reviews'); ?></div>
+        
+        <!-- <div class="button"> -->
           <?php 
+          /*
             if (isset($node->current_user_has_review)) {
               echo l(t('Your Review'), $node->current_user_has_review, array('attributes' => array('title' => t('You have already submitted a review for this provider: "' . $node->current_user_has_review_title . '"')))); 
             }
             else {
               echo l(t('Submit Your Review'), 'node/add/review'); 
             }
+          */
           ?>
-        </div>
+        <!--</div> -->
       </div>
 
       
