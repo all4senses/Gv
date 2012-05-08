@@ -128,10 +128,10 @@ dpm($node->p_data);
                     $prefix = 're';
                   }
                   
-                  echo  '<div class="title">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
+                  echo  '<div class="f caption">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>',
                           
-                          '<div class="title">' , t('Pricing') , ':</div>',
+                          '<div class="f caption">' , t('Pricing') , ':</div>',
                           '<div class="block-1">',
                           '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] , '</div></div>',
                           '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] , '</div></div>',
@@ -142,11 +142,11 @@ dpm($node->p_data);
                           '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] : t('N/A') ) , '</div></div>',
                           '</div>',
                             
-                          '<div class="title">' , t('Money Back Guarantee') , ':</div>',
+                          '<div class="f caption">' , t('Money Back Guarantee') , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_money_back_guarantee']) , '</div>';
                           
                           if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
-                            echo '<div class="title">' , t('Available Features') , ':</div>';
+                            echo '<div class="f caption">' , t('Available Features') , ':</div>';
                             foreach ($node->p_data['services'][$key]['weights_' . $prefix . '_features'] as $tid => $term) {
                               echo '<div class="tag">' , l(t($term['name']), 'taxonomy/term/' . $tid ) , '</div>';
                             }
