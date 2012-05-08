@@ -871,6 +871,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
     case 'rating':
     
       $all_data_quick = gv_misc_getProvidersDataQuick();
+      dpm($all_data_quick);
       $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
                 
