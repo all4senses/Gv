@@ -60,13 +60,13 @@
             <div class="pros-cons">
               <?php
                 if ($content['r_data']['pros']) {
-                  echo '<div class="pros frame"><div class="caption">' . t('Pros:') . '</div><div class="text">' . $content['r_data']['pros'] . '</div></div>';
+                  echo '<div class="pros frame"><div class="text"><span class="caption">' . t('Pros:') . '</span>' . $content['r_data']['pros'] . '</div></div>';
                 }
                 if($content['r_data']['pros'] && $content['r_data']['pros']) {
                   echo '<div class="vs">' . t('VS') . '</div>';
                 }
                 if ($content['r_data']['cons']) {
-                  echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="caption">' . t('Cons:') . '</div><div class="text">' . $content['r_data']['cons'] . '</div></div>';
+                  echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">' . t('Cons:') . '</span>' . $content['r_data']['cons'] . '</div></div>';
                 }
               ?>
             </div>
