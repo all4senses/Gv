@@ -281,7 +281,7 @@
 //      </div>
     
       
-        $content['reviews_entity_view_1'] = preg_replace('/(.*<div class="views-exposed-widget views-widget-sort-order">.*<option value="ASC">)(.*)(<.*)/', "$1xxx$3", $content['reviews_entity_view_1']);
+        $content['reviews_entity_view_1'] = preg_replace('/(.*<option value="ASC">)(.*)(<.*)/', "$1xxx$3", $content['reviews_entity_view_1']);
         echo render($content['reviews_entity_view_1']); 
       ?>
       
