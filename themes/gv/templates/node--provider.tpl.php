@@ -6,7 +6,7 @@
 <?php
 
 dpm($content);
-dpm($node);
+dpm($node->p_data);
 
 ?>
 
