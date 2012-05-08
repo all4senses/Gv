@@ -1690,7 +1690,7 @@ function gv_pages_node_presave($node) {
           'uid' => $node->uid,
           'vote_source' => $node->field_r_email['und'][0]['value'],
         );
-        $node->field_r_rating_overall['und'][0]['value'] = number_format($rating_overall * 0.05, 1);
+        $node->field_r_rating_overall['und'][0]['value'] = 4.6; //number_format($rating_overall * 0.05, 1);
         
         // Remove (clear) this review's previous votes from a target provider calculation set.
         foreach ($votes as $c) {
