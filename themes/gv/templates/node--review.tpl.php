@@ -1,8 +1,8 @@
 <?php
 
   if ($node->nid == 48) {
-    dpm($content);
-    dpm($node);
+    //dpm($content);
+    //dpm($node);
   }
 
 
@@ -56,6 +56,7 @@
           </div>
               
           <div class="right-content">
+            <?php if ($content['r_data']['pros'] || $content['r_data']['pros']) { ?>
             <div class="pros-cons">
               <?php
                 if ($content['r_data']['pros']) {
@@ -69,6 +70,8 @@
                 }
               ?>
             </div>
+            <div class="bottom-clear"></div>
+            <?php } ?>
             <?php echo render($content['body']); ?>
           </div>
           <div class="bottom-clear"></div>
