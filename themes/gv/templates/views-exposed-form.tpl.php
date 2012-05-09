@@ -70,20 +70,24 @@
       </div>
       <div class="views-exposed-widget views-widget-sort-order">
         <?php 
-          //dpm($sort_order);
+          dpm($sort_order);
 //          <div class="form-item form-type-select form-item-sort-order">
 //            <label for="edit-sort-order">Order </label>
 //          <select id="edit-sort-order" name="sort_order" class="form-select"><option value="ASC">Asc</option><option value="DESC" selected="selected">Desc</option></select>
 //          </div>
           switch ($gv_sort_by) {
             case 'Post date':
-              $sort_order = preg_replace('/(.*<option.*value="ASC".*>)(.*)(<.*)/', "$1Date Asc$3", $sort_order);
-              $sort_order = preg_replace('/(.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Desc$3", $sort_order);
+              $sort_order = str_replace('>Asc<', '>Post Asc<', $sort_order);
+              $sort_order = str_replace('>Desc<', '>Post Desc<', $sort_order);
+              //$sort_order = preg_replace('/(.*<option.*value="ASC".*>)(.*)(<.*)/', "$1Date Asc$3", $sort_order);
+              //$sort_order = preg_replace('/(.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Desc$3", $sort_order);
               //$sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Asc$3Date Desc$5", $sort_order);
               break;
             
             case 'Rating':
-              $sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Rating Asc$3Rating Desc$5", $sort_order);
+              $sort_order = str_replace('>Asc<', '>Rating Asc<', $sort_order);
+              $sort_order = str_replace('>Desc<', '>Rating Desc<', $sort_order);
+              //$sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Rating Asc$3Rating Desc$5", $sort_order);
               break;
           }
           print $sort_order; 
