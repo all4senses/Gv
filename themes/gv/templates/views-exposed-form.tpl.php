@@ -51,38 +51,40 @@
       <div class="views-exposed-widget views-widget-sort-by">
         <?php 
           //dpm($sort_by);
-          
+          $gv_sort_by = NULL;
           if(strpos($sort_by, 'selected="selected">Post date')) {
-            dpm('Sort by date' . time());
+            //dpm('Sort by date' . time());
             $gv_sort_by = 'Post date';
           }
-          else {
-            dpm('Sort by rating' . time());
+          elseif(strpos($sort_by, 'selected="selected">Rating')) {
+            //dpm('Sort by rating' . time());
             $gv_sort_by = 'Rating';
           }
 //          <div class="form-item form-type-select form-item-sort-by">
 //            <label for="edit-sort-by">Sort by </label>
 //          <select id="edit-sort-by" name="sort_by" class="form-select"><option value="created" selected="selected">Post date</option><option value="field_r_rating_overall_value">Rating</option></select>
 //          </div>
-//
-//          <div class="form-item form-type-select form-item-sort-order">
-//            <label for="edit-sort-order">Order </label>
-//          <select id="edit-sort-order" name="sort_order" class="form-select"><option value="ASC">Asc</option><option value="DESC" selected="selected">Desc</option></select>
-//          </div>
-
-
-          
           print $sort_by; 
         
         ?>
       </div>
       <div class="views-exposed-widget views-widget-sort-order">
         <?php 
-          dpm($sort_order);
-          if($gv_sort_by == 'Rating') {
-            print $sort_order; 
+          //dpm($sort_order);
+//          <div class="form-item form-type-select form-item-sort-order">
+//            <label for="edit-sort-order">Order </label>
+//          <select id="edit-sort-order" name="sort_order" class="form-select"><option value="ASC">Asc</option><option value="DESC" selected="selected">Desc</option></select>
+//          </div>
+          switch ($gv_sort_by) {
+            case 'Post date':
+              $sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Asc$3Date Desc$5", $sort_order);
+              break;
+            
+            case 'Rating':
+              
+              break;
           }
-        
+          print $sort_order; 
         ?>
       </div>
     <?php endif; ?>
