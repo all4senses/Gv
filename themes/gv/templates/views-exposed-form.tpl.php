@@ -54,9 +54,11 @@
           
           if(strpos($sort_by, 'selected="selected">Post date')) {
             dpm('Sort by date' . time());
+            $gv_sort_by = 'Post date';
           }
           else {
             dpm('Sort by rating' . time());
+            $gv_sort_by = 'Rating';
           }
 //          <div class="form-item form-type-select form-item-sort-by">
 //            <label for="edit-sort-by">Sort by </label>
@@ -69,7 +71,7 @@
 //          </div>
 
 
-        
+          
           print $sort_by; 
         
         ?>
@@ -77,7 +79,9 @@
       <div class="views-exposed-widget views-widget-sort-order">
         <?php 
           dpm($sort_order);
-          print $sort_order; 
+          if($gv_sort_by == 'Rating') {
+            print $sort_order; 
+          }
         
         ?>
       </div>
