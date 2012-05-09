@@ -49,7 +49,11 @@
     
     <?php if (!empty($sort_by)): ?>
       <div class="views-exposed-widget views-widget-sort-by">
-        <?php print $sort_by; ?>
+        <?php 
+          dpm($sort_by);
+          print $sort_by; 
+        
+        ?>
       </div>
       <div class="views-exposed-widget views-widget-sort-order">
         <?php 
