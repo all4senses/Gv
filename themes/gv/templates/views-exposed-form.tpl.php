@@ -77,7 +77,9 @@
 //          </div>
           switch ($gv_sort_by) {
             case 'Post date':
-              $sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Asc$3Date Desc$5", $sort_order);
+              $sort_order = preg_replace('/(.*<option.*value="ASC".*>)(.*)(<.*)/', "$1Date Asc$3", $sort_order);
+              $sort_order = preg_replace('/(.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Desc$3", $sort_order);
+              //$sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Date Asc$3Date Desc$5", $sort_order);
               break;
             
             case 'Rating':
