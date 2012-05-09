@@ -50,7 +50,26 @@
     <?php if (!empty($sort_by)): ?>
       <div class="views-exposed-widget views-widget-sort-by">
         <?php 
-          dpm($sort_by);
+          //dpm($sort_by);
+          
+          if(strpos($sort_by, 'selected="selected">Post date')) {
+            dpm('Sort by date');
+          }
+          else {
+            dpm('Sort by rating');
+          }
+//          <div class="form-item form-type-select form-item-sort-by">
+//            <label for="edit-sort-by">Sort by </label>
+//          <select id="edit-sort-by" name="sort_by" class="form-select"><option value="created" selected="selected">Post date</option><option value="field_r_rating_overall_value">Rating</option></select>
+//          </div>
+//
+//          <div class="form-item form-type-select form-item-sort-order">
+//            <label for="edit-sort-order">Order </label>
+//          <select id="edit-sort-order" name="sort_order" class="form-select"><option value="ASC">Asc</option><option value="DESC" selected="selected">Desc</option></select>
+//          </div>
+
+
+        
           print $sort_by; 
         
         ?>
