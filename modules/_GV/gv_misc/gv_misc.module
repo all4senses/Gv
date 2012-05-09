@@ -874,7 +874,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
                 
-        $out = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
+        $out = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')))
               //. '<div class="rating">' . $data['data']->votingapi_cache_node_percent_overall_average_value . '%</div>'
               //. '<div class="voters">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . t('reviews') . '</div>'
               ;
