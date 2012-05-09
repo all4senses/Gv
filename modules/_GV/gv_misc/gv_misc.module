@@ -909,7 +909,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       $all_data_quick = gv_misc_getProvidersDataQuick();
       $out = isset($all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target]) ? $all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target] : '';
       
-      if ($target == 'monthly') {
+      if ($target == 'monthly' && $out) {
         $out = '$'. $out;
       }
       return $out;
