@@ -81,7 +81,7 @@
               break;
             
             case 'Rating':
-              
+              $sort_order = preg_replace('/(.*<option.*value="ASC">)(.*)(<.*>.*<option.*value="DESC".*>)(.*)(<.*)/', "$1Rating Asc$3Rating Desc$5", $sort_order);
               break;
           }
           print $sort_order; 
