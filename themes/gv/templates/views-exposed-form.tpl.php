@@ -53,10 +53,10 @@
           //dpm($sort_by);
           
           if(strpos($sort_by, 'selected="selected">Post date')) {
-            dpm('Sort by date');
+            dpm('Sort by date' . time());
           }
           else {
-            dpm('Sort by rating');
+            dpm('Sort by rating' . time());
           }
 //          <div class="form-item form-type-select form-item-sort-by">
 //            <label for="edit-sort-by">Sort by </label>
