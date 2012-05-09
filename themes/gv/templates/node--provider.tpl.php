@@ -172,18 +172,21 @@
                 
               </div>
               
+              <?php if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+
+                  <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
+                  <div class="overall"> 
+                    <div class="text">
+                      <?php echo render($content['gv_voters']); ?>
+                      <?php echo render($content['gv_recommend']); ?>
+                      <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?></div>
+                    </div>
+                    <div class="star-big">
+                      <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 stars') . '</div>'; ?>
+                    </div>
+                  </div>
               
-              <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
-              <div class="overall"> 
-                <div class="text">
-                  <?php echo render($content['gv_voters']); ?>
-                  <?php echo render($content['gv_recommend']); ?>
-                  <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?></div>
-                </div>
-                <div class="star-big">
-                  <?php echo render($content['gv_rating_overall']) . '<div class="descr">' . t('Out of 5 stars') . '</div>'; ?>
-                </div>
-              </div>
+              <?php endif; ?>
               
               <div class="bottom-clear"></div>
               
@@ -247,7 +250,7 @@
   <div class="shadow"></div>
   
   
-  <?php if ($page): ?>
+  <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
     <div class="reviews">
       <div class="header">
         <div class="button"><?php echo t('User Reviews'); ?></div>
