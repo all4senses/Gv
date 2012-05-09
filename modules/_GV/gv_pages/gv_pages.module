@@ -1430,7 +1430,10 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
   form_set_value($form['field_p_data_quick'], array('und' => array(0 => array('value' => serialize($p_data_quick)))), $form_state);
   // Reset a helper session var with all quick data.
-  gv_misc_getProvidersDataQuick('all', TRUE);
+  if(isset($_SESSION['p_all_data_quick'])) {
+    unset($_SESSION['p_all_data_quick']);
+  }
+  //gv_misc_getProvidersDataQuick('all', TRUE);
   
 }
 
@@ -1626,6 +1629,21 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     }
   }
   
+}
+
+
+/**
+ * Implements hook_node_update().
+ *
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_node_update($node) {
+  
+  if ($node->type == 'provider') {
+    // Reset ProvidersDataQuick in session var.
+    gv_misc_getProvidersDataQuick('all', TRUE);    
+  }
 }
 
 
