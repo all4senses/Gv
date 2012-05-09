@@ -502,14 +502,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#type' => 'textfield',
                         '#title' => t('Setup fees'),
                         //'#description' => t(''),
-                        '#field_prefix' => '$',
+                        //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees'] : '',
                       );
                       $form['services']['s_residential']['re_basicinfo_fees']['shipping_fees'] = array(
                         '#type' => 'textfield',
                         '#title' => t('Shipping fees'),
                         //'#description' => t(''),
-                        '#field_prefix' => '$',
+                        //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['shipping_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['shipping_fees'] : '',
                       );
                       $form['services']['s_residential']['re_basicinfo_fees']['cancel_fees'] = array(
@@ -523,7 +523,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#type' => 'textfield',
                         '#title' => t('Long distance fees'),
                         //'#description' => t(''),
-                        '#field_prefix' => '$',
+                        //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] : '',
                       );
                       $form['services']['s_residential']['re_basicinfo_fees']['other_fees'] = array(
@@ -642,14 +642,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#type' => 'textfield',
                         '#title' => t('Setup fees'),
                         //'#description' => t(''),
-                        '#field_prefix' => '$',
+                        //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees'] : '',
                       );
                       $form['services']['s_business']['bu_basicinfo_fees']['shipping_fees'] = array(
                         '#type' => 'textfield',
                         '#title' => t('Shipping fees'),
                         //'#description' => t(''),
-                        '#field_prefix' => '$',
+                        //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['shipping_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['shipping_fees'] : '',
                       );
                       $form['services']['s_business']['bu_basicinfo_fees']['cancel_fees'] = array(
@@ -663,7 +663,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#type' => 'textfield',
                         '#title' => t('Long distance fees'),
                         //'#description' => t(''),
-                        '#field_prefix' => '$',
+                        //'#field_prefix' => '$',
                         '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['longdistance_fees'] : '',
                       );
                       $form['services']['s_business']['bu_basicinfo_fees']['other_fees'] = array(
