@@ -855,14 +855,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       
-      
+      if (in_array('administrator', $user->roles)) {
+        $current_user_is_admin = TRUE;
+      }
+      else {
+        $current_user_is_admin = FALSE;
+      }
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
         // Only admin can approve it.
         $form['field_r_notapproved']['#access'] = FALSE;
-        if (in_array('administrator', $user->roles)) {
-          $current_user_is_admin = TRUE;
+        if ($current_user_is_admin) {
           $form['field_r_notapproved_checkbox'] = array(
             '#type' => 'checkbox',
             '#title' => t('This review is approved'),
@@ -870,7 +874,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
         }
         elseif(arg(1) != 'add') {
-          $current_user_is_admin = FALSE;
           $form['field_r_notapproved_info'] = array(
             '#type' => 'item',
             '#title' => t('Approval status for this review:'),
