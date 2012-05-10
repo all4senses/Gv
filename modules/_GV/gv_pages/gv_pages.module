@@ -1832,7 +1832,8 @@ function gv_pages_node_view($node, $view_mode) {
           // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
           'vote_source' => $node->field_r_email['und'][0]['value'],
         );
-        $votes = gv_misc_getVotesIDs($criteria); //votingapi_select_votes($criteria);
+        votingapi_select_votes($criteria);
+        $votes = gv_misc_getVotesIDs($criteria); 
       }
       dpm($criteria);
       dpm($votes);

@@ -54,14 +54,15 @@ function gv_misc_menu() {
  */
 function gv_misc_getVotesIDs($criteria) {
     $query = db_select('votingapi_vote', 'v')
-      ->fields('v', array('vote_id'));
+      ->fields('v', array('vote_id', 'tag', 'value'));
     foreach ($criteria as $field => $value) {
       $query->condition($field, $value);
     }
     $results = $query->execute()->fetchAllAssoc('vote_id');
     $votes = array();
     foreach ($results as $result) {
-      $votes[] = array('vote_id' => $result->vote_id);
+      //$votes[] = array('vote_id' => $result->vote_id);
+      $votes[] = (array) $result;
     }
     return $votes;
 }
