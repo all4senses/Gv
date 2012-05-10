@@ -869,7 +869,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
           );
         }
-        else {
+        elseif(arg(1) != 'add') {
           $current_user_is_admin = FALSE;
           $form['field_r_notapproved_info'] = array(
             '#type' => 'item',
@@ -1053,12 +1053,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
 
         }
-        else {
-          // Options for not logged in users.
-          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user", array('query' => array('destination' => url($_GET['q']))) ), '!register' => l(t('register'), "user/register", array('query' => array('destination' => url($_GET['q']))) )) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
-          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
-          $form['#suffix'] = '</div></fieldset>';
-        }
+//        else {
+//          // Options for not logged in users.
+//          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user", array('query' => array('destination' => url($_GET['q']))) ), '!register' => l(t('register'), "user/register", array('query' => array('destination' => url($_GET['q']))) )) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
+//          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
+//          $form['#suffix'] = '</div></fieldset>';
+//        }
         
         
         // Set a select of available providers.
