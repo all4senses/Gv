@@ -1,8 +1,8 @@
 <?php
 
   if ($node->nid == 48) {
-    //dpm($content);
-    //dpm($node);
+    dpm($content);
+    dpm($node);
   }
 
 
@@ -86,7 +86,7 @@
             hide($content['links']);
             hide($content['field_tags']);
         
-            echo render($content);
+            //echo render($content);
           ?>
           
         </div> <!-- content -->
