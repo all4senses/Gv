@@ -171,7 +171,10 @@
                     ?>
                   </footer>
     
+    
       <?php endif; ?>
+    
+      <div class="bottom-clear"></div>
     
   </div> <!-- main-content -->
  
