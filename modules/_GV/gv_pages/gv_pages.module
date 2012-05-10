@@ -987,12 +987,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#default_value' => $rating_options[''],
               //'#weight' => $weight++,
               //'#required' => TRUE,
-              '#prefix' => '<div class="vote-title">' . t($vote_title) . '</div>',
+              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
             );
-            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
-              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
-              //'#weight' => $weight++,
-            );
+//            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
+//              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
+//              //'#weight' => $weight++,
+//            );
           }
       
           //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
