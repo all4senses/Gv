@@ -1832,11 +1832,9 @@ function gv_pages_node_view($node, $view_mode) {
           // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
           'vote_source' => $node->field_r_email['und'][0]['value'],
         );
-        votingapi_select_votes($criteria);
-        $votes = gv_misc_getVotesIDs($criteria); 
+        
+        $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria);
       }
-      dpm($criteria);
-      dpm($votes);
       gv_pages_addRatingsToNodeThemed($node, $votes);
       
       $node->content['r_data'] = unserialize($node->field_r_data['und'][0]['value']);
@@ -2109,8 +2107,6 @@ function gv_pages_node_delete($node) {
  */
 function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicolon = '') {
   $overall_vote = NULL;
-  dpm('Votes:');
-  dpm($votes);
   if ($votes) {
     //$rating_titles = array('features' => FEATURES, 'sound' => SOUND, 'service' => CUSTOMER, 'money' => PRICE, 'rely' => RELY, 'recommend' => RECOMMEND);
     $rating_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'overall' => OVERALL, 'recommend' => RECOMMEND);
