@@ -1,8 +1,8 @@
 <?php
 
   if ($node->nid == 48) {
-    dpm($content);
-    dpm($node);
+    //dpm($content);
+    //dpm($node);
   }
 
 
