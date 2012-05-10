@@ -129,7 +129,7 @@
               
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
-                email: Drupal.t("Your email address must be in the format of name@domain.com")
+                email: Drupal.t("Email format must be name@domain.com")
               }
             }
           },
