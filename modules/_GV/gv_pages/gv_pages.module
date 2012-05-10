@@ -906,31 +906,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       
       // Group fields
-      $form['provider'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Your VoIP Service Provider Details'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
-        '#weight' => -10,
-      );
-          $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
-          $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
-          unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
-          $form['field_r_data']['#access'] = FALSE;
-          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
-          $form['provider']['lines'] = array(
-            '#type' => 'radios',
-            '#title' => t('How many lines do you have:'),
-            '#options' => $lines_options,
-            '#default_value' => FALSE,
-            '#weight' => 10,
-          );
-          
-          
       $form['about_you'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Your Information'),
+        '#title' => t('Step 1: Your Information'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         '#weight' => -15,
@@ -954,6 +933,30 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           
           
+      $form['provider'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Step 2: Your VoIP Provider Details'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#weight' => -10,
+      );
+          $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
+          $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
+          unset($form['field_ref_provider'], $form['field_r_oprovider']);
+      
+          $form['field_r_data']['#access'] = FALSE;
+          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
+          $form['provider']['lines'] = array(
+            '#type' => 'radios',
+            '#title' => t('How many lines do you have:'),
+            '#options' => $lines_options,
+            '#default_value' => FALSE,
+            '#weight' => 10,
+          );
+          
+          
+      
+          
       // Rate and vote group.
       //$rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
       $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
@@ -964,7 +967,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $votes = array();
       $form['votes'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Rate and Review Your Service Provider'),
+        '#title' => t('Step 3: Rate and Review Your VoIP Provider'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         '#weight' => 4,
