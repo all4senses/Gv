@@ -910,8 +910,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['about_you'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 1: Your Information'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
+        //'#collapsible' => TRUE,
+        //'#collapsed' => FALSE,
         '#weight' => -15,
       );
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
@@ -936,8 +936,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['provider'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 2: Your VoIP Provider Details'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
+        //'#collapsible' => TRUE,
+        //'#collapsed' => FALSE,
         '#weight' => -10,
       );
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
@@ -968,8 +968,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['votes'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 3: Rate and Review Your VoIP Provider'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
+        //'#collapsible' => TRUE,
+        //'#collapsed' => FALSE,
         '#weight' => 4,
       );
           foreach ($vote_keys as $vote_key => $vote_title) {
