@@ -333,6 +333,7 @@ function gv_pages_theme($existing, $type, $theme, $path) {
 function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
   //dpm($form_id);  dpm($form);
+  // $conf['locale_custom_strings_en']['old string'] = 'new string'
   
   switch ($form_id) {
     
@@ -966,7 +967,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       //$vote_keys = array('features', 'sound', 'rely', 'money', 'service');
       $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, );
       $votes = array();
-      $form['votes'] = array(
+      $form['ureview'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 3: Rate and Review Your VoIP Provider'),
         //'#collapsible' => TRUE,
@@ -974,7 +975,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 4,
       );
           foreach ($vote_keys as $vote_key => $vote_title) {
-            $form['votes']['rating_' . $vote_key] = array(
+            $form['ureview']['votes']['rating_' . $vote_key] = array(
               '#type' => 'select',
               '#title' => t($vote_title), //t(drupal_ucfirst($vote_key) . ' Rating'),
               '#options' => $rating_options,
@@ -982,7 +983,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               //'#weight' => $weight++,
               //'#required' => TRUE,
             );
-            $form['votes']['rating_' . $vote_key . '_choice1'] = array(
+            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
               '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
               //'#weight' => $weight++,
             );
@@ -990,7 +991,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
           //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
           $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
-          $form['votes']['rating_recommend'] = array(
+          $form['ureview']['rating_recommend'] = array(
               //'#type' => 'select',
               '#type' => 'radios',
               '#title' => t(RECOMMEND),
@@ -1000,13 +1001,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               //'#required' => TRUE,
           );
       
-          $form['votes']['pros'] = array(
+          $form['ureview']['pros'] = array(
             '#type' => 'textfield',
             '#title' => t('Pros'),
             '#default_value' => '',
             '#attributes' => array('title' => t(PROS_HINT)),
           );
-          $form['votes']['cons'] = array(
+          $form['ureview']['cons'] = array(
             '#type' => 'textfield',
             '#title' => t('Cons'),
             '#default_value' => '',
@@ -1014,7 +1015,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
           
           //$form['body']['#weight'] = 2;
-          $form['votes']['body'] = $form['body'];
+          $form['ureview']['body'] = $form['body'];
           unset($form['body']);
           
       // Hide helper hidden field (for saving temporary serialized ratings data)
@@ -1152,8 +1153,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
           $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
           $form['provider']['lines']['#default_value'] = $other_data['lines'];
-          $form['votes']['pros']['#default_value'] = $other_data['pros'];
-          $form['votes']['cons']['#default_value'] = $other_data['cons'];
+          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
+          $form['ureview']['cons']['#default_value'] = $other_data['cons'];
         }
 
         // Disallow to choose another email for a registered user.
@@ -1194,7 +1195,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
           
           foreach ($field_ratings_oprovider as $tag => $value) {
-            $form['votes']['rating_' . $tag]['#default_value'] = $value;
+            $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
           }
           
         } // End of if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
@@ -1206,7 +1207,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           if ($form['field_r_notapproved']['und'][0]['value']['#default_value'] || !$form['options']['status']['#default_value']) {
             $saved_ratings = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
             foreach ($saved_ratings as $tag => $value) {
-              $form['votes']['rating_' . $tag]['#default_value'] = $value;
+              $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
             }
           }
           else {
@@ -1218,7 +1219,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             if ($votes = votingapi_select_votes($criteria)) {
               foreach ($votes as $vote) {
-                $form['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+                $form['ureview']['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
               }
             }
           } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
