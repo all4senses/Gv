@@ -61,7 +61,6 @@
                 <div><?php echo $content['i_availability']['#markup']; ?></div>
                 <div><?php echo $content['i_web']['#markup']; ?></div>
                 <div><?php echo $content['i_founded']['#markup']; ?></div>
-                <?php echo isset($content['i_email']['#markup']) ? ('<div>' . $content['i_email']['#markup'] . '</div>') : ''; ?>
               </div>
           
           
