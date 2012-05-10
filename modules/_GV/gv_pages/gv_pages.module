@@ -974,6 +974,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //'#collapsed' => FALSE,
         '#weight' => 4,
       );
+          
+          $form['ureview']['votes'] = array(
+              '#type' => 'container',
+              //'#prefix' => '<>'
+              
+          );
           foreach ($vote_keys as $vote_key => $vote_title) {
             $form['ureview']['votes']['rating_' . $vote_key] = array(
               '#type' => 'select',
