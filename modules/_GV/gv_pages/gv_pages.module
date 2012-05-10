@@ -1834,6 +1834,7 @@ function gv_pages_node_view($node, $view_mode) {
         );
         $votes = votingapi_select_votes($criteria);
       }
+      dpm($criteria);
       dpm($votes);
       gv_pages_addRatingsToNodeThemed($node, $votes);
       
