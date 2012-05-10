@@ -79,10 +79,20 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 /* Multipart forms... and specifically Request a quote form*/
 #block-gv-blocks-request-quote{border: none;} 
 #block-gv-blocks-request-quote .content{padding: 0; font-size: 16px; font-family: Verdana,Arial,sans-serif;}
-#block-gv-blocks-request-quote .block_footer{background: url("images/block-head-red.png") repeat-x scroll 0 0 transparent; border-radius: 0 0 10px 10px; height: 15px; width: 100%;}
+
+#requestQuoteFormWrapper{position: relative;}
+
 
 #block-gv-blocks-request-quote .question{border-bottom: 1px solid #D5D4D4; font-weight: bold; height: 36px; line-height: 17px; margin: 10px 5px;}
-#block-gv-blocks-request-quote input#next{background: url("images/block-head-red.png") repeat-x scroll 0 0 transparent; border-radius: 10px; color: white; cursor: pointer; display: inline-block; padding: 7px 15px;}
+
+#requestQuoteFormWrapper .step{height: 272px;}
+
+#requestQuoteFormWrapper #Navigation{bottom: 7px; position: absolute;}
+
+#block-gv-blocks-request-quote #Navigation input{position: absolute; background: url("images/block-head-red.png") repeat-x scroll 0 0 transparent; border: none; border-radius: 10px; color: white; cursor: pointer; display: block; margin-left: 20px; padding: 5px 10px;}
+#block-gv-blocks-request-quote #Navigation input#next{right: 10px;}
+    
+
 #block-gv-blocks-request-quote #phones_amt{background: url("images/r-quote-woman.jpg") no-repeat scroll 51px 97px transparent}
 
 
@@ -94,13 +104,15 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 .multipartForm input.phone{width: 30px; float: left;}
 .multipartForm input#phone_1{margin-left: 55px;}
 
-div#requestQuoteFormWrapper{height: 280px;}
-#requestQuoteFormWrapper .step{height: 240px;}
+
+
 
 .multipartForm label.error{clear: both;}
 #requestQuoteFormWrapper div.results{width:100%; height: 300px; background: lightgray;}
 /* Hide back button for the first step */
 #requestQuoteFormWrapper #Navigation #back.ui-state-disabled{display: none;}
+
+#block-gv-blocks-request-quote .block_footer{background: url("images/block-head-red.png") repeat-x scroll 0 0 transparent; border-radius: 0 0 10px 10px; height: 15px; width: 100%;}
 
 
 .block .inside,
