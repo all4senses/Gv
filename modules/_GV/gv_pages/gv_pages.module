@@ -977,8 +977,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           $form['ureview']['votes'] = array(
               '#type' => 'container',
-              //'#prefix' => '<>'
-              
+              '#prefix' => '<div class="rate-caption"><span class="col-2">' . t('Click Stars To Start Reviewing') . '</span><span class="col-3">' . t('Rate it') . '</span>'
           );
           foreach ($vote_keys as $vote_key => $vote_title) {
             $form['ureview']['votes']['rating_' . $vote_key] = array(
