@@ -594,7 +594,7 @@ $query
 $result = $query->execute(); 
 
 $providers2 = array();
-   foreach($data as $provider) {
+   foreach($result as $provider) {
       $providers2[$provider->nid] = $provider->title;
     }
     dpm($providers2);    
