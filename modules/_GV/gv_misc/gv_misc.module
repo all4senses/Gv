@@ -595,7 +595,7 @@ $result = $query->execute();
 
 $providers2 = array();
    foreach($result as $provider) {
-      $providers2[$provider->nid] = $provider->title;
+      $providers2[$provider->nid] = $provider->field_p_name_value;
     }
     dpm($providers2);    
 
