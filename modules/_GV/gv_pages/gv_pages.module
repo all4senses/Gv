@@ -847,7 +847,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      dpm($form);
+      //dpm($form);
       
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
@@ -1022,7 +1022,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
           
           //$form['body']['#weight'] = 2;
-          $form['body']['und'][0]['#rows'] = 3;
+          $form['body']['und'][0]['#rows'] = 5;
+          // Unlink Ckeditor
           $form['body']['und'][0]['#type'] = 'textarea';
           $form['ureview']['body'] = $form['body'];
           unset($form['body']);
