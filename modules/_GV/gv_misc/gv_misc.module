@@ -595,6 +595,8 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
     foreach($result as $provider) {
       $providers[$provider->nid] = $provider->field_p_name_value; // = $provider->title;
     }
+    // Sort providers alphabetically.
+    asort($providers, 'SORT_NATURAL | SORT_FLAG_CASE');
   }
 }
     
@@ -1121,4 +1123,3 @@ function wdg_misc_sortArrayByWeight($a, $b)
     }
     return ($a['weight'] < $b['weight']) ? -1 : 1;
 }
-  
