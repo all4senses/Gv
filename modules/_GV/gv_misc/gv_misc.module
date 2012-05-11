@@ -213,11 +213,11 @@ function gv_misc_makeRequest_ajax() {
   $output = '';
   $post = $_POST;
   
-  if (empty($post)) {
-    $output = t('The form is not filled!'); 
+  if (1) {//(empty($post)) {
+    $output = t('<p class="error">The form is not filled!</p><p>Please, fill it and try again.</p>'); 
   }
   elseif (!isset($post['token']) || !isset($_SESSION['requestQuoteToken']) || $post['token'] != $_SESSION['requestQuoteToken']){
-    $output = t('The form is outdated or broken.'); 
+    $output = t('<p class="error">The form is outdated or broken.</p><p> Please try again later.</p>'); 
   }
   else {
     $params['request_data'] = $post;
