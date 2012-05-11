@@ -848,7 +848,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       global $user;
       
       // Set outer fieldset with the main caption for the Submit a Review page.
-      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
+      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       $form['#suffix'] = '</div></fieldset>';
       
       //dpm($form);
