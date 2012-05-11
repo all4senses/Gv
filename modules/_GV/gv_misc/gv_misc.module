@@ -582,14 +582,14 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
   if ($scope == 'all') {
     $data = db_select('node', 'n');
          //->fields('n', array('nid', 'title'))
+    $data->leftJoin('field_data_field_p_name', 'p', "p.entity_id = n.nid");
     $data->fields('n', array('nid'));
     $data->fields('p', array('field_p_name_value'));
-    $data->leftJoin('field_data_field_p_name', 'p', "p.entity_id = n.nid");
     //$data->condition('n.type', 'provider');
     $data->execute();
     foreach($data as $provider) {
       //$providers[$provider->nid] = $provider->title;
-      $providers[$provider->nid] = $provider->field_data_field_p_name;
+      $providers[$provider->nid] = $provider;//->field_data_field_p_name;
     }
     dpm($providers);
   }
