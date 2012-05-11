@@ -278,7 +278,8 @@ function _image_captcha_settings_form_font_section() {
     '#description' => t('Define the average spacing between characters. Note that larger values make the image generation more CPU intensive.'),
     '#default_value' => variable_get('image_captcha_character_spacing', '1.2'),
     '#options' => array(
-      '0.75' => t('tight'),
+      //'0.75' => t('tight'),
+      '0.35' => t('tight'),
       '1' => t('normal'),
       '1.2' => t('wide'),
       '1.5' => t('extra wide'),
