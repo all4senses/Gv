@@ -184,7 +184,8 @@ function _image_captcha_image_size($code) {
 
   // Calculate height and width
   $width = $character_spacing * $font_size * $character_quantity;
-  $height = 2 * $font_size;
+  //$height = 2 * $font_size;
+  $height = $font_size;
 
   return array($width, $height);
 }
