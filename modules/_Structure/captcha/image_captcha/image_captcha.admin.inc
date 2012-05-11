@@ -278,6 +278,7 @@ function _image_captcha_settings_form_font_section() {
     '#description' => t('Define the average spacing between characters. Note that larger values make the image generation more CPU intensive.'),
     '#default_value' => variable_get('image_captcha_character_spacing', '1.2'),
     '#options' => array(
+       // a4s chahge To make an image more tight, we have one more hack for an image height
       '0.40' => t('very tight'),
       '0.75' => t('tight'),
       '1' => t('normal'),
