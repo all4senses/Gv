@@ -222,6 +222,10 @@ function gv_misc_makeRequest_ajax() {
   else {
     $params['request_data'] = $post;
     $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
+    
+    // Comment to go live!
+    $admins = array( (object) array('uid' => 1));
+    
     foreach ($admins as $admin) {
       $recipient = user_load($admin->uid);
       $params['recipient'] = $recipient;
