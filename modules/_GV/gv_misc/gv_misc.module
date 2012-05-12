@@ -270,15 +270,17 @@ function gv_misc_mail($key, &$message, $params) {
     
     
     case 'email_verification':
-      $message['subject'] = t('Email verification');
-      $message['body'][] = t('Dear user!
+      $message['subject'] = t('Submitted Review Requires One-Click Email Verification');
+      $message['body'][] = t('Dear User,
 
-To verify your email and make it faster to approve your submitted review, please use this link:
+Thank you for taking your time to share your VoIP experience by submitting a review.
+
+To faster verify and publish your review, please click on the email verification link below:
 
 !url
 
-Best wishes,
-Get VoIP team
+Best Wishes,
+GetVoIP Team
 ', array('!url' => 'http://getvoip.com/approve/email/' . $params['verification_code']));
       
       break;
@@ -340,7 +342,7 @@ function gv_misc_sendMessage($tag, $data = NULL) {
       
       global $language;
       $params['verification_code'] = $data['verification_code'];
-      drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params);
+      drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params, 'contact@getvoip.com');
       
       break;
   }
