@@ -628,7 +628,7 @@ function gv_misc_emailIsRegistered($email) {
  */
 function gv_misc_userHasSubmittedReview($provider_nid, $user_uid, $user_email = NULL, $other_provider_title = NULL, $current_review_nid = NULL) {
   
-  if (!$user_uid && $user_email) {
+  if (!$user_uid && !$user_email) {
     // Not full source data...
     // For uid = 0 should be set email also.
     return FALSE;
