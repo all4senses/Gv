@@ -55,7 +55,7 @@
           </div>
               
           <div class="right-content">
-            <?php if ($content['r_data']['pros'] || $content['r_data']['pros']) { ?>
+            <?php dpm($content); if ($content['r_data']['pros'] || $content['r_data']['pros']) { ?>
             <div class="pros-cons">
               <?php
                 if ($content['r_data']['pros']) {
