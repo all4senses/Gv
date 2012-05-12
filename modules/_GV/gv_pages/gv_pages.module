@@ -1255,7 +1255,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           // Show preview of the provider (as a teaser) on the edit form.
           $provider_node = node_load($form['provider']['field_ref_provider']['und']['#default_value'][0]);
-          dpm($provider_node);
           /*
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider']['provider_preview'] = array(
@@ -1266,7 +1265,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['provider_title_noedit'] = array(
             '#type' => 'item',
             '#title' => t('Your VoIP Service Provider:'),
-            '#markup' => '<div class="text">' . $provider_node->title . '</div>',
+            '#markup' => '<div class="text">' . l($provider_node->field_p_name['und'][0]['safe_value'], 'node/' . $provider_node->nid) . '</div>',
             //'#weight' => -100,
           );
           
