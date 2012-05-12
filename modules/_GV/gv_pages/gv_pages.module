@@ -1026,10 +1026,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#attributes' => array('title' => t(CONS_HINT)),
           );
           
+          
           //$form['body']['#weight'] = 2;
           $form['body']['und'][0]['#rows'] = 5;
           // Unlink Ckeditor
+          $form['body']['und'][0]['#format'] = 'gv_full_html';
+          // Bad trial...
           //$form['body']['und'][0]['#type'] = 'textarea';
+          
           $form['ureview']['body'] = $form['body'];
           unset($form['body']);
           
