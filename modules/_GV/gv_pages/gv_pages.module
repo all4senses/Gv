@@ -1497,12 +1497,15 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
       
       // This clear the field.
       $form[$fdata['set']][$fname]['#value'] = NULL;
+      
       // Just in case.
+      // BUT! It causes fatal eror with #parent index absence
       //form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
+      
       // Just in case on more.
       $form_state['values'][$fname] = NULL;
       
-      if ($form[$fdata['set']][$fname]['#required']) {
+      if (isset($form[$fdata['set']][$fname]['#required']) && $form[$fdata['set']][$fname]['#required']) {
         form_set_error($fname, t('Please fill the field "' . ($form[$fdata['set']][$fname]['#title'] ? $form[$fdata['set']][$fname]['#title'] : $fdata['title'] ) . '"'));
       }
     }
