@@ -1221,7 +1221,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         else {
           // A provider has been selected from a list.
           
-          $recommend = NULL;
           // If this review is not approved OR this review is NOT published.
           // Load votes data from a local field_ratings_oprovider, not from Voting api tables.
           if ($form['field_r_notapproved']['und'][0]['value']['#default_value'] || !$form['options']['status']['#default_value']) {
@@ -1251,7 +1250,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               }
             }
           } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
-          if ($recommend) {
+          if (isset($recommend)) {
             $form['ureview']['rating_recommend']['#default_value'] = $recommend;
           }
           
