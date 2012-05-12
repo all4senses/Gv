@@ -851,7 +851,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       $form['#suffix'] = '</div></fieldset>';
       
-      //dpm($form);
+      dpm($form);
       $form['actions']['submit']['#value'] = t('Submit Review');
       
       // Make some small corrections.
@@ -1294,6 +1294,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#submit'][] = 'gv_pages_submitForm_review';
+      
+      
+      dpm($form);
       
     break;
   }
