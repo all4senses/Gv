@@ -142,6 +142,7 @@ function gv_username($object) {
  * Render it in a fieldset if a description of the CAPTCHA
  * is available. Render it as is otherwise.
  */
+/*
 function gv_captcha($variables) {
   $element = $variables['element'];
   if (!empty($element['#description']) && isset($element['captcha_widgets'])) {
@@ -158,3 +159,4 @@ function gv_captcha($variables) {
     return '<div class="captcha">' . drupal_render_children($element) . '</div>';
   }
 }
+*/
