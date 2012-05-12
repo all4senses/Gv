@@ -1037,6 +1037,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['ureview']['body'] = $form['body'];
           unset($form['body']);
           
+          dpm($form);
           
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
