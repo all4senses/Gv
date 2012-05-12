@@ -2149,13 +2149,15 @@ function gv_pages_node_delete($node) {
           'entity_type' => 'node',
           'entity_id' => $node->field_ref_provider['und'][0]['target_id'],
           'uid' => $node->uid,
+          'vote_source' => $node->field_r_email['und'][0]['value'],
         );
-        votingapi_delete_votes(votingapi_select_votes($criteria));
+        $select_votes = gv_misc_getVotesIDs($criteria); //votingapi_select_votes($criteria);
+        votingapi_delete_votes($select_votes);
         votingapi_recalculate_results('node', $node->field_ref_provider['und'][0]['target_id']);
       }
   }
 }
-      
+
 
 /**
  * Append to a node (for a hook node_view) a themed set of rating votes.
