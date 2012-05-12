@@ -1,5 +1,9 @@
 <!-- <div id="container" class="clearfix"> -->
-
+  <div id="bshadow">
+    <div id="bs1"></div>
+    <div id="bs2"></div>
+    
+    
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
     <?php if ($main_menu): ?>
@@ -7,7 +11,7 @@
     <?php endif; ?>
   </div>
 
-  <div id="bshadow"><div id="bs1"></div><div id="bs2"></div></div>
+
   
   <header id="header" role="banner" class="clearfix">
 
@@ -76,3 +80,5 @@
   </footer> <!-- /#footer -->
 
 <!-- </div> --> <!-- /#container -->
+
+</div>
