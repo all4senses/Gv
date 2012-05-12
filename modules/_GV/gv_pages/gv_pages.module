@@ -1478,7 +1478,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
  */
 function gv_pages_validateForm_review(&$form, &$form_state) {
   
-  //dpm($form);
+  dpm($form);
   dpm($form_state);
 
   // Don't check anything if we delete the node.
@@ -1498,7 +1498,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
       // This clear the field.
       $form[$fdata['set']][$fname]['#value'] = NULL;
       // Just in case.
-      form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
+      //form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
       // Just in case on more.
       $form_state['values'][$fname] = NULL;
       
