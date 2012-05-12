@@ -62,7 +62,7 @@
                   if ($content['r_data']['pros']) {
                     echo '<div class="pros frame"><div class="text"><span class="caption">' . t('Pros:') . '</span>' . $content['r_data']['pros'] . '</div></div>';
                   }
-                  if($content['r_data']['pros'] && $content['r_data']['pros']) {
+                  if($content['r_data']['pros'] && $content['r_data']['cons']) {
                     echo '<div class="vs">' . t('VS') . '</div>';
                   }
                   if ($content['r_data']['cons']) {
