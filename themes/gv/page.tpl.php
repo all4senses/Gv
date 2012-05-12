@@ -70,7 +70,10 @@
       <?php endif; ?>
 
   </div> <!-- /#all-content -->
-  
+
+  </div> <!-- <div id="bshadow"> -->
+
+
   
   <footer id="footer" role="contentinfo" class="clearfix">
     <!-- <div id="footer-inside"> -->
@@ -81,4 +84,3 @@
 
 <!-- </div> --> <!-- /#container -->
 
-</div>
