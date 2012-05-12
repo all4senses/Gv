@@ -132,3 +132,29 @@ function gv_preprocess_search_block_form(&$vars) {
 function gv_username($object) {
   return str_replace(' ('. t('not verified') .')', '', theme_username($object));
 }
+
+
+/**
+ * Theme function for a CAPTCHA element.
+ * 
+ * a4s rename CAPTCHA to Captcha
+ *
+ * Render it in a fieldset if a description of the CAPTCHA
+ * is available. Render it as is otherwise.
+ */
+function gv_captcha($variables) {
+  $element = $variables['element'];
+  if (!empty($element['#description']) && isset($element['captcha_widgets'])) {
+    $fieldset = array(
+      '#type' => 'fieldset',
+      '#title' => t('Captcha'),
+      '#description' => $element['#description'],
+      '#children' => drupal_render_children($element),
+      '#attributes' => array('class' => array('captcha')),
+    );
+    return theme('fieldset', array('element' => $fieldset));
+  }
+  else {
+    return '<div class="captcha">' . drupal_render_children($element) . '</div>';
+  }
+}
