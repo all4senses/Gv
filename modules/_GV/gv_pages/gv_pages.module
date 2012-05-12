@@ -851,7 +851,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       $form['#suffix'] = '</div></fieldset>';
       
-      dpm($form);
+      //dpm($form);
       $form['actions']['submit']['#value'] = t('Submit Review');
       
       // Make some small corrections.
@@ -1128,6 +1128,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // If a target provider has been defined by id from url or by referrer (previous) page,
         // set this provider as selected by default and show its info and preview.
         if ($provider_nid) {
+          
+          /*
           $form['provider']['id_source'] = array(
             '#markup' => '<div class="id-source">' . t('A taget provider has been chosen based on !source.', array('!source' => $provider_id_source)) . '<div>' . t('If You want to chose an other provider, please click !here.', array('!here' => l(t('here'), 'node/add/review'))) . '</div></div>',
           ); 
@@ -1138,6 +1140,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#title' => t('A provider You have chosen'),
             '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
           ); 
+          
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider']['preview'] = array(
             '#type' => 'fieldset',
@@ -1149,12 +1152,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 '#markup' => $provider_preview,
                 '#weight' => -100,
               ); 
-              
+          */
+          
           //$form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
           //$form['field_r_oprovider']['und'][0]['value']['#default_value'] = $provider_nid;
           $form['provider']['field_ref_provider']['und']['#default_value'][0] = $provider_nid;
-          $form['provider']['field_ref_provider']['#access'] = FALSE;
-          $form['provider']['field_r_oprovider']['#access'] = FALSE;
+          //$form['provider']['field_ref_provider']['#access'] = FALSE;
+          //$form['provider']['field_r_oprovider']['#access'] = FALSE;
           
         } // End of if($provider_nid) { // // If a target provider has been defined by id from url or by referrer (previous) page,
         
@@ -1239,22 +1243,30 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }
           } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
           
+          
+          
           // Show preview of the provider (as a teaser) on the edit form.
           $provider_node = node_load($form['provider']['field_ref_provider']['und']['#default_value'][0]);
+          /*
           $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
           $form['provider']['provider_preview'] = array(
               '#markup' => $provider_preview,
               '#weight' => -100,
           ); 
-          $form['provider']['field_ref_provider']['#access'] = FALSE;
-          $form['provider']['field_r_oprovider']['#access'] = FALSE;
+          */
           $form['provider']['provider_title_noedit'] = array(
             '#type' => 'item',
             '#title' => t('Your VoIP Service Provider'),
             '#markup' => '<div class="text">' . $provider_node->title . '</div>',
             //'#weight' => -100,
           );
+          
+          $form['provider']['field_ref_provider']['#access'] = FALSE;
+          $form['provider']['field_r_oprovider']['#access'] = FALSE;
+          
+          
         } // End of A provider has been selected from a list.
+        
       } // End of Edit a review page.
       
       
@@ -1296,7 +1308,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['#submit'][] = 'gv_pages_submitForm_review';
       
       
-      dpm($form);
+      //dpm($form);
       
     break;
   }
