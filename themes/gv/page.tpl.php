@@ -7,6 +7,8 @@
     <?php endif; ?>
   </div>
 
+  <div id="bshadow"><div id="bs1"></div><div id="bs2"></div></div>
+  
   <header id="header" role="banner" class="clearfix">
 
     <nav id="navigation" role="navigation" class="clearfix">
