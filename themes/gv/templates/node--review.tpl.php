@@ -56,24 +56,20 @@
               
           <div class="right-content">
             
-            <?php if ($content['r_data']['pros'] || $content['r_data']['pros']): ?>
-            <div class="pros-cons">
-              <?php
-                dpm($content);
-                if ($content['r_data']['pros']) {
-                  dpm('pro');
-                  echo '<div class="pros frame"><div class="text"><span class="caption">' . t('Pros:') . '</span>' . $content['r_data']['pros'] . '</div></div>';
-                }
-                if($content['r_data']['pros'] && $content['r_data']['pros']) {
-                  dpm('both');
-                  echo '<div class="vs">' . t('VS') . '</div>';
-                }
-                if ($content['r_data']['cons']) {
-                  dpm('con');
-                  echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">' . t('Cons:') . '</span>' . $content['r_data']['cons'] . '</div></div>';
-                }
-              ?>
-            </div>
+            <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
+              <div class="pros-cons">
+                <?php
+                  if ($content['r_data']['pros']) {
+                    echo '<div class="pros frame"><div class="text"><span class="caption">' . t('Pros:') . '</span>' . $content['r_data']['pros'] . '</div></div>';
+                  }
+                  if($content['r_data']['pros'] && $content['r_data']['pros']) {
+                    echo '<div class="vs">' . t('VS') . '</div>';
+                  }
+                  if ($content['r_data']['cons']) {
+                    echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">' . t('Cons:') . '</span>' . $content['r_data']['cons'] . '</div></div>';
+                  }
+                ?>
+              </div>
             <?php endif; ?>
             
             <?php echo render($content['body']); ?>
