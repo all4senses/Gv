@@ -788,12 +788,15 @@ function gv_misc_views_pre_render(&$view) {
    //dpm($view->current_display);
 
   // Add a prefaces for the some views pages.
-  $do_attach_preface = FALSE;
   $key = 'view-' . $view->name . '-' . $view->current_display;
   switch($key) {
     case 'view-providers-page_p_bu': 
       // Providers listing page.
       $do_attach_preface = TRUE;
+      break;
+    
+    default:
+      $do_attach_preface = FALSE;
       break;
   }
   if ($do_attach_preface) {
