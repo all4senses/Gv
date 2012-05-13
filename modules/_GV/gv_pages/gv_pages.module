@@ -2036,7 +2036,7 @@ function gv_pages_node_view($node, $view_mode) {
     
     case 'preface':
       
-      dpm($node);
+      //dpm($node);
       
       if (isset($node->metatags) && count($node->metatags)) {
         foreach($node->metatags as $metatag_title => $metatag_data) {
@@ -2045,29 +2045,9 @@ function gv_pages_node_view($node, $view_mode) {
       }
 /*      
 
- function add_metatag($name, $content){
 
-       $meta = array(
-                '#type' => 'html_tag',
-                '#tag' => 'meta',
-                '#attributes' => array(
-                    'name' => $name,
-                    'content' => $content,
-                )
-            );
-      drupal_add_html_head($meta, 'meta_'.$name);
-      } 
 
-      if(count($metatags["$enitity_id"]) > 0){
-
-        if(isset($metatags["$enitity_id"]["description"])){
-                add_metatag("description", $metatags["$enitity_id"]["description"]);
-        }
-        if(isset($metatags["$enitity_id"]["keywords"])){
-            add_metatag("keywords", $metatags["$enitity_id"]["keywords"]);
-        }
-
-        //к тайтлы не 
+        //doesnt
         if(isset($metatags["$enitity_id"]["title"])){
                 //drupal_set_title($metatags["$enitity_id"]["title"]["value"]);
                 //variable_set("head_title", $metatags["$enitity_id"]["title"]["value"]);
@@ -2077,13 +2057,7 @@ function gv_pages_node_view($node, $view_mode) {
       /*
        
         $tags = array(
-            'title' => array(
-                '#tag' => 'meta',
-                '#attributes' => array(
-                    'name' => 'title',
-                    'content' => "Video '" . $node->title . "' by " . $publisher_title,
-                ),
-            ),
+
             'DC.title' => array(
                 '#tag' => 'meta',
                 '#attributes' => array(
@@ -2091,13 +2065,7 @@ function gv_pages_node_view($node, $view_mode) {
                     'content' => $node->title,
                 ),
             ),
-            'description' => array(
-                '#tag' => 'meta',
-                '#attributes' => array(
-                    'name' => 'description',
-                    'content' => (isset($node->body['und'][0]['summary']) AND $node->body['und'][0]['summary'])?$node->body['und'][0]['summary']:drupal_substr(strip_tags($node->body['und'][0]['value']), 0, 200) . '...',
-                ),
-            ),
+
             'author' => array(
                 '#tag' => 'meta',
                 '#attributes' => array(
@@ -2115,8 +2083,7 @@ function gv_pages_node_view($node, $view_mode) {
             ),
         );
  
-        foreach ($tags as $key => $val)
-            drupal_add_html_head($val, $key);
+
         */
       
       
