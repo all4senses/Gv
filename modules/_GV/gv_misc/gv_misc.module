@@ -50,6 +50,22 @@ function gv_misc_menu() {
 
 
 /**
+ * Helper function to add metatag to a current page.
+ */
+function gv_misc_addMetatag($name, $content) {
+  $meta = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+        'name' => $name,
+        'content' => $content,
+    )
+  );
+  drupal_add_html_head($meta, $name);
+}
+
+
+/**
  * Returns votes ids for a specific criteria.
  */
 function gv_misc_getVotesIDs($criteria) {

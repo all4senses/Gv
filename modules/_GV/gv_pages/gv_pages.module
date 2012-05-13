@@ -2037,7 +2037,16 @@ function gv_pages_node_view($node, $view_mode) {
     case 'preface':
       
       dpm($node);
+      
+      if (isset($node->metatags) && count($node->metatags)) {
+        foreach($node->metatags as $metatag_title => $metatag_data) {
+          gv_misc_addMetatag($metatag_title, $metatag_data['value']);
+        }
+      }
 /*      
+
+ function add_metatag($name, $content){
+
        $meta = array(
                 '#type' => 'html_tag',
                 '#tag' => 'meta',
@@ -2049,19 +2058,6 @@ function gv_pages_node_view($node, $view_mode) {
       drupal_add_html_head($meta, 'meta_'.$name);
       } 
 
-      $enitity_id=arg(2);
-      $enitity_type=arg(0)."_".arg(1);
-
-      $metatags = db_query("SELECT entity_id, data FROM {metatag} WHERE entity_type = :type AND entity_id = :ids", array(
-            ':type' => $enitity_type,
-            ':ids' => $enitity_id,
-          )
-      )->fetchAllKeyed();
-
-      $metatags = array_map('unserialize', $metatags);
-      //dsm($metatags);
-
-
       if(count($metatags["$enitity_id"]) > 0){
 
         if(isset($metatags["$enitity_id"]["description"])){
@@ -2071,12 +2067,59 @@ function gv_pages_node_view($node, $view_mode) {
             add_metatag("keywords", $metatags["$enitity_id"]["keywords"]);
         }
 
-        //к сожалению, тайтлы так и не заработали(((
+        //к тайтлы не 
         if(isset($metatags["$enitity_id"]["title"])){
                 //drupal_set_title($metatags["$enitity_id"]["title"]["value"]);
                 //variable_set("head_title", $metatags["$enitity_id"]["title"]["value"]);
         }
 */      
+      
+      /*
+       
+        $tags = array(
+            'title' => array(
+                '#tag' => 'meta',
+                '#attributes' => array(
+                    'name' => 'title',
+                    'content' => "Video '" . $node->title . "' by " . $publisher_title,
+                ),
+            ),
+            'DC.title' => array(
+                '#tag' => 'meta',
+                '#attributes' => array(
+                    'name' => 'DC.title',
+                    'content' => $node->title,
+                ),
+            ),
+            'description' => array(
+                '#tag' => 'meta',
+                '#attributes' => array(
+                    'name' => 'description',
+                    'content' => (isset($node->body['und'][0]['summary']) AND $node->body['und'][0]['summary'])?$node->body['und'][0]['summary']:drupal_substr(strip_tags($node->body['und'][0]['value']), 0, 200) . '...',
+                ),
+            ),
+            'author' => array(
+                '#tag' => 'meta',
+                '#attributes' => array(
+                    'name' => 'author',
+                    'content' => $publisher_title,
+                ),
+            ),
+            'image_src' => array(
+                '#tag' => 'link', // The #tag is the html tag - <link />
+                '#attributes' => array( 
+                    'href' => '/' . $node->field_thumbnail['und'][0]['value'],
+                    'rel' => 'image_src',
+                    //'type' => 'text/css',
+                ),
+            ),
+        );
+ 
+        foreach ($tags as $key => $val)
+            drupal_add_html_head($val, $key);
+        */
+      
+      
     break;
   
   } // End of switch ($node->type) {
