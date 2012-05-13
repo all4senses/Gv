@@ -2029,6 +2029,56 @@ function gv_pages_node_view($node, $view_mode) {
       } // End of if ($view_mode == 'full') {
       
     break; // End of case 'provider':
+  
+    
+    
+    
+    
+    case 'preface':
+      
+      dpm($node);
+/*      
+       $meta = array(
+                '#type' => 'html_tag',
+                '#tag' => 'meta',
+                '#attributes' => array(
+                    'name' => $name,
+                    'content' => $content,
+                )
+            );
+      drupal_add_html_head($meta, 'meta_'.$name);
+      } 
+
+      $enitity_id=arg(2);
+      $enitity_type=arg(0)."_".arg(1);
+
+      $metatags = db_query("SELECT entity_id, data FROM {metatag} WHERE entity_type = :type AND entity_id = :ids", array(
+            ':type' => $enitity_type,
+            ':ids' => $enitity_id,
+          )
+      )->fetchAllKeyed();
+
+      $metatags = array_map('unserialize', $metatags);
+      //dsm($metatags);
+
+
+      if(count($metatags["$enitity_id"]) > 0){
+
+        if(isset($metatags["$enitity_id"]["description"])){
+                add_metatag("description", $metatags["$enitity_id"]["description"]);
+        }
+        if(isset($metatags["$enitity_id"]["keywords"])){
+            add_metatag("keywords", $metatags["$enitity_id"]["keywords"]);
+        }
+
+        //к сожалению, тайтлы так и не заработали(((
+        if(isset($metatags["$enitity_id"]["title"])){
+                //drupal_set_title($metatags["$enitity_id"]["title"]["value"]);
+                //variable_set("head_title", $metatags["$enitity_id"]["title"]["value"]);
+        }
+*/      
+    break;
+  
   } // End of switch ($node->type) {
 }
 
