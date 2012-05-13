@@ -1,11 +1,11 @@
 <?php if (!$page): ?>
-  <?php if($node->type == 'preface'): ?>
+  <?php if($node->type == 'preface' && in_array('administrator', $user->roles)): ?>
     <div class="tabs-wrapper clearfix"><h2 class="element-invisible">Primary tabs</h2><ul class="tabs primary clearfix">
         <li class="active"><a class="active" href="<?php echo url('node/' . $node->nid); ?>">View<span class="element-invisible">(active tab)</span></a></li>
         <li><a href="<?php echo url('node/' . $node->nid . '/edit'); ?>">Edit</a></li>
         <li><a href="<?php echo url('node/' . $node->nid . '/devel'); ?>">Devel</a></li>
       </ul></div>
-  <?php endif; ?>
+  <?php dpm($_GET); endif; ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <div class="inside">
 <?php endif; ?>
