@@ -784,8 +784,8 @@ function gv_misc_votingapi_metadata_alter(&$data) {
 
 function gv_misc_views_pre_render(&$view) {
   
-   dpm($view->name);
-   dpm($view->current_display);
+   //dpm($view->name);
+   //dpm($view->current_display);
 
   // Add a prefaces for the some views pages.
   $key = 'view-' . $view->name . '-' . $view->current_display;
@@ -794,6 +794,12 @@ function gv_misc_views_pre_render(&$view) {
       // Business Providers listing page.
     case 'view-providers-page_p_re': 
       // Residential Providers listing page.
+    case 'view-blog-page': 
+      // Blog
+    case 'view-articles-page': 
+      // Articles
+    case 'view-news-page': 
+      // News
       $do_attach_preface = TRUE;
       break;
     
