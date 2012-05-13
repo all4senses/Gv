@@ -3,10 +3,11 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <div class="inside">
 <?php endif; ?>
-  <?php if ($user_picture || $display_submitted || !$page): ?>
+  <?php //if ($user_picture || $display_submitted || !$page): ?>
+    
     <?php if (!$page): ?>
       <header>
-	<?php endif; ?>
+    <?php endif; ?>
 <div>BBBBBBBBBBBBB</div>
       <?php print $user_picture; ?>
   
@@ -32,8 +33,9 @@
 
     <?php if (!$page): ?>
       </header>
-	<?php endif; ?>
-  <?php endif; ?>
+    <?php endif; ?>
+    
+  <?php //endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
     <?php
