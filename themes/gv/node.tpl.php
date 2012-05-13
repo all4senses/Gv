@@ -5,7 +5,7 @@
         <li><a href="<?php echo url('node/' . $node->nid . '/edit', array('query' => array('destination' => $_GET['q']))); ?>">Edit</a></li>
         <li><a href="<?php echo url('node/' . $node->nid . '/devel', array('query' => array('destination' => $_GET['q']))); ?>">Devel</a></li>
       </ul></div>
-  <?php dpm($user); endif; ?>
+  <?php endif; ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <div class="inside">
 <?php endif; ?>
