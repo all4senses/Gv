@@ -791,7 +791,9 @@ function gv_misc_views_pre_render(&$view) {
   $key = 'view-' . $view->name . '-' . $view->current_display;
   switch($key) {
     case 'view-providers-page_p_bu': 
-      // Providers listing page.
+      // Business Providers listing page.
+    case 'view-providers-page_p_re': 
+      // Residential Providers listing page.
       $do_attach_preface = TRUE;
       break;
     
