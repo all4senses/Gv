@@ -1,3 +1,4 @@
+<div> AAAAAAAAAAAAAAAAA</div>
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <div class="inside">
@@ -6,12 +7,12 @@
     <?php if (!$page): ?>
       <header>
 	<?php endif; ?>
-
+<div>BBBBBBBBBBBBB</div>
       <?php print $user_picture; ?>
   
       <?php //if (!$page): ?>
           <?php print render($title_prefix); ?>
-          
+<div> CCCCCCCCCCCCCCCCCC</div>          
             <h2<?php print $title_attributes; ?>>
               <?php if (!isset($node->title_no_link) && !$page): ?>
                 <a href="<?php print $node_url; ?>">
@@ -21,7 +22,7 @@
                 <?php print $title; ?>
               <?php endif; ?>
             </h2>
-          
+<div> DDDDDDDDDDDDDDDD</div>          
           <?php print render($title_suffix); ?>
           <?php //endif; ?>
   
