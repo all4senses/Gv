@@ -1,4 +1,5 @@
 <?php if (!$page): ?>
+
   <?php if ($node->type == 'preface'): ?>
     <?php if (in_array('administrator', $user->roles)): ?>
       <div class="tabs-wrapper clearfix"><h2 class="element-invisible">Primary tabs</h2>
@@ -12,18 +13,16 @@
   <?php else: ?> <!-- if ($node->type == 'preface') -->
     <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
     <div class="inside">
+    
+    <header>
   <?php endif; ?> <!-- if ($node->type != 'preface') -->
+  
 <?php endif; ?> <!-- if (!$page) -->
     
-  <?php //if ($user_picture || $display_submitted || !$page): ?>
-    
-    <?php if (!$page): ?>
-      <header>
-    <?php endif; ?>
 
       <?php print $user_picture; ?>
   
-      <?php //if (!$page): ?>
+
           <?php print render($title_prefix); ?>
         
             <?php if ($page || $node->type == 'preface'): ?>
@@ -50,19 +49,18 @@
         
 
           <?php print render($title_suffix); ?>
-      <?php //endif; ?>
+
   
       <?php if ($display_submitted): ?>
         <span class="submitted"><?php print $submitted; ?></span>
       <?php endif; ?>
 
-    <?php if (!$page): ?>
+    <?php if (!$page && $node->type != 'preface'): ?>
       </header>
     <?php endif; ?>
     
-  <?php //endif; ?>
 
-  <div class="content <?php echo ($page ? 'page' : 'teaser'); ?>"<?php print $content_attributes; ?>>
+  <div class="content <?php echo ($page || $node->type == 'preface') ? 'page' : 'teaser'; ?>"<?php print $content_attributes; ?>>
     <?php
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
