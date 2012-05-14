@@ -21,10 +21,10 @@
       <?php //if (!$page): ?>
           <?php print render($title_prefix); ?>
         
-            <?php if (!$page): ?>
-            <h2
-            <?php else: ?>
+            <?php if ($page || $node->type == 'preface'): ?>
             <h1
+            <?php else: ?>
+            <h2
             <?php endif; ?>
 
             <?php print $title_attributes; ?>>
@@ -36,10 +36,10 @@
                 <?php print $title; ?>
               <?php endif; ?>
             
-            <?php if (!$page): ?>
-            </h2>
-            <?php else: ?>
+            <?php if ($page || $node->type == 'preface'): ?>
             </h1>
+            <?php else: ?>
+            </h2>
             <?php endif; ?> 
         
         
