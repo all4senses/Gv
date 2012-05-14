@@ -76,7 +76,7 @@
 
 
 
-      <div class="content"<?php print $content_attributes; ?>>
+      <div class="content <?php echo ($page ? 'page' : 'teaser'); ?>"<?php print $content_attributes; ?>>
         <?php
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
