@@ -1,14 +1,19 @@
 <?php if (!$page): ?>
-  <?php if($node->type == 'preface' && in_array('administrator', $user->roles)): ?>
-    <div class="tabs-wrapper clearfix"><h2 class="element-invisible">Primary tabs</h2><ul class="tabs primary clearfix">
-        <li class="active"><a class="active" href="/<?php echo $_GET['q']; ?>">View<span class="element-invisible">(active tab)</span></a></li>
-        <li><a href="<?php echo url('node/' . $node->nid . '/edit', array('query' => array('destination' => $_GET['q']))); ?>">Edit</a></li>
-        <!--<li><a href="<?php //echo url('node/' . $node->nid . '/devel', array('query' => array('destination' => $_GET['q']))); ?>">Devel</a></li>-->
-      </ul></div>
-  <?php endif; ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <div class="inside">
-<?php endif; ?>
+  <?php if ($node->type == 'preface'): ?>
+    <?php if (in_array('administrator', $user->roles)): ?>
+      <div class="tabs-wrapper clearfix"><h2 class="element-invisible">Primary tabs</h2>
+        <ul class="tabs primary clearfix">
+          <li class="active"><a class="active" href="/<?php echo $_GET['q']; ?>">View<span class="element-invisible">(active tab)</span></a></li>
+          <li><a href="<?php echo url('node/' . $node->nid . '/edit', array('query' => array('destination' => $_GET['q']))); ?>">Edit</a></li>
+          <!--<li><a href="<?php //echo url('node/' . $node->nid . '/devel', array('query' => array('destination' => $_GET['q']))); ?>">Devel</a></li>-->
+        </ul>
+      </div>
+    <?php endif; ?> <!-- if (in_array('administrator', $user->roles))-->
+  <?php else: ?> <!-- if ($node->type == 'preface') -->
+    <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+    <div class="inside">
+  <?php endif; ?> <!-- if ($node->type != 'preface') -->
+<?php endif; ?> <!-- if (!$page) -->
     
   <?php //if ($user_picture || $display_submitted || !$page): ?>
     
@@ -78,9 +83,8 @@
 
   <?php print render($content['comments']); ?>
 
-<?php if (!$page): ?>
+<?php if (!$page && $node->type != 'preface'): ?>
   </div> <!-- /.inside -->
   <div class="shadow"></div>
   </article> <!-- /.node -->
-  
 <?php endif; ?>
