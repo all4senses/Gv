@@ -41,13 +41,13 @@
           <?php print $messages; ?>
           <a id="main-content"></a>
           
-          <!-- -->
+          <!-- 
           <?php //if (!$is_front && $title): ?>
             <?php //print render($title_prefix); ?>
-            <h1 class="title" id="page-title"><?php print $title; ?></h1>
+            <h1 class="title" id="page-title"><?php //print $title; ?></h1>
             <?php //print render($title_suffix); ?>
           <?php //endif; ?>
-          <!-- -->
+          -->
           
           <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
           <?php print render($page['help']); ?>
