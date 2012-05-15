@@ -37,9 +37,10 @@
 
         <?php print render($title_suffix); ?>
 
-
+        <!--
           <span class="submitted">
             <?php 
+              /*
               $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
               global $user;
               if ($user->uid && $node->uid) {
@@ -52,9 +53,10 @@
               else {
                 print preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
               }
+              */
             ?>
           </span>
-
+        -->
 
       <?php if (!$page): ?>
         </header>
