@@ -216,7 +216,7 @@
 //            echo render($content);
           
           
-              echo render($content['metatag']);
+              echo render($content['metatags']);
               //dpm($content);
           ?>
           
