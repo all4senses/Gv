@@ -160,3 +160,11 @@ function gv_captcha($variables) {
   }
 }
 */
+
+
+/**
+ * Preprocess the primary theme implementation for a view.
+ */
+function gv_preprocess_views_view(&$vars) {
+  dpm($vars);
+}
