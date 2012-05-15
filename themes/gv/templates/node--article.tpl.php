@@ -75,7 +75,9 @@
           hide($content['comments']);
           hide($content['links']);
           hide($content['field_topics']);
+          
           print render($content);
+          
           dpm($content);
         ?>
       </div>
