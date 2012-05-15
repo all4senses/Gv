@@ -167,7 +167,7 @@ function gv_captcha($variables) {
  */
 function gv_preprocess_views_view(&$vars) {
   if ($vars['view']->current_display == 'page_by_tag') {
-    dpm($view->get_title());
+    dpm($vars['view']->get_title());
     dpm($vars);
     $vars['title'] = str_replace('%1', $vars['view']->build_info['substitutions']['%1'], $vars['view']->build_info['title']); 
     dpm($vars['title']);
