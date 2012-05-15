@@ -214,7 +214,10 @@
 //            hide($content['reviews_entity_view_1']);
 //
 //            echo render($content);
-            dpm($content);
+          
+          
+              echo render($content['metatag']);
+              //dpm($content);
           ?>
           
         </div> <!-- content -->
