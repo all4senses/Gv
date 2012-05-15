@@ -59,7 +59,7 @@
   </div>
   
        
-  <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
+  <?php if (isset($content['field_tags'][0]) || isset($content['links'][0])): ?>
     <footer>
       <?php print render($content['field_tags']); ?>
       <?php print render($content['links']); ?>
