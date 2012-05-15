@@ -214,6 +214,7 @@
 //            hide($content['reviews_entity_view_1']);
 //
 //            echo render($content);
+            dpm($content);
           ?>
           
         </div> <!-- content -->
