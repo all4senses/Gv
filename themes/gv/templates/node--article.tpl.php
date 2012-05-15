@@ -1,10 +1,12 @@
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <div class="inside">
+  <!-- <div class="inside"> -->
+<?php else: ?>
+  <div class="main-content"> 
 <?php endif; ?>
 
  
-  <div class="main-content">
+  
  
           
 
@@ -40,8 +42,6 @@
         <?php print render($title_suffix); ?>
 
 
-        <?php if ($display_submitted): ?>
-
           <span class="submitted">
             <?php 
               $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
@@ -62,7 +62,6 @@
             ?>
           </span>
 
-        <?php endif; ?>
 
       <?php if (!$page): ?>
         </header>
@@ -169,12 +168,13 @@
       <?php endif; ?>
     
       <div class="bottom-clear"></div>
-    
-  </div> <!-- main-content -->
  
+
   
   
   <?php if ($page): ?>
+      
+  </div> <!-- main-content -->
   
       <div class="providers">
         <?php 
@@ -189,13 +189,11 @@
 
   <?php endif; ?>
   
-  
-  
+    
   <?php print render($content['comments']); ?>
 
 <?php if (!$page): ?>
-  </div> <!-- /.inside -->
-  <div class="shadow"></div>
+  <!-- </div> --> <!-- /.inside -->
+  <!-- <div class="shadow"></div> -->
   </article> <!-- /.node -->
-  
 <?php endif; ?>
