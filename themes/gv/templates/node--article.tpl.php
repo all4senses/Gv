@@ -168,9 +168,11 @@
                       $tags = NULL;
                       
                       switch ($node->type) {
-                        case 'news':
-                        case 'blog':
-                          $target = $node->type;
+                        case 'news_post':
+                          $target = 'news';
+                          break;
+                        case 'blog_post':
+                          $target = 'blog';
                           break;
                         case 'article':
                           $target = 'articles';
