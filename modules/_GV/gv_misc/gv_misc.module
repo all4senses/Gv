@@ -69,7 +69,9 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     $teaser = text_summary($body_full_markup, 'full_html', 145);
   }
   else {
+    dpm($teaser);
     $teaser = text_summary($body_full_markup, 'full_html', 250);
+    dpm($teaser);
   }
   
   // Replace the last word with ...
