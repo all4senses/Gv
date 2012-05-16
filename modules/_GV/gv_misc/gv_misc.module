@@ -63,6 +63,11 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     dpm($matches);
     preg_match_all('/(alt|title|src)=("[^"]*")/i',$matches[0], $matches);
     dpm($matches);
+    
+    foreach ($matches[1] as $index => $key) {
+      $main_image[$key] = $matches[2][$index];
+    }
+    dpm($main_image);
   }
   
   
