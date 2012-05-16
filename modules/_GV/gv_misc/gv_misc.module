@@ -56,6 +56,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
  
   $body_full_markup = '<div><p>VoIP is another name for Voice over Internet Protocol. It is a new technology that allows <p></div><p>people to talk over the Internet. The VoIP technology is used by IP telephony as a way to send phone calls. The IP phone has an RJ-45 Ethernet connector. This phone plugs directly into the router, and it comes with the needed software and hardware to handle an IP call. IP Telephony and VoIP are terms that are used together, but they are actually different; IP telephony deals directly with digital telephony systems that use IP protocols which aids in voice communication and VoIP is actually a subset of IP Telephony. VoIP technology is now being widely accepted in many countries. VoIP service is believed to someday replace the old telephone systems. People can communicate just as if they were using regular analog audio signal phones. The person is heard just as clearly as if they were on a regular phone. Most people find that they cannot tell the difference between the two systems when it comes to call quality.</p>';
   
+  $main_image_html = NULL;
   $main_image = NULL;
   $matches = array();
 
@@ -64,10 +65,13 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
+    //$main_image_path_relative = $main_image['src'];
+    //$main_image_html = theme('image_style', array( 'path' => $main_image_path_relative, 'style_name' => 'logo_provider_page'));
+    
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
   
-  $teaser = text_summary($body_full_markup, 'full_html', 50);
+  $teaser = $main_image_html . text_summary($body_full_markup, 'full_html', 50);
           
   return array('teaser' => $teaser, 'main_image' => $main_image);
 }
