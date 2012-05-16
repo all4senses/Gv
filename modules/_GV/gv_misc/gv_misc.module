@@ -66,7 +66,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
-    $teaser = text_summary($body_full_markup, 'full_html', 160);
+    $teaser = text_summary($body_full_markup, 'full_html', 145);
   }
   else {
     $teaser = text_summary($body_full_markup, 'full_html', 250);
