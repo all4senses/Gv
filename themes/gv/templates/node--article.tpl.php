@@ -78,6 +78,7 @@
           
           print render($content);
           
+          dpm($node);
           dpm($content);
         ?>
       </div>
