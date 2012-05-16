@@ -76,10 +76,19 @@
           hide($content['links']);
           hide($content['field_topics']);
           
+          
+          
+          if (!$page) {
+            $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup']);
+            echo $teaser_data['teaser'];
+            
+            hide($content['body']);
+          }
+          
           print render($content);
           
-          dpm($node);
-          dpm($content);
+          //dpm($node);
+          //dpm($content);
         ?>
       </div>
 

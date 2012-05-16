@@ -50,6 +50,14 @@ function gv_misc_menu() {
 
 
 /**
+ * Return trimmed teaser with right size (cleared from images) and with separated a styled image, cutted off from the body.
+ */
+function gv_misc_getArticleTeaserData($target, $body_full_markup) {
+  return array('teaser' => $body_full_markup);
+}
+
+
+/**
  * Helper function to add metatag to a current page.
  */
 function gv_misc_addMetatag($name, $content) {
