@@ -79,7 +79,7 @@
           
           
           if (!$page) {
-            $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup']);
+            $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
             echo $teaser_data['teaser'];
             
             hide($content['body']);
