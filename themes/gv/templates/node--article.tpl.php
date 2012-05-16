@@ -26,9 +26,7 @@
 
             <?php print $title_attributes; ?>>
             <?php if (!isset($node->title_no_link) && !$page): ?>
-              <a href="<?php print $node_url; ?>">
-                <?php print $title; ?>
-              </a>
+              <a href="<?php print $node_url; ?>"><?php print $title; ?></a>
             <?php else: ?>
               <?php print $title; ?>
             <?php endif; ?>
