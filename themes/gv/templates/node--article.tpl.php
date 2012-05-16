@@ -176,6 +176,7 @@
                           break;
                         case 'article':
                           $target = 'articles';
+                          break;
                       }
                       foreach (element_children($content['field_topics']) as $key) {
                         $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), $target . '/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
