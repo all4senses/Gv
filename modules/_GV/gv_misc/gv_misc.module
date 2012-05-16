@@ -67,16 +67,16 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
     $teaser = text_summary($body_full_markup, 'full_html', 200);
-    
-    // Replace the last word with ...
-    preg_match('/^.*\s(.*)$/i', trim(strip_tags($teaser)), $matches);
-    $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , strrpos($teaser, $matches[1]), strlen($matches[1]));
-    
-    $teaser = $main_image_html . $teaser;
   }
   else {
     $teaser = text_summary($body_full_markup, 'full_html', 300);
   }
+  
+  // Replace the last word with ...
+  preg_match('/^.*\s(.*)$/i', trim(strip_tags($teaser)), $matches);
+  $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , strrpos($teaser, $matches[1]), strlen($matches[1]));
+    
+  $teaser = $main_image_html . $teaser;
           
   return array('teaser' => $teaser, 'main_image' => $main_image);
 }
