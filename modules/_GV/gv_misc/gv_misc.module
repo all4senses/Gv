@@ -59,10 +59,14 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
   //preg_match('/.*(<img.*src=\"(.*)\".*\/>).*/i' , $body_full_markup, $matches);
   
   //preg_match_all('/<img[^>]+>/i',$body_full_markup, $matches); 
-  preg_match('/<img[^>]+>/i',$body_full_markup, $matches);
-  dpm($matches);
+  if (preg_match('/<img[^>]+>/i',$body_full_markup, $matches)) {
+    dpm($matches);
+    preg_match_all('/(alt|title|src)=("[^"]*")/i',$matches[0], $matches);
+    dpm($matches);
+  }
   
-  //preg_match_all('/(alt|title|src)=("[^"]*")/i',$img_tag, $img[$img_tag]);
+  
+  //
 
           
   return array('teaser' => $body_full_markup);
