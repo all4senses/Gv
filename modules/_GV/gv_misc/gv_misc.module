@@ -63,33 +63,28 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
-    $main_image_path_relative = $main_image['src'];
-    
-    $file_default_scheme = file_default_scheme();
-    $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
-
-    dpm($file_default_scheme);
-    dpm($default_file_path);
-    
-    dpm($main_image_path_relative);
-    $stream_path = str_replace('http://getvoip.com', '', $main_image_path_relative);
-    dpm($stream_path);
-    $stream_path = ltrim($stream_path, '/');
-    dpm($stream_path);
-    $stream_path = $file_default_scheme . ':/' . str_replace($default_file_path, '', $stream_path);
-    dpm($stream_path);
-    //$main_image_html = theme('image_style', array( 'path' => $main_image_path_relative, 'style_name' => 'logo_provider_page'));
-    
+    $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
+    $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'logo_provider_page'));
+    dpm($main_image_html);
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
-  
-  
-  
-  
   
   $teaser = $main_image_html . text_summary($body_full_markup, 'full_html', 50);
           
   return array('teaser' => $teaser, 'main_image' => $main_image);
+}
+
+
+/**
+ * Helper function to add metatag to a current page.
+ */
+function gv_misc_getStreamUriFromRelativePath($path) {
+  $file_default_scheme = file_default_scheme();
+  $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
+
+  $stream_path = str_replace('http://getvoip.com', '', $path);
+  $stream_path = ltrim($stream_path, '/');
+  return $file_default_scheme . ':/' . str_replace($default_file_path, '', $stream_path);
 }
 
 
