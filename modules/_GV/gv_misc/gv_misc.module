@@ -67,13 +67,13 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
     
     dpm($body_full_markup);
-    $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
+    //$body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
     dpm($body_full_markup);
     
     
     $teaser = text_summary($body_full_markup, 'full_html', 200);
     dpm($teaser);
-    //$teaser = $main_image_html . text_summary($body_full_markup, 'full_html', 200);
+    $teaser = $main_image_html . $teaser;
   }
   else {
     $teaser = text_summary($body_full_markup, 'full_html', 300);
