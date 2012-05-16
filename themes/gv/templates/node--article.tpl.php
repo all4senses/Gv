@@ -44,8 +44,9 @@
 
           <span class="submitted">
             <?php 
-              $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
+              $created_str = date('F d, Y \a\t g:sa', $node->created); 
               if ($page) {
+                $created_str = '<span class="delim">|</span>' . $created_str;
                 global $user;
                 if ($user->uid && $node->uid) {
                   echo preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
