@@ -74,7 +74,12 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     preg_match('/^.*\s(.*)$/i', trim($plain_teaser), $matches);
     dpm($matches);
     
-    $last_word = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
+    $pos = strrpos($teaser, $matches[1]);
+    dpm('pos = ' . $pos);
+    $teaser = substr_replace ($teaser, '...' , $pos, strlen($matches[1]));
+    dpm($teaser);
+    //$teaser = preg_replace('/.*/i', '', $body_full_markup);
+    
     
     $teaser = $main_image_html . $teaser;
   }
