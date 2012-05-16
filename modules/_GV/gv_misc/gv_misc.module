@@ -65,7 +65,6 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     }
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'logo_provider_page'));
-    dpm($main_image_html);
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
   
@@ -76,7 +75,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
 
 
 /**
- * Helper function to add metatag to a current page.
+ * Convert a relative or absolute path to Drupal stream uri.
  */
 function gv_misc_getStreamUriFromRelativePath($path) {
   $file_default_scheme = file_default_scheme();
