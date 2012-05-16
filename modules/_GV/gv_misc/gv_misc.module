@@ -69,15 +69,19 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
   }
   dpm($body_full_markup);
   $teaser = strip_tags($body_full_markup);
-  dpm('---------------------------');
-  dpm($teaser);
+  
   if ($main_image_html) {
     //$teaser = text_summary($body_full_markup, 'full_html', 145);
     $teaser = substr($teaser, 0, 145);
   }
   else {
     //$teaser = text_summary($body_full_markup, 'full_html', 250);
+    dpm('---------------------------');
+    dpm($teaser);
     $teaser = substr($teaser, 0, 250);
+    dpm('---------------------------');
+    dpm('---------------------------');
+    dpm($teaser);
   }
   
   // Replace the last word with ...
