@@ -64,10 +64,10 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
-    dpm($main_image);
   }
-  $teaser = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
-  dpm($body_full_markup);
+  $body_full_markup_without_images = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
+  $teaser = text_summary($body_full_markup_without_images, NULL, 50);
+  dpm($body_full_markup_without_images);
   dpm($teaser);
   
 
