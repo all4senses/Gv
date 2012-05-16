@@ -70,6 +70,10 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
     $file_default_scheme = file_default_scheme();
     $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
 
+    dpm($file_default_scheme);
+    dpm($default_file_path);
+    
+    dpm($main_image_path_relative);
     $stream_path = str_replace('http://getvoip.com', '', $main_image_path_relative);
     dpm($stream_path);
     $stream_path = ltrim($stream_path, '/');
@@ -83,8 +87,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup) {
   
   
   
-  //dpm($file_default_scheme);
-  //dpm($default_file_path);
+  
   
   $teaser = $main_image_html . text_summary($body_full_markup, 'full_html', 50);
           
