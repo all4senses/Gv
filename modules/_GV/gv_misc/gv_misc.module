@@ -84,6 +84,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
       $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_v'));
     }
     
+    $main_image_html = '<div class="thumb">' . $main_image_html . '</div>';
+    
     //$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
     
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
