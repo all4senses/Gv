@@ -97,6 +97,7 @@ dpm($content);
                 
               <div class="basic-info">
                 <div class="caption"><?php echo t('Company Info:'); ?></div>
+                <div><?php echo '<span class="title">' . t('Headquarters') . ':</span>' . $content['i_heads']['#markup']; ?></div>
                 <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $content['i_founded']['#markup']; ?></div>
                 <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $content['i_availability']['#markup']; ?></div>
                 <div><?php echo '<span class="title">' . t('Website') . ':</span>' . l(str_replace('http://', '', $content['i_web']['#markup']), $content['i_web']['#markup']); ?></div>
@@ -108,7 +109,7 @@ dpm($content);
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
                     echo '<div><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) . '</a></div>'; 
                   }
-                  //dpm($node->p_data);
+                  dpm($node->p_data);
                   //dpm($node);
                 ?>  
                 <div class="site"><?php echo l('Visit ' . $content['field_p_name'][0]['#markup'], $node->p_data['info']['i_web']); ?></div>

@@ -399,6 +399,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //'#description' => t(''),
         '#weight' => 10,
       );
+            $form['data_info']['i_heads'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Headquarters'),
+              //'#description' => t(''),
+              '#default_value' => isset($p_data['info']['i_heads']) ? $p_data['info']['i_heads'] : '',
+            );
             $form['data_info']['i_founded'] = array(
               '#type' => 'textfield',
               '#title' => t('Founded In'),
@@ -417,6 +423,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#description' => t('Please, use a format "http://example.com" strictly!'),
               '#default_value' => isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
+            );
+            $form['data_info']['i_web_hide'] = array(
+              '#type' => 'checkbox',
+              '#title' => t('Hide Web Site'),
+              '#default_value' => isset($p_data['info']['i_web_hide']) ? $p_data['info']['i_web_hide'] : NULL,
             );
             /*
             $form['data_info']['i_email'] = array(
@@ -1981,10 +1992,10 @@ function gv_pages_node_view($node, $view_mode) {
               //dpm($p_data);
 
               // General info.
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_heads', 'Headquarters'));
               gv_pages_addFieldToNode($node, $p_data, array('info', 'i_founded', 'Founded'));
               gv_pages_addFieldToNode($node, $p_data, array('info', 'i_availability', 'Availability'));
               gv_pages_addFieldToNode($node, $p_data, array('info', 'i_web', 'Web address'));
-              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_email', 'Email'));
               // Quote.
               gv_pages_addFieldToNode($node, $p_data, array('quote', 'q_text', 'q_author'));
               
