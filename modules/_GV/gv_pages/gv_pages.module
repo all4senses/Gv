@@ -401,19 +401,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       );
             $form['data_info']['i_founded'] = array(
               '#type' => 'textfield',
-              '#title' => t('Founded in'),
+              '#title' => t('Founded In'),
               //'#description' => t(''),
               '#default_value' => isset($p_data['info']['i_founded']) ? $p_data['info']['i_founded'] : '',
             );
             $form['data_info']['i_availability'] = array(
               '#type' => 'textfield',
-              '#title' => t('Availability'),
+              '#title' => t('Service Availability'),
               //'#description' => t(''),
               '#default_value' => isset($p_data['info']['i_availability']) ? $p_data['info']['i_availability'] : '',
             );
             $form['data_info']['i_web'] = array(
               '#type' => 'textfield',
-              '#title' => t('Web address'),
+              '#title' => t('Web Site'),
               '#description' => t('Please, use a format "http://example.com" strictly!'),
               '#default_value' => isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
