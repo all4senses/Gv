@@ -1213,14 +1213,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
 
         // Disallow to choose another email for a registered user.
-        $form['about_you']['field_r_email_temp']['#access'] = FALSE;
-        $form['about_you']['email_autofilled'] = array(
-            '#type' => 'item',
-            '#title' => t('Your email'),
-            //'#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
-            '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
-        );
-
+        if (!$current_user_is_admin) {
+          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
+          $form['about_you']['email_autofilled'] = array(
+              '#type' => 'item',
+              '#title' => t('Your email'),
+              //'#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
+              '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
+          );
+        }
         if(!isset($form['provider']['field_ref_provider']['und']['#default_value'][0]) || $form['provider']['field_ref_provider']['und']['#default_value'][0] == '_none') {
           // If a provider has not been selected from a list,
           // then it has been set manually in the field field_r_oprovider
