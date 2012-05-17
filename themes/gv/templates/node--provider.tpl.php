@@ -127,10 +127,11 @@ dpm($content);
                     $prefix = 're';
                   }
                   
-                  echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
-                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>',
-                          
-                          '<div class="f caption">' , t('Pricing') , ':</div>',
+                  if ($node->p_data['services'][$key][$prefix . '_preface_title']) {
+                    echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
+                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>';
+                  }
+                  echo    '<div class="f caption">' , t('Pricing') , ':</div>',
                           '<div class="block-1">',
                           '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] : t('N/A') ) , '</div></div>',
                           '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] : t('N/A') ), '</div></div>',
