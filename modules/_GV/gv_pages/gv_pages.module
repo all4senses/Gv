@@ -357,8 +357,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
       // Fix weights of some fields.
       $form['title']['#weight'] = 1;
-      $form['body']['#weight'] = 5;
-      $form['body']['und'][0]['#weight'] = 5;
+      
+      $form['field_p_name ']['#weight'] = 2;
+      
+      $form['body']['#weight'] = 3;
+      $form['body']['und'][0]['#weight'] = 3;
       
       // Hide a placeholder field field_p_data
       $form['field_p_data']['#access'] = FALSE;
