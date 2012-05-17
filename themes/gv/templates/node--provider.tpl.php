@@ -49,7 +49,7 @@ dpm($content);
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>'; 
+                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</a></div>'; 
                   }
                   else {
                     //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
@@ -96,16 +96,17 @@ dpm($content);
               </div> <!-- <div class="logo share">-->
                 
               <div class="basic-info">
-                <div class="title"><?php echo t('Company Contact Info:'); ?></div>
-                <div><?php echo $content['i_availability']['#markup']; ?></div>
-                <div><?php echo $content['i_web']['#markup']; ?></div>
-                <div><?php echo $content['i_founded']['#markup']; ?></div>
+                <div class="title"><?php echo t('Company Info:'); ?></div>
+                <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $content['i_founded']['#markup']; ?></div>
+                <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $content['i_availability']['#markup']; ?></div>
+                <div><?php echo '<span class="title">' . t('Website') . ':</span>' . l(str_replace('http://', '', $content['i_web']['#markup']), $content['i_web']['#markup']); ?></div>
+                
               </div>
              
               <div class="image">
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div>' . theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) . '</div>'; 
+                    echo '<div><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) . '</a></div>'; 
                   }
                   //dpm($node->p_data);
                   //dpm($node);
