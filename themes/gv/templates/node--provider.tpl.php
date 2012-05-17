@@ -60,7 +60,6 @@ dpm($content);
                 
                 <div class="share main">
                
-                  <div id="fb">
                   <div id="fb-root"></div>
                   <div id="fb">
                   <script>(function(d, s, id) {
