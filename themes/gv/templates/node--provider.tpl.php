@@ -166,10 +166,10 @@
                     $key = 's_residential';
                     $prefix = 're';
                   }
-                  dpm($node->p_data);
-                  if ($node->p_data['services'][$key][$prefix . '_preface_title']) {
-                    echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
-                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>';
+                  //dpm($node->p_data);
+                  if ($node->p_data['services'][$key][$prefix . '_basicinfo_title']) {
+                    echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_title']) , ':</div>',
+                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_text']) , '</div>';
                   }
                   echo    '<div class="f caption">' , t('Pricing') , ':</div>',
                           '<div class="block-1">',
