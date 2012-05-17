@@ -359,9 +359,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_p_name']['#weight'] = 1;
       
       $form['title']['#weight'] = 2;
+      $form['title']['#description'] = t('Used in header of provider page');
       
-      //$form['body']['#weight'] = 3;
-      //$form['body']['und'][0]['#weight'] = 3;
+      
+      $form['body']['#weight'] = 2;
+      $form['body']['und'][0]['#weight'] = 2;
       
       // Hide a placeholder field field_p_data
       $form['field_p_data']['#access'] = FALSE;
@@ -391,7 +393,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       $form['data_info'] = array(
         '#type' => 'fieldset',
-        '#title' => t('General info'),
+        '#title' => t('General Provider Info'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
         //'#description' => t(''),
@@ -416,6 +418,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#default_value' => isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
             );
+            /*
             $form['data_info']['i_email'] = array(
               '#type' => 'textfield',
               '#title' => t('Email'),
@@ -423,6 +426,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#element_validate' => array('wdg_misc_elementValidate_email'),
               '#default_value' => isset($p_data['info']['i_email']) ? $p_data['info']['i_email'] : '',
             );
+            */
         
       $form['data_quote'] = array(
         '#type' => 'fieldset',
