@@ -66,8 +66,18 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     
     $image_size = getimagesize(ltrim($main_image['src'], '/'));
-    //dpm($image_size);
+
+    // Scale and cut.
+    /*
     if ($image_size[0] / $image_size[1] > 1.5) {
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_h'));
+    }
+    else {
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_v'));
+    }
+    */
+    // Scale only.
+    if ($image_size[0] / $image_size[1] > 1) {
       $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_h'));
     }
     else {
