@@ -105,12 +105,12 @@ dpm($content);
               <div class="image">
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) . '</div>'; 
+                    echo '<div>' . theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) . '</div>'; 
                   }
-                  dpm($node->p_data);
-                  dpm($node);
+                  //dpm($node->p_data);
+                  //dpm($node);
                 ?>  
-                <div class="site"><?php echo l('Visit ' . '', '<front>') ?></div>
+                <div class="site"><?php echo l('Visit ' . $content['field_p_name'][0]['#markup'], $node->p_data['info']['i_web']); ?></div>
               </div>
           
 
