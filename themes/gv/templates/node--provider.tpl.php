@@ -46,61 +46,76 @@ dpm($content);
           
           
            <?php if ($page): ?>
-             
-              <?php
-                if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                  echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>'; 
-                }
-                else {
-                  //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
-                  echo render($title_prefix), '<h2', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h2>', render($title_suffix);
-                }
-              ?>
+              <div class="logo share">
+                <?php
+                  if (isset($content['field_p_logo'][0]['#item']['uri'])) {
+                    echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>'; 
+                  }
+                  else {
+                    //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h2>', render($title_suffix);
+                  }
+                  $url = 'http://getvoip.com'. url('node/' . $node->nid);
+                ?>
+                
+                <div class="share main">
+               
+                  <div id="fb">
+                  <div id="fb-root"></div>
+                  <div id="fb">
+                  <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));</script>
+                  <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
+                  </div>
+
+                  <div class="s" id="gplus">
+                  <script type="text/javascript">
+                    (function() {
+                      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                      po.src = 'https://apis.google.com/js/plusone.js';
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                    })();
+                  </script>
+                  <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
+                  </div>
+
+                  <div class="s">
+                  <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+                  <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
+                  </div>
+
+                  <div class="s">
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                  </div>
+                </div> <!-- main share buttons -->
+              </div> <!-- <div class="logo share">-->
+                
               <div class="basic-info">
                 <div class="title"><?php echo t('Company Contact Info:'); ?></div>
                 <div><?php echo $content['i_availability']['#markup']; ?></div>
                 <div><?php echo $content['i_web']['#markup']; ?></div>
                 <div><?php echo $content['i_founded']['#markup']; ?></div>
               </div>
+             
+              <div class="image">
+                <?php
+                  if (isset($content['field_p_image'][0]['#item']['uri'])) {
+                    echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) . '</div>'; 
+                  }
+                  dpm($node->p_data);
+                  dpm($node);
+                ?>  
+                <div class="site"><?php echo l('Visit ' . '', '<front>') ?></div>
+              </div>
           
-          
-              <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
-              <div class="share main">
-               
-                <div id="fb">
-                <div id="fb-root"></div>
-                <div id="fb">
-                <script>(function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) return;
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
-                  fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
-                <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
-                </div>
-                
-                <div class="s" id="gplus">
-                <script type="text/javascript">
-                  (function() {
-                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                    po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                  })();
-                </script>
-                <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
-                </div>
 
-                <div class="s">
-                <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-                <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
-                </div>
-                
-                <div class="s">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                </div>
-              </div> <!-- main share buttons -->
+              
                       
                       
               <div class="data tabs">
