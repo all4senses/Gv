@@ -100,7 +100,7 @@ dpm($content);
                 <div><?php echo '<span class="title">' . t('Headquarters') . ':</span>' . $content['i_heads']['#markup']; ?></div>
                 <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $content['i_founded']['#markup']; ?></div>
                 <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $content['i_availability']['#markup']; ?></div>
-                <div><?php echo '<span class="title">' . t('Website') . ':</span>' . l(str_replace('http://', '', $content['i_web']['#markup']), $content['i_web']['#markup']); ?></div>
+                <div><?php if (!$node->p_data['info']['i_web_hide']) echo '<span class="title">' . t('Website') . ':</span>' . l(str_replace('http://', '', $content['i_web']['#markup']), $content['i_web']['#markup']); ?></div>
                 
               </div>
              
