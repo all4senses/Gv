@@ -63,10 +63,19 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
-    $image_size = getimagesize(ltrim($main_image['src'], '/'));
-    dpm($image_size);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
-    $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
+    
+    $image_size = getimagesize(ltrim($main_image['src'], '/'));
+    //dpm($image_size);
+    if ($image_size[0] / $image_size[1] > 1.5) {
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_h'));
+    }
+    else {
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_v'));
+    }
+    
+    //$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
+    
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
 
