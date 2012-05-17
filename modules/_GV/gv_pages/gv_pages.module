@@ -428,30 +428,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             */
         
-      $form['data_quote'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Quote and its author'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
-        //'#description' => t(''),
-        '#weight' => 11,
-      );
-            $form['data_quote']['q_text'] = array(
-              '#type' => 'textarea',
-              //'#type' => 'text_format',
-              //'#format' => 'full_html',
-                
-              '#title' => t('Quote text'),
-              //'#description' => t(''),
-              '#default_value' => isset($p_data['quote']['q_text']) ? $p_data['quote']['q_text'] : '',
-            );
-            $form['data_quote']['q_author'] = array(
-              '#type' => 'textfield',
-              '#title' => t('Quote author'),
-              //'#description' => t(''),
-              '#default_value' => isset($p_data['quote']['q_author']) ? $p_data['quote']['q_author'] : '',
-            );
-        
+      
             
       $form['services'] = array(
         '#type' => 'fieldset',
@@ -821,6 +798,33 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => TRUE,
               //'#description' => t(''),
             );
+            
+            
+      $form['data_quote'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Quote and Its Author'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        //'#description' => t(''),
+        '#weight' => 11,
+      );
+            $form['data_quote']['q_text'] = array(
+              '#type' => 'textarea',
+              //'#type' => 'text_format',
+              //'#format' => 'full_html',
+                
+              '#title' => t('Quote text'),
+              //'#description' => t(''),
+              '#default_value' => isset($p_data['quote']['q_text']) ? $p_data['quote']['q_text'] : '',
+            );
+            $form['data_quote']['q_author'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Quote author'),
+              //'#description' => t(''),
+              '#default_value' => isset($p_data['quote']['q_author']) ? $p_data['quote']['q_author'] : '',
+            );
+      
+            
       
       $form['#validate'][] = 'gv_pages_validateForm_provider';
       
