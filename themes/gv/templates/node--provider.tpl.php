@@ -46,7 +46,7 @@ dpm($content);
           
           
            <?php if ($page): ?>
-              <div class="logo share">
+              <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>'; 
