@@ -427,7 +427,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $form['data_info']['i_web_hide'] = array(
               '#type' => 'checkbox',
               '#title' => t('Hide Web Site'),
-              '#default_value' => isset($p_data['info']['i_web_hide']) ? $p_data['info']['i_web_hide'] : NULL,
+              '#default_value' => isset($p_data['info']['i_web_hide']) ? $p_data['info']['i_web_hide'] : 0,
             );
             /*
             $form['data_info']['i_email'] = array(
