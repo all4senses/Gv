@@ -891,7 +891,10 @@ function gv_misc_views_pre_render(&$view) {
     case 'view-providers-page_p_re': 
       // Residential Providers listing page.
     case 'view-blog-page': 
+    
     case 'view-articles-page': 
+    case 'view-articles-page_by_tag':
+    
     case 'view-news-page': 
     case 'view-sitemap-page': 
       
@@ -904,6 +907,21 @@ function gv_misc_views_pre_render(&$view) {
   }
   if ($do_attach_preface && $preface_node = gv_misc_getPrefaceByKey($key)) {
    
+    if ($key == 'view-articles-page_by_tag') {
+      dpm($view);
+      $preface_node->title = $view->build_info['title'];
+    }
+    else {
+      // Change the title of the view (main page title actually)
+      if (isset($preface_node->metatags['title']['value'])) {
+        $view->build_info['title'] = $preface_node->metatags['title']['value'];
+      }
+      else{
+        $view->build_info['title'] = $preface_node->title;
+      }
+    }
+    
+    
     // Show plain caption, not a link for a full node as a full node itself will be unpublished and unreachable.
     $preface_node->title_no_link = TRUE;
     // Hide the title of the preface.
@@ -918,13 +936,7 @@ function gv_misc_views_pre_render(&$view) {
     );
     */
 
-    // Change the title of the view (main page title actually)
-    if (isset($preface_node->metatags['title']['value'])) {
-      $view->build_info['title'] = $preface_node->metatags['title']['value'];
-    }
-    else{
-      $view->build_info['title'] = $preface_node->title;
-    }
+    
   }
    
 } 
