@@ -165,10 +165,14 @@ function gv_captcha($variables) {
 /**
  * Preprocess the primary theme implementation for a view.
  */
+/*
 function gv_preprocess_views_view(&$vars) {
-  if ($vars['view']->current_display == 'page_by_tag') {
-    if (!$vars['title']) {
-      $vars['title'] = '<h1>' . $vars['view']->get_title() . '</h1>'; //str_replace('%1', $vars['view']->build_info['substitutions']['%1'], $vars['view']->build_info['title']); 
-    }  
-  }
+  
+  // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
+//  if ($vars['view']->current_display == 'page_by_tag') {
+//    if (!$vars['title']) {
+//      $vars['title'] = '<h1>' . $vars['view']->get_title() . '</h1>'; //str_replace('%1', $vars['view']->build_info['substitutions']['%1'], $vars['view']->build_info['title']); 
+//    }  
+//  }
 }
+*/
