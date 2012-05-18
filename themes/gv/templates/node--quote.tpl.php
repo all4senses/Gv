@@ -76,8 +76,8 @@
 
 
 <footer>
-  <div id="copy">Copyright 2012 PhoneQotes. All Rights Reserved.</div>
-  <div id="links">About | Sitemap | Blog</div>
+  <div class="copy">Copyright 2012 PhoneQotes. All Rights Reserved.</div>
+  <div class="links">About | Sitemap | Blog</div>
 </footer>
 
  
