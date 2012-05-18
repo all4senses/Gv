@@ -166,10 +166,10 @@
                     $key = 's_residential';
                     $prefix = 're';
                   }
-                  
-                  if ($node->p_data['services'][$key][$prefix . '_preface_title']) {
-                    echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_preface_title']) , ':</div>',
-                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_preface_text']) , '</div>';
+                  //dpm($node->p_data);
+                  if ($node->p_data['services'][$key][$prefix . '_basicinfo_title']) {
+                    echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_title']) , ':</div>',
+                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_text']) , '</div>';
                   }
                   echo    '<div class="f caption">' , t('Pricing') , ':</div>',
                           '<div class="block-1">',
@@ -188,7 +188,7 @@
                           if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
                             echo '<div class="f caption">' , t('Available Features') , ':</div>';
                             foreach ($node->p_data['services'][$key]['weights_' . $prefix . '_features'] as $tid => $term) {
-                              echo '<div class="tag">' , l(t($term['name']), 'taxonomy/term/' . $tid ) , '</div>';
+                              echo '<div class="tag">' , t($term['name']) /*l(t($term['name']), 'taxonomy/term/' . $tid )*/ , '</div>';
                             }
                             
                           }
