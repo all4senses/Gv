@@ -56,7 +56,7 @@
   
 </div>
   
-<div class="bottom"<?php print $content_attributes; ?>>
+<div id="bottom"<?php print $content_attributes; ?>>
   <div class="left">
     <h3>Whats in the report</h3>
     <div class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
