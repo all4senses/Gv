@@ -32,7 +32,8 @@
     <input type="button" value="Run the free report"/>
   </div>
   <div class="center">
-    <div class="image"></div>
+    <?php echo render($content['field_q_image']); ?>
+    <!--<div class="image"></div> -->
     <div class="quote">This was just the report I was looking for Found the right comp</div>
     <div class="author">Rick Miller - Acme Inc</div>
   </div>
