@@ -1,6 +1,6 @@
 <?php 
   //dpm($node);
-  //dpm($content);
+  dpm($content);
 // Hide comments, tags, and links now so that we can render them later.
   hide($content['links']);
   hide($content['field_topics']);
@@ -10,12 +10,12 @@
 <h2>Don't trust your phone system with just anyone. Get the reviews.</h2>
 <div class="bottom-clear"></div> 
 
-<?php print render($title_prefix); ?>
-  <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
-<?php print render($title_suffix); ?>
-
 <div class="content"<?php print $content_attributes; ?>>
-  
+
+  <?php print render($title_prefix); ?>
+    <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
+  <?php print render($title_suffix); ?>
+
   <div class="left">
     <label>How many users do you need?</label>
     <select>
