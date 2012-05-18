@@ -25,8 +25,3 @@
 
   </div> <!-- /#all-content -->
   
-  
-  <footer id="footer" role="contentinfo" class="clearfix">
-      <?php //print render($page['footer']) ?>
-  </footer> <!-- /#footer -->
-
