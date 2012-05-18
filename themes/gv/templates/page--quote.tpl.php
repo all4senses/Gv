@@ -7,22 +7,26 @@
 
 
 
-  <section id="main" role="main" class="clearfix">
 
-      <?php print $messages; ?>
-      <a id="main-content"></a>
+  <div id="all-content" class="clearfix">
 
-      <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
-      <?php print render($page['help']); ?>
-      <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+    <section id="main" role="main" class="clearfix">
 
-      <?php print render($page['content']); ?>
+        <?php print $messages; ?>
+        <a id="main-content"></a>
 
-  </section> <!-- /#main -->
+        <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
+        <?php print render($page['help']); ?>
+        <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
 
+        <?php print render($page['content']); ?>
 
+    </section> <!-- /#main -->
+
+  </div> <!-- /#all-content -->
+  
   
   <footer id="footer" role="contentinfo" class="clearfix">
-      <?php print render($page['footer']) ?>
+      <?php //print render($page['footer']) ?>
   </footer> <!-- /#footer -->
 
