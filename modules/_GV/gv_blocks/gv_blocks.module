@@ -581,11 +581,12 @@ function gv_blocks_get_requestQuoteForPage() {
                     
                     <div class="step" id="q_for">
                         
-                            <div class="question">' . t('You are looking for a quote for...') . '</div>
-                            
-                            <input type="radio" name="q_for" value="Home" /><div class="label_after">' . t('Home') .'</div>
-                            <input type="radio" name="q_for" value="Home-based Business" /><div class="label_after">' . t('Home-based Business') . '</div>
-                            <input type="radio" name="q_for" value="Business" /><div class="last_radio label_after">' . t('Business') . '</div>
+                            <div class="question">' . t('What is your current phone needs?') . '</div>
+                            <select id="q_for">
+                              <option value="Replace current phone system">' . t('Replace current phone system') .'</option>
+                              <option value="Need a phone system for a new office">' . t('Need a phone system for a new office') .'</option>
+                              <option value="Expand on our current phone system">' . t('Expand on our current phone system') .'</option>
+                            </select>
                          
                             <div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 2, '!second' => 5)) . '</div>
                     </div>
