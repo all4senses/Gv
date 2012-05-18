@@ -317,10 +317,9 @@ function gv_misc_makeRequest_ajax() {
   }
   else {
     $params['request_data'] = $post;
+    /*
     $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
-    
     foreach ($admins as $admin) {
-      
       // Comment to go live!
       //if($admin->uid != 1) continue;
       
@@ -328,6 +327,12 @@ function gv_misc_makeRequest_ajax() {
       $params['recipient'] = $recipient;
       drupal_mail('gv_misc', 'request_quote', $recipient->mail, user_preferred_language($recipient), $params);
     }
+    */
+    global $language;
+    //$params['recipient'] = $recipient;
+    drupal_mail('gv_misc', 'request_quote', 'ruben@getvoip.com', $language->language, $params);
+    
+    
     $status = TRUE;
     
     $output = t('<p>Thank you for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a>.</p>'); 
