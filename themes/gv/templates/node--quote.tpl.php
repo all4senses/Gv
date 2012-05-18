@@ -6,17 +6,23 @@
   hide($content['field_topics']);
 ?>
 
-<div id="logo"></div>
-<h2>Don't trust your phone system with just anyone. Get the reviews.</h2>
-<div class="bottom-clear"></div> 
+<head>
+  <div class="logo"></div>
+  <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
+  
+  <div id="experian">
+    <div class="text">All Vendors are<br>Prescreened by Experian</div><div class="logo"></div>
+  </div>
+  <div class="bottom-clear"></div> 
+</head>
 
 <div class="content"<?php print $content_attributes; ?>>
 
-  <?php print render($title_prefix); ?>
-    <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
-  <?php print render($title_suffix); ?>
-
+  <h2>Don't Trust Your Phone System With Just Anyone.</h2>
+  <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
   <div class="left">
+  
+    <!--
     <label>How many users do you need?</label>
     <select>
       <option value="1-3">1-3</option>    
@@ -30,10 +36,12 @@
       <option value="Phones and Serivce">Phones and Serivce</option>    
     </select>
     <input type="button" value="Run the free report"/>
+    -->
+    <?php echo gv_blocks_get_requestQuoteForPage(); ?>
+  
   </div>
   <div class="center">
     <?php echo render($content['field_q_image']); ?>
-    <!--<div class="image"></div> -->
     <div class="quote">This was just the report I was looking for Found the right comp</div>
     <div class="author">Rick Miller - Acme Inc</div>
   </div>
@@ -45,6 +53,8 @@
       <div class="option">Hardware Support</div>
       <div class="option">Service Score</div>
       <div class="option">Satisfaction Ratings</div>
+      <div class="option">Leading Industry Reliability</div>
+      <div class="option">Advanced VoIP Technology</div>
     </div>
     <div class="image"></div>
     <div class="link">Read the reviews an find the  answers you need.</div>
@@ -77,10 +87,10 @@
   <div class="bottom-clear"></div>
 </div>
 
-
 <footer>
-  <div class="copy">Copyright 2012 PhoneQotes. All Rights Reserved.</div>
-  <div class="links">About | Sitemap | Blog</div>
+  <div class="links"><a href="/about-us">About Us</a><span class="delim">|</span><a href="/privacy-policy">Privacy Policy</a></div>
+  <div class="copy">© 2012 GetVoIP.com | All Rights Reserved</div>
+  <div class="copy">BizMedia Central LLC | New York, NY</div>
 </footer>
 
  
