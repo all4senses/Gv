@@ -72,6 +72,8 @@
   <?php
     
   ?>
+  
+  <div class="bottom-clear"></div>
 </div>
 
 
