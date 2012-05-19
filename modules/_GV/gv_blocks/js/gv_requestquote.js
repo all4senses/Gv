@@ -32,7 +32,8 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname company email phone_1 phone_2 phone_3"
+              username: "firstname lastname company email phone_1 phone_2 phone_3",
+              first_step: "phones_amt q_for q_type buying_time connection"
             },
             errorPlacement: function(error, element) {
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "connection" )
@@ -71,6 +72,7 @@
                 creditcard: {creditcard: true}
               },
               */
+             /*
               classRuleSettings: {
                 required: {required: true},
                 phones_amt: {required: true},
@@ -79,13 +81,15 @@
                 buying_time: {required: true},
                 connection: {required: true}
               },
-              /*
+              */
+              
+              
               phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
-              */
+              
               phone_1: {
                 number: true
 							},
