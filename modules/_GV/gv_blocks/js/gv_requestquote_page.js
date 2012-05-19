@@ -3,6 +3,8 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
+        $('select#phones_amt').selectmenu();
+       
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')

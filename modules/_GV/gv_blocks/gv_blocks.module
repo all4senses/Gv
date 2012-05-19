@@ -551,6 +551,13 @@ function gv_blocks_get_requestQuoteForPage() {
   drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  drupal_add_js('sites/all/libraries/ui/jquery.ui.selectmenu.js');
+  drupal_add_css('sites/all/libraries/ui/themes/base/jquery.ui.selectmenu.css');
+  
+  
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
   
@@ -569,7 +576,7 @@ function gv_blocks_get_requestQuoteForPage() {
                     <div class="step" id="phones_amt">
                         
                             <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
-                            <div class="select-wrapper">
+                            
                               <select name="phones_amt" id="phones_amt" class="input required">
                                 <option value="">- Select a value -</option>
                                 <option value="1 - 4">1 - 4</option>
@@ -578,7 +585,7 @@ function gv_blocks_get_requestQuoteForPage() {
                                 <option value="21 - 50">21 - 50</option>
                                 <option value="More than 50">More than 50</option>
                               </select>
-                            </div>
+                            
                             
                             <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
                             <div class="select-wrapper">
