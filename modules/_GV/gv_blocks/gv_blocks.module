@@ -625,27 +625,39 @@ function gv_blocks_get_requestQuoteForPage() {
                         
                             <div class="question">' . t('Fill out the form below:') . '</div>
                             
-                            <div class="label_before required">' . t('First Name') . '<span class="form-required">*</span></div>
+                            <div class=info-wrapper>
+                              <div class="label_before required">' . t('First Name') . '<span class="form-required">*</span></div>
                                 <input class="after required name" name="firstname" id="firstname" />
-                            <div class="label_before required">' . t('Last Name') . '<span class="form-required">*</span></div>
-                                <input class="after required" name="lastname" id="lastname" />
-                                
-                            <div class="label_before required">' . t('Company') . '</div>
-                                <input class="after required" name="company" id="company" />
-                                
-                            <div class="label_before required">' . t('Email') . '<span class="form-required">*</span></div>
-                                <input class="after email required" name="email" id="email" />
+                            </div>
                             
-                            <div class="label_before">' . t('Website') . '</div>
-                                <input class="after" name="notes" id="notes" />
-                                
-                            <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
+                            <div class=info-wrapper>
+                              <div class="label_before required">' . t('Last Name') . '<span class="form-required">*</span></div>
+                                <input class="after required" name="lastname" id="lastname" />
+                            </div>
+                            
+                            <div class=info-wrapper>
+                              <div class="label_before required">' . t('Company') . '</div>
+                                <input class="after required" name="company" id="company" />
+                            </div>
+
+                            <div class=info-wrapper>
+                              <div class="label_before required">' . t('Email') . '<span class="form-required">*</span></div>
+                                <input class="after email required" name="email" id="email" />
+                            </div>
+                            
+                            <div class=info-wrapper>
+                              <div class="label_before">' . t('Website') . '</div>
+                                <input class="after" name="website" id="website" />
+                            </div>
+                            
+                            <div class=info-wrapper>
+                              <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
                               <div id="phone">
                                 <input class="after required phone" name="phone_1" id="phone_1" value="" />
                                 <input class="after required phone" name="phone_2" id="phone_2" value="" />
                                 <input class="after required phone" name="phone_3" id="phone_3" value="" />
                                </div>
-                            
+                            </div>
                          
                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 2, '!second' => 2)) . '</div>-->
                            <div class="protected"></div>
