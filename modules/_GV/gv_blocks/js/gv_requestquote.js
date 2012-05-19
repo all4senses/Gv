@@ -71,8 +71,8 @@
                 creditcard: {creditcard: true}
               },
               */
-              phones_amt: "required",
               q_for: "required",
+              phones_amt: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
