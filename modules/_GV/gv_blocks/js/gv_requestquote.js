@@ -17,6 +17,7 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
+          textSubmit : 'xxx',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
