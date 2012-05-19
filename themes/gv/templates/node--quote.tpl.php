@@ -59,7 +59,7 @@
       <div class="option">Advanced VoIP Technology</div>
     </div>
     <div class="image"></div>
-    <div class="link">Read the reviews an find the  answers you need.</div>
+    <div class="links">Read the reviews an find the  answers you need.</div>
   </div>
   
   <?php
