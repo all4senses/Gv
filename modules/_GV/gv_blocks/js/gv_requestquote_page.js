@@ -17,8 +17,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          //textSubmit : 'Submit & Get Quotes',
-          //textNext: 'Start Free Report',
+          textSubmit : 'Submit & Get Quotes',
+          textNext: 'Start Free Report',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},

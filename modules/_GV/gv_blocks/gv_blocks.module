@@ -544,7 +544,7 @@ function gv_blocks_get_requestQuoteForPage() {
 
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_requestquote.js');
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
@@ -569,6 +569,8 @@ function gv_blocks_get_requestQuoteForPage() {
                     <div class="step" id="phones_amt">
                         
                             <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
+                            
+                            <div class="select-wrapper">
                             <select name="phones_amt" id="phones_amt" class="input required">
                               <option value="">- Select a value -</option>
                               <option value="1 - 4">1 - 4</option>
@@ -577,6 +579,7 @@ function gv_blocks_get_requestQuoteForPage() {
                               <option value="21 - 50">21 - 50</option>
                               <option value="More than 50">More than 50</option>
                             </select>
+                            </div>
                             
                             <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
                             <select name="q_for" id="q_for" class="input required">
