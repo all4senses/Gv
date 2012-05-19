@@ -568,7 +568,7 @@ function gv_blocks_get_requestQuoteForPage() {
                     
                     <div class="step" id="phones_amt">
                         
-                            <div class="question">' . t('How many phones do you need?') . '</div>
+                            <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
                             <select id="phones_amt" class="required">
                               <option value="">- Select a value -</option>
                               <option value="1 - 4">1 - 4</option>
@@ -578,7 +578,7 @@ function gv_blocks_get_requestQuoteForPage() {
                               <option value="More than 50">More than 50</option>
                             </select>
                             
-                            <div class="question">' . t('What is your current phone needs?') . '</div>
+                            <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
                             <select id="q_for" class="required">
                               <option value="">- Select a value -</option>                            
                               <option value="Replace current phone system">' . t('Replace current phone system') .'</option>
@@ -587,7 +587,7 @@ function gv_blocks_get_requestQuoteForPage() {
                             </select>
                             
 
-                            <div class="question">' . t('What type of quote do you need?') . '</div>
+                            <div class="question">' . t('What type of quote do you need?') . '<span class="form-required">*</span></div>
                             <select id="q_type" class="required">
                               <option value="">- Select a value -</option>                            
                               <option value="Both phones and service">' . t('Both phones and service') .'</option>
@@ -595,7 +595,7 @@ function gv_blocks_get_requestQuoteForPage() {
                               <option value="Service provider only">' . t('Service provider only') .'</option>
                             </select>
                             
-                            <div class="question">' . t('What is your buying time frame?') . '</div>
+                            <div class="question">' . t('What is your buying time frame?') . '<span class="form-required">*</span></div>
                             <select id="buying_time" class="required">
                               <option value="">- Select a value -</option>                            
                               <option value="ASAP">' . t('ASAP') .'</option>
@@ -625,10 +625,11 @@ function gv_blocks_get_requestQuoteForPage() {
                                 <input class="after" name="notes" id="notes" />
                                 
                             <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
+                              <div id="phone">
                                 <input class="after required phone" name="phone_1" id="phone_1" value="" />
                                 <input class="after required phone" name="phone_2" id="phone_2" value="" />
                                 <input class="after required phone" name="phone_3" id="phone_3" value="" />
-                                
+                               </div>
                             
                          
                            <div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 2, '!second' => 2)) . '</div>
