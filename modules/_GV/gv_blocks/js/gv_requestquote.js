@@ -86,13 +86,13 @@
               
               
               first_step: "required",
-              /*
+              
               phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
-              */
+              
               phone_1: {
                 number: true
 							},
