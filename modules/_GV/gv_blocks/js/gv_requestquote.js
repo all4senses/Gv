@@ -74,25 +74,25 @@
               */
              
               classRuleSettingsGV: {
-                required: {required: true}
-                /*
+                required: {required: true},
+                
                 phones_amt: {required: true},
                 q_for: {required: true},
                 q_type: {required: true},
                 buying_time: {required: true},
                 connection: {required: true}
-                */
+                
               },
               
               
               first_step: "required",
-              
+              /*
               phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
-              
+              */
               phone_1: {
                 number: true
 							},
