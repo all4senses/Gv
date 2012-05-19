@@ -7,9 +7,11 @@
 ?>
 
 <head>
-  <div class="logo"></div>
-  <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
-  
+  <div class="gv-logo">
+    <div class="logo"></div>
+    <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
+  </div>
+
   <div id="experian">
     <div class="text">All Vendors are<br>Prescreened by Experian</div><div class="logo"></div>
   </div>
