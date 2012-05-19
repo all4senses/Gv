@@ -93,6 +93,13 @@
               buying_time: "required",
               connection: "required",
               */
+             
+             
+             
+             q_type: {
+								required: true
+							},
+             
               phone_1: {
                 number: true
 							},
