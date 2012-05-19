@@ -129,13 +129,12 @@
               //required: Drupal.t('All fields with * are required'),
               
               
-              // Works!
-              /*
+              
               phones_amt: Drupal.t('Make your choice!'),
               q_for: Drupal.t('Make your choice!'),
               buying_time: Drupal.t('Make your choice!'),
               connection: Drupal.t('Make your choice!'),
-              */
+              
              
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
