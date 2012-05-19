@@ -3,7 +3,7 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
-        $('select#phones_amt').selectmenu();
+        $('select').selectmenu();
        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
