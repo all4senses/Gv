@@ -1,13 +1,13 @@
 <?php 
   //dpm($node);
-  dpm($content);
+  //dpm($content);
 // Hide comments, tags, and links now so that we can render them later.
   hide($content['links']);
   hide($content['field_topics']);
 ?>
 
 <head>
-  <div class="gv-logo">
+  <div id="gv-logo">
     <div class="logo"></div>
     <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
   </div>
