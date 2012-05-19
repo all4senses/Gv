@@ -72,33 +72,13 @@
                 creditcard: {creditcard: true}
               },
               */
-             /*
-              classRuleSettingsGV: {
-                required: {required: true},
-                
-                phones_amt: {required: true},
-                q_for: {required: true},
-                q_type: {required: true},
-                buying_time: {required: true},
-                connection: {required: true}
-                
-              },
-              */
               
-              //first_step: "required",
-              /*
+              
               phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
-              */
-             
-             
-             
-             q_type: {
-								required: true
-							},
              
               phone_1: {
                 number: true
@@ -146,11 +126,15 @@
               // Doesn't work... Used snipped above for it.
               //required: Drupal.t('All fields with * are required'),
               
+              
+              // Works!
+              /*
               phones_amt: Drupal.t('Make your choice!'),
               q_for: Drupal.t('Make your choice!'),
               buying_time: Drupal.t('Make your choice!'),
               connection: Drupal.t('Make your choice!'),
-              
+              */
+             
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
                 email: Drupal.t("Email format must be name@domain.com")
