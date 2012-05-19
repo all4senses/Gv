@@ -608,7 +608,7 @@ body.one-sidebar.sidebar-second.node-type-quote #main{width: 100%;}
 
 
 .node-type-quote .content h2{color: gray; font-size: 17px; font-style: italic; font-weight: bold;}
-.node-type-quote h1{background: none #FFFBE8; display: block; font-size: 47px; margin: 0 0 30px 0; padding: 10px 0 0; text-align: justify;}
+.node-type-quote h1{position: relative; background: none #FFFBE8; display: block; font-size: 47px; margin: 0 0 30px 0; padding: 10px 0 0; text-align: justify;}
 .node-type-quote .content{background: #fffbe8; padding: 0 40px 40px 40px; box-shadow: 4px 4px 4px -4px gray; border: 2px solid white;}
 
 .node-type-quote .left{float: left; width: 250px;}
@@ -618,6 +618,8 @@ body.one-sidebar.sidebar-second.node-type-quote #main{width: 100%;}
 
 .node-type-quote .content .left{float: left; width: 285px;}
 
+.node-type-quote #requestQuoteFormWrapper{position: absolute; width: 285px; z-index: 10;}
+    
 .node-type-quote #requestQuoteFormWrapper,
 .node-type-quote .multipartForm{height: 360px; border: none; background: none;}
 
@@ -648,29 +650,30 @@ text-align: center;
 
 .node-type-quote .content .left #phone{float: right;} 
 
-.node-type-quote .content .left .protected{background: url("images/protected.png") no-repeat transparent; height: 27px; width: 85px; position: absolute; bottom: 50px; right: 0;}
+.node-type-quote .content .left .protected{background: url("images/protected.png") no-repeat transparent; height: 27px; width: 85px; position: absolute; bottom: 45px; right: 0;}
 
+.node-type-quote #requestQuoteFormWrapper #personal_info .question{color: gray; margin-bottom: 20px;}
 .node-type-quote #requestQuoteFormWrapper #personal_info .wrapper{clear: both; height: 25px; margin-bottom: 10px;}
 .node-type-quote #requestQuoteFormWrapper #personal_info input{margin: 0; padding: 0 5px; text-align: left; width: 140px;}
-.node-type-quote #requestQuoteFormWrapper #personal_info #phone input{width: 40px;}
+.node-type-quote #requestQuoteFormWrapper #personal_info #phone input{margin-left: 5px; width: 35px;}
 
 .node-type-quote #personal_info .label_before{margin-left: 0;}
 
 .node-type-quote #requestQuoteFormWrapper #Navigation{bottom: 0;}
 
-.node-type-quote #requestQuoteFormWrapper #Navigation #next{cursor: pointer; background: url("images/next-mark.png") no-repeat 245px center #0354BD; border-radius: 7px; box-shadow: 5px 5px 5px -5px gray; color: white; font-weight: bold; height: 40px; left: 8px; position: relative; width: 282px; margin: 0;}
+.node-type-quote #requestQuoteFormWrapper #Navigation #next{cursor: pointer; background: url("images/next-mark.png") no-repeat 245px center #0354BD; border-radius: 7px; box-shadow: 5px 5px 5px -5px gray; color: white; font-weight: bold; height: 40px; left: 8px; position: relative; width: 282px; margin: 0 0 3px 0;}
 .node-type-quote #requestQuoteFormWrapper #Navigation #back{cursor: pointer; background: none; border: none; color: gray; margin: 10px;}
 
 
 
 .node-type-quote .content .center{overflow: hidden; float: left; margin-left: 10px; margin-bottom: 20px; width: 300px;}
 
-.node-type-quote .center .field-name-field-q-image{height: 280px; left: -50px; position: relative; top: -40px;}
+.node-type-quote .center .field-name-field-q-image{ height: 280px; left: 290px; position: absolute; top: 100px;}
 
 
 
 
-.node-type-quote .content .quote{padding-left: 15px; background: url("images/quote-mark.png") no-repeat; color: gray; font-style: italic;}
+.node-type-quote .content .quote{padding-left: 15px; background: url("images/quote-mark.png") no-repeat; color: gray; font-style: italic; margin-top: 313px;}
 .node-type-quote .content .author{float: right; font-size: 14px; font-style: italic; font-weight: bold; margin-top: 10px; color: gray;}
 
 
