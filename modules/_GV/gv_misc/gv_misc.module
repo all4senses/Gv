@@ -316,6 +316,7 @@ function gv_misc_makeRequest_ajax() {
     $output = t('<p class="error">The form is outdated or broken.</p><p> Please try again later.</p>'); 
   }
   else {
+    unset($post['token']);
     $params['request_data'] = $post;
     /*
     $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
