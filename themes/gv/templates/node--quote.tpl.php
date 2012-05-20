@@ -20,7 +20,7 @@
 
 <div class="content"<?php print $content_attributes; ?>>
 
-  <h2>Don't Trust Your Phone System With Just Anyone.</h2>
+  <h2>Don't Trust Your Phone System With Just Anyone!</h2>
   <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
   <div class="left">
   
@@ -53,10 +53,9 @@
       <div class="option">Feedback Analyzer</div>
       <div class="option">Price Comparisons</div>
       <div class="option">Hardware Support</div>
-      <div class="option">Service Score</div>
       <div class="option">Satisfaction Ratings</div>
-      <div class="option">Leading Industry Reliability</div>
-      <div class="option">Advanced VoIP Technology</div>
+      <div class="option">Top Industry Reliability</div>
+      <div class="option">Advanced VoIP Service</div>
     </div>
     <div class="image"></div>
     <div class="links">Read the reviews an find the  answers you need.</div>
@@ -64,6 +63,7 @@
   
   <?php
     //print render($content);
+    echo render($content['metatags']);
   ?>
   <div class="bottom-clear"></div> 
   
