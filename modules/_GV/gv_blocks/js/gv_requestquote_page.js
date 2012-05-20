@@ -36,11 +36,11 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname company email phone_1 phone_2 phone_3"
+              username: "firstname lastname email phone_1 phone_2 phone_3"
               ,first_step: "phones_amt q_for q_type buying_time"
             },
             errorPlacement: function(error, element) {
-              if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "connection" )
+              if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
                 error.insertAfter( $(".last_radio", element.parent()) );
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
