@@ -1,6 +1,6 @@
 <?php 
   //dpm($node);
-  dpm($node->q_data);
+  //dpm($node->q_data);
   //dpm($content);
 // Hide comments, tags, and links now so that we can render them later.
   hide($content['links']);
@@ -72,16 +72,16 @@
   
 <div id="bottom"<?php print $content_attributes; ?>>
   <div class="left">
-    <h3>Whats in the report</h3>
-    <div class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
+    <h3><?php echo $node->q_data['bottom_text']['left_title']; ?></h3>
+    <div class="text"><?php echo $node->q_data['bottom_text']['left_text']; ?></div>
   </div>
   <div class="center">
-    <h3>How companies are rated</h3>
-    <div class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem  copy</div>
+    <h3><?php echo $node->q_data['bottom_text']['center_title']; ?></h3>
+    <div class="text"><?php echo $node->q_data['bottom_text']['center_text']; ?></div>
   </div>
   <div class="right">
-    <h3>Report a company</h3>
-    <div class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</div>
+    <h3><?php echo $node->q_data['bottom_text']['right_title']; ?></h3>
+    <div class="text"><?php echo $node->q_data['bottom_text']['right_text']; ?></div>
   </div>
   <?php
     
