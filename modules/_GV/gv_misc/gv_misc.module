@@ -63,6 +63,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
+    $main_image['src'] = str_replace('%20', ' ', $main_image['src']);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     
     $image_size = getimagesize(ltrim($main_image['src'], '/'));
