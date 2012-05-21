@@ -1,5 +1,6 @@
 <?php 
   //dpm($node);
+  dpm($node->q_data);
   //dpm($content);
 // Hide comments, tags, and links now so that we can render them later.
   hide($content['links']);
