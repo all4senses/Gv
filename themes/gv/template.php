@@ -72,6 +72,9 @@ function gv_preprocess_node(&$variables) {
     if($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post') {
       $variables['theme_hook_suggestions'][] = 'node__article';
     }
+    elseif($variables['node']->type == 'webform') {
+      $variables['theme_hook_suggestions'][] = 'node__admin-page';
+    }
   }
   
 }
