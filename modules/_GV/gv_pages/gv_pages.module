@@ -341,8 +341,58 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'quote_node_form':
       
       dpm($form);
-      $data = $form['field_p_data'];
+      $data = unserialize($form['field_q_data']['und'][0]['value']['#default_value']);
       dpm($data);
+      
+      $form['bottom_text'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Bottom text'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        //'#description' => t(''),
+        '#weight' => 10,
+        '#tree' => TRUE,
+      );
+            $form['bottom_text']['left_title'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Left title'),
+              //'#description' => t(''),
+              '#default_value' => isset($data['bottom_text']['left_title']) ? $data['bottom_text']['left_title'] : '',
+            );
+            $form['bottom_text']['left_text'] = array(
+              '#type' => 'textarea',
+              '#title' => t('Left text'),
+              //'#description' => t(''),
+              '#default_value' => isset($data['bottom_text']['left_text']) ? $data['bottom_text']['left_text'] : '',
+            );
+      
+            $form['bottom_text']['center_title'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Center title'),
+              //'#description' => t(''),
+              '#default_value' => isset($data['bottom_text']['center_title']) ? $data['bottom_text']['center_title'] : '',
+            );
+            $form['bottom_text']['center_text'] = array(
+              '#type' => 'textarea',
+              '#title' => t('Сenter text'),
+              //'#description' => t(''),
+              '#default_value' => isset($data['bottom_text']['center_text']) ? $data['bottom_text']['center_text'] : '',
+            );
+            
+            $form['bottom_text']['right_title'] = array(
+              '#type' => 'textfield',
+              '#title' => t('Right title'),
+              //'#description' => t(''),
+              '#default_value' => isset($data['bottom_text']['right_title']) ? $data['bottom_text']['right_title'] : '',
+            );
+            $form['bottom_text']['right_text'] = array(
+              '#type' => 'textarea',
+              '#title' => t('Right text'),
+              //'#description' => t(''),
+              '#default_value' => isset($data['bottom_text']['right_text']) ? $data['bottom_text']['right_text'] : '',
+            );
+      
+      $form['#validate'][] = 'gv_pages_validateForm_quote';
       
       break;
     
@@ -1686,6 +1736,26 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     }
     form_set_error('field_ref_provider', $text);
   } // End of if ($review) {
+  
+}
+
+
+/**
+ * Custom validate of review type form.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_quote(&$form, &$form_state) {
+  
+  dpm($form_state);
+  //form_set_value($form['field_r_fname'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_fname_temp']) ? $form_state['values']['field_r_fname_temp'] : NULL ))), $form_state);
   
 }
 
