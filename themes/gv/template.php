@@ -68,12 +68,12 @@ function gv_preprocess_node(&$variables) {
     $variables['classes_array'][] = 'node-full';
   }
   if(isset($variables['node'])) {
-    
+    dpm($variables['node']);
     if($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post') {
       $variables['theme_hook_suggestions'][] = 'node__article';
     }
     elseif($variables['node']->type == 'webform') {
-      $variables['theme_hook_suggestions'][] = 'node__admin-page';
+      $variables['theme_hook_suggestions'][] = 'node__admin_page';
     }
   }
   
