@@ -1972,7 +1972,7 @@ function gv_pages_node_view($node, $view_mode) {
     
     case 'quote':
       
-      $node->q_data = unserialize($provider->field_q_data['und'][0]['value']);
+      $node->q_data = unserialize($node->field_q_data['und'][0]['value']);
       
       break;
     
