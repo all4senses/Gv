@@ -18,7 +18,7 @@
     <div class="text">All Vendors are<br>Prescreened by Experian</div><div class="logo"></div>
   </div>
   -->
-  <div class="partners"><div id="bbb"></div><div class="truste"></div></div>
+  <div class="partners"><!--<div id="truste"></div>--><div id="bbb"></div></div>
   
   <div class="bottom-clear"></div> 
 </head>
