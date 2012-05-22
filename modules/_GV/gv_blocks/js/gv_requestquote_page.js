@@ -25,7 +25,7 @@
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
           textSubmit : 'Submit & Get Quotes',
-          textNext: 'Start Free Report',
+          textNext: 'Instant Quote',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},

@@ -13,9 +13,13 @@
     <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
   </div>
 
+  <!--
   <div id="experian">
     <div class="text">All Vendors are<br>Prescreened by Experian</div><div class="logo"></div>
   </div>
+  -->
+  <div class="partners"><div id="bbb"></div><div class="truste"></div></div>
+  
   <div class="bottom-clear"></div> 
 </head>
 
@@ -50,13 +54,13 @@
   </div>
   <div class="right">
     <div class="options">
-      <div class="option">Provider Qualifier</div>
-      <div class="option">Feedback Analyzer</div>
-      <div class="option">Price Comparisons</div>
-      <div class="option">Hardware Support</div>
-      <div class="option">Satisfaction Ratings</div>
-      <div class="option">Top Industry Reliability</div>
-      <div class="option">Advanced VoIP Service</div>
+      <div class="option">Top Rated Providers</div>
+      <div class="option">HD Quality Service</div>
+      <div class="option">No Contracts</div>
+      <div class="option">Powerful VoIP Services</div>
+      <div class="option">Accredited BBB Companies</div>
+      <div class="option">Unlimited Calling</div>
+      <div class="option">Designed For Business</div>
     </div>
     <div class="image"></div>
     <div class="links">Read the reviews an find the  answers you need.</div>
@@ -69,8 +73,14 @@
   <div class="bottom-clear"></div> 
   
 </div>
-  
-<div id="bottom"<?php print $content_attributes; ?>>
+
+<div id="brands">
+  <h2><?php echo t('Get Quotes From Leading VoIP Brands Such As:'); ?></h2>
+  <div id="cisco"></div><div id="polycom"></div><div id="microsoft"></div><div id="at-n-t"></div><div id="verizon"></div><div id="comcast"></div><div id="panasonic"></div>
+  <div class="bottom-clear"></div> 
+</div>
+
+<div id="bottom">
   <div class="left">
     <h3><?php echo $node->q_data['bottom_text']['left_title']; ?></h3>
     <div class="text"><?php echo $node->q_data['bottom_text']['left_text']; ?></div>
