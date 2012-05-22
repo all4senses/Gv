@@ -57,13 +57,15 @@
       <div class="option">Top Rated Providers</div>
       <div class="option">HD Quality Service</div>
       <div class="option">No Contracts</div>
-      <div class="option">Powerful VoIP Services</div>
+      <div class="option">Robust VoIP Services</div>
       <div class="option">Accredited BBB Companies</div>
       <div class="option">Unlimited Calling</div>
       <div class="option">Designed For Business</div>
     </div>
-    <div class="image"></div>
-    <div class="links">Read the reviews an find the  answers you need.</div>
+    <div id="right-bottom">
+      <div class="image"></div>
+      <div class="links">Read the reviews an find the  answers you need.</div>
+    </div>
   </div>
   
   <?php
