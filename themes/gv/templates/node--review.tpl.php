@@ -49,7 +49,30 @@
               </header>
             <?php endif; ?>
     
-
+            <?php if ($page): ?>
+              <span class="submitted">
+              <?php 
+                $created_str = date('F d, Y \a\t g:sa', $node->created); 
+                if ($page) 
+                  $created_str = '<span class="delim">|</span>' . $created_str;
+                  global $user;
+                  if ($user->uid && $node->uid) {
+                    echo preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ":$3$created_str$5", $submitted);
+                  }
+                  elseif (!$node->uid) {
+                    echo preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": $3 $created_str$5", $submitted);
+                  }
+                  // Make a link for an authors profile from just a Name.
+                  else {
+                    echo preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1" . t('Reviewer') . ":<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
+                  }
+                
+                //dpm($node);
+                //dpm($content);
+                //dpm($content['comments']);
+              ?>
+            </span>
+          <?php endif; ?>
     
 
         <div class="content"<?php print $content_attributes; ?>>
