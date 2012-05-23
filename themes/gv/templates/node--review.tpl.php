@@ -16,7 +16,8 @@
     
             <?php if (!$page): ?>
               <header>
-
+            <?php endif; ?>
+                
                 <?php print render($title_prefix); ?>
                 
                 <?php if ($page): ?>
@@ -38,6 +39,7 @@
                 
                 <?php print render($title_suffix); ?>
 
+            <?php if (!$page): ?>       
               </header>
             <?php endif; ?>
     
