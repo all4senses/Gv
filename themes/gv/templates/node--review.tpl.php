@@ -12,29 +12,30 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-            <?php if ($page): ?>
-                <?php print render($title_prefix); ?>
-                <h1<?php print $title_attributes; ?>>
-                      <?php 
-                        print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
-                      ?>
-                </h1>
-                <?php print render($title_suffix); ?>
-            <?php endif; ?>
-
-            
-        
   <div class="main-content">
     
             <?php if (!$page): ?>
               <header>
 
                 <?php print render($title_prefix); ?>
-                <h2<?php print $title_attributes; ?>>
+                
+                <?php if ($page): ?>
+                  <h1
+                <?php else: ?>
+                  <h2
+                <?php endif; ?>
+                  
+                <?php print $title_attributes; ?>>
                     <a href="<?php print $node_url; ?>">
                       <?php print $title; ?>
                     </a>
-                </h2>
+                
+                <?php if ($page): ?>
+                  </h1>
+                <?php else: ?>
+                  </h2>
+                <?php endif; ?>
+                
                 <?php print render($title_suffix); ?>
 
               </header>
@@ -46,7 +47,7 @@
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , render($content['gv_rating_overall']) , '</div>' , render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , render($content['gv_rating_overall']) , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
               <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
               <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
