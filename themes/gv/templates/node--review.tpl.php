@@ -81,7 +81,7 @@
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , render($content['gv_rating_overall']) , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , $node->field_r_rating_overall['und'][0]['value'] /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
               <?php if (!$page): ?>
                 <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
