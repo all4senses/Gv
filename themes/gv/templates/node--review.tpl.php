@@ -56,14 +56,16 @@
                 if ($page) 
                   $created_str = '<span class="delim">|</span>' . $created_str;
                   global $user;
-                  if ($user->uid && $node->uid) {
+                  if (/*$user->uid && */$node->uid) {
                     echo preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ":$3$created_str$5", $submitted);
                   }
                   elseif (!$node->uid) {
-                    echo preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": $3 $created_str$5", $submitted);
+                    //echo preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": $3 $created_str$5", $submitted);
+                    echo preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": " . $node->field_r_fname['und'][0]['safe_value'] . "$created_str$5", $submitted);
                   }
                   // Make a link for an authors profile from just a Name.
                   else {
+                    //echo preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1" . t('Reviewer') . ":<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                     echo preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1" . t('Reviewer') . ":<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                   }
                 
@@ -80,8 +82,10 @@
           <div class="gv_votes">
             <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , render($content['gv_rating_overall']) , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
-              <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
-              <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
+              <?php if (!$page): ?>
+                <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
+              <?php endif; ?>
               <div class="text"><?php echo render($content['gv_recommend']); ?></div>
             </div>
           </div>
