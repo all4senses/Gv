@@ -53,8 +53,9 @@
               <div class="text"><?php echo render($content['gv_recommend']); ?></div>
             </div>
           </div>
-              
-          <div class="right-content">
+          
+          <!--<div class="right-content">-->
+          <div class="review-right">
             
             <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
               <div class="pros-cons">
