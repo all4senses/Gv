@@ -116,7 +116,7 @@
           <div class="links">
             <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
             <!--<span class="delim">|</span> -->
-            <?php echo l(t('Write a Review'), 'node/add/review'); ?>
+            <?php echo ($page ? l(t('View All !p Reviews', array('!p' => $node->provider_name)), 'node/' . $node->field_ref_provider['und'][0]['target_id']) . '<span class="delim">|</span>' . l(t('Visit !p', array('!p' => $node->provider_name)), $content['provider_url']) . '<span class="delim">|</span>' : '') . l(t('Write a Review'), 'node/add/review'); ?>
           </div>
            
               
