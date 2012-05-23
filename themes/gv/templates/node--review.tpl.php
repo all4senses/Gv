@@ -27,9 +27,15 @@
                 <?php endif; ?>
                   
                 <?php print $title_attributes; ?>>
-                    <a href="<?php print $node_url; ?>">
+                    <?php if (!$page): ?>
+                      <a href="<?php print $node_url; ?>">
+                    <?php endif; ?>
+                        
                       <?php print $title; ?>
-                    </a>
+                        
+                    <?php if (!$page): ?>
+                      </a>
+                    <?php endif; ?>
                 
                 <?php if ($page): ?>
                   </h1>
