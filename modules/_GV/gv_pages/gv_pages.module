@@ -1858,6 +1858,9 @@ function gv_pages_node_presave($node) {
     // If a provider was chosen from a list, save voting results to Voting API tables.
     if ($provider_nid && $provider_nid != 7) {
       
+        $provider = node_load($provider_nid);
+        $node->field_r_provider_name['und'][0]['value'] = $provider->field_p_name['und'][0]['value'];
+        
         //$vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
         $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
         $votes = array();
@@ -1912,7 +1915,9 @@ function gv_pages_node_presave($node) {
         }
       
     } // End of if ($provider_nid && $provider_nid != 7) {
-    
+    else {
+      $node->field_r_provider_name['und'][0]['value'] = $node->field_r_oprovider['und'][0]['value'];
+    }
     
     // If chosen OTHER SP (and dummy nid), replace a dummy nid with 0, 
     // as we don't want to associate this review with that dummy nid node, of course.
