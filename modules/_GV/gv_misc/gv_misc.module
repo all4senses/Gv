@@ -705,6 +705,20 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
     //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
     asort($providers); 
   }
+  elseif ($scope == 'all_including_others_from_reviews') {
+    $query = db_select('field_data_field_r_provider_name', 'pn');
+    //$query->fields('n', array('nid', 'title'))
+    $query->fields('pn', array('field_r_provider_name_value'))
+          ->distinct(); 
+    $result = $query->execute(); 
+    foreach($result as $provider) {
+      $providers[$provider->field_r_provider_name_value] = $provider->field_r_provider_name_value; // = $provider->title;
+    }
+    // Sort providers alphabetically.
+    //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
+    asort($providers); 
+  }
+  
 }
     
 
