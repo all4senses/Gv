@@ -980,12 +980,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       
-      // Unset some fields, so that even super admin could not see and change it.
+      // Hide some fields, so that even super admin could not see and change it.
       $form['field_r_rating_overall']['#access'] = FALSE;
       $form['options']['promote']['#access'] = FALSE;
       $form['options']['sticky']['#access'] = FALSE;
       $form['revision_information']['#access'] = FALSE;
       $form['comment_settings']['#access'] = FALSE;
+      $form['field_r_provider_name']['#access'] = FALSE;
       
       // Show authoring info (including a date) only for administrator.
       if (!in_array('administrator', $user->roles)) {
