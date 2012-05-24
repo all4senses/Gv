@@ -926,6 +926,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['revision_information']['#access'] = FALSE;
       $form['path']['#access'] = FALSE;
       
+      global $user;
+      if ($user->uid !== 1) {
+        $form['field_preface_key']['#access'] = FALSE;
+      }
+      
     break; // End of case 'preface_node_form':
 
   
