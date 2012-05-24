@@ -927,7 +927,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['path']['#access'] = FALSE;
       
       global $user;
-      if ($user->uid !== 1) {
+      if ($user->uid != 1) {
         $form['field_preface_key']['#access'] = FALSE;
       }
       
