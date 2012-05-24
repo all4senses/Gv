@@ -2193,11 +2193,13 @@ function gv_pages_node_view($node, $view_mode) {
           $providers = array('' => t('- Select a Provider -'));
           gv_misc_getProviders($providers, 'all_including_others_from_reviews');
           
+          dpm($providers);
+          
           $node->content['select_providers'] = array(
               '#type' => 'select',
               '#title' => t('Choose a Provider'),
               '#options' => $providers,
-              '#default_value' => (isset($_GET['provider']) && isset($providers[$_GET['provider']])) ? $_GET['provider'] : $providers[0],
+              '#default_value' => (isset($_GET['provider']) && isset($providers[$_GET['provider']])) ? $providers[$_GET['provider']] : $providers[''],
           ); 
           
         }
