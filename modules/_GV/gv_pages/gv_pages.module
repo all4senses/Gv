@@ -2197,7 +2197,7 @@ function gv_pages_node_view($node, $view_mode) {
               '#type' => 'select',
               '#title' => t('Choose a Provider'),
               '#options' => $providers,
-              '#default_value' => $options[0],
+              '#default_value' => (isset($_GET['provider']) && isset($providers[$_GET['provider']])) ? $_GET['provider'] : $providers[0],
           ); 
           
         }
