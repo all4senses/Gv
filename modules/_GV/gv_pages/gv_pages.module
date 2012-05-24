@@ -2176,14 +2176,25 @@ function gv_pages_node_view($node, $view_mode) {
 
       // Set metatags from the preface to a page where the preface is placed
       // Except of the front page, where it can be set via admin interface of the Metatags.
-      if ($node->field_preface_key['und'][0]['safe_value'] != 'front' && isset($node->metatags) && count($node->metatags)) {
-        foreach($node->metatags as $metatag_title => $metatag_data) {
-          if ($metatag_title == 'title' && !$metatag_data) {
-            $metatag_data = $node->title;
+      if ($node->field_preface_key['und'][0]['safe_value'] != 'front') {
+        
+        if (isset($node->metatags) && count($node->metatags)) {
+          foreach($node->metatags as $metatag_title => $metatag_data) {
+            if ($metatag_title == 'title' && !$metatag_data) {
+              $metatag_data = $node->title;
+            }
+            gv_misc_addMetatag($metatag_title, $metatag_data['value']);
           }
-          gv_misc_addMetatag($metatag_title, $metatag_data['value']);
         }
-      }
+        
+        if ($node->field_preface_key['und'][0]['safe_value'] == 'view-reviews-page_all_reviews') {
+          $node->content['select_providers'] = array(
+              '#type' => 'textfield',
+              '#default_value' => 'xxx',
+          );
+        }
+        
+      } // End of if ($node->field_preface_key['und'][0]['safe_value'] != 'front') {
 /*      
 
 
