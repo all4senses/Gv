@@ -31,7 +31,7 @@
                       <a href="<?php print $node_url; ?>">
                     <?php endif; ?>
                         
-                      <?php print $title; ?>
+                      <?php dpm($_GET); echo ($_GET['q'] == 'providers/reviews' ? $node->provider_name . ': ' : '') . $title; ?>
                         
                     <?php if (!$page): ?>
                       </a>
