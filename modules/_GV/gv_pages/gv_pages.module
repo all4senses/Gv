@@ -2042,7 +2042,9 @@ function gv_pages_node_view($node, $view_mode) {
       }
       gv_pages_addRatingsToNodeThemed($node, $votes);
       
-      $node->content['r_data'] = unserialize($node->field_r_data['und'][0]['value']);
+      if (isset($node->field_r_data['und'][0]['value'])) {
+        $node->content['r_data'] = unserialize($node->field_r_data['und'][0]['value']);
+      }
       
     break; // End of case 'review':
     
@@ -2188,14 +2190,39 @@ function gv_pages_node_view($node, $view_mode) {
         }
         
         if ($node->field_preface_key['und'][0]['safe_value'] == 'view-reviews-page_all_reviews') {
-          dpm($_GET);
-          $options = array('aaa', 'bbb');
+          
+          $providers = array('' => t('- All Providers -'));
+          gv_misc_getProviders($providers, 'all_including_others_from_reviews');
+          
+          if (isset($_GET['provider']) && isset($providers[$_GET['provider']])) {
+            $provider_isset = TRUE;
+          }
+          else {
+            $provider_isset = FALSE;
+          }
+          $url = '';
+          foreach ($_GET as $key => $value) {
+            if ($key == 'q' || $key == 'provider') {
+              continue;
+            }
+            $url .= '&' . $key . '=' . urlencode($value);
+          }
+          
+          //dpm($_GET);
+          //dpm($providers);
+          
           $node->content['select_providers'] = array(
               '#type' => 'select',
               '#title' => t('Choose a Provider'),
-              '#options' => $options,
-              '#default_value' => $options[0],
-          );
+              '#options' => $providers,
+              '#default_value' => $provider_isset ? $providers[$_GET['provider']] : $providers[''],
+              '#value' => $provider_isset ? $providers[$_GET['provider']] : $providers[''],
+              ////'#default_value' => 'VoIPo',
+              ////'#value' => 'VoIPo',
+              '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
+
+          ); 
+          //dpm($node);
         }
         
       } // End of if ($node->field_preface_key['und'][0]['safe_value'] != 'front') {
