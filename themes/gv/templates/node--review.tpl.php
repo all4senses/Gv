@@ -116,7 +116,7 @@
           <div class="links">
             <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
             <!--<span class="delim">|</span> -->
-            <?php echo ($page || $_GET['q'] == 'providers/reviews' ? l(t('View All !p Reviews', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), 'node/' . $node->field_ref_provider['und'][0]['target_id']) . '<span class="delim">|</span>' . l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>' : '') . l(t('Write a Review'), 'node/add/review'); ?>
+            <?php echo ($page || $_GET['q'] == 'providers/reviews' ? l(t('View All !p Reviews', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), 'node/' . $node->field_ref_provider['und'][0]['target_id']) . '<span class="delim">|</span>' . l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>' : l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>') . l(t('Write a Review'), 'node/add/review'); ?>
           </div>
            
               
