@@ -2202,6 +2202,13 @@ function gv_pages_node_view($node, $view_mode) {
           else {
             $provider_isset = FALSE;
           }
+          $url = '';
+          foreach ($_GET as $key => $value) {
+            if ($key == 'q' || $key == 'provider') {
+              continue;
+            }
+            $url .= '&' . $key . '=' . urlencode($value);
+          }
           
           dpm($providers);
           
@@ -2216,7 +2223,7 @@ function gv_pages_node_view($node, $view_mode) {
               //'#attributes' => array('onChange' => "top.location.href=document.getElementById('$formname').options[document.getElementById('$formname').selectedIndex].value"),
               //'#attributes' => array('onChange' => "top.location.href=http://" . $_GET['q'] . '?provider=' document.getElementById('$formname').options[document.getElementById('$formname').selectedIndex].value"),
               //// '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value)"),
-              '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURI(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value)"),
+              '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
 
           ); 
           //dpm($node);
