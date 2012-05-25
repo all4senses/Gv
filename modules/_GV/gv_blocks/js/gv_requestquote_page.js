@@ -25,7 +25,7 @@
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
           textSubmit : 'Submit & Get Quotes',
-          textNext: 'Instant Quote',
+          textNext: 'No Risk Quote',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},

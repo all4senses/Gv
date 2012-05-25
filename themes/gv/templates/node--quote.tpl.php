@@ -77,7 +77,7 @@
 </div>
 
 <div id="brands">
-  <h2><?php echo t('Get Quotes From Leading VoIP Brands Such As:'); ?></h2>
+  <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
   <div id="cisco"></div><div id="polycom"></div><div id="microsoft"></div><div id="att"></div><div id="verizon"></div><div id="comcast"></div><div id="panasonic"></div>
   <div class="bottom-clear"></div> 
 </div>
