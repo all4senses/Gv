@@ -46,7 +46,7 @@ h1{margin-top: 5px; margin-bottom: 5px; line-height: 40px;}
     
 /* Footer */
 #footer {background: /*#275FA6*/url("images/footer-back.png") repeat-x scroll 0 0 transparent; color: white; height: 20px; padding: 0; height: 55px;}
-#footer .region-footer{width: 640px; margin: auto; font-family: Georgia,"Bitstream Charter",serif;}
+#footer .region-footer{width: 660px; margin: auto; font-family: Georgia,"Bitstream Charter",serif;}
 #footer .block{margin-bottom: 0;}
 #footer .menu a{color: white; font-size: 14px;}
 #footer .menu li{margin: 2px 5px 0 5px;}
@@ -179,6 +179,7 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 
 .front #main .node .content{padding: 10px; font-size: 13px;}
 
+.front p{line-height: 25px;}
 
 /* Shadows */
 /*.front .block .shadow,
@@ -235,8 +236,16 @@ th.views-field-php-1{width: 100px;}
 
 /* Correct a bit layout for separate admin pages with providers as blocks */
 .node-type-admin-page th.views-field-php-1{width: 110px;}
+
 .page-node.page-node-77 #main .main-content,
-.page-node.page-node-90 #main .main-content{padding: 0 10px 20px;}
+.page-node.page-node-90 #main .main-content{padding: 0 5px 0; border: none;}
+.page-node.page-node-77 #main .main-content h1,
+.page-node.page-node-90 #main .main-content h1{font-size: 18px; font-weight: bold; margin: 0; padding: 0 0 5px; line-height: 25px;}
+.page-node.page-node-77 #main .main-content .content,
+.page-node.page-node-90 #main .main-content .content{border: none; margin: 0; padding: 0;}
+
+.page-node.page-node-77 #main .main-content .content p,
+.page-node.page-node-90 #main .main-content .content p{line-height: 25px; text-align: justify;}
 
 td.views-field-php-1, 
 td.views-field-php-3{font-size: 18px; font-weight: bold;}
@@ -431,6 +440,7 @@ form .counter.exceeded{color: red;}
 
 /*.node-type-article .tabs-wrapper{display: none;}*/
 
+
 .page-node #main .main-content{border: 1px solid lightgray; padding: 0 40px 20px; clear: both;}
 
 .page-node #main .main-content .content h2{color: #275FA6; float: left; border: none; font-size: 40px; padding: 0; width: 250px;}
@@ -547,17 +557,36 @@ form .counter.exceeded{color: red;}
 .node-type-provider .reviews .header .button{cursor: pointer; background: none repeat scroll 0 0 #275FA6; color: white; float: left; font-weight: bold; margin-right: 10px; padding: 7px 10px 7px 10px; font-family: sans-serif;}
 .node-type-provider .reviews .header .button a, .node-type-provider .reviews .header .button a:hover{color: white; display: block;}
 
-.node-type-provider .reviews .pager{float: left; text-align: left; padding: 7px 0 0 0;}
-.node-type-provider .reviews .view-filters label{float: left; margin-right: 5px; font-weight: normal; font-size: 16px;}
+
+
+
+.node-type-provider .reviews .pager,
+.page-providers-reviews .pager{float: left; text-align: left; padding: 7px 0 0 0;}
+
+.page-providers-reviews .pager{float: none; text-align: center;}
+
+
+.page-providers-reviews .view-filters label,
+.node-type-provider .reviews .view-filters label{float: left; margin-right: 5px; font-weight: normal; font-size: 16px; font-family: Georgia,"Bitstream Charter",serif;}
 
 
 /* Review page */
 .page-node .node{margin-bottom: 0;}
-.page-node #main .node-review .main-content, .node-type-review #main .main-content{padding: 0; margin-bottom: 15px;} 
-.page-node #main .node-review .main-content .content, .node-type-review #main .main-content .content{font-family: Georgia,"Bitstream Charter",serif; margin: 0; padding: 5px 10px 15px 10px; position: relative;} 
 
+.page-providers-reviews #main .node-review .main-content,
+.page-node #main .node-review .main-content,
+.node-type-review #main .main-content{padding: 0; margin-bottom: 15px; border: 1px solid lightgray; clear: both;}
+
+.page-providers-reviews #main .node-review .main-content .content,
+.page-node #main .node-review .main-content .content, 
+.node-type-review #main .main-content .content{font-family: Georgia,"Bitstream Charter",serif; margin: 0; padding: 5px 10px 15px 10px; position: relative;} 
+
+.page-providers-reviews #main .node-review h2,
 .page-node #main .node-review h2{background: none repeat scroll 0 0 #CC302A; border: medium none; margin: 5px; padding: 10px 0 10px 10px;}
-.page-node #main .node-review h2 a, .node-type-provider #main .node-review h2 a:hover{color: white; display: block; font-size: 20px; font-weight: bold; padding: 0 5px;}
+
+.page-providers-reviews #main .node-review h2 a, 
+.page-node #main .node-review h2 a, 
+.node-type-provider #main .node-review h2 a:hover{color: white; display: block; font-size: 20px; font-weight: bold; padding: 0 5px;}
 
 .node-type-review #main .main-content h1{padding: 0 10px;  display: block; font-size: 28px;}
 .node-type-review #main .main-content .submitted{display: block; padding: 0 0 10px 10px;}
@@ -607,9 +636,10 @@ form .counter.exceeded{color: red;}
 
 /* All Reviews page */
 .page-providers-reviews #edit-provider-wrapper{display: none;}
-
-
-
+.page-providers-reviews .attachment .content .form-type-select{float: left; margin: 8px 15px 0 0;}
+.page-providers-reviews .attachment .content .form-type-select label{float: left; margin-right: 5px;}
+.page-providers-reviews select select,
+.page-providers-reviews select option{font-family: Georgia,"Bitstream Charter",serif;}
 
 
 /* Prefaces */
@@ -750,16 +780,19 @@ text-align: center;
 
 
 
-.node-type-quote .content .quote{background: url("images/quote-mark.png") no-repeat scroll 0 0 transparent; color: gray; font-size: 15px; font-style: italic; line-height: 20px; margin-top: 238px; padding-left: 15px;}
+/*/.node-type-quote .content .quote{background: url("images/quote-mark.png") no-repeat scroll 0 0 transparent; color: gray; font-size: 15px; font-style: italic; line-height: 20px; margin-top: 238px; padding-left: 15px;}*/
+.node-type-quote .content .quote{color: gray; font-size: 15px; font-style: italic; line-height: 20px; margin: 238px 0 0 20px; text-align: justify; width: 260px;}
+
+    
 .node-type-quote .content .author{float: right; font-size: 13px; font-style: italic; font-weight: bold; margin-top: 10px; color: gray;}
 
 
-.node-type-quote .content .right{float: right; width: 230px; height: 305px; position: relative;}
+.node-type-quote .content .right{float: right; width: 230px; height: 329px; position: relative;}
 .node-type-quote .content .right .option{background: url("images/galka-green-3.png") no-repeat scroll 0 0 transparent; margin-bottom: 10px; padding-left: 30px; font-size: 14px; font-weight: bold;}
 
 .node-type-quote .content #right-bottom{bottom: 0; position: absolute;}
-.node-type-quote .content .right .image{background: url("images/stars-quote.png") no-repeat; height: 20px; width: 120px; margin: 55px 0 10px 15px;}
-.node-type-quote .content .right .links{color: gray; line-height: 18px; margin-left: 15px;}
+.node-type-quote .content .right .image{background: url("images/stars-quote.png") no-repeat; height: 25px; width: 120px; margin: 55px 0 0 15px;}
+.node-type-quote .content .right .links{color: gray; margin-left: 15px;}
 
 .node-type-quote #brands{background: none repeat scroll 0 0 white; box-shadow: 4px 4px 4px -4px gray; margin-top: 30px; padding: 0 30px 20px;}
 
@@ -788,3 +821,8 @@ text-align: center;
 .node-type-quote #main footer a:hover{color: gray; text-decoration: underline;}
 
 .node-type-quote #main footer .delim{color: gray;}
+
+
+/* Body content for admin pages */
+.node-type-admin-page .field-name-body table{margin: none;}
+.node-type-admin-page .field-name-body table td{vertical-align: top;}

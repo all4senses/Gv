@@ -49,7 +49,7 @@
   </div>
   <div class="center">
     <?php echo render($content['field_q_image']); ?>
-    <div class="quote">This was just the report I was looking for Found the right comp</div>
+    <div class="quote">"We found a VoIP company that offers us more features at a much better price"</div>
     <div class="author">Rick Miller - Acme Inc</div>
   </div>
   <div class="right">
@@ -64,7 +64,7 @@
     </div>
     <div id="right-bottom">
       <div class="image"></div>
-      <div class="links">Read the reviews an find the  answers you need.</div>
+      <div class="links">Be smart. Read reviews. Get facts. Save money!</div>
     </div>
   </div>
   
