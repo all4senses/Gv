@@ -49,62 +49,25 @@ function gv_misc_menu() {
 }
 
 
-
 /**
- * Return themed fieldset of Add content section for Admin Content GetVoIP page.
+ * Form with a fieldset of Add content section for Admin Content GetVoIP page (by Views).
  */
-function gv_misc_getAddContentSection() {
-  /*
-  
-<fieldset><legend>Add a new content</legend>
-<select id="select_type" class="form-select" onChange="top.location.href='http://getvoip.com/node/add/' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value" >
-<option value=''>- Select a content type -</option>
-<?php 
-$types = node_type_get_types();
-//dpm($types);
-foreach ($types as $type => $value) {
-  $type = str_replace('_', '-', $type);
-  echo "<option value='$type'>" . $value->name . '</option>';
-}
-?>
-</select>
-</fieldset>
-  
-  */
-  
-  //$types = node_type_get_types();
-  //$out = '<fieldset><legend>Add a new content</legend>';
-  
-//    $out .= '<select id="select_type" class="form-select" onChange="top.location.href=' . "'http://getvoip.com/node/add/' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value" . '">';
-//    $out .= "<option value=''>- Select a content type -</option>";
-//    foreach ($types as $type => $value) {
-//      $type = str_replace('_', '-', $type);
-//      $out .= "<option value='$type'>" . $value->name . '</option>';
-//    }
-//    $out .= '</select>';
-
-    $out = render(drupal_get_form('gv_misc_AddContentSection_form'));
-  
-  //$out .= '</fieldset>';
-  
-  return $out;
-}
-
 function gv_misc_AddContentSection_form() {
   
   global $user;
   
-  $options = array('' => '- Select a content type -');
   $types = node_type_get_types();
-
+  
   // Hide some content tupes if not a root.
   if ($user->uid != 1) {
     unset($types['admin_page'], $types['preface'], $types['quote'], $types['webform']);
   }
   
+  $options = array('' => '- Select a content type -');
   foreach ($types as $type => $value) {
     $options[str_replace('_', '-', $type)] = $value->name;
   }
+  
   $form['add_content'] = array(
     '#type' => 'fieldset',
     '#title' => t('Add a new content'),
@@ -112,12 +75,14 @@ function gv_misc_AddContentSection_form() {
   );
   $form['add_content']['select_type'] = array(
     '#type' => 'select',
-    //'#title' => 'Select content type2',
+    //'#title' => 'Select content type',
     '#options' => $options,
     '#attributes' => array('id' => 'select_type',  'onChange' => "top.location.href='http://getvoip.com/node/add/" . "' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value"),
   );
+  
   return $form;
 }
+
 
 /**
  * Return trimmed teaser with right size (cleared from images) and with separated a styled image, cutted off from the body.
