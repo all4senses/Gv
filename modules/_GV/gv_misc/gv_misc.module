@@ -71,6 +71,7 @@ foreach ($types as $type => $value) {
 </fieldset>
   
   */
+  
   $types = node_type_get_types();
   $out = '<fieldset><legend>Add a new content</legend>';
   $out .= '<select id="select_type" class="form-select" onChange="top.location.href=' . "'http://getvoip.com/node/add/' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value" . '">';
@@ -81,6 +82,13 @@ foreach ($types as $type => $value) {
     $out .= "<option value='$type'>" . $value->name . '</option>';
   }
   
+  $form['select_type2'] = array(
+      '#type' => 'select',
+      '#title' => 'Select content type2',
+      '#options' => array('aaa', 'bbb'),
+  );
+  
+  $out .= render($form);
   $out .= '</select></fieldset>';
   
   return $out;
