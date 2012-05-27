@@ -74,26 +74,30 @@ foreach ($types as $type => $value) {
   
   $types = node_type_get_types();
   $out = '<fieldset><legend>Add a new content</legend>';
-  $out .= '<select id="select_type" class="form-select" onChange="top.location.href=' . "'http://getvoip.com/node/add/' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value" . '">';
-  $out .= "<option value=''>- Select a content type -</option>";
   
-  foreach ($types as $type => $value) {
-    $type = str_replace('_', '-', $type);
-    $out .= "<option value='$type'>" . $value->name . '</option>';
-  }
+    $out .= '<select id="select_type" class="form-select" onChange="top.location.href=' . "'http://getvoip.com/node/add/' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value" . '">';
+    $out .= "<option value=''>- Select a content type -</option>";
+    foreach ($types as $type => $value) {
+      $type = str_replace('_', '-', $type);
+      $out .= "<option value='$type'>" . $value->name . '</option>';
+    }
+    $out .= '</select>';
+
+    $out .= render(drupal_get_form('gv_misc_AddContentSection_form'));
   
+  $out .= '</fieldset>';
+  
+  return $out;
+}
+
+function gv_misc_AddContentSection_form() {
   $form['select_type2'] = array(
       '#type' => 'select',
       '#title' => 'Select content type2',
       '#options' => array('aaa', 'bbb'),
   );
-  
-  $out .= render($form);
-  $out .= '</select></fieldset>';
-  
-  return $out;
+  return $from;
 }
-
 
 /**
  * Return trimmed teaser with right size (cleared from images) and with separated a styled image, cutted off from the body.
