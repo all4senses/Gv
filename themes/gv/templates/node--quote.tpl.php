@@ -64,7 +64,7 @@
     </div>
     <div id="right-bottom">
       <div class="image"></div>
-      <div class="links">Be smart. Read reviews. Get facts. Save money!</div>
+      <div class="links">Be smart. Read reviews. <br/>Get facts. Save money!</div>
     </div>
   </div>
   
