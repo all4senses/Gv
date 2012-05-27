@@ -99,8 +99,8 @@ function gv_misc_AddContentSection_form() {
   }
   $form['select_type'] = array(
       '#type' => 'select',
-      '#title' => 'Select content type2',
-      '#options' => array('aaa', 'bbb'),
+      //'#title' => 'Select content type2',
+      '#options' => $options,
       '#attributes' => array('id' => 'select_type',  'onChange' => "top.location.href='http://getvoip.com/node/add/" . "' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value"),
   );
   return $form;
