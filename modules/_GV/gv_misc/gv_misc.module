@@ -72,8 +72,8 @@ foreach ($types as $type => $value) {
   
   */
   
-  $types = node_type_get_types();
-  $out = '<fieldset><legend>Add a new content</legend>';
+  //$types = node_type_get_types();
+  //$out = '<fieldset><legend>Add a new content</legend>';
   
 //    $out .= '<select id="select_type" class="form-select" onChange="top.location.href=' . "'http://getvoip.com/node/add/' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value" . '">';
 //    $out .= "<option value=''>- Select a content type -</option>";
@@ -83,9 +83,9 @@ foreach ($types as $type => $value) {
 //    }
 //    $out .= '</select>';
 
-    $out .= render(drupal_get_form('gv_misc_AddContentSection_form'));
+    $out = render(drupal_get_form('gv_misc_AddContentSection_form'));
   
-  $out .= '</fieldset>';
+  //$out .= '</fieldset>';
   
   return $out;
 }
@@ -97,11 +97,16 @@ function gv_misc_AddContentSection_form() {
   foreach ($types as $type => $value) {
     $options[str_replace('_', '-', $type)] = $value->name;
   }
-  $form['select_type'] = array(
-      '#type' => 'select',
-      //'#title' => 'Select content type2',
-      '#options' => $options,
-      '#attributes' => array('id' => 'select_type',  'onChange' => "top.location.href='http://getvoip.com/node/add/" . "' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value"),
+  $form['add_content'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Add a new content'),
+    '#collapsible' => TRUE,
+  );
+  $form['add_content']['select_type'] = array(
+    '#type' => 'select',
+    //'#title' => 'Select content type2',
+    '#options' => $options,
+    '#attributes' => array('id' => 'select_type',  'onChange' => "top.location.href='http://getvoip.com/node/add/" . "' + document.getElementById('select_type').options[document.getElementById('select_type').selectedIndex].value"),
   );
   return $form;
 }
