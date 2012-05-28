@@ -50,6 +50,20 @@ function gv_misc_menu() {
 
 
 /**
+ * Implements hook_views_api().
+ *
+ * @return array
+ *   Views api definition.
+ */
+function gv_misc_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'gv_misc') . '/inc',
+  );
+} 
+
+
+/**
  * Form with a fieldset of Add content section for Admin Content GetVoIP page (by Views).
  */
 function gv_misc_AddContentSection_form() {
