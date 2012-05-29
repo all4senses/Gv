@@ -400,14 +400,14 @@ function gv_blocks_get_requestQuote() {
 
   drupal_add_library('system', 'ui.widget');
 
-  drupal_add_library('system', 'effects.bounce');
+  //drupal_add_library('system', 'effects.bounce');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_requestquote.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
-  drupal_add_js($path_to_custom_js . 'bbq.js');
+  //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
   $token = md5(time()); //drupal_get_token('test');
@@ -533,14 +533,14 @@ function gv_blocks_get_requestQuoteForPage() {
 
   drupal_add_library('system', 'ui.widget');
 
-  drupal_add_library('system', 'effects.bounce');
+  //drupal_add_library('system', 'effects.bounce');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
-  drupal_add_js($path_to_custom_js . 'bbq.js');
+  //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
   drupal_add_library('system', 'ui.core');
