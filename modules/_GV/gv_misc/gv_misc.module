@@ -503,20 +503,19 @@ function theme_gv_misc_requestQuote_mail($data) {
 * Implementation of hook_mail_alter().
 * Here we allow the site name to be used as the senders name for outgoing email.
 * see http://drupal.org/node/209672
+* 
+* No need for this hook if the smtp module is used.
 */
+/*
 function gv_misc_mail_alter(&$message){
   $default_from = variable_get('site_mail', ini_get('sendmail_from'));
-  
-  //dpm($default_from);
-  
   
   if($message['from'] == $default_from){
     $message['from'] = '"'. variable_get('site_name', 'GetVoIP.com') .'" <'. $default_from .'>';
     $message['headers']['From'] = $message['headers']['Sender'] = $message['headers']['Return-Path'] = $message['headers']['Errors-To'] = $message['headers']['Reply-To'] = $message['from'];
   }
-  
-  
 }
+*/
 
 
 /**
