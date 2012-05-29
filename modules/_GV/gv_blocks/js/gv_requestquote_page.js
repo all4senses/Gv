@@ -91,10 +91,12 @@
               connection: "required",
              
               phone_1: {
-                number: true
+                number: true,
+                maxlength: 3
 							},
               phone_2: {
-                number: true
+                number: true,
+                minlength: 1
 							},
               phone_3: {
                 number: true
