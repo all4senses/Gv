@@ -92,14 +92,18 @@
              
               phone_1: {
                 number: true,
+                minlength: 3,
                 maxlength: 3
 							},
               phone_2: {
                 number: true,
-                minlength: 1
+                minlength: 3,
+                maxlength: 3
 							},
               phone_3: {
-                number: true
+                number: true,
+                minlength: 4,
+                maxlength: 4
 							}
               // works
               /* 
