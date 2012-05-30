@@ -121,7 +121,7 @@
               
               <div class="bottom-clear"></div>
 
-              <?php if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+              <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
                   <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
                   <div class="overall"> 
@@ -157,16 +157,11 @@
                   if ($node->p_type == 'bu') {
                     $key = 's_business';
                     $prefix = 'bu';
-                  
-                    
-                  
-                  
                   }
                   else {
                     $key = 's_residential';
                     $prefix = 're';
                   }
-                  //dpm($node->p_data);
                   if ($node->p_data['services'][$key][$prefix . '_basicinfo_title']) {
                     echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_title']) , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_text']) , '</div>';
@@ -232,7 +227,7 @@
                 ?>
               </div>
           
-              <?php echo render($content['body']); ?>
+              <?php dpm($content); echo render($content['body']); ?>
           
           
           
