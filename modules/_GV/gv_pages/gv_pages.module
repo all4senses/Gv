@@ -87,7 +87,13 @@ function gv_pages_buildTopicsPage($content_type_label) {
   else {
     $topics = $topics->data;
   }
-  return $topics; 
+  
+  if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
+    $preface->title_no_link = TRUE;
+    $preface = render(node_view($preface, 'full'));
+  }
+  
+  return $preface . $topics; 
 }
 
 
