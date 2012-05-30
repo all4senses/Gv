@@ -385,7 +385,7 @@ function gv_misc_makeRequest_ajax() {
       'Source' => $post['source'],
     );
     
-    $params['request_data'] = $submission;
+    $params['request_data'] = $post;//$submission;
     /*
     $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
     foreach ($admins as $admin) {
@@ -403,7 +403,7 @@ function gv_misc_makeRequest_ajax() {
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
     }
     else {
-      drupal_mail('gv_misc', 'request_quote', 'ruben@getvoip.com', $language->language, $params);
+      //drupal_mail('gv_misc', 'request_quote', 'ruben@getvoip.com', $language->language, $params);
     }
     
     // Test letter to the root
