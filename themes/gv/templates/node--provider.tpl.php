@@ -5,8 +5,9 @@
     
 <?php
 
-//dpm($content);
-//dpm($node->p_data);
+dpm($content);
+dpm($node->p_data);
+dpm($node);
 
 ?>
 
@@ -227,7 +228,7 @@
                 ?>
               </div>
           
-              <?php dpm($content); echo render($content['body']); ?>
+              <?php echo render($content['body']); ?>
           
           
           
