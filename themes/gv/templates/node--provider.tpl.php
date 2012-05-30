@@ -223,7 +223,7 @@ dpm($node);
                     echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</a></div>'; 
                   }
                   else {
-                    echo render($title_prefix), '<h2', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h2>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['safe_value'], '</h2>', render($title_suffix);
                   }
                 ?>
               </div>
