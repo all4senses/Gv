@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width" />
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
-  <?php $args = arg(); if ($args[1] == 'node' && $args[2] == 'edit') { $top = TRUE; print $scripts; } ?>
+  <?php $args = arg(); if ($args[0] == 'node' && $args[2] == 'edit') { $top = TRUE; print $scripts; } ?>
   <!-- IE Fix for HTML5 Tags -->
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
