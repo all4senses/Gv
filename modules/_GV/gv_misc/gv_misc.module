@@ -1009,7 +1009,7 @@ function gv_misc_votingapi_metadata_alter(&$data) {
 
 function gv_misc_views_pre_render(&$view) {
   
-   dpm($view->name); dpm($view->current_display);
+  //dpm($view->name); dpm($view->current_display);
 
   // Add a prefaces for the some views pages.
   $key = 'view-' . $view->name . '-' . $view->current_display;
@@ -1031,6 +1031,8 @@ function gv_misc_views_pre_render(&$view) {
     case 'view-news-page_by_tag':
       
     case 'view-sitemap-page': 
+   
+    case 'view-taxonomy_term-page':
       
       $do_attach_preface = TRUE;
       break;
