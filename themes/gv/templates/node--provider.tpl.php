@@ -220,7 +220,7 @@
               <div class="logo">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</a></div>'; 
+                    echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>';
                   }
                   else {
                     echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['safe_value'], '</h2>', render($title_suffix);
