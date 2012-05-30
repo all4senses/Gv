@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width" />
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
-  <?php dpm(arg()); print $scripts; ?>
+  <?php $args = arg(); if ($args[1] == 'node' && $args[2] == 'edit') { $top = TRUE; print $scripts; } ?>
   <!-- IE Fix for HTML5 Tags -->
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,7 +21,7 @@
   <?php print $page; ?>
   <?php print $page_bottom; ?>
   
-  <?php ////print $scripts; ?>
+  <?php if (!isset($top)) { print $scripts; } ?>
   
 </body>
 
