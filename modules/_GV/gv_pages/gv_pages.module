@@ -2098,84 +2098,84 @@ function gv_pages_node_view($node, $view_mode) {
 
         
         
+        // Load and show all the data from the placeholder field field_p_data serialized data
+        if (isset($node->field_p_data['und'][0]['value'])) {
+
+          $p_data = unserialize($node->field_p_data['und'][0]['value']);
+          $node->p_data = $p_data;
+          if ($node->field_p_types['und'][0]['value'] == 'business') {
+            $node->p_type = 'bu';
+          }
+          else {
+            $node->p_type = 're';
+          }
+
+          // General info.
+          /*        
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_heads', 'Headquarters'));
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_founded', 'Founded'));
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_availability', 'Availability'));
+              gv_pages_addFieldToNode($node, $p_data, array('info', 'i_web', 'Web address'));
+              // Quote.
+              gv_pages_addFieldToNode($node, $p_data, array('quote', 'q_text', 'q_author'));
+          */
+
+
+          // Services
+
+          // Residential
+          if (isset($p_data['services']['s_residential'])) {
+            // Preface.
+            /*
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_preface'));
+                // Basic info.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_basicinfo'));
+                // Special notes.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_specialnotes'));
+
+                // Key and normal features blocks.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_features'), 'key_and_normal_features_blocks');
+            */
+
+            // Remove the original taxonomy field.
+            ////unset($node->content['field_p_re_features']);
+          } // End of if (isset($p_data['services']['s_residential'])) {
+          // Business
+          if (isset($p_data['services']['s_business'])) {
+            // Preface.
+            /*
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_preface'));
+                // Basic info.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_basicinfo'));
+                // Special notes.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_specialnotes'));
+                // PBX preface.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_pbxpreface'));
+                // SIP preface.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_sippreface'));
+
+                // Key and normal features blocks.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features'), 'key_and_normal_features_blocks');
+                // PBX features block.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features_pbx', 'PBX Features'), 'other_features_block');
+                // PBX features block.
+                gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features_sip', 'SIP Features'), 'other_features_block');
+            */  
+
+            // And now Remove original taxonomy fields for Business features.
+            ////unset($node->content['field_p_bu_features'], $node->content['field_p_bu_features_pbx'], $node->content['field_p_bu_features_sip']);
+          } // End of if (isset($p_data['services']['s_residential'])) {
+
+
+        } // End of if (isset($node->field_p_data['und'][0]['value'])) {        
+        
+        
         // Add tabs.
         $module_path = drupal_get_path('module', 'gv_pages');
         drupal_add_library('system', 'ui.tabs');
         drupal_add_js( $module_path . '/js/gv_provider_tabs.js'); 
     
       } // End of if ($view_mode == 'full') {
-      
-      
-      // Load and show all the data from the placeholder field field_p_data serialized data
-      if (isset($node->field_p_data['und'][0]['value'])) {
-          
-        $p_data = unserialize($node->field_p_data['und'][0]['value']);
-        $node->p_data = $p_data;
-        if ($node->field_p_types['und'][0]['value'] == 'business') {
-          $node->p_type = 'bu';
-        }
-        else {
-          $node->p_type = 're';
-        }
-
-        // General info.
-        /*        
-            gv_pages_addFieldToNode($node, $p_data, array('info', 'i_heads', 'Headquarters'));
-            gv_pages_addFieldToNode($node, $p_data, array('info', 'i_founded', 'Founded'));
-            gv_pages_addFieldToNode($node, $p_data, array('info', 'i_availability', 'Availability'));
-            gv_pages_addFieldToNode($node, $p_data, array('info', 'i_web', 'Web address'));
-            // Quote.
-            gv_pages_addFieldToNode($node, $p_data, array('quote', 'q_text', 'q_author'));
-        */
-
-
-        // Services
-
-        // Residential
-        if (isset($p_data['services']['s_residential'])) {
-          // Preface.
-          /*
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_preface'));
-              // Basic info.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_basicinfo'));
-              // Special notes.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_specialnotes'));
-
-              // Key and normal features blocks.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_residential', 're_features'), 'key_and_normal_features_blocks');
-          */
-
-          // Remove the original taxonomy field.
-          unset($node->content['field_p_re_features']);
-        } // End of if (isset($p_data['services']['s_residential'])) {
-        // Business
-        if (isset($p_data['services']['s_business'])) {
-          // Preface.
-          /*
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_preface'));
-              // Basic info.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_basicinfo'));
-              // Special notes.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_specialnotes'));
-              // PBX preface.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_pbxpreface'));
-              // SIP preface.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_sippreface'));
-
-              // Key and normal features blocks.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features'), 'key_and_normal_features_blocks');
-              // PBX features block.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features_pbx', 'PBX Features'), 'other_features_block');
-              // PBX features block.
-              gv_pages_addFieldToNode($node, $p_data, array('services', 's_business', 'bu_features_sip', 'SIP Features'), 'other_features_block');
-          */  
-
-          // And now Remove original taxonomy fields for Business features.
-          unset($node->content['field_p_bu_features'], $node->content['field_p_bu_features_pbx'], $node->content['field_p_bu_features_sip']);
-        } // End of if (isset($p_data['services']['s_residential'])) {
-
-
-      } // End of if (isset($node->field_p_data['und'][0]['value'])) {
         
         
     break; // End of case 'provider':

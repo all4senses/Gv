@@ -5,9 +5,9 @@
     
 <?php
 
-dpm($content);
-dpm($node->p_data);
-dpm($node);
+//dpm($content);
+//dpm($node->p_data);
+//dpm($node);
 
 ?>
 
