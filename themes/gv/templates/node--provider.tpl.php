@@ -135,7 +135,7 @@
                     </div>
                   </div>
               
-              <?php endif; ?>
+              <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
               
               <div class="bottom-clear"></div>
               
@@ -212,38 +212,34 @@
                 
               </div>
               
+              <?php echo render($content['metatags']); ?>
+          
+          
               
               
+              
+              
+          <?php else: ?> <!-- if ($page): -->
+          
+              <div class="logo">
+                <?php
+                  if (isset($content['field_p_logo'][0]['#item']['uri'])) {
+                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</a></div>'; 
+                  }
+                  else {
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h2>', render($title_suffix);
+                  }
+                ?>
+              </div>
+          
+              <?php echo render($content['body']); ?>
+          
+          
+          
           <?php endif; ?>  <!-- if ($page): -->
            
               
-          <?php
-            // Hide already shown anr render the rest.
-//            hide($content['comments']);
-//            hide($content['links']);
-//            hide($content['field_tags']);
-//            
-//            hide($content['field_p_logo']);
-//            hide($content['i_availability']);
-//            hide($content['i_web']);
-//            hide($content['i_email']);
-//            hide($content['i_founded']);
-//            
-//            hide($content['field_p_name']);
-//            hide($content['field_p_erating']);
-//            hide($content['field_p_erating']);
-//            hide($content['field_p_types']);
-//            hide($content['add_review']);
-//            
-//            
-//            hide($content['reviews_entity_view_1']);
-//
-//            echo render($content);
-          
-          
-              echo render($content['metatags']);
-              //dpm($content);
-          ?>
+          <?php //echo render($content); ?>
           
         </div> <!-- content -->
 
