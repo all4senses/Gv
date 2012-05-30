@@ -22,7 +22,10 @@
   -->
 */
 ?>
-  <div class="partners"><div id="some-logo"></div></div>
+  <div class="partners">
+    <div id="some-logo"></div>
+    <a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a> 
+  </div>
   
   <div class="bottom-clear"></div> 
 </head>
