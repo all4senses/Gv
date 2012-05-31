@@ -369,23 +369,40 @@ function gv_misc_makeRequest_ajax() {
     unset($post['token']);
 
     // Mapping form data to right named fields.
-    $submission = array(
-      'Phones needed' => $post['phones_amt'],
-      'Quote for' => $post['q_for'],
-      'Quote type' => $post['q_type'],
-      'Buying Time Frame' => $post['buying_time'],
-      'First Name' => $post['firstname'],
-      'Last Name' => $post['lastname'],
-      'Company' => $post['company'],
-        
-      'Email' => $post['email'],
-      'Website' => $post['website'],
-      'Phone #' => $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'],
-        
-      'Source' => $post['source'],
-    );
+    if ($post['source'] == 'page') {
+      $submission = array(
+        'Phones needed' => $post['phones_amt'],
+        'Quote for' => $post['q_for'],
+        'Quote type' => $post['q_type'],
+        'Buying Time Frame' => $post['buying_time'],
+        'First Name' => $post['firstname'],
+        'Last Name' => $post['lastname'],
+        'Company' => $post['company'],
+
+        'Email' => $post['email'],
+        'Website' => $post['website'],
+        'Phone #' => $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'],
+
+        'Source' => $post['source'],
+      );
+    }
+    else {
+      $submission = array(
+        'Phones needed' => $post['phones_amt'],
+        'Quote for' => $post['q_for'],
+        'Buying Time Frame' => $post['buying_time'],
+        'Connection type' => $post['connection'],
+        'First Name' => $post['firstname'],
+        'Last Name' => $post['lastname'],
+        'Company' => isset($post['company']) ? $post['company'] : '',
+        'Email' => $post['email'],
+        'Phone #' => $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'],
+        'Notes' => $post['notes'],
+        'Source' => $post['source'],
+      );      
+    }
     
-    $params['request_data'] = $post;//$submission;
+    $params['request_data'] = $submission; // $post;
     /*
     $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
     foreach ($admins as $admin) {
