@@ -397,7 +397,7 @@ function gv_misc_makeRequest_ajax() {
         'Company' => isset($post['company']) ? $post['company'] : '',
         'Email' => $post['email'],
         'Phone #' => $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'],
-        'Notes' => $post['notes'],
+        'Notes' => isset($post['notes']) ? $post['notes'] : '',
         'Source' => $post['source'],
       );      
     }
