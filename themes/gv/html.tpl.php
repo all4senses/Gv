@@ -10,7 +10,7 @@
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <?php $args = arg(); 
-        if ($args[0] == 'node' && isset($args[2]) && $args[2] == 'edit') { $top = TRUE; print $scripts; } 
+        if ($args[0] == 'node' && ($args[1] == 'add' || isset($args[2]) && $args[2] == 'edit')) { $top = TRUE; print $scripts; } 
   ?>
   <!-- IE Fix for HTML5 Tags -->
   <!--[if lt IE 9]>
