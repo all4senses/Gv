@@ -185,10 +185,10 @@ function gv_preprocess_html(&$variables) {
   //dpm($variables);
   //global $user;
   //if ($user->uid == 1) {
-    foreach ($variables['page']['content']['system_main']['nodes'] as $html) {
+    foreach ($variables['page']['content']['system_main']['nodes'] as $key => $html) {
       //dpr($html['body']['#object']->rdf_mapping);
-      if (isset($html['body']['#object']->rdf_mapping['comment_count']['datatype'])) {
-        unset($html['body']['#object']->rdf_mapping['comment_count']['datatype']);
+      if (isset($variables['page']['content']['system_main']['nodes'][$key]['body']['#object']->rdf_mapping['comment_count']['datatype'])) {
+        unset($variables['page']['content']['system_main']['nodes'][$key]['body']['#object']->rdf_mapping['comment_count']['datatype']);
       }
     }
     //die;
