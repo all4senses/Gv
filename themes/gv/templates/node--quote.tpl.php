@@ -7,11 +7,11 @@
   hide($content['field_topics']);
 ?>
 
-<head>
-  <div id="gv-logo">
-    <div class="logo"></div>
-    <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
-  </div>
+
+<div id="gv-logo">
+  <div class="logo"></div>
+  <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
+</div>
 
 <?php 
 /*
@@ -22,13 +22,13 @@
   -->
 */
 ?>
-  <div class="partners">
-    <div id="some-logo"></div>
-    <a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a> 
-  </div>
-  
-  <div class="bottom-clear"></div> 
-</head>
+<div class="partners">
+  <div id="some-logo"></div>
+  <a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a> 
+</div>
+
+<div class="bottom-clear"></div> 
+
 
 <div class="content"<?php print $content_attributes; ?>>
 
