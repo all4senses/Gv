@@ -182,5 +182,6 @@ function gv_preprocess_views_view(&$vars) {
 
 
 function gv_preprocess_html(&$variables) {
-  dpm($variables);
+  dpr($variables);
+  die;
 }
