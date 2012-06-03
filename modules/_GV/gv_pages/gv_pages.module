@@ -90,7 +90,13 @@ function gv_pages_buildTopicsPage($content_type_label) {
   
   if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
     
-    drupal_set_title($preface->title);
+    //drupal_set_title($preface->title);
+    if (isset($preface->metatags['title']) && $preface->metatags['title']) {
+      drupal_set_title($preface->metatags['title']);
+    }
+    else {
+      drupal_set_title($preface->title);
+    }
     
     $preface->title_no_link = TRUE;
     $preface = render(node_view($preface, 'full'));
@@ -2194,10 +2200,17 @@ function gv_pages_node_view($node, $view_mode) {
         
         if (isset($node->metatags) && count($node->metatags)) {
           foreach($node->metatags as $metatag_title => $metatag_data) {
+            
+            // We set title while attaching a preface to a view.
+            // So skip it here...
+            /*
             if ($metatag_title == 'title' && !$metatag_data) {
               $metatag_data = $node->title;
             }
-            gv_misc_addMetatag($metatag_title, $metatag_data['value']);
+            */
+            if ($metatag_title != 'title') {
+              gv_misc_addMetatag($metatag_title, $metatag_data['value']);
+            }
           }
         }
         

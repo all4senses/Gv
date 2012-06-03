@@ -195,15 +195,21 @@ function gv_misc_getStreamUriFromRelativePath($path) {
  */
 function gv_misc_addMetatag($name, $content) {
   if ($content) {
-    $meta = array(
-      '#type' => 'html_tag',
-      '#tag' => 'meta',
-      '#attributes' => array(
-          'name' => $name,
-          'content' => $content,
-      )
-    );
-    drupal_add_html_head($meta, $name);
+    
+    if ($name == 'title') {
+      drupal_set_title($content);
+    }
+    else {
+      $meta = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+            'name' => $name,
+            'content' => $content,
+        )
+      );
+      drupal_add_html_head($meta, $name);
+    }
   }
 }
 
