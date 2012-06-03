@@ -16,16 +16,9 @@
   <?php print $user_picture; ?>
 
 
-  <?php 
-  
-  dpm($title_attributes); 
-  $tmp = preg_replace('/datatype=""/', '', $title_attributes);
-  dpm($tmp);
-  
-  print render($title_prefix); 
-  ?>
+  <?php print render($title_prefix); ?>
 
-    <h1<?php print $title_attributes; ?>>
+    <h1<?php print /*$title_attributes*/preg_replace('/datatype=""/', '', $title_attributes); ?>>
         <?php print $title; ?>
     </h1>
 
