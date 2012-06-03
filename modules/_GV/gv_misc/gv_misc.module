@@ -50,6 +50,16 @@ function gv_misc_menu() {
 
 
 /**
+ * Implements hook_TYPE_alter().
+ * 
+ * Specifically hook_html_head_alter().
+ */
+function gv_misc_html_head_alter(&$object) {
+  dpm($object);
+}
+
+
+/**
  * Implements hook_views_api().
  *
  * @return array
