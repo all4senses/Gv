@@ -3,8 +3,8 @@
   //dpm($node->q_data);
   //dpm($content);
   // Hide comments, tags, and links now so that we can render them later.
-  hide($content['links']);
-  hide($content['field_topics']);
+  //hide($content['links']);
+  //hide($content['field_topics']);
 ?>
 
 
