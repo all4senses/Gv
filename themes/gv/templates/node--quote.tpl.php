@@ -33,7 +33,22 @@
 <div class="content"<?php print $content_attributes; ?>>
 
   <h2>Don't Trust Your Phone System With Just Anyone!</h2>
-  <h1<?php print $title_attributes; ?>><?php print $title; ?></h1>
+  <h1<?php 
+  
+  
+  
+  
+  
+  //http://www.lullabot.com/articles/how-does-rdf-work-drupal-7
+  
+  print /*$title_attributes*/preg_replace('/datatype=".*"/', '', $title_attributes); 
+  
+  
+  
+  
+  
+  
+  ?>><?php print $title; ?></h1>
   <div class="left">
     <?php echo gv_blocks_get_requestQuoteForPage(); ?>
   </div>
