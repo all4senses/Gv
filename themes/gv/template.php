@@ -182,13 +182,14 @@ function gv_preprocess_views_view(&$vars) {
 
 
 function gv_preprocess_html(&$variables) {
-  dpm($variables);
-  global $user;
-  if ($user->uid == 1) {
+  //dpm($variables);
+  //global $user;
+  //if ($user->uid == 1) {
     foreach ($variables['page']['content']['system_main']['nodes'] as $html) {
-      dpr($html['body']['#object']->rdf_mapping);
+      //dpr($html['body']['#object']->rdf_mapping);
+      unset($html['body']['#object']->rdf_mapping['comment_count']['datatype']);
     }
-    die;
-  }
+    //die;
+  //}
   //die;
 }
