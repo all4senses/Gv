@@ -183,15 +183,16 @@ function gv_preprocess_views_view(&$vars) {
 
 function gv_preprocess_html(&$variables) {
   //dpm($variables);
-  //global $user;
-  //if ($user->uid == 1) {
+  global $user;
+  if ($user->uid == 1) {
     foreach ($variables['page']['content']['system_main']['nodes'] as $key => $html) {
-      //dpr($html['body']['#object']->rdf_mapping);
+      dpr($html['body']['#object']->rdf_mapping);
       if (isset($variables['page']['content']['system_main']['nodes'][$key]['body']['#object']->rdf_mapping['comment_count']['datatype'])) {
         unset($variables['page']['content']['system_main']['nodes'][$key]['body']['#object']->rdf_mapping['comment_count']['datatype']);
       }
+      dpr($variables['page']['content']['system_main']['nodes'][$key]['body']['#object']->rdf_mapping);
     }
-    //die;
-  //}
-  //die;
+    die;
+  }
+
 }
