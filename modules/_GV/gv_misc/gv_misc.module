@@ -55,7 +55,7 @@ function gv_misc_menu() {
  * Specifically hook_html_head_alter().
  */
 function gv_misc_html_head_alter(&$object) {
-  dpm($object);
+  //dpm($object);
   if (isset($object['rdf_node_comment_count'])) {
     unset($object['rdf_node_comment_count']['#attributes']['datatype']);
   }
