@@ -726,7 +726,7 @@ function theme_gv_misc_submenuSimple($vars) {
     $out .= '</li>';
     if (!empty($submenu['below'])) {
       // Recursion call.
-      $out .= theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter ));
+      $out .= '<li>' . theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter )) . '</li>';
     }
     $count++;
   }
