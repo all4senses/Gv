@@ -16,7 +16,7 @@
   <?php print $user_picture; ?>
 
 
-  <?php print render($title_prefix); ?>
+  <?php dpm($title_attributes); print render($title_prefix); ?>
 
     <h1<?php print $title_attributes; ?>>
         <?php print $title; ?>
