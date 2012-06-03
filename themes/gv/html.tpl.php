@@ -4,7 +4,7 @@
 <!--[if IE 8]>    <html class="ie8 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
 <!--[if gt IE 8]> <!--> <html class="" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <!--<![endif]-->
 <head>
-  <?php dpm($head); print $head; ?>
+  <?php /*dpm($head);*/ print $head; ?>
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
   <title><?php print $head_title; ?></title>
