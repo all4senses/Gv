@@ -187,7 +187,9 @@ function gv_preprocess_html(&$variables) {
   //if ($user->uid == 1) {
     foreach ($variables['page']['content']['system_main']['nodes'] as $html) {
       //dpr($html['body']['#object']->rdf_mapping);
-      unset($html['body']['#object']->rdf_mapping['comment_count']['datatype']);
+      if (isset($html['body']['#object']->rdf_mapping['comment_count']['datatype'])) {
+        unset($html['body']['#object']->rdf_mapping['comment_count']['datatype']);
+      }
     }
     //die;
   //}
