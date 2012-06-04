@@ -1212,7 +1212,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
 //          $form['#suffix'] = '</div></fieldset>';
 //        }
-        if (in_array('administrator', $user->roles)) {
+        if ($current_user_is_admin) {
           $form['about_you']['user_ip_show'] = array(
               '#type' => 'item',
               '#title' => t('User IP'),
@@ -1317,16 +1317,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['ureview']['pros']['#default_value'] = $other_data['pros'];
           $form['ureview']['cons']['#default_value'] = $other_data['cons'];
           
-          if (in_array('administrator', $user->roles)) {
+          $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
+          if ($current_user_is_admin) {
             $form['about_you']['user_ip_show'] = array(
                 '#type' => 'item',
                 '#title' => t('User IP'),
-                '#markup' => $other_data['user_ip'],
+                '#markup' => $user_ip,
             );
           }
           $form['user_ip'] = array(
             '#type' => 'hidden',
-            '#value' => $other_data['user_ip'],
+            '#value' => $user_ip,
           );
         }
 
