@@ -989,6 +989,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#type' => 'checkbox',
             '#title' => t('This review is approved'),
             '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
+            '#weight' => 30,
           );
         }
         elseif(arg(1) != 'add') {
@@ -996,6 +997,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#type' => 'item',
             '#title' => t('Approval status for this review:'),
             '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
+            '#weight' => 30,
           );
         }
       }
