@@ -501,8 +501,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             $form['data_info']['i_web_display'] = array(
               '#type' => 'textfield',
-              '#title' => t('Web Site'),
-              '#description' => t('If this field is empty, Web Site field content will be shown without http(s)://'),
+              '#title' => t('Display Website as'),
+              '#description' => t('If empty, Web Site field content will be used, without http(s)://'),
               '#default_value' => isset($p_data['info']['i_web_display']) ? $p_data['info']['i_web_display'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
             );
