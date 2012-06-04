@@ -1121,11 +1121,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['ureview']['rating_recommend'] = array(
               //'#type' => 'select',
               '#type' => 'radios',
-              '#title' => t(RECOMMEND),
+              //'#title' => t(RECOMMEND),
               '#options' => $rating_recommend_options,
               '#default_value' => FALSE,
               //'#weight' => $weight++,
               //'#required' => TRUE,
+              '#prefix' => '<div class="label left">' . t(RECOMMEND) . '</div>',
           );
       
           $form['ureview']['pros'] = array(
