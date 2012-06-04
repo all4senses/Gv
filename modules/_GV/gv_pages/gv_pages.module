@@ -967,7 +967,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
-      $form['title']['#weight'] = -6;
+      $form['title']['#weight'] = -1;
       if (!in_array('administrator', $user->roles)) {
         $form['title']['#access'] = FALSE;
       }
@@ -1094,7 +1094,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Step 3: Rate and Review Your VoIP Provider'),
         //'#collapsible' => TRUE,
         //'#collapsed' => FALSE,
-        '#weight' => 4,
+        '#weight' => -4,
       );
           
           $form['ureview']['votes'] = array(
