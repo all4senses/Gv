@@ -65,7 +65,7 @@
                 
                 //dpm($submitted);
                 
-                //echo $submitted;
+                echo $submitted;
               }
               else {
                 echo $created_str;
