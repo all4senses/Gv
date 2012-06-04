@@ -1064,13 +1064,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
           $form['field_r_data']['#access'] = FALSE;
+          
+          
           $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
           $form['provider']['lines'] = array(
             '#type' => 'radios',
-            '#title' => t('How many lines do you have:'),
+            //'#title' => t('How many lines do you have:'),
             '#options' => $lines_options,
             '#default_value' => FALSE,
             '#weight' => 10,
+            '#prefix' => '<div class="label">' . t('How many lines do you have:') . '</div>',
           );
           
           
