@@ -44,6 +44,9 @@
 
           <span class="submitted">
             <?php 
+              
+              dpm($submitted);
+              
               $created_str = date('F d, Y \a\t g:sa', $node->created); 
               if ($page) {
                 $created_str = '<span class="delim">|</span>' . $created_str;
