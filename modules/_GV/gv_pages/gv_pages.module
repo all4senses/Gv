@@ -1205,6 +1205,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
 //          $form['#suffix'] = '</div></fieldset>';
 //        }
+        if (in_array('administrator', $user->roles)) {
+          $form['about_you']['user_ip_show'] = array(
+              '#type' => 'item',
+              '#title' => t('User IP'),
+              '#markup' => $_SERVER['REMOTE_ADDR'],
+          );
+        }
+        $form['user_ip'] = array(
+          '#type' => 'hidden',
+          '#value' => $_SERVER['REMOTE_ADDR'],
+        );
         
         
         // Set a select of available providers.
@@ -1285,10 +1296,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
         } // End of if($provider_nid) { // // If a target provider has been defined by id from url or by referrer (previous) page,
         
-        $form['user_ip'] = array(
-          '#type' => 'hidden',
-          '#value' => $_SERVER['REMOTE_ADDR'],
-        );
+        
       } // End of if(arg(1) == 'add') {
       else {
         // Edit a review page.
@@ -1301,6 +1309,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['lines']['#default_value'] = $other_data['lines'];
           $form['ureview']['pros']['#default_value'] = $other_data['pros'];
           $form['ureview']['cons']['#default_value'] = $other_data['cons'];
+          
+          if (in_array('administrator', $user->roles)) {
+            $form['about_you']['user_ip_show'] = array(
+                '#type' => 'item',
+                '#title' => t('User IP'),
+                '#markup' => $other_data['user_ip'],
+            );
+          }
           $form['user_ip'] = array(
             '#type' => 'hidden',
             '#value' => $other_data['user_ip'],
