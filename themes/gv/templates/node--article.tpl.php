@@ -45,10 +45,11 @@
           <span class="submitted">
             <?php 
               
-              dpm($submitted);
+              //dpm($submitted);
               
               $created_str = date('F d, Y \a\t g:sa', $node->created); 
               if ($page) {
+                /*
                 $created_str = '<span class="delim">|</span>' . $created_str;
                 global $user;
                 if ($user->uid && $node->uid) {
@@ -61,14 +62,16 @@
                 else {
                   $submitted = preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                 }
-                
-                dpm($submitted);
+                */
+                //dpm($submitted);
                 
                 echo $submitted;
               }
               else {
                 echo $created_str;
               }
+              
+            
               //dpm($node);
               //dpm($content);
               //dpm($content['comments']);
