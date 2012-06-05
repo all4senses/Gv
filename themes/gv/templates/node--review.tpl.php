@@ -32,7 +32,7 @@
                     <?php endif; ?>
                         
                       <?php 
-                        echo ($_GET['q'] == 'providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['safe_value'] . ': ' : '') . $title; 
+                        echo ($_GET['q'] == 'providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['safe_value'] . ' ' . t('Review') . ' - ' : '') . $title; 
                         //if ($page) {
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
