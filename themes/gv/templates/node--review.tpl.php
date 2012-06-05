@@ -21,7 +21,7 @@
                 <?php print render($title_prefix); ?>
                 
                 <?php if ($page): ?>
-                  <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?>:</span><h1 property="v:summary" 
+                  <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" 
                 <?php else: ?>
                   <h2
                 <?php endif; ?>
