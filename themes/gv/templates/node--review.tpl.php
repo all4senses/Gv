@@ -33,9 +33,9 @@
                         
                       <?php 
                         echo ($_GET['q'] == 'providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['safe_value'] . ': ' : '') . $title; 
-                        if ($page) {
-                          drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
-                        }
+                        //if ($page) {
+                        //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
+                        //}
                       ?>
                     <?php if (!$page): ?>
                       </a>
@@ -84,7 +84,7 @@
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> ' , $node->field_r_rating_overall['und'][0]['value'] /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> <span property="v:rating">' , $node->field_r_rating_overall['und'][0]['value'], '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
               <?php if (!$page): ?>
                 <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
