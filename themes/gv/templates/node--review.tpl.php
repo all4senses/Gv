@@ -20,8 +20,8 @@
                 
                 <?php print render($title_prefix); ?>
                 
-                <?php if ($page): ?>
-                  <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" 
+                <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
+                  <h1 property="v:summary" 
                 <?php else: ?>
                   <h2
                 <?php endif; ?>
@@ -31,7 +31,7 @@
                       <a href="<?php print $node_url; ?>">
                     <?php endif; ?>
                         
-                      <?php echo ($_GET['q'] == 'providers/reviews' ? $node->field_r_provider_name['und'][0]['safe_value'] . ': ' : '') . $title; ?>
+                      <?php echo ($_GET['q'] == 'providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['safe_value'] . ': ' : '') . $title; ?>
                         
                     <?php if (!$page): ?>
                       </a>
@@ -115,7 +115,7 @@
           <div class="links">
             <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
             <!--<span class="delim">|</span> -->
-            <?php echo ($page || $_GET['q'] == 'providers/reviews' ? l(t('View All !p Reviews', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), 'node/' . $node->field_ref_provider['und'][0]['target_id']) . '<span class="delim">|</span>' . l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>' : l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>') . l(t('Write a Review'), 'node/add/review'); ?>
+            <?php echo ($page || $_GET['q'] == 'providers/reviews' ? l(t('View All !p Reviews', array('!p' => '<span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')), 'node/' . $node->field_ref_provider['und'][0]['target_id']) . '<span class="delim">|</span>' . l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>' : l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>') . l(t('Write a Review'), 'node/add/review'); ?>
           </div>
            
               
