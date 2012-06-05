@@ -12,7 +12,7 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-  <div class="main-content">
+  <div class="main-content"  xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review">
     
             <?php if (!$page): ?>
               <header>
@@ -21,7 +21,7 @@
                 <?php print render($title_prefix); ?>
                 
                 <?php if ($page): ?>
-                  <h1
+                  <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?>:</span><h1 property="v:summary" 
                 <?php else: ?>
                   <h2
                 <?php endif; ?>
