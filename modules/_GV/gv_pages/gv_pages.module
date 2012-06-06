@@ -354,13 +354,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     
     case 'article_node_form':
-        dpm($form);
+        
         $form['actions']['save_draft'] = array(
           '#type' => 'submit',
           '#value' => 'Save Draft',
           '#submit' => array('node_form_submit'),
           '#weight' => 6,
         );
+      
+        $form['#validate'][] = 'gv_pages_validateForm_article';
+        dpm($form);
+        
       break;
     
     
@@ -1487,6 +1491,26 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
     break;
   }
+}
+
+
+
+
+
+/**
+ * Custom validate of article type form.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_article(&$form, &$form_state) {
+  dpm($form_state['values']);
 }
 
 
