@@ -1510,17 +1510,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
  *   Return nothing.
  */
 function gv_pages_submitForm_article(&$form, &$form_state) {
-  dpm($form_state['values']);
+
   if ($form_state['values']['op'] == 'Save Draft') {
-
-      //dpr($form_state['values']);
-      //dpr($form['options']);
-      //die;
-      //$form_state['values']['status'] = 0;
+    $form_state['values']['status'] = 0;
+    drupal_set_message(t('Attention! This article is saved as draft and is not published now!'), 'warning');
+      // Doesn't work
       //form_set_value($form['options'], array('status' => array('#default_value' => 0)), $form_state);
-
-
-    form_set_value($form['options']['status'], array('#default_value' => 0), $form_state);
+      //form_set_value($form['options']['status'], array('#default_value' => 0), $form_state);
+  }
+  else {
+    $form_state['values']['status'] = 1;
   }
 }
 
