@@ -102,7 +102,7 @@
                 
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
-                  <div class="caption"><?php echo t('Company !p Info:', array('!p' => '<span property="v:itemreviewed">' . $content['field_p_name'][0]['#markup'] . '</span>')); ?></div>
+                  <div class="caption"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $content['field_p_name'][0]['#markup'] . '</span>')); ?></div>
                   <div><?php echo '<span class="title">' . t('Headquarters') . ':</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $node->p_data['info']['i_founded']; ?></div>
                   <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $node->p_data['info']['i_availability']; ?></div>
