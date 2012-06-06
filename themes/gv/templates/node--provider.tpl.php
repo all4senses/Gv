@@ -50,7 +50,7 @@
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    echo '<div class="logo" rel="v:photo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</a></div>'; 
+                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
                   }
                   else {
                     //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
