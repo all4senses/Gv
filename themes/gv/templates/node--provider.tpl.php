@@ -11,21 +11,21 @@
 
 ?>
 
-  <?php if ($page): ?>
-      <?php print render($title_prefix); ?>
-      <h1<?php print $title_attributes; ?>>
-            <?php 
-              print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
-            ?>
-      </h1>
-      <?php print render($title_suffix); ?>
-  <?php endif; ?>
+
 
         
-  <div class="main-content">
+  <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
-    
-        <?php if (!$page): ?>
+        <?php if ($page): ?>
+          <?php print render($title_prefix); ?>
+          <h1<?php print $title_attributes; ?> property="v:summary">
+                <?php 
+                  print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
+                ?>
+          </h1>
+          <?php print render($title_suffix); ?>
+   
+        <?php else: ?>
           <header>
         
             <?php print render($title_prefix); ?>
@@ -146,7 +146,7 @@
               <div class="data tabs">
                 
                 <ul>
-                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? $content['field_p_name'][0]['#markup'] : t(' Provider') )); ?></a></li>
+                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? '<span property="v:itemreviewed">' . $content['field_p_name'][0]['#markup'] . '</span>' : t(' Provider') )); ?></a></li>
                   <li><a href="#tabs-2"><?php echo t('Features & Pricing'); ?></a></li>
                 </ul>
                 <div id="tabs-1">
