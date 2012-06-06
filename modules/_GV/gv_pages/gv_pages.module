@@ -2143,6 +2143,7 @@ function gv_pages_node_view($node, $view_mode) {
         $votes = votingapi_select_results($criteria);
         $criteria['function'] = 'count';
         $counts = votingapi_select_results($criteria);
+        $node->gv_voters = $counts[0]['value'];
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
 
         
@@ -2527,11 +2528,12 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     }
     
     // Voters count.
-    if ($counts) {
-      $node->content['gv_voters'] = array(
-          '#markup' => '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $counts[0]['value'] . '</div></div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
-      );
-    }
+    // Has been set before, via $node->gv_voters
+//    if ($counts) {
+//      $node->content['gv_voters'] = array(
+//          '#markup' => '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $counts[0]['value'] . '</div></div>', // . (isset($counts[$key]['tag']) ? '<div class="gv_voters">' . t('Voters') . ': ' . $counts[$key]['value'] . '</div>' : '')
+//      );
+//    }
     
 //    if ($overall_vote) {
 //      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . t(OVERALL) . $semicolon . '</div>' 

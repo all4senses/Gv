@@ -127,7 +127,7 @@
                   <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
                   <div class="overall"> 
                     <div class="text">
-                      <?php echo render($content['gv_voters']); ?>
+                      <?php echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count" property="v:count">' . $node->gv_voters . '</div></div>'; ?>
                       <?php echo render($content['gv_recommend']); ?>
                       <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?></div>
                     </div>
