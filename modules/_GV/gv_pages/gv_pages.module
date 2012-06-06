@@ -1512,15 +1512,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 function gv_pages_submitForm_article(&$form, &$form_state) {
   dpm($form_state['values']);
   if ($form_state['values']['op'] == 'Save Draft') {
-    dpm($form);
-    global $user;
-    if ($user->uid == 1) {
+
       //dpr($form_state['values']);
       //dpr($form['options']);
       //die;
-      $form_state['values']['status'] = 0;
-    }
-    //form_set_value($form['options'], array('status' => array('#default_value' => 0)), $form_state);
+      //$form_state['values']['status'] = 0;
+      form_set_value($form['options'], array('status' => array('#default_value' => 0)), $form_state);
+
+
     //form_set_value($form['options']['status'], array('#default_value' => 0), $form_state);
   }
 }
