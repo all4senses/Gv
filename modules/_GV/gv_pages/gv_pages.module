@@ -2549,7 +2549,9 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     
     if ($overall_vote) {
       //$node->content['gv_rating_overall']['#markup'] .= '<div class="gv_vote overall"><div class="title">' . $node->field_p_name['und'][0]['safe_value'] . ' ' . t('Overall Rated') . ':</div><div>' . $overall_vote['value'] . '</div></div>';
-      $node->content['gv_rating_overall']['#markup'] = '<div class="count">' . number_format($overall_vote['value'] * 0.05, 1) . '</div>';
+      
+      //$node->content['gv_rating_overall']['#markup'] = '<div class="count">' . number_format($overall_vote['value'] * 0.05, 1) . '</div>';
+      $node->gv_rating_overall = number_format($overall_vote['value'] * 0.05, 1);
     }
     
     
