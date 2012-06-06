@@ -1515,7 +1515,8 @@ function gv_pages_submitForm_article(&$form, &$form_state) {
     dpm($form);
     global $user;
     if ($user->uid == 1) {
-      dpr($form_state);
+      dpr($form_state['values']);
+      dpr($form);
       die;
     }
     //form_set_value($form['options'], array('status' => array('#default_value' => 0)), $form_state);
