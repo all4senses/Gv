@@ -100,13 +100,14 @@
                 
               </div> <!-- <div class="logo share">-->
                 
-              <div class="basic-info">
-                <div class="caption"><?php echo t('Company Info:'); ?></div>
-                <div><?php echo '<span class="title">' . t('Headquarters') . ':</span>' . $node->p_data['info']['i_heads']; ?></div>
-                <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $node->p_data['info']['i_founded']; ?></div>
-                <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $node->p_data['info']['i_availability']; ?></div>
-                <div><?php if (!$node->p_data['info']['i_web_hide']) echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web']); ?></div>
-                
+              <div class="basic-info" rel="v:itemreviewed">
+                <div typeof="Organization">
+                  <div class="caption"><?php echo t('Company !p Info:', array('!p' => '<span property="v:itemreviewed">' . $content['field_p_name'][0]['#markup'] . '</span>')); ?></div>
+                  <div><?php echo '<span class="title">' . t('Headquarters') . ':</span>' . $node->p_data['info']['i_heads']; ?></div>
+                  <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $node->p_data['info']['i_founded']; ?></div>
+                  <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $node->p_data['info']['i_availability']; ?></div>
+                  <div><?php if (!$node->p_data['info']['i_web_hide']) echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web']); ?></div>
+                </div>
               </div>
              
               <div class="image">
@@ -146,7 +147,7 @@
               <div class="data tabs">
                 
                 <ul>
-                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? '<span property="v:itemreviewed">' . $content['field_p_name'][0]['#markup'] . '</span>' : t(' Provider') )); ?></a></li>
+                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? /*'<span property="v:itemreviewed">' .*/ $content['field_p_name'][0]['#markup'] /*. '</span>'*/ : t(' Provider') )); ?></a></li>
                   <li><a href="#tabs-2"><?php echo t('Features & Pricing'); ?></a></li>
                 </ul>
                 <div id="tabs-1">
