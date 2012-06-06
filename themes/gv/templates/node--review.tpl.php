@@ -88,7 +88,7 @@
             <div class="rate-other">
               <?php if (!$page): ?>
                 <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div>' , date('F j, Y', $node->created) , '</div>'; ?></div>
-                <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div>' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
               <?php endif; ?>
               <div class="text"><?php echo render($content['gv_recommend']); ?></div>
             </div>
