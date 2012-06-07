@@ -53,7 +53,14 @@
     <?php 
       dpm($title);
       dpm($_SERVER);
-      echo gv_blocks_get_requestQuoteForPage(); 
+      
+      if ($_SERVER['REDIRECT_URL'] != '/request-voip-phone-system-quote-final') {
+        echo gv_blocks_get_requestQuoteForPage(); 
+      }
+      else {
+        echo '<div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a>.</p>') . '</div>';
+      }
+      
     ?>
   </div>
   <div class="center">
@@ -117,6 +124,24 @@
   <div class="copy">BizMedia Central LLC | New York, NY</div>
 </footer>
 
- 
-
+<?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?> 
+  <!-- Google Code for Landing Page Conversion Page -->
+  <script type="text/javascript">
+  /* <![CDATA[ */
+  var google_conversion_id = 944838791;
+  var google_conversion_language = "en";
+  var google_conversion_format = "3";
+  var google_conversion_color = "ffffff";
+  var google_conversion_label = "HO_ZCOH81gMQh7HEwgM";
+  var google_conversion_value = 0;
+  /* ]]> */
+  </script>
+  <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+  </script>
+  <noscript>
+  <div style="display:inline;">
+  <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=HO_ZCOH81gMQh7HEwgM&amp;guid=ON&amp;script=0"/>
+  </div>
+  </noscript>
+<?php endif;?>
   
