@@ -51,38 +51,46 @@
   ?>><?php print $title; ?></h1>
   <div class="left">
     <?php 
-      
-      //dpm($_SERVER);
-      
-      if ($_SERVER['REDIRECT_URL'] != '/request-voip-phone-system-quote-final') {
-        echo gv_blocks_get_requestQuoteForPage(); 
-      }
-      else {
+      if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final') {
         echo '<div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
       }
-      
+      else {
+        echo gv_blocks_get_requestQuoteForPage(); 
+      }
     ?>
   </div>
-  <div class="center">
-    <?php echo render($content['field_q_image']); ?>
-    <div class="quote">"We found a VoIP company that offers us more features at a much better price"</div>
-    <div class="author">Rick Miller - Acme Inc</div>
-  </div>
-  <div class="right">
-    <div class="options">
-      <div class="option">Top Rated Providers</div>
-      <div class="option">HD Quality Service</div>
-      <div class="option">No Contracts</div>
-      <div class="option">Robust VoIP Services</div>
-      <div class="option">Accredited BBB Companies</div>
-      <div class="option">Unlimited Calling</div>
-      <div class="option">Designed For Business</div>
+  
+  <?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?>
+    <div class="right-final">
+      <?php 
+        echo render($content['field_q_image']); 
+        echo '<div class="link">' . l(t('Learn more'), '<front>') . '</div>';
+      ?>
     </div>
-    <div id="right-bottom">
-      <div class="image"></div>
-      <div class="links">Be smart. Read reviews. <br/>Get facts. Save money!</div>
+  <?php else: ?>
+  
+    <div class="center">
+      <?php echo render($content['field_q_image']); ?>
+      <div class="quote">"We found a VoIP company that offers us more features at a much better price"</div>
+      <div class="author">Rick Miller - Acme Inc</div>
     </div>
-  </div>
+    <div class="right">
+      <div class="options">
+        <div class="option">Top Rated Providers</div>
+        <div class="option">HD Quality Service</div>
+        <div class="option">No Contracts</div>
+        <div class="option">Robust VoIP Services</div>
+        <div class="option">Accredited BBB Companies</div>
+        <div class="option">Unlimited Calling</div>
+        <div class="option">Designed For Business</div>
+      </div>
+      <div id="right-bottom">
+        <div class="image"></div>
+        <div class="links">Get smarter. Read reviews. <br/>Get facts. Save money!</div>
+      </div>
+    </div>
+  
+  <?php endif; ?>
   
   <?php
     //print render($content);
@@ -145,7 +153,7 @@
     </div>
     </noscript>
   <?php else:?>
-    <script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>
+    <!--<script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>-->
   <?php endif;?>
 <?php endif;?>
   
