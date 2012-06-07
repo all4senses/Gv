@@ -64,7 +64,7 @@
     <div class="right-final">
       <?php 
         echo render($content['field_q_image']); 
-        echo '<h2>' . t('GET ACCESS TO THE LARGEST VOIP FOOTPRINT IN THE NATION!') . '</h2><><div class="link">' . l(t('Learn more'), '<front>') . '</div>';
+        echo '<h2>' . t('GET ACCESS TO THE LARGEST VOIP FOOTPRINT IN THE NATION!') . '</h2><div class="link">' . l(t('Learn more'), '<front>') . '</div>';
       ?>
     </div>
   <?php else: ?>
