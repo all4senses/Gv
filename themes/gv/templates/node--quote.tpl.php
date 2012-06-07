@@ -153,7 +153,7 @@
     </div>
     </noscript>
   <?php else:?>
-    <!--<script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>-->
+    <script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>
   <?php endif;?>
 <?php endif;?>
   
