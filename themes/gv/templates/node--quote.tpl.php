@@ -51,8 +51,8 @@
   ?>><?php print $title; ?></h1>
   <div class="left">
     <?php 
-      dpm($title);
-      dpm($_SERVER);
+      
+      //dpm($_SERVER);
       
       if ($_SERVER['REDIRECT_URL'] != '/request-voip-phone-system-quote-final') {
         echo gv_blocks_get_requestQuoteForPage(); 
@@ -124,7 +124,7 @@
   <div class="copy">BizMedia Central LLC | New York, NY</div>
 </footer>
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final' && $_SERVER['HTTP_REFERER'] == 'http://getvoip.com/request-voip-phone-system-quote'): ?> 
   <!-- Google Code for Landing Page Conversion Page -->
   <script type="text/javascript">
   /* <![CDATA[ */
@@ -143,5 +143,7 @@
   <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=HO_ZCOH81gMQh7HEwgM&amp;guid=ON&amp;script=0"/>
   </div>
   </noscript>
+<?php else:?>
+  <script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>
 <?php endif;?>
   
