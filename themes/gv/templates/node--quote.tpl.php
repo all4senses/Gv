@@ -64,7 +64,7 @@
     <div class="right-final">
       <?php 
         echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
-        echo '<h2>' , t('GET ACCESS<br/> TO THE LARGEST VOIP<br/> FOOTPRINT IN THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>';
+        echo '<h2>' , t('GET ACCESS TO THE LARGEST<br/> VOIP FOOTPRINT IN<br/> THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>';
       ?>
     </div>
   <?php else: ?>
