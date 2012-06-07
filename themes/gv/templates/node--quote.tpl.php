@@ -50,7 +50,11 @@
   
   ?>><?php print $title; ?></h1>
   <div class="left">
-    <?php echo gv_blocks_get_requestQuoteForPage(); ?>
+    <?php 
+      dpm($title);
+      dpm($_SERVER);
+      echo gv_blocks_get_requestQuoteForPage(); 
+    ?>
   </div>
   <div class="center">
     <?php echo render($content['field_q_image']); ?>
