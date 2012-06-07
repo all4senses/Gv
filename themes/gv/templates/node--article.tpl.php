@@ -45,7 +45,7 @@
           <span class="submitted">
             <?php 
               
-              //dpm($submitted);
+              dpm($submitted);
               
               $created_str = date('F d, Y \a\t g:sa', $node->created); 
               if ($page) {
