@@ -76,13 +76,15 @@
                 */
                 
                 if ($node->uid) {
+                  global $language;
                   $author = user_load($node->uid);
+                  dpm($author);
                   $author_name = $author->realname;
                   $author_url = url('user/' . $node->uid);
                   
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   t('By') .
-                                  '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
+                                  '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
                                   '</a>' .
                                   $created_str .
