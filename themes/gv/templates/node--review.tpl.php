@@ -113,7 +113,7 @@
               </div>
             <?php endif; ?>
             
-            <?php echo '<span property="v:description">' . render($content['body']) . '</span>'; ?>
+            <?php echo '<div property="v:description">' . render($content['body']) . '</div>'; ?>
           </div>
           <div class="bottom-clear"></div>
           <div class="links">
