@@ -45,7 +45,7 @@
           <span class="submitted">
             <?php 
               
-              dpm($submitted);
+              //dpm($submitted);
               
               
               //<span property="dc:date dc:created" content="2012-05-23T17:33:06-04:00" datatype="xsd:dateTime" rel="sioc:has_creator">
