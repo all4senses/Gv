@@ -58,7 +58,7 @@
               //dpm($def_vars['user']);
 
               //dpm($def_vars['node']);
-              $cre = preg_replace('|(.*)content=\"(.*)\"s(.*)|', '$2', $date);
+              $cre = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date);
               dpm($cre);
               $created_str = date('F d, Y \a\t g:ia', $node->created); 
               $created_rdf = date('Y-m-d\TH:i:s', $node->created); 
