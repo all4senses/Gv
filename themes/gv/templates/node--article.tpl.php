@@ -95,7 +95,7 @@
                                   '<span class="username">' .
                                     t('Guest') .
                                   '</span>' .
-                                  '<span class="delim">|</span>' . $created_str .
+                                  $created_str .
                                '</span>';
                   
                 }
