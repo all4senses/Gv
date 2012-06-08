@@ -46,8 +46,8 @@
             <?php 
               
               dpm($submitted);
-              $author = user_load($node->uid);
-              dpm($author);
+              
+              
               //<span property="dc:date dc:created" content="2012-05-23T17:33:06-04:00" datatype="xsd:dateTime" rel="sioc:has_creator">
               //  Published by 
               //    <a href="/users/rubenyun" title="View user profile." class="username" xml:lang="" about="/users/rubenyun" typeof="sioc:UserAccount" property="foaf:name">
@@ -57,9 +57,11 @@
                 
               $created_str = date('F d, Y \a\t g:sa', $node->created); 
               $created_rdf = date('Y-m-d\TH:i:s', $node->created); 
+              
               if ($page) {
                 
                 $created_str = '<span class="delim">|</span>' . $created_str;
+                /*
                 global $user;
                 if ($user->uid && $node->uid) {
                   $submitted = preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
@@ -71,19 +73,34 @@
                 else {
                   $submitted = preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                 }
+                */
                 
-                $author_url = url('user/' . $node->uid);
-                if ($user->uid == 1) {
-                  echo '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">',
-                          t('By'),
-                          '<a href="' , $author_url, '" title="View user profile." class="username" xml:lang="" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">',
-                            $author->realname,
-                          '</a>',
-                          '<span class="delim">|</span>' . $created_str,
-                      '</span>';
+                if ($node->uid) {
+                  $author = user_load($node->uid);
+                  $author_name = $author->realname;
+                  $author_url = url('user/' . $node->uid);
+                  
+                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  t('By') .
+                                  '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
+                                    $author_name .
+                                  '</a>' .
+                                  '<span class="delim">|</span>' . $created_str .
+                               '</span>';
+                  
                 }
-                //dpm($submitted);
+                else {
+                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  t('By') .
+                                  '<span class="username">' .
+                                    $author_name .
+                                  '</span>' .
+                                  '<span class="delim">|</span>' . $created_str .
+                               '</span>';
+                  
+                }
                 
+                //dpm($submitted);
                 echo $submitted;
               }
               else {
