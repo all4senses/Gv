@@ -46,7 +46,15 @@
             <?php 
               
               dpm($submitted);
-              
+              $author = user_load($node->uid);
+              dpm($author);
+              //<span property="dc:date dc:created" content="2012-05-23T17:33:06-04:00" datatype="xsd:dateTime" rel="sioc:has_creator">
+              //  Published by 
+              //    <a href="/users/rubenyun" title="View user profile." class="username" xml:lang="" about="/users/rubenyun" typeof="sioc:UserAccount" property="foaf:name">
+              //      Reuben Yonatan
+              //    </a> on Wed, 05/23/2012 - 17:33
+              //</span>
+                
               $created_str = date('F d, Y \a\t g:sa', $node->created); 
               if ($page) {
                 
@@ -63,6 +71,15 @@
                   $submitted = preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                 }
                 
+                /*
+                echo '<span property="dc:date dc:created" content="' . '2012-05-23T17:33:06-04:00' . '" datatype="xsd:dateTime" rel="sioc:has_creator">',
+                        t('By'),
+                        '<a href="' . '/users/rubenyun' . '" title="View user profile." class="username" xml:lang="" about="' . '/users/rubenyun' . '" typeof="sioc:UserAccount" property="foaf:name">',
+                          'Reuben Yonatan',
+                        '</a>',
+                        '<span class="delim">|</span>' . $created_str,
+                     '</span>';
+                 */
                 //dpm($submitted);
                 
                 echo $submitted;
