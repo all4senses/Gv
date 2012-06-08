@@ -64,7 +64,7 @@
                   $submitted = preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
                 }
                 */
-                
+                /*
                 if ($node->uid) {
                   global $language;
                   $author = user_load($node->uid);
@@ -73,7 +73,7 @@
                   $author_url = url('user/' . $node->uid);
                   $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
                   
-                  /*
+
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   t('By') .
                                   '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
@@ -82,16 +82,7 @@
                                   '<span class="delim">|</span>' . $created_str .
                                '</span>';
                   
-                  */
-                   $submitted = '<span>' .
-                                  t('By') .
-                                  '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount">' .
-                                    $author_name .
-                                  '</a>' . $gplus_profile .
-                                  '<span class="delim">|</span><span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" >' . 
-                                    '<time datetime="' . $created_rdf . '" pubdate="pubdate">' . $created_str . '</time>' .
-                                  '</span>' .
-                               '</span>';
+
                   
                 }
                 else {
@@ -104,7 +95,7 @@
                                '</span>';
                   
                 }
-                
+                */
                 //dpm($submitted);
                 echo $submitted;
               }
