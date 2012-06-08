@@ -89,7 +89,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   }
   
   if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
-    
+    dpm($preface);
     //drupal_set_title($preface->title);
     if (isset($preface->metatags['title']) && $preface->metatags['title']) {
       drupal_set_title($preface->metatags['title']);
