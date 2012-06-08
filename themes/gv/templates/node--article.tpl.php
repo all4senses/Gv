@@ -46,7 +46,8 @@
             <?php 
               
               dpm($submitted);
-              $created_str = date('F d, Y \a\t g:sa', $node->created); 
+              dpm(get_defined_vars());
+              $created_str = date('F d, Y \a\t g:ia', $node->created); 
               $created_rdf = date('Y-m-d\TH:i:s', $node->created); 
               
               if ($page) {
