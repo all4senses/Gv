@@ -73,8 +73,16 @@
                   $author_url = url('user/' . $node->uid);
                   $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
                   
-
+                  /*
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  t('By') .
+                                  '<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
+                                    $author_name .
+                                  '</a>' . $gplus_profile .
+                                  '<span class="delim">|</span>' . $created_str .
+                               '</span>';
+                  */
+                  $submitted = '<span property="dc:date dc:created">' .
                                   t('By') .
                                   '<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
