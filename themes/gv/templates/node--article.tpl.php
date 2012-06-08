@@ -88,7 +88,9 @@
                                   '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount">' .
                                     $author_name .
                                   '</a>' . $gplus_profile .
-                                  '<span class="delim">|</span><span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" >' . $created_str . '</span>' .
+                                  '<span class="delim">|</span><span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" >' . 
+                                    '<time datetime="' . $created_rdf . '" pubdate="pubdate">' . $created_str . '</time>' .
+                                  '</span>' .
                                '</span>';
                   
                 }
