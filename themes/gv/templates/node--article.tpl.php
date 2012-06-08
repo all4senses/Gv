@@ -85,7 +85,7 @@
                                   '<a href="' . $author_url . '" title="View user profile." class="username" xml:lang="" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
                                   '</a>' .
-                                  '<span class="delim">|</span>' . $created_str .
+                                  $created_str .
                                '</span>';
                   
                 }
