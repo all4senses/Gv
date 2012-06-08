@@ -21,12 +21,12 @@
                 <?php print render($title_prefix); ?>
                 
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
-                  <h1 property="v:summary" 
+                  <h1 property="dc:title v:summary" 
                 <?php else: ?>
-                  <h2 property="v:summary" 
+                  <h2 property="dc:title v:summary" 
                 <?php endif; ?>
                   
-                <?php print $title_attributes; ?>>
+                <?php /*print $title_attributes;*/ ?>>
                     <?php if (!$page): ?>
                       <a href="<?php print $node_url; ?>">
                     <?php endif; ?>
