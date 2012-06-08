@@ -46,15 +46,6 @@
             <?php 
               
               //dpm($submitted);
-              
-              
-              //<span property="dc:date dc:created" content="2012-05-23T17:33:06-04:00" datatype="xsd:dateTime" rel="sioc:has_creator">
-              //  Published by 
-              //    <a href="/users/rubenyun" title="View user profile." class="username" xml:lang="" about="/users/rubenyun" typeof="sioc:UserAccount" property="foaf:name">
-              //      Reuben Yonatan
-              //    </a> on Wed, 05/23/2012 - 17:33
-              //</span>
-                
               $created_str = date('F d, Y \a\t g:sa', $node->created); 
               $created_rdf = date('Y-m-d\TH:i:s', $node->created); 
               
@@ -78,7 +69,7 @@
                 if ($node->uid) {
                   global $language;
                   $author = user_load($node->uid);
-                  //dpm($author);
+                  
                   $author_name = $author->realname;
                   $author_url = url('user/' . $node->uid);
                   $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
@@ -110,10 +101,6 @@
                 echo $created_str;
               }
               
-            
-              //dpm($node);
-              //dpm($content);
-              //dpm($content['comments']);
             ?>
           </span>
 
