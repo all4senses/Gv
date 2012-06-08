@@ -47,18 +47,18 @@
             
               global $user;
               dpm($user);
-              dpm($submitted);
+              //dpm($submitted);
               dpm(array_keys(get_defined_vars()));
               
               $def_vars = get_defined_vars();
-              dpm($def_vars['display_submitted']);
-              dpm($def_vars['submitted']);
-              dpm($def_vars['created']);
+              //dpm($def_vars['display_submitted']);
+              //dpm($def_vars['submitted']);
+              //dpm($def_vars['created']);
               dpm($def_vars['date']);
-              dpm($def_vars['user']);
+              //dpm($def_vars['user']);
 
               dpm($def_vars['node']);
-              $cre = preg_replace('|.*content=\"(.*)\"|', '$1', $created);
+              $cre = preg_replace('|.*content=\"(.*)\"|', '$1', $date);
               dpm($cre);
               $created_str = date('F d, Y \a\t g:ia', $node->created); 
               $created_rdf = date('Y-m-d\TH:i:s', $node->created); 
