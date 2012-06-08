@@ -93,7 +93,7 @@
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   t('By') .
                                   '<span class="username">' .
-                                    $author_name .
+                                    t('Guest') .
                                   '</span>' .
                                   '<span class="delim">|</span>' . $created_str .
                                '</span>';
