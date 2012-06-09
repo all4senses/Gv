@@ -658,6 +658,7 @@ function gv_blocks_get_requestQuoteForPage() {
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="page" />
+                <input type="hidden" name="version" value="1" />
                 
         </form>
 
@@ -708,49 +709,42 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                 
                 <div id="fieldWrapper">
                     
-                    <div class="step" id="phones_amt_section">
-                        
-                            <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
-                            
-                              <select name="phones_amt" id="phones_amt" class="input required">
-                                <!--<option value="">- Select a value -</option>-->
-                                <option value="1 - 4">1 - 4</option>
-                                <option value="5 - 10">5 - 10</option>
-                                <option value="11 - 20">11 - 20</option>
-                                <option value="21 - 50">21 - 50</option>
-                                <option value="More than 50">More than 50</option>
-                              </select>
-                            
-                            
-                            <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
-                              <select name="q_for" id="q_for" class="input required">
-                                <!--<option value="">- Select a value -</option>-->
-                                <option value="Replace current phone system">' . t('Replace current phone system') .'</option>
-                                <option value="Need a phone system for a new office">' . t('Need a phone system for a new office') .'</option>
-                                <option value="Expand on our current phone system">' . t('Expand on our current phone system') .'</option>
-                              </select>
+                    <div class="step" id="qiestions_section">
 
-                            <div class="question">' . t('What type of quote do you need?') . '<span class="form-required">*</span></div>
-                              <select name="q_type" id="q_type" class="input required">
-                                <!--<option value="">- Select a value -</option>-->
-                                <option value="Both phones and service">' . t('Both phones and service') .'</option>
-                                <option value="Phone system only">' . t('Phone system only') .'</option>
-                                <option value="Service provider only">' . t('Service provider only') .'</option>
-                              </select>
+
+                            <div class="question">' . t('Which best Describe your current phone needs?') . '</div>
                             
-                            <div class="question">' . t('What is your buying time frame?') . '<span class="form-required">*</span></div>
+                            <input type="radio" name="q_for" value="We need to replace our current phone system" /><div class="label_after">' . t('We need to replace our current phone system') .'</div>
+                            <input type="radio" name="q_for" value="We need a phone system for a new office" /><div class="label_after">' . t('We need a phone system for a new office') . '</div>
+                            <input type="radio" name="q_for" value="We need to expand on our current phone system" /><div class="last_radio label_after">' . t('We need to expand on our current phone system') . '</div>
+
+
+                        
+                            <div class="question">' . t('How many phones do you need?') . '</div>
                             
-                              <select name="buying_time" id="buying_time" class="input required">
-                                <!--<option value="">- Select a value -</option>-->
-                                <option value="ASAP">' . t('ASAP') .'</option>
-                                <option value="1-3 Months">' . t('1-3 Months') .'</option>
-                                <option value="3-6 Months">' . t('3-6 Months') .'</option>
-                              </select>
+                            <input type="radio" name="phones_amt" value="1 - 4" /><div class="label_after">1 - 4</div>
+                            <input type="radio" name="phones_amt" value="11 - 20" /><div class="label_after">11 - 20</div>
+                            <input type="radio" name="phones_amt" value="more than 50" /><div class="last_radio label_after">more than 50</div>
                             
+                            <input type="radio" name="phones_amt" value="5 - 10" /><div class="label_after">5 - 10</div>
+                            <input type="radio" name="phones_amt" value="21 - 50" /><div class="last_radio label_after">21 - 50</div>
+
+
+
+                            <div class="question">' . t('What is your buying time frame?') . '</div>
                             
+                            <input type="radio" name="buying_time" value="ASAP" /><div class="label_after">' . t('ASAP') . '</div>
+                            <input type="radio" name="buying_time" value="1 - 3 Months" /><div class="label_after">' . t('1 - 3 Months') . '</div>
+                            <input type="radio" name="buying_time" value="More Than 6 Months" /><div class="last_radio label_after">' . t('More Than 6 Months') . '</div>
+
+                            <input type="radio" name="buying_time" value="3 - 6 Months" /><div class="label_after">' . t('3 - 6 Months') . '</div>
+                            <input type="radio" name="buying_time" value="Less Than 1 Month" /><div class="last_radio label_after">' . t('Less Than 1 Month') . '</div>
+
                             <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
                     </div>
-                    
+
+
+
                     <div class="step" id="personal_info">
                         
                             <div class="question">' . t('Fill out the form below:') . '</div>
@@ -802,6 +796,7 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="page" />
+                <input type="hidden" name="version" value="2" />
                 
         </form>
 
