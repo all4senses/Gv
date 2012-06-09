@@ -51,7 +51,7 @@
   ?>><?php //print $title; ?>Compare Companies! Compare Rates.</h1>
   <div class="left">
     <?php 
-      if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final') {
+      if ($_SERVER['REDIRECT_URL'] == '/voip-provider-quotes-final') {
         echo '<div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
       }
       else {
@@ -60,7 +60,7 @@
     ?>
   </div>
   
-  <?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?>
+  <?php if ($_SERVER['REDIRECT_URL'] == '/voip-provider-quotes-final'): ?>
     <div class="right-final">
       <?php 
         echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
@@ -132,8 +132,8 @@
   <div class="copy">BizMedia Central LLC | New York, NY</div>
 </footer>
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?> 
-  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/request-voip-phone-system-quote'): ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/voip-provider-quotes-final'): ?> 
+  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/voip-provider-quotes'): ?> 
     <!-- Google Code for Landing Page Conversion Page -->
     <script type="text/javascript">
     /* <![CDATA[ */
@@ -153,7 +153,7 @@
     </div>
     </noscript>
   <?php else:?>
-    <script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>
+    <script>top.location.href="http://getvoip.com/voip-provider-quotes";</script>
   <?php endif;?>
 <?php endif;?>
   
