@@ -151,7 +151,7 @@
                   <li><a href="#tabs-2"><?php echo t('Features & Pricing'); ?></a></li>
                 </ul>
                 <div id="tabs-1">
-                  <?php echo '<span>' . render($content['body']) . '</span>'; ?>
+                  <?php echo render($content['body']); ?>
                 </div>
                 <div id="tabs-2">
                   <?php 
