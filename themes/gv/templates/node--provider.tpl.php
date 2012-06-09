@@ -18,7 +18,7 @@
     
         <?php if ($page): ?>
           <?php print render($title_prefix); ?>
-          <h1<?php //print $title_attributes; ?> property="v:summary">
+          <h1<?php //print $title_attributes; ?> property="dc:title v:summary">
                 <?php 
                   print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
                 ?>
@@ -29,7 +29,7 @@
           <header>
         
             <?php print render($title_prefix); ?>
-            <h2<?php print $title_attributes; ?>>
+            <h2<?php //print $title_attributes; ?> property="dc:title v:summary">
                 <a href="<?php print $node_url; ?>">
                   <?php print $title; ?>
                 </a>
