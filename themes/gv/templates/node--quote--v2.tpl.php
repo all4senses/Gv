@@ -18,7 +18,7 @@
     <?php echo render($content['field_q_image']); ?>
 
     
-    <div class="top">
+    <div class="heading">
       
       <h1<?php print /*$title_attributes*/preg_replace('/datatype=".*"/', '', $title_attributes); 
       ?>><?php //print $title; ?>Save Big</h1>
