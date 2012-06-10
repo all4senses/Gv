@@ -2,7 +2,7 @@
   
   <div id="gv-logo">
     <div class="logo"></div>
-    <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
+    <h3>Get Personalized Quotes<br/>For Your VoIP Service Needs </h3>
   </div>
 
   <div class="partners">
