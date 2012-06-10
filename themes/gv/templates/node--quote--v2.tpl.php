@@ -67,7 +67,7 @@
 
     </div>
 
-    <div id="right bottom">
+    <div class="right bottom">
       <a href="#">What is a VoIP Phone System?</a>
       <a class="bottom" href="#">Advantages of VoIP</a>
     </div>
