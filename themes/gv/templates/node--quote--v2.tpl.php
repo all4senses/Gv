@@ -46,6 +46,8 @@
 
     <div class="right top">Let Us Pair You With A VoIP Service Provider<br/>That Best Fit Your Business Needs,<br/>At The Lowest Possible Price</div>
 
+    <div class="bottom-clear"></div> 
+    
     <div class="left bottom">
 
       <div>Complete our <strong>2-Step FAST, FREE & EASY</strong> form and a VoIP expert will begin creating a custom quote for your business phone system needs.</div>
@@ -70,7 +72,7 @@
       <a class="bottom" href="#">Advantages of VoIP</a>
     </div>
 
-
+    <div class="bottom-clear"></div> 
 
     <?php
       //print render($content);
