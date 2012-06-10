@@ -14,15 +14,18 @@
 
 
   <div class="content"<?php print $content_attributes; ?>>
-  <?php echo render($content['field_q_image']); ?>
+  
 
 
     <h1<?php print /*$title_attributes*/preg_replace('/datatype=".*"/', '', $title_attributes); 
     ?>><?php //print $title; ?>Save Big</h1>
 
     <div class="sub_header1">By Switching to a Business</div>
-    <div class="sub_header2"> VoIP Phone System That's Right For You </div>
-    <h2> Save Up To 65% Off a Traditional Phone System </h2>
+    <div class="sub_header2">VoIP Phone System That's Right For You</div>
+    <h2>Save Up To 65% Off a Traditional Phone System</h2>
+    
+    <?php echo render($content['field_q_image']); ?>
+    
     <div class="left top">
       <?php 
         if ($_SERVER['REDIRECT_URL'] == '/voip-provider-quotes-final') {
