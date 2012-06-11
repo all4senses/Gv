@@ -53,6 +53,7 @@
 
       <div>Complete our <strong>2-Step FAST, FREE & EASY</strong> form and a VoIP expert will begin creating a custom quote for your business phone system needs.</div>
 
+      <div class="caption">Get Features Like:</div>
       <div class="options">
         <div class="option">Unlimited Calling</div>
         <div class="option">Free Long Distance</div>
