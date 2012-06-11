@@ -35,7 +35,8 @@
           echo '<div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
         }
         else { 
-          //echo gv_blocks_get_requestQuoteForPage_v2(); 
+          ?><div class="caption">Tell Us About Your VoIP Needs:</div><?php
+          echo gv_blocks_get_requestQuoteForPage_v2(); 
           
         }
       ?>
