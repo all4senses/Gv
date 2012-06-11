@@ -62,14 +62,14 @@
       </div>
 
       <div>Want to Save Money On Your Business VoIP Phone System?</div>
-      <input type="button" value="Request a Quote" />
+      <div>Request a Quote!</div>
       <div>We'll Take Care Of The Rest!</div>
 
     </div>
 
     <div class="right bottom">
-      <a href="#">What is a VoIP Phone System?</a>
-      <a class="bottom" href="#">Advantages of VoIP</a>
+      <div>What is a VoIP Phone System?</div>
+      <div class="second">Advantages of VoIP</div>
     </div>
 
     <div class="bottom-clear"></div> 
