@@ -45,15 +45,24 @@
 
 
 
-    <div class="right top">Let Us Pair You With A VoIP Service Provider<br/>That Best Fit Your Business Needs,<br/>At The Lowest Possible Price</div>
+    <div class="right top"><ul><li>Let Us Pair You With A VoIP Service Provider that best fits your needs!</li><li>Don't trust your phone system with just anyone!</li><li>Compare compenies. Compare rates.</li><li>Get facts. Read Reviews.</li></ul></div>
 
     <div class="bottom-clear"></div> 
+    
+    
+    
+    <div id="brands">
+      <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
+      <div id="cisco"></div><div id="polycom"></div><div id="microsoft"></div><div id="att"></div><div id="verizon"></div><div id="comcast"></div><div id="panasonic"></div>
+      <div class="bottom-clear"></div> 
+    </div>
+    
     
     <div class="left bottom">
 
       <div>Complete our <strong>2-Step FAST, FREE & EASY</strong> form and a VoIP expert will begin creating a custom quote for your business phone system needs.</div>
 
-      <div class="caption">Get Features Like:</div>
+      <div class="caption">Compare:</div>
       <div class="options">
         <div class="option">Unlimited Calling</div>
         <div class="option">Free Long Distance</div>
@@ -62,10 +71,6 @@
         <div class="option">24/7 U.S. Customer Support</div>
         <div class="option">and much more..</div>
       </div>
-
-      <div>Want to Save Money On Your Business VoIP Phone System?</div>
-      <div>Request a Quote!</div>
-      <div>We'll Take Care Of The Rest!</div>
 
     </div>
 
@@ -85,11 +90,6 @@
   </div>
 
 
-  <div id="brands">
-    <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
-    <div id="cisco"></div><div id="polycom"></div><div id="microsoft"></div><div id="att"></div><div id="verizon"></div><div id="comcast"></div><div id="panasonic"></div>
-    <div class="bottom-clear"></div> 
-  </div>
 
   
   <footer>
