@@ -47,7 +47,9 @@
             errorPlacement: function(error, element) {
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
                 //error.insertAfter( $(".last_radio", element.parent()) );
-                error.insertAfter("#buying_time");
+                ////error.insertAfter("#buying_time");
+                error.insertAfter("#on_error");
+              
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
                 //alert(error.html() +  ': ' + element.prev().html());
