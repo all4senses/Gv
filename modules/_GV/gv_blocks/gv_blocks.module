@@ -706,20 +706,19 @@ function gv_blocks_get_requestQuoteForPage_v2() {
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
-        <form class="multipartForm bbq" method="post" action="/request" style="height: 300px; overflow: hidden;">
+        <form class="multipartForm bbq" method="post" action="/request">
 
                 
                 <div id="fieldWrapper">
                     
                     <div class="step" id="qiestions_section">
 
+                            <div class="question">' . t('What is your current phone needs?') . '</div>
+                            <input type="radio" name="q_for" value="Replace current phone system" /><div class="label_after">' . t('Replace current phone system') .'</div>
+                            <input type="radio" name="q_for" value="Need a phone system for a new office" /><div class="label_after">' . t('Need a phone system for a new office') . '</div>
+                            <input type="radio" name="q_for" value="Expand on our current phone system" /><div class="last_radio label_after">' . t('Expand on our current phone system') . '</div>
 
-                            <div class="question">' . t('Which best Describe your current phone needs?') . '</div>
-                            
-                            <input type="radio" name="q_for" value="We need to replace our current phone system" /><div class="label_after">' . t('We need to replace our current phone system') .'</div>
-                            <input type="radio" name="q_for" value="We need a phone system for a new office" /><div class="label_after">' . t('We need a phone system for a new office') . '</div>
-                            <input type="radio" name="q_for" value="We need to expand on our current phone system" /><div class="last_radio label_after">' . t('We need to expand on our current phone system') . '</div>
-                            
+
                             <div class="question">' . t('How many phones do you need?') . '</div>
                             <div class="phones left">
                               <input type="radio" name="phones_amt" value="1 - 4" /><div class="label_after">1 - 4</div>
@@ -732,16 +731,19 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             </div>
                             <div class="bottom-clear"></div>
 
+
+                            <div class="question">' . t('What type of quote do you need?') . '</div>
+                            <input type="radio" name="q_type" value="Both phones and service" /><div class="label_after">' . t('Both phones and service') . '</div>
+                            <input type="radio" name="q_type" value="Phone system only" /><div class="label_after">' . t('Phone system only') . '</div>
+                            <input type="radio" name="q_type" value="Service provider only" /><div class="last_radio label_after">' . t('Service provider only') . '</div>
+
+
                             <div class="question">' . t('What is your buying time frame?') . '</div>
-                            <div class="time left">
-                              <input type="radio" name="buying_time" value="ASAP" /><div class="label_after">' . t('ASAP') . '</div>
-                              <input type="radio" name="buying_time" value="1 - 3 Months" /><div class="label_after">' . t('1 - 3 Months') . '</div>
-                              <input type="radio" name="buying_time" value="More Than 6 Months" /><div class="last_radio label_after">' . t('More Than 6 Months') . '</div>
-                            </div>
-                            <div class="time right">
-                              <input type="radio" name="buying_time" value="3 - 6 Months" /><div class="label_after">' . t('3 - 6 Months') . '</div>
-                              <input type="radio" name="buying_time" value="Less Than 1 Month" /><div class="last_radio label_after">' . t('Less Than 1 Month') . '</div>
-                            </div>
+                            <input type="radio" name="buying_time" value="ASAP" /><div class="label_after">' . t('ASAP') . '</div>
+                            <input type="radio" name="buying_time" value="1 - 3 Months" /><div class="label_after">' . t('1 - 3 Months') . '</div>
+                            <input type="radio" name="buying_time" value="3 - 6 Months" /><div class="last_radio label_after">' . t('3 - 6 Months') . '</div>
+
+                            
                             <div class="bottom-clear"></div>
 
                             <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
