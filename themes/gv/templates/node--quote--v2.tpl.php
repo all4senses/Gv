@@ -75,8 +75,15 @@
     </div>
 
     <div class="right bottom">
-      <div>What is a VoIP Phone System?</div>
-      <div class="second">Advantages of VoIP</div>
+      <h3><?php echo $node->q_data['bottom_text']['left_title']; ?></h3>
+      <div class="text"><?php echo $node->q_data['bottom_text']['left_text']; ?></div>
+      
+      <h3><?php echo $node->q_data['bottom_text']['center_title']; ?></h3>
+      <div class="text"><?php echo $node->q_data['bottom_text']['center_text']; ?></div>
+      
+      <h3><?php echo $node->q_data['bottom_text']['right_title']; ?></h3>
+      <div class="text"><?php echo $node->q_data['bottom_text']['right_text']; ?></div>
+    
     </div>
 
     <div class="bottom-clear"></div> 
