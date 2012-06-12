@@ -35,10 +35,11 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname email phone_1 phone_2 phone_3"
-              ,first_step: "phones_amt q_for q_type buying_time"
+              //username: "firstname lastname email phone_1 phone_2 phone_3",
+              first_step: "phones_amt q_type buying_time firstname lastname email phone_1 phone_2 phone_3"
             },
             errorPlacement: function(error, element) {
+              /*
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 ////error.insertAfter("#buying_time");
@@ -51,6 +52,8 @@
                 //alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
+              */
+              error.insertAfter("#on_error");
             },
 //            showErrors: function(errorMap, errorList) {
 //              alert("Your form contains " + this.numberOfInvalids());
@@ -81,7 +84,7 @@
               
               
               phones_amt: "required",
-              q_for: "required",
+              //q_for: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
