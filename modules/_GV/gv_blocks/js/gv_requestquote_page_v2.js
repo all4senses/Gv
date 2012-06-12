@@ -1,8 +1,14 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_v2 = {
+  Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
-
+       
+        //$('select').selectmenu();
+       
+        $('select').selectmenu({
+				//style:'popup', 
+				maxHeight: 300
+  			});
        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
@@ -35,35 +41,30 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname email phone_1 phone_2 phone_3",
-              first_step: "phones_amt q_type buying_time firstname lastname email phone_1 phone_2 phone_3"
+              username: "firstname lastname email phone_1 phone_2 phone_3"
+              ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
-              /*
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 ////error.insertAfter("#buying_time");
                 error.insertAfter("#on_error");
               
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
-              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
+              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
                 //alert(error.html() +  ': ' + element.prev().html());
-                error.insertAfter("#on_error");
+                error.insertAfter("#phone");
                 //alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
-              */
-              //error.insertAfter("#on_error");
-              alert('Error');
-              console.log('error');
             },
-            showErrors: function(errorMap, errorList) {
-              alert("Your form contains " + this.numberOfInvalids());
-              console.log(this);
-              console.log(this.invalidElements());
-              
-              this.defaultShowErrors();
-            },
+//            showErrors: function(errorMap, errorList) {
+//              alert("Your form contains " + this.numberOfInvalids());
+//              console.log(this);
+//              console.log(this.invalidElements());
+//              
+//              this.defaultShowErrors();
+//            },
             rules: {
               
 //              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
@@ -86,10 +87,10 @@
               
               
               phones_amt: "required",
-              //q_for: "required",
+              q_for: "required",
               q_type: "required",
               buying_time: "required",
-              //connection: "required",
+              connection: "required",
              
               phone_1: {
                 number: true,
@@ -162,7 +163,7 @@
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
             //success: function(data){$('#requestQuoteFormWrapper .sending').hide('clip'); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show('clip');},
             
-            success: function(data){$('#requestQuoteFormWrapper .sending').hide(); $("#requestQuoteFormWrapper .success").html(data.data); $("#requestQuoteFormWrapper .success").show();},
+            success: function(data){$('#requestQuoteFormWrapper .sending').hide(); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },

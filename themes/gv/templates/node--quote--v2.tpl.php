@@ -2,7 +2,7 @@
   
   <div id="gv-logo">
     <div class="logo"></div>
-    <h3>Get Personalized Quotes For Your VoIP Service Needs </h3>
+    <h3>Don't trust your phone system with just anyone!<br/>Get paired with a prescreened VoIP provider that best fits your needs!</h3>
   </div>
 
   <div class="partners">
