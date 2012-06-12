@@ -54,6 +54,7 @@
                 error.insertAfter(element);
               */
               error.insertAfter("#on_error");
+              alert(error.html() +  ': ' + element.prev().html());
             },
 //            showErrors: function(errorMap, errorList) {
 //              alert("Your form contains " + this.numberOfInvalids());
