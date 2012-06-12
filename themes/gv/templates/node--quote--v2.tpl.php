@@ -59,9 +59,10 @@
     
     <div class="left bottom">
 
-      <div>Complete our <strong>1-Step free and easy quick form</strong> and a VoIP expert will begin creating a <strong>personalized no-risk quote</strong> for your business phone system needs.</div>
+7      <div>Complete our <strong>1-Step free and easy quick form</strong> and a VoIP expert will begin creating a <strong>personalized no-risk quote</strong> for your business phone system needs.</div>
 
       <div class="caption">Compare:</div>
+      <div class="bottom-clear"></div> 
       <div class="options">
         <div class="option">Top Rated Providers</div>
         <div class="option">HD Quality Service</div>
@@ -72,16 +73,16 @@
         <div class="option">Designed For Business</div>
       </div>
       <div class="options">
-        <div class="option">Top Rated Providers</div>
-        <div class="option">HD Quality Service</div>
-        <div class="option">No Contracts</div>
-        <div class="option">Robust VoIP Services</div>
-        <div class="option">Accredited BBB Companies</div>
-        <div class="option">Unlimited Calling</div>
-        <div class="option">Designed For Business</div>
+        <div class="option">Hosted VoIP PBX</div>
+        <div class="option">Verifiable References</div>
+        <div class="option">Unified Communications</div>
+        <div class="option">Service Reliability</div>
+        <div class="option">Customer Experience</div>
+        <div class="option">Phone Exchange Options</div>
+        <div class="option">Video Calling</div>
       </div>
       
-      <div class="left bottom">
+      <div class="bottom-clear"></div> 
         
     </div>
 
