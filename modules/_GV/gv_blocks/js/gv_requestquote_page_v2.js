@@ -3,12 +3,7 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
-        //$('select').selectmenu();
-       
-        $('select').selectmenu({
-				//style:'popup', 
-				maxHeight: 300
-  			});
+
        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
