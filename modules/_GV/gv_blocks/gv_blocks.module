@@ -679,12 +679,8 @@ function gv_blocks_get_requestQuoteForPage() {
  */
 function gv_blocks_get_requestQuoteForPage_v2() {
 
-  drupal_add_library('system', 'ui.widget');
-
-  //drupal_add_library('system', 'effects.bounce');
-  
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v2.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
@@ -694,8 +690,6 @@ function gv_blocks_get_requestQuoteForPage_v2() {
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
-  drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
-  drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
   
   
   $token = md5(time()); //drupal_get_token('test');
@@ -714,12 +708,6 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                     
                     <div class="step" id="questions_section">
 
-                            <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
-                            <input checked type="radio" name="q_for" value="Replace current phone system" /><div class="label_after">' . t('Replace current phone system') .'</div>
-                            <input type="radio" name="q_for" value="Need a phone system for a new office" /><div class="label_after">' . t('Need a phone system for a new office') . '</div>
-                            <input type="radio" name="q_for" value="Expand on our current phone system" /><div class="last_radio label_after">' . t('Expand on our current phone system') . '</div>
-
-
                             <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
                             <div class="subset first">
                               <input checked type="radio" name="phones_amt" value="1 - 4" /><div class="label_after">1 - 4</div>
@@ -729,6 +717,7 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                               <input type="radio" name="phones_amt" value="5 - 10" /><div class="label_after">5 - 10</div>
                               <input type="radio" name="phones_amt" value="more than 20" /><div class="last_radio label_after">more than 20</div>
                             </div>
+                            
                             <div class="bottom-clear"></div>
 
 
@@ -749,18 +738,10 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             <div class="subset second">
                               <input type="radio" name="buying_time" value="1 - 3 Months" /><div class="label_after">' . t('1 - 3 Months') . '</div>
                             </div>
-
-                            <div id="on_error"></div>
-
-                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
-                    </div>
-
-
-
-                    <div class="step" id="personal_info">
-                        
-                            <div class="question">' . t('Fill out the form below:') . '</div>
                             
+                            <div class="bottom-clear"></div>
+                            
+                             
                             <div class="wrapper">
                               <div class="label_before required">' . t('First Name') . '<span class="form-required">*</span></div>
                                 <input class="after required name" name="firstname" id="firstname" />
@@ -771,21 +752,12 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                                 <input class="after required" name="lastname" id="lastname" />
                             </div>
                             
-                            <div class="wrapper">
-                              <div class="label_before required">' . t('Company') . '</div>
-                                <input class="after" name="company" id="company" />
-                            </div>
 
                             <div class="wrapper">
                               <div class="label_before required">' . t('Email') . '<span class="form-required">*</span></div>
                                 <input class="after email required" name="email" id="email" />
                             </div>
-                            
-                            <div class="wrapper">
-                              <div class="label_before">' . t('Website') . '</div>
-                                <input class="after" name="website" id="website" />
-                            </div>
-                            
+                         
                             <div class="wrapper">
                               <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
                               <div id="phone">
@@ -794,11 +766,21 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                                 <input class="after required phone" name="phone_3" id="phone_3" value="" />
                                </div>
                             </div>
-                         
-                           <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 2, '!second' => 2)) . '</div>-->
-                           <div class="protected"></div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before required">' . t('Company') . '</div>
+                                <input class="after" name="company" id="company" />
+                            </div>
+
+   
+                     
+
+                            <div id="on_error"></div>
+
+                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
                     </div>
-                    
+
+                   
                 </div>
             
                 <div id="Navigation"> 							
