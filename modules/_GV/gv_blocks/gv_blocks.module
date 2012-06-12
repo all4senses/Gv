@@ -742,13 +742,12 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             <div class="bottom-clear"></div>
                             
                              
-                            <div class="wrapper">
-                              <div class="label_before required">' . t('First Name') . '<span class="form-required">*</span></div>
+                            <div class="wrapper subset first">
+                              <div class="label_before required">' . t('Name') . '<span class="form-required">*</span></div>
                                 <input class="after required name" name="firstname" id="firstname" />
                             </div>
                             
-                            <div class="wrapper">
-                              <div class="label_before required">' . t('Last Name') . '<span class="form-required">*</span></div>
+                            <div class="wrapper subset second">
                                 <input class="after required" name="lastname" id="lastname" />
                             </div>
                             
@@ -768,7 +767,7 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             </div>
                             
                             <div class="wrapper">
-                              <div class="label_before required">' . t('Company') . '</div>
+                              <div class="label_before">' . t('Company') . '</div>
                                 <input class="after" name="company" id="company" />
                             </div>
 
@@ -780,8 +779,11 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
                     </div>
 
-                   
+                    <div class="protected"></div>
+                
                 </div>
+                
+                
             
                 <div id="Navigation"> 							
                         <input class="navigation_button" id="back" value="Back" type="reset" />
