@@ -53,7 +53,7 @@
               else
                 error.insertAfter(element);
               */
-              error.insertAfter("#on_error");
+              //error.insertAfter("#on_error");
               alert(error.html() +  ': ' + element.prev().html());
             },
 //            showErrors: function(errorMap, errorList) {
@@ -88,7 +88,7 @@
               //q_for: "required",
               q_type: "required",
               buying_time: "required",
-              connection: "required",
+              //connection: "required",
              
               phone_1: {
                 number: true,
