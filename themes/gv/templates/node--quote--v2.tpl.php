@@ -59,7 +59,7 @@
     
     <div class="left bottom">
 
-7      <div>Complete our <strong>1-Step free and easy quick form</strong> and a VoIP expert will begin creating a <strong>personalized no-risk quote</strong> for your business phone system needs.</div>
+      <div>Complete our <strong>1-Step free and easy quick form</strong> and a VoIP expert will begin creating a <strong>personalized no-risk quote</strong> for your business phone system needs.</div>
 
       <div class="caption">Compare:</div>
       <div class="bottom-clear"></div> 
@@ -72,7 +72,7 @@
         <div class="option">Unlimited Calling</div>
         <div class="option">Designed For Business</div>
       </div>
-      <div class="options">
+      <div class="options second">
         <div class="option">Hosted VoIP PBX</div>
         <div class="option">Verifiable References</div>
         <div class="option">Unified Communications</div>
