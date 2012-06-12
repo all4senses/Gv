@@ -23,9 +23,8 @@
       <h1<?php print /*$title_attributes*/preg_replace('/datatype=".*"/', '', $title_attributes); 
       ?>><?php //print $title; ?>Save Big</h1>
 
-      <div class="sub_header1">By Switching to a Business</div>
-      <div class="sub_header2">VoIP Phone System That's Right For You</div>
-      <h2>Save Up To 65% Off a Traditional Phone System</h2>
+      <div class="sub_header1">- Switch to a Business VoIP System</div>
+      <h2>Save Up To 80% on Your Business Telephone System With VoIP Services</h2>
     
     </div>
     
@@ -45,14 +44,14 @@
 
 
 
-    <div class="right top"><ul><li>Let Us Pair You With A VoIP Service Provider that best fits your needs!</li><li>Don't trust your phone system with just anyone!</li><li>Compare compenies. Compare rates.</li><li>Get facts. Read Reviews.</li></ul></div>
+    <div class="right top"><ul><li>Don't trust your phone system with just anyone!</li><li>Get paired with a VoIP provider that best fits your needs!</li><li>Compare top providers. Get aggressive rates.</li><li>Get facts. Read Reviews.</li></ul></div>
 
     <div class="bottom-clear"></div> 
     
     
     
     <div id="brands">
-      <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
+      <h2><?php echo t('All Major Award Winning Manufacturers Supported:'); ?></h2>
       <div id="cisco"></div><div id="polycom"></div><div id="microsoft"></div><div id="att"></div><div id="verizon"></div><div id="comcast"></div><div id="panasonic"></div>
       <div class="bottom-clear"></div> 
     </div>
