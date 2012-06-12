@@ -64,12 +64,13 @@
 
       <div class="caption">Compare:</div>
       <div class="options">
+        <div class="option">Top Rated Providers</div>
+        <div class="option">HD Quality Service</div>
+        <div class="option">No Contracts</div>
+        <div class="option">Robust VoIP Services</div>
+        <div class="option">Accredited BBB Companies</div>
         <div class="option">Unlimited Calling</div>
-        <div class="option">Free Long Distance</div>
-        <div class="option">Leading Industry Reliability</div>
-        <div class="option">Quality VoIP Technology</div>
-        <div class="option">24/7 U.S. Customer Support</div>
-        <div class="option">and much more..</div>
+        <div class="option">Designed For Business</div>
       </div>
 
     </div>
