@@ -35,7 +35,7 @@
           
           validationOptions: {
             groups: {
-              //username: "firstname lastname email phone_1 phone_2 phone_3",
+              username: "firstname lastname email phone_1 phone_2 phone_3",
               first_step: "phones_amt q_type buying_time firstname lastname email phone_1 phone_2 phone_3"
             },
             errorPlacement: function(error, element) {
@@ -54,15 +54,16 @@
                 error.insertAfter(element);
               */
               //error.insertAfter("#on_error");
-              alert(error.html() +  ': ' + element.prev().html());
+              alert('Error');
+              console.log('error');
             },
-//            showErrors: function(errorMap, errorList) {
-//              alert("Your form contains " + this.numberOfInvalids());
-//              console.log(this);
-//              console.log(this.invalidElements());
-//              
-//              this.defaultShowErrors();
-//            },
+            showErrors: function(errorMap, errorList) {
+              alert("Your form contains " + this.numberOfInvalids());
+              console.log(this);
+              console.log(this.invalidElements());
+              
+              this.defaultShowErrors();
+            },
             rules: {
               
 //              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
