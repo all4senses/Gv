@@ -206,9 +206,9 @@
               connection: Drupal.t('Make your choice!'),
               */
              
-             firstname: Drupal.t('yyyy!'),
+             //firstname: Drupal.t('yyyy!'),
              
-             notEqualsTo: {
+             firstname: {
                notEqualsTo: Drupal.t("xxxx")
              },
               email: {
