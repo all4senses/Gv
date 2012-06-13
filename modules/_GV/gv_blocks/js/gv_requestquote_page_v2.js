@@ -206,6 +206,11 @@
               connection: Drupal.t('Make your choice!'),
               */
              
+             firstname: Drupal.t('yyyy!'),
+             
+             notEqualsTo: {
+               notEqualsTo: Drupal.t("xxxx")
+             },
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
                 email: Drupal.t("Email format must be name@domain.com")
