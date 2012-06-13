@@ -53,6 +53,11 @@
             }
         });
        
+        jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
+          return !(this.optional(element) || value === param);
+        }, jQuery.format("You must not enter {0}"));
+
+
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')
@@ -135,6 +140,9 @@
               buying_time: "required",
               connection: "required",
              
+              firstname: {
+                notEqualsTo: 'First'
+							},
               phone_1: {
                 number: true,
                 minlength: 3,
