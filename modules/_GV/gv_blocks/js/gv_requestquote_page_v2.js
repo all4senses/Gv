@@ -8,10 +8,10 @@
        
        
         $('input[id="phone_1"]').keydown(function (event) { 
-            //var val = $(this).val();
+            var val = $(this).val();
             //console.log(event);
             // Do stuff with val
-            //console.log('val = ' + val);
+            console.log('val = ' + val);
             
             if( !(event.keyCode == 8                                // backspace
                 || event.keyCode == 46                              // delete
