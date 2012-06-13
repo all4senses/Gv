@@ -7,15 +7,23 @@
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
        
-        $('input[id="phone_1"]').keypress(function (e) { 
-            var val = $(this).val();
-            console.log(e);
+        $('input[id="phone_1"]').keypress(function (event) { 
+            //var val = $(this).val();
+            //console.log(event);
             // Do stuff with val
-            console.log('val = ' + val);
-            //$(this).val('xx');
-            e.preventDefault();
+            //console.log('val = ' + val);
+            
+            if( !(event.keyCode == 8                                // backspace
+                || event.keyCode == 46                              // delete
+                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
+                ) {
+                    event.preventDefault();     // Prevent character input
+            }
 
-        })
+
+        });
 
        
         // Overriding the default Required message.
