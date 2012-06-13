@@ -4,6 +4,7 @@
     attach: function (context, settings) {
        
 
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {

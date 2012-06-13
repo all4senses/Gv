@@ -687,6 +687,10 @@ function gv_blocks_get_requestQuoteForPage_v2() {
   //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  
+          
+          
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
@@ -744,11 +748,11 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             <div class="subset-name"> 
                               <div class="wrapper subset first">
                                 <div class="label_before required">' . t('Name') . '<span class="form-required">*</span></div>
-                                  <input class="after required name" name="firstname" id="firstname" />
+                                  <input class="after required name" name="firstname" id="firstname" title="First" />
                               </div>
 
                               <div class="wrapper subset second">
-                                  <input class="after required" name="lastname" id="lastname" />
+                                  <input class="after required" name="lastname" id="lastname" title="Last" />
                               </div>
                             </div>
                             
@@ -756,7 +760,7 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             
                             <div class="wrapper">
                               <div class="label_before required">' . t('Email') . '<span class="form-required">*</span></div>
-                                <input class="after email required" name="email" id="email" />
+                                <input class="after email required" name="email" id="email" title="Enter a valid email" />
                             </div>
                          
                             <div class="wrapper">
@@ -770,7 +774,7 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                             
                             <div class="wrapper">
                               <div class="label_before">' . t('Company') . '</div>
-                                <input class="after" name="company" id="company" />
+                                <input class="after" name="company" id="company" title="Optional" />
                             </div>
 
    
