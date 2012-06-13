@@ -63,7 +63,7 @@
   <?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?>
     <div class="right-final">
       <?php 
-        echo '<a class="image" href="/">' , render($content['field_q_image']) , '</a>'; 
+        echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
         echo '<h2>' , t('GET ACCESS TO THE LARGEST<br/> VOIP SERVICE GUIDE<br/> IN THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>';
       ?>
     </div>
