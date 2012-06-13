@@ -417,6 +417,12 @@ function gv_misc_makeRequest_ajax() {
         'Source' => $post['source'],
         'Version' => $post['version'],
       );
+      if ($post['version'] == '2') {
+        unset($submission['Quote for'], $submission['Website']);
+      }
+      if ($submission['Company'] == 'Optional') {
+        unset($submission['Company']);
+      }
     }
     else {
       $submission = array(

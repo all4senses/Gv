@@ -46,7 +46,7 @@
 
     <div class="right top">
       
-      <div class="caption">Analyze VoIP Providers from all directions</div><ul><li>Compare top providers.</li><li>Get agressive rates.</li><li>Get facts. Read Reviews.</li></ul>
+      <div class="caption">Analyze VoIP Providers from all directions.</div><ul><li>Compare top providers.</li><li>Get aggressive rates.</li><li>Get facts. Read Reviews.</li></ul>
       
       <div id="brands">
         <h2><?php echo t('All Major Award Winning Manufacturers Supported:'); ?></h2>
