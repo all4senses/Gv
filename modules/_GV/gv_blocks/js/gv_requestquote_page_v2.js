@@ -9,10 +9,10 @@
        
         $('input[id="phone_1"]').keypress(function (e) { 
             var val = $(this).val();
-            console.log('e = ' + e);
+            console.log(e);
             // Do stuff with val
             console.log('val = ' + val);
-            $(this).val('xx');
+            //$(this).val('xx');
             e.preventDefault();
 
         })
