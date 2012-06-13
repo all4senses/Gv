@@ -6,6 +6,15 @@
 
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
+       
+        $('input[id="phone_1"]').keyup(function (e) { 
+            var val = $(this).val();
+            console.log('e = ' + e);
+            // Do stuff with val
+            console.log('val = ' + val);
+        })
+
+       
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')
