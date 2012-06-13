@@ -56,7 +56,7 @@
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
-        }, 'All fields with * are required');
+        }, "All fields with are required");
 
 
         // Overriding the default Required message.
@@ -142,6 +142,7 @@
               connection: "required",
              
               firstname: {
+                required: true,
                 notEqualsTo: 'First'
 							},
               phone_1: {
