@@ -7,13 +7,14 @@
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
        
-        $('input[id="phone_1"]').keyup(function (e) { 
+        $('input[id="phone_1"]').keypress(function (e) { 
             var val = $(this).val();
             console.log('e = ' + e);
             // Do stuff with val
             console.log('val = ' + val);
             $(this).val('xx');
-            return false;
+            e.preventDefault();
+
         })
 
        
