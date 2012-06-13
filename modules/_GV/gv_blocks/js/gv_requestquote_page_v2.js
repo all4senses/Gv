@@ -55,7 +55,8 @@
        
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
-        }, jQuery.format("You must not enter {0}"));
+        //}, jQuery.format("You must not enter {0}"));
+        }, jQuery.format('All fields with * are required'));
 
 
         // Overriding the default Required message.
