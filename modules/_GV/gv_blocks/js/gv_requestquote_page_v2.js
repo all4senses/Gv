@@ -12,6 +12,7 @@
             console.log('e = ' + e);
             // Do stuff with val
             console.log('val = ' + val);
+            return false;
         })
 
        
