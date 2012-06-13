@@ -7,7 +7,7 @@
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
        
-        $('input[id="phone_1"]').keypress(function (event) { 
+        $('input[id="phone_1"]').keydown(function (event) { 
             //var val = $(this).val();
             //console.log(event);
             // Do stuff with val
