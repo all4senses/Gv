@@ -381,7 +381,7 @@ function gv_misc_makeRequest_ajax() {
   if (empty($post) 
       || !isset($post['source']) || !$post['source']
       || !isset($post['phones_amt']) || !$post['phones_amt']
-      || !isset($post['q_for']) || !$post['q_for']
+      //|| !isset($post['q_for']) || !$post['q_for']
       || !isset($post['buying_time']) || !$post['buying_time']
       || !isset($post['firstname']) || !$post['firstname']
       || !isset($post['lastname']) || !$post['lastname']
@@ -390,10 +390,10 @@ function gv_misc_makeRequest_ajax() {
       || !isset($post['phone_2']) || !$post['phone_2']
       || !isset($post['phone_3']) || !$post['phone_3']
      ) {
-    $output = t('<div class="not-verified"><p class="error">The form is not filled!</p><p>Please, fill it and try again.</p></div>'); 
+    $output = t('<div class="not-verified"><p class="error">The form is not filled!</p><p>Please, reload the page and try again.</p></div>'); 
   }
   elseif (!isset($post['token']) /*|| !isset($_SESSION['requestQuoteToken']) || $post['token'] != $_SESSION['requestQuoteToken']*/){
-    $output = t('<div class="not-verified"><p class="error">The form is outdated or broken.</p><p> Please, reload the page and try again later.</p><div class="not-verified">'); 
+    $output = t('<div class="not-verified"><p class="error">The form is outdated or broken.</p><p> Please, reload the page and try again.</p><div class="not-verified">'); 
   }
   else {
 
