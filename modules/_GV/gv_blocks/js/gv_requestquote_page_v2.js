@@ -7,14 +7,9 @@
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
        
-        $('input[id="phone_1"]').keydown(function (event) { 
-            var val = $(this).val();
+        $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
+            //var val = $(this).val();
             var l = $(this).val().length;
-            //console.log(event);
-            // Do stuff with val
-            console.log('val = ' + val);
-            console.log('l = ' + l);
-            
             if( !(event.keyCode == 8                                // backspace
                 || event.keyCode == 46                              // delete
                 || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
@@ -24,10 +19,21 @@
                 ) {
                     event.preventDefault();     // Prevent character input
             }
-
-
         });
 
+        $('input[id="phone_3"]').keydown(function (event) { 
+            //var val = $(this).val();
+            var l = $(this).val().length;
+            if( !(event.keyCode == 8                                // backspace
+                || event.keyCode == 46                              // delete
+                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
+                || l >= 4
+                ) {
+                    event.preventDefault();     // Prevent character input
+            }
+        });
        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
