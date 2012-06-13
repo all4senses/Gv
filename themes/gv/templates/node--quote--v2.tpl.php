@@ -44,13 +44,19 @@
 
 
 
-    <div class="right top"><div class="caption">Analyze VoIP Providers from all directions</div><ul><li>Compare top providers.</li><li>Get agressive rates.</li><li>Get facts. Read Reviews.</li></ul></div>
-
-    <div id="brands">
-      <h2><?php echo t('All Major Award Winning Manufacturers Supported:'); ?></h2>
-      <div id="cisco"></div><div id="polycom"></div><div id="att"></div><div id="verizon"></div><div id="comcast"></div>
-      <div class="bottom-clear"></div> 
+    <div class="right top">
+      
+      <div class="caption">Analyze VoIP Providers from all directions</div><ul><li>Compare top providers.</li><li>Get agressive rates.</li><li>Get facts. Read Reviews.</li></ul>
+      
+      <div id="brands">
+        <h2><?php echo t('All Major Award Winning Manufacturers Supported:'); ?></h2>
+        <div id="cisco"></div><div id="polycom"></div><div id="att"></div><div id="verizon"></div><div id="comcast"></div>
+        <div class="bottom-clear"></div> 
+      </div>
+      
     </div>
+
+    
     
     <div class="bottom-clear"></div> 
 
