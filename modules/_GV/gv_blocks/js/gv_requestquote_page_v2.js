@@ -9,9 +9,10 @@
        
         $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
             //var val = $(this).val();
-            console.log(event.keyCode);
+            //console.log(event.keyCode);
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
+                || event.keyCode == 9
                 || event.keyCode == 46                              // delete
                 || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
               
@@ -22,7 +23,7 @@
             }
             else {
               if (l >= 3 
-                  && !(event.keyCode == 8 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
+                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
                   event.preventDefault();
               }
@@ -31,15 +32,24 @@
 
         $('input[id="phone_3"]').keydown(function (event) { 
             //var val = $(this).val();
+            //console.log(event.keyCode);
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
+                || event.keyCode == 9
                 || event.keyCode == 46                              // delete
                 || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+              
                 || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
                 || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                || l >= 4
                 ) {
                     event.preventDefault();     // Prevent character input
+            }
+            else {
+              if (l >= 4 
+                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
+                  ) {
+                  event.preventDefault();
+              }
             }
         });
        
