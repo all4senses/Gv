@@ -371,6 +371,7 @@ function themekey_rule_set(&$item, $module = 'themekey') {
 
   }
   else {
+    dpm($item);
     if ($item['enabled']) {
       $id = db_select('themekey_properties', 'tp')
         ->fields('tp', array('id'))
