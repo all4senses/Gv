@@ -373,7 +373,7 @@ function themekey_rule_set(&$item, $module = 'themekey') {
   else {
     // a4s fix. because else it shows warning Notice: Undefined index: enabled in themekey_rule_set() (line 376 of /home/gvadmin/public_html/sites/all/modules/_Structure/themekey/themekey_build.inc).
     //if ($item['enabled']) {
-    if (1) {
+    if (isset($item['enabled']) && $item['enabled']) {
       $id = db_select('themekey_properties', 'tp')
         ->fields('tp', array('id'))
         ->condition('property', $item['property'])
