@@ -328,6 +328,7 @@ function themekey_load_rules($parent = 0, $depth = 0) {
  * @throws ThemeKeyRuleConfictException
  */
 function themekey_rule_set(&$item, $module = 'themekey') {
+  dpm($item);
   if ('drupal:path' == $item['property']) {
     list($item['value'], $item['wildcards']) = themekey_prepare_custom_path($item['value']);
   }
