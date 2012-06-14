@@ -328,7 +328,6 @@ function themekey_load_rules($parent = 0, $depth = 0) {
  * @throws ThemeKeyRuleConfictException
  */
 function themekey_rule_set(&$item, $module = 'themekey') {
-  dpm($item);
   if ('drupal:path' == $item['property']) {
     list($item['value'], $item['wildcards']) = themekey_prepare_custom_path($item['value']);
   }
@@ -372,8 +371,9 @@ function themekey_rule_set(&$item, $module = 'themekey') {
 
   }
   else {
-    dpm($item);
-    if ($item['enabled']) {
+    // a4s fix. because else it shows warning Notice: Undefined index: enabled in themekey_rule_set() (line 376 of /home/gvadmin/public_html/sites/all/modules/_Structure/themekey/themekey_build.inc).
+    //if ($item['enabled']) {
+    if (1) {
       $id = db_select('themekey_properties', 'tp')
         ->fields('tp', array('id'))
         ->condition('property', $item['property'])
