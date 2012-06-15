@@ -1,4 +1,3 @@
-<!-- <div id="container" class="clearfix"> -->
   <div id="bshadow">
     <div id="bs1"></div>
     <div id="bs2"></div>
@@ -79,11 +78,6 @@
 
   
   <footer id="footer" role="contentinfo" class="clearfix">
-    <!-- <div id="footer-inside"> -->
-      <?php print render($page['footer']) ?>
-      <?php //print $feed_icons ?>
-    <!-- </div> --> <!-- /.inside -->
+      <?php echo render($page['footer']), '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>'; ?>
   </footer> <!-- /#footer -->
-
-<!-- </div> --> <!-- /#container -->
 
