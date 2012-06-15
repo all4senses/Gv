@@ -93,10 +93,16 @@ function gv_orange_process_comment(&$vars) {
 /**
  * Override or insert variables into the block templates.
  */
-/* -- Delete this line if you want to use these functions
 function gv_orange_preprocess_block(&$vars) {
+ // add odd/even zebra classes into the array of classes
+  $vars['classes_array'][] = $vars['block_zebra'];
+  if ($vars['block_id'] == 1) {
+    $vars['classes_array'][] = 'first';
+  }
 }
 
+/* -- Delete this line if you want to use these function
 function gv_orange_process_block(&$vars) {
 }
 // */
+
