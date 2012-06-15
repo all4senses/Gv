@@ -2,8 +2,8 @@
 
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
-    <?php if ($block->region == 'sidebar_first' || $block->region == 'sidebar_second'): ?>
-      <div class="block-icon pngfix"></div>
+    <?php if ($title != 'Request a Free Quote' && ($block->region == 'sidebar_first' || $block->region == 'sidebar_second') ): ?>
+      <div class="block-icon pngfix"><?php echo t('All'); ?></div>
     <?php endif;?>
     <h2<?php print $title_attributes; ?>><?php print $title; ?></h2>
   <?php endif;?>
