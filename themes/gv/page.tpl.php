@@ -1,4 +1,3 @@
-<!-- <div id="container" class="clearfix"> -->
   <div id="bshadow">
     <div id="bs1"></div>
     <div id="bs2"></div>
@@ -17,8 +16,11 @@
 
     <nav id="navigation" role="navigation" class="clearfix">
       <div id="header-menu-back"></div>
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a>
-      <?php print render($page['header']); ?>
+      <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
+      </a>
+      
+      <?php echo '<div id="block-gv-blocks-header-links">', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
     </nav> <!-- /#navigation -->
 
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
@@ -78,11 +80,6 @@
 
   
   <footer id="footer" role="contentinfo" class="clearfix">
-    <!-- <div id="footer-inside"> -->
-      <?php print render($page['footer']) ?>
-      <?php //print $feed_icons ?>
-    <!-- </div> --> <!-- /.inside -->
+      <?php echo render($page['footer']), '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>'; ?>
   </footer> <!-- /#footer -->
-
-<!-- </div> --> <!-- /#container -->
 
