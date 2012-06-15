@@ -16,7 +16,9 @@
 
     <nav id="navigation" role="navigation" class="clearfix">
       <div id="header-menu-back"></div>
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a>
+      <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
+      </a>
       
       <?php echo '<div id="block-gv-blocks-header-links">', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
     </nav> <!-- /#navigation -->
