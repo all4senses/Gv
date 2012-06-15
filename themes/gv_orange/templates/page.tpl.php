@@ -19,7 +19,7 @@
       <div id="header-menu-back"></div>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo"></a>
       
-      <?php echo gv_blocks_get_headerLinks(), render($page['header']); ?>
+      <?php echo '<div id="block-gv-blocks-header-links">', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
     </nav> <!-- /#navigation -->
 
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
