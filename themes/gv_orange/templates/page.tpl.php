@@ -21,8 +21,10 @@
         <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
           <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
         </a>
-        <div class="title">2012 VOIP</div><div class="stars"></div>
-        <div class="subtitle">SERVICE PROVIDER REVIEWS</div>
+        <div class="descr">
+          <div class="title">2012 VOIP</div><div class="stars"></div>
+          <div class="subtitle">SERVICE PROVIDER REVIEWS</div>
+        </div>
       </div>
       
       <?php echo '<div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
