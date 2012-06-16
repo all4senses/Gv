@@ -183,14 +183,15 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 
 /* Home page main content */
 
-.front #main .block .more-link{background: lightgray; padding-right: 10px;}
-.front #main .block .more-link a{color: #275FA6; font-weight: bold; font-size: 12px;}
+.front #main .block{position: relative;}
+.front #main .block .more-link{position: absolute; right: 0; top: 12px;}
+.front #main .block .more-link a{color: #478AFD; font-size: 12px; font-weight: bold;}
 
 
 .front #main .block h2,
-.front #main .node h2{color: #275FA6; margin: 0; padding: 10px; font-size: 18px; font-weight: bold;}
+.front #main .node h2{color: black; margin: 0; padding: 10px; font-size: 18px; font-weight: bold;}
 
-.front #main .block-views h2{font-size: 22px; padding-bottom: 5px;}
+.front #main .block-views h2{font-size: 22px; padding-bottom: 15px;}
 
 .front #main .node h2 a{color: #275FA6;}
 
@@ -199,7 +200,7 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 
 .front #main .node .content{padding: 10px; font-size: 13px;}
 
-.front p{line-height: 25px;}
+.front p{line-height: 25px; color: #777777;}
 
 /* Shadows */
 /*.front .block .shadow,
@@ -220,7 +221,7 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 
 #main .plan{color: #275FA6; font-size: 13px; font-weight: bold; margin-bottom: 4px;}
 /*#main .feature{background: url("images/galka-blue.png") no-repeat scroll -2px -5px transparent; font-size: 12px; margin-bottom: 2px; padding-left: 20px;}*/
-#main .feature{background: url("/sites/all/themes/gv/css/images/sprite-1.png") no-repeat scroll -2px -375px transparent; font-size: 12px; margin-bottom: 2px; padding-left: 20px;}
+#main .feature{background: url("images/sprite-2.png") no-repeat scroll 0px -755px transparent; font-size: 12px; margin-bottom: 2px; padding-left: 20px; color: #777777;}
 
 
 
@@ -283,10 +284,10 @@ th.views-field-php-4{width: 120px;}
 /* Correct a bit layout for separate admin pages with providers as blocks */
 .node-type-admin-page th.views-field-php-4{width: 130px;}
 
-td.views-field-php-4 a{font-weight: bold; font-size: 13px;}
+td.views-field-php-4 a{font-weight: bold; font-size: 13px; color: gray;}
 th.views-field-php-5{border: none; width: 100px;}
 td.views-field-php-5{border: none;}
-td.views-field-php-5 a{background: url("images/sprite-2.png") repeat-x scroll 0 -365px transparent; border-radius: 10px 10px 10px 10px;   color: white; font-size: 13px; font-weight: bold; padding: 8px;}
+td.views-field-php-5 a{background: #478AFD; border-radius: 3px; color: white; font-size: 13px; font-weight: bold; padding: 8px;}
 
 .views-field .count{font-size: 11px; padding-top: 3px;}
 
@@ -705,6 +706,8 @@ form .counter.exceeded{color: red;}
 
 /* Prefaces */
 /* Front prefaces */
+
+
 .front #main .node-admin-page, 
 .front #main .node-admin-page h2{font-family: Georgia,"Bitstream Charter",serif;}
 .front #main .node-admin-page h2{padding: 10px 10px 0 5px; border: none;}
@@ -715,9 +718,9 @@ form .counter.exceeded{color: red;}
 .front .node-admin-page p{margin: 0 0 10px;}
 
 /* Other prefaces */
-.front h1, .attachment-before h1{line-height: 18px; color: #275FA6; font-size: 18px; font-weight: bold; margin: 0; border: medium none; padding: 0 10px 0 5px; font-family: Georgia,"Bitstream Charter",serif;}
+.front h1, .attachment-before h1{line-height: 18px; color: black; font-size: 18px; font-weight: bold; margin: 0; border: medium none; padding: 0 10px 0 5px; font-family: Georgia,"Bitstream Charter",serif;}
 .front .content.page, .attachment-before .content.page{font-family: Georgia,"Bitstream Charter",serif; font-size: 16px; padding: 10px 5px 0; text-align: justify;}
-.front .content.page{font-size: 13px;}
+.front .content.page{border-bottom: 1px dashed lightgray; font-size: 13px; margin-bottom: 10px;}
 
 /* Articles teasers */
 .node-teaser{font-family: Georgia,"Bitstream Charter",serif; margin-bottom: 0;}
