@@ -16,11 +16,16 @@
 
     <nav id="navigation" role="navigation" class="clearfix">
       <div id="header-menu-back"></div>
-      <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
-        <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
-      </a>
       
-      <?php echo '<div id="block-gv-blocks-header-links">', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
+      <div id="logo-block">
+        <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
+          <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
+        </a>
+        <div class="title">2012 VOIP<span class="star"></span></div>
+        <div class="subtitle">SERVICE PROVIDER REVIEWS</div>
+      </div>
+      
+      <?php echo '<div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
     </nav> <!-- /#navigation -->
 
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
