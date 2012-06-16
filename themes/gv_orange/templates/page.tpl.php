@@ -21,7 +21,7 @@
         <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
           <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
         </a>
-        <div class="title">2012 VOIP<span class="star"></span></div>
+        <div class="title">2012 VOIP</div><div class="stars"></div>
         <div class="subtitle">SERVICE PROVIDER REVIEWS</div>
       </div>
       
