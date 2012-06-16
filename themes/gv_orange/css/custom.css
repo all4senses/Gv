@@ -1,6 +1,13 @@
 /* General structue */
 body{background: url("images/header-back.png") repeat-x right top #e7e7e7;}
 
+/* Three columns layout */
+body.two-sidebars #sidebar-first {float: left; margin: 0 0 0 -857px; padding: 0; width: 180px;}
+body.two-sidebars #main {float: left; margin: 0 0 0 195px; padding: 0; width: 663px;}
+/* Two columns layout */
+body.one-sidebar.sidebar-second #main {background: white; padding: 10px; width: 825px;}
+
+
 #bshadow{margin: auto; position: relative; width: 1120px;}
 /*
 #bshadow #bs1{background: url("images/bshadow.png") no-repeat scroll -4px 0 transparent; height: 700px; left: 3px; position: absolute; top: 130px; width: 7px;}
@@ -9,6 +16,13 @@ body{background: url("images/header-back.png") repeat-x right top #e7e7e7;}
 #bshadow #bs1{background: url("images/bshadow.png") no-repeat -4px -20px; height: 700px; left: 7px; position: absolute; top: 130px; width: 3px;}
 #bshadow #bs2{background: url("images/bshadow.png") no-repeat -32px -20px; height: 700px; position: absolute; right: 7px; top: 130px; width: 3px;}
 
+
+
+/* Make captiona narrower */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: Georgia,"Bitstream Charter",serif;}
+h1{margin-top: 5px; margin-bottom: 5px; line-height: 40px;}
+
+
 strong{font-weight: bold;}
 em, p em{font-style: italic;}
 
@@ -16,14 +30,7 @@ h2, .h2 {line-height: 25px;}
 
 a{color: #275FA6;}
 a:visited{color: #275FA6;}
-#header, #navigation, #all-content, #footer-inside{width: 1100px; margin: auto;}
 
-/*#header{padding-top: 120px;}*/
-#header{padding-top: 90px;}
-
-
-
-#all-content, #highlighted{background: none repeat scroll 0 0 #F3F3F3; margin: auto; padding: 0 0 10px; width: 1100px;}
 
 .delim{margin: 0 5px 0 5px; /*color: #275FA6;*/}
 
@@ -33,22 +40,32 @@ a:visited{color: #275FA6;}
 input.blur,
 .ui-state-default.blur, .ui-widget-content .ui-state-default.blur, .ui-widget-header .ui-state-default.blur{color: lightgray;}
 
-/* Three columns layout */
-body.two-sidebars #sidebar-first {float: left; margin: 0 0 0 -857px; padding: 0; width: 180px;}
-body.two-sidebars #main {float: left; margin: 0 0 0 195px; padding: 0; width: 663px;}
-/* Two columns layout */
-body.one-sidebar.sidebar-second #main {background: white; padding: 10px; width: 825px;}
 
 
-/* Make captiona narrower */
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: Georgia,"Bitstream Charter",serif;}
-h1{margin-top: 5px; margin-bottom: 5px; line-height: 40px;}
+
+#header, #navigation, #all-content, #footer-inside{width: 1100px; margin: auto;}
+
+#header{padding-top: 85px;}
+
+
+
+#all-content, #highlighted{background: none repeat scroll 0 0 #F3F3F3; margin: auto; padding: 0 0 10px; width: 1100px;}
+
+
 
 /* Header */
 /*#header #header-menu-back{background: url("images/menu-main-back.png") repeat-x scroll 0 0 transparent; border-radius: 6px 6px 0 0; min-height: 45px;}*/
 #header #header-menu-back{background: url("images/sprite-2.png") repeat-x scroll 0 -58px #F3F3F3; border-radius: 6px 6px 0 0; min-height: 45px;}
 
-#header #logo-block{color: lightgray; font-family: arial; left: 0; position: absolute; top: 0; width: 500px;}
+/* Search block */
+#header #block-search-form{position: absolute; right: 10px; top: 95px;}
+#header #block-search-form input.form-text{height: 20px; width: 175px; padding-right: 30px; padding-left: 5px; }
+#header #block-search-form .form-actions{position: absolute; right: 0px; top: 5px;}
+#header #block-search-form input.form-submit{background: url("images/search.png") no-repeat scroll 0 0 transparent; text-indent: -9999px; width: 20px; height: 20px; border: none;}
+
+
+
+#header #logo-block{color: #C5C5C5; font-family: arial; left: 0; position: absolute; top: 0; width: 500px;}
 #header #logo{float: left; margin-right: 20px;}
 #header #logo-block .descr{float: left;}
 #header #logo-block .title{float: left; font-size: 27px; font-weight: bold; margin-top: 5px;}
@@ -56,15 +73,15 @@ h1{margin-top: 5px; margin-bottom: 5px; line-height: 40px;}
 #header #logo-block .subtitle{font-size: 15px;}
 
 
-#header #block-gv-blocks-header-links{color: white; margin: 0; padding: 0; position: absolute; right: 33px; top: 7px;}
-#header #block-gv-blocks-header-links .follow-us{}
-ul.header-links{margin: 0; padding: 0;}
+#header #block-gv-blocks-header-links{color: white; margin: 0; padding: 0; position: absolute; right: 33px; top: 5px;}
+#header #block-gv-blocks-header-links .follow-us{color: #C5C5C5; font-size: 14px;}
+ul.header-links{margin: 5px 0 0; padding: 0;}
 ul.header-links li{float: left;}
 ul.header-links a{display: block; text-indent: -9999px; width: 35px; height: 42px; margin-right: 7px;}
-ul.header-links a.Twitter{background: url("images/sprite-2.png") no-repeat scroll 0 -197px transparent;}
+ul.header-links a.Twitter{background: url("images/sprite-2.png") no-repeat scroll 0 -199px transparent;}
 ul.header-links a.Facebook{background: url("images/sprite-2.png") no-repeat scroll 0 -239px transparent;}
 ul.header-links a.GooglePlus{background: url("images/sprite-2.png") no-repeat scroll 0 -322px transparent;}
-ul.header-links a.LinkedIn{background: url("images/sprite-2.png") no-repeat scroll 0 -280px transparent;}
+ul.header-links a.LinkedIn{background: url("images/sprite-2.png") no-repeat scroll 0 -282px transparent;}
 
 ul.header-links a.Submit.Reviews{background: url("images/block-head-red.png") repeat-x scroll 0 0 red; border: 1px solid red; border-radius: 3px 3px 3px 3px; color: white; padding: 0 2px 0 3px; margin: 0; position: absolute; right: 0; text-indent: 0; top: 52px; width: 145px; height: 25px; font-weight: bold;  text-align: center;}
 
@@ -90,7 +107,7 @@ ul.header-links a.Submit.Reviews{background: url("images/block-head-red.png") re
 ul.gv{margin-left: 0px; padding-left: 10px;}
 /*.om-maximenu-simple .om-maximenu-middle-right {background-color: lightgray;}*/
 /*.block.block-om-maximenu{left: 10px; position: absolute; top: 122px; font-family: Georgia,"Bitstream Charter",serif;}*/
-.block.block-om-maximenu{left: 11px; position: absolute; top: 92px; font-family: Georgia,"Bitstream Charter",serif;}
+.block.block-om-maximenu{left: 11px; position: absolute; top: 87px; font-family: Georgia,"Bitstream Charter",serif;}
 
 
 .om-btitle {float: left; position: absolute; left: -180px;}
@@ -387,17 +404,6 @@ body.sidebar-second #sidebar-second{float: right; margin-right: 18px; padding: 1
 
 ul{list-style: none;}
 .sidebar .block li{list-style: none;}
-   
-
-
-/* Search block */
-/*#header #block-search-form{position: absolute; right: 10px; top: 128px;}*/
-#header #block-search-form{position: absolute; right: 10px; top: 99px;}
-
-#header #block-search-form input.form-text{height: 20px; width: 175px; padding-right: 30px; padding-left: 5px; }
-#header #block-search-form .form-actions{position: absolute; right: 0px; top: 5px;}
-#header #block-search-form input.form-submit{background: url("images/search.png") no-repeat scroll 0 0 transparent; text-indent: -9999px; width: 20px; height: 20px; border: none;}
-   
 
 /* Characters counter */
 .form-item{position: relative;}
