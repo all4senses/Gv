@@ -1066,7 +1066,7 @@ body.node-type-quote.page-node-139{background: none;}
 .node-type-admin-page .field-name-body table td{vertical-align: top;}
 
 
-/* Experimental */
+/* Experimental - set white for all-content and gray for the side*/
 
 #all-content, #highlighted {background: white; margin: auto; padding: 0 0 10px; width: 1100px;}
 body.one-sidebar.sidebar-second #main{background: white; padding: 10px; width: 825px;}
@@ -1074,6 +1074,8 @@ body.sidebar-second #sidebar-second {background: #F3F3F3; float: right; margin-r
 
 
 
+/* Experimental - with the image as a background */
+/* image with shadows */
 #bshadow #bs1 {
     background: none;
 }
@@ -1089,7 +1091,35 @@ body.sidebar-second #sidebar-second {background: #F3F3F3; float: right; margin-r
 
 body.one-sidebar.sidebar-second #main {
     background: none;
+    margin-left: 10px;
 }
 body.sidebar-second #sidebar-second {
     background: none;
  }
+
+ 
+ /* image withOUT shadows, and shadow as a browser effect */
+ 
+  #all-content, #highlighted {
+    background: url("images/main-back.png") repeat-y scroll -5px 0 transparent;
+    box-shadow: 0 0 5px #DDDDDD, 0 0 7px #000000;
+    margin: auto;
+    padding: 0;
+    width: 1100px;
+}
+body.one-sidebar.sidebar-second #main {
+    background: none repeat scroll 0 0 transparent;
+    margin-left: 8px;
+}
+body.one-sidebar.sidebar-second #main {
+    background: none repeat scroll 0 0 white;
+    padding: 10px;
+    width: 820px;
+}
+body.sidebar-second #sidebar-second {
+    background: none repeat scroll 0 0 #F3F3F3;
+    float: right;
+    margin-right: 0;
+    padding: 20px 18px 20px 20px;
+    width: 210px;
+}
