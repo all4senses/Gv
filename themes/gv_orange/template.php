@@ -45,7 +45,7 @@ function gv_orange_preprocess_html(&$vars) {
   //$vars['classes_array'][] = drupal_html_class($theme_key);
   
   $vars['classes_array'][] = 'teeeeeeest';
-dpm($vars);  
+dpm(array_keys($vars));  
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
   //$vars['classes_array'][] = css_browser_selector();
