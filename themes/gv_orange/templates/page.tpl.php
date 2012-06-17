@@ -1,6 +1,3 @@
-  
-<?php dpm($classes); ?>
-
   <div id="bshadow">
     <div id="bs1"></div>
     <div id="bs2"></div>
