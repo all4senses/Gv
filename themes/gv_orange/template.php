@@ -62,7 +62,7 @@ function gv_orange_process_html(&$vars) {
  */
 
 function gv_orange_preprocess_page(&$vars) {
-
+$vars['classes_array'][] = 'tesssst';
 dpm($vars);
 
 }
