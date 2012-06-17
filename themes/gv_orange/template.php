@@ -47,6 +47,8 @@ function gv_orange_preprocess_html(&$vars) {
   $vars['classes_array'][] = 'teeeeeeest';
 dpm(array_keys($vars));  
 dpm(array_keys($vars['page']));  
+dpm(array_keys($vars['page']['#type']));  
+dpm(array_keys($vars['page']['content']));  
 
 //dpm($vars['page']);
 dpm($vars['classes_array']);  
