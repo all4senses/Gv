@@ -42,8 +42,10 @@ function gv_orange_preprocess_html(&$vars) {
   
   // Add class for the active theme name
   // Uncomment to add a class for the active theme name.
-  $vars['classes_array'][] = drupal_html_class($theme_key);
-
+  //$vars['classes_array'][] = drupal_html_class($theme_key);
+  
+  $vars['classes_array'][] = 'teeeeeeest';
+  
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
   //$vars['classes_array'][] = css_browser_selector();
