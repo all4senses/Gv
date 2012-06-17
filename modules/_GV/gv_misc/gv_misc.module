@@ -50,6 +50,28 @@ function gv_misc_menu() {
 
 
 /**
+ * Allow modules to define namespaces for RDF mappings.
+ *
+ * Many common namespace prefixes are defined in rdf_rdf_namespaces(). However,
+ * if a module implements hook_rdf_mapping() and uses a prefix that is not
+ * defined in rdf_rdf_namespaces(), this hook should be used to define the new
+ * namespace prefix.
+ *
+ * @return
+ *   An associative array of namespaces where the key is the namespace prefix
+ *   and the value is the namespace URI.
+ *
+ * @ingroup rdf
+ */
+function gv_misc_rdf_namespaces() {
+  return array(
+    'xmlns:addthis'  => 'http://www.addthis.com/help/api-spec',
+    'xmlns:g'  => 'http://base.google.com/ns/1.0',
+  );
+}
+
+
+/**
  * Implements hook_TYPE_alter().
  * 
  * Specifically hook_html_head_alter().
