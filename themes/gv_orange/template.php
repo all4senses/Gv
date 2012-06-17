@@ -67,10 +67,10 @@ dpm($vars);
 
 }
 
-/* -- Delete this line if you want to use these functions
 function gv_orange_process_page(&$vars) {
+  dpm($vars['classes']);
 }
-// */
+
 
 /**
  * Override or insert variables into the node templates.
