@@ -8,16 +8,16 @@
  *    stylesheets for Internet Explorer and a browser detection script to add body classes.
  */
 
-/* -- Delete this line if you want to use this function
+
 function gv_orange_preprocess_html(&$vars) {
   // Load the media queries styles
   // Remember to rename these files to match the names used here - they are
   // in the CSS directory of your subtheme.
-  $media_queries_css = array(
-    'gv_orange.responsive.style.css',
-    'gv_orange.responsive.gpanels.css'
-  );
-  load_subtheme_media_queries($media_queries_css, 'gv_orange');
+//  $media_queries_css = array(
+//    'gv_orange.responsive.style.css',
+//    'gv_orange.responsive.gpanels.css'
+//  );
+//  load_subtheme_media_queries($media_queries_css, 'gv_orange');
 
 
 //  * Load IE Stylesheets
@@ -42,11 +42,11 @@ function gv_orange_preprocess_html(&$vars) {
   
   // Add class for the active theme name
   // Uncomment to add a class for the active theme name.
-  //$vars['classes_array'][] = drupal_html_class($theme_key);
+  $vars['classes_array'][] = drupal_html_class($theme_key);
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
-  //$vars['classes_array'][] = css_browser_selector();
+  $vars['classes_array'][] = css_browser_selector();
 
 }
 // */
@@ -68,7 +68,7 @@ dpm($vars);
 }
 
 function gv_orange_process_page(&$vars) {
-  dpm($vars['classes']);
+  //dpm($vars['classes']);
 }
 
 
