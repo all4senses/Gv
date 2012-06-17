@@ -46,12 +46,10 @@ function gv_orange_preprocess_html(&$vars) {
   
   $vars['classes_array'][] = 'teeeeeeest';
 dpm(array_keys($vars));  
+dpm(array_keys($vars['page']));  
 
-dpm($vars['page']);
+//dpm($vars['page']);
 dpm($vars['classes_array']);  
-
-dpm($vars->page);
-dpm($vars->classes_array);  
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
