@@ -46,7 +46,7 @@ function gv_orange_preprocess_html(&$vars) {
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
-  $vars['classes_array'][] = css_browser_selector();
+  //$vars['classes_array'][] = css_browser_selector();
 
 }
 // */
