@@ -1,6 +1,4 @@
-  <div id="bshadow">
-    <div id="bs1"></div>
-    <div id="bs2"></div>
+<div id="bshadow">
     
     
   <div id="skip-link">
@@ -9,7 +7,6 @@
       <a href="#navigation" class="element-invisible element-focusable"><?php print t('Skip to navigation'); ?></a>
     <?php endif; ?>
   </div>
-
 
   
   <header id="header" role="banner" class="clearfix">
@@ -22,8 +19,8 @@
           <img src="<?php print $logo; ?>" alt="<?php print t('GetVoIP Home'); ?>" />
         </a>
         <div class="descr">
-          <div class="title">2012 VOIP</div><div class="stars"></div>
-          <div class="subtitle">SERVICE PROVIDER REVIEWS</div>
+          <div class="title">2012 VOIP GUIDE</div>
+          <div class="subtitle">SERVICE PROVIDER REVIEWS</div><div class="stars"></div>
         </div>
       </div>
       
@@ -50,13 +47,11 @@
           <?php print $messages; ?>
           <a id="main-content"></a>
           
-          <!-- 
-          <?php //if (!$is_front && $title): ?>
-            <?php //print render($title_prefix); ?>
-            <h1 class="title" id="page-title"><?php //print $title; ?></h1>
-            <?php //print render($title_suffix); ?>
-          <?php //endif; ?>
-          -->
+          <?php /* if (!$is_front && $title): ?>
+            <?php print render($title_prefix); ?>
+            <h1 class="title" id="page-title"><?php print $title; ?></h1>
+            <?php print render($title_suffix); ?>
+          <?php endif; */ ?>
           
           <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
           <?php print render($page['help']); ?>
