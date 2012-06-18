@@ -45,7 +45,13 @@ function gv_orange_preprocess_html(&$vars) {
   //$vars['classes_array'][] = drupal_html_class($theme_key);
   
   // Works!
-  //$vars['classes_array'][] = 'teeeeeeest';
+  global $user;
+  if ($user->uid == 1 || ($user->uid && in_array('administrator', $user->roles)) ) {
+    $vars['classes_array'][] = 'admin';
+  }
+  else {
+    $vars['classes_array'][] = 'not-admin';
+  }
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
