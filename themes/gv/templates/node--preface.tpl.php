@@ -18,7 +18,7 @@
 
   <?php print render($title_prefix); ?>
 
-    <h1<?php print /*$title_attributes*/preg_replace('/datatype=""/', '', $title_attributes); ?>>
+    <h1 class="preface" <?php print /*$title_attributes*/preg_replace('/datatype=""/', '', $title_attributes); ?>>
         <?php print $title; ?>
     </h1>
 
@@ -29,7 +29,7 @@
     <span class="submitted"><?php print $submitted; ?></span>
   <?php endif; ?>
 
-  <div class="content page"<?php print $content_attributes; ?>>
+  <div class="content page preface"<?php print $content_attributes; ?>>
     <?php
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
