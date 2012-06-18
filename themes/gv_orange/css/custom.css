@@ -739,11 +739,11 @@ form .counter.exceeded{color: red;}
 
 .page-node.page-node-77 #main .main-content h1,
 .page-node.page-node-90 #main .main-content h1,
-h1.preface{border: none; color: black; font-family: Georgia,"Bitstream Charter",serif; font-size: 18px; font-weight: bold; line-height: 18px; margin: 0; padding: 0 10px 0 5px;}
+h1.preface{border: none; color: black; font-family: Georgia,"Bitstream Charter",serif; font-size: 18px; font-weight: bold; line-height: 18px; margin: 0; padding: 0 10px 0 0;}
 
 .page-node.page-node-77 #main .main-content .content,
 .page-node.page-node-90 #main .main-content .content,
-.front .content.page.preface, .attachment-before .content.page.preface{font-family: Georgia,"Bitstream Charter",serif; font-size: 13px; padding: 10px 5px 0; text-align: justify;}
+.front .content.page.preface, .attachment-before .content.page.preface{font-family: Georgia,"Bitstream Charter",serif; font-size: 13px; padding: 10px 5px 0 0; text-align: justify;}
 
 .page-node.page-node-77 #main .main-content .content p,
 .page-node.page-node-90 #main .main-content .content p,
@@ -1119,31 +1119,18 @@ body.sidebar-second #sidebar-second {background: #F3F3F3; float: right; margin-r
 
 /* Experimental - with the image as a background */
 /* image with shadows */
-#bshadow #bs1 {
-    background: none;
-}
-#bshadow #bs2 {
-    background: none;
-}
+#bshadow #bs1,
+#bshadow #bs2{background: none;}
+/*
+#all-content, #highlighted {background: url("images/main-back.png") repeat-y scroll 0 0 transparent; margin: auto; padding: 0; width: 1110px;}
+body.one-sidebar.sidebar-second #main {background: none; margin-left: 10px;}
+body.one-sidebar.sidebar-second #sidebar-second {background: none;}
+*/
+ 
+
+/* image withOUT shadows, and shadow as a browser effect */
+ 
 #all-content, #highlighted {
-    background: url("images/main-back.png") repeat-y scroll 0 0 transparent;
-    margin: auto;
-    padding: 0;
-    width: 1110px;
-}
-
-body.one-sidebar.sidebar-second #main {
-    background: none;
-    margin-left: 10px;
-}
-body.sidebar-second #sidebar-second {
-    background: none;
- }
-
- 
- /* image withOUT shadows, and shadow as a browser effect */
- 
-  #all-content, #highlighted {
     background: url("images/main-back.png") repeat-y scroll -5px 0 white;
     box-shadow: 0 0 5px #DDDDDD, 0 0 7px #000000;
     margin: auto;
@@ -1151,18 +1138,18 @@ body.sidebar-second #sidebar-second {
     width: 1100px;
 }
 body.one-sidebar.sidebar-second #main {
-    background: none repeat scroll 0 0 transparent;
-    margin-left: 6px;
-}
-body.one-sidebar.sidebar-second #main {
     background: none repeat scroll 0 0 white;
     padding: 10px;
+    margin-left: 6px;
     width: 820px;
 }
-body.sidebar-second #sidebar-second {
-    background: none repeat scroll 0 0 #F3F3F3;
+body.one-sidebar.sidebar-second #sidebar-second {
+    background: none #F3F3F3;
     float: right;
     margin-right: 0;
     padding: 20px 18px 20px 20px;
     width: 210px;
 }
+
+/* Reset those data for separate quote pages */
+body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
