@@ -49,7 +49,7 @@ function gv_orange_preprocess_html(&$vars) {
   if ($user->uid == 1 || ($user->uid && in_array('administrator', $user->roles)) ) {
     $vars['classes_array'][] = 'admin';
   }
-  elseif ($user->uid == 1 || ($user->uid && in_array('writer', $user->roles)) ) {
+  elseif ($user->uid && in_array('writer', $user->roles) ) {
     $vars['classes_array'][] = 'writer';
   }
   else {
