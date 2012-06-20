@@ -48,6 +48,13 @@
               $created_str = date('F d, Y \a\t g:ia', $node->created); 
               $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
               
+              
+              $author = user_load($node->uid);
+              $author_name = $author->realname;
+              $author_url = url('user/' . $node->uid);
+              $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
+
+                
               if ($page) {
                 
                 /*
@@ -64,11 +71,7 @@
                 }
                 */
                
-                $author = user_load($node->uid);
-                $author_name = $author->realname;
-                $author_url = url('user/' . $node->uid);
-                $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
-
+                
                 if ($node->uid) {
                   global $language;
                   
