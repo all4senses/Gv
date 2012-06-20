@@ -52,7 +52,7 @@
               $author = user_load($node->uid);
               $author_name = $author->realname;
               // Temporary replaced with a link to /our-team
-              ////$author_url = url('user/' . $node->uid);
+              $author_url = '/our-team'; //url('user/' . $node->uid);
               
 
               global $language;
@@ -83,7 +83,7 @@
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   t('By') .
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
-                                  '<a href="' . '/our-team' . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
+                                  '<a href="' . $author_url . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
                                   '</a>' . $gplus_profile .
                                   //'<span class="delim">|</span>' . $created_str .
@@ -107,7 +107,7 @@
               else {
                 echo t('By') .
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
-                                  '<a href="' . '/our-team' . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
+                                  '<a href="' . $author_url . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
                                   '</a>' . $gplus_profile;//$created_str;
               }
