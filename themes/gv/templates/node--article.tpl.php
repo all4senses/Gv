@@ -51,12 +51,15 @@
               
               $author = user_load($node->uid);
               $author_name = $author->realname;
-              $author_url = url('user/' . $node->uid);
-              $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
+              // Temporary replaced with a link to /our-team
+              ////$author_url = url('user/' . $node->uid);
+              
 
               global $language;
               
               if ($page) {
+              
+                $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
                 
                 /*
                 global $user;
