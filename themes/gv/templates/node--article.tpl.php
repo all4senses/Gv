@@ -109,7 +109,7 @@
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                   '<a href="' . $author_url . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
-                                  '</a>' . $gplus_profile;//$created_str;
+                                  '</a>';// . $gplus_profile;//$created_str;
               }
               
             ?>
