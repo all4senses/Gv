@@ -86,7 +86,7 @@
                                   '<a href="' . $author_url . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
                                   '</a>' . $gplus_profile .
-                                  ($node-type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
+                                  ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
                                '</span>';
                   
                  
@@ -97,7 +97,7 @@
                                   '<span class="username">' .
                                     t('Guest') .
                                   '</span>' .
-                                  ($node-type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
+                                  ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
                                '</span>';
                   
                 }
@@ -105,7 +105,7 @@
                 echo $submitted;
               }
               else {
-                if ($node-type == 'article') {
+                if ($node->type == 'article') {
                   echo t('By') , ' ' , $author_name;
                 }
                 else {
