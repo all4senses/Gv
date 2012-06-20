@@ -86,7 +86,7 @@
                                   '<a href="' . $author_url . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
                                   '</a>' . $gplus_profile .
-                                  //'<span class="delim">|</span>' . $created_str .
+                                  ($node-type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
                                '</span>';
                   
                  
@@ -97,7 +97,7 @@
                                   '<span class="username">' .
                                     t('Guest') .
                                   '</span>' .
-                                  //'<span class="delim">|</span>' . $created_str .
+                                  ($node-type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
                                '</span>';
                   
                 }
@@ -105,11 +105,12 @@
                 echo $submitted;
               }
               else {
-                echo t('By') .
-                                  //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
-                                  '<a href="' . $author_url . '" title="Meet Our Team" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
-                                    $author_name .
-                                  '</a>';// . $gplus_profile;//$created_str;
+                if ($node-type == 'article') {
+                  echo t('By') , ' ' , $author_name;
+                }
+                else {
+                  echo $created_str;
+                }
               }
               
             ?>
