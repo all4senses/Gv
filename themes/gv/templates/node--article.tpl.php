@@ -14,7 +14,7 @@
         <header>
       <?php endif; ?>
 
-        <?php print $user_picture; ?>
+        <?php //print $user_picture; ?>
 
         <?php print render($title_prefix); ?>
 
