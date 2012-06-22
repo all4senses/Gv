@@ -35,7 +35,7 @@
 <div class="profile"<?php print $attributes; ?>>
   <?php //print render($user_profile); ?>
   
-  <?php //dpm($user_profile); ?>
+  <?php dpm($user_profile); ?>
   
   <?php 
     $user_name = $user_profile['field_u_fname'][0]['#markup'] . ' ' . $user_profile['field_u_lname'][0]['#markup'];
