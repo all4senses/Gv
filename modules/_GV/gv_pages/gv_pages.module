@@ -436,6 +436,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         drupal_goto('');
       }
       
+      $form['field_u_bio']['und'][0]['#format'] = 'filtered_html';
+      
       break;
       
       

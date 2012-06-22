@@ -38,10 +38,7 @@
   <?php dpm($user_profile); ?>
   
   <?php 
-    //$form['body']['und'][0]['#format'] = 'filtered_html';
-    $user_profile['field_u_bio']['#items'][0]['#format'] = 'filtered_html';
-  
-  
+ 
     $user_name = $user_profile['field_u_fname'][0]['#markup'] . ' ' . $user_profile['field_u_lname'][0]['#markup'];
     
     echo '<div id="user-caption">Meet: ' , $user_name, '</div>', render($user_profile['user_picture']), render($user_profile['field_u_bio']),  '<div class="bottom-clear"></div>';
