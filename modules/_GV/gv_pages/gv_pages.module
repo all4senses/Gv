@@ -2190,10 +2190,8 @@ function gv_pages_node_view($node, $view_mode) {
           'function' => 'average',
         );
         $votes = votingapi_select_results($criteria);
-        dpm($votes);
         $criteria['function'] = 'count';
         $counts = votingapi_select_results($criteria);
-        dpm($counts);
         $node->gv_voters = isset($counts[0]['value']) ? $counts[0]['value'] : '';
         gv_pages_addRatingsToNodeThemed($node, $votes, $counts);
 
