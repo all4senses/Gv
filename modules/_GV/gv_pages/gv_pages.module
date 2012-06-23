@@ -1908,7 +1908,8 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   else {
     // clear previous votes
     // we have to do it now, having the old email, in case it has been changed.
-    dpm($form_state['values']);
+    dpr($form_state['values']);
+    die;
   }
   
   // Redirect doesn't work this way!
