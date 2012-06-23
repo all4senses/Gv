@@ -1350,6 +1350,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
         }
 
+        // Save the current email... in case it will be changes now, we could delete old it's votes connected to the old email.
+        $form['email_old'] = array(
+          '#type' => 'hidden',
+          '#value' => $form['about_you']['field_r_email_temp']['#default_value'],
+        );
+        
         // Disallow to choose another email for a registered user.
         if (!$current_user_is_admin) {
           $form['about_you']['field_r_email_temp']['#access'] = FALSE;
@@ -1898,6 +1904,11 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     drupal_set_message($text);
     // Notify all admins.
     gv_misc_sendMessage('new_review_admin_notify');
+  }
+  else {
+    // clear previous votes
+    // we have to do it now, having the old email, in case it has been changed.
+    dpm($form_state['values']);
   }
   
   // Redirect doesn't work this way!
