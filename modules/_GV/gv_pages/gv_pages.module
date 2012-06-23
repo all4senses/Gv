@@ -1904,13 +1904,50 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     drupal_set_message($text);
     // Notify all admins.
     gv_misc_sendMessage('new_review_admin_notify');
-  }
+  } // End of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
   else {
-    // clear previous votes
-    // we have to do it now, having the old email, in case it has been changed.
-    dpr($form_state['values']);
-    die;
-  }
+    // clear previous votes if an email has been chabged
+    // Some excessive code, that duplicates almost the same in hook_update, but only in case if an email has been changed
+    if ($form_state['values']['email_old'] != $form_state['values']['field_r_email_temp']) {
+      
+      $provider_nid = isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) ? $form_state['values']['field_ref_provider']['und'][0]['target_id'] : NULL;
+      if ($provider_nid && $provider_nid != 7) {
+        $saved_ratings = unserialize($form_state['values']['field_ratings_oprovider']['und'][0]['value']);
+        
+        $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
+        $votes = array();
+        
+        foreach ($vote_keys as $vote_key => $vote_title) {
+          $votes[] = array(
+            'tag' => $vote_key,
+            'entity_type' => 'node',
+            'entity_id' => $provider_nid,
+            'uid' => $form_state['values']['uid'],
+            'vote_source' => $form_state['values']['email_old'],
+          );
+        }
+        // Overall average rating.
+        $votes[] = array(
+          'tag' => 'overall',
+          'entity_type' => 'node',
+          'entity_id' => $provider_nid,
+          'uid' => $form_state['values']['uid'],
+          'vote_source' => $form_state['values']['email_old'],
+        );
+        
+        // Remove (clear) this review's previous votes from a target provider calculation set.
+        foreach ($votes as $c) {
+          $select_votes = gv_misc_getVotesIDs($c); //votingapi_select_votes($c);
+          votingapi_delete_votes($select_votes);
+        }
+        
+      } // End of if ($provider_nid && $provider_nid != 7) {
+      
+    } // End of if ($form_state['values']['email_old'] != $form_state['values']['field_r_email_temp'])
+    
+  } // End of Else of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
+  
+  
   
   // Redirect doesn't work this way!
   //$form_state['redirect'] = '/'; 
