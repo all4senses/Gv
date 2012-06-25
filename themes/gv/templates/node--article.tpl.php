@@ -52,15 +52,15 @@
               $author = user_load($node->uid);
               $author_name = $author->realname;
               // Temporary replaced with a link to /our-team
-              if ($node->type == 'article') {
+              //if ($node->type == 'article') {
                 $author_url = url('user/' . $node->uid);
                 $author_title = t('!author\'s profile', array('!author' => $author_name));
-              }
+              /*}
               else {
                 $author_url = '/our-team'; //url('user/' . $node->uid);
                 $author_title = t('Meet Our Team');
               }
-              
+              */
 
               global $language;
               
