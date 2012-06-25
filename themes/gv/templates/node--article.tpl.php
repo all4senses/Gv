@@ -146,6 +146,7 @@
             hide($content['body']);
           }
           
+          hide($content['metatags']['keywords']);
           dpm($content);
           print render($content);
           
