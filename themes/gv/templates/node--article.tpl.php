@@ -146,6 +146,7 @@
             hide($content['body']);
           }
           
+          dpm($content);
           print render($content);
           
           //dpm($node);
