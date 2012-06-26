@@ -414,6 +414,9 @@ function gv_blocks_get_requestQuote() {
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
+
+  global $user;
+  dpm($user);
   
   $out = '
    <div id="requestQuoteFormWrapper">
