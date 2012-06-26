@@ -146,7 +146,12 @@
             hide($content['body']);
           }
           
-          hide($content['metatags']['keywords']);
+          global $user;
+          //if (!isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) || !$content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
+          if ($user->uid == 1) {
+            hide($content['metatags']['keywords']);
+            gv_misc_addMetatag('keywords', 'getvoip.com');
+          }
           dpm($content);
           print render($content);
           
