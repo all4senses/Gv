@@ -53,6 +53,7 @@ function gv_misc_pushTagsToMetatags($name, $value) {
   switch ($name) {
     case 'keywords':
       $t = '';
+      dpm($value);
       $tags = element_children($value);
       dpm($tags);
       foreach ($tags as $tag) {
