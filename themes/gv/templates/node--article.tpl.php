@@ -146,7 +146,7 @@
             hide($content['body']);
           }
           
-          if (!isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) || !$content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
+          if (isset($content['field_topics']) && (!isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) || !$content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) ) {
             hide($content['metatags']['keywords']);
             gv_misc_pushTagsToMetatags('keywords', $content['field_topics']);
           }
