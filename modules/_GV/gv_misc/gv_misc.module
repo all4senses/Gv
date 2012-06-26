@@ -453,6 +453,7 @@ function gv_misc_makeRequest_ajax() {
 
         'Source' => $post['source'],
         'Version' => $post['version'],
+        'User IP' => $post['ip'],
       );
       if ($post['version'] == '2') {
         unset($submission['Quote for'], $submission['Website']);
