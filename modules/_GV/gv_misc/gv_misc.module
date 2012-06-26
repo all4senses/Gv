@@ -49,6 +49,20 @@ function gv_misc_menu() {
 }
 
 
+function gv_misc_pushTagsToMetatags($name, $value) {
+  switch ($name) {
+    case 'keywords':
+      $t = '';
+      $tags = element_children($value);
+      foreach ($tags as $tag) {
+        $t = $t ? ', ' . $tag['#title'] : $tag['#title'];
+      }
+      gv_misc_addMetatag($name, $t);
+      break;
+  }
+}
+
+
 /**
  * Allow modules to define namespaces for RDF mappings.
  *
@@ -63,6 +77,7 @@ function gv_misc_menu() {
  *
  * @ingroup rdf
  */
+// a4s Seems it didn't work out...
 function gv_misc_rdf_namespaces() {
   return array(
     'xmlns:addthis'  => 'http://www.addthis.com/help/api-spec',
