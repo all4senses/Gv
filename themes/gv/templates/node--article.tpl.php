@@ -146,13 +146,10 @@
             hide($content['body']);
           }
           
-          global $user;
-          //if (!isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) || !$content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
-          if ($user->uid == 1) {
+          if (!isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) || !$content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
             hide($content['metatags']['keywords']);
             gv_misc_pushTagsToMetatags('keywords', $content['field_topics']);
           }
-          dpm($content);
           print render($content);
           
           //dpm($node);
