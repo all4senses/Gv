@@ -416,7 +416,6 @@ function gv_blocks_get_requestQuote() {
   $_SESSION['requestQuoteToken'] = $token;
 
   global $user;
-  dpm($user->hostname);
   
   $out = '
    <div id="requestQuoteFormWrapper">
@@ -519,6 +518,7 @@ function gv_blocks_get_requestQuote() {
                 </div>
                 
                 <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="ip" value="' . $user->hostname . '" />
                 <input type="hidden" name="source" value="block" />
         </form>
 
