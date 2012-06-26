@@ -141,6 +141,27 @@ function gv_username($object) {
 }
 
 
+
+/**
+ * Process variables for search-result.tpl.php.
+ *
+ * The $variables array contains the following arguments:
+ * - $result
+ * - $module
+ *
+ * @see search-result.tpl.php
+ */
+function gv_preprocess_search_result(&$variables) {
+  dpm($variables);
+  
+  $result = $variables['result'];
+  if (!empty($result['date'])) {
+    //$info['date'] = format_date($result['date'], 'short');
+    $info['date'] = format_date($result['node']->created, 'short');
+  }
+}
+
+
 /**
  * Theme function for a CAPTCHA element.
  * 
