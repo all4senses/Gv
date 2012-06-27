@@ -152,7 +152,7 @@ function gv_username($object) {
  * @see search-result.tpl.php
  */
 function gv_preprocess_search_result(&$variables) {
-  dpm($variables);
+
   
   $result = $variables['result'];
   
@@ -170,6 +170,7 @@ function gv_preprocess_search_result(&$variables) {
   $variables['info_split'] = $info;
   $variables['info'] = $result['node']->created; //$info['date']; //implode(' - ', $info);
 
+    dpm($variables);
 }
 
 
