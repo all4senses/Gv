@@ -45,7 +45,7 @@
           <span class="submitted">
             <?php 
             
-              $created_str = date('F d, Y \a\t g:ia', $node->created); 
+              $created_str = date('F d, Y \a\t g:ia', $node->created);
               $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
               
               
