@@ -415,10 +415,6 @@ function gv_blocks_get_requestQuote() {
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
-  global $user;
-  dpm($user);
-  dpm($_SERVER);
-  
   $out = '
    <div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
@@ -559,8 +555,6 @@ function gv_blocks_get_requestQuoteForPage() {
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
   
-  global $user;
-  
   $out = '
    <div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
@@ -666,7 +660,6 @@ function gv_blocks_get_requestQuoteForPage() {
                 </div>
                 
                 <input type="hidden" name="token" value="' . $token . '" />
-                <input type="hidden" name="ip" value="' . $user->hostname . '" />
                 <input type="hidden" name="source" value="page" />
                 <input type="hidden" name="version" value="1" />
                 
@@ -705,8 +698,6 @@ function gv_blocks_get_requestQuoteForPage_v2() {
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
-  
-  global $user;
   
   $out = '
    <div id="requestQuoteFormWrapper">
@@ -806,7 +797,6 @@ function gv_blocks_get_requestQuoteForPage_v2() {
                 </div>
                 
                 <input type="hidden" name="token" value="' . $token . '" />
-                <input type="hidden" name="ip" value="' . $user->hostname . '" />
                 <input type="hidden" name="source" value="page" />
                 <input type="hidden" name="version" value="2" />
                 
