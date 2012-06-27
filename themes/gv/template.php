@@ -167,7 +167,7 @@ function gv_preprocess_search_result(&$variables) {
   dpm($info);
   // Provide separated and grouped meta information..
   $variables['info_split'] = $info;
-  $variables['info'] = $info['date']; //implode(' - ', $info);
+  $variables['info'] = 'xxx'; //$info['date']; //implode(' - ', $info);
 
 }
 
