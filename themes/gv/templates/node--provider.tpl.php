@@ -2,18 +2,7 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
 
-    
-<?php
-
-//dpm($content);
-//dpm($node->p_data);
-//dpm($node);
-
-?>
-
-
-
-        
+           
   <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
         <?php if ($page): ?>
@@ -50,7 +39,7 @@
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
+                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
                   }
                   else {
                     //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
@@ -106,15 +95,15 @@
                   <div><?php echo '<span class="title">' . t('Headquarters') . ':</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $node->p_data['info']['i_founded']; ?></div>
                   <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $node->p_data['info']['i_availability']; ?></div>
-                  <div><?php if (!$node->p_data['info']['i_web_hide']) echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web'], array('attributes' => array('rel' => 'v:url'))); ?></div>
+                  <div><?php if (!$node->p_data['info']['i_web_hide']) echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web'], array('attributes' => array('rel' => 'v:url', 'target' => '_blank'))); ?></div>
                 </div>
               </div>
              
               <div class="image">
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div><a href="' , $node->p_data['info']['i_web'] , '">' , theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) , '</a></div>', 
-                         '<div class="site">' , l('Visit ' . $content['field_p_name'][0]['#markup'], $node->p_data['info']['i_web']) , '</div>';
+                    echo '<div><a href="' , $node->p_data['info']['i_web'] , '" target="_blank">' , theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) , '</a></div>', 
+                         '<div class="site">' , l('Visit ' . $content['field_p_name'][0]['#markup'], $node->p_data['info']['i_web'], array('attributes' => array('target' => '_blank'))) , '</div>';
                   }
                 ?>  
                 
