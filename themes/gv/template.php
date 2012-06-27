@@ -167,7 +167,7 @@ function gv_preprocess_search_result(&$variables) {
     $info['date'] = format_date($result['date'], 'short');
     
     
-    //$info['date'] = format_date($result['node']->created, 'short');
+    $info['date'] = format_date($result['node']->created, 'short');
   }
   if (isset($result['extra']) && is_array($result['extra'])) {
     $info = array_merge($info, $result['extra']);
