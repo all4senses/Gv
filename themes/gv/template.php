@@ -161,8 +161,10 @@ function gv_preprocess_search_result(&$variables) {
   if (!empty($result['date'])) {
     //$info['date'] = format_date($result['date'], 'short');
     $info['date'] = format_date($result['node']->created, 'short');
+    dpm($result['node']->created);
   }
   
+  dpm($info);
   // Provide separated and grouped meta information..
   $variables['info_split'] = $info;
   $variables['info'] = $info['date']; //implode(' - ', $info);
