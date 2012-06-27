@@ -156,23 +156,13 @@ function gv_preprocess_search_result(&$variables) {
   
   $result = $variables['result'];
   
-  $info = array();
-  if (!empty($result['module'])) {
-    $info['module'] = check_plain($result['module']);
-  }
-  if (!empty($result['user'])) {
-    $info['user'] = $result['user'];
-  }
+  $info = $variables['info'];
+  
   if (!empty($result['date'])) {
-    $info['date'] = format_date($result['date'], 'short');
-    
-    
+    //$info['date'] = format_date($result['date'], 'short');
     $info['date'] = format_date($result['node']->created, 'short');
   }
-  if (isset($result['extra']) && is_array($result['extra'])) {
-    $info = array_merge($info, $result['extra']);
-  }
-
+  
   // Provide separated and grouped meta information..
   $variables['info_split'] = $info;
   $variables['info'] = implode(' - ', $info);
