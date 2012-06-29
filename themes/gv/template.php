@@ -78,6 +78,9 @@ function gv_preprocess_node(&$variables) {
     elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v2' || $variables['node']->title == 'Request a Quote page v2 Final') ) {
       $variables['theme_hook_suggestions'][] = 'node__quote__v2';
     }
+    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v2 Final') ) {
+      $variables['theme_hook_suggestions'][] = 'node__quote__v3';
+    }
     
   }
   
