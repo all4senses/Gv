@@ -61,7 +61,7 @@
           <div class="bottom-clear"></div> 
         </div>
         <div id="right-bottom">
-          <?php echo gv_blocks_get_requestQuoteForPage(); ?>
+          <?php echo gv_blocks_get_requestQuoteForPage_v3(); ?>
           <div class="bottom-clear"></div> 
         </div>
       </div>
