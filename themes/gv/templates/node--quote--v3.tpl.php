@@ -10,18 +10,10 @@
 
 <div id="gv-logo">
   <div class="logo"></div>
-  <h3>Get Personalized Quotes & Compare Companies For Your VoIP Service Needs.</h3>
+  <h3>Independent Authority on VoIP Providers</h3>
 </div>
 
-<?php 
-/*
-  <!--
-  <div id="experian">
-    <div class="text">All Vendors are<br>Prescreened by Experian</div><div class="logo"></div>
-  </div>
-  -->
-*/
-?>
+
 <div class="partners">
   <div id="some-logo"></div>
   <a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a> 
@@ -30,32 +22,31 @@
 <div class="bottom-clear"></div> 
 
 
+<div id="upper-block">
+  <h1><?php echo t('We identify and rank the best VoIP Providers, services, and phone systems.'); ?></h1>
+  <div class="quotes">
+    <div class="quote"><span class="text">Great Source.</span><span class="source">CNN</span></div>
+    <div class="quote"><span class="text">Rigorous Evaluation Process.</span><span class="source">Smart Money</span></div>
+    <div class="quote"><span class="text">Over 500 VoIP Providers analyzed.</span><span class="source">Enterpreneur</span></div>
+  </div>
+  
+  <div class="bottom-clear"></div> 
+</div>
+
 <div class="content"<?php print $content_attributes; ?>>
 
-  <h2>Don't Trust Your Phone System With Just Anyone!</h2>
-  <h1<?php 
-  
-  
-  
-  
-  
-  //http://www.lullabot.com/articles/how-does-rdf-work-drupal-7
-  
-  print /*$title_attributes*/preg_replace('/datatype=".*"/', '', $title_attributes); 
-  
-  
-  
-  
-  
-  
-  ?>><?php //print $title; ?>Compare Companies. Compare Rates.</h1>
+ 
   <div class="left">
     <?php 
       if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final') {
         echo '<div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
       }
       else {
-        echo gv_blocks_get_requestQuoteForPage(); 
+        ?>
+           <h2>Have the leading firms work for you</h2>
+           <div class="text">Take advantage of our 8 years of research in ensuring that your online online marketing projects meet their objectives. You can set high expectations and these firms consystently achieve them.</div>
+        <?php
+        echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
       }
     ?>
   </div>
@@ -69,24 +60,16 @@
     </div>
   <?php else: ?>
   
-    <div class="center">
-      <?php echo render($content['field_q_image']); ?>
-      <div class="quote">"We found a VoIP company that offers us more features at a much better price"</div>
-      <div class="author">Rick Miller - Acme Inc</div>
-    </div>
     <div class="right">
-      <div class="options">
-        <div class="option">Top Rated Providers</div>
-        <div class="option">HD Quality Service</div>
-        <div class="option">No Contracts</div>
-        <div class="option">Robust VoIP Services</div>
-        <div class="option">Accredited BBB Companies</div>
-        <div class="option">Unlimited Calling</div>
-        <div class="option">Designed For Business</div>
+      <div class="right-up">
+        <h2>Compare VoIP Providers Tailored to Your Needs</h2>
+        <div class="explain">Tell us about your VoIP needs below</div>
+        <div class="explain">Your request will be reviewed by our expert team of VoIP researchers</div>
+        <div class="explain">We will connect you with three providers that best suit your needs</div>
+        <div class="bottom-clear"></div> 
       </div>
       <div id="right-bottom">
-        <div class="image"></div>
-        <div class="links">Get smarter. Read reviews. <br/>Get facts. Save money!</div>
+        <?php echo gv_blocks_get_requestQuoteForPage(); ?>
       </div>
     </div>
   
