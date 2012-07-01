@@ -39,7 +39,7 @@
               <div class="logo-share">
                 <?php
                 
-                  dpm($content['field_p_logo']);
+                  //dpm($content['field_p_logo']);
                   
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
