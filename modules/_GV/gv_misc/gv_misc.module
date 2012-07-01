@@ -1379,7 +1379,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       global $user;
       if ($user->uid == 1 && $data['data']->nid == 56) {
-          dpm($all_data_quick);
+          dpm($all_data_quick[$data['data']->nid]);
           dpm($data['data']);
       }
           
