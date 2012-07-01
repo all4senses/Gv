@@ -1378,9 +1378,15 @@ function wdg_misc_getProviderQuickData($target, $data) {
       }
       
       global $user;
-      if ($user->uid == 1 && $data['data']->nid == 56) {
+      if ($user->uid == 1 && $data['data']->nid == 109) {
+          
+          if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
+            $logo = '<a href="' . url('node/' . $data['data']->nid) . '" target="_blank">' . theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_page')) . '</a>';
+            $out .= $logo;
+          }
+          
           dpm($all_data_quick[$data['data']->nid]);
-          dpm($data['data']);
+          dpm($logo);
       }
           
       return $out;
