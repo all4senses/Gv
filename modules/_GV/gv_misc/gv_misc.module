@@ -1347,6 +1347,11 @@ function wdg_misc_getProviderQuickData($target, $data) {
       if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
         $out = '<a href="' . url('node/' . $data['data']->nid) . '" target="_blank">' . theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main')) . '</a>';
       }
+      else {
+        dpm($data);
+        dpm($all_data_quick[$data['data']->nid]);
+        $out = '<a href="' . url('node/' . $data['data']->nid) . '" target="_blank">' . 'test' . '</a>';
+      }
           
       return $out;
       
