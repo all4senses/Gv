@@ -1338,6 +1338,20 @@ function wdg_misc_getProviderQuickData($target, $data) {
   
   switch($target) {
     
+    
+    case 'logo_chart':
+    
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      $out = '';
+      
+      if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
+        $out = '<a href="' . url('node/' . $data['data']->nid) . '" target="_blank">' . theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main')) . '</a>';
+      }
+          
+      return $out;
+      
+      
+      
     case 'features':
       
       $out = '';
