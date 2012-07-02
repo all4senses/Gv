@@ -1548,7 +1548,7 @@ function gv_pages_submitForm_article(&$form, &$form_state) {
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
    
-  dpm($form_state);
+  //dpm($form_state);
  
   $p_data = array();
   foreach ($form_state['values'] as $field => $value) {
@@ -1690,13 +1690,13 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     $p_data_quick['i_logo_uri'] = $logo->uri;  
   }
   
-  dpm($p_data_quick);
+  //dpm($p_data_quick);
   
   form_set_value($form['field_p_data_quick'], array('und' => array(0 => array('value' => serialize($p_data_quick)))), $form_state);
-  // Reset a helper session var with all quick data.
-  if(isset($_SESSION['p_all_data_quick'])) {
-    unset($_SESSION['p_all_data_quick']);
-  }
+//  // Reset a helper session var with all quick data.
+//  if(isset($_SESSION['p_all_data_quick'])) {
+//    unset($_SESSION['p_all_data_quick']);
+//  }
   //gv_misc_getProvidersDataQuick('all', TRUE);
   
 }
@@ -1986,8 +1986,9 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
 function gv_pages_node_update($node) {
   
   if ($node->type == 'provider') {
+    
     // Reset ProvidersDataQuick in session var.
-    gv_misc_getProvidersDataQuick('all', TRUE);    
+    gv_misc_getProvidersDataQuick('all', FALSE, TRUE);    
   }
 }
 
