@@ -77,17 +77,17 @@
   </div>
 
   <div id="bottom">
-    <div class="left">
+    <div class="text 1">
       <h3><?php echo $node->q_data['bottom_text']['left_title']; ?></h3>
-      <div class="text"><?php echo $node->q_data['bottom_text']['left_text']; ?></div>
+      <div><?php echo $node->q_data['bottom_text']['left_text']; ?></div>
     </div>
-    <div class="center">
+    <div class="text 2">
       <h3><?php echo $node->q_data['bottom_text']['center_title']; ?></h3>
-      <div class="text"><?php echo $node->q_data['bottom_text']['center_text']; ?></div>
+      <div><?php echo $node->q_data['bottom_text']['center_text']; ?></div>
     </div>
-    <div class="right">
+    <div class="text 3">
       <h3><?php echo $node->q_data['bottom_text']['right_title']; ?></h3>
-      <div class="text"><?php echo $node->q_data['bottom_text']['right_text']; ?></div>
+      <div><?php echo $node->q_data['bottom_text']['right_text']; ?></div>
     </div>
 
 
