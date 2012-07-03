@@ -102,8 +102,7 @@
 
   <footer>
     <div class="links"><a href="/about-us">About Us</a><span class="delim">|</span><a href="/privacy-policy">Privacy Policy</a></div>
-    <div class="copy">© 2012 GetVoIP.com | All Rights Reserved</div>
-    <div class="copy">BizMedia Central LLC | New York, NY</div>
+    <div class="copy">© 2012 GetVoIP.com | All Rights Reserved | BizMedia Central LLC | New York, NY</div>
   </footer>
 
 </div>
