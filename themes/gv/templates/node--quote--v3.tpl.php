@@ -53,13 +53,14 @@
     <?php else: ?>
 
       <div class="right">
-        <div class="right-up">
+        <div id="right-up">
           <h2>Compare VoIP Providers Tailored to Your Needs</h2>
-          <div class="explain">Tell us about your VoIP needs below</div>
-          <div class="explain">Your request will be reviewed by our expert team of VoIP researchers</div>
-          <div class="explain">We will connect you with three providers that best suit your needs</div>
+          <div class="explain"><span class="number">1</span>Tell us about your VoIP needs below</div>
+          <div class="explain"><span class="number">2</span>Your request will be reviewed by our expert team of VoIP researchers</div>
+          <div class="explain"><span class="number">3</span>We will connect you with three providers that best suit your needs</div>
           <div class="bottom-clear"></div> 
         </div>
+        <div id="right-up-image"></div>
         <div id="right-bottom">
           <?php echo gv_blocks_get_requestQuoteForPage_v3(); ?>
           <div class="bottom-clear"></div> 
