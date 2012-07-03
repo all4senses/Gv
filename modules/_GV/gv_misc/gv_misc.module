@@ -1415,18 +1415,6 @@ function wdg_misc_getProviderQuickData($target, $data) {
         $out = '<div class="details"><a href="' . url('node/' . $data['data']->nid) . '">' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . $all_data_quick[$data['data']->nid]['name'] . '<br>' . t('Reviews') . '</a></div>' . $out . ' <div class="count">(' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ')</div>';
       }
       
-      global $user;
-      if ($user->uid == 1 && $data['data']->nid == 109) {
-          
-          if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
-            $logo = '<a href="' . url('node/' . $data['data']->nid) . '" target="_blank">' . theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main')) . '</a>';
-            $out .= $logo;
-          }
-          
-          //dpm($all_data_quick[$data['data']->nid]);
-          //dpm($logo);
-      }
-          
       return $out;
       
       
