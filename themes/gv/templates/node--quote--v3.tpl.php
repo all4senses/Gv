@@ -38,9 +38,7 @@
             <h2>Have the leading firms work for you</h2>
             <div class="text">Take advantage of our 8 years of research in ensuring that your online online marketing projects meet their objectives. You can set high expectations and these firms consystently achieve them.</div>
           <?php
-          echo '<a href="/">' , render($content['field_q_image']) , '</a>';
-          echo '<a href="/">' , render($content['field_q_image2'][2]) , '</a>'; 
-          dpm($content['field_q_image2']);
+          echo '<a href="/">', render($content['field_q_image']), '</a>';
         }
       ?>
     </div>
@@ -99,6 +97,28 @@
 
   <div id="brands">
     <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
+    <?php 
+        if ($brand_keys = element_children($content['field_q_image2']))
+        {
+//          echo '<script type="text/javascript">
+//
+//            jQuery(document).ready(function() {
+//                jQuery("#mycarousel").jcarousel({
+//                    wrap: "circular"
+//                });
+//            });
+//
+//          </script>';
+//          
+          echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
+          foreach ($brand_keys as $brand_key) {
+            echo '<li>', render($content['field_q_image2'][$brand_key]), '</li>'; 
+          }
+          echo '</ul>';
+        }
+        //echo '<a href="/">', render($content['field_q_image2'][2]), '</a>'; 
+        dpm($content['field_q_image2']);
+    ?>
     <div id="cisco"></div><div id="polycom"></div><div id="att"></div><div id="comcast"></div>
     <div class="bottom-clear"></div> 
   </div>
