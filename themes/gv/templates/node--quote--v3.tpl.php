@@ -38,7 +38,8 @@
             <h2>Have the leading firms work for you</h2>
             <div class="text">Take advantage of our 8 years of research in ensuring that your online online marketing projects meet their objectives. You can set high expectations and these firms consystently achieve them.</div>
           <?php
-          echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
+          echo '<a href="/">' , render($content['field_q_image']) , '</a>';
+          echo '<a href="/">' , render($content['field_q_image2'][2]) , '</a>'; 
           dpm($content['field_q_image2']);
         }
       ?>
