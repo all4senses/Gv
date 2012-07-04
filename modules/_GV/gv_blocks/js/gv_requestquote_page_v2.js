@@ -3,6 +3,9 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
+        jQuery("#mycarousel").jcarousel({
+            wrap: "circular"
+        });
 
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
