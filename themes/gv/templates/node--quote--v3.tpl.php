@@ -102,16 +102,16 @@
         //dpm($content['field_q_image2']);
         if ($brand_keys = element_children($content['field_q_image2']))
         {
-//          echo '<script type="text/javascript">
-//
-//            jQuery(document).ready(function() {
-//                jQuery("#mycarousel").jcarousel({
-//                    wrap: "circular"
-//                });
-//            });
-//
-//          </script>';
-//          
+          echo '<script type="text/javascript">
+
+            jQuery(document).ready(function() {
+                jQuery("#mycarousel").jcarousel({
+                    wrap: "circular"
+                });
+            });
+
+          </script>';
+          
           echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
           foreach ($brand_keys as $brand_key) {
             echo '<li>', render($content['field_q_image2'][$brand_key]), '</li>'; 
