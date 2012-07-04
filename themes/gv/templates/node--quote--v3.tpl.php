@@ -97,7 +97,9 @@
 
   <div id="brands">
     <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
-    <?php 
+    <?php
+        
+        //dpm($content['field_q_image2']);
         if ($brand_keys = element_children($content['field_q_image2']))
         {
 //          echo '<script type="text/javascript">
@@ -116,10 +118,10 @@
           }
           echo '</ul>';
         }
-        //echo '<a href="/">', render($content['field_q_image2'][2]), '</a>'; 
-        dpm($content['field_q_image2']);
+        
+        //<div id="cisco"></div><div id="polycom"></div><div id="att"></div><div id="comcast"></div>
     ?>
-    <div id="cisco"></div><div id="polycom"></div><div id="att"></div><div id="comcast"></div>
+    
     <div class="bottom-clear"></div> 
   </div>
 
