@@ -537,8 +537,6 @@ function gv_blocks_get_requestQuoteForPage() {
 
   //drupal_add_library('system', 'effects.bounce');
   
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
@@ -548,8 +546,12 @@ function gv_blocks_get_requestQuoteForPage() {
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
+  
   drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
   drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
   
   
   $token = md5(time()); //drupal_get_token('test');
@@ -677,8 +679,6 @@ function gv_blocks_get_requestQuoteForPage() {
  */
 function gv_blocks_get_requestQuoteForPage_v2() {
 
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v2.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
@@ -687,11 +687,12 @@ function gv_blocks_get_requestQuoteForPage_v2() {
   
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
-          
-          
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v2.js');
   
   
   $token = md5(time()); //drupal_get_token('test');
@@ -815,8 +816,6 @@ function gv_blocks_get_requestQuoteForPage_v2() {
  */
 function gv_blocks_get_requestQuoteForPage_v3() {
 
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v2.js');
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
@@ -828,6 +827,9 @@ function gv_blocks_get_requestQuoteForPage_v3() {
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v2.js');
   
   drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
   drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
