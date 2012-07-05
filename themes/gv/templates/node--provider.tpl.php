@@ -201,16 +201,7 @@
                 
               </div>
               
-              <?php 
-              
-              echo render($content['metatags']['title']);
-              echo render($content['metatags']['description']);
-              echo render($content['metatags']['keywords']);
-              dpm($content['metatags']); 
-              
-              
-              ?>
-              <?php //echo render($content['metatags']); ?>
+              <?php gv_misc_renderMetatags_newOrder($content['metatags']); //echo render($content['metatags']); ?>
           
           
               
