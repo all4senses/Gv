@@ -201,6 +201,7 @@
                 
               </div>
               
+              <?php dmp($content['metatags']); ?>
               <?php echo render($content['metatags']); ?>
           
           
