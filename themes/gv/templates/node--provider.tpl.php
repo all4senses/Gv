@@ -204,7 +204,7 @@
               <?php 
               
               echo render($content['metatags']['title']);
-              //echo render($content['metatags']['description']);
+              echo render($content['metatags']['description']);
               //echo render($content['metatags']['keywords']);
               dpm($content['metatags']); 
               
