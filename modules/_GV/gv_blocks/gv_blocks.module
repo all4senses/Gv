@@ -823,17 +823,15 @@ function gv_blocks_get_requestQuoteForPage_v3() {
   //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
-  drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
-  drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
-  
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
-  
-  
-          
-          
+
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
+  
+  drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
+  drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
+  drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
   
   
   $token = md5(time()); //drupal_get_token('test');
