@@ -114,7 +114,7 @@
           
           echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
           foreach ($brand_keys as $brand_key) {
-            echo '<li>', render($content['field_q_image2'][$brand_key]), '</li>'; 
+            echo '<li>', '<table><tbody><tr><td>', render($content['field_q_image2'][$brand_key]), '</td></tr></tbody></table>', '</li>'; 
           }
           echo '</ul>';
         }
