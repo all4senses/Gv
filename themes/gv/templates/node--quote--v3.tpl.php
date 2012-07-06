@@ -25,6 +25,20 @@
     <div class="bottom-clear"></div> 
   </div>
 
+  
+  
+  
+  <?php
+    if ($node->title == 'Request a Quote page v3 Final') {
+      $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
+      $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
+    }
+    else {
+      $initialQuotePage_node = $node;
+    }
+  ?>
+  
+  
   <div class="content"<?php print $content_attributes; ?>>
 
 
@@ -38,7 +52,8 @@
             <h2>Have the leading firms work for you</h2>
             <div class="text">Take advantage of our 8 years of research in ensuring that your online online marketing projects meet their objectives. You can set high expectations and these firms consystently achieve them.</div>
           <?php
-          echo '<a href="/">', render($content['field_q_image']), '</a>';
+          //echo '<a href="/">', render($content['field_q_image']), '</a>';
+          echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';
         }
       ?>
     </div>
@@ -46,7 +61,8 @@
     <?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?>
       <div class="right-final">
         <?php 
-          echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
+          //echo '<a href="/">' , render($content['field_q_image']) , '</a>'; 
+          echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';
           echo '<h2>' , t('GET ACCESS TO THE LARGEST<br/> VOIP SERVICE GUIDE<br/> IN THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>';
         ?>
       </div>
@@ -77,16 +93,6 @@
 
   </div>
 
-  
-  <?php
-    if ($node->title == 'Request a Quote page v3 Final') {
-      $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
-      $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
-    }
-    else {
-      $initialQuotePage_node = $node;
-    }
-  ?>
   
   <div id="brands">
     <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
