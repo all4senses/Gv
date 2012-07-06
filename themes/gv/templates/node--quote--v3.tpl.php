@@ -78,11 +78,28 @@
   </div>
 
   
+  <?php
+    if ($node->title == 'Request a Quote page v3 Final') {
+      $initialQoutePage_node = gv_misc_getInitialQuotePageNode($node->title);
+    }
+    else {
+      $initialQoutePage_node = $node;
+    }
+  ?>
+  
   <div id="brands">
     <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
     <?php
-        
-        //dpm($content['field_q_image2']);
+        if (isset($initialQoutePage_node->field_q_image2['und'][0])) {
+          echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
+          foreach ($initialQoutePage_node->field_q_image2['und'] as $brand) {
+            echo '<li>', '<table><tbody><tr><td>', 
+                    theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => 'thumbnail', 'alt' => $brand['alt'], 'title' => $brand['title'])),
+                 '</td></tr></tbody></table>', '</li>'; 
+          }
+          echo '</ul>';
+        }
+        /*
         if ($brand_keys = element_children($content['field_q_image2']))
         {
           
@@ -92,26 +109,27 @@
           }
           echo '</ul>';
         }
+        */
         
-        //<div id="cisco"></div><div id="polycom"></div><div id="att"></div><div id="comcast"></div>
     ?>
     
     <div class="bottom-clear"></div> 
   </div>
   
-  
+  <?php 
+  ?>
   <div id="bottom">
     <div class="text">
-      <h3><?php echo $node->q_data['bottom_text']['left_title']; ?></h3>
-      <div><?php echo $node->q_data['bottom_text']['left_text']; ?></div>
+      <h3><?php echo $initialQoutePage_node->q_data['bottom_text']['left_title']; ?></h3>
+      <div><?php echo $initialQoutePage_node->q_data['bottom_text']['left_text']; ?></div>
     </div>
     <div class="text">
-      <h3><?php echo $node->q_data['bottom_text']['center_title']; ?></h3>
-      <div><?php echo $node->q_data['bottom_text']['center_text']; ?></div>
+      <h3><?php echo $initialQoutePage_node->q_data['bottom_text']['center_title']; ?></h3>
+      <div><?php echo $initialQoutePage_node->q_data['bottom_text']['center_text']; ?></div>
     </div>
     <div class="text last">
-      <h3><?php echo $node->q_data['bottom_text']['right_title']; ?></h3>
-      <div><?php echo $node->q_data['bottom_text']['right_text']; ?></div>
+      <h3><?php echo $initialQoutePage_node->q_data['bottom_text']['right_title']; ?></h3>
+      <div><?php echo $initialQoutePage_node->q_data['bottom_text']['right_text']; ?></div>
     </div>
 
 
@@ -127,8 +145,6 @@
 
 <?php 
 
-  $initialQoutePage_node = gv_misc_getInitialQuotePageNode($node->title);
-  dpm($initialQoutePage_node);
   
   return; 
 
