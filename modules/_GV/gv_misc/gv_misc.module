@@ -1008,6 +1008,16 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
     // Sort providers alphabetically.
     //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
     asort($providers); 
+    
+    // Same but case sensitive
+    $keys = array_keys($providers);
+    natcasesort($keys);
+    $sorted_providers = array();
+    foreach ($keys as $key) {
+      $sorted_providers[$key] = $providers[$key];
+    }
+    dpm($sorted_providers);
+    //$providers = $sorted_providers;
   }
 
 }
