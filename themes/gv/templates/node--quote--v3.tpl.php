@@ -81,11 +81,11 @@
   <?php
     if ($node->title == 'Request a Quote page v3 Final') {
       $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
+      $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
     }
     else {
       $initialQuotePage_node = $node;
     }
-    dpm($initialQuotePage_node);
   ?>
   
   <div id="brands">
