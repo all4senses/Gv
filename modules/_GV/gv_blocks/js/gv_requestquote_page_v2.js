@@ -73,7 +73,7 @@
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
           textSubmit : 'Submit & Get Quotes',
-          textNext: 'No Risk Quote',
+          textNext: 'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
