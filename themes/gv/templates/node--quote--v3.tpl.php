@@ -30,8 +30,9 @@
   
   <?php
     if ($node->title == 'Request a Quote page v3 Final') {
-      drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
-      drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
+      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
+      drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
   
       $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
       $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
