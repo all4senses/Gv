@@ -159,13 +159,6 @@
 
 </div>
 
-<?php 
-
-  
-  return; 
-
-?>
-
 <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?> 
   <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'): ?> 
     <!-- Google Code for Landing Page Conversion Page -->
