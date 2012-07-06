@@ -39,7 +39,7 @@
   ?>
   
   
-  <div class="content"<?php print $content_attributes; ?>>
+  <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
 
     <div class="left">
