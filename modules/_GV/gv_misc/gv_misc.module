@@ -58,6 +58,14 @@ function gv_misc_getInitialQuotePageNode($finalQuotePage_title) {
   
   $title = trim(str_replace(' Final', '', $finalQuotePage_title));
   dpm('Initial title = ' . $title);
+  
+  $query = db_select('node', 'n')
+      ->fields('n', array('nid'));
+  $query->condition('n.title', $title);
+  $query->condition('n.type', 'quote');
+  
+  $nid = $query->execute()->fetchfield();
+  dpm($nid);
 }
 
 
