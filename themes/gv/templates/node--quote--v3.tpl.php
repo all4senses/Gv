@@ -127,7 +127,8 @@
 
 <?php 
 
-  gv_misc_getInitialQuotePageNode($node->title);
+  $initialQoutePage_node = gv_misc_getInitialQuotePageNode($node->title);
+  dpm($initialQoutePage_node);
   
   return; 
 
