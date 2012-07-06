@@ -30,6 +30,7 @@
   
   <?php
     if ($node->title == 'Request a Quote page v3 Final') {
+      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
       drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
       drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
       drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
