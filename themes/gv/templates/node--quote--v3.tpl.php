@@ -30,6 +30,9 @@
   
   <?php
     if ($node->title == 'Request a Quote page v3 Final') {
+      drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
+      drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  
       $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
       $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
     }
