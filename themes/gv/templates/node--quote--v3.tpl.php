@@ -166,8 +166,8 @@
 
 ?>
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?> 
-  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/request-voip-phone-system-quote'): ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?> 
+  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'): ?> 
     <!-- Google Code for Landing Page Conversion Page -->
     <script type="text/javascript">
     /* <![CDATA[ */
@@ -187,7 +187,7 @@
     </div>
     </noscript>
   <?php else:?>
-    <script>top.location.href="http://getvoip.com/request-voip-phone-system-quote";</script>
+    <script>top.location.href="http://getvoip.com/compare-voip-solutions";</script>
   <?php endif;?>
 <?php endif;?>
   
