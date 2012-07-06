@@ -125,6 +125,13 @@
 
 </div>
 
+<?php 
+
+  gv_misc_getInitialQuotePageNode($node->title);
+  
+  return; 
+
+?>
 
 <?php if ($_SERVER['REDIRECT_URL'] == '/request-voip-phone-system-quote-final'): ?> 
   <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/request-voip-phone-system-quote'): ?> 

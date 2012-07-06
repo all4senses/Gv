@@ -49,6 +49,18 @@ function gv_misc_menu() {
 }
 
 
+
+/**
+ * Renders metatags array with a new order of tags: description, keywords, the rest...
+ *
+ */
+function gv_misc_getInitialQuotePageNode($finalQuotePage_title) {
+  
+  $title = trim(str_replace(' Final', '', $finalQuotePage_title));
+  dpm('Initial title = ' . $title);
+}
+
+
 /**
  * Renders metatags array with a new order of tags: description, keywords, the rest...
  *
