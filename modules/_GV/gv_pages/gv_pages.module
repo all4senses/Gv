@@ -1154,6 +1154,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               //'#required' => TRUE,
               '#prefix' => '<div class="label left">' . t(RECOMMEND) . '</div>',
           );
+          
+          // just for reference from a below call
+          //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
       
           $form['ureview']['pros'] = array(
             '#type' => 'textfield',
