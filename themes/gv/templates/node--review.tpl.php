@@ -121,53 +121,18 @@
             <!--<span class="delim">|</span> -->
             <?php 
             
-              //echo ($page || $_GET['q'] == 'providers/reviews' ? l(t('View All !p Reviews', array('!p' => '<span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')), 'node/' . $node->field_ref_provider['und'][0]['target_id']) . '<span class="delim">|</span>' . l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>' : l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url']) . '<span class="delim">|</span>') . l(t('Write a Review'), 'node/add/review'); 
-              /*
-              echo ($page || $_GET['q'] == 'providers/reviews' 
+              echo '<div class="rlinks">' 
+                  . (
+                      $page || $_GET['q'] == 'providers/reviews' 
                       ? 
-                      '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">' . t('View All !p Reviews', array('!p' => $node->field_r_provider_name['und'][0]['safe_value']))
-                      . '<span class="delim">|</span>' 
-                        . '<a href="' . $content['provider_url'] . '">' 
-                          . t('Visit !p', array('!p' => '<span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')) 
-                        . '</a>' 
-                        . '<span class="delim">|</span>' 
-                      : '<a href="' . $content['provider_url'] . '">' 
-                        . t('Visit !p', array('!p' => '<span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')) 
-                      . '</a>' 
-                      . '<span class="delim">|</span>') 
-                      . l(t('Write a Review'), 'node/add/review'); 
-              */
-              /*
-              echo '<div class="rlinks">' . ($page || $_GET['q'] == 'providers/reviews' 
-                      ? 
-                        '<div class="rlink"><a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">View All <span class="review-provider">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span> Reviews</a>'
-                      . '<span class="delim">|</span></div>' 
-                      . '<div class="rlink"><a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a>' 
-                      . '<span class="delim">|</span></div>' 
+                        ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">View All <span class="review-provider">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span> Reviews</a> <span class="delim">|</span>')
+                      . ( (!isset($content['provider_url']) || !$content['provider_url']) ? '' : '<a href="' . $content['provider_url'] . '"> <span class="review-provider">Visit <span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></span></a> <span class="delim">|</span>')
                       
-                      : '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a>' 
-                      . '<span class="delim">|</span>') 
-                      
-                      . '<div class="rlink">' . l(t('Write a Review'), 'node/add/review') . '</div>' 
+                      : ( (!isset($content['provider_url']) || !$content['provider_url']) ? '' : '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a> <span class="delim">|</span>')
+                    ) 
+                    . l(t('Write a Review'), 'node/add/review') 
                   . '</div>'; 
-              */
               
-              
-              echo '<div class="rlinks">' . ($page || $_GET['q'] == 'providers/reviews' 
-                      ? 
-                        '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">View All <span class="review-provider">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span> Reviews</a>'
-                      . ' <span class="delim">|</span>' 
-                      . '<a href="' . $content['provider_url'] . '"> <span class="review-provider">Visit <span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></span></a>' 
-                      . ' <span class="delim">|</span>' 
-                      
-                      : '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a>' 
-                      . ' <span class="delim">|</span>') 
-                      
-                      . l(t('Write a Review'), 'node/add/review') 
-                  . '</div>'; 
-              //l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url'])
-              //l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url'])
-              //
               //'<a href="' . $content['provider_url'] . '">' . t('Visit !p', array('!p' => '<span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')) . '</a>'
               //
               //'<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">' . t('View All !p Reviews', array('!p' => '<span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')) . '</a>'
