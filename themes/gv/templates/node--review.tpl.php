@@ -147,7 +147,7 @@
                       
                       : '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a>' 
                       . '<span class="delim">|</span>') 
-                      . l(t('Write a Review'), 'node/add/review'); 
+                      . '<div class="plink">' . l(t('Write a Review'), 'node/add/review') . '</div>'; 
               
               //l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url'])
               //l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url'])
