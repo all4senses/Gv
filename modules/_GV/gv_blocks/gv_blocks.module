@@ -895,11 +895,22 @@ function gv_blocks_get_requestQuoteForPage_v3() {
                                 <input class="after email required" name="email" id="email" />
                             </div>
                          
+                            <div class="wrapper">
+                              <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
+                              <div id="phone">
+                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
+                               </div>
+                            </div>
+                            
+                            <!--
                             <div class="wrapper phone">
                               <div class="label_before required">' . t('Phone') . ':<span class="form-required">*</span></div>
                                 <input class="after required phone" name="phone" id="phone" value="" />
                             </div>
-
+                            -->
+                            
                             <div class="wrapper company">
                               <div class="label_before">' . t('Company') . ':</div>
                                 <input class="after" name="company" id="company" />
