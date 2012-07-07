@@ -55,8 +55,8 @@
         }
         else {
           ?>
-            <h2>Have the leading VoIP Providers work for you</h2>
-            <div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Set high expectations and have a VoIP provider fight to achieve them, by providing you with top-notch VoIP services, while saving you money!</div>
+            <h2>Have the leading VoIP Providers <br/>work for you</h2>
+            <div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
           //echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';
