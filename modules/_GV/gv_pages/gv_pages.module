@@ -2156,12 +2156,12 @@ function gv_pages_node_view($node, $view_mode) {
           // Show preview of the provider (as a teaser)
           $node->content['provider_descr'] = drupal_get_form('gv_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
         }
-        global $provider_url;
-        if (!$provider_url) {
+        //global $provider_url;
+        //if (!$provider_url) {
           $provider = node_load($node->field_ref_provider['und'][0]['target_id']);
           $p_data = unserialize($provider->field_p_data['und'][0]['value']);
           $provider_url = $p_data['info']['i_web'];
-        }
+        //}
         $node->content['provider_url'] = $provider_url;
       }
       
