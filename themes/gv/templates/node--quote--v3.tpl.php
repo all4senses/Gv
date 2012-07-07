@@ -80,9 +80,9 @@
       <div class="right">
         <div id="right-up">
           <h2>Compare Top VoIP Services Tailored to Your Needs</h2>
-          <div class="explain"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
-          <div class="explain"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
-          <div class="explain"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
+          <div class="explain p1"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
+          <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
+          <div class="explain p3"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
           <div class="bottom-clear"></div> 
         </div>
         <div id="right-up-image"></div>
