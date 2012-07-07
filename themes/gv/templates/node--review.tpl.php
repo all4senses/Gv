@@ -137,7 +137,7 @@
                       . '<span class="delim">|</span>') 
                       . l(t('Write a Review'), 'node/add/review'); 
               */
-              
+              /*
               echo '<div class="rlinks">' . ($page || $_GET['q'] == 'providers/reviews' 
                       ? 
                         '<div class="rlink"><a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">View All <span class="review-provider">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span> Reviews</a>'
@@ -150,7 +150,21 @@
                       
                       . '<div class="rlink">' . l(t('Write a Review'), 'node/add/review') . '</div>' 
                   . '</div>'; 
+              */
               
+              
+              echo '<div class="rlinks">' . ($page || $_GET['q'] == 'providers/reviews' 
+                      ? 
+                        '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">View All <span class="review-provider">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span> Reviews</a>'
+                      . '<span class="delim">|</span>' 
+                      . '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a>' 
+                      . '<span class="delim">|</span>' 
+                      
+                      : '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a>' 
+                      . '<span class="delim">|</span>') 
+                      
+                      . l(t('Write a Review'), 'node/add/review') 
+                  . '</div>'; 
               //l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url'])
               //l(t('Visit !p', array('!p' => $node->field_r_provider_name['und'][0]['safe_value'])), $content['provider_url'])
               //
