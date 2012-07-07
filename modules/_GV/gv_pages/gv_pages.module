@@ -1452,7 +1452,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['provider']['provider_title_noedit'] = array(
             '#type' => 'item',
             '#title' => t('Your VoIP Service Provider:'),
-            '#markup' => '<div class="text">' . l($provider_node->field_p_name['und'][0]['safe_value'], 'node/' . $provider_node->nid) . '</div>',
+            '#markup' => '<div class="text">' . l(html_entity_decode($provider_node->field_p_name['und'][0]['safe_value']), 'node/' . $provider_node->nid) . '</div>',
             //'#weight' => -100,
           );
           
