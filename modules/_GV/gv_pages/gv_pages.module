@@ -2019,45 +2019,47 @@ function gv_pages_node_presave($node) {
     $saved_ratings = unserialize($node->field_ratings_oprovider['und'][0]['value']);
     $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
     
+    
+    
+    // Create a votes array
+    
+    //$vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
+    $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
+    $votes = array();
+
+    $overall_count = 0;
+    $overall_summ = 0;
+    foreach ($vote_keys as $vote_key => $vote_title) {
+      $votes[] = array(
+        'tag' => $vote_key,
+        'entity_type' => 'node',
+        'entity_id' => $provider_nid,
+        'value_type' => 'percent',
+        'value' => $saved_ratings[$vote_key],//$form_state['values']['rating_' . $vote_key],
+        'uid' => $node->uid,
+        'vote_source' => $node->field_r_email['und'][0]['value'],
+      );
+      $overall_count++;
+      $overall_summ += $saved_ratings[$vote_key];
+    }
+
+    // Calculate overall average rating.
+    $rating_overall = $overall_summ / $overall_count;
+    $votes[] = array(
+      'tag' => 'overall',
+      'entity_type' => 'node',
+      'entity_id' => $provider_nid,
+      'value_type' => 'percent',
+      'value' => $rating_overall,
+      'uid' => $node->uid,
+      'vote_source' => $node->field_r_email['und'][0]['value'],
+    );
+    $node->field_r_rating_overall['und'][0]['value'] = $rating_overall * 0.05;
+
+
     // If a provider was chosen from a list, save voting results to Voting API tables.
     if ($provider_nid && $provider_nid != 7) {
       
-        $provider = node_load($provider_nid);
-        $node->field_r_provider_name['und'][0]['value'] = $provider->field_p_name['und'][0]['value'];
-        
-        //$vote_keys = array('features', 'sound', 'rely', 'money', 'service', 'recommend');
-        $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
-        $votes = array();
-        
-        $overall_count = 0;
-        $overall_summ = 0;
-        foreach ($vote_keys as $vote_key => $vote_title) {
-          $votes[] = array(
-            'tag' => $vote_key,
-            'entity_type' => 'node',
-            'entity_id' => $provider_nid,
-            'value_type' => 'percent',
-            'value' => $saved_ratings[$vote_key],//$form_state['values']['rating_' . $vote_key],
-            'uid' => $node->uid,
-            'vote_source' => $node->field_r_email['und'][0]['value'],
-          );
-          $overall_count++;
-          $overall_summ += $saved_ratings[$vote_key];
-        }
-        
-        // Calculate overall average rating.
-        $rating_overall = $overall_summ / $overall_count;
-        $votes[] = array(
-          'tag' => 'overall',
-          'entity_type' => 'node',
-          'entity_id' => $provider_nid,
-          'value_type' => 'percent',
-          'value' => $rating_overall,
-          'uid' => $node->uid,
-          'vote_source' => $node->field_r_email['und'][0]['value'],
-        );
-        $node->field_r_rating_overall['und'][0]['value'] = $rating_overall * 0.05;
-        
         // Remove (clear) this review's previous votes from a target provider calculation set.
         foreach ($votes as $c) {
           unset($c['value_type'], $c['value']);
@@ -2077,7 +2079,10 @@ function gv_pages_node_presave($node) {
           // (Adding voting (above), if approved, call this function itself).
           votingapi_recalculate_results('node', $provider_nid);
         }
-      
+        
+        // Save a provider name to the review
+        $provider = node_load($provider_nid);
+        $node->field_r_provider_name['und'][0]['value'] = $provider->field_p_name['und'][0]['value'];
     } // End of if ($provider_nid && $provider_nid != 7) {
     else {
       $node->field_r_provider_name['und'][0]['value'] = $node->field_r_oprovider['und'][0]['value'];
