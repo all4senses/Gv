@@ -1396,12 +1396,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           // Load saved votes from this node's field_ratings_oprovider
           $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
-          dpm($field_ratings_oprovider);
+
           foreach ($field_ratings_oprovider as $tag => $value) {
             $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
           }
           
-          // $form['ureview']['rating_recommend']['#default_value'] = $recommend;
+          $form['ureview']['rating_recommend']['#default_value'] = $field_ratings_oprovider['recommend'];
           
         } // End of if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
         else {
