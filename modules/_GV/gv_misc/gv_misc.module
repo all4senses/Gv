@@ -491,7 +491,12 @@ function gv_misc_testPage() {
 function gv_misc_makeRequest_ajax() {
   $status = TRUE;
   $output = '';
-  $post = $_POST;
+  
+  //$post = $_POST;
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain($value);
+  }
   
   if (empty($post) 
       || !isset($post['source']) || !$post['source']
@@ -513,7 +518,7 @@ function gv_misc_makeRequest_ajax() {
     // Mapping form data to right named fields.
     if ($post['source'] == 'page') {
       
-      $phone = $post['version'] == '3' ? $post['phone'] : $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
+      $phone = isset($post['phone']) ? $post['phone'] : $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
       
       $submission = array(
         'Phones needed' => $post['phones_amt'],
