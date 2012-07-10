@@ -266,7 +266,7 @@
   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
     <div class="reviews">
       <div class="header">
-        <div class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></div>
+        <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
         
         <!-- <div class="button"> -->
           <?php 

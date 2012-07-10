@@ -1,13 +1,3 @@
-<?php
-
-  if ($node->nid == 48) {
-    //dpm($content);
-    //dpm($node);
-  }
-
-
-?>
-
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
@@ -22,8 +12,10 @@
                 
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
                   <h1 property="dc:title v:summary" 
+                <?php elseif($_GET['q'] == 'providers/reviews'): ?>
+                  <h3 property="dc:title v:summary"
                 <?php else: ?>
-                  <h2 property="dc:title v:summary" 
+                  <h2 property="dc:title v:summary"
                 <?php endif; ?>
                   
                 <?php /*print $title_attributes;*/ ?>>
@@ -32,7 +24,7 @@
                     <?php endif; ?>
                         
                       <?php 
-                        echo ($_GET['q'] == 'providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['safe_value'] . ' ' . t('Review') . ' - ' : '') . $title; 
+                        echo ($_GET['q'] == 'providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
                         //if ($page) {
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
