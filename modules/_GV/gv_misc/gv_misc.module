@@ -881,11 +881,11 @@ function theme_gv_misc_headerLinks($vars) {
   if(empty($vars['submenu']['below'])) {
     return NULL;
   }
-  global $user;
-  if ($user->uid == 1) {
-    dpr($vars);
-    exit;
-  }
+//  global $user;
+//  if ($user->uid == 1) {
+//    dpr($vars);
+//    exit;
+//  }
   $class = isset($vars['class']) ? $vars['class'] : 'header-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
   $out = '<ul class="' . $class . '">';
@@ -894,7 +894,7 @@ function theme_gv_misc_headerLinks($vars) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
-    $out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']) ))) . '</li>';
+    $out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'] ))) . '</li>';
     $count++;
   }
   $out .= '</ul>';
