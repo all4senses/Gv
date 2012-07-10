@@ -881,11 +881,7 @@ function theme_gv_misc_headerLinks($vars) {
   if(empty($vars['submenu']['below'])) {
     return NULL;
   }
-//  global $user;
-//  if ($user->uid == 1) {
-//    dpr($vars);
-//    exit;
-//  }
+
   $class = isset($vars['class']) ? $vars['class'] : 'header-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
   $out = '<ul class="' . $class . '">';
