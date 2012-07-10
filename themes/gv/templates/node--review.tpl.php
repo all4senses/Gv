@@ -13,9 +13,9 @@
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
                   <h1 property="dc:title v:summary" 
                 <?php elseif($_GET['q'] == 'providers/reviews'): ?>
-                  <h3 property="dc:title v:summary"
-                <?php else: ?>
                   <h2 property="dc:title v:summary"
+                <?php else: ?>
+                  <h3 property="dc:title v:summary"
                 <?php endif; ?>
                   
                 <?php /*print $title_attributes;*/ ?>>
