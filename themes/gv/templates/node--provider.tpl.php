@@ -216,7 +216,7 @@
                     echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>';
                   }
                   else {
-                    echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['safe_value'], '</h2>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['value'], '</h2>', render($title_suffix);
                   }
                 ?>
               </div>
@@ -266,7 +266,7 @@
   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
     <div class="reviews">
       <div class="header">
-        <div class="button"><?php echo t('User Reviews'); ?></div>
+        <div class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></div>
         
         <!-- <div class="button"> -->
           <?php 
