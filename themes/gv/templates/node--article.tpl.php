@@ -138,8 +138,9 @@
           hide($content['field_topics']);
           
           
-          
+          dpm($node->field_a_teaser['und'][0]['value']);
           if (!$page) {
+            
             $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
             echo $teaser_data['teaser'];
             
