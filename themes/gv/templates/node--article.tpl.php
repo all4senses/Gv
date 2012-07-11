@@ -142,7 +142,7 @@
           if (!$page) {
             
             // TODO: Temporary check. Should be removed after all articles resave.
-            if ($node->field_a_teaser['und'][0]['value']) {
+            if (isset($node->field_a_teaser['und'][0]['value']) && $node->field_a_teaser['und'][0]['value']) {
               echo $node->field_a_teaser['und'][0]['value'];
             }
             else {
