@@ -334,18 +334,21 @@ function gv_misc_addMetatag($name, $content) {
  */
 function gv_misc_addSocialShareData_toPage($node) {
   
-  $tags = array(
+  $image = NULL;
+  
+  switch ($node->type) {
+    case 'blog_post':
+    case 'news_post':
+    case 'article':
+      if ($node->field_mail_image['und'][0]['value']) {
+        $image = unserialize($node->field_mail_image['und'][0]['value']);
+      }
+      break;
       
-      'image_src' => array(
-          '#tag' => 'link', // The #tag is the html tag - <link />
-          '#attributes' => array( 
-              'href' => '/' . $node->field_thumbnail['und'][0]['value'],
-              'rel' => 'image_src',
-              //'type' => 'text/css',
-          ),
-      ),
-
-      /*
+  }
+  
+  $tags = array(
+       /*
       'title' => array(
           '#tag' => 'meta',
           '#attributes' => array(
@@ -418,8 +421,21 @@ function gv_misc_addSocialShareData_toPage($node) {
           ),
       ),
       */
-  );
+    );
  
+  
+  if ($image) {
+    
+    $tags['image_src'] = array(
+        '#tag' => 'link', // The #tag is the html tag - <link />
+        '#attributes' => array( 
+            'href' => $image['src'],
+            'rel' => 'image_src',
+            //'type' => 'text/css',
+        ),
+    );
+    
+  }
         
   foreach ($tags as $key => $val)
       drupal_add_html_head($val, $key);

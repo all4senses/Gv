@@ -1526,15 +1526,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 function gv_pages_validateForm_article(&$form, &$form_state) {
   
   // Define a main image and build a custom teaser.
-  
   $data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
-  dpm($data);
-//  $data = serialize(array(
-//    'bottom_text' => $form_state['values']['bottom_text'],
-//  ));
   form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $data['teaser']) )), $form_state);
-  form_set_value($form['field_a_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']) ) )), $form_state);
-  dpm($form_state['values']);
+  form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']) ) )), $form_state);
 }
 
 
@@ -2175,6 +2169,10 @@ function gv_pages_addProviderPreview_form($node, &$form_state, $provider_nid) {
  */
 function gv_pages_node_view($node, $view_mode) {
 
+  if ($view_mode == 'full') {
+    gv_misc_addSocialShareData_toPage($node);
+  }
+  
   switch ($node->type) {
     
     case 'quote':
