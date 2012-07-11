@@ -342,7 +342,16 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'article':
       if ($node->field_main_image['und'][0]['value']) {
         $image = unserialize($node->field_main_image['und'][0]['value']);
+        $image = $image['src'];
       }
+      else {
+        // Show default image - the logo.
+        $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
+      }
+      break;
+      
+    default: 
+      $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
       break;
       
   }
@@ -429,7 +438,7 @@ function gv_misc_addSocialShareData_toPage($node) {
     $tags['image_src'] = array(
         '#tag' => 'link', // The #tag is the html tag - <link />
         '#attributes' => array( 
-            'href' => 'http://getvoip.com' . $image['src'],
+            'href' => 'http://getvoip.com' . $image,
             'rel' => 'image_src',
             //'type' => 'text/css',
         ),
