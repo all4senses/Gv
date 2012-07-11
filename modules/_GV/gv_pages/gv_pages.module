@@ -364,6 +364,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         );
       
         $form['#submit'][] = 'gv_pages_submitForm_article';
+        $form['#validate'][] = 'gv_pages_validateForm_article';
         
       break;
     
@@ -1510,6 +1511,29 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 
 
+/**
+ * Custom validate of article type form.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_article(&$form, &$form_state) {
+  
+  // Define a main image and build a custom teaser.
+  
+  dpm($form_state['values']);
+//  $data = serialize(array(
+//    'bottom_text' => $form_state['values']['bottom_text'],
+//  ));
+//  form_set_value($form['field_q_data'], array('und' => array(0 => array('value' => $data) )), $form_state);
+  
+}
 
 
 /**
@@ -1864,6 +1888,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   } // End of if ($review) {
   
 }
+
+
 
 
 /**

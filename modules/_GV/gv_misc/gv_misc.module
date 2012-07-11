@@ -229,7 +229,7 @@ function gv_misc_AddContentSection_form() {
 /**
  * Return trimmed teaser with right size (cleared from images) and with separated a styled image, cutted off from the body.
  */
-function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
+function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid) {
  
   $main_image_html = NULL;
   $main_image = NULL;
@@ -326,6 +326,104 @@ function gv_misc_addMetatag($name, $content) {
       drupal_add_html_head($meta, $name);
     }
   }
+}
+
+
+/**
+ * Helper function to add sharing data (metatags and links) to a current page.
+ */
+function gv_misc_addSocialShareData_toPage($node) {
+  
+  $tags = array(
+      
+      'image_src' => array(
+          '#tag' => 'link', // The #tag is the html tag - <link />
+          '#attributes' => array( 
+              'href' => '/' . $node->field_thumbnail['und'][0]['value'],
+              'rel' => 'image_src',
+              //'type' => 'text/css',
+          ),
+      ),
+
+      /*
+      'title' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'title',
+              'content' => "Video '" . $node->title . "' by " . $publisher_title,
+          ),
+      ),
+      'DC.title' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'DC.title',
+              'content' => $node->title,
+          ),
+      ),
+      'description' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'description',
+              'content' => (isset($node->body['und'][0]['summary']) AND $node->body['und'][0]['summary'])?$node->body['und'][0]['summary']:drupal_substr(strip_tags($node->body['und'][0]['value']), 0, 200) . '...',
+          ),
+      ),
+      'author' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'author',
+              'content' => $publisher_title,
+          ),
+      ),
+
+
+
+      'medium' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'medium',
+              'content' => 'video',
+          ),
+      ),
+
+      'video_type' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'video_type',
+              'content' => 'application/x-shockwave-flash',
+          ),
+      ),
+
+      'video_height' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'video_height',
+              'content' => '300',
+          ),
+      ),
+
+      'video_width' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'video_height',
+              'content' => '500',
+          ),
+      ),
+
+
+      'video_src' => array(
+          '#tag' => 'link', // The #tag is the html tag - <link />
+          '#attributes' => array( 
+              'href' => 'http://ripplin.com/sites/all/libraries/flowplayer/flowplayer-3.2.8.swf?config=' . urlencode('http://ripplin.com/video-src?v=' . $node->nid),
+              'rel' => 'video_src',
+          ),
+      ),
+      */
+  );
+ 
+        
+  foreach ($tags as $key => $val)
+      drupal_add_html_head($val, $key);
+        
 }
 
 
