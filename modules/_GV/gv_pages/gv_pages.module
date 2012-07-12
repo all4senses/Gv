@@ -975,22 +975,27 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       } // End of if(arg(1) != 'add') {
 */    
       
-      // Deny to change the status of the node (it should always be unpublished).
-      //$form['options']['#access'] = FALSE;
-      // And other options.
+      
+      // Hide some options for all.
       $form['comment_settings']['#access'] = FALSE;
       $form['revision_information']['#access'] = FALSE;
-      //$form['path']['#access'] = FALSE;
       
+      // And leave some options for the root.
       global $user;
       if ($user->uid != 1) {
         $form['field_preface_key']['#access'] = FALSE;
+        // Deny to change the status of the node (it should always be unpublished).
+        $form['options']['#access'] = FALSE;
+        // Hide url aliasing options.
+        $form['path']['#access'] = FALSE;
       }
+      
+      
+      // Connect Ckeditor for additional fields.
       
       //$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
       //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
       $keys = element_children($form['field_preface_bottom']['und']);
-      
       foreach ($keys as $key) {
         $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'full_html'; // link Ckeditor
       }
