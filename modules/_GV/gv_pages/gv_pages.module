@@ -159,9 +159,13 @@ function gv_pages_buildHome($name, $data) {
     dpm(render($seo_welcome_node_view['body']));
     dpm($seo_welcome_node_view);
     dpm(render($seo_welcome_node_view));
+    $out .= render($seo_welcome_node_view);
+  }
+  else {
+    $out .= render($seo_welcome_node_view);
   }
   
-  $out .= render($seo_welcome_node_view);
+  
   
   // Content of a home page saved in db as a var.
   ////$out .= theme($name, array('data' => $data));
