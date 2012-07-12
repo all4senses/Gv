@@ -35,6 +35,8 @@
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_tags']);
+      
+      hide($content['field_bottom_section']);
       print render($content);
     ?>
     
