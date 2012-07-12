@@ -1,5 +1,8 @@
 <?php
 
+// Load theme functions
+module_load_include('inc', 'eva', 'eva.theme');
+
 /**
  * Implements hook_views_api().
  */
@@ -102,6 +105,10 @@ function eva_get_views($type = NULL, $reset = FALSE) {
 
     // If it's still empty rebuild it.
     if (!isset($used_views)) {
+      // Trigger a rebuild of the views object cache, which may not be fully loaded.
+      ctools_include('export');
+      ctools_export_load_object_reset('views_view');
+
       // Build and cache the data, both in the DB and statically.
       $views = views_get_applicable_views('uses hook entity view');
       foreach ($views as $data) {
@@ -109,7 +116,7 @@ function eva_get_views($type = NULL, $reset = FALSE) {
         $view_entity = $view->display_handler->get_option('entity_type');
         $used_views[$view_entity][] = array(
           'name' => $view->name,
-          'title' => $view->get_title(),
+          'title' => $view->get_human_name() . ' > ' . $view->display[$display_id]->display_title,
           'display' => $display_id,
           'bundles' => $view->display_handler->get_option('bundles'),
         );
@@ -145,7 +152,7 @@ function eva_get_views($type = NULL, $reset = FALSE) {
 function _eva_extract_entity_from_build($build) {
   // EntityAPI often sticks stuff in here.
   if (!empty($build['#entity'])) {
-    return $entity;
+    return $build['#entity'];
   }
   
   // Other entities stick them here!
@@ -185,4 +192,24 @@ function eva_get_arguments_from_token_string($string, $type, $object) {
   }
   $args = token_replace($args, array($type => $object), array('sanitize' => FALSE));
   return explode('/', $args);
+}
+
+/**
+ * Implements hook_modules_enabled().
+ */
+function eva_modules_enabled($modules) {
+  // Reset the static cache in case any of the enabled modules
+  // implement an eva view
+  drupal_static_reset('eva_get_views');
+  cache_clear_all('*', 'cache_views', TRUE);
+}
+
+/**
+ * Implements hook_modules_disabled().
+ */
+function eva_modules_disabled($modules) {
+  // Reset the static cache in case any of the disabled modules
+  // implemented an eva view
+  drupal_static_reset('eva_get_views');
+  cache_clear_all('*', 'cache_views', TRUE);
 }
