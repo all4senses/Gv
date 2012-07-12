@@ -165,6 +165,7 @@ function gv_pages_buildHome($name, $data) {
     dpm($seo_welcome_node_view);
     //dpm(render($seo_welcome_node_view));
     $out .= render($seo_welcome_node_view);
+    $out .= render($seo_welcome_node_view['field_preface_bottom']);
   }
   else {
     $out .= render($seo_welcome_node_view);
