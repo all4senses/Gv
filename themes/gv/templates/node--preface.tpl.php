@@ -1,7 +1,7 @@
 <?php if (!$page): ?>
 
     <?php if (in_array('administrator', $user->roles)): ?>
-      <div class="tabs-wrapper clearfix"><h2 class="element-invisible">Primary tabs</h2>
+      <div class="tabs-wrapper clearfix"><h3 class="element-invisible">Primary tabs</h3>
         <ul class="tabs primary clearfix">
           <li class="active"><a class="active" href="/<?php echo $_GET['q']; ?>">View<span class="element-invisible">(active tab)</span></a></li>
           <li><a href="<?php echo url('node/' . $node->nid . '/edit', array('query' => array('destination' => $_GET['q']))); ?>">Edit</a></li>
