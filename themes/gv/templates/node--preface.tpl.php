@@ -40,7 +40,11 @@
     
     <?php 
     global $user;
-    if ($user->uid == 1): ?>
+    if ($user->uid == 1): 
+      
+      dpm($_GET);
+      $url = $_GET['q'];
+    ?>
     
      <div class="share">
         <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
