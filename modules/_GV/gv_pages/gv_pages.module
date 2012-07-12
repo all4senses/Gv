@@ -158,14 +158,8 @@ function gv_pages_buildHome($name, $data) {
   
   global $user;
   if ($user->uid == 1) {
-    //dpm(render($seo_welcome_node_view['body']));
-    
-    
-    
     dpm($seo_welcome_node_view);
-    //dpm(render($seo_welcome_node_view));
     $out .= render($seo_welcome_node_view);
-    $out .= render($seo_welcome_node_view['field_preface_bottom']);
   }
   else {
     $out .= render($seo_welcome_node_view);
@@ -187,6 +181,11 @@ function gv_pages_buildHome($name, $data) {
   // Get block for Top pick residential providers.
   $block_data = array('module' => 'views', 'delta' => 'providers-block_1', 'shadow' => FALSE); 
   $out .= gv_blocks_getBlockThemed($block_data);
+  
+  
+  if ($user->uid == 1) {
+    $out .= render($seo_welcome_node_view['field_preface_bottom']);
+  }
   
   return $out;
 }
