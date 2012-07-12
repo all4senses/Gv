@@ -986,6 +986,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       dpm($form);
       //$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
       //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+      $keys = element_children($form['field_preface_bottom']['und']);
+      
+      foreach ($keys as $key) {
+        $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'gv_full_html'; // link Ckeditor
+      }
       
     break; // End of case 'preface_node_form':
 
