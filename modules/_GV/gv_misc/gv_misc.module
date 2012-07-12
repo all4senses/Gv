@@ -367,6 +367,16 @@ function gv_misc_addSocialShareData_toPage($node) {
         $image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
       }
       $og_type = 'company';
+      break;
+      
+    case 'review':
+      global $review_provider_logo_path;
+      if ($review_provider_logo_path) {
+        $image = $review_provider_logo_path;
+      }
+      $og_type = 'company';
+      break;
+    
   }
   
   if (!$image){
