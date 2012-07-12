@@ -983,7 +983,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['field_preface_key']['#access'] = FALSE;
       }
       
-      dpm($form);
       //$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
       //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
       $keys = element_children($form['field_preface_bottom']['und']);
