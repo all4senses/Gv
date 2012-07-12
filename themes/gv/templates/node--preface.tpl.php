@@ -32,6 +32,9 @@
   <div class="content page preface"<?php print $content_attributes; ?>>
     <?php
       // Hide comments, tags, and links now so that we can render them later.
+    
+    dpm($content);
+    
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_tags']);
