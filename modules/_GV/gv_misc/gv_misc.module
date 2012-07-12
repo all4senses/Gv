@@ -471,7 +471,7 @@ function gv_misc_addSocialShareData_toPage($node) {
   if ($image) {
     
     if (!strpos($image, '//getvoip.com')) {
-      $image = 'http://getvoip.com' . $image;
+      $image = 'http://getvoip.com/' . ltrim($image, '/');
     }
     
     $tags['image_src'] = array(
