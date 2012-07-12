@@ -953,6 +953,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
     break;
     
+    
+    
+    
+    
   
        
     case 'preface_node_form':
@@ -972,11 +976,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 */    
       
       // Deny to change the status of the node (it should always be unpublished).
-      $form['options']['#access'] = FALSE;
+      //$form['options']['#access'] = FALSE;
       // And other options.
       $form['comment_settings']['#access'] = FALSE;
       $form['revision_information']['#access'] = FALSE;
-      $form['path']['#access'] = FALSE;
+      //$form['path']['#access'] = FALSE;
       
       global $user;
       if ($user->uid != 1) {
@@ -994,6 +998,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     break; // End of case 'preface_node_form':
 
   
+    
+    
+    
+    
+    
     
     
   
