@@ -43,7 +43,8 @@
     if ($user->uid == 1): 
       
       dpm($_GET);
-      $url = $_GET['q'];
+      $url = '/' . ($_GET['q'] == 'home' ? '' : $_GET['q']);
+      dpm($url);
     ?>
     
      <div class="share">
