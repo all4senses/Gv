@@ -154,11 +154,13 @@ function gv_pages_buildHome($name, $data) {
   $seo_welcome_node->title_no_link = TRUE;
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
   
+  hide($seo_welcome_node_view['field_preface_bottom']);
+  
   global $user;
   if ($user->uid == 1) {
     //dpm(render($seo_welcome_node_view['body']));
     
-    //hide($seo_welcome_node_view['body']);
+    
     
     dpm($seo_welcome_node_view);
     //dpm(render($seo_welcome_node_view));
