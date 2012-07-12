@@ -59,11 +59,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  $blocks['business_provider_page_bottom_section'] = array(
+  $blocks['b_provider_p_bottom'] = array(
     'info' => t('Bottom section of Business providers page preface'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['residential_provider_page_bottom_section'] = array(
+  $blocks['r_provider_p_bottom'] = array(
     'info' => t('Bottom section of Residential providers page preface'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -135,11 +135,11 @@ function gv_blocks_block_view($delta = '') {
       break;         
      
     
-    case 'business_provider_page_bottom_section':
+    case 'b_provider_p_bottom':
       $block['subject'] = t('Bottom section of Business providers page preface');
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers'); // Arg - preface's key
       break;
-    case 'residential_provider_page_bottom_section':
+    case 'r_provider_p_bottom':
       $block['subject'] = t('Bottom section of Residential providers page preface');
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-residential-voip-providers'); // Arg - preface's key
       break;
