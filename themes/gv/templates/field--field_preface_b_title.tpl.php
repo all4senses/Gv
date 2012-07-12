@@ -48,4 +48,4 @@ See http://api.drupal.org/api/function/theme_field/7 for details.
 After copying this file to your theme's folder and customizing it, remove this
 HTML comment.
 -->
-<h2 class="preface-bottom"><?php echo render($items[0]); ?></h2>
+<h2 class="preface"><?php echo render($items[0]); ?></h2>
