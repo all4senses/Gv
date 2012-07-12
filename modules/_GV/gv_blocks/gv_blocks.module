@@ -58,6 +58,16 @@ function gv_blocks_block_info() {
     'info' => t('Get access... Banner'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['business_provider_page_bottom_section'] = array(
+    'info' => t('Bottom section of Business providers page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['residential_provider_page_bottom_section'] = array(
+    'info' => t('Bottom section of Residential providers page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   // Topics block for different content types.
   $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
   foreach ($content_types as $content_type => $label) {
@@ -123,7 +133,18 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('GET ACCESS TO THE LARGEST <br>VOIP FOOTPRINT <br>IN THE NATION');
       $block['content'] = gv_blocks_get_accessToFootprintBanner();
       break;         
-        
+     
+    
+    case 'business_provider_page_bottom_section':
+      $block['subject'] = t('Bottom section of Business providers page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers'); // Arg - preface's key
+      break;
+    case 'residential_provider_page_bottom_section':
+      $block['subject'] = t('Bottom section of Residential providers page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-residential-voip-providers'); // Arg - preface's key
+      break;
+    
+    
     default:
       // Get blocks for topics for a specific content type.
       if (strpos($delta, '_topics')) {
