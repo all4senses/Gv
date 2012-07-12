@@ -153,7 +153,13 @@ function gv_pages_buildHome($name, $data) {
   $seo_welcome_node = gv_misc_getPrefaceByKey('front');
   $seo_welcome_node->title_no_link = TRUE;
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
-  dpm($seo_welcome_node_view);
+  
+  global $user;
+  if ($user->uid == 1) {
+    dpm($seo_welcome_node_view);
+    dpm(render($seo_welcome_node_view));
+  }
+  
   $out .= render($seo_welcome_node_view);
   
   // Content of a home page saved in db as a var.
