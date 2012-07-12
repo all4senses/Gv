@@ -156,9 +156,12 @@ function gv_pages_buildHome($name, $data) {
   
   global $user;
   if ($user->uid == 1) {
-    dpm(render($seo_welcome_node_view['body']));
+    //dpm(render($seo_welcome_node_view['body']));
+    
+    hide($seo_welcome_node_view['body']);
+    
     dpm($seo_welcome_node_view);
-    dpm(render($seo_welcome_node_view));
+    //dpm(render($seo_welcome_node_view));
     $out .= render($seo_welcome_node_view);
   }
   else {
