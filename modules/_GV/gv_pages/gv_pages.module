@@ -989,7 +989,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $keys = element_children($form['field_preface_bottom']['und']);
       
       foreach ($keys as $key) {
-        $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'gv_full_html'; // link Ckeditor
+        $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'full_html'; // link Ckeditor
       }
       
     break; // End of case 'preface_node_form':
