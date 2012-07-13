@@ -159,14 +159,14 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $description = $vars['description'];
     //dpr($description);
     //dpr($nid);
-    dpr($node);
-    $description = '<div class="xxx">xxx</div><div class="yyy">yyy</div>';
-    
+    //dpr($node);
+    $description = $node->field_a_teaser['und'][0]['value']; //'<div class="xxx">xxx</div><div class="yyy">yyy</div>';
+    $description = check_plain(htmlspecialchars_decode($description));
     //$vars['description'] = nl2br(check_plain(trim($description)));
     //dpm($vars['description']);
-    $vars['description'] = check_plain(htmlspecialchars_decode(trim($description)));
+    $vars['description'] = check_plain(htmlspecialchars_decode($description));
     //dpr($vars['description']);
-    exit;
+    //exit;
     
   }
 }
