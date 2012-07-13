@@ -157,9 +157,9 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $nid = $vars['row']->nid;
     $node = $vars['view']->style_plugin->row_plugin->nodes[$nid];
     $description = $vars['description'];
-    dpr($description);
-    dpr($nid);
-    dpr($node);
+    //dpr($description);
+    //dpr($nid);
+    //dpr($node);
     $vars['description'] = 'xxx';
   }
 }
