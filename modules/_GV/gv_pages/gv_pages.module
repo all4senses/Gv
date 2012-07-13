@@ -366,8 +366,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'article_node_form':
       
         
-        $form['field_a_teaser']['und'][0]['#format'] = 'full_html';
-        //$form['field_a_teaser']['#access'] = FALSE;
+        //$form['field_a_teaser']['und'][0]['#format'] = 'full_html';
+        $form['field_a_teaser']['#access'] = FALSE;
         $form['field_main_image']['#access'] = FALSE;
       
         $form['actions']['save_draft'] = array(
@@ -379,11 +379,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         $form['#submit'][] = 'gv_pages_submitForm_article';
         $form['#validate'][] = 'gv_pages_validateForm_article';
-        
-        dpm($form['field_a_teaser']);
-        dpm($form);
-        
-        
+                
       break;
     
     
