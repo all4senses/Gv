@@ -149,19 +149,17 @@ function gv_username($object) {
 */
 function gv_preprocess_views_view_row_rss(&$vars) {
   global $user;
-  if ($user->uid == 1) {
-    $keys = array_keys($vars);
-    dpr($keys);
+  if ($user->uid == 1 && $vars['row']->nid == 292) {
+    //$keys = array_keys($vars);
+    //dpr($keys);
     //dpr($vars);
-    
     
     $nid = $vars['row']->nid;
     $node = $vars['view']->style_plugin->row_plugin->nodes[$nid];
     $description = $vars['description'];
-    dpr($description);
-    dpr($nid);
-    dpr($node);
-    exit;
+    dpm($description);
+    dpm($nid);
+    dpm($node);
     
   }
 }
