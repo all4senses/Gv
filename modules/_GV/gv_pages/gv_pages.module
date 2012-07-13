@@ -364,7 +364,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'news_post_node_form':
     case 'blog_post_node_form':
     case 'article_node_form':
-        
+      
+        dpm($form['field_a_teaser']);
+        dpm($form);
         $form['field_a_teaser']['#access'] = FALSE;
         $form['field_main_image']['#access'] = FALSE;
       
