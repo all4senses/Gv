@@ -1567,8 +1567,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   
   // Define a main image and build a custom teaser.
   if ($data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']) ) {
-    form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $data['teaser']) )), $form_state);
-    form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']), 'format' => 'full_html' ) )), $form_state);
+    form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $data['teaser']), 'format' => 'full_html' )), $form_state);
+    form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']) ) )), $form_state);
   }
 }
 
