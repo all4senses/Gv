@@ -148,12 +148,9 @@ function gv_username($object) {
 * Default theme function for all RSS rows.
 */
 function gv_preprocess_views_view_row_rss(&$vars) {
-  global $user;
-  if ($user->uid == 1 /*&& $vars['row']->nid == 292*/) {
-    $node = $vars['view']->style_plugin->row_plugin->nodes[$vars['row']->nid];
-    //$vars['description'] = check_plain(htmlspecialchars_decode($node->field_a_teaser['und'][0]['value']));
-    $vars['description'] = check_plain(htmlspecialchars_decode(gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $vars['row']->nid, 400, TRUE)));
-  }
+  $node = $vars['view']->style_plugin->row_plugin->nodes[$vars['row']->nid];
+  //$vars['description'] = check_plain(htmlspecialchars_decode($node->field_a_teaser['und'][0]['value']));
+  $vars['description'] = check_plain(htmlspecialchars_decode(gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $vars['row']->nid, 400, TRUE)));
 }
 
 
