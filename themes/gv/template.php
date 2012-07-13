@@ -166,7 +166,7 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     //dpm($vars['description']);
     $vars['description'] = check_plain(htmlspecialchars_decode(trim($description)));
     //dpr($vars['description']);
-    //exit;
+    exit;
     
   }
 }
