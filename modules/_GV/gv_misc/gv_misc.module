@@ -551,6 +551,18 @@ function gv_misc_addSocialShareData_toPage($node) {
     ),
       
       
+      
+    // Add main rss feed to every page.
+    'image_src' => array(
+      '#tag' => 'link', 
+      '#attributes' => array( 
+          'href' => 'http://getvoip.com/rss.xml',
+          'rel' => 'alternate',
+          'type' => 'application/rss+xml',
+          'title' => 'Latest Articles from GetVoIP',
+      ),
+    ),
+      
   );
 
     
