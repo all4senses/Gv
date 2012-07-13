@@ -150,6 +150,8 @@ function gv_username($object) {
 function gv_preprocess_views_view_row_rss(&$vars) {
   global $user;
   if ($user->uid == 1) {
+    $keys = array_keys($vars);
+    dpr($keys);
     dpr($vars);
     exit;
   }
