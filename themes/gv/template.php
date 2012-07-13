@@ -162,11 +162,11 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     //dpr($node);
     $description = '<div class="xxx">xxx</div><div class="yyy">yyy</div>';
     
-    $vars['description'] = nl2br(check_plain(trim($description)));
-    dpr($vars['description']);
-    $vars['description'] = htmlspecialchars_decode($description);
-    dpr($vars['description']);
-    exit;
+    //$vars['description'] = nl2br(check_plain(trim($description)));
+    //dpm($vars['description']);
+    $vars['description'] = check_plain(htmlspecialchars_decode(trim($description)));
+    //dpr($vars['description']);
+    //exit;
     
   }
 }
