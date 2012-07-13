@@ -152,8 +152,15 @@ function gv_preprocess_views_view_row_rss(&$vars) {
   if ($user->uid == 1) {
     $keys = array_keys($vars);
     dpr($keys);
-    dpr($vars);
+    //dpr($vars);
+    
+    
+    $nid = $vars['row']->nid;
+    $node = $vars['view']->style_plugin->row_plugin->nodes[$nid];
+    dpr($nid);
+    dpr($node);
     exit;
+    
   }
 }
 
