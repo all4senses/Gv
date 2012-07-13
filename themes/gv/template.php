@@ -145,6 +145,13 @@ function gv_username($object) {
 
 
 /**
+* Default theme function for all RSS rows.
+*/
+function gv_preprocess_views_view_row_rss(&$vars) {
+  dpm($vars);
+}
+
+/**
  * Theme function for a CAPTCHA element.
  * 
  * a4s rename CAPTCHA to Captcha
