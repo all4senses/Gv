@@ -74,6 +74,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   $topics = cache_get($content_type . '_topics_page' . $language->language);
   if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics = gv_misc_getTopics($content_type, $content_type_label);
+    dpm($topics);
     if (!$topics) {
       return NULL;
     }
