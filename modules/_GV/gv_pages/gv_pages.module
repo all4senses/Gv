@@ -365,8 +365,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'blog_post_node_form':
     case 'article_node_form':
       
-        dpm($form['field_a_teaser']);
-        dpm($form);
         
         $form['field_a_teaser']['und'][0]['#format'] = 'full_html';
         $form['field_a_teaser']['#access'] = FALSE;
@@ -381,6 +379,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         $form['#submit'][] = 'gv_pages_submitForm_article';
         $form['#validate'][] = 'gv_pages_validateForm_article';
+        
+        dpm($form['field_a_teaser']);
+        dpm($form);
+        
         
       break;
     
