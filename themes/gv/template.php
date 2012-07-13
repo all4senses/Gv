@@ -148,7 +148,11 @@ function gv_username($object) {
 * Default theme function for all RSS rows.
 */
 function gv_preprocess_views_view_row_rss(&$vars) {
-  dpm($vars);
+  global $user;
+  if ($user->uid == 1) {
+    dpr($vars);
+    exit;
+  }
 }
 
 /**
