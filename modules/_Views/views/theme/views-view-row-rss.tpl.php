@@ -9,6 +9,6 @@
   <item>
     <title><?php print $title; ?></title>
     <link><?php print $link; ?></link>
-    <description><div class="xxx"><?php print $description; ?></div></description>
+    <description><?php print $description; ?></description>
     <?php print $item_elements; ?>
   </item>
