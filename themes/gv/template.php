@@ -160,7 +160,7 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     //dpr($description);
     //dpr($nid);
     //dpr($node);
-    $vars['description'] = 'xxx';
+    $vars['description'] = '<div class="xxx">xxx</div><div class="yyy">yyy</div>';
   }
 }
 
