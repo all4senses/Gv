@@ -1084,7 +1084,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $types = array();
 
   $query = db_select('taxonomy_term_data', 'td')
-        ->fields('td', array('name', 'tid'));
+        ->fields('td', array('name', 'tid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');
   $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
