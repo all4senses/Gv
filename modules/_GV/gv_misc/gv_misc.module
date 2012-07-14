@@ -1101,7 +1101,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
     $base_url = trim($base_url, '/');
     //$result->link = array('link_title' => $result->name, 'href' => $base_url . '/' . urlencode(drupal_strtolower($result->name)));
     $result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . str_replace(' ', '-', drupal_strtolower($result->name)));
-    $topics[$result->tid] = (array) $result;
+    $topics[$result->tid] = /*(array)*/ $result;
   }
   return $topics;
 }
@@ -1167,6 +1167,9 @@ function theme_gv_misc_submenuSimple($vars) {
   $out = '<ul class="gv ' . $class . ' lvl-' . $level . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
+    if (is_object($submenu)) {
+      $submenu = (array) $submenu;
+    }
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
