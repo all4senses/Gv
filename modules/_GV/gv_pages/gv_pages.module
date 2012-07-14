@@ -109,7 +109,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
     $preface = render(node_view($preface, 'full'));
   }
   
-  return $preface . $topics; 
+  return '<div class="tags">' . $preface . $topics . '</div>'; 
 }
 
 
