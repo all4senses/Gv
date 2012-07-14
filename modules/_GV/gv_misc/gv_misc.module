@@ -1126,7 +1126,43 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_requestQuote_mail' => array(
       'variables' => array(),
     ),
+    // Altered Tagadelic weighted tag cloud.
+    'gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths' => array(
+      'variables' => array('terms' => array())
+    ),
+
   );
+}
+
+
+/**
+ * Theme function that renders the HTML for the tags.
+ *
+ * @ingroup themable
+ */
+function theme_gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths(array $vars) {
+  $terms = $vars['terms'];
+  $output = '';
+
+  foreach ($terms as $term) {
+    $output .= l($term->name, 'taxonomy/term/' . $term->tid, array(
+      'attributes' => array(
+        'class' => array("tagadelic", "level" . $term->weight),
+        'rel' => 'tag',
+        'title'  => $term->description,
+        )
+      )
+    ) . " \n";
+  }
+  
+  
+  if(isset($vars['voc'])){
+    if (count($terms) >= variable_get('tagadelic_block_tags_' . $vars['voc']->vid, 12)) {
+      $output .= theme('more_link', array('title' => t('more tags'), 'url' => "tagadelic/chunk/{$vars['voc']->vid}"));
+    }
+  }
+
+  return $output;
 }
   
 
