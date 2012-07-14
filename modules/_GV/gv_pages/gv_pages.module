@@ -104,7 +104,8 @@ function gv_pages_buildTopicsPage($content_type_label) {
   }
   
   
-  $topics_array = tagadelic_build_weighted_tags($topics_array, 12);
+  $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
+  $topics = theme('tagadelic_weighted', array('terms' => $tags));
   dpm($topics_array);
   
   return $preface . $topics; 
