@@ -1145,7 +1145,7 @@ function theme_gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths(array $vars)
   $output = '';
 
   foreach ($terms as $term) {
-    $output .= l($term->name, 'taxonomy/term/' . $term->tid, array(
+    $output .= l($term->name, isset($term->link['href']) ? $term->link['href'] : 'taxonomy/term/' . $term->tid, array(
       'attributes' => array(
         'class' => array("tagadelic", "level" . $term->weight),
         'rel' => 'tag',
