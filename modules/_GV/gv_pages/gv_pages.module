@@ -74,11 +74,17 @@ function gv_pages_buildTopicsPage($content_type_label) {
   $topics = cache_get($content_type . '_topics_page' . $language->language);
   if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
     $topics_array = gv_misc_getTopics($content_type, $content_type_label);
-    dpm($topics_array);
     if (!$topics_array) {
       return NULL;
     }
-    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
+    
+    // Simple List.
+    // $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
+    // Tag cloud.
+    $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
+    $topics = theme('tagadelic_weighted', array('terms' => $topics_array));
+  
+
     //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
     $show_all_url = '<div class="more-link">' . l(t('Show all posts'), $content_type_label) . '</div>';
     $topics = /*$page_title .*/ $topics . $show_all_url;
@@ -102,11 +108,6 @@ function gv_pages_buildTopicsPage($content_type_label) {
     $preface->title_no_link = TRUE;
     $preface = render(node_view($preface, 'full'));
   }
-  
-  
-  $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
-  $topics = theme('tagadelic_weighted', array('terms' => $topics_array));
-  dpm($topics_array);
   
   return $preface . $topics; 
 }
