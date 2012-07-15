@@ -45,6 +45,8 @@
     //if ($user->uid == 1): 
       
       $url = 'http://getvoip.com/' . ($_GET['q'] == 'home' ? '' : $_GET['q']);
+      dpm($_GET);
+      dpm($url);
     ?>
     
      <div class="share">
