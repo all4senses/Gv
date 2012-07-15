@@ -56,8 +56,14 @@ function gv_misc_menu() {
 function gv_misc_menu_alter(&$items) {
   // Example - disable the page at node/add
   //$items['node/add']['access callback'] = FALSE;
-  dpm('test');
-  dpm($items);
+  
+  global $user;
+  if ($user->uid == 1) {
+    dpr('test');
+    dpr($items);
+    exit;
+  }
+  
   
 }
 
