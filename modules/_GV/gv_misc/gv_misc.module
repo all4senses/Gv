@@ -50,6 +50,17 @@ function gv_misc_menu() {
 
 
 /**
+ * Hook menu alter.
+ *
+ */
+function hook_menu_alter(&$items) {
+  // Example - disable the page at node/add
+  //$items['node/add']['access callback'] = FALSE;
+  dpm($items);
+}
+
+
+/**
  * Get prefaces bottom section rendered.
  *
  */
