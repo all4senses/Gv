@@ -43,7 +43,7 @@
     <?php 
     //global $user;
     //if ($user->uid == 1): 
-      
+      dpm($_SERVER);
       $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '/' : (strpos($_GET['q'], 'node/') === FALSE ? ('/' . $_GET['q']) : url($_GET['q'])));
     ?>
     
