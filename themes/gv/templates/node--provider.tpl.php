@@ -135,7 +135,6 @@
               
               
                       
-                      
               <div class="data tabs">
                 
                 <ul>
@@ -145,71 +144,71 @@
                     foreach ($node->field_p_types['und'] as $type) {
                       echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => ucfirst($type['value']))) . '</a></li>';
                     } 
-                    
                   ?>
-                  <!--<li><a href="#tabs-2"><?php //echo t('Features & Pricing'); ?></a></li> -->
                 </ul>
                 <div id="tabs-1">
                   <?php echo render($content['body']); ?>
                 </div>
-                <div id="tabs-2">
-                  <?php 
-                  
-                  if ($node->p_type == 'bu') {
-                    $key = 's_business';
-                    $prefix = 'bu';
-                  }
-                  else {
-                    $key = 's_residential';
-                    $prefix = 're';
-                  }
-                  
-                  if ($node->p_data['services'][$key][$prefix . '_basicinfo_title']) {
-                    echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_title']) , ':</div>',
-                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_text']) , '</div>';
-                  }
-                  echo    '<div class="f caption">' , t('Pricing') , ':</div>',
-                          '<div class="block-1">',
-                          '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] : t('N/A') ) , '</div></div>',
-                          '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] : t('N/A') ), '</div></div>',
-                          '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] : t('N/A') ) , '</div></div>',
-                          '</div>',
-                          '<div class="block-2">',
-                          '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] : t('N/A') ), '</div></div>',
-                          '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] : t('N/A') ) , '</div></div>',
-                          '</div>',
-                            
-                          '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
-                          '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_money_back_guarantee']) , '</div>';
-                          
-                          if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
-                            echo '<div class="f caption">' , t('Available Features') , ':</div>';
-                            foreach ($node->p_data['services'][$key]['weights_' . $prefix . '_features'] as $tid => $term) {
-                              echo '<div class="tag">' , t($term['name']) /*l(t($term['name']), 'taxonomy/term/' . $tid )*/ , '</div>';
-                            }
-                            
-                          }
-                          
-                          
-                  
-                  /*
-                  foreach($content as $field_title => $value) {
-                    if (strpos($field_title, 'bu_') === 0) {
-                      echo render($content[$field_title]);
-                    }
-                  }
-                  foreach($content as $field_title => $value) {
-                    if (strpos($field_title, 's_') === 0) {
-                      echo render($content[$field_title]);
-                    }
-                  }
-                  */
-                  ?>
-                </div>
                 
-              </div>
+                <?php 
+                    $count = 2;
+                    foreach ($node->field_p_types['und'] as $type) {
+                      
+                      switch ($type['value']) {
+                        case 'business':
+                          $key = 's_business';
+                          $prefix = 'bu';
+                          break;
+                        case 'residential':
+                          $key = 's_residential';
+                          $prefix = 're';
+                          break;
+                        case 'international':
+                          $key = 's_international';
+                          $prefix = 'in';
+                          break;
+                      }
+                      
+                      
+                      echo '<div id="tabs-' . $count++ . '">';
+                      
+                        if ($node->p_data['services'][$key][$prefix . '_basicinfo_title']) {
+                          echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_title']) , ':</div>',
+                                '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_text']) , '</div>';
+                        }
+
+                        echo    '<div class="f caption">' , t('Pricing') , ':</div>',
+                                '<div class="block-1">',
+                                '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['monthly_fees'] : t('N/A') ) , '</div></div>',
+                                '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['setup_fees'] : t('N/A') ), '</div></div>',
+                                '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['cancel_fees'] : t('N/A') ) , '</div></div>',
+                                '</div>',
+                                '<div class="block-2">',
+                                '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['longdistance_fees'] : t('N/A') ), '</div></div>',
+                                '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] ? $node->p_data['services'][$key][$prefix . '_basicinfo_fees']['other_fees'] : t('N/A') ) , '</div></div>',
+                                '</div>',
+
+                                '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
+                                '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_money_back_guarantee']) , '</div>';
+
+                        if (isset($node->p_data['services'][$key]['weights_' . $prefix . '_features'])) {
+                          echo '<div class="f caption">' , t('Available Features') , ':</div>';
+                          foreach ($node->p_data['services'][$key]['weights_' . $prefix . '_features'] as $tid => $term) {
+                            echo '<div class="tag">' , t($term['name']) /*l(t($term['name']), 'taxonomy/term/' . $tid )*/ , '</div>';
+                          }
+
+                        }
+                      
+                      echo '</div>'; // End of echo '<div id="tabs-' . $count++ . '">';
+                  
+                      
+                    } // End of foreach ($node->field_p_types['und'] as $type) {
+                    
+                ?>
+                
+              </div> <?php // End of <div class="data tabs"> ?>
               
-              <?php gv_misc_renderMetatags_newOrder($content['metatags']); //echo render($content['metatags']); ?>
+          <?php gv_misc_renderMetatags_newOrder($content['metatags']); //echo render($content['metatags']); ?>
           
           
               
