@@ -57,13 +57,14 @@ function gv_misc_menu_alter(&$items) {
   // Example - disable the page at node/add
   //$items['node/add']['access callback'] = FALSE;
   
-  global $user;
-  if ($user->uid == 1) {
-    dpr('test');
-    dpr($items);
-    exit;
-  }
-  
+  unset($items['tagadelic'], $items['tagadelic/list/%tagadelic_vocs'], $items['tagadelic/chunk/%tagadelic_vocs']);
+//  global $user;
+//  if ($user->uid == 1) {
+//    dpr('test');
+//    dpr($items);
+//    exit;
+//  }
+//  
   
 }
 
