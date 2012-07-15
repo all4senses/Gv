@@ -140,7 +140,14 @@
                 
                 <ul>
                   <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? /*'<span property="v:itemreviewed">' .*/ $content['field_p_name'][0]['#markup'] /*. '</span>'*/ : t(' Provider') )); ?></a></li>
-                  <li><a href="#tabs-2"><?php echo t('Features & Pricing'); ?></a></li>
+                  <?php 
+                    $count = 2;
+                    foreach ($node->field_p_types['und'] as $type) {
+                      echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => ucfirst($type['value']))) . '</a></li>';
+                    } 
+                    
+                  ?>
+                  <!--<li><a href="#tabs-2"><?php //echo t('Features & Pricing'); ?></a></li> -->
                 </ul>
                 <div id="tabs-1">
                   <?php echo render($content['body']); ?>
@@ -156,6 +163,7 @@
                     $key = 's_residential';
                     $prefix = 're';
                   }
+                  
                   if ($node->p_data['services'][$key][$prefix . '_basicinfo_title']) {
                     echo  '<div class="f caption first">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_title']) , ':</div>',
                           '<div class="text">' , t($node->p_data['services'][$key][$prefix . '_basicinfo_text']) , '</div>';
