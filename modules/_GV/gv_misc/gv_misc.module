@@ -1730,10 +1730,10 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
         if ($target == 'logo_chart') {
-          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main'));
+          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         } 
         else {
-          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'thumbnail'));
+          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'thumbnail', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         }
         $out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
       }

@@ -1776,7 +1776,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
   
   if ($logo = file_load($form_state['values']['field_p_logo']['und'][0]['fid'])) {
-    $p_data_quick['i_logo_uri'] = $logo->uri;  
+    $p_data_quick['i_logo_uri'] = $logo->uri;
+    $p_data_quick['i_logo_alt'] = $logo->alt;
+    $p_data_quick['i_logo_title'] = $logo->title;
   }
   
   //dpm($p_data_quick);
