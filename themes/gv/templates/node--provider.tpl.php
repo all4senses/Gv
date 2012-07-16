@@ -39,10 +39,10 @@
               <div class="logo-share">
                 <?php
                 
-                  dpm($content);
+                  //dpm($content);
                   
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
+                    echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
                   }
                   else {
                     //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
@@ -105,7 +105,7 @@
               <div class="image">
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div><a href="' , $node->p_data['info']['i_web'] , '" target="_blank">' , theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page')) , '</a></div>', 
+                    echo '<div><a href="' , $node->p_data['info']['i_web'] , '" target="_blank">' , theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title'])) , '</a></div>', 
                          '<div class="site">' , l('Visit ' . $content['field_p_name'][0]['#markup'], $node->p_data['info']['i_web'], array('attributes' => array('target' => '_blank'))) , '</div>';
                   }
                 ?>  
