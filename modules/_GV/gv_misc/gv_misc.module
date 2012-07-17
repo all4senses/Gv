@@ -274,6 +274,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     }
     $main_image['src'] = str_replace('%20', ' ', $main_image['src']);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
+    $main_image['uri'] = $stream_path;
     
     $image_size = getimagesize(ltrim($main_image['src'], '/'));
 
@@ -288,10 +289,14 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     */
     // Scale only.
     if ($image_size[0] / $image_size[1] > 1) {
-      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_h'));
+      $style_name = 'article_thumbnail_h';
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
+      $main_image['src_themed'] = image_style_url($style_name, $stream_path);
     }
     else {
-      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_v'));
+      $style_name = 'article_thumbnail_v';
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
+      $main_image['src_themed'] = image_style_url($style_name, $stream_path);
     }
     
     $main_image_html = '<div class="thumb">' . $main_image_html . '</div>';
@@ -397,11 +402,14 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'blog_post':
     case 'news_post':
     case 'article':
-      dpm($node->field_main_image['und'][0]['value']);
       if (isset($node->field_main_image['und'][0]['value']) && $node->field_main_image['und'][0]['value']) {
         $image = unserialize($node->field_main_image['und'][0]['value']);
         $image = (isset($image['src']) && $image['src']) ? $image['src'] : NULL;
-        dpm($image);
+        
+        if (isset($image['src_themed'])) {
+          dpm($image['src_themed']);
+        }
+        //$image_themed = theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page'));
       }
       
       $og_type = 'article';
