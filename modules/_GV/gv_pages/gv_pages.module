@@ -435,13 +435,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         dpm($form);
         
+        // Hide second specific Tags field for news/blog/articles for a corresponding content type.
         global $user;
         if ($user->uid != 1) {
-          if (isset($form['field_tags_news'])) {
-            $form['field_tags_news']['#access'] = FALSE;
-          }
-          if (isset($form['field_tags_blog'])) {
-            $form['field_tags_blog']['#access'] = FALSE;
+          switch($form['#node']->type) {
+            case 'news_post':
+              $form['field_tags_news']['#access'] = FALSE;
+              break;
+            case 'blog_post':
+              $form['field_tags_blog']['#access'] = FALSE;
+              break;
+            case 'article':
+              $form['field_tags_articles']['#access'] = FALSE;
+              break;
           }
         }
       
@@ -1674,7 +1680,9 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
         $target_field = 'field_tags_blog';
         break;
       case 'article':
-        
+        $vid = 6;
+        $voc_name = 'articles_tags';
+        $target_field = 'field_tags_articles';
         break;
     }
     
