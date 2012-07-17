@@ -34,7 +34,7 @@ function gv_pages_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
-  */
+  
   $items['articles/tags'] = array(
     //'title' => 'Topics page',
     'page callback' => 'gv_pages_buildTopicsPage',
@@ -49,7 +49,7 @@ function gv_pages_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  /*
+  
   $items['news/tags'] = array(
     //'title' => 'Topics page',
     'page callback' => 'gv_pages_buildTopicsPage',
@@ -150,7 +150,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
     $topics = $topics->data;
   }
   
-  /*
+  
   if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
     //dpm($preface);
     //drupal_set_title($preface->title);
@@ -165,9 +165,9 @@ function gv_pages_buildTopicsPage($content_type_label) {
     $preface = render(node_view($preface, 'full'));
   }
   return '<div class="tags">' . $preface . $topics . '</div>'; 
-  */
   
-  return '<div class="tags">' . $topics . '</div>'; 
+  
+  //return '<div class="tags">' . $topics . '</div>'; 
 }
 
 
