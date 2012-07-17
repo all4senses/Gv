@@ -433,7 +433,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'blog_post_node_form':
     case 'article_node_form':
       
-        dpm($form);
+        //dpm($form);
         
         // Hide second specific Tags field for news/blog/articles for a corresponding content type.
         global $user;
@@ -1666,51 +1666,48 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 function gv_pages_validateForm_article(&$form, &$form_state) {
 
   // Copy tags from the Main Tag field to a specific field news/blog/article tags for a corresponding content type.
-  global $user;
-  if ($user->uid == 1) {
-    switch ($form_state['values']['type']) {
-      case 'news_post':
-        $vid = 4;
-        $voc_name = 'news_tags';
-        $target_field = 'field_tags_news';
-        break;
-      case 'blog_post':
-        $vid = 5;
-        $voc_name = 'blog_tags';
-        $target_field = 'field_tags_blog';
-        break;
-      case 'article':
-        $vid = 6;
-        $voc_name = 'articles_tags';
-        $target_field = 'field_tags_articles';
-        break;
-    }
-    
-    $tags['und'] = array();
-    foreach ($form_state['values']['field_topics']['und'] as $test_term) {
-      $all_vocs_terms = taxonomy_get_term_by_name($test_term['name']);
-      $found = FALSE;
-      foreach ($all_vocs_terms as $term) {
-        // 4 - voc News tags.
-        if ($term->vid == $vid) {
-          // Term exists in the News vocabulary.
-          $tags['und'][] = (array) $term;
-          $found = TRUE;
-          break;
-        }
-      }
-      if (!$found) {
-        $tags['und'][] = array(
-          'tid' => 'autocreate',
-          'vid' => $vid,
-          'name' => $test_term['name'],
-          'vocabulary_machine_name' => $voc_name,
-        );
-      }
-    }
-    form_set_value($form[$target_field], $tags, $form_state);
+  switch ($form_state['values']['type']) {
+    case 'news_post':
+      $vid = 4;
+      $voc_name = 'news_tags';
+      $target_field = 'field_tags_news';
+      break;
+    case 'blog_post':
+      $vid = 5;
+      $voc_name = 'blog_tags';
+      $target_field = 'field_tags_blog';
+      break;
+    case 'article':
+      $vid = 6;
+      $voc_name = 'articles_tags';
+      $target_field = 'field_tags_articles';
+      break;
   }
-  
+
+  $tags['und'] = array();
+  foreach ($form_state['values']['field_topics']['und'] as $test_term) {
+    $all_vocs_terms = taxonomy_get_term_by_name($test_term['name']);
+    $found = FALSE;
+    foreach ($all_vocs_terms as $term) {
+      // 4 - voc News tags.
+      if ($term->vid == $vid) {
+        // Term exists in the News vocabulary.
+        $tags['und'][] = (array) $term;
+        $found = TRUE;
+        break;
+      }
+    }
+    if (!$found) {
+      $tags['und'][] = array(
+        'tid' => 'autocreate',
+        'vid' => $vid,
+        'name' => $test_term['name'],
+        'vocabulary_machine_name' => $voc_name,
+      );
+    }
+  }
+  form_set_value($form[$target_field], $tags, $form_state);
+
   
   // Define a main image and build a custom teaser.
   if ($data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']) ) {
