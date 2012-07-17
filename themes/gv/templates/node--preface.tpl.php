@@ -40,7 +40,11 @@
     
     <?php 
     global $user;
-    if ($user->uid == 1): ?>
+    if ($user->uid == 1): 
+      
+      $url = 'http://getvoip.com/'. $_GET['q'];
+    
+      ?>
     
      <div class="share">
         <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
