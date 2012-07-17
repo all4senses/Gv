@@ -49,6 +49,38 @@ function gv_misc_menu() {
 }
 
 
+/**
+ * Hook menu alter.
+ *
+ */
+function gv_misc_menu_alter(&$items) {
+  // Example - disable the page at node/add
+  //$items['node/add']['access callback'] = FALSE;
+  
+  // Remove all Tagadelic urls.
+  unset($items['tagadelic'], $items['tagadelic/list/%tagadelic_vocs'], $items['tagadelic/chunk/%tagadelic_vocs']);
+//  global $user;
+//  if ($user->uid == 1) {
+//    dpr($items);
+//    exit;
+//  }
+ 
+}
+
+
+/**
+ * Get prefaces bottom section rendered.
+ *
+ */
+function gv_misc_getPrefaceBottomSection($key) {
+  $node = gv_misc_getPrefaceByKey($key);
+  $node_view = node_view($node, 'full');
+  
+  //global $user;
+  //if (in_array('administrator', $user->roles)) {
+    return render($node_view['field_preface_bottom']);
+  //}
+}
 
 /**
  * Renders metatags array with a new order of tags: description, keywords, the rest...
@@ -229,7 +261,7 @@ function gv_misc_AddContentSection_form() {
 /**
  * Return trimmed teaser with right size (cleared from images) and with separated a styled image, cutted off from the body.
  */
-function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
+function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $characters_num = NULL, $only_teaser = FALSE) {
  
   $main_image_html = NULL;
   $main_image = NULL;
@@ -242,6 +274,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     }
     $main_image['src'] = str_replace('%20', ' ', $main_image['src']);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
+    $main_image['uri'] = $stream_path;
     
     $image_size = getimagesize(ltrim($main_image['src'], '/'));
 
@@ -256,10 +289,14 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
     */
     // Scale only.
     if ($image_size[0] / $image_size[1] > 1) {
-      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_h'));
+      $style_name = 'article_thumbnail_h';
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
+      $main_image['src_themed'] = image_style_url($style_name, $stream_path);
     }
     else {
-      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_v'));
+      $style_name = 'article_thumbnail_v';
+      $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
+      $main_image['src_themed'] = image_style_url($style_name, $stream_path);
     }
     
     $main_image_html = '<div class="thumb">' . $main_image_html . '</div>';
@@ -271,14 +308,18 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
 
   $teaser = strip_tags($body_full_markup);
   
-  if ($main_image_html) {
-    // $teaser = text_summary($body_full_markup, 'full_html', 145);
-    $teaser = trim(substr($teaser, 0, 130));
+  
+  if (!$characters_num) {
+    if ($main_image_html) {
+      $characters_num = 130;
+    }
+    else {
+      $characters_num = 250;
+    }
   }
-  else {
-    // $teaser = text_summary($body_full_markup, 'full_html', 250);
-    $teaser = trim(drupal_substr($teaser, 0, 250));
-  }
+  
+  // $teaser = text_summary($body_full_markup, 'full_html', $characters_num);
+  $teaser = trim(drupal_substr($teaser, 0, $characters_num));
   
   // Replace the last word with ...
   // preg_match('/^.*\s(.*)$/i', trim(strip_tags($teaser)), $matches);
@@ -287,8 +328,26 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid = NULL) {
   
   // $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
   $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
-    
-  return array('teaser' => $main_image_html . $teaser, 'main_image' => $main_image);
+
+  if ($only_teaser) {
+    return $main_image_html . $teaser;
+  }
+  else {
+    return array('teaser' => $main_image_html . $teaser, 'main_image' => $main_image);
+  }
+  
+}
+
+
+
+/**
+ * Convert path from Drupal stream uri.
+ */
+function gv_misc_getPathFromStreamUri($uri) {
+  $file_default_scheme = file_default_scheme();
+  $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
+  
+  return $default_file_path . str_replace($file_default_scheme . ':/', '', $uri);
 }
 
 
@@ -326,6 +385,239 @@ function gv_misc_addMetatag($name, $content) {
       drupal_add_html_head($meta, $name);
     }
   }
+}
+
+
+/**
+ * Helper function to add sharing data (metatags and links) to a current page.
+ */
+function gv_misc_addSocialShareData_toPage($node) {
+  
+  global $gplus_type;
+  $image = NULL;
+  $og_type = NULL;
+  $title = $node->title;
+  
+  switch ($node->type) {
+    case 'blog_post':
+    case 'news_post':
+    case 'article':
+      if (isset($node->field_main_image['und'][0]['value']) && $node->field_main_image['und'][0]['value']) {
+        
+        $image = unserialize($node->field_main_image['und'][0]['value']);
+        
+        dpm($image);
+        
+        if (isset($image['src_themed']) && $image['src_themed']) {
+          $image = $image['src_themed'];
+        }
+        elseif (isset($image['src']) && $image['src']) {
+          $image = $image['src'];
+        }
+        else {
+          $image = NULL;
+        }
+      }
+      
+      $og_type = 'article';
+      $gplus_type = 'Article';
+      break;
+    
+    case 'provider':
+      if (isset($node->field_p_logo['und'][0]['uri']) && $node->field_p_logo['und'][0]['uri']) {
+        $image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
+      }
+      $og_type = 'company';
+      $gplus_type = 'LocalBusiness';
+      break;
+      
+    case 'review':
+      global $review_provider_logo_path;
+      if ($review_provider_logo_path) {
+        $image = $review_provider_logo_path;
+      }
+      $og_type = 'company';
+      $gplus_type = 'Review';
+      // Refresh a title a bit.
+      $title = $node->field_r_provider_name['und'][0]['value'] . ' Review - ' . $node->title;
+      break;
+    
+  }
+  
+  if (!$image){
+    // Show default image - the logo.
+    $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
+  }
+
+  if (!strpos($image, '//getvoip.com')) {
+    $image = 'http://getvoip.com/' . ltrim($image, '/');
+  }
+
+  $tags = array(
+       /*
+      'title' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'title',
+              'content' => "Video '" . $node->title . "' by " . $publisher_title,
+          ),
+      ),
+      'DC.title' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'DC.title',
+              'content' => $node->title,
+          ),
+      ),
+      'description' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'description',
+              'content' => (isset($node->body['und'][0]['summary']) AND $node->body['und'][0]['summary'])?$node->body['und'][0]['summary']:drupal_substr(strip_tags($node->body['und'][0]['value']), 0, 200) . '...',
+          ),
+      ),
+      'author' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'author',
+              'content' => $publisher_title,
+          ),
+      ),
+
+
+
+      'medium' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'medium',
+              'content' => 'video',
+          ),
+      ),
+
+      'video_type' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'video_type',
+              'content' => 'application/x-shockwave-flash',
+          ),
+      ),
+
+      'video_height' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'video_height',
+              'content' => '300',
+          ),
+      ),
+
+      'video_width' => array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'video_height',
+              'content' => '500',
+          ),
+      ),
+
+
+      'video_src' => array(
+          '#tag' => 'link', // The #tag is the html tag - <link />
+          '#attributes' => array( 
+              'href' => 'http://ripplin.com/sites/all/libraries/flowplayer/flowplayer-3.2.8.swf?config=' . urlencode('http://ripplin.com/video-src?v=' . $node->nid),
+              'rel' => 'video_src',
+          ),
+      ),
+      */
+  
+    'fb:admins' => array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+          'property' => 'fb:admins',
+          'content' => 'http://www.facebook.com/getvoipservice',
+      ),
+    ),
+
+    // Title for Facebook.
+    'og:title' => array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+          'property' => 'og:title',
+          'content' => $title,
+      ),
+    ),
+      
+    // Title for G+.
+    'name' => array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+          'itemprop' => 'name',
+          'content' => $title,
+      ),
+    ),
+      
+    'image_src' => array(
+      '#tag' => 'link', // The #tag is the html tag - <link />
+      '#attributes' => array( 
+          'href' => $image,
+          'rel' => 'image_src',
+          //'type' => 'text/css',
+      ),
+    ),
+  
+    // For Facebook.
+    'og:image' => array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+          'property' => 'og:image',
+          'content' => $image,
+      ),
+    ),
+      
+    // For G+.  
+    'image' => array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+          'itemprop' => 'image',
+          'content' => $image,
+      ),
+    ),
+      
+      
+      
+    // Add main rss feed to every page.
+    'main_rss' => array(
+      '#tag' => 'link', 
+      '#attributes' => array( 
+          'rel' => 'alternate',
+          'type' => 'application/rss+xml',
+          'title' => 'Latest Articles from GetVoIP',
+          'href' => 'http://getvoip.com/rss.xml',
+      ),
+    ),
+      
+  );
+
+    
+  
+  if ($og_type) {
+   
+    $tags['og:type'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+            'property' => 'og:type',
+            'content' => $og_type,
+        ),
+    );
+  }
+        
+  foreach ($tags as $key => $val)
+      drupal_add_html_head($val, $key);
+        
 }
 
 
@@ -828,7 +1120,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $types = array();
 
   $query = db_select('taxonomy_term_data', 'td')
-        ->fields('td', array('name', 'tid'));
+        ->fields('td', array('name', 'tid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');
   $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
@@ -845,7 +1137,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
     $base_url = trim($base_url, '/');
     //$result->link = array('link_title' => $result->name, 'href' => $base_url . '/' . urlencode(drupal_strtolower($result->name)));
     $result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . str_replace(' ', '-', drupal_strtolower($result->name)));
-    $topics[] = (array) $result;
+    $topics[$result->tid] = /*(array)*/ $result;
   }
   return $topics;
 }
@@ -870,7 +1162,43 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_requestQuote_mail' => array(
       'variables' => array(),
     ),
+    // Altered Tagadelic weighted tag cloud.
+    'gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths' => array(
+      'variables' => array('terms' => array())
+    ),
+
   );
+}
+
+
+/**
+ * Theme function that renders the HTML for the tags.
+ *
+ * @ingroup themable
+ */
+function theme_gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths(array $vars) {
+  $terms = $vars['terms'];
+  $output = '';
+
+  foreach ($terms as $term) {
+    $output .= l($term->name, isset($term->link['href']) ? $term->link['href'] : 'taxonomy/term/' . $term->tid, array(
+      'attributes' => array(
+        'class' => array("tagadelic", "level" . $term->weight),
+        'rel' => 'tag',
+        'title'  => $term->description,
+        )
+      )
+    ) . " \n";
+  }
+  
+  
+  if(isset($vars['voc'])){
+    if (count($terms) >= variable_get('tagadelic_block_tags_' . $vars['voc']->vid, 12)) {
+      $output .= theme('more_link', array('title' => t('more tags'), 'url' => "tagadelic/chunk/{$vars['voc']->vid}"));
+    }
+  }
+
+  return $output;
 }
   
 
@@ -911,6 +1239,9 @@ function theme_gv_misc_submenuSimple($vars) {
   $out = '<ul class="gv ' . $class . ' lvl-' . $level . '">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
+    if (is_object($submenu)) {
+      $submenu = (array) $submenu;
+    }
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
@@ -1012,16 +1343,16 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
   
   if ($scope == 'all') {
     $query = db_select('node', 'n');
-    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
+    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
     $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid"); // inner_join file_usage table against file_managed
     $query->fields('n', array('nid', 'title'))  // specifying fields from file_usage table
-          ->fields('pt', array('field_p_types_value'))
+          //->fields('pt', array('field_p_types_value'))
           ->fields('pn', array('field_p_name_value')) // specifying fields from file_managed table
           ->condition('n.type', 'provider'); // specifying the condition where fu.id = 5
     $result = $query->execute(); 
 
     foreach($result as $provider) {
-      $providers[$provider->nid] = $provider->field_p_name_value . ' - ' . $provider->field_p_types_value; // = $provider->title;
+      $providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
     }
 
     // Sort providers alphabetically.
@@ -1294,6 +1625,12 @@ function gv_misc_views_pre_render(&$view) {
     // $preface_node->title = '';
     // Works, but it's shown after exposed filters.
     $view->attachment_before = render(node_view($preface_node, 'full'));
+    
+//    global $user;
+//    if ($user->uid == 1) {
+//      $view->attachment_after = "test";
+//    }
+    
     // DOesn't work.
     /*
     $view->header = array(
@@ -1410,10 +1747,10 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
         if ($target == 'logo_chart') {
-          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main'));
+          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         } 
         else {
-          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'thumbnail'));
+          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'thumbnail', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         }
         $out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
       }

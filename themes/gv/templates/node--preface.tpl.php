@@ -1,7 +1,7 @@
 <?php if (!$page): ?>
 
     <?php if (in_array('administrator', $user->roles)): ?>
-      <div class="tabs-wrapper clearfix"><h2 class="element-invisible">Primary tabs</h2>
+      <div class="tabs-wrapper clearfix"><h3 class="element-invisible">Primary tabs</h3>
         <ul class="tabs primary clearfix">
           <li class="active"><a class="active" href="/<?php echo $_GET['q']; ?>">View<span class="element-invisible">(active tab)</span></a></li>
           <li><a href="<?php echo url('node/' . $node->nid . '/edit', array('query' => array('destination' => $_GET['q']))); ?>">Edit</a></li>
@@ -35,18 +35,16 @@
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_tags']);
+      
+      hide($content['field_preface_bottom']);
       print render($content);
+    
+      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']); // . ($_GET['q'] == 'home' ? '/' : (strpos($_GET['q'], 'node/') === FALSE ? ('/' . $_GET['q']) : url($_GET['q'])));
     ?>
     
-    <?php 
-    global $user;
-    if ($user->uid == 1): 
-      
-      $url = 'http://getvoip.com/'. $_GET['q'];
-    
-      ?>
-    
      <div class="share">
+       <div class="main">
+         
         <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
         <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
 
@@ -71,8 +69,8 @@
 
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-      </div> <!-- main share buttons -->
-    <?php endif; ?>
+       </div><!-- main -->
+      </div> <!-- share buttons -->
+    <?php //endif; ?>
       
   </div>

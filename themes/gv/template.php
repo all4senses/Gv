@@ -22,7 +22,7 @@ function gv_breadcrumb($variables) {
   if (!empty($breadcrumb)) {
     // Provide a navigational heading to give context for breadcrumb links to
     // screen-reader users. Make the heading invisible with .element-invisible.
-    $heading = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+    $heading = '<h3 class="element-invisible">' . t('You are here') . '</h3>';
     // Uncomment to add current page to breadcrumb
 	// $breadcrumb[] = drupal_get_title();
     return '<nav class="breadcrumb">' . $heading . implode(' » ', $breadcrumb) . '</nav>';
@@ -36,13 +36,13 @@ function gv_menu_local_tasks(&$variables) {
   $output = '';
 
   if (!empty($variables['primary'])) {
-    $variables['primary']['#prefix'] = '<h2 class="element-invisible">' . t('Primary tabs') . '</h2>';
+    $variables['primary']['#prefix'] = '<h3 class="element-invisible">' . t('Primary tabs') . '</h3>';
     $variables['primary']['#prefix'] .= '<ul class="tabs primary clearfix">';
     $variables['primary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['primary']);
   }
   if (!empty($variables['secondary'])) {
-    $variables['secondary']['#prefix'] = '<h2 class="element-invisible">' . t('Secondary tabs') . '</h2>';
+    $variables['secondary']['#prefix'] = '<h3 class="element-invisible">' . t('Secondary tabs') . '</h3>';
     $variables['secondary']['#prefix'] .= '<ul class="tabs secondary clearfix">';
     $variables['secondary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['secondary']);
@@ -141,6 +141,18 @@ function gv_preprocess_search_block_form(&$vars) {
 
 function gv_username($object) {
   return str_replace(' ('. t('not verified') .')', '', theme_username($object));
+}
+
+
+/**
+* Default theme function for all RSS rows.
+*/
+function gv_preprocess_views_view_row_rss(&$vars) {
+  $node = $vars['view']->style_plugin->row_plugin->nodes[$vars['row']->nid];
+  //$vars['description'] = check_plain(htmlspecialchars_decode($node->field_a_teaser['und'][0]['value']));
+  if (isset($node->body['und'][0]['value'])) {
+    $vars['description'] = check_plain(htmlspecialchars_decode(gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $vars['row']->nid, 400, TRUE)));
+  }
 }
 
 

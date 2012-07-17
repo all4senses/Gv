@@ -5,6 +5,7 @@
  *
  * @ingroup views_templates
  */
+//dpm(get_defined_vars());
 ?>
   <item>
     <title><?php print $title; ?></title>

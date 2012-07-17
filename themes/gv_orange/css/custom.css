@@ -542,17 +542,26 @@ form .counter.exceeded{color: red;}
 .page-node #main #comments{margin: 30px;}
 
 /* Article node page */
-.page-node #main .share{font-size: 16px; border-top: 1px solid lightgray; margin-top: 40px; padding: 20px 0 40px 0;}
-.page-node #main .share .main{width: 370px; float: right;}
-.page-node #main .IN-widget{float: left; margin-right: 13px;}
-.page-node #main #___plusone_0{float: left !important; width: 75px !important;}
-.page-node #main .fb-like{float: left; top: -2px;}
-.page-node #main .twitter-share-button{width: 95px !important;}
 
-.page-node #main .share .others{float: left; padding-top: 3px;}
-.page-node #main .share .others .addthis_toolbox a{margin-right: 5px}
-.page-node #main .share .others .addthis_button_email{position: relative; top: -4px;}
-.page-node #main .share .others .at15t_email{margin-right: 4px; position: relative; top: 3px;}
+/*.page-node #main*/ .share{font-size: 16px; border-top: 1px solid lightgray; margin-top: 40px; padding: 20px 0 40px 0;}
+
+.front .share,
+.preface .share{border: none; margin-top: -15px; /*padding: 0 0 40px 0;*/ padding: 3px 0 3px 10px; position: absolute; top: 20px; right: 220px; height: 20px;}
+
+/*.front .share{padding: 0 0 30px 0;}*/
+
+/*.page-node #main*/ .share .main{width: 390px; float: right;}
+/*.page-node #main*/ .IN-widget{float: left; margin-right: 13px;}
+/*.page-node #main*/ #___plusone_0{float: left !important; width: 75px !important;}
+/*.page-node #main*/ .fb-like{float: left; top: -2px;}
+/*.page-node #main*/ .twitter-share-button{width: 95px !important;}
+
+/*.page-node #main*/ .share .others{float: left; padding-top: 3px;}
+/*.page-node #main*/ .share .others .addthis_toolbox a{margin-right: 5px}
+/*.page-node #main*/ .share .others .addthis_button_email{position: relative; top: -4px;}
+/*.page-node #main*/ .share .others .at15t_email{margin-right: 4px; position: relative; top: 3px;}
+
+
 
 .page-node #main .topics{border-top: 1px solid lightgray; font-family: Georgia,"Bitstream Charter",serif; font-size: 15px; font-weight: bold; padding-top: 20px; padding-bottom: 20px;}
 .page-node #main .topics .title{margin-right: 10px; float: left;}
@@ -616,11 +625,11 @@ form .counter.exceeded{color: red;}
 .data.tabs{font-family: Georgia,"Bitstream Charter",serif; clear: both; margin-bottom: 10px; margin-top: 30px;}
 .data.tabs #tabs-1, .data.tabs #tabs-2{font-size: 15px;}
 
-.data.tabs #tabs-2 .f.caption{font-size: 17px; font-weight: bold; margin: 0px 0 10px 0; padding-top: 30px;}
-.data.tabs #tabs-2 .f.caption.first{padding-top: 0;}
-.data.tabs #tabs-2 .f.caption.back{clear: both;}
-.data.tabs #tabs-2 .block-1{float: left; width: 250px;}
-.data.tabs #tabs-2 .price .title{font-size: 15px; font-weight: normal; margin: 0 10px 0 0; float: left;}
+.data.tabs /*#tabs-2*/ .f.caption{font-size: 17px; font-weight: bold; margin: 0px 0 10px 0; padding-top: 30px;}
+.data.tabs /*#tabs-2*/ .f.caption.first{padding-top: 0;}
+.data.tabs /*#tabs-2*/ .f.caption.back{clear: both;}
+.data.tabs /*#tabs-2*/ .block-1{float: left; width: 250px;}
+.data.tabs /*#tabs-2*/ .price .title{font-size: 15px; font-weight: normal; margin: 0 10px 0 0; float: left;}
 
 
 .gv_votes{float: left; width: 280px; margin: 0 30px 0 30px;}
@@ -763,21 +772,28 @@ form .counter.exceeded{color: red;}
 /* Other prefaces */
 .front h1, .attachment-before h1{line-height: 18px; color: black; font-size: 18px; font-weight: bold; margin: 0; border: medium none; padding: 0 10px 0 5px; font-family: Georgia,"Bitstream Charter",serif;}
 .front .content.page, .attachment-before .content.page{font-family: Georgia,"Bitstream Charter",serif; font-size: 16px; padding: 10px 5px 0; text-align: justify;}
-.front .content.page{border-bottom: 1px dashed lightgray; font-size: 13px; margin-bottom: 10px;}
 
+.front .content.page{/*border-bottom: 1px dashed lightgray;*/ font-size: 13px; margin-bottom: 10px;}
+.front .content.page p{margin-bottom: 10px;}
 
 .page-node.page-node-77 #main .main-content h1,
 .page-node.page-node-90 #main .main-content h1,
-h1.preface{border: none; color: black; font-family: Georgia,"Bitstream Charter",serif; font-size: 18px; font-weight: bold; line-height: 18px; margin: 0; padding: 10px 0 5px 0;}
+h1.preface,
+h2.preface{border: none; color: black; font-family: Georgia,"Bitstream Charter",serif; font-size: 18px; font-weight: bold; line-height: 18px; margin: 0; padding: 10px 0 0 0;}
 
+.content.page.preface,
 .page-node.page-node-77 #main .main-content .content,
 .page-node.page-node-90 #main .main-content .content,
-.front .content.page.preface, .attachment-before .content.page.preface{font-family: Georgia,"Bitstream Charter",serif; font-size: 13px; padding: 5px 0 0 0; text-align: justify;}
+.front .content.page.preface, 
+.attachment-before .content.page.preface,
+.field-name-field-preface-b-body{font-family: Georgia,"Bitstream Charter",serif; font-size: 13px; padding: 5px 0 0 0; text-align: justify;}
 
 .page-node.page-node-77 #main .main-content .content p,
 .page-node.page-node-90 #main .main-content .content p,
-.preface p{color: #777777; line-height: 22px;}
+.preface p,
+.field-name-field-preface-b-body p{color: #777777; line-height: 22px;}
 
+.field-name-field-preface-b-body p{margin-bottom: 7px;}
 
 .page-node.page-node-77 #main .main-content,
 .page-node.page-node-90 #main .main-content{padding: 0 5px 0; border: none;}
@@ -1225,9 +1241,19 @@ body.node-type-quote.page-node-139{background: none;}
 .node-type-quote #v3 footer{background: white; margin: 0; clear: both; height: 55px; padding-top: 10px;}
 
 
+/* Tables in bodies */
+.field-name-body table{}
+.field-name-body table tbody{}
+.field-name-body table th{}
+.field-name-body table td{border: 1px solid lightgray; padding: 5px;}
+.field-name-body table tr{}
+
+
 /* Body content for admin pages */
 .node-type-admin-page .field-name-body table{margin: 0;}
 .node-type-admin-page .field-name-body table td{vertical-align: top;}
+
+
 
 
 /* Experimental - set white for all-content and gray for the side*/
@@ -1297,3 +1323,10 @@ body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
 
 .profile .user-picture{float: none; text-align: center;}
 .profile #articles-caption{font-style: italic; margin: 20px 0 20px; text-align: center;}
+
+
+/* Tags page */
+.tags{text-align: center;}
+.tags a:hover{background: #3399FF; color: white;}
+.tags .more-link a{color: gray;}
+.tags .more-link a:hover{background: transparent; color: black;}

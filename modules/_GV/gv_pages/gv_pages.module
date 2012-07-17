@@ -26,13 +26,15 @@ function gv_pages_menu() {
     //'access arguments' => array('home'),
     'access arguments' => array('access content'),  
     'type' => MENU_CALLBACK,
-  );  
+  );
+  /*
   $items['news-topics'] = array(
     'title' => 'News topics',
     'page callback' => 'gv_pages_buildNewsTopics',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
+  */
   $items['articles/tags'] = array(
     //'title' => 'Topics page',
     'page callback' => 'gv_pages_buildTopicsPage',
@@ -64,6 +66,57 @@ function gv_pages_menu() {
  * 
  * Allows to use same topics for News, Articles, Blog posts, etc.
  */
+//function gv_pages_buildTopicsPage($content_type_label) {
+//  global $language;
+//  //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
+//  // Inverted...
+//  $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+//  $content_type = $content_types[$content_type_label];
+//  
+//  $topics = cache_get($content_type . '_topics_page' . $language->language);
+//  if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
+//    $topics_array = gv_misc_getTopics($content_type, $content_type_label);
+//
+//    if (!$topics_array) {
+//      return NULL;
+//    }
+//    
+//    // Simple List.
+//    // $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
+//    // Tag cloud.
+//    $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
+//    $topics = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $topics_array));
+//  
+//
+//    //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
+//    $show_all_url = '<div class="more-link">' . l(t('Show all posts'), $content_type_label) . '</div>';
+//    $topics = /*$page_title .*/ $topics . $show_all_url;
+//    // Expire = current time + 4 hours.
+//    cache_set($content_type . '_topics_page' . $language->language, $topics, 'cache', time() + 14400);
+//  }
+//  else {
+//    $topics = $topics->data;
+//  }
+//  
+//  if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
+//    //dpm($preface);
+//    //drupal_set_title($preface->title);
+//    if (isset($preface->metatags['title']['value']) && $preface->metatags['title']['value']) {
+//      drupal_set_title($preface->metatags['title']['value']);
+//    }
+//    else {
+//      drupal_set_title($preface->title);
+//    }
+//    
+//    $preface->title_no_link = TRUE;
+//    $preface = render(node_view($preface, 'full'));
+//  }
+//  
+//  return '<div class="tags">' . $preface . $topics . '</div>'; 
+//}
+
+
+
 function gv_pages_buildTopicsPage($content_type_label) {
   global $language;
   //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
@@ -73,11 +126,19 @@ function gv_pages_buildTopicsPage($content_type_label) {
   
   $topics = cache_get($content_type . '_topics_page' . $language->language);
   if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
-    $topics = gv_misc_getTopics($content_type, $content_type_label);
-    if (!$topics) {
+    $topics_array = gv_misc_getTopics($content_type, $content_type_label);
+
+    if (!$topics_array) {
       return NULL;
     }
-    $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics), 'class' => 'topics'));
+    
+    // Simple List.
+    // $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
+    // Tag cloud.
+    $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
+    $topics = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $topics_array));
+  
+
     //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
     $show_all_url = '<div class="more-link">' . l(t('Show all posts'), $content_type_label) . '</div>';
     $topics = /*$page_title .*/ $topics . $show_all_url;
@@ -102,8 +163,10 @@ function gv_pages_buildTopicsPage($content_type_label) {
     $preface = render(node_view($preface, 'full'));
   }
   
-  return $preface . $topics; 
+  return '<div class="tags">' . $preface . $topics . '</div>'; 
 }
+
+
 
 
 /**
@@ -111,6 +174,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
  * 
  * Allows to use same topics for News, Articles, Blog posts, etc.
  */
+/*
 function gv_pages_buildNewsTopics() {
   global $language;
   $topics = cache_get('news_topics_page' . $language->language);
@@ -125,7 +189,7 @@ function gv_pages_buildNewsTopics() {
   }
   return $topics; 
 }
-
+*/
 
 /**
  * Implements hook_access().
@@ -152,14 +216,18 @@ function gv_pages_buildHome($name, $data) {
     
   $seo_welcome_node = gv_misc_getPrefaceByKey('front');
   $seo_welcome_node->title_no_link = TRUE;
-  $out .= render(node_view($seo_welcome_node, 'full'));
+  $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
+  
+  $out .= render($seo_welcome_node_view);
+  
+  
   
   // Content of a home page saved in db as a var.
-  ////$out .= theme($name, array('data' => $data));
+  // $out .= theme($name, array('data' => $data));
   
   // Get block for Latest VoIP articles (+ news, blog posts, etc).
-//  $block_data = array('module' => 'views', 'delta' => 'articles-block');
-//  $out .= gv_blocks_getBlockThemed($block_data);
+  // $block_data = array('module' => 'views', 'delta' => 'articles-block');
+  // $out .= gv_blocks_getBlockThemed($block_data);
   
   // Get block for Top pick business providers.
   $block_data = array('module' => 'views', 'delta' => 'providers-block', 'shadow' => FALSE);
@@ -168,6 +236,11 @@ function gv_pages_buildHome($name, $data) {
   // Get block for Top pick residential providers.
   $block_data = array('module' => 'views', 'delta' => 'providers-block_1', 'shadow' => FALSE); 
   $out .= gv_blocks_getBlockThemed($block_data);
+  
+  //global $user;
+  //if (in_array('administrator', $user->roles)) {
+    $out .= render($seo_welcome_node_view['field_preface_bottom']);
+  //}
   
   return $out;
 }
@@ -355,7 +428,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'news_post_node_form':
     case 'blog_post_node_form':
     case 'article_node_form':
+      
         
+        //$form['field_a_teaser']['und'][0]['#format'] = 'full_html';
+        $form['field_a_teaser']['#access'] = FALSE;
+        $form['field_main_image']['#access'] = FALSE;
+      
         $form['actions']['save_draft'] = array(
           '#type' => 'submit',
           '#value' => 'Save Draft',
@@ -364,8 +442,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         );
       
         $form['#submit'][] = 'gv_pages_submitForm_article';
-        
+        $form['#validate'][] = 'gv_pages_validateForm_article';
+                
       break;
+    
+    
+    
+    
+    
+    
     
     
     case 'quote_node_form':
@@ -428,6 +513,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       break;
     
     
+    
+    
+    
+    
+    
     case 'user_profile_form':
       
       // Disallow edit own profile for a Guest user.
@@ -439,6 +529,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_u_bio']['und'][0]['#format'] = 'full_html';
       
       break;
+      
+      
+      
+      
       
       
       
@@ -940,6 +1034,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
     break;
     
+    
+    
+    
+    
+    
+    
   
        
     case 'preface_node_form':
@@ -958,21 +1058,41 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       } // End of if(arg(1) != 'add') {
 */    
       
-      // Deny to change the status of the node (it should always be unpublished).
-      $form['options']['#access'] = FALSE;
-      // And other options.
+      
+      // Hide some options for all.
       $form['comment_settings']['#access'] = FALSE;
       $form['revision_information']['#access'] = FALSE;
-      $form['path']['#access'] = FALSE;
       
+      // And leave some options for the root.
       global $user;
       if ($user->uid != 1) {
         $form['field_preface_key']['#access'] = FALSE;
+        // Deny to change the status of the node (it should always be unpublished).
+        $form['options']['#access'] = FALSE;
+        // Hide url aliasing options.
+        $form['path']['#access'] = FALSE;
+      }
+      
+      
+      // Connect Ckeditor for additional fields.
+      
+      //$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
+      //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+      $keys = element_children($form['field_preface_bottom']['und']);
+      foreach ($keys as $key) {
+        $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'full_html'; // link Ckeditor
       }
       
     break; // End of case 'preface_node_form':
 
   
+    
+    
+    
+    
+    
+    
+    
     
     
   
@@ -1178,8 +1298,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Bad trial...
           //$form['body']['und'][0]['#type'] = 'textarea';
           // Good trial! :)
-          ///$form['body']['und'][0]['#format'] = 'gv_full_html';
-          $form['body']['und'][0]['#format'] = 'filtered_html';
+          ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
+          $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
           
           $form['ureview']['body'] = $form['body'];
           unset($form['body']);
@@ -1510,6 +1630,26 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 
 
+/**
+ * Custom validate of article type form.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_article(&$form, &$form_state) {
+  
+  // Define a main image and build a custom teaser.
+  if ($data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']) ) {
+    form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $data['teaser'], 'format' => 'full_html') )), $form_state);
+    form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']), 'format' => 'full_html') )), $form_state);
+  }
+}
 
 
 /**
@@ -1692,7 +1832,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
   
   if ($logo = file_load($form_state['values']['field_p_logo']['und'][0]['fid'])) {
-    $p_data_quick['i_logo_uri'] = $logo->uri;  
+    $p_data_quick['i_logo_uri'] = $logo->uri;
+    $p_data_quick['i_logo_alt'] = $form_state['values']['field_p_logo']['und'][0]['alt'];
+    $p_data_quick['i_logo_title'] = $form_state['values']['field_p_logo']['und'][0]['title'];
   }
   
   //dpm($p_data_quick);
@@ -1864,6 +2006,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   } // End of if ($review) {
   
 }
+
+
 
 
 /**
@@ -2171,6 +2315,11 @@ function gv_pages_node_view($node, $view_mode) {
           $provider = node_load($node->field_ref_provider['und'][0]['target_id']);
           $p_data = unserialize($provider->field_p_data['und'][0]['value']);
           $provider_url = $p_data['info']['i_web'];
+          
+          if (isset($provider->field_p_logo['und'][0]['uri']) && $provider->field_p_logo['und'][0]['uri']) {
+            global $review_provider_logo_path;
+            $review_provider_logo_path = gv_misc_getPathFromStreamUri($provider->field_p_logo['und'][0]['uri']);
+          }
         //}
         $node->content['provider_url'] = $provider_url;
       }
@@ -2458,6 +2607,10 @@ function gv_pages_node_view($node, $view_mode) {
     break;
   
   } // End of switch ($node->type) {
+  
+  if ($view_mode == 'full') {
+    gv_misc_addSocialShareData_toPage($node);
+  }
 }
 
 
