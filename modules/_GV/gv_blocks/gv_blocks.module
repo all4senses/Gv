@@ -120,7 +120,7 @@ function gv_blocks_block_view($delta = '') {
       break;
     case 'main_menu_om_voiplibrary':
       $block['subject'] = t('OM VoIP Library');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Library', 'gv_blocks_get_omMenuBlock_AllAboutVoIP');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Library', 'gv_blocks_get_omMenuBlock_voiplibrary');
       break;
     
     case 'footer_menu':
@@ -319,7 +319,7 @@ function gv_blocks_get_omMenuBlock_AboutUs($submenu) {
 /**
  * Returns a themed All About VoIP block content for MegaMenu.
  */
-function gv_blocks_get_omMenuBlock_AllAboutVoIP($submenu) {
+function gv_blocks_get_omMenuBlock_voiplibrary($submenu) {
   $block_data = array('module' => 'gv_blocks', 'delta' => 'article_topics', 'subject_visible' => FALSE);
   $out = gv_blocks_getBlockThemed($block_data);
   return $out;   
