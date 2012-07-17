@@ -403,13 +403,9 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'news_post':
     case 'article':
       if (isset($node->field_main_image['und'][0]['value']) && $node->field_main_image['und'][0]['value']) {
+        dpm($image['src_themed']);
         $image = unserialize($node->field_main_image['und'][0]['value']);
         $image = (isset($image['src']) && $image['src']) ? $image['src'] : NULL;
-        
-        if (isset($image['src_themed'])) {
-          dpm($image['src_themed']);
-        }
-        //$image_themed = theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page'));
       }
       
       $og_type = 'article';
