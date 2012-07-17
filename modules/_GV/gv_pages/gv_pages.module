@@ -1659,19 +1659,32 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
  */
 function gv_pages_validateForm_article(&$form, &$form_state) {
 
+  // Copy tags from the Main Tag field to a specific field news/blog/article tags for a corresponding content type.
   global $user;
   if ($user->uid == 1) {
-    dpm($form_state['values']);
+    switch ($form_state['values']['type']) {
+      case 'news_post':
+        $vid = 4;
+        $voc_name = 'news_tags';
+        $target_field = 'field_tags_news';
+        break;
+      case 'blog_post':
+        $vid = 5;
+        $voc_name = 'blog_tags';
+        $target_field = 'field_tags_blog';
+        break;
+      case 'article':
+        
+        break;
+    }
     
     $tags['und'] = array();
-    
     foreach ($form_state['values']['field_topics']['und'] as $test_term) {
       $all_vocs_terms = taxonomy_get_term_by_name($test_term['name']);
-      dpm($all_vocs_terms);
       $found = FALSE;
       foreach ($all_vocs_terms as $term) {
         // 4 - voc News tags.
-        if ($term->vid == 4) {
+        if ($term->vid == $vid) {
           // Term exists in the News vocabulary.
           $tags['und'][] = (array) $term;
           $found = TRUE;
@@ -1681,14 +1694,13 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
       if (!$found) {
         $tags['und'][] = array(
           'tid' => 'autocreate',
-          'vid' => 4,
+          'vid' => $vid,
           'name' => $test_term['name'],
-          'vocabulary_machine_name' => 'news_tags',
+          'vocabulary_machine_name' => $voc_name,
         );
       }
     }
-    dpm($tags);
-    form_set_value($form['field_tags_news'], $tags, $form_state);
+    form_set_value($form[$target_field], $tags, $form_state);
   }
   
   
