@@ -17,8 +17,17 @@ function gv_blocks_block_info() {
     'info' => t('OM News'), 
     'cache' => DRUPAL_NO_CACHE, // DRUPAL_CACHE_GLOBAL
   );
-  $blocks['main_menu_om_providers'] = array(
-    'info' => t('OM Providers'),
+  $blocks['main_menu_om_bus_voip'] = array(
+    'info' => t('OM Business VoIP'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['main_menu_om_res_voip'] = array(
+    'info' => t('OM Residential VoIP'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $blocks['main_menu_om_voiplibrary'] = array(
+    'info' => t('OM VoIP Library'),
     'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['main_menu_om_blog'] = array(
@@ -27,18 +36,6 @@ function gv_blocks_block_info() {
   );
   $blocks['main_menu_om_aboutus'] = array(
     'info' => t('OM About Us'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $blocks['main_menu_om_allaboutvoip'] = array(
-    'info' => t('OM All About VoIP'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  $blocks['main_menu_om_editor'] = array(
-    'info' => t('OM Editor'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
-  $blocks['main_menu_om_user'] = array(
-    'info' => t('OM User'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
@@ -105,30 +102,26 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('OM News');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('News', 'gv_blocks_get_omMenuBlock_News');
       break;
-    case 'main_menu_om_providers':
-      $block['subject'] = t('OM Providers');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Providers', 'gv_blocks_get_omMenuBlock_Providers');
+    case 'main_menu_om_bus_voip':
+      $block['subject'] = t('OM Business VoIP');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Business VoIP', 'gv_blocks_get_omMenuBlock_Providers');
       break;
+  case 'main_menu_om_res_voip':
+      $block['subject'] = t('OM Residential VoIP');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Residential VoIP', 'gv_blocks_get_omMenuBlock_Providers');
+      break;    
     case 'main_menu_om_blog':
       $block['subject'] = t('OM Blog');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Blog', 'gv_blocks_get_omMenuBlock_Blog');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Blog', 'gv_blocks_get_omMenuBlock_Blog');
       break;
     case 'main_menu_om_aboutus':
       $block['subject'] = t('OM About Us');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('About Us', 'gv_blocks_get_omMenuBlock_AboutUs');
       break;
-    case 'main_menu_om_allaboutvoip':
-      $block['subject'] = t('OM All About VoIP');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('All About VoIP', 'gv_blocks_get_omMenuBlock_AllAboutVoIP');
+    case 'main_menu_om_voiplibrary':
+      $block['subject'] = t('OM VoIP Library');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Library', 'gv_blocks_get_omMenuBlock_AllAboutVoIP');
       break;
-    case 'main_menu_om_editor':
-      $block['subject'] = t('OM Editor');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Editor', 'gv_blocks_get_omMenuBlock_Editor');
-      break;     
-    case 'main_menu_om_user':
-      $block['subject'] = t('OM User');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('User', 'gv_blocks_get_omMenuBlock_User');
-      break; 
     
     case 'footer_menu':
       $block['subject'] = t('Footer menu');
