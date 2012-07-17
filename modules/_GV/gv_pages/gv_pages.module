@@ -1663,18 +1663,30 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   if ($user->uid == 1) {
     dpm($form_state['values']);
     
-    $tags = $form_state['values']['field_tags_news'];
+    $tags = array();
     
-    foreach ($tags['und'] as $term) {
-      dpm(taxonomy_get_term_by_name($term['name']));
+    foreach ($form_state['values']['field_topics']['und'] as $test_term) {
+      $all_vocs_terms = taxonomy_get_term_by_name($test_term['name']);
+      dpm($all_vocs_terms);
+      $found = FALSE;
+      foreach ($all_vocs_terms as $term) {
+        // 4 - voc News tags.
+        if ($term['vid'] == 4) {
+          // Term exists in the News vocabulary.
+          $tags['und'][] = $term;
+          $found = TRUE;
+          break;
+        }
+      }
+      if (!$found) {
+        $tags['und'][] = array(
+          'tid' => 'autocreate',
+          'vid' => 4,
+          'name' => $test_term['name'],
+          'vocabulary_machine_name' => 'news_tags',
+        );
+      }
     }
-    
-    $tags['und'][1] = array(
-      'tid' => 'autocreate',
-      'vid' => 4,
-      'name' => 'term2',
-      'vocabulary_machine_name' => 'news_tags',
-    );
     
     form_set_value($form['field_tags_news'], $tags, $form_state);
   }
