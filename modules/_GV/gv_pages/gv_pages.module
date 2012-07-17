@@ -436,7 +436,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         dpm($form);
         
         global $user;
-        if ($user->uid != 1) {
+        if (isset($form['field_a_tags_news']) && $user->uid != 1) {
           $form['field_a_tags_news']['#access'] = FALSE;
         }
       
