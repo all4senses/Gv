@@ -403,11 +403,7 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'news_post':
     case 'article':
       if (isset($node->field_main_image['und'][0]['value']) && $node->field_main_image['und'][0]['value']) {
-        
         $image = unserialize($node->field_main_image['und'][0]['value']);
-        
-        dpm($image);
-        
         if (isset($image['src_themed']) && $image['src_themed']) {
           $image = $image['src_themed'];
         }
@@ -446,7 +442,8 @@ function gv_misc_addSocialShareData_toPage($node) {
   
   if (!$image){
     // Show default image - the logo.
-    $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
+    //$image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
+    $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo-s.png';
   }
 
   if (!strpos($image, '//getvoip.com')) {
