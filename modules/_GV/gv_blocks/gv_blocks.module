@@ -68,15 +68,15 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  $blocks['news_tag_all'] = array(
+  $blocks['news_tags'] = array(
     'info' => t('Shows a tag cloud for news tags'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['blog_tag_all'] = array(
+  $blocks['blog_tags'] = array(
     'info' => t('Shows a tag cloud for blog tags'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['articles_tag_all'] = array(
+  $blocks['articles_tags'] = array(
     'info' => t('Shows a tag cloud for Voip library tags'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -158,15 +158,15 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
-    case 'news_tag_all':
+    case 'news_tags':
       $block['subject'] = t('Shows a tag cloud for news tags');
       $block['content'] = gv_pages_buildTopicsPage('news');
       break;
-    case 'blog_tag_all':
+    case 'blog_tags':
       $block['subject'] = t('Shows a tag cloud for blog tags');
       $block['content'] = gv_pages_buildTopicsPage('blog');
       break;
-    case 'articles_tag_all':
+    case 'articles_tags':
       $block['subject'] = t('Shows a tag cloud for Voip library tags');
       $block['content'] = gv_pages_buildTopicsPage('articles');
       break;
