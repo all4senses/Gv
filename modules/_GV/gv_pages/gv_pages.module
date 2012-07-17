@@ -1673,7 +1673,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
         // 4 - voc News tags.
         if ($term->vid == 4) {
           // Term exists in the News vocabulary.
-          $tags['und'][] = $term;
+          $tags['und'][] = (array) $term;
           $found = TRUE;
           break;
         }
