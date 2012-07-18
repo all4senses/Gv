@@ -298,18 +298,20 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
       //$main_image['src_themed'] = image_style_url($style_name, $stream_path);
     }
-//    if ($image_size[0] / $image_size[1] > 1.6) {
-//      // Too wide. will not be cutted.
-//      $main_image['src_themed'] = image_style_url('share_wide', $stream_path);
-//    }
-//    elseif ($image_size[1] / $image_size[0] > 1.6) {
-//      // Too tall. will not be cutted.
-//      $main_image['src_themed'] = image_style_url('share_tall', $stream_path);
-//    }
-//    else {
-      // Normal image, will not be cutted.
+    
+    // Image for sharing.
+    if ($image_size[0] / $image_size[1] > 1.5) {
+      // Too wide. will not be cutted.
+      $main_image['src_themed'] = image_style_url('share_wide', $stream_path);
+    }
+    elseif ($image_size[1] / $image_size[0] > 1.5) {
+      // Too tall. will not be cutted.
+      $main_image['src_themed'] = image_style_url('share_tall', $stream_path);
+    }
+    else {
+      //Normal image, will not be cutted.
       $main_image['src_themed'] = image_style_url('share', $stream_path);
-    //}
+    }
     
     
     $main_image_html = '<div class="thumb">' . $main_image_html . '</div>';
