@@ -300,11 +300,11 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     }
     
     // Image for sharing.
-    if ($image_size[0] / $image_size[1] > 1.5) {
+    if ($image_size[0] / $image_size[1] > 1.6) {
       // Too wide. will not be cutted.
       $main_image['src_themed'] = image_style_url('share_wide', $stream_path);
     }
-    elseif ($image_size[1] / $image_size[0] > 1.5) {
+    elseif ($image_size[1] / $image_size[0] > 1.6) {
       // Too tall. will not be cutted.
       $main_image['src_themed'] = image_style_url('share_tall', $stream_path);
     }
