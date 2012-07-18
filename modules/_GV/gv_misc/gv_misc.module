@@ -1601,10 +1601,21 @@ function gv_misc_views_pre_render(&$view) {
       break;
   }
   
-  
+  // Redefine the $key if on the specific content type.
   if ($key == 'view-taxonomy_term-page_by_tag') {
     $args = arg();
     $term = taxonomy_term_load($args[2]);
+    switch ($term->vocabulary_machine_name) {
+      case 'news_tags':
+        $key = 'view-news-page_by_tag';
+        break;
+      case 'blog_tags':
+        $key = 'view-blog-page_by_tag';
+        break;
+      case 'articles_tags':
+        $key = 'view-articles-page_by_tag';
+        break;
+    }
     dpm($term);
   }
   if ($do_attach_preface && $preface_node = gv_misc_getPrefaceByKey($key)) {
