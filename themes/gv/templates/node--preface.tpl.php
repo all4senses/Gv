@@ -1,3 +1,10 @@
+<?php 
+if ($node->field_preface_key['und'][0]['value'] == 'page-compare-business-voip-providers' && isset($_GET['page'])) {
+        drupal_not_found();
+        drupal_exit();
+      }
+?>
+
 <?php if (!$page): ?>
 
     <?php if (in_array('administrator', $user->roles)): ?>
