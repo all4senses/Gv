@@ -1628,6 +1628,7 @@ function gv_misc_views_pre_render(&$view) {
 
       //$preface_node->title = $view->get_title();//$view->build_info['title'];
       $preface_node->title .= ' "' . $view->build_info['substitutions']['%1'] . '"';
+      $view->build_info['title'] = $preface_node->title;
       
     }
     else {
