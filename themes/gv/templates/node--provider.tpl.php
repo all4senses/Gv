@@ -9,7 +9,7 @@
           <?php print render($title_prefix); ?>
           <h1<?php //print $title_attributes; ?> property="dc:title v:summary">
                 <?php 
-                  print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $content['field_p_name'][0]['#markup']) )
+                  print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) )
                 ?>
           </h1>
           <?php print render($title_suffix); ?>
@@ -40,14 +40,14 @@
                 <?php
                 
                   //dpm($content);
-                  dpm($node);
+                  //dpm($node);
                   
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
                   }
                   else {
                     //echo render($title_prefix), '<h1', $title_attributes,'><a href="', $node_url, '>', $title, '</a></h1>', render($title_suffix);
-                    echo render($title_prefix), '<h2', $title_attributes,'>', $content['field_p_name'][0]['#markup'], '</h2>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
                   }
                   $url = 'http://getvoip.com'. url('node/' . $node->nid);
                 ?>
@@ -95,7 +95,7 @@
                 
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
-                  <div class="caption"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $content['field_p_name'][0]['#markup'] . '</span>')); ?></div>
+                  <div class="caption"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ . '</span>')); ?></div>
                   <div><?php echo '<span class="title">' . t('Headquarters') . ':</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $node->p_data['info']['i_founded']; ?></div>
                   <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $node->p_data['info']['i_availability']; ?></div>
@@ -107,7 +107,7 @@
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
                     echo '<div><a href="' , $node->p_data['info']['i_web'] , '" target="_blank">' , theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title'])) , '</a></div>', 
-                         '<div class="site">' , l('Visit ' . $content['field_p_name'][0]['#markup'], $node->p_data['info']['i_web'], array('attributes' => array('target' => '_blank'))) , '</div>';
+                         '<div class="site">' , l('Visit ' . $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/, $node->p_data['info']['i_web'], array('attributes' => array('target' => '_blank'))) , '</div>';
                   }
                 ?>  
                 
@@ -123,7 +123,7 @@
                     <div class="text">
                       <?php echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count" property="v:count">' . $node->gv_voters . '</div></div>'; ?>
                       <?php echo render($content['gv_recommend']); ?>
-                      <div class="overall title"><?php $content['field_p_name'][0]['#markup'] . ' ' . t('Overall Rated:'); ?></div>
+                      <div class="overall title"><?php $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ . ' ' . t('Overall Rated:'); ?></div>
                     </div>
                     <div class="star-big">
                       <?php echo /*render($content['gv_rating_overall'])*/ '<div class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>'; ?>
@@ -139,7 +139,7 @@
               <div class="data tabs">
                 
                 <ul>
-                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($content['field_p_name'][0]['#markup']) ? /*'<span property="v:itemreviewed">' .*/ $content['field_p_name'][0]['#markup'] /*. '</span>'*/ : t(' Provider') )); ?></a></li>
+                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ /*. '</span>'*/ : t(' Provider') )); ?></a></li>
                   <?php 
                     $count = 2;
                     foreach ($node->field_p_types['und'] as $type) {
