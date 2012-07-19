@@ -78,6 +78,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['t_pick_providers_ar'] = array(
+    'info' => t('Top pick providers for the all providers reviews page'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+    
   // Topics block for different content types.
   $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
   foreach ($content_types as $content_type => $label) {
@@ -164,7 +169,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_pages_buildTopicsPage('articles');
       break;
     
-  
+    case 't_pick_providers_ar':
+      $block['subject'] = t('Top pick providers for the all providers reviews page');
+      $block['content'] = gv_pages_getTopPickProvidersBlocksForAllReviewsPage();
+      break;
+    
     
     default:
       // Get blocks for topics for a specific content type.
@@ -183,6 +192,17 @@ function gv_blocks_block_view($delta = '') {
   return $block;
 }
 
+
+
+function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
+  $out = '<div class="providers">';
+  $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_bu_areviews', 'shadow' => TRUE);
+  $out .= gv_blocks_getBlockThemed($block_data);
+  $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_re_areviews', 'shadow' => TRUE);
+  $out .= gv_blocks_getBlockThemed($block_data);
+  $out .= '<div id="providers-bottom"></div></div>';
+  return $out;
+}
 
 /**
  * Returns a themed topics block for a specific content type.
