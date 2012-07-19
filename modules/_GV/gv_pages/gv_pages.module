@@ -1836,13 +1836,33 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     uasort($p_data['services']['s_business']['weights_bu_features_sip'], 'wdg_misc_sortArrayByWeight');
   }
   
-  
-  
+
+  if ($logo = file_load($form_state['values']['field_p_logo']['und'][0]['fid'])) {
+    // Define share pic.
+    $image_size = getimagesize(ltrim(gv_misc_getPathFromStreamUri($logo->uri), '/'));
+    // Image for sharing.
+    if ($image_size[0] / $image_size[1] > 1) {
+      // Too wide. will not be cutted.
+      $p_data['logo_share_src_themed'] = image_style_url('share_wide', $logo->uri);
+    }
+    elseif ($image_size[1] / $image_size[0] < 1) {
+      // Too tall. will not be cutted.
+      $p_data['logo_share_src_themed'] = image_style_url('share_tall', $logo->uri);
+    }
+    else {
+      //Normal image, will not be cutted.
+      $p_data['logo_share_src_themed'] = image_style_url('share', $logo->uri);
+    }
+  }
   
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
   
-  // Save collected FEES data from temporary fields to a excessive field for using it from views
+
+  
+
+
+// Save collected FEES data from temporary fields to a excessive field for using it from views
   if (isset($p_data['services']['s_residential']['re_basicinfo_fees'])) {
     $p_fees_save['re'] = $p_data['services']['s_residential']['re_basicinfo_fees'];
   }
@@ -1897,27 +1917,11 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   );
   $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
   
-  if ($logo = file_load($form_state['values']['field_p_logo']['und'][0]['fid'])) {
+  // Logo has been defined above.
+  if ($logo) {
     $p_data_quick['i_logo_uri'] = $logo->uri;
     $p_data_quick['i_logo_alt'] = $form_state['values']['field_p_logo']['und'][0]['alt'];
     $p_data_quick['i_logo_title'] = $form_state['values']['field_p_logo']['und'][0]['title'];
-    
-    // Define share pic.
-    $image_size = getimagesize(ltrim(gv_misc_getPathFromStreamUri($logo->uri), '/'));
-    // Image for sharing.
-    if ($image_size[0] / $image_size[1] > 1) {
-      // Too wide. will not be cutted.
-      $p_data_quick['src_themed'] = image_style_url('share_wide', $logo->uri);
-    }
-    elseif ($image_size[1] / $image_size[0] < 1) {
-      // Too tall. will not be cutted.
-      $p_data_quick['src_themed'] = image_style_url('share_tall', $logo->uri);
-    }
-    else {
-      //Normal image, will not be cutted.
-      $p_data_quick['src_themed'] = image_style_url('share', $logo->uri);
-    }
-
   }
   
   //dpm($p_data_quick);
@@ -2400,8 +2404,13 @@ function gv_pages_node_view($node, $view_mode) {
           $p_data = unserialize($provider->field_p_data['und'][0]['value']);
           $provider_url = $p_data['info']['i_web'];
           
-          if (isset($provider->field_p_logo['und'][0]['uri']) && $provider->field_p_logo['und'][0]['uri']) {
-            global $review_provider_logo_path;
+          // Define a pic for share
+
+          global $review_provider_logo_path;
+          if (isset($p_data['logo_share_src_themed']) && $p_data['logo_share_src_themed']) {
+            $review_provider_logo_path = $p_data['logo_share_src_themed'];
+          }
+          elseif (isset($provider->field_p_logo['und'][0]['uri']) && $provider->field_p_logo['und'][0]['uri']) {
             $review_provider_logo_path = gv_misc_getPathFromStreamUri($provider->field_p_logo['und'][0]['uri']);
           }
         //}
