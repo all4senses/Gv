@@ -40,6 +40,7 @@
                 <?php
                 
                   //dpm($content);
+                  dpm($node);
                   
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
