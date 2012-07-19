@@ -435,8 +435,14 @@ function gv_misc_addSocialShareData_toPage($node) {
       break;
     
     case 'provider':
-      if (isset($node->field_p_logo['und'][0]['uri']) && $node->field_p_logo['und'][0]['uri']) {
-        $image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
+      $p_data_quick = unserialize($node->field_p_data_quick['und'][0]['value']);
+      if (isset($p_data_quick['src_themed']) && $p_data_quick['src_themed']) {
+        $image = $p_data_quick['src_themed'];
+      }
+      else {
+        if (isset($node->field_p_logo['und'][0]['uri']) && $node->field_p_logo['und'][0]['uri']) {
+          $image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
+        }
       }
       $og_type = 'company';
       $gplus_type = 'LocalBusiness';
