@@ -1655,7 +1655,7 @@ function gv_misc_views_pre_render(&$view) {
 
       ); 
       
-      dpm(render($select_providers));
+      $view->attachment_before = render($select_providers);
       
       break;
   }
