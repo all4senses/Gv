@@ -1643,7 +1643,7 @@ function gv_misc_views_pre_render(&$view) {
         $url .= '&' . $key . '=' . urlencode($value);
       }
 
-      $select_providers = array(
+      $select_providers['all-reviews-select-providers'] = array(
           '#type' => 'select',
           '#title' => t('Choose a Provider'),
           '#options' => $providers,
