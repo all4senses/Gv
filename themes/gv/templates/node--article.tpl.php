@@ -279,11 +279,10 @@
           echo gv_blocks_getBlockThemed($block_data);
           $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_re', 'shadow' => TRUE);
           echo gv_blocks_getBlockThemed($block_data);
-
+          echo '<div class="bottom-clear"></div>';
         ?>
-        <div id="providers-bottom"></div>
       </div>
-      
+      <div id="providers-bottom"></div>
 
   <?php endif; ?>
   
