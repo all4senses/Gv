@@ -281,8 +281,9 @@
           echo gv_blocks_getBlockThemed($block_data);
 
         ?>
+        <div id="providers-bottom"></div>
       </div>
-      <div id="providers-bottom"></div>
+      
 
   <?php endif; ?>
   
