@@ -20,7 +20,7 @@
                   
                 <?php /*print $title_attributes;*/ ?>>
                     <?php if (!$page): ?>
-                      <a href="<?php dpm($_SERVER['REQUEST_URI']); dpm($node->field_ref_provider['und'][0]['target_id']); print ($_SERVER['REQUEST_URI'] == 'providers/reviews2' && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
+                      <a href="<?php dpm($_SERVER); dpm($node->field_ref_provider['und'][0]['target_id']); print ($_SERVER['REQUEST_URI'] == 'providers/reviews2' && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
                     <?php endif; ?>
                         
                       <?php 
