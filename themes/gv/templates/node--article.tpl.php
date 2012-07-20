@@ -282,7 +282,7 @@
           echo '<div class="bottom-clear"></div>';
         ?>
       </div>
-      <div id="providers-bottom"></div>
+      <!--<div id="providers-bottom"></div> -->
 
   <?php endif; ?>
   
