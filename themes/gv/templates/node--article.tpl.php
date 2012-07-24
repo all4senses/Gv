@@ -51,16 +51,8 @@
               
               $author = user_load($node->uid);
               $author_name = $author->realname;
-              // Temporary replaced with a link to /our-team
-              //if ($node->type == 'article') {
-                $author_url = url('user/' . $node->uid);
-                $author_title = t('!author\'s profile', array('!author' => $author_name));
-              /*}
-              else {
-                $author_url = '/our-team'; //url('user/' . $node->uid);
-                $author_title = t('Meet Our Team');
-              }
-              */
+              $author_url = url('user/' . $node->uid);
+              $author_title = t('!author\'s profile', array('!author' => $author_name));
 
               global $language;
               
@@ -138,7 +130,6 @@
           hide($content['field_topics']);
           
           
-          //dpm($node->field_a_teaser['und'][0]['value']);
           if (!$page) {
             
             // TODO: Temporary check. Should be removed after all articles resave.
@@ -158,9 +149,6 @@
             gv_misc_pushTagsToMetatags('keywords', $content['field_topics']);
           }
           print render($content);
-          
-          //dpm($node);
-          //dpm($content);
         ?>
       </div>
 
