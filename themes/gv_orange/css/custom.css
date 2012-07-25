@@ -61,11 +61,6 @@ input.blur,
 #header{padding-top: 85px;}
 
 
-
-#all-content, #highlighted{background: none repeat scroll 0 0 #F3F3F3; margin: auto; padding: 0 0 10px; width: 1100px;}
-
-
-
 /* Header */
 /*#header #header-menu-back{background: url("images/menu-main-back.png") repeat-x scroll 0 0 transparent; border-radius: 6px 6px 0 0; min-height: 45px;}*/
 #header #header-menu-back{background: url("images/sprite-2.png") repeat-x scroll 0 -58px #F3F3F3; border-radius: 6px 6px 0 0; min-height: 45px;}
@@ -1322,12 +1317,16 @@ body.node-type-quote.page-node-139{background: none;}
 
 
 
-/* Experimental - set white for all-content and gray for the side*/
+/*
+#all-content, #highlighted{background: none repeat scroll 0 0 #F3F3F3; margin: auto; padding: 0 0 10px; width: 1100px;}
+*/
 
+/* Experimental - set white for all-content and gray for the side*/
+/*
 #all-content, #highlighted {background: white; margin: auto; padding: 0 0 10px; width: 1100px;}
 body.one-sidebar.sidebar-second #main{background: white; padding: 10px; width: 825px;}
 body.sidebar-second #sidebar-second {background: #F3F3F3; float: right; margin-right: 0; padding: 20px; width: 215px;}
-
+*/
 
 
 /* Experimental - with the image as a background */
@@ -1342,27 +1341,13 @@ body.one-sidebar.sidebar-second #sidebar-second {background: none;}
  
 
 /* image withOUT shadows, and shadow as a browser effect */
- 
-#all-content, #highlighted {
-    background: url("images/main-back.png") repeat-y scroll -5px 0 white;
-    box-shadow: 0 0 5px #DDDDDD, 0 0 7px #000000;
-    margin: auto;
-    padding: 0;
-    width: 1100px;
-}
-body.one-sidebar.sidebar-second #main {
-    background: none repeat scroll 0 0 white;
-    padding: 10px;
-    margin-left: 6px;
-    width: 820px;
-}
-body.one-sidebar.sidebar-second #sidebar-second {
-    background: none #F3F3F3;
-    float: right;
-    margin-right: 0;
-    padding: 14px 18px 20px 20px;
-    width: 210px;
-}
+#all-content,
+#highlighted{margin: auto; padding: 0; width: 1100px;}
+
+#all-content{background: url("images/main-back.png") repeat-y scroll -5px 0 white; box-shadow: 0 0 5px #DDDDDD, 0 0 7px #000000;}
+
+body.one-sidebar.sidebar-second #main {background: none repeat scroll 0 0 white; padding: 10px; margin-left: 6px; width: 820px;}
+body.one-sidebar.sidebar-second #sidebar-second {background: none #F3F3F3; float: right; margin-right: 0; padding: 14px 18px 20px 20px; width: 210px;}
 
 /* Reset those data for separate quote pages */
 body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
@@ -1398,5 +1383,9 @@ body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
 .tags .more-link a:hover{background: transparent; color: black;}
 
 /* Home page highlight blocks */
-#block-gv-blocks-get-prefacehome{position: static;}
-#block-gv-blocks-get-prefacehome .inside{position: static;}
+#block-gv-blocks-get-prefacehome{position: static; width: 600px; float: left;}
+#block-gv-blocks-get-prefacehome .inside{position: static; border: none;}
+#block-gv-blocks-get-prefacehome .shadow{background: none; height: 0; margin-bottom: 0;}
+
+#block-gv-blocks-request-quote-v2{float: left; width: 500px;}
+#block-gv-blocks-request-quote-v2 .shadow{background: none; height: 0; margin-bottom: 0;}
