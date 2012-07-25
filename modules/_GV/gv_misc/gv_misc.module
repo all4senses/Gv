@@ -68,6 +68,22 @@ function gv_misc_menu_alter(&$items) {
 }
 
 
+
+/**
+ * Get prefaces main section rendered.
+ *
+ */
+function gv_misc_getPrefaceMainSection($key) {
+  $node = gv_misc_getPrefaceByKey($key);
+  $node_view = node_view($node, 'full');
+  
+  //global $user;
+  //if (in_array('administrator', $user->roles)) {
+    return render($node_view['field_preface_bottom']);
+  //}
+}
+
+
 /**
  * Get prefaces bottom section rendered.
  *
