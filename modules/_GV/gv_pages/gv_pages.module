@@ -222,8 +222,10 @@ function gv_pages_buildHome($name, $data) {
   $seo_welcome_node->title_no_link = TRUE;
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
   
-  $out .= render($seo_welcome_node_view);
-  
+  global $user;
+  if ($user->uid != 1) {
+    $out .= render($seo_welcome_node_view);
+  }
   
   
   // Content of a home page saved in db as a var.
