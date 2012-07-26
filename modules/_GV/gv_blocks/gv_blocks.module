@@ -478,7 +478,12 @@ function gv_blocks_get_accessToFootprintBanner() {
  * Block Request a quote with a multistep form v1.
  */
 function gv_blocks_get_requestQuote() {
-
+  
+  global $user;
+  if ($user->uid == 1) {
+    return '';
+  }
+  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
