@@ -688,7 +688,7 @@ function gv_blocks_get_requestQuote_v2() {
                             <div class="bottom-clear"></div>
 
 
-                            <div class="wrapper">
+                            <div class="wrapper first">
                               <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
                                 <input class="after required firstname" name="firstname" id="firstname" />
                             </div>
@@ -698,12 +698,12 @@ function gv_blocks_get_requestQuote_v2() {
                                 <input class="after required lastname" name="lastname" id="lastname" />
                             </div>
                             
-                            <div class="wrapper">
+                            <div class="wrapper last">
                               <div class="label_before required">' . t('Email') . ':<span class="form-required">*</span></div>
                                 <input class="after email required" name="email" id="email" />
                             </div>
                          
-                            <div class="wrapper phone">
+                            <div class="wrapper phone first">
                               <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
                               <div id="phone">
                                 <input class="after required phone" name="phone_1" id="phone_1" value="" />
@@ -712,19 +712,12 @@ function gv_blocks_get_requestQuote_v2() {
                                </div>
                             </div>
                             
-                            <!--
-                            <div class="wrapper phone">
-                              <div class="label_before required">' . t('Phone') . ':<span class="form-required">*</span></div>
-                                <input class="after required phone" name="phone" id="phone" value="" />
-                            </div>
-                            -->
-                            
                             <div class="wrapper company">
                               <div class="label_before">' . t('Company') . ':</div>
                                 <input class="after" name="company" id="company" />
                             </div>
 
-                            <div class="wrapper website">
+                            <div class="wrapper website last">
                               <div class="label_before">' . t('Website') . ':</div>
                                 <input class="after" name="website" id="website" />
                             </div>
