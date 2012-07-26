@@ -223,7 +223,7 @@ function gv_pages_buildHome($name, $data) {
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
   
   global $user;
-  if ($user->uid != 1) {
+  if (!$user->uid) {
     $out .= render($seo_welcome_node_view);
   }
   

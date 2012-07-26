@@ -1,6 +1,6 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_v2 = {
+  Drupal.behaviors.gv_requestquote_page_v2 = {
     attach: function (context, settings) {
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
