@@ -82,6 +82,6 @@
 
   
   <footer id="footer" role="contentinfo" class="clearfix">
-      <?php echo render($page['footer']), '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>'; ?>
+      <?php echo render($page['footer']), '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div><div id="sitelock"><img src="//shield.sitelock.com/shield/getvoip.com" title="SiteLock" alt="website security"></div>'; ?>
   </footer> <!-- /#footer -->
 
