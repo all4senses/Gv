@@ -221,11 +221,12 @@ function gv_pages_buildHome($name, $data) {
   $seo_welcome_node = gv_misc_getPrefaceByKey('front');
   $seo_welcome_node->title_no_link = TRUE;
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
-  
-  global $user;
-  if (!$user->uid) {
+
+  // Uncomment to hide a main part of the preface from the main content region.
+//  global $user;
+//  if (!$user->uid) {
     $out .= render($seo_welcome_node_view);
-  }
+//  }
   
   
   // Content of a home page saved in db as a var.

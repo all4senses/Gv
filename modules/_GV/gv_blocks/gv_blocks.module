@@ -47,6 +47,8 @@ function gv_blocks_block_info() {
     'info' => t('Header links'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  
   $blocks['request_quote'] = array(
     'info' => t('Request a quote block'),
     'cache' => DRUPAL_NO_CACHE,
@@ -55,8 +57,12 @@ function gv_blocks_block_info() {
     'info' => t('Request a quote block v2'),
     'cache' => DRUPAL_NO_CACHE,
   );
-    
-    
+  $blocks['request_quote_v3'] = array(
+    'info' => t('Request a quote block v3'),
+    'cache' => DRUPAL_NO_CACHE,
+  );  
+  
+  
   $blocks['get_access_banner'] = array(
     'info' => t('Get access... Banner'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -147,14 +153,20 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Header links');
       $block['content'] = gv_blocks_get_headerLinks();
       break; 
+    
     case 'request_quote':
       $block['subject'] = t('Request a quote block');
-      $block['content'] = gv_blocks_get_requestQuote();
+      $block['content'] = gv_blocks_get_requestQuote_block_v1();
       break; 
     case 'request_quote_v2':
       $block['subject'] = t('Request a quote block v2');
-      $block['content'] = gv_blocks_get_requestQuote_v2();
+      $block['content'] = gv_blocks_get_requestQuote_block_v2();
       break; 
+    case 'request_quote_v3':
+      $block['subject'] = t('Request a quote block v3');
+      $block['content'] = gv_blocks_get_requestQuote_block_v3();
+      break; 
+    
     case 'get_access_banner':
       $block['subject'] = t('GET ACCESS TO THE LARGEST <br>VOIP FOOTPRINT <br>IN THE NATION');
       $block['content'] = gv_blocks_get_accessToFootprintBanner();
@@ -477,10 +489,10 @@ function gv_blocks_get_accessToFootprintBanner() {
 /**
  * Block Request a quote with a multistep form v1.
  */
-function gv_blocks_get_requestQuote() {
+function gv_blocks_get_requestQuote_block_v1() {
   
   global $user;
-  if ($user->uid) {
+  if ($user->uid == 1) {
     return '';
   }
   
@@ -615,11 +627,10 @@ function gv_blocks_get_requestQuote() {
 }
 
 
-
 /**
  * Block Request a quote with a multistep form v2.
  */
-function gv_blocks_get_requestQuote_v2() {
+function gv_blocks_get_requestQuote_block_v2() {
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
@@ -750,6 +761,152 @@ function gv_blocks_get_requestQuote_v2() {
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="block" />
                 <input type="hidden" name="version" value="2" />
+                
+        </form>
+
+        <p id="data"></p>
+</div>
+<div class="block_footer"></div>
+  ';
+  
+  return $out;
+}
+
+
+/**
+ * Block Request a quote with a multistep form v3.
+ */
+function gv_blocks_get_requestQuote_block_v3() {
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_v2.js');
+  
+  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+
+  $out = '
+   <div id="up">
+      <h3>Compare Top VoIP Services Tailored to Your Needs</h3>
+      <div class="explain p1"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
+      <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
+      <div class="explain p3"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
+   </div>
+   <div id="up-image"></div>
+   <div class="bottom-clear"></div>   
+   <div id="requestQuoteFormWrapper">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        <form class="multipartForm bbq" method="post" action="/request" style="height: 140px; overflow: hidden;">
+
+                
+                <div id="fieldWrapper">
+                    
+                    <div class="step" id="questions_section">
+
+                            <div class="wrapper top first">
+                              <div class="question">' . t('Phones amount needed') . ':</div>
+                              <select name="phones_amt" id="phones_amt" class="input required">
+                                <option value="1 - 4">1 - 4</option>
+                                <option value="5 - 10">5 - 10</option>
+                                <option selected="selected" value="11 - 20">11 - 20</option>
+                                <option value="21 - 50">21 - 50</option>
+                                <option value="More than 50">More than 50</option>
+                              </select>
+                            </div>
+           
+                            <div class="wrapper top">
+                              <div class="question">' . t('VoIP Service desired') . ':</div>
+                              <select name="q_type" id="q_type" class="input required">
+                                <option value="Both phones and service">' . t('Both phones and service') .'</option>
+                                <option value="Phone system only">' . t('Phone system only') .'</option>
+                                <option value="Service provider only">' . t('Service provider only') .'</option>
+                              </select>
+                            </div>
+                            
+                            <div class="wrapper top last">
+                              <div class="question">' . t('Buying time frame') . ':</div>
+                              <select name="buying_time" id="buying_time" class="input required">
+                                <!--<option value="">- Select a value -</option>-->
+                                <option value="ASAP">' . t('ASAP') .'</option>
+                                <option value="1-3 Months">' . t('1-3 Months') .'</option>
+                                <option value="3-6 Months">' . t('3-6 Months') .'</option>
+                              </select>
+                            </div>
+                            
+                            <div class="bottom-clear"></div>
+
+
+                            <div class="wrapper first">
+                              <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
+                                <input class="after required firstname" name="firstname" id="firstname" />
+                            </div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before required">' . t('Last Name') . ':<span class="form-required">*</span></div>
+                                <input class="after required lastname" name="lastname" id="lastname" />
+                            </div>
+                            
+                            <div class="wrapper last">
+                              <div class="label_before required">' . t('Email') . ':<span class="form-required">*</span></div>
+                                <input class="after email required" name="email" id="email" />
+                            </div>
+                         
+                            <div class="wrapper phone first">
+                              <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
+                              <div id="phone">
+                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
+                               </div>
+                            </div>
+                            
+                            <div class="wrapper company">
+                              <div class="label_before">' . t('Company') . ':</div>
+                                <input class="after" name="company" id="company" />
+                            </div>
+
+                            <div class="wrapper website last">
+                              <div class="label_before">' . t('Website') . ':</div>
+                                <input class="after" name="website" id="website" />
+                            </div>
+                            
+                            <div id="on_error"></div>
+
+                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
+                                
+                            <div class="protected"></div>
+                    </div>
+
+                    
+                
+                </div>
+                
+                
+            
+                <div id="Navigation"> 							
+                        <input class="navigation_button" id="back" value="Back" type="reset" />
+                        <input class="navigation_button" id="next" value="Submit & Get Quotes" type="submit" />
+                </div>
+                
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="block" />
+                <input type="hidden" name="version" value="3" />
                 
         </form>
 
