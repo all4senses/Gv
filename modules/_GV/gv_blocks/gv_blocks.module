@@ -492,7 +492,7 @@ function gv_blocks_get_accessToFootprintBanner() {
 function gv_blocks_get_requestQuote_block_v1() {
   
   global $user;
-  if ($user->uid == 1) {
+  if ($user->uid) {
     return '';
   }
   
@@ -779,7 +779,7 @@ function gv_blocks_get_requestQuote_block_v2() {
 function gv_blocks_get_requestQuote_block_v3() {
   
   global $user;
-  if ($user->uid != 1) {
+  if (!$user->uid) {
     return '';
   }
   
