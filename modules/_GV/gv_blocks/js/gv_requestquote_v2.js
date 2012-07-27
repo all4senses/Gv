@@ -72,8 +72,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'Submit & Get Quotes',
-          textNext: 'Submit & Get Quotes',
+          textSubmit : 'Submit',// 'Submit & Get Quotes',
+          textNext: 'Submit'//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
@@ -222,7 +222,7 @@
              */
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
-                email: Drupal.t("Email format must be name@domain.com")
+                email: Drupal.t("Email format: name@domain.com")
               }
             }
           },

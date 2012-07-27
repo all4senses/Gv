@@ -810,7 +810,7 @@ function gv_blocks_get_requestQuote_block_v3() {
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
-        <form class="multipartForm bbq" method="post" action="/request" style="height: 240px; overflow: hidden;">
+        <form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">
 
                 
                 <div id="fieldWrapper">
@@ -823,8 +823,8 @@ function gv_blocks_get_requestQuote_block_v3() {
                               <div class="question">' . t('Lines needed') . ':</div>
                               <select name="phones_amt" id="phones_amt" class="input required">
                                 <option value="1 - 4">1 - 4</option>
-                                <option value="5 - 10">5 - 10</option>
-                                <option selected="selected" value="11 - 20">11 - 20</option>
+                                <option selected="selected" value="5 - 10">5 - 10</option>
+                                <option value="11 - 20">11 - 20</option>
                                 <option value="21 - 50">21 - 50</option>
                                 <option value="More than 50">More than 50</option>
                               </select>
@@ -833,16 +833,16 @@ function gv_blocks_get_requestQuote_block_v3() {
                             <div class="wrapper top">
                               <div class="question">' . t('Service Type') . ':</div>
                               <select name="q_type" id="q_type" class="input required">
-                                <option value="Both phones and service">' . t('Both phones and service') .'</option>
-                                <option value="Phone system only">' . t('Phone system only') .'</option>
-                                <option value="Service provider only">' . t('Service provider only') .'</option>
+                                <option selected="selected" value="Business">' . t('Business') .'</option>
+                                <option value="Home">' . t('Home') .'</option>
+                                <option value="Home-Based Business">' . t('Home-Based Business') .'</option>
                               </select>
                             </div>
                             
                             <div class="bottom-clear"></div>
 
-                            <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our team of VoIP Experts</span></div>
-                            <div class="explain p3"><div class="number">3</div><span class="text">Сonnect with leading providers that best match your needs</span></div>
+                            <div class="explain p2"><div class="number">2</div><div class="text">Your request will be reviewed by our team of VoIP Experts</div></div>
+                            <div class="explain p3"><div class="number">3</div><div class="text">Сonnect with leading providers that best match your needs</div></div>
       
                             <div class="wrapper first">
                               <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
@@ -888,8 +888,7 @@ function gv_blocks_get_requestQuote_block_v3() {
                 
             
                 <div id="Navigation"> 							
-                        <input class="navigation_button" id="back" value="Back" type="reset" />
-                        <input class="navigation_button" id="next" value="Submit & Get Quotes" type="submit" />
+                        <input class="navigation_button" id="next" value="Submit" type="submit" />
                 </div>
                 
                 
