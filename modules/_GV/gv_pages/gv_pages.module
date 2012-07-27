@@ -2149,7 +2149,25 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     }
     $text .= '</span>';
     drupal_set_message($text);
+    
+    
+    
     // Notify all admins.
+    dpm($form_state);
+    dpm($form);
+//    $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
+//    
+//    // Save a provider name to the review
+//    if ($provider_nid && $provider_nid != 7) {
+//      $provider = node_load($provider_nid);
+//      $node->field_r_provider_name['und'][0]['value'] = $provider->field_p_name['und'][0]['value'];
+//    } 
+//    else {
+//      $node->field_r_provider_name['und'][0]['value'] = $node->field_r_oprovider['und'][0]['value'];
+//    }
+//    
+    
+    
     gv_misc_sendMessage('new_review_admin_notify');
   } // End of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
   else {

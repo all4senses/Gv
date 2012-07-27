@@ -491,11 +491,6 @@ function gv_blocks_get_accessToFootprintBanner() {
  */
 function gv_blocks_get_requestQuote_block_v1() {
   
-  global $user;
-  if ($user->uid) {
-    return '';
-  }
-  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
@@ -778,11 +773,6 @@ function gv_blocks_get_requestQuote_block_v2() {
  */
 function gv_blocks_get_requestQuote_block_v3() {
   
-  global $user;
-  if (!$user->uid) {
-    return '';
-  }
-  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
@@ -822,11 +812,12 @@ function gv_blocks_get_requestQuote_block_v3() {
                             <div class="wrapper top first">
                               <div class="question">' . t('Lines needed') . ':</div>
                               <select name="phones_amt" id="phones_amt" class="input required">
-                                <option value="1 - 4">1 - 4</option>
-                                <option selected="selected" value="5 - 10">5 - 10</option>
+                                <option value="1 - 2">1 - 2</option>
+                                <option value="3 - 5">3 - 5</option>
+                                <option selected="selected" value="6 - 10">6 - 10</option>
                                 <option value="11 - 20">11 - 20</option>
                                 <option value="21 - 50">21 - 50</option>
-                                <option value="More than 50">More than 50</option>
+                                <option value="50+">50+</option>
                               </select>
                             </div>
            
