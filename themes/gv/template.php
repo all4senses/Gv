@@ -138,10 +138,12 @@ function gv_preprocess_search_block_form(&$vars) {
   $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
 
-
+/**
+ * Changes the search button label. Here... because it doesn't work via module hook.
+ */
 function gv_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
-    $form['actions']['submit']['#value'] = t('Go!');
+    $form['actions']['submit']['#value'] = '';
   }
 }
 
