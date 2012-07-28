@@ -813,7 +813,7 @@ function gv_blocks_get_requestQuote_block_v3() {
                             
                             <div class="wrapper top first">
                               <div class="question">' . t('Lines needed') . ':</div>
-                              <select name="phones_amt" id="phones_amt" class="input required ui-helper-reset">
+                              <select name="phones_amt" id="phones_amt" class="input required">
                                 <option value="1 - 2">1 - 2</option>
                                 <option value="3 - 5">3 - 5</option>
                                 <option selected="selected" value="6 - 10">6 - 10</option>
@@ -825,7 +825,7 @@ function gv_blocks_get_requestQuote_block_v3() {
            
                             <div class="wrapper top">
                               <div class="question">' . t('Service Type') . ':</div>
-                              <select name="q_type" id="q_type" class="input required ui-helper-reset">
+                              <select name="q_type" id="q_type" class="input required">
                                 <option selected="selected" value="Business">' . t('Business') .'</option>
                                 <option value="Home">' . t('Home') .'</option>
                                 <option value="Home-Based Business">' . t('Home-Based Business') .'</option>
@@ -839,36 +839,38 @@ function gv_blocks_get_requestQuote_block_v3() {
       
                             <div class="wrapper first">
                               <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
-                                <input class="after required firstname ui-helper-reset" name="firstname" id="firstname" />
+                                <input class="after required firstname" name="firstname" id="firstname" />
                             </div>
                             
                             <div class="wrapper">
                               <div class="label_before required">' . t('Last Name') . ':<span class="form-required">*</span></div>
-                                <input class="after required lastname ui-helper-reset" name="lastname" id="lastname" />
+                                <input class="after required lastname" name="lastname" id="lastname" />
                             </div>
                             
                             <div class="wrapper company">
                               <div class="label_before">' . t('Company') . ':</div>
-                                <input class="after ui-helper-reset" name="company" id="company" />
+                                <input class="after" name="company" id="company" />
                             </div>
 
 
                             <div class="wrapper last">
                               <div class="label_before required">' . t('Email') . ':<span class="form-required">*</span></div>
-                                <input class="after email required ui-helper-reset" name="email" id="email" />
+                                <input class="after email required" name="email" id="email" />
                             </div>
                          
                             <div class="wrapper phone first">
                               <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
                               <div id="phone">
-                                <input class="after required phone ui-helper-reset" name="phone_1" id="phone_1" value="" />
-                                <input class="after required phone ui-helper-reset" name="phone_2" id="phone_2" value="" />
-                                <input class="after required phone ui-helper-reset" name="phone_3" id="phone_3" value="" />
+                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
                                </div>
                             </div>
                             
                             <div id="on_error"></div>
 
+                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
+                                
                             <div class="protected"></div>
                     </div>
 
