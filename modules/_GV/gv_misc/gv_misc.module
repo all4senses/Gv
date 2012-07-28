@@ -1135,7 +1135,9 @@ function gv_misc_getAdmins() {
  *   Return nothing.
  */
 function gv_misc_form_alter(&$form, &$form_state, $form_id) {
+  
   dpm($form_id);dpm($form);
+  
   // Unlink Ckeditor from the comment input form.
   /*
   if($form['#id'] == 'comment-form') {
@@ -1146,6 +1148,14 @@ function gv_misc_form_alter(&$form, &$form_state, $form_id) {
     $form['body']['und']['0']['#format'] = "full_html";
     //$form['field_custom_php_code']['und']['0']['#format'] = "php_code";
   }
+  
+  switch ($form['#id']) {
+    
+    case 'search-block-form':
+      $form['actions']['submit']['#value'] = '';
+      break;
+  }
+  
 }
 
 
