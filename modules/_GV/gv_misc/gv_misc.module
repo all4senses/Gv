@@ -1135,11 +1135,13 @@ function gv_misc_getAdmins() {
  *   Return nothing.
  */
 function gv_misc_form_alter(&$form, &$form_state, $form_id) {
-  // dpm($form_id);dpm($form);
+  dpm($form_id);dpm($form);
   // Unlink Ckeditor from the comment input form.
+  /*
   if($form['#id'] == 'comment-form') {
-    //$form['comment_body']['und'][0]['#type'] = 'textarea';
+    $form['comment_body']['und'][0]['#type'] = 'textarea';
   }
+  */
   if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form') {
     $form['body']['und']['0']['#format'] = "full_html";
     //$form['field_custom_php_code']['und']['0']['#format'] = "php_code";
