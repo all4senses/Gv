@@ -143,7 +143,14 @@ function gv_preprocess_search_block_form(&$vars) {
  */
 function gv_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
+    
     $form['actions']['submit']['#value'] = '';
+    
+    $form['search_block_form']['#value'] = t('Search'); // Set a default value for the textfield
+    
+    // Add extra attributes to the text box
+    $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Search';}";
+    $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == 'Search') {this.value = '';}";
   }
 }
 
