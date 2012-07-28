@@ -146,7 +146,7 @@ function gv_form_alter(&$form, &$form_state, $form_id) {
     
     $form['actions']['submit']['#value'] = '';
     
-    $form['search_block_form']['#value'] = t('Search'); // Set a default value for the textfield
+    $form['search_block_form']['#value'] = t('Enter a phrase to search'); // Set a default value for the textfield
     
     // Add extra attributes to the text box
     $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Search';}";
