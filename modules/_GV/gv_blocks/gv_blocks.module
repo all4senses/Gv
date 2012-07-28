@@ -773,6 +773,8 @@ function gv_blocks_get_requestQuote_block_v2() {
  */
 function gv_blocks_get_requestQuote_block_v3() {
   
+  global $user;
+  if ($user->uid != 1) {
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
@@ -786,7 +788,7 @@ function gv_blocks_get_requestQuote_block_v3() {
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
-  
+  }
   
   
   $token = md5(time()); //drupal_get_token('test');
