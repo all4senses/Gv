@@ -82,6 +82,8 @@
 
   
   <footer id="footer" role="contentinfo" class="clearfix">
-      <?php echo render($page['footer']), '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div><div id="sitelock"><img src="//shield.sitelock.com/shield/getvoip.com" title="SiteLock" alt="website security"></div>'; ?>
+    <?php echo render($page['footer']); ?>
+    <div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>
+    <div id="sitelock"><a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a></div>
   </footer> <!-- /#footer -->
 
