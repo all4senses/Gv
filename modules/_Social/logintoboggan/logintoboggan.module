@@ -524,9 +524,10 @@ function logintoboggan_user_register_submit($form, &$form_state) {
   if(isset($mailkey)) {
     // Mail the user.
     _user_mail_notify($mailkey, $account);
-
-    drupal_set_message($message);
   }
+  
+  drupal_set_message($message);
+  
   
   // where do we need to redirect after registration?
   $redirect = _logintoboggan_process_redirect(variable_get('logintoboggan_redirect_on_register', ''), $account);
