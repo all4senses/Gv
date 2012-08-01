@@ -1954,8 +1954,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
  */
 function gv_pages_validateForm_review(&$form, &$form_state) {
   
-  //dpm($form);
-  //dpm($form_state);
+  dpm($form);
+  dpm($form_state);
 
   // Don't check anything if we delete the node.
   if ($form_state['submit_handlers'][0] == 'node_form_delete_submit') {
@@ -2153,8 +2153,12 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     
     
     // Notify all admins.
-    dpm($form_state);
-    dpm($form);
+//    global $user;
+//    if ($user->uid == 1) {
+//      dpr($form_state);
+//      dpr($form);
+//      exit;
+//    }
 //    $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
 //    
 //    // Save a provider name to the review
