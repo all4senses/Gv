@@ -1956,15 +1956,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   //dpm($form); dpm($form_state);
 
-  
-    if ($form_state['values']['field_r_oprovider']['und'][0]['value']) {
-      $provider_name = $form_state['values']['field_r_oprovider']['und'][0]['value'];
-    }
-    else {
-      $provider_name = $form_state['complete form']['provider']['field_ref_provider']['und']['#options'][$form_state['values']['field_ref_provider']['und'][0]['target_id']];
-    }
-    dpm('$provider_name = ' . $provider_name);
-    
   // Don't check anything if we delete the node.
   if ($form_state['submit_handlers'][0] == 'node_form_delete_submit') {
     return;
@@ -2157,17 +2148,6 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     }
     $text .= '</span>';
     drupal_set_message($text);
-    
-    
-    if ($form_state['values']['field_r_oprovider']['und'][0]['value']) {
-      $provider_name = $form_state['values']['field_r_oprovider']['und'][0]['value'];
-    }
-    else {
-      $provider_name = $form_state['complete form']['provider']['field_ref_provider']['und']['#options'][$form_state['values']['field_ref_provider']['und'][0]['target_id']];
-    }
-    
-    drupal_set_message($provider_name);
-    
 
 //    $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
 //    
@@ -2182,7 +2162,14 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
 //    
     
     // Notify all admins.
-    gv_misc_sendMessage('new_review_admin_notify');
+    if ($form_state['values']['field_r_oprovider']['und'][0]['value']) {
+      $provider_name = $form_state['values']['field_r_oprovider']['und'][0]['value'];
+    }
+    else {
+      $provider_name = $form_state['complete form']['provider']['field_ref_provider']['und']['#options'][$form_state['values']['field_ref_provider']['und'][0]['target_id']];
+    }
+    
+    gv_misc_sendMessage('new_review_admin_notify', array('provider_name' => $provider_name));
   } // End of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
   else {
     // clear previous votes if an email has been chabged
