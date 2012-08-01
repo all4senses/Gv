@@ -1016,7 +1016,7 @@ GetVoIP Team
     
     
     case 'new_review_admin_notify':
-      $message['subject'] = t('New review for "!p" has been submitted', array('!provider' => $params['provider_name']));
+      $message['subject'] = t('New review for "!provider" has been submitted', array('!provider' => $params['provider_name']));
       $message['body'][] = t('Dear administrator!
 
 A new review for the provider "!provider" just has been submitted. Please approve or discard it at !pending_reviews.
