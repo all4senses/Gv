@@ -940,9 +940,10 @@ function gv_blocks_get_requestQuoteForPage() {
                         
                             <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
                               <select name="phones_amt" id="phones_amt" class="input required">
+                                <option value="">- Select a value -</option>
                                 <option value="1 - 4">1 - 4</option>
                                 <option value="5 - 10">5 - 10</option>
-                                <option value="11 - 20">11 - 20</option>
+                                <option selected="selected" value="11 - 20">11 - 20</option>
                                 <option value="21 - 50">21 - 50</option>
                                 <option value="More than 50">More than 50</option>
                               </select>
@@ -950,7 +951,7 @@ function gv_blocks_get_requestQuoteForPage() {
                             
                             <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
                               <select name="q_for" id="q_for" class="input required">
-                                <!--<option value="">- Select a value -</option>-->
+                                <option value="">- Select a value -</option>
                                 <option value="Replace current phone system">' . t('Replace current phone system') .'</option>
                                 <option value="Need a phone system for a new office">' . t('Need a phone system for a new office') .'</option>
                                 <option value="Expand on our current phone system">' . t('Expand on our current phone system') .'</option>
