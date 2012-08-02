@@ -606,25 +606,22 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('General Provider Info'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
-        //'#description' => t(''),
+        '#tree' => TRUE,
         '#weight' => 10,
       );
             $form['data_info']['i_heads'] = array(
               '#type' => 'textfield',
               '#title' => t('Headquarters'),
-              //'#description' => t(''),
               '#default_value' => isset($p_data['info']['i_heads']) ? $p_data['info']['i_heads'] : '',
             );
             $form['data_info']['i_founded'] = array(
               '#type' => 'textfield',
               '#title' => t('Founded In'),
-              //'#description' => t(''),
               '#default_value' => isset($p_data['info']['i_founded']) ? $p_data['info']['i_founded'] : '',
             );
             $form['data_info']['i_availability'] = array(
               '#type' => 'textfield',
               '#title' => t('Service Availability'),
-              //'#description' => t(''),
               '#default_value' => isset($p_data['info']['i_availability']) ? $p_data['info']['i_availability'] : '',
             );
             $form['data_info']['i_web'] = array(
@@ -663,7 +660,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Provider services'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
-        //'#description' => t(''),
         '#weight' => 11,
       );
             $form['services']['s_residential'] = array(
@@ -1033,7 +1029,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Quote and Its Author'),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
-        //'#description' => t(''),
+        '#tree' => TRUE,
         '#weight' => 12,
       );
             $form['data_quote']['q_text'] = array(
@@ -1042,13 +1038,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               //'#format' => 'full_html',
                 
               '#title' => t('Quote text'),
-              //'#description' => t(''),
               '#default_value' => isset($p_data['quote']['q_text']) ? $p_data['quote']['q_text'] : '',
             );
             $form['data_quote']['q_author'] = array(
               '#type' => 'textfield',
               '#title' => t('Quote author'),
-              //'#description' => t(''),
               '#default_value' => isset($p_data['quote']['q_author']) ? $p_data['quote']['q_author'] : '',
             );
       
@@ -1762,18 +1756,18 @@ function gv_pages_submitForm_article(&$form, &$form_state) {
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
    
-  //dpm($form_state);
+  dpm($form_state);
  
   $p_data = array();
   foreach ($form_state['values'] as $field => $value) {
     $prefix = explode('_', $field);
     switch ($prefix[0]) {
-      case 'i':
-          $p_data['info'][$field] = $value;
-        break;
-      case 'q':
-          $p_data['quote'][$field] = $value;
-        break;
+//      case 'i':
+//          $p_data['info'][$field] = $value;
+//        break;
+//      case 'q':
+//          $p_data['quote'][$field] = $value;
+//        break;
       case 're':
           $p_data['services']['s_residential'][$field] = $value;
         break;
@@ -1781,6 +1775,14 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
           $p_data['services']['s_business'][$field] = $value;
         break;
     }
+  }
+  
+  
+  foreach ($form_state['values']['data_info'] as $key => $value) {
+    $p_data['info'][$key] = $value;
+  }
+  foreach ($form_state['values']['data_quote'] as $key => $value) {
+    $p_data['info'][$key] = $value;
   }
   
   // Save weights for Re Features (on the next editing).
