@@ -963,6 +963,10 @@ var google_conversion_value = 0;
   drupal_json_output(array('status' => $status, 'data' => $output/*, 'post' => $_POST, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
+/*
+ * 
+double triggerring of a submit form because of double launching almost the same code from the Request quote block which actually hasn't appeared on the page anyway (before recent time it was absolutely the same so the problem was autosolved quietly :) 
+ */
 
 /**
  * Implements hook_mail().
