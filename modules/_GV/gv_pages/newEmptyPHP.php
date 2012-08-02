@@ -11,9 +11,9 @@ function alter() {
   
   
   
-      $service_types = SERVICE_TYPES;
-      $service_descriptions = SERVICE_DESCRIPTIONS;
-      $fee_types = FEE_TYPES;
+      $service_types = unserialize(SERVICE_TYPES);
+      $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
+      $fee_types = unserialize(FEE_TYPES);
       
       
       
