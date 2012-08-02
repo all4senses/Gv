@@ -915,8 +915,8 @@ function gv_blocks_get_requestQuoteForPage() {
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
   
-  drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
-  drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  //drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
+  //drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
@@ -940,7 +940,7 @@ function gv_blocks_get_requestQuoteForPage() {
                         
                             <div class="question">' . t('How many phones do you need?') . '<span class="form-required">*</span></div>
                               <select name="phones_amt" id="phones_amt" class="input required">
-                                <option value="">- Select a value -</option>
+                                <!--<option value="">- Select a value -</option>-->
                                 <option value="1 - 4">1 - 4</option>
                                 <option value="5 - 10">5 - 10</option>
                                 <option selected="selected" value="11 - 20">11 - 20</option>
@@ -951,7 +951,7 @@ function gv_blocks_get_requestQuoteForPage() {
                             
                             <div class="question">' . t('What is your current phone needs?') . '<span class="form-required">*</span></div>
                               <select name="q_for" id="q_for" class="input required">
-                                <option value="">- Select a value -</option>
+                                <!--<option value="">- Select a value -</option>-->
                                 <option value="Replace current phone system">' . t('Replace current phone system') .'</option>
                                 <option value="Need a phone system for a new office">' . t('Need a phone system for a new office') .'</option>
                                 <option value="Expand on our current phone system">' . t('Expand on our current phone system') .'</option>
