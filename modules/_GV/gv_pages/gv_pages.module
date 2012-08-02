@@ -1778,12 +1778,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   }
   
   
-  foreach ($form_state['values']['data_info'] as $key => $value) {
-    $p_data['info'][$key] = $value;
-  }
-  foreach ($form_state['values']['data_quote'] as $key => $value) {
-    $p_data['info'][$key] = $value;
-  }
+  $p_data['info'] = $form_state['values']['data_info'];
+  $p_data['quote'] = $form_state['values']['data_quote'];
+
   
   // Save weights for Re Features (on the next editing).
   foreach ($form_state['values']['field_p_re_features']['und'] as $term) {
@@ -1864,7 +1861,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
   
 
-  
+  dpm($p_data);
 
 
 // Save collected FEES data from temporary fields to a excessive field for using it from views
