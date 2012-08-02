@@ -668,7 +668,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Residential serviсes'),
               '#collapsible' => TRUE,
               '#collapsed' => TRUE,
-              '#tree' => TRUE,
+              //'#tree' => TRUE,
             );
 
                   $form['services']['s_residential']['re_preface_title'] = array(
@@ -704,7 +704,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#collapsed' => FALSE,
                     '#title' => t('Residential service fees'),
                     //'#description' => t('Residential service fees'),
-                    '#tree' => TRUE,
+                    //'#tree' => TRUE,
                   );
                       $form['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] = array(
                         '#type' => 'textfield',
@@ -783,7 +783,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       '#title' => t('Features tags weights'),
                       '#collapsible' => TRUE,
                       '#collapsed' => TRUE,
-                      '#tree' => TRUE,
+                      //'#tree' => TRUE,
                       //'#description' => t(''),
                       '#weight' => $form['services']['s_residential']['field_p_re_features']['#weight'] + 1,
                     );
@@ -804,7 +804,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Business serviсes'),
               '#collapsible' => TRUE,
               '#collapsed' => TRUE,
-              '#tree' => TRUE,
+              //'#tree' => TRUE,
             );
                   $form['services']['s_business']['bu_preface_title'] = array(
                     '#type' => 'textfield',
@@ -844,7 +844,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#collapsed' => FALSE,
                     '#title' => t('Business service fees'),
                     //'#description' => t('Business service fees'),
-                    '#tree' => TRUE,
+                    //'#tree' => TRUE,
                   );
                       $form['services']['s_business']['bu_basicinfo_fees']['monthly_fees'] = array(
                         '#type' => 'textfield',
@@ -953,7 +953,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       '#title' => t('Features tags weights'),
                       '#collapsible' => TRUE,
                       '#collapsed' => TRUE,
-                      '#tree' => TRUE,
+                      //'#tree' => TRUE,
                       //'#description' => t(''),
                       '#weight' => $form['services']['s_business']['field_p_bu_features']['#weight'] + 1,
                     );
@@ -976,7 +976,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       '#title' => t('PBX Features tags weights'),
                       '#collapsible' => TRUE,
                       '#collapsed' => TRUE,
-                      '#tree' => TRUE,
+                      //'#tree' => TRUE,
                       //'#description' => t(''),
                       '#weight' => $form['services']['s_business']['field_p_bu_features_pbx']['#weight'] + 1,
                     );
@@ -1000,7 +1000,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       '#title' => t('SIP Features tags weights'),
                       '#collapsible' => TRUE,
                       '#collapsed' => TRUE,
-                      '#tree' => TRUE,
+                      //'#tree' => TRUE,
                       //'#description' => t(''),
                       '#weight' => $form['services']['s_business']['field_p_bu_features_sip']['#weight'] + 1,
                     );
@@ -1015,14 +1015,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                           }
                   }
 
-                  
-            $form['services']['s_international'] = array(
-              '#type' => 'fieldset',
-              '#title' => t('International serviсes'),
-              '#collapsible' => TRUE,
-              '#collapsed' => TRUE,
-              //'#description' => t(''),
-            );
+//                  
+//            $form['services']['s_international'] = array(
+//              '#type' => 'fieldset',
+//              '#title' => t('International serviсes'),
+//              '#collapsible' => TRUE,
+//              '#collapsed' => TRUE,
+//              //'#description' => t(''),
+//            );
             
             
       $form['data_quote'] = array(
