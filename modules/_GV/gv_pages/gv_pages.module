@@ -660,6 +660,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Provider services'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
+        '#tree' => TRUE,
         '#weight' => 11,
       );
             $form['services']['s_residential'] = array(
@@ -1780,7 +1781,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   
   $p_data['info'] = $form_state['values']['data_info'];
   $p_data['quote'] = $form_state['values']['data_quote'];
-  foreach ($p_data['services'] as $service_type => $value) {
+  foreach ($form_state['values']['services'] as $service_type => $value) {
     $p_data['services'][$service_type] = $value;
   }
   
