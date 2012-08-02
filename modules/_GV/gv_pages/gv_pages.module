@@ -670,65 +670,65 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#tree' => TRUE,
         '#weight' => 12,
       );
-            foreach ($service_types as $service_type => $service_type_short) {
+            foreach ($service_types as $service_type_key => $service_type_title) {
               
-              $form['s'][$service_type_short] = array(
+              $form['s'][$service_type_key] = array(
                 '#type' => 'fieldset',
-                '#title' => t("$service_type serviсes"),
+                '#title' => t("$service_type_title serviсes"),
                 '#collapsible' => TRUE,
                 '#collapsed' => TRUE,
               );
                   
               
                   // Descriptions fields
-                  foreach ($service_descriptions as $service_description_title => $service_description_short) {
+                  foreach ($service_descriptions as $service_description_key => $service_description_title) {
                     
-                    $form['s'][$service_type_short][$service_description_short] = array(
+                    $form['s'][$service_type_key][$service_description_key] = array(
                       '#type' => 'textfield',
                       '#title' => t($service_description_title),
-                      '#default_value' => isset($p_data['s'][$service_type_short][$service_description_short]) ? $p_data['s'][$service_type_short][$service_description_short] : '',
+                      '#default_value' => isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '',
                     );
                     
                   }
                   
                   // Fees
-                  $form['s'][$service_type_short]['fees'] = array(
+                  $form['s'][$service_type_key]['fees'] = array(
                     '#type' => 'fieldset',
                     '#collapsible' => TRUE,
                     '#collapsed' => FALSE,
-                    '#title' => t("$service_type services fees"),
+                    '#title' => t("$service_type_title services fees"),
                     //'#tree' => TRUE,
                   );
-                      foreach ($fee_types as $fee_type => $fee_type_data) {
+                      foreach ($fee_types as $fee_type_key => $fee_type_data) {
                         
-                        $form['s'][$service_type_short]['fees'][$fee_type_data[0]] = array(
+                        $form['s'][$service_type_key]['fees'][$fee_type_key] = array(
                           '#type' => 'textfield',
-                          '#title' => t($fee_type),
+                          '#title' => t($fee_type_data[0]),
                           '#field_prefix' => $fee_type_data[1],
-                          '#default_value' => isset($p_data['s'][$service_type_short]['fees'][$fee_type_data[0]]) ? $p_data['s'][$service_type_short]['fees'][$fee_type_data[0]] : '',
+                          '#default_value' => isset($p_data['s'][$service_type_key]['fees'][$fee_type_key]) ? $p_data['s'][$service_type_key]['fees'][$fee_type_key] : '',
                         );
                         
                       }
                       
                   
                   // Move defined via admin panel fields with a taxonomy autocomplete for corresponding Features tags to the corresponding fieldset.
-                  $form['s'][$service_type_short]['field_p_' . $service_type_short . '_features'] = $form['field_p_' . $service_type_short . '_features'];
-                  unset($form['field_p_' . $service_type_short . '_features']);
+                  $form['s'][$service_type_key]['field_p_' . $service_type_key . '_features'] = $form['field_p_' . $service_type_key . '_features'];
+                  unset($form['field_p_' . $service_type_key . '_features']);
                   
                   // Add tags weights editing window for corresponding features.
-                  if(isset($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features']) && !empty($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features'])) {
+                  if(isset($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
                     
-                      $form['s'][$service_type_short]['weights_' . $service_type_short . '_features'] = array(
+                      $form['s'][$service_type_key]['weights_' . $service_type_key . '_features'] = array(
                         '#type' => 'fieldset',
-                        '#title' => t("$service_type Features tags weights"),
+                        '#title' => t("$service_type_title Features tags weights"),
                         '#collapsible' => TRUE,
                         '#collapsed' => TRUE,
                         //'#tree' => TRUE,
-                        '#weight' => $form['s'][$service_type_short]['field_p_' . $service_type_short . '_features']['#weight'] + 1,
+                        '#weight' => $form['s'][$service_type_key]['field_p_' . $service_type_key . '_features']['#weight'] + 1,
                       );
 
-                            foreach($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features'] as $tid => $term) {
-                              $form['s'][$service_type_short]['weights_' . $service_type_short . '_features'][$tid] = array(
+                            foreach($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'] as $tid => $term) {
+                              $form['s'][$service_type_key]['weights_' . $service_type_key . '_features'][$tid] = array(
                                 '#type' => 'textfield',
                                 '#size' => 3,
                                 '#title' => t($term['name']),
