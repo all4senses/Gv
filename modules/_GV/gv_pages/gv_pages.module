@@ -660,15 +660,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Provider services'),
         '#collapsible' => TRUE,
         '#collapsed' => FALSE,
-        '#tree' => TRUE,
         '#weight' => 11,
+        '#tree' => TRUE,          
       );
             $form['services']['s_residential'] = array(
               '#type' => 'fieldset',
               '#title' => t('Residential serviсes'),
               '#collapsible' => TRUE,
               '#collapsed' => TRUE,
-              //'#description' => t(''),
+              '#tree' => TRUE,
             );
 
                   $form['services']['s_residential']['re_preface_title'] = array(
@@ -804,7 +804,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Business serviсes'),
               '#collapsible' => TRUE,
               '#collapsed' => TRUE,
-              //'#description' => t(''),
+              '#tree' => TRUE,
             );
                   $form['services']['s_business']['bu_preface_title'] = array(
                     '#type' => 'textfield',
