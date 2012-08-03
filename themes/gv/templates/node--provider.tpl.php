@@ -283,7 +283,7 @@
                                                 '</div>',
 
                                                 '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
-                                                '<div class="text">' , t($money_back) , '</div>';
+                                                '<div class="text">' , (isset($money_back) ? t($money_back) :  t('N/A')), '</div>';
 
                                         if ($features_weights) {
                                           echo '<div class="f caption">' , t('Available Features') , ':</div>';
