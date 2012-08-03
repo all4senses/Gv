@@ -239,7 +239,7 @@
                                         $other_fees = $p_services[$service_type_key]['fees']['oth'] ? $p_services[$service_type_key]['fees']['oth'] : t('N/A');
                                         */
                                         foreach ($fee_types as $fee_type_key => $fee_type_data) {
-                                          $p_fees[$fee_type_key] = $p_services[$service_type_key]['fees'][$fee_type_key] ? $p_services[$service_type_key]['fees'][$fee_type_key] : t('N/A');
+                                          $p_fees[$fee_type_key] = $p_services[$service_type_key]['fees'][$fee_type_key] ? $fee_types[$fee_type_key][1] . $p_services[$service_type_key]['fees'][$fee_type_key] : t('N/A');
                                         }
                                         $features_weights = isset($p_services[$service_type_key]['weights_' . $service_type_key . '_features']) ? $p_services[$service_type_key]['weights_' . $service_type_key . '_features'] : NULL;
                                         //$node->p_data['s']['re']['weights_re_features']
@@ -257,7 +257,7 @@
                                         $other_fees = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['other_fees'] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['other_fees'] : t('N/A');
                                         */
                                         foreach ($fee_types as $fee_type_key => $fee_type_data) {
-                                          $p_fees[$fee_type_key] = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] : t('N/A');
+                                          $p_fees[$fee_type_key] = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] ? $fee_types[$fee_type_key][1] . $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] : t('N/A');
                                         }
                                         $features_weights = isset($p_services[$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features']) ? $p_services[$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features'] : NULL;
                                         //$node->p_data['services']['s_residential']['weights_re_features']
@@ -273,13 +273,13 @@
 
                                         echo    '<div class="f caption">' , t('Pricing') , ':</div>',
                                                 '<div class="block-1">',
-                                                '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , ($p_fees['mon'] ? $p_fees['mon'] : t('N/A') ) , '</div></div>',
-                                                '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , ($p_fees['set'] ? $p_fees['set'] : t('N/A') ), '</div></div>',
-                                                '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , ($p_fees['can'] ? $p_fees['can'] : t('N/A') ) , '</div></div>',
+                                                '<div class="price"><div class="title">' , t('Monthly price') , ':</div><div class="fee">' , $p_fees['mon'] , '</div></div>',
+                                                '<div class="price"><div class="title">' , t('Setup Fees') , ':</div><div class="fee">' , $p_fees['set'], '</div></div>',
+                                                '<div class="price"><div class="title">' , t('Cancellation Fees') , ':</div><div class="fee">' , $p_fees['can'], '</div></div>',
                                                 '</div>',
                                                 '<div class="block-2">',
-                                                '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , ($p_fees['lng'] ? $p_fees['lng'] : t('N/A') ), '</div></div>',
-                                                '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , ($p_fees['oth'] ? $p_fees['oth'] : t('N/A') ) , '</div></div>',
+                                                '<div class="price"><div class="title">' , t('Long Distance') , ':</div><div class="fee">' , $p_fees['lng'], '</div></div>',
+                                                '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , $p_fees['oth'], '</div></div>',
                                                 '</div>',
 
                                                 '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
