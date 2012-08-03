@@ -1958,14 +1958,28 @@ function wdg_misc_getProviderData_fromView($target, $data) {
   switch($target) {
     
     case 'service_types':
-      $service_types = $data['data']->_field_data['nid']['entity']->field_p_types['und'];
+      $service_types = unserialize(SERVICE_TYPES);
+      $p_service_types = $data['data']->_field_data['nid']['entity']->field_p_types['und'];
       $types = '';
-      foreach ($service_types as $service_type) {
-        if ($service_type['value'] == $data['exposed_raw_input']['type']) {
-          $current_type = '<div class="type main">' . drupal_ucfirst($service_type['value']) . '</div>';
+      foreach ($p_service_types as $p_service_type) {
+        
+        if ($p_service_type['value'] == 'residential') {
+          $service_type_key = 're';
+        }
+        elseif ($p_service_type['value'] == 'business') {
+          $service_type_key = 'bu';
         }
         else {
-          $types .= '<div class="type">' . drupal_ucfirst($service_type['value']) . '</div>';
+          $service_type_key = $p_service_type['value'];
+        }
+        
+        if ($p_service_type['value'] == $data['exposed_raw_input']['type']) {
+          //$current_type = '<div class="type main">' . drupal_ucfirst($p_service_type['value']) . '</div>';
+          $current_type = '<div class="type main">' . $service_types[$service_type_key] . '</div>';
+        }
+        else {
+          //$types .= '<div class="type">' . drupal_ucfirst($p_service_type['value']) . '</div>';
+          $types .= '<div class="type">' . $service_types[$service_type_key] . '</div>';
         }
       }
       
