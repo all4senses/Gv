@@ -282,3 +282,371 @@ function validate() {
 
 }
 
+
+
+
+
+  
+            
+      /*      
+      $form['services'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Provider services'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#weight' => 11,
+        '#tree' => TRUE,          
+      );
+            $form['services']['s_residential'] = array(
+              '#type' => 'fieldset',
+              '#title' => t('Residential serviсes'),
+              '#collapsible' => TRUE,
+              '#collapsed' => TRUE,
+              //'#tree' => TRUE,
+            );
+
+                  $form['services']['s_residential']['re_preface_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Preface title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_preface_title']) ? $p_data['services']['s_residential']['re_preface_title'] : '',
+                  );
+                  $form['services']['s_residential']['re_preface_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('Preface text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_preface_text']) ? $p_data['services']['s_residential']['re_preface_text'] : '',
+                  );
+                  
+                  
+                  
+                  $form['services']['s_residential']['re_basicinfo_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Basic info title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_title']) ? $p_data['services']['s_residential']['re_basicinfo_title'] : '',
+                  );
+                  $form['services']['s_residential']['re_basicinfo_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('Basic info text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_text']) ? $p_data['services']['s_residential']['re_basicinfo_text'] : '',
+                  );
+                  $form['services']['s_residential']['re_basicinfo_fees'] = array(
+                    '#type' => 'fieldset',
+                    '#collapsible' => TRUE,
+                    '#collapsed' => FALSE,
+                    '#title' => t('Residential service fees'),
+                    //'#description' => t('Residential service fees'),
+                    //'#tree' => TRUE,
+                  );
+                      $form['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Monthly fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['setup_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Setup fees'),
+                        //'#description' => t(''),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['setup_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['shipping_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Shipping fees'),
+                        //'#description' => t(''),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['shipping_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['shipping_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['cancel_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Cancellation fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['cancel_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['cancel_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Long distance fees'),
+                        //'#description' => t(''),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['longdistance_fees'] : '',
+                      );
+                      $form['services']['s_residential']['re_basicinfo_fees']['other_fees'] = array(
+                        '#type' => 'textarea',
+                        '#title' => t('Other fees'),
+                        '#description' => t('Please set other fees (one per line) in the format "Fee 1 title: $0.5/hour"'),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_residential']['re_basicinfo_fees']['other_fees']) ? $p_data['services']['s_residential']['re_basicinfo_fees']['other_fees'] : '',
+                      );
+                    
+                  
+                  $form['services']['s_residential']['re_money_back_guarantee'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Money Back Guarentee'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_money_back_guarantee']) ? $p_data['services']['s_residential']['re_money_back_guarantee'] : '',
+                  );
+                  
+            
+                  $form['services']['s_residential']['re_specialnotes_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Special notes title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_specialnotes_title']) ? $p_data['services']['s_residential']['re_specialnotes_title'] : '',
+                  );
+                  $form['services']['s_residential']['re_specialnotes_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('Special notes text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_residential']['re_specialnotes_text']) ? $p_data['services']['s_residential']['re_specialnotes_text'] : '',
+                  );
+                  
+                  // Move defined via admin panel fields with a taxonomy autocomplete for Features Residential tags to the corresponding fieldset.
+                  $form['services']['s_residential']['field_p_re_features'] = $form['field_p_re_features'];
+                  unset($form['field_p_re_features']);
+                  
+                  // Add tags weights editing window for residential features.
+                  if(isset($p_data['services']['s_residential']['weights_re_features']) && !empty($p_data['services']['s_residential']['weights_re_features'])) {
+                  
+                    $form['services']['s_residential']['weights_re_features'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      //'#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_residential']['field_p_re_features']['#weight'] + 1,
+                    );
+
+                          foreach($p_data['services']['s_residential']['weights_re_features'] as $tid => $term) {
+                            $form['services']['s_residential']['weights_re_features'][$tid] = array(
+                              '#type' => 'textfield',
+                              '#size' => 3,
+                              '#title' => t($term['name']),
+                              '#default_value' => $term['weight'],
+                            );
+                          }
+                  }
+                    
+                  
+            $form['services']['s_business'] = array(
+              '#type' => 'fieldset',
+              '#title' => t('Business serviсes'),
+              '#collapsible' => TRUE,
+              '#collapsed' => TRUE,
+              //'#tree' => TRUE,
+            );
+                  $form['services']['s_business']['bu_preface_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Preface title'),
+                    //'#description' => t(''),
+                    //'#required' => TRUE,
+                    '#default_value' => isset($p_data['services']['s_business']['bu_preface_title']) ? $p_data['services']['s_business']['bu_preface_title'] : '',
+                  );
+                  $form['services']['s_business']['bu_preface_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('Preface text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_preface_text']) ? $p_data['services']['s_business']['bu_preface_text'] : '',
+                  );
+                  
+                  
+                  
+                  $form['services']['s_business']['bu_basicinfo_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Basic info title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_title']) ? $p_data['services']['s_business']['bu_basicinfo_title'] : '',
+                  );
+                  $form['services']['s_business']['bu_basicinfo_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('Basic info text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_text']) ? $p_data['services']['s_business']['bu_basicinfo_text'] : '',
+                  );
+                  
+                  
+                  
+                  
+                  $form['services']['s_business']['bu_basicinfo_fees'] = array(
+                    '#type' => 'fieldset',
+                    '#collapsible' => TRUE,
+                    '#collapsed' => FALSE,
+                    '#title' => t('Business service fees'),
+                    //'#description' => t('Business service fees'),
+                    //'#tree' => TRUE,
+                  );
+                      $form['services']['s_business']['bu_basicinfo_fees']['monthly_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Monthly fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['monthly_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['setup_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Setup fees'),
+                        //'#description' => t(''),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['setup_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['shipping_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Shipping fees'),
+                        //'#description' => t(''),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['shipping_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['shipping_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['cancel_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Cancellation fees'),
+                        //'#description' => t(''),
+                        '#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['cancel_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['cancel_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['longdistance_fees'] = array(
+                        '#type' => 'textfield',
+                        '#title' => t('Long distance fees'),
+                        //'#description' => t(''),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['longdistance_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['longdistance_fees'] : '',
+                      );
+                      $form['services']['s_business']['bu_basicinfo_fees']['other_fees'] = array(
+                        '#type' => 'textarea',
+                        '#title' => t('Other fees'),
+                        '#description' => t('Please set other fees (one per line) in the format "Fee 1 title: $0.5/hour"'),
+                        //'#field_prefix' => '$',
+                        '#default_value' => isset($p_data['services']['s_business']['bu_basicinfo_fees']['other_fees']) ? $p_data['services']['s_business']['bu_basicinfo_fees']['other_fees'] : '',
+                      );
+                      
+                  
+                  $form['services']['s_business']['bu_money_back_guarantee'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Money Back Guarentee'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_money_back_guarantee']) ? $p_data['services']['s_business']['bu_money_back_guarantee'] : '',
+                  );
+                  
+            
+                  $form['services']['s_business']['bu_specialnotes_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('Special notes title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_specialnotes_title']) ? $p_data['services']['s_business']['bu_specialnotes_title'] : '',
+                  );
+                  $form['services']['s_business']['bu_specialnotes_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('Special notes text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_specialnotes_text']) ? $p_data['services']['s_business']['bu_specialnotes_text'] : '',
+                  );
+                  
+                  $form['services']['s_business']['bu_pbxpreface_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('PBX preface title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_pbxpreface_title']) ? $p_data['services']['s_business']['bu_pbxpreface_title'] : '',
+                  );
+                  $form['services']['s_business']['bu_pbxpreface_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('PBX preface text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_pbxpreface_text']) ? $p_data['services']['s_business']['bu_pbxpreface_text'] : '',
+                  );
+                  
+                  $form['services']['s_business']['bu_sippreface_title'] = array(
+                    '#type' => 'textfield',
+                    '#title' => t('SIP preface title'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_sippreface_title']) ? $p_data['services']['s_business']['bu_sippreface_title'] : '',
+                  );
+                  $form['services']['s_business']['bu_sippreface_text'] = array(
+                    '#type' => 'textarea',
+                    '#title' => t('SIP preface text'),
+                    //'#description' => t(''),
+                    '#default_value' => isset($p_data['services']['s_business']['bu_sippreface_text']) ? $p_data['services']['s_business']['bu_sippreface_text'] : '',
+                  );
+                  
+                  // Move defined via admin panel fields with a taxonomy autocomplete for Features Business tags to the corresponding fieldset.
+                  $form['services']['s_business']['field_p_bu_features'] = $form['field_p_bu_features'];
+                  unset($form['field_p_bu_features']);
+                  $form['services']['s_business']['field_p_bu_features_pbx'] = $form['field_p_bu_features_pbx'];
+                  unset($form['field_p_bu_features_pbx']);
+                  $form['services']['s_business']['field_p_bu_features_sip'] = $form['field_p_bu_features_sip'];
+                  unset($form['field_p_bu_features_sip']);
+                  
+                  // Add tags weights editing window for residential features.
+                  if(isset($p_data['services']['s_business']['weights_bu_features']) && !empty($p_data['services']['s_business']['weights_bu_features'])) {
+                    
+                    $form['services']['s_business']['weights_bu_features'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      //'#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_business']['field_p_bu_features']['#weight'] + 1,
+                    );
+
+                          foreach($p_data['services']['s_business']['weights_bu_features'] as $tid => $term) {
+                            $form['services']['s_business']['weights_bu_features'][$tid] = array(
+                              '#type' => 'textfield',
+                              '#size' => 3,
+                              '#title' => t($term['name']),
+                              '#default_value' => $term['weight'],
+                            );
+                          }
+                  }
+                  
+                  // Add tags weights editing window for PBX residential features.
+                  if(isset($p_data['services']['s_business']['weights_bu_features_pbx']) && !empty($p_data['services']['s_business']['weights_bu_features_pbx'])) {
+                    
+                    $form['services']['s_business']['weights_bu_features_pbx'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('PBX Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      //'#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_business']['field_p_bu_features_pbx']['#weight'] + 1,
+                    );
+
+                          foreach($p_data['services']['s_business']['weights_bu_features_pbx'] as $tid => $term) {
+                            $form['services']['s_business']['weights_bu_features_pbx'][$tid] = array(
+                              '#type' => 'textfield',
+                              '#size' => 3,
+                              '#title' => t($term['name']),
+                              '#default_value' => $term['weight'],
+                            );
+                          }
+                  }
+                  
+                        
+                  // Add tags weights editing window for SIP residential features.
+                  if(isset($p_data['services']['s_business']['weights_bu_features_sip']) && !empty($p_data['services']['s_business']['weights_bu_features_sip'])) {
+                    
+                    $form['services']['s_business']['weights_bu_features_sip'] = array(
+                      '#type' => 'fieldset',
+                      '#title' => t('SIP Features tags weights'),
+                      '#collapsible' => TRUE,
+                      '#collapsed' => TRUE,
+                      //'#tree' => TRUE,
+                      //'#description' => t(''),
+                      '#weight' => $form['services']['s_business']['field_p_bu_features_sip']['#weight'] + 1,
+                    );
+
+                          foreach($p_data['services']['s_business']['weights_bu_features_sip'] as $tid => $term) {
+                            $form['services']['s_business']['weights_bu_features_sip'][$tid] = array(
+                              '#type' => 'textfield',
+                              '#size' => 3,
+                              '#title' => t($term['name']),
+                              '#default_value' => $term['weight'],
+                            );
+                          }
+                  }
+
+      */  

@@ -659,8 +659,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $service_types = unserialize(SERVICE_TYPES);
       $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
       $fee_types = unserialize(FEE_TYPES);
+      $load_key = 's';
       
+      if (!isset($p_data['s'])) {
+        $load_key = 'services';
+        $old_service_types = array('re' => 's_residential', 'bu' => 's_business');
+        $old_service_descriptions = array('pti' => 'preface_title', 'pte' => 'preface_text', 'biti' => 'basicinfo_title', 'bite' => 'basicinfo_text', 'snti' => 'specialnotes_title', 'snte' => 'specialnotes_text', 'mbg' => 'money_back_guarantee');
+        $old_fee_types = array('mon' => 'monthly_fees', 'set' => 'setup_fees', 'shp' => 'shipping_fees', 'can' => 'cancel_fees', 'lng' => 'longdistance_fees', 'oth' => 'other_fees' );
+      }
       
+      //$p_data['s']['re']['pti']
+      //$p_data['services']['s_residential']['re_preface_title']
       
       $form['s'] = array(
         '#type' => 'fieldset',
@@ -686,7 +695,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     $form['s'][$service_type_key][$service_description_key] = array(
                       '#type' => 'textfield',
                       '#title' => t($service_description_title),
-                      '#default_value' => isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '',
+                      //'#default_value' => isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '',
+                      '#default_value' => $load_key == 's' 
+                                           ?
+                                          (isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '')
+                                          //$p_data['s']['re']['pti']
+                                           :
+                                          (isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]]) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]] : ''),
+                                          //$p_data['services']['s_residential']['re_preface_title']
+                      
                     );
                     
                   }
@@ -705,8 +722,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                           '#type' => 'textfield',
                           '#title' => t($fee_type_data[0]),
                           '#field_prefix' => $fee_type_data[1],
-                          '#default_value' => isset($p_data['s'][$service_type_key]['fees'][$fee_type_key]) ? $p_data['s'][$service_type_key]['fees'][$fee_type_key] : '',
-                        );
+                          //'#default_value' => isset($p_data['s'][$service_type_key]['fees'][$fee_type_key]) ? $p_data['s'][$service_type_key]['fees'][$fee_type_key] : '',
+                          '#default_value' => $load_key == 's' 
+                                              ?
+                                              (isset($p_data['s'][$service_type_key]['fees'][$fee_type_key]) ? $p_data['s'][$service_type_key]['fees'][$fee_type_key] : '')
+                                              // $p_data['s']['re']['fees']['mon']
+                                              :
+                                              (isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]]) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] : ''),
+                        );                    // $p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees']
                         
                       }
                       
@@ -716,7 +739,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   unset($form['field_p_' . $service_type_key . '_features']);
                   
                   // Add tags weights editing window for corresponding features.
-                  if(isset($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
+                  if ($load_key == 's' && isset($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
+                    $features_weights = $p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'];
+                    //$p_data['services']['re']['weights_re_features'];
+                  }
+                  elseif ($load_key == 'services' && isset($p_data['services'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
+                    $features_weights = $p_data['services'][$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features'];
+                    //$p_data['services']['s_residential']['weights_re_features'];
+                  }
+                  else {
+                    $features_weights = NULL;
+                  }
+                  
+                  if($features_weights) {
                     
                       $form['s'][$service_type_key]['weights_' . $service_type_key . '_features'] = array(
                         '#type' => 'fieldset',
@@ -727,7 +762,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#weight' => $form['s'][$service_type_key]['field_p_' . $service_type_key . '_features']['#weight'] + 1,
                       );
 
-                            foreach($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'] as $tid => $term) {
+                            foreach($features_weights as $tid => $term) {
                               $form['s'][$service_type_key]['weights_' . $service_type_key . '_features'][$tid] = array(
                                 '#type' => 'textfield',
                                 '#size' => 3,
@@ -736,7 +771,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                               );
                             }
                             
-                  } // End of if(isset($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features']) && !empty($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features'])) {
+                  } // End of if($features_weights) {
                   
               
             } // End of foreach ($service_types as $service_type => $service_type_short) {

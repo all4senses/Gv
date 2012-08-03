@@ -152,9 +152,27 @@
                 </div>
                 
                 <?php 
+                
+                    dpm($node->p_data);
+                    /*
+                    $load_key = 's';
+                    
+                    if (!isset($p_data['s'])) {
+                      $load_key = 'services';
+                      $old_service_types = array('re' => 's_residential', 'bu' => 's_business');
+                      $old_service_descriptions = array('pti' => 'preface_title', 'pte' => 'preface_text', 'biti' => 'basicinfo_title', 'bite' => 'basicinfo_text', 'snti' => 'specialnotes_title', 'snte' => 'specialnotes_text', 'mbg' => 'money_back_guarantee');
+                      $old_fee_types = array('mon' => 'monthly_fees', 'set' => 'setup_fees', 'shp' => 'shipping_fees', 'can' => 'cancel_fees', 'lng' => 'longdistance_fees', 'oth' => 'other_fees' );
+                    }
+                    */
+      
                     $count = 2;
                     foreach ($node->field_p_types['und'] as $type) {
-                      
+                      /*
+                      if ($load_key == 's') {
+                        $basicinfo_title = $node->p_data['services'][$key][$prefix . '_basicinfo_title'];
+                        
+                      }
+                      */
                       switch ($type['value']) {
                         case 'business':
                           $key = 's_business';
