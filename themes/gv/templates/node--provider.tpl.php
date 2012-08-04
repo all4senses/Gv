@@ -245,7 +245,7 @@
                                       echo '<div id="tabs-' . $count++ . '">';
 
                                         if ($basicinfo_title) {
-                                          echo  '<div class="f caption first">' , t($basicinfo_title) , ':</div>',
+                                          echo  '<div class="f caption first">' , t($basicinfo_title) , '</div>',
                                                 '<div class="text">' , t($basicinfo_text) , '</div>';
                                         }
 
