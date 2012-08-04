@@ -2154,6 +2154,20 @@ function gv_misc_refineServiceTypeKey($source_key) {
   }
 }
 
+
+function gv_misc_refineServiceTypeKey_Reverse($source_key) {
+  if ($source_key == 're') {
+    return 'residential';
+  }
+  elseif ($source_key == 'bu') {
+    return 'business';
+  }
+  else {
+    return $source_key;
+  }
+}
+
+
 /**
  * Forms API validation function for email.
  */

@@ -686,8 +686,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 '#title' => t("$service_type_title serviсes"),
                 '#collapsible' => TRUE,
                 '#collapsed' => TRUE,
+                '#states' => array(
+                                  // Hide the this service section when a corresponding checkbox is disabled.
+                                  'invisible' => array(
+                                      ':input[value="' . gv_misc_refineServiceTypeKey_Reverse($service_type_key) . '"]' => array('checked' => FALSE),
+                                ),
+                            ),
               );
                   
+              
+              
               
                   // Descriptions fields
                   foreach ($service_descriptions as $service_description_key => $service_description_title) {
