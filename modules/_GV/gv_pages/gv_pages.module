@@ -736,7 +736,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   
                   // Move defined via admin panel fields with a taxonomy autocomplete for corresponding Features tags to the corresponding fieldset.
                   $form['s'][$service_type_key]['field_p_' . $service_type_key . '_features'] = $form['field_p_' . $service_type_key . '_features'];
-                  //unset($form['field_p_' . $service_type_key . '_features']);
                   $form['field_p_' . $service_type_key . '_features']['#access'] = FALSE;
                   
                   // Add tags weights editing window for corresponding features.
@@ -1929,12 +1928,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     if (isset($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features'])) {
       uasort($p_data['s'][$service_type_short]['weights_' . $service_type_short . '_features'], 'wdg_misc_sortArrayByWeight');
     }
-    
+
     // Save collected FEES data from temporary fields to a excessive field for using it from views
-    if (isset($p_data['s'][$service_type_short]['fees'])) {
-      $p_fees_save[$service_type_short] = $p_data['s'][$service_type_short]['fees'];
-    }
-    
+    $p_fees_save[$service_type_short] = $p_data['s'][$service_type_short]['fees'];
    
   }
   /*
@@ -2013,17 +2009,6 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
   
-  // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
-  form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
-  
-  // Save collected FEES data from temporary fields to a excessive field for using it from views
-  if(isset($p_fees_save)) {
-    form_set_value($form['field_p_fees_save'], array('und' => array(0 => array('value' => serialize($p_fees_save)))), $form_state);
-    // Reset a helper session var with all fees.
-    if (isset($_SESSION['all_fees'])) {
-      unset($_SESSION['all_fees']);
-    }
-  }
 
   
   /*
@@ -2115,15 +2100,34 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   */
   
   
+  // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
+  form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
   
-  //dpm($p_data_quick);
+  // Before saving, remove unused services from quick data fields.
+  foreach ($form_state['values']['field_p_types']['und'] as $used_type) {
+    // Collect used services keys.
+    $used_service_type_keys[] = gv_misc_refineServiceTypeKey($used_type['value']);
+  }
+  foreach ($p_fees_save as $key => $value) {
+    // If it is a service key and it's  not used.
+    if (!in_array($key, $used_service_type_keys)) {
+      unset($p_fees_save[$key], $p_data_quick[$key]);
+    }
+  }
   
+  // Save collected FEES data from temporary fields to a excessive field for using it from views
+  form_set_value($form['field_p_fees_save'], array('und' => array(0 => array('value' => serialize($p_fees_save)))), $form_state);
+  // Reset a helper session var with all fees.
+  if (isset($_SESSION['all_fees'])) {
+    unset($_SESSION['all_fees']);
+  }
+
   form_set_value($form['field_p_data_quick'], array('und' => array(0 => array('value' => serialize($p_data_quick)))), $form_state);
-//  // Reset a helper session var with all quick data.
+//  //Reset a helper session var with all quick data.
 //  if(isset($_SESSION['p_all_data_quick'])) {
 //    unset($_SESSION['p_all_data_quick']);
 //  }
-  //gv_misc_getProvidersDataQuick('all', TRUE);
+//  //gv_misc_getProvidersDataQuick('all', TRUE);
   
   dpm($p_data);
   dpm($p_fees_save);
