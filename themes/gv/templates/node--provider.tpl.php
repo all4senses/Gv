@@ -166,27 +166,19 @@
                           $fee_types = unserialize(FEE_TYPES);
 
                           $load_key = 's';
-                          if (!isset($p_data['s'])) {
-                            $p_services = $p_data['services'];
+                          if (!isset($node->p_data['s'])) {
+                            $p_services = $node->p_data['services'];
                             $load_key = 'services';
                             $old_service_types = array('re' => 's_residential', 'bu' => 's_business');
                             $old_service_descriptions = array('pti' => 'preface_title', 'pte' => 'preface_text', 'biti' => 'basicinfo_title', 'bite' => 'basicinfo_text', 'snti' => 'specialnotes_title', 'snte' => 'specialnotes_text', 'mbg' => 'money_back_guarantee');
                             $old_fee_types = array('mon' => 'monthly_fees', 'set' => 'setup_fees', 'shp' => 'shipping_fees', 'can' => 'cancel_fees', 'lng' => 'longdistance_fees', 'oth' => 'other_fees' );
                           }
                           else {
-                            $p_services = $p_data['s'];
+                            $p_services = $node->p_data['s'];
                           }
 
                           foreach ($node->field_p_types['und'] as $type) {
-                            if ($type['value'] == 'residential') {
-                              $service_type_key = 're';
-                            }
-                            elseif ($type['value'] == 'business') {
-                              $service_type_key = 'bu';
-                            }
-                            else {
-                              $service_type_key = $type['value'];
-                            }
+                            $service_type_key = gv_misc_refineServiceTypeKey($type['value']);
                             echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => $service_types[$service_type_key])) . '</a></li>';
                           }
                     
@@ -214,17 +206,7 @@
                       
                             if ($user->uid == 1) {
 
-
-                                      if ($type['value'] == 'residential') {
-                                        $service_type_key = 're';
-                                      }
-                                      elseif ($type['value'] == 'business') {
-                                        $service_type_key = 'bu';
-                                      }
-                                      else {
-                                        $service_type_key = $type['value'];
-                                      }
-
+                                      $service_type_key = gv_misc_refineServiceTypeKey($type['value']);
 
                                       if ($load_key == 's') {
                                         $basicinfo_title = $p_services[$service_type_key]['pti'];
