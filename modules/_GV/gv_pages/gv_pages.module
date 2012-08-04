@@ -1903,7 +1903,10 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data['quote'] = $form_state['values']['data_quote'];
   
   foreach ($form_state['values']['s'] as $service_type_short => $value) {
-    
+   
+     // Restore an original features field.
+    form_set_value($form['field_p_' . $service_type_short . '_features'], $form_state['values']['s'][$service_type_short]['field_p_' . $service_type_short . '_features'], $form_state);
+  
     $p_data['s'][$service_type_short] = $value;
     // Initially unset Features and its Weights
     unset($p_data['s'][$service_type_short]['field_p_' . $service_type_short . '_features']);
@@ -1930,6 +1933,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     if (isset($p_data['s'][$service_type_short]['fees'])) {
       $p_fees_save[$service_type_short] = $p_data['s'][$service_type_short]['fees'];
     }
+    
+   
   }
   /*
   // Save weights for Re Features (on the next editing).
