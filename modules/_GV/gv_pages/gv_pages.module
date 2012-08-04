@@ -743,7 +743,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     $features_weights = $p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'];
                     //$p_data['services']['re']['weights_re_features'];
                   }
-                  elseif (isset($old_service_types[$service_type_key]) && $load_key == 'services' && isset($p_data['services'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
+                  elseif (isset($old_service_types[$service_type_key]) && isset($p_data['services'][$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features']) && !empty($p_data['services'][$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features'])) {
                     $features_weights = $p_data['services'][$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features'];
                     //$p_data['services']['s_residential']['weights_re_features'];
                   }
