@@ -701,7 +701,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                                           (isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '')
                                           //$p_data['s']['re']['pti']
                                            :
-                                          (isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]]) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]] : ''),
+                                          ( (isset($old_service_types[$service_type_key]) && isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]]) ) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]] : ''),
                                           //$p_data['services']['s_residential']['re_preface_title']
                       
                     );
@@ -728,7 +728,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                                               (isset($p_data['s'][$service_type_key]['fees'][$fee_type_key]) ? $p_data['s'][$service_type_key]['fees'][$fee_type_key] : '')
                                               // $p_data['s']['re']['fees']['mon']
                                               :
-                                              (isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]]) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] : ''),
+                                              ( (isset($old_service_types[$service_type_key]) && isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]]) ) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] : ''),
                         );                    // $p_data['services']['s_residential']['re_basicinfo_fees']['monthly_fees']
                         
                       }
@@ -743,7 +743,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     $features_weights = $p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'];
                     //$p_data['services']['re']['weights_re_features'];
                   }
-                  elseif ($load_key == 'services' && isset($p_data['services'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
+                  elseif (isset($old_service_types[$service_type_key]) && $load_key == 'services' && isset($p_data['services'][$service_type_key]['weights_' . $service_type_key . '_features']) && !empty($p_data['s'][$service_type_key]['weights_' . $service_type_key . '_features'])) {
                     $features_weights = $p_data['services'][$old_service_types[$service_type_key]]['weights_' . $service_type_key . '_features'];
                     //$p_data['services']['s_residential']['weights_re_features'];
                   }
