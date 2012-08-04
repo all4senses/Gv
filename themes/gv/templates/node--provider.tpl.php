@@ -149,18 +149,14 @@
 //                    if ($user->uid == 1) {
                       
                           
-                          $p_fees_save = unserialize($node->field_p_fees_save['und'][0]['value']);
-                          $p_data_quick = unserialize($node->field_p_data_quick['und'][0]['value']);
-                          dpm($node->p_data);
-                          dpm($p_fees_save);
-                          dpm($p_data_quick);
-                      
+                          //$p_fees_save = unserialize($node->field_p_fees_save['und'][0]['value']);
+                          //$p_data_quick = unserialize($node->field_p_data_quick['und'][0]['value']);
                           //$service_types = serialize(array('re' => 'Residential', 'bu' => 'Business', 'mo' => 'Mobile', 'ifa' => 'Internet Fax', 'pbx' => 'Hosted PBX', 'sip' => 'SIP Trunking', 'cc' => 'Call Center'));
                           //$service_descriptions = serialize(array('pti' => 'Preface title', 'pte' => 'Preface text', 'biti' => 'Basic info title', 'bite' => 'Basic info text', 'snti' => 'Special notes title', 'snte' => 'Special notes text', 'mbg' => 'Money Back Guarentee'));
                           //$fee_types = serialize(array('mon' => array('Monthly fees', '$'), 'set' => array('Setup fees', ''), 'shp' => array('Shipping fees', ''), 'can' => array('Cancellation fees', '$'), 'lng' => array('Long distance fees', ''), 'oth' => array('Other fees', '') ));
 
                           $service_types = unserialize(SERVICE_TYPES);
-                          $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
+                          //$service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
                           $fee_types = unserialize(FEE_TYPES);
 
                           $load_key = 's';
