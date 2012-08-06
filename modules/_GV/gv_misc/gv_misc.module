@@ -367,6 +367,23 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
 }
 
 
+function gv_misc_rewriteLinks($type, $data) {
+  switch ($type) {
+    case 'pdfs':
+      // $data = $form_state
+      // $body = $form_state['values']['body']['und'][0]['value'];
+      $body = $form_state['values']['body'];
+      dpm($body);
+//      if (preg_match('/<img[^>]+>/i', $body['und'][0]['value'], $matches)) {
+//        preg_match_all('/(alt|title|src)="([^"]*)"/i',$matches[0], $matches);
+//        foreach ($matches[1] as $index => $key) {
+//          $main_image[$key] = $matches[2][$index];
+//        }
+//      }
+      break;
+  }
+  return NULL;
+}
 
 /**
  * Convert path from Drupal stream uri.
@@ -772,13 +789,9 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
     $path = 'node/add/review';
   }
 //  elseif (preg_match('|^pdfs\/(.*)|', $path, $matches)) {
-////    dpm('inbound');
-////    dpm($path);
-////    dpm($matches);
 //    //$path = 'pdfs/voipe911-advisory.pdf';
 //    $path = 'sites/default/files/pdfs/' . $matches[1];
 //    //$path = '';
-////    dpm($path);
 //  }
 }
 
@@ -796,12 +809,8 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
     $path = 'voip-provider-submit-user-review';
   }
   elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
-////    dpm('outbound');
-////    dpm($path);
-////    dpm($matches);
-//    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
+    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
     $path = 'pdfs/' . $matches[1];
-////    dpm($path);
   }
 }
 
