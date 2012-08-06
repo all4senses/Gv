@@ -772,6 +772,7 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
     $path = 'node/add/review';
   }
   elseif (preg_match('|pdfs\/(.*)|', $path, $matches)) {
+    dpm('inbound');
     dpm($matches);
     //$path = 'pdfs/voipe911-advisory.pdf';
     $path = 'sites/default/files/pdfs/' . $matches[1];
@@ -793,6 +794,7 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
     $path = 'voip-provider-submit-user-review';
   }
   elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
+    dpm('outbound');
     //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
     $path = 'pdfs/' . $matches[1];
   }
