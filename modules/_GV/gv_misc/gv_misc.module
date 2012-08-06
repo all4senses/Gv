@@ -794,10 +794,14 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
  */
 function gv_misc_testPage() {
   
-  $path = 'user/23/edit';
-  preg_match('|^user\/(.*)\/(.*)|', $path, $matches);
+  $path = 'files/pdfs/23/edit';
+  preg_match('|pdfs\/(.*)\/(.*)|', $path, $matches);
   dpm($matches);
-  //$result = url('user/' . $matches[1]) . '/' . $matches[2];
+  $path = 'pdfs/23/edit';
+  preg_match('|^pdfs\/(.*)\/(.*)|', $path, $matches);
+  dpm($matches);
+    
+//$result = url('user/' . $matches[1]) . '/' . $matches[2];
   
   return 'End of Test';
 }
