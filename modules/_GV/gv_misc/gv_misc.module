@@ -387,11 +387,11 @@ function gv_misc_rewriteLinks($type, $data, $direction = 'forward') {
       else {
         // $body = $form_state['body']
         $body = $data['body'];
-        if ($body['und'][0]['#defaut_value']) {
-          $body['und'][0]['#defaut_value'] = preg_replace('|"/pdfs|', '"/sites/default/files/pdfs', $body['und'][0]['#defaut_value'], -1);
+        if ($body['und'][0]['#default_value']) {
+          $body['und'][0]['#default_value'] = preg_replace('|"/pdfs|', '"/sites/default/files/pdfs', $body['und'][0]['#defaut_value'], -1);
         }
-        if ($body['und'][0]['summary']['#defaut_value']) {
-          $body['und'][0]['summary']['#defaut_value'] = preg_replace('|"/pdfs|', '"/sites/default/files/pdfs', $body['und'][0]['summary']['#defaut_value'], -1);
+        if ($body['und'][0]['summary']['#default_value']) {
+          $body['und'][0]['summary']['#default_value'] = preg_replace('|"/pdfs|', '"/sites/default/files/pdfs', $body['und'][0]['summary']['#defaut_value'], -1);
         }
         return $body;
       }
