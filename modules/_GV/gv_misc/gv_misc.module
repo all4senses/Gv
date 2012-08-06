@@ -795,14 +795,14 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
   if ($path == 'node/add/review') {
     $path = 'voip-provider-submit-user-review';
   }
-//  elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
-//    dpm('outbound');
-//    dpm($path);
-//    dpm($matches);
-//    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
-//    $path = 'pdf/' . $matches[1];
-//    dpm($path);
-//  }
+  elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
+    dpm('outbound');
+    dpm($path);
+    dpm($matches);
+    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
+    $path = 'pdf/' . $matches[1];
+    dpm($path);
+  }
 }
 
 
@@ -811,6 +811,9 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
  */
 function gv_misc_testPage() {
   
+  $link = 'sites/default/files/pdfs/voipe911-advisory.pdf';
+  dpm(l('test', $link));
+    
   $path = '/sites/default/files/pdfs/voipe911-advisory.pdf';
   preg_match('|(\/sites\/default\/files\/pdfs\/)(.*)|', $path, $matches);
   dpm($matches);
