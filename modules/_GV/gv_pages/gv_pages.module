@@ -1835,7 +1835,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   form_set_value($form[$target_field], $tags, $form_state);
   
   // Replace real pdfs links with short aliased links.
-  if ($new_body = gv_misc_rewriteLinks('pdfs', $form_state)) {
+  global $user;
+  if ($user->uid == 1 && $new_body = gv_misc_rewriteLinks('pdfs', $form_state)) {
     form_set_value($form['body'], $new_body, $form_state);
   }
   
