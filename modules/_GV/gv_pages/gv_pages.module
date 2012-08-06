@@ -436,7 +436,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'blog_post_node_form':
     case 'article_node_form':
       
-        dpm($form);
+        //dpm($form);
+        
+        // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
         $form['body'] = gv_misc_rewriteLinks('pdfs', $form, 'back');
         
         // Hide second specific Tags field for news/blog/articles for a corresponding content type.
@@ -1835,13 +1837,13 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   }
   form_set_value($form[$target_field], $tags, $form_state);
   
-  // Replace real pdfs links with short aliased links.
+  // Replace real links /sites/default/files/pdfs/ with /pdfs/
   global $user;
   if ($user->uid == 1 && $new_body = gv_misc_rewriteLinks('pdfs', $form_state)) {
     form_set_value($form['body'], $new_body, $form_state);
   }
   
-  dpm($form_state['values']['body']);
+  //dpm($form_state['values']['body']);
   
   // Define a main image and build a custom teaser.
   $data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
