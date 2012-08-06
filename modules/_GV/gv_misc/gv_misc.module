@@ -812,7 +812,7 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
 function gv_misc_testPage() {
   
   $link = 'sites/default/files/pdfs/voipe911-advisory.pdf';
-  dpm(l('test', $link));
+  return l('test', $link);
     
   $path = '/sites/default/files/pdfs/voipe911-advisory.pdf';
   preg_match('|(\/sites\/default\/files\/pdfs\/)(.*)|', $path, $matches);
