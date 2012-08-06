@@ -367,24 +367,32 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
 }
 
 
-function gv_misc_rewriteLinks($type, $data) {
+function gv_misc_rewriteLinks($type, $data, $direction = 'forward') {
   switch ($type) {
     case 'pdfs':
       // $data = $form_state
       // $body = $form_state['values']['body']['und'][0]['value'];
       $body = $data['values']['body'];
+      if ($direction == 'forward') {
+        $pattern_from = 'sites/default/files/pdfs';
+        $pattern_to = 'pdfs';
+      }
+      else {
+        $pattern_from = 'pdfs';
+        $pattern_to = 'sites/default/files/pdfs';
+      }
        // <a href="/sites/default/files/pdfs/voipe911-advisory.pdf">pdffff</a>
-      dpm($body);
+      //dpm($body);
       $count1 = $count2 = 0;
       if ($body['und'][0]['value']) {
-        $body['und'][0]['value'] = preg_replace('|sites/default/files/pdfs|', 'pdfs', $body['und'][0]['value'], -1, $count1);
+        $body['und'][0]['value'] = preg_replace("|$pattern_from|", $pattern_to, $body['und'][0]['value'], -1, $count1);
       }
-      dpm($count1);
+      //dpm($count1);
       if ($body['und'][0]['summary']) {
-        $body['und'][0]['summary'] = preg_replace('|sites/default/files/pdfs|', 'pdfs', $body['und'][0]['summary'], -1, $count2);
+        $body['und'][0]['summary'] = preg_replace("|$pattern_from|", $pattern_to, $body['und'][0]['summary'], -1, $count2);
       }
-      dpm($count2);
-      dpm($body);
+      //dpm($count2);
+      //dpm($body);
       if ($count1 + $count2 > 0) {
         return $body;
       }
