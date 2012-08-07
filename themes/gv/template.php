@@ -181,10 +181,10 @@ function gv_preprocess_views_view_row_rss(&$vars) {
 function gv_preprocess_views_view_unformatted(&$vars) {
   
   if( ($vars['view']->name == 'articles' || $vars['view']->name == 'blog' || $vars['view']->name == 'news') && $vars['view']->current_display == 'page') {
-    $vars['theme_hook_suggestions'][] = 'views-view-unformatted__articles__page';
+    $vars['theme_hook_suggestions'][0] = 'views-view-unformatted__articles__page';
   }
   //elseif($vars['view']->name == 'articles' && $vars['view']->current_display == 'page')
-  dpm($vars);
+  //dpm($vars);
 }
 
 
