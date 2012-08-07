@@ -230,7 +230,7 @@ function gv_preprocess_views_view(&$vars) {
 //  }
   
   if (isset($vars['view']->name) && ($vars['view']->name == 'articles' || $vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
-    $function = 'gv_preprocess_views_view__unformatted'; 
+    $function = 'gv_preprocess_views_view_unformatted'; 
     if (function_exists($function)) {
      $function($vars);
     }
