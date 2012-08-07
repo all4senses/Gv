@@ -178,14 +178,15 @@ function gv_preprocess_views_view_row_rss(&$vars) {
 /**
  * Display the simple view of rows one after another
  */
+/*
 function gv_preprocess_views_view_unformatted(&$vars) {
   
   if( ($vars['view']->name == 'articles' || $vars['view']->name == 'blog' || $vars['view']->name == 'news') && $vars['view']->current_display == 'page') {
     $vars['theme_hook_suggestions'][] = 'views-view-unformatted__articles__page';
   }
-  //elseif($vars['view']->name == 'articles' && $vars['view']->current_display == 'page')
-  //dpm($vars);
+  
 }
+*/
 
 
 /**
@@ -219,7 +220,7 @@ function gv_captcha($variables) {
 /**
  * Preprocess the primary theme implementation for a view.
  */
-
+/*
 function gv_preprocess_views_view(&$vars) {
   
   // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
@@ -228,19 +229,18 @@ function gv_preprocess_views_view(&$vars) {
 //      $vars['title'] = '<h1>' . $vars['view']->get_title() . '</h1>'; //str_replace('%1', $vars['view']->build_info['substitutions']['%1'], $vars['view']->build_info['title']); 
 //    }  
 //  }
+
+  // hasn't worked out to make use one temlate for different views unformatted
   
   if (isset($vars['view']->name) && ($vars['view']->name == 'articles' || $vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
     $function = 'gv_preprocess_views_view_unformatted'; 
     if (function_exists($function)) {
      $function($vars);
-     dpm($vars);
     }
   }
   
-  
-  
 }
-/**/
+*/
 
 
 /*

@@ -6,7 +6,7 @@
  * @ingroup views_templates
  */
 
-dpm('test---------------------->');
+dpm('test---------------------->news');
 ?>
 <?php if (!empty($title)): ?>
   <h3><?php print $title; ?></h3>
