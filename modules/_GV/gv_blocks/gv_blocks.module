@@ -239,7 +239,7 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
 function gv_pages_getTopProvidersBlocksForArticlesDirectory() {
   
   global $user;
-  if ($user->uid != 1) {
+  if (!in_array('administrator', $user->roles)) {
     return NULL;
   }
     
