@@ -179,7 +179,10 @@ function gv_preprocess_views_view_row_rss(&$vars) {
  * Display the simple view of rows one after another
  */
 function gv_preprocess_views_view_unformatted(&$vars) {
-  dpm($vars);
+  //dpm($vars);
+  if($vars['view']-name == 'blog') {
+    $vars['theme_hook_suggestions'][] = 'views-view-unformatted__articles';
+  }
 }
 
 
