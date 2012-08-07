@@ -229,7 +229,15 @@ function gv_preprocess_views_view(&$vars) {
 //    }  
 //  }
   
+  if (isset($vars['view']->name) && ($vars['view']->name == 'articles' || $vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
+    $function = 'gv_preprocess_views_view__unformatted'; 
+    if (function_exists($function)) {
+     $function($vars);
+    }
+  }
+  
   dpm($vars);
+  
 }
 /**/
 
