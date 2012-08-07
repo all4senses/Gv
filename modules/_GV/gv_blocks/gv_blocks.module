@@ -243,11 +243,6 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
  */
 function gv_pages_getTopProvidersBlocksForArticlesDirectory() {
   
-  global $user;
-  if (!in_array('administrator', $user->roles)) {
-    return NULL;
-  }
-    
   $out = '<div class="providers dir">';
   $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_bu', 'shadow' => TRUE);
   $out .= gv_blocks_getBlockThemed($block_data);
