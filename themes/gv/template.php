@@ -178,7 +178,7 @@ function gv_preprocess_views_view_row_rss(&$vars) {
 /**
  * Display the simple view of rows one after another
  */
-
+/*
 function gv_preprocess_views_view_unformatted(&$vars) {
   
   if( ($vars['view']->name == 'blog' || $vars['view']->name == 'news') && $vars['view']->current_display == 'page') {
@@ -189,7 +189,7 @@ function gv_preprocess_views_view_unformatted(&$vars) {
   
   
 }
-/**/
+*/
 
 
 /**
@@ -223,7 +223,7 @@ function gv_captcha($variables) {
 /**
  * Preprocess the primary theme implementation for a view.
  */
-
+/*
 function gv_preprocess_views_view(&$vars) {
   
   // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
@@ -243,7 +243,7 @@ function gv_preprocess_views_view(&$vars) {
   }
   
 }
-/**/
+*/
 
 
 /*

@@ -5,7 +5,7 @@
  *
  * @ingroup views_templates
  */
-
+dpm($rows);
 dpm('test---------------------->blog');
 ?>
 <?php if (!empty($title)): ?>
