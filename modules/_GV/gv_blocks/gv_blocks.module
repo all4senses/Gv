@@ -224,7 +224,9 @@ function gv_blocks_block_view($delta = '') {
 }
 
 
-
+/**
+ * Returns a two themed blocks with Top pick providers for the All Reviews page
+ */
 function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
   $out = '<div class="providers areviews">';
   $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_bu_areviews', 'shadow' => TRUE);
@@ -236,6 +238,9 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
 }
 
 
+/**
+ * Returns a two themed blocks with Top pick providers for the Articles (news, blog, etc) directory page 
+ */
 function gv_pages_getTopProvidersBlocksForArticlesDirectory() {
   
   global $user;
