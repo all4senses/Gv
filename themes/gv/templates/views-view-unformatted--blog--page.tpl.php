@@ -18,7 +18,7 @@ global $user;
   
   if ($user->uid == 1 && $id == 2) {
     echo 'test';
-    echo gv_pages_getTopPickProvidersBlocksForAllReviewsPage();
+    echo gv_pages_getTopProvidersBlocksForArticlesDirectory();
   }
   ?>
   

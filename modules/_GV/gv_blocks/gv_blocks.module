@@ -235,6 +235,20 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
   return $out;
 }
 
+
+function gv_pages_getTopProvidersBlocksForArticlesDirectory() {
+  
+  $out = '<div class="providers">';
+  $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_bu', 'shadow' => TRUE);
+  $out .= gv_blocks_getBlockThemed($block_data);
+  $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_re', 'shadow' => TRUE);
+  $out .= gv_blocks_getBlockThemed($block_data);
+  $out .= '<div class="bottom-clear"></div>';
+  $out .= '</div>';
+  return $out;
+}
+
+
 /**
  * Returns a themed topics block for a specific content type.
  * 
