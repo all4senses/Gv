@@ -223,7 +223,7 @@ function gv_captcha($variables) {
 /**
  * Preprocess the primary theme implementation for a view.
  */
-/*
+
 function gv_preprocess_views_view(&$vars) {
   
   // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
@@ -235,7 +235,7 @@ function gv_preprocess_views_view(&$vars) {
 
   // hasn't worked out to make use one temlate for different views unformatted
   
-  if (isset($vars['view']->name) && ($vars['view']->name == 'articles' || $vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
+  if (isset($vars['view']->name) && ($vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
     $function = 'gv_preprocess_views_view_unformatted'; 
     if (function_exists($function)) {
      $function($vars);
@@ -243,7 +243,7 @@ function gv_preprocess_views_view(&$vars) {
   }
   
 }
-*/
+/**/
 
 
 /*
