@@ -184,7 +184,7 @@ function gv_preprocess_views_view_unformatted(&$vars) {
     $vars['theme_hook_suggestions'][] = 'views-view-unformatted__articles__page';
   }
   //elseif($vars['view']->name == 'articles' && $vars['view']->current_display == 'page')
-  //dpm($vars);
+  dpm($vars);
 }
 
 
