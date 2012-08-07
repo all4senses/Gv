@@ -248,7 +248,7 @@ function gv_pages_getTopProvidersBlocksForArticlesDirectory() {
     return NULL;
   }
     
-  $out = '<div class="providers">';
+  $out = '<div class="providers dir">';
   $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_bu', 'shadow' => TRUE);
   $out .= gv_blocks_getBlockThemed($block_data);
   $block_data = array('module' => 'views', 'delta' => 'providers-block_pick_re', 'shadow' => TRUE);
