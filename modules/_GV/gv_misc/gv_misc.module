@@ -1464,7 +1464,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
           ->fields('pt', array('field_p_types_value'))
           ->fields('pn', array('field_p_name_value')) 
           ->condition('n.type', 'provider')
-          //->condition('pt.field_p_types_value', $data)
+          ->condition('pt.field_p_types_value', $data)
           ->condition('n.status', 1); 
     $result = $query->execute(); 
 
