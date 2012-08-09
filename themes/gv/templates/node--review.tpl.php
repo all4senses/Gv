@@ -12,19 +12,30 @@
                 
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
                   <h1 property="dc:title v:summary" 
-                <?php elseif($_SERVER['REDIRECT_URL'] == '/providers/reviews'): ?>
-                  <h2 property="dc:title v:summary"
                 <?php else: ?>
-                  <h3 property="dc:title v:summary"
+                    <?php 
+                    $full_title_urls = array('/providers/reviews', '/business-voip-reviews');
+                    if (in_array($_SERVER['REDIRECT_URL'], $full_title_urls)) {
+                      $full_title = TRUE;
+                    }
+                    else {
+                      $full_title = FALSE;
+                    }
+                    ?>
+                    <?php if($full_title): ?>
+                      <h2 property="dc:title v:summary"
+                    <?php else: ?>
+                      <h3 property="dc:title v:summary"
+                    <?php endif; ?>
                 <?php endif; ?>
                   
                 <?php /*print $title_attributes;*/ ?>>
                     <?php if (!$page): ?>
-                      <a href="<?php print ($_SERVER['REDIRECT_URL'] == '/providers/reviews' && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
+                      <a href="<?php print ($full_title && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
                     <?php endif; ?>
                         
                       <?php 
-                        echo ($_SERVER['REDIRECT_URL'] == '/providers/reviews' || $page ? $node->field_r_provider_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
+                        echo ($full_title || $page ? $node->field_r_provider_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
                         //if ($page) {
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
@@ -115,7 +126,7 @@
             
               echo '<div class="rlinks">' 
                   . (
-                      $page || $_SERVER['REDIRECT_URL'] == '/providers/reviews' 
+                      $page || $full_title 
                       ? 
                         ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '">View All <span class="review-provider">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span> Reviews</a> <span class="delim">|</span>')
                       . ( (!isset($content['provider_url']) || !$content['provider_url']) ? '' : '<a href="' . $content['provider_url'] . '"> <span class="review-provider">Visit <span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></span></a> <span class="delim">|</span>')

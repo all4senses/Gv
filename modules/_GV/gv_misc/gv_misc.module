@@ -1434,7 +1434,7 @@ function theme_gv_misc_fivestar_static($variables) {
 /**
  * Returns all available providers aray with nid => title.
  */
-function gv_misc_getProviders(&$providers, $scope = 'all') {
+function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
   
   if ($scope == 'all') {
     $query = db_select('node', 'n');
@@ -1450,6 +1450,30 @@ function gv_misc_getProviders(&$providers, $scope = 'all') {
     foreach($result as $provider) {
       $providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
     }
+
+    // Sort providers alphabetically.
+    //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
+    //asort($providers); 
+    natcasesort($providers);
+  }
+  elseif ($scope == 'all_by_service_type') {
+    $query = db_select('node', 'n');
+    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
+    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
+    $query->fields('n', array('nid', 'title'))  
+          ->fields('pt', array('field_p_types_value'))
+          ->fields('pn', array('field_p_name_value')) 
+          ->condition('n.type', 'provider')
+          //->condition('pt.field_p_types_value', $data)
+          ->condition('n.status', 1); 
+    $result = $query->execute(); 
+
+    foreach($result as $provider) {
+      $providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
+      $p[$provider->nid] = $provider;
+    }
+    
+    dpm($p);
 
     // Sort providers alphabetically.
     //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
@@ -1738,7 +1762,7 @@ function gv_misc_views_pre_render(&$view) {
     case 'view-reviews-block_all_reviews_bu':
       
       $providers = array('' => t('- All Providers -'));
-      gv_misc_getProviders($providers, 'all_including_others_from_reviews');
+      gv_misc_getProviders($providers, 'all_by_service_type', 'business');
 
       if (isset($_GET['provider']) && isset($providers[$_GET['provider']])) {
         $provider_isset = TRUE;
