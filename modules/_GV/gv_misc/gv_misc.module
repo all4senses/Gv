@@ -1763,9 +1763,9 @@ function gv_misc_views_pre_render(&$view) {
     case 'view-reviews-block_all_reviews_re':
       
       $providers = array('' => t('- All Providers -'));
-      
+      $p_key = $key;
       $r_p_types = array('view-reviews-block_all_reviews_bu' => array('business', 'Business'), 'view-reviews-block_all_reviews_re' => array('residential', 'Residential'));
-      gv_misc_getProviders($providers, 'all_by_service_type', $r_p_types[$key][0]);
+      gv_misc_getProviders($providers, 'all_by_service_type', $r_p_types[$p_key][0]);
 
       if (isset($_GET['provider']) && isset($providers[$_GET['provider']])) {
         $provider_isset = TRUE;
@@ -1783,7 +1783,7 @@ function gv_misc_views_pre_render(&$view) {
 
       $select_providers['all-reviews-select-providers'] = array(
           '#type' => 'select',
-          '#title' => t('Choose a ' . $r_p_types[$key][1] .' Provider'),
+          '#title' => t('Choose a ' . $r_p_types[$p_key][1] .' Provider'),
           '#options' => $providers,
           '#default_value' => $provider_isset ? $providers[$_GET['provider']] : $providers[''],
           '#value' => $provider_isset ? $providers[$_GET['provider']] : $providers[''],
