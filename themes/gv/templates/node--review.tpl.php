@@ -14,7 +14,7 @@
                   <h1 property="dc:title v:summary" 
                 <?php else: ?>
                     <?php 
-                    $full_title_urls = array('/providers/reviews', '/business-voip-reviews');
+                    $full_title_urls = array('/providers/reviews', '/business-voip-reviews', '/residential-voip-reviews');
                     if (in_array($_SERVER['REDIRECT_URL'], $full_title_urls)) {
                       $full_title = TRUE;
                     }
@@ -23,9 +23,9 @@
                     }
                     ?>
                     <?php if($full_title): ?>
-                      <h2 property="dc:title v:summary"
+                      <h2 class="rcaption" property="dc:title v:summary"
                     <?php else: ?>
-                      <h3 property="dc:title v:summary"
+                      <h3 class="rcaption" property="dc:title v:summary"
                     <?php endif; ?>
                 <?php endif; ?>
                   
