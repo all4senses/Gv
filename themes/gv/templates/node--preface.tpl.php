@@ -45,7 +45,9 @@
      <div class="share">
        <div class="main">
         
-        <?php global $user; if(/*$user->uid == */1): ?> 
+        <?php 
+              // No significant improvements with addthis buttons set... It bacame even slower.
+              /*global $user; if($user->uid == 1): ?> 
          
 
               <!-- AddThis Button BEGIN -->
@@ -59,7 +61,7 @@
             <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-50253baf64925d35"></script>
             <!-- AddThis Button END -->
 
-         <?php else: ?> 
+         <?php else: */?> 
          
         <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
         <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
