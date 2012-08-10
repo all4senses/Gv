@@ -45,7 +45,7 @@
      <div class="share">
        <div class="main">
         
-        <?php global $user; if($user->uid == 1): ?> 
+        <?php global $user; if(/*$user->uid == */1): ?> 
          
 
               <!-- AddThis Button BEGIN -->
