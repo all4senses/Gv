@@ -67,6 +67,9 @@ function gv_misc_menu_alter(&$items) {
  
 }
 
+function gv_misc_stamp() {
+  return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
+}
 
 /**
  * Get prefaces main section rendered.
