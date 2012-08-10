@@ -59,7 +59,14 @@
           
           <?php print render($page['above_content']); ?>
           <?php print render($page['content']); ?>
-
+          
+          <?php 
+          global $user;
+          if ($user->uid == 1) {
+            echo '<div class="ts">' . t('Last updated time: ') . time() . '</div>';
+          }
+          ?>
+          
       </section> <!-- /#main -->
 
 
