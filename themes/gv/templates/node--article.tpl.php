@@ -281,3 +281,5 @@
   <!-- <div class="shadow"></div> -->
   </article> <!-- /.node -->
 <?php endif; ?>
+
+ <?php echo '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>'; ?>
