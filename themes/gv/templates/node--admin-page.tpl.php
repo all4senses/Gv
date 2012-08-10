@@ -84,3 +84,5 @@
 <?php else: ?>
   </div> <!-- <div class="main-content"> -->
 <?php endif; ?>
+
+<?php echo '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>'; ?>
