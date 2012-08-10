@@ -63,7 +63,9 @@
           <?php 
           global $user;
           if ($user->uid == 1) {
-            echo '<div class="ts">' . t('Last updated time: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
+            dpm('Front:' . $is_front);
+            dpm('Front:' . $front);
+            echo '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
           }
           ?>
           
