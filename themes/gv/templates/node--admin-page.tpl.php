@@ -98,7 +98,7 @@
 <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 <a class="addthis_button_tweet"></a>
 </div>
-<script type="text/javascript">var addthis_config = {"data_track_addressbar":true, ui_language:"en"};</script>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true, ui_language:"en", locale:"en_US"};</script>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-50253baf64925d35"></script>
 <!-- AddThis Button END -->
 
