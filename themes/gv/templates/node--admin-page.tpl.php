@@ -95,7 +95,7 @@
 <div class="addthis_toolbox addthis_default_style ">
 <a class="addthis_button_linkedin_counter"></a>
 <a class="addthis_button_google_plusone"></a>
-<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:locale="en_US"></a>
 <a class="addthis_button_tweet"></a>
 </div>
 <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, ui_language:"en", locale:"en_US"};</script>
