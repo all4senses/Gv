@@ -61,11 +61,11 @@
           <?php print render($page['content']); ?>
           
           <?php 
-          global $user;
-          if (/*$user->uid == */1) {
-            //if($is_front)
-            //  echo '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
-          }
+          //global $user;
+          //if ($user->uid == 1) {
+            if($is_front)
+              echo gv_misc_lastUpdatedStamp();
+          //}
           ?>
           
       </section> <!-- /#main -->

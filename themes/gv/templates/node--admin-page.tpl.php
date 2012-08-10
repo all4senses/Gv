@@ -84,5 +84,3 @@
 <?php else: ?>
   </div> <!-- <div class="main-content"> -->
 <?php endif; ?>
-
-<?php echo gv_misc_stamp(); ?>
