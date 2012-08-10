@@ -63,7 +63,7 @@
           <?php 
           global $user;
           if ($user->uid == 1) {
-            echo '<div class="ts">' . t('Last updated time: ') . time() . '</div>';
+            echo '<div class="ts">' . t('Last updated time: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
           }
           ?>
           
