@@ -15,24 +15,24 @@ module_load_include('inc', 'gv_blocks', 'inc/constants');
 function gv_blocks_block_info() {
   $blocks['main_menu_om_news'] = array(
     'info' => t('OM News'), 
-    'cache' => DRUPAL_NO_CACHE, // DRUPAL_CACHE_GLOBAL
+    'cache' => DRUPAL_CACHE_GLOBAL, // DRUPAL_CACHE_GLOBAL
   );
   $blocks['main_menu_om_bus_voip'] = array(
     'info' => t('OM Business VoIP'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['main_menu_om_res_voip'] = array(
     'info' => t('OM Residential VoIP'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
   $blocks['main_menu_om_voiplibrary'] = array(
     'info' => t('OM VoIP Library'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['main_menu_om_blog'] = array(
     'info' => t('OM Blog'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['main_menu_om_aboutus'] = array(
     'info' => t('OM About Us'),
@@ -51,15 +51,15 @@ function gv_blocks_block_info() {
   
   $blocks['request_quote'] = array(
     'info' => t('Request a quote block'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['request_quote_v2'] = array(
     'info' => t('Request a quote block v2'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['request_quote_v3'] = array(
     'info' => t('Request a quote block v3'),
-    'cache' => DRUPAL_NO_CACHE,
+    'cache' => DRUPAL_CACHE_GLOBAL,
   );  
   
   
@@ -106,7 +106,7 @@ function gv_blocks_block_info() {
     
     $blocks[$content_type . '_topics'] = array(
       'info' => t(drupal_ucfirst($label) . ' topics'),
-      'cache' => DRUPAL_NO_CACHE,
+      'cache' => DRUPAL_CACHE_GLOBAL,
     );
   }
   
