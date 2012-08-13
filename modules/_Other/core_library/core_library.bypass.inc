@@ -16,7 +16,7 @@
  * names for HTML inclusion, therefore will proceed to a file copy right after
  * each aggregated file has been created.
  * 
- * @param array $map
+ * @param string $map
  *   Mapped filename.
  * @param array $medias
  *   Key value pairs, keys are CSS media property, values are Drupal core CSS

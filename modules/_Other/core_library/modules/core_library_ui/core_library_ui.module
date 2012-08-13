@@ -238,9 +238,7 @@ function core_library_ui_js_alter(&$javascript) {
   // Aggregate statistics if configured for.
   if (variable_get('core_library_collect', FALSE)) {
     foreach ($javascript as $file => $data) {
-      if ('file' === $data['type']) {
-        core_library_update_stats($file, $data, 'js');
-      }
+      core_library_update_stats($file, $data, 'js');
     }
   }
 }
@@ -252,9 +250,7 @@ function core_library_ui_css_alter(&$css) {
   // Aggregate statistics if configured for.
   if (variable_get('core_library_collect', FALSE)) {
     foreach ($css as $file => $data) {
-      if ('file' === $data['type']) {
-        core_library_update_stats($file, $data, 'css');
-      }
+      core_library_update_stats($file, $data, 'css');
     }
   }
 }

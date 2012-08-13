@@ -31,6 +31,22 @@ This module produces really a few side-effects, depeing on the theme coding
 mainly. We bypass core mecanism, but keep sanefully files weighting which will
 avoid most potential conflicts.
 
+Status
+------
+
+Version 7.x-2.x now rely on the Resource Handling provided module for building
+files. Instead of bypassing core mecanism, it still uses it but lazzy build the
+files when the user hit it for the first time.
+
+This is a much more cleaner pattern. Now Core Library module's only responsible
+for CSS and JS on the fly regrouping, while the Resource Handling module is the
+key to avoid multiple I/O, and provides a generic pluggable API for URL based
+file generation.
+
+Both modules coupled provide a better core integration, which significantly
+reduce bugs chances, and ensure a better integration with other performances
+messing modules.
+
 Motivation
 ----------
 

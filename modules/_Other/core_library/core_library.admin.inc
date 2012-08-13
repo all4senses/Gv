@@ -12,14 +12,15 @@ function core_library_admin_settings($form, &$form_state) {
 
   $form['bypass'] = array(
     '#type' => 'fieldset',
-    '#title' => t("Drupal aggregation mecanism bypass"),
+    '#title' => t("Aggregation leaning mode"),
     '#collapsible' => FALSE,
   );
   $form['bypass']['core_library_bypass'] = array(
     '#type' => 'radios',
     '#options' => array(
       NULL => t("Disabled") . '<br/><small>' . t("Let Drupal core do what it has to do. If you select this, you should then disable this module.") . '</small>',
-      LIBRARY_MODE_MANUAL => t("Manual") . '<br/><small>' . t("Let the site admin choose which file should go through the aggregation process. This needs the Core Library Advanced UI module to be enabled at least to choose the files.") . '</small>',
+      // FIXME:
+      // LIBRARY_MODE_MANUAL => t("Manual") . '<br/><small>' . t("Let the site admin choose which file should go through the aggregation process. This needs the Core Library Advanced UI module to be enabled at least to choose the files.") . '</small>',
       LIBRARY_MODE_LEARNING_ANONYMOUS => t("Anonymous only") . '<br/><small>' . t("Automatically learn files that are being used for anymous users only.") . '</small>',
       LIBRARY_MODE_LEARNING_NO_ADMIN => t("All, no admin") . '<br/><small>' . t("Automatically learn files to aggregate while users browse, excluding the administration pages.") . '</small>',
       LIBRARY_MODE_LEARNING_ALL => t("All <cite>Pinage!</cite>") . '<br/><small>' . t("Automatically learn files to aggregate while users browse, including administration pages.") . '</small>',
@@ -62,8 +63,12 @@ function core_library_admin_settings($form, &$form_state) {
   $form['advanced']['core_library_js_minify'] = array(
     '#type' => 'checkbox',
     '#title' => t("Minify JS"),
-    '#default_value' => variable_get('core_library_js_minify', FALSE),
-    '#description' => t("If checked, the system will attempt to minify JS files. This can lead to some JS crashing since a lot of custom JS files may not have been well formatted. Browsers are tolerant while minifier is not on JS syntax."),
+    // FIXME:
+    '#default_value' => FALSE, //variable_get('core_library_js_minify', FALSE),
+    '#description' => t("If checked, the system will attempt to minify JS files. This can lead to some JS crashing since a lot of custom JS files may not have been well formatted. Browsers are tolerant while minifier is not on JS syntax.")
+      . '<br/><strong>' . t("Minify JS files can accidently remove licence headers and disclaimers. Only you are being responsible for legal consequences if you enable this option.") . '</strong>',
+    // FIXME:
+    '#disabled' => TRUE,
   );
 
   $form = system_settings_form($form);
@@ -127,7 +132,7 @@ function core_library_admin_settings_submit_clear($form, &$form_state) {
   variable_del('core_library_css_status');
   variable_del('core_library_updated');
   drupal_set_message(t("Current aggregation settings have been removed."));
-  
+
   $current_mode = variable_get('core_library_bypass', NULL);
   if ($current_mode == LIBRARY_MODE_BYPASS || $current_mode == LIBRARY_MODE_MANUAL) {
     variable_set('core_library_bypass', NULL);
