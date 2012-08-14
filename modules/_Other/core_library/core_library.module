@@ -287,41 +287,6 @@ function core_library_bypass_mode() {
 }
 
 /**
- * Implements hook_element_info_alter().
- * 
- * Depending on the actual aggregation mode we are, we will change the current
- * JS / CSS aggregation functions to ensure Drupal won't ever, ever attempt any
- * file_exists() or hash compute while we are sure our CSS and JS files are
- * stable and cover the full site.
- */
-function core_library_element_info_alter(&$type) {
-  // Change the 'style' element type rendering if needed.
-  if (core_library_bypass_mode() == LIBRARY_MODE_BYPASS) {
-
-    // Force our file to be included if needed.
-    require_once drupal_get_path('module', 'core_library') . '/core_library.bypass.inc';
-
-    $type['styles'] = array(
-      '#items' => array(),
-      '#pre_render' => array('core_library_element_style_pre_render'),
-    );
-  }
-}
-
-/**
- * Implements hook_init(). 
- */
-function core_library_init() {
-  // We will aggregate libraries files only if are not in learning mode.
-  // Learning mode will find them as classic files, without having to known
-  // if they are part of a library or not.
-  if (core_library_bypass_mode() == LIBRARY_MODE_MANUAL) {
-    require_once drupal_get_path('module', 'core_library') . '/core_library.manual.inc';
-    core_library_manual_init();
-  }
-}
-
-/**
  * Single point where all exclusion rules happen.
  *
  * @param string $type
@@ -423,7 +388,7 @@ function _core_library_merge(&$array, $type) {
   // found, this won't happen anymore.
   // Once the maximum files are being found, you should then switch to manual
   // mode, it will use the exact same variables we are being populating here
-  // and will won't attempt to do the array difference here.
+  // and won't attempt to do the array difference here.
   // We do it before the real file alteration to ensure that newly found files
   // will also be aggregated the first hit.
   if ($do_learn) {
@@ -522,7 +487,10 @@ function core_library_css_alter(&$css) {
  * Implements hook_help().
  */
 function core_library_help($path, $arg) {
+  $messages = array();
+
   switch ($path) {
+
     case 'admin/config/development/library':
       $messages[] = t("This page allows you to configure advanced CSS and JS files aggregation rules. The Core Library module assumes that aggregating all CSS and JS files together on every page -even if they are not being always used- will provide better CSS and JS files cache hit over a long term usage and save more bandwith than core conditional aggregation algorithm.");
       $messages[] = t("Notice that when changing the aggregation mode you need to refresh your aggressive cache page, if enabled. The module won't do it by itself and will let you do so to ensure it won't happen during frequentation pikes.");
@@ -530,5 +498,9 @@ function core_library_help($path, $arg) {
         drupal_set_message(t("The Core Library module has been updated and requires you to reset the learnt files so far. If you don't experience PHP notices, CSS malfunctions, or JS errors you can safely ignore this message."), 'error');
       }
       break;
+  }
+
+  if (!empty($messages)) {
+    return '<p>' . implode('</p><p>', $messages) . '</p>';
   }
 }
