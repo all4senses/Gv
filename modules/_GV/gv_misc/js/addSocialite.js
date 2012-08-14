@@ -5,7 +5,7 @@
        
        //$('#header').one('mouseenter', function()
        //$('body').one('mouseenter', function()
-       $('body').one('mouseover', function()
+       $('#bshadow').one('mouseover', function()
         {
           Socialite.load('.social-buttons');
         });
