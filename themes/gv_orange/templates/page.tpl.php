@@ -20,7 +20,7 @@
         </a>
         <div class="descr">
           <div class="title">2012 VOIP GUIDE</div>
-          <div class="subtitle">SERVICE PROVIDER REVIEWS</div><div class="stars"><img src="/sites/all/themes/gv_orange/css/images/voip-reviews-ratings.png" alt="VoIP Reviews" title="VoIP Reviews"/></div>
+          <div class="subtitle">SERVICE PROVIDER REVIEWS</div><div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="VoIP Reviews" title="VoIP Reviews"/></div>
         </div>
       </div>
       
