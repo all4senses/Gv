@@ -1,30 +1,15 @@
-//(function ($) {
-//
-//  Drupal.behaviors.gv_addSocialite = {
-//    attach: function (context, settings) {
-//       
-//       
-//       Socialite.load('.social-buttons');
-//       /*
-//       $('#header').one('mouseenter', function()
-//        {
-//          Socialite.load('.social-buttons');
-//        });
-//        */
-//    
-//    }
-//  };
-//
-//}(jQuery));
-
-
-
 (function ($) {
-  
-    $(document).ready(function() { 
 
-      Socialite.load('.social-buttons');
-
-    });
+  Drupal.behaviors.gv_addSocialite = {
+    attach: function (context, settings) {
+       
+       //$('#header').one('mouseenter', function()
+       $('body').one('mouseenter', function()
+        {
+          Socialite.load('.social-buttons');
+        });
     
+    }
+  };
+
 }(jQuery));
