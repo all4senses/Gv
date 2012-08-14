@@ -8,7 +8,8 @@
           console.log($(this));
           console.log($(this)[0]);
           
-          Socialite.load($(this)[0]);
+          //Socialite.load($(this)[0]);
+          Socialite.load($(this));
         });
     
     }
