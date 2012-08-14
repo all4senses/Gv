@@ -8,7 +8,10 @@
               <header>
             <?php endif; ?>
                 
+                
                 <?php print render($title_prefix); ?>
+                
+                <?php $full_title = FALSE; ?>
                 
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
                   <h1 property="dc:title v:summary" 
@@ -17,9 +20,6 @@
                     $full_title_urls = array('/providers/reviews', '/business-voip-reviews', '/residential-voip-reviews');
                     if (in_array($_SERVER['REDIRECT_URL'], $full_title_urls)) {
                       $full_title = TRUE;
-                    }
-                    else {
-                      $full_title = FALSE;
                     }
                     ?>
                     <?php if($full_title): ?>
