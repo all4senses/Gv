@@ -4,16 +4,12 @@
     attach: function (context, settings) {
        
        
-       $('#block-views-news-block').one('mouseenter', function()
-        //$('#main').one('mouseenter', function()
+       $('#header').one('mouseenter', function()
         {
-          console.log($(this));
-          console.log($(this)[0]);
+          //Socialite.load($(this)[0]); // Works
+          ////Socialite.load($(this)); // Works
           
-          //Socialite.load($(this)[0]);
-          ////Socialite.load($(this));
-          
-          Socialite.load('#main');
+          Socialite.load('.social-buttons');
           
         });
     
