@@ -47,7 +47,7 @@
         
         <?php 
               // No significant improvements with addthis buttons set... It bacame even slower.
-              global $user; if($user->uid == 1): ?>
+              global $user; if($user->uid != 1): ?>
               
               <?php echo gv_blocks_getSocialiteButtons(); ?> 
 
