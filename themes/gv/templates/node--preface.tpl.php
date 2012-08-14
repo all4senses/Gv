@@ -47,48 +47,38 @@
         
         <?php 
               // No significant improvements with addthis buttons set... It bacame even slower.
-              /*global $user; if($user->uid == 1): ?> 
+              global $user; if($user->uid == 1): ?>
+              
+              <?php echo gv_blocks_getSocialiteButtons(); ?> 
+
+         <?php else: ?> 
          
+              <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+              <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
 
-              <!-- AddThis Button BEGIN -->
-            <div class="addthis_toolbox addthis_default_style ">
-            <a class="addthis_button_linkedin_counter"></a>
-            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-            <a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:locale="en_US"></a>
-            <a class="addthis_button_tweet"></a>
-            </div>
-            <script type="text/javascript">var addthis_config = {"data_track_addressbar":true, ui_language:"en", locale:"en_US"};</script>
-            <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-50253baf64925d35"></script>
-            <!-- AddThis Button END -->
+              <script type="text/javascript">
+                (function() {
+                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                  po.src = 'https://apis.google.com/js/plusone.js';
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                })();
+              </script>
+              <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
 
-         <?php else: */?> 
-         
-        <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-        <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
+              <div id="fb-root"></div>
+              <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));</script>
+              <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
 
-        <script type="text/javascript">
-          (function() {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-          })();
-        </script>
-        <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
-
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
-
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         
-        <?php //endif; ?> 
+        <?php endif; // Of else of if($user->uid == 1) ?> 
         
        </div><!-- main -->
       </div> <!-- share buttons -->
