@@ -4,14 +4,13 @@
     attach: function (context, settings) {
        
        
+       Socialite.load('.social-buttons');
+       /*
        $('#header').one('mouseenter', function()
         {
-          //Socialite.load($(this)[0]); // Works
-          ////Socialite.load($(this)); // Works
-          
           Socialite.load('.social-buttons');
-          
         });
+        */
     
     }
   };
