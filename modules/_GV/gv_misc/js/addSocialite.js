@@ -11,7 +11,7 @@
             Socialite.load('.social-buttons');
           }
         });
-       $('.content').one('mouseenter', function() {
+       $('.content.page').one('mouseenter', function() {
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
