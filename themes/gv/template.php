@@ -179,7 +179,7 @@ function gv_preprocess_views_view_row_rss(&$vars) {
   if ($user->uid == 1) {
     
     dpr($rss_teaser);
-    $rss_teaser2 = preg_replace('typeof="foaf:Image" ', '', $rss_teaser);
+    $rss_teaser2 = preg_replace('|typeof="foaf:Image" |', '', $rss_teaser);
     dpr('-----------------------------------------------------------------' . $rss_teaser2);
     dpr('-----------------------------------------------------------------' . htmlspecialchars_decode($rss_teaser));
     dpr('-----------------------------------------------------------------' . check_plain(htmlspecialchars_decode($rss_teaser)) . '-----------------------------------------------------------------');
