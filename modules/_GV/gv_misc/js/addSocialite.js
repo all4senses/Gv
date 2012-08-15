@@ -7,13 +7,13 @@
         var loadButtons = function() {
           $('#header').unbind('mouseenter', loadButtons);
           $('#all-content').unbind('mouseenter', loadButtons);
-          $('.sidebar-second').unbind('mouseenter', loadButtons);
+          $('#sidebar-second').unbind('mouseenter', loadButtons);
           Socialite.load('.social-buttons');
         };
         
         $('#header').bind('mouseenter', loadButtons);
         $('#all-content').bind('mouseenter', loadButtons);
-        $('.sidebar-second').bind('mouseenter', loadButtons);
+        $('#sidebar-second').bind('mouseenter', loadButtons);
         
        
        /*
