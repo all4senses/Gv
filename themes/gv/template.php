@@ -184,7 +184,7 @@ function gv_preprocess_views_view_rss(&$vars) {
       $vars['namespaces'] .= ' ' . $key . '="' . $value . '"';
     }
     //dpr($vars['namespaces']);
-    $vars['namespaces'] = check_plain($vars['namespaces']);
+    $vars['namespaces'] = check_plain(htmlspecialchars_decode($vars['namespaces']));
     //dpr($vars['namespaces']);
     //dpr($vars);
     //die;
