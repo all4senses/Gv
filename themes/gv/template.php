@@ -178,21 +178,6 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $rss_teaser = preg_replace('|href="/|', 'href="http://getvoip.com/', $rss_teaser);
     $vars['description'] = check_plain(htmlspecialchars_decode($rss_teaser));
   }
-  
-  /*
-  global $user;
-  if ($user->uid == 1) {
-    
-    dpr($rss_teaser);
-    $rss_teaser2 = preg_replace('|typeof="foaf:Image" |', '', $rss_teaser);
-    dpr('-----------------------------------------------------------------' . $rss_teaser2);
-    dpr('-----------------------------------------------------------------' . htmlspecialchars_decode($rss_teaser));
-    dpr('-----------------------------------------------------------------' . check_plain(htmlspecialchars_decode($rss_teaser)) . '-----------------------------------------------------------------');
-    dpr($vars);
-    exit;
-  }
-  */
-  
 }
 
 
