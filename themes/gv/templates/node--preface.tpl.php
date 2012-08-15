@@ -46,12 +46,8 @@
        <div class="main">
         
         <?php 
-              dpm($node);
-              dpm($title);
-              dpm('is_front = ' . $is_front);
-              
               // No significant improvements with addthis buttons set... It bacame even slower.
-              global $user; if($user->uid != 1): ?>
+              global $user; if(/*$user->uid != */1): ?>
               
               <?php 
                 if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
