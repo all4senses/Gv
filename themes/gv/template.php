@@ -169,7 +169,23 @@ function gv_username($object) {
 function gv_preprocess_views_view_rss(&$vars) {
   global $user;
   if ($user->uid == 1) {
-    dpr($vars);
+    $namespaces = $vars['view']->style_plugin->namespaces;
+    dpr($namespaces);
+    $disabled_namespaces = array('content', 'dc', 'foaf', 'og', 'rdfs', 'sioc', 'sioct', 'skos', 'xsd', 'xmlns:addthis');
+    foreach ($disabled_namespaces as $disabled_namespace) {
+      if (isset($namespaces[$disabled_namespace])) {
+        unset($namespaces[$disabled_namespace]);
+      }
+    }
+    dpr($namespaces);
+    $vars['namespaces'] = '';
+    foreach ($namespaces as $key => $value) {
+      $vars['namespaces'] .= ' ' . $key . '="' . $value . '"';
+    }
+    dpr($vars['namespaces']);
+    $vars['namespaces'] = check_plain($vars['namespaces']);
+    dpr($vars['namespaces']);
+    //dpr($vars);
     die;
   }
 }
