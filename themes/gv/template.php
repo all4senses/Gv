@@ -198,7 +198,9 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $rss_teaser = preg_replace('|href="/|', 'href="http://getvoip.com/', $rss_teaser);
     $vars['description'] = check_plain(htmlspecialchars_decode($rss_teaser));
   }
-  $vars['item_elements'] = preg_replace('|<dc:creator>.*</dc:creator>|', '<dc:creator>test</dc:creator>', $vars['item_elements']);
+  
+  // Replace username with real user name for <dc:creator>
+  $vars['item_elements'] = preg_replace('|<dc:creator>.*</dc:creator>|', '<dc:creator>' . gv_misc_getUserRealName($node->uid) . '</dc:creator>', $vars['item_elements']);
 }
 
 
