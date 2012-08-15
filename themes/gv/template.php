@@ -168,7 +168,7 @@ function gv_username($object) {
 */
 function gv_preprocess_views_view_rss(&$vars) {
   //global $user;
-  //if ($user->uid == 1) 
+  if ($user->uid == 1) 
   {
     $namespaces = $vars['view']->style_plugin->namespaces;
     //dpr($namespaces);
@@ -187,7 +187,10 @@ function gv_preprocess_views_view_rss(&$vars) {
     ////$vars['namespaces'] = check_plain(htmlspecialchars_decode($vars['namespaces']));
     //dpr($vars['namespaces']);
     //dpr($vars);
-    //die;
+    
+    dpr($_GET);
+    dpr($_SERVER);
+    die;
   }
 }
 
