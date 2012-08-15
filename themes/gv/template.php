@@ -167,7 +167,7 @@ function gv_username($object) {
 * Default theme function for all RSS rows.
 */
 function gv_preprocess_views_view_rss(&$vars) {
-  //global $user;
+  global $user;
   if ($user->uid == 1) 
   {
     $namespaces = $vars['view']->style_plugin->namespaces;
