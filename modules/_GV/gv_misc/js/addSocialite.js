@@ -16,7 +16,8 @@
 //        $('#all-content').bind('mouseenter', loadButtons);
        
        
-       $('#header').one('mouseenter', function()
+       //$('#header').one('mouseenter', function()
+       $('#main').one('mouseenter', function()
        //$('body').one('mouseenter', function()
        //$('#bshadow').one('mouseover', function()
         {
