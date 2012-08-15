@@ -48,11 +48,21 @@
         <?php 
               dpm($node);
               dpm($title);
+              dpm('is_front = ' . $is_front);
               
               // No significant improvements with addthis buttons set... It bacame even slower.
               global $user; if($user->uid != 1): ?>
               
-              <?php echo gv_blocks_getSocialiteButtons($url); ?> 
+              <?php 
+                if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+                  $share_title = $node->metatags['title']['value'];
+                }
+                else {
+                  $share_title = $title;
+                }
+                echo gv_blocks_getSocialiteButtons($url, $share_title); 
+              
+              ?> 
 
          <?php else: ?> 
          
