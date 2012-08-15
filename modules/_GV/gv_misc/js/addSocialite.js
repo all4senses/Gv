@@ -17,6 +17,12 @@
             Socialite.load('.social-buttons');
           }
         });
+        $('.share').one('mouseenter', function() {
+          if (!buttonLoaded) {
+            buttonLoaded = true;            
+            Socialite.load('.social-buttons');
+          }
+        });
        
     }
   };
