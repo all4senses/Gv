@@ -15,25 +15,21 @@
 //        $('#header').bind('mouseenter', loadButtons);
 //        $('#all-content').bind('mouseenter', loadButtons);
        
-       var buttonLoaded = false;
+       
        //$('#header').one('mouseenter', function()
        //$('body').one('mouseenter', function()
        //$('#bshadow').one('mouseover', function()
-       $('#main').one('mouseenter', function()
-       {
+       
+       var buttonLoaded = false;
+       var loadButtons2 = function() {
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
           }
-        });
-        
-        $('#header').one('mouseenter', function()
-        {
-          if (!buttonLoaded) {
-            buttonLoaded = true;
-            Socialite.load('.social-buttons');
-          }
-        });
+        };
+       
+       $('#header').one('mouseenter', loadButtons2);
+       $('#all-content').one('mouseenter', loadButtons2);
        
     }
   };
