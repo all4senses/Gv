@@ -6,14 +6,14 @@
        
         var loadButtons = function() {
           $('#header').unbind('mouseenter', loadButtons);
-          $('#main').unbind('mouseenter', loadButtons);
-          $('.sidebar').unbind('mouseenter', loadButtons);
+          $('#all-content').unbind('mouseenter', loadButtons);
+          $('.sidebar-second').unbind('mouseenter', loadButtons);
           Socialite.load('.social-buttons');
         };
         
         $('#header').bind('mouseenter', loadButtons);
-        $('#main').bind('mouseenter', loadButtons);
-        $('.sidebar').bind('mouseenter', loadButtons);
+        $('#all-content').bind('mouseenter', loadButtons);
+        $('.sidebar-second').bind('mouseenter', loadButtons);
         
        
        /*
