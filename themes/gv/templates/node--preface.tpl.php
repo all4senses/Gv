@@ -54,7 +54,7 @@
                   $share_title = $node->metatags['title']['value'];
                 }
                 elseif ($is_front) {
-                  $share_title = 'Best VoIP Service Providers - VoIP Reviews - VoIP Info';
+                  $share_title = 'Best VoIP Service Providers - VoIP Reviews - VoIP Info | GetVoIP.com';
                 }
                 else {
                   $share_title = $title;
