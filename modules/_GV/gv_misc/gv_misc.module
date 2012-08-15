@@ -2333,9 +2333,16 @@ function wdg_misc_sortArrayByWeight($a, $b)
 /**
  * Socialite social buttons.
  */
-function gv_blocks_getSocialiteButtons() {
+function gv_blocks_getSocialiteButtons($url = NULL, $title = NULL) {
 
-
+  if (!$url) {
+    $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
+  }
+  
+  if (!$title) {
+    $title = 'Best VoIP Service Providers - VoIP Reviews - VoIP Info';
+  }
+  
   drupal_add_js('sites/all/libraries/jquery.plugins/socialite/socialite.min.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
@@ -2343,10 +2350,10 @@ function gv_blocks_getSocialiteButtons() {
   
   $out = '
   <ul class="social-buttons cf">
-			<li><a href="http://twitter.com/share" class="socialite twitter-share" data-text="getvoip.com" data-url="http://getvoip.com" data-count="horizontal" data-via="dbushell" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a></li>
-			<li><a href="https://plus.google.com/share?url=http://getvoip.com" class="socialite googleplus-one" data-size="medium" data-href="http://getvoip.com" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a></li>
-			<li><a href="http://www.facebook.com/sharer.php?u=http://getvoip.com&amp;t=getvoip.com" class="socialite facebook-like" data-href="http://getvoip.com" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a></li>
-			<li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://getvoip.com&amp;title=getvoip.com" class="socialite linkedin-share" data-url="http://getvoip.com" data-counter="right" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a></li>
+			<li><a href="http://twitter.com/share" class="socialite twitter-share" data-text="' . $title . '" data-url="' . $url . '" data-count="horizontal" data-via="dbushell" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a></li>
+			<li><a href="https://plus.google.com/share?url=' . $url . '" class="socialite googleplus-one" data-size="medium" data-href="' . $url . '" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=' . $url . '&amp;t=' . $title . '" class="socialite facebook-like" data-href="' . $url . '" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a></li>
+			<li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=' . $url . '&amp;title=' . $title . '" class="socialite linkedin-share" data-url="' . $url . '" data-counter="right" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a></li>
 		</ul>
   ';
   
