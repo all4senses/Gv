@@ -196,7 +196,7 @@
 
                       <div class="main">
                         
-                            <?php global $user; if(/*$user->uid == */1): ?>
+                            <?php if(1): ?>
 
                               <?php 
                                 echo gv_blocks_getSocialiteButtons($url, $title); 
