@@ -192,6 +192,7 @@ function gv_preprocess_views_view_rss(&$vars) {
     //dpr($_SERVER);
     //die;
   }
+
 }
 
 
