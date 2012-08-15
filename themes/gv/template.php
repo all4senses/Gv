@@ -188,9 +188,9 @@ function gv_preprocess_views_view_rss(&$vars) {
     //dpr($vars['namespaces']);
     //dpr($vars);
     
-    dpr($_GET);
-    dpr($_SERVER);
-    die;
+    //dpr($_GET);
+    //dpr($_SERVER);
+    //die;
   }
 }
 
