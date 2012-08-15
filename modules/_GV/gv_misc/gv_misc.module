@@ -442,34 +442,31 @@ function gv_misc_getStreamUriFromRelativePath($path) {
  */
 function gv_misc_addMetatag($name, $content, $href = NULL) {
   if ($content) {
-    
     if ($name == 'title') {
       drupal_set_title($content);
     }
     else {
-      if ($href) {
-            $meta = array(
-              '#type' => 'html_tag',
-              '#tag' => 'link',
-              '#attributes' => array(
-                  'rel' => $name,
-                  'href' => $href,
-              )
-            );
-      }
-      else {
-            $meta = array(
-              '#type' => 'html_tag',
-              '#tag' => 'meta',
-              '#attributes' => array(
-                  'name' => $name,
-                  'content' => $content,
-              )
-            );
-      }
+      $meta = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+            'name' => $name,
+            'content' => $content,
+        )
+      );
       drupal_add_html_head($meta, $name);
     }
-  }
+  } // End of if ($content) {
+  elseif($href) {
+    $meta = array(
+      '#tag' => 'link',
+      '#attributes' => array(
+          'rel' => $name,
+          'href' => $href,
+      )
+    );
+    drupal_add_html_head($meta, $name);
+  } // End of elseif($href) {
 }
 
 
