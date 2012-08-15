@@ -57,6 +57,9 @@
                 if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
                   $share_title = $node->metatags['title']['value'];
                 }
+                elseif ($is_front) {
+                  $share_title = 'Best VoIP Service Providers - VoIP Reviews - VoIP Info';
+                }
                 else {
                   $share_title = $title;
                 }
