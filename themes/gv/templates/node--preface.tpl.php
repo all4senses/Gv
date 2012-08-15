@@ -45,9 +45,7 @@
      <div class="share">
        <div class="main">
         
-        <?php 
-              // No significant improvements with addthis buttons set... It bacame even slower.
-              global $user; if(/*$user->uid != */1): ?>
+        <?php global $user; if(/*$user->uid != */1): ?>
               
               <?php 
                 if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
