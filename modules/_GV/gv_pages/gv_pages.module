@@ -2807,8 +2807,8 @@ function gv_pages_node_view($node, $view_mode) {
           }
           
           if (isset($node->field_preface_key['und'][0]['safe_value']) && $node->field_preface_key['und'][0]['safe_value'] == 'front') {
-            gv_misc_addMetatag('canonical', 'http://getvoip.com');
-            gv_misc_addMetatag('shortlink', 'http://getvoip.com');
+            gv_misc_addMetatag('canonical', NULL, 'http://getvoip.com');
+            gv_misc_addMetatag('shortlink', NULL, 'http://getvoip.com');
           }
         }
         /*
