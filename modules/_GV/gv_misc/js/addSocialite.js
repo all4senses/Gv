@@ -11,18 +11,20 @@
             Socialite.load('.social-buttons');
           }
         });
-       $('#all-content').one('mouseenter', function() {
+       $('.content').one('mouseenter', function() {
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
           }
         });
+        /*
         $('.share').one('mouseenter', function() {
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
           }
         });
+        */
        
     }
   };
