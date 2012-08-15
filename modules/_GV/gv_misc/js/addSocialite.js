@@ -15,13 +15,24 @@
 //        $('#header').bind('mouseenter', loadButtons);
 //        $('#all-content').bind('mouseenter', loadButtons);
        
-       
+       var buttonLoaded = false;
        //$('#header').one('mouseenter', function()
-       $('#main').one('mouseenter', function()
        //$('body').one('mouseenter', function()
        //$('#bshadow').one('mouseover', function()
+       $('#main').one('mouseenter', function()
+       {
+          if (!buttonLoaded) {
+            buttonLoaded = true;            
+            Socialite.load('.social-buttons');
+          }
+        });
+        
+        $('#header').one('mouseenter', function()
         {
-          Socialite.load('.social-buttons');
+          if (!buttonLoaded) {
+            buttonLoaded = true;
+            Socialite.load('.social-buttons');
+          }
         });
        
     }
