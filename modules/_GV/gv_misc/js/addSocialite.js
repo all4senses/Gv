@@ -5,9 +5,9 @@
        
        
         var loadButtons = function() {
-          Socialite.load('.social-buttons');
           $('#header').unbind('mouseenter', loadButtons);
           $('#all-content').unbind('mouseenter', loadButtons);
+          Socialite.load('.social-buttons');
         };
         
         $('#header').bind('mouseenter', loadButtons);
