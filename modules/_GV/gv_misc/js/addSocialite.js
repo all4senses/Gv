@@ -22,13 +22,14 @@
        
        var buttonLoaded = false;
        var loadButtons2 = function() {
+         console.log('xxx');
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
           }
         };
        
-       //$('#header').one('mouseenter', loadButtons2);
+       $('#header').one('mouseenter', loadButtons2);
        $('#all-content').one('mouseenter', loadButtons2);
        
     }
