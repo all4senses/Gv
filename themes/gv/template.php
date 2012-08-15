@@ -172,8 +172,10 @@ function gv_preprocess_views_view_row_rss(&$vars) {
   //$vars['description'] = check_plain(htmlspecialchars_decode($node->field_a_teaser['und'][0]['value']));
   if (isset($node->body['und'][0]['value'])) {
     $rss_teaser = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $vars['row']->nid, 400, TRUE);
-    // Clear attribute typeof="foaf:Image" from the img tag (which iss added by the core rdf module via hook_preprocess_image)
+    // Clear attribute typeof="foaf:Image" from the img tag (which iss added by the core rdf module via hook_preprocess_image).
     $rss_teaser = preg_replace('|typeof="foaf:Image" |', '', $rss_teaser);
+    // Convert relative links to absolute.
+    $rss_teaser = preg_replace('|href="/|', 'href="http://getvoip.com/', $rss_teaser);
     $vars['description'] = check_plain(htmlspecialchars_decode($rss_teaser));
   }
   
