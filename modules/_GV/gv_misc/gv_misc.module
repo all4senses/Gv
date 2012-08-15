@@ -440,21 +440,33 @@ function gv_misc_getStreamUriFromRelativePath($path) {
 /**
  * Helper function to add metatag to a current page.
  */
-function gv_misc_addMetatag($name, $content) {
+function gv_misc_addMetatag($name, $content, $href = NULL) {
   if ($content) {
     
     if ($name == 'title') {
       drupal_set_title($content);
     }
     else {
-      $meta = array(
-        '#type' => 'html_tag',
-        '#tag' => 'meta',
-        '#attributes' => array(
-            'name' => $name,
-            'content' => $content,
-        )
-      );
+      if ($href) {
+            $meta = array(
+              '#type' => 'html_tag',
+              '#tag' => 'link',
+              '#attributes' => array(
+                  'rel' => $name,
+                  'href' => $href,
+              )
+            );
+      }
+      else {
+            $meta = array(
+              '#type' => 'html_tag',
+              '#tag' => 'meta',
+              '#attributes' => array(
+                  'name' => $name,
+                  'content' => $content,
+              )
+            );
+      }
       drupal_add_html_head($meta, $name);
     }
   }
