@@ -167,32 +167,19 @@ function gv_username($object) {
 * Default theme function for all RSS rows.
 */
 function gv_preprocess_views_view_rss(&$vars) {
-  //global $user;
-  //if ($user->uid == 1) 
-  {
-    $namespaces = $vars['view']->style_plugin->namespaces;
-    //dpr($namespaces);
-    $disabled_namespaces = array('content', 'dc', 'foaf', 'og', 'rdfs', 'sioc', 'sioct', 'skos', 'xsd', 'xmlns:addthis');
-    foreach ($disabled_namespaces as $disabled_namespace) {
-      if (isset($namespaces[$disabled_namespace])) {
-        unset($namespaces[$disabled_namespace]);
-      }
+  $namespaces = $vars['view']->style_plugin->namespaces;
+  //dpr($namespaces);
+  $disabled_namespaces = array('content', 'dc', 'foaf', 'og', 'rdfs', 'sioc', 'sioct', 'skos', 'xsd', 'xmlns:addthis');
+  foreach ($disabled_namespaces as $disabled_namespace) {
+    if (isset($namespaces[$disabled_namespace])) {
+      unset($namespaces[$disabled_namespace]);
     }
-    //dpr($namespaces);
-    $vars['namespaces'] = '';
-    foreach ($namespaces as $key => $value) {
-      $vars['namespaces'] .= ' ' . $key . '="' . $value . '"';
-    }
-    //dpr($vars['namespaces']);
-    ////$vars['namespaces'] = check_plain(htmlspecialchars_decode($vars['namespaces']));
-    //dpr($vars['namespaces']);
-    //dpr($vars);
-    
-    //dpr($_GET);
-    //dpr($_SERVER);
-    //die;
   }
-
+  //dpr($namespaces);
+  $vars['namespaces'] = '';
+  foreach ($namespaces as $key => $value) {
+    $vars['namespaces'] .= ' ' . $key . '="' . $value . '"';
+  }
 }
 
 
@@ -211,6 +198,7 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $rss_teaser = preg_replace('|href="/|', 'href="http://getvoip.com/', $rss_teaser);
     $vars['description'] = check_plain(htmlspecialchars_decode($rss_teaser));
   }
+  $vars['item_elements'] = preg_replace('|<dc:creator>.*</dc:creator>|', '<dc:creator>test</dc:creator>', $vars['item_elements']);
 }
 
 
