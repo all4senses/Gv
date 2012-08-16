@@ -59,18 +59,61 @@ function gv_misc_menu_alter(&$items) {
   
   // Remove all Tagadelic urls.
   unset($items['tagadelic'], $items['tagadelic/list/%tagadelic_vocs'], $items['tagadelic/chunk/%tagadelic_vocs']);
-//  global $user;
-//  if ($user->uid == 1) {
-//    dpr($items);
-//    exit;
-//  }
- 
 }
 
 
-function gv_misc_lastUpdatedStamp() {
+function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
+  
+  global $user;
+  if ($user->uid != 1) {
+    return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
+  }
+  
+  
+  
+  if (!$path) {
+    $relative_path = $_SERVER['REQUEST_URI'];
+    if ($relative_path == '/home') {
+      $relative_path = '/';
+    }
+    dpm($relative_path);
+  }
+  
   return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
+  
+  $query = db_select('gv_last_update', 'lu')
+      ->fields('lu', array('timestamp'));
+  $query->condition('lu.path', $relative_path);
+  $last_update = $query->execute()->fetchfield();
+  
+  $current_time = time();
+  
+  if (!$last_update || ($current_time - $last_update) > $min_hours * 3600 ) {
+    // Update or insert new timestamp
+    if ($last_update) {
+      $result = db_update('gv_last_update')
+        ->fields(array(
+          'timestamp' => $current_time,
+        ))
+        ->condition('path', $relative_path)
+        ->execute();
+    }
+    else {
+      $result = db_insert('gv_last_update')
+        ->fields(array(
+          'path' => $relative_path,
+          'timestamp' => $current_time,
+        ))
+        ->execute();
+    }
+    dpm($result);
+    return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', $current_time) . '</div>';
+  }
+  else {
+    return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', $last_update) . '</div>';
+  }
 }
+
 
 /**
  * Get prefaces main section rendered.
@@ -92,14 +135,9 @@ function gv_misc_getPrefaceMainSection($key) {
 function gv_misc_getPrefaceBottomSection($key) {
   $node = gv_misc_getPrefaceByKey($key);
   $node_view = node_view($node, 'full');
-  
-  //global $user;
-  //if (in_array('administrator', $user->roles)) {
-    return render($node_view['field_preface_bottom']);
-  //}
+
+  return render($node_view['field_preface_bottom']);
 }
-
-
 
 
 /**

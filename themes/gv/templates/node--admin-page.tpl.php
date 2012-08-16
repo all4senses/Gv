@@ -80,15 +80,3 @@
 <?php else: ?>
   </div> <!-- <div class="main-content"> -->
 <?php endif; ?>
-
-
-  
-<?php
-
-  global $user;
-  if ($user->uid == 1) {
-    echo gv_blocks_getSocialiteButtons();
-  }
-
-?>
-  
