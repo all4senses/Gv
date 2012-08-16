@@ -89,7 +89,7 @@ function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
   
   $current_time = time();
   
-  if (!$last_updated || ($current_time - $last_updated) > $min_hours * 3600 ) {
+  if (!$last_updated || ($current_time - $last_updated) > 300/*$min_hours * 3600*/ ) {
     // Update or insert new timestamp
     if ($last_updated) {
       $result = db_update('gv_last_updated')
