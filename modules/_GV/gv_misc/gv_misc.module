@@ -71,8 +71,9 @@ function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
   
   
   
-  if (!$path) {
+  if (!$relative_path) {
     $relative_path = $_SERVER['REQUEST_URI'];
+    dpm($relative_path);
     if ($relative_path == '/home') {
       $relative_path = '/';
     }
