@@ -73,19 +73,19 @@ function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
   
   if (!$relative_path) {
     $relative_path = $_SERVER['REQUEST_URI'];
-    dpm($relative_path);
     if ($relative_path == '/home') {
       $relative_path = '/';
     }
-    dpm($relative_path);
   }
   
-  return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', time()) . '</div>';
+  
   
   $query = db_select('gv_last_update', 'lu')
       ->fields('lu', array('timestamp'));
   $query->condition('lu.path', $relative_path);
   $last_update = $query->execute()->fetchfield();
+
+  dpm('last_update = ' . $last_update);
   
   $current_time = time();
   
