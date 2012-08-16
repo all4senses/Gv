@@ -80,19 +80,19 @@ function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
   
   
   
-  $query = db_select('gv_last_update', 'lu')
+  $query = db_select('gv_last_updated', 'lu')
       ->fields('lu', array('timestamp'));
   $query->condition('lu.path', $relative_path);
-  $last_update = $query->execute()->fetchfield();
+  $last_updated = $query->execute()->fetchfield();
 
-  dpm('last_update = ' . $last_update);
+  dpm('last_updated = ' . $last_updated);
   
   $current_time = time();
   
-  if (!$last_update || ($current_time - $last_update) > $min_hours * 3600 ) {
+  if (!$last_updated || ($current_time - $last_updated) > $min_hours * 3600 ) {
     // Update or insert new timestamp
-    if ($last_update) {
-      $result = db_update('gv_last_update')
+    if ($last_updated) {
+      $result = db_update('gv_last_updated')
         ->fields(array(
           'timestamp' => $current_time,
         ))
@@ -100,7 +100,7 @@ function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
         ->execute();
     }
     else {
-      $result = db_insert('gv_last_update')
+      $result = db_insert('gv_last_updated')
         ->fields(array(
           'path' => $relative_path,
           'timestamp' => $current_time,
@@ -111,7 +111,7 @@ function gv_misc_lastUpdatedStamp($min_hours = 12, $relative_path = NULL) {
     return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', $current_time) . '</div>';
   }
   else {
-    return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', $last_update) . '</div>';
+    return '<div class="ts">' . t('Last Updated: ') . date('F d, Y \a\t g:ia', $last_updated) . '</div>';
   }
 }
 
