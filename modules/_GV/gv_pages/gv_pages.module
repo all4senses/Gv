@@ -2074,6 +2074,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       // Allow to enter direct YouTube url and then parse it to save just a video ID.
       if (preg_match('|^.*v=(.*)&.*$|', $service['vr-y'], $matches)) {
         $p_data_quick[$service_type_short]['vr-y'] = $matches[1];
+        // Replace url with id to save in this field... so the next edit session a user will see a video id, not url
+        $p_data['s'][$service_type_short]['vr-y'] = $matches[1];
       }
       else {
         $p_data_quick[$service_type_short]['vr-y'] = $service['vr-y'];
@@ -2156,7 +2158,6 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     unset($_SESSION['all_fees']);
   }
 
-  dpm($p_data_quick);
   form_set_value($form['field_p_data_quick'], array('und' => array(0 => array('value' => serialize($p_data_quick)))), $form_state);
 //  //Reset a helper session var with all quick data.
 //  if(isset($_SESSION['p_all_data_quick'])) {
