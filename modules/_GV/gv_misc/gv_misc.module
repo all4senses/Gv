@@ -908,19 +908,18 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
  */
 function gv_misc_testPage() {
   
-  $link = 'sites/default/files/pdfs/voipe911-advisory.pdf';
-  return l('test', $link);
-    
-  $path = '/sites/default/files/pdfs/voipe911-advisory.pdf';
-  preg_match('|(\/sites\/default\/files\/pdfs\/)(.*)|', $path, $matches);
-  dpm($matches);
-  $path = 'pdfs/23/edit';
-  preg_match('|^pdfs\/(.*)\/(.*)|', $path, $matches);
-  dpm($matches);
-    
-//$result = url('user/' . $matches[1]) . '/' . $matches[2];
+
+  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
+  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
   
-  return 'End of Test';
+          
+          
+  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_colorbox_p_video.js');
+  
+  $out = '<a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>';
+  
+  return $out . '<br>End of Test';
 }
 
 
