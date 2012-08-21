@@ -712,7 +712,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                                           (isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '')
                                           //$p_data['s']['re']['pti']
                                            :
-                                          ( (isset($old_service_types[$service_type_key]) && isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]]) ) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]] : ''),
+                                          ( (isset($old_service_types[$service_type_key]) && isset($old_service_descriptions[$service_description_key]) && isset($p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]]) ) ? $p_data['services'][$old_service_types[$service_type_key]][$service_type_key . '_' . $old_service_descriptions[$service_description_key]] : ''),
                                           //$p_data['services']['s_residential']['re_preface_title']
                       
                     );
