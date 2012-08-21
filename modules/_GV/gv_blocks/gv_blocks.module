@@ -81,6 +81,10 @@ function gv_blocks_block_info() {
     'info' => t('Bottom section of Residential providers page preface'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['sip_provider_p_bottom'] = array(
+    'info' => t('Bottom section of Business providers page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   $blocks['news_tags'] = array(
     'info' => t('Shows a tag cloud for news tags'),
@@ -185,7 +189,10 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Bottom section of Residential providers page preface');
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-residential-voip-providers'); // Arg - preface's key
       break;
-    
+    case 'sip_provider_p_bottom':
+      $block['subject'] = t('Bottom section of SIP providers page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-sip-voip-providers'); // Arg - preface's key
+      break;
     
     case 'news_tags':
       $block['subject'] = t('Shows a tag cloud for news tags');
