@@ -926,7 +926,9 @@ function gv_misc_testPage() {
   
   $link = "http://www.youtube.com/watch?v=9fWAFw4iSrg&feature=player_embedded";
   
-  preg_match('|^.*v=(.*)&.*$|', $link, $matches);
+  if (preg_match('|^.*v=(.*)&.*$|', $link, $matches)) {
+    $id = $matches[1];
+  }
   dpm($matches);
   
   return $out . '<br>End of Test';
