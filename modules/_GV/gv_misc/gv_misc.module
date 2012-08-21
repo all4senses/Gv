@@ -920,10 +920,6 @@ function gv_misc_testPage() {
   $out = '<a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>';
   $out .= '<br/><a class="yt-direct" href="http://www.youtube.com/embed/VOc4yf6m16g?rel=0&amp;wmode=transparent" title="Polycom HDX 7000 from Digicom">Polycom HDX 7000 from Digicom</a>';
   
-  $out .= '<br/><br/><a class="yt-direct" href="http://www.youtube.com/watch?v=9fWAFw4iSrg&feature=player_embedded" title="Fonality HUD - Full Demo 2">Fonality HUD - Full Demo 2</a>';
-  $out .= '<br/><a class="yt-direct" href="http://www.youtube.com/watch?v=9fWAFw4iSrg&feature=player_embedded&wmode=transparent" title="Fonality HUD - Full Demo 3">Fonality HUD - Full Demo 3</a>';
-  $out .= '<br/><a class="yt-direct" href="http://www.youtube.com/watch?v=9fWAFw4iSrg&amp;feature=player_embedded&amp;wmode=transparent" title="Fonality HUD - Full Demo 3">Fonality HUD - Full Demo 3</a>';
-  
   $link = "http://www.youtube.com/watch?v=9fWAFw4iSrg&feature=player_embedded";
   
   if (preg_match('|^.*v=(.*)&.*$|', $link, $matches)) {
@@ -2118,7 +2114,9 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
-      return isset($all_data_quick[$data['data']->nid][$data['service_type']]['vr-y']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['vr-y'] : '';
+      return isset($all_data_quick[$data['data']->nid][$data['service_type']]['vr-y']) 
+                ? '<a class="yt-direct" href="http://www.youtube.com/embed/' . $all_data_quick[$data['data']->nid][$data['service_type']]['vr-y'] . '?rel=0&amp;wmode=transparent" title="' . $all_data_quick[$data['data']->nid]['name'] . ' Editor\'s Review">Video Review</a>'
+                : '';
       
             
       
