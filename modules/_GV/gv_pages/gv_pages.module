@@ -2789,6 +2789,15 @@ function gv_pages_node_view($node, $view_mode) {
       
       //dpm($node);
       
+      // Load Colorbox plugin to show YouTube videos in a popup windows
+      // But just for some pages, where links to those videos are presented.
+      if (isset($node->field_preface_key['und'][0]['value'])) {
+        $pages_with_video_to_popup = array('front', 'page-compare-business-voip-providers', 'page-compare-residential-voip-providers');
+        if (in_array($node->field_preface_key['und'][0]['value'], $pages_with_video_to_popup)) {
+          gv_misc_loadColorboxForVideoLinks();
+        }
+      }
+      
       
       // Set metatags from the preface to a page where the preface is placed
       // Except of the front page, where it can be set via admin interface of the Metatags.

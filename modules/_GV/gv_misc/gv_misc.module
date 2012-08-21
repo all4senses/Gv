@@ -904,19 +904,27 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
 
 
 /**
+ * Loads jquery plugin Colorbox to open videos in popup windows
+ */
+function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
+  switch ($type) {
+    case 'YouTube Direct Link':
+        // for links with a class "yt-direct" like <a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>
+        drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
+        drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
+        $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+        drupal_add_js($path_to_custom_js . 'gv_colorbox_p_video.js');
+        break;
+  }
+}
+
+/**
  * Test page function for url /test.
  */
 function gv_misc_testPage() {
   
+  gv_misc_loadColorboxForVideoLinks();
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
-  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
-  
-          
-          
-  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_colorbox_p_video.js');
-  
   $out = '<a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>';
   $out .= '<br/><a class="yt-direct" href="http://www.youtube.com/embed/VOc4yf6m16g?rel=0&amp;wmode=transparent" title="Polycom HDX 7000 from Digicom">Polycom HDX 7000 from Digicom</a>';
   
