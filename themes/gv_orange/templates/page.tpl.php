@@ -65,6 +65,22 @@
           //if ($user->uid == 1) {
             if($is_front)
               echo gv_misc_lastUpdatedStamp();
+            
+
+
+/*
+http://getvoip.com/compare-business-voip-providers
+http://getvoip.com/business-voip-reviews
+http://getvoip.com/compare-residential-voip-providers
+http://getvoip.com/residential-voip-reviews
+http://getvoip.com/providers/reviews
+http://getvoip.com/about-voip-services
+http://getvoip.com/blog
+http://getvoip.com/news
+http://getvoip.com/voip-provider-submit-user-review
+and all of the about us pages in dropdown menu
+*/
+               
           //}
           ?>
           
