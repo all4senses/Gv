@@ -62,25 +62,28 @@
           
           <?php 
           //global $user;
+          $pages_with_timestamp = array(
+            '/compare-business-voip-providers', 
+            '/business-voip-reviews', 
+            '/compare-residential-voip-providers', 
+            '/residential-voip-reviews', 
+            '/providers/reviews', 
+            '/about-voip-services', 
+            '/blog', 
+            '/news', 
+            '/voip-provider-submit-user-review',
+            '/about-us',
+            '/contact-us',
+            '/advertise',
+            '/press',
+            '/privacy-policy',
+            '/terms-of-use',
+            '/our-team',
+          );
           //if ($user->uid == 1) {
-            if($is_front)
-              echo gv_misc_lastUpdatedStamp();
-            
-
-
-/*
-http://getvoip.com/compare-business-voip-providers
-http://getvoip.com/business-voip-reviews
-http://getvoip.com/compare-residential-voip-providers
-http://getvoip.com/residential-voip-reviews
-http://getvoip.com/providers/reviews
-http://getvoip.com/about-voip-services
-http://getvoip.com/blog
-http://getvoip.com/news
-http://getvoip.com/voip-provider-submit-user-review
-and all of the about us pages in dropdown menu
-*/
-               
+          if($is_front || in_array($_SERVER['REDIRECT_URL'], $pages_with_timestamp))
+            echo gv_misc_lastUpdatedStamp();
+              
           //}
           ?>
           
