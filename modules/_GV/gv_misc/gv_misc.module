@@ -1894,9 +1894,8 @@ function gv_misc_views_pre_render(&$view) {
         break;
       default:
         // Don't show, hide other vocabularies terms pages!!!
-        //drupal_not_found();
-        //exit;
-        break;
+        drupal_not_found();
+        exit;
     }
     //dpm($term);
   }
