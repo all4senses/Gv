@@ -1392,7 +1392,7 @@ function theme_gv_misc_headerLinks($vars) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
-    $out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'] ))) . '</li>';
+    $out .= ($count ? $delimiter : '') . '<li>' . l(t($submenu['link']['link_title']), $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'], 'target' => '_blank' ))) . '</li>';
     $count++;
   }
   $out .= '</ul>';
