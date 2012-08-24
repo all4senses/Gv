@@ -194,6 +194,9 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $rss_teaser = preg_replace('|typeof="foaf:Image" |', '', $rss_teaser);
     // Convert relative links to absolute.
     $rss_teaser = preg_replace('|href="/|', 'href="http://getvoip.com/', $rss_teaser);
+    // Restore a normal state of a YouTube url from a token.
+    // [video: http://www.youtube.com/watch?v=SoMS77zE7iE]
+    $rss_teaser = preg_replace('|[video:(.*)]|', '<a href="$1">[Watch a video] </a>', $rss_teaser);
     $vars['description'] = check_plain(htmlspecialchars_decode($rss_teaser));
   }
   
