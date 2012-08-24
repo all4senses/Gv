@@ -929,7 +929,7 @@ inTALK is a Nextiva company. Unlike Nextiva’s website, which has a lot of bell
   
    //[video: http://www.youtube.com/watch?v=SoMS77zE7iE]
    // $rss_teaser = preg_replace('|[video:(.*)]|', '<a href="$1">[Watch a video] </a>', $rss_teaser);
-  $rss_teaser =   preg_replace('|\[video:.*(http://.*)\]|', '<a href="$2">[Watch a video]$2 </a>', $rss_teaser);
+  $rss_teaser =   preg_replace('|\[video:.*(http://.*)\]|', '<a href="$1">[Watch a video]$1 </a>', $rss_teaser);
   dpm($rss_teaser);
   return $out . '<br>End of Test';
 }
