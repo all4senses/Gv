@@ -923,18 +923,14 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
  */
 function gv_misc_testPage() {
   
-  gv_misc_loadColorboxForVideoLinks();
-
-  $out = '<a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>';
-  $out .= '<br/><a class="yt-direct" href="http://www.youtube.com/embed/VOc4yf6m16g?rel=0&amp;wmode=transparent" title="Polycom HDX 7000 from Digicom">Polycom HDX 7000 from Digicom</a>';
+  $rss_teaser = '<div base="http://getvoip.com/about-voip-services" class="feedEntryContent">[video: http://www.youtube.com/watch?v=SoMS77zE7iE]
+inTALK is a Nextiva company. Unlike Nextiva’s website, which has a lot of bells and whistles, inTALK is basic and straightforward. inTALK has three plans, 100, 500 and unlimited minutes. The default is “Nextiva Connect” which is the same as Nextiva Connect on their own web site, inTALK is just a little more upfront about the...<a class="more" href="http://getvoip.com/blog/2012/08/24/intalk-review-video" xml:base="http://getvoip.com/about-voip-services">Read More</a></div>';
   
-  $link = "http://www.youtube.com/watch?v=9fWAFw4iSrg&feature=player_embedded";
   
-  if (preg_match('|^.*v=(.*)&.*$|', $link, $matches)) {
-    $id = $matches[1];
-  }
-  dpm($matches);
-  
+   //[video: http://www.youtube.com/watch?v=SoMS77zE7iE]
+   // $rss_teaser = preg_replace('|[video:(.*)]|', '<a href="$1">[Watch a video] </a>', $rss_teaser);
+  $rss_teaser =   preg_replace('|[video:(.*)]|', '<a href="$1">[Watch a video] </a>', $rss_teaser);
+  dpm($rss_teaser);
   return $out . '<br>End of Test';
 }
 
