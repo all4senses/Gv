@@ -5,11 +5,17 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
-        $('input[id="email"]').blur(function (event) { 
+        $('input[id="email"]').blur(function () { 
           
           console.log($(this).val());
-          console.log(event);
         
+        });
+        
+        $(window).unload( function () { 
+          
+          //alert("Bye now! Thanks for your time!"); 
+          console.log("Bye now! Thanks for your time!");
+          
         });
        
         $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
