@@ -13,8 +13,9 @@
         
         $(window).unload( function () { 
           
-          //alert("Bye now! Thanks for your time!"); 
           console.log("Bye now! Thanks for your time!");
+          alert("Bye now! Thanks for your time!"); 
+          
           
         });
        
