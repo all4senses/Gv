@@ -952,17 +952,37 @@ function gv_misc_makeRequestCapture_ajax() {
   
   $post = array();
   foreach ($_POST as $key => $value) {
-    $post[$key] = check_plain($value);
+    $post[$key] = check_plain(strip_tags($value));
   }
   
   $ucaptured = @$_SESSION['ucaptured'];
-  $email = $post['email'] ? $post['email'] : $ucaptured['email'];
-  $fname = $post['fname'] ? $post['fname'] : $ucaptured['fname'];
-  $lname = $post['lname'] ? $post['lname'] : $ucaptured['lname'];
   
-  $_SESSION['ucaptured'] = array('email' => $email, 'fname' => $fname, 'lname' => $lname);
+  if (@$post['op'] == 'exit' && $ucaptured && @$ucaptured['email']) {
+    
+    // Send a user data to admins.
+    $ucaptured_data = array(
+      'User IP' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+      'Time' => date('Y-m-d, H:i:s', time()),
+        
+      'fname' => @$ucaptured['fname'],
+      'lname' => @$ucaptured['lname'],
+      'email' => @$ucaptured['email'],
+    );
+    
+    $params['ucaptured_data'] = $ucaptured_data;
+    global $language;
+    drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
+    
+  }
+  else {
+    $email = @$post['email'] ? $post['email'] : $ucaptured['email'];
+    $fname = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
+    $lname = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
 
-  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured']/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+    $_SESSION['ucaptured'] = array('email' => $email, 'fname' => $fname, 'lname' => $lname);
+  }
+  
+  drupal_json_output(array('status' => $status, 'op' => @$post['op'], 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured']/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
 
@@ -978,7 +998,7 @@ function gv_misc_makeRequest_ajax() {
   //$post = $_POST;
   $post = array();
   foreach ($_POST as $key => $value) {
-    $post[$key] = check_plain($value);
+    $post[$key] = check_plain(strip_tags($value));
   }
   
   if (empty($post) 
@@ -1000,6 +1020,11 @@ function gv_misc_makeRequest_ajax() {
 
     // Mapping form data to right named fields.
     if ($post['source'] == 'page') {
+      
+      // Clear user's captured on the fly data.
+      if (isset($_SESSION['ucaptured'])) {
+        unset($_SESSION['ucaptured']);
+      }
       
       $phone = isset($post['phone']) ? $post['phone'] : $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
       
@@ -1132,26 +1157,15 @@ double triggerring of a submit form because of double launching almost the same 
 function gv_misc_mail($key, &$message, $params) {
   switch ($key) {
     case 'request_quote':
-      /*  
-      $data = array( 
-        'privatemsg_message' => $params['message'],
-        'privatemsg_recipient' => $params['recipient'],
-      );
-      $options = array(
-        'language' => user_preferred_language($params['recipient']),
-        // Don't sanitize output since this is used in an email, not a browser.
-        'sanitize' => FALSE,
-        // Custom token to avoid custom token handling.
-        'privatemsg-display-invalid' => FALSE,
-      );
-      
-      $message['subject'] = trim(token_replace(variable_get('pm_email_notify_subject', 'New private message at [site:name].'), $data, $options));
-      $message['body'][] = trim(token_replace(variable_get('pm_email_notify_body', _pm_email_notify_default_body()), $data, $options));
-      */
       $message['subject'] = t('New request for a quote');
       $message['body'][] = theme('gv_misc_requestQuote_mail', $params['request_data']);
       break;
     
+    
+    case 'request_quote_ucaptured_data':
+      $message['subject'] = t('New captured BUT not submitted user data');
+      $message['body'][] = theme('gv_misc_requestQuote_mail', $params['ucaptured_data']);
+      break;
     
     
     case 'email_verification':
@@ -1195,6 +1209,24 @@ Get VoIP team
  */
 function theme_gv_misc_requestQuote_mail($data) {
  $out = 'Quote Request submission form:
+
+';
+ foreach ($data as $key => $value) {
+   if ($value) {
+    $out .= "$key = $value
+";
+   }
+ }
+ 
+ return $out;
+}
+
+
+/**
+ * Simple theming of the email with Captured but not submitted by a user data on a Request a quote page.
+ */
+function theme_gv_misc_requestQuoteCaptured_mail($data) {
+ $out = 'Captured (and not submitted by a user) data from a Quote Request submission form:
 
 ';
  foreach ($data as $key => $value) {
@@ -1361,10 +1393,16 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_fivestar_static' => array(
       'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
     ),
-    // Compose a mail with a Request for a quote.
+    // Compose a mail with a Request for a quote page/block.
     'gv_misc_requestQuote_mail' => array(
       'variables' => array(),
     ),
+    // Compose a mail with a Captured but not submitted by a user data from a Request for a quote page/block.
+    'gv_misc_requestQuoteCaptured_mail' => array(
+      'variables' => array(),
+    ),
+    
+      
     // Altered Tagadelic weighted tag cloud.
     'gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths' => array(
       'variables' => array('terms' => array())

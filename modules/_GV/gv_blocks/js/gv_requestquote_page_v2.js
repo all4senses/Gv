@@ -5,6 +5,8 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
+       
+       
         $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
           
           console.log($(this).val());
@@ -43,7 +45,7 @@
             
                 url: '/request/capture', 
                 data: {
-                        op: 'exit_page',
+                        op: 'exit',
                         url: window.location.href
                         }, 
                     type: 'POST', 
