@@ -25,6 +25,7 @@
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
                   event.preventDefault();
+                  console.log($(this));
               }
             }
         });
