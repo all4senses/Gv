@@ -5,12 +5,12 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
-        $('input[id="email"]').onblur(function (event) { 
-          
-          console.log($(this).val());
-          console.log(event);
-        
-        });
+//        $('input[id="email"]').onblur(function (event) { 
+//          
+//          console.log($(this).val());
+//          console.log(event);
+//        
+//        });
        
         $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
             //var val = $(this).val();
