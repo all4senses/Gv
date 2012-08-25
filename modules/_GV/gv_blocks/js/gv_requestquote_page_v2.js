@@ -30,9 +30,11 @@
                   console.log($(this).attr('id'));
                   
                   if ($(this).attr('id') == 'phone_1') {
+                    $('input[id="phone_2"]').val('');
                     $('input[id="phone_2"]').focus();
                   }
                   else {
+                    $('input[id="phone_3"]').val('');
                     $('input[id="phone_3"]').focus();
                   }
               }
