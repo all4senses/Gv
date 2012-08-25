@@ -26,6 +26,7 @@
                   ) {
                   event.preventDefault();
                   console.log($(this));
+                  console.log($(this).attr('id'));
               }
             }
         });
