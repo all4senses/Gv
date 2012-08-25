@@ -23,7 +23,14 @@ function gv_misc_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
-  
+
+  $items['request/capture'] = array(
+    'title' => 'Capture users data on the fly before submitting a request',
+    'page callback' => 'gv_misc_makeRequestCapture_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+    
   $items['test'] = array(
     'title' => 'Test page',
     'page callback' => 'gv_misc_testPage',
@@ -936,6 +943,24 @@ inTALK is a Nextiva company. Unlike Nextiva’s website, which has a lot of bell
 
 
 /**
+ * Implements on the fly capturing of a users' data before they have submit requests.
+ * 
+ * Returns nothing.
+ */
+function gv_misc_makeRequestCapture_ajax() {
+  $status = TRUE;
+  $output = 'test';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain($value);
+  }
+
+  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+}
+
+
+/**
  * Implements requests from users.
  * 
  * Returns json result data with OK or error.
@@ -1037,6 +1062,8 @@ function gv_misc_makeRequest_ajax() {
     */
     global $language;
     //$params['recipient'] = $recipient;
+
+    //$letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
     
     drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
 
@@ -1084,7 +1111,7 @@ var google_conversion_value = 0;
     }
     
   }
-  //$letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
+
   drupal_json_output(array('status' => $status, 'data' => $output/*, 'post' => $_POST, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 

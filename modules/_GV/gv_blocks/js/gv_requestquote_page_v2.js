@@ -5,17 +5,61 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
-        $('input[id="email"]').blur(function () { 
+        $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
           
           console.log($(this).val());
+          
+          
+          (jQuery).ajax({
+            
+                url: '/request/capture', 
+                data: {
+                        op: 'set',
+                        url: window.location.href,
+                        email: $('input[id="email"]').val(),
+                        name: $('input[id="firstname"]').val() + ' ' + $('input[id="lastname"]').val()
+                        }, 
+                    type: 'POST', 
+                    dataType: 'json', 
+                    success: function(data) 
+                            { 
+                                if(!data.error) {
+                                    console.log('The header is arrived!');
+                                }
+                                return false;
+                            } 
+
+            }); // end of (jQuery).ajax
         
         });
         
         $(window).unload( function () { 
           
           console.log("Bye now! Thanks for your time!");
-          alert("Bye now! Thanks for your time!"); 
+          //alert("Bye now! Thanks for your time!"); 
           
+          (jQuery).ajax({
+            
+                url: '/request/capture', 
+                data: {
+                        op: 'exit_page',
+                        url: window.location.href
+                        }, 
+                    type: 'POST', 
+                    dataType: 'json', 
+                    success: function(data) 
+                            { 
+                                if(!data.error) {
+                                    console.log('The header is arrived!');
+                                }
+                                return false;
+                            } 
+
+            }); // end of (jQuery).ajax
+    
+    
+            console.log("Bye again!");
+    
           
         });
        
