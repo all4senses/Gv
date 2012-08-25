@@ -17,7 +17,8 @@
                         op: 'set',
                         url: window.location.href,
                         email: $('input[id="email"]').val(),
-                        name: $('input[id="firstname"]').val() + ' ' + $('input[id="lastname"]').val()
+                        fname: $('input[id="firstname"]').val(),
+                        lname: $('input[id="lastname"]').val()
                         }, 
                     type: 'POST', 
                     dataType: 'json', 

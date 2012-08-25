@@ -933,9 +933,9 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
 function gv_misc_testPage() {
   $out = '';
   
-  $out = @$_SESSION['udata_request'];
+  $ucaptured = @$_SESSION['ucaptured'];
   
-  dpm($out);
+  dpm($ucaptured);
   
   return $out . '<br>End of Test';
 }
@@ -955,9 +955,14 @@ function gv_misc_makeRequestCapture_ajax() {
     $post[$key] = check_plain($value);
   }
   
-  $_SESSION['udata_request'] = array('email' => $post['email'], 'name' => $post['name']);
+  $ucaptured = @$_SESSION['ucaptured'];
+  $email = $post['email'] ? $post['email'] : $ucaptured['email'];
+  $fname = $post['fname'] ? $post['fname'] : $ucaptured['fname'];
+  $lname = $post['lname'] ? $post['lname'] : $ucaptured['lname'];
+  
+  $_SESSION['ucaptured'] = array('email' => $email, 'name' => $fname . ' ' . $lname);
 
-  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+  drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured']/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
 
