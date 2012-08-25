@@ -960,7 +960,7 @@ function gv_misc_makeRequestCapture_ajax() {
   $fname = $post['fname'] ? $post['fname'] : $ucaptured['fname'];
   $lname = $post['lname'] ? $post['lname'] : $ucaptured['lname'];
   
-  $_SESSION['ucaptured'] = array('email' => $email, 'name' => $fname . ' ' . $lname);
+  $_SESSION['ucaptured'] = array('email' => $email, 'fname' => $fname, 'lname' => $lname);
 
   drupal_json_output(array('status' => $status, 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured']/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
