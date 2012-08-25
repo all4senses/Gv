@@ -27,6 +27,13 @@
                   event.preventDefault();
                   console.log($(this));
                   console.log($(this).attr('id'));
+                  
+                  if ($(this).attr('id') == 'phone_1') {
+                    $('input[id="phone_2"]').focus();
+                  }
+                  else {
+                    $('input[id="phone_3"]').focus();
+                  }
               }
             }
         });
