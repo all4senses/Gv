@@ -19,7 +19,10 @@ function gv_pages_menu() {
   $items['admin/content/quote-requests'] = array(
     'title' => 'Quote Requests',
     'description' => 'Quote Requests, including captured but not submitted users data',
-    'page callback' => 'gv_pages_quoteRequestsListPage',
+      
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gv_pages_quoteRequestsList_form'),
+      
     'access arguments' => array('administer content'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -71,8 +74,12 @@ function gv_pages_menu() {
 
 
 
-function gv_pages_quoteRequestsListPage() {
-  return 'RequestsListPage';
+function gv_pages_quoteRequestsList_form() {
+  $form['test'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Title',
+  );
+  return $form;
 }
 
 
