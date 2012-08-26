@@ -1027,7 +1027,7 @@ function gv_misc_makeRequestCapture_ajax() {
         $ucaptured['fname'] = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
         $ucaptured['lname'] = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
         
-        $result = db_update('gv_last_updated')
+        $result = db_update('gv_quote_requests')
           ->fields(array(
             'data' => serialize($ucaptured),
           ))
