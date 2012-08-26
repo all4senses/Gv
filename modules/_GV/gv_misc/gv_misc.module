@@ -959,7 +959,14 @@ function gv_misc_makeRequestCapture_ajax() {
   
   if (@$post['op'] == 'exit' && $ucaptured && @$ucaptured['email']) {
     
+    $query = db_select('gv_quote_requests', 'qr')
+        ->fields('qr', array('data'));
+    $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+    $ucaptured = $query->execute()->fetchField();
+    $ucaptured = unserialize($ucaptured);  
+      
     // Send a user data to admins.
+    /*
     $ucaptured_data = array(
       'User IP' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
       'Time' => date('Y-m-d, H:i:s', time()),
@@ -968,23 +975,119 @@ function gv_misc_makeRequestCapture_ajax() {
       'lname' => @$ucaptured['lname'],
       'email' => @$ucaptured['email'],
     );
+    */
+    $ucaptured_data = array(
+      'User IP' => $ucaptured['ip'],
+      'Time' => date('Y-m-d, H:i:s', $_SESSION['ucaptured_timestamp']),
+        
+      'fname' => $ucaptured['fname'],
+      'lname' => $ucaptured['lname'],
+      'email' => $ucaptured['email'],
+    );
+    
     
     $params['ucaptured_data'] = $ucaptured_data;
     global $language;
     drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
     
-    unset($_SESSION['ucaptured']);
     
-  }
+    
+    
+    $result = db_update('gv_quote_requests')
+      ->fields(array(
+        'status' => 1,
+      ))
+      ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
+      ->execute();
+    
+    
+    unset($_SESSION['ucaptured'], $_SESSION['ucaptured_timestamp']);
+    
+  } // End of if (@$post['op'] == 'exit' && $ucaptured && @$ucaptured['email']) {
   else {
-    $email = @$post['email'] ? $post['email'] : $ucaptured['email'];
-    $fname = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
-    $lname = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
+    $ucaptured['email'] = @$post['email'] ? $post['email'] : $ucaptured['email'];
+    $ucaptured['fname'] = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
+    $ucaptured['lname'] = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
+    
+    
+    
+    if (isset($_SESSION['ucaptured_timestamp'])) {
+      
+      // A row has been already created.
+      
+      $query = db_select('gv_quote_requests', 'qr')
+        ->fields('qr', array('data'));
+      $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+      $ucaptured = $query->execute()->fetchField();
+      
+      if ($ucaptured) {
+        $ucaptured = unserialize($ucaptured);
+        
+        $ucaptured['email'] = @$post['email'] ? $post['email'] : $ucaptured['email'];
+        $ucaptured['fname'] = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
+        $ucaptured['lname'] = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
+        
+        $result = db_update('gv_last_updated')
+          ->fields(array(
+            'data' => serialize($ucaptured),
+          ))
+          ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
+          ->execute();
 
-    $_SESSION['ucaptured'] = array('email' => $email, 'fname' => $fname, 'lname' => $lname);
-  }
+      } // End of if ($ucaptured) {
+      else {
+        $ucaptured['email'] = @$post['email'];
+        $ucaptured['fname'] = @$post['fname'];
+        $ucaptured['lname'] = @$post['lname'];
+
+        $result = db_insert('gv_quote_requests')
+          ->fields(array(
+            'timestamp' => $_SESSION['ucaptured_timestamp'],
+            'status' => 0,
+            'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+            'data' => serialize($ucaptured),
+          ))
+          ->execute();
+      }
+      
+    } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
+    else {
+      
+      // Not yet created.
+      
+      $_SESSION['ucaptured_timestamp'] = time();
+      
+      // Check if such timestamp alreade exists.
+      $query = db_select('gv_quote_requests', 'qr')
+        ->fields('qr', array('data'));
+      $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+      $ucaptured = $query->execute()->fetchField();
+    
+      if ($ucaptured) {
+        // It exists, so we'll just increment timestamp, hopely a new one doesn't exist.
+        $_SESSION['ucaptured_timestamp'] += 1;
+      }
+      
+      $ucaptured['email'] = @$post['email'];
+      $ucaptured['fname'] = @$post['fname'];
+      $ucaptured['lname'] = @$post['lname'];
+      
+      $result = db_insert('gv_quote_requests')
+        ->fields(array(
+          'timestamp' => $_SESSION['ucaptured_timestamp'],
+          'status' => 0,
+          'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+          'data' => serialize($ucaptured),
+        ))
+        ->execute();
+      
+    } // End of Else of if (isset($_SESSION['ucaptured_timestamp'])) {
+    
+    $_SESSION['ucaptured'] = $ucaptured;
+    
+  } // End of Else of if (@$post['op'] == 'exit' && $ucaptured && @$ucaptured['email']) {
   
-  drupal_json_output(array('status' => $status/*, 'op' => @$post['op'], 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured'], 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+  drupal_json_output(array('status' => $status, 'op' => @$post['op'], 'post' => $_POST, 'ucaptured' => $ucaptured/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
 
