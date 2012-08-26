@@ -16,6 +16,14 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_pages_menu() {
 
+  $items['admin/content/quote-requests'] = array(
+    'title' => 'Quote Requests',
+    'description' => 'Quote Requests, including captured but not submitted users data',
+    'page callback' => 'gv_pages_quoteRequestsListPage',
+    'access arguments' => array('administer content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   $items['home'] = array(
     'title' => 'Home page',
     //'description' => 'Home page',
@@ -59,6 +67,12 @@ function gv_pages_menu() {
   ); 
   */
   return $items;
+}
+
+
+
+function gv_pages_quoteRequestsListPage() {
+  return 'RequestsListPage';
 }
 
 

@@ -970,85 +970,82 @@ function gv_misc_makeRequestCapture_ajax() {
       $ucaptured['Email'] = @$post['email'] ? $post['email'] : $ucaptured['Email'];
       $ucaptured['First Name'] = @$post['fname'] ? $post['fname'] : $ucaptured['First Name'];
       $ucaptured['Last Name'] = @$post['lname'] ? $post['lname'] : $ucaptured['Last Name'];
+      
+      if ($ucaptured['Email']) {
+      
+            if (isset($_SESSION['ucaptured_timestamp'])) {
+
+              $result = db_update('gv_quote_requests')
+                ->fields(array(
+                  'data' => serialize($ucaptured),
+                  'status' => 1, // Unsubmitted, sent.
+                  'checked' => 1, // Reviewed, because is sent.
+                  'email_presented' => $ucaptured['Email'] ? 1 : 0,
+                ))
+                ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
+                ->execute();
+
+            } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
+            else {
+
+              $_SESSION['ucaptured_timestamp'] = time();
+
+              // Check if such timestamp already exists.
+              $query = db_select('gv_quote_requests', 'qr')
+                ->fields('qr', array('data'));
+              $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+              $tmp = $query->execute()->fetchField();
+
+              if ($tmp) {
+                // It exists, so we'll just increment timestamp, hopely a new one doesn't exist.
+                $_SESSION['ucaptured_timestamp'] += 1;
+              }
+
+              $result = db_insert('gv_quote_requests')
+                ->fields(array(
+                  'timestamp' => time(),
+                  'status' => 1, // Unsubmitted, sent.
+                  'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+                  'data' => serialize($ucaptured),
+                  'checked' => 1, // Reviewed, because is sent.
+                  'email_presented' => $ucaptured['Email'] ? 1 : 0,
+                ))
+                ->execute();
+
+            } // End of Else of if (isset($_SESSION['ucaptured_timestamp'])) {
+
+
+            // Send email.
+            $ucaptured_data = array(
+              'User IP' => $ucaptured['ip'],
+              'Time' => date('Y-m-d, H:i:s', $_SESSION['ucaptured_timestamp']),
+
+              'First Name' => $ucaptured['First Name'],
+              'Last Name' => $ucaptured['Last Name'],
+              'Email' => $ucaptured['Email'],
+            );
+
+            $params['ucaptured_data'] = $ucaptured_data;
+            global $language;
+            drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
+
+          } // End of if ($ucaptured['email']) {
+          else {
+
+            // Remove the row from DB (if it is there) because it's useless without an email.
+            if (isset($_SESSION['ucaptured_timestamp'])) {
+              $result = db_delete('gv_quote_requests')
+                ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
+                ->execute();
+            }
+          } // End of Else of if ($ucaptured['email']) {
+
+          unset($_SESSION['ucaptured_timestamp']);
     
     } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
-    else {
-      // If a row in the DB hasn't been created yet
-      $ucaptured['Email'] = @$post['email'];
-      $ucaptured['First Name'] = @$post['fname'];
-      $ucaptured['Last Name'] = @$post['lname'];
-    }
+
     
-    if ($ucaptured['Email']) {
-      
-      if (isset($_SESSION['ucaptured_timestamp'])) {
-        
-        $result = db_update('gv_quote_requests')
-          ->fields(array(
-            'data' => serialize($ucaptured),
-            'status' => 1, // Unsubmitted, sent.
-            'checked' => 1, // Reviewed, because is sent.
-            'email_presented' => $ucaptured['Email'] ? 1 : 0,
-          ))
-          ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
-          ->execute();
-        
-      } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
-      else {
-        
-        $_SESSION['ucaptured_timestamp'] = time();
-        
-        // Check if such timestamp already exists.
-        $query = db_select('gv_quote_requests', 'qr')
-          ->fields('qr', array('data'));
-        $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
-        $tmp = $query->execute()->fetchField();
-
-        if ($tmp) {
-          // It exists, so we'll just increment timestamp, hopely a new one doesn't exist.
-          $_SESSION['ucaptured_timestamp'] += 1;
-        }
-
-        $result = db_insert('gv_quote_requests')
-          ->fields(array(
-            'timestamp' => time(),
-            'status' => 1, // Unsubmitted, sent.
-            'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
-            'data' => serialize($ucaptured),
-            'checked' => 1, // Reviewed, because is sent.
-            'email_presented' => $ucaptured['Email'] ? 1 : 0,
-          ))
-          ->execute();
-        
-      } // End of Else of if (isset($_SESSION['ucaptured_timestamp'])) {
-      
-      
-      // Send email.
-      $ucaptured_data = array(
-        'User IP' => $ucaptured['ip'],
-        'Time' => date('Y-m-d, H:i:s', $_SESSION['ucaptured_timestamp']),
-
-        'First Name' => $ucaptured['First Name'],
-        'Last Name' => $ucaptured['Last Name'],
-        'Email' => $ucaptured['Email'],
-      );
-
-      $params['ucaptured_data'] = $ucaptured_data;
-      global $language;
-      drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
-
-    } // End of if ($ucaptured['email']) {
-    else {
-      
-      // Remove the row from DB (if it is there) because it's useless without an email.
-      if (isset($_SESSION['ucaptured_timestamp'])) {
-        $result = db_delete('gv_quote_requests')
-          ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
-          ->execute();
-      }
-    } // End of Else of if ($ucaptured['email']) {
     
-    unset($_SESSION['ucaptured_timestamp']);
     
   } // End of if (@$post['op'] == 'exit') {
   else {
