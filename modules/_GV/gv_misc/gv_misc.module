@@ -1129,7 +1129,7 @@ function gv_misc_makeRequestCapture_ajax() {
     
   } // End of Else of if (@$post['op'] == 'exit' && $ucaptured && @$ucaptured['email']) {
   
-  drupal_json_output(array('status' => $status, 'op' => @$post['op'], 'post' => $_POST, 'ucaptured' => $ucaptured/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+  drupal_json_output(array('status' => $status/*, 'op' => @$post['op'], 'post' => $_POST, 'ucaptured' => $ucaptured/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
 
