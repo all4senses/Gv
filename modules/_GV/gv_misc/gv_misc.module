@@ -967,19 +967,19 @@ function gv_misc_makeRequestCapture_ajax() {
       $ucaptured = $query->execute()->fetchField();
       $ucaptured = unserialize($ucaptured);  
       
-      $ucaptured['email'] = @$post['email'] ? $post['email'] : $ucaptured['email'];
-      $ucaptured['fname'] = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
-      $ucaptured['lname'] = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
+      $ucaptured['Email'] = @$post['email'] ? $post['email'] : $ucaptured['Email'];
+      $ucaptured['First Name'] = @$post['fname'] ? $post['fname'] : $ucaptured['First Name'];
+      $ucaptured['Last Name'] = @$post['lname'] ? $post['lname'] : $ucaptured['Last Name'];
     
     } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
     else {
       // If a row in the DB hasn't been created yet
-      $ucaptured['email'] = @$post['email'];
-      $ucaptured['fname'] = @$post['fname'];
-      $ucaptured['lname'] = @$post['lname'];
+      $ucaptured['Email'] = @$post['email'];
+      $ucaptured['First Name'] = @$post['fname'];
+      $ucaptured['Last Name'] = @$post['lname'];
     }
     
-    if ($ucaptured['email']) {
+    if ($ucaptured['Email']) {
       
       if (isset($_SESSION['ucaptured_timestamp'])) {
         
@@ -1026,9 +1026,9 @@ function gv_misc_makeRequestCapture_ajax() {
         'User IP' => $ucaptured['ip'],
         'Time' => date('Y-m-d, H:i:s', $_SESSION['ucaptured_timestamp']),
 
-        'fname' => $ucaptured['fname'],
-        'lname' => $ucaptured['lname'],
-        'email' => $ucaptured['email'],
+        'First Name' => $ucaptured['First Name'],
+        'Last Name' => $ucaptured['Last Name'],
+        'Email' => $ucaptured['Email'],
       );
 
       $params['ucaptured_data'] = $ucaptured_data;
@@ -1065,9 +1065,9 @@ function gv_misc_makeRequestCapture_ajax() {
       if ($ucaptured) {
         $ucaptured = unserialize($ucaptured);
         
-        $ucaptured['email'] = @$post['email'] ? $post['email'] : $ucaptured['email'];
-        $ucaptured['fname'] = @$post['fname'] ? $post['fname'] : $ucaptured['fname'];
-        $ucaptured['lname'] = @$post['lname'] ? $post['lname'] : $ucaptured['lname'];
+        $ucaptured['Email'] = @$post['email'] ? $post['email'] : $ucaptured['Email'];
+        $ucaptured['First Name'] = @$post['fname'] ? $post['fname'] : $ucaptured['First Name'];
+        $ucaptured['Last Name'] = @$post['lname'] ? $post['lname'] : $ucaptured['Last Name'];
         
         $result = db_update('gv_quote_requests')
           ->fields(array(
@@ -1078,9 +1078,9 @@ function gv_misc_makeRequestCapture_ajax() {
 
       } // End of if ($ucaptured) {
       else {
-        $ucaptured['email'] = @$post['email'];
-        $ucaptured['fname'] = @$post['fname'];
-        $ucaptured['lname'] = @$post['lname'];
+        $ucaptured['Email'] = @$post['email'];
+        $ucaptured['First Name'] = @$post['fname'];
+        $ucaptured['Last Name'] = @$post['lname'];
 
         $result = db_insert('gv_quote_requests')
           ->fields(array(
@@ -1111,9 +1111,9 @@ function gv_misc_makeRequestCapture_ajax() {
         $_SESSION['ucaptured_timestamp'] += 1;
       }
       
-      $ucaptured['email'] = @$post['email'];
-      $ucaptured['fname'] = @$post['fname'];
-      $ucaptured['lname'] = @$post['lname'];
+      $ucaptured['Email'] = @$post['email'];
+      $ucaptured['First Name'] = @$post['fname'];
+      $ucaptured['Last Name'] = @$post['lname'];
       
       $result = db_insert('gv_quote_requests')
         ->fields(array(
@@ -1168,11 +1168,6 @@ function gv_misc_makeRequest_ajax() {
     // Mapping form data to right named fields.
     if ($post['source'] == 'page') {
       
-      // Clear user's captured on the fly data.
-      if (isset($_SESSION['ucaptured'])) {
-        unset($_SESSION['ucaptured']);
-      }
-      
       $phone = isset($post['phone']) ? $post['phone'] : $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
       
       $submission = array(
@@ -1199,6 +1194,24 @@ function gv_misc_makeRequest_ajax() {
         if (!$value || $value == 'Optional') {
           unset($submission[$key]);
         }
+      }
+      
+      // Clear user's captured on the fly data.
+      if (isset($_SESSION['ucaptured_timestamp'])) {
+        
+        $save_submission = $submission;
+        $save_submission['Submit Time'] = date('Y-m-d, H:i:s', time());
+        $save_submission['Submission Duration'] = date('i:s', $save_submission['Submit Time'] - $_SESSION['ucaptured_timestamp']);
+        $result = db_update('gv_quote_requests')
+          ->fields(array(
+            'data' => serialize($save_submission),
+            'status' => 2, // Submitted and sent.
+            'checked' => 1, // Reviewed, because is sent.
+          ))
+          ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
+          ->execute();
+        
+        unset($_SESSION['ucaptured_timestamp']);
       }
       
     }
@@ -1243,8 +1256,10 @@ function gv_misc_makeRequest_ajax() {
 
     //$letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
     
-    drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
-
+    if ($submission['First Name'] != 'a4s') {
+      // Normal send if not a test from a4s
+      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+    }
     // Test letter to the root
     drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params);
 
