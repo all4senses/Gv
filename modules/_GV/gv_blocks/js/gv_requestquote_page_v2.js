@@ -11,6 +11,8 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
           
+          console.log($(this).val());
+          
           (jQuery).ajax({
             
                 url: '/request/capture', 
