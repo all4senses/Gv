@@ -45,7 +45,8 @@
                 url: '/request/capture', 
                 data: {
                         op: 'exit',
-                        url: window.location.href
+                        url: window.location.href,
+                        async: false
                         }, 
                     type: 'POST', 
                     dataType: 'json'
