@@ -41,13 +41,15 @@
 
         $(window).unload( function () { 
           
+          console.log('before unload send');
+          
           (jQuery).ajax({
             
                 url: '/request/capture', 
                 data: {
                         op: 'exit',
                         url: window.location.href,
-                        async: false,
+                        //async: false,
                         email: $('input[id="email"]').val(),
                         fname: $('input[id="firstname"]').val(),
                         lname: $('input[id="lastname"]').val()
@@ -65,6 +67,8 @@
                             } 
                     */
             }); // end of (jQuery).ajax
+            
+            console.log('after unload send');
           
         });
         
