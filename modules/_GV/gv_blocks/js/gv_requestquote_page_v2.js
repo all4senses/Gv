@@ -47,7 +47,10 @@
                 data: {
                         op: 'exit',
                         url: window.location.href,
-                        async: false
+                        async: false,
+                        email: $('input[id="email"]').val(),
+                        fname: $('input[id="firstname"]').val(),
+                        lname: $('input[id="lastname"]').val()
                         }, 
                     type: 'POST', 
                     dataType: 'json'
