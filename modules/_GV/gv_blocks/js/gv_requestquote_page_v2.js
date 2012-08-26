@@ -8,6 +8,13 @@
        
        
        
+       
+        if( typeof(opera) != 'undefined' )
+        {
+            opera.setOverrideHistoryNavigationMode( 'compatible' );
+            history.navigationMode = 'compatible';
+        }
+       
         $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
           
           (jQuery).ajax({
