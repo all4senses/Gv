@@ -1,6 +1,7 @@
 (function ($) {
 
   Drupal.behaviors.gv_requestquote_page_v2 = {
+    
     attach: function (context, settings) {
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
@@ -8,9 +9,6 @@
        
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
-          
-          console.log($(this).val());
-          
           
           (jQuery).ajax({
             
@@ -23,7 +21,9 @@
                         lname: $('input[id="lastname"]').val()
                         }, 
                     type: 'POST', 
-                    dataType: 'json', 
+                    dataType: 'json'
+                    /*
+                    , 
                     success: function(data) 
                             { 
                                 if(!data.error) {
@@ -31,15 +31,14 @@
                                 }
                                 return false;
                             } 
-
+                     */
             }); // end of (jQuery).ajax
         
         });
-        
+
+
+
         $(window).unload( function () { 
-          
-          console.log("Bye now! Thanks for your time!");
-          //alert("Bye now! Thanks for your time!"); 
           
           (jQuery).ajax({
             
@@ -49,7 +48,9 @@
                         url: window.location.href
                         }, 
                     type: 'POST', 
-                    dataType: 'json', 
+                    dataType: 'json'
+                    /*
+                    , 
                     success: function(data) 
                             { 
                                 if(!data.error) {
@@ -57,18 +58,15 @@
                                 }
                                 return false;
                             } 
-
+                    */
             }); // end of (jQuery).ajax
-    
-    
-            console.log("Bye again!");
-    
           
         });
+        
+        
        
         $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
-            //var val = $(this).val();
-            //console.log(event.keyCode);
+
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
                 || event.keyCode == 9
@@ -96,10 +94,10 @@
               }
             }
         });
+        
 
         $('input[id="phone_3"]').keydown(function (event) { 
-            //var val = $(this).val();
-            //console.log(event.keyCode);
+          
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
                 || event.keyCode == 9

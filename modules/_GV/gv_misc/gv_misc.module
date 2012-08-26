@@ -948,7 +948,7 @@ function gv_misc_testPage() {
  */
 function gv_misc_makeRequestCapture_ajax() {
   $status = TRUE;
-  $output = 'test';
+  $output = '';
   
   $post = array();
   foreach ($_POST as $key => $value) {
@@ -984,7 +984,7 @@ function gv_misc_makeRequestCapture_ajax() {
     $_SESSION['ucaptured'] = array('email' => $email, 'fname' => $fname, 'lname' => $lname);
   }
   
-  drupal_json_output(array('status' => $status, 'op' => @$post['op'], 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured']/*, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+  drupal_json_output(array('status' => $status/*, 'op' => @$post['op'], 'data' => $output, 'post' => $_POST, 'ucaptured' => $_SESSION['ucaptured'], 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
 
