@@ -988,6 +988,7 @@ function gv_misc_makeRequestCapture_ajax() {
             'data' => serialize($ucaptured),
             'status' => 1, // Unsubmitted, sent.
             'checked' => 1, // Reviewed, because is sent.
+            'email_presented' => $ucaptured['Email'] ? 1 : 0,
           ))
           ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
           ->execute();
@@ -1015,6 +1016,7 @@ function gv_misc_makeRequestCapture_ajax() {
             'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
             'data' => serialize($ucaptured),
             'checked' => 1, // Reviewed, because is sent.
+            'email_presented' => $ucaptured['Email'] ? 1 : 0,
           ))
           ->execute();
         
@@ -1072,6 +1074,7 @@ function gv_misc_makeRequestCapture_ajax() {
         $result = db_update('gv_quote_requests')
           ->fields(array(
             'data' => serialize($ucaptured),
+            'email_presented' => $ucaptured['Email'] ? 1 : 0,
           ))
           ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
           ->execute();
@@ -1089,6 +1092,7 @@ function gv_misc_makeRequestCapture_ajax() {
             'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
             'data' => serialize($ucaptured),
             'checked' => 0, // Not reviewed by a user or not sent
+            'email_presented' => $ucaptured['Email'] ? 1 : 0,
           ))
           ->execute();
       } // End of Else of if ($ucaptured) {
@@ -1122,6 +1126,7 @@ function gv_misc_makeRequestCapture_ajax() {
           'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
           'data' => serialize($ucaptured),
           'checked' => 0, // Not reviewed by a user or not sent
+          'email_presented' => $ucaptured['Email'] ? 1 : 0,
         ))
         ->execute();
       
@@ -1207,6 +1212,7 @@ function gv_misc_makeRequest_ajax() {
             'data' => serialize($save_submission),
             'status' => 2, // Submitted and sent.
             'checked' => 1, // Reviewed, because is sent.
+            'email_presented' => 1,
           ))
           ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
           ->execute();
