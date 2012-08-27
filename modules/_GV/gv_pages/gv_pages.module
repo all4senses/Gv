@@ -89,56 +89,77 @@ function gv_pages_quoteRequestsList_form() {
       ->limit(2)
       ->execute();
   
+  
+  $form['table_start'] = array(
+    '#type' => 'markup',
+    '#markup' => '<table><tr><td>Num</td><td>Time</td><td>Data</td></tr>',
+  );
+  
   foreach ($ucaptureds as $key => $ucaptured) {
     dpm($ucaptured);
     $form['test' . $key] = array(
-      '#type' => 'item',
-      '#title' => 'Title',
-      '#markup' => '<div><pre>' . print_r($ucaptured, TRUE) . '</pre></div>',
+      '#markup' => "<tr><td>$key</td><td>$ucaptured->timestamp</td><td><pre>" . print_r($ucaptured->data, TRUE) . '</pre></td></tr>',
     );
   }
 
+  $form['table_close'] = array(
+    '#type' => 'markup',
+    '#markup' => '</table></div>',
+  );
+  
   $form['pager'] = array(
-      '#theme' => 'pager',
-      '#weight' => 5,
-    );
+    '#theme' => 'pager',
+    //'#weight' => 5,
+  );
   
-  /*
-  $query = db_select('node', 'n')->extend('PagerDefault');
-  $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
-  $nids = $query
-    ->fields('n', array('nid', 'created'))
-    ->fields('b', array('entity_id', 'body_value'))
-    ->condition('n.type', 'blog_post')
-    ->condition('status', 1)
-    ->orderBy('created', 'DESC')
-    ->limit(10)
-    ->execute()
-    ->fetchCol();
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    /*   
+        $form['table_start'] = array(
+            '#type' => 'markup',
+            '#markup' => '<table><tr><td>Items</td><td>Quantity</td><td>Item Price</td><td>Total</td><td>Remove</td></tr>',
+         ); 
+        
+        foreach($cart['items'] as $key => $item)
+        {
+            $form['items']['item_' . $key. '_open'] = array(
+                '#markup' => '<tr><div class="item">
+                                    <td><div calss="title">Pay as you go: ' . $item['title'] . '</div></td>
+                              </div>',
+            );
+            
+            
+                $form['items']['item_' . $key. '_amount'] = array(
+                '#type'=> 'textfield',
+                '#default_value' => $item['amount'],
+                '#size' => 4,
+                '#prefix'=> '<td>',
+                '#suffix'=> '</td>',    
+                '#maxlength' => 4,
+                );
 
-  if (!empty($nids)) {
-
-        $nodes = node_load_multiple($nids);
-        $build = node_view_multiple($nodes);
-   
-    $build['pager'] = array(
-      '#theme' => 'pager',
-      '#weight' => 5,
-    );
-    return $build; 
-  }
+            
+            $form['items']['item_' . $key . '_close'] = array(
+                '#markup' => '<td><div class="cost">'. $item['value measure'] . number_format($item['value']*$item['cost_per_one'], 2, '.', '') . ' USD</div></td>
+                              <td><div class="cost">'.$item['value measure'] . number_format($item['value']*$item['cost_per_one']*$item['amount'], 2, '.', '') . ' USD</div></td>' . ($target == 'cart'?'<td>'.l(t('Remove'), 'remove_credits', array('attributes' => array('class' => 'removecredit'), 'query' => array('credits' => $key, 'user_url' => $user_url->uid))).'</td>':'') . '</tr>',
+            );
+            
+            
+        } // end of foreach($cart['items'] as $key => $item)
+        
+         $form['table_close'] = array(
+        '#type' => 'markup',
+        '#markup' => '</table></div>',
+         );  
   */
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   return $form;
