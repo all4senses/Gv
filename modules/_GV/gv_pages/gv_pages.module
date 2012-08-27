@@ -105,11 +105,19 @@ function gv_pages_quoteRequestsList_form() {
   
   if (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
     
-//    $result = db_delete('gv_quote_requests')
-//    ->condition('timestamp', $_GET['timestamp'])
-//    ->execute();
+    $result = db_delete('gv_quote_requests')
+      ->condition('timestamp', $_GET['timestamp'])
+      ->execute();
     
-    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => array('a' => 'b')));
+    if ($result) {
+      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '" has been deleted.');
+    }
+    else {
+      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '" has not been found in the database.', 'warning');
+    }
+    
+    unset($_GET['op'], $_GET['timestamp']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
   
   // Remove all useless rows (without emails).
