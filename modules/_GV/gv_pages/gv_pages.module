@@ -97,8 +97,8 @@ function gv_misc_userIsAdmin() {
  */
 function gv_pages_quoteRequestsList_form() {
   
-  //dpm($_GET);
-  //dpm($_SERVER['REDIRECT_URL']);
+  dpm($_GET);
+  dpm($_SERVER['REDIRECT_URL']);
   //dpm($_SERVER);
   
   
@@ -175,7 +175,7 @@ function gv_pages_quoteRequestsList_form() {
     
     $delete_url = $_GET + array('op' => 'delete', 'timestamp' =>$ucaptured->timestamp);
     unset($delete_url['q']);
-    dpm($delete_url);
+    //dpm($delete_url);
     
     $form['item_' . ($key + 1) . 'c'] = array(
       '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td>' . l('Delete', $_SERVER['REDIRECT_URL'], array('query' => $delete_url)) . '</td></tr>',
