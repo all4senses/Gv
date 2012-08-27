@@ -86,6 +86,7 @@ function gv_pages_quoteRequestsList_form() {
   $ucaptureds = $query->execute()->fetch();
   
   foreach ($ucaptureds as $key => $ucaptured) {
+    dpm($ucaptured);
     $form['test' . $key] = array(
       '#type' => 'item',
       '#title' => 'Title',
