@@ -178,7 +178,7 @@ function gv_pages_quoteRequestsList_form() {
     //dpm($delete_url);
     
     $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td>' . l('Delete', $_SERVER['REDIRECT_URL'], array('query' => $delete_url)) . '</td></tr>',
+      '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td></tr>',
     );
   }
 
