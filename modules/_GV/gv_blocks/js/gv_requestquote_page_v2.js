@@ -122,6 +122,14 @@
               if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
+                      
+                      var currentInput = document.getElementById($(this).attr('id'));
+                      
+                      var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
+
+
+                      console.log('selectedSubstring = ' + selectedSubstring);
+                      
                       console.log('this.val = ' + $(this).val());
                       console.log('event.keyCode = ' + event.keyCode);
                       console.log('event.keyCode = ' + event.which);
