@@ -97,9 +97,9 @@ function gv_misc_userIsAdmin() {
  */
 function gv_pages_quoteRequestsList_form() {
   
-  dpm($_GET);
-  dpm($_SERVER['REDIRECT_URL']);
-  dpm($_SERVER);
+  //dpm($_GET);
+  //dpm($_SERVER['REDIRECT_URL']);
+  //dpm($_SERVER);
   
   
   
@@ -110,13 +110,13 @@ function gv_pages_quoteRequestsList_form() {
       ->execute();
     
     if ($result) {
-      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '" has been deleted.');
+      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" has been deleted.');
     }
     else {
-      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '" has not been found in the database.', 'warning');
+      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" has not been found in the database.', 'warning');
     }
     
-    unset($_GET['op'], $_GET['timestamp']);
+    unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
   
