@@ -95,10 +95,15 @@ function gv_pages_quoteRequestsList_form() {
     '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Time</th><th>Data</th></tr></thead><tbody>',
   );
   
+  $tr_class = 'even';
   foreach ($ucaptureds as $key => $ucaptured) {
     dpm($ucaptured);
+    $data = '';
+    foreach (unserialize($ucaptured->data) as $title => $value) {
+      $data .= "<div>$title: $value</div>";
+    }
     $form['test' . $key] = array(
-      '#markup' => "<tr><td>$key</td><td>$ucaptured->timestamp</td><td><pre>" . print_r($ucaptured->data, TRUE) . '</pre></td></tr>',
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . $key . '</td><td>$ucaptured->timestamp</td><td>' . $data . '</td></tr>',
     );
   }
 
