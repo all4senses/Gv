@@ -41,7 +41,8 @@ function gv_misc_menu() {
   $items['admin/content/reviews-to-approve'] = array(
     'title' => 'Reviews to Approve',
     'page callback' => 'gv_misc_gotoReviewsToApprove',
-    'access arguments' => array('administer content'),
+    //'access arguments' => array('administer content'),
+    'access callback' => 'gv_misc_userIsAdmin',
     'type' => MENU_NORMAL_ITEM,
   );
   
