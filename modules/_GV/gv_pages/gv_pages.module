@@ -75,12 +75,6 @@ function gv_pages_menu() {
 
 
 function gv_pages_quoteRequestsList_form() {
-  /*
-  $form['test'] = array(
-      '#type' => 'textfield',
-      '#title' => 'Title',
-  );
-  */
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked'));
@@ -94,7 +88,7 @@ function gv_pages_quoteRequestsList_form() {
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked/Alerted</th><th>Data</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked/Alerted</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
@@ -117,8 +111,20 @@ function gv_pages_quoteRequestsList_form() {
     foreach (unserialize($ucaptured->data) as $title => $value) {
       $data .= "<div>$title: $value</div>";
     }
-    $form['test' . $key] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . $ucaptured->checked . '</td><td>' . $data . '</td></tr>',
+    $form['item_' . ($key + 1) . 'a'] = array(
+      //'#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . $ucaptured->checked . '</td><td>' . $data . '</td><td><a href="#">Delete</a></td></tr>',
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td>',
+    );
+    
+    $form['item_' . ($key + 1) . 'b'] = array(
+      '#type' => 'checkbox',
+      '#default_value' => $ucaptured->checked,
+      '#prefix' => '<td>',
+      '#suffix' => '</td>',
+    );
+    
+    $form['item_' . ($key + 1) . 'c'] = array(
+      '#markup' => '<td>' . $data . '</td><td><a href="#">Delete</a></td></tr>',
     );
   }
 
