@@ -80,20 +80,21 @@
                     event.preventDefault();     // Prevent character input
             }
             else {
-              if (l >= 3 
+              if (l >= 2 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
                       console.log('this.val = ' + $(this).val());
                       console.log('event.keyCode = ' + event.keyCode);
                       console.log('event.keyCode = ' + event.which);
                       console.log('event.char = ' + String.fromCharCode(event.keyCode));
-                      //event.preventDefault();
+                      event.preventDefault();
+                      $(this).val($(this).val() + String.fromCharCode(event.keyCode));
                       if ($(this).attr('id') == 'phone_1') {
-                        $('input[id="phone_2"]').val('');
+                        //$('input[id="phone_2"]').val('');
                         $('input[id="phone_2"]').focus();
                       }
                       else {
-                        $('input[id="phone_3"]').val('');
+                        //$('input[id="phone_3"]').val('');
                         $('input[id="phone_3"]').focus();
                       }
                   }
