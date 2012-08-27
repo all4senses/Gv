@@ -139,7 +139,7 @@ function gv_pages_quoteRequestsList_form() {
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked/Alerted</th><th>IP</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Submission Started at</th><th>Status</th><th>Checked/Alerted</th><th>IP</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
@@ -160,6 +160,9 @@ function gv_pages_quoteRequestsList_form() {
     }
     $data = '';
     foreach (unserialize($ucaptured->data) as $title => $value) {
+      if ($key == 'Submission Duration') {
+        $value = date('Y-m-d, H:i:s', $value);
+      }
       $data .= "<div>$title: $value</div>";
     }
     $form['item_' . ($key + 1) . 'a'] = array(

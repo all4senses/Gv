@@ -11,7 +11,14 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
           
-          console.log($(this).val());
+          //console.log($(this).val());
+          console.log('#phones_amt = ' + $('#phones_amt').val());
+          console.log('#q_type = ' + $('#q_type').val());
+          console.log('#buying_time = ' + $('#buying_time').val());
+          
+          console.log('input[name="version"] = ' + $('input[name="version"]').val());
+          console.log('input[name="source"] = ' + $('input[name="source"]').val());
+          
           
           (jQuery).ajax({
             
@@ -19,9 +26,19 @@
                 data: {
                         op: 'set',
                         url: window.location.href,
+                        
+                        
                         email: $('input[id="email"]').val(),
-                        fname: $('input[id="firstname"]').val(),
-                        lname: $('input[id="lastname"]').val()
+                        firstname: $('input[id="firstname"]').val(),
+                        lastname: $('input[id="lastname"]').val(),
+                        
+                        website: $('input[id="website"]').val(),
+                        company: $('input[id="company"]').val(),
+                        
+                        phone_1: $('input[id="phone_1"]').val(),
+                        phone_2: $('input[id="phone_2"]').val(),
+                        phone_3: $('input[id="phone_3"]').val()
+                        
                         }, 
                     type: 'POST', 
                     dataType: 'json'
@@ -43,7 +60,7 @@
 
         $(window).unload( function () { 
           
-          console.log('before unload send');
+          //console.log('before unload send');
           
           (jQuery).ajax({
             
@@ -52,15 +69,24 @@
                         op: 'exit',
                         url: window.location.href,
                         //async: false,
+                        
                         email: $('input[id="email"]').val(),
-                        fname: $('input[id="firstname"]').val(),
-                        lname: $('input[id="lastname"]').val()
+                        firstname: $('input[id="firstname"]').val(),
+                        lastname: $('input[id="lastname"]').val(),
+                        
+                        website: $('input[id="website"]').val(),
+                        company: $('input[id="company"]').val(),
+                        
+                        phone_1: $('input[id="phone_1"]').val(),
+                        phone_2: $('input[id="phone_2"]').val(),
+                        phone_3: $('input[id="phone_3"]').val()
+                        
                         }, 
                     type: 'POST', 
                     dataType: 'json'
             }); // end of (jQuery).ajax
             
-            console.log('after unload send');
+            //console.log('after unload send');
           
         });
         
