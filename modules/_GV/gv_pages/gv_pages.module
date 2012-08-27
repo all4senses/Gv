@@ -97,6 +97,19 @@ function gv_misc_userIsAdmin() {
  */
 function gv_pages_quoteRequestsList_form() {
   
+  dpm($_GET);
+  dpm($_SERVER['REDIRECT_URL']);
+  dpm($_SERVER);
+  
+  
+//  if (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
+//    $result = db_delete('gv_quote_requests')
+//    ->condition('timestamp', $_GET['timestamp'])
+//    ->execute();
+//    
+//    
+//  }
+  
   // Remove all useless rows (without emails).
   $current_time = time();
   $result = db_delete('gv_quote_requests')
@@ -104,19 +117,20 @@ function gv_pages_quoteRequestsList_form() {
     ->condition('timestamp', ($current_time - 1200), '<') // 20 min old
     ->execute();
   
+  
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
-  $query->fields('qr', array('timestamp', 'data', 'status', 'checked'));
+  $query->fields('qr', array('timestamp', 'data', 'status', 'checked', 'ip'));
   $query->condition('qr.email_presented', 1);
   $ucaptureds = 
     $query
       ->orderBy('timestamp', 'DESC')
-      ->limit(2)
+      ->limit(20)
       ->execute();
   
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked/Alerted</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked/Alerted</th><th>IP</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
@@ -140,7 +154,6 @@ function gv_pages_quoteRequestsList_form() {
       $data .= "<div>$title: $value</div>";
     }
     $form['item_' . ($key + 1) . 'a'] = array(
-      //'#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . $ucaptured->checked . '</td><td>' . $data . '</td><td><a href="#">Delete</a></td></tr>',
       '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td>',
     );
     
@@ -152,7 +165,7 @@ function gv_pages_quoteRequestsList_form() {
     );
     
     $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => '<td>' . $data . '</td><td><a href="#">Delete</a></td></tr>',
+      '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td><a href="#">Delete</a></td></tr>',
     );
   }
 
