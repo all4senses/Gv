@@ -80,7 +80,7 @@
                     event.preventDefault();     // Prevent character input
             }
             else {
-              if (l >= 2 
+              if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
                       console.log('this.val = ' + $(this).val());
