@@ -80,10 +80,14 @@ function gv_pages_quoteRequestsList_form() {
       '#title' => 'Title',
   );
   
-  $query = db_select('gv_quote_requests', 'qr')
-    ->fields('qr', array('timestamp', 'data',));
+  $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
+  $query->fields('qr', array('timestamp', 'data'));
   //$query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
-  $ucaptureds = $query->execute();
+  $ucaptureds = 
+    $query
+      ->orderBy('timestamp', 'DESC')
+      ->limit(2)
+      ->execute();
   
   foreach ($ucaptureds as $key => $ucaptured) {
     dpm($ucaptured);
@@ -94,9 +98,12 @@ function gv_pages_quoteRequestsList_form() {
     );
   }
 
+  $form['pager'] = array(
+      '#theme' => 'pager',
+      '#weight' => 5,
+    );
   
-  
-  
+  /*
   $query = db_select('node', 'n')->extend('PagerDefault');
   $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
   $nids = $query
@@ -120,7 +127,7 @@ function gv_pages_quoteRequestsList_form() {
     );
     return $build; 
   }
-  
+  */
   
   
   
