@@ -1233,7 +1233,7 @@ function gv_misc_makeRequest_ajax() {
       if (isset($_SESSION['ucaptured_timestamp'])) {
         $start_submission_time = $_SESSION['ucaptured_timestamp'];
         //$save_submission['Submission Duration'] = number_format((($current_time - $start_submission_time) / 60), 2, '.', '') . ' min';
-        $save_submission['Submission Duration'] = date('H:i:s', $current_time - $start_submission_time);
+        $save_submission['Submission Duration'] = $current_time - $start_submission_time;
         $result = db_update('gv_quote_requests')
           ->fields(array(
             'data' => serialize($save_submission),
