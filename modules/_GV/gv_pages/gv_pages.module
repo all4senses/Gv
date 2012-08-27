@@ -93,7 +93,47 @@ function gv_pages_quoteRequestsList_form() {
       '#markup' => '<div><pre>' . print_r($ucaptured, TRUE) . '</pre></div>',
     );
   }
-      
+
+  
+  
+  
+  $query = db_select('node', 'n')->extend('PagerDefault');
+  $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
+  $nids = $query
+    ->fields('n', array('nid', 'created'))
+    ->fields('b', array('entity_id', 'body_value'))
+    ->condition('n.type', 'blog_post')
+    ->condition('status', 1)
+    ->orderBy('created', 'DESC')
+    ->limit(10)
+    ->execute()
+    ->fetchCol();
+
+  if (!empty($nids)) {
+
+        $nodes = node_load_multiple($nids);
+        $build = node_view_multiple($nodes);
+   
+    $build['pager'] = array(
+      '#theme' => 'pager',
+      '#weight' => 5,
+    );
+    return $build; 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   return $form;
 }
 
