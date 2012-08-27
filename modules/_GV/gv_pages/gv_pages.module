@@ -23,7 +23,7 @@ function gv_pages_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('gv_pages_quoteRequestsList_form'),
       
-    'access arguments' => array('administer content'),
+    'access arguments' => array('edit any content'),
     'type' => MENU_NORMAL_ITEM,
   );
   
@@ -75,6 +75,13 @@ function gv_pages_menu() {
 
 
 function gv_pages_quoteRequestsList_form() {
+  
+  // Remove all useless rows (without emails).
+  $current_time = time();
+  $result = db_delete('gv_quote_requests')
+    ->condition('email_presented', 0)
+    ->condition('timestamp', ($current_time - 1200), '<') // 20 min old
+    ->execute();
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked'));
