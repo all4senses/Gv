@@ -83,7 +83,7 @@ function gv_pages_quoteRequestsList_form() {
   $query = db_select('gv_quote_requests', 'qr')
     ->fields('qr', array('timestamp', 'data',));
   //$query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
-  $ucaptureds = $query->execute()->fetch();
+  $ucaptureds = $query->execute();
   
   foreach ($ucaptureds as $key => $ucaptured) {
     dpm($ucaptured);
