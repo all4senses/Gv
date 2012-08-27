@@ -1117,7 +1117,7 @@ function gv_misc_makeRequestCapture_ajax() {
 function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone = FALSE) {
   
   if ($combine_phone) {
-    if (isset($ucaptured['phone_1']) && isset($ucaptured['phone_2']) && isset($ucaptured['phone_3'])) {
+    if (isset($ucaptured['Phone 1']) && isset($ucaptured['Phone 2']) && isset($ucaptured['Phone 3'])) {
       $ucaptured['Phone #'] = $ucaptured['Phone 1'] . '-' . $ucaptured['Phone 2'] . '-' . $ucaptured['Phone 3'];
       unset($ucaptured['Phone 1'], $ucaptured['Phone 2'], $ucaptured['Phone 3']);
     }
