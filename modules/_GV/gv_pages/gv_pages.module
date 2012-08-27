@@ -159,9 +159,13 @@ function gv_pages_quoteRequestsList_form() {
         break;
     }
     $data = '';
-    //dpm(unserialize($ucaptured->data));
+    dpm(unserialize($ucaptured->data));
     foreach (unserialize($ucaptured->data) as $title => $value) {
       if ($title == 'Submit Time' && is_numeric($value)) {
+        dpm('difference = ' . ($value - $ucaptured->timestamp));
+        dpm('difference date = ' . date('Y-m-d, H:i:s', ($value - $ucaptured->timestamp)));
+        dpm('difference = ' . (($value - $ucaptured->timestamp) / 60) . 'min' );
+        
         $value = date('Y-m-d, H:i:s', $value);
       }
       $data .= "<div>$title: $value</div>";
