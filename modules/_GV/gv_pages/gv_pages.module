@@ -75,10 +75,12 @@ function gv_pages_menu() {
 
 
 function gv_pages_quoteRequestsList_form() {
+  /*
   $form['test'] = array(
       '#type' => 'textfield',
       '#title' => 'Title',
   );
+  */
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked'));
