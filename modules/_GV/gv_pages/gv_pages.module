@@ -92,17 +92,31 @@ function gv_pages_quoteRequestsList_form() {
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked</th><th>Data</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked/Alerted</th><th>Data</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
   foreach ($ucaptureds as $key => $ucaptured) {
+    switch ($ucaptured->status) {
+      case 0:
+        $status = 'Captured, NOT alerted';
+        $status_class = 'not-alerted';
+        break;
+      case 1:
+        $status = 'Captured, alerted';
+        $status_class = 'alerted';
+        break;
+      case 2:
+        $status = 'Submitted';
+        $status_class = 'submitted';
+        break;
+    }
     $data = '';
     foreach (unserialize($ucaptured->data) as $title => $value) {
       $data .= "<div>$title: $value</div>";
     }
     $form['test' . $key] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td>' . $ucaptured->status . '</td><td>' . $ucaptured->checked . '</td><td>' . $data . '</td></tr>',
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . $ucaptured->checked . '</td><td>' . $data . '</td></tr>',
     );
   }
 
