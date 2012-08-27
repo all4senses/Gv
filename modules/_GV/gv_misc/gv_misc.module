@@ -968,9 +968,9 @@ function gv_misc_makeRequestCapture_ajax() {
       $ucaptured = $query->execute()->fetchField();
       $ucaptured = unserialize($ucaptured);  
       
-      $ucaptured['Email'] = @$post['email'] ? $post['email'] : $ucaptured['Email'];
-      $ucaptured['First Name'] = @$post['fname'] ? $post['fname'] : $ucaptured['First Name'];
-      $ucaptured['Last Name'] = @$post['lname'] ? $post['lname'] : $ucaptured['Last Name'];
+      $ucaptured['Email'] = (isset($post['email']) && $post['email']) ? $post['email'] : $ucaptured['Email'];
+      $ucaptured['First Name'] = (isset($post['fname']) && $post['fname']) ? $post['fname'] : $ucaptured['First Name'];
+      $ucaptured['Last Name'] = (isset($post['lname']) && $post['lname']) ? $post['lname'] : $ucaptured['Last Name'];
       
       if ($ucaptured['Email']) {
       
@@ -1065,9 +1065,9 @@ function gv_misc_makeRequestCapture_ajax() {
       if ($ucaptured) {
         $ucaptured = unserialize($ucaptured);
         
-        $ucaptured['Email'] = @$post['email'] ? $post['email'] : $ucaptured['Email'];
-        $ucaptured['First Name'] = @$post['fname'] ? $post['fname'] : $ucaptured['First Name'];
-        $ucaptured['Last Name'] = @$post['lname'] ? $post['lname'] : $ucaptured['Last Name'];
+        $ucaptured['Email'] = (isset($post['email']) && $post['email']) ? $post['email'] : $ucaptured['Email'];
+        $ucaptured['First Name'] = (isset($post['fname']) && $post['fname']) ? $post['fname'] : $ucaptured['First Name'];
+        $ucaptured['Last Name'] = (isset($post['lname']) && $post['lname']) ? $post['lname'] : $ucaptured['Last Name'];
         
         $result = db_update('gv_quote_requests')
           ->fields(array(
@@ -1079,9 +1079,9 @@ function gv_misc_makeRequestCapture_ajax() {
 
       } // End of if ($ucaptured) {
       else {
-        $ucaptured['Email'] = @$post['email'];
-        $ucaptured['First Name'] = @$post['fname'];
-        $ucaptured['Last Name'] = @$post['lname'];
+        $ucaptured['Email'] = isset($post['email']) ? $post['email'] : '';
+        $ucaptured['First Name'] = isset($post['fname']) ? $post['fname'] : '';
+        $ucaptured['Last Name'] = isset($post['lname']) ? $post['lname'] : '';
 
         $result = db_insert('gv_quote_requests')
           ->fields(array(
@@ -1113,9 +1113,9 @@ function gv_misc_makeRequestCapture_ajax() {
         $_SESSION['ucaptured_timestamp'] += 1;
       }
       
-      $ucaptured['Email'] = @$post['email'];
-      $ucaptured['First Name'] = @$post['fname'];
-      $ucaptured['Last Name'] = @$post['lname'];
+      $ucaptured['Email'] = isset($post['email']) ? $post['email'] : '';
+      $ucaptured['First Name'] = isset($post['fname']) ? $post['fname'] : '';
+      $ucaptured['Last Name'] = isset($post['lname']) ? $post['lname'] : '';
       
       $result = db_insert('gv_quote_requests')
         ->fields(array(
