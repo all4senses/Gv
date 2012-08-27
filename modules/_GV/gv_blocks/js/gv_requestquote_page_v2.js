@@ -87,9 +87,9 @@
                       console.log('event.keyCode = ' + event.keyCode);
                       console.log('event.keyCode = ' + event.which);
                       console.log('event.char = ' + String.fromCharCode(event.keyCode));
-                      event.preventDefault();
+                      //event.preventDefault();
                       if (l < 3) {
-                        $(this).val($(this).val() + String.fromCharCode(event.keyCode));
+                        //$(this).val($(this).val() + String.fromCharCode(event.keyCode));
                       }
                       if ($(this).attr('id') == 'phone_1') {
                         //$('input[id="phone_2"]').val('');
