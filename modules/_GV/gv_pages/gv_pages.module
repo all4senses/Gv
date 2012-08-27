@@ -165,7 +165,7 @@ function gv_pages_quoteRequestsList_form() {
         $value = date('Y-m-d, H:i:s', $value);
       }
       elseif ($title == 'Submission Duration' && is_numeric($value)) {
-        $value = ($value / 60) . 'min';
+        $value = number_format($value / 60, 2, '.', '') . ' min';
       }
       $data .= "<div>$title: $value</div>";
     }
