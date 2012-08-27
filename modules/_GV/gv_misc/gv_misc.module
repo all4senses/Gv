@@ -1153,9 +1153,15 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
     }
   }
   else {
-    //$ucaptured['Email'] = isset($post['email']) ? $post['email'] : '';
-    $ucaptured[$key1] = isset($post[$key2]) ? $post[$key2] : '';
+    foreach ($fields as $key1 => $key2) {
+      //$ucaptured['Email'] = isset($post['email']) ? $post['email'] : '';
+      $ucaptured[$key1] = isset($post[$key2]) ? $post[$key2] : '';
+    }
+    
+    $ucaptured['Browser'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
   }
+  
+
   
   return $ucaptured;
 }
@@ -1216,6 +1222,7 @@ function gv_misc_makeRequest_ajax() {
 
         'Source' => $post['source'],
         'Version' => $post['version'],
+        
       );
       
       foreach ($submission as $key => $value) {
@@ -1229,7 +1236,7 @@ function gv_misc_makeRequest_ajax() {
       $current_time = time();
       $save_submission = $submission;
       $save_submission['Submit Time'] = $current_time;
-      
+      $save_submission['Browser'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
       if (isset($_SESSION['ucaptured_timestamp'])) {
         $start_submission_time = $_SESSION['ucaptured_timestamp'];
         //$save_submission['Submission Duration'] = number_format((($current_time - $start_submission_time) / 60), 2, '.', '') . ' min';
@@ -1284,6 +1291,7 @@ function gv_misc_makeRequest_ajax() {
     }
     
     $submission['User IP'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    $submission['Browser'] = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
     $submission['Time'] = date('Y-m-d, H:i:s', time());
     
     $params['request_data'] = $submission; // $post;
