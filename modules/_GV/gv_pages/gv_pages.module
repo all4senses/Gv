@@ -159,6 +159,7 @@ function gv_pages_quoteRequestsList_form() {
         break;
     }
     $data = '';
+    dpm(unserialize($ucaptured->data));
     foreach (unserialize($ucaptured->data) as $title => $value) {
       if ($key == 'Submission Duration') {
         $value = date('Y-m-d, H:i:s', $value);
