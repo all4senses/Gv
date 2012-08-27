@@ -74,6 +74,11 @@ function gv_pages_menu() {
 }
 
 
+/**
+ * 
+ * User permissions access calback function for the admin.
+ * 
+ */
 function gv_misc_userIsAdmin() {
   global $user;
   if (in_array('administrator', $user->roles)) {
@@ -85,6 +90,11 @@ function gv_misc_userIsAdmin() {
 }
 
 
+/**
+ * 
+ * A form for a Quote Requests data page, including not submitted, but captured data.
+ * 
+ */
 function gv_pages_quoteRequestsList_form() {
   
   // Remove all useless rows (without emails).
@@ -156,56 +166,6 @@ function gv_pages_quoteRequestsList_form() {
     //'#weight' => 5,
   );
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    /*   
-        $form['table_start'] = array(
-            '#type' => 'markup',
-            '#markup' => '<table><tr><td>Items</td><td>Quantity</td><td>Item Price</td><td>Total</td><td>Remove</td></tr>',
-         ); 
-        
-        foreach($cart['items'] as $key => $item)
-        {
-            $form['items']['item_' . $key. '_open'] = array(
-                '#markup' => '<tr><div class="item">
-                                    <td><div calss="title">Pay as you go: ' . $item['title'] . '</div></td>
-                              </div>',
-            );
-            
-            
-                $form['items']['item_' . $key. '_amount'] = array(
-                '#type'=> 'textfield',
-                '#default_value' => $item['amount'],
-                '#size' => 4,
-                '#prefix'=> '<td>',
-                '#suffix'=> '</td>',    
-                '#maxlength' => 4,
-                );
-
-            
-            $form['items']['item_' . $key . '_close'] = array(
-                '#markup' => '<td><div class="cost">'. $item['value measure'] . number_format($item['value']*$item['cost_per_one'], 2, '.', '') . ' USD</div></td>
-                              <td><div class="cost">'.$item['value measure'] . number_format($item['value']*$item['cost_per_one']*$item['amount'], 2, '.', '') . ' USD</div></td>' . ($target == 'cart'?'<td>'.l(t('Remove'), 'remove_credits', array('attributes' => array('class' => 'removecredit'), 'query' => array('credits' => $key, 'user_url' => $user_url->uid))).'</td>':'') . '</tr>',
-            );
-            
-            
-        } // end of foreach($cart['items'] as $key => $item)
-        
-         $form['table_close'] = array(
-        '#type' => 'markup',
-        '#markup' => '</table></div>',
-         );  
-  */
-  
-  
   return $form;
 }
 
@@ -215,55 +175,56 @@ function gv_pages_quoteRequestsList_form() {
  * 
  * Allows to use same topics for News, Articles, Blog posts, etc.
  */
-//function gv_pages_buildTopicsPage($content_type_label) {
-//  global $language;
-//  //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
-//  // Inverted...
-//  $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
-//  $content_type = $content_types[$content_type_label];
-//  
-//  $topics = cache_get($content_type . '_topics_page' . $language->language);
-//  if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
-//    $topics_array = gv_misc_getTopics($content_type, $content_type_label);
-//
-//    if (!$topics_array) {
-//      return NULL;
-//    }
-//    
-//    // Simple List.
-//    // $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
-//    // Tag cloud.
-//    $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
-//    $topics = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $topics_array));
-//  
-//
-//    //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
-//    $show_all_url = '<div class="more-link">' . l(t('Show all posts'), $content_type_label) . '</div>';
-//    $topics = /*$page_title .*/ $topics . $show_all_url;
-//    // Expire = current time + 4 hours.
-//    cache_set($content_type . '_topics_page' . $language->language, $topics, 'cache', time() + 14400);
-//  }
-//  else {
-//    $topics = $topics->data;
-//  }
-//  
-//  if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
-//    //dpm($preface);
-//    //drupal_set_title($preface->title);
-//    if (isset($preface->metatags['title']['value']) && $preface->metatags['title']['value']) {
-//      drupal_set_title($preface->metatags['title']['value']);
-//    }
-//    else {
-//      drupal_set_title($preface->title);
-//    }
-//    
-//    $preface->title_no_link = TRUE;
-//    $preface = render(node_view($preface, 'full'));
-//  }
-//  
-//  return '<div class="tags">' . $preface . $topics . '</div>'; 
-//}
+/*
+function gv_pages_buildTopicsPage($content_type_label) {
+  global $language;
+  //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
+  // Inverted...
+  $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+  $content_type = $content_types[$content_type_label];
+  
+  $topics = cache_get($content_type . '_topics_page' . $language->language);
+  if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
+    $topics_array = gv_misc_getTopics($content_type, $content_type_label);
 
+    if (!$topics_array) {
+      return NULL;
+    }
+    
+    // Simple List.
+    // $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
+    // Tag cloud.
+    $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
+    $topics = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $topics_array));
+  
+
+    //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
+    $show_all_url = '<div class="more-link">' . l(t('Show all posts'), $content_type_label) . '</div>';
+    $topics = $topics . $show_all_url; // $page_title . $topics . $show_all_url;
+    // Expire = current time + 4 hours.
+    cache_set($content_type . '_topics_page' . $language->language, $topics, 'cache', time() + 14400);
+  }
+  else {
+    $topics = $topics->data;
+  }
+  
+  if ($preface = gv_misc_getPrefaceByKey($content_type_label . '_tags') ) {
+    //dpm($preface);
+    //drupal_set_title($preface->title);
+    if (isset($preface->metatags['title']['value']) && $preface->metatags['title']['value']) {
+      drupal_set_title($preface->metatags['title']['value']);
+    }
+    else {
+      drupal_set_title($preface->title);
+    }
+    
+    $preface->title_no_link = TRUE;
+    $preface = render(node_view($preface, 'full'));
+  }
+  
+  return '<div class="tags">' . $preface . $topics . '</div>'; 
+}
+*/
 
 
 function gv_pages_buildTopicsPage($content_type_label) {

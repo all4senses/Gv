@@ -58,16 +58,6 @@
                         }, 
                     type: 'POST', 
                     dataType: 'json'
-                    /*
-                    , 
-                    success: function(data) 
-                            { 
-                                if(!data.error) {
-                                    console.log('The header is arrived!');
-                                }
-                                return false;
-                            } 
-                    */
             }); // end of (jQuery).ajax
             
             console.log('after unload send');
@@ -93,16 +83,19 @@
               if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
-                  //event.preventDefault();
-                  if ($(this).attr('id') == 'phone_1') {
-                    $('input[id="phone_2"]').val('');
-                    $('input[id="phone_2"]').focus();
+                      console.log('event.keyCode = ' . event.keyCode);
+                      console.log('event.keyCode = ' . event.which);
+                      console.log('event.char = ' . String.fromCharCode(event.keyCode));
+                      //event.preventDefault();
+                      if ($(this).attr('id') == 'phone_1') {
+                        $('input[id="phone_2"]').val('');
+                        $('input[id="phone_2"]').focus();
+                      }
+                      else {
+                        $('input[id="phone_3"]').val('');
+                        $('input[id="phone_3"]').focus();
+                      }
                   }
-                  else {
-                    $('input[id="phone_3"]').val('');
-                    $('input[id="phone_3"]').focus();
-                  }
-              }
             }
         });
         
