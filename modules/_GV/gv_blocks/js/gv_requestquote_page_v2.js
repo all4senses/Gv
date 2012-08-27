@@ -127,14 +127,15 @@
                       
                       var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
 
-
                       console.log('selectedSubstring = ' + selectedSubstring);
                       
-                      console.log('this.val = ' + $(this).val());
-                      console.log('event.keyCode = ' + event.keyCode);
-                      console.log('event.keyCode = ' + event.which);
-                      console.log('event.char = ' + String.fromCharCode(event.keyCode));
-                      event.preventDefault();
+                      //console.log('this.val = ' + $(this).val());
+                      //console.log('event.keyCode = ' + event.keyCode);
+                      //console.log('event.keyCode = ' + event.which);
+                      //console.log('event.char = ' + String.fromCharCode(event.keyCode));
+                      if (!selectedSubstring) {
+                        event.preventDefault();
+                      }
                   }
             }
         });
