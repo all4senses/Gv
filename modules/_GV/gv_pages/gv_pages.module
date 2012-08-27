@@ -102,13 +102,15 @@ function gv_pages_quoteRequestsList_form() {
   dpm($_SERVER);
   
   
-//  if (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
+  
+  if (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
+    
 //    $result = db_delete('gv_quote_requests')
 //    ->condition('timestamp', $_GET['timestamp'])
 //    ->execute();
-//    
-//    
-//  }
+    
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => array('a' => 'b')));
+  }
   
   // Remove all useless rows (without emails).
   $current_time = time();
