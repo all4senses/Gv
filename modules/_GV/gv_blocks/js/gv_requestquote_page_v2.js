@@ -66,7 +66,7 @@
         
         
        
-        $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
+        $('input[id="phone_1"], input[id="phone_2"]').keyup(function (event) { 
 
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
@@ -88,7 +88,9 @@
                       console.log('event.keyCode = ' + event.which);
                       console.log('event.char = ' + String.fromCharCode(event.keyCode));
                       event.preventDefault();
-                      $(this).val($(this).val() + String.fromCharCode(event.keyCode));
+                      if (l < 3) {
+                        $(this).val($(this).val() + String.fromCharCode(event.keyCode));
+                      }
                       if ($(this).attr('id') == 'phone_1') {
                         //$('input[id="phone_2"]').val('');
                         $('input[id="phone_2"]').focus();
