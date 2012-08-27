@@ -79,6 +79,20 @@ function gv_pages_quoteRequestsList_form() {
       '#type' => 'textfield',
       '#title' => 'Title',
   );
+  
+  $query = db_select('gv_quote_requests', 'qr')
+    ->fields('qr', array('timestamp', 'data',));
+  //$query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+  $ucaptureds = $query->execute()->fetch();
+  
+  foreach ($ucaptureds as $key => $ucaptured) {
+    $form['test' . $key] = array(
+      '#type' => 'item',
+      '#title' => 'Title',
+      '#value' => '<div><pre>' . print_r($ucaptured, TRUE) . '</pre></div>',
+    );
+  }
+      
   return $form;
 }
 
