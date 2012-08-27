@@ -37,9 +37,16 @@
                         
                         phone_1: $('input[id="phone_1"]').val(),
                         phone_2: $('input[id="phone_2"]').val(),
-                        phone_3: $('input[id="phone_3"]').val()
+                        phone_3: $('input[id="phone_3"]').val(),
                         
-                        }, 
+                        phones_amt: $('#phones_amt').val(),
+                        q_type: $('#q_type').val(),
+                        buying_time: $('#buying_time').val(),
+                        
+                        source: $('input[name="source"]').val(),
+                        version: $('input[name="version"]').val()
+                       
+                      }, 
                     type: 'POST', 
                     dataType: 'json'
                     /*
@@ -79,9 +86,15 @@
                         
                         phone_1: $('input[id="phone_1"]').val(),
                         phone_2: $('input[id="phone_2"]').val(),
-                        phone_3: $('input[id="phone_3"]').val()
+                        phone_3: $('input[id="phone_3"]').val(),
                         
-                        }, 
+                        phones_amt: $('#phones_amt').val(),
+                        q_type: $('#q_type').val(),
+                        buying_time: $('#buying_time').val(),
+                        
+                        source: $('input[name="source"]').val(),
+                        version: $('input[name="version"]').val()
+                      }, 
                     type: 'POST', 
                     dataType: 'json'
             }); // end of (jQuery).ajax
