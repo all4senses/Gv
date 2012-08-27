@@ -128,6 +128,8 @@ function gv_pages_quoteRequestsList_form() {
     ->execute();
   
   
+  unset($_GET['q']);
+  
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked', 'ip'));
   $query->condition('qr.email_presented', 1);
@@ -174,8 +176,10 @@ function gv_pages_quoteRequestsList_form() {
       '#suffix' => '</td>',
     );
     
+    $delete_url = $_GET + array('op' => 'delete', 'timestamp' =>$ucaptured->timestamp);
+    
     $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td><a href="#">Delete</a></td></tr>',
+      '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td><a href="' . $delete_url . '">Delete</a></td></tr>',
     );
   }
 
