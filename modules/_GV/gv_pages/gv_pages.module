@@ -92,7 +92,7 @@ function gv_pages_quoteRequestsList_form() {
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table><tr><td>Num</td><td>Time</td><td>Data</td></tr>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Time</th><th>Data</th></tr></thead><tbody>',
   );
   
   foreach ($ucaptureds as $key => $ucaptured) {
@@ -104,7 +104,7 @@ function gv_pages_quoteRequestsList_form() {
 
   $form['table_close'] = array(
     '#type' => 'markup',
-    '#markup' => '</table></div>',
+    '#markup' => '</tbody></table></div>',
   );
   
   $form['pager'] = array(
