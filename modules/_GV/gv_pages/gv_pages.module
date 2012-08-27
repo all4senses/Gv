@@ -23,7 +23,8 @@ function gv_pages_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('gv_pages_quoteRequestsList_form'),
       
-    'access arguments' => array('create blog_post content'),
+    //'access arguments' => array('create blog_post content'),
+    'access callback' => 'gv_misc_userIsAdmin',
     'type' => MENU_NORMAL_ITEM,
   );
   
@@ -72,6 +73,16 @@ function gv_pages_menu() {
   return $items;
 }
 
+
+function gv_misc_userIsAdmin() {
+  global $user;
+  if (in_array('administrator', $user->roles)) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
 
 
 function gv_pages_quoteRequestsList_form() {
