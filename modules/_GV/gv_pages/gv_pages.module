@@ -81,8 +81,8 @@ function gv_pages_quoteRequestsList_form() {
   );
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
-  $query->fields('qr', array('timestamp', 'data'));
-  //$query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+  $query->fields('qr', array('timestamp', 'data', 'status', 'checked'));
+  $query->condition('qr.email_presented', 1);
   $ucaptureds = 
     $query
       ->orderBy('timestamp', 'DESC')
@@ -92,18 +92,17 @@ function gv_pages_quoteRequestsList_form() {
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Time</th><th>Data</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Date</th><th>Status</th><th>Checked</th><th>Data</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
   foreach ($ucaptureds as $key => $ucaptured) {
-    dpm($ucaptured);
     $data = '';
     foreach (unserialize($ucaptured->data) as $title => $value) {
       $data .= "<div>$title: $value</div>";
     }
     $form['test' . $key] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . $key . '</td><td>$ucaptured->timestamp</td><td>' . $data . '</td></tr>',
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td>' . $ucaptured->status . '</td><td>' . $ucaptured->checked . '</td><td>' . $data . '</td></tr>',
     );
   }
 
