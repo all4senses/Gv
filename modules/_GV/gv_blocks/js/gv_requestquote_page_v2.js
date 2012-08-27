@@ -83,10 +83,10 @@
               if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
-                      console.log('this.val = ' + $(this).val());
-                      console.log('event.keyCode = ' + event.keyCode);
-                      console.log('event.keyCode = ' + event.which);
-                      console.log('event.char = ' + String.fromCharCode(event.keyCode));
+                      //console.log('this.val = ' + $(this).val());
+                      //console.log('event.keyCode = ' + event.keyCode);
+                      //console.log('event.keyCode = ' + event.which);
+                      //console.log('event.char = ' + String.fromCharCode(event.keyCode));
                       //event.preventDefault();
                       if (l > 3) {
                         event.preventDefault();
@@ -122,20 +122,40 @@
               if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
-                      
                       var currentInput = document.getElementById($(this).attr('id'));
-                      
                       var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
-
-                      console.log('selectedSubstring = ' + selectedSubstring);
-                      
-                      //console.log('this.val = ' + $(this).val());
-                      //console.log('event.keyCode = ' + event.keyCode);
-                      //console.log('event.keyCode = ' + event.which);
-                      //console.log('event.char = ' + String.fromCharCode(event.keyCode));
                       if (!selectedSubstring) {
                         event.preventDefault();
                       }
+                  }
+            }
+        });
+        
+        
+
+
+
+        $('input[id="phone_3"]').keyup(function (event) { 
+          
+            var l = $(this).val().length;
+            if( !(event.keyCode == 8                                // backspace
+                || event.keyCode == 9
+                || event.keyCode == 46                              // delete
+                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+              
+                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
+                ) {
+                    event.preventDefault();     // Prevent character input
+            }
+            else {
+              if (l >= 4 
+                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
+                  ) {
+                      if (l > 4) {
+                        event.preventDefault();
+                      }
+                      $('input[id="company"]').focus();
                   }
             }
         });
@@ -159,11 +179,18 @@
               if (l >= 4 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
-                  event.preventDefault();
+                      var currentInput = document.getElementById($(this).attr('id'));
+                      var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
+                      if (!selectedSubstring) {
+                        event.preventDefault();
+                      }
               }
             }
         });
-       
+        
+        
+        
+        
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
