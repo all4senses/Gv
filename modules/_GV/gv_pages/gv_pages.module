@@ -119,6 +119,44 @@ function gv_pages_quoteRequestsList_form() {
     unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
+  elseif (@$_GET['op'] == 'check' && @$_GET['timestamp']) {
+    
+    $result = db_update('gv_quote_requests')
+      ->fields(array(
+        'checked' => 1,
+      ))
+      ->condition('timestamp', $_GET['timestamp'])
+      ->execute();
+    
+    if ($result) {
+      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" is now checked.');
+    }
+    else {
+      drupal_set_message('Somthing wrong has happened while updating the row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". Check the data.', 'warning');
+    }
+    
+    unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+  }
+  elseif (@$_GET['op'] == 'uncheck' && @$_GET['timestamp']) {
+    
+    $result = db_update('gv_quote_requests')
+      ->fields(array(
+        'checked' => 0,
+      ))
+      ->condition('timestamp', $_GET['timestamp'])
+      ->execute();
+    
+    if ($result) {
+      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" is now unchecked.');
+    }
+    else {
+      drupal_set_message('Somthing wrong has happened while updating the row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". Check the data.', 'warning');
+    }
+    
+    unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+  }
   
   // Remove all useless rows (without emails).
 //  $current_time = time();
@@ -127,15 +165,71 @@ function gv_pages_quoteRequestsList_form() {
 //    ->condition('timestamp', ($current_time - 1200), '<') // 20 min old
 //    ->execute();
   
+  
+  switch (@$_GET['sort']) {
+    default:
+    case 'timestamp':
+      $sort = 'timestamp';
+      break;
+    case 'status':
+      $sort = 'status';
+      break;
+    case 'checked':
+      $sort = 'checked';
+      break;
+  }
+  
+  
+  $query = '';
+  foreach ($_GET as $key => $value) {
+    if ($key != 'q' && $key != 'sort' && $key != 'order') {
+      $query .= ($query ? '&' : '?') . $key . '=' . $value;
+    }
+  }
+  
+  $sort_options = array('timestamp' => 'Submission started', 'status' => 'Status', 'checked' => 'Checked / Alerted');
+  $start_url = $_SERVER['REDIRECT_URL'] . $query . ($query ? '&' : '?');
+  
+  $sort_exposed = '';
+  
+  foreach($sort_options as $sort_option => $sort_title) {
+    $order_marker = '';
+    if ($sort_option == @$_GET['sort']) {
+      if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
+        $current_order = 'ASC';
+        $order_marker = '-down-';
+      }
+      else {
+        $current_order = 'DESC';
+        $order_marker = '-up-';
+      }
+    }
+    else {
+      $current_order = 'DESC';
+    }
+    $sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
+    $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
+  }
+  
+  dpm($sort_links);
+  
+  
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked', 'ip'));
   //$query->condition('qr.email_presented', 1);
   $ucaptureds = 
     $query
-      ->orderBy('timestamp', 'DESC')
+      ->orderBy($sort, $current_order)
       ->limit(20)
       ->execute();
   
+  
+  
+  
+  $form['sort'] = array(
+    '#type' => 'markup',
+    '#markup' => $sort_exposed,
+  );
   
   $form['table_start'] = array(
     '#type' => 'markup',
