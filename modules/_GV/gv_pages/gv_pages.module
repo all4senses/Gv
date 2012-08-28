@@ -190,7 +190,7 @@ function gv_pages_quoteRequestsList_form() {
   $start_url = $_SERVER['REDIRECT_URL'] . $query . ($query ? '&' : '?');
   
   $sort_exposed = '';
-  
+  $order = 'ASC';
   foreach($sort_options as $sort_option => $sort_title) {
     $order_marker = '';
     if ($sort_option == @$_GET['sort']) {
