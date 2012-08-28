@@ -178,8 +178,17 @@ function gv_pages_quoteRequestsList_form() {
       $sort = 'checked';
       break;
   }
-  
-  
+  /*
+  switch (@$_GET['order']) {
+    default:
+    case 'DESC':
+      $order = 'DESC';
+      break;
+    case 'ASC':
+      $order = 'ASC';
+      break;
+  }
+  */
   $query = '';
   foreach ($_GET as $key => $value) {
     if ($key != 'q' && $key != 'sort' && $key != 'order') {
@@ -197,10 +206,12 @@ function gv_pages_quoteRequestsList_form() {
     if ($sort_option == @$_GET['sort']) {
       if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
         $current_order = 'ASC';
+        $order = 'ASC';
         $order_marker = '-down-';
       }
       else {
         $current_order = 'DESC';
+        $order = 'DESC';
         $order_marker = '-up-';
       }
     }
@@ -220,7 +231,7 @@ function gv_pages_quoteRequestsList_form() {
   //$query->condition('qr.email_presented', 1);
   $ucaptureds = 
     $query
-      ->orderBy($sort, $current_order)
+      ->orderBy($sort, $order)
       ->limit(20)
       ->execute();
   
