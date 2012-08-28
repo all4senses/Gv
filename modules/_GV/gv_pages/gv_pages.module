@@ -291,7 +291,7 @@ function gv_pages_quoteRequestsList_form() {
     //'#weight' => 5,
   );
   
-  //$form['#submit'][] = 'gv_pages_quoteRequestsList_form_submit';
+  $form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
   $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
   
   
@@ -322,13 +322,26 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   $get['filter'] = $form_state['values'];
   
   
-  drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
+  //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
 //  dpr($form_state['values']);
 //  dpr($_SERVER['REDIRECT_URL']);
 //  dpr($_GET);
 //  die;
 }
 
+function gv_pages_quoteRequestsList_formSubmit(&$form, &$form_state) {
+
+  $get = $_GET;
+  unset($get['q']);
+  $get['filter'] = $form_state['values'];
+  
+  
+  drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
+//  dpr($form_state['values']);
+//  dpr($_SERVER['REDIRECT_URL']);
+//  dpr($_GET);
+//  die;
+}
 
 /**
  * Returns a themed News topics page.
