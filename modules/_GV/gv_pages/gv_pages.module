@@ -336,7 +336,8 @@ function gv_pages_quoteRequestsList_formSubmit(&$form, &$form_state) {
   $get['filter'] = $form_state['values'];
   
   
-  drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
+  //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
+  $form_state['redirect'] = '/';
 //  dpr($form_state['values']);
 //  dpr($_SERVER['REDIRECT_URL']);
 //  dpr($_GET);
