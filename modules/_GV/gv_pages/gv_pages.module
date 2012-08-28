@@ -95,7 +95,7 @@ function gv_misc_userIsAdmin() {
  * A form for a Quote Requests data page, including not submitted, but captured data.
  * 
  */
-function gv_pages_quoteRequestsList_form() {
+function gv_pages_quoteRequestsList_form(&$form, &$form_state) {
   
   //dpm($_GET);
   //dpm($_SERVER['REDIRECT_URL']);
@@ -292,7 +292,7 @@ function gv_pages_quoteRequestsList_form() {
   );
   
   $form['actions']['submit']['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
-  //$form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
+  $form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
   $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
   
   
@@ -344,10 +344,10 @@ function gv_pages_quoteRequestsList_formSubmit(&$form, &$form_state) {
   $form_state['rebuild'] = FALSE;
   $form_state['no_redirect'] = FALSE;
   $form_state['redirect'] = '/';
-//  dpr($form_state['values']);
+  dpr($form_state['values']);
 //  dpr($_SERVER['REDIRECT_URL']);
 //  dpr($_GET);
-//  die;
+  die;
 }
 
 /**
