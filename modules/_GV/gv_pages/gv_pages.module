@@ -320,35 +320,26 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
 
   $get = $_GET;
   unset($get['q']);
-  $get['filter'] = $form_state['values'];
+  $get['filter'] = $form_state['values']['filter'];
   
-  $form_state['rebuild'] = TRUE;
-  //$form_state['no_redirect'] = FALSE;
-  $form_state['redirect'] = 'home';
-  
-  //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
-  drupal_goto($_GET['q'], array('query' => array('a' => 'b')));
-//  dpr($form_state['values']);
-//  dpr($_SERVER['REDIRECT_URL']);
-  dpr($_GET);
-//  die;
+  drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
 }
 
 function gv_pages_quoteRequestsList_formSubmit(&$form, &$form_state) {
 
-  $get = $_GET;
-  unset($get['q']);
-  $get['filter'] = $form_state['values'];
-  
-  
-  //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
-  $form_state['rebuild'] = TRUE;
-  //$form_state['no_redirect'] = FALSE;
-  $form_state['redirect'] = 'home';
-  dpr($form_state['values']);
+//  $get = $_GET;
+//  unset($get['q']);
+//  $get['filter'] = $form_state['values'];
+//  
+//  
+//  //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
+//  $form_state['rebuild'] = TRUE;
+//  //$form_state['no_redirect'] = FALSE;
+//  $form_state['redirect'] = 'home';
+//  dpr($form_state['values']);
 //  dpr($_SERVER['REDIRECT_URL']);
 //  dpr($_GET);
-  die;
+//  die;
 }
 
 /**
