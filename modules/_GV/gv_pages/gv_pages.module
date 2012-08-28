@@ -321,6 +321,9 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   unset($get['q']);
   $get['filter'] = $form_state['values'];
   
+  $form_state['rebuild'] = FALSE;
+  $form_state['no_redirect'] = FALSE;
+  $form_state['redirect'] = '/';
   
   //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
 //  dpr($form_state['values']);
