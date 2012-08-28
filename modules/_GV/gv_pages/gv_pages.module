@@ -327,10 +327,10 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   $form_state['redirect'] = 'home';
   
   //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
-  drupal_goto($_SERVER['REDIRECT_URL'], array('query' => array('a' => 'b')));
+  drupal_goto($_GET['q'], array('query' => array('a' => 'b')));
 //  dpr($form_state['values']);
 //  dpr($_SERVER['REDIRECT_URL']);
-//  dpr($_GET);
+  dpr($_GET);
 //  die;
 }
 
