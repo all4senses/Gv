@@ -267,7 +267,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
     $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=check&timestamp=' . $ucaptured->timestamp;
-    $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
+    $uncheck_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
     unset($delete_url['q']);
 
     
