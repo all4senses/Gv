@@ -291,7 +291,9 @@ function gv_pages_quoteRequestsList_form() {
     //'#weight' => 5,
   );
   
-  $form['#submit'][] = 'gv_pages_quoteRequestsList_form_submit';
+  //$form['#submit'][] = 'gv_pages_quoteRequestsList_form_submit';
+  $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
+  
   
   return $form;
 }
@@ -313,7 +315,7 @@ function gv_pages_quoteRequestsList_form() {
  *   Return nothing.
  */
 
-function gv_pages_quoteRequestsList_form_submit(&$form, &$form_state) {
+function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
 
   dpr($form_state['values']);
   dpr($_SERVER['REDIRECT_URL']);
