@@ -178,17 +178,7 @@ function gv_pages_quoteRequestsList_form() {
       $sort = 'checked';
       break;
   }
-  /*
-  switch (@$_GET['order']) {
-    default:
-    case 'DESC':
-      $order = 'DESC';
-      break;
-    case 'ASC':
-      $order = 'ASC';
-      break;
-  }
-  */
+  
   $query = '';
   foreach ($_GET as $key => $value) {
     if ($key != 'q' && $key != 'sort' && $key != 'order') {
@@ -196,7 +186,7 @@ function gv_pages_quoteRequestsList_form() {
     }
   }
   
-  $sort_options = array('timestamp' => 'Submission started', 'status' => 'Status', 'checked' => 'Checked / Alerted');
+  $sort_options = array('timestamp' => 'Submission started', 'status' => 'Status', 'checked' => 'Checked / Alerted', 'ip' => 'User IP');
   $start_url = $_SERVER['REDIRECT_URL'] . $query . ($query ? '&' : '?');
   
   $sort_exposed = '';
@@ -218,13 +208,9 @@ function gv_pages_quoteRequestsList_form() {
     else {
       $current_order = 'ASC';
     }
-    $sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
+    //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
     $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
   }
-  
-  dpm($sort_links);
-  
-  dpm('$sort = ' . $sort . ', $current_order = ' . $current_order);
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked', 'ip'));
@@ -245,7 +231,7 @@ function gv_pages_quoteRequestsList_form() {
   
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>Submission Started at</th><th>Status</th><th>Checked/Alerted</th><th>IP</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
