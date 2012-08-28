@@ -166,18 +166,7 @@ function gv_pages_quoteRequestsList_form() {
 //    ->execute();
   
   
-  switch (@$_GET['sort']) {
-    default:
-    case 'timestamp':
-      $sort = 'timestamp';
-      break;
-    case 'status':
-      $sort = 'status';
-      break;
-    case 'checked':
-      $sort = 'checked';
-      break;
-  }
+  $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
   
   $query = '';
   foreach ($_GET as $key => $value) {
@@ -211,6 +200,7 @@ function gv_pages_quoteRequestsList_form() {
     //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
     $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . ' ' . $order_marker . '</a>';
   }
+  
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'status', 'checked', 'ip'));
