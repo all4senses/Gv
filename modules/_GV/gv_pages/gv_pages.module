@@ -159,11 +159,8 @@ function gv_pages_quoteRequestsList_form() {
         break;
     }
     $data = '';
-    
     $ucaptured_data = unserialize($ucaptured->data);
-    dpm($ucaptured_data);
     $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
-    dpm($ucaptured_data);
     foreach ($ucaptured_data as $title => $value) {
       if ($title == 'Submit Time' && is_numeric($value)) {
         $value = date('Y-m-d, H:i:s', $value);
