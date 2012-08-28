@@ -276,7 +276,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#default_value' => $ucaptured->checked,
       '#prefix' => '<td>',
       '#suffix' => '</td>',
-      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com/"' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
+      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com/' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
     );
     
     
