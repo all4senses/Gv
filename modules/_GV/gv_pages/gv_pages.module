@@ -265,17 +265,20 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td>',
     );
     
+    $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
+    $check_url = $_GET + array('op' => 'check', 'timestamp' => $ucaptured->timestamp);
+    $uncheck_url = $_GET + array('op' => 'uncheck', 'timestamp' => $ucaptured->timestamp);
+    unset($delete_url['q'], $check_url['q'], $uncheck_url['q']);
+
+    
     $form['item_' . ($key + 1) . 'b'] = array(
       '#type' => 'checkbox',
       '#default_value' => $ucaptured->checked,
       '#prefix' => '<td>',
       '#suffix' => '</td>',
-      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:this.form.submit();')),
+      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com/"' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
     );
     
-    $delete_url = $_GET + array('op' => 'delete', 'timestamp' =>$ucaptured->timestamp);
-    unset($delete_url['q']);
-    //dpm($delete_url);
     
     $form['item_' . ($key + 1) . 'c'] = array(
       '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td></tr>',
