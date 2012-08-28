@@ -934,9 +934,7 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
 function gv_misc_testPage() {
   $out = '';
 
-  $ucaptured = @$_SESSION['ucaptured_timestamp'];
-  
-  dpm($ucaptured);
+  dpm($_SERVER);
   
   return $out . '<br>End of Test';
 }
