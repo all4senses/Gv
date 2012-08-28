@@ -981,6 +981,10 @@ function gv_misc_makeRequestCapture_ajax() {
               'Start Submission Time' => date('Y-m-d, H:i:s', $_SESSION['ucaptured_timestamp']),
             );
             
+            if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']) {
+              $ucaptured_data['Referrer'] = $_SERVER['HTTP_REFERER'];
+            }
+            
             $params['ucaptured_data'] = $ucaptured_data;
             global $language;
             
@@ -1165,6 +1169,10 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
     if(isset($_SERVER['HTTP_USER_AGENT'])) {
       $ucaptured['Browser'] = $_SERVER['HTTP_USER_AGENT'];
     }
+    
+    if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']) {
+      $ucaptured['Referrer'] = $_SERVER['HTTP_REFERER'];
+    }
   }
   
 
@@ -1249,6 +1257,9 @@ function gv_misc_makeRequest_ajax() {
       if(isset($_SERVER['HTTP_USER_AGENT'])) {
         $save_submission['Browser'] = $_SERVER['HTTP_USER_AGENT'];
       }
+      if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']) {
+        $save_submission['Referrer'] = $_SERVER['HTTP_REFERER'];
+      }
 
       if (isset($_SESSION['ucaptured_timestamp'])) {
         $start_submission_time = $_SESSION['ucaptured_timestamp'];
@@ -1309,6 +1320,9 @@ function gv_misc_makeRequest_ajax() {
     $submission['User IP'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
     if(isset($_SERVER['HTTP_USER_AGENT'])) {
       $submission['Browser'] = $_SERVER['HTTP_USER_AGENT'];
+    }
+    if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']) {
+      $submission['Referrer'] = $_SERVER['HTTP_REFERER'];
     }
     $submission['Time'] = date('Y-m-d, H:i:s', time());
     
