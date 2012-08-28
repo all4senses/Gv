@@ -982,8 +982,13 @@ function gv_misc_makeRequestCapture_ajax() {
               'User IP' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
               'Start Submission Time' => date('Y-m-d, H:i:s', $_SESSION['ucaptured_timestamp']),
             );
+            
             $params['ucaptured_data'] = $ucaptured_data;
             global $language;
+            
+            // Normal send if not a test from a4s
+            drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+            // Test letter to the root
             drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
             
             // Update DB.
@@ -1358,7 +1363,11 @@ function gv_misc_makeRequest_ajax() {
 
       $params['ucaptured_data'] = $ucaptured_data;
 
+      // Normal send if not a test from a4s
+      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+      // Test letter to the root
       drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
+      
       // Update a status in DB.
       $result = db_update('gv_quote_requests')
         ->fields(array(
