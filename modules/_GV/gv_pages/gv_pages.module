@@ -322,9 +322,9 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   unset($get['q']);
   $get['filter'] = $form_state['values'];
   
-  $form_state['rebuild'] = FALSE;
+  $form_state['rebuild'] = TRUE;
   $form_state['no_redirect'] = FALSE;
-  $form_state['redirect'] = '/';
+  $form_state['redirect'] = 'home';
   
   //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
 //  dpr($form_state['values']);
@@ -343,7 +343,7 @@ function gv_pages_quoteRequestsList_formSubmit(&$form, &$form_state) {
   //drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $get));
   $form_state['rebuild'] = TRUE;
   $form_state['no_redirect'] = FALSE;
-  $form_state['redirect'] = '/';
+  $form_state['redirect'] = 'home';
   dpr($form_state['values']);
 //  dpr($_SERVER['REDIRECT_URL']);
 //  dpr($_GET);
