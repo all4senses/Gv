@@ -197,7 +197,7 @@ function gv_pages_quoteRequestsList_form() {
       if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
         $current_order = 'ASC';
         $order = 'ASC';
-        $order_marker = '-down-';
+        $order_marker = '&darr;';
       }
       else {
         $current_order = 'DESC';
@@ -207,6 +207,7 @@ function gv_pages_quoteRequestsList_form() {
     }
     else {
       $current_order = 'ASC';
+      $order_marker = '&darr;';
     }
     //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
     $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . ' ' . $order_marker . '</a>';
