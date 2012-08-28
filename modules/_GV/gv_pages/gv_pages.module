@@ -291,7 +291,33 @@ function gv_pages_quoteRequestsList_form() {
     //'#weight' => 5,
   );
   
+  $form['#submit'][] = 'gv_pages_quoteRequestsList_form_submit';
+  
   return $form;
+}
+
+
+
+/**
+ * Custom submit of a form for a Quote Requests List page.
+ *
+ * Provides a filtering functionality.
+ * 
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+
+function gv_pages_quoteRequestsList_form_submit(&$form, &$form_state) {
+
+  dpm($form_state['values']);
+  dpm($_SERVER);
+  dpm($_GET);
 }
 
 
