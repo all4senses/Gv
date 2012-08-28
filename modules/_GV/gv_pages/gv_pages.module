@@ -315,9 +315,10 @@ function gv_pages_quoteRequestsList_form() {
 
 function gv_pages_quoteRequestsList_form_submit(&$form, &$form_state) {
 
-  dpm($form_state['values']);
-  dpm($_SERVER);
-  dpm($_GET);
+  dpr($form_state['values']);
+  dpr($_SERVER['REDIRECT_URL']);
+  dpr($_GET);
+  die;
 }
 
 
