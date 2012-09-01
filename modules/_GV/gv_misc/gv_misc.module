@@ -232,6 +232,27 @@ function gv_misc_preprocess_search_result(&$variables) {
 
 
 
+/**
+ * Implements hook_ranking() for Search ranking.
+ */
+function gv_misc_ranking() {
+ // Add relevance based on creation or changed date.
+  if ($node_cron_last = variable_get('node_cron_last', 0)) {
+    $ranking['recent_created'] = array(
+      'title' => t('Recently posted'),
+      // Exponential decay with half-life of 6 months, starting at last indexed node
+      'score' => 'POW(2.0, (n.created - :node_cron_last) * 6.43e-8)',
+      'arguments' => array(':node_cron_last' => $node_cron_last),
+    );
+  }
+  return $ranking;
+}
+
+
+
+/**
+ * Push metatags to the Head.
+ */
 function gv_misc_pushTagsToMetatags($name, $value) {
   switch ($name) {
     case 'keywords':
