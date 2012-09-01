@@ -216,8 +216,8 @@ function gv_misc_preprocess_search_result(&$variables) {
   if (!empty($result['date'])) {
     //$info['date'] = format_date($result['date'], 'short');
     // a4s changes
-    //$info['date'] = date('F d, Y \a\t g:ia', $result['node']->created);
-    $info['date'] = date('F d, Y \a\t g:ia', $result['date']);
+    //$info['date'] = date('F d, Y \a\t g:ia', $result['date']);
+    $info['date'] = date('F d, Y \a\t g:ia', $result['node']->created);
   }
   if (isset($result['extra']) && is_array($result['extra'])) {
     $info = array_merge($info, $result['extra']);
