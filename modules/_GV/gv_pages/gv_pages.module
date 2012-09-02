@@ -3404,14 +3404,20 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     if (isset($recommend_vote['function'])) {
       // If it's agregated cached results (calculated via function)
       // we'll show percent of voters recomendations.
+      /*
       $node->content['gv_recommend'] = array(
           '#markup' => '<div class="recommend"><div class="title">' . t('Would recommend') . ': </div><div class="data">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div></div>',
       );
+      */
+      $node->gv_recommend = number_format($recommend_vote['value'], 1, '.', '');
     }
     else {
+      /*
       $node->content['gv_recommend'] = array(
           '#markup' => '<div class="title">' . t('Recommend') . ': </div><div class="data">' . ($recommend_vote['value']?t('Yes'):t('No')) . '</div>',
       );
+      */
+      $node->gv_recommend = $recommend_vote['value'] ? t('Yes') : t('No');
     }
     // In case of using the original fivestar theme function there should be connected original fivestar's css
     /*

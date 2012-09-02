@@ -15,7 +15,7 @@
 
 
   <div id="upper-block">
-    <h1><?php echo t('We identify and rank the best VoIP Providers, services, and phone systems.'); ?></h1>
+    <h1><?php echo t('We identify and rank the best business VoIP providers and phone systems.'); ?></h1>
     <div class="quotes">
       <div><span class="text">"Great Source."</span><span class="source">CNN</span></div>
       <div><span class="text">"Rigorous Evaluation Process."</span><span class="source">Smart Money</span></div>
@@ -55,7 +55,7 @@
         }
         else {
           ?>
-            <h2>Have the leading VoIP Providers <br/>work for you</h2>
+            <h2>Compare Leading VoIP Providers</h2>
             <div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
@@ -79,7 +79,7 @@
 
       <div class="right">
         <div id="right-up">
-          <h2>Compare Top VoIP Services Tailored to Your Needs</h2>
+          <h2>Save Up To 70% On Your Business Phone System</h2>
           <div class="explain p1"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
           <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
           <div class="explain p3"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
@@ -104,7 +104,7 @@
 
   
   <div id="brands">
-    <h2><?php echo t('All Major Manufacturers Supported:'); ?></h2>
+    <h2><?php echo t('Supported by major companies across the country'); ?></h2>
     <?php
         if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
           echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
@@ -153,7 +153,7 @@
   </div>
 
   <footer>
-    <div class="links"><a href="/about-us">About Us</a><span class="delim">|</span><a href="/privacy-policy">Privacy Policy</a></div>
+    <div class="links"><a href="/about-us" target="_blank">About Us</a><span class="delim">|</span><a href="/privacy-policy" target="_blank">Privacy Policy</a></div>
     <div class="copy">© 2012 GetVoIP.com | All Rights Reserved | BizMedia Central LLC | New York, NY</div>
   </footer>
 
