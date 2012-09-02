@@ -29,29 +29,6 @@
             }
         });
 
-        $('input[id="phone_3"]').keydown(function (event) { 
-            //var val = $(this).val();
-            //console.log(event.keyCode);
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 4 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                  event.preventDefault();
-              }
-            }
-        });
-       
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
@@ -89,7 +66,7 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname email phone_1 phone_2 phone_3"
+              username: "firstname lastname email phone"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
@@ -98,11 +75,8 @@
                 ////error.insertAfter("#buying_time");
                 error.insertAfter("#on_error");
               
-                //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
-              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
-                //alert(error.html() +  ': ' + element.prev().html());
+              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 error.insertAfter("#phone");
-                //alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
             },
@@ -148,6 +122,10 @@
                 required: true,
                 notEqualsTo: 'Last'
 							},
+              phone: {
+                number: true
+							}
+              /*
               phone_1: {
                 number: true,
                 minlength: 3,
@@ -163,6 +141,7 @@
                 minlength: 4,
                 maxlength: 4
 							}
+              */
               // works
               /* 
 							myemail: {
