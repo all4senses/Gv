@@ -1257,9 +1257,12 @@ function gv_misc_makeRequest_ajax() {
     $current_time = time();
     
     // Mapping form data to right named fields.
+    
+    $phone = isset($post['phone']) ? $post['phone'] : $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
+    
     if ($post['source'] == 'page') {
       
-      $phone = isset($post['phone']) ? $post['phone'] : $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
+      
       
       $submission = array(
         'Phones needed' => $post['phones_amt'],
@@ -1339,6 +1342,9 @@ function gv_misc_makeRequest_ajax() {
       
     }
     else {
+      
+      // Quote Blocks...
+      
       $submission = array(
         'Phones needed' => $post['phones_amt'],
         'Quote for' => isset($post['q_for']) ? $post['q_for'] : '',
@@ -1351,7 +1357,7 @@ function gv_misc_makeRequest_ajax() {
         'Company' => isset($post['company']) ? $post['company'] : '',
         'Website' => isset($post['website']) ? $post['website'] : '',
         'Email' => $post['email'],
-        'Phone #' => $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'],
+        'Phone #' => $phone,
         'Notes' => isset($post['notes']) ? $post['notes'] : '',
           
         'Source' => $post['source'],
@@ -1384,7 +1390,9 @@ function gv_misc_makeRequest_ajax() {
     //$params['recipient'] = $recipient;
     //$letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
     
-    if ($submission['First Name'] != 'a4s') {
+    
+            
+    if ($submission['First Name'] != 'a4s' && !($submission['Source'] == 'block' && $submission['Version'] == '4')) {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
     }

@@ -3,10 +3,10 @@
   Drupal.behaviors.gv_requestquote_block_v2 = {
     attach: function (context, settings) {
        
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
        
        
-        $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
+        $('input[id="phone"]').keydown(function (event) { 
             //var val = $(this).val();
             //console.log(event.keyCode);
             var l = $(this).val().length;
@@ -21,11 +21,13 @@
                     event.preventDefault();     // Prevent character input
             }
             else {
+              /*
               if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
                   event.preventDefault();
               }
+              */
             }
         });
 
@@ -123,6 +125,7 @@
                 notEqualsTo: 'Last'
 							},
               phone: {
+                required: true,
                 number: true
 							}
               /*
