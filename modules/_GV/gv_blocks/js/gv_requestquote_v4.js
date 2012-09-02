@@ -1,136 +1,14 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_page_v2 = {
-    
+  Drupal.behaviors.gv_requestquote_block_v2 = {
     attach: function (context, settings) {
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
        
-       
-       
-        $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
-          
-          //console.log($(this).val());
-          
-          (jQuery).ajax({
-            
-                url: '/request/capture', 
-                data: {
-                        op: 'set',
-                        url: window.location.href,
-                        
-                        
-                        email: $('input[id="email"]').val(),
-                        firstname: $('input[id="firstname"]').val(),
-                        lastname: $('input[id="lastname"]').val(),
-                        
-                        website: $('input[id="website"]').val(),
-                        company: $('input[id="company"]').val(),
-                        
-                        phone_1: $('input[id="phone_1"]').val(),
-                        phone_2: $('input[id="phone_2"]').val(),
-                        phone_3: $('input[id="phone_3"]').val(),
-                        
-                        phones_amt: $('#phones_amt').val(),
-                        q_type: $('#q_type').val(),
-                        buying_time: $('#buying_time').val(),
-                        
-                        source: $('input[name="source"]').val(),
-                        version: $('input[name="version"]').val()
-                       
-                      }, 
-                    type: 'POST', 
-                    dataType: 'json'
-                    /*
-                    , 
-                    success: function(data) 
-                            { 
-                                if(!data.error) {
-                                    console.log('The header is arrived!');
-                                }
-                                return false;
-                            } 
-                     */
-            }); // end of (jQuery).ajax
-        
-        });
-
-
-
-        $(window).unload( function () { 
-          
-          //console.log('before unload send');
-          
-          (jQuery).ajax({
-            
-                url: '/request/capture', 
-                data: {
-                        op: 'exit',
-                        url: window.location.href,
-                        //async: false,
-                        
-                        email: $('input[id="email"]').val(),
-                        firstname: $('input[id="firstname"]').val(),
-                        lastname: $('input[id="lastname"]').val(),
-                        
-                        website: $('input[id="website"]').val(),
-                        company: $('input[id="company"]').val(),
-                        
-                        phone_1: $('input[id="phone_1"]').val(),
-                        phone_2: $('input[id="phone_2"]').val(),
-                        phone_3: $('input[id="phone_3"]').val(),
-                        
-                        phones_amt: $('#phones_amt').val(),
-                        q_type: $('#q_type').val(),
-                        buying_time: $('#buying_time').val(),
-                        
-                        source: $('input[name="source"]').val(),
-                        version: $('input[name="version"]').val()
-                      }, 
-                    type: 'POST', 
-                    dataType: 'json'
-            }); // end of (jQuery).ajax
-            
-            //console.log('after unload send');
-          
-        });
-        
-        
-       
-        $('input[id="phone_1"], input[id="phone_2"]').keyup(function (event) { 
-
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 3 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      if (l > 3) {
-                        event.preventDefault();
-                      }
-                      if ($(this).attr('id') == 'phone_1') {
-                        $('input[id="phone_2"]').focus();
-                      }
-                      else {
-                        $('input[id="phone_3"]').focus();
-                      }
-                  }
-            }
-        });
-        
-
         $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
-
+            //var val = $(this).val();
+            //console.log(event.keyCode);
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
                 || event.keyCode == 9
@@ -146,75 +24,34 @@
               if (l >= 3 
                   && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
                   ) {
-                      var currentInput = document.getElementById($(this).attr('id'));
-                      var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
-                      if (!selectedSubstring) {
-                        event.preventDefault();
-                      }
-                  }
-            }
-        });
-        
-        
-
-
-
-        $('input[id="phone_3"]').keyup(function (event) { 
-          
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 4 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      if (l > 4) {
-                        event.preventDefault();
-                      }
-                      $('input[id="company"]').focus();
-                  }
-            }
-        });
-        
-        
-        
-        $('input[id="phone_3"]').keydown(function (event) { 
-          
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 4 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      var currentInput = document.getElementById($(this).attr('id'));
-                      var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
-                      if (!selectedSubstring) {
-                        event.preventDefault();
-                      }
+                  event.preventDefault();
               }
             }
         });
-        
-        
-        
-        
+
+        $('input[id="phone_3"]').keydown(function (event) { 
+            //var val = $(this).val();
+            //console.log(event.keyCode);
+            var l = $(this).val().length;
+            if( !(event.keyCode == 8                                // backspace
+                || event.keyCode == 9
+                || event.keyCode == 46                              // delete
+                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+              
+                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
+                ) {
+                    event.preventDefault();     // Prevent character input
+            }
+            else {
+              if (l >= 4 
+                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
+                  ) {
+                  event.preventDefault();
+              }
+            }
+        });
+       
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
@@ -235,8 +72,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'Submit & Get Quotes',
-          textNext: 'Submit & Get Quotes',
+          textSubmit : 'Submit',// 'Submit & Get Quotes',
+          textNext: 'Submit',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
@@ -385,7 +222,7 @@
              */
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
-                email: Drupal.t("Email format must be name@domain.com")
+                email: Drupal.t("Email format: name@domain.com")
               }
             }
           },

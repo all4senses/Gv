@@ -800,6 +800,14 @@ function gv_blocks_get_requestQuote_block_v2() {
  */
 function gv_blocks_get_requestQuote_block_v3() {
 
+  global $user;
+  if ($user->uid == 1) {
+    return gv_blocks_get_requestQuote_block_v4();
+  }
+  
+  
+  
+  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
@@ -911,6 +919,129 @@ function gv_blocks_get_requestQuote_block_v3() {
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="block" />
                 <input type="hidden" name="version" value="3" />
+                
+        </form>
+
+        <p id="data"></p>
+</div>
+<div class="block_footer"></div>
+  ';
+  
+  return $out;
+}
+
+
+/**
+ * Block Request a quote with a multistep form v4.
+ */
+function gv_blocks_get_requestQuote_block_v4() {
+
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_v4.js');
+  
+  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+
+  $out = '
+  <h3>No-Risk Free VoIP Quote</h3>
+  <h4>Don\'t trust your phone system with just anyone!</h4>
+  <div id="requestQuoteFormWrapper">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        <form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">
+
+                
+                <div id="fieldWrapper">
+                    
+                    <div class="step" id="questions_section">
+
+                            <div class="wrapper top first">
+                              <div class="question">' . t('Lines needed') . ':</div>
+                              <select name="phones_amt" id="phones_amt" class="input required">
+                                <option value="1 - 2">1 - 2</option>
+                                <option value="3 - 5">3 - 5</option>
+                                <option selected="selected" value="6 - 10">6 - 10</option>
+                                <option value="11 - 20">11 - 20</option>
+                                <option value="21 - 50">21 - 50</option>
+                                <option value="50+">50+</option>
+                              </select>
+                            </div>
+           
+                            <div class="wrapper top">
+                              <div class="question">' . t('Service Type') . ':</div>
+                              <select name="q_type" id="q_type" class="input required">
+                                <option selected="selected" value="Business">' . t('Business') .'</option>
+                                <option value="Home">' . t('Home') .'</option>
+                                <option value="Home-Based Business">' . t('Home-Based Business') .'</option>
+                              </select>
+                            </div>
+                            
+                            <div class="bottom-clear"></div>
+
+                            <div class="wrapper middle first">
+                              <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
+                                <input class="after required firstname" name="firstname" id="firstname" />
+                            </div>
+                            
+                            <div class="wrapper middle">
+                              <div class="label_before required">' . t('Last Name') . ':<span class="form-required">*</span></div>
+                                <input class="after required lastname" name="lastname" id="lastname" />
+                            </div>
+                            
+                            <div class="wrapper middle company">
+                              <div class="label_before">' . t('Company') . ':</div>
+                                <input class="after" name="company" id="company" />
+                            </div>
+
+
+                            <div class="wrapper middle last">
+                              <div class="label_before required">' . t('Email') . ':<span class="form-required">*</span></div>
+                                <input class="after email required" name="email" id="email" />
+                            </div>
+                         
+                            <div class="wrapper middle phone first">
+                              <div class="label_before required">' . t('Phone') . '<span class="form-required">*</span></div>
+                              <div id="phone">
+                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
+                               </div>
+                            </div>
+                            
+                            <div id="on_error"></div>
+
+                            <div class="protected"></div>
+                    </div>
+
+                    
+                
+                </div>
+                
+                
+            
+                <div id="Navigation"> 							
+                        <input class="navigation_button" id="next" value="Submit" type="submit" />
+                </div>
+                
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="block" />
+                <input type="hidden" name="version" value="4" />
                 
         </form>
 
