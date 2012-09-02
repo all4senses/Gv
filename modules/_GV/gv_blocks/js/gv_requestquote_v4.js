@@ -1,10 +1,11 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_block_v2 = {
+  Drupal.behaviors.gv_requestquote_block_v4 = {
     attach: function (context, settings) {
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
        
+       console.log($('input[id="firstname"]').attr('title'));
        
         $('input[id="phone"]').keydown(function (event) { 
             //var val = $(this).val();
