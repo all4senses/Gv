@@ -5,8 +5,6 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
        
-       console.log($('input[id="firstname"]').attr('title'));
-       
         $('input[id="phone"]').keydown(function (event) { 
             //var val = $(this).val();
             //console.log(event.keyCode);
