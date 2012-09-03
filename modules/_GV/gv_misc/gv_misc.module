@@ -1273,7 +1273,7 @@ function gv_misc_makeRequest_ajax() {
         'Last Name' => isset($post['lastname']) ? $post['lastname'] : '',
         'Name' => isset($post['name']) ? $post['name'] : '',
         
-        'Company' => isset($post['company']) ? $post['company'] : '',
+        'Company' => (isset($post['company'])&& $post['company'] != 'Company') ? $post['company'] : '',
 
         'Email' => $post['email'],
         'Website' => isset($post['website']) ? $post['website'] : '',
@@ -1354,7 +1354,7 @@ function gv_misc_makeRequest_ajax() {
         'First Name' => $post['firstname'],
         'Last Name' => $post['lastname'],
           
-        'Company' => isset($post['company']) ? $post['company'] : '',
+        'Company' => (isset($post['company'])&& $post['company'] != 'Company') ? $post['company'] : '',
         'Website' => isset($post['website']) ? $post['website'] : '',
         'Email' => $post['email'],
         'Phone #' => $phone,

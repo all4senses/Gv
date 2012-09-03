@@ -60,7 +60,8 @@ $.fn.hint = function (blurClass) {
           }
         },
         submit: function() {
-          this.remove();
+          // a4s
+          $(this).remove(); // original which caused an error "this.remove() is not a function" : this.remove();
         }
       },
 

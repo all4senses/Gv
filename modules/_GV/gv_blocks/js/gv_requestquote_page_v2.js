@@ -305,11 +305,11 @@
              
               firstname: {
                 required: true,
-                notEqualsTo: 'First'
+                notEqualsTo: $('input[id="firstname"]').attr('title')
 							},
               lastname: {
                 required: true,
-                notEqualsTo: 'Last'
+                notEqualsTo: $('input[id="lastname"]').attr('title')
 							},
               phone_1: {
                 number: true,

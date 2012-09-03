@@ -119,15 +119,16 @@
              
               firstname: {
                 required: true,
-                notEqualsTo: 'First'
+                notEqualsTo: $('input[id="firstname"]').attr('title')
 							},
               lastname: {
                 required: true,
-                notEqualsTo: 'Last'
+                notEqualsTo: $('input[id="lastname"]').attr('title')
 							},
               phone: {
                 required: true,
-                number: true
+                number: true,
+                notEqualsTo: $('input[id="phone"]').attr('title')
 							}
               /*
               phone_1: {
