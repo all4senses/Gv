@@ -61,7 +61,10 @@ function gv_blocks_block_info() {
     'info' => t('Request a quote block v3'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );  
-  
+  $blocks['request_quote_v4'] = array(
+    'info' => t('Request a quote block v4'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   $blocks['get_access_banner'] = array(
     'info' => t('Get access... Banner'),
@@ -170,7 +173,11 @@ function gv_blocks_block_view($delta = '') {
     case 'request_quote_v3':
       $block['subject'] = t('Request a quote block v3');
       $block['content'] = gv_blocks_get_requestQuote_block_v3();
-      break; 
+      break;
+    case 'request_quote_v4':
+      $block['subject'] = t('Request a quote block v4');
+      $block['content'] = gv_blocks_get_requestQuote_block_v4();
+      break;
     
     case 'get_access_banner':
       $block['subject'] = t('GET ACCESS TO THE LARGEST <br>VOIP FOOTPRINT <br>IN THE NATION');
@@ -802,7 +809,7 @@ function gv_blocks_get_requestQuote_block_v3() {
 
   global $user;
   if ($user->uid == 1) {
-    return gv_blocks_get_requestQuote_block_v4();
+    return;
   }
   
   
@@ -936,6 +943,11 @@ function gv_blocks_get_requestQuote_block_v3() {
  */
 function gv_blocks_get_requestQuote_block_v4() {
 
+  global $user;
+  if ($user->uid != 1) {
+    return;
+  }
+  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
