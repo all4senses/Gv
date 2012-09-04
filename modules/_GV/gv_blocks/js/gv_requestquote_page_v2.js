@@ -6,10 +6,11 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
+        console.log('document.referrer = ' + document.referrer);
+        $('input[name="referrer"]').val(document.referrer);
        
        
-       
-        $('input[id="firstname"], input[id="lastname"], input[id="email"]').blur(function () { 
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="website"], input[id="company"], input[id="phone_1"], input[id="phone_2"], input[id="phone_3"], #phones_amt, #q_type, #buying_time').blur(function () { 
           
           //console.log($(this).val());
           
@@ -37,7 +38,8 @@
                         buying_time: $('#buying_time').val(),
                         
                         source: $('input[name="source"]').val(),
-                        version: $('input[name="version"]').val()
+                        version: $('input[name="version"]').val(),
+                        referrer: document.referrer
                        
                       }, 
                     type: 'POST', 
@@ -86,7 +88,8 @@
                         buying_time: $('#buying_time').val(),
                         
                         source: $('input[name="source"]').val(),
-                        version: $('input[name="version"]').val()
+                        version: $('input[name="version"]').val(),
+                        referrer: document.referrer
                       }, 
                     type: 'POST', 
                     dataType: 'json'

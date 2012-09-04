@@ -1196,6 +1196,7 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
       
       'Source' => 'source',
       'Version' => 'version',
+      'Referrer' => 'referrer',
   );
   
   if ($ucaptured) {
@@ -1213,10 +1214,14 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
     if(isset($_SERVER['HTTP_USER_AGENT'])) {
       $ucaptured['Browser'] = $_SERVER['HTTP_USER_AGENT'];
     }
-    
+    if (isset($post['referrer']) && $post['referrer']) {
+      $ucaptured['Referrer'] = $post['referrer'];
+    }
+    /*
     if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] && !strpos($_SERVER['HTTP_REFERER'], '://getvoip.com')) {
       $ucaptured['Referrer'] = $_SERVER['HTTP_REFERER'];
     }
+    */
   }
   
 
@@ -1301,13 +1306,17 @@ function gv_misc_makeRequest_ajax() {
       
       $save_submission = $submission;
       $save_submission['Submit Time'] = $current_time;
-      if(isset($_SERVER['HTTP_USER_AGENT'])) {
+      if (isset($_SERVER['HTTP_USER_AGENT'])) {
         $save_submission['Browser'] = $_SERVER['HTTP_USER_AGENT'];
       }
+      if (isset($post['referrer']) && $post['referrer']) {
+        $save_submission['Referrer'] = $post['referrer'];
+      }
+      /*
       if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] && !strpos($_SERVER['HTTP_REFERER'], '://getvoip.com')) {
         $save_submission['Referrer'] = $_SERVER['HTTP_REFERER'];
       }
-
+      */
       if (isset($_SESSION['ucaptured_timestamp'])) {
         $start_submission_time = $_SESSION['ucaptured_timestamp'];
         //$save_submission['Submission Duration'] = number_format((($current_time - $start_submission_time) / 60), 2, '.', '') . ' min';
@@ -1371,9 +1380,14 @@ function gv_misc_makeRequest_ajax() {
     if(isset($_SERVER['HTTP_USER_AGENT'])) {
       $submission['Browser'] = $_SERVER['HTTP_USER_AGENT'];
     }
+    /*
     if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] && !strpos($_SERVER['HTTP_REFERER'], '://getvoip.com') ) {
       $submission['Referrer'] = $_SERVER['HTTP_REFERER'];
     }
+    */
+    if (isset($post['referrer']) && $post['referrer']) {
+        $submission['Referrer'] = $post['referrer'];
+      }
     $submission['Time'] = date('Y-m-d, H:i:s', time());
     
     $params['request_data'] = $submission; // $post;
