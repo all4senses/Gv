@@ -3,6 +3,9 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
+        $('input[name="referrer"]').val(document.referrer);
+        $('input[name="url"]').val(document.URL);
+        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')

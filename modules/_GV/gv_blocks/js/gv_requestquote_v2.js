@@ -5,6 +5,8 @@
        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
        
+        $('input[name="referrer"]').val(document.referrer);
+        $('input[name="url"]').val(document.URL);
        
         $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
             //var val = $(this).val();

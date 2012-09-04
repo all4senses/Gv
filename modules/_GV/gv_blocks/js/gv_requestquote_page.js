@@ -3,8 +3,10 @@
   Drupal.behaviors.gv_requestquote = {
     attach: function (context, settings) {
        
-        //$('select').selectmenu();
+        $('input[name="referrer"]').val(document.referrer);
+        $('input[name="url"]').val(document.URL);
        
+        //$('select').selectmenu();
         $('select').selectmenu({
 				//style:'popup', 
 				maxHeight: 300
