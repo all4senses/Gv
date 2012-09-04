@@ -129,6 +129,8 @@
               phone: {
                 required: true,
                 number: true,
+                minlength: 5,
+                maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
 							}
               /*
