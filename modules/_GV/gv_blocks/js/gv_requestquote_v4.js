@@ -3,6 +3,8 @@
   Drupal.behaviors.gv_requestquote_block_v4 = {
     attach: function (context, settings) {
        
+        console.log('document.referrer = ' . document.referrer);
+        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
        
         $('input[id="phone"]').keydown(function (event) { 
