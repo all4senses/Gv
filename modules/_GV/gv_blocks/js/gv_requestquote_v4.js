@@ -130,7 +130,7 @@
               phone: {
                 required: true,
                 number: true,
-                minlength: 5,
+                minlength: 9,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
 							}
@@ -200,7 +200,7 @@
              //Works
              firstname: Drupal.t('All fields with * are required'),
              lastname: Drupal.t('All fields with * are required'),
-             phone: Drupal.t('All fields with * are required'),
+             //phone: Drupal.t('All fields with * are required'),
              
              // Works!
              /*
