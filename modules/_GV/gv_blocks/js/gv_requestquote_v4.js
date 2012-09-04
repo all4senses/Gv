@@ -200,7 +200,7 @@
              //Works
              firstname: Drupal.t('First Name is required'),
              lastname: Drupal.t('All fields with * are required'),
-             phone: Drupal.t('Set a valid phone number'),
+             phone: Drupal.t('Enter a valid phone number'),
              
              // Works!
              /*
