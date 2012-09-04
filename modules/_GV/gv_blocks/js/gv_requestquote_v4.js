@@ -194,7 +194,7 @@
              //Works
              firstname: Drupal.t('All fields with * are required'),
              lastname: Drupal.t('All fields with * are required'),
-             
+             phone: Drupal.t('All fields with * are required'),
              
              // Works!
              /*
@@ -203,7 +203,7 @@
              },
              */
               email: {
-                //required: Drupal.t("We need your email address to contact you"),
+                required: Drupal.t("Email format: name@domain.com"),
                 email: Drupal.t("Email format: name@domain.com")
               }
             }
