@@ -4,7 +4,7 @@
     attach: function (context, settings) {
        
         console.log('document.referrer = ' + document.referrer);
-        $('input[id="referrer"]').val(document.referrer);
+        $('input[name="referrer"]').val(document.referrer);
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
        
