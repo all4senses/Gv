@@ -8,6 +8,12 @@
         $('input[name="url"]').val(document.URL);
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
+        
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').focus(function(){
+          if ($(this).val() == $(this).attr('title')) {
+            $(this).val('');
+          }
+        });
        
         $('input[id="phone"]').keydown(function (event) { 
             //var val = $(this).val();
