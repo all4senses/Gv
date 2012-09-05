@@ -9,7 +9,7 @@
         
         $('input[name="search_block_form"]').click(function(e){
           
-          console.log($('input[name="search_block_form"]').val());
+          //console.log($('input[name="search_block_form"]').val());
           
           if ($('input[name="search_block_form"]').val() == $('input[name="search_block_form"]').attr('title')) {
             $('input[name="search_block_form"]').val('');
@@ -20,7 +20,7 @@
         
         $('#search-block-form input[id="edit-submit"]').click(function(e){
           
-          console.log($('input[name="search_block_form"]').val());
+          //console.log($('input[name="search_block_form"]').val());
           
           if ($('input[name="search_block_form"]').val() == $('input[name="search_block_form"]').attr('title')) {
             //$('input[name="search_block_form"]').val('');
