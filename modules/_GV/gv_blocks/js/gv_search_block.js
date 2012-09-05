@@ -7,7 +7,7 @@
         
         //$('input[name="search_block_form"]').hint();
         
-        
+        /*
         $('input[name="search_block_form"]').click(function(e){
           
           //console.log($('input[name="search_block_form"]').val());
@@ -19,7 +19,7 @@
           
           
         });
-        
+        */
         
         $('#search-block-form input[id="edit-submit"]').click(function(e){
           
