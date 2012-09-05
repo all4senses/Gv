@@ -152,6 +152,7 @@ function gv_form_alter(&$form, &$form_state, $form_id) {
     // Add extra attributes to the text box
     $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = '$default_search_text';}";
     $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == '$default_search_text') {this.value = '';}";
+    $form['search_block_form']['#attributes']['onsubmit'] = "alert('Hello!')";
     
     
   }
