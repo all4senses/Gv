@@ -810,14 +810,6 @@ function gv_blocks_get_requestQuote_block_v2() {
  * Block Request a quote with a multistep form v3.
  */
 function gv_blocks_get_requestQuote_block_v3() {
-
-  global $user;
-  if (in_array('administrator', $user->roles)) {
-    return;
-  }
-  
-  
-  
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
@@ -948,11 +940,6 @@ function gv_blocks_get_requestQuote_block_v3() {
  * Block Request a quote with a multistep form v4.
  */
 function gv_blocks_get_requestQuote_block_v4() {
-
-  global $user;
-  if (!in_array('administrator', $user->roles)) {
-    return;
-  }
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
