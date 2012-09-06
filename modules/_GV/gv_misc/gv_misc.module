@@ -572,6 +572,14 @@ function gv_misc_addMetatag($name, $content, $href = NULL) {
 /**
  * Helper function to add sharing data (metatags and links) to a current page.
  */
+function gv_misc_metatag_getFrontMetatags() {
+  $metatags = metatag_metatags_view('global:frontpage', array());
+}
+
+
+/**
+ * Helper function to add sharing data (metatags and links) to a current page.
+ */
 function gv_misc_addSocialShareData_toPage($node) {
   
   global $gplus_type;

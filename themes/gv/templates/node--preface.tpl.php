@@ -52,6 +52,7 @@
               <?php 
                 if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
                   $share_title = $node->metatags['title']['value'];
+                  dpm($node->metatags);
                 }
                 elseif ($is_front) {
                   $share_title = 'VoIP Services - VoIP Providers - Phone System Solutions | Get VoIP';
