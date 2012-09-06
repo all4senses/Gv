@@ -54,7 +54,9 @@
                   $share_title = $node->metatags['title']['value'];
                 }
                 elseif ($is_front) {
-                  $share_title = 'Best VoIP Service Providers - VoIP Reviews - VoIP Info | GetVoIP.com';
+                  $share_title = 'VoIP Services - VoIP Providers - Phone System Solutions | Get VoIP';
+                  $mt = metatag_metatags_view('global:frontpage', array());
+                  dpm($mt);
                 }
                 else {
                   $share_title = $title;
