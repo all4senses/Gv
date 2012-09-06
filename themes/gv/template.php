@@ -143,12 +143,13 @@ function gv_preprocess_search_block_form(&$vars) {
  */
 function gv_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
-    
+    dpm($form);
     $form['actions']['submit']['#value'] = '';
     
     // Autohiding hint.
     $default_search_text = t('Search Site Here');
     $form['default_text']['#default_value'] = $default_search_text;
+    $form['default_text']['#type'] = 'hidden';
     $form['search_block_form']['#default_value'] = $default_search_text;
     
     // Example! Does NOT work!!! The above one works!

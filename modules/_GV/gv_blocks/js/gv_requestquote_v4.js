@@ -9,6 +9,7 @@
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
+        // After reloading a page (ctrl-R) hints mecome normal texts and it should be cleared additionally.
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').focus(function(){
           if ($(this).val() == $(this).attr('title')) {
             $(this).val('');
