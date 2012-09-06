@@ -17,8 +17,12 @@
         });
        
         $('input[id="phone"]').keydown(function (event) { 
+            
             //var val = $(this).val();
-            //console.log(event.keyCode);
+            console.log($(this).val());
+            console.log(event.keyCode);
+            return;
+            
             var l = $(this).val().length;
             if( !(event.keyCode == 8                                // backspace
                 || event.keyCode == 9
@@ -136,7 +140,8 @@
 							},
               phone: {
                 required: true,
-                number: true,
+                //number: true,
+                phoneUS: true,
                 minlength: 9,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
