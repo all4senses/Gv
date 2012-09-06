@@ -36,7 +36,9 @@
       hide($content['links']);
       hide($content['field_tags']);
       
-      hide($content['field_preface_bottom']);
+      if (!@$node->showBottom) {
+        hide($content['field_preface_bottom']);
+      }
       print render($content);
     
       $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']); // . ($_GET['q'] == 'home' ? '/' : (strpos($_GET['q'], 'node/') === FALSE ? ('/' . $_GET['q']) : url($_GET['q'])));
