@@ -24,14 +24,17 @@
             return;
             
             var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
+            if( !(     event.keyCode == 8                                // backspace
+                    || event.keyCode == 9
+                    || event.keyCode == 46                              // delete
+                    || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+
+                    || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+                  
+                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190)    // space, dash, dot
+                 )   
+              ) {
                     event.preventDefault();     // Prevent character input
             }
             else {
@@ -141,7 +144,6 @@
               phone: {
                 required: true,
                 //number: true,
-                phoneUS: true,
                 minlength: 9,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
