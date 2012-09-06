@@ -270,7 +270,7 @@
 
   
   
-  <?php if ($page): ?>
+  <?php if ($page && $node->type != 'news_post'): ?>
       
   </div> <!-- main-content -->
   
