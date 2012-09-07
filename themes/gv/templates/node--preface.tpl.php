@@ -50,6 +50,9 @@
         <?php global $user; if(/*$user->uid != */1): ?>
               
               <?php
+              
+                $share_title = NULL;
+                
                 if ($is_front) {
                   $share_title = gv_misc_metatag_getFrontTitle();
                 }
