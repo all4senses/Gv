@@ -2013,32 +2013,31 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $module_misc_path = drupal_get_path('module', 'gv_misc');
       
       
-      $form['#attached']['js'] = array(
+      if (!$current_user_is_admin) {
         
-        // Add a characters counter.
-        $module_misc_path . '/js/gv_misc_charCount.js',
-        'sites/all/libraries/jquery.plugins/charCount.js',
-          
-        // Add hints inside some fields
-        $module_path . '/js/gv_review_fieldHints.js',
-        'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
-          
-        // Add stars widgets to a Rating block
-        $module_path . '/js/gv_review_stars.js',
-        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
-      );
+            $form['#attached']['js'] = array(
+
+              // Add a characters counter.
+              $module_misc_path . '/js/gv_misc_charCount.js',
+              'sites/all/libraries/jquery.plugins/charCount.js',
+
+              // Add hints inside some fields
+              $module_path . '/js/gv_review_fieldHints.js',
+              'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
+
+              // Add stars widgets to a Rating block
+              $module_path . '/js/gv_review_stars.js',
+              'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+            );
+
+            $form['#attached']['library'][] = array('system', 'ui.widget');
+
+            $form['#attached']['css'] = array(
+              'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+            );
       
-      $form['#attached']['library'][] = array('system', 'ui.widget');
-      
-      $form['#attached']['css'] = array(
-        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-      );
       
 
-
-      
-      if ($current_user_is_admin) {
-        return;
       }
   
   
