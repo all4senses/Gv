@@ -6,9 +6,15 @@
       //$('input[id="edit-field-r-fname-temp"], input[id="edit-field-r-lname-temp"], input[id="edit-field-r-email-temp"], input[id="edit-pros"], input[id="edit-cons"]').hint();
       //$('input[id="edit-pros"]').hint();
       
+      $('input[id="edit-field-r-fname-temp"], input[id="edit-field-r-lname-temp"], input[id="edit-field-r-email-temp"], input[id="edit-pros"], input[id="edit-cons"]').each(function(){
+        if ($(this).val() == '') {
+          $(this).val($(this).attr('title'));
+        }
+      });
+      
       $('input[id="edit-pros"]').val($('input[id="edit-pros"]').attr('title'));
       
-      $('input[id="edit-pros"]').focus(function(){
+      $('input[id="edit-field-r-fname-temp"], input[id="edit-field-r-lname-temp"], input[id="edit-field-r-email-temp"], input[id="edit-pros"], input[id="edit-cons"]').focus(function(){
         
         if ($(this).val() == $(this).attr('title')) {
           $(this).val('');
@@ -16,7 +22,7 @@
         
       });
       
-      $('input[id="edit-pros"]').blur(function(){
+      $('input[id="edit-field-r-fname-temp"], input[id="edit-field-r-lname-temp"], input[id="edit-field-r-email-temp"], input[id="edit-pros"], input[id="edit-cons"]').blur(function(){
         
         if ($(this).val() == '') {
           $(this).val($(this).attr('title'));
