@@ -147,20 +147,20 @@ function gv_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = '';
     
     // Autohiding hint.
-//    $default_search_text = t('Search Site Here');
-//    $form['search_block_form']['#default_value'] = $default_search_text;
-//    $form['default_text']['#default_value'] = $default_search_text;
-//    // Cause a fatal error without it for anonymous.
-//    $form['default_text']['#type'] = 'hidden';
-//    
-//    
-//    // Example! Does NOT work!!! The above one works!
-//    //$form['search_block_form']['#value'] = t($default_search_text); // Set a default value for the textfield
-//    
-//    // Add extra attributes to the text box
-//    // Without this a hint autohiding will not work for anonymous.
-//    $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = '$default_search_text';}";
-//    $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == '$default_search_text') {this.value = '';}";
+    $default_search_text = t('Search Site Here');
+    $form['search_block_form']['#default_value'] = $default_search_text;
+    $form['default_text']['#default_value'] = $default_search_text;
+    // Cause a fatal error without it for anonymous.
+    $form['default_text']['#type'] = 'hidden';
+    
+    
+    // Example! Does NOT work!!! The above one works!
+    //$form['search_block_form']['#value'] = t($default_search_text); // Set a default value for the textfield
+    
+    // Add extra attributes to the text box
+    // Without this a hint autohiding will not work for anonymous.
+    $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = '$default_search_text';}";
+    $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == '$default_search_text') {this.value = '';}";
   }
 }
 

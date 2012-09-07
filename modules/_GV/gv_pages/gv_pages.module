@@ -2012,8 +2012,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $module_path = drupal_get_path('module', 'gv_pages');
       $module_misc_path = drupal_get_path('module', 'gv_misc');
       
-      drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
-      drupal_add_js($module_path . '/js/gv_review_fieldHints.js');
+      //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+      //drupal_add_js($module_path . '/js/gv_review_fieldHints.js');
       
       
         
@@ -2024,7 +2024,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //'sites/all/libraries/jquery.plugins/charCount.js',
 
         // Add hints inside some fields
-        //$module_path . '/js/gv_review_fieldHints.js',
+        $module_path . '/js/gv_review_fieldHints.js',
         //'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
 
         // Add stars widgets to a Rating block
