@@ -1536,10 +1536,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       
-      if ($current_user_is_admin) {
-        return;
-      }
-      
+     
       if (!$current_user_is_admin) {
         $form['title']['#access'] = FALSE;
         // Show authoring info (including a date) only for administrator.
@@ -2010,7 +2007,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       } // End of Edit a review page.
       
       
-     
+      if ($current_user_is_admin) {
+        return;
+      }
+      
       // Add stars widgets to a Rating block
       $module_path = drupal_get_path('module', 'gv_pages');
       $module_misc_path = drupal_get_path('module', 'gv_misc');
