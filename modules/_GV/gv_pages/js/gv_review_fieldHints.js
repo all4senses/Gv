@@ -7,6 +7,23 @@
       //$('input[id="edit-pros"]').hint();
       
       $('input[id="edit-pros"]').val($('input[id="edit-pros"]').attr('title'));
+      
+      $('input[id="edit-pros"]').focus(function(){
+        
+        if ($(this).val() == $(this).attr('title')) {
+          $(this).val('');
+        }
+        
+      });
+      
+      $('input[id="edit-pros"]').blur(function(){
+        
+        if ($(this).val() == '') {
+          $(this).val($(this).attr('title'));
+        }
+        
+      });
+      
     }
   };
 
