@@ -1537,9 +1537,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Make some small corrections.
       $form['title']['#title'] = t('Review title');
       $form['title']['#weight'] = -1;
-      if (!in_array('administrator', $user->roles)) {
-        $form['title']['#access'] = FALSE;
-      }
       
       
       if (in_array('administrator', $user->roles)) {
@@ -1548,6 +1545,23 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       else {
         $current_user_is_admin = FALSE;
       }
+      
+      if (!$current_user_is_admin) {
+        $form['title']['#access'] = FALSE;
+        // Show authoring info (including a date) only for administrator.
+        $form['author']['#access'] = FALSE;
+      }
+//      else {
+//        // Or connect datepicker to a post date field
+//        $module_path = drupal_get_path('module', 'gv_pages');
+//  
+//        $form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
+//        $form['#attached']['js'][] = $module_path . '/js/gv_review_datepicker.js';
+//        $form['#attached']['library'][] = array('system', 'ui.datepicker');
+//      }
+      
+      
+      
       
       // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
       if (isset($form['field_r_notapproved'])) {
@@ -1579,18 +1593,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['comment_settings']['#access'] = FALSE;
       $form['field_r_provider_name']['#access'] = FALSE;
       
-      // Show authoring info (including a date) only for administrator.
-      if (!in_array('administrator', $user->roles)) {
-        $form['author']['#access'] = FALSE;
-      }
-//      else {
-//        // Or connect datepicker to a post date field
-//        $module_path = drupal_get_path('module', 'gv_pages');
-//  
-//        $form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
-//        $form['#attached']['js'][] = $module_path . '/js/gv_review_datepicker.js';
-//        $form['#attached']['library'][] = array('system', 'ui.datepicker');
-//      }
       
       
       
@@ -1600,8 +1602,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['about_you'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 1: Your Information'),
-        //'#collapsible' => TRUE,
-        //'#collapsed' => FALSE,
         '#weight' => -15,
       );
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
@@ -1661,8 +1661,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['ureview'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 3: Rate and Review Your VoIP Provider'),
-        //'#collapsible' => TRUE,
-        //'#collapsed' => FALSE,
         '#weight' => -4,
       );
           
@@ -1673,11 +1671,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           foreach ($vote_keys as $vote_key => $vote_title) {
             $form['ureview']['votes']['rating_' . $vote_key] = array(
               '#type' => 'select',
-              //'#title' => t($vote_title), //t(drupal_ucfirst($vote_key) . ' Rating'),
               '#options' => $rating_options,
               '#default_value' => $rating_options[''],
-              //'#weight' => $weight++,
-              //'#required' => TRUE,
               '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
               '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
             );
@@ -1690,13 +1685,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
           $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
           $form['ureview']['rating_recommend'] = array(
-              //'#type' => 'select',
               '#type' => 'radios',
-              //'#title' => t(RECOMMEND),
               '#options' => $rating_recommend_options,
               '#default_value' => FALSE,
-              //'#weight' => $weight++,
-              //'#required' => TRUE,
               '#prefix' => '<div class="label left">' . t(RECOMMEND) . '</div>',
           );
           
@@ -1873,6 +1864,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
       } // End of if(arg(1) == 'add') {
       else {
+        
+        
         // Edit a review page.
         
         
@@ -2018,23 +2011,23 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['#attached']['js'] = array(
         
         // Add a characters counter.
-        $module_misc_path . '/js/gv_misc_charCount.js',
-        'sites/all/libraries/jquery.plugins/charCount.js',
+        //$module_misc_path . '/js/gv_misc_charCount.js',
+        //'sites/all/libraries/jquery.plugins/charCount.js',
           
         // Add hints inside some fields
         $module_path . '/js/gv_review_fieldHints.js',
         'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
           
         // Add stars widgets to a Rating block
-        $module_path . '/js/gv_review_stars.js',
-        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+        //$module_path . '/js/gv_review_stars.js',
+        //'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
       );
       
-      $form['#attached']['library'][] = array('system', 'ui.widget');
-      
-      $form['#attached']['css'] = array(
-        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-      );
+//      $form['#attached']['library'][] = array('system', 'ui.widget');
+//      
+//      $form['#attached']['css'] = array(
+//        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+//      );
       
 
 
