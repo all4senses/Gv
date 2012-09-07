@@ -592,11 +592,13 @@ function gv_misc_addSocialShareData_toPage($node) {
   if (@$node->field_preface_key['und'][0]['value'] == 'front') {
     $title = gv_misc_metatag_getFrontTitle();
   }
-  if (!$title && isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-    $title = $node->metatags['title']['value'];
-  }
-  else {
-    $title = $node->title;
+  if (!$title) {
+    if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+      $title = $node->metatags['title']['value'];
+    }
+    else {
+      $title = $node->title;
+    }
   }
   
   
