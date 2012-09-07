@@ -2487,7 +2487,9 @@ function wdg_misc_getProviderQuickData($target, $data) {
         $out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
       }
       else {
-        $out = '<a href="' . $link . '" target="_blank">' . $all_data_quick[$data['data']->nid]['name'] . '</a>';
+        if (isset($all_data_quick[$data['data']->nid]['name'])) {
+          $out = '<a href="' . $link . '" target="_blank">' . $all_data_quick[$data['data']->nid]['name'] . '</a>';
+        }
       }
           
       return $out;
