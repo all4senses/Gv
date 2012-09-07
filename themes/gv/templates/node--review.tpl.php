@@ -18,9 +18,7 @@
                 <?php else: ?>
                     <?php 
                     $full_title_urls = array('/providers/reviews', '/business-voip-reviews', '/residential-voip-reviews');
-                    dpm($_SERVER);
-                    dpm($_GET);
-                    if (in_array($_SERVER['REDIRECT_URL'], $full_title_urls)) {
+                    if (in_array(@$_SERVER['REDIRECT_URL'], $full_title_urls)) {
                       $full_title = TRUE;
                     }
                     ?>
