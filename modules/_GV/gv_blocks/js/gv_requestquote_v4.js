@@ -6,8 +6,19 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
+      
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+          if ($(this).val() == '') {
+            $(this).val($(this).attr('title'));
+          }
+          if ($(this).val() == $(this).attr('title')) {
+            $(this).addClass('blur');
+          }
+        });
+
+
         // After reloading a page (ctrl-R) hints mecome normal texts and it should be cleared additionally.
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').focus(function(){
           if ($(this).val() == $(this).attr('title')) {
