@@ -1402,17 +1402,26 @@ function gv_misc_makeRequest_ajax() {
     }
     
     $submission['User IP'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
-    /*
-    if(isset($_SERVER['HTTP_USER_AGENT'])) {
-      $submission['Browser'] = $_SERVER['HTTP_USER_AGENT'];
-    }
-    if (isset($post['referrer']) && $post['referrer']) {
-      $submission['Referrer'] = $post['referrer'];
-    }
-    */  
     $submission['Time'] = date('Y-m-d, H:i:s', time());
     
-    $params['request_data'] = $submission; // $post;
+    $params['request_data'] = $submission;
+    
+    
+
+    // Add an extra data.
+    
+    $submission_with_extra = $submission;
+    
+    $submission_with_extra['Sumbission page'] = $post['url'];
+    if (isset($post['referrer']) && $post['referrer']) {
+      $submission_with_extra['Referrer'] = $post['referrer'];
+    }
+    if(isset($_SERVER['HTTP_USER_AGENT'])) {
+      $submission_with_extra['Browser'] = $_SERVER['HTTP_USER_AGENT'];
+    }
+    
+    $params_with_extra['request_data'] = $submission_with_extra;
+    
     /*
     $admins = db_query("SELECT u.uid FROM {users_roles} u INNER JOIN {role} r ON r.name = :role AND r.rid = u.rid WHERE 1", array(':role' => 'administrator')); 
     foreach ($admins as $admin) {
@@ -1435,7 +1444,7 @@ function gv_misc_makeRequest_ajax() {
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
     }
     // Test letter to the root
-    drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params);
+    drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
 
 
     
