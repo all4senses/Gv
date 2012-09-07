@@ -570,10 +570,11 @@ function gv_misc_addMetatag($name, $content, $href = NULL) {
 
 
 /**
- * Helper function to add sharing data (metatags and links) to a current page.
+ * Get the title metatag for the front page from the Metatag module's settings.
  */
-function gv_misc_metatag_getFrontMetatags() {
+function gv_misc_metatag_getFrontTitle() {
   $metatags = metatag_metatags_view('global:frontpage', array());
+  return $metatags['title']['#attached']['metatag_set_preprocess_variable'][0][2];
 }
 
 
