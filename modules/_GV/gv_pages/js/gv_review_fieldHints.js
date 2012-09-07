@@ -9,6 +9,7 @@
       $('input[id="edit-field-r-fname-temp"], input[id="edit-field-r-lname-temp"], input[id="edit-field-r-email-temp"], input[id="edit-pros"], input[id="edit-cons"]').each(function(){
         if ($(this).val() == '') {
           $(this).val($(this).attr('title'));
+          $(this).addClass('blur');
         }
       });
       
@@ -18,6 +19,7 @@
         
         if ($(this).val() == $(this).attr('title')) {
           $(this).val('');
+          $(this).removeClass('blur');
         }
         
       });
@@ -26,6 +28,7 @@
         
         if ($(this).val() == '') {
           $(this).val($(this).attr('title'));
+          $(this).addClass('blur');
         }
         
       });
