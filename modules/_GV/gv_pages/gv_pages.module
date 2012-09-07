@@ -2012,31 +2012,35 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $module_path = drupal_get_path('module', 'gv_pages');
       $module_misc_path = drupal_get_path('module', 'gv_misc');
       
+      drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+      drupal_add_js($module_path . '/js/gv_review_fieldHints.js');
       
       
         
-            $form['#attached']['js'] = array(
+      $form['#attached']['js'] = array(
 
-              // Add a characters counter.
-              //$module_misc_path . '/js/gv_misc_charCount.js',
-              //'sites/all/libraries/jquery.plugins/charCount.js',
+        // Add a characters counter.
+        //$module_misc_path . '/js/gv_misc_charCount.js',
+        //'sites/all/libraries/jquery.plugins/charCount.js',
 
-              // Add hints inside some fields
-              $module_path . '/js/gv_review_fieldHints.js',
-              'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
+        // Add hints inside some fields
+        //$module_path . '/js/gv_review_fieldHints.js',
+        //'sites/all/libraries/jquery.plugins/jquery.hint-with-password.js',
 
-              // Add stars widgets to a Rating block
-              $module_path . '/js/gv_review_stars.js',
-              'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
-            );
+        // Add stars widgets to a Rating block
+        $module_path . '/js/gv_review_stars.js',
+        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+      );
 
-            $form['#attached']['library'][] = array('system', 'ui.widget');
+      $form['#attached']['library'][] = array('system', 'ui.widget');
 
-            $form['#attached']['css'] = array(
-              'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-            );
+      $form['#attached']['css'] = array(
+        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+      );
+
       
-  
+      
+
   
   
   
