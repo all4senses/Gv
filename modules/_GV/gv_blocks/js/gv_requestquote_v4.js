@@ -3,7 +3,6 @@
   Drupal.behaviors.gv_requestquote_block_v4 = {
     attach: function (context, settings) {
        
-        //console.log('document.referrer = ' + document.referrer);
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
@@ -18,10 +17,8 @@
        
         $('input[id="phone"]').keydown(function (event) { 
             
-            //var val = $(this).val();
             //console.log($(this).val());
             //console.log(event.keyCode);
-            //return;
             
             //var l = $(this).val().length;
             if( !(     event.keyCode == 8                                // backspace
