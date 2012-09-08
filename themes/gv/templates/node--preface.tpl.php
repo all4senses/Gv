@@ -36,7 +36,8 @@
       hide($content['links']);
       hide($content['field_tags']);
       
-      if (!@$node->showBottom) {
+      //if (!@$node->showBottom) {
+      if (@$node->field_display_type['und'][0]['value'] != 1) {
         hide($content['field_preface_bottom']);
       }
       print render($content);
