@@ -289,7 +289,7 @@ function gv_process_html(&$vars) {
   
   if ($user->uid == 1) {
     
-      //dpm($vars);
+      dpm($vars);
 
       $before = array(
         "/>\s\s+/",
@@ -309,9 +309,9 @@ function gv_process_html(&$vars) {
       // Page content.
       //if (!preg_match('/<pre|<textarea/', $vars['page'])) {
         $page = $vars['page'];
-        dpr($page);
+        //dpr($page);
         $page = preg_replace($before, $after, $page);
-        //$vars['page'] = $page;
+        $vars['page'] = $page;
       //}
 
       // Page bottom.
@@ -321,8 +321,8 @@ function gv_process_html(&$vars) {
 
 
       //dpm($page_top);
-      dpr($page);
-      die;
+      dpm($vars);
+      //die;
       //dpm($page_bottom);
 
   }
