@@ -307,11 +307,11 @@ function gv_process_html(&$vars) {
       //$vars['page_top'] = $page_top;
 
       // Page content.
-      if (!preg_match('/<pre|<textarea/', $vars['page'])) {
+      //if (!preg_match('/<pre|<textarea/', $vars['page'])) {
         $page = $vars['page'];
         $page = preg_replace($before, $after, $page);
         //$vars['page'] = $page;
-      }
+      //}
 
       // Page bottom.
       $page_bottom = $vars['page_bottom'];
