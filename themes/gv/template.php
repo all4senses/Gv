@@ -311,7 +311,7 @@ function gv_process_html(&$vars) {
         $page = $vars['page'];
         //dpr($page);
         $page = preg_replace($before, $after, $page);
-        $vars['page'] = $page;
+        //$vars['page'] = $page;
       //}
 
       // Page bottom.
