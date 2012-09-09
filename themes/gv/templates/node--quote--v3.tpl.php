@@ -86,6 +86,7 @@
           <div class="bottom-clear"></div> 
         </div>
         <div id="right-up-image"></div>
+        <div class="guide"></div>
         <div id="right-bottom">
           <?php echo gv_blocks_get_requestQuoteForPage_v3(); ?>
           <div class="bottom-clear"></div> 
