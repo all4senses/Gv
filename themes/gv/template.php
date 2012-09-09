@@ -283,6 +283,10 @@ function gv_preprocess_views_view(&$vars) {
 */
 
 
+function gv_process_html(&$vars) {
+  dpm($vars);
+}
+
 /*
 function gv_preprocess_html(&$variables) {
   //dpm($variables);
