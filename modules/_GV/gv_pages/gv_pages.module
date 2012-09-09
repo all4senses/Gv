@@ -1968,20 +1968,33 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
               'uid' => $form['uid']['#value'],
               // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
-              'vote_source' => $form['about_you']['field_r_email_temp']['#default_value'],
+              //'vote_source' => $form['about_you']['field_r_email_temp']['#default_value'],
             );
             
             
             
             
+            $votes = votingapi_select_votes($criteria);
             
+            dpm($criteria);
+            dpm($votes);
             
+            $criteria = array(
+              'entity_type' => 'node',
+              'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
+              'uid' => $form['uid']['#value'],
+              // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
+              'vote_source' => $form['about_you']['field_r_email_temp']['#default_value'],
+            );
             
+            $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria)
             
             
             dpm($criteria);
-            if ($votes = votingapi_select_votes($criteria)) {
-              dpm($votes);
+            dpm($votes);
+            
+            if ($votes) {
+              
               foreach ($votes as $vote) {
                 if ($vote['tag'] == 'recommend') {
                   $recommend = $vote['value'];
