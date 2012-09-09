@@ -284,8 +284,49 @@ function gv_preprocess_views_view(&$vars) {
 
 
 function gv_process_html(&$vars) {
-  dpm($vars);
+  
+  global $user;
+  
+  if ($user->uid == 1) {
+    
+      dpm($vars);
+
+      $before = array(
+        "/>\s\s+/",
+        "/\s\s+</",
+        "/>\t+</",
+        "/\s\s+(?=\w)/",
+        "/(?<=\w)\s\s+/"
+      );
+
+      $after = array('> ', ' <', '> <', ' ', ' ');
+
+      // Page top.
+      $page_top = $vars['page_top'];
+      $page_top = preg_replace($before, $after, $page_top);
+      //$vars['page_top'] = $page_top;
+
+      // Page content.
+      if (!preg_match('/<pre|<textarea/', $vars['page'])) {
+        $page = $vars['page'];
+        $page = preg_replace($before, $after, $page);
+        //$vars['page'] = $page;
+      }
+
+      // Page bottom.
+      $page_bottom = $vars['page_bottom'];
+      $page_bottom = preg_replace($before, $after, $page_bottom);
+      //$vars['page_bottom'] = $page_bottom . drupal_get_js('footer');
+
+
+      dpm($page_top);
+      dpm($page);
+      dpm($page_bottom);
+
+  }
+  
 }
+
 
 /*
 function gv_preprocess_html(&$variables) {
