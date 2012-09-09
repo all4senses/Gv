@@ -1968,7 +1968,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
               'uid' => $form['uid']['#value'],
             );
+            dpm($criteria);
             if ($votes = votingapi_select_votes($criteria)) {
+              dpm($votes);
               foreach ($votes as $vote) {
                 if ($vote['tag'] == 'recommend') {
                   $recommend = $vote['value'];
