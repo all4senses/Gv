@@ -302,8 +302,8 @@ function gv_process_html(&$vars) {
       $after = array('> ', ' <', '> <', ' ', ' ');
 
       // Page top.
-      $page_top = $vars['page_top'];
-      $page_top = preg_replace($before, $after, $page_top);
+      ////$page_top = $vars['page_top'];
+      ////$page_top = preg_replace($before, $after, $page_top);
       //$vars['page_top'] = $page_top;
 
       // Page content.
@@ -314,14 +314,14 @@ function gv_process_html(&$vars) {
       //}
 
       // Page bottom.
-      $page_bottom = $vars['page_bottom'];
-      $page_bottom = preg_replace($before, $after, $page_bottom);
+      ////$page_bottom = $vars['page_bottom'];
+      ////$page_bottom = preg_replace($before, $after, $page_bottom);
       //$vars['page_bottom'] = $page_bottom . drupal_get_js('footer');
 
 
-      dpm($page_top);
+      //dpm($page_top);
       dpm($page);
-      dpm($page_bottom);
+      //dpm($page_bottom);
 
   }
   
