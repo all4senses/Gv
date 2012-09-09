@@ -289,7 +289,7 @@ function gv_process_html(&$vars) {
   
   if ($user->uid == 1) {
     
-      //dpm($vars);
+      dpm($vars);
 
       $before = array(
         "/>\s\s+/",
