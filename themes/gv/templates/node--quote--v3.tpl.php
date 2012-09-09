@@ -181,7 +181,7 @@
     <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=HO_ZCOH81gMQh7HEwgM&amp;guid=ON&amp;script=0"/>
     </div>
     </noscript>
-  <?php else:?>
+  <?php global $user; elseif ($user->uid != 1):?>
     <script>top.location.href="http://getvoip.com/compare-voip-solutions";</script>
   <?php endif;?>
     
