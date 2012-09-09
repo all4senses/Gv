@@ -2969,6 +2969,7 @@ function gv_pages_node_view($node, $view_mode) {
         
         $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria);
       }
+      dpm($votes);
       gv_pages_addRatingsToNodeThemed($node, $votes);
       
       if (isset($node->field_r_data['und'][0]['value'])) {
@@ -3404,7 +3405,6 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
     }
     
     
-    dpm($recommend_vote);
     // Recommend vote.
     if (isset($recommend_vote['function'])) {
       // If it's agregated cached results (calculated via function)
