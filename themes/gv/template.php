@@ -308,9 +308,9 @@ function gv_process_html(&$vars) {
 
       // Page content.
       //if (!preg_match('/<pre|<textarea/', $vars['page'])) {
-        $page = $vars['page'];
+        //$page = $vars['page'];
         //dpr($page);
-        $page = preg_replace($before, $after, $page);
+        //$page = preg_replace($before, $after, $page);
         //$vars['page'] = $page;
       //}
 
@@ -321,7 +321,7 @@ function gv_process_html(&$vars) {
 
 
       //dpm($page_top);
-      dpm($vars);
+      //dpm($vars);
       //die;
       //dpm($page_bottom);
 
