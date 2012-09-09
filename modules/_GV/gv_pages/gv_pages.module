@@ -2977,7 +2977,7 @@ function gv_pages_node_view($node, $view_mode) {
       
       // Add a provider name in front of title
       if ($view_mode == 'full') {
-        //dpm($node);
+        dpm($node);
         //drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $node->title);
       }
       
@@ -3032,13 +3032,14 @@ function gv_pages_node_view($node, $view_mode) {
 
           $p_data = unserialize($node->field_p_data['und'][0]['value']);
           $node->p_data = $p_data;
+          /*
           if ($node->field_p_types['und'][0]['value'] == 'business') {
             $node->p_type = 'bu';
           }
           else {
             $node->p_type = 're';
           }
-
+          */
         } // End of if (isset($node->field_p_data['und'][0]['value'])) {        
         
         
@@ -3399,7 +3400,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
       $node->gv_rating_overall = number_format($overall_vote['value'] * 0.05, 1);
     }
     
-    
+    dpm($recommend_vote);
     // Recommend vote.
     if (isset($recommend_vote['function'])) {
       // If it's agregated cached results (calculated via function)
