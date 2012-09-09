@@ -309,11 +309,13 @@ function gv_process_html(&$vars) {
       $test = preg_replace(
           array(
               '/ {2,}/',
-              '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s'
+              '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
+              '/\n/',
           ),
           array(
               ' ',
-              ''
+              '',
+              '',
           ),
           $test
       );
