@@ -50,6 +50,18 @@ function boost_requirements($phase) {
   $t = get_t();
   // Check the server's ability to use boost
   if ($phase == 'runtime') {
+    // Check if core cache is enabled
+    $core_cache = variable_get('cache', 0);
+    if ($core_cache) {
+      $requirements['boost_core_cache'] = array(
+        'title' => $t('Boost'),
+        'value' => $t('Core cache is enabled'),
+        'severity' => REQUIREMENT_WARNING,
+        'description' => $t('Boost will not function properly while Drupal core cache is enabled. Disable Boost or <a href="@settings">the core cache</a>.', array('@settings' => url('admin/config/development/performance'))),
+      );
+    }
+
+    // Check cache directories
     $cache_directories = array(
       boost_get_normal_cache_dir(),
     );

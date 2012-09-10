@@ -66,6 +66,21 @@ define('BOOST_ADD_DEFAULT_CHARSET', TRUE);
  */
 define('BOOST_CHARSET_TYPE', 'utf-8');
 
+/**
+ * Shows this block on every page except the listed pages.
+ * (do not depend on block.module, see #1612448)
+ */
+define('BOOST_VISIBILITY_NOTLISTED', 0);
+
+/**
+ * Shows this block on only the listed pages.
+ */
+define('BOOST_VISIBILITY_LISTED', 1);
+
+/**
+ * Shows this block if the associated PHP code returns TRUE.
+ */
+define('BOOST_VISIBILITY_PHP', 2);
 
 /**
  * Implements hook_menu().
@@ -147,6 +162,45 @@ function boost_menu() {
 }
 
 /**
+ * Implements hook_permissions().
+ */
+function boost_permission() {
+  return array(
+    'boost flush pages' => array(
+      'title' => t('Flush pages from Boost cache'), 
+      'description' => t('Allow users to flush individual pages from the Boost cache using the Boost status block.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function boost_block_info() {
+  $blocks['status'] = array(
+    'info' => t('Boost: Pages cache status'), 
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function boost_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'status':
+      module_load_include('inc', 'boost', 'boost.blocks');
+      return boost_block_view_status();
+  }
+
+  return $block;
+}
+
+/**
  * Implements hook_init().
  *
  * Performs page setup tasks.
@@ -208,10 +262,11 @@ function boost_exit($destination = NULL) {
       return;
     }
   }
-  elseif ($_boost['cache_this'] == FALSE) {
+
+  if (isset($_boost['cache_this']) && $_boost['cache_this'] == FALSE) {
     return;
   }
-  elseif (!$_boost['is_cacheable']) {
+  elseif (!isset($_boost['is_cacheable']) || !$_boost['is_cacheable']) {
     return;
   }
   elseif ($_boost['menu_item']['status'] != 200) {
@@ -285,6 +340,38 @@ function boost_flush_caches() {
     watchdog('boost', 'Flushed all files (%count) from static page cache.', array('%count' => $count), WATCHDOG_NOTICE);
   }
   return;
+}
+
+/**
+ * Implements hook_expire_cache (from the 'expire' module)
+ */
+function boost_expire_cache($urls) {
+  global $base_root;
+
+  foreach ($urls as $url) {
+    // Check if the URL to be flushed matches our base URL
+    if (strpos($base_root, $url) == 0) {
+      $boost = boost_transform_url($url);
+
+      // We need the extention for the filename
+      $boost['header_info'] = boost_get_header_info();
+      $boost['matched_header_info'] = boost_match_header_attributes($boost['header_info']);
+
+      $filename = (isset($boost['filename']) ? $boost['filename'] . '.' . $boost['matched_header_info']['extension'] : NULL);
+
+      if ($filename && file_exists($filename)) {
+        if (unlink($filename)) {
+          boost_log('Removed !file from the boost cache.', array('!file' => $filename), WATCHDOG_DEBUG);
+        }
+        else {
+          boost_log('Could not delete !file from the boost cache. Check file permissions.', array('!file' => $filename), WATCHDOG_WARNING);
+        }
+      }
+      else {
+        boost_log('Could not delete the cache for !url, file !file does not exist.', array('!url' => $url, '!file' => $filename), WATCHDOG_DEBUG);
+      }
+    }
+  }
 }
 
 /**
@@ -389,7 +476,7 @@ function boost_parse_url($url = NULL, $b_path = NULL) {
   if (!isset($parts['query'])) {
     $parts['query'] = '';
   }
-  $parts['path'] = $parts['full_path'] = preg_replace('/^' . preg_quote($b_path, '/') .'/i', '', $parts['path']);
+  $parts['path'] = $parts['full_path'] = urldecode(preg_replace('/^' . preg_quote($b_path, '/') .'/i', '', $parts['path']));
   $parts['base_path'] = $b_path;
   $parts['query_array'] = array();
   parse_str($parts['query'], $parts['query_array']);
@@ -441,10 +528,16 @@ function boost_parse_url($url = NULL, $b_path = NULL) {
  *
  * @param $parts
  *   $parts
+ * @param $request_type
+ *   May be 'status' to skip some checks in order to show the status
+ *   block on the admin interface (otherwise we will always mention
+ *   that the page is non-cacheable, since user is logged in).
+ *   Please don't rely on this parameter if you are extending boost,
+ *   this is likely to change in the future. Contact us if you use it.
  *
  * @return $parts
  */
-function boost_is_cacheable($parts) {
+function boost_is_cacheable($parts, $request_type = 'normal') {
   // Set local variables.
   $path = $parts['path'];
   $query = $parts['query'];
@@ -479,6 +572,7 @@ function boost_is_cacheable($parts) {
       || !empty($query_array['destination'])
     ) {
     $parts['is_cacheable'] = FALSE;
+    $parts['is_cacheable_reason'] = 'Core Drupal dynamic pages';
     return $parts;
   }
 
@@ -488,18 +582,19 @@ function boost_is_cacheable($parts) {
   $chars = '"*:<>|';
   if (stristr(PHP_OS, 'WIN') && preg_match("/[" . $chars . "]/", $full)) {
     $parts['is_cacheable'] = FALSE;
+    $parts['is_cacheable_reason'] = 'Reserved characters on MS Windows';
     return $parts;
   }
 
   // Match the user's cacheability settings against the path.
   // See http://api.drupal.org/api/function/block_block_list_alter/7
-  $visibility = variable_get('boost_cacheability_option', BLOCK_VISIBILITY_NOTLISTED);
+  $visibility = variable_get('boost_cacheability_option', BOOST_VISIBILITY_NOTLISTED);
   $pages_setting = variable_get('boost_cacheability_pages', BOOST_CACHEABILITY_PAGES);
   if ($pages_setting) {
     // Convert path string to lowercase. This allows comparison of the same path
     // with different case. Ex: /Page, /page, /PAGE.
     $pages = drupal_strtolower($pages_setting);
-    if ($visibility < BLOCK_VISIBILITY_PHP) {
+    if ($visibility < BOOST_VISIBILITY_PHP) {
       // Convert the alias to lowercase.
       $path = drupal_strtolower($alias);
       // Compare the lowercase internal and lowercase path alias (if any).
@@ -507,9 +602,9 @@ function boost_is_cacheable($parts) {
       if ($path != $normal_path) {
         $page_match = $page_match || drupal_match_path($normal_path, $pages);
       }
-      // When 'boost_cacheability_option' has a value of 0 (BLOCK_VISIBILITY_NOTLISTED),
+      // When 'boost_cacheability_option' has a value of 0 (BOOST_VISIBILITY_NOTLISTED),
       // Boost will cache all pages except those listed in 'boost_cacheability_pages'.
-      // When set to 1 (BLOCK_VISIBILITY_LISTED), Boost will only cache those
+      // When set to 1 (BOOST_VISIBILITY_LISTED), Boost will only cache those
       // pages listed in 'boost_cacheability_pages'.
       $page_match = !($visibility xor $page_match);
     }
@@ -523,7 +618,13 @@ function boost_is_cacheable($parts) {
   else {
     $page_match = TRUE;
   }
+
   $parts['is_cacheable'] = $page_match;
+
+  if (! $page_match) {
+    $parts['is_cacheable_reason'] = 'Page excluded from cache by the include/exclude paths defined by site admin.';
+  }
+
   if (!$parts['is_cacheable']) {
     return $parts;
   }
@@ -531,8 +632,12 @@ function boost_is_cacheable($parts) {
   // Invoke hook_boost_is_cacheable($path).
   $modules = boost_module_implements('boost_is_cacheable', 'boost');
   foreach ($modules as $module) {
-    $result = module_invoke($module, 'boost_is_cacheable', $parts);
+    $result = module_invoke($module, 'boost_is_cacheable', $parts, $request_type);
     if ($result['is_cacheable'] === FALSE) {
+      if (! isset($result['is_cacheable'])) {
+        $result['is_cacheable_reason'] = 'Page excluded from cache by a third-party module.';
+      }
+
       return $result;
     }
   }
@@ -547,13 +652,18 @@ function boost_is_cacheable($parts) {
  *
  * @param $parts
  *   info about this request
+ * @param $request_type
+ *   if the request_type is "status", we assume that this is being
+ *   called from the admin status block. Since the user must be
+ *   logged in to view this block, we do not return false.
  *
  * @return $parts
  */
-function boost_boost_is_cacheable($parts) {
+function boost_boost_is_cacheable($parts, $request_type = 'normal') {
   global $user;
-  if ($user->uid != 0) {
+  if ($user->uid != 0 && $request_type != 'status') {
     $parts['is_cacheable'] = FALSE;
+    $parts['is_cacheable_reason'] = 'Boost only works for anonymous users.';
   }
   else {
     $parts['is_cacheable'] = TRUE;
@@ -598,13 +708,14 @@ function boost_cookie_handler() {
   if (isset($_COOKIE[BOOST_COOKIE]) && $uid == 0) {
     boost_set_cookie($uid, REQUEST_TIME - 86400);
   }
+  // Set Boost cookie if it doesn't exists (or is -1 likely because of a login POST) and user is logged in.
+  // c.f. Issue #1616356 comment #7
+  elseif ((!isset($_COOKIE[BOOST_COOKIE]) || $_COOKIE[BOOST_COOKIE] == '-1') && $uid != 0) {
+    boost_set_cookie($uid);
+  }
   // Remove Boost cookie if set to -1 & Request Method is a GET/HEAD.
   elseif (isset($_COOKIE[BOOST_COOKIE]) && $_COOKIE[BOOST_COOKIE] == '-1' && ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD')) {
     boost_set_cookie($uid, REQUEST_TIME - 86400);
-  }
-  // Set Boost cookie if it doesn't exists and user is logged in.
-  elseif (!isset($_COOKIE[BOOST_COOKIE]) && $uid != 0) {
-    boost_set_cookie($uid);
   }
 
   // Issue #1242416: Set a nocache cookie on a POST, remove it immediately after
@@ -760,7 +871,14 @@ function boost_boost_menu_router($parts) {
 
   // Handle panels.
   if (isset($parts['menu_item']['page_callback']) && $parts['menu_item']['page_callback'] == 'page_manager_page_execute') {
-    $subtask_id = array_shift($parts['menu_item']['page_arguments']);
+    $page_arguments = $parts['menu_item']['page_arguments'];
+
+    // Issue #1653206 : panels with access control have serialized page arguments
+    if (! is_array($page_arguments)) {
+      $page_arguments = unserialize($page_arguments);
+    }
+
+    $subtask_id = array_shift($page_arguments);
     $page = page_manager_page_load($subtask_id);
     $task = page_manager_get_task($page->task);
     if ($function = ctools_plugin_get_function($task, 'page callback')) {
@@ -1398,3 +1516,16 @@ function boost_htaccess_cache_dir_generate() {
 
   return $string;
 }
+
+/**
+ * Simple function to output log and debug messages
+ */
+function boost_log($message, $variables, $severity = WATCHDOG_NOTICE) {
+  // Log debug info only if boost debugging is enabled
+  if ($severity == WATCHDOG_DEBUG && ! variable_get('boost_message_debug', BOOST_MESSAGE_DEBUG)) {
+    return;
+  }
+
+  watchdog('boost', $message, $variables, $severity);
+}
+

@@ -46,23 +46,25 @@ Handbook page: http://drupal.org/node/1459690
 2. Unzip and upload the module folder (as is) to the sites/all/modules
    folder in your Drupal installation directory.
 
-3. Goto: [Administer > Configuration > System > Boost > Boost Settings]
+3. Goto: [Administer > Configuration > Development > Performance] and disable
+   the Drupal core cache for anonymous users. Boost will not be able to
+   generate its cache if a page is already in the Drupal core cache.
+   This is the only core setting you must disable, others can be left enabled.
+
+4. Goto: [Administer > Configuration > System > Boost > Boost Settings]
    and review the default settings.
 
-4. Goto: [Administer > Configuration > System > Boost > File System]
-   Specify the cache directory, which should be something like
-   cache/normal/www.example.com (keeping the default directory is
-   recommended) and must be writeable by the web server: you may need
-   to create the directory, and set the permissions so it is writeable.
-
+5. Goto: [Administer > Configuration > System > Boost > File System]
+   Make sure that the cache directory is writeable by the web server:
+   you may need to create the directory, and set the permissions.
    Ideally, the cache directory should be owned by your user and be in
    the group of your web server ("www-data" on Debian/Ubuntu), with a
    unix permission of 0775 (read/write/exec owner, read/write/exec group,
    read/exec others).
 
-5. Review the other default Boost settings.
+6. Review the other default Boost settings.
 
-6. IMPORTANT - This step is easy and required for Boost to work!
+7. IMPORTANT - This step is easy and required for Boost to work!
    Backup the original .htaccess file from your Drupal installation
    directory for safe keeping.
    Copy the custom generated htaccess rule from [Administer > Configuration

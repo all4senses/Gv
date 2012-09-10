@@ -21,12 +21,12 @@ function boost_admin_settings() {
   // See http://api.drupal.org/api/function/block_admin_configure/7
   $access = user_access('use PHP for settings');
   $options = array(
-    BLOCK_VISIBILITY_NOTLISTED => t('All pages except those listed'),
-    BLOCK_VISIBILITY_LISTED => t('Only the listed pages'),
+    BOOST_VISIBILITY_NOTLISTED => t('All pages except those listed'),
+    BOOST_VISIBILITY_LISTED => t('Only the listed pages'),
   );
   $description = t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array('%blog' => 'blog', '%blog-wildcard' => 'blog/*', '%front' => '<front>'));
   if (module_exists('php') && $access) {
-    $options += array(BLOCK_VISIBILITY_PHP => t('Pages on which this PHP code returns <code>TRUE</code> (experts only)'));
+    $options += array(BOOST_VISIBILITY_PHP => t('Pages on which this PHP code returns <code>TRUE</code> (experts only)'));
     $title = t('Pages or PHP code');
     $description .= ' ' . t('If the PHP option is chosen, enter PHP code between %php. Note that executing incorrect PHP code can break your Drupal site.', array('%php' => '<?php ?>'));
   }
@@ -37,7 +37,7 @@ function boost_admin_settings() {
     '#type' => 'radios',
     '#title' => t('Cache specific pages'),
     '#options' => $options,
-    '#default_value' => variable_get('boost_cacheability_option', BLOCK_VISIBILITY_NOTLISTED),
+    '#default_value' => variable_get('boost_cacheability_option', BOOST_VISIBILITY_NOTLISTED),
   );
   $form['cacheability']['boost_cacheability_pages'] = array(
     '#type' => 'textarea',
