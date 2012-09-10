@@ -80,15 +80,20 @@ function gv_pages_menu() {
  */
 function gv_misc_js_alter(&$javascript) {
 
-  //include_once '/sites/all/libraries/minify/min/lib/Minify.php';
-  include_once '/sites/all/libraries/minify/min/lib/JSMin.php';
-  
-  dpm($javascript);
-  foreach($javascript as $filename => $attr){
-    //if(strpos($filename, ".js")) {
-    //  $sources_to_minify[] = $filename;	
-    //}
-  }  
+  global $user;
+  if ($user->uid == 1) {
+    
+    //include_once '/sites/all/libraries/minify/min/lib/Minify.php';
+    include_once '/sites/all/libraries/minify/min/lib/JSMin.php';
+
+    dpm($javascript);
+    foreach($javascript as $filename => $attr){
+      //if(strpos($filename, ".js")) {
+      //  $sources_to_minify[] = $filename;	
+      //}
+    }
+    
+  }
   
 }
 
