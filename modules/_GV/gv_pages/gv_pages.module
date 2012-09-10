@@ -83,8 +83,8 @@ function gv_misc_js_alter(&$javascript) {
   global $user;
   if ($user->uid == 1) {
     
-    //include_once '/sites/all/libraries/minify/min/lib/Minify.php';
-    include_once '/sites/all/libraries/minify/min/lib/JSMin.php';
+    //include_once 'sites/all/libraries/minify/min/lib/Minify.php';
+    include_once 'sites/all/libraries/minify/min/lib/JSMin.php';
 
     dpm($javascript);
     foreach($javascript as $filename => $attr){
