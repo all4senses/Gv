@@ -86,20 +86,25 @@ function gv_misc_js_alter(&$javascript) {
     //include_once 'sites/all/libraries/minify/min/lib/Minify.php';
     include_once DRUPAL_ROOT . "/" . 'sites/all/libraries/minify/min/lib/JSMin.php';
 
-    dpm($javascript);
     
-    $source_fpath = DRUPAL_ROOT . "/" . $javascript['sites/all/modules/_GV/gv_misc/js/addSocialite.js']['data'];
+    
+    $source_fpath_short = $javascript['sites/all/modules/_GV/gv_misc/js/addSocialite.js']['data'];
+    $source_fpath = DRUPAL_ROOT . "/" . $source_fpath_short;
     dpm($source_fpath);
     
-    $target_path = DRUPAL_ROOT . '/sites/default/files/jsmin-gv/' . array_pop(explode('/', $source_fpath));
+    $target_path_short = 'sites/default/files/jsmin-gv/' . array_pop(explode('/', $source_fpath));
+    $target_path = DRUPAL_ROOT . '/' . $target_path_short;
     dpm($target_path);
     
     $source_content = file_get_contents($source_fpath);
     dpm($source_content);
     $minOutput = JSMin::minify($source_content);
     dpm($minOutput);
-    file_put_contents($target_path, $minOutput);
-            
+    if (file_put_contents($target_path, $minOutput)) {
+      $javascript[$source_fpath_short]['data'] = $target_path_short;
+    }
+    dpm($javascript);
+    
     foreach($javascript as $filename => $attr){
       //if(strpos($filename, ".js")) {
       //  $sources_to_minify[] = $filename;	
