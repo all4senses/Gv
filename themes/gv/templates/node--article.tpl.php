@@ -24,7 +24,7 @@
           <h2
           <?php endif; ?>
 
-            <?php print /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ preg_replace('/datatype=""/', '', $title_attributes); ?>>
+            <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ preg_replace('/datatype=""/', '', $title_attributes); ?>>
             <?php if (!isset($node->title_no_link) && !$page): ?>
               <a href="<?php print $node_url; ?>">
                 <?php print $title; ?>
