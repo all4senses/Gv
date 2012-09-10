@@ -81,7 +81,7 @@ function gv_misc_process_html(&$vars) {
   
   global $user;
   
-  if ($user->uid != 1) {
+  if (!$user->uid) {
     
       // Minify a Html Page content.
       $vars['page'] = preg_replace(
@@ -111,7 +111,7 @@ function gv_misc_process_html(&$vars) {
 function gv_misc_js_alter(&$javascript) {
 
   global $user;
-  if ($user->uid != 1) {
+  if (!$user->uid) {
     
     // Minify all js on the page.
     
