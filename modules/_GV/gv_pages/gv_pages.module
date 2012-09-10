@@ -113,7 +113,7 @@ function gv_misc_js_alter(&$javascript) {
         $minOutput = JSMin::minify($source_content);
 
         if (file_put_contents($target_path, $minOutput)) {
-          $javascript[$source_fpath_short]['data'] = $target_path_short;
+          $javascript[$filename]['data'] = $target_path_short;
         }
 
       }
