@@ -123,7 +123,7 @@ function gv_misc_js_alter(&$javascript) {
         
         $source_fpath_short = $attr['data'];
         $source_fpath = DRUPAL_ROOT . "/" . $source_fpath_short;
-        $target_path_short = 'sites/default/files/jsmin-gv/' . array_pop(explode('/', $source_fpath));
+        $target_path_short = 'sites/default/files/jsmin-gv/' . md5($source_fpath_short) . '_' . array_pop(explode('/', $source_fpath));
         $target_path = DRUPAL_ROOT . '/' . $target_path_short;
 
         $source_content = file_get_contents($source_fpath);
