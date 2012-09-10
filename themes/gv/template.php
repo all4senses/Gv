@@ -306,11 +306,14 @@ function gv_process_html(&$vars) {
         main content</a> 
         
 <a href="#navigation" class="element-invisible element-focusable">Skip to navigation</a>       </div> <header id="header" role="banner" class="clearfix"> <nav id="navigation" role="navigation" class="clearfix"> <div id="header-menu-back"></div> <div id="logo-block"> <a href="/" title="GetVoIP Home" id="logo"> <img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo.png" alt="GetVoIP logo" title="GetVoIP Home" /> </a> <div class="descr"> <div class="title">2012 VOIP GUIDE</div> <div class="subtitle">SERVICE PROVIDER REVIEWS</div><div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="VoIP Reviews" title="VoIP Reviews"/></div> </div> </div> <div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div><ul class="header-links"><li><a href="https://twitter.com/#!/getvoipreviews" class="Twitter" title="Follow GetVoIP on Twitter" target="_blank">Twitter</a></li><li><a href="http://www.facebook.com/GetVoip" class="Facebook" title="Like GetVoIP on FaceBook" target="_blank">Facebook</a></li><li><a href="https://plus.google.com/102678795633763007140" class="GooglePlus" title="+1 GetVoIP on Google+" target="_blank">GooglePlus</a></li><li><a href="http://www.linkedin.com/groups/GetVoIPcom-4458404" class="LinkedIn" title="Join GetVoIP on LinkedIn" target="_blank">LinkedIn</a></li></ul></div><div class="region region-header"> <section id="block-om-maximenu-om-maximenu-1" class="block block-om-maximenu contextual-links-region odd first"> <div class="contextual-links-wrapper"><ul class="contextual-links"><li class="block-configure first last"><a href="/admin/structure/block/manage/om_maximenu/om-maximenu-1/configure?destination=node/38">Configure block</a></li> </ul></div> <div class="content"> <div id="om-maximenu-main-om-menu" class="om-maximenu om-maximenu-simple om-maximenu-block om-maximenu-row om-maximenu-block-down code-om-u1-939494773"> <div id="om-menu-main-om-menu-ul-wrapper" class="om-menu-ul-wrapper"> <ul id="om-menu-main-om-menu" class="om-menu"> <li id="om-leaf-om-u1-939494773-3" class="om-leaf first leaf-business-voip"> <a class="om-link link-business-voip" href="/compare-business-voip-providers">Business VoIP</a> <div class="om-maximenu-content om-maximenu-content-nofade closed"> <!-- <div class="om-maximenu-top"> <div class="om-maximenu-top-left"></div> <div class="om-maximenu-top-right"></div> </div> --> <!-- /.om-maximenu-top --> <div class="om-maximenu-middle"> <!-- <div class="om-maximenu-middle-left"> <div class="om-maximenu-middle-right"> --> <div class="block block-gv_blocks block-gv_blocks-id-main_menu_om_bus_voip first last"> <div class="content"><ul class="gv block lvl-0"><li><a href="/compare-business-voip-providers">Business VoIP Providers</a></li><li><a href="/sip-trunking-providers">SIP Trunking</a></li><li><a href="/business-voip-reviews">Business VoIP Reviews</a></li></ul></div> <div class="edit-block"><a href="/admin/structure/block/manage/gv_blocks/main_menu_om_bus_voip/configure?destination=node/38" title="Configure " class="block-config">configure</a></div></div><!-- /.block --> <div class="om-clearfix"></div>';
-      dpm($test);
+      //dpm($test);
+      
+      $page = $vars['page'];
+      
       //$test = preg_replace($before, $after, $test);
     
       
-      $test = preg_replace(
+      $page = preg_replace(
           array(
               '/ {2,}/',
               '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
@@ -321,7 +324,7 @@ function gv_process_html(&$vars) {
               '',
               
           ),
-          $test
+          $page
       );
       
       
@@ -341,7 +344,7 @@ function gv_process_html(&$vars) {
     
     
     
-      dpm($test);
+      //dpm($test);
       
       
       // Page top.
@@ -354,7 +357,7 @@ function gv_process_html(&$vars) {
         //$page = $vars['page'];
         //dpr($page);
         //$page = preg_replace($before, $after, $page);
-        //$vars['page'] = $page;
+        $vars['page'] = $page;
       //}
 
       // Page bottom.
