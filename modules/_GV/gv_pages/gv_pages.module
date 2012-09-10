@@ -75,12 +75,41 @@ function gv_pages_menu() {
 
 
 /**
+ * Implements Hook Process Html.
+ */
+function gv_misc_process_html(&$vars) {
+  
+  global $user;
+  
+  if ($user->uid != 1) {
+    
+      // Minify a Html Page content.
+      $vars['page'] = preg_replace(
+        array(
+          '/ {2,}/',
+          '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
+        ),
+        array(
+          ' ',
+          '',
+        ),
+        $vars['page']
+      );
+
+  }
+  else {
+    //dpm($vars);
+  }
+  
+}
+
+
+/**
  * Implementing hook_js_alter
  * @param $javascript
  */
 function gv_misc_js_alter(&$javascript) {
 
-  return;
   global $user;
   if ($user->uid != 1) {
     

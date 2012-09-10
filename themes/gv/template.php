@@ -283,36 +283,6 @@ function gv_preprocess_views_view(&$vars) {
 */
 
 
-/**
- * Implements Hook Process Html.
- */
-function gv_process_html(&$vars) {
-  
-  global $user;
-  
-  if (!$user->uid == 1) {
-    
-      // Minify a Html Page content.
-      $vars['page'] = preg_replace(
-        array(
-          '/ {2,}/',
-          '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
-        ),
-        array(
-          ' ',
-          '',
-        ),
-        $vars['page']
-      );
-
-  }
-  else {
-    //dpm($vars);
-  }
-  
-}
-
-
 /*
 function gv_preprocess_html(&$variables) {
   //dpm($variables);
