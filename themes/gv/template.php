@@ -318,7 +318,7 @@ function gv_process_html(&$vars) {
           $page
         );
         
-        $vars['page'] = $page;
+        //$vars['page'] = $page;
       }
 
       // Page bottom.
