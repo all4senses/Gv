@@ -88,13 +88,17 @@ function gv_misc_js_alter(&$javascript) {
 
     dpm($javascript);
     
-    $source = DRUPAL_ROOT . "/" . $javascript['sites/all/modules/_GV/gv_misc/js/addSocialite.js']['data'];
-    dpm($source);
+    $source_fpath = DRUPAL_ROOT . "/" . $javascript['sites/all/modules/_GV/gv_misc/js/addSocialite.js']['data'];
+    dpm($source_fpath);
     
-    $src = file_get_contents($source);
-    dpm($src);
-    $minOutput = JSMin::minify($src);
+    $target_path = DRUPAL_ROOT . '/sites/all/defult/files/jsmin-gv/' . array_pop(explode('/', $source_fpath));
+    dpm($target_path);
+    
+    $source_content = file_get_contents($source_fpath);
+    dpm($source_content);
+    $minOutput = JSMin::minify($source_content);
     dpm($minOutput);
+    file_put_contents($target_path, $minOutput);
             
     foreach($javascript as $filename => $attr){
       //if(strpos($filename, ".js")) {
