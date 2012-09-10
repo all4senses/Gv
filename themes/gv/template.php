@@ -283,55 +283,31 @@ function gv_preprocess_views_view(&$vars) {
 */
 
 
+/**
+ * Implements Hook Process Html.
+ */
 function gv_process_html(&$vars) {
   
   global $user;
   
-  if ($user->uid == 1) {
+  if (!$user->uid == 1) {
     
-      dpm($vars);
+      // Minify a Html Page content.
+      $vars['page'] = preg_replace(
+        array(
+          '/ {2,}/',
+          '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
+        ),
+        array(
+          ' ',
+          '',
+        ),
+        $vars['page']
+      );
 
-      
-      
-      
-      // Page top.
-      ////$page_top = $vars['page_top'];
-      ////$page_top = preg_replace($before, $after, $page_top);
-      //$vars['page_top'] = $page_top;
-
-      // Page content.
-      if (!preg_match('/<pre|<textarea/', $vars['page'])) {
-        
-        //$page = preg_replace($before, $after, $page);
-        
-        $page = $vars['page'];
-      
-        $page = preg_replace(
-          array(
-            '/ {2,}/',
-            '/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
-          ),
-          array(
-            ' ',
-            '',
-          ),
-          $page
-        );
-        
-        //$vars['page'] = $page;
-      }
-
-      // Page bottom.
-      ////$page_bottom = $vars['page_bottom'];
-      ////$page_bottom = preg_replace($before, $after, $page_bottom);
-      //$vars['page_bottom'] = $page_bottom . drupal_get_js('footer');
-
-
-      //dpm($page_top);
-      //dpm($vars);
-      //die;
-      //dpm($page_bottom);
-
+  }
+  else {
+    //dpm($vars);
   }
   
 }
