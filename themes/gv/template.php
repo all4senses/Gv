@@ -307,7 +307,7 @@ function gv_process_html(&$vars) {
 
   }
   else {
-    //dpm($vars);
+    dpm($vars);
   }
   
 }
