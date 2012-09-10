@@ -19,12 +19,12 @@
         <?php print render($title_prefix); ?>
 
           <?php if ($page): ?>
-          <h1
+          <h1 <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ preg_replace('/datatype=""/', '', $title_attributes); ?>>
           <?php else: ?>
-          <h2
+          <h2 <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ preg_replace('/datatype=""/', '', $title_attributes); ?>>
           <?php endif; ?>
 
-            <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ preg_replace('/datatype=""/', '', $title_attributes); ?>>
+            
             <?php if (!isset($node->title_no_link) && !$page): ?>
               <a href="<?php print $node_url; ?>">
                 <?php print $title; ?>
