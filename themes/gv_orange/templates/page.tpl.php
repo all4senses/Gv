@@ -66,6 +66,7 @@
             '/compare-business-voip-providers', 
             '/business-voip-reviews', 
             '/compare-residential-voip-providers', 
+            '/best-voip-service-providers',
             '/residential-voip-reviews', 
             '/providers/reviews', 
             '/about-voip-services', 
