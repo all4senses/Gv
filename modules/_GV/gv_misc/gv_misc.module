@@ -999,9 +999,21 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
 function gv_misc_testPage() {
   $out = '';
 
-  $out .= l('Request quote block v4', 'about-us');
-  $out .= '<br>' . l('Request quote page v4', 'compare-voip-solutions');
-  dpm($_SERVER);
+//  $out .= l('Request quote block v4', 'about-us');
+//  $out .= '<br>' . l('Request quote page v4', 'compare-voip-solutions');
+//  dpm($_SERVER);
+  
+  $dir = 'sites/default/files/jsmin-gv';
+  $objects = scandir($dir);
+  dpm($objects);
+  foreach ($objects as $object) {
+    if ($object == "." || $object == "..") {
+      continue;
+    }
+    $file = $dir . "/" . $object;
+    //unlink($file);
+  }
+   
   
   return $out . '<br>End of Test';
 }
