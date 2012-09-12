@@ -168,6 +168,7 @@ function gv_misc_js_alter(&$javascript) {
  * Implements hook_flush_caches().
  */
 function gv_misc_flush_caches() {
+  return;
   // Remove all minified files from jsmin-gv folder.
   $dir = 'sites/default/files/jsmin-gv';
   $objects = scandir($dir);
