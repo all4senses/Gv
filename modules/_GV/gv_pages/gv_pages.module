@@ -123,9 +123,10 @@ function gv_misc_js_alter(&$javascript) {
     
     if ($gv_minified_js) {
       foreach($javascript as $filename => $attr){
-        if (!in_array($gv_minified_js, $filename) && strpos($filename, '.js') && !strpos($attr['data'], "min.js") && !strpos($attr['data'], "jsmin-gv")) {
+        if (!in_array($filename, $gv_minified_js) && strpos($filename, '.js') && !strpos($attr['data'], "min.js") && !strpos($attr['data'], "jsmin-gv")) {
           $add_to_minified[$filename] = $attr;
         }
+        dpm($add_to_minified);
       }
     }
     else {
