@@ -110,11 +110,29 @@ function gv_misc_process_html(&$vars) {
  */
 function gv_misc_js_alter(&$javascript) {
 
+  return;
+  
   global $user;
   if (!$user->uid) {
     
     // Minify all js on the page.
     
+    $add_to_minified = NULL;
+    
+    $gv_minified_js = variable_get('gv_minified_js');
+    
+    if ($gv_minified_js) {
+      foreach($javascript as $filename => $attr){
+        if (!in_array($gv_minified_js, $filename)) {
+          $add_to_minified[$filename] = $attr;
+        }
+      }
+    }
+    
+    if($add_to_minified) {
+      
+    }
+      
     include_once DRUPAL_ROOT . "/" . 'sites/all/libraries/minify/min/lib/JSMin.php';
     
     foreach($javascript as $filename => $attr){
@@ -123,15 +141,18 @@ function gv_misc_js_alter(&$javascript) {
         
         $source_fpath_short = $attr['data'];
         $source_fpath = DRUPAL_ROOT . "/" . $source_fpath_short;
-        $target_path_short = 'sites/default/files/jsmin-gv/' . md5($source_fpath_short) . '_' . array_pop(explode('/', $source_fpath));
-        $target_path = DRUPAL_ROOT . '/' . $target_path_short;
-
-        $source_content = file_get_contents($source_fpath);
-
-        $minOutput = JSMin::minify($source_content);
-
-        if (file_put_contents($target_path, $minOutput)) {
-          $javascript[$filename]['data'] = $target_path_short;
+        
+        if ($source_content = file_get_contents($source_fpath)) {
+          if ($minOutput = JSMin::minify($source_content)) {
+            $target_fname = str_replace('/', '-', $source_fpath_short) . '_' . array_pop(explode('/', $source_fpath_short));
+            //$target_path_short = 'sites/default/files/jsmin-gv/' . md5($source_fpath_short) . '_' . array_pop(explode('/', $source_fpath));
+            $target_path_short = 'sites/default/files/jsmin-gv/' . $target_fname;
+            $target_path = DRUPAL_ROOT . '/' . $target_path_short;
+          
+            if (file_put_contents($target_path, $minOutput)) {
+              $javascript[$filename]['data'] = $target_path_short;
+            }
+          }
         }
 
       } // End of if(strpos($filename, '.js') && !strpos($attr['data'], "min.js") && !strpos($attr['data'], "jsmin-gv")) {
@@ -140,6 +161,22 @@ function gv_misc_js_alter(&$javascript) {
     
   } // End of if ($user->uid != 1) {
   
+}
+
+
+/**
+ * Implements hook_flush_caches().
+ */
+function gv_misc_flush_caches() {
+  // Remove all minified files from jsmin-gv folder.
+  $dir = 'sites/default/files/jsmin-gv';
+  $objects = scandir($dir);
+  foreach ($objects as $object) {
+    if ($object != "." && $object != "..") {
+      unlink($dir . "/" . $object);
+    }
+  }
+  variable_del('gv_minified_js');
 }
 
 

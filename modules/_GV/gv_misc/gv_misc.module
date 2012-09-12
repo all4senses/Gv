@@ -1005,15 +1005,13 @@ function gv_misc_testPage() {
   
   $dir = 'sites/default/files/jsmin-gv';
   $objects = scandir($dir);
-  dpm($objects);
   foreach ($objects as $object) {
-    if ($object == "." || $object == "..") {
-      continue;
+    if ($object != "." && $object != "..") {
+      unlink($dir . "/" . $object);
     }
-    $file = $dir . "/" . $object;
-    //unlink($file);
   }
-   
+ 
+  variable_del('gv_minified_js');
   
   return $out . '<br>End of Test';
 }
