@@ -149,12 +149,7 @@ function gv_misc_js_alter(&$javascript) {
 
           if ($source_content = file_get_contents($source_fpath)) {
             if ($minOutput = JSMin::minify($source_content)) {
-              //$target_folder_alias = str_replace('/', '-', $source_fpath_short);
-              //$target_fname = str_replace('/', '-', $source_fpath_short); //$target_folder_alias . '__' . array_pop(explode('/', $source_fpath_short));
-              //$target_path_short = 'sites/default/files/jsmin-gv/' . md5($source_fpath_short) . '_' . array_pop(explode('/', $source_fpath));
               $target_path_short = 'sites/default/files/jsmin-gv/' . str_replace('/', '-', $source_fpath_short);
-              //$target_path = DRUPAL_ROOT . '/' . $target_path_short;
-
               if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $minOutput)) {
                 $javascript[$filename]['data'] = $target_path_short;
                 $gv_minified_js[] = $filename;
