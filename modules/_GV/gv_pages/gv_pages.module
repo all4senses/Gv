@@ -111,7 +111,7 @@ function gv_misc_process_html(&$vars) {
 function gv_misc_js_alter(&$javascript) {
 
   global $user;
-  if ($user->uid == 1) {
+  if (!$user->uid) {
     
     // Minify all js on the page.
     
@@ -126,7 +126,6 @@ function gv_misc_js_alter(&$javascript) {
           $add_to_minified[$filename] = $attr;
         }
       }
-      dpm($add_to_minified);
     }
     else {
       $add_to_minified = $javascript;
