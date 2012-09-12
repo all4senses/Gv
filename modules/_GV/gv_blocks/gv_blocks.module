@@ -91,7 +91,11 @@ function gv_blocks_block_info() {
   );
   
   $blocks['best_voip_p_bottom'] = array(
-    'info' => t('Bottom section of best-voip-service-providers page preface'), // for best-voip-service-providers page
+    'info' => t('Bottom section of best-voip-service-providers page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['bu_voip_features_p_bottom'] = array(
+    'info' => t('Bottom section of business-voip-features page preface'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
@@ -210,6 +214,10 @@ function gv_blocks_block_view($delta = '') {
     case 'best_voip_p_bottom':
       $block['subject'] = t('Bottom section of best-voip-service-providers page preface');
       $block['content'] = gv_misc_getPrefaceBottomSection('best-voip-service-providers'); // Arg - preface's key
+      break;
+    case 'bu_voip_features_p_bottom':
+      $block['subject'] = t('Bottom section of business-voip-features page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('business-voip-features'); // Arg - preface's key
       break;
     
     
