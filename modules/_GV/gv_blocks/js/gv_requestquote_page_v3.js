@@ -99,6 +99,9 @@
        
         $('input[id="phone"]').keydown(function (event) { 
             
+            console.log($(this).val());
+            console.log(event.keyCode);
+            
             //var l = $(this).val().length;
             if( !(     event.keyCode == 8                                // backspace
                     || event.keyCode == 9
