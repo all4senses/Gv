@@ -296,7 +296,18 @@
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
-            beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide(); $("#requestQuoteFormWrapper .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); $("#requestQuoteFormWrapper .sending").show(); },
+            beforeSubmit: function(data){
+              if ($('input[id="website"]').val() == $('input[id="website"]').attr('title')) {
+                $('input[id="website"]').val('');
+              }
+              if ($('input[id="company"]').val() == $('input[id="company"]').attr('title')) {
+                $('input[id="company"]').val('');
+              }
+
+              $('#requestQuoteFormWrapper .multipartForm').hide(); 
+              $("#requestQuoteFormWrapper .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $("#requestQuoteFormWrapper .sending").show(); 
+            },
             
             
             dataType: 'json',
