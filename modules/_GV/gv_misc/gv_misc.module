@@ -1314,10 +1314,10 @@ function gv_misc_makeRequest_ajax() {
         'Last Name' => isset($post['lastname']) ? $post['lastname'] : '',
         'Name' => isset($post['name']) ? $post['name'] : '',
         
-        'Company' => (isset($post['company']) && $post['company'] != 'Company') ? $post['company'] : '',
+        'Company' => isset($post['company']) ? $post['company'] : '',
 
         'Email' => $post['email'],
-        'Website' => (isset($post['website']) && $post['website'] != 'Website') ? $post['website'] : '',
+        'Website' => isset($post['website']) ? $post['website'] : '',
         'Phone #' => $phone,
         'Monthly budget' => isset($post['budget']) ? $post['budget'] : '',
 
@@ -1400,7 +1400,7 @@ function gv_misc_makeRequest_ajax() {
         'First Name' => $post['firstname'],
         'Last Name' => $post['lastname'],
           
-        'Company' => (isset($post['company'])&& $post['company'] != 'Company') ? $post['company'] : '',
+        'Company' => isset($post['company']) ? $post['company'] : '',
         'Website' => isset($post['website']) ? $post['website'] : '',
         'Email' => $post['email'],
         'Phone #' => $phone,
@@ -1410,6 +1410,12 @@ function gv_misc_makeRequest_ajax() {
         'Version' => $post['version'],
         //'Sumbission page' => $post['url'],
       );      
+      
+      foreach ($submission as $key => $value) {
+        if (!$value || $value == 'Optional' || $key == $value) {
+          unset($submission[$key]);
+        }
+      }
     }
     
     $submission['User IP'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
