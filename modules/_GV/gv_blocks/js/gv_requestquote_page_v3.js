@@ -57,7 +57,7 @@
         });
 
 
-
+        /*
         $(window).unload( function () { 
           
           //console.log('before unload send');
@@ -94,7 +94,7 @@
             //console.log('after unload send');
           
         });
-        
+        */
         
        
         $('input[id="phone"]').keydown(function (event) { 
