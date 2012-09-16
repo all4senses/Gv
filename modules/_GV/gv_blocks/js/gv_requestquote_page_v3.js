@@ -1,6 +1,6 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_page_v2 = {
+  Drupal.behaviors.gv_requestquote_page_v3 = {
     
     attach: function (context, settings) {
        
@@ -10,7 +10,7 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
        
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="website"], input[id="company"], input[id="phone"], input[id="phone_1"], input[id="phone_2"], input[id="phone_3"], #phones_amt, #q_type, #buying_time').blur(function () { 
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="website"], input[id="company"], input[id="phone"], #phones_amt, #q_type, #buying_time').blur(function () { 
           
           //console.log($(this).val());
           
@@ -29,9 +29,7 @@
                         website: $('input[id="website"]').val(),
                         company: $('input[id="company"]').val(),
                         
-                        phone_1: $('input[id="phone_1"]').val(),
-                        phone_2: $('input[id="phone_2"]').val(),
-                        phone_3: $('input[id="phone_3"]').val(),
+                        phone_1: $('input[id="phone"]').val(),
                         
                         phones_amt: $('#phones_amt').val(),
                         q_type: $('#q_type').val(),
@@ -79,9 +77,7 @@
                         website: $('input[id="website"]').val(),
                         company: $('input[id="company"]').val(),
                         
-                        phone_1: $('input[id="phone_1"]').val(),
-                        phone_2: $('input[id="phone_2"]').val(),
-                        phone_3: $('input[id="phone_3"]').val(),
+                        phone_1: $('input[id="phone"]').val(),
                         
                         phones_amt: $('#phones_amt').val(),
                         q_type: $('#q_type').val(),
@@ -101,120 +97,24 @@
         
         
        
-        $('input[id="phone_1"], input[id="phone_2"]').keyup(function (event) { 
+        $('input[id="phone"]').keydown(function (event) { 
+            
+            //var l = $(this).val().length;
+            if( !(     event.keyCode == 8                                // backspace
+                    || event.keyCode == 9
+                    || event.keyCode == 46                              // delete
+                    || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
 
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
+                    || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+                  
+                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190)    // space, dash, dot
+                 )   
+              ) {
                     event.preventDefault();     // Prevent character input
             }
-            else {
-              if (l >= 3 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      if (l > 3) {
-                        event.preventDefault();
-                      }
-                      if ($(this).attr('id') == 'phone_1') {
-                        $('input[id="phone_2"]').focus();
-                      }
-                      else {
-                        $('input[id="phone_3"]').focus();
-                      }
-                  }
-            }
-        });
-        
 
-        $('input[id="phone_1"], input[id="phone_2"]').keydown(function (event) { 
-
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 3 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      var currentInput = document.getElementById($(this).attr('id'));
-                      var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
-                      if (!selectedSubstring) {
-                        event.preventDefault();
-                      }
-                  }
-            }
-        });
-        
-        
-
-
-
-        $('input[id="phone_3"]').keyup(function (event) { 
-          
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 4 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      if (l > 4) {
-                        event.preventDefault();
-                      }
-                      $('input[id="company"]').focus();
-                  }
-            }
-        });
-        
-        
-        
-        $('input[id="phone_3"]').keydown(function (event) { 
-          
-            var l = $(this).val().length;
-            if( !(event.keyCode == 8                                // backspace
-                || event.keyCode == 9
-                || event.keyCode == 46                              // delete
-                || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-              
-                || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-                || (event.keyCode >= 96 && event.keyCode <= 105))   // number on keypad
-                ) {
-                    event.preventDefault();     // Prevent character input
-            }
-            else {
-              if (l >= 4 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                      var currentInput = document.getElementById($(this).attr('id'));
-                      var selectedSubstring = currentInput.value.substring(currentInput.selectionStart, currentInput.selectionEnd);
-                      if (!selectedSubstring) {
-                        event.preventDefault();
-                      }
-              }
-            }
-        });
-        
+        });        
         
         
         
@@ -255,7 +155,7 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname email phone_1 phone_2 phone_3"
+              username: "firstname lastname email phone"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
@@ -265,7 +165,7 @@
                 error.insertAfter("#on_error");
               
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
-              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
+              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 //alert(error.html() +  ': ' + element.prev().html());
                 error.insertAfter("#phone");
                 //alert(Drupal.t('All fields with * are required'));
@@ -314,20 +214,12 @@
                 required: true,
                 notEqualsTo: $('input[id="lastname"]').attr('title')
 							},
-              phone_1: {
-                number: true,
-                minlength: 3,
-                maxlength: 3
-							},
-              phone_2: {
-                number: true,
-                minlength: 3,
-                maxlength: 3
-							},
-              phone_3: {
-                number: true,
-                minlength: 4,
-                maxlength: 4
+              phone: {
+                required: true,
+                //number: true,
+                minlength: 9,
+                maxlength: 15,
+                notEqualsTo: $('input[id="phone"]').attr('title')
 							}
               // works
               /* 
@@ -376,9 +268,10 @@
               */
              
              //Works
-             firstname: Drupal.t('All fields with * are required'),
-             lastname: Drupal.t('All fields with * are required'),
-             
+             firstname: Drupal.t('First Name is required'),
+             lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
+             phone: Drupal.t('Enter a valid phone number'),
+
              
              // Works!
              /*
@@ -387,8 +280,8 @@
              },
              */
               email: {
-                //required: Drupal.t("We need your email address to contact you"),
-                email: Drupal.t("Email format must be name@domain.com")
+                required: Drupal.t("Email format: name@domain.com"),
+                email: Drupal.t("Email format: name@domain.com")
               }
             }
           },
