@@ -332,7 +332,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th>Data</th><th>Operations</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table quote-requests"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th>Operations</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
@@ -383,7 +383,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     
     $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => '<td>' . $ucaptured->ip . '</td><td>' . $data . '</td><td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td></tr>',
+      '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data>' . $data . '</td><td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td></tr>',
     );
   }
 
