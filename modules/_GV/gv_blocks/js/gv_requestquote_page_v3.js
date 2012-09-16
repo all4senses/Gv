@@ -22,14 +22,14 @@
                         url: window.location.href,
                         
                         
-                        email: $('input[id="email"]').val(),
-                        firstname: $('input[id="firstname"]').val(),
-                        lastname: $('input[id="lastname"]').val(),
+                        email: $('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        firstname: $('input[id="firstname"]').val() != $('input[id="firstname"]').attr('title') ? $('input[id="firstname"]').val() : '',
+                        lastname: $('input[id="lastname"]').val() != $('input[id="lastname"]').attr('title') ? $('input[id="lastname"]').val() : '',
                         
-                        website: $('input[id="website"]').val(),
-                        company: $('input[id="company"]').val(),
+                        website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
+                        company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
                         
-                        phone_1: $('input[id="phone"]').val(),
+                        phone: $('input[id="phone"]').val() != $('input[id="phone"]').attr('title') ? $('input[id="phone"]').val() : '',
                         
                         phones_amt: $('#phones_amt').val(),
                         q_type: $('#q_type').val(),
@@ -70,14 +70,14 @@
                         url: window.location.href,
                         //async: false,
                         
-                        email: $('input[id="email"]').val(),
-                        firstname: $('input[id="firstname"]').val(),
-                        lastname: $('input[id="lastname"]').val(),
+                        email: $('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        firstname: $('input[id="firstname"]').val() != $('input[id="firstname"]').attr('title') ? $('input[id="firstname"]').val() : '',
+                        lastname: $('input[id="lastname"]').val() != $('input[id="lastname"]').attr('title') ? $('input[id="lastname"]').val() : '',
                         
-                        website: $('input[id="website"]').val(),
-                        company: $('input[id="company"]').val(),
+                        website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
+                        company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
                         
-                        phone_1: $('input[id="phone"]').val(),
+                        phone: $('input[id="phone"]').val() != $('input[id="phone"]').attr('title') ? $('input[id="phone"]').val() : '',
                         
                         phones_amt: $('#phones_amt').val(),
                         q_type: $('#q_type').val(),
