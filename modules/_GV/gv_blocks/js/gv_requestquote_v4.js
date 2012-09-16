@@ -40,7 +40,7 @@
                     || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
                     || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
                   
-                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190)    // space, dash, dot
+                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190 || event.keyCode == 73)    // space, dash, dot
                  )   
               ) {
                     event.preventDefault();     // Prevent character input
