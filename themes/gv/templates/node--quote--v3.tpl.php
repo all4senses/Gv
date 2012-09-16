@@ -1,8 +1,8 @@
 <div id="v3">
 
   <div id="gv-logo">
-    <div class="logo"></div>
-    <h3>Independent Authority on VoIP Providers</h3>
+    <a href="<?php echo $_SERVER['REDIRECT_URL']?>"><div class="logo"></div></a>
+    <h3>Leading Authority on VoIP Providers</h3>
   </div>
 
 
@@ -15,9 +15,9 @@
 
 
   <div id="upper-block">
-    <h1><?php echo t('We identify and rank the best business VoIP providers and phone systems.'); ?></h1>
+    <h1><?php echo 'We identify and rank the best business VoIP providers and phone systems.'; ?></h1>
     <div class="quotes">
-      <div><span class="text">"Great Source."</span><span class="source">CNN</span></div>
+      <div><span class="text">"Great Source."</span><span class="source">Inc.</span></div>
       <div><span class="text">"Rigorous Evaluation Process."</span><span class="source">Smart Money</span></div>
       <div><span class="text">"Over 500 VoIP Providers analyzed."</span><span class="source">Enterpreneur</span></div>
     </div>
