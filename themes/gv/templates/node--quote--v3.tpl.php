@@ -56,7 +56,11 @@
         else {
           ?>
             <h2>Compare Leading VoIP Providers</h2>
-            <div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>
+            <!--<div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>-->
+            <div class="text bullet">Highly Accredited BBB Companies</div>
+            <div class="text bullet">Hosted Technology & PBX Services</div>
+            <div class="text bullet">Unlimited Anytime Calling & Faxing, US & Canada</div>
+            <div class="text bullet">Sleek, Reliable, HD IP Phone Systems</div>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
           //echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';
