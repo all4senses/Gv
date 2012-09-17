@@ -79,6 +79,16 @@ function gv_process_page(&$variables) {
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
+  
+  if (arg(0) == 'user' && arg(1) == 'login') {
+    drupal_set_title(t('User login'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'password') {
+    drupal_set_title(t('Request new password'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'register') {
+    drupal_set_title(t('Create new account'));
+  }
 }
 
 /**
