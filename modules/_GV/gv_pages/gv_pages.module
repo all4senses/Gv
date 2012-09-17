@@ -75,6 +75,27 @@ function gv_pages_menu() {
 
 
 /**
+ * Implements Hook Preprocess page.
+ */
+function gv_misc_preprocess_page(&$vars) {
+  
+  // Work-around a stupid bug in Drupal 7
+  // Taken from Adaptive theme's template.php
+  
+  if (arg(0) == 'user' && arg(1) == 'login') {
+    drupal_set_title(t('User login'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'password') {
+    drupal_set_title(t('Request new password'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'register') {
+    drupal_set_title(t('Create new account'));
+  }
+  
+}
+
+
+/**
  * Implements Hook Process Html.
  */
 function gv_misc_process_html(&$vars) {
