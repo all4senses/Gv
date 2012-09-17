@@ -50,6 +50,28 @@ function gv_menu_local_tasks(&$variables) {
   return $output;
 }
 
+
+/**
+ * Implements Hook Preprocess page.
+ */
+function gv_preprocess_page(&$vars) {
+  
+  // Work-around a stupid bug in Drupal 7
+  // Taken from Adaptive theme's template.php
+  
+  if (arg(0) == 'user' && arg(1) == 'login') {
+    drupal_set_title(t('User login'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'password') {
+    drupal_set_title(t('Request new password'));
+  }
+  if (arg(0) == 'user' && arg(1) == 'register') {
+    drupal_set_title(t('Create new account'));
+  }
+  
+}
+
+
 /**
  * Override or insert variables into the page template.
  */
