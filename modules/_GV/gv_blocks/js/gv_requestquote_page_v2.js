@@ -22,12 +22,12 @@
                         url: window.location.href,
                         
                         
-                        email: $('input[id="email"]').val(),
-                        firstname: $('input[id="firstname"]').val(),
-                        lastname: $('input[id="lastname"]').val(),
+                        email: $('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        firstname: $('input[id="firstname"]').val() != $('input[id="firstname"]').attr('title') ? $('input[id="firstname"]').val() : '',
+                        lastname: $('input[id="lastname"]').val() != $('input[id="lastname"]').attr('title') ? $('input[id="lastname"]').val() : '',
                         
-                        website: $('input[id="website"]').val(),
-                        company: $('input[id="company"]').val(),
+                        website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
+                        company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
                         
                         phone_1: $('input[id="phone_1"]').val(),
                         phone_2: $('input[id="phone_2"]').val(),
@@ -59,7 +59,7 @@
         });
 
 
-
+        /*
         $(window).unload( function () { 
           
           //console.log('before unload send');
@@ -72,12 +72,12 @@
                         url: window.location.href,
                         //async: false,
                         
-                        email: $('input[id="email"]').val(),
-                        firstname: $('input[id="firstname"]').val(),
-                        lastname: $('input[id="lastname"]').val(),
+                        email: $('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        firstname: $('input[id="firstname"]').val() != $('input[id="firstname"]').attr('title') ? $('input[id="firstname"]').val() : '',
+                        lastname: $('input[id="lastname"]').val() != $('input[id="lastname"]').attr('title') ? $('input[id="lastname"]').val() : '',
                         
-                        website: $('input[id="website"]').val(),
-                        company: $('input[id="company"]').val(),
+                        website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
+                        company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
                         
                         phone_1: $('input[id="phone_1"]').val(),
                         phone_2: $('input[id="phone_2"]').val(),
@@ -98,7 +98,7 @@
             //console.log('after unload send');
           
         });
-        
+        */
         
        
         $('input[id="phone_1"], input[id="phone_2"]').keyup(function (event) { 
