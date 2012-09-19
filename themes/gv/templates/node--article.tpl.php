@@ -251,6 +251,7 @@
                           $target = 'articles';
                           break;
                       }
+                      dpm($content);
                       foreach (element_children($content['field_topics']) as $key) {
                         $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), $target . '/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
                       }
