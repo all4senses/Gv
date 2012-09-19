@@ -254,25 +254,12 @@
                           $target_tags = $field_tags_articles['und'];
                           break;
                       }
-                      dpm($content);
-                      global $user;
-                      if ($user->uid != 1) {
-                        
-                        foreach (element_children($content['field_topics']) as $key) {
-                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), $target . '/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
-                        }
-                        
-                      }
-                      else {
-                        foreach ($target_tags as $key => $value) {
-                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
-                        }
+                      foreach ($target_tags as $key => $value) {
+                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
                       }
                       if ($tags) {
                         echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
                       }
-                      //print render($content['field_topics']); 
-                      //print render($content['links']);
                     ?>
                   </footer>
     
