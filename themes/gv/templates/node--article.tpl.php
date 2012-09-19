@@ -243,17 +243,30 @@
                       switch ($node->type) {
                         case 'news_post':
                           $target = 'news';
+                          $target_tags_field = 'field_tags_news';
                           break;
                         case 'blog_post':
                           $target = 'blog';
+                          $target_tags_field = 'field_tags_blog';
                           break;
                         case 'article':
                           $target = 'articles';
+                          $target_tags_field = 'field_tags_articles';
                           break;
                       }
                       dpm($content);
-                      foreach (element_children($content['field_topics']) as $key) {
-                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), $target . '/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+                      global $user;
+                      if ($user->uid != 1) {
+                        
+                        foreach (element_children($content['field_topics']) as $key) {
+                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), $target . '/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+                        }
+                        
+                      }
+                      else {
+                        foreach ($$target_tags_field['und'] as $key => $value) {
+                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
+                        }
                       }
                       if ($tags) {
                         echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
