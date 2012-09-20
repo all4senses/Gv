@@ -174,7 +174,8 @@
 
                           foreach ($node->field_p_types['und'] as $type) {
                             $service_type_key = gv_misc_refineServiceTypeKey($type['value']);
-                            echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => $service_types[$service_type_key])) . '</a></li>';
+                            //echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => $service_types[$service_type_key])) . '</a></li>';
+                            echo '<li><a href="#tabs-' . $count++ . '">' . t('!type', array('!type' => $service_types[$service_type_key])) . '</a></li>';
                           }
                     
 //                    }
