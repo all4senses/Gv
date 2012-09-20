@@ -89,6 +89,12 @@ function gv_blocks_block_info() {
     'info' => t('Bottom section of SIP providers page preface'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['ifa_provider_p_bottom'] = array(
+    'info' => t('Bottom section of IFA providers page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  
   
   $blocks['best_voip_p_bottom'] = array(
     'info' => t('Bottom section of best-voip-service-providers page preface'),
@@ -200,24 +206,30 @@ function gv_blocks_block_view($delta = '') {
       break;
     case 'b_provider_p_bottom':
       $block['subject'] = t('Bottom section of Business providers page preface');
-      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers'); // Arg - preface's key
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers');
       break;
     case 'r_provider_p_bottom':
       $block['subject'] = t('Bottom section of Residential providers page preface');
-      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-residential-voip-providers'); // Arg - preface's key
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-residential-voip-providers');
       break;
     case 'sip_provider_p_bottom':
       $block['subject'] = t('Bottom section of SIP providers page preface');
-      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-sip-voip-providers'); // Arg - preface's key
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-sip-voip-providers');
       break;
+    case 'ifa_provider_p_bottom':
+      $block['subject'] = t('Bottom section of IFA providers page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-ifa-voip-providers');
+      break;
+    
+    
     
     case 'best_voip_p_bottom':
       $block['subject'] = t('Bottom section of best-voip-service-providers page preface');
-      $block['content'] = gv_misc_getPrefaceBottomSection('best-voip-service-providers'); // Arg - preface's key
+      $block['content'] = gv_misc_getPrefaceBottomSection('best-voip-service-providers');
       break;
     case 'bu_voip_features_p_bottom':
       $block['subject'] = t('Bottom section of business-voip-features page preface');
-      $block['content'] = gv_misc_getPrefaceBottomSection('business-voip-features'); // Arg - preface's key
+      $block['content'] = gv_misc_getPrefaceBottomSection('business-voip-features');
       break;
     
     
