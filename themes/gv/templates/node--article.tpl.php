@@ -239,20 +239,22 @@
 
                     <?php 
                       $tags = NULL;
-                      
                       switch ($node->type) {
                         case 'news_post':
                           $target = 'news';
-                          $target_tags = $field_tags_news['und'];
+                          $target_tags = @$field_tags_news['und'];
                           break;
                         case 'blog_post':
                           $target = 'blog';
-                          $target_tags = $field_tags_blog['und'];
+                          $target_tags = @$field_tags_blog['und'];
                           break;
                         case 'article':
                           $target = 'articles';
-                          $target_tags = $field_tags_articles['und'];
+                          $target_tags = @$field_tags_articles['und'];
                           break;
+                      }
+                      if (!$target_tags) {
+                        $target_tags = array();
                       }
                       foreach ($target_tags as $key => $value) {
                         $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
