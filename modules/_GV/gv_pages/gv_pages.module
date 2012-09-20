@@ -1594,6 +1594,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       global $user;
       if ($user->uid != 1) {
         $form['field_preface_key']['#access'] = FALSE;
+      }
+      if (!in_array('administrator', $user->roles)) {
         // Deny to change the status of the node (it should always be unpublished).
         $form['options']['#access'] = FALSE;
         // Hide url aliasing options.
