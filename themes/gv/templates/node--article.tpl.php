@@ -14,10 +14,6 @@
         <header>
       <?php endif; ?>
 
-        <?php //print $user_picture; ?>
-
-        <?php print render($title_prefix); ?>
-
           <?php if ($page): ?>
           <h1 <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ preg_replace('/datatype=""/', '', $title_attributes); ?>>
           <?php else: ?>
@@ -38,8 +34,6 @@
           <?php else: ?>
           </h2>
           <?php endif; ?> 
-
-        <?php print render($title_suffix); ?>
 
 
           <span class="submitted">
