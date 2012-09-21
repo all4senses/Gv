@@ -519,22 +519,25 @@ window.Socialite = (function(window, document, undefined)
             fb.id = 'fb-root';
             document.body.appendChild(fb);
             network.script.src = network.script.src.replace('{{language}}', settings.lang);
-            fbApiInit = true;
+            fbApiInit = false;
             console.log('fbApiInit 1 = ' + fbApiInit);
             window.fbAsyncInit = function() {
                 window.FB.init({
                       appId: settings.appId,
                       xfbml: true
                 });
+                
+                // a4s
+                fbApiInit = true; //init flag
+                console.log('fbApiInit 2 = ' + fbApiInit);
+                
                 for (var e in events) {
                     if (typeof settings[e] === 'function') {
                         window.FB.Event.subscribe(events[e], settings[e]);
                     }
                 }
                 
-                // a4s
-                fbApiInit = true; //init flag
-                console.log('fbApiInit 2 = ' + fbApiInit);
+                
 
             };
         }
