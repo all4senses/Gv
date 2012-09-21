@@ -195,18 +195,18 @@ window.Socialite = (function(window, document, undefined)
                     }
                 };
                 
-                if (network.script.src == '//connect.facebook.net/en_GB/all.js') {
-                  console.log('fbApiInit 3= ' + fbApiInit);
-                  console.log(network);
-                  fbEnsureInit(function() {
-                      console.log("this will be run once FB is initialized");
-                      document.body.appendChild(network.el);
-                  });
-
-                }
-                else {
+//                if (network.script.src == '//connect.facebook.net/en_GB/all.js') {
+//                  console.log('fbApiInit 3= ' + fbApiInit);
+//                  console.log(network);
+//                  fbEnsureInit(function() {
+//                      console.log("this will be run once FB is initialized");
+//                      document.body.appendChild(network.el);
+//                  });
+//
+//                }
+//                else {
                   document.body.appendChild(network.el);
-                }
+//                }
             }
             network.appended = true;
         },
@@ -519,8 +519,10 @@ window.Socialite = (function(window, document, undefined)
             fb.id = 'fb-root';
             document.body.appendChild(fb);
             network.script.src = network.script.src.replace('{{language}}', settings.lang);
-            fbApiInit = false;
-            console.log('fbApiInit 1 = ' + fbApiInit);
+            
+            //fbApiInit = false;
+            //console.log('fbApiInit 1 = ' + fbApiInit);
+            
             window.fbAsyncInit = function() {
                 window.FB.init({
                       appId: settings.appId,
@@ -528,8 +530,8 @@ window.Socialite = (function(window, document, undefined)
                 });
                 
                 // a4s
-                fbApiInit = true; //init flag
-                console.log('fbApiInit 2 = ' + fbApiInit);
+                //fbApiInit = true; //init flag
+                //console.log('fbApiInit 2 = ' + fbApiInit);
                 
                 for (var e in events) {
                     if (typeof settings[e] === 'function') {
@@ -728,14 +730,14 @@ window.Socialite = (function(window, document, undefined)
 })();
 
 
-function fbEnsureInit(callback) {
-        console.log('fbApiInit 4 = ' + fbApiInit);
-        if(!fbApiInit) {
-            setTimeout(function() {fbEnsureInit(callback);}, 50);
-        } else {
-            if(callback) {
-                callback();
-            }
-        }
-    }
+//function fbEnsureInit(callback) {
+//        console.log('fbApiInit 4 = ' + fbApiInit);
+//        if(!fbApiInit) {
+//            setTimeout(function() {fbEnsureInit(callback);}, 50);
+//        } else {
+//            if(callback) {
+//                callback();
+//            }
+//        }
+//    }
 
