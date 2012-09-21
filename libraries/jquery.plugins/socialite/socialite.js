@@ -149,7 +149,6 @@ window.Socialite = (function(window, document, undefined)
                     }
                 };
             }
-            console.log('f');
             return iframe;
         },
 
