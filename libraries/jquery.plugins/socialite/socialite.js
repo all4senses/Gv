@@ -524,13 +524,13 @@ window.Socialite = (function(window, document, undefined)
     Socialite.widget('facebook', 'like', {
         init: function(instance)
         {
-            var el = document.createElement('div');
-            el.className = 'fb-like';
-            Socialite.copyDataAttributes(instance.el, el);
-            instance.el.appendChild(el);
-            if (window.FB && window.FB.XFBML) {
-                window.FB.XFBML.parse(instance.el);
-            }
+//            var el = document.createElement('div');
+//            el.className = 'fb-like';
+//            Socialite.copyDataAttributes(instance.el, el);
+//            instance.el.appendChild(el);
+//            if (window.FB && window.FB.XFBML) {
+//                window.FB.XFBML.parse(instance.el);
+//            }
         }
     });
 
