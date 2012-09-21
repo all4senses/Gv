@@ -139,7 +139,7 @@ window.Socialite = (function(window, document, undefined)
             // Socialite v2 has slashed the amount of manual iframe creation, we should aim to avoid this entirely
             var iframe = document.createElement('iframe');
             iframe.style.cssText = 'overflow: hidden; border: none;';
-            socialite.extendObject(iframe, { src: src, allowtransparency: 'true', frameborder: '0', scrolling: 'no' }, true);
+            //socialite.extendObject(iframe, { src: src, allowtransparency: 'true', frameborder: '0', scrolling: 'no' }, true);
             if (instance) {
                 iframe.onload = iframe.onreadystatechange = function ()
                 {
