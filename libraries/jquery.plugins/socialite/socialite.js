@@ -194,7 +194,8 @@ window.Socialite = (function(window, document, undefined)
                         socialite.activateAll(network);
                     }
                 };
-                //document.body.appendChild(network.el);
+                console.log(network.el);
+                document.body.appendChild(network.el);
             }
             network.appended = true;
         },
