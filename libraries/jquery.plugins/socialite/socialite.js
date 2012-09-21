@@ -195,7 +195,7 @@ window.Socialite = (function(window, document, undefined)
                     }
                 };
                 
-                if (network.script.src == '//connect.facebook.net/en_GB/all.js ') {
+                if (network.script.src == '//connect.facebook.net/en_GB/all.js') {
                   console.log(network);
                 }
                 document.body.appendChild(network.el);
