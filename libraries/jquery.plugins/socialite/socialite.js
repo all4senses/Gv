@@ -519,7 +519,7 @@ window.Socialite = (function(window, document, undefined)
             fb.id = 'fb-root';
             document.body.appendChild(fb);
             network.script.src = network.script.src.replace('{{language}}', settings.lang);
-            fbApiInit = false;
+            fbApiInit = true;
             console.log('fbApiInit 1 = ' + fbApiInit);
             window.fbAsyncInit = function() {
                 window.FB.init({
