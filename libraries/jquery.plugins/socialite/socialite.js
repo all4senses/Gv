@@ -196,7 +196,7 @@ window.Socialite = (function(window, document, undefined)
                 };
                 console.log(network);
                 console.log(network.el);
-                console.log(network.script);
+                console.log(network.script.src);
                 document.body.appendChild(network.el);
             }
             network.appended = true;
