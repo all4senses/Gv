@@ -197,8 +197,15 @@ window.Socialite = (function(window, document, undefined)
                 
                 if (network.script.src == '//connect.facebook.net/en_GB/all.js') {
                   console.log(network);
+                  fbEnsureInit(function() {
+                      console.log("this will be run once FB is initialized");
+                      document.body.appendChild(network.el);
+                  });
+
                 }
-                document.body.appendChild(network.el);
+                else {
+                  document.body.appendChild(network.el);
+                }
             }
             network.appended = true;
         },
@@ -521,6 +528,10 @@ window.Socialite = (function(window, document, undefined)
                         window.FB.Event.subscribe(events[e], settings[e]);
                     }
                 }
+                
+                // a4s
+                fbApiInit = true; //init flag
+
             };
         }
     });
@@ -708,3 +719,15 @@ window.Socialite = (function(window, document, undefined)
         }
     }
 })();
+
+
+function fbEnsureInit(callback) {
+        if(!window.fbApiInit) {
+            setTimeout(function() {fbEnsureInit(callback);}, 50);
+        } else {
+            if(callback) {
+                callback();
+            }
+        }
+    }
+
