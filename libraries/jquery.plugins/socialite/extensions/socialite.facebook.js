@@ -28,7 +28,7 @@
                 events   = { onlike: 'edge.create', onunlike: 'edge.remove', onsend: 'message.send' };
             fb.id = 'fb-root';
             document.body.appendChild(fb);
-            network.script.src = network.script.src.replace('{{language}}', settings.lang);
+            //network.script.src = network.script.src.replace('{{language}}', settings.lang);
             window.fbAsyncInit = function() {
                 window.FB.init({
                       appId: settings.appId,
