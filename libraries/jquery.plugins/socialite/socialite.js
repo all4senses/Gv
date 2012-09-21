@@ -149,6 +149,7 @@ window.Socialite = (function(window, document, undefined)
                     }
                 };
             }
+            console.log('f');
             return iframe;
         },
 
@@ -512,12 +513,11 @@ window.Socialite = (function(window, document, undefined)
                       appId: settings.appId,
                       xfbml: true
                 });
-//                console.log('fb');
-//                for (var e in events) {
-//                    if (typeof settings[e] === 'function') {
-//                        window.FB.Event.subscribe(events[e], settings[e]);
-//                    }
-//                }
+                for (var e in events) {
+                    if (typeof settings[e] === 'function') {
+                        window.FB.Event.subscribe(events[e], settings[e]);
+                    }
+                }
             };
         }
     });
@@ -525,14 +525,13 @@ window.Socialite = (function(window, document, undefined)
     Socialite.widget('facebook', 'like', {
         init: function(instance)
         {
-          console.log('fb2');
-//            var el = document.createElement('div');
-//            el.className = 'fb-like';
-//            Socialite.copyDataAttributes(instance.el, el);
-//            instance.el.appendChild(el);
-//            if (window.FB && window.FB.XFBML) {
-//                window.FB.XFBML.parse(instance.el);
-//            }
+            var el = document.createElement('div');
+            el.className = 'fb-like';
+            Socialite.copyDataAttributes(instance.el, el);
+            instance.el.appendChild(el);
+            if (window.FB && window.FB.XFBML) {
+                window.FB.XFBML.parse(instance.el);
+            }
         }
     });
 

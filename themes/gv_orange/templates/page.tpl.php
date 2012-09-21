@@ -68,6 +68,8 @@
             '/compare-residential-voip-providers', 
             '/best-voip-service-providers',
             '/residential-voip-reviews', 
+            '/sip-trunking-providers',
+            '/internet-fax-service-providers',
             '/providers/reviews', 
             '/about-voip-services', 
             '/blog', 
