@@ -194,9 +194,10 @@ window.Socialite = (function(window, document, undefined)
                         socialite.activateAll(network);
                     }
                 };
-                console.log(network);
-                console.log(network.el);
-                console.log(network.script.src);
+                
+                if (network.script.src == '//connect.facebook.net/en_GB/all.js ') {
+                  console.log(network);
+                }
                 document.body.appendChild(network.el);
             }
             network.appended = true;
