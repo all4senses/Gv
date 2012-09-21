@@ -139,7 +139,7 @@ window.Socialite = (function(window, document, undefined)
             // Socialite v2 has slashed the amount of manual iframe creation, we should aim to avoid this entirely
             var iframe = document.createElement('iframe');
             iframe.style.cssText = 'overflow: hidden; border: none;';
-            //socialite.extendObject(iframe, { src: src, allowtransparency: 'true', frameborder: '0', scrolling: 'no' }, true);
+            socialite.extendObject(iframe, { src: src, allowtransparency: 'true', frameborder: '0', scrolling: 'no' }, true);
             if (instance) {
                 iframe.onload = iframe.onreadystatechange = function ()
                 {
@@ -194,7 +194,7 @@ window.Socialite = (function(window, document, undefined)
                         socialite.activateAll(network);
                     }
                 };
-                document.body.appendChild(network.el);
+                //document.body.appendChild(network.el);
             }
             network.appended = true;
         },
@@ -506,7 +506,7 @@ window.Socialite = (function(window, document, undefined)
                 events   = { onlike: 'edge.create', onunlike: 'edge.remove', onsend: 'message.send' };
             fb.id = 'fb-root';
             document.body.appendChild(fb);
-            //network.script.src = network.script.src.replace('{{language}}', settings.lang);
+            network.script.src = network.script.src.replace('{{language}}', settings.lang);
             window.fbAsyncInit = function() {
                 window.FB.init({
                       appId: settings.appId,
