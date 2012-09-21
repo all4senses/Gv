@@ -512,6 +512,7 @@ window.Socialite = (function(window, document, undefined)
                       appId: settings.appId,
                       xfbml: true
                 });
+                console.log('fb');
 //                for (var e in events) {
 //                    if (typeof settings[e] === 'function') {
 //                        window.FB.Event.subscribe(events[e], settings[e]);
