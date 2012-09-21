@@ -525,6 +525,7 @@ window.Socialite = (function(window, document, undefined)
     Socialite.widget('facebook', 'like', {
         init: function(instance)
         {
+          console.log('fb2');
 //            var el = document.createElement('div');
 //            el.className = 'fb-like';
 //            Socialite.copyDataAttributes(instance.el, el);
