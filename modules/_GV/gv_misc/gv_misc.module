@@ -1762,7 +1762,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   foreach($results as $result) {
     
     if ($user->uid == 1) {
-      dpm($result->name . ' => ' . pathauto_cleanstring(drupal_strtolower($result->name)));
+      dpm($result->name . ' => ' . pathauto_cleanstring($result->name));
     }
     
     // Translate terms to the current language.
