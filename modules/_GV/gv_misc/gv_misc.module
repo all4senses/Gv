@@ -1758,18 +1758,19 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $results = $query->execute();
 
   module_load_include('inc', 'pathauto');
-  global $user;
+  //global $user;
   foreach($results as $result) {
-    
+    /*
     if ($user->uid == 1) {
       dpm($result->name . ' => ' . pathauto_cleanstring($result->name));
     }
-    
+    */
     // Translate terms to the current language.
     // $result->name = i18n_string_translate(array('taxonomy', 'term', $result->tid, 'name'), $result->name);
     $base_url = trim($base_url, '/');
     //$result->link = array('link_title' => $result->name, 'href' => $base_url . '/' . urlencode(drupal_strtolower($result->name)));
-    $result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . str_replace(array(' ', '.'), array('-', ''), drupal_strtolower($result->name)));
+    ////$result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . str_replace(array(' ', '.'), array('-', ''), drupal_strtolower($result->name)));
+    $result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . pathauto_cleanstring($result->name));
     $topics[$result->tid] = /*(array)*/ $result;
   }
   return $topics;
