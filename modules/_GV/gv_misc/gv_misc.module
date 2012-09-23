@@ -1758,7 +1758,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $results = $query->execute();
 
   module_load_include('inc', 'pathauto');
-  global $userl;
+  global $user;
   foreach($results as $result) {
     
     if ($user->uid == 1) {
