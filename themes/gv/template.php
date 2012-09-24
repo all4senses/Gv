@@ -51,33 +51,12 @@ function gv_menu_local_tasks(&$variables) {
 }
 
 
-
-/**
- * Override or insert variables into the page template.
- */
-function gv_process_html(&$variables) {
-dpm(array_keys($variables));
-
-  dpm(array_keys($variables['page']));
-  dpm(array_keys($variables['page']['content']));
-  
-    //dpm($variables);
-    //dpm($variables['page']);
-    //dpm($variables[' attributes_array']);
-//    dpm($variables['test-3']);
-    //if (!$variables['node']->status) {
-      $variables['classes_array'][] = 'not-published-3';
-    //}
-  
-}
-
-
 /**
  * Override or insert variables into the page template.
  */
 function gv_preprocess_page(&$variables) {
   if(isset($variables['node'])) {
-    //dpm($variables['node']);
+
     //if (!$variables['node']->status) {
       $variables['classes_array'][] = 'not-published';
     //}
@@ -91,7 +70,6 @@ function gv_preprocess_page(&$variables) {
 function gv_process_page(&$variables) {
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
-    $variables['classes_array'][] = 'not-published-2';
   }
 }
 
@@ -104,11 +82,8 @@ function gv_preprocess_node(&$variables) {
   $variables['test-1'] = 'test-1';
   if ($variables['view_mode'] == 'full' && node_is_page($variables['node'])) {
     $variables['classes_array'][] = 'node-full';
-    
-    $variables['test-2'] = 'test-2';
   }
   if(isset($variables['node'])) {
-    $variables['test-3'] = 'test-3';
     if($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post') {
       $variables['theme_hook_suggestions'][] = 'node__article';
     }
