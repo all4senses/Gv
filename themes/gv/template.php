@@ -57,6 +57,11 @@ function gv_menu_local_tasks(&$variables) {
 function gv_process_page(&$variables) {
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+    
+    dpm($variables['node']);
+//    if (!$variables['node']->status) {
+//      $variables['classes_array'][] = 'not-published';
+//    }
   }
 }
 
