@@ -56,7 +56,7 @@ function gv_menu_local_tasks(&$variables) {
  * Override or insert variables into the page template.
  */
 function gv_preprocess_html(&$variables) {
-
+dpm('test');
     //dpm($variables);
 //    dpm($variables['test-1']);
 //    dpm($variables['test-2']);
