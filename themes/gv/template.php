@@ -59,6 +59,7 @@ function gv_preprocess_html(&$variables) {
 //dpm(array_keys($variables));
 
   dpm(array_keys($variables['page']));
+  dpm(array_keys($variables['page']['content']));
   
     //dpm($variables);
     //dpm($variables['page']);
