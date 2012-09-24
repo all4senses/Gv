@@ -147,6 +147,7 @@
           else {
             dpm('keywords');
             dpm($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
+            gv_misc_addMetatag('news_keywords', $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
           }
           print render($content);
         ?>
