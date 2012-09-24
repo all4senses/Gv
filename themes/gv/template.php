@@ -58,9 +58,9 @@ function gv_menu_local_tasks(&$variables) {
 function gv_preprocess_html(&$variables) {
 
     //dpm($variables);
-    dpm($variables['test-1']);
-    dpm($variables['test-2']);
-    dpm($variables['test-3']);
+//    dpm($variables['test-1']);
+//    dpm($variables['test-2']);
+//    dpm($variables['test-3']);
     //if (!$variables['node']->status) {
       $variables['classes_array'][] = 'not-published-3';
     //}
