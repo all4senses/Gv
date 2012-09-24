@@ -51,12 +51,26 @@ function gv_menu_local_tasks(&$variables) {
 }
 
 
+
+/**
+ * Override or insert variables into the page template.
+ */
+function gv_preprocess_html(&$variables) {
+
+    dpm($variables);
+    //if (!$variables['node']->status) {
+      $variables['classes_array'][] = 'not-published-3';
+    //}
+  
+}
+
+
 /**
  * Override or insert variables into the page template.
  */
 function gv_preprocess_page(&$variables) {
   if(isset($variables['node'])) {
-    dpm($variables['node']);
+    //dpm($variables['node']);
     //if (!$variables['node']->status) {
       $variables['classes_array'][] = 'not-published';
     //}
