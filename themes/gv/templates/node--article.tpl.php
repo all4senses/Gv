@@ -140,8 +140,13 @@
           
           if (isset($content['field_topics']) && (!isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) || !$content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) ) {
             hide($content['metatags']['keywords']);
+            dpm('tags');
             dpm($content['field_topics']);
             gv_misc_pushTagsToMetatags('keywords', $content['field_topics']);
+          }
+          else {
+            dpm('keywords');
+            dpm($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
           }
           print render($content);
         ?>
