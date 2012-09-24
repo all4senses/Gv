@@ -498,26 +498,36 @@ function gv_pages_buildTopicsPage($content_type_label) {
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
-  $topics = cache_get($content_type . '_topics_page' . $language->language);
-  if (1) { //(!$topics || empty($topics->data) || $topics->expire < time()) {
-    $topics_array = gv_misc_getTopics($content_type, $content_type_label);
+  // Uncomment to use a cache.
+  //$tags = cache_get($content_type . '_tags_page' . $language->language);
+  
+  // Comment to use a cache.
+  if (1) { 
+    
+  // Uncomment to use a cache.
+  //if (!$tags || empty($tags->data) || $tags->expire < time()) {
+    
+    $tags_array = gcb_misc_getTags($content_type, $content_type_label);
 
-    if (!$topics_array) {
+    if (!$tags_array) {
       return NULL;
     }
     
     // Simple List.
-    // $topics = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $topics_array), 'class' => 'topics'));
+    // $tags = theme('gcb_misc_submenuSimple', array('submenu' => array('below' => $tags_array), 'class' => 'tags'));
     // Tag cloud.
-    $topics_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($topics_array, 12));
-    $topics = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $topics_array));
+    $tags_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags_array, 12));
+    $tags = theme('gcb_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $tags_array));
   
 
     //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
     $show_all_url = '<div class="more-link">' . l(t('Show all posts'), $content_type_label) . '</div>';
-    $topics = /*$page_title .*/ $topics . $show_all_url;
+    $tags = /*$page_title .*/ $tags . $show_all_url;
     // Expire = current time + 4 hours.
-    cache_set($content_type . '_topics_page' . $language->language, $topics, 'cache', time() + 14400);
+   
+    // Uncomment to use a cache.
+    // cache_set($content_type . '_tags_page' . $language->language, $tags, 'cache', time() + 14400);
+    
   }
   else {
     $topics = $topics->data;
@@ -3001,17 +3011,18 @@ function gv_pages_node_view($node, $view_mode) {
       
       
       if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
-        if ($view_mode == 'full') {
-          // Show preview of the provider (as a teaser)
-          $node->content['provider_descr'] = drupal_get_form('gv_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
-        }
+        
+//        // Show preview of the provider (as a teaser)
+//        if ($view_mode == 'full') {
+//          $node->content['provider_descr'] = drupal_get_form('gcb_pages_addProviderPreview_form', $node->field_ref_provider['und'][0]['target_id']);
+//        }
 
         $provider = node_load($node->field_ref_provider['und'][0]['target_id']);
         $p_data = unserialize($provider->field_p_data['und'][0]['value']);
         $provider_url = $p_data['info']['i_web'];
 
+        
         // Define a pic for share
-
         global $review_provider_logo_path;
         if (isset($p_data['logo_share_src_themed']) && $p_data['logo_share_src_themed']) {
           $review_provider_logo_path = $p_data['logo_share_src_themed'];
@@ -3031,7 +3042,6 @@ function gv_pages_node_view($node, $view_mode) {
         unset($node->content['field_r_oprovider']);
       }
       
-      //dpm($node);
       // Show voting results for this provider and user (author of this review).
       // Take votes from a local ratings field if it's not empty.
       if (!empty($node->field_ratings_oprovider['und'][0]['value'])) {
@@ -3060,11 +3070,10 @@ function gv_pages_node_view($node, $view_mode) {
         $node->content['r_data'] = unserialize($node->field_r_data['und'][0]['value']);
       }
       
-      // Add a provider name in front of title
-      if ($view_mode == 'full') {
-        //dpm($node);
-        //drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $node->title);
-      }
+//      // Add a provider name in front of title
+//      if ($view_mode == 'full') {
+//        drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $node->title);
+//      }
       
     break; // End of case 'review':
     
@@ -3117,14 +3126,6 @@ function gv_pages_node_view($node, $view_mode) {
 
           $p_data = unserialize($node->field_p_data['und'][0]['value']);
           $node->p_data = $p_data;
-          /*
-          if ($node->field_p_types['und'][0]['value'] == 'business') {
-            $node->p_type = 'bu';
-          }
-          else {
-            $node->p_type = 're';
-          }
-          */
         } // End of if (isset($node->field_p_data['und'][0]['value'])) {        
         
         

@@ -157,8 +157,7 @@ function gv_misc_getUserRealName($uid) {
 
 
 /**
- * Renders metatags array with a new order of tags: description, keywords, the rest...
- *
+ * Returns initial (landing) node for a given final request a quote page.
  */
 function gv_misc_getInitialQuotePageNode($finalQuotePage_title) {
   
@@ -269,9 +268,8 @@ function gv_misc_ranking() {
 }
 
 
-
 /**
- * Push metatags to the Head.
+ * Push field tags (topics) to metatags in the Head.
  */
 function gv_misc_pushTagsToMetatags($name, $value) {
   switch ($name) {
@@ -283,6 +281,8 @@ function gv_misc_pushTagsToMetatags($name, $value) {
       }
       if ($t) {
         gv_misc_addMetatag($name, $t);
+        // Duplicate same keywords to news_keywords metatag.
+        gv_misc_addMetatag('news_keywords', $t);
       }
       break;
   }
@@ -1752,6 +1752,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
         ->addExpression('COUNT(n.nid)', 'count');
   $query->groupBy('td.name');
+  //$query->condition('td.vid', $voc->vid);
   if ($limit) {
     $query->range(0, $limit);
   }
