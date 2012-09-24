@@ -56,11 +56,11 @@ function gv_menu_local_tasks(&$variables) {
  * Override or insert variables into the page template.
  */
 function gv_preprocess_html(&$variables) {
-dpm(array_keys($variables));
+//dpm(array_keys($variables));
 
     //dpm($variables);
-//    dpm($variables['test-1']);
-//    dpm($variables['test-2']);
+    dpm($variables['page']);
+    //dpm($variables[' attributes_array']);
 //    dpm($variables['test-3']);
     //if (!$variables['node']->status) {
       $variables['classes_array'][] = 'not-published-3';
