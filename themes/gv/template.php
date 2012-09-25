@@ -11,8 +11,16 @@ function gv_html_head_alter(&$head_elements) {
   dpm('head_alter');
   dpm($head_elements);
   
-  $head_elements['keywords']['#weight'] = -10;
-  $head_elements['metatag_description']['#weight'] = -20;
+  if (isset($head_elements['metatag_description'])) {
+    $head_elements['metatag_description']['#weight'] = -15;
+  }
+  if (isset($head_elements['keywords'])) {
+    $head_elements['keywords']['#weight'] = -10;
+  }
+  if (isset($head_elements['news_keywords'])) {
+    $head_elements['news_keywords']['#weight'] = -9;
+  }
+  
   
 }
 
@@ -35,6 +43,7 @@ function gv_breadcrumb($variables) {
     return '<nav class="breadcrumb">' . $heading . implode(' » ', $breadcrumb) . '</nav>';
   }
 }
+
 
 /**
  * Duplicate of theme_menu_local_tasks() but adds clearfix to tabs.
@@ -59,33 +68,6 @@ function gv_menu_local_tasks(&$variables) {
 
 
 /**
- * Override or insert variables into the html template.
- */
-function gv_preprocess_html(&$variables) {
-  //dpm('preprocess');
-  //dpm(array_keys($variables));
-  //dpm(array_keys($variables['head_array']));
-
-}
-
-
-/**
- * Override or insert variables into the html template.
- */
-function gv_process_html(&$variables) {
-  dpm('process');
- // dpm(array_keys($variables));
- // dpm(array_keys($variables['head_array']));
-  dpm($variables['head']);
-  
-  dpm(drupal_add_html_head());
-  //dpm(drupal_get_html_head());
-  //dpm(render(drupal_add_html_head()));
-
-}
-
-
-/**
  * Override or insert variables into the page template.
  */
 function gv_process_page(&$variables) {
@@ -93,6 +75,7 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
 }
+
 
 /**
  * Override or insert variables into the node template.
@@ -121,6 +104,7 @@ function gv_preprocess_node(&$variables) {
   
 }
 
+
 /**
  * Preprocess variables for region.tpl.php
  *
@@ -136,6 +120,7 @@ function gv_preprocess_region(&$variables, $hook) {
   }
 }
 
+
 /**
  * Override or insert variables into the block templates.
  *
@@ -149,9 +134,10 @@ function gv_preprocess_block(&$variables, $hook) {
   if ($variables['block_html_id'] == 'block-system-main') {
     $variables['theme_hook_suggestions'][] = 'block__bare';
   }
-//dpm($variables);
+
   $variables['title_attributes_array']['class'][] = 'block-title';
 }
+
 
 /**
  * Override or insert variables into the block templates.

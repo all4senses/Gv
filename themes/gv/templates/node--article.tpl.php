@@ -149,18 +149,16 @@
           }
           */
           
-          dpm($content['metatags']);
-          
           $keyword_metatag_name = ($node->type == 'news_post') ? 'news_keywords' : 'keywords';
           
           if (isset($content['metatags']['keywords'])) {
             hide($content['metatags']['keywords']);
           }
           if (isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) && $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
-            gv_misc_addMetatag($keyword_metatag_name, $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value'], NULL, 1000);
+            gv_misc_addMetatag($keyword_metatag_name, $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
           }
           elseif (@$content['field_topics']) {
-            gv_misc_pushTagsToMetatags($keyword_metatag_name, $content['field_topics'], 1000);
+            gv_misc_pushTagsToMetatags($keyword_metatag_name, $content['field_topics']);
           }
           
           echo render($content);

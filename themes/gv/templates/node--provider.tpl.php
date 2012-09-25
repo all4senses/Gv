@@ -333,7 +333,7 @@
                 
               </div> <?php // End of <div class="data tabs"> ?>
               
-          <?php gv_misc_renderMetatags_newOrder($content['metatags']); //echo render($content['metatags']); ?>
+          <?php echo render($content['metatags']); //gv_misc_renderMetatags_newOrder($content['metatags']);?>
           
           
               
