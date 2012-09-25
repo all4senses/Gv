@@ -10,6 +10,8 @@ function gv_html_head_alter(&$head_elements) {
   
   dpm('head_alter');
   dpm($head_elements);
+  
+  $head_elements['keywords']['#weight'] = 999;
 }
 
 /**
@@ -72,11 +74,11 @@ function gv_process_html(&$variables) {
   dpm('process');
  // dpm(array_keys($variables));
  // dpm(array_keys($variables['head_array']));
- // dpm($variables['head']);
+  dpm($variables['head']);
   
   dpm(drupal_add_html_head());
   //dpm(drupal_get_html_head());
-  dpm(render(drupal_add_html_head()));
+  //dpm(render(drupal_add_html_head()));
 
 }
 
