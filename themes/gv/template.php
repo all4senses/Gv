@@ -70,6 +70,8 @@ function gv_process_html(&$variables) {
   dpm(array_keys($variables));
   dpm(array_keys($variables['head_array']));
   dpm($variables['head']);
+  
+  dpm(drupal_add_html_head());
   dpm(drupal_get_html_head());
 
 
