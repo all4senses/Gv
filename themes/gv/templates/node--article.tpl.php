@@ -149,6 +149,8 @@
           }
           */
           
+          dpm($content['metatags']);
+          
           $keyword_metatag_name = ($node->type == 'news_post') ? 'news_keywords' : 'keywords';
           
           if (isset($content['metatags']['keywords'])) {
