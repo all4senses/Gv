@@ -15,6 +15,9 @@ function gv_html_head_alter(&$head_elements) {
   if (isset($head_elements['metatag_description'])) {
     $head_elements['metatag_description']['#weight'] = -15;
   }
+  if (isset($head_elements['metatag_keywords'])) {
+    $head_elements['keywords']['#weight'] = -14;
+  }
   if (isset($head_elements['keywords'])) {
     $head_elements['keywords']['#weight'] = -14;
   }
