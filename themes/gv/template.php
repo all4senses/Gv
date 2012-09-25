@@ -69,7 +69,7 @@ function gv_process_html(&$variables) {
   dpm('process');
   dpm(array_keys($variables));
   dpm(array_keys($variables['head_array']));
-  dpm(array_keys($variables['head']));
+  dpm($variables['head']);
 
 }
 
