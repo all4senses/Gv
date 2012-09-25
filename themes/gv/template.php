@@ -9,19 +9,21 @@ function gv_html_head_alter(&$head_elements) {
   );
   $head_elements['system_meta_content_type']['#weight'] = -8;
   
+  dpm('head_alter');
+  dpm($head_elements);
+  
   if (isset($head_elements['metatag_description'])) {
     $head_elements['metatag_description']['#weight'] = -15;
   }
   if (isset($head_elements['keywords'])) {
-    $head_elements['keywords']['#weight'] = -10;
+    $head_elements['keywords']['#weight'] = -14;
   }
   if (isset($head_elements['news_keywords'])) {
-    $head_elements['news_keywords']['#weight'] = -9;
+    $head_elements['news_keywords']['#weight'] = -13;
   }
   
   
 }
-
 
 /**
  * Return a themed breadcrumb trail.
