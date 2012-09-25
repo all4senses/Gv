@@ -7,6 +7,7 @@ function gv_html_head_alter(&$head_elements) {
   $head_elements['system_meta_content_type']['#attributes'] = array(
     'charset' => 'utf-8'
   );
+  $head_elements['system_meta_content_type']['#weight'] = -8;
   
   dpm('head_alter');
   dpm($head_elements);
