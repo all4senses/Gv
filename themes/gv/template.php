@@ -9,9 +9,6 @@ function gv_html_head_alter(&$head_elements) {
   );
   $head_elements['system_meta_content_type']['#weight'] = -8;
   
-  dpm('head_alter');
-  dpm($head_elements);
-  
   if (isset($head_elements['metatag_description'])) {
     $head_elements['metatag_description']['#weight'] = -15;
   }
@@ -24,6 +21,7 @@ function gv_html_head_alter(&$head_elements) {
   
   
 }
+
 
 /**
  * Return a themed breadcrumb trail.
