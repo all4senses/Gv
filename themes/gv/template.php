@@ -55,7 +55,18 @@ function gv_menu_local_tasks(&$variables) {
  * Override or insert variables into the html template.
  */
 function gv_preprocess_html(&$variables) {
-  
+  dpm('preprocess');
+  dpm(array_keys($variables));
+  dpm(array_keys($variables['head_array']));
+
+}
+
+
+/**
+ * Override or insert variables into the html template.
+ */
+function gv_process_html(&$variables) {
+  dpm('process');
   dpm(array_keys($variables));
   dpm(array_keys($variables['head_array']));
 
