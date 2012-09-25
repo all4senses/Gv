@@ -11,7 +11,7 @@ function gv_html_head_alter(&$head_elements) {
   dpm('head_alter');
   dpm($head_elements);
   
-  $head_elements['keywords']['#weight'] = 0;
+  $head_elements['keywords']['#weight'] = -10;
 }
 
 /**
