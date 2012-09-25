@@ -274,6 +274,7 @@ function gv_misc_ranking() {
 function gv_misc_pushTagsToMetatags($name, $value) {
   switch ($name) {
     case 'keywords':
+    case 'news_keywords':
       $t = '';
       $tags = element_children($value);
       foreach ($tags as $tag) {
@@ -281,8 +282,6 @@ function gv_misc_pushTagsToMetatags($name, $value) {
       }
       if ($t) {
         gv_misc_addMetatag($name, $t);
-        // Duplicate same keywords to news_keywords metatag.
-        gv_misc_addMetatag('news_keywords', $t);
       }
       break;
   }
