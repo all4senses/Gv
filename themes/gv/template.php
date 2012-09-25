@@ -57,6 +57,7 @@ function gv_menu_local_tasks(&$variables) {
 function gv_preprocess_html(&$variables) {
   
   dpm(array_keys($variables));
+  dpm(array_keys($variables['head_array']));
 
 }
 
