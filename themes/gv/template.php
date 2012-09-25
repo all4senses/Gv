@@ -12,6 +12,8 @@ function gv_html_head_alter(&$head_elements) {
   dpm($head_elements);
   
   $head_elements['keywords']['#weight'] = -10;
+  $head_elements['metatag_description']['#weight'] = -20;
+  
 }
 
 /**
