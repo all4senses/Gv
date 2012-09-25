@@ -80,10 +80,13 @@ function gv_process_html(&$variables) {
 /*
 * Implements hook_html_head_alter
 */
+/*
 function gv_html_head_alter(&$head_elements) {
   dpm('head_alter');
   dpm($head_elements);
 }
+ 
+ */
 
 /**
  * Override or insert variables into the page template.
