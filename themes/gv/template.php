@@ -56,6 +56,7 @@ function gv_menu_local_tasks(&$variables) {
  */
 function gv_process_page(&$variables) {
   dpm(array_keys($variables));
+  dpm(array_keys($variables['page']));
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
