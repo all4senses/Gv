@@ -7,6 +7,10 @@ function gv_html_head_alter(&$head_elements) {
   $head_elements['system_meta_content_type']['#attributes'] = array(
     'charset' => 'utf-8'
   );
+  
+  // Set right order for main metatags.
+  
+  
   $head_elements['system_meta_content_type']['#weight'] = -8;
   
   
