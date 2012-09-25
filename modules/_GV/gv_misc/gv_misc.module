@@ -271,7 +271,7 @@ function gv_misc_ranking() {
 /**
  * Push field tags (topics) to metatags in the Head.
  */
-function gv_misc_pushTagsToMetatags($name, $value) {
+function gv_misc_pushTagsToMetatags($name, $value, $weight = 'NA') {
   switch ($name) {
     case 'keywords':
     case 'news_keywords':
@@ -281,7 +281,7 @@ function gv_misc_pushTagsToMetatags($name, $value) {
         $t .= $t ? ', ' . $value[$tag]['#title'] : $value[$tag]['#title'];
       }
       if ($t) {
-        gv_misc_addMetatag($name, $t);
+        gv_misc_addMetatag($name, $t, NULL, $weight);
       }
       break;
   }
@@ -538,7 +538,7 @@ function gv_misc_getStreamUriFromRelativePath($path) {
 /**
  * Helper function to add metatag to a current page.
  */
-function gv_misc_addMetatag($name, $content, $href = NULL) {
+function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA') {
   if ($content) {
     if ($name == 'title') {
       drupal_set_title($content);
@@ -552,6 +552,9 @@ function gv_misc_addMetatag($name, $content, $href = NULL) {
             'content' => $content,
         )
       );
+      if ($weight != 'NA') {
+        $meta['#weight'] = $weight;
+      }
       drupal_add_html_head($meta, $name);
     }
   } // End of if ($content) {
@@ -563,6 +566,9 @@ function gv_misc_addMetatag($name, $content, $href = NULL) {
           'href' => $href,
       )
     );
+    if ($weight != 'NA') {
+      $meta['#weight'] = $weight;
+    }
     drupal_add_html_head($meta, $name);
   } // End of elseif($href) {
 }

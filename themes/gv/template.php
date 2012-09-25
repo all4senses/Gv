@@ -58,7 +58,7 @@ function gv_process_page(&$variables) {
   
   dpm(array_keys($variables));
   dpm(array_keys($variables['page']));
-  dpm(array_keys($variables['page']['header']));
+  dpm($variables['page']['header']);
   
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
