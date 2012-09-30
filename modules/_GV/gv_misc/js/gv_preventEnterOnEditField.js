@@ -5,7 +5,12 @@
 
         //console.log('Tabs!');
         $(".field-type-number-integer input").click(function(){
-          console.log('Test');
+          //console.log('Test');
+          // Because of too much data handling, editing the listing field get failed if there are more then 10 results on the page.
+          if (jQuery('#edit-items-per-page').val() > 10) {
+            alert('To change listing positions please set "Items per page" value to not more then 10.');
+            event.preventDefault();
+          }
         });
         
         $('.field-type-number-integer input').keydown(function (event) { 
@@ -23,12 +28,12 @@
                     || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
                  )   
               ) {
-                  if (event.keyCode == 13) {
-                    $(this).blur();
-                  }
-                  else {
+                  //if (event.keyCode == 13) {
+                  //  $(this).blur();
+                  // }
+                  // else {
                     event.preventDefault();     // Prevent character input
-                  }
+                  //}
             }
             
            
