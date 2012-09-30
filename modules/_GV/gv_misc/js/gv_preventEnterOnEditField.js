@@ -10,6 +10,7 @@
           if (jQuery('#edit-items-per-page').val() > 10) {
             alert('To change listing positions please set "Items per page" value to not more then 10.');
             event.preventDefault();
+            $(this).blur();
           }
         });
         
