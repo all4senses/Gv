@@ -4,7 +4,7 @@
     attach: function (context, settings) {
 
         //console.log('Tabs!');
-        $(".field-type-number-integer input").click(function(){
+        $(".field-type-number-integer input").click(function(event){
           //console.log('Test');
           // Because of too much data handling, editing the listing field get failed if there are more then 10 results on the page.
           if (jQuery('#edit-items-per-page').val() > 10) {
