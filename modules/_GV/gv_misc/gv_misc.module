@@ -58,6 +58,16 @@ function gv_misc_menu() {
 
 
 /**
+ * Prevent Enter button on Content_GetVoIP page while inline editing fields.
+ */
+function gv_misc_preventEnterOnEditField() {
+  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_preventEnterOnEditField.js');
+  
+}
+
+
+/**
  * Hook menu alter.
  *
  */
