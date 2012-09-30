@@ -9,7 +9,7 @@
         });
         
         $('.field-type-number-integer input').keydown(function (event) { 
-            
+            alert('z');
             console.log($(this).val());
             console.log(event.keyCode);
             
