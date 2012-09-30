@@ -10,8 +10,8 @@
         
         $('.field-type-number-integer input').keydown(function (event) { 
 
-            console.log($(this).val());
-            console.log(event.keyCode);
+            //console.log($(this).val());
+            //console.log(event.keyCode);
             
             
             if( !(     event.keyCode == 8                                // backspace
@@ -23,7 +23,12 @@
                     || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
                  )   
               ) {
+                  if (event.keyCode == 13) {
+                    $(this).blur();
+                  }
+                  else {
                     event.preventDefault();     // Prevent character input
+                  }
             }
             
            
