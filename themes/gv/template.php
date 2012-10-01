@@ -11,6 +11,7 @@ function gv_preprocess_search_results(&$variables) {
     
     $tmp = $variables;
     unset($tmp['results'], $tmp['search_results']);
+    
     dpm($tmp);
     
     global $pager_page_array, $pager_total;
