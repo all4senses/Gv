@@ -3,11 +3,12 @@
 /**
  * Implements hook_preprocess_search_results().
  */
-function gv_preprocess_search_results(&$vars) {
+function gv_preprocess_search_results(&$variables) {
   global $user;
   if ($user->uid == 1) {
-    unset($vars['results']);
-    dpm($vars);
+    unset($variables['results']);
+    $variables['pager'] = theme('pager', array('tags' => NULL));
+    dpm($variables);
     //die;
   }
 }
