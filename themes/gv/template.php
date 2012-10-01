@@ -10,14 +10,15 @@ function gv_preprocess_search_results(&$variables) {
     global $gv_num_rows, $gv_limit_rows;
     dpm('$gv_num_rows =' . $gv_num_rows);
     dpm('$gv_limit_rows = ' . $gv_limit_rows);
-    dpm($_SESSION['gv_num_rows']);
-    dpm($_SESSION['gv_limit_rows']);
+    dpm($_SESSION['gv_node_search_data']);
+    //dpm($_SESSION['gv_limit_rows']);
     
     //$page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
     //$page = pager_default_initialize(43, 15);
-    $page = pager_default_initialize($_SESSION['gv_num_rows'], $_SESSION['gv_limit_rows']);
+    $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
+    unset($_SESSION['gv_node_search_data']);
     
-    $variables['pager'] = 'tst ' . theme('pager', array('tags' => NULL));
+    $variables['pager'] = theme('pager', array('tags' => NULL));
     dpm($variables['pager']);
     
     //$tmp = $variables;
