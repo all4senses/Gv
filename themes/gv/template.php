@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * Implements hook_preprocess_search_results().
+ */
+function gv_preprocess_search_results(&$vars) {
+  dpm($vars);
+}
+
+
 /**
  * Implements hook_html_head_alter().
  * We are overwriting the default meta character type tag with HTML5 version.
