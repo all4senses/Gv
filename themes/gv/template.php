@@ -4,7 +4,11 @@
  * Implements hook_preprocess_search_results().
  */
 function gv_preprocess_search_results(&$vars) {
-  dpm($vars);
+  global $user;
+  if ($user->uid == 1) {
+    dpr($vars);
+    die;
+  }
 }
 
 
