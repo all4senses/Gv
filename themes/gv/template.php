@@ -7,6 +7,10 @@ function gv_preprocess_search_results(&$variables) {
   global $user;
   if ($user->uid == 1) {
     
+    global $gv_num_rows, $gv_limit_rows;
+    
+    $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
+    
     $variables['pager'] = 'tst ' . theme('pager', array('tags' => NULL));
     dpm($variables['pager']);
     
@@ -19,6 +23,9 @@ function gv_preprocess_search_results(&$variables) {
     dpm($pager_total); 
     dpm($pager_total_items); 
     dpm($pager_limits);
+    
+    
+    
     //die;
   }
 }
