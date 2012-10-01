@@ -6,9 +6,13 @@
 function gv_preprocess_search_results(&$variables) {
   global $user;
   if ($user->uid == 1) {
-    unset($variables['results']);
+    
     $variables['pager'] = 'tst ' . theme('pager', array('tags' => NULL));
-    dpm($variables);
+    
+    $tmp = $variables;
+    unset($tmp['results'], $tmp['search_results']);
+    dpm($tmp);
+    
     global $pager_page_array, $pager_total;
     dpm($pager_page_array); dpm($pager_total);
     //die;
