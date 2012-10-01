@@ -16,20 +16,20 @@ function gv_preprocess_search_results(&$variables) {
     //$page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
     //$page = pager_default_initialize(43, 15);
     $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
-    unset($_SESSION['gv_node_search_data']);
+    //unset($_SESSION['gv_node_search_data']);
     
     $variables['pager'] = theme('pager', array('tags' => NULL));
-    dpm($variables['pager']);
+    //dpm($variables['pager']);
     
     //$tmp = $variables;
     //unset($tmp['results'], $tmp['search_results']);
     //dpm($tmp);
     
-    global $pager_page_array, $pager_total, $pager_total_items, $pager_limits;
-    dpm($pager_page_array); 
-    dpm($pager_total); 
-    dpm($pager_total_items); 
-    dpm($pager_limits);
+//    global $pager_page_array, $pager_total, $pager_total_items, $pager_limits;
+//    dpm($pager_page_array); 
+//    dpm($pager_total); 
+//    dpm($pager_total_items); 
+//    dpm($pager_limits);
     
     
     
