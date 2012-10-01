@@ -7,7 +7,7 @@ function gv_preprocess_search_results(&$variables) {
   global $user;
   if ($user->uid == 1) {
     unset($variables['results']);
-    $variables['pager'] = theme('pager', array('tags' => NULL));
+    $variables['pager'] = 'tst ' . theme('pager', array('tags' => NULL));
     dpm($variables);
     //die;
   }
