@@ -8,10 +8,9 @@ function gv_preprocess_search_results(&$variables) {
   if ($user->uid == 1) {
     
     global $gv_num_rows, $gv_limit_rows;
-    dpm('$gv_num_rows =' . $gv_num_rows);
-    dpm('$gv_limit_rows = ' . $gv_limit_rows);
-    dpm($_SESSION['gv_node_search_data']);
-    //dpm($_SESSION['gv_limit_rows']);
+//    dpm('$gv_num_rows =' . $gv_num_rows);
+//    dpm('$gv_limit_rows = ' . $gv_limit_rows);
+//    dpm($_SESSION['gv_node_search_data']);
     
     //$page = pager_default_initialize(43, 15);
 
