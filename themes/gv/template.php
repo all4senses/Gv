@@ -14,8 +14,8 @@ function gv_preprocess_search_results(&$variables) {
     
 //    $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
     
-    $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
-    $variables['pager'] = theme('pager', array('tags' => NULL));
+    ////$page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
+    ////$variables['pager'] = theme('pager', array('tags' => NULL));
   }
 }
 
