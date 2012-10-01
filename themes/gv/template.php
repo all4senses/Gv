@@ -6,8 +6,9 @@
 function gv_preprocess_search_results(&$vars) {
   global $user;
   if ($user->uid == 1) {
-    dpr($vars);
-    die;
+    unset($vars['results']);
+    dpm($vars);
+    //die;
   }
 }
 
