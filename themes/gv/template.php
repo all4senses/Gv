@@ -14,8 +14,11 @@ function gv_preprocess_search_results(&$variables) {
     //unset($tmp['results'], $tmp['search_results']);
     //dpm($tmp);
     
-    global $pager_page_array, $pager_total;
-    dpm($pager_page_array); dpm($pager_total);
+    global $pager_page_array, $pager_total, $pager_total_items, $pager_limits;
+    dpm($pager_page_array); 
+    dpm($pager_total); 
+    dpm($pager_total_items); 
+    dpm($pager_limits);
     //die;
   }
 }
