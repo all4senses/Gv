@@ -9,6 +9,8 @@ function gv_preprocess_search_results(&$variables) {
     unset($variables['results']);
     $variables['pager'] = 'tst ' . theme('pager', array('tags' => NULL));
     dpm($variables);
+    global $pager_page_array, $pager_total;
+    dpm($pager_page_array); dpm($pager_total);
     //die;
   }
 }
