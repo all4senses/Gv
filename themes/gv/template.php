@@ -8,14 +8,14 @@ function gv_preprocess_search_results(&$variables) {
   if ($user->uid == 1) {
     
     $variables['pager'] = 'tst ' . theme('pager', array('tags' => NULL));
+    dpm($variables['pager']);
     
-    $tmp = $variables;
-    unset($tmp['results'], $tmp['search_results']);
+    //$tmp = $variables;
+    //unset($tmp['results'], $tmp['search_results']);
+    //dpm($tmp);
     
-    dpm($tmp);
-    
-    global $pager_page_array, $pager_total;
-    dpm($pager_page_array); dpm($pager_total);
+    //global $pager_page_array, $pager_total;
+    //dpm($pager_page_array); dpm($pager_total);
     //die;
   }
 }
