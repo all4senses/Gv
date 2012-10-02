@@ -10,8 +10,15 @@ function gv_preprocess_search_results(&$variables) {
 //  dpm('$gv_num_rows =' . $gv_num_rows, '$gv_limit_rows = ' . $gv_limit_rows);
 //  dpm($_SESSION['gv_node_search_data']);
 //  $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
-  $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
-  $variables['pager'] = theme('pager', array('tags' => NULL));
+ 
+  global $user;
+  if ($user->uid == 1) {
+    //$variables['pager'] = theme('pager', array('tags' => NULL, 'element' => 7));
+  }
+  else {
+    $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
+    $variables['pager'] = theme('pager', array('tags' => NULL));
+  }
 }
 
 
