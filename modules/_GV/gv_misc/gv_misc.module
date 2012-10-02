@@ -23,6 +23,13 @@ function gv_misc_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
+  
+  $items['request-test'] = array(
+    'page callback' => 'gv_misc_testPage_requestTest',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
 
   $items['request/capture'] = array(
     'title' => 'Capture users data on the fly before submitting a request',
@@ -1015,28 +1022,6 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
 
 
 
-/**
- * Test page function for url /test.
- */
-function gv_misc_testPage() {
-  $out = '';
-
-//  $out .= l('Request quote block v4', 'about-us');
-//  $out .= '<br>' . l('Request quote page v4', 'compare-voip-solutions');
-//  dpm($_SERVER);
-  
-  $dir = 'sites/default/files/jsmin-gv';
-  $objects = scandir($dir);
-  foreach ($objects as $object) {
-    if ($object != "." && $object != "..") {
-      unlink($dir . "/" . $object);
-    }
-  }
- 
-  variable_del('gv_minified_js');
-  
-  return $out . '<br>End of Test';
-}
 
 
 /**
@@ -1481,11 +1466,14 @@ function gv_misc_makeRequest_ajax() {
     if ($submission['First Name'] != 'a4s') {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+      
+      // Send to Vocalocity.
+      // gv_miscSendRequestToVocalocity($submission);
     }
     // Test letter to the root
     drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
 
-
+    
     
     
     
@@ -1563,6 +1551,125 @@ function gv_misc_makeRequest_ajax() {
  * 
 double triggerring of a submit form because of double launching almost the same code from the Request quote block which actually hasn't appeared on the page anyway (before recent time it was absolutely the same so the problem was autosolved quietly :) 
  */
+
+
+
+
+
+
+function gv_misc_testPage_requestTest() {
+  
+  $status = TRUE;
+  $output = 'gv_misc_testPage_requestTest()----';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+  
+  global $language;
+  $params['request_data'] = $post;
+
+  drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params);
+
+  drupal_json_output(array('status' => $status, 'data' => $output/*, 'post' => $_POST, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
+}
+
+
+/**
+ * Test page function for url /test.
+ */
+function gv_misc_testPage() {
+  $out = '';
+
+  $vocalocity_submission = array(
+    'First Name' => 'test first',
+    'Last Name' => 'test last',
+    'Phones needed' => 'test Phones needed',
+    'Buying Time Frame' => 'test Buying Time Frame',
+    'Company' => 'test Company',
+    'Email' => 'test Email',
+    'Website' => 'test Website',
+    'Phone #' => 'test Phone #',
+  );
+      
+  
+  gv_miscSendRequestToVocalocity($vocalocity_submission);
+  
+  return $out . '<br>End of Test';
+}
+
+
+/**
+ * Send a request to Vocalocity.
+ */
+function gv_miscSendRequestToVocalocity($submission) {
+  
+  
+      $map_vocalocity = array(
+        'First Name' => '7772_177925pi_7772_177925',
+        'Last Name' => '7772_177935pi_7772_177935',
+        'Name' => '',
+        'Phones needed' => '7772_178005pi_7772_178005',
+        'Quote for' => '',
+        'Quote type' => '',
+        'Buying Time Frame' => '7772_177985pi_7772_177985',
+        
+        
+        'Company' => '7772_177965pi_7772_177965',
+
+        'Email' => '7772_177955pi_7772_177955',
+        'Website' => '7772_177975pi_7772_177975',
+        'Phone #' => '7772_177945pi_7772_177945',
+        'Monthly budget' => '',
+
+        'Source' => '',
+        'Version' => '',
+        //'Sumbission page' => $post['url'],
+      );
+      
+  
+  
+  
+  // Map data to Vocalocity's var names.
+  foreach ($submission as $key => $value) {
+    $data_to[$map_vocalocity[$key]] = $value;
+  }
+  
+  $url = 'http://getvoip.com/request-test';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+  //curl_setopt($curl, CURLOPT_MAXREDIRS, 7);
+  //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+
+  $data_from = curl_exec($curl);
+
+  if ($data_from === false) {
+    $data_from = curl_error($curl);
+    // close the connection
+    curl_close($curl);
+    $error_data = $data_from;
+    
+    dpm('Error!');
+    dpm($data_from);
+    
+    //return $error_data;
+    //return NULL;
+  }
+  else {
+    dpm($data_from);
+  }
+
+  // close the connection
+  curl_close($curl);
+
+}
+
 
 /**
  * Implements hook_mail().
