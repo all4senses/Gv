@@ -24,7 +24,15 @@
         </div>
       </div>
       
-      <?php echo '<div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>', render($page['header']); ?>
+      <?php 
+        global $user;
+        if ($user->uid == 1) {
+          echo '<div id="itexpo"></div>', render($page['header']); 
+        }
+        else {
+          echo '<div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>', render($page['header']); 
+        }
+      ?>
     </nav> <!-- /#navigation -->
 
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
@@ -118,7 +126,7 @@
 
     
     <?php
-      global $user;
+      
       
       if ($user->uid) {
         
