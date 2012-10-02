@@ -1613,7 +1613,11 @@ function gv_misc_testPage() {
  */
 function gv_miscSendRequestToVocalocity($submission) {
   
-  
+  // Skip sending to Vocalocity if "More than 50"
+  if ($submission['Phones needed'] == 'More than 50') {
+    return NULL;
+  }
+    
       $map_vocalocity = array(
         'First Name' => '7772_177925pi_7772_177925',
         'Last Name' => '7772_177935pi_7772_177935',
@@ -1625,7 +1629,13 @@ function gv_miscSendRequestToVocalocity($submission) {
         'Phone #' => '7772_177945pi_7772_177945',
       );
       
-  
+      $map_vocalocity_timeframe = array(
+        'ASAP' => '3791',
+        //'Less than 1 month' => '3681',
+        '1-3 Months' => '3691',
+        '3-6 Months' => '3701',
+        //'More than 6 months' => '3711',
+      );
   
   
   // Map data to Vocalocity's var names.
@@ -1634,7 +1644,12 @@ function gv_miscSendRequestToVocalocity($submission) {
 //  }
   
   foreach ($map_vocalocity as $getvoip_key => $vocalocity_key) {
-    $data_to[$vocalocity_key] = $submission[$getvoip_key];
+    if ($getvoip_key == 'Buying Time Frame') {
+      $data_to[$vocalocity_key] = $map_vocalocity_timeframe[$submission[$getvoip_key]];
+    }
+    else {
+      $data_to[$vocalocity_key] = $submission[$getvoip_key];
+    }
   }
   
   $url = 'http://ww3.vocalocity.com/l/7772/2012-10-01/36gsq6';
@@ -1657,10 +1672,26 @@ function gv_miscSendRequestToVocalocity($submission) {
   }
 
   curl_close($curl);
+ 
   
+  $out = 'Quote Request submission form:
+
+';
+  foreach ($submission as $key => $value) {
+   if ($value) {
+      $out .= "$key = $value
+";
+    }
+  }
+ 
+ 
   // Send a report to admin.
   global $language;
-  $params['report'] = $data_from;
+  $params['report'] = $out . '
+    
+
+
+' . $data_from;
   drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $data_from;
