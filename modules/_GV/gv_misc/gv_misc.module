@@ -1601,7 +1601,8 @@ function gv_misc_testPage() {
   );
           
           
-  gv_miscSendRequestToVocalocity($vocalocity_submission);
+  $result = gv_miscSendRequestToVocalocity($vocalocity_submission);
+  dpm($result);
   
   return $out . '<br>End of Test';
 }
@@ -1661,6 +1662,8 @@ function gv_miscSendRequestToVocalocity($submission) {
   global $language;
   $params['report'] = $data_from;
   drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
+  
+  return $data_from;
 }
 
 
