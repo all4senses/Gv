@@ -4,22 +4,25 @@
  * Implements hook_preprocess_search_results().
  */
 function gv_preprocess_search_results(&$variables) {
-  // a4s - fix - show loosen pager from the results page on some pages.
+  
+  // a4s - fix - show lost pager from the results page on some pages.
   // need prior actions (hack) in function node_search_execute() at node.module
-  global $gv_num_rows, $gv_limit_rows;
-//  dpm('$gv_num_rows =' . $gv_num_rows, '$gv_limit_rows = ' . $gv_limit_rows);
-//  dpm($_SESSION['gv_node_search_data']);
-//  $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
- 
-  global $user;
-  if ($user->uid == 1) {
-    $variables['pager'] = theme('pager', array('tags' => NULL, 'element' => 7));
-    //$variables['pager'] = theme('pager', array('tags' => NULL));
-  }
-  else {
-    $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
-    $variables['pager'] = theme('pager', array('tags' => NULL));
-  }
+  // v1
+  $variables['pager'] = theme('pager', array('tags' => NULL, 'element' => 7));
+
+  
+  
+//  // a4s - fix - show lost pager from the results page on some pages.
+//  // need prior actions (hack) in function node_search_execute() at node.module
+//  // v2
+//  global $gv_num_rows, $gv_limit_rows;
+////  dpm('$gv_num_rows =' . $gv_num_rows, '$gv_limit_rows = ' . $gv_limit_rows);
+////  dpm($_SESSION['gv_node_search_data']);
+////  $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
+//  $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
+//  $variables['pager'] = theme('pager', array('tags' => NULL));
+  
+  
 }
 
 
