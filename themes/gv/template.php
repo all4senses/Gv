@@ -14,6 +14,7 @@ function gv_preprocess_search_results(&$variables) {
   global $user;
   if ($user->uid == 1) {
     //$variables['pager'] = theme('pager', array('tags' => NULL, 'element' => 7));
+    $variables['pager'] = theme('pager', array('tags' => NULL));
   }
   else {
     $page = pager_default_initialize($gv_num_rows, $gv_limit_rows);
