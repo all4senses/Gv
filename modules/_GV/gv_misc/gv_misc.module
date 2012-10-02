@@ -1591,9 +1591,16 @@ function gv_misc_testPage() {
     'Email' => 'test Email',
     'Website' => 'test Website',
     'Phone #' => 'test Phone #',
-  );
       
-  
+    'Quote for' => 'test Quote for',
+    'Quote type' => 'test Quote type',
+    'Connection type' => 'test Connection type',
+    'Notes' => 'test Notes',
+    'Source' => 'test Source',
+    'Version' => 'test Version',
+  );
+          
+          
   gv_miscSendRequestToVocalocity($vocalocity_submission);
   
   return $out . '<br>End of Test';
@@ -1609,31 +1616,24 @@ function gv_miscSendRequestToVocalocity($submission) {
       $map_vocalocity = array(
         'First Name' => '7772_177925pi_7772_177925',
         'Last Name' => '7772_177935pi_7772_177935',
-        'Name' => '',
         'Phones needed' => '7772_178005pi_7772_178005',
-        'Quote for' => '',
-        'Quote type' => '',
         'Buying Time Frame' => '7772_177985pi_7772_177985',
-        
-        
         'Company' => '7772_177965pi_7772_177965',
-
         'Email' => '7772_177955pi_7772_177955',
         'Website' => '7772_177975pi_7772_177975',
         'Phone #' => '7772_177945pi_7772_177945',
-        'Monthly budget' => '',
-
-        'Source' => '',
-        'Version' => '',
-        //'Sumbission page' => $post['url'],
       );
       
   
   
   
   // Map data to Vocalocity's var names.
-  foreach ($submission as $key => $value) {
-    $data_to[$map_vocalocity[$key]] = $value;
+//  foreach ($submission as $key => $value) {
+//    $data_to[$map_vocalocity[$key]] = $value;
+//  }
+  
+  foreach ($map_vocalocity as $getvoip_key => $vocalocity_key) {
+    $data_to[$vocalocity_key] = $submission[$getvoip_key];
   }
   
   $url = 'http://getvoip.com/request-test';
