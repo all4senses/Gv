@@ -1650,24 +1650,16 @@ function gv_miscSendRequestToVocalocity($submission) {
   $data_from = curl_exec($curl);
 
   if ($data_from === false) {
-    $data_from = curl_error($curl);
-    // close the connection
-    curl_close($curl);
-    $error_data = $data_from;
-    
-    dpm('Error!');
-    dpm($data_from);
-    
-    //return $error_data;
-    //return NULL;
-  }
-  else {
-    dpm($data_from);
+    $data_from = 'Error!!! 
+' . curl_error($curl);
   }
 
-  // close the connection
   curl_close($curl);
-
+  
+  // Send a report to admin.
+  global $language;
+  $params['report'] = $post;
+  drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
 }
 
 
@@ -1681,6 +1673,10 @@ function gv_misc_mail($key, &$message, $params) {
       $message['body'][] = theme('gv_misc_requestQuote_mail', $params['request_data']);
       break;
     
+    case 'vocalocity_send_report':
+      $message['subject'] = t('Report from the Vocalocity request sending.');
+      $message['body'][] = $params['report'];
+      break;
     
     case 'request_quote_ucaptured_data':
       $message['subject'] = t('New captured BUT not submitted user data');
