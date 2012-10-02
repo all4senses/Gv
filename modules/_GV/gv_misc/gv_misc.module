@@ -1694,7 +1694,7 @@ function gv_miscSendRequestToVocalocity($submission) {
 ' . $data_from;
   drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
   
-  return $data_from;
+  return $params['report'];
 }
 
 
