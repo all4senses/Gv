@@ -2531,7 +2531,7 @@ function gv_misc_views_pre_render(&$view) {
         gv_misc_addMetatag('keywords', $term->metatags['keywords']['value']);
       }
       if (isset($term->description) && $term->description) {
-        gv_misc_addMetatag('description', $term->description, NULL, -10);
+        gv_misc_addMetatag('description', $term->description);
       }
       
       //$preface_node->title = $view->get_title();//$view->build_info['title'];
