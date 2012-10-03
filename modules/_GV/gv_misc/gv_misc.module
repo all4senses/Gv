@@ -2505,6 +2505,7 @@ function gv_misc_views_pre_render(&$view) {
   if ($key == 'view-taxonomy_term-page_by_tag') {
     $args = arg();
     $term = taxonomy_term_load($args[2]);
+    dpm($term);
     switch ($term->vocabulary_machine_name) {
       case 'news_tags':
         $key = 'view-news-page_by_tag';
