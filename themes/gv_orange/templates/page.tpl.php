@@ -27,7 +27,7 @@
       <?php 
 //        global $user;
 //        if ($user->uid == 1) {
-          echo '<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012" target="_blank"></a>', render($page['header']); 
+          echo '<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012"></a>', render($page['header']); 
 //        }
 //        else {
 //          echo '<div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>', render($page['header']); 
@@ -129,14 +129,14 @@
       
       
       if (1/*$user->uid*/) {
-        
+        echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
         ?>
           <div id="lock-n-rss">
             <div id="sitelock"><a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a></div>
-            <a id="valid-rss" href="http://appc.w3.org/check.cgi?url=http%3A//getvoip.com/rss.xml"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
+            <!--<a id="valid-rss" href="http://appc.w3.org/check.cgi?url=http%3A//getvoip.com/rss.xml"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a> -->
           </div>
         <?php
-          echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
+          
       }
       else {
         ?>
