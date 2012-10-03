@@ -2530,6 +2530,10 @@ function gv_misc_views_pre_render(&$view) {
       if (isset($term->metatags['keywords']['value']) && $term->metatags['keywords']['value']) {
         gv_misc_addMetatag('keywords', $term->metatags['keywords']['value']);
       }
+      if (isset($term->description) && $term->description) {
+        gv_misc_addMetatag('description', $term->description);
+      }
+      
       //$preface_node->title = $view->get_title();//$view->build_info['title'];
       $preface_node->title .= ' "' . htmlspecialchars_decode($view->build_info['substitutions']['%1']) . '"';
       $view->build_info['title'] = $preface_node->title;
