@@ -2535,9 +2535,10 @@ function gv_misc_views_pre_render(&$view) {
       }
       
       if (isset($term->metatags['title']['value']) && $term->metatags['title']['value']) {
-        gv_misc_addMetatag('title', $term->metatags['title']['value']);
+        $metatag_title = token_replace($term->metatags['title']['value']);
+        gv_misc_addMetatag('title', $metatag_title);
         // Set the title (not only a metatag title) as well.
-        $preface_node->title = htmlspecialchars_decode($term->metatags['title']['value']);
+        $preface_node->title = htmlspecialchars_decode($metatag_title);
         $view->build_info['title'] = $preface_node->title;
       }
       else {
