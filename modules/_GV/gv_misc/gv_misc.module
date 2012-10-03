@@ -1601,7 +1601,7 @@ function gv_misc_testPage() {
   );
           
           
-  $result = gv_miscSendRequestToVocalocity($vocalocity_submission);
+  $result = gv_misc_SendRequestToVocalocity($vocalocity_submission);
   dpm($result);
   
   return $out . '<br>End of Test';
@@ -1611,7 +1611,7 @@ function gv_misc_testPage() {
 /**
  * Send a request to Vocalocity.
  */
-function gv_miscSendRequestToVocalocity($submission) {
+function gv_misc_SendRequestToVocalocity($submission) {
   
   // Skip sending to Vocalocity if "More than 50"
   if ($submission['Phones needed'] == 'More than 50') {
@@ -1636,7 +1636,14 @@ function gv_miscSendRequestToVocalocity($submission) {
         '3-6 Months' => '3701',
         //'More than 6 months' => '3711',
       );
-  
+      
+      $map_vocalocity_phonesNeeded = array(
+        '1 - 4' => '58655',
+        '5 - 10' => '58665',
+        '11 - 20' => '58675',
+        '21 - 50' => '58685',
+      );
+      
   
   // Map data to Vocalocity's var names.
 //  foreach ($submission as $key => $value) {
@@ -1646,6 +1653,9 @@ function gv_miscSendRequestToVocalocity($submission) {
   foreach ($map_vocalocity as $getvoip_key => $vocalocity_key) {
     if ($getvoip_key == 'Buying Time Frame') {
       $data_to[$vocalocity_key] = $map_vocalocity_timeframe[$submission[$getvoip_key]];
+    }
+    if ($getvoip_key == 'Phones needed') {
+      $data_to[$vocalocity_key] = $map_vocalocity_phonesNeeded[$submission[$getvoip_key]];
     }
     else {
       $data_to[$vocalocity_key] = $submission[$getvoip_key];
