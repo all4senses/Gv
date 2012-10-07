@@ -507,7 +507,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   // Uncomment to use a cache.
   //if (!$tags || empty($tags->data) || $tags->expire < time()) {
     
-    $tags_array = gcb_misc_getTags($content_type, $content_type_label);
+    $tags_array = gv_misc_getTags($content_type, $content_type_label);
 
     if (!$tags_array) {
       return NULL;
