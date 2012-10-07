@@ -507,7 +507,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   // Uncomment to use a cache.
   //if (!$tags || empty($tags->data) || $tags->expire < time()) {
     
-    $tags_array = gv_misc_getTags($content_type, $content_type_label);
+    $tags_array = gv_misc_getTopics($content_type, $content_type_label);
 
     if (!$tags_array) {
       return NULL;
@@ -517,7 +517,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
     // $tags = theme('gcb_misc_submenuSimple', array('submenu' => array('below' => $tags_array), 'class' => 'tags'));
     // Tag cloud.
     $tags_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags_array, 12));
-    $tags = theme('gcb_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $tags_array));
+    $tags = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $tags_array));
   
 
     //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
@@ -530,7 +530,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
     
   }
   else {
-    $topics = $topics->data;
+    $tags = $tags->data;
   }
   
   /*
@@ -550,7 +550,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   return '<div class="tags">' . $preface . $topics . '</div>'; 
   */
   
-  return '<div class="tags">' . $topics . '</div>'; 
+  return '<div class="tags">' . $tags . '</div>'; 
 }
 
 
