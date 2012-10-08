@@ -1463,7 +1463,7 @@ function gv_misc_makeRequest_ajax() {
     
     
             
-    if ($submission['First Name'] != 'a4s') {
+    if ($submission['First Name'] != 'a4s' && $submission['Version'] != 5) {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
