@@ -387,7 +387,7 @@ function gv_blocks_get_headerLinks() {
 function gv_blocks_get_footerMenu() {
   $menu = menu_build_tree('menu-footer-menu');
   return theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>'));
-  // . '<div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>';
+  // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
 }
 
 
@@ -919,7 +919,7 @@ function gv_blocks_get_requestQuote_block_v3() {
                             <div class="bottom-clear"></div>
 
                             <div class="explain p2"><div class="number">2</div><div class="text">Your request will be reviewed by our team of VoIP Experts</div></div>
-                            <div class="explain p3"><div class="number">3</div><div class="text">Сonnect with leading providers that best match your needs</div></div>
+                            <div class="explain p3"><div class="number">3</div><div class="text">РЎonnect with leading providers that best match your needs</div></div>
       
                             <div class="wrapper middle first">
                               <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
@@ -988,6 +988,11 @@ function gv_blocks_get_requestQuote_block_v3() {
  * Block Request a quote with a multistep form v4.
  */
 function gv_blocks_get_requestQuote_block_v4() {
+  
+  global $user;
+  if ($user->uid) {
+    return NULL;
+  }
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
