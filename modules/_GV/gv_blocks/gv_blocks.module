@@ -1124,6 +1124,11 @@ function gv_blocks_get_requestQuote_block_v4() {
  */
 function gv_blocks_get_requestQuote_block_v5() {
   
+  global $user;
+  if ($user->uid != 1) {
+    return NULL;
+  }
+  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.position');  
