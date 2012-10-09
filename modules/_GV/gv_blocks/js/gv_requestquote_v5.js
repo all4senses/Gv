@@ -80,7 +80,7 @@
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
           textSubmit : 'Submit',// 'Submit & Get Quotes',
-          textNext: 'Submit',//'Submit & Get Quotes',
+          textNext: 'Next',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
