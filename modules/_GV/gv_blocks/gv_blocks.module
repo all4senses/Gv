@@ -1144,7 +1144,7 @@ function gv_blocks_get_requestQuote_block_v5() {
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
   
-  
+  // height: 140px; 
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
@@ -1159,7 +1159,7 @@ function gv_blocks_get_requestQuote_block_v5() {
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
-        <form class="multipartForm bbq" method="post" action="/request" style="height: 140px; overflow: hidden;">
+        <form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">
 
                 
                 <div id="fieldWrapper">
@@ -1220,7 +1220,7 @@ function gv_blocks_get_requestQuote_block_v5() {
 
                             <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
                                 
-                            <div class="protected"></div>
+                            <div class="bottom-info">Get personalized quotes, that best match your needs.</div>
                             <div class="progress"><img src="/sites/all/themes/gv_orange/css/images/progress-bar-50.jpg" /></div>
                     </div>
 
