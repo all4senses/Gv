@@ -78,7 +78,7 @@
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
-				 	focusFirstInput: true,
+				 	//focusFirstInput: true,
           textSubmit : 'Submit',// 'Submit & Get Quotes',
           textNext: 'Submit',//'Submit & Get Quotes',
           
