@@ -2824,7 +2824,7 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
     
     case 'blog_post_thumb':
       dpm($data);
-      $out = '<a href="#">Test</a>';
+      $out = '<a href="#">Test' . $data['data']['nid'] . '</a>';
       
       return $out;
   }
