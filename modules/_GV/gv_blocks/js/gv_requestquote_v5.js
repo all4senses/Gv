@@ -1,12 +1,15 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_block_v4 = {
+  Drupal.behaviors.gv_requestquote_block_v5 = {
     attach: function (context, settings) {
        
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
-      
+        $('#block-gv-blocks-request-quote-v5 #requestQuoteFormWrapper #Navigation #next').click(function(){
+          $('input[id="firstname"]').blur();
+        });
+        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
@@ -75,9 +78,9 @@
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
-				 	focusFirstInput: true,
+				 	//focusFirstInput: true,
           textSubmit : 'Submit',// 'Submit & Get Quotes',
-          textNext: 'Submit',//'Submit & Get Quotes',
+          textNext: 'Next',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},

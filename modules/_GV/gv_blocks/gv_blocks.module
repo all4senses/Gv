@@ -1124,10 +1124,10 @@ function gv_blocks_get_requestQuote_block_v4() {
  */
 function gv_blocks_get_requestQuote_block_v5() {
   
-  global $user;
-  if ($user->uid != 1) {
-    return NULL;
-  }
+//  global $user;
+//  if ($user->uid != 1) {
+//    return NULL;
+//  }
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
@@ -1144,7 +1144,7 @@ function gv_blocks_get_requestQuote_block_v5() {
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
   
-  
+  // height: 140px; 
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
@@ -1159,7 +1159,7 @@ function gv_blocks_get_requestQuote_block_v5() {
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
-        <form class="multipartForm bbq" method="post" action="/request" style="height: 140px; overflow: hidden;">
+        <form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">
 
                 
                 <div id="fieldWrapper">
@@ -1174,7 +1174,7 @@ function gv_blocks_get_requestQuote_block_v5() {
                             <div class="middle-wrapper">
 
                                 <div class="wrapper top first">
-                                  <div class="question">' . t('Lines needed') . ':</div>
+                                  <div class="question">' . /*t('How many phone lines do you need?')*/t('Lines needed') . ':</div>
                                   <select name="phones_amt" id="phones_amt" class="input required">
                                     <option value="1 - 4">1 - 4</option>
                                     <option selected="selected" value="5 - 10">5 - 10</option>
@@ -1185,7 +1185,7 @@ function gv_blocks_get_requestQuote_block_v5() {
                                 </div>
 
                                 <div class="wrapper top">
-                                  <div class="question">' . t('Service Type') . ':</div>
+                                  <div class="question">' . /*t('What is your current phone needs?')*/t('Service Type') . ':</div>
                                   <select name="q_type" id="q_type" class="input required">
                                     <option selected="selected" value="Business">' . t('Business') .'</option>
                                     <option value="Home">' . t('Home') .'</option>
@@ -1195,7 +1195,7 @@ function gv_blocks_get_requestQuote_block_v5() {
 
 
                                 <div class="wrapper top last">
-                                  <div class="question">' . t('Buying time frame') . ':</div>
+                                  <div class="question">' . /*t('What is your buying time frame?')*/ t('Buying time frame') . ':</div>
                                   <select name="buying_time" id="buying_time" class="input required">
                                     <!--<option value="">- Select a value -</option>-->
                                     <option value="ASAP">' . t('ASAP') .'</option>
@@ -1210,6 +1210,7 @@ function gv_blocks_get_requestQuote_block_v5() {
 
                             <div class="right">
                               <img src="/sites/all/themes/gv_orange/css/images/qrequest-book.jpg" /> 
+                              <div class="str2">With quote request</div>
                             </div>
                             
 
@@ -1220,7 +1221,7 @@ function gv_blocks_get_requestQuote_block_v5() {
 
                             <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
                                 
-                            <div class="protected"></div>
+                            <div class="bottom-info">Get personalized quotes, that best match your needs.</div>
                             <div class="progress"><img src="/sites/all/themes/gv_orange/css/images/progress-bar-50.jpg" /></div>
                     </div>
 
@@ -1261,9 +1262,16 @@ function gv_blocks_get_requestQuote_block_v5() {
                               
                             </div>
                             
+                            
                             <div class="right">
-                               <img src="/sites/all/themes/gv_orange/css/images/qrequest-guide.jpg" />
+                               <img src="/sites/all/themes/gv_orange/css/images/qrequest-book.jpg" />
+                               <div class="str2">With quote request</div>
                             </div>
+                            <!--<div class="right">
+                               <img src="/sites/all/themes/gv_orange/css/images/qrequest-guide.jpg" />
+                               <div class="str1">Free VoIP Guide</div>
+                               <div class="str2">With quote request</div>
+                            </div>-->
                             
                             <div id="on_error"></div>
 

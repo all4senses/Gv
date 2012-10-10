@@ -1468,7 +1468,9 @@ function gv_misc_makeRequest_ajax() {
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
       // Send to Vocalocity.
-      gv_misc_SendRequestToVocalocity($submission);
+      if ($submission['Version'] != 5) {
+        gv_misc_SendRequestToVocalocity($submission);
+      }
     }
     // Test letter to the root
     drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
@@ -1523,7 +1525,12 @@ function gv_misc_makeRequest_ajax() {
     
     $status = TRUE;
          
-    $output = t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>'); 
+    if ($submission['Version'] == 5) {
+      $output = '<a class="guide" href="/pdfs/Business-VoIP-Guide.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guid Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+    }
+    else {
+      $output = '<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>'; 
+    }
     
     if ($post['source'] == 'page') {
       switch ($post['version']) {
@@ -2803,6 +2810,36 @@ function wdg_misc_getProviderQuickData($target, $data) {
       return isset($all_data_quick[$data['data']->nid][$target]) ? $all_data_quick[$data['data']->nid][$target] : '';
 
   }
+}
+
+
+/**
+ * Return themed field content for a view.
+ */
+function  gv_misc_getFieldThemed_forView($target, $data) {
+  
+  $out = '';
+  
+  switch($target) {
+    
+    case 'blog_post_thumb':
+      
+      //echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
+      
+      //$out = '<a href="#">Test-' . $data['data']->nid . '</a>';
+      $node = node_load($data['data']->nid);
+      if (@$node->field_main_image['und'][0]['value']) {
+        $main_image = unserialize($node->field_main_image['und'][0]['value']);
+        if (@$main_image['uri']) {
+          $out = theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => $main_image['alt'], 'title' => $data['data']->node_title)); 
+          //dpm($data);
+          //dpm($main_image);
+        }
+      }
+      
+      return $out;
+  }
+  
 }
 
 

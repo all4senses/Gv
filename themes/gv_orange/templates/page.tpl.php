@@ -27,7 +27,7 @@
       <?php 
 //        global $user;
 //        if ($user->uid == 1) {
-          echo '<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012"></a>', render($page['header']); 
+          echo /*'<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012"></a>',*/ render($page['header']); 
 //        }
 //        else {
 //          echo '<div id="block-gv-blocks-header-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>', render($page['header']); 
