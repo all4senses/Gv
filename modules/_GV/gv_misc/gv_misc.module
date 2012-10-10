@@ -2826,12 +2826,12 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
       
       //echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
       
-      $out = '<a href="#">Test-' . $data['data']->nid . '</a>';
+      //$out = '<a href="#">Test-' . $data['data']->nid . '</a>';
       $node = node_load($data['data']->nid);
       if (@$node->field_main_image['und'][0]['value']) {
         $main_image = unserialize($node->field_main_image['und'][0]['value']);
         if (@$main_image['uri']) {
-          $out .= '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => $main_image['alt'], 'title' => $data['node_title'])) . '</div>'; 
+          $out = '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => $main_image['alt'], 'title' => $data['node_title'])) . '</div>'; 
           //dpm($data);
           //dpm($main_image);
         }
