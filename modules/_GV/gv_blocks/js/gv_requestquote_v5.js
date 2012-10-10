@@ -6,10 +6,6 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
-        $('#block-gv-blocks-request-quote-v5 #requestQuoteFormWrapper #Navigation #next').click(function(){
-          $('input[id="firstname"]').blur();
-        });
-        
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
@@ -79,8 +75,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
-          textSubmit : 'Submit',// 'Submit & Get Quotes',
-          textNext: 'Next',//'Submit & Get Quotes',
+          textSubmit : 'Submit Now',// 'Submit & Get Quotes',
+          textNext: 'Get Quotes',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
