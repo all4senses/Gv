@@ -2814,6 +2814,25 @@ function wdg_misc_getProviderQuickData($target, $data) {
 
 
 /**
+ * Return themed field content for a view.
+ */
+function  gv_misc_getFieldThemed_forView($target, $data) {
+  
+  $out = '';
+  
+  switch($target) {
+    
+    case 'blog_post_thumb':
+      
+      $out = '<a href="#">Test</a>';
+      
+      return $out;
+  }
+  
+}
+
+
+/**
  * Return specific variable value for a provider depending on the filter value (business OR residential, etc)
  */
 function wdg_misc_getProviderData_fromView($target, $data) {
