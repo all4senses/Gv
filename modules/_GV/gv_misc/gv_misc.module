@@ -2827,24 +2827,20 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
       
       //$out = '<a href="#">Test-' . $data['data']->nid . '</a>';
       
-      global $user;
-      if ($user->uid == 1) {
-        $query = db_select('field_data_field_main_image', 'mi')
-          ->fields('mi', array('field_main_image_value'));
-        $query->condition('entity_id', $data['data']->nid);
-        $main_image = unserialize($query->execute()->fetchField());
-        dpm($main_image);
-      }
+      $query = db_select('field_data_field_main_image', 'mi')
+        ->fields('mi', array('field_main_image_value'));
+      $query->condition('entity_id', $data['data']->nid);
+      $main_image = unserialize($query->execute()->fetchField());
       
-      $node = node_load($data['data']->nid);
-      if (@$node->field_main_image['und'][0]['value']) {
-        $main_image = unserialize($node->field_main_image['und'][0]['value']);
+//      $node = node_load($data['data']->nid);
+//      if (@$node->field_main_image['und'][0]['value']) {
+//        $main_image = unserialize($node->field_main_image['und'][0]['value']);
         if (@$main_image['uri']) {
           $out = '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => $main_image['alt'], 'title' => $data['data']->node_title)) . '</div>'; 
           //dpm($data);
           //dpm($main_image);
         }
-      }
+//      }
       
       return $out;
   }
