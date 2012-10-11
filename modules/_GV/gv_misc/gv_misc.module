@@ -1652,7 +1652,7 @@ function gv_misc_testPage() {
   $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
   
   $url = 'http://img.youtube.com/vi/H1vdPJzzzAY/maxresdefault.jpg';
-  $file_local_abs = DRUPAL_ROOT . '/' . $default_file_path . '/H1vdPJzzzAY.jpg';
+  $file_local_abs = DRUPAL_ROOT . '/' . $default_file_path . '/vthumbs/H1vdPJzzzAY.jpg';
   if (!gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs)) {
     $out .= 'img = ' . $file_local_abs;
   }
