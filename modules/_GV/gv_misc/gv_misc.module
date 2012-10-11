@@ -2543,7 +2543,6 @@ function gv_misc_views_pre_render(&$view) {
   if ($do_attach_preface && $preface_node = gv_misc_getPrefaceByKey($key)) {
    
     if ($view->current_display == 'page_by_tag') {
-      //dpm($term);
       // add metatags for the specific term.
       if (isset($term->metatags['keywords']['value']) && $term->metatags['keywords']['value']) {
         gv_misc_addMetatag('keywords', $term->metatags['keywords']['value']);
@@ -2827,6 +2826,16 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
       //echo '<div class="logo"><a href="' . $node->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a></div>'; 
       
       //$out = '<a href="#">Test-' . $data['data']->nid . '</a>';
+      
+      global $user;
+      if ($user->uid == 1) {
+        $query = db_select('field_data_field_main_image', 'mi')
+          ->fields('mi', array('field_main_image_value'));
+        $query->condition('entity_id', $data['data']->nid);
+        $main_image = unserialize($query->execute()->fetchField());
+        dpm($main_image);
+      }
+      
       $node = node_load($data['data']->nid);
       if (@$node->field_main_image['und'][0]['value']) {
         $main_image = unserialize($node->field_main_image['und'][0]['value']);
