@@ -459,12 +459,26 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $main_image_html = NULL;
   $main_image = NULL;
   $matches = NULL;
-
+  $found_image = NULL;
+  
   if (preg_match('/<img[^>]+>/i', $body_full_markup, $matches)) {
+    $found_image = TRUE;
     preg_match_all('/(alt|title|src)="([^"]*)"/i',$matches[0], $matches);
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
+    $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
+  }
+//  elseif (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
+//    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
+//    $video_id = $matches[1];
+//    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
+//      $found_image = TRUE;
+//    }
+//  }
+    
+    if ($found_image) {
+    
     $main_image['src'] = str_replace('%20', ' ', $main_image['src']);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     $main_image['uri'] = $stream_path;
@@ -506,12 +520,9 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       $main_image['src_themed'] = image_style_url('share', $stream_path);
     }
     
-    
     $main_image_html = '<div class="thumb">' . $main_image_html . '</div>';
     
     //$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
-    
-    $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
 
   $teaser = strip_tags($body_full_markup);
@@ -1645,25 +1656,54 @@ function gv_misc_testPage_requestTest() {
 /**
  * Test page function for url /test.
  */
-function gv_misc_testPage() {
-  $out = '<div>Start test...</div>';
+function gv_misc_getYoutubeVideoThumb($video_id) {
   
   $file_default_scheme = file_default_scheme();
   $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
   
-  $video_id = 'H1vdPJzzzAY';
   $url = 'http://img.youtube.com/vi/' . $video_id . '/0.jpg'; //'/maxresdefault.jpg';
   $file_local = $default_file_path . '/vthumbs/' . $video_id . '.jpg';
   $file_local_abs = DRUPAL_ROOT . '/' . $file_local;
   if (!gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs)) {
-    $out .= 'img = ' . $file_local_abs . '<br>';
-    $out .= '<img src="' . $file_local . '" />';
+    return $file_local;
   }
   else {
-    $out .= 'Error!';
+    return NULL; // Failed.
   }
+}
 
+
+/**
+ * Test page function for url /test.
+ */
+function gv_misc_testPage() {
+  $out = '<div>Start test...</div>';
+
+  $body_full_markup = 'Check out this live demo of the RCA IP150 from ITExpo West 2012:
+
+[video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
+
+When I see the RCA insignia, it immediately brings me back to my childhood, along with the fond memories of the quality audio and video products I owned from them over the years that seemingly lasted forever.  At the ITExpo last week, we got a sneak peek at three IP phones RCA are launching over the next couple';
   
+  if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
+    dpm($matches);
+    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
+//    $video_id = $matches[1];
+//    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
+//      $found_image = TRUE;
+//    }
+  }
+ 
+  
+  
+//  $video_id = 'H1vdPJzzzAY';
+//  if(gv_misc_getYoutubeVideoThumb($video_id)) {
+//    $out .= 'img = ' . $file_local_abs . '<br>';
+//    $out .= '<img src="' . $file_local . '" />';
+//  }
+//  else {
+//    $out .= 'Error!';
+//  }
   
   return $out . '<br>End of Test';
 }
