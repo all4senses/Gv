@@ -194,6 +194,10 @@ class EntityReference_SelectionHandler_Generic implements EntityReference_Select
       $entity_type = $this->field['settings']['target_type'];
       $query = $this->buildEntityFieldQuery();
       $query->entityCondition('entity_id', $ids, 'IN');
+      
+      // a4s
+      $query->addMetaData('account', user_load(1));
+      
       $result = $query->execute();
       if (!empty($result[$entity_type])) {
         return array_keys($result[$entity_type]);
