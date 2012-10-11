@@ -1688,10 +1688,12 @@ When I see the RCA insignia, it immediately brings me back to my childhood, alon
   if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
     dpm($matches);
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-//    $video_id = $matches[1];
-//    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
-//      $found_image = TRUE;
-//    }
+    $video_id = $matches[1];
+    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
+      $found_image = TRUE;
+      $out .= '<img src="' . $main_image['src'] . '" />';
+
+    }
   }
  
   
