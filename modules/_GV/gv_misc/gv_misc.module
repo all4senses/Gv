@@ -469,15 +469,17 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     }
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
-//  elseif (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-//    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-//    $video_id = $matches[1];
-//    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
-//      $found_image = TRUE;
-//    }
-//  }
-    
-    if ($found_image) {
+  elseif (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
+    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
+    $video_id = $matches[1];
+    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
+      $found_image = TRUE;
+    }
+    $body_full_markup = preg_replace('|\[video:.*(http://.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
+  }
+  
+  
+  if ($found_image) {
     
     $main_image['src'] = str_replace('%20', ' ', $main_image['src']);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
@@ -1692,8 +1694,9 @@ When I see the RCA insignia, it immediately brings me back to my childhood, alon
     if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
       $found_image = TRUE;
       $out .= '<img src="' . $main_image['src'] . '" />';
-
     }
+    $body_full_markup = preg_replace('|\[video:.*(http://.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
+    dpm($body_full_markup);
   }
  
   
