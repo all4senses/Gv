@@ -195,7 +195,7 @@ class EntityReference_SelectionHandler_Generic implements EntityReference_Select
       $query = $this->buildEntityFieldQuery();
       $query->entityCondition('entity_id', $ids, 'IN');
       
-      // a4s
+      // a4s patch http://drupal.org/node/1468734#comment-5785548
       $query->addMetaData('account', user_load(1));
       
       $result = $query->execute();
