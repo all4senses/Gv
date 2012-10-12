@@ -1993,7 +1993,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
           dpm($other_data);
           $form['provider']['lines']['#default_value'] = $other_data['lines'];
-          $form['ureview']['pros']['#default_value'] = trim($other_data['pros']);
+          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
           $form['ureview']['cons']['#default_value'] = $other_data['cons'];
           
           $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
