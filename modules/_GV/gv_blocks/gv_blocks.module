@@ -572,7 +572,7 @@ function gv_blocks_getBlockThemed($block_data)
       $block['subject'] = $block_data['subject'];
     }
     elseif (@$block_data['no_subject']) {
-      unset($block['subject']);
+      $block['subject'] = '';
     }
     return gv_blocks_wrapInBlockThemed($block_data, $block);
   }
