@@ -1535,12 +1535,12 @@ function gv_misc_makeRequest_ajax() {
     
     
             
-    if ($submission['First Name'] != 'a4s' && $submission['Version'] != 5) {
+    if ($submission['First Name'] != 'a4s' && $submission['Version'] != 5 && $submission['Version'] != 6) {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
       // Send to Vocalocity.
-      if ($submission['Version'] != 5) {
+      if ($submission['Version'] != 5 && $submission['Version'] != 6) {
         gv_misc_SendRequestToVocalocity($submission);
       }
     }
@@ -1597,7 +1597,7 @@ function gv_misc_makeRequest_ajax() {
     
     $status = TRUE;
          
-    if ($submission['Version'] == 5) {
+    if ($submission['Version'] == 5 || $submission['Version'] == 6) {
       $output = '<a class="guide" href="/pdfs/Business-VoIP-Guide.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
     }
     else {
