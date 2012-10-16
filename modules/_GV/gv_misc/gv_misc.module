@@ -2797,6 +2797,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
     
     case 'logo_chart':
     case 'logo_article':
+    case 'logo_chart_iframe':
     
       $all_data_quick = gv_misc_getProvidersDataQuick();
       $out = '';
@@ -2813,7 +2814,10 @@ function wdg_misc_getProviderQuickData($target, $data) {
         if ($target == 'logo_chart') {
           $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         } 
-        else {
+        elseif ($target == 'logo_chart_iframe') {
+          $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_iframe', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
+        }
+        elseif ($target == 'logo_article') {
           $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'thumbnail', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         }
         $out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
