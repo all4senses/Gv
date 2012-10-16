@@ -568,8 +568,11 @@ function gv_blocks_getBlockThemed($block_data)
   $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
   if ($block) {
     dpm($block_data);
-    if (isset($block_data['subject']) && !@$block_data['no_title']) {
+    if (isset($block_data['subject'])) {
       $block['subject'] = $block_data['subject'];
+    }
+    elseif (@$block_data['no_subject']) {
+      unset($block['subject']);
     }
     return gv_blocks_wrapInBlockThemed($block_data, $block);
   }
