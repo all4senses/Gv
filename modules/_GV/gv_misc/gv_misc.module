@@ -24,6 +24,13 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   ); 
   
+  $items['get/iframe/business-voip'] = array(
+    'title' => 'Top Business VoIP Providers',
+    'page callback' => 'gv_misc_getIframe_TopProvidersBu',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['request-test'] = array(
     'page callback' => 'gv_misc_testPage_requestTest',
     'access arguments' => array('access content'),
@@ -1535,12 +1542,12 @@ function gv_misc_makeRequest_ajax() {
     
     
             
-    if ($submission['First Name'] != 'a4s' && $submission['Version'] != 5) {
+    if ($submission['First Name'] != 'a4s') {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
       // Send to Vocalocity.
-      if ($submission['Version'] != 5) {
+      if ($submission['Version'] != 5 && $submission['Version'] != 6) {
         gv_misc_SendRequestToVocalocity($submission);
       }
     }
@@ -1598,7 +1605,10 @@ function gv_misc_makeRequest_ajax() {
     $status = TRUE;
          
     if ($submission['Version'] == 5) {
-      $output = '<a class="guide" href="/pdfs/Business-VoIP-Guide.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+      $output = '<a class="guide" href="/pdfs/Business-VoIP-Guide.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide Here</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+    }
+    elseif($submission['Version'] == 6) {
+      $output = '<a class="guide" href="/pdfs/Business-VoIP-Guide.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide Here<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
     }
     else {
       $output = '<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>'; 
@@ -1681,38 +1691,29 @@ function gv_misc_getYoutubeVideoThumb($video_id) {
 function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
-  $body_full_markup = 'Check out this live demo of the RCA IP150 from ITExpo West 2012:
-
-[video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-
-When I see the RCA insignia, it immediately brings me back to my childhood, along with the fond memories of the quality audio and video products I owned from them over the years that seemingly lasted forever.  At the ITExpo last week, we got a sneak peek at three IP phones RCA are launching over the next couple';
   
-  if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-    dpm($matches);
-    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-    $video_id = $matches[1];
-    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
-      $found_image = TRUE;
-      $out .= '<img src="' . $main_image['src'] . '" />';
-    }
-    $body_full_markup = preg_replace('/\[video:.*(http.*)\]/', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
-    dpm($body_full_markup);
-  }
- 
+  $block_data = array('module' => 'views', 'delta' => 'providers-block', 'shadow' => FALSE);
+  $out .= gv_blocks_getBlockThemed($block_data);
   
+  // Get block for Top pick business providers chart.
+  $block_data = array('module' => 'views', 'delta' => 'providers-block_p_bu_page', 'shadow' => FALSE);
+  $out .= gv_blocks_getBlockThemed($block_data);
   
-//  $video_id = 'H1vdPJzzzAY';
-//  if(gv_misc_getYoutubeVideoThumb($video_id)) {
-//    $out .= 'img = ' . $file_local_abs . '<br>';
-//    $out .= '<img src="' . $file_local . '" />';
-//  }
-//  else {
-//    $out .= 'Error!';
-//  }
-  
-  return $out . '<br>End of Test';
+  echo $out . '<br>End of Test';
 }
 
+
+/**
+ * Returns TopProvidersBu chart for an iframe.
+ */
+function gv_misc_getIframe_TopProvidersBu() {
+  
+  // Get block for Top pick business providers chart.
+  $block_data = array('module' => 'views', 'delta' => 'providers-block_p_bu_page', 'shadow' => FALSE);
+  $out = gv_blocks_getBlockThemed($block_data);
+  
+  return $out;
+}
 
 /**
  * Send a request to Vocalocity.
