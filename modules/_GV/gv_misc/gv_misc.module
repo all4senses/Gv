@@ -1542,17 +1542,26 @@ function gv_misc_makeRequest_ajax() {
     //$letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
     
     
-            
-    if ($submission['First Name'] != 'a4s') {
+    if ($submission['First Name'] == 'nextiva') {
+      // Test for Nextiva
+      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+      
+      // Send a lead to Remote providers.
+      if ($submission['Version'] != 5 && $submission['Version'] != 6) {
+        gv_misc_SendRequestToNextiva($submission);
+      }
+    }
+    elseif ($submission['First Name'] != 'a4s') {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
-      // Send to Vocalocity.
+      // Send a lead to Remote providers.
       if ($submission['Version'] != 5 && $submission['Version'] != 6) {
         gv_misc_SendRequestToVocalocity($submission);
+        //gv_misc_SendRequestToNextiva($submission);
       }
     }
-    // Test letter to the root
+    // A test letter to the root.
     drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
 
     
@@ -1707,7 +1716,25 @@ function gv_misc_testPage() {
         //alert(document.getElementById("bu-chart").style.height);
       }
     </SCRIPT>';
+
   
+  /*
+  <iframe id="bu-chart" src="http://getvoip.com/get/iframe/business-voip-chart" scrolling="no" width="822px" frameborder="0" seamless="seamless"></iframe>
+  <SCRIPT>
+      function setGvIframeSize(pixels) {
+        document.getElementById("bu-chart").style.height=pixels+"px";
+      }
+  </SCRIPT>
+  
+  
+  
+  <iframe id="bu-chart" src="http://getvoip.com/get/iframe/business-voip-chart/narrow" scrolling="no" width="590px" frameborder="0" seamless="seamless"></iframe>
+  <SCRIPT>
+      function setGvIframeSize(pixels) {
+        document.getElementById("bu-chart").style.height=pixels+"px";
+      }
+  </SCRIPT>
+  */
   echo $out . '<br>End of Test';
 }
 
@@ -1742,12 +1769,12 @@ function gv_misc_getIframe_TopProvidersBu() {
  */
 function gv_misc_SendRequestToVocalocity($submission) {
   
-  // Skip sending to Vocalocity if "More than 50"
+  // Skip sending if "More than 50".
   if ($submission['Phones needed'] == 'More than 50') {
     return NULL;
   }
     
-      $map_vocalocity = array(
+      $map_main = array(
         'First Name' => '7772_177925pi_7772_177925',
         'Last Name' => '7772_177935pi_7772_177935',
         'Phones needed' => '7772_178005pi_7772_178005',
@@ -1758,7 +1785,7 @@ function gv_misc_SendRequestToVocalocity($submission) {
         'Phone #' => '7772_177945pi_7772_177945',
       );
       
-      $map_vocalocity_timeframe = array(
+      $map_timeframe = array(
         'ASAP' => '3791',
         //'Less than 1 month' => '3681',
         '1-3 Months' => '3691',
@@ -1766,7 +1793,7 @@ function gv_misc_SendRequestToVocalocity($submission) {
         //'More than 6 months' => '3711',
       );
       
-      $map_vocalocity_phonesNeeded = array(
+      $map_phonesNeeded = array(
         '1 - 4' => '58655',
         '5 - 10' => '58665',
         '11 - 20' => '58675',
@@ -1774,20 +1801,16 @@ function gv_misc_SendRequestToVocalocity($submission) {
       );
       
   
-  // Map data to Vocalocity's var names.
-//  foreach ($submission as $key => $value) {
-//    $data_to[$map_vocalocity[$key]] = $value;
-//  }
-  
-  foreach ($map_vocalocity as $getvoip_key => $vocalocity_key) {
+  // Map data to remote vars names.
+  foreach ($map_main as $getvoip_key => $remote_key) {
     if ($getvoip_key == 'Buying Time Frame') {
-      $data_to[$vocalocity_key] = $map_vocalocity_timeframe[$submission[$getvoip_key]];
+      $data_to[$remote_key] = $map_timeframe[$submission[$getvoip_key]];
     }
     elseif ($getvoip_key == 'Phones needed') {
-      $data_to[$vocalocity_key] = $map_vocalocity_phonesNeeded[$submission[$getvoip_key]];
+      $data_to[$remote_key] = $map_phonesNeeded[$submission[$getvoip_key]];
     }
     else {
-      $data_to[$vocalocity_key] = $submission[$getvoip_key];
+      $data_to[$remote_key] = $submission[$getvoip_key];
     }
   }
   
@@ -1795,24 +1818,19 @@ function gv_misc_SendRequestToVocalocity($submission) {
   //$url = 'http://getvoip.com/request-test';
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
-
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_TIMEOUT, 300);
-  //curl_setopt($curl, CURLOPT_MAXREDIRS, 7);
-  //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
   curl_setopt($curl, CURLOPT_POST, TRUE);
   curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
-
   $data_from = curl_exec($curl);
-
   if ($data_from === false) {
     $data_from = 'Error!!! 
 ' . curl_error($curl);
   }
-
   curl_close($curl);
  
-  
+
+  // Report to a4s.
   $out = 'Quote Request submission form:
 
 ';
@@ -1829,9 +1847,84 @@ function gv_misc_SendRequestToVocalocity($submission) {
   $params['report'] = $out . '
     
 
-
 ' . $data_from;
   drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
+  
+  return $params['report'];
+}
+
+
+/**
+ * Send a request to Nextiva.
+ */
+function gv_misc_SendRequestToNextiva($submission) {
+  
+  // Skip sending if "More than 50".
+  if ($submission['Phones needed'] == 'More than 50') {
+    return NULL;
+  }
+    
+      $map_main = array(
+        'First Name' => 'first_name',
+        'Last Name' => 'last_name',
+        'Phones needed' => '00N70000002LdcG', // Number of Phone Lines
+        'Quote type' => '00N70000002Lgx0', // Comments
+        'Buying Time Frame' => '00N70000002eDO6',
+        'Company' => 'company',
+        'Email' => 'email',
+        'Website' => 'URL',
+        'Phone #' => 'phone',
+      );
+ 
+      
+  // Set initial fields.
+  $data_to = array(
+    'lead_source' => 'GetVoIP',
+    'oid' => '00D700000009mLY',
+    'retURL' => 'http://getvoip.com',
+    'debug' => 1,
+    'debugEmail' => 'all4senses@gmail.com',
+  );
+  // Map data to remote vars names.
+  foreach ($map_main as $getvoip_key => $remote_key) {
+    $data_to[$remote_key] = $submission[$getvoip_key];
+  }
+  
+  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  //$url = 'http://getvoip.com/request-test';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+  curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+  $data_from = curl_exec($curl);
+  if ($data_from === false) {
+    $data_from = 'Error!!! 
+' . curl_error($curl);
+  }
+  curl_close($curl);
+ 
+
+  // Report to a4s.
+  $out = 'Quote Request submission form:
+
+';
+  foreach ($submission as $key => $value) {
+   if ($value) {
+      $out .= "$key = $value
+";
+    }
+  }
+ 
+ 
+  // Send a report to admin.
+  global $language;
+  $params['report'] = $out . '
+    
+
+' . $data_from;
+  drupal_mail('gv_misc', 'nextiva_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
 }
@@ -1849,6 +1942,10 @@ function gv_misc_mail($key, &$message, $params) {
     
     case 'vocalocity_send_report':
       $message['subject'] = t('Report from the Vocalocity request sending.');
+      $message['body'][] = $params['report'];
+      break;
+    case 'nextiva_send_report':
+      $message['subject'] = t('Report from the Nextiva request sending.');
       $message['body'][] = $params['report'];
       break;
     
