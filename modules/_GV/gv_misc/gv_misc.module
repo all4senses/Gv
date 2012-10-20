@@ -2805,6 +2805,7 @@ function gv_misc_views_pre_render(&$view) {
           $node_a_teaser = $query->execute()->fetchField(); 
           dpm($node_a_teaser);
           $node_a_teaser = strip_tags($node_a_teaser);
+          $node_a_teaser = rtrim($node_a_teaser, 'Read More');
           dpm($node_a_teaser);
         }
         
