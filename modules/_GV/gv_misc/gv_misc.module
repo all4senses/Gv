@@ -2790,6 +2790,22 @@ function gv_misc_views_pre_render(&$view) {
       }
       else {
         
+        global $user;
+        if ($user->uid == 1) {
+          dpm($term);
+          $query = db_select('taxonomy_index', 'ti');
+          //$query->join('node', 'n', "n.nid = ti.nid"); 
+          $query->join('field_revision_field_a_teaser', 'tf', "tf.type = 'node' AND tf.entity_id = ti.nid"); 
+          //$query->fields('n', array('nid', 'changed'))
+          //$query->fields('n', array('nid', 'changed'))
+          $query->fields('tf', array('field_a_teaser_value'))
+                //->orderBy('n.changed', 'DESC')
+                //->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN')
+                ->condition('ti.tid', $term->tid); 
+          $node_a_teaser = $query->execute()->fetchField(); 
+          dpm($node_a_teaser);
+        }
+        
       }
       
       // add metatag title for the specific term, if it's set in the Metatags block and not equal to defaults.
