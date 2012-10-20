@@ -2805,7 +2805,7 @@ function gv_misc_views_pre_render(&$view) {
           $node_a_teaser = $query->execute()->fetchField(); 
          
           if ($node_a_teaser) {
-            gv_misc_addMetatag('description', drupal_substr(rtrim(strip_tags($node_a_teaser), 'Read More'), 0, 150));
+            gv_misc_addMetatag('description', $term->name . ': ' . drupal_substr(rtrim(strip_tags($node_a_teaser), 'Read More'), 0, 150));
           }
           
           //dpm($node_a_teaser);
