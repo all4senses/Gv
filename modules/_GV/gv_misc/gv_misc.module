@@ -2795,7 +2795,7 @@ function gv_misc_views_pre_render(&$view) {
           dpm($term);
           $query = db_select('taxonomy_index', 'ti');
           //$query->join('node', 'n', "n.nid = ti.nid"); 
-          $query->join('field_revision_field_a_teaser', 'tf', "tf.type = 'node' AND tf.entity_id = ti.nid"); 
+          $query->join('field_revision_field_a_teaser', 'tf', "tf.entity_type = 'node' AND tf.entity_id = ti.nid"); 
           //$query->fields('n', array('nid', 'changed'))
           //$query->fields('n', array('nid', 'changed'))
           $query->fields('tf', array('field_a_teaser_value'))
