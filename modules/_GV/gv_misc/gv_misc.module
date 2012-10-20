@@ -2781,10 +2781,27 @@ function gv_misc_views_pre_render(&$view) {
   if ($do_attach_preface && $preface_node = gv_misc_getPrefaceByKey($key)) {
    
     if ($view->current_display == 'page_by_tag') {
+      
+      
+      // add metatag title for the specific term, if it's set in the Metatags block and not equal to defaults.
+      if (isset($term->metatags['title']['value']) && $term->metatags['title']['value']) {
+        $metatag_title = token_replace($term->metatags['title']['value']);
+        gv_misc_addMetatag('title', $metatag_title);
+        // Set the title (not only a metatag title) as well.
+        $preface_node->title = htmlspecialchars_decode($metatag_title);
+        $view->build_info['title'] = $preface_node->title;
+      }
+      else {
+        //$preface_node->title = $view->get_title();//$view->build_info['title'];
+        $preface_node->title .= ' "' . htmlspecialchars_decode($view->build_info['substitutions']['%1']) . '"';
+        $view->build_info['title'] = $preface_node->title;
+      }
+      
       // add metatags for the specific term.
       if (isset($term->metatags['keywords']['value']) && $term->metatags['keywords']['value']) {
         gv_misc_addMetatag('keywords', $term->metatags['keywords']['value']);
       }
+      
       if (isset($term->description) && $term->description) {
         gv_misc_addMetatag('description', $term->description);
       }
@@ -2800,24 +2817,11 @@ function gv_misc_views_pre_render(&$view) {
         $node_a_teaser = $query->execute()->fetchField(); 
 
         if ($node_a_teaser) {
-          gv_misc_addMetatag('description', $term->name . ': ' . drupal_substr(rtrim(strip_tags($node_a_teaser), 'Read More'), 0, 150));
+          gv_misc_addMetatag('description', $preface_node->title . '. ' . drupal_substr(rtrim(strip_tags($node_a_teaser), 'Read More'), 0, 150));
         }
-  
-      }
+      } // End of else of if (isset($term->description) && $term->description) {
       
-      // add metatag title for the specific term, if it's set in the Metatags block and not equal to defaults.
-      if (isset($term->metatags['title']['value']) && $term->metatags['title']['value']) {
-        $metatag_title = token_replace($term->metatags['title']['value']);
-        gv_misc_addMetatag('title', $metatag_title);
-        // Set the title (not only a metatag title) as well.
-        $preface_node->title = htmlspecialchars_decode($metatag_title);
-        $view->build_info['title'] = $preface_node->title;
-      }
-      else {
-        //$preface_node->title = $view->get_title();//$view->build_info['title'];
-        $preface_node->title .= ' "' . htmlspecialchars_decode($view->build_info['substitutions']['%1']) . '"';
-        $view->build_info['title'] = $preface_node->title;
-      }
+      
     }
     else {
       // Change the title of the view (main page title actually)
