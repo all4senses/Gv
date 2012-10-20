@@ -2804,8 +2804,8 @@ function gv_misc_views_pre_render(&$view) {
                 ->condition('ti.tid', $term->tid); 
           $node_a_teaser = $query->execute()->fetchField(); 
           dpm($node_a_teaser);
-          $node_a_teaser = strip_tags($node_a_teaser);
-          $node_a_teaser = rtrim($node_a_teaser, 'Read More');
+          
+          $node_a_teaser = drupal_substr(rtrim(strip_tags($node_a_teaser), 'Read More'), 0, 150);
           dpm($node_a_teaser);
         }
         
