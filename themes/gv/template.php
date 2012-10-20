@@ -57,7 +57,7 @@ function gv_html_head_alter(&$head_elements) {
     $head_elements['news_keywords']['#weight'] = -13;
   }
   
-  dpm($head_elements);
+  //dpm($head_elements);
   
 }
 
