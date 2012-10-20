@@ -691,6 +691,7 @@ function gv_misc_addSocialShareData_toPage($node) {
   $image = NULL;
   $og_type = NULL;
   $title = NULL;
+  $description = NULL;
   
   //$title = $node->title;
   if (@$node->field_preface_key['und'][0]['value'] == 'front') {
@@ -723,11 +724,15 @@ function gv_misc_addSocialShareData_toPage($node) {
           $image = NULL;
         }
       }
+    
+      /*
+      if (!@$node->metatags['description']['value']) {
+        $description = $title . '...';
+      }
+      */
       
       $og_type = 'article';
       $gplus_type = 'Article';
-      
-      dpm($node);
       
       break;
     
@@ -924,7 +929,18 @@ function gv_misc_addSocialShareData_toPage($node) {
       
   );
 
+  /*  
+  if ($description) {
     
+    $tags['description'] = array(
+          '#tag' => 'meta',
+          '#attributes' => array(
+              'name' => 'description',
+              'content' => $description,
+          ),
+      );
+  }
+  */
   
   if ($og_type) {
    
@@ -2771,6 +2787,9 @@ function gv_misc_views_pre_render(&$view) {
       }
       if (isset($term->description) && $term->description) {
         gv_misc_addMetatag('description', $term->description);
+      }
+      else {
+        
       }
       
       // add metatag title for the specific term, if it's set in the Metatags block and not equal to defaults.
