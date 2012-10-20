@@ -2794,7 +2794,8 @@ function gv_misc_views_pre_render(&$view) {
         $query->join('node', 'n', "n.nid = ti.nid"); 
         $query->join('field_revision_field_a_teaser', 'tf', "tf.entity_type = 'node' AND tf.entity_id = ti.nid"); 
         $query->fields('tf', array('field_a_teaser_value'))
-              ->orderBy('n.changed', 'DESC')
+              //->orderBy('n.changed', 'DESC')
+              ->orderBy('n.created', 'DESC')
               ->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN')
               ->condition('ti.tid', $term->tid); 
         $node_a_teaser = $query->execute()->fetchField(); 
