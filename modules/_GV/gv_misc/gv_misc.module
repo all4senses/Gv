@@ -2799,7 +2799,8 @@ function gv_misc_views_pre_render(&$view) {
           //$query->fields('n', array('nid', 'changed'))
           //$query->fields('n', array('nid', 'changed'))
           $query->fields('tf', array('field_a_teaser_value'))
-                ->orderBy('n.changed', 'DESC')
+                //->orderBy('n.changed', 'DESC')
+                ->orderBy('n.changed', 'ASC')
                 //->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN')
                 ->condition('ti.tid', $term->tid); 
           $node_a_teaser = $query->execute()->fetchField(); 
