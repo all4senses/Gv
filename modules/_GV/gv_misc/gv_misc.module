@@ -2801,6 +2801,9 @@ function gv_misc_views_pre_render(&$view) {
       if (isset($term->metatags['keywords']['value']) && $term->metatags['keywords']['value']) {
         gv_misc_addMetatag('keywords', $term->metatags['keywords']['value']);
       }
+      else {
+        gv_misc_addMetatag('keywords', $term->name);
+      }
       
       if (isset($term->description) && $term->description) {
         gv_misc_addMetatag('description', $term->description);
