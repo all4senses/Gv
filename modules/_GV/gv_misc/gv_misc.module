@@ -2980,6 +2980,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
         }
         $image_styled_src = image_style_url($image_style_name, $all_data_quick[$data['data']->nid]['i_logo_uri']);
         dpm($image_styled_src);
+
         $image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => $image_style_name, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
         $out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
         
