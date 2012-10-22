@@ -30,9 +30,9 @@
                 <?php endif; ?>
                   
                 <?php /*print $title_attributes;*/ ?>>
-                    <?php if (!$page): ?>
+                    <?php /*if (!$page): ?>
                       <a href="<?php print ($full_title && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
-                    <?php endif; ?>
+                    <?php endif; */?>
                         
                       <?php 
                         echo ($full_title || $page ? $node->field_r_provider_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
@@ -40,9 +40,9 @@
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
                       ?>
-                    <?php if (!$page): ?>
+                    <?php /*if (!$page): ?>
                       </a>
-                    <?php endif; ?>
+                    <?php endif;*/ ?>
                 
                 <?php if ($page): ?>
                   </h1>
