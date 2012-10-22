@@ -113,6 +113,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['canada_voip_p_bottom'] = array(
+    'info' => t('Bottom section of canada-voip page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  
   $blocks['news_tags'] = array(
     'info' => t('Shows a tag cloud for news tags'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -248,6 +254,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('business-voip-features');
       break;
     
+    case 'canada_voip_p_bottom':
+      $block['subject'] = t('Bottom section of canada-voip page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('canada-voip');
+      break;
+  
     
     
     case 'news_tags':
