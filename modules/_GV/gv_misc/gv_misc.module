@@ -2985,8 +2985,9 @@ function wdg_misc_getProviderQuickData($target, $data) {
         global $user;
         if ($user->uid == 1) {
           $image_styled_src = image_style_url($image_style_name, $all_data_quick[$data['data']->nid]['i_logo_uri']);
-          dpm($image_styled_src);
-          $out .= '<img title="test" src="' . $image_styled_src . '" />';
+          //dpm($image_styled_src);
+          //$out .= '<img title="test" src="' . $image_styled_src . '" />';
+          $out .= theme('image', array('path' => $image_styled_src));
         }
       }
       else {
