@@ -3159,16 +3159,8 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
       $main_image = unserialize($query->execute()->fetchField());
       
       if (@$main_image['uri']) {
-        $out = '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => @$main_image['alt'], 'title' => $data['data']->node_title)) . '</div>';
-        
-        global $user;
-        if ($user->uid == 1) {
-          $out .= '<div class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'path' => $main_image['uri'], 'alt' =>  @$main_image['alt'], 'title' => $data['data']->node_title )) . '</div>';
-        }
-        //$image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => $image_style_name, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
-        //$image = theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'path' => $main_image['uri'], 'alt' =>  @$main_image['alt'], 'title' => $data['data']->node_title ));
-        //$out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
-
+        //$out = '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => @$main_image['alt'], 'title' => $data['data']->node_title)) . '</div>';
+        $out = '<div class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'path' => $main_image['uri'], 'alt' =>  @$main_image['alt'], 'title' => $data['data']->node_title )) . '</div>';
       }
 
       return $out;
