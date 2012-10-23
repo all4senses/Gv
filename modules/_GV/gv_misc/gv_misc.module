@@ -3078,7 +3078,6 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     
     case 'grade':
-      dpm($data);
       //$all_data_quick = gv_misc_getProvidersDataQuick();
       $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
@@ -3163,7 +3162,7 @@ function gv_misc_getProviderQuickData($target, $data) {
 function gv_misc_getProviderGradeFromRating($r) {
   
   if ($r > 5) {
-    $r = $r / 20;
+    $r = number_format( (0.05 * $r), 1 );
   }
   
   $grades = array(
