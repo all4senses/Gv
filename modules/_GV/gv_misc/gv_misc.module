@@ -3162,6 +3162,10 @@ function gv_misc_getProviderQuickData($target, $data) {
  */
 function gv_misc_getProviderGradeFromRating($r) {
   
+  if ($r > 5) {
+    $r = $r / 20;
+  }
+  
   $grades = array(
     'A+' => array(4.8, 5.0),
     'A' => array(4.4, 4.7),
