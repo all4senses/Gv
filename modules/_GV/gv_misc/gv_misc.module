@@ -3030,7 +3030,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
         }
         
         //$image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => $image_style_name, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
-        $image .= theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$data['data']->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
+        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$data['data']->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
         $out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
         
       }
