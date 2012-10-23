@@ -177,10 +177,11 @@ function gv_misc_js_alter(&$javascript) {
       
     
     // Replace js with min.js
-    
-//    foreach($javascript as $filename => $attr) {
-//      $javascript[$filename]['data'] = $gv_minified_js[$filename];
-//    }
+    foreach($javascript as $filename => $attr) {
+      if (isset($gv_minified_js[$filename])) {
+        $javascript[$filename]['data'] = $gv_minified_js[$filename];
+      }
+    }
     
     dpm('7');
     dpm($javascript);
