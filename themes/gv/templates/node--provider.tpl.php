@@ -171,8 +171,15 @@
                           else {
                             $p_services = $node->p_data['s'];
                           }
-
+                          global $user;
                           foreach ($node->field_p_types['und'] as $type) {
+                            
+                            if ($user->uid == 1) {
+                              if(strpos($node->field_p_types['und'], '_ca')) {
+                                continue;
+                              }
+                            }
+                            
                             $service_type_key = gv_misc_refineServiceTypeKey($type['value']);
                             //echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => $service_types[$service_type_key])) . '</a></li>';
                             echo '<li><a href="#tabs-' . $count++ . '">' . t('!type', array('!type' => $service_types[$service_type_key])) . '</a></li>';
@@ -196,7 +203,11 @@
                     $count = 2;
                     foreach ($node->field_p_types['und'] as $type) {
               
-                      
+                              if ($user->uid == 1) {
+                                if(strpos($node->field_p_types['und'], '_ca')) {
+                                  continue;
+                                }
+                              }
                       
 //                            if ($user->uid == 1) {
 
