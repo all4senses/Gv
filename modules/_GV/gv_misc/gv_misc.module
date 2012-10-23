@@ -2993,9 +2993,17 @@ function gv_misc_getProvidersDataQuick($scope = 'all', $reset = FALSE, $clear_fr
     
 
 /**
- * Return specific variable value from p_data_quick for a provider depending on the filter value (business OR residential, etc)
+ * Wrapper for gv_misc_getProviderQuickData()
  */
 function wdg_misc_getProviderQuickData($target, $data) {
+  return gv_misc_getProviderQuickData($target, $data);
+}
+
+
+/**
+ * Return specific variable value from p_data_quick for a provider depending on the filter value (business OR residential, etc)
+ */
+function gv_misc_getProviderQuickData($target, $data) {
   
   $out = '';
   
@@ -3069,7 +3077,18 @@ function wdg_misc_getProviderQuickData($target, $data) {
       
     
     
+    case 'grade':
     
+      //$all_data_quick = gv_misc_getProvidersDataQuick();
+      $out = '';
+      if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
+        $out = gv_misc_getProviderGradeFromRating($data['data']->votingapi_cache_node_percent_overall_average_value);
+      }
+      
+      return $out;
+
+      
+      
     
     case 'rating':
     
@@ -3135,6 +3154,41 @@ function wdg_misc_getProviderQuickData($target, $data) {
       return isset($all_data_quick[$data['data']->nid][$target]) ? $all_data_quick[$data['data']->nid][$target] : '';
 
   }
+}
+
+
+/**
+ * Gets grade from rating for a provider.
+ */
+function gv_misc_getProviderGradeFromRating($r) {
+  
+  $grades = array(
+    'A+' => array(4.8, 5.0),
+    'A' => array(4.4, 4.7),
+    'A-' => array(4.2, 4.3),
+
+    'B+' => array(4.0, 4.1),
+    'B' => array(3.7, 3.9),
+    'B-' => array(3.3, 3.6),
+
+    'C+' => array(3.1, 3.2),
+    'C' => array(2.9, 3.0),
+    'C-' => array(2.5, 2.8),
+
+    'D+' => array(2.1, 2.4),
+    'D' => array(1.9, 2.0),
+    'D-' => array(1.6, 1.8),
+
+    'F' => array(1.0, 1.5),
+  );
+  
+  foreach ($grades as $grade => $borders) {
+    if ($r >= $borders[0] && $r <= $borders[1]) {
+      return $grade;
+    }
+  }
+  
+  return '';
 }
 
 
