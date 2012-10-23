@@ -177,9 +177,13 @@ function gv_misc_js_alter(&$javascript) {
       
     
     // Replace js with min.js
-//    foreach($javascript as $filename => $attr) {
-//      $javascript[$filename]['data'] = $gv_minified_js[$filename];
-//    }
+    foreach($javascript as $filename => $attr) {
+      $javascript[$filename]['data'] = $gv_minified_js[$filename];
+    }
+    
+    dpm('7');
+    dpm($javascript);
+    dpm('8');
     
   } // End of if ($user->uid != 1) {
   else {
