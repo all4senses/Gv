@@ -173,9 +173,9 @@
                           }
                           global $user;
                           foreach ($node->field_p_types['und'] as $type) {
-                            dpm();
+                            //dpm();
                             if ($user->uid == 1) {
-                              if(strpos($type, '_ca')) {
+                              if(strpos($type['value'], '_ca')) {
                                 continue;
                               }
                             }
@@ -204,7 +204,7 @@
                     foreach ($node->field_p_types['und'] as $type) {
               
                               if ($user->uid == 1) {
-                                if(strpos($type, '_ca')) {
+                                if(strpos($type['value'], '_ca')) {
                                   continue;
                                 }
                               }
