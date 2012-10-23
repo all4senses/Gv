@@ -2238,7 +2238,16 @@ function gv_misc_theme($existing, $type, $theme, $path) {
 
 
 function theme_gv_misc_image(array $variables) {
-  return theme('image', array('width' => $variables['width'], 'height' => $variables['height'], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
+  
+  if (!$variables['width']) {
+    $size = getimagesize($variables['path']);
+    theme('image', array('width' => $size[0] . 'px', 'height' => $size[1] . 'px', 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
+  }
+  else {
+    $image = theme('image', array('width' => $variables['width'], 'height' => $variables['height'], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));
+  }
+  
+  return $image;
 }
 
 
@@ -3005,13 +3014,12 @@ function wdg_misc_getProviderQuickData($target, $data) {
         if ($user->uid == 1) {
           $image_styled_src = image_style_url($image_style_name, $all_data_quick[$data['data']->nid]['i_logo_uri']);
           
-          $size = getimagesize($image_styled_src);
-          
-          //dpm($size);
-          //$out .= '<img title="test" src="' . $image_styled_src . '" />';
+          ////$size = getimagesize($image_styled_src);
           
           //$out .= theme('image', array('width' => $size[0] . 'px', 'height' => $size[1] . 'px', 'path' => $image_styled_src, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
-          $out .= theme('gv_misc_image', array('width' => $size[0] . 'px', 'height' => $size[1] . 'px', 'path' => $image_styled_src, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
+          ////$out .= theme('gv_misc_image', array('width' => $size[0] . 'px', 'height' => $size[1] . 'px', 'path' => $image_styled_src, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
+          
+          $out .= theme('gv_misc_image', array('path' => $image_styled_src, 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
           
         }
       }
