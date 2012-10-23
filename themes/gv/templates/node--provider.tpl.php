@@ -269,8 +269,9 @@
                                                 '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , $p_fees['oth'], '</div></div>',
                                                 '</div>',
 
-                                                '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
-                                                '<div class="text">' , ($money_back ? t($money_back) :  t('N/A')), '</div>';
+                                                //'<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
+                                                //'<div class="text">' , ($money_back ? t($money_back) :  t('N/A')), '</div>';
+                                                '<div class="f caption back">' , t('Money Back Guarantee') , ': <div class="text">' , ($money_back ? t($money_back) :  t('N/A')), '</div></div>';
 
                                         if ($features_weights) {
                                           echo '<div class="f caption">' , t('Available Features') , ':</div>';
