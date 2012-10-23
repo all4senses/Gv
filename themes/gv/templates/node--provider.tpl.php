@@ -171,13 +171,12 @@
                           else {
                             $p_services = $node->p_data['s'];
                           }
-                          global $user;
+                          
                           foreach ($node->field_p_types['und'] as $type) {
-                            //dpm();
-                            if ($user->uid == 1) {
-                              if(strpos($type['value'], '_ca')) {
-                                continue;
-                              }
+
+                            // Don't show Canada type tabs
+                            if(strpos($type['value'], '_ca')) {
+                              continue;
                             }
                             
                             $service_type_key = gv_misc_refineServiceTypeKey($type['value']);
@@ -203,11 +202,11 @@
                     $count = 2;
                     foreach ($node->field_p_types['und'] as $type) {
               
-                              if ($user->uid == 1) {
-                                if(strpos($type['value'], '_ca')) {
-                                  continue;
-                                }
+                              // Don't show Canada type tabs
+                              if(strpos($type['value'], '_ca')) {
+                                continue;
                               }
+
                       
 //                            if ($user->uid == 1) {
 
