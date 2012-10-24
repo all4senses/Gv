@@ -57,6 +57,8 @@ function gv_html_head_alter(&$head_elements) {
     $head_elements['news_keywords']['#weight'] = -13;
   }
   
+  //dpm($head_elements);
+  
 }
 
 
@@ -109,6 +111,10 @@ function gv_menu_local_tasks(&$variables) {
 function gv_process_page(&$variables) {
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+  }
+  elseif (@arg(0) == 'get' && @arg(1) == 'iframe') {
+    module_invoke('admin_menu', 'suppress');
+    $variables['theme_hook_suggestions'][] = 'page__url__iframe';
   }
 }
 

@@ -171,8 +171,14 @@
                           else {
                             $p_services = $node->p_data['s'];
                           }
-
+                          
                           foreach ($node->field_p_types['und'] as $type) {
+
+                            // Don't show Canada type tabs
+                            if(strpos($type['value'], '_ca')) {
+                              continue;
+                            }
+                            
                             $service_type_key = gv_misc_refineServiceTypeKey($type['value']);
                             //echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => $service_types[$service_type_key])) . '</a></li>';
                             echo '<li><a href="#tabs-' . $count++ . '">' . t('!type', array('!type' => $service_types[$service_type_key])) . '</a></li>';
@@ -196,7 +202,11 @@
                     $count = 2;
                     foreach ($node->field_p_types['und'] as $type) {
               
-                      
+                              // Don't show Canada type tabs
+                              if(strpos($type['value'], '_ca')) {
+                                continue;
+                              }
+
                       
 //                            if ($user->uid == 1) {
 
@@ -258,8 +268,9 @@
                                                 '<div class="price"><div class="title">' , t('Other Fees') , ':</div><div class="fee">' , $p_fees['oth'], '</div></div>',
                                                 '</div>',
 
-                                                '<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
-                                                '<div class="text">' , ($money_back ? t($money_back) :  t('N/A')), '</div>';
+                                                //'<div class="f caption back">' , t('Money Back Guarantee') , ':</div>',
+                                                //'<div class="text">' , ($money_back ? t($money_back) :  t('N/A')), '</div>';
+                                                '<div class="f caption back">' , t('Money Back Guarantee') , ': <span class="text">' , ($money_back ? t($money_back) :  t('N/A')), '</span></div>';
 
                                         if ($features_weights) {
                                           echo '<div class="f caption">' , t('Available Features') , ':</div>';

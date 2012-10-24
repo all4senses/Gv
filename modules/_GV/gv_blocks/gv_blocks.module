@@ -113,6 +113,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['canada_voip_p_bottom'] = array(
+    'info' => t('Bottom section of canada-voip page preface'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  
   $blocks['news_tags'] = array(
     'info' => t('Shows a tag cloud for news tags'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -248,6 +254,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('business-voip-features');
       break;
     
+    case 'canada_voip_p_bottom':
+      $block['subject'] = t('Bottom section of canada-voip page preface');
+      $block['content'] = gv_misc_getPrefaceBottomSection('canada-voip');
+      break;
+  
     
     
     case 'news_tags':
@@ -569,6 +580,9 @@ function gv_blocks_getBlockThemed($block_data)
   if ($block) {
     if (isset($block_data['subject'])) {
       $block['subject'] = $block_data['subject'];
+    }
+    elseif (@$block_data['no_subject']) {
+      $block['subject'] = '';
     }
     return gv_blocks_wrapInBlockThemed($block_data, $block);
   }
@@ -1005,10 +1019,10 @@ function gv_blocks_get_requestQuote_block_v3() {
  */
 function gv_blocks_get_requestQuote_block_v4() {
   
-  global $user;
-  if ($user->uid) {
-    return NULL;
-  }
+//  global $user;
+//  if ($user->uid) {
+//    return NULL;
+//  }
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
