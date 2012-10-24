@@ -2252,9 +2252,12 @@ function gv_misc_theme($existing, $type, $theme, $path) {
 
 function theme_gv_misc_image_style(array $variables) {
   
-  if (!file_exists($variables['path'])) {
+  // Check if a file exists only for anonymous.
+  global $user;
+  if (!$user->uid && !file_exists($variables['path'])) {
     return NULL;
   }
+  
   $image_src = image_style_url($variables['style_name'], $variables['path']);
   $image = theme('gv_misc_image', array('path' => $image_src, 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));
         
@@ -2264,7 +2267,9 @@ function theme_gv_misc_image_style(array $variables) {
 
 function theme_gv_misc_image(array $variables) {
   
-  if (!$variables['width']) {
+  // Add dimensions only for anonymous.
+  global $user;
+  if (!$user->uid && !$variables['width']) {
     $size = getimagesize($variables['path']);
     $image = theme('image', array('width' => $size[0] . 'px', 'height' => $size[1] . 'px', 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
   }
@@ -3191,7 +3196,7 @@ function gv_misc_getProviderGradeFromRating($r) {
     }
   }
   
-  return 'NA';
+  return '';
 }
 
 
