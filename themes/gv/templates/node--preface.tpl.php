@@ -23,9 +23,10 @@
           echo $title; 
           global $user;
           if ($user->uid == 1) {
-            $pages_with_gplus_author = array('/providers/reviews');
+            dpm($_SERVER);
+            $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
             if (in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
-              dpm($_SERVER);
+              
               //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
               echo ' <a class="gplus" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
             }
