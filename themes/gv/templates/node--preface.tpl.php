@@ -22,16 +22,13 @@
       // Define if this page should contain G+ provile link and authorship,
       // And if it's a ALL reviews page.
       $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
-      
+      $current_is_reviews = FALSE;
+      $current_is_with_gplus_author = FALSE;
       if (isset($_SERVER['REDIRECT_URL']) && in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
         $current_is_with_gplus_author = TRUE;
         if ($_SERVER['REDIRECT_URL'] == '/providers/reviews') {
           $current_is_reviews =  TRUE;
         }
-      }
-      else {
-        $current_is_with_gplus_author = FALSE;
-        $current_is_reviews = FALSE;
       }
   
   ?>
