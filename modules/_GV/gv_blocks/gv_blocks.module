@@ -313,23 +313,6 @@ function gv_blocks_block_view($delta = '') {
  */
 function gv_blocks_getGoogleAllReviewsSnippet() {
   
-  global $user;
-  if ($user->uid == 1) {
-    
-    
-    
-    $query = db_select('votingapi_vote', 'v');
-    $query->condition('v.value_type', 'percent')
-          ->condition('v.tag', 'overall');
-    //$votes = $query->execute();
-    $countQuery = $query->countQuery();
-    $num_votes = $countQuery->execute()->fetchField();
-    dpm($num_votes);
-    
-  }
-  
-  variable_set('gv_allReviewsAmount', 98);
-  
   $allReviewsAmount = variable_get('gv_allReviewsAmount');
   $out = '<div class="content page preface" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
           <div id="all-reviews-snippet">Total of <span id="count" property="v:count">' . $allReviewsAmount . '</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>

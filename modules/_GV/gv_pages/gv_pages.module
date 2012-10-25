@@ -192,6 +192,15 @@ function gv_misc_flush_caches() {
     }
   }
   variable_del('gv_minified_js');
+  
+  // Recalculate the reviews amount.
+  $query = db_select('votingapi_vote', 'v');
+  $query->condition('v.value_type', 'percent')
+        ->condition('v.tag', 'overall');
+  //$votes = $query->execute();
+  $countQuery = $query->countQuery();
+  $num_votes = $countQuery->execute()->fetchField();
+  variable_set('gv_allReviewsAmount', '1' . $num_votes);
 }
 
 
