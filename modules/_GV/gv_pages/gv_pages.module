@@ -200,7 +200,7 @@ function gv_misc_flush_caches() {
   //$votes = $query->execute();
   $countQuery = $query->countQuery();
   $num_votes = $countQuery->execute()->fetchField();
-  variable_set('gv_allReviewsAmount', '1' . $num_votes);
+  variable_set('gv_allReviewsAmount', $num_votes + 100);
 }
 
 
