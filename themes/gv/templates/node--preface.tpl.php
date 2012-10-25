@@ -64,7 +64,7 @@
     
     <?php
       if ($current_is_reviews) {
-        echo '<div id="all-reviews-count" property="v:count">99</div><div id="all-reviews-rating" property="v:rating">5</div>';
+        echo '<div id="all-reviews-snippet"><span id="count" property="v:count">99</span> Reviews for <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr">, with average rating of <span id="rating" property="v:rating">5</span></span>';
       }
       
       // Hide comments, tags, and links now so that we can render them later.
