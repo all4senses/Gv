@@ -136,7 +136,12 @@ function gv_blocks_block_info() {
     'info' => t('Top pick providers for the all providers reviews page'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-    
+  
+  $blocks['google_all_reviews_snippet'] = array(
+    'info' => t('Google all  reviews aggregator snippet with the descriptive caption'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   // Topics block for different content types.
   $content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
   foreach ($content_types as $content_type => $label) {
@@ -278,7 +283,12 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Top pick providers for the all providers reviews page');
       $block['content'] = gv_pages_getTopPickProvidersBlocksForAllReviewsPage();
       break;
-    
+  
+    case 'google_all_reviews_snippet':
+      $block['subject'] = t('Google all  reviews aggregator snippet with the descriptive caption');
+      $block['content'] = gv_blocks_getGoogleAllReviewsSnippet();
+      break;
+  
     
     default:
       // Get blocks for topics for a specific content type.
@@ -295,6 +305,18 @@ function gv_blocks_block_view($delta = '') {
   }
 
   return $block;
+}
+
+
+/**
+ * Returns a snippet providing a data for all reviews aggregator data for Google search.
+ */
+function gv_blocks_getGoogleAllReviewsSnippet() {
+
+  $out = '<div class="content page preface" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">';
+  $out .= '<div id="all-reviews-snippet">Total of <span id="count" property="v:count">99</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>';
+  $out .= '</div>';
+  return $out;
 }
 
 

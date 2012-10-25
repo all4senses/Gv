@@ -38,7 +38,6 @@
           echo $title; 
           // Add G+ provile link and authorship for some pages.
           if ($current_is_with_gplus_author) {
-            //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
             echo ' <a title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author"></a>';
           }
         ?>
@@ -54,15 +53,15 @@
   <div class="content page preface" 
     <?php 
     echo $content_attributes;
-    if ($current_is_reviews) {
-      echo ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"';
-    }
+//    if ($current_is_reviews) {
+//      echo ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"';
+//    }
   ?>>
     
     <?php
-      if ($current_is_reviews) {
-        echo '<div id="all-reviews-snippet">Total of <span id="count" property="v:count">99</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>';
-      }
+//      if ($current_is_reviews) {
+//        echo '<div id="all-reviews-snippet">Total of <span id="count" property="v:count">99</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>';
+//      }
       
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
