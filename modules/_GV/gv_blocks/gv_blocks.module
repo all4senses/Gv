@@ -312,10 +312,12 @@ function gv_blocks_block_view($delta = '') {
  * Returns a snippet providing a data for all reviews aggregator data for Google search.
  */
 function gv_blocks_getGoogleAllReviewsSnippet() {
-
-  $out = '<div class="content page preface" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">';
-  $out .= '<div id="all-reviews-snippet">Total of <span id="count" property="v:count">99</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>';
-  $out .= '</div>';
+  variable_set('gv_allReviewsAmount', 98);
+  
+  $allReviewsAmount = variable_get('gv_allReviewsAmount');
+  $out = '<div class="content page preface" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
+          <div id="all-reviews-snippet">Total of <span id="count" property="v:count">' . $allReviewsAmount . '</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>
+          </div>';
   return $out;
 }
 
