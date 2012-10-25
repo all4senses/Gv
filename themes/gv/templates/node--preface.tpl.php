@@ -64,7 +64,7 @@
     
     <?php
       if ($current_is_reviews) {
-        echo '<div id="all-reviews-count" property="v:count">999</div>';
+        echo '<div id="all-reviews-count" property="v:count">999</div><div id="all-reviews-rating" property="v:rating">999</div>';
       }
       
       // Hide comments, tags, and links now so that we can render them later.
