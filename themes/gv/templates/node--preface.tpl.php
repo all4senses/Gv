@@ -16,10 +16,16 @@
   <?php //print $user_picture; ?>
 
 
-  <?php print render($title_prefix); ?>
+  <?php echo render($title_prefix); ?>
 
-    <h1 class="preface" <?php print /*$title_attributes*/preg_replace('/datatype=""/', '', $title_attributes); ?>>
-        <?php print $title; ?>
+    <h1 class="preface" <?php echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
+        <?php 
+          echo $title; 
+          global $user;
+          if ($user->uid == 1) {
+            echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
+          }
+        ?>
     </h1>
 
   <?php print render($title_suffix); ?>
