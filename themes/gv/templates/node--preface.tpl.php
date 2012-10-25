@@ -61,7 +61,12 @@
       echo ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"';
     }
   ?>>
+    
     <?php
+      if ($current_is_reviews) {
+        echo '<div id="all-reviews-count" typeof="v:Votes">999</div>';
+      }
+      
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
