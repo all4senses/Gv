@@ -16,18 +16,34 @@
   <?php //print $user_picture; ?>
 
 
-  <?php echo render($title_prefix); ?>
+  <?php 
+      echo render($title_prefix); 
+      
+      // Define if this page should contain G+ provile link and authorship,
+      // And if it's a ALL reviews page.
+      $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
+      
+      if (isset($_SERVER['REDIRECT_URL']) && in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
+        $current_is_with_gplus_author = TRUE;
+        if ($_SERVER['REDIRECT_URL'] == '/providers/reviews') {
+          $current_is_reviews =  TRUE;
+        }
+      }
+      else {
+        $current_is_with_gplus_author = FALSE;
+        $current_is_reviews = FALSE;
+      }
+  
+  ?>
 
-    <h1 class="preface" <?php echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
+    <h1 class="preface" <?php echo preg_replace('/datatype=""/', '', $title_attributes); if ($current_is_reviews) {echo ' property="dc:title v:summary"';} ?>>
         <?php 
           echo $title; 
-            // Add G+ provile link and authorship for some pages.
-            $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
-            if (isset($_SERVER['REDIRECT_URL']) && in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
-              //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
-              echo ' <a class="gplus" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
-            }
-
+          // Add G+ provile link and authorship for some pages.
+          if ($current_is_with_gplus_author) {
+            //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
+            echo ' <a class="gplus" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
+          }
         ?>
     </h1>
 
@@ -38,7 +54,13 @@
     <span class="submitted"><?php print $submitted; ?></span>
   <?php endif; ?>
 
-  <div class="content page preface"<?php print $content_attributes; ?>>
+  <div class="content page preface" 
+    <?php 
+    echo $content_attributes;
+    if ($current_is_reviews) {
+      echo ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"';
+    }
+  ?>>
     <?php
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
