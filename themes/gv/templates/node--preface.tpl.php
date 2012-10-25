@@ -39,7 +39,7 @@
           // Add G+ provile link and authorship for some pages.
           if ($current_is_with_gplus_author) {
             //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
-            echo ' <a class="gplus invisible" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
+            echo ' <a title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author"></a>';
           }
         ?>
     </h1>
