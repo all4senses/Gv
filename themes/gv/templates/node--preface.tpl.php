@@ -42,7 +42,7 @@
           // Add G+ provile link and authorship for some pages.
           if ($current_is_with_gplus_author) {
             //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
-            echo ' <a class="gplus" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
+            echo ' <a class="gplus invisible" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
           }
         ?>
     </h1>
@@ -64,7 +64,7 @@
     
     <?php
       if ($current_is_reviews) {
-        echo '<div id="all-reviews-snippet"><span id="count" property="v:count">99</span> Reviews for <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr">, with average rating of <span id="rating" rel="v:rating"><span typeof="v:Rating"><span property="v:best">5</span></span></span></span>';
+        echo '<div id="all-reviews-snippet"><span id="count" property="v:count">99</span> Reviews for <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr">, with top rating of <span id="rating" property="v:rating">5</span></span>';
       }
       
       // Hide comments, tags, and links now so that we can render them later.
