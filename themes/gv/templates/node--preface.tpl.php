@@ -21,16 +21,13 @@
     <h1 class="preface" <?php echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
         <?php 
           echo $title; 
-          global $user;
-          if ($user->uid == 1) {
-            dpm($_SERVER);
+            // Add G+ provile link and authorship for some pages.
             $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
             if (in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
-              
               //echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
               echo ' <a class="gplus" title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
             }
-          }
+
         ?>
     </h1>
 
