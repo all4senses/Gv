@@ -312,6 +312,22 @@ function gv_blocks_block_view($delta = '') {
  * Returns a snippet providing a data for all reviews aggregator data for Google search.
  */
 function gv_blocks_getGoogleAllReviewsSnippet() {
+  
+  global $user;
+  if ($user->uid == 1) {
+    
+    
+    
+    $query = db_select('votingapi_vote', 'v');
+    $query->condition('v.value_type', 'percent')
+          ->condition('v.tag', 'overall');
+    //$votes = $query->execute();
+    $countQuery = $query->countQuery();
+    $num_votes = $countQuery->execute()->fetchField();
+    dpm($num_votes);
+    
+  }
+  
   variable_set('gv_allReviewsAmount', 98);
   
   $allReviewsAmount = variable_get('gv_allReviewsAmount');
