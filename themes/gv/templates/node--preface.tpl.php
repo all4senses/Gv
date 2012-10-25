@@ -23,6 +23,8 @@
           echo $title; 
           global $user;
           if ($user->uid == 1) {
+            dpm($_GET);
+            dpm($_SERVER);
             echo ' <a class="gplus" title="Google+ profile of Samantha Kleary" href="https://plus.google.com/u/0/111924926980254330731?rel=author">(G+)</a>';
           }
         ?>
