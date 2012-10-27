@@ -2271,7 +2271,7 @@ function theme_gv_misc_image(array $variables) {
   global $user;
   if (!$user->uid && !$variables['width']) {
     $size = getimagesize($variables['path']);
-    $image = theme('image', array('width' => $size[0] . 'px', 'height' => $size[1] . 'px', 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
+    $image = theme('image', array('width' => $size[0], 'height' => $size[1], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
   }
   else {
     $image = theme('image', array('width' => $variables['width'], 'height' => $variables['height'], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));
