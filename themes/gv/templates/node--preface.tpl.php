@@ -16,10 +16,31 @@
   <?php //print $user_picture; ?>
 
 
-  <?php print render($title_prefix); ?>
+  <?php 
+      echo render($title_prefix); 
+      
+      // Define if this page should contain G+ provile link and authorship,
+      // And if it's a ALL reviews page.
+      $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
+      $current_is_reviews = FALSE;
+      $current_is_with_gplus_author = FALSE;
+      if (isset($_SERVER['REDIRECT_URL']) && in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
+        $current_is_with_gplus_author = TRUE;
+        if ($_SERVER['REDIRECT_URL'] == '/providers/reviews') {
+          $current_is_reviews =  TRUE;
+        }
+      }
+  
+  ?>
 
-    <h1 class="preface" <?php print /*$title_attributes*/preg_replace('/datatype=""/', '', $title_attributes); ?>>
-        <?php print $title; ?>
+    <h1 class="preface" <?php /*echo preg_replace('/datatype=""/', '', $title_attributes);*/ if ($current_is_reviews) {echo ' property="dc:title v:summary"';} else {echo preg_replace('/datatype=""/', '', $title_attributes);} ?>>
+        <?php 
+          echo $title; 
+          // Add G+ provile link and authorship for some pages.
+          if ($current_is_with_gplus_author) {
+            echo ' <a title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author"></a>';
+          }
+        ?>
     </h1>
 
   <?php print render($title_suffix); ?>
@@ -29,8 +50,19 @@
     <span class="submitted"><?php print $submitted; ?></span>
   <?php endif; ?>
 
-  <div class="content page preface"<?php print $content_attributes; ?>>
+  <div class="content page preface" 
+    <?php 
+    echo $content_attributes;
+//    if ($current_is_reviews) {
+//      echo ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"';
+//    }
+  ?>>
+    
     <?php
+//      if ($current_is_reviews) {
+//        echo '<div id="all-reviews-snippet">Total of <span id="count" property="v:count">99</span> Reviews for all <span id="itemreviewed" property="v:itemreviewed">VoIP Providers</span><span class="rating-descr" style="display: none;">, with top rating of <span id="rating" property="v:rating">5</span></span>';
+//      }
+      
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
