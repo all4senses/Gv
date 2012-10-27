@@ -99,7 +99,8 @@
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 ////error.insertAfter("#buying_time");
-                error.insertAfter("#on_error");
+                ////error.insertAfter("#on_error");
+              error.insertAfter(".step");
               
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 error.insertAfter("#phone");
