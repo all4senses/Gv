@@ -3222,7 +3222,7 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
       
       if (@$main_image['uri']) {
         //$out = '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => @$main_image['alt'], 'title' => $data['data']->node_title)) . '</div>';
-        $out = '<div class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'path' => $main_image['uri'], 'alt' =>  @$main_image['alt'], 'title' => $data['data']->node_title )) . '</div>';
+        $out = '<span class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'path' => $main_image['uri'], 'alt' =>  @$main_image['alt'], 'title' => $data['data']->node_title )) . '</span>';
       }
 
       return $out;
