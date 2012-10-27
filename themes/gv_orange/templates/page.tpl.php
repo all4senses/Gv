@@ -19,7 +19,7 @@
       
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print t('GetVoIP Home'); ?>" id="logo">
-          <img src="<?php print 'http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png'; ?>" alt="<?php print t('GetVoIP Home'); ?>" title="<?php print t('GetVoIP Home'); ?>" />
+          <img src="<?php print 'http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png'; ?>" alt="VoIP Service Providers" title="<?php print t('GetVoIP Home'); ?>" />
         </a>
         <div class="descr">
           <div class="title">2012 VOIP GUIDE</div>
