@@ -26,6 +26,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
+  $blocks['main_menu_om_voip_reviews'] = array(
+    'info' => t('OM VoIP Reviews'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['main_menu_om_voiplibrary'] = array(
     'info' => t('OM VoIP Library'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -174,6 +179,14 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('OM Residential VoIP');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Residential VoIP', 'gv_blocks_get_omMenuBlock_Providers');
       break;    
+    
+  case 'main_menu_om_voip_reviews':
+      $block['subject'] = t('OM VoIP Reviews');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Reviews', 'gv_blocks_get_omMenuBlock_Providers');
+      break;    
+    
+    
+    
     case 'main_menu_om_blog':
       $block['subject'] = t('OM Blog');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Blog', 'gv_blocks_get_omMenuBlock_Blog');
