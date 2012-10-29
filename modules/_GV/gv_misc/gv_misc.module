@@ -2787,7 +2787,7 @@ function gv_misc_views_pre_render(&$view) {
       $p_key = $key;
       $r_p_types = array('view-reviews-block_all_reviews_bu' => array('business', 'Business'), 
                          'view-reviews-block_all_reviews_re' => array('residential', 'Residential'),
-                         'view-reviews-block_all_reviews_ca' => array(array('re_ca', 'bu_ca'), 'Canadian')
+                         'view-reviews-block_all_reviews_ca' => array(array('re_ca', 'bu_ca'), '') //'Canadian'
                         );
       gv_misc_getProviders($providers, 'all_by_service_type', $r_p_types[$p_key][0]);
 
