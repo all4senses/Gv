@@ -36,7 +36,7 @@
               <div class="phone photo">
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_image'][0]['#item']['alt'], 'title' => $content['field_p_image'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))); 
+                    echo theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'phone_page_main', 'alt' => $content['field_p_image'][0]['#item']['alt'], 'title' => $content['field_p_image'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))); 
                   }
                 ?>
               </div>
