@@ -3294,7 +3294,7 @@ function gv_pages_node_view($node, $view_mode) {
       $node->pros_and_cons = $extra_data['pros_and_cons'];
       $node->specs = '';
       foreach ($extra_data['specs'] as $spec_title => $spec_value) {
-        $node->specs .= '<div><span class="title">' . $spec_title . '</span><class="value">' . (is_int($spec_value) ? ($spec_value ? 'Yes' : 'No') : $spec_value) . '</span>';
+        $node->specs .= '<div><span class="title">' . $spec_title . '</span><span class="value">' . (is_int($spec_value) ? ($spec_value ? 'Yes' : 'No') : $spec_value) . '</span>';
       }
       $node->specs = '<div class="specs">' . $node->specs . '</div>';
       
