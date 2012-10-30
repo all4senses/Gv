@@ -211,9 +211,7 @@
                         
                             <?php if(1): ?>
 
-                              <?php 
-                                echo gv_blocks_getSocialiteButtons($url, $title); 
-                              ?> 
+                              <?php echo gv_blocks_getSocialiteButtons($url, $title); ?> 
 
                             <?php else: ?> 
         

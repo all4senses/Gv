@@ -6,24 +6,20 @@
   <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
         <?php if ($page): ?>
-          <?php print render($title_prefix); ?>
           <h1<?php //print $title_attributes; ?> property="dc:title v:summary">
                 <?php 
                   print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) )
                 ?>
           </h1>
-          <?php print render($title_suffix); ?>
    
         <?php else: ?>
           <header>
         
-            <?php print render($title_prefix); ?>
             <h2<?php //print $title_attributes; ?> property="dc:title v:summary">
                 <a href="<?php print $node_url; ?>">
                   <?php print $title; ?>
                 </a>
             </h2>
-            <?php print render($title_suffix); ?>
         
           </header>
         <?php endif; ?>
