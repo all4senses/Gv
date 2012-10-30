@@ -43,13 +43,13 @@
                 
               <div class="pros-and-cons">
                 <div>
-                  <span>The good:</span><?php dpm($node); echo 'Good!'; ?>
+                  <span>The good:</span><?php dpm($node); echo $node->pros_and_cons['The good']; ?>
                 </div>
                 <div>
-                  <span>The bad:</span><?php echo 'Not bad!'; ?>
+                  <span>The bad:</span><?php echo $node->pros_and_cons['The bad']; ?>
                 </div>
                 <div>
-                  <span>The bad:</span><?php echo 'Not bad!'; ?>
+                  <span>The bad:</span><?php echo $node->pros_and_cons['The bottom line']; ?>
                 </div>
                 
               </div>
