@@ -886,9 +886,65 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'phone_node_form':
       
       dpm($form);
-      $data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
-      dpm($data);
+      $extra_data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
+      dpm($extra_data);
       $form['field_extra_data']['#access'] = FALSE;
+      
+      // Fix a summary height.
+      //unset($form['body']['und'][0]['summary']['#attached']['js']);
+      // Fix Ckeditor intrusion results.
+      if (trim($form['body']['und'][0]['summary']['#default_value']) == '<br />') {
+        $form['body']['und'][0]['summary']['#default_value'] = '';
+      }
+      
+      $specs = array(
+        //'Manufacturer' => 'textfield', //Cisco
+        //'Type' => 'textfield', //Desktop
+        '# of RJ45 Ports' => 'textfield', //2 
+        '# of Lines' => 'textfield', //4
+        '3 way conference' => 'checkbox', //Yes
+        'AC Power Supply Included' => 'checkbox', //No
+        'Backlit-LCD' => 'checkbox', //Yes
+        'Built-In Bluetooth' => 'checkbox', //No
+        'Built-In WiFi' => 'checkbox', //No
+        'Color Screen' => 'checkbox', //No
+        'Desktop Paging' => 'checkbox', //Yes
+        'Display Type' => 'textfield', //Enhanced
+        'EHS Support' => 'checkbox', //No
+        'Gigabit Ethernet Support' => 'checkbox', //No
+        'Headset Interface' => 'textfield', //2.5mm
+        'Mass Provisioning' => 'checkbox', //Yes
+        'MWI Support' => 'checkbox', //Yes
+        'Peripheral ports' => 'textfield', //AUX
+        'PoE Compatible' => 'checkbox', //Yes
+        'Protocol Supported' => 'textfield', //SIP, SPCP
+        'Provisioning Method' => 'textfield', //HTTP, HTTPS, TFTP, WEB GUI
+        'Sidecar Compatible' => 'checkbox', //Yes
+        'Speakerphone' => 'textfield', //Full-Duplex
+        'Supported Codecs' => 'textfield', //G.722, G.726, G.729 a/b, G.711 u/a law
+        'Touch Screen' => 'checkbox', //No
+        'Voicemail Button' => 'checkbox', //Yes
+        'Wideband Voice Protocol' => 'textfield', //Cisco Wideband
+      );
+      
+      $form['data_specs'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Spec'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#tree' => TRUE,
+        '#weight' => 10,
+      );
+      foreach($specs as $spec_title => $spec_field_type) {
+        $form['data_specs'][$spec_title] = array(
+          '#type' => $spec_field_type,
+          '#title' => $spec_title,
+          '#default_value' => isset($extra_data['specs'][$spec_title]) ? $extra_data['specs'][$spec_title] : ($spec_field_type == 'textfield' ? '' : FALSE),
+        );
+      }
+      
+      
+       
       
       break;
     
