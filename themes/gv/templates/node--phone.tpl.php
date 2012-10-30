@@ -121,13 +121,13 @@
                       <?php echo render($content['body']); ?>
                     </div>
                     <div id="tabs-2">
-                      <?php echo render($content['body']); ?>
+                      <?php echo 'Editor\'s rating'; ?>
                     </div>
                     <div id="tabs-3">
-                      <?php echo render($content['body']); ?>
+                      <?php echo $node->specs; ?>
                     </div>
                     <div id="tabs-4">
-                      <?php echo render($content['body']); ?>
+                      <?php echo 'Reviews...'; ?>
                     </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>
