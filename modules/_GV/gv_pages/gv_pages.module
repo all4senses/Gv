@@ -887,17 +887,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       dpm($form);
       $extra_data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
-      dpm($extra_data);
+      //dpm($extra_data);
       $form['field_extra_data']['#access'] = FALSE;
       
       $form['field_p_name']['#weight'] = 1;
-      $form['field_p_image']['#weight'] = 2;
-      $form['field_phone_type']['#weight'] = 3;
-      $form['field_manufacturer']['#weight'] = 4;
-      
+      $form['field_phone_type']['#weight'] = 2;
+      $form['field_manufacturer']['#weight'] = 3;
+      $form['field_p_image']['#weight'] = 4;
       
       $form['body']['#weight'] = 5;
-      
       
       // Fix a summary height.
       //unset($form['body']['und'][0]['summary']['#attached']['js']);
