@@ -948,7 +948,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         );
       }
       
-      
+      $form['#validate'][] = 'gv_pages_validateForm_phone';
        
       
       break;
@@ -2361,6 +2361,27 @@ function gv_pages_submitForm_article(&$form, &$form_state) {
   else {
     $form_state['values']['status'] = 1;
   }
+}
+
+
+
+/**
+ * Custom validate of Phone type form.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_phone(&$form, &$form_state) {
+  dpm($form_state);
+  $extra_data = array();
+  // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
+  form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data)))), $form_state);
 }
 
 
