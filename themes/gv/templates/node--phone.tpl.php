@@ -49,7 +49,7 @@
                   <span>The bad:</span><?php echo $node->pros_and_cons['The bad']; ?>
                 </div>
                 <div>
-                  <span>The bad:</span><?php echo $node->pros_and_cons['The bottom line']; ?>
+                  <span>The bottom line:</span><?php echo $node->pros_and_cons['The bottom line']; ?>
                 </div>
                 
               </div>
