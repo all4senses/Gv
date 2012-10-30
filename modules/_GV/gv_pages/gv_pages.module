@@ -916,7 +916,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       foreach($pros_and_cons_descrs as $pros_and_cons_title) {
         $form['data_pros_and_cons'][$pros_and_cons_title] = array(
           '#type' => 'textarea',
-          '#title' => $spec_title,
+          '#title' => $pros_and_cons_title,
           '#default_value' => isset($extra_data['pros_and_cons'][$pros_and_cons_title]) ? $extra_data['pros_and_cons'][$pros_and_cons_title] : '',
         );
       }
