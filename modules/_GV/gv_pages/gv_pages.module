@@ -883,6 +883,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     
     
+    case 'phone_node_form':
+      
+      dpm($form);
+      $data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
+      dpm($data);
+      $form['field_extra_data']['#access'] = FALSE;
+      
+      break;
+    
+    
+    
     
     
     case 'quote_node_form':
