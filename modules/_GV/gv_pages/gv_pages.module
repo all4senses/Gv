@@ -985,7 +985,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['in_the_box'] = array(
         '#type' => 'text_format',
         '#title' => 'In the Box',
-        '#format' => 'filtered_html',
+        '#format' => 'full_html',
         '#default_value' => isset($extra_data['In the Box']) ? $extra_data['In the Box'] : '',
       );
       
