@@ -11,7 +11,6 @@
                   print $title; 
                 ?>
           </h1>
-   
         <?php else: ?>
           <header>
         
@@ -20,9 +19,9 @@
                   <?php print $title; ?>
                 </a>
             </h2>
-            
-            
-            
+        <?php endif; ?>
+    
+          
             <span class="submitted">
               <?php 
 
@@ -77,7 +76,10 @@
 
               ?>
             </span>
-        
+
+            
+            
+        <?php if (!$page): ?>
           </header>
         <?php endif; ?>
     
