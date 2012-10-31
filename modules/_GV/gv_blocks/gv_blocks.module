@@ -578,7 +578,12 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   if (is_array($block['content'])) {
     $block['content'] = render($block);
   }
-  
+  if(isset($block_data['subjectTag']) && $block_data['subjectTag']) {
+    $subjectTag = $block_data['subjectTag'];
+  }
+  else {
+    $subjectTag = 'h2';
+  }
   if(isset($block_data['replaceUnderlinesWithDashesInID']) && $block_data['replaceUnderlinesWithDashesInID']) {
     $block_data['module'] = str_replace('_', '-', $block_data['module']);
     $block_data['delta'] = str_replace('_', '-', $block_data['delta']);
@@ -589,7 +594,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
         . '<div class="inside">'
             . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )
                 ? 
-                '<div class="block-icon pngfix"></div><h2 class="block-title">' . $block['subject'] . '</h2>'
+                '<div class="block-icon pngfix"></div><' . $subjectTag . ' class="block-title">' . $block['subject'] . '</' . $subjectTag . '>'
                 :
                 '') 
             . '<div class="content">' . $block['content'] . '</div>
@@ -602,7 +607,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
       '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . '">' 
          . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )
             ? 
-            '<div class="block-icon pngfix"></div><h2 class="block-title">' . $block['subject'] . '</h2>'
+            '<div class="block-icon pngfix"></div><' . $subjectTag . ' class="block-title">' . $block['subject'] . '</' . $subjectTag . '>'
             :
             '') 
          . '<div class="content">' . $block['content'] . '</div>
