@@ -43,13 +43,13 @@
                 
               <div class="pros-and-cons">
                 <div>
-                  <span>The good:</span><?php /*dpm($node);*/ echo $node->pros_and_cons['The good']; ?>
+                  <span>The good:</span><?php /*dpm($node);*/ echo $node->extra_data['pros_and_cons']['The good']; ?>
                 </div>
                 <div>
-                  <span>The bad:</span><?php echo $node->pros_and_cons['The bad']; ?>
+                  <span>The bad:</span><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
                 </div>
                 <div>
-                  <span>The bottom line:</span><?php echo $node->pros_and_cons['The bottom line']; ?>
+                  <span>The bottom line:</span><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?>
                 </div>
                 
               </div>
@@ -116,6 +116,8 @@
                       <li><a href="#tabs-2">Editor's Rating</a></li>
                       <li><a href="#tabs-3">Technical Specs</a></li>
                       <li><a href="#tabs-4">User Reviews</a></li>
+                      <li><a href="#tabs-5">Downloads</a></li>
+                      <li><a href="#tabs-6">In the Box</a></li>
                     </ul>
                     <div id="tabs-1">
                       <?php echo render($content['body']); ?>
@@ -128,6 +130,12 @@
                     </div>
                     <div id="tabs-4">
                       <?php echo 'Reviews...'; ?>
+                    </div>
+                    <div id="tabs-5">
+                      <?php echo $node->extra_data['downloads']; ?>
+                    </div>
+                    <div id="tabs-6">
+                      <?php echo $node->extra_data['in_the_box']; ?>
                     </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>
