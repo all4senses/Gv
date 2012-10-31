@@ -2918,8 +2918,8 @@ function gv_pages_submitForm_article(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_validateForm_phone(&$form, &$form_state) {
-  dpm($form_state);
-  $extra_data = array('specs' => $form_state['values']['data_specs'], 'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 'downloads' => $form_state['values']['downloads'], 'in_the_box' => $form_state['values']['in_the_box']);
+  //dpm($form_state);
+  $extra_data = array('specs' => $form_state['values']['data_specs'], 'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 'downloads' => $form_state['values']['downloads']['value'], 'in_the_box' => $form_state['values']['in_the_box']['value']);
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data)))), $form_state);
 }
