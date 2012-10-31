@@ -2554,6 +2554,34 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
     
 
 /**
+ * Returns all available phones array with nid => title.
+ */
+function gv_misc_getPhones(&$phones, $scope = 'all', $data = NULL) {
+  
+  if ($scope == 'all') {
+    $query = db_select('node', 'n');
+    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
+    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
+    $query->fields('n', array('nid', 'title'))  
+          //->fields('pt', array('field_p_types_value'))
+          ->fields('pn', array('field_p_name_value')) 
+          ->condition('n.type', 'phone')
+          ->condition('n.status', 1); 
+    $result = $query->execute(); 
+
+    foreach($result as $phone) {
+      $phones[$phone->nid] = $phone->field_p_name_value;// . ' - ' . $phone->field_p_types_value; // = $phone->title;
+    }
+
+    // Sort phones alphabetically.
+    //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
+    //asort($phones); 
+    natcasesort($phones);
+  }
+}
+
+
+/**
  * Checks if the email is already taken by one of the site's registered user.
  */
 function gv_misc_emailIsRegistered($email) {
