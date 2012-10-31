@@ -4135,6 +4135,7 @@ function gv_pages_node_view($node, $view_mode) {
       // Phone specs
 
       // Add a Manufacturer and a type first.
+      dpm($node);
       $node->specs = '<tr><td class="title">Manufacturer</td><td class="value">' . $node->field_manufacturer['und'][0]['taxonomy_term']->name . '</td></tr>
                       <tr><td class="title">Phone type</td><td class="value">' . $node->field_phone_type['und'][0]['value'] . '</td></tr>';
       
