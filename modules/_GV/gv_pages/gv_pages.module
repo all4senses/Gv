@@ -978,8 +978,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['downloads'] = array(
         '#type' => 'text_format',
         '#title' => 'Downloads',
-        '#format' => 'gv_full_html',
+        '#format' => 'full_html',
         '#default_value' => isset($extra_data['Downloads']) ? $extra_data['Downloads'] : '',
+        '#weight' => 11,
       );
       
       $form['in_the_box'] = array(
@@ -987,6 +988,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#title' => 'In the Box',
         '#format' => 'full_html',
         '#default_value' => isset($extra_data['In the Box']) ? $extra_data['In the Box'] : '',
+        '#weight' => 12,
       );
       
       $form['#validate'][] = 'gv_pages_validateForm_phone';
