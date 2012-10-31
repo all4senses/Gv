@@ -1743,6 +1743,8 @@ function gv_misc_getYoutubeVideoThumb($video_id) {
 function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
+  // iframes (wide and narrow) for business voip providers chart.
+  /*
   if (@arg(1) == 'narrow') {
     $out .= '<iframe id="bu-chart" src="http://getvoip.com/get/iframe/business-voip-chart/narrow" scrolling="no" width="590px" frameborder="0" seamless="seamless"></iframe>';
   }
@@ -1758,25 +1760,12 @@ function gv_misc_testPage() {
         //alert(document.getElementById("bu-chart").style.height);
       }
     </SCRIPT>';
-
-  
-  /*
-  <iframe id="bu-chart" src="http://getvoip.com/get/iframe/business-voip-chart" scrolling="no" width="822px" frameborder="0" seamless="seamless"></iframe>
-  <SCRIPT>
-      function setGvIframeSize(pixels) {
-        document.getElementById("bu-chart").style.height=pixels+"px";
-      }
-  </SCRIPT>
+   */
+ 
+  $out .= '<iframe id="gv-quote-request-block" src="http://getvoip.com/get/iframe/quote-request-block" scrolling="no" width="240px" height="322px" frameborder="0" seamless="seamless"></iframe>';
   
   
   
-  <iframe id="bu-chart" src="http://getvoip.com/get/iframe/business-voip-chart/narrow" scrolling="no" width="590px" frameborder="0" seamless="seamless"></iframe>
-  <SCRIPT>
-      function setGvIframeSize(pixels) {
-        document.getElementById("bu-chart").style.height=pixels+"px";
-      }
-  </SCRIPT>
-  */
   echo $out . '<br>End of Test';
 }
 
