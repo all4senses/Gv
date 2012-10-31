@@ -110,14 +110,13 @@
               
                       
               <div class="data tabs">
-
                     <ul>
                       <li><a href="#tabs-1">Editor's Review</a></li>
-                      <li><a href="#tabs-2">Editor's Rating</a></li>
+                      <li><a href="#tabs-2">Rating</a></li>
                       <li><a href="#tabs-3">Technical Specs</a></li>
-                      <li><a href="#tabs-4">User Reviews</a></li>
                       <li><a href="#tabs-5">Downloads</a></li>
                       <li><a href="#tabs-6">In the Box</a></li>
+                      <li><a href="#tabs-4">User Reviews</a></li>
                     </ul>
                     <div id="tabs-1">
                       <?php echo render($content['body']); ?>
