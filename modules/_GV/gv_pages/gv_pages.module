@@ -976,16 +976,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       $form['downloads'] = array(
-        '#type' => 'textarea',
+        '#type' => 'text_format',
         '#title' => 'Downloads',
         '#format' => 'gv_full_html',
         '#default_value' => isset($extra_data['Downloads']) ? $extra_data['Downloads'] : '',
       );
       
       $form['in_the_box'] = array(
-        '#type' => 'textarea',
+        '#type' => 'text_format',
         '#title' => 'In the Box',
-        '#format' => 'full_html',
+        '#format' => 'filtered_html',
         '#default_value' => isset($extra_data['In the Box']) ? $extra_data['In the Box'] : '',
       );
       
