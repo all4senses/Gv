@@ -2393,7 +2393,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => -15,
       );
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
-          $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, 'field_r_lname' => LNAME_HINT, 'field_r_email' => EMAIL_HINT);
+          $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, /*'field_r_lname' => LNAME_HINT,*/ 'field_r_email' => EMAIL_HINT);
           foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
             $temp_field = $form[$field_to_rebuild]['und'][0];
             $form['about_you'][$field_to_rebuild . '_temp'] = array(
@@ -2407,7 +2407,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $form[$field_to_rebuild]['#access'] = FALSE;
           }
           $form['about_you']['field_r_fname_temp']['#title'] = t('Your name');
-          $form['about_you']['field_r_lname_temp']['#title'] = '';
+          //$form['about_you']['field_r_lname_temp']['#title'] = '';
           
           
           
@@ -2424,15 +2424,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['field_r_data']['#access'] = FALSE;
           
           
-          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
-          $form['phone']['lines'] = array(
-            '#type' => 'radios',
-            //'#title' => t('How many lines do you have:'),
-            '#options' => $lines_options,
-            '#default_value' => FALSE,
-            '#weight' => 100,
-            '#prefix' => '<div class="label left">' . t('How many lines do you have:') . '</div>',
-          );
+          
+          
+          
+          
+//          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
+//          $form['phone']['lines'] = array(
+//            '#type' => 'radios',
+//            //'#title' => t('How many lines do you have:'),
+//            '#options' => $lines_options,
+//            '#default_value' => FALSE,
+//            '#weight' => 100,
+//            '#prefix' => '<div class="label left">' . t('How many lines do you have:') . '</div>',
+//          );
           
           
       
@@ -2489,18 +2493,28 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // just for reference from a below call
           //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
       
-          $form['ureview']['pros'] = array(
-            '#type' => 'textfield',
-            '#title' => t('Pros'),
-            '#default_value' => '',
-            '#attributes' => array('title' => t(PROS_HINT)),
-          );
-          $form['ureview']['cons'] = array(
-            '#type' => 'textfield',
-            '#title' => t('Cons'),
-            '#default_value' => '',
-            '#attributes' => array('title' => t(CONS_HINT)),
-          );
+          
+          
+          
+          
+          
+//          $form['ureview']['pros'] = array(
+//            '#type' => 'textfield',
+//            '#title' => t('Pros'),
+//            '#default_value' => '',
+//            '#attributes' => array('title' => t(PROS_HINT)),
+//          );
+//          $form['ureview']['cons'] = array(
+//            '#type' => 'textfield',
+//            '#title' => t('Cons'),
+//            '#default_value' => '',
+//            '#attributes' => array('title' => t(CONS_HINT)),
+//          );
+          
+          
+          
+          
+          
           
           
           //$form['body']['#weight'] = 2;
@@ -2544,7 +2558,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
           //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
           $form['about_you']['field_r_fname_temp']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          $form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          //////$form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
           $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
           
           // Disallow to choose another email for a registered user.
@@ -2663,9 +2677,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Show saved it a hidden field other data
         if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
           $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
-          $form['phone']['lines']['#default_value'] = $other_data['lines'];
-          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
-          $form['ureview']['cons']['#default_value'] = $other_data['cons'];
+          
+          
+          
+          
+//          $form['phone']['lines']['#default_value'] = $other_data['lines'];
+//          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
+//          $form['ureview']['cons']['#default_value'] = $other_data['cons'];
+          
+          
+          
           
           $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
           if ($current_user_is_admin) {
@@ -3252,7 +3273,7 @@ function gv_pages_validateForm_phoneReview(&$form, &$form_state) {
 
   
   // Clear hints, if any.
-  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
+  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), /*'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')),*/ 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
   foreach ($fields_to_clear_hints as $fname => $fdata) {
    
     if ($form_state['values'][$fname] == t($fdata['hint'])) {
@@ -3280,7 +3301,7 @@ function gv_pages_validateForm_phoneReview(&$form, &$form_state) {
   // Rebuild original fields field_r_fname, field_r_lname, field_r_email from temporary fields fields field_r_fname_temp, field_r_lname_temp, field_r_email_temp
   // Without this (with just rewriting those field with its simplified versions) Drupal will fire errors like eg Warning: array_values() expects parameter 1 to be array, string given in _field_filter_items()...)
   form_set_value($form['field_r_fname'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_fname_temp']) ? $form_state['values']['field_r_fname_temp'] : NULL ))), $form_state);
-  form_set_value($form['field_r_lname'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_lname_temp']) ? $form_state['values']['field_r_lname_temp'] : NULL ))), $form_state);
+  ////form_set_value($form['field_r_lname'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_lname_temp']) ? $form_state['values']['field_r_lname_temp'] : NULL ))), $form_state);
   form_set_value($form['field_r_email'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_email_temp']) ? $form_state['values']['field_r_email_temp'] : NULL ))), $form_state);
 
   // Check if a not logged in user has entered an email which is already is taken with one of our registered user.
@@ -3328,14 +3349,14 @@ function gv_pages_validateForm_phoneReview(&$form, &$form_state) {
   // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
   // OR it its data may remain, if the review is not approved OR it's for not listed provider
   
-  if (!$form_state['values']['lines']) {
-    form_set_error('lines',t('Please set a numbers of lines'));
-  }
-  else {
+//  if (!$form_state['values']['lines']) {
+//    form_set_error('lines',t('Please set a numbers of lines'));
+//  }
+//  else {
     // Save several vars in the field
-    $field_r_data = serialize(array('saved_ratings' => $votes, 'lines' => $form_state['values']['lines'], 'pros' => $form_state['values']['pros'], 'cons' => $form_state['values']['cons'], 'user_ip' => $form_state['values']['user_ip']));
+    $field_r_data = serialize(array('saved_ratings' => $votes, /*'lines' => $form_state['values']['lines'], 'pros' => $form_state['values']['pros'], 'cons' => $form_state['values']['cons'],*/ 'user_ip' => $form_state['values']['user_ip']));
     form_set_value($form['field_r_data'], array('und' => array(0 => array('value' => $field_r_data))), $form_state);
-  }
+//  }
 
   
   
@@ -3859,6 +3880,14 @@ function gv_pages_node_presave($node) {
     }
     
   } // End of if ($node->type == 'review') {
+  
+  
+  
+  
+  
+  
+  
+  
   elseif ($node->type == 'phone_review') {
     
     // Unpublish, if is not approved... and publish if approved.
@@ -3941,7 +3970,7 @@ function gv_pages_node_presave($node) {
         
         // Save a phone name to the review
         $phone = node_load($phone_nid);
-        $node->field_r_pphone_name['und'][0]['value'] = $phone->field_p_name['und'][0]['value'];
+        $node->field_p_name['und'][0]['value'] = $phone->field_p_name['und'][0]['value'];
 
     
   } // End of if ($node->type == 'phone_review') {
