@@ -6,14 +6,26 @@
  */
 
 // Ratings titles.
-define('SOUND', 'Sound/Call Quality');
 define('INSTALL', 'Installation Process');
-define('CUSTOMER', 'Customer Experience');
-define('RELY', 'Service Reliability');
 define('FEATURES', 'Features');
 define('PRICE', 'Price');
 define('OVERALL', 'Overall Average Rating');
+
+define('SOUND', 'Sound/Call Quality');
+define('CUSTOMER', 'Customer Experience');
+define('RELY', 'Service Reliability');
 define('RECOMMEND', 'Would you recommend this VoIP provider?');
+
+// Phones only
+define('USE_EASE', 'Ease of Use');
+define('VOICE', 'Voice Quality');
+define('DURABILITY', 'Durability');
+define('PERFORMANCE', 'Value Performance');
+define('RECOMMEND_PHONE', 'Would you recommend this VoIP phone?');
+
+
+
+
 
 // Fields hints.
 define('FNAME_HINT', 'First');

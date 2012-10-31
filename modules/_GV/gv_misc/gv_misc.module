@@ -61,6 +61,14 @@ function gv_misc_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   
+  $items['admin/content/phone-reviews-to-approve'] = array(
+    'title' => 'Phone reviews to Approve',
+    'page callback' => 'gv_misc_gotoPhoneReviewsToApprove',
+    //'access arguments' => array('administer content'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   $items['approve/%/%'] = array(
     'title' => 'Approve content',
     'page callback' => 'gv_misc_approveContent',
@@ -986,6 +994,14 @@ function gv_misc_getVotesIDs($criteria) {
  */
 function gv_misc_gotoReviewsToApprove() {
   drupal_goto('admin/content/approve-reviews');
+}
+
+
+/**
+ * Helper function to for administer menu.
+ */
+function gv_misc_gotoPhoneReviewsToApprove() {
+  drupal_goto('admin/content/approve-phone-reviews');
 }
 
 
@@ -1993,7 +2009,7 @@ GetVoIP Team
     
     
     case 'new_review_admin_notify':
-      $message['subject'] = t('New review for "!provider" has been submitted', array('!provider' => $params['provider_name']));
+      $message['subject'] = t('New Provider review for "!provider" has been submitted', array('!provider' => $params['provider_name']));
       $message['body'][] = t('Dear administrator!
 
 A new review for the provider "!provider" just has been submitted. Please approve or discard it at !pending_reviews.
@@ -2005,6 +2021,25 @@ Get VoIP team
 ', array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!provider' => $params['provider_name']));
       
       break;
+    
+    
+    
+    
+    
+    case 'new_phone_review_admin_notify':
+      $message['subject'] = t('New Phone review for "!phone" has been submitted', array('!phone' => $params['phone_name']));
+      $message['body'][] = t('Dear administrator!
+
+A new review for the phone "!phone" just has been submitted. Please approve or discard it at !pending_reviews.
+
+Please, don\'t forget to log in to access this page.
+
+Best wishes,
+Get VoIP team
+', array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-phone-reviews', '!phone' => $params['phone_name']));
+      
+      break;
+    
     
   }
 }  
