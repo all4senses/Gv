@@ -932,8 +932,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $specs = array(
         //'Manufacturer' => 'textfield', //Cisco
         //'Type' => 'textfield', //Desktop
-        "\# of RJ45 Ports" => 'textfield', //2 
-        "\# of Lines" => 'textfield', //4
+        'Num of RJ45 Ports' => 'textfield', //2 
+        'Num of Lines' => 'textfield', //4
         '3 way conference' => 'checkbox', //Yes
         'AC Power Supply Included' => 'checkbox', //No
         'Backlit-LCD' => 'checkbox', //Yes
@@ -4139,6 +4139,7 @@ function gv_pages_node_view($node, $view_mode) {
                       <tr><td class="title">Phone type</td><td class="value">' . $node->field_phone_type['und'][0]['value'] . '</td></tr>';
       
       foreach ($extra_data['specs'] as $spec_title => $spec_value) {
+        $spec_title = str_replace('Num ', '# ', $spec_title);
         $spec_value = (is_int($spec_value) ? ($spec_value ? 'Yes' : 'No') : ($spec_value ? $spec_value : 'N/A'));
         $node->specs .= '<tr><td class="title">' . $spec_title . '</td><td class="value">' . $spec_value . '</td></tr>';
       }
