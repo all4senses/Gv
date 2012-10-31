@@ -2606,6 +2606,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           else {
             $phone_id_source = t('your choice while viewing this phone\'s page');
           }
+          dpm('$phone_id_source = ' . $phone_id_source);
+          dpm('$phone_nid = ' . $phone_nid);
+          dpm('$phones = ' . $phones);
         }
         elseif ($_SERVER['HTTP_REFERER']) {
           // If a user has clicked "Submit a review" on the phone's page, treat it as choice of that phone.
