@@ -193,7 +193,7 @@
                       <?php echo $node->extra_data['in_the_box']; ?>
                     </div>
                     <div id="tabs-6">
-                      <?php echo l('Rate it', 'voip-phone-submit-user-review', array('query' => array('id' => $node->nid))); ?>
+                      <?php echo l('Rate it', 'voip-phone-submit-user-review', array('query' => array('nid' => $node->nid))); ?>
                     </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>
