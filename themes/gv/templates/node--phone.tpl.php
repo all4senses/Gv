@@ -173,27 +173,27 @@
                       <li><a href="#tabs-1">Editor's Review</a></li>
                       <li><a href="#tabs-2">Rating</a></li>
                       <li><a href="#tabs-3">Technical Specs</a></li>
-                      <li><a href="#tabs-5">Downloads</a></li>
-                      <li><a href="#tabs-6">In the Box</a></li>
-                      <li><a href="#tabs-4">User Reviews</a></li>
+                      <li><a href="#tabs-4">Downloads</a></li>
+                      <li><a href="#tabs-5">In the Box</a></li>
+                      <li><a href="#tabs-6">User Reviews</a></li>
                     </ul>
                     <div id="tabs-1">
                       <?php echo render($content['body']); ?>
                     </div>
                     <div id="tabs-2">
-                      <?php echo 'Editor\'s rating'; ?>
+                      <?php echo 'Rating'; ?>
                     </div>
                     <div id="tabs-3">
                       <?php echo $node->specs; ?>
                     </div>
                     <div id="tabs-4">
-                      <?php echo 'Reviews...'; ?>
-                    </div>
-                    <div id="tabs-5">
                       <?php echo $node->extra_data['downloads']; ?>
                     </div>
-                    <div id="tabs-6">
+                    <div id="tabs-5">
                       <?php echo $node->extra_data['in_the_box']; ?>
+                    </div>
+                    <div id="tabs-6">
+                      <?php echo l('Rate it', 'voip-phone-submit-user-review'); ?>
                     </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>
