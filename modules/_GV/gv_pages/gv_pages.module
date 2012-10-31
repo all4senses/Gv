@@ -2787,7 +2787,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
 
   
-  
+      $form['#attributes']['class'][] = 'gv-edit-review-page';
   
       $form['#validate'][] = 'gv_pages_validateForm_phoneReview';
       $form['#submit'][] = 'gv_pages_submitForm_phoneReview';
