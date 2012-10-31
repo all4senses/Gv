@@ -2578,7 +2578,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Set a select of available phones.
         $phones['_none'] = t('- Select a value -');
         gv_misc_getPhones($phones);
-        $phones[7] = t('OTHER SP');
+        //$phones[7] = t('OTHER SP');
         $form['phone']['field_ref_phone']['und']['#options'] = $phones;
         $form['phone']['field_ref_phone']['und']['#default_value'][0] = '_none';
 
