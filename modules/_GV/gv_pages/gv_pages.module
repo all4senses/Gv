@@ -974,7 +974,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#default_value' => isset($extra_data['specs'][$spec_title]) ? $extra_data['specs'][$spec_title] : ($spec_field_type == 'textfield' ? '' : FALSE),
         );
       }
-
+      
+      $form['downloads'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Downloads',
+        '#format' => 'gv_full_html',
+        '#default_value' => isset($extra_data['Downloads']) ? $extra_data['Downloads'] : '',
+      );
+      
+      $form['in_the_box'] = array(
+        '#type' => 'textarea',
+        '#title' => 'In the Box',
+        '#format' => 'filtered_html',
+        '#default_value' => isset($extra_data['In the Box']) ? $extra_data['In the Box'] : '',
+      );
       
       $form['#validate'][] = 'gv_pages_validateForm_phone';
        
