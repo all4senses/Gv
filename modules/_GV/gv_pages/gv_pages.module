@@ -2412,7 +2412,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //$form['about_you']['field_r_lname_temp']['#title'] = '';
           
           
-        dpm($form['field_ref_phone']);  
+        
       $form['phone'] = array(
         '#type' => 'fieldset',
         '#title' => t('Step 2: Your VoIP Phone Details'),
@@ -2592,12 +2592,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         
         // Set a select of available phones.
-        $phones['_none'] = t('- Select a value -');
-        gv_misc_getPhones($phones);
-        //$phones[7] = t('OTHER SP');
-        $form['phone']['field_ref_phone']['und']['#options'] = $phones;
-        $form['phone']['field_ref_phone']['und']['#default_value'][0] = '_none';
-
+        // As we use the entityReference field for phones and use only existing phones nodes
+        // we can just use prefilled field data.
+        //////////$phones['_none'] = t('- Select a value -');
+        ///////////gv_misc_getPhones($phones);
+        // $phones[7] = t('OTHER SP'); // we don't use it for phones. just for providers.
+        ////$form['phone']['field_ref_phone']['und']['#options'] = $phones;
+        ////$form['phone']['field_ref_phone']['und']['#default_value'][0] = '_none';
+        $phones = $form['phone']['field_ref_phone']['und']['#options'];
+        
         // Check if the review is added via a button on a phone's page.
         $phone_nid = NULL;
         if (isset($_GET['id'])) {
