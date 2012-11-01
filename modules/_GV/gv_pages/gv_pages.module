@@ -4300,7 +4300,7 @@ function gv_pages_node_view($node, $view_mode) {
     $display_name = 'block_phone_reviews';
     $view = views_get_view($view_name);
     
-    $viewsFilterOptions_nodeNid = array('id' => 'nid', 'value' => array('value' => 8160));
+    $viewsFilterOptions_nodeNid = array('id' => 'nid', 'value' => array('value' => $node->nid));
     $view->add_item($display_name, 'filter', 'node', 'nid', $viewsFilterOptions_nodeNid);
 
     
