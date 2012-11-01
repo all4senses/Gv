@@ -4294,14 +4294,20 @@ function gv_pages_node_view($node, $view_mode) {
       
 
       
+
+/* Filter criterion: Content: Phone reviewed (field_ref_phone) */
+//$handler->display->display_options['filters']['field_ref_phone_target_id']['id'] = 'field_ref_phone_target_id';
+//$handler->display->display_options['filters']['field_ref_phone_target_id']['table'] = 'field_data_field_ref_phone';
+//$handler->display->display_options['filters']['field_ref_phone_target_id']['field'] = 'field_ref_phone_target_id';
+//$handler->display->display_options['filters']['field_ref_phone_target_id']['value']['value'] = '803';
       
       
     $view_name = 'phone_reviews'; 
     $display_name = 'block_phone_reviews';
     $view = views_get_view($view_name);
     
-    $viewsFilterOptions_nodeNid = array('id' => 'nid', 'value' => array('value' => $node->nid));
-    $view->add_item($display_name, 'filter', 'node', 'nid', $viewsFilterOptions_nodeNid);
+    $viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => $node->nid));
+    $view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
 
     
     //$view->add_item($display_name, 'filter', 'taxonomy_index', 'tid', $viewsFilterOptions_tid);
