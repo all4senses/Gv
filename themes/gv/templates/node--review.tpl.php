@@ -133,7 +133,7 @@
                       
                       : ( (!isset($content['provider_url']) || !$content['provider_url']) ? '' : '<a href="' . $content['provider_url'] . '">Visit <span class="review-provider" property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span></a> <span class="delim">|</span>')
                     ) 
-                    . l(t('Write a Review'), 'node/add/review', array('query' => array('id' => $node->field_ref_phone['und'][0]['target_id']))) 
+                    . l(t('Write a Review'), 'node/add/review') 
                   . '</div>'; 
               
               //'<a href="' . $content['provider_url'] . '">' . t('Visit !p', array('!p' => '<span property="v:itemreviewed">' . $node->field_r_provider_name['und'][0]['safe_value'] . '</span>')) . '</a>'
