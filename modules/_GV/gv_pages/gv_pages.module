@@ -979,7 +979,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'text_format',
         '#title' => 'Downloads',
         '#format' => 'full_html',
-        '#default_value' => isset($extra_data['Downloads']) ? $extra_data['Downloads'] : '',
+        '#default_value' => isset($extra_data['Downloads']) ? $extra_data['downloads'] : '',
         '#weight' => 11,
       );
       
@@ -987,7 +987,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'text_format',
         '#title' => 'In the Box',
         '#format' => 'full_html',
-        '#default_value' => isset($extra_data['In the Box']) ? $extra_data['In the Box'] : '',
+        '#default_value' => isset($extra_data['In the Box']) ? $extra_data['in_the_box'] : '',
         '#weight' => 12,
       );
       
