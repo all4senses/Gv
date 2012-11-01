@@ -172,8 +172,8 @@
                     <ul>
                       <li><a href="#tabs-1">Editor's Review</a></li>
                       <li><a href="#tabs-2">Technical Specs</a></li>
-                      <li><a href="#tabs-3">Downloads</a></li>
-                      <li><a href="#tabs-4">In the Box</a></li>
+                      <?php if ($node->extra_data['downloads']): ?><li><a href="#tabs-3">Downloads</a></li><?php endif; ?>
+                      <?php if ($node->extra_data['in_the_box']): ?><li><a href="#tabs-4">In the Box</a></li><?php endif; ?>
                       <li><a href="#tabs-5">User Reviews</a></li>
                     </ul>
                     <div id="tabs-1">
@@ -194,12 +194,16 @@
                     <div id="tabs-2">
                       <?php echo $node->specs; ?>
                     </div>
-                    <div id="tabs-3">
-                      <?php echo $node->extra_data['downloads']; ?>
-                    </div>
-                    <div id="tabs-4">
-                      <?php echo $node->extra_data['in_the_box']; ?>
-                    </div>
+                    <?php if ($node->extra_data['downloads']): ?>
+                      <div id="tabs-3">
+                        <?php echo $node->extra_data['downloads']; ?>
+                      </div>
+                    <?php endif; ?>
+                    <?php if ($node->extra_data['in_the_box']): ?>
+                      <div id="tabs-4">
+                        <?php echo $node->extra_data['in_the_box']; ?>
+                      </div>
+                    <?php endif; ?>
                     <div id="tabs-5">
                       <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
