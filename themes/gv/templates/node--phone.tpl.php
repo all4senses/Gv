@@ -11,18 +11,7 @@
                   print $title; 
                 ?>
           </h1>
-        <?php else: ?>
-          <header>
-        
-            <h2<?php //print $title_attributes; ?> property="dc:title v:summary">
-                <a href="<?php print $node_url; ?>">
-                  <?php print $title; ?>
-                </a>
-            </h2>
-        <?php endif; ?>
-    
-          
-            <span class="submitted">
+          <span class="submitted">
               <?php 
 
                 $created_str = date('F d, Y \a\t g:ia', $node->created);
@@ -77,18 +66,32 @@
               ?>
             </span>
 
+        <?php endif; ?>
+    
+        <?php /*else: ?>
+          <header>
+        
+            <h2<?php //print $title_attributes; ?> property="dc:title v:summary">
+                <a href="<?php print $node_url; ?>">
+                  <?php print $title; ?>
+                </a>
+            </h2>
+        <?php endif;  ?>
+    
+          
+            
             
             
         <?php if (!$page): ?>
           </header>
-        <?php endif; ?>
+        <?php endif; */?>
     
 
     
 
         <div class="content"<?php print $content_attributes; ?>>
           
-          
+           <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
           
            <?php if ($page): ?>
           
@@ -179,7 +182,7 @@
                     <div id="tabs-1">
                       
                       <div class="gv_votes editor">
-                        <?php echo '<div class="caption"><span><span property="v:reviewer">Editor</span>\'s Overall Rating:</span> <span property="v:rating">' , number_format($node->extra_data['editor_rating_overall'] * 0.05, 1), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
+                        <?php echo '<div class="caption"><span><span property="v:reviewer">Editor</span>\'s Overall Rating:</span> <span property="v:rating">' , $editor_overall_rating, '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
                         <div class="rate-other">
                           <?php if ($page): ?>
                             <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
@@ -244,9 +247,18 @@
                     echo theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_image'][0]['#item']['alt'], 'title' => $content['field_p_image'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))); 
                   }
                 ?>
+                
               </div>
-          
-              <?php echo render($content['body']); ?>
+              <?php
+                  $stars = theme('gv_misc_fivestar_static', array('rating' => $node->extra_data['editor_rating_overall'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+                  echo '</div>' . $out . ' <div class="count">(' . $editor_overall_rating . ')</div>';
+              ?>
+              <h2<?php //print $title_attributes; ?> property="dc:title v:summary">
+                  <a href="<?php print $node_url; ?>">
+                    <?php print $title; ?>
+                  </a>
+              </h2>
+              <?php //echo render($content['body']); ?>
           
           
           
@@ -259,18 +271,21 @@
 
         
         
-      <?php if ($page): ?>
+      <?php/* if ($page): ?>
     
         <footer>
         </footer>
     
-      <?php endif; ?>
+      <?php endif; */?>
         
       
 
   </div> <!-- main-content -->
   
-  <div class="shadow"></div>
+  <?php if ($page): ?>
+    <div class="shadow"></div>  
+  <?php endif; ?>
+  
   
   
 
