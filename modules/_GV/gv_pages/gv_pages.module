@@ -1032,7 +1032,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
               dpm($extra_data);
               // Fill saved editor's ratings, if editing...
-              if(arg(1) == 'edit') {
+              if(arg(1) != 'add') {
                 
                   foreach ($extra_data['editor_ratings'] as $tag => $value) {
                     if ($tag == 'recommend') {
