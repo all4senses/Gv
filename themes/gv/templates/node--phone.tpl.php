@@ -271,12 +271,12 @@
 
         
         
-      <?php/* if ($page): ?>
+      <?php /* if ($page): ?>
     
         <footer>
         </footer>
     
-      <?php endif; */?>
+      <?php endif; */ ?>
         
       
 
