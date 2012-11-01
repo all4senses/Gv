@@ -171,11 +171,10 @@
               <div class="data tabs">
                     <ul>
                       <li><a href="#tabs-1">Editor's Review</a></li>
-                      <li><a href="#tabs-2">Rating</a></li>
-                      <li><a href="#tabs-3">Technical Specs</a></li>
-                      <li><a href="#tabs-4">Downloads</a></li>
-                      <li><a href="#tabs-5">In the Box</a></li>
-                      <li><a href="#tabs-6">User Reviews</a></li>
+                      <li><a href="#tabs-2">Technical Specs</a></li>
+                      <li><a href="#tabs-3">Downloads</a></li>
+                      <li><a href="#tabs-4">In the Box</a></li>
+                      <li><a href="#tabs-5">User Reviews</a></li>
                     </ul>
                     <div id="tabs-1">
                       
@@ -193,18 +192,15 @@
                       
                     </div>
                     <div id="tabs-2">
-                      <?php echo 'Rating'; ?>
-                    </div>
-                    <div id="tabs-3">
                       <?php echo $node->specs; ?>
                     </div>
-                    <div id="tabs-4">
+                    <div id="tabs-3">
                       <?php echo $node->extra_data['downloads']; ?>
                     </div>
-                    <div id="tabs-5">
+                    <div id="tabs-4">
                       <?php echo $node->extra_data['in_the_box']; ?>
                     </div>
-                    <div id="tabs-6">
+                    <div id="tabs-5">
                       <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
                             <div class="gv_votes users_overall"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
