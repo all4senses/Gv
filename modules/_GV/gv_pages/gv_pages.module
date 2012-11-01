@@ -4039,7 +4039,7 @@ function gv_pages_node_view($node, $view_mode) {
     
     
     
-    case 'review':
+    case 'review': // Provider's review
       
       
       if(isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
@@ -4167,6 +4167,61 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       gv_pages_addPhoneRatingsToNodeThemed($node, $votes);
+      
+      
+//      $block_data = array('module' => 'views', 'delta' => 'providers-block', 'shadow' => FALSE);
+//      $out .= gv_blocks_getBlockThemed($block_data);
+ 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+/* Filter criterion: Content: Nid */
+//$handler->display->display_options['filters']['nid']['id'] = 'nid';
+//$handler->display->display_options['filters']['nid']['table'] = 'node';
+//$handler->display->display_options['filters']['nid']['field'] = 'nid';
+//$handler->display->display_options['filters']['nid']['value']['value'] = '816';
+      
+
+$viewsFilterOptions_nodeNid = array('id' => 'nid', 'value' => array('value' => 816));
+$view->add_item($display_name, 'filter', 'node', 'nid', $viewsFilterOptions_nodeNid);
+      
+      
+      
+    $view_name = 'phone_reviews'; 
+    $display_name = 'block_phone_reviews';
+    $view = views_get_view($view_name);
+    //$view->add_item($display_name, 'filter', 'taxonomy_index', 'tid', $viewsFilterOptions_tid);
+    //$viewsFilterOptions_nodeType = array('id' => 'type', 'value' => array($type => $type));
+    //$view->add_item($display_name, 'filter', 'node', 'type', $viewsFilterOptions_nodeType);
+    
+    $results = $view->preview($display_name);
+    //if ($view->total_rows) {
+    if ($view->result) {
+      $node->userReviews = $results;
+    }
+    else {
+      $node->userReviews = 'No reviews found';
+    }
+    dpm($node->userReviews);
+  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       
       
