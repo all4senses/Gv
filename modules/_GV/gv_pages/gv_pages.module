@@ -4261,7 +4261,7 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       gv_pages_addPhoneRatingsToNodeThemed($node, $votes);
-      
+      dpm($r_data);
       // Get Editor's ratings
       $votes_simple_format = $r_data['editor_ratings'];
       // Rebuild the array to the votes api format
