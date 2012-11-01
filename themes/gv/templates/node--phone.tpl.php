@@ -193,7 +193,7 @@
                       <?php echo $node->extra_data['in_the_box']; ?>
                     </div>
                     <div id="tabs-6">
-                      <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                      <?php dpm($node); if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
                             <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
                             <div class="overall"> 
