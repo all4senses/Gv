@@ -4558,6 +4558,7 @@ function gv_pages_node_delete($node) {
  *   Return nothing.
  */
 function gv_pages_addPhoneRatingsToNodeThemed($node, $votes, $counts = NULL, $semicolon = '') {
+  dpm($votes);
   
   $overall_vote = NULL;
   if ($votes) {
