@@ -4128,7 +4128,7 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       
-      break;
+      break; // End of quote.
     
     
     
@@ -4261,16 +4261,6 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       gv_pages_addPhoneRatingsToNodeThemed($node, $votes);
-      dpm($r_data);
-      // Get Editor's ratings
-      $votes_simple_format = $r_data['editor_ratings'];
-      // Rebuild the array to the votes api format
-      foreach ($votes_simple_format as $tag => $value) {
-        $votes[] = array('tag' => $tag, 'value' => $value);
-      }
-      $editor = new stdClass;
-      gv_pages_addPhoneRatingsToNodeThemed($editor, $votes);
-      $node->editor = $editor;
       
 //      // Add a provider name in front of title
 //      if ($view_mode == 'full') {
@@ -4391,6 +4381,15 @@ function gv_pages_node_view($node, $view_mode) {
       $node->gv_voters = isset($counts[0]['value']) ? $counts[0]['value'] : '';
       gv_pages_addPhoneRatingsToNodeThemed($node, $votes, $counts);
 
+      // Get Editor's ratings
+      $votes_simple_format = $extra_data['editor_ratings'];
+      // Rebuild the array to the votes api format
+      foreach ($votes_simple_format as $tag => $value) {
+        $votes[] = array('tag' => $tag, 'value' => $value);
+      }
+      $editor = new stdClass;
+      gv_pages_addPhoneRatingsToNodeThemed($editor, $votes);
+      $node->editor = $editor;
       
         
       
