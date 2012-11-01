@@ -93,10 +93,10 @@
                       ? 
                         ( (!isset($node->field_ref_phone['und'][0]['target_id']) || !$node->field_ref_phone['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_phone['und'][0]['target_id']) . '">View All <span class="review-phone">' . $node->field_p_name['und'][0]['safe_value'] . '</span> Reviews</a> <span class="delim">|</span>')
                       
-                      
+                        . l(t('Write a Review'), 'node/add/phone-review') 
                       : ''
                     ) 
-                    . l(t('Write a Review'), 'node/add/phone-review') 
+                    
                   . '</div>'; 
               
             ?>
