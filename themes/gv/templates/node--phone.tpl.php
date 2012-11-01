@@ -178,12 +178,8 @@
                       <li><a href="#tabs-6">User Reviews</a></li>
                     </ul>
                     <div id="tabs-1">
-                      <?php echo render($content['body']); ?>
-                    </div>
-                    <div id="tabs-2">
-                      <?php echo 'Rating'; ?>
                       
-                      <div class="gv_votes">
+                      <div class="gv_votes editor">
                         <?php echo '<div class="caption"><span>' , t('Editor\'s Rating') , ':</span> <span property="v:rating">' , number_format($node->extra_data['editor_rating_overall'] * 0.05, 1), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
                         <div class="rate-other">
                           <?php if ($page): ?>
@@ -193,7 +189,11 @@
                           <div class="text"><?php echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->editor->gv_recommend . '</div>'?></div>
                         </div>
                       </div>
+                      <?php echo render($content['body']); ?>
                       
+                    </div>
+                    <div id="tabs-2">
+                      <?php echo 'Rating'; ?>
                     </div>
                     <div id="tabs-3">
                       <?php echo $node->specs; ?>
@@ -205,7 +205,7 @@
                       <?php echo $node->extra_data['in_the_box']; ?>
                     </div>
                     <div id="tabs-6">
-                      <?php dpm($node->editor); if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                      <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
                             <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
                             <div class="overall"> 
