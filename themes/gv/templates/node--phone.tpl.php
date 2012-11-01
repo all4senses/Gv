@@ -182,6 +182,18 @@
                     </div>
                     <div id="tabs-2">
                       <?php echo 'Rating'; ?>
+                      
+                      <div class="gv_votes">
+                        <?php echo '<div class="caption"><span>' , t('Editor\'s Rating') , ':</span> <span property="v:rating">' , $node->extra_data['editor_rating_overal'], '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
+                        <div class="rate-other">
+                          <?php if (!$page): ?>
+                            <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
+                            <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">Editor</div>'; ?></div>
+                          <?php endif; ?>
+                          <div class="text"><?php echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->editor->gv_recommend . '</div>'?></div>
+                        </div>
+                      </div>
+                      
                     </div>
                     <div id="tabs-3">
                       <?php echo $node->specs; ?>
