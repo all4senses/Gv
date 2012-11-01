@@ -179,7 +179,7 @@
                     <div id="tabs-1">
                       
                       <div class="gv_votes editor">
-                        <?php echo '<div class="caption"><span><span property="v:reviewer">Editor</span>\'s Rating:</span> <span property="v:rating">' , number_format($node->extra_data['editor_rating_overall'] * 0.05, 1), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
+                        <?php echo '<div class="caption"><span><span property="v:reviewer">Editor</span>\'s Overall Rating:</span> <span property="v:rating">' , number_format($node->extra_data['editor_rating_overall'] * 0.05, 1), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
                         <div class="rate-other">
                           <?php if ($page): ?>
                             <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
