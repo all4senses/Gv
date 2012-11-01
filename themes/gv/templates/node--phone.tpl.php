@@ -192,7 +192,7 @@
                         </div>
                       </div>
                       <?php echo render($content['body']); ?>
-                      
+                      <div class="bottom-clear"></div>
                     </div>
                     <div id="tabs-2">
                       <?php echo $node->specs; ?>
