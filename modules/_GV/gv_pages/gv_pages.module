@@ -1005,7 +1005,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['ureview'] = array(
             '#type' => 'fieldset',
             '#title' => t('Editor\'s Rating for this VoIP Phone'),
-            //'#weight' => -9,
+            '#weight' => 13,
           );
 
               $form['ureview']['votes'] = array(
@@ -1049,6 +1049,27 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   }
               }
               
+              
+              // Add stars widgets to a Rating block
+              $module_path = drupal_get_path('module', 'gv_pages');
+              $module_misc_path = drupal_get_path('module', 'gv_misc');
+
+              $form['#attached']['js'] = array(
+
+                // Add stars widgets to a Rating block
+                $module_path . '/js/gv_phone_review_stars.js',
+                'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+              );
+
+              $form['#attached']['library'][] = array('system', 'ui.widget');
+
+              $form['#attached']['css'] = array(
+                'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+              );
+
+
+              $form['#attributes']['class'][] = 'gv-edit-review-page';
+
               
               
       
