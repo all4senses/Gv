@@ -207,7 +207,7 @@
                     <div id="tabs-6">
                       <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
-                            <div class="gv_votes"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
+                            <div class="gv_votes users_overall"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
                             <div class="overall"> 
                               <div class="text">
                                 <?php echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count" property="v:count">' . $node->gv_voters . '</div></div>'; ?>
