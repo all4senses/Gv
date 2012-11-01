@@ -1065,6 +1065,8 @@ function gv_misc_approveContent($type, $id) {
       $query->leftJoin('field_data_field_r_approvecode', 'ac', 'ac.entity_id = n.nid');
       $review = $query->execute()->fetchObject();
       
+      dpm($review);
+      
       if ($review->uid) {
         // Wrong request because it's a registered user's email.
         //drupal_access_denied();
