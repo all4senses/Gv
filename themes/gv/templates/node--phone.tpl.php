@@ -179,13 +179,15 @@
                       <?php if ($node->extra_data['in_the_box']): ?><li><a href="#tabs-4">In the Box</a></li><?php endif; ?>
                       <li><a href="#tabs-5">User Reviews</a></li>
                     </ul>
+                
+                
                     <div id="tabs-1">
                       
                       <div class="gv_votes editor">
                         <?php echo '<div class="caption"><span><span property="v:reviewer">Editor</span>\'s Overall Rating:</span> <span property="v:rating">' , $editor_overall_rating, '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($node->editor->content['gv_ratings']); ?>
                         <div class="rate-other">
                           <?php if ($page): ?>
-                            <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
+                            <?php /*<div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div> */?>
                             <?php /*<div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">Editor</div>'; ?></div> */?>
                           <?php endif; ?>
                           <div class="text"><?php echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->editor->gv_recommend . '</div>'?></div>
