@@ -6,7 +6,7 @@
   <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
         <?php if ($page): ?>
-          <h1<?php //print $title_attributes; ?> property="dc:title v:summary">
+          <h1<?php //print $title_attributes; ?> property="dc:title v:summary" <?php if (!$node->status) {echo ' class="not-published"';}?> >
                 <?php 
                   print $title; 
                 ?>
