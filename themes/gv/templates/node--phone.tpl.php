@@ -177,7 +177,7 @@
                       <li><a class="a-tab" href="#tabs-2">Technical Specs</a></li>
                       <?php if ($node->extra_data['downloads']): ?><li><a class="a-tab" href="#tabs-3">Downloads</a></li><?php endif; ?>
                       <?php if ($node->extra_data['in_the_box']): ?><li><a class="a-tab" href="#tabs-4">In the Box</a></li><?php endif; ?>
-                      <li><a class="a-tab" href="#tabs-5">User Reviews</a></li>
+                      <li><a class="a-tab" href="#user-reviews">User Reviews</a></li>
                     </ul>
                 
                 
@@ -209,7 +209,7 @@
                         <?php echo $node->extra_data['in_the_box']; ?>
                       </div>
                     <?php endif; ?>
-                    <div id="tabs-5">
+                    <div id="user-reviews">
                       <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
                             <div class="gv_votes users_overall"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
