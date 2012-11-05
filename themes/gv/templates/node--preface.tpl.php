@@ -21,13 +21,17 @@
       
       // Define if this page should contain G+ provile link and authorship,
       // And if it's a ALL reviews page.
-      dpm($node);
-      $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
+      //dpm($node);
+      //$pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
+      $pages_with_gplus_author_keys = array('front', 'view-reviews-page_all_reviews', 'view-news-page', 'view-blog-page');
       $current_is_reviews = FALSE;
       $current_is_with_gplus_author = FALSE;
-      if (isset($_SERVER['REDIRECT_URL']) && in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
+      
+      if (isset($node->field_preface_key['und'][0]['value']) && in_array($node->field_preface_key['und'][0]['value'], $pages_with_gplus_author_keys)) {
+      //if (isset($_SERVER['REDIRECT_URL']) && in_array($_SERVER['REDIRECT_URL'], $pages_with_gplus_author)) {
         $current_is_with_gplus_author = TRUE;
-        if ($_SERVER['REDIRECT_URL'] == '/providers/reviews') {
+        //if ($_SERVER['REDIRECT_URL'] == '/providers/reviews') {
+        if ($node->field_preface_key['und'][0]['value'] == 'view-reviews-page_all_reviews') {
           $current_is_reviews =  TRUE;
         }
       }
