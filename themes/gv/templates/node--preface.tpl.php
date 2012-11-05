@@ -21,7 +21,7 @@
       
       // Define if this page should contain G+ provile link and authorship,
       // And if it's a ALL reviews page.
-      dpm($_SERVER['REDIRECT_URL']);
+      dpm($node);
       $pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
       $current_is_reviews = FALSE;
       $current_is_with_gplus_author = FALSE;
