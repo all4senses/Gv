@@ -14,7 +14,7 @@
 //           return this.src;
 //         }
        });
-       //console.log('full content!');
+       console.log('full content!');
        
     }
   };
