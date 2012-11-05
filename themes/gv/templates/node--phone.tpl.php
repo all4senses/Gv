@@ -229,7 +229,13 @@
 
                         <div class="bottom-clear"></div>
               
-                      <?php echo $node->userReviews . '<br/>' . l('Rate it', 'voip-phone-submit-user-review', array('attributes' => array('target' => '_blank'), 'query' => array('id' => $node->nid))); ?>
+                      <?php 
+                        echo $node->userReviews . '<br/>' . l('Rate it', 'voip-phone-submit-user-review', array('attributes' => array('target' => '_blank'), 'query' => array('id' => $node->nid))); 
+                        global $user;
+                        if ($user->uid) {
+                          echo $node->addPhoneReviewForm;
+                        }
+                      ?>
                     </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>
@@ -258,7 +264,7 @@
               ?>
               <h4<?php //print $title_attributes; ?> property="dc:title v:summary">
                   <a href="<?php print $node_url; ?>">
-                    <?php print $title; ?>
+                    <?php print $node->field_p_name['und'][0]['value']; ?>
                   </a>
               </h4>
               <?php //echo render($content['body']); ?>

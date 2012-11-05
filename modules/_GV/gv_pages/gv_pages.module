@@ -4064,6 +4064,10 @@ function gv_pages_node_view($node, $view_mode) {
           else {
             $node->userReviews = 'No reviews found';
           }
+          
+
+          $node->addPhoneReviewForm = drupal_get_form('gv_pages_addPhonePreview_form', $node->field_ref_phone['und'][0]['target_id']);
+
 
 
           // Add tabs handling.
@@ -4347,6 +4351,24 @@ function gv_pages_node_delete($node) {
         votingapi_delete_votes($select_votes);
         votingapi_recalculate_results('node', $node->field_ref_provider['und'][0]['target_id']);
       }
+      
+      break;
+      
+    case 'phone_review':
+      // Delete vote of this user for this phone, if it exists.
+      if (isset($node->field_ref_phone['und'][0]['target_id'])) {
+        $criteria = array(
+          'entity_type' => 'node',
+          'entity_id' => $node->field_ref_phone['und'][0]['target_id'],
+          'uid' => $node->uid,
+          'vote_source' => $node->field_r_email['und'][0]['value'],
+        );
+        $select_votes = gv_misc_getVotesIDs($criteria); //votingapi_select_votes($criteria);
+        votingapi_delete_votes($select_votes);
+        votingapi_recalculate_results('node', $node->field_ref_phone['und'][0]['target_id']);
+      }
+      
+      break;
   }
 }
 
@@ -4562,4 +4584,41 @@ function gv_pages_addReviewButton_form($node, &$form_state, $provider_nid) {
  */
 function gv_pages_addReviewButton_form_submit(&$form, &$form_state) {
   drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
+}
+
+
+/**
+ * Implements hook_form().
+ *
+ * Add a phone review form for the main phone page.
+ * 
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_addPhoneReview_form($node, &$form_state, $phone_nid) {
+  
+  $form['id'] = array(
+      '#type' => 'hidden',
+      '#value' => $phone_nid,
+  );
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add a review'),
+  ); 
+  //$form['#action'] = url('node/add/review', array('query' => array('id' => $provider_nid)));
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_addPhoneReview_form_submit(&$form, &$form_state) {
+  //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
+  drupal_set_message('Ok!', 'warning');
 }
