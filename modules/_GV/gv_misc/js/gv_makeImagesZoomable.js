@@ -7,8 +7,8 @@
        //$(".full-content img").colorbox({rel:"gallery"});
        $("a.zoom").css('cursor', 'pointer').css('cursor', '-webkit-zoom-in').css('cursor', '-moz-zoom-in').colorbox({
          //href: this.src
-         width:"80%", 
-         height:"80%"
+//         width:"80%", 
+//         height:"80%"
 //         ,href: function() {
 //           //console.log(this.src);
 //           return this.src;
