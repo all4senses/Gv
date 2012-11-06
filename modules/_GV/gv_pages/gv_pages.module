@@ -4679,6 +4679,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#options' => $rating_recommend_options,
     '#default_value' => FALSE,
     '#prefix' => '<div class="label left">' . RECOMMEND_PHONE . '</div>',
+    '#required' => TRUE,
   );
 
   $form['ureview']['review'] = array(
@@ -4686,6 +4687,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#title' => 'Your Review',
     '#format' => 'filtered_html',
     '#default_value' => '',
+    '#required' => TRUE,
   );
   
   
