@@ -232,7 +232,7 @@
                       <?php 
                         echo $node->userReviews . '<br/>' . l('Rate it', 'voip-phone-submit-user-review', array('attributes' => array('target' => '_blank'), 'query' => array('id' => $node->nid))); 
                         global $user;
-                        if ($user->uid) {
+                        if ($user->uid == 1) {
                           echo $node->addPhoneReviewForm;
                         }
                       ?>

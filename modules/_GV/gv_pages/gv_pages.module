@@ -4065,9 +4065,10 @@ function gv_pages_node_view($node, $view_mode) {
             $node->userReviews = 'No reviews found';
           }
           
-
-          $node->addPhoneReviewForm = render(drupal_get_form('gv_pages_addPhoneReview_form', $node));
-
+          global $user;
+          if ($user->uid == 1) {
+            $node->addPhoneReviewForm = render(drupal_get_form('gv_pages_addPhoneReview_form', $node));
+          }
 
 
           // Add tabs handling.
@@ -4596,6 +4597,12 @@ function gv_pages_addReviewButton_form_submit(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
+  
+  global $user;
+  dpm($user);
+  $user = user_load($user->uid);
+  dpm($user);
+  
   dpm($node);
   
   $form['phone_nid'] = array(
@@ -4603,12 +4610,116 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
       '#value' => $node->nid,
   );
   
+  
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Your Name/Nickname',
+    '#default_value' => $user->uid ? $user->field_u_fname['und'][0]['value'] : NULL,
+    //'#description' => '',
+    '#required' => TRUE,
+    '#attributes' => array('title' => 'Your Name/Nickname'),
+  );
+  
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Your Name/Nickname',
+    '#default_value' => $user->uid ? $user->mail : NULL,
+    //'#description' => '',
+    '#required' => TRUE,
+    '#access' => $user->uid ? FALSE : TRUE,
+    '#attributes' => array('title' => 'Your Email'),
+  );
+  
+  if ($user->uid) {
+    $form['email_autofilled'] = array(
+      '#type' => 'item',
+      '#title' => t('Your Email'),
+      '#markup' => $user->mail,
+    );
+  }
+    
+          
+  // Rate and vote group.
+  $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
+  $vote_keys = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE);
+
+  $votes = array();
+
+  $form['votes'] = array(
+    '#type' => 'container',
+    '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
+  );
+      foreach ($vote_keys as $vote_key => $vote_title) {
+        $form['votes']['rating_' . $vote_key] = array(
+          '#type' => 'select',
+          '#options' => $rating_options,
+          '#default_value' => $rating_options[''],
+          '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+          '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+        );
+      }
+
+  $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+  $form['rating_recommend'] = array(
+    '#type' => 'radios',
+    '#options' => $rating_recommend_options,
+    '#default_value' => FALSE,
+    '#prefix' => '<div class="label left">' . RECOMMEND_PHONE . '</div>',
+  );
+
+  $form['review'] = array(
+    '#type' => 'text_format',
+    '#title' => 'Your Review',
+    '#format' => 'full_html',
+    '#default_value' => '',
+  );
+  
+  // Generate an approval code for email verification, only for not registered users.
+  $form['field_r_approvecode'] = array(
+    '#type' => 'hidden',
+    '#default_value' => $user->uid ? '' : md5(time()),
+  );
+ 
+  $form['user_ip'] = array(
+    '#type' => 'hidden',
+    '#value' => $_SERVER['REMOTE_ADDR'],
+  );
+  
+
+
+
+  // Add stars widgets to a Rating block
+  $module_path = drupal_get_path('module', 'gv_pages');
+
+  $form['#attached']['js'] = array(
+
+    // Add hints inside some fields
+    $module_path . '/js/gv_review_fieldHints.js',
+
+    // Add stars widgets to a Rating block
+    $module_path . '/js/gv_phone_review_stars.js',
+    'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+  );
+
+  $form['#attached']['library'][] = array('system', 'ui.widget');
+
+  $form['#attached']['css'] = array(
+    'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+  );
+
+  // Use defined styles for reviews.
+  $form['#attributes']['class'][] = 'gv-edit-review-page';
+
+  
+  
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Add a review'),
   ); 
+  
   //$form['#action'] = url('node/add/review', array('query' => array('id' => $provider_nid)));
+  
   return $form;
 }
 
@@ -4622,7 +4733,6 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
 function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
   //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
   drupal_set_message('Valid!', 'warning');
-  dpm($form_state);
   dpm($form_state['values']);
   form_set_error($form_state['values']['phone_nid'], t('Test valid...'));
   drupal_goto('node/' . $form_state['values']['phone_nid'], array('fragment' => 'user-reviews'));
