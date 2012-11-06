@@ -4614,7 +4614,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#attributes' => array('class' => array('review-userblock')),
   );
   
-  if ($node->userReviews) {
+  if (!$node->userReviews) {
     $form['user']['be-the-first'] = array(
       '#markup' => '<div>Be the first to review!</div>',
     );
@@ -4635,7 +4635,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#default_value' => $user->uid ? $user->mail : NULL,
     //'#description' => '',
     '#required' => TRUE,
-    '#access' => $user->uid ? FALSE : TRUE,
+    //'#access' => $user->uid ? FALSE : TRUE,
     '#attributes' => array('title' => 'Your Email'),
   );
   
