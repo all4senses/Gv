@@ -4611,7 +4611,11 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
   );
   
   
-  $form['name'] = array(
+  $form['user'] = array(
+    '#type' => 'container',
+  );
+  
+  $form['user']['name'] = array(
     '#type' => 'textfield',
     '#title' => 'Your Name/Nickname',
     '#default_value' => $user->uid ? $user->field_u_fname['und'][0]['value'] : NULL,
@@ -4620,7 +4624,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#attributes' => array('title' => 'Your Name/Nickname'),
   );
   
-  $form['email'] = array(
+  $form['user']['email'] = array(
     '#type' => 'textfield',
     '#title' => 'Your Name/Nickname',
     '#default_value' => $user->uid ? $user->mail : NULL,
@@ -4631,7 +4635,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
   );
   
   if ($user->uid) {
-    $form['email_autofilled'] = array(
+    $form['user']['email_autofilled'] = array(
       '#type' => 'item',
       '#title' => t('Your Email'),
       '#markup' => $user->mail,
