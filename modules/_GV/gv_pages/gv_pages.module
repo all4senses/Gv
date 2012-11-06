@@ -3397,6 +3397,7 @@ function gv_pages_submitForm_phoneReview(&$form, &$form_state) {
     }
   }
   
+  dpm($form_state['values']);
 }
 
 
@@ -4835,8 +4836,45 @@ function gv_pages_addPhoneReview_form_submit(&$form, &$form_state) {
   dpm($votes);
   
   // Save several vars in the field
-  $field_r_data = serialize(array('saved_ratings' => $votes, /*'lines' => $form_state['values']['lines'], 'pros' => $form_state['values']['pros'], 'cons' => $form_state['values']['cons'],*/ 'user_ip' => $form_state['values']['user_ip']));
+  $field_r_data = serialize(array('saved_ratings' => $votes, 'user_ip' => $form_state['values']['user_ip']));
   //form_set_value($form['field_r_data'], array('und' => array(0 => array('value' => $field_r_data))), $form_state);
   
   drupal_set_message('On Submit, Ok!', 'warning');
+  
+  //gv_pages_createNode_phoneReview();
+    
+  
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_createNode_phoneReview($form_state, $phone_node, $data) {
+  
+  global $user;
+  
+  $node = new stdClass();
+  $node->type = 'phone_review';
+  node_object_prepare($node);
+  
+  $node->title = 'Unapproved review';
+  $node->language = LANGUAGE_NONE;
+  $node->uid = $user->uid;
+  $node->status = 0;
+  $node->promote = 0;
+  $node->sticky = 0;
+  $node->comment = 0;
+  
+  $node->body[$node->language][0] = $form_state['values']['review'];
+  $node->body[$node->language][0]['summary'] = '';
+
+  if ($node = node_submit($node)) {
+    node_save($node);
+    drupal_set_message('Saved, Ok!', 'warning');
+  }
+  
 }
