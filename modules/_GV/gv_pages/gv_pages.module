@@ -4735,7 +4735,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#value' => t('Add a review'),
   ); 
   
-  //$form['#action'] = url('node/add/review', array('query' => array('id' => $provider_nid)));
+  $form['#action'] = url('node/' . $node->nid, array('fragment' => 'test', 'query' => array('id' => $provider_nid)));
   
   return $form;
 }
