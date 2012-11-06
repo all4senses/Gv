@@ -4645,12 +4645,16 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
 
   $votes = array();
 
-  $form['votes'] = array(
+  $form['ureview'] = array(
+    '#type' => 'container',
+  );
+  
+  $form['ureview']['votes'] = array(
     '#type' => 'container',
     '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
   );
       foreach ($vote_keys as $vote_key => $vote_title) {
-        $form['votes']['rating_' . $vote_key] = array(
+        $form['ureview']['votes']['rating_' . $vote_key] = array(
           '#type' => 'select',
           '#options' => $rating_options,
           '#default_value' => $rating_options[''],
@@ -4660,19 +4664,20 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
       }
 
   $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
-  $form['rating_recommend'] = array(
+  $form['ureview']['rating_recommend'] = array(
     '#type' => 'radios',
     '#options' => $rating_recommend_options,
     '#default_value' => FALSE,
     '#prefix' => '<div class="label left">' . RECOMMEND_PHONE . '</div>',
   );
 
-  $form['review'] = array(
+  $form['ureview']['review'] = array(
     '#type' => 'text_format',
     '#title' => 'Your Review',
     '#format' => 'filtered_html',
     '#default_value' => '',
   );
+  
   
   // Generate an approval code for email verification, only for not registered users.
   $form['field_r_approvecode'] = array(
