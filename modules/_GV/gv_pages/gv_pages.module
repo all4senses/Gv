@@ -4751,7 +4751,7 @@ function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
   //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
   drupal_set_message('Valid!', 'warning');
   dpm($form_state['values']);
-  form_set_error($form_state['values']['phone_nid'], t('Test valid...'));
+  //form_set_error($form_state['values']['phone_nid'], t('Test valid...'));
   drupal_goto('node/' . $form_state['values']['phone_nid'], array('fragment' => 'user-reviews'));
 }
 
