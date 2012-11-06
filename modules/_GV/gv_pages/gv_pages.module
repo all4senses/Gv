@@ -4735,7 +4735,8 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#value' => t('Add a review'),
   ); 
   
-  $form['#action'] = url('node/' . $node->nid, array('fragment' => 'user-reviews'/*, 'query' => array('id' => $phone_nid)*/));
+  // Send a user to the right tab with a reviews.
+  $form['#action'] = url('node/' . $node->nid, array('fragment' => 'user-reviews'));
   
   return $form;
 }
@@ -4748,14 +4749,65 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
  *   Return nothing.
  */
 function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
-  //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
+
   drupal_set_message('In Validate!', 'warning');
-  //dpr($form_state['values']);
-  //dpr($form_state);
-  //die;
+  dpm($form_state['values']);
+  //dpm($form_state);
+    
+  global $user;
   
-  //form_set_error($form_state['values']['phone_nid'], t('Test valid...'));
-  //drupal_goto('node/' . $form_state['values']['phone_nid'], array('fragment' => 'user-reviews'));
+  // Clear hints, if any.
+  $fields_to_clear_hints = array('name' => array('hint' => 'Your Name / Nickname'), 'email' => array('hint' => 'Your Email'));
+  foreach ($fields_to_clear_hints as $fname => $fdata) {
+   
+    if ($form_state['values'][$fname] == $fdata['hint']) {
+      
+      // This clear the field.
+      $form[$fname]['#value'] = NULL;
+      
+      // Just in case.
+      // BUT! It causes fatal eror with #parent index absence
+      //form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
+      
+      // Just in case on more.
+      $form_state['values'][$fname] = NULL;
+      
+      if (isset($form[$fname]['#required']) && $form[$fname]['#required']) {
+        form_set_error($fname, t('Please fill the field "' . ($form[$fname]['#title'] ? $form[$fname]['#title'] : $fdata['title'] ) . '"'));
+      }
+    }
+    
+  }
+
+  // Check if a not logged in user has entered an email which is already is taken with one of our registered user.
+  if (!$form_state['values']['uid'] && isset($form_state['values']['email']) && $form_state['values']['email']) {
+    if (gv_misc_emailIsRegistered($form_state['values']['email'])) {
+      form_set_error('email',t('Sorry, an email You have entered is already registered in our system. If it is your email, please !login and proceed with submitting this review as a logged in user.', array('!login' => l('Log in', 'user/login', array('query' => array('destination' => url($_GET['q'])))))));
+      return;
+    }
+  }
+
+  $rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
+  foreach ($rating_options as $rating_option => $rating_option_title) {
+    if ($form_state['values']['rating_' . $rating_option] === FALSE) {
+      form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
+    }
+  }
+  
+  // Check if an author of this review has already submitted a review for a selected phone.
+  $review = gv_misc_userHasSubmittedReview($form_state['values']['phone_nid'], $user->uid, $form_state['values']['email'], NULL, NULL);
+
+  if ($review) {
+    $text =  t('You have already submitted a review for this phone');
+    if($user->uid || !$review->field_r_notapproved_value) {
+      $text .= ': ' . l($review->title, 'node/' . $review->nid);
+    }
+    if($review->field_r_notapproved_value) {
+      $text .= '. ' . t('But it\'s not yet approved by our administrators.');
+    }
+    form_set_error('field_ref_phone', $text);
+  } // End of if ($review) {
+  
 }
 
 
@@ -4766,7 +4818,24 @@ function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_addPhoneReview_form_submit(&$form, &$form_state) {
-  //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
-  drupal_set_message('Ok!', 'warning');
-  drupal_goto('node/' . $form_state['values']['phone_nid'], array('fragment' => 'user-reviews'));
+
+  // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
+  $votes = array();
+  foreach ($rating_options as $vote_key => $vote_title) {
+    if(isset($form_state['values']['rating_' . $vote_key])) {
+      $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
+    }
+  }
+  // Save votes to the temporary votes at r_data field.
+  // It maybe reset later on. But just for the sake of a code simplifying.
+  // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
+  // OR it its data may remain, if the review is not approved OR it's for not listed provider
+  
+  dpm($votes);
+  
+  // Save several vars in the field
+  $field_r_data = serialize(array('saved_ratings' => $votes, /*'lines' => $form_state['values']['lines'], 'pros' => $form_state['values']['pros'], 'cons' => $form_state['values']['cons'],*/ 'user_ip' => $form_state['values']['user_ip']));
+  //form_set_value($form['field_r_data'], array('und' => array(0 => array('value' => $field_r_data))), $form_state);
+  
+  drupal_set_message('On Submit, Ok!', 'warning');
 }
