@@ -4780,7 +4780,7 @@ function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
   }
 
   // Check if a not logged in user has entered an email which is already is taken with one of our registered user.
-  if (!$form_state['values']['uid'] && isset($form_state['values']['email']) && $form_state['values']['email']) {
+  if (!$user->uid && isset($form_state['values']['email']) && $form_state['values']['email']) {
     if (gv_misc_emailIsRegistered($form_state['values']['email'])) {
       form_set_error('email',t('Sorry, an email You have entered is already registered in our system. If it is your email, please !login and proceed with submitting this review as a logged in user.', array('!login' => l('Log in', 'user/login', array('query' => array('destination' => url($_GET['q'])))))));
       return;
