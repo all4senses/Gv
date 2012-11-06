@@ -4062,7 +4062,7 @@ function gv_pages_node_view($node, $view_mode) {
             $node->userReviews = $results;
           }
           else {
-            $node->userReviews = 'No reviews found';
+            $node->userReviews = NULL;
           }
           
           global $user;
@@ -4599,11 +4599,9 @@ function gv_pages_addReviewButton_form_submit(&$form, &$form_state) {
 function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
   
   global $user;
-  dpm($user);
   $user = user_load($user->uid);
-  dpm($user);
   
-  dpm($node);
+  //dpm($node);
   
   $form['phone_nid'] = array(
       '#type' => 'hidden',
@@ -4616,13 +4614,19 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#attributes' => array('class' => array('review-userblock')),
   );
   
+  if ($node->userReviews) {
+    $form['user']['be-the-first'] = array(
+      '#markup' => '<div>Be the first to review!</div>',
+    );
+  }
+  
   $form['user']['name'] = array(
     '#type' => 'textfield',
     '#title' => 'Your Name/Nickname',
     '#default_value' => $user->uid ? $user->field_u_fname['und'][0]['value'] : NULL,
     //'#description' => '',
     '#required' => TRUE,
-    '#attributes' => array('title' => 'Your Name/Nickname'),
+    '#attributes' => array('title' => 'Your Name / Nickname'),
   );
   
   $form['user']['email'] = array(
@@ -4635,13 +4639,13 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#attributes' => array('title' => 'Your Email'),
   );
   
-  if ($user->uid) {
-    $form['user']['email_autofilled'] = array(
-      '#type' => 'item',
-      '#title' => t('Your Email'),
-      '#markup' => $user->mail,
-    );
-  }
+//  if ($user->uid) {
+//    $form['user']['email_autofilled'] = array(
+//      '#type' => 'item',
+//      '#title' => t('Your Email'),
+//      '#markup' => $user->mail,
+//    );
+//  }
     
           
   // Rate and vote group.
