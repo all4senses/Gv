@@ -7,14 +7,14 @@
        //$(".full-content img").colorbox({rel:"gallery"});
        $("a.zoom").css('cursor', 'pointer').css('cursor', '-webkit-zoom-in').css('cursor', '-moz-zoom-in').colorbox({
          //href: this.src
-         width:"50%", 
+         width:"40%", 
          height:"80%"
 //         ,href: function() {
 //           //console.log(this.src);
 //           return this.src;
 //         }
        });
-       console.log('full content!');
+       //console.log('full content!');
        
     }
   };
