@@ -4820,6 +4820,7 @@ function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
 function gv_pages_addPhoneReview_form_submit(&$form, &$form_state) {
 
   // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
+  $rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
   $votes = array();
   foreach ($rating_options as $vote_key => $vote_title) {
     if(isset($form_state['values']['rating_' . $vote_key])) {
