@@ -4608,6 +4608,11 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
       '#type' => 'hidden',
       '#value' => $node->nid,
   );
+  $form['phone_model'] = array(
+      '#type' => 'hidden',
+      '#value' => $node->field_p_name['und'][0]['value'],
+  );
+  
   
   
   $form['user'] = array(
@@ -4871,6 +4876,36 @@ function gv_pages_createNode_phoneReview($form_state, $phone_node, $data) {
   
   $node->body[$node->language][0] = $form_state['values']['review'];
   $node->body[$node->language][0]['summary'] = '';
+  $node->body[$node->language][0]['safe_summary'] = '';
+  $node->body[$node->language][0]['safe_value'] = check_plain($form_state['values']['review']['value']);
+  
+  $node->field_r_email[$node->language][0] = array(
+    'value' => $form_state['values']['email'],
+    'safe_value' => check_plain($form_state['values']['email']),
+    'format' => NULL,
+  );
+  $node->field_r_fname[$node->language][0] = array(
+    'value' => $form_state['values']['name'],
+    'safe_value' => check_plain($form_state['values']['name']),
+    'format' => NULL,
+  );
+  
+  $node->field_r_notapproved[$node->language][0]['value'] = $form_state['values']['field_r_approvecode'];
+  $node->field_r_rating_overall[$node->language][0]['value'] = NULL;
+  $node->field_ref_phone[$node->language][0]['target_id'] = $form_state['values']['phone_nid'];
+  
+  $node->field_r_approvecode[$node->language][0] = array(
+    'value' => $form_state['values']['field_r_approvecode'],
+    'safe_value' => check_plain($form_state['values']['field_r_approvecode']),
+    'format' => NULL,
+  );
+  
+  $node->field_p_name[$node->language][0] = array(
+    'value' => $form_state['values']['phone_model'],
+    'safe_value' => check_plain($form_state['values']['phone_model']),
+    'format' => NULL,
+  );
+  
 
   if ($node = node_submit($node)) {
     node_save($node);
