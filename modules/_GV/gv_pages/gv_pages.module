@@ -4066,7 +4066,7 @@ function gv_pages_node_view($node, $view_mode) {
           }
           
           global $user;
-          if ($user->uid == 1) {
+          if ($_SERVER['REMOTE_ADDR'] == '91.200.156.91') {
             $node->addPhoneReviewForm = render(drupal_get_form('gv_pages_addPhoneReview_form', $node));
           }
 
@@ -4701,11 +4701,6 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
   );
   
   
-  $form['user']['ip-temp'] = array(
-    '#markup' => $_SERVER['REMOTE_ADDR'],
-  );
-  
-
 
 
   // Add stars widgets to a Rating block
