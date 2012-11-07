@@ -715,7 +715,7 @@ function gv_misc_metatag_getFrontTitle() {
  */
 function gv_misc_addSocialShareData_toPage($node) {
   
-  global $gplus_type;
+  global $schema_org_type;
   $image = NULL;
   $og_type = NULL;
   $title = NULL;
@@ -760,7 +760,7 @@ function gv_misc_addSocialShareData_toPage($node) {
       */
       
       $og_type = 'article';
-      $gplus_type = 'Article';
+      $schema_org_type = 'Article';
       
       break;
     
@@ -769,29 +769,56 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'provider':
       
       $p_data = unserialize($node->field_p_data['und'][0]['value']);
-      if (isset($p_data['logo_share_src_themed']) && $p_data['logo_share_src_themed']) {
-        $image = $p_data['logo_share_src_themed'];
+      if (isset($p_data['share_src_themed']) && $p_data['share_src_themed']) {
+        $image = $p_data['share_src_themed'];
       }
       elseif(isset($node->field_p_logo['und'][0]['uri']) && $node->field_p_logo['und'][0]['uri']) {
         $image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
       }
       
       $og_type = 'company';
-      $gplus_type = 'LocalBusiness';
+      $schema_org_type = 'LocalBusiness';
       break;
       
+      
+    case 'phone':
+      
+      $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+      if (isset($extra_data['share_src_themed']) && $extra_data['share_src_themed']) {
+        $image = $extra_data['share_src_themed'];
+      }
+      elseif(isset($node->field_p_image['und'][0]['uri']) && $node->field_p_image['und'][0]['uri']) {
+        $image = gv_misc_getPathFromStreamUri($node->field_p_image['und'][0]['uri']);
+      }
+      
+      $og_type = 'product';
+      $schema_org_type = 'Product';
+      break;
       
       
     case 'review':
-      global $review_provider_logo_path;
-      if ($review_provider_logo_path) {
-        $image = $review_provider_logo_path;
+      global $review_share_src_themed;
+      if ($review_share_src_themed) {
+        $image = $review_share_src_themed;
       }
       $og_type = 'company';
-      $gplus_type = 'Review';
+      $schema_org_type = 'Review';
       // Refresh a title a bit.
       $title = $node->field_r_provider_name['und'][0]['value'] . ' Review - ' . $node->title;
       break;
+      
+    
+    case 'phone_review':
+      global $review_share_src_themed;
+      if ($review_share_src_themed) {
+        $image = $review_share_src_themed;
+      }
+      $og_type = 'product';
+      $schema_org_type = 'Review';
+      // Refresh a title a bit.
+      $title = $node->field_p_name['und'][0]['value'] . ' Review - ' . $node->title;
+      break;
+ 
     
   }
   
@@ -987,6 +1014,31 @@ function gv_misc_addSocialShareData_toPage($node) {
   foreach ($tags as $key => $val)
       drupal_add_html_head($val, $key);
         
+}
+
+
+/**
+ * Get img src for Share from Uri.
+ */
+function gv_misc_getShareSrcThemed_fromUri($uri) {
+  
+  // Define share pic.
+  $image_size = getimagesize(ltrim(gv_misc_getPathFromStreamUri($uri), '/'));
+  // Image for sharing.
+  if ($image_size[0] / $image_size[1] > 1) {
+    // Too wide. will not be cutted.
+    $out = image_style_url('share_wide', $uri);
+  }
+  elseif ($image_size[1] / $image_size[0] < 1) {
+    // Too tall. will not be cutted.
+    $out = image_style_url('share_tall', $uri);
+  }
+  else {
+    //Normal image, will not be cutted.
+    $out = image_style_url('share', $uri);
+  }
+  
+  return $out;
 }
 
 

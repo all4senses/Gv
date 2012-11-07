@@ -2,7 +2,7 @@
 <!--[if lt IE 7]> <html class="ie6 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
-<!--[if gt IE 8]> <!--> <html itemscope itemtype="http://schema.org/<?php global $gplus_type; echo $gplus_type ? $gplus_type : ''; ?>" class="" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <!--<![endif]-->
+<!--[if gt IE 8]> <!--> <html itemscope itemtype="http://schema.org/<?php global $schema_org_type; echo $schema_org_type ? $schema_org_type : ''; ?>" class="" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <!--<![endif]-->
 <head>
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
