@@ -32,7 +32,12 @@
                 <?php /*print $title_attributes;*/ ?>>
                     <?php /*if (!$page): ?>
                       <a href="<?php print ($full_title && isset($node->field_ref_phone['und'][0]['target_id']) ? url('node/' . $node->field_ref_phone['und'][0]['target_id']) : $node_url); ?>">
-                    <?php endif; */?>
+                      <?php endif; */
+                      global $user;
+                      if (!$page && $user->uid) {
+                        echo '<a href="' . $node_url . '">';
+                      }
+                    ?>
                         
                       <?php 
                         echo ($full_title || $page ? 'Phone ' . $node->field_p_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
@@ -42,7 +47,11 @@
                       ?>
                     <?php /*if (!$page): ?>
                       </a>
-                    <?php endif;*/ ?>
+                    <?php endif;*/ 
+                      if (!$page && $user->uid) {
+                        echo '</a>';
+                      }
+                    ?>
                 
                 <?php if ($page): ?>
                   </h1>
