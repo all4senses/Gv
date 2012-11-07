@@ -263,11 +263,11 @@
                   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->extra_data['editor_rating_overall'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
                   echo '<div class="rating">' . $stars . ' <span class="count">(' . $editor_overall_rating . ')</span></div>';
               ?>
-              <h4<?php //print $title_attributes; ?> property="dc:title v:summary">
+              <h3<?php //print $title_attributes; ?> property="dc:title v:summary">
                   <a href="<?php print $node_url; ?>">
                     <?php print $node->field_p_name['und'][0]['value']; ?>
                   </a>
-              </h4>
+              </h3>
               <?php //echo render($content['body']); ?>
           
           
