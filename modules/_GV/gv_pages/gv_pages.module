@@ -4767,7 +4767,7 @@ function gv_pages_createNode_phoneReview($form_state) {
     'format' => NULL,
   );
   
-  $node->field_r_notapproved[$node->language][0]['value'] = $form_state['values']['field_r_approvecode'];
+  $node->field_r_notapproved[$node->language][0]['value'] = 1;
   $node->field_r_rating_overall[$node->language][0]['value'] = NULL;
   $node->field_ref_phone[$node->language][0]['target_id'] = $form_state['values']['phone_nid'];
   
