@@ -2201,7 +2201,7 @@ function gv_misc_sendMessage($tag, $data = NULL) {
     case 'new_phone_review_admin_notify':
       global $language;
       $params['phone_name'] = $data['phone_name'];
-      //drupal_mail('gv_misc', 'new_phone_review_admin_notify', 'ry@getvoip.com', $language->language, $params);
+      drupal_mail('gv_misc', 'new_phone_review_admin_notify', 'ry@getvoip.com', $language->language, $params);
       drupal_mail('gv_misc', 'new_phone_review_admin_notify', 'all4senses@gmail.com', $language->language, $params);
       
       break;
