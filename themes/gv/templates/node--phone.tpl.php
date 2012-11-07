@@ -234,8 +234,15 @@
                         if ($_SERVER['REMOTE_ADDR'] == '91.200.156.91') {
                           echo $node->addPhoneReviewForm;
                         }
-                        echo $node->userReviews; // . '<br/>' . l('Rate it', 'voip-phone-submit-user-review', array('attributes' => array('target' => '_blank'), 'query' => array('id' => $node->nid))); 
                         
+                        if ($node->userReviews) {
+                        ?>
+                            <div class="header">
+                                <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
+                            </div>
+                        <?php
+                        echo $node->userReviews; // . '<br/>' . l('Rate it', 'voip-phone-submit-user-review', array('attributes' => array('target' => '_blank'), 'query' => array('id' => $node->nid))); 
+                        }
                       ?>
                     </div>
                 
