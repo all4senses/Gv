@@ -4721,41 +4721,20 @@ function gv_pages_addPhoneReview_form_validate(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_addPhoneReview_form_submit(&$form, &$form_state) {
-
-  // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
-  $rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
-  $votes = array();
-  foreach ($rating_options as $vote_key => $vote_title) {
-    if(isset($form_state['values']['rating_' . $vote_key])) {
-      $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
-    }
-  }
-  // Save votes to the temporary votes at r_data field.
-  // It maybe reset later on. But just for the sake of a code simplifying.
-  // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
-  // OR it its data may remain, if the review is not approved OR it's for not listed provider
-  
-  dpm($votes);
-  
-  // Save several vars in the field
-  $field_r_data = serialize(array('saved_ratings' => $votes, 'user_ip' => $form_state['values']['user_ip']));
-  //form_set_value($form['field_r_data'], array('und' => array(0 => array('value' => $field_r_data))), $form_state);
   
   drupal_set_message('On Submit, Ok!', 'warning');
   
-  //gv_pages_createNode_phoneReview();
-    
-  
+  gv_pages_createNode_phoneReview($form_state);
 }
 
 
 /**
- * Implements hook_form_submit().
+ * Create a phone_review node programmatically.
  *
  * @return $form
  *   Return nothing.
  */
-function gv_pages_createNode_phoneReview($form_state, $phone_node, $data) {
+function gv_pages_createNode_phoneReview($form_state) {
   
   global $user;
   
@@ -4776,9 +4755,10 @@ function gv_pages_createNode_phoneReview($form_state, $phone_node, $data) {
   $node->body[$node->language][0]['safe_summary'] = '';
   $node->body[$node->language][0]['safe_value'] = check_plain($form_state['values']['review']['value']);
   
+  $user_mail = $user->uid ? $user->mail : $form_state['values']['email'];
   $node->field_r_email[$node->language][0] = array(
-    'value' => $form_state['values']['email'],
-    'safe_value' => check_plain($form_state['values']['email']),
+    'value' => $user_mail,
+    'safe_value' => check_plain($user_mail),
     'format' => NULL,
   );
   $node->field_r_fname[$node->language][0] = array(
@@ -4804,11 +4784,50 @@ function gv_pages_createNode_phoneReview($form_state, $phone_node, $data) {
   );
   
   
+  // Prepare votes to save in a temporary field (it may be not used, but just in case and for a code simplifying).
+  $rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
+  $votes = array();
+  foreach ($rating_options as $vote_key => $vote_title) {
+    if(isset($form_state['values']['rating_' . $vote_key])) {
+      $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
+    }
+  }
+  // Save votes to the temporary votes at r_data field.
+  // It maybe reset later on. But just for the sake of a code simplifying.
+  // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
+  // OR it its data may remain, if the review is not approved OR it's for not listed provider
   
-
+  dpm($votes);
+  
+  // Save several vars in the field
+  $field_r_data = serialize(array('saved_ratings' => $votes, 'user_ip' => $form_state['values']['user_ip']));
+  
+  $node->field_r_data[$node->language][0] = array(
+    'value' => $field_r_data,
+    'safe_value' => check_plain($field_r_data),
+    'format' => NULL,
+  );
+  
+  
   if ($node = node_submit($node)) {
     node_save($node);
     drupal_set_message('Saved, Ok!', 'warning');
+    
+    
+    // Show a Success message and Send notifications.
+    $text = t('<span class="review"><span class="success">Your review has been successfully submitted. Thank you for your time and efforts in sharing your much appreciated feedback.</span> <span class="approve">It will be published as soon as our administrators have approved it.</span> <span class="contact">If we may be of any further assistance please email us at contact@getvoip.com</span>');
+    // Send verification code to approve email for an unregistered user.
+    if (!$user->uid) {
+      gv_misc_sendMessage('email_verification', array('verification_code' => $form_state['values']['field_r_approvecode'] . '=' . urlencode($form_state['values']['email']), 'email' => $form_state['values']['email']));
+      $text .= '<div class="emailed">' . t('To assist in getting your review published faster, we have sent you an email verification with 1-click instructions for immediate publishing of your review.') . '</div>';
+    }
+    $text .= '</span>';
+    drupal_set_message($text);
+
+    // Notify all admins.
+    $phone_name = $form_state['complete form']['phone']['field_ref_phone']['und']['#options'][$form_state['values']['field_ref_phone']['und'][0]['target_id']];
+
+    gv_misc_sendMessage('new_phone_review_admin_notify', array('phone_name' => $phone_name));
   }
   
 }
