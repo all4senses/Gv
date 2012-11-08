@@ -4586,7 +4586,7 @@ function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
     '#type' => 'text_format',
     '#title' => 'Your Review',
     '#format' => 'filtered_html',
-    '#rows' => $user->uid ? 6 : 4,
+    '#rows' => $user->uid ? 8 : 4, // 4 for the case with captcha
     '#default_value' => '',
     '#required' => TRUE,
   );
