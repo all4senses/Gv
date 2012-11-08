@@ -230,6 +230,8 @@
               
                       <?php echo $node->addPhoneReviewForm; ?>
                         
+                      <div class="bottom-clear"></div>
+                      
                       <?php if ($node->userReviews): ?> 
 
                         <div class="reviews">
