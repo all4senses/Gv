@@ -231,7 +231,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   //dpm($args);
     
   // Show emails only.
-  if ($arg(3) == 'emails') {
+  if (arg(3) == 'emails') {
     $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
     $query->fields('qr', array('data', 'email_presented'));
     $query->condition('qr.email_presented', '0', '!=');
