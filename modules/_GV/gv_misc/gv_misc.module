@@ -1864,10 +1864,9 @@ function gv_misc_testPage() {
       //->limit(20)
       ->execute();
   
-  $count = 1;
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
-    $out .= '<div>' . $count++ . ' - ' . $ucaptured->email_presented . ' - ' . $data['Email'] . '</div>';
+    $out .= '<div>' . $data['Email'] . '</div>';
   }
   
   echo $out . '<br>End of Test';
