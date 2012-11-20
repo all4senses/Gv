@@ -13,6 +13,11 @@
             callback	: test,
             addClass	: 'shadow'
         });
+        
+        function test(){
+          console.log('KONIEC');
+        }
+
 
        
     }
