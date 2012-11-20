@@ -157,6 +157,12 @@ function gv_blocks_block_info() {
     );
   }
   
+  
+  $blocks['ad_free_ipad_mini'] = array(
+    'info' => t('Ad for a free ipad-mini'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -315,9 +321,32 @@ function gv_blocks_block_view($delta = '') {
         $block['content'] = gv_blocks_get_topicsBlock($content_type);
       }
       break;
+      
+      
+    case 'ad_free_ipad_mini':
+      $block['subject'] = t('Ad for a free ipad-mini');
+      $block['content'] = gv_blocks_getAdBlock('free_ipad_mini');
+      break;
+    
+    $blocks['ad_free_ipad_mini'] = array(
+      'info' => t('Ad for a free ipad-mini'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+    
   }
 
   return $block;
+}
+
+
+/**
+ * Returns an ad block by its name.
+ */
+function gv_blocks_getAdBlock($ad_name) {
+  switch ($ad_name) {
+    case 'free_ipad_mini':
+      return '<img src="sites/default/files/ads/free-ipad-mini-banner.jpg" />';
+  }
 }
 
 
