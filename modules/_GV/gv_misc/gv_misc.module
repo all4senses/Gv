@@ -1881,8 +1881,9 @@ function gv_misc_testPage() {
 //  }
   
   $f = file_get_contents($dir . "/" . $objects[2]);
-  dpm($f);
   
+  $f = str_replace("\n", ' ', $f);
+  dpm($f);
   preg_match_all('|(.*)Quote Request submission form(.*)|', $f, $matches);
   dpm($matches);
   
