@@ -1883,7 +1883,7 @@ function gv_misc_testPage() {
   $f = file_get_contents($dir . "/" . $objects[2]);
   dpm($f);
   
-  preg_match('|(.*)Quote Request submission form(.*)|', $f, $matches);
+  preg_match_all('|(.*)Quote Request submission form(.*)|', $f, $matches);
   dpm($matches);
   
   return $out . '<br>End of Test';
