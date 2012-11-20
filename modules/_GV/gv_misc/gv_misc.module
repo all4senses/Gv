@@ -1895,9 +1895,22 @@ function gv_misc_testPage() {
   
   $f = file($dir . "/" . $objects[2]);
   dpm($f);
+  $start = FALSE;
+  $requests = array();
+  foreach ($f as $str) {
+    if ($str && ($start || strpos($str, 'Quote Request submission form:') !== NULL) ) {
+      $start = TRUE;
+      $data = explode(' = ', $str);
+      $requests[0][trim($data[0])] = trim($data[1]);
+    }
+  }
+  
+  dpm($requests);
+  
   $f = file_get_contents($dir . "/" . $objects[2]);
   $f = str_replace("\n", ' ', $f);
   dpm($f);
+  
   preg_match('|.*Quote Request submission form:(.*)Phones needed = (.*)|', $f, $matches);
   dpm($matches);
   
