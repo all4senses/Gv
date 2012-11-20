@@ -1870,7 +1870,7 @@ function gv_misc_testPage() {
   }
   */
   
-  
+  $requests = array();
   $dir = 'sites/default/files/qrequests';
   $objects = scandir($dir);
   dpm($objects);
@@ -1879,7 +1879,7 @@ function gv_misc_testPage() {
       $f = file($dir . "/" . $object);
       //dpm($f);
       $start = FALSE;
-      $requests = array();
+      
       foreach ($f as $str) {
         if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
           $start = TRUE;
