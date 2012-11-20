@@ -1889,7 +1889,7 @@ function gv_misc_testPage() {
         }
       }
       if ($start) {
-        $requests[$key]['Time_Unix'] = strtotime($requests[$key]['Time']);
+        $requests[$key]['Time_Unix'] = isset($requests[$key]['Time']) ? strtotime($requests[$key]['Time']) : '';
       }
     }
   }
