@@ -9,8 +9,8 @@
             hoursText	: ':',
             minutesText	: ':',
             secondsText	: '',
-            displayZeroDays : false,
-            callback	: test
+            displayZeroDays : false
+            //,callback	: test
             //,addClass	: 'shadow'
         });
         
