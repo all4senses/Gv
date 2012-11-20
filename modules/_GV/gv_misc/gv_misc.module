@@ -1851,7 +1851,7 @@ function gv_misc_testPage() {
  
   //$out .= '<iframe id="gv-quote-request-block" src="http://getvoip.com/get/iframe/quote-request-block" scrolling="no" width="245px" height="335px" frameborder="0" seamless="seamless"></iframe>';
   
-  
+  /*
   $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
   $query->fields('qr', array('data', 'email_presented'));
   $query->condition('qr.email_presented', '0', '!=');
@@ -1868,6 +1868,17 @@ function gv_misc_testPage() {
     $data = unserialize($ucaptured->data);
     $out .= '<div>' . $data['Email'] . '</div>';
   }
+  */
+  
+  
+  $dir = 'sites/default/files/qrequests';
+  $objects = scandir($dir);
+  dpm($objects);
+//  foreach ($objects as $object) {
+//    if ($object != "." && $object != "..") {
+//      //unlink($dir . "/" . $object);
+//    }
+//  }
   
   echo $out . '<br>End of Test';
 }
