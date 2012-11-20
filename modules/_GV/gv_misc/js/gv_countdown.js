@@ -10,8 +10,8 @@
             minutesText	: ':',
             secondsText	: '',
             displayZeroDays : false,
-            callback	: test,
-            addClass	: 'shadow'
+            callback	: test
+            //,addClass	: 'shadow'
         });
         
         function test(){
