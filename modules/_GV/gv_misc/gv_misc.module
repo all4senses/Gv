@@ -1898,7 +1898,7 @@ function gv_misc_testPage() {
   $start = FALSE;
   $requests = array();
   foreach ($f as $str) {
-    if ($str && ($start || (strpos($str, 'Quote Request submission form:') !== NULL) ) ) {
+    if ($start || trim($str) == 'Quote Request submission form:') {
       $start = TRUE;
       $data = explode(' = ', $str);
       $requests[0][trim($data[0])] = trim($data[1]);
@@ -1907,12 +1907,12 @@ function gv_misc_testPage() {
   
   dpm($requests);
   
-  $f = file_get_contents($dir . "/" . $objects[2]);
-  $f = str_replace("\n", ' ', $f);
-  dpm($f);
-  
-  preg_match('|.*Quote Request submission form:(.*)Phones needed = (.*)|', $f, $matches);
-  dpm($matches);
+//  $f = file_get_contents($dir . "/" . $objects[2]);
+//  $f = str_replace("\n", ' ', $f);
+//  dpm($f);
+//  
+//  preg_match('|.*Quote Request submission form:(.*)Phones needed = (.*)|', $f, $matches);
+//  dpm($matches);
   
   return $out . '<br>End of Test';
 }
