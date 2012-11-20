@@ -4027,7 +4027,8 @@ function gv_pages_node_view($node, $view_mode) {
       
       $preface_key = @$node->field_preface_key['und'][0]['value'];
       
-      if ($preface_key == 'view-news-page') {
+      
+      if (in_array($preface_key, array('view-news-page', 'view-blog-page', 'view-articles-page'))) {
         $args = arg();
         if (!empty($args[1])) {
           drupal_not_found();
