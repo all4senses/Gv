@@ -1874,66 +1874,46 @@ function gv_misc_testPage() {
   $dir = 'sites/default/files/qrequests';
   $objects = scandir($dir);
   dpm($objects);
-//  foreach ($objects as $key => $object) {
-//    if ($object != "." && $object != "..") {
-//      
-//      //unlink($dir . "/" . $object);
-//      $f = file($dir . "/" . $object);
-//      //dpm($f);
-//      $start = FALSE;
-//      $requests = array();
-//      foreach ($f as $str) {
-//        if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
-//          $start = TRUE;
-//          $data = explode(' = ', $str);
-//
-//          $requests[$key][trim($data[0])] = @trim($data[1]);
-//        }
-//      }
-//      
-//    }
-//  }
+  foreach ($objects as $key => $object) {
+    if ($object != "." && $object != "..") {
+      $f = file($dir . "/" . $object);
+      //dpm($f);
+      $start = FALSE;
+      $requests = array();
+      foreach ($f as $str) {
+        if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
+          $start = TRUE;
+          $data = explode(' = ', $str);
 
-
-// Phones needed = More than 50
-// Quote type = Both phones and service
-// Buying Time Frame = ASAP
-// First Name = Muhammad
-// Last Name = Abdullahi
-// Company = K.B.B
-// Email = muhdbigguy@yahoo.com
-// Phone # = 062-415-4188
-// Source = page
-// Version = 3
-// User IP = 74.115.1.92
-// Time = 2012-08-20, 16:20:31
-  
-  $f = file($dir . "/" . $objects[2]);
-  dpm($f);
-  $start = FALSE;
-  $requests = array();
-  foreach ($f as $str) {
-    if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
-      $start = TRUE;
-      $data = explode(' = ', $str);
-      
-      $requests[0][trim($data[0])] = @trim($data[1]);
+          $requests[$key][trim($data[0])] = @trim($data[1]);
+        }
+      }
+      if ($start) {
+        $requests[$key]['Time_Unix'] = strtotime($requests[$key]['Time']);
+      }
     }
   }
+
+  
+//  $f = file($dir . "/" . $objects[2]);
+//  dpm($f);
+//  $start = FALSE;
+//  $requests = array();
+//  foreach ($f as $str) {
+//    if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
+//      $start = TRUE;
+//      $data = explode(' = ', $str);
+//      
+//      $requests[0][trim($data[0])] = @trim($data[1]);
+//    }
+//  }
+  
+//  $t = strtotime($requests[0]['Time']);
+//  $t_str = date('Y-m-d\TH:i:s', $t);
+//  dpm($t);
+//  dpm($t_str);
   
   dpm($requests);
-  
-  $t = strtotime($requests[0]['Time']);
-  $t_str = date('Y-m-d\TH:i:s', $t);
-  dpm($t);
-  dpm($t_str);
-  
-//  $f = file_get_contents($dir . "/" . $objects[2]);
-//  $f = str_replace("\n", ' ', $f);
-//  dpm($f);
-//  
-//  preg_match('|.*Quote Request submission form:(.*)Phones needed = (.*)|', $f, $matches);
-//  dpm($matches);
   
   return $out . '<br>End of Test';
 }
