@@ -1902,7 +1902,7 @@ function gv_misc_testPage() {
       $start = TRUE;
       $data = explode(' = ', $str);
       
-      $requests[0][trim($data[0])] = trim($data[1]);
+      $requests[0][trim($data[0])] = @trim($data[1]);
     }
   }
   
