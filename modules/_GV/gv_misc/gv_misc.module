@@ -1871,7 +1871,7 @@ function gv_misc_testPage() {
   $count = NULL;
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
-    if (!strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== NULL || strpos($data['Email'], '@test') !== NULL) {
+    if (!strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
       continue;
     }
     $out .= '<div>' . $data['Email'] . '</div>';
