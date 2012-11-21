@@ -345,7 +345,14 @@ function gv_blocks_block_view($delta = '') {
 function gv_blocks_getAdBlock($ad_name) {
   switch ($ad_name) {
     case 'free_ipad_mini':
-      return '<a href="/blog/2012/11/19/getvoipcom-holiday-sweepstakes-win-a-free-ipad-mini"><img src="/sites/default/files/a/free-ipad-mini-banner.jpg" /></a>';
+      
+      $path_to_custom_js = 'sites/all/libraries/jquery.plugins/countdown/';
+      drupal_add_js($path_to_custom_js . 'kkcountdown.min.js');
+      $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+      drupal_add_js($path_to_custom_js . 'gv_countdown.js');
+  
+      return '<a href="/blog/2012/11/19/getvoipcom-holiday-sweepstakes-win-a-free-ipad-mini"><img src="/sites/default/files/a/free-ipad-mini-banner.jpg" /></a>
+              <span time="1392145200" class="kkcount-down"></span>';
   }
 }
 
