@@ -8,7 +8,7 @@
           daysText 	: 'days ',
             hoursText	: 'h ',
             minutesText	: 'm ',
-            secondsText	: 'c left',
+            secondsText	: 's left',
             displayZeroDays : false
             //,callback	: test
             //,addClass	: 'shadow'
