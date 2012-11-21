@@ -260,7 +260,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //      if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
 //        continue;
 //      }
-      if (in_array($ucaptured->email_presented, $all_emails) || !strpos($ucaptured->email_presented, '@') || strpos($ucaptured->email_presented, 'test@') !== FALSE || strpos($ucaptured->email_presented, '@test') !== FALSE) {
+      if (in_array($ucaptured->email_presented, $all_emails) || !strpos($ucaptured->email_presented, '@') || strpos($ucaptured->email_presented, 'getvoip.') !== FALSE || strpos($ucaptured->email_presented, 'test@') !== FALSE || strpos($ucaptured->email_presented, '@test') !== FALSE) {
         continue;
       }
       $all_emails[] = $ucaptured->email_presented;
