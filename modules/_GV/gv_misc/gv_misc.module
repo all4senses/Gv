@@ -1887,10 +1887,11 @@ function gv_misc_testPage() {
       
       foreach ($f as $str) {
         if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
+          
+          $start = TRUE;
           if (trim($str) == 'Quote Request submission form:') {
             continue;
           }
-          $start = TRUE;
           $data = explode(' = ', $str);
 
           $requests[$key][trim($data[0])] = @trim($data[1]);
