@@ -1868,12 +1868,16 @@ function gv_misc_testPage() {
       //->orderBy($sort, $order)
       //->limit(20)
       ->execute();
-  
+  $count = NULL;
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
+    if (!strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== NULL || strpos($data['Email'], '@test') !== NULL) {
+      continue;
+    }
     $out .= '<div>' . $data['Email'] . '</div>';
+    $count++;
   }
-  
+  $out .= '<div>Amount of emails: ' . $count . '</div>';
   
   
   
