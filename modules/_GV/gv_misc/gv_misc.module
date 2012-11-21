@@ -1869,11 +1869,13 @@ function gv_misc_testPage() {
       //->limit(20)
       ->execute();
   $count = NULL;
+  $all_emails = array();
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
-    if (!strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
+    if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
       continue;
     }
+    $all_emails[] = $data['Email'];
     $out .= '<div>' . $data['Email'] . '</div>';
     $count++;
   }
