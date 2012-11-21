@@ -92,9 +92,168 @@ function gv_misc_menu() {
  * Implements hook_taxonomy_term_delete().
  * Removes tag's references and its twin tag from a main tag voc references from nodes.
  */
-function gv_misc_taxonomy_term_delete($term) {
+function gv_misc_taxonomy_term_delete($current_term) {
   dpm($term);
   
+  // Search for the corresponding main voc term tid.
+  $all_vocs_terms = taxonomy_get_term_by_name($current_term->name);
+  $found = FALSE;
+  $main_term = FALSE;
+  $main_vid = 2; // 2 - main voc - Topics tags.
+  foreach ($all_vocs_terms as $term) {
+    
+    if ($term->vid == $main_vid) {
+      // Term exists in the Topics vocabulary.
+      $main_term = $term;
+      $found = TRUE;
+      break;
+    }
+  }
+  
+  
+  // Define fields names.
+  $main_field_name = 'topics';
+  switch ($current_term->vocabulary_machine_name) {
+    case 'blog_tags':
+      $target_field_name = 'tags_blog';
+      $node_type = 'blog_post';
+      break;
+    case 'news_tags':
+      $target_field_name = 'tags_news';
+      $node_type = 'news_post';
+      break;
+    case 'articles_tags':
+      $target_field_name = 'tags_articles';
+      $node_type = 'article';
+      break;
+  }
+  // Delete current deleting term from nodes' fields.
+  gv_misc_fieldDelete($target_field_name, NULL, 'field_' . $target_field_name . '_tid', $current_term->tid);
+  
+  if ($main_term) {
+    // Get nodes list of the specific type that have this field value.
+    $query = db_select('field_data_field_' . $target_field_name, 'f');
+    $query->fields('f', array('entity_id'))
+      ->condition('f.field_' . $target_field_name . '_value', $current_term->tid)
+      ->condition('f.entity_type', 'node');
+    $nids = $query->execute()->fetchAll(PDO::FETCH_COLUMN);
+    dpm($nids);
+    //gv_misc_fieldDelete($main_field_name, NULL, 'field_' . $main_field_name . '_tid', $main_term->tid, $nids);
+  }
+}
+
+
+/**
+ * Saves or updates a field.
+ */
+function gv_misc_fieldDelete($field_name, $entity_id, $target_field_name = NULL, $target_field_id = NULL, $entity_ids = array()) {
+  
+  if (!$entity_id && $target_field_id) {
+    if (empty($entity_ids)) {
+      // Delete all nodes fields with set value field.
+      db_delete('field_data_field_' . $field_name)
+        ->condition($target_field_name, $target_field_id)
+        ->execute();
+      db_delete('field_revision_field_' . $field_name)
+        ->condition($target_field_name, $target_field_id)
+        ->execute();
+    }
+    else {
+      // Delete only specific nodes fields with set value field.
+      db_delete('field_data_field_' . $field_name)
+        ->condition($target_field_name, $target_field_id)
+        ->condition('entity_id', $entity_ids, 'IN')
+        ->execute();
+      db_delete('field_revision_field_' . $field_name)
+        ->condition($target_field_name, $target_field_id)
+        ->condition('entity_id', $entity_ids, 'IN')
+        ->execute();
+    }
+      
+  }
+  else {
+    db_delete('field_data_field_' . $field_name)
+      ->condition('entity_id', $entity_id)
+      ->execute();
+    db_delete('field_revision_field_' . $field_name)
+      ->condition('entity_id', $entity_id)
+      ->execute();
+  }
+  
+  
+  field_cache_clear();
+}
+
+
+/**
+ * Saves or updates a field.
+ */
+function gv_misc_fieldSave($field_name, $entity_id, $data, $entity_type = 'node', $bundle = NULL) {
+  
+  if(!$bundle) {
+    $bundle = $entity_type;
+  }
+  
+  $query = db_select('field_data_field_' . $field_name, 'f');
+  $query->fields('f', array('field_' . $field_name . '_value'))
+        ->condition('f.entity_id', $entity_id)
+        ->condition('f.entity_type', $entity_type);
+  $result = $query->execute(); //->fetchField();
+  
+  if ($result->rowCount()) {
+    // Need update an existing field.
+    db_update('field_data_field_' . $field_name)
+      ->fields(array(
+        'entity_id' => $entity_id,
+        'delta' => 0,  
+        'revision_id'=> $entity_id,    
+        'field_' . $field_name . '_value' => $data,
+      ))
+      ->condition('entity_id', $entity_id)
+      ->condition('entity_type', $entity_type)
+      ->execute();
+
+    db_update('field_revision_field_' . $field_name)
+      ->fields(array(
+        'entity_id' => $entity_id,
+        'delta' => 0,  
+        'revision_id'=> $entity_id,     
+        'field_' . $field_name . '_value' => $data,
+      ))
+      ->condition('entity_id', $entity_id)
+      ->condition('entity_type', $entity_type)
+      ->execute();
+  }
+  else {
+    // Need create a new field.
+    db_insert('field_data_field_' . $field_name) 
+      ->fields(array(
+        'entity_type'=> $entity_type,
+        'bundle'=> $bundle,
+        'deleted'=> 0,                
+        'entity_id' => $entity_id,
+        'delta' => 0,  
+        'revision_id'=> $entity_id,
+        'language'=> 'und',  
+        'field_' . $field_name . '_value' => $data,
+      ))
+      ->execute();
+
+    db_insert('field_revision_field_' . $field_name)
+      ->fields(array(
+        'entity_type'=> $entity_type,
+        'bundle'=> $bundle,
+        'deleted'=> 0,                
+        'entity_id' => $entity_id,
+        'delta' => 0,  
+        'revision_id'=> $entity_id,
+        'language'=> 'und',  
+        'field_' . $field_name . '_value' => $data,
+      ))
+      ->execute();
+  }
+
+  field_cache_clear();
 }
 
 
@@ -1875,7 +2034,7 @@ function gv_misc_testPage() {
   
   
   
-  
+  /*
   $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data', 'email_presented'));
   $query->condition('qr.email_presented', '0', '!=');
@@ -1909,7 +2068,7 @@ function gv_misc_testPage() {
 
   }
   $out .= '<div>Amount of emails: ' . $count . '</div>';
-  
+  */
   
   
   
@@ -2001,6 +2160,14 @@ function gv_misc_testPage() {
 //  drupal_add_js($path_to_custom_js . 'gv_countdown.js');
 
   
+  $target_field_name = 'tags_blog';
+  $current_term_tid = '4071';
+  $query = db_select('field_data_field_' . $target_field_name, 'f');
+    $query->fields('f', array('entity_id'))
+      ->condition('f.field_' . $target_field_name . '_value', $current_term_tid)
+      ->condition('f.entity_type', 'node');
+    $nids = $query->execute()->fetchAll(PDO::FETCH_COLUMN);
+    dpm($nids);
   
   return $out . '<br>End of Test';
 }
