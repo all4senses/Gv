@@ -4,11 +4,11 @@
     attach: function (context, settings) {
        
         $(".kkcount-down").kkcountdown({
-          dayText		: 'd ',
-          daysText 	: 'd ',
-            hoursText	: ':',
-            minutesText	: ':',
-            secondsText	: '',
+          dayText		: 'day ',
+          daysText 	: 'days ',
+            hoursText	: 'h ',
+            minutesText	: 'm ',
+            secondsText	: 'c left',
             displayZeroDays : false
             //,callback	: test
             //,addClass	: 'shadow'
