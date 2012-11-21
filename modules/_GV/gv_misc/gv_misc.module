@@ -1887,13 +1887,13 @@ function gv_misc_testPage() {
     $count++;
     
 
-//    $result = db_update('gv_quote_requests')
-//      ->fields(array(
-//        'email_presented' => $data['Email'],
-//      ))
-//      ->condition('timestamp', $ucaptured->timestamp)
-//      ->condition('data', $ucaptured->data)    
-//      ->execute();
+    $result = db_update('gv_quote_requests')
+      ->fields(array(
+        'email_presented' => strtolower($data['Email']),
+      ))
+      ->condition('timestamp', $ucaptured->timestamp)
+      ->condition('data', $ucaptured->data)    
+      ->execute();
 
   }
   $out .= '<div>Amount of emails: ' . $count . '</div>';
