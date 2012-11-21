@@ -233,7 +233,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   // Show emails only.
   if (arg(3) == 'emails') {
     $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
-    $query->fields('qr', array(/*'data', */'email_presented'));
+    $query->fields('qr', array(/*'data', */'email_presented', 'timestamp'));
     $query->condition('qr.email_presented', '0', '!=');
     $query->condition('qr.email_presented', '', '!=');
     $query->isNotNull('qr.email_presented');
@@ -269,6 +269,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     }
     $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
+    $emails .= '<br/><div><strong>All emails separated by commas:</strong><br/> ' . implode(',', $all_emails) . '</div>';
   
 
     $form['emails'] = array(
