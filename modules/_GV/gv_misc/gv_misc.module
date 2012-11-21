@@ -89,6 +89,16 @@ function gv_misc_menu() {
 
 
 /**
+ * Implements hook_taxonomy_term_delete().
+ * Removes tag's references and its twin tag from a main tag voc references from nodes.
+ */
+function gv_misc_taxonomy_term_delete($term) {
+  dpm($term);
+  
+}
+
+
+/**
  * Prevent Enter button on Content_GetVoIP page while inline editing fields.
  */
 function gv_misc_preventEnterOnEditField() {
