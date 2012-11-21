@@ -1873,7 +1873,7 @@ function gv_misc_testPage() {
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
     if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
-      continue;
+      //continue;
     }
     $all_emails[] = $data['Email'];
     $out .= '<div>' . $data['Email'] . '</div>';
