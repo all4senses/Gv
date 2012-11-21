@@ -233,7 +233,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   // Show emails only.
   if (arg(3) == 'emails') {
     $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
-    $query->fields('qr', array('data', 'email_presented'));
+    $query->fields('qr', array(/*'data', */'email_presented'));
     $query->condition('qr.email_presented', '0', '!=');
     $query->condition('qr.email_presented', '', '!=');
     $query->isNotNull('qr.email_presented');
@@ -245,10 +245,31 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         ->execute();
 
     $emails = '';
+//    foreach ($ucaptureds as $ucaptured) {
+//      $data = unserialize($ucaptured->data);
+//      $emails .= '<div>' . $data['Email'] . '</div>';
+//    }
+    
+    
+    
+    $count = NULL;
+    $all_emails = array();
     foreach ($ucaptureds as $ucaptured) {
-      $data = unserialize($ucaptured->data);
-      $emails .= '<div>' . $data['Email'] . '</div>';
+      //$data = unserialize($ucaptured->data);
+      
+//      if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
+//        continue;
+//      }
+      if (in_array($ucaptured->email_presented, $all_emails) || !strpos($ucaptured->email_presented, '@') || strpos($ucaptured->email_presented, 'test@') !== FALSE || strpos($ucaptured->email_presented, '@test') !== FALSE) {
+        continue;
+      }
+      $all_emails[] = $ucaptured->email_presented;
+      $emails .= '<div>' . $ucaptured->email_presented . '</div>';
+      $count++;
+
     }
+    $emails .= '<div>Amount of emails: ' . $count . '</div>';
+  
 
     $form['emails'] = array(
       '#type' => 'markup',

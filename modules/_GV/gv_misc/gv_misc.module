@@ -1288,7 +1288,7 @@ function gv_misc_makeRequestCapture_ajax() {
                 'data' => serialize($ucaptured),
                 'status' => 1, // Unsubmitted, sent.
                 'checked' => 1, // Reviewed, because is sent.
-                'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : 0,
+                'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : NULL,
               ))
               ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
               ->execute();
@@ -1339,7 +1339,7 @@ function gv_misc_makeRequestCapture_ajax() {
         $result = db_update('gv_quote_requests')
           ->fields(array(
             'data' => serialize($ucaptured),
-            'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : 0,
+            'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : NULL,
           ))
           ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
           ->execute();
@@ -1359,7 +1359,7 @@ function gv_misc_makeRequestCapture_ajax() {
             'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
             'data' => serialize($ucaptured),
             'checked' => 0, // Not reviewed by a user or not sent
-            'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : 0,
+            'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : NULL,
           ))
           ->execute();
       } // End of Else of if ($ucaptured) {
@@ -1395,7 +1395,7 @@ function gv_misc_makeRequestCapture_ajax() {
           'ip' =>  isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
           'data' => serialize($ucaptured),
           'checked' => 0, // Not reviewed by a user or not sent
-          'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : 0,
+          'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : NULL,
         ))
         ->execute();
       
@@ -1879,14 +1879,7 @@ function gv_misc_testPage() {
   $all_emails = array();
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
-    if (/*in_array($data['Email'], $all_emails) ||*/ !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
-      $result = db_update('gv_quote_requests')
-        ->fields(array(
-          'email_presented' => NULL,
-        ))
-        ->condition('timestamp', $ucaptured->timestamp)
-        ->condition('data', $ucaptured->data)    
-        ->execute();
+    if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
       continue;
     }
     $all_emails[] = $data['Email'];
