@@ -306,7 +306,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //      if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
 //        continue;
 //      }
-      if (in_array($result->field_r_email_value, $all_emails) || !strpos($result->field_r_email_value, '@') || strpos($result->field_r_email_value, 'getvoip.') !== FALSE || strpos($result->field_r_email_value, 'test') !== FALSE || strpos($ucaptured->email_presented, 'ruben') !== FALSE || strpos($ucaptured->email_presented, 'alexxhome') !== FALSE || strpos($ucaptured->email_presented, 'all4senses') !== FALSE) {
+      if (in_array($result->field_r_email_value, $all_emails) || !strpos($result->field_r_email_value, '@') || strpos($result->field_r_email_value, 'getvoip.') !== FALSE || strpos($result->field_r_email_value, 'test') !== FALSE || strpos($result->field_r_email_value, 'ruben') !== FALSE || strpos($result->field_r_email_value, 'alexxhome') !== FALSE || strpos($result->field_r_email_value, 'all4senses') !== FALSE) {
         continue;
       }
       $all_emails[] = $result->field_r_email_value;
