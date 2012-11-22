@@ -129,13 +129,14 @@ function gv_misc_taxonomy_term_delete($current_term) {
   }
   
   if ($main_term) {
+    dpm($main_term);
     // Get nodes list of the specific type that have this field value.
     $query = db_select('field_data_field_' . $target_field_name, 'f');
     $query->fields('f', array('entity_id'))
       ->condition('f.field_' . $target_field_name . '_tid', $current_term->tid)
       ->condition('f.entity_type', 'node');
     $nids = $query->execute()->fetchAll(PDO::FETCH_COLUMN);
-    //dpm($nids);
+    dpm($nids);
 
     // Delete corresponding main tag from fields.
     gv_misc_fieldDelete($main_field_name, NULL, 'field_' . $main_field_name . '_tid', $main_term->tid, $nids);
@@ -159,6 +160,7 @@ function gv_misc_fieldDelete($field_name, $entity_id, $target_field_name = NULL,
   
   if (!$entity_id && $target_field_id) {
     if (empty($entity_ids)) {
+      dpm('$entity_ids');
       // Delete all nodes fields with set value field.
       db_delete('field_data_field_' . $field_name)
         ->condition($target_field_name, $target_field_id)
@@ -168,6 +170,7 @@ function gv_misc_fieldDelete($field_name, $entity_id, $target_field_name = NULL,
         ->execute();
     }
     else {
+      dpm('NOT $entity_ids');
       // Delete only specific nodes fields with set value field.
       db_delete('field_data_field_' . $field_name)
         ->condition($target_field_name, $target_field_id)
@@ -181,6 +184,7 @@ function gv_misc_fieldDelete($field_name, $entity_id, $target_field_name = NULL,
       
   }
   else {
+    dpm('simple by $entity_id');
     db_delete('field_data_field_' . $field_name)
       ->condition('entity_id', $entity_id)
       ->execute();
