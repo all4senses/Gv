@@ -2204,14 +2204,14 @@ function gv_misc_testPage() {
   
   //$url = 'http://ww3.vocalocity.com/l/7772/2012-10-01/36gsq6';
   
-  $url = 'https://disqus.com/api/3.0/forums/listUsers.json?';
+  $url = 'https://disqus.com/api/3.0/forums/listUsers.json?' . implode('&', $params);
   
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_TIMEOUT, 300);
-  curl_setopt($curl, CURLOPT_POST, FALSE);
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+//  curl_setopt($curl, CURLOPT_POST, TRUE);
+//  curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
   $data_from = curl_exec($curl);
   
   dpm($data_from);
