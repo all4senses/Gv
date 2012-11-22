@@ -2136,9 +2136,6 @@ function gv_misc_testPage() {
     if (!@$request['Email']) {
       continue;
     }
-    if (!@$request['Time_Unix']) {
-      $notime_requests[] = $request;
-    }
     $request['Email'] = strtolower($request['Email']);
     if (in_array($request['Email'], $good_requests_emails) || !strpos($request['Email'], '@') || strpos($request['Email'], 'getvoip') !== FALSE || strpos($request['Email'], 'test@') !== FALSE || strpos($request['Email'], '@test') !== FALSE) {
       continue;
@@ -2147,9 +2144,19 @@ function gv_misc_testPage() {
     $good_requests_emails[] = $request['Email'];
   }
   
+  
+  
+  $new_requests = array();
+  foreach ($good_requests as $good_request) {
+    if (in_array($good_request['Email'], $all_emails)) {
+      continue;
+    }
+    $new_requests[] = $good_request;
+  }
+  
   dpm($good_requests_emails);
   dpm($good_requests);
-  dpm($notime_requests);
+  dpm($new_requests);
   
   
   /*
