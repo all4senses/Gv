@@ -2136,7 +2136,7 @@ function gv_misc_testPage() {
     if (!@$request['Email']) {
       continue;
     }
-    if (!@$request['Time']) {
+    if (!@$request['Time_Unix']) {
       $notime_requests[] = $request;
     }
     $request['Email'] = strtolower($request['Email']);
