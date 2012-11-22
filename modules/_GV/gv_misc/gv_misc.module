@@ -2180,7 +2180,7 @@ function gv_misc_testPage() {
       ->fields(array(
         'timestamp' => $Submit_Time,
         'status' => 2, // Submitted and sent.
-        'ip' =>  @$new_request['User IP'],
+        'ip' =>  !empty($new_request['User IP']) ? $new_request['User IP'] : '',
         'data' => serialize($new_request),
         'checked' => 1, // Reviewed, because is sent.
         'email_presented' => $new_request['Email'],
