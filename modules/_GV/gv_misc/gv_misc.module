@@ -2168,8 +2168,9 @@ function gv_misc_testPage() {
     $query->condition('qr.email_presented', $new_request['Email']);
   
     $existing = $query->execute()->fetchObject();
-    //dpm($existing);
-    $existings[] = $existing;
+    if ($existing) {
+      $existings[] = $existing;
+    }
   }
   
   dpm($existings);
