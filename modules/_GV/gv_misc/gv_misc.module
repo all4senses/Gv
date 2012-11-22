@@ -2090,6 +2090,7 @@ function gv_misc_testPage() {
     if ($object != "." && $object != "..") {
       $f = file($dir . "/" . $object);
       //dpm($f);
+      $files[] = $f;
       $start = FALSE;
       
       foreach ($f as $key2 => $str) {
@@ -2117,6 +2118,7 @@ function gv_misc_testPage() {
     }
   }
 
+  dpm($files);
   dpm($requests);
   
   $good_requests = array();
