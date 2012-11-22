@@ -2092,13 +2092,20 @@ function gv_misc_testPage() {
       dpm($f);
       $start = FALSE;
       
-      foreach ($f as $str) {
+      foreach ($f as $key => $str) {
+        
+        if (trim($str) && strpos($str, 'Recieved:') !== FALSE) {
+          $requests[$key]['Recieved'] = @trim($f[$key + 1]);
+        }
+        
         if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
           
           $start = TRUE;
+          
           if (trim($str) == 'Quote Request submission form:') {
             continue;
           }
+          
           $data = explode(' = ', $str);
 
           $requests[$key][trim($data[0])] = @trim($data[1]);
