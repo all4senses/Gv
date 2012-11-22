@@ -2115,7 +2115,7 @@ function gv_misc_testPage() {
   $good_requests = array();
   $good_requests_emails = array();
   foreach ($requests as $request) {
-    if (in_array($request['Email'], $good_requests_emails)/* || !strpos($request['Email'], '@') || strpos($request['Email'], 'test@') !== FALSE || strpos($request['Email'], '@test') !== FALSE*/) {
+    if (!@$request['Email'] || in_array($request['Email'], $good_requests_emails)/* || !strpos($request['Email'], '@') || strpos($request['Email'], 'test@') !== FALSE || strpos($request['Email'], '@test') !== FALSE*/) {
       continue;
     }
     $good_requests[] = $request;
