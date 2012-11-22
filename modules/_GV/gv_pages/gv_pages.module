@@ -274,12 +274,63 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('Show all data', 'admin/content/quote-requests') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('Show all data', 'admin/content/quote-requests') . ' - ' . l('Show reviews emails', 'admin/content/quote-requests/reviews-emails') . '</div><br/>' . $emails,
+    );
+    
+    return $form;
+  }
+  elseif (arg(3) == 'reviews-emails') {
+    // Show reviews emails.
+    $query = db_select('field_data_field_r_email', 're'); //->extend('PagerDefault');
+    $query->fields('re', array('field_r_email_value'));
+    
+    $results = 
+      $query
+        //->orderBy($sort, $order)
+        //->limit(20)
+        ->execute();
+
+    $emails = '';
+//    foreach ($ucaptureds as $ucaptured) {
+//      $data = unserialize($ucaptured->data);
+//      $emails .= '<div>' . $data['Email'] . '</div>';
+//    }
+    
+    
+    
+    $count = NULL;
+    $all_emails = array();
+    foreach ($results as $result) {
+      //$data = unserialize($ucaptured->data);
+      
+//      if (in_array($data['Email'], $all_emails) || !strpos($data['Email'], '@') || strpos($data['Email'], 'test@') !== FALSE || strpos($data['Email'], '@test') !== FALSE) {
+//        continue;
+//      }
+      if (in_array($result->field_r_email_value, $all_emails) || !strpos($result->field_r_email_value, '@') || strpos($result->field_r_email_value, 'getvoip.') !== FALSE || strpos($result->field_r_email_value, 'test') !== FALSE || strpos($ucaptured->email_presented, 'ruben') !== FALSE || strpos($ucaptured->email_presented, 'alexxhome') !== FALSE || strpos($ucaptured->email_presented, 'all4senses') !== FALSE) {
+        continue;
+      }
+      $all_emails[] = $result->field_r_email_value;
+      $emails .= '<div>' . $result->field_r_email_value . '</div>';
+      $count++;
+
+    }
+    $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
+    $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
+  
+
+    $form['emails'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div class="type">' . l('Show all data', 'admin/content/quote-requests') . ' - ' . l('Only emails', 'admin/content/quote-requests/emails') . '</div><br/>' . $emails,
     );
     
     return $form;
   }
   
+  
+  
+  
+  
+  // All Quote Requests Data.
   
   if (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
     
@@ -347,7 +398,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   $form['emails'] = array(
     '#type' => 'markup',
-    '#markup' => '<div class="type">' . l('Show emails only', 'admin/content/quote-requests/emails') . '</div>',
+    '#markup' => '<div class="type">' . l('Show emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Show reviews emails', 'admin/content/quote-requests/reviews-emails') . '</div>',
   );
   
   $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
