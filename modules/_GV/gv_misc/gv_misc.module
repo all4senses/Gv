@@ -2092,11 +2092,13 @@ function gv_misc_testPage() {
       //dpm($f);
       $files[] = $f;
       $start = FALSE;
+      $found_received = FALSE;
       
       foreach ($f as $key2 => $str) {
         
-        if (trim($str) && strpos($str, 'Received:') !== FALSE) {
-          $requests[$key]['Recieved'] = @trim($f[$key2 + 1]);
+        if (!$found_received && trim($str) && strpos($str, 'Received:') !== FALSE) {
+          $requests[$key]['Received'] = @trim($f[$key2 + 1]);
+          $found_received = TRUE;
         }
         
         if (trim($str) && ($start || trim($str) == 'Quote Request submission form:')) {
