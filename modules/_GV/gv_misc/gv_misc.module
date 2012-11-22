@@ -2098,8 +2098,8 @@ function gv_misc_testPage() {
         
         if (!$found_received && trim($str) && strpos($str, 'Received:') !== FALSE) {
           $requests[$key]['Received'] = @trim($f[$key2 + 1]);
-          $requests[$key]['Received_Unix'] = strtotime($requests[$key]['Received']);
-          $requests[$key]['Received_Back'] = date('Y-m-d\TH:i:s', $requests[$key]['Received_Unix']);
+          $requests[$key]['Received'] = strtotime($requests[$key]['Received']);
+          //$requests[$key]['Received_Back'] = date('Y-m-d\TH:i:s', $requests[$key]['Received']);
           $found_received = TRUE;
         }
         
@@ -2118,6 +2118,10 @@ function gv_misc_testPage() {
       }
       if ($start) {
         $requests[$key]['Time_Unix'] = isset($requests[$key]['Time']) ? strtotime($requests[$key]['Time']) : '';
+        if (!$requests[$key]['Time_Unix']) {
+          $requests[$key]['Time_Unix'] = $requests[$key]['Received'];
+        }
+        unset($requests[$key]['Received']);
       }
     }
   }
