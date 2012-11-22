@@ -2098,6 +2098,8 @@ function gv_misc_testPage() {
         
         if (!$found_received && trim($str) && strpos($str, 'Received:') !== FALSE) {
           $requests[$key]['Received'] = @trim($f[$key2 + 1]);
+          $requests[$key]['Received_Unix'] = strtotime($requests[$key]['Received']);
+          $requests[$key]['Received_Back'] = date('Y-m-d\TH:i:s', $requests[$key]['Received_Unix']);
           $found_received = TRUE;
         }
         
@@ -2120,7 +2122,7 @@ function gv_misc_testPage() {
     }
   }
 
-  dpm($files);
+  //dpm($files);
   dpm($requests);
   
   $good_requests = array();
