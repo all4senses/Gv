@@ -328,16 +328,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   elseif (arg(3) == 'disqus-emails') {
     // Show Disqus emails.
 
-    $gv_disqus_users = unserialize(variable_get('gv_disqus_users', serialize(array())));
+    $all_emails = unserialize(variable_get('gv_disqus_users', serialize(array())));
     
     $emails = '<br/><div><strong>Disqus emails</strong></div><br/>';
-
-    
-    
+   
     $count = NULL;
-    $all_emails = array();
-    foreach ($gv_disqus_users as $result) {
-      $emails .= '<div>' . $result['email'] . '</div>';
+    foreach ($all_emails as $disqus_user) {
+      $emails .= '<div>' . $disqus_user['email'] . '</div>';
       $count++;
     }
     $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
