@@ -2276,7 +2276,9 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
         }
       }
       
+      dpm($data_from->corsor->next);
       if (!empty($data_from->corsor->next)) {
+        dpm($data_from->corsor->next);
         $next_id = explode(':', $data_from->corsor->next);
         dpm($next_id);
         $next_id = $next_id[0];
