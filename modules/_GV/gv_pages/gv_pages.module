@@ -232,6 +232,9 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
   // Show emails only.
   if (arg(3) == 'emails') {
+    
+    // Requests emails only.
+    
     $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
     $query->fields('qr', array(/*'data', */'email_presented', 'timestamp'));
     $query->condition('qr.email_presented', '0', '!=');
@@ -244,7 +247,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         //->limit(20)
         ->execute();
 
-    $emails = '<br/><div><strong>Only emails</strong></div><br/>';
+    $emails = '<br/><div><strong>Quote requests emails only.</strong></div><br/>';
 //    foreach ($ucaptureds as $ucaptured) {
 //      $data = unserialize($ucaptured->data);
 //      $emails .= '<div>' . $data['Email'] . '</div>';
@@ -274,7 +277,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('Show all data', 'admin/content/quote-requests') . ' - ' . l('Show reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
     );
     
     return $form;
@@ -290,7 +293,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         //->limit(20)
         ->execute();
 
-    $emails = '<br/><div><strong>Reviews emails</strong></div><br/>';
+    $emails = '<br/><div><strong>Reviews emails.</strong></div><br/>';
 //    foreach ($ucaptureds as $ucaptured) {
 //      $data = unserialize($ucaptured->data);
 //      $emails .= '<div>' . $data['Email'] . '</div>';
@@ -320,7 +323,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('Show all data', 'admin/content/quote-requests') . ' - ' . l('Only emails', 'admin/content/quote-requests/emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
     );
     
     return $form;
@@ -345,7 +348,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('Show all data', 'admin/content/quote-requests') . ' - ' . l('Only emails', 'admin/content/quote-requests/emails')  . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails')  . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . '</div><br/>' . $emails,
     );
     
     return $form;
@@ -422,7 +425,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   $form['emails'] = array(
     '#type' => 'markup',
-    '#markup' => '<div class="type">' . l('Show emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Show reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div>'
+    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div>'
       . '<br/><div><strong>All Quote Requests data</strong></div><br/>',
   );
   
