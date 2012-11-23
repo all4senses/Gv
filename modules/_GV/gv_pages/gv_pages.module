@@ -333,7 +333,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $gv_disqus_users = unserialize(variable_get('gv_disqus_users', serialize(array())));
     
-    $emails = '<br/><div><strong>Disqus emails</strong></div><br/>';
+    $emails = '<br/><div><strong>Disqus emails.</strong></div><br/>';
 
     $count = NULL;
     $all_emails = array();
@@ -426,7 +426,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   $form['emails'] = array(
     '#type' => 'markup',
     '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div>'
-      . '<br/><div><strong>All Quote Requests data</strong></div><br/>',
+      . '<br/><div><strong>All Quote Requests data.</strong></div><br/>',
   );
   
   $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
