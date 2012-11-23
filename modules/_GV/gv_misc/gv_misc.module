@@ -2253,6 +2253,8 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
 
   $remote_users = array();
   
+  dpm($next_id);
+  
   $url = 'https://disqus.com/api/3.0/forums/listUsers.json?' . 
     'forum=getvoip' .
     ($next_id ? '&since_id=' . $next_id : '') .
@@ -2276,7 +2278,9 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
       
       if (!empty($data_from->corsor->next)) {
         $next_id = explode(':', $data_from->corsor->next);
+        dpm($next_id);
         $next_id = $next_id[0];
+        dpm($next_id);
         $remote_users += gv_misc_disqus_getUsers($next_id);
       }
       
