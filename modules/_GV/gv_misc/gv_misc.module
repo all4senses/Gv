@@ -2217,18 +2217,19 @@ function gv_misc_testPage() {
 //  curl_setopt($curl, CURLOPT_POST, TRUE);
 //  curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
   
-  $data_from = curl_exec($curl);
-  
-  dpm($data_from);
-  
-  $data_from = json_decode($data_from);
-  
-  dpm($data_from);
-  
-  if ($data_from === false) {
-    $data_from = 'Error!!! 
-' . curl_error($curl);
+  $remote_users = array();
+  if ($data_from = curl_exec($curl)) {
+    $data_from = json_decode($data_from);
+    dpm($data_from);
+    if (!$data_from->code) {
+      foreach ($data_from->response as $remote_user) {
+        $remote_users[$remote_user->id] = array('name' => $remote_user->name, 'email' => $remote_user->email);
+      }
+    }
   }
+  
+  dpm($remote_users);
+  
   curl_close($curl);
   
   
