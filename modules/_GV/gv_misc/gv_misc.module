@@ -24,6 +24,13 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   ); 
   
+  $items['get-disqus-users'] = array(
+    'title' => 'Get new Disqus users',
+    'page callback' => 'gv_misc_disqus_getNewUsers',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  
   $items['get/iframe/business-voip-chart'] = array(
     'title' => 'Top Business VoIP Providers',
     'page callback' => 'gv_misc_getIframe_TopProvidersBu',
@@ -2255,6 +2262,30 @@ function gv_misc_testPage() {
 }
 
 
+/**
+ * Get new users from Disqus and update local variable/db.
+ */
+function gv_misc_disqus_getNewUsers() {
+  
+  $out = 'No new Disqus users this time.';
+  
+  $gv_disqus_users = unserialize(variable_get('gv_disqus_users', serialize(array())));
+  
+  $new_gv_disqus_users = gv_misc_disqus_getUsers();
+  dpm($new_gv_disqus_users);
+  
+  if ($gv_disqus_users != $new_gv_disqus_users) {
+    $gv_disqus_users += $new_gv_disqus_users;
+    variable_set('gv_disqus_users', serialize($gv_disqus_users));
+    $out = 'Something has changed (new users, less users, etc).';
+  }
+  
+  dpm(unserialize(variable_get('gv_disqus_users')));
+  
+  return $out;
+}
+
+  
 /**
  * Get users from Disqus.
  */
