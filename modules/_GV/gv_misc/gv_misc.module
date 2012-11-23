@@ -2277,12 +2277,13 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
         }
       }
       
-//      if (!empty($data_from->cursor->next)) {
-//        $next_id = explode(':', $data_from->cursor->next);
-//        $next_id = $next_id[0];
-//        dpm($next_id);
-//        $remote_users += gv_misc_disqus_getUsers($next_id);
-//      }
+      if ($data_from->cursor->hasNext) {
+        $next_id = explode(':', $data_from->cursor->next);
+        $next_id = $next_id[0];
+        dpm($next_id);
+        $remote_users += gv_misc_disqus_getUsers($next_id);
+        return $remote_users;
+      }
       
     } // End of if (!$data_from->code) {
   } // End of if ($data_from) {.
