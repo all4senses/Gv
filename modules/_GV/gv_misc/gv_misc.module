@@ -2234,10 +2234,19 @@ function gv_misc_testPage() {
   }
   */
   
+  $gv_disqus_users = unserialize(variable_get('gv_disqus_users', serialize(array())));
+  dpm($gv_disqus_users);
   
-  $remote_users = gv_misc_disqus_getUsers();
+  $new_gv_disqus_users = gv_misc_disqus_getUsers();
+  dpm($new_gv_disqus_users);
   
-  dpm($remote_users);
+  if ($gv_disqus_users != $new_gv_disqus_users) {
+    dpm('$gv_disqus_users != $new_gv_disqus_users');
+    $gv_disqus_users += $new_gv_disqus_users;
+    variable_set('gv_disqus_users', serialize($gv_disqus_users));
+  }
+  
+  dpm(unserialize(variable_get('gv_disqus_users')));
   
   
   
@@ -2257,7 +2266,7 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
   
   $url = 'https://disqus.com/api/3.0/forums/listUsers.json?' . 
     'forum=getvoip' .
-    '&limit=3' .
+    '&limit=100' .
     ($next_id ? '&since_id=' . $next_id : '') .
     //'&access_token=8d0dbf3f80be4df4be19a4bbcaa0912c' .
     //'&api_key=LTxXVkhAehxdgzsFbolUXSTosneekOOuwWrpx1okk8LHaW5APx4yVcXDP0zwapS5' .
@@ -2279,9 +2288,7 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
       
       if ($data_from->cursor->hasNext) {
         $next_id = explode(':', $data_from->cursor->next);
-        dpm($next_id);
         $next_id = $next_id[0];
-        dpm($next_id);
         $remote_users += gv_misc_disqus_getUsers($next_id);
         return $remote_users;
       }
