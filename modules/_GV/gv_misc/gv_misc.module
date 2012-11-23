@@ -2279,6 +2279,7 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
       
       if ($data_from->cursor->hasNext) {
         $next_id = explode(':', $data_from->cursor->next);
+        dpm($next_id);
         $next_id = $next_id[0];
         dpm($next_id);
         $remote_users += gv_misc_disqus_getUsers($next_id);
