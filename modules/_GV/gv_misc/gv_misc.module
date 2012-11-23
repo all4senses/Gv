@@ -2223,7 +2223,9 @@ function gv_misc_testPage() {
     dpm($data_from);
     if (!$data_from->code) {
       foreach ($data_from->response as $remote_user) {
-        $remote_users[$remote_user->id] = array('name' => $remote_user->name, 'email' => $remote_user->email);
+        if (!empty($remote_user->email) && strpos($remote_user->email, 'getvoip') === FALSE ) {
+          $remote_users[$remote_user->id] = array('name' => $remote_user->name, 'email' => $remote_user->email);
+        }
       }
     }
   }
