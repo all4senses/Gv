@@ -45,6 +45,7 @@
               
               
               $author = user_load($node->uid);
+              dpm($author);
               $author_name = $author->realname;
               $author_url = url('user/' . $node->uid);
               $author_title = t('!author\'s profile', array('!author' => $author_name));
@@ -154,6 +155,7 @@
           if (isset($content['metatags']['keywords'])) {
             hide($content['metatags']['keywords']);
           }
+          
           if (isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) && $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
             gv_misc_addMetatag($keyword_metatag_name, $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
           }
@@ -209,11 +211,11 @@
 
                       <div class="main">
                         
-                            <?php if(1): ?>
+                            <?php //if(1): ?>
 
                               <?php echo gv_blocks_getSocialiteButtons($url, $title); ?> 
 
-                            <?php else: ?> 
+                            <?php /*else: ?> 
         
 
                                 <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
@@ -241,7 +243,9 @@
                                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
                                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-                            <?php endif; // Of else of if($user->uid == 1) ?> 
+                            <?php endif; // Of else of if($user->uid == 1) 
+                             */
+                            ?> 
                         
                       </div> <!-- main share buttons -->
 
