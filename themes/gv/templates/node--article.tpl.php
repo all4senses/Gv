@@ -46,16 +46,12 @@
               //$author = user_load($node->uid);
               //$author_name = $author->realname;
               
-              $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
-              $author_name = $authorExtendedData->realname;
-              
-              $author_url = url('user/' . $node->uid);
-              $author_title = t('!author\'s profile', array('!author' => $author_name));
+              if ($page || $node->type == 'article') {
+                $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
+                $author_name = $authorExtendedData->realname;
+              }
             
               if ($page) {
-               
-                //$gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
-                $gplus_profile = ($authorExtendedData->field_u_gplus_profile_value) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $authorExtendedData->field_u_gplus_profile_value . '?rel=author">(G+)</a>' : '';
                 
                 /*
                 global $user;
@@ -75,6 +71,11 @@
                   
                   global $language;
                   
+                  $author_url = url('user/' . $node->uid);
+                  $author_title = t('!author\'s profile', array('!author' => $author_name));
+                  //$gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
+                  $gplus_profile = ($authorExtendedData->field_u_gplus_profile_value) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $authorExtendedData->field_u_gplus_profile_value . '?rel=author">(G+)</a>' : '';
+                
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   t('By') . ':' .
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
