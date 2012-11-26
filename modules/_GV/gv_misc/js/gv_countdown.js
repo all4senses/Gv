@@ -14,6 +14,8 @@
           //,addClass	: 'shadow'
         });
         
+        console.log('xxx');
+        
 //        function test(){
 //          console.log('KONIEC');
 //        }
