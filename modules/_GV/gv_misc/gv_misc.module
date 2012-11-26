@@ -109,13 +109,15 @@ function gv_misc_loadUserExtendedData($uid) {
   $cache = cache_get($cid, 'cache');
   dpm($cache);
 
+  $cache = FALSE;
+  
   if ($cache && !empty($cache->data) && !empty($cache->data[$uid]) && $cache->expire > time()) {
     $out = $cache->data[$uid];
     dpm($out);
   }
   else {
     $userExtendedData_all = $cache ? $cache->data : array();
-    $userExtendedData_all += db_query("SELECT uid, realname FROM {realname} WHERE uid = :uids", array(':uids' => $uid))->fetchAllKeyed();
+    $userExtendedData_all += db_query("SELECT uid, realname FROM {realname} WHERE uid = :uids", array(':uids' => $uid))->fetchAll();
     dpm($userExtendedData_all);
     cache_set($cid, $userExtendedData_all, 'cache', strtotime('+1 day'));
     $out = $userExtendedData_all[$uid];
