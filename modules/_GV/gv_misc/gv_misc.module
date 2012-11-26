@@ -96,6 +96,41 @@ function gv_misc_menu() {
 
 
 /**
+ * Loads an additional user_data for articles.
+ *
+ * @param $uid
+ *   A user account uid.
+ * @return
+ *   The user's generated object with additional data.
+ */
+function gv_misc_loadUserExtendedData($uid) {
+  
+  $userExtendedData_all = &drupal_static(__FUNCTION__, array());
+  
+  dpm($userExtendedData_all);
+  
+  $accounts = array($uid => $uid);
+  
+  if ($new_accounts = array_diff_key($accounts, $userExtendedData_all)) {
+    // Attempt to fetch realnames from the database first.
+    $userExtendedData_all += db_query("SELECT uid, realname FROM {realname} WHERE uid IN (:uids)", array(':uids' => array_keys($new_accounts)))->fetchAllKeyed();
+  }
+  
+  dpm($userExtendedData_all);
+  
+  $userExtendedData_all_out = array_intersect_key($userExtendedData_all, $accounts);
+  
+  dpm($userExtendedData_all_out);
+  
+  $out = reset($userExtendedData_all_out);
+  
+  dpm($out);
+  
+  return $out;
+}
+
+
+/**
  * Implements hook_taxonomy_term_delete().
  * Removes tag's references and its twin tag from a main tag voc references from nodes.
  */
