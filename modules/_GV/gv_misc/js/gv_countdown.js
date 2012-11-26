@@ -3,20 +3,20 @@
   Drupal.behaviors.gv_countdown = {
     attach: function (context, settings) {
        
-        $(".kkcount-down").kkcountdown({
+        $(".kkcount-down#ipad_mini").kkcountdown({
           dayText		: 'day ',
           daysText 	: 'days ',
-            hoursText	: 'h ',
-            minutesText	: 'm ',
-            secondsText	: 's left',
-            displayZeroDays : false
-            //,callback	: test
-            //,addClass	: 'shadow'
+          hoursText	: 'h ',
+          minutesText	: 'm ',
+          secondsText	: 's left',
+          displayZeroDays : false
+          //,callback	: test
+          //,addClass	: 'shadow'
         });
         
-        function test(){
-          console.log('KONIEC');
-        }
+//        function test(){
+//          console.log('KONIEC');
+//        }
 
 
        

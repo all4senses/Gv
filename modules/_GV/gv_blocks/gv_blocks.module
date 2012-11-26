@@ -352,7 +352,7 @@ function gv_blocks_getAdBlock($ad_name) {
       drupal_add_js($path_to_custom_js . 'gv_countdown.js');
   
       return '<a href="/blog/2012/11/19/getvoipcom-holiday-sweepstakes-win-a-free-ipad-mini"><img src="/sites/default/files/a/free-ipad-mini-banner.jpg" /></a>
-              <span time="' . strtotime('2012-12-18, 23:59:59') . '" class="kkcount-down"></span>';
+              <span time="' . strtotime('2012-12-18, 23:59:59') . '" class="kkcount-down" id="ipad_mini"></span>';
   }
 }
 
@@ -495,7 +495,7 @@ function gv_blocks_get_footerMenu() {
     $menu = menu_build_tree('menu-footer-menu');
     $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
-    cache_set($cid, $out, 'cache', strtotime('+30 day'));
+    cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
