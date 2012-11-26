@@ -48,8 +48,11 @@
               
               $author_name = $author->realname;
               
-              $xxx = gv_misc_loadUserExtendedData($node->uid);
-              //dpm($xxx);
+              global $user;
+              if ($user->uid == 1) {
+                $xxx = gv_misc_loadUserExtendedData($node->uid);
+                //dpm($xxx);
+                }
               
               $author_url = url('user/' . $node->uid);
               $author_title = t('!author\'s profile', array('!author' => $author_name));
