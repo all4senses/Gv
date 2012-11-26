@@ -4140,6 +4140,7 @@ function gv_pages_node_view($node, $view_mode) {
         $args = arg();
         if (!empty($args[1])) {
           drupal_not_found();
+          drupal_exit();
         }
       }
       elseif ($preface_key) {
