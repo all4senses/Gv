@@ -14,7 +14,7 @@
           //,addClass	: 'shadow'
         });
         
-        console.log('xxx');
+        //console.log('xxx');
         
 //        function test(){
 //          console.log('KONIEC');
