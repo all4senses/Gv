@@ -2275,6 +2275,7 @@ function gv_misc_disqus_getNewUsers() {
 <pre>' . print_r($new_users, TRUE) . '</pre>';
   }
   
+  global $language;
   $params['report'] = $out;
   drupal_mail('gv_misc', 'new_disqus_user', 'all4senses@gmail.com', $language->language, $params);
   //dpm(unserialize(variable_get('gv_disqus_users')));
