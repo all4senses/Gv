@@ -710,8 +710,7 @@ function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_
   $cid = 'gv-block-cache---' . $block_data['module'] . '-' . $block_data['delta'];
   $cache = cache_get($cid, 'cache');
 
-  if (0) {
-  //if ($cache && !empty($cache->data) && $cache->expire > time()) {
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
     $out = $cache->data;
     dpm('cached!');
   }
