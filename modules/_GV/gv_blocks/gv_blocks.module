@@ -712,7 +712,6 @@ function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_
 
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
     $out = $cache->data;
-    dpm('cached!');
   }
   else {
 
@@ -724,7 +723,6 @@ function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_
         cache_set($cid, $out, 'cache');
       }
       
-      dpm('no cached!');
     }
 
   } // End of else of if ($cache && !empty($cache->data) && $cache->expire > time()) {
