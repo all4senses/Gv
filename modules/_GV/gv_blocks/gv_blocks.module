@@ -474,9 +474,23 @@ function gv_blocks_get_newsTopics() {
  * Returns a themed Header links block.
  */
 function gv_blocks_get_headerLinks() {
-  $menu = menu_build_tree('menu-header-links');
-  //return '<span class="menu-preface">Header:</span>' . theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu'));
-  return theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
+  
+  $cid = 'gv_cached_headerLinks';
+  $cache = cache_get($cid, 'cache');
+
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    $out = $cache->data;
+  }
+  else {
+    $menu = menu_build_tree('menu-header-links');
+    $out = theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
+    
+    cache_set($cid, $out, 'cache', strtotime('+31 day'));
+  } 
+  
+//  $menu = menu_build_tree('menu-header-links');
+//  $out = theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
+  return $out;
 }
 
 
