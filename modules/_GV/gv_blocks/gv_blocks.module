@@ -670,55 +670,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
 /**
  * Returns a content of a block wrapped in proper divs.
  */
-function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_str = FALSE)
-{
-
-  // Caching system version.
-  
-  if ($cache_on) {
-    $cid = 'gv-block-cache---' . $block_data['module'] . '-' . $block_data['delta'];
-    $cache = cache_get($cid, 'cache');
-
-    if ($cache && !empty($cache->data) && $cache->expire > time()) {
-      $out = $cache->data;
-      dpm($out);
-    }
-    else {
-      
-      $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
-      
-      if ($block) {
-        
-        if (isset($block_data['subject'])) {
-          $block['subject'] = $block_data['subject'];
-        }
-        elseif (@$block_data['no_subject']) {
-          $block['subject'] = '';
-        }
-        
-        $out = gv_blocks_wrapInBlockThemed($block_data, $block);
-        
-        dpm($out);
-        
-        if ($cache_expire_str) {
-          cache_set($cid, $out, 'cache', strtotime($cache_expire_str));
-        }
-        else {
-          cache_set($cid, $out, 'cache');
-        }
-
-      } // End of if ($block) {
-      else {
-        $out = NULL;
-      }
-      
-    } // End of else of if ($cache && !empty($cache->data) && $cache->expire > time()) {
-    
-    return $out;
-  }
-  
-  
-  
+function gv_blocks_getBlockThemed_noCache($block_data){
   
   // No caching version.
   
@@ -733,6 +685,67 @@ function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_
     return gv_blocks_wrapInBlockThemed($block_data, $block);
   }
   return NULL;
+  
+}
+
+
+/**
+ * Returns a content of a block wrapped in proper divs.
+ */
+function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_str = FALSE)
+{
+
+  
+  
+  // No caching version.
+  
+  if (!$cache_on) {
+    return gv_blocks_getBlockThemed_noCache($block_data);
+  }
+
+  
+  
+  // Caching system version.
+  
+  $cid = 'gv-block-cache---' . $block_data['module'] . '-' . $block_data['delta'];
+  $cache = cache_get($cid, 'cache');
+
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    $out = $cache->data;
+    dpm($out);
+  }
+  else {
+
+    if ($out = gv_blocks_getBlockThemed_noCache($block_data)) {
+      if ($cache_expire_str) {
+        cache_set($cid, $out, 'cache', strtotime($cache_expire_str));
+      }
+      else {
+        cache_set($cid, $out, 'cache');
+      }
+    }
+
+  } // End of else of if ($cache && !empty($cache->data) && $cache->expire > time()) {
+
+  return $out;
+
+  
+  
+  
+  
+  // No caching version.
+  
+//  $block = module_invoke($block_data['module'], 'block_view', $block_data['delta']);
+//  if ($block) {
+//    if (isset($block_data['subject'])) {
+//      $block['subject'] = $block_data['subject'];
+//    }
+//    elseif (@$block_data['no_subject']) {
+//      $block['subject'] = '';
+//    }
+//    return gv_blocks_wrapInBlockThemed($block_data, $block);
+//  }
+//  return NULL;
 }
 
 
