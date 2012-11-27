@@ -2264,9 +2264,15 @@ function gv_misc_disqus_getNewUsers() {
   //dpm($new_gv_disqus_users);
   
   if ($gv_disqus_users != $new_gv_disqus_users) {
+    
+    $new_users = array_diff_key($new_gv_disqus_users, $gv_disqus_users);
+    
     $gv_disqus_users += $new_gv_disqus_users;
     variable_set('gv_disqus_users', serialize($gv_disqus_users));
-    $out = 'Something has changed (new users, less users, etc).';
+    $out = 'Something has changed (new users, less users, etc).
+ 
+
+<pre>' . print_r($new_users, TRUE) . '</pre>';
   }
   
   $params['report'] = $out;
