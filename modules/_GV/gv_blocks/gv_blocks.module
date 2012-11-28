@@ -706,7 +706,7 @@ function gv_blocks_getBlockThemed_noCache($block_data){
 /**
  * Returns a content of a block wrapped in proper divs.
  */
-function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_str = FALSE)
+function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_str = FALSE, $suffix = NULL)
 {
 
   
@@ -721,7 +721,7 @@ function gv_blocks_getBlockThemed($block_data, $cache_on = FALSE, $cache_expire_
   
   // Caching system version.
   
-  $cid = 'gv-block-cache---' . $block_data['module'] . '-' . $block_data['delta'];
+  $cid = 'gv-block-cache---' . $block_data['module'] . '-' . $block_data['delta'] . $suffix;
   $cache = cache_get($cid, 'cache');
 
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
