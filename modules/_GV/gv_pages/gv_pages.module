@@ -2795,14 +2795,14 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 
   if ($form_state['values']['op'] == 'Save' && @$form_state['build_info']['args'][0]->status == 0) {
     // NOT publish ---> Publish
-    drupal_set_message('NOT publish ---> Publish', 'warning');
+    //drupal_set_message('NOT publish ---> Publish', 'warning');
 
     $form_state['values']['status'] = 1;
     $status_changed = TRUE;
   }
   elseif (($form_state['values']['op'] == 'Save Draft' ||  $form_state['values']['status'] == 0) && @$form_state['build_info']['args'][0]->status == 1) {
     // Publish ---> NOT publish
-    drupal_set_message('Publish ---> NOT publish', 'warning');
+    //drupal_set_message('Publish ---> NOT publish', 'warning');
 
     $form_state['values']['status'] = 0;
     drupal_set_message(t('Attention! This article is saved as draft and is not published now!'), 'warning');
@@ -2816,6 +2816,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     // Clear the views cache.
     cache_clear_all('*', 'cache_views', TRUE);
     cache_clear_all('*', 'cache_views_data', TRUE);
+    drupal_set_message(t('A cache is flushed.'), 'warning');
   }
 
 //  if ($form_state['values']['op'] == 'Save Draft') {
