@@ -2790,9 +2790,12 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 
   global $user;
   if ($user->uid == 1) {
-    dpr($form);
-    dpr($form_state);
-    exit;
+    drupal_set_message('status before = ' . $form_state['build_info']['args'][0]->status, 'warning');
+    drupal_set_message('status after = ' . $form_state['values']['status'], 'warning');
+    drupal_set_message('op = ' . $form_state['values']['op'], 'warning');
+    //dpr($form);
+    //dpr($form_state);
+    //exit;
   }
   dpm($form);
   dpm($form_state);
