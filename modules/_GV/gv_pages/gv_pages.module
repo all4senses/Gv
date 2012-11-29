@@ -2793,12 +2793,12 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     drupal_set_message('op = ' . $form_state['values']['op'], 'warning');
   
 
-  global $user;
-  if ($user->uid == 1) {
-    dpr($form);
-    dpr($form_state);
-    exit;
-  }
+//  global $user;
+//  if ($user->uid == 1) {
+//    dpr($form);
+//    dpr($form_state);
+//    exit;
+//  }
           
   if ($form_state['values']['op'] == 'Save' && @$form_state['build_info']['args'][0]->status == 0) {
     // NOT publish ---> Publish
@@ -2814,6 +2814,9 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 
     $form_state['values']['status'] = 0;
     drupal_set_message(t('Attention! This article is saved as draft and is not published now!'), 'warning');
+    $status_changed = TRUE;
+  }
+  elseif (!$form_state['values']['nid'] || $form_state['values']['op'] == 'Delete') {
     $status_changed = TRUE;
   }
   else {
