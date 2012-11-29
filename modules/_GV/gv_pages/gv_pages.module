@@ -2788,6 +2788,12 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
  */
 function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 
+  global $user;
+  if ($user->uid == 1) {
+    dpr($form);
+    dpr($form_state);
+    exit;
+  }
   dpm($form);
   dpm($form_state);
   //dpm($form_state['values']);
