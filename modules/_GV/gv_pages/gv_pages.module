@@ -2845,6 +2845,11 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 }
 
 
+function gv_pages_node_delete(&$form, &$form_state) {
+  cache_clear_all('*', 'cache_views', TRUE);
+  cache_clear_all('*', 'cache_views_data', TRUE);
+  drupal_set_message(t('A cache has been flushed.'), 'warning');
+}
 
 /**
  * Custom validate of Phone type form.
