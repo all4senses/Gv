@@ -2815,6 +2815,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
   if ($status_changed) {
     // Clear the views cache.
     cache_clear_all('*', 'cache_views', TRUE);
+    cache_clear_all('*', 'cache_views_data', TRUE);
   }
 
 //  if ($form_state['values']['op'] == 'Save Draft') {
