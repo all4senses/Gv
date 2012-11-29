@@ -91,7 +91,16 @@
 
     </div>
   <?php endif; ?>
-  <?php */?>
-  
+  <?php */
+    
+    global $user;
+    if ($user->uid) {
+      $phones = views_embed_view('phones','block_all_by_author');
+      if ($articles) {
+        echo '<div id="articles-caption">', t('Read some of !author\'s latest ip phones reviews below:', array('!author' => $user_profile['field_u_fname'][0]['#markup'])), '</div>', $phones;
+      }
+    }
+    
+    ?>
   
  </div>
