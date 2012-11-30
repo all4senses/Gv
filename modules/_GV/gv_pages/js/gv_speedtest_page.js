@@ -20,7 +20,7 @@
             e.fromJS(jsmethod, args);
           }
         }
-
+        */
         
         var flashvars = {};
         var params = {
@@ -34,7 +34,7 @@
         };
         swfobject.embedSWF("sites/all/libraries/ookla/linequalitytest.swf?v=2.1.7", "linequalitytest", "640", "400", "8.0.0", "sites/all/libraries/ookla/expressInstall.swf", flashvars, params, attributes);
 
-        */
+        
 
         if ((BrowserDetect.browser != "Safari") && (BrowserDetect.browser != "Opera")) {
           if (deployJava.getJREs() == "") {
