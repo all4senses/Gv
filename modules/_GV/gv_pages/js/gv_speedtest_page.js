@@ -4,7 +4,7 @@
     attach: function (context, settings) {
 
         //console.log('Speedtest!');
-        /*
+        
         function toJava(jsmethod,args) {
           var e = document.getElementById('VoipApplet');
           if (e) {
@@ -21,7 +21,7 @@
           }
         }
 
-
+        /*
         var flashvars = {};
         var params = {
           quality: "high",
