@@ -1901,7 +1901,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
-        $providers[7] = t('OTHER SP');
+        $providers[41] = t('OTHER SP');
         $form['provider']['field_ref_provider']['und']['#options'] = $providers;
         $form['provider']['field_ref_provider']['und']['#default_value'][0] = '_none';
 
@@ -2028,10 +2028,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           $providers = array();
           gv_misc_getProviders($providers);
-          $providers[7] = t('OTHER SP');
+          $providers[41] = t('OTHER SP');
           
           $form['provider']['field_ref_provider']['und']['#options'] = $providers;
-          $form['provider']['field_ref_provider']['und']['#default_value'][0] = 7;
+          $form['provider']['field_ref_provider']['und']['#default_value'][0] = 41;
           
           // Should we allow to a regular user to edit the name in the text field / reselect from the list?
           // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
@@ -2445,7 +2445,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // we can just use prefilled field data.
         //////////$phones['_none'] = t('- Select a value -');
         ///////////gv_misc_getPhones($phones);
-        // $phones[7] = t('OTHER SP'); // we don't use it for phones. just for providers.
+        // $phones[41] = t('OTHER SP'); // we don't use it for phones. just for providers.
         ////$form['phone']['field_ref_phone']['und']['#options'] = $phones;
         ////$form['phone']['field_ref_phone']['und']['#default_value'][0] = '_none';
         $phones = $form['phone']['field_ref_phone']['und']['#options'];
@@ -3332,7 +3332,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   }
   
   // If field_ref_provider is choosen as OTHER SP, the field_r_oprovider should be set as well
-  if ($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && !$form_state['values']['field_r_oprovider']['und'][0]['value']) {
+  if ($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && !$form_state['values']['field_r_oprovider']['und'][0]['value']) {
     form_set_error('field_r_oprovider', t('Please write in the name of a Provider'));  
   }
 
@@ -3363,10 +3363,10 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
     
   // If OTHER SP has been set.
-  if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
+  if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
     // Check if author of this review has already submitted a review for a selected provider.
     $review = gv_misc_userHasSubmittedReview(NULL, $author_uid, $author_email, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid);
-  } // End of if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 7 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
+  } // End of if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
   else {
     // Check if author of this review has already submitted a review for a selected provider.
     $review = gv_misc_userHasSubmittedReview($form_state['values']['field_ref_provider']['und'][0]['target_id'], $author_uid, $author_email, NULL, $current_review_nid);
@@ -3515,7 +3515,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
 //    $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
 //    
 //    // Save a provider name to the review
-//    if ($provider_nid && $provider_nid != 7) {
+//    if ($provider_nid && $provider_nid != 41) {
 //      $provider = node_load($provider_nid);
 //      $node->field_r_provider_name['und'][0]['value'] = $provider->field_p_name['und'][0]['value'];
 //    } 
@@ -3540,7 +3540,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     if ($form_state['values']['email_old'] != $form_state['values']['field_r_email_temp']) {
       
       $provider_nid = isset($form_state['values']['field_ref_provider']['und'][0]['target_id']) ? $form_state['values']['field_ref_provider']['und'][0]['target_id'] : NULL;
-      if ($provider_nid && $provider_nid != 7) {
+      if ($provider_nid && $provider_nid != 41) {
         $saved_ratings = unserialize($form_state['values']['field_ratings_oprovider']['und'][0]['value']);
         
         $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
@@ -3570,7 +3570,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
           votingapi_delete_votes($select_votes);
         }
         
-      } // End of if ($provider_nid && $provider_nid != 7) {
+      } // End of if ($provider_nid && $provider_nid != 41) {
       
     } // End of if ($form_state['values']['email_old'] != $form_state['values']['field_r_email_temp'])
     
@@ -3680,7 +3680,7 @@ function gv_pages_node_presave($node) {
 
 
     // If a provider was chosen from a list, save voting results to Voting API tables.
-    if ($provider_nid && $provider_nid != 7) {
+    if ($provider_nid && $provider_nid != 41) {
       
         // Remove (clear) this review's previous votes from a target provider calculation set.
         foreach ($votes as $c) {
@@ -3705,7 +3705,7 @@ function gv_pages_node_presave($node) {
         // Save a provider name to the review
         $provider = node_load($provider_nid);
         $node->field_r_provider_name['und'][0]['value'] = $provider->field_p_name['und'][0]['value'];
-    } // End of if ($provider_nid && $provider_nid != 7) {
+    } // End of if ($provider_nid && $provider_nid != 41) {
     else {
       $node->field_r_provider_name['und'][0]['value'] = $node->field_r_oprovider['und'][0]['value'];
     }
@@ -3713,7 +3713,7 @@ function gv_pages_node_presave($node) {
     // If chosen OTHER SP (and dummy nid), replace a dummy nid with 0, 
     // as we don't want to associate this review with that dummy nid node, of course.
     // Or clear OTHER SP field.
-    if ($node->field_ref_provider['und'][0]['target_id'] == 7) {
+    if ($node->field_ref_provider['und'][0]['target_id'] == 41) {
       $node->field_ref_provider['und'][0]['target_id'] = 0;
     }
     else {
