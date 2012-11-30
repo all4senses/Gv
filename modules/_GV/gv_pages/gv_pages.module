@@ -39,6 +39,16 @@ function gv_pages_menu() {
     'access arguments' => array('access content'),  
     'type' => MENU_CALLBACK,
   );
+  
+  
+  
+  $items['voip-speed-test'] = array(
+    'title' => 'Home page',
+    'page callback' => 'gv_pages_speedTestPage',
+    'access arguments' => array('access content'),  
+    'type' => MENU_CALLBACK,
+  );
+  
   /*
   $items['news-topics'] = array(
     'title' => 'News topics',
@@ -75,7 +85,83 @@ function gv_pages_menu() {
 
 
 /**
+ * Ookla Speedtest page.
+ */
+function gv_pages_speedTestPage() {
+  
+  $path_to_lib = 'sites/all/libraries/ookla/';
+  drupal_add_js($path_to_lib . 'swfobject.js');
+  drupal_add_js($path_to_lib . 'browserdetect.js');
+  drupal_add_js($path_to_lib . 'deployJava.js');
+  drupal_add_js($path_to_lib . 'functions.js');
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_speedtest_page.js');
+  
+  
+$out = '  
+<div id="abovebefore">
+  <!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES -->
+  Edit index.html to change or remove this example content that will <strong>disappear after</strong> the test is run once.
+</div>
+
+<div id="aboveafter" style="display: none;">
+  <!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST AFTER IT COMPLETES -->
+  This content will <strong>not appear until after</strong> the test is run once. Edit index.html to change or remove it.
+</div>
+
+<br/>
+
+<div id="linequalitytest">
+  The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http://get.adobe.com/flashplayer/">Please update your client</a>.
+</div>
+
+          
+          
+<div id="speed"></div>
+<div id="javaerror" style="display: none;">
+   <br/>The Ookla Line Quality Test requires Java. <a href="javascript:deployJava.installLatestJRE();">Please update your client.</a><br/><br/>
+</div>
+
+
+          
+          
+          
+<applet code="VoipApplet.class" archive="/sites/all/libraries/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet">
+	<param name="bgcolor" value="ffffff">
+	<param name="packetlosslength" value="100">
+	<param name="tcpport" value="5060">
+	<param name="udpport" value="5060">
+	<param name="latencylength" value="10">
+	<param name="latencypause" value="20">
+	<param name="packetlosspause" value="20">
+</applet>
+
+<br/>
+
+<div id="belowbefore">
+<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP BELOW THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES -->
+This content will <strong>disappear after</strong> the test is run once. Edit index.html to change or remove it.
+<br/><br/>
+If you are having trouble getting things working as expected, then please see our <a href="http://wiki.ookla.com" target="_blank">documentation</a>.
+
+</div>
+
+<div id="belowafter" style="display: none;">
+<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP BELOW THE LINE QUALITY TEST AFTER IT COMPLETES -->
+Edit index.html to change or remove this example content that will <strong>not appear until after</strong> the test is run once.
+</div>
+
+';
+
+
+  return $out;  
+}
+
+
+/**
  * Implements Hook Process Html.
+ * Minify html on the fly.
  */
 function gv_misc_process_html(&$vars) {
   
