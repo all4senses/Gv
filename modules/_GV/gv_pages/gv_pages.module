@@ -96,8 +96,8 @@ function gv_pages_speedTestPage() {
   //drupal_add_js($path_to_lib . 'deployJava.js');
   //drupal_add_js($path_to_lib . 'functions.js');
   
-  //$path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
-  //drupal_add_js($path_to_custom_js . 'gv_speedtest_page.js');
+  $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_speedtest_page.js');
   
 /*
 $out = '  
@@ -216,6 +216,8 @@ The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http:
 </script>
 <div id="speed"></div>
 <div id="javaerror" style="display: none;"><br/>The Ookla Line Quality Test requires Java. <a href="javascript:deployJava.installLatestJRE();">Please update your client.</a><br/><br/></div>
+
+<!--
 <script type="text/javascript">
      if ((BrowserDetect.browser != "Safari") && (BrowserDetect.browser != "Opera")) {
           if (deployJava.getJREs() == "") {
@@ -226,6 +228,8 @@ The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http:
              }
         }
 </script>
+-->
+
 <applet code="VoipApplet.class" archive="/sites/all/libraries/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet">
 	<param name="bgcolor" value="ffffff">
 	<param name="packetlosslength" value="100">
