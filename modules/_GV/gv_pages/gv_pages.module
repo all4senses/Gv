@@ -91,7 +91,7 @@ function gv_pages_speedTestPage() {
   
   
   $path_to_lib = 'sites/all/libraries/ookla/';
-  drupal_add_js($path_to_lib . 'swfobject.js', 'inline');
+  drupal_add_js($path_to_lib . 'swfobject.js', array('type' => 'inline'));
   drupal_add_js($path_to_lib . 'browserdetect.js');
   //drupal_add_js($path_to_lib . 'deployJava.js');
   //drupal_add_js($path_to_lib . 'functions.js');
