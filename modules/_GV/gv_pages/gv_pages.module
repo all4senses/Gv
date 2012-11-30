@@ -90,16 +90,16 @@ function gv_pages_menu() {
 function gv_pages_speedTestPage() {
   
   
-//  $path_to_lib = 'sites/all/libraries/ookla/';
-//  drupal_add_js($path_to_lib . 'swfobject.js');
-//  drupal_add_js($path_to_lib . 'browserdetect.js');
-//  drupal_add_js($path_to_lib . 'deployJava.js');
-//  drupal_add_js($path_to_lib . 'functions.js');
+  $path_to_lib = 'sites/all/libraries/ookla/';
+  drupal_add_js($path_to_lib . 'swfobject.js');
+  drupal_add_js($path_to_lib . 'browserdetect.js');
+  drupal_add_js($path_to_lib . 'deployJava.js');
+  drupal_add_js($path_to_lib . 'functions.js');
   
   //$path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
   //drupal_add_js($path_to_custom_js . 'gv_speedtest_page.js');
   
-/*  
+
 $out = '  
 <div id="abovebefore">
   <!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES -->
@@ -154,11 +154,11 @@ Edit index.html to change or remove this example content that will <strong>not a
 </div>
 
 ';
-*/
 
 
 
 
+/*
 $out = '
 <script type="text/javascript" src="/sites/all/libraries/ookla/swfobject.js"></script>
 <script type="text/javascript" src="/sites/all/libraries/ookla/browserdetect.js"></script>
@@ -251,7 +251,7 @@ If you are having trouble getting things working as expected, then please see ou
 Edit index.html to change or remove this example content that will <strong>not appear until after</strong> the test is run once.
 </div>
 ';
-
+*/
 
 
   return $out;  
