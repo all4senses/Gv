@@ -96,10 +96,10 @@ function gv_pages_speedTestPage() {
   drupal_add_js($path_to_lib . 'deployJava.js');
   drupal_add_js($path_to_lib . 'functions.js');
   
-  $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_speedtest_page.js');
+  //$path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
+  //drupal_add_js($path_to_custom_js . 'gv_speedtest_page.js');
   
-  
+/*  
 $out = '  
 <div id="abovebefore">
   <!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES -->
@@ -154,16 +154,17 @@ Edit index.html to change or remove this example content that will <strong>not a
 </div>
 
 ';
+*/
 
 
 
 
-/*
 $out = '
-<script type="text/javascript" src="/sites/all/libraries/ookla/swfobject.js"></script>
+<!-- <script type="text/javascript" src="/sites/all/libraries/ookla/swfobject.js"></script>
 <script type="text/javascript" src="/sites/all/libraries/ookla/browserdetect.js"></script>
 <script type="text/javascript" src="/sites/all/libraries/ookla/deployJava.js"></script>
-<script type="text/javascript" src="/sites/all/libraries/ookla/functions.js"></script>
+<script type="text/javascript" src="/sites/all/libraries/ookla/functions.js"></script> -->
+
 <script language="JavaScript">
 <!--
 function toJava(jsmethod,args) {
@@ -254,7 +255,7 @@ Edit index.html to change or remove this example content that will <strong>not a
 </body>
 </html>
 ';
-*/
+
 
 
   return $out;  
