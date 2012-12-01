@@ -21,17 +21,17 @@
 function gv_pager($variables) {
   
   
-  
-  if (arg(0) != 'user') {
-    return theme('pager', $variables);
-  }
-  
-  
-  
-  dpm(arg());
-
-  dpm($variables);
-  
+//  
+//  if (arg(0) != 'user') {
+//    return theme('pager', $variables);
+//  }
+//  
+//  
+//  
+//  dpm(arg());
+//
+//  dpm($variables);
+//  
   $tags = $variables['tags'];
   $element = $variables['element'];
   $parameters = $variables['parameters'];
