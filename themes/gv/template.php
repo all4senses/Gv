@@ -20,9 +20,9 @@
  */
 function gv_pager($variables) {
   
-  $ar = args();
-  dpm($ar);
-  //dpm($_SERVER);
+//  $ar = args();
+//  dpm($ar);
+//  //dpm($_SERVER);
   
   dpm($variables);
   
