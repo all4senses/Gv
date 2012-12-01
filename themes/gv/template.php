@@ -20,17 +20,11 @@
  */
 function gv_pager($variables) {
   
+  // Show only next/prev pager for user profile page.
   
-  global $user;
-  if ($user->uid != 1 || arg(0) != 'user') {
+  if (arg(0) != 'user') {
     return theme_pager($variables);
   }
-  
-  
-  
-  dpm(arg());
-
-  dpm($variables);
   
   $tags = $variables['tags'];
   $element = $variables['element'];
@@ -38,13 +32,8 @@ function gv_pager($variables) {
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
 
-
   $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : t('‹ previous')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
   $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('next ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
-  
-  dpm($li_previous);
-  dpm($li_next);
-  
   
   if ($li_previous) {
     $items[] = array(
@@ -64,6 +53,13 @@ function gv_pager($variables) {
     'items' => $items,
     'attributes' => array('class' => array('pager')),
   ));
+  
+  
+  
+  
+  
+  
+  
   
   
   // Calculate various markers within this pager piece:
