@@ -38,6 +38,34 @@ function gv_pager($variables) {
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
 
+
+  $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : t('‹ previous')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+  $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('next ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+  
+  dpm($li_previous);
+  dpm($li_next);
+  
+  
+  if ($li_previous) {
+    $items[] = array(
+      'class' => array('pager-previous'),
+      'data' => $li_previous,
+    );
+  }
+  if ($li_next) {
+    $items[] = array(
+      'class' => array('pager-next'),
+      'data' => $li_next,
+    );
+  }
+    
+    
+  return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . theme('item_list', array(
+    'items' => $items,
+    'attributes' => array('class' => array('pager')),
+  ));
+  
+  
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
   $pager_middle = ceil($quantity / 2);
@@ -70,9 +98,6 @@ function gv_pager($variables) {
   $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('next ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
   $li_last = theme('pager_last', array('text' => (isset($tags[4]) ? $tags[4] : t('last »')), 'element' => $element, 'parameters' => $parameters));
 
-  dpm($li_previous);
-  dpm($li_next);
-  
   if ($pager_total[$element] > 1) {
     if ($li_first) {
       $items[] = array(
