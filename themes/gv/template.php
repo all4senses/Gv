@@ -21,8 +21,8 @@
 function gv_pager($variables) {
   
   
-  
-  if (arg(0) != 'user') {
+  global $user;
+  if ($user->uid != 1 || arg(0) != 'user') {
     return theme_pager($variables);
   }
   
@@ -70,6 +70,9 @@ function gv_pager($variables) {
   $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('next ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
   $li_last = theme('pager_last', array('text' => (isset($tags[4]) ? $tags[4] : t('last »')), 'element' => $element, 'parameters' => $parameters));
 
+  dpm($li_previous);
+  dpm($li_next);
+  
   if ($pager_total[$element] > 1) {
     if ($li_first) {
       $items[] = array(
