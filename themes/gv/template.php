@@ -20,6 +20,9 @@
  */
 function gv_pager($variables) {
   
+  dpm(args());
+  dpm($_SERVER);
+  
   dpm($variables);
   
   $tags = $variables['tags'];
