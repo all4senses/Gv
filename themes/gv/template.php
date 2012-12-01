@@ -19,6 +19,9 @@
  * @ingroup themeable
  */
 function gv_pager($variables) {
+  
+  dpm($variables);
+  
   $tags = $variables['tags'];
   $element = $variables['element'];
   $parameters = $variables['parameters'];
