@@ -32,8 +32,8 @@ function gv_pager($variables) {
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
 
-  $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : t('‹ previous')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
-  $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('next ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+  $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : t('‹ Newer Posts')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+  $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('Older Posts ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
   
   if ($li_previous) {
     $items[] = array(
