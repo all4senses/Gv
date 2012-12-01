@@ -20,10 +20,16 @@
  */
 function gv_pager($variables) {
   
-  $ar = arg();
-  dpm($ar);
-  dpm($_SERVER);
   
+  
+  if (arg(0) != 'user') {
+    return theme('pager', $variables);
+  }
+  
+  
+  
+  dpm(arg());
+
   dpm($variables);
   
   $tags = $variables['tags'];
