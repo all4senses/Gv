@@ -21,7 +21,7 @@
 function gv_pager($variables) {
   
   dpm(args());
-  dpm($_SERVER);
+  //dpm($_SERVER);
   
   dpm($variables);
   
