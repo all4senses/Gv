@@ -1,5 +1,4 @@
-
-  <h1 class="preface" <?php /*echo preg_replace('/datatype=""/', '', $title_attributes);*/ if ($current_is_reviews) {echo ' property="dc:title v:summary"';} else {echo preg_replace('/datatype=""/', '', $title_attributes);} ?>>
+  <h1 class="preface" <?php echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
       <?php 
         echo $title; 
       ?>
