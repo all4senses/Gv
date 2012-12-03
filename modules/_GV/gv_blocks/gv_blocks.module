@@ -386,7 +386,8 @@ function gv_blocks_weeklyVideoBlock() {
   
   $youtube_video_id = variable_get('gv_weekly_video_block', NULL);
   $out = 'weekly Video';
-  $out .= token_replace('[video: http://www.youtube.com/watch?v=' . $youtube_video_id . ']');
+
+  $out .= '<iframe width="230" height="129" src="http://www.youtube.com/embed/' . $youtube_video_id . '" frameborder="0" allowfullscreen></iframe>';
   
   return $out;
 }
