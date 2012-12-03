@@ -313,7 +313,7 @@ function gv_preprocess_node(&$variables) {
       $variables['theme_hook_suggestions'][] = 'node__quote__v3';
     }
     // Speed test page have its own template
-    elseif($variables['node']->type == 'preface' && $variables['node']->field_preface_key['und'][0]['value'] = 'voip-speed-test') {
+    elseif($variables['node']->type == 'preface' && $variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
       dpm($variables['node']);
       $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
     }
