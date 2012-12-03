@@ -22,6 +22,8 @@ function gv_pager($variables) {
   
   // Show only next/prev pager for user profile page.
   
+  dpm(arg());
+  
   if (arg(0) != 'user') {
     return theme_pager($variables);
   }
@@ -48,12 +50,17 @@ function gv_pager($variables) {
     );
   }
     
-    
-  return '<h2 class="element-invisible">' . t('Pages') . '</h2>' . theme('item_list', array(
-    'items' => $items,
-    'attributes' => array('class' => array('pager')),
-  ));
   
+  if (empty($items)) {
+    return NULL;
+  }
+  else {
+    return '<h2 class="element-invisible">' . t('Pages') . '</h2>' 
+          . theme('item_list', array(
+            'items' => $items,
+            'attributes' => array('class' => array('pager')),
+          ));
+  }
   
   
   
