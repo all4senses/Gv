@@ -383,7 +383,11 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  * Returns a weekly Video block.
  */
 function gv_blocks_weeklyVideoBlock() {
-  return 'weekly Video';
+  
+  $youtube_video_id = variable_get('gv_weekly_video_block', NULL);
+  $out = 'weekly Video - ' . $youtube_video_id;
+  
+  return $out;
 }
 
 
