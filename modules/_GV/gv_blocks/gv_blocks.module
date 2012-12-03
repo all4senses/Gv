@@ -162,6 +162,11 @@ function gv_blocks_block_info() {
     'info' => t('Ad for a free ipad-mini'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['weekly_video'] = array(
+    'info' => t('Weekly video'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   
   return $blocks;
 }
@@ -328,14 +333,24 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getAdBlock('free_ipad_mini');
       break;
     
-    $blocks['ad_free_ipad_mini'] = array(
-      'info' => t('Ad for a free ipad-mini'),
-      'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+    case 'weekly_video':
+      $block['subject'] = t('Weekly video');
+      $block['content'] = gv_blocks_weeklyVideoBlock();
+      break;
+    
+    
     
   }
 
   return $block;
+}
+
+
+/**
+ * Returns a weekly Video block.
+ */
+function gv_blocks_weeklyVideoBlock() {
+  return 'weekly Video';
 }
 
 
