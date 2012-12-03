@@ -41,13 +41,15 @@ function gv_pages_menu() {
   );
   
   
-  
+  /*
+  // Deprecated.
   $items['voip-speed-test'] = array(
     'title' => 'Home page',
     'page callback' => 'gv_pages_speedTestPage',
     'access arguments' => array('access content'),  
     'type' => MENU_CALLBACK,
   );
+  */
   
   /*
   $items['news-topics'] = array(
@@ -86,8 +88,9 @@ function gv_pages_menu() {
 
 /**
  * Ookla Speedtest page.
+ * Deprecated! Used separated template of preface type: node--preface--voip-speed-test.tpl Look at template.php
  */
-function gv_pages_speedTestPage() {
+function gv_pages_speedTestPage_____deprecated() {
   
   drupal_set_title('VoIP Speed Test');
   
@@ -337,6 +340,7 @@ Edit index.html to change or remove this example content that will <strong>not a
 
   return $out;  
 }
+
 
 
 /**
