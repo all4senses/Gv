@@ -385,7 +385,8 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 function gv_blocks_weeklyVideoBlock() {
   
   $youtube_video_id = variable_get('gv_weekly_video_block', NULL);
-  $out = 'weekly Video - ' . $youtube_video_id;
+  $out = 'weekly Video';
+  $out .= token_replace('[video: http://www.youtube.com/watch?v=' . $youtube_video_id . ']');
   
   return $out;
 }
