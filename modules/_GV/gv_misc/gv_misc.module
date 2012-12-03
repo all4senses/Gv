@@ -2837,13 +2837,8 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
     //$result->link = array('link_title' => $result->name, 'href' => $base_url . '/' . urlencode(drupal_strtolower($result->name)));
     ////$result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . str_replace(array(' ', '.'), array('-', ''), drupal_strtolower($result->name)));
     
-    global $user;
-    if ($user->uid == 1) {
-      $result->link = array('link_title' => $result->name, 'href' => 'taxonomy/term/' . $result->tid);
-    }
-    else {
-      $result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . pathauto_cleanstring($result->name));
-    }
+    //$result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . pathauto_cleanstring($result->name)); // WRONG WAY!
+    $result->link = array('link_title' => $result->name, 'href' => 'taxonomy/term/' . $result->tid);
     
     $topics[$result->tid] = /*(array)*/ $result;
   }
