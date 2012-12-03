@@ -346,7 +346,6 @@ function gv_blocks_block_view($delta = '') {
 }
 
 
-
 /**
  * Implements hook_block_configure().
  */
@@ -365,6 +364,18 @@ function gv_blocks_block_configure($delta = '') {
   }
   
   return $form;
+}
+
+
+/**
+ * Implements hook_block_save().
+ */
+function gv_blocks_block_save($delta = '', $edit = array()) {
+
+  if ($delta == 'weekly_video') {
+    variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
+  }
+  
 }
 
 
