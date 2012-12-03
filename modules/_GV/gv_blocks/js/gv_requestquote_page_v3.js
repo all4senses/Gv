@@ -279,7 +279,7 @@
              firstname: Drupal.t('First Name is required'),
              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
              phone: Drupal.t('Enter a valid phone number'),
-             phone: Drupal.t('Enter a company name'),
+             company: Drupal.t('Enter a company name'),
              
              // Works!
              /*
