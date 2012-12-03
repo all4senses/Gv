@@ -2837,7 +2837,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
     
     global $user;
     if ($user->uid == 1) {
-      $result->link = array('link_title' => $result->name, 'href' => url('/taxonomy/term/' . $result->tid));
+      $result->link = array('link_title' => $result->name, 'href' => url('taxonomy/term/' . $result->tid));
     }
     else {
       $result->link = array('link_title' => $result->name, 'href' => $base_url . '/tags/' . pathauto_cleanstring($result->name));
