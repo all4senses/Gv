@@ -312,6 +312,11 @@ function gv_preprocess_node(&$variables) {
     elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') ) {
       $variables['theme_hook_suggestions'][] = 'node__quote__v3';
     }
+    // Speed test page have its own template
+    elseif($variables['node']->type == 'preface') {
+      dpm($variables['node']);
+      //$variables['theme_hook_suggestions'][] = 'node__quote__v3';
+    }
     
   }
   

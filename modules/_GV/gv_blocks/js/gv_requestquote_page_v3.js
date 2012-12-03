@@ -224,6 +224,10 @@
                 minlength: 9,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
+							},
+              company: {
+                required: true,
+                notEqualsTo: $('input[id="company"]').attr('title')
 							}
               // works
               /* 
@@ -275,7 +279,7 @@
              firstname: Drupal.t('First Name is required'),
              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
              phone: Drupal.t('Enter a valid phone number'),
-
+             phone: Drupal.t('Enter a company name'),
              
              // Works!
              /*
