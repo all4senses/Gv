@@ -21,7 +21,7 @@
     echo 'teeeeeest';
 
     if (@$node->field_display_type['und'][0]['value'] == 1) {
-      render($content['field_preface_bottom']);
+      echo render($content['field_preface_bottom']);
     }
     
   ?>
