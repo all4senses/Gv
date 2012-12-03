@@ -346,6 +346,28 @@ function gv_blocks_block_view($delta = '') {
 }
 
 
+
+/**
+ * Implements hook_block_configure().
+ */
+function gv_blocks_block_configure($delta = '') {
+  
+  $form = array();
+  
+  if ($delta == 'weekly_video') {
+    
+    $form['youtube_video_id'] = array(
+      '#type' => 'textfield', 
+      '#title' => t('YouTube video id'),
+      '#default_value' => variable_get('gv_weekly_video_block', NULL), 
+    );
+    
+  }
+  
+  return $form;
+}
+
+
 /**
  * Returns a weekly Video block.
  */
