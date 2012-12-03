@@ -21,10 +21,9 @@
 function gv_pager($variables) {
   
   // Show only next/prev pager for user profile page.
-  dpm('test');
-  dpm(arg());
-  
-  if (arg(0) != 'user') {
+  $arg_0 = arg(0);
+ 
+  if ($arg_0 != 'user') {
     return theme_pager($variables);
   }
   
