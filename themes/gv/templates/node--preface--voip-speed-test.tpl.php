@@ -26,7 +26,9 @@
 // Ookla speed test page original content. -------------------------------------------------------------------------------
     
   
-  $path_to_lib = 'sites/all/libraries/ookla/';
+  //$path_to_lib = 'sites/all/libraries/ookla/';
+  $path_to_lib = 'ookla/';
+  
   //drupal_add_js($path_to_lib . 'swfobject.js');
   drupal_add_js($path_to_lib . 'browserdetect.js');
   //drupal_add_js($path_to_lib . 'deployJava.js');
@@ -195,10 +197,19 @@ Edit index.html to change or remove this example content that will <strong>not a
   
 ?>
     
-    
+<?php
+/*    
 <script type="text/javascript" src="/sites/all/libraries/ookla/swfobject.js"></script>
 <script type="text/javascript" src="/sites/all/libraries/ookla/deployJava.js"></script>
 <script type="text/javascript" src="/sites/all/libraries/ookla/functions.js"></script>
+*/
+?>
+    
+<script type="text/javascript" src="/ookla/swfobject.js"></script>
+<script type="text/javascript" src="/ookla/deployJava.js"></script>
+<script type="text/javascript" src="/ookla/functions.js"></script>
+
+
 
 <script language="JavaScript">
 
@@ -243,8 +254,10 @@ The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http:
 
 
 
-<applet code="VoipApplet.class" archive="/sites/all/libraries/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet">
-	<param name="bgcolor" value="ffffff">
+<?php // <applet code="VoipApplet.class" archive="/sites/all/libraries/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet"> ?>
+<applet code="VoipApplet.class" archive="/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet">  
+
+  <param name="bgcolor" value="ffffff">
 	<param name="packetlosslength" value="100">
 	<param name="tcpport" value="5060">
 	<param name="udpport" value="5060">
