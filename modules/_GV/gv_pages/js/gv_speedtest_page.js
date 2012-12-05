@@ -23,7 +23,7 @@
         */
         
         var flashvars = {
-          //configExtension: "php"
+          configExtension: "php"
         };
         var params = {
           quality: "high",
