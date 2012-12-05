@@ -22,7 +22,9 @@
         }
         */
         
-        var flashvars = {};
+        var flashvars = {
+          configExtension: "php"
+        };
         var params = {
           quality: "high",
           bgcolor: "#ffffff",
@@ -33,7 +35,7 @@
           name: "flashtest"
         };
         //swfobject.embedSWF("sites/all/libraries/ookla/linequalitytest.swf?v=2.1.7", "linequalitytest", "640", "400", "8.0.0", "sites/all/libraries/ookla/expressInstall.swf", flashvars, params, attributes);
-        swfobject.embedSWF("ookla/linequalitytest.swf?v=2.1.7", "linequalitytest", "640", "400", "8.0.0", "ookla/expressInstall.swf", flashvars, params, attributes);
+        swfobject.embedSWF("ookla/linequalitytest.swf?v=2.2", "linequalitytest", "640", "400", "8.0.0", "ookla/expressInstall.swf", flashvars, params, attributes);
 
         
 

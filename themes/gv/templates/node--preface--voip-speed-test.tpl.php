@@ -261,6 +261,9 @@ The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http:
 	<param name="packetlosslength" value="100">
 	<param name="tcpport" value="5060">
 	<param name="udpport" value="5060">
+  
+  <param name="debug" value="false">
+  
 	<param name="latencylength" value="10">
 	<param name="latencypause" value="20">
 	<param name="packetlosspause" value="20">
