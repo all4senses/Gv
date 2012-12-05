@@ -3627,7 +3627,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     }
   }
   // Save votes to the temporary votes field.
-  // It maybe reset later on. But just for the sake of a code simplifying.
+  // It maybe reset later on (in node_save hook). But just for the sake of a code simplifying.
   // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
   // OR it its data may remain, if the review is not approved OR it's for not listed provider
   form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);

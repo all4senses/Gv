@@ -1373,9 +1373,13 @@ function gv_misc_approveContent($type, $id) {
       }
       
       // We are ready to approve the email now.
-      $review = node_load($review_nid);
-      $review->field_r_approvecode['und'][0]['value'] = '';
-      node_save($review);
+      
+      //$review = node_load($review_nid);
+      //$review->field_r_approvecode['und'][0]['value'] = '';
+      //node_save($review);
+      
+      gv_misc_fieldSave('r_approvecode', $review_nid, '');
+      
       return t('Thank you! Your email has been successfully verified! After approving by our administrators, your review will be published on our site.');
   }
   
