@@ -245,7 +245,8 @@ This content will <strong>not appear until after</strong> the test is run once. 
 <br/>
 -->
 
-
+<div id="speedtest-main-window">
+  
 <div id="linequalitytest">
 The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http://get.adobe.com/flashplayer/">Please update your client</a>.
 </div>
@@ -289,6 +290,7 @@ Edit index.html to change or remove this example content that will <strong>not a
 </div>
 -->
 
+</div>
 
 <?php // End of Ookla speed test page original content. ------------------------------------------------------------------------------- ?>
 
