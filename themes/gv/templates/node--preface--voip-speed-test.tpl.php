@@ -232,17 +232,19 @@ function flashCall(jsmethod, args) {
 </script>
 
 
+<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES
 <div id="abovebefore">
-<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES -->
 Edit index.html to change or remove this example content that will <strong>disappear after</strong> the test is run once.
 </div>
+-->
 
+<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST AFTER IT COMPLETES
 <div id="aboveafter" style="display: none;">
-<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP ABOVE THE LINE QUALITY TEST AFTER IT COMPLETES -->
 This content will <strong>not appear until after</strong> the test is run once. Edit index.html to change or remove it.
 </div>
-
 <br/>
+-->
+
 
 <div id="linequalitytest">
 The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http://get.adobe.com/flashplayer/">Please update your client</a>.
@@ -269,21 +271,23 @@ The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http:
 	<param name="packetlosspause" value="20">
 </applet>
 
-<br/>
 
+
+<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP BELOW THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES
+<br/>
 <div id="belowbefore">
-<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP BELOW THE LINE QUALITY TEST BUT DISAPPEAR AFTER IT COMPLETES -->
+
 This content will <strong>disappear after</strong> the test is run once. Edit index.html to change or remove it.
 <br/><br/>
 If you are having trouble getting things working as expected, then please see our <a href="http://wiki.ookla.com" target="_blank">documentation</a>.
-
 </div>
+-->
 
+<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP BELOW THE LINE QUALITY TEST AFTER IT COMPLETES
 <div id="belowafter" style="display: none;">
-<!-- ANYTHING PLACED IN THIS DIV WILL SHOW UP BELOW THE LINE QUALITY TEST AFTER IT COMPLETES -->
 Edit index.html to change or remove this example content that will <strong>not appear until after</strong> the test is run once.
 </div>
-
+-->
 
 
 <?php // End of Ookla speed test page original content. ------------------------------------------------------------------------------- ?>
