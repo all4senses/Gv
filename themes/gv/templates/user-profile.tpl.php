@@ -43,11 +43,10 @@
     
     echo '<div id="user-caption">Meet: ' , $user_name, '</div>', render($user_profile['user_picture']), render($user_profile['field_u_bio']),  '<div class="bottom-clear"></div>';
     
-//    $articles = views_embed_view('articles','block_all_by_author');
-//    if ($articles) {
-//      echo '<div id="articles-caption">', t('Read some of !author\'s latest articles below:', array('!author' => $user_profile['field_u_fname'][0]['#markup'])), '</div>', $articles;
-//    }
-    
+    $articles = views_embed_view('articles','block_all_by_author');
+    if ($articles) {
+      echo '<div id="articles-caption">', t('Read some of !author\'s latest articles below:', array('!author' => $user_profile['field_u_fname'][0]['#markup'])), '</div>', $articles;
+    }
     /*
     $articles = views_embed_view('articles','block_by_author');
     $blog_posts = views_embed_view('blog','block_by_author');
@@ -94,13 +93,13 @@
   <?php endif; ?>
   <?php */
     
-    global $user;
-    if ($user->uid) {
-      $phones = views_embed_view('phones','block_all_by_author');
-      if ($articles) {
-        echo '<div id="articles-caption">', t('Read some of !author\'s latest ip phones reviews below:', array('!author' => $user_profile['field_u_fname'][0]['#markup'])), '</div>', $phones;
-      }
-    }
+//    global $user;
+//    if ($user->uid) {
+//      $phones = views_embed_view('phones','block_all_by_author');
+//      if ($articles) {
+//        echo '<div id="articles-caption">', t('Read some of !author\'s latest ip phones reviews below:', array('!author' => $user_profile['field_u_fname'][0]['#markup'])), '</div>', $phones;
+//      }
+//    }
     
     ?>
   
