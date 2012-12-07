@@ -20,16 +20,31 @@
  */
 function gv_pager($variables) {
 
-  dpm(arg());
-  dpm($_SERVER);
+  //dpm(arg());
+  //dpm($_SERVER);
   
-  // Show only next/prev pager for user profile page.
-  $arg_0 = arg(0);
-  $altered_pager_pages = array('user', 'news', 'blog', 'about-voip-services');
-  //if ($arg_0 != 'user') {
-  if (!in_array($arg_0, $altered_pager_pages)) {
+  $altered_pager_reviews = array('/canada-voip', '/residential-voip-reviews', '/business-voip-reviews', '/providers/reviews');
+  $altered_pager_posts = array('/about-voip-services', '/blog', '/news');
+  
+  if (@in_array($_SERVER['REQUEST_URI'], $altered_pager_reviews)) {
+    $newer_link_title = '‹ Newer Reviews';
+    $older_link_title = 'Older Reviews ›';
+  }
+  elseif (arg(0) == 'user' || in_array(@$_SERVER['REQUEST_URI'], $altered_pager_posts)) {
+    $newer_link_title = '‹ Newer Posts';
+    $older_link_title = 'Older Posts ›';
+  }
+  else {
     return theme_pager($variables);
   }
+  
+  // Show only next/prev pager for user profile page.
+//  $arg_0 = arg(0);
+//  $altered_pager_pages = array('user', 'news', 'blog', 'about-voip-services');
+//  //if ($arg_0 != 'user') {
+//  if (!in_array($arg_0, $altered_pager_pages)) {
+//    return theme_pager($variables);
+//  }
   
   $tags = $variables['tags'];
   $element = $variables['element'];
@@ -37,8 +52,8 @@ function gv_pager($variables) {
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
 
-  $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : t('‹ Newer Posts')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
-  $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : t('Older Posts ›')), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+  $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : $newer_link_title), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
+  $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : $older_link_title), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
   
   if ($li_previous) {
     $items[] = array(
