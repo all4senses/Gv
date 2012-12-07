@@ -128,7 +128,7 @@
   
   <footer id="footer" role="contentinfo" class="clearfix">
     <?php echo render($page['footer']); ?>
-    <div class="c">© 2012 GetVoIP.com | All Rights Reserved</div>
+    <div class="c">© 2013 GetVoIP.com | All Rights Reserved</div>
     
 
     
