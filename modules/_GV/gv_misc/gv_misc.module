@@ -2242,7 +2242,7 @@ function gv_misc_testPage() {
           $requests[$key]['Email'] = strtolower($requests[$key]['Email']);
         }
         
-        if (empty($requests[$key]['Email']) || in_array($requests[$key]['Email'], $collected_emails) || isset($all_emails[$requests[$key]['Email']]) || strpos($requests[$key]['Email'], 'test') !== FALSE  || strpos($requests[$key]['Email'], 'getvoip.com') !== FALSE ||  strpos($requests[$key]['Email'], '@') === FALSE) {
+        if ($requests[$key]['Source'] == 'page' || empty($requests[$key]['Email']) || in_array($requests[$key]['Email'], $collected_emails) || isset($all_emails[$requests[$key]['Email']]) || strpos($requests[$key]['Email'], 'test') !== FALSE  || strpos($requests[$key]['Email'], 'getvoip.com') !== FALSE ||  strpos($requests[$key]['Email'], '@') === FALSE) {
           unset($requests[$key]);
         }
         else {
@@ -2255,7 +2255,24 @@ function gv_misc_testPage() {
   //dpm($files);
   dpm($requests);
   
-  
+/*
+  foreach ($requests as $new_request) {
+    
+    $Submit_Time = $new_request['Time_Unix'];
+    unset($new_request['Time_Unix']);
+    //dpm($new_request);
+    $result = db_insert('gv_quote_requests')
+      ->fields(array(
+        'timestamp' => $Submit_Time,
+        'status' => 2, // Submitted and sent.
+        'ip' =>  !empty($new_request['User IP']) ? $new_request['User IP'] : '',
+        'data' => serialize($new_request),
+        'checked' => 1, // Reviewed, because is sent.
+        'email_presented' => $new_request['Email'],
+      ))
+      ->execute();
+  }
+  */
   
   
   /*
