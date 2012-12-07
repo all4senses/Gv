@@ -2149,17 +2149,23 @@ function gv_misc_testPage() {
     $count++;
     
     
-    if ($data['Source'] == 'block') {
+    if (@$data['Source'] == 'block') {
       $all_emails[] = $data;
-    }
-    /*
-    $result = db_update('gv_quote_requests')
+      
+      $result = db_update('gv_quote_requests')
       ->fields(array(
-        'via_block' => ($data['Source'] == 'block' ? TRUE : NULL),
+        'via_block' => TRUE,
       ))
       ->condition('timestamp', $ucaptured->timestamp)
       ->condition('data', $ucaptured->data)    
       ->execute();
+      
+      if ($count > 4) {
+        break;
+      }
+    }
+    /*
+    
     */
   }
   //$out .= '<div>Amount of emails: ' . $count . '</div>';
