@@ -2133,7 +2133,7 @@ function gv_misc_testPage() {
   
   
   // set a db field via_block
-  
+  /*
   $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
   $query->fields('qr', array('timestamp', 'data'));
   
@@ -2162,15 +2162,34 @@ function gv_misc_testPage() {
       ->execute();
       
     }
-    /*
-    
-    */
+
   }
   //$out .= '<div>Amount of emails: ' . $count . '</div>';
   
   dpm($all_emails);
+  */
   
   
+  $query = db_select('gv_quote_requests', 'qr'); //->extend('PagerDefault');
+  $query->fields('qr', array('timestamp', 'data'));
+  
+  $ucaptureds = 
+    $query
+      //->orderBy($sort, $order)
+      //->limit(20)
+      ->execute();
+  $count = NULL;
+  $all_emails = array();
+  foreach ($ucaptureds as $ucaptured) {
+    $data = unserialize($ucaptured->data);
+    
+    $all_emails[] = $data;
+    
+
+  }
+  //$out .= '<div>Amount of emails: ' . $count . '</div>';
+  
+  dpm($all_emails);
   
   
   
@@ -2214,9 +2233,13 @@ function gv_misc_testPage() {
   
   //dpm($all_emails);
   */
+
+  
+  
+  
   
   /*
-  
+
   $requests = array();
   $dir = 'sites/default/files/qrequests';
   $objects = scandir($dir);
