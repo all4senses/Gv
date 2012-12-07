@@ -21,16 +21,16 @@
 function gv_pager($variables) {
 
   //dpm(arg());
-  dpm($_SERVER);
+  //dpm($_SERVER);
   
   $altered_pager_reviews = array('/canada-voip', '/residential-voip-reviews', '/business-voip-reviews', '/providers/reviews');
   $altered_pager_posts = array('/about-voip-services', '/blog', '/news');
   
-  if (@in_array($_SERVER['REQUEST_URL'], $altered_pager_reviews)) {
+  if (@in_array($_SERVER['REDIRECT_URL'], $altered_pager_reviews)) {
     $newer_link_title = '‹ Newer Reviews';
     $older_link_title = 'Older Reviews ›';
   }
-  elseif (arg(0) == 'user' || in_array(@$_SERVER['REQUEST_URL'], $altered_pager_posts)) {
+  elseif (arg(0) == 'user' || in_array(@$_SERVER['REDIRECT_URL'], $altered_pager_posts)) {
     $newer_link_title = '‹ Newer Posts';
     $older_link_title = 'Older Posts ›';
   }
