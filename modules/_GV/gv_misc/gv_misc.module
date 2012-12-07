@@ -2238,6 +2238,10 @@ function gv_misc_testPage() {
         }
         unset($requests[$key]['Received']);
         
+        if (!empty($requests[$key]['Email'])) {
+          $requests[$key]['Email'] = strtolower($requests[$key]['Email']);
+        }
+        
         if (empty($requests[$key]['Email']) || isset($all_emails[$requests[$key]['Email']]) || strpos($requests[$key]['Email'], 'test') !== FALSE) {
           unset($requests[$key]);
         }
