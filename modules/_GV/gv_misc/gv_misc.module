@@ -2146,10 +2146,11 @@ function gv_misc_testPage() {
   $all_emails = array();
   foreach ($ucaptureds as $ucaptured) {
     $data = unserialize($ucaptured->data);
-    $count++;
+    
     
     
     if (@$data['Source'] == 'block') {
+      $count++;
       $all_emails[] = $data;
       
       $result = db_update('gv_quote_requests')
