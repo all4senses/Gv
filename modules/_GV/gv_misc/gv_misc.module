@@ -2193,7 +2193,7 @@ function gv_misc_testPage() {
   dpm($all_emails);
   
   
-  $trusted_emails = array('nizbbu@yovpak.com', 'getvoip@almiller.org', 'samuel.kiragu@yahoo.com', 'rob@laserimageplus.com');
+  $trusted_emails = array('getvoip@almiller.org', 'samuel.kiragu@yahoo.com', 'rob@laserimageplus.com');
   $collected_emails = array();
   
   $requests = array();
@@ -2256,7 +2256,7 @@ function gv_misc_testPage() {
   //dpm($files);
   dpm($requests);
   
-/*
+
   foreach ($requests as $new_request) {
     
     $Submit_Time = $new_request['Time_Unix'];
@@ -2270,10 +2270,11 @@ function gv_misc_testPage() {
         'data' => serialize($new_request),
         'checked' => 1, // Reviewed, because is sent.
         'email_presented' => $new_request['Email'],
+        'via_block' => TRUE,
       ))
       ->execute();
   }
-  */
+
   
   
   /*
