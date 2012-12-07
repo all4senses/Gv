@@ -20,6 +20,8 @@
  */
 function gv_pager($variables) {
 
+  dpm(arg());
+  
   // Show only next/prev pager for user profile page.
   $arg_0 = arg(0);
   $altered_pager_pages = array('user', 'news', 'blog', 'about-voip-services');
