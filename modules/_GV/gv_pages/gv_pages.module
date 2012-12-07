@@ -708,7 +708,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     }
   }
   
-  $sort_options = array('timestamp' => 'Submission started', 'status' => 'Status', 'checked' => 'Checked / Alerted', 'ip' => 'User IP');
+  $sort_options = array('timestamp' => 'Submission started', 'via_block' => 'Page / Block', 'status' => 'Status', 'checked' => 'Checked / Alerted', 'ip' => 'User IP');
   $start_url = $_SERVER['REDIRECT_URL'] . $query . ($query ? '&' : '?');
   
   $sort_exposed = '';
@@ -741,7 +741,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   
   $query = db_select('gv_quote_requests', 'qr')->extend('PagerDefault');
-  $query->fields('qr', array('timestamp', 'data', 'status', 'checked', 'ip'));
+  $query->fields('qr', array('timestamp', 'via_block', 'data', 'status', 'checked', 'ip'));
   
   
   if ($filter_by_db[$current_filter]) {
@@ -770,7 +770,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table quote-requests"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th>Operations</th></tr></thead><tbody>',
+    '#markup' => '<table class="views-table quote-requests"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['via_block'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th>Operations</th></tr></thead><tbody>',
   );
   
   $tr_class = 'even';
@@ -802,7 +802,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       $data .= "<div>$title: $value</div>";
     }
     $form['item_' . ($key + 1) . 'a'] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td>',
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? '' : 'Via block' ) . '</td>',
     );
     
     $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
