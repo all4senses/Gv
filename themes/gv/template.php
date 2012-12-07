@@ -24,13 +24,14 @@ function gv_pager($variables) {
   
   if ($user->uid == 1) {
     dpm(arg());
-    dpm($_SERVER);
+    //dpm($_SERVER);
   }
   
   // Show only next/prev pager for user profile page.
   $arg_0 = arg(0);
- 
-  if ($arg_0 != 'user') {
+  $altered_pager_pages = array('user', 'news', 'blog', 'about-voip-services');
+  //if ($arg_0 != 'user') {
+  if (in_array($arg_0, $altered_pager_pages)) {
     return theme_pager($variables);
   }
   
