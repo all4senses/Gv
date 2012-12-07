@@ -21,6 +21,7 @@
 function gv_pager($variables) {
 
   dpm(arg());
+  dpm($_SERVER);
   
   // Show only next/prev pager for user profile page.
   $arg_0 = arg(0);
@@ -316,7 +317,7 @@ function gv_preprocess_node(&$variables) {
       $variables['theme_hook_suggestions'][] = 'node__quote__v3';
     }
     // Speed test page have its own template
-    elseif($variables['node']->type == 'preface' && $variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
+    elseif($variables['node']->type == 'preface' && @$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
       $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
     }
     
