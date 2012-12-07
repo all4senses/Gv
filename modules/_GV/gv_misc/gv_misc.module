@@ -2243,12 +2243,9 @@ function gv_misc_testPage() {
         }
         
         
-        if (isset($requests[$key]['Source'])) {
+        if (!isset($requests[$key]['Source']) || $requests[$key]['Source'] == 'page' || empty($requests[$key]['Email']) || in_array($requests[$key]['Email'], $collected_emails) || isset($all_emails[$requests[$key]['Email']]) || strpos($requests[$key]['Email'], 'test') !== FALSE  || strpos($requests[$key]['Email'], 'getvoip.com') !== FALSE ||  strpos($requests[$key]['Email'], '@') === FALSE) {
           unset($requests[$key]);
         }
-//        if ($requests[$key]['Source'] == 'page' || empty($requests[$key]['Email']) || in_array($requests[$key]['Email'], $collected_emails) || isset($all_emails[$requests[$key]['Email']]) || strpos($requests[$key]['Email'], 'test') !== FALSE  || strpos($requests[$key]['Email'], 'getvoip.com') !== FALSE ||  strpos($requests[$key]['Email'], '@') === FALSE) {
-//          unset($requests[$key]);
-//        }
         else {
           $collected_emails[] = $requests[$key]['Email'];
         }
