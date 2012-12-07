@@ -31,7 +31,7 @@ function gv_pager($variables) {
   $arg_0 = arg(0);
   $altered_pager_pages = array('user', 'news', 'blog', 'about-voip-services');
   //if ($arg_0 != 'user') {
-  if (in_array($arg_0, $altered_pager_pages)) {
+  if (!in_array($arg_0, $altered_pager_pages)) {
     return theme_pager($variables);
   }
   
