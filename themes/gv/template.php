@@ -23,6 +23,7 @@ function gv_pager($variables) {
   dpm(arg());
   dpm($_SERVER);
   
+  /*
   $altered_pager_reviews = array('/canada-voip', '/residential-voip-reviews', '/business-voip-reviews', '/providers/reviews');
   $altered_pager_posts = array('/about-voip-services', '/blog', '/news');
   
@@ -37,6 +38,26 @@ function gv_pager($variables) {
   else {
     return theme_pager($variables);
   }
+  */
+  
+  $arg_0 = arg(0);
+  $arg_1 = arg(1);
+  $altered_pager_posts = array('user', 'news', 'blog', 'about-voip-services');
+  $altered_pager_reviews = array(98, 429, 434, 581); // 581 - /canada-voip, 434 - /residential-voip-reviews, 429 - /business-voip-reviews, 98 - /providers/reviews
+  
+  if (in_array($arg_0, $altered_pager_posts)) {
+    $newer_link_title = '‹ Newer Posts';
+    $older_link_title = 'Older Posts ›';
+  }
+  elseif ($arg_0 == 'node' && in_array($arg_1, $altered_pager_reviews)) {
+    $newer_link_title = '‹ Newer Reviews';
+    $older_link_title = 'Older Reviews ›';
+  }
+  else {
+    return theme_pager($variables);
+  }
+  
+  
   
   // Show only next/prev pager for user profile page.
 //  $arg_0 = arg(0);
