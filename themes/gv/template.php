@@ -20,13 +20,6 @@
  */
 function gv_pager($variables) {
 
-  global $user;
-  
-  if ($user->uid == 1) {
-    dpm(arg());
-    //dpm($_SERVER);
-  }
-  
   // Show only next/prev pager for user profile page.
   $arg_0 = arg(0);
   $altered_pager_pages = array('user', 'news', 'blog', 'about-voip-services');
