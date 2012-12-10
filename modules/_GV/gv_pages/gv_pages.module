@@ -2998,6 +2998,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 function gv_pages_validateForm_disableUserLoginForDisabled(&$form, &$form_state) {
   dpm($form_state);
   dpm($form);
+  
+  $u = user_load($form_state['uid']);
+  dpm($u);
   //form_set_error('name',t('test'));
 }
 
