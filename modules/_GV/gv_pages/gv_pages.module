@@ -2996,11 +2996,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
  *   Return nothing.
  */
 function gv_pages_validateForm_disableUserLoginForDisabled(&$form, &$form_state) {
-  dpm($form_state);
-  dpm($form);
+  
+  //dpm($form_state); dpm($form);
   
   $u = user_load($form_state['uid']);
-  dpm($u);
   if (in_array('disabled', $u->roles)) {
     form_set_error('name',t('Sorry, but Your account is blocked. Please contact administrator to unblock it.'));
   }
@@ -4477,6 +4476,7 @@ function gv_pages_node_view($node, $view_mode) {
       
       if (in_array($preface_key, array('view-news-page', 'view-blog-page', 'view-articles-page'))) {
         $args = arg();
+        dpm($args);
         if (!empty($args[1])) {
           drupal_not_found();
           drupal_exit();
