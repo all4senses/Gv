@@ -2983,10 +2983,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 }
 
 
-
-
-
-
 /**
  * Disable user login for disabled users.
  *
@@ -3002,7 +2998,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 function gv_pages_validateForm_disableUserLoginForDisabled(&$form, &$form_state) {
   dpm($form_state);
   dpm($form);
-  form_set_error('name',t('test'));
+  //form_set_error('name',t('test'));
 }
 
 
