@@ -1253,6 +1253,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
   switch ($form_id) {
     
+    case 'user_login_block':
+    case 'user_login':
+      
+      // Disable login for disabled users
+      $form['#validate'][] = 'gv_pages_validateForm_disableUserLoginForDisabled';
+                
+      break;
+    
+    
+    
+    
+    
     case 'news_post_node_form':
     case 'blog_post_node_form':
     case 'article_node_form':
@@ -2972,6 +2984,28 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 
 
+
+
+
+/**
+ * Disable user login for disabled users.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_validateForm_disableUserLoginForDisabled(&$form, &$form_state) {
+  dpm($form_state);
+  dpm($form);
+  form_set_error('name',t('test'));
+}
+
+
 /**
  * Custom validate of article type form.
  *
@@ -3342,14 +3376,6 @@ function gv_pages_validateForm_quote(&$form, &$form_state) {
   form_set_value($form['field_q_data'], array('und' => array(0 => array('value' => $data) )), $form_state);
   
 }
-
-
-
-
-
-
-
-
 
 
 /**
