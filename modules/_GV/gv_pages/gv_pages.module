@@ -3127,7 +3127,8 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     $status_changed = FALSE;
   }
   
-  if ($status_changed) {
+  //if ($status_changed) 
+  {
     // Clear the views cache.
     //drupal_flush_all_caches(); // This would clear a Boost cache as well, but we have a Boost Expire module that do it itself.
     // So we clear here only a views caches.
