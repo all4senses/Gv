@@ -336,12 +336,8 @@ function gv_process_page(&$variables) {
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
           
-  
-  
-  //dpm($_SERVER);
-  
-  
-  
+
+  /*
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
@@ -396,6 +392,8 @@ function gv_process_page(&$variables) {
     //dpm('Any other page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
+  */
+  
 }
 
 
