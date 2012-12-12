@@ -278,9 +278,12 @@ function gv_preprocess_page(&$variables) {
 }
 */
 
+/*
 function gv_preprocess_breadcrumb(&$variables) {
   dpm($variables);
 }
+*/
+
 
 /**
  * Return a themed breadcrumb trail.
@@ -330,7 +333,8 @@ function gv_menu_local_tasks(&$variables) {
  */
 function gv_process_page(&$variables) {
   
-  dpm($variables);
+  //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
+  $variables['breadcrumb'] = 'teeest';
   
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
