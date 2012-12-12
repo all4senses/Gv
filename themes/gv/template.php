@@ -339,7 +339,7 @@ function gv_process_page(&$variables) {
   dpm(arg());
   dpm($_SERVER);
   
-  $main_menu = menu_build_tree('menu-main-menu');
+  $main_menu = menu_build_tree('main-menu');
   dpm($main_menu);
   
   if(isset($variables['node'])) {
