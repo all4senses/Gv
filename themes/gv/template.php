@@ -349,6 +349,17 @@ function gv_process_page(&$variables) {
     module_invoke('admin_menu', 'suppress');
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
   }
+  
+  
+  // Set breadcrumb
+  $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
+  if(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
+    //dpm($variables['node']);
+    dpm('node------------');
+  }
+  else {
+    dpm('NOT node------------');
+  }
 }
 
 
