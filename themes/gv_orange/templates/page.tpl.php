@@ -62,6 +62,8 @@
           <?php print $messages; ?>
           <a id="main-content"></a>
           
+          <?php if ($user->uid && $breadcrumb): print $breadcrumb; endif;?>
+          
           <?php /* if (!$is_front && $title): ?>
             <?php print render($title_prefix); ?>
             <h1 class="title" id="page-title"><?php print $title; ?></h1>
