@@ -399,7 +399,7 @@ function gv_process_page(&$variables) {
     }
   }
   */
-  elseif ($menu_trail = gv_misc_getMenuTrail(@$_SERVER['REQUEST_URI'])) {
+  elseif ($menu_trail = gv_misc_getMenuTrail()) {
     dpm('Page VIA MENU------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
