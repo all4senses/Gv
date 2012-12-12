@@ -272,11 +272,28 @@ function gv_html_head_alter(&$head_elements) {
   
 }
 
-/*
-function gv_preprocess_page(&$variables) {
-  dpm($variables);
+
+/**
+ * Duplicate of theme_menu_local_tasks() but adds clearfix to tabs.
+ */
+function gv_menu_local_tasks(&$variables) {
+  $output = '';
+
+  if (!empty($variables['primary'])) {
+    $variables['primary']['#prefix'] = '<h3 class="element-invisible">' . t('Primary tabs') . '</h3>';
+    $variables['primary']['#prefix'] .= '<ul class="tabs primary clearfix">';
+    $variables['primary']['#suffix'] = '</ul>';
+    $output .= drupal_render($variables['primary']);
+  }
+  if (!empty($variables['secondary'])) {
+    $variables['secondary']['#prefix'] = '<h3 class="element-invisible">' . t('Secondary tabs') . '</h3>';
+    $variables['secondary']['#prefix'] .= '<ul class="tabs secondary clearfix">';
+    $variables['secondary']['#suffix'] = '</ul>';
+    $output .= drupal_render($variables['secondary']);
+  }
+  return $output;
 }
-*/
+
 
 /*
 function gv_preprocess_breadcrumb(&$variables) {
@@ -307,28 +324,6 @@ function gv_breadcrumb($variables) {
 
 
 /**
- * Duplicate of theme_menu_local_tasks() but adds clearfix to tabs.
- */
-function gv_menu_local_tasks(&$variables) {
-  $output = '';
-
-  if (!empty($variables['primary'])) {
-    $variables['primary']['#prefix'] = '<h3 class="element-invisible">' . t('Primary tabs') . '</h3>';
-    $variables['primary']['#prefix'] .= '<ul class="tabs primary clearfix">';
-    $variables['primary']['#suffix'] = '</ul>';
-    $output .= drupal_render($variables['primary']);
-  }
-  if (!empty($variables['secondary'])) {
-    $variables['secondary']['#prefix'] = '<h3 class="element-invisible">' . t('Secondary tabs') . '</h3>';
-    $variables['secondary']['#prefix'] .= '<ul class="tabs secondary clearfix">';
-    $variables['secondary']['#suffix'] = '</ul>';
-    $output .= drupal_render($variables['secondary']);
-  }
-  return $output;
-}
-
-
-/**
  * Override or insert variables into the page template.
  */
 function gv_process_page(&$variables) {
@@ -337,7 +332,7 @@ function gv_process_page(&$variables) {
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
           
 
-  /*
+  
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
@@ -357,7 +352,26 @@ function gv_process_page(&$variables) {
   elseif(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
     //dpm($variables['node']);
     //dpm('teasers node------------');
+    switch ($variables['node']->type) {
+      case 'provider':
+        break;
+      case 'review':
+        break;
+      case 'phone_review':
+        break;
+      
+      case 'article':
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library', 'about-voip-services'), $variables['node']->title )));
+        break;
+      case 'news_post':
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), $variables['node']->title )));
+        break;
+      case 'blog_post':
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), $variables['node']->title )));
+        break;
+    }
   }
+  /*
   elseif(in_array(@$_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
     //dpm('Tags cloud page ------------');
     switch ($_SERVER['REQUEST_URI']) {
@@ -384,15 +398,16 @@ function gv_process_page(&$variables) {
       $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), l('News tags', 'news/tags') )));
     }
   }
-  elseif ($menu_trail = gv_misc_getMenuTrail(@$_SERVER['REQUEST_URI'])) {
-    //dpm('NOT node VIA MENU------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
-  }
-  else {
-    //dpm('Any other page------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
-  }
   */
+  elseif ($menu_trail = gv_misc_getMenuTrail(@$_SERVER['REQUEST_URI'])) {
+    //dpm('Page VIA MENU------------');
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
+  }
+  elseif (isset($variables['node'])) {
+    //dpm('Any other page------------');
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
+  }
+  
   
 }
 
