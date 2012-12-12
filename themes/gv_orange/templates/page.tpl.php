@@ -63,9 +63,9 @@
           <a id="main-content"></a>
           
           <?php 
-//            if ($user->uid && $breadcrumb): 
-//              print $breadcrumb; 
-//            endif;
+            if ($user->uid && $breadcrumb): 
+              print $breadcrumb; 
+            endif;
           ?>
           
           <?php /* if (!$is_front && $title): ?>
