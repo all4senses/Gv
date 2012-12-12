@@ -100,7 +100,6 @@ function gv_misc_getMenuTrail() {
   $main_menu = menu_build_tree('main-menu');
   
   dpm($main_menu);
-  dpm($url);
   
   $url_aliased = @$_SERVER['REQUEST_URI'];
   $url_not_aliased = (arg(0) == 'node' ? 'node/' . arg(1) : NULL);
