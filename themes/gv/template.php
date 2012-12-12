@@ -404,8 +404,12 @@ function gv_process_page(&$variables) {
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
   elseif (isset($variables['node'])) {
-    dpm('Any other page------------');
+    dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
+  }
+  else {
+    dpm('Any other page------------');
+    $variables['breadcrumb'] = '';
   }
   
   
