@@ -62,7 +62,12 @@
           <?php print $messages; ?>
           <a id="main-content"></a>
           
-          <?php if ($user->uid && $breadcrumb): print $breadcrumb; endif;?>
+          <?php if ($user->uid && $breadcrumb): 
+            
+            print $breadcrumb; 
+            dpm($breadcrumb);
+            
+          endif;?>
           
           <?php /* if (!$is_front && $title): ?>
             <?php print render($title_prefix); ?>
