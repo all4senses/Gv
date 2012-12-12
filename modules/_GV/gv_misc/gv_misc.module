@@ -100,7 +100,7 @@ function gv_misc_getMenuTrail($url) {
   foreach ($main_menu as $key_top => $value_top) {
     
   }
-  //dpm($main_menu);
+  dpm($main_menu);
 }
 
 /**
@@ -3361,7 +3361,6 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
 
     foreach($result as $provider) {
       $providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
-      //$providers[$provider->field_p_name_value] = $provider->field_p_name_value;
       //$p[$provider->nid] = $provider;
     }
     
@@ -3669,9 +3668,7 @@ function gv_misc_views_pre_render(&$view) {
           '#value' => $provider_isset ? $providers[$_GET['provider']] : $providers[''],
           ////'#default_value' => 'VoIPo',
           ////'#value' => 'VoIPo',
-          
-          //'#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
-          '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com" . $_SERVER['REDIRECT_URL'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
+          '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
 
       ); 
       
@@ -3706,7 +3703,7 @@ function gv_misc_views_pre_render(&$view) {
         }
         $url .= '&' . $key . '=' . urlencode($value);
       }
-      
+
       $select_providers['all-reviews-select-providers'] = array(
           '#type' => 'select',
           '#title' => t('Choose a ' . $r_p_types[$p_key][1] .' Provider'),
@@ -3715,10 +3712,8 @@ function gv_misc_views_pre_render(&$view) {
           '#value' => $provider_isset ? $providers[$_GET['provider']] : $providers[''],
           ////'#default_value' => 'VoIPo',
           ////'#value' => 'VoIPo',
+          '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
 
-          //'#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
-          '#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com" . $_SERVER['REDIRECT_URL'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
-          
       ); 
       
       $view->attachment_before = render($select_providers);
