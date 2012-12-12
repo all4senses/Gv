@@ -2999,9 +2999,10 @@ function gv_pages_validateForm_disableUserLoginForDisabled(&$form, &$form_state)
   
   //dpm($form_state); dpm($form);
   
-  $u = user_load($form_state['uid']);
-  if (in_array('disabled', $u->roles)) {
-    form_set_error('name',t('Sorry, but Your account is blocked. Please contact administrator to unblock it.'));
+  if (!empty($form_state['uid']) && $u = user_load($form_state['uid'])) {
+    if (in_array('disabled', $u->roles)) {
+      form_set_error('name',t('Sorry, but Your account is blocked. Please contact administrator to unblock it.'));
+    }
   }
 }
 
