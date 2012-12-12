@@ -351,7 +351,7 @@ function gv_process_page(&$variables) {
   }
   elseif(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
     //dpm($variables['node']);
-    //dpm('teasers node------------');
+    dpm('teasers node------------');
     switch ($variables['node']->type) {
       case 'provider':
         break;
@@ -400,11 +400,11 @@ function gv_process_page(&$variables) {
   }
   */
   elseif ($menu_trail = gv_misc_getMenuTrail(@$_SERVER['REQUEST_URI'])) {
-    //dpm('Page VIA MENU------------');
+    dpm('Page VIA MENU------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
   elseif (isset($variables['node'])) {
-    //dpm('Any other page------------');
+    dpm('Any other page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
   }
   
