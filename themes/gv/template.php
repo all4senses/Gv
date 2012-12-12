@@ -336,7 +336,7 @@ function gv_process_page(&$variables) {
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
           
-  $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l(t('Home'), NULL), l(t('Blogs'), 'blog'))));;
+  
   
   dpm($_SERVER);
   
@@ -360,12 +360,37 @@ function gv_process_page(&$variables) {
   }
   elseif(in_array(@$_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
     dpm('Tags cloud page ------------');
+    switch ($_SERVER['REQUEST_URI']) {
+      case '/articles/tags':
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services') )));
+        break;
+      case '/blog/tags':
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog') )));
+        break;
+      case '/news/tags':
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news') )));
+        break;
+    }
   }
   elseif(strpos(@$_SERVER['REQUEST_URI'], '/tags/') != FALSE) {
     dpm('Tag page ------------');
+    if(strpos($_SERVER['REQUEST_URI'], 'articles/tags/') != FALSE) {
+      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services'), l('Articles tags', 'articles/tags') )));
+    }
+    elseif (strpos($_SERVER['REQUEST_URI'], 'blog/tags/') != FALSE) {
+      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), l('Blog tags', 'blog/tags') )));
+    }
+    else {
+      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), l('News tags', 'news/tags') )));
+    }
+  }
+  elseif ($menu_trail = gv_misc_getMenuTrail(@$_SERVER['REQUEST_URI'])) {
+    dpm('NOT node VIA MENU------------');
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
   else {
-    dpm('NOT node------------');
+    dpm('Any other page------------');
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
 }
 
