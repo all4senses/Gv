@@ -356,7 +356,7 @@ function gv_process_page(&$variables) {
   $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
   
   if(@$_SERVER['REQUEST_URI'] == '/') {
-    ; // No bredcrumb.
+    ; // Home page has no bredcrumb.
   }
   elseif(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
     //dpm($variables['node']);
