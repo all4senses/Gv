@@ -301,7 +301,7 @@ function gv_breadcrumb($variables) {
     $heading = '<h3 class="element-invisible">' . t('You are here') . '</h3>';
     // Uncomment to add current page to breadcrumb
 	// $breadcrumb[] = drupal_get_title();
-    return '<nav class="breadcrumb">' . $heading . implode(' » ', $breadcrumb) . '</nav>';
+    return '<nav class="breadcrumb">' . $heading . implode(' » ', $breadcrumb) . ' » </nav>';
   }
 }
 
