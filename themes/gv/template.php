@@ -272,6 +272,11 @@ function gv_html_head_alter(&$head_elements) {
   
 }
 
+/*
+function gv_preprocess_page(&$variables) {
+  dpm($variables);
+}
+*/
 
 function gv_preprocess_breadcrumb(&$variables) {
   dpm($variables);
@@ -324,6 +329,9 @@ function gv_menu_local_tasks(&$variables) {
  * Override or insert variables into the page template.
  */
 function gv_process_page(&$variables) {
+  
+  dpm($variables);
+  
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
