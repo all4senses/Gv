@@ -273,6 +273,10 @@ function gv_html_head_alter(&$head_elements) {
 }
 
 
+function gv_preprocess_breadcrumb(&$variables) {
+  dpm($variables);
+}
+
 /**
  * Return a themed breadcrumb trail.
  *
