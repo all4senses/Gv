@@ -338,7 +338,7 @@ function gv_process_page(&$variables) {
           
   
   
-  dpm($_SERVER);
+  //dpm($_SERVER);
   
   
   
@@ -360,10 +360,10 @@ function gv_process_page(&$variables) {
   }
   elseif(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
     //dpm($variables['node']);
-    dpm('teasers node------------');
+    //dpm('teasers node------------');
   }
   elseif(in_array(@$_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
-    dpm('Tags cloud page ------------');
+    //dpm('Tags cloud page ------------');
     switch ($_SERVER['REQUEST_URI']) {
       case '/articles/tags':
         $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services') )));
@@ -377,7 +377,7 @@ function gv_process_page(&$variables) {
     }
   }
   elseif(strpos(@$_SERVER['REQUEST_URI'], '/tags/') != FALSE) {
-    dpm('Tag page ------------');
+    //dpm('Tag page ------------');
     if(strpos($_SERVER['REQUEST_URI'], 'articles/tags/') != FALSE) {
       $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services'), l('Articles tags', 'articles/tags') )));
     }
@@ -389,11 +389,11 @@ function gv_process_page(&$variables) {
     }
   }
   elseif ($menu_trail = gv_misc_getMenuTrail(@$_SERVER['REQUEST_URI'])) {
-    dpm('NOT node VIA MENU------------');
+    //dpm('NOT node VIA MENU------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
   else {
-    dpm('Any other page------------');
+    //dpm('Any other page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
   }
 }
