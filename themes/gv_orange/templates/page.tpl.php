@@ -65,7 +65,7 @@
           <?php if ($user->uid && $breadcrumb): 
             
             print $breadcrumb; 
-            dpm($breadcrumb);
+            //dpm($breadcrumb);
             
           endif;?>
           
