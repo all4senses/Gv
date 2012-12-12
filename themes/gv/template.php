@@ -354,9 +354,13 @@ function gv_process_page(&$variables) {
   // Set breadcrumb
   $tags_cloud_pages = array('/articles/tags', '/blog/tags', '/news/tags');
   $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
-  if(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
+  
+  if(@$_SERVER['REQUEST_URI'] == '/') {
+    ; // No bredcrumb.
+  }
+  elseif(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
     //dpm($variables['node']);
-    dpm('node------------');
+    dpm('teasers node------------');
   }
   elseif(in_array(@$_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
     dpm('Tags cloud page ------------');
