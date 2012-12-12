@@ -336,6 +336,9 @@ function gv_process_page(&$variables) {
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   $variables['breadcrumb'] = 'teeest';
   
+  dpm(arg());
+  dpm($_SERVER);
+  
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
