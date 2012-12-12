@@ -95,6 +95,11 @@ function gv_misc_menu() {
 }
 
 
+function gv_misc_getMenuTrail($url) {
+  $main_menu = menu_build_tree('main-menu');
+  dpm($main_menu);
+}
+
 /**
  * Loads an additional user_data for articles, etc.
  *

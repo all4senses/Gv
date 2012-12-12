@@ -334,13 +334,13 @@ function gv_menu_local_tasks(&$variables) {
 function gv_process_page(&$variables) {
   
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
-  $variables['breadcrumb'] = 'teeest';
+  //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
+          
+  $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l(t('Home'), NULL), l(t('Blogs'), 'blog'))));;
   
-  dpm(arg());
   dpm($_SERVER);
   
-  $main_menu = menu_build_tree('main-menu');
-  dpm($main_menu);
+  
   
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
@@ -358,10 +358,10 @@ function gv_process_page(&$variables) {
     //dpm($variables['node']);
     dpm('node------------');
   }
-  elseif(in_array($_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
+  elseif(in_array(@$_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
     dpm('Tags cloud page ------------');
   }
-  elseif(strpos($_SERVER['REQUEST_URI'], '/tags/') != FALSE) {
+  elseif(strpos(@$_SERVER['REQUEST_URI'], '/tags/') != FALSE) {
     dpm('Tag page ------------');
   }
   else {
