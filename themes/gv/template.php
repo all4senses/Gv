@@ -49,8 +49,8 @@ function gv_preprocess_user_picture(&$picture) {
  */
 function gv_pager($variables) {
 
-  dpm(arg());
-  dpm($_SERVER);
+  //dpm(arg());
+  //dpm($_SERVER);
   
   /*
   $altered_pager_reviews = array('/canada-voip', '/residential-voip-reviews', '/business-voip-reviews', '/providers/reviews');
