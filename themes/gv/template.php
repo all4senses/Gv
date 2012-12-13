@@ -356,11 +356,11 @@ function gv_process_page(&$variables) {
     dpm('teasers node------------');
     switch ($variables['node']->type) {
       case 'provider':
-        dpm($variables['node']);
         $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), $variables['node']->field_p_name['und'][0]['value'] . ' Reviews')));
         break;
       case 'review':
-        //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), l('VoIP Library', 'node/' . $variables['node']->nid), $variables['node']->title )));
+        dpm($variables['node']);
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] . ' Reviews', 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
         break;
       case 'phone_review':
         break;
