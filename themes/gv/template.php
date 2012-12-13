@@ -356,6 +356,7 @@ function gv_process_page(&$variables) {
     dpm('teasers node------------');
     switch ($variables['node']->type) {
       case 'provider':
+        dpm($variables['node']);
         break;
       case 'review':
         break;
