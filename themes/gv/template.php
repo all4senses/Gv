@@ -346,7 +346,7 @@ function gv_process_page(&$variables) {
   $tags_cloud_pages = array('/articles/tags', '/blog/tags', '/news/tags');
   $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
   
-  dpm($_SERVER);
+  //dpm($_SERVER);
   
   if(@$_SERVER['REQUEST_URI'] == '/') {
     $variables['breadcrumb'] = ''; // Home page has no bredcrumb.
