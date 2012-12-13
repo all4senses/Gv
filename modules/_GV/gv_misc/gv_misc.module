@@ -145,7 +145,7 @@ function gv_misc_getMenuTrail() {
   }
 
   $breadcrumbs[$url_aliased] = $breadcrumb;
-  cache_get('gv_breadcrumbs_for_menu', $breadcrumbs); 
+  cache_set('gv_breadcrumbs_for_menu', $breadcrumbs); 
   
   return $breadcrumb;
 }
