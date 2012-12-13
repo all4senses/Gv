@@ -415,15 +415,15 @@ function gv_process_page(&$variables) {
     */
   }
   elseif ($breadcrumb = gv_misc_getMenuTrail()) {
-    dpm('Page VIA MENU------------');
+    //dpm('Page VIA MENU------------');
     $variables['breadcrumb'] = $breadcrumb;
   }
   elseif (isset($variables['node'])) {
-    dpm('Any other NODE page------------');
+    //dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
   }
   else {
-    dpm('Any other NOT node page------------');
+    //dpm('Any other NOT node page------------');
     $variables['breadcrumb'] = '';
   }
   
