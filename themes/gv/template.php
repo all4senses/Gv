@@ -399,9 +399,9 @@ function gv_process_page(&$variables) {
     }
   }
   */
-  elseif ($menu_trail = gv_misc_getMenuTrail()) {
+  elseif ($breadcrumb = gv_misc_getMenuTrail()) {
     dpm('Page VIA MENU------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL) )));
+    $variables['breadcrumb'] = $breadcrumb;
   }
   elseif (isset($variables['node'])) {
     dpm('Any other NODE page------------');
