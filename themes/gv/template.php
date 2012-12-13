@@ -372,6 +372,7 @@ function gv_process_page(&$variables) {
         break;
       case 'phone_review':
         dpm($variables['node']);
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), l('VoIP Phone Reviews', 'voip-phone-reviews'), l($variables['node']->field_p_name['und'][0]['value'], 'node/' . $variables['node']->field_ref_phone['und'][0]['target_id']), $variables['node']->title )));
         break;
       
       case 'article':
