@@ -60,7 +60,7 @@
       <section id="main" role="main" class="clearfix">
 
           <?php 
-            if ($user->uid && $breadcrumb): 
+            if (/*$user->uid && */$breadcrumb): 
               print $breadcrumb; 
             endif;
           ?>
