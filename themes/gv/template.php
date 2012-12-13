@@ -336,7 +336,7 @@ function gv_process_page(&$variables) {
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
-  elseif (@arg(0) == 'get' && @arg(1) == 'iframe') {
+  elseif (arg(0) == 'get' && @arg(1) == 'iframe') {
     module_invoke('admin_menu', 'suppress');
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
   }
