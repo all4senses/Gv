@@ -16,6 +16,9 @@ function gv_preprocess_user_profile(&$profile) {
  */
 function gv_preprocess_user_picture(&$picture) {
   // Remove a link from a picture.
+  if (!isset($picture['account']->picture->uri)) {
+    return;
+  }
   if (!empty($picture['account']->realname)) {
     $realname = $picture['account']->realname;
   }
