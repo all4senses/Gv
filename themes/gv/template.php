@@ -376,7 +376,7 @@ function gv_process_page(&$variables) {
         break;
       
       case 'article':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Articles', 'articles'), l('VoIP Library', 'about-voip-services'), $variables['node']->title )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Articles', 'articles'), l('Library', 'about-voip-services'), $variables['node']->title )));
         break;
       case 'blog_post':
         $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Articles', 'articles'), l('Blog', 'blog'), $variables['node']->title )));
