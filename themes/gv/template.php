@@ -8,6 +8,7 @@ function gv_preprocess_user_profile(&$profile) {
 
 function gv_preprocess_user_picture(&$picture) {
   dpm($picture);
+  $picture['user_picture'] = '';
 }
 
 /**
