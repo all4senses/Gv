@@ -346,8 +346,8 @@ function gv_process_page(&$variables) {
   $tags_cloud_pages = array('/articles/tags', '/blog/tags', '/news/tags');
   $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
   
-  dpm($_SERVER);
-  dpm(arg());
+  //dpm($_SERVER);
+  //dpm(arg());
   
   if(@$_SERVER['REQUEST_URI'] == '/') {
     $variables['breadcrumb'] = ''; // Home page has no bredcrumb.
@@ -426,7 +426,7 @@ function gv_process_page(&$variables) {
     $variables['breadcrumb'] = $breadcrumb;
   }
   elseif (isset($variables['node'])) {
-    dpm('Any other NODE page------------');
+    //dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
   }
   elseif (@$_SERVER['REDIRECT_URL'] == '/voip-provider-submit-user-review') {
@@ -437,8 +437,13 @@ function gv_process_page(&$variables) {
     //dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
   }
+  elseif (arg(0) == 'user' && $arg_uid = arg(1)) {
+    //dpm('User profile page------------');
+    $userExtendedData = gv_misc_loadUserExtendedData($arg_uid);
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('About Us', 'about-us'), l('Our Team', 'our-team'), $userExtendedData->realname )));
+  }
   else {
-    dpm('Any other NOT node page------------');
+    //dpm('Any other NOT node page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL)))); //'';
   }
   
