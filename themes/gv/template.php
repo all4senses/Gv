@@ -444,7 +444,7 @@ function gv_process_page(&$variables) {
   }
   else {
     //dpm('Any other NOT node page------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL)))); //'';
+    $variables['breadcrumb'] = '';
   }
   
   
