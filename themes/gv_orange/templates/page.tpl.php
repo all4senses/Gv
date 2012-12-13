@@ -59,14 +59,14 @@
     
       <section id="main" role="main" class="clearfix">
 
-          <?php print $messages; ?>
-          <a id="main-content"></a>
-          
           <?php 
             if ($user->uid && $breadcrumb): 
               print $breadcrumb; 
             endif;
           ?>
+        
+          <?php print $messages; ?>
+          <a id="main-content"></a>
           
           <?php /* if (!$is_front && $title): ?>
             <?php print render($title_prefix); ?>
