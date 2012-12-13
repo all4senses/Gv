@@ -346,7 +346,7 @@ function gv_process_page(&$variables) {
   $tags_cloud_pages = array('/articles/tags', '/blog/tags', '/news/tags');
   $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
   
-  //dpm($_SERVER);
+  dpm($_SERVER);
   
   if(@$_SERVER['REQUEST_URI'] == '/') {
     $variables['breadcrumb'] = ''; // Home page has no bredcrumb.
@@ -421,15 +421,15 @@ function gv_process_page(&$variables) {
     */
   }
   elseif ($breadcrumb = gv_misc_getMenuTrail()) {
-    //dpm('Page VIA MENU------------');
+    dpm('Page VIA MENU------------');
     $variables['breadcrumb'] = $breadcrumb;
   }
   elseif (isset($variables['node'])) {
-    //dpm('Any other NODE page------------');
+    dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
   }
   else {
-    //dpm('Any other NOT node page------------');
+    dpm('Any other NOT node page------------');
     $variables['breadcrumb'] = '';
   }
   
