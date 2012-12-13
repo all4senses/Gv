@@ -36,6 +36,9 @@
                         
                       <?php 
                         echo ($full_title || $page ? $node->field_r_provider_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
+                        if ($page) {
+                          dpm($node);
+                        }
                         //if ($page) {
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
