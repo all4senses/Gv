@@ -117,7 +117,7 @@ function gv_misc_getMenuTrail() {
       if (!empty($value_top['below'])) {
         foreach ($value_top['below'] as $key_below => $value_below) {
           if ('/' . $value_below['link']['href'] == $url_aliased || $value_below['link']['href'] == $url_not_aliased) {
-            dpm('Found below url ' . $value_below['link']['link_title'] . ' --- ' . $key_below);
+            dpm('Found below url ' . $value_below['link']['link_title'] . ' --- ' . $key_top . ' --- ' . $key_below);
           }
         }
       }
