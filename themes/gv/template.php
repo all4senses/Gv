@@ -428,6 +428,14 @@ function gv_process_page(&$variables) {
     dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
   }
+  elseif (@$_SERVER['REDIRECT_URL'] == '/voip-provider-submit-user-review') {
+    //dpm('Any other NODE page------------');
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Provider Review' )));
+  }
+  elseif (@$_SERVER['REDIRECT_URL'] == '/voip-phone-submit-user-review') {
+    //dpm('Any other NODE page------------');
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
+  }
   else {
     dpm('Any other NOT node page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL)))); //'';

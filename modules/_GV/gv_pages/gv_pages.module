@@ -1944,11 +1944,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //        $form['#attached']['library'][] = array('system', 'ui.datepicker');
 //      }
       
-      $breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Provider Review' )));
-      //$breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
+      //$breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Provider Review' )));
       
       // Set outer fieldset with the main caption for the Submit a Review page.
-      $form['#prefix'] = $breadcrumb . '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
+      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       $form['#suffix'] = '</div></fieldset>';
       
       //dpm($form);
@@ -2481,10 +2480,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
      
       
-      $breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
+      //$breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
       
       // Set outer fieldset with the main caption for the Submit a Review page.
-      $form['#prefix'] = $breadcrumb . '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of this VoIP Phone?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
+      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of this VoIP Phone?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       $form['#suffix'] = '</div></fieldset>';
       
       //dpm($form);
