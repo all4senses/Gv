@@ -98,7 +98,11 @@ function gv_misc_menu() {
 function gv_misc_getMenuTrail() {
   
   
-  $url_aliased = $_SERVER['REQUEST_URI'];
+  if(!$url_aliased = @$_SERVER['REDIRECT_URL']) {
+    return FALSE;
+  }
+    
+  
   
   $breadcrumbs = cache_get('gv_breadcrumbs_for_menu');
   dpm($breadcrumbs);
@@ -108,11 +112,42 @@ function gv_misc_getMenuTrail() {
     return $breadcrumbs[$url_aliased];
   }
   
+  // Search for the url in the menu and define a breadcrumb.
+  $main_menu = NULL;
+  
+  // Check if the url is presented in the menu.
+  if($main_menu_all_items = cache_get('gv_main_menu_all_items')) {
+    $main_menu_all_items = $main_menu_all_items->data;
+  }
+  else {
+    $main_menu = menu_build_tree('main-menu');
+    foreach ($main_menu as $key_top => $value_top) {
+      $main_menu_all_items[] = $value_top['link']['href'];
+      if (!empty($value_top['below'])) {
+        foreach ($value_top['below'] as $key_below => $value_below) {
+          $main_menu_all_items[] = $value_below['link']['href'];
+        }
+      }
+    }
+    cache_set('gv_main_menu_all_items', $main_menu_all_items);
+  }
+  
   $url_not_aliased = (arg(0) == 'node' ? 'node/' . arg(1) : NULL);
+  if (!in_array($url_aliased, $main_menu_all_items) && !in_array($url_not_aliased, $main_menu_all_items)) {
+    // Target url is not in the menu.
+    return FALSE;
+  }
+  
+  if (!$main_menu) {
+    $main_menu = menu_build_tree('main-menu');
+  }
+  dpm($main_menu);
+  
+  
+  
   $breadcrumb = '';
   
-  $main_menu = menu_build_tree('main-menu');
-  dpm($main_menu);
+  
   
   
   dpm($url_aliased);
@@ -145,7 +180,7 @@ function gv_misc_getMenuTrail() {
   }
 
   $breadcrumbs[$url_aliased] = $breadcrumb;
-  cache_set('gv_breadcrumbs_for_menu', $breadcrumbs); 
+  cache_set('gv_breadcrumbs_for_menu', $breadcrumbs);
   
   return $breadcrumb;
 }
