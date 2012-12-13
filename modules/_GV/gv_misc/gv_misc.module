@@ -104,7 +104,7 @@ function gv_misc_getMenuTrail() {
   dpm($breadcrumbs);
   
   $breadcrumbs = empty($breadcrumbs->data) ? array() : $breadcrumbs->data;
-  if (!isset($breadcrumbs[$url_aliased])) {
+  if (isset($breadcrumbs[$url_aliased])) {
     return $breadcrumbs[$url_aliased];
   }
   
