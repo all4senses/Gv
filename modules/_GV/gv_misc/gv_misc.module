@@ -123,10 +123,10 @@ function gv_misc_getMenuTrail() {
   else {
     $main_menu = menu_build_tree('main-menu');
     foreach ($main_menu as $key_top => $value_top) {
-      $main_menu_all_items[] = $value_top['link']['href'];
+      $main_menu_all_items[] = strpos($value_top['link']['href'], 'node/') !== FALSE ? $value_top['link']['href'] : '/' . $value_top['link']['href'];
       if (!empty($value_top['below'])) {
         foreach ($value_top['below'] as $key_below => $value_below) {
-          $main_menu_all_items[] = $value_below['link']['href'];
+          $main_menu_all_items[] = strpos($value_below['link']['href'], 'node/') !== FALSE ? $value_below['link']['href'] : '/' . $value_below['link']['href'];
         }
       }
     }
@@ -137,7 +137,7 @@ function gv_misc_getMenuTrail() {
   dpm($main_menu_all_items);
   
   $url_not_aliased = (arg(0) == 'node' ? 'node/' . arg(1) : NULL);
-  if (!in_array($url_aliased, $main_menu_all_items) && !in_array($url_not_aliased, $main_menu_all_items)) {
+  if (!in_array(ltrim($url_aliased, '/'), $main_menu_all_items) && !in_array($url_not_aliased, $main_menu_all_items)) {
     // Target url is not in the menu.
     dpm('Target url is not in the menu... Exit');
     return FALSE;
