@@ -23,8 +23,6 @@ function gv_preprocess_user_picture(&$picture) {
     $userExtendedData = gv_misc_loadUserExtendedData($picture['account']->uid);
     $realname = $userExtendedData->realname;
   }
-  
-  //dpm($picture);
   $picture['user_picture'] = theme('image_style', array( 'path' =>  $picture['account']->picture->uri, 'style_name' => 'avatar_profile_page', 'alt' => $realname, 'title' => $realname, 'attributes' => array('rel' => 'v:photo')));
 }
 
