@@ -116,7 +116,7 @@ function gv_misc_getMenuTrail() {
       // Check nested links.
       if (!empty($value_top['below'])) {
         foreach ($value_top['below'] as $key_below => $value_below) {
-          if ('/' . $value_top['link']['href'] == $url_aliased || $value_top['link']['href'] == $url_not_aliased) {
+          if ('/' . $value_below['link']['href'] == $url_aliased || $value_below['link']['href'] == $url_not_aliased) {
             dpm('Found below url ' . $value_top['link']['link_title']);
           }
         }
