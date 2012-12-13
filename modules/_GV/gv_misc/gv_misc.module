@@ -109,6 +109,7 @@ function gv_misc_getMenuTrail() {
   
   $breadcrumbs = !$breadcrumbs ? array() : $breadcrumbs->data;
   if (isset($breadcrumbs[$url_aliased])) {
+    dpm('breadcrumb is found in cache');
     return $breadcrumbs[$url_aliased];
   }
   
@@ -129,15 +130,21 @@ function gv_misc_getMenuTrail() {
         }
       }
     }
+    dpm('Define gv_main_menu_all_items');
     cache_set('gv_main_menu_all_items', $main_menu_all_items);
   }
+  
+  dpm($main_menu_all_items);
   
   $url_not_aliased = (arg(0) == 'node' ? 'node/' . arg(1) : NULL);
   if (!in_array($url_aliased, $main_menu_all_items) && !in_array($url_not_aliased, $main_menu_all_items)) {
     // Target url is not in the menu.
+    dpm('Target url is not in the menu... Exit');
     return FALSE;
   }
   
+  
+  dpm('in the menu! Define breadcrumb...');
   if (!$main_menu) {
     $main_menu = menu_build_tree('main-menu');
   }
