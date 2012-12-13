@@ -359,8 +359,12 @@ function gv_process_page(&$variables) {
         $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), $variables['node']->field_p_name['und'][0]['value'] . ' Reviews')));
         break;
       case 'review':
-        dpm($variables['node']);
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] . ' Reviews', 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
+        if (!empty($variables['node']->field_ref_provider['und'][0]['target_id'])) {
+          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] . ' Reviews', 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
+        }
+        else {
+          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Reviews', 'providers/reviews'), $variables['node']->title )));
+        }
         break;
       case 'phone_review':
         break;
