@@ -20,7 +20,7 @@ function gv_preprocess_user_picture(&$picture) {
     $realname = $picture['account']->realname;
   }
   else {
-    $userExtendedData = gv_misc_loadUserExtendedData($node->uid);
+    $userExtendedData = gv_misc_loadUserExtendedData($picture['account']->uid);
     $realname = $userExtendedData->realname;
   }
   
