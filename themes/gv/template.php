@@ -1,5 +1,11 @@
 <?php
 
+
+function gv_preprocess_user_profile(&$profile) {
+  dpm($profile);
+}
+
+
 /**
  * Returns HTML for a query pager.
  *
