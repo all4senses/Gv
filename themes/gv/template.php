@@ -1,13 +1,21 @@
 <?php
 
 
+/**
+ * Implements hook_preprocess_user_profile();
+ */
+/*
 function gv_preprocess_user_profile(&$profile) {
-  dpm($profile);
+  //dpm($profile);
 }
+*/
 
 
+/**
+ * Implements hook_preprocess_user_picture();
+ */
 function gv_preprocess_user_picture(&$picture) {
-  dpm($picture);
+  // Remove a link from a picture.
   $picture['user_picture'] = theme('image_style', array( 'path' =>  $picture['account']->picture->uri, 'style_name' => 'avatar_profile_page', 'alt' => $picture['account']->realname, 'title' => $picture['account']->realname, 'attributes' => array('rel' => 'v:photo')));
 }
 
