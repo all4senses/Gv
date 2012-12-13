@@ -68,7 +68,7 @@
             <?php if ($page): ?>
               <span class="submitted">
               <?php 
-                echo t('Reviewer'), ': ', '<span property="v:reviewer">' . $node->field_r_fname['und'][0]['safe_value'], '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
+                echo t('Reviewer'), ': ', '<span property="v:reviewer">' . ( isset($node->field_r_fname['und'][0]['safe_value']) ? $node->field_r_fname['und'][0]['safe_value'] : $node->field_r_fname[0]['safe_value']), '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
               ?>
             </span>
           <?php endif; ?>
