@@ -104,6 +104,9 @@ function gv_misc_getMenuTrail() {
   $url_aliased = @$_SERVER['REQUEST_URI'];
   $url_not_aliased = (arg(0) == 'node' ? 'node/' . arg(1) : NULL);
   
+  dpm($url_aliased);
+  dpm($url_not_aliased);
+  
   foreach ($main_menu as $key_top => $value_top) {
     // Check top link.
     if ('/' . $value_top['link']['href'] == $url_aliased || $value_top['link']['href'] == $url_not_aliased) {
