@@ -366,7 +366,7 @@ function gv_html_head_alter(&$head_elements) {
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
   }
-  //dpm($head_elements);
+  dpm($head_elements);
   
 }
 
