@@ -397,6 +397,13 @@ function gv_html_head_alter(&$head_elements) {
     if ($current_page) {
       global $altered_head_title;
       $altered_head_title = str_replace(' | GetVoIP.com', '', $current_title) . ' - Page ' . $current_page . ' | GetVoIP.com';
+      
+      if (isset($head_elements['metatag_description'])) {
+        $head_elements['metatag_description']['#value'] = 'Page ' . $current_page . ' - ' . $head_elements['metatag_description']['#value'];
+      }
+      if (isset($head_elements['description'])) {
+        $head_elements['description']['#value'] = 'Page ' . $current_page . ' - ' . $head_elements['description']['#value'];
+      }
       //dpm('$altered_head_title = ' . $altered_head_title);
 //      global $user;
 //      if ($user->uid == 1) {
