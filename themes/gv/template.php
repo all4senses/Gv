@@ -367,6 +367,9 @@ function gv_html_head_alter(&$head_elements) {
     return;
   }
   
+  drupal_set_title('xxx');
+  return;
+  
   // Remove a canonical tag if there next or prev tags are present.
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
