@@ -29,6 +29,59 @@ function gv_preprocess_user_picture(&$picture) {
   $picture['user_picture'] = theme('image_style', array( 'path' =>  $picture['account']->picture->uri, 'style_name' => 'avatar_profile_page', 'alt' => $realname, 'title' => $realname, 'attributes' => array('rel' => 'v:photo')));
 }
 
+
+/**
+ * Returns HTML for the "next page" link in a query pager.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - text: The name (or image) of the link.
+ *   - element: An optional integer to distinguish between multiple pagers on
+ *     one page.
+ *   - interval: The number of pages to move forward when the link is clicked.
+ *   - parameters: An associative array of query string parameters to append to
+ *     the pager links.
+ *
+ * @ingroup themeable
+ */
+function gv_pager_next($variables) {
+  // Add a next rel metatag.
+  $out = theme_pager_next($variables);
+  if ($out) {
+    if(preg_match('|.*href="(.*)"\s.*|', $out, $matches) && !empty($matches[1])) {
+      gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . $matches[1]);
+    }
+  }
+  return $out;
+}
+
+
+/**
+ * Returns HTML for the "previous page" link in a query pager.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - text: The name (or image) of the link.
+ *   - element: An optional integer to distinguish between multiple pagers on
+ *     one page.
+ *   - interval: The number of pages to move backward when the link is clicked.
+ *   - parameters: An associative array of query string parameters to append to
+ *     the pager links.
+ *
+ * @ingroup themeable
+ */
+function gv_pager_previous($variables) {
+  // Add a prev rel metatag.
+  $out = theme_pager_previous($variables);
+  if ($out) {
+    if(preg_match('|.*href="(.*)"\s.*|', $out, $matches) && !empty($matches[1])) {
+      gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . $matches[1]);
+    }
+  }
+  return $out;
+}
+
+
 /**
  * Returns HTML for a query pager.
  *
@@ -111,9 +164,10 @@ function gv_pager($variables) {
       'data' => $li_previous,
     );
     
-    if(preg_match('|.*href="(.*)"\s.*|', $li_previous, $matches) && !empty($matches[1])) {
-      gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . $matches[1]);
-    }
+//    if(preg_match('|.*href="(.*)"\s.*|', $li_previous, $matches) && !empty($matches[1])) {
+//      gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . $matches[1]);
+//    }
+    
   }
   if ($li_next) {
     
@@ -122,9 +176,9 @@ function gv_pager($variables) {
       'data' => $li_next,
     );
     
-    if(preg_match('|.*href="(.*)"\s.*|', $li_next, $matches) && !empty($matches[1])) {
-      gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . $matches[1]);
-    }
+//    if(preg_match('|.*href="(.*)"\s.*|', $li_next, $matches) && !empty($matches[1])) {
+//      gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . $matches[1]);
+//    }
 
   }
     
