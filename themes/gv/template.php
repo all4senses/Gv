@@ -366,8 +366,9 @@ function gv_html_head_alter(&$head_elements) {
   if ($user->uid != 1) {
     return;
   }
-  
-  drupal_set_title('xxx');
+  global $altered_head_title;
+  $altered_head_title = 'xxx';
+  drupal_set_title('yyy');
   return;
   
   // Remove a canonical tag if there next or prev tags are present.
@@ -472,11 +473,6 @@ function gv_process_page(&$variables) {
   
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
-          
-  global $user;
-  if ($user->uid == 1) {
-    drupal_set_title('xxx');
-  }
   
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
