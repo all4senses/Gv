@@ -369,14 +369,14 @@ function gv_html_head_alter(&$head_elements) {
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
     $current_title = drupal_get_title();
-    dpm($current_title);
+    //dpm($current_title);
     // Define the number of a current page.
     if (!empty($head_elements['next'])) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
-      dpm($next);
+      //dpm($next);
       foreach (explode('&', $next[1]) as $param) {
         $param = explode('=', $param);
-        dpm($param);
+        //dpm($param);
         if ($param[0] == 'page') {
           $current_page = $param[1] - 1;
           break;
@@ -393,11 +393,11 @@ function gv_html_head_alter(&$head_elements) {
         }
       }
     }
-    dpm('$current_page = ' . $current_page);
+    //dpm('$current_page = ' . $current_page);
     if ($current_page) {
       global $altered_head_title;
       $altered_head_title = str_replace(' | GetVoIP.com', '', $current_title) . ' - Page ' . $current_page . ' | GetVoIP.com';
-      dpm('$altered_head_title = ' . $altered_head_title);
+      //dpm('$altered_head_title = ' . $altered_head_title);
 //      global $user;
 //      if ($user->uid == 1) {
 //        gv_misc_addMetatag('title', $altered_head_title);
