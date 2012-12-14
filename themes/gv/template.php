@@ -76,6 +76,7 @@ function gv_pager_previous($variables) {
   if ($out) {
     if(preg_match('|.*href="(.*)"\s.*|', $out, $matches) && !empty($matches[1])) {
       gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . $matches[1]);
+      dpm($matches);
     }
   }
   return $out;
