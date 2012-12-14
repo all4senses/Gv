@@ -362,29 +362,19 @@ function gv_html_head_alter(&$head_elements) {
     $head_elements['news_keywords']['#weight'] = -13;
   }
   
-  global $user;
-  if ($user->uid != 1) {
-    return;
-  }
-  global $altered_head_title;
-  $altered_head_title = 'xxx';
-  drupal_set_title('yyy');
-  return;
+  
   
   // Remove a canonical tag if there next or prev tags are present.
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
     $current_title = drupal_get_title();
-    dpm($current_title);
     // Define the number of a current page.
     if (!empty($head_elements['next'])) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
       foreach (explode('&', $next[1]) as $param) {
         $param = explode('=', $param);
-        dpm($param);
         if ($param[0] == 'page') {
           $current_page = $param[1] - 1;
-          dpm('$current_page - ' . $current_page);
           break;
         }
       }
@@ -393,10 +383,8 @@ function gv_html_head_alter(&$head_elements) {
       $prev = explode('?', $head_elements['prev']['#attributes']['href']);
       foreach (explode('&', $prev[1]) as $param) {
         $param = explode('=', $param);
-        dpm($param);
         if ($param[0] == 'page') {
           $current_page = $param[1] + 1;
-          dpm('$current_page - ' . $current_page);
           break;
         }
       }
@@ -407,8 +395,9 @@ function gv_html_head_alter(&$head_elements) {
       $current_title .= ' - Page ' . $current_page;
       dpm('$current_page final = ' . $current_title);
 
-      drupal_set_title($current_title);
-
+      //drupal_set_title($current_title);
+      global $altered_head_title;
+      $altered_head_title = $current_title . ' - Page ' . $current_page . ' | GetVoIP.com';
     }
   }
   dpm($head_elements);
