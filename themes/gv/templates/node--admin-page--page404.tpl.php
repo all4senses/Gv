@@ -1,9 +1,6 @@
   <div class="main-content page404"> 
 
-
-          <h1>
-              <?php //print $title; ?>
-          </h1>
+          <!-- <h1><?php //print $title; ?></h1> -->
 
       <div class="content page"<?php print $content_attributes; ?>>
         <?php
