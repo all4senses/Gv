@@ -112,7 +112,7 @@ function gv_pager($variables) {
     );
     
     if(preg_match('|.*href="(.*)"\s.*|', $li_previous, $matches) && !empty($matches[1])) {
-      gv_misc_addMetatag('prev', NULL, $href = $matches[1]);
+      gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . $matches[1]);
     }
   }
   if ($li_next) {
@@ -123,7 +123,7 @@ function gv_pager($variables) {
     );
     
     if(preg_match('|.*href="(.*)"\s.*|', $li_next, $matches) && !empty($matches[1])) {
-      gv_misc_addMetatag('next', NULL, $href = $matches[1]);
+      gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . $matches[1]);
     }
 
   }
