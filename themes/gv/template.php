@@ -367,6 +367,36 @@ function gv_html_head_alter(&$head_elements) {
     unset($head_elements['metatag_canonical']);
     $current_title = drupal_get_title();
     dpm($current_title);
+    // Define the number of a current page.
+    if (!empty($head_elements['next'])) {
+      $next = explode('?', $head_elements['next']);
+      foreach (explode('&', $next[1]) as $param) {
+        $param = explode('=', $param);
+        if ($paramp[0] == 'page') {
+          $current_page = $paramp[1] - 1;
+          break;
+        }
+      }
+    }
+    else {
+      $prev = explode('?', $head_elements['prev']);
+      foreach (explode('&', $prev[1]) as $param) {
+        $param = explode('=', $param);
+        if ($paramp[0] == 'page') {
+          $current_page = $paramp[1] + 1;
+          break;
+        }
+      }
+    }
+    
+    
+    if ($current_page) {
+      $current_title .= ' - Page ' . $current_page;
+      global $user;
+      if ($user->uid == 1) {
+        drupal_set_title($current_title);
+      }
+    }
   }
   dpm($head_elements);
   
