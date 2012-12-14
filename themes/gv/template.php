@@ -102,15 +102,8 @@ function gv_pager($variables) {
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
 
-  dpm($element);
-  dpm($parameters);
-  dpm($tags);
-  
   $li_previous = theme('pager_previous', array('text' => (isset($tags[1]) ? $tags[1] : $newer_link_title), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
   $li_next = theme('pager_next', array('text' => (isset($tags[3]) ? $tags[3] : $older_link_title), 'element' => $element, 'interval' => 1, 'parameters' => $parameters));
-  
-  dpm($li_previous);
-  dpm($li_next);
   
   if ($li_previous) {
     $items[] = array(
