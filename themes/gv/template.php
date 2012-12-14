@@ -110,12 +110,16 @@ function gv_pager($variables) {
       'class' => array('pager-previous'),
       'data' => $li_previous,
     );
+    
+    gv_misc_addMetatag('prev', NULL, $href = $li_previous);
   }
   if ($li_next) {
     $items[] = array(
       'class' => array('pager-next'),
       'data' => $li_next,
     );
+    
+    gv_misc_addMetatag('next', NULL, $href = $li_next);
   }
     
   
