@@ -614,9 +614,14 @@ function gv_preprocess_node(&$variables) {
     elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') ) {
       $variables['theme_hook_suggestions'][] = 'node__quote__v3';
     }
+    
     // Speed test page have its own template
     elseif($variables['node']->type == 'preface' && @$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
       $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
+    }
+    // Custom 404 page.
+    elseif($variables['node']->nid == 987) {
+      $variables['theme_hook_suggestions'][] = 'node__admin_page__page404';
     }
     
   }
