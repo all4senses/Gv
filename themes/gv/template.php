@@ -402,9 +402,9 @@ function gv_html_head_alter(&$head_elements) {
     if ($current_page) {
       $current_title .= ' - Page ' . $current_page;
       dpm('$current_page final = ' . $current_title);
-      if ($user->uid == 1) {
-        drupal_set_title($current_title);
-      }
+
+      drupal_set_title($current_title);
+
     }
   }
   dpm($head_elements);
