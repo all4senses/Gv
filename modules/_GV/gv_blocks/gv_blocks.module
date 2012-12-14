@@ -31,6 +31,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['main_menu_om_library'] = array(
+    'info' => t('OM Library'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['main_menu_om_voiplibrary'] = array(
     'info' => t('OM VoIP Library'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -206,10 +211,17 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('OM About Us');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('About Us', 'gv_blocks_get_omMenuBlock_AboutUs');
       break;
+    
+    case 'main_menu_om_library':
+      $block['subject'] = t('OM Library');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Library', 'gv_blocks_get_omMenuBlock_library');
+      break;
+    
     case 'main_menu_om_voiplibrary':
       $block['subject'] = t('OM VoIP Library');
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Library', 'gv_blocks_get_omMenuBlock_voiplibrary');
       break;
+    
     
     case 'footer_menu':
       $block['subject'] = t('Footer menu');
@@ -598,6 +610,14 @@ function gv_blocks_get_omMenuBlock_News($submenu) {
   $out = gv_blocks_getBlockThemed($block_data);
   return $out;  
   //return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
+}
+
+
+/**
+ * Returns a themed Library block content for MegaMenu.
+ */
+function gv_blocks_get_omMenuBlock_library($submenu) {
+  return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
 }
 
 
