@@ -363,7 +363,7 @@ function gv_html_head_alter(&$head_elements) {
   }
   
   
-  
+  $current_page = NULL;
   // Remove a canonical tag if there next or prev tags are present.
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
@@ -390,14 +390,13 @@ function gv_html_head_alter(&$head_elements) {
       }
     }
     
-    
     if ($current_page) {
-      //global $altered_head_title;
+      global $altered_head_title;
       $altered_head_title = $current_title . ' - Page ' . $current_page . (strpos($current_title, '| GetVoIP.com') ? '' : ' | GetVoIP.com');
-      global $user;
-      if ($user->uid == 1) {
-        gv_misc_addMetatag('title', $altered_head_title);
-      }
+//      global $user;
+//      if ($user->uid == 1) {
+//        gv_misc_addMetatag('title', $altered_head_title);
+//      }
     }
   }
   dpm($head_elements);
