@@ -362,6 +362,11 @@ function gv_html_head_alter(&$head_elements) {
     $head_elements['news_keywords']['#weight'] = -13;
   }
   
+  global $user;
+  if ($user->uid != 1) {
+    return;
+  }
+  
   // Remove a canonical tag if there next or prev tags are present.
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
@@ -392,7 +397,7 @@ function gv_html_head_alter(&$head_elements) {
     
     if ($current_page) {
       $current_title .= ' - Page ' . $current_page;
-      global $user;
+      
       if ($user->uid == 1) {
         drupal_set_title($current_title);
       }
