@@ -31,8 +31,8 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  $blocks['main_menu_om_library'] = array(
-    'info' => t('OM Library'),
+  $blocks['main_menu_om_articles'] = array(
+    'info' => t('OM Articles'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
@@ -212,9 +212,9 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('About Us', 'gv_blocks_get_omMenuBlock_AboutUs');
       break;
     
-    case 'main_menu_om_library':
-      $block['subject'] = t('OM Library');
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Library', 'gv_blocks_get_omMenuBlock_library');
+    case 'main_menu_om_articles':
+      $block['subject'] = t('OM Articles');
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Articles', 'gv_blocks_get_omMenuBlock_articles');
       break;
     
     case 'main_menu_om_voiplibrary':
@@ -616,7 +616,7 @@ function gv_blocks_get_omMenuBlock_News($submenu) {
 /**
  * Returns a themed Library block content for MegaMenu.
  */
-function gv_blocks_get_omMenuBlock_library($submenu) {
+function gv_blocks_get_omMenuBlock_articles($submenu) {
   return theme('gv_misc_submenuSimple', array('submenu' => $submenu, 'class' => 'block'));
 }
 
