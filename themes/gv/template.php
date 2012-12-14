@@ -198,8 +198,8 @@ function gv_pager($variables) {
   
   
   
-  
-  
+  // Original.
+  /*
   
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
@@ -301,6 +301,7 @@ function gv_pager($variables) {
       'attributes' => array('class' => array('pager')),
     ));
   }
+  */
 }
 
 
@@ -361,7 +362,7 @@ function gv_html_head_alter(&$head_elements) {
     $head_elements['news_keywords']['#weight'] = -13;
   }
   
-  //dpm($head_elements);
+  dpm($head_elements);
   
 }
 
