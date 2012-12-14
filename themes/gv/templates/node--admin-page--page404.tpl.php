@@ -1,4 +1,4 @@
-  <div class="main-content 404"> 
+  <div class="main-content page404"> 
 
 
           <h1>
