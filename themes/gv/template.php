@@ -391,10 +391,11 @@ function gv_html_head_alter(&$head_elements) {
         }
       }
     }
-    
+    dpm('$current_page = ' . $current_page);
     if ($current_page) {
       global $altered_head_title;
       $altered_head_title = $current_title . ' - Page ' . $current_page . (strpos($current_title, '| GetVoIP.com') ? '' : ' | GetVoIP.com');
+      dpm('$altered_head_title = ' . $altered_head_title);
 //      global $user;
 //      if ($user->uid == 1) {
 //        gv_misc_addMetatag('title', $altered_head_title);
