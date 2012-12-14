@@ -392,11 +392,12 @@ function gv_html_head_alter(&$head_elements) {
     
     
     if ($current_page) {
-      dpm('$current_page final = ' . $current_title);
-
-      //drupal_set_title($current_title);
-      global $altered_head_title;
-      $altered_head_title = $current_title . ' - Page ' . $current_page . ' | GetVoIP.com';
+      //global $altered_head_title;
+      $altered_head_title = $current_title . ' - Page ' . $current_page . (strpos($current_title, '| GetVoIP.com') ? '' : ' | GetVoIP.com');
+      global $user;
+      if ($user->uid == 1) {
+        gv_misc_addMetatag('title', $altered_head_title);
+      }
     }
   }
   dpm($head_elements);
