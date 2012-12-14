@@ -377,8 +377,8 @@ function gv_html_head_alter(&$head_elements) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
       foreach (explode('&', $next[1]) as $param) {
         $param = explode('=', $param);
-        if ($paramp[0] == 'page') {
-          $current_page = $paramp[1] - 1;
+        if ($param[0] == 'page') {
+          $current_page = $param[1] - 1;
           break;
         }
       }
@@ -387,8 +387,8 @@ function gv_html_head_alter(&$head_elements) {
       $prev = explode('?', $head_elements['prev']['#attributes']['href']);
       foreach (explode('&', $prev[1]) as $param) {
         $param = explode('=', $param);
-        if ($paramp[0] == 'page') {
-          $current_page = $paramp[1] + 1;
+        if ($param[0] == 'page') {
+          $current_page = $param[1] + 1;
           break;
         }
       }
