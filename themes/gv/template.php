@@ -111,15 +111,21 @@ function gv_pager($variables) {
       'data' => $li_previous,
     );
     
-    //gv_misc_addMetatag('prev', NULL, $href = $li_previous);
+    if(preg_match('|.*href="(.*)"\s.*|', $li_previous, $matches) && !empty($matches[1])) {
+      gv_misc_addMetatag('prev', NULL, $href = $matches[1]);
+    }
   }
   if ($li_next) {
+    
     $items[] = array(
       'class' => array('pager-next'),
       'data' => $li_next,
     );
     
-    //gv_misc_addMetatag('next', NULL, $href = $li_next);
+    if(preg_match('|.*href="(.*)"\s.*|', $li_next, $matches) && !empty($matches[1])) {
+      gv_misc_addMetatag('next', NULL, $href = $matches[1]);
+    }
+
   }
     
   
