@@ -17,9 +17,15 @@
                 $created_str = date('F d, Y \a\t g:ia', $node->created);
                 $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
 
-
-                $author = user_load($node->uid);
-                $author_name = $author->realname;
+                $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
+                $author_name = $authorExtendedData->realname;
+                $author_gplus_profile = $authorExtendedData->field_u_gplus_profile_value;
+               
+                
+//                $author = user_load($node->uid);
+//                $author_name = $author->realname;
+//                $author_gplus_profile = @$author->field_u_gplus_profile['und'][0]['safe_value'];
+                
                 $author_url = url('user/' . $node->uid);
                 $author_title = t('!author\'s profile', array('!author' => $author_name));
 
@@ -27,7 +33,7 @@
 
                 if ($page) {
 
-                  $gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
+                  $gplus_profile = ($author_gplus_profile) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author_gplus_profile . '?rel=author">(G+)</a>' : '';
 
                   if ($node->uid) {
 
