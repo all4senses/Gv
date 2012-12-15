@@ -18,7 +18,7 @@
                 ->condition('n.type', 'preface')
                 ->condition('pk.field_preface_key_value', $key);
           $sitemap_body = $query->execute()->fetchField(); 
-          dpm($sitemap_body);
+          echo $sitemap_body;
     
         ?>
       </div>
