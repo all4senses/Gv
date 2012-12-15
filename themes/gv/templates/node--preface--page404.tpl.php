@@ -1,4 +1,4 @@
-  <div class="page404"> 
+  <div class="main-content page404"> 
 
           <!-- <h1><?php //print $title; ?></h1> -->
 
