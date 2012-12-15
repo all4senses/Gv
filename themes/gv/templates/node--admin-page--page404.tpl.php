@@ -18,13 +18,12 @@
                 ->condition('n.type', 'preface')
                 ->condition('pk.field_preface_key_value', $key);
           $sitemap_body = $query->execute()->fetchField(); 
-          echo $sitemap_body;
+          
     
         ?>
       </div>
    
-      <div class="bottom-clear"></div>
-  
+      <div class="sitemap"><?php echo $sitemap_body; ?></div>
 
   </div> <!-- <div class="main-content"> -->
 
