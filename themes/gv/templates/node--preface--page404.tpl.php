@@ -20,7 +20,7 @@
           $sitemap_body = $query->execute()->fetchField(); 
         ?>
         
-        <div class="sitemap"><?php echo $sitemap_body; ?></div>
+        <div class="sitemap field-name-body"><?php echo $sitemap_body; ?></div>
       </div>
    
       
