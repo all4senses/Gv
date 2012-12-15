@@ -620,8 +620,8 @@ function gv_preprocess_node(&$variables) {
       $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
     }
     // Custom 404 page.
-    elseif($variables['node']->nid == 987) {
-      $variables['theme_hook_suggestions'][] = 'node__admin_page__page404';
+    elseif($variables['node']->type == 'preface' && @$variables['node']->field_preface_key['und'][0]['value'] == 'page-not-found') {
+      $variables['theme_hook_suggestions'][] = 'node__preface__page404';
     }
     
   }
