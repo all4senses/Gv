@@ -378,7 +378,7 @@ function gv_html_head_alter(&$head_elements) {
         $param = explode('=', $param);
         //dpm($param);
         if ($param[0] == 'page') {
-          $current_page = $param[1] - 1;
+          $current_page = ($param[1] - 1) + 1;
           break;
         }
       }
@@ -388,13 +388,13 @@ function gv_html_head_alter(&$head_elements) {
       foreach (explode('&', $prev[1]) as $param) {
         $param = explode('=', $param);
         if ($param[0] == 'page') {
-          $current_page = $param[1] + 1;
+          $current_page = ($param[1] + 1) + 1;
           break;
         }
       }
     }
     //dpm('$current_page = ' . $current_page);
-    if ($current_page) {
+    if ($current_page > 1) {
       global $altered_head_title;
       $altered_head_title = str_replace(' | GetVoIP.com', '', $current_title) . ' - Page ' . $current_page . ' | GetVoIP.com';
       
