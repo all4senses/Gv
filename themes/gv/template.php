@@ -403,7 +403,7 @@ function gv_html_head_alter(&$head_elements) {
         $head_elements['metatag_description']['#value'] = 'Page ' . $current_page . ' - ' . $head_elements['metatag_description']['#value'];
       }
       if (isset($head_elements['description'])) {
-        $head_elements['description']['#value'] = 'Page ' . $current_page . ' - ' . $head_elements['description']['#value'];
+        $head_elements['description']['#attributes']['content'] = 'Page ' . $current_page . ' - ' . $head_elements['description']['#attributes']['content'];
       }
       //dpm('$altered_head_title = ' . $altered_head_title);
 //      global $user;
