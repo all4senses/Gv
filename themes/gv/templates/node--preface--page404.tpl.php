@@ -2,7 +2,7 @@
 
           <!-- <h1><?php //print $title; ?></h1> -->
 
-      <div class="content page preface"<?php print $content_attributes; ?>>
+      <div class="content page preface">
         <?php
         
           drupal_set_title('Page Not Found | GetVoIP.com');

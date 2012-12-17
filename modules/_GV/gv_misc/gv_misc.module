@@ -134,7 +134,27 @@ function gv_misc_page_not_found() {
   if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
     // Standard 404 handler.
     drupal_set_title(t('Page not found'));
-    $return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+    
+    $sitemap_body = cache_get('gv_sitemap_body');
+    if (!$sitemap_body || empty($sitemap_body->data)) {
+      $key = 'view-sitemap-page';
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+      $query->fields('fb', array('body_value'))
+            ->condition('n.type', 'preface')
+            ->condition('pk.field_preface_key_value', $key);
+      $sitemap_body = $query->execute()->fetchField(); 
+
+      cache_set('gv_sitemap_body', $sitemap_body);
+    }
+    else {
+      $sitemap_body = $sitemap_body->data;
+    }
+
+    $return = '<div class="sitemap field-name-body">' . $sitemap_body .'</div>';
+    
+    //$return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
   }
 
   drupal_set_page_content($return);
