@@ -124,6 +124,7 @@ function gv_misc_page_not_found() {
   }
 
   $path = drupal_get_normal_path(variable_get('site_404', ''));
+  dpm($path);
   if ($path && $path != $_GET['q']) {
     // Custom 404 handler. Set the active item in case there are tabs to
     // display, or other dependencies on the path.
@@ -131,11 +132,11 @@ function gv_misc_page_not_found() {
     $return = menu_execute_active_handler($path, FALSE);
   }
 
-//  if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
-//    // Standard 404 handler.
-//    drupal_set_title(t('Page not found...'));
-//    $return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
-//  }
+  if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
+    // Standard 404 handler.
+    drupal_set_title(t('Page not found...'));
+    $return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+  }
 
   drupal_set_page_content($return);
   $page = element_info('page');
