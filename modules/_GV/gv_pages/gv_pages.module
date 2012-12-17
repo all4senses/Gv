@@ -4482,7 +4482,8 @@ function gv_pages_node_view($node, $view_mode) {
       
       // Disable ?page* links for /sitemap.
       if (@$_SERVER['REDIRECT_URL'] == '/sitemap' && $_SERVER['REQUEST_URI'] != '/sitemap') {
-        drupal_not_found();
+        //drupal_not_found();
+        gv_misc_page_not_found();
         drupal_exit();
       }
       
