@@ -135,6 +135,7 @@ function gv_misc_page_not_found() {
     // Standard 404 handler.
     drupal_set_title(t('Page not found'));
     
+    /*
     $sitemap_body = cache_get('gv_sitemap_body');
     if (!$sitemap_body || empty($sitemap_body->data)) {
       $key = 'view-sitemap-page';
@@ -151,8 +152,11 @@ function gv_misc_page_not_found() {
     else {
       $sitemap_body = $sitemap_body->data;
     }
-
-    $return = '<div class="sitemap field-name-body">' . $sitemap_body .'</div>';
+    */
+    //$return = '<div class="sitemap field-name-body">' . $sitemap_body .'</div>';
+    
+    $page404_node = gv_misc_getPrefaceByKey('page-not-found');
+    $return = node_view($page404_node/*, 'full'*/);
     
     //$return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
   }
