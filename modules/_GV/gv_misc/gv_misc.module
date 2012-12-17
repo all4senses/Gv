@@ -135,11 +135,11 @@ function gv_misc_page_not_found() {
     dpm($return);
   //}
 
-  if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
-    // Standard 404 handler.
-    drupal_set_title(t('Page not found...'));
-    $return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
-  }
+//  if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
+//    // Standard 404 handler.
+//    drupal_set_title(t('Page not found...'));
+//    $return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+//  }
 
   drupal_set_page_content($return);
   $page = element_info('page');
