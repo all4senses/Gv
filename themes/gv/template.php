@@ -389,6 +389,10 @@ function gv_html_head_alter(&$head_elements) {
     }
     else {
       $prev = explode('?', $head_elements['prev']['#attributes']['href']);
+      
+      dpm($head_elements['prev']['#attributes']['href']);
+      dpm($prev);
+      
       foreach (explode('&', $prev[1]) as $param) {
         $param = explode('=', $param);
         if ($param[0] == 'page') {
