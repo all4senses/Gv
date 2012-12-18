@@ -371,14 +371,16 @@ function gv_misc_taxonomy_term_delete($current_term) {
       ->condition('f.entity_type', 'node');
     $nids = $query->execute()->fetchAll(PDO::FETCH_COLUMN);
 
-    // Delete corresponding main tag from fields.
-    gv_misc_fieldDelete($main_field_name, NULL, 'field_' . $main_field_name . '_tid', $main_term->tid, $nids);
-    
-    // Delete corresponding main tag from taxonomy_index.
-    db_delete('taxonomy_index')
-      ->condition('tid', $main_term->tid)
-      ->condition('nid', $nids, 'IN')
-      ->execute();
+    if (!empty($nids)) {
+      // Delete corresponding main tag from fields.
+      gv_misc_fieldDelete($main_field_name, NULL, 'field_' . $main_field_name . '_tid', $main_term->tid, $nids);
+
+      // Delete corresponding main tag from taxonomy_index.
+      db_delete('taxonomy_index')
+        ->condition('tid', $main_term->tid)
+        ->condition('nid', $nids, 'IN')
+        ->execute();
+    }
   }
   
   // Delete current deleting term from nodes' fields.
