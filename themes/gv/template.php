@@ -49,6 +49,7 @@ function gv_pager_next($variables) {
   $out = theme_pager_next($variables);
   if ($out) {
     if(preg_match('|.*href="(.*)"\s.*|', $out, $matches) && !empty($matches[1])) {
+      dpm('out = ' . $out);
       dpm($matches[1]);
       gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . str_replace('&amp;', '&', $matches[1]));
     }
