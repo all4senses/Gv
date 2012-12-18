@@ -48,7 +48,7 @@ function gv_pager_next($variables) {
   // Add a next rel metatag.
   $out = theme_pager_next($variables);
   if ($out) {
-    if(preg_match('|.*href="(.*)"\s.*|', $out, $matches) && !empty($matches[1])) {
+    if(preg_match('|.*href="(.*)" .*|', $out, $matches) && !empty($matches[1])) {
       dpm($out);
       dpm($matches[1]);
       gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . str_replace('&amp;', '&', $matches[1]));
@@ -76,7 +76,7 @@ function gv_pager_previous($variables) {
   // Add a prev rel metatag.
   $out = theme_pager_previous($variables);
   if ($out) {
-    if(preg_match('|.*href="(.*)"\s.*|', $out, $matches) && !empty($matches[1])) {
+    if(preg_match('|.*href="(.*)" .*|', $out, $matches) && !empty($matches[1])) {
       dpm($matches[1]);
       gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . str_replace('&amp;', '&', $matches[1]));
     }
