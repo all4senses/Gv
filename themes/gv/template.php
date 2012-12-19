@@ -366,11 +366,9 @@ function gv_html_head_alter(&$head_elements) {
   if (isset($head_elements['news_keywords'])) {
     $head_elements['news_keywords']['#weight'] = -13;
   }
-  
+
   
   $current_page = NULL;
-  
-  dpm($head_elements);
   
   // Remove a canonical tag if there next or prev tags are present.
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
@@ -381,10 +379,8 @@ function gv_html_head_alter(&$head_elements) {
     // Define the number of a current page.
     if (!empty($head_elements['next'])) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
-      //dpm($next);
       foreach (explode('&', $next[1]) as $param) {
         $param = explode('=', $param);
-        //dpm($param);
         if ($param[0] == 'page') {
           $current_page = ($param[1] - 1) + 1;
           break;
@@ -393,10 +389,6 @@ function gv_html_head_alter(&$head_elements) {
     }
     else {
       $prev = explode('?', $head_elements['prev']['#attributes']['href']);
-      
-      //dpm($head_elements['prev']['#attributes']['href']);
-      //dpm($prev);
-      
       if (isset($prev[1])) {
         foreach (explode('&', $prev[1]) as $param) {
           $param = explode('=', $param);
@@ -412,7 +404,7 @@ function gv_html_head_alter(&$head_elements) {
       
       
     }
-    //dpm('$current_page = ' . $current_page);
+
     if ($current_page > 1) {
       global $altered_head_title;
       $altered_head_title = str_replace(' | GetVoIP.com', '', $current_title) . ' - Page ' . $current_page . ' | GetVoIP.com';
@@ -430,7 +422,7 @@ function gv_html_head_alter(&$head_elements) {
 //      }
     }
   }
-  dpm($head_elements);
+  //dpm($head_elements);
   
 }
 
