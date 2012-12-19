@@ -2672,7 +2672,9 @@ function gv_misc_testPage() {
   
   //$str = '<a href="/about-voip-services" class="active">‹ Newer Posts</a>';
   $str = '<a href="/news/tags/mobile-voip?page=1" title="Go to next page" class="active">next ›</a>';
-  preg_match('|.*href="(.*)"\s.*|', $str, $matches);
+  //preg_match('|.*href="(.*)"\s.*|', $str, $matches);
+  preg_match('|.*href="([^"]*)" .*|', $str, $matches);
+  
   dpm($matches);
   
   
