@@ -377,6 +377,7 @@ function gv_html_head_alter(&$head_elements) {
     unset($head_elements['metatag_canonical']);
     $current_title = drupal_get_title();
     //dpm($current_title);
+    
     // Define the number of a current page.
     if (!empty($head_elements['next'])) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
@@ -393,16 +394,23 @@ function gv_html_head_alter(&$head_elements) {
     else {
       $prev = explode('?', $head_elements['prev']['#attributes']['href']);
       
-      dpm($head_elements['prev']['#attributes']['href']);
-      dpm($prev);
+      //dpm($head_elements['prev']['#attributes']['href']);
+      //dpm($prev);
       
-      foreach (explode('&', $prev[1]) as $param) {
-        $param = explode('=', $param);
-        if ($param[0] == 'page') {
-          $current_page = ($param[1] + 1) + 1;
-          break;
+      if (isset($prev[1])) {
+        foreach (explode('&', $prev[1]) as $param) {
+          $param = explode('=', $param);
+          if ($param[0] == 'page') {
+            $current_page = ($param[1] + 1) + 1;
+            break;
+          }
         }
       }
+      else {
+        $current_page = 2;
+      }
+      
+      
     }
     //dpm('$current_page = ' . $current_page);
     if ($current_page > 1) {
