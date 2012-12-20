@@ -48,6 +48,7 @@ function gv_pager_next($variables) {
   // Add a next rel metatag.
   $out = theme_pager_next($variables);
   if ($out) {
+    dpm($out);
     //if(preg_match('|.*href="(.*)" .*|', $out, $matches) && !empty($matches[1])) {
     if(preg_match('|.*href="([^"]*)" .*|', $out, $matches) && !empty($matches[1])) {
       
@@ -368,10 +369,10 @@ function gv_html_head_alter(&$head_elements) {
   }
 
   
-  $c_title = drupal_get_title();
-  dpm($c_title);
+//  $c_title = drupal_get_title();
+//  dpm($c_title);
   
-  dpm($head_elements);
+  //dpm($head_elements);
   
   $current_page = NULL;
   
@@ -421,7 +422,7 @@ function gv_html_head_alter(&$head_elements) {
 
       $current_title = str_replace(' | GetVoIP.com', '', $current_title);
 
-      dpm($current_title);
+      //dpm($current_title);
 
       global $altered_head_title;
       
