@@ -3390,7 +3390,7 @@ function theme_gv_misc_image(array $variables) {
   global $user;
   if (/*!$user->uid &&*/ !$variables['width']) {
     //$size = getimagesize($variables['path']);
-    $size = getimagesize(str_replace(' ', '%20', $variables['path']));
+    $size = getimagesize(str_replace('%20', ' ', $variables['path']));
     $image = theme('image', array('width' => $size[0], 'height' => $size[1], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
   }
   else {
