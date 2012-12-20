@@ -558,7 +558,7 @@ function gv_process_page(&$variables) {
         break;
     }
   }
-  /*
+  /**/
   elseif(in_array($_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
     //dpm('Tags cloud page ------------');
     switch ($_SERVER['REQUEST_URI']) {
@@ -573,7 +573,7 @@ function gv_process_page(&$variables) {
         break;
     }
   }
-  */
+  /**/
   elseif(strpos($_SERVER['REQUEST_URI'], '/tags/') != FALSE) {
     //dpm('Tag page ------------');
     
