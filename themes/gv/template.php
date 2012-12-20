@@ -580,7 +580,7 @@ function gv_process_page(&$variables) {
     // Don't show anything yet.
     $variables['breadcrumb'] = '';
     
-    /*
+    /**/
     if(strpos($_SERVER['REQUEST_URI'], 'articles/tags/') != FALSE) {
       $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services'), l('Articles tags', 'articles/tags') )));
     }
@@ -590,7 +590,7 @@ function gv_process_page(&$variables) {
     else {
       $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), l('News tags', 'news/tags') )));
     }
-    */
+    /**/
   }
   elseif ($breadcrumb = gv_misc_getMenuTrail()) {
     //dpm('Page VIA MENU------------');
