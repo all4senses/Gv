@@ -3382,14 +3382,15 @@ function theme_gv_misc_image(array $variables) {
   
   //dpm($variables['path']);
   
-//  if (!file_exists(str_replace('http://getvoip.com/', '', $variables['path']))) {
-//    return NULL;
-//  }
+  if (!file_exists(str_replace('http://getvoip.com/', '', $variables['path']))) {
+    return NULL;
+  }
   
   // Add dimensions only for anonymous.
   global $user;
   if (/*!$user->uid &&*/ !$variables['width']) {
-    $size = getimagesize($variables['path']);
+    //$size = getimagesize($variables['path']);
+    $size = getimagesize(str_replace(' ', '%20', $variables['path']));
     $image = theme('image', array('width' => $size[0], 'height' => $size[1], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
   }
   else {
