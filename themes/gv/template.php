@@ -578,7 +578,10 @@ function gv_process_page(&$variables) {
     //dpm('Tag page ------------');
     
     // Don't show anything yet.
-    $variables['breadcrumb'] = '';
+    //$variables['breadcrumb'] = '';
+    
+    global $current_tag_title;
+    dpm($current_tag_title);
     
     /**/
     if(strpos($_SERVER['REQUEST_URI'], 'articles/tags/') != FALSE) {
