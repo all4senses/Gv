@@ -563,13 +563,13 @@ function gv_process_page(&$variables) {
     //dpm('Tags cloud page ------------');
     switch ($_SERVER['REQUEST_URI']) {
       case '/articles/tags':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services') )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services'), 'VoIP Library tags' )));
         break;
       case '/blog/tags':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog') )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), 'Blog tags' )));
         break;
       case '/news/tags':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news') )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), 'News tags' )));
         break;
     }
   }
