@@ -368,6 +368,9 @@ function gv_html_head_alter(&$head_elements) {
   }
 
   
+  
+  dpm($head_elements);
+  
   $current_page = NULL;
   
   // Remove a canonical tag if there next or prev tags are present.
@@ -422,7 +425,7 @@ function gv_html_head_alter(&$head_elements) {
 //      }
     }
   }
-  //dpm($head_elements);
+  dpm($head_elements);
   
 }
 
