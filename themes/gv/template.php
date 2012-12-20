@@ -378,8 +378,7 @@ function gv_html_head_alter(&$head_elements) {
   // Remove a canonical tag if there next or prev tags are present.
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     unset($head_elements['metatag_canonical']);
-    $current_title = drupal_get_title();
-    //dpm($current_title);
+    
     
     // Define the number of a current page.
     if (!empty($head_elements['next'])) {
@@ -411,8 +410,22 @@ function gv_html_head_alter(&$head_elements) {
     }
 
     if ($current_page > 1) {
+      
+      // Define a current page title
+      if (!empty($head_elements['name']['#attributes']['content'])) {
+        $current_title = $head_elements['name']['#attributes']['content'];
+      }
+      else {
+        $current_title = drupal_get_title();
+      }
+
+      $current_title = str_replace(' | GetVoIP.com', '', $current_title);
+
+      dpm($current_title);
+
       global $altered_head_title;
-      $altered_head_title = str_replace(' | GetVoIP.com', '', $current_title) . ' - Page ' . $current_page . ' | GetVoIP.com';
+      
+      $altered_head_title = $current_title . ' - Page ' . $current_page . ' | GetVoIP.com';
       
       if (isset($head_elements['metatag_description'])) {
         $head_elements['metatag_description']['#value'] = 'Page ' . $current_page . ' - ' . $head_elements['metatag_description']['#value'];
