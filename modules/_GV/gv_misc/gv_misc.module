@@ -4320,7 +4320,19 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
       
+    // Deprecated.
     case 'i_web':
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      
+      $url = isset($all_data_quick[$data['data']->nid][$target]) ? $all_data_quick[$data['data']->nid][$target] : '';
+      //$url = '<a href="' . $value . '" class="site" target="_blank">' . t('Visit Site') . '</a>';
+      //$url = l('Visit Site', $url, array('attributes' => array('rel' => 'nofollow', 'target' => '_blank', 'class' => 'site')));
+
+      return $url;
+      
+      
+    case 'i_web2':
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
