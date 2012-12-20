@@ -368,6 +368,8 @@ function gv_html_head_alter(&$head_elements) {
   }
 
   
+  $c_title = drupal_get_title();
+  dpm($c_title);
   
   dpm($head_elements);
   
