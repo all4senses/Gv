@@ -3380,11 +3380,13 @@ function theme_gv_misc_image_style(array $variables) {
 
 function theme_gv_misc_image(array $variables) {
 
-  dpm('path = ' . $variables['path']);
+  
   
   if (!file_exists(str_replace('http://getvoip.com/', '', $variables['path']))) {
     return NULL;
   }
+  
+  dpm('path = ' . $variables['path']);
   
   // Add dimensions only for anonymous.
   global $user;
