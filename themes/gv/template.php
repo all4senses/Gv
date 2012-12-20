@@ -580,18 +580,18 @@ function gv_process_page(&$variables) {
     // Don't show anything yet.
     //$variables['breadcrumb'] = '';
     
+    // Defined in
     global $current_tag_title;
-    dpm($current_tag_title);
     
     /**/
     if(strpos($_SERVER['REQUEST_URI'], 'articles/tags/') != FALSE) {
-      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services'), l('Articles tags', 'articles/tags') )));
+      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('VoIP Library articles', 'about-voip-services'), l('Articles tags', 'articles/tags'), $current_tag_title )));
     }
     elseif (strpos($_SERVER['REQUEST_URI'], 'blog/tags/') != FALSE) {
-      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), l('Blog tags', 'blog/tags') )));
+      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), l('Blog tags', 'blog/tags'), $current_tag_title )));
     }
     else {
-      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), l('News tags', 'news/tags') )));
+      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), l('News tags', 'news/tags'), $current_tag_title )));
     }
     /**/
   }
