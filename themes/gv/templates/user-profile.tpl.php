@@ -35,10 +35,12 @@
 <div class="profile"<?php print $attributes; ?>>
   <?php //print render($user_profile); ?>
   
-  <?php dpm($user_profile); ?>
+  <?php //dpm($user_profile); ?>
   
   <?php 
  
+    print render($user_profile['metatags']);
+    
     $user_name = $user_profile['field_u_fname'][0]['#markup'] . ' ' . $user_profile['field_u_lname'][0]['#markup'];
     
     echo '<div id="user-caption">Meet: ' , $user_name, '</div>', render($user_profile['user_picture']), render($user_profile['field_u_bio']),  '<div class="bottom-clear"></div>';
