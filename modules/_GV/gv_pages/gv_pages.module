@@ -958,19 +958,56 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
   $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 20);
 
+  
+  $topics = NULL;
+  
+  $main_tags_voc = taxonomy_vocabulary_machine_name_load(TOPICS);
+  
+    
+  $types = array();
+
+  $query = db_select('taxonomy_term_data', 'td');
+  if ($pager) {
+    $query->extend('pagerDefault')->limit(30);
+  }
+  $query->fields('td', array('name', 'tid', 'description'));
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
+  $query->leftJoin('node', 'n', 'n.nid = ti.nid');
+  $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
+        ->addExpression('COUNT(n.nid)', 'count');
+  $query->groupBy('td.name');
+  // Exclude main topics terms -> choose only terms for specific node type.
+  $query->condition('td.vid', $main_tags_voc->vid, '!=');
+  $query->orderBy('count', 'DESC');
+//  if ($limit) {
+//    $query->range(0, $limit);
+//  }
+  $results = $query->execute();
+
+//  foreach($results as $result) {
+//    $result->link = array('link_title' => $result->name, 'href' => 'taxonomy/term/' . $result->tid);
+//
+//    $topics[$result->tid] = /*(array)*/ $result;
+//  }
+//  
+  
+  
+  
   //dpm($tags_array);
   
-  if (!$tags_array) {
-    $form['no_results'] = array(
-      '#markup' => '<div class="no-results">No tags here yet...</div>',
-    ); 
-  }
-  else {
+//  if (!$tags_array) {
+//    $form['no_results'] = array(
+//      '#markup' => '<div class="no-results">No tags here yet...</div>',
+//    ); 
+//  }
+//  else 
+    {
     $tags = '';
-    foreach ($tags_array as $tid => $tag) {
-      $form['tags']['tag_' . $tid] = array(
-        '#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
-      );
+    foreach ($results as $tid => $tag) {
+      dpm($tag);
+//      $form['tags']['tag_' . $tid] = array(
+//        '#markup' => '<div class="tag">' . l($tag->name, 'taxonomy/term/'. $tid) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
+//      );
     }
     
     $form['more'] = array(
