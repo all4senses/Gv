@@ -960,13 +960,13 @@ function gv_pages_buildEditTagsPage($content_type_label) {
   if (!$tags_array) {
     return 'No tags here yet...';
   }
-  
+  $tags = '';
   foreach ($tags_array as $tid => $tag) {
     
-    $tags .= '<div class="tag">' . l($tag->name, $tag->link['href']) . ' (' . $tag->count . ')</div>';
+    $tags .= '<div class="tag">' . l($tag->name, $tag->link['href']) . ', tid =' . $tid . ' (' . $tag->count . ' posts)</div>';
   }
   
-  return '<div class="tags">' . $tags . '</div>'; 
+  return '<div class="tags-admin">' . $tags . '</div>'; 
   
   
   
