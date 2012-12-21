@@ -956,7 +956,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
-  $tags_array = gv_misc_getTopics($content_type, $content_type_label, 100, TRUE);
+  $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 20);
 
   //dpm($tags_array);
   
