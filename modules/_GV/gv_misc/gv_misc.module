@@ -2171,7 +2171,7 @@ function gv_misc_makeRequest_ajax() {
     
     if ($submission['First Name'] == '8x8' || $submission['First Name'] == '8X8') {
       // Test for 8x8
-      //drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
       // Send a lead to Remote providers.
       if ($submission['Source'] != 'block') {
@@ -2997,26 +2997,33 @@ function gv_misc_SendRequestTo8x8($submission) {
     return NULL;
   }
     
-      $map_main = array(
-        'First Name' => 'first_name',
-        'Last Name' => 'last_name',
-        'Phones needed' => '00N70000002xLFJ', // Number of Locations  ///////////  '00N70000002LdcG', // Number of Phone Lines  
-        'Quote type' => '00N70000002Lgx0', // Comments
-        'Buying Time Frame' => '00N70000002eDO6',
-        'Company' => 'company',
-        'Email' => 'email',
-        //'Website' => 'URL',
-        'Phone #' => 'phone',
-      );
+  $map_main = array(
+    'First Name' => 'first_name',
+    'Last Name' => 'last_name',
+    'Phones needed' => '00N50000001Pxsf', // Number of Phone Lines  
+    'Quote type' => '00N50000001PrEA', // Comments
+    'Buying Time Frame' => '00N50000001ya9a',
+    'Company' => 'company',
+    'Email' => 'email',
+    //'Website' => 'URL',
+    'Phone #' => 'phone',
+  );
  
       
   // Set initial fields.
   $data_to = array(
-    'lead_source' => 'GetVoIP',
-    'oid' => '00D700000009mLY',
+    'lead_source' => 'LG-GetVoIP',
+    'oid' => '00D300000006Mvt', 
     'retURL' => 'http://getvoip.com',
+      
+    'Campaign_ID' => '70150000000g8vF',
+    'member_status' => 'Responded',
+      
     //'debug' => 1,
     //'debugEmail' => 'all4senses@gmail.com',
+      
+    'title' => 'N/A',
+    'industry' => 'N/A',
       
     'city' => 'N/A',
     'state' => 'N/A',
@@ -3025,9 +3032,6 @@ function gv_misc_SendRequestTo8x8($submission) {
     'title' => 'N/A',
     'country' => 'N/A',
     'employees' => 'N/A',
-      
-    '00N70000002xLFE' => 'Other',
-    '00N70000002xLFT' => 'Other',
   );
   
   
@@ -3036,8 +3040,11 @@ function gv_misc_SendRequestTo8x8($submission) {
     $data_to[$remote_key] = $submission[$getvoip_key];
   }
   
+  //$url = https://salesforce.ringlead.com/cgi-bin/797/1/dedup.pl
+  
   $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   //$url = 'http://getvoip.com/request-test';
+  
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -3070,7 +3077,7 @@ function gv_misc_SendRequestTo8x8($submission) {
     
 
 ' . $data_from;
-  drupal_mail('gv_misc', 'nextiva_send_report', 'all4senses@gmail.com', $language->language, $params);
+  drupal_mail('gv_misc', '8x8_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
 }
@@ -3183,7 +3190,10 @@ function gv_misc_mail($key, &$message, $params) {
       $message['subject'] = t('Report from the Nextiva request sending.');
       $message['body'][] = $params['report'];
       break;
-    
+    case '8x8_send_report':
+      $message['subject'] = t('Report from the 8x8 request sending.');
+      $message['body'][] = $params['report'];
+      break;
     case 'request_quote_ucaptured_data':
       $message['subject'] = t('New captured BUT not submitted user data');
       $message['body'][] = theme('gv_misc_requestQuote_mail', $params['ucaptured_data']);
