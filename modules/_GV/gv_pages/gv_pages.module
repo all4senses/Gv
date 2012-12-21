@@ -1030,7 +1030,10 @@ function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
  * Returns a block with a cloud of all tags of s specific content type.
  */
 function gv_pages_buildTopicsPage($content_type_label) {
+  
   global $language;
+  global $user;
+  
   //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
   // Inverted...
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
@@ -1088,7 +1091,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   return '<div class="tags">' . $preface . $topics . '</div>'; 
   */
   
-  return '<div class="tags">' . $tags . '</div>'; 
+  return ($user->uid ? '<div class="tags-admin-link">' . $content_type_label . '/tags-admin</div>' : '') . '<div class="tags">' . $tags . '</div>'; 
 }
 
 
