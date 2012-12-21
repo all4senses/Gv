@@ -16,6 +16,17 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_pages_menu() {
 
+  $items['%/tags-admin'] = array(
+    'title' => 'Admin tags',
+    'description' => 'Admin tags',
+      
+    'page callback' => 'gv_pages_buildEditTagsPage',
+    'page arguments' => array(1),
+      
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   $items['admin/content/quote-requests'] = array(
     'title' => 'Quote Requests',
     'description' => 'Quote Requests, including captured but not submitted users data',
@@ -85,6 +96,11 @@ function gv_pages_menu() {
   return $items;
 }
 
+
+function gv_pages_buildEditTagsPage($type) {
+  dpm();
+  return 'tags';
+}
 
 /**
  * Ookla Speedtest page.
