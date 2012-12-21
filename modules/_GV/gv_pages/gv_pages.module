@@ -956,7 +956,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
-  $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 20);
+  //$tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 20);
 
   
   $topics = NULL;
@@ -967,9 +967,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $types = array();
 
   $query = db_select('taxonomy_term_data', 'td');
-  if ($pager) {
-    $query->extend('pagerDefault')->limit(30);
-  }
+  $query->extend('pagerDefault')->limit(30);
   $query->fields('td', array('name', 'tid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');
@@ -1028,7 +1026,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     $form['#submit'][] = 'gv_pages_editTagsPage_formSubmit';
   }
 
-  dpm($form);
+  //dpm($form);
   return $form; 
 }
 
