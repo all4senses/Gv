@@ -22,8 +22,11 @@ function gv_pages_menu() {
       'title' => 'Admin tags ' . $tags_admin_type,
       'description' => 'Admin tags ' . $tags_admin_type,
 
-      'page callback' => 'gv_pages_buildEditTagsPage',
-      'page arguments' => array($tags_admin_type),
+//      'page callback' => 'gv_pages_buildEditTagsPage',
+//      'page arguments' => array($tags_admin_type),
+        
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('gv_pages_editTagsPage_form', $tags_admin_type),
 
       'access callback' => 'gv_misc_userIsAdmin',
       'type' => MENU_NORMAL_ITEM,
@@ -943,10 +946,29 @@ function gv_pages_buildTopicsPage($content_type_label) {
 */
 
 
+
+/**
+ * 
+ * A form for a Quote Requests data page, including not submitted, but captured data.
+ * 
+ */
+function gv_pages_quoteRequestsList_form($form, &$form_state) {
+  
+  
+  //$form['actions']['submit']['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
+  //$form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
+  $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
+  
+  
+  return $form;
+}
+
+
+
 /**
  * Returns a admin page of all tags of s specific content type.
  */
-function gv_pages_buildEditTagsPage($content_type_label) {
+function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
   dpm($content_type_label);
 
@@ -958,34 +980,31 @@ function gv_pages_buildEditTagsPage($content_type_label) {
   dpm($tags_array);
   
   if (!$tags_array) {
-    return 'No tags here yet...';
+    $form['no_results'] = array(
+      '#markup' => '<div class="no-results">No tags here yet...</div>',
+    ); 
   }
-  $tags = '';
-  foreach ($tags_array as $tid => $tag) {
+  else {
+    $tags = '';
+    foreach ($tags_array as $tid => $tag) {
+      $form['tag_' . $tid] = array(
+        '#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
+      );
+    }
     
-    $tags .= '<div class="tag">' . l($tag->name, $tag->link['href']) . ', tid =' . $tid . ' (' . $tag->count . ' posts)</div>';
+    $form['more'] = array(
+      '#markup' => '<div class="more-link">' . l(t('Show all posts...'), $content_type_label) . '</div>',
+    );
+    
+    $form['#submit'][] = 'gv_pages_editTagsPage_formSubmit';
   }
-  
-  return '<div class="tags-admin">' . $tags . '</div>'; 
-  
-  
-  
-  
-  // Simple List.
-  // $tags = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $tags_array), 'class' => 'tags'));
-  // Tag cloud.
-  $tags_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags_array, 12));
-  
-  dpm($tags_array);
-  
-  $tags = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $tags_array));
+
+  return $form; 
+}
 
 
-  //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
-  $show_all_url = '<div class="more-link">' . l(t('Show all posts...'), $content_type_label) . '</div>';
-  $tags = /*$page_title .*/ $tags . $show_all_url;
+function gv_pages_editTagsPage_formSubmit() {
   
-  return '<div class="tags">' . $tags . '</div>'; 
 }
 
 
