@@ -956,7 +956,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
-  $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 20);
+  $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 80);
 
   //dpm($tags_array);
   
@@ -979,7 +979,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
         //'#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
         '#type' => 'checkbox',
         '#default_value' => FALSE,
-        '#title' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . ',</span> <span' . ($tag->count ? '' : ' class="zero"') . '>' . $tag->count . '</span> posts</div>',
+        '#title' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . ',</span> <span' . ($tag->count == 1? ' class="zero"' : '') . '>' . $tag->count . '</span> posts</div>',
       );
     }
     
