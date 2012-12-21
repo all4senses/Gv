@@ -16,16 +16,19 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_pages_menu() {
 
-  $items['%type/tags-admin'] = array(
-    'title' => 'Admin tags',
-    'description' => 'Admin tags',
-      
-    'page callback' => 'gv_pages_buildEditTagsPage',
-    'page arguments' => array(1),
-      
-    'access callback' => 'gv_misc_userIsAdmin',
-    'type' => MENU_NORMAL_ITEM,
-  );
+  $tags_admin_types = array('articles', 'news', 'blog');
+  foreach ($tags_admin_types as $tags_admin_type) {
+    $items['articles/tags-admin'] = array(
+      'title' => 'Admin tags ' . $tags_admin_type,
+      'description' => 'Admin tags ' . $tags_admin_type,
+
+      'page callback' => 'gv_pages_buildEditTagsPage',
+      'page arguments' => array($tags_admin_type),
+
+      'access callback' => 'gv_misc_userIsAdmin',
+      'type' => MENU_NORMAL_ITEM,
+    );
+  }
   
   $items['admin/content/quote-requests'] = array(
     'title' => 'Quote Requests',
