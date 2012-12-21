@@ -1019,6 +1019,7 @@ function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
   //dpm($tags_to_delete);
   foreach ($tags_to_delete as $tid => $name) {
     taxonomy_term_delete($tid);
+    drupal_set_message('A tag "' . $name . '" has been deleted.');
   }
 }
 
