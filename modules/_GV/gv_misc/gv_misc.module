@@ -2726,7 +2726,6 @@ function gv_misc_testPage() {
 
 
   $query = db_select('taxonomy_term_data', 'td')->extend('pagerDefault')->limit(80);
-  
   $query->fields('td', array('name', 'tid', 'vid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');

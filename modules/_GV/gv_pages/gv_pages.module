@@ -952,10 +952,32 @@ function gv_pages_buildTopicsPage($content_type_label) {
 function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+  $voc_names = array('blog' => 'blog_tags', 'news' => 'news_tags', 'articles' => 'articles_tags');
   $content_type = $content_types[$content_type_label];
   
-  $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 80);
+  //$tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 80);
+  //$main_topics_voc = taxonomy_vocabulary_machine_name_load(TOPICS);
+  
+  $voc = taxonomy_vocabulary_machine_name_load($voc_names[$content_type_label]);
+  
+  $tags_array = array();
+  $query = db_select('taxonomy_term_data', 'td')->extend('pagerDefault')->limit(80);
+  $query->fields('td', array('name', 'tid', 'vid', 'description'));
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
+  $query->leftJoin('node', 'n', 'n.nid = ti.nid');
+  //$query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
+  $query->addExpression('COUNT(n.nid)', 'count');
+  $query->groupBy('td.name');
+  $query->condition('td.vid', $voc->vid);
+  $query->orderBy('count', 'ASC');
+  $results = $query->execute();
 
+  foreach($results as $result) {
+    $result->link = array('link_title' => $result->name, 'href' => 'taxonomy/term/' . $result->tid);
+    $tags_array[$result->tid] = $result;
+  }
+
+  
   $content_type_label_title = ucfirst($content_type_label);
   $form['Title'] = array(
     '#markup' => '<h1>' . $content_type_label_title . ' Tags Admin page</h1><div class="cloud-link">' . l($content_type_label_title . ' tags cloud page', $content_type_label . '/tags')  . '</div>',
@@ -978,7 +1000,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
       $form['tags'][$tid] = array(
         '#type' => 'checkbox',
         '#default_value' => FALSE,
-        '#title' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . ',</span> <span' . ($tag->count == 1? ' class="zero"' : '') . '>' . $tag->count . '</span> posts</div>',
+        '#title' => '<div class="tag">' . l($tag->name, $tag->link['href'], array('attributes' => array('target' => '_blank'))) . '<span class="tid">, tid =' . $tid . ',</span> <span' . ($tag->count == 1? ' class="zero"' : '') . '>' . $tag->count . '</span> posts</div>',
       );
     }
     
