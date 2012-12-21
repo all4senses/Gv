@@ -946,12 +946,10 @@ function gv_pages_buildTopicsPage($content_type_label) {
 /**
  * Returns a admin page of all tags of s specific content type.
  */
-function gv_pages_buildEditTagsPage($type) {
+function gv_pages_buildEditTagsPage($content_type_label) {
   
-  dpm($type);
-  global $language;
-  //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
-  // Inverted...
+  dpm($content_type_label);
+
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
