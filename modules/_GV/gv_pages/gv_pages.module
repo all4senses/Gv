@@ -956,7 +956,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
-  $tags_array = gv_misc_getTopics($content_type, $content_type_label);
+  $tags_array = gv_misc_getTopics($content_type, $content_type_label, 100, TRUE);
 
   //dpm($tags_array);
   
@@ -983,10 +983,10 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
       '#weight' => 40,
     ); 
     
-//    $form['sumbit'] = array(
-//     '#type' => 'submit',
-//     '#value' => 'Submit',
-//    );
+    $form['pager'] = array(
+      '#type' => 'markup',
+      '#markup' => theme('pager'),
+    );
     
     $form['#submit'][] = 'gv_pages_editTagsPage_formSubmit';
   }

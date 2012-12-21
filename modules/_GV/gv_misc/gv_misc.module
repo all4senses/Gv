@@ -3268,7 +3268,7 @@ function gv_misc_form_alter(&$form, &$form_state, $form_id) {
  * 
  * Allows to use same topics for News, articles, etc.
  */
-function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
+function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $pager = NULL) {
   $topics = NULL;
   
   $main_topics_voc = taxonomy_vocabulary_machine_name_load(TOPICS);
@@ -3278,8 +3278,11 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
     
   $types = array();
 
-  $query = db_select('taxonomy_term_data', 'td')
-        ->fields('td', array('name', 'tid', 'description'));
+  $query = db_select('taxonomy_term_data', 'td');
+  if ($pager) {
+    $query->extend('pagerDefault');
+  }
+  $query->fields('td', array('name', 'tid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');
   $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
