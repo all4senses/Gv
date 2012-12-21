@@ -3287,7 +3287,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL) {
   $query->groupBy('td.name');
   // Exclude main topics terms -> choose only terms for specific node type.
   $query->condition('td.vid', $main_topics_voc->vid, '!=');
-  $query->orderBy('count');
+  $query->orderBy('count', 'DESC');
   if ($limit) {
     $query->range(0, $limit);
   }
