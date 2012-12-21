@@ -966,7 +966,10 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     ); 
   }
   else {
-    $tags = '';
+    $form['tags_array'] = array(
+      '#type' => 'hidden',
+      '#value' => $tags_array,
+    );
     $form['tags'] = array(
       '#type' => 'container',
       '#tree' => TRUE,
@@ -1009,7 +1012,7 @@ function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
   $tags_to_delete = array();
   foreach ($form_state['values']['tags'] as $tid => $value) {
     if ($value) {
-      $tags_to_delete[] = $tid;
+      $tags_to_delete[$form['tags'][]] = $tid;
     }
   }
   dpm($tags_to_delete);
