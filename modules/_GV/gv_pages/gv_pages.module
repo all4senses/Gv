@@ -960,7 +960,17 @@ function gv_pages_buildEditTagsPage($content_type_label) {
   if (!$tags_array) {
     return 'No tags here yet...';
   }
-
+  
+  foreach ($tags_array as $tid => $tag) {
+    
+    $tags .= '<div class="tag">' . l($tag->name, $tag->link['href']) . ' (' . $tag->count . ')</div>';
+  }
+  
+  return '<div class="tags">' . $tags . '</div>'; 
+  
+  
+  
+  
   // Simple List.
   // $tags = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $tags_array), 'class' => 'tags'));
   // Tag cloud.
