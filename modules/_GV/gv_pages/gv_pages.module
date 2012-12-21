@@ -100,11 +100,6 @@ function gv_pages_menu() {
 }
 
 
-function gv_pages_buildEditTagsPage($type) {
-  dpm($type);
-  return 'tags';
-}
-
 /**
  * Ookla Speedtest page.
  * Deprecated! Used separated template of preface type: node--preface--voip-speed-test.tpl Look at template.php
@@ -948,6 +943,44 @@ function gv_pages_buildTopicsPage($content_type_label) {
 */
 
 
+/**
+ * Returns a admin page of all tags of s specific content type.
+ */
+function gv_pages_buildEditTagsPage($type) {
+  
+  dpm($type);
+  global $language;
+  //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
+  // Inverted...
+  $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+  $content_type = $content_types[$content_type_label];
+  
+  $tags_array = gv_misc_getTopics($content_type, $content_type_label);
+
+  dpm($tags_array);
+  
+  if (!$tags_array) {
+    return 'No tags here yet...';
+  }
+
+  // Simple List.
+  // $tags = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $tags_array), 'class' => 'tags'));
+  // Tag cloud.
+  $tags_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags_array, 12));
+  $tags = theme('gv_misc_tagadelicWeighted_acceptPredefinedTermsPaths', array('terms' => $tags_array));
+
+
+  //$page_title = '<h1 id="page-title" class="title">' . drupal_ucfirst($content_type_label) . ' tags</h1>';
+  $show_all_url = '<div class="more-link">' . l(t('Show all posts...'), $content_type_label) . '</div>';
+  $tags = /*$page_title .*/ $tags . $show_all_url;
+  
+  return '<div class="tags">' . $tags . '</div>'; 
+}
+
+
+/**
+ * Returns a block with a cloud of all tags of s specific content type.
+ */
 function gv_pages_buildTopicsPage($content_type_label) {
   global $language;
   //$content_types = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles');
