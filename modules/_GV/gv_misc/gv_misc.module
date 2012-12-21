@@ -387,7 +387,8 @@ function gv_misc_taxonomy_term_delete($current_term) {
   gv_misc_fieldDelete($target_field_name, NULL, 'field_' . $target_field_name . '_tid', $current_term->tid);
   
   // Clear all caches.
-  drupal_flush_all_caches();
+  // Commented here, because used at function gv_pages_editTagsPage_formSubmit($form, &$form_state)
+  //drupal_flush_all_caches();
 }
 
 
@@ -2167,7 +2168,17 @@ function gv_misc_makeRequest_ajax() {
     //$letter = theme('gv_misc_requestQuote_mail', $post);//$params['request_data']);
     
     
-    if ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
+    
+    if ($submission['First Name'] == '8x8' || $submission['First Name'] == '8X8') {
+      // Test for 8x8
+      //drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+      
+      // Send a lead to Remote providers.
+      if ($submission['Source'] != 'block') {
+        gv_misc_SendRequestTo8x8($submission);
+      }
+    }
+    elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
       // Test for Nextiva
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
@@ -2971,6 +2982,95 @@ function gv_misc_SendRequestToVocalocity($submission) {
 
 ' . $data_from;
   drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
+  
+  return $params['report'];
+}
+
+
+/**
+ * Send a request to 8x8.
+ */
+function gv_misc_SendRequestTo8x8($submission) {
+  
+  // Skip sending if "More than 50".
+  if ($submission['Phones needed'] == 'More than 50') {
+    return NULL;
+  }
+    
+      $map_main = array(
+        'First Name' => 'first_name',
+        'Last Name' => 'last_name',
+        'Phones needed' => '00N70000002xLFJ', // Number of Locations  ///////////  '00N70000002LdcG', // Number of Phone Lines  
+        'Quote type' => '00N70000002Lgx0', // Comments
+        'Buying Time Frame' => '00N70000002eDO6',
+        'Company' => 'company',
+        'Email' => 'email',
+        //'Website' => 'URL',
+        'Phone #' => 'phone',
+      );
+ 
+      
+  // Set initial fields.
+  $data_to = array(
+    'lead_source' => 'GetVoIP',
+    'oid' => '00D700000009mLY',
+    'retURL' => 'http://getvoip.com',
+    //'debug' => 1,
+    //'debugEmail' => 'all4senses@gmail.com',
+      
+    'city' => 'N/A',
+    'state' => 'N/A',
+    'street' => 'N/A',
+    'zip' => 'N/A', 
+    'title' => 'N/A',
+    'country' => 'N/A',
+    'employees' => 'N/A',
+      
+    '00N70000002xLFE' => 'Other',
+    '00N70000002xLFT' => 'Other',
+  );
+  
+  
+  // Map data to remote vars names.
+  foreach ($map_main as $getvoip_key => $remote_key) {
+    $data_to[$remote_key] = $submission[$getvoip_key];
+  }
+  
+  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  //$url = 'http://getvoip.com/request-test';
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+  curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+  $data_from = curl_exec($curl);
+  if ($data_from === false) {
+    $data_from = 'Error!!! 
+' . curl_error($curl);
+  }
+  curl_close($curl);
+ 
+
+  // Report to a4s.
+  $out = 'Quote Request submission form:
+
+';
+  foreach ($submission as $key => $value) {
+   if ($value) {
+      $out .= "$key = $value
+";
+    }
+  }
+ 
+ 
+  // Send a report to admin.
+  global $language;
+  $params['report'] = $out . '
+    
+
+' . $data_from;
+  drupal_mail('gv_misc', 'nextiva_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
 }
