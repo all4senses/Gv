@@ -2735,7 +2735,7 @@ function gv_misc_testPage() {
   $query->groupBy('td.name');
   // Exclude main topics terms -> choose only terms for specific node type.
   $query->condition('td.vid', $voc->vid);
-  $query->orderBy('count', 'DESC');
+  $query->orderBy('count', 'ASC');
   $results = $query->execute();
 
   foreach($results as $result) {
