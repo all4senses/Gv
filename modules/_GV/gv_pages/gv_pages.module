@@ -979,7 +979,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
         //'#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
         '#type' => 'checkbox',
         '#default_value' => FALSE,
-        '#title' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
+        '#title' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . ',</span> <span' . ($tag->count ? '' : ' class="zero"') . '>' . $tag->count . '</span> posts</div>',
       );
     }
     
