@@ -967,6 +967,10 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   }
   else {
     $tags = '';
+    $form['tags'] = array(
+      '#type' => 'container',
+      '#tree' => TRUE,
+    );
     foreach ($tags_array as $tid => $tag) {
       $form['tags']['tag_' . $tid] = array(
         //'#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
