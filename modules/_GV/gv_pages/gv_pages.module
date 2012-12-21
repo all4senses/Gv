@@ -951,7 +951,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
  */
 function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
-  dpm($content_type_label);
+  //dpm($content_type_label);
 
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
@@ -960,8 +960,9 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
 
   //dpm($tags_array);
   
+  $content_type_label_title = ucfirst($content_type_label);
   $form['Title'] = array(
-    '#markup' => '<h1>' . ucfirst($content_type_label) . ' Tags Admin page</h1>',
+    '#markup' => '<h1>' . $content_type_label_title . ' Tags Admin page</h1><div class="cloud-link">' . l($content_type_label_title . ' tags cloud page', $content_type_label . '/tags')  . '</div>',
   );
   if (!$tags_array) {
     $form['no_results'] = array(
