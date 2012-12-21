@@ -3376,10 +3376,10 @@ function theme_gv_misc_image_style(array $variables) {
   
   
   // Check if a file exists only for anonymous.
-  global $user;
-  if (!$user->uid && !file_exists($variables['path'])) {
-    return NULL;
-  }
+//  global $user;
+//  if (!$user->uid && !file_exists($variables['path'])) {
+//    return NULL;
+//  }
   
   
   $image_src = image_style_url($variables['style_name'], $variables['path']);
