@@ -977,9 +977,15 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
       '#markup' => '<div class="more-link">' . l(t('Show all posts...'), $content_type_label) . '</div>',
     );
     
+    $form['sumbit'] = array(
+     '#type' => 'submit',
+     '#value' => 'Submit',
+    );
+    
     $form['#submit'][] = 'gv_pages_editTagsPage_formSubmit';
   }
 
+  dpm($form);
   return $form; 
 }
 
