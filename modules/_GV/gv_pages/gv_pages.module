@@ -1015,7 +1015,7 @@ function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
   
   foreach ($form_state['values']['tags'] as $tid => $value) {
     if ($value) {
-      //$tags_to_delete[$form['tags'][]] = $tid;
+      $tags_to_delete[$tid] = $tags_array[$tid]['name'];
     }
   }
   dpm($tags_to_delete);
