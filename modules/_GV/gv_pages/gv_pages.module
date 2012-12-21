@@ -978,7 +978,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $query->condition('td.vid', $main_tags_voc->vid, '!=');
   $query->orderBy('count', 'DESC');
 //  if ($limit) {
-    $query->range(0, $limit);
+    $query->range(0, 30);
 //  }
   $results = $query->execute();
 
