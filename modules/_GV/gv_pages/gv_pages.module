@@ -972,7 +972,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
       '#tree' => TRUE,
     );
     foreach ($tags_array as $tid => $tag) {
-      $form['tags']['tag_' . $tid] = array(
+      $form['tags'][$tid] = array(
         //'#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
         '#type' => 'checkbox',
         '#default_value' => FALSE,
@@ -1005,8 +1005,13 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
 
 function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
   dpm($form_state['values']);
-  //drupal_set_message('test..............');
-  //exit;
+  $tags_to_delete = array();
+  foreach ($form_state['values']['tags'] as $tid => $value) {
+    if ($value) {
+      $tags_to_delete[] = $tid;
+    }
+  }
+  dpm($tags_to_delete);
 }
 
 
