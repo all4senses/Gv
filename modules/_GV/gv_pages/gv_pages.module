@@ -966,8 +966,8 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     
   $types = array();
 
-  $query = db_select('taxonomy_term_data', 'td');
-  $query->extend('pagerDefault')->limit(30);
+  $query = db_select('taxonomy_term_data', 'td')->extend('pagerDefault')->limit(30);
+
   $query->fields('td', array('name', 'tid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
   $query->leftJoin('node', 'n', 'n.nid = ti.nid');
@@ -978,7 +978,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   $query->condition('td.vid', $main_tags_voc->vid, '!=');
   $query->orderBy('count', 'DESC');
 //  if ($limit) {
-    $query->range(0, 30);
+//    $query->range(0, 30);
 //  }
   $results = $query->execute();
 
