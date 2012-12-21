@@ -989,7 +989,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Save'),
+      '#value' => t('Delete all selected tags'),
       '#weight' => 40,
     ); 
     
@@ -1001,24 +1001,24 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     $form['#submit'][] = 'gv_pages_editTagsPage_formSubmit';
   }
 
-  dpm($form);
   return $form; 
 }
 
 
 function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
   //dpm($form);
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   $tags_array = unserialize($form_state['values']['tags_array']);
-  dpm($tags_array);
   $tags_to_delete = array();
-  
   foreach ($form_state['values']['tags'] as $tid => $value) {
     if ($value) {
       $tags_to_delete[$tid] = $tags_array[$tid]->name;
     }
   }
   dpm($tags_to_delete);
+  foreach ($tags_to_delete as $tid => $name) {
+    
+  }
 }
 
 
