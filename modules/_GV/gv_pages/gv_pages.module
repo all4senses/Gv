@@ -968,7 +968,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   else {
     $form['tags_array'] = array(
       '#type' => 'hidden',
-      '#value' => $tags_array,
+      '#value' => serialize($tags_array),
     );
     $form['tags'] = array(
       '#type' => 'container',
