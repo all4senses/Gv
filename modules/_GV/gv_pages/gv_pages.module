@@ -18,7 +18,7 @@ function gv_pages_menu() {
 
   $tags_admin_types = array('articles', 'news', 'blog');
   foreach ($tags_admin_types as $tags_admin_type) {
-    $items['articles/tags-admin'] = array(
+    $items[$tags_admin_type . '/tags-admin'] = array(
       'title' => 'Admin tags ' . $tags_admin_type,
       'description' => 'Admin tags ' . $tags_admin_type,
 
