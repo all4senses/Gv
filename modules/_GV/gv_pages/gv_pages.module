@@ -951,15 +951,11 @@ function gv_pages_buildTopicsPage($content_type_label) {
  */
 function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
-  //dpm($content_type_label);
-
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
   $tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 80);
 
-  //dpm($tags_array);
-  
   $content_type_label_title = ucfirst($content_type_label);
   $form['Title'] = array(
     '#markup' => '<h1>' . $content_type_label_title . ' Tags Admin page</h1><div class="cloud-link">' . l($content_type_label_title . ' tags cloud page', $content_type_label . '/tags')  . '</div>',
@@ -980,7 +976,6 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     );
     foreach ($tags_array as $tid => $tag) {
       $form['tags'][$tid] = array(
-        //'#markup' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . '</span> (' . $tag->count . ' posts)</div>',
         '#type' => 'checkbox',
         '#default_value' => FALSE,
         '#title' => '<div class="tag">' . l($tag->name, $tag->link['href']) . '<span class="tid">, tid =' . $tid . ',</span> <span' . ($tag->count == 1? ' class="zero"' : '') . '>' . $tag->count . '</span> posts</div>',
@@ -1010,8 +1005,9 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
 
 
 function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
-  //dpm($form);
-  //dpm($form_state['values']);
+  
+  //dpm($form); dpm($form_state['values']);
+  
   $tags_array = unserialize($form_state['values']['tags_array']);
   $tags_to_delete = array();
   foreach ($form_state['values']['tags'] as $tid => $value) {
@@ -1019,9 +1015,10 @@ function gv_pages_editTagsPage_formSubmit($form, &$form_state) {
       $tags_to_delete[$tid] = $tags_array[$tid]->name;
     }
   }
-  dpm($tags_to_delete);
+  
+  //dpm($tags_to_delete);
   foreach ($tags_to_delete as $tid => $name) {
-    //taxonomy_term_delete($tid);
+    taxonomy_term_delete($tid);
   }
 }
 
