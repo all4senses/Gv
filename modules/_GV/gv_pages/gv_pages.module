@@ -960,6 +960,9 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
 
   //dpm($tags_array);
   
+  $form['Title'] = array(
+    '#markup' => '<h1>' . ucfirst($content_type_label) . ' Tags Admin page</h1>',
+  );
   if (!$tags_array) {
     $form['no_results'] = array(
       '#markup' => '<div class="no-results">No tags here yet...</div>',
