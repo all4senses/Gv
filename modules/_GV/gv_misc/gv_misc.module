@@ -3280,7 +3280,8 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $page
 
   $query = db_select('taxonomy_term_data', 'td');
   if ($pager) {
-    $query->extend('pagerDefault')->limit($pages_per_page);
+    $query->extend('pagerDefault');
+    $query->limit($pages_per_page);
   }
   $query->fields('td', array('name', 'tid', 'description'));
   $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
