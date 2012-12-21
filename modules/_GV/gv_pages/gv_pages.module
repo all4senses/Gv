@@ -1091,7 +1091,7 @@ function gv_pages_buildTopicsPage($content_type_label) {
   return '<div class="tags">' . $preface . $topics . '</div>'; 
   */
   
-  return ($user->uid ? '<div class="tags-admin-link">' . $content_type_label . '/tags-admin</div>' : '') . '<div class="tags">' . $tags . '</div>'; 
+  return ($user->uid ? '<div class="tags-admin-link">' . l(ucfirst($content_type_label) . ' tags Admin page', $content_type_label . '/tags-admin</div>')  : '') . '<div class="tags">' . $tags . '</div>'; 
 }
 
 
