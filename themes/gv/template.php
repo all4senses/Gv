@@ -19,6 +19,7 @@ function gv_link($variables) {
   if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449') {
     dpm($variables['path']);
     dpm($variables);
+    $variables['options']['attributes']['rel'] = 'nofollow';
   }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }
