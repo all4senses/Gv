@@ -19,11 +19,11 @@
       
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <img src="<?php print 'http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png'; ?>" alt="VoIP Service Providers" title="<?php print t('GetVoIP Home'); ?>" />
+          <img src="<?php print 'http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png'; ?>" alt="GetVoIP.com - Complete VoIP Provider Directory & Service Guide" title="<?php print t('GetVoIP Home'); ?>" />
         </a>
         <div class="descr">
           <div class="title">2013 VOIP GUIDE</div>
-          <div class="subtitle">SERVICE PROVIDER REVIEWS</div><div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="VoIP Reviews" title="VoIP Reviews"/></div>
+          <div class="subtitle">SERVICE PROVIDER REVIEWS</div><div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>
         </div>
       </div>
       
