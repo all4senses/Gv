@@ -1676,13 +1676,15 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
 
   
   //if (!empty($options['attributes']['rel'])) 
-  if ($path == 'reviews/fonality')
+  global $user;
+  if ($path == 'reviews/fonality' && $user->uid == 1)
   {
     //$options['attributes']['rel'] = 'nofollow';
     dpm($path);
     dpm($options);
     //unset($options['attributes']['rel']);
     $options['attributes']['xxx'] = 'yyy';
+    $options['fragment'] = 'zzz';
     dpm($options);
   }
   
