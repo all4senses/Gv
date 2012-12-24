@@ -13,6 +13,8 @@ function gv_preprocess_user_profile(&$profile) {
 
 /**
  * Implements theme_link();
+ * 
+ * Add rel=nofollow to external links.
  */
 function gv_link($variables) {
   //global $user;
