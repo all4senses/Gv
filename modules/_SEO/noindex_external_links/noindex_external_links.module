@@ -1,0 +1,222 @@
+<?php
+/**
+ * @file
+ */
+
+
+/**
+ * Builds the form.
+ * 
+ * Have a4s fixes...
+ */
+function noindex_external_links_settings_form($form_/*a4s fix*/, &$form_state, $filter, $format, $defaults, $filters) {
+  
+  
+  $filter->settings += $defaults;
+  $form['noindex_external_links_method'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Indexing control method'),
+    '#description' => t('You can use any combination of this methods.'),
+      /*a4s fix*/
+    '#default_value' => isset($filter->settings['noindex_external_links_method']) ? $filter->settings['noindex_external_links_method'] : array('nofollow'), 
+    '#options' => array(
+      'noindex' => '<strong>'. t('Wrap links with tag') .' '. htmlentities('<NOINDEX>') .' </strong>. <br />'. t('NOINDEX tag is used to deny indexing part of page. Only Yandex and Rambler considers this tag but Google and others doesn\'t. There is also an attribute NOINDEX in meta-tag Robots.'),
+      'nofollow' => t('<strong>Add attribute rel="nofollow" to links</strong>. <br />This link\'s attribute has no effect on indexing. Only Google really do not follow this links but others do. Attribute is used to say to search engine that links no longer constitute a "vote" in the PageRank system.'),
+    ),
+  );
+
+  $html_validation_link = array('!link' => l(t('HTML-validation'), 'http://validator.w3.org/'));
+
+  $form['noindex_external_links_noindex_format'] = array(
+    '#type' => 'radios',
+    '#title' => htmlentities('<NOINDEX>') . t(' format'),
+    '#description' => t('If you want your pages be valid then use option "Valid".'),
+    '#options' => array(
+      'simple' => '<strong>'. t('Simple') .'</strong>: '. htmlentities('<noindex>') .'<br />'. t('This is a default. NOINDEX-tag isn\'t a valid HTML-tag. It was created by Yandex and used also by Rambler. Google ignore this tag. HTML-validators considers this tag as mistake so your pages will not pass !link.', $html_validation_link),
+
+      'valid' => '<strong>'. t('Valid') .'</strong>: '. htmlentities('<span style="display: none"><![CDATA[<noindex>]]></span>') .'<br />'. t('Using this trick your pages will pass !link.', $html_validation_link) .'<br /><em><strong>'. t('NOTE') .'</strong>: '. t('You have to set "Noindex External Links filter" below "HTML-corrector filter" for all input formats you\'re using at the !link</em>.', array('!link' => l(t('Input formats page'), 'admin/config/content/formats')) ),
+    ),
+    '#default_value' => $filter->settings['noindex_external_links_noindex_format'],
+  );
+
+
+  $form['domains'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Always allowed and always denied domains'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#description' => t('Links to your own domain is allowed by default for indexing and following. You can override this default behaviour by writing down your domain in one of this lists. If the domain will be found in both lists at the same time then will be used common methods for this domain.
+    <br /><em><strong>NOTE</strong>: Subdomain is a separate site.</em>
+    <br /><em><strong>NOTE</strong>: Allowed domains can have nofollow attribute and be wrapped by NOINDEX-tag if user was added them to node\'s body. This means that for allowed domains links do not changed at all.</em>'),
+  );
+
+
+  $form['domains']['noindex_external_links_allowed_domains'] = array(
+    '#type' => 'textarea',
+    '#title' => t('ALWAYS index and follow links to this domains'),
+    '#description' => t('Search Engines will <strong>always</strong> index and follow links to this domains at this site. <br />Separate domains with comma. For example: drupal.ru, drupal.org'),
+    '#default_value' =>  $filter->settings['noindex_external_links_allowed_domains'],
+  );
+
+  $form['domains']['noindex_external_links_denied_domains'] = array(
+    '#type' => 'textarea',
+    '#title' => t('NEVER index and follow links to this domains'),
+    '#description' => t('Search Engines will <strong>never</strong> index and follow links to this domains at this site. <br />Separate domains with comma. For example: google.com, yandex.ru'),
+    '#default_value' =>  $filter->settings['noindex_external_links_denied_domains'],
+  );
+
+
+//  $form['thanks'] = array(
+//    '#type' => 'item',
+//    '#title' => '',
+//    '#markup' => '
+//	    <ul>
+//        <li><a title="Рецепты создания сайтов на Drupal" href="http://drupalcookbook.ru/">Рецепты создания сайтов на Drupal</a></li>
+//        <li><a title="Крупнейшее русскоязычное сообщество Drupal" href="http://drupal.ru/">Русскоязычное Drupal-сообщество</a></li>
+//        <li><a title="Поиск по русским сайтам о Drupal" href="http://drupalpoisk.ru/">Поиск по русским сайтам про Drupal</a></li>
+//        </ul>',
+//  );
+    
+  return $form;
+}
+
+/**
+ * Enter description here...
+ *
+ * @param string $section
+ *   A Drupal path
+ * @return string
+ *   The help text
+ */
+function noindex_external_links_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#noindex_external_links':
+      $output = '<p>'. t('Using this module you can control which external links will be indexed or/and followed by Search Engines. You can select a method of hidding depending on your prefered Search Engines. There are two lists of domains - one for always allowed and other for always denied domains.') .'</p>';
+      return $output;
+  }
+}
+
+
+
+/*
+* Implementation of hook_filter_info
+*/
+
+function noindex_external_links_filter_info(){
+	$filters['noindex'] = array(
+		'title'=>t('Noindex External Links filter'),
+		'description'=> t('Links will be wrapped with tag NOINDEX and will have attribute rel="nofollow" added to them.'),
+		'tips callback'=>'_noindex_tips',
+		'process callback'=>'_noindex_process',
+		'settings callback'=>'noindex_external_links_settings_form',
+		'default settings'=>array('noindex_external_links_noindex_format'=>'simple',
+							'noindex_external_links_allowed_domains'=>'',
+							'noindex_external_links_denied_domains'=>''
+							)
+	);
+	return $filters;
+}
+
+/**
+ * Implementation of hook_filter_FILTER_tips()
+ *
+ * @param int $delta
+ *   Used when a module defines more than one filter
+ * @param unknown_type $format
+ * @param boolean $long
+ *   Determines whether the long or the short tip version is displayed
+ * @return string
+ *   The tip to be displayed
+ */
+function _noindex_tips($filter, $format, $long = FALSE) {
+  $output = '<p>'. t('Search Engines will index and follow ONLY links to allowed domains.') ."</p>\n";
+  return $output;
+}
+
+/**
+ * Implementation of hook_filter. Defines a filter, "Noindex External Links filter".
+ *
+ * @param string $op
+ * @param int $delta
+ * @param int $format
+ * @param string $text
+ *   The text to be filtered
+ * @return string
+ */
+function _noindex_process($text, $filter, $format, $langcode, $cache, $cache_id) {
+	global $_noindex_external_links_allowed_domains;
+	global $_noindex_external_links_denied_domains;
+	global $_noindex_external_links_method;
+
+	
+	$_noindex_external_links_allowed_domains = explode(',', str_replace( ' ', '', $filter->settings['domains']['noindex_external_links_allowed_domains']));
+	$_noindex_external_links_denied_domains = explode(',', str_replace( ' ', '', $filter->settings['domains']['noindex_external_links_denied_domains']));
+	//Find domains in both lists:
+	$ignored_domains = array_diff($_noindex_external_links_allowed_domains, $_noindex_external_links_denied_domains);
+	if (count($ignored_domains)>0) {
+		foreach ($ignored_domains as $domain)  {
+		  unset($_noindex_external_links_allowed_domains[$domain]);
+		  unset($_noindex_external_links_denied_domains[$domain]);
+		}
+	}
+	$_noindex_external_links_method = $filter->settings['noindex_external_links_method'];
+	if (count($_noindex_external_links_method)>0 || count($_noindex_external_links_denied_domains)>0) {
+		//This regexp not found tags at links ancor:
+		//$regexp = '/<a([^href]*)\shref="([^"]+)"\s*([^>]*)>([^<]+)<\/a>/i';
+
+		//This regexp not found link like: <a title="Download this file as PDF" href="http://buytaert.net/files/oopsla07-georges.pdf">dfgsdfgdfgdfg</a>
+		//$regexp = '/<a([^href]*)\shref="([^"]+)"\s*([^>]*)>(.*?)<\/a>/i';
+
+		$regexp = '/<a(.*?)\shref="([^"]+)"\s*([^>]*)>(.*?)<\/a>/i';
+		$text = preg_replace_callback($regexp, 'noindex_external_links_replace', $text);
+	}
+	return $text;
+
+}
+
+
+/**
+ * Do the magic with links
+ *
+ * @param string $input
+ * @return boolean
+
+ */
+function noindex_external_links_replace($match) {
+  global $_noindex_external_links_allowed_domains;
+  global $_noindex_external_links_denied_domains;
+  global $_noindex_external_links_method;
+
+  $url = parse_url($match[2]);
+  if ($url['host'] == $_SERVER['HTTP_HOST'])  return $match[0]; //Inner Link
+
+//  drupal_set_message('Process link: '. $match[0]);
+//  watchdog('noindex_external_links', 'Process link: '. $match[0]);
+
+  // Default in case it doesn't get changed.
+  $link = $match[0];
+
+  //ToDo: Можно принудительно удалять noindex,nofollow...
+  if (in_array($url['host'], $_noindex_external_links_allowed_domains))  return $link;
+  elseif (count($_noindex_external_links_method)<1 && !in_array($url['host'], $_noindex_external_links_denied_domains))  return $link;
+  else {
+    //Combine all attributes:
+    $attr = $match[1] .' '. $match[3];
+    if ($_noindex_external_links_method['nofollow'] || in_array($url['host'], $_noindex_external_links_denied_domains)) {
+      if (strpos($attr, 'nofollow') === FALSE) {
+        if (strpos($attr, 'rel="') === FALSE)     $attr = $attr .' rel="nofollow" ';
+        else    $attr = preg_replace('!rel="([^"]+)"!', 'rel="${1} nofollow"', $attr);
+      }
+    }
+
+    $link = '<a href="'. $match[2] .'" '. $attr .'>'. $match[4] .'</a>';
+
+    if ($_noindex_external_links_method['noindex'] || in_array($url['host'], $_noindex_external_links_denied_domains)) {
+      // Build a new link:
+      if (variable_get('noindex_external_links_noindex_format', 'simple') == 'valid') {
+        $link = '<span style="display: none"><![CDATA[<noindex>]]></span>'.$link.'<span style="display: none"><![CDATA[</noindex>]]></span>';
+      } else    $link = '<noindex>'.$link.'</noindex>';
+    }
+  }
+  return $link;
+}
