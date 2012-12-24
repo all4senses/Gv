@@ -18,8 +18,8 @@ function gv_link($variables) {
   //global $user;
   //if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449' && strpos($variables['path'], 'ttp://') && !strpos($variables['path'], 'ttp://getvoip.com')) {
   if (strpos($variables['path'], 'ttp://') && !strpos($variables['path'], 'ttp://getvoip.com')) {
-    dpm($variables['path']);
-    dpm($variables);
+    //dpm($variables['path']);
+    //dpm($variables);
     if (empty($variables['options']['attributes']['rel'])) {
       $variables['options']['attributes']['rel'] = 'nofollow';
     }
