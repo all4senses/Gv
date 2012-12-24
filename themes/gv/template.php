@@ -16,10 +16,15 @@ function gv_preprocess_user_profile(&$profile) {
  */
 function gv_link($variables) {
   global $user;
-  if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449') {
+  if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449' && strpos($variables['path'], 'ttp://') && !strpos($variables['path'], 'ttp://getvoip.com')) {
     dpm($variables['path']);
     dpm($variables);
-    $variables['options']['attributes']['rel'] = 'nofollow';
+    if (empty($variables['options']['attributes']['rel'])) {
+      $variables['options']['attributes']['rel'] = 'nofollow';
+    }
+    else {
+      $variables['options']['attributes']['rel'] .= ' nofollow';
+    }
   }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
 }
