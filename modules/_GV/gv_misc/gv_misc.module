@@ -1684,6 +1684,7 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
     dpm($options);
 //    //unset($options['attributes']['rel']);
     $options['attributes']['xxx'] = 'yyy';
+    $options['attributes']['target'] = '_parent';
     $options['fragment'] = 'zzz';
     dpm($options);
   }
