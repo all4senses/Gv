@@ -49,12 +49,12 @@ function gv_pager_next($variables) {
   $out = theme_pager_next($variables);
   if ($out) {
     //dpm($out);
-    $out = str_replace('&amp;', '&', $out);
+    $out_altered = str_replace('&amp;', '&', $out);
     //if(preg_match('|.*href="(.*)" .*|', $out, $matches) && !empty($matches[1])) {
-    if(preg_match('|.*href="([^"]*)" .*title="([^"]*)"|', $out, $matches) && !empty($matches[1])) {
+    if(preg_match('|.*href="([^"]*)" .*title="([^"]*)"|', $out_altered, $matches) && !empty($matches[1])) {
       
-      dpm('out in next = ' . $out);
-      dpm($matches);
+      //dpm('out in next = ' . $out_altered);
+      //dpm($matches);
       //gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . str_replace('&amp;', '&', $matches[1]));
       if ($matches[2] == 'Go to next page') {
         gv_misc_addMetatag('next', NULL, $href = 'http://getvoip.com' . $matches[1]);
@@ -83,9 +83,14 @@ function gv_pager_previous($variables) {
   // Add a prev rel metatag.
   $out = theme_pager_previous($variables);
   if ($out) {
-    if(preg_match('|.*href="([^"]*)" .*|', $out, $matches) && !empty($matches[1])) {
+    $out_altered = str_replace('&amp;', '&', $out);
+    if(preg_match('|.*href="([^"]*)" .*|', $out_altered, $matches) && !empty($matches[1])) {
       //dpm($matches[1]);
-      gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . str_replace('&amp;', '&', $matches[1]));
+      
+      dpm('out in prev = ' . $out_altered);
+      dpm($matches);
+      //gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . str_replace('&amp;', '&', $matches[1]));
+      gv_misc_addMetatag('prev', NULL, $href = 'http://getvoip.com' . $matches[1]);
     }
   }
   return $out;
