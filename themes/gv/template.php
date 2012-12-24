@@ -12,6 +12,18 @@ function gv_preprocess_user_profile(&$profile) {
 
 
 /**
+ * Implements theme_link();
+ */
+function gv_link($variables) {
+  global $user;
+  if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449') {
+    dpm($variables['path']);
+  }
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
+}
+
+
+/**
  * Implements hook_preprocess_user_picture();
  */
 function gv_preprocess_user_picture(&$picture) {
