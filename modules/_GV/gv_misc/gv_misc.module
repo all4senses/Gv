@@ -977,7 +977,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     $default_file_path = variable_get('file_' . file_default_scheme() . '_path', conf_path() . '/files');
     $styles_to_delete = array($style_name, $style_name_share, 'block_thumb');
     foreach ($styles_to_delete as $style_to_delete) {
-      $to_delete = str_replace($default_file_path, $default_file_path . '/styles/' . $style_to_delete . '/public/' , $main_image['src']);
+      $to_delete = str_replace($default_file_path, $default_file_path . '/styles/' . $style_to_delete . '/public' , $main_image['src']);
       dpm($to_delete);
     }
     
