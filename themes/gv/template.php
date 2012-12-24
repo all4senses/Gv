@@ -48,7 +48,7 @@ function gv_pager_next($variables) {
   // Add a next rel metatag.
   $out = theme_pager_next($variables);
   if ($out) {
-    //dpm($out);
+    dpm($out);
     //if(preg_match('|.*href="(.*)" .*|', $out, $matches) && !empty($matches[1])) {
     if(preg_match('|.*href="([^"]*)" .*|', $out, $matches) && !empty($matches[1])) {
       
@@ -384,6 +384,7 @@ function gv_html_head_alter(&$head_elements) {
     // Define the number of a current page.
     if (!empty($head_elements['next'])) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
+      //dpm($next);
       foreach (explode('&', $next[1]) as $param) {
         $param = explode('=', $param);
         if ($param[0] == 'page') {
