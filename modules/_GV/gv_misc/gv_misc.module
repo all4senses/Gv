@@ -4148,8 +4148,10 @@ function gv_misc_views_pre_render(&$view) {
         if ($user->uid == 1) {
           drupal_set_message('h. Topics page!', 'warning');
         }
-        gv_misc_drupal_not_found();
-        drupal_exit();
+        else {
+          gv_misc_drupal_not_found();
+          drupal_exit();
+        }
         
     }
 
