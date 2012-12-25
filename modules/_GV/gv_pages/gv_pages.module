@@ -16,7 +16,7 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_pages_menu() {
 
-  $tags_admin_types = array('articles', 'news', 'blog');
+  $tags_admin_types = array('topics', 'articles', 'news', 'blog');
   foreach ($tags_admin_types as $tags_admin_type) {
     $items[$tags_admin_type . '/tags-admin'] = array(
       'title' => 'Admin tags ' . $tags_admin_type,
@@ -951,10 +951,11 @@ function gv_pages_buildTopicsPage($content_type_label) {
  */
 function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
-  $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
-  $voc_names = array('blog' => 'blog_tags', 'news' => 'news_tags', 'articles' => 'articles_tags');
-  $content_type = $content_types[$content_type_label];
   
+  $voc_names = array('topics' => 'topics', 'blog' => 'blog_tags', 'news' => 'news_tags', 'articles' => 'articles_tags');
+  
+  //$content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+  //$content_type = $content_types[$content_type_label];
   //$tags_array = gv_misc_getTopics($content_type, $content_type_label, NULL, TRUE, 80);
   //$main_topics_voc = taxonomy_vocabulary_machine_name_load(TOPICS);
   
