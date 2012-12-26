@@ -1014,7 +1014,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     }
     
     $form['select_all'] = array(
-      '#markup' => '<div class="select-all">Select all tags</div>',
+      '#markup' => '<div class="select-all" style="cursor: pointer; color: gray; margin: 0 0 20px 25px;">Select all tags</div>',
     );
     
     $form['actions']['submit'] = array(
@@ -1032,7 +1032,7 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   }
   
   
-  $path_to_custom_js = drupal_get_path('module', 'gv_page') . '/js/';
+  $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_selectAllTagsToDel.js');
   
 
