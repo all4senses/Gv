@@ -1007,11 +1007,15 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
       );
     }
     
-    if ($content_type_label == 'topics') {
+    if ($content_type_label != 'topics') {
       $form['more'] = array(
-        '#markup' => '<div class="more-link">' . l(t('Show all posts...'), $content_type_label) . '</div>',
+        '#markup' => '<div class="more-link">' . l('Show all posts...', $content_type_label) . '</div>',
       );
     }
+    
+    $form['select_all'] = array(
+      '#markup' => '<div class="select-all">Select all tags</div>',
+    );
     
     $form['actions']['submit'] = array(
       '#type' => 'submit',
@@ -1026,6 +1030,11 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
     
     $form['#submit'][] = 'gv_pages_editTagsPage_formSubmit';
   }
+  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_page') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_selectAllTagsToDel.js');
+  
 
   return $form; 
 }
