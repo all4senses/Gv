@@ -331,24 +331,16 @@ function gv_misc_loadUserExtendedData($uid) {
  * Removes tag's references and its twin tag from a main tag voc references from nodes.
  */
 function gv_misc_taxonomy_term_delete($current_term) {
-  // Search for the corresponding main voc term tid.
-  $all_vocs_terms = taxonomy_get_term_by_name($current_term->name);
-  $found = FALSE;
-  $main_term = FALSE;
-  $main_vid = 2; // 2 - main voc - Topics tags.
-  foreach ($all_vocs_terms as $term) {
-    
-    if ($term->vid == $main_vid) {
-      // Term exists in the Topics vocabulary.
-      $main_term = $term;
-      $found = TRUE;
-      break;
-    }
-  }
+
   
   // Define fields names.
   $main_field_name = 'topics';
   switch ($current_term->vocabulary_machine_name) {
+    
+    case 'topics':
+      $target_field_name = 'topics';
+      break;
+    
     case 'blog_tags':
       $target_field_name = 'tags_blog';
       $node_type = 'blog_post';
@@ -362,27 +354,47 @@ function gv_misc_taxonomy_term_delete($current_term) {
       $node_type = 'article';
       break;
   }
+
   
-  if ($main_term) {
-    // Get nodes list of the specific type that have this field value.
-    $query = db_select('field_data_field_' . $target_field_name, 'f');
-    $query->fields('f', array('entity_id'))
-      ->condition('f.field_' . $target_field_name . '_tid', $current_term->tid)
-      ->condition('f.entity_type', 'node');
-    $nids = $query->execute()->fetchAll(PDO::FETCH_COLUMN);
+  if ($current_term->vid != 2) { // vid for 'topics' = 2
+    
+    // Search for the corresponding main voc term tid.
+    $all_vocs_terms = taxonomy_get_term_by_name($current_term->name);
+    $found = FALSE;
+    $main_term = FALSE;
+    $main_vid = 2; // 2 - main voc - Topics tags.
+    foreach ($all_vocs_terms as $term) {
 
-    if (!empty($nids)) {
-      // Delete corresponding main tag from fields.
-      gv_misc_fieldDelete($main_field_name, NULL, 'field_' . $main_field_name . '_tid', $main_term->tid, $nids);
-
-      // Delete corresponding main tag from taxonomy_index.
-      db_delete('taxonomy_index')
-        ->condition('tid', $main_term->tid)
-        ->condition('nid', $nids, 'IN')
-        ->execute();
+      if ($term->vid == $main_vid) {
+        // Term exists in the Topics vocabulary.
+        $main_term = $term;
+        $found = TRUE;
+        break;
+      }
     }
+
+
+    if ($main_term) {
+      // Get nodes list of the specific type that have this field value.
+      $query = db_select('field_data_field_' . $target_field_name, 'f');
+      $query->fields('f', array('entity_id'))
+        ->condition('f.field_' . $target_field_name . '_tid', $current_term->tid)
+        ->condition('f.entity_type', 'node');
+      $nids = $query->execute()->fetchAll(PDO::FETCH_COLUMN);
+
+      if (!empty($nids)) {
+        // Delete corresponding main tag from fields.
+        gv_misc_fieldDelete($main_field_name, NULL, 'field_' . $main_field_name . '_tid', $main_term->tid, $nids);
+
+        // Delete corresponding main tag from taxonomy_index.
+        db_delete('taxonomy_index')
+          ->condition('tid', $main_term->tid)
+          ->condition('nid', $nids, 'IN')
+          ->execute();
+      }
+    }
+
   }
-  
   // Delete current deleting term from nodes' fields.
   gv_misc_fieldDelete($target_field_name, NULL, 'field_' . $target_field_name . '_tid', $current_term->tid);
   
