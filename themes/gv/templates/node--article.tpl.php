@@ -262,15 +262,15 @@
                       switch ($node->type) {
                         case 'news_post':
                           $target = 'news';
-                          $target_tags = @$field_tags_news['und'];
+                          $target_tags = @$node->field_tags_news['und'];
                           break;
                         case 'blog_post':
                           $target = 'blog';
-                          $target_tags = @$field_tags_blog['und'];
+                          $target_tags = @$node->field_tags_blog['und'];
                           break;
                         case 'article':
                           $target = 'articles';
-                          $target_tags = @$field_tags_articles['und'];
+                          $target_tags = @$node->field_tags_articles['und'];
                           break;
                       }
                       if (!$target_tags) {
