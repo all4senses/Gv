@@ -125,6 +125,10 @@
           hide($content['comments']);
           hide($content['links']);
           hide($content['field_topics']);
+          if (isset($content['field_tags_news'])) {
+            hide($content['field_tags_news']);
+          }
+          dpm($content);
           
           
           if (!$page) {
@@ -164,7 +168,6 @@
             gv_misc_pushTagsToMetatags($keyword_metatag_name, $content['field_topics']);
           }
           
-          dpm($content);
           echo render($content);
         ?>
       </div>
