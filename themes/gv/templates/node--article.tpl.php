@@ -129,7 +129,7 @@
             hide($content['field_tags_news']);
           }
           dpm($content);
-          
+          dpm($node);
           
           if (!$page) {
             
