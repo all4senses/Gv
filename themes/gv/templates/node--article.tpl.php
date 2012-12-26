@@ -131,19 +131,19 @@
             case 'news_post':
               $target = 'news';
               $target_tags = @$node->field_tags_news['und'];
-              $field_tags_current = $content['field_tags_news'];
+              $field_tags_current = @$content['field_tags_news'];
               hide($content['field_tags_news']);
               break;
             case 'blog_post':
               $target = 'blog';
               $target_tags = @$node->field_tags_blog['und'];
-              $field_tags_current = $content['field_tags_blog'];
+              $field_tags_current = @$content['field_tags_blog'];
               hide($content['field_tags_blog']);
               break;
             case 'article':
               $target = 'articles';
               $target_tags = @$node->field_tags_articles['und'];
-              $field_tags_current = $content['field_tags_articles'];
+              $field_tags_current = @$content['field_tags_articles'];
               hide($content['field_tags_articles']);
               break;
           }
