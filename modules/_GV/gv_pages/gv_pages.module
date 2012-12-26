@@ -981,7 +981,9 @@ function gv_pages_editTagsPage_form($form, &$form_state, $content_type_label) {
   
   $content_type_label_title = ucfirst($content_type_label);
   $form['Title'] = array(
-    '#markup' => $content_type_label == 'topics' ? ('<h1>Main Tags holder Admin page</h1>') : '<h1>' . $content_type_label_title . ' Tags Admin page</h1><div class="cloud-link">' . l($content_type_label_title . ' tags cloud page', $content_type_label . '/tags')  . '</div>',
+    '#markup' => $content_type_label == 'topics' 
+                        ? '<h1>Main Tags holder Admin page</h1><div class="cloud-link">' . l('Blog tags cloud page', 'blog/tags')  . '</div><div class="cloud-link">' . l('News tags cloud page', 'news/tags')  . '</div><div class="cloud-link">' . l('Voip Library tags cloud page', 'articles/tags')  . '</div>'
+                        : '<h1>' . $content_type_label_title . ' Tags Admin page</h1><div class="cloud-link">' . l($content_type_label_title . ' tags cloud page', $content_type_label . '/tags')  . '</div><div class="cloud-link">' . l('Main tags holder Admin page', 'topics/tags-admin')  . '</div>',
   );
   if (!$tags_array) {
     $form['no_results'] = array(
