@@ -24,6 +24,10 @@
                   ->condition('pk.field_preface_key_value', $key);
             $sitemap_body = $query->execute()->fetchField(); 
             
+            if(preg_match('/.*(<table.*)/', $sitemap_body, $matches)) {
+              $sitemap_body = $matches[1];
+            }
+                    
             cache_set('gv_sitemap_body', $sitemap_body);
           }
           else {
