@@ -147,9 +147,8 @@
               hide($content['field_tags_articles']);
               break;
           }
-                      
-          //dpm($content);
-          //dpm($node);
+          dpm($content);
+          dpm($node);
           
           if (!$page) {
             
