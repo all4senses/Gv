@@ -125,9 +125,29 @@
           hide($content['comments']);
           hide($content['links']);
           hide($content['field_topics']);
-          if (isset($content['field_tags_news'])) {
-            hide($content['field_tags_news']);
+          
+          
+          switch ($node->type) {
+            case 'news_post':
+              $target = 'news';
+              $target_tags = @$node->field_tags_news['und'];
+              $field_tags_current = $content['field_tags_news'];
+              hide($content['field_tags_news']);
+              break;
+            case 'blog_post':
+              $target = 'blog';
+              $target_tags = @$node->field_tags_blog['und'];
+              $field_tags_current = $content['field_tags_blog'];
+              hide($content['field_tags_blog']);
+              break;
+            case 'article':
+              $target = 'articles';
+              $target_tags = @$node->field_tags_articles['und'];
+              $field_tags_current = $content['field_tags_articles'];
+              hide($content['field_tags_articles']);
+              break;
           }
+                      
           dpm($content);
           dpm($node);
           
@@ -259,6 +279,7 @@
 
                     <?php 
                       $tags = NULL;
+                      /*
                       switch ($node->type) {
                         case 'news_post':
                           $target = 'news';
@@ -273,11 +294,21 @@
                           $target_tags = @$node->field_tags_articles['und'];
                           break;
                       }
+                      */
                       if (!$target_tags) {
                         $target_tags = array();
                       }
-                      foreach ($target_tags as $key => $value) {
-                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
+                      
+                      global $user;
+                      if ($user->uid != 1) {
+                        foreach ($target_tags as $key => $value) {
+                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
+                        }
+                      }
+                      else {
+                        foreach ($target_tags as $key => $value) {
+                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
+                        }
                       }
                       if ($tags) {
                         echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
