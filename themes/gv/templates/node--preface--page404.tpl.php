@@ -26,6 +26,7 @@
             
             if(preg_match('/.*(<table.*)/', $sitemap_body, $matches)) {
               $sitemap_body = $matches[1];
+              dpm($matches);
             }
                     
             cache_set('gv_sitemap_body', $sitemap_body);
