@@ -27,7 +27,7 @@
             global $user;
             if ($user->uid == 1) {
               dpm($sitemap_body);
-              if(preg_match('/.*(<table.*)/', $sitemap_body, $matches)) {
+              if(preg_match_all('/.*(<table.*)/', $sitemap_body, $matches)) {
                 $sitemap_body = $matches[1];
                 dpm($matches);
               }
