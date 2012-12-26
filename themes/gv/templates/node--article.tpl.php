@@ -148,8 +148,8 @@
               break;
           }
                       
-          dpm($content);
-          dpm($node);
+          //dpm($content);
+          //dpm($node);
           
           if (!$page) {
             
