@@ -2756,7 +2756,15 @@ function gv_misc_testPage() {
 */
 
   //unlink();
+  
+  $str = '<div class="sitemap field-name-body"><p>This sitemap is your complete link directory guide in a table of contents format for everything that we have to offer throughout our site.</p>
+<table align="center" border="0" cellpadding="1" cellspacing="1" class="no-border" height="405" style="width: 500px; margin: auto;" width="528">
+';
+  
+  $str = preg_replace('/.*(<table.*)/i', '$1', $str);
     
+  dpm($str);
+  
   return $out . '<br>End of Test';
 }
 
