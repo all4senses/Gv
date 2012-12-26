@@ -14,7 +14,7 @@
           
           // Get content of the Sitemap.
           $sitemap_body = cache_get('gv_sitemap_body');
-          if (!$sitemap_body || empty($sitemap_body->data)) {
+          //if (!$sitemap_body || empty($sitemap_body->data)) {
             $key = 'view-sitemap-page';
             $query = db_select('node', 'n');
             $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
@@ -24,16 +24,21 @@
                   ->condition('pk.field_preface_key_value', $key);
             $sitemap_body = $query->execute()->fetchField(); 
             
-            if(preg_match('/.*(<table.*)/', $sitemap_body, $matches)) {
-              $sitemap_body = $matches[1];
-              dpm($matches);
+            global $user;
+            if ($user->uid == 1) {
+              dpm($sitemap_body);
+              if(preg_match('/.*(<table.*)/', $sitemap_body, $matches)) {
+                $sitemap_body = $matches[1];
+                dpm($matches);
+              }
             }
                     
-            cache_set('gv_sitemap_body', $sitemap_body);
-          }
-          else {
-            $sitemap_body = $sitemap_body->data;
-          }
+//            cache_set('gv_sitemap_body', $sitemap_body);
+//          }
+//          else 
+//          {
+//            $sitemap_body = $sitemap_body->data;
+//          }
         ?>
         <div class="sitemap field-name-body"><?php echo $sitemap_body; ?></div>
         
