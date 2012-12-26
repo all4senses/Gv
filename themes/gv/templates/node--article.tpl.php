@@ -299,17 +299,17 @@
                         $target_tags = array();
                       }
                       
-                      global $user;
-                      if ($user->uid != 1) {
-                        foreach ($target_tags as $key => $value) {
-                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
-                        }
-                      }
-                      else {
+                      //global $user;
+                      //if ($user->uid != 1) {
+                      //  foreach ($target_tags as $key => $value) {
+                      //    $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
+                      //  }
+                      //}
+                      //else {
                         foreach ($target_tags as $key => $value) {
                           $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
                         }
-                      }
+                      //}
                       if ($tags) {
                         echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
                       }
