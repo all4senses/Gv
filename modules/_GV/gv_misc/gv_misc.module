@@ -149,6 +149,11 @@ function gv_misc_drupal_not_found() {
             ->condition('pk.field_preface_key_value', $key);
       $sitemap_body = $query->execute()->fetchField(); 
 
+      // Remove preface text from a Sitemap body.
+      if(preg_match('/.*(<table.*)/s', $sitemap_body, $matches)) {
+        $sitemap_body = $matches[1];
+      }
+            
       cache_set('gv_sitemap_body', $sitemap_body);
     }
     else {
@@ -2755,15 +2760,6 @@ function gv_misc_testPage() {
   }
 */
 
-  //unlink();
-  
-  $str = '<div class="sitemap field-name-body"><p>This sitemap is your complete link directory guide in a table of contents format for everything that we have to offer throughout our site.</p>
-<table align="center" border="0" cellpadding="1" cellspacing="1" class="no-border" height="405" style="width: 500px; margin: auto;" width="528">
-';
-  
-  preg_match('/.*(<table.*)/', $str, $matches);
-    
-  dpm($matches);
   
   return $out . '<br>End of Test';
 }
