@@ -3019,13 +3019,13 @@ function gv_misc_SendRequestTo8x8($submission) {
   $data_to = array(
     'lead_source' => 'LG-GetVoIP',
     'oid' => '00D300000006Mvt', 
-    'retURL' => 'http://getvoip.com',
+    'retURL' =>  'http://go.8x8.com/getvoip', //'http://getvoip.com',
       
     'Campaign_ID' => '70150000000g8vF',
     'member_status' => 'Responded',
       
-    //'debug' => 1,
-    //'debugEmail' => 'all4senses@gmail.com',
+    'debug' => 1,
+    'debugEmail' => 'jessica.weimer@8x8.com',//'all4senses@gmail.com',
       
     'title' => 'N/A',
     'industry' => 'N/A',
@@ -3045,9 +3045,9 @@ function gv_misc_SendRequestTo8x8($submission) {
     $data_to[$remote_key] = $submission[$getvoip_key];
   }
   
-  //$url = https://salesforce.ringlead.com/cgi-bin/797/1/dedup.pl
+  $url = 'https://salesforce.ringlead.com/cgi-bin/797/1/dedup.pl';
+  //$url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   
-  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   //$url = 'http://getvoip.com/request-test';
   
   $curl = curl_init();
