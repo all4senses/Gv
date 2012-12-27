@@ -411,7 +411,7 @@ function gv_blocks_currentPageProviderArticles() {
     $query = db_select('field_data_field_providers_mentioned', 'p')
           ->fields('p', array('entity_id'));
     $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
-    $query->leftJoin('field_revision_field_p_name"', 'pn', 'pn.nid = p.field_providers_mentioned_target_id');
+    $query->leftJoin('field_revision_field_p_name"', 'pn', 'pn.entity_id = p.field_providers_mentioned_target_id');
     
     $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = p.entity_id');
     $query->fields('n', array('created'));
