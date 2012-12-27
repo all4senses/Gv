@@ -1410,7 +1410,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'blog_post_node_form':
     case 'article_node_form':
       
-        //dpm($form);
+        dpm($form);
         
         // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
         $form['body'] = gv_misc_rewriteLinks('pdfs', $form, 'back');
