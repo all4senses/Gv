@@ -139,8 +139,7 @@ function gv_pager_previous($variables) {
  */
 function gv_pager($variables) {
 
-  //dpm(arg());
-  //dpm($_SERVER);
+  
   
   /*
   $altered_pager_reviews = array('/canada-voip', '/residential-voip-reviews', '/business-voip-reviews', '/providers/reviews');
@@ -160,6 +159,10 @@ function gv_pager($variables) {
   */
   
   global $current_page_node_type;
+  
+  dpm(arg());
+  dpm($_SERVER);
+  dpm($current_page_node_type);
   
   $arg_0 = arg(0);
   $arg_1 = arg(1);
