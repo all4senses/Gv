@@ -170,7 +170,7 @@ function gv_pager($variables) {
     $newer_link_title = '‹ Newer Posts';
     $older_link_title = 'Older Posts ›';
   }
-  elseif ( ($arg_0 == 'node' && (in_array($arg_1, $altered_pager_reviews) || $current_page_node_type == 'provider') ) /*|| strpos(@$_SERVER['REQUEST_URI'], '/reviews/') !== FALSE*/ ) {
+  elseif ( ($arg_0 == 'node' && (in_array($arg_1, $altered_pager_reviews) ) ) || $current_page_node_type == 'provider' || strpos(@$_SERVER['REQUEST_URI'], '/reviews/') !== FALSE ) {
     $newer_link_title = '‹ Newer Reviews';
     $older_link_title = 'Older Reviews ›';
   }
