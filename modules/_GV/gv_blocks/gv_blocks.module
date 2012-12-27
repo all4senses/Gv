@@ -419,7 +419,7 @@ function gv_blocks_currentPageProviderArticles() {
 
     dpm($provider_articles_teasers);
     foreach ($provider_articles_teasers as $provider_articles_teaser) {
-      $provider_articles_teaser = unserialize($provider_articles_teaser);
+      $provider_articles_teaser = unserialize($provider_articles_teaser->field_extra_data_value);
       dpm($provider_articles_teaser);
     }
   }
