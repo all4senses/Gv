@@ -159,16 +159,18 @@ function gv_pager($variables) {
   }
   */
   
+  global $current_page_node_type;
+  
   $arg_0 = arg(0);
   $arg_1 = arg(1);
   $altered_pager_posts = array('user', 'news', 'blog', 'about-voip-services', 'taxonomy');
   $altered_pager_reviews = array(98, 429, 434, 581); // 581 - /canada-voip, 434 - /residential-voip-reviews, 429 - /business-voip-reviews, 98 - /providers/reviews
   
-  if ((in_array($arg_0, $altered_pager_posts) && $arg_1 != 'tags-admin') || @$_SERVER['REDIRECT_URL'] == '/articles' || strpos(@$_SERVER['REQUEST_URI'], '/reviews/') !== FALSE) {
+  if ((in_array($arg_0, $altered_pager_posts) && $arg_1 != 'tags-admin') || @$_SERVER['REDIRECT_URL'] == '/articles') {
     $newer_link_title = '‹ Newer Posts';
     $older_link_title = 'Older Posts ›';
   }
-  elseif ($arg_0 == 'node' && in_array($arg_1, $altered_pager_reviews)) {
+  elseif ( ($arg_0 == 'node' && (in_array($arg_1, $altered_pager_reviews) || $current_page_node_type == 'provider') ) /*|| strpos(@$_SERVER['REQUEST_URI'], '/reviews/') !== FALSE*/ ) {
     $newer_link_title = '‹ Newer Reviews';
     $older_link_title = 'Older Reviews ›';
   }
