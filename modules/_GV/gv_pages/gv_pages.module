@@ -3229,7 +3229,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   
   form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $data['teaser'], 'format' => 'full_html') )), $form_state);
   form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']), 'format' => 'full_html') )), $form_state);
-  form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title']['und'][0]['value'], 'teaser_block' => $data['teaser_block'])), 'format' => 'full_html') )), $form_state);
+  //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title']['und'][0]['value'], 'teaser_block' => $data['teaser_block'])), 'format' => 'full_html') )), $form_state);
   
 }
 
