@@ -1434,6 +1434,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //$form['field_a_teaser']['und'][0]['#format'] = 'full_html';
         $form['field_a_teaser']['#access'] = FALSE;
         $form['field_main_image']['#access'] = FALSE;
+        $form['field_extra_data']['#access'] = FALSE;
         
         $form['#validate'][] = 'gv_pages_validateForm_article';
                 

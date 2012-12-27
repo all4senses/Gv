@@ -354,8 +354,9 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     case 'current_page_provider_articles':
-      $block['subject'] = t('Current page provider articles');
-      $block['content'] = gv_blocks_currentPageProviderArticles();
+      $block_data = gv_blocks_currentPageProviderArticles();
+      $block['subject'] = $block_data['subject']; //t('Current page provider articles');
+      $block['content'] = $block_data['content']; //gv_blocks_currentPageProviderArticles();
       break;
     
   }
@@ -402,15 +403,19 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_currentPageProviderArticles() {
   
-  $out = NULL;
+  $content = NULL;
+  $title = NULL;
   
   $args = arg();
   if ($args[0] == 'node') {
     $query = db_select('field_data_field_providers_mentioned', 'p')
           ->fields('p', array('entity_id'));
     $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
+    $query->leftJoin('field_revision_field_p_name"', 'pn', 'pn.nid = p.field_providers_mentioned_target_id');
+    
     $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = p.entity_id');
     $query->fields('n', array('created'));
+    $query->fields('pn', array('field_p_name_value'));
     $query->fields('e', array('field_extra_data_value'));
     $query->condition('p.field_providers_mentioned_target_id', $args[1]);
     //$provider_articles_teasers = $query->execute()->fetchAllAssoc('p.entity_id');
@@ -418,11 +423,11 @@ function gv_blocks_currentPageProviderArticles() {
 
     if (!empty($results)) {
       dpm($results);
-      $out = '';
+      $title = 'Latest ' . $results[0]->field_p_name_value . ' articles';
       foreach ($results as $result) {
         $extra_data = unserialize($result->field_extra_data_value);
         dpm($extra_data);
-        $out .= '<div class="views-row">
+        $content .= '<div class="views-row">
           
                     <div class="views-field views-field-created date-icon">
                       <span class="field-content">
@@ -433,6 +438,12 @@ function gv_blocks_currentPageProviderArticles() {
                     </div>
 
                     <div class="views-field views-field-title">
+                      <span class="field-content">' .
+                        l($extra_data['title'], 'node/' . $result->entity_id) .
+                      '</span>
+                    </div>
+                    
+                    <div class="views-field teaser">
                       <span class="field-content">' .
                         l($extra_data['title'], 'node/' . $result->entity_id) .
                       '</span>
@@ -449,11 +460,11 @@ function gv_blocks_currentPageProviderArticles() {
               ;
       }
       
-      $out = '<div class="view-content">' . $out . '</div>';
-      dpm($out);
+      $content = '<div class="view-content">' . $content . '</div>';
+      dpm($content);
     }
   }
-  return $out;
+  return array('title' => $title, 'content' => $content);
   
   /*
   <div class="view-content">
