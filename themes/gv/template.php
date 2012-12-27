@@ -167,7 +167,7 @@ function gv_pager($variables) {
   $arg_0 = arg(0);
   $arg_1 = arg(1);
   $altered_pager_posts = array('user', 'news', 'blog', 'about-voip-services', 'taxonomy');
-  $altered_pager_reviews = array(98, 429, 434, 581); // 581 - /canada-voip, 434 - /residential-voip-reviews, 429 - /business-voip-reviews, 98 - /providers/reviews
+  $altered_pager_reviews = array(98, 429, 434, 581, 63); // 581 - /canada-voip, 434 - /residential-voip-reviews, 429 - /business-voip-reviews, 98 - /providers/reviews
   
   if ((in_array($arg_0, $altered_pager_posts) && $arg_1 != 'tags-admin') || @$_SERVER['REDIRECT_URL'] == '/articles') {
     $newer_link_title = '‹ Newer Posts';
