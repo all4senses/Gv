@@ -407,8 +407,8 @@ function gv_blocks_currentPageProviderArticles() {
   
   $args = arg();
   if ($args[0] == 'node') {
-    $query = db_select('field_data_field_providers_mentioned', 'p');
-          //->fields('p', array('entity_id'));
+    $query = db_select('field_data_field_providers_mentioned', 'p')
+          ->fields('p', array('entity_id'));
     //$query->leftJoin('node', 'n', 'n.nid = p.entity_id');
     $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = p.entity_id');
     //$query->fields('n', array('title', 'nid'));
