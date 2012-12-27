@@ -355,7 +355,7 @@ function gv_blocks_block_view($delta = '') {
     
     case 'current_page_provider_articles':
       $block_data = gv_blocks_currentPageProviderArticles();
-      $block['subject'] = $block_data['subject']; //t('Current page provider articles');
+      $block['subject'] = $block_data['title']; //t('Current page provider articles');
       $block['content'] = $block_data['content']; //gv_blocks_currentPageProviderArticles();
       break;
     
