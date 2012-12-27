@@ -418,6 +418,10 @@ function gv_blocks_currentPageProviderArticles() {
     $provider_articles_teasers = $query->execute()->fetchAll();
 
     dpm($provider_articles_teasers);
+    foreach ($provider_articles_teasers as $provider_articles_teaser) {
+      $provider_articles_teaser = unserialize($provider_articles_teaser);
+      dpm($provider_articles_teaser);
+    }
   }
   return 'test';
 }
