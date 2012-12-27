@@ -96,6 +96,20 @@ function gv_misc_menu() {
 
 
 /**
+ * Identify the type of the node.
+ */
+function gv_misc_identifyNodeType($nid) {
+    
+  $query = db_select('node', 'n')  
+        ->fields('n', array('type'));
+  $query->condition('n.nid', $nid);
+  $node_type = $query->execute()->fetchField();
+
+  return $node_type;
+}
+
+    
+/**
  * Custom page not found 404.
  * Fix for a standard drupal_not_found
  */
