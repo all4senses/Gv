@@ -158,11 +158,8 @@ function gv_pager($variables) {
   }
   */
   
-  global $current_page_node_type;
-  
-  dpm(arg());
-  dpm($_SERVER);
-  dpm($current_page_node_type);
+  //dpm(arg());
+  //dpm($_SERVER);
   
   $arg_0 = arg(0);
   $arg_1 = arg(1);
