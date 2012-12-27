@@ -171,7 +171,10 @@ function gv_blocks_block_info() {
     'info' => t('GV Weekly video'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+  $blocks['current_page_provider_articles'] = array(
+    'info' => t('Current page provider articles'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   return $blocks;
 }
@@ -350,7 +353,10 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_weeklyVideoBlock();
       break;
     
-    
+    case 'current_page_provider_articles':
+      $block['subject'] = t('Current page provider articles');
+      $block['content'] = gv_blocks_currentPageProviderArticles();
+      break;
     
   }
 
@@ -390,6 +396,15 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
   
 }
 
+
+/**
+ * Returns a Current page provider articles block.
+ */
+function gv_blocks_currentPageProviderArticles() {
+  dpm($_SERVER);
+  dpm(arg());
+  return 'test';
+}
 
 /**
  * Returns a weekly Video block.
