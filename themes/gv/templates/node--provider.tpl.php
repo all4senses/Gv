@@ -136,9 +136,9 @@
               <div class="data tabs">
                 
                 <ul>
-                  <li><a href="#tabs-1"><?php echo t('About !p', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ /*. '</span>'*/ : t(' Provider') )); ?></a></li>
+                  <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ /*. '</span>'*/ : t(' Provider') )); ?></a></li>
                   <?php 
-                  
+                  /*
                     $count = 2;
                     
                     
@@ -187,6 +187,7 @@
 //                            echo '<li><a href="#tabs-' . $count++ . '">' . t('!type Features & Pricing', array('!type' => ucfirst($type['value']))) . '</a></li>';
 //                          } 
 //                    }
+                    */
                   ?>
                 </ul>
                 <div id="tabs-1">
@@ -194,7 +195,7 @@
                 </div>
                 
                 <?php 
-                
+                /*
                     $count = 2;
                     foreach ($node->field_p_types['und'] as $type) {
               
@@ -212,14 +213,7 @@
                                         $basicinfo_title = $p_services[$service_type_key]['pti'];
                                         $basicinfo_text = $p_services[$service_type_key]['pte'];
                                         $money_back = $p_services[$service_type_key]['mbg'];
-                                        /*
-                                        //$node->p_data['s']['re']['fees']['mon']
-                                        $monthly_fees = $p_services[$service_type_key]['fees']['mon'] ? $p_services[$service_type_key]['fees']['mon'] : t('N/A');
-                                        $setup_fees = $p_services[$service_type_key]['fees']['set'] ? $p_services[$service_type_key]['fees']['set'] : t('N/A');
-                                        $cancel_fees = $p_services[$service_type_key]['fees']['can'] ? $p_services[$service_type_key]['fees']['can'] : t('N/A');
-                                        $longdistance_fees = $p_services[$service_type_key]['fees']['lng'] ? $p_services[$service_type_key]['fees']['lng'] : t('N/A');
-                                        $other_fees = $p_services[$service_type_key]['fees']['oth'] ? $p_services[$service_type_key]['fees']['oth'] : t('N/A');
-                                        */
+                                        
                                         foreach ($fee_types as $fee_type_key => $fee_type_data) {
                                           $p_fees[$fee_type_key] = $p_services[$service_type_key]['fees'][$fee_type_key] ? $fee_types[$fee_type_key][1] . $p_services[$service_type_key]['fees'][$fee_type_key] : t('N/A');
                                         }
@@ -230,14 +224,6 @@
                                         $basicinfo_title = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_title'];
                                         $basicinfo_text = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_text'];
                                         $money_back = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_money_back_guarantee'];
-                                        /*
-                                        //$node->p_data['services'][s_residential]['re_basicinfo_fees']['monthly_fees']
-                                        $monthly_fees = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['monthly_fees'] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['monthly_fees'] : t('N/A');
-                                        $setup_fees = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['setup_fees'] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['setup_fees'] : t('N/A');
-                                        $cancel_fees = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['cancel_fees'] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['cancel_fees'] : t('N/A');
-                                        $longdistance_fees = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['longdistance_fees'] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['longdistance_fees'] : t('N/A');
-                                        $other_fees = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['other_fees'] ? $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees']['other_fees'] : t('N/A');
-                                        */
                                         foreach ($fee_types as $fee_type_key => $fee_type_data) {
                                           $p_fees[$fee_type_key] = $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] ? $fee_types[$fee_type_key][1] . $p_services[$old_service_types[$service_type_key]][$service_type_key . '_basicinfo_fees'][$old_fee_types[$fee_type_key]] : t('N/A');
                                         }
@@ -335,6 +321,8 @@
                   
                       
                     } // End of foreach ($node->field_p_types['und'] as $type) {
+                    
+                    */
                     
                 ?>
                 
