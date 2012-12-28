@@ -188,7 +188,8 @@ function noindex_external_links_replace($match) {
   global $_noindex_external_links_method;
 
   $url = parse_url($match[2]);
-  if ($url['host'] == $_SERVER['HTTP_HOST'])  return $match[0]; //Inner Link
+  // a4s fix empty($url['host']) ||  because of thrown errors.
+  if (empty($url['host']) || $url['host'] == $_SERVER['HTTP_HOST'])  return $match[0]; //Inner Link
 
 //  drupal_set_message('Process link: '. $match[0]);
 //  watchdog('noindex_external_links', 'Process link: '. $match[0]);
