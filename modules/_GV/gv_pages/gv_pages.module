@@ -1413,12 +1413,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
-        dpm($providers);
+        //dpm($providers);
         $form['field_providers_mentioned']['und']['#options'] = $providers;
         
     case 'article_node_form':
       
-        dpm($form);
+        //dpm($form);
         
         
         // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
