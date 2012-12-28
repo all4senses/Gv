@@ -1408,9 +1408,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     case 'news_post_node_form':
     case 'blog_post_node_form':
+      
+        
+        // Set a select of available providers.
+        $providers['_none'] = t('- Select a value -');
+        gv_misc_getProviders($providers);
+        dpm($providers);
+        //$form['field_providers_mentioned']['und']['#options'] = $providers;
+        
     case 'article_node_form':
       
         dpm($form);
+        
         
         // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
         $form['body'] = gv_misc_rewriteLinks('pdfs', $form, 'back');
