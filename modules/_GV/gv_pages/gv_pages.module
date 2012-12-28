@@ -1414,7 +1414,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
         dpm($providers);
-        //$form['field_providers_mentioned']['und']['#options'] = $providers;
+        $form['field_providers_mentioned']['und']['#options'] = $providers;
         
     case 'article_node_form':
       
