@@ -102,7 +102,7 @@
               }
               elseif ($_SERVER['REQUEST_URI'] == '/') {
                 // Home page articles teasers.
-                echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By ' , $author_name , ' / ', $created_str;
+                echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By ' , l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username'))), ' / ', $created_str;
               }
               else {
                 if ($node->type == 'article') {
