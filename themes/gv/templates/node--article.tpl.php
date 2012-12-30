@@ -46,7 +46,7 @@
               //$author = user_load($node->uid);
               //$author_name = $author->realname;
               
-              if ($page || $node->type == 'article') {
+              if ($page || $node->type == 'article' || $_SERVER['REQUEST_URI'] == '/') {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
                 $author_name = $authorExtendedData->realname;
               }
@@ -100,13 +100,14 @@
                 
                 echo $submitted;
               }
+              elseif ($_SERVER['REQUEST_URI'] == '/') {
+                echo t('By') , ': ' , $author_name, $created_str;
+              }
               else {
-                dpm($_SERVER);
                 if ($node->type == 'article') {
                   echo t('By') , ': ' , $author_name;
                 }
                 else {
-                  
                   echo $created_str;
                 }
               }
