@@ -105,6 +105,7 @@
                   echo t('By') , ': ' , $author_name;
                 }
                 else {
+                  dpm($_SERVER);
                   echo $created_str;
                 }
               }
