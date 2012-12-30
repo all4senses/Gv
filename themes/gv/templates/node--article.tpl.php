@@ -101,11 +101,12 @@
                 echo $submitted;
               }
               else {
+                dpm($_SERVER);
                 if ($node->type == 'article') {
                   echo t('By') , ': ' , $author_name;
                 }
                 else {
-                  dpm($_SERVER);
+                  
                   echo $created_str;
                 }
               }
