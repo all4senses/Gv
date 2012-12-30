@@ -77,7 +77,7 @@
                   $gplus_profile = ($authorExtendedData->field_u_gplus_profile_value) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $authorExtendedData->field_u_gplus_profile_value . '?rel=author">(G+)</a>' : '';
                 
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  t('By') . ':' .
+                                  'By' . ':' .
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                   '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                                     $author_name .
@@ -89,9 +89,9 @@
                 }
                 else {
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  t('By') . ':' .
+                                  'By' . ':' .
                                   '<span class="username">' .
-                                    t('Guest') .
+                                    'Guest' .
                                   '</span>' .
                                   ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
                                '</span>';
@@ -101,11 +101,12 @@
                 echo $submitted;
               }
               elseif ($_SERVER['REQUEST_URI'] == '/') {
-                echo t('By') , ': ' , $author_name, $created_str;
+                // Home page articles teasers.
+                echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By ' , $author_name , ' / ', $created_str;
               }
               else {
                 if ($node->type == 'article') {
-                  echo t('By') , ': ' , $author_name;
+                  echo 'By' , ': ' , $author_name;
                 }
                 else {
                   echo $created_str;
