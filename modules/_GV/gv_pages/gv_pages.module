@@ -1206,18 +1206,20 @@ function gv_pages_buildHome($name, $data) {
   $block_data = array('module' => 'views', 'delta' => 'providers-block_1', 'shadow' => FALSE); 
   $out .= gv_blocks_getBlockThemed($block_data);
   
-  //global $user;
-  //if (in_array('administrator', $user->roles)) {
-    $out .= render($seo_welcome_node_view['field_preface_bottom']);
-  //}
+  $out .='<div id="home-bottom">';
   
-  global $user;
-  if (in_array('administrator', $user->roles)) {
-    // Get block for All latest articles (news, blogs)Top pick residential providers.
-    $block_data = array('module' => 'views', 'delta' => 'articles-block_home_all_latest_articles', 'shadow' => FALSE); 
-    $out .= gv_blocks_getBlockThemed($block_data);
-  }
-  return $out . '<div class="bottom-clear"></div>';
+      $out .= render($seo_welcome_node_view['field_preface_bottom']);
+
+      global $user;
+      if (in_array('administrator', $user->roles)) {
+        // Get block for All latest articles (news, blogs)Top pick residential providers.
+        $block_data = array('module' => 'views', 'delta' => 'articles-block_home_all_latest_articles', 'shadow' => FALSE); 
+        $out .= gv_blocks_getBlockThemed($block_data);
+      }
+      
+  $out .='<div class="bottom-clear"></div></div>';
+  
+  return $out;
 }
 
 
