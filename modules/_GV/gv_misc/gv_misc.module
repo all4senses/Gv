@@ -2780,9 +2780,9 @@ function gv_misc_testPage() {
   }
 */
 
-
-  $out .= gv_misc_elapsed_time('1234567890').'<br />'; // 3 years 5 months ago 
-  $out .= gv_misc_elapsed_time('1234567890', 6); // 3 years 5 months 1 week 2 days 57 mins 4 secs ago 
+  $t = '1356729178';
+  $out .= gv_misc_elapsed_time($t).'<br />'; // 3 years 5 months ago 
+  $out .= gv_misc_elapsed_time($t, 6); // 3 years 5 months 1 week 2 days 57 mins 4 secs ago 
 
 
   return $out . '<br>End of Test';
