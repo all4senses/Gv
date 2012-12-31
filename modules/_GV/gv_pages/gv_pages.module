@@ -1424,9 +1424,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //dpm($providers);
         $form['field_providers_mentioned']['und']['#options'] = $providers;
         
+        dpm($form);
+        
     case 'article_node_form':
       
-        //dpm($form);
+        
         
         
         // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
