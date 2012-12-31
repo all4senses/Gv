@@ -1210,12 +1210,12 @@ function gv_pages_buildHome($name, $data) {
   
       $out .= render($seo_welcome_node_view['field_preface_bottom']);
 
-      global $user;
-      if (in_array('administrator', $user->roles)) {
+      //global $user;
+      //if (in_array('administrator', $user->roles)) {
         // Get block for All latest articles (news, blogs)Top pick residential providers.
         $block_data = array('module' => 'views', 'delta' => 'articles-block_home_all_latest_articles', 'shadow' => FALSE); 
         $out .= gv_blocks_getBlockThemed($block_data);
-      }
+      //}
       
   $out .='<div class="bottom-clear"></div></div>';
   
