@@ -1034,6 +1034,11 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $last_pos = strrpos($teaser_block, ' ');
   $teaser_block = substr_replace ($teaser_block, '...', $last_pos);
   
+  $teaser_home = trim(drupal_substr($teaser, 0, 250));// . '...';
+  $last_pos = strrpos($teaser_home, ' ');
+  $teaser_home = substr_replace ($teaser_home, '...', $last_pos);
+  
+  
   // $teaser = text_summary($body_full_markup, 'full_html', $characters_num);
   $teaser = trim(drupal_substr($teaser, 0, $characters_num));
   
@@ -1050,7 +1055,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     return $main_image_html . $teaser;
   }
   else {
-    return array('teaser' => $main_image_html . $teaser, 'teaser_block' => $teaser_block, 'main_image' => $main_image);
+    return array('teaser' => $main_image_html . $teaser, 'teaser_block' => $teaser_block, 'teaser_home' => $main_image_html . $teaser_home, 'main_image' => $main_image);
   }
   
 }
