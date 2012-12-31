@@ -11,7 +11,12 @@
 <?php endif; ?>
 <?php foreach ($rows as $id => $row): ?>
   
-  <?php if ($id == 2) { echo gv_pages_getTopProvidersBlocksForArticlesDirectory(); } ?>
+  <?php 
+//    if ($id == 2) { 
+//      // Add a comparison charts.
+//      echo gv_pages_getTopProvidersBlocksForArticlesDirectory(); 
+//    } 
+  ?>
   
   <div class="<?php print $classes_array[$id]; ?>">
     <?php print $row; ?>
