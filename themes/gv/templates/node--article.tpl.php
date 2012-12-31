@@ -158,8 +158,8 @@
             
             if ($_SERVER['REQUEST_URI'] == '/') {
               // Show an other teaser on the home page.
-              echo $node->field_a_teaser['und'][0]['value'];
-              dpm($node);
+              $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+              echo $extra_data['teaser_block'];
             }
             else {
               // TODO: Temporary check. Should be removed after all articles resave.
