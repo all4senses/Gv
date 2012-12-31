@@ -428,8 +428,10 @@ function gv_blocks_blogPageLatestNews() {
     //$provider_articles_teasers = $query->execute()->fetchAllAssoc('n.nid');
     $results = $query->execute()->fetchAll();
 
+    dpm('xxx');
+    
     if (!empty($results)) {
-      //dpm($results);
+      dpm($results);
       $count = count($results) - 1;
       foreach ($results as $key => $result) {
         $extra_data = unserialize($result->field_extra_data_value);
