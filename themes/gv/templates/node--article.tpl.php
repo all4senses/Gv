@@ -102,7 +102,7 @@
               }
               elseif ($_SERVER['REQUEST_URI'] == '/') {
                 // Home page articles teasers.
-                echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', gv_misc_elapsed_time($node->created);
+                echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', date('F d, Y', $node->created) /*gv_misc_elapsed_time($node->created)*/;
               }
               else {
                 if ($node->type == 'article') {
