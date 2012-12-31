@@ -1034,7 +1034,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $last_pos = strrpos($teaser_block, ' ');
   $teaser_block = substr_replace ($teaser_block, '...', $last_pos);
   
-  $teaser_home = trim(drupal_substr($teaser, 0, 250));// . '...';
+  $teaser_home = trim(drupal_substr($teaser, 0, 200));// . '...';
   $last_pos = strrpos($teaser_home, ' ');
   $teaser_home = substr_replace ($teaser_home, '...', $last_pos);
   
