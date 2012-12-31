@@ -158,7 +158,7 @@
             
             if ($_SERVER['REQUEST_URI'] == '/') {
               // Show an other teaser on the home page.
-              echo $teaser_data['teaser'];
+              echo $node->field_a_teaser['und'][0]['value'];
               dpm($node);
             }
             else {
