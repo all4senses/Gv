@@ -1426,6 +1426,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         dpm($form);
         
+        if (!empty($form['field_extra_data']['und'][0]['value']['#default_value'])) {
+          $extradata = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
+          dpm($extradata);
+        }
+        
     case 'article_node_form':
       
         
