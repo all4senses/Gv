@@ -156,13 +156,20 @@
           
           if (!$page) {
             
-            // TODO: Temporary check. Should be removed after all articles resave.
-            if (isset($node->field_a_teaser['und'][0]['value']) && $node->field_a_teaser['und'][0]['value']) {
-              echo $node->field_a_teaser['und'][0]['value'];
+            if ($_SERVER['REQUEST_URI'] == '/') {
+              // Show an other teaser on the home page.
+              echo $teaser_data['teaser'];
+              dpm($node);
             }
             else {
-              $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
-              echo $teaser_data['teaser'];
+              // TODO: Temporary check. Should be removed after all articles resave.
+              if (isset($node->field_a_teaser['und'][0]['value']) && $node->field_a_teaser['und'][0]['value']) {
+                echo $node->field_a_teaser['und'][0]['value'];
+              }
+              else {
+                $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
+                echo $teaser_data['teaser'];
+              }
             }
             
             hide($content['body']);
