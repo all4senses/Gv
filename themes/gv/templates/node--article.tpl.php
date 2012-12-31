@@ -159,7 +159,12 @@
             if ($_SERVER['REQUEST_URI'] == '/') {
               // Show an other teaser on the home page.
               $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-              echo $extra_data['teaser_home'];
+              if (isset($extra_data['teaser_home'])) {
+                echo $extra_data['teaser_home'];
+              }
+              else {
+                echo $extra_data['teaser_block'];
+              }
             }
             else {
               // TODO: Temporary check. Should be removed after all articles resave.
