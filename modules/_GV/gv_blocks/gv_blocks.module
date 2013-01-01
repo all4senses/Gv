@@ -447,6 +447,7 @@ function gv_blocks_prefaceBottomLatestArticles() {
   if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
     return NULL;
   }
+  dpm('page_index = ' . $page_index);
   
   $query = db_select('node', 'n')  
         ->fields('n', array('nid', 'created'));
