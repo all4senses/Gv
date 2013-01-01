@@ -467,8 +467,18 @@ function gv_blocks_prefaceBottomLatestArticles() {
         ->range(0, 9);
   
   $results = $query->execute()->fetchAll();
-
+  
   dpm($results);
+  
+  $out = '';
+  
+  if (!empty($results)) {
+  
+    foreach ($results as $result) {
+      $node = node_load($result->nid);
+      $out .= node_view($node, 'teaser');
+    }
+  }
   return 'xxx';
   
   if (!empty($results)) {
