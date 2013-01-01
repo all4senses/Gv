@@ -1435,7 +1435,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#title' => 'Pin article to...',
             '#options' => array('Business VoIP' => 'Business VoIP', 'Residential VoIP' => 'Residential VoIP', 'Business VoIP Features' => 'Business VoIP Features',
                                 'SIP Trunking Providers' => 'SIP Trunking Providers', 'Canada VoIP' => 'Canada VoIP', 'Internet Fax' => 'Internet Fax'),
-            '#default_value' => array('SIP Trunking Providers'),
+            '#default_value' => isset($extradata['pin_article_to']) ? $extradata['pin_article_to'] : array(),
             '#weight' => 33,
           );
         }
@@ -3262,7 +3262,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   // Define a main image and build a custom teaser.
   $data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
 
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   
   $pin_article_to = array();
   if (!empty($form_state['values']['pin_article_to'])) {
