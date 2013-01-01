@@ -2233,21 +2233,12 @@ function gv_misc_makeRequest_ajax() {
     
     
     
-    if ($submission['First Name'] == '8x8' || $submission['First Name'] == '8X8' || $submission['First Name'] == 'Alllexxx') {
-      // Test for 8x8
-      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
-      
-      // Send a lead to Remote providers.
-      if ($submission['Source'] != 'block') {
-        gv_misc_SendRequestTo8x8($submission);
-      }
-    }
-    elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
+    if ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
       // Test for Nextiva
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
       // Send a lead to Remote providers.
-      if ($submission['Version'] != 5 && $submission['Version'] != 6) {
+      if ($submission['Source'] != 'block') {
         gv_misc_SendRequestToNextiva($submission);
       }
     }
@@ -2256,8 +2247,9 @@ function gv_misc_makeRequest_ajax() {
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
       // Send a lead to Remote providers.
-      if ($submission['Version'] != 5 && $submission['Version'] != 6) {
+      if ($submission['Source'] != 'block') {
         gv_misc_SendRequestToVocalocity($submission);
+        gv_misc_SendRequestTo8x8($submission);
         //gv_misc_SendRequestToNextiva($submission);
       }
     }
