@@ -1430,6 +1430,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $extradata = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
           dpm($extradata);
         }
+        else {
+//          $form['pin_article_to'] = array(
+//            '#type' => 'textarea',
+//            '#title' => $pros_and_cons_title,
+//            '#default_value' => isset($extra_data['pros_and_cons'][$pros_and_cons_title]) ? $extra_data['pros_and_cons'][$pros_and_cons_title] : '',
+//          );
+        }
         
     case 'article_node_form':
       
