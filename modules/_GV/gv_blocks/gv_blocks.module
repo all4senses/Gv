@@ -479,7 +479,7 @@ function gv_blocks_prefaceBottomLatestArticles() {
       $content .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
     }
 
-    $content = '<div id="bottom-latest-articles">' . $content . '<div class="bottom-clear"></div></div>';
+    $content = '<div id="bottom-latest-articles"><div class="block-views">' . $content . '</div><div class="bottom-clear"></div></div>';
   }
 
   return $content;
