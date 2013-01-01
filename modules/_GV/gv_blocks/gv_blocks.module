@@ -424,20 +424,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_prefaceBottomLatestArticles() {
 
-  /*
-
-  http://getvoip.com/compare-business-voip-providers
-  http://getvoip.com/compare-residential-voip-providers
-  http://getvoip.com/business-voip-features
-  http://getvoip.com/sip-trunking-providers
-  http://getvoip.com/canada-voip
-  http://getvoip.com/internet-fax-service-providers
-  
-  */
-  
   $content = NULL;
-  
-  //dpm($_SERVER);
   
   $map_path_to_type = array(
     '/compare-business-voip-providers' => 'Business VoIP',
@@ -464,19 +451,22 @@ function gv_blocks_prefaceBottomLatestArticles() {
     return 'index for ' . @$map_path_to_type[$_SERVER['REDIRECT_URL']] . ' = ' . @$pin_article_to[@$map_path_to_type[$_SERVER['REDIRECT_URL']]];
   }
   
-
+  if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
+    return NULL;
+  }
+  
   $query = db_select('node', 'n')  
         ->fields('n', array('nid', 'created'));
-  $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = n.nid');
-  $query->fields('e', array('field_extra_data_value'));
-  $query->condition('n.type', 'news_post');
+  $query->leftJoin('field_data_field_pin_article_to', 'a', 'a.field_pin_article_to_value = ' . $page_index);
+  $query->fields('e', array('entity_id'));
+  //$query->condition('n.type', 'news_post');
   $query->orderBy('n.created', 'DESC')
         ->range(0, 9);
   //$provider_articles_teasers = $query->execute()->fetchAllAssoc('n.nid');
   $results = $query->execute()->fetchAll();
 
   if (!empty($results)) {
-    //dpm($results);
+    dpm($results);
     $count = count($results) - 1;
     foreach ($results as $key => $result) {
       $extra_data = unserialize($result->field_extra_data_value);
