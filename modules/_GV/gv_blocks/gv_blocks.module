@@ -451,13 +451,16 @@ function gv_blocks_prefaceBottomLatestArticles() {
   $query = db_select('node', 'n')  
         ->fields('n', array('nid', 'created'));
   $query->leftJoin('field_data_field_pin_article_to', 'a', 'a.field_pin_article_to_value = ' . $page_index);
-  $query->fields('e', array('entity_id'));
+  $query->fields('a', array('entity_id'));
   //$query->condition('n.type', 'news_post');
   $query->orderBy('n.created', 'DESC')
         ->range(0, 9);
   //$provider_articles_teasers = $query->execute()->fetchAllAssoc('n.nid');
   $results = $query->execute()->fetchAll();
 
+  dpm($results);
+  return 'xxx';
+  
   if (!empty($results)) {
     dpm($results);
     $count = count($results) - 1;
