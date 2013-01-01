@@ -100,17 +100,22 @@
                 
                 echo $submitted;
               }
-              elseif ($_SERVER['REQUEST_URI'] == '/') {
-                // Home page articles teasers.
-                echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', date('F d, Y', $node->created) /*gv_misc_elapsed_time($node->created)*/;
-              }
               else {
-                if ($node->type == 'article') {
-                  echo 'By' , ': ' , $author_name;
-                }
-                else {
-                  echo $created_str;
-                }
+                  $paths_with_latest_articles = array('/compare-business-voip-providers', '/compare-residential-voip-providers', '/business-voip-features', '/sip-trunking-providers', '/canada-voip', '/internet-fax-service-providers');
+                  $paths_with_latest_article = FALSE;
+                  if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $paths_with_latest_articles)) {
+                    $paths_with_latest_article = TRUE;
+                    // Home page articles teasers.
+                    echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', date('F d, Y', $node->created) /*gv_misc_elapsed_time($node->created)*/;
+                  }
+                  else {
+                    if ($node->type == 'article') {
+                      echo 'By' , ': ' , $author_name;
+                    }
+                    else {
+                      echo $created_str;
+                    }
+                  }
               }
               
             ?>
@@ -155,10 +160,8 @@
           //dpm($node);
           
           if (!$page) {
-            dpm($_SERVER);
-            $paths_with_latest_articles = array('/compare-business-voip-providers', '/compare-residential-voip-providers', '/business-voip-features', '/sip-trunking-providers', '/canada-voip', '/internet-fax-service-providers');
-            
-            if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $paths_with_latest_articles)) {
+            // $path_with_latest_article is defined above.
+            if ($paths_with_latest_article) {
               // Show an other teaser on the home page.
               $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
               if (isset($extra_data['teaser_home'])) {
