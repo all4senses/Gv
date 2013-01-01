@@ -476,7 +476,7 @@ function gv_blocks_prefaceBottomLatestArticles() {
   
     foreach ($results as $result) {
       $node = node_load($result->entity_id);
-      $out .= node_view($node, 'teaser');
+      $out .= render(node_view($node, 'teaser'));
     }
   }
   return $out;
