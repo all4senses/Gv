@@ -475,7 +475,7 @@ function gv_blocks_prefaceBottomLatestArticles() {
   if (!empty($results)) {
   
     foreach ($results as $result) {
-      $node = node_load($result->nid);
+      $node = node_load($result->entity_id);
       $out .= node_view($node, 'teaser');
     }
   }
