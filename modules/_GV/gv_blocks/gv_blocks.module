@@ -182,6 +182,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['preface_bottom_latest_articles'] = array(
+    'info' => t('Preface bottom latest articles'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -370,6 +375,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_blogPageLatestNews();
       break;
     
+    case 'preface_bottom_latest_articles':
+      $block['subject'] = t('Preface bottom latest articles');
+      $block['content'] = gv_blocks_prefaceBottomLatestArticles();
+      break;
+    
   }
 
   return $block;
@@ -406,6 +416,80 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+/**
+ * Returns a preface Bottom Latest Articles block.
+ */
+function gv_blocks_prefaceBottomLatestArticles() {
+
+  /*
+
+  http://getvoip.com/compare-business-voip-providers
+  http://getvoip.com/compare-residential-voip-providers
+  http://getvoip.com/business-voip-features
+  http://getvoip.com/sip-trunking-providers
+  http://getvoip.com/canada-voip
+  http://getvoip.com/internet-fax-service-providers
+  
+  */
+  
+  $content = NULL;
+  
+  return 'xxx';
+  
+  
+
+  $query = db_select('node', 'n')  
+        ->fields('n', array('nid', 'created'));
+  $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = n.nid');
+  $query->fields('e', array('field_extra_data_value'));
+  $query->condition('n.type', 'news_post');
+  $query->orderBy('n.created', 'DESC')
+        ->range(0, 9);
+  //$provider_articles_teasers = $query->execute()->fetchAllAssoc('n.nid');
+  $results = $query->execute()->fetchAll();
+
+  if (!empty($results)) {
+    //dpm($results);
+    $count = count($results) - 1;
+    foreach ($results as $key => $result) {
+      $extra_data = unserialize($result->field_extra_data_value);
+      //dpm($extra_data);
+      $content .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">
+
+                  <div class="views-field views-field-created date-icon">
+                    <span class="field-content">
+                        <span>
+                          <span>' . date('d\<\/\s\p\a\n\>\<\d\i\v\>M\<\/\d\i\v\>', $result->created) . '
+                        </span>
+                    </span>
+                  </div>
+
+                  <div class="views-field views-field-title">
+                    <span class="field-content">' .
+                      l($extra_data['title'], 'node/' . $result->nid) .
+                    '</span>
+                  </div>
+
+                  <div class="views-field teaser">
+                    <span class="field-content">' .
+                      $extra_data['teaser_block'] .
+                    '</span>
+                  </div>
+
+                  <div class="bottom-clear"></div>
+
+                </div>';
+
+            ;
+    }
+
+    $content = '<div class="view-content block-teasers">' . $content . '</div>';
+  }
+
+  return $content;
 }
 
 
