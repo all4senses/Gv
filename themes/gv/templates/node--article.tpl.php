@@ -156,7 +156,9 @@
           
           if (!$page) {
             
-            if ($_SERVER['REQUEST_URI'] == '/') {
+            $paths_with_latest_articles = array('/compare-business-voip-providers', '/compare-residential-voip-providers', '/business-voip-features', '/sip-trunking-providers', '/canada-voip', '/internet-fax-service-providers');
+            
+            if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $paths_with_latest_articles)) {
               // Show an other teaser on the home page.
               $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
               if (isset($extra_data['teaser_home'])) {
