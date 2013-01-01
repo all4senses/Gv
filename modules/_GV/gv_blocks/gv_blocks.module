@@ -452,7 +452,7 @@ function gv_blocks_prefaceBottomLatestArticles() {
   $query = db_select('node', 'n')  
         ->fields('n', array('nid', 'created'));
   $query->leftJoin('field_data_field_pin_article_to', 'a', 'a.field_pin_article_to_value = ' . $page_index);
-  //$query->fields('a', array('entity_id'));
+  $query->fields('a', array('entity_id'));
   $query->condition('n.nid', 'a.entity_id');
   $query->orderBy('n.created', 'DESC')
         ->range(0, 9);
