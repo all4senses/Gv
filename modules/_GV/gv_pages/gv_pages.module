@@ -1424,7 +1424,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         //dpm($providers);
         $form['field_providers_mentioned']['und']['#options'] = $providers;
         
-        dpm($form);
+        //dpm($form);
         
         global $user;
         if ($user->uid == 1 && !empty($form['field_extra_data']['und'][0]['value']['#default_value'])) {
@@ -1433,8 +1433,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['pin_article_to'] = array(
             '#type' => 'checkboxes',
             '#title' => 'Pin article to...',
-            '#options' => array('xxx' => 'xxx', 'yyy' => 'yyy'),
-            '#default_value' => array('yyy'),
+            '#options' => array('Business VoIP' => 'Business VoIP', 'Residential VoIP' => 'Residential VoIP', 'Business VoIP Features' => 'Business VoIP Features',
+                                'SIP Trunking Providers' => 'SIP Trunking Providers', 'Canada VoIP' => 'Canada VoIP', 'Internet Fax' => 'Internet Fax'),
+            '#default_value' => array('SIP Trunking Providers'),
             '#weight' => 33,
           );
         }
