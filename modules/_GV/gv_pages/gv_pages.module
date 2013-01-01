@@ -1426,16 +1426,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         dpm($form);
         
-        if (!empty($form['field_extra_data']['und'][0]['value']['#default_value'])) {
+        global $user;
+        if ($user->uid == 1 && !empty($form['field_extra_data']['und'][0]['value']['#default_value'])) {
           $extradata = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
           dpm($extradata);
+          $form['pin_article_to'] = array(
+            '#type' => 'checkboxes',
+            '#title' => 'Pin article to...',
+            '#options' => array('xxx' => 'xxx', 'yyy' => 'yyy'),
+            //'#default_value' => isset($extra_data['pros_and_cons'][$pros_and_cons_title]) ? $extra_data['pros_and_cons'][$pros_and_cons_title] : '',
+          );
         }
         else {
-//          $form['pin_article_to'] = array(
-//            '#type' => 'textarea',
-//            '#title' => $pros_and_cons_title,
-//            '#default_value' => isset($extra_data['pros_and_cons'][$pros_and_cons_title]) ? $extra_data['pros_and_cons'][$pros_and_cons_title] : '',
-//          );
+          
         }
         
     case 'article_node_form':
