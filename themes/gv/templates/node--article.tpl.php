@@ -46,7 +46,16 @@
               //$author = user_load($node->uid);
               //$author_name = $author->realname;
               
-              if ($page || $node->type == 'article' || $_SERVER['REQUEST_URI'] == '/') {
+              $paths_with_latest_article = FALSE;
+              if (!$page) {
+                $paths_with_latest_articles = array('/compare-business-voip-providers', '/compare-residential-voip-providers', '/business-voip-features', '/sip-trunking-providers', '/canada-voip', '/internet-fax-service-providers');
+                if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $paths_with_latest_articles)) {
+                  $paths_with_latest_article = TRUE;
+                }
+              }
+              
+              
+              if ($page || $node->type == 'article' || $paths_with_latest_article) {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
                 $author_name = $authorExtendedData->realname;
               }
@@ -101,10 +110,7 @@
                 echo $submitted;
               }
               else {
-                  $paths_with_latest_articles = array('/compare-business-voip-providers', '/compare-residential-voip-providers', '/business-voip-features', '/sip-trunking-providers', '/canada-voip', '/internet-fax-service-providers');
-                  $paths_with_latest_article = FALSE;
-                  if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $paths_with_latest_articles)) {
-                    $paths_with_latest_article = TRUE;
+                  if ($paths_with_latest_article) {
                     // Home page articles teasers.
                     echo ($node->type == 'blog_post' ? 'Blog' : 'News') . ' - By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', date('F d, Y', $node->created) /*gv_misc_elapsed_time($node->created)*/;
                   }
