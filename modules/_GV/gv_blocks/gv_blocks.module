@@ -480,7 +480,7 @@ function gv_blocks_prefaceBottomLatestArticles() {
     $latest = '<div class="block-views"><h2 class="block-title">Latest VoIP Headlines</h2>' . $latest . '</div>';
   }
   
-  $content = '<div id="bottom-with-latest-articles"' . ($latest ? '' : ' class="no-articles"') . '>' 
+  $content = '<div id="bottom-with-latest-articles"' . ($latest ? ' class="with-articles"' : '') . '>' 
               . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
               . $latest
               . '<div class="bottom-clear"></div>' 
