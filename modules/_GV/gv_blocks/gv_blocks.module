@@ -182,8 +182,8 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  $blocks['preface_bottom_latest_articles'] = array(
-    'info' => t('Preface bottom latest articles'),
+  $blocks['preface_bottom_with_latest_articles'] = array(
+    'info' => t('Preface bottom with latest articles'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
@@ -375,9 +375,9 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_blogPageLatestNews();
       break;
     
-    case 'preface_bottom_latest_articles':
-      $block['subject'] = t('Preface bottom latest articles');
-      $block['content'] = gv_blocks_prefaceBottomLatestArticles();
+    case 'preface_bottom_with_latest_articles':
+      $block['subject'] = t('Preface bottom with latest articles');
+      $block['content'] = gv_blocks_prefaceBottomWithLatestArticles();
       break;
     
   }
@@ -422,7 +422,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 /**
  * Returns a preface Bottom Latest Articles block.
  */
-function gv_blocks_prefaceBottomLatestArticles() {
+function gv_blocks_prefaceBottomWithLatestArticles() {
 
   $latest = NULL;
   
