@@ -443,6 +443,16 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/canada-voip' => 'Canada VoIP',
     '/internet-fax-service-providers' => 'Internet Fax',
   );
+ 
+  $map_path_to_title = array(
+    '/compare-business-voip-providers' => 'Business VoIP',
+    '/compare-residential-voip-providers' => 'Residential VoIP',
+    '/business-voip-features' => 'Business VoIP Features',
+    '/sip-trunking-providers' => 'SIP Trunking',
+    '/canada-voip' => 'Canada VoIP',
+    '/internet-fax-service-providers' => 'Internet Fax',
+  );
+ 
   
   $pin_article_to = array(
     'Business VoIP' => 1,
@@ -478,7 +488,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       $latest .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
     }
 
-    $latest = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_type[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest . '</div></div>';
+    $latest = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest . '</div></div>';
   }
   
   $content = '<div id="bottom-with-latest-articles"' . ($latest ? ' class="with-articles"' : '') . '>' 
