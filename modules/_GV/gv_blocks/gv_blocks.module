@@ -424,7 +424,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_prefaceBottomLatestArticles() {
 
-  $content = NULL;
+  $latest = NULL;
+  
+  $map_path_to_preface_type = array(
+    '/compare-business-voip-providers' => 'page-compare-business-voip-providers',
+    '/compare-residential-voip-providers' => 'page-compare-residential-voip-providers',
+    '/sip-trunking-providers' => 'page-compare-sip-voip-providers',
+    '/internet-fax-service-providers' => 'page-compare-ifa-voip-providers',
+    '/business-voip-features' => 'business-voip-features',
+    '/canada-voip' => 'canada-voip',
+  );
   
   $map_path_to_type = array(
     '/compare-business-voip-providers' => 'Business VoIP',
@@ -448,17 +457,6 @@ function gv_blocks_prefaceBottomLatestArticles() {
     return NULL;
   }
   
-  //dpm('page_index = ' . $page_index);
-  
-//  $query = db_select('node', 'n')  
-//        ->fields('n', array('nid', 'created'));
-//  $query->leftJoin('field_data_field_pin_article_to', 'a', 'a.field_pin_article_to_value = ' . $page_index);
-//  $query->fields('a', array('entity_id'));
-//  $query->condition('n.nid', 'a.entity_id');
-//  $query->orderBy('n.created', 'DESC')
-//        ->range(0, 9);
-  //$provider_articles_teasers = $query->execute()->fetchAllAssoc('n.nid');
-  
   $query = db_select('field_data_field_pin_article_to', 'a')
         ->fields('a', array('entity_id'));
   $query->leftJoin('node', 'n', 'n.nid = a.entity_id');
@@ -476,11 +474,17 @@ function gv_blocks_prefaceBottomLatestArticles() {
     $count = count($results) - 1;
     foreach ($results as $key => $result) {
       $node = node_load($result->entity_id);
-      $content .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
+      $latest .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
     }
 
-    $content = '<div id="bottom-latest-articles"><div class="block-views"><h2 class="block-title">Latest VoIP Headlines</h2>' . $content . '</div><div class="bottom-clear"></div></div>';
+    $latest = '<div class="block-views"><h2 class="block-title">Latest VoIP Headlines</h2>' . $latest . '</div>';
   }
+  
+  $content = '<div id="bottom-with-latest-articles' . ($latest ? '' : ' no-articles') . '">' 
+              . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
+              . $latest
+              . '<div class="bottom-clear"></div>' 
+           . '</div>';
 
   return $content;
 }
