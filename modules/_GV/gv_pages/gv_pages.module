@@ -1414,35 +1414,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'news_post_node_form':
     case 'blog_post_node_form':
       
-        
-        // Set a select of available providers.
+          // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
-        //dpm($providers);
         $form['field_providers_mentioned']['und']['#options'] = $providers;
-        
-        //dpm($form);
-        
-//        global $user;
-//        if ($user->uid == 1 && !empty($form['field_extra_data']['und'][0]['value']['#default_value'])) {
-//          $extradata = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
-//          dpm($extradata);
-//          $form['pin_article_to'] = array(
-//            '#type' => 'checkboxes',
-//            '#title' => 'Pin article to...',
-//            '#options' => array('Business VoIP' => 'Business VoIP', 'Residential VoIP' => 'Residential VoIP', 'Business VoIP Features' => 'Business VoIP Features',
-//                                'SIP Trunking Providers' => 'SIP Trunking Providers', 'Canada VoIP' => 'Canada VoIP', 'Internet Fax' => 'Internet Fax'),
-//            '#default_value' => isset($extradata['pin_article_to']) ? $extradata['pin_article_to'] : array(),
-//            '#weight' => 33,
-//          );
-//        }
-//        else {
-//          
-//        }
         
     case 'article_node_form':
       
-        
+        //dpm($form);      
         
         
         // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
