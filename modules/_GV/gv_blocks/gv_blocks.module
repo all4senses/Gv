@@ -463,7 +463,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   $query->fields('n', array('created'));
   $query->condition('a.field_pin_article_to_value', $page_index);
   $query->orderBy('n.created', 'DESC')
-        ->range(0, 9);
+        //->range(0, 9)
+          ;
   
   $results = $query->execute()->fetchAll();
   
