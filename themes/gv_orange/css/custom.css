@@ -341,6 +341,9 @@ body.not-admin #om-menu-main-om-menu li.om-leaf.leaf-write-review{background: no
 #main #bottom-with-latest-articles .node .content {padding: 0; font-family: arial;}
 #main #bottom-with-latest-articles .node .content.teaser .more{display: none; padding-top: 20px;}
 
+/* Allow floating from the left*/
+.field-name-field-preface-bottom .clearfix::after{clear: none;}
+
 
 /* Views block with charts on some pages */
 
@@ -1131,7 +1134,7 @@ h1.preface,
 
 /* Articles teasers */
 .node-teaser{font-family: Georgia,"Bitstream Charter",serif; margin-bottom: 0;}
-.node-teaser h2{display: block; max-height: 50px; overflow: hidden;}
+.node-teaser h2{/*max-height: 50px;*/ display: block; overflow: hidden;}
 .node-teaser h2 a{font-family: Georgia,"Bitstream Charter",serif; color: #478AFD; font-size: 18px; line-height: 20px; font-weight: bold; margin: 0; border: medium none; padding: 0 10px 0 0;}    
 
 #main .node-teaser .submitted{border-bottom: 1px dotted lightgray; display: block; font-size: 12px; margin: 2px 0; padding-bottom: 5px;}
