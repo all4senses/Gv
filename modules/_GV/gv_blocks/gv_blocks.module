@@ -493,14 +493,14 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   
   global $user;
   if ($user->uid == 1) {
-    $content = '<div id="bottom-with-latest-articles"' . ($latest ? ' class="with-articles"' : '') . '>' 
+    $content = '<div id="bottom-with-latest-articles" class="preface' . ($latest ? ' with-articles' : '') . '">'
               . $latest
               . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
               . '<div class="bottom-clear"></div>'
            . '</div>';
   }
   else {
-    $content = '<div id="bottom-with-latest-articles"' . ($latest ? ' class="with-articles"' : '') . '>' 
+    $content = '<div id="bottom-with-latest-articles" class="preface' . ($latest ? ' with-articles' : '') . '">'
               . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
               . $latest
               . '<div class="bottom-clear"></div>'
