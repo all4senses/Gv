@@ -212,6 +212,7 @@
              
               firstname: {
                 required: true,
+                number: false,
                 notEqualsTo: $('input[id="firstname"]').attr('title')
 							},
               lastname: {
