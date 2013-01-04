@@ -167,6 +167,12 @@ function gv_blocks_block_info() {
     'info' => t('Ad for a free ipad-mini'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['ad_speedtest_page'] = array(
+    'info' => t('Ad for a speedtest page'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+    
+    
   $blocks['weekly_video'] = array(
     'info' => t('GV Weekly video'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -360,7 +366,7 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     case 'ad_speedtest_page':
-      $block['subject'] = t('Ad for a speedtest page');
+      $block['subject'] = t('Speedtest');
       $block['content'] = gv_blocks_getAdBlock('speedtest_page');
       break;
     
