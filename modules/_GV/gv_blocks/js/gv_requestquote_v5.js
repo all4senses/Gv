@@ -54,6 +54,18 @@
               */
             }
         });
+        
+        
+        $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
+            
+            if( 
+                    (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+              ) {
+                    event.preventDefault();     // Prevent character input
+            }
+
+        });
 
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
