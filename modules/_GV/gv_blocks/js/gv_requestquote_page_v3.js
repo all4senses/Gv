@@ -119,12 +119,26 @@
 
         });        
         
+        $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
+            
+            //console.log($(this).val());
+            //console.log(event.keyCode);
+            
+            //var l = $(this).val().length;
+            if( 
+                    (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+              ) {
+                    event.preventDefault();     // Prevent character input
+            }
+
+        });
         
         
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
-        }, "All fields with are required");
+        }, "All fields with * are required");
 
 
         // Overriding the default Required message.
@@ -212,7 +226,7 @@
              
               firstname: {
                 required: true,
-                number: false,
+                //number: false,
                 notEqualsTo: $('input[id="firstname"]').attr('title')
 							},
               lastname: {
