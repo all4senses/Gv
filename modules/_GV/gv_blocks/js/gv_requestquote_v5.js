@@ -61,6 +61,9 @@
             if( 
                     (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
                     || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+                    || (event.keyCode == 186) // :
+                    || (event.keyCode == 191) // /
+                    || (event.keyCode == 190) // .
               ) {
                     event.preventDefault();     // Prevent character input
             }
