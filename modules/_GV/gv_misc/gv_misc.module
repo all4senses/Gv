@@ -4957,9 +4957,14 @@ function gv_blocks_getAddThisButtonsLike() {
 function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   
   global $user;
-  $form['user']['email'] = array(
+  
+  $form['title'] = array(
+    '#markup' => '<div class="title">Sign up to receive weekly updates</div>',
+  );
+  
+  $form['email'] = array(
     '#type' => 'textfield',
-    '#title' => 'Sign up to receive weekly updates',
+    //'#title' => 'Sign up to receive weekly updates',
     //'#default_value' => $user->uid ? $user->mail : NULL,
     //'#description' => '',
     '#required' => TRUE,
