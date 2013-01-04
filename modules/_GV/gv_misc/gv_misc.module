@@ -4946,3 +4946,103 @@ function gv_blocks_getAddThisButtonsLike() {
   
   return $out;
 }
+
+
+/**
+ * Implements hook_form().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_newsletterSubscribe_form($form, &$form_state, $node) {
+  
+  global $user;
+  $form['user']['email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Sign up to receive weekly updates',
+    '#default_value' => $user->uid ? $user->mail : NULL,
+    //'#description' => '',
+    '#required' => TRUE,
+    //'#access' => $user->uid ? FALSE : TRUE,
+    '#attributes' => array('title' => 'Email'),
+  );
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Sign Up'),
+  ); 
+  
+  
+  // Add stars widgets to a Rating block
+  $module_path = drupal_get_path('module', 'gv_pages');
+
+  $form['#attached']['js'] = array(
+    // Add hints inside some fields
+    $module_path . '/js/gv_review_fieldHints.js',
+  );
+
+  
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_validate().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_newsletterSubscribe_form_validate(&$form, &$form_state) {
+
+  drupal_set_message('In Validate!', 'warning');
+  dpm($form_state['values']);
+    
+  global $user;
+  
+  // Clear hints, if any.
+  $fields_to_clear_hints = array('email' => array('hint' => 'Your Email'));
+  foreach ($fields_to_clear_hints as $fname => $fdata) {
+   
+    if ($form_state['values'][$fname] == $fdata['hint']) {
+      
+      // This clear the field.
+      $form[$fname]['#value'] = NULL;
+      
+      // Just in case.
+      // BUT! It causes fatal eror with #parent index absence
+      //form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
+      
+      // Just in case on more.
+      $form_state['values'][$fname] = NULL;
+      
+      if (isset($form[$fname]['#required']) && $form[$fname]['#required']) {
+        form_set_error($fname, t('Please fill the field "' . ($form[$fname]['#title'] ? $form[$fname]['#title'] : $fdata['title'] ) . '"'));
+      }
+    }
+    
+  }
+
+  // Check if a not logged in user has entered an email which is already is taken with one of our registered user.
+//  if (!$user->uid && isset($form_state['values']['email']) && $form_state['values']['email']) {
+//    if (gv_misc_emailIsRegistered($form_state['values']['email'])) {
+//      form_set_error('email',t('Sorry, an email You have entered is already registered in our system. If it is your email, please !login and proceed with submitting this review as a logged in user.', array('!login' => l('Log in', 'user/login', array('query' => array('destination' => url($_GET['q'])))))));
+//      return;
+//    }
+//  }
+
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_newsletterSubscribe_form_submit(&$form, &$form_state) {
+  
+  drupal_set_message('On Submit, Ok!', 'warning');
+  
+  //gv_pages_createNode_phoneReview($form_state);
+}

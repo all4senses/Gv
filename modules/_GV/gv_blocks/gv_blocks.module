@@ -184,15 +184,20 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['blog_page_latest_news'] = array(
-    'info' => t('Blog page latest news'),
+    'info' => 'Blog page latest news',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
   $blocks['preface_bottom_w_latest_articles'] = array(
-    'info' => t('Preface bottom with latest articles'),
+    'info' => 'Preface bottom with latest articles',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['newsletters_subscribe'] = array(
+    'info' => 'Newsletters subscribe',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+      
   return $blocks;
 }
 
@@ -390,6 +395,13 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = t('Preface bottom with latest articles');
       $block['content'] = gv_blocks_prefaceBottomWithLatestArticles();
       break;
+    
+    case 'newsletters_subscribe':
+      $block['subject'] = 'Weekly Newsletter';
+      $block['content'] = drupal_get_form('gv_misc_newsletterSubscribe_form');
+      break;
+    
+    
     
   }
 
