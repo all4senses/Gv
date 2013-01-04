@@ -121,6 +121,9 @@
         
         $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
             
+            console.log($(this).val());
+            console.log(event.keyCode);
+            
             if( 
                     (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
                     || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
