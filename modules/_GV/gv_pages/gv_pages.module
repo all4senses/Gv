@@ -5018,7 +5018,8 @@ function gv_pages_addPhoneRatingsToNodeThemed($node, $votes, $counts = NULL, $se
     if (isset($recommend_vote['function'])) {
       // If it's agregated cached results (calculated via function)
       // we'll show percent of voters recomendations.
-      $node->gv_recommend = number_format($recommend_vote['value'], 1, '.', '');
+      //$node->gv_recommend = number_format($recommend_vote['value'], 1, '.', '');
+      $node->gv_recommend = number_format($recommend_vote['value'], 0);
     }
     else {
       $node->gv_recommend = $recommend_vote['value'] ? t('Yes') : t('No');
