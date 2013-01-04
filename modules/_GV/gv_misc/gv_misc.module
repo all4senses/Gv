@@ -5036,9 +5036,10 @@ function gv_misc_newsletterSubscribe_form_validate(&$form, &$form_state) {
       if (isset($form[$fname]['#required']) && $form[$fname]['#required']) {
         form_set_error($fname, t('Please fill the field "' . $fname . '"'));
       }
-      elseif ($fname == 'email' && !preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $form_state['values'][$fname])) {
-        form_error($element, 'Wrong email format!');
-      }
+      
+    }
+    elseif ($fname == 'email' && !preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $form_state['values'][$fname])) {
+      form_error($element, 'Wrong email format!');
     }
     
   }
