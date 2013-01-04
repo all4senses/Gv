@@ -4975,11 +4975,11 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   
   
   // Add stars widgets to a Rating block
-  $module_path = drupal_get_path('module', 'gv_pages');
+  $module_path = drupal_get_path('module', 'gv_misc');
 
   $form['#attached']['js'] = array(
     // Add hints inside some fields
-    $module_path . '/js/gv_review_fieldHints.js',
+    $module_path . '/js/gv_newsletterSubscribe_fieldHints.js',
   );
 
   
