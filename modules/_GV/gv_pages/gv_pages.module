@@ -5111,7 +5111,8 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
           '#markup' => '<div class="recommend"><div class="title">' . t('Would recommend') . ': </div><div class="data">' . $recommend_vote['value'] . '% ' . t('of all voters') . '</div></div>',
       );
       */
-      $node->gv_recommend = number_format($recommend_vote['value'], 1, '.', '');
+      //$node->gv_recommend = number_format($recommend_vote['value'], 1, '.', '');
+      $node->gv_recommend = number_format($recommend_vote['value'], 0);
     }
     else {
       /*
