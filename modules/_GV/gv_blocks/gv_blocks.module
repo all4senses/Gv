@@ -359,6 +359,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getAdBlock('free_ipad_mini');
       break;
     
+    case 'ad_speedtest_page':
+      $block['subject'] = t('Ad for a speedtest page');
+      $block['content'] = gv_blocks_getAdBlock('speedtest_page');
+      break;
+    
     case 'weekly_video':
       $block['subject'] = t('GV Weekly video');
       $block['content'] = gv_blocks_weeklyVideoBlock();
@@ -502,22 +507,12 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $latest = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest . '</div></div>';
   }
   
-//  global $user;
-//  if ($user->uid == 1) {
-    $content = '<div id="bottom-with-latest-articles" class="preface' . ($latest ? ' with-articles' : '') . '">'
-              . $latest
-              . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
-              . '<div class="bottom-clear"></div>'
-           . '</div>';
-//  }
-//  else {
-//    $content = '<div id="bottom-with-latest-articles" class="preface' . ($latest ? ' with-articles' : '') . '">'
-//              . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
-//              . $latest
-//              . '<div class="bottom-clear"></div>'
-//           . '</div>';
-//    
-//  }
+  $content = '<div id="bottom-with-latest-articles" class="preface' . ($latest ? ' with-articles' : '') . '">'
+            . $latest
+            . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
+            . '<div class="bottom-clear"></div>'
+          . '</div>';
+
   return $content;
 }
 
@@ -670,6 +665,10 @@ function gv_blocks_weeklyVideoBlock() {
  */
 function gv_blocks_getAdBlock($ad_name) {
   switch ($ad_name) {
+    
+    case 'speedtest_page':
+      return '<a href="/voip-speed-test"><img src="/default/files/speedtestbanner.png" /></a>';
+      
     case 'free_ipad_mini':
       
       $path_to_custom_js = 'sites/all/libraries/jquery.plugins/countdown/';
