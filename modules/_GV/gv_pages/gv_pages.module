@@ -517,8 +517,39 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   //$args = arg();
   //dpm($args);
     
+  // Show newsletter emails
+  if (arg(3) == 'newsletter-emails') {
+    
+    $query = db_select('gv_emails_subscribed', 'e')
+          ->fields('e', array('email'));
+    $query->condition('e.email', $form_state['values']['email']);
+    $email = $query->execute()->fetchField();
+
+    $results = $query->execute();
+
+    $emails = '<br/><div><strong>Newsletter emails.</strong></div><br/>';
+    
+    $count = NULL;
+    $all_emails = array();
+    foreach ($results as $result) {
+      $all_emails[] = $result->email;
+      $emails .= '<div>' . $result->email_presented . '</div>';
+      $count++;
+
+    }
+    $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
+    $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
+  
+
+    $form['emails'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') .  ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+    );
+    
+    return $form;
+  }
   // Show emails only.
-  if (arg(3) == 'emails') {
+  elseif (arg(3) == 'emails') {
     
     // Requests emails only.
     
@@ -564,7 +595,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/newsletter-emails') . '</div><br/>' . $emails,
     );
     
     return $form;
@@ -610,7 +641,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/newsletter-emails') . '</div><br/>' . $emails,
     );
     
     return $form;
@@ -635,7 +666,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $form['emails'] = array(
       '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails')  . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . '</div><br/>' . $emails,
+      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails')  . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Newsletter emails', 'admin/content/newsletter-emails') . '</div><br/>' . $emails,
     );
     
     return $form;
@@ -712,7 +743,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   $form['emails'] = array(
     '#type' => 'markup',
-    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div>'
+    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/newsletter-emails') . '</div>'
       . '<br/><div><strong>All Quote Requests data.</strong></div><br/>',
   );
   
