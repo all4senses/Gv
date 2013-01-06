@@ -65,7 +65,21 @@
             endif;
           ?>
         
-          <?php print $messages; ?>
+          <?php 
+          
+            //print $messages; 
+            // we aren't getting messages, get them manually
+            if (isset($_SESSION['messages'])) {
+                echo '<div class="messages">';
+                foreach($_SESSION['messages'] as $type=>$messages) {
+                    echo "<p class=\"$type\">".implode("</p><p class=\"$type\">", $messages)."</p>";
+                }
+                echo '</div>';
+                unset($_SESSION['messages']);
+            }
+
+            
+          ?>
           <a id="main-content"></a>
           
           <?php /* if (!$is_front && $title): ?>
