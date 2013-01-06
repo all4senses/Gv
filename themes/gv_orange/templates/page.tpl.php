@@ -67,7 +67,7 @@
         
           <?php 
           
-            //print $messages; 
+            print $messages; 
             // we aren't getting messages, get them manually
 //            if (isset($_SESSION['messages'])) {
 //                echo '<div class="messages">';
