@@ -5087,5 +5087,5 @@ function gv_misc_newsletterSubscribe_form_submit(&$form, &$form_state) {
   dpm($_SERVER);
   
   drupal_set_message('Thank you for subscribing to our newsletter.');
-  drupal_goto('', array('query' => array('nocache' => 1)));
+  drupal_goto($_SERVER['REDIRECT_URL'], array('query' => array('nocache' => 1)));
 }
