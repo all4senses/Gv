@@ -214,7 +214,7 @@ class views_plugin_display_page extends views_plugin_display {
     // display, and arguments should be set on the view.
     $this->view->build();
     if (!empty($this->view->build_info['fail'])) {
-      // a4s fix patch
+      // a4s fix patch, prevents Warning: Cannot modify header information - headers already sent... http://drupal.org/node/1414068
       ///return drupal_not_found();
       return MENU_NOT_FOUND;
     }
