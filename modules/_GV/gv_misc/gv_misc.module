@@ -333,7 +333,7 @@ function gv_misc_loadUserExtendedData($uid) {
       ->fields('rn', array('realname'))
       ->fields('g', array('field_u_gplus_profile_value'));
     $query->condition('uid', $uid);
-    $query->leftJoin('field_data_field_u_gplus_profile', 'g', 'g.entity_id = ' . $uid);
+    $query->leftJoin('field_data_field_u_gplus_profile', 'g', 'g.entity_id = "' . $uid . '"');
     $userExtendedData = $query->execute()->fetchObject();
     
     $userExtendedData_all[$uid] = $userExtendedData;
