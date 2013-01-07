@@ -645,7 +645,7 @@ function gv_process_page(&$variables) {
     //dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
   }
-  elseif (arg(0) == 'user' && $arg_uid = arg(1) && is_int($arg_uid)) {
+  elseif (arg(0) == 'user' && is_int($arg_uid = arg(1))) {
     //dpm('User profile page------------');
     $userExtendedData = gv_misc_loadUserExtendedData($arg_uid);
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('About Us', 'about-us'), l('Our Team', 'our-team'), $userExtendedData->realname )));
