@@ -54,7 +54,10 @@
                 }
               }
               
-              dpm($node);
+              if (!empty($node->field_extra_data['und'][0]['value'])) {
+                $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+                dpm($extra_data);
+              }
               
               if ($page || $node->type == 'article' || $paths_with_latest_article) {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
