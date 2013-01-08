@@ -54,6 +54,7 @@
                 }
               }
               
+              dpm($node);
               
               if ($page || $node->type == 'article' || $paths_with_latest_article) {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
