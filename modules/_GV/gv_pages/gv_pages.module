@@ -1452,8 +1452,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
     case 'article_node_form':
       
-        //dpm($form);      
+        dpm($form);      
         
+        //$form['field_extra_data']
         
         // Restore aliased pdfs links, from /pdfs/ to /sites/default/files/pdfs/
         $form['body'] = gv_misc_rewriteLinks('pdfs', $form, 'back');
@@ -3267,7 +3268,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 //  }
   
   // Define a main image and build a custom teaser.
-  $data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
+  $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
 
   //dpm($form_state['values']);
   
@@ -3281,11 +3282,19 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 //  }
   
   
-  form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $data['teaser'], 'format' => 'full_html') )), $form_state);
-  form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($data['main_image']), 'format' => 'full_html') )), $form_state);
+  form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $teaser_data['teaser'], 'format' => 'full_html') )), $form_state);
+  form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
+  
+  
+  $extra_data = array(
+      'title' => $form_state['values']['title'], 
+      'teaser_block' => $teaser_data['teaser_block'], 
+      'teaser_home' => $teaser_data['teaser_home']
+    );
   
   //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('pin_article_to' => $pin_article_to, 'title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
-  form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
+  //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
+  form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
   
 }
 
