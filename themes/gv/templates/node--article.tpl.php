@@ -57,9 +57,10 @@
               if (!empty($node->field_extra_data['und'][0]['value'])) {
                 $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
                 dpm($extra_data);
+                $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
               }
               
-              if ($page || $node->type == 'article' || $paths_with_latest_article) {
+              if (!$extra_data['guest_author'] && ($page || $node->type == 'article' || $paths_with_latest_article) ) {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
                 $author_name = $authorExtendedData->realname;
               }
@@ -84,18 +85,21 @@
                   
                   global $language;
                   
-                  $author_url = url('user/' . $node->uid);
-                  $author_title = t('!author\'s profile', array('!author' => $author_name));
-                  //$gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
-                  $gplus_profile = ($authorExtendedData->field_u_gplus_profile_value) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $authorExtendedData->field_u_gplus_profile_value . '?rel=author">(G+)</a>' : '';
-                
+                  if (!$extra_data['guest_author']) {
+                    $author_url = url('user/' . $node->uid);
+                    //$gplus_profile = (isset($author->field_u_gplus_profile['und'][0]['safe_value']) && $author->field_u_gplus_profile['und'][0]['safe_value']) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author->field_u_gplus_profile['und'][0]['safe_value'] . '?rel=author">(G+)</a>' : '';
+                    $gplus_profile = ($authorExtendedData->field_u_gplus_profile_value) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $authorExtendedData->field_u_gplus_profile_value . '?rel=author">(G+)</a>' : '';
+                    $author_title = t('!author\'s profile', array('!author' => $author_name));
+                  }
+                  
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By' . ':' .
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
-                                  '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
-                                    $author_name .
-                                  '</a>' . $gplus_profile .
+                          
+                                  (!$extra_data['guest_author'] ? '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' . $gplus_profile : $author_name) .
+                          
                                   ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
+                          
                                '</span>';
                   
                  
