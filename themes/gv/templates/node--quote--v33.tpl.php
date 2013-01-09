@@ -1,4 +1,5 @@
 <div id="v33">
+  <div id="quote-content">
 
   <div id="gv-logo">
     <a href="<?php echo $_SERVER['REDIRECT_URL']?>"><div class="logo"></div></a>
@@ -167,6 +168,7 @@
     <div class="copy">© 2012 GetVoIP.com | All Rights Reserved | BizMedia Central LLC | New York, NY</div>
   </footer>
 
+  </div>
 </div>
 
 <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?> 
