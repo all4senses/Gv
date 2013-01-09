@@ -1,6 +1,22 @@
 <div id="v33">
   <div id="quote-content">
 
+    
+  <?php
+    if ($node->title == 'Request a Quote page v3 Final') {
+      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
+      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
+      drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
+  
+      $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
+      $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
+    }
+    else {
+      $initialQuotePage_node = $node;
+    }
+  ?>
+    
   <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][1]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][1]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][1]['title'])), '</div>'; ?>
   <div id="gv-logo">
     <a href="<?php echo '/compare-voip-solutions'; /*$_SERVER['REDIRECT_URL']*/ ?>"><div class="logo"></div></a>
@@ -19,20 +35,7 @@
   <div class="bottom-clear"></div> 
 
   
-  <?php
-    if ($node->title == 'Request a Quote page v3 Final') {
-      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
-      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
-      drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
-  
-      $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
-      $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
-    }
-    else {
-      $initialQuotePage_node = $node;
-    }
-  ?>
+ 
   
   
   <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
