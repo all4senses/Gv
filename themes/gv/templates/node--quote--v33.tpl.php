@@ -14,20 +14,6 @@
 
   <div class="bottom-clear"></div> 
 
-
-  <div id="upper-block">
-    <h1><?php echo 'We identify and rank the best business VoIP providers and phone systems.'; ?></h1>
-    <div class="quotes">
-      <div><span class="text">"Great Source."</span><span class="source">Inc.</span></div>
-      <div><span class="text">"Rigorous Evaluation Process."</span><span class="source">Smart Money</span></div>
-      <div><span class="text">"Over 500 VoIP Providers analyzed."</span><span class="source">Enterpreneur</span></div>
-    </div>
-
-    <div class="bottom-clear"></div> 
-  </div>
-
-  
-  
   
   <?php
     if ($node->title == 'Request a Quote page v3 Final') {
@@ -85,13 +71,7 @@
     <?php else: ?>
 
       <div class="right">
-        <div id="right-up">
-          <h2>Save Up To 70% On Your Business Phone System</h2>
-          <div class="explain p1"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
-          <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
-          <div class="explain p3"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
-          <div class="bottom-clear"></div> 
-        </div>
+        
         <div id="right-up-image"></div>
         
         <div id="right-bottom">
@@ -113,6 +93,30 @@
 
   </div>
 
+  
+  
+  
+  
+  <div id="upper-block">
+    <h1><?php echo 'We identify and rank the best business VoIP providers and phone systems.'; ?></h1>
+    <div class="quotes">
+      <div><span class="text">"Great Source."</span><span class="source">Inc.</span></div>
+      <div><span class="text">"Rigorous Evaluation Process."</span><span class="source">Smart Money</span></div>
+      <div><span class="text">"Over 500 VoIP Providers analyzed."</span><span class="source">Enterpreneur</span></div>
+    </div>
+
+    <div class="bottom-clear"></div> 
+  </div>
+  
+  
+  <div id="right-up">
+    <h2>Save Up To 70% On Your Business Phone System</h2>
+    <div class="explain p1"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
+    <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
+    <div class="explain p3"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
+    <div class="bottom-clear"></div> 
+  </div>
+  
   
   <div id="brands">
     <h2><?php echo t('Supported by major companies across the country'); ?></h2>
