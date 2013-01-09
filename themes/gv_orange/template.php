@@ -55,6 +55,11 @@ function gv_orange_preprocess_html(&$vars) {
   else {
     $vars['classes_array'][] = 'not-admin';
   }
+  
+  global $body_classes_add;
+  if (!empty($body_classes_add)) {
+    $vars['classes_array'] += $body_classes_add;
+  }
 
   // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
   //Uncomment to add a classes for the browser and platform.
