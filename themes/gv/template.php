@@ -679,7 +679,13 @@ function gv_preprocess_node(&$variables) {
       $variables['theme_hook_suggestions'][] = 'node__quote__v2';
     }
     elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') ) {
-      $variables['theme_hook_suggestions'][] = 'node__quote__v3';
+      global $user;
+      if ($user->uid == 1) {
+        $variables['theme_hook_suggestions'][] = 'node__quote__v33';
+      }
+      else {
+        $variables['theme_hook_suggestions'][] = 'node__quote__v3';
+      }
     }
     
     // Speed test page have its own template
