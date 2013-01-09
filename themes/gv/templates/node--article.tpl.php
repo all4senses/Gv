@@ -54,9 +54,10 @@
                 }
               }
               
+              $extra_data['guest_author'] = NULL;
               if (!empty($node->field_extra_data['und'][0]['value'])) {
                 $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-                dpm($extra_data);
+                //dpm($extra_data);
                 $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
               }
               
@@ -96,7 +97,7 @@
                                   'By' . ':' .
                                   //'<a href="' . $author_url . '" title="View user profile." class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' .
                           
-                                  (!$extra_data['guest_author'] ? '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' . $gplus_profile : $author_name) .
+                                  (!$extra_data['guest_author'] ? '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' . $gplus_profile : '<span class="guest-author">' . $author_name . '</span>') .
                           
                                   ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
                           
