@@ -76,7 +76,7 @@
 
       <div class="right">
         
-        <div id="right-up-image"></div>
+        <!--<div id="right-up-image"></div> -->
         
         <div id="right-bottom">
           <?php echo gv_blocks_get_requestQuoteForPage_v32(); ?>
