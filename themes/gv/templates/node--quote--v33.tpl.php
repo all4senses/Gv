@@ -2,7 +2,7 @@
   <div id="quote-content">
 
   <div id="gv-logo">
-    <a href="<?php echo $_SERVER['REDIRECT_URL']?>"><div class="logo"></div></a>
+    <a href="<?php echo '/compare-voip-solutions'; /*$_SERVER['REDIRECT_URL']*/ ?>"><div class="logo"></div></a>
     <h3>Leading Authority on VoIP Providers</h3>
   </div>
 
@@ -51,6 +51,7 @@
             <div class="text bullet">Hosted Technology & PBX Services</div>
             <div class="text bullet">Unlimited Anytime Calling & Faxing, US & Canada</div>
             <div class="text bullet">Sleek, Reliable, HD IP Phone Systems</div>
+            <div class="guide">Free VoIP Guide With Request</div>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
           //echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';

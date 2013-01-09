@@ -1,7 +1,7 @@
 <div id="v3">
 
   <div id="gv-logo">
-    <a href="<?php echo $_SERVER['REDIRECT_URL']?>"><div class="logo"></div></a>
+    <a href="<?php echo '/compare-voip-solutions'; /*$_SERVER['REDIRECT_URL']*/ ?>"><div class="logo"></div></a>
     <h3>Leading Authority on VoIP Providers</h3>
   </div>
 
