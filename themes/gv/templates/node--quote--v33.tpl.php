@@ -47,13 +47,13 @@
 //        }
 //        else {
           ?>
-            <h2>Compare Leading VoIP Providers</h2>
+            <h2>Compare Unpublished Rates From Top Providers</h2>
             <!--<div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>-->
-            <div class="text bullet">Highly Accredited BBB Companies</div>
-            <div class="text bullet">Hosted Technology & PBX Services</div>
-            <div class="text bullet">Unlimited Anytime Calling & Faxing, US & Canada</div>
-            <div class="text bullet">Sleek, Reliable, HD IP Phone Systems</div>
-            <div class="guide">Free VoIP Guide With Request</div>
+            <div class="text bullet"><strong>Lowest Rates & Exclusive Discounts:</strong> Best Providers in the Industry compete for your business</div>
+            <div class="text bullet"><strong>Unlimited Calling:</strong> All plans include unlimited calling and faxing in USA/Canada</div>
+            <div class="text bullet"><strong>Personalized Plans:</strong> Get custom tailored packages, and pay only for services you need</div>
+            
+            <div class="guide"><span>Free Guide</span> Big Advantages of VoIP for Any Business</div>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
           //echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';
@@ -121,15 +121,15 @@
   
   <div id="right-up">
     <h2>Save Up To 70% On Your Business Phone System</h2>
-    <div class="explain p1"><div class="number">1</div><span class="text">Tell us about your VoIP needs below</span></div>
-    <div class="explain p2"><div class="number">2</div><span class="text">Your request will be reviewed by our expert team of VoIP researchers</span></div>
-    <div class="explain p3"><div class="number">3</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
+    <div class="explain p1"><div class="number">1.</div><span class="text">Tell us about your calling needs</span></div>
+    <div class="explain p2"><div class="number">2.</div><span class="text">Your needs will be assessed by our researchers</span></div>
+    <div class="explain p3"><div class="number">3.</div><span class="text">We will connect you with 3 suitable providers</span></div>
     <div class="bottom-clear"></div> 
   </div>
   
   
   <div id="brands">
-    <h2><?php echo t('Supported by major companies across the country'); ?></h2>
+    <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
     <?php
         if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
           echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
