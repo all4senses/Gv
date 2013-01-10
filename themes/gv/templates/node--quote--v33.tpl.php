@@ -53,7 +53,14 @@
             <div class="text bullet"><strong>Unlimited Calling:</strong> All plans include unlimited calling and faxing in USA/Canada</div>
             <div class="text bullet"><strong>Personalized Plans:</strong> Get custom tailored packages, and pay only for services you need</div>
             
-            <div class="guide"><span>Free Guide</span> Big Advantages of VoIP for Any Business</div>
+            <?php
+            if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
+              echo '<a href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank"><div class="guide"><span>Free Guide</span> Big Advantages of VoIP for Any Business</div></a>';
+            }
+            else {
+              echo '<div class="guide"><span>Free Guide</span> Big Advantages of VoIP for Any Business</div>';
+            }
+            ?>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
           //echo '<a href="/">', theme('image_style', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</a>';
