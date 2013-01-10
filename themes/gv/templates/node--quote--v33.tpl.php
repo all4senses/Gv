@@ -41,11 +41,11 @@
 
     <div class="left">
       <?php 
-        if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
-          echo '<a class="guide" href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+//        if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
+//          echo '<a class="guide" href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
           //echo '<a href="/"><div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div></a>';
-        }
-        else {
+//        }
+//        else {
           ?>
             <h2>Compare Leading VoIP Providers</h2>
             <!--<div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>-->
@@ -61,18 +61,21 @@
                //'<div class="text-2">Over 20,000+ Monthly Visitors</div>
                // <div class="text-3">A Leading Online VoIP Authority</div>'
                // ;
-        }
+//        }
       ?>
     </div>
 
     <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?>
       <div class="right-final">
         
+        <div id="right-bottom">
+           <?php  echo '<a class="guide" href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>'; ?>
+        </div>
         <?php 
-          echo '<div class="right-final">',
-                  '<a class="image" href="/"><div class="field field-name-field-q-image-2 field-type-image field-label-hidden"><div class="field-items"><div class="field-item even"><img width="476" height="262" alt="" src="http://getvoip.com/sites/default/files/get-access.png" typeof="foaf:Image"></div></div></div></a>',
-                  '<h2>' , t('GET ACCESS TO THE LARGEST<br/> VOIP SERVICE GUIDE<br/> IN THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>',
-               '</div>';        
+//          echo '<div class="right-final">',
+//                  '<a class="image" href="/"><div class="field field-name-field-q-image-2 field-type-image field-label-hidden"><div class="field-items"><div class="field-item even"><img width="476" height="262" alt="" src="http://getvoip.com/sites/default/files/get-access.png" typeof="foaf:Image"></div></div></div></a>',
+//                  '<h2>' , t('GET ACCESS TO THE LARGEST<br/> VOIP SERVICE GUIDE<br/> IN THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>',
+//               '</div>';        
         ?>
       </div>
     <?php else: ?>
