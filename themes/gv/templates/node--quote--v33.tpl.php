@@ -47,7 +47,7 @@
 //        }
 //        else {
           ?>
-            <h2>Compare Unpublished Rates From Top Providers</h2>
+            <h2>Compare Unpublished Rates <br/>From Top Providers</h2>
             <!--<div class="text">Take advantage of our VoIP research and experience. Don't trust your phone system with just any company. Ensure that your business telecommunications system meet your objectives. Have a leading VoIP provider fight for your business, receive top-notch VoIP services, while saving money!</div>-->
             <div class="text bullet"><strong>Lowest Rates & Exclusive Discounts:</strong> Best Providers in the Industry compete for your business</div>
             <div class="text bullet"><strong>Unlimited Calling:</strong> All plans include unlimited calling and faxing in USA/Canada</div>
