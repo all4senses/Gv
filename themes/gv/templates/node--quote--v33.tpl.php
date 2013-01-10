@@ -122,9 +122,9 @@
   <div id="upper-block">
     <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
     <div class="quotes">
-      <div><div class="text">"Great Source."</div><div class="source">Inc.</div></div>
-      <div><div class="text">"Rigorous Evaluation Process."</div><div class="source">Smart Money</div></div>
-      <div><div class="text">"Over 500 VoIP Providers analyzed."</div><divclass="source">Enterpreneur</div></div>
+      <div class="group"><div class="text">"Great Source."</div><div class="source">Inc.</div></div>
+      <div class="group"><div class="text">"Rigorous Evaluation Process."</div><div class="source">Smart Money</div></div>
+      <div class="group"><div class="text">"Over 500 VoIP Providers analyzed."</div><divclass="source">Enterpreneur</div></div>
     </div>
 
     <div class="bottom-clear"></div> 
