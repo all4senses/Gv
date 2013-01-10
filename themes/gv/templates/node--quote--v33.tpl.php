@@ -118,9 +118,9 @@
   
   
   
-  
+  <!--
   <div id="upper-block">
-    <h1><?php echo 'We identify and rank the best business VoIP providers and phone systems.'; ?></h1>
+    <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
     <div class="quotes">
       <div><span class="text">"Great Source."</span><span class="source">Inc.</span></div>
       <div><span class="text">"Rigorous Evaluation Process."</span><span class="source">Smart Money</span></div>
@@ -129,7 +129,15 @@
 
     <div class="bottom-clear"></div> 
   </div>
+  -->
   
+  <div id="upper-block">
+    
+    <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
+    <div class="quotes"><span>"Great Source."</span><span>"Rigorous Evaluation Process."</span><span>"Over 500 VoIP Providers analyzed."</span></div>
+    <div class="source"><span>Inc.</span><span>Smart Money</span><span>Enterpreneur</span></div>
+
+  </div>
   
   <div id="right-up">
     <h2>Save Up To 70% On Your Business Phone System</h2>
