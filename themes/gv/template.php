@@ -680,7 +680,7 @@ function gv_preprocess_node(&$variables) {
     }
     elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') ) {
       global $user;
-      if ($user->uid == 1) {
+      if (in_array('administrator', $user->roles)) {
         global $body_classes_add;
         $body_classes_add['quote_page'] = 'quote-page v33';
         $variables['theme_hook_suggestions'][] = 'node__quote__v33';
