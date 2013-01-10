@@ -118,19 +118,19 @@
   
   
   
-  <!--
+
   <div id="upper-block">
     <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
     <div class="quotes">
-      <div><span class="text">"Great Source."</span><span class="source">Inc.</span></div>
-      <div><span class="text">"Rigorous Evaluation Process."</span><span class="source">Smart Money</span></div>
-      <div><span class="text">"Over 500 VoIP Providers analyzed."</span><span class="source">Enterpreneur</span></div>
+      <div><div class="text">"Great Source."</div><div class="source">Inc.</div></div>
+      <div><div class="text">"Rigorous Evaluation Process."</div><div class="source">Smart Money</div></div>
+      <div><div class="text">"Over 500 VoIP Providers analyzed."</div><divclass="source">Enterpreneur</div></div>
     </div>
 
     <div class="bottom-clear"></div> 
   </div>
-  -->
-  
+
+ <!--  
   <div id="upper-block">
     
     <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
@@ -138,6 +138,7 @@
     <div class="source"><span>Inc.</span><span>Smart Money</span><span>Enterpreneur</span></div>
 
   </div>
+  -->
   
   <div id="right-up">
     <h2>Save Up To 70% On Your Business Phone System</h2>
