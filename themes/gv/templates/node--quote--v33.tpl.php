@@ -65,6 +65,8 @@
       ?>
     </div>
 
+    </div>
+  
     <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?>
       <!--<div class="right-final"> -->
         
@@ -101,7 +103,7 @@
     ?>
     <div class="bottom-clear"></div> 
 
-  </div>
+  
 
   
   
