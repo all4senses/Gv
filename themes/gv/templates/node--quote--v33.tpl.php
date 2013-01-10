@@ -84,7 +84,7 @@
         <!--<div id="right-up-image"></div> -->
         
         <div id="right-bottom">
-          <?php echo gv_blocks_get_requestQuoteForPage_v32(); ?>
+          <?php echo gv_blocks_get_requestQuoteForPage_v33(); ?>
           <div class="bottom-clear"></div> 
         </div>
       </div>
