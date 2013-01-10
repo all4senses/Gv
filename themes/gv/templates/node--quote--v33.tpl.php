@@ -66,9 +66,9 @@
     </div>
 
     <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?>
-      <div class="right-final">
+      <!--<div class="right-final"> -->
         
-        <div id="right-bottom">
+        <div class="right">
            <?php  echo '<a class="guide" href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>'; ?>
         </div>
         <?php 
@@ -77,7 +77,7 @@
 //                  '<h2>' , t('GET ACCESS TO THE LARGEST<br/> VOIP SERVICE GUIDE<br/> IN THE NATION!') , '</h2><div class="link">' , l(t('Learn more'), '<front>') , '</div>',
 //               '</div>';        
         ?>
-      </div>
+      <!--</div>-->
     <?php else: ?>
 
       <div class="right">
