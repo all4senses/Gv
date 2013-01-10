@@ -124,7 +124,7 @@
     <div class="quotes">
       <div class="group"><div class="text">"Great Source."</div><div class="source">Inc.</div></div>
       <div class="group"><div class="text">"Rigorous Evaluation Process."</div><div class="source">Smart Money</div></div>
-      <div class="group"><div class="text">"Over 500 VoIP Providers analyzed."</div><divclass="source">Enterpreneur</div></div>
+      <div class="group"><div class="text">"Over 500 VoIP Providers analyzed."</div><div class="source">Enterpreneur</div></div>
     </div>
 
     <div class="bottom-clear"></div> 
