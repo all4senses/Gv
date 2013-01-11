@@ -1912,15 +1912,19 @@ function gv_misc_makeRequestCapture_ajax() {
       $tmp = $query->execute()->fetchField();
        
       if ($tmp) {
-        do {
-          // It exists, so we'll just increment timestamp, hopely a new one doesn't exist.
-          $_SESSION['ucaptured_timestamp'] += 1;
-          $query = db_select('gv_quote_requests', 'qr')
-            ->fields('qr', array('data'));
-          $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
-          $tmp = $query->execute()->fetchField();
-        } while ($tmp);
+        $_SESSION['ucaptured_timestamp'] += 1;
       }
+      
+//      if ($tmp) {
+//        do {
+//          // It exists, so we'll just increment timestamp, hopely a new one doesn't exist.
+//          $_SESSION['ucaptured_timestamp'] += 1;
+//          $query = db_select('gv_quote_requests', 'qr')
+//            ->fields('qr', array('data'));
+//          $query->condition('qr.timestamp', $_SESSION['ucaptured_timestamp']);
+//          $tmp = $query->execute()->fetchField();
+//        } while ($tmp);
+//      }
       
       $ucaptured = gv_misc_setUcapturedVariable($post);
       $result = db_insert('gv_quote_requests')
