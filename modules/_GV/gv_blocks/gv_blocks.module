@@ -2467,20 +2467,30 @@ function gv_blocks_get_requestQuoteForPage_v3() {
  */
 function gv_blocks_get_requestQuoteForPage_v32() {
 
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  
+  
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
   //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
-
-  drupal_add_library('system', 'ui.core');
-  drupal_add_library('system', 'ui.widget');
-  drupal_add_library('system', 'ui.position');  
+  
+  
+  //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  
+  
+  drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
+  
   drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v3.js');
+  
+  
   
   drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
   drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
@@ -2613,22 +2623,27 @@ function gv_blocks_get_requestQuoteForPage_v32() {
  */
 function gv_blocks_get_requestQuoteForPage_v33() {
 
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
   //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
   
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
-
-  drupal_add_library('system', 'ui.core');
-  drupal_add_library('system', 'ui.widget');
-  drupal_add_library('system', 'ui.position');  
+  //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  
+  drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
   drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v3.js');
   
   drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
+  
   drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
   drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
   
