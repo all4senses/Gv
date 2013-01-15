@@ -678,6 +678,63 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   // All Quote Requests Data.
   if (@$_GET['op'] == 'email-captured') {
     
+    
+    // Check for new captured but not sent data with emails in db, more than 1 hour old
+
+    $query = db_select('gv_quote_requests', 'qr')
+      ->fields('qr', array('data', 'ip', 'timestamp'));
+    $query->condition('qr.status', 0);
+    $query->condition('qr.checked', 0);
+    
+    
+    //$query->condition('qr.email_presented', 1);
+    
+    $query->condition('qr.email_presented', '0', '!=');
+    $query->condition('qr.email_presented', '', '!=');
+    $query->isNotNull('qr.email_presented');
+    
+    $current_time = time();
+    $query->condition('qr.timestamp', $current_time - 3600, '<'); // 1 hour old
+    $not_sents = $query->execute();
+
+    $count_emailed = 0;
+    foreach ($not_sents as $not_sent) {
+      
+      $count_emailed++;
+      
+      $ucaptured = unserialize($not_sent->data);
+
+      // Send email.
+      $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured, TRUE);
+      $ucaptured_data += array(
+        'User IP' => $not_sent->ip,
+        'Start Submission Time' => date('Y-m-d, H:i:s', $not_sent->timestamp),
+      );
+
+      $params['ucaptured_data'] = $ucaptured_data;
+
+      global $language;
+      // Normal send
+      if ($submission['First Name'] != 'afs') {
+        drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'leads@getvoip.com', $language->language, $params);
+      }
+      // Test letter to the root
+      drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
+      
+      // Update a status in DB.
+      $result = db_update('gv_quote_requests')
+        ->fields(array(
+          'status' => 1, // Unsubmitted, sent.
+          'checked' => 1, // Reviewed, because is sent.
+        ))
+        ->condition('timestamp', $not_sent->timestamp)
+        ->execute();
+
+    } // foreach ($not_sents as $not_sent) {
+
+    
+    
+    
 //    $result = db_delete('gv_quote_requests')
 //      ->condition('timestamp', $_GET['timestamp'])
 //      ->execute();
@@ -689,10 +746,10 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" has not been found in the database.', 'warning');
 //    }
     
-    drupal_set_message('Bingo! :)', 'warning');
+    drupal_set_message($count_emailed . ' captured requests have been found and emailed!', 'warning');
     
     unset($_GET['q'], $_GET['op']);
-    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+    drupal_goto(ltrim($_SERVER['REDIRECT_URL'], '/'), array('query' => $_GET));
   }
   elseif (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
     
