@@ -715,9 +715,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
       global $language;
       // Normal send
-      if ($submission['First Name'] != 'afs') {
-        drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'leads@getvoip.com', $language->language, $params);
-      }
+      drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'leads@getvoip.com', $language->language, $params);
       // Test letter to the root
       drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
       
