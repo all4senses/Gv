@@ -456,6 +456,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/internet-fax-service-providers' => NULL,
     '/business-voip-features' => 4,
     '/canada-voip' => 2,
+    '/hosted-pbx-providers' => NULL,
   );
   
   $map_path_to_preface_type = array(
@@ -465,6 +466,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/internet-fax-service-providers' => 'page-compare-ifa-voip-providers',
     '/business-voip-features' => 'business-voip-features',
     '/canada-voip' => 'canada-voip',
+    '/hosted-pbx-providers' => 'page-compare-pbx-voip-providers',
   );
   
   $map_path_to_type = array(
@@ -474,6 +476,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/sip-trunking-providers' => 'SIP Trunking Providers',
     '/canada-voip' => 'Canada VoIP',
     '/internet-fax-service-providers' => 'Internet Fax',
+    '/hosted-pbx-providers' => 'Hosted PBX Providers',
   );
  
   $map_path_to_title = array(
@@ -483,6 +486,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/sip-trunking-providers' => 'SIP Trunking',
     '/canada-voip' => 'Canada VoIP',
     '/internet-fax-service-providers' => 'Internet Fax',
+    '/hosted-pbx-providers' => 'Hosted PBX Providers',
   );
  
   
@@ -493,6 +497,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     'SIP Trunking Providers' => 4,
     'Canada VoIP' => 5,
     'Internet Fax' => 6,
+    'Hosted PBX Providers' => 7,
   );
   
   if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
