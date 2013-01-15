@@ -62,10 +62,10 @@
             
             <?php
             if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
-              echo '<a href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank"><div class="guide"><span>Free Guide</span> Big Advantages of VoIP for Any Business</div></a>';
+              echo '<a href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank"><div class="guide"><span>Free eBook with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div></a>';
             }
             else {
-              echo '<div class="guide"><span>Free Guide</span> Big Advantages of VoIP for Any Business</div>';
+              echo '<div class="guide"><span>Free eBook with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div>';
             }
             ?>
           <?php
