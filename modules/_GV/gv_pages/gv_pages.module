@@ -676,8 +676,25 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   
   // All Quote Requests Data.
-  
-  if (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
+  if (@$_GET['op'] == 'email-captured') {
+    
+//    $result = db_delete('gv_quote_requests')
+//      ->condition('timestamp', $_GET['timestamp'])
+//      ->execute();
+//    
+//    if ($result) {
+//      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" has been deleted.');
+//    }
+//    else {
+//      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" has not been found in the database.', 'warning');
+//    }
+    
+    drupal_set_message('Bingo! :)', 'warning');
+    
+    unset($_GET['q'], $_GET['op']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+  }
+  elseif (@$_GET['op'] == 'delete' && @$_GET['timestamp']) {
     
     $result = db_delete('gv_quote_requests')
       ->condition('timestamp', $_GET['timestamp'])
@@ -744,7 +761,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   $form['emails'] = array(
     '#type' => 'markup',
     '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div>'
-      . '<br/><div><strong>All Quote Requests data.</strong></div><br/>',
+      . '<br/><div><strong>All Quote Requests data.</strong></div><br/><div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
   );
   
   $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
