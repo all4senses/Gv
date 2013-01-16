@@ -360,7 +360,7 @@
 
   
   
-  <?php if ($page && $node->type != 'news_post'): ?>
+  <?php /*if ($page && $node->type != 'news_post'): ?>
       
   </div> <!-- main-content -->
   
@@ -374,7 +374,7 @@
         ?>
       </div>
 
-  <?php endif; ?>
+  <?php endif; */?>
   
     
   <?php //print render($content['comments']); ?>
