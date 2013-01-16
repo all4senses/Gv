@@ -2813,6 +2813,11 @@ function gv_blocks_voipAds($type = 'bu') {
   //$query->range(0, 10);
 
   $results = $query->execute()->fetchAll();
-  dpm($results);
   
+  $out = NULL;
+  foreach ($results as $result) {
+    $out .= '<div class="bnr"><a href="' /*. $result->p_data['info']['i_web'] */. '" target="_blank">' . theme('image_style', array( 'path' =>  $result->uri, 'style_name' => 'logo_provider_page', 'alt' => $result->field_banner_pic_alt, 'title' => $result->field_banner_pic_title)) . '</a></div>'; 
+  }
+  dpm($results);
+  return $out;
 }
