@@ -2819,7 +2819,7 @@ function gv_blocks_voipAds($type = 'bu') {
   foreach ($results as $result) {
     $p_data = unserialize($result->field_p_data_value);
     dpm($p_data);
-    $out .= '<div class="bnr"><a href="' /*. $result->p_data['info']['i_web'] */. '" target="_blank">' . theme('image_style', array( 'path' =>  $result->uri, 'style_name' => 'logo_provider_page', 'alt' => $result->field_banner_pic_alt, 'title' => $result->field_banner_pic_title)) . '</a></div>'; 
+    $out .= '<div class="bnr"><a href="' . $result->p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $result->uri, 'style_name' => 'logo_provider_page', 'alt' => $result->field_banner_pic_alt, 'title' => $result->field_banner_pic_title)) . '</a></div>'; 
   }
   
   return $out;
