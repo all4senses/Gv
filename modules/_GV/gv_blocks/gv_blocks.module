@@ -198,6 +198,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
       
+  $blocks['bu_voip_ads'] = array(
+    'info' => 'Business VoIP Ads',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -401,7 +406,16 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = drupal_get_form('gv_misc_newsletterSubscribe_form');
       break;
     
+    case 'bu_voip_ads':
+      $block['subject'] = 'Business VoIP Ads';
+      $block['content'] = gv_blocks_voipAds('bu');
+      break;
     
+    
+    $blocks['bu_voip_ads'] = array(
+      'info' => 'Business VoIP Ads',
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
     
   }
 
@@ -2767,4 +2781,36 @@ function gv_blocks_get_requestQuoteForPage_v33() {
   ';
   
   return $out;
+}
+
+
+/**
+ * Block with providers banner ads.
+ */
+function gv_blocks_voipAds($type = 'bu') {
+  
+  $query = db_select('field_data_field_banner_toggle', 'bt')
+        ->fields('bt', array('field_banner_toggle_value'));
+  $query->leftJoin('field_data_field_banner_pic', 'bp', 'bp.entity_id = bt.entity_id');
+  $query->fields('bp', array('field_banner_pic_alt', 'field_banner_pic_title'));
+  
+  $query->leftJoin('file_managed', 'f', 'f.fid = bp.field_banner_pic_fid');
+  $query->fields('f', array('uri'));
+  
+  $query->leftJoin('field_data_field_p_data', 'pd', 'pd.entity_id = bt.entity_id');
+  $query->fields('pd', array('field_p_data_value'));
+  
+  $query->leftJoin('field_data_field_p_erating', 'er', 'er.entity_id = bt.entity_id');
+  $query->fields('er', array('field_p_erating_value'));
+  
+  $query->condition('bt.field_banner_toggle_value', 1);
+  $query->condition('er.field_p_erating_value', 0, '>');
+  
+  $query->orderBy('er.field_p_erating_value', 'DESC');
+  
+  //$query->range(0, 10);
+
+  $results = $query->execute()->fetchAll();
+  dpm($results);
+  
 }
