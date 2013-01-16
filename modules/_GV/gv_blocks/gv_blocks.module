@@ -2805,7 +2805,9 @@ function gv_blocks_voipAds($type = 'bu') {
   
   $query->condition('bt.field_banner_toggle_value', 1);
   $query->condition('er.field_p_erating_value', 0, '>');
+  $query->isNotNull('bp.field_banner_pic_fid');
   
+          
   $query->orderBy('er.field_p_erating_value', 'DESC');
   
   //$query->range(0, 10);
