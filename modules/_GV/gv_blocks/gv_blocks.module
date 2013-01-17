@@ -519,6 +519,10 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     'Small Business VoIP' => 8,
   );
   
+  dpm($_SERVER);
+  
+  dpm($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]);
+  
   if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
     return NULL;
   }
@@ -538,9 +542,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   
   //dpm($results);
 
-  dpm($_SERVER);
   
-  dpm($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]);
   
   if (!empty($results)) {
 
