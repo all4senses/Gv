@@ -471,6 +471,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/business-voip-features' => 4,
     '/canada-voip' => 2,
     '/hosted-pbx-providers' => 5,
+    '/small-business-voip' => 5,
   );
   
   $map_path_to_preface_type = array(
@@ -481,6 +482,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/business-voip-features' => 'business-voip-features',
     '/canada-voip' => 'canada-voip',
     '/hosted-pbx-providers' => 'page-compare-pbx-voip-providers',
+    '/small-business-voip' => 'page-compare-smbv-voip-providers',
   );
   
   $map_path_to_type = array(
@@ -491,6 +493,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/canada-voip' => 'Canada VoIP',
     '/internet-fax-service-providers' => 'Internet Fax',
     '/hosted-pbx-providers' => 'Hosted PBX Providers',
+    '/small-business-voip' => 'Small Business Providers',
   );
  
   $map_path_to_title = array(
@@ -501,6 +504,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/canada-voip' => 'Canada VoIP',
     '/internet-fax-service-providers' => 'Internet Fax',
     '/hosted-pbx-providers' => 'Hosted PBX',
+    '/small-business-voip' => 'Small Business VoIP',
   );
  
   
@@ -512,6 +516,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     'Canada VoIP' => 5,
     'Internet Fax' => 6,
     'Hosted PBX Providers' => 7,
+    'Small Business VoIP' => 8,
   );
   
   if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
