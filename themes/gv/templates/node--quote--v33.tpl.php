@@ -60,7 +60,7 @@
             <div class="text bullet"><strong>Lowest Rates & Exclusive Discounts</strong></div>
             <!--<div class="text bullet"><strong>Unlimited Calling & Faxing USA/Canada</strong></div> -->
             
-            <div class="ps"><span>6000+ Submissions -</span> Average saving of $180 per month</div>
+            <div class="ps"><div class="text"><span>6000+ Submissions -</span> Average saving of $180 per month</div><img src="/sites/all/themes/gv_orange/css/images/pdf-icon2.png" /></div>
 
             
             <?php
