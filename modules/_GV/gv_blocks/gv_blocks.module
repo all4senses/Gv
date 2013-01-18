@@ -519,9 +519,6 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     'Small Business VoIP' => 8,
   );
   
-  //dpm($_SERVER);
-  //dpm($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]);
-  
   if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
     return NULL;
   }
@@ -2693,7 +2690,7 @@ function gv_blocks_get_requestQuoteForPage_v33() {
                     
                     <div class="step" id="questions_section">
 
-                            <div class="question">Amount of phones needed:</div>
+                            <div class="question">Amount of lines needed:</div>
                               <select name="phones_amt" id="phones_amt" class="input required">
                                 <option value="1 - 4">1 - 4 Lines</option>
                                 <option selected="selected" value="5 - 10">5 - 10 Lines</option>
@@ -2772,12 +2769,16 @@ function gv_blocks_get_requestQuoteForPage_v33() {
                 </div>
                 
                 
-            
+                <div class="guide ps"><span>Free Guide with submission</span> Business VoIP Start-up Guide</div>
+                
                 <div id="Navigation"> 							
                         <input class="navigation_button" id="next" value="Submit & Get Quotes" type="submit" />
                 </div>
                 
-                <div class="ps"><span>5000+ Submissions -</span> Delivered Businesses an Average Savings of $250 per month</div>
+                <!-- <div class="ps"><span>5000+ Submissions -</span> Delivered Businesses an Average Savings of $180 per month</div> -->
+                
+                
+                
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="page" />

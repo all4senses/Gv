@@ -47,7 +47,8 @@
 //        }
 //        else {
           ?> 
-            <h2>Your Business Deserves a <br/>Real Phone System!</h2>
+            <!-- <h2>Your Business Deserves a <br/>Real Phone System!</h2> -->
+            <h2>Save Up To 70% On <br/>Your Business Phone System!</h2>
             <!--
             <div class="text bullet"><strong>Lowest Rates & Exclusive Discounts:</strong> Best Providers in the Industry compete for your business.</div>
             <div class="text bullet"><strong>Unlimited Calling:</strong> All plans include unlimited calling and faxing in USA/Canada.</div>
@@ -57,16 +58,18 @@
             <div class="text bullet"><strong>Personalized Quotes From Top Providers</strong></div>
             <div class="text bullet"><strong>Flexible & Intuitive VoIP Phone Systems</strong></div>
             <div class="text bullet"><strong>Lowest Rates & Exclusive Discounts</strong></div>
-            <div class="text bullet"><strong>Unlimited Calling & Faxing USA/Canada</strong></div>
+            <!--<div class="text bullet"><strong>Unlimited Calling & Faxing USA/Canada</strong></div> -->
             
+            <div class="ps"><span>6000+ Submissions -</span> Average saving of $180 per month</div>
+
             
             <?php
-            if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
-              echo '<a href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank"><div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div></a>';
-            }
-            else {
-              echo '<div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div>';
-            }
+//            if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
+//              echo '<a href="/pdfs/SMB-VOIP-AdvantagesWhitePaper.pdf" target="_blank"><div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div></a>';
+//            }
+//            else {
+//              echo '<div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div>';
+//            }
             ?>
           <?php
           //echo '<a href="/">', render($content['field_q_image']), '</a>';
@@ -128,12 +131,20 @@
 
   <div id="upper-block">
     <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
+    
+    <div class="quotes one">
+      <div class="text">"GetVoIP.com stands out in the online VoIP Implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into quality prospects and high conversion rates."</div>
+      <div class="source">- Chris Rabbu, VP of Marketing at Vocalocity, Inc.</div>
+    </div>
+    
+    <!--
     <div class="quotes">
       <div class="group"><div class="text">"Great Source."</div><div class="source">Inc.</div></div>
       <div class="group"><div class="text">"Rigorous Evaluation Process."</div><div class="source">Smart Money</div></div>
       <div class="group"><div class="text">"Over 500 VoIP Providers analyzed."</div><div class="source">Enterpreneur</div></div>
     </div>
-
+    -->
+    
     <div class="bottom-clear"></div> 
   </div>
 
@@ -147,6 +158,7 @@
   </div>
   -->
   
+  <!--
   <div id="right-up">
     <h2>Save Up To 70% On Your Business Phone System</h2>
     <div class="explain p1"><div class="number">1.</div><span class="text">Tell us about your calling needs</span></div>
@@ -154,7 +166,7 @@
     <div class="explain p3"><div class="number">3.</div><span class="text">We will connect you with three providers that best suit your needs</span></div>
     <div class="bottom-clear"></div> 
   </div>
-  
+  -->
   
   <div id="brands">
     <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
