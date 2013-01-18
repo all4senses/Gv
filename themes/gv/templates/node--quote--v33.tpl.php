@@ -48,7 +48,7 @@
 //        else {
           ?> 
             <!-- <h2>Your Business Deserves a <br/>Real Phone System!</h2> -->
-            <h2>Save Up To 70% On <br/>Your Business Phone System!</h2>
+            <h2>Save Up To 70% On Your<br/> Business Phone System!</h2>
             <!--
             <div class="text bullet"><strong>Lowest Rates & Exclusive Discounts:</strong> Best Providers in the Industry compete for your business.</div>
             <div class="text bullet"><strong>Unlimited Calling:</strong> All plans include unlimited calling and faxing in USA/Canada.</div>
