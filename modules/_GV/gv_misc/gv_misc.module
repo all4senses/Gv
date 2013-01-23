@@ -4484,7 +4484,30 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       return $out; // $all_data_quick[$data['data']->nid][$target];
       
+      
+      
     
+    case 'bottom_line':
+      
+      $out = '';
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      //dpm($all_data_quick);
+      
+      $plan_title = isset($all_data_quick[$data['data']->nid][$data['service_type']]['plan']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['plan'] : '';
+      
+      if ($plan_title) {
+        $out .= '<div class="plan">' . $plan_title . '</div>';
+      }
+      
+      
+      if (isset($all_data_quick[$data['data']->nid]['the_bottom_line'])) {
+        $out .= '<div class="feature">' . $all_data_quick[$data['data']->nid]['the_bottom_line'] . '</div>';
+      }
+                
+      
+      return $out; // $all_data_quick[$data['data']->nid][$target];
+    
+      
     
     case 'grade':
       //$all_data_quick = gv_misc_getProvidersDataQuick();
