@@ -2105,6 +2105,107 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#title' => t('Quote author'),
               '#default_value' => isset($p_data['quote']['q_author']) ? $p_data['quote']['q_author'] : '',
             );
+            
+            
+            
+            
+            
+            
+
+      // Admin Rate and vote group.
+      $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
+      $weight = 8;
+
+      $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE);
+      //$vote_keys = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE);
+
+      $votes = array();
+      $form['ereview'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Editor\'s Rating for this VoIP Provider'),
+        '#weight' => 13,
+      );
+
+//          $form['ereview']['votes'] = array(
+//              '#type' => 'container',
+//              '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
+//          );
+//          foreach ($vote_keys as $vote_key => $vote_title) {
+//            $form['ereview']['votes']['rating_' . $vote_key] = array(
+//              '#type' => 'select',
+//              '#options' => $rating_options,
+//              '#default_value' => $rating_options[''],
+//              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+//              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+//            );
+//          }
+//
+//          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+//          $form['ereview']['rating_recommend'] = array(
+//              '#type' => 'radios',
+//              '#options' => $rating_recommend_options,
+//              '#default_value' => FALSE,
+//              '#prefix' => '<div class="label left">' . RECOMMEND . '</div>',
+//          );
+//
+//          // Fill saved editor's ratings, if editing...
+//          if(arg(1) != 'add' && isset($p_data['ereview']['editor_ratings'])) {
+//
+//              foreach ($p_data['ereview']['editor_ratings'] as $tag => $value) {
+//                if ($tag == 'recommend') {
+//                  $recommend = $value;
+//                  continue;
+//                }
+//                $form['ereview']['votes']['rating_' . $tag]['#default_value'] = $value;
+//              }
+//
+//
+//              if (isset($recommend)) {
+//                $form['ereview']['rating_recommend']['#default_value'] = $recommend;
+//              }
+//          }
+
+
+          $pros_and_cons_descrs = array(/*'The good', 'The bad', */'The bottom line');
+          $form['ereview']['data_pros_and_cons'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Pros and Cons'),
+            '#collapsible' => TRUE,
+            '#collapsed' => FALSE,
+            '#tree' => TRUE,
+            '#weight' => 6,
+          );
+          foreach($pros_and_cons_descrs as $pros_and_cons_title) {
+            $form['ereview']['data_pros_and_cons'][$pros_and_cons_title] = array(
+              '#type' => 'textarea',
+              '#title' => $pros_and_cons_title,
+              '#default_value' => isset($p_data['ereview']['pros_and_cons'][$pros_and_cons_title]) ? $p_data['ereview']['pros_and_cons'][$pros_and_cons_title] : '',
+            );
+          }
+
+
+//          // Add stars widgets to a Rating block
+//          $module_path = drupal_get_path('module', 'gv_pages');
+//          $module_misc_path = drupal_get_path('module', 'gv_misc');
+//
+//          $form['#attached']['js'] = array(
+//
+//            // Add stars widgets to a Rating block
+//            $module_path . '/js/vn_review_stars.js',
+//            'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+//          );
+//
+//          $form['#attached']['library'][] = array('system', 'ui.widget');
+//
+//          $form['#attached']['css'] = array(
+//            'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+//          );
+
+
+          $form['#attributes']['class'][] = 'gv-edit-review-page';
+
+
+            
       
             
       
@@ -3527,6 +3628,47 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
    
   $p_data['info'] = $form_state['values']['data_info'];
   $p_data['quote'] = $form_state['values']['data_quote'];
+  
+  
+  
+  
+  
+  
+//  //$rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
+//  $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
+//  
+//  // Check if all editor's votes (ratings) fields are set.
+//  foreach ($rating_options as $rating_option => $rating_option_title) {
+//    if ($form_state['values']['rating_' . $rating_option] === FALSE) {
+//      form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
+//    }
+//  }
+//  
+//  // Prepare editor votes (ratings) to save in the extra field.
+//  $votes = array();
+//  $overall_count = 0;
+//  $overall_summ = 0;
+//  foreach ($rating_options as $vote_key => $vote_title) {
+//    if(isset($form_state['values']['rating_' . $vote_key])) {
+//      $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
+//      $overall_count++;
+//      $overall_summ += $form_state['values']['rating_' . $vote_key];
+//    }
+//  }
+//  // Calculate the overall average editor's rating.
+//  $editor_rating_overall = $overall_summ / $overall_count;
+  
+  $p_data['ereview'] = array(
+    //'editor_rating_overall' => $editor_rating_overall, 
+    //'editor_ratings' => $votes, 
+    'pros_and_cons' => $form_state['values']['data_pros_and_cons'],
+  );
+  
+  
+  
+  
+  
+  
   
   foreach ($form_state['values']['s'] as $service_type_short => $value) {
    
