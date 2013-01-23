@@ -35,7 +35,7 @@
                     <?php endif; */?>
                         
                       <?php 
-                        echo ($full_title || $page ? (isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'] ) . ' ' . t('Review') . ' - ' : '') . $title; 
+                        echo ($full_title || $page ? (isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'] ) . ' - ' : '') . $title; 
                         //if ($page) {
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
