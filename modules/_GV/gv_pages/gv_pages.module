@@ -3730,12 +3730,16 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   // Save some more aggregated data to other field
   $p_data_quick['name'] = $form_state['values']['field_p_name']['und'][0]['value'];
   $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
+  
   // Logo has been defined above.
   if ($logo) {
     $p_data_quick['i_logo_uri'] = $logo->uri;
     $p_data_quick['i_logo_alt'] = $form_state['values']['field_p_logo']['und'][0]['alt'];
     $p_data_quick['i_logo_title'] = $form_state['values']['field_p_logo']['und'][0]['title'];
   }
+  
+  $p_data_quick['the_bottom_line'] = $p_data['ereview']['pros_and_cons']['The bottom line'];
+  
   
   foreach ($p_data['s'] as $service_type_short => $service) {
     
@@ -3772,6 +3776,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     } // End of if (isset($service['weights_' . $service_type_short . 're_features'])) {
     
   } // foreach ($p_data['s'] as $service_type_short => $service) {
+  
   
     
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
