@@ -4991,6 +4991,8 @@ function gv_blocks_getSocialiteButtons($url = NULL, $title = NULL) {
 		</ul>
   ';
   */
+  
+  /*
   $out = '
   <ul class="social-buttons cf">
 			<li><a href="http://twitter.com/share" class="socialite twitter-share" data-text="' . $title . '" data-url="' . $url . '" data-count="horizontal" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a></li>
@@ -4999,7 +5001,15 @@ function gv_blocks_getSocialiteButtons($url = NULL, $title = NULL) {
 			<li><a href="http://www.linkedin.com/shareArticle?' . 'mini=true&amp;url=' . urlencode($url . '&title=' . $title) . '" class="socialite linkedin-share" data-url="' . $url . '" data-counter="right" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a></li>
 		</ul>
   ';
-  
+  */
+  $out = '
+  <ul class="social-buttons cf">
+			<li><a href="http://twitter.com/share" class="socialite twitter-share" data-text="' . $title . '" data-url="' . $url . '" data-count="horizontal" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a></li>
+			<li><a href="https://plus.google.com/share?' . 'url=' . urlencode($url) . '" class="socialite googleplus-one" data-size="medium" data-href="' . $url . '" rel="nofollow" target="_blank"><span class="vhidden">Share on Google+</span></a></li>
+			<li><a href="http://www.facebook.com/sharer.php?' . 'u=' . urlencode($url) . '&amp;t=' . urlencode($title) . '" class="socialite facebook-like" data-href="' . $url . '" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">Share on Facebook</span></a></li>
+			<li><a href="http://www.linkedin.com/shareArticle?' . 'mini=true&amp;url=' . urlencode($url) .  '&amp;title=' . urlencode($title) . '" class="socialite linkedin-share" data-url="' . $url . '" data-counter="right" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a></li>
+		</ul>
+  ';
   
   return $out;
 }
