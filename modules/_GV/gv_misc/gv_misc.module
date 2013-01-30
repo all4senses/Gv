@@ -24,6 +24,13 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   ); 
   
+  $items['referer'] = array(
+    'title' => 'Set user external referer',
+    'page callback' => 'gv_misc_setReferer_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  
   $items['request'] = array(
     'title' => 'Make a request',
     'page callback' => 'gv_misc_makeRequest_ajax',
@@ -103,6 +110,27 @@ function gv_misc_menu() {
 
 
 /**
+ * Set a current user external referer.
+ */
+function gv_misc_setReferer_ajax() {
+  
+  $status = TRUE;
+  $output = '';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+  
+  if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
+    $_SESSION['gv_current_http_referer'] = $post['referer'];
+  }
+  
+  drupal_json_output(array('status' => $status, /*'data' => $output*/));
+}
+
+
+/**
  * Redirect to an external url and track the data.
  */
 function gv_misc_goToExternalUrl() {
@@ -113,7 +141,8 @@ function gv_misc_goToExternalUrl() {
   dpm($_SERVER);
   dpm($_SESSION['gv_current_http_referer']);
   dpm($_GET);
-  drupal_goto(urldecode($_GET['url']), array('external' => TRUE));
+  
+  //drupal_goto(urldecode($_GET['url']), array('external' => TRUE));
   return 'Ok';
 }
 
