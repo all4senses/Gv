@@ -110,6 +110,65 @@ function gv_misc_menu() {
 
 
 /**
+ * Redirect to an external url and track the data.
+ */
+function gv_misc_goToExternalUrl() {
+  
+  dpm($_SESSION['gv_current_http_referer']);
+  dpm($_GET);
+  
+  // Save a tracked redirection.
+  if (!empty($_GET['t']) && !empty($_GET['n']) && !empty($_GET['url'])) {
+    
+    switch ($_GET['t']) {
+      
+      case 'provider':
+        
+        $query = db_select('field_data_field_p_name', 'pn');
+          //->fields('pn', array(''))
+        $query->condition('pn.bundle', 'provider');
+        $query->condition('pn.field_p_name_value', $_GET['n']);
+        $query->leftJoin('field_data_field_p_data_quick', 'pd', 'pd.entity_id = pd.entity_id');
+        $query->fields('pd', array('field_p_data_quick_value'));
+        $p_data_quick = $query->execute()->fetchField();
+        
+        if ($p_data_quick) {
+          $p_data_quick = unserialize($p_data_quick);
+          $url = $p_data_quick['i_web'];
+        }
+    
+        if ($url) {
+          
+            global $user;
+            $data = serialize(array(
+              'referer' => @$_SESSION['gv_current_http_referer'],
+              'user' => array('name' => $user->name, 'hostname' => $user->hostname),
+            ));
+
+            db_insert('gv_track_links')
+              ->fields(array(
+                'object_id' => NULL,
+                'object_name' => $_GET['n'],
+                'url' => $url,
+                'timestamp' => time(),
+                'data' => $data,
+              ))
+              ->execute();
+            
+            drupal_goto(urldecode($_GET['url']), array('external' => TRUE));
+        }
+        
+        break;
+    }
+  }
+  
+  drupal_goto(@$_SERVER['HTTP_REFERER']);
+  
+  return '';
+}
+
+
+/**
  * Set a current user external referer.
  */
 function gv_misc_setReferer_ajax() {
@@ -129,22 +188,6 @@ function gv_misc_setReferer_ajax() {
   drupal_json_output(array('status' => $status, /*'data' => $output*/));
 }
 
-
-/**
- * Redirect to an external url and track the data.
- */
-function gv_misc_goToExternalUrl() {
-  global $user;
-  dpm($user);
-  $args = arg();
-  dpm($args);
-  dpm($_SERVER);
-  dpm($_SESSION['gv_current_http_referer']);
-  dpm($_GET);
-  
-  //drupal_goto(urldecode($_GET['url']), array('external' => TRUE));
-  return 'Ok';
-}
 
 
 /**
