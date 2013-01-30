@@ -158,7 +158,7 @@ function gv_misc_goToExternalUrl() {
               ))
               ->execute();
             
-            drupal_goto(urldecode($_GET['url']), array('external' => TRUE));
+            drupal_goto($url, array('external' => TRUE));
         }
         
         break;
