@@ -95,7 +95,18 @@
                   <div><?php echo '<span class="title">' . t('Headquarters') . ':</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">' . t('Founded In') . ':</span>' . $node->p_data['info']['i_founded']; ?></div>
                   <div><?php echo '<span class="title">' . t('Service Availability') . ':</span>' . $node->p_data['info']['i_availability']; ?></div>
-                  <div><?php if (!$node->p_data['info']['i_web_hide']) echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web'], array('attributes' => array('rel' => 'v:url', 'target' => '_blank'))); ?></div>
+                  <div>
+                    <?php 
+                      if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
+                        
+                        $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
+                        $goto_link = 'goto';
+                        $goto_link_query = array('t' => 'provider', 'url' => $node->p_data['info']['i_web']);
+                        echo '<span class="title">' . t('Website') . ':</span>' . l( $goto_link_title, $goto_link, array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url', 'target' => '_blank'))); 
+                        //echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web'], array('attributes' => array('rel' => 'v:url', 'target' => '_blank'))); 
+                      }
+                      ?>
+                  </div>
                 </div>
               </div>
              
