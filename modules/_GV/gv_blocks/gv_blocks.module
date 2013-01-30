@@ -2823,51 +2823,69 @@ function gv_blocks_get_requestQuoteForPage_v33() {
  */
 function gv_blocks_voipAds($type = 'bu') {
   
-  $query = db_select('field_data_field_banner_toggle', 'bt')
-        ->fields('bt', array('field_banner_toggle_value'));
-  $query->leftJoin('field_data_field_banner_pic', 'bp', 'bp.entity_id = bt.entity_id');
-  $query->fields('bp', array('field_banner_pic_alt', 'field_banner_pic_title'));
-  
-  $query->leftJoin('file_managed', 'f', 'f.fid = bp.field_banner_pic_fid');
-  $query->fields('f', array('uri'));
-  
-//  $query->leftJoin('field_data_field_p_data', 'pd', 'pd.entity_id = bt.entity_id');
-//  $query->fields('pd', array('field_p_data_value'));
-  $query->leftJoin('field_data_field_p_data_quick', 'pd', 'pd.entity_id = bt.entity_id');
-  $query->fields('pd', array('field_p_data_quick_value'));
-  
-  
-  $query->leftJoin('field_data_field_p_erating', 'er', 'er.entity_id = bt.entity_id');
-  $query->fields('er', array('field_p_erating_value'));
-  
-  $query->condition('bt.field_banner_toggle_value', 1);
-  $query->condition('er.field_p_erating_value', 0, '>');
-  $query->isNotNull('bp.field_banner_pic_fid');
-  
-          
-  $query->orderBy('er.field_p_erating_value', 'ASC');
-  
-  //$query->range(0, 10);
-
-  $results = $query->execute()->fetchAll();
-  //dpm($results);
-  
   $out = NULL;
-  foreach ($results as $result) {
-    //$p_data = unserialize($result->field_p_data_value);
-    $p_data = unserialize($result->field_p_data_quick_value);
-    //$out .= '<div class="bnr"><a href="' . $p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $result->uri, 'style_name' => 'banner_ads', 'alt' => $result->field_banner_pic_alt, 'title' => $result->field_banner_pic_title)) . '</a></div>';
+  
+  if ($type == 'bu') {
     
+      $cid = 'gv_voipAds_bu';
+      $cache = cache_get($cid, 'cache');
+
+      if ($cache && !empty($cache->data) && $cache->expire > time()) {
+        $out = $cache->data;
+      }
+      else {
     
-    
-    //$out .= '<div class="bnr"><a href="' . $p_data['info']['i_web'] . '" target="_blank"><img src="/' . gv_misc_getPathFromStreamUri($result->uri) . '" alt="' . $result->field_banner_pic_alt . '" title="' . $result->field_banner_pic_title . '" /></a></div>';
-    ////$out .= '<div class="bnr"><a href="' . $p_data['i_web'] . '" target="_blank"><img src="/' . gv_misc_getPathFromStreamUri($result->uri) . '" alt="' . $result->field_banner_pic_alt . '" title="' . $result->field_banner_pic_title . '" /></a></div>';
-    
-    
-//    $goto_link = 'goto';
-//    $goto_link_query = array('t' => 'provider', 'n' => urlencode($p_data['name'])/*, 'url' => urlencode($node->p_data['info']['i_web'])*/);
-                        
-    $out .= '<div class="bnr"><a href="/goto?t=provider&n=' . urlencode($p_data['name']) . '" rel="nofollow" target="_blank"><img src="/' . gv_misc_getPathFromStreamUri($result->uri) . '" alt="' . $result->field_banner_pic_alt . '" title="' . $result->field_banner_pic_title . '" /></a></div>';
+            $query = db_select('field_data_field_banner_toggle', 'bt')
+                  ->fields('bt', array('field_banner_toggle_value'));
+            $query->leftJoin('field_data_field_banner_pic', 'bp', 'bp.entity_id = bt.entity_id');
+            $query->fields('bp', array('field_banner_pic_alt', 'field_banner_pic_title'));
+
+            $query->leftJoin('file_managed', 'f', 'f.fid = bp.field_banner_pic_fid');
+            $query->fields('f', array('uri'));
+
+          //  $query->leftJoin('field_data_field_p_data', 'pd', 'pd.entity_id = bt.entity_id');
+          //  $query->fields('pd', array('field_p_data_value'));
+            $query->leftJoin('field_data_field_p_data_quick', 'pd', 'pd.entity_id = bt.entity_id');
+            $query->fields('pd', array('field_p_data_quick_value'));
+
+
+            $query->leftJoin('field_data_field_p_erating', 'er', 'er.entity_id = bt.entity_id');
+            $query->fields('er', array('field_p_erating_value'));
+
+            $query->condition('bt.field_banner_toggle_value', 1);
+            $query->condition('er.field_p_erating_value', 0, '>');
+            $query->isNotNull('bp.field_banner_pic_fid');
+
+
+            $query->orderBy('er.field_p_erating_value', 'ASC');
+
+            //$query->range(0, 10);
+
+            $results = $query->execute()->fetchAll();
+            //dpm($results);
+
+            $out = NULL;
+            foreach ($results as $result) {
+              //$p_data = unserialize($result->field_p_data_value);
+              $p_data = unserialize($result->field_p_data_quick_value);
+              //$out .= '<div class="bnr"><a href="' . $p_data['info']['i_web'] . '" target="_blank">' . theme('image_style', array( 'path' =>  $result->uri, 'style_name' => 'banner_ads', 'alt' => $result->field_banner_pic_alt, 'title' => $result->field_banner_pic_title)) . '</a></div>';
+
+
+
+              //$out .= '<div class="bnr"><a href="' . $p_data['info']['i_web'] . '" target="_blank"><img src="/' . gv_misc_getPathFromStreamUri($result->uri) . '" alt="' . $result->field_banner_pic_alt . '" title="' . $result->field_banner_pic_title . '" /></a></div>';
+              ////$out .= '<div class="bnr"><a href="' . $p_data['i_web'] . '" target="_blank"><img src="/' . gv_misc_getPathFromStreamUri($result->uri) . '" alt="' . $result->field_banner_pic_alt . '" title="' . $result->field_banner_pic_title . '" /></a></div>';
+
+
+          //    $goto_link = 'goto';
+          //    $goto_link_query = array('t' => 'provider', 'n' => urlencode($p_data['name'])/*, 'url' => urlencode($node->p_data['info']['i_web'])*/);
+
+              $out .= '<div class="bnr"><a href="/goto?t=provider&n=' . urlencode($p_data['name']) . '" rel="nofollow" target="_blank"><img src="/' . gv_misc_getPathFromStreamUri($result->uri) . '" alt="' . $result->field_banner_pic_alt . '" title="' . $result->field_banner_pic_title . '" /></a></div>';
+            }
+
+      
+       cache_set($cid, $out, 'cache', strtotime('+7 day'));
+      } 
+
   }
   
   return $out;
