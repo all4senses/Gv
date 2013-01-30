@@ -143,6 +143,7 @@ function gv_misc_goToExternalUrl() {
             global $user;
             $data = serialize(array(
               'referer' => @$_SESSION['gv_current_http_referer'],
+              'click_on_page' => @$_SERVER['HTTP_REFERER'],
               'user' => array('name' => $user->name, 'hostname' => $user->hostname),
             ));
 
@@ -164,7 +165,7 @@ function gv_misc_goToExternalUrl() {
     }
   }
   
-  //drupal_goto(@$_SERVER['HTTP_REFERER']);
+  drupal_goto(@$_SERVER['HTTP_REFERER']);
   
   return '';
 }
