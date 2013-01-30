@@ -114,11 +114,11 @@ function gv_misc_menu() {
  */
 function gv_misc_goToExternalUrl() {
   
-  dpm($_SESSION['gv_current_http_referer']);
-  dpm($_GET);
+  //dpm($_SESSION['gv_current_http_referer']);
+  //dpm($_GET);
   
   // Save a tracked redirection.
-  if (!empty($_GET['t']) && !empty($_GET['n']) && !empty($_GET['url'])) {
+  if (!empty($_GET['t']) && !empty($_GET['n'])/* && !empty($_GET['url'])*/) {
     
     switch ($_GET['t']) {
       
