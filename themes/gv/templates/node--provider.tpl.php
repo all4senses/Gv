@@ -102,19 +102,10 @@
                         $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
                         $goto_link = 'goto';
                         $goto_link_query = array('t' => 'provider', 'n' => urlencode($node->field_p_name['und'][0]['value'])/*, 'url' => urlencode($node->p_data['info']['i_web'])*/);
-                        
-//                        dpm($_SERVER);
-//                        if (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'http://getvoip.com') === FALSE) {
-//                          $_SESSION['gv_current_http_referer'] = $_SERVER['HTTP_REFERER'];
-//                        }
-//                        global $user;
-//                        if ($user->uid == 1) 
-//                        {
+
                           echo '<span class="title">' . t('Website') . ':</span>' . l($goto_link_title, $goto_link, array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url nofollow', 'target' => '_blank'))); 
-//                        }
-//                        else {
 //                          echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web'], array('attributes' => array('rel' => 'v:url', 'target' => '_blank'))); 
-//                        }
+
                       }
                       ?>
                   </div>
@@ -124,8 +115,13 @@
               <div class="image">
                 <?php
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
+                    
+                    $goto_link = 'goto';
+                    $goto_link_query = array('t' => 'provider', 'n' => urlencode($node->field_p_name['und'][0]['value'])/*, 'url' => urlencode($node->p_data['info']['i_web'])*/);
+                          
                     echo '<div><a href="' , $node->p_data['info']['i_web'] , '" target="_blank">' , theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title'])) , '</a></div>', 
-                         '<div class="site">' , l('Visit ' . $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/, $node->p_data['info']['i_web'], array('external' => TRUE, 'attributes' => array('target' => '_blank'))) , '</div>';
+                         //'<div class="site">' , l('Visit ' . $node->field_p_name['und'][0]['value'], $node->p_data['info']['i_web'], array('external' => TRUE, 'attributes' => array('target' => '_blank'))) , '</div>';
+                         '<div class="site">' , l('Visit ' . $node->field_p_name['und'][0]['value'], $goto_link, array('query' => $goto_link_query, 'attributes' => array('rel' => 'nofollow', 'target' => '_blank'))) , '</div>';
                   }
                 ?>  
                 
