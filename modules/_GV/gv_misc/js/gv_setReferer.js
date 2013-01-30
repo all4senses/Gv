@@ -9,7 +9,7 @@
                 data: {
                         op: 'set',
                         url: window.location.href,
-                        referrer: document.referrer
+                        referer: document.referrer
                        
                       }, 
                     type: 'POST', 
