@@ -101,7 +101,7 @@
                         
                         $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
                         $goto_link = 'goto';
-                        $goto_link_query = array('t' => 'provider', 'n' => $node->field_p_name['und'][0]['value'], 'url' => urlencode($node->p_data['info']['i_web']));
+                        $goto_link_query = array('t' => 'provider', 'n' => $node->field_p_name['und'][0]['value']/*, 'url' => urlencode($node->p_data['info']['i_web'])*/);
                         
 //                        dpm($_SERVER);
 //                        if (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'http://getvoip.com') === FALSE) {
