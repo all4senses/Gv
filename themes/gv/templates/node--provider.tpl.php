@@ -103,6 +103,7 @@
                         $goto_link = 'goto';
                         $goto_link_query = array('t' => 'provider', 'url' => urlencode($node->p_data['info']['i_web']));
                         
+                        dpm($_SERVER);
                         if (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'http://getvoip.com') === FALSE) {
                           $_SESSION['gv_current_http_referer'] = $_SERVER['HTTP_REFERER'];
                         }
