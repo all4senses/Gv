@@ -109,7 +109,7 @@
 //                        }
                         global $user;
                         if ($user->uid == 1) {
-                          echo '<span class="title">' . t('Website') . ':</span>' . l( $goto_link_title, $goto_link, array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url', 'target' => '_blank'))); 
+                          echo '<span class="title">' . t('Website') . ':</span>' . l( $goto_link_title, $goto_link, array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url nofollow', 'target' => '_blank'))); 
                         }
                         else {
                           echo '<span class="title">' . t('Website') . ':</span>' . l( (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']), $node->p_data['info']['i_web'], array('attributes' => array('rel' => 'v:url', 'target' => '_blank'))); 
