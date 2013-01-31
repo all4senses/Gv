@@ -6,17 +6,19 @@
        $(".yt-direct").colorbox({iframe:true, innerWidth:425, innerHeight:344});
        
        $(".yt-direct").click(function(){
-         console.log('click');
-         console.log('href = ' + $(this).attr('href'));
-         console.log('title = ' + $(this).attr('title'));
-         return;
+         
+         //console.log('click');
+         //console.log('href = ' + $(this).attr('href'));
+         //console.log('title = ' + $(this).attr('title'));
+
          (jQuery).ajax({
             
                 url: '/click', 
                 data: {
                         type: 'video_click',
                         click_on_page: window.location.href,
-                        url: this.attr('href')
+                        url: $(this).attr('href'),
+                        title: $(this).attr('title')
                         //,referer: document.referrer
                        
                       }, 
