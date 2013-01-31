@@ -4663,7 +4663,7 @@ function gv_misc_getProviderQuickData($target, $data) {
        
 //        global $user;
 //        if ($user->uid == 1) {
-//          $goto_link = 'goto';
+          $goto_link = 'goto';
           $goto_link_query = array('t' => 'provider', 'n' => urlencode($all_data_quick[$data['data']->nid]['name'])/*, 'url' => urlencode($url)*/);
           $url = l('Visit Site', $goto_link, array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url nofollow', 'target' => '_blank'))); 
 //        }
