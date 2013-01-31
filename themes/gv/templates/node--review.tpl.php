@@ -159,13 +159,13 @@
                       
                           //. ( !$provider_url ? '' : '<a rel="nofollow" href="' . $provider_url . '"> <span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span></a>');
                       
-                        . ( !$provider_url ? '' : '<a rel="nofollow" href="/goto?t=provider&n=' . urlencode($provider_name) . '"> <span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span></a>');
+                        . ( !$provider_url ? '' : '<a rel="nofollow" target="_blank" href="/goto?t=provider&n=' . urlencode($provider_name) . '"> <span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span></a>');
                       }
                       else {
 
                         ///echo !$provider_url ? '' : '<a rel="nofollow" href="' . $provider_url . '">Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span></a>';
 
-                        echo !$provider_url ? '' : '<a rel="nofollow" href="/goto?t=provider&n=' . urlencode($provider_name) . '" >Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span></a>';
+                        echo !$provider_url ? '' : '<a rel="nofollow" target="_blank" href="/goto?t=provider&n=' . urlencode($provider_name) . '" >Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span></a>';
                       }
                       
                   echo ' <span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
