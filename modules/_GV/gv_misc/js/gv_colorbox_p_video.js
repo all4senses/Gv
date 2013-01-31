@@ -4,6 +4,10 @@
     attach: function (context, settings) {
        
        $(".yt-direct").colorbox({iframe:true, innerWidth:425, innerHeight:344});
+       
+       $(".yt-direct").click(function(){
+         console.log('click');
+       });
 
        
     }
