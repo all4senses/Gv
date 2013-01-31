@@ -7,8 +7,8 @@
        
        $(".yt-direct").click(function(){
          console.log('click');
-         console.log('href = ' + this.attr('href'));
-         console.log('title = ' + this.attr('title'));
+         console.log('href = ' + $(this).attr('href'));
+         console.log('title = ' + $(this).attr('title'));
          return;
          (jQuery).ajax({
             
