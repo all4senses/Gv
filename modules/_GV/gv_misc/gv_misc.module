@@ -129,6 +129,7 @@ function gv_misc_menu() {
  */
 function gv_misc_flushCache() {
   drupal_flush_all_caches();
+  drupal_set_message('Cache is flushed.', 'warning');
   drupal_goto('');
 }
 
