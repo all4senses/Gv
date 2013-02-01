@@ -17,6 +17,14 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
+  $items['cc'] = array(
+    'title' => 'Flush the cache and redirect to the Home page',
+    'page callback' => 'gv_misc_flushCache',
+    //'access arguments' => array('access content'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['goto'] = array(
     'title' => 'Redirect to an external link',
     'page callback' => 'gv_misc_goToExternalUrl',
@@ -113,6 +121,15 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+
+/**
+ * Flush the cache and redirect to the Home page.
+ */
+function gv_misc_flushCache() {
+  drupal_flush_all_caches();
+  drupal_goto('');
 }
 
 
