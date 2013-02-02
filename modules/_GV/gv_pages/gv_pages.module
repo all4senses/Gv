@@ -161,8 +161,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   }
   
   
-  $filter_by = array('type' => 'Object type', 'all' => 'Show all');
-  $filter_by_db = array(/*'type' => array('type', $_GET['type']),  */'all' => NULL);
+  $filter_by = array('provider_link' => 'Provider link', 'video_click' => 'Video link', 'all' => 'Show all');
+  $filter_by_db = array('provider_link' => array('type', 'provider_link'), 'video_click' => array('type', 'video_click'), 'all' => NULL);
   $current_filter = isset($filter_by[@$_GET['filter']]) ? $_GET['filter'] : 'all';
   
   
