@@ -171,7 +171,17 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   
   if ($filter_by_db[$current_filter]) {
-    $query->condition($filter_by_db[$current_filter][0], $filter_by_db[$current_filter][1]);
+    $filter_field = $filter_by_db[$current_filter][0];
+    $filter_value = $filter_by_db[$current_filter][1];
+    if ($filter_field == 'type' && $filter_value == 'provider_link') {
+      // add an alias.
+      $or = db_or()->condition('type', 'provider_link')
+                   ->condition('type', 'provider');
+      $query->condition($or);
+    }
+    else {
+      $query->condition($filter_field, $filter_value);
+    }
   }
   
   $results = 
