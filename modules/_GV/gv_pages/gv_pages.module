@@ -217,16 +217,18 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       </tr></thead><tbody>',
   );
   
-  $data = '';
-  $result_data = unserialize($result->data);
-  if (!empty($result_data)) {
-    foreach ($result_data as $title => $value) {
-      $data .= "<div>$title: $value</div>";
-    }
-  }
+  
     
   $tr_class = 'even';
   foreach ($results as $key => $result) {
+    
+    $data = '';
+    $result_data = unserialize($result->data);
+    if (!empty($result_data)) {
+      foreach ($result_data as $title => $value) {
+        $data .= "<div>$title: $value</div>";
+      }
+    }
 
     $form['item_' . ($key + 1) . 'a'] = array(
       '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
