@@ -263,6 +263,30 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
 
 /**
+ * Custom submit of a form for a Quote Requests List page.
+ *
+ * Provides a filtering functionality.
+ * 
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
+
+  $get = $_GET;
+  unset($get['q']);
+  $get['filter'] = $form_state['values']['filter'];
+  
+  drupal_goto($_GET['q'], array('query' => $get));
+}
+
+
+/**
  * Ookla Speedtest page.
  * Deprecated! Used separated template of preface type: node--preface--voip-speed-test.tpl Look at template.php
  */
