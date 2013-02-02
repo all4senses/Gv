@@ -36,15 +36,21 @@ function gv_pages_menu() {
   $items['admin/content/quote-requests'] = array(
     'title' => 'Quote Requests',
     'description' => 'Quote Requests, including captured but not submitted users data',
-      
     'page callback' => 'drupal_get_form',
     'page arguments' => array('gv_pages_quoteRequestsList_form'),
-      
-    //'access arguments' => array('create blog_post content'),
     'access callback' => 'gv_misc_userIsAdmin',
     'type' => MENU_NORMAL_ITEM,
   );
   
+  $items['admin/content/track-report'] = array(
+    'title' => 'Track clicks report',
+    'description' => 'Track clicks report',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gv_pages_trackClickReport_form'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
   $items['home'] = array(
     'title' => 'Home page',
     //'description' => 'Home page',
@@ -100,6 +106,161 @@ function gv_pages_menu() {
   ); 
   */
   return $items;
+}
+
+
+/**
+ * Track clicks report page.
+ */
+function gv_pages_trackClickReport_form($form, &$form_state) {
+  
+  //$args = arg();
+  //dpm($args);
+  
+//  $form['emails'] = array(
+//    '#type' => 'markup',
+//    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div>'
+//      . '<br/><div><strong>All Quote Requests data.</strong></div><br/><div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
+//  );
+  
+  $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
+  
+  $query = '';
+  foreach ($_GET as $key => $value) {
+    if ($key != 'q' && $key != 'sort' && $key != 'order') {
+      $query .= ($query ? '&' : '?') . $key . '=' . $value;
+    }
+  }
+  
+  $sort_options = array('timestamp' => 'Click date', 'type' => 'Object type', 'name' => 'Object name');
+  $start_url = $_SERVER['REDIRECT_URL'] . $query . ($query ? '&' : '?');
+  
+  $sort_exposed = '';
+  $order = 'DESC';
+  foreach($sort_options as $sort_option => $sort_title) {
+    $order_marker = '';
+    if ($sort_option == @$_GET['sort']) {
+      if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
+        $current_order = 'ASC';
+        $order = 'ASC';
+        $order_marker = '&darr;';
+      }
+      else {
+        $current_order = 'DESC';
+        $order = 'DESC';
+        $order_marker = '&uarr;';
+      }
+    }
+    else {
+      $current_order = 'DESC';
+    }
+    //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
+    $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . ' ' . $order_marker . '</a>';
+  }
+  
+  
+  $filter_by = array('type' => 'Object type', 'all' => 'Show all');
+  $filter_by_db = array(/*'type' => array('type', $_GET['type']),  */'all' => NULL);
+  $current_filter = isset($filter_by[@$_GET['filter']]) ? $_GET['filter'] : 'with_emails';
+  
+  
+  $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
+  $query->fields('tl');
+  
+  
+  if ($filter_by_db[$current_filter]) {
+    $query->condition($filter_by_db[$current_filter][0], $filter_by_db[$current_filter][1]);
+  }
+  
+  $ucaptureds = 
+    $query
+      ->orderBy($sort, $order)
+      ->limit(20)
+      ->execute();
+  
+  
+  $form['filter'] = array(
+    '#type' => 'radios',
+    '#title' => t('Filter by: '),
+    '#default_value' => $current_filter,
+    '#options' => $filter_by,
+    '#attributes' =>  array('class' =>array('filter_by'), 'onClick' => array('javascript:this.form.submit();')),
+  );
+ 
+    
+  $form['table_start'] = array(
+    '#type' => 'markup',
+    '#markup' => '<table class="views-table quote-requests"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['via_block'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th>Operations</th></tr></thead><tbody>',
+  );
+  
+  $tr_class = 'even';
+  foreach ($ucaptureds as $key => $ucaptured) {
+    switch ($ucaptured->status) {
+      case 0:
+        $status = 'Captured, NOT alerted';
+        $status_class = 'not-alerted';
+        break;
+      case 1:
+        $status = 'Captured, alerted';
+        $status_class = 'alerted';
+        break;
+      case 2:
+        $status = 'Submitted';
+        $status_class = 'submitted';
+        break;
+    }
+    $data = '';
+    $ucaptured_data = unserialize($ucaptured->data);
+    $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
+    foreach ($ucaptured_data as $title => $value) {
+      if ($title == 'Submit Time' && is_numeric($value)) {
+        $value = date('Y-m-d, H:i:s', $value);
+      }
+      elseif ($title == 'Submission Duration' && is_numeric($value)) {
+        $value = number_format($value / 60, 2, '.', '') . ' min';
+      }
+      $data .= "<div>$title: $value</div>";
+    }
+    $form['item_' . ($key + 1) . 'a'] = array(
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : 'Via block' ) . '</td>',
+    );
+    
+    $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
+    $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=check&timestamp=' . $ucaptured->timestamp;
+    $uncheck_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
+    unset($delete_url['q']);
+
+    
+    $form['item_' . ($key + 1) . 'b'] = array(
+      '#type' => 'checkbox',
+      '#default_value' => $ucaptured->checked,
+      '#prefix' => '<td>',
+      '#suffix' => '</td>',
+      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
+    );
+    
+    
+    $form['item_' . ($key + 1) . 'c'] = array(
+      '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td><td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td></tr>',
+    );
+  }
+
+  $form['table_close'] = array(
+    '#type' => 'markup',
+    '#markup' => '</tbody></table></div>',
+  );
+  
+  $form['pager'] = array(
+    '#theme' => 'pager',
+    //'#weight' => 5,
+  );
+  
+  //$form['actions']['submit']['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
+  //$form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
+  $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
+  
+  
+  return $form;
 }
 
 
@@ -508,9 +669,7 @@ function gv_misc_userIsAdmin() {
 
 
 /**
- * 
  * A form for a Quote Requests data page, including not submitted, but captured data.
- * 
  */
 function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
