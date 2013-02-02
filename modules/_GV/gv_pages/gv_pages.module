@@ -202,13 +202,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table quote-requests"><thead><tr>
+    '#markup' => '<table class="views-table track-links"><thead><tr>
         <th>Num</th>
-        <th>' . $sort_links['timestamp'] . '</th>
+        <th class="date">' . $sort_links['timestamp'] . '</th>
         <th>' . $sort_links['type'] . '</th>
-        <th>' . $sort_links['object_name'] . '</th>
-        <th>' . $sort_links['url'] . '</th>
-        <th>' . $sort_links['referer'] . '</th>
+        <th class="name">' . $sort_links['object_name'] . '</th>
+        <th class="url">' . $sort_links['url'] . '</th>
+        <th class="referer">' . $sort_links['referer'] . '</th>
         <th>' . $sort_links['click_page'] . '</th>
         <th>' . $sort_links['ip'] . '</th>
         <th>' . $sort_links['uname'] . '</th>'
@@ -233,7 +233,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     $form['item_' . ($key + 1) . 'a'] = array(
       '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
         <td>' . ($key + 1) . '</td>
-        <td  class="date">' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
+        <td class="date">' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
         <td>' . $result->type . '</td>
         <td class="name">' . $result->object_name . '</td>
         <td class="url">' . $result->url . '</td>
