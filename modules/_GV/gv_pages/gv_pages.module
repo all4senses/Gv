@@ -233,11 +233,11 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     $form['item_' . ($key + 1) . 'a'] = array(
       '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
         <td>' . ($key + 1) . '</td>
-        <td>' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
+        <td  class="date">' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
         <td>' . $result->type . '</td>
-        <td>' . $result->object_name . '</td>
-        <td>' . $result->url . '</td>
-        <td>' . ($result->referer ? $result->referer : (!empty($result_data['referer']) ? $result_data['referer'] : '') ) . '</td>
+        <td class="name">' . $result->object_name . '</td>
+        <td class="url">' . $result->url . '</td>
+        <td class="referer">' . ($result->referer ? $result->referer : (!empty($result_data['referer']) ? $result_data['referer'] : '') ) . '</td>
         <td>' . ($result->click_page ? $result->click_page : (!empty($result_data['click_on_page']) ? $result_data['click_on_page'] : '') ) . '</td>
         <td>' . ($result->ip ? $result->ip : (!empty($result_data['user']['hostname']) ? $result_data['user']['hostname'] : '') ) . '</td>
         <td>' . ($result->uname ? $result->uname : (!empty($result_data['user']['name']) ? $result_data['user']['name'] : '') ) . '</td>',
