@@ -228,7 +228,7 @@ function gv_misc_goToExternalUrl() {
                 'timestamp' => time(),
                   
                 'referer' => @$_SESSION['gv_current_http_referer'],
-                'click_page' => $post['click_page'],
+                'click_page' => @$_SERVER['HTTP_REFERER'],
                 'uname' => $user->name,
                 'ip' => $user->hostname,
           

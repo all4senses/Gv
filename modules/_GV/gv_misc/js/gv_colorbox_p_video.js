@@ -16,7 +16,8 @@
                 url: '/click', 
                 data: {
                         type: 'video_click',
-                        click_on_page: window.location.href,
+                        type: 'video_click',
+                        click_page: window.location.href,
                         url: $(this).attr('href'),
                         title: $(this).attr('title')
                         //,referer: document.referrer
