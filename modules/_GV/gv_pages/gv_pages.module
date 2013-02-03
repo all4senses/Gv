@@ -1509,8 +1509,8 @@ function gv_pages_buildHome($name, $data) {
       $out .= render($seo_welcome_node_view['field_preface_bottom']);
 
       // Get block for All latest articles (news, blogs)Top pick residential providers.
-      $block_data = array('module' => 'views', 'delta' => 'articles-block_home_all_latest_articles', 'shadow' => FALSE);
-      //$block_data = array('module' => 'views', 'delta' => 'blog-block_home_latest_blogs', 'shadow' => FALSE);
+      //$block_data = array('module' => 'views', 'delta' => 'articles-block_home_all_latest_articles', 'shadow' => FALSE);
+      $block_data = array('module' => 'views', 'delta' => 'blog-block_home_latest_blogs', 'shadow' => FALSE);
       $out .= gv_blocks_getBlockThemed($block_data);
       
   $out .='<div class="bottom-clear"></div></div>';
