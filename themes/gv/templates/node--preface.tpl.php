@@ -23,7 +23,7 @@
       // And if it's a ALL reviews page.
       //dpm($node);
       //$pages_with_gplus_author = array('/providers/reviews', '/news', '/blog');
-      $pages_with_gplus_author_keys = array('front', 'view-reviews-page_all_reviews', 'view-news-page', 'view-blog-page');
+      $pages_with_gplus_author_keys = array(/*'front', 'view-reviews-page_all_reviews', 'view-news-page', 'view-blog-page'*/);
       $current_is_reviews = FALSE;
       $current_is_with_gplus_author = FALSE;
       
