@@ -6,8 +6,11 @@
   <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
         <?php if ($page): ?>
-          <h1<?php //print $title_attributes; ?> property="dc:title v:summary" <?php if (!$node->status) {echo ' class="not-published"';}?> >
-                <?php 
+          <h1<?php //print $title_attributes; 
+                //echo 'property="dc:title v:summary"'; 
+                echo 'property="v:summary"'; 
+                if (!$node->status) {echo ' class="not-published"';}?> >
+             <?php 
                   print $title; //t('Our Take on !p Business VoIP Provider', array('!p' => $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) )
                 ?>
           </h1>

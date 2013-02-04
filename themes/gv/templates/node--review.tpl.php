@@ -14,7 +14,10 @@
                 <?php $full_title = FALSE; ?>
                 
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
-                  <h1 property="dc:title v:summary" 
+                  <h1 <?php 
+                          //echo 'property="dc:title v:summary"';
+                          echo 'property="v:summary"';
+                      ?>
                 <?php else: ?>
                     <?php 
                     $full_title_urls = array('/providers/reviews', '/business-voip-reviews', '/residential-voip-reviews');
@@ -23,9 +26,15 @@
                     }
                     ?>
                     <?php if($full_title): ?>
-                      <h2 class="rcaption" property="dc:title v:summary"
+                      <h2 <?php 
+                              //echo 'class="rcaption" property="dc:title v:summary"';
+                              echo 'class="rcaption" property="v:summary"';
+                           ?>
                     <?php else: ?>
-                      <h3 class="rcaption" property="dc:title v:summary"
+                      <h3 <?php 
+                              //echo 'class="rcaption" property="dc:title v:summary"';
+                              echo 'class="rcaption" property="v:summary"';
+                           ?>
                     <?php endif; ?>
                 <?php endif; ?>
                   

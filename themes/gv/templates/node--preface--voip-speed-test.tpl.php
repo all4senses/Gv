@@ -1,4 +1,4 @@
-  <h1 class="preface" <?php echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
+  <h1 class="preface" <?php //echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
       <?php 
         echo $title; 
       ?>
