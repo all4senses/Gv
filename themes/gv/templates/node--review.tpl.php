@@ -41,9 +41,7 @@
                 <?php /*print $title_attributes;*/ ?>>
                     <?php /*if (!$page): ?>
                       <a href="<?php print ($full_title && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
-                    <?php endif; */?>
-                        
-                      <?php 
+                    <?php endif; */
                         echo ($full_title || $page ? (isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'] ) . ' - ' : '') . $title; 
                         //if ($page) {
                         //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);

@@ -42,15 +42,13 @@
       <?php 
         //if ($current_is_reviews) {echo ' property="dc:title v:summary"';} else {echo preg_replace('/datatype=""/', '', $title_attributes);} 
       ?>
-    >
-        <?php 
+    ><?php 
           echo $title; 
           // Add G+ provile link and authorship for some pages.
           if ($current_is_with_gplus_author) {
             echo ' <a title="Google+ profile" href="https://plus.google.com/u/0/111924926980254330731?rel=author"></a>';
           }
-        ?>
-    </h1>
+        ?></h1>
 
   <?php print render($title_suffix); ?>
 
