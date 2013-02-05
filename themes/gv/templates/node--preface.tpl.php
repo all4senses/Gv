@@ -17,8 +17,7 @@
 
 
   <?php 
-      echo render($title_prefix); 
-      
+     
       // Define if this page should contain G+ provile link and authorship,
       // And if it's a ALL reviews page.
       //dpm($node);
@@ -41,8 +40,7 @@
     <h1 class="preface" 
       <?php 
         //if ($current_is_reviews) {echo ' property="dc:title v:summary"';} else {echo preg_replace('/datatype=""/', '', $title_attributes);} 
-      ?>
-    ><?php 
+      ?> ><?php 
           echo $title; 
           // Add G+ provile link and authorship for some pages.
           if ($current_is_with_gplus_author) {
@@ -50,7 +48,6 @@
           }
         ?></h1>
 
-  <?php print render($title_suffix); ?>
 
 
   <?php if ($display_submitted): ?>

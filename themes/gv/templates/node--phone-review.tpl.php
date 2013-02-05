@@ -8,9 +8,6 @@
               <header>
             <?php endif; ?>
                 
-                
-                <?php print render($title_prefix); ?>
-                
                 <?php $full_title = FALSE; ?>
                 
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_p_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
@@ -38,37 +35,32 @@
                     <?php endif; ?>
                 <?php endif; ?>
                   
-                <?php /*print $title_attributes;*/ ?>>
-                    <?php /*if (!$page): ?>
+                <?php /*print $title_attributes;*/ ?>><?php 
+                /*if (!$page): ?>
                       <a href="<?php print ($full_title && isset($node->field_ref_phone['und'][0]['target_id']) ? url('node/' . $node->field_ref_phone['und'][0]['target_id']) : $node_url); ?>">
                       <?php endif; */
                       global $user;
                       if (!$page && $user->uid) {
                         echo '<a href="' . $node_url . '">';
                       }
-                    ?>
-                        
-                      <?php 
-                        echo ($full_title || $page ? 'Phone ' . $node->field_p_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
+                     
+                      echo ($full_title || $page ? 'Phone ' . $node->field_p_name['und'][0]['value'] . ' ' . t('Review') . ' - ' : '') . $title; 
                         //if ($page) {
                         //  drupal_set_title($node->field_p_name['und'][0]['safe_value'] . ': ' . $title);
                         //}
-                      ?>
-                    <?php /*if (!$page): ?>
+                     /*if (!$page): ?>
                       </a>
                     <?php endif;*/ 
                       if (!$page && $user->uid) {
                         echo '</a>';
                       }
-                    ?>
-                
-                <?php if ($page): ?>
-                  </h1>
-                <?php else: ?>
-                  </h2>
-                <?php endif; ?>
-                
-                <?php print render($title_suffix); ?>
+                  if ($page) {
+                    echo '</h1>';
+                  }
+                  else {
+                    echo '</h2>';
+                  }
+                 ?>
 
             <?php if (!$page): ?>       
               </header>
