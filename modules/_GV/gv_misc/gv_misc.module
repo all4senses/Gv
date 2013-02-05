@@ -4722,7 +4722,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>' . $data['data']->votingapi_cache_node_percent_overall_count_value . ' ' . $all_data_quick[$data['data']->nid]['name'] . '</div><div>Reviews</div></a></div>' . $out . ' <div class="count">(' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ')</div>';
       }
       else {
-        $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div><div>Reviews</div></a></div>';
+        $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div></a></div>';
       }
       
       return $out;
