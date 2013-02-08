@@ -2,7 +2,7 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-  <div class="main-content"  xmlns:v="http://rdf.data-vocabulary.org/#" <?php if (@$_SERVER['REDIRECT_URL'] == '/providers/reviews') { echo 'typeof="v:Review"?>'; } ?>>
+  <div class="main-content"  xmlns:v="http://rdf.data-vocabulary.org/#" <?php if (@$_SERVER['REDIRECT_URL'] != '/providers/reviews') { echo 'typeof="v:Review"'; } ?>>
     
             <?php if (!$page): ?>
               <header>
