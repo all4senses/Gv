@@ -26,7 +26,19 @@ function gv_link($variables) {
       $variables['options']['attributes']['rel'] = 'nofollow';
     }
     else {
-      $variables['options']['attributes']['rel'] .= ' nofollow';
+      
+      if(is_array($variables['options']['attributes']['rel'])) {
+        $rels = '';
+        foreach($variables['options']['attributes']['rel'] as $rel) {
+          $rels .= ($rels ? ' ' : '') . $rel;
+        }
+        $variables['options']['attributes']['rel'] = $rels;
+      }
+
+      if (strpos($variables['options']['attributes']['rel'], 'nofollow') === FALSE) {
+        $variables['options']['attributes']['rel'] .= ' nofollow';
+      }
+
     }
   }
   return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])) . '</a>';
