@@ -111,7 +111,7 @@
                   if ($paths_with_latest_article) {
                     // Home page articles teasers.
                     $type_cations = array('blog_post' => 'Blog', 'news_post' => 'News', 'article' => 'Article');
-                    echo $type_cations[$node->type] . ' - By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', date('F d, Y', $node->created) /*gv_misc_elapsed_time($node->created)*/;
+                    echo ($_SERVER['REQUEST_URI'] != '/' ? $type_cations[$node->type] . ' - ' : '') . 'By <span class="author">' , $author_name, '</span>' /*l($author_name, 'user/' . $node->uid, array('attributes' => array('title' => $author_name . '\'s profile', 'class' => 'username')))*/, ' / ', date('F d, Y', $node->created) /*gv_misc_elapsed_time($node->created)*/;
                   }
                   else {
                     if ($node->type == 'article') {
