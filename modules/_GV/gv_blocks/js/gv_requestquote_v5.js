@@ -158,16 +158,18 @@
              
               firstname: {
                 required: true,
+                minlength: 2,
                 notEqualsTo: $('input[id="firstname"]').attr('title')
 							},
               lastname: {
                 required: true,
+                minlength: 2,
                 notEqualsTo: $('input[id="lastname"]').attr('title')
 							},
               phone: {
                 required: true,
                 //number: true,
-                minlength: 9,
+                minlength: 10,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
 							}
