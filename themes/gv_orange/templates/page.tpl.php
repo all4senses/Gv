@@ -149,16 +149,18 @@
   <footer id="footer" role="contentinfo" class="clearfix">
    <div id="footer-inside">
 
-    <?php echo render($page['footer']); ?>
-    
-
+   
     
     <?php
       
       
 
         echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
+        
+        echo render($page['footer']);
+        
         ?>
+     
     
             <div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
 <div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
