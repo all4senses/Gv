@@ -148,30 +148,26 @@
   
   <footer id="footer" role="contentinfo" class="clearfix">
    <div id="footer-inside">
+
     <?php echo render($page['footer']); ?>
-    <div class="c">© 2013 GetVoIP.com | All Rights Reserved</div>
     
 
     
     <?php
       
       
-      if (1/*$user->uid*/) {
+
         echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
         ?>
-          <!--<div id="lock-n-rss">-->
+    
+            <div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
+<div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
+</div>
+
+    
             <div id="sitelock"><a href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a></div>
-            <!--<a id="valid-rss" href="http://appc.w3.org/check.cgi?url=http%3A//getvoip.com/rss.xml"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a> -->
-          <!--</div>-->
         <?php
-          
-      }
-      else { 
-        ?>
-          <div id="sitelock"><a href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a></div>
-          <a id="valid-rss" href="http://appc.w3.org/check.cgi?url=http%3A//getvoip.com/rss.xml"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
-        <?php
-      }
+
     ?>
    </div>
   </footer> <!-- /#footer -->
