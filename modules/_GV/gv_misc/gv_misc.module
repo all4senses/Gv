@@ -168,7 +168,9 @@ function gv_misc_goToExternalUrl2() {
 
   $args = arg();
   
-  if ($args[1] == 'providers' && !empty($args[2])) {
+  //dpm($args);
+  
+  if ($args[1] == 'reviews' && !empty($args[2])) {
     
     $query = db_select('url_alias', 'a')
         ->fields('a', array('source'));
@@ -180,6 +182,8 @@ function gv_misc_goToExternalUrl2() {
     $query->fields('pd', array('entity_id', 'field_p_data_quick_value'));
     $p_data_quick = $query->execute()->fetchObject();
 
+    //dpm($p_data_quick);
+    
     if ($p_data_quick) {
       
       $object_id = $p_data_quick->entity_id;
