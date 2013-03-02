@@ -150,7 +150,9 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
         ->fields('a', array('alias'));
       $query->condition('a.source', 'node/' . $nid);
       $subpath = '/' . $query->execute()->fetchField();
+      dpm($subpath);
       $subpath = str_replace('reviews/', '', $subpath);
+      dpm($subpath);
     }
     else {
       $subpath = $_SERVER['REDIRECT_URL'];
