@@ -4401,12 +4401,18 @@ function gv_misc_getProviderQuickData($target, $data) {
         $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$data['data']->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
         
         ////$out = '<a href="' . $link . '" target="_blank">' . $image . '</a>';
-        $out = '<a href="/goto?t=provider&n=' . urlencode($all_data_quick[$data['data']->nid]['name']) . '" rel="nofollow" target="_blank">' . $image . '</a>';
+        
+        ///////$out = '<a href="/goto?t=provider&n=' . urlencode($all_data_quick[$data['data']->nid]['name']) . '" rel="nofollow" target="_blank">' . $image . '</a>';
+        
+        $out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
       }
       else {
         if (isset($all_data_quick[$data['data']->nid]['name'])) {
           /////$out = '<a href="' . $link . '" target="_blank">' . $all_data_quick[$data['data']->nid]['name'] . '</a>';
-          $out = '<a href="/goto?t=provider&n=' . urlencode($all_data_quick[$data['data']->nid]['name']) . '" rel="nofollow" target="_blank">' . $all_data_quick[$data['data']->nid]['name'] . '</a>';
+          
+          /////$out = '<a href="/goto?t=provider&n=' . urlencode($all_data_quick[$data['data']->nid]['name']) . '" rel="nofollow" target="_blank">' . $all_data_quick[$data['data']->nid]['name'] . '</a>';
+          
+          $out = gv_misc_getTrackingUrl($all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid);
         }
       }
           
