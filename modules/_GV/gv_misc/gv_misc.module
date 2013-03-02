@@ -253,7 +253,8 @@ function gv_misc_goToExternalUrl() {
       
       case 'provider':
     
-        
+        // Preserve a compatibility with the old tracking link... goto?t=provider&n=nextiva
+        /// but redirect to the new tracking url... /go/nextiva
         
         $query = db_select('field_data_field_p_name', 'pn')
           ->fields('pn', array('entity_id'));
@@ -261,16 +262,19 @@ function gv_misc_goToExternalUrl() {
         $query->condition('pn.field_p_name_value', urldecode($_GET['n']));
         $node_id = $query->execute()->fetchField();
         
-        dpm($node_id);
-        
         $query = db_select('url_alias', 'a')
           ->fields('a', array('alias'));
         //$query->condition('a.alias', $args[1] .  '/' . $args[2]);
         $query->condition('a.source', 'node/' . $node_id);
         $path = 'go/' . str_replace('reviews/', '', $query->execute()->fetchField());
 
-        dpm($path);
-        return 'xxx';
+        if ($path) {
+          drupal_goto($path);
+        }
+        else {
+          drupal_goto(@$_SERVER['HTTP_REFERER']);
+        }
+        
         
         /*
         $query = db_select('field_data_field_p_name', 'pn');
