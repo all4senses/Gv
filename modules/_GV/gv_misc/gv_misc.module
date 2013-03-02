@@ -150,6 +150,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
         ->fields('a', array('alias'));
       $query->condition('a.source', 'node/' . $nid);
       $subpath = '/' . $query->execute()->fetchField();
+      $subpath = str_replace('reviews/', '', $subpath);
     }
     else {
       $subpath = $_SERVER['REDIRECT_URL'];
@@ -171,11 +172,13 @@ function gv_misc_goToExternalUrl2() {
   
   //dpm($args);
   
-  if ($args[1] == 'reviews' && !empty($args[2])) {
+  //if ($args[1] == 'reviews' && !empty($args[2])) {
+  if (!empty($args[1])) {
     
     $query = db_select('url_alias', 'a')
         ->fields('a', array('source'));
-    $query->condition('a.alias', $args[1] .  '/' . $args[2]);
+    //$query->condition('a.alias', $args[1] .  '/' . $args[2]);
+    $query->condition('a.alias', 'reviews/' . $args[1]);
     $node_id = str_replace('node/', '', $query->execute()->fetchField());
 
     $query = db_select('field_data_field_p_data_quick', 'pd');
