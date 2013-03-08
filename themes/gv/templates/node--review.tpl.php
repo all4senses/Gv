@@ -41,7 +41,7 @@ if($view_mode == 'home_teaser') {
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
   $teaser = strip_tags($body);
   
-  $characters_num = 200;
+  $characters_num = 150;
   
   $teaser = trim(drupal_substr($teaser, 0, $characters_num));
   
