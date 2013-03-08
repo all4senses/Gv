@@ -1,7 +1,7 @@
 <?php 
 if($view_mode == 'home_teaser') {
-  dpm($content);
-  dpm($node);
+  //dpm($content);
+  //dpm($node);
   
   
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
@@ -18,7 +18,7 @@ if($view_mode == 'home_teaser') {
       echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
 
       $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-      echo '<div class="rating">' . $stars . '<div class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</div></div>';
+      echo '<div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>';
 
   echo '</div>';
   
@@ -26,7 +26,7 @@ if($view_mode == 'home_teaser') {
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
   $teaser = strip_tags($body);
   
-  $characters_num = 250;
+  $characters_num = 200;
   
   $teaser = trim(drupal_substr($teaser, 0, $characters_num));
   
