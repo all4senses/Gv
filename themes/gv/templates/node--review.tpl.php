@@ -29,7 +29,7 @@ if($view_mode == 'home_teaser') {
       
       
       //echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
-      echo '<a class="logo" href="' . $logo_link . '">' . $image . '</a>';
+      //echo '<a class="logo" href="' . $logo_link . '">' . $image . '</a>';
       
 
       $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
