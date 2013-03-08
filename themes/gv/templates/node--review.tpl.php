@@ -16,8 +16,10 @@ if($view_mode == 'home_teaser') {
 
   echo '<a href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
 
-  $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-  echo $stars . '<div class="count">' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ' out of 5</div>';
+  
+  
+  $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+  echo $stars . '<div class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</div>';
       
   echo '<div property="v:description">' . render($content['body']) . '</div>';
   
