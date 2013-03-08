@@ -35,7 +35,7 @@ if($view_mode == 'home_teaser') {
   
 
   
-  echo $teaser_data['main_image_html'] . '<h3>'. $node->title . '</h3><div class="submitted"><span class="author">- by ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+  echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted"><span class="author">- by ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
           . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
               
   
