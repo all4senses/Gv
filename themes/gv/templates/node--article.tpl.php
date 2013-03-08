@@ -6,20 +6,8 @@ if($view_mode == 'home_teaser') {
   
 
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
-//  $teaser = strip_tags($body);
-//  
-//  $characters_num = 200;
-//  
-//  $teaser = trim(drupal_substr($teaser, 0, $characters_num));
-//  
-//  
-//  $last_pos = strrpos($teaser, ' ');
-//  
-//  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
-
   
   $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 200);
-  
   
   if (!empty($node->field_extra_data['und'][0]['value'])) {
     $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
@@ -32,12 +20,8 @@ if($view_mode == 'home_teaser') {
   }
             
   
-  
-
-  
-  echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted"><span class="author">- by ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+  echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted"><span class="author">By ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
           . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
-              
   
   return;
 } 
