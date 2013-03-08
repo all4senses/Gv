@@ -29,7 +29,10 @@ if($view_mode == 'home_teaser') {
   }
             
   
-  echo '<h3>'. $node->title . '</h3><div class="submitted"><span class="author">- by ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+  $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
+
+  
+  echo $teaser_data['main_image_html'] . '<h3>'. $node->title . '</h3><div class="submitted"><span class="author">- by ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
           . '<div class="teaser">' . $teaser . '</div>';
               
   
