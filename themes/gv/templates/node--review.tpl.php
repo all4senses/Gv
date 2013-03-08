@@ -33,7 +33,7 @@ if($view_mode == 'home_teaser') {
   
   $last_pos = strrpos($teaser, ' ');
   
-  $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
+  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
 
   
   
