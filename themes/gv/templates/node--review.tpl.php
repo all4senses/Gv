@@ -8,26 +8,16 @@ if($view_mode == 'home_teaser') {
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
 
-      
-      
-//      if (!empty($all_data_quick[$provider_nid]['i_web'])) {
-//        $link = $all_data_quick[$provider_nid]['i_web'];
-//      }
-//      else {
-//        $link = url('node/' . $provider_nid);
-//      }
+
         
-      //    $image_style_name = 'logo_provider_chart_main';
-          $image_style_name = 'thumbnail';
-        
-        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
-        
-      
-        echo '<a href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
-      
-          
-      return $out;
-      
+  //$image_style_name = 'logo_provider_chart_main';
+  $image_style_name = 'thumbnail';
+  $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
+
+  echo '<a href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
+
+  $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+  echo $stars . '<div class="count">' . number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 ) . ' out of 5</div>';
       
   echo '<div property="v:description">' . render($content['body']) . '</div>';
   
