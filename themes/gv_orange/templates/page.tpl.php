@@ -119,8 +119,9 @@
             '/our-team',
           );
           //if ($user->uid == 1) {
-          if($is_front || in_array($_SERVER['REDIRECT_URL'], $pages_with_timestamp))
-            echo gv_misc_lastUpdatedStamp();
+//          if($is_front || in_array($_SERVER['REDIRECT_URL'], $pages_with_timestamp)) {
+//            echo gv_misc_lastUpdatedStamp();
+//          }
               
           //}
           ?>
