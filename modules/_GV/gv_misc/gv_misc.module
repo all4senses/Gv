@@ -1374,7 +1374,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $last_pos = strrpos($teaser, ' ');
   
   // $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
-  $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
+  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
 
   if ($only_teaser) {
     return $main_image_html . $teaser;
