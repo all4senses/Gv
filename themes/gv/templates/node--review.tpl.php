@@ -1,6 +1,7 @@
 <?php 
 if($view_mode == 'home_teaser') {
-  
+  dpm($content);
+  dpm($node);
   echo 'xxx<div property="v:description">' . render($content['body']) . '</div>';
   
   return;
