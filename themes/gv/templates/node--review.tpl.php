@@ -2,7 +2,34 @@
 if($view_mode == 'home_teaser') {
   dpm($content);
   dpm($node);
-  echo 'xxx<div property="v:description">' . render($content['body']) . '</div>';
+  
+  
+  $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
+  
+  $all_data_quick = gv_misc_getProvidersDataQuick();
+
+      
+      
+//      if (!empty($all_data_quick[$provider_nid]['i_web'])) {
+//        $link = $all_data_quick[$provider_nid]['i_web'];
+//      }
+//      else {
+//        $link = url('node/' . $provider_nid);
+//      }
+        
+      //    $image_style_name = 'logo_provider_chart_main';
+          $image_style_name = 'thumbnail';
+        
+        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
+        
+      
+        echo '<a href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
+      
+          
+      return $out;
+      
+      
+  echo '<div property="v:description">' . render($content['body']) . '</div>';
   
   return;
 } 
