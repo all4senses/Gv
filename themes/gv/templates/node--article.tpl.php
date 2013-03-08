@@ -1,3 +1,43 @@
+<?php 
+if($view_mode == 'home_teaser') {
+  //dpm($content);
+  //dpm($node);
+  
+  
+
+  $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+  $teaser = strip_tags($body);
+  
+  $characters_num = 200;
+  
+  $teaser = trim(drupal_substr($teaser, 0, $characters_num));
+  
+  
+  $last_pos = strrpos($teaser, ' ');
+  
+  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
+
+  
+  if (!empty($node->field_extra_data['und'][0]['value'])) {
+    $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+    $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
+  }
+
+  if (!$extra_data['guest_author'] && ($page || $node->type == 'article' || $paths_with_latest_article) ) {
+    $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
+    $author_name = $authorExtendedData->realname;
+  }
+            
+  
+  echo '<h3>'. $node->title . '</h3><div class="submitted"><span class="author">- by ' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+          . '<div class="teaser">' . $teaser . '</div>';
+              
+  
+  return;
+} 
+?>
+
+
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <!-- <div class="inside"> -->
