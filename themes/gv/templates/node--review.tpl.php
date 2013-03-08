@@ -1,4 +1,11 @@
-<?php dpm('view_mode = ' . $view_mode); ?>
+<?php 
+if($view_mode == 'home_teaser') {
+  
+  echo '<div property="v:description">' . render($content['body']) . '</div>';
+  
+  return;
+} 
+?>
 
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
@@ -216,23 +223,25 @@
         
       <?php if ($page): ?>
     
-        <footer>
+        
 
           <?php 
-            if (isset($content['field_topics'])) {
-              $tags = NULL;
-              foreach (element_children($content['field_topics']) as $key) {
-                $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
-              }
-              if ($tags) {
-                echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
-              }
-            }
-            //print render($content['field_topics']); 
-            //print render($content['links']);
-
+//            echo '<footer>';
+//          
+//                if (isset($content['field_topics'])) {
+//                  $tags = NULL;
+//                  foreach (element_children($content['field_topics']) as $key) {
+//                    $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+//                  }
+//                  if ($tags) {
+//                    echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
+//                  }
+//                }
+//                //print render($content['field_topics']); 
+//                //print render($content['links']);
+//
+//            echo '</footer>'
           ?>
-        </footer>
     
       <?php endif; ?>
         
