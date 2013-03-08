@@ -1,7 +1,7 @@
 <?php 
 if($view_mode == 'home_teaser') {
   
-  echo '<div property="v:description">' . render($content['body']) . '</div>';
+  echo 'xxx<div property="v:description">' . render($content['body']) . '</div>';
   
   return;
 } 
