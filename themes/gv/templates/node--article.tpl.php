@@ -7,7 +7,7 @@ if($view_mode == 'home_teaser') {
 
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
   
-  $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 250);
+  $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
   
   if (!empty($node->field_extra_data['und'][0]['value'])) {
     $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
