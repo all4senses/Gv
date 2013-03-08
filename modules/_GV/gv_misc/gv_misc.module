@@ -1380,7 +1380,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     return $main_image_html . $teaser;
   }
   else {
-    return array('teaser' => $main_image_html . $teaser, 'teaser_block' => $teaser_block, 'teaser_home' => $main_image_html . $teaser_home, 'main_image' => $main_image, 'main_image_html' => $main_image_html);
+    return array('teaser_only' => $teaser, 'teaser' => $main_image_html . $teaser, 'teaser_block' => $teaser_block, 'teaser_home' => $main_image_html . $teaser_home, 'main_image' => $main_image, 'main_image_html' => $main_image_html);
   }
   
 }
