@@ -9,19 +9,18 @@ if($view_mode == 'home_teaser') {
   $all_data_quick = gv_misc_getProvidersDataQuick();
 
 
-        
-  //$image_style_name = 'logo_provider_chart_main';
-  $image_style_name = 'thumbnail';
-  $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
+  echo '<div class="header">';
+  
+      //$image_style_name = 'logo_provider_chart_main';
+      $image_style_name = 'thumbnail';
+      $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
 
-  echo '<a href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
+      echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
 
-  
-  
-  $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-  echo $stars . '<div class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</div>';
-      
-  
+      $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+      echo '<div class="rating">' . $stars . '<div class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</div></div>';
+
+  echo '</div>';
   
   
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
