@@ -21,7 +21,9 @@ if($view_mode == 'home_teaser') {
   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
   echo $stars . '<div class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</div>';
       
-  echo '<h3>'. $node->title . '</h3><div property="v:description">' . render($content['body']) . '</div>';
+  echo '<h3>'. $node->title . '</h3><div property="v:description">' . render($content['body']) . '</div>' . l('Read More', 'node/' . $node->nid);
+  
+  echo '<div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . '</span> / ' . date('F d, Y', $node->created) . '</div>';
   
   return;
 } 
