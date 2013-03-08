@@ -18,11 +18,15 @@ if($view_mode == 'home_teaser') {
       
       
       if (!empty($all_data_quick[$provider_nid]['i_web'])) {
-        $logo_link = $all_data_quick[$provider_nid]['i_web'];
+        //$logo_link = $all_data_quick[$provider_nid]['i_web'];
+        echo gv_misc_getTrackingUrl($image, NULL, $provider_nid);
       }
       else {
-        $logo_link = url('node/' . $provider_nid);
+        echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       }
+      
+      //$out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
+      
       
       //echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       echo '<a class="logo" href="' . $logo_link . '">' . $image . '</a>';
