@@ -23,7 +23,7 @@ if($view_mode == 'home_teaser') {
     $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
   }
 
-  if (!$extra_data['guest_author'] && ($page || $node->type == 'article' || $paths_with_latest_article) ) {
+  if (!$extra_data['guest_author']) {
     $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
     $author_name = $authorExtendedData->realname;
   }
