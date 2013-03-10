@@ -22,8 +22,8 @@
           <img src="<?php print 'http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png'; ?>" alt="GetVoIP.com - Complete VoIP Provider Directory & Service Guide" title="<?php print t('GetVoIP Home'); ?>" />
         </a>
         <div class="descr">
-          <div class="title">VoIP Knowledge</div>
-          <div class="subtitle">From VoIP Experts!</div><!--<div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>-->
+          <div class="title">VoIP Decisions</div>
+          <div class="subtitle">Made Easy!</div><!--<div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>-->
         </div>
       </div>
       
