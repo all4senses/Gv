@@ -4089,8 +4089,8 @@ function gv_misc_views_pre_render(&$view) {
     
     case 'view-providers-block_providers_list': 
       dpm(count($view->result));
-      $view->style_plugin->display->handler->options['footer'] = count($view->result);
-      $view->style_plugin->display->handler->options['defaults']['footer'] = FALSE;
+      $view->style_plugin->display->handler->options['footer'] = count($view->result) . ' items';
+      //$view->style_plugin->display->handler->options['defaults']['footer'] = FALSE;
       break;
     
     case 'view-providers-page_p_bu': 
