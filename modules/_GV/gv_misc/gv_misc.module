@@ -4086,6 +4086,11 @@ function gv_misc_views_pre_render(&$view) {
   $do_attach_preface = FALSE;
   
   switch($key) {
+    
+    case 'view-providers-block_providers_list': 
+      dpm(count($view->result));
+      break;
+    
     case 'view-providers-page_p_bu': 
       // Business Providers listing page.
     case 'view-providers-page_p_re': 
