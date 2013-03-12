@@ -4091,6 +4091,10 @@ function gv_misc_views_pre_render(&$view) {
       dpm(count($view->result));
       $view->style_plugin->display->handler->options['footer'] = count($view->result) . ' items';
       $view->style_plugin->display->handler->options['defaults']['footer'] = FALSE;
+      
+      $view->attachment_before = count($view->result);
+      $view->attachment_after = count($view->result) . ' items';
+      
       break;
     
     case 'view-providers-page_p_bu': 
