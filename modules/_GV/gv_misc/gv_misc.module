@@ -4624,10 +4624,22 @@ function gv_misc_getProviderQuickData($target, $data) {
       $all_data_quick = gv_misc_getProvidersDataQuick();
       //dpm($all_data_quick);
       
-//      if (isset($all_data_quick[$data['data']->nid]['details'])) {
-//        dpm($all_data_quick);
-//      }
       
+      $query = db_select('field_data_field_p_data', 'pd')
+        ->fields('pd', array('field_p_data_value'));
+      $query->condition('pd.entity_id', $data['data']->nid);
+      $p_data = $query->execute()->fetchField();
+       
+      $p_data = unserialize($p_data);
+      
+      
+      if (isset($all_data_quick[$data['data']->nid]['details'])) {
+        dpm($all_data_quick);
+        dpm($p_data);
+      }
+      
+      
+        
       return isset($all_data_quick[$data['data']->nid]['details']) ? $all_data_quick[$data['data']->nid]['details'] : '';
        
     
