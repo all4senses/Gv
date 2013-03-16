@@ -4587,7 +4587,18 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
       
+    case 'details':
       
+      //dpm($data); 
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      //dpm($all_data_quick);
+      
+      if (isset($all_data_quick[$data['data']->nid]['details'])) {
+        dpm($all_data_quick);
+      }
+      
+      return isset($all_data_quick[$data['data']->nid]['details']) ? $all_data_quick[$data['data']->nid]['details'] : '';
+       
       
       
     case 'plan':
