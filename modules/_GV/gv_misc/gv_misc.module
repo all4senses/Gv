@@ -4599,6 +4599,22 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       return isset($all_data_quick[$data['data']->nid]['details']) ? $all_data_quick[$data['data']->nid]['details'] : '';
        
+    
+      
+    case 'i_availability':
+      
+      //dpm($data); 
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      //dpm($all_data_quick);
+      
+//      if (isset($all_data_quick[$data['data']->nid]['i_availability'])) {
+//        dpm($all_data_quick);
+//      }
+      
+      return isset($all_data_quick[$data['data']->nid]['i_availability']) ? $all_data_quick[$data['data']->nid]['i_availability'] : '';
+    
+      
+      
       
       
     case 'plan':
