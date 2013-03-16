@@ -4433,8 +4433,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
 
       if (!empty($all_data_quick[$data['data']->nid]['name'])) {
-        //$out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid);
-        $out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid); 
+        $out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid);
+        //$out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid); 
       }
           
       return $out;
