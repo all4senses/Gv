@@ -4620,6 +4620,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     case 'details':
       
+      $details = NULL;
+      
       //dpm($data); 
       $all_data_quick = gv_misc_getProvidersDataQuick();
       //dpm($all_data_quick);
@@ -4630,19 +4632,19 @@ function gv_misc_getProviderQuickData($target, $data) {
       $query->condition('b.entity_id', $data['data']->nid);
       $body = $query->execute()->fetchField();
        
-      $details = trim(drupal_substr(strip_tags($body), 0, 200));  
-  
-      $last_pos = strrpos($details, ' ');
-      $details = substr_replace ($details, '... ', $last_pos);
-      $details .= l('Read More', 'node/' . $data['data']->nid, array('attributes' => array('class' => array('more'))));
-  
       
-      if (isset($all_data_quick[$data['data']->nid]['details'])) {
-        dpm($all_data_quick);
-        dpm($p_data);
+      if ($body) {
+          $details = trim(drupal_substr(strip_tags($body), 0, 200));  
+
+          $last_pos = strrpos($details, ' ');
+          $details = substr_replace ($details, '... ', $last_pos);
+          $details .= l('Read More', 'node/' . $data['data']->nid, array('attributes' => array('class' => array('more'))));
+
+//          if (isset($all_data_quick[$data['data']->nid]['details'])) {
+//            dpm($all_data_quick);
+//            dpm($p_data);
+//          }
       }
-      
-      
         
       //return isset($all_data_quick[$data['data']->nid]['details']) ? $all_data_quick[$data['data']->nid]['details'] : '';
       
