@@ -236,9 +236,9 @@ if($view_mode == 'home_teaser') {
             hide($content['metatags']['keywords']);
           }
           
-          if (isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) && $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
-            gv_misc_addMetatag($keyword_metatag_name, $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
-          }
+//          if (isset($content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) && $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']) {
+//            gv_misc_addMetatag($keyword_metatag_name, $content['metatags']['keywords']['#attached']['drupal_add_html_head'][0][0]['#value']);
+//          }
 //          elseif (@$content['field_topics']) {
 //            gv_misc_pushTagsToMetatags($keyword_metatag_name, $content['field_topics']);
 //          }
