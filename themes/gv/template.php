@@ -488,25 +488,20 @@ function gv_html_head_alter(&$head_elements) {
     }
   }
   
+  
+  // Hide keywords metatag from all the site.
   if (isset($head_elements['metatag_keywords'])) {
     unset($head_elements['metatag_keywords']);
   }
-  
-  dpm($head_elements);
-  
-  
-  
-  /*
-    if (isset($head_elements['metatag_keywords'])) {
-    $head_elements['metatag_keywords']['#weight'] = -14;
-  }
   if (isset($head_elements['keywords'])) {
-    $head_elements['keywords']['#weight'] = -14;
+    unset($head_elements['keywords']);
   }
   if (isset($head_elements['news_keywords'])) {
-    $head_elements['news_keywords']['#weight'] = -13;
+    unset($head_elements['news_keywords']);
   }
-  */
+  
+  //dpm($head_elements);
+  
 }
 
 
