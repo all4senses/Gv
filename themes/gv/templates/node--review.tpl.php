@@ -123,6 +123,19 @@ if($view_mode == 'home_teaser') {
             <?php if (!$page): ?>       
               </header>
             <?php endif; ?>
+   
+    
+            <?php 
+    
+                if (isset($node->field_r_fname[0]['value'])) {
+                  $reviewer = $node->field_r_fname[0]['value'] . ' ' . strtoupper($node->field_r_lname[0]['value'][0]) . '.';
+                }
+                else {
+                  $reviewer = $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.';
+                }
+    
+            ?>
+    
     
             <?php if ($page): ?>
               <span class="submitted">
@@ -146,7 +159,8 @@ if($view_mode == 'home_teaser') {
                 
                 echo $submitted;
                 */
-                echo t('Reviewer'), ': ', '<span property="v:reviewer">' . (isset($node->field_r_fname[0]['value']) ? $node->field_r_fname[0]['value'] : $node->field_r_fname['und'][0]['value'] ), '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
+              
+                echo t('Reviewer'), ': ', '<span property="v:reviewer">' . $reviewer, '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
               ?>
             </span>
           <?php endif; ?>
@@ -159,7 +173,7 @@ if($view_mode == 'home_teaser') {
             <div class="rate-other">
               <?php if (!$page): ?>
                 <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
-                <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">' , $node->field_r_fname['und'][0]['safe_value'] , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">' , $reviewer , '</div>'; ?></div>
               <?php endif; ?>
               <div class="text"><?php echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->gv_recommend . '</div>'?></div>
             </div>
