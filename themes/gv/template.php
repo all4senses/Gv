@@ -487,7 +487,13 @@ function gv_html_head_alter(&$head_elements) {
 //      }
     }
   }
+  
+  if (isset($head_elements['metatag_keywords'])) {
+    unset($head_elements['metatag_keywords']);
+  }
+  
   dpm($head_elements);
+  
   
   
   /*
