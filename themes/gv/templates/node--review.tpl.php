@@ -58,6 +58,9 @@ if($view_mode == 'home_teaser') {
   
   echo '<div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . '</span> / ' . date('F d, Y', $node->created) . '</div>';
   
+  dpm($node->field_r_lname['und'][0]['value']);
+  dpm($node->field_r_lname['und'][0]['value'][0]);
+  
   return;
 } 
 ?>
