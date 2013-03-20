@@ -56,10 +56,7 @@ if($view_mode == 'home_teaser') {
   
   echo '<h3>'. $node->title . '</h3><div class="review">' . $teaser . '</div>';
   
-  echo '<div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . '</span> / ' . date('F d, Y', $node->created) . '</div>';
-  
-  dpm($node->field_r_lname['und'][0]['value']);
-  dpm($node->field_r_lname['und'][0]['value'][0]);
+  echo '<div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.</span> / ' . date('F d, Y', $node->created) . '</div>';
   
   return;
 } 
