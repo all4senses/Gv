@@ -1,4 +1,3 @@
-console.log('test 1');
 adroll_adv_id = "YJ2QITGB3FFUPCENFTQBW7";
 adroll_pix_id = "X2ZQHGK7VZDKNJRBCO6IOF";
 (function () {
@@ -11,7 +10,7 @@ window.onload = function(){
   scr.type = "text/javascript";
   scr.src = host + "/j/roundtrip.js";
 
-  console.log('test 2');
+  console.log('test onload');
 
   ((document.getElementsByTagName('head') || [null])[0] ||
     document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
@@ -24,30 +23,25 @@ window.onload = function(){
   Drupal.behaviors.gv_add_adroll = {
     attach: function (context, settings) {
       
-      console.log('test 1');
-      
-//      alert("hello!");
-//      
-//      adroll_adv_id = "YJ2QITGB3FFUPCENFTQBW7";
-//      adroll_pix_id = "X2ZQHGK7VZDKNJRBCO6IOF";
-//      (function () {
-//      var oldonload = window.onload;
-//      window.onload = function(){
-//        __adroll_loaded=true;
-//        var scr = document.createElement("script");
-//        var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
-//        scr.setAttribute('async', 'true');
-//        scr.type = "text/javascript";
-//        scr.src = host + "/j/roundtrip.js";
-//        
-//        console.log('test 2');
-//        
-//        ((document.getElementsByTagName('head') || [null])[0] ||
-//          document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
-//        if(oldonload){oldonload()}};
-//      }());
-//    
-//    
+      adroll_adv_id = "YJ2QITGB3FFUPCENFTQBW7";
+      adroll_pix_id = "X2ZQHGK7VZDKNJRBCO6IOF";
+      (function () {
+      var oldonload = window.onload;
+      window.onload = function(){
+        __adroll_loaded=true;
+        var scr = document.createElement("script");
+        var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+        scr.setAttribute('async', 'true');
+        scr.type = "text/javascript";
+        scr.src = host + "/j/roundtrip.js";
+        
+        console.log('test onload 2');
+        
+        ((document.getElementsByTagName('head') || [null])[0] ||
+          document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+        if(oldonload){oldonload()}};
+      }());
+    
     }
   };
 
