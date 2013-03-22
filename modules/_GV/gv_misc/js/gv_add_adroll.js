@@ -10,8 +10,6 @@ window.onload = function(){
   scr.type = "text/javascript";
   scr.src = host + "/j/roundtrip.js";
 
-  console.log('test onload');
-
   ((document.getElementsByTagName('head') || [null])[0] ||
     document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
   if(oldonload){oldonload()}};
