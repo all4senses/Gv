@@ -4624,13 +4624,13 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
-      if ($data['data']->nid == 1291 || $data['data']->nid == 1338) {
-        dpm($all_data_quick[$data['data']->nid]);
-      }
+//      if ($data['data']->nid == 1291 || $data['data']->nid == 1338) {
+//        dpm($all_data_quick[$data['data']->nid]);
+//      }
       
       //if (empty($all_data_quick[$data['data']->nid]['details'])) {
       global $user;
-      if ( (empty($all_data_quick[$data['data']->nid]['details']) || $all_data_quick[$data['data']->nid]['details'] == '... <a href="/node/" class="more">Read More</a>') && $user->uid == 1) {
+      if (empty($all_data_quick[$data['data']->nid]['details']) && $user->uid == 1) {
 
         //return NULL;
 
