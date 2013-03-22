@@ -3,6 +3,8 @@
   Drupal.behaviors.gv_setReferer = {
     attach: function (context, settings) {
        
+       console.log('teeeest');
+       
        (jQuery).ajax({
             
                 url: '/referer', 
