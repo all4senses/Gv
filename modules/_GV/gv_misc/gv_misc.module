@@ -4624,6 +4624,10 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
+      if ($data['data']->nid == 1291) {
+        dpm($all_data_quick[$data['data']->nid]);
+      }
+      
       //if (empty($all_data_quick[$data['data']->nid]['details'])) {
       global $user;
       if (empty($all_data_quick[$data['data']->nid]['details']) && $user->uid == 1) {
