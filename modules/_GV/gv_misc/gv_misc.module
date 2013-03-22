@@ -4641,16 +4641,18 @@ function gv_misc_getProviderQuickData($target, $data) {
             $details = substr_replace ($details, '... ', $last_pos);
             $details .= l('Read More', 'node/' . $data['data']->nid, array('attributes' => array('class' => array('more'))));
 
+            $all_data_quick[$data['data']->nid]['details'] = $details;
+                    
             db_update('field_data_field_p_data_quick')
               ->fields(array(
-                'field_p_data_quick_value' => serialize($details),
+                'field_p_data_quick_value' => serialize($all_data_quick[$data['data']->nid]),
               ))
               ->condition('entity_id', $data['data']->nid)
               ->execute();
             
             db_update('field_revision_field_p_data_quick')
               ->fields(array(
-                'field_p_data_quick_value' => serialize($details),
+                'field_p_data_quick_value' => serialize($all_data_quick[$data['data']->nid]),
               ))
               ->condition('entity_id', $data['data']->nid)
               ->execute();
