@@ -4664,7 +4664,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
       else {
         //dpm($all_data_quick[$data['data']->nid]);
-        $details = $all_data_quick[$data['data']->nid]['details'];
+        $details = @$all_data_quick[$data['data']->nid]['details'];
       }
       
       
