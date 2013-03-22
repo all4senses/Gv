@@ -3953,11 +3953,11 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data_quick['name'] = $form_state['values']['field_p_name']['und'][0]['value'];
   $p_data_quick['i_web'] = isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '';
   $p_data_quick['i_availability'] = $p_data['info']['i_availability'];
-  
+
+  // Prepare details exerpt field for Providers page.
   $p_data_quick['details'] =  trim(drupal_substr(strip_tags($form_state['values']['body']['und'][0]['value']), 0, 200));  
-  
   $last_pos = strrpos($p_data_quick['details'], ' ');
-  $p_data_quick['details'] = substr_replace ($p_data_quick['details'], '... ', $last_pos);
+  $p_data_quick['details'] = substr_replace($p_data_quick['details'], '... ', $last_pos);
   $p_data_quick['details'] .= l('Read More', 'node/' . $form_state['values']['nid'], array('attributes' => array('class' => array('more'))));
   //$p_data_quick['details'] = substr_replace ($p_data_quick['details'], '...' . l(t('Read More'), 'node/' . $form_state['values']['nid'], array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
   
