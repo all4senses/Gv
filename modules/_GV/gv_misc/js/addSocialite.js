@@ -11,12 +11,14 @@
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
+            console.log('teeeest 1');
           }
         });
        $('.content.page').one('mouseenter', function() {
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
+            console.log('teeeest 2');
           }
         });
         
@@ -24,6 +26,7 @@
           if (!buttonLoaded) {
             buttonLoaded = true;            
             Socialite.load('.social-buttons');
+            console.log('teeeest 3');
           }
         });
 
