@@ -3,6 +3,8 @@
   Drupal.behaviors.gv_add_adroll = {
     attach: function (context, settings) {
       
+      console.log('test 1');
+      
       adroll_adv_id = "YJ2QITGB3FFUPCENFTQBW7";
       adroll_pix_id = "X2ZQHGK7VZDKNJRBCO6IOF";
       (function () {
@@ -15,7 +17,7 @@
         scr.type = "text/javascript";
         scr.src = host + "/j/roundtrip.js";
         
-        console.log('test');
+        console.log('test 2');
         
         ((document.getElementsByTagName('head') || [null])[0] ||
           document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
