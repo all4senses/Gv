@@ -1,3 +1,4 @@
+console.log('test 1');
 adroll_adv_id = "YJ2QITGB3FFUPCENFTQBW7";
 adroll_pix_id = "X2ZQHGK7VZDKNJRBCO6IOF";
 (function () {
