@@ -3,6 +3,8 @@
   Drupal.behaviors.gv_addSocialite = {
     attach: function (context, settings) {
        
+       console.log('teeeest');
+       
        var buttonLoaded = false;
 
        $('#header').one('mouseenter', function() {

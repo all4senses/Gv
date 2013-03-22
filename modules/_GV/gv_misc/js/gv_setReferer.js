@@ -4,7 +4,7 @@
     attach: function (context, settings) {
        
        //console.log('teeeest');
-       alert('Hello!');
+       //alert('Hello!');
        
        (jQuery).ajax({
             
