@@ -1,3 +1,4 @@
+console.log('testttt');
 var fb_param = {};
 fb_param.pixel_id = '6005656184574';
 fb_param.value = '0.00';
