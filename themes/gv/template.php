@@ -685,6 +685,9 @@ function gv_process_page(&$variables) {
   drupal_add_js( $module_path_misc . '/js/gv_setReferer.js'); 
   
   drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
+  
+  drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
+  
 }
 
 

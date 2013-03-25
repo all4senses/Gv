@@ -16,6 +16,7 @@
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6005656184574&amp;value=0" /></noscript>
 </head>
 
 <body itemscope itemtype="http://schema.org/<?php global $schema_org_type; echo $schema_org_type ? $schema_org_type : 'WebPage'; ?>" class="<?php print $classes; ?>" <?php print $attributes;?>>
