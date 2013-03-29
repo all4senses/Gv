@@ -480,7 +480,7 @@ function gv_blocks_libraryList() {
   $query = db_select('node', 'n')
         ->fields('n', array('title', 'nid'));
   $query->condition('n.type', 'article');
-  $query->condlition('n.status', 1);
+  $query->condition('n.status', 1);
   $query->orderBy('n.created', 'DESC');
 
   $results = $query->execute()->fetchAllAssoc('nid');
