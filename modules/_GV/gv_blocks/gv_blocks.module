@@ -486,7 +486,7 @@ function gv_blocks_libraryList() {
 
   $results = $query->execute()->fetchAllAssoc('nid');
   
-  $out = '<div class="articles-list"><div class="col-1">';
+  $out = '<div class="articles-list"><div class="col col-1">';
   $count = 0;
   $amount = count($results);
   $second = FALSE;
@@ -497,7 +497,7 @@ function gv_blocks_libraryList() {
       $second = TRUE;
     }
     
-    $out .= l($article->title, 'node/' . $nid, array('attributes' => array('title' => $article->title)));
+    $out .= '<div>' . l($article->title, 'node/' . $nid, array('attributes' => array('title' => $article->title))) . '</div>';
     $count++;
   }
   $out .= '</div></div>';
