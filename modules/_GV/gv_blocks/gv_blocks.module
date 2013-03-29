@@ -485,11 +485,21 @@ function gv_blocks_libraryList() {
 
   $results = $query->execute()->fetchAllAssoc('nid');
   
-  $out = '';
-  
+  $out = '<div class="articles-list"><div class="col-1">';
+  $count = 0;
+  $amount = count($results);
+  $second = FALSE;
   foreach ($results as $nid => $article) {
+    
+    if (!$second && $count > ($amount - 1)/2) {
+      $out .= '</div><div class="col-2">';
+      $second = TRUE;
+    }
+    
     $out .= '<div class="item">' . l($article->title, 'node/' . $nid) . '</div>';
+    $count++;
   }
+  $out .= '</div></div>';
   
   return $out;
 }
