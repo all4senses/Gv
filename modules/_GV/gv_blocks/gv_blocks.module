@@ -496,7 +496,7 @@ function gv_blocks_libraryList() {
       $second = TRUE;
     }
     
-    $out .= l($article->title, 'node/' . $nid);
+    $out .= l($article->title, 'node/' . $nid, array('attributes' => array('title' => $article->title)));
     $count++;
   }
   $out .= '</div></div>';
