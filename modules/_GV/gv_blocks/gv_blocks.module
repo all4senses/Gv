@@ -209,6 +209,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['library_list'] = array(
+    'info' => 'Library list',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -422,10 +427,11 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
-    $blocks['bu_voip_ads'] = array(
-      'info' => 'Business VoIP Ads',
-      'cache' => DRUPAL_CACHE_GLOBAL,
-    );
+    case 'library_list':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_libraryList();
+      break;
+    
     
   }
 
@@ -463,6 +469,29 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+/**
+ * Returns Library articles list block.
+ */
+function gv_blocks_libraryList() {
+ 
+  $query = db_select('node', 'n')
+        ->fields('n', array('title', 'nid'));
+  $query->condition('n.type', 'article');
+  $query->condlition('n.status', 1);
+  $query->orderBy('n.created', 'DESC');
+
+  $results = $query->execute()->fetchAllAssoc('nid');
+  
+  $out = '';
+  
+  foreach ($results as $nid => $article) {
+    $out .= '<div class="item">' . l($article->title, 'node/' . $nid) . '</div>';
+  }
+  
+  return $out;
 }
 
 
