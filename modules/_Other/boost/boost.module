@@ -1394,7 +1394,8 @@ function boost_deliver_html_page($page_callback_result) {
 
   // Last possible place to send a watchdog message without a shutdown function.
   //if (variable_get('boost_message_debug', BOOST_MESSAGE_DEBUG) && $_boost['args'][0] != 'admin') {
-  if (variable_get('boost_message_debug', BOOST_MESSAGE_DEBUG) && (!isset($_boost['args'][0]) || $_boost['args'][0] != 'admin')) {
+  // a4s fix for Notice: Undefined index: args in boost_deliver_html_page() (line 1396 of /home/gvadmin/public_html/sites/all/modules/_Other/boost/boost.module).
+  if (variable_get('boost_message_debug', BOOST_MESSAGE_DEBUG) && (!isset($_boost['args'][0]) || (isset($_boost['args'][0]) && $_boost['args'][0] != 'admin') )) {
     watchdog('boost', boost_print_r($_boost), array(), WATCHDOG_DEBUG);
   }
 }
