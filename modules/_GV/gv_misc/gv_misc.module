@@ -3015,6 +3015,21 @@ function gv_misc_testPage() {
       $page_prev = FALSE;
     }
   }
+  
+  if ($page_prev !== FALSE) {
+    $page_prev = l('Older posts', $_GET['q'], array('query' => array('page' => $page_prev)));
+  }
+  if ($page_next !== FALSE) {
+    if (!$page_next) {
+      $page_next = l('Newer posts', $_GET['q']);
+    }
+    else {
+      $page_next = l('Newer posts', $_GET['q'], array('query' => array('page' => $page_next)));
+    }
+  }
+  
+  $out .= $page_next . ' ' . $page_prev;
+  
   dpm('page_next = ' . $page_next . ', page_prev = ' . $page_prev);
   
   $query->range($start, $limit);
@@ -3023,7 +3038,6 @@ function gv_misc_testPage() {
   $results = $query->execute()->fetchCol();
   
   dpm($results);
-  
   
   return $out . '<br>End of Test';
 }
