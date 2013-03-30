@@ -3011,6 +3011,9 @@ function gv_misc_testPage() {
   elseif (!empty($_GET['page'])) {
     $page_prev = $_GET['page'] + 1;
     $page_next = $_GET['page'] - 1;
+    if ($corrected) {
+      $page_next = FALSE;
+    }
   }
   dpm('page_prev = ' . $page_prev . ', page_next = ' . $page_next);
   
