@@ -2955,7 +2955,8 @@ function gv_misc_testPage() {
   
   
   $query = db_select('node', 'n')
-        ->fields('n', array('title', 'nid'));
+        //->fields('n', array('title', 'nid'));
+        ->fields('n', array('nid'));
   $query->condition('n.type', 'article');
   $query->condition('n.status', 1);
   $query->orderBy('n.created', 'DESC');
@@ -2969,10 +2970,11 @@ function gv_misc_testPage() {
   
   dpm($_GET);
   
-  //$query->range(0, $limit);
+  $query->range(0, $limit);
   
   
-  $results = $query->execute()->fetchAllAssoc('nid');
+  //$results = $query->execute()->fetchAllAssoc('nid');
+  $results = $query->execute()->fetchCol();
   
   dpm($results);
   
