@@ -2931,7 +2931,51 @@ function gv_misc_testPage_iframe() {
 function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
-  $out .= gv_misc_testPage_iframe();
+  //$out .= gv_misc_testPage_iframe();
+  
+  
+  /*
+  $query = db_select('taxonomy_term_data', 'td');
+  
+  $query->fields('td', array('name', 'tid', 'description'));
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = td.tid');
+  $query->leftJoin('node', 'n', 'n.nid = ti.nid');
+  $query->where('n.nid = ti.nid AND n.type = :type', array(':type' => $content_type))
+        ->addExpression('COUNT(n.nid)', 'count');
+  $query->groupBy('td.name');
+  // Exclude main topics terms -> choose only terms for specific node type.
+  $query->condition('td.vid', $main_topics_voc->vid, '!=');
+  $query->orderBy('count', 'DESC');
+  if ($limit) {
+    $query->range(0, $limit);
+  }
+  $results = $query->execute();
+  */
+  
+  
+  
+  $query = db_select('node', 'n')
+        ->fields('n', array('title', 'nid'));
+  $query->condition('n.type', 'article');
+  $query->condition('n.status', 1);
+  $query->orderBy('n.created', 'DESC');
+  //$query->orderBy('n.title', 'ASC');
+  
+  
+  $countQuery = $query->countQuery();
+  $overal_articles_num = $countQuery->execute()->fetchField();
+  
+  dpm($overal_articles_num);
+  
+  dpm($_GET);
+  
+  //$query->range(0, $limit);
+  
+  
+  $results = $query->execute()->fetchAllAssoc('nid');
+  
+  dpm($results);
+  
   
   return $out . '<br>End of Test';
 }
