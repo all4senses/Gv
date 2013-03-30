@@ -2985,9 +2985,20 @@ function gv_misc_testPage() {
       $start = 4 + ($_GET['page'] * $limit - $limit);
     }
   }
+
+  dpm('start = ' . $start . ', limit = ' . $limit);
+  // Correction for overflows.
+  $corrected = FALSE;
+  while ($start > $overal_articles_num - 1) {
+    $corrected = TRUE;
+    $_GET['page'] -= 1;
+    $start = 4 + ($_GET['page'] * $limit - $limit);
+  }
+  if ($corrected) {
+    dpm('corrected start = ' . $start . ', limit = ' . $limit);
+  }
   
   $query->range($start, $limit);
-  
   
   //$results = $query->execute()->fetchAllAssoc('nid');
   $results = $query->execute()->fetchCol();
