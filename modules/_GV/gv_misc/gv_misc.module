@@ -2969,11 +2969,15 @@ function gv_misc_testPage() {
   dpm($overal_articles_num);
   
   dpm($_GET);
+  
+  $page_next = FALSE;
+  $page_prev = FALSE;
+  
   if (empty($_GET['page'])) {
     // First page.
     $limit = 4;
     $start = 0;
-    
+    $page_prev = 1;
   }
   else {
     $limit = 18;
@@ -2994,9 +2998,21 @@ function gv_misc_testPage() {
     $_GET['page'] -= 1;
     $start = 4 + ($_GET['page'] * $limit - $limit);
   }
+  
+  
   if ($corrected) {
     dpm('corrected start = ' . $start . ', limit = ' . $limit);
   }
+  
+  
+  if (empty($_GET['page']) || (!empty($_GET['page']) && $_GET['page'] === 0)) {
+    $page_prev = 1;
+  }
+  elseif (!empty($_GET['page'])) {
+    $page_prev = $_GET['page'] + 1;
+    $page_next = $_GET['page'] - 1;
+  }
+  dpm('page_prev = ' . $page_prev . ', page_next = ' . $page_next);
   
   $query->range($start, $limit);
   
