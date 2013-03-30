@@ -2972,12 +2972,10 @@ function gv_misc_testPage() {
   if (empty($_GET['page'])) {
     // First page.
     $limit = 4;
-    $limit -= 1;
     $query->range(0, $limit);
   }
   else {
     $limit = 18;
-    $limit -= 1;
     $start = 4;
     $query->range($start, $limit);
   }
