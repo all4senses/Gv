@@ -3041,10 +3041,12 @@ function gv_misc_testPage() {
   
   dpm($nids);
   
+  $out .=  '<div class="view-articles">';
   foreach ($nids as $nid) {
     $node = node_load($nid);
-    $out .= render(node_view($node, 'teaser'));
+    $out .= '<div class="views-row">' . render(node_view($node, 'teaser')) . '</div>';
   }
+  $out .=  '</div>';
   
   return $out . '<br>End of Test';
 }
