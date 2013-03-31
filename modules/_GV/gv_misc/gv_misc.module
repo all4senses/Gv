@@ -3023,10 +3023,10 @@ function gv_misc_testPage() {
   }
   if ($page_next !== FALSE) {
     if (!$page_next) {
-      $page_next = l('‹ Newer Posts', $_GET['q'], array('attributes' => array('class' => 'newer')));
+      $page_next = l('‹ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
     }
     else {
-      $page_next = l('‹ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next)));
+      $page_next = l('‹ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
     }
   }
   
