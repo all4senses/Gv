@@ -3019,18 +3019,18 @@ function gv_misc_testPage() {
   dpm('page_next = ' . $page_next . ', page_prev = ' . $page_prev);
   
   if ($page_prev !== FALSE) {
-    $page_prev = l('Older posts', $_GET['q'], array('query' => array('page' => $page_prev)));
+    $page_prev = l('‹ Older Posts', $_GET['q'], array('query' => array('page' => $page_prev)));
   }
   if ($page_next !== FALSE) {
     if (!$page_next) {
-      $page_next = l('Newer posts', $_GET['q']);
+      $page_next = l('‹ Newer Posts', $_GET['q']);
     }
     else {
-      $page_next = l('Newer posts', $_GET['q'], array('query' => array('page' => $page_next)));
+      $page_next = l('‹ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next)));
     }
   }
   
-  $out .= $page_next . ' ' . $page_prev;
+  
   
   
   
@@ -3056,6 +3056,7 @@ function gv_misc_testPage() {
     $out .= '<div class="views-row' . $class_add . '">' . render(node_view($node, 'teaser')) . '</div>';
   }
   $out .=  '</div>';
+  $out .= $page_next . ' ' . $page_prev;
   
   return $out . '<br>End of Test';
 }
