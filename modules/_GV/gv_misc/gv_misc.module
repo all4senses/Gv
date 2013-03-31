@@ -3042,9 +3042,18 @@ function gv_misc_testPage() {
   dpm($nids);
   
   $out .=  '<div class="view-articles">';
+  $views_row_odd = TRUE;
   foreach ($nids as $nid) {
     $node = node_load($nid);
-    $out .= '<div class="views-row">' . render(node_view($node, 'teaser')) . '</div>';
+    if ($views_row_odd) {
+      $views_row_odd = FALSE;
+      $class_add = ' views-row-odd';
+    }
+    else {
+      $views_row_odd = TRUE;
+      $class_add = '';
+    }
+    $out .= '<div class="views-row' . $class_add . '">' . render(node_view($node, 'teaser')) . '</div>';
   }
   $out .=  '</div>';
   
