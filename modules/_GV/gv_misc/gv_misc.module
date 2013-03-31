@@ -2955,7 +2955,6 @@ function gv_misc_testPage() {
   
   
   $query = db_select('node', 'n')
-        //->fields('n', array('title', 'nid'));
         ->fields('n', array('nid'));
   $query->condition('n.type', 'article');
   $query->condition('n.status', 1);
@@ -2965,10 +2964,6 @@ function gv_misc_testPage() {
   
   $countQuery = $query->countQuery();
   $overal_articles_num = $countQuery->execute()->fetchField();
-  
-  dpm($overal_articles_num);
-  
-  dpm($_GET);
   
   $page_next = FALSE;
   $page_prev = FALSE;
@@ -2990,7 +2985,8 @@ function gv_misc_testPage() {
     }
   }
 
-  dpm('start = ' . $start . ', limit = ' . $limit);
+  //dpm('start = ' . $start . ', limit = ' . $limit);
+
   // Correction for overflows.
   $corrected = FALSE;
   while ($start > $overal_articles_num - 1) {
@@ -3000,9 +2996,9 @@ function gv_misc_testPage() {
   }
   
   
-  if ($corrected) {
-    dpm('corrected start = ' . $start . ', limit = ' . $limit . ', new cur page = ' . $_GET['page']);
-  }
+//  if ($corrected) {
+//    dpm('corrected start = ' . $start . ', limit = ' . $limit . ', new cur page = ' . $_GET['page']);
+//  }
   
   
   if (empty($_GET['page']) || (!empty($_GET['page']) && $_GET['page'] === 0)) {
@@ -3016,8 +3012,6 @@ function gv_misc_testPage() {
     }
   }
   
-  dpm('page_next = ' . $page_next . ', page_prev = ' . $page_prev);
-  
   if ($page_prev !== FALSE) {
     $page_prev = l('Older Posts ›', $_GET['q'], array('query' => array('page' => $page_prev)));
   }
@@ -3030,16 +3024,9 @@ function gv_misc_testPage() {
     }
   }
   
-  
-  
-  
-  
   $query->range($start, $limit);
   
-  //$results = $query->execute()->fetchAllAssoc('nid');
   $nids = $query->execute()->fetchCol();
-  
-  dpm($nids);
   
   $out .=  '<div class="view-articles">';
   $views_row_odd = TRUE;
