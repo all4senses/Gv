@@ -591,6 +591,10 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
  */
 function gv_blocks_libraryList() {
  
+  if (!empty($_GET['page'])) {
+    return NULL;
+  }
+  
   $query = db_select('node', 'n')
         ->fields('n', array('title', 'nid'));
   $query->condition('n.type', 'article');
