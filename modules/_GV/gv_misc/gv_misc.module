@@ -25,6 +25,14 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['go/%'] = array(
+    'title' => 'Redirect to an external link',
+    'page callback' => 'gv_misc_goToExternalUrl2',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  // Old version, left for old existing links.
   $items['goto'] = array(
     'title' => 'Redirect to an external link',
     'page callback' => 'gv_misc_goToExternalUrl',
@@ -32,12 +40,7 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   ); 
   
-  $items['go/%'] = array(
-    'title' => 'Redirect to an external link',
-    'page callback' => 'gv_misc_goToExternalUrl2',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  ); 
+   
   
   $items['click'] = array(
     'title' => 'Track a click',
@@ -388,7 +391,7 @@ function gv_misc_goToExternalUrl2() {
               ))
               ->execute();
             
-            drupal_goto( (strpos($url, 'http') !== FALSE ? $url : 'http://' . $url), array('external' => TRUE));
+            drupal_goto( (strpos($url, 'http') !== FALSE ? $url : 'http://' . $url), array('external' => TRUE), 301);
         }
      
     
@@ -431,7 +434,7 @@ function gv_misc_goToExternalUrl() {
         $path = 'go/' . str_replace('reviews/', '', $query->execute()->fetchField());
 
         if ($path) {
-          drupal_goto($path);
+          drupal_goto($path, array(), 301);
         }
         else {
           drupal_goto(@$_SERVER['HTTP_REFERER']);
