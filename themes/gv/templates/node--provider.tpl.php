@@ -177,6 +177,10 @@
               <div class="data tabs">
                 
                 <ul>
+                  <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
+                    <li><a href="#tabs-0"><?php echo t('!p User Reviews', array('!p' => isset($node->field_p_name['und'][0]['value']) ? $node->field_p_name['und'][0]['value'] : 'Provider' )); ?></a></li>
+                  <?php endif; ?>
+                    
                   <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ /*. '</span>'*/ : t(' Provider') )); ?></a></li>
                   <?php 
                   /*
@@ -231,6 +235,21 @@
                     */
                   ?>
                 </ul>
+                
+                <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
+                  <div id="tabs-0">
+                    <div class="reviews">
+                      <div class="header">
+                        <a id="reviews"></a>
+                        <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
+                      </div>
+
+                      <?php echo render($content['reviews_entity_view_1']); ?>
+
+                    </div>
+                  </div>
+                <?php endif; ?>
+                
                 <div id="tabs-1">
                   <?php echo render($content['body']); ?>
                 </div>
@@ -376,7 +395,7 @@
               
               
               
-          <?php else: ?> <!-- if ($page): -->
+          <?php else: ?> <!-- if (!$page): -->
           
               <div class="logo">
                 <?php
@@ -407,15 +426,15 @@
         <footer>
 
           <?php 
-            if (isset($content['field_topics'])) {
-              $tags = NULL;
-              foreach (element_children($content['field_topics']) as $key) {
-                $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
-              }
-              if ($tags) {
-                echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
-              }
-            }
+//            if (isset($content['field_topics'])) {
+//              $tags = NULL;
+//              foreach (element_children($content['field_topics']) as $key) {
+//                $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
+//              }
+//              if ($tags) {
+//                echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
+//              }
+//            }
             //print render($content['field_topics']); 
             //print render($content['links']);
 
