@@ -2042,6 +2042,7 @@ function gv_misc_getShareSrcThemed_fromUri($uri) {
  * Returns recommendations counts for pos and neg.
  */
 function gv_misc_getVotesRecommendPosVsNeg($nid) {
+  
     $query = db_select('votingapi_vote', 'v')
       ->fields('v', array('value'));
     $query->condition('entity_id', $nid);
@@ -2051,12 +2052,19 @@ function gv_misc_getVotesRecommendPosVsNeg($nid) {
     //$results = $query->execute()->fetchAllAssoc('vote_id');
     $results = $query->execute()->fetchCol();
     dpm($results);
-    $votes = array();
-//    foreach ($results as $result) {
-//      //$votes[] = array('vote_id' => $result->vote_id);
-//      $votes[] = (array) $result;
-//    }
-    return $votes;
+    $recommend = array('positive' => 0, 'negative' => 0);
+    foreach ($results as $result) {
+      if ($result) {
+        $recommend['positive'] += 1;
+      }
+      else {
+        $recommend['negative'] += 1;
+      }
+    }
+    
+    dpm($recommend);
+    
+    return $recommend;
 }
 
 
