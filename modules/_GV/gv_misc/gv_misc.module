@@ -2049,9 +2049,8 @@ function gv_misc_getVotesRecommendPosVsNeg($nid) {
     $query->condition('value_type', 'percent');
     $query->condition('tag', 'recommend');
     
-    //$results = $query->execute()->fetchAllAssoc('vote_id');
     $results = $query->execute()->fetchCol();
-    dpm($results);
+
     $recommend = array('positive' => 0, 'negative' => 0);
     foreach ($results as $result) {
       if ($result) {
@@ -2061,9 +2060,7 @@ function gv_misc_getVotesRecommendPosVsNeg($nid) {
         $recommend['negative'] += 1;
       }
     }
-    
-    dpm($recommend);
-    
+        
     return $recommend;
 }
 
