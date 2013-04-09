@@ -239,10 +239,7 @@
                 <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
                   <div id="tabs-0">
                     <div class="reviews">
-                      <div class="header">
                         <a id="reviews"></a>
-                        <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
-                      </div>
 
                       <?php echo render($content['reviews_entity_view_1']); ?>
 
@@ -450,7 +447,7 @@
   <div class="shadow"></div>
   
   
-  <?php if (0) /*($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1'])*/: ?>
+  <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
     <div class="reviews">
       <div class="header">
         <a id="reviews"></a>
