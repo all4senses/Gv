@@ -449,7 +449,7 @@
   
   <?php 
   global $user;
-  if ($user->uid == 1) /*($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1'])*/: ?>
+  if (0) /*($user->uid == 1)*/ /*($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1'])*/: ?>
     <div class="reviews">
       <div class="header">
         <a id="reviews"></a>
