@@ -504,8 +504,10 @@ function gv_html_head_alter(&$head_elements) {
   $head_elements['metatag_og_description'] = $head_elements['metatag_description'];
   $head_elements['metatag_og_description']['#id'] = 'metatag_og_description';
   $head_elements['metatag_og_description']['#name'] = 'og:description';
+  $head_elements['metatag_og_description']['#weight'] = 0;
   
-  dpm($head_elements);
+  
+  //dpm($head_elements);
   
 }
 
