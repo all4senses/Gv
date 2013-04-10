@@ -501,11 +501,6 @@ function gv_html_head_alter(&$head_elements) {
   }
   
   // Add a OG:Description metatag
-//  $head_elements['metatag_og_description'] = $head_elements['metatag_description'];
-//  $head_elements['metatag_og_description']['#id'] = 'metatag_og_description';
-//  $head_elements['metatag_og_description']['#name'] = 'og:description';
-//  $head_elements['metatag_og_description']['#weight'] = 0;
-  
   $head_elements['metatag_og_description'] = array(
     '#type' => 'html_tag',
     '#tag' => 'meta',
