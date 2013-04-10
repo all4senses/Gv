@@ -500,7 +500,7 @@ function gv_html_head_alter(&$head_elements) {
     unset($head_elements['news_keywords']);
   }
   
-  //dpm($head_elements);
+  dpm($head_elements);
   
 }
 
