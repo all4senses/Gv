@@ -500,6 +500,11 @@ function gv_html_head_alter(&$head_elements) {
     unset($head_elements['news_keywords']);
   }
   
+  // Add a OG:Description metatag
+  $head_elements['metatag_og_description'] = $head_elements['metatag_description'];
+  $head_elements['metatag_og_description']['#id'] = 'metatag_og_description';
+  $head_elements['metatag_og_description']['#name'] = 'og:description';
+  
   dpm($head_elements);
   
 }
