@@ -495,7 +495,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 
 
 /**
- * Returns block with paginated articles pages with 4 teasers on the first page and 18 pages on the rest of pages.
+ * Returns block with cached providers table.
  */
 function gv_blocks_getProvidersTableFromViews_withCaching() {
 
@@ -503,7 +503,7 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
     $block_data = array('module' => 'views', 'delta' => 'providers-block_providers_list_table', 'shadow' => FALSE);
     $providers = gv_blocks_getBlockThemed($block_data);
     variable_set('gv_providers_table', $providers);
-    dpm('new generation');
+    //dpm('new generation');
   }
  
   return $providers;
