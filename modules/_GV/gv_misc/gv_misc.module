@@ -3371,14 +3371,18 @@ function gv_misc_SendRequestToRingCentral($submission) {
       
   // Set initial fields.
   $data_to = array(
-    'lead_source' => 'Lead Generation',
+    
+    //'lead_source' => 'Lead Generation',
+    //'BMID' => 'GETVOIPHQL',
+     
+    'lead_source' => 'GETVOIPHQL',
+    //'BMID' => 'GETVOIPHQL',
+    
     'oid' => '00D80000000aRUX',
-    'BMID' => 'GETVOIPHQL',
-
-    'retURL' =>  'http://www.ringcentral.com',
-      
     'Campaign_ID' => '70180000000auP8',
     //'member_status' => 'Responded',
+      
+    'retURL' =>  'http://www.ringcentral.com',
       
     'debug' => 1,
     'debugEmail' => 'wilson.chu@ringcentral.com',//'all4senses@gmail.com',
