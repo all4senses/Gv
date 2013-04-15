@@ -3461,21 +3461,33 @@ function gv_misc_SendRequestToNextiva($submission) {
   if ($submission['Phones needed'] == 'More than 50') {
     return NULL;
   }
-    
-      $map_main = array(
-        'First Name' => 'first_name',
-        'Last Name' => 'last_name',
-        'Phones needed' => 'employees', // '00N70000002xLFJ', // Number of Locations  ///////////  '00N70000002LdcG', // Number of Phone Lines  
-        //'Quote type' => '00N70000002Lgx0', // Comments
-        //'Buying Time Frame' => '00N70000002eDO6', 
-        'Company' => 'company',
-        'Email' => 'email',
-        //'Website' => 'URL',
-        'Phone #' => 'phone',
-      );
- 
+  
+  /*
+  $map_main = array(
+    'First Name' => 'first_name',
+    'Last Name' => 'last_name',
+    'Phones needed' => 'employees', // '00N70000002xLFJ', // Number of Locations  ///////////  '00N70000002LdcG', // Number of Phone Lines  
+    //'Quote type' => '00N70000002Lgx0', // Comments
+    //'Buying Time Frame' => '00N70000002eDO6', 
+    'Company' => 'company',
+    'Email' => 'email',
+    //'Website' => 'URL',
+    'Phone #' => 'phone',
+  );
+ */
+  $map_main = array(
+    'First Name' => 'FirstName',
+    'Last Name' => 'LastName',
+    'Phones needed' => 'Number of Phone Lines',
+    //'Quote type' => '00N70000002Lgx0', // Comments
+    'Buying Time Frame' => 'Notes__c', 
+    'Company' => 'Company',
+    'Email' => 'Email',
+    'Phone #' => 'Phone',
+  );
       
   // Set initial fields.
+  /*
   $data_to = array(
     'lead_source' => 'GetVoIP',
     'oid' => '00D700000009mLY',
@@ -3495,15 +3507,21 @@ function gv_misc_SendRequestToNextiva($submission) {
     //'00N70000002xLFT' => 'Other',
     '00N70000002Lgx0' => 'N/A', // Comments
   );
-  
+  */
+  $data_to = array(
+    'LeadSource' => 'Get VoIP',
+  );
   
   // Map data to remote vars names.
   foreach ($map_main as $getvoip_key => $remote_key) {
     $data_to[$remote_key] = $submission[$getvoip_key];
   }
   
-  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   //$url = 'http://getvoip.com/request-test';
+  //$url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  $url = 'http://business-voip.nextiva.com/index.php/leadCapture/save';
+  
+  
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
