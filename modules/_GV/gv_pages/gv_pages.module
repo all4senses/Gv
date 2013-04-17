@@ -2010,6 +2010,141 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
             
             
+            
+            
+            
+      $provider_options = array(
+          'Provider Info' => array(
+              'Overall Rating' => 'textfield',
+              'Year Founded' => 'textfield',
+              'Headquarters Location' => 'textfield',
+              'Service Location' => 'textfield',
+              'Service Type Availability' => 'textfield',
+              'Popular Service Plan' => 'textfield',
+              'Money Back Guarantee' => 'textfield',
+          ),
+          
+          'Services & Pricing' => array(
+              'Monthly Cost of Cheapest Service' => 'textfield',
+              'Amount of Lines Per Price Tier' => 'textarea',
+              'Month to Month Option' => 'checkbox',
+              'Metered Plans' => 'textfield',
+              'Requires Contract' => 'checkbox',
+              'Contract Length (in yrs)' => 'textfield',
+              'Customizable Plans' => 'checkbox',
+              'Activation Fee' => 'textfield',
+              'Setup Fee' => 'textfield',
+              'Number Porting Fee' => 'textfield',
+              'Shipping' => 'textfield',
+              'Equipment Leasing' => 'checkbox',
+              'Mobile App' => 'checkbox',
+              'Own Softphone' => 'checkbox',
+              'Works with 3rd party Softphones' => 'checkbox',
+              'Fax Options' => 'checkbox',
+              'Fax Pricing' => 'textfield',
+              'Desktop Integration' => 'checkbox',
+              'IP Phones Supported' => 'textfield',
+              'IP Phones Non Supported' => 'textfield',
+              'Toll Free Numbers' => 'textfield',
+              'Local Numbers' => 'textfield',
+              'Vanity Numbers' => 'textfield',
+              'BYOD Option' => 'checkbox',
+          ),
+          
+          
+          'Available Features (some features cost extra, as per provider rates)' => array(
+              'Advanced Call Forwarding' => 'checkbox',
+              'Anonymous Call Rejection' => 'checkbox',
+              'Auto Attendant' => 'checkbox',
+              'Busy Lamp Field' => 'checkbox',
+              'Call Queuing' => 'checkbox',
+              'Call Me Now' => 'checkbox',
+              'Call Notifications' => 'checkbox',
+              'Call Parking' => 'checkbox',
+              'Call Recording' => 'checkbox',
+              'Call Return' => 'checkbox',
+              'Call Waiting' => 'checkbox',
+              'Caller ID' => 'checkbox',
+              'Conference Calls' => 'checkbox',
+              'Dial-by-name Directory' => 'checkbox',
+              'Directed Call Pickup' => 'checkbox',
+              'Do Not Disturb' => 'checkbox',
+              'E911' => 'checkbox',
+              'Find Me/Follow Me' => 'checkbox',
+              'Group Paging' => 'checkbox',
+              'Hoteling Guest' => 'checkbox',
+              'Hunt Group' => 'checkbox',
+              'IVR' => 'checkbox',
+              'Line Mirroring' => 'checkbox', 
+              'On-Hold Music' => 'checkbox',
+              'Privacy Options' => 'checkbox',
+              'Push To Talk' => 'checkbox',
+              'Selective Call Acceptance' => 'checkbox',
+              'Selective Call Rejection' => 'checkbox',
+              'Shared Call Appearance' => 'checkbox',
+              'Simultaneous Ring' => 'checkbox',
+              'Switchboard Software for Live Receptionist' => 'checkbox',
+              'Three-way Calling' => 'checkbox',
+              'Unlimited Extensions' => 'checkbox',
+              'Voicemail Transcriptions' => 'checkbox',
+              'Virtual Extensions' => 'checkbox',
+              'Virtual Numbers' => 'checkbox',
+          ),
+          
+          'Cloud/CRM Integration' => array(
+              'SalesForce' => 'checkbox',
+              'Outlook' => 'checkbox',
+              'Sugar' => 'checkbox',
+          ),
+          
+          'Support' => array(
+              'Hours' => 'textfield',
+              'Telephone Support' => 'checkbox',
+              'Email Support' => 'checkbox',
+              'Instant Chat' => 'checkbox',
+              '24/7 Call-in Support' => 'checkbox',
+              'FAQs Section' => 'checkbox',
+              'Video Tutorials' => 'checkbox',
+              'E-Guides' => 'checkbox',
+              'Online Ticket Submissions' => 'checkbox',
+        ),
+          
+      );
+      
+      
+      $form['provider_options'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Provider options',
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#tree' => TRUE,
+        '#weight' => 11,
+      );
+            foreach ($provider_options as $options_set => $options_data) {
+              
+                  $form['provider_options'][$options_set] = array(
+                    '#type' => 'fieldset',
+                    '#title' => $options_set,
+                    '#collapsible' => TRUE,
+                    '#collapsed' => TRUE,
+                  );
+      
+                  foreach ($options_data as $option_title => $option_type) {
+                    
+                      $form['provider_options'][$options_set][$option_title] = array(
+                        '#title' => $option_title,
+                        '#type' => $option_type,
+                        '#default_value' => isset($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title] : NULL,
+                      );
+                    
+                  }
+                  
+            }            
+            
+            
+            
+            
+            
       $service_types = unserialize(SERVICE_TYPES);
       $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
       $fee_types = unserialize(FEE_TYPES);
@@ -2027,7 +2162,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       $form['s'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Provider services'),
+        '#title' => 'Provider services',
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
         '#tree' => TRUE,
@@ -2037,7 +2172,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               
               $form['s'][$service_type_key] = array(
                 '#type' => 'fieldset',
-                '#title' => t("$service_type_title serviсes"),
+                '#title' => "$service_type_title serviсes",
                 '#collapsible' => TRUE,
                 '#collapsed' => TRUE,
                 '#states' => array(
@@ -2056,7 +2191,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     
                     $form['s'][$service_type_key][$service_description_key] = array(
                       '#type' => 'textfield',
-                      '#title' => t($service_description_title),
+                      '#title' => $service_description_title,
                       //'#default_value' => isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '',
                       '#default_value' => $load_key == 's' 
                                            ?
