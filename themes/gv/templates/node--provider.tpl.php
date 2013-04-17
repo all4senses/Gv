@@ -278,7 +278,7 @@
                           $row_class = 'odd';
                         }
                           
-                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : '') . '">' . $option_value . '</td></tr>';
+                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '">' . $option_value . '</td></tr>';
                       }
                     }
                     echo '<table class="specs"><tbody>' . $provider_options . '</tbody></table>';
