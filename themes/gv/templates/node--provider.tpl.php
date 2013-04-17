@@ -262,7 +262,7 @@
                     
                     foreach ($node->p_data['provider_options'] as $options_set => $options_data) {
                       
-                      $provider_options .= '<tr class="caption"><td>' . $options_set . '</td></tr>';
+                      $provider_options .= '<tr></tr><tr colspan="2" class="caption"><td>' . $options_set . '</td></tr>';
                       
                       $odd = TRUE;
                       
@@ -278,7 +278,7 @@
                           $row_class = 'odd';
                         }
                           
-                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value">' . $option_value . '</td></tr>';
+                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : '') . '">' . $option_value . '</td></tr>';
                       }
                     }
                     echo '<table class="specs"><tbody>' . $provider_options . '</tbody></table>';
