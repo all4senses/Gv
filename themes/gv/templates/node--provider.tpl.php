@@ -256,7 +256,7 @@
                 <div id="tabs-2">
                   <?php 
                     
-                    dpm($node->p_data['provider_options']);
+                    //dpm($node->p_data['provider_options']);
                     
                     $provider_options = '';
                     
