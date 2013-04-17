@@ -262,7 +262,7 @@
                     
                     foreach ($node->p_data['provider_options'] as $options_set => $options_data) {
                       
-                      $provider_options .= '<tr><td class="caption">' . $options_set . '</td></tr>';
+                      $provider_options .= '<tr class="caption"><td>' . $options_set . '</td></tr>';
                       
                       $odd = TRUE;
                       
