@@ -2138,10 +2138,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       );
                       
                       if ($option_type == 'checkbox') {
-                        $form['provider_options'][$options_set][$option_title . ' text'] = array(
+                        $form['provider_options'][$options_set][$option_title . ' -text-'] = array(
                           '#title' => $option_title . ' text',
                           '#type' => 'textfield',
-                          '#default_value' => isset($p_data['provider_options'][$options_set][$option_title . ' text']) ? $p_data['provider_options'][$options_set][$option_title . ' text'] : NULL,
+                          '#default_value' => isset($p_data['provider_options'][$options_set][$option_title . ' -text-']) ? $p_data['provider_options'][$options_set][$option_title . ' -text-'] : NULL,
+                            
+                            '#states' => array(
+                                  'invisible' => array(
+                                      //':input[value="' . gv_misc_refineServiceTypeKey_Reverse($service_type_key) . '"]' => array('checked' => FALSE),
+                                      ':input[name="' . 'provider_options[Services & Pricing][Month to Month Option]' . '"]' => array('checked' => FALSE),
+                                      
+                                ),
+                            ),
+                            
+                            
+                            
                         );
                       }
                     
