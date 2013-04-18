@@ -2144,7 +2144,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         $form['provider_options'][$options_set][$option_title]['#suffix'] = '</div>';
                         
                         $form['provider_options'][$options_set][$option_title . ' -text-'] = array(
-                          '#title' => $option_title . ' -text-',
+                          //'#title' => $option_title . ' -text-',
                           '#type' => 'textfield',
                           '#default_value' => isset($p_data['provider_options'][$options_set][$option_title . ' -text-']) ? $p_data['provider_options'][$options_set][$option_title . ' -text-'] : NULL,
                             
