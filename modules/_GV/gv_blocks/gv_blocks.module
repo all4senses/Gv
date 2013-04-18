@@ -520,6 +520,31 @@ function gv_blocks_compareProviders() {
   
   dpm($p_names);
   
+  foreach ($p_names as $p_name) {
+    
+    $query = db_select('field_data_field_p_name', 'pn');
+    $query->join('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
+    $query->fields('pd', array('field_p_data_value', 'entity_id'))
+      ->condition('pn.field_p_name_value', $p_name);
+    $results = $query->execute()->fetchAllAssoc('entity_id');
+  }
+  
+  dpm($results);
+  
+//  $query = db_select('node', 'n');
+//    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
+//    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
+//    $query->fields('n', array('nid', 'title'))  
+//          //->fields('pt', array('field_p_types_value'))
+//          ->fields('pn', array('field_p_name_value')) 
+//          ->condition('n.type', 'provider')
+//          ->condition('n.status', 1); 
+//    $result = $query->execute(); 
+
+    
+    
+    
+  
   return '<div>test</div>';
 }
 
