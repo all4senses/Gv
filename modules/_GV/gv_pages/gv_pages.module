@@ -2150,8 +2150,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         'function' => 'average',
       );
       $votes = votingapi_select_results($criteria);
-            
+     
+      foreach ($votes as $vote) {
+        if ($vote['tag'] == 'overall') {
+          $overall_vote = number_format($vote['value'] * 0.05, 1);
+          break;
+        }
+      }
+      
       dpm($votes);
+      dpm($overall_vote);
+      
             
       $service_types = unserialize(SERVICE_TYPES);
       $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
