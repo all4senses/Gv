@@ -301,7 +301,13 @@
                           $row_class = 'odd';
                         }
                           
-                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '">' . $option_value . '</td></tr>';
+                        if ($option_value == 'Yes' && !empty($options_data[$option_title . ' -text-'])) {
+                          $additional_text = ' <span>' . $options_data[$option_title . ' -text-'] . '</span>';
+                        }
+                        else {
+                          $additional_text = '';
+                        }
+                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '">' . $option_value . $additional_text . '</td></tr>';
                       }
                     }
                     echo '<table class="specs"><tbody>' . $provider_options . '</tbody></table>';
