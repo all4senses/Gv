@@ -2131,6 +2131,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
                   foreach ($options_data as $option_title => $option_type) {
                     
+                    
                       $form['provider_options'][$options_set][$option_title] = array(
                         '#title' => $option_title,
                         '#type' => $option_type,
@@ -2138,6 +2139,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       );
                       
                       if ($option_type == 'checkbox') {
+                        
+                        $form['provider_options'][$options_set][$option_title]['#prefix'] = '<div style="overflow: hidden;"><div style="float: left;">';
+                        $form['provider_options'][$options_set][$option_title]['#suffix'] = '</div>';
+                        
                         $form['provider_options'][$options_set][$option_title . ' -text-'] = array(
                           '#title' => $option_title . ' -text-',
                           '#type' => 'textfield',
@@ -2150,7 +2155,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
                               ),
                           ),
-                          '#attributes' => array('class' => array('xxx'), 'style' => 'float: right;'),
+                          //'#attributes' => array('class' => array('xxx'), 'style' => 'float: right;'),
+                          '#prefix' => '<div style="float: right;">',
+                          '#suffix' => '</div></div>',
                             
                             
                             
