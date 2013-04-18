@@ -520,21 +520,25 @@ function gv_blocks_compareProviders() {
   
   dpm($p_names);
   
+  
+
+  $query = db_select('field_data_field_p_name', 'pn');
+  $query->join('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
+  $query->fields('pd', array('field_p_data_value', 'entity_id'));
+  $query->fields('pn', array('field_p_name_value'));
+  $db_or = db_or();
+
   foreach ($p_names as $p_name) {
-    
-    $query = db_select('field_data_field_p_name', 'pn');
-    $query->join('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
-    $query->fields('pd', array('field_p_data_value', 'entity_id'));
-    $query->fields('pn', array('field_p_name_value'));
-    $db_or = db_or();
-            
-    foreach ($p_names as $p_name) {
-      $db_or->condition('pn.field_p_name_value', $p_name);
-    }
-    
-    $query->condition($db_or);
-      
-    $results = $query->execute()->fetchAllAssoc('entity_id');
+    $db_or->condition('pn.field_p_name_value', $p_name);
+  }
+
+  $query->condition($db_or);
+
+  $results = $query->execute()->fetchAllAssoc('entity_id');
+  
+  foreach ($results as $nid => $provider) {
+    $d_pada = unserialize($provider->field_p_data_value);
+    dpm($d_pada);
   }
   
   dpm($results);
