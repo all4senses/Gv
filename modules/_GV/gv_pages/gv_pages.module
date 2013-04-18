@@ -2011,8 +2011,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             
             
-            
-            
+      $provider_options = unserialize(PROVIDER_OPTIONS);
+      /*      
       $provider_options = array(
           'Provider Info' => array(
               'Overall Rating' => 'textfield',
@@ -2110,7 +2110,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         ),
           
       );
-      
+      */
       
       $form['provider_options'] = array(
         '#type' => 'fieldset',

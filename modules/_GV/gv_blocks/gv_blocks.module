@@ -536,55 +536,58 @@ function gv_blocks_compareProviders() {
 
   $results = $query->execute()->fetchAllAssoc('entity_id');
   
+  foreach ($results as $nid => $provider) {
+    $providers[$nid] = array('nid' => $provider->entity_id, 'p_name' => $provider->field_p_name_value, 'p_data' => unserialize($provider->field_p_data_value));
+  }
   
   $out = '<table class="specs"><tbody>';
   
-      $out .= '<tr class="logos">';
-      foreach ($results as $nid => $provider) {
-        $d_pada = unserialize($provider->field_p_data_value);
+      $out .= '<tr class="logos"><td>Logos</td>';
+      foreach ($providers as $nid => $provider) {
+        //$provider['d_pada'] = unserialize($provider->field_p_data_value);
         $out .= '<td>';
         if (!empty($d_pada['logo']['i_logo_uri'])) {
           $image_style_name = 'logo_provider_chart_main';
-          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $d_pada['logo']['i_logo_uri'], 'alt' =>  $d_pada['logo']['i_logo_alt'], 'title' =>  $d_pada['logo']['i_logo_title'] ));
-          $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
+          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['d_pada']['logo']['i_logo_uri'], 'alt' =>  $provider['d_pada']['logo']['i_logo_alt'], 'title' =>  $provider['d_pada']['logo']['i_logo_title'] ));
+          $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
         }
         $out .= '</td>';
       }
       $out .= '</tr>';
 
 
-      $out .= '<tr class="ratings">';
-      foreach ($results as $nid => $provider) {
-        $d_pada = unserialize($provider->field_p_data_value);
+      $out .= '<tr class="ratings"><td>Ratings</td>';
+      foreach ($providers as $nid => $provider) {
+        
         $out .= '<td>';
 
-        $criteria = array(
-          'entity_type' => 'node',
-          'entity_id' => $provider->entity_id,
-          'function' => 'average',
-        );
-        $votes = votingapi_select_results($criteria);
+            $criteria = array(
+              'entity_type' => 'node',
+              'entity_id' => $provider['nid'],
+              'function' => 'average',
+            );
+            $votes = votingapi_select_results($criteria);
 
-        foreach ($votes as $vote) {
-          if ($vote['tag'] == 'overall') {
-            $p_vote_overall = number_format($vote['value'] * 0.05, 1);
-          }
-          elseif ($vote['tag'] == 'recommend') {
-            $p_vote_recommend = $vote['value'];
-          }
-          else {
-            //$p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
-            $p_votes[$vote['tag']] = $vote['value'];
-          }
-        }
+            foreach ($votes as $vote) {
+              if ($vote['tag'] == 'overall') {
+                $p_vote_overall = number_format($vote['value'] * 0.05, 1);
+              }
+              elseif ($vote['tag'] == 'recommend') {
+                $p_vote_recommend = $vote['value'];
+              }
+              else {
+                //$p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
+                $p_votes[$vote['tag']] = $vote['value'];
+              }
+            }
 
-        $v_max_height = 100;
-        $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
-        $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
-        foreach ($p_votes as $p_vote_title => $p_vote_value) {
-          $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
-        }
-        $out .= '</div>';
+            $v_max_height = 100;
+            $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
+            $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
+            foreach ($p_votes as $p_vote_title => $p_vote_value) {
+              $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
+            }
+            $out .= '</div>';
 
 
         $out .= '</td>';
@@ -593,6 +596,55 @@ function gv_blocks_compareProviders() {
   
       
       
+      
+      
+      $provider_options = unserialize(PROVIDER_OPTIONS);
+      
+      
+      
+      
+      foreach ($provider_options as $options_set => $options_data) {
+                      
+        $provider_options .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+
+        
+        
+        $odd = TRUE;
+        foreach ($options_data as $option_title => $option_type) {
+          
+          $option_title = str_replace('Num ', '# ', $option_title);
+          
+          if ($odd) {$odd = FALSE; $row_class = 'even';} else {$odd = TRUE; $row_class = 'odd';}
+          
+          $out .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td>';
+          
+          foreach ($providers as $nid => $provider) {
+            
+              $out .= '<tr class="' . $row_class . '">';
+              
+              
+              $option_value = $provider['p_data']['providers_options'][$options_set][$option_title];
+              
+              $option_value = (is_int($option_value) ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
+              
+
+              if ($option_value == 'Yes' && !empty($options_data[$option_title . ' -text-'])) {
+                $additional_text = ' <span>' . $options_data[$option_title . ' -text-'] . '</span>';
+              }
+              else {
+                $additional_text = '';
+              }
+              
+              $out .= '<td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. (is_int($option_value) ? ' class="check"' : '') . '>' . $option_value . '</div><span>' . $additional_text . '</span></td>';
+
+          }
+          
+          $out .= '</tr>';
+          
+          //$provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
+        }
+      }
+
       
 //      $out .= '<tr class="ratings">';
 //      foreach ($results as $nid => $provider) {
