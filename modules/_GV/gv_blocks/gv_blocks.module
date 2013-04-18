@@ -536,50 +536,136 @@ function gv_blocks_compareProviders() {
 
   $results = $query->execute()->fetchAllAssoc('entity_id');
   
-  $out = '';
-  foreach ($results as $nid => $provider) {
-    $d_pada = unserialize($provider->field_p_data_value);
-    dpm($d_pada);
-    if (!empty($d_pada['logo']['i_logo_uri'])) {
-        
-        $image_style_name = 'logo_provider_chart_main';
-        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $d_pada['logo']['i_logo_uri'], 'alt' =>  $d_pada['logo']['i_logo_alt'], 'title' =>  $d_pada['logo']['i_logo_title'] ));
+  
+  $out = '<table class="specs"><tbody>';
+  
+      $out .= '<tr class="logos">';
+      foreach ($results as $nid => $provider) {
+        $d_pada = unserialize($provider->field_p_data_value);
+        $out .= '<td>';
+        if (!empty($d_pada['logo']['i_logo_uri'])) {
+          $image_style_name = 'logo_provider_chart_main';
+          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $d_pada['logo']['i_logo_uri'], 'alt' =>  $d_pada['logo']['i_logo_alt'], 'title' =>  $d_pada['logo']['i_logo_title'] ));
+          $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
+        }
+        $out .= '</td>';
+      }
+      $out .= '</tr>';
 
-        $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
-      }
-      
-      $criteria = array(
-        'entity_type' => 'node',
-        'entity_id' => $provider->entity_id,
-        'function' => 'average',
-      );
-      $votes = votingapi_select_results($criteria);
-     
-      foreach ($votes as $vote) {
-        if ($vote['tag'] == 'overall') {
-          $p_vote_overall = number_format($vote['value'] * 0.05, 1);
+
+      $out .= '<tr class="ratings">';
+      foreach ($results as $nid => $provider) {
+        $d_pada = unserialize($provider->field_p_data_value);
+        $out .= '<td>';
+
+        $criteria = array(
+          'entity_type' => 'node',
+          'entity_id' => $provider->entity_id,
+          'function' => 'average',
+        );
+        $votes = votingapi_select_results($criteria);
+
+        foreach ($votes as $vote) {
+          if ($vote['tag'] == 'overall') {
+            $p_vote_overall = number_format($vote['value'] * 0.05, 1);
+          }
+          elseif ($vote['tag'] == 'recommend') {
+            $p_vote_recommend = $vote['value'];
+          }
+          else {
+            //$p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
+            $p_votes[$vote['tag']] = $vote['value'];
+          }
         }
-        elseif ($vote['tag'] == 'recommend') {
-          $p_vote_recommend = $vote['value'];
+
+        $v_max_height = 100;
+        $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
+        $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
+        foreach ($p_votes as $p_vote_title => $p_vote_value) {
+          $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
         }
-        else {
-          //$p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
-          $p_votes[$vote['tag']] = $vote['value'];
-        }
+        $out .= '</div>';
+
+
+        $out .= '</td>';
       }
+      $out .= '</tr>';
+  
       
       
-        
-      $v_max_height = 100;
-      $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
-      $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
-      foreach ($p_votes as $p_vote_title => $p_vote_value) {
-        $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
-      }
-      $out .= '</div>';
       
-      dpm($p_votes);
-  }
+//      $out .= '<tr class="ratings">';
+//      foreach ($results as $nid => $provider) {
+//        $d_pada = unserialize($provider->field_p_data_value);
+//        $out .= '<td>';
+//
+//
+//        $out .= '</td>';
+//      }
+//      $out .= '</tr>';
+      
+      
+  $out .= '</tbody></table>';
+  
+  
+  
+/*  
+//  foreach ($results as $nid => $provider) {
+    
+    
+    //dpm($d_pada);
+
+    
+//    if (!empty($d_pada['logo']['i_logo_uri'])) {
+//        
+//      $image_style_name = 'logo_provider_chart_main';
+//      $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $d_pada['logo']['i_logo_uri'], 'alt' =>  $d_pada['logo']['i_logo_alt'], 'title' =>  $d_pada['logo']['i_logo_title'] ));
+//
+//      $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
+//    }
+
+    
+    
+    
+    
+    
+//    $criteria = array(
+//      'entity_type' => 'node',
+//      'entity_id' => $provider->entity_id,
+//      'function' => 'average',
+//    );
+//    $votes = votingapi_select_results($criteria);
+//
+//    foreach ($votes as $vote) {
+//      if ($vote['tag'] == 'overall') {
+//        $p_vote_overall = number_format($vote['value'] * 0.05, 1);
+//      }
+//      elseif ($vote['tag'] == 'recommend') {
+//        $p_vote_recommend = $vote['value'];
+//      }
+//      else {
+//        //$p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
+//        $p_votes[$vote['tag']] = $vote['value'];
+//      }
+//    }
+//
+//
+//
+//    $v_max_height = 100;
+//    $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
+//    $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
+//    foreach ($p_votes as $p_vote_title => $p_vote_value) {
+//      $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
+//    }
+//    $out .= '</div>';
+//
+//    dpm($p_votes);
+//  }
+
+*/
+  
+  
+  
   
   //dpm($results);
   
