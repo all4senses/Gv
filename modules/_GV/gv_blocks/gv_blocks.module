@@ -628,8 +628,8 @@ function gv_blocks_compareProviders() {
               $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
               
 
-              if ($option_value == 'Yes' && !empty($options_data[$option_title . ' -text-'])) {
-                $additional_text = ' <span>' . $options_data[$option_title . ' -text-'] . '</span>';
+              if ($option_value == 'Yes' && !empty($provider['p_data']['provider_options'][$options_set][$option_title . ' -text-'])) {
+                $additional_text = ' <span>' . $provider['p_data']['provider_options'][$options_set][$option_title . ' -text-'] . '</span>';
               }
               else {
                 $additional_text = '';
