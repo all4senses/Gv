@@ -518,7 +518,7 @@ function gv_blocks_compareProviders() {
   
   $p_names = explode(';', $_GET['p']);
   
-  dpm($p_names);
+  //dpm($p_names);
   
   
 
@@ -547,9 +547,21 @@ function gv_blocks_compareProviders() {
 
         $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
       }
+      
+      $criteria = array(
+        'entity_type' => 'node',
+        'entity_id' => $provider->entity_id,
+        'function' => 'average',
+      );
+      $votes = votingapi_select_results($criteria);
+     
+      foreach ($votes as $vote) {
+        $p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
+      }
+      dpm($p_votes);
   }
   
-  dpm($results);
+  //dpm($results);
   
 //  $query = db_select('node', 'n');
 //    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
