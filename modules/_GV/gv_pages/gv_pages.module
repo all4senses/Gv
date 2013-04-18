@@ -2142,16 +2142,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }            
             
 
-       dpm($form);
+       //dpm($form['nid']['#value']);
       // Load votes for a provider.
-//      $criteria = array(
-//        'entity_type' => 'node',
-//        'entity_id' => $node->nid,
-//        'function' => 'average',
-//      );
-//      $votes = votingapi_select_results($criteria);
+      $criteria = array(
+        'entity_type' => 'node',
+        'entity_id' => $form['nid']['#value'],
+        'function' => 'average',
+      );
+      $votes = votingapi_select_results($criteria);
             
-            
+      dpm($votes);
             
       $service_types = unserialize(SERVICE_TYPES);
       $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
