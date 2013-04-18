@@ -2142,8 +2142,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }            
             
 
-       //dpm($form['nid']['#value']);
-      // Load votes for a provider.
+      
+      // Find out overall tating for the provider.
       $criteria = array(
         'entity_type' => 'node',
         'entity_id' => $form['nid']['#value'],
@@ -2153,13 +2153,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
      
       foreach ($votes as $vote) {
         if ($vote['tag'] == 'overall') {
-          $overall_vote = number_format($vote['value'] * 0.05, 1);
+          $form['provider_options']['Provider Info']['Overall Rating']['#default_value'] = number_format($vote['value'] * 0.05, 1);
           break;
         }
       }
       
-      dpm($votes);
-      dpm($overall_vote);
       
             
       $service_types = unserialize(SERVICE_TYPES);
