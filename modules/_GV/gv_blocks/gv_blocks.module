@@ -574,7 +574,7 @@ function gv_blocks_compareProviders() {
       $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
       $out .= '<div class="v-graphs" style="overflow: hidden;">';
       foreach ($p_votes as $p_vote_title => $p_vote_value) {
-        $out .= '<div class="v-bar" style="float: left; height: ' . (100*($p_vote_value/100)) .  'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
+        $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . (100*($p_vote_value/100)) .  'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
       }
       $out .= '</div>';
       
