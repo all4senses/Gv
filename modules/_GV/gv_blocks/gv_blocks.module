@@ -225,6 +225,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
+  $blocks['compare_providers'] = array(
+    'info' => 'Compare providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   return $blocks;
 }
@@ -455,6 +459,11 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
+    case 'compare_providers':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareProviders();
+      break;
+    
   }
 
   return $block;
@@ -491,6 +500,19 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+/**
+ * Returns block with cached providers table.
+ */
+function gv_blocks_compareProviders() {
+  
+  dpm($_GET);
+  
+  $p_names = url_encode('Nextiva;8x8 Inc.;RingCentral');
+  
+  return '<div>test</div>';
 }
 
 
