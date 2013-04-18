@@ -287,6 +287,9 @@
                       $odd = TRUE;
                       
                       foreach ($options_data as $option_title => $option_value) {
+                        if (strpos($option_title, '-text-')) {
+                          continue;
+                        }
                         $option_title = str_replace('Num ', '# ', $option_title);
                         $option_value = (is_int($option_value) ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
                         if ($odd) {
