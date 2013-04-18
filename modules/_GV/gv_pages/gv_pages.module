@@ -2141,7 +2141,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   
             }            
             
-            
+
+       dpm($form);
+      // Load votes for a provider.
+//      $criteria = array(
+//        'entity_type' => 'node',
+//        'entity_id' => $node->nid,
+//        'function' => 'average',
+//      );
+//      $votes = votingapi_select_results($criteria);
             
             
             
@@ -5028,9 +5036,6 @@ function gv_pages_node_view($node, $view_mode) {
         $votes = votingapi_select_results($criteria);
         $criteria['function'] = 'count';
         $counts = votingapi_select_results($criteria);
-        
-        dpm($votes);
-        dpm($counts);
         
         $node->gv_recommends = gv_misc_getVotesRecommendPosVsNeg($node->nid);
         
