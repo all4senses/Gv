@@ -307,7 +307,7 @@
                         else {
                           $additional_text = '';
                         }
-                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><span class="check">' . $option_value . '</span><span">' . $additional_text . '</span></td></tr>';
+                        $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
                       }
                     }
                     echo '<table class="specs"><tbody>' . $provider_options . '</tbody></table>';
