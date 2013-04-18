@@ -182,8 +182,21 @@
                   <?php endif; ?>
                     
                   <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ /*. '</span>'*/ : t(' Provider') )); ?></a></li>
-                  <li><a href="#tabs-2"><?php echo t('!p Options', array('!p' => isset($node->field_p_name['und'][0]['value'] ) ? $node->field_p_name['und'][0]['value'] : t(' Provider') )); ?></a></li>
+                  
+                  
+                  
+                  
+                  
                   <?php 
+                  
+                  global $user;
+                  
+                  if ($user->uid == 1) {
+                    echo '<li><a href="#tabs-2">' . t('!p Options', array('!p' => isset($node->field_p_name['und'][0]['value'] ) ? $node->field_p_name['und'][0]['value'] : t(' Provider') )) . '</a></li>';
+                  }
+                  
+                  
+                  
                   /*
                     $count = 2;
                     
@@ -253,8 +266,15 @@
                 </div>
                 
                 
-                <div id="tabs-2">
+                
                   <?php 
+                  
+                  
+                  
+                  if ($user->uid == 1) {
+                    
+                  
+                  echo '<div id="tabs-2">';
                     
                     //dpm($node->p_data['provider_options']);
                     
@@ -283,10 +303,10 @@
                     }
                     echo '<table class="specs"><tbody>' . $provider_options . '</tbody></table>';
 
-          
-                  
+                  echo '</div>';
+                  }
                   ?>
-                </div>
+               
                 
                 
                 <?php 
