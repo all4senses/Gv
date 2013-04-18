@@ -2136,6 +2136,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         '#type' => $option_type,
                         '#default_value' => isset($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title] : NULL,
                       );
+                      
+                      if ($option_type == 'checkbox') {
+                        $form['provider_options'][$options_set][$option_title . ' [text]'] = array(
+                          '#title' => $option_title . ' [text]',
+                          '#type' => 'textfield',
+                          '#default_value' => isset($p_data['provider_options'][$options_set][$option_title . ' [text]']) ? $p_data['provider_options'][$options_set][$option_title . ' [text]'] : NULL,
+                        );
+                      }
                     
                   }
                   
