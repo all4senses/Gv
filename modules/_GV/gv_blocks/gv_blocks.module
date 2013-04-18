@@ -536,9 +536,17 @@ function gv_blocks_compareProviders() {
 
   $results = $query->execute()->fetchAllAssoc('entity_id');
   
+  $out = '';
   foreach ($results as $nid => $provider) {
     $d_pada = unserialize($provider->field_p_data_value);
     dpm($d_pada);
+    if (!empty($d_pada['logo']['i_logo_uri'])) {
+        
+        $image_style_name = 'logo_provider_chart_main';
+        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $d_pada['logo']['i_logo_uri'], 'alt' =>  $d_pada['logo']['i_logo_alt'], 'title' =>  $d_pada['logo']['i_logo_title'] ));
+
+        $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
+      }
   }
   
   dpm($results);
@@ -555,9 +563,9 @@ function gv_blocks_compareProviders() {
 
     
     
-    
+  $out .= '<div>test</div>';  
   
-  return '<div>test</div>';
+  return $out;
 }
 
 
