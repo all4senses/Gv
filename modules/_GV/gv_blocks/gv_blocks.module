@@ -544,11 +544,10 @@ function gv_blocks_compareProviders() {
   
       $out .= '<tr class="logos"><td>Logos</td>';
       foreach ($providers as $nid => $provider) {
-        //$provider['d_pada'] = unserialize($provider->field_p_data_value);
         $out .= '<td>';
-        if (!empty($d_pada['logo']['i_logo_uri'])) {
+        if (!empty($provider['p_pada']['logo']['i_logo_uri'])) {
           $image_style_name = 'logo_provider_chart_main';
-          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['d_pada']['logo']['i_logo_uri'], 'alt' =>  $provider['d_pada']['logo']['i_logo_alt'], 'title' =>  $provider['d_pada']['logo']['i_logo_title'] ));
+          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_pada']['logo']['i_logo_uri'], 'alt' =>  $provider['p_pada']['logo']['i_logo_alt'], 'title' =>  $provider['p_pada']['logo']['i_logo_title'] ));
           $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
         }
         $out .= '</td>';
@@ -625,7 +624,8 @@ function gv_blocks_compareProviders() {
               
               $option_value = $provider['p_data']['provider_options'][$options_set][$option_title];
               
-              $option_value = (is_int($option_value) ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
+              $is_checkbox = is_int($option_value);
+              $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
               
 
               if ($option_value == 'Yes' && !empty($options_data[$option_title . ' -text-'])) {
@@ -635,7 +635,7 @@ function gv_blocks_compareProviders() {
                 $additional_text = '';
               }
               
-              $out .= '<td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. (is_int($option_value) ? ' class="check"' : '') . '>' . $option_value . '</div><span>' . $additional_text . '</span></td>';
+              $out .= '<td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><span>' . $additional_text . '</span></td>';
 
           }
           
