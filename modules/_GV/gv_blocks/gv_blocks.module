@@ -510,7 +510,14 @@ function gv_blocks_compareProviders() {
   
   dpm($_GET);
   
-  $p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
+  //$p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
+  
+  if (empty($_GET['p'])) {
+    return 'No providers selected';
+  }
+  
+  $p_names = explode(';', $_GET['p']);
+  
   dpm($p_names);
   
   return '<div>test</div>';
