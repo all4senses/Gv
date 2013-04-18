@@ -510,7 +510,8 @@ function gv_blocks_compareProviders() {
   
   dpm($_GET);
   
-  $p_names = url_encode('Nextiva;8x8 Inc.;RingCentral');
+  $p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
+  dpm($p_names);
   
   return '<div>test</div>';
 }
