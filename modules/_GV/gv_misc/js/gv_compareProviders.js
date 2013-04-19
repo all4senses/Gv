@@ -24,7 +24,7 @@
          console.log(checkboxes);
          
          for (i = 0; i < checkboxes.length; ++i) {
-           if (checkboxes[i].is(':checked')) {
+           if (checkboxes[i].checked) {
              console.log(i + ' is checked');
            }
          }
