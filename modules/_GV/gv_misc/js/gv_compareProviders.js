@@ -4,7 +4,7 @@
     attach: function (context, settings) {
            
        
-       $('#block-views-providers-block_top_business_cmp .block-title').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 40px; background: red;"></div>');
+       $('#block-views-providers-block_top_business_cmp').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 40px; background: red;"></div>');
            
        $(".p-compare").click(function(e){
          console.log(e);
