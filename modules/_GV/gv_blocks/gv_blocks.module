@@ -597,11 +597,14 @@ function gv_blocks_compareProviders() {
       $out .= '<tr class="rating-graphs"><td>';
       
       // Ratings graphs title td.
-      $out .= '<div class="graph-titles">';
+      $out .= '<div class="graph-titles" style="float: left;">';
         foreach ($p_votes as $vote_tag => $vote_value) {
-          $out .= '<div style="overflow: hidden;"><div class="marker" style="background: ' . $v_colors[$vote_tag] . '; height: 30px; width: 30px; float: left;"></div><div class="title" style="float: right;">' . $vote_tag . '</div></div>';
+          $out .= '<div style="overflow: hidden;"><div class="marker" style="background: ' . $v_colors[$vote_tag] . '; height: 30px; width: 30px; float: left;"></div><div class="title" style="float: left;">' . $vote_tag . '</div></div>';
         } 
       $out .= '</div>';
+      
+      $out .= '<div class="graph-grades" style="float: right;"><div style="float: left;">5</div><div style="float: left;">4</div><div style="float: left;">3</div><div style="float: left;">2</div><div style="float: left;">1</div></div>';
+      
       
       $out .= '</td>';
       
