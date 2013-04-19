@@ -6,6 +6,7 @@
        $(".p-compare").click(function(e){
          console.log(e);
          console.log(this);
+         console.log((this).val());
        });
 
 
