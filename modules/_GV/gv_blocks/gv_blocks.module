@@ -641,7 +641,17 @@ function gv_blocks_compareProviders() {
       
       $out .= '<tr class="reviews"><td>User Reviews</td>';
       foreach ($providers as $nid => $provider) {
-        $out .= '<td>' . l('Read Review', 'node/' . $nid, array('attributes' => array('class' => array('review')))) . '</td>';
+        $out .= '<td>' . l('Read Review', 'node/' . $nid) . '</td>';
+      }
+      $out .= '</tr>';
+      
+      
+      
+      
+      
+      $out .= '<tr class="visit"><td>Visit Provider</td>';
+      foreach ($providers as $nid => $provider) {
+        $out .= '<td>' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
       }
       $out .= '</tr>';
       
