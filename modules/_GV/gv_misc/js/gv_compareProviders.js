@@ -2,7 +2,10 @@
 
   Drupal.behaviors.gv_compareProviders = {
     attach: function (context, settings) {
-              
+           
+       
+       $('#block-views-providers-block_top_business_cmp .block-title').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 40px; background: red;"></div>');
+           
        $(".p-compare").click(function(e){
          console.log(e);
          //console.log(this);
@@ -47,6 +50,15 @@
               checkboxes[i].disabled = false;
               checkboxes[i].title = '';
             }
+         }
+         
+         if (!checked_count) {
+           console.log('not selected at all');
+           $('.compare-button#b1').hide();
+         }
+         else {
+           console.log('selected something');
+           $('.compare-button#b1').show();
          }
          
        });
