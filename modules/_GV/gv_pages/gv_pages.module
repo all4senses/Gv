@@ -1351,7 +1351,7 @@ function gv_pages_buildHome($name, $data) {
     
   // Test compare providers functionality.  
   global $user;
-  if ($user->uid == 1) {  
+  if ($user->uid) {  
     $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE);
     $out .= gv_blocks_getBlockThemed($block_data);
     
@@ -2149,16 +2149,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       $form['provider_options'][$options_set][$option_title] = array(
                         '#title' => $option_title,
                         '#type' => $option_type,
-                        // ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
-                        //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
                         '#default_value' => isset($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title] : NULL,
                       );
                       
                       if ($option_type == 'textarea') {
-                        dpm($form['provider_options'][$options_set][$option_title]['#default_value']);
                         $form['provider_options'][$options_set][$option_title]['#default_value'] = !empty($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title]['value'] : NULL;
                         $form['provider_options'][$options_set][$option_title]['#type'] = 'text_format';
-                        $form['provider_options'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html';
+                        $form['provider_options'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
                       }
                       
                       if ($option_type == 'checkbox') {
