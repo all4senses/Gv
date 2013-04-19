@@ -21,6 +21,7 @@
          //return false;
          
          var checkboxes = $(".p-compare");
+         console.log(checkboxes);
          
          for (i = 0; i < checkboxes.length; ++i) {
            if (checkboxes[i].is(':checked')) {
