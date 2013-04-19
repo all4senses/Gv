@@ -2153,7 +2153,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       );
                       
                       if ($option_type == 'textarea') {
-                        dpm($form['provider_options'][$options_set][$option_title]['#default_value']);
+                        //dpm($form['provider_options'][$options_set][$option_title]['#default_value']);
                         $form['provider_options'][$options_set][$option_title]['#default_value'] = !empty($p_data['provider_options'][$options_set][$option_title]) ? (is_array($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title]['value'] : $p_data['provider_options'][$options_set][$option_title]) : NULL;
                         $form['provider_options'][$options_set][$option_title]['#type'] = 'text_format';
                         $form['provider_options'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
