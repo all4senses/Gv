@@ -12,13 +12,21 @@
          //var checked_count = 0;
          var checkboxes = $(".p-compare");
          //console.log(checkboxes);
-         
+         var params = '';
          for (i = 0; i < checkboxes.length; ++i) {
            if (checkboxes[i].checked) {
              console.log(checkboxes[i].name);
              //++checked_count;
+             if (params) {
+               params += ';' + checkboxes[i].name;
+             }
+             else {
+               params = checkboxes[i].name;
+             }
            }
          }
+         var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
+         console.log(url);
        });    
            
        $(".p-compare").click(function(e){
