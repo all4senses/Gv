@@ -656,9 +656,6 @@ function gv_blocks_compareProviders() {
           
           foreach ($providers as $nid => $provider) {
             
-              //$out .= '<tr class="' . $row_class . '">';
-              
-              
               $option_value = $provider['p_data']['provider_options'][$options_set][$option_title];
               
               $is_checkbox = is_int($option_value);
@@ -677,100 +674,15 @@ function gv_blocks_compareProviders() {
           }
           
           $out .= '</tr>';
-          
-          //$provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
+     
         }
       }
 
-      
-//      $out .= '<tr class="ratings">';
-//      foreach ($results as $nid => $provider) {
-//        $d_pada = unserialize($provider->field_p_data_value);
-//        $out .= '<td>';
-//
-//
-//        $out .= '</td>';
-//      }
-//      $out .= '</tr>';
       
       
   $out .= '</tbody></table>';
   
   
-  
-/*  
-//  foreach ($results as $nid => $provider) {
-    
-    
-    //dpm($d_pada);
-
-    
-//    if (!empty($d_pada['logo']['i_logo_uri'])) {
-//        
-//      $image_style_name = 'logo_provider_chart_main';
-//      $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $d_pada['logo']['i_logo_uri'], 'alt' =>  $d_pada['logo']['i_logo_alt'], 'title' =>  $d_pada['logo']['i_logo_title'] ));
-//
-//      $out .= gv_misc_getTrackingUrl($image, NULL, $provider->entity_id, NULL, 'logo');
-//    }
-
-    
-    
-    
-    
-    
-//    $criteria = array(
-//      'entity_type' => 'node',
-//      'entity_id' => $provider->entity_id,
-//      'function' => 'average',
-//    );
-//    $votes = votingapi_select_results($criteria);
-//
-//    foreach ($votes as $vote) {
-//      if ($vote['tag'] == 'overall') {
-//        $p_vote_overall = number_format($vote['value'] * 0.05, 1);
-//      }
-//      elseif ($vote['tag'] == 'recommend') {
-//        $p_vote_recommend = $vote['value'];
-//      }
-//      else {
-//        //$p_votes[$vote['tag']] = number_format($vote['value'] * 0.05, 1);
-//        $p_votes[$vote['tag']] = $vote['value'];
-//      }
-//    }
-//
-//
-//
-//    $v_max_height = 100;
-//    $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
-//    $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
-//    foreach ($p_votes as $p_vote_title => $p_vote_value) {
-//      $out .= '<div class="v-bar" title="' . $p_vote_title . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; width: 20px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
-//    }
-//    $out .= '</div>';
-//
-//    dpm($p_votes);
-//  }
-
-*/
-  
-  
-  
-  
-  //dpm($results);
-  
-//  $query = db_select('node', 'n');
-//    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
-//    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
-//    $query->fields('n', array('nid', 'title'))  
-//          //->fields('pt', array('field_p_types_value'))
-//          ->fields('pn', array('field_p_name_value')) 
-//          ->condition('n.type', 'provider')
-//          ->condition('n.status', 1); 
-//    $result = $query->execute(); 
-
-    
-    
-  $out .= '<div>test</div>';  
   
   return $out;
 }
