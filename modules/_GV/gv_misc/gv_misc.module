@@ -4770,6 +4770,17 @@ function gv_misc_getProviderQuickData($target, $data) {
   switch($target) {
     
     
+    case 'compare_check':
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      $out = '<input type="checkbox" class="compare" id="' . $data['data']->nid . '" name="' . $all_data_quick[$data['data']->nid]['name'] . '" value="0"/>';
+      
+      
+      return $out;
+      
+      
+      
+    
     case 'name_n_logo_chart':
     
       $all_data_quick = gv_misc_getProvidersDataQuick();
