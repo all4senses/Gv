@@ -639,6 +639,15 @@ function gv_blocks_compareProviders() {
       
       
       
+      $out .= '<tr class="reviews"><td>User Reviews</td>';
+      foreach ($providers as $nid => $provider) {
+        $out .= '<td>' . l('Read Review', 'node/' . $nid, array('attributes' => array('class' => array('review')))) . '</td>';
+      }
+      $out .= '</tr>';
+      
+      
+      
+      
       $provider_options = unserialize(PROVIDER_OPTIONS);
       
       foreach ($provider_options as $options_set => $options_data) {
@@ -654,7 +663,7 @@ function gv_blocks_compareProviders() {
           
           if ($odd) {$odd = FALSE; $row_class = 'even';} else {$odd = TRUE; $row_class = 'odd';}
           
-          $out .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td>';
+          $out .= '<tr class="option ' . $row_class . '"><td class="title">' . $option_title . '</td>';
           
           foreach ($providers as $nid => $provider) {
             
