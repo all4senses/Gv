@@ -37,13 +37,15 @@
             if (!checkboxes[i].checked) {
               console.log(i + ' disabled');
               checkboxes[i].disabled = true;
+              checkboxes[i].title = 'You can select not more than 3 providers';
             }
           }
          }
          else {
            console.log('enable all');
            for (i = 0; i < checkboxes.length; ++i) {
-                checkboxes[i].disabled = false;
+              checkboxes[i].disabled = false;
+              checkboxes[i].title = '';
             }
          }
          
