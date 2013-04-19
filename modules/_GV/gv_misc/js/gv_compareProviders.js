@@ -18,6 +18,7 @@
          console.log($(this)[0].checked);
          console.log($(this)[0].id);
          console.log($(this)[0].name);
+         return FALSE;
        });
 
 
