@@ -635,9 +635,6 @@ function gv_blocks_compareProviders() {
       
       $provider_options = unserialize(PROVIDER_OPTIONS);
       
-      
-      
-      
       foreach ($provider_options as $options_set => $options_data) {
                       
         $provider_options .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
@@ -646,6 +643,10 @@ function gv_blocks_compareProviders() {
         
         $odd = TRUE;
         foreach ($options_data as $option_title => $option_type) {
+          
+          if ($option_title == 'Overall Rating') {
+            continue;
+          }
           
           $option_title = str_replace('Num ', '# ', $option_title);
           
