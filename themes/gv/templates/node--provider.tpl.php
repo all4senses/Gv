@@ -192,7 +192,7 @@
                   global $user;
                   
                   if ($user->uid && !empty($node->p_data['provider_options'])) {
-                    echo '<li><a href="#tabs-2">' . t('!p Options', array('!p' => isset($node->field_p_name['und'][0]['value'] ) ? $node->field_p_name['und'][0]['value'] : t(' Provider') )) . '</a></li>';
+                    echo '<li><a href="#tabs-2">Options</a></li>';
                   }
                   
                   
