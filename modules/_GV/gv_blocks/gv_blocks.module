@@ -545,6 +545,24 @@ function gv_blocks_compareProviders() {
   $out = '<table class="specs"><tbody>';
   
   
+      
+      
+      $out .= '<tr class="logos"><td></td>';
+      foreach ($providers as $nid => $provider) {
+        $out .= '<td>';
+        if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
+          $image_style_name = 'logo_provider_chart_main';
+          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  $provider['p_data']['logo']['i_logo_alt'], 'title' =>  $provider['p_data']['logo']['i_logo_title'] ));
+          $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
+        }
+        $out .= '</td>';
+      }
+      $out .= '</tr>';
+
+      
+      
+      
+  
       $out .= '<tr class="overall"><td>Ratings</td>';
       foreach ($providers as $nid => $provider) {
               
@@ -577,19 +595,6 @@ function gv_blocks_compareProviders() {
       $out .= '</tr>';
       
       
-      
-      $out .= '<tr class="logos"><td>Logos</td>';
-      foreach ($providers as $nid => $provider) {
-        $out .= '<td>';
-        if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
-          $image_style_name = 'logo_provider_chart_main';
-          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  $provider['p_data']['logo']['i_logo_alt'], 'title' =>  $provider['p_data']['logo']['i_logo_title'] ));
-          $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
-        }
-        $out .= '</td>';
-      }
-      $out .= '</tr>';
-
       
       
       
