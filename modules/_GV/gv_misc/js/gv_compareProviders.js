@@ -8,6 +8,17 @@
            
        $("#block-views-providers-block_top_business_cmp .compare-button#b1").click(function(e){
          console.log('click');
+         
+         //var checked_count = 0;
+         var checkboxes = $(".p-compare");
+         //console.log(checkboxes);
+         
+         for (i = 0; i < checkboxes.length; ++i) {
+           if (checkboxes[i].checked) {
+             console.log(checkboxes[i].name);
+             //++checked_count;
+           }
+         }
        });    
            
        $(".p-compare").click(function(e){
@@ -39,7 +50,7 @@
           }
          }
          else {
-           console.log('enable all');
+           //console.log('enable all');
            for (i = 0; i < checkboxes.length; ++i) {
               checkboxes[i].disabled = false;
               checkboxes[i].title = '';
