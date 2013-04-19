@@ -536,6 +536,10 @@ function gv_blocks_compareProviders() {
 
   $results = $query->execute()->fetchAllAssoc('entity_id');
   
+  if (empty($results)) {
+    return '<div class="error">No providers have been chosen.</div>';
+  }
+  
   foreach ($results as $nid => $provider) {
     $providers[$nid] = array('nid' => $provider->entity_id, 'p_name' => $provider->field_p_name_value, 'p_data' => unserialize($provider->field_p_data_value));
   }
