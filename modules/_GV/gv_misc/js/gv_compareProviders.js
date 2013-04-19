@@ -7,8 +7,14 @@
          console.log(e);
          console.log(this);
          
-         console.log($(this));
          console.log($(this).val());
+         
+         console.log($(this));
+         
+         
+         
+         console.log('xxx');
+         console.log($(this)[0]);
        });
 
 
