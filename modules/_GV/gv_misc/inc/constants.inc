@@ -53,7 +53,6 @@ define('FEE_TYPES', $fee_types);
 
 $provider_options = array(
           'Provider Info' => array(
-              'Overall Rating' => 'textfield',
               'Year Founded' => 'textfield',
               'Headquarters Location' => 'textfield',
               'Service Location' => 'textfield',

@@ -513,7 +513,7 @@ function gv_blocks_compareProviders() {
   //$p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
   
   if (empty($_GET['p'])) {
-    return 'No providers selected';
+    return '<div class="error">No providers have been chosen.</div>';
   }
   
   $p_names = explode(';', $_GET['p']);
@@ -649,10 +649,6 @@ function gv_blocks_compareProviders() {
         
         $odd = TRUE;
         foreach ($options_data as $option_title => $option_type) {
-          
-          if ($option_title == 'Overall Rating') {
-            continue;
-          }
           
           $option_title = str_replace('Num ', '# ', $option_title);
           
