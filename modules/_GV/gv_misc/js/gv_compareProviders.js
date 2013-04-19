@@ -15,6 +15,7 @@
          
          console.log('xxx');
          console.log($(this)[0]);
+         console.log($(this)[0].checked);
        });
 
 
