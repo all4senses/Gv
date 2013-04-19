@@ -540,6 +540,8 @@ function gv_blocks_compareProviders() {
     $providers[$nid] = array('nid' => $provider->entity_id, 'p_name' => $provider->field_p_name_value, 'p_data' => unserialize($provider->field_p_data_value));
   }
   
+  $cols_num = count($providers) + 1;
+  
   $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
   
   $out = '<table class="specs"><tbody>';
@@ -637,7 +639,7 @@ function gv_blocks_compareProviders() {
       
       foreach ($provider_options as $options_set => $options_data) {
                       
-        $out .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+        $out .= '<tr></tr><tr class="caption"><td colspan="' . $cols_num . '">' . $options_set . '</td></tr>';
 
         
         
