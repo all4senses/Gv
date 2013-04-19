@@ -656,7 +656,7 @@ function gv_blocks_compareProviders() {
           
           foreach ($providers as $nid => $provider) {
             
-              $option_value = $provider['p_data']['provider_options'][$options_set][$option_title];
+              $option_value = @$provider['p_data']['provider_options'][$options_set][$option_title];
               
               $is_checkbox = is_int($option_value);
               $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
