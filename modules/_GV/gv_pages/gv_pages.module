@@ -2149,8 +2149,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       $form['provider_options'][$options_set][$option_title] = array(
                         '#title' => $option_title,
                         '#type' => $option_type,
+                        // ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
+                        //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
                         '#default_value' => isset($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title] : NULL,
                       );
+                      
+                      if ($option_type == 'textarea') {
+                        $form['provider_options'][$options_set][$option_title]['#type'] = 'text_format';
+                        $form['provider_options'][$options_set][$option_title]['#format'] = 'filtered_html';
+                      }
                       
                       if ($option_type == 'checkbox') {
                         
