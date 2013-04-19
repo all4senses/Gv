@@ -7,16 +7,16 @@
        $('#block-views-providers-block_top_business_cmp').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; background-color: red; position: absolute; right: -10px;top: 220px;"></div>');
            
        $("#block-views-providers-block_top_business_cmp .compare-button#b1").click(function(e){
-         console.log('click');
          
-         //var checked_count = 0;
+         //console.log('click');
+         
          var checkboxes = $(".p-compare");
          //console.log(checkboxes);
+         
          var params = '';
          for (i = 0; i < checkboxes.length; ++i) {
            if (checkboxes[i].checked) {
-             console.log(checkboxes[i].name);
-             //++checked_count;
+             //console.log(checkboxes[i].name);
              if (params) {
                params += ';' + checkboxes[i].name;
              }
@@ -26,7 +26,10 @@
            }
          }
          var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
-         console.log(url);
+         //console.log(url);
+         
+         top.location.href = url;
+         
        });    
            
        $(".p-compare").click(function(e){
