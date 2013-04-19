@@ -33,6 +33,12 @@
          
          if (checked_count >= 3) {
            console.log('more than 3');
+           for (i = 0; i < checkboxes.length; ++i) {
+            if (!checkboxes[i].checked) {
+              console.log(i + ' disabled');
+              checkboxes[i].disabled = true;
+            }
+          }
          }
          
        });
