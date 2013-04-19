@@ -2158,7 +2158,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         dpm($form['provider_options'][$options_set][$option_title]['#default_value']);
                         $form['provider_options'][$options_set][$option_title]['#default_value'] = !empty($p_data['provider_options'][$options_set][$option_title]) ? $p_data['provider_options'][$options_set][$option_title]['value'] : NULL;
                         $form['provider_options'][$options_set][$option_title]['#type'] = 'text_format';
-                        $form['provider_options'][$options_set][$option_title]['#format'] = 'filtered_html';
+                        $form['provider_options'][$options_set][$option_title]['#format'] = 'gv_full_html';//'filtered_html';
                       }
                       
                       if ($option_type == 'checkbox') {
