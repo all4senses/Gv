@@ -20,14 +20,21 @@
          console.log($(this)[0].name);
          //return false;
          
+         var checked_count = 0;
          var checkboxes = $(".p-compare");
          console.log(checkboxes);
          
          for (i = 0; i < checkboxes.length; ++i) {
            if (checkboxes[i].checked) {
              console.log(i + ' is checked');
+             ++checked_count;
            }
          }
+         
+         if (checked_count >= 3) {
+           console.log('more than 3');
+         }
+         
        });
 
 
