@@ -690,6 +690,10 @@ function gv_blocks_compareProviders() {
                 $additional_text = '';
               }
               
+              if (is_array($option_value)) {
+                $option_value = $option_value['value'];
+              }
+                        
               $out .= '<td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><span>' . $additional_text . '</span></td>';
 
           }
