@@ -595,7 +595,7 @@ function gv_blocks_compareProviders() {
             $providers[$nid]['p_vote_overall'] = $p_vote_overall;
             $providers[$nid]['p_vote_recommend'] = $p_vote_recommend;
             
-            $out .= '<td>' . $p_vote_overall . '</td>';
+            $out .= '<td style="text-align: center;">' . $p_vote_overall . '</td>';
           
       }
       $out .= '</tr>';
@@ -624,7 +624,7 @@ function gv_blocks_compareProviders() {
         $out .= '<td>';
 
             $v_max_height = 100;
-            $out .= '<div class="v-graphs" style="overflow: hidden; position: relative;">';
+            $out .= '<div class="v-graphs">';
             foreach ($provider['p_votes'] as $p_vote_title => $p_vote_value) {
               $out .= '<div class="v-bar" title="' . ucfirst($p_vote_title) . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 7px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
             }
