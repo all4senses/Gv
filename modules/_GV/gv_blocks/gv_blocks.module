@@ -608,13 +608,13 @@ function gv_blocks_compareProviders() {
       $out .= '<tr class="rating-graphs"><td>';
       
       // Ratings graphs title td.
-      $out .= '<div class="graph-titles" style="float: left;">';
+      $out .= '<div class="graph-titles" style="float: left; padding-top: 1px;">';
         foreach ($p_votes as $vote_tag => $vote_value) {
           $out .= '<div style="overflow: hidden;"><div class="marker" style="background: ' . $v_colors[$vote_tag] . ';"></div><div class="title">' . ucfirst($vote_tag) . '</div></div>';
         } 
       $out .= '</div>';
       
-      $out .= '<div class="graph-grades" style="float: right;"><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div></div>';
+      $out .= '<div class="graph-grades"><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div></div>';
       
       
       $out .= '</td>';
