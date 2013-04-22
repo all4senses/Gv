@@ -555,7 +555,7 @@ function gv_blocks_compareProviders() {
       
       $out .= '<tr class="logos"><td></td>';
       foreach ($providers as $nid => $provider) {
-        $out .= '<td>';
+        $out .= '<td style="text-align: center;">';
         if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
           $image_style_name = 'logo_provider_chart_main';
           $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  $provider['p_data']['logo']['i_logo_alt'], 'title' =>  $provider['p_data']['logo']['i_logo_title'] ));
@@ -626,7 +626,7 @@ function gv_blocks_compareProviders() {
             $v_max_height = 100;
             $out .= '<div class="v-graphs">';
             foreach ($provider['p_votes'] as $p_vote_title => $p_vote_value) {
-              $out .= '<div class="v-bar" title="' . ucfirst($p_vote_title) . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 7px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
+              $out .= '<div class="v-bar" title="' . ucfirst($p_vote_title) . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 10px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
             }
             $out .= '</div>';
 
@@ -641,7 +641,7 @@ function gv_blocks_compareProviders() {
       
       $out .= '<tr class="reviews"><td>User Reviews</td>';
       foreach ($providers as $nid => $provider) {
-        $out .= '<td>' . l('Read Review', 'node/' . $nid) . '</td>';
+        $out .= '<td style="text-align: center;">' . l('Read Review', 'node/' . $nid) . '</td>';
       }
       $out .= '</tr>';
       
@@ -651,7 +651,7 @@ function gv_blocks_compareProviders() {
       
       $out .= '<tr class="visit"><td>Visit Provider</td>';
       foreach ($providers as $nid => $provider) {
-        $out .= '<td>' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
+        $out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
       }
       $out .= '</tr>';
       
@@ -694,7 +694,7 @@ function gv_blocks_compareProviders() {
                 $option_value = $option_value['value'];
               }
                         
-              $out .= '<td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><span>' . $additional_text . '</span></td>';
+              $out .= '<td  style="text-align: center;" class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
 
           }
           
