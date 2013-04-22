@@ -4,7 +4,7 @@
     attach: function (context, settings) {
            
        
-       $('#block-views-providers-block_top_business_cmp').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; position: absolute; right: -24px;top: 238px; z-index: 20;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px;"/></div>');
+       $('#block-views-providers-block_top_business_cmp').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; position: absolute; right: -24px;top: 238px; z-index: 20;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
          
          
          
