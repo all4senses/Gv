@@ -569,7 +569,7 @@ function gv_blocks_compareProviders() {
       
       
   
-      $out .= '<tr class="overall"><td>Ratings</td>';
+      $out .= '<tr class="overall"><td class="title">Ratings</td>';
       foreach ($providers as $nid => $provider) {
               
             $criteria = array(
@@ -639,7 +639,7 @@ function gv_blocks_compareProviders() {
       
       
       
-      $out .= '<tr class="reviews"><td>User Reviews</td>';
+      $out .= '<tr class="reviews"><td class="title">User Reviews</td>';
       foreach ($providers as $nid => $provider) {
         $out .= '<td style="text-align: center;">' . l('Read Review', 'node/' . $nid) . '</td>';
       }
@@ -694,7 +694,7 @@ function gv_blocks_compareProviders() {
                 $option_value = $option_value['value'];
               }
                         
-              $out .= '<td  class="option" style="text-align: center;" class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
+              $out .= '<td class="option" style="text-align: center;" class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
 
           }
           
