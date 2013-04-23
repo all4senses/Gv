@@ -551,29 +551,28 @@ function gv_blocks_compareProviders() {
   $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
   $v_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
   
+  drupal_add_js('misc/tableheader.js');
   
-  $out = '<table class="specs"><tbody>';
+  $out = '<table class="specs">';
   
   
-      
-      
-      $out .= '<tr class="logos"><td style="border: none;"></td>';
-      foreach ($providers as $nid => $provider) {
-        $out .= '<td style="border: none; text-align: center;">';
-        if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
-          $image_style_name = 'logo_provider_chart_main';
-          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
-          $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
+      $out .= '<thead class="sticky-enabled"><tr class="logos"><td style="border: none;"></td>';
+        foreach ($providers as $nid => $provider) {
+          $out .= '<td style="border: none; text-align: center;">';
+          if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
+            $image_style_name = 'logo_provider_chart_main';
+            $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
+            $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
+          }
+          $out .= '</td>';
         }
-        $out .= '</td>';
-      }
-      $out .= '</tr>';
+      $out .= '</tr></thead>';
 
       
       
       
   
-      $out .= '<tr class="overall"><td class="title">Ratings</td>';
+      $out .= '<tbody><tr class="overall"><td class="title">Ratings</td>';
       foreach ($providers as $nid => $provider) {
               
             $criteria = array(
