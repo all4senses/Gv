@@ -540,6 +540,8 @@ function gv_blocks_compareProviders() {
 
   $results = $query->execute()->fetchAllAssoc('entity_id');
   
+  dpm($results);
+  
   if (empty($results)) {
     return '<div class="error">No providers have been chosen.</div>';
   }
