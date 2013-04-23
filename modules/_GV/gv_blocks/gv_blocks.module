@@ -553,18 +553,18 @@ function gv_blocks_compareProviders() {
   
   drupal_add_js('misc/tableheader.js');
   
-  $out = '<table class="specs">';
+  $out = '<table class="specs sticky-enabled sticky-table">';
   
   
-      $out .= '<thead class="sticky-enabled"><tr class="logos"><td style="border: none;"></td>';
+      $out .= '<thead><tr class="logos"><th style="border: none;"></th>';
         foreach ($providers as $nid => $provider) {
-          $out .= '<td style="border: none; text-align: center;">';
+          $out .= '<th style="border: none; text-align: center;">';
           if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
             $image_style_name = 'logo_provider_chart_main';
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
             $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
           }
-          $out .= '</td>';
+          $out .= '</th>';
         }
       $out .= '</tr></thead>';
 
