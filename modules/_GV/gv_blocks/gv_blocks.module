@@ -558,7 +558,7 @@ function gv_blocks_compareProviders() {
         $out .= '<td style="text-align: center;">';
         if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
           $image_style_name = 'logo_provider_chart_main';
-          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  $provider['p_data']['logo']['i_logo_alt'], 'title' =>  $provider['p_data']['logo']['i_logo_title'] ));
+          $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
           $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
         }
         $out .= '</td>';
@@ -673,7 +673,7 @@ function gv_blocks_compareProviders() {
           
           if ($odd) {$odd = FALSE; $row_class = 'even';} else {$odd = TRUE; $row_class = 'odd';}
           
-          $out .= '<tr class="option ' . $row_class . '"><td class="title">' . $option_title . '</td>';
+          $out .= '<tr class="options ' . $row_class . '"><td class="title">' . $option_title . '</td>';
           
           foreach ($providers as $nid => $provider) {
             
@@ -694,7 +694,7 @@ function gv_blocks_compareProviders() {
                 $option_value = $option_value['value'];
               }
                         
-              $out .= '<td  style="text-align: center;" class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
+              $out .= '<td  class="option" style="text-align: center;" class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
 
           }
           
