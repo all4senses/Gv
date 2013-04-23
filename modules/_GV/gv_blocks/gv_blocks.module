@@ -524,6 +524,8 @@ function gv_blocks_compareProviders() {
 
   $query = db_select('field_data_field_p_name', 'pn');
   $query->join('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
+  $query->join('votingapi_cache', 'vc', "vc.entity_id = pn.entity_id AND vc.value_type = 'percent' AND  vc.tag = 'overall'");
+  $query->fields('vc', array('value'));
   $query->fields('pd', array('field_p_data_value', 'entity_id'));
   $query->fields('pn', array('field_p_name_value'));
   $db_or = db_or();
@@ -533,6 +535,8 @@ function gv_blocks_compareProviders() {
   }
 
   $query->condition($db_or);
+  
+  $query->orderBy('vc.value', 'ASC');
 
   $results = $query->execute()->fetchAllAssoc('entity_id');
   
