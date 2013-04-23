@@ -5,6 +5,9 @@
  * Module constants list.
  */
 
+// Topics vocabulary name.
+define('TOPICS', 'topics');
+
 // Ratings titles.
 define('INSTALL', 'Installation Process');
 define('FEATURES', 'Features');

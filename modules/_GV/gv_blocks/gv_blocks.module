@@ -6,7 +6,7 @@
  */
 
 
-module_load_include('inc', 'gv_blocks', 'inc/constants');
+module_load_include('inc', 'gv_misc', 'inc/constants');
 
 
 /**
@@ -547,6 +547,8 @@ function gv_blocks_compareProviders() {
   $cols_num = count($providers) + 1;
   
   $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
+  $v_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
+  
   
   $out = '<table class="specs"><tbody>';
   
@@ -610,7 +612,7 @@ function gv_blocks_compareProviders() {
       // Ratings graphs title td.
       $out .= '<div class="graph-titles" style="float: left; padding-top: 1px;">';
         foreach ($p_votes as $vote_tag => $vote_value) {
-          $out .= '<div style="overflow: hidden;"><div class="marker" style="background: ' . $v_colors[$vote_tag] . ';"></div><div class="title">' . ucfirst($vote_tag) . '</div></div>';
+          $out .= '<div style="overflow: hidden;"><div class="marker" style="background: ' . $v_colors[$vote_tag] . ';"></div><div class="title">' . $v_titles[$vote_tag] . '</div></div>';
         } 
       $out .= '</div>';
       
@@ -625,8 +627,8 @@ function gv_blocks_compareProviders() {
 
             $v_max_height = 100;
             $out .= '<div class="v-graphs">';
-            foreach ($provider['p_votes'] as $p_vote_title => $p_vote_value) {
-              $out .= '<div class="v-bar" title="' . ucfirst($p_vote_title) . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 10px; background: ' . $v_colors[$p_vote_title] . ';"></div>';
+            foreach ($provider['p_votes'] as $vote_tag => $p_vote_value) {
+              $out .= '<div class="v-bar" title="' . $v_titles[$vote_tag] . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 10px; background: ' . $v_colors[$vote_tag] . ';"></div>';
             }
             $out .= '</div>';
 
