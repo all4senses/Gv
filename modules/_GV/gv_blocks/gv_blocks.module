@@ -528,19 +528,15 @@ function gv_blocks_compareProviders() {
   $query->fields('pr', array('field_p_erating_value'));
   $query->fields('pd', array('field_p_data_value', 'entity_id'));
   $query->fields('pn', array('field_p_name_value'));
+  
   $db_or = db_or();
-
   foreach ($p_names as $p_name) {
     $db_or->condition('pn.field_p_name_value', $p_name);
   }
-
   $query->condition($db_or);
   
   $query->orderBy('field_p_erating_value', 'ASC');
-
   $results = $query->execute()->fetchAllAssoc('entity_id');
-  
-  dpm($results);
   
   if (empty($results)) {
     return '<div class="error">No providers have been chosen.</div>';
