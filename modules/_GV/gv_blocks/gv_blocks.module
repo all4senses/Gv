@@ -553,9 +553,9 @@ function gv_blocks_compareProviders() {
   
       
       
-      $out .= '<tr class="logos"><td></td>';
+      $out .= '<tr class="logos"><td style="border: none;"></td>';
       foreach ($providers as $nid => $provider) {
-        $out .= '<td style="text-align: center;">';
+        $out .= '<td style="border: none; text-align: center;">';
         if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
           $image_style_name = 'logo_provider_chart_main';
           $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
