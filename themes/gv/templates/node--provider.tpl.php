@@ -187,7 +187,7 @@
                   
                   global $user;
                   dpm($node->p_data['provider_options']);
-                  if (!empty($node->p_data['provider_options'])) {
+                  if (!empty($node->p_data['provider_options']) && (!isset($options_data['enabled']) || !empty($options_data['enabled']))) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
                   
@@ -267,7 +267,7 @@
                   
                   
                   
-                  if (!empty($node->p_data['provider_options'])) {
+                  if (!empty($node->p_data['provider_options']) && (!isset($options_data['enabled']) || !empty($options_data['enabled']))) {
                     
                   
                   echo '<div id="tabs-2">';
@@ -275,6 +275,8 @@
                     //dpm($node->p_data['provider_options']);
                     
                     $provider_options = '';
+                    
+                    unset($options_data['enabled']);
                     
                     foreach ($node->p_data['provider_options'] as $options_set => $options_data) {
                       
