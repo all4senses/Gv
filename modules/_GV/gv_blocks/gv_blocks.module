@@ -513,7 +513,7 @@ function gv_blocks_compareProviders() {
   //$p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
   
   if (empty($_GET['p'])) {
-    return '<div class="error">No providers have been chosen.</div>';
+    return '<div class="no-results">No providers have been chosen.</div>';
   }
   
   $p_names = explode(';', $_GET['p']);
@@ -523,8 +523,8 @@ function gv_blocks_compareProviders() {
   
 
   $query = db_select('field_data_field_p_name', 'pn');
-  $query->join('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
-  $query->join('field_data_field_p_erating', 'pr', "pr.entity_id = pn.entity_id");
+  $query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
+  $query->leftJoin('field_data_field_p_erating', 'pr', "pr.entity_id = pn.entity_id");
   $query->fields('pr', array('field_p_erating_value'));
   $query->fields('pd', array('field_p_data_value', 'entity_id'));
   $query->fields('pn', array('field_p_name_value'));
@@ -541,7 +541,7 @@ function gv_blocks_compareProviders() {
   dpm($results);
   
   if (empty($results)) {
-    return '<div class="error">No providers have been chosen.</div>';
+    return '<div class="no-results">No providers have been chosen.</div>';
   }
   
   foreach ($results as $nid => $provider) {
