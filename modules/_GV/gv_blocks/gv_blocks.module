@@ -518,7 +518,7 @@ function gv_blocks_compareProviders() {
   
   $p_names = explode(';', $_GET['p']);
   
-  dpm($p_names);
+  //dpm($p_names);
   
   
 
@@ -538,7 +538,7 @@ function gv_blocks_compareProviders() {
   $query->orderBy('field_p_erating_value', 'ASC');
   $results = $query->execute()->fetchAllAssoc('entity_id');
 
-  dpm($results);
+  //dpm($results);
   
   if (empty($results)) {
     return '<div class="no-results">No providers have been chosen.</div>';
