@@ -186,7 +186,7 @@
                   <?php 
                   
                   global $user;
-                  
+                  dpm($node->p_data['provider_options']);
                   if (!empty($node->p_data['provider_options'])) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
