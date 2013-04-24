@@ -555,8 +555,9 @@ function gv_blocks_compareProviders() {
   
   $out = '<table class="specs sticky-enabled">';
   
+  dpm($_SERVER);
   
-      $out .= '<thead><tr class="logos"><th></th>';
+      $out .= '<thead><tr class="logos"><th class="back" style="text-align: center;">' . l('Back', '/') . '</th>';
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center;">';
           if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
