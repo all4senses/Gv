@@ -267,7 +267,7 @@
                   
                   
                   
-                  if (!empty($node->p_data['provider_options']) && (!isset($options_data['enabled']) || !empty($options_data['enabled']))) {
+                  if (!empty($node->p_data['provider_options']) && (!isset($node->p_data['provider_options']['enabled']) || !empty($node->p_data['provider_options']['enabled']))) {
                     
                   
                   echo '<div id="tabs-2">';
@@ -276,7 +276,7 @@
                     
                     $provider_options = '';
                     
-                    unset($options_data['enabled']);
+                    unset($node->p_data['provider_options']['enabled']);
                     
                     foreach ($node->p_data['provider_options'] as $options_set => $options_data) {
                       
