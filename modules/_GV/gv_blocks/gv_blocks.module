@@ -557,7 +557,7 @@ function gv_blocks_compareProviders() {
   
   //dpm($_SERVER['HTTP_REFERER']);
   
-      $out .= '<thead><tr class="logos" style="background: #ffaf63;"><th class="back" style="border-radius: 10px 0 0 0; background: #ffaf63;">' . l('Back', @$_SERVER['HTTP_REFERER'], array('attributes' => array('style' => 'background: url(/sites/all/themes/gv_orange/css/images/rect-btn-gray-left.png) no-repeat 0 0 transparent;
+      $out .= '<thead><tr class="logos" style="background: #ffaf63;"><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0; background: #ffaf63;">' . l('Back', @$_SERVER['HTTP_REFERER'], array('attributes' => array('style' => 'background: url(/sites/all/themes/gv_orange/css/images/rect-btn-gray-left.png) no-repeat 0 0 transparent;
 color: gray;
 display: block;
 width: 110px;
@@ -567,7 +567,7 @@ font-size: 12px;
 padding: 4px 0 0 0; text-indent: 50px;'))) . '</th>';
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
-          $out .= '<th style="text-align: center; background: #ffaf63; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
+          $out .= '<th style="text-align: center; padding: 8px 0 3px; background: #ffaf63; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
           if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
             $image_style_name = 'logo_provider_chart_main';
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
