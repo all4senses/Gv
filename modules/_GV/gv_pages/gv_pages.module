@@ -2135,6 +2135,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#tree' => TRUE,
         '#weight' => 11,
       );
+            $form['provider_options']['enabled'] = array(
+              '#title' => 'Enable Option Tab',
+              '#type' => 'checkbox',
+              '#default_value' => isset($p_data['provider_options']['enabled']) ? $p_data['provider_options']['enabled'] : NULL,
+            );
+            
             foreach ($provider_options as $options_set => $options_data) {
               
                   $form['provider_options'][$options_set] = array(
