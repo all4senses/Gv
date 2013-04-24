@@ -183,15 +183,11 @@
                     
                   <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ /*. '</span>'*/ : t(' Provider') )); ?></a></li>
                   
-                  
-                  
-                  
-                  
                   <?php 
                   
                   global $user;
                   
-                  if ($user->uid && !empty($node->p_data['provider_options'])) {
+                  if (!empty($node->p_data['provider_options'])) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
                   
@@ -271,7 +267,7 @@
                   
                   
                   
-                  if ($user->uid && !empty($node->p_data['provider_options'])) {
+                  if (!empty($node->p_data['provider_options'])) {
                     
                   
                   echo '<div id="tabs-2">';
