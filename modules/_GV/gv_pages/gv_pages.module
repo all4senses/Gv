@@ -1355,8 +1355,9 @@ function gv_pages_buildHome($name, $data) {
     $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE);
     $out .= gv_blocks_getBlockThemed($block_data);
     
-    $module_path_pages = drupal_get_path('module', 'gv_misc');
-    drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
+    // it's connected via php in views header
+//    $module_path_pages = drupal_get_path('module', 'gv_misc');
+//    drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
   }  
   
   
