@@ -317,7 +317,7 @@
                   }
                   ?>
                
-                
+                <div class="bottom-clear"></div>
                 
                 <?php 
                 /*
