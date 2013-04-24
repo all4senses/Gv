@@ -132,10 +132,11 @@ $provider_options = array(
               'Virtual Numbers' => 'checkbox',
           ),
           
-          'Cloud/CRM Integration' => array(
-              'SalesForce' => 'checkbox',
+          'Integrations' => array(
+              'Filemaker' => 'checkbox',
               'Outlook' => 'checkbox',
-              'Sugar' => 'checkbox',
+              'SalesForce' => 'checkbox',
+              'SugarCRM' => 'checkbox',
           ),
           
           'Support' => array(
