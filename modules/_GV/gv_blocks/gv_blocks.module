@@ -557,7 +557,14 @@ function gv_blocks_compareProviders() {
   
   dpm($_SERVER['HTTP_REFERER']);
   
-      $out .= '<thead><tr class="logos"><th class="back" style="text-align: center;">' . l('Back', @$_SERVER['HTTP_REFERER']) . '</th>';
+      $out .= '<thead><tr class="logos"><th class="back" style="background: url(/sites/all/themes/gv_orange/css/images/rect-btn-gray-left.png) no-repeat 12px 0 transparent;
+color: gray;
+display: block;
+width: 110px;
+height: 25px;
+margin: auto;
+font-size: 12px;
+padding: 4px 0 0px 18px;">' . l('Back', @$_SERVER['HTTP_REFERER']) . '</th>';
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center;">';
           if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
