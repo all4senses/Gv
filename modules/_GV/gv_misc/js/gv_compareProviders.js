@@ -4,10 +4,7 @@
     attach: function (context, settings) {
            
        var block_height = ($(".bu-providers tbody").height() / 2);
-       console.log('height = ' + block_height);
-       
-       var append_element = '<div class="compare-button" id="b1" style="top: ' + block_height + ';"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>';
-       console.log('append = ' + append_element);
+       //console.log('height = ' + block_height);
        
        //$('#block-views-providers-block_top_business_cmp').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; position: absolute; right: -24px;top: 216px; z-index: 20;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
        //$('.bu-providers').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; position: absolute; right: -24px;top: 216px; z-index: 20;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
