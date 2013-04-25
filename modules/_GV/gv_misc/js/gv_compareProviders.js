@@ -3,7 +3,7 @@
   Drupal.behaviors.gv_compareProviders = {
     attach: function (context, settings) {
            
-       var block_height = ($(".bu-providers tbody").height() / 2) - 20;
+       var block_height = ($(".bu-providers tbody").height() / 2);
        console.log('height = ' + block_height);
        
        var append_element = '<div class="compare-button" id="b1" style="top: ' + block_height + ';"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>';
