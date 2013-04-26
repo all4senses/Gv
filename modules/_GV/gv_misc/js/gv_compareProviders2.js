@@ -41,15 +41,6 @@
        
        $(".p-compare").click(function(e){
          
-         var current_tr = $(this).parent().parent();
-         
-         console.log(current_tr);
-         console.log(e);
-         
-         $('#b2').remove();
-         $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
-       
-         
          var checked_count = 0;
          var checkboxes = $(".p-compare");
          
@@ -75,10 +66,23 @@
          }
          
          if (!checked_count) {
-           $('.compare-button#b1').hide();
+           //$('.compare-button#b1').hide();
+           $('#b2').remove();
          }
          else {
-           $('.compare-button#b1').show();
+           
+            //$('.compare-button#b1').show();
+           
+            var current_tr = $(this).parent().parent();
+         
+            console.log(current_tr);
+            console.log(e);
+
+            $('#b2').remove();
+            $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
+       
+         
+         
          }
          
        });
