@@ -34,13 +34,20 @@
          top.location.href = url;
          
        });    
-           
+       
+       
+       
+       
+       
        $(".p-compare").click(function(e){
          
          var current_tr = $(this).parent().parent();
          
          console.log(current_tr);
          console.log(e);
+         
+         $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important; top: 0px;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
+       
          
          var checked_count = 0;
          var checkboxes = $(".p-compare");

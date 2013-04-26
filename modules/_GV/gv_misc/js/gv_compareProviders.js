@@ -37,11 +37,6 @@
            
        $(".p-compare").click(function(e){
          
-         var current_tr = $(this).parent().parent();
-         
-         console.log(current_tr);
-         console.log(e);
-         
          var checked_count = 0;
          var checkboxes = $(".p-compare");
          
