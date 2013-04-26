@@ -31,7 +31,7 @@
            }
          }
          var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
-         //console.log(url);
+         console.log(url);
          
          top.location.href = url;
          
