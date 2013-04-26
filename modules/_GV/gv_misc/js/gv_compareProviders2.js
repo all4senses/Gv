@@ -74,7 +74,7 @@
          
          
          
-         console.log($(this)[0].checked);
+         //console.log($(this)[0].checked);
          
          if (!checked_count) {
            //$('.compare-button#b1').hide();
@@ -84,10 +84,10 @@
            
             //$('.compare-button#b1').show();
            
-            var current_tr = $(this).parent().parent();
+            //var current_tr = $(this).parent().parent();
          
-            console.log(current_tr);
-            console.log(e);
+            //console.log(current_tr);
+            //console.log(e);
 
             $('#b2').remove();
             if ($(this)[0].checked) {
@@ -97,6 +97,8 @@
              console.log(checkboxes_checked[0]);
              $(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next.png"/></div>');
             }
+            
+            $(".p-compare").click(compare_click);
          
          }
          
@@ -107,4 +109,29 @@
     }
   };
 
+
+      function compare_click(e){
+         
+         var checkboxes = $(".p-compare");
+         
+         var params = '';
+         for (i = 0; i < checkboxes.length; ++i) {
+           if (checkboxes[i].checked) {
+             //console.log(checkboxes[i].name);
+             if (params) {
+               params += ';' + checkboxes[i].name;
+             }
+             else {
+               params = checkboxes[i].name;
+             }
+           }
+         }
+         var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
+         console.log(url);
+         
+         top.location.href = url;
+         
+       }
+       
+       
 }(jQuery));
