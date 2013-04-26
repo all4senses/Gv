@@ -98,7 +98,7 @@
              $(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next.png"/></div>');
             }
             
-            $(".p-compare").click(compare_click);
+            $(".compare-button#b2").click(compare_click);
          
          }
          
