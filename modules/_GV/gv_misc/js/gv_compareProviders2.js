@@ -65,6 +65,10 @@
             }
          }
          
+         
+         
+         console.log($(this));
+         
          if (!checked_count) {
            //$('.compare-button#b1').hide();
            $('#b2').remove();
