@@ -93,6 +93,7 @@
             }
             else {
              console.log(checkboxes_checked[0]);
+             $(checkboxes_checked[0]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
             }
          
          }
