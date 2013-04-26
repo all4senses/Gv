@@ -14,28 +14,28 @@
          
        
          
-       $(".compare-button#b2").click(function(e){
-         
-         var checkboxes = $(".p-compare");
-         
-         var params = '';
-         for (i = 0; i < checkboxes.length; ++i) {
-           if (checkboxes[i].checked) {
-             //console.log(checkboxes[i].name);
-             if (params) {
-               params += ';' + checkboxes[i].name;
-             }
-             else {
-               params = checkboxes[i].name;
-             }
-           }
-         }
-         var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
-         console.log(url);
-         
-         top.location.href = url;
-         
-       });    
+//       $(".compare-button#b2").click(function(e){
+//         
+//         var checkboxes = $(".p-compare");
+//         
+//         var params = '';
+//         for (i = 0; i < checkboxes.length; ++i) {
+//           if (checkboxes[i].checked) {
+//             //console.log(checkboxes[i].name);
+//             if (params) {
+//               params += ';' + checkboxes[i].name;
+//             }
+//             else {
+//               params = checkboxes[i].name;
+//             }
+//           }
+//         }
+//         var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
+//         //console.log(url);
+//         
+//         top.location.href = url;
+//         
+//       });    
        
        
        
@@ -55,7 +55,7 @@
            }
          }
          
-         console.log(checkboxes_checked);
+         //console.log(checkboxes_checked);
          
          if (checked_count >= 3) {
            for (i = 0; i < checkboxes.length; ++i) {
@@ -94,7 +94,7 @@
               $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next.png"/></div>');
             }
             else {
-             console.log(checkboxes_checked[0]);
+             //console.log(checkboxes_checked[0]);
              $(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next.png"/></div>');
             }
             
@@ -127,7 +127,7 @@
            }
          }
          var url = 'http://getvoip.com/compare-providers?p=' + encodeURIComponent(params);
-         console.log(url);
+         //console.log(url);
          
          top.location.href = url;
          
