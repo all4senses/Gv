@@ -44,11 +44,16 @@
          var checked_count = 0;
          var checkboxes = $(".p-compare");
          
+         var checkboxes_checked = [];
+         
          for (i = 0; i < checkboxes.length; ++i) {
            if (checkboxes[i].checked) {
              ++checked_count;
+             checkboxes_checked.push(checkboxes[i]);
            }
          }
+         
+         console.log(checkboxes_checked);
          
          if (checked_count >= 3) {
            for (i = 0; i < checkboxes.length; ++i) {
@@ -83,9 +88,12 @@
             console.log(e);
 
             $('#b2').remove();
-            $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
-       
-         
+            if ($(this)[0].checked) {
+              $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
+            }
+            else {
+             console.log(checkboxes_checked[0]);
+            }
          
          }
          
