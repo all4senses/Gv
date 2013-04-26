@@ -3,16 +3,18 @@
   Drupal.behaviors.gv_compareProviders = {
     attach: function (context, settings) {
            
-       var block_height = ($(".bu-providers tbody").height() / 2) + 15;
+       
        //console.log('height = ' + block_height);
        
        //$('#block-views-providers-block_top_business_cmp').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; position: absolute; right: -24px;top: 216px; z-index: 20;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
        //$('.bu-providers').append('<div class="compare-button" id="b1" style="display: none; height: 100px; width: 35px; position: absolute; right: -24px;top: 216px; z-index: 20;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
-       $('.bu-providers').append('<div class="compare-button" id="b1" style="top: ' + block_height + 'px;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
+
+       ////var block_height = ($(".bu-providers tbody").height() / 2) + 15;
+       ////$('.bu-providers').append('<div class="compare-button" id="b1" style="top: ' + block_height + 'px;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
          
        
          
-       $(".compare-button#b1").click(function(e){
+       $(".compare-button#b2").click(function(e){
          
          var checkboxes = $(".p-compare");
          
@@ -89,11 +91,11 @@
 
             $('#b2').remove();
             if ($(this)[0].checked) {
-              $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
+              $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next.png"/></div>');
             }
             else {
              console.log(checkboxes_checked[0]);
-             $(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
+             $(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next.png"/></div>');
             }
          
          }
