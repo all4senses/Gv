@@ -46,6 +46,7 @@
          console.log(current_tr);
          console.log(e);
          
+         //$(this).parent().parent().find('#b2').remo
          $(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important; top: 0px;"><img src="/sites/all/themes/gv_orange/css/images/compare-button2.png" style="height: 150px; cursor: pointer;"/></div>');
        
          
