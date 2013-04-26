@@ -67,7 +67,7 @@
          
          
          
-         console.log($(this));
+         console.log($(this)[0].checked);
          
          if (!checked_count) {
            //$('.compare-button#b1').hide();
