@@ -1,0 +1,239 @@
+<?php
+
+/**
+ * @file
+ * Acquia Marketo Integration main file.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function marketo_soap_menu() {
+  $items['admin/config/search/marketo-soap'] = array(
+    'title' => 'Marketo SOAP API Integration',
+    'description' => 'Configures Marketo SOAP API',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('marketo_soap_settings'),
+    'access arguments' => array('administer Marketo Soap'),
+    'file' => 'marketo_soap.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements of hook_permission().
+ */
+function marketo_soap_permission() {
+  return array(
+    'administer Marketo Soap' => array(
+      'title' => t('Administer Marketo SOAP'),
+      'description' => t('Manage Marketo SOAP API settings'),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_cron_queue_info().
+ */
+function marketo_soap_cron_queue_info() {
+  if (variable_get('marketo_soap_use_queue', FALSE) && variable_get('marketo_soap_queue_cron', FALSE)) {
+    $queues['marketo_soap_push'] = array(
+      'worker callback' => 'marketo_soap_queue_push',
+      'time' => 120
+    );
+    return $queues;
+  }
+  else {
+    return array();
+  }
+}
+
+/**
+ * Handle queue item and push data from queue to Marketo
+ *
+ * @param $data
+ *   Data array from queue
+ */
+function marketo_soap_queue_push($data) {
+  marketo_soap_push_account($data['account'], $data['event'], TRUE);
+}
+
+/**
+ * Push account o Marketo.
+ *
+ * @param $account
+ *   Drupal account
+ * @param $event
+ *   Event type - 'insert', 'update'
+ * @param $bypass_queue
+ *   Force bypassing queue
+ */
+function marketo_soap_push_account($account, $event, $bypass_queue = FALSE) {
+  if (variable_get('marketo_soap_use_queue', FALSE) && !$bypass_queue) {
+    $queue = DrupalQueue::get('marketo_soap_push');
+    $queue->createItem(array(
+      'account' => $account,
+      'event' => $event,
+    ));
+  }
+  else {
+    $submit_to_marketo = _marketo_soap_create_values($account);
+    // Trigger sync.
+    _marketo_soap_upsert($submit_to_marketo['Email'], $submit_to_marketo, $event);
+  }
+}
+
+/**
+ * Implements of hook_user_insert().
+ */
+function marketo_soap_user_insert(&$edit, $account, $category) {
+  marketo_soap_push_account($account, 'insert');
+}
+
+/**
+ * Implements of hook_user_update().
+ */
+function marketo_soap_user_update(&$edit, $account, $category) {
+  marketo_soap_push_account($account, 'update');
+}
+
+/*******************************************************************************
+ *
+ * Non-drupaly Marketo's stuff plus some custom support functions below
+ *
+ ******************************************************************************/
+
+/**
+ * Initialize Marketo's client object.
+ */
+function _marketo_soap_initialize() {
+
+  $accessKey = variable_get('marketo_soap_user_id');
+  $secretKey = variable_get('marketo_soap_secret_key');
+  $soapEndPoint = variable_get('marketo_soap_endpoint');
+  $timezone = date_default_timezone();
+
+  // Client object and campaign list available to be used in this module's hooks.
+  $client = new mktowsClient($accessKey, $secretKey, $soapEndPoint, $timezone);
+
+  return $client;
+}
+
+/**
+ * Handle sync of lead (means, it could be creation or updating).
+ * @TODO: error handle this baby below. Try/Catch and throw exception if client object doesn't initialize.
+ */
+function _marketo_soap_upsert($email, $values, $action) {
+
+  // Do we need to place the lead into a specific campaign depending on creation or updating?
+  // Handle that in the switch below.
+  switch ($action) {
+    case 'insert':
+      $campaign = variable_get('marketo_soap_reg_campaign');
+      break;
+    case 'update':
+      $campaign = variable_get('marketo_soap_upd_campaign');
+      break;
+    default :
+      // do
+      break;
+  }
+
+  // Initialize client object.
+  $client = _marketo_soap_initialize();
+
+  // Make an upsert LeadSync call here passing the $submit_to_marketo as the values.
+  $success = $client->syncLead($email, $values);
+  $campaigns = $client->getCampaignsForSource();
+
+  switch ($success->result->syncStatus->status) {
+    case 'CREATED' || 'UPDATED':
+
+      // Handle what to do on a successful new lead created.
+      $leadId = $client->getLead('EMAIL', $email);
+
+      // Check that the campaign exist.
+      if (isset($campaigns[$campaign])) {
+        $ok = $client->requestCampaign($campaigns[$campaign], $leadId);
+      }
+      // Campaign doesn't exist of requestCampaign failed, log error.
+      if (!isset($campaigns[$campaign]) || $ok == FALSE) {
+        _marketo_soap_watchdog_log('Assigning lead to campaign failed.', WATCHDOG_ERROR);
+      }
+      break;
+    default:
+      // Something went wrong and the lead was not submitted. Handle here.
+      drupal_set_message('Marketo lead submission failed.', 'error');
+      return;
+
+      break;
+  }
+}
+
+/**
+ * Custom function to return fields mapped array.
+ */
+function _marketo_soap_map_values($text_area_values) {
+
+  $map = array();
+
+  // Use regex to account for the different break line methods in different platforms.
+  $text_area_lines = preg_split('/$\R?^/m', $text_area_values);
+
+  // Loop through lines and make a map array with the local field as the key and the Marketo corresponding field on the right.
+  foreach ($text_area_lines as $line) {
+    $temp_map = explode('|', $line);
+    // Trim bad spaces around the field names.
+    $map[trim($temp_map[0])] = trim($temp_map[1]);
+  }
+  return $map;
+};
+
+/**
+ * Custom function to create Marketo submission values.
+ */
+function _marketo_soap_create_values($account) {
+
+  $submit_to_marketo = array();
+  $fields_map = _marketo_soap_map_values(variable_get('marketo_soap_field_mapping'));
+
+  foreach ($fields_map as $our_field => $marketo_field) {
+    if (isset($account->$our_field)) {
+      // To grab the value of the field, it needs to be a string, int, float or even boolean, but not an array.
+      if (!is_array($account->$our_field)) {
+        $submit_to_marketo[$marketo_field] = $account->$our_field;
+      }
+      // Handle values in arrays.
+      else {
+        $items = field_get_items('user', $account, $our_field);
+
+        // More than one value in the array == some hacky way of passing all values.
+        if (count($items) > 1) {
+          $concatenated_values = '';
+
+          foreach ($items as $key => $item) {
+            $value = field_view_value('user', $account, $our_field, $items[$key]);
+            $concatenated_values .= $value['#markup'] . ' ';
+          }
+
+          // Ugly, but how else to pass multiple selections to a single item field?
+          $submit_to_marketo[$marketo_field] = $concatenated_values;
+        }
+        // A bit better than above, just grab the single value of the array.
+        else {
+          $value = field_view_value('user', $account, $our_field, $items[0]);
+          $submit_to_marketo[$marketo_field] = $value['#markup'];
+        }
+      }
+    }
+  }
+  return $submit_to_marketo;
+}
+
+/**
+ * Wrapper function to log errors to watchdog without mixing Drupaly functions in the Marketo class file.
+ */
+function _marketo_soap_watchdog_log($message, $severity) {
+  watchdog('marketo_soap', t($message), NULL, $severity);
+}

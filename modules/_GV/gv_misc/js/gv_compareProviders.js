@@ -14,6 +14,10 @@
          
        $(".compare-button#b1").click(function(e){
          
+         var current_tr = $(this).parent().parent();
+         
+         console.log(current_tr);
+         
          var checkboxes = $(".p-compare");
          
          var params = '';
