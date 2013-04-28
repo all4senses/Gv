@@ -3059,12 +3059,13 @@ function gv_misc_testPage() {
 
       
       //$input_image['img'] = gv_misc_loadImage(str_replace('%20', ' ', $provider['themed_image_src']));
+      $input_image['img'] = gv_misc_loadImage($provider['themed_image_src']);
       $input_image['info'] = getimagesize($provider['themed_image_src']);
       //dpm($input_image['img']);
       //if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) 
         {
         
-        $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
+        //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
         
         $x1 = $current_x; $x2 = $out_size['w']; $y1 = $current_y; $y2 = $current_y + $input_image['info'][1];
         //dpm('$x1 = ' . $x1 . ', $x2 = ' . ', $y1 = ' . $y1 . ', $y2 = ' . $y2);
