@@ -2994,9 +2994,9 @@ function gv_misc_testPage() {
         //dpm($view->result);
         foreach ($view->result as $provider) {
           //dpm($all_data_quick[$provider->nid]['name']);
-          if (strpos($all_data_quick[$provider->nid]['i_logo_uri'], 'gif')) {
-            continue;
-          }
+//          if (strpos($all_data_quick[$provider->nid]['i_logo_uri'], 'gif')) {
+//            continue;
+//          }
           $input_providers[$providers_logos_sprite_name][$provider->nid]['nid'] = $all_data_quick[$provider->nid]['name'];
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
