@@ -3055,15 +3055,21 @@ function gv_misc_testPage() {
     $current_y = 0;
     
     foreach ($providers_logos_sprite as $nid => $provider) {
-      $input_image['file'] = $provider['themed_image_src'];
-      if ($input_image['img'] = gv_misc_loadImage($input_image['file'])) {
+
+      
+      $input_image['img'] = gv_misc_loadImage($provider['themed_image_src']);
+      //if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) 
+        {
+        
         $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
         
         $x1 = $current_x; $x2 = $out_size['w']; $y1 = $current_y; $y2 = $current_y + $input_image['info'][1];
         dpm('$x1 = ' . $x1 . ', $x2 = ' . ', $y1 = ' . $y1 . ', $y2 = ' . $y2);
         imagecopy($out_sprite['img'], $input_image['img'], $current_x, $current_y, $out_size['w'], $current_y + $input_image['info'][1], $input_image['info'][0], $input_image['info'][1]);
         $current_y += 10 + $input_image['info'][1];
+        
       }
+      
     }
   
     // Save a new sprite file.
