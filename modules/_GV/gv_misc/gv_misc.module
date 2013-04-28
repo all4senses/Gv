@@ -2973,9 +2973,9 @@ function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
   $providers_logos_sprites = array(
-    //'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
+    'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
     'top_bu_providers' => array('providers_views_displays' => array('block'), 'listing_pos_fields' => array('field_p_erating')),
-    //'top_re_providers' => array('providers_views_displays' => array('block_1'), 'listing_pos_fields' => array('field_p_erating_residential')),
+    'top_re_providers' => array('providers_views_displays' => array('block_1'), 'listing_pos_fields' => array('field_p_erating_residential')),
   );
 
   $image_style_name = 'logo_provider_chart_main';
@@ -2990,7 +2990,7 @@ function gv_misc_testPage() {
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
       $view->execute($providers_views_display);
       if ($view->result) {
-        dpm($view->result);
+        //dpm($view->result);
         foreach ($view->result as $provider) {
           //dpm($all_data_quick[$provider->nid]['name']);
           $input_providers[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
