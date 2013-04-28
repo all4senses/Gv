@@ -2978,12 +2978,11 @@ function gv_misc_testPage() {
     //'top_re_providers' => array('providers_views_displays' => array('block_1'), 'listing_pos_fields' => array('field_p_erating_residential')),
   );
 
+  $image_style_name = 'logo_provider_chart_main';
+  
   $all_data_quick = gv_misc_getProvidersDataQuick();
-  $all_data_quick[$data['data']->nid]['name'];
-      
-      
   $view = views_get_view('providers');
-  dpm($view);
+
   foreach ($providers_logos_sprites as $providers_logos_sprite) {
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
@@ -2992,6 +2991,11 @@ function gv_misc_testPage() {
         dpm($view->result);
         foreach ($view->result as $provider) {
           dpm($all_data_quick[$provider->nid]['name']);
+          
+          $themed_image_src = image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']);
+          dpm($themed_image_src);
+          $out .= theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
+
         }
       }
       
