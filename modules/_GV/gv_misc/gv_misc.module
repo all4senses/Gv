@@ -3023,8 +3023,8 @@ function gv_misc_testPage() {
     $out_size = array();
     
     foreach ($providers_logos_sprite as $nid => $provider) {
-      $input_image['info'] = getimagesize($provider['themed_image_src']);
-      
+      $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
+      dpm($input_image);
       // Set a height (all providers logos height + 10px between each others).
       if (empty($out_size['h'])) {
         $out_size['h'] = $input_image['info'][1];
