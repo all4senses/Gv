@@ -3039,7 +3039,7 @@ function gv_misc_testPage() {
       }
     }
     
-    //dpm($out_size);
+    dpm($out_size);
     
     $out_sprite['img'] = imagecreatetruecolor($out_size['w'], $out_size['h']);
   
@@ -5847,6 +5847,10 @@ function gv_misc_loadImage($imgname, $type = null)
         case 'jpg':
         case 'jpeg':
             $im = @imagecreatefromjpeg($imgname);
+            break;
+          
+        case 'gif':
+            $im = @imagecreatefromgif($imgname);
             break;
     }
 
