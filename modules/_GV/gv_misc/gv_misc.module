@@ -2972,6 +2972,24 @@ function gv_misc_testPage_iframe() {
 function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
+  $providers_logos_sprites = array(
+    //'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
+    'top_bu_providers' => array('providers_views_displays' => array('block'), 'listing_pos_fields' => array('field_p_erating')),
+    //'top_re_providers' => array('providers_views_displays' => array('block_1'), 'listing_pos_fields' => array('field_p_erating_residential')),
+  );
+
+  $view = views_get_view('providers');
+  foreach ($providers_logos_sprites as $providers_logos_sprite) {
+    
+    foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
+      $results = $view->preview($providers_views_display);
+      if ($view->result) {
+        dpm($view);
+        dpm($results);
+      }
+    }
+  }
+  
   $input_image['file'] = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo.png';
   
   $input_image['img']  = gv_misc_loadImage($input_image['file']);
@@ -3015,7 +3033,7 @@ function gv_misc_testPage() {
   //Header("Content-type: image/png");
   //imagepng($out_sprite['img'], NULL, 0);
   
-  //return $out . '<br>End of Test';
+  return $out . '<br>End of Test';
 }
 
 
