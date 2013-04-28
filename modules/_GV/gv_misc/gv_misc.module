@@ -2975,7 +2975,7 @@ function gv_misc_testPage() {
   $image_file = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo.png';
   
   $profile_pic['img']  = gv_misc_loadImage($image_file);
-  $profile_pic['info'] = getimagesize($profile_pic[$image_file]);
+  $profile_pic['info'] = getimagesize($image_file);
   
   dpm($profile_pic);
   
