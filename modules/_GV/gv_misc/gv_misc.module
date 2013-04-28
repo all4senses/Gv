@@ -2991,7 +2991,7 @@ function gv_misc_testPage() {
       $view->execute($providers_views_display);
       if ($view->result) {
         foreach ($view->result as $provider) {
-          $input_providers[$providers_logos_sprite_name][$provider->nid]['nid'] = $all_data_quick[$provider->nid]['name'];
+          $input_providers[$providers_logos_sprite_name][$provider->nid]['nid'] = $provider->nid;
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
           
