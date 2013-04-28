@@ -3057,7 +3057,8 @@ function gv_misc_testPage() {
     foreach ($providers_logos_sprite as $nid => $provider) {
 
       
-      $input_image['img'] = gv_misc_loadImage($provider['themed_image_src']);
+      $input_image['img'] = gv_misc_loadImage(str_replace('%20', ' ', $provider['themed_image_src']));
+      dpm($input_image['img']);
       //if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) 
         {
         
