@@ -3017,6 +3017,7 @@ function gv_misc_testPage() {
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
+    $out_size = array();
     
     foreach ($providers_logos_sprite as $nid => $provider) {
       $input_image['info'] = getimagesize($provider['themed_image_src']);
