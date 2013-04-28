@@ -2978,18 +2978,23 @@ function gv_misc_testPage() {
     //'top_re_providers' => array('providers_views_displays' => array('block_1'), 'listing_pos_fields' => array('field_p_erating_residential')),
   );
 
+  $all_data_quick = gv_misc_getProvidersDataQuick();
+  $all_data_quick[$data['data']->nid]['name'];
+      
+      
   $view = views_get_view('providers');
   dpm($view);
   foreach ($providers_logos_sprites as $providers_logos_sprite) {
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
-//      $results = $view->preview($providers_views_display);
-//      if ($view->result) {
-//        dpm($view);
-//        dpm($results);
-//      }
       $view->execute($providers_views_display);
-      dpm($view);
+      if ($view->result) {
+        dpm($view->result);
+        foreach ($view->result as $provider) {
+          dpm($all_data_quick[$provider->nid]['name']);
+        }
+      }
+      
     }
   }
   
