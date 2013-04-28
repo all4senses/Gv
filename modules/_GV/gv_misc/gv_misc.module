@@ -2983,11 +2983,11 @@ function gv_misc_testPage() {
   foreach ($providers_logos_sprites as $providers_logos_sprite) {
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
-      $results = $view->preview($providers_views_display);
-      if ($view->result) {
-        dpm($view);
-        dpm($results);
-      }
+//      $results = $view->preview($providers_views_display);
+//      if ($view->result) {
+//        dpm($view);
+//        dpm($results);
+//      }
       $view->execute($providers_views_display);
       dpm($view);
     }
