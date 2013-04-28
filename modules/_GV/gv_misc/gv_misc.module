@@ -3016,7 +3016,7 @@ function gv_misc_testPage() {
   
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
-    $out_sprite['file'] = $out_sprite['path'] . $providers_logos_sprite_name . '.' . $out_sprite['ext'];
+    $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
     
     foreach ($providers_logos_sprite as $nid => $provider) {
       $input_image['info'] = getimagesize($provider['themed_image_src']);
@@ -3037,46 +3037,33 @@ function gv_misc_testPage() {
     
     dpm($out_size);
     
+    $out_sprite['img'] = imagecreatetruecolor($out_size['w'], $out_size['h']);
+  
+    // Make the background transparent.
+    $white = imagecolorallocate($out_sprite['img'], 255, 255, 255);
+    $transparent = imagecolortransparent($out_sprite['img'],$white);
+
+    // Set transparency for the output image.
+    imagefilledrectangle($out_sprite['img'], 0, 0, $out_size['w'], $out_size['h'], $transparent);
+
+  
     foreach ($providers_logos_sprite as $nid => $provider) {
       $input_image['file'] = $provider['themed_image_src'];
       $input_image['img']  = gv_misc_loadImage($input_image['file']);
       $input_image['info'] = getimagesize($input_image['file']);
-
+      
+      imagecopy($out_sprite['img'], $input_image['img'], 0, 0, 0, 0, $input_image['info'][0], $input_image['info'][1]);
     }
-    
-  }
   
-  return 'test';
-  
-  //$input_image['info']['width'] = $input_image['info'][0];
-  //$input_image['info']['height'] = $input_image['info'][1];
-  
-  //dpm($input_image);
-  
-  // Should be here collected data from all added logos
-  
-  $out_size['h'] = '500'; //$height;
-    
-  
-  $out_sprite['img'] = imagecreatetruecolor($out_size['w'], $out_size['h']);
-  
-  // Make the background transparent.
-  $white = imagecolorallocate($out_sprite['img'], 255, 255, 255);
-  $transparent = imagecolortransparent($out_sprite['img'],$white);
-  
-  // Set transparency for the output image.
-  imagefilledrectangle($out_sprite['img'], 0, 0, $out_size['w'], $out_size['h'], $transparent);
-  
-  imagecopy($out_sprite['img'], $input_image['img'], 0, 0, 0, 0, $input_image['info'][0], $input_image['info'][1]);
-  
-  //dpm($out_sprite);
-  
-  // Save a new sprite file.
-  imagepng($out_sprite['img'], $out_sprite['file']);
+    // Save a new sprite file.
+    imagepng($out_sprite['img'], $out_sprite['file']);
 
-  // Show image.
-  //Header("Content-type: image/png");
-  //imagepng($out_sprite['img'], NULL, 0);
+    // Show image.
+    //Header("Content-type: image/png");
+    //imagepng($out_sprite['img'], NULL, 0);
+  
+  }
+    
   
   return $out . '<br>End of Test';
 }
