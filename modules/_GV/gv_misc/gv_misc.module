@@ -2986,14 +2986,11 @@ function gv_misc_testPage() {
   $input_providers = array();
   
   foreach ($providers_logos_sprites as $providers_logos_sprite_name => $providers_logos_sprite) {
-    
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
       $view = views_get_view('providers');
       $view->execute($providers_views_display);
       if ($view->result) {
-        //dpm($view->result);
         foreach ($view->result as $provider) {
-
           $input_providers[$providers_logos_sprite_name][$provider->nid]['nid'] = $all_data_quick[$provider->nid]['name'];
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
@@ -3023,24 +3020,20 @@ function gv_misc_testPage() {
     $out_size = array();
     
     foreach ($providers_logos_sprite as $nid => $provider) {
-      //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
-      $input_image['info'] = getimagesize($provider['themed_image_src']);
-      //dpm($input_image);
-      // Set a height (all providers logos height + 10px between each others).
-      if (empty($out_size['h'])) {
-        $out_size['h'] = $input_image['info'][1];
-      }
-      else {
-        $out_size['h'] += 10 + $input_image['info'][1];
-      }
-      
-      // Set once a width of the sprite by the widest one.
-      if (empty($out_size['w']) || $out_size['w'] < $input_image['info'][0]) {
-        $out_size['w'] = $input_image['info'][0];
+      if($input_image['info'] = getimagesize($provider['themed_image_src'])) {
+        // Set a height (all providers logos height + 10px between each others).
+        if (empty($out_size['h'])) {
+          $out_size['h'] = $input_image['info'][1];
+        }
+        else {
+          $out_size['h'] += 10 + $input_image['info'][1];
+        }
+        // Set once a width of the sprite by the widest one.
+        if (empty($out_size['w']) || $out_size['w'] < $input_image['info'][0]) {
+          $out_size['w'] = $input_image['info'][0];
+        }
       }
     }
-    
-    //dpm($out_size);
     
     $out_sprite['img'] = imagecreatetruecolor($out_size['w'], $out_size['h']);
   
@@ -3050,31 +3043,15 @@ function gv_misc_testPage() {
 
     // Set transparency for the output image.
     imagefilledrectangle($out_sprite['img'], 0, 0, $out_size['w'], $out_size['h'], $transparent);
-
   
     $current_x = 0;
-    $current_y = 0;
     
     foreach ($providers_logos_sprite as $nid => $provider) {
-
-      
-      //$input_image['img'] = gv_misc_loadImage(str_replace('%20', ' ', $provider['themed_image_src']));
-      $input_image['img'] = gv_misc_loadImage($provider['themed_image_src']);
-      $input_image['info'] = getimagesize($provider['themed_image_src']);
-      //dpm($input_image['img']);
-      //if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) 
-        {
-        
-        //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
-        
-        $x1 = $current_x; $x2 = $out_size['w']; $y1 = $current_y; $y2 = $current_y + $input_image['info'][1];
-        //dpm('$x1 = ' . $x1 . ', $x2 = ' . ', $y1 = ' . $y1 . ', $y2 = ' . $y2);
-        //imagecopy($out_sprite['img'], $input_image['img'], $current_x, $current_y, $out_size['w'], $current_y + $input_image['info'][1], $input_image['info'][0], $input_image['info'][1]);
-        imagecopy($out_sprite['img'], $input_image['img'], $current_x, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
+      if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) {
+        $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
+        imagecopy($out_sprite['img'], $input_image['img'], 0, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
         $current_y += 10 + $input_image['info'][1];
-        
       }
-      
     }
   
     // Save a new sprite file.
