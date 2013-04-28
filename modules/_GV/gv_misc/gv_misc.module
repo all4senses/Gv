@@ -3036,7 +3036,7 @@ function gv_misc_testPage() {
       }
     }
     
-    dpm($out_size);
+    //dpm($out_size);
     
     $out_sprite['img'] = imagecreatetruecolor($out_size['w'], $out_size['h']);
   
@@ -3048,12 +3048,16 @@ function gv_misc_testPage() {
     imagefilledrectangle($out_sprite['img'], 0, 0, $out_size['w'], $out_size['h'], $transparent);
 
   
+    $current_x = 0;
+    $current_y = 0;
+    
     foreach ($providers_logos_sprite as $nid => $provider) {
       $input_image['file'] = $provider['themed_image_src'];
-      $input_image['img']  = gv_misc_loadImage($input_image['file']);
-      $input_image['info'] = getimagesize($input_image['file']);
-      
-      imagecopy($out_sprite['img'], $input_image['img'], 0, 0, 0, 0, $input_image['info'][0], $input_image['info'][1]);
+      if ($input_image['img']  = gv_misc_loadImage($input_image['file'])) {
+        $input_image['info'] = getimagesize($input_image['file']);
+        imagecopy($out_sprite['img'], $input_image['img'], $current_x, $current_y, $out_size['w'], $current_y  + $input_image['info'][1], $input_image['info'][0], $input_image['info'][1]);
+        $current_y += 10 + $input_image['info'][1];
+      }
     }
   
     // Save a new sprite file.
