@@ -3009,10 +3009,11 @@ function gv_misc_testPage() {
   //dpm($out_sprite);
   
   // Save a new sprite file.
-  //imagepng($out_sprite['img'], $out_sprite['file']);
+  imagepng($out_sprite['img'], $out_sprite['file']);
+
   // Show image.
-  Header("Content-type: image/png");
-  imagepng($out_sprite['img'], NULL, 0);
+  //Header("Content-type: image/png");
+  //imagepng($out_sprite['img'], NULL, 0);
   
   //return $out . '<br>End of Test';
 }
