@@ -2983,7 +2983,9 @@ function gv_misc_testPage() {
   $all_data_quick = gv_misc_getProvidersDataQuick();
   $view = views_get_view('providers');
 
-  foreach ($providers_logos_sprites as $providers_logos_sprite) {
+  $input_providers = array();
+  
+  foreach ($providers_logos_sprites as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
       $view->execute($providers_views_display);
@@ -2991,19 +2993,17 @@ function gv_misc_testPage() {
         dpm($view->result);
         foreach ($view->result as $provider) {
           //dpm($all_data_quick[$provider->nid]['name']);
-          $input_providers[$providers_logos_sprite][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
-          
-          //$input_providers[$providers_logos_sprite][$provider->nid]['themed_image_src'] = str_replace('http://getvoip.com/', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
-          //$input_providers[$providers_logos_sprite][$provider->nid]['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
-          //$out .= $input_providers[$providers_logos_sprite][$provider->nid]['themed_image_html'];
-          dpm($input_providers);
+          $input_providers[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
+          $input_providers[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = str_replace('http://getvoip.com/', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
+          $input_providers[$providers_logos_sprite_name][$provider->nid]['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
+          $out .= $input_providers[$providers_logos_sprite_name][$provider->nid]['themed_image_html'];
         }
       }
       
     }
   }
   
-  //dpm($input_providers);
+  dpm($input_providers);
   
   $input_image['file'] = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo.png';
   
