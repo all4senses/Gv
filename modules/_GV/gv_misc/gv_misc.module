@@ -2990,17 +2990,19 @@ function gv_misc_testPage() {
       if ($view->result) {
         dpm($view->result);
         foreach ($view->result as $provider) {
-          dpm($all_data_quick[$provider->nid]['name']);
-          
-          $themed_image_src = str_replace('http://getvoip.com', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
-          dpm($themed_image_src);
-          $out .= theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
+          //dpm($all_data_quick[$provider->nid]['name']);
+          $input_providers[$providers_logos_sprite]['nid']['name'] = $all_data_quick[$provider->nid]['name'];
+          $input_providers[$providers_logos_sprite]['nid']['themed_image_src'] = str_replace('http://getvoip.com/', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
+          $input_providers[$providers_logos_sprite]['nid']['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
+          $out .= $input_providers[$providers_logos_sprite]['themed_image_html'];
 
         }
       }
       
     }
   }
+  
+  dpm($input_providers);
   
   $input_image['file'] = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo.png';
   
