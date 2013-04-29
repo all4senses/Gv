@@ -4944,19 +4944,24 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       global $user;
       if ($user->uid == 1) {
+        
         // Render a logo from sprite.
         $gv_providers_sprites = variable_get('gv_providers_sprites');
+        
         dpm($_GET);
         dpm($gv_providers_sprites);
         
-        switch ($_GET['q']) {
-          case 'home':
-            if (isset($gv_providers_sprites['home_top_providers']['data'][$data['data']->nid])) {
-              return $gv_providers_sprites['home_top_providers']['data'][$data['data']->nid]['h'];
+        $out_sprite_path = 'sites/default/files/p/';
+        $url_to_sprite = array('home' => 'home_top_providers');
+        $current_url = $_GET['q'];
+        
+        if (isset($url_to_sprite[$current_url])) {
+          if (isset($gv_providers_sprites[$url_to_sprite[$current_url]]['data'][$data['data']->nid])) {
+              return gv_misc_getTrackingUrl('<div style="width: 140px; height: ' . $gv_providers_sprites[$url_to_sprite[$current_url]]['data'][$data['data']->nid]['h'] . '; background: url("/' . $out_sprite_path . $url_to_sprite[$current_url] . '.png?' . $gv_providers_sprites[$url_to_sprite[$current_url]]['time'] . '") no-repeat 0 ' . $gv_providers_sprites[$url_to_sprite[$current_url]]['data'][$data['data']->nid]['y'] . '"></div>', NULL, $data['data']->nid);
             }
         }
+          
         
-        //return 'xxx';
       }
         
     case 'logo_article':
