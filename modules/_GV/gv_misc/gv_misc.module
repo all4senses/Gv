@@ -4885,13 +4885,15 @@ function gv_misc_getProvidersDataQuick($scope = 'all', $reset = FALSE, $clear_fr
 /**
  * Return sprite image with link for a provider from certain sprite by nid.
  */
-function gv_misc_getProviderLogoFromSprite($nid, $sprite_name) {
+function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick = NULL) {
 
   $gv_providers_sprites = variable_get('gv_providers_sprites');
   if (isset($gv_providers_sprites[$sprite_name]['data'][$nid])) {
     $out_sprite_path = 'sites/default/files/p/';
-    $all_data_quick = gv_misc_getProvidersDataQuick();
-    return gv_misc_getTrackingUrl('<div title="' . $all_data_quick[$nid]['i_logo_title'] . '" style="width: 130px; height: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['h'] . 'px; background: url('. "'/" . $out_sprite_path . $sprite_name . '.png?' . $gv_providers_sprites[$sprite_name]['time'] . "')" . ' no-repeat 0 -' . $gv_providers_sprites[$sprite_name]['data'][$nid]['y'] . 'px transparent;"></div>', NULL, $nid);
+    if (!$all_data_quick) {
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+    }
+    return '<div title="' . $all_data_quick[$nid]['i_logo_title'] . '" style="width: 130px; height: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['h'] . 'px; background: url('. "'/" . $out_sprite_path . $sprite_name . '.png?' . $gv_providers_sprites[$sprite_name]['time'] . "')" . ' no-repeat 0 -' . $gv_providers_sprites[$sprite_name]['data'][$nid]['y'] . 'px transparent;"></div>';
   }
   return NULL;
 }        
@@ -4967,7 +4969,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         if (isset($url_to_sprite[$current_url])) {
           if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url])) {
-            return $p_image;
+            return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid);
           }
         }
         

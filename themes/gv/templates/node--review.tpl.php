@@ -11,11 +11,11 @@ if($view_mode == 'home_teaser') {
 
   echo '<div class="header">';
   
-      //$image_style_name = 'logo_provider_chart_main';
-      $image_style_name = 'logo_provider_chart_main'; //'thumbnail';
-      $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
-
-      
+      global $user;
+      if ($user->uid != 1 || !$image = gv_misc_getProviderLogoFromSprite($provider_nid, 'home_top_providers', $all_data_quick)) {
+        $image_style_name = 'logo_provider_chart_main'; //'thumbnail';
+        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
+      }
       
       if (!empty($all_data_quick[$provider_nid]['i_web'])) {
         //$logo_link = $all_data_quick[$provider_nid]['i_web'];
