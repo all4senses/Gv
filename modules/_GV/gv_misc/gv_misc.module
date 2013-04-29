@@ -4963,12 +4963,14 @@ function gv_misc_getProviderQuickData($target, $data) {
       global $user;
       if ($user->uid == 1) {
         
-        dpm($_GET);
-        dpm($_SERVER);
+        //dpm($_GET);
+        //dpm($_SERVER);
         
         // Render a logo from sprite.
-        $url_to_sprite = array('home' => 'home_top_providers', 'compare-business-voip-providers' => 'top_bu_providers', 'compare-residential-voip-providers' => 'top_re_providers');
-        $current_url = $_GET['q'];
+        $url_to_sprite = array('/' => 'home_top_providers', '/compare-business-voip-providers' => 'top_bu_providers', '/compare-residential-voip-providers' => 'top_re_providers');
+        $current_url = $_SERVER['REQUEST_URI'];
+        
+        
         
         if (isset($url_to_sprite[$current_url])) {
           if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url])) {
