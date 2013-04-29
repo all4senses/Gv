@@ -4949,7 +4949,14 @@ function gv_misc_getProviderQuickData($target, $data) {
         dpm($_GET);
         dpm($gv_providers_sprites);
         
-        return 'xxx';
+        switch ($_GET['q']) {
+          case 'home':
+            if (isset($gv_providers_sprites['home_top_providers']['data'][$data['data']->nid])) {
+              return $gv_providers_sprites['home_top_providers']['data'][$data['data']->nid]['h'];
+            }
+        }
+        
+        //return 'xxx';
       }
         
     case 'logo_article':
