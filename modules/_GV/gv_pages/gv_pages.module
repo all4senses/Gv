@@ -2485,7 +2485,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $erating_fields_names = array('field_p_erating', 'field_p_erating_residential', 'field_p_erating_sip', 'field_p_erating_pbx', 'field_p_erating_mo', 'field_p_erating_ifa', 'field_p_erating_cc', 'field_p_erating_bu_ca', 'field_p_erating_re_ca', 'field_p_erating_smbv');
 
           foreach ($erating_fields_names as $erating_field) {
-            $erating_fields[$erating_field] = $form['und'][0]['value']['#default_value'];
+            $erating_fields[$erating_field] = $form[$erating_field]['und'][0]['value']['#default_value'];
           }
           
           $form['erating_fields_original'] = array(
