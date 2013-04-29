@@ -2972,6 +2972,17 @@ function gv_misc_testPage_iframe() {
 function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
+  gv_misc_rebuildProvidersLogosSprites();
+  
+  return $out . '<br>End of Test';
+}
+
+
+/**
+ * Rebuilds providers logos sprites.
+ */
+function gv_misc_rebuildProvidersLogosSprites() {
+  
   $providers_logos_sprites = array(
     'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
     'top_bu_providers' => array('providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
@@ -2988,17 +2999,16 @@ function gv_misc_testPage() {
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
-
-  $input_providers = array();
-  
   foreach ($providers_logos_sprites as $providers_logos_sprite_name => $providers_logos_sprite) {
+    
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
+      
       $view = views_get_view('providers');
       $view->execute($providers_views_display);
+      
       if ($view->result) {
 
         foreach ($view->result as $provider) {
-          //$input_providers[$providers_logos_sprite_name][$provider->nid]['nid'] = $provider->nid;
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
           
@@ -3007,11 +3017,13 @@ function gv_misc_testPage() {
                   
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
           
-          $out .= $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'];
+          //$out .= $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'];
         }
+        
       }
       
     }
+    
   }
   
   
@@ -3077,10 +3089,12 @@ function gv_misc_testPage() {
   
   variable_set('gv_providers_sprites', $input_providers);
   
-  return $out . '<br>End of Test';
 }
 
 
+/**
+ * Creates time elapsed format.
+ */
 function gv_misc_elapsed_time($timestamp, $precision = 2) { 
   $time = time() - $timestamp; 
   $a = array('decade' => 315576000, 'year' => 31557600, 'month' => 2629800, 'week' => 604800, 'day' => 86400, 'hour' => 3600, 'min' => 60, 'sec' => 1); 

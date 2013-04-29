@@ -85,9 +85,9 @@ $provider_options = array(
               'Desktop Integration Client' => 'checkbox',
               'IP Phones Supported' => 'textfield',
               //'IP Phones Non Supported' => 'textfield',
-              'Toll Free Numbers' => 'textfield',
-              'Local Numbers' => 'textfield',
-              'Vanity Numbers' => 'textfield',
+              'Toll Free Numbers' => 'checkbox',
+              'Local Numbers' => 'checkbox',
+              'Vanity Numbers' => 'checkbox',
               'BYOD Option' => 'checkbox',
           ),
           
@@ -133,8 +133,10 @@ $provider_options = array(
           ),
           
           'Integrations' => array(
+              'ACT!' => 'checkbox',
               'Filemaker' => 'checkbox',
               'Outlook' => 'checkbox',
+              'NetSuite' => 'checkbox',
               'SalesForce' => 'checkbox',
               'SugarCRM' => 'checkbox',
           ),
