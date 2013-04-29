@@ -4969,7 +4969,15 @@ function gv_misc_getProviderQuickData($target, $data) {
         //dpm($_SERVER);
         
         // Render a logo from sprite.
-        $url_to_sprite = array('/providers/reviews' => 'all_reviews_providers', '/' => 'home_top_providers', '/compare-business-voip-providers' => 'top_bu_providers', '/compare-residential-voip-providers' => 'top_re_providers');
+        
+        $url_to_sprite = array( '/' => 'home_top_providers', 
+                                '/providers/reviews' => 'all_reviews_providers', 
+                                '/compare-business-voip-providers' => 'top_bu_providers', 
+                                '/business-voip-reviews' => 'top_bu_providers', 
+                                '/compare-residential-voip-providers' => 'top_re_providers', 
+                                '/residential-voip-reviews' => 'top_re_providers'
+                              );
+        
         $current_url = $_SERVER['REQUEST_URI'];
         
         
