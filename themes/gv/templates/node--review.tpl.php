@@ -12,7 +12,7 @@ if($view_mode == 'home_teaser') {
   echo '<div class="header">';
   
       //$image_style_name = 'logo_provider_chart_main';
-      $image_style_name = 'thumbnail';
+      $image_style_name = 'logo_provider_chart_main'; //'thumbnail';
       $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
 
       
