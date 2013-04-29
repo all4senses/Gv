@@ -3068,6 +3068,8 @@ function gv_misc_testPage() {
   dpm($input_providers);
   dpm($input_providers_data);
   
+  variable_set('gv_providers_sprites', $input_providers);
+  
   return $out . '<br>End of Test';
 }
 
@@ -4939,6 +4941,17 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
     case 'logo_chart':
+      
+      global $user;
+      if ($user->uid == 1) {
+        // Render a logo from sprite.
+        $gv_providers_sprites = variable_set('gv_providers_sprites', $input_providers);
+        dpm($_GET);
+        dpm($gv_providers_sprites);
+        
+        return 'xxx';
+      }
+        
     case 'logo_article':
     case 'logo_chart_iframe':
     
