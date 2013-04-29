@@ -4963,8 +4963,11 @@ function gv_misc_getProviderQuickData($target, $data) {
       global $user;
       if ($user->uid == 1) {
         
+        dpm($_GET);
+        dpm($_SERVER);
+        
         // Render a logo from sprite.
-        $url_to_sprite = array('home' => 'home_top_providers');
+        $url_to_sprite = array('home' => 'home_top_providers', 'compare-business-voip-providers' => 'top_bu_providers', 'compare-residential-voip-providers' => 'top_re_providers');
         $current_url = $_GET['q'];
         
         if (isset($url_to_sprite[$current_url])) {
@@ -4972,16 +4975,6 @@ function gv_misc_getProviderQuickData($target, $data) {
             return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid);
           }
         }
-        
-//        if (isset($url_to_sprite[$current_url])) {
-//          $gv_providers_sprites = variable_get('gv_providers_sprites');
-//          if (isset($gv_providers_sprites[$url_to_sprite[$current_url]]['data'][$data['data']->nid])) {
-//              $out_sprite_path = 'sites/default/files/p/';
-//              $all_data_quick = gv_misc_getProvidersDataQuick();
-//              return gv_misc_getTrackingUrl('<div title="' . $all_data_quick[$data['data']->nid]['i_logo_title'] . '" style="width: 130px; height: ' . $gv_providers_sprites[$url_to_sprite[$current_url]]['data'][$data['data']->nid]['h'] . 'px; background: url('. "'/" . $out_sprite_path . $url_to_sprite[$current_url] . '.png?' . $gv_providers_sprites[$url_to_sprite[$current_url]]['time'] . "')" . ' no-repeat 0 -' . $gv_providers_sprites[$url_to_sprite[$current_url]]['data'][$data['data']->nid]['y'] . 'px transparent;"></div>', NULL, $data['data']->nid);
-//            }
-//        }
-          
         
       }
         
