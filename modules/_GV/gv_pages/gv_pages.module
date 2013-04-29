@@ -4557,7 +4557,12 @@ function gv_pages_submitForm_phoneReview(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_submitForm_provider(&$form, &$form_state) {
-  dpm($form_state['values']);
+  global $user;
+  if ($user->uid == 1) {
+    dpr($form_state['values']);
+    exit;
+  }
+  //dpm($form_state['values']);
   //dpm($form);
 }
 
