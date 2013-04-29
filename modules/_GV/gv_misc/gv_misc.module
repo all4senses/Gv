@@ -4945,7 +4945,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       global $user;
       if ($user->uid == 1) {
         // Render a logo from sprite.
-        $gv_providers_sprites = variable_set('gv_providers_sprites', $input_providers);
+        $gv_providers_sprites = variable_get('gv_providers_sprites');
         dpm($_GET);
         dpm($gv_providers_sprites);
         
