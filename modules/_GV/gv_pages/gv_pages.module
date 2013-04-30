@@ -4580,7 +4580,7 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
     foreach($erating_fields_original as $erating_field_title => $erating_field_original) {
       $erating_fields_submitted[$erating_field_title] = $form_state['values'][$erating_field_title]['und'][0]['value'];
       if ($erating_field_original != $form_state['values'][$erating_field_title]['und'][0]['value']) {
-        $erating_fields_different[$erating_field_title]['before'] = $erating_fields_submitted[$erating_field_title];
+        $erating_fields_different[$erating_field_title]['before'] = $erating_field_original;
         $erating_fields_different[$erating_field_title]['after'] = $form_state['values'][$erating_field_title]['und'][0]['value'];
       }
       //dpm($form_state['values'][$erating_field_title]);
