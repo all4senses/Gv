@@ -1154,11 +1154,8 @@ function gv_blocks_getAdBlock($ad_name) {
   switch ($ad_name) {
     
     case 'speedtest_page':
-      return '<a href="/voip-speed-test">' .
-          //'<img alt="VoIP Speed Test Tool" title="VoIP Speed Test Tool" src="/sites/default/files/speedtestbanner.png" />'
-          '<div title="VoIP Speed Test Tool" style="background: url(/sites/all/themes/gv_orange/css/images/sprite-0.png?1) no-repeat -2px -435px transparent; width: 240px; height: 120px;" />'
-        . '</a>';
-      
+      return '<a href="/voip-speed-test"><div title="VoIP Speed Test Tool" style="background: url(/sites/all/themes/gv_orange/css/images/sprite-0.png?1) no-repeat -2px -435px transparent; width: 240px; height: 120px;"></div></a>';
+      ////'<img alt="VoIP Speed Test Tool" title="VoIP Speed Test Tool" src="/sites/default/files/speedtestbanner.png" />'
     case 'free_ipad_mini':
       
       $path_to_custom_js = 'sites/all/libraries/jquery.plugins/countdown/';
