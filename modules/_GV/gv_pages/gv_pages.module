@@ -4576,11 +4576,19 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
   if ($user->uid == 1) {
     
     $erating_fields_original = unserialize($form_state['values']['erating_fields_original']);
-    dpm($erating_fields_original);
+    
     foreach($erating_fields_original as $erating_field_title => $erating_field_original) {
-      dpm($form_state['values'][$erating_field_title]);
+      $erating_fields_submitted[$erating_field_title] = $form_state['values'][$erating_field_title];
+      if ($erating_field_original != $form_state['values'][$erating_field_title]) {
+        $erating_fields_different[$erating_field_title]['before'] = $erating_fields_submitted[$erating_field_title];
+        $erating_fields_different[$erating_field_title]['after'] = $form_state['values'][$erating_field_title];
+      }
+      //dpm($form_state['values'][$erating_field_title]);
       //$form_state['values'][$erating_field_title]['und'][0]['value']
     }
+    
+    dpm($erating_fields_original);
+    dpm($erating_fields_submitted);
     
     //dpr($form_state['values']);
     //dpr($form);
