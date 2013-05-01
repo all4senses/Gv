@@ -89,8 +89,17 @@
             //console.log(current_tr);
             //console.log(e);
 
+            
             var b_top = ($(this).parent().height() - 80);
             console.log($(this).parent().height());
+            console.log(b_top);
+            
+            
+            //this.css("top", Math.max(0, ((div.height() - this.outerHeight()) / 2) + position.top) + "px");
+            
+            var cell_height = $(this).parent().height();
+            //this.css("top", Math.max(0, ((cell_height - 80) / 2)) + "px");
+            var b_top = Math.max(0, ((cell_height - 80) / 2));
             console.log(b_top);
             
             $('#b2').remove();
