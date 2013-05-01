@@ -4559,7 +4559,7 @@ function gv_pages_submitForm_phoneReview(&$form, &$form_state) {
 
 
 /**
- * Custom additional submit of review type form.
+ * Custom additional submit of provider type form.
  *
  * @param array &$form
  *   Array with declared form.
@@ -4572,23 +4572,22 @@ function gv_pages_submitForm_phoneReview(&$form, &$form_state) {
  */
 function gv_pages_submitForm_provider(&$form, &$form_state) {
   
-  global $user;
-  if ($user->uid == 1) {
-    
-    
-      // Prepare for providers logos sprites regeneration.
-      // They will be regenerated (if needed) in hook_node_update / hook_node_insert.
-    
-      $last_erating_fields_different = NULL;
-      
-      $erating_fields_before = unserialize($form_state['values']['erating_fields_original']);
+  // Prepare for providers logos sprites regeneration.
+  // They will be regenerated (if needed) in hook_node_update / hook_node_insert.
 
-      foreach($erating_fields_before as $erating_field_title => $erating_field_before) {
-        $erating_fields_submitted[$erating_field_title] = $form_state['values'][$erating_field_title]['und'][0]['value'];
-        if ($erating_field_before != $form_state['values'][$erating_field_title]['und'][0]['value']) {
-          $last_erating_fields_different[] = $erating_field_title;
-        }
-      }
+  dpm($form_state['values']);
+  
+  $last_erating_fields_different = NULL;
+
+  $erating_fields_before = unserialize($form_state['values']['erating_fields_original']);
+
+  // Find out if some of listing fields have been changed.
+  foreach($erating_fields_before as $erating_field_title => $erating_field_before) {
+    $erating_fields_submitted[$erating_field_title] = $form_state['values'][$erating_field_title]['und'][0]['value'];
+    if ($erating_field_before != $form_state['values'][$erating_field_title]['und'][0]['value']) {
+      $last_erating_fields_different[] = $erating_field_title;
+    }
+  }
 
 //      if (empty($last_erating_fields_different)) {
 //        dpm('No changed listing fields this time!');
@@ -4596,12 +4595,10 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
 //      else {
 //        dpm($last_erating_fields_different);
 //      }
-      
-      $p_data = unserialize($form['field_p_data']['und'][0]['value']['#default_value']);
-      $p_data['last_erating_fields_different'] = $last_erating_fields_different;
-      form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
-  }
-  
+
+  $p_data = unserialize($form['field_p_data']['und'][0]['value']['#default_value']);
+  $p_data['last_erating_fields_different'] = $last_erating_fields_different;
+  form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
 }
 
 
