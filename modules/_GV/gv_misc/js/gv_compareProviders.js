@@ -103,6 +103,8 @@
              $(this).parent().css('position', 'relative');
             }
             
+            console.log($(this).parent().height());
+            
             $(".compare-button#b2").click(compare_click);
          
          }
