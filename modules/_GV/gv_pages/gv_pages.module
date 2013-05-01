@@ -4609,7 +4609,7 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
       $p_data = unserialize($form['field_p_data']['und'][0]['value']['#default_value']);
       dpm($p_data);
       
-      $p_data['erating_fields_different'] = 'xxx'; //$erating_fields_different;
+      $p_data['erating_fields_different'] = 'yyy'; //$erating_fields_different;
       
       form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
       
@@ -4764,7 +4764,7 @@ function gv_pages_node_update($node) {
     //dpm($loaded_node);
     
     
-    entity_get_controller('node')->resetCache(array($node->nid));
+    //entity_get_controller('node')->resetCache(array($node->nid));
     $loaded_node2 = node_load($node->nid);
     dpm(unserialize($loaded_node2->field_p_data['und'][0]['value']));
   }
