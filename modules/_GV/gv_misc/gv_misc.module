@@ -2983,10 +2983,7 @@ function gv_misc_testPage() {
 
   //gv_misc_rebuildProvidersLogosSprites();
   
-  
-  $input_image['info'] = getimagesize('sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo.png');
-  dpm($input_image);
-  
+
   return $out . '<br>End of Test';
 }
 
@@ -3120,10 +3117,15 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   variable_set('gv_providers_sprites', $gv_providers_sprites);
   
+  
+  drupal_flush_all_caches();
+  drupal_set_message('Cache is flushed after the prividers logos sprites regenerating.', 'warning');
+  
   if (!$listing_pos_fields) {
     drupal_set_message('All providers logos sprites have been regenerated!');
-    drupal_goto();
+    drupal_goto($_GET['q']);
   }
+  
 }
 
 
