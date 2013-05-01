@@ -4605,7 +4605,7 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
       //dpr($form);
       //exit;
       
-      dpm(unserialize($form['field_p_data']));
+      dpm(unserialize($form['field_p_data']['und'][0]['value']));
       
       if (!empty($form_state['values']['nid'])) {
         //gv_misc_rebuildProvidersLogosSprites($erating_fields_different);
