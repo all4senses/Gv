@@ -3002,10 +3002,12 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   // Skip refreshing sprites without selected listing fields.
   if($listing_pos_fields && $gv_providers_sprites = variable_get('gv_providers_sprites')) {
     foreach($listing_pos_fields as $listing_pos_field) {
-      dpm($listing_pos_field);
+      //dpm($listing_pos_field);
       foreach ($providers_logos_sprites as $providers_logos_sprite_title => $providers_logos_sprite_data) {
-        dpm($providers_logos_sprite_title);
+        //dpm($providers_logos_sprite_title);
         if (!in_array($listing_pos_field, $providers_logos_sprite_data['listing_pos_fields'])) {
+          dpm($listing_pos_field);
+          dpm($providers_logos_sprite_data['listing_pos_fields']);
           unset($providers_logos_sprites[$providers_logos_sprite_title]);
         }
       }
