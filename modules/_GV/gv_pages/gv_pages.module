@@ -4577,6 +4577,7 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
     
     
     
+      $last_erating_fields_different = NULL;
       
       $erating_fields_before = unserialize($form_state['values']['erating_fields_original']);
 
@@ -4585,7 +4586,7 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
         if ($erating_field_before != $form_state['values'][$erating_field_title]['und'][0]['value']) {
   //        $erating_fields_different[$erating_field_title]['before'] = $erating_field_before;
   //        $erating_fields_different[$erating_field_title]['after'] = $form_state['values'][$erating_field_title]['und'][0]['value'];
-          $erating_fields_different[] = $erating_field_title;
+          $last_erating_fields_different[] = $erating_field_title;
         }
         //dpm($form_state['values'][$erating_field_title]);
         //$form_state['values'][$erating_field_title]['und'][0]['value']
@@ -4593,12 +4594,12 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
 
       //dpm($erating_fields_original);
       //dpm($erating_fields_submitted);
-      $erating_fields_different = NULL;
-      if (empty($erating_fields_different)) {
+      
+      if (empty($last_erating_fields_different)) {
         dpm('No changed listing fields this time!');
       }
       else {
-        dpm($erating_fields_different);
+        dpm($last_erating_fields_different);
       }
       
 
@@ -4607,9 +4608,9 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
       //exit;
       
       $p_data = unserialize($form['field_p_data']['und'][0]['value']['#default_value']);
-      dpm($p_data);
+      //dpm($p_data);
       
-      $p_data['erating_fields_different'] = 'ccc'; //$erating_fields_different;
+      $p_data['last_erating_fields_different'] = $last_erating_fields_different;
       
       form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
       
@@ -4765,7 +4766,12 @@ function gv_pages_node_update($node) {
     
     
     entity_get_controller('node')->resetCache(array($node->nid));
-    dpm(unserialize($node->field_p_data['und'][0]['value']));
+    
+    $p_data = unserialize($node->field_p_data['und'][0]['value']);
+    dpm($p_data['last_erating_fields_different']);
+    if (!empty($p_data['last_erating_fields_different'])) {
+      gv_misc_rebuildProvidersLogosSprites($p_data['last_erating_fields_different']);
+    }
     //$loaded_node2 = node_load($node->nid);
     //dpm(unserialize($loaded_node2->field_p_data['und'][0]['value']));
   }
