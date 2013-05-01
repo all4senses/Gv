@@ -2996,9 +2996,6 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   );
   
   
-  dpm($providers_logos_sprites);
-  dpm($listing_pos_fields);
-  
   // Skip refreshing sprites without selected listing fields.
   if($listing_pos_fields && $gv_providers_sprites = variable_get('gv_providers_sprites')) {
     foreach ($providers_logos_sprites as $providers_logos_sprite_title => $providers_logos_sprite_data) {
@@ -3008,7 +3005,6 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
           $in_array = TRUE;
         }
       }
-               
       if (!$in_array) {
         unset($providers_logos_sprites[$providers_logos_sprite_title]);
       }
@@ -3017,8 +3013,6 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   else {
     $gv_providers_sprites = array();
   }
-
-  dpm($providers_logos_sprites);
   
   $image_style_name = 'logo_provider_chart_main';
   
@@ -3032,8 +3026,6 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
       $view->execute($providers_views_display);
       
       if ($view->result) {
-
-        dpm($view->result);
         
         foreach ($view->result as $provider) {
           
@@ -3053,11 +3045,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     
   }
   
-  dpm($input_providers_data);
-  
   $out_sprite_path = 'sites/default/files/p/';
   $out_sprite_ext = 'png';
-  
   
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
