@@ -93,12 +93,14 @@
             if ($(this)[0].checked) {
               //$(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
               $(this).parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
+              $(this).parent().css('position', 'relative');
             }
             else {
              //console.log(checkboxes_checked[0]);
              
              //$(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
              $(checkboxes_checked[checked_count - 1]).parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
+             $(this).parent().css('position', 'relative');
             }
             
             $(".compare-button#b2").click(compare_click);
