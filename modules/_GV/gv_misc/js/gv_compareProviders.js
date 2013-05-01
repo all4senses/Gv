@@ -90,7 +90,7 @@
             //console.log(e);
 
             
-            var b_top = ($(this).parent().height()/2 - 30);
+            var b_top = ($(this).parent().height()/2 - 35);
             console.log($(this).parent().height());
             console.log(b_top);
             
