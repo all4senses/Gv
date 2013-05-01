@@ -4757,11 +4757,11 @@ function gv_pages_node_update($node) {
     gv_misc_getProvidersDataQuick('all', FALSE, TRUE);   
     
     
-    dpm($node);
-    $loaded_node = node_load($node->nid);
+    //dpm($node);
+    //$loaded_node = node_load($node->nid);
     // Provides the old values, which shouldn't be there according
     // to the documentation above
-    dpm($loaded_node);
+    //dpm($loaded_node);
     
     
     entity_get_controller('node')->resetCache(array($node->nid));
