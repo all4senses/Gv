@@ -89,7 +89,7 @@
             //console.log(current_tr);
             //console.log(e);
 
-            var b_top = ($(this).parent().height() - 80) / 2;
+            var b_top = ($(this).parent().height() - 80);
             console.log($(this).parent().height());
             console.log(b_top);
             
