@@ -2998,60 +2998,60 @@ function gv_misc_testPage() {
   $destination = image_style_path($style_name, $source);
   dpm($destination);
   
-  
-  
-  
-  
-  
-  // Get the folder for the final location of this style.
-  $directory = drupal_dirname($destination);
-
-  dpm($directory);
-  
-  // Build the destination folder tree if it doesn't already exist.
-  if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
-    dpm('Failed to create style directory: ' . $directory);
-  }
-  else {
-    dpm('OK directory: ' . $directory);
-  }
-
-  
-  
-  
-  
-  
-  if (!$image = image_load($source)) {
-    dpm('Error loading image');
-  }
-  else {
-    dpm($image);
-  }
-
-  return $out;
-  
-  
-  foreach ($style['effects'] as $effect) {
-    image_effect_apply($image, $effect);
-  }
-
-  if (!image_save($image, $destination)) {
-    if (file_exists($destination)) {
-      watchdog('image', 'Cached image file %destination already exists. There may be an issue with your rewrite configuration.', array('%destination' => $destination), WATCHDOG_ERROR);
-    }
-    return FALSE;
-  }
-  
-  
-  
-  
-  
-//  if (image_style_create_derivative($style_name, $source, $destination)) {
-//    dpm('True');
+//  
+//  
+//  
+//  
+//  
+//  // Get the folder for the final location of this style.
+//  $directory = drupal_dirname($destination);
+//
+//  dpm($directory);
+//  
+//  // Build the destination folder tree if it doesn't already exist.
+//  if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+//    dpm('Failed to create style directory: ' . $directory);
 //  }
 //  else {
-//    dpm('False');
+//    dpm('OK directory: ' . $directory);
 //  }
+//
+//  
+//  
+//  
+//  
+//  
+//  if (!$image = image_load($source)) {
+//    dpm('Error loading image');
+//  }
+//  else {
+//    dpm($image);
+//  }
+//
+//  return $out;
+//  
+//  
+//  foreach ($style['effects'] as $effect) {
+//    image_effect_apply($image, $effect);
+//  }
+//
+//  if (!image_save($image, $destination)) {
+//    if (file_exists($destination)) {
+//      watchdog('image', 'Cached image file %destination already exists. There may be an issue with your rewrite configuration.', array('%destination' => $destination), WATCHDOG_ERROR);
+//    }
+//    return FALSE;
+//  }
+//  
+//  
+  
+  
+  
+  if (image_style_create_derivative($style_name, $source, $destination)) {
+    dpm('True');
+  }
+  else {
+    dpm('False');
+  }
             
   
 //  $source_content = file_get_contents('sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo.png');
