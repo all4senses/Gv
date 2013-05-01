@@ -2992,7 +2992,7 @@ function gv_misc_testPage() {
     
   $style_name = 'logo_provider_chart_main';
   //$file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
-  $file_path = 'sites/default/files/p/logos/Nextiva-Logo2.png';
+  $file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
   $source = gv_misc_getStreamUriFromRelativePath($file_path);
   dpm($source);
   $destination = image_style_path($style_name, $source);
@@ -3021,7 +3021,7 @@ function gv_misc_testPage() {
   
   
   
-  if (!$image = image_load($file_path)) {
+  if (!$image = image_load($source)) {
     dpm('Error loading image');
   }
   else {
