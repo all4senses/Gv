@@ -92,7 +92,9 @@
             
             $('#b2').remove();
             if ($(this)[0].checked) {
-              var b_top = ($(this).parent().height()/2 - 35);
+              
+              //var b_top = ($(this).parent().height()/2 - 35);
+              var b_top = ($(this).parent().parent().height()/2 - 35);
             
               //$(this).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
               //$(this).parent().append('<div class="compare-button" id="b2" style="top: ' + b_top + 'px; display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
@@ -101,7 +103,8 @@
             else {
              //console.log(checkboxes_checked[0]);
              
-              var b_top = $(checkboxes_checked[checked_count - 1]).parent().height()/2 - 35;
+              //var b_top = $(checkboxes_checked[checked_count - 1]).parent().height()/2 - 35;
+              var b_top = $(checkboxes_checked[checked_count - 1]).parent().parent().height()/2 - 35;
               
              //$(checkboxes_checked[checked_count - 1]).parent().parent().append('<div class="compare-button" id="b2" style="display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
              //$(checkboxes_checked[checked_count - 1]).parent().append('<div class="compare-button" id="b2" style="top: ' + b_top + 'px; display: block !important;"><img src="/sites/all/themes/gv_orange/css/images/compare-btn-next4.png"/></div>');
