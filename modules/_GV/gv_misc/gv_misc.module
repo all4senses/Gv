@@ -2994,9 +2994,10 @@ function gv_misc_testPage() {
   //$file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
   $file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
   $source = gv_misc_getStreamUriFromRelativePath($file_path);
-  dpm($source);
   $destination = image_style_path($style, $source);
-  dpm($destination);
+
+  image_style_create_derivative($style, $source, $destination);
+          
   
 //  
 //  
@@ -3122,10 +3123,14 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
           // Assure that the imagecache file is created already, or recreate it.
           if (!file_exists($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'])) {
             
-            //file_get_contents($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
-//            $derivative_uri = image_style_path($style_name, $original->uri);
-//            image_style_create_derivative($style_name, $original->uri, $derivative_uri);
-  
+            $style_name = 'logo_provider_chart_main';
+            $style = image_style_load($style_name);
+            //$file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
+            //$file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
+            $file_path = str_replace($style_name . '/public/', '', $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
+            $source = gv_misc_getStreamUriFromRelativePath($file_path);
+            $destination = image_style_path($style, $source);
+            image_style_create_derivative($style, $source, $destination);
           }
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
