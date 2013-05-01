@@ -2993,7 +2993,7 @@ function gv_misc_testPage() {
   $style_name = 'logo_provider_chart_main';
   //$file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
   $file_path = 'sites/default/files/p/logos/Nextiva-Logo2.png';
-  $file_uri = gv_misc_getStreamUriFromRelativePath($file_path);
+  $source = gv_misc_getStreamUriFromRelativePath($file_path);
   dpm($file_uri);
   $destination = image_style_path($style_name, $file_uri);
   dpm($destination);
@@ -3016,15 +3016,21 @@ function gv_misc_testPage() {
     dpm('OK directory: ' . $directory);
   }
 
-  return $out;
+  
   
   
   
   
   if (!$image = image_load($source)) {
-    return FALSE;
+    dpm('Error loading image');
+  }
+  else {
+    dpm($image);
   }
 
+  return $out;
+  
+  
   foreach ($style['effects'] as $effect) {
     image_effect_apply($image, $effect);
   }
@@ -3040,7 +3046,7 @@ function gv_misc_testPage() {
   
   
   
-//  if (image_style_create_derivative($style_name, $file_uri, $destination)) {
+//  if (image_style_create_derivative($style_name, $source, $destination)) {
 //    dpm('True');
 //  }
 //  else {
