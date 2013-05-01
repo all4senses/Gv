@@ -2990,12 +2990,12 @@ function gv_misc_testPage() {
 //    dpm('File NOT exists');
 //  }
     
-  $style_name = 'logo_provider_chart_main';
+  $style = image_style_load('logo_provider_chart_main');
   //$file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
   $file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
   $source = gv_misc_getStreamUriFromRelativePath($file_path);
   dpm($source);
-  $destination = image_style_path($style_name, $source);
+  $destination = image_style_path($style, $source);
   dpm($destination);
   
 //  
