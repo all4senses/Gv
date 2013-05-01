@@ -2996,6 +2996,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   );
   
   
+  dpm($providers_logos_sprites);
+  dpm($listing_pos_fields);
   
   // Skip refreshing sprites without selected listing fields.
   if($listing_pos_fields && $gv_providers_sprites = variable_get('gv_providers_sprites')) {
