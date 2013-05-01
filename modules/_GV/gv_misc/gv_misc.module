@@ -3008,14 +3008,19 @@ function gv_misc_testPage() {
 
   dpm($directory);
   
-  return $out;
-  
   // Build the destination folder tree if it doesn't already exist.
   if (!file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
-    watchdog('image', 'Failed to create style directory: %directory', array('%directory' => $directory), WATCHDOG_ERROR);
-    return FALSE;
+    dpm('Failed to create style directory: ' . $directory);
+  }
+  else {
+    dpm('OK directory: ' . $directory);
   }
 
+  return $out;
+  
+  
+  
+  
   if (!$image = image_load($source)) {
     return FALSE;
   }
