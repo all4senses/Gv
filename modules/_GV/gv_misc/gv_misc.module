@@ -3038,6 +3038,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   }
   
   $image_style_name = 'logo_provider_chart_main';
+  $need_cache_flush_after_recreated_imagecached_image = FALSE;
+  
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
@@ -3060,6 +3062,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
           // Assure that the imagecache file is created already, or recreate it.
           if (!file_exists($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'])) {
             file_get_contents($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
+            $need_cache_flush_after_recreated_imagecached_image = TRUE;
           }
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
@@ -3071,6 +3074,15 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
       
     }
     
+  }
+  
+  // Not sure if it's necessary, but just in case to be sure that imagecached images are created and accessible...
+  if ($need_cache_flush_after_recreated_imagecached_image) {
+    $core = array('cache', 'cache_path', 'cache_filter', 'cache_bootstrap', 'cache_page');
+    $cache_tables = array_merge(module_invoke_all('flush_caches'), $core);
+    foreach ($cache_tables as $table) {
+      cache_clear_all('*', $table, TRUE);
+    }
   }
   
   $out_sprite_path = 'sites/default/files/p/';
