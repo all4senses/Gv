@@ -2981,7 +2981,7 @@ function gv_misc_testPage() {
 /**
  * Rebuilds providers logos sprites.
  */
-function gv_misc_rebuildProvidersLogosSprites() {
+function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   $providers_logos_sprites = array(
     'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
@@ -2994,7 +2994,24 @@ function gv_misc_rebuildProvidersLogosSprites() {
       
     'all_reviews_providers' => array('providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
   );
+  
+  
+  
+  // Skip refreshing sprites without selected listing fields.
+  if($listing_pos_fields && $gv_providers_sprites = variable_get('gv_providers_sprites')) {
+    foreach($listing_pos_fields as $listing_pos_field) {
+      foreach ($providers_logos_sprites as $providers_logos_sprite_title => $providers_logos_sprite_data) {
+        if (!in_array($listing_pos_field, $providers_logos_sprite_data['listing_pos_fields'])) {
+          unset($providers_logos_sprites[$providers_logos_sprite_title]);
+        }
+      }
+    }
+  }
+  else {
+    $gv_providers_sprites = array();
+  }
 
+  
   $image_style_name = 'logo_provider_chart_main';
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
@@ -3068,9 +3085,10 @@ function gv_misc_rebuildProvidersLogosSprites() {
         $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
         imagecopy($out_sprite['img'], $input_image['img'], 0, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
         
-        $input_providers[$providers_logos_sprite_name]['data'][$nid]['y'] = $current_y;
-        $input_providers[$providers_logos_sprite_name]['data'][$nid]['h'] = $input_image['info'][1];
-        $input_providers[$providers_logos_sprite_name]['time'] =  time();
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['y'] = $current_y;
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['w'] = $input_image['info'][0];
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['h'] = $input_image['info'][1];
+        $gv_providers_sprites[$providers_logos_sprite_name]['time'] =  time();
         
         $current_y += 10 + $input_image['info'][1];
       }
@@ -3084,10 +3102,10 @@ function gv_misc_rebuildProvidersLogosSprites() {
     //imagepng($out_sprite['img'], NULL, 0);
   }
     
-  dpm($input_providers);
-  dpm($input_providers_data);
+  //dpm($gv_providers_sprites);
+  //dpm($input_providers_data);
   
-  variable_set('gv_providers_sprites', $input_providers);
+  variable_set('gv_providers_sprites', $gv_providers_sprites);
   
 }
 
