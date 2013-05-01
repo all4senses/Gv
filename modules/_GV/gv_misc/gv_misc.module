@@ -2994,8 +2994,8 @@ function gv_misc_testPage() {
   //$file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
   $file_path = 'sites/default/files/p/logos/Nextiva-Logo2.png';
   $source = gv_misc_getStreamUriFromRelativePath($file_path);
-  dpm($file_uri);
-  $destination = image_style_path($style_name, $file_uri);
+  dpm($source);
+  $destination = image_style_path($style_name, $source);
   dpm($destination);
   
   
