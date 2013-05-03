@@ -5067,6 +5067,12 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       if (isset($url_to_sprite[$current_url])) {
       
+        if (@$_GET['t'] == 'xxx') {
+          echo '<PRE>' . print_r($_SERVER, TRUE) . '</PRE>';
+          exit;
+          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url]);
+          return 'xxx ' . $_SERVER['REQUEST_URI'] . ' -> ' . $url_to_sprite[$current_url] . ' -> ' . $data['data']->nid . ' -> ' . $p_image;
+        }
         
         if ($_SERVER['HTTP_CF_CONNECTING_IP'] == '37.229.182.41') {
           $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url]);
