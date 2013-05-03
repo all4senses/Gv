@@ -3581,9 +3581,14 @@ function gv_misc_SendRequestToRingCentral($submission) {
       
   // Set initial fields.
   $data_to = array(
-    //'lead_source' => 'Lead Generation',
+    'lead_source' => 'Lead Generation',
     'BMID__c' => 'GETVOIPHQL',
     
+    'AID__c' => 'GETVOIPHQL',
+    'PID__c' => 'GETVOIPHQL',
+      
+    'Number_of_Locations__c_lead' => 1,
+      
     //'oid' => '00D80000000aRUX',
     //'Campaign_ID' => '70180000000auP8',
     //'member_status' => 'Responded',
@@ -3604,14 +3609,18 @@ function gv_misc_SendRequestToRingCentral($submission) {
     '_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
       
       
-    'Title' => 'N/A',
-    'Industry' => 'N/A',
+    'Title' => 'NA',
+    'Industry' => 'Advertising, Marketing, Media, PR',
       
-    'City' => 'N/A',
-    'State' => 'N/A',
-    'Street' => 'N/A',
-    'zip' => 'N/A', 
-    'Country' => 'N/A',
+    'City' => 'NA',
+    'State' => 'AK',
+    'Street' => 'NA',
+    //'zip' => 'N/A', 
+    'Country' => 'USA',
+    'Description_of_Your_Business__c' => 'NA',
+    'Notes__c' => 'NA',
+    'Number_Of_Locations__c' => 'NA',
+      
     //'NumberOfEmployees' => 'N/A',
   );
     
