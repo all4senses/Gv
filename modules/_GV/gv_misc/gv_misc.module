@@ -5276,7 +5276,9 @@ function gv_misc_getProviderQuickData($target, $data) {
           ////$url = l('Visit Site', 'goto', array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url nofollow', 'target' => '_blank', 'class' => 'site visit-site'))); 
 //        }
       
-          $url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'site visit-site');
+          //$url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'site visit-site');
+          $url = gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn');
+          
         
         $out .= $url;
       }
