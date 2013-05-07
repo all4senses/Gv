@@ -2768,21 +2768,23 @@ body.one-sidebar.sidebar-second.page-get-iframe #main{background: none transpare
 #block-gv-blocks-ad-speedtest-page .content a div {background: url("/sites/all/themes/gv_orange/css/images/sprite-03.png") no-repeat -2px -435px transparent; width: 240px; height: 120px;}
 
 
-/* Move Colorbox images to GV Sprite image */
+/* Get rid of extra images to load */
 #cboxTopCenter {background: url("/sites/all/themes/gv_orange/css/images/sprite-03.png") repeat-x 0 -562px transparent;} 
 #cboxBottomCenter {background: url("/sites/all/themes/gv_orange/css/images/sprite-03.png") repeat-x 0 -592px transparent;}
-/*
-#cboxClose {background: url("/sites/all/themes/gv_orange/css/images/sprite-03.png") no-repeat -90px -1028px transparent;}
-#cboxClose:hover {background-position: -90px -1053px;}
-#cboxNext {background: url("/sites/all/themes/gv_orange/css/images/sprite-03.png") no-repeat -116px -1028px transparent;}
-#cboxNext:hover {background-position: -116px -1053px;}
-#cboxPrevious {background: url("/sites/all/themes/gv_orange/css/images/sprite-03.png") no-repeat -141px -1028px transparent;}
-#cboxPrevious:hover {background-position: -141px -1053px;}
-*/
-
-.ui-state-default, 
-.ui-widget-content .ui-state-default, 
-.ui-widget-header .ui-state-default { background: #f1f1f1/*#e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x*/;}
-
 #cboxLoadingOverlay {background: none;}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {background: #f1f1f1/*#e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x*/;}
+
+
+/* Quote Block Captcha */
+
+/*.gv-captcha{line-height: 7px; font-size: 9px !important;}*/
+.gv-captcha{margin-left: 30px; width: 180px; margin-top: 20px;}
+.gv-captcha #siimage{border: 1px solid lightgray !important; margin-right: 15px !important; width: 105px; height: 45px;}
+.gv-captcha #play-btn{width: 20px; height: 20px;}
+.gv-captcha #reload-btn{border-style: none; margin: 0; padding: 0;}
+.gv-captcha #reload-btn img{width: 17px; height: 17px; float: none;}
+.gv-captcha #code{color: gray; font-size: 11px; clear: both; margin-top: 7px;}
+#ct_captcha {background: white;}
+
 

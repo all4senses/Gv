@@ -17,6 +17,8 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
+  
+  
   $items['cc'] = array(
     'title' => 'Flush the cache and redirect to the Home page',
     'page callback' => 'gv_misc_flushCache',
@@ -169,6 +171,44 @@ function gv_misc_flush_caches() {
   $countQuery = $query->countQuery();
   $num_votes = $countQuery->execute()->fetchField();
   variable_set('gv_allReviewsAmount', $num_votes + 100);
+}
+
+
+/**
+ * Returns a captcha image.
+ */
+function vn_misc_securimage_show_ajax() {
+
+  //require_once dirname(__FILE__) . '/securimage.php';
+  
+  require_once '/home/gvadmin/public_html/sites/all/libraries/jquery.plugins/securimage/securimage.php';
+
+  $img = new Securimage();
+
+  $img->show();  // outputs the image and content headers to the browser
+}
+
+
+/**
+ * Returns json result data with OK or error.
+ */
+function gv_misc_checkCtCaptcha_ajax() {
+  $status = TRUE;
+  $output = '';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+
+  if ($post['op'] == 'get') {
+    $cap = $_SESSION['securimage_code_value']['default'];
+  }
+  else {
+    $cap = NULL;
+  }
+  
+  drupal_json_output(array('status' => $status, 'cap' => $cap));
 }
 
 
