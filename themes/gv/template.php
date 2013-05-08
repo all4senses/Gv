@@ -512,6 +512,16 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
+  // <meta name="verify-a" value="5c21728cee5f71b74ae4"> 
+  $head_elements['verify-a'] = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+        'name' => 'verify-a',
+        'value' => '5c21728cee5f71b74ae4',
+    ),
+  );
+  
   dpm($head_elements);
   
 }
