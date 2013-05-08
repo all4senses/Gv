@@ -110,7 +110,7 @@
           //console.log('va = ' + value.toLowerCase());
           return value.toLowerCase() === captcha_val;
         //}, jQuery.format("You must not enter {0}"));
-        }, "Wrong captcha");
+        }, "Code Error");
         
         
         // Overriding the default Required message.
