@@ -3610,7 +3610,7 @@ function gv_misc_SendRequestToRingCentral($submission) {
   
  
   // Temporary commented
-  /*
+  
   $map_phonesNeeded = array(
     '1 - 4' => '2-19 Employees',
     '5 - 10' => '2-19 Employees',
@@ -3654,12 +3654,12 @@ function gv_misc_SendRequestToRingCentral($submission) {
     //'debug' => 1,
     //'debugEmail' => 'wilson.chu@ringcentral.com',//'all4senses@gmail.com',
     
-    'IpId' => '4529',
-    'subld' => '100',
-    'munkchkinld' => '075-DTB-715',
-    'Ipurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',
+    'Lpid' => '4529',//'IpId' => '4529',
+    'subID' => '100',//'subld' => '100',
+    'munchkinID' => '075-DTB-715',//'munkchkinld' => '075-DTB-715',
+    'LPURL' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',//'Ipurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',
     'formid' => '1163',
-    'returnLPld' => '1947',
+    'returnLPld' => '1947',//'returnLPld' => '1947',
     '_mkt_disp' => 'return',
     '_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
       
@@ -3685,8 +3685,9 @@ function gv_misc_SendRequestToRingCentral($submission) {
     $data_to[$remote_key] = $submission[$getvoip_key];
   }
   
-  */
   
+  
+  /*
   $data_to = array(
     'FirstName' => 'Sam',
     'LastName' => 'Smith',
@@ -3694,6 +3695,7 @@ function gv_misc_SendRequestToRingCentral($submission) {
     'Phone' => '516-464-5463',
     'NumberOfEmployees' => '2-19 Employees',
   );
+  */
     
   //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
   $url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
