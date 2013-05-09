@@ -3612,11 +3612,11 @@ function gv_misc_SendRequestToRingCentral($submission) {
   // Temporary commented
   
   $map_phonesNeeded = array(
-    '1 - 4' => '2-19 Employees',
-    '5 - 10' => '2-19 Employees',
-    '11 - 20' => '2-19 Employees',
-    '21 - 50' => '50-99 Employees',
-    'More than 50' => '50-99 Employees',
+    '1 - 4' => '2-19',
+    '5 - 10' => '2-19',
+    '11 - 20' => '2-19',
+    '21 - 50' => '20-49',
+    'More than 50' => '50-99',
   );
   
   $submission['Phones needed'] = $map_phonesNeeded[$submission['Phones needed']];
@@ -3661,7 +3661,9 @@ function gv_misc_SendRequestToRingCentral($submission) {
     'formid' => '1163',
     'returnLPId' => '1947',//'returnLPld' => '1947',
     '_mkt_disp' => 'return',
-    '_mkt_trk' => 'id:075-DTB-715',// '_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
+      
+    '_mkt_trk' => 'id:075-DTB-715',
+    // '_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
       
       
     'Title' => 'NA',
@@ -3677,6 +3679,9 @@ function gv_misc_SendRequestToRingCentral($submission) {
     'Number_Of_Locations__c' => 'NA',
       
     //'NumberOfEmployees' => 'N/A',
+      
+    //'kw' => 'not found',
+    //'cr' => 'not found',
   );
     
   
@@ -3685,6 +3690,40 @@ function gv_misc_SendRequestToRingCentral($submission) {
     $data_to[$remote_key] = $submission[$getvoip_key];
   }
   
+  
+  
+  
+/*
+http://marketo.ringcentral.com/index.php/leadCapture/save?
+  lpID=4529
+  subID=100
+  munchkinId=075-DTB-715
+  kw=not+found
+  cr=not+found
+  returnLPId=1947
+  _mkt_disp=return
+  _mkt_trk=id%3A075-DTB-715%26token%3A_mch-ringcentral.com-1368046772884-35572
+  lpurl=http%3A%2F%2Fmarketo.ringcentral.com%2FHQLLeadSubmissionform.html%3Fcr%3D%7Bcreative%7D%26kw%3D%7Bkeyword%7D
+  returnURL=http%3A%2F%2Fmarketo.ringcentral.com%2FLeadGen1-ThankYou.html
+  retURL=http%3A%2F%2Fmarketo.ringcentral.com%2FLeadGen1-ThankYou.html
+  formid=1163
+  BMID_c=THRIVE
+  Company=test
+  Email=robtestnew%40pitest.com
+  FirstName=Test
+  LastName=Test
+  Phone=9788870010
+  Street=123+Testing
+  City=Testingville
+  PostalCode=01983
+  State=MA
+  Country=US
+  description=Mobility+%26+Cloud+Communication+Trends+for+Businesses
+  Industry=Banking%2FAccounting%2FFinancial
+  Title=tester
+  No_of_Employees__c=20-49
+*/
+
   
   
   /*
@@ -3697,8 +3736,8 @@ function gv_misc_SendRequestToRingCentral($submission) {
   );
   */
     
-  $url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
-  //$url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
+  //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
+  $url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
   
   
   $curl = curl_init();
