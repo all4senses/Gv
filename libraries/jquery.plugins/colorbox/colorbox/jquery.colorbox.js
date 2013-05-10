@@ -365,8 +365,8 @@
 				$close = $tag(div, "Close")
 			);
 			
-      console.log($content);
-      console.log($title);
+      //console.log($content);
+      //console.log($title);
       
 			$wrap.append( // The 3x3 Grid that makes up ColorBox
 				$tag(div).append(
