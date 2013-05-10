@@ -175,6 +175,7 @@
         //$block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
         $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_nograde', 'shadow' => FALSE, 'subject' => '');
         echo gv_blocks_getBlockThemed($block_data);
+        gv_misc_loadColorboxForVideoLinks();
       ?>
       <div class="bottom-clear"></div> 
     </div>
