@@ -21,7 +21,7 @@
                     success: function(data) 
                             { 
                                 if(!data.error) {
-                                    captcha_val = data.cap;
+                                    captcha_val = data.cap + '';
                                     console.log('The header is arrived: ' + captcha_val);
                                 }
                                 return false;
