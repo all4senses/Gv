@@ -168,14 +168,15 @@
   </div>
   -->
   <div id="chart-and-bottom">
-  <div id="brands">
-    <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
-    <?php 
-      $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
-      echo gv_blocks_getBlockThemed($block_data);
-    ?>
-    <div class="bottom-clear"></div> 
-  </div>
+    
+    <div id="brands">
+      <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
+      <?php 
+        $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
+        echo gv_blocks_getBlockThemed($block_data);
+      ?>
+      <div class="bottom-clear"></div> 
+    </div>
   
     <div id="bottom-text">
       <div class="text">
@@ -192,6 +193,8 @@
       </div>
       <div class="bottom-clear"></div>
     </div>
+    
+    <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
     
   </div>
   
@@ -249,11 +252,14 @@
 */
 ?>
 
+  <?php
+  /*
   <footer>
     <!--<div class="links"><a href="/about-us" target="_blank">About Us</a><span class="delim">|</span><a href="/privacy-policy" target="_blank">Privacy Policy</a></div>-->
     <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
   </footer>
-
+    */      
+?>
   </div>
 </div>
 
