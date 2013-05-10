@@ -197,7 +197,10 @@ function gv_misc_securimage_show_ajax() {
   
   require_once '/home/gvadmin/public_html/sites/all/libraries/jquery.plugins/securimage/securimage.php';
 
-  $img = new Securimage();
+  $options = array('captcha_type' => Securimage::SI_CAPTCHA_MATHEMATIC /* use math captcha */);
+
+  
+  $img = new Securimage($options);
   
   $img->code_length = 3;
   $img->num_lines = 0;
