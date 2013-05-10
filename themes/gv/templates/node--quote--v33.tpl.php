@@ -167,15 +167,16 @@
     <div class="bottom-clear"></div> 
   </div>
   -->
-  
+  <div id="chart-and-bottom">
   <div id="brands">
     <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
     <?php 
-      $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE);
+      $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
       echo gv_blocks_getBlockThemed($block_data);
     ?>
     <div class="bottom-clear"></div> 
-    
+  </div>
+  
     <div id="bottom-text">
       <div class="text">
         <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
