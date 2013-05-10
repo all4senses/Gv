@@ -178,7 +178,7 @@
       <div class="bottom-clear"></div> 
     </div>
   
-    <div id="bottom-text">
+    <div id="bottom">
       <div class="text">
         <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
         <div><?php echo $initialQuotePage_node->q_data['bottom_text']['left_text']; ?></div>
