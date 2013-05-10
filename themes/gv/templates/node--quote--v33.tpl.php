@@ -169,6 +169,15 @@
   -->
   
   <div id="brands">
+    <?php 
+      $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE);
+      echo gv_blocks_getBlockThemed($block_data);
+    ?>
+  </div>
+  
+  <?php 
+  /*
+  <div id="brands">
     <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
     <?php
         if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
@@ -180,22 +189,25 @@
           }
           echo '</ul>';
         }
-        /*
-        if ($brand_keys = element_children($content['field_q_image2']))
-        {
-          
-          echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
-          foreach ($brand_keys as $brand_key) {
-            echo '<li>', '<table><tbody><tr><td>', render($content['field_q_image2'][$brand_key]), '</td></tr></tbody></table>', '</li>'; 
-          }
-          echo '</ul>';
-        }
-        */
         
+//        if ($brand_keys = element_children($content['field_q_image2']))
+//        {
+//          
+//          echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
+//          foreach ($brand_keys as $brand_key) {
+//            echo '<li>', '<table><tbody><tr><td>', render($content['field_q_image2'][$brand_key]), '</td></tr></tbody></table>', '</li>'; 
+//          }
+//          echo '</ul>';
+//        }
     ?>
     
     <div class="bottom-clear"></div> 
   </div>
+
+*/
+?>
+  
+  
   
   <?php 
   ?>
