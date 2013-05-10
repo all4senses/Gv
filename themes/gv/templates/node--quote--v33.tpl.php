@@ -172,7 +172,8 @@
     <div id="brands">
       <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
       <?php 
-        $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
+        //$block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
+        $block_data = array('module' => 'views', 'delta' => 'providers-block', 'shadow' => FALSE, 'subject' => '');
         echo gv_blocks_getBlockThemed($block_data);
       ?>
       <div class="bottom-clear"></div> 
