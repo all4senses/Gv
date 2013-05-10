@@ -22,7 +22,7 @@
                             { 
                                 if(!data.error) {
                                     captcha_val = data.cap + '';
-                                    console.log('The header is arrived: ' + captcha_val);
+                                    //console.log('The header is arrived: ' + captcha_val);
                                 }
                                 return false;
                             } 
