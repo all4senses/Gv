@@ -169,10 +169,29 @@
   -->
   
   <div id="brands">
+    <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
     <?php 
       $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE);
       echo gv_blocks_getBlockThemed($block_data);
     ?>
+    <div class="bottom-clear"></div> 
+    
+    <div id="bottom-text">
+      <div class="text">
+        <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
+        <div><?php echo $initialQuotePage_node->q_data['bottom_text']['left_text']; ?></div>
+      </div>
+      <div class="text">
+        <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['center_title']; ?></h3>
+        <div><?php echo $initialQuotePage_node->q_data['bottom_text']['center_text']; ?></div>
+      </div>
+      <div class="text last">
+        <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['right_title']; ?></h3>
+        <div><?php echo $initialQuotePage_node->q_data['bottom_text']['right_text']; ?></div>
+      </div>
+      <div class="bottom-clear"></div>
+    </div>
+    
   </div>
   
   <?php 
@@ -208,9 +227,7 @@
 ?>
   
   
-  
-  <?php 
-  ?>
+  <?php /*
   <div id="bottom">
     <div class="text">
       <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
@@ -228,6 +245,8 @@
 
     <div class="bottom-clear"></div>
   </div>
+*/
+?>
 
   <footer>
     <!--<div class="links"><a href="/about-us" target="_blank">About Us</a><span class="delim">|</span><a href="/privacy-policy" target="_blank">Privacy Policy</a></div>-->
