@@ -357,7 +357,7 @@
 			$content = $tag(div, "Content").append(
 				$loaded = $tag(div, "LoadedContent", 'width:0; height:0; overflow:hidden'),
 				$loadingOverlay = $tag(div, "LoadingOverlay").add($tag(div, "LoadingGraphic")),
-				$title = $tag(div, "Title") + ' x',
+				$title = $tag(div, "Title"),
 				$current = $tag(div, "Current"),
 				$next = $tag(div, "Next"),
 				$prev = $tag(div, "Previous"),
@@ -365,6 +365,9 @@
 				$close = $tag(div, "Close")
 			);
 			
+      console.log($content);
+      console.log($title);
+      
 			$wrap.append( // The 3x3 Grid that makes up ColorBox
 				$tag(div).append(
 					$tag(div, "TopLeft"),
