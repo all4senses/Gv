@@ -193,7 +193,7 @@
                         <div class="rate-other">
                           <?php /*<div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div> */?>
                           <?php /*<div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">Editor</div>'; ?></div> */?>
-                          <div class="text"><?php echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->editor->gv_recommend . '</div>'?></div>
+                          <div class="text"><?php //echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->editor->gv_recommend . '</div>'?></div>
                           <?php echo '<div class="voters editor"><div class="count" property="v:count">' . (!empty($node->gv_voters) ? $node->gv_voters : 1) . '</div></div>';?>
                         </div>
                       </div>
