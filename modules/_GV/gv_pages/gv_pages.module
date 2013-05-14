@@ -1812,6 +1812,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     $form['ureview']['rating_recommend']['#default_value'] = $recommend;
                   }
               }
+              elseif (arg(1) == 'add') {
+                $form['ureview']['rating_recommend']['#default_value'] = TRUE;
+              }
               
               $form['ureview']['rating_recommend']['#access'] = FALSE;
               
