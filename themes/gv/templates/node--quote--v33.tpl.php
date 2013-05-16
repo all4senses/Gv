@@ -167,6 +167,9 @@
     <div class="bottom-clear"></div> 
   </div>
   -->
+  
+  
+  <?php /*
   <div id="chart-and-bottom">
     
     <div id="brands">
@@ -200,8 +203,12 @@
     
   </div>
   
-  <?php 
-  /*
+  */
+  ?>
+  
+  
+  <?php ?>
+  
   <div id="brands">
     <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
     <?php
@@ -224,16 +231,16 @@
 //          }
 //          echo '</ul>';
 //        }
-    ?>
+     ?>
     
     <div class="bottom-clear"></div> 
   </div>
 
-*/
-?>
+
+<?php ?>
   
   
-  <?php /*
+  <?php ?>
   <div id="bottom">
     <div class="text">
       <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
@@ -251,17 +258,17 @@
 
     <div class="bottom-clear"></div>
   </div>
-*/
-?>
 
-  <?php
-  /*
+<?php ?>
+
+  <?php ?>
+  
   <footer>
     <!--<div class="links"><a href="/about-us" target="_blank">About Us</a><span class="delim">|</span><a href="/privacy-policy" target="_blank">Privacy Policy</a></div>-->
     <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
   </footer>
-    */      
-?>
+          
+<?php ?>
   </div>
 </div>
 
