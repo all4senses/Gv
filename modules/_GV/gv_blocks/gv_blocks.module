@@ -1154,7 +1154,7 @@ function gv_blocks_getAdBlock($ad_name) {
   switch ($ad_name) {
     
     case 'speedtest_page':
-      return '<a href="/voip-speed-test"><div title="VoIP Speed Test Tool" style="background: url(/sites/all/themes/gv_orange/css/images/sprite-0.png?1) no-repeat -2px -435px transparent; width: 240px; height: 120px;"></div></a>';
+      return '<a href="/voip-speed-test"><div title="VoIP Speed Test Tool" ></div></a>';
       ////'<img alt="VoIP Speed Test Tool" title="VoIP Speed Test Tool" src="/sites/default/files/speedtestbanner.png" />'
     case 'free_ipad_mini':
       
@@ -2374,14 +2374,7 @@ function gv_blocks_get_requestQuote_block_v6() {
   $_SESSION['requestQuoteToken'] = $token;
 
   $out = '
-   <div id="up">
-      <div class="caption">Compare Leading Providers</div>
-      <div class="text">Low Price Assurance</div>
-      <div class="text">Personal Service Reps</div>
-      <div class="text">Unlimited Calling & Faxing</div>
-      <div class="img"></div>
-   </div>
-   <div class="bottom-clear"></div>   
+   
    <div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
         <div class="success results" style="display: none;"></div>
@@ -2393,10 +2386,19 @@ function gv_blocks_get_requestQuote_block_v6() {
                 <div id="fieldWrapper">
                     
                     <div class="step" id="questions_section">
+                    
+                                <div id="up">
+                                    <div class="caption">Compare Leading Providers</div>
+                                    <div class="text">Low Price Assurance</div>
+                                    <div class="text">Personal Service Reps</div>
+                                    <div class="text">Unlimited Calling & Faxing</div>
+                                    <div class="img"></div>
+                                </div>
+                                <div class="bottom-clear"></div>   
                            
                                 <div class="wrapper top first">
-                                  <div class="question">' . t('Lines needed') . ':</div>
-                                  <select name="phones_amt" id="phones_amt" class="input required">
+                                  <div class="question ui-widget">' . t('Lines needed') . ':</div>
+                                  <select name="phones_amt" id="phones_amt" class="input required ui-state-default ui-helper-reset">
                                     <!-- <option value="1 - 4">1 - 4</option> -->
                                     <option value="1">1</option>
                                     <option value="2 - 4">2 - 4</option>
@@ -2408,8 +2410,8 @@ function gv_blocks_get_requestQuote_block_v6() {
                                 </div>
 
                                 <div class="wrapper top">
-                                  <div class="question">' . t('Service Type') . ':</div>
-                                  <select name="q_type" id="q_type" class="input required">
+                                  <div class="question ui-widget">' . t('Service Type') . ':</div>
+                                  <select name="q_type" id="q_type" class="input required ui-state-default ui-helper-reset">
                                     <option selected="selected" value="Business">' . t('Business') .'</option>
                                     <option value="Home">' . t('Home') .'</option>
                                     <option value="Home-Based Business">' . t('Home-Based Business') .'</option>
@@ -2418,8 +2420,8 @@ function gv_blocks_get_requestQuote_block_v6() {
 
 
                                 <div class="wrapper top last">
-                                  <div class="question">' . t('Buying time frame') . ':</div>
-                                  <select name="buying_time" id="buying_time" class="input required">
+                                  <div class="question ui-widget">' . t('Buying time frame') . ':</div>
+                                  <select name="buying_time" id="buying_time" class="input required ui-state-default ui-helper-reset">
                                     <!--<option value="">- Select a value -</option>-->
                                     <option value="ASAP">' . t('ASAP') .'</option>
                                     <option value="1-3 Months">' . t('1-3 Months') .'</option>
@@ -2431,6 +2433,7 @@ function gv_blocks_get_requestQuote_block_v6() {
                             <div class="bottom-clear"></div>
                             
                             <!--<img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" /> -->
+                            <div class="phone-pic"></div>
                             <div class="guide">Free VoIP Guide With Request</div>
                             
 
@@ -2451,7 +2454,7 @@ function gv_blocks_get_requestQuote_block_v6() {
 
                     <div class="step" id="personal_data">
                     
-           
+                                <div id="personal-title">Your Info:</div>
                             
                                 <div class="wrapper middle first">
                                     <input class="after required firstname" name="firstname" id="firstname" title="First Name *" />
@@ -2472,10 +2475,30 @@ function gv_blocks_get_requestQuote_block_v6() {
                                 <div class="wrapper middle company">
                                     <input class="after" name="company" id="company" title="Company" />
                                 </div>
+      
+' 
+      
+    . 
+          
+          '<div class="gv-captcha">
+    <img id="siimage" style="border: 1px solid #000; margin-right: 15px" src="/securimage_show?sid=' . md5(uniqid()) . '" alt="CAPTCHA Image" align="left" />
+    <object id="play-btn" type="application/x-shockwave-flash" data="/sites/all/libraries/jquery.plugins/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=/sites/all/libraries/jquery.plugins/securimage/images/audio_icon.png&amp;audio_file=/sites/all/libraries/jquery.plugins/securimage/securimage_play.php" height="32" width="32">
+    <param name="movie" value="/sites/all/libraries/jquery.plugins/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=/sites/all/libraries/jquery.plugins/securimage/images/audio_icon.png&amp;audio_file=/sites/all/libraries/jquery.plugins/securimage/securimage_play.php" />
+    </object>
+
+    <a id="reload-btn" tabindex="-1" style="border-style: none;" href="#" title="Refresh Image" onclick="document.getElementById(' . "'siimage'" . ').src = ' . "'/securimage_show?sid='" . ' + Math.random(); this.blur(); return false"><img src="/sites/all/libraries/jquery.plugins/securimage/images/refresh.png" alt="Reload Image" height="32" width="32" onclick="this.blur()" align="bottom" border="0" /></a>
+    <div id="code">Enter Code*:</div>' . /* @$_SESSION["ctform"]["captcha_error"] .*/ '
+    <input type="text" class="required ct_captcha" id="ct_captcha" name="ct_captcha" size="12" maxlength="16" />
+  </div>'
+    
+    . 
+          ' 
+      
 
                             <div class="bottom-clear"></div>
                             
-                            <img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" />
+                            <!-- <img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" /> -->
+                            <div class="phone-pic"></div>
                             <div class="guide">Free VoIP Guide With Request</div>
            
                             

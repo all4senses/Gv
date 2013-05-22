@@ -2,6 +2,36 @@
 
   Drupal.behaviors.gv_requestquote_block_v5 = {
     attach: function (context, settings) {
+      
+        
+        captcha_val = 'kjhjhkgsjdhgjk';
+        
+        $('input[name="ct_captcha"]').focus(function(){
+          
+           // Get a current captcha value.
+          (jQuery).ajax({
+            
+                url: '/check_ctcaptcha', 
+                data: {
+                        op: 'get'
+                      }, 
+                    type: 'POST', 
+                    dataType: 'json'
+                    , 
+                    success: function(data) 
+                            { 
+                                if(!data.error) {
+                                    captcha_val = data.cap + '';
+                                    //console.log('The header is arrived: ' + captcha_val);
+                                }
+                                return false;
+                            } 
+                    
+            }); // end of (jQuery).ajax
+       
+        });
+        
+        
        
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
@@ -75,7 +105,14 @@
         //}, jQuery.format("You must not enter {0}"));
         }, "All fields with are required");
 
-
+        jQuery.validator.addMethod("wrongCaptcha", function(value, element, param) {
+          //console.log('captcha_val = ' + captcha_val);
+          //console.log('va = ' + value.toLowerCase());
+          return value.toLowerCase() === captcha_val;
+        //}, jQuery.format("You must not enter {0}"));
+        }, "Code Error");
+        
+        
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')
@@ -107,7 +144,8 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname email phone"
+              //username: "firstname lastname email phone"
+              username: "firstname lastname email phone ct_captcha"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
@@ -117,7 +155,9 @@
                 ////error.insertAfter("#on_error");
               error.insertAfter(".step");
               
-              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
+              
+              //else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
+              else if(element.attr("name") == "ct_captcha" || element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 error.insertAfter("#phone");
               else
                 error.insertAfter(element);
@@ -172,6 +212,10 @@
                 minlength: 10,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
+							},
+              ct_captcha: {
+                required: true,
+                wrongCaptcha: 'aaa'
 							}
               /*
               phone_1: {

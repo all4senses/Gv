@@ -17,6 +17,22 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
+  $items['securimage_show'] = array(
+    'title' => 'Securimage',
+    'page callback' => 'gv_misc_securimage_show_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['check_ctcaptcha'] = array(
+    'title' => 'Check CT Captcha',
+    'page callback' => 'gv_misc_checkCtCaptcha_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  
+  
   $items['cc'] = array(
     'title' => 'Flush the cache and redirect to the Home page',
     'page callback' => 'gv_misc_flushCache',
@@ -107,6 +123,15 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  
+  $items['admin/content/rebuild-providers-sprites'] = array(
+    'title' => 'Regenerate providers sprites',
+    'page callback' => 'gv_misc_rebuildProvidersLogosSprites',
+    //'access arguments' => array('administer content'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   $items['admin/content/reviews-to-approve'] = array(
     'title' => 'Reviews to Approve',
     'page callback' => 'gv_misc_gotoReviewsToApprove',
@@ -142,15 +167,15 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
   
-  $dir = 'sites/default/files/jsmin-gv';
-  $objects = scandir($dir);
-  foreach ($objects as $object) {
-    if ($object != "." && $object != "..") {
-      unlink($dir . "/" . $object);
-    }
-  }
-  variable_del('gv_minified_js');
-  
+//  $dir = 'sites/default/files/jsmin-gv';
+//  $objects = scandir($dir);
+//  foreach ($objects as $object) {
+//    if ($object != "." && $object != "..") {
+//      unlink($dir . "/" . $object);
+//    }
+//  }
+//  variable_del('gv_minified_js');
+//  
   
   // Recalculate the reviews amount.
   $query = db_select('votingapi_vote', 'v');
@@ -160,6 +185,50 @@ function gv_misc_flush_caches() {
   $countQuery = $query->countQuery();
   $num_votes = $countQuery->execute()->fetchField();
   variable_set('gv_allReviewsAmount', $num_votes + 100);
+}
+
+
+/**
+ * Returns a captcha image.
+ */
+function gv_misc_securimage_show_ajax() {
+
+  //require_once dirname(__FILE__) . '/securimage.php';
+  
+  // http://www.phpcaptcha.org/documentation/setting-options/
+  
+  require_once '/home/gvadmin/public_html/sites/all/libraries/jquery.plugins/securimage/securimage.php';
+
+  //$img = new Securimage(array('captcha_type' => Securimage::SI_CAPTCHA_MATHEMATIC /* use math captcha */));
+  $img = new Securimage();
+  
+  $img->code_length = 3;
+  $img->num_lines = 0;
+
+  $img->show();  // outputs the image and content headers to the browser
+}
+
+
+/**
+ * Returns json result data with OK or error.
+ */
+function gv_misc_checkCtCaptcha_ajax() {
+  $status = TRUE;
+  $output = '';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+
+  if ($post['op'] == 'get') {
+    $cap = $_SESSION['securimage_code_value']['default'];
+  }
+  else {
+    $cap = NULL;
+  }
+  
+  drupal_json_output(array('status' => $status, 'cap' => $cap));
 }
 
 
@@ -2259,7 +2328,10 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
   switch ($type) {
     case 'YouTube Direct Link':
         // for links with a class "yt-direct" like <a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>
+        
         drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
+        //drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+        
         drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
         $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
         drupal_add_js($path_to_custom_js . 'gv_colorbox_p_video.js');
@@ -2759,7 +2831,7 @@ function gv_misc_makeRequest_ajax() {
     
     
     
-    if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral') {
+    if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || $submission['Company'] == 'RC') {
       // Test for Nextiva
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
@@ -2777,7 +2849,7 @@ function gv_misc_makeRequest_ajax() {
         gv_misc_SendRequestToNextiva($submission);
       }
     }
-    elseif ($submission['First Name'] != 'afs') {
+    elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s') {
       // Normal send if not a test from a4s
       drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
       
@@ -2786,6 +2858,7 @@ function gv_misc_makeRequest_ajax() {
         gv_misc_SendRequestToVocalocity($submission);
         gv_misc_SendRequestTo8x8($submission);
         gv_misc_SendRequestToNextiva($submission);
+        gv_misc_SendRequestToRingCentral($submission);
       }
     }
     // A test letter to the root.
@@ -2967,12 +3040,13 @@ function gv_misc_testPage_iframe() {
 
 
 /**
- * Test page function for url /test.
+ * Test page function for url /test. 
  */
 function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
-  gv_misc_rebuildProvidersLogosSprites();
+  //gv_misc_rebuildProvidersLogosSprites();
+  
   
   return $out . '<br>End of Test';
 }
@@ -2981,7 +3055,7 @@ function gv_misc_testPage() {
 /**
  * Rebuilds providers logos sprites.
  */
-function gv_misc_rebuildProvidersLogosSprites() {
+function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   $providers_logos_sprites = array(
     'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
@@ -2994,7 +3068,26 @@ function gv_misc_rebuildProvidersLogosSprites() {
       
     'all_reviews_providers' => array('providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
   );
-
+  
+  
+  // Skip refreshing sprites without selected listing fields.
+  if($listing_pos_fields && $gv_providers_sprites = variable_get('gv_providers_sprites')) {
+    foreach ($providers_logos_sprites as $providers_logos_sprite_title => $providers_logos_sprite_data) {
+      $in_array = FALSE;
+      foreach($listing_pos_fields as $listing_pos_field) {
+        if (in_array($listing_pos_field, $providers_logos_sprite_data['listing_pos_fields'])) {
+          $in_array = TRUE;
+        }
+      }
+      if (!$in_array) {
+        unset($providers_logos_sprites[$providers_logos_sprite_title]);
+      }
+    }
+  }
+  else {
+    $gv_providers_sprites = array();
+  }
+  
   $image_style_name = 'logo_provider_chart_main';
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
@@ -3007,7 +3100,7 @@ function gv_misc_rebuildProvidersLogosSprites() {
       $view->execute($providers_views_display);
       
       if ($view->result) {
-
+        
         foreach ($view->result as $provider) {
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
@@ -3015,6 +3108,18 @@ function gv_misc_rebuildProvidersLogosSprites() {
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = str_replace('http://getvoip.com/', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = str_replace('%20', ' ', $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
                   
+          // Assure that the imagecache file is created already, or recreate it.
+          if (!file_exists($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'])) {
+            $style_name = 'logo_provider_chart_main';
+            $style = image_style_load($style_name);
+            //$styled_file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
+            //$original_file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
+            $file_path = str_replace('styles/' . $style_name . '/public/', '', $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
+            $source = gv_misc_getStreamUriFromRelativePath($file_path);
+            $destination = image_style_path($style_name, $source);
+            image_style_create_derivative($style, $source, $destination);
+          }
+          
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'] = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider->nid]['i_logo_title'] ));
           
           //$out .= $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_html'];
@@ -3026,10 +3131,8 @@ function gv_misc_rebuildProvidersLogosSprites() {
     
   }
   
-  
   $out_sprite_path = 'sites/default/files/p/';
   $out_sprite_ext = 'png';
-  
   
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
@@ -3068,9 +3171,10 @@ function gv_misc_rebuildProvidersLogosSprites() {
         $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
         imagecopy($out_sprite['img'], $input_image['img'], 0, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
         
-        $input_providers[$providers_logos_sprite_name]['data'][$nid]['y'] = $current_y;
-        $input_providers[$providers_logos_sprite_name]['data'][$nid]['h'] = $input_image['info'][1];
-        $input_providers[$providers_logos_sprite_name]['time'] =  time();
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['y'] = $current_y;
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['w'] = $input_image['info'][0];
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['h'] = $input_image['info'][1];
+        $gv_providers_sprites[$providers_logos_sprite_name]['time'] =  time();
         
         $current_y += 10 + $input_image['info'][1];
       }
@@ -3084,10 +3188,19 @@ function gv_misc_rebuildProvidersLogosSprites() {
     //imagepng($out_sprite['img'], NULL, 0);
   }
     
-  dpm($input_providers);
-  dpm($input_providers_data);
+  //dpm($gv_providers_sprites);
+  //dpm($input_providers_data);
   
-  variable_set('gv_providers_sprites', $input_providers);
+  variable_set('gv_providers_sprites', $gv_providers_sprites);
+  
+  
+  drupal_flush_all_caches();
+  drupal_set_message('Cache is flushed after the prividers logos sprites regenerating.', 'warning');
+  
+  if (!$listing_pos_fields) {
+    drupal_set_message('All providers logos sprites have been regenerated!');
+    drupal_goto();
+  }
   
 }
 
@@ -3449,67 +3562,23 @@ function gv_misc_SendRequestToRingCentral($submission) {
 //  if ($submission['Phones needed'] != '1 - 4' && $submission['Phones needed'] != '2 - 4' && $submission['Phones needed'] != '5 - 10' && $submission['Phones needed'] != '11 - 20') {
 //    return NULL;
 //  }
-  
-//  if ($submission['Phones needed'] == '1 - 4') {
-//    $submission['Phones needed'] = '2 - 4';
-//  }
-  
-  
-/*  
-  $map_main = array(
-    'First Name' => 'first_name',
-    'Last Name' => 'last_name',
-    'Phones needed' => '00N80000003uOHe', // Number of Employees
-    //'Quote type' => '00N50000001PrEA', // Comments
-    'Buying Time Frame' => '00N80000004k0pG',
-    'Company' => 'company',
-    'Email' => 'email',
-    //'Website' => 'URL',
-    'Phone #' => 'phone',
-  );
- 
-      
-  // Set initial fields.
-  $data_to = array(
     
-    //'lead_source' => 'Lead Generation',
-    //'BMID' => 'GETVOIPHQL',
-     
-    //'lead_source' => 'GETVOIPHQL',
-    /////'BMID' => 'GETVOIPHQL',
-      
-      
-    'lead_source' => 'Lead Generation',
-    '00N80000004Ecl8' => 'GETVOIPHQL', //'BMID'
-      
-    
-    'oid' => '00D80000000aRUX',
-    'Campaign_ID' => '70180000000auP8',
-    //'member_status' => 'Responded',
-      
-    'retURL' =>  'http://www.ringcentral.com',
-      
-    'debug' => 1,
-    'debugEmail' => 'wilson.chu@ringcentral.com',//'all4senses@gmail.com',
-      
-    'title' => 'N/A',
-    'industry' => 'N/A',
-      
-    'city' => 'N/A',
-    'state' => 'N/A',
-    'street' => 'N/A',
-    'zip' => 'N/A', 
-    'title' => 'N/A',
-    'country' => 'N/A',
-    'employees' => 'N/A',
+  
+  $map_phonesNeeded = array(
+    '1 - 4' => '2-19',
+    '5 - 10' => '2-19',
+    '11 - 20' => '2-19',
+    '21 - 50' => '20-49',
+    'More than 50' => '50-99',
   );
-*/  
+  
+  $submission['Phones needed'] = $map_phonesNeeded[$submission['Phones needed']];
   
   
   $map_main = array(
     'First Name' => 'FirstName',
     'Last Name' => 'LastName',
-    'Phones needed' => 'Notes__c', 
+    'Phones needed' => 'NumberOfEmployees__c', 
     //'Quote type' => '', 
     'Buying Time Frame' => 'Time_Frame__c',
     'Company' => 'Company',
@@ -3520,9 +3589,14 @@ function gv_misc_SendRequestToRingCentral($submission) {
       
   // Set initial fields.
   $data_to = array(
-    //'lead_source' => 'Lead Generation',
-    'BMID__c' => 'Thrive',
+    'lead_source' => 'Lead Generation',
+    'BMID__c' => 'GETVOIPHQL',
     
+    //'AID__c' => 'GETVOIPHQL',
+    //'PID__c' => 'GETVOIPHQL',
+      
+    'Number_of_Locations__c_lead' => 1,
+      
     //'oid' => '00D80000000aRUX',
     //'Campaign_ID' => '70180000000auP8',
     //'member_status' => 'Responded',
@@ -3533,25 +3607,34 @@ function gv_misc_SendRequestToRingCentral($submission) {
     //'debug' => 1,
     //'debugEmail' => 'wilson.chu@ringcentral.com',//'all4senses@gmail.com',
     
-    'IpId' => '4529',
-    'subld' => '100',
-    'munkchkinld' => '075-DTB-715',
-    'Ipurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',
+    'lpId' => '4529',//'IpId' => '4529',
+    'subId' => '100',//'subld' => '100',
+    'munchkinId' => '075-DTB-715',//'munkchkinld' => '075-DTB-715',
+    'lpurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',//'Ipurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',
     'formid' => '1163',
-    'returnLPld' => '1947',
+    'returnLPId' => '1947',//'returnLPld' => '1947',
     '_mkt_disp' => 'return',
-    '_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
+      
+    '_mkt_trk' => 'id:075-DTB-715',
+    //'_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
       
       
-    'Title' => 'N/A',
-    'Industry' => 'N/A',
+    'Title' => 'NA',
+    'Industry' => 'Advertising, Marketing, Media, PR',
       
-    'City' => 'N/A',
-    'State' => 'N/A',
-    'Street' => 'N/A',
-    'zip' => 'N/A', 
-    'Country' => 'N/A',
-    'NumberOfEmployees' => 'N/A',
+    'City' => 'NA',
+    'State' => 'AK',
+    'Street' => 'NA',
+    //'zip' => 'N/A', 
+    'Country' => 'USA',
+    'Description_of_Your_Business__c' => 'NA',
+    'Notes__c' => 'NA',
+    'Number_Of_Locations__c' => 'NA',
+      
+    //'NumberOfEmployees' => 'N/A',
+      
+    //'kw' => 'not found',
+    //'cr' => 'not found',
   );
     
   
@@ -3561,7 +3644,8 @@ function gv_misc_SendRequestToRingCentral($submission) {
   }
   
   
-  $url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
+  //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
+  $url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
   
   
   $curl = curl_init();
@@ -4980,38 +5064,62 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
     case 'logo_chart':
+        
+      // Render a logo from sprite.
+
+      //dpm($_SERVER);
       
-      global $user;
-      if ($user->uid == 1) {
-        
-        //dpm($_GET);
-        //dpm($_SERVER);
-        
-        // Render a logo from sprite.
-        
-        $url_to_sprite = array( '/' => 'home_top_providers', 
-                                '/providers/reviews' => 'all_reviews_providers', 
-                                '/compare-business-voip-providers' => 'top_bu_providers', 
-                                '/business-voip-reviews' => 'top_bu_providers', 
-                                '/hosted-pbx-providers' => 'top_pbx_providers', 
-                                '/sip-trunking-providers' => 'top_sip_providers',
-                                '/internet-fax-service-providers' => 'top_ifa_providers',
-                                '/canada-voip' => 'top_ca_providers',
-                                '/compare-residential-voip-providers' => 'top_re_providers', 
-                                '/residential-voip-reviews' => 'top_re_providers'
-                              );
-        
-        $current_url = $_SERVER['REQUEST_URI'];
-        
-        
-        
-        if (isset($url_to_sprite[$current_url])) {
-          if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url])) {
-            return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid);
-          }
+      
+      
+      $url_to_sprite = array( '/' => 'home_top_providers', 
+                              '/providers/reviews' => 'all_reviews_providers', 
+                              '/compare-business-voip-providers' => 'top_bu_providers', 
+                              '/business-voip-reviews' => 'top_bu_providers', 
+                              '/hosted-pbx-providers' => 'top_pbx_providers', 
+                              '/sip-trunking-providers' => 'top_sip_providers',
+                              '/internet-fax-service-providers' => 'top_ifa_providers',
+                              '/canada-voip' => 'top_ca_providers',
+                              '/compare-residential-voip-providers' => 'top_re_providers', 
+                              '/residential-voip-reviews' => 'top_re_providers'
+                            );
+
+      $current_url = $_SERVER['REQUEST_URI'];
+
+      
+      
+      
+      if (isset($url_to_sprite[$current_url]) || $_GET['q'] == 'home') {
+      
+        if ($_GET['q'] == 'home') {
+          $sprite_name = 'home_top_providers';
         }
+        else {
+          $sprite_name = $url_to_sprite[$current_url];
+        }
+
+        /*
+//        
         
+//        if (@$_GET['t'] == 'xxx') {
+//          echo '<PRE>' . print_r($_SERVER, TRUE) . '</PRE>';
+//          exit;
+//          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url]);
+//          return 'xxx ' . $_SERVER['REQUEST_URI'] . ' -> ' . $url_to_sprite[$current_url] . ' -> ' . $data['data']->nid . ' -> ' . $p_image;
+//        }
+        
+//        if ($_SERVER['HTTP_CF_CONNECTING_IP'] == '37.229.182.41') {
+//          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $url_to_sprite[$current_url]);
+//          return 'xxx ' . $_SERVER['REQUEST_URI'] . ' -> ' . $url_to_sprite[$current_url] . ' -> ' . $data['data']->nid . ' -> ' . $p_image;
+//        }
+        
+        */
+        
+        //if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name)) {
+          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
+          return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid);
+        //}
       }
+        
         
     case 'logo_article':
     case 'logo_chart_iframe':
@@ -5179,7 +5287,9 @@ function gv_misc_getProviderQuickData($target, $data) {
           ////$url = l('Visit Site', 'goto', array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url nofollow', 'target' => '_blank', 'class' => 'site visit-site'))); 
 //        }
       
-          $url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'site visit-site');
+          //$url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'site visit-site');
+          $url = gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'reviews visit-site-btn');
+          
         
         $out .= $url;
       }
@@ -5298,7 +5408,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
       return isset($all_data_quick[$data['data']->nid][$data['service_type']]['vr-y']) 
-                ? '<a rel="nofollow" id="oid' . $data['data']->nid . '" class="yt-direct" href="http://www.youtube.com/embed/' . $all_data_quick[$data['data']->nid][$data['service_type']]['vr-y'] . '?rel=0&amp;wmode=transparent" title="' . $all_data_quick[$data['data']->nid]['name'] . ' Video">Watch</a>'
+                //? '<a rel="nofollow" id="oid' . $data['data']->nid . '" class="yt-direct" href="http://www.youtube.com/embed/' . $all_data_quick[$data['data']->nid][$data['service_type']]['vr-y'] . '?rel=0&amp;wmode=transparent" title="' . $all_data_quick[$data['data']->nid]['name'] . ' Video">Watch</a>'
+                ? '<a rel="nofollow" id="oid' . $data['data']->nid . '" class="yt-direct" href="http://www.youtube.com/embed/' . $all_data_quick[$data['data']->nid][$data['service_type']]['vr-y'] . '?rel=0&amp;wmode=transparent" title="' . $all_data_quick[$data['data']->nid]['name'] . ' Video"></a><div class="yt-direct-label">Watch</div>'
                 : '';
       
             
@@ -5344,7 +5455,9 @@ function gv_misc_getProviderQuickData($target, $data) {
           ////$url = l('Visit Site', 'goto', array('query' => $goto_link_query, 'attributes' => array('rel' => 'v:url nofollow', 'target' => '_blank'))); 
 //        }
           
-          $url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid);
+          
+          //$url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'visit-site-btn');
+          $url = gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn');
       }
                         
       return $url;

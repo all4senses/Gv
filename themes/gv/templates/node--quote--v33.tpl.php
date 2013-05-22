@@ -168,6 +168,47 @@
   </div>
   -->
   
+  
+  <?php /*
+  <div id="chart-and-bottom">
+    
+    <div id="brands">
+      <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
+      <?php 
+        //$block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE, 'subject' => '');
+        $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_nograde', 'shadow' => FALSE, 'subject' => '');
+        echo gv_blocks_getBlockThemed($block_data);
+        gv_misc_loadColorboxForVideoLinks();
+      ?>
+      <div class="bottom-clear"></div> 
+    </div>
+  
+    <div id="bottom">
+      <div class="text">
+        <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
+        <div><?php echo $initialQuotePage_node->q_data['bottom_text']['left_text']; ?></div>
+      </div>
+      <div class="text">
+        <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['center_title']; ?></h3>
+        <div><?php echo $initialQuotePage_node->q_data['bottom_text']['center_text']; ?></div>
+      </div>
+      <div class="text last">
+        <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['right_title']; ?></h3>
+        <div><?php echo $initialQuotePage_node->q_data['bottom_text']['right_text']; ?></div>
+      </div>
+      <div class="bottom-clear"></div>
+    </div>
+    
+    <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
+    
+  </div>
+  
+  */
+  ?>
+  
+  
+  <?php ?>
+  
   <div id="brands">
     <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
     <?php
@@ -180,25 +221,26 @@
           }
           echo '</ul>';
         }
-        /*
-        if ($brand_keys = element_children($content['field_q_image2']))
-        {
-          
-          echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
-          foreach ($brand_keys as $brand_key) {
-            echo '<li>', '<table><tbody><tr><td>', render($content['field_q_image2'][$brand_key]), '</td></tr></tbody></table>', '</li>'; 
-          }
-          echo '</ul>';
-        }
-        */
         
-    ?>
+//        if ($brand_keys = element_children($content['field_q_image2']))
+//        {
+//          
+//          echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
+//          foreach ($brand_keys as $brand_key) {
+//            echo '<li>', '<table><tbody><tr><td>', render($content['field_q_image2'][$brand_key]), '</td></tr></tbody></table>', '</li>'; 
+//          }
+//          echo '</ul>';
+//        }
+     ?>
     
     <div class="bottom-clear"></div> 
   </div>
+
+
+<?php ?>
   
-  <?php 
-  ?>
+  
+  <?php ?>
   <div id="bottom">
     <div class="text">
       <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
@@ -217,11 +259,16 @@
     <div class="bottom-clear"></div>
   </div>
 
+<?php ?>
+
+  <?php ?>
+  
   <footer>
     <!--<div class="links"><a href="/about-us" target="_blank">About Us</a><span class="delim">|</span><a href="/privacy-policy" target="_blank">Privacy Policy</a></div>-->
     <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
   </footer>
-
+          
+<?php ?>
   </div>
 </div>
 
