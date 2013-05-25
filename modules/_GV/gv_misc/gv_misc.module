@@ -187,10 +187,10 @@ function gv_misc_rShareReviews_rest() {
 
   
   if ($post['op'] == 'get') {
-    $out = 'test 1';
+    $out = array('test 1', 'data 1', array('test' => 'teeeest 1'));
   }
   else {
-    $out = 'test 2';
+    $out = array('test 2', 'data 2', array('test' => 'teeeest 2'));
   }
   
   drupal_json_output(array('out' => $out));
