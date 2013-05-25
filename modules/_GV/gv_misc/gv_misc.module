@@ -185,13 +185,23 @@ function gv_misc_rShareReviews_rest() {
     $post[$key] = check_plain(strip_tags($value));
   }
 
+  switch ($post['op']) {
+    case 'get all reviews':
+      $out = array('test 1', 'data 1', array('test' => 'teeeest 1'));
+      break;
+    
+    case 'get provider reviews':
+      $out = array('test 2', 'data 2', array('test' => 'teeeest 2'));
+      break;
+    
+    case 'get review by nid':
+      $out = array('test 3', 'data 3', array('test' => 'teeeest 3'));
+      break;
+    
+    default:
+      $out = 'Invalid operation request! Please try another one.';
+  }
   
-  if ($post['op'] == 'get') {
-    $out = array('test 1', 'data 1', array('test' => 'teeeest 1'));
-  }
-  else {
-    $out = array('test 2', 'data 2', array('test' => 'teeeest 2'));
-  }
   
   drupal_json_output(array('out' => $out));
 }
