@@ -186,7 +186,7 @@ function gv_misc_rShareReviews_rest() {
     $out = 'test 2';
   }
   
-  drupal_json_output(array('status' => $status, 'out' => $out));
+  drupal_json_output(array('out' => $out, 'server' => $_SERVER));
 }
 
 
