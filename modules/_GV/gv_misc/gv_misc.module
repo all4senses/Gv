@@ -17,6 +17,13 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
+  $items['r-share'] = array(
+    'title' => 'Share reviews',
+    'page callback' => 'gv_misc_rShareReviews_rest',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['securimage_show'] = array(
     'title' => 'Securimage',
     'page callback' => 'gv_misc_securimage_show_ajax',
@@ -156,6 +163,30 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+
+/**
+ * Share reviews with partners sites.
+ */
+function gv_misc_rShareReviews_rest() {
+  
+  $status = TRUE;
+  $out = '';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+
+  if ($post['op'] == 'get') {
+    $out = 'test 1';
+  }
+  else {
+    $out = 'test 2';
+  }
+  
+  drupal_json_output(array('status' => $status, 'out' => $out));
 }
 
 
@@ -3049,6 +3080,8 @@ function gv_misc_testPage() {
   $out = '<div>Start test...</div>';
 
   //gv_misc_rebuildProvidersLogosSprites();
+  
+  
   
   
   return $out . '<br>End of Test';
