@@ -192,18 +192,38 @@ function gv_misc_rShareReviews_rest() {
       
       $query = db_select('node', 'n');
       $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
-      $query->join('field_data_field_r_provider_name', 'rpn', "rpn.field_r_provider_name_value = pn.field_p_name_value");
-      $query->fields('pn', array('field_p_name_value')) 
-            ->fields('rpn', array('entity_id'));
+      $query->fields('pn', array('field_p_name_value'));
       $query->condition('n.type', 'provider')
             ->condition('n.status', 1); 
-      //$query->orderBy('field_p_name_value');
-      $query->groupBy('field_p_name_value');
-      //$result = $query->execute()->fetchCol();
-      $result = $query->execute()->fetchAllAssoc('field_p_name_value');
+      $query->orderBy('field_p_name_value');
+      $providers = $query->execute()->fetchCol();
       
-      $out = $result;
+      $out = $providers;
       break;
+    
+    
+    case 'get all reviews grouped by providers':
+      
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_p_name', 'pn', 'pn.entity_id = n.nid');
+      $query->fields('pn', array('field_p_name_value'));
+      $query->condition('n.type', 'provider')
+            ->condition('n.status', 1); 
+      $query->orderBy('field_p_name_value');
+      $result = $query->execute()->fetchCol();
+      
+      foreach ($result as $provider_name) {
+        $query = db_select('field_data_field_r_provider_name', 'rpn');
+        $query->join('node', 'n', 'n.nid = rpn.entity_id');
+        $query->fields('n', array('nid', 'changed'));
+        $query->condition('rpn.field_r_provider_name_value', $provider_name)
+              ->condition('n.status', 1);
+        $providers[$provider_name] = $query->execute()->fetchAllAssoc('n.nid');
+      }
+      
+      $out = $providers;
+      break;
+    
     
     case 'get provider reviews':
       $out = array('test 2', 'data 2', array('test' => 'teeeest 2'));
