@@ -3897,6 +3897,12 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   // Calculate the overall average editor's rating.
   $editor_rating_overall = $overall_summ / $overall_count;
   
+  
+  
+  dpm($overall_summ);
+  dpm($overall_count);
+  dpm($editor_rating_overall);
+  
   // Set an image for sharing.
   $photo = file_load($form_state['values']['field_p_image']['und'][0]['fid']);
   if ($photo) {
