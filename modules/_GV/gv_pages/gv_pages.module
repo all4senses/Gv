@@ -5266,6 +5266,7 @@ function gv_pages_node_view($node, $view_mode) {
 
           // Get Editor's ratings
           $votes_simple_format = $extra_data['editor_ratings'];
+          
           // Rebuild the array to the votes api format
           $votes = array();
           foreach ($votes_simple_format as $tag => $value) {
@@ -5274,7 +5275,9 @@ function gv_pages_node_view($node, $view_mode) {
           $editor = new stdClass;
           gv_pages_addPhoneRatingsToNodeThemed($editor, $votes);
           $node->editor = $editor;
-
+          
+          dpm($votes_simple_format);
+          dpm($editor);
 
 
           // Get users reviews.
