@@ -3876,7 +3876,7 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   
   // Check if all editor's votes (ratings) fields are set.
   foreach ($rating_options as $rating_option => $rating_option_title) {
-    if ($form_state['values']['rating_' . $rating_option] === FALSE) {
+    if ($form_state['values']['rating_' . $rating_option] === FALSE && $rating_option != 'recommend') {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
     }
   }
