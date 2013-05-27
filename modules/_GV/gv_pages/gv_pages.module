@@ -3888,6 +3888,9 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   dpm($rating_options);
   dpm($form_state['values']);
   foreach ($rating_options as $vote_key => $vote_title) {
+    if ($vote_key == 'recommend') {
+      continue;
+    }
     if(isset($form_state['values']['rating_' . $vote_key])) {
       $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
       $overall_count++;
