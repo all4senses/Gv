@@ -78,6 +78,7 @@ if($view_mode == 'home_teaser') {
                   <h1 <?php 
                           //echo 'property="dc:title v:summary"';
                           echo 'property="v:summary"';
+                          if (!$node->status) {echo ' class="not-published"';}
                       ?>
                 <?php else: ?>
                     <?php 
