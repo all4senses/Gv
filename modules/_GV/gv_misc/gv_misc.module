@@ -210,7 +210,10 @@ function gv_misc_testPage() {
 
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.entity_id = n.nid');
-  $query->fields('rpn', array('entity_id', 'field_r_provider_name_value'));
+  
+  //$query->fields('rpn', array('entity_id', 'field_r_provider_name_value'));
+  $query->fields('rpn', 'field_r_provider_name_value', 'pname');
+  $query->addField('rpn', 'entity_id', 'nid');
 
   $query->condition('n.type', 'review')
         ->condition('n.status', 1); 
@@ -218,7 +221,8 @@ function gv_misc_testPage() {
   //$query->distinct();
 
   $query->orderBy('field_r_provider_name_value');
-  $out = $query->execute()->fetchAllAssoc('entity_id');
+  //$out = $query->execute()->fetchAllAssoc('entity_id');
+  $out = $query->execute()->fetchAllAssoc('nid');
 
   dpm($out);
       
