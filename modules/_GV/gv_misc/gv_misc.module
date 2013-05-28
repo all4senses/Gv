@@ -285,8 +285,6 @@ function gv_misc_rShareReviews_rest() {
 
       $query->orderBy('field_p_name_value');
       
-      
-      
       $out = $query->execute()->fetchCol();
 
       break;
@@ -350,7 +348,8 @@ function gv_misc_rShareReviews_rest() {
         $query = db_select('field_data_field_r_provider_name', 'rpn');
         $query->leftJoin('node', 'n', 'n.nid = rpn.entity_id');
         $query->fields('n', array('changed'));
-        $query->fields('rpn', array('entity_id'));
+        //$query->fields('rpn', array('entity_id'));
+        $query->addField('rpn', 'entity_id', 'nid');
         $query->condition('rpn.field_r_provider_name_value', $provider_name)
               ->condition('n.status', 1);
         
@@ -358,24 +357,51 @@ function gv_misc_rShareReviews_rest() {
           $query->condition('changed', $post['changed_after'], '>');
         }
 
-      
-        $result = $query->execute()->fetchAllAssoc('entity_id');
+        $result = $query->execute()->fetchAllAssoc('nid');
         if (!empty($result)) {
           $r_providers[$provider_name] = $result;
           //$providers[$provider_name]['count'] = count($result);
+          
+          foreach ($r_providers[$provider_name] as $key => $value) {
+            unset($r_providers[$provider_name][$key]->nid);
+          }
         }
       }    
       $out = $r_providers;
       break;
     
     
+      
     case 'get provider reviews':
-      $out = array('test 2', 'data 2', array('test' => 'teeeest 2'));
+    case 'get provider reviews changed after...':
+      
+      $query = db_select('field_data_field_r_provider_name', 'rpn');
+      $query->leftJoin('node', 'n', 'n.nid = rpn.entity_id');
+      $query->fields('n', array('changed'));
+      //$query->fields('rpn', array('entity_id'));
+      $query->addField('rpn', 'entity_id', 'nid');
+      $query->condition('rpn.field_r_provider_name_value', $post['pname'])
+            ->condition('n.status', 1);
+
+      if ($post['op'] == 'get provider reviews changed after...') {
+        $query->condition('changed', $post['changed_after'], '>');
+      }
+
+      //$result = $query->execute()->fetchAllAssoc('entity_id');
+      $result = $query->execute()->fetchAllAssoc('nid');
+      if (!empty($result)) {
+        $out = $result;
+      }
+
       break;
     
+      
+      
     case 'get review by nid':
       $out = array('test 3', 'data 3', array('test' => 'teeeest 3'));
       break;
+    
+    
     
     default:
       $out = 'Invalid operation request! Please try another one.';
