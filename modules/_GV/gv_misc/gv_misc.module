@@ -212,7 +212,7 @@ function gv_misc_testPage() {
   $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.entity_id = n.nid');
   
   //$query->fields('rpn', array('entity_id', 'field_r_provider_name_value'));
-  $query->fields('rpn', 'field_r_provider_name_value', 'pname');
+  $query->addField('rpn', 'field_r_provider_name_value', 'pname');
   $query->addField('rpn', 'entity_id', 'nid');
 
   $query->condition('n.type', 'review')
