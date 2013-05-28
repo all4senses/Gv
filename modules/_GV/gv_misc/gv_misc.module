@@ -207,7 +207,21 @@ function gv_misc_testPage() {
   }
 
   dpm($r_providers);
-  
+
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.entity_id = n.nid');
+  $query->fields('rpn', array('entity_id', 'field_r_provider_name_value'));
+
+  $query->condition('n.type', 'review')
+        ->condition('n.status', 1); 
+
+  //$query->distinct();
+
+  $query->orderBy('field_r_provider_name_value');
+  $out = $query->execute()->fetchAllAssoc('entity_id');
+
+  dpm($out);
+      
   return $out . '<br>End of Test';
 }
 
@@ -252,6 +266,25 @@ function gv_misc_rShareReviews_rest() {
       $out = $query->execute()->fetchCol();
 
       break;
+    
+    
+    
+    case 'get all reviews':
+      
+      $query = db_select('node', 'n');
+      $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.entity_id = n.nid');
+      $query->fields('rpn', array('entity_id', 'field_r_provider_name_value'));
+      
+      $query->condition('n.type', 'review')
+            ->condition('n.status', 1); 
+
+      //$query->distinct();
+
+      $query->orderBy('field_r_provider_name_value');
+      $out = $query->execute()->fetchAllAssoc('entity_id');
+
+      break;
+    
     
     
     case 'get all reviews grouped by providers':
