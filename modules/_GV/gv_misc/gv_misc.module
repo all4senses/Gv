@@ -213,7 +213,7 @@ function gv_misc_testPage() {
   
   //$query->fields('rpn', array('entity_id', 'field_r_provider_name_value'));
   $query->addField('rpn', 'field_r_provider_name_value', 'pname');
-  $query->addField('rpn', 'entity_id', 'nid');
+  //$query->addField('rpn', 'entity_id', 'nid');
 
   $query->condition('n.type', 'review')
         ->condition('n.status', 1); 
