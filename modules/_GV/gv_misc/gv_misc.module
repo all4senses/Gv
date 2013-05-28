@@ -192,8 +192,8 @@ function gv_misc_testPage() {
     $query->condition('rpn.field_r_provider_name_value', $provider_name);
           //->condition('n.status', 1);
     //$providers[$provider_name] = $query->execute()->fetchAllAssoc('n.nid');
-     
-    if ($result = $query->execute()->fetchAllAssoc('entity_id')) {
+    $result = $query->execute()->fetchAllAssoc('entity_id');
+    if (!empty($result)) {
       $providers[$provider_name] = $result;
     }
   }
