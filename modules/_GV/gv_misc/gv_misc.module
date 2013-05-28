@@ -187,11 +187,11 @@ function gv_misc_testPage() {
   $query->distinct();
           
   $query->orderBy('field_p_name_value');
-  $result = $query->execute()->fetchCol();
+  $providers = $query->execute()->fetchCol();
 
-  dpm($result);
+  dpm($providers);
   
-  foreach ($result as $provider_name) {
+  foreach ($providers as $provider_name) {
     $query = db_select('field_data_field_r_provider_name', 'rpn');
     $query->leftJoin('node', 'n', 'n.nid = rpn.entity_id');
     $query->fields('n', array('changed'));
@@ -201,12 +201,12 @@ function gv_misc_testPage() {
     //$providers[$provider_name] = $query->execute()->fetchAllAssoc('n.nid');
     $result = $query->execute()->fetchAllAssoc('entity_id');
     if (!empty($result)) {
-      $providers[$provider_name] = $result;
+      $r_providers[$provider_name] = $result;
       //$providers[$provider_name]['count'] = count($result);
     }
   }
 
-  dpm($providers);
+  dpm($r_providers);
   
   return $out . '<br>End of Test';
 }
@@ -234,42 +234,57 @@ function gv_misc_rShareReviews_rest() {
 
   switch ($post['op']) {
     
-    case 'get providers':
+    case 'get providers having reviews':
       
       $query = db_select('node', 'n');
-      $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_name', 'pn', 'pn.entity_id = n.nid');
       $query->fields('pn', array('field_p_name_value'));
       $query->condition('n.type', 'provider')
             ->condition('n.status', 1); 
+
+      $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.field_r_provider_name_value = pn.field_p_name_value');
+      $query->join('node', 'rn', 'rn.nid = rpn.entity_id AND rn.status = 1');
+      //$query->condition('rn.status', 1); 
+
+      $query->distinct();
+
       $query->orderBy('field_p_name_value');
-      $providers = $query->execute()->fetchCol();
-      
-      $out = $providers;
+      $out = $query->execute()->fetchCol();
+
       break;
     
     
     case 'get all reviews grouped by providers':
       
       $query = db_select('node', 'n');
-      $query->join('field_data_field_p_name', 'pn', 'pn.entity_id = n.nid');
+      $query->leftJoin('field_data_field_p_name', 'pn', 'pn.entity_id = n.nid');
       $query->fields('pn', array('field_p_name_value'));
       $query->condition('n.type', 'provider')
             ->condition('n.status', 1); 
+
+      $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.field_r_provider_name_value = pn.field_p_name_value');
+      $query->join('node', 'rn', 'rn.nid = rpn.entity_id AND rn.status = 1');
+
+      $query->distinct();
+
       $query->orderBy('field_p_name_value');
-      $result = $query->execute()->fetchCol();
-      
-      foreach ($result as $provider_name) {
+      $providers = $query->execute()->fetchCol();
+
+      foreach ($providers as $provider_name) {
         $query = db_select('field_data_field_r_provider_name', 'rpn');
-        //$query->leftJoin('node', 'n', 'n.nid = rpn.entity_id');
-        //$query->fields('n', array('nid', 'changed'));
+        $query->leftJoin('node', 'n', 'n.nid = rpn.entity_id');
+        $query->fields('n', array('changed'));
         $query->fields('rpn', array('entity_id'));
-        $query->condition('rpn.field_r_provider_name_value', $provider_name);
-              //->condition('n.status', 1);
-        //$providers[$provider_name] = $query->execute()->fetchAllAssoc('n.nid');
-        $providers[$provider_name] = $query->execute()->fetchAllAssoc('rpn.entity_id');
-      }
+        $query->condition('rpn.field_r_provider_name_value', $provider_name)
+              ->condition('n.status', 1);
       
-      $out = $providers;
+        $result = $query->execute()->fetchAllAssoc('entity_id');
+        if (!empty($result)) {
+          $r_providers[$provider_name] = $result;
+          //$providers[$provider_name]['count'] = count($result);
+        }
+      }    
+      $out = $r_providers;
       break;
     
     
