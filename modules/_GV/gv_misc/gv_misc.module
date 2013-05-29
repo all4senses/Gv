@@ -391,6 +391,10 @@ function gv_misc_rShareReviews_rest() {
       $result = $query->execute()->fetchAllAssoc('nid');
       if (!empty($result)) {
         $out = $result;
+        
+        foreach ($out as $key => $value) {
+          unset($out[$key]->nid);
+        }
       }
 
       break;
