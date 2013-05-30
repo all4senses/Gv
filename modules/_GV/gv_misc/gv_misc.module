@@ -1854,7 +1854,14 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $last_pos = strrpos($teaser_home, ' ');
   $teaser_home = substr_replace ($teaser_home, '...', $last_pos);
   
-  $teaser_side_block = trim(drupal_substr($teaser, 0, 200));// . '...';
+//  if ($found_image) {
+//    $teaser_side_block_chars = 75;
+//  }
+//  else 
+  {
+    $teaser_side_block_chars = 115;
+  }
+  $teaser_side_block = trim(drupal_substr($teaser, 0, $teaser_side_block_chars));
   $last_pos = strrpos($teaser_side_block, ' ');
   $teaser_side_block = '<div class="teaser-content">' . substr_replace ($teaser_side_block, '...' . l('Read more', 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos) . '</div>';
   
