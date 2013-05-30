@@ -3769,7 +3769,9 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   $extra_data = array(
     'title' => $form_state['values']['title'], 
     'teaser_block' => $teaser_data['teaser_block'], 
-    'teaser_home' => $teaser_data['teaser_home']
+    'teaser_home' => $teaser_data['teaser_home'],
+    'teaser_side_block' => $teaser_data['teaser_side_block'],
+    'side_block_main_image' => $teaser_data['side_block_main_image'],
   );
   
   if (!empty($form_state['values']['guest_author'])) {

@@ -1,35 +1,51 @@
 <?php 
-if($view_mode == 'home_teaser') {
-  //dpm($content);
-  //dpm($node);
-  
-  
 
-  $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+  $class_thumb_presented = '';
   
-  $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
-  
-  if (!empty($node->field_extra_data['und'][0]['value'])) {
-    $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-    $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
-  }
+  if($view_mode == 'home_teaser') {
 
-  if (!$extra_data['guest_author']) {
-    $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
-    $author_name = $authorExtendedData->realname;
+    $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+
+    $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
+
+    if (!empty($node->field_extra_data['und'][0]['value'])) {
+      $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+      $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
+    }
+
+    if (!$extra_data['guest_author']) {
+      $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
+      $author_name = $authorExtendedData->realname;
+    }
+
+    echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+            . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
+
+    return;
   }
-            
+  elseif($view_mode == 'side_block_teaser') {
+    
+      if (!empty($node->field_extra_data['und'][0]['value'])) {
+        $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+      }
   
-  echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
-          . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
-  
-  return;
-} 
+     if (!empty($extra_data['teaser_side_block'])) {
+        $teaser_data = $extra_data;
+      }
+      else {
+        $teaser_data = ch_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
+      }
+      
+      if (!empty($$teaser_data['side_block_main_image'])) {
+        $class_thumb_presented = ' with_thumb';
+      }
+      
+  }
 ?>
 
 
 <?php if (!$page): ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes . $class_thumb_presented; ?> clearfix"<?php print $attributes; ?>>
   <!-- <div class="inside"> -->
 <?php else: ?>
   <div class="main-content"> 
@@ -41,6 +57,11 @@ if($view_mode == 'home_teaser') {
           
 
       <?php if (!$page): ?>
+        <?php 
+          if (!empty($teaser_data['side_block_main_image'])) {
+            echo $teaser_data['side_block_main_image']; 
+          }
+        ?>
         <header>
       <?php endif; ?>
 
@@ -138,6 +159,9 @@ if($view_mode == 'home_teaser') {
                 echo $submitted;
               }
               else {
+                  if ($view_mode == 'side_block_teaser') {
+                    echo $created_str;
+                  }
                   if ($paths_with_latest_article) {
                     // Home page articles teasers.
                     $type_cations = array('blog_post' => 'Blog', 'news_post' => 'News', 'article' => 'Article');
@@ -195,8 +219,11 @@ if($view_mode == 'home_teaser') {
           //dpm($node);
           
           if (!$page) {
+            if ($view_mode == 'side_block_teaser') {
+              echo $teaser_data['teaser_side_block'];
+            }
             // $path_with_latest_article is defined above.
-            if ($paths_with_latest_article) {
+            elseif ($paths_with_latest_article) {
               // Show an other teaser on the home page.
               $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
               if (isset($extra_data['teaser_home'])) {
