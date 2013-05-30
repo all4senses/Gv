@@ -33,7 +33,7 @@
         $teaser_data = $extra_data;
       }
       else {
-        $teaser_data = ch_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
+        $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
       }
       
       if (!empty($$teaser_data['side_block_main_image'])) {
