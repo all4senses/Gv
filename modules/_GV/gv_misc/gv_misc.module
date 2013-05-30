@@ -402,7 +402,42 @@ function gv_misc_rShareReviews_rest() {
       
       
     case 'get review by nid':
-      $out = array('test 3', 'data 3', array('test' => 'teeeest 3'));
+      
+      $query = db_select('node', 'n');
+        $query->fields('n', array('nid', 'changed'));
+      $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.entity_id = n.nid');
+        $query->addField('rpn', 'field_r_provider_name_value', 'pname');
+      $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
+        $query->addField('b', 'body_value', 'review');
+      $query->leftJoin('field_data_field_r_fname', 'fn', 'fn.entity_id = n.nid');
+        $query->addField('fn', 'field_r_fname_value', 'fname');
+      $query->leftJoin('field_data_field_r_lname', 'ln', 'ln.entity_id = n.nid');
+        $query->addField('ln', 'field_r_lname_value', 'lname');
+      $query->leftJoin('field_data_field_r_email', 'm', 'm.entity_id = n.nid');
+        $query->addField('m', 'field_r_email_value', 'email');  
+      $query->leftJoin('field_data_field_r_data', 'd', 'd.entity_id = n.nid');
+        $query->addField('d', 'field_r_data_value', 'r_data');  
+      $query->leftJoin('field_data_field_r_rating_overall', 'ro', 'ro.entity_id = n.nid');
+        $query->addField('ro', 'field_r_rating_overall_value', 'rating_overall');  
+            
+      $query->condition('n.nid', $post['nid']);
+
+      $review = $query->execute()->fetchObject();
+      
+      $criteria = array(
+        'entity_type' => 'node',
+        'entity_id' => $node->field_ref_provider['und'][0]['target_id'],
+        'uid' => $node->uid,
+        // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
+        'vote_source' => $node->field_r_email['und'][0]['value'],
+      );
+      $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria);
+      gv_pages_addRatingsToNodeThemed($node, $votes);
+
+      if (!empty($review)) {
+        $out = $review;
+      }
+      
       break;
     
     
