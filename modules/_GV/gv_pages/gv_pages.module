@@ -2401,54 +2401,55 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $weight = 8;
 
       $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE);
-      //$vote_keys = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE);
-
+      
       $votes = array();
       $form['ereview'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Editor\'s Rating for this VoIP Provider'),
-        '#weight' => 13,
+        '#title' => 'Editor\'s Rating for this VoIP Provider',
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#weight' => 11,
       );
+            /*
+          $form['ereview']['votes'] = array(
+              '#type' => 'container',
+              '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
+          );
+          foreach ($vote_keys as $vote_key => $vote_title) {
+            $form['ereview']['votes']['rating_' . $vote_key] = array(
+              '#type' => 'select',
+              '#options' => $rating_options,
+              '#default_value' => $rating_options[''],
+              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+            );
+          }
 
-//          $form['ereview']['votes'] = array(
-//              '#type' => 'container',
-//              '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
-//          );
-//          foreach ($vote_keys as $vote_key => $vote_title) {
-//            $form['ereview']['votes']['rating_' . $vote_key] = array(
-//              '#type' => 'select',
-//              '#options' => $rating_options,
-//              '#default_value' => $rating_options[''],
-//              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
-//              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
-//            );
-//          }
-//
-//          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
-//          $form['ereview']['rating_recommend'] = array(
-//              '#type' => 'radios',
-//              '#options' => $rating_recommend_options,
-//              '#default_value' => FALSE,
-//              '#prefix' => '<div class="label left">' . RECOMMEND . '</div>',
-//          );
-//
-//          // Fill saved editor's ratings, if editing...
-//          if(arg(1) != 'add' && isset($p_data['ereview']['editor_ratings'])) {
-//
-//              foreach ($p_data['ereview']['editor_ratings'] as $tag => $value) {
-//                if ($tag == 'recommend') {
-//                  $recommend = $value;
-//                  continue;
-//                }
-//                $form['ereview']['votes']['rating_' . $tag]['#default_value'] = $value;
-//              }
-//
-//
-//              if (isset($recommend)) {
-//                $form['ereview']['rating_recommend']['#default_value'] = $recommend;
-//              }
-//          }
+          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+          $form['ereview']['rating_recommend'] = array(
+              '#type' => 'radios',
+              '#options' => $rating_recommend_options,
+              '#default_value' => FALSE,
+              '#prefix' => '<div class="label left">' . RECOMMEND . '</div>',
+          );
 
+          // Fill saved editor's ratings, if editing...
+          if(arg(1) != 'add' && isset($p_data['ereview']['editor_ratings'])) {
+
+              foreach ($p_data['ereview']['editor_ratings'] as $tag => $value) {
+                if ($tag == 'recommend') {
+                  $recommend = $value;
+                  continue;
+                }
+                $form['ereview']['votes']['rating_' . $tag]['#default_value'] = $value;
+              }
+
+
+              if (isset($recommend)) {
+                $form['ereview']['rating_recommend']['#default_value'] = $recommend;
+              }
+          }
+          */
 
           $pros_and_cons_descrs = array(/*'The good', 'The bad', */'The bottom line');
           $form['ereview']['data_pros_and_cons'] = array(
@@ -2504,8 +2505,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 
             
-      
-      //dpm($form);
       
       $form['#validate'][] = 'gv_pages_validateForm_provider';
       $form['#submit'][] = 'gv_pages_submitForm_provider';
