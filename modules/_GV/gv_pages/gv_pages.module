@@ -2033,105 +2033,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             
       $provider_options = unserialize(PROVIDER_OPTIONS);
-      /*      
-      $provider_options = array(
-          'Provider Info' => array(
-              'Overall Rating' => 'textfield',
-              'Year Founded' => 'textfield',
-              'Headquarters Location' => 'textfield',
-              'Service Location' => 'textfield',
-              'Service Type Availability' => 'textfield',
-              'Popular Service Plan' => 'textfield',
-              'Money Back Guarantee' => 'textfield',
-          ),
-          
-          'Services & Pricing' => array(
-              'Monthly Cost of Cheapest Service' => 'textfield',
-              'Amount of Lines Per Price Tier' => 'textarea',
-              'Month to Month Option' => 'checkbox',
-              'Metered Plans' => 'textfield',
-              'Requires Contract' => 'checkbox',
-              'Contract Length (in yrs)' => 'textfield',
-              'Customizable Plans' => 'checkbox',
-              'Activation Fee' => 'textfield',
-              'Setup Fee' => 'textfield',
-              'Number Porting Fee' => 'textfield',
-              'Shipping' => 'textfield',
-              'Equipment Leasing' => 'checkbox',
-              'Mobile App' => 'checkbox',
-              'Own Softphone' => 'checkbox',
-              'Works with 3rd party Softphones' => 'checkbox',
-              'Fax Options' => 'checkbox',
-              'Fax Pricing' => 'textfield',
-              'Desktop Integration' => 'checkbox',
-              'IP Phones Supported' => 'textfield',
-              'IP Phones Non Supported' => 'textfield',
-              'Toll Free Numbers' => 'textfield',
-              'Local Numbers' => 'textfield',
-              'Vanity Numbers' => 'textfield',
-              'BYOD Option' => 'checkbox',
-          ),
-          
-          
-          'Available Features (some features cost extra, as per provider rates)' => array(
-              'Advanced Call Forwarding' => 'checkbox',
-              'Anonymous Call Rejection' => 'checkbox',
-              'Auto Attendant' => 'checkbox',
-              'Busy Lamp Field' => 'checkbox',
-              'Call Queuing' => 'checkbox',
-              'Call Me Now' => 'checkbox',
-              'Call Notifications' => 'checkbox',
-              'Call Parking' => 'checkbox',
-              'Call Recording' => 'checkbox',
-              'Call Return' => 'checkbox',
-              'Call Waiting' => 'checkbox',
-              'Caller ID' => 'checkbox',
-              'Conference Calls' => 'checkbox',
-              'Dial-by-name Directory' => 'checkbox',
-              'Directed Call Pickup' => 'checkbox',
-              'Do Not Disturb' => 'checkbox',
-              'E911' => 'checkbox',
-              'Find Me/Follow Me' => 'checkbox',
-              'Group Paging' => 'checkbox',
-              'Hoteling Guest' => 'checkbox',
-              'Hunt Group' => 'checkbox',
-              'IVR' => 'checkbox',
-              'Line Mirroring' => 'checkbox', 
-              'On-Hold Music' => 'checkbox',
-              'Privacy Options' => 'checkbox',
-              'Push To Talk' => 'checkbox',
-              'Selective Call Acceptance' => 'checkbox',
-              'Selective Call Rejection' => 'checkbox',
-              'Shared Call Appearance' => 'checkbox',
-              'Simultaneous Ring' => 'checkbox',
-              'Switchboard Software for Live Receptionist' => 'checkbox',
-              'Three-way Calling' => 'checkbox',
-              'Unlimited Extensions' => 'checkbox',
-              'Voicemail Transcriptions' => 'checkbox',
-              'Virtual Extensions' => 'checkbox',
-              'Virtual Numbers' => 'checkbox',
-          ),
-          
-          'Cloud/CRM Integration' => array(
-              'SalesForce' => 'checkbox',
-              'Outlook' => 'checkbox',
-              'Sugar' => 'checkbox',
-          ),
-          
-          'Support' => array(
-              'Hours' => 'textfield',
-              'Telephone Support' => 'checkbox',
-              'Email Support' => 'checkbox',
-              'Instant Chat' => 'checkbox',
-              '24/7 Call-in Support' => 'checkbox',
-              'FAQs Section' => 'checkbox',
-              'Video Tutorials' => 'checkbox',
-              'E-Guides' => 'checkbox',
-              'Online Ticket Submissions' => 'checkbox',
-        ),
-          
-      );
-      */
       
       $form['provider_options'] = array(
         '#type' => 'fieldset',
@@ -3935,7 +3836,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   //dpm($form_state['values']);
    
   $p_data['info'] = $form_state['values']['data_info'];
-  $p_data['quote'] = $form_state['values']['data_quote'];
+  //$p_data['quote'] = $form_state['values']['data_quote'];
   $p_data['provider_options'] = $form_state['values']['provider_options'];
   
   //dpm($p_data['provider_options']);
