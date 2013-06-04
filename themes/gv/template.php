@@ -536,8 +536,8 @@ function gv_html_head_alter(&$head_elements) {
       '#type' => 'html_tag',
       '#tag' => 'meta',
       '#attributes' => array(
-          'name' => 'og:url',
-          'value' => $head_elements['metatag_canonical']['#value'],
+          'property' => 'og:url',
+          'content' => $head_elements['metatag_canonical']['#value'],
       ),
     );
   }
