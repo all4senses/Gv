@@ -522,6 +522,14 @@ function gv_html_head_alter(&$head_elements) {
     ),
   );
   
+  // Remove tags 'dc:title' and 'sioc:num_replies' from pages
+  if (isset($head_elements['rdf_node_title'])) {
+    unset($head_elements['rdf_node_title']);
+  }
+  if (isset($head_elements['rdf_node_comment_count'])) {
+    unset($head_elements['rdf_node_comment_count']);
+  }
+  
   dpm($head_elements);
   
 }
