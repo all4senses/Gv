@@ -15,7 +15,10 @@
         <?php else: ?>
           <header>
         
-            <h2<?php //print $title_attributes; ?> property="dc:title v:summary">
+            <h2<?php 
+                  //echo /*$title_attributes .*/ ' property="dc:title v:summary"'; 
+                  echo /*$title_attributes .*/ ' property="v:summary"'; 
+                ?>>
                 <a href="<?php print $node_url; ?>">
                   <?php print $title; ?>
                 </a>
