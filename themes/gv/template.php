@@ -512,7 +512,7 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
-  // <meta name="verify-a" value="5c21728cee5f71b74ae4"> 
+ // <meta name="verify-a" value="5c21728cee5f71b74ae4"> 
   $head_elements['verify-a'] = array(
     '#type' => 'html_tag',
     '#tag' => 'meta',
@@ -530,7 +530,19 @@ function gv_html_head_alter(&$head_elements) {
     unset($head_elements['rdf_node_comment_count']);
   }
   
-  dpm($head_elements);
+  // Add og:url by recomendation of Facebook's developer tool
+  if (isset($head_elements['metatag_canonical'])) {
+    $head_elements['og:url'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+          'name' => 'og:url',
+          'value' => $head_elements['metatag_canonical']['#value'],
+      ),
+    );
+  }
+  
+  //dpm($head_elements);
   
 }
 
