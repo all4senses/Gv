@@ -248,14 +248,22 @@ function gv_misc_testPage() {
   //$query->join('node', 'rn', 'rn.nid = rpn.entity_id AND rn.status = 1');
   //$query->condition('rn.status', 1); 
 
-  $query->distinct();
+  //$query->distinct();
           
   //$query->orderBy('field_p_name_value');
   $nodes = $query->execute()->fetchAllAssoc('nid');
 
+  
+  
+  foreach ($nodes as $nid => $node) {
+    $query = db_select('url_alias', 'a');
+    $query->condition('a.source', 'node/' . $nid);
+    $query->fields('a', array('alias'));
+    $nodes[$nid]->alias = $query->execute()->fetchField();
+  }
+  
   dpm($nodes);
   
-      
   return $out . '<br>End of Test';
 }
 
