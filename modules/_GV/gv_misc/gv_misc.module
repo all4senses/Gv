@@ -247,7 +247,11 @@ function gv_misc_testPage() {
   dpm($global_metatags_config->config['title']['value']);
   global $language;
   
-  $metatag_title = token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
+  //$string = $global_metatags_config->config['title']['value'];
+  $string = '[node:field_p_name] Reviews | GetVoIP';
+  //$string = '[node:title] Reviews | GetVoIP';
+  
+  $metatag_title = token_replace($string, array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
   dpm($metatag_title);
   gv_misc_addMetatag('title', 'GetVoIP.com.');
           
