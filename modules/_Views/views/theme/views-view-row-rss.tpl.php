@@ -1,11 +1,11 @@
 <?php
+
 /**
- * @file views-view-row-rss.tpl.php
+ * @file
  * Default view template to display a item in an RSS feed.
  *
  * @ingroup views_templates
  */
-//dpm(get_defined_vars());
 ?>
   <item>
     <title><?php print $title; ?></title>
