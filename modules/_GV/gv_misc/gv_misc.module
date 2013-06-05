@@ -2212,6 +2212,8 @@ function gv_misc_addSocialShareData_toPage($node) {
       
       $global_metatags_config = metatag_config_load('node:' . $node->type);
       dpm($global_metatags_config);
+      $global_metatags_config = metatag_config_load('node');
+      dpm($global_metatags_config);
       if (isset($node->metatags['title']['value']) && $global_metatags_config = metatag_config_load('node:' . $node->type)) {
             
           if (!empty($global_metatags_config->config['title']['value'])) {
