@@ -5250,6 +5250,9 @@ function gv_pages_node_view($node, $view_mode) {
       // AND except of published prefaces, because thier metatags will be pulled automatically!
 
       if (isset($node->metatags) && count($node->metatags) && !$node->status) {
+        
+        dpm($node->metatags);
+        
         foreach($node->metatags as $metatag_title => $metatag_data) {
 
           // We set title while attaching a preface to a view.

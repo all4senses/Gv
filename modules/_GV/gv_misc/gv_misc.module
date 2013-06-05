@@ -238,6 +238,17 @@ function gv_misc_testPage() {
   */
   
   
+  return $out . '<br>End of Test';
+}
+
+
+
+/**
+ * Bulk Replace an alias of nodes.
+ */
+function gv_misc_bulkReplaceAliases() {
+  
+  
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'));
   $query->condition('n.type', 'article');
@@ -252,18 +263,9 @@ function gv_misc_testPage() {
     $nodes[$nid]->alias = $query->execute()->fetchField();
   }
   
-  dpm($nodes);
-  
-  dpm($nodes[782]);
-
-  
-  $nid = 782;
+  //dpm($nodes);
   
   foreach ($nodes as $nid => $node) {
-    
-    if ($nid == 782) {
-      continue;
-    }
     
     if (strpos($node->alias, 'what-is-voip') === FALSE) {
       dpm('Wrong Alias for ' . $node->nid);
@@ -318,15 +320,10 @@ function gv_misc_testPage() {
       'access' => 0
     );
     
-    //dpm($redirect_object);
-    
     db_insert('redirect')
         ->fields($redirect_object)
         ->execute();
   }
-  
-  return $out . '<br>End of Test';
-  
   
 }
 
