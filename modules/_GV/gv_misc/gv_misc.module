@@ -282,12 +282,12 @@ function gv_misc_testPage() {
     $hash = redirect_hash($redirect);
 
     
-//    db_update('url_alias')
-//        ->fields(array(
-//          'alias' => $new_alias,
-//        ))
-//        ->condition('source', 'node/' . $nid)
-//        ->execute();
+    db_update('url_alias')
+        ->fields(array(
+          'alias' => $new_alias,
+        ))
+        ->condition('source', 'node/' . $nid)
+        ->execute();
   
     $query = db_select('redirect', 'r');
     $query->condition('r.source', $old_alias);
@@ -314,9 +314,9 @@ function gv_misc_testPage() {
     
     dpm($redirect_object);
     
-//    db_insert('redirect')
-//        ->fields($redirect_object)
-//        ->execute();
+    db_insert('redirect')
+        ->fields($redirect_object)
+        ->execute();
   }
   
   return $out . '<br>End of Test';
