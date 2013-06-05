@@ -265,6 +265,11 @@ function gv_misc_testPage() {
       continue;
     }
     
+    if (strpos($node->alias, 'what-is-voip') === FALSE) {
+      dpm('Wrong Alias for ' . $node->nid);
+    }
+    
+    continue;
     
     
     $old_alias = $node->alias;
