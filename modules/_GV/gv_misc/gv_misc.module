@@ -238,6 +238,20 @@ function gv_misc_testPage() {
   */
   
   
+  $node = node_load(63);
+  dpm($node);
+  
+  $global_metatags_config = metatag_config_load('node:' . $node->type);
+  dpm($global_metatags_config);
+  
+  dpm($global_metatags_config->config['title']['value']);
+  global $language;
+  
+  $metatag_title = token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
+  dpm($metatag_title);
+  gv_misc_addMetatag('title', 'GetVoIP.com.');
+          
+          
   return $out . '<br>End of Test';
 }
 
