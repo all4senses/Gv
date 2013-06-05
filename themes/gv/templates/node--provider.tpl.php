@@ -1,3 +1,5 @@
+<?php $provider_name = isset($provider_name) ? $node->field_p_name['und'][0]['value'] : $node->field_p_name[0]['value']; ?>
+
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
@@ -42,7 +44,7 @@
                     echo '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo')))) . '</div>';
                   }
                   else {
-                    echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
                   }
                   $url = 'http://getvoip.com'. url('node/' . $node->nid);
                 ?>
@@ -90,7 +92,7 @@
                 
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
-                  <div class="caption"><?php dpm($node); echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $node->field_p_name['und'][0]['value'] . '</span>')); ?></div>
+                  <div class="caption"><?php dpm($node); echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
                   <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">Founded In:</span>' . $node->p_data['info']['i_founded']; ?></div>
                   <div><?php echo '<span class="title">Service Availability:</span>' . $node->p_data['info']['i_availability']; ?></div>
@@ -113,7 +115,7 @@
                   }
                   
                   if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
-                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $node->field_p_name['und'][0]['value']), '</div>';
+                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $provider_name), '</div>';
                   }
                 ?>  
                 
@@ -130,7 +132,7 @@
                       <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/default/files/writeareview.png" /></a><div class="voters"><div class="title">' . 'Number of Reviews' . ':</div><div class="count" property="v:count"><a href="#reviews">' . $node->gv_voters . '</a></div></div>'; ?>
                       <?php echo '<div id="positive">' . $node->gv_recommends['positive'] . ' Positive reviews</div><div id="negative">' . $node->gv_recommends['negative'] . ' Negative reviews</div>' ?>
                       <?php echo '<div class="recommend"><div class="title">Would recommend: </div><div class="data">' . $node->gv_recommend . '% of Users' . '</div></div>'; ?>
-                      <div class="title"><?php $node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/ . ' Overall Rated:'; ?></div>
+                      <div class="title"><?php $provider_name /*$content['field_p_name'][0]['#markup']*/ . ' Overall Rated:'; ?></div>
                     </div>
                     <div class="star-big">
                       <?php echo '<div class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>'; ?>
@@ -149,10 +151,10 @@
                 
                 <ul>
                   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
-                    <li><a href="#tabs-0"><?php echo t('!p User Reviews', array('!p' => isset($node->field_p_name['und'][0]['value']) ? $node->field_p_name['und'][0]['value'] : 'Provider' )); ?></a></li>
+                    <li><a href="#tabs-0"><?php echo t('!p User Reviews', array('!p' => empty($provider_name) ? $provider_name : 'Provider' )); ?></a></li>
                   <?php endif; ?>
                     
-                  <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => isset($node->field_p_name['und'][0]['value'] /*$content['field_p_name'][0]['#markup']*/) ? /*'<span property="v:itemreviewed">' .*/ $node->field_p_name['und'][0]['value'] : t(' Provider') )); ?></a></li>
+                  <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => empty($provider_name ) ? $provider_name : t(' Provider') )); ?></a></li>
                   
                   <?php 
                   
@@ -253,7 +255,7 @@
                     echo '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page')) . '</div>';
                   }
                   else {
-                    echo render($title_prefix), '<h2', $title_attributes,'>', $node->field_p_name['und'][0]['value'], '</h2>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name, '</h2>', render($title_suffix);
                   }
                 ?>
               </div>
@@ -292,7 +294,7 @@
     <div class="reviews">
       <div class="header">
         <a id="reviews"></a>
-        <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
+        <h2 class="button"><?php echo $provider_name, ' User Reviews'; ?></h2>
         
         <!-- <div class="button"> -->
           <?php 
