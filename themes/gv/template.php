@@ -541,7 +541,7 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
-  dpm($head_elements);
+  //dpm($head_elements);
   
 }
 
