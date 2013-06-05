@@ -2204,7 +2204,8 @@ function gv_misc_addSocialShareData_toPage($node) {
           dpm($node->metatags);
 
           dpm($global_metatags_config->config['title']['value']);
-          $metatag_title = token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => 'und'));
+          global $language;
+          $metatag_title = token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language));
           dpm($metatag_title);
           gv_misc_addMetatag('title', 'GetVoIP.com');
         }
