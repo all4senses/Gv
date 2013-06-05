@@ -2211,11 +2211,13 @@ function gv_misc_addSocialShareData_toPage($node) {
       $title = $node->title;
       
       if (isset($node->metatags['title']['value'])) {
-            
+          dpm($node->metatags);
           if (!$global_metatags_config = metatag_config_load('node:' . $node->type) || empty($global_metatags_config->config['title']['value'])) {
             $global_metatags_config = metatag_config_load('node');
           }
                   
+          dpm($global_metatags_config);
+          
           if (!empty($global_metatags_config->config['title']['value'])) {
             global $language;
             global $altered_head_title;
