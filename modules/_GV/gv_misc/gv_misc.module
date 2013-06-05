@@ -261,22 +261,23 @@ function gv_misc_testPage() {
   
   foreach ($nodes as $nid => $node) {
     
-    if ($nid != 782) {
+    if ($nid == 782) {
       continue;
     }
     
     if (strpos($node->alias, 'what-is-voip') === FALSE) {
       dpm('Wrong Alias for ' . $node->nid);
+      continue;
     }
     
-    continue;
+    
     
     
     $old_alias = $node->alias;
     $new_alias = str_replace('what-is-voip', 'library', $old_alias);
     
-    dpm('$old_alias = ' . $old_alias);
-    dpm('$new_alias = ' . $new_alias);
+    //dpm('$old_alias = ' . $old_alias);
+    //dpm('$new_alias = ' . $new_alias);
     
     
     $redirect = new stdClass();
@@ -317,7 +318,7 @@ function gv_misc_testPage() {
       'access' => 0
     );
     
-    dpm($redirect_object);
+    //dpm($redirect_object);
     
     db_insert('redirect')
         ->fields($redirect_object)
