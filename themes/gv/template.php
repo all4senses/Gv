@@ -468,8 +468,7 @@ function gv_html_head_alter(&$head_elements) {
 
       $current_title = str_replace(' | GetVoIP.com', '', $current_title);
 
-      //dpm($current_title);
-
+      // Will be used in html.tpl.php
       global $altered_head_title;
       
       $altered_head_title = $current_title . ' - Page ' . $current_page . ' | GetVoIP.com';
@@ -542,7 +541,7 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
-  //dpm($head_elements);
+  dpm($head_elements);
   
 }
 
