@@ -244,7 +244,9 @@ function gv_misc_testPage() {
       
   $query->groupBy('type');
   //$query->condition('n.type', 'article');
-  $nodes = $query->execute()->fetchAllAssoc('nid');
+  
+  //$nodes = $query->execute()->fetchAllAssoc('nid');
+  $nodes = $query->execute()->fetchAll();
 
   dpm($nodes);
   
