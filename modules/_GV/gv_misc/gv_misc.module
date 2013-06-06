@@ -261,13 +261,21 @@ function gv_misc_testPage() {
     
     
     // Replace title without '| GetVoIP.com' with title with '| GetVoIP'
-    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE || strpos($nodes[$nid]->metatag['title']['value'], '[') !== FALSE) {
-    //if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE) {
+//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE || strpos($nodes[$nid]->metatag['title']['value'], '[') !== FALSE) {
+//      unset($nodes[$nid]);
+//    }
+//    else {
+//      $nodes[$nid]->metatag['title']['value'] = $nodes[$nid]->metatag['title']['value'] . ' | GetVoIP';
+//    }
+    
+    // Replace '| GetVoIP' with '[site:name]'
+    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') === FALSE) {
       unset($nodes[$nid]);
     }
     else {
-      $nodes[$nid]->metatag['title']['value'] = $nodes[$nid]->metatag['title']['value'] . ' | GetVoIP';
+      $nodes[$nid]->metatag['title']['new_value'] = str_replace('| GetVoIP', '| [site:name]', $nodes[$nid]->metatag['title']['value']);
     }
+
   }
   
   dpm($nodes);
