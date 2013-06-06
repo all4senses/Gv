@@ -241,7 +241,7 @@ function gv_misc_testPage() {
   $query->fields('n', array('nid', 'title', 'type'));
   $query->leftJoin('metatag', 'm', 'm.entity_id = n.nid');
   $query->fields('m', array('data'));
-  
+  $query->condition('n.status', 1);
   $nodes = $query->execute()->fetchAllAssoc('nid');
 
   //dpm($nodes);
@@ -2241,7 +2241,7 @@ function gv_misc_addSocialShareData_toPage($node) {
   }
   if (!$title) {
     if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-      $title = $node->metatags['title']['value'] . '..';
+      $title = $node->metatags['title']['value'];
     }
     else {
       $title = $node->title;
