@@ -2143,6 +2143,7 @@ function gv_misc_addZoomableImagesJs() {
 function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA') {
   if ($content) {
     if ($name == 'title') {
+      $content = str_replace('| GetVoIP', '', $content);
       drupal_set_title($content);
     }
     else {
@@ -2245,22 +2246,22 @@ function gv_misc_addSocialShareData_toPage($node) {
       $title = $node->title;
       
       //Set the right title metatag for the page if it's not defined.
-//      if (isset($node->metatags['title']['value'])) {
-//
-//          $global_metatags_config = metatag_config_load('node:' . $node->type);
-//          // Use the upper level config if it's not defined for a specific content type.
-//          if (!$global_metatags_config || empty($global_metatags_config->config['title']['value'])) {
-//            $global_metatags_config = metatag_config_load('node');
-//          }
-//          
-//          if (!empty($global_metatags_config->config['title']['value'])) {
-//            global $language;
-//            global $altered_head_title;
-//            $altered_head_title = token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
-//            gv_misc_addMetatag('title', $altered_head_title);
-//          }
-//
-//      }
+      if (isset($node->metatags['title']['value'])) {
+
+          $global_metatags_config = metatag_config_load('node:' . $node->type);
+          // Use the upper level config if it's not defined for a specific content type.
+          if (!$global_metatags_config || empty($global_metatags_config->config['title']['value'])) {
+            $global_metatags_config = metatag_config_load('node');
+          }
+          
+          if (!empty($global_metatags_config->config['title']['value'])) {
+            global $language;
+            global $altered_head_title;
+            $altered_head_title = token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
+            gv_misc_addMetatag('title', $altered_head_title);
+          }
+
+      }
       
       
     }
