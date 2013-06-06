@@ -248,7 +248,7 @@ function gv_misc_testPage() {
   $nodes = $query->execute()->fetchAllAssoc('nid');
   //$nodes = $query->execute()->fetchAll();
 
-  //dpm($nodes);
+  dpm($nodes);
   
   foreach ($nodes as $nid => $node) {
     $nodes[$nid]->metatag = unserialize($node->data);
