@@ -282,7 +282,7 @@ function gv_misc_testPage() {
   
   foreach ($nodes as $nid => $node) {
     $data = serialize($node->metatag);
-    dpm($nodes[$nid]);
+    //dpm($nodes[$nid]);
     
     db_update('metatag')
         ->fields(array(
@@ -290,7 +290,7 @@ function gv_misc_testPage() {
         ))
         ->condition('entity_id', $nid)
         ->execute();
-    break;
+    //break;
   }
   
        
