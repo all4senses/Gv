@@ -466,12 +466,12 @@ function gv_html_head_alter(&$head_elements) {
         $current_title = drupal_get_title();
       }
 
-      $current_title = str_replace(' | GetVoIP', '', $current_title);
+      $current_title = str_replace(' - GetVoIP', '', $current_title);
 
       // Will be used in html.tpl.php
       global $altered_head_title;
       
-      $altered_head_title = $current_title . ' - Page ' . $current_page . ' | GetVoIP';
+      $altered_head_title = $current_title . ' - Page ' . $current_page . ' - GetVoIP';
       
       if (isset($head_elements['metatag_description'])) {
         $head_elements['metatag_description']['#value'] = 'Page ' . $current_page . ' - ' . $head_elements['metatag_description']['#value'];
