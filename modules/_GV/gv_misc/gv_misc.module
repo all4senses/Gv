@@ -261,7 +261,7 @@ function gv_misc_testPage() {
     
     
     // Replace title without '| GetVoIP.com' with title with '| GetVoIP'
-    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE) {
+    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE || strpos($nodes[$nid]->metatag['title']['value'], '[') !== FALSE) {
       unset($nodes[$nid]);
     }
     else {
