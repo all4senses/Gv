@@ -2144,7 +2144,7 @@ function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA') {
   if ($content) {
     if ($name == 'title') {
       dpm($content);
-      $content = str_replace('| GetVoIP', '', $content);
+      //$content = str_replace('| GetVoIP', '', $content);
       drupal_set_title($content);
     }
     else {
