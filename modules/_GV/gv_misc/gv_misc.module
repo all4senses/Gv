@@ -2210,15 +2210,14 @@ function gv_misc_addSocialShareData_toPage($node) {
     else {
       $title = $node->title;
       
+      //Set the right title metatag for the page if it's not defined.
       if (isset($node->metatags['title']['value'])) {
-          dpm($node->metatags);
+
           $global_metatags_config = metatag_config_load('node:' . $node->type);
-          dpm($global_metatags_config);
+          // Use the upper level config if it's not defined for a specific content type.
           if (!$global_metatags_config || empty($global_metatags_config->config['title']['value'])) {
             $global_metatags_config = metatag_config_load('node');
           }
-                  
-          dpm($global_metatags_config);
           
           if (!empty($global_metatags_config->config['title']['value'])) {
             global $language;
