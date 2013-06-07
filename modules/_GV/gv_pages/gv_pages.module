@@ -2726,7 +2726,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         // This TEMPORARY title will see only Administrators.
         if (!$current_user_is_admin) {
-          $form['title']['#default_value'] = 'Unapproved review';
+          $form['title']['#default_value'] = 'Unapproved review ' . time();
         }
         
         // Generate an approval code for email verification.
@@ -3277,7 +3277,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         // This TEMPORARY title will see only Administrators.
         if (!$current_user_is_admin) {
-          $form['title']['#default_value'] = 'Unapproved review';
+          $form['title']['#default_value'] = 'Unapproved review ' . time();
         }
         
         // Generate an approval code for email verification.
@@ -4168,8 +4168,9 @@ function gv_pages_validateForm_phoneReview(&$form, &$form_state) {
   
   
   // An Administrator MUST set the real title for the review.
-  if ($current_is_administrator && !$form_state['values']['field_r_notapproved']['und'][0]['value'] && $form_state['values']['title'] == 'Unapproved review') {
-    form_set_error('title',t('Please set a new title for this review'));
+  //if ($current_is_administrator && !$form_state['values']['field_r_notapproved']['und'][0]['value'] && $form_state['values']['title'] == 'Unapproved review') {
+  if ($current_is_administrator && !$form_state['values']['field_r_notapproved']['und'][0]['value'] && strpos($form_state['values']['title'], 'Unapproved review') !== FALSE) {
+    form_set_error('title', 'Please set a new title for this review');
   }
   
   // Rebuild field_r_notapproved from the temp field field_r_notapproved_checkbox.
@@ -4333,7 +4334,9 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   
   // An Administrator MUST set the real title for the review.
-  if ($current_is_administrator && !$form_state['values']['field_r_notapproved']['und'][0]['value'] && $form_state['values']['title'] == 'Unapproved review') {
+  
+  //if ($current_is_administrator && !$form_state['values']['field_r_notapproved']['und'][0]['value'] && $form_state['values']['title'] == 'Unapproved review') {
+  if ($current_is_administrator && !$form_state['values']['field_r_notapproved']['und'][0]['value'] && strpos($form_state['values']['title'], 'Unapproved review') !== FALSE) {
     form_set_error('title',t('Please set a new title for this review'));
   }
   
@@ -6019,7 +6022,7 @@ function gv_pages_createNode_phoneReview($form_state) {
   $node->type = 'phone_review';
   node_object_prepare($node);
   
-  $node->title = 'Unapproved review';
+  $node->title = 'Unapproved review ' . time();
   $node->language = LANGUAGE_NONE;
   $node->uid = $user->uid;
   $node->status = 0;
