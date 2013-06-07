@@ -2696,7 +2696,17 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
             
               $form['ureview']['tips']['data'] = array(
-                '#markup' => '<div>...</div>',
+                '#markup' => "<div id='tips-block'><div class='title'>Review Tips:</div>
+<span>What do you like about your provider?</span><span>What do you dislike and why?</span>
+<span>Talk about the advantages & disadvantages of the specific plan you have.</span>
+<span>How long have you been with the provider.</span>
+<span>Write as if you're literally telling a friend about the provider/service.</span>
+</div>
+<div id='about'><div class='title'>About Reviews:</div>
+<span>We will only accept and publish honest, detailed, and appropriate reviews.</span>
+<span>We will not publish reviews that use profanity. We reserve the right to refuse any review that is not verified by the reviewer.</span>
+<span>Your review will be published after it's been approved by one of our editors.</span>
+<span>Submissions that do not follow the above guidelines will not be posted.</span></siv>",
               );
           
           
