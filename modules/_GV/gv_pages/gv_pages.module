@@ -2691,6 +2691,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               $form['ureview']['u_input']['body'] = $form['body'];
               unset($form['body']);
 
+          $form['ureview']['tips'] = array(
+              '#type' => 'container',
+          );
+            
+              $form['ureview']['tips']['data'] = array(
+                '#markup' => '<div>...</div>',
+              );
+          
           
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
@@ -2730,7 +2738,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['about_you']['field_r_email_temp']['#access'] = FALSE;
           $form['about_you']['email_autofilled'] = array(
               '#type' => 'item',
-              '#title' => t('Your email'),
+              '#title' => 'Your email',
               '#markup' => $user->mail,
           );
 
@@ -2744,7 +2752,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         if ($current_user_is_admin) {
           $form['about_you']['user_ip_show'] = array(
               '#type' => 'item',
-              '#title' => t('User IP:'),
+              '#title' => 'User IP:',
               '#markup' => $_SERVER['REMOTE_ADDR'],
           );
         }
@@ -2755,9 +2763,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         
         // Set a select of available providers.
-        $providers['_none'] = t('- Select a value -');
+        $providers['_none'] = '- Select a value -';
         gv_misc_getProviders($providers);
-        $providers[41] = t('OTHER SP');
+        $providers[41] = 'OTHER SP';
         $form['provider']['field_ref_provider']['und']['#options'] = $providers;
         $form['provider']['field_ref_provider']['und']['#default_value'][0] = '_none';
 
@@ -2769,7 +2777,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $provider_nid = NULL;
           }
           else {
-            $provider_id_source = t('your choice while viewing this provider\'s page');
+            $provider_id_source = 'your choice while viewing this provider\'s page';
           }
         }
         elseif ($_SERVER['HTTP_REFERER']) {
@@ -2788,7 +2796,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               $type = $query->execute()->fetchField();
               if ($type == 'provider') {
                 $provider_nid = $source;
-                $provider_id_source = t('the page you have been viewing when clicked a Submit review button');
+                $provider_id_source = 'the page you have been viewing when clicked a Submit review button';
               }
             }
           } // End of if (isset($refferer[1]) && $refferer[1]) {
@@ -2840,19 +2848,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Edit a review page.
         
         
-        
         // Show saved it a hidden field other data
         if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
           $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
           $form['provider']['lines']['#default_value'] = $other_data['lines'];
-          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
-          $form['ureview']['cons']['#default_value'] = $other_data['cons'];
+          $form['ureview']['u_input']['pros']['#default_value'] = $other_data['pros'];
+          $form['ureview']['u_input']['cons']['#default_value'] = $other_data['cons'];
           
           $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
           if ($current_user_is_admin) {
             $form['about_you']['user_ip_show'] = array(
                 '#type' => 'item',
-                '#title' => t('User IP:'),
+                '#title' => 'User IP:',
                 '#markup' => $user_ip,
             );
           }
@@ -2873,7 +2880,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['about_you']['field_r_email_temp']['#access'] = FALSE;
           $form['about_you']['email_autofilled'] = array(
               '#type' => 'item',
-              '#title' => t('Your email'),
+              '#title' => 'Your email',
               //'#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
               '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
           );
@@ -2884,7 +2891,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           $providers = array();
           gv_misc_getProviders($providers);
-          $providers[41] = t('OTHER SP');
+          $providers[41] = 'OTHER SP';
           
           $form['provider']['field_ref_provider']['und']['#options'] = $providers;
           $form['provider']['field_ref_provider']['und']['#default_value'][0] = 41;
@@ -2897,7 +2904,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $form['provider']['field_r_oprovider']['#access'] = FALSE;  
             $form['provider']['provider_title_noedit'] = array(
               '#type' => 'item',
-              '#title' => t('Your VoIP Service Provider') . ' (*)',
+              '#title' => 'Your VoIP Service Provider (*)',
               '#markup' => '<div class="text">' . $form['provider']['field_r_oprovider']['und'][0]['value']['#default_value'] . '</div>',
               //'#weight' => -100,
             ); 
@@ -2907,10 +2914,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
 
           foreach ($field_ratings_oprovider as $tag => $value) {
-            $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
+            $form['ureview']['u_input']['votes']['rating_' . $tag]['#default_value'] = $value;
           }
           
-          $form['ureview']['rating_recommend']['#default_value'] = $field_ratings_oprovider['recommend'];
+          $form['ureview']['u_input']['rating_recommend']['#default_value'] = $field_ratings_oprovider['recommend'];
           
         } // End of if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
         else {
@@ -2925,7 +2932,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 $recommend = $value;
                 continue;
               }
-              $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
+              $form['ureview']['u_input']['votes']['rating_' . $tag]['#default_value'] = $value;
             }
           }
           else {
@@ -2946,12 +2953,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   $recommend = $vote['value'];
                   continue;
                 }
-                $form['ureview']['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+                $form['ureview']['u_input']['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
               }
             }
           } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
           if (isset($recommend)) {
-            $form['ureview']['rating_recommend']['#default_value'] = $recommend;
+            $form['ureview']['u_input']['rating_recommend']['#default_value'] = $recommend;
           }
           
           // Show preview of the provider (as a teaser) on the edit form.
@@ -2965,7 +2972,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           */
           $form['provider']['provider_title_noedit'] = array(
             '#type' => 'item',
-            '#title' => t('Your VoIP Service Provider:'),
+            '#title' => 'Your VoIP Service Provider:',
             '#markup' => '<div class="text">' . l(html_entity_decode($provider_node->field_p_name['und'][0]['safe_value']), 'node/' . $provider_node->nid) . '</div>',
             //'#weight' => -100,
           );
