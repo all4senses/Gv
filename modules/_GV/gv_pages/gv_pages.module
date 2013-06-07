@@ -2567,7 +2567,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       $form['about_you'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Step 1: Your Information'),
+        '#title' => 'Step 1: Your Information',
         '#weight' => -15,
       );
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
@@ -2591,7 +2591,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
       $form['provider'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Step 2: Your VoIP Provider Details'),
+        '#title' => 'Step 2: Your VoIP Provider Details',
         //'#collapsible' => TRUE,
         //'#collapsed' => FALSE,
         '#weight' => -10,
@@ -2610,7 +2610,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#options' => $lines_options,
             '#default_value' => FALSE,
             '#weight' => 10,
-            '#prefix' => '<div class="label left">' . t('How many lines do you have:') . '</div>',
+            '#prefix' => '<div class="label left">How many lines do you have:</div>',
           );
           
           
@@ -2626,66 +2626,71 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $votes = array();
       $form['ureview'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Step 3: Rate and Review Your VoIP Provider'),
+        '#title' => 'Step 3: Rate and Review Your VoIP Provider',
         '#weight' => -4,
       );
           
-          $form['ureview']['votes'] = array(
+      
+          $form['ureview']['u_input'] = array(
               '#type' => 'container',
-              '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
-          );
-          foreach ($vote_keys as $vote_key => $vote_title) {
-            $form['ureview']['votes']['rating_' . $vote_key] = array(
-              '#type' => 'select',
-              '#options' => $rating_options,
-              '#default_value' => $rating_options[''],
-              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
-              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
-            );
-//            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
-//              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
-//              //'#weight' => $weight++,
-//            );
-          }
-      
-          //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
-          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
-          $form['ureview']['rating_recommend'] = array(
-              '#type' => 'radios',
-              '#options' => $rating_recommend_options,
-              '#default_value' => FALSE,
-              '#prefix' => '<div class="label left">' . t(RECOMMEND) . '</div>',
           );
           
-          // just for reference from a below call
-          //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
-      
-          $form['ureview']['pros'] = array(
-            '#type' => 'textfield',
-            '#title' => t('Pros'),
-            '#default_value' => '',
-            '#attributes' => array('title' => t(PROS_HINT)),
-          );
-          $form['ureview']['cons'] = array(
-            '#type' => 'textfield',
-            '#title' => t('Cons'),
-            '#default_value' => '',
-            '#attributes' => array('title' => t(CONS_HINT)),
-          );
-          
-          
-          //$form['body']['#weight'] = 2;
-          $form['body']['und'][0]['value']['#rows'] = 5;
-          // Unlink Ckeditor
-          // Bad trial...
-          //$form['body']['und'][0]['#type'] = 'textarea';
-          // Good trial! :)
-          ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
-          $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
-          
-          $form['ureview']['body'] = $form['body'];
-          unset($form['body']);
-          
+              $form['ureview']['u_input']['votes'] = array(
+                  '#type' => 'container',
+                  '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
+              );
+              foreach ($vote_keys as $vote_key => $vote_title) {
+                $form['ureview']['u_input']['votes']['rating_' . $vote_key] = array(
+                  '#type' => 'select',
+                  '#options' => $rating_options,
+                  '#default_value' => $rating_options[''],
+                  '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+                  '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+                );
+    //            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
+    //              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
+    //              //'#weight' => $weight++,
+    //            );
+              }
+
+              //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
+              $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+              $form['ureview']['u_input']['rating_recommend'] = array(
+                  '#type' => 'radios',
+                  '#options' => $rating_recommend_options,
+                  '#default_value' => FALSE,
+                  '#prefix' => '<div class="label left">' . RECOMMEND . '</div>',
+              );
+
+              // just for reference from a below call
+              //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
+
+              $form['ureview']['u_input']['pros'] = array(
+                '#type' => 'textfield',
+                '#title' => 'Pros',
+                '#default_value' => '',
+                '#attributes' => array('title' => PROS_HINT),
+              );
+              $form['ureview']['u_input']['cons'] = array(
+                '#type' => 'textfield',
+                '#title' => 'Cons',
+                '#default_value' => '',
+                '#attributes' => array('title' => CONS_HINT),
+              );
+
+
+              //$form['body']['#weight'] = 2;
+              $form['body']['und'][0]['value']['#rows'] = 5;
+              // Unlink Ckeditor
+              // Bad trial...
+              //$form['body']['und'][0]['#type'] = 'textarea';
+              // Good trial! :)
+              ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
+              $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+
+              $form['ureview']['u_input']['body'] = $form['body'];
+              unset($form['body']);
+
           
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
