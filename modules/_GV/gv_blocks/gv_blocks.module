@@ -534,7 +534,7 @@ function gv_blocks_compareTopProviders($service_type) {
   
       //dpm($p_names);
       
-      return gv_blocks_compareProviders($p_names);
+      return gv_blocks_compareProviders($p_names, '<none>');
   }
   
 }
@@ -543,7 +543,7 @@ function gv_blocks_compareTopProviders($service_type) {
 /**
  * Returns block with comparing providers table.
  */
-function gv_blocks_compareProviders($p_names = NULL) {
+function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL) {
   
   //dpm($_GET);
   
@@ -598,14 +598,22 @@ function gv_blocks_compareProviders($p_names = NULL) {
   
   //dpm($_SERVER['HTTP_REFERER']);
   
-      $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . l('Back', @$_SERVER['HTTP_REFERER'], array('attributes' => array('style' => 'background: url(/sites/all/themes/gv_orange/css/images/rect-btn-gray-left.png) no-repeat 0 0 transparent;
-color: gray;
-display: block;
-width: 110px;
-height: 25px;
-margin: auto;
-font-size: 12px;
-padding: 5px 0 0 0; text-indent: 50px; font-weight: bold;'))) . '</th>';
+      if ($back_button) {
+        if ($back_button = '<none>') {
+          $back_button = '';
+        }
+      }
+      else {
+        $back_button = l('Back', @$_SERVER['HTTP_REFERER'], array('attributes' => array('style' => 'background: url(/sites/all/themes/gv_orange/css/images/rect-btn-gray-left.png) no-repeat 0 0 transparent;
+                      color: gray;
+                      display: block;
+                      width: 110px;
+                      height: 25px;
+                      margin: auto;
+                      font-size: 12px;
+                      padding: 5px 0 0 0; text-indent: 50px; font-weight: bold;')));
+      }
+      $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
