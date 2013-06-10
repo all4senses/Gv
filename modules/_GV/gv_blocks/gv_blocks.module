@@ -230,6 +230,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['compare_providers_top_bu'] = array(
+    'info' => 'Compare Top Bu providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+    
   return $blocks;
 }
 
@@ -464,6 +470,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_compareProviders();
       break;
     
+    case 'compare_providers_top_bu':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('business');
+      break;
+    
   }
 
   return $block;
@@ -503,21 +514,49 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 }
 
 
+
 /**
- * Returns block with cached providers table.
+ * Returns block with comparing TOP BUSINESS providers table.
  */
-function gv_blocks_compareProviders() {
+function gv_blocks_compareTopProviders($service_type) {
+  switch ($service_type) {
+    
+    case 'business':
+      
+      $query = db_select('field_revision_field_p_erating', 'tb');
+      $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = tb.entity_id");
+
+      $query->fields('pn', array('field_p_name_value'));
+      $query->condition('tb.bundle', 'provider');
+      $query->orderBy('field_p_erating_value');
+      
+      $results = $query->execute()->fetchCol();
+  
+      dpm($results);
+      
+      return '...';
+  }
+  
+}
+
+
+/**
+ * Returns block with comparing providers table.
+ */
+function gv_blocks_compareProviders($p_names = NULL) {
   
   //dpm($_GET);
   
   //$p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
   
-  if (empty($_GET['p'])) {
-    return '<div class="no-results">No providers have been chosen.</div>';
+  if (empty($p_names)) {
+  
+    if (empty($_GET['p'])) {
+      return '<div class="no-results">No providers have been chosen.</div>';
+    }
+
+    $p_names = explode(';', $_GET['p']);
   }
-  
-  $p_names = explode(';', $_GET['p']);
-  
   //dpm($p_names);
   
   
