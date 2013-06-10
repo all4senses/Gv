@@ -530,11 +530,12 @@ function gv_blocks_compareTopProviders($service_type) {
       $query->condition('tb.bundle', 'provider');
       $query->orderBy('field_p_erating_value');
       
-      $results = $query->execute()->fetchCol();
+      $p_names = $query->execute()->fetchCol();
   
+      
       dpm($results);
       
-      return '...';
+      return gv_blocks_compareProviders($p_names);
   }
   
 }
