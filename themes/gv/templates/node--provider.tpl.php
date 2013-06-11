@@ -139,6 +139,8 @@
                 
               </div>
           
+              <div class="bottom-clear"></div>
+              
             </div>
               <!--<div class="bottom-clear"></div> -->
 
