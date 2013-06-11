@@ -54,7 +54,7 @@
           
           
            <?php if ($page): ?>
-          
+            <div id="provider-top">
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
@@ -139,8 +139,8 @@
                 
               </div>
           
-              
-              <div class="bottom-clear"></div>
+            </div>
+              <!--<div class="bottom-clear"></div> -->
 
               <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
