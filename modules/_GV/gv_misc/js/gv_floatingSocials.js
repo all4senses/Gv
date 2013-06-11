@@ -8,7 +8,7 @@
          duration: 200 
          //stickToBottom: true
          //,
-         ,startOffset: 300
+         //,startOffset: 300
          //,offsetY: 450
        });
 
