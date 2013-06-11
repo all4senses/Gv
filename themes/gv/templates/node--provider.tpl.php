@@ -2,6 +2,23 @@
 
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+<?php else: ?>
+     <?php 
+    
+      $url = 'http://getvoip.com'. url('node/' . $node->nid);
+      //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
+     
+
+          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+            $share_title = $node->metatags['title']['value'];
+          }
+          else {
+            $share_title = $title;
+          }
+
+        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+
+    ?>
 <?php endif; ?>
 
            
@@ -49,6 +66,7 @@
                   $url = 'http://getvoip.com'. url('node/' . $node->nid);
                 ?>
                 
+                <?php /*
                 <div class="share main">
                   
                   <div id="facebook-b">
@@ -87,7 +105,7 @@
                   </div>
                   
                 </div> <!-- main share buttons -->
-                
+                */ ?>
               </div> <!-- <div class="logo share">-->
                 
               <div class="basic-info" rel="v:itemreviewed">

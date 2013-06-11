@@ -5391,7 +5391,7 @@ function gv_pages_node_view($node, $view_mode) {
   if ($view_mode == 'full') {
     gv_misc_addSocialShareData_toPage($node);
     
-    $types_with_floating_share = array ('article', 'blog_post', 'news_post', 'preface');
+    $types_with_floating_share = array ('article', 'blog_post', 'news_post', 'preface', 'provider');
     if (in_array($node->type, $types_with_floating_share)) {
       
         // Floating share buttons box.
