@@ -49,6 +49,7 @@
                   $url = 'http://getvoip.com'. url('node/' . $node->nid);
                 ?>
                 
+                <?php /*
                 <div class="share main">
                   
                   <div id="facebook-b">
@@ -87,7 +88,7 @@
                   </div>
                   
                 </div> <!-- main share buttons -->
-                
+                */ ?>
               </div> <!-- <div class="logo share">-->
                 
               <div class="basic-info" rel="v:itemreviewed">
