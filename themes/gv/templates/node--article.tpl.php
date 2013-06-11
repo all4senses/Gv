@@ -48,7 +48,7 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes . $class_thumb_presented; ?> clearfix"<?php print $attributes; ?>>
   <!-- <div class="inside"> -->
 <?php else: ?>
-  <div class="main-content"> 
+  
     <?php 
     
       $url = 'http://getvoip.com'. url('node/' . $node->nid);
@@ -74,6 +74,8 @@
         echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
       }
     ?>
+
+  <div class="main-content"> 
 <?php endif; ?>
 
  
