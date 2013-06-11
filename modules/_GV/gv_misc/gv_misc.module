@@ -6339,8 +6339,8 @@ function gv_blocks_getSocialiteButtons($url = NULL, $title = NULL) {
   */
   
   
-  global $user;
-  if ($user->uid != 1) {
+  // Horizontal
+  /*
   $out = '
   <ul class="social-buttons cf">
 			<li><a href="http://twitter.com/share" class="socialite twitter-share" data-text="' . $title . '" data-url="' . $url . '" data-count="horizontal" rel="nofollow" target="_blank"><span class="vhidden">Share on Twitter</span></a></li>
@@ -6349,8 +6349,7 @@ function gv_blocks_getSocialiteButtons($url = NULL, $title = NULL) {
 			<li><a href="http://www.linkedin.com/shareArticle?' . 'mini=true&amp;url=' . urlencode($url) .  '&amp;title=' . urlencode($title) . '" class="socialite linkedin-share" data-url="' . $url . '" data-counter="right" rel="nofollow" target="_blank"><span class="vhidden">Share on LinkedIn</span></a></li>
 		</ul>
   ';
-  }
-  else {
+  */
   
   // Vertical
   $out = '
@@ -6362,7 +6361,7 @@ function gv_blocks_getSocialiteButtons($url = NULL, $title = NULL) {
 		</ul>
   ';
   
-  }
+
   
   
   return $out;

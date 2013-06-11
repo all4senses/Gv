@@ -31,7 +31,7 @@
       
       $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
       
-      if ($user->uid == 1) {
+
         
         $share_title = NULL;
                 
@@ -49,7 +49,7 @@
         }
 
         echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
-      }
+
   
   ?>
 
@@ -98,25 +98,25 @@
        <div class="main">
         
               <?php
-                if ($user->uid != 1) {
-                  
-                  $share_title = NULL;
-
-                  if ($is_front) {
-                    $share_title = gv_misc_metatag_getFrontTitle();
-                  }
-
-                  if (!$share_title) {
-                    if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-                      $share_title = $node->metatags['title']['value'];
-                    }
-                    else {
-                      $share_title = $title;
-                    }
-                  }
-                  echo gv_blocks_getSocialiteButtons($url, $share_title); 
-
-                }
+//                if ($user->uid != 1) {
+//                  
+//                  $share_title = NULL;
+//
+//                  if ($is_front) {
+//                    $share_title = gv_misc_metatag_getFrontTitle();
+//                  }
+//
+//                  if (!$share_title) {
+//                    if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+//                      $share_title = $node->metatags['title']['value'];
+//                    }
+//                    else {
+//                      $share_title = $title;
+//                    }
+//                  }
+//                  echo gv_blocks_getSocialiteButtons($url, $share_title); 
+//
+//                }
               ?> 
 
         

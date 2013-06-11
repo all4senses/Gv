@@ -54,7 +54,6 @@
       $url = 'http://getvoip.com'. url('node/' . $node->nid);
       //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
       
-      if ($user->uid == 1) {
         
         $share_title = NULL;
                 
@@ -72,7 +71,7 @@
         }
 
         echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
-      }
+
     ?>
 
   <div class="main-content"> 
@@ -343,9 +342,9 @@
 
                       <div class="main">
                               <?php 
-                                if ($user->uid != 1) {
-                                  echo gv_blocks_getSocialiteButtons($url, $title); 
-                                }
+//                                if ($user->uid != 1) {
+//                                  echo gv_blocks_getSocialiteButtons($url, $title); 
+//                                }
                               ?> 
                       </div> <!-- main share buttons -->
 
