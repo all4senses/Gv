@@ -9,7 +9,7 @@
          stickToBottom: true
          //,
          //startOffset: 300,
-         //offsetY: -150
+         ,offsetY: -150
        });
 
        
