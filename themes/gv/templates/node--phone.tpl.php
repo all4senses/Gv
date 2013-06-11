@@ -1,7 +1,22 @@
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-<?php endif; ?>
+<?php else: ?>
+  
+    <?php 
+    
+        $url = 'http://getvoip.com'. url('node/' . $node->nid);
 
+        if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+          $share_title = $node->metatags['title']['value'];
+        }
+        else {
+          $share_title = $title;
+        }
+
+        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+
+    ?>
+<?php endif; ?>
            
   <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
@@ -131,8 +146,6 @@
               
               <div class="share">
 
-                      <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
-
                       <div class="others">
                         <!-- ADDTHIS BUTTON BEGIN -->
                         <script type="text/javascript">
@@ -164,7 +177,7 @@
 
                 
                       <div class="main">
-                          <?php echo gv_blocks_getSocialiteButtons($url, $title); ?> 
+                          <?php //echo gv_blocks_getSocialiteButtons($url, $title); ?> 
                       </div> <!-- main share buttons -->
 
               </div>
