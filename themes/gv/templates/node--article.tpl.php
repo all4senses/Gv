@@ -49,6 +49,31 @@
   <!-- <div class="inside"> -->
 <?php else: ?>
   <div class="main-content"> 
+    <?php 
+    
+      $url = 'http://getvoip.com'. url('node/' . $node->nid);
+      //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
+      
+      if ($user->uid == 1) {
+        
+        $share_title = NULL;
+                
+        if ($is_front) {
+          $share_title = gv_misc_metatag_getFrontTitle();
+        }
+
+        if (!$share_title) {
+          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+            $share_title = $node->metatags['title']['value'];
+          }
+          else {
+            $share_title = $title;
+          }
+        }
+
+        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+      }
+    ?>
 <?php endif; ?>
 
  
@@ -215,8 +240,6 @@
               hide($content['field_tags_articles']);
               break;
           }
-          //dpm($content);
-          //dpm($node);
           
           if (!$page) {
             if ($view_mode == 'side_block_teaser') {
@@ -282,7 +305,7 @@
 
                     <div class="share">
 
-                      <?php $url = 'http://getvoip.com'. url('node/' . $node->nid); ?>
+                      
 
                       <div class="others">
                         <!-- ADDTHIS BUTTON BEGIN -->
@@ -317,43 +340,11 @@
                       
 
                       <div class="main">
-                        
-                            <?php //if(1): ?>
-
-                              <?php echo gv_blocks_getSocialiteButtons($url, $title); ?> 
-
-                            <?php /*else: ?> 
-        
-
-                                <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-                                <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
-
-                                <script type="text/javascript">
-                                  (function() {
-                                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                                    po.src = 'https://apis.google.com/js/plusone.js';
-                                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                                  })();
-                                </script>
-                                <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
-
-                                <div id="fb-root"></div>
-                                <script>(function(d, s, id) {
-                                  var js, fjs = d.getElementsByTagName(s)[0];
-                                  if (d.getElementById(id)) return;
-                                  js = d.createElement(s); js.id = id;
-                                  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
-                                  fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));</script>
-                                <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
-
-                                <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
-                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-                            <?php endif; // Of else of if($user->uid == 1) 
-                             */
-                            ?> 
-                        
+                              <?php 
+                                if ($user->uid != 1) {
+                                  echo gv_blocks_getSocialiteButtons($url, $title); 
+                                }
+                              ?> 
                       </div> <!-- main share buttons -->
 
                     </div>
