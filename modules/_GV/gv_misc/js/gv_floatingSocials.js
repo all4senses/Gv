@@ -9,7 +9,7 @@
          stickToBottom: true
          //,
          //,startOffset: 200
-         ,offsetY: 250
+         ,offsetY: 450
        });
 
        
