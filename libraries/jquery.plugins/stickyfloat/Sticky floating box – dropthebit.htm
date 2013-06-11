@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="index, follow" />
+<meta name="keywords" content="client-side, front-end, javascript, js, css, css3, html, html5, web development, client, jquery, plugins, plugin, blog" />
+<meta name="author" content="Yair Even-Or (vsync)" />
+<meta name="description" content="A blog about client side web development and my personal creations. Only high quality stuff." />
+<meta name="viewport" content="width=device-width" />
+<title>Sticky floating box &#8211; dropthebit</title>
+	 <script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) { var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",mirage:{responsive:0,lazy:0},oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/abv=1870252173/"},atok:"df4c9376f7d7648b82fc7dd7aa881bfd",zone:"dropthebit.com",rocket:"a",apps:{}}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/abv=4114775854/cloudflare.min.js"><'+'\/script>')}}catch(e){};
+//]]>
+</script>
+<link rel="shortcut icon" href="http://dropthebit.com/wp-content/themes/toolbox/favicon.ico" />
+	<link rel="stylesheet" type="text/css" media="all" href="http://dropthebit.com/wp-content/themes/toolbox/reset.css?v=1" />
+	<link rel="stylesheet" type="text/css" media="all" href="http://dropthebit.com/wp-content/themes/toolbox/style.css?v=1" />
+		<link rel="pingback" href="http://dropthebit.com/xmlrpc.php" />
+	<!--[if lt IE 9]>
+		<script src="http://dropthebit.com/wp-content/themes/toolbox/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="dropthebit &raquo; Feed" href="http://dropthebit.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="dropthebit &raquo; Comments Feed" href="http://dropthebit.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="dropthebit &raquo; Sticky floating box Comments Feed" href="http://dropthebit.com/74/sticky-floating-box/feed/" />
+<script type='text/rocketscript' data-rocketsrc='http://dropthebit.com/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<link rel='canonical' href='http://dropthebit.com/74/sticky-floating-box/' />
+<link rel='shortlink' href='http://dropthebit.com/?p=74' />
+</head>
+
+<body class="single single-post postid-74 single-format-standard single-author">
+	<header id="branding" role="banner">
+		<div class='wrap'>
+			<a class='logo' href="http://dropthebit.com/" title="" rel="home">dropthebit</a>
+			<nav id="access" role="navigation">
+				<h1 class="assistive-text section-heading">Main menu</h1>
+				<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+			</nav><!-- #access -->
+			<div class="menu-main-container"><ul id="menu-main" class="menu"><li id="menu-item-278" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-278"><a title="Home" href="/">Home</a></li>
+<li id="menu-item-279" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-279"><a title="About" href="/about/">About</a></li>
+</ul></div>		</div>
+	</header><!-- #branding -->
+<div id="page" class="hfeed">
+	<div id="main">
+		<div id="primary">
+			<div id="content" role="main">
+
+			
+				
+				
+<article id="post-74" class="post-74 post type-post status-publish format-standard hentry category-css category-jquery tag-css tag-html tag-jquery-plugin">
+	<header class="entry-header">
+		<h1 class="entry-title">Sticky floating box</h1>
+
+		<div class="entry-meta">
+			<a href="http://dropthebit.com/74/sticky-floating-box/" title="10:15 pm" rel="bookmark" class="postDate"><time class="entry-date" datetime="2011-11-06T22:15:46+00:00">06 Nov 2011</time></a><span class="byline"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="http://dropthebit.com/author/vsync/" title="View all posts by vsync" rel="author">vsync</a></span></span>		</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>This is a jQuery plugin I wrote back in 2009 (improving it regularly since). It&#8217;s highly useful for side menus that you wish to float or to be &#8220;stuck&#8221; on screen as the user scrolls around your website. It&#8217;s funny because I still get fan mail for making this plugin, so I recently re-released it with extra features, so check it out.</p>
+<span id="more-74"></span>
+<p class='update'><strong>Note: I have completely re-built this plugin as of October 25, 2012</strong><br />
+It is much more versatile now, allowing separate settings for each floated element, updating it&#8217;s settings on the fly or destroying it. You should really check out the <a href="http://dropthebit.com/demos/stickyfloat/stickyfloat.html" title="stickyfloat demo page" target="_blank">demo page</a>.
+</p><br />
+<p>I would call this an enhanced position fixed. This plugin makes it possible to have a fixed position element that is relative to it&#8217;s parent. A normal fixed positioned element would be &#8220;out of context&#8221; and is very difficult to use in the most common situations with fluid designs. This plugin solves that problem with as little code as I could possible get it so it will run in the most optimized way, while also allow you to customize it in many important ways which might suit you best.</p>
+<br />
+<h2>CSS3 transitions support</h2>
+<p>
+My suggestion to you is to always use CSS transition if you want to achieve a smooth floating effect to your floated element. CSS transitions are using the GPU of your graphic chip, and are not calculated using javascript (js is slow for rapid calculations), so the end result would look much better. I wrote this plugin way back when CSS was really primitive, but now I would suggest you do the following: Create a class for your floated element with the desired transition, something like this:
+<pre><code class='language-css'>
+.transition200{ transition:200ms; -webkit-transition:200ms; -o-transition:200ms; }
+</code></pre>
+And then run the plugin with &#8216;<strong>cssTransition</strong>&#8216; setting set to <strong>&#8216;true&#8217;</strong>. This will make sure to use your CSS3 transition, and if the browser doesn&#8217;t support it, use the  slower javascript transition (IE <10 for example). Now, I didn't want the plugin to actually do this for you automatically because it's not a clean solution, setting hard coded styles on each floated elements and if would be hard to create more than basic transitions using a <a href="http://matthewlein.com/ceaser/" title="this tool is great for playing around with CSS3 easing" target="_blank">cubic-bezier easing algorithm</a>.
+<br />
+If you don&#8217;t want to write any CSS but want this plugin to use CSS3 transitions automatically if possible, I would suggest using one of these solutions below (load them before the stickyfloat plugin):
+</p>
+<p>
+<a href="https://github.com/louisremi/jquery.transition.js" target="_blank">jquery.transition.js</a>
+<br />
+<a href="https://github.com/benbarnett/jQuery-Animate-Enhanced" target="_blank">jQuery-Animate-Enhanced</a>
+</p>
+<br />
+<h2>Benefits</h2>
+<ul class='live'>
+   <li>Can handle many floated elements, each with it&#8217;s own settings</li>
+   <li>Floated elements&#8217; movement can be bound inside their parents&#8217; area</li>
+   <li>Uses Native javascript easing, but using CSS3 transitions would be the optimum (not for IE)</li>
+   <li>Has many settings, such as stick to the bottom or animation style</li>
+   <li>Code is very maintainable and higly efficient</li>
+</ul>
+<br />
+<h2>CSS setup notice</h2>
+<p>Make sure you set up your CSS manually so the floating element will have <code>position:absolute</code> and it&#8217;s parent will be <code>position:relative</code>, or else the floating wouldn&#8217;t work.</p>
+<h2>Example &#8211; initialize</h2>
+<pre><code class='language-javascript'>jQuery('.menu').stickyfloat( {duration: 400} );</code></pre>
+
+<h2>Example &#8211; update (change settings for a specific element)</h2>
+<pre><code class='language-javascript'>jQuery('.menu').stickyfloat('update',{duration : 0, stickToBottom:true });</code></pre>
+
+<h2>Example &#8211; destroy (no more floating)</h2>
+<pre><code class='language-javascript'>jQuery('.menu').stickyfloat('destroy');</code></pre>
+<br/>
+<h2>Parameters</h2>
+<ul class='type2'>
+	<li>
+		<strong>duration (200)</strong>
+		The duration of the animation
+	</li>
+	<li>
+		<strong>startOffset (number)</strong>
+		The amount of scroll offset after the animations kicks in
+	</li>
+	<li>
+		<strong>offsetY (number)</strong>
+		The offset from the top when the object is animated
+	</li>
+	<li>
+		<strong>lockBottom (true)</strong>
+		Set to false if you don&#8217;t want your floating box to stop at parent&#8217;s bottom
+	</li>
+	<li>
+		<strong>stickToBottom (false)</strong>
+		Make whatever that is &#8220;floating&#8221; sticl top the bottom instead to the top
+	</li>
+	<li>
+		<strong>delay (0)</strong>
+		Delay in milliseconds  until the animnations starts
+	</li>
+	<li>
+		<strong>easing (linear)</strong>
+		Easing function (jQuery has by default only &#8216;swing&#8217; &amp; &#8216;linear&#8217;)
+	</li>
+	<li>
+		<strong>cssTransition (false)</strong>
+		if you wish to manualy set your own CSS3 transion styles on the floated element, flag this setting as &#8216;true&#8217;
+	</li>
+</ul>
+<br />
+<h2>Resources</h2>
+<p>
+<a href="http://plugins.jquery.com/project/stickyfloat" title="jquery repository" target="_blank">stickyFloat in jQuery repository</a>
+<br /><br />
+<a href="http://dropthebit.com/demos/stickyfloat/stickyfloat.html" title="See it live" target="_blank">Demo page</a>
+<br /><br />
+<a href="http://dropthebit.com/demos/stickyfloat/stickyfloat.js" title="See it live" target="_blank">Source code</a>
+<br /><br />
+<a href="http://dropthebit.com/demos/stickyfloat/stickyfloat.min.js" title="See it live" target="_blank">Minified source</a>
+</p>			</div><!-- .entry-content -->
+
+	<footer class="entry-meta place1">
+		<ul class="tags"><li><a href="http://dropthebit.com/tag/css/" rel="tag">css</a></li><li><a href="http://dropthebit.com/tag/html/" rel="tag">html</a></li><li><a href="http://dropthebit.com/tag/jquery-plugin/" rel="tag">jQuery plugin</a></li></ul>
+			</footer><!-- .entry-meta -->
+</article><!-- #post-74 -->
+
+				
+			
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+
+		<div id="secondary" class="widget-area" role="complementary">
+			<aside id="search-3" class="widget widget_search"><form role="search" method="get" id="searchform" action="http://dropthebit.com/" >
+    <div>
+		<label class="screen-reader-text" for="s">Search for:</label>
+		<input type="text" placeholder="search" value="" name="s" id="s" />
+		<input type="submit" id="searchsubmit" value="Search" />
+    </div>
+    </form></aside><aside id="categories-3" class="widget widget_categories"><h2 class="widget-title">Categories</h2>		<ul>
+	<li class="cat-item cat-item-3"><a href="http://dropthebit.com/category/css/" title="View all posts filed under css">css</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://dropthebit.com/category/html/" title="View all posts filed under html">html</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://dropthebit.com/category/html5/" title="View all posts filed under html5">html5</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://dropthebit.com/category/javascript/" title="View all posts filed under javascript">javascript</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="http://dropthebit.com/category/jquery/" title="View all posts filed under jQuery">jQuery</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://dropthebit.com/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+		</ul>
+</aside>		</div><!-- #secondary .widget-area -->
+
+		
+</div><!-- #main -->
+		<div id="comments">
+		<div class='wrap'>
+	
+	
+			<h2 id="comments-title">
+			56 Talk about this		</h2>
+
+		
+		<ol class="commentlist">
+				<li class="comment even thread-even depth-1" id="li-comment-2">
+		<article id="comment-2" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Maykel</cite>					<time datetime="2011-12-08T19:30:16+00:00">
+						08 Dec 2011 at 7:30 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/70c114ed8d546f700141360e9051eeae?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Can i fix a div into bottom, instead of top of browser?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=2#respond' onclick='return addComment.moveForm("comment-2", "2", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor odd alt depth-2" id="li-comment-3">
+		<article id="comment-3" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2011-12-09T19:03:16+00:00">
+						09 Dec 2011 at 7:03 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Currently not. I&#8217;ve never considered it until you mentioned it now. It&#8217;s an interesting concept, I will devote my myself to implement such support in the very near future. thanks.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=3#respond' onclick='return addComment.moveForm("comment-3", "3", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-11">
+		<article id="comment-11" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Beon</cite>					<time datetime="2011-12-31T02:22:09+00:00">
+						31 Dec 2011 at 2:22 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/8fe348459ec4b3e9d56ca04f692bd24f?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi, like your plugin, two things:</p>
+<p>When reloading the page in the part that has to come down the floating div, it doesnt appear until you move the bar of the browser.</p>
+<p>And offsetY is not working for me in this version os plugin, is the old one works well dont know the reason</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=11#respond' onclick='return addComment.moveForm("comment-11", "11", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-13">
+		<article id="comment-13" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.cineweekly.com' rel='external nofollow' class='url'>CineWeekly</a></cite>					<time datetime="2012-01-13T09:43:31+00:00">
+						13 Jan 2012 at 9:43 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/97b476ceb54e7ab530c9bc85a0697678?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I love this plugin but I really hate the jerky flicker it gives since I don&#8217;t want an animation. I&#8217;m going for the effect they have on Cracked on the right sidebar when the bottom ad clicks into place after scrolling a certain amount and smoothly follows you <a href="http://tinyurl.com/7nw2g4g" rel="nofollow">http://tinyurl.com/7nw2g4g</a> How could I accomplish this?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=13#respond' onclick='return addComment.moveForm("comment-13", "13", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even thread-odd thread-alt depth-1" id="li-comment-14">
+		<article id="comment-14" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-01-16T22:27:08+00:00">
+						16 Jan 2012 at 10:27 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I will try to fix and change at guys, so stay tuned!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=14#respond' onclick='return addComment.moveForm("comment-14", "14", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href='http://www.basitansari.com/sticky-jquery-sidebar-menu/' rel='external nofollow' class='url'>Create an Attractive Floating jQuery Sidebar Menu</a></p>
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-34">
+		<article id="comment-34" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Phasm</cite>					<time datetime="2012-10-22T17:04:27+00:00">
+						22 Oct 2012 at 5:04 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/8dbe17fe7e9365c8157057b6b674289d?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>How is it possible to leave the div at its actual position after reloading the page ?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=34#respond' onclick='return addComment.moveForm("comment-34", "34", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even thread-odd thread-alt depth-1" id="li-comment-35">
+		<article id="comment-35" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-10-22T19:42:21+00:00">
+						22 Oct 2012 at 7:42 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I&#8217;m sorry but i didn&#8217;t understand your question, what do you mean by &#8220;actual position&#8221; ? when the page refreshes the &#8220;floating&#8221; element will be floated as well into view and not stay static</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=35#respond' onclick='return addComment.moveForm("comment-35", "35", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-38">
+		<article id="comment-38" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Phasm</cite>					<time datetime="2012-10-23T09:57:00+00:00">
+						23 Oct 2012 at 9:57 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/8dbe17fe7e9365c8157057b6b674289d?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Well, yes, I meant the same position before and after reloading the page. I think this is more or less what Beon meant as well (see above). </p>
+<p>At first, I didn&#8217;t set the offsetY parameter and had many problems on some platforms (like the floating element even leaving the window forever by its bottom really fast, right after reloading the page on some old IE versions).</p>
+<p>Then things got better yesterday after I used offsetY (read TFM !). The floating element is not &#8220;leaving&#8221; anymore, but just like Beon, I sometimes need to use the mousewheel to make the element appear on some browsers. Which can be a little weird to some users I think.</p>
+<p>Is there a way to replace offsetY (the starting point of the animation if I got it right) with something like offsetY + window.PageOffsetY or something like that ? (Sorry if I&#8217;m a bit hazy, I&#8217;m not a javascript freak) :-)</p>
+<p>Anyway, many thanks for your answer :-)</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=38#respond' onclick='return addComment.moveForm("comment-38", "38", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even thread-odd thread-alt depth-1" id="li-comment-39">
+		<article id="comment-39" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-10-24T22:29:25+00:00">
+						24 Oct 2012 at 10:29 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I have updated the plugin today, take a look.<br />
+now it will made sure the window object was loaded before doing anything, so the scroll event will fire correctly on refresh, and also made the floated element appear where it should, after a page refresh, without any duration.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=39#respond' onclick='return addComment.moveForm("comment-39", "39", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-43">
+		<article id="comment-43" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Phasm</cite>					<time datetime="2012-10-25T15:07:19+00:00">
+						25 Oct 2012 at 3:07 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/8dbe17fe7e9365c8157057b6b674289d?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Many thanx vsync for trying to adapt so fast.<br />
+Unfortunately, this new version doesn&#8217;t work for me :-/<br />
+I&#8217;ve been fighting with this for hours, but with no results. As always, it works like a charm on each browser on OSX, but on old IE versions on Windows, the floating div doesn&#8217;t even move (even tho your demo page works fine on those browsers).<br />
+I think the reason is that I&#8217;m using several jQuery plugins and JS in my page. So their order is important, so that they don&#8217;t cancel each other.<br />
+That&#8217;s why I had to go back to the previous version of your plugin. Sigh.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=43#respond' onclick='return addComment.moveForm("comment-43", "43", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even thread-odd thread-alt depth-1" id="li-comment-67">
+		<article id="comment-67" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-11-06T20:03:51+00:00">
+						06 Nov 2012 at 8:03 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>@Phasm &#8211; Thanks, I will check into this matter of old IE.<br />
+ok, it appears that I had forgotten a &#8216;console.log()&#8217; in the minified code.<br />
+it is now removed and working on IE again.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=67#respond' onclick='return addComment.moveForm("comment-67", "67", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-80">
+		<article id="comment-80" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.ddesignerr.com' rel='external nofollow' class='url'>Syaan</a></cite>					<time datetime="2012-11-09T03:11:39+00:00">
+						09 Nov 2012 at 3:11 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/ef2abbe9dbfd33714b13d5cd434af33a?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hey! I am looking for this great plugins for more than 3 months and finally its here :)</p>
+<p>Could you please tell me how can I add this to wordpress?</p>
+<p>Note &#8211; I have no knowledge in wordpress editing :(</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=80#respond' onclick='return addComment.moveForm("comment-80", "80", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even thread-odd thread-alt depth-1" id="li-comment-82">
+		<article id="comment-82" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-11-09T03:30:23+00:00">
+						09 Nov 2012 at 3:30 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>@Syaan &#8211; Thanks. I&#8217;m going to improve it a lot more next week.  For your question, I don&#8217;t really know how much do you know about code and stuff. you would have to know how to access WordPress via FTP and upload the script, then create your own javascript file that initiate my script with your personal settings..it&#8217;s a lot to explain and very hard if you don&#8217;t know how to edit stuff using FTP</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=82#respond' onclick='return addComment.moveForm("comment-82", "82", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-101">
+		<article id="comment-101" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.webdesign-zoehrer.de' rel='external nofollow' class='url'>Carsten</a></cite>					<time datetime="2012-11-11T11:55:34+00:00">
+						11 Nov 2012 at 11:55 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/265edeb7a382b7c8e491f6e678d268cc?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi. I&#8217;m just doing some testing with your plugin. But I can&#8217;t get it to work with IE9. Even your demo page won&#8217;t work with IE9. Is this a bug?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=101#respond' onclick='return addComment.moveForm("comment-101", "101", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-2" id="li-comment-164">
+		<article id="comment-164" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-05T07:05:13+00:00">
+						05 Dec 2012 at 7:05 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>it does work on IE9 and below also..</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=164#respond' onclick='return addComment.moveForm("comment-164", "164", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-107">
+		<article id="comment-107" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Ninja</cite>					<time datetime="2012-11-13T17:53:02+00:00">
+						13 Nov 2012 at 5:53 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/473d6ab397ac0db509afe9db6fb1198c?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Doesn&#8217;t work with jQuery 1.8.2?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=107#respond' onclick='return addComment.moveForm("comment-107", "107", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-2" id="li-comment-162">
+		<article id="comment-162" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-05T07:03:46+00:00">
+						05 Dec 2012 at 7:03 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>in the demo it works with 1.8.3 so should work with 1.8.2 also.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=162#respond' onclick='return addComment.moveForm("comment-162", "162", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-112">
+		<article id="comment-112" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">w12d</cite>					<time datetime="2012-11-14T11:31:38+00:00">
+						14 Nov 2012 at 11:31 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/49f052c18b176bef763969a704bb5f6d?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>This is awesome, great!<br />
+It makes my life easier, really.<br />
+&#8230; Thank you!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=112#respond' onclick='return addComment.moveForm("comment-112", "112", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-113">
+		<article id="comment-113" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.fene-blog.de' rel='external nofollow' class='url'>Christian</a></cite>					<time datetime="2012-11-15T01:29:28+00:00">
+						15 Nov 2012 at 1:29 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/b04b6d0e7f5d58162f17d3c3f85c0bf8?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Thanks. Take me some time to get it work, but now it is great!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=113#respond' onclick='return addComment.moveForm("comment-113", "113", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-143">
+		<article id="comment-143" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Ngon Com</cite>					<time datetime="2012-11-27T10:15:23+00:00">
+						27 Nov 2012 at 10:15 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/0c5e96536e35adeee069700e1701e1ca?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Dear master!</p>
+<p>Could you tell me how to margin it from top (because I have a sticky bar at the top off site so when floating box scroll, some content off box have been hidden).</p>
+<p>Thank you for great plugin!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=143#respond' onclick='return addComment.moveForm("comment-143", "143", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-2" id="li-comment-163">
+		<article id="comment-163" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-05T07:04:36+00:00">
+						05 Dec 2012 at 7:04 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I really don&#8217;t understand, can you describe it better or show an example?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=163#respond' onclick='return addComment.moveForm("comment-163", "163", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-3" id="li-comment-167">
+		<article id="comment-167" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Ngon Com</cite>					<time datetime="2012-12-06T12:20:48+00:00">
+						06 Dec 2012 at 12:20 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/0c5e96536e35adeee069700e1701e1ca?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi master!</p>
+<p>Please see this pic: <a href="http://i483.photobucket.com/albums/rr200/ngoncom/stickybox.png" rel="nofollow">http://i483.photobucket.com/albums/rr200/ngoncom/stickybox.png</a></p>
+<p>I hope you can understand me!</p>
+<p>P/S: I put it in the tab 2 but seem it not work, it only work with tab 1 (<a href="http://www.red-team-design.com/wp-content/uploads/2012/05/google-play-minimal-tabs-with-css3-jquery-demo.html" rel="nofollow">http://www.red-team-design.com/wp-content/uploads/2012/05/google-play-minimal-tabs-with-css3-jquery-demo.html</a>), thank!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=167#respond' onclick='return addComment.moveForm("comment-167", "167", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-4" id="li-comment-168">
+		<article id="comment-168" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-06T20:49:21+00:00">
+						06 Dec 2012 at 8:49 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>this has nothing to do with the plugin, it&#8217;s how you write your html and CSS.<br />
+your demo doesn&#8217;t contain anything related to the subject..can you please verify?<br />
+of put something up in <a href="http://jsfiddle.net/" rel="nofollow">http://jsfiddle.net/</a></p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=168#respond' onclick='return addComment.moveForm("comment-168", "168", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-5" id="li-comment-173">
+		<article id="comment-173" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Ngon Com</cite>					<time datetime="2012-12-11T05:51:52+00:00">
+						11 Dec 2012 at 5:51 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/0c5e96536e35adeee069700e1701e1ca?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Thank you very much! I&#8217;ll try to fix css.</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-144">
+		<article id="comment-144" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Ngon Com</cite>					<time datetime="2012-11-28T11:36:03+00:00">
+						28 Nov 2012 at 11:36 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/0c5e96536e35adeee069700e1701e1ca?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I&#8217;ve test with tab, seem it not work clearly at tab 2 or I cant put 2 box, one in tab 1, one in tab 2 work.</p>
+<p>Thanks!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=144#respond' onclick='return addComment.moveForm("comment-144", "144", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-154">
+		<article id="comment-154" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Brunner</cite>					<time datetime="2012-12-02T10:47:01+00:00">
+						02 Dec 2012 at 10:47 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/bb1618ef78b0fe1ab565535689944173?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>I am having trouble with this, I have some error in the script:<br />
+&#8220;11TypeError: &#8216;null&#8217; is not an object (evaluating &#8216;document.body.style&#8217;)&#8221;</p>
+<p>Any ideas?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=154#respond' onclick='return addComment.moveForm("comment-154", "154", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-2" id="li-comment-155">
+		<article id="comment-155" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Brunner</cite>					<time datetime="2012-12-02T10:51:33+00:00">
+						02 Dec 2012 at 10:51 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/bb1618ef78b0fe1ab565535689944173?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>The error shows just after the supportsTransitions function</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=155#respond' onclick='return addComment.moveForm("comment-155", "155", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor odd alt depth-3" id="li-comment-161">
+		<article id="comment-161" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-05T06:44:08+00:00">
+						05 Dec 2012 at 6:44 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Ha.. yes..<br />
+unfortunately I&#8217;ve forgotten people still put scripts in the <head> of the document instead at the bottom of the <body> element&#8230;I need to fix this issue, but for your own good, put this script at the bottom.</body></head></p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=161#respond' onclick='return addComment.moveForm("comment-161", "161", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-4" id="li-comment-174">
+		<article id="comment-174" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Brunner</cite>					<time datetime="2012-12-12T17:03:42+00:00">
+						12 Dec 2012 at 5:03 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/52b9f859132013f6972fa313a1411dbe?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi. Thanks I moved it to the bottom, but now another issue:<br />
+The script:</p>
+<p>jQuery(&#8216;.view-filters&#8217;).stickyfloat( {duration: 400} );</p>
+<p>The error in stickyfloat.min:</p>
+<p>Oncaught TypeError: Object [object Object] has no method &#8216;on&#8217;</p>
+<p>any ideas?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=174#respond' onclick='return addComment.moveForm("comment-174", "174", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-5" id="li-comment-178">
+		<article id="comment-178" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">rerich</cite>					<time datetime="2012-12-17T17:14:13+00:00">
+						17 Dec 2012 at 5:14 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/60e6e05e78ae3901511b3ac1195ff77b?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>you need jquery 1.7+ if you want use on method<br />
+<a href="http://api.jquery.com/on/" rel="nofollow">http://api.jquery.com/on/</a></p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-5" id="li-comment-180">
+		<article id="comment-180" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-18T03:35:00+00:00">
+						18 Dec 2012 at 3:35 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>yeah, please use a newer version of jQuery, preferably from google CDN: <a href="https://developers.google.com/speed/libraries/devguide#jquery" rel="nofollow">https://developers.google.com/speed/libraries/devguide#jquery</a></p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-177">
+		<article id="comment-177" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Jay</cite>					<time datetime="2012-12-16T08:03:30+00:00">
+						16 Dec 2012 at 8:03 am					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/64aee8b75131ce45cb8025fe5933fc98?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi,<br />
+Just love your plugin , it has been my companion through many projects, just one question tho. When i set both delay and duration to &#8217;0&#8242; i get an ugly jerk while scrolling. I don&#8217;t want any animation just it needs to sticky. Any ideas on how can i achieve this. Please help</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=177#respond' onclick='return addComment.moveForm("comment-177", "177", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-2" id="li-comment-179">
+		<article id="comment-179" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-18T03:32:57+00:00">
+						18 Dec 2012 at 3:32 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>are you sure you are using the latest plugin version? can you send me a link so I can see?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=179#respond' onclick='return addComment.moveForm("comment-179", "179", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-182">
+		<article id="comment-182" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Scott</cite>					<time datetime="2012-12-19T18:23:46+00:00">
+						19 Dec 2012 at 6:23 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/6eb8c0ea0ebbdec581a8d7d14bf4e1da?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>This plug-in is exactly what I need for the project I&#8217;m working on, but I can&#8217;t get it to work. </p>
+<p>Maybe I&#8217;m daft, but after putting in the link to the script using the 1.8.3 jQuery build, and then placing the initialize code after the div that I want to apply it to (pointing it to the ID I want to affect), the box aligns to the top of the window, but doesn&#8217;t budge with scrolling. Are there further instructions that I might be missing?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=182#respond' onclick='return addComment.moveForm("comment-182", "182", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-2" id="li-comment-183">
+		<article id="comment-183" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">Scott</cite>					<time datetime="2012-12-19T18:44:42+00:00">
+						19 Dec 2012 at 6:44 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/6eb8c0ea0ebbdec581a8d7d14bf4e1da?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Oh, latest Chrome/Safari/Firefox, OSX Snow Leopard.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=183#respond' onclick='return addComment.moveForm("comment-183", "183", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor odd alt depth-2" id="li-comment-185">
+		<article id="comment-185" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-23T21:35:02+00:00">
+						23 Dec 2012 at 9:35 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>maybe it&#8217;s something with your CSS..the plugin does work as you can see in the example page, but you need to set up your CSS right, but i&#8217;m only guessing. can you provide a link to the issue?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=185#respond' onclick='return addComment.moveForm("comment-185", "185", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-186">
+		<article id="comment-186" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://joanpique.com' rel='external nofollow' class='url'>Joan</a></cite>					<time datetime="2012-12-25T08:00:40+00:00">
+						25 Dec 2012 at 8:00 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/d8e7b959443c1e796963c2104d6420d6?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi vsync, thx for the plugin!</p>
+<p>Is there any way to keep the floating bar inside the div.</p>
+<p>Im using this method, and i can&#8217;t correct this problem with offset, check this out:</p>
+<p><a href="http://jsfiddle.net/mLbZH/42/" rel="nofollow">http://jsfiddle.net/mLbZH/42/</a></p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=186#respond' onclick='return addComment.moveForm("comment-186", "186", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor odd alt depth-2" id="li-comment-200">
+		<article id="comment-200" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-27T00:08:07+00:00">
+						27 Dec 2012 at 12:08 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>something like this:<br />
+<a href="http://jsfiddle.net/mLbZH/44/" rel="nofollow">http://jsfiddle.net/mLbZH/44/</a><br />
+changed some stuff in the container of the floating menu and also the flaoting menu needs to be position:absolute, not relative&#8230;</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=200#respond' onclick='return addComment.moveForm("comment-200", "200", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-even depth-1" id="li-comment-202">
+		<article id="comment-202" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">sensaetions</cite>					<time datetime="2012-12-27T01:18:21+00:00">
+						27 Dec 2012 at 1:18 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/92ad78f4ed5e577c4dbc0a8eee7dbf39?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi,</p>
+<p>Great plugin!</p>
+<p>However, similar to Scott, I&#8217;m having trouble getting the plugin to work correctly. I also studied your CSS and it&#8217;s nothing different from mine&#8230;how does this plugin work with floating parent div? Your demo positions the boxes absolutely to the parent; is this a requirement in the CSS in order to get the plugin to work?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=202#respond' onclick='return addComment.moveForm("comment-202", "202", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor odd alt depth-2" id="li-comment-204">
+		<article id="comment-204" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-27T03:43:46+00:00">
+						27 Dec 2012 at 3:43 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Actually now I see there is a major bug with the offsetY setting, I will address this right away.<br />
+And this plugin makes the floating element float relatively to it&#8217;s parent element. you don&#8217;t have to set any parent element, or neither to  relative position it, but then the floating element wont be &#8220;locked&#8221; inside the parent if you don&#8217;t..</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=204#respond' onclick='return addComment.moveForm("comment-204", "204", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment even depth-3" id="li-comment-207">
+		<article id="comment-207" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">sensaetions</cite>					<time datetime="2012-12-27T15:30:30+00:00">
+						27 Dec 2012 at 3:30 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/92ad78f4ed5e577c4dbc0a8eee7dbf39?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Thank you for addressing the offsetY position bug. Would you please inform us when it has been fixed? Thank you in advance!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=207#respond' onclick='return addComment.moveForm("comment-207", "207", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-203">
+		<article id="comment-203" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.kedaipixel.com' rel='external nofollow' class='url'>Heri Setiawan</a></cite>					<time datetime="2012-12-27T02:02:11+00:00">
+						27 Dec 2012 at 2:02 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/7fe258512977f726fcbbc5cc765f5848?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi, is there any workaround to make the offsetY back to null when it reaches the top of the container?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=203#respond' onclick='return addComment.moveForm("comment-203", "203", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-2" id="li-comment-205">
+		<article id="comment-205" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-27T04:39:11+00:00">
+						27 Dec 2012 at 4:39 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>you when when the user has scrolled up before the point the element starts moving?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=205#respond' onclick='return addComment.moveForm("comment-205", "205", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-3" id="li-comment-206">
+		<article id="comment-206" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.kedaipixel.com' rel='external nofollow' class='url'>Heri Setiawan</a></cite>					<time datetime="2012-12-27T05:21:09+00:00">
+						27 Dec 2012 at 5:21 am					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/7fe258512977f726fcbbc5cc765f5848?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>the current offsetY variable adds a top position value to the element once it starts animating, and it keeps the value even when I have scrolled up back to the initial position. I need to get the element back to the original position when it stops animating. Any idea how to do this?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=206#respond' onclick='return addComment.moveForm("comment-206", "206", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-4" id="li-comment-209">
+		<article id="comment-209" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-27T19:32:27+00:00">
+						27 Dec 2012 at 7:32 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>you can try set the same numbe to both &#8216;startOffset&#8217; and &#8216;offsetY&#8217;. try it out in the demo page</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=209#respond' onclick='return addComment.moveForm("comment-209", "209", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-5" id="li-comment-262">
+		<article id="comment-262" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://kathyisawesome.com' rel='external nofollow' class='url'>Kathy</a></cite>					<time datetime="2013-01-10T18:44:45+00:00">
+						10 Jan 2013 at 6:44 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/e59280745b3f6f86a4cc6fad485647e9?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>@vsync &#8211; I&#8217;m having the same issue. I&#8217;ve tried setting the two equal and the &#8216;top&#8217; positioning is still there when you scroll up to the top of the container.  Check my fiddle:<br />
+<a href="http://jsfiddle.net/helgatheviking/fGbdf/" rel="nofollow">http://jsfiddle.net/helgatheviking/fGbdf/</a></p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-5" id="li-comment-266">
+		<article id="comment-266" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2013-01-11T23:13:27+00:00">
+						11 Jan 2013 at 11:13 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>#float should be positioned absolute, not relative, this is why you see the gap, because relative position takes into consideration its parent&#8217;s padding</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-214">
+		<article id="comment-214" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.htmlslice.lv' rel='external nofollow' class='url'>Edgar</a></cite>					<time datetime="2012-12-30T16:12:43+00:00">
+						30 Dec 2012 at 4:12 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/ae81979f686901f541da653420b11b62?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>There is a bug on line 86: objHeight  wHeight</p>
+<p>This fixed issue when menu is not positioned correctly when menu&#8217;s height is greater than viewport&#8217;s height.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=214#respond' onclick='return addComment.moveForm("comment-214", "214", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-2" id="li-comment-218">
+		<article id="comment-218" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2012-12-30T23:14:02+00:00">
+						30 Dec 2012 at 11:14 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>it&#8217;s not a bug, I put it on purpose to the menu won&#8217;t move when it&#8217;s bigger, because then user could never see a part of it, so there is no logic in that..</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=218#respond' onclick='return addComment.moveForm("comment-218", "218", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-215">
+		<article id="comment-215" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.htmlslice.lv' rel='external nofollow' class='url'>Edgar</a></cite>					<time datetime="2012-12-30T16:15:57+00:00">
+						30 Dec 2012 at 4:15 pm					</time>
+					<img alt='' src='http://0.gravatar.com/avatar/ae81979f686901f541da653420b11b62?s=40&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Oops, greater and less signs were stripped out of my comment.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=215#respond' onclick='return addComment.moveForm("comment-215", "215", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-242">
+		<article id="comment-242" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://www.zhongdeliu.de' rel='external nofollow' class='url'>Zhongde</a></cite>					<time datetime="2013-01-04T16:56:53+00:00">
+						04 Jan 2013 at 4:56 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/506e07267ed723c223913f6258ad337c?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>Hi there,<br />
+thanks for writing this useful plugin.</p>
+<p>However in IE7, there is a bug in the supportsTransitions check due to the prop[0] command (line 37). You should change it to prop.charAt(0).</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=242#respond' onclick='return addComment.moveForm("comment-242", "242", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor odd alt depth-2" id="li-comment-243">
+		<article id="comment-243" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2013-01-04T19:11:10+00:00">
+						04 Jan 2013 at 7:11 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>yeah right, i forgot old browsers don&#8217;t support this. Thanks for letting me know dude!</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=243#respond' onclick='return addComment.moveForm("comment-243", "243", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-291">
+		<article id="comment-291" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://rosslaird.com' rel='external nofollow' class='url'>Ross Laird</a></cite>					<time datetime="2013-01-15T17:50:01+00:00">
+						15 Jan 2013 at 5:50 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/b39240dc7475fb78645c56818ead0ac5?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>This is a great plugin. Thanks for creating it. One thing I found, and that may be useful for others to know, is that the target element must be set to relative, otherwise the plugin will not work.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=291#respond' onclick='return addComment.moveForm("comment-291", "291", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment odd alt depth-2" id="li-comment-292">
+		<article id="comment-292" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn"><a href='http://rosslaird.com' rel='external nofollow' class='url'>Ross Laird</a></cite>					<time datetime="2013-01-15T18:41:58+00:00">
+						15 Jan 2013 at 6:41 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/b39240dc7475fb78645c56818ead0ac5?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>One more thing: I notice that the menus on the demo page are set to absolute positioning, so perhaps it&#8217;s more complicated than I indicated above. Perhaps the item simply needs to be explicitly positioned (relative, absolute, fixed)?</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=292#respond' onclick='return addComment.moveForm("comment-292", "292", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<ul class='children'>
+	<li class="comment byuser comment-author-vsync bypostauthor even depth-3" id="li-comment-293">
+		<article id="comment-293" class="comment">
+			<footer>
+				<div class="comment-author vcard">
+					<cite class="fn">vsync</cite>					<time datetime="2013-01-15T19:29:11+00:00">
+						15 Jan 2013 at 7:29 pm					</time>
+					<img alt='' src='http://1.gravatar.com/avatar/98385d51f929b6a8e799b91322bfc9b7?s=40&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D40&amp;r=G' class='avatar avatar-40 photo' height='40' width='40' />				</div><!-- .comment-author .vcard -->
+				
+				<div class="comment-meta commentmetadata">
+									</div><!-- .comment-meta .commentmetadata -->
+			</footer>
+
+			<div class="comment-content"><p>it&#8217;s really simple, the moving object is absolute positioned in a relation to it&#8217;s relative positioned parent. I didn&#8217;t want to enforce any CSS changed via the plugin, not the be intrusive, but the demo shows you how to set things up.</p>
+</div>
+
+			<div class="reply">
+				<a class='comment-reply-link' href='/74/sticky-floating-box/?replytocom=293#respond' onclick='return addComment.moveForm("comment-293", "293", "respond", "74")'>Reply</a>			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+		</ol>
+
+		
+	
+									<div id="respond">
+				<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/74/sticky-floating-box/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://dropthebit.com/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name</label> <span class="required">*</span><input id="author" name="author" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-email"><label for="email">Email</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input type="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='74' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="7384b8c881" /></p><textarea name="comments_" style="display:none;"></textarea>					</form>
+							</div><!-- #respond -->
+							</div>
+</div><!-- #comments -->
+
+</div><!-- #main -->
+</div><!-- #page -->
+
+<script data-rocketsrc='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type="text/rocketscript" ></script>
+<script data-rocketsrc='http://dropthebit.com/wp-content/themes/toolbox/js/main.js' type="text/rocketscript" ></script>
+<script data-rocketsrc='http://dropthebit.com/wp-content/themes/toolbox/js/prismjs.js' type="text/rocketscript" ></script>
+<script type="text/rocketscript">
+	var _gaq = _gaq || [];
+	var pluginUrl ='//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+	_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+	_gaq.push(['_setAccount', 'UA-26520680-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+</body>
+</html>
