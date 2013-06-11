@@ -114,7 +114,7 @@
            <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
           
            <?php if ($page): ?>
-          
+            <div id="phone-top">
               <div class="phone photo">
                 <?php
                   if (isset($node->field_p_image['und'][0]['uri'])) {
@@ -182,7 +182,7 @@
 
               </div>
               
-              
+             </div>
               
               
               
