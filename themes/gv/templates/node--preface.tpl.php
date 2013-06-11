@@ -27,6 +27,29 @@
           $current_is_reviews =  TRUE;
         }
       }
+      
+      
+      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
+      
+      if ($user->uid == 1) {
+        
+        $share_title = NULL;
+                
+        if ($is_front) {
+          $share_title = gv_misc_metatag_getFrontTitle();
+        }
+
+        if (!$share_title) {
+          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+            $share_title = $node->metatags['title']['value'];
+          }
+          else {
+            $share_title = $title;
+          }
+        }
+
+        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+      }
   
   ?>
 
@@ -68,32 +91,32 @@
 
       print render($content);
     
-      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
+      
     ?>
     
      <div class="share">
        <div class="main">
         
               <?php
-              
-                dpm($user);
-                
-                $share_title = NULL;
-                
-                if ($is_front) {
-                  $share_title = gv_misc_metatag_getFrontTitle();
-                }
-                
-                if (!$share_title) {
-                  if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-                    $share_title = $node->metatags['title']['value'];
+                if ($user->uid != 1) {
+                  
+                  $share_title = NULL;
+
+                  if ($is_front) {
+                    $share_title = gv_misc_metatag_getFrontTitle();
                   }
-                  else {
-                    $share_title = $title;
+
+                  if (!$share_title) {
+                    if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+                      $share_title = $node->metatags['title']['value'];
+                    }
+                    else {
+                      $share_title = $title;
+                    }
                   }
+                  echo gv_blocks_getSocialiteButtons($url, $share_title); 
+
                 }
-                echo gv_blocks_getSocialiteButtons($url, $share_title); 
-              
               ?> 
 
         
