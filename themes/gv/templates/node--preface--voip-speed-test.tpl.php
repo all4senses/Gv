@@ -1,4 +1,18 @@
-  <h1 class="preface" <?php //echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
+<?php
+
+      if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+        $share_title = $node->metatags['title']['value'];
+      }
+      else {
+        $share_title = $title;
+      }
+
+      echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+
+?>
+
+
+<h1 class="preface" <?php //echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
       <?php 
         echo $title; 
       ?>
@@ -312,16 +326,16 @@ Edit index.html to change or remove this example content that will <strong>not a
         
               <?php
               
-                if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-                  $share_title = $node->metatags['title']['value'];
-                }
-                else {
-                  $share_title = $title;
-                }
-
-                $url = 'http://getvoip.com' . $_SERVER['REQUEST_URI']; 
-                echo gv_blocks_getSocialiteButtons($url, $share_title); 
-              
+//                if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+//                  $share_title = $node->metatags['title']['value'];
+//                }
+//                else {
+//                  $share_title = $title;
+//                }
+//
+//                $url = 'http://getvoip.com' . $_SERVER['REQUEST_URI']; 
+//                echo gv_blocks_getSocialiteButtons($url, $share_title); 
+//              
               ?> 
 
            </div> <!-- main -->
