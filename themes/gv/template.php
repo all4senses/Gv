@@ -705,7 +705,7 @@ function gv_process_page(&$variables) {
   }
   elseif (@$_SERVER['REDIRECT_URL'] == '/voip-provider-submit-user-review') {
     //dpm('Any other NODE page------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Provider Review' )));
+    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Review' )));
   }
   elseif (@$_SERVER['REDIRECT_URL'] == '/voip-phone-submit-user-review') {
     //dpm('Any other NODE page------------');
