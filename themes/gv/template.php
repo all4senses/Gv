@@ -628,11 +628,11 @@ function gv_process_page(&$variables) {
     //dpm('teasers node------------');
     switch ($variables['node']->type) {
       case 'provider':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->field_p_name['und'][0]['value'] . ' Reviews')));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->field_p_name['und'][0]['value']/* . ' Reviews'*/)));
         break;
       case 'review':
         if (!empty($variables['node']->field_ref_provider['und'][0]['target_id'])) {
-          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] . ' Reviews', 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
+          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] /*. ' Reviews'*/, 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
         }
         else {
           $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->title )));
