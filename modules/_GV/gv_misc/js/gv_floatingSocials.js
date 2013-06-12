@@ -6,6 +6,8 @@
        console.log('xxx');
        console.log($(".float.share"));
        
+       console.log('length = ' + $(".float.share").length);
+       
        $(".float.share").stickyfloat({ 
          duration: 200 
          //stickToBottom: true
