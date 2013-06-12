@@ -3,7 +3,9 @@
   Drupal.behaviors.gv_floatingSocials = {
     attach: function (context, settings) {
        
-          
+       console.log('xxx');
+       console.log($(".float.share"));
+       
        $(".float.share").stickyfloat({ 
          duration: 200 
          //stickToBottom: true
