@@ -606,6 +606,16 @@ function gv_process_page(&$variables) {
   
   if(isset($variables['node'])) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+    
+    global $user;
+    if ($user->uid == 1) {
+      if ($variables['node']->type == 'preface') {
+        dpm($variables['node']);
+        
+        $variables['theme_hook_suggestions'][] = 'page__compare_providers';
+      }
+    }
+    
   }
   elseif (arg(0) == 'get' && @arg(1) == 'iframe') {
     module_invoke('admin_menu', 'suppress');
