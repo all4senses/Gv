@@ -610,7 +610,8 @@ function gv_process_page(&$variables) {
     global $user;
     if ($user->uid == 1) {
       if ($variables['node']->type == 'preface') {
-        dpm($variables['node']);
+        
+        //dpm($variables['node']);
         
         $variables['theme_hook_suggestions'][] = 'page__compare_providers';
       }

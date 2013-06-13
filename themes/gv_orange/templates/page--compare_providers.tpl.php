@@ -1,4 +1,4 @@
-<div id="bshadow page-compare-providers">
+<div id="bshadow" class="page-compare-providers">
     
   <?php
   /*
