@@ -608,12 +608,13 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     
     global $user;
-    if ($user->uid == 1) {
+    if ($user->uid) {
       if ($variables['node']->type == 'preface') {
-        
+        $pages_with_separate_tpl = array('page-compare-business-voip-providers', 'page-compare-pbx-voip-providers');
         //dpm($variables['node']);
-        
-        $variables['theme_hook_suggestions'][] = 'page__compare_providers';
+        if (in_array(@$variables['node']->field_preface_key['und'][0]['value'], $pages_with_separate_tpl)) {
+          $variables['theme_hook_suggestions'][] = 'page__compare_providers';
+        }
       }
     }
     
