@@ -67,6 +67,7 @@ $provider_options = array(
           'Services & Pricing' => array(
               'Monthly Cost of Cheapest Service' => 'textfield',
               'Amount of Lines Per Price Tier' => 'textarea',
+              'Amount of Features Included' => 'textarea',
               'Month to Month Option' => 'checkbox',
               'Metered Plans' => 'textfield',
               'Requires Contract' => 'checkbox',
