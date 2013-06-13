@@ -235,6 +235,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  
+  $blocks['compare_providers_top_pbx'] = array(
+    'info' => 'Compare Top PBX providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
     
   return $blocks;
 }
@@ -472,8 +478,15 @@ function gv_blocks_block_view($delta = '') {
     
     case 'compare_providers_top_bu':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_compareTopProviders('business');
+      $block['content'] = gv_blocks_compareTopProviders('bu');
       break;
+    
+    case 'compare_providers_top_pbx':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('pbx');
+      break;
+    
+  
     
   }
 
@@ -520,21 +533,29 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_compareTopProviders($service_type) {
   switch ($service_type) {
-    
-    case 'business':
+    case 'bu':
+      $rating_table = 'field_revision_field_p_erating';
+      $rating_field = 'field_p_erating_value';
+      break;
+    case 'pbx':
+      $rating_table = 'field_revision_field_p_erating_pbx';
+      $rating_field = 'field_p_erating_pbx_value';
+      break;
+  }
       
-      $query = db_select('field_revision_field_p_erating', 'tb');
-      $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = tb.entity_id");
+  $query = db_select($rating_table, 'r');
+  $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
 
-      $query->fields('pn', array('field_p_name_value'));
-      $query->condition('tb.bundle', 'provider');
-      $query->orderBy('field_p_erating_value');
-      
-      $p_names = $query->execute()->fetchCol();
-  
-      //dpm($p_names);
-      
-      return gv_blocks_compareProviders($p_names, '<none>');
+  $query->fields('pn', array('field_p_name_value'));
+  $query->condition('r.bundle', 'provider');
+  $query->orderBy($rating_field);
+
+  $p_names = $query->execute()->fetchCol();
+
+  //dpm($p_names);
+
+  if (!empty($p_names)) {
+    return gv_blocks_compareProviders($p_names, '<none>');
   }
   
 }
