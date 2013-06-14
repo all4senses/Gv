@@ -1329,6 +1329,16 @@ function gv_pages_access($type = null) {
  */
 function gv_pages_buildHome($name, $data) {
   $out = '';
+  
+  global $language;
+  $home_main_content_cache_name = 'gv_home_main_content_' . $language->language;
+  $home_main_content = cache_get($home_main_content_cache_name);
+  if ($home_main_content && !empty($home_main_content->data) && $home_main_content->expire > time()) {
+    return $home_main_content->data;
+  }
+  
+  dpm('no cache');
+  
     
   $seo_welcome_node = gv_misc_getPrefaceByKey('front');
   $seo_welcome_node->title_no_link = TRUE;
@@ -1400,6 +1410,9 @@ function gv_pages_buildHome($name, $data) {
 //
 //  }
   
+  
+  cache_set($home_main_content_cache_name, $out, 'cache', time() + 14400);
+
   return $out;
 }
 
