@@ -1099,7 +1099,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   
   // Find latest reviews
   global $user;
-  if ($user->uid == 1 && $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]) {
+  if ($user->uid && $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]) {
     
     $map_preface_type_to_service_type = array(
       'page-compare-business-voip-providers' => 'business',
@@ -1134,7 +1134,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
 
-      $latest_reviews = '<div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
+      $latest_reviews = '<div id="compare-providers-reviews" class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
     }
 
   }
