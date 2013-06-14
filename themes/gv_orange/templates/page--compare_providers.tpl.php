@@ -44,14 +44,6 @@
 
     <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
   </header> <!-- /#header -->
-
-  
-  <?php if ($page['highlighted']): ?>
-    <section id="highlighted" class="clearfix">
-      <?php print render($page['highlighted']); ?>
-    </section>
-  <?php endif; ?>
-  
   
   <div id="all-content" class="clearfix">
       
@@ -95,6 +87,13 @@
           <?php print render($page['above_content']); ?>
           <?php print render($page['content']); ?>
           
+          <?php if ($page['sidebar_second']): ?>
+            <aside id="sidebar-second" role="complementary" class="sidebar clearfix">
+              <?php print render($page['sidebar_second']); ?>
+            </aside>  <!-- /#sidebar-second -->
+          <?php endif; ?>
+
+          
           <?php 
           //global $user;
           $pages_with_timestamp = array(
@@ -128,18 +127,11 @@
           
       </section> <!-- /#main -->
 
-
-      <?php if ($page['sidebar_first']): ?>
-        <aside id="sidebar-first" role="complementary" class="sidebar clearfix">
-          <?php print render($page['sidebar_first']); ?>
-        </aside>  <!-- /#sidebar-first -->
-      <?php endif; ?>
-
-      <?php if ($page['sidebar_second']): ?>
+      <?php /*if ($page['sidebar_second']): ?>
         <aside id="sidebar-second" role="complementary" class="sidebar clearfix">
           <?php print render($page['sidebar_second']); ?>
         </aside>  <!-- /#sidebar-second -->
-      <?php endif; ?>
+      <?php endif; */?>
 
   </div> <!-- /#all-content -->
 
