@@ -1331,7 +1331,9 @@ function gv_pages_buildHome($name, $data) {
   $out = '';
   
   global $language;
-  $home_main_content_cache_name = 'gv_home_main_content_' . $language->language;
+  global $user;
+  $logged_in = $user->uid ? '1' : '0';
+  $home_main_content_cache_name = 'gv_home_main_content_' . $language->language . '_' . $logged_in;
   $home_main_content = cache_get($home_main_content_cache_name);
   if ($home_main_content && !empty($home_main_content->data) && $home_main_content->expire > time()) {
     return $home_main_content->data;
