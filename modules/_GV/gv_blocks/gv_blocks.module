@@ -1239,63 +1239,78 @@ function gv_blocks_currentPageProviderArticles() {
   $title = NULL;
   
   $args = arg();
-  if ($args[0] == 'node') {
-    $query = db_select('field_data_field_providers_mentioned', 'p')  
-          ->fields('p', array('entity_id'));
-    $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
-    $query->leftJoin('field_revision_field_p_name"', 'pn', 'pn.entity_id = p.field_providers_mentioned_target_id');
-    
-    $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = p.entity_id');
-    $query->fields('n', array('created'));
-    $query->fields('pn', array('field_p_name_value'));
-    $query->fields('e', array('field_extra_data_value'));
-    $query->condition('p.field_providers_mentioned_target_id', $args[1]);
-    $query->orderBy('n.created', 'DESC')
-          ->range(0, 9);//->limit(10);
-    //$provider_articles_teasers = $query->execute()->fetchAllAssoc('p.entity_id');
-    $results = $query->execute()->fetchAll();
-
-    if (!empty($results)) {
-      //dpm($results);
-      $count = count($results) - 1;
-      $title = $results[0]->field_p_name_value . ' articles';
-      foreach ($results as $key => $result) {
-        $extra_data = unserialize($result->field_extra_data_value);
-        //dpm($extra_data);
-        $content .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">
-          
-                    <div class="views-field views-field-created date-icon">
-                      <span class="field-content">
-                          <span>
-                            <span>' . date('d\<\/\s\p\a\n\>\<\d\i\v\>M\<\/\d\i\v\>', $result->created) . '
-                          </span>
-                      </span>
-                    </div>
-
-                    <div class="views-field views-field-title">
-                      <span class="field-content">' .
-                        l($extra_data['title'], 'node/' . $result->entity_id) .
-                      '</span>
-                    </div>
-                    
-                    <div class="views-field teaser">
-                      <span class="field-content">' .
-                        $extra_data['teaser_block'] .
-                      '</span>
-                    </div>
-
-                    <div class="bottom-clear"></div>
-                    
-                 </div>';
-              
-              ;
-              
-      }
-      
-      $content = '<div class="view-content block-teasers">' . $content . '</div>';
-    }
+  if ($args[0] != 'node') {
+    return array('title' => $title, 'content' => $content);
   }
-  return array('title' => $title, 'content' => $content);
+    
+  
+  
+  global $language;
+  $cache_name = 'gv_providersArticles_' . $args[1] . '_' .$language->language;
+  $cache_content = cache_get($cache_name);
+  if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+    return $cache_content->data;
+  }
+  
+  $query = db_select('field_data_field_providers_mentioned', 'p')  
+        ->fields('p', array('entity_id'));
+  $query->leftJoin('node', 'n', 'n.nid = p.entity_id');
+  $query->leftJoin('field_revision_field_p_name"', 'pn', 'pn.entity_id = p.field_providers_mentioned_target_id');
+
+  $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = p.entity_id');
+  $query->fields('n', array('created'));
+  $query->fields('pn', array('field_p_name_value'));
+  $query->fields('e', array('field_extra_data_value'));
+  $query->condition('p.field_providers_mentioned_target_id', $args[1]);
+  $query->orderBy('n.created', 'DESC')
+        ->range(0, 9);//->limit(10);
+  //$provider_articles_teasers = $query->execute()->fetchAllAssoc('p.entity_id');
+  $results = $query->execute()->fetchAll();
+
+  if (!empty($results)) {
+    //dpm($results);
+    $count = count($results) - 1;
+    $title = $results[0]->field_p_name_value . ' articles';
+    foreach ($results as $key => $result) {
+      $extra_data = unserialize($result->field_extra_data_value);
+      //dpm($extra_data);
+      $content .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">
+
+                  <div class="views-field views-field-created date-icon">
+                    <span class="field-content">
+                        <span>
+                          <span>' . date('d\<\/\s\p\a\n\>\<\d\i\v\>M\<\/\d\i\v\>', $result->created) . '
+                        </span>
+                    </span>
+                  </div>
+
+                  <div class="views-field views-field-title">
+                    <span class="field-content">' .
+                      l($extra_data['title'], 'node/' . $result->entity_id) .
+                    '</span>
+                  </div>
+
+                  <div class="views-field teaser">
+                    <span class="field-content">' .
+                      $extra_data['teaser_block'] .
+                    '</span>
+                  </div>
+
+                  <div class="bottom-clear"></div>
+
+                </div>';
+
+            ;
+
+    }
+
+    $content = '<div class="view-content block-teasers">' . $content . '</div>';
+  }
+  
+  $out = array('title' => $title, 'content' => $content);
+  cache_set($cache_name, $out, 'cache', time() + 14400);
+  
+  return $out;
 }
 
 
