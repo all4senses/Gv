@@ -1129,7 +1129,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
 
       $count = count($results) - 1;
       foreach ($results as $key => $result) {
-        $node = node_load($result->entity_id);
+        $node = node_load($result->nid);
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
 
