@@ -19,7 +19,7 @@
       
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <img src="<?php print 'http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png'; ?>" alt="GetVoIP.com - Complete VoIP Provider Directory & Service Guide" title="<?php print t('GetVoIP Home'); ?>" />
+          <img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo2.png" alt="GetVoIP" title="GetVoIP" />
         </a>
         <div class="descr">
           <div class="title">VoIP Decisions</div>
