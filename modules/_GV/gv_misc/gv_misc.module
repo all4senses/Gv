@@ -242,9 +242,8 @@ function gv_misc_testPage() {
   $path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/callcentric-logo_0.png';
   
   $path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/jive-hosted-pbx%20130x46.png';
-  
-  
-  $size = getimagesize($path);
+
+  $size = getimagesize(str_replace('%20', ' ', $path));
   dpm($size);
   
   
@@ -4688,7 +4687,7 @@ function theme_gv_misc_image(array $variables) {
   // Add dimensions only for anonymous.
   global $user;
   if (/*!$user->uid &&*/ !$variables['width']) {
-    $size = getimagesize(str_replace('http://getvoip.com/', '', $variables['path']));
+    $size = getimagesize(str_replace('%20', ' ', str_replace('http://getvoip.com/', '', $variables['path'])));
     $image = theme('image', array('width' => $size[0], 'height' => $size[1], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
   }
   else {
