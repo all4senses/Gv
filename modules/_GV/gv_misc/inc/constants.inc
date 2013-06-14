@@ -53,6 +53,19 @@ define('SERVICE_DESCRIPTIONS', $service_descriptions);
 define('FEE_TYPES', $fee_types);
 
 
+$sprite_names = serialize(array(
+  'business' => 'top_bu_providers',
+  'residential' => 'top_re_providers',
+  'sip' => 'top_sip_providers',
+  'ifa' => 'top_ifa_providers',
+  'pbx' => 'top_pbx_providers',
+  'bu_ca' => 'top_ca_providers',
+  're_ca' => 'top_ca_providers',
+  //'smbv' => '',  
+));
+
+define('SPRITE_NAMES', $sprite_names);
+
 
 $provider_options = array(
           'Provider Info' => array(

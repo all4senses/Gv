@@ -1114,10 +1114,9 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $query = db_select('node', 'n')
             ->fields('n', array('nid', 'created'));
     $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
-    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value = '" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "'");
     
-    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
-    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%ca%%'");
+//$query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value = '" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "'");
+    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
     
     $query->condition('n.status', 1);
     $query->condition('n.type', 'review');
@@ -1134,6 +1133,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       $count = count($results) - 1;
       foreach ($results as $key => $result) {
         $node = node_load($result->nid);
+        $sprite_names = unserialize(SPRITE_NAMES);
+        $node->service_type_for_compare_providers = $sprite_names[$map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]];
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
       //class="view-articles"
