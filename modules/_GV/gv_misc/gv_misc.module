@@ -3550,16 +3550,19 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = 'log
   if (!file_exists($relative_path)) {
     dpm($relative_path . ' doesnt exist');
     $style = image_style_load($style_name);
+    dpm($style);
     //$styled_file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
     //$original_file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
     $file_path = str_replace('styles/' . $style_name . '/public/', '', $relative_path);
+    dpm($file_path);
     $source = gv_misc_getStreamUriFromRelativePath($file_path);
     $destination = image_style_path($style_name, $source);
+    dpm($source);
     image_style_create_derivative($style, $source, $destination);
   }
-  else {
-    dpm($relative_path . ' exists!');
-  }
+//  else {
+//    dpm($relative_path . ' exists!');
+//  }
 }
 
 
