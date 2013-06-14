@@ -1133,8 +1133,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
         $node = node_load($result->nid);
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
-
-      $latest_reviews = '<div id="compare-providers-reviews" class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
+      //class="view-articles"
+      $latest_reviews = '<div id="compare-providers-reviews"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
     }
 
   }
