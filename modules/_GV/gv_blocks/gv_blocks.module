@@ -971,11 +971,12 @@ function gv_blocks_libraryList() {
  */
 function gv_blocks_prefaceBottomWithLatestArticles() {
 
-  $latest = NULL;
+  $latest_articles = NULL;
+  $latest_reviews = NULL;
   
   $map_path_to_articles_limit = array(
     //'/compare-business-voip-providers' => 7,
-    '/business' => 7,
+    '/business' => 2,
     //'/compare-residential-voip-providers' => 5,
     '/residential' => 5,
     //'/sip-trunking-providers' => 4,
@@ -986,7 +987,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     //'/canada-voip' => 2,
     '/canada' => 2,
     //'/hosted-pbx-providers' => 4,
-    '/hosted-pbx' => 4,
+    '/hosted-pbx' => 2,
     '/small-business-voip' => 5,
   );
   
@@ -1050,13 +1051,27 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     'Canada VoIP' => 5,
     'Internet Fax' => 6,
     'Hosted PBX Providers' => 7,
-    'Small Business VoIP' => 8,
+    //'Small Business VoIP' => 8,
+  );
+  
+  
+  $map_preface_type_to_latest_reviews = array(
+    'page-compare-business-voip-providers' => 3,
+    'page-compare-residential-voip-providers' => NULL,
+    'page-compare-sip-voip-providers' => NULL,
+    'page-compare-ifa-voip-providers' => NULL,
+    'business-voip-features' => NULL,
+    'canada-voip' => NULL,
+    'page-compare-pbx-voip-providers' => 3,
+    //'page-compare-smbv-voip-providers' => NULL,
   );
   
   if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
     return NULL;
   }
   
+  
+  // Find latest articles
   $query = db_select('field_data_field_pin_article_to', 'a')
         ->fields('a', array('entity_id'));
   $query->leftJoin('node', 'n', 'n.nid = a.entity_id');
@@ -1068,26 +1083,65 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $query->range(0, $map_path_to_articles_limit[$_SERVER['REDIRECT_URL']]);
   }
   
-  
   $results = $query->execute()->fetchAll();
-  
-  //dpm($results);
-
-  
   
   if (!empty($results)) {
 
     $count = count($results) - 1;
     foreach ($results as $key => $result) {
       $node = node_load($result->entity_id);
-      $latest .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
+      $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
     }
 
-    $latest = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest . '</div></div>';
+    $latest_articles = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div></div>';
   }
   
-  $content = '<div id="bottom-with-latest-articles" class="preface' . ($latest ? ' with-articles' : '') . '">'
-            . $latest
+  
+  // Find latest reviews
+  global $user;
+  if ($user->uid && $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]) {
+    
+    $map_preface_type_to_service_type = array(
+      'page-compare-business-voip-providers' => 'business',
+      'page-compare-residential-voip-providers' => 'residential',
+      'page-compare-sip-voip-providers' => 'sip',
+      'page-compare-ifa-voip-providers' => 'ifa',
+      'canada-voip' => 'bu_ca',
+      'page-compare-pbx-voip-providers' => 'pbx',
+      //'page-compare-smbv-voip-providers' => NULL,
+    );
+    
+    $query = db_select('node', 'n')
+            ->fields('n', array('nid', 'created'));
+    $query->leftJoin('field_ref_provider', 'p', 'p.entity_id = n.nid');
+    $query->join('field_data_field_p_types', 'pt', 'pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value "' . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . '"');
+    
+    $query->condition('n.type', 'review');
+    $query->orderBy('n.created', 'DESC');
+    // Show only 2 latest reviews
+    $query->range(0, 2);
+
+    $results = $query->execute()->fetchAll();
+
+    dpm($results);
+    
+    if (!empty($results)) {
+
+      $count = count($results) - 1;
+      foreach ($results as $key => $result) {
+        $node = node_load($result->entity_id);
+        $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
+      }
+
+      $latest_articles = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div></div>';
+    }
+
+  }
+  
+  
+  $content = '<div id="bottom-with-latest-articles" class="preface' . (($latest_articles || $latest_reviews) ? ' with-articles' : '') . '">'
+            . $latest_reviews
+            . $latest_articles
             . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
             . '<div class="bottom-clear"></div>'
           . '</div>';
