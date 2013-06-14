@@ -970,26 +970,9 @@ function gv_blocks_libraryList() {
  * Returns a preface Bottom Latest Articles block.
  */
 function gv_blocks_prefaceBottomWithLatestArticles() {
-
+  
   $latest_articles = NULL;
   $latest_reviews = NULL;
-  
-  $map_path_to_articles_limit = array(
-    //'/compare-business-voip-providers' => 7,
-    '/business' => 2,
-    //'/compare-residential-voip-providers' => 5,
-    '/residential' => 5,
-    //'/sip-trunking-providers' => 4,
-    '/sip-trunking' => 4,
-    //'/internet-fax-service-providers' => NULL,
-    '/fax' => NULL,
-    '/business-voip-features' => 4,
-    //'/canada-voip' => 2,
-    '/canada' => 2,
-    //'/hosted-pbx-providers' => 4,
-    '/hosted-pbx' => 2,
-    '/small-business-voip' => 5,
-  );
   
   $map_path_to_preface_type = array(
     //'/compare-business-voip-providers' => 'page-compare-business-voip-providers',
@@ -1005,7 +988,17 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/canada' => 'canada-voip',
     //'/hosted-pbx-providers' => 'page-compare-pbx-voip-providers',
     '/hosted-pbx' => 'page-compare-pbx-voip-providers',
-    '/small-business-voip' => 'page-compare-smbv-voip-providers',
+    //'/small-business-voip' => 'page-compare-smbv-voip-providers',
+  );
+  
+  $map_preface_type_to_service_type = array(
+    'page-compare-business-voip-providers' => 'business',
+    'page-compare-residential-voip-providers' => 'residential',
+    'page-compare-sip-voip-providers' => 'sip',
+    'page-compare-ifa-voip-providers' => 'ifa',
+    'canada-voip' => 'ca',
+    'page-compare-pbx-voip-providers' => 'pbx',
+    //'page-compare-smbv-voip-providers' => NULL,
   );
   
   $map_path_to_type = array(
@@ -1025,6 +1018,49 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     '/small-business-voip' => 'Small Business VoIP',
   );
  
+  
+  $pin_article_to = array(
+    'Business VoIP' => 1,
+    'Residential VoIP' => 2, 
+    'Business VoIP Features' => 3,
+    'SIP Trunking Providers' => 4,
+    'Canada VoIP' => 5,
+    'Internet Fax' => 6,
+    'Hosted PBX Providers' => 7,
+    //'Small Business VoIP' => 8,
+  );
+  
+  if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
+    return NULL;
+  }
+  
+  
+  global $language;
+  $bottom_content_cache_name = 'gv_top_' . $map_preface_type_to_service_type[$map_path_to_type[$_SERVER['REDIRECT_URL']]] . '_bottom_content_' . $language->language;
+  
+  $bottom_content = cache_get($bottom_content_cache_name);
+  if ($bottom_content && !empty($bottom_content->data) && $bottom_content->expire < time()) {
+    return $bottom_content->data;
+  }
+  
+  $map_path_to_articles_limit = array(
+    //'/compare-business-voip-providers' => 7,
+    '/business' => 2,
+    //'/compare-residential-voip-providers' => 5,
+    '/residential' => 5,
+    //'/sip-trunking-providers' => 4,
+    '/sip-trunking' => 4,
+    //'/internet-fax-service-providers' => NULL,
+    '/fax' => NULL,
+    '/business-voip-features' => 4,
+    //'/canada-voip' => 2,
+    '/canada' => 2,
+    //'/hosted-pbx-providers' => 4,
+    '/hosted-pbx' => 2,
+    '/small-business-voip' => 5,
+  );
+  
+  
   $map_path_to_title = array(
     //'/compare-business-voip-providers' => 'Business VoIP',
     '/business' => 'Business VoIP',
@@ -1043,17 +1079,6 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   );
  
   
-  $pin_article_to = array(
-    'Business VoIP' => 1,
-    'Residential VoIP' => 2, 
-    'Business VoIP Features' => 3,
-    'SIP Trunking Providers' => 4,
-    'Canada VoIP' => 5,
-    'Internet Fax' => 6,
-    'Hosted PBX Providers' => 7,
-    //'Small Business VoIP' => 8,
-  );
-  
   
   $map_preface_type_to_latest_reviews = array(
     'page-compare-business-voip-providers' => 2,
@@ -1066,9 +1091,6 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     //'page-compare-smbv-voip-providers' => NULL,
   );
   
-  if (!$page_index = @$pin_article_to[@$map_path_to_type[@$_SERVER['REDIRECT_URL']]]) {
-    return NULL;
-  }
   
   
   // Find latest articles
@@ -1100,16 +1122,6 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   // Find latest reviews
   global $user;
   if ($user->uid && $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]) {
-    
-    $map_preface_type_to_service_type = array(
-      'page-compare-business-voip-providers' => 'business',
-      'page-compare-residential-voip-providers' => 'residential',
-      'page-compare-sip-voip-providers' => 'sip',
-      'page-compare-ifa-voip-providers' => 'ifa',
-      'canada-voip' => 'ca',
-      'page-compare-pbx-voip-providers' => 'pbx',
-      //'page-compare-smbv-voip-providers' => NULL,
-    );
     
     $query = db_select('node', 'n')
             ->fields('n', array('nid', 'created'));
@@ -1151,6 +1163,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
             . '<div class="bottom-clear"></div>'
           . '</div>';
  
+  cache_set($bottom_content_cache_name, $content, 'cache', time() + 14400);
+  
   return $content;
 }
 
