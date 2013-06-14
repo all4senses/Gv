@@ -1093,7 +1093,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
     }
 
-    $latest_articles = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div></div>';
+    $latest_articles = '<div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div>';
   }
   
   
@@ -1120,7 +1120,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $query->condition('n.type', 'review');
     $query->orderBy('n.created', 'DESC');
     // Show only 2 latest reviews
-    $query->range(0, 2);
+    $query->range(0, 3);
 
     $results = $query->execute()->fetchAll();
 
@@ -1134,15 +1134,15 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
 
-      $latest_reviews = '<div class="block-views"><div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div></div>';
+      $latest_reviews = '<div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
     }
 
   }
   
-  
+  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views">' . $latest_reviews . $latest_articles . '</div>' : NULL;
+
   $content = '<div id="bottom-with-latest-articles" class="preface' . (($latest_articles || $latest_reviews) ? ' with-articles' : '') . '">'
-            . $latest_reviews
-            . $latest_articles
+            . $right_col
             . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
             . '<div class="bottom-clear"></div>'
           . '</div>';
