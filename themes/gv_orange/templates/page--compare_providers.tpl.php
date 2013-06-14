@@ -85,14 +85,15 @@
           <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
           
           <?php print render($page['above_content']); ?>
-          <?php print render($page['content']); ?>
-          
           <?php if ($page['sidebar_second']): ?>
             <aside id="sidebar-second" role="complementary" class="sidebar clearfix">
               <?php print render($page['sidebar_second']); ?>
             </aside>  <!-- /#sidebar-second -->
           <?php endif; ?>
 
+          <?php print render($page['content']); ?>
+          
+          
           
           <?php 
           //global $user;
