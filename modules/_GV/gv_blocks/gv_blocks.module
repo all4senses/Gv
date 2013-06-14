@@ -1093,7 +1093,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser')) . '</div>';
     }
 
-    $latest_articles = '<div class="view-articles"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div>';
+    $latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div>';
   }
   
   
@@ -1134,7 +1134,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
       //class="view-articles"
-      $latest_reviews = '<div id="compare-providers-reviews"><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
+      $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
     }
 
   }
