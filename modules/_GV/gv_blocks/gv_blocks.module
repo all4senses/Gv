@@ -1040,7 +1040,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   
   $bottom_content = cache_get($bottom_content_cache_name);
   dpm($bottom_content);
-  if ($bottom_content && !empty($bottom_content->data) && $bottom_content->expire < time()) {
+  if ($bottom_content && !empty($bottom_content->data) && $bottom_content->expire > time()) {
     return $bottom_content->data;
   }
   
