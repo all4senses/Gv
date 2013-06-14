@@ -4684,15 +4684,15 @@ function gv_pages_node_update($node) {
   
   if ($node->type == 'provider') {
     
+    // Reset a cache because without it the DB now contains the old data (before the node save).
+    entity_get_controller('node')->resetCache(array($node->nid));
+      
     // Reset ProvidersDataQuick in session var.
     gv_misc_getProvidersDataQuick('all', FALSE, TRUE);   
     
     // Regenerate providers logos sprites (if needed). The data was prepared in gv_pages_submitForm_provider(&$form, &$form_state)
     $p_data = unserialize($node->field_p_data['und'][0]['value']);
     if (!empty($p_data['last_erating_fields_different'])) {
-      
-      // Reset a cache because without it the DB now contains the old data (before the node save).
-      entity_get_controller('node')->resetCache(array($node->nid));
       
       gv_misc_rebuildProvidersLogosSprites($p_data['last_erating_fields_different']);
     }
