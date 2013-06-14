@@ -1039,6 +1039,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   $bottom_content_cache_name = 'gv_top_' . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . '_bottom_content_' . $language->language;
   
   $bottom_content = cache_get($bottom_content_cache_name);
+  dpm($bottom_content);
   if ($bottom_content && !empty($bottom_content->data) && $bottom_content->expire < time()) {
     return $bottom_content->data;
   }
