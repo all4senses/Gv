@@ -627,9 +627,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       }
       $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
         $i = $cols_num - 1;
+        global $user;
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
-          if ($sprite_name) {
+          if ($user->uid == 1 && $sprite_name) {
             $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
             $out .= gv_misc_getTrackingUrl($p_image, NULL, $provider['nid'],'logo');
           }
