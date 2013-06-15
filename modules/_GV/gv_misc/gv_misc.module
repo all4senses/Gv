@@ -4688,8 +4688,13 @@ function theme_gv_misc_image(array $variables) {
 //    return NULL;
 //  }
   
-  $clean_relative_path = str_replace('%20', ' ', str_replace('http://getvoip.com/', '', $variables['path']));
+  // Make a path relative.
+  $variables['path'] = str_replace('http://getvoip.com/', '', $variables['path']);
+  
+  $clean_relative_path = str_replace('%20', ' ', $variables['path']);
+  //dpm($clean_relative_path);
   gv_misc_createCachedImageIfNotExists($clean_relative_path);
+  
   if (!$variables['width']) {
     $size = getimagesize($clean_relative_path);
     $image = theme('image', array('width' => $size[0], 'height' => $size[1], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));  
@@ -6162,10 +6167,14 @@ function wdg_misc_getProviderData_fromView($target, $data) {
       
       
       
+      
     case 'plan':
+      
       if (!$p_data = unserialize($data['data']->field_field_p_data[0]['raw']['value'])) {
         return NULL;
       }
+      
+      $features = NULL;
       
       $service_type_key = gv_misc_refineServiceTypeKey($data['exposed_raw_input']['type']);
       
