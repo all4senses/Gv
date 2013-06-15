@@ -478,7 +478,7 @@ function gv_blocks_block_view($delta = '') {
     
     case 'compare_providers_top_bu':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_compareTopProviders('bu');
+      $block['content'] = gv_blocks_compareTopProviders('business');
       break;
     
     case 'compare_providers_top_pbx':
@@ -533,7 +533,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_compareTopProviders($service_type) {
   switch ($service_type) {
-    case 'bu':
+    case 'business':
       $rating_table = 'field_revision_field_p_erating';
       $rating_field = 'field_p_erating_value';
       break;
