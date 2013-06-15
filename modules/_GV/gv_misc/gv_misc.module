@@ -237,11 +237,8 @@ function gv_misc_testPage() {
   dpm($out);
   */
 
-  
-
-  $gv_providers_sprites = variable_get('gv_providers_sprites');
-  
-  dpm($gv_providers_sprites);
+  $path = 'sites/default/files/styles/block_thumb/public/Vocalocity_Logo.jpeg';
+  $image = theme('image', array('path' => $variables['path']));  
   
   return $out . '<br>End of Test';
 }
@@ -4692,7 +4689,7 @@ function theme_gv_misc_image(array $variables) {
   $variables['path'] = str_replace('http://getvoip.com/', '', $variables['path']);
   
   $clean_relative_path = str_replace('%20', ' ', $variables['path']);
-  dpm($clean_relative_path);
+  dpm('relative = ' . $clean_relative_path);
   gv_misc_createCachedImageIfNotExists($clean_relative_path);
   
   if (!$variables['width']) {
@@ -4702,7 +4699,7 @@ function theme_gv_misc_image(array $variables) {
   else {
     $image = theme('image', array('width' => $variables['width'], 'height' => $variables['height'], 'path' => $variables['path'], 'alt' =>  $variables['alt'], 'title' => $variables['title'] ));
   }
-  dpm($image);
+  
   return $image;
 }
 

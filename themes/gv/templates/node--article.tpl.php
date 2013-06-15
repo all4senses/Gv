@@ -252,6 +252,7 @@
             else {
               // TODO: Temporary check. Should be removed after all articles resave.
               if (isset($node->field_a_teaser['und'][0]['value']) && $node->field_a_teaser['und'][0]['value']) {
+                dpm($node->nid . ' -> no teaser field');
                 echo $node->field_a_teaser['und'][0]['value'];
               }
               else {
