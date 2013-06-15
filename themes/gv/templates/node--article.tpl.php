@@ -23,6 +23,10 @@
 
     return;
   }
+  elseif ($view_mode == 'side_block_teaser_latestBlogsOnNews') {
+    echo 'xxx';
+    return;
+  }
   elseif($view_mode == 'side_block_teaser') {
     
       if (!empty($node->field_extra_data['und'][0]['value'])) {
