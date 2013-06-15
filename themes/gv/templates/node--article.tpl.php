@@ -26,7 +26,7 @@
   elseif ($view_mode == 'side_block_teaser_latestBlogsOnNews') {
     $main_image = unserialize($node->field_main_image['und'][0]['value']);
     
-    $out = '<span class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'src' => $main_image['src'], 'path' => $main_image['uri'], 'alt' =>  (@$main_image['alt'] ? $main_image['alt'] : $title), 'title' => $title )) . '</span>';
+    $out = '<div class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'src' => $main_image['src'], 'path' => $main_image['uri'], 'alt' =>  (@$main_image['alt'] ? $main_image['alt'] : $title), 'title' => $title )) . '</div>' . l($title, 'node/' . $node->nid);
     echo $out;
     return;
   }
