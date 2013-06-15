@@ -631,7 +631,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
           if ($user->uid == 1 && $sprite_name) {
-            $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
+            $p_image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name);
             $out .= gv_misc_getTrackingUrl($p_image, NULL, $provider['nid'],'logo');
           }
           elseif (!empty($provider['p_data']['logo']['i_logo_uri'])) {
