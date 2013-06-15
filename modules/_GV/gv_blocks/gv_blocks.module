@@ -553,9 +553,9 @@ function gv_blocks_compareTopProviders($service_type) {
   $p_names = $query->execute()->fetchCol();
 
   //dpm($p_names);
-
+  $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
-    return gv_blocks_compareProviders($p_names, '<none>');
+    return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type]);
   }
   
 }
@@ -564,11 +564,7 @@ function gv_blocks_compareTopProviders($service_type) {
 /**
  * Returns block with comparing providers table.
  */
-function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL) {
-  
-  //dpm($_GET);
-  
-  //$p_names = urlencode('Nextiva;8x8 Inc.;RingCentral'); 
+function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL) {
   
   if (empty($p_names)) {
   
@@ -578,10 +574,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL) {
 
     $p_names = explode(';', $_GET['p']);
   }
-  //dpm($p_names);
   
-  
-
   $query = db_select('field_data_field_p_name', 'pn');
   $query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
   $query->leftJoin('field_data_field_p_erating', 'pr', "pr.entity_id = pn.entity_id");
@@ -617,8 +610,6 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL) {
   
   $out = '<table class="specs sticky-enabled p' . ($cols_num - 1) . '">';
   
-  //dpm($_SERVER['HTTP_REFERER']);
-  
       if ($back_button) {
         if ($back_button = '<none>') {
           $back_button = '';
@@ -638,7 +629,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL) {
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
-          if (!empty($provider['p_data']['logo']['i_logo_uri'])) {
+          if ($sprite_name) {
+            $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
+            $out .= gv_misc_getTrackingUrl($p_image, NULL, $provider['nid'],'logo');
+          }
+          elseif (!empty($provider['p_data']['logo']['i_logo_uri'])) {
             $image_style_name = 'logo_provider_chart_main';
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
             $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
