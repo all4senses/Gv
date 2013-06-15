@@ -252,10 +252,10 @@
             else {
               // TODO: Temporary check. Should be removed after all articles resave.
               if (isset($node->field_a_teaser['und'][0]['value']) && $node->field_a_teaser['und'][0]['value']) {
-                dpm($node->nid . ' -> no teaser field');
                 echo $node->field_a_teaser['und'][0]['value'];
               }
               else {
+                dpm($node->nid . ' -> no teaser field');
                 $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
                 echo $teaser_data['teaser'];
               }
