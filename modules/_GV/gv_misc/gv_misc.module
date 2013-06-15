@@ -6040,6 +6040,7 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
       $main_image = unserialize($query->execute()->fetchField());
       
       if (@$main_image['uri']) {
+        dpm('in gen -> uri = ' . $main_image['uri']);
         //$out = '<div class="block-thumb">' . theme('image_style', array( 'path' =>  $main_image['uri'], 'style_name' => 'block_thumb', 'alt' => @$main_image['alt'], 'title' => $data['data']->node_title)) . '</div>';
         $out = '<span class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'src' => $main_image['src'], 'path' => $main_image['uri'], 'alt' =>  (@$main_image['alt'] ? $main_image['alt'] : $data['data']->node_title), 'title' => $data['data']->node_title )) . '</span>';
       }
