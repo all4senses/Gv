@@ -1179,8 +1179,6 @@ function gv_blocks_blogPageLatestNews() {
     return $cache_content->data;
   }
   
-  dpm('no_cache');
-
   $query = db_select('node', 'n')  
         ->fields('n', array('nid', 'created'));
   $query->leftJoin('field_data_field_extra_data', 'e', 'e.entity_id = n.nid');
