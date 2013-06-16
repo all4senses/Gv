@@ -1142,7 +1142,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       foreach ($results as $key => $result) {
         $node = node_load($result->nid);
         $sprite_names = unserialize(SPRITE_NAMES);
-        $node->service_type_for_compare_providers = $sprite_names[$map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]];
+        $node->sprite_name = $sprite_names[$map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]];
         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
       }
       //class="view-articles"

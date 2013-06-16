@@ -6065,9 +6065,17 @@ function  gv_misc_getFieldThemed_forView($target, $data) {
 
 
 /**
- * Return specific variable value for a provider depending on the filter value (business OR residential, etc)
+ * Replace for the original function.
  */
 function wdg_misc_getProviderData_fromView($target, $data) {
+  return gv_misc_getProviderData_fromView($target, $data);
+}
+
+
+/**
+ * Return specific variable value for a provider depending on the filter value (business OR residential, etc)
+ */
+function gv_misc_getProviderData_fromView($target, $data) {
   
   $out = '';
   
