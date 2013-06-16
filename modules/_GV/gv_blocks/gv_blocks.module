@@ -1178,6 +1178,8 @@ function gv_blocks_blogPageLatestNews() {
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
     return $cache_content->data;
   }
+  
+  dpm('no_cache');
 
   $query = db_select('node', 'n')  
         ->fields('n', array('nid', 'created'));
