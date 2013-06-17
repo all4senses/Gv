@@ -1378,6 +1378,8 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
   
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+    $module_path_pages = drupal_get_path('module', 'gv_misc');
+    drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
     return $cache_content->data;
   }
   
