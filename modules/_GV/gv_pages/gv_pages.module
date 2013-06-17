@@ -1340,6 +1340,13 @@ function gv_pages_buildHome($name, $data) {
     
     // Because of caching, float box js is not loaded (on node_view of preface) so we load it here, just with the cached content being shown. 
     
+    // Main share functionality
+    drupal_add_js('sites/all/libraries/jquery.plugins/socialite/socialite.min.js');
+    //drupal_add_js('sites/all/libraries/jquery.plugins/socialite/socialite.js');
+
+    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+    drupal_add_js($path_to_custom_js . 'addSocialite.js');
+  
     // Floating share buttons box.
     //drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.min.js');
     ////drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.js');
