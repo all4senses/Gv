@@ -3,8 +3,6 @@
   Drupal.behaviors.gv_floatingSocials = {
     attach: function (context, settings) {
       
-      console.log('float...');
-      
        if ($(".float.share").length) {
          
             $(".float.share").stickyfloat({ 
