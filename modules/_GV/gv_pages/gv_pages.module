@@ -1334,20 +1334,21 @@ function gv_pages_buildHome($name, $data) {
   global $user;
   $logged_in = $user->uid ? '1' : '0';
   $cache_name = 'gv_home_main_content_' . $language->language . '_' . $logged_in;
-  $cache_content = cache_get($cache_name);
-  if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
-    
-    // Because of caching, float box js is not loaded (on node_view of preface) so we load it here, just with the cached content being shown. 
-    
-    // Floating share buttons box.
-    //drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.min.js');
-    ////drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.js');
-    drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat2.js');
-    $module_path = drupal_get_path('module', 'gv_misc');
-    drupal_add_js( $module_path . '/js/gv_floatingSocials.js'); 
-        
-    return $cache_content->data;
-  }
+//  $cache_content = cache_get($cache_name);
+//
+//  if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+//    
+//    // Because of caching, float box js is not loaded (on node_view of preface) so we load it here, just with the cached content being shown. 
+//    
+//    // Floating share buttons box.
+//    //drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.min.js');
+//    ////drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.js');
+//    drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat2.js');
+//    $module_path = drupal_get_path('module', 'gv_misc');
+//    drupal_add_js( $module_path . '/js/gv_floatingSocials.js'); 
+//        
+//    return $cache_content->data;
+//  }
   
     
   $seo_welcome_node = gv_misc_getPrefaceByKey('front');
