@@ -741,11 +741,13 @@ function gv_process_page(&$variables) {
   //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
   //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
   
-  dpm($_SERVER);
-  
-//  $module_path_pages = drupal_get_path('module', 'gv_misc');
-//  drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
-
+  //dpm($_SERVER);
+  // JS for comparing providers functionality on pages ehere appropriate views are cached and therefore have not loaded js itselves within views.
+  $pages_with_compare_provider_functionality = array('/providers/reviews');
+  if ($_SERVER['REQUEST_URI'] == '/' || in_array($_SERVER['REDIRECT_URL'], $pages_with_compare_provider_functionality)) {
+    $module_path_pages = drupal_get_path('module', 'gv_misc');
+    drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
+  }
 }
 
 
