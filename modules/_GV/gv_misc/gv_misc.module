@@ -4888,10 +4888,8 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
   
   if ($scope == 'all') {
     $query = db_select('node', 'n');
-    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
     $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
     $query->fields('n', array('nid', 'title'))  
-          //->fields('pt', array('field_p_types_value'))
           ->fields('pn', array('field_p_name_value')) 
           ->condition('n.type', 'provider')
           ->condition('n.status', 1); 
@@ -4924,13 +4922,8 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
     $result = $query->execute(); 
 
     foreach($result as $provider) {
-      //////$providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
       $providers[$provider->field_p_name_value] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
-
-      //$p[$provider->nid] = $provider;
     }
-    
-    //dpm($p);
 
     // Sort providers alphabetically.
     //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
@@ -4939,7 +4932,6 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
   }
   elseif ($scope == 'all_including_others_from_reviews') {
     $query = db_select('field_data_field_r_provider_name', 'pn');
-    //$query->fields('n', array('nid', 'title'))
     $query->fields('pn', array('field_r_provider_name_value'))
           ->distinct(); 
     $result = $query->execute(); 
