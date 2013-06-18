@@ -610,10 +610,6 @@ function gv_process_page(&$variables) {
     if ($variables['node']->type == 'preface') {
       $pages_with_separate_tpl = array('page-compare-business-voip-providers', 'page-compare-pbx-voip-providers');
       if (in_array(@$variables['node']->field_preface_key['und'][0]['value'], $pages_with_separate_tpl) && arg(2) != 'edit') {
-        $args = arg(2);
-        dpm($args);
-        dpm($_GET);
-        dpm($_SERVER);
         $variables['theme_hook_suggestions'][] = 'page__compare_providers';
       }
     }
