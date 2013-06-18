@@ -116,7 +116,7 @@ function om_maximenu_admin($form, &$form_state, $op = NULL) {
             '#collapsible' => TRUE,
             '#collapsed'   => (arg(3) == 'maxedit') ? TRUE: FALSE,
             '#attributes' => array('id' => 'om-maximenu-fieldset-' . om_string_name($menu_content['title']), 'class' => array('om-maximenu-fieldset')),                
-            '#description' => ($active_links != 0) ? t('Active Link/s: ') . '(' . $active_links . ')': t('This menu will only show if you have added link/s.'),
+            '#description' => ($active_links != 0) ? t('Active Link/s:') . ' (' . $active_links . ')': t('This menu will only show if you have added link/s.'),
           );  
           //dsm($menu_content);
           $menu_content['menu_key']   = $menu_key;
@@ -182,7 +182,7 @@ function _om_maximenu_admin($menu_content = array()) {
   $skin     = om_maximenu_skin_get();
   $roles    = $menu_content['roles'];
   $menu_key = $menu_content['menu_key'];
-  $code     = 'om-u'. $user->uid . '-' . mt_rand();  
+  $code     = 'om-u' . $user->uid . '-' . mt_rand();  
   $out = array();
   // delete field is for saved menus only
   if (trim($menu_content['title']) != 'New Menu') {
@@ -260,6 +260,18 @@ function _om_maximenu_admin($menu_content = array()) {
     '#title' => t('Displace'),
     '#default_value' => isset($menu_content['displace']) ? $menu_content['displace']: 0,
     '#description' => t('This will move the next link item from its position, which creates a sliding menu effect.'),   
+  );    
+  $out['style_options']['delay'] = array(
+    '#type'  => 'textfield',
+    '#title' => t('Hover Delay'),
+    '#default_value' => isset($menu_content['delay']) ? $menu_content['delay']: 1000,
+    '#description' => t('This is used for Hover (fade/slow), 1 sec = 1000'),   
+  );
+  $out['style_options']['fadeout'] = array(
+    '#type'  => 'checkbox',
+    '#title' => t('Fadeout'),
+    '#default_value' => isset($menu_content['fadeout']) ? $menu_content['fadeout']: 1,
+    '#description' => t('This is used for Hover (fade/slow), if unchecked, the submenu will stay open.'),   
   );    
   $out['other_options'] = array(
     '#type'  => 'fieldset',
@@ -377,7 +389,7 @@ function _om_maximenu_admin($menu_content = array()) {
   $out['block_options']['direction'] = array(
     '#type'  => 'select',
     '#title' => t('Block Menu Direction'),
-    '#options' => array('block-down' => 'Dropdown','block-up' => 'Dropup', 'block-right' => 'Right', 'block-left' => 'Left'),    
+    '#options' => array('block-down' => 'Dropdown', 'block-up' => 'Dropup', 'block-right' => 'Right', 'block-left' => 'Left'),    
     '#default_value' => isset($menu_content['block_options']['direction']) ? $menu_content['block_options']['direction']: 'block-down', 
     '#attributes' => array('id' => 'block-options-direction-' . $menu_key), 
     '#description' => t('OM Maximenu will popup on this direction. Applicable only with dropdown style.'),                   
@@ -534,7 +546,7 @@ function _om_maximenu_admin($menu_content = array()) {
 
     if (module_exists('php') && $access) {
       $options[] = t('Show if the following PHP code returns <code>TRUE</code> (PHP-mode, experts only).');
-      $description .= ' '. t('If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code canbreak your Drupal site.', array('%php' => '<?php ?>'));
+      $description .= ' ' . t('If the PHP-mode is chosen, enter PHP code between %php. Note that executing incorrect PHP-code canbreak your Drupal site.', array('%php' => '<?php ?>'));
     }
     $out['menu_visibility']['visibility'] = array(
       '#type' => 'radios',
@@ -853,6 +865,8 @@ function om_maximenu_admin_submit($form, $form_state) {
       if ($maximenu_content['style'] == '') {
         if (isset($maximenu_content['style_options']['disabled']) && ($maximenu_content['style_options']['disabled'] == 1)) $om_maximenu[$menu_id]['disabled'] = 1;        
         if (isset($maximenu_content['style_options']['displace']) && ($maximenu_content['style_options']['displace'] == 1)) $om_maximenu[$menu_id]['displace'] = 1;        
+        if (isset($maximenu_content['style_options']['delay']) && ($maximenu_content['style_options']['delay'] != '')) $om_maximenu[$menu_id]['delay'] = $maximenu_content['style_options']['delay'];        
+        if (isset($maximenu_content['style_options']['fadeout']) && ($maximenu_content['style_options']['fadeout'] == 0)) $om_maximenu[$menu_id]['fadeout'] = 0; 
       }
       if (($maximenu_content['style'] != 'roundabout') && ($maximenu_content['style'] != 'accordion')) {
         if (isset($maximenu_content['other_options']['active']) && ($maximenu_content['other_options']['active'] == 1)) $om_maximenu[$menu_id]['active'] = 1;
@@ -922,12 +936,12 @@ function om_maximenu_admin_submit($form, $form_state) {
         }
       }
       if ($form_values['op'] == t('Cancel')) drupal_goto('admin/structure/om-maximenu');       
-      drupal_set_message(t($om_maximenu[$menu_id]['title'] . ' has been saved.'));          
+      drupal_set_message(t('%menu_title has been saved.', array('%menu_title' => check_plain($om_maximenu[$menu_id]['title']))));          
     }
     elseif (isset($maximenu_content['delete']) && ($maximenu_content['delete'] == 1)) {
  
       if ($form_values['op'] == t('Cancel')) drupal_goto('admin/structure/om-maximenu'); 
-      drupal_set_message(t($om_maximenu[$menu_id]['title'] . ' has been deleted.'));               
+      drupal_set_message(t('%menu_title has been deleted.', array('%menu_title' => check_plain($om_maximenu[$menu_id]['title']))));          
       unset($om_maximenu[$menu_id]); 
     }    
   }
@@ -970,8 +984,8 @@ function theme_om_maximenu_links_order($form) {
             
       $rows[] = array(
         'data' => $row,
-        'id' => 'om-row-'. $menu_key . '-' . $key,
-        'class' => array('draggable row-'. $key, 'tabledrag-leaf'),
+        'id' => 'om-row-' . $menu_key . '-' . $key,
+        'class' => array('draggable row-' . $key, 'tabledrag-leaf'),
       ); 
     }
   }

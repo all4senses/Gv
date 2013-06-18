@@ -70,7 +70,7 @@ function om_maximenu_blocks_get() {
   
   //dsm($modules);
   if (module_exists('om_tools')) {
-    $block_class_edit = l(t('<strong>Block Classes</strong> | '), 'admin/config/system/om-tools',
+    $block_class_edit = l(t('<strong>Block Classes</strong> |'), 'admin/config/system/om-tools',
       array(
         'attributes' => array(
           'title' => t('Edit / Add custom block classes.'),
@@ -93,7 +93,7 @@ function om_maximenu_blocks_get() {
     '#collapsed'   => FALSE,
     '#tree'        => TRUE,
     '#description' => t('These are all the available blocks in your system. Choose the blocks which will appear under the navigation menu link.<br />') . 
-      $block_class_edit . '<strong>'. l(t('Back to OM Settings'), 'admin/structure/om-maximenu') . '</strong>',
+      $block_class_edit . '<strong>' . l(t('Back to OM Settings'), 'admin/structure/om-maximenu') . '</strong>',
   );
   
   foreach ($modules as $module => $blocks) {
@@ -236,7 +236,7 @@ function om_maximenu_blocks_attach($module = NULL, $blocks = array()) {
       '#type'  => 'checkbox',
       '#title' => t('Use Drupal\'s block visibility settings'),
       '#default_value' => $value['visibility'],
-      '#description' => t('You can set visibility in ') . om_maximenu_block_edit($module, $delta, $block_title),
+      '#description' => t('You can set visibility in') . ' ' . om_maximenu_block_edit($module, $delta, $block_title),
     ); 
   }
   return $out;
@@ -274,7 +274,7 @@ function theme_om_maximenu_blocks_attach($form) {
             
       $rows[] = array(
         'data' => $row,
-        'id' => 'om-row-'. $module . '-' . $key,
+        'id' => 'om-row-' . $module . '-' . $key,
       ); 
     }
   }

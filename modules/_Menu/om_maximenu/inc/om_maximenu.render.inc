@@ -56,6 +56,8 @@ function om_maximenu_asset_loader($menu_content = array()) {
   $active        = isset($menu_content['active']) ? $menu_content['active']: 0;  
   $longmenu      = isset($menu_content['longmenu']) ? $menu_content['longmenu']: FALSE;  
   $displace      = isset($menu_content['displace']) ? $menu_content['displace']: 0;  
+  $delay         = isset($menu_content['delay']) ? $menu_content['delay']: 1000;  
+  $fadeout       = isset($menu_content['fadeout']) ? $menu_content['fadeout']: 1;          
   $skin          = isset($menu_content['skin']) ? $menu_content['skin']: 'bubble';
   $animated_bg   = isset($menu_content['animated_bg']) ? 1: 0; 
   $animated_link = isset($menu_content['animated_link']) ? 1: 0; 
@@ -66,7 +68,7 @@ function om_maximenu_asset_loader($menu_content = array()) {
   $maximenu_name = om_string_name($menu_content['title']); 
 
   // add action per OM Maximenu
-  om_maximenu_action($action, $maximenu_name, $displace, $style); 
+  om_maximenu_action($action, $maximenu_name, $displace, $style, $delay, $fadeout); 
               
   // add css per OM Maximenu     
   drupal_add_css(OM_MAXIMENU_PATH . '/skin/' . $skin . '/' . $skin . '.css');
@@ -274,14 +276,45 @@ function om_maximenu_content_render($content = array()) {
       $options             = array();
       $options['query']    = isset($prop['title_path_query']) ? om_path_query($prop['title_path_query']): '';
       $options['fragment'] = isset($prop['title_path_fragment']) ? $prop['title_path_fragment']: '';        
-      $block_title         = (!empty($prop['title_path'])) ? '<a href="' . url($path, $options) .'" title="' . $title . '">' . $title . '</a>': $title;      
+      $block_title         = (!empty($prop['title_path'])) ? '<a href="' . url($path, $options) . '" title="' . $title . '">' . $title . '</a>': $title;      
+      
+      // previous
       $block               = module_invoke($module, 'block_view', $delta ); 
+      
+      /*
+      // new - there's still a bug here which doubles the markups .block container
+      
+      // http://drupal.org/node/1422706 - by catch
+      // Attached patch takes the output, of the view hook, puts it through block rendering pipeline 
+      // (unfortunately there are only private functions for this), then pulls the individual block back out, 
+      // this allows those hooks to operate as normal.
 
+      $blocks = array();
+      $index = $module . '_' . $delta;
+      $blocks[$index] = (object) array(
+        'delta' => $delta,
+        'module' => $module,
+        'title' => '<none>',
+        // There is no real region, put a false one in instead.
+        'region' => 'om_maximenu',
+      );
+      $blocks = _block_render_blocks($blocks);
+      $build = _block_get_renderable_array($blocks);
+      if (isset($build[$index])) {
+        $block = array('content' => $build[$index]);
+
+        $om_classes = ($count == 1) ? ' first': '';
+        if ($count == $total) $om_classes .= ' last'; 
+        $om_classes .=  isset($block_classes[$module][$delta]) ? ' ' . $block_classes[$module][$delta]: ''; 
+
+        $out .= theme('om_maximenu_content', array('block' => $block, 'module' => $module, 'delta' => $delta, 'om_classes' => $om_classes, 'title' => $title, 'block_title' => $block_title));
+      }
+      */
       $om_classes = ($count == 1) ? ' first': '';
       if ($count == $total) $om_classes .= ' last'; 
       $om_classes .=  isset($block_classes[$module][$delta]) ? ' ' . $block_classes[$module][$delta]: ''; 
 
-      $out .= theme('om_maximenu_content', array('block' => $block, 'module' => $module, 'delta' => $delta, 'om_classes' => $om_classes, 'title' => $title, 'block_title' => $block_title));                               
+      $out .= theme('om_maximenu_content', array('block' => $block, 'module' => $module, 'delta' => $delta, 'om_classes' => $om_classes, 'title' => $title, 'block_title' => $block_title));
     }
   }
   return $out;
@@ -465,18 +498,18 @@ function template_preprocess_om_maximenu_submenu_links(&$vars) {
   $attributes = om_maximenu_link_attrib($content);
 
   // link is disabled when it's on its page
-  $uri = trim($_SERVER['REQUEST_URI']);
+  $uri = trim(request_uri());
   $qpath =  $_GET['q'];
-	$path_relative = base_path() . $content['path'];
+  $path_relative = base_path() . $content['path'];
 
   // Drupal doesn't accept # as valid path on field input
   $options = array();       
   $options['query']    = isset($content['path_query']) ? om_path_query($content['path_query']): '';
   $options['fragment'] = isset($content['path_fragment']) ? $content['path_fragment']: '';                
-				
-	// disables link when active
+        
+  // disables link when active
   $disable_active_link = ($disabled) ? (($path_relative != $uri) && ($content['path'] != $qpath)) ? 1: 0: 1;
-			
+      
   if (!empty($content['path']) && $disable_active_link) {
     $path = ($content['path'] == '<front>') ? '': $content['path'];
     // there are too many things inside this $link_options which a regular l() can't handle
@@ -579,14 +612,14 @@ function template_preprocess_om_maximenu_tabbed_links(&$vars) {
   $attributes = om_maximenu_link_attrib($content);
 
   // link is disabled when it's on its page
-  $uri = trim($_SERVER['REQUEST_URI']);
+  $uri = trim(request_uri());
   $path_relative = base_path() . $content['path'];
 
   // Drupal doesn't accept # as valid path on field input
   $options = array();
   $options['query']    = isset($content['path_query']) ? $content['path_query']: '';
   $options['fragment'] = isset($content['path_fragment']) ? $content['path_fragment']: '';        
-			
+      
   // title with javascript should have div tag
   $script_link = om_string_name($content['link_title'], FALSE);
       
@@ -677,14 +710,14 @@ function template_preprocess_om_maximenu_modal_links(&$vars) {
   $attributes = om_maximenu_link_attrib($content);
 
   // link is disabled when it's on its page
-  $uri = trim($_SERVER['REQUEST_URI']);
+  $uri = trim(request_uri());
   $path_relative = base_path() . $content['path'];
 
   // Drupal doesn't accept # as valid path on field input
   $options = array();
   $options['query']    = isset($content['path_query']) ? $content['path_query']: '';
   $options['fragment'] = isset($content['path_fragment']) ? $content['path_fragment']: '';        
-			
+      
   // title with javascript should have div tag
   $script_link = om_string_name($content['link_title'], FALSE);
       
@@ -898,7 +931,7 @@ function template_preprocess_om_maximenu_wrapper(&$vars) {
 
   $links = $vars['links'];
   $vars['maximenu_name'] = om_string_name($links['title']); 
-  $vars['link_code']     = isset($links['code']) ? trim($links['code']): 'om-u'. $vars['user']->uid . '-' . mt_rand();  
+  $vars['link_code']     = isset($links['code']) ? trim($links['code']): 'om-u' . $vars['user']->uid . '-' . mt_rand();  
 
   $vars['theme_hook_suggestions'][] = 'om_maximenu_wrapper__' . $vars['link_code'];
   $vars['theme_hook_suggestions'][] = 'om_maximenu_wrapper__' . $vars['maximenu_name'];

@@ -21,16 +21,6 @@ function autocomplete_deluxe_field_widget_info() {
         'multiple values' => FIELD_BEHAVIOR_CUSTOM,
       ),
     ),
-    'autocomplete_deluxe_list' => array(
-      'label' => t('Autocomplete Deluxe'),
-      'field types' => array('list', 'list_text', 'list_text', 'list_integer', 'list_float'),
-      'settings' => array(
-        'size' => 60,
-      ),
-      'behaviors' => array(
-        'multiple values' => FIELD_BEHAVIOR_CUSTOM,
-      ),
-    ),
   );
 }
 
@@ -50,14 +40,16 @@ function taxonomy_autocomplete_deluxe($field_name, $tags_typed = '') {
   $vids = array();
   $vocabularies = taxonomy_vocabulary_get_names();
   foreach ($field['settings']['allowed_values'] as $tree) {
-    $vids[] = $vocabularies[$tree['vocabulary']]->vid;
+    // If the content taxonomy setting content_taxonomy_ignore_in_suggestions
+    // is set, then the vocabulary is ignored.
+    if (empty($tree['content_taxonomy_ignore_in_suggestions'])) {
+      $vids[] = $vocabularies[$tree['vocabulary']]->vid;
+    }
   }
 
   $query = db_select('taxonomy_term_data', 't');
   $query->addTag('translatable');
   $query->addTag('term_access');
-  $query->addTag('autocomplete_deluxe_taxonomy_autocomplete');
-  $query->addMetadata('field_name', $field_name);
 
   if ($tag_last != '') {
     // Do not select already entered terms.
@@ -69,6 +61,7 @@ function taxonomy_autocomplete_deluxe($field_name, $tags_typed = '') {
       ->fields('t', array('tid', 'name'))
       ->condition('t.vid', $vids)
       ->condition('t.name', '%' . db_like($tag_last) . '%', 'LIKE')
+      ->range(0, 10)
       ->execute()
       ->fetchAllKeyed();
   }
@@ -76,11 +69,12 @@ function taxonomy_autocomplete_deluxe($field_name, $tags_typed = '') {
     $tags_return = $query
       ->fields('t', array('tid', 'name'))
       ->condition('t.vid', $vids)
+      ->range(0, 10)
       ->execute()
       ->fetchAllKeyed();
   }
 
-  $prefix = count($tags_typed) ? implode(', ', $tags_typed) . ', ' : '';
+  $prefix = count($tags_typed) ? drupal_implode_tags($tags_typed) . ', ' : '';
 
   $term_matches = array();
   foreach ($tags_return as $tid => $name) {
@@ -89,9 +83,7 @@ function taxonomy_autocomplete_deluxe($field_name, $tags_typed = '') {
     if (strpos($name, ',') !== FALSE || strpos($name, '"') !== FALSE) {
       $n = '"' . str_replace('"', '""', $name) . '"';
     }
-    else {
-      $term_matches[$prefix . $n] = check_plain($name);
-    }
+    $term_matches[$prefix . $n] = check_plain($name);
   }
 
   drupal_json_output($term_matches);
@@ -120,7 +112,6 @@ function autocomplete_deluxe_allowed_terms($field) {
 function autocomplete_deluxe_field_widget_settings_form($field, $instance) {
   $widget = $instance['widget'];
   $settings = $widget['settings'];
-  $type = str_replace('autocomplete_deluxe_', '', $widget['type']);
 
   $form['size'] = array(
     '#type' => 'textfield',
@@ -170,7 +161,6 @@ function autocomplete_deluxe_field_widget_error($element, $error, $form, &$form_
  * Implements hook_field_widget_form().
  */
 function autocomplete_deluxe_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
-  $type = str_replace('autocomplete_deluxe_', '', $instance['widget']['type']);
   $element += array(
     '#type' => 'autocomplete_deluxe',
     '#size' => $instance['widget']['settings']['size'],
@@ -178,57 +168,18 @@ function autocomplete_deluxe_field_widget_form(&$form, &$form_state, $field, $in
 
   $multiple = $field['cardinality'] > 1 || $field['cardinality'] == FIELD_CARDINALITY_UNLIMITED ? TRUE : FALSE;
 
-  switch ($type) {
-    case 'taxonomy':
-      $tags = array();
-      foreach ($items as $item) {
-        $tags[$item['tid']] = isset($item['taxonomy_term']) ? $item['taxonomy_term'] : taxonomy_term_load($item['tid']);
-      }
-      $element['#element_validate'] = array('taxonomy_autocomplete_validate');
-      if (isset($instance['widget']['settings']['content_taxonomy_autocomplete_new_terms']) && $instance['widget']['settings']['content_taxonomy_autocomplete_new_terms'] == 'deny') {
-        $options = autocomplete_deluxe_allowed_terms($field);
-        $default_values = array();
-        foreach ($tags as $tag) {
-          $default_values[$tag->name] = $tag->name;
-        }
-        $element += array(
-          '#autocomplete_options' => $options,
-          '#multiple' => $multiple && count($options) > 1,
-          '#default_value' => $default_values,
-        );
-      }
-      else {
-        $element += array(
-          '#multiple' => $multiple,
-          '#autocomplete_deluxe_path' => url($instance['widget']['settings']['autocomplete_deluxe_path'] . '/' . $field['field_name'], array('absolute' => TRUE)),
-          '#default_value' => autocomplete_deluxe_taxonomy_implode_tags($tags),
-        );
-      }
-      $form_state['autocomplete_deluxe']['terms'] = TRUE;
-      break;
-    case 'list':
-      $value_key = key($field['columns']);
+  $tags = array();
+  foreach ($items as $item) {
+    $tags[$item['tid']] = isset($item['taxonomy_term']) ? $item['taxonomy_term'] : taxonomy_term_load($item['tid']);
+  }
 
-      $type = str_replace('options_', '', $instance['widget']['type']);
-      $required = $element['#required'];
-      $has_value = isset($items[0][$value_key]);
-      $properties = _options_properties($type, $multiple, $required, $has_value);
+  $element['#element_validate'] = array('taxonomy_autocomplete_validate');
+  $element += array(
+    '#multiple' => $multiple,
+    '#autocomplete_deluxe_path' => url($instance['widget']['settings']['autocomplete_deluxe_path'] . '/' . $field['field_name'], array('absolute' => TRUE)),
+    '#default_value' => autocomplete_deluxe_taxonomy_implode_tags($tags),
+  );
 
-      // Prepare the list of options.
-      $options = _options_get_options($field, $instance, $properties);
-      $default_value = _options_storage_to_form($items, $options, $value_key, $properties);
-
-      $element += array(
-        '#autocomplete_options' => $options,
-        '#autocomplete_min_length' => 0,
-        '#multiple' => $multiple && count($options) > 1,
-        '#value_key' => $value_key,
-        '#element_validate' => array('options_field_widget_validate'),
-        '#properties' => $properties,
-        '#default_value' => $default_value,
-      );
-      break;
-  };
   return $element;
 }
 
@@ -252,8 +203,6 @@ function autocomplete_deluxe_element_process($element) {
 
   // Set default options for multiple values.
   $element['#multiple'] = isset($element['#multiple']) ? $element['#multiple'] : FALSE;
-  $element['#prefix'] = '<div class="clearfix autocomplete-container">';
-  $element['#suffix'] = '</div>';
 
   $element['values'] = array(
     '#type' => 'container',
@@ -265,22 +214,36 @@ function autocomplete_deluxe_element_process($element) {
   $element['textfield'] = array(
     '#type' => 'textfield',
     '#size' => isset($element['#size']) ? $element['#size'] : '',
-    '#attributes' => array('class' => array('autocomplete-deluxe-form', 'form-autocomplete'), 'id' => array($html_id)),
+    '#attributes' => array('class' => array('autocomplete-deluxe-form'), 'id' => array($html_id)),
     '#default_value' => '',
+    '#prefix' => '<div class="autocomplete-deluxe-container">',
+    '#suffix' => '</div>',
   );
 
   $js_settings['autocomplete_deluxe'][$html_id] = array(
     'input_id' => $html_id,
     'min_length' => isset($element['#autocomplete_min_length']) ? $element['#autocomplete_min_length'] : 0,
     'multiple' => $element['#multiple'],
+    'required' => $element['#required'],
   );
 
   if (isset($element['#autocomplete_deluxe_path'])) {
+    if (isset($element['#default_value'])) {
+      // Split on the comma only if that comma has zero, or an even number of
+      // quotes in ahead of it.
+      // http://stackoverflow.com/questions/1757065/java-splitting-a-comma-separated-string-but-ignoring-commas-in-quotes
+      $default_value = preg_replace('/,(?=([^\"]*\"[^\"]*\")*[^\"]*$)/i', '"" ""', $element['#default_value']);
+      $default_value = '""' . $default_value . '""';
+    }
+    else {
+      $default_value = '';
+    }
+
     if ($element['#multiple']) {
       $element['value_field'] = array(
         '#type' => 'textfield',
         '#attributes' => array('class' => array('autocomplete-deluxe-value-field')),
-        '#default_value' => isset($element['#default_value']) ? $element['#default_value'] : '',
+        '#default_value' => $default_value,
         '#prefix' => '<div class="autocomplete-deluxe-value-container">',
         '#suffix' => '</div>',
       );
@@ -294,25 +257,6 @@ function autocomplete_deluxe_element_process($element) {
       'type' => 'ajax',
       'uri' => $element['#autocomplete_deluxe_path'],
     );
-  }
-  elseif (isset($element['#autocomplete_options'])) {
-    $js_settings['autocomplete_deluxe'][$html_id] += array(
-      'type' => 'list',
-      'data' => $element['#autocomplete_options'],
-    );
-
-    $html_id_select = drupal_html_id('autocomplete-deluxe-input-select');
-    $element['list_value'] = array(
-      '#type' => 'select',
-      '#options' => $element['#autocomplete_options'],
-      '#multiple' => $element['#multiple'],
-      '#attributes' => array('class' => array('autocomplete-deluxe-form', 'form-autocomplete'), 'id' => array($html_id_select)),
-      '#default_value' => isset($element['#default_value']) ? $element['#default_value'] : '',
-    );
-
-    // Hide textfield so that, in case javascript is deactivated
-    $element['textfield']['#attributes']['style'] = 'display: none;';
-    $js_settings['autocomplete_deluxe'][$html_id]['select_input'] = $html_id_select;
   }
   else {
     // If there is no source (path or data), we don't want to add the js
@@ -344,23 +288,22 @@ function autocomplete_deluxe_value(&$element, $input = FALSE, $form_state = NULL
  */
 function autocomplete_deluxe_after_build($element, &$form_state) {
   // By default drupal sets the maxlength to 128 if the property isn't
-  // specified, but since the limit isn't usefull in some cases,
+  // specified, but since the limit isn't useful in some cases,
   // we unset the property.
   unset($element['textfield']['#maxlength']);
 
-  if (!isset($element['list_value'])) {
-    $element['#value'] = isset($element['value_field']) ? $element['value_field']['#value'] : $element['textfield']['#value'];
-    // Do the same for similar reasons as before.
-    unset($element['value_field']['#maxlength']);
-  }
-  else {
-    if (!empty($form_state['autocomplete_deluxe']['terms']) && !empty($element['#multiple'])) {
-      $element['#value'] = (!empty($element['list_value']['#value'])) ? implode(',', $element['list_value']['#value']) : "";
-    }
-    else {
-      $element['#value'] = $element['list_value']['#value'];
-    }
-  }
+  // Set the elements value from either the value field or text field input.
+  $element['#value'] = isset($element['value_field']) ? $element['value_field']['#value'] : $element['textfield']['#value'];
+
+  $element['#value'] = trim($element['#value']);
+  // Replace all double double quotes and space with a comma. This will allows
+  // us to keep entries in double quotes.
+  $element['#value'] = str_replace('"" ""', ',', $element['#value']);
+  // Remove the double quotes at the beginning and the end from the first and
+  // the last term.
+  $element['#value'] = substr($element['#value'], 2, strlen($element['#value']) - 4);
+  unset($element['value_field']['#maxlength']);
+
 
   form_set_value($element, $element['#value'], $form_state);
   return $element;

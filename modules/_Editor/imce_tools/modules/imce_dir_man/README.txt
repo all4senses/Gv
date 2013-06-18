@@ -9,3 +9,6 @@ To use, create an IMCE profile and specify
 'php: return imce_dir_man_path();' as the directory path the profile is
 allowed to edit. On page admin/settings/imce_dir_man configure which
 directories each user should be restricted to.
+
+Access to configure directories users should be restricted to requires
+the "administer site configuration" permission.

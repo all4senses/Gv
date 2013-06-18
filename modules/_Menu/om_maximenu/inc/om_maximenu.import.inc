@@ -53,7 +53,7 @@ function om_maximenu_import() {
   foreach ($_om_maximenu_existing_menus as $menu_name => $tree) {
     $options = array();
     om_menu_tree_options($options, $tree[0], $menu_name);
-    $menu_title = ucwords(preg_replace('/-/',' ', $menu_name));   
+    $menu_title = ucwords(preg_replace('/-/', ' ', $menu_name));   
     $none = array('' => '<none>', $menu_name =>  $menu_title);
     $options = $none + $options;
 
@@ -217,7 +217,7 @@ function om_maximenu_import_submit($form, $form_state) {
           );
         }   
       } 
-      drupal_set_message(t($menu_title . ' has been imported.'));  
+      drupal_set_message(t('%menu_title has been imported.', array('%menu_title' => check_plain($menu_title))));  
       $om_maximenu[$menu_id] = $import;
       $menu_id++;
     }
@@ -286,7 +286,7 @@ function om_maximenu_import_submit($form, $form_state) {
             );
           }   
         } 
-        drupal_set_message(t($voc_title . ' has been imported.'));  
+        drupal_set_message(t('%voc_title has been imported.', array('%voc_title' => check_plain($voc_title))));  
         $om_maximenu[$menu_id] = $import;
         $menu_id++;
       }   

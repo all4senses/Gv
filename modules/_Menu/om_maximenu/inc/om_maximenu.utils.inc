@@ -53,7 +53,7 @@ function om_maximenu_link_option($content = array()) {
   $icon_option = (isset($content['icon_option']) && ($content['icon_option'] == 1)) ? 'class="om-hover"': '';
 
   // title, icon options
-  $link_title        = stripslashes($content['link_title']);
+  $link_title        = stripslashes(t($content['link_title']));
   $link_title_option = $content['link_title_option'];
   $link_icon         = !empty($content['path_icon']) ? '<img ' . $icon_option . ' src="' . url($content['path_icon']) . '" alt="' . om_string_name($link_title, FALSE) . '" />': '';
       
@@ -99,12 +99,13 @@ function om_maximenu_link_attrib($content = array()) {
   $attributes['class'] = 'om-link' . $custom_classes . ' link-' . $title_class;  
   
   // active class   
-  $uri = trim($_SERVER['REQUEST_URI']);
-  $path_relative = base_path() . $content['path'];	
-	    
-  if (($_GET['q'] == $content['path']) || ($path_relative == $uri)) $attributes['class'] .= ' active'; 
+  $uri = trim(request_uri());
+  $path_relative = base_path() . $content['path'];  
+      
+  if (!empty($content['path']) && ($_GET['q'] == $content['path'])) $attributes['class'] .= ' active'; 
+  if (!empty($content['path']) && ($path_relative == $uri)) $attributes['class'] .= ' active'; 
   
-  if ((empty($content['path']) || ($content['path'] == '<front>')) && drupal_is_front_page()) $attributes['class'] .= ' active';   
+  if (($content['path'] == '<front>') && drupal_is_front_page()) $attributes['class'] .= ' active';   
   
   // link description options
   if (!empty($content['description']) && ($content['description_option'] == 'hover')) $attributes['title'] = check_plain($content['description']); 
@@ -198,7 +199,7 @@ function om_maximenu_inline_style($links = array()) {
     $y_px        = ($y_value != 0) ? 'px': '';    
     $y_prop      = $y_origin . ': ' . $y_value . $y_px . '; ';
                
-    $out = ' style="position: ' . $position . '; ' . $x_prop  . $y_prop . '" ';   
+    $out = ' style="position: ' . $position . '; ' . $x_prop . $y_prop . '" ';   
   }
   elseif ($links['output'] == 'main_menu') {
     // do nothing now, maybe in the future
@@ -224,10 +225,14 @@ function om_maximenu_link_classes($content = array(), $permission = array(), $co
   // link title class
   $classes[] = 'leaf-' . $content['link_title'];     
 
-  // active class       
-  if ($_GET['q'] == $content['path']) $classes[] = 'active'; 
+  // active class   
+  $uri = trim(request_uri());
+  $path_relative = base_path() . $content['path'];  
       
-  if ((empty($content['path']) || ($content['path'] == '<front>')) && drupal_is_front_page()) $classes[] = 'active';   
+  if (!empty($content['path']) && ($_GET['q'] == $content['path'])) $classes[] = ' active'; 
+  if (!empty($content['path']) && ($path_relative == $uri)) $classes[] = ' active'; 
+  
+  if (($content['path'] == '<front>') && drupal_is_front_page()) $classes[] = ' active';   
       
   // user role class
   if (is_array($permission)) {
@@ -408,9 +413,9 @@ function om_maximenu_menu_visibility($menu_visibility = FALSE) {
  *
  */
 function om_maximenu_form_alter(&$form, $form_state, $form_id) { 
-  switch($form_id) {
+  switch ($form_id) {
     case 'block_admin_configure':
-      if($form['module']['#value'] == 'om_maximenu') $form['#submit'][] = '_om_maximenu_block_admin_configure_submit_handler';
+      if ($form['module']['#value'] == 'om_maximenu') $form['#submit'][] = '_om_maximenu_block_admin_configure_submit_handler';
       break;
     case 'block_admin_display_form':
       $form['#submit'][] = '_om_maximenu_block_admin_display_submit_handler';
@@ -427,7 +432,7 @@ function _om_maximenu_block_admin_configure_submit_handler(&$form, $form_state) 
   $delta = $form_state['values']['delta'];
   $delta = explode('-', $delta);
   
-  if($delta[1] == 'maximenu') {
+  if ($delta[1] == 'maximenu') {
     global $_om_maximenu_variable;
     $maximenu = $_om_maximenu_variable;
     $delta = $delta[2];
@@ -572,9 +577,23 @@ function om_path_query($path_query = array()) {
     foreach ($queries as $kquery => $query) {
       if (!empty($query)) {
         $query = explode('=', $query);
-        if (!empty($query)) $out[$query[0]] = $query[1];
+        if (!empty($query) && isset($query[0]) && isset($query[1])) {
+          $out[$query[0]] = $query[1];
+        }
+        else {
+          drupal_set_message(t('Invalid input.'));
+        }  
       }
     }
+  }
+  else {
+    $query = explode('=', $path_query);
+    if (!empty($query) && isset($query[0]) && isset($query[1])) {
+      $out[$query[0]] = $query[1];
+    }  
+    else {
+      drupal_set_message(t('Invalid input.'));
+    }  
   }
   return $out;
 } 

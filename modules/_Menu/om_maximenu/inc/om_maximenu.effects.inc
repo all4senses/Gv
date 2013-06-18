@@ -13,7 +13,7 @@
  * Mouse actions
  *
  */
-function om_maximenu_action($action = 'hover', $menu = '', $displace = 0, $style = '') {
+function om_maximenu_action($action = 'hover', $menu = '', $displace = 0, $style = '', $delay = 1000, $fadeout = 1) {
 
   $displace_menu = ($displace == 1) ? "$('#om-maximenu-" . $menu . " li.om-leaf .om-maximenu-content').css('position', 'relative').addClass('om-maximenu-displace');": '';
 
@@ -35,20 +35,33 @@ function om_maximenu_action($action = 'hover', $menu = '', $displace = 0, $style
     jQuery(document).ready(function($){"
       . $displace_menu . "     
       $('#om-maximenu-" . $menu . " li.om-leaf .om-maximenu-content').removeClass('om-maximenu-content-nofade');
-      $('#om-maximenu-" . $menu . " li.om-leaf .om-link').click(function() {
-				if($(this).parent().hasClass('open')) {
-				  $(this).parent().removeClass('open');
-				}
-				else {
-				  $('#om-maximenu-" . $menu . " li.om-leaf').removeClass('open');
-				  $(this).parent().addClass('open');
-				}	
+      $('#om-maximenu-" . $menu . " li.om-leaf .om-link').click(function(ev) {
+        ev.stopPropagation();
+        if($(this).parent().hasClass('open')) {
+          $(this).parent().removeClass('open');
+        }
+        else {
+          $('#om-maximenu-" . $menu . " li.om-leaf').removeClass('open');
+          $(this).parent().addClass('open');
+        }  
         " . $click_action . "       
         return false;
       });
+      $('#om-maximenu-" . $menu . " .om-maximenu-content').click(function(ev) {
+        ev.stopPropagation();
+      });        
+      $('html').click(function() {
+        // Close any open menus.
+        $('#om-maximenu-" . $menu . " .om-maximenu-content:visible').each(function() {
+          $(this).parent().removeClass('open');
+          $(this).hide();
+        });
+      });      
     }); 
     ";
-                  
+
+  $fadeout_out = ($fadeout == 1) ? '.fadeOut()': '';
+              
   $hover_fade = "
     jQuery(document).ready(function($){"
       . $displace_menu . "     
@@ -56,11 +69,11 @@ function om_maximenu_action($action = 'hover', $menu = '', $displace = 0, $style
       //$('#om-maximenu-" . $menu . " li.om-leaf').hover(omFadeIn,omFadeOut); //native jquery
       $('#om-maximenu-" . $menu . " li.om-leaf').hoverIntent({
         over: omFadeIn,
-        timeout: 1000,
+        timeout: " . $delay . ",
         out: omFadeOut
       }); 
-      function omFadeIn(){ $('.om-maximenu-content.closed', this).fadeIn();}
-      function omFadeOut(){ $('.om-maximenu-content.closed', this).fadeOut();}  
+      function omFadeIn(){ $('.om-maximenu-content.closed', this).fadeIn(); }
+      function omFadeOut(){ $('.om-maximenu-content.closed', this)" . $fadeout_out . "; }  
     });
     ";
 
@@ -129,50 +142,50 @@ function om_maximenu_action($action = 'hover', $menu = '', $displace = 0, $style
   if (($action == 'click_fast') || ($action == 'click_slow')) $modal_action = 'click';
   
   $style_modal_js = "
-    jQuery(document).ready(function($) {	
+    jQuery(document).ready(function($) {  
    
-	    $('#om-maximenu-" . $menu . " .om-link[rel=om-maximenu-modal]')." . $modal_action . "(function(e) {
-	      // prevent default link behavior
-	      e.preventDefault();
-		
-	      // get anchor id
-	      var id = $(this).attr('href');
+      $('#om-maximenu-" . $menu . " .om-link[rel=om-maximenu-modal]')." . $modal_action . "(function(e) {
+        // prevent default link behavior
+        e.preventDefault();
+    
+        // get anchor id
+        var id = $(this).attr('href');
 
-	      // mask height and width
-	      var om_maskHeight = $(document).height();
-	      var om_maskWidth = $(window).width();
-	
-	      $('#om-maximenu-mask').css({'width': om_maskWidth, 'height': om_maskHeight});
-		
-	      // fade effect	
-	      $('#om-maximenu-mask').fadeIn(" . $speed . ");	
-	      $('#om-maximenu-mask').fadeTo('slow',0.75);	
-	
-	      // om-maximenu-modal-content height and width
-	      var windowHeight = $(window).height();
-	      var windowWidth = $(window).width();
+        // mask height and width
+        var om_maskHeight = $(document).height();
+        var om_maskWidth = $(window).width();
+  
+        $('#om-maximenu-mask').css({'width': om_maskWidth, 'height': om_maskHeight});
+    
+        // fade effect  
+        $('#om-maximenu-mask').fadeIn(" . $speed . ");  
+        $('#om-maximenu-mask').fadeTo('slow',0.75);  
+  
+        // om-maximenu-modal-content height and width
+        var windowHeight = $(window).height();
+        var windowWidth = $(window).width();
               
-	      // set om-maximenu-modal-content to center
-	      $(id).css('top',  windowHeight/2-$(id).height()/2);
-	      $(id).css('left', windowWidth/2-$(id).width()/2);
-	
-	      // fade effect to window
-	      $(id).fadeIn(" . $speed . "); 
-	    }, function() {
-	      // do nothing
-	    });
-	
-	    // if close button is clicked
-	    $('.om-maximenu-modal-content .om-maximenu-close').click(function() {
-		    $('#om-maximenu-mask').hide();
-		    $('.om-maximenu-modal-content').hide();
-	    });		
-	
-	    // if om-maximenu-mask is clicked
-	    $('#om-maximenu-mask').click(function() {
-		    $(this).hide();
-		    $('.om-maximenu-modal-content').hide();
-	    });			
+        // set om-maximenu-modal-content to center
+        $(id).css('top',  windowHeight/2-$(id).height()/2);
+        $(id).css('left', windowWidth/2-$(id).width()/2);
+  
+        // fade effect to window
+        $(id).fadeIn(" . $speed . "); 
+      }, function() {
+        // do nothing
+      });
+  
+      // if close button is clicked
+      $('.om-maximenu-modal-content .om-maximenu-close').click(function() {
+        $('#om-maximenu-mask').hide();
+        $('.om-maximenu-modal-content').hide();
+      });    
+  
+      // if om-maximenu-mask is clicked
+      $('#om-maximenu-mask').click(function() {
+        $(this).hide();
+        $('.om-maximenu-modal-content').hide();
+      });      
     });
   ";
     
@@ -349,22 +362,22 @@ function om_maximenu_link_slider($menu = NULL) {
   
       $('#om-menu-" . $menu . " .om-leaf').css('height', linkHeight + 'px');
       $('#om-menu-" . $menu . " .om-leaf .om-link').css('overflow', 'hidden').css('height', 0);      
-	    $('#om-menu-" . $menu . " .om-leaf').prepend('<span class=\"om-link-slider\"></span>'); 
+      $('#om-menu-" . $menu . " .om-leaf').prepend('<span class=\"om-link-slider\"></span>'); 
 
-	    $('#om-menu-" . $menu . " .om-leaf').each(function() { 
-		    var textLink = $(this).find('.om-link').text(); 
-		    $(this).find('span.om-link-slider').show().text(textLink); 
-	    }); 
+      $('#om-menu-" . $menu . " .om-leaf').each(function() { 
+        var textLink = $(this).find('.om-link').text(); 
+        $(this).find('span.om-link-slider').show().text(textLink); 
+      }); 
 
-	    $('#om-menu-" . $menu . " .om-leaf').hover(
-	      function() { 
-	        $(this).find('span.om-link-slider').stop().animate({ lineHeight: 0, height: 0 }, 250);
-	        $(this).find('.om-link').stop().animate({ height: linkHeight }, 250); 
-	      },
-	      function() { 
-	        $(this).find('span.om-link-slider').stop().animate({ lineHeight: linkHeight, height: linkHeight }, 250);
-	        $(this).find('.om-link').stop().animate({ height: 0 }, 250);
-	    });
+      $('#om-menu-" . $menu . " .om-leaf').hover(
+        function() { 
+          $(this).find('span.om-link-slider').stop().animate({ lineHeight: 0, height: 0 }, 250);
+          $(this).find('.om-link').stop().animate({ height: linkHeight }, 250); 
+        },
+        function() { 
+          $(this).find('span.om-link-slider').stop().animate({ lineHeight: linkHeight, height: linkHeight }, 250);
+          $(this).find('.om-link').stop().animate({ height: 0 }, 250);
+      });
     });
   ";
   drupal_add_js($link_slide_js, "inline");
@@ -379,38 +392,38 @@ function om_maximenu_jiggle($menu = NULL) {
   
   $link_giggle_js = "
     jQuery(document).ready(function($){ 
-	    // creates the target paths
-	    var list_elements = '#om-menu-" . $menu . "' + ' li.om-leaf';
-	    var link_elements = list_elements + ' .om-link';
-	    var pad_out = 25;
-	    var pad_in = 15;
-	    var time = 150;
-	    var multiplier = .8;
-	    
-  	  // initiates the timer used for the sliding animation
-  	  var timer = 0;
-	
-	    // creates the jiggle animation for all list elements 
-	    $(list_elements).each(function(i){
-  		  // margin left = - ([width of element] + [total vertical padding of element])
-	  	  $(this).css('margin-left','-180px');
-	  	  // updates timer
-	  	  timer = (timer*multiplier + time);
-	  	  $(this).animate({ marginLeft: '0' }, timer);
-	  	  $(this).animate({ marginLeft: '15px' }, timer);
-	  	  $(this).animate({ marginLeft: '0' }, timer);
-	    });
+      // creates the target paths
+      var list_elements = '#om-menu-" . $menu . "' + ' li.om-leaf';
+      var link_elements = list_elements + ' .om-link';
+      var pad_out = 25;
+      var pad_in = 15;
+      var time = 150;
+      var multiplier = .8;
+      
+      // initiates the timer used for the sliding animation
+      var timer = 0;
+  
+      // creates the jiggle animation for all list elements 
+      $(list_elements).each(function(i){
+        // margin left = - ([width of element] + [total vertical padding of element])
+        $(this).css('margin-left','-180px');
+        // updates timer
+        timer = (timer*multiplier + time);
+        $(this).animate({ marginLeft: '0' }, timer);
+        $(this).animate({ marginLeft: '15px' }, timer);
+        $(this).animate({ marginLeft: '0' }, timer);
+      });
 
-  	  // creates the hover-jiggle effect for all link elements 		
-  	  $(link_elements).each(function(i){
-	  	  $(this).hover(
-		      function(){
-			      $(this).animate({ paddingLeft: pad_out }, 150);
-		      },		
-		      function(){
-		      	$(this).animate({ paddingLeft: pad_in }, 150);
-		    });
-	    });
+      // creates the hover-jiggle effect for all link elements     
+      $(link_elements).each(function(i){
+        $(this).hover(
+          function(){
+            $(this).animate({ paddingLeft: pad_out }, 150);
+          },    
+          function(){
+            $(this).animate({ paddingLeft: pad_in }, 150);
+        });
+      });
     });";
   drupal_add_js($link_giggle_js, "inline");  
 }
@@ -427,14 +440,14 @@ function om_maximenu_scroll($menu = NULL) {
       var topYloc = null;
 
       $(window).scroll(function () { 
-	      var scrollTop = $(document).scrollTop();
-	      scrollTop = parseInt(scrollTop);
-	
-	      var offset = topYloc+scrollTop+'px';  
-	      $('#om-maximenu-" . $menu . "').animate({top:offset},{duration:500,queue:false});
+        var scrollTop = $(document).scrollTop();
+        scrollTop = parseInt(scrollTop);
+  
+        var offset = topYloc+scrollTop+'px';  
+        $('#om-maximenu-" . $menu . "').animate({top:offset},{duration:500,queue:false});
       });
 
-	    topYloc = parseInt($('#om-maximenu-" . $menu . "').css('top').substring(0,$('#om-maximenu-" . $menu . "').css('top').indexOf('px')));
+      topYloc = parseInt($('#om-maximenu-" . $menu . "').css('top').substring(0,$('#om-maximenu-" . $menu . "').css('top').indexOf('px')));
     });";
   drupal_add_js($scroll_float_js, "inline");  
 }
@@ -528,9 +541,9 @@ function om_maximenu_active_js($menu = NULL, $animated_bg = 0, $tabbed = NULL) {
       $.each($('#om-menu-" . $menu . " .om-leaf'),function() {
         var leafId = $(this).attr('id');
         var tabbedContentId = leafId.replace('leaf', 'tabbed-content');
-        var active_tabbed = $('.menu a', '.om-maximenu-tabbed-content #' + tabbedContentId).hasClass('active');
+        var active_tabbed = $('ul li a', '.om-maximenu-tabbed-content #' + tabbedContentId).hasClass('active');
 
-        var active = $('.menu a', this).hasClass('active');
+        var active = $('ul li a', this).hasClass('active');
         
         if ((active_tabbed == true) || (active == true)) {
           $('#om-menu-" . $menu . " .om-leaf').removeClass('" . $class . "');
