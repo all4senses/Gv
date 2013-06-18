@@ -129,7 +129,7 @@ function imagestyleflush_form($form, &$form_state, $style = NULL) {
  */
 function imagestyleflush_form_submit($form, &$form_state) {
   if (isset($form_state['values']['style_name'])) {
-    $style = $form_state['values']['style_name'];
+    $style = image_style_load($form_state['values']['style_name']);
     $operations[] = array('image_style_flush', array($style));
   }
   else {
