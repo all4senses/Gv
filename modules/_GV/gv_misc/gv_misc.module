@@ -237,8 +237,10 @@ function gv_misc_testPage() {
   dpm($out);
   */
 
-  $path = 'sites/default/files/styles/block_thumb/public/Vocalocity_Logo.jpeg';
-  $image = theme('image', array('path' => $variables['path']));  
+  $path = '/sites/default/files/styles/block_thumb/public/siptrunkingvshosted%20voip.jpg';
+  dpm(urldecode($path));
+  $image = theme('image', array('path' => $path));  
+  dpm($image);
   
   return $out . '<br>End of Test';
 }
