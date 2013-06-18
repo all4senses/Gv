@@ -3549,6 +3549,14 @@ function gv_misc_testPage_iframe() {
 function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = 'logo_provider_chart_main', $variables) {
   // Assure that the imagecache file is created already, or recreate it.
   if (!file_exists($relative_path)) {
+    
+    // Find out the style name from 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
+    
+    $path_part = explode('/styles/', $relative_path);
+    $path_part = explode('/public/', $path_part[1]);
+    $style_name = $path_part[0];
+    dpm($style_name);
+    
     dpm($variables);
     dpm($relative_path);
     $style = image_style_load($style_name);
