@@ -4694,7 +4694,7 @@ function theme_gv_misc_image(array $variables) {
   $variables['path'] = str_replace('http://getvoip.com/', '', $variables['path']);
   $variables['path']= str_replace('%20', ' ', $variables['path']);
 
-  dpm('relative = ' . $clean_relative_path);
+  dpm('relative = ' . $variables['path']);
   
   gv_misc_createCachedImageIfNotExists($variables['path']);
   if (!$variables['width']) {
