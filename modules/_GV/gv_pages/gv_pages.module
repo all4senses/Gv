@@ -3793,8 +3793,11 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
   //if ($status_changed) 
   {
     // Clear the views cache.
-    drupal_flush_all_caches(); // This would clear a Boost cache as well.
-    drupal_set_message('All caches has been flushed!', 'warning');
+    ///////drupal_flush_all_caches(); // This would clear a Boost cache as well.
+    ///////drupal_set_message('All caches has been flushed!', 'warning');
+    //
+    //
+    //
     // So we clear here only a views caches.
 //    cache_clear_all('*', 'cache_views', TRUE);
 //    cache_clear_all('*', 'cache_views_data', TRUE);
