@@ -1,7 +1,4 @@
-<?php
-dpm($node);
-
-if (!$page): ?>
+<?php if (!$page): ?>
 
     <?php if (in_array('administrator', $user->roles)): ?>
       <div class="tabs-wrapper clearfix"><h3 class="element-invisible">Primary tabs</h3>
