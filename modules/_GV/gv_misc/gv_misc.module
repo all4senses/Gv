@@ -300,7 +300,7 @@ function gv_misc_bulkReplaceTitlesMetatags() {
 
   }
   
-  dpm($nodes);
+  //dpm($nodes);
   
   foreach ($nodes as $nid => $node) {
     $data = serialize($node->metatag);
@@ -1968,8 +1968,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   
   
   if ($found_image) {
-    dpm($main_image);
-    $main_image['src'] = str_replace('%20', ' ', $main_image['src']);
+
+    $main_image['src'] = urldecode($main_image['src']); //str_replace('%20', ' ', $main_image['src']);
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     $main_image['uri'] = $stream_path;
     
@@ -3627,7 +3627,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = str_replace('http://getvoip.com/', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
-          $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = str_replace('%20', ' ', $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
+          $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = urldecode($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']); //str_replace('%20', ' ', $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
                   
           // Assure that the imagecache file is created already, or recreate it.
           gv_misc_createCachedImageIfNotExists($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
@@ -3652,7 +3652,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     $out_size = array();
     
     foreach ($providers_logos_sprite as $nid => $provider) {
-      dpm($provider);
+
       if($input_image['info'] = getimagesize($provider['themed_image_src'])) {
         // Set a height (all providers logos height + 10px between each others).
         if (empty($out_size['h'])) {
@@ -3681,7 +3681,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     
     foreach ($providers_logos_sprite as $nid => $provider) {
       if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) {
-        $input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
+        //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
+        $input_image['info'] = getimagesize(urldecode($provider['themed_image_src']));
         imagecopy($out_sprite['img'], $input_image['img'], 0, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
         
         $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['y'] = $current_y;
