@@ -3549,6 +3549,7 @@ function gv_misc_testPage_iframe() {
 function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = 'logo_provider_chart_main') {
   // Assure that the imagecache file is created already, or recreate it.
   if (!file_exists($relative_path)) {
+    dpm($relative_path);
     $style = image_style_load($style_name);
     //$styled_file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
     //$original_file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
@@ -4694,7 +4695,7 @@ function theme_gv_misc_image(array $variables) {
   $variables['path'] = str_replace('http://getvoip.com/', '', $variables['path']);
   $variables['path']= str_replace('%20', ' ', $variables['path']);
 
-  dpm('relative = ' . $variables['path']);
+  //dpm('relative = ' . $variables['path']);
   
   gv_misc_createCachedImageIfNotExists($variables['path']);
   if (!$variables['width']) {
