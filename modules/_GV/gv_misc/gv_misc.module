@@ -4705,10 +4705,7 @@ function theme_gv_misc_image(array $variables) {
   
   // Make a path relative.
   $variables['path'] = str_replace('http://getvoip.com/', '', $variables['path']);
-  if (strpos($variables['path'], '%') !== FALSE) {
-    dpm($variables['path']);
-  }
-  $variables['path']= str_replace('%20', ' ', $variables['path']);
+  $variables['path']= urldecode($variables['path']); // remove %20 (' '), %26 (&), etc
 
   //dpm('relative = ' . $variables['path']);
   
