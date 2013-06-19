@@ -2201,7 +2201,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             
             
-      $provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
+      $provider_options_bu_structure = unserialize(PROVIDER_OPTIONS_BU);
+      $provider_options_bu = isset($p_data['provider_options_bu']) ? $p_data['provider_options_bu'] : $p_data['provider_options'];
       
       $form['provider_options_bu'] = array(
         '#type' => 'fieldset',
@@ -2214,10 +2215,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $form['provider_options_bu']['enabled'] = array(
               '#title' => 'Enable Option Tab',
               '#type' => 'checkbox',
-              '#default_value' => isset($p_data['provider_options_bu']['enabled']) ? $p_data['provider_options_bu']['enabled'] : NULL,
+              '#default_value' => isset($provider_options_bu['enabled']) ? $provider_options_bu['enabled'] : NULL,
             );
             
-            foreach ($provider_options_bu as $options_set => $options_data) {
+            foreach ($provider_options_bu_structure as $options_set => $options_data) {
               
                   $form['provider_options_bu'][$options_set] = array(
                     '#type' => 'fieldset',
@@ -2238,11 +2239,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       $form['provider_options_bu'][$options_set][$option_title] = array(
                         '#title' => $option_title,
                         '#type' => $option_type,
-                        '#default_value' => isset($p_data['provider_options_bu'][$options_set][$option_title]) ? $p_data['provider_options_bu'][$options_set][$option_title] : NULL,
+                        '#default_value' => isset($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title] : NULL,
                       );
                       
                       if ($option_type == 'textarea') {
-                        $form['provider_options_bu'][$options_set][$option_title]['#default_value'] = !empty($p_data['provider_options_bu'][$options_set][$option_title]) ? (is_array($p_data['provider_options_bu'][$options_set][$option_title]) ? $p_data['provider_options_bu'][$options_set][$option_title]['value'] : $p_data['provider_options_bu'][$options_set][$option_title]) : NULL;
+                        $form['provider_options_bu'][$options_set][$option_title]['#default_value'] = !empty($provider_options_bu[$options_set][$option_title]) ? (is_array($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title]['value'] : $provider_options_bu[$options_set][$option_title]) : NULL;
                         $form['provider_options_bu'][$options_set][$option_title]['#type'] = 'text_format';
                         $form['provider_options_bu'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
                       }
@@ -2255,7 +2256,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         $form['provider_options_bu'][$options_set][$option_title . ' -text-'] = array(
                           //'#title' => $option_title . ' -text-',
                           '#type' => 'textfield',
-                          '#default_value' => isset($p_data['provider_options_bu'][$options_set][$option_title . ' -text-']) ? $p_data['provider_options_bu'][$options_set][$option_title . ' -text-'] : NULL,
+                          '#default_value' => isset($provider_options_bu[$options_set][$option_title . ' -text-']) ? $provider_options_bu[$options_set][$option_title . ' -text-'] : NULL,
                             
                           '#states' => array(
                                 'invisible' => array(
@@ -2292,7 +2293,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //        }
 //      }
             
-      //$form['s']['bu']['provider_options_bu'] = $form['provider_options_bu'];
+      $form['s']['bu']['provider_options_bu'] = $form['provider_options_bu'];
             
                   
       $form['field_p_types']['#suffix'] = '<div class="bottom-clear"></div>';
@@ -3899,7 +3900,7 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
    
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
    
   $p_data['info'] = $form_state['values']['data_info'];
   //$p_data['quote'] = $form_state['values']['data_quote'];
