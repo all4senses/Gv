@@ -2268,7 +2268,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
                             '#states' => array(
                                   'invisible' => array(
-                                      ':input[name="' . "provider_options_" . $service_type_index . "[$options_set][$option_title]" . '"]' => array('checked' => FALSE),
+                                      //':input[name="' . "provider_options_" . $service_type_index . "[$options_set][$option_title]" . '"]' => array('checked' => FALSE),
+                                      ':input[name="' . "s[$service_type_index][provider_options_$service_type_index][$options_set][$option_title]" . '"]' => array('checked' => FALSE),
 
                                 ),
                             ),
