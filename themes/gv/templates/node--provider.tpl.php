@@ -205,7 +205,8 @@
                 
                 <?php 
                   
-                  if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
+                  if (0) {
+                  //if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
                     
                   
                     echo '<div id="tabs-2">';
