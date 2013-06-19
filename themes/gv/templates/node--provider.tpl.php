@@ -177,7 +177,7 @@
                   
                   <?php 
                   
-                  if (!empty($node->p_data['provider_options']) && (!isset($node->p_data['provider_options']['enabled']) || !empty($node->p_data['provider_options']['enabled']))) {
+                  if (!empty($node->p_data['provider_options_bu']) && (!isset($node->p_data['provider_options_bu']['enabled']) || !empty($node->p_data['provider_options_bu']['enabled']))) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
                   
@@ -203,18 +203,18 @@
                 
                 <?php 
                   
-                  if (!empty($node->p_data['provider_options']) && (!isset($node->p_data['provider_options']['enabled']) || !empty($node->p_data['provider_options']['enabled']))) {
+                  if (!empty($node->p_data['provider_options_bu']) && (!isset($node->p_data['provider_options_bu']['enabled']) || !empty($node->p_data['provider_options_bu']['enabled']))) {
                     
                   
                     echo '<div id="tabs-2">';
 
-                      $provider_options = '';
+                      $provider_options_bu = '';
 
-                      unset($node->p_data['provider_options']['enabled']);
+                      unset($node->p_data['provider_options_bu']['enabled']);
 
-                      foreach ($node->p_data['provider_options'] as $options_set => $options_data) {
+                      foreach ($node->p_data['provider_options_bu'] as $options_set => $options_data) {
 
-                        $provider_options .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+                        $provider_options_bu .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
 
                         $odd = TRUE;
 
@@ -242,10 +242,10 @@
                           if (is_array($option_value)) {
                             $option_value = $option_value['value'];
                           }
-                          $provider_options .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
+                          $provider_options_bu .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
                         }
                       }
-                      echo '<table class="specs"><tbody>' . $provider_options . '</tbody></table>';
+                      echo '<table class="specs"><tbody>' . $provider_options_bu . '</tbody></table>';
 
                     echo '</div>';
                   }

@@ -721,9 +721,9 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       
       
-      $provider_options = unserialize(PROVIDER_OPTIONS);
+      $provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
       
-      foreach ($provider_options as $options_set => $options_data) {
+      foreach ($provider_options_bu as $options_set => $options_data) {
         
         $out .= '<tr class="reviews"><td class="title">User Reviews</td>';
           foreach ($providers as $nid => $provider) {
@@ -755,14 +755,14 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           
           foreach ($providers as $nid => $provider) {
             
-              $option_value = @$provider['p_data']['provider_options'][$options_set][$option_title];
+              $option_value = @$provider['p_data']['provider_options_bu'][$options_set][$option_title];
               
               $is_checkbox = is_int($option_value);
               $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
               
 
-              if ($option_value == 'Yes' && !empty($provider['p_data']['provider_options'][$options_set][$option_title . ' -text-'])) {
-                $additional_text = ' <span>' . $provider['p_data']['provider_options'][$options_set][$option_title . ' -text-'] . '</span>';
+              if ($option_value == 'Yes' && !empty($provider['p_data']['provider_options_bu'][$options_set][$option_title . ' -text-'])) {
+                $additional_text = ' <span>' . $provider['p_data']['provider_options_bu'][$options_set][$option_title . ' -text-'] . '</span>';
               }
               else {
                 $additional_text = '';

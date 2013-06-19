@@ -67,7 +67,7 @@ $sprite_names = serialize(array(
 define('SPRITE_NAMES', $sprite_names);
 
 
-$provider_options = array(
+$provider_options_bu = array(
           'Provider Info' => array(
               'Year Founded' => 'textfield',
               'Headquarters Location' => 'textfield',
@@ -169,4 +169,71 @@ $provider_options = array(
           
       );
       
-define('PROVIDER_OPTIONS', serialize($provider_options));
+define('PROVIDER_OPTIONS_BU', serialize($provider_options_bu));
+
+
+
+
+
+$provider_options_re = array(
+    
+          'Provider Info' => array(
+              'Year Founded' => 'textfield',
+              'Headquarters Location' => 'textfield',
+              'Service Location' => 'textfield',
+              'Service Type Availability' => 'textfield',
+              'Popular Service Plan' => 'textfield',
+              'Money Back Guarantee' => 'textfield',
+          ),
+    
+          'Services & Pricing' => array(
+              'Monthly Cost of Cheapest Service' => 'textfield',
+              'Requires Contract' => 'checkbox',
+              'Month to Month Option' => 'checkbox',
+              'Bundle Package' => 'checkbox',
+              'Activation Fee' => 'checkbox',
+              'Setup Fee' => 'checkbox',
+              'Number Porting Fee' => 'checkbox',
+              'Free ATA' => 'checkbox',
+              'Unlimited Calling US/Canada'  => 'checkbox',
+              'International Calling' - 'checkbox',
+              'Mobile App' => 'checkbox',
+          ),
+    
+          'Available Features (some features cost extra, as per provider rates)' => array(
+              'Advanced Call Forwarding' => 'checkbox',
+              'Call Blocking' => 'checkbox',
+              'Call Forwarding' => 'checkbox',
+              'Call History/Logs' => 'checkbox',
+              'Call Hunt' => 'checkbox',
+              'Call Record' => 'checkbox',
+              'Call Waiting' => 'checkbox',
+              'Caller ID' => 'checkbox',
+              'Directory Assistance (411)' => 'checkbox',
+              'Do Not Disturb' => 'checkbox',
+              'E911' => 'checkbox',
+              'Enhanced Voicemail' => 'checkbox',
+              'Failsafe/Failover' => 'checkbox',
+              'Selective Call Acceptance' => 'checkbox',
+              'Selective Call Rejection' => 'checkbox',
+              'Softphone' => 'checkbox',
+              'Telemarketer Block' => 'checkbox',
+              'Three-way Calling' => 'checkbox',
+              'Virtual Phone Number' => 'checkbox',
+          ),
+          
+          'Support' => array(
+              'Hours' => 'textfield',
+              'Telephone Support' => 'checkbox',
+              'Email Support' => 'checkbox',
+              'Instant Chat' => 'checkbox',
+              '24/7 Call-in Support' => 'checkbox',
+              'FAQs Section' => 'checkbox',
+              'Video Tutorials' => 'checkbox',
+              'E-Guides' => 'checkbox',
+              'Online Ticket Submissions' => 'checkbox',
+        ),
+          
+      );
+      
+define('PROVIDER_OPTIONS_RE', serialize($provider_options_re));
