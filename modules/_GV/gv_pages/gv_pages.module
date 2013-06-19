@@ -2204,7 +2204,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $provider_options_bu_structure = unserialize(PROVIDER_OPTIONS_BU);
       $provider_options_bu = isset($p_data['provider_options_bu']) ? $p_data['provider_options_bu'] : $p_data['provider_options'];
       
-      $form['provider_options_bu'] = array(
+      $form['s']['bu']['provider_options_bu'] = array(
         '#type' => 'fieldset',
         '#title' => 'Provider options',
         '#collapsible' => TRUE,
@@ -2212,7 +2212,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#tree' => TRUE,
         '#weight' => 11,
       );
-            $form['provider_options_bu']['enabled'] = array(
+            $form['s']['bu']['provider_options_bu']['enabled'] = array(
               '#title' => 'Enable Option Tab',
               '#type' => 'checkbox',
               '#default_value' => isset($provider_options_bu['enabled']) ? $provider_options_bu['enabled'] : NULL,
@@ -2220,14 +2220,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             foreach ($provider_options_bu_structure as $options_set => $options_data) {
               
-                  $form['provider_options_bu'][$options_set] = array(
+                  $form['s']['bu']['provider_options_bu'][$options_set] = array(
                     '#type' => 'fieldset',
                     '#title' => $options_set,
                     '#collapsible' => TRUE,
                     '#collapsed' => TRUE,
                     '#states' => array(
                                 'invisible' => array(
-                                    ':input[name="' . "provider_options_bu[enabled]" . '"]' => array('checked' => FALSE),
+                                    //':input[name="' . "provider_options_bu[enabled]" . '"]' => array('checked' => FALSE),
                                     ':input[name="' . "s[bu][provider_options_bu][enabled]" . '"]' => array('checked' => FALSE),
                               ),
                           ),
@@ -2236,24 +2236,24 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   
                   foreach ($options_data as $option_title => $option_type) {
                     
-                      $form['provider_options_bu'][$options_set][$option_title] = array(
+                      $form['s']['bu']['provider_options_bu'][$options_set][$option_title] = array(
                         '#title' => $option_title,
                         '#type' => $option_type,
                         '#default_value' => isset($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title] : NULL,
                       );
                       
                       if ($option_type == 'textarea') {
-                        $form['provider_options_bu'][$options_set][$option_title]['#default_value'] = !empty($provider_options_bu[$options_set][$option_title]) ? (is_array($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title]['value'] : $provider_options_bu[$options_set][$option_title]) : NULL;
-                        $form['provider_options_bu'][$options_set][$option_title]['#type'] = 'text_format';
-                        $form['provider_options_bu'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
+                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#default_value'] = !empty($provider_options_bu[$options_set][$option_title]) ? (is_array($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title]['value'] : $provider_options_bu[$options_set][$option_title]) : NULL;
+                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#type'] = 'text_format';
+                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
                       }
                       
                       if ($option_type == 'checkbox') {
                         
-                        $form['provider_options_bu'][$options_set][$option_title]['#prefix'] = '<div style="overflow: hidden;"><div style="float: left;">';
-                        $form['provider_options_bu'][$options_set][$option_title]['#suffix'] = '</div>';
+                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#prefix'] = '<div style="overflow: hidden;"><div style="float: left;">';
+                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#suffix'] = '</div>';
                         
-                        $form['provider_options_bu'][$options_set][$option_title . ' -text-'] = array(
+                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title . ' -text-'] = array(
                           //'#title' => $option_title . ' -text-',
                           '#type' => 'textfield',
                           '#default_value' => isset($provider_options_bu[$options_set][$option_title . ' -text-']) ? $provider_options_bu[$options_set][$option_title . ' -text-'] : NULL,
@@ -2267,8 +2267,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                           '#attributes' => array('class' => array('-text-'), 'style' => 'background: #eee; border: none; padding: 3px;'),
                           '#prefix' => '<div style="float: left; margin-left: 20px;">',
                           '#suffix' => '</div></div>',
-                            
-                            
                             
                         );
                       }
@@ -2288,12 +2286,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //     
 //      foreach ($votes as $vote) {
 //        if ($vote['tag'] == 'overall') {
-//          $form['provider_options_bu']['Provider Info']['Overall Rating']['#default_value'] = number_format($vote['value'] * 0.05, 1);
+//          $form['s']['bu']['provider_options_bu']['Provider Info']['Overall Rating']['#default_value'] = number_format($vote['value'] * 0.05, 1);
 //          break;
 //        }
 //      }
             
-      $form['s']['bu']['provider_options_bu'] = $form['provider_options_bu'];
+            
+            
             
                   
       $form['field_p_types']['#suffix'] = '<div class="bottom-clear"></div>';
