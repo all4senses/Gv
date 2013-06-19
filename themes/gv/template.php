@@ -541,6 +541,8 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
+  $current_title = drupal_get_title();
+  dpm('$current_title = ' . $current_title);
   dpm($head_elements);
   
 }
