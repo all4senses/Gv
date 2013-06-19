@@ -545,6 +545,12 @@ function gv_html_head_alter(&$head_elements) {
   dpm('$current_title = ' . $current_title);
   dpm($head_elements);
   
+  if (!empty($head_elements['name']['#attributes']['content'])) {
+    // Will be used in html.tpl.php
+    global $altered_head_title;
+    $altered_head_title = $head_elements['name']['#attributes']['content'];
+  }
+      
 }
 
 
