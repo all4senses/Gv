@@ -208,21 +208,16 @@
                   //if (0) {
                   if ($user->uid == 1 && (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled'])))) {
                     
-                    dpm($node->p_data['provider_options_bu']);
-                  dpm($provider_options_bu);
-                  
-                  return;
-                  
                   
                     echo '<div id="tabs-2">';
 
-                      $provider_options_bu = '';
+                      $provider_options_bu_out = '';
 
                       unset($provider_options_bu['enabled']);
 
                       foreach ($provider_options_bu as $options_set => $options_data) {
 
-                        $provider_options_bu .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+                        $provider_options_bu_out .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
 
                         $odd = TRUE;
 
@@ -250,10 +245,10 @@
                           if (is_array($option_value)) {
                             $option_value = $option_value['value'];
                           }
-                          $provider_options_bu .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
+                          $provider_options_bu_out .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
                         }
                       }
-                      echo '<table class="specs"><tbody>' . $provider_options_bu . '</tbody></table>';
+                      echo '<table class="specs"><tbody>' . $provider_options_bu_out . '</tbody></table>';
 
                     echo '</div>';
                   }
