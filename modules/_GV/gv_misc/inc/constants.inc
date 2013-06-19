@@ -196,7 +196,7 @@ $provider_options_re = array(
               'Number Porting Fee' => 'checkbox',
               'Free ATA' => 'checkbox',
               'Unlimited Calling US/Canada'  => 'checkbox',
-              'International Calling' - 'checkbox',
+              'International Calling' => 'checkbox',
               'Mobile App' => 'checkbox',
           ),
     
