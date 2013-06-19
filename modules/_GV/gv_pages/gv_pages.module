@@ -2214,7 +2214,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
         $form['s'][$service_type_index]['provider_options_' . $service_type_index] = array(
           '#type' => 'fieldset',
-          '#title' => 'Provider options',
+          '#title' => 'Provider options (' . $service_type_index . ')',
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,
           '#tree' => TRUE,
