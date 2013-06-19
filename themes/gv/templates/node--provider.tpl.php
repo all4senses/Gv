@@ -177,7 +177,9 @@
                   
                   <?php 
                   
-                  if (!empty($node->p_data['provider_options_bu']) && (!isset($node->p_data['provider_options_bu']['enabled']) || !empty($node->p_data['provider_options_bu']['enabled']))) {
+                  $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
+                  
+                  if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
                   
@@ -203,16 +205,16 @@
                 
                 <?php 
                   
-                  if (!empty($node->p_data['provider_options_bu']) && (!isset($node->p_data['provider_options_bu']['enabled']) || !empty($node->p_data['provider_options_bu']['enabled']))) {
+                  if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
                     
                   
                     echo '<div id="tabs-2">';
 
                       $provider_options_bu = '';
 
-                      unset($node->p_data['provider_options_bu']['enabled']);
+                      unset($provider_options_bu['enabled']);
 
-                      foreach ($node->p_data['provider_options_bu'] as $options_set => $options_data) {
+                      foreach ($provider_options_bu as $options_set => $options_data) {
 
                         $provider_options_bu .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
 

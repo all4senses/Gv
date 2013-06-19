@@ -755,14 +755,16 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           
           foreach ($providers as $nid => $provider) {
             
-              $option_value = @$provider['p_data']['provider_options_bu'][$options_set][$option_title];
+              $provider_options_bu = isset($provider['p_data']['provider_options_bu']) ? $provider['p_data']['provider_options_bu'] : (isset($provider['p_data']['provider_options']) ? $provider['p_data']['provider_options'] : NULL);
+            
+              $option_value = $provider_options_bu[$options_set][$option_title];
               
               $is_checkbox = is_int($option_value);
               $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
               
 
-              if ($option_value == 'Yes' && !empty($provider['p_data']['provider_options_bu'][$options_set][$option_title . ' -text-'])) {
-                $additional_text = ' <span>' . $provider['p_data']['provider_options_bu'][$options_set][$option_title . ' -text-'] . '</span>';
+              if ($option_value == 'Yes' && !empty($provider_options_bu[$options_set][$option_title . ' -text-'])) {
+                $additional_text = ' <span>' . $provider_options_bu[$options_set][$option_title . ' -text-'] . '</span>';
               }
               else {
                 $additional_text = '';
