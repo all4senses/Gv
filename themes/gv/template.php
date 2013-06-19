@@ -541,10 +541,8 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
-  $current_title = drupal_get_title();
-  dpm('$current_title = ' . $current_title);
-  dpm($head_elements);
-  
+  // Quick fix for Metatag, where the local node metatag title for some reason doesnt apply to the page metatag title.
+  // Hope it will be solved with the newer version of the Metatag module.
   if (!empty($head_elements['name']['#attributes']['content'])) {
     // Will be used in html.tpl.php
     global $altered_head_title;
