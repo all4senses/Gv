@@ -182,6 +182,8 @@
                   dpm($node->p_data['provider_options_bu']);
                   dpm($provider_options_bu);
                   
+                  return;
+                  
                   if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
