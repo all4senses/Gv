@@ -179,11 +179,6 @@
                   
                   $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
                   
-                  dpm($node->p_data['provider_options_bu']);
-                  dpm($provider_options_bu);
-                  
-                  return;
-                  
                   if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
                     echo '<li><a href="#tabs-2">Options</a></li>';
                   }
@@ -213,6 +208,11 @@
                   //if (0) {
                   if ($user->uid == 1 && (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled'])))) {
                     
+                    dpm($node->p_data['provider_options_bu']);
+                  dpm($provider_options_bu);
+                  
+                  return;
+                  
                   
                     echo '<div id="tabs-2">';
 
