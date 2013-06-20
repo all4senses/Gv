@@ -180,11 +180,20 @@
                   $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
                   
                   if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
-                    echo '<li><a href="#tabs-2">Options</a></li>';
+                    echo '<li><a href="#tabs-2">Business Options</a></li>';
+                  }
+                  
+                  $provider_options_re = isset($node->p_data['provider_options_re']) ? $node->p_data['provider_options_re'] : NULL;
+                  
+                  if (!empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
+                    echo '<li><a href="#tabs-3">Residential Options</a></li>';
                   }
                   
                   ?>
                 </ul>
+                
+                
+                
                 
                 <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
                   <div id="tabs-0">
@@ -250,6 +259,56 @@
 
                     echo '</div>';
                   }
+                  
+                  
+                  
+                  
+                  if ($user->uid && !empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
+                  
+                    echo '<div id="tabs-3">';
+
+                      $provider_options_re_out = '';
+
+                      unset($provider_options_re['enabled']);
+
+                      foreach ($provider_options_re as $options_set => $options_data) {
+
+                        $provider_options_re_out .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+
+                        $odd = TRUE;
+
+                        foreach ($options_data as $option_title => $option_value) {
+                          if (strpos($option_title, '-text-')) {
+                            continue;
+                          }
+                          $option_title = str_replace('Num ', '# ', $option_title);
+                          $option_value = (is_int($option_value) ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
+                          if ($odd) {
+                            $odd = FALSE;
+                            $row_class = 'even';
+                          }
+                          else {
+                            $odd = TRUE;
+                            $row_class = 'odd';
+                          }
+
+                          if ($option_value == 'Yes' && !empty($options_data[$option_title . ' -text-'])) {
+                            $additional_text = ' <span>' . $options_data[$option_title . ' -text-'] . '</span>';
+                          }
+                          else {
+                            $additional_text = '';
+                          }
+                          if (is_array($option_value)) {
+                            $option_value = $option_value['value'];
+                          }
+                          $provider_options_re_out .= '<tr class="' . $row_class . '"><td class="title">' . $option_title . '</td><td class="value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div class="check">' . $option_value . '</div><span>' . $additional_text . '</span></td></tr>';
+                        }
+                      }
+                      echo '<table class="specs"><tbody>' . $provider_options_re_out . '</tbody></table>';
+
+                    echo '</div>';
+                  }
+                  
                   ?>
                
                 <div class="bottom-clear"></div>
