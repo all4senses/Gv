@@ -4077,7 +4077,7 @@ function gv_misc_SendRequestToRingCentral($submission) {
 //    return NULL;
 //  }
     
-  
+  /*
   $map_phonesNeeded = array(
     '1 - 4' => '2-19',
     '5 - 10' => '2-19',
@@ -4085,6 +4085,15 @@ function gv_misc_SendRequestToRingCentral($submission) {
     '21 - 50' => '20-49',
     'More than 50' => '50-99',
   );
+  */
+  $map_phonesNeeded = array(
+    '1 - 4' => '2-4',
+    '5 - 10' => '5-9',
+    '11 - 20' => '11-20',
+    '21 - 50' => '21-49',
+    'More than 50' => '50-99',
+  );
+  
   
   $submission['Phones needed'] = $map_phonesNeeded[$submission['Phones needed']];
   
