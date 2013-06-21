@@ -299,17 +299,18 @@
       var value = jqObject.val();
       // If a comma was entered and there is none or more then one comma,
       // then enter the new term.
-      if (event.which == 188 && (value.split('"').length - 1) != 1) {
-        value = value.substr(0, value.length);
-        if (self.items[value] === undefined && value != '') {
-          var ui_item = {
-            label: value,
-            value: value
-          };
-          self.addValue(ui_item);
-        }
-        clear = true;
-      }
+      // a4s fix - allow to enter commas within one term
+//      if (event.which == 188 && (value.split('"').length - 1) != 1) {
+//        value = value.substr(0, value.length);
+//        if (self.items[value] === undefined && value != '') {
+//          var ui_item = {
+//            label: value,
+//            value: value
+//          };
+//          self.addValue(ui_item);
+//        }
+//        clear = true;
+//      }
 
       // If the Backspace key was hit and the input is empty
       if (event.which == 8 && value == '') {
