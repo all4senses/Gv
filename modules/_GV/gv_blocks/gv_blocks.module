@@ -541,14 +541,11 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_reviewsCounter() {
   
-  $allReviewsAmount = variable_get('gv_allReviewsAmount');
-  $chars = str_split($allReviewsAmount);
+  $chars = str_split(variable_get('gv_allReviewsAmount'));
   $counter = count($chars) == 3 ? '<span>0</span>' : '';
   foreach ($chars as $char) {
     $counter .= '<span>' . $char . '</span>';
   }
-  dpm(count($chars));
-  dpm($counter);
   return '<div class="r-counter">' . $counter . '</div><div class="title">Real user reviews</div>';
 }
 
