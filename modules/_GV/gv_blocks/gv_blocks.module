@@ -540,15 +540,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  * Returns block with the current reviews counter.
  */
 function gv_blocks_reviewsCounter() {
-  $counter = '';
+  
   $allReviewsAmount = variable_get('gv_allReviewsAmount');
   $chars = str_split($allReviewsAmount);
+  $counter = count($chars) == 3 ? '<span>0</span>' : '';
   foreach ($chars as $char) {
     $counter .= '<span>' . $char . '</span>';
   }
-  dpm(count($allReviewsAmount));
+  dpm(count($chars));
   dpm($counter);
-  return '<div class="r-counter">' . $allReviewsAmount . '</div><div class="title">Real user reviews</div>';
+  return '<div class="r-counter">' . $counter . '</div><div class="title">Real user reviews</div>';
 }
 
 
