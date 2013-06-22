@@ -241,6 +241,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['reviews_counter'] = array(
+    'info' => 'Reviews counter',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
     
   return $blocks;
 }
@@ -487,6 +492,10 @@ function gv_blocks_block_view($delta = '') {
       break;
     
   
+    case 'reviews_counter':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_reviewsCounter();
+      break;
     
   }
 
@@ -526,6 +535,14 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
   
 }
 
+
+/**
+ * Returns block with the current reviews counter.
+ */
+function gv_blocks_reviewsCounter() {
+  $allReviewsAmount = variable_get('gv_allReviewsAmount');
+  return '<div class="r-counter">' . $allReviewsAmount . '</div><div class="title">Real user reviews</div>';
+}
 
 
 /**

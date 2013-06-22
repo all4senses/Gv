@@ -623,17 +623,24 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
   
-  $dir = 'sites/default/files/jsmin-gv';
-  $objects = scandir($dir);
-  foreach ($objects as $object) {
-    if ($object != "." && $object != "..") {
-      unlink($dir . "/" . $object);
-    }
-  }
-  variable_del('gv_minified_js');
+//  $dir = 'sites/default/files/jsmin-gv';
+//  $objects = scandir($dir);
+//  foreach ($objects as $object) {
+//    if ($object != "." && $object != "..") {
+//      unlink($dir . "/" . $object);
+//    }
+//  }
+//  variable_del('gv_minified_js');
   
   
-  // Recalculate the reviews amount.
+  gv_misc_recalculateReviewsAmount();
+}
+
+
+/**
+ * Recalculate the reviews amount.
+ */
+function gv_misc_recalculateReviewsAmount() {
   $query = db_select('votingapi_vote', 'v');
   $query->condition('v.value_type', 'percent')
         ->condition('v.tag', 'overall');
