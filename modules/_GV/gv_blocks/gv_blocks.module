@@ -541,8 +541,9 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_reviewsCounter() {
   $counter = '';
-  $allReviewsAmount = variable_get('gv_allReviewsAmount') . '';
-  foreach ($allReviewsAmount as $char) {
+  $allReviewsAmount = variable_get('gv_allReviewsAmount');
+  $chars = str_split($allReviewsAmount);
+  foreach ($chars as $char) {
     $counter .= '<span>' . $char . '</span>';
   }
   dpm(count($allReviewsAmount));
