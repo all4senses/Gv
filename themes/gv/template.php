@@ -912,17 +912,9 @@ function gv_preprocess_views_view_rss(&$vars) {
     }
   }
   
-  
   $vars['namespaces'] = '';
   foreach ($namespaces as $key => $value) {
     $vars['namespaces'] .= ' ' . $key . '="' . $value . '"';
-  }
-  
-  global $user;
-  if ($user->uid == 1) {
-    dpr($namespaces);
-    dpr($vars['namespaces']);
-    exit;
   }
   
 }
