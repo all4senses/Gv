@@ -235,6 +235,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['compare_providers_top_re'] = array(
+    'info' => 'Compare Top Re providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   $blocks['compare_providers_top_pbx'] = array(
     'info' => 'Compare Top PBX providers',
@@ -486,6 +490,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_compareTopProviders('business');
       break;
     
+    case 'compare_providers_top_re':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('residential');
+      break;
+    
     case 'compare_providers_top_pbx':
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareTopProviders('pbx');
@@ -560,6 +569,10 @@ function gv_blocks_compareTopProviders($service_type) {
       $rating_table = 'field_revision_field_p_erating';
       $rating_field = 'field_p_erating_value';
       break;
+    case 'residential':
+      $rating_table = 'field_revision_field_p_erating_residential';
+      $rating_field = 'field_p_erating_residential_value';
+      break;
     case 'pbx':
       $rating_table = 'field_revision_field_p_erating_pbx';
       $rating_field = 'field_p_erating_pbx_value';
@@ -578,7 +591,7 @@ function gv_blocks_compareTopProviders($service_type) {
   //dpm($p_names);
   $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
-    return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type]);
+    return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type);
   }
   
 }
@@ -587,7 +600,7 @@ function gv_blocks_compareTopProviders($service_type) {
 /**
  * Returns block with comparing providers table.
  */
-function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL) {
+function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business') {
   
   if (empty($p_names)) {
   
@@ -598,6 +611,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
     $p_names = explode(';', $_GET['p']);
   }
   
+  // Get providers with data, by names
   $query = db_select('field_data_field_p_name', 'pn');
   $query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
   $query->leftJoin('field_data_field_p_erating', 'pr', "pr.entity_id = pn.entity_id");
@@ -629,6 +643,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
   $v_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
   
+  // Stick table header to the page top.
   drupal_add_js('misc/tableheader.js');
   
   $out = '<table class="specs sticky-enabled p' . ($cols_num - 1) . '">';
@@ -741,12 +756,20 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
      
       
+      switch ($service_type) {
+        case 'business':
+          $provider_options_structure = unserialize(PROVIDER_OPTIONS_BU);
+          $provider_options_index = 'provider_options_bu';
+          break;
+        
+        case 'residential':
+          $provider_options_structure = unserialize(PROVIDER_OPTIONS_RE);
+          $provider_options_index = 'provider_options_re';
+          break;
+      }
+      //$provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
       
-      
-      
-      $provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
-      
-      foreach ($provider_options_bu as $options_set => $options_data) {
+      foreach ($provider_options_structure as $options_set => $options_data) {
         
         $out .= '<tr class="reviews"><td class="title">User Reviews</td>';
           foreach ($providers as $nid => $provider) {
@@ -778,16 +801,21 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           
           foreach ($providers as $nid => $provider) {
             
-              $provider_options_bu = isset($provider['p_data']['provider_options_bu']) ? $provider['p_data']['provider_options_bu'] : (isset($provider['p_data']['provider_options']) ? $provider['p_data']['provider_options'] : NULL);
-            
-              $option_value = $provider_options_bu[$options_set][$option_title];
+              if ($provider_options_index == 'provider_options_bu') {
+                $provider_options = isset($provider['p_data'][$provider_options_index]) ? $provider['p_data'][$provider_options_index] : (isset($provider['p_data']['provider_options']) ? $provider['p_data']['provider_options'] : NULL);
+              }
+              else {
+                $provider_options = isset($provider['p_data'][$provider_options_index]) ? $provider['p_data'][$provider_options_index] : NULL;
+              }
+              
+              $option_value = $provider_options[$options_set][$option_title];
               
               $is_checkbox = is_int($option_value);
               $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
               
 
-              if ($option_value == 'Yes' && !empty($provider_options_bu[$options_set][$option_title . ' -text-'])) {
-                $additional_text = ' <span>' . $provider_options_bu[$options_set][$option_title . ' -text-'] . '</span>';
+              if ($option_value == 'Yes' && !empty($provider_options[$options_set][$option_title . ' -text-'])) {
+                $additional_text = ' <span>' . $provider_options[$options_set][$option_title . ' -text-'] . '</span>';
               }
               else {
                 $additional_text = '';
