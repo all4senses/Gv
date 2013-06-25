@@ -902,6 +902,15 @@ function gv_preprocess_views_view_rss(&$vars) {
     dpr($vars['namespaces']);
     exit;
   }
+  
+  // Clear doubled xmlns
+  foreach ($namespaces as $key => $value) {
+    if (strpos($key, 'xmlns:xmlns') !== FALSE) {
+      unset($namespaces[$key]);
+      $namespaces[str_replace('xmlns:xmlns', 'xmlns', $key)] = $value;
+    }
+  }
+  
   $disabled_namespaces = array('content', 'dc', 'foaf', 'og', 'rdfs', 'sioc', 'sioct', 'skos', 'xsd', 'xmlns:addthis');
   foreach ($disabled_namespaces as $disabled_namespace) {
     if (isset($namespaces[$disabled_namespace])) {
