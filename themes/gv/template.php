@@ -896,12 +896,6 @@ function gv_username($object) {
 */
 function gv_preprocess_views_view_rss(&$vars) {
   $namespaces = $vars['view']->style_plugin->namespaces;
-  global $user;
-  if ($user->uid == 1) {
-    dpr($namespaces);
-    dpr($vars['namespaces']);
-    exit;
-  }
   
   // Clear doubled xmlns
   foreach ($namespaces as $key => $value) {
@@ -917,10 +911,20 @@ function gv_preprocess_views_view_rss(&$vars) {
       unset($namespaces[$disabled_namespace]);
     }
   }
+  
+  
   $vars['namespaces'] = '';
   foreach ($namespaces as $key => $value) {
     $vars['namespaces'] .= ' ' . $key . '="' . $value . '"';
   }
+  
+  global $user;
+  if ($user->uid == 1) {
+    dpr($namespaces);
+    dpr($vars['namespaces']);
+    exit;
+  }
+  
 }
 
 
