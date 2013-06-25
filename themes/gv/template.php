@@ -896,6 +896,12 @@ function gv_username($object) {
 */
 function gv_preprocess_views_view_rss(&$vars) {
   $namespaces = $vars['view']->style_plugin->namespaces;
+  global $user;
+  if ($user->uid == 1) {
+    dpr($namespaces);
+    dpr($vars['namespaces']);
+    exit;
+  }
   $disabled_namespaces = array('content', 'dc', 'foaf', 'og', 'rdfs', 'sioc', 'sioct', 'skos', 'xsd', 'xmlns:addthis');
   foreach ($disabled_namespaces as $disabled_namespace) {
     if (isset($namespaces[$disabled_namespace])) {
