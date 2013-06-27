@@ -4678,12 +4678,14 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
   // Prepare for providers logos sprites regeneration.
   // They will be regenerated (if needed) in hook_node_update / hook_node_insert.
 
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
   
   $last_erating_fields_different = NULL;
 
   $erating_fields_before = unserialize($form_state['values']['erating_fields_original']);
 
+  //dpm($erating_fields_before);
+  
   // Find out if some of listing fields have been changed.
   foreach($erating_fields_before as $erating_field_title => $erating_field_before) {
     $erating_fields_submitted[$erating_field_title] = $form_state['values'][$erating_field_title]['und'][0]['value'];
@@ -4704,7 +4706,7 @@ function gv_pages_submitForm_provider(&$form, &$form_state) {
   //dpm($form['field_p_data']['und'][0]['value']);
   //dpm($p_data);
   $p_data['last_erating_fields_different'] = $last_erating_fields_different;
-  ////form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
+  form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
 }
 
 
