@@ -30,9 +30,9 @@
       }
       
       
-      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
-      dpm($_SERVER['REQUEST_URI']);
-      //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : gv_misc_getOlderUrlForSharing($_SERVER['REQUEST_URI']));
+      //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
+      //dpm($_SERVER['REQUEST_URI']);
+      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : gv_misc_getOlderUrlForSharing($_SERVER['REQUEST_URI']));
       
 
         
