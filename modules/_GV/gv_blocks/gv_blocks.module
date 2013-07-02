@@ -587,9 +587,7 @@ function gv_blocks_compareTopProviders($service_type) {
   $query->orderBy($rating_field);
 
   $p_names = $query->execute()->fetchCol();
-  
-  dpm($p_names);
-  
+    
   $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
     return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
