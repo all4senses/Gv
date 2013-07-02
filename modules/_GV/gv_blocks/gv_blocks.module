@@ -587,7 +587,7 @@ function gv_blocks_compareTopProviders($service_type) {
   $query->orderBy($rating_field);
 
   $p_names = $query->execute()->fetchCol();
-    
+  
   $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
     return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
@@ -645,6 +645,13 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   
   $out = '<table class="specs sticky-enabled p' . ($cols_num - 1) . '">';
   
+  
+  
+  
+  
+  global $user;
+  
+  
       if ($back_button) {
         if ($back_button = '<none>') {
           $back_button = '';
@@ -660,7 +667,12 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                       font-size: 12px;
                       padding: 5px 0 0 0; text-indent: 50px; font-weight: bold;')));
       }
-      $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
+      if ($user->uid == 1) {
+        $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div>Rank</div></th>';
+      }
+      else {
+        $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
+      }
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
@@ -672,6 +684,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             $image_style_name = 'logo_provider_chart_main';
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
             $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
+          }
+         
+          if ($user->uid == 1) {
+            $out .= '<div class="rank">' . $i . '</div>';
           }
           $out .= '</th>';
         }
