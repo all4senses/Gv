@@ -2218,7 +2218,7 @@ function gv_misc_addZoomableImagesJs() {
 /**
  * Helper function to add metatag to a current page.
  */
-function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA', $type = NULL) {
+function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA', $attr_type = NULL) {
   if ($content) {
     if ($name == 'title') {
       //dpm($content);
@@ -2227,7 +2227,7 @@ function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA', $type
     }
     else {
       $meta = array(
-        '#type' => $type ? $type : 'html_tag',
+        '#type' => 'html_tag',
         '#tag' => 'meta',
         '#attributes' => array(
             'name' => $name,
@@ -2248,8 +2248,8 @@ function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA', $type
           'href' => $href,
       )
     );
-    if ($type) {
-      $meta['#type'] = $type;
+    if ($attr_type) {
+      $meta['#attributes']['#type'] = $attr_type;
     }
     if ($weight != 'NA') {
       $meta['#weight'] = $weight;
