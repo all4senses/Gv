@@ -566,42 +566,18 @@ function gv_blocks_reviewsCounter() {
 function gv_blocks_compareTopProviders($service_type) {
   switch ($service_type) {
     case 'business':
-      $rating_table = 'field_revision_field_p_erating';
+      $rating_table = 'field_data_field_p_erating';
       $rating_field = 'field_p_erating_value';
       break;
     case 'residential':
-      $rating_table = 'field_revision_field_p_erating_residential';
+      $rating_table = 'field_data_field_p_erating_residential';
       $rating_field = 'field_p_erating_residential_value';
       break;
     case 'pbx':
-      $rating_table = 'field_revision_field_p_erating_pbx';
+      $rating_table = 'field_data_field_p_erating_pbx';
       $rating_field = 'field_p_erating_pbx_value';
       break;
   }
-  
-  
-  
-  
-  
-  
-  global $user;
-  
-  if ($user->uid == 1) {
-  
-  $query = db_select($rating_table, 'r');
-  $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
-
-  $query->fields('pn', array('field_p_name_value'));
-  $query->fields('r', array($rating_field));
-  $query->condition('r.bundle', 'provider');
-  $query->orderBy($rating_field);
-
-  $p_names = $query->execute()->fetchAllAssoc('field_p_name_value');
-  dpm($p_names);
-
-  
-  }
-  
   
   $query = db_select($rating_table, 'r');
   $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
@@ -616,7 +592,7 @@ function gv_blocks_compareTopProviders($service_type) {
   
   $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
-    return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type);
+    return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
   }
   
 }
@@ -625,7 +601,7 @@ function gv_blocks_compareTopProviders($service_type) {
 /**
  * Returns block with comparing providers table.
  */
-function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business') {
+function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business', $rating_table = 'field_data_field_p_erating', $rating_field = 'field_p_erating_value') {
   
   if (empty($p_names)) {
   
@@ -639,8 +615,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   // Get providers with data, by names
   $query = db_select('field_data_field_p_name', 'pn');
   $query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = pn.entity_id");
-  $query->leftJoin('field_data_field_p_erating', 'pr', "pr.entity_id = pn.entity_id");
-  $query->fields('pr', array('field_p_erating_value'));
+  $query->leftJoin($rating_table, 'pr', "pr.entity_id = pn.entity_id");
+  $query->fields('pr', array($rating_field));
   $query->fields('pd', array('field_p_data_value', 'entity_id'));
   $query->fields('pn', array('field_p_name_value'));
   
@@ -650,11 +626,9 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   }
   $query->condition($db_or);
   
-  $query->orderBy('field_p_erating_value', 'ASC');
+  $query->orderBy($rating_field, 'ASC');
   $results = $query->execute()->fetchAllAssoc('entity_id');
 
-  //dpm($results);
-  
   if (empty($results)) {
     return '<div class="no-results">No providers have been chosen.</div>';
   }
