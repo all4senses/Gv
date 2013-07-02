@@ -265,7 +265,7 @@ function gv_misc_testPage() {
   dpm($out);
   */
 
-  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans');  
+  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');  
   
   return $out . '<br>End of Test';
 }
@@ -2218,7 +2218,7 @@ function gv_misc_addZoomableImagesJs() {
 /**
  * Helper function to add metatag to a current page.
  */
-function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA') {
+function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA', $type = NULL) {
   if ($content) {
     if ($name == 'title') {
       //dpm($content);
@@ -2227,7 +2227,7 @@ function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA') {
     }
     else {
       $meta = array(
-        '#type' => 'html_tag',
+        '#type' => $type ? $type : 'html_tag',
         '#tag' => 'meta',
         '#attributes' => array(
             'name' => $name,
@@ -2248,6 +2248,9 @@ function gv_misc_addMetatag($name, $content, $href = NULL, $weight = 'NA') {
           'href' => $href,
       )
     );
+    if ($type) {
+      $meta['#type'] = $type;
+    }
     if ($weight != 'NA') {
       $meta['#weight'] = $weight;
     }
