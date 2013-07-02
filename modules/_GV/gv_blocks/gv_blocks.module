@@ -668,7 +668,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                       padding: 5px 0 0 0; text-indent: 50px; font-weight: bold;')));
       }
       if ($user->uid == 1) {
-        $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div>Rank</div></th>';
+        $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title">Rank</div></th>';
       }
       else {
         $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
@@ -687,7 +687,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           }
          
           if ($user->uid == 1) {
-            $out .= '<div class="rank">' . $i . '</div>';
+            $out .= '<div class="rank">#' . ($cols_num - $i) . '</div>';
           }
           $out .= '</th>';
         }
