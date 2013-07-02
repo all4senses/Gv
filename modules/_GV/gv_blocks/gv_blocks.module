@@ -578,16 +578,10 @@ function gv_blocks_compareTopProviders($service_type) {
       $rating_field = 'field_p_erating_pbx_value';
       break;
   }
-      
-  $query = db_select($rating_table, 'r');
-  $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
-
-  $query->fields('pn', array('field_p_name_value'));
-  $query->condition('r.bundle', 'provider');
-  $query->orderBy($rating_field);
-
-  $p_names = $query->execute()->fetchCol();
-
+  
+  
+  
+  
   
   
   global $user;
@@ -609,7 +603,15 @@ function gv_blocks_compareTopProviders($service_type) {
   }
   
   
-  //dpm($p_names);
+  $query = db_select($rating_table, 'r');
+  $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
+
+  $query->fields('pn', array('field_p_name_value'));
+  $query->condition('r.bundle', 'provider');
+  $query->orderBy($rating_field);
+
+  $p_names = $query->execute()->fetchCol();
+  
   $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
     return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type);
