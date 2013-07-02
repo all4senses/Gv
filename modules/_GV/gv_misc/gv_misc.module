@@ -265,7 +265,8 @@ function gv_misc_testPage() {
   dpm($out);
   */
 
-  //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');  
+  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');  
+  // Cufon's, via font-face
   drupal_add_css(path_to_theme() . '/css/remote-fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   
   return $out . '<br>End of Test';

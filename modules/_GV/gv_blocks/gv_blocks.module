@@ -588,6 +588,25 @@ function gv_blocks_compareTopProviders($service_type) {
 
   $p_names = $query->execute()->fetchCol();
 
+  
+  
+  
+  
+  $query = db_select($rating_table, 'r');
+  $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
+
+  $query->fields('pn', array('field_p_name_value'));
+  $query->fields('r', array($rating_field));
+  $query->condition('r.bundle', 'provider');
+  $query->orderBy($rating_field);
+
+  $p_names = $query->execute()->fetchAllAssoc();
+  dpm($p_names);
+
+  
+  
+  
+  
   //dpm($p_names);
   $sprite_names = unserialize(SPRITE_NAMES);
   if (!empty($p_names)) {
