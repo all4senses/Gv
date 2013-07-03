@@ -671,11 +671,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         $out .= '<thead><tr class="logos" ><th class="back" style="vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title" style="background: #2c7bbf; color: white; text-align: left; font-size: 12px; font-weight: bold; padding: 3px 0 3px 7px;">Rank</div></th>';
       }
       else {
-        $out .= '<thead><tr class="logos" ><th class="back" style="padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
+        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
       }
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
-          $out .= '<th style="vertical-align: bottom; text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
+          $out .= '<th style="border: none; vertical-align: bottom; text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
           if ($sprite_name) {
             $image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name, array($provider['nid'] => array('name' => $provider['p_name'])));
           }
