@@ -677,15 +677,18 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         foreach ($providers as $nid => $provider) {
           $out .= '<th style="text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
           if ($sprite_name) {
-            $p_image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name, array($provider['nid'] => array('name' => $provider['p_name'])));
-            $out .= gv_misc_getTrackingUrl($p_image, NULL, $provider['nid'],'logo');
+            $image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name, array($provider['nid'] => array('name' => $provider['p_name'])));
           }
           elseif (!empty($provider['p_data']['logo']['i_logo_uri'])) {
             $image_style_name = 'logo_provider_chart_main';
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
-            $out .= gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'logo');
           }
-         
+          
+          if (!empty($image)) {
+            // gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL)
+            $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'],NULL, 'logo');
+          }
+          
           if ($user->uid == 1) {
             $out .= '<div class="rank" style="background: #2c7bbf; color: white; margin-top: 5px;">#' . ($cols_num - $i - 1) . '</div>';
           }
