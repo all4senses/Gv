@@ -5584,7 +5584,7 @@ function gv_misc_getProvidersDataQuick($scope = 'all', $reset = FALSE, $clear_fr
 /**
  * Return sprite image with link for a provider from certain sprite by nid.
  */
-function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick = NULL) {
+function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick = NULL, &$height = FALSE) {
 
   $gv_providers_sprites = variable_get('gv_providers_sprites');
   if (isset($gv_providers_sprites[$sprite_name]['data'][$nid])) {
