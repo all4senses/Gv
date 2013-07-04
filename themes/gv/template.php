@@ -755,6 +755,10 @@ function gv_process_page(&$variables) {
     $module_path_pages = drupal_get_path('module', 'gv_misc');
     drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
   }
+  
+  
+  /* Add Google's fonts */
+  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500italic', 'NA', 'text/css');
 }
 
 
