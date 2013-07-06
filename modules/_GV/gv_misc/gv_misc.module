@@ -274,14 +274,17 @@ function gv_misc_testPage() {
   $content_type_label = 'articles';
   
   $tags = gv_misc_getTopics($content_type, $content_type_label, 20);  
-  //$tags_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags_array, 12));
+  //$tags = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags, 12));
+  
+  //dpm($tags);
+  
+  $themed_tags = '';
+  foreach ($tags as $tag) {
+    $themed_tags .= l($tag->name . '(' . $tag->count . ')', $tag->link['href']);
+  }
   
   
-  dpm($tags);
-  
-  $tags = tagadelic_sort_tags($tags);
-  
-  dpm($tags);
+  $out .= $themed_tags . '<div class="more">' . l('All', '.articles/tags') . '</div>';
   
   return $out . '<br>End of Test';
 }
