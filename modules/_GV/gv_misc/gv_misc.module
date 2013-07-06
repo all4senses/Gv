@@ -273,7 +273,13 @@ function gv_misc_testPage() {
   $content_type = 'article';
   $content_type_label = 'articles';
   
-  $tags = gv_misc_getTopics($content_type, $content_type_label);  
+  $tags = gv_misc_getTopics($content_type, $content_type_label, 20);  
+  //$tags_array = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags_array, 12));
+  
+  
+  dpm($tags);
+  
+  $tags = tagadelic_sort_tags($tags);
   
   dpm($tags);
   
