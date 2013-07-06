@@ -280,11 +280,11 @@ function gv_misc_testPage() {
   
   $themed_tags = '';
   foreach ($tags as $tag) {
-    $themed_tags .= l($tag->name . '(' . $tag->count . ')', $tag->link['href']);
+    $themed_tags .= l($tag->name . ' (' . $tag->count . ')', $tag->link['href']);
   }
   
   
-  $out .= $themed_tags . '<div class="more">' . l('All', 'articles/tags') . '</div>';
+  $out .= $themed_tags . '<div class="more-link">' . l('All', 'articles/tags') . '</div>';
   
   return $out . '<br>End of Test';
 }

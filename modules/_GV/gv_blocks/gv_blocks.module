@@ -148,6 +148,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['articles_tags_blog'] = array(
+    'info' => 'Shows a tag cloud BLOCK for Voip library page',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  
   $blocks['t_pick_providers_ar'] = array(
     'info' => 'Top pick providers for the all providers reviews page',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -397,6 +403,14 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_pages_buildTopicsPage('articles');
       break;
     
+    case 'articles_tags_block':
+      $block['subject'] = 'Shows a tag cloud BLOCK for Voip library page';
+      $block['content'] = gv_block_buildTopicsBlock('articles');
+      break;
+    
+    
+    
+    
     case 't_pick_providers_ar':
       $block['subject'] = 'Top pick providers for the all providers reviews page';
       $block['content'] = gv_pages_getTopPickProvidersBlocksForAllReviewsPage();
@@ -542,6 +556,27 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+
+/**
+ * Returns a block with a cloud of all tags of s specific content type.
+ */
+function gv_block_buildTopicsBlock($content_type_label) {
+  
+  $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
+  $content_type = $content_types[$content_type_label];
+  
+  $tags = gv_misc_getTopics($content_type, $content_type_label, 20);  
+  //$tags = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags, 12));
+  
+  $themed_tags = '';
+  foreach ($tags as $tag) {
+    $themed_tags .= l($tag->name . ' (' . $tag->count . ')', $tag->link['href']);
+  }
+  
+  return $themed_tags . '<div class="more-link">' . l('All', 'articles/tags') . '</div>';
 }
 
 
