@@ -1062,26 +1062,25 @@ function gv_blocks_librarySections() {
     $query->range(0, 3);
     $results = $query->execute()->fetchAllAssoc('entity_id');
     
-    if (empty($results)) {
-      continue;
-    }
     
     //dpm($results);
 
     $articles = NULL;
-    foreach ($results as $nid => $article) {
-      $len = strlen($article->title);
-      if ($len > 26) {
-        $title = drupal_substr($article->title, 0, 26);
-        $last_pos = strrpos($title, ' ');
-        $title = substr_replace($title, '...', $last_pos);
-        $articles .= '<div class="article">' . l($title, 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
-      }
-      else {
-        $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
+    
+    if (empty($results)) {
+      foreach ($results as $nid => $article) {
+        $len = strlen($article->title);
+        if ($len > 26) {
+          $title = drupal_substr($article->title, 0, 26);
+          $last_pos = strrpos($title, ' ');
+          $title = substr_replace($title, '...', $last_pos);
+          $articles .= '<div class="article">' . l($title, 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
+        }
+        else {
+          $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
+        }
       }
     }
-  
     $count++;
     $odd = $odd ? FALSE : TRUE;
     $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '"><img src="' . @$data['image'] . '" /><div class="caption">' . $section . '</div>' . $articles . '<div class="more-link">' . l('See All', $data['see_all_link']) . '</div></div>';
