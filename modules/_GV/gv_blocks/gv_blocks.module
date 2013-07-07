@@ -1034,14 +1034,14 @@ function gv_blocks_librarySections() {
  
   
   $sections = array(
-    'Advantages of' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Cloud' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Connectivity' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Equipment/Hardware' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'How Stuff Works' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Mobility' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Terms to Know/Glossary' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Types of Features' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Advantages of' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Cloud' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Connectivity' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Equipment/Hardware' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'How Stuff Works' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Mobility' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Terms to Know/Glossary' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Types of Features' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
   );
   
   $out = '';
@@ -1071,7 +1071,7 @@ function gv_blocks_librarySections() {
   
     $count++;
     $odd = $odd ? FALSE : TRUE;
-    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '"><img src="' . @$data['image'] . '" />' . $articles . '</div>';
+    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '"><img src="' . @$data['image'] . '" /><div class="caption">' . $section . '</div>' . $articles . '<div class="more-link">' . l('See All', $data['see_all_link']) . '</div></div>';
   }
   
   
