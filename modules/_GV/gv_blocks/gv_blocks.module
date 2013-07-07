@@ -1035,13 +1035,13 @@ function gv_blocks_librarySections() {
   
   $sections = array(
     'Advantages of' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Cloud' => array(),
-    'Connectivity' => array(),
-    'Equipment/Hardware' => array(),
-    'How Stuff Works' => array(),
-    'Mobility' => array(),
-    'Terms to Know/Glossary' => array(),
-    'Types of Features' => array(),
+    'Cloud' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Connectivity' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Equipment/Hardware' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'How Stuff Works' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Mobility' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Terms to Know/Glossary' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Types of Features' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
   );
   
   $out = '';
@@ -1055,6 +1055,7 @@ function gv_blocks_librarySections() {
     $query->leftJoin('node', 'n', 'n.nid = s.entity_id ');
     $query->fields('n', array('title'));
     $query->condition('field_funnel_sections_value', $section);
+    $query->limit(0, 3);
     $results = $query->execute()->fetchAllAssoc('entity_id');
     
     if (empty($results)) {
