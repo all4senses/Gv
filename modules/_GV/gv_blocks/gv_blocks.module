@@ -1067,7 +1067,7 @@ function gv_blocks_librarySections() {
 
     $articles = NULL;
     
-    if (empty($results)) {
+    if (!empty($results)) {
       foreach ($results as $nid => $article) {
         $len = strlen($article->title);
         if ($len > 26) {
