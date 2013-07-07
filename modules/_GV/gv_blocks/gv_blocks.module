@@ -220,6 +220,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  $blocks['library_sections'] = array(
+    'info' => 'Library sections',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['lib_teasers_custom'] = array(
     'info' => 'Library teasers custom pagination',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -481,6 +486,11 @@ function gv_blocks_block_view($delta = '') {
     case 'library_list':
       $block['subject'] = '';
       $block['content'] = gv_blocks_libraryList();
+      break;
+    
+    case 'library_sections':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_librarySections();
       break;
     
     case 'lib_teasers_custom':
@@ -1016,6 +1026,34 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
   return $out;
 }
 
+
+/**
+ * Returns Library articles sections block.
+ */
+function gv_blocks_librarySections() {
+ 
+  $sections = array(
+    'Advantages of',
+    'Cloud',
+    'Connectivity',
+    'Equipment/Hardware',
+    'How Stuff Works',
+    'Mobility',
+    'Terms to Know/Glossary',
+    'Types of Features',
+  );
+  
+  $out = '';
+  $odd = TRUE;
+  $count = 0;
+  foreach ($sections as $section) {
+    $count++;
+    $odd = $odd ? FALSE : TRUE;
+    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '">' . $section . '</div>';
+  }
+  
+  return $out;
+}
 
 
 /**
