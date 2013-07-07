@@ -1061,7 +1061,8 @@ function gv_blocks_librarySections() {
         //->fields('s', array('entity_id'));
         ->fields('s');
   $query->groupBy('field_funnel_sections_value');
-  $results = $query->execute()->fetchAllAssoc('entity_id');
+  //$results = $query->execute()->fetchAllAssoc('entity_id');
+  $results = $query->execute()->fetchAllAssoc('field_funnel_sections_value');
   
   dpm($results);
   
