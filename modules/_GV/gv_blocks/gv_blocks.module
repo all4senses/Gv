@@ -1066,11 +1066,12 @@ function gv_blocks_librarySections() {
       continue;
     }
     
-    dpm($results);
+    //dpm($results);
 
     $articles = NULL;
     foreach ($results as $nid => $article) {
-      $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
+      $len = strlen($article->title);
+      $articles .= '<div class="article">' . l($len . ' -- ' . $article->title, 'node/' . $article->entity_id) . '</div>';
     }
   
     $count++;
