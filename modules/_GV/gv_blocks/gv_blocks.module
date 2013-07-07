@@ -1032,8 +1032,9 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
  */
 function gv_blocks_librarySections() {
  
+  
   $sections = array(
-    'Advantages of' => array(),
+    'Advantages of' => array('image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
     'Cloud' => array(),
     'Connectivity' => array(),
     'Equipment/Hardware' => array(),
@@ -1056,14 +1057,20 @@ function gv_blocks_librarySections() {
     $query->condition('field_funnel_sections_value', $section);
     $results = $query->execute()->fetchAllAssoc('entity_id');
     
-
+    if (empty($results)) {
+      continue;
+    }
+    
     dpm($results);
 
-  
+    $articles = NULL;
+    foreach ($results as $nid => $article) {
+      $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
+    }
   
     $count++;
     $odd = $odd ? FALSE : TRUE;
-    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '">' . $section . '</div>';
+    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '"><img src="' . @$data['image'] . '" />' . $articles . '</div>';
   }
   
   
