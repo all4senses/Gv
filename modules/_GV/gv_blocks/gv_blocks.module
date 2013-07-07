@@ -1046,7 +1046,19 @@ function gv_blocks_librarySections() {
   $out = '';
   $odd = TRUE;
   $count = 0;
-  foreach ($sections as $section) {
+  foreach ($sections as $section => $data) {
+    
+    $query = db_select('field_data_field_funnel_sections', 's')
+        //->fields('s', array('entity_id'));
+        ->fields('s');
+    $query->condition('field_funnel_sections_value', $section);
+    $results = $query->execute()->fetchAllAssoc('entity_id');
+    
+
+    dpm($results);
+
+  
+  
     $count++;
     $odd = $odd ? FALSE : TRUE;
     $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '">' . $section . '</div>';
@@ -1057,10 +1069,14 @@ function gv_blocks_librarySections() {
   
   
   
-//  $query = db_select('field_data_field_funnel_sections', 's')
-//        ->fields('s');
-//  $results = $query->execute()->fetchAllAssoc('entity_id');
-//  dpm($results);
+  $query = db_select('field_data_field_funnel_sections', 's')
+        //->fields('s', array('entity_id'));
+        ->fields('s');
+  $query->groupBy('field_funnel_sections_value');
+  //$results = $query->execute()->fetchAllAssoc('entity_id');
+  $results = $query->execute()->fetchAllAssoc('field_funnel_sections_value');
+  
+  dpm($results);
   
   return $out;
 }
