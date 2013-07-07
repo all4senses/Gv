@@ -1085,10 +1085,10 @@ function gv_blocks_librarySections() {
     }
     $count++;
     $odd = $odd ? FALSE : TRUE;
-    if ($count == 3 || $count == 6) {
+    if ($count == 3 || $count == 6 || $count == 9) {
       $out .= '</div><div>';
     }
-    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6) ? ' last-col' : ''). '"><img src="' . @$data['image'] . '" /><div class="caption">' . $section . '</div>' . $articles . '<div class="more-link">' . l('See All', $data['see_all_link']) . '</div></div>';
+    $out .= '<div class="section ' . ($odd ? 'odd' : 'even') . (($count == 3 || $count == 6 || $count == 9) ? ' last-col' : ''). '"><img src="' . @$data['image'] . '" /><div class="caption">' . $section . '</div>' . $articles . '<div class="more-link">' . l('See All', $data['see_all_link']) . '</div></div>';
   }
   $out .= '</div>';
   
