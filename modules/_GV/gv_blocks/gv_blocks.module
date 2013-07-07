@@ -1032,6 +1032,10 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
  */
 function gv_blocks_librarySections() {
  
+  // Show only on the first page (not on further pagenated pages)
+  if (!empty($_GET['page'])) {
+    return NULL;
+  }
   
   $sections = array(
     'Advantages of' => array('see_all_link' => '/library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
@@ -1094,6 +1098,7 @@ function gv_blocks_librarySections() {
  */
 function gv_blocks_libraryList() {
  
+  // Show only on the first page (not on further pagenated pages)
   if (!empty($_GET['page'])) {
     return NULL;
   }
