@@ -1071,11 +1071,11 @@ function gv_blocks_librarySections() {
     $articles = NULL;
     foreach ($results as $nid => $article) {
       $len = strlen($article->title);
-      if ($len > 22) {
-        $articles .= '<div class="article">' . l(drupal_substr($article->title, 0, 20) . '...', 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
+      if ($len > 24) {
+        $articles .= '<div class="article">' . l(drupal_substr($article->title, 0, 24) . '...', 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
       }
       else {
-        $articles .= '<div class="article">' . l($len . ' -- ' . $article->title, 'node/' . $article->entity_id) . '</div>';
+        $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
       }
     }
   
