@@ -9,6 +9,7 @@
             console.log('clickkk');
             console.log(this);
             console.log($(this));
+            return false;
           });
           /*
           (jQuery).ajax({
