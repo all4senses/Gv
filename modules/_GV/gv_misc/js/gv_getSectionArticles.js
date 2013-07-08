@@ -9,6 +9,9 @@
             console.log('clickkk');
             console.log(this);
             console.log($(this));
+            console.log($(this)[0].className);
+            console.log($(this)[0]['className']);
+            
             return false;
           });
           /*
