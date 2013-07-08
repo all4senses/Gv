@@ -1037,6 +1037,10 @@ function gv_blocks_librarySections() {
     return NULL;
   }
   
+  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_getSectionArticles.js');
+  
+  
   $sections = array(
     'Advantages of' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
     'Cloud' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
