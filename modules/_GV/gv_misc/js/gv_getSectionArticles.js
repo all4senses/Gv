@@ -31,7 +31,7 @@
                                 if(!data.error && data.articles) {
                                     //pr1 = $(this).parent().parent();
                                     console.log(pr1);
-                                    pr1.html(data.articles);
+                                    pr1.find('.articles').html(data.articles);
                                     console.log('Articles arrived: ' + data.articles);
                                 }
                                 return false;
