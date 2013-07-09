@@ -6,20 +6,17 @@
           articles = '';
           
           $('#block-gv-blocks-library-sections .more-link a').click(function(){
-            console.log('clickkk');
-            console.log(this);
-            console.log($(this));
+//            console.log('clickkk');
+//            console.log(this);
+//            console.log($(this));
             console.log($(this)[0].className);
-            //console.log($(this)[0]['className']);
+          
+            (jQuery).ajax({
             
-            return false;
-          });
-          /*
-          (jQuery).ajax({
-            
-                url: '/get_sectionarticles', 
+                url: '/get-sectionarticles', 
                 data: {
-                        op: 'get'
+                        op: 'get',
+                        section: $(this)[0].className
                       }, 
                     type: 'POST', 
                     dataType: 'json'
@@ -35,7 +32,11 @@
                     
             }); // end of (jQuery).ajax
 
-            */
+            return false;
+          });
+          
+          
+            
 
        
     }

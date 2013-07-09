@@ -17,6 +17,13 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
+  $items['get-sectionarticles'] = array(
+    'title' => 'Get Section Articles',
+    'page callback' => 'gv_misc_get_sectionArticles_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['r-share'] = array(
     'title' => 'Share reviews',
     'page callback' => 'gv_misc_rShareReviews_rest',
@@ -163,6 +170,28 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+
+/**
+ * Test page function for url /test. 
+ */
+function gv_misc_get_sectionArticles_ajax() {
+  $status = TRUE;
+  $output = '';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+
+  if ($post['op'] != 'get' || empty($post['section'])) {
+    return FALSE;
+  }
+  
+  $articles = '';
+  
+  drupal_json_output(array('status' => $status, 'articles' => $articles));
 }
 
 
