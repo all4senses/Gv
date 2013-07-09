@@ -30,7 +30,7 @@
                             {   
                                 if(!data.error && data.articles) {
                                     $(this).parent().parent().html(data.articles);
-                                    console.log('Articles arrived: ' + articles);
+                                    console.log('Articles arrived: ' + data.articles);
                                 }
                                 return false;
                             } 
