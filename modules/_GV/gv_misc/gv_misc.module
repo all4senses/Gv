@@ -262,6 +262,28 @@ function gv_misc_getOlderUrlForSharing($current_url) {
 
 
 /**
+ * Check if the submission already has been sent.
+ */
+function gv_misc_isSubmissionAlreadySent($email) {
+      
+    $query = db_select('gv_quote_requests', 'qr')
+      ->fields('qr', array('ip', 'status', 'email_presented'));
+    
+    $query->condition('qr.status', 2);
+    $query->condition('qr.email_presented', $email);
+    $not_sents = $query->execute()->fetchAllAssoc('ip');
+    if (!empty($not_sents)) {
+      //return TRUE;
+      return 'TRUE';
+    }
+    else {
+      //return FALSE;
+      return 'FALSE';
+    }
+}
+
+
+/**
  * Test page function for url /test. 
  */
 function gv_misc_testPage() {
@@ -338,29 +360,27 @@ function gv_misc_testPage() {
   //drupal_add_css(path_to_theme() . '/css/remote-fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   
   
-    $query = db_select('gv_quote_requests', 'qr')
-      //->fields('qr', array('data', 'ip', 'timestamp'));
-      ->fields('qr');
-    //$query->condition('qr.status', 0);
-    //$query->isNotNull('qr.status');
-    //$query->condition('qr.checked', 0);
-    
-    
-    $query->condition('qr.email_presented', 'michelle@code3realty.com');
-    
-//    $query->condition('qr.email_presented', '0', '!=');
-//    $query->condition('qr.email_presented', '', '!=');
-//    $query->isNotNull('qr.email_presented');
-    //$query->isNotNull('qr.email_presented');
-    
-    //$query->condition('qr.timestamp', $current_time - 3600, '<'); // 1 hour old
-    $not_sents = $query->execute()->fetchAllAssoc('ip');
+//    $query = db_select('gv_quote_requests', 'qr')
+//      //->fields('qr', array('data', 'ip', 'timestamp'));
+//      ->fields('qr');
+//    
+//    $query->condition('qr.email_presented', 'michelle@code3realty.com');
+//    $not_sents = $query->execute()->fetchAllAssoc('ip');
+//  
+//    foreach($not_sents as $key => $not_sent) {
+//      $not_sents[$key]->timestamp = date('F d, Y \a\t g:ia', $not_sents[$key]->timestamp);
+//    }
+//    
+//    dpm($not_sents);
   
-    foreach($not_sents as $key => $not_sent) {
-      $not_sents[$key]->timestamp = date('F d, Y \a\t g:ia', $not_sents[$key]->timestamp);
-    }
-    
-    dpm($not_sents);
+  
+  $issent =  gv_misc_isSubmissionAlreadySent('michelle@code3realty.com');
+  dpm($issent);
+  
+  
+  $issent =  gv_misc_isSubmissionAlreadySent('michelle@code3realty.co');
+  dpm($issent);
+  
   
   return $out . '<br>End of Test';
 }
@@ -3291,8 +3311,12 @@ function gv_misc_makeRequest_ajax() {
     
     
     
-    
+    $already_sent = FALSE;
+    if (gv_misc_isSubmissionAlreadySent($post['email'])) {
+      $already_sent = TRUE;
+    }
     // Check if there is already a submission in the DB with such an email.
+    
     
 //    $query = db_select('gv_quote_requests', 'qr')
 //      ->fields('qr', array('data', 'ip', 'timestamp'));
@@ -3504,40 +3528,41 @@ function gv_misc_makeRequest_ajax() {
     
     
     
-    
-    if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || $submission['Company'] == 'RC') {
-      // Test for Nextiva
-      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+    if (!$already_sent) {
       
-      // Send a lead to Remote providers.
-      if ($submission['Source'] != 'block') {
-        gv_misc_SendRequestToRingCentral($submission);
-      }
-    }
-    elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
-      // Test for Nextiva
-      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
-      
-      // Send a lead to Remote providers.
-      if ($submission['Source'] != 'block') {
-        gv_misc_SendRequestToNextiva($submission);
-      }
-    }
-    elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s') {
-      // Normal send if not a test from a4s
-      drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
-      
-      // Send a lead to Remote providers.
-      if ($submission['Source'] != 'block') {
-        gv_misc_SendRequestToVocalocity($submission);
-        gv_misc_SendRequestTo8x8($submission);
-        gv_misc_SendRequestToNextiva($submission);
-        gv_misc_SendRequestToRingCentral($submission);
-      }
-    }
-    // A test letter to the root.
-    drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
+        if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || $submission['Company'] == 'RC') {
+          // Test for Nextiva
+          drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
 
+          // Send a lead to Remote providers.
+          if ($submission['Source'] != 'block') {
+            gv_misc_SendRequestToRingCentral($submission);
+          }
+        }
+        elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
+          // Test for Nextiva
+          drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+
+          // Send a lead to Remote providers.
+          if ($submission['Source'] != 'block') {
+            gv_misc_SendRequestToNextiva($submission);
+          }
+        }
+        elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s') {
+          // Normal send if not a test from a4s
+          drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+
+          // Send a lead to Remote providers.
+          if ($submission['Source'] != 'block') {
+            gv_misc_SendRequestToVocalocity($submission);
+            gv_misc_SendRequestTo8x8($submission);
+            gv_misc_SendRequestToNextiva($submission);
+            gv_misc_SendRequestToRingCentral($submission);
+          }
+        }
+        // A test letter to the root.
+        drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
+    }
     
     
     
