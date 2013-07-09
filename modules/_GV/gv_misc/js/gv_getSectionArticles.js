@@ -11,7 +11,7 @@
 //            console.log($(this));
             //console.log($(this)[0].className);
           
-            //pr1 = $(this).parent().parent();
+            pr1 = $(this).parent().parent();
             //console.log(pr1);
 
             //console.log($(this).prev().prev());
@@ -29,7 +29,7 @@
                     success: function(data) 
                             {   
                                 if(!data.error && data.articles) {
-                                    pr1 = $(this).parent().parent();
+                                    //pr1 = $(this).parent().parent();
                                     console.log(pr1);
                                     pr1.html(data.articles);
                                     console.log('Articles arrived: ' + data.articles);
