@@ -11,6 +11,9 @@
 //            console.log($(this));
             console.log($(this)[0].className);
           
+            console.log($(this).prev());
+            console.log($(this).prev().prev());
+            
             (jQuery).ajax({
             
                 url: '/get-sectionarticles', 
