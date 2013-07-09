@@ -1059,34 +1059,37 @@ function gv_blocks_librarySections() {
   $count = 0;
   foreach ($sections as $section => $data) {
     
-    $query = db_select('field_data_field_funnel_sections', 's')
-        //->fields('s', array('entity_id'));
-        ->fields('s');
-    $query->leftJoin('node', 'n', 'n.nid = s.entity_id ');
-    $query->fields('n', array('title'));
-    $query->condition('field_funnel_sections_value', $section);
-    $query->range(0, 3);
-    $results = $query->execute()->fetchAllAssoc('entity_id');
+//    $articles = NULL;
+//    $limit = 3;
+//    
+//    $query = db_select('field_data_field_funnel_sections', 's')
+//        ->fields('s', array('entity_id'));
+//        //->fields('s');
+//    $query->leftJoin('node', 'n', 'n.nid = s.entity_id ');
+//    $query->fields('n', array('title'));
+//    $query->condition('field_funnel_sections_value', $section);
+//    if ($limit) {
+//      $query->range(0, 3);
+//    }
+//    $results = $query->execute()->fetchAllAssoc('entity_id');
+//    
+//    if (!empty($results)) {
+//      foreach ($results as $nid => $article) {
+//        $len = strlen($article->title);
+//        if ($len > 26) {
+//          $title = drupal_substr($article->title, 0, 26);
+//          $last_pos = strrpos($title, ' ');
+//          $title = substr_replace($title, '...', $last_pos);
+//          $articles .= '<div class="article">' . l($title, 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
+//        }
+//        else {
+//          $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
+//        }
+//      }
+//    }
+    $articles = gv_misc_get_sectionArticles($section, 3);
     
     
-    //dpm($results);
-
-    $articles = NULL;
-    
-    if (!empty($results)) {
-      foreach ($results as $nid => $article) {
-        $len = strlen($article->title);
-        if ($len > 26) {
-          $title = drupal_substr($article->title, 0, 26);
-          $last_pos = strrpos($title, ' ');
-          $title = substr_replace($title, '...', $last_pos);
-          $articles .= '<div class="article">' . l($title, 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
-        }
-        else {
-          $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
-        }
-      }
-    }
     $count++;
     $odd = $odd ? FALSE : TRUE;
     if ($count == 4 || $count == 7 || $count == 10) {
