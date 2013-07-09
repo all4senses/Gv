@@ -22,7 +22,7 @@
                     dataType: 'json'
                     , 
                     success: function(data) 
-                            { 
+                            {   console.log(data);
                                 if(!data.error) {
                                     articles = data.articles;
                                     console.log('Articles arrived: ' + articles);

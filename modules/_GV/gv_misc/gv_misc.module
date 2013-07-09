@@ -189,7 +189,7 @@ function gv_misc_get_sectionArticles_ajax() {
     return FALSE;
   }
   
-  $articles = '';
+  $articles = $post['section'];
   
   drupal_json_output(array('status' => $status, 'articles' => $articles));
 }
