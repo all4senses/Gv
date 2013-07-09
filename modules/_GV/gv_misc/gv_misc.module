@@ -356,6 +356,10 @@ function gv_misc_testPage() {
     //$query->condition('qr.timestamp', $current_time - 3600, '<'); // 1 hour old
     $not_sents = $query->execute()->fetchAllAssoc('ip');
   
+    foreach($not_sents as $key => $not_sent) {
+      $not_sents[$key]->timestamp = date('F d, Y \a\t g:ia', $not_sents[$key]->timestamp);
+    }
+    
     dpm($not_sents);
   
   return $out . '<br>End of Test';
