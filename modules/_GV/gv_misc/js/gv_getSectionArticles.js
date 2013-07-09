@@ -11,8 +11,10 @@
 //            console.log($(this));
             console.log($(this)[0].className);
           
-            console.log($(this).prev());
-            console.log($(this).prev().prev());
+            pr1 = $(this).prev();
+            
+            console.log(pr1);
+            //console.log($(this).prev().prev());
             
             (jQuery).ajax({
             
@@ -25,7 +27,7 @@
                     dataType: 'json'
                     , 
                     success: function(data) 
-                            {   console.log(data);
+                            {   
                                 if(!data.error) {
                                     articles = data.articles;
                                     console.log('Articles arrived: ' + articles);
