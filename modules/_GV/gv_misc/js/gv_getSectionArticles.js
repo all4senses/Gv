@@ -11,7 +11,7 @@
 //            console.log($(this));
             console.log($(this)[0].className);
           
-            pr1 = $(this).parent();
+            pr1 = $(this).parent().parent();
             
             console.log(pr1);
             //console.log($(this).prev().prev());
