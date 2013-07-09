@@ -28,8 +28,8 @@
                     , 
                     success: function(data) 
                             {   
-                                if(!data.error) {
-                                    articles = data.articles;
+                                if(!data.error && data.articles) {
+                                    $(this).parent().parent().html(data.articles);
                                     console.log('Articles arrived: ' + articles);
                                 }
                                 return false;
