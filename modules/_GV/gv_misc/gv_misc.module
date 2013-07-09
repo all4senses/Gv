@@ -273,12 +273,12 @@ function gv_misc_isSubmissionAlreadySent($email) {
     $query->condition('qr.email_presented', $email);
     $not_sents = $query->execute()->fetchAllAssoc('ip');
     if (!empty($not_sents)) {
-      //return TRUE;
-      return 'TRUE';
+      return TRUE;
+      //return 'TRUE';
     }
     else {
-      //return FALSE;
-      return 'FALSE';
+      return FALSE;
+      //return 'FALSE';
     }
 }
 
