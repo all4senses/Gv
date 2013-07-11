@@ -216,7 +216,7 @@
                 
                 <?php 
                 
-                  if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
+                  if (!empty($provider_options_bu) && !empty($provider_options_bu['enabled'])) {
                   
                     echo '<div id="tabs-2">';
 
@@ -265,7 +265,7 @@
                   
                   
                   
-                  if ($user->uid && !empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
+                  if ($user->uid && !empty($provider_options_re) && !empty($provider_options_re['enabled'])) {
                   
                     echo '<div id="tabs-3">';
 

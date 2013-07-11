@@ -4244,7 +4244,6 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   } // foreach ($p_data['s'] as $service_type_short => $service) {
   
   
-  dpm($p_data);
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_p_data'], array('und' => array(0 => array('value' => serialize($p_data)))), $form_state);
   
