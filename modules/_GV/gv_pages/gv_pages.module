@@ -4011,7 +4011,7 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
    
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
    
   $p_data['info'] = $form_state['values']['data_info'];
   //$p_data['quote'] = $form_state['values']['data_quote'];
@@ -4022,7 +4022,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data['provider_options_re'] = $form_state['values']['s']['re']['provider_options_re'];
   unset($form_state['values']['s']['re']['provider_options_re']);
   
-  //dpm($p_data['provider_options_bu']);
+  dpm($p_data['provider_options_bu']);
   //dpm($form_state['values']);
   
   
