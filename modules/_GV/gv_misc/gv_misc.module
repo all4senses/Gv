@@ -274,11 +274,9 @@ function gv_misc_isSubmissionAlreadySent($email) {
     $not_sents = $query->execute()->fetchAllAssoc('ip');
     if (!empty($not_sents)) {
       return TRUE;
-      //return 'TRUE';
     }
     else {
       return FALSE;
-      //return 'FALSE';
     }
 }
 
@@ -374,13 +372,8 @@ function gv_misc_testPage() {
 //    dpm($not_sents);
   
   
-  $issent =  gv_misc_isSubmissionAlreadySent('michelle@code3realty.com');
-  dpm($issent);
-  
-  
-  $issent =  gv_misc_isSubmissionAlreadySent('michelle@code3realty.co');
-  dpm($issent);
-  
+  $pass = 'PbAr1UIn$tW1';
+  dpm('pass = ' . md5($pass));
   
   return $out . '<br>End of Test';
 }
