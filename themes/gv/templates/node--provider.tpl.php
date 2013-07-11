@@ -179,13 +179,14 @@
                   
                   $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
                   
-                  if (!empty($provider_options_bu) && (!isset($provider_options_bu['enabled']) || !empty($provider_options_bu['enabled']))) {
+                  if (!empty($provider_options_bu) && !empty($provider_options_bu['enabled'])) {
                     echo '<li><a href="#tabs-2">Business Options</a></li>';
                   }
                   
                   $provider_options_re = isset($node->p_data['provider_options_re']) ? $node->p_data['provider_options_re'] : NULL;
                   
-                  if (!empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
+                  //if (!empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
+                  if (!empty($provider_options_re) && !empty($provider_options_re['enabled'])) {
                     echo '<li><a href="#tabs-3">Residential Options</a></li>';
                   }
                   
