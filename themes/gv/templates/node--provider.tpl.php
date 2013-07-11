@@ -177,6 +177,8 @@
                   
                   <?php 
                   
+                  dpm($node->p_data);
+                          
                   $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
                   
                   dpm($provider_options_bu);
