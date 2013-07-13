@@ -72,6 +72,17 @@
               pr1.find('.articles').html(this_button.all_atricles);
             }
           }
+          
+          
+          if (this_button.opened) {
+            $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-less.png) no-repeat 0 0 transparent');
+            $(this_button).css('width', '95px');
+          }
+          else {
+            $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-all.png) no-repeat 0 0 transparent');
+            $(this_button).css('width', '95px');
+          }
+            
             
           return false;
         });
