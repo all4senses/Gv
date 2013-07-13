@@ -19,7 +19,9 @@
     
   <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][1]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][1]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][1]['title'])), '</div>'; ?>
   <div id="gv-logo">
-    <?php echo /*'<a href="/compare-voip-solutions">' . */'<div class="logo"></div>'/* . '</a>'*/; ?>
+    <?php 
+      echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
+    ?>
     <h3>Leading Authority on VoIP Providers</h3>
   </div>
 
