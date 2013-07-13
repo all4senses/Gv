@@ -45,14 +45,15 @@
                                           
                                           pr1.find('.articles').html(data.articles);
                                          
-                                          if (this_button.opened) {
-                                            this_button.opened = false;
-                                            //console.log('Not opened!');
-                                          }
-                                          else {
-                                            this_button.opened = true;
-                                            //console.log('opened!');
-                                          }
+                                          this_button.opened = true;
+//                                          if (this_button.opened) {
+//                                            this_button.opened = false;
+//                                            //console.log('Not opened!');
+//                                          }
+//                                          else {
+//                                            this_button.opened = true;
+//                                            //console.log('opened!');
+//                                          }
                                           
                                           this_button.loaded = true;
                                       }
