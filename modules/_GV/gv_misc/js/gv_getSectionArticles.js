@@ -23,7 +23,9 @@
             //$(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent').css('width', '33px').css('border-radius', '10px');
             
             //$(this_button).css({'border-radius':'10px', 'width':'33px', 'background':'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent'});
-            $(this_button).css('background', 'url("/sites/all/themes/gv_orange/css/images/loading.gif") no-repeat 0 0 transparent');
+            //$(this_button).css('background', 'url("/sites/all/themes/gv_orange/css/images/loading.gif") no-repeat 0 0 transparent');
+            $(this_button).hide();
+            pr1.find('.loading').show();
 
             
             if (!this_button.loaded) {
