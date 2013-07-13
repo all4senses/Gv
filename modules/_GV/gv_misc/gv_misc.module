@@ -213,11 +213,13 @@ function gv_misc_get_sectionArticles($section, $limit = NULL) {
     }
     $results = $query->execute()->fetchAllAssoc('entity_id');
     
+    $max_len = 28;
+    
     if (!empty($results)) {
       foreach ($results as $nid => $article) {
         $len = strlen($article->title);
-        if ($len > 26) {
-          $title = drupal_substr($article->title, 0, 26);
+        if ($len > $max_len) {
+          $title = drupal_substr($article->title, 0, $max_len);
           $last_pos = strrpos($title, ' ');
           $title = substr_replace($title, '...', $last_pos);
           $articles .= '<div class="article">' . l($title, 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
