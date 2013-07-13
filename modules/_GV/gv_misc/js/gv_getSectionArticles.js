@@ -4,35 +4,20 @@
     attach: function (context, settings) {
              
           articles = '';
-          //opened = false;
           
           $('#block-gv-blocks-library-sections .more-link a').click(function(){
           
-          
+            //console.log(this);
+            //console.log($(this));
+            //console.log($(this)[0].className);
             
             this_button = this;
-            
-            //console.log($(this_button));
+            console.log($(this_button));
+
             
             pr1 = $(this_button).parent().parent();
             
             if (!this_button.loaded) {
-              
-                  //console.log('NOT opened!');
-                  //this_button.loaded = false;
-
-      //            console.log('clickkk');
-                  //console.log(this);
-                  //console.log($(this));
-
-                  //console.log($(this)[0].className);
-
-                  //console.log($(this_button));
-
-                  
-                  //console.log(pr1);
-
-                  //console.log($(this).prev().prev());
 
                   (jQuery).ajax({
 
@@ -47,14 +32,11 @@
                           success: function(data) 
                                   {   
                                       if(!data.error && data.articles) {
-                                          //pr1 = $(this).parent().parent();
-                                          //console.log(pr1);
                                           this_button.less_atricles = pr1.find('.articles').html();
                                           this_button.all_atricles = data.articles;
                                           
                                           pr1.find('.articles').html(data.articles);
-                                          //console.log('Articles arrived: ' + data.articles);
-                                          
+                                         
                                           if (this_button.opened) {
                                             this_button.opened = false;
                                             console.log('Not opened!');
@@ -64,9 +46,7 @@
                                             console.log('opened!');
                                           }
                                           
-                                          
                                           this_button.loaded = true;
-                                          console.log($(this_button));
                                       }
                                       return false;
                                   } 
@@ -75,20 +55,16 @@
                   
           }
           else {
-            
             if (this_button.opened) {
               this_button.opened = false;
               console.log('Not opened!');
               pr1.find('.articles').html(this_button.less_atricles);
-              
             }
             else {
               this_button.opened = true;
               console.log('opened!');
               pr1.find('.articles').html(this_button.all_atricles);
             }
-            
-            console.log($(this_button));
           }
             
           return false;
