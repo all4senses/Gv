@@ -1042,16 +1042,16 @@ function gv_blocks_librarySections() {
   
   
   $sections = array(
-    'Advantages of' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Advantages of' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-advantages.png'),
     'Cloud' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Connectivity' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Equipment/Hardware' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'How Stuff Works' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Mobility' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Terms to Know/Glossary' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Types of Features' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'SIP' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
-    'Compare Services' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-cloud.png'),
+    'Connectivity' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-connectivity.png'),
+    'Equipment/Hardware' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-equipment.png'),
+    'How Stuff Works' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-howworks.png'),
+    'Mobility' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-mobility.png'),
+    'Terms to Know/Glossary' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-terms.png'),
+    'Types of Features' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-features.png'),
+    'SIP' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-sip.png'),
+    'Compare Services' => array('see_all_link' => 'library', 'image' => '/sites/all/themes/gv_orange/css/images/section-services.png'),
   );
   
   $out = '<div class="row">';
@@ -1059,36 +1059,7 @@ function gv_blocks_librarySections() {
   $count = 0;
   foreach ($sections as $section => $data) {
     
-//    $articles = NULL;
-//    $limit = 3;
-//    
-//    $query = db_select('field_data_field_funnel_sections', 's')
-//        ->fields('s', array('entity_id'));
-//        //->fields('s');
-//    $query->leftJoin('node', 'n', 'n.nid = s.entity_id ');
-//    $query->fields('n', array('title'));
-//    $query->condition('field_funnel_sections_value', $section);
-//    if ($limit) {
-//      $query->range(0, 3);
-//    }
-//    $results = $query->execute()->fetchAllAssoc('entity_id');
-//    
-//    if (!empty($results)) {
-//      foreach ($results as $nid => $article) {
-//        $len = strlen($article->title);
-//        if ($len > 26) {
-//          $title = drupal_substr($article->title, 0, 26);
-//          $last_pos = strrpos($title, ' ');
-//          $title = substr_replace($title, '...', $last_pos);
-//          $articles .= '<div class="article">' . l($title, 'node/' . $article->entity_id, array('attributes' => array('title' => $article->title))) . '</div>';
-//        }
-//        else {
-//          $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
-//        }
-//      }
-//    }
     $articles = gv_misc_get_sectionArticles($section, 3);
-    
     
     $count++;
     $odd = $odd ? FALSE : TRUE;
