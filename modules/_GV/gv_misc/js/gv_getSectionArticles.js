@@ -24,7 +24,7 @@
             
             //$(this_button).css({'border-radius':'10px', 'width':'33px', 'background':'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent'});
             //$(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent');
-            $(this_button).css('background', 'url("images/loading.gif") no-repeat 0 0 transparent');
+            $(this_button).css('background', 'url(images/loading.gif) no-repeat 0 0 transparent');
             
             if (!this_button.loaded) {
 
