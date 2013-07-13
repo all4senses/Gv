@@ -4,7 +4,7 @@
     attach: function (context, settings) {
              
           articles = '';
-          opened = false;
+          //opened = false;
           
           $('#block-gv-blocks-library-sections .more-link a').click(function(){
           
@@ -12,13 +12,13 @@
             
             this_button = this;
             
-            console.log($(this_button));
+            //console.log($(this_button));
             
             
-            if (!this_button.opened) {
+            if (!this_button.loaded) {
               
-                  console.log('NOT opened!');
-                  this_button.opened = false;
+                  //console.log('NOT opened!');
+                  //this_button.loaded = false;
 
       //            console.log('clickkk');
                   //console.log(this);
@@ -26,9 +26,9 @@
 
                   //console.log($(this)[0].className);
 
-                  console.log($(this_button));
+                  //console.log($(this_button));
 
-                  pr1 = $(this).parent().parent();
+                  pr1 = $(this_button).parent().parent();
                   //console.log(pr1);
 
                   //console.log($(this).prev().prev());
@@ -50,7 +50,15 @@
                                           //console.log(pr1);
                                           pr1.find('.articles').html(data.articles);
                                           //console.log('Articles arrived: ' + data.articles);
-                                          this_button.opened = true;
+                                          if (this_button.opened) {
+                                            this_button.opened = false;
+                                          }
+                                          else {
+                                            this_button.opened = true;
+                                          }
+                                          
+                                          
+                                          this_button.loaded = true;
                                           console.log($(this_button));
                                       }
                                       return false;
@@ -60,7 +68,16 @@
                   
           }
           else {
-            console.log('opened!');
+            
+            if (this_button.opened) {
+              this_button.opened = false;
+              console.log('Not opened!');
+            }
+            else {
+              this_button.opened = true;
+              console.log('opened!');
+            }
+            
             console.log($(this_button));
           }
             
