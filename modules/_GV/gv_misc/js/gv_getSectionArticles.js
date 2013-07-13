@@ -21,8 +21,8 @@
             console.log($(this_button).css('width'));
             
             $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent');
-            $(this_button).css('width', '33px');
-            $(this_button).css('border-radius', '10px');
+            $(this_button).css('width', '33');
+            $(this_button).css('border-radius', '10');
             
             
             if (!this_button.loaded) {
@@ -77,7 +77,7 @@
           
           
           $(this_button).css('border-radius', 'none');
-          $(this_button).css('width', '95px');
+          $(this_button).css('width', '95');
           if (this_button.opened) {
             $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-less.png) no-repeat 0 0 transparent');
           }
