@@ -46,7 +46,7 @@
                                     //console.log(pr1);
                                     pr1.find('.articles').html(data.articles);
                                     //console.log('Articles arrived: ' + data.articles);
-                                    this_button.opened = true;
+                                    //this_button.opened = true;
                                     console.log($(this_button));
                                 }
                                 return false;
