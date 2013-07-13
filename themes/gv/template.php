@@ -629,113 +629,7 @@ function gv_process_page(&$variables) {
   
   
   // Set breadcrumb
-  $tags_cloud_pages = array('/articles/tags', '/blog/tags', '/news/tags');
-  $not_teasers_types = array('preface', 'admin_page', 'page', 'quote', 'webform');
-  
-  //dpm($_SERVER);
-  //dpm(arg());
-  
-  if(@$_SERVER['REQUEST_URI'] == '/') {
-    $variables['breadcrumb'] = ''; // Home page has no bredcrumb.
-  }
-  elseif(isset($variables['node']) && !in_array($variables['node']->type, $not_teasers_types) ) {
-    //dpm($variables['node']);
-    //dpm('teasers node------------');
-    switch ($variables['node']->type) {
-      case 'provider':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->field_p_name['und'][0]['value']/* . ' Reviews'*/)));
-        break;
-      case 'review':
-        if (!empty($variables['node']->field_ref_provider['und'][0]['target_id'])) {
-          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] /*. ' Reviews'*/, 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
-        }
-        else {
-          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->title )));
-        }
-        break;
-      case 'phone':
-        //dpm($variables['node']);
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l('Phones', 'reviews/phone'), $variables['node']->title )));
-        break;
-      case 'phone_review':
-        //dpm($variables['node']);
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l('Phones', 'reviews/phone'), l($variables['node']->field_p_name['und'][0]['value'], 'node/' . $variables['node']->field_ref_phone['und'][0]['target_id']), $variables['node']->title )));
-        break;
-      
-      case 'article':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('Library', 'about-voip-services'), $variables['node']->title )));
-        break;
-      case 'blog_post':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('Blog', 'blog'), $variables['node']->title )));
-        break;
-      case 'news_post':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('News', 'news'), $variables['node']->title )));
-        break;
-    }
-  }
-  /**/
-  elseif(in_array($_SERVER['REQUEST_URI'], $tags_cloud_pages)) {
-    //dpm('Tags cloud page ------------');
-    switch ($_SERVER['REQUEST_URI']) {
-      case '/articles/tags':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Library articles', 'about-voip-services'), 'Library tags' )));
-        break;
-      case '/blog/tags':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), 'Blog tags' )));
-        break;
-      case '/news/tags':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), 'News tags' )));
-        break;
-    }
-  }
-  /**/
-  elseif(strpos($_SERVER['REQUEST_URI'], '/tags/') != FALSE) {
-    //dpm('Tag page ------------');
-    
-    // Don't show anything yet.
-    //$variables['breadcrumb'] = '';
-    
-    // Defined in
-    global $current_tag_title;
-    
-    /**/
-    if(strpos($_SERVER['REQUEST_URI'], 'articles/tags/') != FALSE) {
-      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Library articles', 'about-voip-services'), l('Articles tags', 'articles/tags'), $current_tag_title )));
-    }
-    elseif (strpos($_SERVER['REQUEST_URI'], 'blog/tags/') != FALSE) {
-      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), l('Blog tags', 'blog/tags'), $current_tag_title )));
-    }
-    else {
-      $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), l('News tags', 'news/tags'), $current_tag_title )));
-    }
-    /**/
-  }
-  elseif ($breadcrumb = gv_misc_getMenuTrail()) {
-    //dpm('Page VIA MENU------------');
-    $variables['breadcrumb'] = $breadcrumb;
-  }
-  elseif (isset($variables['node'])) {
-    //dpm('Any other NODE page------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
-  }
-  elseif (@$_SERVER['REDIRECT_URL'] == '/voip-provider-submit-user-review') {
-    //dpm('Any other NODE page------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Review' )));
-  }
-  elseif (@$_SERVER['REDIRECT_URL'] == '/voip-phone-submit-user-review') {
-    //dpm('Any other NODE page------------');
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
-  }
-  elseif (arg(0) == 'user' && is_int($arg_uid = arg(1))) {
-    //dpm('User profile page------------');
-    $userExtendedData = gv_misc_loadUserExtendedData($arg_uid);
-    $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('About Us', 'about-us'), l('Our Team', 'our-team'), $userExtendedData->realname )));
-  }
-  else {
-    //dpm('Any other NOT node page------------');
-    $variables['breadcrumb'] = '';
-  }
-
+  gv_misc_setBreadcrumbs($variables);
   
   
   
@@ -748,7 +642,7 @@ function gv_process_page(&$variables) {
   //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
   //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
   
-  //dpm($_SERVER);
+  
   // JS for comparing providers functionality on pages ehere appropriate views are cached and therefore have not loaded js itselves within views.
   $pages_with_compare_provider_functionality = array('/providers/reviews');
   if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $pages_with_compare_provider_functionality)) {
@@ -758,7 +652,6 @@ function gv_process_page(&$variables) {
   
   
   /* Add Google's fonts */
-  //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500italic', 'NA', 'text/css');
   gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500', 'NA', 'text/css');
 }
 
