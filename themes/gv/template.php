@@ -621,10 +621,15 @@ function gv_process_page(&$variables) {
       }
     }
     
+    if ($variables['node']->type == 'quote') {
+      drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+    }
+    
   }
   elseif (arg(0) == 'get' && @arg(1) == 'iframe') {
     module_invoke('admin_menu', 'suppress');
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
+    drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   }
   
   
