@@ -59,8 +59,12 @@
 //                                          }
                                           
                                           this_button.loaded = true;
-                                          $(this_button).show();
+                                          
+                                          $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-less.png) no-repeat 0 0 transparent');
                                           pr1.find('.loading').hide();
+                                          $(this_button).show();
+                                          
+                                          
                                       }
                                       return false;
                                   } 
@@ -69,6 +73,7 @@
                   
           }
           else {
+            
             if (this_button.opened) {
               this_button.opened = false;
               console.log('Not opened!');
@@ -82,8 +87,8 @@
               $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-all.png) no-repeat 0 0 transparent');
             }
             
-            $(this_button).show();
             pr1.find('.loading').hide();
+            $(this_button).show();
           }
           
             
