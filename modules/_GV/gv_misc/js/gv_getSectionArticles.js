@@ -78,7 +78,7 @@
               this_button.opened = false;
               console.log('Not opened!');
               pr1.find('.articles').html(this_button.less_atricles);
-              $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-all.png) no-repeat 0 0 transparent');
+              $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-all.png) no-repeat 20px 0 transparent');
               
             }
             else {
