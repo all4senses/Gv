@@ -17,6 +17,9 @@
             
             pr1 = $(this_button).parent().parent();
             
+            $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent');
+            $(this_button).css('width', '30');
+            
             if (!this_button.loaded) {
 
                   (jQuery).ajax({
