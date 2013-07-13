@@ -14,6 +14,7 @@
             
             //console.log($(this_button));
             
+            pr1 = $(this_button).parent().parent();
             
             if (!this_button.loaded) {
               
@@ -28,7 +29,7 @@
 
                   //console.log($(this_button));
 
-                  pr1 = $(this_button).parent().parent();
+                  
                   //console.log(pr1);
 
                   //console.log($(this).prev().prev());
@@ -48,6 +49,9 @@
                                       if(!data.error && data.articles) {
                                           //pr1 = $(this).parent().parent();
                                           //console.log(pr1);
+                                          this_button.less_atricles = pr1.find('.articles').html();
+                                          this_button.all_atricles = data.articles;
+                                          
                                           pr1.find('.articles').html(data.articles);
                                           //console.log('Articles arrived: ' + data.articles);
                                           
@@ -75,10 +79,13 @@
             if (this_button.opened) {
               this_button.opened = false;
               console.log('Not opened!');
+              pr1.find('.articles').html(this_button.less_atricles);
+              
             }
             else {
               this_button.opened = true;
               console.log('opened!');
+              pr1.find('.articles').html(this_button.all_atricles);
             }
             
             console.log($(this_button));
