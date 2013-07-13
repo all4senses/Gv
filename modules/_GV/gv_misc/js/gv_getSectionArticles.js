@@ -7,14 +7,22 @@
           opened = false;
           
           $('#block-gv-blocks-library-sections .more-link a').click(function(){
-            
-            this.opened = false;
-//            console.log('clickkk');
-            console.log(this);
-            console.log($(this));
-            //console.log($(this)[0].className);
+          
           
             
+            this_button = this;
+            
+            console.log(this_button);
+          
+            this_button.opened = false;
+            
+//            console.log('clickkk');
+            //console.log(this);
+            //console.log($(this));
+            
+            //console.log($(this)[0].className);
+          
+            console.log(this_button);
             
             pr1 = $(this).parent().parent();
             //console.log(pr1);
@@ -38,7 +46,8 @@
                                     console.log(pr1);
                                     pr1.find('.articles').html(data.articles);
                                     console.log('Articles arrived: ' + data.articles);
-                                    opened = true;
+                                    this_button.opened = true;
+                                    console.log(this_button);
                                 }
                                 return false;
                             } 
