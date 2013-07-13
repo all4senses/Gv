@@ -92,8 +92,8 @@
             console.log('Not opened!');
           }
           
-          $(this_button).show();
-          pr1.find('.loading').hide();
+//          $(this_button).show();
+//          pr1.find('.loading').hide();
           
             
           return false;
