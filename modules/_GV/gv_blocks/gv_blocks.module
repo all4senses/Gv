@@ -1059,7 +1059,7 @@ function gv_blocks_librarySections() {
   $count = 0;
   foreach ($sections as $section => $data) {
     
-    $articles = gv_misc_get_sectionArticles($section, 3);
+    $articles = '<div class="articles">' . gv_misc_get_sectionArticles($section, 5) . '</div>';
     
     $count++;
     $odd = $odd ? FALSE : TRUE;
