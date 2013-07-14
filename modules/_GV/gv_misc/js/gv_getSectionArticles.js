@@ -13,8 +13,10 @@
             //console.log($(this)[0].className);
             
             if (in_progress) {
+              console.log('in_progress');
               return false;
             }
+            console.log('not in_progress, starting...');
             
             in_progress = true;
             
@@ -64,6 +66,7 @@
                                           $(this_button).show();
                                           $(articles).animate({height: this_button.all_height},'slow');
                                       }
+                                      in_progress = false;
                                       return false;
                                   } 
 
@@ -93,10 +96,10 @@
               $(articles).animate({height: this_button.all_height},'slow');
             }
             
-            
+            in_progress = false;
           }
           
-          in_progress = false;
+          
           return false;
         });
 
