@@ -78,14 +78,14 @@
               this_button.opened = false;
               console.log('Not opened!');
               pr1.find('.articles').html(this_button.less_atricles);
-              $(this_button).css('background-position', '-95px 0');
+              $(this_button).css('background-position', '0 0');
               
             }
             else {
               this_button.opened = true;
               console.log('opened!');
               pr1.find('.articles').html(this_button.all_atricles);
-              $(this_button).css('background-position', '0 0');
+              $(this_button).css('background-position', '-95px 0');
               
             }
             
