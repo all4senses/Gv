@@ -578,7 +578,9 @@ function gv_block_buildTopicsBlock($content_type_label) {
   $content_types = array('blog' => 'blog_post', 'news' => 'news_post', 'articles' => 'article');
   $content_type = $content_types[$content_type_label];
   
-  $tags = gv_misc_getTopics($content_type, $content_type_label, 20);  
+  //$tags = gv_misc_getTopics($content_type, $content_type_label, 20);  
+  $tags = gv_misc_getTopics($content_type, $content_type_label);
+  
   //$tags = tagadelic_sort_tags(tagadelic_build_weighted_tags($tags, 12));
   
   $themed_tags = '';
