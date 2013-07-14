@@ -4,12 +4,19 @@
     attach: function (context, settings) {
              
           articles = '';
+          in_progress = false;
           
           $('#block-gv-blocks-library-sections .more-link a').click(function(){
           
             //console.log(this);
             //console.log($(this));
             //console.log($(this)[0].className);
+            
+            if (in_progress) {
+              return false;
+            }
+            
+            in_progress = true;
             
             this_button = this;
             pr1 = $(this_button).parent().parent();
@@ -89,6 +96,7 @@
             
           }
           
+          in_progress = false;
           return false;
         });
 
