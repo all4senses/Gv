@@ -46,28 +46,14 @@
                                           this_button.opened = true;
                                           this_button.loaded = true;
                                           
-                                          
                                           this_button.less_atricles = articles.html();
-                                          
                                           
                                           this_button.all_atricles = data.articles;
                                           
-                                          console.log('before less height: ' + articles.css('height'));
+                                          this_button.less_height = articles.css('height');
                                           
-                                          this_button.less_height = articles.css('min-height');
-                                          console.log('min-height: ' + this_button.less_height);
-                                          //this_button.less_height = articles.height();
-                                          
-                                          //articles.html(data.articles);
-                                          articles.replaceWith(data.articles);
-                                          
-                                          
+                                          articles.html(data.articles);
                                           this_button.all_height = articles.css('height');
-                                          
-                                          this_button.all_height = articles.height();
-                                          
-                                          //this_button.all_height = articles.height();
-                                          console.log('all: ' + this_button.all_height);
                                           
                                           articles.css({'height': this_button.less_height, 'overflow': 'hidden'});
                                           
