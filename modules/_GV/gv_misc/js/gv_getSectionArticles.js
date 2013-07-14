@@ -19,9 +19,6 @@
             
             //$(articles).animate({height: '1000px'},'slow');
             
-            return false;
-            
-            
             
             $(this_button).hide();
             pr1.find('.loading').show();
