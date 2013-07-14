@@ -46,13 +46,18 @@
                                           this_button.opened = true;
                                           this_button.loaded = true;
                                           
+                                          
                                           this_button.less_atricles = articles.html();
+                                          
                                           
                                           this_button.all_atricles = data.articles;
                                           
                                           this_button.less_height = articles.css('height');
                                           
-                                          articles.html(data.articles);
+                                          //articles.html(data.articles);
+                                          articles.replaceWith(data.articles);
+                                          
+                                          
                                           this_button.all_height = articles.css('height');
                                           
                                           articles.css({'height': this_button.less_height, 'overflow': 'hidden'});

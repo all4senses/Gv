@@ -228,7 +228,7 @@ function gv_misc_get_sectionArticles($section, $limit = NULL) {
           $articles .= '<div class="article">' . l($article->title, 'node/' . $article->entity_id) . '</div>';
         }
       }
-      //$articles = '<div class="articles">' . $articles . '</div>';
+      $articles = '<div class="articles">' . $articles . '</div>';
     }
     
     return $articles;
