@@ -17,8 +17,6 @@
             articles = pr1.find('.articles');
             
             $(this_button).hide();
-            
-            //pr1.find('.loading').show();
             loading.show();
             
             
@@ -54,9 +52,7 @@
                                           
                                           $(this_button).css('background-position', '-95px 0');
                                           
-                                          //pr1.find('.loading').hide();
                                           loading.hide();
-                                          
                                           
                                           $(this_button).show();
                                           $(articles).animate({height: this_button.all_height},'slow');
@@ -75,9 +71,7 @@
               
               $(this_button).css('background-position', '0 0');
               
-              //pr1.find('.loading').hide();
               loading.hide();
-              
               $(this_button).show();
               $(articles).animate({height: this_button.less_height},'slow');
             }
@@ -86,7 +80,6 @@
               /////articles.html(this_button.all_atricles);
               $(this_button).css('background-position', '-95px 0');
               
-              //pr1.find('.loading').hide();
               loading.hide();
               
               $(this_button).show();
