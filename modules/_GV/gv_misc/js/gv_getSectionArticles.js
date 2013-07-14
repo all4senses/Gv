@@ -53,6 +53,7 @@
                                           this_button.all_atricles = data.articles;
                                           
                                           this_button.less_height = articles.css('height');
+                                          console.log('less: ' + this_button.less_height);
                                           //this_button.less_height = articles.height();
                                           
                                           //articles.html(data.articles);
@@ -61,6 +62,7 @@
                                           
                                           //this_button.all_height = articles.css('height');
                                           this_button.all_height = articles.height();
+                                          console.log('all: ' + this_button.all_height);
                                           
                                           articles.css({'height': this_button.less_height, 'overflow': 'hidden'});
                                           
