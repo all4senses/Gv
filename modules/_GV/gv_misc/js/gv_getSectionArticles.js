@@ -38,23 +38,33 @@
                           success: function(data) 
                                   {   
                                       if(!data.error && data.articles) {
+                                          
+                                          this_button.opened = true;
+                                          this_button.loaded = true;
+                                          
                                           //this_button.less_atricles = pr1.find('.articles').html();
                                           this_button.less_atricles = articles.html();
                                           
                                           this_button.all_atricles = data.articles;
                                           
+                                          this_button.less_height = articles.css('height');
+                                          
+                                          
                                           //pr1.find('.articles').html(data.articles);
                                           
                                           console.log(articles.css('height'));
                                           articles.html(data.articles);
+                                          this_button.all_height = articles.css('height');
                                           console.log(articles.css('height'));
                                           
-                                          this_button.opened = true;
-                                          this_button.loaded = true;
+                                          articles.css({'height': this_button.less_height, 'overflow': 'hidden'});
+                                          
                                           
                                           $(this_button).css('background-position', '-95px 0');
                                           pr1.find('.loading').hide();
                                           $(this_button).show();
+                                          $(articles).animate({height: this_button.all_height},'slow');
+                                          
                                       }
                                       return false;
                                   } 
