@@ -12,21 +12,19 @@
             //console.log($(this)[0].className);
             
             this_button = this;
-            
-
-            
             pr1 = $(this_button).parent().parent();
             
-            //console.log($(this_button).css('background'));
-            //console.log($(this_button).css('width'));
+            articles = pr1.find('.articles');
             
-            //$(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent').css('width', '33px').css('border-radius', '10px');
             
-            //$(this_button).css({'border-radius':'10px', 'width':'33px', 'background':'url(/sites/all/themes/gv_orange/css/images/loading.gif) no-repeat 0 0 transparent'});
-            //$(this_button).css('background', 'url("/sites/all/themes/gv_orange/css/images/loading.gif") no-repeat 0 0 transparent');
+            $(articles).animate({height: '1000px'},'slow');
+            
+            return false;
+            
+            
+            
             $(this_button).hide();
             pr1.find('.loading').show();
-
             
             if (!this_button.loaded) {
 
@@ -43,28 +41,20 @@
                           success: function(data) 
                                   {   
                                       if(!data.error && data.articles) {
-                                          this_button.less_atricles = pr1.find('.articles').html();
+                                          //this_button.less_atricles = pr1.find('.articles').html();
+                                          this_button.less_atricles = articles.html();
+                                          
                                           this_button.all_atricles = data.articles;
                                           
-                                          pr1.find('.articles').html(data.articles);
+                                          //pr1.find('.articles').html(data.articles);
+                                          articles.html(data.articles);
                                          
                                           this_button.opened = true;
-//                                          if (this_button.opened) {
-//                                            this_button.opened = false;
-//                                            //console.log('Not opened!');
-//                                          }
-//                                          else {
-//                                            this_button.opened = true;
-//                                            //console.log('opened!');
-//                                          }
-                                          
                                           this_button.loaded = true;
                                           
                                           $(this_button).css('background-position', '-95px 0');
                                           pr1.find('.loading').hide();
                                           $(this_button).show();
-                                          
-                                          
                                       }
                                       return false;
                                   } 
@@ -76,15 +66,16 @@
             
             if (this_button.opened) {
               this_button.opened = false;
-              console.log('Not opened!');
-              pr1.find('.articles').html(this_button.less_atricles);
+              //pr1.find('.articles').html(this_button.less_atricles);
+              articles.html(this_button.less_atricles);
+              
               $(this_button).css('background-position', '0 0');
               
             }
             else {
               this_button.opened = true;
-              console.log('opened!');
-              pr1.find('.articles').html(this_button.all_atricles);
+              //pr1.find('.articles').html(this_button.all_atricles);
+              articles.html(this_button.all_atricles);
               $(this_button).css('background-position', '-95px 0');
               
             }
@@ -93,23 +84,6 @@
             $(this_button).show();
           }
           
-            
-//          console.log($(this_button));
-//          if (this_button.opened) {
-//            //$(this_button).css({'border-radius':'0', 'width':'95px', 'background':'url(/sites/all/themes/gv_orange/css/images/section-view-less.png) no-repeat 0 0 transparent'});
-//            $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-less.png) no-repeat 0 0 transparent');
-//            console.log('Opened!');
-//          }
-//          else {
-//            //$(this_button).css({'border-radius':'0', 'width':'95px', 'background':'url(/sites/all/themes/gv_orange/css/images/section-view-all.png) no-repeat 0 0 transparent'});
-//            $(this_button).css('background', 'url(/sites/all/themes/gv_orange/css/images/section-view-all.png) no-repeat 0 0 transparent');
-//            console.log('Not opened!');
-//          }
-          
-//          $(this_button).show();
-//          pr1.find('.loading').hide();
-          
-            
           return false;
         });
 
