@@ -13,10 +13,8 @@
             //console.log($(this)[0].className);
             
             if (in_progress) {
-              console.log('in_progress');
               return false;
             }
-            console.log('not in_progress, starting...');
             
             in_progress = true;
             
