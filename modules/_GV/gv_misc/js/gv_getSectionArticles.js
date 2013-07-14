@@ -52,10 +52,10 @@
                                           
                                           //pr1.find('.articles').html(data.articles);
                                           
-                                          console.log(articles.css('height'));
+                                          //console.log(articles.css('height'));
                                           articles.html(data.articles);
                                           this_button.all_height = articles.css('height');
-                                          console.log(articles.css('height'));
+                                          //console.log(articles.css('height'));
                                           
                                           articles.css({'height': this_button.less_height, 'overflow': 'hidden'});
                                           
@@ -77,21 +77,28 @@
             if (this_button.opened) {
               this_button.opened = false;
               //pr1.find('.articles').html(this_button.less_atricles);
-              articles.html(this_button.less_atricles);
+              /////articles.html(this_button.less_atricles);
+              
+              
               
               $(this_button).css('background-position', '0 0');
               
+              pr1.find('.loading').hide();
+              $(this_button).show();
+              $(articles).animate({height: this_button.less_height},'slow');
             }
             else {
               this_button.opened = true;
               //pr1.find('.articles').html(this_button.all_atricles);
-              articles.html(this_button.all_atricles);
+              /////articles.html(this_button.all_atricles);
               $(this_button).css('background-position', '-95px 0');
               
+              pr1.find('.loading').hide();
+              $(this_button).show();
+              $(articles).animate({height: this_button.all_height},'slow');
             }
             
-            pr1.find('.loading').hide();
-            $(this_button).show();
+            
           }
           
           return false;
