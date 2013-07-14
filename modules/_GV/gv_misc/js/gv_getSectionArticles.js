@@ -52,8 +52,10 @@
                                           
                                           this_button.all_atricles = data.articles;
                                           
+                                          console.log('before less height: ' + articles.css('height'));
+                                          
                                           this_button.less_height = articles.css('min-height');
-                                          console.log('less: ' + this_button.less_height);
+                                          console.log('min-height: ' + this_button.less_height);
                                           //this_button.less_height = articles.height();
                                           
                                           //articles.html(data.articles);
