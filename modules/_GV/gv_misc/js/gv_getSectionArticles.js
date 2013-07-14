@@ -64,7 +64,7 @@
                                           
                                           this_button.all_height = articles.css('height');
                                           
-                                          this_button.all_height = articles.html().css('height');
+                                          this_button.all_height = articles.height();
                                           
                                           //this_button.all_height = articles.height();
                                           console.log('all: ' + this_button.all_height);
