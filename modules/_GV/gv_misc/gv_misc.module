@@ -4746,7 +4746,7 @@ function gv_misc_form_alter(&$form, &$form_state, $form_id) {
  * 
  * Allows to use same topics for News, articles, etc.
  */
-function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $pager = NULL, $pages_per_page = 30) {
+function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $pager = NULL, $pages_per_page = 30, $orderBy = NULL) {
   $topics = NULL;
   
   $main_topics_voc = taxonomy_vocabulary_machine_name_load(TOPICS);
@@ -4771,7 +4771,12 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $page
   $query->groupBy('td.name');
   // Exclude main topics terms -> choose only terms for specific node type.
   $query->condition('td.vid', $main_topics_voc->vid, '!=');
-  $query->orderBy('count', 'DESC');
+  if ($orderBy) {
+    $query->orderBy($orderBy[0], $orderBy[1]);
+  }
+  else {
+    $query->orderBy('count', 'DESC');
+  }
   if ($limit) {
     $query->range(0, $limit);
   }
