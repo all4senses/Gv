@@ -17,7 +17,7 @@
             articles = pr1.find('.articles');
             
             
-            $(articles).animate({height: '1000px'},'slow');
+            //$(articles).animate({height: '1000px'},'slow');
             
             return false;
             
@@ -47,8 +47,11 @@
                                           this_button.all_atricles = data.articles;
                                           
                                           //pr1.find('.articles').html(data.articles);
+                                          
+                                          console.log(articles.css('height'));
                                           articles.html(data.articles);
-                                         
+                                          console.log(articles.css('height'));
+                                          
                                           this_button.opened = true;
                                           this_button.loaded = true;
                                           
