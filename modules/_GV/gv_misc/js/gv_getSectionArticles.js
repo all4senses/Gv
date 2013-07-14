@@ -13,15 +13,14 @@
             
             this_button = this;
             pr1 = $(this_button).parent().parent();
-            
+            loading = pr1.find('.loading');
             articles = pr1.find('.articles');
             
-            
-            //$(articles).animate({height: '1000px'},'slow');
-            
-            
             $(this_button).hide();
-            pr1.find('.loading').show();
+            
+            //pr1.find('.loading').show();
+            loading.show();
+            
             
             if (!this_button.loaded) {
 
@@ -42,29 +41,25 @@
                                           this_button.opened = true;
                                           this_button.loaded = true;
                                           
-                                          //this_button.less_atricles = pr1.find('.articles').html();
                                           this_button.less_atricles = articles.html();
                                           
                                           this_button.all_atricles = data.articles;
                                           
                                           this_button.less_height = articles.css('height');
                                           
-                                          
-                                          //pr1.find('.articles').html(data.articles);
-                                          
-                                          //console.log(articles.css('height'));
                                           articles.html(data.articles);
                                           this_button.all_height = articles.css('height');
-                                          //console.log(articles.css('height'));
                                           
                                           articles.css({'height': this_button.less_height, 'overflow': 'hidden'});
                                           
-                                          
                                           $(this_button).css('background-position', '-95px 0');
-                                          pr1.find('.loading').hide();
+                                          
+                                          //pr1.find('.loading').hide();
+                                          loading.hide();
+                                          
+                                          
                                           $(this_button).show();
                                           $(articles).animate({height: this_button.all_height},'slow');
-                                          
                                       }
                                       return false;
                                   } 
@@ -76,24 +71,24 @@
             
             if (this_button.opened) {
               this_button.opened = false;
-              //pr1.find('.articles').html(this_button.less_atricles);
               /////articles.html(this_button.less_atricles);
-              
-              
               
               $(this_button).css('background-position', '0 0');
               
-              pr1.find('.loading').hide();
+              //pr1.find('.loading').hide();
+              loading.hide();
+              
               $(this_button).show();
               $(articles).animate({height: this_button.less_height},'slow');
             }
             else {
               this_button.opened = true;
-              //pr1.find('.articles').html(this_button.all_atricles);
               /////articles.html(this_button.all_atricles);
               $(this_button).css('background-position', '-95px 0');
               
-              pr1.find('.loading').hide();
+              //pr1.find('.loading').hide();
+              loading.hide();
+              
               $(this_button).show();
               $(articles).animate({height: this_button.all_height},'slow');
             }
