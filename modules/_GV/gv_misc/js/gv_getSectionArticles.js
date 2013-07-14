@@ -52,8 +52,8 @@
                                           
                                           this_button.all_atricles = data.articles;
                                           
-                                          //this_button.less_height = articles.css('height');
-                                          this_button.less_height = articles.height();
+                                          this_button.less_height = articles.css('height');
+                                          //this_button.less_height = articles.height();
                                           
                                           //articles.html(data.articles);
                                           articles.replaceWith(data.articles);
