@@ -585,7 +585,7 @@ function gv_block_buildTopicsBlock($content_type_label) {
   
   $themed_tags = '';
   foreach ($tags as $tag) {
-    $themed_tags .= l($tag->name . ' (' . $tag->count . ')', $tag->link['href']);
+    $themed_tags .= l(drupal_ucfirst($tag->name) . ' (' . $tag->count . ')', $tag->link['href']);
   }
   
   return $themed_tags . '<div class="more-link">' . l('All', 'articles/tags') . '</div>';
