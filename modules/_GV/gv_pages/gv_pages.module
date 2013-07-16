@@ -5146,8 +5146,9 @@ function gv_pages_node_view($node, $view_mode) {
     case 'blog_post':
     case 'news_post':
       
-      dpm($node);
-      
+      //dpm($node);
+
+      $node->body['und'][0]['value'] = preg_replace('|(<a.*\.mp3.*</a>)|', '<div class="ui360">$1</div>', $node->body['und'][0]['value']);
       
       break; // End of quote.
       
