@@ -5215,7 +5215,8 @@ If you don&rsquo;t know it by now, you might never know. Voicemail greetings are
         dpm($result);
         
            
-        $str = preg_replace('/(<a.*\.mp3.*<\/a>)/sim', '<div class="ui360">$1</div>', $str);
+        //$str = preg_replace('/(<a.*\.mp3.*<\/a>)/sim', '<div class="ui360">$1</div>', $str);
+        $str = preg_replace('/(<a.*\.mp3.*<\/a>)/iU', '<div class="ui360">$1</div>', $str);
         dpm('---------------------------');
         dpm($str);
         
