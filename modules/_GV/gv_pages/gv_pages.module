@@ -5203,18 +5203,18 @@ If you don&rsquo;t know it by now, you might never know. Voicemail greetings are
 <p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>';
         
     
-           $str = 'If you don&rsquo;t know it by now, you might never know. Voicemail greetings are incredibly important to users. It conveys identity, character, and image to callers. In an increasingly digital world, where business is conducted online and over the phone, phone presence is increasingly important. As such, your greeting is a crucial part of the platform. While there are a number of obstacles to be aware of, utilized properly, voicemail greetings can be incredibly helpful and beneficial; therefore, its in users best interest to invest themselves in creating a quality recording.</em></p>
-<p>&nbsp;</p>
-<p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>
-<p><br />
-	&nbsp;</p>
-<p>Related Articles:<br />';
+//           $str = 'If you don&rsquo;t know it by now, you might never know. Voicemail greetings are incredibly important to users. It conveys identity, character, and image to callers. In an increasingly digital world, where business is conducted online and over the phone, phone presence is increasingly important. As such, your greeting is a crucial part of the platform. While there are a number of obstacles to be aware of, utilized properly, voicemail greetings can be incredibly helpful and beneficial; therefore, its in users best interest to invest themselves in creating a quality recording.</em></p>
+//<p>&nbsp;</p>
+//<p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>
+//<p><br />
+//	&nbsp;</p>
+//<p>Related Articles:<br />';
     
-           preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/s', $str, $result);
+           preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/si', $str, $result);
         dpm($result);
         
            
-        $str = preg_replace('/(<a.*\.mp3.*<\/a>)/s', '<div class="ui360">$1</div>', $str);
+        $str = preg_replace('/(<a.*\.mp3.*<\/a>)/si', '<div class="ui360">$1</div>', $str);
         dpm('---------------------------');
         dpm($str);
         
