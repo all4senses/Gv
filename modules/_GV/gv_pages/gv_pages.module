@@ -5173,7 +5173,7 @@ function gv_pages_node_view($node, $view_mode) {
         foreach ($links as $link) {
           //$image->setAttribute('src', 'http://example.com/' . $image->getAttribute('src'));
           dpm($link->getAttribute('href'));
-          dpm($link->substringData(0, 1000));
+          dpm($link->getNodePath());
           
         }
 
