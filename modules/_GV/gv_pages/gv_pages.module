@@ -5210,11 +5210,11 @@ If you don&rsquo;t know it by now, you might never know. Voicemail greetings are
 //	&nbsp;</p>
 //<p>Related Articles:<br />';
     
-           preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/si', $str, $result);
+           preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/sim', $str, $result);
         dpm($result);
         
            
-        $str = preg_replace('/(<a.*\.mp3.*<\/a>)/si', '<div class="ui360">$1</div>', $str);
+        $str = preg_replace('/(<a.*\.mp3.*<\/a>)/sim', '<div class="ui360">$1</div>', $str);
         dpm('---------------------------');
         dpm($str);
         
