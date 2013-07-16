@@ -385,6 +385,15 @@ function gv_misc_testPage() {
              </div>';
 
   $out .= $player;
+  
+  
+  $out .= '<a href="' . $file_path . '" class="sm2_button">Test</a>';
+  
+  
+  drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
+  drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/mp3-player-button/script/mp3-player-button.js');
+  drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/mp3-player-button/css/mp3-player-button.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+
                 
   return $out . '<br>End of Test';
 }
