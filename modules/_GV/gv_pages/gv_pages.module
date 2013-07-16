@@ -5156,12 +5156,6 @@ function gv_pages_node_view($node, $view_mode) {
         $str = '<p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>';
         
         
-        $str = 'If you don&rsquo;t know it by now, you might never know. Voicemail greetings are incredibly important to users. It conveys identity, character, and image to callers. In an increasingly digital world, where business is conducted online and over the phone, phone presence is increasingly important. As such, your greeting is a crucial part of the platform. While there are a number of obstacles to be aware of, utilized properly, voicemail greetings can be incredibly helpful and beneficial; therefore, its in users best interest to invest themselves in creating a quality recording.</em></p>
-<p>&nbsp;</p>
-<p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>
-<p><br />
-	&nbsp;</p>
-<p>Related Articles:<br />';
         
         
         $str = '&nbsp;&nbsp;&nbsp;&nbsp; <strong>j. Holiday Greetings</strong>: Holiday greetings are great as they show callers you&rsquo;re updated, in touch, and involved in the present. Standardization is good, but it sometimes lacks the human touch. Also, holiday greetings can express one&rsquo;s consideration; however, in utilizing this method, there are a number of routes one can go. For example, <a href="http://www.snaprecordings.com/common/examples/holiday_greetings.html" target="_blank">SnapRecordings lists a few samples</a> in which one may choose a more lax greeting; i.e. &ldquo;Happy Holidays from <strong>[Company Name]</strong>! At this time, our office is closed for the holiday season. Please leave a message and your call will be returned when we return,&rdquo; or even something more formal, &ldquo;Thank you for calling <strong>[Company Name]</strong>; we are currently closed for the holiday. Please leave a message and your call will be returned when we return.&rdquo; Another good use of a holiday greeting can be to relay variances in business hours, specials, etc.</p>
@@ -5208,7 +5202,15 @@ If you don&rsquo;t know it by now, you might never know. Voicemail greetings are
 <p>&nbsp;</p>
 <p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>';
         
-        
+    
+           $str = 'If you don&rsquo;t know it by now, you might never know. Voicemail greetings are incredibly important to users. It conveys identity, character, and image to callers. In an increasingly digital world, where business is conducted online and over the phone, phone presence is increasingly important. As such, your greeting is a crucial part of the platform. While there are a number of obstacles to be aware of, utilized properly, voicemail greetings can be incredibly helpful and beneficial; therefore, its in users best interest to invest themselves in creating a quality recording.</em></p>
+<p>&nbsp;</p>
+<p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>
+<p><br />
+	&nbsp;</p>
+<p>Related Articles:<br />';
+    
+           
         $str = preg_replace('/(<a.*\.mp3.*<\/a>)/s', '<div class="ui360">$1</div>', $str);
         dpm('---------------------------');
         dpm($str);
