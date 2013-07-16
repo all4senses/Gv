@@ -5210,7 +5210,7 @@ If you don&rsquo;t know it by now, you might never know. Voicemail greetings are
 	&nbsp;</p>
 <p>Related Articles:<br />';
     
-           preg_match('/(<a.*\.mp3.*<\/a>)/s', $str, $result);
+           preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/s', $str, $result);
         dpm($result);
         
            
