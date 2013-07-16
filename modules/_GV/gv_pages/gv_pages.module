@@ -5142,6 +5142,14 @@ function gv_pages_node_view($node, $view_mode) {
 
   switch ($node->type) {
     
+    case 'article':
+      
+      dpm($node);
+      
+      
+      break; // End of quote.
+      
+      
     case 'quote':
       
       $node->q_data = unserialize($node->field_q_data['und'][0]['value']);
