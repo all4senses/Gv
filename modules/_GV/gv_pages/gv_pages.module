@@ -5150,8 +5150,8 @@ function gv_pages_node_view($node, $view_mode) {
 
       global $user;
       if ($user->uid == 1) {
-        $node->body['und'][0]['value'] = preg_replace('/(<a.*\.mp3.*<\/a>)/iU', '<div class="ui360">$1</div>', $node->body['und'][0]['value']);
-        //dpm($node->body['und'][0]['value']);
+        $node->body['und'][0]['value'] = preg_replace('/(<a.*\.mp3.*<\/a>)/iUs', '<div class="ui360">$1</div>', $node->body['und'][0]['value']);
+        dpm($node->body['und'][0]['value']);
         
         $str = '<p><a href="http://getvoip.com/sites/default/files/audio/VN_LiveConnect_4.mp3"><em>Test Audio 1</em></a></p>';
         
