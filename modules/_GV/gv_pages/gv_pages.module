@@ -5185,7 +5185,8 @@ function gv_pages_node_view($node, $view_mode) {
 
         dpm($audios);
         foreach ($audios as $audio) {
-          $node->body['und'][0]['value'] = str_replace($audio, '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
+          //$node->body['und'][0]['value'] = str_replace($audio, '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
+          $node->body['und'][0]['value'] = preg_replace('/' . $audio . '/i', '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
         }
         
         
