@@ -388,13 +388,24 @@ function gv_misc_testPage() {
   
   
   $out .= '<a href="' . $file_path . '" class="sm2_button">Test</a>';
+  $out .= '<div class="ui360"><a href="' . $file_path . '" class="sm2_button">Test</a><div>';
   
   
   drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
   drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/mp3-player-button/script/mp3-player-button.js');
   drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/mp3-player-button/css/mp3-player-button.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
-                
+  
+  //drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
+  drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/360-player/script/berniecode-animator.js');
+  drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/360-player/script/360player.js');
+  drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/360-player/360player.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+
+  drupal_add_js('soundManager.setup({
+  // path to directory containing SM2 SWF
+  url: "sites/all/libraries/audio/soundmanager2/swf/"
+});', 'inline');
+  
   return $out . '<br>End of Test';
 }
 
