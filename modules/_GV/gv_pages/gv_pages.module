@@ -5174,7 +5174,8 @@ function gv_pages_node_view($node, $view_mode) {
           //$image->setAttribute('src', 'http://example.com/' . $image->getAttribute('src'));
           if (strpos($link->getAttribute('href'), '.mp3') !== false) {
             $audios[] = $dom->saveXML($link);
-            $element = $dom->createElement('div', $dom->saveXML($link));
+            $element = $dom->createElement('div');
+            $element->appendChild($link);
             dpm($dom->saveXML($element));
           }
           //dpm($link->getAttribute('href'));
