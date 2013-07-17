@@ -184,7 +184,7 @@ ul.gv{margin-left: 0px; padding-left: 10px;}
 
 /* set constant position for om submenu block*/
 .om-maximenu.om-maximenu-block ul.om-menu {width: 1080px;}
-.not-logged-in .om-maximenu.om-maximenu-block ul.om-menu {margin-left: 48px;}
+.not-logged-in .om-maximenu.om-maximenu-block ul.om-menu {margin-left: 40px;}
 
 .om-maximenu ul.om-menu li.om-leaf{top: -2px;}
 
@@ -201,7 +201,14 @@ body.not-admin #om-menu-main-om-menu li.om-leaf.leaf-write-review{background: no
 
 
 /*.om-maximenu ul.om-menu li.om-leaf .om-link{line-height: 30px; color: white; font-weight: bold; padding: 5px 20px 15px 20px;}*/
-.om-maximenu ul.om-menu li.om-leaf .om-link{line-height: 41/*36*/px; color: #868686; font-weight: bold; font-size: 13/*15*/px; padding: 4px 14px 8px 14px;}
+
+
+.om-maximenu ul.om-menu li.om-leaf .om-link{line-height: 41/*36*/px; color: #868686; font-weight: bold; font-size: 13px; padding: 4px 14px 8px 14px;}
+
+/* safari only */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .om-maximenu ul.om-menu li.om-leaf .om-link {font-size: 12px;}
+}
 
 
 .om-maximenu ul.om-menu li.om-leaf .om-link.link-e{padding: 4px 8px 8px 8px;}
