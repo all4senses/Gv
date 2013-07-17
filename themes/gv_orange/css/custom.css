@@ -2204,11 +2204,23 @@ body.sidebar-second .page-compare-providers #sidebar-second {padding: 0; margin-
 #block-gv-blocks-library-sections .articles {overflow: hidden; min-height: 105px;}
 
 
+
+
 /* Sound Manager 2 player */
-.ui360 .sm2-360btn-default:hover, .ui360 .sm2-360ui.sm2_paused .sm2-360btn:hover {
-background: transparent url(/sites/all/libraries/audio/soundmanager2/demo/360-player/360-button-play-light.png) no-repeat 50% 50%;
-_background: transparent url(/sites/all/libraries/audio/soundmanager2/demo/360-player/360-button-play.gif) no-repeat 50% 50%;
-cursor: pointer;
+
+.ui360, .ui360 .sm2-360btn-default, .ui360 .sm2-360ui.sm2_paused .sm2-360btn {
+background: transparent url(/sites/all/libraries/audio/soundmanager2/demo/360-player/360-button-play2.png) no-reoeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAABoUlEQ…k2yJDFsRZfXpzXbDZ7WiwW3nw+9zUKGDPHGpkL5V//mn7OJyJZApyzeUS5AAAAAElFTkSuQmCC);
+background-repeat: no-repeat;
 }
 
+.ui360 .sm2-360btn-default, .ui360 .sm2-360ui.sm2_paused .sm2-360btn {
+background-position: 50% 50%;
+_background: transparent url(/sites/all/libraries/audio/soundmanager2/demo/360-player/360-button-play2.gif) no-repeat 50% 50%;
+}
 
+.ui360 .sm2-360btn-default:hover, .ui360 .sm2-360ui.sm2_paused .sm2-360btn:hover {
+background: transparent url(/sites/all/libraries/audio/soundmanager2/demo/360-player/360-button-play-light2.png) no-repeat 50% 50%;
+_background: transparent url(/sites/all/libraries/audio/soundmanager2/demo/360-player/360-button-play2.gif) no-repeat 50% 50%;
+cursor: pointer;
+}
