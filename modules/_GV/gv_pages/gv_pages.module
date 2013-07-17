@@ -5179,13 +5179,14 @@ function gv_pages_node_view($node, $view_mode) {
             $element = $dom->createElement('div');
             $element->appendChild($link);
             $element->setAttribute('class', 'ui360');
-            dpm('удуьуте: ' . $dom->saveXML($element));
+            dpm('$element: ' . $dom->saveXML($element));
             
             //$link->insertBefore($element, $link);
             
             
             //dpm($parent);
             $parent->appendChild($element);
+            dpm('parent: ' . $dom->saveXML($parent));
             //dpm($dom->saveXML($link->parentNode));
             //$link->parentNode->replaceChild($element, $link);
           }
@@ -5196,12 +5197,13 @@ function gv_pages_node_view($node, $view_mode) {
         }
         
         $node->body['und'][0]['value'] = $dom->saveXML();
+        dpm($node->body['und'][0]['value']);
 
-        dpm($audios);
-        foreach ($audios as $audio) {
-          //$node->body['und'][0]['value'] = str_replace($audio, '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
-          $node->body['und'][0]['value'] = preg_replace('|' . $audio . '|', '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
-        }
+//        dpm($audios);
+//        foreach ($audios as $audio) {
+//          //$node->body['und'][0]['value'] = str_replace($audio, '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
+//          $node->body['und'][0]['value'] = preg_replace('|' . $audio . '|', '<div class="ui360">' . $audio . '</div>', $node->body['und'][0]['value']);
+//        }
         
         
         drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
