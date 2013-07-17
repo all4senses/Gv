@@ -5155,15 +5155,15 @@ function gv_pages_node_view($node, $view_mode) {
         $dom = new DOMDocument;
         $dom->loadHTML($node->body['und'][0]['value']);
         $links = $dom->getElementsByTagName('a');
-          if (strpos($link->getAttribute('href'), '.mp3') !== false) {
-            $parent = $link->parentNode;
-            $element = $dom->createElement('div');
-            $element->setAttribute('class', 'ui360');
-            $element->appendChild($link);
-            $parent->appendChild($element);
-            $mp3_presents = TRUE;
-          }
+        if (strpos($link->getAttribute('href'), '.mp3') !== false) {
+          $parent = $link->parentNode;
+          $element = $dom->createElement('div');
+          $element->setAttribute('class', 'ui360');
+          $element->appendChild($link);
+          $parent->appendChild($element);
+          $mp3_presents = TRUE;
         }
+        
         
         
         $node->body['und'][0]['value'] = preg_replace('/(<a.*\.mp3.*<\/a>)/iU', '<div class="ui360">$1</div>', $node->body['und'][0]['value']);
