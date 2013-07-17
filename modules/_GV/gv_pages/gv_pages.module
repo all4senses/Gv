@@ -5152,6 +5152,9 @@ function gv_pages_node_view($node, $view_mode) {
       if ($user->uid == 1) {
            
         $mp3_presents = FALSE;
+        
+        // Variant 1 - with DOMDocument.
+        
 //        $dom = new DOMDocument;
 //        $dom->loadHTML($node->body['und'][0]['value']);
 //        $links = $dom->getElementsByTagName('a');
@@ -5165,16 +5168,23 @@ function gv_pages_node_view($node, $view_mode) {
 //        }
 //        
         
+        // Variant 2 - with preg_replace
         
-        $node->body['und'][0]['value'] = preg_replace('/(<a.*\.mp3.*<\/a>)/iU', '<div class="ui360">$1</div>', $node->body['und'][0]['value']);
-        $node->content['body'][0]['#markup'] = $node->body['und'][0]['value'];
-        $mp3_presents = TRUE;
         //preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/sim', $str, $result);
         //preg_match('/(<a.*href="(.*\.mp3)".*<\/a>)/iU', $str, $result);
+        $new_body = preg_replace('/(<a.*\.mp3.*<\/a>)/iU', '<div class="ui360">$1</div>', $node->body['und'][0]['value']);
+        if ($new_body != $node->body['und'][0]['value']) {
+          $node->body['und'][0]['value'] = $node->content['body'][0]['#markup'] = $new_body;
+          $mp3_presents = TRUE;
+        }
+        
+        
         
         
         if ($mp3_presents) {
           
+          // Variant 1 - with DOMDocument.
+           
 //          $node->body['und'][0]['value'] = $dom->saveHTML($dom->documentElement);
 //          $node->body['und'][0]['value'] = str_replace(array('<html><body>', '</body></html>'), '', $node->body['und'][0]['value']);
 //          $node->content['body'][0]['#markup'] = $node->body['und'][0]['value'];
@@ -5182,7 +5192,7 @@ function gv_pages_node_view($node, $view_mode) {
           drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
           drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/360-player/script/berniecode-animator.js');
           drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/360-player/script/360player.js');
-          drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/360-player/360player.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+          drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/360-player/360player.css'); //drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/360-player/360player.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
           drupal_add_js('soundManager.setup({
               // path to directory containing SM2 SWF
