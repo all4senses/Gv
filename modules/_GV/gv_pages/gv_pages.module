@@ -5178,9 +5178,9 @@ function gv_pages_node_view($node, $view_mode) {
             $element->appendChild($link);
             $element->setAttribute('class', 'ui360');
             dpm($dom->saveXML($element));
-            //$dom->insertBefore($element, $link);
+            $link->insertBefore($element, $link);
             //dpm($dom->saveXML($link->parentNode));
-            $link->parentNode->replaceChild($element, $link);
+            //$link->parentNode->replaceChild($element, $link);
           }
           //dpm($link->getAttribute('href'));
           //dpm($link->getNodePath());
