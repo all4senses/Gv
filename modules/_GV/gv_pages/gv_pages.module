@@ -5197,6 +5197,7 @@ function gv_pages_node_view($node, $view_mode) {
           
         }
         
+        dpm($node);
         $node->body['und'][0]['value'] = $dom->saveHTML();
         dpm($node->body['und'][0]['value']);
 
