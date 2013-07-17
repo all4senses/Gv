@@ -5173,21 +5173,21 @@ function gv_pages_node_view($node, $view_mode) {
         foreach ($links as $link) {
           //$image->setAttribute('src', 'http://example.com/' . $image->getAttribute('src'));
           if (strpos($link->getAttribute('href'), '.mp3') !== false) {
-            $audios[] = $dom->saveXML($link);
+            $audios[] = $dom->saveHTML($link);
             $parent = $link->parentNode;
             dpm('parent: ' . $dom->saveXML($parent));
             $element = $dom->createElement('div');
             $element->appendChild($link);
-            dpm('parent: ' . $dom->saveXML($parent));
+            dpm('parent: ' . $dom->saveHTML($parent));
             $element->setAttribute('class', 'ui360');
-            dpm('$element: ' . $dom->saveXML($element));
+            dpm('$element: ' . $dom->saveHTML($element));
             
             //$link->insertBefore($element, $link);
             
             
             //dpm($parent);
             $parent->appendChild($element);
-            dpm('parent: ' . $dom->saveXML($parent));
+            dpm('parent: ' . $dom->saveHTML($parent));
             //dpm($dom->saveXML($link->parentNode));
             //$link->parentNode->replaceChild($element, $link);
           }
@@ -5197,7 +5197,7 @@ function gv_pages_node_view($node, $view_mode) {
           
         }
         
-        $node->body['und'][0]['value'] = $dom->saveXML();
+        $node->body['und'][0]['value'] = $dom->saveHTML();
         dpm($node->body['und'][0]['value']);
 
 //        dpm($audios);
