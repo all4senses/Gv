@@ -5194,7 +5194,7 @@ function gv_pages_node_view($node, $view_mode) {
           
         }
         
-        $node->body['und'][0]['value'] = saveXML($dom);
+        $node->body['und'][0]['value'] = $dom->saveXML();
 
         dpm($audios);
         foreach ($audios as $audio) {
