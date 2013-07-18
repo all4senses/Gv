@@ -5146,6 +5146,9 @@ function gv_pages_node_view($node, $view_mode) {
     case 'blog_post':
     case 'news_post':
            
+      if ($view_mode != 'full') {
+        return;
+      }
       $mp3_presents = FALSE;
         
       // Variant 1 - with DOMDocument.
@@ -5181,6 +5184,8 @@ function gv_pages_node_view($node, $view_mode) {
 
       if ($mp3_presents) {
 
+        dpm('mp3_presents!!!!!!');
+        
         // Variant 1 - with DOMDocument.
 
 //          $node->body['und'][0]['value'] = $dom->saveHTML($dom->documentElement);
