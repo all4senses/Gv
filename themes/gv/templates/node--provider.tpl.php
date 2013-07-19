@@ -131,10 +131,10 @@
                     <div class="text">
                       <?php 
                       
-                         echo '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><img src="/sites/default/files/writeareview.png" /></a>',
+                         echo '<div class="voters"><div class="title">Number of Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>',
                               '<div id="positive">', $node->gv_recommends['positive'], ' Positive reviews</div><div id="negative">', $node->gv_recommends['negative'], ' Negative reviews</div>',
                               '<div class="recommend"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
-                              '<div class="voters"><div class="title">Number of Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>';
+                              '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><img src="/sites/default/files/writeareview.png" /></a>';
                       ?>
                       
                     </div>
