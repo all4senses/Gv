@@ -125,27 +125,8 @@
                 </div>
               </div>
              
-              <div class="image">
-                <?php
-                
-                  if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div>' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title']))), '</div>';
-                  }
-                  
-                  if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
-                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $provider_name), '</div>';
-                  }
-                ?>  
-                
-              </div>
-          
-              
-            </div>
-              <!--<div class="bottom-clear"></div> -->
+            <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
-              <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
-
-                  <div class="gv_votes"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?></div>
                   <div class="overall"> 
                     <div class="text">
                       <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/default/files/writeareview.png" /></a><div class="voters"><div class="title">' . 'Number of Reviews' . ':</div><div class="count" property="v:count"><a href="#reviews">' . $node->gv_voters . '</a></div></div>'; ?>
@@ -161,7 +142,32 @@
               <? else: ?>
                   <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/default/files/writeareview.png" /></a>'; ?>
               <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+             
               
+            </div>
+          
+          
+              <!--<div class="bottom-clear"></div> -->
+
+              <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                  <div class="gv_votes"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?></div>
+              <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+             
+              
+              <div class="image">
+                <?php
+                
+                  if (isset($content['field_p_image'][0]['#item']['uri'])) {
+                    echo '<div>' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title']))), '</div>';
+                  }
+                  
+                  if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
+                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $provider_name), '</div>';
+                  }
+                ?>  
+                
+              </div>
+                  
               <div class="bottom-clear"></div>
               
               
