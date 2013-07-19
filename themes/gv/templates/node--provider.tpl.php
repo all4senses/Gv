@@ -129,10 +129,14 @@
 
                   <div class="overall"> 
                     <div class="text">
-                      <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/default/files/writeareview.png" /></a><div class="voters"><div class="title">' . 'Number of Reviews' . ':</div><div class="count" property="v:count"><a href="#reviews">' . $node->gv_voters . '</a></div></div>'; ?>
-                      <?php echo '<div id="positive">' . $node->gv_recommends['positive'] . ' Positive reviews</div><div id="negative">' . $node->gv_recommends['negative'] . ' Negative reviews</div>' ?>
-                      <?php echo '<div class="recommend"><div class="title">Would recommend: </div><div class="data">' . $node->gv_recommend . '% of Users' . '</div></div>'; ?>
-                      <div class="title"><?php $provider_name . ' Overall Rated:'; ?></div>
+                      <?php 
+                      
+                         echo '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><img src="/sites/default/files/writeareview.png" /></a>',
+                              '<div id="positive">', $node->gv_recommends['positive'], ' Positive reviews</div><div id="negative">', $node->gv_recommends['negative'], ' Negative reviews</div>',
+                              '<div class="recommend"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
+                              '<div class="voters"><div class="title">Number of Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>';
+                      ?>
+                      
                     </div>
                     
                   </div>
@@ -149,6 +153,7 @@
 
               <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
                   <div class="gv_votes"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
+                    <div class="title"><?php echo 'Total Rating'; ?></div>
                     <div class="star-big">
                       <?php echo '<div class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>'; ?>
                     </div>
