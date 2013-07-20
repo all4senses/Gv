@@ -152,7 +152,7 @@
               <!--<div class="bottom-clear"></div> -->
 
               <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
-                  <div class="gv_votes"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
+                  <div class="gv_votes main"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
                     <div class="total">
                       <?php echo '<span class="title">Total Rating: </span><span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span>'; ?>
                     </div>
