@@ -54,6 +54,7 @@
           
           
            <?php if ($page): ?>
+          <div id="provider-main">
             <div id="provider-top">
               <div class="logo-share">
                 <?php
@@ -178,7 +179,7 @@
               </div>
                   
               <div class="bottom-clear"></div>
-              
+            </div>
               
                       
               <div class="data tabs">
