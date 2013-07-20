@@ -382,7 +382,7 @@
 
   </div> <!-- main-content -->
   
-  <div class="shadow"></div>
+  <!--<div class="shadow"></div> -->
   
   
   <?php 
