@@ -188,7 +188,7 @@
                 
                 <ul>
                   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
-                    <li><a href="#tabs-0"><?php echo t('!p User Reviews', array('!p' => !empty($provider_name) ? $provider_name : 'Provider' )); ?></a></li>
+                    <li><a href="#tabs-0"><?php echo t('!p Reviews', array('!p' => !empty($provider_name) ? $provider_name : 'Provider' )); ?></a></li>
                   <?php endif; ?>
                     
                   <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => !empty($provider_name ) ? $provider_name : ' Provider' )); ?></a></li>
