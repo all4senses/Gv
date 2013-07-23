@@ -60,7 +60,7 @@
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     $logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo')))) . '</div>';
-                    echo '<table><tbody>><tr><td>' . $logo_block . '</td></tr></tbody></table>';
+                    echo '<table><tbody><tr><td>' . $logo_block . '</td></tr></tbody></table>';
                   }
                   else {
                     echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
