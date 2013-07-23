@@ -59,11 +59,13 @@
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    echo '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo')))) . '</div>';
+                    $logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo')))) . '</div>';
+                    echo '<table><tbody>><tr><td>' . $logo_block . '</td></tr></tbody></table>';
                   }
                   else {
                     echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
                   }
+                  
                   $url = 'http://getvoip.com'. url('node/' . $node->nid);
                 ?>
                 
@@ -126,7 +128,7 @@
                 </div>
               </div>
              
-            <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+            <?php if (!empty($content['gv_ratings'])): ?>
 
                   <div class="overall"> 
                     <div class="text">
@@ -385,9 +387,6 @@
   <!--<div class="shadow"></div> -->
   
   
-  <?php 
-  global $user;
-  if (0) /*($user->uid == 1)*/ /*($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1'])*/: ?>
     <div class="reviews">
       <div class="header">
         <a id="reviews"></a>
@@ -431,7 +430,7 @@
       ?>
       
     </div>
- <?php endif; ?>
+
   
 
 <?php if (!$page): ?>
