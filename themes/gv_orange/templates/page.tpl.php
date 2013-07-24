@@ -46,11 +46,11 @@
   </header> <!-- /#header -->
 
   
-  <?php /* if ($page['highlighted']): ?>
+  <?php  if ($page['highlighted']): ?>
     <section id="highlighted" class="clearfix">
       <?php print render($page['highlighted']); ?>
     </section>
-  <?php endif; */ ?>
+  <?php endif;  ?>
   
   
   <div id="all-content" class="clearfix">
