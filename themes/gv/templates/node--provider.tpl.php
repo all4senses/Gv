@@ -9,14 +9,14 @@
       //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
      
 
-          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-            $share_title = $node->metatags['title']['value'];
-          }
-          else {
-            $share_title = $title;
-          }
-
-        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+//          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+//            $share_title = $node->metatags['title']['value'];
+//          }
+//          else {
+//            $share_title = $title;
+//          }
+//
+//        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
 
     ?>
 <?php endif; ?>
@@ -66,7 +66,6 @@
                     echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
                   }
                   
-                  $url = 'http://getvoip.com'. url('node/' . $node->nid);
                 ?>
                 
                 <?php /*

@@ -31,27 +31,26 @@
       
       
       //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
-      //dpm($_SERVER['REQUEST_URI']);
-      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : gv_misc_getOlderUrlForSharing($_SERVER['REQUEST_URI']));
+
       
-
-        
-        $share_title = NULL;
-                
-        if ($is_front) {
-          $share_title = gv_misc_metatag_getFrontTitle();
-        }
-
-        if (!$share_title) {
-          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-            $share_title = $node->metatags['title']['value'];
-          }
-          else {
-            $share_title = $title;
-          }
-        }
-
-        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+//      $url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : gv_misc_getOlderUrlForSharing($_SERVER['REQUEST_URI']));
+//
+//      $share_title = NULL;
+//
+//      if ($is_front) {
+//        $share_title = gv_misc_metatag_getFrontTitle();
+//      }
+//
+//      if (!$share_title) {
+//        if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+//          $share_title = $node->metatags['title']['value'];
+//        }
+//        else {
+//          $share_title = $title;
+//        }
+//      }
+//
+//      echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
 
   
   ?>
