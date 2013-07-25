@@ -261,6 +261,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['home_in_highlighted'] = array(
+    'info' => 'Home in highlighted',
+    'cache' => DRUPAL_NO_CACHE,
+  );
     
   return $blocks;
 }
@@ -530,6 +534,17 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_reviewsCounter();
       break;
     
+    case 'home_in_highlighted':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion();
+      break;
+    
+  $blocks['home_in_highlighted'] = array(
+    'info' => 'Home in highlighted',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+    
   }
 
   return $block;
@@ -568,6 +583,17 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
   
 }
 
+
+/**
+ * Block with the main part of the home preface to place to Highlighted region.
+ */
+function gv_blocks_prefaceHomeMainInHighlightedRegion() {
+  $home_preface_node = gv_misc_getPrefaceByKey('front');
+  $home_preface_node->title_no_link = TRUE;
+  $home_preface_node_view = node_view($home_preface_node, 'full');
+
+  return render($home_preface_node_view);
+}
 
 
 /**
