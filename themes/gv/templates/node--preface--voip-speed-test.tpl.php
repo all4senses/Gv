@@ -1,15 +1,15 @@
 <?php
 
-      $url = 'http://getvoip.com' . $_SERVER['REQUEST_URI'];
-        
-      if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-        $share_title = $node->metatags['title']['value'];
-      }
-      else {
-        $share_title = $title;
-      }
-
-      echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+//      $url = 'http://getvoip.com' . $_SERVER['REQUEST_URI'];
+//        
+//      if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+//        $share_title = $node->metatags['title']['value'];
+//      }
+//      else {
+//        $share_title = $title;
+//      }
+//
+//      echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
 
 ?>
 
