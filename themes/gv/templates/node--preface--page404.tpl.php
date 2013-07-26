@@ -12,6 +12,10 @@
           hide($content['links']);
           print render($content);
           
+          
+          // echo gv_blocks_getBlockThemed(array('module' => 'om_maximenu', 'delta' => 'om-maximenu-1', 'no_subject' => TRUE, 'class' => 'block-om-maximenu', 'shadow' => FALSE), TRUE, '+31 day', ($user->uid ? '_logged' : NULL));
+          dpm($user);
+          
           // Get content of the Sitemap.
           $sitemap_body = cache_get('gv_sitemap_body');
           if (!$sitemap_body || empty($sitemap_body->data)) {
