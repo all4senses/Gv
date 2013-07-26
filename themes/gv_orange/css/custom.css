@@ -2442,3 +2442,7 @@ html[xmlns*=""]:root .s-test {color: green;}
 body:last-child:not(:root:root) .s-test {color: black;} 
 
 
+/* safari only */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .s-test {color: yellow;}
+}
