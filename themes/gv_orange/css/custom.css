@@ -2417,32 +2417,32 @@ text-shadow: 1px 1px 1px gray;
 
 /* Safari hacks */
 
-.s-test {color: lightgray;}
+.s-test-violet, .s-test-red, .s-test-green, .s-test-blue, .s-test-black, .s-test-yellow {color: lightgray;}
 
 
 
 /* Safari browser css hack */
-body:first-of-type .s-test {color: violet;}
+body:first-of-type .s-test-violet {color: violet;}
 
 
 /* Safari 2-3 */
-html[xmlns*=""] body:last-child .s-test {color: red;}
+html[xmlns*=""] body:last-child .s-test-red {color: red;}
 
 
 /* Safari 2 - 3.1 */
-html[xmlns*=""]:root .s-test {color: green;}
+html[xmlns*=""]:root .s-test-green {color: green;}
 
 
 /* Safari only */
-.s-test:not(:root:root) {color: blue;}
+.s-test-blue:not(:root:root) {color: blue;}
 
 
   
 /* For  Safari 1.3+ only */
-body:last-child:not(:root:root) .s-test {color: black;} 
+body:last-child:not(:root:root) .s-test-black {color: black;} 
 
 
 /* safari only */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    .s-test {color: yellow;}
+    .s-test-yellow {color: yellow;}
 }
