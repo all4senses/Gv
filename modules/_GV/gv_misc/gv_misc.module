@@ -372,51 +372,7 @@ function gv_misc_testPage() {
   //drupal_add_css(path_to_theme() . '/css/remote-fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   
   
-  $file_path = '/sites/all/libraries/audio/mp3-maxi/test.mp3';
-  /*
-  $player_type = 'player_mp3_maxi.swf'; // 'player_mp3.swf'
-  //$file_path = '/' . file_directory_path() . '/mp3/' . 'test.mp3';
-  $skin = 'skin=/sites/all/libraries/audio/mp3-maxi/skin001.jpg';
-  $player = '<div class="mp3">
-              <object type="application/x-shockwave-flash" data="/sites/all/libraries/audio/mp3-maxi/' . $player_type . '" width="200" height="20">
-                <param name="movie" value="/sites/all/libraries/audio/mp3-maxi/' . $player_type . '" />
-                <param name="FlashVars" value="mp3=' . $file_path . '&amp;showvolume=1&amp;showinfo=1&amp;' . $skin . '" />
-                <p>Texte alternatif</p>
-              </object>
-             </div>';
-
-  $out .= $player;
-  */
-  
-  //$out .= '<a href="' . $file_path . '" class="sm2_button">Test</a>';
-  
-  //$out .= '<div class="ui360"><a href="' . $file_path . '">Test</a></div>';
-  
-  $out .= '<a href="' . $file_path . '">Test</a>';
-  
-  //$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
-  $out = preg_replace('|(<a.*\.mp3.*</a>)|', '<div class="ui360">$1</div>', $out);
-  
-  dpm($out);
-  
-//  drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
-//  drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/mp3-player-button/script/mp3-player-button.js');
-//  drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/mp3-player-button/css/mp3-player-button.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-  
-  drupal_add_js('sites/all/libraries/audio/soundmanager2/script/soundmanager2.js');
-  drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/360-player/script/berniecode-animator.js');
-  drupal_add_js('sites/all/libraries/audio/soundmanager2/demo/360-player/script/360player.js');
-  drupal_add_css('sites/all/libraries/audio/soundmanager2/demo/360-player/360player.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-  drupal_add_js('soundManager.setup({
-  // path to directory containing SM2 SWF
-  url: "sites/all/libraries/audio/soundmanager2/swf/"
-});', 'inline');
-
-  
-  
-  
+  $out .= '<div class="s-test">Test string. Light gray color by default</div>';
   
   return $out . '<br><div>End of Test</div>';
 }
