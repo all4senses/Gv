@@ -59,7 +59,7 @@
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    $logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo')))) . '</div>';
+                    $logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))), NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')) . '</div>';
                     echo '<table><tbody><tr><td>' . $logo_block . '</td></tr></tbody></table>';
                   }
                   else {
@@ -120,7 +120,7 @@
                     <?php 
                       if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
                         $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
-                        echo '<span class="title">Website:</span>' . gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'v:url'));
+                        echo '<span class="title">Website:</span>' . gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'v:url nofollow'));
                       }
                       ?>
                   </div>
@@ -170,11 +170,11 @@
                 <?php
                 
                   if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div>' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title']))), '</div>';
+                    echo '<div>' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title'])), NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')), '</div>';
                   }
                   
                   if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
-                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $provider_name), '</div>';
+                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $provider_name, NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')), '</div>';
                   }
                 ?>  
                 
