@@ -299,7 +299,7 @@ function gv_misc_isSubmissionAlreadySent($email) {
  * Test page function for url /test. 
  */
 function gv_misc_testPage() {
-  $out = '<div>Start test...</div>';
+  $out = '<div>'; //'<div>Start test...</div>';
 
   /*
   $query = db_select('node', 'n');
@@ -374,7 +374,7 @@ function gv_misc_testPage() {
   
   $out .= '<div class="s-test">Test string. Light gray color by default</div>';
   
-  return $out . '<br><div>End of Test</div>';
+  return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
 
