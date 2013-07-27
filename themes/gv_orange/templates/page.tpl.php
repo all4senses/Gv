@@ -28,10 +28,7 @@
       </div>
       
       <?php 
-          dpm($user);
-          global $user;
-          dpm($user);
-
+          
 //        if ($user->uid == 1) {
           echo /*'<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012"></a>',*/ render($page['header']); 
           
