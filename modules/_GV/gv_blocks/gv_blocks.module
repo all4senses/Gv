@@ -265,7 +265,12 @@ function gv_blocks_block_info() {
     'info' => 'Home in highlighted',
     'cache' => DRUPAL_NO_CACHE,
   );
-    
+  
+  $blocks['writer-admin-links'] = array(
+    'info' => 'Writer admin links',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   return $blocks;
 }
 
@@ -539,10 +544,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion();
       break;
     
-  $blocks['home_in_highlighted'] = array(
-    'info' => 'Home in highlighted',
-    'cache' => DRUPAL_NO_CACHE,
-  );
+    case 'writer-admin-links':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getWriterAdminLinks();
+      break;
+    
   
     
   }
@@ -581,6 +587,15 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+
+/**
+ * Block with writer admin links.
+ */
+function gv_blocks_getWriterAdminLinks() {
+  return 'Writer!!!!!!!!!!!!';
 }
 
 
