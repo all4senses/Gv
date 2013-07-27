@@ -2718,9 +2718,12 @@ function gv_blocks_get_requestQuote_block_v6() {
 //    return NULL;
 //  }
   
-  dpm($_SERVER);
-  dpm(arg());
-  dpm($_GET);
+  //dpm($_SERVER);
+  //dpm(arg());
+  // Don't show the block if on the 404 page
+  if ($_GET['q'] == 'node/988') {
+    return NULL;
+  }
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
