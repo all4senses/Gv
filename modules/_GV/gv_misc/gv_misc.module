@@ -966,6 +966,25 @@ function gv_misc_userIsAdmin() {
 
 
 /**
+ * 
+ * User permissions access calback function for the admin or writer.
+ * 
+ */
+function gv_misc_userIsAdminOrWriter($user = NULL) {
+  if (!$user) {
+    global $user;
+  }
+  
+  if (in_array('administrator', $user->roles) || in_array('Writer', $user->roles)) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+
+/**
  * Implements a new view_mode.
  */
 function gv_misc_entity_info_alter(&$entity_info) {
