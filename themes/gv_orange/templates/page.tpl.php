@@ -36,6 +36,7 @@
           echo gv_blocks_getBlockThemed(array('module' => 'om_maximenu', 'delta' => 'om-maximenu-1', 'no_subject' => TRUE, 'class' => 'block-om-maximenu', 'shadow' => FALSE), TRUE, '+31 day', ($user->uid ? '_logged' : NULL));
           
           //if (gv_misc_userIsAdminOrWriter($user)) {
+          dpm('test-0');
           if ($user->uid == 1) {
             dpm('test');
             echo '<div id="gv-writer-block">Writer!</div>';
