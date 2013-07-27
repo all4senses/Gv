@@ -37,6 +37,7 @@
           
           //if (gv_misc_userIsAdminOrWriter($user)) {
           if ($user->uid == 1) {
+            dpm('test');
             echo '<div id="gv-writer-block">Writer!</div>';
           }
 //        }
