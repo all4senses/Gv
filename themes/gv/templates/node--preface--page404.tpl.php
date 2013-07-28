@@ -12,10 +12,9 @@
           hide($content['links']);
           print render($content);
           
-          if ($user->uid == 1) {
-            echo gv_blocks_getBlockThemed(array('module' => 'search', 'delta' => 'search-form', 'no_subject' => TRUE, 'class' => 'search-on-404', 'shadow' => FALSE));
-            echo '<br/><p>Or, try one of the links below.</p>';
-          }
+          echo gv_blocks_getBlockThemed(array('module' => 'search', 'delta' => 'search-form', 'no_subject' => TRUE, 'class' => 'search-on-404', 'shadow' => FALSE)),
+               '<br/><p>Or, try one of the links below.</p>';
+          
           
           // Get content of the Sitemap.
           $sitemap_body = cache_get('gv_sitemap_body');
