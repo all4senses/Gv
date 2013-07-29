@@ -128,7 +128,7 @@
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
           textSubmit : 'Submit Now',// 'Submit & Get Quotes',
-          textNext: 'Continue',// 'Get Quotes',//'Submit & Get Quotes',
+          textNext: 'Get Quotes',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
