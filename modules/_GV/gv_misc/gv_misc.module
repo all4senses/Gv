@@ -761,14 +761,14 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
 //  
-  $dir = 'sites/default/files/jsmin-gv';
-  $objects = scandir($dir);
-  foreach ($objects as $object) {
-    if ($object != "." && $object != "..") {
-      unlink($dir . "/" . $object);
-    }
-  }
-  variable_del('gv_minified_js');
+//  $dir = 'sites/default/files/jsmin-gv';
+//  $objects = scandir($dir);
+//  foreach ($objects as $object) {
+//    if ($object != "." && $object != "..") {
+//      unlink($dir . "/" . $object);
+//    }
+//  }
+//  variable_del('gv_minified_js');
   
   
   gv_misc_recalculateReviewsAmount();
@@ -6883,13 +6883,16 @@ function gv_misc_setBreadcrumbs(&$variables) {
         break;
       
       case 'article':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('Library', 'about-voip-services'), $variables['node']->title )));
+        //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('Library', 'about-voip-services'), $variables['node']->title )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Library', 'about-voip-services'), $variables['node']->title )));
         break;
       case 'blog_post':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('Blog', 'blog'), $variables['node']->title )));
+        //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('Blog', 'blog'), $variables['node']->title )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Blog', 'blog'), $variables['node']->title )));
         break;
       case 'news_post':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('News', 'news'), $variables['node']->title )));
+        //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Articles', 'articles'), l('News', 'news'), $variables['node']->title )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('News', 'news'), $variables['node']->title )));
         break;
     }
   }
