@@ -2872,7 +2872,12 @@ function gv_blocks_get_requestQuote_block_v6() {
     <param name="movie" value="/sites/all/libraries/jquery.plugins/securimage/securimage_play.swf?bgcol=#ffffff&amp;icon_file=/sites/all/libraries/jquery.plugins/securimage/images/audio_icon.png&amp;audio_file=/sites/all/libraries/jquery.plugins/securimage/securimage_play.php" />
     </object>
 
-    <a id="reload-btn" tabindex="-1" style="border-style: none;" href="#" title="Refresh Image" onclick="document.getElementById(' . "'siimage'" . ').src = ' . "'/securimage_show?sid='" . ' + Math.random(); this.blur(); return false"><img src="/sites/all/libraries/jquery.plugins/securimage/images/refresh.png" alt="Reload Image" height="32" width="32" onclick="this.blur()" align="bottom" border="0" /></a>
+    <a id="reload-btn" tabindex="-1" style="border-style: none;" href="#" title="Refresh Image" onclick="document.getElementById(' . "'siimage'" . ').src = ' . "'/securimage_show?sid='" . ' + Math.random(); this.blur(); return false">
+      ' . 
+          //'<img src="/sites/all/libraries/jquery.plugins/securimage/images/refresh.png" alt="Reload Image" height="32" width="32" onclick="this.blur()" align="bottom" border="0" />' 
+          '<div class="reload" alt="Reload Image" style="height: 32px; width: 32px;" onclick="this.blur()"></div>' 
+      . '
+    </a>
     <div id="code">Enter Code*:</div>' . /* @$_SESSION["ctform"]["captcha_error"] .*/ '
     <input type="text" class="required ct_captcha" id="ct_captcha" name="ct_captcha" size="12" maxlength="16" />
   </div>'
