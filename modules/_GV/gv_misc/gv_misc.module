@@ -817,7 +817,11 @@ function gv_misc_securimage_show_ajax() {
   // white bg
   $img->image_bg_color = new Securimage_Color('#ffffff');
   $img->text_color = new Securimage_Color('#000000');
-  $img->noise_color = new Securimage_Color('#ffffff');
+  
+  
+  //$img->noise_color = new Securimage_Color('#ffffff');
+  $img->noise_level = 0;
+          
   $img->perturbation = 0.1; // 0.75 default
 
 
