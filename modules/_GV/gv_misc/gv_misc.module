@@ -223,7 +223,7 @@ function gv_misc_get_sectionArticles($section, $limit = NULL) {
     }
     $results = $query->execute()->fetchAllAssoc('entity_id');
     
-    $max_len = 32;
+    $max_len = 38;
     
     if (!empty($results)) {
       foreach ($results as $nid => $article) {
