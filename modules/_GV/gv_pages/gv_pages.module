@@ -1645,9 +1645,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //        $query->condition('pn.field_p_name_value', urldecode($_GET['n']));
 //        $query->leftJoin('field_data_field_p_data_quick', 'pd', 'pd.entity_id = pn.entity_id');
 //        $query->fields('pd', array('entity_id', 'field_p_data_quick_value'));
-        $a_tags = $query->execute()->fetchAllAssoc('ti.nid');
-        dpm($a_tags);
-      
+        //$a_tags = $query->execute()->fetchAllAssoc('ti.nid');
+        $a_tags = $query->execute();
+        //dpm($a_tags);
+        foreach ($a_tags as $a_tag) {
+          dpm($a_tag);
+        }
         
         $extra_data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
         //dpm($extra_data);
