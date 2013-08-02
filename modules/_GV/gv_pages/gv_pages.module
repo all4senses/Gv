@@ -1637,7 +1637,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
     case 'article_node_form':
       
-        dpm($form);   
+        //dpm($form);   
         // Get the article's tags
         $query = db_select('taxonomy_index', 'ti')
             ->fields('ti', array('tid'));
@@ -1645,7 +1645,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //        $query->condition('pn.field_p_name_value', urldecode($_GET['n']));
 //        $query->leftJoin('field_data_field_p_data_quick', 'pd', 'pd.entity_id = pn.entity_id');
 //        $query->fields('pd', array('entity_id', 'field_p_data_quick_value'));
-        $a_tags = $query->execute()->fetchAssoc();
+        $a_tags = $query->execute()->fetchAllAssoc('nid');
         dpm($a_tags);
       
         
