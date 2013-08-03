@@ -5,7 +5,7 @@
       <div class="content page preface">
         <?php
         
-          drupal_set_title('Page Not Found | GetVoIP.com');
+          drupal_set_title('Page Not Found. | GetVoIP.com');
         
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
