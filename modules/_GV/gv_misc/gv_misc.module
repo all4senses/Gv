@@ -17,6 +17,14 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
+  
+  $items['compare-residential-voip-providers'] = array(
+    'title' => 'The Page is Gone (410)',
+    'page callback' => 'gv_misc_410gone',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['get-sectionarticles'] = array(
     'title' => 'Get Section Articles',
     'page callback' => 'gv_misc_get_sectionArticles_ajax',
@@ -170,6 +178,20 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+
+
+/**
+ * Return 410 gone for the current page.
+ */
+function gv_misc_410gone() {
+  drupal_add_http_header('Status', '410 Gone');
+  drupal_exit('The page is gone (410)');
+  
+  //gv_misc_drupal_not_found();
+  //drupal_exit();
+  //return 'The page is gone (410)';
 }
 
 
