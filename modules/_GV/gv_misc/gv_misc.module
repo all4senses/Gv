@@ -17,13 +17,7 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
  */
 function gv_misc_menu() {
  
-  
-  $items['compare-residential-voip-providers'] = array(
-    'title' => 'The Page is Gone (410)',
-    'page callback' => 'gv_misc_410gone',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
+  gv_misc_setPagesToShow410($items);
   
   $items['get-sectionarticles'] = array(
     'title' => 'Get Section Articles',
@@ -181,6 +175,24 @@ function gv_misc_menu() {
 }
 
 
+/**
+ * Define pages (urls) that should be shown as Gone 410 (instead of 404)
+ */
+function gv_misc_setPagesToShow410(&$items) {
+  
+  $pages = array('compare-residential-voip-providers');
+  
+  foreach ($pages as $page) {
+    $items[$page] = array(
+      'title' => 'The Page is Gone (410)',
+      'page callback' => 'gv_misc_410gone',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+    );
+  }
+ 
+}
+
 
 /**
  * Return 410 gone for the current page.
@@ -192,7 +204,6 @@ function gv_misc_410gone() {
   gv_misc_drupal_410_gone();
   //gv_misc_drupal_not_found();
   drupal_exit();
-  //return 'The page is gone (410)';
 }
 
 
@@ -229,8 +240,7 @@ function gv_misc_drupal_410_gone() {
     // Custom 404 handler. Set the active item in case there are tabs to
     // display, or other dependencies on the path.
     menu_set_active_item($path);
-    //$return = menu_execute_active_handler($path, FALSE);
-    dpm('xxx');
+    $return = menu_execute_active_handler($path, FALSE);
   }
 
   if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
