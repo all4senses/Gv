@@ -186,11 +186,11 @@ function gv_misc_menu() {
  * Return 410 gone for the current page.
  */
 function gv_misc_410gone() {
-  drupal_add_http_header('Status', '410 Gone');
-  drupal_exit('The page is gone (410)');
+  //drupal_add_http_header('Status', '410 Gone');
+  //drupal_exit('The page is gone (410)');
   
-  //gv_misc_drupal_not_found();
-  //drupal_exit();
+  gv_misc_drupal_not_found();
+  drupal_exit();
   //return 'The page is gone (410)';
 }
 
