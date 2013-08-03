@@ -189,9 +189,109 @@ function gv_misc_410gone() {
   //drupal_add_http_header('Status', '410 Gone');
   //drupal_exit('The page is gone (410)');
   
-  gv_misc_drupal_not_found();
+  gv_misc_drupal_410_gone();
+  //gv_misc_drupal_not_found();
   drupal_exit();
   //return 'The page is gone (410)';
+}
+
+
+/**
+ * Custom page not found 404.
+ * Fix for a standard drupal_not_found
+ */
+function gv_misc_drupal_410_gone() {
+  // Emit the correct charset HTTP header, but not if the page callback
+  // result is NULL, since that likely indicates that it printed something
+  // in which case, no further headers may be sent, and not if code running
+  // for this page request has already set the content type header.
+
+  drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
+
+  // Send appropriate HTTP-Header for browsers and search engines.
+  global $language;
+  drupal_add_http_header('Content-Language', $language->language);
+
+  drupal_add_http_header('Status', '410 Gone');
+
+  watchdog('page is gone', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
+
+  // Check for and return a fast 404 page if configured.
+  ////drupal_fast_404();
+
+  // Keep old path for reference, and to allow forms to redirect to it.
+  if (!isset($_GET['destination'])) {
+    $_GET['destination'] = $_GET['q'];
+  }
+
+  $path = drupal_get_normal_path(variable_get('site_404', ''));
+  if ($path && $path != $_GET['q']) {
+    // Custom 404 handler. Set the active item in case there are tabs to
+    // display, or other dependencies on the path.
+    menu_set_active_item($path);
+    $return = menu_execute_active_handler($path, FALSE);
+  }
+
+  if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
+    // Standard 404 handler.
+    ////drupal_set_title(t('Page not found'));
+    ////$return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+    
+    drupal_set_title('Page Is Gone');
+    
+    $sitemap_body = cache_get('gv_sitemap_body');
+    if (!$sitemap_body || empty($sitemap_body->data)) {
+      $key = 'view-sitemap-page';
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+      $query->fields('fb', array('body_value'))
+            ->condition('n.type', 'preface')
+            ->condition('pk.field_preface_key_value', $key);
+      $sitemap_body = $query->execute()->fetchField(); 
+
+      // Remove preface text from a Sitemap body.
+      if(preg_match('/.*(<table.*)/s', $sitemap_body, $matches)) {
+        $sitemap_body = $matches[1];
+      }
+            
+      cache_set('gv_sitemap_body', $sitemap_body);
+    }
+    else {
+      $sitemap_body = $sitemap_body->data;
+    }
+    
+    $page404_body = cache_get('gv_page404');
+    if (!$page404_body || empty($page404_body->data)) {
+      $key = 'page-not-found';
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+      $query->fields('fb', array('body_value'))
+            ->condition('n.type', 'preface')
+            ->condition('pk.field_preface_key_value', $key);
+      $page404_body = $query->execute()->fetchField(); 
+
+      cache_set('gv_page404', $page404_body);
+    }
+    else {
+      $page404_body = $page404_body->data;
+    }
+    
+    $return = '<div class="main-content page404"> 
+      <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
+      </div>
+  </div>';
+
+    
+  }
+
+  drupal_set_page_content($return);
+  $page = element_info('page');
+  print drupal_render_page($page);
+
+  // Perform end-of-request tasks.
+  drupal_page_footer();
 }
 
 
