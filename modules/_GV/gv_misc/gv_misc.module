@@ -239,6 +239,23 @@ function gv_misc_drupal_410_gone() {
     
     drupal_set_title('Page Is Gone');
     
+    $return = gv_mics_page404CustomContent();
+
+    
+  }
+
+  drupal_set_page_content($return);
+  $page = element_info('page');
+  print drupal_render_page($page);
+
+  // Perform end-of-request tasks.
+  drupal_page_footer();
+}
+
+
+
+function gv_mics_page404CustomContent() {
+  
     $sitemap_body = cache_get('gv_sitemap_body');
     if (!$sitemap_body || empty($sitemap_body->data)) {
       $key = 'view-sitemap-page';
@@ -278,20 +295,11 @@ function gv_misc_drupal_410_gone() {
       $page404_body = $page404_body->data;
     }
     
-    $return = '<div class="main-content page404"> 
+    return '<div class="main-content page404"> 
       <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
       </div>
   </div>';
 
-    
-  }
-
-  drupal_set_page_content($return);
-  $page = element_info('page');
-  print drupal_render_page($page);
-
-  // Perform end-of-request tasks.
-  drupal_page_footer();
 }
 
 
@@ -1471,50 +1479,51 @@ function gv_misc_drupal_not_found() {
     
     drupal_set_title('Page Not Found');
     
-    $sitemap_body = cache_get('gv_sitemap_body');
-    if (!$sitemap_body || empty($sitemap_body->data)) {
-      $key = 'view-sitemap-page';
-      $query = db_select('node', 'n');
-      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
-      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
-      $query->fields('fb', array('body_value'))
-            ->condition('n.type', 'preface')
-            ->condition('pk.field_preface_key_value', $key);
-      $sitemap_body = $query->execute()->fetchField(); 
-
-      // Remove preface text from a Sitemap body.
-      if(preg_match('/.*(<table.*)/s', $sitemap_body, $matches)) {
-        $sitemap_body = $matches[1];
-      }
-            
-      cache_set('gv_sitemap_body', $sitemap_body);
-    }
-    else {
-      $sitemap_body = $sitemap_body->data;
-    }
+//    $sitemap_body = cache_get('gv_sitemap_body');
+//    if (!$sitemap_body || empty($sitemap_body->data)) {
+//      $key = 'view-sitemap-page';
+//      $query = db_select('node', 'n');
+//      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+//      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+//      $query->fields('fb', array('body_value'))
+//            ->condition('n.type', 'preface')
+//            ->condition('pk.field_preface_key_value', $key);
+//      $sitemap_body = $query->execute()->fetchField(); 
+//
+//      // Remove preface text from a Sitemap body.
+//      if(preg_match('/.*(<table.*)/s', $sitemap_body, $matches)) {
+//        $sitemap_body = $matches[1];
+//      }
+//            
+//      cache_set('gv_sitemap_body', $sitemap_body);
+//    }
+//    else {
+//      $sitemap_body = $sitemap_body->data;
+//    }
+//    
+//    $page404_body = cache_get('gv_page404');
+//    if (!$page404_body || empty($page404_body->data)) {
+//      $key = 'page-not-found';
+//      $query = db_select('node', 'n');
+//      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+//      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+//      $query->fields('fb', array('body_value'))
+//            ->condition('n.type', 'preface')
+//            ->condition('pk.field_preface_key_value', $key);
+//      $page404_body = $query->execute()->fetchField(); 
+//
+//      cache_set('gv_page404', $page404_body);
+//    }
+//    else {
+//      $page404_body = $page404_body->data;
+//    }
+//    
+//    $return = '<div class="main-content page404"> 
+//      <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
+//      </div>
+//  </div>';
     
-    $page404_body = cache_get('gv_page404');
-    if (!$page404_body || empty($page404_body->data)) {
-      $key = 'page-not-found';
-      $query = db_select('node', 'n');
-      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
-      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
-      $query->fields('fb', array('body_value'))
-            ->condition('n.type', 'preface')
-            ->condition('pk.field_preface_key_value', $key);
-      $page404_body = $query->execute()->fetchField(); 
-
-      cache_set('gv_page404', $page404_body);
-    }
-    else {
-      $page404_body = $page404_body->data;
-    }
-    
-    $return = '<div class="main-content page404"> 
-      <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
-      </div>
-  </div>';
-
+    $return = gv_mics_page404CustomContent();
     
   }
 
