@@ -230,6 +230,7 @@ function gv_misc_drupal_410_gone() {
     // display, or other dependencies on the path.
     menu_set_active_item($path);
     $return = menu_execute_active_handler($path, FALSE);
+    dpm('xxx');
   }
 
   if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
@@ -244,7 +245,6 @@ function gv_misc_drupal_410_gone() {
     
   }
 
-  drupal_set_title('Page Is Gone');
   
   drupal_set_page_content($return);
   $page = element_info('page');
