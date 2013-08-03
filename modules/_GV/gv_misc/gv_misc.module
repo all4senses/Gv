@@ -298,7 +298,10 @@ function gv_mics_page404CustomContent() {
     }
     
     return '<div class="main-content page404"> 
-      <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
+      <div class="content page preface">' . $page404_body 
+            . gv_blocks_getBlockThemed(array('module' => 'search', 'delta' => 'search-form', 'no_subject' => TRUE, 'class' => 'search-on-404', 'shadow' => FALSE)) 
+            . '<br/><p>Or, try one of the links below.</p>'
+            . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
       </div>
   </div>';
 
