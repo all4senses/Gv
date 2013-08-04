@@ -1714,6 +1714,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           
           foreach ($result as $key => $array) {
+            if (count($array) == 1) {
+              unset($result[$key]);
+              continue;
+            }
             $temp_array = array();
             foreach ($array as $key2 => $item) {
               if (in_array($item, $temp_array)) {
