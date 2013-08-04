@@ -1795,6 +1795,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               dpm($articles_by_index);
               //dpm($articles);
                
+              dpm($form);
               $form['related_articles'] = array(
                 '#type' => 'fieldset',
                 '#title' => 'Related articles',
@@ -1802,6 +1803,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 '#collapsed' => FALSE,
                 '#attributes' => array ('class' => array('related-articles')),
                 '#tree' => TRUE,
+                '#weight' => 30,
               );
               
               foreach ($articles_by_index as $index => $articles) {
