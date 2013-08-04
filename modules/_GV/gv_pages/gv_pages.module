@@ -1727,12 +1727,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
                   $query->fields('ti_' . $key, array('tid'));
                 }
-                $query->condition('n.nid', 1428, '!=');
+                $query->condition('n.nid', $form['nid'], '!=');
                 $query->range(0, $max_articles);
                 $results = $query->execute()->fetchAllAssoc('nid');
                 
                 if ($results) {
-                  dpm($index_tags);
+                  //dpm($index_tags);
                   dpm($results);
                   $articles += $results;
                   if (count($articles) < $max_articles) {
