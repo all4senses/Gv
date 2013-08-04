@@ -1670,17 +1670,18 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   }
               }
           }
+          
           for ($i = 0; $i<count($arr); $i++) {
-              combinations($arr, $i+1, $result);
+            combinations($arr, $i+1, $result);
           }
 
           
           
           foreach ($result as $key => $array) {
-            if (count($array) == 1) {
-              unset($result[$key]);
-              continue;
-            }
+//            if (count($array) == 1) {
+//              unset($result[$key]);
+//              continue;
+//            }
             $temp_array = array();
             foreach ($array as $key2 => $item) {
               if (in_array($item, $temp_array)) {
@@ -1691,7 +1692,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }
             
             if (isset($result[$key])) {
-              $tags[count($result[$key])][] = $result[$key];
+              $index = count($result[$key]);
+              $tags[$index][] = $result[$key];
+              if ($max_index < $index) {
+                $max_index = $index;
+              }
             }
           }
           
@@ -1702,6 +1707,27 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           foreach ($result as $arr) {
               dpm(join(" - ", $arr));
           }
+          
+          
+          $articles = array();
+          for ($i = $max_index; $i > 0; $i--) {
+            foreach ($tags[$i] as $index => $index_tags) {
+              $query = db_select('node', 'n')
+                  ->fields('n', array('nid'));
+              
+              foreach ($index_tags as $key => $index_tag) {
+                $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.tid = ' . $index_tag);
+              }
+
+              $results = $query->execute()->fetchAllAssoc('nid');
+              if ($results) {
+                dpm($results);
+                $articles += $results;
+              }
+            }
+          }
+          
+          dpm($articles);
           
         } // uid = 1
         
