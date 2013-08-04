@@ -1718,7 +1718,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   ->fields('n', array('nid'));
               
               foreach ($index_tags as $key => $index_tag) {
-                $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.tid = ' . $index_tag);
+                $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
                 $query->fields('ti_' . $key, array('tid'));
               }
 
