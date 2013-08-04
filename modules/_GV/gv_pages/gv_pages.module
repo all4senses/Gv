@@ -1784,9 +1784,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     '#title' => render(node_view($a, 'teaser')),
                     '#default_value' => FALSE,
                   );
-//                  $form['related_articles']['index_' . $index]['a_' . $nid] = array(
-//                    '#markup' => render(node_view($a, 'teaser')),
-//                  );
+
                 }
                 
               }
@@ -3986,7 +3984,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   // Define a main image and build a custom teaser.
   $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
 
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
   
 //  $pin_article_to = array();
 //  if (!empty($form_state['values']['pin_article_to'])) {
