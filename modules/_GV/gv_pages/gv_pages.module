@@ -1778,6 +1778,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 
                 foreach ($articles as $nid => $article) {
                   $a = node_load($nid);
+                  $form['related_articles']['index_' . $index]['a_' . $nid . '_check'] = array(
+                    '#type' => 'checkbox',
+                    '#title' => render(node_view($a, 'teaser')),
+                    '#default_value' => FALSE,
+                  );
                   $form['related_articles']['index_' . $index]['a_' . $nid] = array(
                     '#markup' => render(node_view($a, 'teaser')),
                   );
