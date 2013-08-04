@@ -4013,7 +4013,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
     'related_articles' => @$form_state['values']['related_articles'], 
   );
   
-  dpm($extra_data);
+  //dpm($extra_data);
   
   if (!empty($form_state['values']['guest_author'])) {
     $extra_data['guest_author'] = $form_state['values']['guest_author'];
