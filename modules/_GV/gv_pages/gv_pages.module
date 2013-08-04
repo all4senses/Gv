@@ -1756,8 +1756,35 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 }
               }
             }
-            dpm($articles_by_index);
-            //dpm($articles);
+            
+            if (!empty($articles_by_index)) {
+              dpm($articles_by_index);
+              //dpm($articles);
+               
+              $form['related_articles'] = array(
+                '#type' => 'fieldset',
+                '#title' => 'Related articles',
+                '#collapsible' => TRUE,
+                '#collapsed' => FALSE,
+              );
+              
+              foreach ($articles_by_index as $index => $articles) {
+                $form['related_articles']['index_' . $index] = array(
+                  '#type' => 'fieldset',
+                  '#title' => 'By ' . $index . ' tags',
+                  '#collapsible' => TRUE,
+                  '#collapsed' => FALSE,
+                );
+                
+                foreach ($articles as $nid) {
+                  $a = node_load($nid);
+                  $form['related_articles']['index_' . $index]['a_' . $nid] = array(
+                    '#markup' => node_view($a, 'teaser'),
+                  );
+                }
+                
+              }
+            }
             
           } // end of if this article has any tags.
           
