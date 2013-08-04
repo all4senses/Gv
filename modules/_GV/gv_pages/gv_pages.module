@@ -1654,21 +1654,70 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           dpm($a_tags);
           
           
-          $tags_sets = array();
-          foreach ($a_tags as $a_tag => $data) {
+          $tags_2_sets_ = array();
+          $tags_3_sets_ = array();
           
-            foreach ($a_tags as $a_tag_2 => $data_2) {
-              if ($a_tag_2 == $a_tag || (isset($tags_sets[$a_tag_2]) && in_array($a_tag, $tags_sets[$a_tag_2]) )) {
-                continue;
+          
+//          if (count($a_tags) > 3) {
+//            foreach ($a_tags as $a_tag => $data) {
+//              $tags_3_sets[$a_tag][] = $a_tag;
+//              foreach ($a_tags as $a_tag_2 => $data_2) {
+//                if (in_array($a_tag_2, $tags_3_sets[$a_tag]) ) {
+//                  continue;
+//                }
+//                
+//                $tags_3_sets[$a_tag][] = $a_tag_2;
+//              }
+//
+//            } 
+//
+//            dpm($tags_3_sets);
+//          }
+          
+
+          if (count($a_tags) > 2) {
+            foreach ($a_tags as $a_tag => $data) {
+
+              foreach ($a_tags as $a_tag_2 => $data_2) {
+                if ($a_tag_2 == $a_tag || (isset($tags_2_sets[$a_tag_2]) && in_array($a_tag, $tags_2_sets[$a_tag_2]) )) {
+                  continue;
+                }
+                $tags_2_sets[$a_tag][] = $a_tag_2;
               }
-              $tags_sets[$a_tag][] = $a_tag_2;
-            }
-            
-          } 
-            
-          dpm($tags_sets);
+
+            } 
+
+            dpm($tags_2_sets);
+          }
           
-        }
+          
+          $arr = array(1,2,3);
+          $result = array();
+
+          function combinations($arr, $level, &$result, $curr=array()) {
+              for($i = 0; $i < count($arr); $i++) {
+                  $new = array_merge($curr, array($arr[$i]));
+                  if($level == 1) {
+                      sort($new);
+                      if (!in_array($new, $result)) {
+                          $result[] = $new;          
+                      }
+                  } else {
+                      combinations($arr, $level - 1, $result, $new);
+                  }
+              }
+          }
+          for ($i = 0; $i<count($arr); $i++) {
+              combinations($arr, $i+1, $result);
+          }
+
+          // TEST
+          foreach ($result as $arr) {
+              dpm(join(" ", $arr) . '<br>');
+          }
+          dpm($result);
+          
+        } // uid = 1
         
         
         
