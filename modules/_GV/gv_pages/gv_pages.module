@@ -1706,12 +1706,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }
 
 
-            dpm($tags);
+            //dpm($tags);
 
             // TEST
-            foreach ($result as $arr) {
-                dpm(join(" - ", $arr));
-            }
+//            foreach ($result as $arr) {
+//                dpm(join(" - ", $arr));
+//            }
 
             $max_articles = 10;
             $articles = array();
@@ -1719,7 +1719,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             for ($i = $max_index; $i >= $min_index; $i--) {
               
-              dpm('index = ' . $i);
+              //dpm('index = ' . $i);
               foreach ($tags[$i] as $index => $index_tags) {
 
 
@@ -1737,7 +1737,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 
                 if ($results) {
                   //dpm($index_tags);
-                  dpm($results);
+                  //dpm($results);
                   foreach ($results as $key => $result) {
                     if (in_array($result, $articles)) {
                       unset($results[$key]);
@@ -1757,7 +1757,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               }
             }
             dpm($articles_by_index);
-            dpm($articles);
+            //dpm($articles);
             
           } // end of if this article has any tags.
           
