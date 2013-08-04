@@ -1642,7 +1642,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         if ($user->uid == 1) {
           
-          //dpm($form);   
           // Get the article's tags
           $query = db_select('taxonomy_index', 'ti')
               ->fields('ti', array('tid'));
@@ -1650,9 +1649,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //$query->fields('td');
           $query->condition('ti.nid', $form['nid']['#value']);
           $query->condition('td.vid', 2, '!=');
-          //$a_tags = $query->execute()->fetchAllAssoc('tid');
-          $arr = $query->execute()->fetchCol();
-          dpm($arr);
+          $a_tags = $query->execute()->fetchAllAssoc('tid');
+          //$arr = $query->execute()->fetchCol();
+          $arr = array_keys($a_tags);
+          //dpm($arr);
           
           if ($arr) {
             
@@ -1718,6 +1718,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             
             for ($i = $max_index; $i >= $min_index; $i--) {
+              
               dpm('index = ' . $i);
               foreach ($tags[$i] as $index => $index_tags) {
 
