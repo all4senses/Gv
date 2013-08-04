@@ -1711,6 +1711,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               combinations($arr, $i+1, $result);
           }
 
+          
+          
+          foreach ($result as $key => $array) {
+            $temp_array = array();
+            foreach ($array as $key2 => $item) {
+              if (in_array($item, $temp_array)) {
+                unset($result[$key]);
+                break;
+              }
+              $temp_array[] = $item;
+            }
+          }
+          
+          
+          
           // TEST
           foreach ($result as $arr) {
               dpm(join(" ", $arr) . '<br>');
