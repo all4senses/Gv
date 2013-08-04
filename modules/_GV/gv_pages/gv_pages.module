@@ -1731,7 +1731,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   $query->fields('ti_' . $key, array('tid'));
                 }
                 $query->condition('n.nid', $form['nid']['#value'], '!=');
-                $query->orderBy('n.created');
+                $query->orderBy('n.created', 'DESC');
                 $query->range(0, $max_articles);
                 $results = $query->execute()->fetchAllAssoc('nid');
                 
