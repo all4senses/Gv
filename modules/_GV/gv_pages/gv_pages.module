@@ -1648,7 +1648,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               ->fields('ti', array('tid'));
           $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
           //$query->fields('td');
-          $query->condition('ti.nid', $form['nid']);
+          $query->condition('ti.nid', $form['nid']['#value']);
           $query->condition('td.vid', 2, '!=');
           //$a_tags = $query->execute()->fetchAllAssoc('tid');
           $arr = $query->execute()->fetchCol();
@@ -1730,7 +1730,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
                   $query->fields('ti_' . $key, array('tid'));
                 }
-                $query->condition('n.nid', $form['nid'], '!=');
+                $query->condition('n.nid', $form['nid']['#value'], '!=');
                 $query->range(0, $max_articles);
                 $results = $query->execute()->fetchAllAssoc('nid');
                 
