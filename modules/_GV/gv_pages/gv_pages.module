@@ -1711,9 +1711,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           $articles = array();
           for ($i = $max_index; $i > 0; $i--) {
+            dpm('index = ' . $i);
             foreach ($tags[$i] as $index => $index_tags) {
-              dpm('index = ' . $index);
-              dpm($index_tags);
+              
+              
               $query = db_select('node', 'n')
                   ->fields('n', array('nid'));
               
@@ -1724,6 +1725,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
               $results = $query->execute()->fetchAllAssoc('nid');
               if ($results) {
+                dpm($index_tags);
                 dpm($results);
                 $articles += $results;
               }
