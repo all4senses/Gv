@@ -1792,10 +1792,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }
             
             if (!empty($articles_by_index)) {
-              dpm($articles_by_index);
+              //dpm($articles_by_index);
               //dpm($articles);
                
-              dpm($form);
               $form['related_articles'] = array(
                 '#type' => 'fieldset',
                 '#title' => 'Related articles',
