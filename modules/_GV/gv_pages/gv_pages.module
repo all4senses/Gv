@@ -1724,7 +1724,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 
                 $query = db_select('node', 'n')
-                    ->fields('n', array('nid'));
+                    ->fields('n', array('nid', 'created'));
 
                 foreach ($index_tags as $key => $index_tag) {
                   $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
@@ -1738,6 +1738,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 if ($results) {
                   //dpm($index_tags);
                   dpm($results);
+                  foreach ($results as $key => $result) {
+                    if (in_array($result, $articles)) {
+                      unset($results[$key]);
+                    }
+                  }
+                  $articles_by_index[$i] = $results;
+                  
                   $articles += $results;
                   if (count($articles) < $max_articles) {
                     $max_articles -= count($articles);
@@ -1749,7 +1756,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 }
               }
             }
-
+            dpm($articles_by_index);
             dpm($articles);
             
           } // end of if this article has any tags.
