@@ -1713,6 +1713,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }
           }
           
+          foreach ($tags as $key => $tag) {
+            if (count($tag) == 1) {
+              unset($tags[$key]);
+            }
+          }
+          
           dpm($tags);
           
           // TEST
