@@ -1654,24 +1654,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $arr = $query->execute()->fetchCol();
           dpm($arr);
           
-          
-//          $tags_2_sets_ = array();
-//          if (count($a_tags) > 2) {
-//            foreach ($a_tags as $a_tag => $data) {
-//
-//              foreach ($a_tags as $a_tag_2 => $data_2) {
-//                if ($a_tag_2 == $a_tag || (isset($tags_2_sets[$a_tag_2]) && in_array($a_tag, $tags_2_sets[$a_tag_2]) )) {
-//                  continue;
-//                }
-//                $tags_2_sets[$a_tag][] = $a_tag_2;
-//              }
-//
-//            } 
-//
-//            dpm($tags_2_sets);
-//          }
-          
-          
           //$arr = array(1,2,3,4);
           $result = array();
 
@@ -1713,11 +1695,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             }
           }
           
-          foreach ($tags as $key => $tag) {
-            if (count($tag) == 1) {
-              unset($tags[$key]);
-            }
-          }
           
           dpm($tags);
           
@@ -1725,7 +1702,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           foreach ($result as $arr) {
               dpm(join(" - ", $arr));
           }
-          dpm($result);
           
         } // uid = 1
         
