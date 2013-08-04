@@ -1645,50 +1645,31 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           //dpm($form);   
           // Get the article's tags
           $query = db_select('taxonomy_index', 'ti')
-              ->fields('ti', array('tid', 'nid'));
+              ->fields('ti', array('tid'));
           $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
-          $query->fields('td');
+          //$query->fields('td');
           $query->condition('ti.nid', $form['nid']);
           $query->condition('td.vid', 2, '!=');
-          $a_tags = $query->execute()->fetchAllAssoc('tid');
+          //$a_tags = $query->execute()->fetchAllAssoc('tid');
+          $a_tags = $query->execute()->fetchCol();
           dpm($a_tags);
           
           
-          $tags_2_sets_ = array();
-          $tags_3_sets_ = array();
-          
-          
-//          if (count($a_tags) > 3) {
+//          $tags_2_sets_ = array();
+//          if (count($a_tags) > 2) {
 //            foreach ($a_tags as $a_tag => $data) {
-//              $tags_3_sets[$a_tag][] = $a_tag;
+//
 //              foreach ($a_tags as $a_tag_2 => $data_2) {
-//                if (in_array($a_tag_2, $tags_3_sets[$a_tag]) ) {
+//                if ($a_tag_2 == $a_tag || (isset($tags_2_sets[$a_tag_2]) && in_array($a_tag, $tags_2_sets[$a_tag_2]) )) {
 //                  continue;
 //                }
-//                
-//                $tags_3_sets[$a_tag][] = $a_tag_2;
+//                $tags_2_sets[$a_tag][] = $a_tag_2;
 //              }
 //
 //            } 
 //
-//            dpm($tags_3_sets);
+//            dpm($tags_2_sets);
 //          }
-          
-
-          if (count($a_tags) > 2) {
-            foreach ($a_tags as $a_tag => $data) {
-
-              foreach ($a_tags as $a_tag_2 => $data_2) {
-                if ($a_tag_2 == $a_tag || (isset($tags_2_sets[$a_tag_2]) && in_array($a_tag, $tags_2_sets[$a_tag_2]) )) {
-                  continue;
-                }
-                $tags_2_sets[$a_tag][] = $a_tag_2;
-              }
-
-            } 
-
-            dpm($tags_2_sets);
-          }
           
           
           $arr = array(1,2,3,4);
