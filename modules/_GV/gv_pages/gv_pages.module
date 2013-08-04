@@ -1715,7 +1715,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
             
             $articles = array();
-            for ($i = $max_index; $i > 0; $i--) {
+            for ($i = $max_index; $i >= $min_index; $i--) {
               dpm('index = ' . $i);
               foreach ($tags[$i] as $index => $index_tags) {
 
