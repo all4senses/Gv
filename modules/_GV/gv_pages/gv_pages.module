@@ -1654,85 +1654,91 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $arr = $query->execute()->fetchCol();
           dpm($arr);
           
-          //$arr = array(1,2,3,4);
-          $result = array();
-
-          function combinations($arr, $level, &$result, $curr=array()) {
-              for($i = 0; $i < count($arr); $i++) {
-                  $new = array_merge($curr, array($arr[$i]));
-                  if($level == 1) {
-                      sort($new);
-                      if (!in_array($new, $result)) {
-                          $result[] = $new;          
-                      }
-                  } else {
-                      combinations($arr, $level - 1, $result, $new);
-                  }
-              }
-          }
-          
-          for ($i = 0; $i<count($arr); $i++) {
-            combinations($arr, $i+1, $result);
-          }
-
-          
-          $max_index = 0;
-          foreach ($result as $key => $array) {
-//            if (count($array) == 1) {
-//              unset($result[$key]);
-//              continue;
-//            }
-            $temp_array = array();
-            foreach ($array as $key2 => $item) {
-              if (in_array($item, $temp_array)) {
-                unset($result[$key]);
-                break;
-              }
-              $temp_array[] = $item;
-            }
+          if ($arr) {
             
-            if (isset($result[$key])) {
-              $index = count($result[$key]);
-              $tags[$index][] = $result[$key];
-              if ($max_index < $index) {
-                $max_index = $index;
+            $current_article_index = count($arr);
+
+            //$arr = array(1,2,3,4);
+            $result = array();
+
+            function combinations($arr, $level, &$result, $curr=array()) {
+                for($i = 0; $i < count($arr); $i++) {
+                    $new = array_merge($curr, array($arr[$i]));
+                    if($level == 1) {
+                        sort($new);
+                        if (!in_array($new, $result)) {
+                            $result[] = $new;          
+                        }
+                    } else {
+                        combinations($arr, $level - 1, $result, $new);
+                    }
+                }
+            }
+
+            for ($i = 0; $i<count($arr); $i++) {
+              combinations($arr, $i+1, $result);
+            }
+
+
+            $max_index = 0;
+            foreach ($result as $key => $array) {
+              if ($current_article_index > 1 && count($array) == 1) {
+                unset($result[$key]);
+                continue;
+              }
+              $temp_array = array();
+              foreach ($array as $key2 => $item) {
+                if (in_array($item, $temp_array)) {
+                  unset($result[$key]);
+                  break;
+                }
+                $temp_array[] = $item;
+              }
+
+              if (isset($result[$key])) {
+                $index = count($result[$key]);
+                $tags[$index][] = $result[$key];
+                if ($max_index < $index) {
+                  $max_index = $index;
+                }
               }
             }
-          }
-          
-          
-          dpm($tags);
-          
-          // TEST
-          foreach ($result as $arr) {
-              dpm(join(" - ", $arr));
-          }
-          
-          
-          $articles = array();
-          for ($i = $max_index; $i > 0; $i--) {
-            dpm('index = ' . $i);
-            foreach ($tags[$i] as $index => $index_tags) {
-              
-              
-              $query = db_select('node', 'n')
-                  ->fields('n', array('nid'));
-              
-              foreach ($index_tags as $key => $index_tag) {
-                $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
-                $query->fields('ti_' . $key, array('tid'));
-              }
-              $query->condition('n.nid', 1428, '!=');
-              $results = $query->execute()->fetchAllAssoc('nid');
-              if ($results) {
-                dpm($index_tags);
-                dpm($results);
-                $articles += $results;
+
+
+            dpm($tags);
+
+            // TEST
+            foreach ($result as $arr) {
+                dpm(join(" - ", $arr));
+            }
+
+
+            $articles = array();
+            for ($i = $max_index; $i > 0; $i--) {
+              dpm('index = ' . $i);
+              foreach ($tags[$i] as $index => $index_tags) {
+
+
+                $query = db_select('node', 'n')
+                    ->fields('n', array('nid'));
+
+                foreach ($index_tags as $key => $index_tag) {
+                  $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
+                  $query->fields('ti_' . $key, array('tid'));
+                }
+                $query->condition('n.nid', 1428, '!=');
+                $results = $query->execute()->fetchAllAssoc('nid');
+                if ($results) {
+                  dpm($index_tags);
+                  dpm($results);
+                  $articles += $results;
+                }
               }
             }
-          }
-          
-          dpm($articles);
+
+            dpm($articles);
+            
+          } // end of if this article has any tags.
           
         } // uid = 1
         
