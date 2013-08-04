@@ -1776,7 +1776,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   '#collapsed' => FALSE,
                 );
                 
-                foreach ($articles as $nid) {
+                foreach ($articles as $nid => $article) {
                   $a = node_load($nid);
                   $form['related_articles']['index_' . $index]['a_' . $nid] = array(
                     '#markup' => node_view($a, 'teaser'),
