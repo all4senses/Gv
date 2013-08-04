@@ -239,6 +239,9 @@
               $field_tags_current = @$content['field_tags_articles'];
               hide($content['field_tags_articles']);
               break;
+            default:
+              $target_tags = array();
+              break;
           }
           
           if (!$page) {
@@ -353,37 +356,10 @@
 
                     <?php 
                       $tags = NULL;
-                      /*
-                      switch ($node->type) {
-                        case 'news_post':
-                          $target = 'news';
-                          $target_tags = @$node->field_tags_news['und'];
-                          break;
-                        case 'blog_post':
-                          $target = 'blog';
-                          $target_tags = @$node->field_tags_blog['und'];
-                          break;
-                        case 'article':
-                          $target = 'articles';
-                          $target_tags = @$node->field_tags_articles['und'];
-                          break;
+                      foreach ($target_tags as $key => $value) {
+                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
                       }
-                      */
-                      if (!$target_tags) {
-                        $target_tags = array();
-                      }
-                      
-//                      global $user;
-//                      if ($user->uid != 1) {
-//                        foreach ($target_tags as $key => $value) {
-//                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'taxonomy/term/' . $value['tid']);
-//                        }
-//                      }
-//                      else {
-                        foreach ($target_tags as $key => $value) {
-                          $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
-                        }
-//                      }
+
                       if ($tags) {
                         echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
                       }
@@ -420,6 +396,19 @@
 <?php if (!$page): ?>
   <!-- </div> --> <!-- /.inside -->
   <!-- <div class="shadow"></div> -->
+  
+  <?php
+    if (isset($node->related_articles_teaser)) {
+      $tags = NULL;
+      foreach ($target_tags as $key => $value) {
+        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
+      }
+
+      if ($tags) {
+        echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
+      }
+    }
+  ?>
   </article> <!-- /.node -->
 <?php endif; ?>
 

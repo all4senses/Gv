@@ -1816,6 +1816,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 
                 foreach ($articles as $nid => $article) {
                   $a = node_load($nid);
+                  $a->related_articles_teaser = TRUE;
                   $form['related_articles']['index_' . $index]['a_' . $nid . '_check'] = array(
                     '#type' => 'checkbox',
                     '#title' => render(node_view($a, 'teaser')),
