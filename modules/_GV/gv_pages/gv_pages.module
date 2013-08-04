@@ -1713,7 +1713,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 dpm(join(" - ", $arr));
             }
 
-            
+            $max_articles = 10;
             $articles = array();
             for ($i = $max_index; $i >= $min_index; $i--) {
               dpm('index = ' . $i);
@@ -1728,11 +1728,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   $query->fields('ti_' . $key, array('tid'));
                 }
                 $query->condition('n.nid', 1428, '!=');
+                $query->range(0, $max_articles);
                 $results = $query->execute()->fetchAllAssoc('nid');
+                
                 if ($results) {
                   dpm($index_tags);
                   dpm($results);
                   $articles += $results;
+                  if (count($articles) < $max_articles) {
+                    $max_articles -= count($articles);
+                  }
+                  else {
+                    $max_articles = 0;
+                  }
+
                 }
               }
             }
