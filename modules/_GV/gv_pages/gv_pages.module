@@ -1672,164 +1672,164 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['field_extra_data']['#access'] = FALSE;
         
         
+
         
         
-        if ($user->uid == 1) {
-          
-          // Get the article's tags
-          $query = db_select('taxonomy_index', 'ti')
-              ->fields('ti', array('tid'));
-          $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
-          //$query->fields('td');
-          $query->condition('ti.nid', $form['nid']['#value']);
-          $query->condition('td.vid', 2, '!=');
-          $a_tags = $query->execute()->fetchAllAssoc('tid');
-          //$arr = $query->execute()->fetchCol();
-          $arr = array_keys($a_tags);
-          //dpm($arr);
-          
-          if ($arr) {
-            
-            $current_article_index = count($arr);
+        
+        // Get the article's tags
+        $query = db_select('taxonomy_index', 'ti')
+            ->fields('ti', array('tid'));
+        $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
+        //$query->fields('td');
+        $query->condition('ti.nid', $form['nid']['#value']);
+        $query->condition('td.vid', 2, '!=');
+        $a_tags = $query->execute()->fetchAllAssoc('tid');
+        //$arr = $query->execute()->fetchCol();
+        $arr = array_keys($a_tags);
+        //dpm($arr);
 
-            //$arr = array(1,2,3,4);
-            $result = array();
+        if ($arr) {
 
-            function combinations($arr, $level, &$result, $curr=array()) {
-                for($i = 0; $i < count($arr); $i++) {
-                    $new = array_merge($curr, array($arr[$i]));
-                    if($level == 1) {
-                        sort($new);
-                        if (!in_array($new, $result)) {
-                            $result[] = $new;          
-                        }
-                    } else {
-                        combinations($arr, $level - 1, $result, $new);
-                    }
-                }
+          $current_article_index = count($arr);
+
+          //$arr = array(1,2,3,4);
+          $result = array();
+
+          function combinations($arr, $level, &$result, $curr=array()) {
+              for($i = 0; $i < count($arr); $i++) {
+                  $new = array_merge($curr, array($arr[$i]));
+                  if($level == 1) {
+                      sort($new);
+                      if (!in_array($new, $result)) {
+                          $result[] = $new;          
+                      }
+                  } else {
+                      combinations($arr, $level - 1, $result, $new);
+                  }
+              }
+          }
+
+          for ($i = 0; $i<count($arr); $i++) {
+            combinations($arr, $i+1, $result);
+          }
+
+          $min_index = $current_article_index > 1 ? 2 : 1;
+          $max_index = 0;
+
+          foreach ($result as $key => $array) {
+            if ($current_article_index > 1 && count($array) == 1) {
+              unset($result[$key]);
+              continue;
             }
-
-            for ($i = 0; $i<count($arr); $i++) {
-              combinations($arr, $i+1, $result);
-            }
-
-            $min_index = $current_article_index > 1 ? 2 : 1;
-            $max_index = 0;
-            
-            foreach ($result as $key => $array) {
-              if ($current_article_index > 1 && count($array) == 1) {
+            $temp_array = array();
+            foreach ($array as $key2 => $item) {
+              if (in_array($item, $temp_array)) {
                 unset($result[$key]);
-                continue;
+                break;
               }
-              $temp_array = array();
-              foreach ($array as $key2 => $item) {
-                if (in_array($item, $temp_array)) {
-                  unset($result[$key]);
-                  break;
-                }
-                $temp_array[] = $item;
-              }
-
-              if (isset($result[$key])) {
-                $index = count($result[$key]);
-                $tags[$index][] = $result[$key];
-                if ($max_index < $index) {
-                  $max_index = $index;
-                }
-              }
+              $temp_array[] = $item;
             }
 
+            if (isset($result[$key])) {
+              $index = count($result[$key]);
+              $tags[$index][] = $result[$key];
+              if ($max_index < $index) {
+                $max_index = $index;
+              }
+            }
+          }
 
-            //dpm($tags);
 
-            // TEST
+          //dpm($tags);
+
+          // TEST
 //            foreach ($result as $arr) {
 //                dpm(join(" - ", $arr));
 //            }
 
-            $max_articles = 10;
-            $articles = array();
-            
-            
-            for ($i = $max_index; $i >= $min_index; $i--) {
-              
-              //dpm('index = ' . $i);
-              foreach ($tags[$i] as $index => $index_tags) {
+          $max_articles = 10;
+          $articles = array();
 
 
-                $query = db_select('node', 'n')
-                    ->fields('n', array('nid', 'created'));
+          for ($i = $max_index; $i >= $min_index; $i--) {
 
-                foreach ($index_tags as $key => $index_tag) {
-                  $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
-                  $query->fields('ti_' . $key, array('tid'));
+            //dpm('index = ' . $i);
+            foreach ($tags[$i] as $index => $index_tags) {
+
+
+              $query = db_select('node', 'n')
+                  ->fields('n', array('nid', 'created'));
+
+              foreach ($index_tags as $key => $index_tag) {
+                $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
+                $query->fields('ti_' . $key, array('tid'));
+              }
+              $query->condition('n.nid', $form['nid']['#value'], '!=');
+              $query->orderBy('n.created', 'DESC');
+              $query->range(0, $max_articles);
+              $results = $query->execute()->fetchAllAssoc('nid');
+
+              if ($results) {
+                //dpm($index_tags);
+                //dpm($results);
+                foreach ($results as $key => $result) {
+                  if (in_array($result, $articles)) {
+                    unset($results[$key]);
+                  }
                 }
-                $query->condition('n.nid', $form['nid']['#value'], '!=');
-                $query->orderBy('n.created', 'DESC');
-                $query->range(0, $max_articles);
-                $results = $query->execute()->fetchAllAssoc('nid');
-                
-                if ($results) {
-                  //dpm($index_tags);
-                  //dpm($results);
-                  foreach ($results as $key => $result) {
-                    if (in_array($result, $articles)) {
-                      unset($results[$key]);
-                    }
-                  }
-                  $articles_by_index[$i] = $results;
-                  
-                  $articles += $results;
-                  if (count($articles) < $max_articles) {
-                    $max_articles -= count($articles);
-                  }
-                  else {
-                    $max_articles = 0;
-                  }
+                $articles_by_index[$i] = $results;
 
+                $articles += $results;
+                if (count($articles) < $max_articles) {
+                  $max_articles -= count($articles);
                 }
+                else {
+                  $max_articles = 0;
+                }
+
               }
             }
-            
-            if (!empty($articles_by_index)) {
-              //dpm($articles_by_index);
-              //dpm($articles);
-               
-              $form['related_articles'] = array(
+          }
+
+          if (!empty($articles_by_index)) {
+            //dpm($articles_by_index);
+            //dpm($articles);
+
+            $form['related_articles'] = array(
+              '#type' => 'fieldset',
+              '#title' => 'Related articles',
+              '#collapsible' => TRUE,
+              '#collapsed' => TRUE,
+              '#attributes' => array ('class' => array('related-articles')),
+              '#tree' => TRUE,
+              '#weight' => 38,
+            );
+
+            foreach ($articles_by_index as $index => $articles) {
+              $form['related_articles']['index_' . $index] = array(
                 '#type' => 'fieldset',
-                '#title' => 'Related articles',
+                '#title' => 'By ' . $index . ' tags',
                 '#collapsible' => TRUE,
                 '#collapsed' => TRUE,
-                '#attributes' => array ('class' => array('related-articles')),
-                '#tree' => TRUE,
-                '#weight' => 38,
               );
-              
-              foreach ($articles_by_index as $index => $articles) {
-                $form['related_articles']['index_' . $index] = array(
-                  '#type' => 'fieldset',
-                  '#title' => 'By ' . $index . ' tags',
-                  '#collapsible' => TRUE,
-                  '#collapsed' => TRUE,
-                );
-                
-                foreach ($articles as $nid => $article) {
-                  $a = node_load($nid);
-                  $a->related_articles_teaser = TRUE;
-                  $form['related_articles']['index_' . $index]['a_' . $nid . '_check'] = array(
-                    '#type' => 'checkbox',
-                    '#title' => render(node_view($a, 'teaser')),
-                    '#default_value' => isset($extra_data['related_articles']['index_' . $index]['a_' . $nid . '_check']) ? $extra_data['related_articles']['index_' . $index]['a_' . $nid . '_check'] : FALSE,
-                  );
 
-                }
-                
+              foreach ($articles as $nid => $article) {
+                $a = node_load($nid);
+                $a->related_articles_teaser = TRUE;
+                $form['related_articles']['index_' . $index]['a_' . $nid . '_check'] = array(
+                  '#type' => 'checkbox',
+                  '#title' => render(node_view($a, 'teaser')),
+                  '#default_value' => isset($extra_data['related_articles']['index_' . $index]['a_' . $nid . '_check']) ? $extra_data['related_articles']['index_' . $index]['a_' . $nid . '_check'] : FALSE,
+                );
+
               }
+
             }
-            
-          } // end of if this article has any tags.
+          }
+
+        } // end of if this article has any tags.
           
-        } // uid = 1
+
         
         
         
