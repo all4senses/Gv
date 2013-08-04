@@ -1712,11 +1712,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $articles = array();
           for ($i = $max_index; $i > 0; $i--) {
             foreach ($tags[$i] as $index => $index_tags) {
+              dpm('index = ' . $index);
+              dpm($index_tags);
               $query = db_select('node', 'n')
                   ->fields('n', array('nid'));
               
               foreach ($index_tags as $key => $index_tag) {
                 $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.tid = ' . $index_tag);
+                $query->fields('ti_' . $key, array('tid'));
               }
 
               $results = $query->execute()->fetchAllAssoc('nid');
