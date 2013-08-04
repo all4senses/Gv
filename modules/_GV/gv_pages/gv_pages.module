@@ -1766,7 +1766,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 '#title' => 'Related articles',
                 '#collapsible' => TRUE,
                 '#collapsed' => FALSE,
-                '#attributes' => array ('class' => array('related-articles'))
+                '#attributes' => array ('class' => array('related-articles')),
+                '#tree' => TRUE,
               );
               
               foreach ($articles_by_index as $index => $articles) {
