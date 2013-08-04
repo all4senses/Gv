@@ -1800,10 +1800,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 '#type' => 'fieldset',
                 '#title' => 'Related articles',
                 '#collapsible' => TRUE,
-                '#collapsed' => FALSE,
+                '#collapsed' => TRUE,
                 '#attributes' => array ('class' => array('related-articles')),
                 '#tree' => TRUE,
-                '#weight' => 30,
+                '#weight' => 38,
               );
               
               foreach ($articles_by_index as $index => $articles) {
