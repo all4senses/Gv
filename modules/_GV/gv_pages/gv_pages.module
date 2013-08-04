@@ -1773,13 +1773,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   '#type' => 'fieldset',
                   '#title' => 'By ' . $index . ' tags',
                   '#collapsible' => TRUE,
-                  '#collapsed' => FALSE,
+                  '#collapsed' => TRUE,
                 );
                 
                 foreach ($articles as $nid => $article) {
                   $a = node_load($nid);
                   $form['related_articles']['index_' . $index]['a_' . $nid] = array(
-                    '#markup' => node_view($a, 'teaser'),
+                    '#markup' => render(node_view($a, 'teaser')),
                   );
                 }
                 
