@@ -1655,9 +1655,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           
           $tags_sets = array();
-          foreach ($a_tags as $a_tag) {
+          foreach ($a_tags as $a_tag => $data) {
           
-            foreach ($a_tags as $a_tag_2) {
+            foreach ($a_tags as $a_tag_2 => $data_2) {
               if ($a_tag_2 == $a_tag || (isset($tags_sets[$a_tag_2]) && in_array($a_tag, $tags_sets[$a_tag_2]) )) {
                 continue;
               }
