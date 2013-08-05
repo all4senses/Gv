@@ -4291,7 +4291,7 @@ function gv_misc_SendRequestToVocalocity($submission) {
       $data_to[$remote_key] = $map_phonesNeeded[$submission[$getvoip_key]];
     }
     else {
-      $data_to[$remote_key] = $submission[$getvoip_key];
+      $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
     }
   }
   
@@ -4389,7 +4389,7 @@ function gv_misc_SendRequestTo8x8($submission) {
   
   // Map data to remote vars names.
   foreach ($map_main as $getvoip_key => $remote_key) {
-    $data_to[$remote_key] = $submission[$getvoip_key];
+    $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
   $url = 'https://salesforce.ringlead.com/cgi-bin/797/1/dedup.pl';
@@ -4531,7 +4531,7 @@ function gv_misc_SendRequestToRingCentral($submission) {
   
   // Map data to remote vars names.
   foreach ($map_main as $getvoip_key => $remote_key) {
-    $data_to[$remote_key] = $submission[$getvoip_key];
+    $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
   
@@ -4653,7 +4653,7 @@ function gv_misc_SendRequestToNextiva($submission) {
   
   // Map data to remote vars names.
   foreach ($map_main as $getvoip_key => $remote_key) {
-    $data_to[$remote_key] = $submission[$getvoip_key];
+    $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
   //$url = 'http://getvoip.com/request-test';
