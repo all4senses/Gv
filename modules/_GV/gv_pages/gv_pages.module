@@ -5385,7 +5385,10 @@ function gv_pages_node_view($node, $view_mode) {
       
       // Redirect old versions Quote pages to the latest version.
       global $user;
+      
+      dpm('x1-----------------');
       if (!$user->uid && !strpos($node->title, 'Quote page v3')) {
+        dpm('x222-----------------');
         drupal_goto('compare-voip-solutions', array(), 301);
       }
       
