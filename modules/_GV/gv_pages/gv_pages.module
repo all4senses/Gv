@@ -5381,6 +5381,10 @@ function gv_pages_node_view($node, $view_mode) {
       
     case 'quote':
       
+      if ($view_mode != 'full') {
+        return;
+      }
+      
       $node->q_data = unserialize($node->field_q_data['und'][0]['value']);
       
       // Redirect old versions Quote pages to the latest version.
@@ -5389,7 +5393,7 @@ function gv_pages_node_view($node, $view_mode) {
       dpm('x1-----------------');
       if (!$user->uid && !strpos($node->title, 'Quote page v3')) {
         dpm('x222-----------------');
-        //drupal_goto('compare-voip-solutions', array(), 301);
+        drupal_goto('compare-voip-solutions', array(), 301);
       }
       
       
