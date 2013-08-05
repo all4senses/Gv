@@ -203,10 +203,11 @@ function gv_misc_410gone() {
   //drupal_add_http_header('Status', '410 Gone');
   //drupal_exit('The page is gone (410)');
  
-  dpm(drupal_get_http_header('Status'));
+  dpm('s = ' . drupal_get_http_header('Status'));
   
   gv_misc_drupal_410_gone();
   //gv_misc_drupal_not_found();
+  dpm('s = ' . drupal_get_http_header('Status'));
   drupal_exit();
 }
 
