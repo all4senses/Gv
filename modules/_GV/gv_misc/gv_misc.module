@@ -180,11 +180,11 @@ function gv_misc_menu() {
  */
 function gv_misc_setPagesToShow410(&$items) {
   
-  $pages = array('compare-residential-voip-providers', 'compare-business-voip-providers', 'providers/reviews', 'best-voip-service-providers');
+  $pages410 = unserialize(PAGES_410);
   // best-voip-service-providers is now best-voip-service-providers-old OR node/453
   
   
-  foreach ($pages as $page) {
+  foreach ($pages410 as $page) {
     $items[$page] = array(
       'title' => 'The Page is Gone (410)',
       'page callback' => 'gv_misc_410gone',
@@ -200,8 +200,6 @@ function gv_misc_setPagesToShow410(&$items) {
  * Return 410 gone for the current page.
  */
 function gv_misc_410gone() {
-  global $gone410;
-  $gone410 = 'TRUE';
   gv_misc_drupal_410_gone();
   drupal_exit();
 }
@@ -215,10 +213,10 @@ function gv_misc_410gone() {
  * @return $parts
  */
 function gv_misc_boost_is_cacheable($parts, $request_type = 'normal') {
- 
-  global $gone410;
-  dpm($gone410);
-  if ($_GET['q'] == 'providers/reviews') {
+
+  $pages410 = unserialize(PAGES_410);
+  
+  if (in_array($_GET['q'], $pages410)) {
     $parts['is_cacheable'] = FALSE;
     $parts['is_cacheable_reason'] = 'This page is gone. No cache for preserving the page status 410 gone.';
   }
