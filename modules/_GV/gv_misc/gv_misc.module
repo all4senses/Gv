@@ -219,8 +219,16 @@ function gv_misc_init() {
 //  }
   
   global $user;
-  dpm($_GET);
-  dpm($user);
+  
+  
+  if ($user->uid == 1 && $_GET['q'] == '$user') {
+    //dpm($_GET);
+    //dpm($user);
+    
+    drupal_add_http_header('Status', '410 Gone');
+    drupal_exit('The page is gone (410)');
+ 
+  }
 }
 
 /**
