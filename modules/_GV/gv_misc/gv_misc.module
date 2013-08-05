@@ -203,7 +203,7 @@ function gv_misc_410gone() {
   //drupal_add_http_header('Status', '410 Gone');
   //drupal_exit('The page is gone (410)');
  
-  dpm('s = ' . drupal_get_http_header('Status'));
+  dpm('s0 = ' . drupal_get_http_header('Status'));
   
   gv_misc_drupal_410_gone();
   //gv_misc_drupal_not_found();
@@ -230,7 +230,7 @@ function gv_misc_drupal_410_gone() {
 
   drupal_add_http_header('Status', '410 Gone');
 
-  dpm('s = ' . drupal_get_http_header('Status'));
+  dpm('s1 = ' . drupal_get_http_header('Status'));
   
   watchdog('page is gone', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
 
@@ -262,21 +262,21 @@ function gv_misc_drupal_410_gone() {
     
   }
 
-  dpm('s = ' . drupal_get_http_header('Status'));
+  dpm('s2 = ' . drupal_get_http_header('Status'));
   
   
   drupal_set_page_content($return);
   
-  dpm('s = ' . drupal_get_http_header('Status'));
+  dpm('s3 = ' . drupal_get_http_header('Status'));
   
   $page = element_info('page');
   
-  dpm('s = ' . drupal_get_http_header('Status'));
+  dpm('s4 = ' . drupal_get_http_header('Status'));
   
   print drupal_render_page($page);
 
   
-  dpm('s = ' . drupal_get_http_header('Status'));
+  dpm('s5 = ' . drupal_get_http_header('Status'));
   
   // Perform end-of-request tasks.
   drupal_page_footer();
