@@ -373,6 +373,10 @@ function gv_preprocess_search_results(&$variables) {
   // need prior actions (hack) in function node_search_execute() at node.module
   // v2
   global $gv_num_rows, $gv_limit_rows;
+  
+  if (!$gv_limit_rows) {
+    $gv_limit_rows = 15;
+  }
 //  dpm('$gv_num_rows =' . $gv_num_rows, '$gv_limit_rows = ' . $gv_limit_rows);
 //  dpm($_SESSION['gv_node_search_data']);
 //  $page = pager_default_initialize($_SESSION['gv_node_search_data']['gv_num_rows'], $_SESSION['gv_node_search_data']['gv_limit_rows']);
