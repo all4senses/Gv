@@ -222,14 +222,15 @@ function gv_misc_init() {
 //  global $user;
 //  
 //  
-//  if ($_GET['q'] == 'providers/reviews') {
-//    //dpm($_GET);
-//    //dpm($user);
-//    
-//    drupal_add_http_header('Status', '410 Gone');
-//    //drupal_exit('The page is gone (410)');
-// 
-//  }
+  if ($_GET['q'] == 'providers/reviews') {
+    //dpm($_GET);
+    //dpm($user);
+    
+    //drupal_add_http_header('Status', '410 Gone');
+    //drupal_exit('The page is gone (410)');
+ 
+    $GLOBALS['conf']['cache'] = 0;
+  }
 }
 
 /**
