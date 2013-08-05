@@ -244,6 +244,11 @@
               break;
           }
           
+          
+          if (!$target_tags) {
+            $target_tags = array();
+          }
+          
           if (!$page) {
             if ($view_mode == 'side_block_teaser') {
               echo $teaser_data['teaser_side_block'];
