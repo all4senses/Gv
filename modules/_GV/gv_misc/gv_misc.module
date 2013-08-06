@@ -7217,7 +7217,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
     }
 
 
-    dpm($tags);
+    //dpm($tags);
 
     // TEST
 //            foreach ($result as $arr) {
@@ -7226,9 +7226,8 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
 
 
     for ($i = $max_index; $i >= $min_index; $i--) {
-      dpm('i =  ' . $i);
-      foreach ($tags[$i] as $index => $index_tags) {
 
+      foreach ($tags[$i] as $index => $index_tags) {
 
         $query = db_select('node', 'n')
             ->fields('n', array('nid', 'created'));
@@ -7243,7 +7242,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
         $results = $query->execute()->fetchAllAssoc('nid');
 
         if ($results) {
-          dpm($results);
+
           foreach ($results as $key => $result) {
             if (in_array($result, $articles)) {
               unset($results[$key]);
@@ -7265,7 +7264,5 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
 
   }
 
-  dpm($articles_by_index);
-  
   return $articles_by_index;
 }
