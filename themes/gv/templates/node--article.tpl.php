@@ -368,6 +368,16 @@
                       if ($tags) {
                         echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
                       }
+                      
+                      
+                      
+                      
+                      // Related articles.
+                      if (!empty($node->related_articles)) {
+                        echo '<div class="related_articles">' . $node->related_articles[0] . '</div>';
+                      }
+                      
+                      
                     ?>
                   </footer>
     
