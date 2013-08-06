@@ -5405,8 +5405,9 @@ function gv_pages_node_view($node, $view_mode) {
               $query->condition('n.nid', $nid);
               if ($result = $query->execute()->fetchObject()) {
                 //dpm($result);
+                $result->field_main_image_value = unserialize($result->field_main_image_value);
                 $node->related_articles[$nid] = $result;
-                if ($max_articles-- < 1) {
+                if (--$max_articles < 1) {
                   break 2;
                 }
                 
