@@ -5393,14 +5393,45 @@ function gv_pages_node_view($node, $view_mode) {
         $max_articles = 4;
         foreach ($extra_data['related_articles'] as $group) {
           foreach ($group as $nid => $checked) {
-            if ($max_articles-- < 1) {
-              break 2;
-            }
+
             if ($checked) {
-              $node->related_articles[] = array($nid);
+              //$related_articles_nids[] = $nid;
+              $query = db_select('node', 'n')
+                ->fields('n', array('title'));
+
+              $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+              $query->fields('mi', array('field_main_image_value'));
+
+              $query->condition('n.nid', $nid);
+              if ($result = $query->execute()->fetchAllAssoc('nid')) {
+                //dpm($result);
+                $node->related_articles[] = $result;
+                if ($max_articles-- < 1) {
+                  break 2;
+                }
+                
+              }
+              
             }
           }
         }
+        
+        /*
+        if (!empty($related_articles_nids)) {
+          $query = db_select('node', 'n')
+            ->fields('n', array('title'));
+
+          $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+          $query->fields('mi', array('field_main_image_value'));
+
+          $query->condition('n.nid', $related_articles_nids, 'IN');
+          $query->orderBy('n.created', 'DESC');
+          $query->range(0, $max_articles);
+          $node->related_articles = $query->execute()->fetchAllAssoc('nid');
+
+        }
+        */
+        
         
         //$node->related_articles = array('testtt');
       }
