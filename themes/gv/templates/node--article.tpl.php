@@ -377,7 +377,7 @@
                         dpm($node->related_articles);
                         echo '<div class="related_articles"><h3>Recommended For You</h3>';
                           foreach ($node->related_articles as $nid => $article) {
-                            echo '<div><img src="' . $article->field_main_image_value['src_themed'] . '" />', l($article->title, 'node/' . $nid) . '</div>';
+                            echo '<div><a href="' . url('node/' . $nid) . '"><img src="' . $article->field_main_image_value['src_themed'] . '" /></a>', l($article->title, 'node/' . $nid) . '</div>';
                           }
                         echo '</div>';
                       }
