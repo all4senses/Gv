@@ -7154,3 +7154,115 @@ function gv_misc_findAllArrayElementsCombinations($arr, $level, &$result, $curr=
         }
     }
 }
+
+
+
+/**
+ * Find all related articles (based on similar tags) divided in groups by Index (amount of similar tags ).
+ *
+ */
+function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
+  
+  $max_articles = 10;
+  $articles = array();
+  $articles_by_index = NULL;
+
+
+  // Get the article's tags
+  $query = db_select('taxonomy_index', 'ti')
+      ->fields('ti', array('tid'));
+  $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
+  //$query->fields('td');
+  $query->condition('ti.nid', $article_nid);
+  $query->condition('td.vid', 2, '!=');
+  $a_tags = $query->execute()->fetchAllAssoc('tid');
+  //$arr = $query->execute()->fetchCol();
+  $arr = array_keys($a_tags);
+  //dpm($arr);
+
+  if ($arr) {
+
+    $current_article_index = count($arr);
+
+    $result = array();
+
+    for ($i = 0; $i<count($arr); $i++) {
+      gv_misc_findAllArrayElementsCombinations($arr, $i+1, $result);
+    }
+
+    $min_index = $current_article_index > 1 ? 2 : 1;
+    $max_index = 0;
+
+    foreach ($result as $key => $array) {
+      if ($current_article_index > 1 && count($array) == 1) {
+        unset($result[$key]);
+        continue;
+      }
+      $temp_array = array();
+      foreach ($array as $key2 => $item) {
+        if (in_array($item, $temp_array)) {
+          unset($result[$key]);
+          break;
+        }
+        $temp_array[] = $item;
+      }
+
+      if (isset($result[$key])) {
+        $index = count($result[$key]);
+        $tags[$index][] = $result[$key];
+        if ($max_index < $index) {
+          $max_index = $index;
+        }
+      }
+    }
+
+
+    //dpm($tags);
+
+    // TEST
+//            foreach ($result as $arr) {
+//                dpm(join(" - ", $arr));
+//            }
+
+
+    for ($i = $max_index; $i >= $min_index; $i--) {
+
+      foreach ($tags[$i] as $index => $index_tags) {
+
+
+        $query = db_select('node', 'n')
+            ->fields('n', array('nid', 'created'));
+
+        foreach ($index_tags as $key => $index_tag) {
+          $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
+          $query->fields('ti_' . $key, array('tid'));
+        }
+        $query->condition('n.nid', $form['nid']['#value'], '!=');
+        $query->orderBy('n.created', 'DESC');
+        $query->range(0, $max_articles);
+        $results = $query->execute()->fetchAllAssoc('nid');
+
+        if ($results) {
+          foreach ($results as $key => $result) {
+            if (in_array($result, $articles)) {
+              unset($results[$key]);
+            }
+          }
+          $articles_by_index[$i] = $results;
+
+          $articles += $results;
+          if (count($articles) < $max_articles) {
+            $max_articles -= count($articles);
+          }
+          else {
+            $max_articles = 0;
+          }
+
+        }
+      }
+    }
+
+  }
+
+  return $articles_by_index;
+}
