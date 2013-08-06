@@ -5382,8 +5382,8 @@ function gv_pages_node_view($node, $view_mode) {
         // we then set it here by default the first 4 most relative articles from all found related articles.
         if (!isset($extra_data['related_articles'])) {
           
-          
-          
+          $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($node->nid);
+          dpm($articles_by_index);
           $extra_data['related_articles'] = array();
         }
         
