@@ -7190,7 +7190,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
       gv_misc_findAllArrayElementsCombinations($arr, $i+1, $result);
     }
 
-    $min_index = $current_article_index > 1 ? 2 : 1;
+    $min_index = 1; //$current_article_index > 1 ? 2 : 1;
     $max_index = 0;
 
     foreach ($result as $key => $array) {
