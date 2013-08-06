@@ -374,7 +374,7 @@
                       
                       // Related articles.
                       if (!empty($node->related_articles)) {
-                        echo '<div class="related_articles">' . $node->related_articles[0] . '</div>';
+                        //echo '<div class="related_articles">' . $node->related_articles[0] . '</div>';
                         dpm($node->related_articles);
                       }
                       
