@@ -7226,7 +7226,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
 
 
     for ($i = $max_index; $i >= $min_index; $i--) {
-
+      dpm('i =  ' . $i);
       foreach ($tags[$i] as $index => $index_tags) {
 
 
@@ -7243,6 +7243,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
         $results = $query->execute()->fetchAllAssoc('nid');
 
         if ($results) {
+          dpm($results);
           foreach ($results as $key => $result) {
             if (in_array($result, $articles)) {
               unset($results[$key]);
