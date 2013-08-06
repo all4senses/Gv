@@ -5403,9 +5403,9 @@ function gv_pages_node_view($node, $view_mode) {
               $query->fields('mi', array('field_main_image_value'));
 
               $query->condition('n.nid', $nid);
-              if ($result = $query->execute()->fetchAllAssoc('nid')) {
+              if ($result = $query->execute()->fetchObject()) {
                 //dpm($result);
-                $node->related_articles[] = $result;
+                $node->related_articles[$nid] = $result;
                 if ($max_articles-- < 1) {
                   break 2;
                 }
