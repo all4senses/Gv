@@ -7135,3 +7135,22 @@ function gv_misc_setBreadcrumbs(&$variables) {
   }
 
 }
+
+
+/**
+ * Find all combinationa of an array's elements.
+ *
+ */
+function gv_misc_findAllArrayElementsCombinations($arr, $level, &$result, $curr=array()) {
+    for($i = 0; $i < count($arr); $i++) {
+        $new = array_merge($curr, array($arr[$i]));
+        if($level == 1) {
+            sort($new);
+            if (!in_array($new, $result)) {
+                $result[] = $new;          
+            }
+        } else {
+            gv_misc_findAllArrayElementsCombinations($arr, $level - 1, $result, $new);
+        }
+    }
+}
