@@ -5390,7 +5390,7 @@ function gv_pages_node_view($node, $view_mode) {
           foreach ($articles_by_index as $index => $data) {
             foreach ($data as $related_nid => $related_article) {
               $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
-              if (++$related_count > 4) {
+              if ($related_count++ > $max_articles) {
                 break 2;
               }
             }
