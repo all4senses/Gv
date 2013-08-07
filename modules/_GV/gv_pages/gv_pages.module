@@ -5396,7 +5396,7 @@ function gv_pages_node_view($node, $view_mode) {
                 if(1){
                 //if (gv_misc_articleHasMainImageField($related_nid)) {
                   $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
-                  if ($related_count++ >= $max_articles) {
+                  if ($related_count++ >= $max_articles - 1) {
                     break 2;
                   }
                 }
