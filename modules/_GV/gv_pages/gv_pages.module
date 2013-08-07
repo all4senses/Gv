@@ -5391,7 +5391,7 @@ function gv_pages_node_view($node, $view_mode) {
             foreach ($data as $related_nid => $related_article) {
               dpm('$related_count = ' . $related_count . ', $max_articles = ' . $max_articles);
               if ($related_count++ >= $max_articles) {
-                break;
+                break 2;
               }
               $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
             }
