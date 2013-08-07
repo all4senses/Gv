@@ -5393,8 +5393,8 @@ function gv_pages_node_view($node, $view_mode) {
               foreach ($data as $related_nid => $related_article) {
                 dpm('$related_count = ' . $related_count . ', $max_articles = ' . $max_articles);
                 
-                if(1){
-                //if (gv_misc_articleHasMainImageField($related_nid)) {
+                //{
+                if (gv_misc_articleHasMainImageField($related_nid)) {
                   $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
                   if ($related_count++ >= $max_articles - 1) {
                     break 2;
