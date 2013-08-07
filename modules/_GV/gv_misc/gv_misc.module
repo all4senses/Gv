@@ -7266,3 +7266,22 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
 
   return $articles_by_index;
 }
+
+
+function gv_misc_articleHasMainImageField($nid) {
+  
+  $query = db_select('node', 'n')
+    ->fields('n', array('title'));
+
+  $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+  $query->fields('mi', array('field_main_image_value'));
+  $query->condition('n.nid', $nid);
+
+  if ($result = $query->execute()->fetchObject()) {
+    $result->field_main_image_value = unserialize($result->field_main_image_value);
+    if(!empty($result->field_main_image_value)) {
+      return TRUE;
+    }
+  }
+  return FALSE;              
+}

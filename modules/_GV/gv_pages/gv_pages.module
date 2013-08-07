@@ -5392,10 +5392,13 @@ function gv_pages_node_view($node, $view_mode) {
             foreach ($articles_by_index as $index => $data) {
               foreach ($data as $related_nid => $related_article) {
                 //dpm('$related_count = ' . $related_count . ', $max_articles = ' . $max_articles);
-                if ($related_count++ >= $max_articles) {
-                  break 2;
+                
+                if (gv_misc_articleHasMainImageField($related_nid)) {
+                  $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
+                  if ($related_count++ >= $max_articles - 1) {
+                    break 2;
+                  }
                 }
-                $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
               }
             }
 
@@ -5413,7 +5416,7 @@ function gv_pages_node_view($node, $view_mode) {
           foreach ($group as $nid => $checked) {
 
             if ($checked) {
-              //$related_articles_nids[] = $nid;
+
               $query = db_select('node', 'n')
                 ->fields('n', array('title'));
 
@@ -5422,10 +5425,10 @@ function gv_pages_node_view($node, $view_mode) {
 
               $query->condition('n.nid', $nid);
               if ($result = $query->execute()->fetchObject()) {
-                dpm($result);
+                //dpm($result);
                 
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
-                if($result->field_main_image_value) {
+                if(!empty($result->field_main_image_value)) {
                   $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
                   $node->related_articles[$nid] = $result;
                   if (--$max_articles < 1) {
