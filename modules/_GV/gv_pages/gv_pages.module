@@ -5442,10 +5442,10 @@ function gv_pages_node_view($node, $view_mode) {
 //                }
 //              }
               
-              $result = $query->execute()->fetchObject();
-              dpm('on view default related...');
-              if ($result) {
-                dpm($result);
+              
+              
+              if ($result = $query->execute()->fetchObject()) {
+                //dpm($result);
                 
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
                 if(!empty($result->field_main_image_value)) {
