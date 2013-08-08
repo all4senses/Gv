@@ -7277,7 +7277,7 @@ function gv_misc_articleHasMainImageField($nid) {
   $query->fields('mi', array('field_main_image_value'));
   $query->condition('n.nid', $nid);
 
-  $result = $query->execute()->fetchObject()
+  $result = $query->execute()->fetchObject();
   dpm($result);
   
   if ($result) {
