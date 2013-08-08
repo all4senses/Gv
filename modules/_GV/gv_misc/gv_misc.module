@@ -7163,13 +7163,13 @@ function gv_misc_findAllArrayElementsCombinations($arr, $level, &$result, $curr=
  */
 function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   
-  return array();
+  //return array();
   
   $max_articles = 10;
   $articles = array();
   $articles_by_index = array();
 
-  $map_nodeType_to_tagsTable = array('blog_post' => 'field_data_field_tags_blog', 'news_post' => 'field_data_field_tags_news', 'article' => 'field_data_field_tags_articles',);
+  $map_nodeType_to_tagsTable = array('blog_post' => 'blog', 'news_post' => 'news', 'article' => 'articles',);
 
   // Get the article's tags
   /*
@@ -7187,8 +7187,8 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   
   
   
-  $query = db_select($map_nodeType_to_tagsTable[$node_type], 'ti')
-      ->fields('ti', array('field_tags_blog_tid'));
+  $query = db_select('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti')
+      ->fields('ti', array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
   //$query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
   //$query->fields('td');
   $query->condition('ti.entity_id', $article_nid);
