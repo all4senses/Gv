@@ -5428,19 +5428,37 @@ function gv_pages_node_view($node, $view_mode) {
               $query->fields('mi', array('field_main_image_value'));
 
               $query->condition('n.nid', $nid);
-              if ($result = $query->execute()->fetchObject()) {
+              
+//              if ($result = $query->execute()->fetchObject()) {
+//                dpm($result);
+//                
+//                $result->field_main_image_value = unserialize($result->field_main_image_value);
+//                if(!empty($result->field_main_image_value)) {
+//                  $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+//                  $node->related_articles[$nid] = $result;
+//                  if (--$max_articles < 1) {
+//                    break 2;
+//                  }
+//                }
+//              }
+              
+              $result = $query->execute()->fetchObject();
+              dpm('yyy');
+              if ($result) {
                 dpm($result);
                 
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
                 if(!empty($result->field_main_image_value)) {
                   $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
                   $node->related_articles[$nid] = $result;
-                  if (--$max_articles < 1) {
-                    break 2;
-                  }
                 }
                 
               }
+              
+              if (--$max_articles < 1) {
+                break 2;
+              }
+              
               
             }
           }
