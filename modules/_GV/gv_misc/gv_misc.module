@@ -7161,14 +7161,16 @@ function gv_misc_findAllArrayElementsCombinations($arr, $level, &$result, $curr=
  * Find all related articles (based on similar tags) divided in groups by Index (amount of similar tags ).
  *
  */
-function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
+function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   
   $max_articles = 10;
   $articles = array();
   $articles_by_index = array();
 
+  $map_nodeType_to_tagsTable = array('blog_post' => 'field_data_field_tags_blog', 'news_post' => 'field_data_field_tags_news', 'article' => 'field_data_field_tags_articles',);
 
   // Get the article's tags
+  /*
   $query = db_select('taxonomy_index', 'ti')
       ->fields('ti', array('tid'));
   $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
@@ -7177,9 +7179,24 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
   $query->condition('td.vid', 2, '!=');
   //$a_tags = $query->execute()->fetchAllAssoc('tid');
   $arr = $query->execute()->fetchCol();
-  //dpm($article_nid);
   //dpm($a_tags);
   //$arr = array_keys($a_tags);
+  */
+  
+  
+  
+  $query = db_select($map_nodeType_to_tagsTable[$node_type], 'ti')
+      ->fields('ti', array('field_tags_blog_tid'));
+  //$query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
+  //$query->fields('td');
+  $query->condition('ti.entity_id', $article_nid);
+  //$query->condition('td.vid', 2, '!=');
+  //$a_tags = $query->execute()->fetchAllAssoc('tid');
+  $arr = $query->execute()->fetchCol();
+  
+  
+  
+  
   dpm($arr);
 
   if (empty($arr)) 
