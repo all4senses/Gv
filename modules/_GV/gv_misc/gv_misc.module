@@ -7175,11 +7175,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid) {
   //$query->fields('td');
   $query->condition('ti.nid', $article_nid);
   ////$query->condition('td.vid', 2, '!=');
-  $a_tags = $query->execute()->fetchAllAssoc('tid');
-  //$arr = $query->execute()->fetchCol();
+  //$a_tags = $query->execute()->fetchAllAssoc('tid');
+  $arr = $query->execute()->fetchCol();
   dpm($article_nid);
-  dpm($a_tags);
-  $arr = array_keys($a_tags);
+  //dpm($a_tags);
+  //$arr = array_keys($a_tags);
   dpm($arr);
 
   if ($arr) {
