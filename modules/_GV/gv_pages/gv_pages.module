@@ -1778,7 +1778,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         */
 
         $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($form['nid']['#value']);
-        dpm($articles_by_index);
+        //dpm($articles_by_index);
         if (!empty($articles_by_index)) {
           //dpm($articles_by_index);
           //dpm($articles);
@@ -5443,13 +5443,13 @@ function gv_pages_node_view($node, $view_mode) {
 //              }
               
               $result = $query->execute()->fetchObject();
-              dpm('yyy');
+              dpm('on view default related...');
               if ($result) {
                 dpm($result);
                 
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
                 if(!empty($result->field_main_image_value)) {
-                  $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+                  $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
                   $node->related_articles[$nid] = $result;
                 }
                 
@@ -5481,7 +5481,7 @@ function gv_pages_node_view($node, $view_mode) {
         */
         
         
-        //$node->related_articles = array('testtt');
+
       }
       
       break; // End of quote.

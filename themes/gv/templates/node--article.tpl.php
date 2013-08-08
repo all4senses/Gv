@@ -376,7 +376,12 @@
                       if (!empty($node->related_articles)) {
                         echo '<div class="related_articles"><h3>Recommended For You</h3>';
                           foreach ($node->related_articles as $nid => $article) {
-                            echo '<div><a href="' . url('node/' . $nid) . '"><img src="' . $article->field_main_image_value['src_themed'] . '" /></a>', l($article->title, 'node/' . $nid) . '</div>';
+                            if (!empty($article->field_main_image_value['src_themed_related'])) {
+                              echo '<div><a href="' . url('node/' . $nid) . '"><img src="' . $article->field_main_image_value['src_themed_related'] . '" /></a>', l($article->title, 'node/' . $nid) . '</div>';
+                            }
+                            else {
+                              echo '<div>', l($article->title, 'node/' . $nid) . '</div>';
+                            }
                           }
                         echo '</div>';
                       }
