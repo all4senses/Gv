@@ -7038,23 +7038,23 @@ function gv_misc_setBreadcrumbs(&$variables) {
     //dpm('teasers node------------');
     switch ($variables['node']->type) {
       case 'provider':
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->field_p_name['und'][0]['value']/* . ' Reviews'*/)));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'reviews'), $variables['node']->field_p_name['und'][0]['value']/* . ' Reviews'*/)));
         break;
       case 'review':
         if (!empty($variables['node']->field_ref_provider['und'][0]['target_id'])) {
-          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] /*. ' Reviews'*/, 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
+          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'reviews'), l($variables['node']->field_r_provider_name['und'][0]['value'] /*. ' Reviews'*/, 'node/' . $variables['node']->field_ref_provider['und'][0]['target_id']), $variables['node']->title )));
         }
         else {
-          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), $variables['node']->title )));
+          $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'reviews'), $variables['node']->title )));
         }
         break;
       case 'phone':
         //dpm($variables['node']);
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l('Phones', 'reviews/phone'), $variables['node']->title )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'reviews'), l('Phones', 'reviews/phone'), $variables['node']->title )));
         break;
       case 'phone_review':
         //dpm($variables['node']);
-        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'providers/reviews'), l('Phones', 'reviews/phone'), l($variables['node']->field_p_name['und'][0]['value'], 'node/' . $variables['node']->field_ref_phone['und'][0]['target_id']), $variables['node']->title )));
+        $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), l('Reviews', 'reviews'), l('Phones', 'reviews/phone'), l($variables['node']->field_p_name['und'][0]['value'], 'node/' . $variables['node']->field_ref_phone['und'][0]['target_id']), $variables['node']->title )));
         break;
       
       case 'article':
