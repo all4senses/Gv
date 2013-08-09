@@ -7361,6 +7361,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         $query->fields('ti_' . $key, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
       }
       $query->condition('n.nid', $article_nid, '!=');
+      $query->condition('n.nid', $articles, 'NOT IN');
       $query->orderBy('n.created', 'DESC');
       $query->range(0, $max_articles);
       $results = $query->execute()->fetchAllAssoc('nid');
