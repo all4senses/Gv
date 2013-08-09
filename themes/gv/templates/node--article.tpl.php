@@ -429,7 +429,7 @@
       }
 
       if ($tags) {
-        echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
+        echo '<div class="topics related"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
       }
     }
   ?>
