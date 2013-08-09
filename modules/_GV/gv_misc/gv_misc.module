@@ -7224,8 +7224,12 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       if (empty($results)) {
         dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
+        
       }
     }
+    
+    // Normalize array for the case if it was cut
+    $arr = array_values($arr);
     
     dpm($arr);
     
