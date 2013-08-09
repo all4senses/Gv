@@ -426,6 +426,9 @@
       dpm($node->related_articles_teaser);
       $tags = NULL;
       foreach ($target_tags as $key => $value) {
+        if (empty($field_tags_current[$key]['#title'])) {
+          break;
+        }
         $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
       }
 
