@@ -423,7 +423,6 @@
   
   <?php
     if (isset($node->related_articles_teaser)) {
-      dpm($node->related_articles_teaser);
       $tags = NULL;
       foreach ($target_tags as $key => $value) {
         if (empty($field_tags_current[$key]['#title'])) {
