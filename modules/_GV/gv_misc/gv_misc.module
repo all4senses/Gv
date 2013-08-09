@@ -7198,6 +7198,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   
   
   
+  if (empty($arr)) {
+    return array();
+  }
   
   dpm($arr);
 
@@ -7217,7 +7220,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $query->orderBy('n.created', 'DESC');
       //$query->range(0, $max_articles);
       $results = $query->execute()->fetchAllAssoc('nid');
-      dpm($results);
+      //dpm($results);
       if (empty($results)) {
         dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
@@ -7226,27 +7229,37 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     
     dpm($arr);
     
-    // Find couples
-    $tags_sets = array();
-    foreach ($arr as $a_tag) {
-      foreach ($arr as $a_tag_2) {
-        if ($a_tag_2 == $a_tag || (isset($tags_sets[$a_tag_2]) && in_array($a_tag, $tags_sets[$a_tag_2]) )) {
-          continue;
+    // If still > 6, try to folter by couples coinsedences.
+    if (count($arr) > 6) {
+      
+      return array();
+      
+      
+      
+      
+
+      // Find couples
+      $tags_sets = array();
+      foreach ($arr as $a_tag) {
+        foreach ($arr as $a_tag_2) {
+          if ($a_tag_2 == $a_tag || (isset($tags_sets[$a_tag_2]) && in_array($a_tag, $tags_sets[$a_tag_2]) )) {
+            continue;
+          }
+          $tags_sets[$a_tag][] = $a_tag_2;
         }
-        $tags_sets[$a_tag][] = $a_tag_2;
       }
-    }
 
-    dpm($tags_sets);
-    foreach ($tags_sets as $root => $leaves) {
-      foreach ($leaves as $leave) {
-        $tags_sets['couples'][] = array($root, $leave);
+      dpm($tags_sets);
+      foreach ($tags_sets as $root => $leaves) {
+        foreach ($leaves as $leave) {
+          $tags_sets['couples'][] = array($root, $leave);
+        }
       }
-    }
 
-    
-    dpm($tags_sets['couples']);
 
+      dpm($tags_sets['couples']);
+      
+      
 //    $query = db_select('node', 'n')
 //          ->fields('n', array('nid', 'created'));
 //
@@ -7259,18 +7272,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 //    $query->range(0, $max_articles);
 //    $results = $query->execute()->fetchAllAssoc('nid');
 
-    
-    
-    
-    
-    
-    return array();
+      return array();
+    }
+  
   }
   
-  if (empty($arr)) 
-  {
-    return array();
-  }
   
   $current_article_index = count($arr);
 
