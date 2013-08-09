@@ -7384,9 +7384,13 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
             dpm('found');
             unset($results[$key]);
           }
+          else {
+            $articles_by_index[$i][$key] = $result;
+          }
         }
         dpm($results);
-        $articles_by_index[$i] += $results;
+        dpm($articles_by_index);
+        //$articles_by_index[$i] += $results;
 
         $articles += $results;
         dpm($articles);
