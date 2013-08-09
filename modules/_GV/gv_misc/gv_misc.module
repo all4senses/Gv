@@ -7327,15 +7327,17 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     dpm('i = ' . $i);
     
     foreach ($tags[$i] as $index => $index_tags) {
+      
+      
+      if (!$max_articles) {
+        break;
+      }
 
       $query = db_select('node', 'n')
           ->fields('n', array('nid', 'created'));
 
       foreach ($index_tags as $key => $index_tag) {
         
-        if (!$max_articles) {
-          break;
-        }
         /*
         
         $query = db_select('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti')
