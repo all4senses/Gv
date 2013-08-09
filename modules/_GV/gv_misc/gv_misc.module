@@ -7222,7 +7222,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $results = $query->execute()->fetchAllAssoc('nid');
       //dpm($results);
       if (empty($results)) {
-        dpm('tag ' . $tag . ' has no related');
+        //dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
         
       }
@@ -7231,7 +7231,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     // Normalize array for the case if it was cut
     $arr = array_values($arr);
     
-    dpm($arr);
+    //dpm($arr);
     
     // If still > 6, try to folter by couples coinsedences.
     if (count($arr) > 6) {
@@ -7314,7 +7314,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   }
 
 
-  dpm($tags);
+  //dpm($tags);
 
   // TEST
 //            foreach ($result as $arr) {
@@ -7324,7 +7324,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
   for ($i = $max_index; $i >= $min_index; $i--) {
 
-    dpm('i = ' . $i);
+    //dpm('i = ' . $i);
     
     foreach ($tags[$i] as $index => $index_tags) {
       
@@ -7369,19 +7369,18 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $results = $query->execute()->fetchAllAssoc('nid');
       
       //if ($i == 1)
-      if (!empty($results))
-      {
-        dpm('$max_articles = ' . $max_articles);
-        dpm('$map_nodeType_to_tagsTable[$node_type] = ' . $map_nodeType_to_tagsTable[$node_type]);
-        dpm ('$index_tag = ' . $index_tag);
-        dpm($results);
-      }
+//      if (!empty($results))
+//      {
+//        dpm('$max_articles = ' . $max_articles);
+//        dpm('$map_nodeType_to_tagsTable[$node_type] = ' . $map_nodeType_to_tagsTable[$node_type]);
+//        dpm ('$index_tag = ' . $index_tag);
+//        dpm($results);
+//      }
       
       if ($results) {
 
         foreach ($results as $key => $result) {
           if (isset($articles[$key])) {
-            dpm('found');
             unset($results[$key]);
           }
           elseif ($max_articles) {
@@ -7391,11 +7390,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           }
         }
         //dpm($results);
-        dpm($articles_by_index);
+        //dpm($articles_by_index);
         //$articles_by_index[$i] += $results;
 
         //$articles += $results;
-        dpm($articles);
+        //dpm($articles);
         //$max_articles -= count($results);
         
 //        if (count($articles) < $max_articles) {
@@ -7409,7 +7408,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     }
   }
 
-  dpm($articles_by_index);
+  //dpm($articles_by_index);
   return $articles_by_index;
 }
 
