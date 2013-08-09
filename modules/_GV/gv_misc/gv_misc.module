@@ -7213,7 +7213,16 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         $tags_sets[$a_tag][] = $a_tag_2;
       }
     }
-    dpm($tags_sets);
+    if (!empty($tags_sets)) {
+      dpm($tags_sets);
+      foreach ($tags_sets as $root => $leaves) {
+        foreach ($leaves as $leave) {
+          $tags_sets['couples'][] = array($root, $leave);
+        }
+      }
+      
+      dpm($tags_sets['couples']);
+    }
     
     return array();
   }
