@@ -7333,6 +7333,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
       foreach ($index_tags as $key => $index_tag) {
         
+        if (!$max_articles) {
+          break;
+        }
         /*
         
         $query = db_select('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti')
@@ -7378,12 +7381,14 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         $articles_by_index[$i] = $results;
 
         $articles += $results;
-        if (count($articles) < $max_articles) {
-          $max_articles -= count($results);
-        }
-        else {
-          $max_articles = 0;
-        }
+        $max_articles -= count($results);
+        
+//        if (count($articles) < $max_articles) {
+//          $max_articles -= count($results);
+//        }
+//        else {
+//          $max_articles = 0;
+//        }
 
       }
     }
