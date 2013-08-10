@@ -7293,7 +7293,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
       // Sort by created time (by keys).
       foreach($all_nids_sets as $key => $value) {
-        $all_nids_sets[$key] = krsort($all_nids_sets[$key]);
+        krsort($all_nids_sets[$key]);
       }
     
       dpm($all_nids_sets);
@@ -7445,7 +7445,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
   dpm($articles_by_index);
   foreach($all_nids_sets as $key => $value) {
-    $all_nids_sets[$key] = krsort($all_nids_sets[$key]);
+    krsort($all_nids_sets[$key]);
   }
   dpm($articles_by_index);
   
