@@ -7228,7 +7228,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
       else {
         foreach($results as $key => $value) {
-          $all_nids_sets['singles'][$key] = $value;
+          $all_nids_sets['singles'][$value['created']] = $value;
         }
       }
     }
@@ -7284,7 +7284,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         if (!empty($results)) {
           dpm($results);
           foreach($results as $key => $value) {
-            $all_nids_sets['couples'][$key] = $value;
+            $all_nids_sets['couples'][$value['created']] = $value;
           }
         }
       }
@@ -7394,16 +7394,29 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
       if ($results) {
 
+//        foreach ($results as $key => $result) {
+//          if (isset($articles[$key])) {
+//            unset($results[$key]);
+//          }
+//          elseif ($max_articles) {
+//            $articles_by_index[$i][$key] = $result;
+//            $articles[$key] = $result;
+//            --$max_articles;
+//          }
+//        }
+        
         foreach ($results as $key => $result) {
-          if (isset($articles[$key])) {
+          if (in_array($result, $articles)) {
             unset($results[$key]);
           }
           elseif ($max_articles) {
-            $articles_by_index[$i][$key] = $result;
-            $articles[$key] = $result;
+            $articles_by_index[$i][$result['created']] = $result;
+            $articles[$result['created']] = $result;
             --$max_articles;
           }
         }
+        
+        
         //dpm($results);
         //dpm($articles_by_index);
         //$articles_by_index[$i] += $results;

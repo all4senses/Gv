@@ -1801,13 +1801,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => TRUE,
             );
 
-            foreach ($articles as $nid => $article) {
-              $a = node_load($nid);
+            foreach ($articles as $key => $article) {
+              $a = node_load($article['nid']);
               $a->related_articles_teaser = TRUE;
-              $form['related_articles']['index_' . $index][$nid] = array(
+              $form['related_articles']['index_' . $index][$article['nid']] = array(
                 '#type' => 'checkbox',
                 '#title' => render(node_view($a, 'teaser')),
-                '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$nid]) ? 1 : 0,
+                '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$article['nid']]) ? 1 : 0,
               );
 
             }
@@ -5403,7 +5403,7 @@ function gv_pages_node_view($node, $view_mode) {
                 
                 //if (gv_misc_articleHasMainImageField($related_nid)) 
                 {
-                  $extra_data['related_articles']['index_'. $index][$related_nid] = 1;
+                  $extra_data['related_articles']['index_'. $index][$related_article['nid']] = 1;
                   if ($related_count++ >= $max_articles_on_front - 1) {
                     break 2;
                   }
