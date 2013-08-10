@@ -7173,6 +7173,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
   // Get the article's tags
   /*
+  // via taxonomy_index, not effective, bec don't contain some tags for some reason...
   $query = db_select('taxonomy_index', 'ti')
       ->fields('ti', array('tid'));
   $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
@@ -7185,14 +7186,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   //$arr = array_keys($a_tags);
   */
   
-  
-  
   $query = db_select('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti')
       ->fields('ti', array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
   //$query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
   //$query->fields('td');
   $query->condition('ti.entity_id', $article_nid);
-  //$query->condition('td.vid', 2, '!=');
   //$a_tags = $query->execute()->fetchAllAssoc('tid');
   $arr = $query->execute()->fetchCol();
   
@@ -7204,6 +7202,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   
   dpm($arr);
 
+  // If count($arr) > 6, the system will hang up... So we go another way in this case...
   if (count($arr) > 6) {
     
     // Find singles
@@ -7222,18 +7221,18 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $results = $query->execute()->fetchAllAssoc('nid');
       //dpm($results);
       if (empty($results)) {
-        //dpm('tag ' . $tag . ' has no related');
+        dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
         
       }
     }
     
     // Normalize array for the case if it was cut
-    $arr = array_values($arr);
+    $arr = $tags_sets['singles'] = array_values($arr);
     
-    //dpm($arr);
+    dpm($arr);
     
-    // If still > 6, try to folter by couples coinsedences.
+    // If still > 6, try to filter by couples' coinsedences.
     if (count($arr) > 6) {
       
       return array();
