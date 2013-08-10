@@ -4002,7 +4002,6 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
     'related_articles_timestamp' => time(),
   );
   
-  dpm($extra_data);
   // Define and refine main image value for checked related articles.
   foreach ($extra_data['related_articles'] as $index => $group) {
     
@@ -4028,7 +4027,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 
     }
   }
-  dpm($extra_data);                
+  //dpm($extra_data);                
                   
                   
                   
