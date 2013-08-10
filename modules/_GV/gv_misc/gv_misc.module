@@ -7248,70 +7248,30 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     if (count($arr) > 6) {
       
       
-    $i = 0; $j = 0; $k = 0;
-    $len = count($arr);
-    
-    
-    for ($i = 0; $i < $len - 2; $i++)
-    {
-        for ($j = $i + 1; $j < $len - 1; $j++)
-        {
-            for ($k = $j + 1; $k < $len; $k++)
-                $all_nids_sets['trinities'][] = array($arr[$i], $arr[$j], $arr[$k]);
-                //dpm($arr[$i] . ', ' . $arr[$j] . ', ' . $arr[$k]);
+      $len = count($arr);
+      // Find trinities.
+      $i = 0; $j = 0; $k = 0;
+      for ($i = 0; $i < $len - 2; $i++) {
+        for ($j = $i + 1; $j < $len - 1; $j++) {
+          for ($k = $j + 1; $k < $len; $k++) {
+            $all_tags_sets['trinities'][] = array($arr[$i], $arr[$j], $arr[$k]);
+          }
         }
-    }
-    
-    
-    
-    
-    $i = 0; $j = 0; $k = 0;
-    
-    //for ($i = 0; $i < $len - 2; $i++)
-    {
-        for ($j = 0; $j < $len - 1; $j++)
-        {
-            for ($k = $j + 1; $k < $len; $k++)
-                $all_nids_sets['couples'][] = array($arr[$j], $arr[$k]);
-                //dpm($arr[$j] . ', ' . $arr[$k]);
-        }
-    }
+      }
 
-    dpm($all_nids_sets);
-    
-    foreach ($all_nids_sets['couples'] as $key => $couple) {
-      foreach ($all_nids_sets['couples'] as $key_test => $couple_test) {
-        
-        if ($key_test == $key) {
-          continue;
+      // Find couples
+      $i = 0; $j = 0; $k = 0;
+      for ($j = 0; $j < $len - 1; $j++) {
+        for ($k = $j + 1; $k < $len; $k++) {
+          $all_tags_sets['couples'][] = array($arr[$j], $arr[$k]);
         }
-        if (in_array($couple[0], $couple_test) && in_array($couple[1], $couple_test)) {
-          unset($all_nids_sets['couples'][$key_test]);
-          dpm('found!');
-        }
-        
       }
-    }
-    
-    foreach ($all_nids_sets['trinities'] as $key => $trinity) {
-      foreach ($all_nids_sets['trinities'] as $key_test => $trinity_test) {
-        
-        if ($key_test == $key) {
-          continue;
-        }
-        if (in_array($trinity[0], $trinity_test) && in_array($trinity[1], $trinity_test) && in_array($trinity[2], $trinity_test) ) {
-          unset($all_nids_sets['trinities'][$key_test]);
-          dpm('found tri!');
-        }
-        
-      }
-    }
-    
-    dpm($all_nids_sets);
-    
-    return array();
-      
-      
+
+
+      dpm($all_tags_sets);
+
+
+      /*
       // Find couples
       $tags_set = array();
       foreach ($arr as $a_tag) {
@@ -7329,7 +7289,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           $all_tags_sets['couples'][] = array($root, $leave);
         }
       }
-
+      */
 
       dpm($all_tags_sets);
       
@@ -7341,15 +7301,10 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
               ->fields('n', array('nid', 'created'));
 
         foreach ($tags_couple as $key2 => $tag) {
-          //$query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
-          //$query->fields('ti_' . $key, array('tid'));
-          
           $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti_' . $key2, 'ti_' . $key2 . '.entity_id = n.nid AND ti_' . $key2 . '.field_tags_' . $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
           $query->fields('ti_' . $key2, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
         }
         $query->condition('n.nid', $article_nid, '!=');
-        //$query->orderBy('n.created', 'DESC');
-        //$query->range(0, $max_articles);
         $results = $query->execute()->fetchAllAssoc('nid');
         
         if (!empty($results)) {
