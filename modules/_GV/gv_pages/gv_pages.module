@@ -4002,7 +4002,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
     'related_articles_timestamp' => time(),
   );
   
-  //dpm($extra_data);
+  dpm($extra_data);
   
   if (!empty($form_state['values']['guest_author'])) {
     $extra_data['guest_author'] = $form_state['values']['guest_author'];
@@ -5403,10 +5403,33 @@ function gv_pages_node_view($node, $view_mode) {
                 
                 //if (gv_misc_articleHasMainImageField($related_nid)) 
                 {
-                  $extra_data['related_articles']['index_'. $index][$related_article->nid] = 1;
-                  if ($related_count++ >= $max_articles_on_front - 1) {
-                    break 2;
+                  
+                  
+                  $query = db_select('node', 'n')
+                    ->fields('n', array('title'));
+                  $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+                  $query->fields('mi', array('field_main_image_value'));
+                  $query->condition('n.nid', $related_article->nid);
+
+                  if ($result = $query->execute()->fetchObject()) {
+                
+                    $result->field_main_image_value = unserialize($result->field_main_image_value);
+                    if(!empty($result->field_main_image_value)) {
+                      $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+                    }
+                    $extra_data['related_articles']['index_'. $index][$related_article->nid] = $result;
+                    
+                    if ($related_count++ >= $max_articles_on_front - 1) {
+                      break 2;
+                    }
+                    
                   }
+                  
+//                  $extra_data['related_articles']['index_'. $index][$related_article->nid] = 1;
+//                  if ($related_count++ >= $max_articles_on_front - 1) {
+//                    break 2;
+//                  }
+                  
                 }
               }
             }
@@ -5428,45 +5451,57 @@ function gv_pages_node_view($node, $view_mode) {
         foreach ($extra_data['related_articles'] as $group) {
           foreach ($group as $nid => $checked) {
 
+            
             if ($checked) {
+              
+              if (is_int($checked)) {
 
-              $query = db_select('node', 'n')
-                ->fields('n', array('title'));
+                $query = db_select('node', 'n')
+                  ->fields('n', array('title'));
 
-              $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
-              $query->fields('mi', array('field_main_image_value'));
+                $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+                $query->fields('mi', array('field_main_image_value'));
 
-              $query->condition('n.nid', $nid);
+                $query->condition('n.nid', $nid);
 
-              /*
-              // Skip articles without thumbnails.
-              if ($result = $query->execute()->fetchObject()) {
-                
-                $result->field_main_image_value = unserialize($result->field_main_image_value);
-                if(!empty($result->field_main_image_value)) {
-                  $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+                /*
+                // Skip articles without thumbnails.
+                if ($result = $query->execute()->fetchObject()) {
+
+                  $result->field_main_image_value = unserialize($result->field_main_image_value);
+                  if(!empty($result->field_main_image_value)) {
+                    $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+                    $node->related_articles[$nid] = $result;
+                    if (--$max_articles < 1) {
+                      break 2;
+                    }
+                  }
+                }
+
+                  */
+
+                if ($result = $query->execute()->fetchObject()) {
+
+                  $result->field_main_image_value = unserialize($result->field_main_image_value);
+                  if(!empty($result->field_main_image_value)) {
+                    $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+                  }
                   $node->related_articles[$nid] = $result;
-                  if (--$max_articles < 1) {
+
+                  if (--$max_articles_on_front < 1) {
                     break 2;
                   }
                 }
-              }
-              
-                */
-              
-              if ($result = $query->execute()->fetchObject()) {
+              } // End of if_int
+              else {
                 
-                $result->field_main_image_value = unserialize($result->field_main_image_value);
-                if(!empty($result->field_main_image_value)) {
-                  $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+                $node->related_articles[$nid] = $checked;
+                if (--$max_articles_on_front < 1) {
+                  break 2;
                 }
-                $node->related_articles[$nid] = $result;
                 
               }
               
-              if (--$max_articles_on_front < 1) {
-                break 2;
-              }
               
             }
           }
