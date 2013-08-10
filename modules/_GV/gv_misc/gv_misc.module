@@ -7257,7 +7257,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
       dpm($all_tags_sets);
       
-      foreach ($all_index_tags['couples'] as $key => $tags_couple) {  
+      foreach ($all_tags_sets['couples'] as $key => $tags_couple) {  
         dpm($tags_couple);
         $query = db_select('node', 'n')
               ->fields('n', array('nid', 'created'));
