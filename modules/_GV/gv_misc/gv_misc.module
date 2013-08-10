@@ -7493,11 +7493,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     }
   }
 
-  dpm($articles_by_index);
+  
   foreach($all_nids_sets as $key => $value) {
     krsort($all_nids_sets[$key]);
   }
-  dpm($articles_by_index);
+  //dpm($articles_by_index);
   
   return $articles_by_index;
 }
