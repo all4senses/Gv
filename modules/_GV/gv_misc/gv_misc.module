@@ -7293,26 +7293,35 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
       dpm($all_tags_sets);
       
-      foreach ($all_tags_sets['couples'] as $key => $tags_couple) {  
-        
-        dpm('$tags_couple ' . $tags_couple[0] . ', ' . $tags_couple[1]);
-        
-        $query = db_select('node', 'n')
-              ->fields('n', array('nid', 'created'));
-
-        foreach ($tags_couple as $key2 => $tag) {
-          $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti_' . $key2, 'ti_' . $key2 . '.entity_id = n.nid AND ti_' . $key2 . '.field_tags_' . $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
-          $query->fields('ti_' . $key2, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+      foreach ($all_tags_sets as $index => $set ) {
+      
+        // We have found articles for singles already.
+        if ($index == 'singles') {
+          continue;
         }
-        $query->condition('n.nid', $article_nid, '!=');
-        $results = $query->execute()->fetchAllAssoc('nid');
         
-        if (!empty($results)) {
-          dpm($results);
-          foreach($results as $key => $value) {
-            $all_nids_sets['couples'][$value->created] = $value;
+        foreach ($set as $key => $tags_set) {  
+
+          dpm('$tags_set ' . $tags_set[0] . ', ' . $tags_set[1] . ', ' . @$tags_set[2]);
+
+          $query = db_select('node', 'n')
+                ->fields('n', array('nid', 'created'));
+
+          foreach ($tags_set as $key2 => $tag) {
+            $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti_' . $key2, 'ti_' . $key2 . '.entity_id = n.nid AND ti_' . $key2 . '.field_tags_' . $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
+            $query->fields('ti_' . $key2, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+          }
+          $query->condition('n.nid', $article_nid, '!=');
+          $results = $query->execute()->fetchAllAssoc('nid');
+
+          if (!empty($results)) {
+            dpm($results);
+            foreach($results as $key => $value) {
+              $all_nids_sets['couples'][$value->created] = $value;
+            }
           }
         }
+
       }
       
       dpm($all_nids_sets);
