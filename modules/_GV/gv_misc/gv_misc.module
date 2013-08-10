@@ -7277,7 +7277,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           $query->fields('ti_' . $key2, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
         }
         $query->condition('n.nid', $article_nid, '!=');
-        $query->orderBy('n.created', 'DESC');
+        //$query->orderBy('n.created', 'DESC');
         //$query->range(0, $max_articles);
         $results = $query->execute()->fetchAllAssoc('nid');
         
@@ -7290,6 +7290,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
       
       dpm($all_nids_sets);
+      
+      // Sort by created time (by keys).
+      foreach($all_nids_sets as $key => $value) {
+        $all_nids_sets[$key] = krsort($all_nids_sets[$key]);
+      }
     
       return array();
     }
@@ -7379,7 +7384,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       if (!empty($articles)) {
         $query->condition('n.nid', array_keys($articles), 'NOT IN');
       }
-      $query->orderBy('n.created', 'DESC');
+      //$query->orderBy('n.created', 'DESC');
       //$query->range(0, $max_articles);
       $results = $query->execute()->fetchAllAssoc('nid');
       
@@ -7436,7 +7441,12 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     }
   }
 
-  //dpm($articles_by_index);
+  dpm($articles_by_index);
+  foreach($all_nids_sets as $key => $value) {
+    $all_nids_sets[$key] = krsort($all_nids_sets[$key]);
+  }
+  dpm($articles_by_index);
+  
   return $articles_by_index;
 }
 
