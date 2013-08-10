@@ -7226,6 +7226,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
       }
+      else {
+        $all_nids_sets['singles'] += $results;
+      }
     }
     
     // Normalize array for the case if it was cut
@@ -7258,7 +7261,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       dpm($all_tags_sets);
       
       foreach ($all_tags_sets['couples'] as $key => $tags_couple) {  
-        dpm($tags_couple);
+        
+        dpm('$tags_couple ' . $tags_couple[0] . ', ' . $tags_couple[1]);
+        
         $query = db_select('node', 'n')
               ->fields('n', array('nid', 'created'));
 
@@ -7276,10 +7281,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         
         if (!empty($results)) {
           dpm($results);
+          $all_nids_sets['couples'] += $results;
         }
       }
       
-      
+      dpm($all_nids_sets);
     
       return array();
     }
