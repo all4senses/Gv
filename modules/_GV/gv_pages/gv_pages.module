@@ -4003,6 +4003,36 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   );
   
   dpm($extra_data);
+  // Define and refine main image value for checked related articles.
+  foreach ($extra_data['related_articles'] as $index => $group) {
+    
+    foreach ($group as $nid => $checked) {
+      
+      if (!$checked) {
+        continue;
+      }
+      
+      $query = db_select('node', 'n')
+        ->fields('n', array('title'));
+      $query->join('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+      $query->fields('mi', array('field_main_image_value'));
+      $query->condition('n.nid', $nid);
+
+      if ($result = $query->execute()->fetchObject()) {
+        $result->field_main_image_value = unserialize($result->field_main_image_value);
+        if(!empty($result->field_main_image_value)) {
+          $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+        }
+        $extra_data['related_articles'][$index][$nid] = $result;
+      }
+
+    }
+  }
+  dpm($extra_data);                
+                  
+                  
+                  
+                  
   
   if (!empty($form_state['values']['guest_author'])) {
     $extra_data['guest_author'] = $form_state['values']['guest_author'];
