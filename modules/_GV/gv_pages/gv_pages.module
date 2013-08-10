@@ -1807,7 +1807,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               $form['related_articles']['index_' . $index][$nid] = array(
                 '#type' => 'checkbox',
                 '#title' => render(node_view($a, 'teaser')),
-                '#default_value' => isset($extra_data['related_articles']['index_' . $index][$nid]) ? $extra_data['related_articles']['index_' . $index][$nid] : FALSE,
+                '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$nid]) ? 1 : 0,
               );
 
             }
@@ -5389,7 +5389,7 @@ function gv_pages_node_view($node, $view_mode) {
         $time_elapsed = time() - @$extra_data['related_articles_timestamp'];
         dpm('$time_elapsed = ' . $time_elapsed);
         
-        if (!isset($extra_data['related_articles']) || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > 600 ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
+        if (!isset($extra_data['related_articles']) || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > 120 ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
         {
           dpm('Recaclulate related...');
           
