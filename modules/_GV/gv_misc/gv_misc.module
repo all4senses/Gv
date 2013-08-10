@@ -7279,6 +7279,36 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
     dpm($all_nids_sets);
     
+    foreach ($all_nids_sets['couples'] as $key => $couple) {
+      foreach ($all_nids_sets['couples'] as $key_test => $couple_test) {
+        
+        if ($key_test == $key) {
+          continue;
+        }
+        if (in_array($couple[0], $couple_test) && in_array($couple[1], $couple_test)) {
+          unset($all_nids_sets['couples'][$key_test]);
+          dpm('found!');
+        }
+        
+      }
+    }
+    
+    foreach ($all_nids_sets['trinities'] as $key => $trinity) {
+      foreach ($all_nids_sets['trinities'] as $key_test => $trinity_test) {
+        
+        if ($key_test == $key) {
+          continue;
+        }
+        if (in_array($trinity[0], $trinity_test) && in_array($trinity[1], $trinity_test) && in_array($trinity[2], $trinity_test) ) {
+          unset($all_nids_sets['trinities'][$key_test]);
+          dpm('found tri!');
+        }
+        
+      }
+    }
+    
+    dpm($all_nids_sets);
+    
     return array();
       
       
