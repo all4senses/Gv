@@ -7228,13 +7228,13 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
       else {
         foreach($results as $key => $value) {
-          $all_nids_sets['singles'][$value->created] = $value;
+          $all_nids_sets[1][$value->created] = $value;
         }
       }
     }
     
     // Normalize array for the case if it was cut
-    $arr = $all_tags_sets['singles'] = array_values($arr);
+    $arr = $all_tags_sets[1] = array_values($arr);
     
     dpm($arr);
     
@@ -7247,7 +7247,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     // If still > 6, try to filter by couples' coinsedences.
     if (count($arr) > 6) {
       
-      $articles = $all_nids_sets['singles']; 
+      $articles = $all_nids_sets[1]; 
       
       $len = count($arr);
       // Find trinities.
@@ -7255,7 +7255,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       for ($i = 0; $i < $len - 2; $i++) {
         for ($j = $i + 1; $j < $len - 1; $j++) {
           for ($k = $j + 1; $k < $len; $k++) {
-            $all_tags_sets['trinities'][] = array($arr[$i], $arr[$j], $arr[$k]);
+            $all_tags_sets[3][] = array($arr[$i], $arr[$j], $arr[$k]);
           }
         }
       }
@@ -7264,7 +7264,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $i = 0; $j = 0; $k = 0;
       for ($j = 0; $j < $len - 1; $j++) {
         for ($k = $j + 1; $k < $len; $k++) {
-          $all_tags_sets['couples'][] = array($arr[$j], $arr[$k]);
+          $all_tags_sets[2][] = array($arr[$j], $arr[$k]);
         }
       }
 
@@ -7297,13 +7297,13 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       foreach ($all_tags_sets as $index => $set ) {
       
         // We have found articles for singles already.
-        if ($index == 'singles') {
+        if ($index == 1) {
           continue;
         }
         
         foreach ($set as $key => $tags_set) {  
 
-          dpm('$tags_set ' . $tags_set[0] . ', ' . $tags_set[1] . ', ' . @$tags_set[2]);
+          //dpm('$tags_set ' . $tags_set[0] . ', ' . $tags_set[1] . ', ' . @$tags_set[2]);
 
           $query = db_select('node', 'n')
                 ->fields('n', array('nid', 'created'));
@@ -7316,7 +7316,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           $results = $query->execute()->fetchAllAssoc('nid');
 
           if (!empty($results)) {
-            dpm($results);
+            //dpm($results);
             foreach($results as $key => $result) {
               if (!in_array($result, $articles)) {
                 $all_nids_sets[$index][$result->created] = $result;
@@ -7328,7 +7328,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
       }
       
-      dpm($all_nids_sets);
+      //dpm($all_nids_sets);
       
       // Sort by created time (by keys).
       foreach($all_nids_sets as $key => $value) {
@@ -7336,6 +7336,20 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
     
       dpm($all_nids_sets);
+      
+      // Leave nly 10 elements.
+      $max_index = count($all_nids_sets);
+      for ($i = $max_index; $i <= 1; $i--) {
+        foreach ($all_nids_sets[$i] as $key => $value) {
+          if ($max_articles <= 0) {
+            break 2;
+          }
+          --$max_articles;
+          $articles_by_index[$i][$key] = $value;
+        }
+      }
+      
+      dpm($articles_by_index);
       
       return array();
     }
