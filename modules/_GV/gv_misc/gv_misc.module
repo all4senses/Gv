@@ -7257,19 +7257,30 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
       dpm($all_tags_sets);
       
-      
-//    $query = db_select('node', 'n')
-//          ->fields('n', array('nid', 'created'));
-//
-//    foreach ($index_tags as $key => $index_tag) {
-//      $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
-//      $query->fields('ti_' . $key, array('tid'));
-//    }
-//    $query->condition('n.nid', $article_nid, '!=');
-//    $query->orderBy('n.created', 'DESC');
-//    $query->range(0, $max_articles);
-//    $results = $query->execute()->fetchAllAssoc('nid');
+      foreach ($all_index_tags['couples'] as $key => $tags_couple) {  
+        dpm($tags_couple);
+        $query = db_select('node', 'n')
+              ->fields('n', array('nid', 'created'));
 
+        foreach ($tags_couple as $key2 => $tag) {
+          //$query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
+          //$query->fields('ti_' . $key, array('tid'));
+          
+          $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti_' . $key2, 'ti_' . $key2 . '.entity_id = n.nid AND ti_' . $key2 . '.field_tags_' . $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
+          $query->fields('ti_' . $key2, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+        }
+        $query->condition('n.nid', $article_nid, '!=');
+        $query->orderBy('n.created', 'DESC');
+        //$query->range(0, $max_articles);
+        $results = $query->execute()->fetchAllAssoc('nid');
+        
+        if (!empty($results)) {
+          dpm($results);
+        }
+      }
+      
+      
+    
       return array();
     }
   
