@@ -7223,7 +7223,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
       //dpm($results);
       if (empty($results)) {
-        dpm('tag ' . $tag . ' has no related');
+        //dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
       }
       else {
@@ -7316,7 +7316,6 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           $results = $query->execute()->fetchAllAssoc('nid');
 
           if (!empty($results)) {
-            //dpm($results);
             foreach($results as $key => $result) {
               if (!in_array($result, $articles)) {
                 $all_nids_sets[$index][$result->created] = $result;
@@ -7328,25 +7327,18 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
       }
       
-      //dpm($all_nids_sets);
-      
       // Sort by created time (by keys).
       foreach($all_nids_sets as $key => $value) {
         krsort($all_nids_sets[$key]);
       }
     
-      dpm($all_nids_sets);
+      //dpm($all_nids_sets);
       
       // Leave nly 10 elements.
       $max_index = count($all_nids_sets);
-      dpm('$max_index = ' . $max_index);
       for ($i = $max_index; $i >= 1; $i--) {
         
-        dpm('$i = ' . $i);
         foreach ($all_nids_sets[$i] as $key => $value) {
-          dpm('$key = ' . $key);
-          //dpm('$value = ' . $value);
-          dpm('$max_articles = ' . $max_articles);
           if ($max_articles <= 0) {
             break 2;
           }
@@ -7357,7 +7349,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
       dpm($articles_by_index);
       
-      return array();
+      return $articles_by_index;
     }
   
   }
