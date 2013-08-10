@@ -7228,7 +7228,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
       else {
         foreach($results as $key => $value) {
-          $all_nids_sets['singles'][$value['created']] = $value;
+          $all_nids_sets['singles'][$value->created] = $value;
         }
       }
     }
@@ -7284,7 +7284,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         if (!empty($results)) {
           dpm($results);
           foreach($results as $key => $value) {
-            $all_nids_sets['couples'][$value['created']] = $value;
+            $all_nids_sets['couples'][$value->created] = $value;
           }
         }
       }
