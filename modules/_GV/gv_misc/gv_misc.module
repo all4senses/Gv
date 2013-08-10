@@ -7211,10 +7211,12 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $query = db_select('node', 'n')
             ->fields('n', array('nid', 'created'));
 
-      $query->join('taxonomy_index', 'ti', 'ti.nid = n.nid AND ti.tid = ' . $tag);
-      $query->fields('ti', array('tid'));
+      //$query->join('taxonomy_index', 'ti', 'ti.nid = n.nid AND ti.tid = ' . $tag);
+      //$query->fields('ti', array('tid'));
       
-
+      $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti', 'ti.entity_id = n.nid AND ti.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
+      $query->fields('ti', array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+      
       $query->condition('n.nid', $article_nid, '!=');
       $query->orderBy('n.created', 'DESC');
       $results = $query->execute()->fetchAllAssoc('nid');
@@ -7245,7 +7247,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         }
       }
 
-      dpm($tags_sets);
+      //dpm($tags_sets);
       foreach ($tags_sets as $root => $leaves) {
         foreach ($leaves as $leave) {
           $tags_sets['couples'][] = array($root, $leave);
@@ -7253,7 +7255,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
 
 
-      dpm($tags_sets['couples']);
+      dpm($tags_sets);
       
       
 //    $query = db_select('node', 'n')
