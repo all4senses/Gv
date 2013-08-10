@@ -7244,26 +7244,31 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
     $i = 0; $j = 0; $k = 0;
     $len = count($arr);
-
-//    for ($i = 0; $i < $len - 2; $i++)
-//    {
-//        for ($j = $i + 1; $j < $len - 1; $j++)
-//        {
-//            for ($k = $j + 1; $k < $len; $k++)
-//                dpm($arr[$i] . ', ' . $arr[$j] . ', ' . $arr[$k]);
-//        }
-//    }
+    
+    
+    for ($i = 0; $i < $len - 2; $i++)
+    {
+        for ($j = $i + 1; $j < $len - 1; $j++)
+        {
+            for ($k = $j + 1; $k < $len; $k++)
+                $all_nids_sets['trinities'][] = array($arr[$i], $arr[$j], $arr[$k]);
+                //dpm($arr[$i] . ', ' . $arr[$j] . ', ' . $arr[$k]);
+        }
+    }
+    
     
     //for ($i = 0; $i < $len - 2; $i++)
     {
         for ($j = 0; $j < $len - 1; $j++)
         {
             for ($k = $j + 1; $k < $len; $k++)
-                dpm($arr[$j] . ', ' . $arr[$k]);
+                $all_nids_sets['couples'][] = array($arr[$j], $arr[$k]);
+                //dpm($arr[$j] . ', ' . $arr[$k]);
         }
     }
 
-     
+    dpm();
+    
     return array();
       
       
