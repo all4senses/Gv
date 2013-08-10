@@ -7238,6 +7238,12 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     
     dpm($arr);
     
+    
+    
+    
+    
+    
+    
     // If still > 6, try to filter by couples' coinsedences.
     if (count($arr) > 6) {
       
@@ -7257,6 +7263,10 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     }
     
     
+    
+    
+    $i = 0; $j = 0; $k = 0;
+    
     //for ($i = 0; $i < $len - 2; $i++)
     {
         for ($j = 0; $j < $len - 1; $j++)
@@ -7267,7 +7277,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         }
     }
 
-    dpm();
+    dpm($all_nids_sets);
     
     return array();
       
