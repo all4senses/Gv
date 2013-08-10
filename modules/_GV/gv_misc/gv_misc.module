@@ -7339,8 +7339,14 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
       // Leave nly 10 elements.
       $max_index = count($all_nids_sets);
+      dpm('$max_index = ' . $max_index);
       for ($i = $max_index; $i <= 1; $i--) {
+        
+        dpm('$i = ' . $i);
         foreach ($all_nids_sets[$i] as $key => $value) {
+          dpm('$key = ' . $key);
+          dpm('$value = ' . $value);
+          dpm('$max_articles = ' . $max_articles);
           if ($max_articles <= 0) {
             break 2;
           }
