@@ -1677,9 +1677,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         // Uncomment to recalculate related articles
         //$articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($form['nid']['#value'], $form['type']['#value']);
         
-        // Comment next block to recalculate related articles
-        //dpm($articles_by_index);
-        dpm($extra_data['related_articles']);
+        // Comment the next block to recalculate related articles
         foreach ($extra_data['related_articles'] as $key => $value) {
           $index = str_replace('index_', '', $key);
           foreach ($value as $key2 => $value2) {
@@ -1687,7 +1685,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             $articles_by_index[$index][$key2] = $value2;
           }
         }
-        dpm($articles_by_index);
         
         if (!empty($articles_by_index)) {
 
@@ -1716,6 +1713,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 '#type' => 'checkbox',
                 '#title' => render(node_view($a, 'teaser')),
                 '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$article->nid]) ? 1 : 0,
+                '#disabled' => TRUE,
               );
 
             }
