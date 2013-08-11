@@ -366,7 +366,7 @@
                       }
 
                       if ($tags) {
-                        echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
+                        echo '<div class="topics"><div class="title">TAGS:</div>' . $tags . '<div class="bottom-clear"></div></div>';
                       }
                       
                       
@@ -375,6 +375,7 @@
                       // Related articles.
                       if (!empty($node->related_articles)) {
                         echo '<div class="related_articles"><h3>Recommended For You</h3>';
+                          dpm($node->related_articles);
                           foreach ($node->related_articles as $nid => $article) {
                             if (!empty($article->field_main_image_value['src_themed_related'])) {
                               echo '<div><a href="' . url('node/' . $nid) . '"><img src="' . $article->field_main_image_value['src_themed_related'] . '" /></a>', l($article->title, 'node/' . $nid) . '</div>';
@@ -432,7 +433,7 @@
       }
 
       if ($tags) {
-        echo '<div class="topics related"><div class="title">' . t('TAGS:') . '</div>' . $tags . '<div class="bottom-clear"></div></div>';
+        echo '<div class="topics related"><div class="title">TAGS:</div>' . $tags . '<div class="bottom-clear"></div></div>';
       }
     }
   ?>
