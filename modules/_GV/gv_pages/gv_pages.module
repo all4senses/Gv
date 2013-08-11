@@ -1778,7 +1778,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         */
 
         $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($form['nid']['#value'], $form['type']['#value']);
-        //dpm($articles_by_index);
+        
+        dpm($articles_by_index);
+        dpm($extra_data['related_articles']);
+        
         if (!empty($articles_by_index)) {
           //dpm($articles_by_index);
           //dpm($articles);
