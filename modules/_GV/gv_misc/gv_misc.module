@@ -549,7 +549,9 @@ function gv_misc_rShareReviews_rest() {
   global $user;
   watchdog('Request for reviews', check_plain($_GET['q']) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
   
-  if (!in_array($_SERVER['HTTP_X_FORWARDED_FOR'], $allowed_remote_servers)) {
+  
+  //if (!in_array($_SERVER['HTTP_X_FORWARDED_FOR'], $allowed_remote_servers)) {
+  if (!in_array($_SERVER['REMOTE_ADDR'], $allowed_remote_servers)) {
     exit('Access denied for your IP!');
   }
   
