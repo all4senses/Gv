@@ -888,6 +888,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       foreach ($provider_options_structure as $options_set => $options_data) {
         
+        if (in_array($options_set, $options_sets_to_exclude)) {
+          continue;
+        }
+        
         $out .= '<tr class="reviews"><td class="title">User Reviews</td>';
           foreach ($providers as $nid => $provider) {
             $out .= '<td style="text-align: center;">' . l('Read Review', 'node/' . $nid) . '</td>';
