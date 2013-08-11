@@ -5328,12 +5328,12 @@ function gv_pages_node_view($node, $view_mode) {
         // If the article hasn't been yet resaved with set related artivles
         // we then set it here by default the first 4 most relative articles from all found related articles.
         
-        $time_elapsed = time() - @$extra_data['related_articles_timestamp'];
-        dpm('$time_elapsed = ' . $time_elapsed);
+        //$time_elapsed = time() - @$extra_data['related_articles_timestamp'];
+        //dpm('$time_elapsed = ' . $time_elapsed);
         
         if (!isset($extra_data['related_articles']) || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > (3600*24*3) ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
         {
-          dpm('Recaclulate related...');
+          //dpm('Recaclulate related...');
           
           $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($node->nid, $node->type);
           if (!empty($articles_by_index)) {
@@ -5377,7 +5377,7 @@ function gv_pages_node_view($node, $view_mode) {
             }
             $extra_data['related_articles_timestamp'] = time();
             
-            dpm($extra_data);
+            //dpm($extra_data);
             // Save found related articles to the article's extra_data field to set it as default related articles.
             // After that there will not be need to recalculate it avery time the article being viewed.
             
@@ -5452,6 +5452,13 @@ function gv_pages_node_view($node, $view_mode) {
       } // End of $user->uid.
       
       break; // End of quote.
+      
+      
+      
+      
+      
+      
+      
       
       
     case 'quote':
