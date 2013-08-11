@@ -22,8 +22,12 @@
           <img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />
         </a>
         <div class="descr">
-          <div class="title">VoIP Decisions</div>
-          <div class="subtitle">Made Easy!</div><!--<div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>-->
+          
+          <!--<div class="title">VoIP Decisions</div>
+          <div class="subtitle">Made Easy!</div> -->
+          
+          <!--<div class="stars"><img src="/sites/all/themes/gv_orange/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>-->
+          
         </div>
       </div>
       
