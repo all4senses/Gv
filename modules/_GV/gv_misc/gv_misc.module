@@ -723,6 +723,10 @@ function gv_misc_rShareReviews_rest() {
         $query->addField('d', 'field_r_data_value', 'r_data');  
       $query->leftJoin('field_data_field_r_rating_overall', 'ro', 'ro.entity_id = n.nid');
         $query->addField('ro', 'field_r_rating_overall_value', 'rating_overall');  
+       
+      $query->leftJoin('field_data_field_r_notapproved', 'na', 'na.entity_id = n.nid');
+        $query->addField('na', 'field_r_notapproved_value', 'r_notapproved');  
+       
             
       $query->condition('n.nid', $post['nid']);
 
