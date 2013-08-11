@@ -877,6 +877,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             );
           }
           
+          $additional_options_td_style = array(
+            'Monthly Cost of Cheapest Service' => ' color: red; font-weight: bold;',
+          );
+          
           break;
         
         case 'residential':
@@ -949,8 +953,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
               if (is_array($option_value)) {
                 $option_value = $option_value['value'];
               }
-                        
-              $out .= '<td style="text-align: center;" class="option value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
+              
+              $out .= '<td style="text-align: center;' . (!empty($additional_options_td_style[$option_title]) ? $additional_options_td_style[$option_title] : '') . '" class="option value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
 
           }
           
