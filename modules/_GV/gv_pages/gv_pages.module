@@ -1691,7 +1691,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Save the current $extra_data
           $form['extra_data_previous'] = array(
             '#type' => 'hidden',
-            '#default_vaule' => $form['field_extra_data']['und'][0]['value']['#default_value'],
+            '#default_vaule' => serialize($extra_data),
           );
 
           $form['related_articles'] = array(
