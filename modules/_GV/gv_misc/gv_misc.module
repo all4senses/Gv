@@ -546,7 +546,8 @@ function gv_misc_rShareReviews_rest() {
   
   $allowed_remote_servers = array('50.62.82.224' /* voiprater.com */);
   
-  watchdog('Request for reviews', check_plain($_GET['q']) . print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+  global $user;
+  watchdog('Request for reviews', check_plain($_GET['q']) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
   
   if (!in_array($_SERVER['HTTP_X_FORWARDED_FOR'], $allowed_remote_servers)) {
     exit('Access denied for your IP!');
