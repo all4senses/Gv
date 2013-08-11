@@ -1674,117 +1674,22 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
 
         
+        // Uncomment to recalculate related articles
+        //$articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($form['nid']['#value'], $form['type']['#value']);
         
-        /*
-        // Get the article's tags
-        $query = db_select('taxonomy_index', 'ti')
-            ->fields('ti', array('tid'));
-        $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = ti.tid');
-        //$query->fields('td');
-        $query->condition('ti.nid', $form['nid']['#value']);
-        $query->condition('td.vid', 2, '!=');
-        $a_tags = $query->execute()->fetchAllAssoc('tid');
-        //$arr = $query->execute()->fetchCol();
-        $arr = array_keys($a_tags);
-        //dpm($arr);
-
-        if ($arr) {
-
-          $current_article_index = count($arr);
-
-          $result = array();
-
-          for ($i = 0; $i<count($arr); $i++) {
-            gv_misc_findAllArrayElementsCombinations($arr, $i+1, $result);
-          }
-
-          $min_index = $current_article_index > 1 ? 2 : 1;
-          $max_index = 0;
-
-          foreach ($result as $key => $array) {
-            if ($current_article_index > 1 && count($array) == 1) {
-              unset($result[$key]);
-              continue;
-            }
-            $temp_array = array();
-            foreach ($array as $key2 => $item) {
-              if (in_array($item, $temp_array)) {
-                unset($result[$key]);
-                break;
-              }
-              $temp_array[] = $item;
-            }
-
-            if (isset($result[$key])) {
-              $index = count($result[$key]);
-              $tags[$index][] = $result[$key];
-              if ($max_index < $index) {
-                $max_index = $index;
-              }
-            }
-          }
-
-
-          //dpm($tags);
-
-          // TEST
-//            foreach ($result as $arr) {
-//                dpm(join(" - ", $arr));
-//            }
-
-          $max_articles = 10;
-          $articles = array();
-
-
-          for ($i = $max_index; $i >= $min_index; $i--) {
-
-            //dpm('index = ' . $i);
-            foreach ($tags[$i] as $index => $index_tags) {
-
-
-              $query = db_select('node', 'n')
-                  ->fields('n', array('nid', 'created'));
-
-              foreach ($index_tags as $key => $index_tag) {
-                $query->join('taxonomy_index', 'ti_' . $key, 'ti_' . $key . '.nid = n.nid AND ti_' . $key . '.tid = ' . $index_tag);
-                $query->fields('ti_' . $key, array('tid'));
-              }
-              $query->condition('n.nid', $form['nid']['#value'], '!=');
-              $query->orderBy('n.created', 'DESC');
-              $query->range(0, $max_articles);
-              $results = $query->execute()->fetchAllAssoc('nid');
-
-              if ($results) {
-                foreach ($results as $key => $result) {
-                  if (in_array($result, $articles)) {
-                    unset($results[$key]);
-                  }
-                }
-                $articles_by_index[$i] = $results;
-
-                $articles += $results;
-                if (count($articles) < $max_articles) {
-                  $max_articles -= count($articles);
-                }
-                else {
-                  $max_articles = 0;
-                }
-
-              }
-            }
-          }
-        } // end of if this article has any tags.
-        
-        */
-
-        $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($form['nid']['#value'], $form['type']['#value']);
-        
-        dpm($articles_by_index);
+        // Comment next block to recalculate related articles
+        //dpm($articles_by_index);
         dpm($extra_data['related_articles']);
+        foreach ($extra_data['related_articles'] as $key => $value) {
+          $index = str_replace('index_', '', $key);
+          foreach ($value as $key2 => $value2) {
+            $value2->nid = $key2;
+            $articles_by_index[$index][$key2] = $value2;
+          }
+        }
+        dpm($articles_by_index);
         
         if (!empty($articles_by_index)) {
-          //dpm($articles_by_index);
-          //dpm($articles);
 
           $form['related_articles'] = array(
             '#type' => 'fieldset',
