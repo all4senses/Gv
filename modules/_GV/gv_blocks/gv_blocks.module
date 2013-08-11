@@ -851,6 +851,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
      
       $options_to_exclude = array();
       $options_sets_to_exclude = array();
+      
+      $additional_options_td_style = array(
+        'Monthly Cost of Cheapest Service' => ' font-size: 14px; font-weight: bold;',
+      );
           
       switch ($service_type) {
         case 'business':
@@ -876,10 +880,6 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
               'Call Me Now',
             );
           }
-          
-          $additional_options_td_style = array(
-            'Monthly Cost of Cheapest Service' => ' font-size: 14px; font-weight: bold;',
-          );
           
           break;
         
