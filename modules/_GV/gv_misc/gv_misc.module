@@ -723,7 +723,8 @@ function gv_misc_rShareReviews_rest() {
       $query->condition('n.nid', $post['nid']);
 
       $review = $query->execute()->fetchObject();
-      
+      $review->r_data = unserialize($review->r_data);
+              
       $criteria = array(
         'entity_type' => 'node',
         'entity_id' => $node->field_ref_provider['und'][0]['target_id'],
