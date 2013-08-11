@@ -704,9 +704,13 @@ function gv_misc_rShareReviews_rest() {
     case 'get review by nid':
       
       $query = db_select('node', 'n');
-        $query->fields('n', array('nid', 'changed'));
+        $query->fields('n', array('nid', 'changed', 'uid'));
       $query->leftJoin('field_data_field_r_provider_name', 'rpn', 'rpn.entity_id = n.nid');
         $query->addField('rpn', 'field_r_provider_name_value', 'pname');
+      
+      $query->leftJoin('field_data_field_p_name', 'pn', 'pn.field_p_name_value = rpn.field_r_provider_name_value');
+        $query->addField('pn', 'entity_id', 'p_nid');
+        
       $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
         $query->addField('b', 'body_value', 'review');
       $query->leftJoin('field_data_field_r_fname', 'fn', 'fn.entity_id = n.nid');
@@ -714,7 +718,7 @@ function gv_misc_rShareReviews_rest() {
       $query->leftJoin('field_data_field_r_lname', 'ln', 'ln.entity_id = n.nid');
         $query->addField('ln', 'field_r_lname_value', 'lname');
       $query->leftJoin('field_data_field_r_email', 'm', 'm.entity_id = n.nid');
-        $query->addField('m', 'field_r_email_value', 'email');  
+        $query->addField('m', 'field_r_email_value', 'r_email');  
       $query->leftJoin('field_data_field_r_data', 'd', 'd.entity_id = n.nid');
         $query->addField('d', 'field_r_data_value', 'r_data');  
       $query->leftJoin('field_data_field_r_rating_overall', 'ro', 'ro.entity_id = n.nid');
@@ -727,10 +731,13 @@ function gv_misc_rShareReviews_rest() {
               
       $criteria = array(
         'entity_type' => 'node',
-        'entity_id' => $node->field_ref_provider['und'][0]['target_id'],
-        'uid' => $node->uid,
+        //'entity_id' => $review->field_ref_provider['und'][0]['target_id'],
+        'entity_id' => $review->p_nid,
+        //'uid' => $node->uid,
+        'uid' => $review->uid,
         // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
-        'vote_source' => $node->field_r_email['und'][0]['value'],
+        //'vote_source' => $node->field_r_email['und'][0]['value'],
+        'vote_source' => $review->r_email,
       );
       $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria);
       gv_pages_addRatingsToNodeThemed($node, $votes);
