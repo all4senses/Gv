@@ -849,14 +849,34 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       
      
-      
+      $option_to_exclude = array();
+      $options_sets_to_exclude = array();
+          
       switch ($service_type) {
         case 'business':
         case 'pbx':
           $provider_options_structure = unserialize(PROVIDER_OPTIONS_BU);
+          $provider_options_index = 'provider_options_bu';
           
           dpm($provider_options_structure);
-          $provider_options_index = 'provider_options_bu';
+
+          if ($service_type == 'business') {
+            $options_sets_to_exclude = array(
+              'Integrations',
+            );
+            $options_to_exclude = array(
+              'Amount of Lines Per Price Tier',
+              'Desktop Integration Client',
+              'Call Notifications',
+              'Call Return',
+              'Push To Talk',
+              'Selective Call Acceptance',
+              'Selective Call Rejection',
+              'Switchboard Software for Live Receptionist',
+              'Virtual Extensions',
+            );
+          }
+          
           break;
         
         case 'residential':
@@ -889,6 +909,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         
         $odd = TRUE;
         foreach ($options_data as $option_title => $option_type) {
+          
+          if (in_array($option_title, $option_to_exclude)) {
+            continue;
+          }
           
           $option_title = str_replace('Num ', '# ', $option_title);
           
