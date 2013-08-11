@@ -544,7 +544,7 @@ function gv_misc_rShareReviews_rest() {
   $out = NULL;
   $error = FALSE;
   
-  $allowed_remote_servers = array('50.62.82.224' /* voiprater.com */);
+  $allowed_remote_servers = array('50.62.82.224-' /* voiprater.com */);
   
   global $user;
   watchdog('Request for reviews', check_plain($_GET['q']) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
