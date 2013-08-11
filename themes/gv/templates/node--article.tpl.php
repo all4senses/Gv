@@ -378,7 +378,7 @@
                           dpm($node->related_articles);
                           foreach ($node->related_articles as $nid => $article) {
                             if (!empty($article->field_main_image_value['src_themed_related'])) {
-                              echo '<div><a href="' . url('node/' . $nid) . '"><img src="' . $article->field_main_image_value['src_themed_related'] . '" /></a>', l($article->title, 'node/' . $nid) . '</div>';
+                              echo '<div><a href="' . url('node/' . $nid) . '"><img src="' . $article->field_main_image_value['src_themed_related'] . '" ' . (!empty($article->field_main_image_value['alt']) ? 'alt="' . $article->field_main_image_value['alt'] . '" ' : '') . (!empty($article->field_main_image_value['title']) ? 'title="' . $article->field_main_image_value['title'] . '" ' : '') . '/></a>', l($article->title, 'node/' . $nid) . '</div>';
                             }
                             else {
                               echo '<div>', l($article->title, 'node/' . $nid) . '</div>';
