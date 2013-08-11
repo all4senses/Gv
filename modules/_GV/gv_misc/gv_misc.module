@@ -735,6 +735,8 @@ function gv_misc_rShareReviews_rest() {
       $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria);
       gv_pages_addRatingsToNodeThemed($node, $votes);
 
+      $review->votes = $votes;
+      
       if (!empty($review)) {
         $out = $review;
       }
