@@ -465,7 +465,7 @@ function gv_misc_isSubmissionAlreadySent($email) {
 function gv_misc_testPage() {
   $out = '<div>'; //'<div>Start test...</div>';
 
-  /*
+  
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_p_name', 'pn', 'pn.entity_id = n.nid');
   $query->fields('pn', array('field_p_name_value'));
@@ -528,181 +528,11 @@ function gv_misc_testPage() {
   }
 
   dpm($out);
-  */
+  
 
-  //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');
-  ////gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500italic', 'NA', 'text/css');
-  // Cufon's, via font-face
-  //drupal_add_css(path_to_theme() . '/css/remote-fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   
-  
-  $out .= '<div class="s-test-violet">Violet</div>';
-  
-  $out .= '<div class="s-test-red">Red</div>';
-  $out .= '<div class="s-test-green">Green</div>';
-  $out .= '<div class="s-test-blue">Blue</div>';
-  $out .= '<div class="s-test-black">Black</div>';
-  $out .= '<div class="s-test-yellow">Yellow</div>';
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
-}
-
-
-/**
- * Bulk Replace titles metatags.
- */
-function gv_misc_bulkReplaceTitlesMetatags() {
-
-  $query = db_select('node', 'n');
-  $query->fields('n', array('nid', 'title', 'type'));
-  $query->leftJoin('metatag', 'm', 'm.entity_id = n.nid');
-  $query->fields('m', array('data'));
-  $query->condition('n.status', 1);
-  $nodes = $query->execute()->fetchAllAssoc('nid');
-
-  //dpm($nodes);
-  
-  
-  foreach ($nodes as $nid => $node) {
-    $nodes[$nid]->metatag = unserialize($node->data);
-    unset($nodes[$nid]->data);
-    
-    // Replace '| GetVoIP.com' with '| GetVoIP'
-//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP.com') === FALSE) {
-//      unset($nodes[$nid]);
-//    }
-//    else {
-//      $nodes[$nid]->metatag['title']['value'] = str_replace('| GetVoIP.com', '| GetVoIP', $nodes[$nid]->metatag['title']['value']);
-//    }
-    
-    
-    // Replace title without '| GetVoIP.com' with title with '| GetVoIP'
-//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE || strpos($nodes[$nid]->metatag['title']['value'], '[') !== FALSE) {
-//      unset($nodes[$nid]);
-//    }
-//    else {
-//      $nodes[$nid]->metatag['title']['value'] = $nodes[$nid]->metatag['title']['value'] . ' | GetVoIP';
-//    }
-    
-    // Replace '| GetVoIP' with '[site:name]'
-//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') === FALSE) {
-//      unset($nodes[$nid]);
-//    }
-//    else {
-//      $nodes[$nid]->metatag['title']['value'] = str_replace('| GetVoIP', '| [site:name]', $nodes[$nid]->metatag['title']['value']);
-//    }
-    
-    // Replace '| GetVoIP' with '[site:name]'
-    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| [site:name]') === FALSE) {
-      unset($nodes[$nid]);
-    }
-    else {
-      $nodes[$nid]->metatag['title']['value'] = str_replace('| [site:name]', '- [site:name]', $nodes[$nid]->metatag['title']['value']);
-    }
-
-  }
-  
-  //dpm($nodes);
-  
-  foreach ($nodes as $nid => $node) {
-    $data = serialize($node->metatag);
-    //dpm($nodes[$nid]);
-    
-    db_update('metatag')
-        ->fields(array(
-          'data' => $data,
-        ))
-        ->condition('entity_id', $nid)
-        ->execute();
-    //break;
-  }
-  
-       
-}
-  
-
-/**
- * Bulk Replace an alias of nodes.
- */
-function gv_misc_bulkReplaceAliases() {
-  
-  
-  $query = db_select('node', 'n');
-  $query->fields('n', array('nid', 'title'));
-  $query->condition('n.type', 'article');
-  $nodes = $query->execute()->fetchAllAssoc('nid');
-
-  
-  
-  foreach ($nodes as $nid => $node) {
-    $query = db_select('url_alias', 'a');
-    $query->condition('a.source', 'node/' . $nid);
-    $query->fields('a', array('alias'));
-    $nodes[$nid]->alias = $query->execute()->fetchField();
-  }
-  
-  //dpm($nodes);
-  
-  foreach ($nodes as $nid => $node) {
-    
-    if (strpos($node->alias, 'what-is-voip') === FALSE) {
-      dpm('Wrong Alias for ' . $node->nid);
-      continue;
-    }
-    
-    
-    
-    
-    $old_alias = $node->alias;
-    $new_alias = str_replace('what-is-voip', 'library', $old_alias);
-    
-    //dpm('$old_alias = ' . $old_alias);
-    //dpm('$new_alias = ' . $new_alias);
-    
-    
-    $redirect = new stdClass();
-    redirect_object_prepare($redirect);
-    $redirect->source = $old_alias;
-    $redirect->redirect = 'node/' . $nid;
-    $redirect->language = 'und';
-    $hash = redirect_hash($redirect);
-
-    
-    db_update('url_alias')
-        ->fields(array(
-          'alias' => $new_alias,
-        ))
-        ->condition('source', 'node/' . $nid)
-        ->execute();
-  
-    $query = db_select('redirect', 'r');
-    $query->condition('r.source', $old_alias);
-    $query->fields('r', array('redirect'));
-    $redirect_existing = $query->execute()->fetchField();
-    if ($redirect_existing) {
-      continue;
-    }
-    
-   
-    $redirect_object = array(
-      'hash' => $hash,
-      'type' => 'redirect',
-      'uid' => 1,
-      'source' => $old_alias,
-      'source_options' => serialize(array()),
-      'redirect' => 'node/' . $nid,
-      'redirect_options' => serialize(array()),
-      'language' => 'und',
-      'status_code' => 0,
-      'count' => 0,
-      'access' => 0
-    );
-    
-    db_insert('redirect')
-        ->fields($redirect_object)
-        ->execute();
-  }
-  
 }
 
 
@@ -715,6 +545,8 @@ function gv_misc_rShareReviews_rest() {
   $error = FALSE;
   
   $allowed_remote_servers = array('50.62.82.224' /* voiprater.com */);
+  
+  watchdog('Request for reviews', check_plain($_GET['q']) . print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
   
   if (!in_array($_SERVER['HTTP_X_FORWARDED_FOR'], $allowed_remote_servers)) {
     exit('Access denied for your IP!');
@@ -914,6 +746,158 @@ function gv_misc_rShareReviews_rest() {
   }
   
   drupal_json_output(array('out' => $out, 'error' => $error));
+}
+
+
+/**
+ * Bulk Replace titles metatags.
+ */
+function gv_misc_bulkReplaceTitlesMetatags() {
+
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title', 'type'));
+  $query->leftJoin('metatag', 'm', 'm.entity_id = n.nid');
+  $query->fields('m', array('data'));
+  $query->condition('n.status', 1);
+  $nodes = $query->execute()->fetchAllAssoc('nid');
+
+  //dpm($nodes);
+  
+  
+  foreach ($nodes as $nid => $node) {
+    $nodes[$nid]->metatag = unserialize($node->data);
+    unset($nodes[$nid]->data);
+    
+    // Replace '| GetVoIP.com' with '| GetVoIP'
+//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP.com') === FALSE) {
+//      unset($nodes[$nid]);
+//    }
+//    else {
+//      $nodes[$nid]->metatag['title']['value'] = str_replace('| GetVoIP.com', '| GetVoIP', $nodes[$nid]->metatag['title']['value']);
+//    }
+    
+    
+    // Replace title without '| GetVoIP.com' with title with '| GetVoIP'
+//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') !== FALSE || strpos($nodes[$nid]->metatag['title']['value'], '[') !== FALSE) {
+//      unset($nodes[$nid]);
+//    }
+//    else {
+//      $nodes[$nid]->metatag['title']['value'] = $nodes[$nid]->metatag['title']['value'] . ' | GetVoIP';
+//    }
+    
+    // Replace '| GetVoIP' with '[site:name]'
+//    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| GetVoIP') === FALSE) {
+//      unset($nodes[$nid]);
+//    }
+//    else {
+//      $nodes[$nid]->metatag['title']['value'] = str_replace('| GetVoIP', '| [site:name]', $nodes[$nid]->metatag['title']['value']);
+//    }
+    
+    // Replace '| GetVoIP' with '[site:name]'
+    if(empty($nodes[$nid]->metatag['title']['value']) || strpos($nodes[$nid]->metatag['title']['value'], '| [site:name]') === FALSE) {
+      unset($nodes[$nid]);
+    }
+    else {
+      $nodes[$nid]->metatag['title']['value'] = str_replace('| [site:name]', '- [site:name]', $nodes[$nid]->metatag['title']['value']);
+    }
+
+  }
+  
+  //dpm($nodes);
+  
+  foreach ($nodes as $nid => $node) {
+    $data = serialize($node->metatag);
+    //dpm($nodes[$nid]);
+    
+    db_update('metatag')
+        ->fields(array(
+          'data' => $data,
+        ))
+        ->condition('entity_id', $nid)
+        ->execute();
+    //break;
+  }
+  
+       
+}
+  
+
+/**
+ * Bulk Replace an alias of nodes.
+ */
+function gv_misc_bulkReplaceAliases() {
+  
+  
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->condition('n.type', 'article');
+  $nodes = $query->execute()->fetchAllAssoc('nid');
+
+  
+  
+  foreach ($nodes as $nid => $node) {
+    $query = db_select('url_alias', 'a');
+    $query->condition('a.source', 'node/' . $nid);
+    $query->fields('a', array('alias'));
+    $nodes[$nid]->alias = $query->execute()->fetchField();
+  }
+  
+  foreach ($nodes as $nid => $node) {
+    
+    if (strpos($node->alias, 'what-is-voip') === FALSE) {
+      dpm('Wrong Alias for ' . $node->nid);
+      continue;
+    }
+    
+    
+    
+    
+    $old_alias = $node->alias;
+    $new_alias = str_replace('what-is-voip', 'library', $old_alias);
+    
+    $redirect = new stdClass();
+    redirect_object_prepare($redirect);
+    $redirect->source = $old_alias;
+    $redirect->redirect = 'node/' . $nid;
+    $redirect->language = 'und';
+    $hash = redirect_hash($redirect);
+
+    
+    db_update('url_alias')
+        ->fields(array(
+          'alias' => $new_alias,
+        ))
+        ->condition('source', 'node/' . $nid)
+        ->execute();
+  
+    $query = db_select('redirect', 'r');
+    $query->condition('r.source', $old_alias);
+    $query->fields('r', array('redirect'));
+    $redirect_existing = $query->execute()->fetchField();
+    if ($redirect_existing) {
+      continue;
+    }
+    
+   
+    $redirect_object = array(
+      'hash' => $hash,
+      'type' => 'redirect',
+      'uid' => 1,
+      'source' => $old_alias,
+      'source_options' => serialize(array()),
+      'redirect' => 'node/' . $nid,
+      'redirect_options' => serialize(array()),
+      'language' => 'und',
+      'status_code' => 0,
+      'count' => 0,
+      'access' => 0
+    );
+    
+    db_insert('redirect')
+        ->fields($redirect_object)
+        ->execute();
+  }
+  
 }
 
 
@@ -7473,21 +7457,6 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           }
         }
         
-        
-        //dpm($results);
-        //dpm($articles_by_index);
-        //$articles_by_index[$i] += $results;
-
-        //$articles += $results;
-        //dpm($articles);
-        //$max_articles -= count($results);
-        
-//        if (count($articles) < $max_articles) {
-//          $max_articles -= count($results);
-//        }
-//        else {
-//          $max_articles = 0;
-//        }
 
       }
     }

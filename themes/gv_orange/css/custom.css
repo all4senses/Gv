@@ -2492,29 +2492,29 @@ text-shadow: 1px 1px 1px gray;
 
 
 /* Safari browser css hack */
-body:first-of-type .s-test-violet {color: violet;}
+body:first-of-type .s-test-violet {color: violet;} /* Works everywhere */
 
 
 /* Safari 2-3 */
-html[xmlns*=""] body:last-child .s-test-red {color: red;}
+html[xmlns*=""] body:last-child .s-test-red {color: red;} /* Doesn't work nowhere */
 
 
 /* Safari 2 - 3.1 */
-html[xmlns*=""]:root .s-test-green {color: green;}
+html[xmlns*=""]:root .s-test-green {color: green;} /* Doesn't work nowhere */
 
 
 /* Safari only */
-.s-test-blue:not(:root:root) {color: blue;}
+.s-test-blue:not(:root:root) {color: blue;} /* Doesn't work nowhere */
 
 
   
 /* For  Safari 1.3+ only */
-body:last-child:not(:root:root) .s-test-black {color: black;} 
+body:last-child:not(:root:root) .s-test-black {color: black;} /* Doesn't work nowhere */
 
 
 /* safari only */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-    .s-test-yellow {color: yellow;}
+    .s-test-yellow {color: yellow;} /* Works only in safari and chrome */
 }
 
 
