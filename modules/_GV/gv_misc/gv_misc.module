@@ -7333,7 +7333,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
     
       //dpm($all_nids_sets);
       
-      // Leave nly 10 elements.
+      // Build $articles_by_index and Leave nly 10 elements.
       $max_index = count($all_nids_sets);
       for ($i = $max_index; $i >= 1; $i--) {
         
@@ -7494,8 +7494,8 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   }
 
   
-  foreach($all_nids_sets as $key => $value) {
-    krsort($all_nids_sets[$key]);
+  foreach($articles_by_index as $key => $value) {
+    krsort($articles_by_index[$key]);
   }
   //dpm($articles_by_index);
   
