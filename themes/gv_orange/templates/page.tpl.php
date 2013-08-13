@@ -30,6 +30,7 @@
           
         </div>
       </div>
+      <div id="headline">We've helped over 7,000 VoIP shoppers find the perfect phone service.</div>
       
       <?php 
           global $user;
