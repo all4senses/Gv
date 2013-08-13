@@ -1691,7 +1691,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
         
         dpm($articles_by_index);
-        return;
+
         
         if (!empty($articles_by_index)) {
           
@@ -1714,13 +1714,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => TRUE,
             );
 
-            foreach ($articles as $key => $article) {
-              $a = node_load($article->nid);
+            foreach ($articles as $nid => $article) {
+              $a = node_load($nid);
               $a->related_articles_teaser = TRUE;
-              $form['related_articles']['index_' . $index][$article->nid] = array(
+              $form['related_articles']['index_' . $index][$nid] = array(
                 '#type' => 'checkbox',
                 '#title' => render(node_view($a, 'teaser')),
-                '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$article->nid]) ? 1 : 0,
+                '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$nid]) ? 1 : 0,
                 '#disabled' => TRUE,
               );
 
