@@ -1720,7 +1720,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               $form['related_articles']['index_' . $index][$nid] = array(
                 '#type' => 'checkbox',
                 '#title' => render(node_view($a, 'teaser')),
-                '#default_value' => !empty($extra_data['related_articles']['index_' . $index][$nid]) ? 1 : 0,
+                //'#default_value' => !empty($extra_data['related_articles']['index_' . $index][$nid]) ? 1 : 0,
+                '#default_value' => is_object($article) ? 1 : 0,
                 '#disabled' => TRUE,
               );
 
