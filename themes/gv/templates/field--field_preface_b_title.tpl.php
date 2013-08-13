@@ -50,7 +50,8 @@ HTML comment.
 -->
 <h2 class="preface"><?php 
 
-if (render($items[0]) == 'VoIP 101: What exactly is it?<br />') {
+//if (render($items[0]) == 'VoIP 101: What exactly is it?<br />') 
+  {
   dpm($element);
   dpm($items);
 }
