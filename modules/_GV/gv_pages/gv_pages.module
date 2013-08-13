@@ -1683,6 +1683,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         foreach ($extra_data['related_articles'] as $key => $value) {
           $index = str_replace('index_', '', $key);
           foreach ($value as $key2 => $value2) {
+            dpm($key2);
+            dpm($value2);
             $value2->nid = $key2;
             $articles_by_index[$index][$key2] = $value2;
           }
