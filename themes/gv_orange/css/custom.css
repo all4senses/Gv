@@ -701,6 +701,8 @@ body.sidebar-second #sidebar-second{float: right; margin-right: 18px; padding: 1
 .sidebar .block, 
 #highlighted .block#block-gv-blocks-request-quote-v6 {box-shadow: 1px 3px 10px -4px black; border: 1px solid orange; overflow: hidden; background: white; border-radius: 5px; margin-bottom: 12px; position: relative; padding-bottom: 10px; z-index: 1; margin-top: 25px;}
 
+.sidebar .block {box-shadow: none; border: 1px solid lightgray; border-radius: 0;}
+
 .sidebar .block-title,
 #highlighted .block-title {background: url("images/sprite-04.png") no-repeat 0px -720px #fbd8ba; border-radius: 5px 5px 0 0; padding: 10px; margin: 0; font-size: 16px; font-weight: bold; text-transform: capitalize; line-height: 18px; color: white;}
 .sidebar .block li {list-style: none; clear: both;}
@@ -2210,9 +2212,26 @@ a.yt-direct:active{outline: none;}
 #block-gv-blocks-ad-speedtest-page .content{padding: 0;}
 #block-gv-blocks-ad-speedtest-page a{padding: 0;}
 
+
+
+
+/* new fonts for preface and block titles */
+.sidebar h3.block-title,
+#highlighted h2.block-title {
+/*font-family: Open Sans;*/
+font-family: arial;
+font-size: 20px;
+font-weight: normal;
+text-shadow: 1px 1px 1px gray;
+}
+
+.sidebar h3.block-title {font-weight: normal; text-shadow: none; color: #44444; padding: 23px 10px 7px 10px; border-radius: 0;}
+
+
+
 /* Newsletters subscribe */
 #block-gv-blocks-newsletters-subscribe{border: 1px solid #3677d1;}
-#block-gv-blocks-newsletters-subscribe h3{background: url('images/sprite-04.png') no-repeat 0px -625px lightBlue;}
+#block-gv-blocks-newsletters-subscribe h3{/*background: url('images/sprite-04.png') no-repeat 0px -625px lightBlue;*/}
 #block-gv-blocks-newsletters-subscribe .content{padding: 10px 0 0 10px;}
 #block-gv-blocks-newsletters-subscribe .content .title{color: gray; font-size: 15px; margin-bottom: 7px; font-family: arial;}
 #block-gv-blocks-newsletters-subscribe .content .form-item-email{/*width: 150px; */float: left; margin: 0;}
@@ -2492,17 +2511,6 @@ height: 0;
 overflow: hidden;
 }
 
-
-
-/* new fonts for preface and block titles */
-.sidebar h3.block-title,
-#highlighted h2.block-title {
-/*font-family: Open Sans;*/
-font-family: arial;
-font-size: 20px;
-font-weight: normal;
-text-shadow: 1px 1px 1px gray;
-}
 
 
 
