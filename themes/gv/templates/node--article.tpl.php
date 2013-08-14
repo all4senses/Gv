@@ -314,6 +314,8 @@
       <?php if ($page): ?>
     
                   <footer>
+                    
+                    <?php /*
 
                     <div class="share">
 
@@ -360,7 +362,7 @@
                       </div> <!-- main share buttons -->
 
                     </div>
-
+                    */  ?>
 
                     <?php 
                       $tags = NULL;
