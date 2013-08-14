@@ -274,9 +274,9 @@
   </div>
 </div>
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): /* If we are on the final page, after the submission */ ?> 
 
-  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'): ?> 
+  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'):  /* If we get the final page from the main quote page, what is correct.*/ ?> 
     <!-- Google Code for Lead Conversion Page -->
     <script type="text/javascript">
     /* <![CDATA[ */
