@@ -22,7 +22,7 @@
     <?php 
       echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
     ?>
-    <h3>Leading Authority on VoIP Providers</h3>
+    <h3>The Authority on VoIP Service Selection</h3>
   </div>
 
 
