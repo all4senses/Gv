@@ -7,8 +7,10 @@
         
           drupal_set_title('Page Not Found. | GetVoIP.com');
         
-          watchdog('My test 404', print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
-          
+          // Fix ttp:// urls, i don't understand where they are coming from, but seems that via msie6.0
+          if (strpos($_GET['destination'], 'ttp://') === 0) {
+            watchdog('My test 404', print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
+          }
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
           hide($content['links']);
