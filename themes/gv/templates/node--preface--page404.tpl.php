@@ -11,7 +11,7 @@
           if (strpos($_GET['destination'], 'ttp://') === 0) {
             $fixed_path = str_replace('ttp://getvoip.com/', '', $_GET['destination']);
             unset($_GET['destination']);
-            watchdog('My test 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
+            watchdog('GV Redirect ttp:// to http://... 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
             drupal_goto($fixed_path);
           }
           // Hide comments, tags, and links now so that we can render them later.
