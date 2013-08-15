@@ -276,28 +276,28 @@
 
 <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): /* If we are on the final page, after the submission */ ?> 
 
-  <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'):  /* If we get the final page from the main quote page, what is correct.*/ ?> 
-    <!-- Google Code for Lead Conversion Page -->
-    <script type="text/javascript">
-    /* <![CDATA[ */
-    var google_conversion_id = 944838791;
-    var google_conversion_language = "en";
-    var google_conversion_format = "2";
-    var google_conversion_color = "ffffff";
-    var google_conversion_label = "cXd0CMHGnAYQh7HEwgM";
-    var google_conversion_value = 0;
-    /* ]]> */
-    </script>
-    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-    </script>
-    <noscript>
-    <div style="display:inline;">
-    <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
-    </div>
-    </noscript>
-  <?php global $user; elseif ($user->uid != 1):?>
-    <script>top.location.href="http://getvoip.com/compare-voip-solutions";</script>
-  <?php endif;?>
+          <?php if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'):  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+            <!-- Google Code for Lead Conversion Page -->
+            <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 944838791;
+            var google_conversion_language = "en";
+            var google_conversion_format = "2";
+            var google_conversion_color = "ffffff";
+            var google_conversion_label = "cXd0CMHGnAYQh7HEwgM";
+            var google_conversion_value = 0;
+            /* ]]> */
+            </script>
+            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+            </script>
+            <noscript>
+            <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
+            </div>
+            </noscript>
+          <?php global $user; elseif ($user->uid != 1): /* If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.*/?>
+            <script>top.location.href="http://getvoip.com/compare-voip-solutions";</script>
+          <?php endif;?>
     
 <?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'):
 // So we are on the lending page '/compare-voip-solutions' 

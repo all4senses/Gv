@@ -3511,7 +3511,8 @@ function gv_misc_makeRequest_ajax() {
     
     
     $already_sent = FALSE;
-    if (gv_misc_isSubmissionAlreadySent($post['email'])) {
+    // allow dublicate of test@test.test address for testing purposes.
+    if ($post['email'] != 'test@test.test' && gv_misc_isSubmissionAlreadySent($post['email'])) {
       $already_sent = TRUE;
     }
     // Check if there is already a submission in the DB with such an email.

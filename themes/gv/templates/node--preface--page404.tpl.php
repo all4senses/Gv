@@ -7,6 +7,8 @@
         
           drupal_set_title('Page Not Found. | GetVoIP.com');
         
+          watchdog('My test 404', print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
+          
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
           hide($content['links']);
