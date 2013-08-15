@@ -9,8 +9,9 @@
         
           // Fix ttp:// urls, i don't understand where they are coming from, but seems that via msie6.0
           if (strpos($_GET['destination'], 'ttp://') === 0) {
-            watchdog('My test 404', str_replace('ttp://getvoip.com/', '', $_GET['destination']). ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
-            //drupal_goto();
+            $fixed_path = str_replace('ttp://getvoip.com/', '', $_GET['destination']);
+            watchdog('My test 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE) . ' ' . print_r($user, TRUE), NULL, WATCHDOG_WARNING);
+            drupal_goto($fixed_path);
           }
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
