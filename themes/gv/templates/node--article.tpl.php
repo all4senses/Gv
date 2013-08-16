@@ -315,11 +315,11 @@
     
                   <footer>
                     
-                    <?php /*
+                    
 
                     <div class="share">
 
-                      
+                    <?php /*  
 
                       <div class="others">
                         <!-- ADDTHIS BUTTON BEGIN -->
@@ -360,9 +360,16 @@
 //                                }
                               ?> 
                       </div> <!-- main share buttons -->
-
-                    </div>
                     */  ?>
+                      
+                    <?php 
+                      if ($user->uid) {
+                        echo gv_blocks_getSidebarShareStaticBlock($node);
+                      }
+                    ?>  
+                    
+                    </div>
+                    
 
                     <?php 
                       $tags = NULL;

@@ -612,9 +612,11 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 /**
  * Block with sidebar share links for a current article.
  */
-function gv_blocks_getSidebarShareStaticBlock() {
+function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
   
-  $node = node_load(str_replace('node/', '', $_GET['q']));
+  if (!$node) {
+    $node = node_load(str_replace('node/', '', $_GET['q']));
+  }
   //dpm($_GET);
   //dpm($node);
   
