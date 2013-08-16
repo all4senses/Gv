@@ -362,7 +362,7 @@
                     */  ?>
                       
                     <?php 
-                      echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
+                      echo '.' . gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
                     ?>  
                     
                     </div>
