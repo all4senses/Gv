@@ -272,7 +272,7 @@
                 echo $node->field_a_teaser['und'][0]['value'];
               }
               else {
-                dpm($node->nid . ' -> no teaser field');
+                //dpm($node->nid . ' -> no teaser field');
                 $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
                 echo $teaser_data['teaser'];
               }
@@ -362,9 +362,7 @@
                     */  ?>
                       
                     <?php 
-                      if ($user->uid) {
-                        echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
-                      }
+                      echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
                     ?>  
                     
                     </div>
