@@ -3,12 +3,21 @@
   Drupal.behaviors.gv_colorbox_share_link = {
     attach: function (context, settings) {
        
-       $(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
-       //$(".share-static a").colorbox();
+       //$(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
        
        
        
        // GV track click share link.
+       
+       $(".share-static a").click(function(){
+         
+         //console.log('click');
+         //console.log('href = ' + $(this).attr('href'));
+         //console.log('title = ' + $(this).attr('title'));
+
+
+        window.open("'" + $(this).attr('href')+ "'", 'ShareThis','toolbar=0,status=0,width=626,height=436'); 
+         
        /*
        $(".yt-direct").click(function(){
          
