@@ -12,11 +12,13 @@
        $(".share-static a").click(function(){
          
          //console.log('click');
-         //console.log('href = ' + $(this).attr('href'));
+         console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
 
 
         window.open("'" + $(this).attr('href')+ "'", 'ShareThis','toolbar=0,status=0,width=626,height=436'); 
+        
+        return false;
          
        /*
        $(".yt-direct").click(function(){
