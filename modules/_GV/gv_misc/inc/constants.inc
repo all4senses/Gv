@@ -9,7 +9,7 @@
 define('TOPICS', 'topics');
 
 // Ratings titles.
-define('INSTALL', 'Installation Process');
+define('INSTALL', 'Installation');
 define('FEATURES', 'Features');
 define('PRICE', 'Price');
 define('OVERALL', 'Overall Average Rating');
