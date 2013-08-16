@@ -1,14 +1,14 @@
 (function ($) {
 
-  Drupal.behaviors.gv_colorbox_p_video = {
+  Drupal.behaviors.gv_colorbox_share_link = {
     attach: function (context, settings) {
        
-       $(".yt-direct").colorbox({iframe:true, innerWidth:425, innerHeight:344});
+       $(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
        
        
        
-       // GV track click video link.
-       
+       // GV track click share link.
+       /*
        $(".yt-direct").click(function(){
          
          //console.log('click');
@@ -19,7 +19,7 @@
             
                 url: '/click', 
                 data: {
-                        type: 'video_click',
+                        type: 'share_click',
                         oid: $(this).attr('id'),
                         click_page: window.location.href,
                         url: $(this).attr('href'),
@@ -29,22 +29,22 @@
                       }, 
                     type: 'POST', 
                     dataType: 'json'
-                    /*
-                    , 
-                    success: function(data) 
-                            { 
-                                if(!data.error) {
-                                    console.log('The header is arrived!');
-                                }
-                                return false;
-                            } 
-                     */
+//                    
+//                    , 
+//                    success: function(data) 
+//                            { 
+//                                if(!data.error) {
+//                                    console.log('The header is arrived!');
+//                                }
+//                                return false;
+//                            } 
             }); // end of (jQuery).ajax
         
 
 
        });
 
+       */
        
     }
   };
