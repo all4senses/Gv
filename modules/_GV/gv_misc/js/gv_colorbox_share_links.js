@@ -3,35 +3,30 @@
   Drupal.behaviors.gv_colorbox_share_link = {
     attach: function (context, settings) {
        
-       //$(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
+       $(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
        
        
        
-       // GV track click share link.
+       // GV track click video link.
        
        $(".share-static a").click(function(){
+         
          
          //console.log('click');
          console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
 
-
-        window.open("'" + $(this).attr('href')+ "'", 'ShareThis','toolbar=0,status=0,width=626,height=436'); 
-        
-        return false;
+          
+          window.open("'" + $(this).attr('href')+ "'", 'ShareThis','toolbar=0,status=0,width=626,height=436'); 
+          return false;
          
-       /*
-       $(".yt-direct").click(function(){
-         
-         //console.log('click');
-         //console.log('href = ' + $(this).attr('href'));
-         //console.log('title = ' + $(this).attr('title'));
-
+         // GV track click share link.
+         /*
          (jQuery).ajax({
             
                 url: '/click', 
                 data: {
-                        type: 'share_click',
+                        type: 'share_click', /// ToDo: to be implemented
                         oid: $(this).attr('id'),
                         click_page: window.location.href,
                         url: $(this).attr('href'),
@@ -41,7 +36,6 @@
                       }, 
                     type: 'POST', 
                     dataType: 'json'
-//                    
 //                    , 
 //                    success: function(data) 
 //                            { 
@@ -50,15 +44,16 @@
 //                                }
 //                                return false;
 //                            } 
+                     
             }); // end of (jQuery).ajax
-        
+        */
 
 
        });
 
-       */
        
     }
   };
 
 }(jQuery));
+
