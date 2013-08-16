@@ -640,10 +640,10 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
   );
   
   foreach ($links as $class => $link) {
-    $out .= l($class, $link['social_url'], array('attributes' => array('target' => '_blank', 'class' => array('share-link', 'static', $class), 'rel' => 'nofollow'), 'query' => $link['query']));
+    $out .= l($class, $link['social_url'], array('attributes' => array('target' => '_blank', 'class' => array($class), 'rel' => 'nofollow'), 'query' => $link['query']));
   }
   
-  return $out;
+  return '<div class="share-static">' . $out . '</div>';
 }
 
 
