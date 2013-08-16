@@ -613,17 +613,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  * Block with sidebar share links for a current article.
  */
 function gv_blocks_getSidebarShareStaticBlock() {
-  dpm($_GET);
   
   $node = node_load(str_replace('node/', '', $_GET['q']));
-  dpm($node);
+  //dpm($_GET);
+  //dpm($node);
   
   $out = NULL;
   $source = 'GetVoIP.com';
   $post_url = url($_GET['q'], array('absolute' => TRUE));
   $post_title = $node->title;
   $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags($node->body['und'][0]['value']), 0, 200);
-  
   
   $links = array(
       'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title)),
