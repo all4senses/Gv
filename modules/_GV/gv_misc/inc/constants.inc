@@ -14,9 +14,9 @@ define('FEATURES', 'Features');
 define('PRICE', 'Price');
 define('OVERALL', 'Overall Average Rating');
 
-define('SOUND', 'Sound/Call Quality');
-define('CUSTOMER', 'Customer Experience');
-define('RELY', 'Service Reliability');
+define('SOUND', 'Call Quality');
+define('CUSTOMER', 'Support');
+define('RELY', 'Reliability');
 define('RECOMMEND', 'Would you recommend this VoIP provider?');
 
 // Phones only
@@ -70,10 +70,10 @@ define('SPRITE_NAMES', $sprite_names);
 $provider_options_bu = array(
           'Provider Info' => array(
               'Year Founded' => 'textfield',
-              'Headquarters Location' => 'textfield',
+              'Headquarters' => 'textfield',
               'Service Location' => 'textfield',
               'Service Type Availability' => 'textfield',
-              'Popular Service Plan' => 'textfield',
+              'Popular Plan' => 'textfield',
               'Money Back Guarantee' => 'textfield',
           ),
           
@@ -81,14 +81,14 @@ $provider_options_bu = array(
               'Monthly Cost of Cheapest Service' => 'textfield',
               'Amount of Lines Per Price Tier' => 'textarea',
               //'Amount of Features Included' => 'textarea',
-              'Month to Month Option' => 'checkbox',
+              'No Contracts' => 'checkbox',
               'Metered Plans' => 'textfield',
-              'Requires Contract' => 'checkbox',
+              //'Requires Contract' => 'checkbox',
               //'Contract Length (in yrs)' => 'textfield',
               'Customizable Plans' => 'checkbox',
               'Activation Fee' => 'textfield',
               'Setup Fee' => 'textfield',
-              'Number Porting Fee' => 'textfield',
+              'Number Port Fee' => 'textfield',
               //'Shipping' => 'textfield',
               //'Equipment Leasing' => 'checkbox',
               'Mobile App' => 'checkbox',
@@ -179,21 +179,21 @@ $provider_options_re = array(
     
           'Provider Info' => array(
               'Year Founded' => 'textfield',
-              'Headquarters Location' => 'textfield',
+              'Headquarters' => 'textfield',
               'Service Location' => 'textfield',
               'Service Type Availability' => 'textfield',
-              'Popular Service Plan' => 'textfield',
+              'Popular Plan' => 'textfield',
               'Money Back Guarantee' => 'textfield',
           ),
     
           'Services & Pricing' => array(
               'Monthly Cost of Cheapest Service' => 'textfield',
-              'Requires Contract' => 'checkbox',
-              'Month to Month Option' => 'checkbox',
+              //'Requires Contract' => 'checkbox',
+              'No Contracts' => 'checkbox',
               'Bundle Package' => 'checkbox',
               'Activation Fee' => 'checkbox',
               'Setup Fee' => 'checkbox',
-              'Number Porting Fee' => 'checkbox',
+              'Number Port Fee' => 'checkbox',
               'Free ATA' => 'checkbox',
               'Unlimited Calling US/Canada'  => 'checkbox',
               'International Calling' => 'checkbox',
