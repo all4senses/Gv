@@ -71,6 +71,26 @@ $sprite_names = serialize(array(
 define('SPRITE_NAMES', $sprite_names);
 
 
+
+
+
+
+
+
+// Provider options
+
+$provider_options_titles_aliases = array(
+  'Number Porting Fee' => 'Number Port Fee',
+  'Headquarters Location' => 'Headquarters',
+  'Popular Service Plan' => 'Popular Plan',
+  'Month to Month Option' => 'No Contracts',
+);
+
+define('PROVIDER_OPTIONS_TITLES_ALIASES', serialize($provider_options_titles_aliases));
+
+unserialize(PROVIDER_OPTIONS_TITLES_ALIASES);
+
+
 $provider_options_bu = array(
           'Provider Info' => array(
               'Year Founded' => 'textfield',
@@ -87,7 +107,7 @@ $provider_options_bu = array(
               //'Amount of Features Included' => 'textarea',
               'Month to Month Option' => 'checkbox',
               'Metered Plans' => 'textfield',
-              'Requires Contract' => 'checkbox',
+              //'Requires Contract' => 'checkbox',
               //'Contract Length (in yrs)' => 'textfield',
               'Customizable Plans' => 'checkbox',
               'Activation Fee' => 'textfield',
@@ -192,7 +212,7 @@ $provider_options_re = array(
     
           'Services & Pricing' => array(
               'Monthly Cost of Cheapest Service' => 'textfield',
-              'Requires Contract' => 'checkbox',
+              //'Requires Contract' => 'checkbox',
               'Month to Month Option' => 'checkbox',
               'Bundle Package' => 'checkbox',
               'Activation Fee' => 'checkbox',

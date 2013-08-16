@@ -914,6 +914,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       $additional_options_td_style = array(
         'Monthly Cost of Cheapest Service' => ' font-size: 14px; font-weight: bold;',
       );
+      $provider_options_titles_aliases = unserialize(PROVIDER_OPTIONS_TITLES_ALIASES);
           
       switch ($service_type) {
         case 'business':
@@ -981,11 +982,15 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             continue;
           }
           
-          $option_title = str_replace('Num ', '# ', $option_title);
+          
           
           if ($odd) {$odd = FALSE; $row_class = 'even';} else {$odd = TRUE; $row_class = 'odd';}
           
-          $out .= '<tr class="options ' . $row_class . '"><td class="title">' . $option_title . '</td>';
+          
+          // Refine a title to show.
+          $title_alias = isset($provider_options_titles_aliases[$option_title])? $provider_options_titles_aliases[$option_title] : $option_title;
+          $title_alias = str_replace('Num ', '# ', $title_alias);
+          $out .= '<tr class="options ' . $row_class . '"><td class="title">' . $title_alias . '</td>';
           
           foreach ($providers as $nid => $provider) {
             
