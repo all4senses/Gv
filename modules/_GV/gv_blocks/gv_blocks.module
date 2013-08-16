@@ -619,9 +619,14 @@ function gv_blocks_getSidebarShareStaticBlock() {
   dpm($node);
   
   $out = NULL;
-  $source = urlencode('GetVoIP.com');
-  $post_url = urlencode(url($_GET['q'], array('absolute' => TRUE)));
-  $post_title = urlencode($node->title);
+  //$source = urlencode('GetVoIP.com');
+  $source = 'GetVoIP.com';
+  //$post_url = urlencode(url($_GET['q'], array('absolute' => TRUE)));
+  $post_url = url($_GET['q'], array('absolute' => TRUE));
+  dpm(urlencode(url($_GET['q'], array('absolute' => TRUE))));
+  //$post_title = urlencode($node->title);
+  dpm(urlencode($node->title));
+  $post_title = $node->title;
   $summary = 'tesst summary';
   
   
