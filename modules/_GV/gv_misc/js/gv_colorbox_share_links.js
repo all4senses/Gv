@@ -3,8 +3,8 @@
   Drupal.behaviors.gv_colorbox_share_link = {
     attach: function (context, settings) {
        
-       //$(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
-       $(".share-static a").colorbox();
+       $(".share-static a").colorbox({iframe:true, innerWidth:425, innerHeight:344});
+       //$(".share-static a").colorbox();
        
        
        
