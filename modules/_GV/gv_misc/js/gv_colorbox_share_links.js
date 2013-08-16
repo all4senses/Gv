@@ -13,12 +13,12 @@
          
          
          //console.log('click');
-         console.log('href = ' + $(this).attr('href'));
+         //console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
 
           
           //window.open("'" + $(this).attr('href')+ "'", 'ShareThis','toolbar=0,status=0,width=626,height=436'); 
-          window.open($(this).attr('href'), 'ShareThis','toolbar=0,status=0,width=626,height=436'); 
+          window.open($(this).attr('href'), 'ShareThis','toolbar=0,status=0,width=626,height=436,top=100,left=100'); 
           return false;
          
          // GV track click share link.
