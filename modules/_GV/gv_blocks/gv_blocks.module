@@ -612,7 +612,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 /**
  * Block with sidebar share links for a current article.
  */
-function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
+function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL) {
   
   if (!$node) {
     $node = node_load(str_replace('node/', '', $_GET['q']));
@@ -646,7 +646,7 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
   
   //$out .= '<a ' . $link_open . $links['Facebook']['social_url'] . $links['Facebook']['link_close'] . '">Share</a>';
   
-  return '<div class="share-static">' . $out . '</div>';
+  return '<div class="share-static">' . $block_title . $out . '</div>';
 }
 
 

@@ -364,7 +364,7 @@
                       
                     <?php 
                       if ($user->uid) {
-                        echo gv_blocks_getSidebarShareStaticBlock($node);
+                        echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
                       }
                     ?>  
                     
