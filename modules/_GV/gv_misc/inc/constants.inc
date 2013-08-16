@@ -9,15 +9,21 @@
 define('TOPICS', 'topics');
 
 // Ratings titles.
+
+//define('INSTALL', 'Installation Process');
 define('INSTALL', 'Installation');
 define('FEATURES', 'Features');
 define('PRICE', 'Price');
 define('OVERALL', 'Overall Average Rating');
 
+//define('SOUND', 'Sound/Call Quality');
 define('SOUND', 'Call Quality');
+//define('CUSTOMER', 'Customer Experience');
 define('CUSTOMER', 'Support');
+//define('RELY', 'Service Reliability');
 define('RELY', 'Reliability');
 define('RECOMMEND', 'Would you recommend this VoIP provider?');
+
 
 // Phones only
 define('USE_EASE', 'Ease of Use');
@@ -25,8 +31,6 @@ define('VOICE', 'Voice Quality');
 define('DURABILITY', 'Durability');
 define('PERFORMANCE', 'Value Performance');
 define('RECOMMEND_PHONE', 'Would you recommend this VoIP phone?');
-
-
 
 
 
