@@ -573,15 +573,10 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     case 'sidebar_related_articles':
-      $block['subject'] = 'Share this Post:';
+      $block['subject'] = 'Related posts';
       $block['content'] = gv_blocks_getSidebarRelatedArticlesBlock();
       break;
     
-    $blocks['sidebar_related_articles'] = array(
-    'info' => 'Related posts',
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  
     
   }
 
@@ -626,6 +621,8 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  * Block with sidebar related posts for a current post.
  */
 function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $block_title = NULL) {
+  
+  return 'Rel...';
   
   
   if (!$node) {
