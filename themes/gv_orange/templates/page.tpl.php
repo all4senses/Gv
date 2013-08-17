@@ -21,8 +21,17 @@
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
           <?php
             dpm($_GET);
+            
             if ($user->uid) {
-              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_w.png" alt="GetVoIP" title="GetVoIP" />';
+              if ($_GET['q'] == 'node/1293') {
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_b.png" alt="GetVoIP" title="GetVoIP" />';
+              }
+              elseif ($_GET['q'] == 'node/1568') {
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_bo.png" alt="GetVoIP" title="GetVoIP" />';
+              }
+              else {
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_w.png" alt="GetVoIP" title="GetVoIP" />';
+              }
             }
             else {
               echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />';
@@ -41,10 +50,8 @@
       <div id="headline">We've helped <span>over 7,000 VoIP shoppers</span> find the perfect phone service.</div>
       
       <?php 
-          global $user;
 //        if ($user->uid == 1) {
           echo /*'<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012"></a>',*/ render($page['header']); 
-          
           
           echo gv_blocks_getBlockThemed(array('module' => 'om_maximenu', 'delta' => 'om-maximenu-1', 'no_subject' => TRUE, 'class' => 'block-om-maximenu', 'shadow' => FALSE), TRUE, '+31 day', ($user->uid ? '_logged' : NULL));
           
