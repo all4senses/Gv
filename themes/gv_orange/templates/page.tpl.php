@@ -20,7 +20,7 @@
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
           <?php
-            dpm($_GET);
+            //dpm($_GET);
             
             if ($user->uid) {
               if ($_GET['q'] == 'node/1293') {
