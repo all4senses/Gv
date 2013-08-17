@@ -7547,7 +7547,8 @@ function gv_misc_addRelatedArticlesToNode($node) {
     }
   
     $max_articles_on_front = 4;
-    $extra_data = unserialize(@$node->field_extra_data['und'][0]['value']);
+    $field_extra_data = !empty($node->field_extra_data['und'][0]['value']) ? $node->field_extra_data['und'][0]['value'] : @$node->field_extra_data;
+    $extra_data = unserialize($field_extra_data);
 
     dpm($extra_data);
 
