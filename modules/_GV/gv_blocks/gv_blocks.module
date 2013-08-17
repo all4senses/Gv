@@ -2826,10 +2826,10 @@ function gv_blocks_get_requestQuote_block_v5() {
  */
 function gv_blocks_get_requestQuote_block_v6() {
   
-//  global $user;
-//  if ($user->uid == 1) {
-//    return NULL;
-//  }
+  global $user;
+  if ($user->uid == 1) {
+    return NULL;
+  }
   
   //dpm($_SERVER);
   //dpm(arg());
@@ -3029,14 +3029,13 @@ function gv_blocks_get_requestQuote_block_v6() {
 }
 
 
-
 /**
  * Block Request a quote with a multistep form v7 - 1 step.
  */
 function gv_blocks_get_requestQuote_block_v7() {
   
-//  global $user;
-//  if ($user->uid != 1) 
+  global $user;
+  if ($user->uid != 1) 
     {
     return NULL;
   }
