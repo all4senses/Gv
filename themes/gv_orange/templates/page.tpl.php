@@ -20,8 +20,13 @@
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
           <?php
-            dpm($user);
-            echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />';
+            dpm($_GET);
+            if ($user->uid) {
+              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_w.png" alt="GetVoIP" title="GetVoIP" />';
+            }
+            else {
+              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />';
+            }
           ?>
         </a>
         <div class="descr">
