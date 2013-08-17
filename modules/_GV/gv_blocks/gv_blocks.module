@@ -622,7 +622,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $block_title = NULL) {
   
-  return 'Rel...';
+  
   
   
   if (!$node) {
@@ -631,6 +631,8 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     if (!$nid) {
       $nid = str_replace('node/', '', $_GET['q']);
     }
+    
+    return 'Rel... ' . $nid;
     
     $query = db_select('node', 'n')
       ->fields('n', array('nid', 'type'));
