@@ -632,7 +632,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
       $nid = str_replace('node/', '', $_GET['q']);
     }
     
-    return 'Rel... ' . $nid;
+    
     
     $query = db_select('node', 'n')
       ->fields('n', array('nid', 'type'));
@@ -648,7 +648,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   //gv_misc_addRelatedArticlesToNode($node);
   dpm($node);
   
-  return 'Related...';
+  return 'Rel... ' . $nid;
 }
 
 
