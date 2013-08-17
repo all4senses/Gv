@@ -3,6 +3,7 @@
   Drupal.behaviors.gv_requestquote_block_v5 = {
     attach: function (context, settings) {
       
+        $('#requestQuoteFormWrapper #Navigation #back').css('display', 'block');
         
         captcha_val = 'kjhjhkgsjdhgjk';
         
