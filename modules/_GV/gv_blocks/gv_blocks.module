@@ -280,6 +280,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['sidebar_related_articles'] = array(
+    'info' => 'Related articles for a current post',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   return $blocks;
 }
@@ -568,6 +572,15 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getSidebarShareStaticBlock();
       break;
     
+    case 'sidebar_related_articles':
+      $block['subject'] = 'Share this Post:';
+      $block['content'] = gv_blocks_getSidebarRelatedArticlesBlock();
+      break;
+    
+    $blocks['sidebar_related_articles'] = array(
+    'info' => 'Related posts',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
     
   }
@@ -606,6 +619,37 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+/**
+ * Block with sidebar related posts for a current post.
+ */
+function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $block_title = NULL) {
+  
+  
+  if (!$node) {
+    //$node = node_load(str_replace('node/', '', $_GET['q']));
+    
+    if (!$nid) {
+      $nid = str_replace('node/', '', $_GET['q']);
+    }
+    
+    $query = db_select('node', 'n')
+      ->fields('n', array('nid', 'type'));
+    $query->join('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
+    //$query->fields('ed', array('field_extra_data_value'));
+    $query->addField('ed', 'field_extra_data_value', 'field_extra_data');
+    
+    $query->condition('n.nid', $nid);
+
+    $node = $query->execute()->fetchObject();
+  }
+  
+  gv_misc_addRelatedArticlesToNode($node);
+  dpm($node);
+  
+  return 'Related...';
 }
 
 
