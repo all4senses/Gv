@@ -669,7 +669,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     $fragments = '';
     
     foreach ($node->related_articles as $related_nid => $related_article) {
-      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '">' . $related_article->title . '</a></li>';
+      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
       $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel"><div class="info">' . $related_article->teaser . '</div></div>';
     }
 //    $key += 1; 
