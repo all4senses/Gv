@@ -22,7 +22,7 @@
             drupal_goto($fixed_path);
           }
           elseif (strpos($_GET['destination'], 'apple-touch-icon') !== FALSE) {
-            watchdog('GV What is apple-touch-icon???? 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+            watchdog('GV What is apple-touch-icon???? 404', print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
           }
           
                   
