@@ -21,6 +21,11 @@
             watchdog('GV Redirect from ___.html 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
             drupal_goto($fixed_path);
           }
+          elseif (strpos($_GET['destination'], 'apple-touch-icon') !== FALSE) {
+            watchdog('GV What is apple-touch-icon???? 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+          }
+          
+                  
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
           hide($content['links']);
