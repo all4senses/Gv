@@ -14,6 +14,13 @@
             watchdog('GV Redirect ttp:// to http://... 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
             drupal_goto($fixed_path);
           }
+          elseif (strpos($_GET['destination'], '___.html') !== FALSE) {
+            $fixed_path = str_replace('http://getvoip.com/', '', $_GET['destination']);
+            $fixed_path = str_replace('___.html', '', $fixed_path);
+            unset($_GET['destination']);
+            watchdog('GV Redirect from ___.html 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+            drupal_goto($fixed_path);
+          }
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
           hide($content['links']);
