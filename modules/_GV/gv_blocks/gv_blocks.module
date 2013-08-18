@@ -663,29 +663,24 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     drupal_add_css($path_to_current_theme . 'gv_relatedArticlesRotator.css');
 
     
-    return 'Rel... ' . $nid;
+    //return 'Rel... ' . $nid;
     
     $ui_tabs_nav = '';
     $fragments = '';
-    $middles = element_children($content['field_preface_middle']);
-    foreach ($middles as $key) {
-
-      foreach($content['field_preface_middle'][$key]['entity']['field_collection_item'] as $value) {
-        $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">' . $value['field_preface_b_title'][0]['#markup'] . '</a></li>';
-        $fragments .= '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . $value['field_preface_b_body'][0]['#markup'] . '</div></div>';
-
-        break; // Here should be just one item, but with an undefined key.
-      }
-
+    
+    foreach ($node->related_articles as $related_nid => $related_article) {
+      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '">' . $related_article->title . '</a></li>';
+      $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel"><div class="info">' . $related_article->teaser . '</div></div>';
     }
-    $key += 1; 
-    $blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
-    $blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
-    return '<div id="featured"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';
+//    $key += 1; 
+//    $blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
+//    $blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
+//    return '<div id="related-block"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';
+    return '<div class="related-block" id="rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul>' . $fragments . '</div>';
   }
   
   
-  return NULL;
+  return 'Rel... ' . $nid;
 }
 
 
