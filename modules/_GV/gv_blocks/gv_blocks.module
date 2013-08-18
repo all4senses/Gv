@@ -656,11 +656,11 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     drupal_add_library('system', 'ui.widget');
     drupal_add_library('system', 'ui.tabs');
 
-    $path_to_custom_js = drupal_get_path('module', 'vr_misc') . '/js/';
-    drupal_add_js($path_to_custom_js . 'vr_homeBannerRotator.js');
+    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+    drupal_add_js($path_to_custom_js . 'gv_relatedArticlesRotator.js');
 
     $path_to_current_theme = drupal_get_path('theme',$GLOBALS['theme']) . '/css/';
-    drupal_add_css($path_to_current_theme . 'vr_bannerRotator.css');
+    drupal_add_css($path_to_current_theme . 'gv_relatedArticlesRotator.css');
 
     
     return 'Rel... ' . $nid;

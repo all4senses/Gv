@@ -1,6 +1,6 @@
 (function ($) {
 
-  Drupal.behaviors.vr_homeBannerRotator = {
+  Drupal.behaviors.gv_relatedArticlesRotator = {
     attach: function (context, settings) {
        
       //$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
