@@ -33,7 +33,7 @@
                 echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wg.png" alt="GetVoIP" title="GetVoIP" />';
               }
               elseif ($_GET['q'] == 'node/1576') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" />';
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" style="width: 220px; margin-top: 17px;"/>';
               }
               else {
                 echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_w.png" alt="GetVoIP" title="GetVoIP" />';
