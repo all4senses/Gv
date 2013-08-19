@@ -7297,7 +7297,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
 
 
-      dpm($all_tags_sets);
+      //dpm($all_tags_sets);
 
 
       /*
@@ -7390,16 +7390,13 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         }
       }
       
-      dpm($articles_by_index);
+      //dpm($articles_by_index);
       
       return $articles_by_index;
       
     } // End of if still > 6 after filtering.
   
-    dpm('xxx');
   } // End of if (count($arr) > 6) {
-  
-  dpm('yyy');
   
   
   
@@ -7608,7 +7605,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
       $extra_data['related_articles'] = array();
       
       $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($node->nid, $node->type);
-      dpm($articles_by_index);
+      //dpm($articles_by_index);
       
       if (!empty($articles_by_index)) {
 
@@ -7643,7 +7640,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
                 $last_pos = strrpos($result->teaser, ' ');
                 $result->teaser = substr_replace ($result->teaser, '... ', $last_pos);
               
-                dpm($related_article);
+                //dpm($related_article);
                 $similar_tags = '';
                 foreach ($related_article as $key => $value) {
                   if (strpos($key, 'term') !== FALSE) {
