@@ -7491,7 +7491,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
             unset($results[$key]);
           }
           elseif ($max_articles) {
-            $result->similar_tags_count = $index;
+            $result->similar_tags_count = $i;
             $articles_by_index[$i][$result->created] = $result;
             $articles[$result->created] = $result;
             --$max_articles;
