@@ -7597,6 +7597,8 @@ function gv_misc_addRelatedArticlesToNode($node) {
 
               if ($result = $query->execute()->fetchObject()) {
 
+                dpm($result);
+                
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
                 if(!empty($result->field_main_image_value)) {
                   $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
