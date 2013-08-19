@@ -7646,7 +7646,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
                 //dpm($related_article);
                 $similar_tags = '';
                 foreach ($related_article as $key => $value) {
-                  if (strpos($key, 'term_') !== FALSE) {
+                  if (strpos($key, 'term') !== FALSE) {
                     $similar_tags .= ($similar_tags ? ', ' : '') . $value;
                   }
                 }
