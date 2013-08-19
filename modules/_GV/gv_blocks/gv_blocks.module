@@ -670,7 +670,16 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     
     foreach ($node->related_articles as $related_nid => $related_article) {
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel"><div class="info">' . $related_article->teaser . '</div></div>';
+      $fragments .= 
+      '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel">
+        
+        <a href="' . url('node/' . $related_nid) . '">
+          <img src="' . $related_article->field_main_image_value['src_themed_related'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>
+        </a>' 
+        . l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
+
+        '<div class="teaser">' . $related_article->teaser . '</div>
+      </div>';
     }
 //    $key += 1; 
 //    $blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
