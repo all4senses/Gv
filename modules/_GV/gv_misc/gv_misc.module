@@ -7359,7 +7359,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
             dpm($results);
             foreach($results as $key => $result) {
               //if (!in_array($result, $articles)) {
-              if (isset($articles[$key])) {
+              if (isset($articles[$key]) && !isset($all_nids_sets[1][$key])) {
                 unset($results[$key]);
               }
               else {
