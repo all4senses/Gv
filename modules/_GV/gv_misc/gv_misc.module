@@ -7235,8 +7235,14 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       //$query->join('taxonomy_index', 'ti', 'ti.nid = n.nid AND ti.tid = ' . $tag);
       //$query->fields('ti', array('tid'));
       
+      //$query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti', 'ti.entity_id = n.nid AND ti.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
+      //$query->fields('ti', array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+      
       $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti', 'ti.entity_id = n.nid AND ti.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
-      $query->fields('ti', array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+      $query->addField('ti', 'field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid', 'tid');
+
+      $query->join('taxonomy_term_data', 'td', 'td.tid = ti.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid');
+      $query->addField('td', 'name', 'term');
       
       $query->condition('n.nid', $article_nid, '!=');
       $query->orderBy('n.created', 'DESC');
@@ -7249,6 +7255,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
       else {
         foreach($results as $key => $value) {
+          $value->similar_tags_count = 1;
           $all_nids_sets[1][$value->created] = $value;
         }
       }
