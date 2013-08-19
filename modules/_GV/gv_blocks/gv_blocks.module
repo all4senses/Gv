@@ -677,8 +677,9 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
           <img src="' . $related_article->field_main_image_value['src_themed_related'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>
         </a>' 
         . l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
-        '<div class="submitted">' . date('D, F d, Y', $related_article->created) . '</div
-        <div class="teaser">' . $related_article->teaser . '</div>
+              
+        '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div
+        <div class="teaser">' . (!isset($related_article->teaser) ? '' : $related_article->teaser) . '</div>
           
       </div>';
     }
