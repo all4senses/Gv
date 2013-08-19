@@ -7452,6 +7452,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         
         $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti_' . $key, 'ti_' . $key . '.entity_id = n.nid AND ti_' . $key . '.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $index_tag);
         $query->fields('ti_' . $key, array('field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid'));
+        
+        $query->join('taxonomy_term_data', 'td_' . $key, 'td_' . $key . '.tid = ti_' . $key . '.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid');
+        $query->addField('td_' . $key, 'name', 'term_' . $key);
       }
       $query->condition('n.nid', $article_nid, '!=');
       if (!empty($articles)) {
