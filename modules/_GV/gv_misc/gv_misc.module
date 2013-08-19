@@ -7352,6 +7352,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           //$results = $query->execute()->fetchAllAssoc('nid');
           $results = $query->execute()->fetchAllAssoc('created');
           
+          dpm('index = ' . $index);
+          dpm($results);
+          
           if (!empty($results)) {
             foreach($results as $key => $result) {
               //if (!in_array($result, $articles)) {
