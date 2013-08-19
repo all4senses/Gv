@@ -7363,6 +7363,10 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
                 unset($results[$key]);
               }
               else {
+                if (isset($all_nids_sets[1][$key])) {
+                  // Clear this tag from 1 tags array.
+                  unset($all_nids_sets[1][$key]); 
+                }
                 $result->similar_tags_count = $index;
                 $all_nids_sets[$index][$result->created] = $result;
                 $articles[$result->created] = $result;
