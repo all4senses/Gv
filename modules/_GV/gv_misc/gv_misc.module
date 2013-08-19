@@ -7297,7 +7297,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       }
 
 
-      //dpm($all_tags_sets);
+      dpm($all_tags_sets);
 
 
       /*
@@ -7343,7 +7343,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
             $query->join('field_data_field_tags_' . $map_nodeType_to_tagsTable[$node_type], 'ti_' . $key2, 'ti_' . $key2 . '.entity_id = n.nid AND ti_' . $key2 . '.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid = ' . $tag);
             $query->addField('ti_' . $key2, 'field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid', 'tid_' . $key2);
 
-            $query->join('taxonomy_term_data', 'td_' . $key2, 'td_' . $key2 . '.tid = ti_' . $key2 . '.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid');
+            $query->leftJoin('taxonomy_term_data', 'td_' . $key2, 'td_' . $key2 . '.tid = ti_' . $key2 . '.field_tags_'. $map_nodeType_to_tagsTable[$node_type] . '_tid');
             $query->addField('td_' . $key2, 'name', 'term_' . $key2);
 
 
@@ -7351,7 +7351,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           $query->condition('n.nid', $article_nid, '!=');
           //$results = $query->execute()->fetchAllAssoc('nid');
           $results = $query->execute()->fetchAllAssoc('created');
-
+          
           if (!empty($results)) {
             foreach($results as $key => $result) {
               //if (!in_array($result, $articles)) {
@@ -7359,9 +7359,9 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
                 unset($results[$key]);
               }
               else {
-                  $result->similar_tags_count = $index;
-                  $all_nids_sets[$index][$result->created] = $result;
-                  $articles[$result->created] = $result;
+                $result->similar_tags_count = $index;
+                $all_nids_sets[$index][$result->created] = $result;
+                $articles[$result->created] = $result;
               }
               //}
             }
@@ -7375,7 +7375,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         krsort($all_nids_sets[$key]);
       }
     
-      //dpm($all_nids_sets);
+      dpm($all_nids_sets);
       
       // Build $articles_by_index and Leave nly 10 elements.
       $max_index = count($all_nids_sets);
