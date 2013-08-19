@@ -7490,8 +7490,8 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 //        }
         
         foreach ($results as $key => $result) {
-          if (in_array($result, $articles)) {
-          //if (isset($articles[$key])) {
+          //if (in_array($result, $articles)) {
+          if (isset($articles[$key])) {
             unset($results[$key]);
           }
           elseif ($max_articles) {
