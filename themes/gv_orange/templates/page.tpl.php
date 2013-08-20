@@ -187,8 +187,12 @@
   </div> <!-- <div id="bshadow"> -->
 
 
+  <?php
+    $hide_follow_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
+  ?>
+    
   
-  <footer id="footer" role="contentinfo" class="clearfix">
+  <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_links ? ' no-follow-links' : '' ?>">
    <div id="footer-inside">
 
    
@@ -198,7 +202,7 @@
       
         //dpm(array_keys($page));
         dpm($node);
-        if ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) {
+        if (!$hide_follow_links) {
           echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
         }
         echo render($page['footer']);
