@@ -4015,11 +4015,19 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     $gv_providers_sprites = array();
   }
   
-  $image_style_name = 'logo_provider_chart_main';
+  
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
+  $image_style_name = 'logo_provider_chart_main';
+  
   foreach ($providers_logos_sprites as $providers_logos_sprite_name => $providers_logos_sprite) {
+    
+    // Decrease width of images for vertical charts pages.
+    if ($providers_logos_sprite_name == 'top_bu_providers') {
+      $image_style_name = 'logo_provider_vertical_chart';
+      dpm('new style used');
+    }
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
       
