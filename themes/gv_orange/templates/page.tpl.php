@@ -188,30 +188,23 @@
 
 
   <?php
-    $hide_follow_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
+    $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
   ?>
     
   
-  <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_links ? ' no-follow-links' : '' ?>">
+  <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
    <div id="footer-inside">
 
-   
-    
     <?php
-      
-      
-        //dpm(array_keys($page));
-        dpm($node);
-        if (!$hide_follow_links) {
+        if (!$hide_follow_us_links) {
           echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
         }
         echo render($page['footer']);
-        
-        ?>
-     
-    
-            <div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
-<div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
+    ?>
+
+
+    <div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
+    <div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
 </div>
 
     
