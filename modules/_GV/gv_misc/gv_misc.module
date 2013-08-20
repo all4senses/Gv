@@ -3985,15 +3985,15 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
 function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   $providers_logos_sprites = array(
-    'home_top_providers' => array('providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
-    'top_bu_providers' => array('providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
-    'top_re_providers' => array('providers_views_displays' => array('block_p_re_page'), 'listing_pos_fields' => array('field_p_erating_residential')),
-    'top_pbx_providers' => array('providers_views_displays' => array('block_p_pbx_page', 'block_p_pbx_page_cmp'), 'listing_pos_fields' => array('field_p_erating_pbx')),
-    'top_sip_providers' => array('providers_views_displays' => array('block_p_sip_page'), 'listing_pos_fields' => array('field_p_erating_sip')),
-    'top_ifa_providers' => array('providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
-    'top_ca_providers' => array('providers_views_displays' => array('block_p_bu_ca_page', 'block_p_bu_ca_page_cmp', 'block_p_re_ca_page'), 'listing_pos_fields' => array('field_p_erating_bu_ca', 'field_p_erating_re_ca')),
+    'home_top_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
+    'top_bu_providers' => array('image_style' => 'logo_provider_vertical_chart', 'providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
+    'top_re_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_re_page'), 'listing_pos_fields' => array('field_p_erating_residential')),
+    'top_pbx_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_pbx_page', 'block_p_pbx_page_cmp'), 'listing_pos_fields' => array('field_p_erating_pbx')),
+    'top_sip_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_sip_page'), 'listing_pos_fields' => array('field_p_erating_sip')),
+    'top_ifa_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
+    'top_ca_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_bu_ca_page', 'block_p_bu_ca_page_cmp', 'block_p_re_ca_page'), 'listing_pos_fields' => array('field_p_erating_bu_ca', 'field_p_erating_re_ca')),
       
-    'all_reviews_providers' => array('providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
+    'all_reviews_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
   );
   
   
@@ -4019,15 +4019,18 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
-  $image_style_name = 'logo_provider_chart_main';
+  //$image_style_name = 'logo_provider_chart_main';
   
   foreach ($providers_logos_sprites as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     // Decrease width of images for vertical charts pages.
-    if ($providers_logos_sprite_name == 'top_bu_providers') {
-      $image_style_name = 'logo_provider_vertical_chart';
-      dpm('new style used');
-    }
+//    if ($providers_logos_sprite_name == 'top_bu_providers') {
+//      $image_style_name = 'logo_provider_vertical_chart';
+//      dpm('new style used');
+//    }
+    
+    $image_style_name = $providers_logos_sprite['image_style'];
+    dpm($image_style_name);
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
       
