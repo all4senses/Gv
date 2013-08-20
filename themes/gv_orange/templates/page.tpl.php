@@ -196,10 +196,11 @@
     <?php
       
       
-        dpm(array_keys($page));
+        //dpm(array_keys($page));
         dpm($node);
-        echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
-        
+        if ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) {
+          echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
+        }
         echo render($page['footer']);
         
         ?>
