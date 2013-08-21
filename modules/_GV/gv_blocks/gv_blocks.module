@@ -714,7 +714,7 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL)
 
   $link_open = 'href="javascript:void(window.open(' . "'";
   $links = array(
-      'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title)),
+      'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title . ' via @getvoipreviews')),
       'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
       //array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('p[title]' => $post_title, 'p[url]' => $post_url, 'p[summary]' => $summary, 'p[images]' => $image, )),
       'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
