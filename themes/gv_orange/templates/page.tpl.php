@@ -46,6 +46,9 @@
               if ($_GET['q'] == 'node/1293') {
                 echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_nocut_wg.png" alt="GetVoIP" title="GetVoIP" />';
               }
+              elseif ($_GET['q'] == 'node/1568') {
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_nocut_wgs2.png" alt="GetVoIP" title="GetVoIP" />';
+              }
               else 
               {
                 //echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />';
