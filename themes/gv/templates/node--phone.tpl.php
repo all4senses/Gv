@@ -143,7 +143,7 @@
 
               
               
-              
+              <?php /*
               <div class="share">
 
                       <div class="others">
@@ -181,6 +181,8 @@
                       </div> <!-- main share buttons -->
 
               </div>
+              
+              */ ?>
               
              </div>
               
