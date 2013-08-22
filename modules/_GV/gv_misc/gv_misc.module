@@ -3209,7 +3209,7 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
 /**
  * Loads jquery plugin Colorbox to open sharing links in popup windows.
  */
-function gv_misc_loadColorboxForShareLinks() {
+function gv_misc_loadPopupForShareLinks() {
 
   drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
   //drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
@@ -3217,7 +3217,7 @@ function gv_misc_loadColorboxForShareLinks() {
   drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_colorbox_share_links.js');
+  drupal_add_js($path_to_custom_js . 'gv_popup_share_links.js');
 }
 
 

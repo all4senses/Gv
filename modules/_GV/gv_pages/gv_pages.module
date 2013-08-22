@@ -5258,8 +5258,8 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       
-      // Add ColorBox popup functionality for sharing links.
-      gv_misc_loadColorboxForShareLinks();
+      // Add ColorBox OR just JS popup functionality for sharing links.
+      gv_misc_loadPopupForShareLinks();
       
       
       
@@ -5718,6 +5718,9 @@ function gv_pages_node_view($node, $view_mode) {
       $node->extra_data = $extra_data;
           
       if ($view_mode == 'full') {
+      
+          // Add ColorBox OR just JS popup functionality for sharing links.
+          gv_misc_loadPopupForShareLinks();
       
           // Set pros and cons.
           //$node->pros_and_cons = $extra_data['pros_and_cons'];
