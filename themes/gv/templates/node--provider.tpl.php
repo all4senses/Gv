@@ -188,10 +188,20 @@
                 
                 <ul>
                   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
-                    <li><a href="#tabs-0"><?php echo t('!p Reviews', array('!p' => !empty($provider_name) ? $provider_name : 'Provider' )); ?></a></li>
+                    <li><a href="#tabs-0">
+                      <?php 
+                        //echo t('!p Reviews', array('!p' => !empty($provider_name) ? $provider_name : 'Provider' ));
+                        echo 'Customer Reviews';
+                      ?>
+                    </a></li>
                   <?php endif; ?>
                     
-                  <li><a href="#tabs-1"><?php echo t('!p Rundown', array('!p' => !empty($provider_name ) ? $provider_name : ' Provider' )); ?></a></li>
+                  <li><a href="#tabs-1">
+                    <?php 
+                      //echo t('!p Rundown', array('!p' => !empty($provider_name ) ? $provider_name : ' Provider' ));
+                      echo 'Provider Overview';
+                    ?>
+                  </a></li>
                   
                   <?php 
                   
@@ -199,14 +209,16 @@
                   $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
                   
                   if (!empty($provider_options_bu) && !empty($provider_options_bu['enabled'])) {
-                    echo '<li><a href="#tabs-2">Business Service Details</a></li>';
+                    //echo '<li><a href="#tabs-2">Business Service Details</a></li>';
+                    echo '<li><a href="#tabs-2">Available Services</a></li>';
                   }
                   
                   $provider_options_re = isset($node->p_data['provider_options_re']) ? $node->p_data['provider_options_re'] : NULL;
                   
                   //if (!empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
                   if (!empty($provider_options_re) && !empty($provider_options_re['enabled'])) {
-                    echo '<li><a href="#tabs-3">Residential Service Details</a></li>';
+                    //echo '<li><a href="#tabs-3">Residential Service Details</a></li>';
+                    echo '<li><a href="#tabs-3">Available Services</a></li>';
                   }
                   
                   ?>
