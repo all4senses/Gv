@@ -4325,6 +4325,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
         foreach ($p_data[$map_options_keys_to_provider_types_key[$service_type_short]] as $section_key => $section_options) {
           dpm($section_options);
           if (isset($section_options[$option_name_to_save])) {
+            dpm($option_name_to_save . ' found in ' . $section_key);
             $p_data_quick[$service_type_short]['options'][$option_name_to_save] = $section_options[$option_name_to_save];
           }
         }
