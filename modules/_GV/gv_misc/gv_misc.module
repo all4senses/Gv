@@ -6392,7 +6392,15 @@ function gv_misc_getProviderQuickData($target, $data) {
         $out = '$'. $out;
       }
       return $out;
+    
       
+    // One of a provider options.
+    case 'options':
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      $out = isset($all_data_quick[$data['data']->nid][$data['service_type']]['options'][$data['option_name']]) ? $all_data_quick[$data['data']->nid][$data['service_type']]['options'][$data['option_name']] : '';
+      
+      return $out;
     
       
     // Deprecated.
