@@ -88,8 +88,10 @@ $provider_options_titles_aliases = array(
 
 define('PROVIDER_OPTIONS_TITLES_ALIASES', serialize($provider_options_titles_aliases));
 
-unserialize(PROVIDER_OPTIONS_TITLES_ALIASES);
-
+$provider_options_to_quick_save = array(
+  'bu' => array('Number Porting', 'Toll Free #s', 'Money Back Guarantee'),
+);
+define('PROVIDER_OPTIONS_TO_QUICK_SAVE', serialize($provider_options_to_quick_save));
 
 $provider_options_bu = array(
           'Provider Info' => array(

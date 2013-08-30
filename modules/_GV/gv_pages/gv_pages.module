@@ -4156,30 +4156,16 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     }
   }
 
-//      if (empty($last_erating_fields_different)) {
-//        dpm('No changed listing fields this time!');
-//      }
-//      else {
-//        dpm($last_erating_fields_different);
-//      }
-
+  /*
+      if (empty($last_erating_fields_different)) {
+        dpm('No changed listing fields this time!');
+      }
+      else {
+        dpm($last_erating_fields_different);
+      }
+  */
   
   $p_data['last_erating_fields_different'] = $last_erating_fields_different;
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -4190,29 +4176,31 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     $p_data['logo']['i_logo_title'] = $form_state['values']['field_p_logo']['und'][0]['title'];
   }
   
-//  //$rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
-//  $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
-//  
-//  // Check if all editor's votes (ratings) fields are set.
-//  foreach ($rating_options as $rating_option => $rating_option_title) {
-//    if ($form_state['values']['rating_' . $rating_option] === FALSE) {
-//      form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
-//    }
-//  }
-//  
-//  // Prepare editor votes (ratings) to save in the extra field.
-//  $votes = array();
-//  $overall_count = 0;
-//  $overall_summ = 0;
-//  foreach ($rating_options as $vote_key => $vote_title) {
-//    if(isset($form_state['values']['rating_' . $vote_key])) {
-//      $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
-//      $overall_count++;
-//      $overall_summ += $form_state['values']['rating_' . $vote_key];
-//    }
-//  }
-//  // Calculate the overall average editor's rating.
-//  $editor_rating_overall = $overall_summ / $overall_count;
+  /*
+  //$rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
+  $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
+  
+  // Check if all editor's votes (ratings) fields are set.
+  foreach ($rating_options as $rating_option => $rating_option_title) {
+    if ($form_state['values']['rating_' . $rating_option] === FALSE) {
+      form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
+    }
+  }
+  
+  // Prepare editor votes (ratings) to save in the extra field.
+  $votes = array();
+  $overall_count = 0;
+  $overall_summ = 0;
+  foreach ($rating_options as $vote_key => $vote_title) {
+    if(isset($form_state['values']['rating_' . $vote_key])) {
+      $votes[$vote_key] = $form_state['values']['rating_' . $vote_key];
+      $overall_count++;
+      $overall_summ += $form_state['values']['rating_' . $vote_key];
+    }
+  }
+  // Calculate the overall average editor's rating.
+  $editor_rating_overall = $overall_summ / $overall_count;
+  */
   
   $p_data['ereview'] = array(
     //'editor_rating_overall' => $editor_rating_overall, 
@@ -4263,22 +4251,24 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   if ($logo) {
     
     $p_data['share_src_themed'] = gv_misc_getShareSrcThemed_fromUri($logo->uri);
-//    
-//    // Define share pic.
-//    $image_size = getimagesize(ltrim(gv_misc_getPathFromStreamUri($logo->uri), '/'));
-//    // Image for sharing.
-//    if ($image_size[0] / $image_size[1] > 1) {
-//      // Too wide. will not be cutted.
-//      $p_data['share_src_themed'] = image_style_url('share_wide', $logo->uri);
-//    }
-//    elseif ($image_size[1] / $image_size[0] < 1) {
-//      // Too tall. will not be cutted.
-//      $p_data['share_src_themed'] = image_style_url('share_tall', $logo->uri);
-//    }
-//    else {
-//      //Normal image, will not be cutted.
-//      $p_data['share_src_themed'] = image_style_url('share', $logo->uri);
-//    }
+    /*
+    
+    // Define share pic.
+    $image_size = getimagesize(ltrim(gv_misc_getPathFromStreamUri($logo->uri), '/'));
+    // Image for sharing.
+    if ($image_size[0] / $image_size[1] > 1) {
+      // Too wide. will not be cutted.
+      $p_data['share_src_themed'] = image_style_url('share_wide', $logo->uri);
+    }
+    elseif ($image_size[1] / $image_size[0] < 1) {
+      // Too tall. will not be cutted.
+      $p_data['share_src_themed'] = image_style_url('share_tall', $logo->uri);
+    }
+    else {
+      //Normal image, will not be cutted.
+      $p_data['share_src_themed'] = image_style_url('share', $logo->uri);
+    }
+    */
   }
   
  
@@ -4315,7 +4305,27 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $p_data_quick['the_bottom_line'] = $p_data['ereview']['pros_and_cons']['The bottom line'];
   
   
+  //$p_data['provider_options_re']
+  $provider_options_to_quick_save = unserialize(PROVIDER_OPTIONS_TO_QUICK_SAVE);
+  $map_options_keys_to_provider_types_key = array(
+      'bu' => 'provider_options_bu',
+      're' => 'provider_options_re',
+  );
+  
   foreach ($p_data['s'] as $service_type_short => $service) {
+    
+    // Save some options to quick save.
+    if (isset($p_data[$map_options_keys_to_provider_types_key[$service_type_short]]) && isset($provider_options_to_quick_save[$service_type_short]) ) {
+      foreach ($provider_options_to_quick_save[$service_type_short] as $option_name_to_save) {
+        // try to find a specific option among several subarrays of the options array.
+        foreach ($p_data[$map_options_keys_to_provider_types_key[$service_type_short]] as $section_key => $section_options) {
+          if (isset($section_options[$option_name_to_save])) {
+            $p_data_quick[$service_type_short]['options'][$option_name_to_save] = $section_options[$option_name_to_save];
+          }
+        }
+      }
+    }
+    
     
     // Save collected Features and FEES data from temporary fields to a excessive field for using it from views
     $p_data_quick[$service_type_short]['plan'] = isset($service['pti']) ? $service['pti'] : '';
