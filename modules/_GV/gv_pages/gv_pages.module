@@ -4315,8 +4315,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   foreach ($p_data['s'] as $service_type_short => $service) {
     
     // Save some options to quick save.
-    if (isset($p_data[$map_options_keys_to_provider_types_key[$service_type_short]]) && isset($provider_options_to_quick_save[$service_type_short]) ) {
-      foreach ($provider_options_to_quick_save[$service_type_short] as $option_name_to_save) {
+    if (isset($map_options_keys_to_provider_types_key[$service_type_short]) && isset($p_data[$map_options_keys_to_provider_types_key[$service_type_short]]) && isset($provider_options_to_quick_save[$service_type_short]) ) {
+      foreach ($provider_options_to_quick_save[$map_options_keys_to_provider_types_key[$service_type_short]] as $option_name_to_save) {
         // try to find a specific option among several subarrays of the options array.
         foreach ($p_data[$map_options_keys_to_provider_types_key[$service_type_short]] as $section_key => $section_options) {
           if (isset($section_options[$option_name_to_save])) {
