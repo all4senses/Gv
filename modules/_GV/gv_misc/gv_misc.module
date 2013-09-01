@@ -6415,10 +6415,10 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
       else {
         // Find and add requested options to a provider's quick data field.
-        if ($data['data']->nid == 12) {
+        ////if ($data['data']->nid == 12) {
           //dpm($all_data_quick[$data['data']->nid]);
-          gv_misc_addProviderSelectedOptionsToItsQuickDataField($data['data']->nid);
-        }
+          $out = gv_misc_addProviderSelectedOptionsToItsQuickDataField($data['data']->nid, $data['option_name']);
+        ////}
         
       }
       
@@ -6468,7 +6468,7 @@ function gv_misc_getProviderQuickData($target, $data) {
 /**
  * Add a provider selected options to its quick data field.
  */
-function gv_misc_addProviderSelectedOptionsToItsQuickDataField($nid) {
+function gv_misc_addProviderSelectedOptionsToItsQuickDataField($nid, $option_to_return_name = NULL) {
 
   $query = db_select('field_data_field_p_data', 'pd');
   $query->fields('pd', array('field_p_data_value'));
@@ -6499,6 +6499,9 @@ function gv_misc_addProviderSelectedOptionsToItsQuickDataField($nid) {
         foreach ($p_data[$map_options_keys_to_provider_types_key[$service_type_short]] as $section_key => $section_options) {
           if (isset($section_options[$option_name_to_save])) {
             $p_data_quick[$service_type_short]['options'][$option_name_to_save] = $section_options[$option_name_to_save];
+            if ($option_name_to_save == $option_to_return_name) {
+              $option_to_return_value = $section_options[$option_name_to_save];
+            }
           }
         }
       }
@@ -6508,6 +6511,13 @@ function gv_misc_addProviderSelectedOptionsToItsQuickDataField($nid) {
   dpm($p_data_quick);
   // gv_misc_fieldSave($field_name, $entity_id, $data, $entity_type = 'node', $bundle = NULL) {
   gv_misc_fieldSave('p_data_quick', $nid, serialize($p_data_quick));
+  
+  // Reset ProvidersDataQuick in Session/global variable.
+  gv_misc_getProvidersDataQuick(NULL, TRUE, TRUE);
+  
+  if (isset($option_to_return_value)) {
+   return $option_to_return_value;
+  }
 }
 
 
