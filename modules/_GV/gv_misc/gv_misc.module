@@ -6476,7 +6476,8 @@ function gv_misc_addProviderSelectedOptionsToItsQuickDataField($nid) {
   $query->fields('pdq', array('field_p_data_quick_value'));
   $query->condition('pd.entity_id', $nid);
   $p_data = $query->execute()->fetchObject();
-  //unserialize(
+  $p_data->field_p_data_value = unserialize($p_data->field_p_data_value);
+  $p_data->field_p_data_quick_value = unserialize($p_data->field_p_data_quick_value)
   dpm($p_data);
 }
 
