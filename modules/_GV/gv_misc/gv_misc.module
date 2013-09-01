@@ -4107,6 +4107,9 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
     $current_y = 0;
     
+    // Reset the sprite data to avoid remaining the old data. 
+    $gv_providers_sprites[$providers_logos_sprite_name] = array();
+    
     foreach ($providers_logos_sprite as $nid => $provider) {
       if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) {
         //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
@@ -5972,7 +5975,7 @@ function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick =
 
   $gv_providers_sprites = variable_get('gv_providers_sprites');
   if (isset($gv_providers_sprites[$sprite_name]['data'][$nid])) {
-    dpm($gv_providers_sprites[$sprite_name]);
+    dpm($gv_providers_sprites);
     $out_sprite_path = 'sites/default/files/p/';
     if (!$all_data_quick) {
       $all_data_quick = gv_misc_getProvidersDataQuick();
