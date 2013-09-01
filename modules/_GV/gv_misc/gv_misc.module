@@ -5975,7 +5975,7 @@ function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick =
 
   $gv_providers_sprites = variable_get('gv_providers_sprites');
   if (isset($gv_providers_sprites[$sprite_name]['data'][$nid])) {
-    dpm($gv_providers_sprites);
+    //dpm($gv_providers_sprites);
     $out_sprite_path = 'sites/default/files/p/';
     if (!$all_data_quick) {
       $all_data_quick = gv_misc_getProvidersDataQuick();
