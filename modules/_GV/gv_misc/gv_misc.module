@@ -4317,7 +4317,7 @@ function gv_misc_getIframe_TopProvidersBu() {
     . '<SCRIPT>
         console.log("hi!");
         /*parent.setGvIframeSize(document.body.scrollHeight);*/
-        window.parent.postMessage("777", "*");
+        window.parent.postMessage("" + document.body.scrollHeight + "", "*");
         /*alert("h: " + document.body.scrollHeight);*/
         console.log("h: " + document.body.scrollHeight)
        </SCRIPT>';
