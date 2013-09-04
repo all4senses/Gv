@@ -316,11 +316,11 @@
       <?php  if ($page): ?>
     
         <footer>
-          <div class="share"><div class="share-static">
+          <div class="share">
               <?php 
                 echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
               ?> 
-          </div></div>
+          </div>
           
         </footer>
     
