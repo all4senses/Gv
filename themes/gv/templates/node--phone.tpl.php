@@ -272,9 +272,6 @@
                 
               </div> <?php // End of <div class="data tabs"> ?>
               
-              <?php 
-                echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
-              ?> 
           
               <?php echo render($content['metatags']); ?>
           
@@ -316,12 +313,18 @@
 
         
         
-      <?php /* if ($page): ?>
+      <?php  if ($page): ?>
     
         <footer>
+          <div class="share"><div class="share-static">
+              <?php 
+                echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
+              ?> 
+          </div></div>
+          
         </footer>
     
-      <?php endif; */ ?>
+      <?php endif;  ?>
         
       
 
