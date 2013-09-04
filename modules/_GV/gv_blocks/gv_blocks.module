@@ -682,7 +682,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
       $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
               
         '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div>
-        <div class="teaser">' . (!isset($related_article->teaser) ? '' : $related_article->teaser) . '... ' . l('Read more', 'node/' . $related_nid) . '</div>
+        <div class="teaser">' . (!isset($related_article->teaser) ? '' : $related_article->teaser) . ' ' . l('Read more', 'node/' . $related_nid) . '</div>
           
       </div>';
     }
