@@ -272,6 +272,10 @@
                 
               </div> <?php // End of <div class="data tabs"> ?>
               
+              <?php 
+                echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
+              ?> 
+          
               <?php echo render($content['metatags']); ?>
           
           
