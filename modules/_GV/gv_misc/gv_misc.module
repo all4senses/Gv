@@ -4058,7 +4058,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
 //    }
     
     $image_style_name = $providers_logos_sprite['image_style'];
-    dpm($providers_logos_sprite_name . ' => ' . $image_style_name);
+    //dpm($providers_logos_sprite_name . ' => ' . $image_style_name);
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
       
@@ -7802,6 +7802,11 @@ function gv_misc_addRelatedArticlesToNode($node) {
                   
                   dpm($result->field_main_image_value['src_themed_related_sideblock']);
                   dpm(getimagesize($result->field_main_image_value['src_themed_related_sideblock']));
+                  
+                  // Assure that the imagecache file is created already, or recreate it.
+                  gv_misc_createCachedImageIfNotExists($result->field_main_image_value['src_themed_related_sideblock']);
+                  
+                  $sizes = getimagesize($result->field_main_image_value['src_themed_related_sideblock']);
                 }
                 
                 $result->teaser = drupal_substr(strip_tags($result->teaser), 0, 300);

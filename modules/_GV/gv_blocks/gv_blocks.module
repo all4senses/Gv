@@ -674,7 +674,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
       $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel">';
         
       if (!empty($related_article->field_main_image_value['src_themed_related_sideblock'])) {
-        $fragments .='<a href="' . url('node/' . $related_nid) . '">'
+        $fragments .='<a class="thumb" href="' . url('node/' . $related_nid) . '">'
             //. '<img src="' . $related_article->field_main_image_value['src_themed_related'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>'
             . ($related_article->field_main_image_value['src_themed_related_sideblock'] ? '<img src="' . $related_article->field_main_image_value['src_themed_related_sideblock'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>' : '')
         . '</a>';
