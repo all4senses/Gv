@@ -7803,24 +7803,24 @@ function gv_misc_addRelatedArticlesToNode($node) {
                   $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
                   $result->field_main_image_value['src_themed_related_sideblock'] = image_style_url('related_article_thumb_sideblock', $result->field_main_image_value['uri']);
                   
-                  dpm($result->field_main_image_value['src_themed_related_sideblock']);
-                  dpm(getimagesize($result->field_main_image_value['src_themed_related_sideblock']));
+                  //dpm($result->field_main_image_value['src_themed_related_sideblock']);
+                  //dpm(getimagesize($result->field_main_image_value['src_themed_related_sideblock']));
                   
                   // Assure that the imagecache file is created already, or recreate it.
                   gv_misc_createCachedImageIfNotExists($result->field_main_image_value['src_themed_related_sideblock']);
                   
                   $sizes = getimagesize($result->field_main_image_value['src_themed_related_sideblock']);
                   
-                  if ($sizes[1] >= 212) {
-                    $teaser_lenght = 390; // with pic 215px and 2 lines of a title.
-                  }
-                  else {
-                    //$teaser_lenght = 300 + (215 - $sizes[1])
-                    $teaser_lenght = 500;
-                  }
+//                  if ($sizes[1] >= 212) {
+//                    $teaser_lenght = 390; // with pic 215px and 2 lines of a title.
+//                  }
+//                  else {
+//                    //$teaser_lenght = 300 + (215 - $sizes[1])
+//                    $teaser_lenght = 500;
+//                  }
                 }
                 
-                dpm('$teaser_lenght = ' . $teaser_lenght);
+                //dpm('$teaser_lenght = ' . $teaser_lenght);
                 
                 $result->teaser = drupal_substr(strip_tags($result->teaser), 0, $teaser_lenght);
                 // Remove the last broken word.
