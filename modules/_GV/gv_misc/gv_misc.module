@@ -7793,7 +7793,8 @@ function gv_misc_addRelatedArticlesToNode($node) {
               
               $query->condition('n.nid', $related_article->nid);
 
-              $teaser_lenght = 780;
+              //$teaser_lenght = 780; // without pic
+              $teaser_lenght = 900;
               
               if ($result = $query->execute()->fetchObject()) {
                 
@@ -7811,7 +7812,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
                   $sizes = getimagesize($result->field_main_image_value['src_themed_related_sideblock']);
                   
                   if ($sizes[1] >= 212) {
-                    $teaser_lenght = 390;
+                    $teaser_lenght = 390; // with pic 215px and 2 lines of a title.
                   }
                   else {
                     //$teaser_lenght = 300 + (215 - $sizes[1])
