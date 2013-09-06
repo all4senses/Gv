@@ -7760,7 +7760,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
       {
       $cache_time = (3600*24*3);
     }
-    
+    dpm('now time = ' . time());
     //if (!isset($extra_data['related_articles']) || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > (180) ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
     if (!isset($extra_data['related_articles']) || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
     {
