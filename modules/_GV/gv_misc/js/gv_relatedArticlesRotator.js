@@ -19,7 +19,8 @@
           }  
       );  
         
-      $('.sidebar .block .content #rotator a.title').click(function(){
+      $('.sidebar .block .content #rotator a.title').hover(function(){
+        console.log(this.css('height'));
         original_title_height[this.parentElement.id] = this.css('height');
         //jQuery('.sidebar .block .content #rotator a.title').css('height');
         //console.log(original_height);
