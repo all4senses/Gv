@@ -26,9 +26,11 @@
           function() {  
             $(this)[0].original_title_height = $(this).css('height');
             $(this).css('height', 'inherit');
+            console.log( $(this).css('height'));
           },  
           function() {  
-            $(this).css('height') = $(this)[0].original_title_height;
+            $(this).css('height', $(this)[0].original_title_height);
+            console.log( $(this).css('height'));
           }  
       );
         
