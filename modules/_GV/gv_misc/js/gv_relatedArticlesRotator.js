@@ -8,11 +8,14 @@
       //$("#rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 20000, true);
       ////$("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
       
-      $("#rotator").tabs({fx: [
-                                {opacity: "toggle"}, // will be used for hide
-                                {width: "toggle"} // will be used for show
-                              ]
-                    }).tabs("rotate", 7000, true);
+      $("#rotator").tabs({fxShow: { height: 'show', opacity: 'show' }}).tabs("rotate", 20000, true);
+      
+      
+//      $("#rotator").tabs({fx: [
+//                                {opacity: "toggle"}, // will be used for hide
+//                                {width: "toggle"} // will be used for show
+//                              ]
+//                    }).tabs("rotate", 7000, true);
       
       
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
