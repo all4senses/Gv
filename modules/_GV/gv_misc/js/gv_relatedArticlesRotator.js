@@ -21,7 +21,7 @@
         
       $('.sidebar .block .content #rotator a.title').mouseenter(function(){
         //console.log(this.css('height'));
-        console.log(this);
+        console.log($(this));
         ///////original_title_height[this.parentElement.id] = this.css('height');
         //jQuery('.sidebar .block .content #rotator a.title').css('height');
         //console.log(original_height);
