@@ -20,12 +20,14 @@
       );  
         
       $('.sidebar .block .content #rotator a.title').mouseenter(function(){
-        console.log(this.css('height'));
-        original_title_height[this.parentElement.id] = this.css('height');
+        //console.log(this.css('height'));
+        console.log(this);
+        ///////original_title_height[this.parentElement.id] = this.css('height');
         //jQuery('.sidebar .block .content #rotator a.title').css('height');
         //console.log(original_height);
         //console.log(original_title_height[this.parentElement.id]);
-        console.log(original_title_height);
+        
+        /////console.log(original_title_height);
 
         //jQuery('.sidebar .block .content #rotator a.title').css('height', 'inherit');
         ///this.css('height', 'inherit');
