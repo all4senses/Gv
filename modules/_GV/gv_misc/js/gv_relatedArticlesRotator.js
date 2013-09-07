@@ -24,7 +24,7 @@
         console.log($(this));
         console.log($(this)[0].parentElement.id);
         
-        $(this).original_title_height = $(this).css('height');
+        $(this)[0].original_title_height = $(this).css('height');
         console.log($(this));
         
         //original_title_height[$(this)[0].parentElement.id] = $(this).css('height');
