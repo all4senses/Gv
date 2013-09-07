@@ -6,7 +6,15 @@
       //$("#rotator > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
       
       //$("#rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 20000, true);
-      $("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
+      ////$("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
+      
+      $("#rotator").tabs({fx: [
+                                {opacity: "toggle"}, // will be used for hide
+                                {width: "toggle"} // will be used for show
+                              ]
+                    }).tabs("rotate", 20000, true);
+      
+      
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
       
       // Pause on hover.
