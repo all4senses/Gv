@@ -19,7 +19,7 @@
           }  
       );  
         
-      $('.sidebar .block .content #rotator a.title').hover(function(){
+      $('.sidebar .block .content #rotator a.title').mouseenter(function(){
         console.log(this.css('height'));
         original_title_height[this.parentElement.id] = this.css('height');
         //jQuery('.sidebar .block .content #rotator a.title').css('height');
