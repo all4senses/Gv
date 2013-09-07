@@ -29,6 +29,8 @@
             console.log( $(this).css('height'));
             
             $('#block-gv-blocks-sidebar-related-articles.block .content')[0].original_title_height = $('#block-gv-blocks-sidebar-related-articles.block .content').css('height');
+            $('#block-gv-blocks-sidebar-related-articles.block .content').css('height', 'inherit');
+            
             
           },  
           function() {  
