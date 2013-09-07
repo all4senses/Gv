@@ -24,15 +24,19 @@
         console.log($(this));
         console.log($(this)[0].parentElement.id);
         
-        original_title_height[$(this)[0].parentElement.id] = $(this).css('height');
+        $(this).original_title_height = $(this).css('height');
+        console.log($(this));
         
-        console.log($(this)[0].parentElement.id);
-        console.log(original_title_height[$(this)[0].parentElement.id]);
+        //original_title_height[$(this)[0].parentElement.id] = $(this).css('height');
+        
+        //console.log($(this)[0].parentElement.id);
+        //console.log(original_title_height[$(this)[0].parentElement.id]);
+
         //jQuery('.sidebar .block .content #rotator a.title').css('height');
         //console.log(original_height);
         //console.log(original_title_height[this.parentElement.id]);
         
-        console.log(original_title_height);
+        //console.log(original_title_height);
 
         //jQuery('.sidebar .block .content #rotator a.title').css('height', 'inherit');
         ///this.css('height', 'inherit');
