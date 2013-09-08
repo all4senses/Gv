@@ -9,8 +9,15 @@
       ////$("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
       
       
-      $("#rotator").tabs({fx: [
-                                {opacity: "toggle"}, // will be used for hide
+//      $("#rotator").tabs({fx: [
+//                                {opacity: "toggle"}, // will be used for hide
+//                                {width: "toggle"} // will be used for show
+//                              ]
+//                    }).tabs("rotate", 7000, true);
+      
+      
+       $("#rotator").tabs({fx: [
+                                {left: "+=50"}, // will be used for hide
                                 {width: "toggle"} // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);
