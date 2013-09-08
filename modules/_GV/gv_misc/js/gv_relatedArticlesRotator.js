@@ -17,8 +17,8 @@
       
       
        $("#rotator").tabs({fx: [
-                                {left: "+=50"}, // will be used for hide
-                                {width: "toggle"} // will be used for show
+                                {left: "+=250"}, // will be used for hide
+                                {right: "-=250"} // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);
       
