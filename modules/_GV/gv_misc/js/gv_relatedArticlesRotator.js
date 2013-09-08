@@ -36,7 +36,7 @@
                               ]
                     }).tabs("rotate", 7000, true);
       
-      $( "#rotator" ).on( "tabsactivate", function( event, ui ) {console.log('xx')} );
+      $( "#rotator" ).bind( "tabsactivate", function( event, ui ) {console.log('xx')} );
       
       // Doesn't work.
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
