@@ -9,7 +9,8 @@
       ///////$("#rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 20000, true);
       ////$("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
       
-      $("#rotator").tabs({ hide: { effect: "explode", duration: 1000 } });
+      // Doesn't work
+      //$("#rotator").tabs({ hide: { effect: "explode", duration: 1000 } });
       
       
       // Works but need to be tuned
@@ -29,38 +30,40 @@
 //                    }).tabs("rotate", 7000, true);
       
       // Works.
-//       $("#rotator").tabs({fx: [
-//                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-//                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-//                              ]
-//                    }).tabs("rotate", 7000, true);
-//      
+       $("#rotator").tabs({fx: [
+                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                              ]
+                    }).tabs("rotate", 7000, true);
+      
+      $( "#rotator" ).on( "tabsactivate", function( event, ui ) {console.log('xx')} );
+      
       // Doesn't work.
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
       
       // Pause on hover.
-//      $("#rotator").hover(  
-//          function() {  
-//            //$("#rotator").tabs("rotate",0,true);  
-//            
-//            $("#rotator").tabs({fx: [
-//                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-//                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-//                              ]
-//                    }).tabs("rotate", 0, true);
-//            
-//          },  
-//          function() {  
-//            //$("#rotator").tabs("rotate",77000,true);  
-//            
-//            $("#rotator").tabs({fx: [
-//                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-//                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-//                              ]
-//                    }).tabs("rotate", 7000, true);
-//          }  
-//      );
-//        
+      $("#rotator").hover(  
+          function() {  
+            //$("#rotator").tabs("rotate",0,true);  
+            
+            $("#rotator").tabs({fx: [
+                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                              ]
+                    }).tabs("rotate", 0, true);
+            
+          },  
+          function() {  
+            //$("#rotator").tabs("rotate",77000,true);  
+            
+            $("#rotator").tabs({fx: [
+                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                              ]
+                    }).tabs("rotate", 7000, true);
+          }  
+      );
+        
         
         
       // Show full title on hover if it was more than 3 lines and has been cutted to two lines.
