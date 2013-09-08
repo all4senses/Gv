@@ -12,6 +12,7 @@
       $("#rotator").tabs({fx:{
           width: [ "toggle", "easeInOutBounce" ],
           //height: [ "toggle", "swing" ],
+          left: "+=250",
           opacity: "toggle"
         }, duration: 10000}).tabs("rotate", 20000, true);
       //$("#rotator").tabs({fx:{left: "+=50", duration:'slow'}}).tabs("rotate", 20000, true);
