@@ -11,9 +11,9 @@
       
       $("#rotator").tabs({fx:{
           width: [ "toggle", "swing" ],
-          height: [ "toggle", "swing" ],
+          //height: [ "toggle", "swing" ],
           opacity: "toggle"
-        }}).tabs("rotate", 20000, true);
+        }, duration: 1500}).tabs("rotate", 20000, true);
       //$("#rotator").tabs({fx:{left: "+=50", duration:'slow'}}).tabs("rotate", 20000, true);
       
 //      // Works
