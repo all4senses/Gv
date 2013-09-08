@@ -29,13 +29,20 @@
 //                              ]
 //                    }).tabs("rotate", 7000, true);
       
+      // Doesn't work.
+      //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
+      
       // Works.
        $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                                //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 100}, // will be used for hide
+                                //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                                {opacity: "toggle", left: "0", duration: 1500} // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);//.tabs({  activate: function( event, ui ) {console.log('xxx'); alert('xxxx'); } });
       
+      
+      // Set a tab from right back to the left to move it always from left to right.
       $( "#rotator" ).bind( "tabsselect", function( event, ui ) {
         //console.log(ui);
         //console.log(ui.panel.id);
@@ -43,17 +50,16 @@
         $('#'+ui.panel.id).attr('style', 'left: -250px;')
       });
       
-      // Doesn't work.
-      //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
-      
       // Pause on hover.
       $("#rotator").hover(  
           function() {  
             //$("#rotator").tabs("rotate",0,true);  
             
             $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                                //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 100}, // will be used for hide
+                                //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                                {opacity: "toggle", left: "0", duration: 1500} // will be used for show
                               ]
                     }).tabs("rotate", 0, true);
             
@@ -62,8 +68,10 @@
             //$("#rotator").tabs("rotate",77000,true);  
             
             $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                                //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 100}, // will be used for hide
+                                //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+                                {opacity: "toggle", left: "0", duration: 1500} // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);
           }  
