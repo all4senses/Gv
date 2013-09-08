@@ -30,11 +30,11 @@
 //                    }).tabs("rotate", 7000, true);
       
       // Works.
-       $("#rotator").tabs({  beforeActivate: function( event, ui ) {console.log('xxx');} }).tabs({fx: [
+       $("#rotator").tabs({fx: [
                                 {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
                                 {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                               ]
-                    }).tabs("rotate", 7000, true);
+                    }).tabs("rotate", 7000, true).tabs({  beforeActivate: function( event, ui ) {console.log('xxx'); alert('xxxx'); } });
       
       $( "#rotator" ).bind( "tabsactivate", function( event, ui ) {console.log('xx')} );
       
