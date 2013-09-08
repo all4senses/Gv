@@ -28,8 +28,8 @@
       
       // Doesn't work
        $("#rotator").tabs({fx: [
-                                {left: "-=250", duration:'slow'}, // will be used for hide
-                                {left: "+=250", duration:'slow'} // will be used for show
+                                {left: "250", duration:'slow'}, // will be used for hide
+                                { opacity: "toggle", left: "0" } // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);
       
