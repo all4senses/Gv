@@ -672,7 +672,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     foreach ($node->related_articles as $related_nid => $related_article) {
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
       
-      $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel">';
+      $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel' . (!$fragments ? ' first': '') . '">';
         
       if (!empty($related_article->field_main_image_value['src_themed_related_sideblock'])) {
         $fragments .='<a class="thumb" href="' . url('node/' . $related_nid) . '">'
