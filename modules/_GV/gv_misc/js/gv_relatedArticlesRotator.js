@@ -39,7 +39,7 @@
       $( "#rotator" ).bind( "tabsselect", function( event, ui ) {
         //console.log(ui);
         console.log(ui.panel.id);
-        console.log($('#'+ui.panel.id));
+        console.log($('#'+ui.panel.id).attr('style'));
       });
       
       // Doesn't work.
