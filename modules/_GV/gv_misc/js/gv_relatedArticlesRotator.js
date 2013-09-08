@@ -38,8 +38,8 @@
       
       $( "#rotator" ).bind( "tabsselect", function( event, ui ) {
         //console.log(ui);
-        console.log(ui.panel.id);
-        console.log($('#'+ui.panel.id).attr('style'));
+        //console.log(ui.panel.id);
+        //console.log($('#'+ui.panel.id).attr('style'));
         $('#'+ui.panel.id).attr('style', 'left: -250px;')
       });
       
