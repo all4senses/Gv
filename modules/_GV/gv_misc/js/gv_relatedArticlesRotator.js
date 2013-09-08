@@ -9,12 +9,14 @@
       ////$("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
       
       
-      $("#rotator").tabs({fx:{
-          width: [ "toggle", "easeInOutBounce" ],
-          //height: [ "toggle", "swing" ],
-          left: "+=250",
-          opacity: "toggle"
-        }, duration: 10000}).tabs("rotate", 20000, true);
+      // Works but need to be tuned
+//      $("#rotator").tabs({fx:{
+//          width: [ "toggle", "easeInOutBounce" ],
+//          //height: [ "toggle", "swing" ],
+//          left: "+=250",
+//          opacity: "toggle"
+//        }, duration: 10000}).tabs("rotate", 20000, true);
+      
       //$("#rotator").tabs({fx:{left: "+=50", duration:'slow'}}).tabs("rotate", 20000, true);
       
 //      // Works
@@ -24,12 +26,12 @@
 //                              ]
 //                    }).tabs("rotate", 7000, true);
       
-//      // Doesn't work
-//       $("#rotator").tabs({fx: [
-//                                {left: "+=250", duration:'slow'}, // will be used for hide
-//                                {right: "-=250", duration:'slow'} // will be used for show
-//                              ]
-//                    }).tabs("rotate", 7000, true);
+      // Doesn't work
+       $("#rotator").tabs({fx: [
+                                {left: "+=250", duration:'slow'}, // will be used for hide
+                                {left: "-=250", duration:'slow'} // will be used for show
+                              ]
+                    }).tabs("rotate", 7000, true);
       
       
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
