@@ -17,7 +17,6 @@
 //          opacity: "toggle"
 //        }, duration: 10000}).tabs("rotate", 20000, true);
       
-      //$("#rotator").tabs({fx:{left: "+=50", duration:'slow'}}).tabs("rotate", 20000, true);
       
 //      // Works
 //      $("#rotator").tabs({fx: [
@@ -28,8 +27,8 @@
       
       // Doesn't work
        $("#rotator").tabs({fx: [
-                                {left: "250", duration:'slow'}, // will be used for hide
-                                { opacity: "toggle", left: "0" } // will be used for show
+                                {opacity: "toggle", left: ["250", 'swing'], duration: 'slow'}, // will be used for hide
+                                {opacity: "toggle", left: ["0", 'swing']} // will be used for show
                               ]
                     }).tabs("rotate", 77000, true);
       
