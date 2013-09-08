@@ -29,12 +29,12 @@
 //                    }).tabs("rotate", 7000, true);
       
       // Works.
-       $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-                              ]
-                    }).tabs("rotate", 7000, true);
-      
+//       $("#rotator").tabs({fx: [
+//                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+//                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+//                              ]
+//                    }).tabs("rotate", 7000, true);
+//      
       // Doesn't work.
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
       
