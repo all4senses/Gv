@@ -31,7 +31,7 @@
                                 {left: "250", duration:'slow'}, // will be used for hide
                                 { opacity: "toggle", left: "0" } // will be used for show
                               ]
-                    }).tabs("rotate", 37000, true);
+                    }).tabs("rotate", 77000, true);
       
       
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
@@ -42,7 +42,7 @@
             $("#rotator").tabs("rotate",0,true);  
           },  
           function() {  
-            $("#rotator").tabs("rotate",7000,true);  
+            $("#rotator").tabs("rotate",77000,true);  
             //$("#rotator").tabs("rotate",3000,true);  
           }  
       );
