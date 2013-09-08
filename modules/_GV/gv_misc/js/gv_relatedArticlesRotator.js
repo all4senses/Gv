@@ -5,8 +5,11 @@
        
       //$("#rotator > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
       
-      //$("#rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 20000, true);
+      
+      ///////$("#rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 20000, true);
       ////$("#rotator").tabs({fx:{width: "toggle"}}).tabs("rotate", 20000, true);
+      
+      $("#rotator").tabs({ hide: { effect: "explode", duration: 1000 } });
       
       
       // Works but need to be tuned
@@ -27,7 +30,7 @@
       
       // Works.
        $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100, complete: function() {alert('!!!');}}, // will be used for hide
+                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
                                 {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);
@@ -41,7 +44,7 @@
             //$("#rotator").tabs("rotate",0,true);  
             
             $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100, complete: function() {alert('!!!');}  }, // will be used for hide
+                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
                                 {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                               ]
                     }).tabs("rotate", 0, true);
@@ -51,7 +54,7 @@
             //$("#rotator").tabs("rotate",77000,true);  
             
             $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100, complete: function() {alert('!!!');}}, // will be used for hide
+                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
                                 {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                               ]
                     }).tabs("rotate", 7000, true);
