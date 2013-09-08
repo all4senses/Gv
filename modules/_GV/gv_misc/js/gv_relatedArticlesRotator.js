@@ -38,7 +38,7 @@
       
       $( "#rotator" ).bind( "tabsselect", function( event, ui ) {
         console.log(ui.panel.id);
-        console.log($('#'+ui.panel.id).css('left'));
+        console.log($('#'+ui.panel.id));
       });
       
       // Doesn't work.
