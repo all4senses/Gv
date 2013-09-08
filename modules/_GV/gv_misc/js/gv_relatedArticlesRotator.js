@@ -39,28 +39,28 @@
       //$("#rotator").tabs({fxSlide: true, fxFade: true, fxSpeed: 'fast'}).tabs("rotate", 20000, true);
       
       // Pause on hover.
-      $("#rotator").hover(  
-          function() {  
-            //$("#rotator").tabs("rotate",0,true);  
-            
-            $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-                              ]
-                    }).tabs("rotate", 0, true);
-            
-          },  
-          function() {  
-            //$("#rotator").tabs("rotate",77000,true);  
-            
-            $("#rotator").tabs({fx: [
-                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-                              ]
-                    }).tabs("rotate", 7000, true);
-          }  
-      );
-        
+//      $("#rotator").hover(  
+//          function() {  
+//            //$("#rotator").tabs("rotate",0,true);  
+//            
+//            $("#rotator").tabs({fx: [
+//                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+//                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+//                              ]
+//                    }).tabs("rotate", 0, true);
+//            
+//          },  
+//          function() {  
+//            //$("#rotator").tabs("rotate",77000,true);  
+//            
+//            $("#rotator").tabs({fx: [
+//                                {opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
+//                                {opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
+//                              ]
+//                    }).tabs("rotate", 7000, true);
+//          }  
+//      );
+//        
         
         
       // Show full title on hover if it was more than 3 lines and has been cutted to two lines.
