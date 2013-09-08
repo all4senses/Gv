@@ -14,10 +14,11 @@ if($view_mode == 'home_teaser') {
       // Use a logo from providers sprite for monimizing loaded images amount.
       $sprite_name = isset($node->sprite_name) ? $node->sprite_name : 'home_top_providers'; 
       
-      dpm($_GET);
-      dpm($_SERVER);
+      //dpm($_GET);
+      //dpm($_SERVER);
       
-      if (!$image = gv_misc_getProviderLogoFromSprite($provider_nid, $sprite_name, $all_data_quick)) {
+      // Only for /hosted-pbx don't take thubbs from the current sprite, but generate it with different sizes (bigger than on that page sprite).
+      if ($_SERVER['REQUEST_URI'] == '/hosted-pbx' || !$image = gv_misc_getProviderLogoFromSprite($provider_nid, $sprite_name, $all_data_quick)) {
         $image_style_name = 'logo_provider_chart_main'; //'thumbnail';
         $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
       }
