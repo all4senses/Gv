@@ -30,6 +30,10 @@ function gv_blocks_block_info() {
     'info' => 'OM VoIP Reviews',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['mmenu_om_rev'] = array(
+    'info' => 'OM VoIP Reviews 2',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   $blocks['main_menu_om_articles'] = array(
     'info' => 'OM Articles',
@@ -310,6 +314,10 @@ function gv_blocks_block_view($delta = '') {
     
   case 'main_menu_om_voip_reviews':
       $block['subject'] = 'OM VoIP Reviews';
+      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Reviews', 'gv_blocks_get_omMenuBlock_Providers');
+      break;    
+  case 'mmenu_om_rev':
+      $block['subject'] = 'OM VoIP Reviews 2';
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Reviews', 'gv_blocks_get_omMenuBlock_Providers');
       break;    
     
