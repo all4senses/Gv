@@ -314,7 +314,20 @@
     
                   <footer>
                     
+                   
                     
+                    <?php 
+                      $tags = NULL;
+                      foreach ($target_tags as $key => $value) {
+                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
+                      }
+
+                      if ($tags) {
+                        echo '<div class="topics"><div class="title">TAGS:</div>' . $tags . '<div class="bottom-clear"></div></div>';
+                      }
+                      
+                    ?>
+
 
                     <div class="share">
 
@@ -367,20 +380,9 @@
                     
                     </div>
                     
-
-                    <?php 
-                      $tags = NULL;
-                      foreach ($target_tags as $key => $value) {
-                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
-                      }
-
-                      if ($tags) {
-                        echo '<div class="topics"><div class="title">TAGS:</div>' . $tags . '<div class="bottom-clear"></div></div>';
-                      }
-                      
-                      
-                      
-                      
+                    
+                    
+                    <?php  
                       // Related articles.
                       if (!empty($node->related_articles)) {
                         echo '<div class="related_articles"><h3>Recommended For You</h3>';
