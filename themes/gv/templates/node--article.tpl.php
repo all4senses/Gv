@@ -437,6 +437,8 @@
   <!-- <div class="shadow"></div> -->
   
   <?php
+    // Related articles section
+    /*
     if (isset($node->related_articles_teaser)) {
       $tags = NULL;
       foreach ($target_tags as $key => $value) {
@@ -450,6 +452,7 @@
         echo '<div class="topics related"><div class="title">TAGS:</div>' . $tags . '<div class="bottom-clear"></div></div>';
       }
     }
+    */
   ?>
   </article> <!-- /.node -->
 <?php endif; ?>
