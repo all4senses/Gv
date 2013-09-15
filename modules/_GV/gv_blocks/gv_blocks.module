@@ -2131,6 +2131,22 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
 
 
 
+function gv_blocks_contextual_links_view_alter(&$element, &$items) {
+  // This hook is called for EVERY set of contextual links
+  // on a page.  We first want to check the $element to make
+  // sure we are adding a link to the correct list of contextual
+  // links. In this case we only want to add a link to blocks
+  // created by the "search" module. We just add links using the
+  // same array structure as is used by theme_links.
+  ////if (isset($element['#element']['#block']) && $element['#element']['#block']->delta == "site_tweets-site_tweets_block") {
+  if (isset($element['#element']['#block'])) {
+    $element['#links']['social-networks'] = array(
+      'title' => 'Edit social network links',
+      'href' => url('/admin/config/system/site-information', array('absolute' => TRUE)),
+    );
+  }
+}
+
 /**
  * Returns themed block using standard drupal functions.
  */
