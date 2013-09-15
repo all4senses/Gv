@@ -2130,6 +2130,19 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
 }
 
 
+
+/**
+ * Returns themed block using standard drupal functions.
+ */
+function gv_blocks_render_block($module, $delta) {
+  $block = module_invoke($module, 'block_view', $delta);
+  $block['module'] = $module;
+  $block['delta'] = $delta;
+  $vars = array('elements' => array('#block' => (object) $block, '#children' => render($block['content'])));
+  return theme('block', $vars);
+}
+
+
 /**
  * Returns a content of a block wrapped in proper divs.
  */
