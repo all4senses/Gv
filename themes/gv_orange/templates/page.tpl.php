@@ -198,15 +198,8 @@
 
 
   <?php
-    if ($is_front && $user->uid) {
-      //echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'as_featured_in', 'no_subject' => TRUE, 'shadow' => FALSE)/*, TRUE, '+31 day'*/);
-      
-      
-      
-      
+    if ($is_front) {
       echo gv_blocks_render_block('gv_blocks', 'as_featured_in');
-      
-
     }
     
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
