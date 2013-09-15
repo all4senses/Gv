@@ -198,7 +198,7 @@
 
 
   <?php
-    if ($is_front) {
+    if ($user->uid && $is_front) {
       echo gv_blocks_render_block('gv_blocks', 'as_featured_in');
     }
     
