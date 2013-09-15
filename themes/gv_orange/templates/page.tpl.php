@@ -203,7 +203,7 @@
       $b = module_invoke('gv_blocks', 'block_view', 'as_featured_in');
       dpm($b);
       dpm(render($b));
-      echo $b;
+      echo render($b);
     }
     
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
