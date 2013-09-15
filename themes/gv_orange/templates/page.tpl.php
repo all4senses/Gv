@@ -198,7 +198,7 @@
 
   <?php
     if ($is_front && $user->uid) {
-      echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'as_featured_in', 'no_subject' => TRUE, 'shadow' => FALSE)/*, TRUE, '+31 day'*/);
+      //echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'as_featured_in', 'no_subject' => TRUE, 'shadow' => FALSE)/*, TRUE, '+31 day'*/);
       
       
       
