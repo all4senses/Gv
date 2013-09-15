@@ -714,6 +714,9 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL) {
   
   if (!$node) {
+    if (strpos($_GET['q'], 'node/') === FALSE) {
+      return NULL;
+    }
     $node = node_load(str_replace('node/', '', $_GET['q']));
   }
   //dpm($_GET);

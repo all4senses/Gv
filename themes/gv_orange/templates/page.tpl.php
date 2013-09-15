@@ -146,7 +146,7 @@
           <?php print render($page['content']); ?>
           
           <?php 
-          //global $user;
+          /*
           $pages_with_timestamp = array(
             '/compare-business-voip-providers', 
             '/business-voip-reviews', 
@@ -168,12 +168,12 @@
             '/terms-of-use',
             '/our-team',
           );
-          //if ($user->uid == 1) {
-//          if($is_front || in_array($_SERVER['REDIRECT_URL'], $pages_with_timestamp)) {
-//            echo gv_misc_lastUpdatedStamp();
-//          }
-              
-          //}
+
+          if($is_front || in_array($_SERVER['REDIRECT_URL'], $pages_with_timestamp)) {
+            echo gv_misc_lastUpdatedStamp();
+          }
+          */
+
           ?>
           
       </section> <!-- /#main -->
@@ -197,6 +197,9 @@
 
 
   <?php
+    if ($is_front && $user->uid) {
+      //echo 
+    }
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
   ?>
     
