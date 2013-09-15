@@ -279,6 +279,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['as_featured_in'] = array(
+    'info' => 'As featured in block',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  
   $blocks['sidebar_share_block'] = array(
     'info' => 'Share this Post Static',
     'cache' => DRUPAL_NO_CACHE,
@@ -575,6 +581,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getWriterAdminLinks();
       break;
     
+    case 'as_featured_in':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getAsFeaturedInBlock();
+      break;
+    
     case 'sidebar_share_block':
       $block['subject'] = 'Share this Post:';
       $block['content'] = gv_blocks_getSidebarShareStaticBlock();
@@ -622,6 +633,15 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
   }
   
+}
+
+
+
+/**
+ * Block with images for the home page footer.
+ */
+function gv_blocks_getAsFeaturedInBlock() {
+  return '<div class="title">As featured In</div>';
 }
 
 
