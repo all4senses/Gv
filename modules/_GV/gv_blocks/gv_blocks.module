@@ -2034,6 +2034,7 @@ function gv_blocks_get_omMenuBlock_User($submenu) {
  */
 function gv_blocks_getSubmenuByTitle($menu_name, $submenu_title) {
   $menu = menu_build_tree($menu_name);
+  dpm($menu);
   if(!$menu) {
     return NULL;
   }
