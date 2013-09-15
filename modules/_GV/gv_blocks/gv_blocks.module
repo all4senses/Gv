@@ -667,7 +667,12 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  * Block with images for the home page footer.
  */
 function gv_blocks_getAsFeaturedInBlock() {
-  return '<div class="title">As featured In</div>';
+
+  $data = unserialize(variable_get('gv_as_featured_in', NULL));
+
+  $out = '<div class="body">' . $data['body']['value'] . '</body>';
+
+  return '<div class="title">As featured In</div>' . $out;
 }
 
 
