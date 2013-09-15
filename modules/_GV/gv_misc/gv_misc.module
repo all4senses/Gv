@@ -7943,6 +7943,5 @@ function gv_misc_addRelatedArticlesToNode($node) {
  * Trying to allow contextual links for all view_modes.
  */
 function gv_misc_node_view_alter(&$build) {
-  //dpm($build);
   $build['#contextual_links']['node'] = array('node', array($build['#node']->nid));
 }
