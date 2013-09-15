@@ -83,18 +83,22 @@ table.sticky-header {z-index: 10;}
 .admin #header #header-menu-back{display: none;}
 
 
-#block-nice-menus-1 {position: absolute; top: 45px; right: 0; font-size: 14px;}
+#block-nice-menus-1 {position: absolute; top: 42px; right: 0; font-size: 12px; font-family: arial; text-transform: uppercase;}
 ul.nice-menu li {background: none; border: none;}
-ul.nice-menu li:hover {background: #ecf3f5;}
+ul.nice-menu li:hover,
+ul.nice-menu-down li.menuparent:hover {background: #ecf3f5; box-shadow: 0 0 0px #DDDDDD,0 1px 1px lightgray;}
 ul.nice-menu a,
-ul.nice-menu-down .menuparent a{color: #666666; font-weight: 600; padding: 0.3em 5px 0.3em 5px;}
+ul.nice-menu-down .menuparent a{color: #666666; font-weight: 600; padding: 7px 7px;}
+
+ul.nice-menu li:hover a,
+ul.nice-menu li ul a{color: #0099c8;}
 
 ul.nice-menu-down li.menuparent {background: none;}
-ul.nice-menu-down li.menuparent:hover {background: #ecf3f5;}
+
 
 ul.nice-menu ul {border: none; background: #ecf3f5;}
-
-
+ul.nice-menu-down .menuparent ul a {font-weight: normal; padding-left: 25px;}
+ul.nice-menu-down ul li:hover {background: #f8fafb;}
 
 
 
@@ -352,7 +356,7 @@ body.not-admin #om-menu-main-om-menu li.om-leaf.leaf-write-review{background: no
 
 /* Writer menu */
 /*.om-maximenu ul.om-menu li.om-leaf .om-link.link-e{padding: 4px 8px 8px 8px;}*/
-#block-gv-blocks-writer-admin-links {position: absolute; top: 20px/*69px*/; right: 0/*140px*/;}
+#block-gv-blocks-writer-admin-links {position: absolute; top: 22px; right: -5px; font-size: 13px;}
 #block-gv-blocks-writer-admin-links .content a {color: lightgray; padding: 0 10px;}
 #block-gv-blocks-writer-admin-links .content a:hover {/*text-decoration: underline; font-weight: bold;*/ border: 1px dotted lightgray; border-radius: 5px;}
 #block-gv-blocks-writer-admin-links .contextual-links-wrapper {display: none;}
