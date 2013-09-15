@@ -19,7 +19,7 @@
       
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" />
+          <img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" />
         </a>
         <div class="descr">
           
@@ -38,7 +38,7 @@
 //        if ($user->uid == 1) {
           echo /*'<a id="itexpo" href="http://getvoip.com/blog/tags/itexpo-2012"></a>',*/ render($page['header']); 
           
-          echo gv_blocks_getBlockThemed(array('module' => 'om_maximenu', 'delta' => 'om-maximenu-1', 'no_subject' => TRUE, 'class' => 'block-om-maximenu', 'shadow' => FALSE), TRUE, '+31 day', ($user->uid ? '_logged' : NULL));
+          //echo gv_blocks_getBlockThemed(array('module' => 'om_maximenu', 'delta' => 'om-maximenu-1', 'no_subject' => TRUE, 'class' => 'block-om-maximenu', 'shadow' => FALSE), TRUE, '+31 day', ($user->uid ? '_logged' : NULL));
           
 //        }
 //        else {
@@ -139,6 +139,18 @@
   </div> <!-- <div id="bshadow"> -->
 
 
+  
+  
+
+  <?php
+    if ($is_front && $user->uid) {
+      
+      echo gv_blocks_render_block('gv_blocks', 'as_featured_in');
+    
+    }
+    
+    
+  ?>
   
   <footer id="footer" role="contentinfo" class="clearfix">
    <div id="footer-inside">

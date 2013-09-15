@@ -610,13 +610,30 @@ function gv_blocks_block_configure($delta = '') {
   
   $form = array();
   
-  if ($delta == 'weekly_video') {
+  switch ($delta) {
+  
+    case 'weekly_video':
     
-    $form['youtube_video_id'] = array(
-      '#type' => 'textfield', 
-      '#title' => t('YouTube video id'),
-      '#default_value' => variable_get('gv_weekly_video_block', NULL), 
-    );
+      $form['youtube_video_id'] = array(
+        '#type' => 'textfield', 
+        '#title' => t('YouTube video id'),
+        '#default_value' => variable_get('gv_weekly_video_block', NULL), 
+      );
+
+      break;
+  
+  
+  
+    case 'as_featured_in':
+      $data = unserialize(variable_get('gv_as_featured_in', NULL));
+          
+      $form['body'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Body',
+        '#default_value' => $data['body']['value'],
+      );
+      
+      break;
     
   }
   
@@ -629,8 +646,16 @@ function gv_blocks_block_configure($delta = '') {
  */
 function gv_blocks_block_save($delta = '', $edit = array()) {
 
-  if ($delta == 'weekly_video') {
-    variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
+  switch ($delta) {
+    
+    case 'weekly_video':
+      variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
+      break;
+    
+    case 'as_featured_in':
+      $data = array('body' => $edit['body']);
+      variable_set('gv_as_featured_in', serialize($data));
+      break;
   }
   
 }
