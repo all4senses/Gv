@@ -1488,7 +1488,9 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   
   
   global $language;
-  $cache_name = 'gv_top_' . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . '_bottom_content_' . $language->language;
+  global $user;
+  $logged_in = $user->uid ? '_logged' : '';
+  $cache_name = 'gv_top_' . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . '_bottom_content_' . $language->language . $logged_in;
   
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
