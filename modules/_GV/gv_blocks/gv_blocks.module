@@ -2164,7 +2164,7 @@ function gv_blocks_render_block($module, $delta) {
   
   $block = block_load($module, $delta);      
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  dpm($block_array);
+  //dpm($block_array);
   $output = drupal_render($block_array);
   return $output; 
 }
