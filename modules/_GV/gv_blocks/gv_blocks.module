@@ -629,7 +629,8 @@ function gv_blocks_block_configure($delta = '') {
           
       $form['body'] = array(
         '#type' => 'text_format', 
-        '#title' => 'Body',
+        '#title' => 'Images',
+        '#format' => 'filtered_html',
         '#default_value' => $data['body']['value'],
       );
       

@@ -141,16 +141,6 @@
 
   
   
-
-  <?php
-    if ($is_front && $user->uid) {
-      
-      echo gv_blocks_render_block('gv_blocks', 'as_featured_in');
-    
-    }
-    
-    
-  ?>
   
   <footer id="footer" role="contentinfo" class="clearfix">
    <div id="footer-inside">
