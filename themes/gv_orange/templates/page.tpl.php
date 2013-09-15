@@ -200,7 +200,7 @@
     if ($is_front && $user->uid) {
       echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'as_featured_in', 'no_subject' => TRUE, 'shadow' => FALSE)/*, TRUE, '+31 day'*/);
       
-      $b = module_invoke('gv_block', 'block_view', 'as_featured_in');
+      $b = module_invoke('gv_blocks', 'block_view', 'as_featured_in');
       dpm($b);
     }
     
