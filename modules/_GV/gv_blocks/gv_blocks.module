@@ -626,11 +626,12 @@ function gv_blocks_block_configure($delta = '') {
     case 'home_in_hlighted_2':
     
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
+      dpm($data);
       
       $form['title'] = array(
         '#type' => 'textfield', 
         '#title' => 'Title',
-        '#default_value' => $data['title']['value'],
+        '#default_value' => @$data['title']['value'],
       );
       $form['body'] = array(
         '#type' => 'text_format', 
@@ -685,6 +686,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
   switch ($delta) {
     
     case 'home_in_hlighted_2':
+      dpm($edit);
       $data = array('title' => $edit['title'], 'body' => $edit['body'], 'flying_text_1' => $edit['flying_text_1']);
       variable_set('gv_home_in_hlighted_2', serialize($data));
       break;
