@@ -627,6 +627,12 @@ function gv_blocks_block_configure($delta = '') {
     
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
       
+      $form['body'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Main body text',
+        '#format' => 'full_html',
+        '#default_value' => $data['body']['value'],
+      );
       $form['flying_text_1'] = array(
         '#type' => 'text_format', 
         '#title' => 'Flying text 1',
@@ -674,7 +680,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
   switch ($delta) {
     
     case 'home_in_hlighted_2':
-      $data = array('flying_text_1' => $edit['flying_text_1']);
+      $data = array('body' => $edit['body'], 'flying_text_1' => $edit['flying_text_1']);
       variable_set('gv_home_in_hlighted_2', serialize($data));
       break;
       
@@ -854,7 +860,7 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
   switch ($key) {
     case 'v2':
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
-      $out .= '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
+      $out .= $data['body']['value'] . '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
       break;
   }
   
