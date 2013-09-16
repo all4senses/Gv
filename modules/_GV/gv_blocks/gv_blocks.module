@@ -274,6 +274,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['home_in_hlighted_2'] = array(
+    'info' => 'Home in highlighted 2',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['writer-admin-links'] = array(
     'info' => 'Writer admin links',
     'cache' => DRUPAL_NO_CACHE,
@@ -573,7 +578,12 @@ function gv_blocks_block_view($delta = '') {
     
     case 'home_in_highlighted':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion();
+      $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion('v1');
+      break;
+    
+    case 'home_in_hlighted_2':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion('v2');
       break;
     
     case 'writer-admin-links':
@@ -611,6 +621,20 @@ function gv_blocks_block_configure($delta = '') {
   $form = array();
   
   switch ($delta) {
+    
+    
+    case 'home_in_hlighted_2':
+    
+      $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
+      
+      $form['flying_text_1'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Flying text 1',
+        '#format' => 'full_html',
+        '#default_value' => $data['flying_text_1']['value'],
+      );
+
+      break;
   
     case 'weekly_video':
     
@@ -648,6 +672,12 @@ function gv_blocks_block_configure($delta = '') {
 function gv_blocks_block_save($delta = '', $edit = array()) {
 
   switch ($delta) {
+    
+    case 'home_in_hlighted_2':
+      $data = array('flying_text_1' => $edit['flying_text_1']);
+      variable_set('gv_home_in_hlighted_2', serialize($data));
+      break;
+      
     
     case 'weekly_video':
       variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
@@ -814,12 +844,21 @@ function gv_blocks_getWriterAdminLinks() {
 /**
  * Block with the main part of the home preface to place to Highlighted region.
  */
-function gv_blocks_prefaceHomeMainInHighlightedRegion() {
+function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
   $home_preface_node = gv_misc_getPrefaceByKey('front');
   $home_preface_node->title_no_link = TRUE;
   $home_preface_node_view = node_view($home_preface_node, 'full');
 
-  return render($home_preface_node_view);
+  $out = render($home_preface_node_view);
+  
+  switch ($key) {
+    case 'v2':
+      $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
+      $out .= '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
+      break;
+  }
+  
+  return $out;
 }
 
 
