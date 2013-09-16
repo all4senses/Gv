@@ -628,10 +628,10 @@ function gv_blocks_block_configure($delta = '') {
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
       dpm($data);
       
-      $form['title'] = array(
+      $form['banner_title'] = array(
         '#type' => 'textfield', 
         '#title' => 'Title',
-        '#description' => 'Title',
+        //'#description' => 'Title',
         '#default_value' => @$data['title']['value'],
       );
       $form['body'] = array(
@@ -688,7 +688,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     
     case 'home_in_hlighted_2':
       dpm($edit);
-      $data = array('title' => $edit['title'], 'body' => $edit['body'], 'flying_text_1' => $edit['flying_text_1']);
+      $data = array('title' => $edit['banner_title'], 'body' => $edit['body'], 'flying_text_1' => $edit['flying_text_1']);
       variable_set('gv_home_in_hlighted_2', serialize($data));
       break;
       
