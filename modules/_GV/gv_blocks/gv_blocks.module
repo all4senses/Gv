@@ -631,8 +631,7 @@ function gv_blocks_block_configure($delta = '') {
       $form['banner_title'] = array(
         '#type' => 'textfield', 
         '#title' => 'Title',
-        //'#description' => 'Title',
-        '#default_value' => @$data['title']['value'],
+        '#default_value' => $data['title'],
       );
       $form['body'] = array(
         '#type' => 'text_format', 
@@ -868,7 +867,7 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
   switch ($key) {
     case 'v2':
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
-      $out .= '<h1>' . $data['title']['value'] . '</h1>' . $data['body']['value'] . '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
+      $out .= '<h1>' . $data['title'] . '</h1>' . $data['body']['value'] . '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
       break;
   }
   
