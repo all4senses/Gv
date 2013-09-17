@@ -167,7 +167,7 @@ if($view_mode == 'home_teaser') {
                 echo $submitted;
                 */
               
-                echo t('Reviewer'), ': ', '<span property="v:reviewer">' . $reviewer, '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
+                echo 'Reviewer: <span property="v:reviewer">' . $reviewer, '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
               ?>
             </span>
           <?php endif; ?>
@@ -176,13 +176,13 @@ if($view_mode == 'home_teaser') {
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption"><span>' , t('User\'s Rating') , ':</span> <span property="v:rating">' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption"><span>User\'s Rating:</span> <span property="v:rating">' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
               <?php if (!$page): ?>
-                <div class="text"><?php echo '<div class="title">' , t('Date:') , '</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
-                <div class="text"><?php echo '<div class="title">' , t('Reviewer:') , '</div><div property="v:reviewer">' , $reviewer , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">Date:</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">Reviewer:</div><div property="v:reviewer">' , $reviewer , '</div>'; ?></div>
               <?php endif; ?>
-              <div class="text"><?php echo '<div class="title">' . t('Recommend') . ': </div><div class="data">' . $node->gv_recommend . '</div>'?></div>
+              <div class="text"><?php echo '<div class="title">Recommend: </div><div class="data">' . $node->gv_recommend . '</div>'?></div>
             </div>
           </div>
           
@@ -193,13 +193,13 @@ if($view_mode == 'home_teaser') {
               <div class="pros-cons">
                 <?php
                   if ($content['r_data']['pros']) {
-                    echo '<div class="pros frame"><div class="text"><span class="caption">' . t('Pros:') . '</span>' . $content['r_data']['pros'] . '</div></div>';
+                    echo '<div class="pros frame"><div class="text"><span class="caption">Pros:</span>' . $content['r_data']['pros'] . '</div></div>';
                   }
                   if($content['r_data']['pros'] && $content['r_data']['cons']) {
-                    echo '<div class="vs">' . t('VS') . '</div>';
+                    echo '<div class="vs">VS</div>';
                   }
                   if ($content['r_data']['cons']) {
-                    echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">' . t('Cons:') . '</span>' . $content['r_data']['cons'] . '</div></div>';
+                    echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">Cons:</span>' . $content['r_data']['cons'] . '</div></div>';
                   }
                 ?>
               </div>
@@ -219,7 +219,7 @@ if($view_mode == 'home_teaser') {
                       $provider_name = isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'];
                       
                       if($page || $full_title) {
-                        echo ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a> <span class="delim">|</span>')
+                        echo ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
                         . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
                       }
                       else {
