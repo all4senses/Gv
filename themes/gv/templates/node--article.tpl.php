@@ -204,7 +204,7 @@
                       echo 'By' , ': ' , $author_name;
                     }
                     else {
-                      echo $created_str;
+                      echo 'By' , ': ' , $author_name, ' / ', $created_str;
                     }
                   }
               }
