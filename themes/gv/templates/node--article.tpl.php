@@ -61,14 +61,14 @@
         $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
         
         $extra_data = array(
-          'title' => $form_state['values']['title'], 
+          'title' => $title, 
           'teaser_block' => $teaser_data['teaser_block'], 
           'teaser_home' => $teaser_data['teaser_home'],
           'teaser_side_block' => $teaser_data['teaser_side_block'],
           'side_block_main_image' => $teaser_data['side_block_main_image'],
 
-          'teaser_only' => $teaser,
-          'teaser_main_image' => $main_image_html,
+          'teaser_only' => $teaser_data['teaser_only'],
+          'teaser_main_image' => $teaser_data['teaser_main_image'],
 
 
           // Don't recalculate related articles..
