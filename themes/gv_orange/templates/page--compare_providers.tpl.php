@@ -57,9 +57,15 @@
       <section id="main" role="main" class="clearfix">
 
           <?php 
+            /*
             if ($breadcrumb): 
-              print $breadcrumb; 
+              print $breadcrumb;
             endif;
+            */
+            
+            // Hide breadcrumbs temporarily, but reserve the room for it.
+            //echo $breadcrumb; 
+            echo '<div style="height: 18px; width: 100%;"></div>'
           ?>
         
           <?php 
