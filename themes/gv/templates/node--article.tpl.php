@@ -313,9 +313,9 @@
               if (isset($extra_data['teaser_home'])) {
                 echo $extra_data['teaser_home'];
               }
-//              else {
-//                echo $extra_data['teaser_block'];
-//              }
+              else {
+                echo $extra_data['teaser_block'];
+              }
             }
             else {
               
