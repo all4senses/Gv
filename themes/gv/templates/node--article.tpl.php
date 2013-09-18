@@ -319,7 +319,7 @@
             else {
               
               if ($class_thumb_presented) {
-                echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser'] . '</div>';
+                echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
               }
               else {
                 
