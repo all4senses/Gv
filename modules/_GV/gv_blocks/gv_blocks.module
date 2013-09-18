@@ -791,6 +791,17 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       dpm($saved_files);
       */
       
+      
+      if (preg_match('/<img[^>]+>/i', $edit['html_images'], $matches)) {
+        $found_image = TRUE;
+        preg_match_all('/(alt|title|src)="([^"]*)"/i',$matches[0], $matches);
+        dpm($matches);
+        foreach ($matches[1] as $index => $key) {
+          $main_image[$key] = $matches[2][$index];
+        }
+        //$body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
+      }
+      
       $data = array('html_images' => $edit['html_images']/*, 'pl_images' => $saved_files*/);
       variable_set('gv_as_featured_in_side', serialize($data));
       break;
