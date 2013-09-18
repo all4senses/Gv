@@ -688,12 +688,15 @@ function gv_blocks_block_configure($delta = '') {
       
       $data = unserialize(variable_get('gv_as_featured_in_side', NULL));
           
-      $form['body'] = array(
+      $form['html_images'] = array(
         '#type' => 'text_format', 
-        '#title' => 'Body',
+        '#title' => 'Images',
         '#format' => 'full_html',
-        '#default_value' => $data['body']['value'],
+        '#default_value' => $data['html_images']['value'],
       );
+      
+      
+      // Upload images using 'managed_file' form api element. 
       /*
       $form['image_example_image_fid'] = array(
         '#title' => 'Images',
@@ -704,6 +707,8 @@ function gv_blocks_block_configure($delta = '') {
       );
       */
       
+      // Upload images using plupload multiple load.
+      /*
       $form['pl_images'] = array(
         '#type' => 'plupload',
         '#title' => 'Upload files',
@@ -717,6 +722,7 @@ function gv_blocks_block_configure($delta = '') {
 //          'chunk_size' => '1mb',
 //        ),
       );
+      */
       
       break;
     
@@ -749,8 +755,11 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       break;
     
     case 'as_featured_in_side':
-      dpm($edit);
+      //dpm($edit);
       
+      
+      // Save files using plupload multiple load.
+      /*
       $saved_files = array(); //Array to capture file objects
       $scheme = variable_get('file_default_scheme', 'public') . '://';
       $directoryname = 'pl_uploads'; // Directory where images are collected
@@ -769,14 +778,20 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           $destination = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
           $file = plupload_file_uri_to_object($destination);
           file_save($file);
+          
+          $block = block_load('custom_block', $delta);
+          file_usage_add($file, 'gv_blocks', 'as_featured_in_side', $block->bid);
+      
           $saved_files[] = $file;
         }
         else {
-          form_set_error('uploadfiles', "Upload of {$uploaded_file['name']} failed");
+          drupal_set_message("Upload of {$uploaded_file['name']} failed", 'warning');
         }
       }
       dpm($saved_files);
-      $data = array('body' => $edit['body'], 'pl_images' => $saved_files);
+      */
+      
+      $data = array('html_images' => $edit['html_images']/*, 'pl_images' => $saved_files*/);
       variable_set('gv_as_featured_in_side', serialize($data));
       break;
   }
@@ -806,7 +821,7 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
       break;
     
     case 'side':
-      $out = 'test';
+      $out = $data['html_images']['value'];
       break;
   }
   
