@@ -178,7 +178,7 @@
               }
               
               //if (!$extra_data['guest_author'] && ($page || $node->type == 'article' || $paths_with_latest_article) ) {
-              if (empty($extra_data['guest_author'])) {
+              if (empty($extra_data['guest_author']) || !$extra_data['guest_author']) {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
                 $author_name = $authorExtendedData->realname;
               }
