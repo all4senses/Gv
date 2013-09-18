@@ -75,7 +75,7 @@
           
         </div>
       </div>
-      <div id="headline">We've helped <span>over 7,000 VoIP shoppers</span> find the perfect phone service.</div>
+      <!--<div id="headline">We've helped <span>over 7,000 VoIP shoppers</span> find the perfect phone service.</div>-->
       
       <?php 
 //        if ($user->uid == 1) {
@@ -111,9 +111,12 @@
       <section id="main" role="main" class="clearfix">
 
           <?php 
+            /*
             if ($breadcrumb): 
-              print $breadcrumb; 
+              print $breadcrumb;
             endif;
+            */
+            print $breadcrumb; 
           ?>
         
           <?php 
