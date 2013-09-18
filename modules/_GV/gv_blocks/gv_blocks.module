@@ -285,10 +285,13 @@ function gv_blocks_block_info() {
   );
   
   $blocks['as_featured_in'] = array(
-    'info' => 'As featured in block',
+    'info' => 'As featured in BOTTOM block',
     'cache' => DRUPAL_NO_CACHE,
   );
-  
+  $blocks['as_featured_in_side'] = array(
+    'info' => 'As featured in SIDE block',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   $blocks['sidebar_share_block'] = array(
     'info' => 'Share this Post Static',
@@ -593,7 +596,12 @@ function gv_blocks_block_view($delta = '') {
     
     case 'as_featured_in':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_getAsFeaturedInBlock();
+      $block['content'] = gv_blocks_getAsFeaturedInBlock('bottom');
+      break;
+    
+    case 'as_featured_in_side':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getAsFeaturedInBlock('side');
       break;
     
     case 'sidebar_share_block':
@@ -662,13 +670,37 @@ function gv_blocks_block_configure($delta = '') {
   
   
     case 'as_featured_in':
-      $data = unserialize(variable_get('gv_as_featured_in', NULL));
+      
+      if(!$data = unserialize(variable_get('gv_as_featured_in_bottom', NULL))) {
+        $data = unserialize(variable_get('gv_as_featured_in', NULL));
+      }
           
       $form['body'] = array(
         '#type' => 'text_format', 
         '#title' => 'Images',
         '#format' => 'full_html',
         '#default_value' => $data['body']['value'],
+      );
+      
+      break;
+      
+    case 'as_featured_in_side':
+      
+      $data = unserialize(variable_get('gv_as_featured_in_side', NULL));
+          
+      $form['body'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Body',
+        '#format' => 'full_html',
+        '#default_value' => $data['body']['value'],
+      );
+      
+      $form['image_example_image_fid'] = array(
+        '#title' => 'Images',
+        '#type' => 'managed_file',
+        '#description' => 'The uploaded image will be displayed on this page using the image style choosen below.',
+        //'#default_value' => variable_get('image_example_image_fid', ''),
+        '#upload_location' => 'public://a/',
       );
       
       break;
@@ -698,7 +730,13 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     
     case 'as_featured_in':
       $data = array('body' => $edit['body']);
-      variable_set('gv_as_featured_in', serialize($data));
+      variable_set('gv_as_featured_in_bottom', serialize($data));
+      break;
+    
+    case 'as_featured_in_side':
+      dpm($edit);
+      $data = array('body' => $edit['body']);
+      variable_set('gv_as_featured_in_side', serialize($data));
       break;
   }
   
@@ -709,13 +747,30 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 /**
  * Block with images for the home page footer.
  */
-function gv_blocks_getAsFeaturedInBlock() {
+function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
 
-  $data = unserialize(variable_get('gv_as_featured_in', NULL));
 
-  $out = '<div class="body">' . $data['body']['value'] . '</body>';
+  if ($key == 'bottom') {
+    if (!$data = unserialize(variable_get('gv_as_featured_in_bottom', NULL))) {
+      $data = unserialize(variable_get('gv_as_featured_in', NULL));
+    }
+  }
+  else {
+    $data = unserialize(variable_get('gv_as_featured_in_' . $key, NULL));
+  }
 
-  return '<div class="title">As featured In</div>' . $out;// . '<div class="more">' . l('See all of the recent buzz about us >>>', '') . '</div>';
+  switch ($key) {
+    case 'bottom':
+      $out = '<div class="title">As featured In</div><div class="body">' . $data['body']['value'] . '</body>'; // . '<div class="more">' . l('See all of the recent buzz about us >>>', '') . '</div>';
+      break;
+    
+    case 'side':
+      $out = 'test';
+      break;
+  }
+  
+
+  return $out;
 }
 
 
