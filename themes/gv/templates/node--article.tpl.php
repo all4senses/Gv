@@ -72,8 +72,8 @@
 
 
           // Don't recalculate related articles..
-          'related_articles' => $old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
-          'related_articles_timestamp' => $old_extra_data['related_articles_timestamp'], //time(),
+          'related_articles' => @$old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
+          'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'], //time(),
         );
         
         if (!empty($old_extra_data['guest_author'])) {
