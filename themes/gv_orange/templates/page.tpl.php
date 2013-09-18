@@ -116,7 +116,8 @@
               print $breadcrumb;
             endif;
             */
-            print $breadcrumb; 
+            echo $breadcrumb; 
+            echo '<div style="height: 18px; width: 100%;"></div>'
           ?>
         
           <?php 
