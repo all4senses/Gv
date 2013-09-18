@@ -51,8 +51,44 @@
       }
       
   }
-  elseif( $view_mode == 'teaser' && !empty($node->field_main_image['und'][0]['value'])) {
-    $class_thumb_presented = ' with_thumb';
+  elseif($view_mode == 'teaser') {
+    if (!empty($node->field_main_image['und'][0]['value'])) {
+      $class_thumb_presented = ' with_thumb';
+      
+      // Tune for fixing old style teaser for the new one after setting one teaser per a row.
+      $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+      if (!isset($extra_data['teaser_only'])) {
+        $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
+        
+        $extra_data = array(
+          'title' => $form_state['values']['title'], 
+          'teaser_block' => $teaser_data['teaser_block'], 
+          'teaser_home' => $teaser_data['teaser_home'],
+          'teaser_side_block' => $teaser_data['teaser_side_block'],
+          'side_block_main_image' => $teaser_data['side_block_main_image'],
+
+          'teaser_only' => $teaser,
+          'teaser_main_image' => $main_image_html,
+
+
+          // Don't recalculate related articles..
+          'related_articles' => $old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
+          'related_articles_timestamp' => $old_extra_data['related_articles_timestamp'], //time(),
+        );
+        
+        if (!empty($old_extra_data['guest_author'])) {
+          $extra_data['guest_author'] = $old_extra_data['guest_author'];
+        }
+        
+        // Update the field $extra_data in the db
+        // ...
+        
+      }
+      
+    }
+    else {
+      $class_thumb_presented = NULL;
+    }
   }
   
   
@@ -279,15 +315,25 @@
               }
             }
             else {
-              // TODO: Temporary check. Should be removed after all articles resave.
-              if (isset($node->field_a_teaser['und'][0]['value']) && $node->field_a_teaser['und'][0]['value']) {
-                echo $node->field_a_teaser['und'][0]['value'];
+              
+              if ($class_thumb_presented) {
+                echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser'] . '</div>';
               }
               else {
-                //dpm($node->nid . ' -> no teaser field');
-                $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
-                echo $teaser_data['teaser'];
+                
+                if (!empty($node->field_a_teaser['und'][0]['value'])) {
+                  echo $node->field_a_teaser['und'][0]['value'];
+                }
+                else {
+                  $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
+                  echo $teaser_data['teaser'];
+                  
+                  // Update the field field_a_teaser
+                  // ...
+                }
+                
               }
+              
             }
             
             hide($content['body']);
