@@ -2407,19 +2407,25 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   
   
   if (!$characters_num) {
+    /*
     if ($main_image_html) {
       $characters_num = 130;
     }
     else {
       $characters_num = 250;
     }
+    */
+    $characters_num = 450;
   }
   
-  $teaser_block = trim(drupal_substr($teaser, 0, 200));// . '...';
+  
+  $teaser_block_chars = 200;
+  $teaser_block = trim(drupal_substr($teaser, 0, $teaser_block_chars));// . '...';
   $last_pos = strrpos($teaser_block, ' ');
   $teaser_block = substr_replace ($teaser_block, '...', $last_pos);
   
-  $teaser_home = trim(drupal_substr($teaser, 0, 200));// . '...';
+  $teaser_home_chars = 200;
+  $teaser_home = trim(drupal_substr($teaser, 0, $teaser_home_chars));// . '...';
   $last_pos = strrpos($teaser_home, ' ');
   $teaser_home = substr_replace ($teaser_home, '...', $last_pos);
   
