@@ -18,7 +18,9 @@
       $author_name = $authorExtendedData->realname;
     }
 
-    echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+    
+    //echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+    echo $teaser_data['side_block_main_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
             . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
 
     return;
