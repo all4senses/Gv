@@ -127,7 +127,7 @@
 
       <?php if (!$page): ?>
         <?php 
-          if (!empty($teaser_data['side_block_main_image'])) {
+          if ($view_mode == 'side_block_teaser' && !empty($teaser_data['side_block_main_image'])) {
             echo $teaser_data['side_block_main_image']; 
           }
         ?>
