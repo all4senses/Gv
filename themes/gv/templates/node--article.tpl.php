@@ -51,6 +51,18 @@
       }
       
   }
+  elseif( $view_mode == 'teaser') {
+    $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
+    if (!empty($teaser_data['teaser_main_image'])) {
+      $class_thumb_presented = ' with_thumb';
+    }
+    else {
+      $class_thumb_presented = '';
+    }
+  }
+  
+  
+  
 ?>
 
 
