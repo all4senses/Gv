@@ -794,18 +794,27 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       
       if (preg_match_all('/<img[^>]+>/i', $edit['html_images']['value'], $matches)) {
         $found_image = TRUE;
-        dpm($matches);
+        //dpm($matches);
         foreach ($matches[0] as $i) {
           preg_match_all('/(alt|title|src)="([^"]*)"/i',$i, $matches2);
-          dpm($matches2);
+          //dpm($matches2);
           foreach ($matches2[1] as $index => $key) {
             $main_image[$key] = $matches2[2][$index];
           }
+          
+          $main_image['src'] = urldecode($main_image['src']); //str_replace('%20', ' ', $main_image['src']);
+          $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
+          //$main_image['uri'] = $stream_path;
+          
+          $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'as_featured_in_sideblock'));
+          //$main_image_html = '<div>' . $main_image_html;
+          $images[] = $main_image_html;
         }
         //$body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
       }
       
-      $data = array('html_images' => $edit['html_images']/*, 'pl_images' => $saved_files*/);
+      dpm($images);
+      $data = array('html_images' => $edit['html_images'], 'images' => $images);
       variable_set('gv_as_featured_in_side', serialize($data));
       break;
   }
