@@ -844,7 +844,10 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
       break;
     
     case 'side':
-      $out = $data['html_images']['value'];
+      $out = '';//$data['html_images']['value'];
+      foreach ($data['images'] as $image) {
+        $out .= $image;
+      }
       break;
   }
   
