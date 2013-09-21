@@ -58,7 +58,7 @@
       $class_thumb_presented = ' with_thumb';
       
       // Tune for fixing old style teaser for the new one after setting one teaser per a row.
-      $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+      $extra_data = $old_extra_data = unserialize(@$node->field_extra_data['und'][0]['value']);
       if (!isset($extra_data['teaser_only'])) {
         $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
         
