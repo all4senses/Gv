@@ -299,6 +299,16 @@ function gv_misc_drupal_410_gone() {
 
   // Perform end-of-request tasks.
   drupal_page_footer();
+  
+  
+  
+  // Disable boost caching for custom gv page not found pages.
+  // First part, initialization.
+  // See the second part at gv_misc_process_html(),
+  // where $_boost variable  will be corrected to prevent the current page caching.
+  global $gv_page_not_found;
+  $gv_page_not_found = TRUE;
+  
 }
 
 
@@ -1047,17 +1057,21 @@ function gv_misc_checkCtCaptcha_ajax() {
  */
 function gv_misc_process_html(&$vars) {
   
-        global $_boost;
+  // Disable boost caching for custom gv page not found pages.
+  // First part, initialization.
+  // See the second part at gv_misc_preprocess_page(),
+  // where $_boost variable  will be corrected to prevent the current page caching.
+  global $_boost;
+  global $gv_page_not_found;
+
+  if ($gv_page_not_found) {
+    $_boost['cache_this'] = FALSE;
+  }
+
   
-      dpm($_boost);   
-
-      global $gv_boost_cachable;
-    dpm('$gv_boost_cachable in gv_process_html' . $gv_boost_cachable);
-
-    if ($gv_boost_cachable) {
-      $_boost['cache_this'] = FALSE;
-    }
-    
+  
+  
+  
   global $user;
   
   if (!$user->uid) {
@@ -1547,51 +1561,51 @@ function gv_misc_drupal_not_found() {
     ////$return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
     
     drupal_set_title('Page Not Found');
-    
-//    $sitemap_body = cache_get('gv_sitemap_body');
-//    if (!$sitemap_body || empty($sitemap_body->data)) {
-//      $key = 'view-sitemap-page';
-//      $query = db_select('node', 'n');
-//      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
-//      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
-//      $query->fields('fb', array('body_value'))
-//            ->condition('n.type', 'preface')
-//            ->condition('pk.field_preface_key_value', $key);
-//      $sitemap_body = $query->execute()->fetchField(); 
-//
-//      // Remove preface text from a Sitemap body.
-//      if(preg_match('/.*(<table.*)/s', $sitemap_body, $matches)) {
-//        $sitemap_body = $matches[1];
-//      }
-//            
-//      cache_set('gv_sitemap_body', $sitemap_body);
-//    }
-//    else {
-//      $sitemap_body = $sitemap_body->data;
-//    }
-//    
-//    $page404_body = cache_get('gv_page404');
-//    if (!$page404_body || empty($page404_body->data)) {
-//      $key = 'page-not-found';
-//      $query = db_select('node', 'n');
-//      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
-//      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
-//      $query->fields('fb', array('body_value'))
-//            ->condition('n.type', 'preface')
-//            ->condition('pk.field_preface_key_value', $key);
-//      $page404_body = $query->execute()->fetchField(); 
-//
-//      cache_set('gv_page404', $page404_body);
-//    }
-//    else {
-//      $page404_body = $page404_body->data;
-//    }
-//    
-//    $return = '<div class="main-content page404"> 
-//      <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
-//      </div>
-//  </div>';
-    
+    /*
+    $sitemap_body = cache_get('gv_sitemap_body');
+    if (!$sitemap_body || empty($sitemap_body->data)) {
+      $key = 'view-sitemap-page';
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+      $query->fields('fb', array('body_value'))
+            ->condition('n.type', 'preface')
+            ->condition('pk.field_preface_key_value', $key);
+      $sitemap_body = $query->execute()->fetchField(); 
+
+      // Remove preface text from a Sitemap body.
+      if(preg_match('/.*(<table.*)/s', $sitemap_body, $matches)) {
+        $sitemap_body = $matches[1];
+      }
+
+      cache_set('gv_sitemap_body', $sitemap_body);
+    }
+    else {
+      $sitemap_body = $sitemap_body->data;
+    }
+
+    $page404_body = cache_get('gv_page404');
+    if (!$page404_body || empty($page404_body->data)) {
+      $key = 'page-not-found';
+      $query = db_select('node', 'n');
+      $query->join('field_data_field_preface_key', 'pk', "pk.entity_id = n.nid"); 
+      $query->join('field_data_body', 'fb', "fb.entity_id = n.nid"); 
+      $query->fields('fb', array('body_value'))
+            ->condition('n.type', 'preface')
+            ->condition('pk.field_preface_key_value', $key);
+      $page404_body = $query->execute()->fetchField(); 
+
+      cache_set('gv_page404', $page404_body);
+    }
+    else {
+      $page404_body = $page404_body->data;
+    }
+
+    $return = '<div class="main-content page404"> 
+      <div class="content page preface">' . $page404_body . '<div class="sitemap field-name-body">' . $sitemap_body . '</div>
+        </div>
+      </div>';
+    */
     $return = gv_mics_page404CustomContent();
     
   }
@@ -1602,6 +1616,16 @@ function gv_misc_drupal_not_found() {
 
   // Perform end-of-request tasks.
   drupal_page_footer();
+  
+  
+  
+  // Disable boost caching for custom gv page not found pages.
+  // First part, initialization.
+  // See the second part at gv_misc_process_html(),
+  // where $_boost variable  will be corrected to prevent the current page caching.
+  global $gv_page_not_found;
+  $gv_page_not_found = TRUE;
+      
 }
 
 
@@ -5849,28 +5873,9 @@ function gv_misc_views_pre_render(&$view) {
   // Redefine the $key if on the specific content type.
   if ($key == 'view-taxonomy_term-page_by_tag') {
     $args = arg();
+    
     // Disable any pages called with additional arguments after term_id in url, like taxonomy/term/597/feed (feed should be disables)
-    
-    
-      
     if (isset($args[3])) {
-      global $gv_boost_cachable;
-
-    
-      global $_boost;
-      
-      
-      
-      dpm($_boost);  
-//      if ($args[2] == 597) {
-//        $boost['cache_this']= TRUE;
-//      }
-    
-      
-      dpm('$gv_boost_cachable in prerender = ' . $gv_boost_cachable);
-      $gv_boost_cachable = 'xxx';
-      dpm('$gv_boost_cachable in prerender 2 = ' . $gv_boost_cachable);
-      
       gv_misc_drupal_not_found();
       drupal_exit();
     }

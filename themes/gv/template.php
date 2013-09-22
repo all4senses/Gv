@@ -612,18 +612,6 @@ function gv_breadcrumb($variables) {
  */
 function gv_process_page(&$variables) {
   
-    global $_boost;
-    dpm($_boost);   
-    
-    global $gv_boost_cachable;
-
-//    if ($gv_boost_cachable) {
-//      $_boost['cache_this'] = FALSE;
-//    }
-    dpm('$gv_boost_cachable in template _process_page' . $gv_boost_cachable);
-
-
-  
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
   
