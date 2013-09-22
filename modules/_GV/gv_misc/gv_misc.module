@@ -1047,6 +1047,10 @@ function gv_misc_checkCtCaptcha_ajax() {
  */
 function gv_misc_process_html(&$vars) {
   
+        global $_boost;
+  
+      dpm($_boost);   
+
   global $user;
   
   if (!$user->uid) {
