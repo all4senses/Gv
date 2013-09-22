@@ -1066,10 +1066,10 @@ function gv_misc_process_html(&$vars) {
   
   
   global $user;
-  dpm($_SERVER);
-  dpm($_GET);
+//  dpm($_SERVER);
+//  dpm($_GET);
   
-  if (!$user->uid) {
+  if (!$user->uid && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions-final' && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions') {
     
       // Minify a Html Page content.
       $vars['page'] = preg_replace(
