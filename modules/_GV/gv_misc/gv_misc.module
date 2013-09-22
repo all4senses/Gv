@@ -225,7 +225,10 @@ function gv_misc_boost_is_cacheable($parts, $request_type = 'normal') {
   $pages410 = unserialize(PAGES_410);
   
   global $gv_boost_cachable;
+  global $_boost;
   
+  dpm($_boost);
+
   dpm('$gv_boost_cachable in boost = ' . $gv_boost_cachable);
   $gv_boost_cachable = 'yyy';
   
@@ -5838,7 +5841,10 @@ function gv_misc_views_pre_render(&$view) {
     // Disable any pages called with additional arguments after term_id in url, like taxonomy/term/597/feed (feed should be disables)
     if (isset($args[3])) {
       global $gv_boost_cachable;
+
+      global $_boost;
   
+      dpm($_boost);   
       
       dpm('$gv_boost_cachable in prerender = ' . $gv_boost_cachable);
       $gv_boost_cachable = 'xxx';
