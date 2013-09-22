@@ -616,7 +616,7 @@ function gv_process_page(&$variables) {
     dpm($_boost);   
     
     global $gv_boost_cachable;
-    dpm($gv_boost_cachable);
+    dpm('$gv_boost_cachable in template _process_page' . $gv_boost_cachable);
 
 
   
