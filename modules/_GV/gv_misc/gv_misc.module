@@ -1069,6 +1069,7 @@ function gv_misc_process_html(&$vars) {
 //  dpm($_SERVER);
 //  dpm($_GET);
   
+  // We do not minify the code for logged in users and for quote landing and final pages.
   if (!$user->uid && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions-final' && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions') {
     
       // Minify a Html Page content.
@@ -2842,7 +2843,7 @@ function gv_misc_addSocialShareData_toPage($node) {
   if (!$image){
     // Show default image - the logo.
     //$image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
-    $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo3-t.png';
+    $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo4-t.png';
   }
 
   if (!strpos($image, '//getvoip.com')) {
