@@ -1524,6 +1524,21 @@ function gv_misc_identifyNodeType($nid) {
  * Fix for a standard drupal_not_found
  */
 function gv_misc_drupal_not_found() {
+  
+  
+  
+  // Disable boost caching for custom gv page not found pages.
+  // First part, initialization.
+  // See the second part at gv_misc_process_html(),
+  // where $_boost variable  will be corrected to prevent the current page caching.
+  global $gv_page_not_found;
+  $gv_page_not_found = TRUE;
+  
+  
+  
+  
+  
+  
   // Emit the correct charset HTTP header, but not if the page callback
   // result is NULL, since that likely indicates that it printed something
   // in which case, no further headers may be sent, and not if code running
@@ -1616,16 +1631,6 @@ function gv_misc_drupal_not_found() {
 
   // Perform end-of-request tasks.
   drupal_page_footer();
-  
-  
-  
-  // Disable boost caching for custom gv page not found pages.
-  // First part, initialization.
-  // See the second part at gv_misc_process_html(),
-  // where $_boost variable  will be corrected to prevent the current page caching.
-  global $gv_page_not_found;
-  $gv_page_not_found = TRUE;
-      
 }
 
 
