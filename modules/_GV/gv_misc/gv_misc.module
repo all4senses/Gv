@@ -220,27 +220,17 @@ function gv_misc_410gone() {
  * 
  * @return $parts
  */
-function gv_misc_boost_is_cacheable($parts, $request_type = 'normal') {
-
-  $pages410 = unserialize(PAGES_410);
-  
-  global $gv_boost_cachable;
-  global $_boost;
-  
-  dpm($_boost);
-
-  dpm('$gv_boost_cachable in boost = ' . $gv_boost_cachable);
-  $gv_boost_cachable = 'yyy';
-  
-  dpm('$gv_boost_cachable in boost 2= ' . $gv_boost_cachable);
-  
-  if (in_array($_GET['q'], $pages410)) {
-    $parts['is_cacheable'] = FALSE;
-    $parts['is_cacheable_reason'] = 'This page is gone. No cache for preserving the page status 410 gone.';
-  }
-  
-  return $parts;
-}
+//function gv_misc_boost_is_cacheable($parts, $request_type = 'normal') {
+//
+//  $pages410 = unserialize(PAGES_410);
+//  
+//  if (in_array($_GET['q'], $pages410)) {
+//    $parts['is_cacheable'] = FALSE;
+//    $parts['is_cacheable_reason'] = 'This page is gone. No cache for preserving the page status 410 gone.';
+//  }
+//  
+//  return $parts;
+//}
 
 
 
