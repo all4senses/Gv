@@ -612,9 +612,12 @@ function gv_breadcrumb($variables) {
  */
 function gv_process_page(&$variables) {
   
-        global $_boost;
-  
-      dpm($_boost);   
+    global $_boost;
+    dpm($_boost);   
+    
+    global $gv_boost_cachable;
+    dpm($gv_boost_cachable);
+
 
   
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));

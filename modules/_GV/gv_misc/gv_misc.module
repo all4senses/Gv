@@ -1051,6 +1051,9 @@ function gv_misc_process_html(&$vars) {
   
       dpm($_boost);   
 
+      global $gv_boost_cachable;
+    dpm($gv_boost_cachable);
+
   global $user;
   
   if (!$user->uid) {
@@ -5851,7 +5854,9 @@ function gv_misc_views_pre_render(&$view) {
 
     
       global $_boost;
-  
+      
+      
+      
       dpm($_boost);  
       if ($args[2] == 597) {
         $boost['cache_this']= TRUE;
