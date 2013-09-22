@@ -617,9 +617,9 @@ function gv_process_page(&$variables) {
     
     global $gv_boost_cachable;
 
-    if ($gv_boost_cachable) {
-      $_boost['cache_this'] = FALSE;
-    }
+//    if ($gv_boost_cachable) {
+//      $_boost['cache_this'] = FALSE;
+//    }
     dpm('$gv_boost_cachable in template _process_page' . $gv_boost_cachable);
 
 
