@@ -224,6 +224,10 @@ function gv_misc_boost_is_cacheable($parts, $request_type = 'normal') {
 
   $pages410 = unserialize(PAGES_410);
   
+  global $gv_boost_cachable;
+  
+  dpm('$gv_boost_cachable = ' . $gv_boost_cachable);
+  
   if (in_array($_GET['q'], $pages410)) {
     $parts['is_cacheable'] = FALSE;
     $parts['is_cacheable_reason'] = 'This page is gone. No cache for preserving the page status 410 gone.';
@@ -5830,6 +5834,13 @@ function gv_misc_views_pre_render(&$view) {
     $args = arg();
     // Disable any pages called with additional arguments after term_id in url, like taxonomy/term/597/feed (feed should be disables)
     if (isset($args[3])) {
+      global $gv_boost_cachable;
+  
+      
+      dpm('$gv_boost_cachable in prerender = ' . $gv_boost_cachable);
+      $gv_boost_cachable = 'xxx';
+      dpm('$gv_boost_cachable in prerender 2 = ' . $gv_boost_cachable);
+      
       gv_misc_drupal_not_found();
       drupal_exit();
     }
