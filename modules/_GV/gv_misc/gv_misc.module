@@ -1939,6 +1939,13 @@ function gv_misc_menu_alter(&$items) {
   unset($items['tagadelic'], $items['tagadelic/list/%tagadelic_vocs'], $items['tagadelic/chunk/%tagadelic_vocs']);
   
   
+   //unset($items['taxonomy/term/%taxonomy_term']);
+  unset($items['taxonomy/term/%taxonomy_term/view']);
+  unset($items['taxonomy/term/%taxonomy_term/feed']); // If you want to hide the feed as well.
+  unset($items['taxonomy/term/%taxonomy_term/%views_arg']);
+  
+  
+  
   $keys = array_keys($items);
   foreach($keys as $key) {
     if (strpos($key, 'taxonomy/term/') !== FALSE) {
@@ -1947,10 +1954,6 @@ function gv_misc_menu_alter(&$items) {
   }
   dpr($keys2);
   exit();
-  
-   //unset($items['taxonomy/term/%taxonomy_term']);
-  unset($items['taxonomy/term/%taxonomy_term/view']);
-  unset($items['taxonomy/term/%taxonomy_term/feed']); // If you want to hide the feed as well.
 }
 
 
