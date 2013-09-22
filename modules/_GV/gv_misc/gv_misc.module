@@ -1945,15 +1945,18 @@ function gv_misc_menu_alter(&$items) {
   unset($items['taxonomy/term/%taxonomy_term/%views_arg']);
   
   
-  
-  $keys = array_keys($items);
-  foreach($keys as $key) {
-    if (strpos($key, 'taxonomy/term/') !== FALSE) {
-      $keys2[] = $key;
+  global $user;
+  if ($user->uid == 1) {
+    $keys = array_keys($items);
+    foreach($keys as $key) {
+      if (strpos($key, 'taxonomy/term/') !== FALSE) {
+        $keys2[] = $key;
+      }
     }
+    dpr($keys2);
+    exit();
   }
-  dpr($keys2);
-  exit();
+  
 }
 
 
