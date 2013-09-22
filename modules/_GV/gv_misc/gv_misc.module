@@ -5829,6 +5829,12 @@ function gv_misc_views_pre_render(&$view) {
   if ($key == 'view-taxonomy_term-page_by_tag') {
     $args = arg();
     dpm($args);
+    // Disable any pages called with additional arguments after term_id in url, like taxonomy/term/597/feed (feed should be disables)
+    if (isset($args[3])) {
+      gv_misc_drupal_not_found();
+      drupal_exit();
+    }
+    
     $term = taxonomy_term_load($args[2]);
     
     switch ($term->vocabulary_machine_name) {
