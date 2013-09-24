@@ -204,10 +204,12 @@
 
 
   <?php
+    /*
     if ($user->uid && $is_front) {
       echo gv_blocks_render_block('gv_blocks', 'as_featured_in');
     }
-    
+    */
+  
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
   ?>
     
