@@ -86,11 +86,9 @@
           $extra_data['guest_author'] = $old_extra_data['guest_author'];
         }
         
-        // Update the field $extra_data in the db
-        // ...
-        if ($node->nid == 1602) {
-          gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
-        }
+         // Update the field $extra_data in the db
+         gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
+        
       }
       
     }
