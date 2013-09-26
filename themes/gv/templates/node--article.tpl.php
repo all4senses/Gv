@@ -62,7 +62,6 @@
       
       // Update older version of extra_data fields. Newer extra_data has 'teaser_only' field. 
       if (!isset($extra_data['teaser_only'])) {
-        dpm('older field for nid ' . $node->nid);
         
         $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
         
