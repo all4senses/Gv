@@ -88,7 +88,9 @@
         
         // Update the field $extra_data in the db
         // ...
-        //gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
+        if ($node->nid == 1602) {
+          gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
+        }
       }
       
     }
