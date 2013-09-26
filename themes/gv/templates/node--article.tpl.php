@@ -59,7 +59,11 @@
       
       // Tune for fixing old style teaser for the new one after setting one teaser per a row.
       $extra_data = $old_extra_data = unserialize(@$node->field_extra_data['und'][0]['value']);
+      
+      // Update older version of extra_data fields. Newer extra_data has 'teaser_only' field. 
       if (!isset($extra_data['teaser_only'])) {
+        dpm('older field for nid ' . $node->nid);
+        
         $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
         
         $extra_data = array(
@@ -84,7 +88,7 @@
         
         // Update the field $extra_data in the db
         // ...
-        
+        //gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
       }
       
     }
