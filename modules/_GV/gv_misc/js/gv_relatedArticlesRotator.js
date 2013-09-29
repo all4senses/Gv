@@ -107,7 +107,7 @@
         //console.log('h after ' + hafter);
         
         hafter2 = $(this).height();
-        console.log('h after2 ' + hafter);
+        console.log('h after2 ' + hafter2);
         
         //console.log('ih after ' + $(this).innerHeight());
         //console.log('oh after ' + $(this).outerHeight());
