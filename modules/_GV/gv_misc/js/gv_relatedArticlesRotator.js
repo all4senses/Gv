@@ -102,9 +102,9 @@
         console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
-        $(this).css('height', '34px');
-        hafter = $(this).css('height'); //$(this).height();
-        console.log('h after ' + hafter);
+        //$(this).css('height', '34px');
+        //hafter = $(this).css('height'); //$(this).height();
+        //console.log('h after ' + hafter);
         
         //hafter2 = $(this).height();
         //console.log('h after2 ' + hafter2);
