@@ -98,7 +98,7 @@
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
         
-        hbefore = $(this).css('height'); //$(this).height();
+        hbefore = $(this).height(); //css('height'); //
         console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
