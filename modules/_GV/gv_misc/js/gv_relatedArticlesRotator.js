@@ -97,7 +97,8 @@
       $( ".sidebar .block .content #rotator a.title" ).each(function( index ) {
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
-        console.log(this);
+        console.log($(this).height());
+        //console.log($this);
       });
 
        
