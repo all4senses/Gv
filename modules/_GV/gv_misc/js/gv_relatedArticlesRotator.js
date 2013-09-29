@@ -97,7 +97,7 @@
       $( ".sidebar .block .content #rotator a.title" ).each(function( index ) {
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
-        
+        console.log('scroll ' + $(this).scrollHeight);
         hbefore = $(this).height(); //css('height'); //
         console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
