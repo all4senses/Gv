@@ -94,7 +94,26 @@
           }  
       );
       
+      
+      console.log($( ".sidebar .block .content #rotator a.title" )[0].height());
+      console.log($( ".sidebar .block .content #rotator a.title" )[1].height());
+      console.log($( ".sidebar .block .content #rotator a.title" )[2].height());
+      console.log($( ".sidebar .block .content #rotator a.title" )[3].height());
+      
+      
+      $( ".sidebar .block .content #rotator a.title" )[0].css('height', 'inherit');
+      $( ".sidebar .block .content #rotator a.title" )[1].css('height', 'inherit');
+      $( ".sidebar .block .content #rotator a.title" )[2].css('height', 'inherit');
+      $( ".sidebar .block .content #rotator a.title" )[3].css('height', 'inherit');
+      
+      console.log($( ".sidebar .block .content #rotator a.title" )[0].height());
+      console.log($( ".sidebar .block .content #rotator a.title" )[1].height());
+      console.log($( ".sidebar .block .content #rotator a.title" )[2].height());
+      console.log($( ".sidebar .block .content #rotator a.title" )[3].height());
+      
+      
       $( ".sidebar .block .content #rotator a.title" ).each(function( index ) {
+        return;
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
         console.log('scroll ' + $(this).firstChild.scrollHeight);
