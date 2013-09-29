@@ -98,20 +98,25 @@
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
         
-        hbefore = $(this).css('height'); //$(this).height();
-        console.log('h before ' + hbefore);
+        //hbefore = $(this).css('height'); //$(this).height();
+        //console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
-        $(this).css('height', 'inherit');
+        //$(this).css('height', 'inherit');
         //hafter = css('height'); //$(this).height();
         //console.log('h after ' + hafter);
         
-        hafter2 = $(this).height();
-        console.log('h after2 ' + hafter2);
+        //hafter2 = $(this).height();
+        //console.log('h after2 ' + hafter2);
         
         //console.log('ih after ' + $(this).innerHeight());
         //console.log('oh after ' + $(this).outerHeight());
         //console.log($this);
+        
+        var lht = parseInt($(this).css('lineHeight'),10);
+        var lines = $(this).attr('scrollHeight') / lht;
+        console.log(lines);
+        
       });
 
        
