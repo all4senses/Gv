@@ -98,12 +98,12 @@
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
         console.log('h before ' + $(this).height());
-        console.log('ih before ' + $(this).innerHeight());
-        console.log('oh before ' + $(this).outerHeight());
-        $(this).css('height', 'inherit');
+        //console.log('ih before ' + $(this).innerHeight());
+        //console.log('oh before ' + $(this).outerHeight());
+        $(this).css('height', 'auto');
         console.log('h after ' + $(this).height());
-        console.log('ih after ' + $(this).innerHeight());
-        console.log('oh after ' + $(this).outerHeight());
+        //console.log('ih after ' + $(this).innerHeight());
+        //console.log('oh after ' + $(this).outerHeight());
         //console.log($this);
       });
 
