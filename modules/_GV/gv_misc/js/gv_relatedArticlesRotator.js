@@ -103,8 +103,8 @@
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
         $(this).css('height', 'inherit');
-        hafter = css('height'); //$(this).height();
-        console.log('h after ' + hafter);
+        //hafter = css('height'); //$(this).height();
+        //console.log('h after ' + hafter);
         
         hafter2 = $(this).height();
         console.log('h after2 ' + hafter);
