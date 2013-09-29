@@ -98,12 +98,12 @@
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
         
-        hbefore = $(this).height();
+        hbefore = $(this).css('height'); //$(this).height();
         console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
         $(this).css('height', 'inherit');
-        hafter = $(this).height();
+        hafter = css('height'); //$(this).height();
         console.log('h after ' + hafter);
         //console.log('ih after ' + $(this).innerHeight());
         //console.log('oh after ' + $(this).outerHeight());
