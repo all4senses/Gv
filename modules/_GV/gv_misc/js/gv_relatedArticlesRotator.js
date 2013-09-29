@@ -97,11 +97,14 @@
       $( ".sidebar .block .content #rotator a.title" ).each(function( index ) {
         console.log( index + ": " + $( this ).text() );
         console.log($(this));
-        console.log('h before ' + $(this).height());
+        
+        hbefore = $(this).height();
+        console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
-        $(this).css('height', 'auto');
-        console.log('h after ' + $(this).height());
+        $(this).css('height', 'inherit');
+        hafter = $(this).height();
+        console.log('h after ' + hafter);
         //console.log('ih after ' + $(this).innerHeight());
         //console.log('oh after ' + $(this).outerHeight());
         //console.log($this);
