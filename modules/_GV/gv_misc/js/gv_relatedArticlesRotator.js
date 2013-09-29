@@ -94,7 +94,9 @@
           }  
       );
       
-
+      $( ".sidebar .block .content #rotator a.title" ).each(function( index ) {
+        console.log( index + ": " + $( this ).text() );
+      });
 
        
     }
