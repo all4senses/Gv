@@ -8,6 +8,8 @@
  */
 echo 'xxx';
 dpm($rows);
+$half_count = (int) count($rows)/2;
+dpm('$half_count = ' . $half_count);
 ?>
 <?php if (!empty($title)): ?>
   <h3><?php print $title; ?></h3>
