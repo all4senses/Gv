@@ -1,6 +1,7 @@
 <?php 
 
   $class_thumb_presented = '';
+  $update_teaser = FALSE;
   
   if($view_mode == 'home_teaser') {
 
@@ -35,7 +36,7 @@
   elseif($view_mode == 'side_block_teaser') {
     
       if (!empty($node->field_extra_data['und'][0]['value'])) {
-        $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+        $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
       }
   
      if (!empty($extra_data['teaser_side_block'])) {
@@ -43,6 +44,7 @@
       }
       else {
         $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
+        $update_teaser = TRUE;
       }
       
       // Hide thumbnails
@@ -62,38 +64,40 @@
       
       // Update older version of extra_data fields. Newer extra_data has 'teaser_only' field. 
       if (!isset($extra_data['teaser_only'])) {
-        
         $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
-        
-        $extra_data = array(
-          'title' => $title, 
-          'teaser_block' => $teaser_data['teaser_block'], 
-          'teaser_home' => $teaser_data['teaser_home'],
-          'teaser_side_block' => $teaser_data['teaser_side_block'],
-          'side_block_main_image' => $teaser_data['side_block_main_image'],
-
-          'teaser_only' => $teaser_data['teaser_only'],
-          'teaser_main_image' => $teaser_data['teaser_main_image'],
-
-
-          // Don't recalculate related articles..
-          'related_articles' => @$old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
-          'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'], //time(),
-        );
-        
-        if (!empty($old_extra_data['guest_author'])) {
-          $extra_data['guest_author'] = $old_extra_data['guest_author'];
-        }
-        
-         // Update the field $extra_data in the db
-         gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
-        
+        $update_teaser = TRUE;
       }
       
     }
     else {
       $class_thumb_presented = NULL;
     }
+  }
+  
+  
+  if ($update_teaser == TRUE) {
+    $extra_data = array(
+      'title' => $title, 
+      'teaser_block' => $teaser_data['teaser_block'], 
+      'teaser_home' => $teaser_data['teaser_home'],
+      'teaser_side_block' => $teaser_data['teaser_side_block'],
+      'side_block_main_image' => $teaser_data['side_block_main_image'],
+
+      'teaser_only' => $teaser_data['teaser_only'],
+      'teaser_main_image' => $teaser_data['teaser_main_image'],
+
+
+      // Don't recalculate related articles..
+      'related_articles' => @$old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
+      'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'], //time(),
+    );
+
+    if (!empty($old_extra_data['guest_author'])) {
+      $extra_data['guest_author'] = $old_extra_data['guest_author'];
+    }
+
+      // Update the field $extra_data in the db
+      gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
   }
   
   
@@ -110,16 +114,16 @@
     
       $url = 'http://getvoip.com'. url('node/' . $node->nid);
       
+      /*
+        if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+          $share_title = $node->metatags['title']['value'];
+        }
+        else {
+          $share_title = $title;
+        }
 
-//        if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-//          $share_title = $node->metatags['title']['value'];
-//        }
-//        else {
-//          $share_title = $title;
-//        }
-
-//        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
-
+        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+      */
     ?>
 
   <div class="main-content"> 
@@ -314,7 +318,9 @@
             // $path_with_latest_article is defined above.
             elseif ($paths_with_latest_article) {
               // Show an other teaser on the home page.
-              $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+              if (empty($extra_data)) {
+                $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+              }
               if (isset($extra_data['teaser_home'])) {
                 echo $extra_data['teaser_home'];
               }
@@ -337,7 +343,7 @@
                   echo $teaser_data['teaser'];
                   
                   // Update the field field_a_teaser
-                  // ...
+                  gv_misc_fieldSave('a_teaser', $node->nid, $teaser_data['teaser']);
                 }
                 
               }
