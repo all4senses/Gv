@@ -95,30 +95,14 @@
       );
       
       
-      console.log($( ".sidebar .block .content #rotator a.title" )[0].height());
-      console.log($( ".sidebar .block .content #rotator a.title" )[1].height());
-      console.log($( ".sidebar .block .content #rotator a.title" )[2].height());
-      console.log($( ".sidebar .block .content #rotator a.title" )[3].height());
-      
-      
-      $( ".sidebar .block .content #rotator a.title" )[0].css('height', 'inherit');
-      $( ".sidebar .block .content #rotator a.title" )[1].css('height', 'inherit');
-      $( ".sidebar .block .content #rotator a.title" )[2].css('height', 'inherit');
-      $( ".sidebar .block .content #rotator a.title" )[3].css('height', 'inherit');
-      
-      console.log($( ".sidebar .block .content #rotator a.title" )[0].height());
-      console.log($( ".sidebar .block .content #rotator a.title" )[1].height());
-      console.log($( ".sidebar .block .content #rotator a.title" )[2].height());
-      console.log($( ".sidebar .block .content #rotator a.title" )[3].height());
-      
       
       $( ".sidebar .block .content #rotator a.title" ).each(function( index ) {
-        return;
-        console.log( index + ": " + $( this ).text() );
-        console.log($(this));
-        console.log('scroll ' + $(this).firstChild.scrollHeight);
-        hbefore = $(this).height(); //css('height'); //
-        console.log('h before ' + hbefore);
+//        return;
+//        console.log( index + ": " + $( this ).text() );
+//        console.log($(this));
+//        console.log('scroll ' + $(this).firstChild.scrollHeight);
+//        hbefore = $(this).height(); //css('height'); //
+//        console.log('h before ' + hbefore);
         //console.log('ih before ' + $(this).innerHeight());
         //console.log('oh before ' + $(this).outerHeight());
         //$(this).css('height', '34px');
