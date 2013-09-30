@@ -198,12 +198,14 @@
         </aside>  <!-- /#sidebar-second -->
       <?php endif; ?>
 
+      <div class="bottom-clear"></div>
+      
+      <div id="above_footer">
+          <?php echo render($page['above_footer']); ?>
+      </div>
+
   </div> <!-- /#all-content -->
 
-  <div id="above_footer">
-      <?php echo render($page['above_footer']); ?>
-  </div>
-  
 </div> <!-- <div id="bshadow"> -->
 
 
