@@ -80,19 +80,34 @@
         
         
       // Show full title on hover if it was more than 3 lines and has been cutted to two lines.
-      $(".sidebar .block .content #rotator a.title").hover(  
+//      $(".sidebar .block .content #rotator a.title").hover(  
+//          function() {  
+//            $(this)[0].original_title_height = $(this).css('height');
+//            $(this).css('height', 'inherit');
+//            
+//            $('#block-gv-blocks-sidebar-related-articles.block .content')[0].original_title_height = $('#block-gv-blocks-sidebar-related-articles.block .content').css('height');
+//            $('#block-gv-blocks-sidebar-related-articles.block .content').css('height', 'inherit');
+//          },  
+//          function() {  
+//            $(this).css('height', $(this)[0].original_title_height);
+//            $('#block-gv-blocks-sidebar-related-articles.block .content').css('height', $('#block-gv-blocks-sidebar-related-articles.block .content')[0].original_title_height);
+//          }  
+//      );
+        
+        $(".sidebar .block .content #rotator .ui-tabs-panel").hover(  
           function() {  
-            $(this)[0].original_title_height = $(this).css('height');
-            $(this).css('height', 'inherit');
+            $(this)[0].original_title_height = $(this).find('a.title').css('height');
+            $(this).find('a.title').css('height', 'inherit');
             
             $('#block-gv-blocks-sidebar-related-articles.block .content')[0].original_title_height = $('#block-gv-blocks-sidebar-related-articles.block .content').css('height');
             $('#block-gv-blocks-sidebar-related-articles.block .content').css('height', 'inherit');
           },  
           function() {  
-            $(this).css('height', $(this)[0].original_title_height);
+            $(this).find('a.title').css('height', $(this)[0].original_title_height);
             $('#block-gv-blocks-sidebar-related-articles.block .content').css('height', $('#block-gv-blocks-sidebar-related-articles.block .content')[0].original_title_height);
           }  
       );
+        
       
       
       
