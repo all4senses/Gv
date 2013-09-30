@@ -200,7 +200,11 @@
 
   </div> <!-- /#all-content -->
 
-  </div> <!-- <div id="bshadow"> -->
+  <div id="above_footer">
+      <?php echo render($page['above_footer']); ?>
+  </div>
+  
+</div> <!-- <div id="bshadow"> -->
 
 
   <?php
@@ -213,11 +217,6 @@
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
   ?>
     
-  <div id="above_footer">
-    <div class="inside">
-      <?php echo render($page['above_footer']); ?>
-    </div>
-  </div>
   
   
   <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
