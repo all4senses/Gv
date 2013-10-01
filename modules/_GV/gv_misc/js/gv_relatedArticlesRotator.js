@@ -35,11 +35,11 @@
       // Works.
        $("#rotator").tabs({fx: [
                                 //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: "250", duration: 250}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 400}, // will be used for hide
                                 //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-                                {opacity: "toggle", left: "0", duration: 1500} // will be used for show
+                                {opacity: "toggle", left: "0", duration: 2500} // will be used for show
                               ]
-                    }).tabs("rotate", 7000, true);//.tabs({  activate: function( event, ui ) {console.log('xxx'); alert('xxxx'); } });
+                    }).tabs("rotate", 15000, true);//.tabs({  activate: function( event, ui ) {console.log('xxx'); alert('xxxx'); } });
       
       
       // Set a tab from right back to the left to move it always from left to right.
@@ -57,9 +57,9 @@
             
             $("#rotator").tabs({fx: [
                                 //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: "250", duration: 250}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 400}, // will be used for hide
                                 //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-                                {opacity: "toggle", left: "0", duration: 1500} // will be used for show
+                                {opacity: "toggle", left: "0", duration: 2500} // will be used for show
                               ]
                     }).tabs("rotate", 0, true);
             
@@ -69,11 +69,11 @@
             
             $("#rotator").tabs({fx: [
                                 //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: "250", duration: 250}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 400}, // will be used for hide
                                 //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
-                                {opacity: "toggle", left: "0", duration: 1500} // will be used for show
+                                {opacity: "toggle", left: "0", duration: 2500} // will be used for show
                               ]
-                    }).tabs("rotate", 7000, true);
+                    }).tabs("rotate", 15000, true);
           }  
       );
         
