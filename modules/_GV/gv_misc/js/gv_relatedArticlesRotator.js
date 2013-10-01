@@ -35,7 +35,7 @@
       // Works.
        $("#rotator").tabs({fx: [
                                 //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: "250", duration: 400}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 800}, // will be used for hide
                                 //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                                 {opacity: "toggle", left: "0", duration: 2500} // will be used for show
                               ]
@@ -57,7 +57,7 @@
             
             $("#rotator").tabs({fx: [
                                 //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: "250", duration: 400}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 800}, // will be used for hide
                                 //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                                 {opacity: "toggle", left: "0", duration: 2500} // will be used for show
                               ]
@@ -69,7 +69,7 @@
             
             $("#rotator").tabs({fx: [
                                 //{opacity: "toggle", left: ["250", 'easeInOutBounce'], duration: 100}, // will be used for hide
-                                {opacity: "toggle", left: "250", duration: 400}, // will be used for hide
+                                {opacity: "toggle", left: "250", duration: 800}, // will be used for hide
                                 //{opacity: "toggle", left: ["0", 'easeInOutBounce'], duration: 1500} // will be used for show
                                 {opacity: "toggle", left: "0", duration: 2500} // will be used for show
                               ]
@@ -94,6 +94,9 @@
 //          }  
 //      );
         
+        
+        // Set the inherit heights on the content hover.
+        /*
         $(".sidebar .block .content #rotator .ui-tabs-panel").hover(  
           function() {  
             $(this)[0].original_title_height = $(this).find('a.title').css('height');
@@ -107,7 +110,7 @@
             $('#block-gv-blocks-sidebar-related-articles.block .content').css('height', $('#block-gv-blocks-sidebar-related-articles.block .content')[0].original_title_height);
           }  
       );
-        
+      */
       
       
       
