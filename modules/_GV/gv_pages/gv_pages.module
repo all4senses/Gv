@@ -3911,6 +3911,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
   
   $old_extra_data = unserialize($form_state['values']['field_extra_data']['und'][0]['value']);
+  dpm('----->  ' . $form_state['values']['title']);
   $extra_data = array(
     'title' => $form_state['values']['title'], 
     'teaser_block' => $teaser_data['teaser_block'], 
