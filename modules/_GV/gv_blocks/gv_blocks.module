@@ -892,55 +892,50 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   gv_misc_addRelatedArticlesToNode($node);
   
   
-  if (!empty($node->related_articles)) {
+  if (empty($node->related_articles)) {
+    return NULL;
+  }
     
-    //dpm($node);
-    
-    drupal_add_library('system', 'ui.core');
-    drupal_add_library('system', 'ui.widget');
-    drupal_add_library('system', 'ui.tabs');
-    //drupal_add_library('system', 'effects.bounce');
-    
+  //dpm($node);
 
-    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-    drupal_add_js($path_to_custom_js . 'gv_relatedArticlesRotator.js');
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.tabs');
+  //drupal_add_library('system', 'effects.bounce');
 
-    $path_to_current_theme = drupal_get_path('theme',$GLOBALS['theme']) . '/css/';
-    drupal_add_css($path_to_current_theme . 'gv_relatedArticlesRotator.css');
 
-    
-    //return 'Rel... ' . $nid;
-    
-    $ui_tabs_nav = '';
-    $fragments = '';
-    
-    foreach ($node->related_articles as $related_nid => $related_article) {
-      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
-      
-      $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel' . (!$fragments ? ' first': '') . '">';
-        
-      if (!empty($related_article->field_main_image_value['src_themed_related_sideblock'])) {
-        $fragments .='<a class="thumb" href="' . url('node/' . $related_nid) . '">'
-            //. '<img src="' . $related_article->field_main_image_value['src_themed_related'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>'
-            . ($related_article->field_main_image_value['src_themed_related_sideblock'] ? '<img src="' . $related_article->field_main_image_value['src_themed_related_sideblock'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>' : '')
-        . '</a>';
-      }
-      $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
-              
-        '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div>
-        <div class="teaser">' . (!isset($related_article->teaser) ? '' : $related_article->teaser) . ' ' . l('Read more', 'node/' . $related_nid, array('attributes' => array('class' => array('more')))) . '</div>
-          
-      </div>';
+  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_relatedArticlesRotator.js');
+
+  $path_to_current_theme = drupal_get_path('theme',$GLOBALS['theme']) . '/css/';
+  drupal_add_css($path_to_current_theme . 'gv_relatedArticlesRotator.css');
+
+  $ui_tabs_nav = '';
+  $fragments = '';
+
+  foreach ($node->related_articles as $related_nid => $related_article) {
+    $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
+
+    $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel' . (!$fragments ? ' first': '') . '">';
+
+    if (!empty($related_article->field_main_image_value['src_themed_related_sideblock'])) {
+      $fragments .='<a class="thumb" href="' . url('node/' . $related_nid) . '">'
+          //. '<img src="' . $related_article->field_main_image_value['src_themed_related'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>'
+          . ($related_article->field_main_image_value['src_themed_related_sideblock'] ? '<img src="' . $related_article->field_main_image_value['src_themed_related_sideblock'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>' : '')
+      . '</a>';
     }
+    $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
+
+      '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div>
+      <div class="teaser">' . (!isset($related_article->teaser) ? '' : $related_article->teaser) . ' ' . l('Read more', 'node/' . $related_nid, array('attributes' => array('class' => array('more')))) . '</div>
+
+    </div>';
+  }
 //    $key += 1; 
 //    $blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
 //    $blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
 //    return '<div id="related-block"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';
-    return '<div class="related-block" id="rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul>' . $fragments . '</div>';
-  }
-  
-  
-  return 'Rel... ' . $nid;
+  return '<div class="related-block" id="rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul>' . $fragments . '</div>';
 }
 
 
