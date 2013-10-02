@@ -668,7 +668,7 @@ function gv_process_page(&$variables) {
   
   
   global $user;
-  if ($user->uid == 1) {
+  if ($user->uid) {
     gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500', 'NA', 'text/css');
   }
   else {
