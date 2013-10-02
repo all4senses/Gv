@@ -668,8 +668,14 @@ function gv_process_page(&$variables) {
   gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500', 'NA', 'text/css');
   
   
+  
   // Add the font-awesome icons font.
   drupal_add_css('sites/all/libraries/fonts/font-awesome/css/font-awesome.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  
+  global $user;
+  if ($user->uid == 1) {
+    gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
+  }
 }
 
 
