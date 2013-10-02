@@ -674,7 +674,9 @@ function gv_process_page(&$variables) {
   
   global $user;
   if ($user->uid == 1) {
-    gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
+    // Add a twitter-bootstrap styles.
+    //gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
+    drupal_add_css('sites/all/libraries/twitter-bootstrap/css/bootstrap-combined.no-icons.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
   }
 }
 
