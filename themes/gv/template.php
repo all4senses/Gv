@@ -671,13 +671,14 @@ function gv_process_page(&$variables) {
   
   // Add the font-awesome icons font.
   drupal_add_css('sites/all/libraries/fonts/font-awesome/css/font-awesome.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-  
-  global $user;
-  if ($user->uid == 1) {
-    // Add a twitter-bootstrap styles.
-    //gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
-    drupal_add_css('sites/all/libraries/twitter-bootstrap/css/bootstrap-combined.no-icons.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-  }
+
+  // Adding this css will break a little bit a styling on the page!
+//  global $user;
+//  if ($user->uid == 1) {
+//    // Add a twitter-bootstrap styles.
+//    //gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
+//    drupal_add_css('sites/all/libraries/twitter-bootstrap/css/bootstrap-combined.no-icons.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+//  }
 }
 
 
