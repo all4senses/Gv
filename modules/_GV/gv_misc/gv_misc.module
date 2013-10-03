@@ -8034,3 +8034,86 @@ function gv_misc_node_view_alter(&$build) {
   // Allow contextual links even on full view mode on node pages.
   //$build['#contextual_links']['node'] = array('node', array($build['#node']->nid));
 }
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * Implements hook_form().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_request_data) {
+  
+  $form['m_and_s'] = array(
+    '#type' => 'container',
+  );
+    $form['m_and_s']['message'] = array(
+      '#type' => 'textarea',
+      //'#required' => TRUE,
+      '#default_value' => $quote_request_data['ip'],
+      '#attributes' => array('title' => 'Message *'),
+    );
+    $form['m_and_s']['subscribe'] = array(
+      '#type' => 'checkbox',
+      '#default_value' => FALSE,
+      '#title' => 'Sign me up for the newsletter',
+    );
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Send',
+  ); 
+  
+ 
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_validate().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_sendCapturedQuotesToProviders_form_validate(&$form, &$form_state) {
+  
+  //drupal_set_message('In Validate!', 'warning');
+  //dpm($form_state['values']);
+  //dpm($form);
+    
+  //global $user;
+  
+  
+//  if (!$form_state['values']['message']) {
+//    form_set_error('message', 'You have to enter a Message, if don\'t want to just subscribe to newsletters');
+//  }
+
+  
+  
+  
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state) {
+ 
+  dpm('xxx');
+  
+  $get = $_GET;
+  unset($get['q']);
+  $get['filter'] = $form_state['values']['filter'];
+  
+  drupal_goto($_GET['q'], array('query' => $get));
+  //drupal_goto(ltrim(@$_SERVER['REDIRECT_URL'], '/'), array('query' => array('nocache' => 1)));
+}
