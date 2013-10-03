@@ -8110,7 +8110,7 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
  
   dpm('xxx');
   dpm($form_state);
-  
+  dpm($_GET);
   $get = $_GET;
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
