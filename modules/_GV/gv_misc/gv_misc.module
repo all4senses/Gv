@@ -8049,26 +8049,46 @@ function gv_misc_node_view_alter(&$build) {
  */
 function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_request_data) {
   
-  $form['m_and_s'] = array(
-    '#type' => 'container',
+  $form['timestamp'] = array(
+    '#type' => 'hidden',
+    '#value' => $quote_request_data['timestamp'],
   );
-    $form['m_and_s']['message'] = array(
-      '#type' => 'textarea',
-      //'#required' => TRUE,
-      '#default_value' => $quote_request_data['ip'],
-      '#attributes' => array('title' => 'Message *'),
-    );
-    $form['m_and_s']['subscribe'] = array(
-      '#type' => 'checkbox',
-      '#default_value' => FALSE,
-      '#title' => 'Sign me up for the newsletter',
-    );
+  $form['ip'] = array(
+    '#type' => 'hidden',
+    '#value' => $quote_request_data['ip'],
+  );
+
+  $submissions = array(
+    'Nextiva' => TRUE,
+    'Vocalocity' => FALSE,
+    '8x8' => FALSE,
+    'RingCentral' => TRUE,
+  );
   
-  $form['actions'] = array('#type' => 'actions');
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Send',
-  ); 
+  $form['remoteSubmittions'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Remote submissions',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+      $form['remoteSubmittions']['providers'] = array(
+        '#type' => 'container',
+      );
+
+          foreach ($submissions as $provider => $submitted) {
+            $form['remoteSubmittions']['providers'][$provider] = array(
+              '#type' => 'checkbox',
+              '#default_value' => $submitted,
+              '#title' => $provider,
+              '#disabled' => $submitted,
+            );
+          }
+  
+      $form['remoteSubmittions']['actions'] = array('#type' => 'actions');
+      $form['remoteSubmittions']['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Send',
+      ); 
   
  
   return $form;
@@ -8110,9 +8130,8 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
  
   dpm('xxx');
   dpm($form_state);
-  dpm($_GET);
-  $get = $_GET;
-  unset($get['q']);
+
+  //unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
   
   drupal_goto($_GET['q'], array('query' => $get));
