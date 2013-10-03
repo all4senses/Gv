@@ -992,7 +992,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . ( $user->uid != 1 ? '' : drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip)) )
+            . ( $user->uid != 1 ? '' : render(drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip))) )
         . '</td>'
       . '</tr>',
     );
