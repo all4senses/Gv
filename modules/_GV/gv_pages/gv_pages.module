@@ -971,6 +971,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       elseif ($title == 'Submission Duration' && is_numeric($value)) {
         $value = number_format($value / 60, 2, '.', '') . ' min';
       }
+      elseif ($title == 'sentToRemoteProviders') {
+        $submissions_list = NULL;
+        foreach ($value as $data_provider => $data_submitted) {
+          $submissions_list .= ($submissions_list && $data_submitted ? ', ' : '') . ($data_submitted ? $data_provider : ''); 
+        }
+        $value = $submissions_list;
+      }
       $data .= "<div>$title: $value</div>";
     }
     $form['item_' . ($key + 1) . 'a'] = array(
