@@ -4727,6 +4727,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
  
 
   // Report to a4s.
+  /*
   $out = 'Quote Request submission form:
 
 ';
@@ -4738,15 +4739,20 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
   }
  
  
-  // Send a report to admin.
-  global $language;
+  
   $params['report'] = $out . '
     
 
 ' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
   drupal_mail('gv_misc', 'vocalocity_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
+  */
+  
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'vocalocity_send_report');
 }
 
 
@@ -4844,6 +4850,7 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
  
 
   // Report to a4s.
+  /*
   $out = 'Quote Request submission form:
 
 ';
@@ -4855,15 +4862,20 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   }
  
  
-  // Send a report to admin.
-  global $language;
+  
   $params['report'] = $out . '
     
 
 ' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
   drupal_mail('gv_misc', '8x8_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
+  */
+  
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, '8x8_send_report');
 }
 
 
@@ -5004,6 +5016,7 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
  
 
   // Report to a4s.
+  /*
   $out = 'Quote Request submission form:
 
 ';
@@ -5015,15 +5028,20 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
   }
  
  
-  // Send a report to admin.
-  global $language;
+  
   $params['report'] = $out . '
     
 
 ' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
   drupal_mail('gv_misc', 'ringcentral_send_report', 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
+  */
+  
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'ringcentral_send_report');
 }
 
 
@@ -5141,7 +5159,9 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
   curl_close($curl);
  
 
+  
   // Report to a4s.
+  /*
   $out = 'Quote Request submission form:
 
 ';
@@ -5153,13 +5173,59 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
   }
  
  
-  // Send a report to admin.
-  global $language;
+  
   $params['report'] = $out . '
     
 
 ' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
   drupal_mail('gv_misc', 'nextiva_send_report', 'all4senses@gmail.com', $language->language, $params);
+  
+  return $params['report'];
+  */
+  
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'nextiva_send_report');
+}
+
+
+/**
+ * Prepare report data about submission and send it to admin.
+ */
+function gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, $mail_subject) {
+  
+  // Build a report data.
+  $out = 'Quote Request submission form:
+
+';
+  foreach ($submission as $key => $value) {
+   if ($value) {
+     
+     if ($key == 'sentToRemoteProviders') {
+       $submissions = NULL;
+       foreach ($value as $provider => $submitted) {
+         $submissions_list = ($submissions_list && $submitted ? ', ' : '') . ($submitted ? $provider : ''); 
+       }
+        $out .= "$key = $submissions_list
+";
+     }
+     else {
+      $out .= "$key = $value
+";
+     }
+     
+    }
+  }
+ 
+  $params['report'] = $out . '
+    
+
+' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
+  drupal_mail('gv_misc', $mail_subject, 'all4senses@gmail.com', $language->language, $params);
   
   return $params['report'];
 }
