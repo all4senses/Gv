@@ -5196,6 +5196,8 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
 function gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, $mail_subject) {
   
   // Build a report data.
+  $out = theme('gv_misc_requestQuote_mail', $submission);
+  /*
   $out = 'Quote Request submission form:
 
 ';
@@ -5217,6 +5219,7 @@ function gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data
      
     }
   }
+  */
  
   $params['report'] = $out . '
     
@@ -5331,8 +5334,23 @@ function theme_gv_misc_requestQuote_mail($data) {
 ';
  foreach ($data as $key => $value) {
    if ($value) {
-    $out .= "$key = $value
+     
+//    $out .= "$key = $value
+//";
+        
+     if ($key == 'sentToRemoteProviders') {
+       $submissions = NULL;
+       foreach ($value as $provider => $submitted) {
+         $submissions_list = ($submissions_list && $submitted ? ', ' : '') . ($submitted ? $provider : ''); 
+       }
+        $out .= "$key = $submissions_list
 ";
+     }
+     else {
+      $out .= "$key = $value
+";
+     }
+     
    }
  }
  
