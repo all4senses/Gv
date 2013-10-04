@@ -5341,7 +5341,7 @@ function theme_gv_misc_requestQuote_mail($data) {
      if ($key == 'sentToRemoteProviders') {
        $submissions = NULL;
        foreach ($value as $provider => $submitted) {
-         $submissions_list = ($submissions_list && $submitted ? ', ' : '') . ($submitted ? $provider : ''); 
+         $submissions_list .= ($submissions_list && $submitted ? ', ' : '') . ($submitted ? $provider : ''); 
        }
         $out .= "$key = $submissions_list
 ";
