@@ -266,3 +266,15 @@ define('PROVIDER_OPTIONS_RE', serialize($provider_options_re));
 
 $pages410 = array('compare-residential-voip-providers', 'compare-business-voip-providers', 'providers/reviews', 'best-voip-service-providers');
 define('PAGES_410', serialize($pages410));
+
+
+
+// Remote submissions data, functions, etc.
+$remoteProvidersSubmissionsSettings = array(
+  'Nextiva' => 'gv_misc_SendRequestToNextiva',
+  'Vocalocity' => 'gv_misc_SendRequestToVocalocity',
+  '8x8' => 'gv_misc_SendRequestTo8x8',
+  'RingCentral' => 'gv_misc_SendRequestToRingCentral',
+);
+
+define('REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS', serialize($remoteProvidersSubmissionsSettings));
