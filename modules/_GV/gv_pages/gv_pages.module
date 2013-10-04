@@ -998,14 +998,14 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
     );
     
-    $submitQuote_form = render(drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'])));
+    $submitQuote_form = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders']));
     dpm($submitQuote_form);
     // Ips, User input data, Operations.
     $form['item_' . ($key + 1) . 'c'] = array(
       '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . $submitQuote_form
+            . '<div>' . render($submitQuote_form) . '</div>'
         . '</td>'
       . '</tr>',
     );
