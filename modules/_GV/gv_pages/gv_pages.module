@@ -963,7 +963,6 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
     
     //dpm($ucaptured_data);
-    
     $form['test'] = array('#markup' => '<form><div class="test">test</div></form>',);
     foreach ($ucaptured_data as $title => $value) {
       if ($title == 'Submit Time' && is_numeric($value)) {
@@ -999,14 +998,12 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
     );
     
-    $submitQuote_form = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders']));
-    dpm($submitQuote_form);
     // Ips, User input data, Operations.
     $form['item_' . ($key + 1) . 'c'] = array(
       '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . '<div>' . render($submitQuote_form) . '</div>'
+            . render(drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'])))
         . '</td>'
       . '</tr>',
     );
