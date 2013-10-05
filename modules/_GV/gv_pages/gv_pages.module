@@ -962,7 +962,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     // Correct the phone field data.
     $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
     dpm($ucaptured);
-    //dpm($ucaptured_data);
+    dpm($ucaptured_data);
     
     // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
     // is filtered from the outer tags <form> for some reason.
