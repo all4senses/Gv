@@ -961,9 +961,14 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     // Correct the phone field data.
     $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
-    
+    dpm($ucaptured);
     //dpm($ucaptured_data);
-    $form['test'] = array('#markup' => '<form><div class="test">test</div></form>',);
+    
+    // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
+    // is filtered from the outer tags <form> for some reason.
+    // So here i just put a dummy form for this to save the real forms.
+    $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
+    
     foreach ($ucaptured_data as $title => $value) {
       if ($title == 'Submit Time' && is_numeric($value)) {
         $value = date('Y-m-d, H:i:s', $value);
