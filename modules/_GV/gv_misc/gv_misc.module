@@ -4773,8 +4773,9 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   global $user;
   if ($user->uid == 1) {
     dpm(__FUNCTION__);
-    return;
+    //return;
   }
+  else {
   
   
   // If allowedToBeSent...
@@ -4864,6 +4865,7 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   }
   curl_close($curl);
  
+}
 
   // Report to a4s.
   /*
