@@ -8554,12 +8554,11 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
  
   //dpm($form_state['values']);
   
-  dpm($form_state['values']['providers']);
-
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
   $quote_request_data = unserialize($form_state['values']['quote_request_data']);
-  //dpm($quote_request_data);
-  //dpm($form_state['values']['providers']);
+  
+  dpm($quote_request_data);
+  dpm($form_state['values']['providers']);
   
   unset($quote_request_data['submission']['sentToRemoteProviders']);
   //dpm($quote_request_data['submission']);
