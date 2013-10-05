@@ -961,8 +961,9 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     // Correct the phone field data.
     $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
-    dpm($ucaptured);
-    dpm($ucaptured_data);
+    
+    //dpm($ucaptured);
+    //dpm($ucaptured_data);
     
     // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
     // is filtered from the outer tags <form> for some reason.
@@ -1008,7 +1009,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . render(drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'])))
+            . render(drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form', array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data)))
         . '</td>'
       . '</tr>',
     );
