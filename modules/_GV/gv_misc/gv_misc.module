@@ -8438,10 +8438,10 @@ function gv_misc_node_view_alter(&$build) {
 function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_request_data) {
   
   $form = array();
-//  $form['quote_request_data'] = array(
-//    '#type' => 'hidden',
-//    '#value' => serialize($quote_request_data),
-//  );
+  $form['quote_request_data'] = array(
+    '#type' => 'hidden',
+    '#value' => serialize($quote_request_data),
+  );
   
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
   $class_submitted = 'all-submitted';
