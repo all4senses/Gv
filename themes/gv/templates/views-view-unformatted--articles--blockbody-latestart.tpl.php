@@ -7,6 +7,9 @@
  * @ingroup views_templates
  */
 $half_count = (int) count($rows)/2;
+dpm(count($rows));
+dpm(count($rows)/2);
+dpm($half_count);
 ?>
 <?php if (!empty($title)): ?>
   <h3><?php print $title; ?></h3>
