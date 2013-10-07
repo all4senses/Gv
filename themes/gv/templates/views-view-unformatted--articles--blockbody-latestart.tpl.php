@@ -7,6 +7,7 @@
  * @ingroup views_templates
  */
 $half_count = (int) count($rows)/2;
+$half_count = (int) 11/2;
 dpm(count($rows));
 dpm(count($rows)/2);
 dpm($half_count);
