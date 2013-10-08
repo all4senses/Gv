@@ -4951,6 +4951,8 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
 //    }
 //    
     
+    
+    
     // Notify all admins.
     if ($form_state['values']['field_r_oprovider']['und'][0]['value']) {
       $provider_name = $form_state['values']['field_r_oprovider']['und'][0]['value'];
@@ -4960,6 +4962,26 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     }
     
     gv_misc_sendMessage('new_review_admin_notify', array('provider_name' => $provider_name));
+    
+    
+    
+    
+    // Notify all admins. Improved version.
+    $spam = FALSE;
+//    if ($form_state['values']['field_r_oprovider']['und'][0]['value'] && $form_state['complete form']['provider']['field_ref_provider']['und']['#options'][$form_state['values']['field_ref_provider']['und'][0]['target_id']] == 'OTHER SP') {
+//      $provider_name = $form_state['values']['field_r_oprovider']['und'][0]['value'];
+//    }
+//    else {
+//      $provider_name = $form_state['complete form']['provider']['field_ref_provider']['und']['#options'][$form_state['values']['field_ref_provider']['und'][0]['target_id']];
+//      if (!empty($form_state['values']['field_r_oprovider']['und'][0]['value'])) {
+//        $spam = TRUE;
+//      }
+//    }
+    
+    
+    watchdog('Capture review submission values', print_r($form_state['values'], TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+    //ch_misc_sendMessage('new_review_admin_notify', array('provider_name' => $provider_name, 'review' => $form_state['values']['body']['und'][0]['value'], 'spam' => $spam));
+    
   } // End of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
   else {
     // clear previous votes if an email has been chabged
