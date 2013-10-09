@@ -6568,9 +6568,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'compare_check':
       
       global $user;
-      if ($user->uid) {
-        dpm($_GET);
-        dpm($_SERVER);
+      if ($user->uid && $_SERVER['REQUEST_URI'] == '/business') {
         return NULL;
       }
       
