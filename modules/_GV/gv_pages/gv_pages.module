@@ -2131,14 +2131,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             $form['data_info']['i_web_display'] = array(
               '#type' => 'textfield',
-              '#title' => t('Display Website as'),
-              '#description' => t('If empty, Web Site field content will be used, without http(s)://'),
+              '#title' => 'Display Website as',
+              '#description' => 'If empty, Web Site field content will be used, without http(s)://',
               '#default_value' => isset($p_data['info']['i_web_display']) ? $p_data['info']['i_web_display'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
             );
             $form['data_info']['i_web_hide'] = array(
               '#type' => 'checkbox',
-              '#title' => t('Hide Web Site'),
+              '#title' => 'Hide Web Site',
               '#default_value' => isset($p_data['info']['i_web_hide']) ? $p_data['info']['i_web_hide'] : 0,
             );
             /*
@@ -2150,6 +2150,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#default_value' => isset($p_data['info']['i_email']) ? $p_data['info']['i_email'] : '',
             );
             */
+            $form['data_info']['i_phone'] = array(
+              '#type' => 'text_format', 
+              '#title' => 'Phone',
+              '#format' => 'full_html',
+              '#default_value' => isset($p_data['info']['i_phone']) ? $p_data['info']['i_phone'] : NULL,
+            );
         
       
             
@@ -2264,7 +2270,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     
                       $form['s'][$service_type_key]['weights_' . $service_type_key . '_features'] = array(
                         '#type' => 'fieldset',
-                        '#title' => t("$service_type_title Features tags weights"),
+                        '#title' => "$service_type_title Features tags weights",
                         '#collapsible' => TRUE,
                         '#collapsed' => TRUE,
                         //'#tree' => TRUE,
@@ -2275,7 +2281,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                               $form['s'][$service_type_key]['weights_' . $service_type_key . '_features'][$tid] = array(
                                 '#type' => 'textfield',
                                 '#size' => 3,
-                                '#title' => t($term['name']),
+                                '#title' => $term['name'],
                                 '#default_value' => $term['weight'],
                               );
                             }
