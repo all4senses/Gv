@@ -3493,7 +3493,6 @@ function gv_blocks_get_requestQuote_block_v7() {
   
   
   $data = unserialize(variable_get('gv_request_quote_v7', NULL));
-  dpm($data);
   
   $out = '
    
@@ -3510,10 +3509,7 @@ function gv_blocks_get_requestQuote_block_v7() {
                     <div class="step" id="questions_section">
                     
                                 <div id="up">
-                                    <!--<div class="caption">Compare Leading Providers</div> -->
-                                    <div class="text">' . $data['headline']['value'] . 'Find out how much</div>
-                                    <div class="text">you can save on your</div>
-                                    <div class="text">business phone service!</div>
+                                    <div class="text">' . $data['headline']['value'] . '</div>
                                     <div class="phone-pic"></div>
                                 </div>
                                 <div class="bottom-clear"></div>   
