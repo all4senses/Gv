@@ -6567,6 +6567,13 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'compare_check':
       
+      global $user;
+      if ($user->uid) {
+        dpm($_GET);
+        dpm($_SERVER);
+        return NULL;
+      }
+      
       $all_data_quick = gv_misc_getProvidersDataQuick();
       $out = '<input type="checkbox" class="p-compare" id="' . $data['data']->nid . '" name="' . $all_data_quick[$data['data']->nid]['name'] . '" />';
       
@@ -6831,6 +6838,30 @@ function gv_misc_getProviderQuickData($target, $data) {
       return $out;
       
     
+      
+      
+       
+    case 'phone_n_visit':
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      
+      $out = NULL;
+     
+      global $user;
+      
+      if ($user->uid && !empty($all_data_quick[$data['data']->nid]['i_phone'])) {
+        $out .= '<div class="phone"><div class="title">Call</div>' . $all_data_quick[$data['data']->nid]['i_phone'] . '</div>';
+      }
+      if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
+        $out .= gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn');
+      }
+                        
+      return $out;
+      
+      
+      
+      
+      
       
     case 'details':
       
