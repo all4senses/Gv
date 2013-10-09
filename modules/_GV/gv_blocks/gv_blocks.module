@@ -630,6 +630,20 @@ function gv_blocks_block_configure($delta = '') {
   
   switch ($delta) {
     
+    case 'request_quote_v7':
+      
+      $data = unserialize(variable_get('gv_request_quote_v7', NULL));
+      
+      $form['headline'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Headline',
+        '#format' => 'full_html',
+        '#default_value' => $data['headline']['value'],
+      );
+      
+      break;
+    
+    
     
     case 'home_in_hlighted_2':
     
@@ -670,6 +684,8 @@ function gv_blocks_block_configure($delta = '') {
 
       break;
   
+    
+    
     case 'weekly_video':
     
       $form['youtube_video_id'] = array(
@@ -696,6 +712,8 @@ function gv_blocks_block_configure($delta = '') {
       );
       
       break;
+      
+      
       
     case 'as_featured_in_side':
       
@@ -751,6 +769,12 @@ function gv_blocks_block_configure($delta = '') {
 function gv_blocks_block_save($delta = '', $edit = array()) {
 
   switch ($delta) {
+    
+    case 'request_quote_v7':
+      $data = array('headline' => $edit['headline']);
+      variable_set('gv_request_quote_v7', serialize($data));
+      break;
+    
     
     case 'home_in_hlighted_2':
       $data = array(/*'title' => $edit['banner_title'], 'body' => $edit['body'], */'flying_text_1' => $edit['flying_text_1'], 'flying_text_2' => $edit['flying_text_2'], 'flying_text_3' => $edit['flying_text_3']);
@@ -839,8 +863,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  * Block with images for the home page footer.
  */
 function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
-
-
+  
   if ($key == 'bottom') {
     if (!$data = unserialize(variable_get('gv_as_featured_in_bottom', NULL))) {
       $data = unserialize(variable_get('gv_as_featured_in', NULL));
@@ -872,9 +895,6 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
  * Block with sidebar related posts for a current post.
  */
 function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $block_title = NULL) {
-  
-  
-  
   
   if (!$node) {
     //$node = node_load(str_replace('node/', '', $_GET['q']));
@@ -3469,6 +3489,11 @@ function gv_blocks_get_requestQuote_block_v7() {
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
+  
+  
+  
+  $data = unserialize(variable_get('request_quote_v7', NULL));
+  
   $out = '
    
    <div id="requestQuoteFormWrapper">
@@ -3485,7 +3510,7 @@ function gv_blocks_get_requestQuote_block_v7() {
                     
                                 <div id="up">
                                     <!--<div class="caption">Compare Leading Providers</div> -->
-                                    <div class="text">Find out how much</div>
+                                    <div class="text">' . $data['headline']['value'] . 'Find out how much</div>
                                     <div class="text">you can save on your</div>
                                     <div class="text">business phone service!</div>
                                     <div class="phone-pic"></div>
