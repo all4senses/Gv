@@ -16,7 +16,7 @@
                 {
                     //if (now.getTime() > times[i][0] && now.getTime() < times[i][1])
                     {
-                        $.fn.colorbox({iframe:true, width:650, height:600, href: "http://getvoip.com/get-popup-on-exit-intent", open: true});          
+                        $.fn.colorbox({iframe:true, width:650, height:600, href: "get-popup-on-exit-intent", open: true});          
                         //alert('test');
                     }    
                 }
