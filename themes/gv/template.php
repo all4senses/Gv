@@ -964,6 +964,7 @@ function gv_preprocess_html(&$variables) {
 /**
  * Preprocess theme function to print a single record from a row, with fields
  */
+/*
 function gv_preprocess_views_view_fields(&$vars) {
   $view = $vars['view'];
   // Loop through the fields for this view.
@@ -1096,9 +1097,12 @@ function gv_preprocess_views_view_fields(&$vars) {
   }
 
 }
+*/
 
 
 /**
+ *  a4s fix. Allow html in labels.
+ * 
  * Display a view as a table style.
  */
 function gv_preprocess_views_view_table(&$vars) {
@@ -1149,7 +1153,7 @@ function gv_preprocess_views_view_table(&$vars) {
       // a4s fix. Allow html in labels.
       //$label = check_plain(!empty($fields[$field]) ? $fields[$field]->label() : '');
       $label = !empty($fields[$field]) ? $fields[$field]->label() : '';
-      dpm('ccccccc ' . $label);
+
       
       if (empty($options['info'][$field]['sortable']) || !$fields[$field]->click_sortable()) {
         $vars['header'][$field] = $label;
