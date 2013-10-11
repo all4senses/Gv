@@ -28,7 +28,7 @@
       <tr>
         <?php foreach ($header as $field => $label): ?>
           <th <?php if ($header_classes[$field]) { print 'class="'. $header_classes[$field] . '" '; } ?>>
-            <?php print '<div class="f">' . $label . '</div>'; ?>
+            <?php print $label; ?>
           </th>
         <?php endforeach; ?>
       </tr>
