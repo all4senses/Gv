@@ -1056,7 +1056,7 @@ function gv_preprocess_views_view_fields(&$vars) {
       //a4s fix, allow html in labels.
       //$object->label = check_plain($view->field[$id]->label());
       $object->label = $view->field[$id]->label();
-      dpm($object->label);
+      dpm('xxxxxx '. $object->label);
       
       $object->label_html = '';
       if ($object->label) {
