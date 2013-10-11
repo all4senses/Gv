@@ -8,7 +8,9 @@
         $(document).bind("mouseleave", function(e)
         {
             console.log(e.pageY);
-            if (!done && e.pageY <= 1)
+            
+            //if (!done && e.pageY <= 1)
+            if (!done && e.pageY - $(window).scrollTop() <= 1)
             {    
                 done = true;
                 //now = new Date();           
