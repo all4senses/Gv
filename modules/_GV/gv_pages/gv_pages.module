@@ -4937,11 +4937,11 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   global $user;
   // Just submitted new review.
   if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
-    $text = t('<span class="review"><span class="success">Your review has been successfully submitted. Thank you for your time and efforts in sharing your much appreciated feedback.</span> <span class="approve">It will be published as soon as our administrators have approved it.</span> <span class="contact">If we may be of any further assistance please email us at contact@getvoip.com</span>');
+    $text = '<span class="review"><span class="success">Your review has been successfully submitted. Thank you for your time and efforts in sharing your much appreciated feedback.</span> <span class="approve">It will be published as soon as our administrators have approved it.</span> <span class="contact">If we may be of any further assistance please email us at contact@getvoip.com</span>';
     // Send verification code to approve email for an unregistered user.
     if (!$form_state['values']['uid']) {
       gv_misc_sendMessage('email_verification', array('verification_code' => $form_state['values']['field_r_approvecode']['und'][0]['value'] . '=' . urlencode($form_state['values']['field_r_email']['und'][0]['value']), 'email' => $form_state['values']['field_r_email']['und'][0]['value']));
-      $text .= '<div class="emailed">' . t('To assist in getting your review published faster, we have sent you an email verification with 1-click instructions for immediate publishing of your review.') . '</div>';
+      $text .= '<div class="emailed">To assist in getting your review published faster, we have sent you an email verification with 1-click instructions for immediate publishing of your review.</div>';
     }
     $text .= '</span>';
     drupal_set_message($text);
@@ -4986,7 +4986,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     }
     
     
-    watchdog('Capture review submission values', print_r($form_state['values'], TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+    //watchdog('Capture review submission values', print_r($form_state['values'], TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
     gv_misc_sendMessage('new_review_admin_notify', array('provider_name' => $provider_name, 'review' => $form_state['values']['body']['und'][0]['value'], 'spam' => $spam));
     
   } // End of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
