@@ -966,7 +966,6 @@ function gv_preprocess_html(&$variables) {
  */
 function gv_preprocess_views_view_fields(&$vars) {
   $view = $vars['view'];
-dpm('xyz');
   // Loop through the fields for this view.
   $previous_inline = FALSE;
   $vars['fields'] = array(); // ensure it's at least an empty array.
@@ -1053,7 +1052,12 @@ dpm('xyz');
 
       // Set up the label for the value and the HTML to make it easier
       // on the template.
-      $object->label = check_plain($view->field[$id]->label());
+      
+      //a4s fix, allow html in labels.
+      //$object->label = check_plain($view->field[$id]->label());
+      $object->label = $view->field[$id]->label();
+      dpm($object->label);
+      
       $object->label_html = '';
       if ($object->label) {
         $object->label_html .= $object->label;
