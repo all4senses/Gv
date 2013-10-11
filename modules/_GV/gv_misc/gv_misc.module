@@ -19,6 +19,13 @@ function gv_misc_menu() {
  
   gv_misc_setPagesToShow410($items);
   
+  $items['get-popup-on-exit-intent'] = array(
+    'title' => 'Pop up iframe for exit intent',
+    'page callback' => 'gv_misc_getPopupOnExitIntent_iframe',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['get-sectionarticles'] = array(
     'title' => 'Get Section Articles',
     'page callback' => 'gv_misc_get_sectionArticles_ajax',
@@ -180,6 +187,14 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+
+/**
+ * Iframe page that pops up on exit intent.
+ */
+function gv_misc_getPopupOnExitIntent_iframe() {
+  return 'test';
 }
 
 
