@@ -14,7 +14,7 @@
                 {
                     //if (now.getTime() > times[i][0] && now.getTime() < times[i][1])
                     {
-                        //$.fn.colorbox({iframe:true, width:650, height:600, href: "work.html", open: true});          
+                        $.fn.colorbox({iframe:true, width:650, height:600, href: "http://getvoip.com", open: true});          
                         alert('test');
                     }    
                 }
