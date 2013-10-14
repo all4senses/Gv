@@ -119,8 +119,9 @@
             
             // Hide breadcrumbs temporarily, but reserve the room for it.
             //echo $breadcrumb; 
-            echo '<div style="height: 18px; width: 100%;"></div>'
+            //echo '<div style="height: 18px; width: 100%;"></div>';
           ?>
+          <div id="breadcrumbs-dummy"></div>
         
           <?php 
           

@@ -65,8 +65,9 @@
             
             // Hide breadcrumbs temporarily, but reserve the room for it.
             //echo $breadcrumb; 
-            echo '<div style="height: 18px; width: 100%;"></div>'
+            //echo '<div style="height: 18px; width: 100%;"></div>'
           ?>
+        <div id="breadcrumbs-dummy"></div>
         
           <?php 
           
@@ -102,7 +103,7 @@
           
           
           <?php 
-          //global $user;
+          /*
           $pages_with_timestamp = array(
             '/compare-business-voip-providers', 
             '/business-voip-reviews', 
@@ -130,6 +131,7 @@
 //          }
               
           //}
+          */
           ?>
           
       </section> <!-- /#main -->
