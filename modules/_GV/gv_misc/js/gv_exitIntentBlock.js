@@ -1,5 +1,8 @@
 (function ($) {
 
+
+  // http://stackoverflow.com/questions/1617757/detect-when-mouse-leaves-via-top-of-page-with-jquery
+
   Drupal.behaviors.gv_exitIntentBlock = {
     attach: function (context, settings) {
        
