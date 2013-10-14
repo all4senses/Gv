@@ -6616,8 +6616,8 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'compare_check':
       
-      global $user;
-      if ($user->uid && $_SERVER['REQUEST_URI'] == '/business') {
+      // Hide compare column on Business page.
+      if ($_SERVER['REQUEST_URI'] == '/business') {
         return NULL;
       }
       
@@ -6894,9 +6894,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $out = NULL;
      
-      global $user;
-      
-      if ($user->uid && !empty($all_data_quick[$data['data']->nid]['i_phone'])) {
+      if (!empty($all_data_quick[$data['data']->nid]['i_phone'])) {
         //$out .= '<div class="phone"><div class="title">Call</div><div itemprop="telephone"><a href="callto:' . (strpos($all_data_quick[$data['data']->nid]['i_phone'], '+') !== FALSE ? '' : '+1') . (str_replace(array(' ', '(', ')', '-'), '', strip_tags($all_data_quick[$data['data']->nid]['i_phone']))) . '">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</a></div></div>';
         //$out .= '<div class="phone"><div class="title">Call Toll Free</div><div itemprop="telephone">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</div></div>';
         $out .= '<div class="phone" itemprop="telephone">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</div>';
