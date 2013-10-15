@@ -7010,6 +7010,13 @@ function gv_misc_getProviderQuickData($target, $data) {
     // Video Review from YouTube
     case 'vr-y':
       
+      global $user;
+      dpm($_SERVER);
+      dpm($_GET);
+//      if ($user->uid) {
+//        return NULL;
+//      }
+      
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
       return isset($all_data_quick[$data['data']->nid][$data['service_type']]['vr-y']) 
