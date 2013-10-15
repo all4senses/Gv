@@ -7011,11 +7011,11 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'vr-y':
       
       global $user;
-      dpm($_SERVER);
-      dpm($_GET);
-//      if ($user->uid) {
-//        return NULL;
-//      }
+//      dpm($_SERVER);
+//      dpm($_GET);
+      if ($user->uid && $_GET['q'] == 'home') {
+        return NULL;
+      }
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
