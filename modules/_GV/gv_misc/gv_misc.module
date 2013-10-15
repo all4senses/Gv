@@ -6616,6 +6616,11 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'compare_check':
       
+      global $user;
+      if ($user->uid && $_GET['q'] == 'home') {
+        return NULL;
+      }
+      
       // Hide compare column on Business page.
       if ($_SERVER['REQUEST_URI'] == '/business') {
         return NULL;
