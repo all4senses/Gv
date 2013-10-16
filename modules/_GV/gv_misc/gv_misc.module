@@ -6622,7 +6622,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
       //dpm($_SERVER);
       // Hide compare column on Business page.
-      if ($_SERVER['REQUEST_URI'] == '/business' || $_SERVER['REDIRECT_URL'] == '/business') {
+      if (@$_SERVER['REQUEST_URI'] == '/business' || @$_SERVER['REDIRECT_URL'] == '/business') {
         return NULL;
       }
       
