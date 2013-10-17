@@ -6616,13 +6616,8 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'compare_check':
       
-      global $user;
-      if ($user->uid && $_GET['q'] == 'home') {
-        return NULL;
-      }
-      //dpm($_SERVER);
-      // Hide compare column on Business page.
-      if (@$_SERVER['REQUEST_URI'] == '/business' || @$_SERVER['REDIRECT_URL'] == '/business') {
+      // Hide compare column on Home and Business page.
+      if ($_GET['q'] == 'home' || @$_SERVER['REQUEST_URI'] == '/business' || @$_SERVER['REDIRECT_URL'] == '/business') {
         return NULL;
       }
       
@@ -6838,10 +6833,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
     case 'grade':
-      
-      global $user;
-      
-      if ($user->uid && $_GET['q'] == 'home') {
+      // Don't show on Home page.
+      if ($_GET['q'] == 'home') {
         return NULL;
       }
 
@@ -7021,10 +7014,8 @@ function gv_misc_getProviderQuickData($target, $data) {
     // Video Review from YouTube
     case 'vr-y':
       
-      global $user;
-//      dpm($_SERVER);
-//      dpm($_GET);
-      if ($user->uid && $_GET['q'] == 'home') {
+      // Don't show on Home page.
+      if ($_GET['q'] == 'home') {
         return NULL;
       }
       
