@@ -163,9 +163,8 @@
         <div id="footer-inside">
 
           <?php
-              echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
-              //echo render($page['footer']);
-              echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'footer_menu', 'no_subject' => TRUE, /*'class' => 'block-om-maximenu',*/ 'shadow' => FALSE), TRUE, '+31 day');
+              //echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
+              //echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'footer_menu', 'no_subject' => TRUE, /*'class' => 'block-om-maximenu',*/ 'shadow' => FALSE), TRUE, '+31 day');
           ?>
 
 
