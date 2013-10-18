@@ -4371,7 +4371,7 @@ function gv_blocks_get_requestQuoteForPage_v4() {
   $_SESSION['requestQuoteToken'] = $token;
   
   $out = '
-   <div class="title">Ready To Save?<br/>Get Competing Quotes Now!</div>
+   <h2>Ready To Save?<br/>Get Competing Quotes Now!</h2>
    <div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
         <div class="success results" style="display: none;"></div>
@@ -4437,13 +4437,12 @@ function gv_blocks_get_requestQuoteForPage_v4() {
                 </div>
                 
                 
-                <div class="guide ps"><div id="pdf-icon"></div><div class="text"><span>Free guide with submission</span> Business VoIP Start-up Guide</div></div>
-                
                 <div id="Navigation"> 							
                         <input class="navigation_button" id="next" value="Submit & Get Quotes" type="submit" />
                 </div>
                 
                 
+                <div class="guide ps"><div id="pdf-icon"></div><div class="text"><span>Free guide with submission</span> Business VoIP Start-up Guide</div></div>
                 
                 
                 <input type="hidden" name="token" value="' . $token . '" />
