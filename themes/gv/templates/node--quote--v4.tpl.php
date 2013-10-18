@@ -111,7 +111,6 @@
       <div class="full brands">
 
           <div id="brands">
-            <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
             <?php
                 if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
                   echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
