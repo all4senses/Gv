@@ -36,7 +36,7 @@
   
 
 
-      <div class="full/* main-content-lp*/">
+      <div class="full">
         
         <div id="main-content">
 
@@ -45,7 +45,7 @@
                     <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
 
                     <div class="left">
-                            <h2>Save Up To 80% On Your<br/> Business Phone System!</h2>
+                            <h2>Save Up To 80% On a Better<br/> Business Phone System!</h2>
                             <div class="caption">Benefits & Features:</div>
                             <div class="text bullet v1"><strong>Lowest Rates & Exclusive Discounts</strong></div>
                             <div class="text bullet v2"><strong>Personalized Quotes From Top Providers</strong></div>
