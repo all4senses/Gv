@@ -116,7 +116,7 @@
                   echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
                   foreach ($initialQuotePage_node->field_q_image2['und'] as $brand) {
                     echo '<li>', '<table><tbody><tr><td>', 
-                            theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => 'thumbnail', 'alt' => $brand['alt'], 'title' => $brand['title'])),
+                            theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => 'landing_page_logos_slider_gray'/*'thumbnail'*/, 'alt' => $brand['alt'], 'title' => $brand['title'])),
                         '</td></tr></tbody></table>', '</li>'; 
                   }
                   echo '</ul>';
