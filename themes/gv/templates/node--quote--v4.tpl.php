@@ -40,7 +40,7 @@
         
         <div id="main-content">
 
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final-4' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
                     <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
 
@@ -57,7 +57,7 @@
 
               </div>
 
-              <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final-4'): ?>
 
                   <div class="right final">
                     <?php  
@@ -184,7 +184,7 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final-4'): /* If we are on the final page, after the submission */ ?> 
 
           <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/compare-voip-solutions'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             <!-- Google Code for GV Lead - LP Conversion Page -->
