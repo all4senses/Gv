@@ -26,7 +26,6 @@
             <?php 
               echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv-logo-lp4.jpg" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
-            <h3>The Authority on VoIP Service Selection</h3>
           </div>
 
       </div>
