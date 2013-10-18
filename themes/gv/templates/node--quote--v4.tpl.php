@@ -159,7 +159,7 @@
       
 
   
-      <footer id="footer" role="contentinfo" class="clearfix">
+      <footer id="footer" role="contentinfo" class="region-footer clearfix">
         <div id="footer-inside">
 
           <?php
