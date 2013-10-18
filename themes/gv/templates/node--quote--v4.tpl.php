@@ -36,7 +36,7 @@
   
 
 
-      <div class="full main-content">
+      <div class="full/* main-content-lp*/">
         
         <div id="main-content">
 
