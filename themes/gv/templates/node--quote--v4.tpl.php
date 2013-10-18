@@ -164,7 +164,7 @@
 
           <?php
               echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
-              echo render($page['footer']);
+              //echo render($page['footer']);
           ?>
 
 
