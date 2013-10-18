@@ -37,51 +37,55 @@
   
 
 
-      <div class="full">
+      <div class="full main-content">
+        
+        <div id="main-content">
 
-        <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
-              <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
+                    <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
 
-              <div class="left">
-                      <h2>Save Up To 80% On Your<br/> Business Phone System!</h2>
-                      <div class="caption">Benefits & Features:</div>
-                      <div class="text bullet v1"><strong>Lowest Rates & Exclusive Discounts</strong></div>
-                      <div class="text bullet v2"><strong>Personalized Quotes From Top Providers</strong></div>
-                      <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
-                      <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD VoIP Phones</strong></div>
+                    <div class="left">
+                            <h2>Save Up To 80% On Your<br/> Business Phone System!</h2>
+                            <div class="caption">Benefits & Features:</div>
+                            <div class="text bullet v1"><strong>Lowest Rates & Exclusive Discounts</strong></div>
+                            <div class="text bullet v2"><strong>Personalized Quotes From Top Providers</strong></div>
+                            <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
+                            <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD VoIP Phones</strong></div>
 
-                      <div class="ps"><span>6000+ Submissions -</span> Average saving of $180 per month</div>
+                            <div class="ps"><span>6000+ Submissions -</span> Average saving of $180 per month</div>
+                    </div>
+
               </div>
 
-        </div>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?>
 
-        <?php if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final'): ?>
+                  <div class="right final">
+                    <?php  
+                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+                    ?>
+                  </div>
+              <?php else: ?>
 
-            <div class="right final">
-              <?php  
-              echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
-              ?>
-            </div>
-        <?php else: ?>
+                  <div class="right">
 
-            <div class="right">
+                    <div id="right-bottom">
+                      <?php echo gv_blocks_get_requestQuoteForPage_v4(); ?>
+                      <div class="bottom-clear"></div> 
+                    </div>
+                  </div>
 
-              <div id="right-bottom">
-                <?php echo gv_blocks_get_requestQuoteForPage_v4(); ?>
+                <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
+
+
+                <?php endif; ?>
+
+                <?php
+                  echo render($content['metatags']);
+                ?>
                 <div class="bottom-clear"></div> 
-              </div>
-            </div>
 
-          <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
-
-
-          <?php endif; ?>
-
-          <?php
-            echo render($content['metatags']);
-          ?>
-          <div class="bottom-clear"></div> 
+          </div>
 
       </div> <!-- of Full -->
 
@@ -105,7 +109,7 @@
       
 
       
-      <div class="full">
+      <div class="full brands">
 
           <div id="brands">
             <h2><?php echo 'Supported by all major VoIP Companies in the country:'; ?></h2>
