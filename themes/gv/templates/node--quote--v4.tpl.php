@@ -20,7 +20,7 @@
   <div id="quote-content">
 
     
-      <div class="full">
+      <div class="full logo">
 
           <div id="gv-logo">
             <?php 
@@ -32,7 +32,7 @@
       </div>
   
 
-<div class="bottom-clear"></div> 
+      <div class="bottom-clear"></div> 
   
   
 
@@ -87,7 +87,7 @@
 
 
 
-      <div class="full">
+      <div class="full excerpt">
         
           <div id="upper-block">
             <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
@@ -131,7 +131,7 @@
   
 
       
-      <div class="full">
+      <div class="full bottom">
 
           <div id="bottom">
             <div class="text">
