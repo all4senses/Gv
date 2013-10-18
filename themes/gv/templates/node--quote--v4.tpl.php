@@ -17,19 +17,12 @@
     }
   ?>
     
-  <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][1]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][1]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][1]['title'])), '</div>'; ?>
+  <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
   <div id="gv-logo">
     <?php 
-      echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
+      echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv-logo-lp4.jpg" alt="GetVoIP" title="GetVoIP" /></div>'; 
     ?>
     <h3>The Authority on VoIP Service Selection</h3>
-  </div>
-
-
-  
-  <div class="partners">
-    <div id="trusted-logos"></div>
-    <a id="sitelock" href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="http://shield.sitelock.com/shield/getvoip.com"/></a> 
   </div>
 
   <div class="bottom-clear"></div> 
