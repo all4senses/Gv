@@ -155,13 +155,11 @@
       
 
   
-      <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
+      <footer id="footer" role="contentinfo" class="clearfix">
         <div id="footer-inside">
 
           <?php
-              if (!$hide_follow_us_links) {
-                echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
-              }
+              echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
               echo render($page['footer']);
           ?>
 
