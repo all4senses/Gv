@@ -112,15 +112,20 @@
 
           <div id="brands">
             <?php
+                /*
                 if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
                   echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
+                 
+                  $image_style = 'landing_page_logos_slider_gray'; //'thumbnail'
                   foreach ($initialQuotePage_node->field_q_image2['und'] as $brand) {
                     echo '<li>', '<table><tbody><tr><td>', 
-                            theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => 'landing_page_logos_slider_gray'/*'thumbnail'*/, 'alt' => $brand['alt'], 'title' => $brand['title'])),
+                            theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => $image_style, 'alt' => $brand['alt'], 'title' => $brand['title'])),
                         '</td></tr></tbody></table>', '</li>'; 
                   }
                   echo '</ul>';
                 }
+                */
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/lp-slider-logos-v41.jpg" />';
 
             ?>
 
