@@ -4355,11 +4355,18 @@ function gv_blocks_get_requestQuoteForPage_v4() {
   
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
+  
+  
+  drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
+  drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  
+  
+  
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   
   drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
   
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v3.js');
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v4.js');
   
   drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
   
