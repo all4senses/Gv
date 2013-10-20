@@ -17,7 +17,7 @@ if($view_mode == 'home_teaser') {
       //dpm($_GET);
       //dpm($_SERVER);
       
-      // Only for /hosted-pbx don't take thubbs from the current sprite, but generate it with different sizes (bigger than on that page sprite).
+      // Only for /hosted-pbx don't take thumbs from the current sprite, but generate it with different sizes (bigger than on that page sprite).
       if ($_SERVER['REQUEST_URI'] == '/hosted-pbx' || !$image = gv_misc_getProviderLogoFromSprite($provider_nid, $sprite_name, $all_data_quick)) {
         $image_style_name = 'logo_provider_chart_main'; //'thumbnail';
         $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
@@ -72,7 +72,7 @@ if($view_mode == 'home_teaser') {
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-  <div class="main-content"  xmlns:v="http://rdf.data-vocabulary.org/#" <?php if (@$_SERVER['REDIRECT_URL'] != '/providers/reviews') { echo 'typeof="v:Review"'; } ?>>
+  <div class="main-content"<?php echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');  ?>>
     
             <?php if (!$page): ?>
               <header>
@@ -88,7 +88,7 @@ if($view_mode == 'home_teaser') {
                       ?>
                 <?php else: ?>
                     <?php 
-                    $full_title_urls = array('/providers/reviews', '/business-voip-reviews', '/residential-voip-reviews');
+                    $full_title_urls = array('/reviews', '/reviews/business', '/reviews/residential');
                     if (in_array(@$_SERVER['REDIRECT_URL'], $full_title_urls)) {
                       $full_title = TRUE;
                     }
@@ -96,12 +96,14 @@ if($view_mode == 'home_teaser') {
                     <?php if($full_title): ?>
                       <h2 <?php 
                               //echo 'class="rcaption" property="dc:title v:summary"';
-                              echo 'class="rcaption"' . (@$_SERVER['REDIRECT_URL'] == '/providers/reviews' ? '' : ' property="v:summary"');
+                              //echo 'class="rcaption"' . (@$_SERVER['REDIRECT_URL'] == '/providers/reviews' ? '' : ' property="v:summary"');
+                              echo 'class="rcaption"';
                            ?>
                     <?php else: ?>
                       <h3 <?php 
                               //echo 'class="rcaption" property="dc:title v:summary"';
-                              echo 'class="rcaption" property="v:summary"';
+                              //echo 'class="rcaption" property="v:summary"';
+                              echo 'class="rcaption"';
                            ?>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -176,11 +178,11 @@ if($view_mode == 'home_teaser') {
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption"><span>User\'s Rating:</span> <span property="v:rating">' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
+            <?php echo '<div class="caption"><span>User\'s Rating:</span> <span' . ($page ? ' property="v:rating"' : '') . '>' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
             <div class="rate-other">
               <?php if (!$page): ?>
-                <div class="text"><?php echo '<div class="title">Date:</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
-                <div class="text"><?php echo '<div class="title">Reviewer:</div><div property="v:reviewer">' , $reviewer , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">Date:</div><div' . ($page ? ' property="v:dtreviewed"' : '') . ' content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
+                <div class="text"><?php echo '<div class="title">Reviewer:</div><div' . ($page ? ' property="v:reviewer"' : '') . '>', $reviewer , '</div>'; ?></div>
               <?php endif; ?>
               <div class="text"><?php echo '<div class="title">Recommend: </div><div class="data">' . $node->gv_recommend . '</div>'?></div>
             </div>
@@ -205,7 +207,7 @@ if($view_mode == 'home_teaser') {
               </div>
             <?php endif; ?>
             
-            <?php echo '<div property="v:description">' . render($content['body']) . '</div>'; ?>
+            <?php echo '<div'. ($page ? ' property="v:description"' : '') . '>' . render($content['body']) . '</div>'; ?>
           </div>
           <div class="bottom-clear"></div>
           <div class="links">
@@ -220,10 +222,10 @@ if($view_mode == 'home_teaser') {
                       
                       if($page || $full_title) {
                         echo ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
-                        . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
+                        . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
                       }
                       else {
-                        echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
+                        echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider"'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
                       }
                       
                   echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
