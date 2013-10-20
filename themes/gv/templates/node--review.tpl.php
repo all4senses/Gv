@@ -93,19 +93,19 @@ if($view_mode == 'home_teaser') {
                       $full_title = TRUE;
                     }
                     ?>
-                    <?php if($full_title): ?>
+                    <?php /*if($full_title): ?>
                       <h2 <?php 
                               //echo 'class="rcaption" property="dc:title v:summary"';
                               //echo 'class="rcaption"' . (@$_SERVER['REDIRECT_URL'] == '/providers/reviews' ? '' : ' property="v:summary"');
                               echo 'class="rcaption"';
                            ?>
-                    <?php else: ?>
+                    <?php else: */?>
                       <h3 <?php 
                               //echo 'class="rcaption" property="dc:title v:summary"';
                               //echo 'class="rcaption" property="v:summary"';
                               echo 'class="rcaption"';
                            ?>
-                    <?php endif; ?>
+                    <?php /*endif;*/ ?>
                 <?php endif; ?>
                   
                 <?php /*print $title_attributes;*/ ?>><?php 
