@@ -6552,7 +6552,7 @@ function gv_misc_getProvidersDataQuick($scope = 'all', $reset = FALSE, $clear_fr
     }
     
     
-    if ($reset || !$p_data_quick || time() > ($p_data_quick['timestamp'] + 18000) ) {
+    if ($reset || !$p_data_quick/* || time() > ($p_data_quick['timestamp'] + 18000)*/ ) {
       $data = db_select('field_revision_field_p_data_quick', 'f')
             ->fields('f', array('entity_id', 'field_p_data_quick_value'))
             ->execute();
