@@ -66,8 +66,9 @@
                   </div>
               <?php else: ?>
 
+                  <div id="verisign"></div>
+                  
                   <div class="right">
-                    <div id="verisign"></div>
                     <div id="right-bottom">
                       <?php echo gv_blocks_get_requestQuoteForPage_v4(); ?>
                       <div class="bottom-clear"></div> 
