@@ -50,7 +50,7 @@
                             <div class="text bullet v1"><strong>Lowest Rates & Exclusive Discounts</strong></div>
                             <div class="text bullet v2"><strong>Personalized Quotes From Top Providers</strong></div>
                             <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
-                            <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD VoIP Phones</strong></div>
+                            <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD Phones</strong></div>
 
                             <div class="ps"><span>6000+ Submissions -</span> Average saving of $180 per month</div>
                     </div>
@@ -171,7 +171,7 @@
           ?>
 
 
-          <div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
+          <div class="c">GetVoIP is an independent VoIP service shoppers guide, offering unbiased comparisons and consumer reports. 
             <div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
           </div>
 
