@@ -110,8 +110,9 @@
 
       
       <div class="full brands">
-
+          
           <div id="brands">
+            <h2>Supported by Major Brands:</h2>
             <?php
                 /*
                 if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
