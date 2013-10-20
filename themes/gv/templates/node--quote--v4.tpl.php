@@ -96,7 +96,7 @@
             <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
 
             <div class="quotes one">
-              <div class="text">"GetVoIP.com stands out in the online VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into quality prospects and high conversion rates."</div>
+              <div class="text">"GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system."</div>
               <div class="source">Chris Rabbu, VP of Marketing at Vocalocity, Inc.</div>
             </div>
             <div class="bottom-clear"></div> 
