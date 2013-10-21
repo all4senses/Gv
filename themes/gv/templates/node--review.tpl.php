@@ -72,7 +72,7 @@ if($view_mode == 'home_teaser') {
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-  <div class="main-content"<?php echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');  ?>>
+  <div class="main-content "<?php echo 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'; /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
     
             <?php if (!$page): ?>
               <header>
@@ -178,11 +178,25 @@ if($view_mode == 'home_teaser') {
         <div class="content"<?php print $content_attributes; ?>>
           
           <div class="gv_votes">
-            <?php echo '<div class="caption"><span>User\'s Rating:</span> <span' . ($page ? ' property="v:rating"' : '') . '>' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); ?>
+            <?php 
+              //echo '<div class="caption"><span>User\'s Rating:</span> <span' . ($page ? ' property="v:rating"' : '') . '>' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); 
+              echo '<div class="caption"><span>User\'s Rating:</span> <span property="v:rating">' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); 
+            
+            ?>
             <div class="rate-other">
               <?php if (!$page): ?>
-                <div class="text"><?php echo '<div class="title">Date:</div><div' . ($page ? ' property="v:dtreviewed"' : '') . ' content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; ?></div>
-                <div class="text"><?php echo '<div class="title">Reviewer:</div><div' . ($page ? ' property="v:reviewer"' : '') . '>', $reviewer , '</div>'; ?></div>
+                <div class="text">
+                  <?php 
+                    //echo '<div class="title">Date:</div><div' . ($page ? ' property="v:dtreviewed"' : '') . ' content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; 
+                    echo '<div class="title">Date:</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; 
+                  ?>
+                </div>
+                <div class="text">
+                  <?php 
+                    //echo '<div class="title">Reviewer:</div><div' . ($page ? ' property="v:reviewer"' : '') . '>', $reviewer , '</div>'; 
+                    echo '<div class="title">Reviewer:</div><div property="v:reviewer">', $reviewer , '</div>'; 
+                  ?>
+                </div>
               <?php endif; ?>
               <div class="text"><?php echo '<div class="title">Recommend: </div><div class="data">' . $node->gv_recommend . '</div>'?></div>
             </div>
@@ -207,7 +221,10 @@ if($view_mode == 'home_teaser') {
               </div>
             <?php endif; ?>
             
-            <?php echo '<div'. ($page ? ' property="v:description"' : '') . '>' . render($content['body']) . '</div>'; ?>
+            <?php 
+              //echo '<div'. ($page ? ' property="v:description"' : '') . '>' . render($content['body']) . '</div>'; 
+              echo '<div property="v:description">' . render($content['body']) . '</div>'; 
+            ?>
           </div>
           <div class="bottom-clear"></div>
           <div class="links">
@@ -222,10 +239,12 @@ if($view_mode == 'home_teaser') {
                       
                       if($page || $full_title) {
                         echo ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
-                        . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
+                        //. ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
+                        . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
                       }
                       else {
-                        echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider"'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
+                        //echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider"'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
+                        echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
                       }
                       
                   echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
