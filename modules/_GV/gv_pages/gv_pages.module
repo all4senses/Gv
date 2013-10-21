@@ -1719,7 +1719,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         //dpm($articles_by_index);
 
-        return;
+        
         
         if (!empty($articles_by_index)) {
           
@@ -1742,6 +1742,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => TRUE,
             );
 
+            /*
             foreach ($articles as $nid => $article) {
               $a = node_load($nid);
               $a->related_articles_teaser = TRUE;
@@ -1754,6 +1755,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               );
 
             }
+            */
 
           }
         }
