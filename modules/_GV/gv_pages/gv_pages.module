@@ -1734,6 +1734,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 38,
           );
 
+          
+          dpm($articles_by_index);
+            
           foreach ($articles_by_index as $index => $articles) {
             $form['related_articles']['index_' . $index] = array(
               '#type' => 'fieldset',
