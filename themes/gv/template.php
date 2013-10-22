@@ -688,11 +688,11 @@ function gv_process_page(&$variables) {
     $pages_to_noindex = array('blog', 'news', 'library');
     dpm($_SERVER);
     dpm($_GET);
-    if ( (in_array($_GET['q'], $pages_to_noindex) && !empty($_GET['page'])) || (strpos($_SERVER['REQUEST_URI'], 'staff/') !== FALSE && strpos($_SERVER['REQUEST_URI'], '?page=')) ) {
-      //
+    if ( (in_array($_GET['q'], $pages_to_noindex) || strpos($_SERVER['REQUEST_URI'], 'staff/')) && !empty($_GET['page']) ) {
       dpm('xxx');
+      //gv_misc_setNoindexToCurrentPage();
     }
-    //gv_misc_setNoindexToCurrentPage();
+    
   
 }
 
