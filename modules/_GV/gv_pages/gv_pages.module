@@ -6015,6 +6015,12 @@ function gv_pages_node_view($node, $view_mode) {
   if ($view_mode == 'full') {
     gv_misc_addSocialShareData_toPage($node);
     
+    // Set NoIndex tag for some paginated pages.
+    $pages_to_noindex = array('blog', 'news', 'library', 'staff/');
+    dpm($_SERVER);
+    dpm($_GET);
+    //gv_misc_noIndexPage();
+    
     
     // Floating Share buttons, applied to already initialized social buttons block
     /* .
