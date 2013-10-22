@@ -1745,8 +1745,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => TRUE,
             );
 
-            /*
+            $recalculate_related_articles = FALSE;
             foreach ($articles as $nid => $article) {
+              
+              if (!gv_misc_nodeExists($nid)) {
+                $recalculate_related_articles = TRUE;
+                continue;
+              }
+              
               $a = node_load($nid);
               $a->related_articles_teaser = TRUE;
               $form['related_articles']['index_' . $index][$nid] = array(
@@ -1758,7 +1764,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               );
 
             }
-            */
+            
 
           }
         }
