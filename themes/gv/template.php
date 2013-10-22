@@ -690,6 +690,7 @@ function gv_process_page(&$variables) {
     dpm($_GET);
     if ( (in_array($_GET['q'], $pages_to_noindex) || strpos($_SERVER['REQUEST_URI'], 'staff/')) && !empty($_GET['page']) ) {
       dpm('xxx');
+      gv_misc_addMetatag('robots', 'noindex');
       //gv_misc_setNoindexToCurrentPage();
     }
     
