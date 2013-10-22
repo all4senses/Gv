@@ -159,7 +159,9 @@
                       <?php 
                         //$stars_overall = theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
                         //echo '<span class="title">' . $provider_name . ' Rated: </span>' . $stars_overall . '<span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span> out of 5'; 
-                        echo '<span class="title">' . $provider_name . ' Rated: </span><span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span> out of 5'; 
+                        
+                        //echo '<span class="title">' . $provider_name . ' Rated: </span><span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span> out of <span property="v:best">5</span>'; 
+                        echo '<span class="title">' . $provider_name . ' Rated: </span><span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span> out of <span property="v:best">5</span>'; 
                       ?>
                     </div>
                   </div>
