@@ -684,14 +684,10 @@ function gv_process_page(&$variables) {
   
   
   
-    // Set NoIndex tag for some paginated pages.
+    // Set NoIndex tag for some paginated main articles and user pages.
     $pages_to_noindex = array('blog', 'news', 'library');
-    dpm($_SERVER);
-    dpm($_GET);
     if ( (in_array($_GET['q'], $pages_to_noindex) || strpos($_SERVER['REQUEST_URI'], 'staff/')) && !empty($_GET['page']) ) {
-      dpm('xxx');
       gv_misc_addMetatag('robots', 'noindex');
-      //gv_misc_setNoindexToCurrentPage();
     }
     
   
