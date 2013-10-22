@@ -681,6 +681,19 @@ function gv_process_page(&$variables) {
 //    //gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
 //    drupal_add_css('sites/all/libraries/twitter-bootstrap/css/bootstrap-combined.no-icons.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 //  }
+  
+  
+  
+    // Set NoIndex tag for some paginated pages.
+    $pages_to_noindex = array('blog', 'news', 'library');
+    dpm($_SERVER);
+    dpm($_GET);
+    if ( (in_array($_GET['q'], $pages_to_noindex) && !empty($_GET['page'])) || (strpos($_SERVER['REQUEST_URI'], 'staff/') !== FALSE && strpos($_SERVER['REQUEST_URI'], '?page=')) ) {
+      //
+      dpm('xxx');
+    }
+    //gv_misc_setNoindexToCurrentPage();
+  
 }
 
 
