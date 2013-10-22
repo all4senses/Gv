@@ -3947,7 +3947,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   // Define a main image and build a custom teaser.
   $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
 
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   
 //  $pin_article_to = array();
 //  if (!empty($form_state['values']['pin_article_to'])) {
@@ -3977,7 +3977,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
       
     // Don't recalculate related articles..
     'related_articles' => $old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
-    'related_articles_timestamp' => $old_extra_data['related_articles_timestamp'], //time(),
+    // If related articles should be recalculated, set timestamp to 0, what will make existing related articles expired.
+    'related_articles_timestamp' => ($form_state['values']['related_articles']['recalculate'] ? 0 : $old_extra_data['related_articles_timestamp']), //time(),
   );
   
   // Define and refine main image value for checked related articles.
