@@ -1736,6 +1736,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
           
           dpm($articles_by_index);
+          $recalculate_related_articles = FALSE;
             
           foreach ($articles_by_index as $index => $articles) {
             $form['related_articles']['index_' . $index] = array(
@@ -1745,7 +1746,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#collapsed' => TRUE,
             );
 
-            $recalculate_related_articles = FALSE;
+            
             foreach ($articles as $nid => $article) {
               
               if (!gv_misc_nodeExists($nid)) {
@@ -1764,9 +1765,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               );
 
             }
-            
 
           }
+          
+
+          $form['related_articles']['recalculate'] = array(
+            '#type' => 'checkbox',
+            '#title' => 'Recalculate related articles' . ($recalculate_related_articles ? ' (some related articles have been removed)' : ''),
+            '#default_value' => $recalculate_related_articles,
+            '#disabled' => $recalculate_related_articles,
+          );
+
+          
+          
         }
 
         
@@ -3936,7 +3947,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   // Define a main image and build a custom teaser.
   $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
 
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
   
 //  $pin_article_to = array();
 //  if (!empty($form_state['values']['pin_article_to'])) {
