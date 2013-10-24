@@ -4805,7 +4805,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
   return $params['report'];
   */
   
-  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'vocalocity_send_report');
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'vocalocity_send_report', $data_to);
 }
 
 
@@ -4937,7 +4937,7 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   return $params['report'];
   */
   
-  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, '8x8_send_report');
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, '8x8_send_report', $data_to);
 }
 
 
@@ -5068,7 +5068,7 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
     $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
-  if (!isset($data_to['Company'])) {
+  if (empty($data_to['Company'])) {
     $data_to['Company'] = 'Unavailable';
   }
   
@@ -5116,7 +5116,7 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
   return $params['report'];
   */
   
-  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'ringcentral_send_report');
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'ringcentral_send_report', $data_to);
 }
 
 
@@ -5266,17 +5266,35 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
   return $params['report'];
   */
   
-  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'nextiva_send_report');
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'nextiva_send_report', $data_to);
 }
 
 
 /**
  * Prepare report data about submission and send it to admin.
  */
-function gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, $mail_subject) {
+function gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, $mail_subject, $data_to = NULL) {
+  
+  $out = '';
   
   // Build a report data.
-  $out = theme('gv_misc_requestQuote_mail', $submission);
+
+  // Data from.
+  $out .= 'Quote Request submission form:
+
+';
+  $out .= theme('gv_misc_requestQuote_mail', $submission, FALSE);
+  
+  // Data to.
+  if ($data_to) {
+    $out .= '
+      
+Data sent to a provider:
+
+';
+    $out .= theme('gv_misc_requestQuote_mail', $data_to, FALSE);
+  }
+  
   /*
   $out = 'Quote Request submission form:
 
@@ -5417,10 +5435,14 @@ Get VoIP team
 /**
  * Simple theming of a Request for quote mail content.
  */
-function theme_gv_misc_requestQuote_mail($data) {
- $out = 'Quote Request submission form:
+function theme_gv_misc_requestQuote_mail($data, $with_title = TRUE) {
+ 
+ $out = '';
+ if ($with_title) {
+   $out .= 'Quote Request submission form:
 
 ';
+ }
  foreach ($data as $key => $value) {
    if ($value) {
      
