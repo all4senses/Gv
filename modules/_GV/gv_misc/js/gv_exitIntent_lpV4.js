@@ -22,7 +22,7 @@
                     //if (now.getTime() > times[i][0] && now.getTime() < times[i][1])
                     {
                         //$.fn.colorbox({iframe:true, width:650, height:600, href: "get-popup-on-exit-intent", open: true});  
-                        $.fn.colorbox({iframe:true, width:650, height:600, href: 'get/iframe/exitIntent_lpV4', open: true});  
+                        $.fn.colorbox({iframe:true, width:650, height:400, href: 'get/iframe/exitIntent_lpV4', open: true});  
                         
                         //alert('test');
                     }    
