@@ -30,6 +30,21 @@
                 }
             }
         });
+        
+        
+        
+        
+        
+        $("#no").click(function(e)
+        {
+            console.log('Closedddddd');
+            $.fn.colorbox.close();
+            
+       
+        });
+        
+        
+        
        
        
     }
