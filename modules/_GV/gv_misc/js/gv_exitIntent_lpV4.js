@@ -24,7 +24,7 @@
                         //$.fn.colorbox({iframe:true, width:650, height:600, href: "get-popup-on-exit-intent", open: true});  
                         $.fn.colorbox({iframe:true, width:650, height:400, href: 'get/iframe/exitIntent_lpV4', open: true});  
                         
-                        $.fn.colorbox.close();
+                        //$.fn.colorbox.close();
                         //alert('test');
                     }    
                 }
