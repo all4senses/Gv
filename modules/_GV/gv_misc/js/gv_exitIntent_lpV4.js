@@ -32,16 +32,13 @@
         });
         
         
-        
-        
-        
-        $("#no").click(function(e)
-        {
+        $("#no").click(function(){
             console.log('Closedddddd');
             $.fn.colorbox.close();
-            
-       
         });
+        
+        
+   
         
         
         
