@@ -41,6 +41,9 @@
         window.addEventListener("message", receiveMessage, false);
         function receiveMessage(event) {
             alert('Message: ' + event.data);
+            if (event.data == 'close') {
+              $.fn.colorbox.close();
+            }
         }
         
         
