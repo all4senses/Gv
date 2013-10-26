@@ -1,9 +1,9 @@
   <?php
     if ($node->title == 'Request a Quote page v4 Final') {
-      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
-      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
-      drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
+//      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+//      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
+//      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
+//      drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
   
       $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
       $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
@@ -56,6 +56,48 @@
                     </div>
 
               </div>
+          
+          
+          
+          
+          
+          
+          
+              <div style="display: none;">
+                <div id="exitIntent"> 
+                  <div id="line-1">Do You Want To Save BIG On</div>
+                  <div id="line-2">Reliable Business Phone Service?</div>
+
+                  <div id="line-3">Get voice, fax, text and conferencing</div>
+                  <div id="line-4">in one phone system for $19/mo.</div>
+
+                  <a href="/business" id="yes" target="_top">YES</a>
+                  <div id="no">NO - I like overpaying for my old phone service.</div>
+                </div>
+              </div>
+          
+              <?php
+              
+                // Exit intent Ad popup block.
+                global $user; 
+
+                if ($user->uid) {
+                  // Colorbox for popup window.
+                  //1, 3, 4, 
+                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+
+                  // Exit intent Ad block main js.
+                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
+                }
+
+              
+              ?>
+          
+          
+          
+          
 
               <?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'): ?>
 
