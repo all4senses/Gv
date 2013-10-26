@@ -219,7 +219,7 @@ function gv_misc_getIframe_exitIntent_lpV4() {
     <div id="line-4">in one phone system for $19/mo.</div>
     
     <a href="/business" id="yes" target="_top">YES</a>
-    <div id="no" onclick="alert('. "'xxx!'" .');">NO - I like overpaying for my old phone service.</div>
+    <div id="no" onclick="/*alert('. "'xxx!'" .');*/ window.parent.postMessage("close!!!", "*");">NO - I like overpaying for my old phone service.</div>
 ';
   
   return $out;

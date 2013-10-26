@@ -32,13 +32,17 @@
         });
         
         
-        $("#no").click(function(){
-            console.log('Closedddddd');
-            $.fn.colorbox.close();
-        });
+//        $("#no").click(function(){
+//            console.log('Closedddddd');
+//            $.fn.colorbox.close();
+//        });
         
         
-   
+        window.addEventListener("message", receiveMessage, false);
+        function receiveMessage(event) {
+            alert('Message: ' + event.data);
+        }
+        
         
         
         
