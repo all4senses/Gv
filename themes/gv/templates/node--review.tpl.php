@@ -193,6 +193,7 @@ if($view_mode == 'home_teaser') {
                               '<span property="v:value">', $r, '</span>', //' out of', 
                               //'<span property="v:best">5</span>',
                               '<span property="v:best" content="5"></span>',
+                              '<span property="v:worst" content="0"></span>',
                             '</span>',
                           '</span>'; 
                     
