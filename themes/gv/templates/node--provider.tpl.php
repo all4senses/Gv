@@ -164,7 +164,7 @@
                           echo '<span class="title">' . $provider_name . ' Rated: </span>
                           <span class="count" rel="v:rating">
                             <span typeof="v:Rating">
-                              <span property="v:worst" content="' . $node->gv_rating_overall . '"></span>
+                              <span property="v:worst" content="0"></span>
                               <span property="v:value">' . $node->gv_rating_overall . '</span> out of 
                               <span property="v:best">5</span>
                             </span>
