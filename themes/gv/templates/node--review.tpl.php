@@ -180,7 +180,25 @@ if($view_mode == 'home_teaser') {
           <div class="gv_votes">
             <?php 
               //echo '<div class="caption"><span>User\'s Rating:</span> <span' . ($page ? ' property="v:rating"' : '') . '>' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); 
-              echo '<div class="caption"><span>User\'s Rating:</span> <span property="v:rating">' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); 
+              
+              $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value'];
+              echo '<div class="caption"><span>User\'s Rating:</span>';
+              
+                    //echo '<span property="v:rating">' , $r, '</span>' /* render($content['gv_rating_overall'])*/;
+                
+                    echo  //'<span class="count" rel="v:rating">',
+                          '<span rel="v:rating">',
+                            '<span typeof="v:Rating">',
+                              //'<span property="v:worst" content="' . $r . '"></span>',
+                              '<span property="v:value">', $r, '</span> out of 
+                              <span property="v:best">5</span>
+                            </span>
+                          </span>'; 
+                    
+                    
+                echo '<div class="bottom-clear"></div>
+               </div>', 
+               render($content['gv_ratings']); 
             
             ?>
             <div class="rate-other">
