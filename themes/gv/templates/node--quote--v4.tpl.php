@@ -78,9 +78,10 @@
               <?php
               
                 // Exit intent Ad popup block.
-                global $user; 
-
-                if ($user->uid) {
+//                global $user; 
+//
+//                if ($user->uid) 
+                {
                   // Colorbox for popup window.
                   //1, 3, 4, 
                   drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
