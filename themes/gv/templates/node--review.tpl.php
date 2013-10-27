@@ -124,9 +124,11 @@ if($view_mode == 'home_teaser') {
                   echo '</h1>';
                 }
                 else {
-                  echo '</h2>';
+                  echo '</h3>';
                 }
                 ?>
+                
+            <?php print render($title_suffix); ?>
                 
 
             <?php if (!$page): ?>       
