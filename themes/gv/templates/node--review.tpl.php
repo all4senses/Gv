@@ -190,10 +190,11 @@ if($view_mode == 'home_teaser') {
                           '<span rel="v:rating">',
                             '<span typeof="v:Rating">',
                               //'<span property="v:worst" content="' . $r . '"></span>',
-                              '<span property="v:value">', $r, '</span> out of 
-                              <span property="v:best">5</span>
-                            </span>
-                          </span>'; 
+                              '<span property="v:value">', $r, //'</span> out of', 
+                              //'<span property="v:best">5</span>',
+                              '<span property="v:best" content="5"></span>',
+                            '</span>',
+                          '</span>'; 
                     
                     
                 echo '<div class="bottom-clear"></div>
