@@ -68,8 +68,7 @@
                   <div id="line-1">Do You Want To Save BIG On</div>
                   <div id="line-2">Reliable Business Phone Service?</div>
 
-                  <div id="line-3">Get voice, fax, text and conferencing</div>
-                  <div id="line-4">in one phone system for $19/mo.</div>
+                  <div id="line-3">Get Voice, Fax, Text and Video Conferencing for $19/mo.</div>
 
                   <a href="/business" id="yes" target="_top">YES</a>
                   <div id="no">NO - I like overpaying for my old phone service.</div>
