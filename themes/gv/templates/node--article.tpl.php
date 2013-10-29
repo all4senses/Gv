@@ -1,9 +1,10 @@
 <?php 
 
   global $user;
-//  if ($user->uid == 1 && $node->nid = 1642 && !$page) {
-//    return NULL;
-//  }
+  if ($user->uid == 1 && $node->nid = 1642 && !$page) {
+    dpm($node->nid);
+    return FALSE;
+  }
 
   $class_thumb_presented = '';
   $update_teaser = FALSE;
