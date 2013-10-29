@@ -1,5 +1,10 @@
 <?php 
 
+  global $user;
+  if ($user->uid == 1 && $node->nid = 1642) {
+    return NULL;
+  }
+
   $class_thumb_presented = '';
   $update_teaser = FALSE;
   
