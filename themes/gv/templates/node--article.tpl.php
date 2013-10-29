@@ -1,7 +1,7 @@
 <?php 
 
   global $user;
-  if ($user->uid == 1 && $node->nid = 1642 && !$page) {
+  if ($user->uid == 1 && $node->nid == 1642 && !$page) {
     dpm($node);
     return FALSE;
   }
