@@ -1,11 +1,11 @@
 <?php 
 
-  global $user;
-  if ($user->uid == 1 && $node->nid == 1642 && !$page) {
-    dpm($node);
-    echo '-';
-    return;
-  }
+//  global $user;
+//  if ($user->uid == 1 && $node->nid == 1642 && !$page) {
+//    dpm($node);
+//    echo '-';
+//    return;
+//  }
 
   $class_thumb_presented = '';
   $update_teaser = FALSE;
