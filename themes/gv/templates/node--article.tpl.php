@@ -3,7 +3,7 @@
   global $user;
   if ($user->uid == 1 && $node->nid == 1642 && !$page) {
     dpm($node);
-    echo '';
+    echo '-';
     return;
   }
 
