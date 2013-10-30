@@ -487,6 +487,13 @@
  
 
   
+
+
+<?php if ($page): ?>
+  </div>  <!-- main-content -->
+<?php endif; ?>
+    
+    
   
   <?php /*if ($page && $node->type != 'news_post'): ?>
       
@@ -531,5 +538,7 @@
   ?>
   </article> <!-- /.node -->
 <?php endif; ?>
+
+  
 
 
