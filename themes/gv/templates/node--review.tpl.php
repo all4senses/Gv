@@ -57,7 +57,8 @@ if($view_mode == 'home_teaser') {
   //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
   $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more')))), $last_pos);
 
-  
+  // Replaces & with &amp;
+  $teaser = htmlspecialchars($teaser); 
   
   
   echo '<h3>'. $node->title . '</h3><div class="review">' . $teaser . '</div>';
