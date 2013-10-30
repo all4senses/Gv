@@ -144,7 +144,7 @@
                   </div>
               
               <? else: ?>
-                  <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" /></a>'; ?>
+                  <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>'; ?>
               <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
              
               
@@ -269,7 +269,7 @@
 
                       foreach ($provider_options_bu as $options_set => $options_data) {
 
-                        $provider_options_bu_out .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+                        $provider_options_bu_out .= '<tr><td colspan="2"></td></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
 
                         $odd = TRUE;
 
@@ -318,7 +318,7 @@
 
                       foreach ($provider_options_re as $options_set => $options_data) {
 
-                        $provider_options_re_out .= '<tr></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+                        $provider_options_re_out .= '<tr><td colspan="2"></td></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
 
                         $odd = TRUE;
 
