@@ -70,7 +70,7 @@ if($view_mode == 'home_teaser') {
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
    
-  <div class="main-content "<?php echo 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'; /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
+  <div class="main-content" <?php echo 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'; /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
     
             <?php if (!$page): ?>
               <header>
