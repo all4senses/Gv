@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
-
+<?php 
+  global $schema_org_type;
+  $itemscope = ' itemscope itemtype="http://schema.org/' . ($schema_org_type ? $schema_org_type : 'WebPage') . '"';
+?>
 
 <!--[if lt IE 7]> <html class="ie6 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
@@ -23,7 +26,7 @@
   
 </head>
 
-<body itemscope itemtype="http://schema.org/<?php global $schema_org_type; echo $schema_org_type ? $schema_org_type : 'WebPage'; ?>" class="<?php print $classes; ?>" <?php print $attributes;?>>
+<body <?php echo $itemscope ?> class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
