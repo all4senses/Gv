@@ -3849,6 +3849,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => 6,
         );
       
+        $form['actions']['unpublished_but_visible'] = array(
+          '#type' => 'submit',
+          '#value' => 'Unpublished, but visible',
+          '#submit' => array('node_form_submit'),
+          '#weight' => 7,
+        );
+      
         $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         
         break;
@@ -4069,6 +4076,12 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     $form_state['values']['status'] = 0;
     drupal_set_message(t('Attention! This article is saved as draft and is not published now!'), 'warning');
     $status_changed = TRUE;
+  }
+  elseif ($form_state['values']['op'] == 'Unpublished, but visible') {
+
+    $form_state['values']['status'] = 1;
+    drupal_set_message(t('Attention! This article is saved as  Unpublished, but visible now!'), 'warning');
+    //$status_changed = TRUE;
   }
   elseif (!$form_state['values']['nid'] || @$form_state['build_info']['args'][0]->field_show_in_block['und'][0]['value'] != @$form_state['values']['field_show_in_block']['und'][0]['value'] || $form_state['values']['op'] == 'Delete') {
     $status_changed = TRUE;
