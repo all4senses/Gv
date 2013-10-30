@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 
-<html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"
-<!--[if lt IE 7]> class="ie6 ie" <![endif]-->
-<!--[if IE 7]> class="ie7 ie" <![endif]-->
-<!--[if IE 8]> class="ie8 ie" <![endif]-->
-<!--[if gt IE 8]> <!-->  <!--<![endif]-->
->
+
+
+<!--[if lt IE 7]> <html class="ie6 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
+<!--[if gt IE 8]> <!--> <html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <!--<![endif]-->
+  
 <head>
   <title><?php global $altered_head_title; if ($altered_head_title) {print $altered_head_title;} else {print $head_title;} ?></title>
   <?php print $head; ?>
