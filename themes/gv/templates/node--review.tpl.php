@@ -49,17 +49,14 @@ if($view_mode == 'home_teaser') {
   
   $characters_num = 160;
   
-  $teaser = trim(drupal_substr($teaser, 0, $characters_num));
+  // Replaces & with &amp;
+  $teaser = htmlspecialchars(trim(drupal_substr($teaser, 0, $characters_num)));
   
   
   $last_pos = strrpos($teaser, ' ');
   
   //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
   $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more')))), $last_pos);
-
-  // Replaces & with &amp;
-  $teaser = htmlspecialchars($teaser); 
-  
   
   echo '<h3>'. $node->title . '</h3><div class="review">' . $teaser . '</div>';
   
