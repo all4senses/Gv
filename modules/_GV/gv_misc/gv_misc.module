@@ -581,9 +581,10 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
   curl_close($ch);
 
   // Show new information
-  var_dump($result);
-  dpm($result);
-  return json_decode($result);
+  //var_dump($result);
+  //dpm($result);
+  //return json_decode($result);
+  return $result;
 }
 
 
@@ -657,7 +658,8 @@ function gv_misc_testPage() {
   $threadId = '1868907483';
   
   $result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
-  dpm($result);
+  //dpm($result);
+  $out .= $result;
   
   
   
