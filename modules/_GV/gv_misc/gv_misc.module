@@ -574,6 +574,9 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
   curl_setopt($ch,CURLOPT_POST,count($fields));
   curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
 
+  // indicates that we want the response back rather than just returning a "TRUE" string
+  curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
   // execute POST
   $result = curl_exec($ch);
 
@@ -583,8 +586,8 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
   // Show new information
   //var_dump($result);
   //dpm($result);
-  //return json_decode($result);
-  return $result;
+  return json_decode($result);
+  //return $result;
 }
 
 
@@ -654,11 +657,11 @@ function gv_misc_testPage() {
   
   $oldTitle = 'The Top 100 VoIP Experts to Follow on Twitter';
   //$newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
-  $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter...';
+  $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
   $threadId = '1868907483';
   
   $result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
-  //dpm($result);
+  dpm($result);
   //$out .= $result;
   
   
