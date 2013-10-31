@@ -536,7 +536,6 @@ EOT;
         $item = menu_get_item();
         // Retrieve the object from the menu router, if it exists.
         if ($object = isset($item['page_arguments'][0]) ? $item['page_arguments'][0] : FALSE) {
-          dpm($object);
           switch ($item['path']) {
             case 'node/%':
               // For nodes, display if the Disqus object is enabled.
