@@ -2910,7 +2910,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
               $form['ureview']['u_input']['votes'] = array(
                   '#type' => 'container',
-                  '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
+                  '#prefix' => '<div class="rate-caption"><div class="col-2">Click Stars To Start Reviewing</div><div class="col-3">Rate it</div></div>',
               );
               foreach ($vote_keys as $vote_key => $vote_title) {
                 $form['ureview']['u_input']['votes']['rating_' . $vote_key] = array(
@@ -2980,7 +2980,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 <span>We will only accept and publish honest, detailed, and appropriate reviews.</span>
 <span>We will not publish reviews that use profanity. We reserve the right to refuse any review that is not verified by the reviewer.</span>
 <span>Your review will be published after it's been approved by one of our editors.</span>
-<span>Submissions that do not follow the above guidelines will not be posted.</span></siv>",
+<span>Submissions that do not follow the above guidelines will not be posted.</span></div>",
               );
           
           
