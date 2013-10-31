@@ -383,6 +383,7 @@
 //            gv_misc_pushTagsToMetatags($keyword_metatag_name, $content['field_topics']);
 //          }
           
+          dpm($content);
           echo render($content);
         ?>
       </div>
