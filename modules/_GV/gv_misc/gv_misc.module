@@ -554,7 +554,9 @@ function gv_misc_testPage() {
   
   
   
+  
   //$key="<api key>"; // Requires a registered DISQUS API application. Create one (free) at http://disqus.com/api/applications/
+        $key = "IlTOWiFAZGYxGCUdjCEMQqzTRVl9hpG7f9KrSAkSqcbFDH4duZADgQUy0asDTHOW"; // Secret key.
         $thread="1888015311";
         $forum="getvoip";
 
@@ -566,7 +568,7 @@ function gv_misc_testPage() {
                 2. By identifier: thread:ident=%s — requires the forum parameter
                 3. By URL: thread:link=%s — requires the forum parameter
         */
-        $endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key='.urlencode($user_api_key).'&forum='.$forum.'&thread='.urlencode($thread);
+        $endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key='.urlencode($key).'&forum='.$forum.'&thread='.urlencode($thread);
 
         // setup curl to make a call to the endpoint
         $session = curl_init($endpoint);
