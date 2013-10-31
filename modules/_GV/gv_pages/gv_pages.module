@@ -2916,8 +2916,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 $form['ureview']['u_input']['votes']['rating_' . $vote_key] = array(
                   '#type' => 'select',
                   '#options' => $rating_options,
-                  '#default_value' => $rating_options[''],
-                  '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+                  '#default_value' => ' ', //$rating_options[''],
+                  '#prefix' => '<div class="vote"><div class="vote-title">' . $vote_title . '</div>',
                   '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
                 );
     //            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
