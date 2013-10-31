@@ -575,7 +575,7 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
   curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
 
   // indicates that we want the response back rather than just returning a "TRUE" string
-  curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
   // execute POST
   $result = curl_exec($ch);
