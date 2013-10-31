@@ -591,7 +591,7 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
 /**
  * Disqus get a thread details.
  */
-function gv_misc_disqusGetThereadDetails($thread, $threadIdType = 'thread:ident') {
+function gv_misc_disqusGetThreadDetails($thread, $threadIdType = 'thread:ident') {
   
   // construct the query with our apikey and the query we want to make
   // Change api_key to api_secret when using your secret key
@@ -657,14 +657,14 @@ function gv_misc_testPage() {
   $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter...';
   $threadId = '1868907483';
   
-  $result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
+  //$result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
   //dpm($result);
   //$out .= $result;
   
   
   
   $threadId = 'node/1644';
-  $result = gv_misc_disqusGetThereadDetails($threadId, 'thread:ident');      
+  $result = gv_misc_disqusGetThreadDetails($threadId, 'thread:ident');      
   dpm($result);      
         
   
