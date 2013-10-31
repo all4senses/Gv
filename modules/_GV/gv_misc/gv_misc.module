@@ -563,8 +563,8 @@ function gv_misc_testPage() {
 //      echo $forum->name;
 //    }
     
-    $uname = $disqus->get_user_name();
-    dpm($uname);
+    $data = $disqus->get_forum_list();
+    dpm($data);
     
   } catch(DisqusException $exception) {
     // Display the error.
