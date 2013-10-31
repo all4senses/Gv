@@ -558,8 +558,8 @@ function gv_misc_testPage() {
   //$key="<api key>"; // Requires a registered DISQUS API application. Create one (free) at http://disqus.com/api/applications/
         //$key = "IlTOWiFAZGYxGCUdjCEMQqzTRVl9hpG7f9KrSAkSqcbFDH4duZADgQUy0asDTHOW"; // Secret key.
         $key = 'LTxXVkhAehxdgzsFbolUXSTosneekOOuwWrpx1okk8LHaW5APx4yVcXDP0zwapS5'; // Public key.
-        $thread="1888015311";
-        $thread="1888015311";
+        ///$thread="1888015311";
+        $thread="http://getvoip.com/blog/2013/10/22/polycom-vvx-600-media-phone-top-5-features-business-users-will-love";
         $forum="getvoip";
 
         // construct the query with our apikey and the query we want to make
@@ -570,7 +570,8 @@ function gv_misc_testPage() {
                 2. By identifier: thread:ident=%s — requires the forum parameter
                 3. By URL: thread:link=%s — requires the forum parameter
         */
-        $endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key='.urlencode($key).'&forum='.$forum.'&thread='.urlencode($thread);
+        ///$endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key='.urlencode($key).'&forum='.$forum.'&thread='.urlencode($thread);
+        $endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key='.urlencode($key).'&forum='.$forum.'&thread:link='.urlencode($thread);
 
         // setup curl to make a call to the endpoint
         $session = curl_init($endpoint);
