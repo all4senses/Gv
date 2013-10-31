@@ -563,7 +563,7 @@ function gv_misc_testPage() {
 //      echo $forum->name;
 //    }
     
-    $data = $disqus->get_forum_list();
+    $data = $disqus->get_thread_list('1540289');
     dpm($data);
     
   } catch(DisqusException $exception) {
