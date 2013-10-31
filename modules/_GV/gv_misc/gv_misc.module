@@ -563,7 +563,9 @@ function gv_misc_testPage() {
 //      echo $forum->name;
 //    }
     
-    $data = $disqus->get_thread_list('1540289');
+    //$data = $disqus->get_thread_list('1540289');
+    $data = $disqus->get_thread_by_url('http://getvoip.com/blog/2013/10/28/top-50-voip-experts-on-twitter');
+    
     dpm($data);
     
   } catch(DisqusException $exception) {
