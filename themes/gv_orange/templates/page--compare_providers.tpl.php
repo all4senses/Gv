@@ -101,22 +101,25 @@
           <?php print render($page['content']); ?>
           
             
-          <div id="below-content-with-second-sidebar">
+          <?php if ($page['below_content_with_sidebar'] || $page['sidebar_second_below_chart']): ?>
             
-              <?php if ($page['below_content_with_sidebar']): ?>
-                <div id="below-content-with-sidebar">
-                  <?php print render($page['below_content_with_sidebar']); ?>
-                </div>
-              <?php endif; ?>
-                
-              <?php if ($page['sidebar_second_below_chart']): ?>
-                <aside id="sidebar-second-below-chart" role="complementary" class="sidebar clearfix">
-                  <?php print render($page['sidebar_second_below_chart']); ?>
-                </aside> 
-              <?php endif; ?>
-                
-          </div>
+            <div id="below-content-with-second-sidebar">
+
+                <?php if ($page['below_content_with_sidebar']): ?>
+                  <div id="below-content-with-sidebar">
+                    <?php print render($page['below_content_with_sidebar']); ?>
+                  </div>
+                <?php endif; ?>
+
+                <?php if ($page['sidebar_second_below_chart']): ?>
+                  <aside id="sidebar-second-below-chart" role="complementary" class="sidebar clearfix">
+                    <?php print render($page['sidebar_second_below_chart']); ?>
+                  </aside> 
+                <?php endif; ?>
+
+            </div>
             
+          <?php endif; ?>  
             
             
           <?php 
