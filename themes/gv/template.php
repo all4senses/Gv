@@ -962,7 +962,7 @@ function gv_preprocess_html(&$variables) {
   // And remove no-sidebars class.
   if (!empty($variables['page']['sidebar_second_below_chart']) && ($key = array_search('no-sidebars', $variables['classes_array'])) !== FALSE) {
     unset($variables['classes_array'][$key]);
-    $variables['classes_array'][] = 'one-sidebar sidebar-second';
+    $variables['classes_array'][] = 'one-sidebar sidebar-second no-top-sidebar-second';
   }
  
   
