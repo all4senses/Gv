@@ -142,6 +142,12 @@
         </aside>  <!-- /#sidebar-second -->
       <?php endif; */?>
       
+      <?php if ($page['sidebar_second_below_chart']): ?>
+        <aside id="sidebar-second-below-chart" role="complementary" class="sidebar clearfix">
+          <?php print render($page['sidebar_second_below_chart']); ?>
+        </aside>  <!-- /#sidebar-second -->
+      <?php endif; ?>
+      
       <div class="bottom-clear"></div>
       
       <div id="above_footer">
