@@ -959,8 +959,8 @@ function gv_preprocess_views_view(&$vars) {
 function gv_preprocess_html(&$variables) {
   $key = array_search('no-sidebars', $variables['classes_array']);
   dpm($key);
-  if (!empty($variables['page']['sidebar_second_below_chart']) && $key = array_search('no-sidebars', $variables['classes_array']) !== FALSE) {
-    
+  if (!empty($variables['page']['sidebar_second_below_chart']) && ($key = array_search('no-sidebars', $variables['classes_array'])) !== FALSE) {
+    dpm($key);
     unset($variables['classes_array'][$key]);
     $variables['classes_array'][] = 'one-sidebar sidebar-second';
   }
