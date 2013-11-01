@@ -959,6 +959,8 @@ function gv_preprocess_views_view(&$vars) {
 function gv_preprocess_html(&$variables) {
   
   dpm($variables['classes_array']);
+  dpm($_GET);
+  dpm($_SERVER);
   
   //dpm($variables);
   //global $user;
