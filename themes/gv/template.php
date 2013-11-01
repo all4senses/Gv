@@ -959,7 +959,7 @@ function gv_preprocess_views_view(&$vars) {
 function gv_preprocess_html(&$variables) {
   
   if (!empty($variables['page']['sidebar_second_below_chart']) && $key = array_search('no-sidebars', $variables['classes_array']) !== FALSE) {
-    $variables['classes_array'][] = 'one-sidebar sidebar-first';
+    $variables['classes_array'][] = 'one-sidebar sidebar-second';
     unset($variables['classes_array'][$key]);
   }
   
