@@ -922,7 +922,7 @@ body.one-sidebar.sidebar-second .sidebar{background: none; padding: 10px 10px 0 
 
 
 
-.page-node #main .sidebar .block .content .views-row a{color: #777; font-size: 12px; /*padding: 4px 10px;*/ display: block; border-bottom: 1px dotted lightgray; width: 205px; margin: 0 0 0 12px; padding: 2px 10px 2px 0;}
+.sidebar .block .content .views-row a{color: #777; font-size: 12px; /*padding: 4px 10px;*/ display: block; border-bottom: 1px dotted lightgray; width: 205px; margin: 0 0 0 12px; padding: 2px 10px 2px 0;}
 
 
 .page-node #main .sidebar .block .content .view-display-id-block_with_thumbs .views-row,
@@ -978,6 +978,14 @@ body.one-sidebar.sidebar-second .sidebar{background: none; padding: 10px 10px 0 
 .view-display-id-block_with_thumbs_on_news_2 .views-row.views-row-last {border: none;}
 .view-display-id-block_with_thumbs_on_news_2 .block-thumb {padding: 0; margin-top: 0;}
 .page-node #main .sidebar .block .view-display-id-block_with_thumbs_on_news_2 .views-row a {border: none; padding: 0; width: auto;}
+
+
+
+/* Cancel the main content styles for sidebbar*/
+#main .sidebar .view-taxonomy-term .views-row, 
+#main .sidebar .view-articles .views-row, 
+#main .sidebar .view-news .views-row, 
+#main .sidebar .view-blog .views-row {border: none; padding: 0; margin: 0; width: inherit;}
 
 
 
@@ -1228,6 +1236,7 @@ margin-top: 150px;
 #main .view-articles .views-row-odd,
 #main .view-news .views-row-odd,
 #main .view-blog .views-row-odd{/*float: left; margin-right: 10px;*/}
+
 
 
 
