@@ -3846,6 +3846,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'provider_node_form':
     case 'phone_node_form':
       
+        $form['actions']['submit']['#value'] = 'Save & Publish';
+      
         $form['actions']['save_draft'] = array(
           '#type' => 'submit',
           '#value' => 'Save Draft',
