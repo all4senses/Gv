@@ -2919,6 +2919,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 $form['ureview']['u_input']['votes']['rating_' . $vote_key] = array(
                   '#type' => 'select',
                   '#options' => $rating_options,
+                  // Commented because caused errors on w3 html validation.
                   //'#default_value' => $rating_options[''],
                   '#prefix' => '<div class="vote"><div class="vote-title">' . $vote_title . '</div>',
                   '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
@@ -3858,6 +3859,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#submit' => array('node_form_submit'),
           '#weight' => 7,
         );
+        
+        dpm($form);
       
         $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         
@@ -4064,7 +4067,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 //    exit;
 //  }
           
-  if ($form_state['values']['op'] == 'Save' && @$form_state['build_info']['args'][0]->status == 0) {
+  if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->status == 0) {
     // NOT publish ---> Publish
     drupal_set_message('NOT publish ---> Publish', 'warning');
 
