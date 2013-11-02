@@ -3846,7 +3846,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'provider_node_form':
     case 'phone_node_form':
       
-        $form['field_invisible']['#access'] = FALSE;
+        if (isset($form['field_invisible'])) {
+          //$form['field_invisible']['#access'] = FALSE;
+        }
       
         $form['actions']['submit']['#value'] = 'Save & Publish';
       
@@ -4046,7 +4048,6 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
   
-  //dpm($form_state['values']);
 }
 
 
@@ -4119,6 +4120,10 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
   }
   elseif ($form_state['values']['op'] == 'Unpublished, but visible') {
 
+    dpm($form_state['values']);
+    //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
+  
+    
     $form_state['values']['status'] = 1;
     drupal_set_message(t('Attention! This article is saved as  Unpublished, but visible now!'), 'warning');
     //$status_changed = TRUE;
