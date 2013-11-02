@@ -4098,7 +4098,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 //  }
   
 //  dpm($form);
-  dpm($form_state);
+  dpm($form_state['values']);
           
   if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->status == 0) {
     // NOT publish ---> Publish
