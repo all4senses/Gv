@@ -4117,7 +4117,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     drupal_set_message(t('This article is now published!'), 'warning');
     $status_changed = TRUE;
   }
-  if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->field_invisible == 1) {
+  if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->field_invisible['und'][0]['value'] == 1) {
     // NOT publish ---> Publish
     drupal_set_message('Invisible in lists ---> Visible', 'warning');
 
