@@ -4043,7 +4043,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('pin_article_to' => $pin_article_to, 'title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
   //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
-  
+ 
+  dpm($form_state['values']);
 }
 
 
