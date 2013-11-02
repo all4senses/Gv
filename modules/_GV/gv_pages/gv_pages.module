@@ -3855,12 +3855,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => 6,
         );
       
-        $form['actions']['unpublished_but_visible'] = array(
-          '#type' => 'submit',
-          '#value' => 'Unpublished, but visible',
-          '#submit' => array('node_form_submit'),
-          '#weight' => 7,
-        );
+        global $user;
+        if ($user->uid == 1) {
+          $form['actions']['unpublished_but_visible'] = array(
+            '#type' => 'submit',
+            '#value' => 'Unpublished, but visible',
+            '#submit' => array('node_form_submit'),
+            '#weight' => 7,
+          );
+        }
         
         dpm($form);
       
