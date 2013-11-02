@@ -3837,7 +3837,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   } // End of switch ($form_id) {
   
   
-  // Add a Save Draft button.
+  // Add a Save Draft and Invisible buttons.
   switch ($form_id) {
     
     case 'news_post_node_form':
@@ -3845,6 +3845,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'article_node_form':
     case 'provider_node_form':
     case 'phone_node_form':
+      
+        $form['field_invisible']['#access'] = FALSE;
       
         $form['actions']['submit']['#value'] = 'Save & Publish';
       
