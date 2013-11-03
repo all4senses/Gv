@@ -217,6 +217,7 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
     dpm($expressions);
     dpm($tables);
     dpm($order);
+    $order['n.created'] = 'ASC';
     dpm($where);
     dpm($having);
   }
