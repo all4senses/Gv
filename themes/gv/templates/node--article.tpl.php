@@ -159,8 +159,10 @@
               <?php endif; ?>
 
                 <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ ''/*preg_replace('/datatype=""/', '', $title_attributes)*/; 
-                if (!$node->status) {echo ' class="not-published"';} 
-                
+//                if (!$node->status || !empty()) {
+//                  echo ' class="not-published"';
+//                } 
+                dpm($node);
                 
                 ?>><?php if (!isset($node->title_no_link) && !$page): ?><a href="<?php print $node_url; ?>"><?php print $title; ?></a>
                 <?php else: ?><?php print $title; ?><?php endif; ?><?php if ($page): ?></h1><?php else: ?></h2><?php endif; ?> 
