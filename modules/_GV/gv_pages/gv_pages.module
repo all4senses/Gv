@@ -3855,10 +3855,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => 6,
         );
       
-        global $user;
-        if ($user->uid == 1 && isset($form['field_invisible'])) {
+        if (isset($form['field_invisible'])) {
           
-          //$form['field_invisible']['#access'] = FALSE;
+          $form['field_invisible']['#access'] = FALSE;
           
           $form['actions']['published_but_invisible'] = array(
             '#type' => 'submit',
@@ -3867,8 +3866,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 7,
           );
         }
-        
-        //dpm($form);
       
         $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
