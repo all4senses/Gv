@@ -159,10 +159,20 @@
               <?php endif; ?>
 
                 <?php print ' ' . /*$title_attributes*/ /*preg_replace('/datatype=".*"/', '', $title_attributes);*/ ''/*preg_replace('/datatype=""/', '', $title_attributes)*/; 
-//                if (!$node->status || !empty()) {
-//                  echo ' class="not-published"';
-//                } 
-                dpm($node);
+                
+                $custom_classes = array();
+
+                if (!$node->status) {
+                  $custom_classes[] = 'not-published';
+                }
+                if (!empty($node->field_invisible['und'][0]['value'])) {
+                  $custom_classes[] = 'invisible-in-lists';
+                }
+                if (!empty($custom_classes)) {
+                  echo ' class="' . implode(' ', $custom_classes) . '"';
+                }
+                 
+                //dpm($node);
                 
                 ?>><?php if (!isset($node->title_no_link) && !$page): ?><a href="<?php print $node_url; ?>"><?php print $title; ?></a>
                 <?php else: ?><?php print $title; ?><?php endif; ?><?php if ($page): ?></h1><?php else: ?></h2><?php endif; ?> 
