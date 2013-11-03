@@ -208,7 +208,17 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
     //dpm($query);
     
     $fields =& $query->getFields();
+    $expressions =& $query->getExpressions();
+    $tables =& $query->getTables();
+    $order =& $query->getOrderBy();
+    $where =& $query->conditions();
+    $having =& $query->havingConditions();
     dpm($fields);
+    dpm($expressions);
+    dpm($tables);
+    dpm($order);
+    dpm($where);
+    dpm($having);
   }
   
   if ($query->hasTag('views')) {
