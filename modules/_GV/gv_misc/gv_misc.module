@@ -207,6 +207,13 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
     //$query->range(0, 2);
     dpm($query);
   }
+  
+  if ($query->hasTag('views')) {
+    dpm('has views tag!');
+    //$query->range(0, 2);
+    dpm($query);
+  }
+  
 }
 
 /**
