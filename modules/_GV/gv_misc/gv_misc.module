@@ -216,12 +216,22 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
     dpm($fields);
     dpm($where);
     
-    $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = n.nid");
-    //$query->condition('i.field_invisible_value', 1, '!=');
+    // Define if we have to add our new condition to exclude NOT IN LIST articles.
+    // Only for specified content types.
+    $types_to_apply_condition = array('blog_post', 'news_post', 'article');
+    $wheres = array_intersect_key($where, element_children($where));
+    $apply_condition = FALSE;
+    foreach ($wheres as $w) {
+      if ($w['field'] == 'n.type' && in_array($w['value'], $types_to_apply_condition)) {
+        $apply_condition = TRUE;
+      }
+    }
     
-    $or = db_or()->isNull('i.field_invisible_value')->condition('i.field_invisible_value', 0);
-    
-    $query->condition($or);
+    if ($apply_condition) {
+      $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = n.nid");
+      $or = db_or()->isNull('i.field_invisible_value')->condition('i.field_invisible_value', 0);
+      $query->condition($or);
+    }
 
     //$query->isNull('i.field_invisible_value');
   }
