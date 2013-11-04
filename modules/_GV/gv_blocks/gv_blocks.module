@@ -1453,6 +1453,8 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
         ->fields('n', array('nid'));
   $query->condition('n.type', 'article');
   $query->condition('n.status', 1);
+  $query->addTag('a4s');
+  $query->addTag('articles');
   $query->orderBy('n.created', 'DESC');
   //$query->orderBy('n.title', 'ASC');
   
@@ -1616,6 +1618,8 @@ function gv_blocks_libraryList() {
         ->fields('n', array('title', 'nid'));
   $query->condition('n.type', 'article');
   $query->condition('n.status', 1);
+  $query->addTag('a4s');
+  $query->addTag('articles');
   //$query->orderBy('n.created', 'DESC');
   $query->orderBy('n.title', 'ASC');
 
@@ -1779,6 +1783,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   $query->fields('n', array('created'));
   $query->condition('a.field_pin_article_to_value', $page_index);
   $query->condition('n.status', 1);
+  $query->addTag('a4s');
+  $query->addTag('articles');
   $query->orderBy('n.created', 'DESC');
   if ($map_path_to_articles_limit[$_SERVER['REDIRECT_URL']]) {
     $query->range(0, $map_path_to_articles_limit[$_SERVER['REDIRECT_URL']]);
@@ -1809,6 +1815,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
     
     $query->condition('n.status', 1);
+    $query->addTag('a4s');
+    $query->addTag('reviews');
     $query->condition('n.type', 'review');
     $query->orderBy('n.created', 'DESC');
     // Show only 2 latest reviews
@@ -1868,6 +1876,7 @@ function gv_blocks_blogPageLatestNews() {
   $query->condition('n.type', 'news_post');
   $query->condition('n.status', 1);
   $query->addTag('a4s');
+  $query->addTag('articles');
   $query->orderBy('n.created', 'DESC')
         ->range(0, 6);
 

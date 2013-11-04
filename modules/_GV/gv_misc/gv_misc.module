@@ -213,7 +213,8 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
   // https://drupal.org/node/310086
   
   
-  if ($query->hasTag('a4s')) {
+  //if ($query->hasTag('a4s')) {
+  if ($query->hasAllTags('a4s', 'articles')) {
     
     /*
       dpm('has a4s tag!');
@@ -1286,6 +1287,8 @@ function gv_misc_recalculateReviewsAmount() {
   $query = db_select('node', 'n');
   $query->condition('n.type', 'review');
   $query->condition('n.status', 1);
+  $query->addTag('a4s');
+  $query->addTag('reviews');
   //$votes = $query->execute();
   $countQuery = $query->countQuery();
   $num_votes = $countQuery->execute()->fetchField();
