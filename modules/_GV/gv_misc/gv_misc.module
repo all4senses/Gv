@@ -214,18 +214,23 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
   
   
   if ($query->hasTag('a4s')) {
-    //dpm('has a4s tag!');
     
-    //$fields =& $query->getFields();
-    //$expressions =& $query->getExpressions();
-    //$tables =& $query->getTables();
-    //$order =& $query->getOrderBy();
+    /*
+      dpm('has a4s tag!');
+
+      $fields =& $query->getFields();
+      $expressions =& $query->getExpressions();
+      $tables =& $query->getTables();
+      $order =& $query->getOrderBy();
+      $having =& $query->havingConditions();
+    */
     $where =& $query->conditions();
-    //$having =& $query->havingConditions();
     
-    //dpm($tables);
-    //dpm($fields);
-    //dpm($where);
+    /*
+      dpm($tables);
+      dpm($fields);
+      dpm($where);
+    */
     
     // Define if we have to add our new condition to exclude NOT IN LIST articles.
     // Only for specified content types.
@@ -244,7 +249,6 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
       $query->condition($or);
     }
 
-    //$query->isNull('i.field_invisible_value');
   }
   
    
@@ -252,29 +256,31 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
           
   if ($query->hasAnyTag('views_blog', 'views_news', 'views_articles')) {
   //if ($query->hasTag('views')) {
-    //dpm('has views tag!');
-    //dpm($query);
     
-//    $fields =& $query->getFields();
-//    $expressions =& $query->getExpressions();
-//    $tables =& $query->getTables();
-//    $order =& $query->getOrderBy();
-//    $where =& $query->conditions();
-//    $having =& $query->havingConditions();
-//    
-//    dpm($tables);
-//    dpm($fields);
-//    dpm($where);
-//    
-//    dpm($expressions);
-//    dpm($order);
-//    dpm($having);
+    /*
     
+    dpm('has views tag!');
+    dpm($query);
+    
+    $fields =& $query->getFields();
+    $expressions =& $query->getExpressions();
+    $tables =& $query->getTables();
+    $order =& $query->getOrderBy();
+    $where =& $query->conditions();
+    $having =& $query->havingConditions();
+    
+    dpm($tables);
+    dpm($fields);
+    dpm($where);
+    
+    dpm($expressions);
+    dpm($order);
+    dpm($having);
+    */
     
     $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = node.nid");
     $or = db_or()->isNull('i.field_invisible_value')->condition('i.field_invisible_value', 0);
     $query->condition($or);
-    
   }
   
 }
