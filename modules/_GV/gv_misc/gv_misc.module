@@ -635,7 +635,7 @@ function gv_misc_isSubmissionAlreadySent($email) {
 /**
  * Disqus update a thread title.
  */
-function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
+function gv_misc_disqusUpdateThread($threadId, $data = array()) {
    // threadId must be the internal Disqus ID
         // Use the 'threads/details' endpoint to get the Disqus thread ID using an identifier or URL
 
@@ -656,9 +656,16 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
     'api_secret' => urlencode($api),
     //'access_token' => $accessToken,
     'thread' => $threadId,
-    'title' => urlencode($newTitle),
+    //'title' => urlencode($newTitle),
     'forum' => $shortname,
   );
+  
+  if (!empty($data['title'])) {
+    $fields['title'] = urlencode($data['title']);
+  }
+  if (!empty($data['url'])) {
+    $fields['link'] = urlencode($data['url']);
+  }
 
   foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
   rtrim($fields_string,'&');
@@ -739,19 +746,32 @@ function gv_misc_testPage() {
    
   //$user_api_key = 'PYSnoPKBQs9Xip75kj2f7UeXnyARoC8XbK67HKfpcBP9IojdH1dRcKRzuSuMirNg';
   
-  $oldTitle = 'The Top 100 VoIP Experts to Follow on Twitter';
-  //$newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
-  $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
-  $threadId = '1868907483';
   
-  //$result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
-  //dpm($result);
-  //$out .= $result;
+  //$threadId = '1868907483';
+  //$threadId = 'node/1644';
+  //$nid = 1644;
+  
+//  $oldTitle = 'The Top 100 VoIP Experts to Follow on Twitter';
+//  $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
+  
+  $nid = 1502;
+  
+//  $result = gv_misc_disqusGetThreadDetails($nid); 
+//  $threadId = $result->response->id;
+  
+  $oldTitle = 'Potential Problems with PoE Switches &amp; Adapters';
+  $newTitle = 'Power Over Ethernet Guide - 7 Potential Issues';
+  $oldUrl = 'http://getvoip.com/blog/2013/05/28/potential-problems-with-poe-switches-adapters';
+  $newUrl = 'http://getvoip.com/blog/2013/05/28/power-over-ethernet-guide-7-potential-issues';
   
   
   
-  $threadId = 'node/1644';
-  $nid = 1644;
+//  $result = gv_misc_disqusUpdateThread($threadId, array('title' => $newTitle, 'url' => $newUrl));
+//  dpm($result);
+//  
+  
+  
+  
   $result = gv_misc_disqusGetThreadDetails($nid);      
   dpm($result);      
         
