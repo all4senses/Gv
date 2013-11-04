@@ -211,13 +211,14 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
 //    $order =& $query->getOrderBy();
 //    $where =& $query->conditions();
 //    $having =& $query->havingConditions();
-    $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = n.nid");
-    $query->condition('i.field_invisible_value', 1, '!=');
+    
+    
+//    $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = n.nid");
+//    $query->condition('i.field_invisible_value', 1, '!=');
   }
   
   if ($query->hasTag('views')) {
     dpm('has views tag!');
-    //$query->range(0, 2);
     dpm($query);
   }
   
