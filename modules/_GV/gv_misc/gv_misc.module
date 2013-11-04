@@ -200,6 +200,9 @@ function gv_misc_menu() {
 
 /**
  * Implementation of hook_query_alter().
+ * 
+ * Hide articles with a flag Invisible in lists from articles lists.
+ * 
  */
 function gv_misc_query_alter(QueryAlterableInterface $query) {
   
@@ -213,6 +216,9 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
   // https://drupal.org/node/310086
   
   
+  
+  // Custom queries.
+  // 
   //if ($query->hasTag('a4s')) {
   if ($query->hasAllTags('a4s', 'articles')) {
     
@@ -254,7 +260,7 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
   
    
   
-          
+  // Views queries.      
   if ($query->hasAnyTag('views_blog', 'views_news', 'views_articles')) {
   //if ($query->hasTag('views')) {
     
@@ -663,11 +669,7 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
 
   // indicates that we want the response back rather than just returning a "TRUE" string
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-  // execute POST
   $result = curl_exec($ch);
-
-  // close connection
   curl_close($ch);
 
   // Show new information
@@ -681,8 +683,11 @@ function gv_misc_disqusUpdateThreadTitle($threadId, $newTitle) {
 /**
  * Disqus get a thread details.
  */
-function gv_misc_disqusGetThreadDetails($thread, $threadIdType = 'thread:ident') {
+function gv_misc_disqusGetThreadDetails($nid = NULL, $thread = NULL, $threadIdType = 'thread:ident') {
   
+  if ($nid) {
+    $thread = 'node/' . $nid;
+  }
   // construct the query with our apikey and the query we want to make
   // Change api_key to api_secret when using your secret key
 
@@ -697,9 +702,6 @@ function gv_misc_disqusGetThreadDetails($thread, $threadIdType = 'thread:ident')
   //$key = "IlTOWiFAZGYxGCUdjCEMQqzTRVl9hpG7f9KrSAkSqcbFDH4duZADgQUy0asDTHOW"; // Secret key.
   $key = 'LTxXVkhAehxdgzsFbolUXSTosneekOOuwWrpx1okk8LHaW5APx4yVcXDP0zwapS5'; // Public key.
   ///$thread="1888015311";
-  ///$thread="http://getvoip.com/blog/2013/10/22/polycom-vvx-600-media-phone-top-5-features-business-users-will-love";
-
-  ///$thread = 'http://getvoip.com/blog/2013/10/28/top-50-voip-experts-on-twitter';
   ////$thread = 'http://getvoip.com/blog/2013/10/17/the-top-100-voip-experts-to-follow-on-twitter';
   //$thread = 'node/1644'; // identifier
 
@@ -711,16 +713,11 @@ function gv_misc_disqusGetThreadDetails($thread, $threadIdType = 'thread:ident')
   ////$endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key='.urlencode($key).'&forum='.$forum.'&thread:link='.urlencode($thread);
   $endpoint = 'http://disqus.com/api/3.0/threads/details.json?api_key=' . urlencode($key) . '&forum=' . $forum . "&$threadIdType=" . urlencode($thread);
 
-  // setup curl to make a call to the endpoint
-  $session = curl_init($endpoint);
 
+  $session = curl_init($endpoint);
   // indicates that we want the response back rather than just returning a "TRUE" string
   curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-
-  // execute GET and get the session back
   $result = curl_exec($session);
-
-  // close connection
   curl_close($session);
 
   // show the response in the browser
@@ -747,14 +744,15 @@ function gv_misc_testPage() {
   $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
   $threadId = '1868907483';
   
-  $result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
-  dpm($result);
+  //$result = gv_misc_disqusUpdateThreadTitle($threadId, $newTitle);
+  //dpm($result);
   //$out .= $result;
   
   
   
   $threadId = 'node/1644';
-  $result = gv_misc_disqusGetThreadDetails($threadId, 'thread:ident');      
+  $nid = 1644;
+  $result = gv_misc_disqusGetThreadDetails($nid);      
   dpm($result);      
         
   

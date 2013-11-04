@@ -5439,6 +5439,13 @@ function gv_pages_node_view($node, $view_mode) {
       }
       
       
+      global $user;
+      if ($user->uid == 1) {
+        $disqus = gv_misc_disqusGetThreadDetails($node->nid);
+        dpm($disqus);
+      }
+      
+      
       // Add ColorBox OR just JS popup functionality for sharing links.
       gv_misc_loadPopupForShareLinks();
       
