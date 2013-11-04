@@ -202,6 +202,17 @@ function gv_misc_menu() {
  * Implementation of hook_query_alter().
  */
 function gv_misc_query_alter(QueryAlterableInterface $query) {
+  
+  // hasTag
+  // https://drupal.org/node/310077
+  // https://drupal.org/node/2086801#comment-7851281
+  // 
+  // Works with db.
+  // https://api.drupal.org/api/drupal/includes%21database%21database.inc/group/database/7
+  // https://api.drupal.org/api/drupal/includes%21database%21database.inc/function/db_or/7
+  // https://drupal.org/node/310086
+  
+  
   if ($query->hasTag('a4s')) {
     dpm('has a4s tag!');
     
@@ -242,22 +253,26 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
   if ($query->hasAnyTag('views_blog', 'views_news', 'views_articles')) {
   //if ($query->hasTag('views')) {
     dpm('has views tag!');
-    dpm($query);
+    //dpm($query);
     
-    $fields =& $query->getFields();
-    $expressions =& $query->getExpressions();
-    $tables =& $query->getTables();
-    $order =& $query->getOrderBy();
-    $where =& $query->conditions();
-    $having =& $query->havingConditions();
+//    $fields =& $query->getFields();
+//    $expressions =& $query->getExpressions();
+//    $tables =& $query->getTables();
+//    $order =& $query->getOrderBy();
+//    $where =& $query->conditions();
+//    $having =& $query->havingConditions();
+//    
+//    dpm($tables);
+//    dpm($fields);
+//    dpm($where);
+//    
+//    dpm($expressions);
+//    dpm($order);
+//    dpm($having);
     
-    dpm($tables);
-    dpm($fields);
-    dpm($where);
-    
-    dpm($expressions);
-    dpm($order);
-    dpm($having);
+    $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = n.nid");
+    $or = db_or()->isNull('i.field_invisible_value')->condition('i.field_invisible_value', 0);
+    $query->condition($or);
     
   }
   
