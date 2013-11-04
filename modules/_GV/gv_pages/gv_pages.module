@@ -5444,12 +5444,12 @@ function gv_pages_node_view($node, $view_mode) {
         $disqusRemote = gv_misc_disqusGetThreadDetails($node->nid);
         dpm($disqusRemote);
         
-//        if (!$disqusRemote->code) {
-//          if ($disqusRemote->response['title'] != $node->disqus['title']) {
-//            dpm('Remote title: ' . $disqusRemote->response['title']);
-//            dpm('Right title: ' . $node->disqus['title']);
-//          }
-//        }
+        if (!$disqusRemote->code) {
+          if ($disqusRemote->response->title != $node->disqus['title']) {
+            dpm('Remote title: ' . $disqusRemote->response->title);
+            dpm('Right title: ' . $node->disqus['title']);
+          }
+        }
       }
       
       
