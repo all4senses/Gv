@@ -271,9 +271,9 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
 //    dpm($having);
     
     
-    $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = node.nid");
-    $or = db_or()->isNull('i.field_invisible_value')->condition('i.field_invisible_value', 0);
-    $query->condition($or);
+//    $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = node.nid");
+//    $or = db_or()->isNull('i.field_invisible_value')->condition('i.field_invisible_value', 0);
+//    $query->condition($or);
     
   }
   
