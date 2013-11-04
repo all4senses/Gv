@@ -768,6 +768,8 @@ function gv_misc_testPage() {
   
   $disqusRemote = gv_misc_disqusGetThreadDetails($node->nid);
   dpm($disqusRemote);
+  
+  $threadId = $disqusRemote->response->id;
 
   if (!$disqusRemote->code) {
     if ($disqusRemote->response->title != $node->disqus['title']) {
