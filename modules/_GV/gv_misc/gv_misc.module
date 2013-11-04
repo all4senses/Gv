@@ -212,6 +212,9 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
 //    $where =& $query->conditions();
 //    $having =& $query->havingConditions();
     
+    dpm($tables);
+    dpm($fields);
+    dpm($where);
     
     $query->leftJoin('field_data_field_invisible', 'i', "i.entity_id = n.nid");
     //$query->condition('i.field_invisible_value', 1, '!=');
@@ -224,8 +227,8 @@ function gv_misc_query_alter(QueryAlterableInterface $query) {
   }
   
   if ($query->hasTag('views')) {
-    dpm('has views tag!');
-    dpm($query);
+    //dpm('has views tag!');
+    //dpm($query);
   }
   
 }
