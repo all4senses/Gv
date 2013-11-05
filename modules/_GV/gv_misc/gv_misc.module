@@ -664,7 +664,7 @@ function gv_misc_disqusUpdateThread($threadId, $data = array()) {
     $fields['title'] = urlencode($data['title']);
   }
   if (!empty($data['url'])) {
-    $fields['link'] = urlencode($data['url']);
+    $fields['url'] = urlencode($data['url']);
   }
 
   foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
