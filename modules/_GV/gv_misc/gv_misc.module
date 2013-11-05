@@ -784,7 +784,7 @@ function gv_misc_disqusUpdateNodeThread_ifChangedLocally($node, $form_state_valu
         //dpm('Successfully changed remote Disqus data.');
         $message = (!empty($updateData['title']) ? 'An Old title "' . $disqusRemote->response->title . '" has changed to a new one "' . $updateData['title'] . '"' : '') . (!empty($updateData['title']) && !empty($updateData['url']) ? '.
           
-' : '') . (!empty($updateData['url']) ? 'An Old title "' . $disqusRemote->response->title . '" has changed to a new one "' . $updateData['url'] . '"' : '');
+' : '') . (!empty($updateData['url']) ? 'An Old url "' . $disqusRemote->response->link . '" has changed to a new one "' . $updateData['url'] . '"' : '');
         
       drupal_set_message('Successfully changed remote Disqus data:
 
