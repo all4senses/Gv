@@ -754,18 +754,22 @@ function gv_misc_testPage() {
 //  $oldTitle = 'The Top 100 VoIP Experts to Follow on Twitter';
 //  $newTitle = 'The Top 50 VoIP Experts to Follow on Twitter';
   
-  $nid = 1502;
-  $node = node_load($nid);
+  //$nid = 1502;
+  
   
 //  $result = gv_misc_disqusGetThreadDetails($nid); 
 //  $threadId = $result->response->id;
   
-  $oldTitle = 'Potential Problems with PoE Switches &amp; Adapters';
-  $newTitle = 'Power Over Ethernet Guide - 7 Potential Issues';
-  $oldUrl = 'http://getvoip.com/blog/2013/05/28/potential-problems-with-poe-switches-adapters';
-  $newUrl = 'http://getvoip.com/blog/2013/05/28/power-over-ethernet-guide-7-potential-issues';
+//  $oldTitle = 'Potential Problems with PoE Switches &amp; Adapters';
+//  $newTitle = 'Power Over Ethernet Guide - 7 Potential Issues';
+//  $oldUrl = 'http://getvoip.com/blog/2013/05/28/potential-problems-with-poe-switches-adapters';
+//  $newUrl = 'http://getvoip.com/blog/2013/05/28/power-over-ethernet-guide-7-potential-issues';
   
+  $oldUrl = 'http://getvoip.com/blog/2013/07/18/comprehensive-guide-to-using-skype-in-the-classroom';
+  $newUrl = 'http://getvoip.com/blog/2013/07/22/skype-in-the-classroom-comprehensive-guide';
+  $nid = 1555;
   
+  $node = node_load($nid);
   $disqusRemote = gv_misc_disqusGetThreadDetails($node->nid);
   dpm($disqusRemote);
   
