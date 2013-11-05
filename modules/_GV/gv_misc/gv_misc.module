@@ -777,29 +777,29 @@ function gv_misc_disqusUpdateNodeThread_ifChangedLocally($node, $form_state_valu
     }
    
 
-//    if (!empty($updateData)) {
-//      $result = gv_misc_disqusUpdateThread($disqusRemote->response->id, $updateData);
-//      //dpm($result);
-//      if (!$result->code) {
-//        //dpm('Successfully changed remote Disqus data.');
-//        $message = (!empty($updateData['title']) ? 'An Old title "' . $disqusRemote->response->title . '" has changed to a new one "' . $updateData['title'] . '"' : '') . (!empty($updateData['title']) && !empty($updateData['url']) ? '.
-//          
-//' : '') . (!empty($updateData['url']) ? 'An Old title "' . $disqusRemote->response->title . '" has changed to a new one "' . $updateData['url'] . '"' : '');
-//        
-//      drupal_set_message('Successfully changed remote Disqus data:
-//
-//
-//' . $message);
-//      }
-//      else {
-//        //dpm('Some error hase occured while changing remote Disqus data.');
-//        drupal_set_message('Some error hase occured while changing remote Disqus data:
-//
-//
-//' . $result->response);
-//      }
-//    }
-//    else 
+    if (!empty($updateData)) {
+      $result = gv_misc_disqusUpdateThread($disqusRemote->response->id, $updateData);
+      //dpm($result);
+      if (!$result->code) {
+        //dpm('Successfully changed remote Disqus data.');
+        $message = (!empty($updateData['title']) ? 'An Old title "' . $disqusRemote->response->title . '" has changed to a new one "' . $updateData['title'] . '"' : '') . (!empty($updateData['title']) && !empty($updateData['url']) ? '.
+          
+' : '') . (!empty($updateData['url']) ? 'An Old title "' . $disqusRemote->response->title . '" has changed to a new one "' . $updateData['url'] . '"' : '');
+        
+      drupal_set_message('Successfully changed remote Disqus data:
+
+
+' . $message);
+      }
+      else {
+        //dpm('Some error hase occured while changing remote Disqus data.');
+        drupal_set_message('Some error hase occured while changing remote Disqus data:
+
+
+' . $result->response);
+      }
+    }
+    else 
       {
       dpm('No changes in remote Disqus data.');
     }
