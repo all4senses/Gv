@@ -3968,7 +3968,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
 
  //dpm($form_state['values']);
- dpm($form_state['values']);
+ //dpm($form_state['values']);
  //dpm($form);
   
 //  $pin_article_to = array();
@@ -4100,8 +4100,11 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 //  }
   
           
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
   //dpm($form_state['build_info']['args']);
+  
+  $alias = pathauto_create_alias('node', 'return', 'node/' . $form_state['values'], array('node' => $form['#node']), $form['#node']->type);
+  dpm($alias);
   
   if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->status == 0) {
     // NOT publish ---> Publish
