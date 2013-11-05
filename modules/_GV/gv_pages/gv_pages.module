@@ -4103,10 +4103,6 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
   dpm($form_state['values']);
   //dpm($form_state['build_info']['args']);
   
-  //$alias = pathauto_create_alias('node', 'return', 'node/' . $form_state['values']['nid'], array('node' => $form['#node']), $form['#node']->type);
-  //dpm($alias);
-  
-  gv_misc_disqusUpdateNodeThread_ifChangedLocally($form['#node'], $form_state['values']);
   
   if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->status == 0) {
     // NOT publish ---> Publish
@@ -4120,6 +4116,10 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     
     drupal_set_message(t('This article is now published!'), 'warning');
     $status_changed = TRUE;
+    
+    //$alias = pathauto_create_alias('node', 'return', 'node/' . $form_state['values']['nid'], array('node' => $form['#node']), $form['#node']->type);
+    gv_misc_disqusUpdateNodeThread_ifChangedLocally($form['#node'], $form_state['values']);
+  
   }
   if ($form_state['values']['op'] == 'Save & Publish' && @$form_state['build_info']['args'][0]->field_invisible['und'][0]['value'] == 1) {
     // NOT publish ---> Publish
@@ -4152,6 +4152,12 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
     $form_state['values']['status'] = 1;
     drupal_set_message(t('Attention! This article is saved as  Unpublished, but visible now!'), 'warning');
     //$status_changed = TRUE;
+    
+    // Update remote Disqus data if the node is publishing (though invisible) after being unpublished.
+    if (@$form_state['build_info']['args'][0]->status == 0) {
+      gv_misc_disqusUpdateNodeThread_ifChangedLocally($form['#node'], $form_state['values']);
+    }
+    
   }
   elseif (!$form_state['values']['nid'] || @$form_state['build_info']['args'][0]->field_show_in_block['und'][0]['value'] != @$form_state['values']['field_show_in_block']['und'][0]['value'] || $form_state['values']['op'] == 'Delete') {
     $status_changed = TRUE;
