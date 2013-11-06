@@ -763,7 +763,7 @@ function gv_misc_disqusUpdateNodeThread_ifChangedLocally($node, $form_state_valu
   $updateData = array();
 
   if (!$disqusRemote->code) {
-    if ($disqusRemote->response->title != $form_state_values['title']) {
+    if ($disqusRemote->response->title != htmlspecialchars_decode($form_state_values['title'], ENT_QUOTES)) {
       //dpm('Remote title: ' . $disqusRemote->response->title);
       //dpm('Right title: ' . $form_state_values['title']);
       

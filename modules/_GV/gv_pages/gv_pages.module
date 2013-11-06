@@ -5459,7 +5459,7 @@ function gv_pages_node_view($node, $view_mode) {
         
         if (!$disqusRemote->code) {
           $updateData = array();
-          if ($disqusRemote->response->title != $node->disqus['title']) {
+          if ($disqusRemote->response->title != htmlspecialchars_decode($node->disqus['title'], ENT_QUOTES)) {
             dpm('Remote title: ' . $disqusRemote->response->title);
             dpm('Right title: ' . $node->disqus['title']);
           }
