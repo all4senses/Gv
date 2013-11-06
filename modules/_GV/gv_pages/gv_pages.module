@@ -5455,7 +5455,7 @@ function gv_pages_node_view($node, $view_mode) {
       global $user;
       if ($user->uid == 1) {
         $disqusRemote = gv_misc_disqusGetThreadDetails($node->nid);
-        //dpm($disqusRemote);
+        dpm($disqusRemote);
         
         if (!$disqusRemote->code) {
           $updateData = array();
