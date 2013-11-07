@@ -5453,7 +5453,7 @@ function gv_pages_node_view($node, $view_mode) {
       
       
       global $user;
-      if ($user->uid == 1) {
+      if (isset($_GET['disqus'])) {
         $disqusRemote = gv_misc_disqusGetThreadDetails($node->nid);
         
         if (!$disqusRemote->code) {
@@ -5483,6 +5483,9 @@ function gv_pages_node_view($node, $view_mode) {
 
             drupal_set_message($message);
            
+          }
+          else {
+            drupal_set_message('Remote Dusqus data is the same as the local one.');
           }
         }
       }
