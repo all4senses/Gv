@@ -25,7 +25,7 @@
       });
       
       // Blur.
-      $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="phone"], input[id="company"], input[id="website"]').blur(function(){
+      $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="phone"], input[id="company"], input[id="website"], input[id="q-title"]').blur(function(){
         
         if ($(this).val() == '') {
           $(this).val($(this).attr('title'));
