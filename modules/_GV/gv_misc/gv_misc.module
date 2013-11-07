@@ -1391,14 +1391,14 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
   
-  $dir = 'sites/default/files/jsmin-gv';
-  $objects = scandir($dir);
-  foreach ($objects as $object) {
-    if ($object != "." && $object != "..") {
-      unlink($dir . "/" . $object);
-    }
-  }
-  variable_del('gv_minified_js');
+//  $dir = 'sites/default/files/jsmin-gv';
+//  $objects = scandir($dir);
+//  foreach ($objects as $object) {
+//    if ($object != "." && $object != "..") {
+//      unlink($dir . "/" . $object);
+//    }
+//  }
+//  variable_del('gv_minified_js');
   
   
   gv_misc_recalculateReviewsAmount();
@@ -4112,6 +4112,7 @@ function gv_misc_makeRequest_ajax() {
         'Name' => isset($post['name']) ? $post['name'] : '',
         
         'Company' => isset($post['company']) ? $post['company'] : '',
+        'Title' => isset($post['q-title']) ? $post['q-title'] : '',
 
         'Email' => $post['email'],
         'Website' => isset($post['website']) ? $post['website'] : '',
