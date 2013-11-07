@@ -5479,7 +5479,7 @@ function gv_pages_node_view($node, $view_mode) {
             //dpm($disqusRemote);
             $message = (!empty($updateData['title']) ? 'An Old title "' . $disqusRemote->response->title . '". A new one "' . $updateData['title'] . '"' : '') . (!empty($updateData['title']) && !empty($updateData['url']) ? '.
 
-      ' : '') . (!empty($updateData['url']) ? 'An Old url "' . $disqusRemote->response->link . '". A new one "' . $updateData['url'] . '"' : '');
+      ' : '') . (!empty($updateData['url']) ? 'An Old url "' . $disqusRemote->response->link . '". A new one "' . $updateData['url'] . '".' : '') . ' You may save this article as draft and then publish it again to fix all the differences.';
 
             drupal_set_message($message, 'warning');
            
