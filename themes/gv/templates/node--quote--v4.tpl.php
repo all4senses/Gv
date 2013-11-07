@@ -52,7 +52,7 @@
                             <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
                             <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD Phones</strong></div>
 
-                            <div class="ps"><span>6000+ Submissions -</span> Average saving of $180 per month</div>
+                            <div class="ps"><span>Over 10,000 Quotes Delivered -</span> Average business saving of $180/mo</div>
                     </div>
 
               </div>
