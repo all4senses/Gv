@@ -763,11 +763,12 @@ function gv_misc_disqusUpdateNodeThread_ifChangedLocally($node, $form_state_valu
   $updateData = array();
 
   if (!$disqusRemote->code) {
-    if ($disqusRemote->response->title != htmlspecialchars_decode($form_state_values['title'], ENT_QUOTES)) {
+    $decoded_right_title = htmlspecialchars_decode($form_state_values['title'], ENT_QUOTES);
+    if ($disqusRemote->response->title != $decoded_right_title) {
       //dpm('Remote title: ' . $disqusRemote->response->title);
       //dpm('Right title: ' . $form_state_values['title']);
       
-      $updateData['title'] = $form_state_values['title'];
+      $updateData['title'] = $decoded_right_title;
     }
     if ($disqusRemote->response->link != $local_url) {
       //dpm('Remote link: ' . $disqusRemote->response->link);
