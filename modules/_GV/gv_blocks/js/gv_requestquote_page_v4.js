@@ -17,7 +17,7 @@
           maxHeight: 300
   			});
        
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="website"], input[id="company"], input[id="phone"], #phones_amt, #q_type, #buying_time').blur(function () { 
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="website"], input[id="company"], input[id="q-title"], input[id="phone"], #phones_amt, #q_type, #buying_time').blur(function () { 
           
           //console.log($(this).val());
           
@@ -35,6 +35,8 @@
                         
                         website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
                         company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
+                        
+                        company: $('input[id="q-title"]').val() != $('input[id="q-title"]').attr('title') ? $('input[id="q-title"]').val() : '',
                         
                         phone: $('input[id="phone"]').val() != $('input[id="phone"]').attr('title') ? $('input[id="phone"]').val() : '',
                         
@@ -249,11 +251,14 @@
                 minlength: 10,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
-							},
+							}
+              /*
+              ,
               company: {
                 required: true,
                 notEqualsTo: $('input[id="company"]').attr('title')
 							}
+              */
               // works
               /* 
 							myemail: {
@@ -304,7 +309,7 @@
              firstname: Drupal.t('First Name is required'),
              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
              phone: Drupal.t('Enter a valid phone number'),
-             company: Drupal.t('Company name is required'),
+             //company: Drupal.t('Company name is required'),
              
              // Works!
              /*
