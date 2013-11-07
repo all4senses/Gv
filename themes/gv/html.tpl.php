@@ -12,7 +12,7 @@
   
 <head>
   <title><?php global $altered_head_title; if ($altered_head_title) {print $altered_head_title;} else {print $head_title;} ?></title>
-  <?php dpm($head); print $head; ?>
+  <?php print $head; ?>
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
   <?php print $styles; ?>
