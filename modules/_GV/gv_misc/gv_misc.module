@@ -4429,7 +4429,7 @@ double triggerring of a submit form because of double launching almost the same 
 function gv_misc_getAllowedProvidersToSendSubmission($submission) {
   
   if (in_array($submission['First Name'], array('afs', 'a4s', 'test'))) {
-    return array('TEST submission, was not sent to anywhere' => NULL);
+    return array('TEST submission, was not sent to anywhere' => TRUE);
   }
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
    
