@@ -3162,7 +3162,8 @@ function gv_misc_addSocialShareData_toPage($node) {
     
   }
   if (!$title) {
-    if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+    
+    if (!empty($node->metatags['title']['value'])) {
       $title = $node->metatags['title']['value'];
     }
     else {
@@ -3281,6 +3282,8 @@ function gv_misc_addSocialShareData_toPage($node) {
   //$title = str_replace('[site:name]', 'GetVoIP.com', $title);
   $title = token_replace($title);
   
+  // Strip special symbols from the title.
+  $title = htmlspecialchars_decode($title, ENT_QUOTES)
   
   if (!$image){
     // Show default image - the logo.
