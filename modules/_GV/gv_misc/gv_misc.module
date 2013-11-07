@@ -3281,9 +3281,11 @@ function gv_misc_addSocialShareData_toPage($node) {
   
   //$title = str_replace('[site:name]', 'GetVoIP.com', $title);
   $title = token_replace($title);
+  dpm($title);
   
   // Strip special symbols from the title.
   $title = htmlspecialchars_decode($title, ENT_QUOTES);
+  dpm($title);
   
   if (!$image){
     // Show default image - the logo.
