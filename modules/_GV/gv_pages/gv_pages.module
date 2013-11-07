@@ -5476,12 +5476,12 @@ function gv_pages_node_view($node, $view_mode) {
           
           if (!empty($updateData)) {
             
-            dpm($disqusRemote);
+            //dpm($disqusRemote);
             $message = (!empty($updateData['title']) ? 'An Old title "' . $disqusRemote->response->title . '". A new one "' . $updateData['title'] . '"' : '') . (!empty($updateData['title']) && !empty($updateData['url']) ? '.
 
       ' : '') . (!empty($updateData['url']) ? 'An Old url "' . $disqusRemote->response->link . '". A new one "' . $updateData['url'] . '"' : '');
 
-            drupal_set_message($message);
+            drupal_set_message($message, 'warning');
            
           }
           else {
