@@ -5954,7 +5954,7 @@ function gv_misc_sendMessage($tag, $data = NULL) {
     case 'new_file_was_uploaded':
       global $language;
       $params['report'] = $data['report'];
-      drupal_mail('gv_misc', 'new_phone_review_admin_notify', 'all4senses@gmail.com', $language->language, $params);
+      drupal_mail('gv_misc', 'new_file_was_uploaded', 'all4senses@gmail.com', $language->language, $params);
       
       break;
   
