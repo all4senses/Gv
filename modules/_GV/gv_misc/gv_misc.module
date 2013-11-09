@@ -205,7 +205,6 @@ function gv_misc_menu() {
  * 
  */
 function gv_misc_file_insert($file) {
-  // Add a message to the log, if the file is a jpg
   $file_data = print_r($file, TRUE);
   gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
 }
