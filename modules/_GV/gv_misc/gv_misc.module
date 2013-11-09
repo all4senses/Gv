@@ -199,6 +199,19 @@ function gv_misc_menu() {
 
 
 /**
+ * Implementation of hook_file_insert().
+ * 
+ * Try to optimize images on upload.
+ * 
+ */
+function gv_misc_file_insert($file) {
+  // Add a message to the log, if the file is a jpg
+  $file_data = print_r($file, TRUE);
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
+}
+
+
+/**
  * Implementation of hook_query_alter().
  * 
  * Hide articles with a flag Invisible in lists from articles lists.
@@ -5755,6 +5768,13 @@ Data sent to a provider:
  */
 function gv_misc_mail($key, &$message, $params) {
   switch ($key) {
+    
+    case 'new_file_was_uploaded':
+      $message['subject'] = 'GV New file was uploaded';
+      $message['body'][] = $params['report'];
+      break;
+    
+    
     case 'request_quote':
       $message['subject'] = 'GV New request for a quote';
       $message['body'][] = theme('gv_misc_requestQuote_mail', $params['request_data']);
@@ -5930,6 +5950,14 @@ function gv_misc_mail_alter(&$message){
 function gv_misc_sendMessage($tag, $data = NULL) {
   
   switch ($tag) {
+    
+    case 'new_file_was_uploaded':
+      global $language;
+      $params['report'] = $data['report'];
+      drupal_mail('gv_misc', 'new_phone_review_admin_notify', 'all4senses@gmail.com', $language->language, $params);
+      
+      break;
+  
     
     case 'new_phone_review_admin_notify':
       global $language;
