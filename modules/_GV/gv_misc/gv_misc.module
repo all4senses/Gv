@@ -214,7 +214,7 @@ function gv_misc_file_insert($file) {
   
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file->uri);
-  switch ($file->mime_type) {
+  switch ($file->filemime) {
     case 'image/png':
       
       $file_data = print_r($file, TRUE);
