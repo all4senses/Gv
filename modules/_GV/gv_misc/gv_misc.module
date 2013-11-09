@@ -218,7 +218,7 @@ function gv_misc_file_insert($file) {
     case 'image/png':
       
       $file_data = print_r($file, TRUE);
-      gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
+       gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
   
       
       if ($cmd = variable_get('imageapi_optimize_optipng', '')) { // /usr/bin/optipng, should be installed in system
