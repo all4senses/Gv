@@ -206,21 +206,18 @@ function gv_misc_menu() {
  */
 function gv_misc_file_insert($file) {
   
+  $file_data = print_r($file, TRUE);
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
   
-  global $user;
-  if ($user->uid != 1) {
-    return;
-  }
+//  global $user;
+//  if ($user->uid != 1) {
+//    return;
+//  }
   
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file->uri);
   switch ($file->filemime) {
     case 'image/png':
-      
-      $file_data = print_r($file, TRUE);
-       gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
-  
-      
       if ($cmd = variable_get('imageapi_optimize_optipng', '')) { // /usr/bin/optipng, should be installed in system
         exec("$cmd -o5 -quiet ". escapeshellarg($dst));
       }
