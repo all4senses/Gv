@@ -984,7 +984,7 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL)
   $source = 'GetVoIP.com';
   $post_url = url($_GET['q'], array('absolute' => TRUE));
   $post_title = $node->title;
-  $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags($node->body['und'][0]['value']), 0, 200);
+  $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags(@$node->body['und'][0]['value']), 0, 200);
 
   $link_open = 'href="javascript:void(window.open(' . "'";
   $links = array(
