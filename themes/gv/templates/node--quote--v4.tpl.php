@@ -80,7 +80,7 @@
                 // Exit intent Ad popup block.
                 // 
                 //global $user; 
-                //if ($user->uid) 
+                if ($user->uid) 
                 {
                   // Colorbox for popup window.
                   //1, 3, 4, 
