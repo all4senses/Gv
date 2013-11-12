@@ -5129,14 +5129,15 @@ function gv_misc_getIframe_QuoteRequestBlock() {
 function gv_misc_getIframe_TopProvidersBu() {
   
   // Get block for Top pick business providers chart.
-  if (@arg(3) == 'narrow') {
+  //if (@arg(3) == 'narrow') 
+  {
     $block_data = array('module' => 'views', 'delta' => 'providers-block_p_bu_iframe', 'shadow' => FALSE);
   }
-  else {
-    // wide.
-    $block_data = array('module' => 'views', 'delta' => 'providers-block_p_bu_page', 'shadow' => FALSE);
-    gv_misc_loadColorboxForVideoLinks();
-  }
+//  else {
+//    // wide.
+//    $block_data = array('module' => 'views', 'delta' => 'providers-block_p_bu_page', 'shadow' => FALSE);
+//    gv_misc_loadColorboxForVideoLinks();
+//  }
   $block_data['no_subject'] = TRUE;
   $out = gv_blocks_getBlockThemed($block_data) 
     . '<SCRIPT>
