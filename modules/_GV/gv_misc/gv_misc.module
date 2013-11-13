@@ -8314,6 +8314,9 @@ function gv_misc_loadImage($imgname, $type = null) {
         case 'gif':
             $im = @imagecreatefromgif($imgname);
             break;
+       
+       default:
+         $im = NULL;
     }
 
     if(!$im)
