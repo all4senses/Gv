@@ -673,7 +673,7 @@ function gv_process_page(&$variables) {
     gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500', 'NA', 'text/css');
   }
   else {
-    drupal_add_css('sites/all/libraries/fonts/google/open-sans-n-ubuntu/font.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+    drupal_add_css('sites/all/libraries/fonts/google/open-sans-n-ubuntu/fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
   }
   
   // Add the font-awesome icons font.
