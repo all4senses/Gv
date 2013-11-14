@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width" />
   <?php 
     global $user;
-    if ($user->uid != 1) {
+    if ($user->uid == 1) {
       print $styles; 
     }
   ?>
@@ -37,7 +37,7 @@
   <?php print $page_bottom; ?>
   
   <?php 
-    if ($user->uid == 1) {
+    if ($user->uid != 1) {
       print $styles; 
     }
     if (!isset($top)) { print $scripts; } 
