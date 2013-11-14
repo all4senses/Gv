@@ -224,8 +224,8 @@ function _imageapi_optimize_optimize($image, $dst) {
 function _imageapi_optimize_service_internal($image, $dst) {
   
   // a4s fix
-//  $file_data = $dst . ': ' . print_r($image, TRUE);
-//  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'VIA IMAGE API OPTIMIZE...............' . $file_data));
+  $file_data = $dst . ': ' . print_r($image, TRUE);
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'VIA IMAGE API OPTIMIZE...............' . $file_data));
   
   $dst = drupal_realpath($dst);
   switch ($image->info['mime_type']) {

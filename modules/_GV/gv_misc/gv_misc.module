@@ -209,6 +209,14 @@ function gv_misc_file_insert($file) {
   $file_data = print_r($file, TRUE);
   gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
   
+  // Settings on this page http://getvoip.com/admin/config/media/image-toolkit
+  /*
+  /usr/local/bin/advpng
+  /usr/bin/optipng
+  /usr/bin/pngcrush
+  /usr/local/bin/jfifremove
+  */
+  
 //  global $user;
 //  if ($user->uid != 1) {
 //    return;
