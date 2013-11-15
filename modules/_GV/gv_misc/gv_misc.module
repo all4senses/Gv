@@ -8928,6 +8928,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
       exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
       
       dpm('Recaclulate related...');
+      dpm($extra_data);
       
       // Reset the related_articles array. Just in case.
       $extra_data['related_articles'] = array();
