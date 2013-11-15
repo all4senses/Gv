@@ -6,19 +6,20 @@
   Drupal.behaviors.gv_exitIntent_lpV4 = {
     attach: function (context, settings) {
        
-        //var done = null;
-        var done = true;
+        //var turned_off = null;
+        var turned_off = true;
         
-        setTimeout(function(){done = null; console.log('done is off');},30000);
+        // 3 mins delay before turn on the exitIntent popup.
+        setTimeout(function(){turned_off = null; console.log('popup is turned on');},180000); 
        
         $(document).bind("mouseleave", function(e)
         {
-            console.log(e.pageY);
+            //console.log(e.pageY);
             
-            //if (!done && e.pageY <= 1)
-            if (!done && e.pageY - $(window).scrollTop() <= 1)
+            //if (!turned_off && e.pageY <= 1)
+            if (!turned_off && e.pageY - $(window).scrollTop() <= 1)
             {    
-                done = true;
+                turned_off = true;
                 //now = new Date();           
                 //for (i=0; i < times.length; i++)
                 {
@@ -39,7 +40,7 @@
         
         
         $("#no").click(function(){
-            console.log('Closedddddd');
+            //console.log('Closedddddd');
             $.fn.colorbox.close();
         });
         
