@@ -9,7 +9,7 @@
         //var done = null;
         var done = true;
         
-        setTimeout(function(){done = null; console.log('done is off');},3000);
+        setTimeout(function(){done = null; console.log('done is off');},30000);
        
         $(document).bind("mouseleave", function(e)
         {
