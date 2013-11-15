@@ -228,7 +228,7 @@ function _imageapi_optimize_service_internal($image, $dst) {
   //gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'VIA IMAGE API OPTIMIZE...............' . $file_data));
   
   // Write to log.file
-  exec('echo "---->API--->'. escapeshellarg($dst) . '" >>~/gv_image_optimize.log');
+  exec('echo "$(date ' . "'%Y-%m-%d %H:%M:%S'" . ') ---->API--->'. escapeshellarg($dst) . '" >>~/gv_image_optimize.log');
   
   $dst = drupal_realpath($dst);
   switch ($image->info['mime_type']) {

@@ -210,7 +210,7 @@ function gv_misc_file_insert($file) {
   //gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
   
   // Write to log.file
-  exec('echo "---->UPLOAD--->'. escapeshellarg($file->uri) . '" >>~/gv_image_optimize.log');
+  exec('echo "$(date ' . "'%Y-%m-%d %H:%M:%S'" . ') ---->UPLOAD--->'. escapeshellarg($file->uri) . '" >>~/gv_image_optimize.log');
   
   // Settings on this page http://getvoip.com/admin/config/media/image-toolkit
   /*
@@ -8925,7 +8925,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
     //$extra_data['related_articles_timestamp'] < 1380644802 -----> assure that there is used a new calculation version.
     if (!isset($extra_data['related_articles']) || $extra_data['related_articles_timestamp'] < 1380644802 || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
     {
-      exec('echo "---->RELATED START n' . $node->nid . '--->'. escapeshellarg($node->title) . escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
+      exec('echo "$(date ' . "'%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
       
       //dpm('Recaclulate related...');
       
@@ -9033,8 +9033,10 @@ function gv_misc_addRelatedArticlesToNode($node) {
         gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data), 'node', $node->type);
 
       }
-      
-      exec('echo "---->RELATED STOP n' . $node->nid . '--->'. escapeshellarg($node->title) . '" >>~/gv_image_optimize.log');
+      //date +"%Y-%m-%d %H:%M:%S"
+      //echo "$(date '+TIME:%H:%M:%S') aa" >>test.log
+      //exec('echo "---->RELATED STOP n' . $node->nid . '--->'.'" >>~/gv_image_optimize.log');
+      exec('echo "$(date ' . "'%Y-%m-%d %H:%M:%S'" . ') ---->RELATED STOP n' . $node->nid . '--->'.'" >>~/gv_image_optimize.log');
 
     }
 
