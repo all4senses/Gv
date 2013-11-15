@@ -10,7 +10,13 @@
         var turned_off = true;
         
         // 3 mins delay before turn on the exitIntent popup.
-        setTimeout(function(){turned_off = null; console.log('popup is turned on');},180000); 
+        setTimeout(
+                    function(){
+                      turned_off = null; 
+                      //console.log('popup is turned on');
+                    },
+                   180000
+                 ); 
        
         $(document).bind("mouseleave", function(e)
         {
