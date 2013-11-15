@@ -6,7 +6,10 @@
   Drupal.behaviors.gv_exitIntent_lpV4 = {
     attach: function (context, settings) {
        
-        var done = null;
+        //var done = null;
+        var done = true;
+        
+        setTimeout(function(){done = null; console.log('done is off');},3000);
        
         $(document).bind("mouseleave", function(e)
         {
