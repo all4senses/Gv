@@ -8928,6 +8928,22 @@ function gv_misc_addRelatedArticlesToNode($node) {
       dpm($extra_data);
       $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($node->nid, $node->type);
       dpm($articles_by_index);
+      
+      $same_articles = array();
+      foreach ($articles_by_index as $index => $new_articles) {
+        foreach ($new_articles as $new_article) {
+          if (isset($extra_data['related_articles']['index_' . $index][$new_article->nid])) {
+            $same_articles[] = $new_article->nid;
+          }
+        }
+      }
+      
+      if (empty($same_articles)) {
+        dpm('No same articles.');
+      }
+      else{
+        dpm('There are some similar articles...');
+      }
     }
     //dpm('now time = ' . time());
     //$extra_data['related_articles_timestamp'] < 1380644802 -----> assure that there is used a new calculation version.
