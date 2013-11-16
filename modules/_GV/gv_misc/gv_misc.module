@@ -8922,9 +8922,13 @@ function gv_misc_addRelatedArticlesToNode($node) {
       $cache_time = (3600*24*3);
     }
     
-    
-    dpm($extra_data);
-    
+
+    global $user;
+    if ($user->uid == 1) {
+      dpm($extra_data);
+      $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($node->nid, $node->type);
+      dpm($articles_by_index);
+    }
     //dpm('now time = ' . time());
     //$extra_data['related_articles_timestamp'] < 1380644802 -----> assure that there is used a new calculation version.
     if (!isset($extra_data['related_articles']) || $extra_data['related_articles_timestamp'] < 1380644802 || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
@@ -8932,7 +8936,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
       exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
       
       dpm('Recaclulate related...');
-      dpm($extra_data);
+      //dpm($extra_data);
       
       // Reset the related_articles array. Just in case.
       $extra_data['related_articles'] = array();
