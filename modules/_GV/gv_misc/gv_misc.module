@@ -8973,15 +8973,15 @@ function gv_misc_addRelatedArticlesToNode($node) {
 
             
             
-            if (isset($old_extra_data_related_articles['index_' . $index][$related_article->nid])) {
-              $extra_data['related_articlzes']['index_'. $index][$related_article->nid] = $old_extra_data_related_articles['index_' . $index][$related_article->nid];
-              dpm($related_article->nid . ' is defined already. We use it on step ' . $related_count);
-              if ($related_count++ >= $max_articles_on_front - 1) {
-                break 2;
-              }
-            }        
-            
-            dpm('New article is found on ' . $related_count . ' step!');
+//            if (isset($old_extra_data_related_articles['index_' . $index][$related_article->nid])) {
+//              $extra_data['related_articlzes']['index_'. $index][$related_article->nid] = $old_extra_data_related_articles['index_' . $index][$related_article->nid];
+//              dpm($related_article->nid . ' is defined already. We use it on step ' . $related_count);
+//              if ($related_count++ >= $max_articles_on_front - 1) {
+//                break 2;
+//              }
+//            }        
+//            
+//            dpm('New article is found on ' . $related_count . ' step!');
             
             //if (gv_misc_articleHasMainImageField($related_article->nid)) 
             {
