@@ -4808,6 +4808,8 @@ function gv_misc_testPage_iframe() {
  */
 function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL) {
   // Assure that the imagecache file is created already, or recreate it.
+  $relative_path = str_replace('http://getvoip.com', '', $relative_path);
+  
   if (!file_exists($relative_path)) {
     
     dpm($relative_path);
