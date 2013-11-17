@@ -4828,6 +4828,8 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
     if (!image_style_create_derivative($style, $source, $destination)) {
       return FALSE;
     }
+    
+    return 'updated';
   }
   
   return TRUE;
@@ -8927,39 +8929,15 @@ function gv_misc_addRelatedArticlesToNode($node) {
 //    }
 //    else 
       {
-      $cache_time = (3600*24*3);
+      $cache_time = (3600*24*3); // 3 days before the next related articles update.
     }
     
-
-//    global $user;
-//    if ($user->uid == 1) {
-//      dpm($extra_data);
-//      $articles_by_index = gv_misc_get_relatedArticles_dividedByIndex($node->nid, $node->type);
-//      dpm($articles_by_index);
-//      
-//      $same_articles = array();
-//      foreach ($articles_by_index as $index => $new_articles) {
-//        foreach ($new_articles as $new_article) {
-//          if (isset($extra_data['related_articles']['index_' . $index][$new_article->nid])) {
-//            $same_articles[] = $new_article->nid;
-//          }
-//        }
-//      }
-      
-//      if (empty($same_articles)) {
-//        dpm('No same articles.');
-//      }
-//      else{
-//        dpm('There are some similar articles...');
-//        dpm($same_articles);
-//      }
-//    }
 
     //dpm('now time = ' . time());
     //$extra_data['related_articles_timestamp'] < 1380644802 -----> assure that there is used a new calculation version.
     if (!isset($extra_data['related_articles']) || $extra_data['related_articles_timestamp'] < 1380644802 || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
     {
-      exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
+      //exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
       
       dpm('Recaclulate related...');
       //dpm($extra_data);
@@ -8977,6 +8955,8 @@ function gv_misc_addRelatedArticlesToNode($node) {
 
         // Recreate $extra_data['related_articles'] element
         $related_count = 0;
+        $cached_image_flag = FALSE;
+        $cached_image_flag_updated = FALSE;
         foreach ($articles_by_index as $index => $data) {
           foreach ($data as $created => $related_article) {
 
@@ -9027,7 +9007,12 @@ function gv_misc_addRelatedArticlesToNode($node) {
                   // Assure that the imagecache file is created already, or recreate it.
                   //dpm($result->field_main_image_value);
                   //dpm($result->field_main_image_value['src_themed_related_sideblock']);
-                  gv_misc_createCachedImageIfNotExists($result->field_main_image_value['src_themed_related_sideblock']);
+                  
+                  $cached_image_flag = gv_misc_createCachedImageIfNotExists($result->field_main_image_value['src_themed_related_sideblock']);
+                  if (!$cached_image_flag_updated && $cached_image_flag == 'updated')  {
+                    $cached_image_flag_updated = TRUE;
+                    exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
+                  }
                   
                   $sizes = getimagesize($result->field_main_image_value['src_themed_related_sideblock']);
                   
@@ -9094,10 +9079,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
 
       gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data), 'node', $node->type);
       
-      //date +"%Y-%m-%d %H:%M:%S"
-      //echo "$(date '+TIME:%H:%M:%S') aa" >>test.log
-      //exec('echo "---->RELATED STOP n' . $node->nid . '--->'.'" >>~/gv_image_optimize.log');
-      exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED STOP n' . $node->nid . '--->'.'" >>~/gv_image_optimize.log');
+      //exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED STOP n' . $node->nid . '--->'.'" >>~/gv_image_optimize.log');
 
     }
 
