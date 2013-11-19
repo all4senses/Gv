@@ -954,6 +954,9 @@ function gv_misc_testPage() {
   
   foreach ($articles_data as $index => $data) {
     $articles_data[$index]->field_extra_data_value = unserialize($data->field_extra_data_value);
+    if (empty($articles_data[$index]->field_extra_data_value['guest_author'])) {
+      unset($articles_data[$index]);
+    }
   }
     
   dpm($articles_data);
