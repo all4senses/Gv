@@ -1670,7 +1670,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'];
         }
         else {
-          $guest_author = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : '';
+          $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'] = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : '';
         }
         //unset($form['field_guest_author']);
         
