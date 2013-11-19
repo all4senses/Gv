@@ -35,7 +35,7 @@
 <div class="profile"<?php print $attributes; ?>>
   <?php //print render($user_profile); ?>
   
-  <?php dpm($user_profile); dpm($_GET); dpm(arg()); ?>
+  <?php //dpm($user_profile); dpm($_GET); dpm(arg()); ?>
   
   <?php 
  
@@ -45,7 +45,8 @@
     
     echo '<h1 id="user-caption">Meet: ' , $user_name, '</h1>', render($user_profile['user_picture']), render($user_profile['field_u_bio']),  '<div class="bottom-clear"></div>';
     
-    $articles = views_embed_view('articles','block_all_by_author');
+    $articles = $user_profile['field_u_fname']['#object']->name == 'guest' ? views_embed_view('articles','block_all_by_guest') : views_embed_view('articles','block_all_by_author');
+    
     if ($articles) {
       echo '<div id="articles-caption">', t('Read some of !author\'s latest articles below:', array('!author' => @$user_profile['field_u_fname'][0]['#markup'])), '</div>', $articles;
     }
