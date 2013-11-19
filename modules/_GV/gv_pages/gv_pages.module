@@ -1672,9 +1672,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         else {
           $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'] = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : '';
         }
-        unset($form['field_guest_author']);
+        $form['field_guest_author']['#access'] = FALSE;
         
-        $form['author']['field_guest_author'] = array(
+        $form['author']['guest_author'] = array(
           '#type' => 'textfield',
           '#title' => 'Guest Post author',
           '#default_value' => $guest_author, //!empty($extra_data['guest_author']) ? $extra_data['guest_author'] : '',
@@ -4047,8 +4047,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
                   
                   
   
-  if (!empty($form_state['values']['field_guest_author'])) {
-    $extra_data['guest_author'] = $form_state['values']['field_guest_author'];
+  if (!empty($form_state['values']['guest_author'])) {
+    $extra_data['guest_author'] = $form_state['values']['guest_author'];
   }
   
   //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('pin_article_to' => $pin_article_to, 'title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
