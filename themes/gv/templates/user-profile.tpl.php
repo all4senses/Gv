@@ -35,7 +35,7 @@
 <div class="profile"<?php print $attributes; ?>>
   <?php //print render($user_profile); ?>
   
-  <?php dpm($user_profile); dpm($_GET); ?>
+  <?php dpm($user_profile); dpm($_GET); dpm(arg()); ?>
   
   <?php 
  
