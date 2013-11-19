@@ -952,7 +952,13 @@ function gv_misc_testPage() {
   $query->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN');  
   $articles_data = $query->execute()->fetchAllAssoc('entity_id');
   
+  foreach ($articles_data as $index => $data) {
+    $articles_data[$index]->field_extra_data_value = unserialize($data->field_extra_data_value);
+  }
+    
   dpm($articles_data);
+  
+  
 
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
