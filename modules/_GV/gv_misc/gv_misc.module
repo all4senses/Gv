@@ -7617,7 +7617,10 @@ function gv_misc_getProviderQuickData($target, $data) {
         
       }
       
-      dpm($data['option_name'] . ': ' . $out);
+      if ($data['option_name'] == 'Toll Free Numbers' && !$out) {
+        $out = 'N/A';
+      }
+      //dpm($data['option_name'] . ': ' . $out);
       
       if ($out === 1) {
         $out = 'Yes';
