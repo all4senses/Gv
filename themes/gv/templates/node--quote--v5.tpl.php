@@ -113,7 +113,7 @@
                   
                   <div class="right">
                     <div id="right-bottom">
-                      <?php echo gv_blocks_get_requestQuoteForPage_v4(); ?>
+                      <?php echo gv_blocks_get_requestQuoteForPage_v5(); ?>
                       <div class="bottom-clear"></div> 
                     </div>
                   </div>
