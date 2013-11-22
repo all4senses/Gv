@@ -227,8 +227,17 @@ function _imageapi_optimize_service_internal($image, $dst) {
   //$file_data = $dst . ': ' . print_r($image, TRUE);
   //gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'VIA IMAGE API OPTIMIZE...............' . $file_data));
   
+  
   // Write to log.file
   exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->API--->'. escapeshellarg($dst) . '" >>~/gv_image_optimize.log');
+  
+  // Settings on this page http://getvoip.com/admin/config/media/image-toolkit
+  /*
+  /usr/local/bin/advpng
+  /usr/bin/optipng
+  /usr/bin/pngcrush
+  /usr/local/bin/jfifremove
+  */
   
   $dst = drupal_realpath($dst);
   switch ($image->info['mime_type']) {
