@@ -2238,10 +2238,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               
               
                   // Descriptions fields
-                  foreach ($service_descriptions as $service_description_key => $service_description_title) {
+                  foreach ($service_descriptions as $service_description_key => $service_description_data) {
+                    
+                    if (is_array($service_description_data)) {
+                      $service_description_title = $service_description_data['title'];
+                      $service_description_type = $service_description_data['type'];
+                    }
+                    else {
+                      $service_description_title = $service_description_data;
+                      $service_description_type = 'textfield';
+                    }
+                    $service_description_title = is_array($service_description_data) ? $service_description_data['title'] : $service_description_title;
                     
                     $form['s'][$service_type_key][$service_description_key] = array(
-                      '#type' => 'textfield',
+                      '#type' => $service_description_type,
                       '#title' => $service_description_title,
                       //'#default_value' => isset($p_data['s'][$service_type_key][$service_description_key]) ? $p_data['s'][$service_type_key][$service_description_key] : '',
                       '#default_value' => $load_key == 's' 
