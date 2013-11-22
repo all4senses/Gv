@@ -81,16 +81,16 @@
                 // 
                 //global $user; 
                 //if ($user->uid) 
-                {
-                  // Colorbox for popup window.
-                  //1, 3, 4, 
-                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-                  // Exit intent Ad block main js.
-                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
-                }
+//                {
+//                  // Colorbox for popup window.
+//                  //1, 3, 4, 
+//                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+//                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+//
+//                  // Exit intent Ad block main js.
+//                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+//                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
+//                }
 
               
               ?>
