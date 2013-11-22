@@ -233,9 +233,9 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'): /* If we are on the final page, after the submission */ ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/business-systems'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lp-iscope'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
             /* <![CDATA[ */
@@ -256,11 +256,11 @@
             </div>
             </noscript>
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/business-systems";</script>
+            <script>top.location.href="http://getvoip.com/lp-iscope";</script>
           <?php endif;*/?>
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'):
-// So we are on the lending page '/business-systems' 
+<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'):
+// So we are on the lending page '/lp-iscope' 
 ?>
     
   <!-- Google Code for Remarketing tag -->
@@ -281,5 +281,5 @@
   </div>
   </noscript>
   
-<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'):?>
+<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'):?>
   
