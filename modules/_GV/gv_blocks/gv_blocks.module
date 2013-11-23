@@ -1090,6 +1090,19 @@ function gv_blocks_reviewsCounter() {
  * Returns block with comparing TOP BUSINESS providers table.
  */
 function gv_blocks_compareTopProviders($service_type) {
+  
+  $cid = 'gv_blocks_compareTopProviders_' . $service_type;
+  $cache = cache_get($cid, 'cache');
+  
+  // Try to get the data from cache.
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    dpm('Cache...');
+    return $cache->data;
+  }
+  
+  dpm('No cache');
+  
+  // No cached data... rebuilding...
   switch ($service_type) {
     case 'business':
       $rating_table = 'field_data_field_p_erating';
@@ -1120,7 +1133,10 @@ function gv_blocks_compareTopProviders($service_type) {
   $sprite_names['residential'] = 'top_re_providers_chart_big';
   
   if (!empty($p_names)) {
-    return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
+    //return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
+    $out = gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
+    cache_set($cid, $out, 'cache', strtotime('+31 day'));
+    return $out;
   }
   
 }
