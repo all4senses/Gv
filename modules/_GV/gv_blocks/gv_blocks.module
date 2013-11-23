@@ -1355,7 +1355,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         $out .= '<tr class="visit"><td class="title">Details</td>';
           foreach ($providers as $nid => $provider) {
             //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
-            $out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid) . '</td>';
+            //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid) . '</td>';
+            $out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
           }
         $out .= '</tr>';
         
