@@ -1211,13 +1211,9 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           
           if (!empty($image)) {
             // gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL)
-            if ($user->uid == 1) {
-              $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
-            }
-            //else 
-              {
-              $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo');
-            }
+            
+            //$out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo');
+            $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
           }
           
           $out .= '<div class="rank" style="background: #2c7bbf; color: white; margin-top: 5px;">#' . ($cols_num - $i - 1) . '</div>';
