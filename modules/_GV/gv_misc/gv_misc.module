@@ -7299,7 +7299,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         //if (0) {
         if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name)) {
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
-          return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], $data['data']->service_type);
+          return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
         }
 //        elseif (!empty($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
 //          $image_style_name = 'logo_provider_chart_main';
