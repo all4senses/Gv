@@ -5207,7 +5207,7 @@ function gv_pages_node_update($node) {
       
     // Reset ProvidersDataQuick in session var.
     ///gv_misc_getProvidersDataQuick('all', FALSE, TRUE);   
-    dpm('y1');
+
     // OR BETTER:
     // Reset only a current provider data.
     gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $node->nid);
@@ -5215,7 +5215,6 @@ function gv_pages_node_update($node) {
     // Regenerate providers logos sprites (if needed). The data was prepared in gv_pages_submitForm_provider(&$form, &$form_state)
     $p_data = unserialize($node->field_p_data['und'][0]['value']);
     if (!empty($p_data['last_erating_fields_different'])) {
-      
       gv_misc_rebuildProvidersLogosSprites($p_data['last_erating_fields_different']);
     }
 
