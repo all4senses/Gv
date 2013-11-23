@@ -1096,11 +1096,8 @@ function gv_blocks_compareTopProviders($service_type) {
   
   // Try to get the data from cache.
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
-    dpm('Cache...');
     return $cache->data;
   }
-  
-  dpm('No cache');
   
   // No cached data... rebuilding...
   switch ($service_type) {
