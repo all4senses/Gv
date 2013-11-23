@@ -1766,9 +1766,13 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
           $provider_data_quick = unserialize(gv_misc_fieldRead_valueById_single('p_data_quick', $nid));
           $provider_data_quick['i_web_ts'] = $subpath;
           dpm($provider_data_quick);
-//
-//          // Reset only a current provider data.
-//          gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $nid);
+          
+          if ($nid == 36) {
+          gv_misc_fieldSave('p_data_quick', $nid, serialize($provider_data_quick));
+
+          // Reset only a current provider data.
+          gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $nid);
+          }
         }
         else {
           $subpath = $_SERVER['REDIRECT_URL'];
