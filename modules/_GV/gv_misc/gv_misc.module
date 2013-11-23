@@ -7080,11 +7080,12 @@ function gv_misc_getProvidersDataQuick($scope = 'all', $reset = FALSE, $clear_fr
   }
   
   
-  
+  dpm('x1');
   
   if ($p_nid_to_reset) {
     if (!empty($var_p_all_data_quick)) {
       
+      dpm('x2');
       
       $query = db_select('field_revision_field_p_data_quick', 'f')
             ->fields('f', array('entity_id', 'field_p_data_quick_value'));
@@ -7103,6 +7104,7 @@ function gv_misc_getProvidersDataQuick($scope = 'all', $reset = FALSE, $clear_fr
       variable_set('p_all_data_quick', $var_p_all_data_quick);
       
       drupal_set_message('Quick data for this provider has been reset.', 'warning');
+      dpm('x3');
       dpm($var_p_all_data_quick);
       
       return NULL;
