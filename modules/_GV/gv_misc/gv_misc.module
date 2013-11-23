@@ -1724,7 +1724,7 @@ function gv_misc_getTrackingUrl_trackingSubpath_byNid($nid) {
  * Build the tracking url.
  */
 function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL, $provider_data_quick = NULL, $service_type = NULL) {
-  //dpm($provider_data_quick);
+  dpm($provider_data_quick);
   if ($subpath) {
     $subpath = str_replace('reviews/', '', $subpath);
   }
