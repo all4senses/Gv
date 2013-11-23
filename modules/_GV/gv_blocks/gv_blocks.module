@@ -1131,6 +1131,8 @@ function gv_blocks_compareTopProviders($service_type) {
  */
 function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business', $rating_table = 'field_data_field_p_erating', $rating_field = 'field_p_erating_value') {
   
+  global $user;
+  
   if (empty($p_names)) {
   
     if (empty($_GET['p'])) {
@@ -1160,6 +1162,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   if (empty($results)) {
     return '<div class="no-results">No providers have been chosen.</div>';
   }
+  
+  $all_data_quick = gv_misc_getProvidersDataQuick();
   
   foreach ($results as $nid => $provider) {
     $providers[$nid] = array('nid' => $provider->entity_id, 'p_name' => $provider->field_p_name_value, 'p_data' => unserialize($provider->field_p_data_value));
@@ -1207,7 +1211,13 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           
           if (!empty($image)) {
             // gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL)
-            $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'],NULL, 'logo');
+            if ($user->uid == 1) {
+              $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
+            }
+            //else 
+              {
+              $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo');
+            }
           }
           
           $out .= '<div class="rank" style="background: #2c7bbf; color: white; margin-top: 5px;">#' . ($cols_num - $i - 1) . '</div>';
