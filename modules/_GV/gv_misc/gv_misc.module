@@ -1755,25 +1755,14 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
           $subpath = gv_misc_getTrackingUrl_trackingSubpath_byNid($nid);
           $subpath_stripped = TRUE;
           dpm('sub in nid ' . $subpath);
-          
-          
-//           = db_select('field_revision_field_p_data_quick', 'f')
-//            ->fields('f', array('entity_id', 'field_p_data_quick_value'));
-//      $query->condition('f.entity_id', $p_nid_to_reset);
-//      $provider = $query->execute()->fetchObject();
-//      $var_p_all_da
       
+          // Update providers quick data field and the static variable.
           $provider_data_quick = unserialize(gv_misc_fieldRead_valueById_single('p_data_quick', $nid));
-          dpm($provider_data_quick);
           $provider_data_quick['i_web_ts'] = $subpath;
-          
-          
-          if ($nid == 36) {
           gv_misc_fieldSave('p_data_quick', $nid, serialize($provider_data_quick));
-
           // Reset only a current provider data.
           gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $nid);
-          }
+
         }
         else {
           $subpath = $_SERVER['REDIRECT_URL'];
@@ -1781,14 +1770,17 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
       //}
 
       // Make a path looks like /go/nextiva
-      if (!$subpath_stripped) {
+      if (!$subpath_stripped && $subpath) {
         $subpath = str_replace('reviews/', '', $subpath);
       }
   }
   
-  $trackingUrl = '<a href="/go' . $subpath . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : ' rel="nofollow"') . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
-  
-  return $trackingUrl;
+  if ($subpath) {
+    return '<a href="/go' . $subpath . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : ' rel="nofollow"') . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
+  }
+  else {
+    return NULL;
+  }
 }
 
 
