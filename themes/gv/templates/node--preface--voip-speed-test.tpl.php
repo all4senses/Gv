@@ -281,7 +281,8 @@ The Ookla Line Quality Test requires at least version 8 of Flash. <a href="http:
 
 
 <?php // <applet code="VoipApplet.class" archive="/sites/all/libraries/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet"> ?>
-<applet code="VoipApplet.class" archive="/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet">  
+  <!--<applet code="VoipApplet.class" archive="/ookla/LQApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet"> -->
+  <applet code="VoipApplet.class" archive="/ookla/VoipApplet.jar?v=1.1" width="1" height="1" mayscript id="VoipApplet" name="VoipApplet">  
 
   <param name="bgcolor" value="ffffff">
 	<param name="packetlosslength" value="100">

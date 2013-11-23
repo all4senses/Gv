@@ -1711,7 +1711,9 @@ function gv_misc_entity_info_alter(&$entity_info) {
 /**
  * Build the tracking url.
  */
-function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
+function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL, $provider_data_quick = NULL) {
+  
+  //if  (!empty($provider_data_quick[]))
   
   // v1
   //$trackingUrl = l($title_or_wrapped_object, 'click', array('query' => array('p' => urlencode($target_name)), 'attributes' => array('rel' => 'nofollow', 'target' => '_blank')));
@@ -7294,7 +7296,8 @@ function gv_misc_getProviderQuickData($target, $data) {
         dpm($all_data_quick[$data['data']->nid]);
         //if (0) {
         if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name)) {
-          return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid);
+          //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
+          return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid]);
         }
 //        elseif (!empty($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
 //          $image_style_name = 'logo_provider_chart_main';
