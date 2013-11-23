@@ -1764,9 +1764,8 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
 //      $var_p_all_da
       
           $provider_data_quick = unserialize(gv_misc_fieldRead_valueById_single('p_data_quick', $nid));
+          $provider_data_quick['i_web_ts'] = $subpath;
           dpm($provider_data_quick);
-//          $provider_data_quick = 
-//          $provider_data_quick['i_web_ts'] = $subpath;
 //
 //          // Reset only a current provider data.
 //          gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $nid);
