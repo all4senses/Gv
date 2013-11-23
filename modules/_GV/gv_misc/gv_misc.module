@@ -1731,6 +1731,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   elseif (!empty($provider_data_quick['i_web_ts'])) {
     // ts = tracking_subpath
     $subpath = $provider_data_quick['i_web_ts'];
+    dpm('ts=' . $provider_data_quick['i_web_ts']);
   }
   else {
   
@@ -1750,6 +1751,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
 //          $subpath = '/' . $query->execute()->fetchField();
           $subpath = gv_misc_getTrackingUrl_trackingSubpath_byNid($nid);
           $subpath_stripped = TRUE;
+          dpm('sub in nid ' . $subpath);
         }
         else {
           $subpath = $_SERVER['REDIRECT_URL'];
