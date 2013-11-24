@@ -1737,9 +1737,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
     //dpm('ts=' . $provider_data_quick['i_web_ts']);
   }
   else {
-      
-      dpm($provider_data_quick);
-    
+     
       // v1
       //$trackingUrl = l($title_or_wrapped_object, 'click', array('query' => array('p' => urlencode($target_name)), 'attributes' => array('rel' => 'nofollow', 'target' => '_blank')));
 
@@ -1756,11 +1754,11 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
 //          $subpath = '/' . $query->execute()->fetchField();
           $subpath = gv_misc_getTrackingUrl_trackingSubpath_byNid($nid);
           $subpath_stripped = TRUE;
-          dpm('sub in nid ' . $subpath);
+          //dpm('sub in nid ' . $subpath);
       
           // Update providers quick data field and the static variable.
           $provider_data_quick = unserialize(gv_misc_fieldRead_valueById_single('p_data_quick', $nid));
-          dpm($provider_data_quick);
+          //dpm($provider_data_quick);
           $provider_data_quick['i_web_ts'] = $subpath;
           gv_misc_fieldSave('p_data_quick', $nid, serialize($provider_data_quick));
           // Reset only a current provider data.
@@ -8949,7 +8947,7 @@ function gv_misc_articleHasMainImageField($nid) {
   $query->condition('n.nid', $nid);
 
   $result = $query->execute()->fetchObject();
-  dpm($result);
+  //dpm($result);
   
   if ($result) {
     $result->field_main_image_value = unserialize($result->field_main_image_value);
