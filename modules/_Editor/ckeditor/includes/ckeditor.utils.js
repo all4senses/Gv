@@ -3,10 +3,20 @@ Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
+
+
+// a4s fix of Drupal undefined
 //window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
 
+
 (function ($) {
-  return;
+
+  
+  if (typeof(Drupal) == 'undefined') {
+    return;
+  }
+  
+  
   window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
 
 
