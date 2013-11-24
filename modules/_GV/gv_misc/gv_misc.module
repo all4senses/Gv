@@ -3153,10 +3153,13 @@ function gv_misc_getStreamUriFromRelativePath($path) {
  */
 function gv_misc_addZoomableImagesJs() {
   //1, 3, 4, 
-  dpm(drupal_add_js());
-  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-  dpm(drupal_add_js());
-  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  // Fix, workaround: if colorbox has been already loaded, and now we will add it again, it won't work.
+  // So we prevent it.
+  $drupal_alredy_loaded_js = drupal_add_js();
+  if (!isset($drupal_alredy_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js'])) {
+    drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+    drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  }
 
   $path_to_module = drupal_get_path('module', 'gv_misc');
   drupal_add_js($path_to_module . '/js/gv_makeImagesZoomable.js');
