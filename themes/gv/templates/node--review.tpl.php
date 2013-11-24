@@ -1,12 +1,15 @@
 <?php 
-if($view_mode == 'home_teaser') {
+
+ $all_data_quick = gv_misc_getProvidersDataQuick();
+ 
+ if($view_mode == 'home_teaser') {
   //dpm($content);
   //dpm($node);
   
   
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
   
-  $all_data_quick = gv_misc_getProvidersDataQuick();
+ 
 
 
   echo '<div class="header">';
@@ -257,14 +260,17 @@ if($view_mode == 'home_teaser') {
                       $provider_url = (!isset($content['provider_url']) || !$content['provider_url']) ? '' : $content['provider_url'];
                       $provider_name = isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'];
                       
+                      $provider_data_quick = !empty($node->field_ref_provider['und'][0]['target_id']) ? $all_data_quick[$node->field_ref_provider['und'][0]['target_id']] : NULL;
+                              
                       if($page || $full_title) {
-                        echo ( (!isset($node->field_ref_provider['und'][0]['target_id']) || !$node->field_ref_provider['und'][0]['target_id'] ) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
+                        
+                        echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
                         //. ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
-                        . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
+                        . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick));
                       }
                       else {
                         //echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider"'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
-                        echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
+                        echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick);
                       }
                       
                   echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
