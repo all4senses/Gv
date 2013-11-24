@@ -25,7 +25,7 @@ if($view_mode == 'home_teaser') {
       
       if (!empty($all_data_quick[$provider_nid]['i_web'])) {
         //$logo_link = $all_data_quick[$provider_nid]['i_web'];
-        echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo');
+        echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo', NULL, $all_data_quick[$provider_nid]);
       }
       else {
         echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
