@@ -1759,10 +1759,10 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
           // Update providers quick data field and the static variable.
           $provider_data_quick = unserialize(gv_misc_fieldRead_valueById_single('p_data_quick', $nid));
           dpm($provider_data_quick);
-//          $provider_data_quick['i_web_ts'] = $subpath;
-//          gv_misc_fieldSave('p_data_quick', $nid, serialize($provider_data_quick));
-//          // Reset only a current provider data.
-//          gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $nid);
+          $provider_data_quick['i_web_ts'] = $subpath;
+          gv_misc_fieldSave('p_data_quick', $nid, serialize($provider_data_quick));
+          // Reset only a current provider data.
+          gv_misc_getProvidersDataQuick('all', FALSE, FALSE, $nid);
 
         }
         else {
