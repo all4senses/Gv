@@ -10,22 +10,29 @@
   $class_thumb_presented = '';
   $update_teaser = FALSE;
   
-  if($view_mode == 'home_teaser') {
+  /*
+  if($view_mode == 'side_block_teaser_onPrefaceBottomLatest') {
+    
+    $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+
+    $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
+
+    $author_name = gv_misc_getNodeAuthor($node);
+    
+    //echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+    echo $teaser_data['home_teaser_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+            . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
+
+    return;    
+  }
+  else
+    */if($view_mode == 'home_teaser') {
 
     $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
 
     $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
 
-    if (!empty($node->field_extra_data['und'][0]['value'])) {
-      $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-      $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
-    }
-
-    if (!$extra_data['guest_author']) {
-      $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
-      $author_name = $authorExtendedData->realname;
-    }
-
+    $author_name = gv_misc_getNodeAuthor($node);
     
     //echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
     echo $teaser_data['home_teaser_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
