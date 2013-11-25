@@ -1826,7 +1826,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $count = count($results) - 1;
     foreach ($results as $key => $result) {
       $node = node_load($result->entity_id);
-      if ($user->uid == 1) {
+      if ($user->uid) {
         $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'side_block_teaser')) . '</div>';
       }
       else {
