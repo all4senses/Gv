@@ -1094,6 +1094,9 @@ function gv_blocks_compareTopProviders($service_type) {
   $cid = 'gv_blocks_compareTopProviders_' . $service_type;
   $cache = cache_get($cid, 'cache');
   
+  // Stick table header to the page top.
+  drupal_add_js('misc/tableheader.js');
+  
   // Try to get the data from cache.
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
     return $cache->data;
@@ -1186,9 +1189,6 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   
   $v_colors = array('features' => 'red', 'install' => 'yellow', 'money' => 'green', 'rely' => 'violet', 'service' => 'purple', 'sound' => 'pink');
   $v_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
-  
-  // Stick table header to the page top.
-  drupal_add_js('misc/tableheader.js');
   
   $out = '<table class="specs sticky-enabled p' . ($cols_num - 1) . '">';
   
