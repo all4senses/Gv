@@ -6,18 +6,18 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 
 // a4s fix of Drupal undefined
-//window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
+window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
 
 
-(function ($) {
+//(function ($) {
 
   
-  if (typeof(Drupal) == 'undefined') {
-    return;
-  }
+//  if (typeof(Drupal) == 'undefined') {
+//    return;
+//  }
   
   
-  window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
+  //window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
 
 
 (function ($) {
@@ -377,4 +377,4 @@ var ckeditor_imceSendTo = function (file, win){
   win.close();
 }
 
-});
+//});
