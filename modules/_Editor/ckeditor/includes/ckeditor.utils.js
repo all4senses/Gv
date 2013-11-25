@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 
 
-// a4s fix of Drupal undefined
+// a4s fix of Drupal undefined, depaecated
 window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
 
 
