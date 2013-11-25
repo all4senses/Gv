@@ -13,7 +13,7 @@
 <?php endif; ?> <!-- if (!$page) -->
   
 
-<a href="https://plus.google.com/102678795633763007140?rel=author"></a>
+<!-- <a href="https://plus.google.com/102678795633763007140?rel=author"></a> -->
   <?php 
      
       // Define if this page should contain G+ provile link and authorship,
