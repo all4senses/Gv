@@ -130,7 +130,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
   
   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
       
-  echo '<a href="' . url('node/' . $provider_nid) . '"><h4>'. $all_data_quick[$provider_nid]['name'] . ' - ' . $node->title . '</h4></a>
+  echo '<h4><a href="' . url('node/' . $provider_nid) . '">'. $all_data_quick[$provider_nid]['name'] . ' - ' . $node->title . '</a></h4>
     <div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>
     <div class="submitted"><span class="author">' . $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.</span> - ' . date('F d, Y', $node->created) . '</div>
     <div class="review">' . $teaser . '</div>';
