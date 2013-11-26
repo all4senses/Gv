@@ -132,7 +132,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
       
   echo '<a href="' . url('node/' . $provider_nid) . '"><h3>'. $all_data_quick[$provider_nid]['name'] . ' - ' . $node->title . '</h3></a>
     <div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>
-    <div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.</span> / ' . date('F d, Y', $node->created) . '</div>
+    <div class="submitted"><span class="author">' . $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.</span> - ' . date('F d, Y', $node->created) . '</div>
     <div class="review">' . $teaser . '</div>';
     
   return;
