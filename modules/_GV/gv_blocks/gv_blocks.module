@@ -1883,7 +1883,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       }
       //class="view-articles"
       if ($user->uid) {
-        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3>' . $latest_reviews . '</div>';
+        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3><div class="view-content">' . $latest_reviews . '</div></div>';
       }
       else {
         $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
