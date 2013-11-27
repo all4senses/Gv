@@ -124,7 +124,9 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
   $last_pos = strrpos($teaser, ' ');
   
   //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
-  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more')))), $last_pos);
+  
+  //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more')))), $last_pos);
+  $teaser = substr_replace ($teaser, '...', $last_pos);
   
   //dpm($all_data_quick[$provider_nid]['name']);
   
