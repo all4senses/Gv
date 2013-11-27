@@ -4595,7 +4595,7 @@ function sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetv
   }
   
   // Test submissions.
-  /*
+  
   if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || $submission['Company'] == 'RC') {
     // Test for Nextiva
     drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
@@ -4605,6 +4605,7 @@ function sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetv
       gv_misc_SendRequestToRingCentral($submission);
     }
   }
+  /*
   elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
     // Test for Nextiva
     drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
@@ -4613,9 +4614,9 @@ function sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetv
     if ($submission['Source'] != 'block') {
       gv_misc_SendRequestToNextiva($submission);
     }
-  }
+  }*/
   else
-  */
+  
   
   if ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s' && $submission['First Name'] != 'test') {
     
