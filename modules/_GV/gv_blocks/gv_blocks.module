@@ -1826,21 +1826,21 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $count = count($results) - 1;
     foreach ($results as $key => $result) {
       $node = node_load($result->entity_id);
-      if ($user->uid) {
+//      if ($user->uid) {
         $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'side_block_teaser')) . '</div>';
-      }
-      else {
-        $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
-      }
+//      }
+//      else {
+//        $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
+//      }
     }
 
     //$latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div>';
-    if ($user->uid) {
+//    if ($user->uid) {
       $latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h3 class="block-title">Latest Posts</h3><div class="view-content">' . $latest_articles . '</div></div>';
-    }
-    else {
-      $latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h2 class="block-title">Latest From Our Blog</h2>' . $latest_articles . '</div>';
-    }
+//    }
+//    else {
+//      $latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h2 class="block-title">Latest From Our Blog</h2>' . $latest_articles . '</div>';
+//    }
   }
   
   
