@@ -1874,20 +1874,20 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
         $sprite_names = unserialize(SPRITE_NAMES);
         $node->sprite_name = $sprite_names[$map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]];
         
-        if ($user->uid) {
+//        if ($user->uid) {
           $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
-        }
-        else {
-          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
-        }
+//        }
+//        else {
+//          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
+//        }
       }
       //class="view-articles"
-      if ($user->uid) {
+//      if ($user->uid) {
         $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3><div class="view-content">' . $latest_reviews . '</div></div>';
-      }
-      else {
-        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
-      }
+//      }
+//      else {
+//        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
+//      }
     }
 
   }
