@@ -308,6 +308,9 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   //dpm($form_state['values']);
   $get = $_GET;
   unset($get['q']);
+  if (isset($get['provider'])) {
+    unset($get['provider']);
+  }
   $get['filter'] = $form_state['values']['filter'];
   
   if ($form_state['values']['provider'] != '_none' && $form_state['values']['provider'] != '') {
