@@ -208,7 +208,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#title' => 'Provider',
     '#default_value' => $selected_provider ? $providers[$selected_provider] : '_none',
     '#options' => $providers,
-    '#attributes' =>  array('class' =>array('provider'), 'onSelect' => array('javascript:this.form.submit();')),
+    '#attributes' =>  array('class' =>array('provider'), 'onChange' => array('javascript:this.form.submit();')),
   );
     
   $form['table_start'] = array(
