@@ -273,7 +273,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 //    $filter_by_track_id_url = $_GET + array('op' => 'filter_by_track_id', 'track_id' => $result->track_id);
 //    unset($filter_by_track_id_url['q']);
     
-    $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode($result->object_name));
+    $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode(str_replace(' Video Review', '', $result->object_name)));
     
     $form['item_' . ($key + 1) . 'c'] = array(
       '#markup' => //'<td class="data">' . $data . '</td>' .
