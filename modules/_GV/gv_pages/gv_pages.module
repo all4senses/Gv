@@ -308,6 +308,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   $get = $_GET;
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
+  $get['provider'] = $form_state['values']['provider'];
   
   drupal_goto($_GET['q'], array('query' => $get));
 }
