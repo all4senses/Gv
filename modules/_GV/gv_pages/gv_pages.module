@@ -201,7 +201,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
   $selected_provider = !empty($_GET['provider']) ? $_GET['provider'] : NULL;
   $providers['_none'] = '- Select a value -';
-  gv_misc_getProviders($providers);
+  //gv_misc_getProviders($providers);
+  gv_misc_getProvidersKeyedByName($providers);
   dpm($providers);
   $form['provider'] = array(
     '#type' => 'select',
