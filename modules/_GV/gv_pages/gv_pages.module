@@ -170,7 +170,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $query->fields('tl');
   
   
-  if ($filter_by_db[$current_filter]) {
+  if (@$filter_by_db[$current_filter]) {
     $filter_field = $filter_by_db[$current_filter][0];
     $filter_value = $filter_by_db[$current_filter][1];
     if ($filter_field == 'type' && $filter_value == 'provider_link') {
@@ -292,6 +292,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
  */
 function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
 
+  dpm($form_state['values']);
   $get = $_GET;
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
