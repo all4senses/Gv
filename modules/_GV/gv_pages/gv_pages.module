@@ -190,6 +190,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     }
   }
   
+  if ($selected_provider) {
+    $query->condition('object_name', $selected_provider);
+  }
+  
   $results = 
     $query
       ->orderBy($sort, $order)
