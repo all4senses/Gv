@@ -32,8 +32,8 @@
           }
         });
     
-        $( "#edit-time-from" ).timepicker();
-        $( "#edit-time-to" ).timepicker();
+        $( "#edit-time-from" ).timepicker({ 'timeFormat': 'H:i:s' });
+        $( "#edit-time-to" ).timepicker({ 'timeFormat': 'H:i:s' });
     
     }
   };
