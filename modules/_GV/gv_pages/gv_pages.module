@@ -220,22 +220,29 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#attributes' =>  array('class' =>array('provider'), 'onChange' => array('javascript:this.form.submit();')),
   );
   
-  $form['date_from'] = array(
+  
+  $form['from'] = array(
+    '#type' => 'container',
+  );
+  $form['from']['date_from'] = array(
     '#type' => 'textfield',
     '#title' => 'Date from:',
     '#default_value' => NULL,
   );
-  $form['time_from'] = array(
+  $form['from']['time_from'] = array(
     '#type' => 'textfield',
     '#title' => 'Time from:',
     '#default_value' => NULL,
   );
-  $form['date_to'] = array(
+  $form['to'] = array(
+    '#type' => 'container',
+  );
+  $form['to']['date_to'] = array(
     '#type' => 'textfield',
     '#title' => 'Date to:',
     '#default_value' => NULL,
   );
-  $form['time_to'] = array(
+  $form['to']['time_to'] = array(
     '#type' => 'textfield',
     '#title' => 'Time to:',
     '#default_value' => NULL,
@@ -314,6 +321,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     //'#weight' => 5,
   );
   
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  ); 
+  
   // Datepicker.
 
   $module_path = drupal_get_path('module', 'gv_pages');
@@ -354,7 +368,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
  */
 function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
 
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
   $get = $_GET;
   unset($get['q']);
   if (isset($get['provider'])) {
