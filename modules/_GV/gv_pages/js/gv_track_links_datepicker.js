@@ -9,7 +9,9 @@
         $( "#edit-date-from" ).datepicker({
           defaultDate: "+1w",
           changeMonth: true,
+          changeYear: true,
           //numberOfMonths: 3,
+          showAnim: 'slideDown',
           onClose: function( selectedDate ) {
             $( "#to" ).datepicker( "option", "minDate", selectedDate );
           }
@@ -17,7 +19,9 @@
         $( "#edit-date-to" ).datepicker({
           defaultDate: "+1w",
           changeMonth: true,
+          changeYear: true,
           //numberOfMonths: 3,
+          showAnim: 'bounce',
           onClose: function( selectedDate ) {
             $( "#from" ).datepicker( "option", "maxDate", selectedDate );
           }
