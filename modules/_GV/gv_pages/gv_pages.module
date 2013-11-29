@@ -249,7 +249,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       );
     
   
-  $form['actions'] = array('#type' => 'actions');
+  $form['actions'] = array(
+    '#type' => 'actions',
+    '#weight' => 5,
+  );
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
