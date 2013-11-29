@@ -20,7 +20,7 @@
           defaultDate: "+1w",
           changeMonth: true,
           changeYear: true,
-          minDate: new Date(2013),
+          minDate: new Date(2013, 1, 1),
           maxDate: 'today',
           //numberOfMonths: 3,
           //showAnim: 'bounce',
