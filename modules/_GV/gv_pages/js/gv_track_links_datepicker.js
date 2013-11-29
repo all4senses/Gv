@@ -13,7 +13,7 @@
           //numberOfMonths: 3,
           showAnim: 'slideDown',
           onClose: function( selectedDate ) {
-            $( "#to" ).datepicker( "option", "minDate", selectedDate );
+            $( "#edit-date-to" ).datepicker( "option", "minDate", selectedDate );
           }
         });
         $( "#edit-date-to" ).datepicker({
@@ -21,9 +21,9 @@
           changeMonth: true,
           changeYear: true,
           //numberOfMonths: 3,
-          showAnim: 'bounce',
+          //showAnim: 'bounce',
           onClose: function( selectedDate ) {
-            $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+            $( "#edit-date-from" ).datepicker( "option", "maxDate", selectedDate );
           }
         });
     
