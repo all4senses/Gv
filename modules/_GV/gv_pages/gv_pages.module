@@ -204,7 +204,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $filter_temp_get = $_GET;
   unset($filter_temp_get['q']);
   
-  $form['filter'] = array(
+  
+  $form['header-block'] = array(
+    '#type' => 'container',
+  );
+  
+  $form['header-block']['filter'] = array(
     '#type' => 'radios',
     '#title' => t('Filter by: '),
     '#default_value' => $current_filter,
@@ -212,7 +217,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#attributes' =>  array('class' =>array('filter_by'), 'onClick' => array('javascript:this.form.submit();')),
   );
 
-  $form['provider'] = array(
+  $form['header-block']['provider'] = array(
     '#type' => 'select',
     '#title' => 'Provider',
     '#default_value' => $selected_provider ? $providers[$selected_provider] : '_none',
@@ -221,39 +226,39 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   );
   
   
-  $form['from'] = array(
+  $form['header-block']['from'] = array(
     '#type' => 'container',
   );
-      $form['from']['date_from'] = array(
+      $form['header-block']['from']['date_from'] = array(
         '#type' => 'textfield',
         '#title' => 'Date from:',
         '#default_value' => NULL,
       );
-      $form['from']['time_from'] = array(
+      $form['header-block']['from']['time_from'] = array(
         '#type' => 'textfield',
         '#title' => 'Time from:',
         '#default_value' => NULL,
       );
-  $form['to'] = array(
+  $form['header-block']['to'] = array(
     '#type' => 'container',
   );
-      $form['to']['date_to'] = array(
+      $form['header-block']['to']['date_to'] = array(
         '#type' => 'textfield',
         '#title' => 'Date to:',
         '#default_value' => NULL,
       );
-      $form['to']['time_to'] = array(
+      $form['header-block']['to']['time_to'] = array(
         '#type' => 'textfield',
         '#title' => 'Time to:',
         '#default_value' => NULL,
       );
     
   
-  $form['actions'] = array(
+  $form['header-block']['actions'] = array(
     '#type' => 'actions',
-    '#weight' => 1,
+    //'#weight' => 1,
   );
-  $form['actions']['submit'] = array(
+  $form['header-block']['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
   ); 
