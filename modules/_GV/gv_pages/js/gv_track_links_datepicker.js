@@ -32,12 +32,8 @@
           }
         });
     
-        $( "#edit-time-from" ).timepicker({
-          
-        });
-        $( "#edit-time-to" ).timepicker({
-          
-        });
+        $( "#edit-time-from" ).timepicker();
+        $( "#edit-time-to" ).timepicker();
     
     }
   };
