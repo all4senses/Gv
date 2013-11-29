@@ -224,30 +224,38 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $form['from'] = array(
     '#type' => 'container',
   );
-  $form['from']['date_from'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Date from:',
-    '#default_value' => NULL,
-  );
-  $form['from']['time_from'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Time from:',
-    '#default_value' => NULL,
-  );
+      $form['from']['date_from'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Date from:',
+        '#default_value' => NULL,
+      );
+      $form['from']['time_from'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Time from:',
+        '#default_value' => NULL,
+      );
   $form['to'] = array(
     '#type' => 'container',
   );
-  $form['to']['date_to'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Date to:',
-    '#default_value' => NULL,
-  );
-  $form['to']['time_to'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Time to:',
-    '#default_value' => NULL,
-  );
+      $form['to']['date_to'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Date to:',
+        '#default_value' => NULL,
+      );
+      $form['to']['time_to'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Time to:',
+        '#default_value' => NULL,
+      );
     
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  ); 
+  
+  
   $form['table_start'] = array(
     '#type' => 'markup',
     '#markup' => '<table class="views-table track-links"><thead><tr>
@@ -322,11 +330,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   );
   
   
-  $form['actions'] = array('#type' => 'actions');
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Submit',
-  ); 
   
   // Datepicker.
 
