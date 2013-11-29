@@ -20,6 +20,7 @@
           defaultDate: "+1w",
           changeMonth: true,
           changeYear: true,
+          maxDate: 'today',
           //numberOfMonths: 3,
           //showAnim: 'bounce',
           onClose: function( selectedDate ) {
