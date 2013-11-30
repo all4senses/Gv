@@ -432,7 +432,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (!empty($form_state['values']['date_from'])) {
     $from_str = $form_state['values']['date_from'];
     if (!empty($form_state['values']['time_from'])) {
-      $from_str .= 'T' . $form_state['values']['time_from'];
+      //$from_str .= 'T' . $form_state['values']['time_from'];
     }
     $from_str = str_replace('/', '-', $from_str);
     dpm('$from_str: ' . $from_str);
@@ -444,7 +444,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (!empty($form_state['values']['date_to'])) {
     $to_str = $form_state['values']['date_to'];
     if (!empty($form_state['values']['time_to'])) {
-      $to_str .= 'T' . $form_state['values']['time_to'];
+      //$to_str .= 'T' . $form_state['values']['time_to'];
     }
     $to_str = str_replace('/', '-', $to_str);
     dpm('$to_str: ' . $to_str);
