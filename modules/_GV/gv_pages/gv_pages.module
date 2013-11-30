@@ -176,7 +176,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   if ($from = @$_GET['date_from']) {
     $from_date_str = date('d\/m\/y', $from);
     $from_time_str = date('H:i:s', $from);
-    if ($from_date_str == '00:00:00') {
+    if ($from_time_str == '00:00:00') {
       $from_date_str = NULL;
     }
     dpm($from_date_str);
@@ -185,7 +185,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   if ($to = @$_GET['date_to']) {
     $to_date_str = date('d\/m\/y', $to);
     $to_time_str = date('H:i:s', $to);
-    if ($to_date_str == '00:00:00') {
+    if ($to_time_str == '00:00:00') {
       $to_date_str = NULL;
     }
     dpm($to_date_str);
