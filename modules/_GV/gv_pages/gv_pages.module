@@ -282,6 +282,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#attributes' =>  array('class' =>array('provider'), 'onChange' => array('javascript:this.form.submit();')),
   );
   
+  $form['header-block']['include_logged_in'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Include logged in',
+    '#default_value' => $include_logged_in,
+    '#attributes' =>  array('class' =>array('include_logged_in'), 'onChange' => array('javascript:this.form.submit();')),
+  );
+  
   
   $form['header-block']['from'] = array(
     '#type' => 'container',
