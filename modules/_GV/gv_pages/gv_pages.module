@@ -391,6 +391,10 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $get['provider'] = $form_state['values']['provider'];
   }
   
+  if (!empty($form_state['values']['date_from'])) {
+    dpm(strtotime($form_state['values']['date_from']));
+  }
+  
   drupal_goto($_GET['q'], array('query' => $get));
 }
 
