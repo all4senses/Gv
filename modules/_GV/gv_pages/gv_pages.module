@@ -405,6 +405,9 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
       $from_str .= $from_str . 'T' . $form_state['values']['time_from'];
       dpm(strtotime($form_state['values']['time_from']));
     }
+    
+    $from_str = str_replace('/', '-', $from_str);
+    dpm($from_str);
     dpm(strtotime($from_str));
     $get['date_from'] = strtotime($from_str);
   }
