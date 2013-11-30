@@ -425,9 +425,6 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     
   }  
   
-  if ($get['date_to'] < $get['date_from']) {
-    unset($get['date_to'])
-  }
   drupal_goto($_GET['q'], array('query' => $get));
 }
 
