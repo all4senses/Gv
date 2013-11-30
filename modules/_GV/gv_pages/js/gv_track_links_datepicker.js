@@ -15,7 +15,7 @@
           showWeek: true,
           firstDay: 1,
           showAnim: 'slideDown',
-          showButtonPanel: true,
+          //showButtonPanel: true,
           formatDate: 'yy-mm-dd',
           onClose: function( selectedDate ) {
             $( "#edit-date-to" ).datepicker( "option", "minDate", selectedDate );
