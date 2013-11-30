@@ -437,7 +437,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $from_str = str_replace('/', '-', $from_str);
     $get['date_from'] = strtotime($from_str);
     
-    //dpm(date('D, d M Y H:i:s', $get['date_from']));
+    dpm(date('D, d M Y H:i:s', $get['date_from']));
   }
 
   if (!empty($form_state['values']['date_to'])) {
@@ -448,13 +448,15 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $from_str = str_replace('/', '-', $from_str);
     $get['date_to'] = strtotime($from_str);
     
-    //dpm(date('D, d M Y H:i:s', $get['date_to']));
+    dpm(date('D, d M Y H:i:s', $get['date_to']));
     if (!empty($get['date_from']) && $get['date_from'] > $get['date_to']) {
       unset($get['date_to']);
       drupal_set_message('Wrong Date-To value! It can\'t be less than Date-From! So the wrong Date-To date has been excluded.', 'error');
     }
     
   }  
+  
+  dpm($get);
   
   drupal_goto($_GET['q'], array('query' => $get));
 }
