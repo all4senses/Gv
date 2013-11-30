@@ -214,6 +214,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
   }
   
+  if ($from) {
+    $query->condition('timestamp', $from, '>=');
+  }
+  if ($to) {
+    $query->condition('timestamp', $to, '<=');
+  }
+  
   $results = 
     $query
       ->orderBy($sort, $order)
