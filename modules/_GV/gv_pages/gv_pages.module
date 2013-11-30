@@ -165,6 +165,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $filter_by_db = array('provider_link' => array('type', 'provider_link'), 'video_click' => array('type', 'video_click'), 'all' => NULL);
   $current_filter = isset($filter_by[@$_GET['filter']]) ? $_GET['filter'] : 'all';
   
+  
+  $included_logged_in = !empty($filter_by[@$_GET['included_logged_in']]) ? $_GET['included_logged_in'] : NULL;
+  
+  
   $providers['_none'] = '- All providers -';
   //gv_misc_getProviders($providers);
   gv_misc_getProvidersKeyedByName($providers);
@@ -229,6 +233,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   }
   if ($to) {
     $query->condition('timestamp', $to, '<=');
+  }
+  
+  if (!$included_logged_in) {
+    $query->isNull('uname');
   }
   
   $results = 
