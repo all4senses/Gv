@@ -9730,3 +9730,48 @@ function gv_misc_filter_url_onlywebaddresses_trim($text, $length = NULL) {
 function gv_misc_filter_url_onlywebaddresses_tips($filter, $format, $long = FALSE) {
   return t('Web page addresses (BUT NO e-mail addresses) turn into links automatically.');
 }
+
+
+class GvPager extends PagerDefault {
+
+  /**
+   * Overrides PagerDefault::execute().
+   */
+  public function execute() {
+    // Add convenience tag to mark that this is an extended query. We have to
+    // do this in the constructor to ensure that it is set before preExecute()
+    // gets called.
+    if (!$this->preExecute($this)) {
+      return NULL;
+    }
+
+    // A NULL limit is the "kill switch" for pager queries.
+    if (empty($this->limit)) {
+      return;
+    }
+    $this->ensureElement();
+
+    // Get the total items from our new statically cached function.
+    $total_items = $this->getTotalItemCount();
+
+    $current_page = pager_default_initialize($total_items, $this->limit, $this->element);
+    $this->range($current_page * $this->limit, $this->limit);
+
+    // Now that we've added our pager-based range instructions, run the query normally.
+    return $this->query->execute();
+  }
+
+  /**
+   * Cache the results of PagerDefault::getCountQuery().
+   */
+  public function getTotalItemCount() {
+    static $total_items = NULL;
+
+    if ($total_items === NULL) {
+      $total_items = $this->getCountQuery()->execute()->fetchField();
+    }
+
+    return $total_items;
+  }
+
+}

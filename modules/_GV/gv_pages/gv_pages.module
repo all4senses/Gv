@@ -200,7 +200,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   }
   
   
-  $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
+  //$query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
+  $query = db_select('gv_track_links', 'tl')->extend('GvPager');
+  
   $query->fields('tl');
   
   
@@ -235,6 +237,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       ->limit(20)
       ->execute();
   
+  $total_items = $query->getTotalItemCount();
+  dpm('Total results count: ' . $total_items);
   
   $filter_temp_get = $_GET;
   unset($filter_temp_get['q']);
