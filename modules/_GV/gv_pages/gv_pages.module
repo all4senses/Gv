@@ -232,11 +232,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       $form['header-block']['from']['date_from'] = array(
         '#type' => 'textfield',
         '#title' => 'Date from:',
+        '#description' => 'mm/dd/yyyy',
         '#default_value' => NULL,
       );
       $form['header-block']['from']['time_from'] = array(
         '#type' => 'textfield',
         '#title' => 'Time from:',
+        '#description' => '00:00:00',
         '#default_value' => NULL,
       );
   $form['header-block']['to'] = array(
@@ -245,11 +247,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       $form['header-block']['to']['date_to'] = array(
         '#type' => 'textfield',
         '#title' => 'Date to:',
+        '#description' => 'mm/dd/yyyy',
         '#default_value' => NULL,
       );
       $form['header-block']['to']['time_to'] = array(
         '#type' => 'textfield',
         '#title' => 'Time to:',
+        '#description' => '00:00:00',
         '#default_value' => NULL,
       );
     
