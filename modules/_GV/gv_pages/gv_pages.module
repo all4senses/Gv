@@ -385,6 +385,13 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (isset($get['provider'])) {
     unset($get['provider']);
   }
+  if (isset($get['date_from'])) {
+    unset($get['date_from']);
+  }
+  if (isset($get['date_to'])) {
+    unset($get['date_to']);
+  }
+  
   $get['filter'] = $form_state['values']['filter'];
   
   if ($form_state['values']['provider'] != '_none' && $form_state['values']['provider'] != '') {
@@ -394,9 +401,10 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (!empty($form_state['values']['date_from'])) {
     $from_str = $form_state['values']['date_from'];
     if (!empty($form_state['values']['time_from'])) {
-      $from_str .= $form_state['values']['date_from'] . ' ' . $form_state['values']['time_from'];
+      $from_str .= $from_str . ' ' . $form_state['values']['time_from'];
     }
     dpm(strtotime($from_str));
+    $get['date_from'] = strtotime($from_str);
   }
   
   drupal_goto($_GET['q'], array('query' => $get));
