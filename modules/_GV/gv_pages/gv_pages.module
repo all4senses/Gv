@@ -192,10 +192,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     //dpm($to_time_str);
   }
   
-  if (!$from_time_str && $to_time_str) {
+  if (!$from_time_str && $from_date_str && $to_date_str && $to_time_str) {
     $from_time_str = '00:00:00';
   }
-  elseif (!$to_time_str && $from_time_str) {
+  elseif (!$to_time_str && $to_date_str && $from_date_str && $from_time_str) {
     $to_time_str = '00:00:00';
   }
   
