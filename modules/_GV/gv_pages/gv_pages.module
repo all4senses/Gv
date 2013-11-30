@@ -410,6 +410,8 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     dpm($from_str);
     dpm(strtotime($from_str));
     $get['date_from'] = strtotime($from_str);
+    
+    dpm(date('D, d M Y H:i:s', $get['date_from']));
   }
   
   drupal_goto($_GET['q'], array('query' => $get));
