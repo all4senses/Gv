@@ -9732,6 +9732,20 @@ function gv_misc_filter_url_onlywebaddresses_tips($filter, $format, $long = FALS
 }
 
 
+
+/**
+ * Adding possibility to get total results count from a paged query without qeriing it again without pager.
+ * 
+ * http://drupal.stackexchange.com/questions/80381/can-we-get-full-count-of-results-from-a-query-that-is-extended-by-pagerdefault
+ * 
+ * Example of call:
+ * 
+ * $query = db_select('gv_track_links', 'tl')->extend('GvPager'); // Instead of $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
+ * ...
+ * $results = $query->orderBy($sort, $order)->limit(20)->execute();
+ * $total_items = $query->getTotalItemCount();
+ */
+// 
 class GvPager extends PagerDefault {
 
   /**
