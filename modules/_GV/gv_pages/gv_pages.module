@@ -172,6 +172,17 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   //dpm($_GET);
   $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
   
+  
+  if ($from = @$_GET['date_from']) {
+    $from_date_str = date('d\/m\/y', $from);
+    $from_time_str = date('H:i:s', $from);
+    if ($from_date_str == '00:00:00') {
+      $from_date_str = NULL;
+    }
+    dpm($from_date_str);
+    dpm($from_time_str);
+  }
+  
   $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
   $query->fields('tl');
   
