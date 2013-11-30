@@ -240,9 +240,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   if (!$include_logged_in) {
     //$query->isNull('uname');
     
-    $or = db_or()->condition('uname', '')
-                   ->isNull('uname');
-    $query->condition($or);
+//    $or = db_or()->condition('uname', '')
+//                   ->isNull('uname');
+//    $query->condition($or);
+    $query->condition('uname', '', '!=')
+                   ->isNotNull('uname');
+    
   }
   
   $results = 
