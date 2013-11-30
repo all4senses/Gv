@@ -172,7 +172,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   //dpm($_GET);
   $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
   
-  
+  $from_date_str = $from_time_str = NULL;
   if ($from = @$_GET['date_from']) {
     $from_date_str = date('d\/m\/y', $from);
     $from_time_str = date('H:i:s', $from);
@@ -244,13 +244,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         '#type' => 'textfield',
         '#title' => 'Date from:',
         '#description' => 'mm/dd/yyyy',
-        '#default_value' => NULL,
+        '#default_value' => $from_date_str,
       );
       $form['header-block']['from']['time_from'] = array(
         '#type' => 'textfield',
         '#title' => 'Time from:',
         '#description' => '00:00:00',
-        '#default_value' => NULL,
+        '#default_value' => $from_time_str,
       );
   $form['header-block']['to'] = array(
     '#type' => 'container',
