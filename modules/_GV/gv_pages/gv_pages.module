@@ -400,20 +400,25 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   
   if (!empty($form_state['values']['date_from'])) {
     $from_str = $form_state['values']['date_from'];
-    dpm(strtotime($from_str));
     if (!empty($form_state['values']['time_from'])) {
       $from_str .= 'T' . $form_state['values']['time_from'];
-      dpm(strtotime($form_state['values']['time_from']));
     }
-    
     $from_str = str_replace('/', '-', $from_str);
-    dpm($from_str);
-    dpm(strtotime($from_str));
     $get['date_from'] = strtotime($from_str);
     
     dpm(date('D, d M Y H:i:s', $get['date_from']));
   }
-  
+
+  if (!empty($form_state['values']['date_to'])) {
+    $from_str = $form_state['values']['date_to'];
+    if (!empty($form_state['values']['time_to'])) {
+      $from_str .= 'T' . $form_state['values']['time_to'];
+    }
+    $from_str = str_replace('/', '-', $from_str);
+    $get['date_to'] = strtotime($from_str);
+    
+    dpm(date('D, d M Y H:i:s', $get['date_to']));
+  }  
   drupal_goto($_GET['q'], array('query' => $get));
 }
 
