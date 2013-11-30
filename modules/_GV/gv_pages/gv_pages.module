@@ -435,18 +435,20 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
       $from_str .= 'T' . $form_state['values']['time_from'];
     }
     $from_str = str_replace('/', '-', $from_str);
+    dpm($from_str);
     $get['date_from'] = strtotime($from_str);
     
     dpm(date('D, d M Y H:i:s', $get['date_from']));
   }
 
   if (!empty($form_state['values']['date_to'])) {
-    $from_str = $form_state['values']['date_to'];
+    $to_str = $form_state['values']['date_to'];
     if (!empty($form_state['values']['time_to'])) {
-      $from_str .= 'T' . $form_state['values']['time_to'];
+      $to_str .= 'T' . $form_state['values']['time_to'];
     }
-    $from_str = str_replace('/', '-', $from_str);
-    $get['date_to'] = strtotime($from_str);
+    $to_str = str_replace('/', '-', $to_str);
+    dpm($to_str);
+    $get['date_to'] = strtotime($to_str);
     
     dpm(date('D, d M Y H:i:s', $get['date_to']));
     if (!empty($get['date_from']) && $get['date_from'] > $get['date_to']) {
