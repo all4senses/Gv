@@ -166,7 +166,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $current_filter = isset($filter_by[@$_GET['filter']]) ? $_GET['filter'] : 'all';
   
   
-  $included_logged_in = !empty($filter_by[@$_GET['included_logged_in']]) ? $_GET['included_logged_in'] : NULL;
+  $include_logged_in = !empty($filter_by[@$_GET['include_logged_in']]) ? $_GET['include_logged_in'] : NULL;
   
   
   $providers['_none'] = '- All providers -';
@@ -235,7 +235,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     $query->condition('timestamp', $to, '<=');
   }
   
-  if (!$included_logged_in) {
+  if (!$include_logged_in) {
     $query->isNull('uname');
   }
   
