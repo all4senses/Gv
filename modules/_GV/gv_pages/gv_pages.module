@@ -179,8 +179,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     if ($from_time_str == '00:00:00') {
       $from_time_str = NULL;
     }
-    dpm($from_date_str);
-    dpm($from_time_str);
+    //dpm($from_date_str);
+    //dpm($from_time_str);
   }
   if ($to = @$_GET['date_to']) {
     $to_date_str = date('d\/m\/y', $to);
@@ -188,8 +188,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     if ($to_time_str == '00:00:00') {
       $to_time_str = NULL;
     }
-    dpm($to_date_str);
-    dpm($to_time_str);
+    //dpm($to_date_str);
+    //dpm($to_time_str);
   }
   
   $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
@@ -430,7 +430,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $from_str = str_replace('/', '-', $from_str);
     $get['date_from'] = strtotime($from_str);
     
-    dpm(date('D, d M Y H:i:s', $get['date_from']));
+    //dpm(date('D, d M Y H:i:s', $get['date_from']));
   }
 
   if (!empty($form_state['values']['date_to'])) {
@@ -441,7 +441,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $from_str = str_replace('/', '-', $from_str);
     $get['date_to'] = strtotime($from_str);
     
-    dpm(date('D, d M Y H:i:s', $get['date_to']));
+    //dpm(date('D, d M Y H:i:s', $get['date_to']));
     if (!empty($get['date_from']) && $get['date_from'] > $get['date_to']) {
       unset($get['date_to']);
       drupal_set_message('Wrong Date-To value! It can\'t be less than Date-From! So the wrong Date-To date has been excluded.', 'error');
