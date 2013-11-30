@@ -172,7 +172,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   //dpm($_GET);
   $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
   
-  $from_date_str = $from_time_str = NULL;
+  $from_date_str = $from_time_str = $to_date_str = $to_time_str = NULL;
   if ($from = @$_GET['date_from']) {
     $from_date_str = date('d\/m\/y', $from);
     $from_time_str = date('H:i:s', $from);
@@ -181,6 +181,15 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     }
     dpm($from_date_str);
     dpm($from_time_str);
+  }
+  if ($to = @$_GET['date_to']) {
+    $to_date_str = date('d\/m\/y', $to);
+    $to_time_str = date('H:i:s', $to);
+    if ($to_date_str == '00:00:00') {
+      $to_date_str = NULL;
+    }
+    dpm($to_date_str);
+    dpm($to_time_str);
   }
   
   $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
@@ -259,13 +268,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         '#type' => 'textfield',
         '#title' => 'Date to:',
         '#description' => 'mm/dd/yyyy',
-        '#default_value' => NULL,
+        '#default_value' => $to_date_str,
       );
       $form['header-block']['to']['time_to'] = array(
         '#type' => 'textfield',
         '#title' => 'Time to:',
         '#description' => '00:00:00',
-        '#default_value' => NULL,
+        '#default_value' => $to_time_str,
       );
     
   
