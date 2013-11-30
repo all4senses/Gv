@@ -418,7 +418,16 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $get['date_to'] = strtotime($from_str);
     
     dpm(date('D, d M Y H:i:s', $get['date_to']));
+    if (!empty($get['date_from']) && $get['date_from'] > $get['date_to']) {
+      unset($get['date_to']);
+      drupal_set_message('Wrong Date-To value! It can\'t be less than Date-From', 'error');
+    }
+    
   }  
+  
+  if ($get['date_to'] < $get['date_from']) {
+    unset($get['date_to'])
+  }
   drupal_goto($_GET['q'], array('query' => $get));
 }
 
