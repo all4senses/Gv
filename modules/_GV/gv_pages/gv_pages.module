@@ -401,7 +401,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (!empty($form_state['values']['date_from'])) {
     $from_str = $form_state['values']['date_from'];
     if (!empty($form_state['values']['time_from'])) {
-      $from_str .= $from_str . ' ' . $form_state['values']['time_from'];
+      $from_str .= $from_str . 'T' . $form_state['values']['time_from'];
     }
     dpm(strtotime($from_str));
     $get['date_from'] = strtotime($from_str);
