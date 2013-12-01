@@ -453,11 +453,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             </tr></thead><tbody>',
         );
 
-
+        $filter_temp_get['stat_type'] = 'full';
+        
         $providers = array();
         gv_misc_getProviders($providers);
+        unset($providers['_none']);
         //gv_misc_getProvidersKeyedByName($providers);
-        dpm($providers);
+        //dpm($providers);
         
         $tr_class = 'even';
         $count = 0;
@@ -502,19 +504,23 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $results = $query->execute();
           $total_items = $results->rowCount();
 
-
-
-          $form['nid_' . $p_nid . '_data'] = array(
+          $providers_clicks[$count] = array('p_nid' => $p_nid, 'name' => $selected_provider, 'clicks' => $total_items); 
+        }
+        
+        
+        foreach ($providers_clicks as $count => $selected_provider) {
+          
+          $form['nid_' . $selected_provider['p_nid'] . '_data'] = array(
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
               <td>' . $count . '</td>
-              <td class="name">' . $selected_provider . '</td>
-              <td>' . $total_items . '</td>',
+              <td class="name">' . $selected_provider['name'] . '</td>
+              <td>' . $selected_provider['clicks'] . '</td>',
           );
 
 
-          $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode($selected_provider));
+          $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode($selected_provider['name']));
 
-          $form['nid_' . $p_nid . '_op'] = array(
+          $form['nid_' . $selected_provider['p_nid'] . '_op'] = array(
             '#markup' => 
               '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
               '</tr>',
