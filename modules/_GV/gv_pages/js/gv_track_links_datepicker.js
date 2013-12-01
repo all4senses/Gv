@@ -42,6 +42,7 @@
         $( "#edit-set-timeframe" ).change(function(e) {
           console.log(e);
           console.log($(this));
+          console.log($(this).val());
         });
         
         console.log(Drupal.settings['gv_pages']);
