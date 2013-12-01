@@ -514,7 +514,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
           $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode($selected_provider));
 
-          $form['nid_' . $p_key . '_op'] = array(
+          $form['nid_' . $p_nid . '_op'] = array(
             '#markup' => 
               '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
               '</tr>',
