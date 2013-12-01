@@ -321,6 +321,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         '#default_value' => $to_time_str,
       );
     
+  $form['header-block']['set_timeframe'] = array(
+    '#type' => 'select',
+    '#title' => 'Set recent...',
+    '#default_value' => '',
+    '#options' => array('_none' => '', 'day' => 'day', 'week' => 'week', 'month' => 'month'),
+    '#attributes' =>  array('class' =>array('set_timeframe')),
+  );
   
   $form['header-block']['actions'] = array(
     '#type' => 'actions',
