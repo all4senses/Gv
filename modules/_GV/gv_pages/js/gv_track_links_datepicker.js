@@ -4,7 +4,7 @@
     attach: function (context, settings) {
 
         
-        console.log('Datepicker!');
+        //console.log('Datepicker!');
         
         $( "#edit-date-from" ).datepicker({
           defaultDate: "+1w",
