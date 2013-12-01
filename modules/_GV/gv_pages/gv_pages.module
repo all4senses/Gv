@@ -205,62 +205,19 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     $to_time_str = '00:00:00';
   }
   
-  
-  //$query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
-  $query = db_select('gv_track_links', 'tl')->extend('GvPager');
-  
-  $query->fields('tl');
-  
-  
-  if (@$filter_by_db[$current_filter]) {
-    $filter_field = $filter_by_db[$current_filter][0];
-    $filter_value = $filter_by_db[$current_filter][1];
-    if ($filter_field == 'type' && $filter_value == 'provider_link') {
-      // add an alias.
-      $or = db_or()->condition('type', 'provider_link')
-                   ->condition('type', 'provider');
-      $query->condition($or);
-    }
-    else {
-      $query->condition($filter_field, $filter_value);
-    }
-  }
-  
-  if ($selected_provider) {
-    $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
-  }
-  
-  if ($from) {
-    $query->condition('timestamp', $from, '>=');
-  }
-  if ($to) {
-    $query->condition('timestamp', $to, '<=');
-  }
-  
-  if (!$include_logged_in) {
-    //$query->isNull('uname');
-    
-    $or = db_or()->condition('uname', '')
-                   ->isNull('uname');
-    $query->condition($or);
-//    $query->condition('uname', '', '!=')
-//                   ->isNotNull('uname');
-    
-  }
-  
-  $results = 
-    $query
-      ->orderBy($sort, $order)
-      ->limit(20)
-      ->execute();
-  
-  $results = $query->orderBy($sort, $order)->limit(20)->execute();
-  
-  $total_items = $query->getTotalItemCount();
-  
   $filter_temp_get = $_GET;
   unset($filter_temp_get['q']);
+    
+  $statistics_types = array('full' => 'Full', 'per_provider' => 'Per provider');
+  $statistics_type = isset($statistics_types[@$_GET['stat_type']]) ? $_GET['stat_type'] : 'full'; 
   
+  $form['stat_type'] = array(
+    '#type' => 'radios',
+    '#title' => 'Statistics type:',
+    '#default_value' => $statistics_type,
+    '#options' => $statistics_types,
+    '#attributes' =>  array('class' =>array('statistics_type'), 'onClick' => array('javascript:this.form.submit();')),
+  );
   
   $form['header-block'] = array(
     '#type' => 'container',
@@ -338,6 +295,75 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#type' => 'submit',
     '#value' => 'Submit',
   ); 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Full statistics.
+  
+  
+  //$query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
+  $query = db_select('gv_track_links', 'tl')->extend('GvPager');
+  
+  $query->fields('tl');
+  
+  
+  if (@$filter_by_db[$current_filter]) {
+    $filter_field = $filter_by_db[$current_filter][0];
+    $filter_value = $filter_by_db[$current_filter][1];
+    if ($filter_field == 'type' && $filter_value == 'provider_link') {
+      // add an alias.
+      $or = db_or()->condition('type', 'provider_link')
+                   ->condition('type', 'provider');
+      $query->condition($or);
+    }
+    else {
+      $query->condition($filter_field, $filter_value);
+    }
+  }
+  
+  if ($selected_provider) {
+    $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
+  }
+  
+  if ($from) {
+    $query->condition('timestamp', $from, '>=');
+  }
+  if ($to) {
+    $query->condition('timestamp', $to, '<=');
+  }
+  
+  if (!$include_logged_in) {
+    //$query->isNull('uname');
+    
+    $or = db_or()->condition('uname', '')
+                   ->isNull('uname');
+    $query->condition($or);
+//    $query->condition('uname', '', '!=')
+//                   ->isNotNull('uname');
+    
+  }
+  
+  $results = 
+    $query
+      ->orderBy($sort, $order)
+      ->limit(20)
+      ->execute();
+  
+  $results = $query->orderBy($sort, $order)->limit(20)->execute();
+  
+  $total_items = $query->getTotalItemCount();
+  
+  
   
   $form['total_results'] = array(
     '#markup' => '<div class="total"><strong>Total results: </strong>' . $total_items . '</div>',
@@ -500,6 +526,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     unset($get['include_logged_in']);
   }
   
+  $get['stat_type'] = !empty($form_state['values']['stat_type']) ? $form_state['values']['stat_type'] : 'full';
   
   if (!empty($form_state['values']['include_logged_in'])) {
     $get['include_logged_in'] = 1;
