@@ -571,10 +571,24 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items); 
         }
         
-        uasort($providers_clicks, 'gv_misc_sortArrayByClicks');
+        switch ($url_sort) {
+          case 'object_name':
+            if ($url_order == 'DESC') {
+              uasort($providers_clicks, 'gv_misc_sortArrayByClicksReverse');
+            }
+            break;
+            
+          case 'clicks':
+            if ($url_order == 'ASC') {
+              uasort($providers_clicks, 'gv_misc_sortArrayByClicks');
+            }
+            else {
+              uasort($providers_clicks, 'gv_misc_sortArrayByClicksReverse');
+            }
+            break;
+        }
         
         $count = 0;
-        
         foreach ($providers_clicks as $p_nid => $selected_provider) {
           
           $count++;
