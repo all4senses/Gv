@@ -8195,6 +8195,46 @@ function wdg_misc_sortArrayByWeight($a, $b)
 }
 
 
+/**
+ * Helper function for sorting by weight with uasort function.
+ * 
+ * Example of using:
+ * 
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByСlicks');
+ */
+function gv_misc_sortArrayByClicks($a, $b) {
+  if ($a['clicks'] == $b['clicks']) {
+      return 0;
+  }
+  return ($a['clicks'] < $b['clicks']) ? -1 : 1;
+}
+function gv_misc_sortArrayByClicksReverse($a, $b) {
+  if ($a['clicks'] == $b['clicks']) {
+      return 0;
+  }
+  return ($a['clicks'] > $b['clicks']) ? -1 : 1;
+}
+
+
+/**
+ * Helper function for sorting by weight with uasort function.
+ * 
+ * Example of using:
+ * 
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByName');
+ */
+function gv_misc_sortArrayByName($a, $b) {
+  if ($a['name'] == $b['name']) {
+      return 0;
+  }
+  return ($a['name'] < $b['name']) ? -1 : 1;
+}
+function gv_misc_sortArrayByNameReverse($a, $b) {
+  if ($a['name'] == $b['name']) {
+      return 0;
+  }
+  return ($a['name'] > $b['name']) ? -1 : 1;
+}
 
 /**
  * Socialite social buttons.
