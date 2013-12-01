@@ -324,8 +324,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $form['header-block']['set_timeframe'] = array(
     '#type' => 'select',
     '#title' => 'Set timeframe',
+    '#description' => 'From now',
     '#default_value' => '',
-    '#options' => array('_none' => '', 'day' => 'day', 'week' => 'week', 'month' => 'month'),
+    '#options' => array('_none' => '', 'day' => '1 day', 'week' => '7 days', 'month' => '30 days'),
     '#attributes' =>  array('class' =>array('set_timeframe')),
   );
   
