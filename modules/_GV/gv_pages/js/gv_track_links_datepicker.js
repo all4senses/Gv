@@ -36,7 +36,9 @@
     
 //        $( "#edit-time-from" ).timepicker({ 'timeFormat': 'H:i:s' });
 //        $( "#edit-time-to" ).timepicker({ 'timeFormat': 'H:i:s' });
-    
+        
+        console.log(Drupal.settings['gv_pages']);
+        
     }
   };
 

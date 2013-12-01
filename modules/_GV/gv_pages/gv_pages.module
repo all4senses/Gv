@@ -415,7 +415,31 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $module_path = drupal_get_path('module', 'gv_pages');
   $form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
   $form['#attached']['js'][] = $module_path . '/js/gv_track_links_datepicker.js';
-//  
+  
+  $time_now = time();
+  $day = 60*60*24;
+  $week = day*7;
+  $week = day*30;
+  drupal_add_js(array('gv_pages' => array(
+    'date_day' => array(
+      'date_from' => date('m\/d\/Y', $time_now - $day),
+      'time_from' => date('H:i:s', $time_now - $day),
+      'date_to' => date('m\/d\/Y', $time_now),
+      'time_to' => date('H:i:s', $time_now),
+    ),
+    'date_week' => array(
+      'date_from' => date('m\/d\/Y', $time_now - $week),
+      'time_from' => date('H:i:s', $time_now - $week),
+      'date_to' => date('m\/d\/Y', $time_now),
+      'time_to' => date('H:i:s', $time_now),
+    ),
+    'date_month' => array(
+      'date_from' => date('m\/d\/Y', $time_now - $month),
+      'time_from' => date('H:i:s', $time_now - $month),
+      'date_to' => date('m\/d\/Y', $time_now),
+      'time_to' => date('H:i:s', $time_now),
+    ),
+  )), 'setting');  
 //  
 //  http://jonthornton.github.io/jquery-timepicker/
 //  $form['#attached']['css'][] = 'sites/all/libraries/jquery.plugins/timepicker/jquery.timepicker.css';
