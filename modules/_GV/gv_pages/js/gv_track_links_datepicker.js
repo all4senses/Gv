@@ -39,10 +39,15 @@
 //        $( "#edit-time-from" ).timepicker({ 'timeFormat': 'H:i:s' });
 //        $( "#edit-time-to" ).timepicker({ 'timeFormat': 'H:i:s' });
         
-        $( "#edit-set-timeframe" ).change(function(e) {
-          console.log(e);
+        $( "#edit-set-timeframe" ).change(function(event) {
+          console.log(event);
           console.log($(this));
           console.log($(this).val());
+          if (!event.preventDefault) {
+              event.preventDefault = function() {
+                  event.returnValue = false; //ie
+              };
+          }
         });
         
         console.log(Drupal.settings['gv_pages']);
