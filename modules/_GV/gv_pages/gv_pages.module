@@ -442,6 +442,31 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   } // End of if ($statistics_type == 'full') {
   elseif ($statistics_type == 'per_provider') {
 
+        $sort_options = array('object_name' => 'Provider', 'clicks' => 'Clicks');
+
+        $sort_exposed = '';
+        $order = 'DESC';
+        foreach($sort_options as $sort_option => $sort_title) {
+          $order_marker = '';
+          if ($sort_option == @$_GET['sort']) {
+            if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
+              $current_order = 'ASC';
+              $order = 'ASC';
+              $order_marker = '&darr;';
+            }
+            else {
+              $current_order = 'DESC';
+              $order = 'DESC';
+              $order_marker = '&uarr;';
+            }
+          }
+          else {
+            $current_order = 'DESC';
+          }
+          //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
+          $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . ' ' . $order_marker . '</a>';
+        }
+
     
         // Find out and print total clicks for all providers
         $query = db_select('gv_track_links', 'tl');
@@ -490,8 +515,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           '#markup' => 
             '<table class="views-table track-links"><thead><tr>
               <th>Num</th>
-              <th class="name">Provider</th>
-              <th>Clicks</th>
+              <th class="name">' . $sort_links['object_name'] . '</th>
+              <th>' . $sort_links['clicks'] . '</th>
               <th>Operations</th>
             </tr></thead><tbody>',
         );
