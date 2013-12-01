@@ -311,140 +311,147 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   
   // Full statistics.
+  if ($statistics_type == 'full') {
   
-  
-  //$query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
-  $query = db_select('gv_track_links', 'tl')->extend('GvPager');
-  
-  $query->fields('tl');
-  
-  
-  if (@$filter_by_db[$current_filter]) {
-    $filter_field = $filter_by_db[$current_filter][0];
-    $filter_value = $filter_by_db[$current_filter][1];
-    if ($filter_field == 'type' && $filter_value == 'provider_link') {
-      // add an alias.
-      $or = db_or()->condition('type', 'provider_link')
-                   ->condition('type', 'provider');
-      $query->condition($or);
-    }
-    else {
-      $query->condition($filter_field, $filter_value);
-    }
-  }
-  
-  if ($selected_provider) {
-    $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
-  }
-  
-  if ($from) {
-    $query->condition('timestamp', $from, '>=');
-  }
-  if ($to) {
-    $query->condition('timestamp', $to, '<=');
-  }
-  
-  if (!$include_logged_in) {
-    //$query->isNull('uname');
-    
-    $or = db_or()->condition('uname', '')
-                   ->isNull('uname');
-    $query->condition($or);
-//    $query->condition('uname', '', '!=')
-//                   ->isNotNull('uname');
-    
-  }
-  
-  $results = 
-    $query
-      ->orderBy($sort, $order)
-      ->limit(20)
-      ->execute();
-  
-  $results = $query->orderBy($sort, $order)->limit(20)->execute();
-  
-  $total_items = $query->getTotalItemCount();
-  
-  
-  
-  $form['total_results'] = array(
-    '#markup' => '<div class="total"><strong>Total results: </strong>' . $total_items . '</div>',
-  );
-  
-  $form['table_start'] = array(
-    '#type' => 'markup',
-    '#markup' => '<table class="views-table track-links"><thead><tr>
-        <th>Num</th>
-        <th class="date">' . $sort_links['timestamp'] . '</th>
-        <th>' . $sort_links['type'] . '</th>
-        <th class="name">' . $sort_links['object_name'] . '</th>
-        <th class="url">' . $sort_links['url'] . '</th>
-        <th class="referer">' . $sort_links['referer'] . '</th>
-        <th class="page">' . $sort_links['click_page'] . '</th>
-        <th>' . $sort_links['ip'] . '</th>
-        <th>' . $sort_links['uname'] . '</th>'
-       //.'<th class="data">Data</th>'
-       .'<th>Operations</th>
-      </tr></thead><tbody>',
-  );
-  
-  
-    
-  $tr_class = 'even';
-  foreach ($results as $key => $result) {
-    
-    $data = '';
-    $result_data = unserialize($result->data);
-    if (!empty($result_data)) {
-      foreach ($result_data as $title => $value) {
-        $data .= "<div>$title: $value</div>";
-      }
-    }
+        //$query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
+        $query = db_select('gv_track_links', 'tl')->extend('GvPager');
 
-    $form['item_' . ($key + 1) . 'a'] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
-        <td>' . ($key + 1) . '</td>
-        <td class="date">' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
-        <td>' . $result->type . '</td>
-        <td class="name">' . $result->object_name . '</td>
-        <td' . ($result->url ? ' class="url"' : '') . '>' . $result->url . '</td>
-        <td' . (($result->referer || !empty($result_data['referer'])) ? ' class="referer"' : '') . '>' . ($result->referer ? $result->referer : (!empty($result_data['referer']) ? $result_data['referer'] : '') ) . '</td>
-        <td' . (($result->click_page || !empty($result_data['click_on_page'])) ? ' class="page"' : '') . '>' . ($result->click_page ? $result->click_page : (!empty($result_data['click_on_page']) ? $result_data['click_on_page'] : '') ) . '</td>
-        <td>' . ($result->ip ? $result->ip : (!empty($result_data['user']['hostname']) ? $result_data['user']['hostname'] : '') ) . '</td>
-        <td>' . ($result->uname ? $result->uname : (!empty($result_data['user']['name']) ? $result_data['user']['name'] : '') ) . '</td>',
-    );
-    
-    
-    
-    
-//    $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $result->timestamp);
-//    unset($delete_url['q']);
-    
-    
-//    $filter_by_track_id_url = $_GET + array('op' => 'filter_by_track_id', 'track_id' => $result->track_id);
-//    unset($filter_by_track_id_url['q']);
-    
-    $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode(str_replace(' Video Review', '', $result->object_name)));
-    
-    $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => //'<td class="data">' . $data . '</td>' .
-        //'<td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td>' .
-        '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
-        '</tr>',
-    );
-  }
+        $query->fields('tl');
 
-  $form['table_close'] = array(
-    '#type' => 'markup',
-    '#markup' => '</tbody></table></div>',
-  );
+
+        if (@$filter_by_db[$current_filter]) {
+          $filter_field = $filter_by_db[$current_filter][0];
+          $filter_value = $filter_by_db[$current_filter][1];
+          if ($filter_field == 'type' && $filter_value == 'provider_link') {
+            // add an alias.
+            $or = db_or()->condition('type', 'provider_link')
+                        ->condition('type', 'provider');
+            $query->condition($or);
+          }
+          else {
+            $query->condition($filter_field, $filter_value);
+          }
+        }
+
+        if ($selected_provider) {
+          $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
+        }
+
+        if ($from) {
+          $query->condition('timestamp', $from, '>=');
+        }
+        if ($to) {
+          $query->condition('timestamp', $to, '<=');
+        }
+
+        if (!$include_logged_in) {
+          //$query->isNull('uname');
+
+          $or = db_or()->condition('uname', '')
+                        ->isNull('uname');
+          $query->condition($or);
+      //    $query->condition('uname', '', '!=')
+      //                   ->isNotNull('uname');
+
+        }
+
+        $results = 
+          $query
+            ->orderBy($sort, $order)
+            ->limit(20)
+            ->execute();
+
+        $results = $query->orderBy($sort, $order)->limit(20)->execute();
+
+        $total_items = $query->getTotalItemCount();
+
+
+
+        $form['total_results'] = array(
+          '#markup' => '<div class="total"><strong>Total results: </strong>' . $total_items . '</div>',
+        );
+
+        $form['table_start'] = array(
+          '#type' => 'markup',
+          '#markup' => '<table class="views-table track-links"><thead><tr>
+              <th>Num</th>
+              <th class="date">' . $sort_links['timestamp'] . '</th>
+              <th>' . $sort_links['type'] . '</th>
+              <th class="name">' . $sort_links['object_name'] . '</th>
+              <th class="url">' . $sort_links['url'] . '</th>
+              <th class="referer">' . $sort_links['referer'] . '</th>
+              <th class="page">' . $sort_links['click_page'] . '</th>
+              <th>' . $sort_links['ip'] . '</th>
+              <th>' . $sort_links['uname'] . '</th>'
+            //.'<th class="data">Data</th>'
+            .'<th>Operations</th>
+            </tr></thead><tbody>',
+        );
+
+
+
+        $tr_class = 'even';
+        foreach ($results as $key => $result) {
+
+          $data = '';
+          $result_data = unserialize($result->data);
+          if (!empty($result_data)) {
+            foreach ($result_data as $title => $value) {
+              $data .= "<div>$title: $value</div>";
+            }
+          }
+
+          $form['item_' . ($key + 1) . 'a'] = array(
+            '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
+              <td>' . ($key + 1) . '</td>
+              <td class="date">' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
+              <td>' . $result->type . '</td>
+              <td class="name">' . $result->object_name . '</td>
+              <td' . ($result->url ? ' class="url"' : '') . '>' . $result->url . '</td>
+              <td' . (($result->referer || !empty($result_data['referer'])) ? ' class="referer"' : '') . '>' . ($result->referer ? $result->referer : (!empty($result_data['referer']) ? $result_data['referer'] : '') ) . '</td>
+              <td' . (($result->click_page || !empty($result_data['click_on_page'])) ? ' class="page"' : '') . '>' . ($result->click_page ? $result->click_page : (!empty($result_data['click_on_page']) ? $result_data['click_on_page'] : '') ) . '</td>
+              <td>' . ($result->ip ? $result->ip : (!empty($result_data['user']['hostname']) ? $result_data['user']['hostname'] : '') ) . '</td>
+              <td>' . ($result->uname ? $result->uname : (!empty($result_data['user']['name']) ? $result_data['user']['name'] : '') ) . '</td>',
+          );
+
+
+
+
+      //    $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $result->timestamp);
+      //    unset($delete_url['q']);
+
+
+      //    $filter_by_track_id_url = $_GET + array('op' => 'filter_by_track_id', 'track_id' => $result->track_id);
+      //    unset($filter_by_track_id_url['q']);
+
+          $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode(str_replace(' Video Review', '', $result->object_name)));
+
+          $form['item_' . ($key + 1) . 'c'] = array(
+            '#markup' => //'<td class="data">' . $data . '</td>' .
+              //'<td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td>' .
+              '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
+              '</tr>',
+          );
+        }
+
+        $form['table_close'] = array(
+          '#type' => 'markup',
+          '#markup' => '</tbody></table></div>',
+        );
+
+        $form['pager'] = array(
+          '#theme' => 'pager',
+          //'#weight' => 5,
+        );
   
-  $form['pager'] = array(
-    '#theme' => 'pager',
-    //'#weight' => 5,
-  );
+  } // End of if ($statistics_type == 'full') {
+  elseif ($statistics_type == 'per_provider') {
+    
+  }
   
-  
+
+
+
   
   // Datepicker.
 
