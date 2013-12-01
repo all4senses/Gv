@@ -442,13 +442,56 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   } // End of if ($statistics_type == 'full') {
   elseif ($statistics_type == 'per_provider') {
 
+    
+        // Find out and print total clicks for all providers
+        $query = db_select('gv_track_links', 'tl');
+        $query->fields('tl', array('track_id'));
+
+        if (@$filter_by_db[$current_filter]) {
+          $filter_field = $filter_by_db[$current_filter][0];
+          $filter_value = $filter_by_db[$current_filter][1];
+          if ($filter_field == 'type' && $filter_value == 'provider_link') {
+            // add an alias.
+            $or = db_or()->condition('type', 'provider_link')
+                        ->condition('type', 'provider');
+            $query->condition($or);
+          }
+          else {
+            $query->condition($filter_field, $filter_value);
+          }
+        }
+
+        if ($from) {
+          $query->condition('timestamp', $from, '>=');
+        }
+        if ($to) {
+          $query->condition('timestamp', $to, '<=');
+        }
+
+        if (!$include_logged_in) {
+          $or = db_or()->condition('uname', '')
+                        ->isNull('uname');
+          $query->condition($or);
+        }
+
+        $results = $query->execute();
+        $total_items = $results->rowCount();
+
+    
+        $form['total_results'] = array(
+          '#markup' => '<div class="total"><strong>Total results: </strong>' . $total_items . '</div>',
+        );
+        
+        
+        // Clicks per provider.
+        
         $form['table_start'] = array(
           '#type' => 'markup',
           '#markup' => 
             '<table class="views-table track-links"><thead><tr>
               <th>Num</th>
               <th class="name">Provider</th>
-              <th>Total clicks</th>
+              <th>Clicks</th>
               <th>Operations</th>
             </tr></thead><tbody>',
         );
@@ -458,8 +501,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         $providers = array();
         gv_misc_getProviders($providers);
         unset($providers['_none']);
-        //gv_misc_getProvidersKeyedByName($providers);
-        //dpm($providers);
         
         $tr_class = 'even';
         
@@ -468,9 +509,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $query = db_select('gv_track_links', 'tl');
           $query->fields('tl', array('track_id'));
 
-          if ($selected_provider) {
-            $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
-          }
+          $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
 
           if (@$filter_by_db[$current_filter]) {
             $filter_field = $filter_by_db[$current_filter][0];
