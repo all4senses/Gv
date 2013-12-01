@@ -574,7 +574,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         switch ($url_sort) {
           case 'object_name':
             if ($url_order == 'DESC') {
-              uasort($providers_clicks, 'gv_misc_sortArrayByClicksReverse');
+              uasort($providers_clicks, 'gv_misc_sortArrayByNameReverse');
             }
             break;
             
