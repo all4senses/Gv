@@ -459,11 +459,20 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (isset($get['provider'])) {
     unset($get['provider']);
   }
+  
   if (isset($get['date_from'])) {
     unset($get['date_from']);
   }
   if (isset($get['date_to'])) {
     unset($get['date_to']);
+  }
+  if (isset($get['include_logged_in'])) {
+    unset($get['include_logged_in']);
+  }
+  
+  
+  if (!empty($form_state['values']['include_logged_in'])) {
+    $get['include_logged_in'] = 1;
   }
   
   $get['filter'] = $form_state['values']['filter'];
