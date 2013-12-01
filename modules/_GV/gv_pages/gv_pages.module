@@ -536,7 +536,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   
   $get['filter'] = $form_state['values']['filter'];
   
-  if ($form_state['values']['provider'] != '_none' && $form_state['values']['provider'] != '') {
+  if (!empty($form_state['values']['provider']) && $form_state['values']['provider'] != '_none') {
     $get['provider'] = $form_state['values']['provider'];
   }
   
