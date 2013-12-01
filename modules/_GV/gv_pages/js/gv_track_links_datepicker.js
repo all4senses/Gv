@@ -40,14 +40,38 @@
 //        $( "#edit-time-to" ).timepicker({ 'timeFormat': 'H:i:s' });
         
         $( "#edit-set-timeframe" ).change(function(event) {
-          console.log(event);
-          console.log($(this));
-          console.log($(this).val());
-          if (!event.preventDefault) {
-              event.preventDefault = function() {
-                  event.returnValue = false; //ie
-              };
+          switch ($(this).val()) {
+            
+            case 'day':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_day']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_day']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to']['time']);
+              break;
+              
+            case 'week':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_week']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_week']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to']['time']);
+              break;
+            
+            case 'month':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_month']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_month']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to']['time']);
+              break;
+              
+            default:
+              $('#edit-date-from').val('');
+              $('#edit-time-from').val('');
+              $('#edit-date-to').val('');
+              $('#edit-time-to').val('');
+              break;
           }
+          console.log($(this).val());
+          
         });
         
         console.log(Drupal.settings['gv_pages']);
