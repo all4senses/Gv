@@ -168,15 +168,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   
   $include_logged_in = !empty($_GET['include_logged_in']) ? $_GET['include_logged_in'] : NULL;
-  //dpm($_GET);
-  //dpm()
-  
-  $providers['_none'] = '- All providers -';
-  //gv_misc_getProviders($providers);
-  gv_misc_getProvidersKeyedByName($providers);
-  //dpm($providers);
-  //dpm($_GET);
-  $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
   
   $from_date_str = $from_time_str = $to_date_str = $to_time_str = NULL;
   if ($from = @$_GET['date_from']) {
@@ -185,8 +176,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     if ($from_time_str == '00:00:00') {
       $from_time_str = NULL;
     }
-    //dpm($from_date_str);
-    //dpm($from_time_str);
   }
   if ($to = @$_GET['date_to']) {
     $to_date_str = date('m\/d\/Y', $to);
@@ -194,8 +183,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     if ($to_time_str == '00:00:00') {
       $to_time_str = NULL;
     }
-    //dpm($to_date_str);
-    //dpm($to_time_str);
   }
   
   if (!$from_time_str && $from_date_str && $to_date_str && $to_time_str) {
@@ -232,6 +219,14 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   );
 
   if ($statistics_type == 'full') {
+    
+    $providers['_none'] = '- All providers -';
+    //gv_misc_getProviders($providers);
+    gv_misc_getProvidersKeyedByName($providers);
+    //dpm($providers);
+    //dpm($_GET);
+    $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
+
     $form['header-block']['provider'] = array(
       '#type' => 'select',
       '#title' => 'Provider',
@@ -446,8 +441,92 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   } // End of if ($statistics_type == 'full') {
   elseif ($statistics_type == 'per_provider') {
-    
-  }
+
+        $form['table_start'] = array(
+          '#type' => 'markup',
+          '#markup' => 
+            '<table class="views-table track-links"><thead><tr>
+              <th>Num</th>
+              <th class="name">Provider</th>
+              <th>Total clicks</th>
+              <th>Operations</th>
+            </tr></thead><tbody>',
+        );
+
+
+        $providers = array();
+        gv_misc_getProviders($providers);
+        //gv_misc_getProvidersKeyedByName($providers);
+        dpm($providers);
+        
+        $tr_class = 'even';
+        $count = 0;
+        foreach ($providers as $p_nid => $selected_provider) {
+          
+          $count++;
+          
+          $query = db_select('gv_track_links', 'tl');
+          $query->fields('tl', array('track_id'));
+
+          if ($selected_provider) {
+            $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
+          }
+
+          if (@$filter_by_db[$current_filter]) {
+            $filter_field = $filter_by_db[$current_filter][0];
+            $filter_value = $filter_by_db[$current_filter][1];
+            if ($filter_field == 'type' && $filter_value == 'provider_link') {
+              // add an alias.
+              $or = db_or()->condition('type', 'provider_link')
+                          ->condition('type', 'provider');
+              $query->condition($or);
+            }
+            else {
+              $query->condition($filter_field, $filter_value);
+            }
+          }
+
+          if ($from) {
+            $query->condition('timestamp', $from, '>=');
+          }
+          if ($to) {
+            $query->condition('timestamp', $to, '<=');
+          }
+
+          if (!$include_logged_in) {
+            $or = db_or()->condition('uname', '')
+                          ->isNull('uname');
+            $query->condition($or);
+          }
+
+          $results = $query->execute();
+          $total_items = $results->rowCount();
+
+
+
+          $form['nid_' . $p_nid . '_data'] = array(
+            '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
+              <td>' . $count . '</td>
+              <td class="name">' . $selected_provider . '</td>
+              <td>' . $total_items . '</td>',
+          );
+
+
+          $filter_by_provider_name_url = $filter_temp_get + array('provider' => urlencode($selected_provider));
+
+          $form['nid_' . $p_key . '_op'] = array(
+            '#markup' => 
+              '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
+              '</tr>',
+          );
+        }
+
+        $form['table_close'] = array(
+          '#type' => 'markup',
+          '#markup' => '</tbody></table></div>',
+        );    
+        
+  } // End of elseif ($statistics_type == 'per_provider') {
   
 
 
