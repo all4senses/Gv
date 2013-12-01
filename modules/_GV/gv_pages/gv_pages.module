@@ -132,39 +132,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     }
   }
 
-              
-  $sort_options = array('timestamp' => 'Click date', 'type' => 'Object type', 'object_name' => 'Object name', 
-      'url' => 'Url', 'referer' => 'Referrer', 'click_page' => 'Click page', 'ip' => 'IP', 'uname' => 'User name');
   $start_url = $_SERVER['REDIRECT_URL'] . $query . ($query ? '&' : '?');
-  
-  $sort_exposed = '';
-  $order = 'DESC';
-  foreach($sort_options as $sort_option => $sort_title) {
-    $order_marker = '';
-    if ($sort_option == @$_GET['sort']) {
-      if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
-        $current_order = 'ASC';
-        $order = 'ASC';
-        $order_marker = '&darr;';
-      }
-      else {
-        $current_order = 'DESC';
-        $order = 'DESC';
-        $order_marker = '&uarr;';
-      }
-    }
-    else {
-      $current_order = 'DESC';
-    }
-    //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
-    $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . ' ' . $order_marker . '</a>';
-  }
-  
+              
   
   $filter_by = array('provider_link' => 'Provider link', 'video_click' => 'Video link', 'all' => 'Show all');
   $filter_by_db = array('provider_link' => array('type', 'provider_link'), 'video_click' => array('type', 'video_click'), 'all' => NULL);
   $current_filter = isset($filter_by[@$_GET['filter']]) ? $_GET['filter'] : 'all';
-  
   
   
   $include_logged_in = !empty($_GET['include_logged_in']) ? $_GET['include_logged_in'] : NULL;
@@ -305,8 +278,35 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   
   
-  // Full statistics.
-  if ($statistics_type == 'full') {
+    // Full statistics.
+    if ($statistics_type == 'full') {
+
+        $sort_options = array('timestamp' => 'Click date', 'type' => 'Object type', 'object_name' => 'Object name', 
+          'url' => 'Url', 'referer' => 'Referrer', 'click_page' => 'Click page', 'ip' => 'IP', 'uname' => 'User name');
+
+        $sort_exposed = '';
+        $order = 'DESC';
+        foreach($sort_options as $sort_option => $sort_title) {
+          $order_marker = '';
+          if ($sort_option == @$_GET['sort']) {
+            if (!@$_GET['order'] || $_GET['order'] == 'DESC') {
+              $current_order = 'ASC';
+              $order = 'ASC';
+              $order_marker = '&darr;';
+            }
+            else {
+              $current_order = 'DESC';
+              $order = 'DESC';
+              $order_marker = '&uarr;';
+            }
+          }
+          else {
+            $current_order = 'DESC';
+          }
+          //$sort_exposed .= ' | <a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . $order_marker . '</a>';
+          $sort_links[$sort_option] = '<a href="' . $start_url . 'sort=' . $sort_option . '&order=' . $current_order . '">' . $sort_title . ' ' . $order_marker . '</a>';
+        }
+
   
         //$query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
         $query = db_select('gv_track_links', 'tl')->extend('GvPager');
@@ -424,7 +424,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $form['item_' . ($key + 1) . 'c'] = array(
             '#markup' => //'<td class="data">' . $data . '</td>' .
               //'<td>' . l('Delete', $_GET['q'], array('query' => $delete_url)) . '</td>' .
-              '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
+              '<td>' . l('Full stat for this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
               '</tr>',
           );
         }
@@ -564,7 +564,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
           $form['nid_' . $p_nid . '_op'] = array(
             '#markup' => 
-              '<td>' . l('Filter by this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
+              '<td>' . l('Full stat for this provider', $_GET['q'], array('query' => $filter_by_provider_name_url)) . '</td>' .
               '</tr>',
           );
         }
