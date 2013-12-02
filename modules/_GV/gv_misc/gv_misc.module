@@ -967,7 +967,15 @@ function gv_misc_testPage() {
   $display_name = 'block_top_bu_cmp_wide';
   $view = views_get_view($view_name);
 
-  $items = $view->get_items('filter', $display_name);
+  $filters = $view->get_items('filter', $display_name);
+  $sps_filter = NULL;
+  foreach ($filters as $name => $data) {
+    if ($data['ui_name'] == 'sps') {
+      $sps_filter = $name;
+      break;
+    }
+  }
+  dpm('$sps_filter = ' . $sps_filter);
   dpm($items);
   dpm($view);
   
