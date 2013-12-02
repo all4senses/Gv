@@ -968,26 +968,32 @@ function gv_misc_testPage() {
   $view = views_get_view($view_name);
 
   $filters = $view->get_items('filter', $display_name);
+  dpm($filters);
+  dpm($view);
   $sps_filter = NULL;
   foreach ($filters as $name => $data) {
-    if ($data['ui_name'] == 'sps') {
+    if (@$data['ui_name'] == 'sps') {
       $sps_filter = $name;
       break;
     }
   }
+  if ($sps_filter) {
+    $view->set_item($display_name, 'filter', $sps_filter, NULL);
+  }
   dpm('$sps_filter = ' . $sps_filter);
-  dpm($items);
+  
+  
+  
+//  $viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => '$node->nid'));
+//  $view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
+  
+  $filters = $view->get_items('filter', $display_name);
+  dpm($filters);
   dpm($view);
   
-  $viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => '$node->nid'));
-  $view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
   
-  $items = $view->get_items('filter', $display_name);
-  dpm($items);
-  dpm($view);
-  
-  
-//  $results = $view->preview($display_name);
+$results = $view->preview($display_name);
+$out .= $results;
 //  dpm($view->result);
 //  dpm($view);
 
