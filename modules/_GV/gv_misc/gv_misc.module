@@ -7742,6 +7742,18 @@ function gv_misc_getProviderQuickData($target, $data) {
       return $out;
     
       
+      
+      
+    //Insert in Secondary Providers Section
+    case 'sps':
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      
+      return !empty($all_data_quick[$data['data']->nid][$data['service_type']]['sps']);
+        
+        
+        
+      
     // One of a provider options.
     case 'options':
       
