@@ -4962,6 +4962,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     // Save collected Features and FEES data from temporary fields to a excessive field for using it from views
     $p_data_quick[$service_type_short]['plan'] = isset($service['pti']) ? $service['pti'] : '';
     $p_data_quick[$service_type_short]['fl'] = isset($service['fl']) ? $service['fl'] : '';
+    $p_data_quick[$service_type_short]['sps'] = isset($service['sps']) ? $service['sps'] : '';
     
     // YouTube video ID
     if (isset($service['vr-y']) && $service['vr-y']) {
