@@ -945,7 +945,7 @@ function gv_misc_testPage() {
   }
   */
   
-  
+  /*
   $query = db_select('node', 'n');
   $query->join('field_data_field_extra_data', 'd', 'd.entity_id = n.nid');
   $query->fields('d', array('field_extra_data_value', 'entity_id'));
@@ -961,8 +961,19 @@ function gv_misc_testPage() {
   }
     
   dpm($articles_data);
+  */
   
-  
+  $view_name = 'providers'; 
+  $display_name = 'block_top_bu_cmp_wide';
+  $view = views_get_view($view_name);
+
+  dpm($view);
+  //$viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => $node->nid));
+  //$view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
+
+  $results = $view->preview($display_name);
+  dpm($view->result);
+  dpm($view);
 
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
