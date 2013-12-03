@@ -980,7 +980,7 @@ function gv_misc_testPage() {
   
   
   if ($sps_filter) {
-    $filters[$sps_filter]['php_filter'] = 'return gv_misc_getProviderQuickData("sps", array("data" => $data, "service_type" =>"bu"));';
+    $filters[$sps_filter]['php_filter'] = 'return !gv_misc_getProviderQuickData("sps", array("data" => $data, "service_type" =>"bu"));';
     
     //$view->set_item($display_name, "filter", $sps_filter, NULL); // Delete filter.
     $view->set_item($display_name, "filter", $sps_filter, $filters[$sps_filter]);
