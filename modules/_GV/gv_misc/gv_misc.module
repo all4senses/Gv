@@ -968,8 +968,8 @@ function gv_misc_testPage() {
   $view = views_get_view($view_name);
 
   $filters = $view->get_items('filter', $display_name);
-  dpm($filters);
-  dpm($view);
+  //dpm($filters);
+  //dpm($view);
   $sps_filter = NULL;
   foreach ($filters as $name => $data) {
     if (@$data['ui_name'] == 'sps') {
@@ -980,12 +980,13 @@ function gv_misc_testPage() {
   
   
   if ($sps_filter) {
-    $filters[$sps_filter]['php_filter'] = 'return !gv_misc_getProviderQuickData("sps", array("data" => $data, "service_type" =>"bu"));';
+    //$filters[$sps_filter]['php_filter'] = 'return !gv_misc_getProviderQuickData("sps", array("data" => $data, "service_type" =>"bu"));';
+    $filters[$sps_filter]['php_filter'] = str_replace(' gv_misc_getProviderQuickData("sps",', ' !gv_misc_getProviderQuickData("sps",', $filters);
     
     //$view->set_item($display_name, "filter", $sps_filter, NULL); // Delete filter.
     $view->set_item($display_name, "filter", $sps_filter, $filters[$sps_filter]);
   }
-  dpm('$sps_filter = ' . $sps_filter);
+  //dpm('$sps_filter = ' . $sps_filter);
   
   
   
@@ -994,7 +995,7 @@ function gv_misc_testPage() {
   
   $filters = $view->get_items('filter', $display_name);
   dpm($filters);
-  dpm($view);
+  //dpm($view);
   
   
 $results = $view->preview($display_name);
