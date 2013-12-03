@@ -968,41 +968,27 @@ function gv_misc_testPage() {
   $view = views_get_view($view_name);
 
   $filters = $view->get_items('filter', $display_name);
-  dpm($filters);
-  //dpm($view);
-  $sps_filter = NULL;
+  //dpm($filters);
+
   foreach ($filters as $name => $data) {
     if (@$data['ui_name'] == 'sps') {
-      $sps_filter = $name;
+
+      $filters[$name]['php_filter'] = str_replace(" gv_misc_getProviderQuickData('sps',", " !gv_misc_getProviderQuickData('sps',", $filters[$name]['php_filter']);
+    
+      //$view->set_item($display_name, "filter", $sps_filter, NULL); // Delete filter.
+      $view->set_item($display_name, "filter", $name, $filters[$name]);
+
+      //$filters = $view->get_items('filter', $display_name);
+      //dpm($filters);
+
+      $results = $view->preview($display_name);
+      $out .= $results;
+      //dpm($view->result);
       break;
     }
   }
   
   
-  if ($sps_filter) {
-    //$filters[$sps_filter]['php_filter'] = 'return !gv_misc_getProviderQuickData("sps", array("data" => $data, "service_type" =>"bu"));';
-    $filters[$sps_filter]['php_filter'] = str_replace(" gv_misc_getProviderQuickData('sps',", " !gv_misc_getProviderQuickData('sps',", $filters[$sps_filter]['php_filter']);
-    
-    //$view->set_item($display_name, "filter", $sps_filter, NULL); // Delete filter.
-    $view->set_item($display_name, "filter", $sps_filter, $filters[$sps_filter]);
-  }
-  //dpm('$sps_filter = ' . $sps_filter);
-  
-  
-  
-//  $viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => '$node->nid'));
-//  $view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
-  
-  $filters = $view->get_items('filter', $display_name);
-  dpm($filters);
-  //dpm($view);
-  
-  
-$results = $view->preview($display_name);
-$out .= $results;
-//  dpm($view->result);
-//  dpm($view);
-
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
