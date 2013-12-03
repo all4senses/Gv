@@ -968,7 +968,7 @@ function gv_misc_testPage() {
   $view = views_get_view($view_name);
 
   $filters = $view->get_items('filter', $display_name);
-  //dpm($filters);
+  dpm($filters);
   //dpm($view);
   $sps_filter = NULL;
   foreach ($filters as $name => $data) {
