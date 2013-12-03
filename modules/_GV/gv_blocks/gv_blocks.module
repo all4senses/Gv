@@ -880,15 +880,20 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_getSecondaryProvidersSectionBlock() {
   
-  dpm($_GET);
-  dpm($_SERVER);
+  //dpm($_GET);
+  //dpm($_SERVER);
   
-  $map_url_to_view_name = array(
-    'business' => 'block_top_bu_cmp_wide',
+  $map_url_to_viewsDisplay_name = array(
+    '/business' => 'block_top_bu_cmp_wide',
   );
+  
+  if (!isset($map_url_to_viewsDisplay_name[$_SERVER['REQUEST_URI']])) {
+    return NULL;
+  }
+  
   $chart_themed = NULL;
   $view_name = 'providers'; 
-  $display_name = 'block_top_bu_cmp_wide';
+  $display_name = $map_url_to_viewsDisplay_name[$_SERVER['REQUEST_URI']];
   $view = views_get_view($view_name);
 
   $filters = $view->get_items('filter', $display_name);
