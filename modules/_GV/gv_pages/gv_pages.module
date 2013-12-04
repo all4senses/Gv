@@ -256,7 +256,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#title' => 'Set timeframe',
     //'#description' => 'From now',
     '#default_value' => '',
-    '#options' => array('_none' => '', 'today' => 'Today', 'day' => '24h from now', 'week' => '7 days from now', 'month' => '30 days from now', 'this_month' => 'This month', 'last_month' => 'Last month', '_clear' => 'Clear...'),
+    '#options' => array('_none' => '', 'today' => 'Today', 'yesterday' => 'Yesterday', 'day' => '24h from now', 'week' => '7 days from now', 'month' => '30 days from now', 'this_month' => 'This month', 'last_month' => 'Last month', '_clear' => 'Clear...'),
     '#attributes' =>  array('class' =>array('set_timeframe')),
   );
   
@@ -272,6 +272,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     ),
      'from_today' => array(
       'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', time()))),
+      'time' => '00:00:00',
+    ),
+    'from_yesterday' => array(
+      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', strtotime('yesterday')))),
       'time' => '00:00:00',
     ),
     'from_day' => array(

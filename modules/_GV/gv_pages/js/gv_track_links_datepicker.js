@@ -48,11 +48,16 @@
               $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
               $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
-              
+            case 'yesterday':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_yesterday']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_yesterday']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['from_today']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['from_today']['time']);
+              break;  
             case 'day':
               $('#edit-date-from').val(Drupal.settings['gv_pages']['from_day']['date']);
               $('#edit-time-from').val(Drupal.settings['gv_pages']['from_day']['time']);
-              $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['from_today']['date']);
               $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
               
