@@ -247,15 +247,51 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         '#description' => '00:00:00',
         '#default_value' => $to_time_str,
       );
-    
+  
+      
+      
+      
   $form['header-block']['set_timeframe'] = array(
     '#type' => 'select',
     '#title' => 'Set timeframe',
-    '#description' => 'From now',
+    //'#description' => 'From now',
     '#default_value' => '',
-    '#options' => array('_none' => '', 'day' => '1 day', 'week' => '7 days', 'month' => '30 days', '_clear' => 'Clear...'),
+    '#options' => array('_none' => '', 'day' => '1 day from now', 'week' => '7 days from now', 'month' => '30 days from now', '_clear' => 'Clear...'),
     '#attributes' =>  array('class' =>array('set_timeframe')),
   );
+  
+  
+  $time_now = time();
+  $day = 60*60*24;
+  $week = $day*7;
+  $month = $day*30;
+  drupal_add_js(array('gv_pages' => array(
+    'to_now' => array(
+      'date' => date('m\/d\/Y', $time_now),
+      'time' => date('H:i:s', $time_now),
+    ),
+    'from_day' => array(
+      'date' => date('m\/d\/Y', $time_now - $day),
+      'time' => date('H:i:s', $time_now - $day),
+    ),
+    'from_week' => array(
+      'date' => date('m\/d\/Y', $time_now - $week),
+      'time' => date('H:i:s', $time_now - $week),
+    ),
+    'from_month' => array(
+      'date' => date('m\/d\/Y', $time_now - $month),
+      'time' => date('H:i:s', $time_now - $month),
+    ),
+    'from_this_month' => array(
+      'date' => date('m\/d\/Y', $time_now - $month),
+      'time' => date('H:i:s', $time_now - $month),
+    ),
+  )), 'setting');  
+  
+  
+  
+  
+  
   
   $form['header-block']['actions'] = array(
     '#type' => 'actions',
@@ -629,28 +665,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
   $form['#attached']['js'][] = $module_path . '/js/gv_track_links_datepicker.js';
   
-  $time_now = time();
-  $day = 60*60*24;
-  $week = $day*7;
-  $month = $day*30;
-  drupal_add_js(array('gv_pages' => array(
-    'to_now' => array(
-      'date' => date('m\/d\/Y', $time_now),
-      'time' => date('H:i:s', $time_now),
-    ),
-    'from_day' => array(
-      'date' => date('m\/d\/Y', $time_now - $day),
-      'time' => date('H:i:s', $time_now - $day),
-    ),
-    'from_week' => array(
-      'date' => date('m\/d\/Y', $time_now - $week),
-      'time' => date('H:i:s', $time_now - $week),
-    ),
-    'from_month' => array(
-      'date' => date('m\/d\/Y', $time_now - $month),
-      'time' => date('H:i:s', $time_now - $month),
-    ),
-  )), 'setting');  
 //  
 //  http://jonthornton.github.io/jquery-timepicker/
 //  $form['#attached']['css'][] = 'sites/all/libraries/jquery.plugins/timepicker/jquery.timepicker.css';

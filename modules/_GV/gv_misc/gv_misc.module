@@ -997,6 +997,13 @@ function gv_misc_testPage() {
   dpm('today: ' . date('m\/d\/Y H:i:s', strtotime('today')));
   dpm('last week: ' . date('m\/d\/Y H:i:s', strtotime('last week')));
   dpm('this month: ' . date('m\/d\/Y H:i:s', strtotime('this month')));
+  
+  dpm('this month: ' . date('m\/d\/Y H:i:s', strtotime(date('m\/01\/Y 00\:00\:00', time()))));
+  
+  
+  
+  
+  
   dpm('last month: ' . date('m\/d\/Y H:i:s', strtotime('last month')));
   dpm('last day: ' . date('m\/d\/Y H:i:s', strtotime('last day')));
   dpm('last 7 days: ' . date('m\/d\/Y H:i:s', strtotime('-7 days')));
