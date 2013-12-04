@@ -12,7 +12,7 @@
           changeYear: true,
           minDate: new Date(2013, 1, 1),
           maxDate: 'today',
-          showWeek: true,
+          //showWeek: true,
           firstDay: 1,
           showAnim: 'slideDown',
           //showButtonPanel: true,
@@ -28,7 +28,7 @@
           changeYear: true,
           minDate: new Date(2013, 1, 1),
           maxDate: 'today',
-          showWeek: true,
+          //showWeek: true,
           firstDay: 1
 //          ,
 //          onClose: function( selectedDate ) {
@@ -45,22 +45,22 @@
             case 'day':
               $('#edit-date-from').val(Drupal.settings['gv_pages']['from_day']['date']);
               $('#edit-time-from').val(Drupal.settings['gv_pages']['from_day']['time']);
-              $('#edit-date-to').val(Drupal.settings['gv_pages']['to']['date']);
-              $('#edit-time-to').val(Drupal.settings['gv_pages']['to']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
               
             case 'week':
               $('#edit-date-from').val(Drupal.settings['gv_pages']['from_week']['date']);
               $('#edit-time-from').val(Drupal.settings['gv_pages']['from_week']['time']);
-              $('#edit-date-to').val(Drupal.settings['gv_pages']['to']['date']);
-              $('#edit-time-to').val(Drupal.settings['gv_pages']['to']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
             
             case 'month':
               $('#edit-date-from').val(Drupal.settings['gv_pages']['from_month']['date']);
               $('#edit-time-from').val(Drupal.settings['gv_pages']['from_month']['time']);
-              $('#edit-date-to').val(Drupal.settings['gv_pages']['to']['date']);
-              $('#edit-time-to').val(Drupal.settings['gv_pages']['to']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
               
             default:

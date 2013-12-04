@@ -634,7 +634,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $week = $day*7;
   $month = $day*30;
   drupal_add_js(array('gv_pages' => array(
-    'to' => array(
+    'to_now' => array(
       'date' => date('m\/d\/Y', $time_now),
       'time' => date('H:i:s', $time_now),
     ),

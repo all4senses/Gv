@@ -963,6 +963,8 @@ function gv_misc_testPage() {
   dpm($articles_data);
   */
   
+  
+  /*
   $view_name = 'providers'; 
   $display_name = 'block_top_bu_cmp_wide';
   $view = views_get_view($view_name);
@@ -987,7 +989,16 @@ function gv_misc_testPage() {
       break;
     }
   }
+  */
   
+  dpm('Now: ' . date('m\/d\/Y H:i:s', 'now'));
+  dpm('yesterday: ' . date('m\/d\/Y H:i:s', 'yesterday'));
+  dpm('today: ' . date('m\/d\/Y H:i:s', 'today'));
+  dpm('last week: ' . date('m\/d\/Y H:i:s', 'last week'));
+  dpm('this month: ' . date('m\/d\/Y H:i:s', 'this month'));
+  dpm('last month: ' . date('m\/d\/Y H:i:s', 'last month'));
+  dpm('last day: ' . date('m\/d\/Y H:i:s', 'last day'));
+
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
