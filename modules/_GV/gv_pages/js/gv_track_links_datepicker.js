@@ -7,13 +7,13 @@
         //console.log('Datepicker!');
         
         $( "#edit-date-from" ).datepicker({
-          defaultDate: "+1w",
+          //defaultDate: "+1w",
           changeMonth: true,
           changeYear: true,
           minDate: new Date(2013, 1, 1),
           maxDate: 'today',
           //showWeek: true,
-          firstDay: 1,
+          //firstDay: 1,
           showAnim: 'slideDown',
           //showButtonPanel: true,
           formatDate: 'yy-mm-dd'
@@ -23,13 +23,13 @@
 //          }
         });
         $( "#edit-date-to" ).datepicker({
-          defaultDate: "+1w",
+          //defaultDate: "+1w",
           changeMonth: true,
           changeYear: true,
           minDate: new Date(2013, 1, 1),
           maxDate: 'today',
           //showWeek: true,
-          firstDay: 1
+          //firstDay: 1
 //          ,
 //          onClose: function( selectedDate ) {
 //            $( "#edit-date-from" ).datepicker( "option", "maxDate", selectedDate );
