@@ -992,13 +992,13 @@ function gv_misc_testPage() {
   */
   
   dpm('Time: ' . date('m\/d\/Y H:i:s', time()));
-  dpm('Now: ' . date('m\/d\/Y H:i:s', time('now')));
-  dpm('yesterday: ' . date('m\/d\/Y H:i:s', time('yesterday')));
-  dpm('today: ' . date('m\/d\/Y H:i:s', time('today')));
-  dpm('last week: ' . date('m\/d\/Y H:i:s', time('last week')));
-  dpm('this month: ' . date('m\/d\/Y H:i:s', time('this month')));
-  dpm('last month: ' . date('m\/d\/Y H:i:s', time('last month')));
-  dpm('last day: ' . date('m\/d\/Y H:i:s', time('last day')));
+  dpm('Now: ' . date('m\/d\/Y H:i:s', strtotime('now')));
+  dpm('yesterday: ' . date('m\/d\/Y H:i:s', strtotime('yesterday')));
+  dpm('today: ' . date('m\/d\/Y H:i:s', strtotime('today')));
+  dpm('last week: ' . date('m\/d\/Y H:i:s', strtotime('last week')));
+  dpm('this month: ' . date('m\/d\/Y H:i:s', strtotime('this month')));
+  dpm('last month: ' . date('m\/d\/Y H:i:s', strtotime('last month')));
+  dpm('last day: ' . date('m\/d\/Y H:i:s', strtotime('last day')));
 
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
