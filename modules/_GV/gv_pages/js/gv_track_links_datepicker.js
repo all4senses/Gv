@@ -70,6 +70,13 @@
               $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
               
+            case 'last_month':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_last_month']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_last_month']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['from_this_month']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['from_this_month']['time']);
+              break;
+              
             default:
               $('#edit-date-from').val('');
               $('#edit-time-from').val('');
