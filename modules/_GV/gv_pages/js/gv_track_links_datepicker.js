@@ -42,6 +42,13 @@
         $( "#edit-set-timeframe" ).change(function(event) {
           switch ($(this).val()) {
             
+            case 'today':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_today']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_today']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
+              break;
+              
             case 'day':
               $('#edit-date-from').val(Drupal.settings['gv_pages']['from_day']['date']);
               $('#edit-time-from').val(Drupal.settings['gv_pages']['from_day']['time']);
