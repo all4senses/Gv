@@ -62,6 +62,13 @@
               $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
               $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
               break;
+            
+            case 'this_month':
+              $('#edit-date-from').val(Drupal.settings['gv_pages']['from_this_month']['date']);
+              $('#edit-time-from').val(Drupal.settings['gv_pages']['from_this_month']['time']);
+              $('#edit-date-to').val(Drupal.settings['gv_pages']['to_now']['date']);
+              $('#edit-time-to').val(Drupal.settings['gv_pages']['to_now']['time']);
+              break;
               
             default:
               $('#edit-date-from').val('');
