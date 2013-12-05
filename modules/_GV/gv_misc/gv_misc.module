@@ -6626,32 +6626,6 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
           ->fields('pn', array('field_p_name_value')) 
           ->condition('n.type', 'provider')
           ->condition('n.status', 1); 
-    $result = $query->execute(); 
-
-    foreach($result as $provider) {
-      $providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
-    }
-
-    // Sort providers alphabetically.
-    //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
-    //asort($providers); 
-    natcasesort($providers);
-  }
-  elseif ($scope == 'all_by_service_type') {
-    $query = db_select('node', 'n');
-    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
-    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
-    $query->fields('n', array('nid', 'title'))  
-          ->fields('pt', array('field_p_types_value'))
-          ->fields('pn', array('field_p_name_value')) 
-          ->condition('n.type', 'provider')
-          ->condition('n.status', 1);
-    if (is_array($data)) {
-      $query->condition('pt.field_p_types_value', $data, 'IN');
-    }
-    else {
-      $query->condition('pt.field_p_types_value', $data);
-    }
     
     if ($cache_key == 'featured') {
       dpm('xxx');
@@ -6680,6 +6654,34 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
               ;
       $query->condition($or);
     }
+    
+    $result = $query->execute(); 
+
+    foreach($result as $provider) {
+      $providers[$provider->nid] = $provider->field_p_name_value;// . ' - ' . $provider->field_p_types_value; // = $provider->title;
+    }
+
+    // Sort providers alphabetically.
+    //SORT_NATURAL | SORT_FLAG_CASE   only for php from 5.4.0
+    //asort($providers); 
+    natcasesort($providers);
+  }
+  elseif ($scope == 'all_by_service_type') {
+    $query = db_select('node', 'n');
+    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = n.nid"); 
+    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
+    $query->fields('n', array('nid', 'title'))  
+          ->fields('pt', array('field_p_types_value'))
+          ->fields('pn', array('field_p_name_value')) 
+          ->condition('n.type', 'provider')
+          ->condition('n.status', 1);
+    if (is_array($data)) {
+      $query->condition('pt.field_p_types_value', $data, 'IN');
+    }
+    else {
+      $query->condition('pt.field_p_types_value', $data);
+    }
+    
     $result = $query->execute(); 
 
     foreach($result as $provider) {
