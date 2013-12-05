@@ -6596,12 +6596,12 @@ function gv_misc_getProvidersKeyedByName(&$providers, $scope = 'all', $data = NU
 /**
  * Returns all available providers aray with nid => title.
  */
-function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL) {
+function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_key = '', $only_featured = NULL) {
 
   
   
   global $language;
-  $cache_name = 'gv_provider_list_' . $scope . '_' . $language->language;
+  $cache_name = 'gv_provider_list_' . $scope . '_' . $language->language . $cache_key;
   
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {

@@ -128,8 +128,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
-          textSubmit : 'Get Quotes',// 'Submit & Get Quotes',
-          textNext: 'Get Quotes',//'Submit & Get Quotes',
+          textSubmit : 'Quote Me',// 'Submit & Get Quotes',
+          textNext: 'Quote Me',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
