@@ -261,8 +261,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       
   $form['header-block']['set_timeframe'] = array(
     '#type' => 'select',
-    '#title' => 'Set timeframe',
-    //'#description' => 'From now',
+    '#title' => 'Timeframe',
+    '#description' => 'Presets',
     '#default_value' => '',
     '#options' => array('_none' => '', 'today' => 'Today', 'yesterday' => 'Yesterday', 'day' => '24h from now', 'week' => '7 days from now', 'month' => '30 days from now', 'this_month' => 'This month', 'last_month' => 'Last month', '_clear' => 'Clear...'),
     '#attributes' =>  array('class' =>array('set_timeframe')),
