@@ -166,8 +166,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'Submit & Get Quotes',
-          textNext: 'Submit & Get Quotes',
+          textSubmit : 'Get My Free Quote',// 'Submit & Get Quotes',
+          textNext: 'Get My Free Quote',// 'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
