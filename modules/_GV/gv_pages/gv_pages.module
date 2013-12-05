@@ -195,6 +195,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     
     $providers['_none'] = '- All providers -';
     //gv_misc_getProviders($providers);
+    // function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_key = '', $only_featured = NULL, $no_cache = FALSE) {
     gv_misc_getProvidersKeyedByName($providers);
     //dpm($providers);
     //dpm($_GET);
@@ -209,6 +210,13 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     );
   }
   
+  $form['header-block']['only_featured'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Only Featured',
+    '#default_value' => NULL,//$include_logged_in,
+    '#disabled' => TRUE,
+    '#attributes' =>  array('class' =>array('only_featured'), 'onChange' => array('javascript:this.form.submit();')),
+  );
   $form['header-block']['include_logged_in'] = array(
     '#type' => 'checkbox',
     '#title' => 'Include logged in',

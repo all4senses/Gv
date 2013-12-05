@@ -6628,8 +6628,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
           ->condition('n.status', 1); 
     
     if ($cache_key == 'featured') {
-      dpm('xxx');
-      //$query->condition('pt.field_p_types_value', $data);
+      // Get only featured providers.
       $query->leftJoin('field_data_field_p_erating', 'er_bu', "er_bu.entity_id = n.nid");
       $query->leftJoin('field_data_field_p_erating_smbv', 'er_smbv', "er_smbv.entity_id = n.nid");
       $query->leftJoin('field_data_field_p_erating_residential', 'er_re', "er_re.entity_id = n.nid");
