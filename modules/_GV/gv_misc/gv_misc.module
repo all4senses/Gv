@@ -6596,19 +6596,20 @@ function gv_misc_getProvidersKeyedByName(&$providers, $scope = 'all', $data = NU
 /**
  * Returns all available providers aray with nid => title.
  */
-function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_key = '', $only_featured = NULL) {
+function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_key = '', $only_featured = NULL, $no_cache = FALSE) {
 
   
   
   global $language;
   $cache_name = 'gv_provider_list_' . $scope . '_' . $language->language . $cache_key;
   
-  $cache_content = cache_get($cache_name);
-  if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
-    $providers += $cache_content->data;
-    return;
+  if (!$no_cache) {
+    $cache_content = cache_get($cache_name);
+    if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+      $providers += $cache_content->data;
+      return;
+    }
   }
-  
   //dpm('plist no cache');
   
   
@@ -6646,6 +6647,33 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
     else {
       $query->condition('pt.field_p_types_value', $data);
     }
+    
+    if ($cache_key == 'featured') {
+      //$query->condition('pt.field_p_types_value', $data);
+      $query->leftJoin('field_data_field_p_erating', 'er_bu', "er_bu.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_smbv', 'er_smbv', "er_smbv.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_residential', 'er_re', "er_re.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_sip', 'er_sip', "er_sip.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_pbx', 'er_pbx', "er_pbx.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_mo', 'er_mo', "er_mo.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_ifa', 'er_ifa', "er_ifa.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_cc', 'er_cc', "er_cc.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_bu_ca', 'er_bu_ca', "er_bu_ca.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_re_ca', 'er_re_ca', "er_re_ca.entity_id = n.nid");
+      
+      $or = db_or()->isNotNull('field_p_erating_value')
+                   ->isNotNull('field_p_erating_smbv_value')
+                   ->isNotNull('field_p_erating_residential_value')
+                   ->isNotNull('field_p_erating_sip_value')
+                   ->isNotNull('field_p_erating_pbx_value')
+                   ->isNotNull('field_p_erating_mo_value')
+                   ->isNotNull('field_p_erating_ifa_value')
+                   ->isNotNull('field_p_erating_cc_value')
+                   ->isNotNull('field_p_erating_bu_ca_value')
+                   ->isNotNull('field_p_erating_re_ca_value')
+              ;
+      $query->condition($or);
+    }
     $result = $query->execute(); 
 
     foreach($result as $provider) {
@@ -6671,7 +6699,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
     natcasesort($providers);
   }
 
-  if (count($providers)> 3) {
+  if (!$no_cache && count($providers)> 3) {
     cache_set($cache_name, $providers, 'cache', time() + 14400);
   }
 }
