@@ -271,7 +271,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       'time' => date('H:i:s', $time_now),
     ),
      'from_today' => array(
-      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', time()))),
+      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', $time_now))),
       'time' => '00:00:00',
     ),
     'from_yesterday' => array(
@@ -291,7 +291,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
       'time' => date('H:i:s', $time_now - $month),
     ),
     'from_this_month' => array(
-      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', time()))),
+      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', $time_now))),
       'time' => '00:00:00',
     ),
     'from_last_month' => array(
