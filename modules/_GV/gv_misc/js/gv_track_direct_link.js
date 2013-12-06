@@ -4,11 +4,11 @@
     attach: function (context, settings) {
        
        
-       // GV track click video link.
+       // GV track provider direct link.
        
        $(".direct-link").click(function(){
          
-         //console.log('click');
+         console.log('direct link click');
          //console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
 
@@ -16,7 +16,7 @@
             
                 url: '/click', 
                 data: {
-                        type: 'direct_link_click',
+                        type: 'provider',
                         oid: $(this).attr('id'),
                         click_page: window.location.href,
                         url: $(this).attr('href'),

@@ -1798,9 +1798,9 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   //dpm($provider_data_quick);
   
   if ($provider_data_quick && $service_type && !empty($provider_data_quick[$service_type]['fl'])) {
-    dpm($provider_data_quick);
+    //dpm($provider_data_quick);
     //gv_misc_loadTrackingHandlerForDirectLinks();
-    return $trackingUrl = '<a class="direct-link" href="' . $provider_data_quick['i_web'] . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : '' /*' rel="nofollow"'*/) . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
+    return $trackingUrl = '<a id="oid' . $nid . '" class="direct-link" href="' . $provider_data_quick['i_web'] . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : '' /*' rel="nofollow"'*/) . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
   }
   elseif ($subpath) {
     $subpath = str_replace('reviews/', '', $subpath);
