@@ -5,7 +5,7 @@
        
        
        // GV track provider direct link.
-       
+       alert('.');
        $(".direct-link").click(function(){
          
          console.log('direct link click');
