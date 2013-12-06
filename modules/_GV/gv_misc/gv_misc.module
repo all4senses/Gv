@@ -7681,12 +7681,13 @@ function gv_misc_getProviderQuickData($target, $data) {
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
       $out = NULL;
-     
+     /*
       if (!empty($all_data_quick[$data['data']->nid]['i_phone'])) {
         //$out .= '<div class="phone"><div class="title">Call</div><div itemprop="telephone"><a href="callto:' . (strpos($all_data_quick[$data['data']->nid]['i_phone'], '+') !== FALSE ? '' : '+1') . (str_replace(array(' ', '(', ')', '-'), '', strip_tags($all_data_quick[$data['data']->nid]['i_phone']))) . '">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</a></div></div>';
         //$out .= '<div class="phone"><div class="title">Call Toll Free</div><div itemprop="telephone">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</div></div>';
         $out .= '<div class="phone" itemprop="telephone">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</div>';
       }
+      */
       if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
         $out .= gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
       }
