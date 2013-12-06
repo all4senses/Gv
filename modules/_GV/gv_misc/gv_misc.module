@@ -1796,11 +1796,14 @@ function gv_misc_getTrackingUrl_trackingSubpath_byNid($nid) {
  */
 function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL, $provider_data_quick = NULL, $service_type = NULL) {
   //dpm($provider_data_quick);
-  if ($subpath) {
-    $subpath = str_replace('reviews/', '', $subpath);
+  
+  if ($provider_data_quick && $service_type && !empty($provider_data_quick[$service_type]['fl'])) {
+    dpm($provider_data_quick);
+    //gv_misc_loadTrackingHandlerForDirectLinks();
+    return $trackingUrl = '<a class="direct-link" href="' . $provider_data_quick['i_web'] . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : '' /*' rel="nofollow"'*/) . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
   }
-  elseif ($provider_data_quick && $service_type && !empty($provider_data_quick[$service_type]['fl'])) {
-    return $trackingUrl = '<a href="' . $provider_data_quick['i_web'] . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : '' /*' rel="nofollow"'*/) . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
+  elseif ($subpath) {
+    $subpath = str_replace('reviews/', '', $subpath);
   }
   elseif (!empty($provider_data_quick['i_web_ts'])) {
     // ts = tracking_subpath
@@ -1852,6 +1855,21 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   }
   else {
     return NULL;
+  }
+}
+
+
+/**
+ * Loads js handler for tracking direct links via ajax.
+ */
+function gv_misc_loadTrackingHandlerForDirectLinks() {
+  static $js_already_loaded;
+
+  if (!$js_already_loaded) {
+    $js_already_loaded = TRUE;
+
+    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+    drupal_add_js($path_to_custom_js . 'gv_track_direct_link.js');
   }
 }
 
@@ -3907,16 +3925,22 @@ function gv_misc_loadColorboxForVideoLinks($type = 'YouTube Direct Link') {
     case 'YouTube Direct Link':
         // for links with a class "yt-direct" like <a class="yt-direct" href="http://www.youtube.com/embed/9fWAFw4iSrg?rel=0&amp;wmode=transparent" title="Fonality HUD - Full Demo">Fonality HUD - Full Demo</a>
         
-        drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
-        //drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+      
+        static $js_already_loaded;
         
-        drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
-        $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-        drupal_add_js($path_to_custom_js . 'gv_colorbox_p_video.js');
+        if (!$js_already_loaded) {
+          $js_already_loaded = TRUE;
+          
+          drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js');
+          //drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+
+          drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css');
+          $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+          drupal_add_js($path_to_custom_js . 'gv_colorbox_p_video.js');
+        }
         break;
   }
 }
-
 
 
 /**
@@ -7781,6 +7805,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
+      
+      gv_misc_loadColorboxForVideoLinks();
       
       return isset($all_data_quick[$data['data']->nid][$data['service_type']]['vr-y']) 
                 //? '<a rel="nofollow" id="oid' . $data['data']->nid . '" class="yt-direct" href="http://www.youtube.com/embed/' . $all_data_quick[$data['data']->nid][$data['service_type']]['vr-y'] . '?rel=0&amp;wmode=transparent" title="' . $all_data_quick[$data['data']->nid]['name'] . ' Video">Watch</a>'
