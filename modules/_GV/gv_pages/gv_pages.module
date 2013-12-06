@@ -749,7 +749,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   
   // Reset sort option in case of changing the type of statistics.
   if ( ($prev_stat_type == 'full' && $get['stat_type'] == 'per_provider') || ($prev_stat_type == 'per_provider' && $get['stat_type'] == 'full') ) {
-    unset($get['sort']);
+    unset($get['sort'], $get['order']);
   }
     
   if (!empty($form_state['values']['include_logged_in'])) {
