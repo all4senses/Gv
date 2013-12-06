@@ -8,7 +8,7 @@
        //alert('.');
        $(".direct-link").click(function(){
          
-         console.log('direct link click');
+         //console.log('direct link click');
          //console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
 
