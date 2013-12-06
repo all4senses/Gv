@@ -213,8 +213,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $form['header-block']['only_featured'] = array(
     '#type' => 'checkbox',
     '#title' => 'Only Featured',
-    '#default_value' => NULL,//$include_logged_in,
-    '#disabled' => TRUE,
+    '#default_value' => @$_GET['only_featured'],//$include_logged_in,
+    //'#disabled' => TRUE,
     '#attributes' =>  array('class' =>array('only_featured'), 'onChange' => array('javascript:this.form.submit();')),
   );
   $form['header-block']['include_logged_in'] = array(
@@ -739,11 +739,18 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   if (isset($get['include_logged_in'])) {
     unset($get['include_logged_in']);
   }
+  if (isset($get['only_featured'])) {
+    unset($get['only_featured']);
+  }
+  
   
   $get['stat_type'] = !empty($form_state['values']['stat_type']) ? $form_state['values']['stat_type'] : 'full';
   
   if (!empty($form_state['values']['include_logged_in'])) {
     $get['include_logged_in'] = 1;
+  }
+  if (!empty($form_state['values']['only_featured'])) {
+    $get['only_featured'] = 1;
   }
   
   $get['filter'] = $form_state['values']['filter'];
