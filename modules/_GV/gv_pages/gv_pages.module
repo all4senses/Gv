@@ -745,9 +745,10 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   
   
   $get['stat_type'] = !empty($form_state['values']['stat_type']) ? $form_state['values']['stat_type'] : 'full';
+  $prev_stat_type = empty($_GET['stat_type']) ? 'full' : $_GET['stat_type'];
   
   // Reset sort option in case of changing the type of statistics.
-  if ( (@$form_state['values']['stat_type'] == 'full' && $get['stat_type'] == 'per_provider') || (@$form_state['values']['stat_type'] == 'per_provider' && $get['stat_type'] == 'full') ) {
+  if ( ($prev_stat_type == 'full' && $get['stat_type'] == 'per_provider') || ($prev_stat_type == 'per_provider' && $get['stat_type'] == 'full') ) {
     unset($get['sort']);
   }
     
