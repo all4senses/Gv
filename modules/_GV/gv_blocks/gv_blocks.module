@@ -928,8 +928,10 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
         }
       }
       dpm($unlisted);
-      unset($view->result[1]);
+      //unset($view->result[1]);
+      $view->result += $unlisted;
       dpm($view);
+      
       $chart_themed = $view->preview($display_name);
       //dpm($view->result);
       //dpm($view);
