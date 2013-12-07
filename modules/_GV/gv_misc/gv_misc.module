@@ -8335,7 +8335,7 @@ function gv_misc_sortArrayByClicksReverse($a, $b) {
 
 
 /**
- * Helper function for sorting by weight with uasort function.
+ * Helper function for sorting by name with uasort function.
  * 
  * Example of using:
  * 
@@ -8350,6 +8350,24 @@ function gv_misc_sortArrayByName($a, $b) {
   //return ($a['name'] < $b['name']) ? -1 : 1;
   return ($aa < $bb) ? -1 : 1;
 }
+/**
+ * Helper function for sorting by node_title with uasort function.
+ * 
+ * Example of using:
+ * 
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByObjectsNodeTitle');
+ */
+function gv_misc_sortArrayByObjectsNodeTitle($a, $b) {
+  $aa = strtolower($a->node_title); $bb = strtolower($b->node_title);
+  //if ($a['name'] == $b['name']) {
+  if ($aa == $bb) {
+      return 0;
+  }
+  //return ($a['name'] < $b['name']) ? -1 : 1;
+  return ($aa < $bb) ? -1 : 1;
+}
+
+
 function gv_misc_sortArrayByNameReverse($a, $b) {
   $aa = strtolower($a['name']); $bb = strtolower($b['name']);
   //if ($a['name'] == $b['name']) {

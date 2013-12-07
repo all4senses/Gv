@@ -917,7 +917,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
 
       //dpm($view);
       $view->execute();
-      dpm($view);
+      //dpm($view);
       $unlisted = array();
       foreach ($view->result as $index => $data) {
         foreach ($data as $field_name => $field_value) {
@@ -928,9 +928,10 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
         }
       }
       dpm($unlisted);
+      uasort($unlisted, 'gv_misc_sortArrayByObjectsNodeTitle');
       //unset($view->result[1]);
       $view->result += $unlisted;
-      dpm($view);
+      //dpm($view);
       
       $chart_themed = $view->preview($display_name);
       //dpm($view->result);
