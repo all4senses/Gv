@@ -920,7 +920,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
       $unlisted = array();
       foreach ($view->result as $index => $data) {
         foreach ($data as $field_name => $field_value) {
-          if (strpos($fielf_name, 'field_p_erating') && (!$field_value || $field_value == 'NA')) {
+          if (strpos($field_name, 'field_p_erating') && (!$field_value || $field_value == 'NA')) {
             $unlisted[] = $view->result[$index];
             unset($view->result[$index]);
           }
