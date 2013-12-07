@@ -914,6 +914,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
 
       //dpm($view);
       $view->execute();
+      unset($view->result[1]);
       dpm($view);
       $chart_themed = $view->preview($display_name);
       //dpm($view->result);
