@@ -902,7 +902,10 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   dpm($filters);
 
   foreach ($filters as $name => $data) {
-    if (@$data['ui_name'] == 'sps') {
+    if (strpos($name, '_p_erating')) {
+      $view->set_item($display_name, "filter", $name, NULL); // Delete filter.
+    }
+    elseif (@$data['ui_name'] == 'sps') {
 
       $filters[$name]['php_filter'] = str_replace(" gv_misc_getProviderQuickData('sps',", " !gv_misc_getProviderQuickData('sps',", $filters[$name]['php_filter']);
     
