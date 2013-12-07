@@ -917,6 +917,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
 
       //dpm($view);
       $view->execute();
+      dpm($view);
       $unlisted = array();
       foreach ($view->result as $index => $data) {
         foreach ($data as $field_name => $field_value) {
