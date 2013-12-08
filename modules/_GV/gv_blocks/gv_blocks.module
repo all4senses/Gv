@@ -899,7 +899,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   $view = views_get_view($view_name);
 
   $filters = $view->get_items('filter', $display_name);
-  dpm($filters);
+  //dpm($filters);
 
   foreach ($filters as $name => $data) {
     if (strpos($name, '_p_erating')) {
@@ -929,6 +929,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
       }
       dpm($unlisted);
       uasort($unlisted, 'gv_misc_sortArrayByObjectsNodeTitle');
+      dpm($unlisted);
       //unset($view->result[1]);
       $view->result += $unlisted;
       //dpm($view);
