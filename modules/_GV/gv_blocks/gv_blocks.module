@@ -900,10 +900,11 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   
   //dpm($view);
   
+  // Remove almost all existing fields. We will add some new fields instead for the second chart.
   //$types = views_object_types();
   //dpm($types);
   $fields = $view->get_items('field', $display_name);
-  dpm($fields);
+  //dpm($fields);
   
   $labels_of_fields_to_leave = array(/*'Title', */ /*'Company'*/ /*, 'More Details'*/);
   foreach ($fields as $field_name => $data) {
