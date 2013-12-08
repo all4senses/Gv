@@ -947,6 +947,22 @@ echo $value;
   $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
   
   
+  $php_field_options = array(
+    'id' => 'php_details', 
+    'label' => 'Details',
+    'use_php_setup' => 0, 
+    'use_php_click_sortable' => '0',
+    'php_click_sortable' => '',
+    'php_value' => '$value = gv_misc_getProviderQuickData(\'details\', array(\'data\' => $data));
+return $value;',
+    'php_output' => '<?php 
+echo $value;
+?>',
+  );
+  //$view->add_item($display_name, 'field', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
+  $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
+  
+  
   
   /*
   
