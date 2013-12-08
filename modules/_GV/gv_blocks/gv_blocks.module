@@ -905,7 +905,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   $fields = $view->get_items('field', $display_name);
   dpm($fields);
   
-  $labels_of_fields_to_leave = array(/*'Title', */'Company'/*, 'More Details'*/);
+  $labels_of_fields_to_leave = array(/*'Title', */ /*'Company'*/ /*, 'More Details'*/);
   foreach ($fields as $field_name => $data) {
     if ($field_name != 'title' && !in_array($data['label'], $labels_of_fields_to_leave)) {
       $view->set_item($display_name, "field", $field_name, NULL); // Delete field.
@@ -914,10 +914,10 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   
   //$viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => $node->nid));
   //$view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
-  /*
+  
   $php_field_options = array(
     'id' => 'php_title', 
-    'label' => 'Title X',
+    'label' => 'Company',
     'use_php_setup' => 0, 
     'use_php_click_sortable' => '3',
     'php_click_sortable' => '',
@@ -929,7 +929,7 @@ echo $value;
   );
   //$view->add_item($display_name, 'field', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
   $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
-  */
+  
   
   $php_field_options = array(
     'id' => 'php_country', 
