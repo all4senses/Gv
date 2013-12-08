@@ -902,6 +902,8 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   
   $types = views_object_types();
   dpm($types);
+  $fields = $view->get_items('field', $display_name);
+  dpm($fields);
   
   $filters = $view->get_items('filter', $display_name);
 
