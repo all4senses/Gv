@@ -912,6 +912,43 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
     }
   }
   
+  //$viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => $node->nid));
+  //$view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
+  $php_field_options = array(
+    'id' => 'php_title', 
+    'label' => 'Title X',
+    'use_php_setup' => 0, 
+    'use_php_click_sortable' => '3',
+    'php_click_sortable' => '',
+    'php_value' =>  '$value = gv_misc_getProviderQuickData(\'name_n_logo_chart\', array(\'data\' => $data));
+return $value;',
+    'php_output' => '<?php 
+echo $value;
+?>',
+  );
+  //$view->add_item($display_name, 'field', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
+  $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
+  
+  /*
+  
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+$handler->display->display_options['fields']['php_1']['table'] = 'views';
+$handler->display->display_options['fields']['php_1']['field'] = 'php';
+$handler->display->display_options['fields']['php_1']['label'] = 'Video';
+$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_1']['php_value'] = '$value = gv_misc_getProviderQuickData(\'vr-y\', array(\'data\' => $data, \'service_type\' =>\'re\'));
+
+return $value;';
+$handler->display->display_options['fields']['php_1']['php_output'] = '<?php 
+echo $value;
+?>';
+$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '3';
+$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+
+  
+  
+  */
+  
   
   $filters = $view->get_items('filter', $display_name);
 
