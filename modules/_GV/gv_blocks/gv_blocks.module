@@ -900,6 +900,9 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   
   dpm($view);
   
+  $types = views_object_types();
+  dpm($types);
+  
   $filters = $view->get_items('filter', $display_name);
 
   foreach ($filters as $name => $data) {
