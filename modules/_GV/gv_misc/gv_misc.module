@@ -7399,6 +7399,39 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       return $out;
       
+    
+      
+      
+    case 'name_chart':
+      //$count = 1;
+      //dpm('name_n_logo_chart ' . $count++);
+      
+      /*
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      $out = '';
+      
+      if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
+        $link = $all_data_quick[$data['data']->nid]['i_web'];
+      }
+      else {
+        $link = url('node/' . $data['data']->nid);
+      }
+      
+      if (!empty($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
+        
+        $image_style_name = 'logo_provider_chart_main';
+        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$data['data']->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
+
+        $out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid, NULL, 'logo', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+      }
+      */
+      if (!empty($all_data_quick[$data['data']->nid]['name'])) {
+        $out .= '<div class="name">' . gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']) . '</div>';
+        //$out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid); 
+      }
+          
+      return $out;
+      
       
       
     
