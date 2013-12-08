@@ -907,7 +907,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   
   $labels_of_fields_to_leave = array(/*'Title', */'Company'/*, 'More Details'*/);
   foreach ($fields as $field_name => $data) {
-    if (/*$field_name != 'title' && */!in_array($data['label'], $labels_of_fields_to_leave)) {
+    if ($field_name != 'title' && !in_array($data['label'], $labels_of_fields_to_leave)) {
       $view->set_item($display_name, "field", $field_name, NULL); // Delete field.
     }
   }
