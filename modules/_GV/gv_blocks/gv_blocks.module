@@ -897,7 +897,9 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
   $view_name = 'providers'; 
   $display_name = $map_url_to_viewsDisplay_name[$_SERVER['REQUEST_URI']];
   $view = views_get_view($view_name);
-
+  
+  dpm($view);
+  
   $filters = $view->get_items('filter', $display_name);
 
   foreach ($filters as $name => $data) {
