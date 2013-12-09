@@ -4965,6 +4965,19 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     $p_data_quick['details'] = l('Read a Review', 'node/' . $form_state['values']['nid'], array('attributes' => array('class' => array('more'))));
   }
   
+  // Prepare SHORTER details exerpt field for Providers page.
+  $p_data_quick['details2'] =  trim(drupal_substr(strip_tags($form_state['values']['body']['und'][0]['value']), 0, 140));  
+  
+  if (!empty($p_data_quick['details2'])) {
+    $last_pos = strrpos($p_data_quick['details2'], ' ');
+    $p_data_quick['details2'] = substr_replace($p_data_quick['details2'], '... ', $last_pos);
+    $p_data_quick['details2'] .= l('Read More', 'node/' . $form_state['values']['nid'], array('attributes' => array('class' => array('more'))));
+    //$p_data_quick['details'] = substr_replace ($p_data_quick['details'], '...' . l(t('Read More'), 'node/' . $form_state['values']['nid'], array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
+  }
+  else {
+    $p_data_quick['details2'] = l('Read a Review', 'node/' . $form_state['values']['nid'], array('attributes' => array('class' => array('more'))));
+  }
+  
   
     // Logo has been defined above.
   if ($logo) {

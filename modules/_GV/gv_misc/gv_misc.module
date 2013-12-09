@@ -7792,6 +7792,30 @@ function gv_misc_getProviderQuickData($target, $data) {
       
        
     
+    
+      
+    // Shorter details excerpt.
+    case 'details2':
+      
+      $details = NULL;
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      
+      if (empty($all_data_quick[$data['data']->nid]['details'])) {
+        $details = l('Read a Review', 'node/' . $data['data']->nid, array('attributes' => array('class' => array('more'))));
+      }
+      else {
+        //dpm($all_data_quick[$data['data']->nid]);
+        $details = $all_data_quick[$data['data']->nid]['details'];
+      }
+      
+      
+      return $details;
+    
+      
+      
+      
+      
       
     case 'i_availability':
       
