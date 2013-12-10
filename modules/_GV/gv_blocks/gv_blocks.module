@@ -889,7 +889,8 @@ function gv_blocks_getSecondaryProvidersSectionBlock() {
     '/fax' => 'block_p_ifa_page',
   );
   
-  if (!isset($map_url_to_viewsDisplay_name[$_SERVER['REQUEST_URI']])) {
+  global $user;
+  if (!isset($map_url_to_viewsDisplay_name[$_SERVER['REQUEST_URI']]) || !($user->uid && $_SERVER['REQUEST_URI'] == '/business')) {
     return NULL;
   }
   
