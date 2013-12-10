@@ -650,14 +650,10 @@ function gv_blocks_block_configure($delta = '') {
     case 'secondary_p_section':
       
       $data = unserialize(variable_get('gv_secondary_p_section_data', NULL));
-      //dpm($data);
-      //dpm($_SERVER);
-      //dpm($_GET);
-      
+     
       $form['chart_title'] = array(
         '#type' => 'textfield', 
         '#title' => 'Chart Title',
-        //'#format' => 'full_html',
         '#default_value' => @$data['chart_title'][$_GET['destination']],
       );
       
@@ -907,7 +903,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
  */
 function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
   
-  dpm($_GET);
+  //dpm($_GET);
   //dpm($_SERVER);
   
   if ($op == 'title') {
