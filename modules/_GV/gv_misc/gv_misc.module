@@ -1013,9 +1013,10 @@ function gv_misc_testPage() {
   //gv_misc_getProviders($providers, 'all', NULL, NULL, NULL, TRUE);
   dpm($providers);
   
-  
+  global $base_url, $base_root, $base_path;
   dpm('getcwd() = ' . getcwd());
   dpm('$_SERVER[DOCUMENT_ROOT] = ' . $_SERVER['DOCUMENT_ROOT']);
+  dpm('$base_url = ' . $base_url);
   dpm('$base_root = ' . $base_root);
   dpm('$base_path = ' . $base_path);
   dpm('file = ' . __FILE__);
