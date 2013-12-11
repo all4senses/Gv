@@ -923,7 +923,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
   }
   
   global $user;
-  if (!$user->uid && $_SERVER['REQUEST_URI'] != '/business') {
+  if (!$user->uid && $_SERVER['REQUEST_URI'] != '/business' && $_SERVER['REQUEST_URI'] != '/sip-trunking') {
     return NULL;
   }
   
