@@ -942,8 +942,12 @@ function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
   $fields = $view->get_items('field', $display_name);
   //dpm($fields);
   
+  // Delete all header fields, in this case some js scripts (for example, gv_compareProviders.js)
   $header = $view->get_items('header', $display_name);
-  dpm($header);
+  //dpm($header);
+  foreach ($header as $header_field_name => $data) {
+    $view->set_item($display_name, 'header', $header_field_name, NULL); // Delete field.
+  }
   
   $labels_of_fields_to_leave = array(/*'Title', */ /*'Company'*/ /*, 'More Details'*/);
   foreach ($fields as $field_name => $data) {
