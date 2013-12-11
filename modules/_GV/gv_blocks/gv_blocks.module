@@ -916,6 +916,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
     '/sip-trunking' => 'block_p_sip_page',
     '/fax' => 'block_p_ifa_page',
     '/hosted-pbx' => 'block_p_pbx_page_cmp',
+    '/residential' => 'block_p_re_page',
   );
   
   
@@ -936,8 +937,8 @@ function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
   dpm($view);
   
   // Remove almost all existing fields. We will add some new fields instead for the second chart.
-  //$types = views_object_types();
-  //dpm($types);
+  $types = views_object_types();
+  dpm($types);
   $fields = $view->get_items('field', $display_name);
   dpm($fields);
   
