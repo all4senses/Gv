@@ -5397,6 +5397,9 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
     elseif ($getvoip_key == 'Phones needed') {
       $data_to[$remote_key] = $map_phonesNeeded[$submission[$getvoip_key]];
     }
+    elseif ($getvoip_key == 'Company' && !$submission[$getvoip_key]) {
+      $data_to[$remote_key] = 'Unavailable';
+    }
     else {
       $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
     }
