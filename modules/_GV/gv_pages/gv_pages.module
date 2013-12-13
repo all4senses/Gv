@@ -655,7 +655,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         dpm('$all_total_items_unique = ' . $all_total_items_unique);
         
         $form['total_results'] = array(
-          '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . (!$all_total_items ? '' : ' (unique: ' .  $all_total_items_unique . ')') . '</div>',
+          '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . ( (!$all_total_items || $all_total_items == $all_total_items_unique) ? '' : ' (unique: ' .  $all_total_items_unique . ')') . '</div>',
         );
         
         
@@ -708,7 +708,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
               <td>' . $count . '</td>
               <td class="name">' . $selected_provider['name'] . '</td>
-              <td>' . $selected_provider['clicks'] . (!$selected_provider['clicks'] ? '' : ' (unique: ' .  $selected_provider['clicks_unique'] . ')') . '</td>',
+              <td>' . $selected_provider['clicks'] . ( (!$selected_provider['clicks'] || $selected_provider['clicks'] == $selected_provider['clicks_unique']) ? '' : ' (unique: ' .  $selected_provider['clicks_unique'] . ')') . '</td>',
           );
 
 
