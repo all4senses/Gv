@@ -548,6 +548,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         }
 
     
+        
+        //$providers = array();
+        //gv_misc_getProviders($providers);
+        unset($providers['_none']);
+        
+        
         // Find out and print total clicks for all providers
         /*
         $query = db_select('gv_track_links', 'tl');
@@ -651,8 +657,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique); 
         }
         
-        dpm('$all_total_items = ' . $all_total_items);
-        dpm('$all_total_items_unique = ' . $all_total_items_unique);
+        //dpm('$all_total_items = ' . $all_total_items);
+        //dpm('$all_total_items_unique = ' . $all_total_items_unique);
         
         $form['total_results'] = array(
           '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . ( (!$all_total_items || $all_total_items == $all_total_items_unique) ? '' : ' (unique: ' .  $all_total_items_unique . ')') . '</div>',
@@ -674,11 +680,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
         $filter_temp_get['stat_type'] = 'full';
         unset($filter_temp_get['sort'], $filter_temp_get['order']);
-        
-        
-        //$providers = array();
-        //gv_misc_getProviders($providers);
-        unset($providers['_none']);
         
         $tr_class = 'even';
         
