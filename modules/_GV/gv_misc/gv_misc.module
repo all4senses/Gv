@@ -8413,7 +8413,7 @@ function wdg_misc_sortArrayByWeight($a, $b)
 
 
 /**
- * Helper function for sorting by weight with uasort function.
+ * Helper function for sorting by clicks with uasort function.
  * 
  * Example of using:
  * 
@@ -8430,6 +8430,27 @@ function gv_misc_sortArrayByClicksReverse($a, $b) {
       return 0;
   }
   return ($a['clicks'] > $b['clicks']) ? -1 : 1;
+}
+
+
+/**
+ * Helper function for sorting by clicks_unique with uasort function.
+ * 
+ * Example of using:
+ * 
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByClicksUnique');
+ */
+function gv_misc_sortArrayByClicksUnique($a, $b) {
+  if ($a['clicks_unique'] == $b['clicks_unique']) {
+      return 0;
+  }
+  return ($a['clicks_unique'] < $b['clicks_unique']) ? -1 : 1;
+}
+function gv_misc_sortArrayByClicksUniqueReverse($a, $b) {
+  if ($a['clicks_unique'] == $b['clicks_unique']) {
+      return 0;
+  }
+  return ($a['clicks_unique'] > $b['clicks_unique']) ? -1 : 1;
 }
 
 

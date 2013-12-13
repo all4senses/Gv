@@ -520,7 +520,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   } // End of if ($statistics_type == 'full') {
   elseif ($statistics_type == 'per_provider') {
 
-        $sort_options = array('object_name' => 'Provider', 'clicks' => 'Clicks');
+        $sort_options = array('object_name' => 'Provider', 'clicks' => 'All Clicks', 'clicks_unique' => 'Unique Clicks');
 
         $sort_exposed = '';
         $order = 'DESC';
@@ -673,6 +673,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             '<table class="views-table track-links"><thead><tr>
               <th>Num</th>
               <th class="name">' . $sort_links['object_name'] . '</th>
+              <th>' . $sort_links['clicks_unique'] . '</th>
               <th>' . $sort_links['clicks'] . '</th>
               <th>Operations</th>
             </tr></thead><tbody>',
@@ -698,6 +699,14 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               uasort($providers_clicks, 'gv_misc_sortArrayByClicksReverse');
             }
             break;
+          case 'clicks_unique':
+            if ($url_order == 'ASC') {
+              uasort($providers_clicks, 'gv_misc_sortArrayByClicksUnique');
+            }
+            else {
+              uasort($providers_clicks, 'gv_misc_sortArrayByClicksUniqueReverse');
+            }
+            break;
         }
         
         $count = 0;
@@ -709,7 +718,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
               <td>' . $count . '</td>
               <td class="name">' . $selected_provider['name'] . '</td>
-              <td>' . $selected_provider['clicks'] . ( (!$selected_provider['clicks'] || $selected_provider['clicks'] == $selected_provider['clicks_unique']) ? '' : ' (unique: ' .  $selected_provider['clicks_unique'] . ')') . '</td>',
+              <td>' . $selected_provider['clicks_unique'] . '</td>
+              <td>' . $selected_provider['clicks'] . '</td>',
           );
 
 
