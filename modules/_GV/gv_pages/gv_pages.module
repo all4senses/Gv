@@ -626,7 +626,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         foreach ($providers as $p_nid => $selected_provider) {
           
           $query = db_select('gv_track_links', 'tl');
-          $query->fields('tl', array('track_id', 'ip'));
+          $query->fields('tl', array('track_id', 'ip', 'timestamp'));
 
           $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
 
@@ -659,7 +659,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           global $user;
           if ($user->uid == 1) {
-            //$query->groupBy('ip');
+            $query->groupBy('ip');
           }
           
           $results = $query->execute();
