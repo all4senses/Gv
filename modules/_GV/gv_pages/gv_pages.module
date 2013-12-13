@@ -549,6 +549,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
     
         // Find out and print total clicks for all providers
+        /*
         $query = db_select('gv_track_links', 'tl');
         $query->fields('tl', array('track_id'));
 
@@ -592,36 +593,11 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         }
 
         $results = $query->execute();
-        $total_items = $results->rowCount();
-
+        $all_total_items = $results->rowCount();
+        */
     
-        $form['total_results'] = array(
-          '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $total_items . '</div>',
-        );
         
-        
-        // Clicks per provider.
-        
-        $form['table_start'] = array(
-          '#type' => 'markup',
-          '#markup' => 
-            '<table class="views-table track-links"><thead><tr>
-              <th>Num</th>
-              <th class="name">' . $sort_links['object_name'] . '</th>
-              <th>' . $sort_links['clicks'] . '</th>
-              <th>Operations</th>
-            </tr></thead><tbody>',
-        );
-
-        $filter_temp_get['stat_type'] = 'full';
-        unset($filter_temp_get['sort'], $filter_temp_get['order']);
-        
-        
-        //$providers = array();
-        //gv_misc_getProviders($providers);
-        unset($providers['_none']);
-        
-        $tr_class = 'even';
+        $all_total_items = $all_total_items_unique = 0;
         
         foreach ($providers as $p_nid => $selected_provider) {
           
@@ -657,32 +633,54 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             $query->condition($or);
           }
           
-          global $user;
-          if ($user->uid == 1) {
-            //$query->groupBy('ip');
-          }
+//          global $user;
+//          if ($user->uid == 1) {
+//            //$query->groupBy('ip');
+//          }
           
           $results = $query->execute();
           
-          
-          if ($user->uid == 1) {
-            //dpm($results->fetchAllAssoc('ip', PDO::FETCH_BOTH));
-            //dpm($results->fetchAllAssoc('ip', PDO::FETCH_ASSOC));
-            dpm($results->fetchAllAssoc('ip', PDO::FETCH_NUM));
-            //dpm($results->fetchAllAssoc('timestamp'));
-            //dpm($results->fetchAll());
-            foreach($results as $key => $result) {
-              $p_by_ip[$p_nid][$key] = $result;
-              dpm($result);
-            }
-          }
+          $p_by_ip = $results->fetchAll('ip');
+          dpm($p_by_ip);
           
           $total_items = $results->rowCount();
-
-          $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items); 
+          $all_total_items += $total_items;
+          $total_items_unique = count($p_by_ip);
+          $all_total_items_unique += $total_items_unique;
+          
+          $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique); 
         }
         
-        dpm(@$p_by_ip);
+        dpm('$all_total_items = ' . $all_total_items);
+        dpm('$all_total_items_unique = ' . $all_total_items_unique);
+        
+        $form['total_results'] = array(
+          '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . '</div>',
+        );
+        
+        
+        // Clicks per provider.
+        
+        $form['table_start'] = array(
+          '#type' => 'markup',
+          '#markup' => 
+            '<table class="views-table track-links"><thead><tr>
+              <th>Num</th>
+              <th class="name">' . $sort_links['object_name'] . '</th>
+              <th>' . $sort_links['clicks'] . '</th>
+              <th>Operations</th>
+            </tr></thead><tbody>',
+        );
+
+        $filter_temp_get['stat_type'] = 'full';
+        unset($filter_temp_get['sort'], $filter_temp_get['order']);
+        
+        
+        //$providers = array();
+        //gv_misc_getProviders($providers);
+        unset($providers['_none']);
+        
+        $tr_class = 'even';
         
         switch ($url_sort) {
           case 'object_name':
