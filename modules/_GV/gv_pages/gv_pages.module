@@ -666,9 +666,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           
           if ($user->uid == 1) {
-            //dpm($results->fetchAllAssoc('ip'));
+            dpm($results->fetchAllAssoc('ip'));
+            dpm($results->fetchAll());
             foreach($results as $key => $result) {
-              //$p_by_ip[$p_nid][$key] = $result;
+              $p_by_ip[$p_nid][$key] = $result;
               dpm($result);
             }
           }
@@ -678,7 +679,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items); 
         }
         
-        dpm($p_by_ip);
+        dpm(@$p_by_ip);
         
         switch ($url_sort) {
           case 'object_name':
