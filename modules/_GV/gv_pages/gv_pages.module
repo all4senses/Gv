@@ -233,6 +233,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $statistics_types = array('full' => 'Full', 'per_provider' => 'Per provider');
   $statistics_type = isset($statistics_types[@$_GET['stat_type']]) ? $_GET['stat_type'] : 'per_provider'; 
   
+  
+  $form['default_preset'] = array(
+    '#markup' => '<div>' . l('Default preset', 'admin/content/track-report') . '</div>',
+  );
+  
+  
   $form['stat_type'] = array(
     '#type' => 'radios',
     '#title' => 'Statistics type:',
