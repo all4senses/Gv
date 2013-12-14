@@ -235,9 +235,11 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   
   $form['default_preset'] = array(
-    '#markup' => '<div>' . l('Default preset', 'admin/content/track-report') . '</div>
-      <div class="description">Stat per provider, All types clicks, Yesterday, sort DESC by Unique clicks, show only Featured provider, logged in users Exclueded.</div>',
-    '#attributes' =>  array('class' =>array('default_preset')),
+    '#markup' => 
+       '<div class="default preset">' 
+          . l('Default preset', 'admin/content/track-report') . '
+        <div class="description">Stat per provider, All types clicks, Yesterday, sort DESC by Unique clicks, show only Featured provider, logged in users Exclueded.</div>
+      </div>',
   );
   
   
