@@ -169,7 +169,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   unset($filter_temp_get['q']);
     
   $statistics_types = array('full' => 'Full', 'per_provider' => 'Per provider');
-  $statistics_type = isset($statistics_types[@$_GET['stat_type']]) ? $_GET['stat_type'] : 'full'; 
+  $statistics_type = isset($statistics_types[@$_GET['stat_type']]) ? $_GET['stat_type'] : 'per_provider'; 
   
   $form['stat_type'] = array(
     '#type' => 'radios',
@@ -196,7 +196,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   //gv_misc_getProviders($providers);
   // function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_key = '', $only_featured = NULL, $no_cache = FALSE) {
 
-  if (@$_GET['only_featured']) {
+  if (!isset($_GET['only_featured']) || $_GET['only_featured']) {
     gv_misc_getProviders($providers, 'all', NULL, 'featured');
   }
   else {
