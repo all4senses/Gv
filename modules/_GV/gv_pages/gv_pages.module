@@ -480,9 +480,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               <td class="date">' . date('Y-m-d, H:i:s', $result->timestamp) . '</td>
               <td>' . $result->type . '</td>
               <td class="name">' . $result->object_name . '</td>
-              <td class="url"><div>' . $result->url . '</div></td>
-              <td class="referer"><div>' . ($result->referer ? $result->referer : (!empty($result_data['referer']) ? $result_data['referer'] : '') ) . '</div></td>
-              <td class="page"><div>' . ($result->click_page ? $result->click_page : (!empty($result_data['click_on_page']) ? $result_data['click_on_page'] : '') ) . '</div></td>
+              <td ><div class="url">' . $result->url . '</div></td>
+              <td><div class="referer">' . ($result->referer ? $result->referer : (!empty($result_data['referer']) ? $result_data['referer'] : '') ) . '</div></td>
+              <td><div class="page">' . ($result->click_page ? $result->click_page : (!empty($result_data['click_on_page']) ? $result_data['click_on_page'] : '') ) . '</div></td>
               <td>' . ($result->ip ? $result->ip : (!empty($result_data['user']['hostname']) ? $result_data['user']['hostname'] : '') ) . '</td>
               <td>' . ($result->uname ? $result->uname : (!empty($result_data['user']['name']) ? $result_data['user']['name'] : '') ) . '</td>',
           );
