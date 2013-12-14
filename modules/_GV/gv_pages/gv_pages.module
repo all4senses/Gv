@@ -192,13 +192,16 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     // Default timeframe - yesterday.
     $from = strtotime(date('m\/d\/Y 00\:00\:00', strtotime('yesterday')));
     $from_date_str = date('m\/d\/Y', $from);
-    $from_time_str = date('H:i:s', $from);
-    if ($from_time_str == '00:00:00') {
-      $from_time_str = NULL;
-    }
+    $from_time_str = '00:00:00';
+//    if ($from_time_str == '00:00:00') {
+//      $from_time_str = NULL;
+//    }
     $to = strtotime(date('m\/d\/Y 00\:00\:00', $time_now));
     $to_date_str = date('m\/d\/Y', $to);
-    $to_time_str = NULL;
+    $to_time_str = '00:00:00';
+//    if ($to_time_str == '00:00:00') {
+//      $to_time_str = NULL;
+//    }
   }
   else {
     if ($from = @$_GET['date_from']) {
