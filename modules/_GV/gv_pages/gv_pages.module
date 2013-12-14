@@ -116,14 +116,14 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   //$args = arg();
   //dpm($args);
-  dpm($_GET);
+  //dpm($_GET);
 //  $form['emails'] = array(
 //    '#type' => 'markup',
 //    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div>'
 //      . '<br/><div><strong>All Quote Requests data.</strong></div><br/><div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
 //  );
   
-  $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
+  $defult_preset = count($_GET) > 1 ? FALSE :  TRUE;
   
   $query = '';
   foreach ($_GET as $key => $value) {
@@ -142,19 +142,78 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
   $include_logged_in = !empty($_GET['include_logged_in']) ? $_GET['include_logged_in'] : NULL;
   
+  
+  
   $from_date_str = $from_time_str = $to_date_str = $to_time_str = NULL;
-  if ($from = @$_GET['date_from']) {
+  
+  
+  $time_now = time();
+  $day = 60*60*24;
+  $week = $day*7;
+  $month = $day*30;
+  drupal_add_js(array('gv_pages' => array(
+    'to_now' => array(
+      'date' => date('m\/d\/Y', $time_now),
+      'time' => date('H:i:s', $time_now),
+    ),
+     'from_today' => array(
+      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', $time_now))),
+      'time' => '00:00:00',
+    ),
+    'from_yesterday' => array(
+      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', strtotime('yesterday')))),
+      'time' => '00:00:00',
+    ),
+    'from_day' => array(
+      'date' => date('m\/d\/Y', $time_now - $day),
+      'time' => date('H:i:s', $time_now - $day),
+    ),
+    'from_week' => array(
+      'date' => date('m\/d\/Y', $time_now - $week),
+      'time' => date('H:i:s', $time_now - $week),
+    ),
+    'from_month' => array(
+      'date' => date('m\/d\/Y', $time_now - $month),
+      'time' => date('H:i:s', $time_now - $month),
+    ),
+    'from_this_month' => array(
+      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', $time_now))),
+      'time' => '00:00:00',
+    ),
+    'from_last_month' => array(
+      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', strtotime('last month')))),
+      'time' => '00:00:00',
+    ),
+  )), 'setting');  
+  
+  
+  
+  if ($defult_preset) {
+    // Default timeframe - yesterday.
+    $from = strtotime(date('m\/d\/Y 00\:00\:00', strtotime('yesterday')));
     $from_date_str = date('m\/d\/Y', $from);
     $from_time_str = date('H:i:s', $from);
     if ($from_time_str == '00:00:00') {
       $from_time_str = NULL;
     }
-  }
-  if ($to = @$_GET['date_to']) {
+    $to = strtotime(date('m\/d\/Y 00\:00\:00', $time_now));
     $to_date_str = date('m\/d\/Y', $to);
-    $to_time_str = date('H:i:s', $to);
-    if ($to_time_str == '00:00:00') {
-      $to_time_str = NULL;
+    $to_time_str = NULL;
+  }
+  else {
+    if ($from = @$_GET['date_from']) {
+      $from_date_str = date('m\/d\/Y', $from);
+      $from_time_str = date('H:i:s', $from);
+      if ($from_time_str == '00:00:00') {
+        $from_time_str = NULL;
+      }
+    }
+    if ($to = @$_GET['date_to']) {
+      $to_date_str = date('m\/d\/Y', $to);
+      $to_time_str = date('H:i:s', $to);
+      if ($to_time_str == '00:00:00') {
+        $to_time_str = NULL;
+      }
     }
   }
   
@@ -210,7 +269,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     
   if ($statistics_type == 'full') {
     
-        $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
+    $selected_provider = (!empty($_GET['provider']) && !empty($providers[$_GET['provider']])) ? $_GET['provider'] : NULL;
 
     $form['header-block']['provider'] = array(
       '#type' => 'select',
@@ -274,50 +333,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => 'Timeframe',
     '#description' => 'Presets',
-    '#default_value' => '',
+    '#default_value' => $defult_preset ? 'yesterday' : '',
     '#options' => array('_none' => '', 'today' => 'Today', 'yesterday' => 'Yesterday', 'day' => '24h from now', 'week' => '7 days from now', 'month' => '30 days from now', 'this_month' => 'This month', 'last_month' => 'Last month', '_clear' => 'Clear...'),
     '#attributes' =>  array('class' =>array('set_timeframe')),
   );
-  
-  
-  $time_now = time();
-  $day = 60*60*24;
-  $week = $day*7;
-  $month = $day*30;
-  drupal_add_js(array('gv_pages' => array(
-    'to_now' => array(
-      'date' => date('m\/d\/Y', $time_now),
-      'time' => date('H:i:s', $time_now),
-    ),
-     'from_today' => array(
-      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', $time_now))),
-      'time' => '00:00:00',
-    ),
-    'from_yesterday' => array(
-      'date' => date('m\/d\/Y', strtotime(date('m\/d\/Y 00\:00\:00', strtotime('yesterday')))),
-      'time' => '00:00:00',
-    ),
-    'from_day' => array(
-      'date' => date('m\/d\/Y', $time_now - $day),
-      'time' => date('H:i:s', $time_now - $day),
-    ),
-    'from_week' => array(
-      'date' => date('m\/d\/Y', $time_now - $week),
-      'time' => date('H:i:s', $time_now - $week),
-    ),
-    'from_month' => array(
-      'date' => date('m\/d\/Y', $time_now - $month),
-      'time' => date('H:i:s', $time_now - $month),
-    ),
-    'from_this_month' => array(
-      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', $time_now))),
-      'time' => '00:00:00',
-    ),
-    'from_last_month' => array(
-      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', strtotime('last month')))),
-      'time' => '00:00:00',
-    ),
-  )), 'setting');  
   
   
   
@@ -348,6 +367,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     // Full statistics.
     if ($statistics_type == 'full') {
 
+        
+        $sort = (@$_GET['sort'] && isset($sort_options[$_GET['sort']]) ) ? $_GET['sort'] : 'timestamp';
+  
         $sort_options = array('timestamp' => 'Click date', 'type' => 'Object type', 'object_name' => 'Object name', 
           'url' => 'Url', 'referer' => 'Referrer', 'click_page' => 'Click page', 'ip' => 'IP', 'uname' => 'User name');
 
@@ -639,10 +661,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             $query->condition($or);
           }
           
-//          global $user;
-//          if ($user->uid == 1) {
-//            //$query->groupBy('ip');
-//          }
           
           $results = $query->execute();
           
