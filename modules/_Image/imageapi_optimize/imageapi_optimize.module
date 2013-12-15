@@ -258,7 +258,7 @@ function _imageapi_optimize_service_internal($image, $dst) {
 
     case 'image/jpeg':
       if ($cmd = variable_get('imageapi_optimize_jpegtran', '')) {
-        _imageapi_optimize_exec("$cmd -copy none -optimize". escapeshellarg($dst), $dst);
+        _imageapi_optimize_exec("$cmd -copy none -optimize". escapeshellarg($dst), $dst); 
       }
       if ($cmd = variable_get('imageapi_optimize_jfifremove', '')) {
         _imageapi_optimize_exec("$cmd < ". escapeshellarg($dst), $dst);
