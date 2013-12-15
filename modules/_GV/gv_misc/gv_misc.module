@@ -245,7 +245,7 @@ function gv_misc_file_insert($file) {
 
     case 'image/jpeg':
       if ($cmd = variable_get('imageapi_optimize_jpegtran', '')) { // /usr/bin/jpegtran, should be installed in system
-        _imageapi_optimize_exec("$cmd -copy none -optimize ". escapeshellarg($dst), $dst);
+        _imageapi_optimize_exec("$cmd -copy none -optimize -progressive ". escapeshellarg($dst), $dst);
       }
       if ($cmd = variable_get('imageapi_optimize_jfifremove', '')) {
         _imageapi_optimize_exec("$cmd < ". escapeshellarg($dst), $dst);
