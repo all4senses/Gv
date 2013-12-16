@@ -5119,7 +5119,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     $gv_providers_sprites = array();
   }
   
-  cache_clear_all('*', 'cache_views', TRUE);
+  //cache_clear_all('*', 'cache_views', TRUE);
   cache_clear_all('*', 'cache_views_data', TRUE);
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
@@ -5240,7 +5240,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   //drupal_flush_all_caches();
   // Not so hard clearing.
   views_invalidate_cache();
-  cache_clear_all('*', 'cache_views_data', TRUE);
+  //cache_clear_all('*', 'cache_views_data', TRUE);
   
   drupal_set_message('Cache is flushed after the prividers logos sprites regenerating.', 'warning');
   
