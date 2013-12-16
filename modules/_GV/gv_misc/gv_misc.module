@@ -229,6 +229,8 @@ function gv_misc_file_insert($file) {
   
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file->uri);
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
+  
   switch ($file->filemime) {
     case 'image/png':
       if ($cmd = variable_get('imageapi_optimize_optipng', '')) { // /usr/bin/optipng, should be installed in system
