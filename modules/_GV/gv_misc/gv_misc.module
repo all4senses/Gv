@@ -1035,7 +1035,7 @@ function gv_misc_testPage() {
 (function($){$.fn.superfish=function';
   
   //preg_replace('/<img[^>]+>/i', '', $str);
-  $str = preg_replace('/\/\*.*\*\//i', '', $str);
+  $str = preg_replace('/\/\*.*?\*\//s', '', $str);
   
   dpm($str);
   
