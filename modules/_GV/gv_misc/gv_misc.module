@@ -210,7 +210,7 @@ function gv_misc_file_insert($file) {
   //gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
   
   // Write to log.file
-  exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->UPLOAD--->'. escapeshellarg($file->uri) . '" >>~/gv_image_optimize.log');
+  //exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->UPLOAD--->'. escapeshellarg($file->uri) . '" >>~/gv_image_optimize.log');
   
   // Settings on this page http://getvoip.com/admin/config/media/image-toolkit
   /*
@@ -5204,10 +5204,14 @@ function gv_misc_disqus_getNewUsers() {
     
     $gv_disqus_users += $new_gv_disqus_users;
     variable_set('gv_disqus_users', serialize($gv_disqus_users));
-    $out = 'Something has changed (new users, less users, etc).
+    
+    if ($new_users = print_r($new_users, TRUE)) {
+      $out = 'Something has changed (new users, less users, etc).
  
 
-<pre>' . print_r($new_users, TRUE) . '</pre>';
+<pre>' . $new_users . '</pre>';
+    }
+    
   }
   
   global $language;
