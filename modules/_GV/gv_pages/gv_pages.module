@@ -4912,11 +4912,14 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   // Find out if some of listing fields have been changed.
   foreach($erating_fields_before as $erating_field_title => $erating_field_before) {
     $erating_fields_submitted[$erating_field_title] = $form_state['values'][$erating_field_title]['und'][0]['value'];
-    if ($erating_field_before != $form_state['values'][$erating_field_title]['und'][0]['value']) {
+    if ($erating_field_before != @$form_state['values'][$erating_field_title]['und'][0]['value']) {
       $last_erating_fields_different[] = $erating_field_title;
     }
   }
 
+  dpm($erating_fields_before);
+  dpm($last_erating_fields_different);
+  
   /*
       if (empty($last_erating_fields_different)) {
         dpm('No changed listing fields this time!');
