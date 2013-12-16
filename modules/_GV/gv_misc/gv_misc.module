@@ -274,7 +274,7 @@ function gv_misc_file_insert($file) {
 function gv_misc_imageOptimizeOnServer($file) {
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file['uri']);
-  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
+  //gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
   
   switch ($file['filemime']) {
     case 'image/png':
