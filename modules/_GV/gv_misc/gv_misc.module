@@ -227,9 +227,13 @@ function gv_misc_file_insert($file) {
 //    return;
 //  }
   
+  
+  gv_misc_imageOptimizeOnServer(array('uri' => $file->uri, 'filemime' => $file->filemime));
+  
+  /*
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file->uri);
-  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
+  //gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
   
   switch ($file->filemime) {
     case 'image/png':
@@ -254,9 +258,48 @@ function gv_misc_file_insert($file) {
       }
       break;
   }
+  */
   
   
+}
+
+
+/**
+ * 
+ * Try to optimize an image with applications installed on the server.
+ * 
+ * Depends on the imageapi_optimize module.
+ * 
+ */
+function gv_misc_imageOptimizeOnServer($file) {
+  // Code example from the image_optimize.module
+  $dst = drupal_realpath($file['uri']);
+  //gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
   
+  switch ($file['filemime']) {
+    case 'image/png':
+      if ($cmd = variable_get('imageapi_optimize_optipng', '')) { // /usr/bin/optipng, should be installed in system
+        exec("$cmd -o5 -quiet ". escapeshellarg($dst));
+      }
+      if ($cmd = variable_get('imageapi_optimize_pngcrush', '')) {
+        $temp = drupal_realpath(drupal_tempnam('temporary://', 'file'));
+        exec("$cmd -rem alla -reduce -brute -q ". escapeshellarg($dst) ." ". escapeshellarg($temp) ." && mv ". escapeshellarg($temp) ." ". escapeshellarg($dst));
+      }
+      if ($cmd = variable_get('imageapi_optimize_advpng', '')) {
+        exec("$cmd -z4q ". escapeshellarg($dst), $return, $output);
+      }
+      break;
+
+    case 'image/jpeg':
+      if ($cmd = variable_get('imageapi_optimize_jpegtran', '')) { // /usr/bin/jpegtran, should be installed in system
+        _imageapi_optimize_exec("$cmd -copy none -optimize -progressive ". escapeshellarg($dst), $dst);
+      }
+      if ($cmd = variable_get('imageapi_optimize_jfifremove', '')) {
+        _imageapi_optimize_exec("$cmd < ". escapeshellarg($dst), $dst);
+      }
+      break;
+  }
+
 }
 
 
@@ -5127,6 +5170,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
+    $out_sprite['uri'] = 'public://p/' . $providers_logos_sprite_name . '.' . $out_sprite_ext;
     $out_size = array();
     
     foreach ($providers_logos_sprite as $nid => $provider) {
@@ -5177,6 +5221,9 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
     // Save a new sprite file.
     imagepng($out_sprite['img'], $out_sprite['file']);
+    
+    // Optimize the image.
+    gv_misc_imageOptimizeOnServer(array('uri' => $out_sprite['uri'], 'filemime' => 'image/png'));
 
     // Show image.
     //Header("Content-type: image/png");
