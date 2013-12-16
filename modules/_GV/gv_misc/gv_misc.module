@@ -1486,14 +1486,14 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
   
-//  $dir = 'sites/default/files/jsmin-gv';
-//  $objects = scandir($dir);
-//  foreach ($objects as $object) {
-//    if ($object != "." && $object != "..") {
-//      unlink($dir . "/" . $object);
-//    }
-//  }
-//  variable_del('gv_minified_js');
+  $dir = 'sites/default/files/jsmin-gv';
+  $objects = scandir($dir);
+  foreach ($objects as $object) {
+    if ($object != "." && $object != "..") {
+      unlink($dir . "/" . $object);
+    }
+  }
+  variable_del('gv_minified_js');
   
   
   gv_misc_recalculateReviewsAmount();
@@ -1669,7 +1669,7 @@ function gv_misc_js_alter(&$javascript) {
     
       foreach($add_to_minified as $filename => $attr){
 
-        if(!$from_scratch || (strpos($filename, '.js') && !strpos($attr['data'], 'min.js') && !strpos($attr['data'], 'jsmin-gv'))) {
+        if(!$from_scratch || (strpos($filename, '.js') /*&& !strpos($attr['data'], 'min.js')*/ && !strpos($attr['data'], 'jsmin-gv'))) {
 
           $source_fpath_short = $attr['data'];
           $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
