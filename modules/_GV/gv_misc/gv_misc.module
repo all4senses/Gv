@@ -1705,6 +1705,7 @@ function gv_misc_js_alter(&$javascript) {
             if ($minOutput = JSMin::minify($source_content)) {
               
               if (strpos($minOutput, '/*') !== FALSE) {
+                $minOutput = preg_replace('/\/\*.*?\*\//s', '', $minOutput);
                 $tmp[] = $minOutput;
               }
               
