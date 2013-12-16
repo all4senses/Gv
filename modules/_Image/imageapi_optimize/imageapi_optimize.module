@@ -242,6 +242,9 @@ function _imageapi_optimize_service_internal($image, $dst) {
   */
   
   $dst = drupal_realpath($dst);
+  
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'VIA IMAGE API OPTIMIZE............... ' . $dst));
+  
   switch ($image->info['mime_type']) {
     case 'image/png':
       if ($cmd = variable_get('imageapi_optimize_optipng', '')) {
