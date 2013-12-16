@@ -1690,8 +1690,6 @@ function gv_misc_js_alter(&$javascript) {
     if($add_to_minified) {
 
       include_once DRUPAL_ROOT . '/sites/all/libraries/minify/min/lib/JSMin.php';
-    
-      $tmp = array();
       foreach($add_to_minified as $filename => $attr){
 
         if(!$from_scratch || (strpos($filename, '.js') /*&& !strpos($attr['data'], 'min.js')*/ && !strpos($attr['data'], 'jsmin-gv'))) {
@@ -1704,9 +1702,9 @@ function gv_misc_js_alter(&$javascript) {
           if ($source_content = file_get_contents($source_fpath)) {
             if ($minOutput = JSMin::minify($source_content)) {
               
+              // Remove comments.
               if (strpos($minOutput, '/*') !== FALSE) {
                 $minOutput = preg_replace('/\/\*.*?\*\//s', '', $minOutput);
-                $tmp[] = $minOutput;
               }
               
               $target_path_short = 'sites/default/files/jsmin-gv/' . str_replace('/', '-', $source_fpath_short);
@@ -1720,8 +1718,6 @@ function gv_misc_js_alter(&$javascript) {
         } // End of if(strpos($filename, '.js') && !strpos($attr['data'], "min.js") && !strpos($attr['data'], "jsmin-gv")) {
 
       } // End of foreach($javascript as $filename => $attr){
-      
-      dpm($tmp);
       
       variable_set('gv_minified_js', $gv_minified_js);
     } // End of if($add_to_minified) {
