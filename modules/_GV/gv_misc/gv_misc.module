@@ -5290,7 +5290,8 @@ function gv_misc_disqus_getNewUsers() {
     $gv_disqus_users += $new_gv_disqus_users;
     variable_set('gv_disqus_users', serialize($gv_disqus_users));
     
-    if ($new_users = print_r($new_users, TRUE)) {
+    if (!empty($new_users)) {
+      $new_users = print_r($new_users, TRUE);
       $out = 'Something has changed (new users, less users, etc).
  
 
