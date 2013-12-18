@@ -27,7 +27,8 @@
           changeMonth: true,
           changeYear: true,
           minDate: new Date(2013, 1, 1),
-          maxDate: 'today',
+          maxDate: 'today'
+          //,
           //showWeek: true,
           //firstDay: 1
 //          ,
