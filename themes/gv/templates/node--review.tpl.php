@@ -144,8 +144,13 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
-   
-  <div class="main-content" <?php echo 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'; /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
+
+<?php 
+  $full_title_urls = array('/reviews', '/reviews/business', '/reviews/residential');
+  $full_title = (in_array(@$_SERVER['REDIRECT_URL'], $full_title_urls)) ? TRUE : FALSE;
+?>
+
+  <div class="main-content" <?php echo ($full_title ? '' : 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'); /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
     
             <?php if (!$page): ?>
               <header>
@@ -156,16 +161,10 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                 <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
                   <h1 <?php 
                           //echo 'property="dc:title v:summary"';
-                          echo 'property="v:summary"';
+                          echo $full_title ? '' : 'property="v:summary"';
                           if (!$node->status) {echo ' class="not-published"';}
                       ?>
                 <?php else: ?>
-                    <?php 
-                    $full_title_urls = array('/reviews', '/reviews/business', '/reviews/residential');
-                    if (in_array(@$_SERVER['REDIRECT_URL'], $full_title_urls)) {
-                      $full_title = TRUE;
-                    }
-                    ?>
                     <?php /*if($full_title): ?>
                       <h2 <?php 
                               //echo 'class="rcaption" property="dc:title v:summary"';
