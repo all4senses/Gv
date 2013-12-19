@@ -593,7 +593,9 @@ h2 .p-icon.advice {background: url("images/sprite-04.png") no-repeat scroll -215
 /* Features */
 
 /* Ratings */
-#main .view-providers/*.block*/ .fivestar{float: left; position: relative; top: 3px;}
+#main .view-providers .fivestar{float: left; position: relative; top: 3px;}
+.logged-in #main .view-providers .fivestar{float: none; position: static; margin: auto;}
+
 
 div.fivestar-widget-static .star{width: 15px; height: 15px; float: left; background: url("images/sprite-2.png") no-repeat scroll 0 0 transparent;}
 div.fivestar-widget-static .star span.on{text-indent: -9999px; width: 15px; height: 15px; display: block; background: url("images/sprite-2.png") no-repeat scroll 0 -32px transparent;}
@@ -779,7 +781,7 @@ td.views-field-php-4 a.visit-site:hover{text-decoration: none;}
 
 
 
-.fivestars_n_count {max-width: 105px; margin: auto;}
+.fivestars_n_count {max-width: 105px; margin: auto; overflow: hidden;}
 
 #block-views-providers-bl-p-bu-rev-page-cmp td.views-field-php-9 {font-size: 12px;}
 
