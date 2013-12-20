@@ -5486,9 +5486,6 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
     }
   }
   
-  dpm($form_state['values']);
-  dpm($votes);
-  
   // Save votes to the temporary votes field.
   // It maybe reset later on (in node_save hook). But just for the sake of a code simplifying.
   // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
