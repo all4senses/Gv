@@ -1739,6 +1739,12 @@ function gv_misc_process_html(&$vars) {
 }
 
 
+function gv_misc_css_alter(&$css) {
+  // Remove defaults.css file.
+  //unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+  dpm($css);
+}
+
 /**
  * Implementing hook_js_alter
  * @param $javascript
