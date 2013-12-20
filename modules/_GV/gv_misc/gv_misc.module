@@ -1646,6 +1646,10 @@ function gv_misc_process_html(&$vars) {
   
   dpm($vars['page']);
   
+  $page_w_altered_urls = preg_replace('/sites\/all\/themes\/gv_orange\/css/s', 'theme', $vars['page']);
+  dpm($page_w_altered_urls);
+  
+  
   // We do not minify the code for logged in users and for quote landing and final pages.
   if (!$user->uid && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions-final' && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions') {
     
