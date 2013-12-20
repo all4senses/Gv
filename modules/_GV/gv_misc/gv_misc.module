@@ -1618,6 +1618,73 @@ function gv_misc_checkCtCaptcha_ajax() {
 }
 
 
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
+  // Create the path /contact-us from /contact
+//  if (preg_match('|^contact$|', $path, $matches)) {
+//    $path = 'contact-us';
+//  }
+//  else
+
+  
+  //if (!empty($options['attributes']['rel'])) 
+//  global $user;
+//  if ($path == 'http://click.websitegear.com/track/1883449')
+//  {
+//    //$options['attributes']['rel'] = 'nofollow';
+//    //dpm($path);
+//    //dpm($options);
+//    //unset($options['attributes']['rel']);
+//    $options['attributes']['rel'] = 'yyy';
+//    //$options['attributes']['target'] = '_parent';
+//    $options['fragment'] = 'zzz';
+//    //dpm($options);
+//  }
+  
+  if ($path == 'node/add/review') {
+    $path = 'voip-provider-submit-user-review';
+  }
+  elseif ($path == 'node/add/phone-review') {
+    $path = 'voip-phone-submit-user-review';
+  }
+  elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
+    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
+    $path = 'pdfs/' . $matches[1];
+  }
+  
+}
+
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
+//Create the path /contact-us from /contact
+//if (preg_match('|^contact-us$|', $path, $matches)) {
+//  $path = 'contact';
+//}
+//else
+  if ($path == 'voip-provider-submit-user-review') {
+    $path = 'node/add/review';
+  }
+  elseif ($path == 'voip-phone-submit-user-review') {
+    $path = 'node/add/phone-review';
+  }
+  else {
+    if (strpos($path, 'theme/images/') !== FALSE) {
+      dpm($path);
+      $path = str_replace('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
+    }
+  }
+//  elseif (preg_match('|^pdfs\/(.*)|', $path, $matches)) {
+//    //$path = 'pdfs/voipe911-advisory.pdf';
+//    $path = 'sites/default/files/pdfs/' . $matches[1];
+//    //$path = '';
+//  }
+}
+
 
 /**
  * Implements Hook Process Html.
@@ -1643,13 +1710,7 @@ function gv_misc_process_html(&$vars) {
   global $user;
 //  dpm($_SERVER);
 //  dpm($_GET);
-  
   //dpm($vars['page']);
-  
-  //$page_w_altered_urls = preg_replace('/sites\/all\/themes\/gv_orange\/css/s', 'theme', $vars['page']);
-  //$page_w_altered_urls = preg_replace('|sites/all/themes/gv_orange/css|s', 'theme', $vars['page']);
-  //dpm($page_w_altered_urls);
-  
   
   // We do not minify the code for logged in users and for quote landing and final pages.
   if (!$user->uid && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions-final' && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions') {
@@ -1671,7 +1732,7 @@ function gv_misc_process_html(&$vars) {
   else {
     //dpm($vars);
     if ($user->uid == 1) {
-      $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css|s', 'theme', $vars['page']);
+      $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'theme/images', $vars['page']);
     }
   }
   
@@ -3909,74 +3970,6 @@ function gv_misc_approveContent($type, $id) {
   }
   
   drupal_access_denied();
-}
-
-
-/**
- * Implements hook_url_inbound_alter().
- */
-function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
-//Create the path /contact-us from /contact
-//if (preg_match('|^contact-us$|', $path, $matches)) {
-//  $path = 'contact';
-//}
-//else
-  if ($path == 'voip-provider-submit-user-review') {
-    $path = 'node/add/review';
-  }
-  elseif ($path == 'voip-phone-submit-user-review') {
-    $path = 'node/add/phone-review';
-  }
-  else {
-    if (strpos($path, 'theme/images/') !== FALSE) {
-      dpm($path);
-      $path = str_replace('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
-    }
-  }
-//  elseif (preg_match('|^pdfs\/(.*)|', $path, $matches)) {
-//    //$path = 'pdfs/voipe911-advisory.pdf';
-//    $path = 'sites/default/files/pdfs/' . $matches[1];
-//    //$path = '';
-//  }
-}
-
-
-/**
- * Implements hook_url_outbound_alter().
- */
-function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
-  // Create the path /contact-us from /contact
-//  if (preg_match('|^contact$|', $path, $matches)) {
-//    $path = 'contact-us';
-//  }
-//  else
-
-  
-  //if (!empty($options['attributes']['rel'])) 
-//  global $user;
-//  if ($path == 'http://click.websitegear.com/track/1883449')
-//  {
-//    //$options['attributes']['rel'] = 'nofollow';
-//    //dpm($path);
-//    //dpm($options);
-//    //unset($options['attributes']['rel']);
-//    $options['attributes']['rel'] = 'yyy';
-//    //$options['attributes']['target'] = '_parent';
-//    $options['fragment'] = 'zzz';
-//    //dpm($options);
-//  }
-  
-  if ($path == 'node/add/review') {
-    $path = 'voip-provider-submit-user-review';
-  }
-  elseif ($path == 'node/add/phone-review') {
-    $path = 'voip-phone-submit-user-review';
-  }
-  elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
-    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
-    $path = 'pdfs/' . $matches[1];
-  }
-  
 }
 
 
