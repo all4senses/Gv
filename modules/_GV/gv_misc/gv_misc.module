@@ -1053,36 +1053,16 @@ function gv_misc_testPage() {
 */
   
   
-  // Get only featured providers.
-  /*
-  $providers = array();
-  //gv_misc_getProvidersKeyedByName($providers);
-  //function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_key = '', $only_featured = NULL, $no_cache = FALSE) {
-  
-  gv_misc_getProviders($providers, 'all', NULL, 'featured', NULL, TRUE);
-  //gv_misc_getProviders($providers, 'all', NULL, NULL, NULL, TRUE);
-  dpm($providers);
-  */
   
   
-  $str = 're(ev,ob);},cfg.interval);}}else{$(ob).unbind("mousemove",track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob);},cfg.timeout);}}};return this.mouseover(handleHover).mouseout(handleHover);};})(jQuery);;
-;
-/*!
- * Superfish v1.4.8 - jQuery menu widget
- * Copyright (c) 2008 Joel Birch
- *
- * Dual licensed under the MIT and GPL licenses:
- *  http://www.opensource.org/licenses/mit-license.php
- *  http://www.gnu.org/licenses/gpl.html
- *
- * CHANGELOG: http://users.tpg.com.au/j_birch/plugins/superfish/changelog.txt
- */
-(function($){$.fn.superfish=function';
+  $style_to_flush = 'as_featured_in_sideblock';
+  // Cut from function image_style_flush($style) {
+  // Delete the style directory in each registered wrapper.
+  $wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_WRITE_VISIBLE);
+  foreach ($wrappers as $wrapper => $wrapper_data) {
+    file_unmanaged_delete_recursive($wrapper . '://styles/' . $style_to_flush);
+  }
   
-  //preg_replace('/<img[^>]+>/i', '', $str);
-  $str = preg_replace('/\/\*.*?\*\//s', '', $str);
-  
-  dpm($str);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
