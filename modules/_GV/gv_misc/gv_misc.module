@@ -3930,7 +3930,7 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
   else {
     if (strpos($path, 'theme/images/') !== FALSE) {
       dpm($path);
-      $path = str_replce('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
+      $path = str_replace('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
     }
   }
 //  elseif (preg_match('|^pdfs\/(.*)|', $path, $matches)) {
