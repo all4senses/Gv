@@ -1644,6 +1644,8 @@ function gv_misc_process_html(&$vars) {
 //  dpm($_SERVER);
 //  dpm($_GET);
   
+  dpm($vars['page']);
+  
   // We do not minify the code for logged in users and for quote landing and final pages.
   if (!$user->uid && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions-final' && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions') {
     
@@ -3960,11 +3962,7 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
     //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
     $path = 'pdfs/' . $matches[1];
   }
-  else {
-    dpm($path);
-    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
-    //$path = 'pdfs/' . $matches[1];
-  }
+  
 }
 
 
