@@ -1816,9 +1816,9 @@ function gv_misc_js_alter(&$javascript) {
             if ($minOutput = JSMin::minify($source_content)) {
               
               // Remove comments.
-              if (strpos($minOutput, '/*') !== FALSE) {
-                $minOutput = preg_replace('/\/\*.*?\*\//s', '', $minOutput);
-              }
+//              if (strpos($minOutput, '/*') !== FALSE) {
+//                $minOutput = preg_replace('/\/\*.*?\*\//s', '', $minOutput);
+//              }
               
               $target_path_short = 'sites/default/files/jsmin-gv/' . str_replace('/', '-', $source_fpath_short);
               if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $minOutput)) {
