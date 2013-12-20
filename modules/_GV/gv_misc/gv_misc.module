@@ -1742,7 +1742,29 @@ function gv_misc_process_html(&$vars) {
 function gv_misc_css_alter(&$css) {
   // Remove defaults.css file.
   //unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
-  dpm($css);
+  //dpm($css);
+  /*
+   $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
+
+          
+          
+          if ($source_content = file_get_contents($source_fpath)) {
+            if ($minOutput = JSMin::minify($source_content)) {
+              
+              // Remove comments.
+              if (strpos($minOutput, '/*') !== FALSE) {
+                $minOutput = preg_replace('/\/\*.*?\*\//s', '', $minOutput);
+              }
+              
+              $target_path_short = 'sites/default/files/jsmin-gv/' . str_replace('/', '-', $source_fpath_short);
+              if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $minOutput)) {
+                $gv_minified_js[$filename] = $target_path_short;
+                $javascript[$filename]['data'] = $gv_minified_js[$filename];
+              }
+            }
+          }
+          
+          */
 }
 
 /**
