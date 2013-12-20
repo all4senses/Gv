@@ -7672,14 +7672,14 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         //dpm($all_data_quick[$data['data']->nid]);
         //if (0) {
-        global $user;
-        
-        if ($user->hostname == '109.171.109.18') {
-          //dpm($user);
-          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
-          return '. ' . $sprite_name . ' - ' . $p_image;
-        }
-        if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name)) {
+//        global $user;
+//        
+//        if ($user->hostname == '109.171.109.18') {
+//          //dpm($user);
+//          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
+//          return '. ' . $sprite_name . ' - ' . $p_image;
+//        }
+        if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name, $all_data_quick)) {
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
         }
