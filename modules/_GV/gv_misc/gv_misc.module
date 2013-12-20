@@ -1672,12 +1672,12 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
   elseif ($path == 'voip-phone-submit-user-review') {
     $path = 'node/add/phone-review';
   }
-  else {
-    if (strpos($path, 'theme/images/') !== FALSE) {
-      //dpm($path);
-      $path = str_replace('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
-    }
-  }
+//  else {
+//    if (strpos($path, 'theme/images/') !== FALSE) {
+//      //dpm($path);
+//      $path = str_replace('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
+//    }
+//  }
 //  elseif (preg_match('|^pdfs\/(.*)|', $path, $matches)) {
 //    //$path = 'pdfs/voipe911-advisory.pdf';
 //    $path = 'sites/default/files/pdfs/' . $matches[1];
@@ -1731,9 +1731,9 @@ function gv_misc_process_html(&$vars) {
   }
   else {
     //dpm($vars);
-    if ($user->uid == 1) {
-      $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'theme/images', $vars['page']);
-    }
+//    if ($user->uid == 1) {
+//      $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'theme/images', $vars['page']);
+//    }
   }
   
 }
