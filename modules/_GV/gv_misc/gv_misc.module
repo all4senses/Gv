@@ -3928,7 +3928,10 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
     $path = 'node/add/phone-review';
   }
   else {
-    dpm($path);
+    if (strpos($path, 'theme/images/') !== FALSE) {
+      dpm($path);
+      $path = str_replce('theme/images/', 'sites/all/themes/gv_orange/css/images/',$path );
+    }
   }
 //  elseif (preg_match('|^pdfs\/(.*)|', $path, $matches)) {
 //    //$path = 'pdfs/voipe911-advisory.pdf';
