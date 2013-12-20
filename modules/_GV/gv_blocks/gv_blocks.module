@@ -892,6 +892,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       //dpm($images);
       $data = array('html_images' => $edit['html_images'], 'images' => $images);
       variable_set('gv_as_featured_in_side', serialize($data));
+      
+      // Reset (clear) old styled images so that new images will be created on the next access to those images.
+      $style_to_flush = 'as_featured_in_sideblock';
+      // Cut from function image_style_flush($style) {
+      // Delete the style directory in each registered wrapper.
+      $wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_WRITE_VISIBLE);
+      foreach ($wrappers as $wrapper => $wrapper_data) {
+        file_unmanaged_delete_recursive($wrapper . '://styles/' . $style_to_flush);
+      }
+      
       break;
   }
   

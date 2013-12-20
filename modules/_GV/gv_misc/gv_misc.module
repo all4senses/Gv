@@ -1053,17 +1053,6 @@ function gv_misc_testPage() {
 */
   
   
-  
-  
-  $style_to_flush = 'as_featured_in_sideblock';
-  // Cut from function image_style_flush($style) {
-  // Delete the style directory in each registered wrapper.
-  $wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_WRITE_VISIBLE);
-  foreach ($wrappers as $wrapper => $wrapper_data) {
-    file_unmanaged_delete_recursive($wrapper . '://styles/' . $style_to_flush);
-  }
-  
-  
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
@@ -3970,6 +3959,11 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
   elseif (preg_match('|^sites\/default\/files\/pdfs\/(.*)|', $path, $matches)) {
     //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
     $path = 'pdfs/' . $matches[1];
+  }
+  else {
+    dpm($path);
+    //$path = 'sites/default/files/pdfs/voipe911-advisory.pdf';
+    //$path = 'pdfs/' . $matches[1];
   }
 }
 
