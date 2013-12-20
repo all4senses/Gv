@@ -1644,7 +1644,7 @@ function gv_misc_process_html(&$vars) {
 //  dpm($_SERVER);
 //  dpm($_GET);
   
-  dpm($vars['page']);
+  //dpm($vars['page']);
   
   //$page_w_altered_urls = preg_replace('/sites\/all\/themes\/gv_orange\/css/s', 'theme', $vars['page']);
   //$page_w_altered_urls = preg_replace('|sites/all/themes/gv_orange/css|s', 'theme', $vars['page']);
@@ -1670,6 +1670,9 @@ function gv_misc_process_html(&$vars) {
   }
   else {
     //dpm($vars);
+    if ($user->uid == 1) {
+      $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css|s', 'theme', $vars['page']);
+    }
   }
   
 }
