@@ -1774,7 +1774,7 @@ function gv_misc_css_alter(&$css) {
       continue;
     }
     
-    $changes = TRUE;
+    
     
     //$source_fpath_short = 'sites/all/themes/gv_orange/css/custom.css';
     $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
@@ -1798,6 +1798,8 @@ function gv_misc_css_alter(&$css) {
         
         $gv_altered_css[$source_fpath_short] = $target_path_short;
         $css[$source_fpath_short]['data'] = $gv_altered_css[$source_fpath_short];
+        
+        $changes = TRUE;
       }
     }
           
