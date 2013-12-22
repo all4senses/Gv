@@ -1783,7 +1783,9 @@ function gv_misc_css_alter(&$css) {
       
       $output = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'images/theme', $output);
       # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
-      //$output = preg_replace('|images\/|s', 'theme/images/', $output);
+      $output = preg_replace('|(images\/|s', '/theme/images/', $output);
+      $output = preg_replace('|(\"images\/|s', '/theme/images/', $output);
+      $output = preg_replace('|(\'images\/|s', '/theme/images/', $output);
       // The same ...
       # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
               
