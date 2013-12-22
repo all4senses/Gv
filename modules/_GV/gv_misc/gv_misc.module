@@ -1763,7 +1763,7 @@ function gv_misc_css_alter(&$css) {
   
   //dpm($css);
   
-  $gv_altered_css = variable_get('gv_altered_css');
+  $gv_altered_css = variable_get('gv_altered_css', array());
   
   $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css'/*, 'sites/all/themes/gv_orange/css/iframes-n-quotes.css'*/);
     
