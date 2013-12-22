@@ -1765,15 +1765,17 @@ function gv_misc_css_alter(&$css) {
   
   $gv_altered_css = variable_get('gv_altered_css');
   
-  if ($gv_altered_css) {
-    return;
-  }
-  
-  
   $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css', 'sites/all/themes/gv_orange/css/iframes-n-quotes.css');
-  
+    
+  $changes = FALSE;
   foreach ($css_files_to_alter as $source_fpath_short) {
   
+    if (!isset($css[$source_fpath_short]) || in_array($source_fpath_short, $gv_altered_css)) {
+      continue;
+    }
+    
+    $changes = TRUE;
+    
     //$source_fpath_short = 'sites/all/themes/gv_orange/css/custom.css';
     $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
       
@@ -1802,7 +1804,9 @@ function gv_misc_css_alter(&$css) {
   } // End of foreach ($css_files_to_alter as $source_fpath_short) {
   
   //dpm($gv_altered_css);
-  variable_set('gv_altered_css', $gv_altered_css);
+  if ($changes) {
+    variable_set('gv_altered_css', $gv_altered_css);
+  }
 }
 
 
