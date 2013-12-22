@@ -1524,13 +1524,15 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
   
-//  $dir = 'sites/default/files/jsmin-gv';
-//  $objects = scandir($dir);
-//  foreach ($objects as $object) {
-//    if ($object != "." && $object != "..") {
-//      unlink($dir . "/" . $object);
-//    }
-//  }
+  /* // No need to delete files as they are deleted on rebuilding after gv_minified_js variable reset.
+  $dir = 'sites/default/files/jsmin-gv';
+  $objects = scandir($dir);
+  foreach ($objects as $object) {
+    if ($object != "." && $object != "..") {
+      unlink($dir . "/" . $object);
+    }
+  }
+  */
 //  variable_del('gv_minified_js');
   
   
@@ -1739,33 +1741,51 @@ function gv_misc_process_html(&$vars) {
 }
 
 
+/**
+ * Implementing hook_css_alter
+ * @param $css
+ * 
+ * GV Change long image files paths to short aliases...
+ */
 function gv_misc_css_alter(&$css) {
-  // Remove defaults.css file.
-  //unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+  
   //dpm($css);
-  /*
-   $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
-
+  
+  $gv_altered_css = variable_get('gv_altered_css');
+  
+  if ($gv_altered_css) {
+    return;
+  }
+  
+  
+  $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css', 'sites/all/themes/gv_orange/css/iframes-n-quotes.css');
+  
+  foreach ($css_files_to_alter as $source_fpath_short) {
+  
+    $source_fpath_short = 'sites/all/themes/gv_orange/css/custom.css';
+    $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
+      
+    if ($source_content = file_get_contents($source_fpath)) {
+      $output = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'theme/images', $source_content);
+      $target_path_short = 'sites/default/files/css-altered-gv/' . str_replace('/', '-', $source_fpath_short);
+      if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $output)) {
+        /*
+        $gv_altered_css[$target_path_short] = $css[$source_fpath_short]; 
+        $gv_altered_css[$target_path_short]['data'] = $gv_altered_css[$target_path_short];
+        unset($css[$source_fpath_short]);
+        $css[$target_path_short] = $gv_altered_css[$target_path_short];
+        */
+        
+        $gv_altered_css[$filename] = $target_path_short;
+        ////$css[$source_fpath_short]['data'] = $gv_altered_css[$filename];
+      }
+    }
           
-          
-          if ($source_content = file_get_contents($source_fpath)) {
-            if ($minOutput = JSMin::minify($source_content)) {
-              
-              // Remove comments.
-              if (strpos($minOutput, '/*') !== FALSE) {
-                $minOutput = preg_replace('/\/\*.*?\*\//s', '', $minOutput);
-              }
-              
-              $target_path_short = 'sites/default/files/jsmin-gv/' . str_replace('/', '-', $source_fpath_short);
-              if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $minOutput)) {
-                $gv_minified_js[$filename] = $target_path_short;
-                $javascript[$filename]['data'] = $gv_minified_js[$filename];
-              }
-            }
-          }
-          
-          */
+  } // End of foreach ($css_files_to_alter as $source_fpath_short) {
+  
+  variable_set('gv_altered_css', $gv_altered_css);
 }
+
 
 /**
  * Implementing hook_js_alter
