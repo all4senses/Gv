@@ -1777,8 +1777,14 @@ function gv_misc_css_alter(&$css) {
     //$source_fpath_short = 'sites/all/themes/gv_orange/css/custom.css';
     $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
       
-    if ($source_content = file_get_contents($source_fpath)) {
-      $output = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'theme/images', $source_content);
+    if ($output = file_get_contents($source_fpath)) {
+      
+      $output = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'images/theme', $output);
+      # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
+      $output = preg_replace('|images\/|s', 'theme/images/', $output);
+      // The same ...
+      # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
+              
       $target_path_short = 'sites/default/files/css-altered-gv/' . str_replace('/', '-', $source_fpath_short);
       if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $output)) {
         /*
