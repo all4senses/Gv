@@ -1052,6 +1052,20 @@ function gv_misc_testPage() {
   dpm('last 7 days: ' . date('m\/d\/Y H:i:s', strtotime('-7 days')));
 */
   
+  $output = "
+#block-gv-blocks-request-quote-v6 .results .guide{position: relative; color: black; font-size: 14px; left: 0; padding: 040px 0 0 0; top: 0; width: 200px; background: none;}
+#block-gv-blocks-request-quote-v6 .phone-pic{background: url(/sites/all/themes/gv_orange/css/images/sprite-04.png) no-repeat -4px -246px transparent; position: absolute; right: 10px; top: 97px; width: 90px; height: 80px;}
+#block-gv-blocks-request-quote-v6 #personal_data .phone-pic{background: url('images/sprite-04.png') no-repeat -4px -246px transparent; position: absolute; right: 0; top: 60px; width: 90px; height: 80px;}
+#block-gv-blocks-request-quote-v6 .results .guide img{width: 80px; padding: 0 63px; margin: 2px 0 0 0;}
+";
+  
+  $output = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'images/theme', $output);
+  //$output = preg_replace('|\(images|s', '(/images/theme', $output);
+  //$output = preg_replace('|\(\"images|s', '("/images/theme', $output);
+  $output = preg_replace('|\(\'images|s', '(\'/images/theme', $output);
+  
+  dpm($output);
+  
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
