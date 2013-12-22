@@ -1736,6 +1736,10 @@ function gv_misc_process_html(&$vars) {
     //dpm($vars);
     if ($user->uid == 1) {
       $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'theme/images', $vars['page']);
+//      $vars['page'] = preg_replace('|sites\/default\/files\/p|s', 'images/providers/sprites', $vars['page']);
+//      $vars['page'] = preg_replace('|sites\/default\/files\/p\/logos|s', 'images/providers/logos', $vars['page']);
+//      $vars['page'] = preg_replace('|sites\/default\/files\/p\/images|s', 'images/providers', $vars['page']);
+
     }
   }
   
@@ -1755,7 +1759,7 @@ function gv_misc_css_alter(&$css) {
   $gv_altered_css = variable_get('gv_altered_css');
   
   if ($gv_altered_css) {
-    //return;
+    return;
   }
   
   
@@ -1784,7 +1788,7 @@ function gv_misc_css_alter(&$css) {
           
   } // End of foreach ($css_files_to_alter as $source_fpath_short) {
   
-  dpm($gv_altered_css);
+  //dpm($gv_altered_css);
   variable_set('gv_altered_css', $gv_altered_css);
 }
 
