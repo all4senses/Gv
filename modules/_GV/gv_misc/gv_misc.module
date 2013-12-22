@@ -1754,7 +1754,7 @@ function gv_misc_css_alter(&$css) {
   $gv_altered_css = variable_get('gv_altered_css');
   
   if ($gv_altered_css) {
-    return;
+    //return;
   }
   
   
@@ -1783,6 +1783,7 @@ function gv_misc_css_alter(&$css) {
           
   } // End of foreach ($css_files_to_alter as $source_fpath_short) {
   
+  dpm($gv_altered_css);
   variable_set('gv_altered_css', $gv_altered_css);
 }
 
