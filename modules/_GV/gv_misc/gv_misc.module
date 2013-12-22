@@ -1765,7 +1765,7 @@ function gv_misc_css_alter(&$css) {
   
   $gv_altered_css = variable_get('gv_altered_css');
   
-  $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css', 'sites/all/themes/gv_orange/css/iframes-n-quotes.css');
+  $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css'/*, 'sites/all/themes/gv_orange/css/iframes-n-quotes.css'*/);
     
   $changes = FALSE;
   foreach ($css_files_to_alter as $source_fpath_short) {
@@ -1797,7 +1797,7 @@ function gv_misc_css_alter(&$css) {
         */
         
         $gv_altered_css[$source_fpath_short] = $target_path_short;
-        $css[$source_fpath_short]['data'] = $gv_altered_css[$source_fpath_short];
+        //$css[$source_fpath_short]['data'] = $gv_altered_css[$source_fpath_short];
         
         $changes = TRUE;
       }
