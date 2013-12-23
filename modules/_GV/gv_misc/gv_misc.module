@@ -1751,6 +1751,7 @@ function gv_misc_process_html(&$vars) {
     //dpm($vars);
     //if ($user->uid == 1) 
       {
+      /*
       $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'images/theme', $vars['page']);
         # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
       $vars['page'] = preg_replace('|sites\/default\/files\/p|s', 'images/providers/logos/sprites', $vars['page']);
@@ -1763,6 +1764,25 @@ function gv_misc_process_html(&$vars) {
       $vars['page'] = preg_replace('|sites\/default\/files\/styles\/logo_provider_chart_main\/public\/p\/logos|s', 'images/providers/logos/chart', $vars['page']);
         # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
 
+      */
+      
+      $vars['page'] = preg_replace(
+              array(
+                '|sites\/default\/files\/p\/|s',
+                    # RewriteRule ^images/providers/logos/sprites/(.*) sites/default/files/p/$1
+                '|sites\/default\/files\/styles\/logo_provider_chart_main\/public\/p\/logos\/|s',
+                    # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
+                '|sites\/all\/themes\/gv_orange\/css\/images\/|s', 
+                    # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
+              ), 
+              array(
+                'images/providers/logos/sprites/',
+                'images/providers/logos/chart/',
+                'images/theme/',
+              ), 
+              
+              $vars['page']);
+      
     }
   }
   
