@@ -57,7 +57,8 @@
                 echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" />';
               }
               */
-              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" />';
+              //echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" />';
+              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
             }
 //            else 
 //            {
