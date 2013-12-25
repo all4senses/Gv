@@ -1069,7 +1069,7 @@ function gv_misc_testPage() {
   
   
   $output = 'sites/default/files/yyyy/xxx.png, sites/default/files/zzz.png';
-  $output = preg_replace('|sites\/default\/files\/[^\/]*|s', 'images/content/all/', $output);
+  $output = preg_replace('|sites\/default\/files\/[^\/]\..*|s', 'images/content/all/', $output);
   
   dpm($output);
   
