@@ -1068,10 +1068,10 @@ function gv_misc_testPage() {
   
   
   
-  $output = 'sites/default/files/yyyy/xxx.png, sites/default/files/zzz.png';
+  $output = 'sites/default/files/yyy/xxx.png, sites/default/files/zzz.png';
   
   // $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
-  $output = preg_replace('|sites\/default\/files\/[^\/]*\.|s', 'images/content/all/', $output);
+  $output = preg_replace('|sites\/default\/files\/([^\/]*\.)|s', 'images/content/all/$1', $output);
   
   dpm($output);
   
