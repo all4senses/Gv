@@ -1776,6 +1776,15 @@ function gv_misc_process_html(&$vars) {
       $vars['page'] = preg_replace(
               array(
                   
+                // sites/default/files/styles/related_article_thumb_sideblock/public/tech-review-sites-header-getvoip.jpg
+                '|sites\/default\/files\/styles\/related_article_thumb_sideblock/public\/|s',
+                # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
+                
+                //sites/default/files/styles/article_thumbnail_h/public/cloud-for-hr.png  
+                '|sites\/default\/files\/styles\/article_thumbnail_h/public\/|s',
+                # RewriteRule ^images/content/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
+                 
+                  
                 // sites/default/files/styles/as_featured_in_sideblock/public/a/logo_pcworld.jpg  
                 '|sites\/default\/files\/styles\/as_featured_in_sideblock\/public\/a\/|s',
                 # RewriteRule ^images/providers/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
@@ -1797,6 +1806,8 @@ function gv_misc_process_html(&$vars) {
                     # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
               ), 
               array(
+                'images/content/thumb-related/',
+                'images/content/thumb-h/',
                 'images/providers/logos/featured-in/',
                 'images/providers/logos/page/',
                 'images/providers/site/',
