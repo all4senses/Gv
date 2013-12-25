@@ -1068,8 +1068,8 @@ function gv_misc_testPage() {
   
   
   
-  $output = 'kjhk oid123xxx3546';
-  $output = preg_replace('/.*oid(.*)xxx.*/s', '$1', $output);
+  $output = 'sites/default/files/yyyy/xxx.png';
+  $output = preg_replace('|sites\/default\/files\/|s', 'images/content/all/', $output);
   
   dpm($output);
   
@@ -1776,6 +1776,11 @@ function gv_misc_process_html(&$vars) {
       $vars['page'] = preg_replace(
               array(
                   
+                // sites/default/files/cloud-for-hr.png  
+                ////'|sites\/default\/files\/|s',
+                # RewriteRule ^images/content/all/(.*) sites/default/files/$1
+                
+                
                 // sites/default/files/styles/related_article_thumb_sideblock/public/tech-review-sites-header-getvoip.jpg
                 '|sites\/default\/files\/styles\/related_article_thumb_sideblock/public\/|s',
                 # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
@@ -1806,6 +1811,7 @@ function gv_misc_process_html(&$vars) {
                     # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
               ), 
               array(
+                ////'images/content/all/',
                 'images/content/thumb-related/',
                 'images/content/thumb-h/',
                 'images/providers/logos/featured-in/',
