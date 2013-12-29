@@ -9244,7 +9244,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       
       $query->condition('n.nid', $article_nid, '!=');
       
-      ////$query->condition('n.status', 1);
+      $query->condition('n.status', 1);
       
       $query->orderBy('n.created', 'DESC');
       $results = $query->execute()->fetchAllAssoc('nid');
@@ -9350,7 +9350,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 
           }
           
-          ////$query->condition('n.status', 1);
+          $query->condition('n.status', 1);
           
           $query->condition('n.nid', $article_nid, '!=');
           //$results = $query->execute()->fetchAllAssoc('nid');
@@ -9495,7 +9495,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
         $query->addField('td_' . $key, 'name', 'term_' . $key);
       }
       
-      ////$query->condition('n.status', 1);
+      $query->condition('n.status', 1);
       
       $query->condition('n.nid', $article_nid, '!=');
       if (!empty($articles)) {
