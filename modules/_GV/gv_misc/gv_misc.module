@@ -658,6 +658,8 @@ function gv_misc_get_sectionArticles($section, $limit = NULL) {
         ->fields('s', array('entity_id'));
     $query->leftJoin('node', 'n', 'n.nid = s.entity_id ');
     $query->fields('n', array('title'));
+    
+    $query->condition('n.status', 1);
     $query->condition('field_funnel_sections_value', $section);
     $query->orderBy('title', 'asc');
     if ($limit) {
