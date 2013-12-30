@@ -2215,8 +2215,11 @@ function gv_blocks_currentPageProviderArticles() {
   $cache_name = 'gv_providersArticles_' . $args[1] . '_' .$language->language;
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+    dpm('a');
     return $cache_content->data;
   }
+  
+  dpm('b');
   
   $query = db_select('field_data_field_providers_mentioned', 'p')  
         ->fields('p', array('entity_id'));
