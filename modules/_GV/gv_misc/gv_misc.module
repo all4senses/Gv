@@ -1776,9 +1776,8 @@ function gv_misc_process_html(&$vars) {
         # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
 
       */
-      dpm($_GET);
-      dpm(arg());
-      dpm(arg(2));
+      
+      //dpm(arg(2));
       $edit_page = (arg(2) == 'edit' ? TRUE : FALSE);
       
       if (!$edit_page) {
@@ -1799,7 +1798,9 @@ function gv_misc_process_html(&$vars) {
                 '|sites\/default\/files\/styles\/article_thumbnail_h\/public\/|s',
                 # RewriteRule ^images/content/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
                  
-                  
+                '|sites\/default\/files\/styles\/article_thumbnail_v\/public\/|s',
+                # RewriteRule ^images/content/thumb-v/(.*) sites/default/files/styles/article_thumbnail_v/public/$1
+                
                 // sites/default/files/styles/as_featured_in_sideblock/public/a/logo_pcworld.jpg  
                 '|sites\/default\/files\/styles\/as_featured_in_sideblock\/public\/a\/|s',
                 # RewriteRule ^images/providers/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
@@ -1824,6 +1825,7 @@ function gv_misc_process_html(&$vars) {
                 'images/posts/$1', //'images/content/all/$1',
                 'images/thumb-related/', //'images/content/thumb-related/',
                 'images/thumb-h/', //'images/content/thumb-h/',
+                'images/thumb-v/', //'images/content/thumb-v/',
                 'images/logos/featured-in/', //'images/providers/logos/featured-in/',
                 'images/logos/page/', //'images/providers/logos/page/',
                 'images/providerwebsite/', //'images/providers/site/',
