@@ -2227,6 +2227,9 @@ function gv_blocks_currentPageProviderArticles() {
   $query->fields('n', array('created'));
   $query->fields('pn', array('field_p_name_value'));
   $query->fields('e', array('field_extra_data_value'));
+  
+  $query->condition('n.status', 1);
+  
   $query->condition('p.field_providers_mentioned_target_id', $args[1]);
   $query->orderBy('n.created', 'DESC')
         ->range(0, 5);//->limit(10);
