@@ -731,6 +731,7 @@ function gv_blocks_block_configure($delta = '') {
     
       $data = unserialize(variable_get('gv_home_in_hlighted_3', NULL));
       
+      //dpm($data);
 
       $form['banner_title'] = array(
         '#type' => 'textfield', 
@@ -862,7 +863,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     
     case 'home_in_hlighted_3':
       $data = array('title' => $edit['banner_title'], 'testimonial' => $edit['testimonial'], 'features' => $edit['features']);
-      variable_set('gv_home_in_hlighted_2', serialize($data));
+      variable_set('gv_home_in_hlighted_3', serialize($data));
       break;
     
     
