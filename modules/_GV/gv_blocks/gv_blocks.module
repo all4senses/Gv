@@ -736,6 +736,7 @@ function gv_blocks_block_configure($delta = '') {
       $form['banner_title'] = array(
         '#type' => 'text_format', 
         '#title' => 'Title',
+        '#format' => 'full_html',
         '#default_value' => $data['title']['value'],
       );
       $form['testimonial'] = array(
