@@ -282,6 +282,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['home_in_hlighted_3'] = array(
+    'info' => 'Home in highlighted 3',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['writer-admin-links'] = array(
     'info' => 'Writer admin links',
     'cache' => DRUPAL_NO_CACHE,
@@ -601,6 +606,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion('v2');
       break;
     
+    case 'home_in_hlighted_3':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_prefaceHomeMainInHighlightedRegion('v3');
+      break;
+    
     case 'writer-admin-links':
       $block['subject'] = '';
       $block['content'] = gv_blocks_getWriterAdminLinks();
@@ -717,6 +727,34 @@ function gv_blocks_block_configure($delta = '') {
       break;
   
     
+    case 'home_in_hlighted_3':
+    
+      $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
+      
+
+      $form['banner_title'] = array(
+        '#type' => 'textfield', 
+        '#title' => 'Title',
+        '#default_value' => $data['title'],
+      );
+      $form['testimonial'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Testimonial',
+        '#format' => 'full_html',
+        '#default_value' => $data['testimonial']['value'],
+      );
+
+      $form['features'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Features',
+        '#format' => 'full_html',
+        '#default_value' => $data['features']['value'],
+      );
+      
+      break;
+    
+    
+    
     
     case 'weekly_video':
     
@@ -822,6 +860,13 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       break;
       
     
+    case 'home_in_hlighted_3':
+      $data = array('title' => $edit['banner_title'], 'testimonial' => $edit['testimonial'], 'features' => $edit['features']);
+      variable_set('gv_home_in_hlighted_2', serialize($data));
+      break;
+    
+    
+    
     case 'weekly_video':
       variable_set('gv_weekly_video_block', $edit['youtube_video_id']);
       break;
@@ -905,6 +950,47 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       break;
   }
   
+}
+
+
+/**
+ * Block with the main part of the home preface to place to Highlighted region.
+ */
+function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
+  
+  $out = '';
+  
+  switch ($key) {
+    case 'v1':
+    case 'v2':
+      $home_preface_node = gv_misc_getPrefaceByKey('front');
+      $home_preface_node->title_no_link = TRUE;
+      $home_preface_node_view = node_view($home_preface_node, 'full');
+
+      $out = render($home_preface_node_view);
+      break;
+  }
+  
+  switch ($key) {
+    case 'v2':
+      $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
+      //$out = '<h1 class="preface">' . $data['title'] . '</h1>' . $data['body']['value'] . '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
+      ////$out .= '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div><div id="flying_text_2">' . $data['flying_text_2']['value'] . '</div>';
+      $out .= '<div id="flying_text_3">' . $data['flying_text_3']['value'] . '</div>';
+      break;
+    
+    case 'v3':
+      $data = unserialize(variable_get('gv_home_in_hlighted_3', NULL));
+      
+      $out .= '
+        <div id="banner_title">' . $data['title']['value'] . '</div>
+        <div id="features">' . $data['features']['value'] . '</div>
+        <div id="testimonial">' . $data['testimonial']['value'] . '</div>
+      ';
+      break;
+  }
+  
+  return $out;
 }
 
 
@@ -1241,30 +1327,6 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL)
  */
 function gv_blocks_getWriterAdminLinks() {
   return '<a href="/admin/content-gv?service=All">Add/Edit Content</a><a href="/cc">Clear Cache</a>';
-}
-
-
-/**
- * Block with the main part of the home preface to place to Highlighted region.
- */
-function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
-  
-  $home_preface_node = gv_misc_getPrefaceByKey('front');
-  $home_preface_node->title_no_link = TRUE;
-  $home_preface_node_view = node_view($home_preface_node, 'full');
-
-  $out = render($home_preface_node_view);
-
-  switch ($key) {
-    case 'v2':
-      $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
-      //$out = '<h1 class="preface">' . $data['title'] . '</h1>' . $data['body']['value'] . '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
-      ////$out .= '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div><div id="flying_text_2">' . $data['flying_text_2']['value'] . '</div>';
-      $out .= '<div id="flying_text_3">' . $data['flying_text_3']['value'] . '</div>';
-      break;
-  }
-  
-  return $out;
 }
 
 
