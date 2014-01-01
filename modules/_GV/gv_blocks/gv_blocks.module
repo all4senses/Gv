@@ -734,9 +734,9 @@ function gv_blocks_block_configure($delta = '') {
       //dpm($data);
 
       $form['banner_title'] = array(
-        '#type' => 'textfield', 
+        '#type' => 'text_format', 
         '#title' => 'Title',
-        '#default_value' => $data['title'],
+        '#default_value' => $data['title']['value'],
       );
       $form['testimonial'] = array(
         '#type' => 'text_format', 
