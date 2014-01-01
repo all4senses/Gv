@@ -216,7 +216,7 @@
 
 
           <div class="c">GetVoIP is an independent VoIP service shoppers guide, offering unbiased comparisons and consumer reports. 
-            <div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
+            <div>© 2014 GetVoIP.com | All Rights Reserved</div>
           </div>
 
         </div>

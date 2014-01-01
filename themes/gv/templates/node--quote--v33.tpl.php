@@ -201,7 +201,7 @@
       <div class="bottom-clear"></div>
     </div>
     
-    <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
+    <div class="copy">© 2014 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
     
   </div>
   
@@ -267,7 +267,7 @@
   
   <footer>
     <!--<div class="links"><a href="/about-us" target="_blank">About Us</a><span class="delim">|</span><a href="/privacy-policy" target="_blank">Privacy Policy</a></div>-->
-    <div class="copy">© 2010-2013 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
+    <div class="copy">© 2014 GetVoIP.com All Rights Reserved <br/> BizMedia Central LLC | New York, NY</div>
   </footer>
           
 <?php ?>

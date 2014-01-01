@@ -194,7 +194,7 @@
      
     
             <div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
-<div>© 2012-2013 GetVoIP.com | All Rights Reserved</div>
+<div>© 2014 GetVoIP.com | All Rights Reserved</div>
 </div>
 
     
