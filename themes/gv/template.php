@@ -674,7 +674,8 @@ function gv_process_page(&$variables) {
   // Local fonts, taken from the remote side.  
   drupal_add_css('sites/all/libraries/fonts/google/open-sans-n-ubuntu/fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
-  
+  drupal_add_css('sites/all/libraries/fonts/other/fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  //
   // Add the font-awesome icons font.
   drupal_add_css('sites/all/libraries/fonts/font-awesome/css/font-awesome.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
