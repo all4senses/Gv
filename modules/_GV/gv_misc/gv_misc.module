@@ -1716,7 +1716,7 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
 
 /**
  * Implements Hook Process Html.
- * Minify html on the fly.
+ * 
  */
 function gv_misc_process_html(&$vars) {
   
@@ -1734,12 +1734,9 @@ function gv_misc_process_html(&$vars) {
   
   
   
+  // Minify html on the fly.
   
   global $user;
-//  dpm($_SERVER);
-//  dpm($_GET);
-  //dpm($vars['page']);
-  
   // We do not minify the code for logged in users and for quote landing and final pages.
   if (!$user->uid && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions-final' && @$_SERVER['REQUEST_URI'] != '/compare-voip-solutions') {
     
@@ -1757,88 +1754,84 @@ function gv_misc_process_html(&$vars) {
       );
 
   }
-  //else 
-    {
-    //dpm($vars);
-    //if ($user->uid == 1) 
-      {
-      /*
-      $vars['page'] = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'images/theme', $vars['page']);
-        # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
-      $vars['page'] = preg_replace('|sites\/default\/files\/p|s', 'images/providers/logos/sprites', $vars['page']);
-        # RewriteRule ^images/providers/logos/sprites/(.*) sites/default/files/p/$1
-      
-//      $vars['page'] = preg_replace('|sites\/default\/files\/p\/logos|s', 'images/providers/logos', $vars['page']);
-//      $vars['page'] = preg_replace('|sites\/default\/files\/p\/images|s', 'images/providers', $vars['page']);
+  
+  
+  
+  // Rewrite urls in the content to make them more short and beautifull
+  // .htaccess should contain back decoding code for these encoded urls.
+  
+  /*
+  
+    # Back decode changed (in function gv_misc_process_html(&$vars) ) urls.
 
-      
-      $vars['page'] = preg_replace('|sites\/default\/files\/styles\/logo_provider_chart_main\/public\/p\/logos|s', 'images/providers/logos/chart', $vars['page']);
-        # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
+    RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
 
-      */
-      
-      //dpm(arg(2));
-      $edit_page = (arg(2) == 'edit' ? TRUE : FALSE);
-      
-      if (!$edit_page) {
-        $vars['page'] = preg_replace(
-              array(
-                  
-                // sites/default/files/cloud-for-hr.png  
-                // $output = preg_replace('|sites\/default\/files\/([^\/]*\.)|s', 'images/content/all/$1', $output);
-                '|sites\/default\/files\/([^\/]*\.)|s',
-                # RewriteRule ^images/content/all/(.*) sites/default/files/$1
-                
-                
-                // sites/default/files/styles/related_article_thumb_sideblock/public/tech-review-sites-header-getvoip.jpg
-                '|sites\/default\/files\/styles\/related_article_thumb_sideblock\/public\/|s',
-                # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
-                
-                //sites/default/files/styles/article_thumbnail_h/public/cloud-for-hr.png  
-                '|sites\/default\/files\/styles\/article_thumbnail_h\/public\/|s',
-                # RewriteRule ^images/content/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
-                 
-                '|sites\/default\/files\/styles\/article_thumbnail_v\/public\/|s',
-                # RewriteRule ^images/content/thumb-v/(.*) sites/default/files/styles/article_thumbnail_v/public/$1
-                
-                // sites/default/files/styles/as_featured_in_sideblock/public/a/logo_pcworld.jpg  
-                '|sites\/default\/files\/styles\/as_featured_in_sideblock\/public\/a\/|s',
-                # RewriteRule ^images/providers/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
-                  
-                 // sites/default/files/styles/logo_provider_page/public/p/logos/phonebooth-logo_0.png
-                '|sites\/default\/files\/styles\/logo_provider_page\/public\/p\/logos\/|s',
-                # RewriteRule ^images/providers/logos/page/(.*) sites/default/files/styles/logo_provider_page/public/p/logos/$1
-                  
-                  
-                // sites/default/files/styles/image_provider_page/public/p/images/phonebooth-site.png  
-                '|sites\/default\/files\/styles\/image_provider_page\/public\/p\/images\/|s',
-                # RewriteRule ^images/providers/site/(.*) sites/default/files/styles/image_provider_page/public/p/images/$1
-                  
-                '|sites\/default\/files\/p\/|s',
-                    # RewriteRule ^images/providers/logos/sprites/(.*) sites/default/files/p/$1
-                '|sites\/default\/files\/styles\/logo_provider_chart_main\/public\/p\/logos\/|s',
-                    # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
-                '|sites\/all\/themes\/gv_orange\/css\/images\/|s', 
-                    # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
-              ), 
-              array(
-                'images/posts/$1', //'images/content/all/$1',
-                'images/thumb-related/', //'images/content/thumb-related/',
-                'images/thumb-h/', //'images/content/thumb-h/',
-                'images/thumb-v/', //'images/content/thumb-v/',
-                'images/logos/featured-in/', //'images/providers/logos/featured-in/',
-                'images/logos/page/', //'images/providers/logos/page/',
-                'images/providerwebsite/', //'images/providers/site/',
-                'images/logos/sprites/', //'images/providers/logos/sprites/',
-                'images/logos/chart/', //'images/providers/logos/chart/',
-                'images/theme/',
-              ), 
+    RewriteRule ^images/logos/sprites/(.*) sites/default/files/p/$1
+    RewriteRule ^images/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
+    RewriteRule ^images/logos/page/(.*) sites/default/files/styles/logo_provider_page/public/p/logos/$1
+    RewriteRule ^images/providerwebsite/(.*) sites/default/files/styles/image_provider_page/public/p/images/$1
+    RewriteRule ^images/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
+    RewriteRule ^images/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
+    RewriteRule ^images/thumb-v/(.*) sites/default/files/styles/article_thumbnail_v/public/$1
+    RewriteRule ^images/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
+    RewriteRule ^images/posts/(.*) sites/default/files/$1
+  
+  */
+  
+  // Disable rewriting for edit mode.
+  $edit_page = (arg(2) == 'edit' ? TRUE : FALSE);
+  if (!$edit_page) {
+    
+    //$vars['page'] = preg_replace('|sites\/default\/files\/p\/logos|s', 'images/providers/logos', $vars['page']);
+    //$vars['page'] = preg_replace('|sites\/default\/files\/p\/images|s', 'images/providers', $vars['page']);
+
+    $vars['page'] = preg_replace(
+          array(
+            '|sites\/default\/files\/([^\/]*\.)|s',
+            # RewriteRule ^images/content/all/(.*) sites/default/files/$1
+
+            '|sites\/default\/files\/styles\/related_article_thumb_sideblock\/public\/|s',
+            # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
+
+            '|sites\/default\/files\/styles\/article_thumbnail_h\/public\/|s',
+            # RewriteRule ^images/content/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
+
+            '|sites\/default\/files\/styles\/article_thumbnail_v\/public\/|s',
+            # RewriteRule ^images/content/thumb-v/(.*) sites/default/files/styles/article_thumbnail_v/public/$1
+
+            '|sites\/default\/files\/styles\/as_featured_in_sideblock\/public\/a\/|s',
+            # RewriteRule ^images/providers/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
+
+            '|sites\/default\/files\/styles\/logo_provider_page\/public\/p\/logos\/|s',
+            # RewriteRule ^images/providers/logos/page/(.*) sites/default/files/styles/logo_provider_page/public/p/logos/$1
+
+            '|sites\/default\/files\/styles\/image_provider_page\/public\/p\/images\/|s',
+            # RewriteRule ^images/providers/site/(.*) sites/default/files/styles/image_provider_page/public/p/images/$1
+
+            '|sites\/default\/files\/p\/|s',
+            # RewriteRule ^images/providers/logos/sprites/(.*) sites/default/files/p/$1
               
-              $vars['page']);
-      
-      }
-      
-    }
+            '|sites\/default\/files\/styles\/logo_provider_chart_main\/public\/p\/logos\/|s',
+            # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
+            
+            '|sites\/all\/themes\/gv_orange\/css\/images\/|s', 
+            # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
+          ), 
+          array(
+            'images/posts/$1',
+            'images/thumb-related/',
+            'images/thumb-h/',
+            'images/thumb-v/',
+            'images/logos/featured-in/',
+            'images/logos/page/',
+            'images/providerwebsite/',
+            'images/logos/sprites/',
+            'images/logos/chart/',
+            'images/theme/',
+          ), 
+
+          $vars['page']);
+
   }
   
 }
@@ -1854,9 +1847,12 @@ function gv_misc_css_alter(&$css) {
   
   //dpm($css);
   
+  // Rewrite urls in the content to make them more short and beautifull
+  // .htaccess should contain back decoding code for these encoded urls.
+  
   $gv_altered_css = variable_get('gv_altered_css', array());
   
-  $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css'/*, 'sites/all/themes/gv_orange/css/iframes-n-quotes.css'*/);
+  $css_files_to_alter = array('sites/all/themes/gv_orange/css/custom.css', 'sites/all/themes/gv_orange/css/iframes-n-quotes.css');
     
   $changes = FALSE;
   foreach ($css_files_to_alter as $source_fpath_short) {
