@@ -1876,6 +1876,9 @@ function gv_misc_css_alter(&$css) {
       // The same ...
       # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
               
+      
+      
+      
       $target_path_short = 'sites/default/files/css-altered-gv/' . str_replace('/', '-', $source_fpath_short);
       if (file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $output)) {
         /*
