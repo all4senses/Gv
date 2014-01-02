@@ -1359,6 +1359,10 @@ function gv_block_buildTopicsBlock($content_type_label) {
  */
 function gv_blocks_reviewsCounter() {
   
+  if (!$ReviewsAmount = variable_get('gv_allReviewsAmount')) {
+    $ReviewsAmount = gv_misc_recalculateReviewsAmount();
+  }
+  
   $chars = str_split(variable_get('gv_allReviewsAmount'));
   //$counter = count($chars) == 3 ? '<span>0</span>' : '';
   $counter = '';

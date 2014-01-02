@@ -1562,7 +1562,9 @@ function gv_misc_flush_caches() {
   
   variable_del('gv_altered_css');
   
-  gv_misc_recalculateReviewsAmount();
+  //gv_misc_recalculateReviewsAmount();
+  variable_del('gv_allReviewsAmount');
+  
 }
 
 
@@ -1589,6 +1591,8 @@ function gv_misc_recalculateReviewsAmount() {
   $countQuery = $query->countQuery();
   $num_votes = $countQuery->execute()->fetchField();
   variable_set('gv_allReviewsAmount', $num_votes);
+  
+  return $num_votes;
 }
 
 
@@ -2350,7 +2354,26 @@ function gv_misc_goToExternalUrl() {
  * Flush the cache and redirect to the Home page.
  */
 function gv_misc_flushCache() {
-  drupal_flush_all_caches();
+  
+  //drupal_flush_all_caches();
+  
+  // Not so hard reset...
+
+  // The code from function views_invalidate_cache()
+  // Clear the views cache.
+  cache_clear_all('*', 'cache_views', TRUE);
+  // Clear the page and block cache.
+  cache_clear_all();
+  // Allow modules to respond to the Views cache being cleared.
+  module_invoke_all('views_invalidate_cache');
+  
+  cache_clear_all('*', 'cache_views_data', TRUE);
+  
+  // Function from the module boost.
+  boost_flush_caches();
+  
+  variable_del('gv_allReviewsAmount');
+  
   drupal_set_message('Cache is flushed.', 'warning');
   drupal_goto('');
 }
