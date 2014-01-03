@@ -5138,3 +5138,27 @@ function gv_blocks_voipAds($type = 'bu') {
   
   return $out;
 }
+
+
+/**
+ * Themed user block for the header.
+ */
+function gv_blocks_userBlock() {
+  
+  global $user;
+  
+  if (!$user->uid) {
+    
+    gv_misc_initLogin();
+    // V1, no need to launch drupal_add_library('system', 'drupal.ajax');
+    //$out = ctools_modal_text_button(t('Login'), 'ajax_register/login/nojs', t('Login'), 'ctools-modal-ctools-ajax-register-style');
+    // V2, need to launch drupal_add_library('system', 'drupal.ajax') in zp_user_initLogin(), but possible to set more params in l()...
+    $out = l(t('Login'), 'ajax_register/login/nojs', array('html' => TRUE, 'attributes' => array('rel' => 'nofollow', 'class' => array('gv-login', 'ctools-use-modal', 'ctools-modal-ctools-ajax-register-style'), 'title' => t('Login'))));
+  }
+  else {
+    $out = '<span class="user-profile">Hello, ' . theme('username', array('account' => $user, 'link_path' => 'user/' . $user->uid))  . '</span><span class="user-logout">' . l('Logout', 'user/logout', array('query' => array('destination' => ltrim(str_replace('#comment-form', '', $_SERVER['REQUEST_URI']), '/')))) . '</span>';
+  }
+  
+  return $out;
+}
+

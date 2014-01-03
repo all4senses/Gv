@@ -3370,6 +3370,14 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
+      dpm($user);
+      
+//      if ($user->hostname == '') {
+//        $form['social_login'] = array(
+//          '#markup' => '<div class="user-header">', gv_blocks_userBlock(), '</div>',
+//        );
+//      }
+      
       
       if (in_array('administrator', $user->roles)) {
         $current_user_is_admin = TRUE;

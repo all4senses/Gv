@@ -10415,3 +10415,31 @@ class GvPager extends PagerDefault {
   }
 
 }
+
+
+/**
+ * Prepare login data for poopup and loginza.
+ */
+function gv_misc_initLogin() {
+  
+  global $gv_login_initiated;
+  
+  if (!$gv_login_initiated) {
+    
+    $gv_login_initiated = TRUE;
+    
+    // ajax_login module functionality for popup ajax login.
+    _ajax_register_include_modal();
+    
+    
+    // V1, no need to launch drupal_add_library('system', 'drupal.ajax');
+    //$out = ctools_modal_text_button(t('Login'), 'ajax_register/login/nojs', t('Login'), 'ctools-modal-ctools-ajax-register-style');
+    // V2, need to launch drupal_add_library('system', 'drupal.ajax') in zp_user_initLogin(), but possible to set more params in l()...
+    //$out = l(t('Login'), 'ajax_register/login/nojs', array('html' => TRUE, 'attributes' => array('class' => array('ctools-use-modal', 'ctools-modal-ctools-ajax-register-style'), 'title' => t('Login'))));
+    
+    // So, comment if plan to use without ctools_modal_text_button()
+    drupal_add_library('system', 'drupal.ajax');
+    
+    
+  }
+}
