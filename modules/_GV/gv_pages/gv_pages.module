@@ -3373,8 +3373,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       //dpm($user);
       
       if ($user->hostname == '37.229.169.239') {
-        $form['social_login'] = array(
-          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+//        $form['social_login'] = array(
+//          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+//        );
+        
+        $form['hybridauth'] = array(
+          '#type' => 'hybridauth_widget',
         );
       }
       
