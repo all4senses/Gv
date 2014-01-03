@@ -3370,19 +3370,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       global $user;
       
-      //dpm($user);
-      
-      if ($user->hostname == '37.229.169.239') {
-//        $form['social_login'] = array(
-//          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
-//        );
-        
-        $form['hybridauth'] = array(
-          '#type' => 'hybridauth_widget',
-        );
-      }
-      
-      
       if (in_array('administrator', $user->roles)) {
         $current_user_is_admin = TRUE;
       }
@@ -3481,6 +3468,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['about_you']['field_r_fname_temp']['#title'] = t('Your name');
           $form['about_you']['field_r_lname_temp']['#title'] = '';
           
+          
+          if ($user->hostname == '37.229.169.239') {
+    //        $form['social_login'] = array(
+    //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+    //        );
+
+            $form['about_you']['hybridauth'] = array(
+              '#type' => 'hybridauth_widget',
+            );
+          }
           
           
       $form['provider'] = array(
