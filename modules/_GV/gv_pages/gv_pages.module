@@ -3374,7 +3374,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       if ($user->hostname == '37.229.169.239') {
         $form['social_login'] = array(
-          '#markup' => '<div class="user-header">', gv_blocks_userBlock(), '</div>',
+          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
         );
       }
       
