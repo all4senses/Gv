@@ -10443,3 +10443,36 @@ function gv_misc_initLogin() {
     
   }
 }
+
+
+/**
+ * Invoked when a new user account is about to be created through HybridAuth.
+ * @param object $account
+ *   User account object.
+ * @param array $data
+ *   HybridAuth identity data.
+ */
+function gv_misc_hybridauth_user_preinsert($account, $data) {
+  dpm($data);
+  dpm($account);
+}
+
+/**
+ * Alter the values returned by HybridAuth library.
+ * @param array $profile
+ */
+function gv_misc_hybridauth_profile_alter(&$profile) {
+  dpm($profile);
+}
+
+/**
+ * Alter the user info for the user being created by HybridAuth.
+ * @param array $userinfo
+ *   Information to create a new user.
+ * @param array $data
+ *   HybridAuth identity data.
+ */
+function gv_misc_hybridauth_userinfo_alter(&$userinfo, $data) {
+  dpm($data);
+  dpm($userinfo);
+}
