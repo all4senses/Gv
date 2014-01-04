@@ -44,7 +44,7 @@
   
   <?php 
  
-    $is_reviewer = strpos($_SERVER['REQUEST_URI'], 'reviewer/');
+    $is_reviewer = strpos($_SERVER['REQUEST_URI'], 'reviewer/') !== FALSE ? TRUE : FALSE;
   
     print render($user_profile['metatags']);
     
