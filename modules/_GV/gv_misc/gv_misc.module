@@ -10453,8 +10453,8 @@ function gv_misc_initLogin() {
  *   HybridAuth identity data.
  */
 function gv_misc_hybridauth_user_preinsert($account, $data) {
-  dpm($data);
-  dpm($account);
+  //dpm($data);
+  //dpm($account);
 }
 
 /**
@@ -10462,7 +10462,7 @@ function gv_misc_hybridauth_user_preinsert($account, $data) {
  * @param array $profile
  */
 function gv_misc_hybridauth_profile_alter(&$profile) {
-  dpm($profile);
+  //dpm($profile);
 }
 
 /**
@@ -10475,6 +10475,10 @@ function gv_misc_hybridauth_profile_alter(&$profile) {
 function gv_misc_hybridauth_userinfo_alter(&$userinfo, $data) {
   dpm($data);
   dpm($userinfo);
+  
+  $userinfo['name'] = 'aaa';  
+  $userinfo['field_u_fname']['und'][0]['value'] = 'xxx';
+  $userinfo['field_u_lname']['und'][0]['value'] = 'yyy';
 }
 
 /**
@@ -10483,8 +10487,8 @@ function gv_misc_hybridauth_userinfo_alter(&$userinfo, $data) {
 function gv_misc_form_user_register_form_alter(&$form, &$form_state) {
     
   
-  dpm($form);
-  dpm($form_state);
+  //dpm($form);
+  //dpm($form_state);
     {
 //    
 //    
