@@ -7196,29 +7196,22 @@ function gv_misc_tokens($type, $tokens, array $data = array(), array $options = 
   }
   
   
-  //dpm($type);
-  //dpm($tokens);
-  //dpm($data);
   
-  // Add new token 'provider-name-for-current-review' to a 'node' tokens group.
+  // Add new token 'subpath-by-role' to a 'user' tokens group.
   if ($type == 'user' && !empty($data['user'])) {
     $user = $data['user'];
-    
-    dpm($user);
     
     foreach ($tokens as $name => $original) {
       switch ($name) {
         case 'subpath-by-role':
 
-            //if (in_array('reviewer', $user->roles)) {
-            if (isset($user->roles[9])) { // reviewer
-              
+            //if (in_array('reviewer', $user->roles)) { // doesn't work.
+            if (isset($user->roles[9])) { // reviewer.
               $replacements[$original] = 'reviewers';
             }
             else {
               $replacements[$original] = 'staff';
             }
-
           
           break;
       }
