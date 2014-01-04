@@ -7210,7 +7210,8 @@ function gv_misc_tokens($type, $tokens, array $data = array(), array $options = 
       switch ($name) {
         case 'subpath-by-role':
 
-            if (in_array('reviewer', $user->roles)) {
+            //if (in_array('reviewer', $user->roles)) {
+            if (isset($user->roles[9])) { // reviewer
               
               $replacements[$original] = 'reviewers';
             }
