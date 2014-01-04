@@ -2233,7 +2233,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#type'] = 'textarea';
       //$form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
       unset($form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size']);
-      dpm($form);
+      //dpm($form);
       break;
       
     case 'user_login_block':
@@ -3488,10 +3488,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   );
                 }
                 else {
-                  dpm($_GET);
-                  dpm($_SERVER);
+                  //dpm($_GET);
+                  //dpm($_SERVER);
                   $form['about_you']['logout'] = array(
-                    '#markup' => l('Log out...', 'user/logout', array('query' => array('destination' => $_SERVER['REQUEST_URI']))),
+                    '#markup' => l('Log out...', 'user/logout', array('query' => array('destination' => ltrim('/', $_SERVER['REQUEST_URI'])))),
                     '#weight' => 10,
                   );
                 }
