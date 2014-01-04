@@ -7196,51 +7196,32 @@ function gv_misc_tokens($type, $tokens, array $data = array(), array $options = 
   }
   
   
-  dpm($type);
-  dpm($tokens);
-  dpm($data);
-  /*
+  //dpm($type);
+  //dpm($tokens);
+  //dpm($data);
+  
   // Add new token 'provider-name-for-current-review' to a 'node' tokens group.
   if ($type == 'user' && !empty($data['user'])) {
     $user = $data['user'];
-
+    
     foreach ($tokens as $name => $original) {
       switch ($name) {
-        case 'provider-name-for-current-review':
-          if ($node->type == 'review') {
-            if (isset($node->field_ref_provider['und'][0]['target_id']) && $node->field_ref_provider['und'][0]['target_id']) {
+        case 'subpath-by-role':
+
+            if (in_array('reviewer', $user->roles)) {
               
-//              $provider_title = db_select('node', 'n')
-//                ->fields('n', array('title'))
-//                ->condition('nid', $node->field_ref_provider['und'][0]['target_id'])
-//                ->execute()->fetchField();
-              
-              
-              $query = db_select('node', 'n');
-              $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid"); // inner_join file_usage table against file_managed
-              //$query->fields('n', array('nid', 'title'))  // specifying fields from file_usage table
-              $query->fields('pn', array('field_p_name_value')) // specifying fields from file_managed table
-                    ->condition('nid', $node->field_ref_provider['und'][0]['target_id']);
-              
-              $provider_title = $query->execute()->fetchField();
-              
-              
-              
-              
-              
-              $replacements[$original] = $provider_title;
+              $replacements[$original] = 'reviewers';
             }
             else {
-              $replacements[$original] = check_plain($node->field_r_oprovider['und'][0]['value']);
+              $replacements[$original] = 'staff';
             }
 
-          }
           
           break;
       }
     }
   }
-  */
+  
   
   return $replacements;
 }
