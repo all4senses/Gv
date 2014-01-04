@@ -39,6 +39,7 @@
     dpm($user_profile); 
     //dpm($variables); 
     dpm($_GET); dpm(arg()); 
+    dpm($_SERVER);
   ?>
   
   <?php 
