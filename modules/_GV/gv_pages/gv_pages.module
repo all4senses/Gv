@@ -3490,8 +3490,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 else {
                   //dpm($_GET);
                   //dpm($_SERVER);
+                  dpm($user);
                   $form['about_you']['logout'] = array(
-                    '#markup' => l('Log out...', 'user/logout', array('query' => array('destination' => ltrim($_SERVER['REQUEST_URI'], '/')))),
+                    '#markup' => 'You are logged in as ' . $user->name . '. ' . l('Log out...', 'user/logout', array('query' => array('destination' => ltrim($_SERVER['REQUEST_URI'], '/')))),
                     '#weight' => 10,
                   );
                 }
