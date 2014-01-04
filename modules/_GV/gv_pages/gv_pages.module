@@ -2229,7 +2229,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     
     case 'hybridauth_admin_provider_settings':
-      $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
+      $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#type'] = 'textarea';
+      //$form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
+      unset($form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size']);
       dpm($form);
       break;
       
