@@ -2229,6 +2229,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     
     case 'hybridauth_admin_provider_settings':
+      // Allow enter longer scope string on the hybridauth settings page http://getvoip.com/admin/config/people/hybridauth/provider/Google?destination=admin/config/people/hybridauth.
       $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#type'] = 'textarea';
       //$form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
       unset($form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size']);
@@ -3476,14 +3477,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           $form['about_you']['field_r_lname_temp']['#title'] = '';
           
           
-          if (!$user->uid && /*$user->hostname == '37.229.169.239'*/ isset($_GET['social'])) {
-    //        $form['social_login'] = array(
-    //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
-    //        );
+          if (isset($_GET['social'])) {
+                if (!$user->uid) {
+          //        $form['social_login'] = array(
+          //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+          //        );
 
-            $form['about_you']['hybridauth'] = array(
-              '#type' => 'hybridauth_widget',
-            );
+                  $form['about_you']['hybridauth'] = array(
+                    '#type' => 'hybridauth_widget',
+                  );
+                }
+                else {
+                  $form['about_you']['logout'] = array(
+                    '#markup' => l('Log out...', '/user/logout'),
+                  );
+                }
           }
           
           
