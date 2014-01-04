@@ -10476,3 +10476,37 @@ function gv_misc_hybridauth_userinfo_alter(&$userinfo, $data) {
   dpm($data);
   dpm($userinfo);
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function gv_misc_form_user_register_form_alter(&$form, &$form_state) {
+    
+  
+  dpm($form);
+  dpm($form_state);
+    {
+//    
+//    
+//    $form['account']['name']['#default_value'] = zp_user_loginza_username($data); //strtolower(str_replace(' ', '.', $data['name']['full_name'])); //_loginza_username($data);
+//    $form['field_first_name']['und'][0]['value']['#default_value'] = @$data['name']['first_name'];
+//    $form['field_last_name']['und'][0]['value']['#default_value'] = @$data['name']['last_name'];
+//    
+//    // Set a full name.
+//    if (!empty($data['name']['full_name'])) {
+//      $full_name = $data['name']['full_name'];
+//    }
+//    else {
+//      $name_parts = array();
+//      if (!empty($data['name']['first_name'])) {
+//        $name_parts[] = $data['name']['first_name'];
+//      }
+//      if (!empty($data['name']['last_name'])) {
+//        $name_parts[] = $data['name']['last_name'];
+//      }
+//      $full_name = trim(implode(' ', $name_parts));
+//    }
+//    $form['field_full_name']['und'][0]['value']['#default_value'] = $full_name;
+ }
+
+}
