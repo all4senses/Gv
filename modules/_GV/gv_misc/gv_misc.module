@@ -10476,9 +10476,9 @@ function gv_misc_hybridauth_userinfo_alter(&$userinfo, $data) {
   dpm($data);
   dpm($userinfo);
   
-  $userinfo['name'] = 'aaa';  
-  $userinfo['field_u_fname']['und'][0]['value'] = 'xxx';
-  $userinfo['field_u_lname']['und'][0]['value'] = 'yyy';
+  //$userinfo['name'] = 'aaa';  
+  $userinfo['field_u_fname']['und'][0]['value'] = $data['firstName'];
+  $userinfo['field_u_lname']['und'][0]['value'] = $data['lastName'];
 }
 
 /**
