@@ -2230,6 +2230,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     
     case 'hybridauth_admin_provider_settings':
       $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
+      dpm($form);
       break;
       
     case 'user_login_block':
