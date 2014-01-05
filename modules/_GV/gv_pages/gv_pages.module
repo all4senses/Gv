@@ -3513,7 +3513,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     
                     if ($avatar) {
                       dpm($avatar);
+                      $avatar_themed = theme('image_style', array( 'path' =>  $avatar->uri, 'style_name' => 'logo_provider_page', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
                     }
+                    else {
+                      $avatar_themed = NULL;
+                    }
+                    
+                    
                     
                   }
                   
@@ -3524,7 +3530,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   //dpm(unserialize($user->session));
                   
                   $form['about_you']['logout'] = array(
-                    '#markup' => 'You are logged in as ' . l($user->name, 'user/' . $user->uid) . (!empty($user->data['hybridauth']['provider']) ? ', registered via ' . l($user->data['hybridauth']['provider'], $user->data['hybridauth']['profileURL'], array('external' => TRUE)) : '') . '. ' . l('Log out...', 'user/logout', array('query' => array('destination' => ltrim($_SERVER['REQUEST_URI'], '/')))),
+                    '#markup' => 'You are logged in as ' . $avatar_themed . l($user->name, 'user/' . $user->uid) . (!empty($user->data['hybridauth']['provider']) ? ', registered via ' . l($user->data['hybridauth']['provider'], $user->data['hybridauth']['profileURL'], array('external' => TRUE)) : '') . '. ' . l('Log out...', 'user/logout', array('query' => array('destination' => ltrim($_SERVER['REQUEST_URI'], '/')))),
                     '#weight' => 10,
                   );
                 }
