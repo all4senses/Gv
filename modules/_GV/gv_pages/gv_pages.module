@@ -3493,10 +3493,28 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   //dpm($_GET);
                   //dpm($_SERVER);
                   
+                  
+                  
+                  if (is_object($user->picture)) {
+                    $avatar = $user->picture;
+                  }
+                  elseif($user->picture) {
+                    $avatar = file_load($user->picture);
+                  }
+                  else {
+                    $avatar = NULL;
+                  }
+                  
+                  
                   if ($user->hostname == '37.229.169.239') {
                     dpm($user);
-                    $user_full = user_load($user->uid);
-                    dpm($user_full);
+                    //$user_full = user_load($user->uid);
+                    //dpm($user_full);
+                    
+                    if ($avatar) {
+                      dpm($avatar);
+                    }
+                    
                   }
                   
                   //dpm($_SESSION);
