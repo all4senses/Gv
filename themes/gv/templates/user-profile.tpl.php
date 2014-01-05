@@ -39,12 +39,12 @@
     //dpm($user_profile); 
     //dpm($variables); 
     //dpm($_GET); dpm(arg()); 
-    dpm($_SERVER);
+    //dpm($_SERVER);
   ?>
   
   <?php 
  
-    $is_reviewer = strpos($_SERVER['REQUEST_URI'], 'reviewer/') !== FALSE ? TRUE : FALSE;
+    $is_reviewer = strpos($_SERVER['REQUEST_URI'], 'reviewers/') !== FALSE ? TRUE : FALSE;
   
     print render($user_profile['metatags']);
     
