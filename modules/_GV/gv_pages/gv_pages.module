@@ -2229,11 +2229,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     
     case 'hybridauth_admin_provider_settings':
+      
       // Allow enter longer scope string on the hybridauth settings page http://getvoip.com/admin/config/people/hybridauth/provider/Google?destination=admin/config/people/hybridauth.
-      $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#type'] = 'textarea';
-      //$form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
-      unset($form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size']);
-      //dpm($form);
+      if (isset($form['vtabs']['advanced']['hybridauth_provider_Google_scope'])) {
+        $form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#type'] = 'textarea';
+        //$form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size'] = 300;
+        unset($form['vtabs']['advanced']['hybridauth_provider_Google_scope']['#size']);
+      }
       break;
       
     case 'user_login_block':
