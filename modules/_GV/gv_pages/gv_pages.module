@@ -3493,7 +3493,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   //dpm($_GET);
                   //dpm($_SERVER);
                   
-                  dpm($user);
+                  if ($user->hostname == '37.229.169.239') {
+                    dpm($user);
+                  }
+                  
                   //dpm($_SESSION);
                   //dpm(unserialize($_SESSION['HA::CONFIG']['config']));
                   
