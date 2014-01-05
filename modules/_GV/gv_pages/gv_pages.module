@@ -3495,6 +3495,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   
                   dpm($user);
                   dpm($_SESSION);
+                  dpm(unserialize($_SESSION['HA::CONFIG']['config']));
+                  
                   dpm(unserialize($user->session));
                   
                   $form['about_you']['logout'] = array(
