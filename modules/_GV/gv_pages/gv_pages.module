@@ -3492,7 +3492,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                 else {
                   //dpm($_GET);
                   //dpm($_SERVER);
+                  
                   dpm($user);
+                  dpm($_SESSION);
+                  dpm(unserialize($user->session));
+                  
                   $form['about_you']['logout'] = array(
                     '#markup' => 'You are logged in as ' . l($user->name, 'user/' . $user->uid) . (!empty($user->data['hybridauth']['provider']) ? ' via ' . l($user->data['hybridauth']['provider'], $user->data['hybridauth']['profileURL'], array('external' => TRUE)) : '') . '. ' . l('Log out...', 'user/logout', array('query' => array('destination' => ltrim($_SERVER['REQUEST_URI'], '/')))),
                     '#weight' => 10,
