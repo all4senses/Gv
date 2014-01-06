@@ -3537,7 +3537,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                     //dpm($user_full);
                     
                     if ($avatar) {
-                      dpm($avatar);
+                      //dpm($avatar);
                       $avatar_themed = theme('image_style', array( 'path' =>  $avatar->uri, 'style_name' => 'avatar_reviewer', 'alt' => '', 'title' => '', 'attributes' => array('class' => 'avatar reviewer', 'rel' => 'v:photo')));
                     }
                     else {
