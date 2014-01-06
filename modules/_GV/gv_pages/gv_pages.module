@@ -2223,10 +2223,23 @@ function gv_pages_theme($existing, $type, $theme, $path) {
  */
 function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
-   //dpm($form_id);  dpm($form);
+   dpm($form_id);  dpm($form);
   // $conf['locale_custom_strings_en']['old string'] = 'new string'
   
   switch ($form_id) {
+    
+    
+    if (isset($_GET['social'])) {
+                if (!$user->uid) {
+          //        $form['social_login'] = array(
+          //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+          //        );
+
+                  $form['about_you']['hybridauth'] = array(
+                    '#type' => 'hybridauth_widget',
+                  );
+                }
+    }
     
     case 'hybridauth_admin_provider_settings':
       
