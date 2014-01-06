@@ -2223,11 +2223,10 @@ function gv_pages_theme($existing, $type, $theme, $path) {
  */
 function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
-  global $user;
-  
-  if ($user->hostname == '37.229.169.239') {
-    dpm($form_id);  //dpm($form);
-  }
+//  global $user;
+//  if ($user->hostname == '37.229.169.239') {
+//    dpm($form_id);  //dpm($form);
+//  }
   
   //dpm($form_id);  dpm($form);
   // $conf['locale_custom_strings_en']['old string'] = 'new string'
@@ -2238,17 +2237,16 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'user_login':
     
       if (isset($_GET['social'])) {
-                  //if (!$user->uid) 
-                    {
-            //        $form['social_login'] = array(
-            //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
-            //        );
 
-                    $form['about_you']['hybridauth'] = array(
-                      '#type' => 'hybridauth_widget',
-                      '#weight' => 10,
-                    );
-                  }
+        //        $form['social_login'] = array(
+        //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+        //        );
+
+              $form['about_you']['hybridauth'] = array(
+                '#type' => 'hybridauth_widget',
+                '#weight' => 10,
+              );
+
       }
       break;
     
