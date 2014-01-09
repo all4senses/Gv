@@ -21,7 +21,9 @@ function gv_link($variables) {
   //dpm('-------> ' . $variables['path']);
   if (isset($variables['options']['query']['items_per_page'])) {
   //if ($variables['path'] == 'node/63') {
+    $variables['options']['query']['sort_by'] = 'created';
     dpm($variables['options']);
+    
   }
   //if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449' && strpos($variables['path'], 'ttp://') && !strpos($variables['path'], 'ttp://getvoip.com')) {
   if (strpos($variables['path'], '://') && !strpos($variables['path'], 'ttp://getvoip.com')) {
