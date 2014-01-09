@@ -19,10 +19,11 @@ function gv_preprocess_user_profile(&$profile) {
 function gv_link($variables) {
   //global $user;
   //dpm('-------> ' . $variables['path']);
-  if (isset($variables['options']['query']['items_per_page'])) {
+  //if (isset($variables['options']['query']['items_per_page'])) {
+  if (isset($variables['options']['query']['sort_by']) && !$variables['options']['query']['sort_by']) {
   //if ($variables['path'] == 'node/63') {
     $variables['options']['query']['sort_by'] = 'created';
-    dpm($variables['options']);
+    //dpm($variables['options']);
     
   }
   //if ($user->uid == 1 && $variables['path'] == 'http://click.websitegear.com/track/1883449' && strpos($variables['path'], 'ttp://') && !strpos($variables['path'], 'ttp://getvoip.com')) {
