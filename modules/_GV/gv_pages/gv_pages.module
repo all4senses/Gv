@@ -6603,18 +6603,16 @@ function gv_pages_node_view($node, $view_mode) {
       
       if ($view_mode == 'full') {
         
-        dpm($_GET);
-        
-        global $user;
-        
-        if ($user->uid == 1 && isset($_GET['sort_by']) && !$_GET['sort_by']) {
+        // Fix for a possibe wrong url param => empty sort_by param that causes php error.
+        // Also need to rewrite urls at function gv_link($variables) at template.php
+        if (isset($_GET['sort_by']) && !$_GET['sort_by']) {
           $query = $_GET;
           unset($query['q']);
           $query['sort_by'] = 'created';
           drupal_goto($_GET['q'], array('query' => $query));
         }
         
-        
+        global $user;
         
         
         // For a registered user....
