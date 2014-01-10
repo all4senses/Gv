@@ -6607,6 +6607,16 @@ function gv_pages_node_view($node, $view_mode) {
         
         global $user;
         
+        if ($user->uid == 1 && isset($_GET['sort_by']) && !$_GET['sort_by']) {
+          $query = $_GET;
+          unset($query['q']);
+          $query['sort_by'] = 'created';
+          drupal_goto($_GET['q'], array('query' => $query));
+        }
+        
+        
+        
+        
         // For a registered user....
         // Add a "Add a review" button to the Provider's page 
         // OR link to review of the current user if he has already submitted a review for this Provider.
