@@ -1789,6 +1789,10 @@ function gv_misc_process_html(&$vars) {
     //$vars['page'] = preg_replace('|sites\/default\/files\/p\/logos|s', 'images/providers/logos', $vars['page']);
     //$vars['page'] = preg_replace('|sites\/default\/files\/p\/images|s', 'images/providers', $vars['page']);
 
+    
+    // Performance and xdebug.
+    // http://stackoverflow.com/questions/7336862/could-preg-replace-be-causing-a-heavy-enough-load-to-cause-502s
+    
     $vars['page'] = preg_replace(
           array(
             '|sites\/default\/files\/([^\/]*\.)|s',
