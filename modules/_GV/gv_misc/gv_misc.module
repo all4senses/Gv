@@ -1783,6 +1783,8 @@ function gv_misc_process_html(&$vars) {
   */
   
   // Disable rewriting for edit mode.
+  dpm(arg(2));
+  dpm($_GET);
   $edit_page = (arg(2) == 'edit' ? TRUE : FALSE);
   if (!$edit_page) {
     
