@@ -4577,8 +4577,70 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
   // Convert beautiful urls back to originals
   dpm($form);
+  global $user;
+  if ($user->uid == 1 && !empty($form['body']['und'][0]['#default_value'])) {
+    $form['body']['und'][0]['#default_value'] = gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $form['body']['und'][0]['#default_value']);
+    $form['#submit'][] = 'gv_pages_submitForm_convertBeautifulUrls';
+  }
+  
+}
+
+
+/**
+ * convert original urls to Beautiful.
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_submitForm_convertBeautifulUrls(&$form, &$form_state) {
+
+ 
+   drupal_set_message('...', 'warning');
+          
+  dpm($form_state['values']);
+  //dpm($form_state['build_info']['args']);
   
   
+//  if (isset($form['field_invisible'])) {
+//    form_set_value($form['field_invisible'], array('und' => array(0 => array('value' => 0) )), $form_state);
+//  }
+  
+}
+
+function gv_pages_convertBeautifulUrls($direction, $text) {
+  switch ($direction) {
+    case 'from_beautiful_to_originals':
+      return $text;
+      
+      
+      $text = preg_replace(
+          array(
+            //'|sites\/default\/files\/([^\/]*\.)|s',
+            # RewriteRule ^images/posts/(.*) sites/default/files/$1
+            '|images\/posts\/|s',
+          ), 
+          array(
+            //'images/posts/$1',
+            'sites/default/files/',
+            
+          ), 
+
+          $text);
+ 
+      break;
+    
+    
+    
+    case 'from_originals_to_beautiful':
+      
+      break;
+  }
 }
 
 
