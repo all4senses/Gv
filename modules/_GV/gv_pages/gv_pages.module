@@ -4616,7 +4616,7 @@ function gv_pages_submitForm_convertBeautifulUrls(&$form, &$form_state) {
 function gv_pages_convertBeautifulUrls($direction, $text) {
   switch ($direction) {
     case 'from_beautiful_to_originals':
-      return $text;
+      
       
       
       $text = preg_replace(
@@ -4633,7 +4633,8 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
 
           $text);
  
-      break;
+      return $text;
+      
     
     
     
