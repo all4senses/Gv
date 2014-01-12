@@ -4628,10 +4628,49 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             //'|sites\/default\/files\/([^\/]*\.)|s',
             # RewriteRule ^images/posts/(.*) sites/default/files/$1
             '|images\/posts\/|s',
+              
+              
+            '|images\/thumb-related\/|s',
+            '|images\/thumb-h\/|s',
+            '|images\/thumb-v\/|s',
+            '|images\/logos\/featured-in\/|s',
+            '|images\/logos\/page\/|s',
+            '|images\/providerwebsite\/|s',
+            '|images\/logos\/sprites\/|s',
+            '|images\/logos\/chart\/|s',
+            '|images\/theme\/|s',
           ), 
           array(
             //'images/posts/$1',
             'sites/default/files/',
+              
+              
+            'sites/default/files/styles/related_article_thumb_sideblock/public/',
+            # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
+
+            'sites/default/files/styles/article_thumbnail_h/public/',
+            # RewriteRule ^images/content/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
+
+            'sites/default/files/styles/article_thumbnail_v/public/',
+            # RewriteRule ^images/content/thumb-v/(.*) sites/default/files/styles/article_thumbnail_v/public/$1
+
+            'sites/default/files/styles/as_featured_in_sideblock/public/a/',
+            # RewriteRule ^images/providers/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
+
+            'sites/default/files/styles/logo_provider_page/public/p/logos/',
+            # RewriteRule ^images/providers/logos/page/(.*) sites/default/files/styles/logo_provider_page/public/p/logos/$1
+
+            'sites/default/files/styles/image_provider_page/public/p/images/',
+            # RewriteRule ^images/providers/site/(.*) sites/default/files/styles/image_provider_page/public/p/images/$1
+
+            'sites/default/files/p/',
+            # RewriteRule ^images/providers/logos/sprites/(.*) sites/default/files/p/$1
+              
+            'sites/default/files/styles/logo_provider_chart_main/public/p/logos/',
+            # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
+            
+            'sites/all/themes/gv_orange/css/images/', 
+            # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
             
           ), 
 
@@ -4647,12 +4686,49 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
       $text = preg_replace(
           array(
             '|sites\/default\/files\/([^\/]*\.)|s',
-            # RewriteRule ^images/posts/(.*) sites/default/files/$1
+            # RewriteRule ^images/content/all/(.*) sites/default/files/$1
+
+            '|sites\/default\/files\/styles\/related_article_thumb_sideblock\/public\/|s',
+            # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
+
+            '|sites\/default\/files\/styles\/article_thumbnail_h\/public\/|s',
+            # RewriteRule ^images/content/thumb-h/(.*) sites/default/files/styles/article_thumbnail_h/public/$1
+
+            '|sites\/default\/files\/styles\/article_thumbnail_v\/public\/|s',
+            # RewriteRule ^images/content/thumb-v/(.*) sites/default/files/styles/article_thumbnail_v/public/$1
+
+            '|sites\/default\/files\/styles\/as_featured_in_sideblock\/public\/a\/|s',
+            # RewriteRule ^images/providers/logos/featured-in/(.*) sites/default/files/styles/as_featured_in_sideblock/public/a/$1
+
+            '|sites\/default\/files\/styles\/logo_provider_page\/public\/p\/logos\/|s',
+            # RewriteRule ^images/providers/logos/page/(.*) sites/default/files/styles/logo_provider_page/public/p/logos/$1
+
+            '|sites\/default\/files\/styles\/image_provider_page\/public\/p\/images\/|s',
+            # RewriteRule ^images/providers/site/(.*) sites/default/files/styles/image_provider_page/public/p/images/$1
+
+            '|sites\/default\/files\/p\/|s',
+            # RewriteRule ^images/providers/logos/sprites/(.*) sites/default/files/p/$1
+              
+            '|sites\/default\/files\/styles\/logo_provider_chart_main\/public\/p\/logos\/|s',
+            # RewriteRule ^images/providers/logos/chart/(.*) sites/default/files/styles/logo_provider_chart_main/public/p/logos/$1
             
+            '|sites\/all\/themes\/gv_orange\/css\/images\/|s', 
+            # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
           ), 
           array(
             'images/posts/$1',
+            
+            'images/thumb-related/',
+            'images/thumb-h/',
+            'images/thumb-v/',
+            'images/logos/featured-in/',
+            'images/logos/page/',
+            'images/providerwebsite/',
+            'images/logos/sprites/',
+            'images/logos/chart/',
+            'images/theme/',
           ), 
+ 
 
           $text);
  
