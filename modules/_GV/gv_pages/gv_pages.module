@@ -4576,7 +4576,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   
   
   // Convert beautiful urls back to originals
-  dpm($form);
+  //dpm($form);
   global $user;
   if ($user->uid == 1 && !empty($form['body']['und'][0]['#default_value'])) {
     $form['body']['und'][0]['#default_value'] = gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $form['body']['und'][0]['#default_value']);
@@ -4605,7 +4605,7 @@ function gv_pages_submitForm_convertBeautifulUrls(&$form, &$form_state) {
           
   dpm($form_state['values']);
   //dpm($form_state['build_info']['args']);
-  
+  dpm($form);
   
 //  if (isset($form['field_invisible'])) {
 //    form_set_value($form['field_invisible'], array('und' => array(0 => array('value' => 0) )), $form_state);
