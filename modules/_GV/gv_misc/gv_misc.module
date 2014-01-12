@@ -2110,7 +2110,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   static $count_id;
   ++$count_id;
   
-  if (strpos($title_or_wrapped_object, 'src')) {
+  if (strpos($title_or_wrapped_object, 'src') || strpos($title_or_wrapped_object, 'url')) {
     dpm($title_or_wrapped_object);
   }
   
