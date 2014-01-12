@@ -2110,6 +2110,12 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   static $count_id;
   ++$count_id;
   
+  if (strpos($title_or_wrapped_object, 'src')) {
+    dpm($title_or_wrapped_object);
+  }
+  
+  
+  
   if ($provider_data_quick && ($forse_direct_link || ($service_type && !empty($provider_data_quick[$service_type]['fl'])) ) ) {
     // Direct link.
     gv_misc_loadTrackingHandlerForDirectLinks();
