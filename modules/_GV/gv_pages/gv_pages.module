@@ -4610,7 +4610,7 @@ function gv_pages_submitForm_convertBeautifulUrls(&$form, &$form_state) {
   
   if ($user->uid == 1 && !empty($form_state['values']['body']['und'][0]['value'])) {
     //dpm($form['body']);
-    form_set_value($form['body'], array('und' => array(0 => array('value' => $form_state['values']['body']['und'][0]['value'], '#format' => 'full_html') )), $form_state);
+    form_set_value($form['body'], array('und' => array(0 => array('value' => $form_state['values']['body']['und'][0]['value'], 'format' => 'full_html') )), $form_state);
   }
 //  if (isset($form['field_invisible'])) {
 //    form_set_value($form['field_invisible'], array('und' => array(0 => array('value' => 0) )), $form_state);
