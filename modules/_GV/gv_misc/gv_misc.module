@@ -2111,9 +2111,9 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   ++$count_id;
   
   if (strpos($title_or_wrapped_object, 'src') || strpos($title_or_wrapped_object, 'url')) {
-    dpm($title_or_wrapped_object);
-    //$title_or_wrapped_object = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $title_or_wrapped_object);
+    //dpm($title_or_wrapped_object);
     dpm(gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $title_or_wrapped_object));
+    $title_or_wrapped_object = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $title_or_wrapped_object);
   }
   
   
