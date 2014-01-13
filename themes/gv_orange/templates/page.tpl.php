@@ -20,51 +20,8 @@
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
           <?php
-
-            /*
-            if ($user->uid) {
-              if ($_GET['q'] == 'node/1293') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_b.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-              elseif ($_GET['q'] == 'node/1568') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_bo.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-              elseif ($_GET['q'] == 'node/1580') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wg.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-              elseif ($_GET['q'] == 'node/1576') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" style="width: 220px; margin-top: 17px;"/>';
-              }
-              else {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_w.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-            }
-            else 
-            */
-          
-//            if ($user->uid) 
-              {
-              /*
-              if ($_GET['q'] == 'node/1293') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_nocut_wg.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-              elseif ($_GET['q'] == 'node/1568') {
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs2.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-              else 
-              {
-                //echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />';
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" />';
-              }
-              */
-              //echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" />';
-              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
-            }
-//            else 
-//            {
-//              //echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo3.png" alt="GetVoIP" title="GetVoIP" />';
-//              echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/gv_logo_cut_wgs.png" alt="GetVoIP" title="GetVoIP" />';
-//            }
+              //echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
+              echo '<img src="/images/theme/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
           ?>
         </a>
         <div class="descr">
