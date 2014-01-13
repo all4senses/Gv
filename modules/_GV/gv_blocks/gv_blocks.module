@@ -933,8 +933,8 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'as_featured_in_sideblock'));
           //$main_image_html = '<div>' . $main_image_html;
           
-          $images[] = $main_image_html;
-          //$images[] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
+          //$images[] = $main_image_html;
+          $images[] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
         }
       }
       
