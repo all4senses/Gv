@@ -951,6 +951,10 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
         file_unmanaged_delete_recursive($wrapper . '://styles/' . $style_to_flush);
       }
       
+      // TO-DO IMPORTANT! Need to regenerate file!
+      // Assure that the imagecache file is created already, or recreate it.
+      //gv_misc_createCachedImageIfNotExists($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
+      
       break;
   }
   
