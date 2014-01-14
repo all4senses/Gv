@@ -1,0 +1,1 @@
+Del this folder after some time (when google will forget about this because of wrong link /other instead of fonts/other)
