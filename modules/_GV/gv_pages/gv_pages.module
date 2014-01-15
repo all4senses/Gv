@@ -2410,7 +2410,19 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#default_value' => $recalculate_related_articles,
             '#disabled' => $recalculate_related_articles,
           );
-
+          $form['related_articles']['recalculate_full'] = array(
+            '#type' => 'checkbox',
+            '#title' => 'Full regenerate related teasers (not using already generated teasers). More server load demanding.',
+            '#default_value' => NULL,
+            '#states' => array(
+              'visible' => array(
+                ':input[name="related_articles[recalculate]"]' => array('checked' => TRUE),
+              ),
+              'disabled' => array(
+                ':input[name="related_articles[recalculate]"]' => array('checked' => FALSE),
+              ),
+            ),
+          );
           
           
         }
