@@ -4628,7 +4628,10 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             //'|sites\/default\/files\/([^\/]*\.)|s',
             # RewriteRule ^images/posts/(.*) sites/default/files/$1
             '|images\/posts\/|s',
-              
+            
+            // Older/previous version, but stillneed to be converted back.
+            //'images/content/all/$1',
+            '|images\/content\/all\/|s',
               
             '|images\/thumb-related\/|s',
             '|images\/thumb-h\/|s',
@@ -4643,7 +4646,13 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
           array(
             //'images/posts/$1',
             'sites/default/files/',
-              
+            # RewriteRule ^images/posts/(.*) sites/default/files/$1
+            
+            // Older/previous version, but stillneed to be converted back.
+            //'images/content/all/$1',
+            'sites/default/files/',
+            # RewriteRule ^images/content/all/(.*) sites/default/files/$1
+            
               
             'sites/default/files/styles/related_article_thumb_sideblock/public/',
             # RewriteRule ^images/content/thumb-related/(.*) sites/default/files/styles/related_article_thumb_sideblock/public/$1
