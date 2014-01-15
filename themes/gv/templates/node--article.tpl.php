@@ -70,7 +70,8 @@
       
   }
   elseif($view_mode == 'teaser') {
-    if (!empty($node->field_main_image['und'][0]['value'])) {
+    
+    if (!$field_main_image = unserialize($node->field_main_image['und'][0]['value'])) {
       $class_thumb_presented = ' with_thumb';
       
       // Tune for fixing old style teaser for the new one after setting one teaser per a row.
