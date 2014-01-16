@@ -4654,6 +4654,9 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             '|images\/logos\/sprites\/|s',
             '|images\/logos\/chart\/|s',
             '|images\/theme\/|s',
+              
+            '|images\/share-h\/|s',
+            '|images\/share-v\/|s',
           ), 
           array(
             //'images/posts/$1',
@@ -4692,6 +4695,15 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             
             'sites/all/themes/gv_orange/css/images/', 
             # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
+              
+              
+              
+              
+           'sites/default/files/styles/share_wide/public/',
+            # RewriteRule ^images/share-h/(.*) sites/default/files/styles/share_-h_wide/public/$1
+           
+            'sites/default/files/styles/share_tall/public/',
+            # RewriteRule ^images/share-v/(.*) sites/default/files/styles/share_tall/public/$1
             
           ), 
 
@@ -4735,6 +4747,14 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             
             '|sites\/all\/themes\/gv_orange\/css\/images\/|s', 
             # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
+              
+              
+            '|sites\/default\/files\/styles\/share_wide\/public\/|s',
+            # RewriteRule ^images/share-h/(.*) sites/default/files/styles/share_-h_wide/public/$1
+                
+            '|sites\/default\/files\/styles\/share_tall\/public\/|s',
+            # RewriteRule ^images/share-v/(.*) sites/default/files/styles/share_tall/public/$1
+            
           ), 
           array(
             'images/posts/$1',
@@ -4748,6 +4768,9 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             'images/logos/sprites/',
             'images/logos/chart/',
             'images/theme/',
+              
+            'images/share-h/',
+            'images/share-v/',
           ), 
  
 
@@ -4896,6 +4919,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
     'related_articles_timestamp' => (@$form_state['values']['related_articles']['recalculate'] ? (@$form_state['values']['related_articles']['recalculate_full'] ? -1 : 0) : $old_extra_data['related_articles_timestamp']), //time(),
   );
   
+  dpm($extra_data);
   
   // Define and refine main image value for checked related articles.
   // But only in case if we recalculate related articles (look above at $old_extra_data)

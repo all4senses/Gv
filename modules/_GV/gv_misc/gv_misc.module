@@ -3434,8 +3434,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       $style_name_share = 'share';
       //$main_image['src_themed'] = image_style_url('share', $stream_path);
     }
-    $main_image['src_themed'] = image_style_url($style_name_share, $stream_path);
-    
+    $main_image['src_themed'] = $main_image['src_share'] = image_style_url($style_name_share, $stream_path);
+    $main_image['src_share_beautify'] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image['src_share']);
     
     //$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
     
