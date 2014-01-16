@@ -3503,11 +3503,25 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   // $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
   $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
 
+  
+  $teaser_with_image = $main_image_html . $teaser;
+  
   if ($only_teaser) {
-    return $main_image_html . $teaser;
+    return $teaser_with_image;
   }
   else {
-    return array('teaser_only' => $teaser, 'teaser_side_block' => $teaser_side_block, 'teaser' => $main_image_html . $teaser, 'teaser_block' => $teaser_block, 'teaser_home' => $main_image_html . $teaser_home, 'main_image' => $main_image,  'teaser_main_image' => $main_image_html, 'main_image_html' => $main_image_html, 'side_block_main_image' => $side_block_image_html, 'home_teaser_image' => $home_teaser_image_html);
+    return array(
+      'teaser_only' => $teaser, 
+      'teaser' => $teaser_with_image, 
+      'teaser_side_block' => $teaser_side_block, 
+      'teaser_block' => $teaser_block, 
+      'teaser_home' => $main_image_html . $teaser_home, 
+      'main_image' => $main_image,  
+      'teaser_main_image' => $main_image_html, 
+      'main_image_html' => $main_image_html, 
+      'side_block_main_image' => $side_block_image_html, 
+      'home_teaser_image' => $home_teaser_image_html
+    );
   }
   
 }
@@ -9727,7 +9741,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
       
       // Use already calculated related articles teasers.
       
-      // Let to work condition below later (in a month or so), when there will be recalculated all old teaser with wrongly built images beautiful images urls (contained content/all)
+      // TO-DO !!!!!!!!!!!!!!!!!!!!!!  Let to work condition below later (in a month or so), when there will be recalculated all old teaser with wrongly built images beautiful images urls (contained content/all)
 //      if ($extra_data['related_articles_timestamp'] == -1) 
       {
         $old_extra_data_related_articles = array();
