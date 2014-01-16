@@ -4888,7 +4888,7 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   
   $old_extra_data = unserialize($form_state['values']['field_extra_data']['und'][0]['value']);
 
-  $extra_data_temp = $teaser_data 
+  $extra_data = $teaser_data 
                 + array(
       'title' => htmlspecialchars_decode($form_state['values']['title'], ENT_QUOTES), 
       // Don't recalculate related articles..
@@ -4898,8 +4898,9 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
       'related_articles_timestamp' => (@$form_state['values']['related_articles']['recalculate'] ? (@$form_state['values']['related_articles']['recalculate_full'] ? -1 : 0) : $old_extra_data['related_articles_timestamp']), //time(),             
   );
   
-  dpm($extra_data_temp);
+  dpm($extra_data);
   
+  /*
   $extra_data = array(
     'title' => htmlspecialchars_decode($form_state['values']['title'], ENT_QUOTES), 
       
@@ -4918,8 +4919,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
     // -1 for full teasers regenerating, will not use already generated teasers for not changed related articles in function gv_misc_addRelatedArticlesToNode
     'related_articles_timestamp' => (@$form_state['values']['related_articles']['recalculate'] ? (@$form_state['values']['related_articles']['recalculate_full'] ? -1 : 0) : $old_extra_data['related_articles_timestamp']), //time(),
   );
+  */
   
-  dpm($extra_data);
   
   // Define and refine main image value for checked related articles.
   // But only in case if we recalculate related articles (look above at $old_extra_data)
