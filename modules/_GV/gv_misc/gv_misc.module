@@ -3756,7 +3756,14 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'article':
       if (isset($node->field_main_image['und'][0]['value']) && $node->field_main_image['und'][0]['value']) {
         $image = unserialize($node->field_main_image['und'][0]['value']);
-        if (isset($image['src_themed']) && $image['src_themed']) {
+        
+        if (!empty($image['src_share_beautify'])) {
+          $image = $image['src_share_beautify'];
+        }
+        elseif (!empty($image['src_share'])) {
+          $image = $image['src_themed_share'];
+        }
+        elseif (!empty($image['src_themed'])) {
           $image = $image['src_themed'];
         }
         elseif (isset($image['src']) && $image['src']) {
