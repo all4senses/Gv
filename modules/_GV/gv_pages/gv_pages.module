@@ -4657,6 +4657,10 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
               
             '|images\/share-h\/|s',
             '|images\/share-v\/|s',
+              
+            '|images\/thumb-side\/|s',
+            '|images\/thumb-home\/|s',
+            '|images\/thumb-block\/|s',
           ), 
           array(
             //'images/posts/$1',
@@ -4700,10 +4704,21 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
               
               
            'sites/default/files/styles/share_wide/public/',
-            # RewriteRule ^images/share-h/(.*) sites/default/files/styles/share_-h_wide/public/$1
+            # RewriteRule ^images/share-h/(.*) sites/default/files/styles/share_wide/public/$1
            
             'sites/default/files/styles/share_tall/public/',
             # RewriteRule ^images/share-v/(.*) sites/default/files/styles/share_tall/public/$1
+              
+            
+            
+            'sites/default/files/styles/article_thumbnail_side_block/public/',
+            # RewriteRule ^images/thumb-side/(.*) sites/default/files/styles/article_thumbnail_side_block/public/$1
+            
+            'sites/default/files/styles/article_thumbnail_home_teaser/public/',
+            # RewriteRule ^images/thumb-home/(.*) sites/default/files/styles/article_thumbnail_home_teaser/public/$1
+              
+            'sites/default/files/styles/block_thumb/public/',
+            # RewriteRule ^images/thumb-block/(.*) sites/default/files/styles/block_thumb/public/$1
             
           ), 
 
@@ -4749,12 +4764,24 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
             # RewriteRule ^images/theme/(.*) sites/all/themes/gv_orange/css/images/$1
               
               
+              
             '|sites\/default\/files\/styles\/share_wide\/public\/|s',
-            # RewriteRule ^images/share-h/(.*) sites/default/files/styles/share_-h_wide/public/$1
+            # RewriteRule ^images/share-h/(.*) sites/default/files/styles/share_wide/public/$1
                 
             '|sites\/default\/files\/styles\/share_tall\/public\/|s',
             # RewriteRule ^images/share-v/(.*) sites/default/files/styles/share_tall/public/$1
+              
+              
+              
+            '|sites\/default\/files\/styles\/article_thumbnail_side_block\/public\/|s',
+            # RewriteRule ^images/thumb-side/(.*) sites/default/files/styles/article_thumbnail_side_block/public/$1
             
+            '|sites\/default\/files\/styles\/article_thumbnail_home_teaser\/public\/|s',
+            # RewriteRule ^images/thumb-home/(.*) sites/default/files/styles/article_thumbnail_home_teaser/public/$1
+              
+            '|sites\/default\/files\/styles\/block_thumb\/public\/|s',
+            # RewriteRule ^images/thumb-block/(.*) sites/default/files/styles/block_thumb/public/$1
+              
           ), 
           array(
             'images/posts/$1',
@@ -4771,6 +4798,10 @@ function gv_pages_convertBeautifulUrls($direction, $text) {
               
             'images/share-h/',
             'images/share-v/',
+              
+            'images/thumb-side/',
+            'images/thumb-home/',
+            'images/thumb-block/',
           ), 
  
 
