@@ -3352,7 +3352,7 @@ function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs)
 /**
  * Return trimmed teaser with right size (cleared from images) and with separated a styled image, cutted off from the body.
  */
-function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $characters_num = NULL, $only_teaser = FALSE) {
+function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $characters_num = NULL, $only_teaser = FALSE, $title = NULL) {
  
   $main_image = NULL;
   $main_image_html = NULL;
@@ -3382,10 +3382,21 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   if ($found_image) {
 
     $main_image['src'] = urldecode($main_image['src']); //str_replace('%20', ' ', $main_image['src']);
+    $main_image['src_beautify'] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image['src']);
+    
     $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
     $main_image['uri'] = $stream_path;
     
     $image_size = getimagesize(ltrim($main_image['src'], '/'));
+
+    
+    
+    
+    
+
+    
+    
+    // Define and regenerate thumbnails.
 
     // Scale and cut.
     /*
@@ -3408,16 +3419,6 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       //$main_image['src_themed'] = image_style_url($style_name, $stream_path);
     }
     
-    $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
-    $main_image_html = '<div class="thumb">' . $main_image_html . '</div>';
-    
-    $side_block_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_side_block'));
-    $side_block_image_html = '<div class="thumb">' . $side_block_image_html . '</div>';
-    
-    $home_teaser_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_home_teaser'));
-    $home_teaser_image_html = '<div class="thumb">' . $home_teaser_image_html . '</div>';
-  
-    
     // Image for sharing.
     if ($image_size[0] / $image_size[1] > 1) {
       // Too wide. will not be cutted.
@@ -3434,21 +3435,57 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       $style_name_share = 'share';
       //$main_image['src_themed'] = image_style_url('share', $stream_path);
     }
-    $main_image['src_themed'] = $main_image['src_share'] = image_style_url($style_name_share, $stream_path);
-    $main_image['src_share_beautify'] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image['src_share']);
     
-    //$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail'));
     
-    // Clear existing image_cached files.
+    
+    // Clear existing thumbnails image_cached files.
     $default_file_path = variable_get('file_' . file_default_scheme() . '_path', conf_path() . '/files');
-    $styles_to_delete = array($style_name, $style_name_share, 'block_thumb');
+    $styles_to_delete = array($style_name, $style_name_share, 'block_thumb', 'article_thumbnail_side_block', 'article_thumbnail_home_teaser');
     foreach ($styles_to_delete as $style_to_delete) {
       $to_delete = str_replace($default_file_path, $default_file_path . '/styles/' . $style_to_delete . '/public' , $main_image['src']);
       if (file_exists($to_delete)) {
         unlink($to_delete);
       } 
     }
-      
+    
+    /*
+    //$main_image_html = '<div class="thumb">' . theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name)) . '</div>';
+    $main_image_html = image_style_url($style_name, $stream_path);
+    gv_misc_createCachedImageIfNotExists($main_image_html);
+    $main_image_html = '<div class="thumb"><image src="' . $main_image_html . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
+    $main_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
+    */
+    gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, $main_image_html, $main_image_html_beautify, $title);
+    
+    $main_image['src_themed'] = $main_image['src_share'] = image_style_url($style_name_share, $stream_path);
+    gv_misc_createCachedImageIfNotExists($main_image['src_themed']);
+    $main_image['src_share_beautify'] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image['src_share']);
+    
+    /*
+    $block_thumb_image_html = image_style_url('block_thumb', $stream_path);
+    gv_misc_createCachedImageIfNotExists($block_thumb_image_html);
+    $block_thumb_image_html = '<div class="thumb"><image src="' . $block_thumb_image_html . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
+    $block_thumb_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $block_thumb_image_html);
+    */
+    gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, 'block_thumb', $block_thumb_image_html, $block_thumb_image_html_beautify, $title);
+    
+    /*
+    //$side_block_image_html = '<div class="thumb">' . theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_side_block')) . '</div>';
+    $side_block_image_html = image_style_url('article_thumbnail_side_block', $stream_path);
+    gv_misc_createCachedImageIfNotExists($side_block_image_html);
+    //---->WRONG -> fix--->$side_block_image_html = '<div class="thumb">' . $side_block_image_html . '</div>';
+    $side_block_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $side_block_image_html);
+    */
+    gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, 'article_thumbnail_side_block', $side_block_image_html, $side_block_image_html_beautify, $title);
+    
+    /*
+    //$home_teaser_image_html = '<div class="thumb">' . theme('image_style', array( 'path' => $stream_path, 'style_name' => 'article_thumbnail_home_teaser')) . '</div>';
+    $home_teaser_image_html = image_style_url('article_thumbnail_home_teaser', $stream_path);
+    gv_misc_createCachedImageIfNotExists($home_teaser_image_html);
+    //---->WRONG -> fix--->$home_teaser_image_html = '<div class="thumb">' . $home_teaser_image_html . '</div>';
+    $home_teaser_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $home_teaser_image_html);
+    */
+    gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, 'article_thumbnail_home_teaser', $home_teaser_image_html, $home_teaser_image_html_beautify, $title);      
     
   } // End of if ($found_image) {
 
@@ -3505,9 +3542,11 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
 
   
   $teaser_with_image = $main_image_html . $teaser;
+  $teaser_with_image_beautify = $main_image_html_beautify . $teaser;
   
   if ($only_teaser) {
-    return $teaser_with_image;
+    //return $teaser_with_image;
+    return $teaser_with_image_beautify;
   }
   else {
     return array(
@@ -3515,15 +3554,40 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       'teaser' => $teaser_with_image, 
       'teaser_side_block' => $teaser_side_block, 
       'teaser_block' => $teaser_block, 
+      
       'teaser_home' => $main_image_html . $teaser_home, 
-      'main_image' => $main_image,  
+      'teaser_home_beautify' => $main_image_html_beautify . $teaser_home, 
+        
+      'main_image' => $main_image,
+        
       'teaser_main_image' => $main_image_html, 
+      'teaser_main_image_beautify' => $main_image_html_beautify, 
+        
       'main_image_html' => $main_image_html, 
-      'side_block_main_image' => $side_block_image_html, 
-      'home_teaser_image' => $home_teaser_image_html
+      'main_image_html_beautify' => $main_image_html_beautify,
+        
+      'block_thumb_image_html' => $block_thumb_image_html,
+      'block_thumb_image_html_beautify' => $block_thumb_image_html_beautify,
+        
+      'side_block_main_image' => $side_block_image_html,
+      'side_block_main_image_beautify' => $side_block_image_html_beautify,
+        
+      'home_teaser_image' => $home_teaser_image_html,
+      'home_teaser_image_beautify' => $home_teaser_image_html_beautify,
     );
   }
   
+}
+
+
+/**
+ * Helper function to regenerate Styled And Beautify Image Html.
+ */
+function gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, &$image_html, &$image_html_beautify, $title = NULL, $class = 'thumb') {
+  $image_url = image_style_url($style_name, $stream_path);
+  gv_misc_createCachedImageIfNotExists($image_url, $style_name);
+  $image_html = '<div class="' .$class . '"><image src="' . $image_url . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
+  $image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image_html);
 }
 
 
