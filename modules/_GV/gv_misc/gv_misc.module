@@ -9923,6 +9923,9 @@ function gv_misc_addRelatedArticlesToNode($node) {
               $query->leftJoin('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
               $query->fields('mi', array('field_main_image_value'));
               
+              $query->leftJoin('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
+              $query->fields('ed', array('field_extra_data_value'));
+              
               $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
               $query->addField('b', 'body_value', 'teaser');
               
@@ -9933,8 +9936,13 @@ function gv_misc_addRelatedArticlesToNode($node) {
               
               if ($result = $query->execute()->fetchObject()) {
                 
+                
+                
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
                 if(!empty($result->field_main_image_value)) {
+                  
+                  dpm(unserialize($result->field_extra_data_value));
+                  
                   $result->field_main_image_value['src_themed_related'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
                   $result->field_main_image_value['src_themed_related_sideblock'] = image_style_url('related_article_thumb_sideblock', $result->field_main_image_value['uri']);
                   
@@ -9948,7 +9956,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
                   $cached_image_flag = gv_misc_createCachedImageIfNotExists($result->field_main_image_value['src_themed_related_sideblock']);
                   if (!$cached_image_flag_updated && $cached_image_flag == 'updated')  {
                     $cached_image_flag_updated = TRUE;
-                    exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
+                    //exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
                   }
                   
                   $sizes = getimagesize($result->field_main_image_value['src_themed_related_sideblock']);
@@ -9987,6 +9995,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
                 }
                 $result->similar_tags = $similar_tags;
                 $result->similar_tags_count = @$related_article->similar_tags_count;
+                
                 $extra_data['related_articles']['index_'. $index][$related_article->nid] = $result;
                                 
                 if ($related_count++ >= $max_articles_on_front - 1) {
