@@ -4911,8 +4911,10 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 //  }
   
 
+  $title_normalized = htmlspecialchars_decode($form_state['values']['title'], ENT_QUOTES);
+  
   // Define a main image and build a custom teaser.
-  $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid']);
+  $teaser_data = gv_misc_getArticleTeaserData('all', $form_state['values']['body']['und'][0]['value'], $form_state['values']['nid'], NULL, NULL, $title_normalized);
 
   form_set_value($form['field_a_teaser'], array('und' => array(0 => array('value' => $teaser_data['teaser'], 'format' => 'full_html') )), $form_state);
   form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
@@ -4921,7 +4923,6 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 
   $extra_data = $teaser_data 
                 + array(
-      'title' => htmlspecialchars_decode($form_state['values']['title'], ENT_QUOTES), 
       // Don't recalculate related articles..
       'related_articles' => $old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
       // If related articles should be recalculated, set timestamp to 0, what will make existing related articles expired.

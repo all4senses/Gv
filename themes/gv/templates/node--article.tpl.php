@@ -1,15 +1,13 @@
 <?php 
 
-//  global $user;
-//  if ($user->uid == 1 && $node->nid == 1642 && !$page) {
-//    dpm($node);
-//    echo '-';
-//    return;
-//  }
-
-  $class_thumb_presented = '';
-  $update_teaser = FALSE;
+  $class_thumb_presented = NULL;
+  $return = FALSE;
   
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node);
+
+
+  
+      
   /*
   if($view_mode == 'side_block_teaser_onPrefaceBottomLatest') {
     
@@ -26,7 +24,8 @@
     return;    
   }
   else
-    */if($view_mode == 'home_teaser') {
+    */
+  if($view_mode == 'home_teaser') {
 
     $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
 
@@ -34,7 +33,6 @@
 
     $author_name = gv_misc_getNodeAuthor($node);
     
-    //echo $teaser_data['main_image_html'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
     echo $teaser_data['home_teaser_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
             . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
 
@@ -48,18 +46,6 @@
     return;
   }
   elseif($view_mode == 'side_block_teaser') {
-    
-      if (!empty($node->field_extra_data['und'][0]['value'])) {
-        $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-      }
-  
-     if (!empty($extra_data['teaser_side_block'])) {
-        $teaser_data = $extra_data;
-      }
-      else {
-        $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
-        $update_teaser = TRUE;
-      }
       
       // Hide thumbnails
       $teaser_data['side_block_main_image'] = NULL;
@@ -73,48 +59,11 @@
     
     if ($field_main_image = unserialize($node->field_main_image['und'][0]['value'])) {
       $class_thumb_presented = ' with_thumb';
-      
-      // Tune for fixing old style teaser for the new one after setting one teaser per a row.
-      $extra_data = $old_extra_data = unserialize(@$node->field_extra_data['und'][0]['value']);
-      
-      // Update older version of extra_data fields. Newer extra_data has 'teaser_only' field. 
-      if (!isset($extra_data['teaser_only'])) {
-        $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid);
-        $update_teaser = TRUE;
-      }
-      
     }
     else {
       $class_thumb_presented = NULL;
     }
   }
-  
-  
-  if ($update_teaser == TRUE) {
-    $extra_data = array(
-      'title' => $title, 
-      'teaser_block' => $teaser_data['teaser_block'], 
-      'teaser_home' => $teaser_data['teaser_home'],
-      'teaser_side_block' => $teaser_data['teaser_side_block'],
-      'side_block_main_image' => $teaser_data['side_block_main_image'],
-
-      'teaser_only' => $teaser_data['teaser_only'],
-      'teaser_main_image' => $teaser_data['teaser_main_image'],
-
-
-      // Don't recalculate related articles..
-      'related_articles' => @$old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
-      'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'], //time(),
-    );
-
-    if (!empty($old_extra_data['guest_author'])) {
-      $extra_data['guest_author'] = $old_extra_data['guest_author'];
-    }
-
-      // Update the field $extra_data in the db
-      gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
-  }
-  
   
   
 ?>
