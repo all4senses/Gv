@@ -9859,7 +9859,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
     }
     
 
-    //dpm('now time = ' . time());
+    dpm('now time = ' . time());
     //$extra_data['related_articles_timestamp'] < 1380644802 -----> assure that there is used a new calculation version.
     if (!isset($extra_data['related_articles']) || $extra_data['related_articles_timestamp'] < 1380644802 || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
     {
@@ -9894,9 +9894,9 @@ function gv_misc_addRelatedArticlesToNode($node) {
         $related_count = 0;
         $cached_image_flag = FALSE;
         $cached_image_flag_updated = FALSE;
+        
         foreach ($articles_by_index as $index => $data) {
           foreach ($data as $created => $related_article) {
-
             
             // Use already prepared related article section from previous found related articles.
 
@@ -9917,11 +9917,10 @@ function gv_misc_addRelatedArticlesToNode($node) {
             //if (gv_misc_articleHasMainImageField($related_article->nid)) 
             {
 
-
               $query = db_select('node', 'n')
                 ->fields('n', array('title', 'created'));
-              $query->leftJoin('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
-              $query->fields('mi', array('field_main_image_value'));
+//              $query->leftJoin('field_data_field_main_image', 'mi', 'mi.entity_id = n.nid');
+//              $query->fields('mi', array('field_main_image_value'));
               
               $query->leftJoin('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
               $query->fields('ed', array('field_extra_data_value'));
@@ -9931,12 +9930,16 @@ function gv_misc_addRelatedArticlesToNode($node) {
               
               $query->condition('n.nid', $related_article->nid);
 
-              $teaser_lenght = 780; // without pic
-              //$teaser_lenght = 900;
-              
               if ($result = $query->execute()->fetchObject()) {
                 
                 
+                $result = gv_misc_calculateDataForRelatedArticlesBlock($result->title, $result->teaser, unserialize($result->field_extra_data_value), $result->created, array('title_not_normalized' => TRUE, 'body_not_stripped' => TRUE));
+
+                
+                
+                /*
+                $teaser_lenght = 780; // without pic
+                //$teaser_lenght = 900;
                 
                 $result->field_main_image_value = unserialize($result->field_main_image_value);
                 if(!empty($result->field_main_image_value)) {
@@ -9985,7 +9988,9 @@ function gv_misc_addRelatedArticlesToNode($node) {
                 // Remove the last broken word.
                 $last_pos = strrpos($result->teaser, ' ');
                 $result->teaser = substr_replace ($result->teaser, '... ', $last_pos);
-              
+                */
+                
+                
                 //dpm($related_article);
                 $similar_tags = '';
                 foreach ($related_article as $key => $value) {
@@ -9996,11 +10001,15 @@ function gv_misc_addRelatedArticlesToNode($node) {
                 $result->similar_tags = $similar_tags;
                 $result->similar_tags_count = @$related_article->similar_tags_count;
                 
+                
+                
                 $extra_data['related_articles']['index_'. $index][$related_article->nid] = $result;
                                 
                 if ($related_count++ >= $max_articles_on_front - 1) {
                   break 2;
                 }
+                
+                
 
               } // End of if ($result = $query->execute()->fetchObject()) {
 
@@ -10029,20 +10038,26 @@ function gv_misc_addRelatedArticlesToNode($node) {
 
     }
 
+    
+    
+    
+    // Add loaded related articles to a node.
+    
     if (!isset($extra_data['related_articles'])) {
       $extra_data['related_articles'] = array();
     }
     
-    
     foreach ($extra_data['related_articles'] as $group) {
       
-      foreach ($group as $nid => $checked) {
+      foreach ($group as $nid => $data) {
 
+        if ($data) {
 
-        if ($checked) {
+          // Fix related articles data if it's an integer value (checked), replace it with the data object.
+          if (is_int($data)) {
 
-          if (is_int($checked)) {
-
+            unset($node->related_articles[$nid]);
+            /*
             $query = db_select('node', 'n')
               ->fields('n', array('title'));
 
@@ -10051,21 +10066,21 @@ function gv_misc_addRelatedArticlesToNode($node) {
 
             $query->condition('n.nid', $nid);
 
-            /*
-            // Skip articles without thumbnails.
-            if ($result = $query->execute()->fetchObject()) {
+            
+//            // Skip articles without thumbnails.
+//            if ($result = $query->execute()->fetchObject()) {
+//
+//              $result->field_main_image_value = unserialize($result->field_main_image_value);
+//              if(!empty($result->field_main_image_value)) {
+//                $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
+//                $node->related_articles[$nid] = $result;
+//                if (--$max_articles < 1) {
+//                  break 2;
+//                }
+//              }
+//            }
 
-              $result->field_main_image_value = unserialize($result->field_main_image_value);
-              if(!empty($result->field_main_image_value)) {
-                $result->field_main_image_value['src_themed'] = image_style_url('related_article_thumb', $result->field_main_image_value['uri']);
-                $node->related_articles[$nid] = $result;
-                if (--$max_articles < 1) {
-                  break 2;
-                }
-              }
-            }
-
-              */
+              
 
             if ($result = $query->execute()->fetchObject()) {
 
@@ -10079,22 +10094,22 @@ function gv_misc_addRelatedArticlesToNode($node) {
                 break 2;
               }
             }
+             */
           } // End of if_int
           else {
 
-            $node->related_articles[$nid] = $checked;
+            $node->related_articles[$nid] = $data;
             if (--$max_articles_on_front < 1) {
               break 2;
             }
-
           }
 
-
-        } // End of if(checked)
+        } // End of if($data)
         
-      } // End of foreach ($group as $nid => $checked) {
+      } // End of foreach ($group as $nid => $data) {
       
-    }
+    } // End of foreach ($extra_data['related_articles'] as $group) {
+
 }
 
 
@@ -10106,6 +10121,65 @@ function gv_misc_node_view_alter(&$build) {
   //$build['#contextual_links']['node'] = array('node', array($build['#node']->nid));
 }
 
+
+/**
+ * Calculate for the article its Data For Related Articles Block.
+ */
+function gv_misc_calculateDataForRelatedArticlesBlock($title, $body, $extra_data, $created, $options = array()) {
+              
+  static $cached_image_flag_updated;
+  
+  $result = new stdClass();
+  
+  $teaser_lenght = 780; // without pic
+  //$teaser_lenght = 900;
+  
+  $result->title = empty($options['title_not_normalized']) ? $title : htmlspecialchars_decode($title, ENT_QUOTES);
+  $result->teaser = empty($options['body_not_stripped']) ? $body : strip_tags($body);
+  $result->created = $created;
+  
+  if(!empty($extra_data['main_image'])) {
+
+    $result->src_themed_related = image_style_url('related_article_thumb', $extra_data['main_image']['uri']);
+    $result->src_themed_related_sideblock = image_style_url('related_article_thumb_sideblock', $extra_data['main_image']['uri']);
+    $result->src_themed_related_sideblock_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $result->src_themed_related_sideblock);
+    
+    $cached_image_flag = gv_misc_createCachedImageIfNotExists($result->src_themed_related_sideblock);
+//    if (!$cached_image_flag_updated && $cached_image_flag == 'updated')  {
+//      $cached_image_flag_updated = TRUE;
+//      exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
+//    }
+
+    $sizes = getimagesize($result->src_themed_related_sideblock);
+
+    $image_height = $sizes[1];
+    if ($image_height >= 212) {
+      $teaser_lenght = 390; // with pic 215px and 2 lines of a title.
+    }
+    else {
+      //$teaser_lenght = 300 + (215 - $sizes[1])
+      $ratio = 1 - (($image_height*100)/215)/100;
+      $teaser_lenght = 390 + 390*$ratio;
+//      dpm('$image_height = ' . $image_height);
+//      dpm('$ratio = ' . $ratio);
+//      dpm('$teaser_lenght = ' . $teaser_lenght);
+    }
+  }
+
+  //dpm('$teaser_lenght = ' . $teaser_lenght);
+
+  // Shorten a teaser a little bit.
+  $teaser_lenght -= 175;
+
+  
+
+  $result->teaser = drupal_substr($result->teaser, 0, $teaser_lenght);
+  // Remove the last broken word.
+  $last_pos = strrpos($result->teaser, ' ');
+  $result->teaser = substr_replace ($result->teaser, '... ', $last_pos);
+
+  return $result;
+}
 
 
 
