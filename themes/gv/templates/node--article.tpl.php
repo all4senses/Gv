@@ -4,7 +4,8 @@
   $return = FALSE;
   
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node);
-
+  $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
+              
 
   
       
@@ -48,16 +49,17 @@
   elseif($view_mode == 'side_block_teaser') {
       
       // Hide thumbnails
-      $teaser_data['side_block_main_image'] = NULL;
+      $teaser_data['side_block_main_image'] = NULL; //$teaser_data['side_block_main_image'] = NULL;
       
-      if (!empty($teaser_data['side_block_main_image'])) {
-        $class_thumb_presented = ' with_thumb';
-      }
+//      if (!empty($teaser_data['side_block_main_image'])) {
+//        $class_thumb_presented = ' with_thumb';
+//      }
       
   }
   elseif($view_mode == 'teaser') {
     
-    if ($field_main_image = unserialize($node->field_main_image['und'][0]['value'])) {
+    //if ($field_main_image = unserialize($node->field_main_image['und'][0]['value'])) {
+    if (!empty($extra_data['main_image'])) {
       $class_thumb_presented = ' with_thumb';
     }
     else {
@@ -101,7 +103,7 @@
       <?php if (!$page): ?>
         <?php 
           if ($view_mode == 'side_block_teaser' && !empty($teaser_data['side_block_main_image'])) {
-            echo $teaser_data['side_block_main_image']; 
+            echo $teaser_data['side_block_main_image_beautify'];  //echo $teaser_data['side_block_main_image']; 
           }
         ?>
         <header>
@@ -166,17 +168,8 @@
               }
               
               
-              if (empty($extra_data)) {
-                $extra_data['guest_author'] = NULL;
-                if (!empty($node->field_extra_data['und'][0]['value'])) {
-                  $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-                  
-                }
-              }
-              $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
-              
               //if (!$extra_data['guest_author'] && ($page || $node->type == 'article' || $paths_with_latest_article) ) {
-              if (empty($extra_data['guest_author']) || !$extra_data['guest_author']) {
+              if (empty($extra_data['guest_author'])) {
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
                 $author_name = $authorExtendedData->realname;
               }
@@ -306,11 +299,8 @@
             // $path_with_latest_article is defined above.
             elseif ($paths_with_latest_article) {
               // Show an other teaser on the home page.
-              if (empty($extra_data)) {
-                $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
-              }
               if (isset($extra_data['teaser_home'])) {
-                echo $extra_data['teaser_home'];
+                echo $extra_data['teaser_home_beautify']; //echo $extra_data['teaser_home'];
               }
               else {
                 echo $extra_data['teaser_block'];
@@ -319,21 +309,11 @@
             else {
               
               if ($class_thumb_presented) {
-                echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
+                //echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
+                echo $extra_data['teaser_main_image_beautify'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
               }
               else {
-                
-                if (!empty($node->field_a_teaser['und'][0]['value'])) {
-                  echo $node->field_a_teaser['und'][0]['value'];
-                }
-                else {
-                  $teaser_data = gv_misc_getArticleTeaserData('all', $content['body'][0]['#markup'], $node->nid);
-                  echo $teaser_data['teaser'];
-                  
-                  // Update the field field_a_teaser
-                  gv_misc_fieldSave('a_teaser', $node->nid, $teaser_data['teaser']);
-                }
-                
+                echo $teaser_data['teaser_beautify']; //echo $teaser_data['teaser'];
               }
               
             }
@@ -444,6 +424,7 @@
                     
                     <?php  
                       // Related articles.
+                    /*
                       if (!empty($node->related_articles)) {
                         echo '<div class="related_articles"><h3>Recommended For You</h3>';
                           foreach ($node->related_articles as $nid => $article) {
@@ -456,7 +437,7 @@
                           }
                         echo '</div>';
                       }
-                      
+                     */ 
                       
                     ?>
                   </footer>
