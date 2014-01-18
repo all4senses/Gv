@@ -3639,7 +3639,8 @@ function gv_misc_updateArticleExtraData($node) {
     // Update the field $extra_data in the db
     gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
    
-    dpm('Updated artilces extra_data!');
+    dpm('Updated article\'s extra_data!');
+    dpm($extra_data);
   }
   
   return $extra_data;
