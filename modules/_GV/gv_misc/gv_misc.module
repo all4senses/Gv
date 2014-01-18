@@ -3540,8 +3540,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
 
   
-  $teaser_with_image = $main_image_html . $teaser;
-  $teaser_with_image_beautify = $main_image_html_beautify . $teaser;
+  $teaser_with_image = @$main_image_html . $teaser;
+  $teaser_with_image_beautify = @$main_image_html_beautify . $teaser;
   
   if ($only_teaser) {
     //return $teaser_with_image;
