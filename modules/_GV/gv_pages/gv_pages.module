@@ -4616,12 +4616,12 @@ function gv_pages_submitForm_convertBeautifulUrls(&$form, &$form_state) {
   //dpm($form_state['values']);
   //dpm($form_state['build_info']['args']);
   //dpm($form);
-  global $user;
+  //global $user;
   
   if (!empty($form_state['values']['body']['und'][0]['value'])) {
     //dpm($form['body']);
-    //$body_with_fixed_urls = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $form_state['values']['body']['und'][0]['value']);
-    $body_with_fixed_urls = $form_state['values']['body']['und'][0]['value'];
+    $body_with_fixed_urls = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $form_state['values']['body']['und'][0]['value']);
+    //$body_with_fixed_urls = $form_state['values']['body']['und'][0]['value'];
     
     form_set_value($form['body'], array('und' => array(0 => array('value' => $body_with_fixed_urls, 'format' => 'full_html') )), $form_state);
   }
@@ -4631,6 +4631,10 @@ function gv_pages_submitForm_convertBeautifulUrls(&$form, &$form_state) {
   
 }
 
+
+/**
+ * Convert original images urls to their beautify analogs and vise versa.
+ */
 function gv_pages_convertBeautifulUrls($direction, $text) {
   switch ($direction) {
     case 'from_beautiful_to_originals':
