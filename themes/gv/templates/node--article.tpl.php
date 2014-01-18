@@ -40,10 +40,11 @@
     return;
   }
   elseif ($view_mode == 'side_block_teaser_latestBlogsOnNews') {
-    $main_image = unserialize($node->field_main_image['und'][0]['value']);
     
-    $out = '<div class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'src' => $main_image['src'], 'path' => $main_image['uri'], 'alt' =>  (@$main_image['alt'] ? $main_image['alt'] : $title), 'title' => $title )) . '</div>' . l($node->title, 'node/' . $node->nid);
-    echo $out;
+    //$main_image = unserialize($node->field_main_image['und'][0]['value']);
+    //echo '<div class="block-thumb">' . theme('gv_misc_image_style', array('style_name' => 'block_thumb', 'src' => $main_image['src'], 'path' => $main_image['uri'], 'alt' =>  (@$main_image['alt'] ? $main_image['alt'] : $title), 'title' => $title )) . '</div>' . l($node->title, 'node/' . $node->nid);
+    
+    echo '<div class="block-thumb">' . $extra_data['block_thumb_image_html_beautify'] . '</div>' . l($node->title, 'node/' . $node->nid);
     return;
   }
   elseif($view_mode == 'side_block_teaser') {
