@@ -9837,7 +9837,7 @@ function gv_misc_addRelatedArticlesToNode($node) {
     $field_extra_data = is_array($node->field_extra_data)? @$node->field_extra_data['und'][0]['value'] : @$node->field_extra_data;
     $extra_data = unserialize($field_extra_data);
 
-    //dpm($extra_data);
+    dpm($extra_data);
 
     
     //'related_articles_timestamp' => time()
