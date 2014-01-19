@@ -1092,8 +1092,17 @@ function gv_misc_testPage() {
 
   //if ($results = $query->execute()->fetchAllAssoc('nid')) {
   if ($results = $query->execute()->fetchAll()) {
-    dpm($results);
+    //dpm($results);
+    
+    for($i = 1; $i <= 100; $i++) {
+      $results[$i]['field_extra_data_value'] = unserialize($results[$i]['field_extra_data_value']);
+      $out[$i] = $results[$i];
+    }
+
+    dpm($out);
   }
+  
+  
   //$result = gv_misc_calculateDataForRelatedArticlesBlock($result->title, $result->teaser, unserialize($result->field_extra_data_value), $result->created, array('title_not_normalized' => TRUE, 'body_not_stripped' => TRUE));
 
   
