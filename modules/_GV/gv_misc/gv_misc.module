@@ -1098,11 +1098,20 @@ function gv_misc_testPage() {
     $out_array = array();
     
     for($i = 1; $i <= 100; $i++) {
-      $results[$i]->field_extra_data_value = unserialize($results[$i]->field_extra_data_value);
-      $out_array[$i] = $results[$i];
       
-      //dpm($out_array);
-      //break;
+    
+      $node = new stdClass();
+      $node->field_extra_data['und'][0]['value'] = $results[$i]->field_extra_data_value;
+      $node->body['und'][0]['value'] = $results[$i]->body_value;
+      $node->nid = $results[$i]->nid;
+      $node->title = $results[$i]->title;
+    
+      $results[$i]->field_extra_data_value = unserialize($results[$i]->field_extra_data_value);
+
+      $out_array[$i] = $results[$i];
+      $out_array[$i]->new_extra_data = gv_misc_updateArticleExtraData($node, FALSE);
+      
+      break;
     }
 
     dpm($out_array);
@@ -3631,7 +3640,7 @@ function gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name,
 /**
  * Helper function to rebuild article's extra_data.
  */
-function gv_misc_updateArticleExtraData($node) {
+function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE) {
   if (!empty($node->field_extra_data['und'][0]['value'])) {
     $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
   }
@@ -3673,8 +3682,10 @@ function gv_misc_updateArticleExtraData($node) {
     }
 
     // Update the field $extra_data in the db
-    gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
-   
+    if ($save_to_node) {
+      gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
+    }
+    
     dpm('Updated article\'s extra_data!');
     dpm($extra_data);
   }
