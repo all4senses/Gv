@@ -1109,7 +1109,7 @@ function gv_misc_testPage() {
       
       $node = new stdClass();
       $node->field_extra_data['und'][0]['value'] = $results[$i]->field_extra_data_value;
-      $node->body['und'][0]['value'] = gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $results[$i]->body_value);
+      $node->body['und'][0]['value'] = $results[$i]->body_value;//gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $results[$i]->body_value);
       $node->nid = $results[$i]->nid;
       $node->title = $results[$i]->title;
     
@@ -1121,7 +1121,9 @@ function gv_misc_testPage() {
 
     dpm($out_array);
     
-    dpm($results[2]);
+    $node = $results[2];
+    dpm($node);
+    //gv_misc_fieldSave('body', $node->nid, $node->new_body);
   }
   
   
