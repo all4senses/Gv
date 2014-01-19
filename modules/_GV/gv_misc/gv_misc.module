@@ -1090,7 +1090,8 @@ function gv_misc_testPage() {
   $query->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN');
   $query->orderBy('nid');
 
-  if ($results = $query->execute()->fetchAllAssoc('nid')) {
+  //if ($results = $query->execute()->fetchAllAssoc('nid')) {
+  if ($results = $query->execute()->fetchAll()) {
     dpm($results);
   }
   //$result = gv_misc_calculateDataForRelatedArticlesBlock($result->title, $result->teaser, unserialize($result->field_extra_data_value), $result->created, array('title_not_normalized' => TRUE, 'body_not_stripped' => TRUE));
