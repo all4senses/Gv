@@ -9859,11 +9859,11 @@ function gv_misc_addRelatedArticlesToNode($node) {
     }
     
 
-    dpm('now time = ' . time());
+    //dpm('now time = ' . time());
     //$extra_data['related_articles_timestamp'] < 1380644802 -----> assure that there is used a new calculation version.
     
     
-    if (!isset($extra_data['related_articles']) || $extra_data['related_articles_timestamp'] < 1390113413 || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
+    if (!isset($extra_data['related_articles']) || $extra_data['related_articles_timestamp'] < 1390117881 || (isset($extra_data['related_articles']) && (time() - @$extra_data['related_articles_timestamp']) > $cache_time ) ) // 60s*60 = 3600s = 1h     //Comment this line to ignore srelected by admin related articled.
     {
       //exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->RELATED START n' . $node->nid . '--->'. escapeshellarg($extra_data['title']) . '" >>~/gv_image_optimize.log');
       
