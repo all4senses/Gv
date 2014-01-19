@@ -1081,8 +1081,8 @@ function gv_misc_testPage() {
   $query = db_select('node', 'n')
       ->fields('n', array('nid', 'title'));
 
-//  $query->leftJoin('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
-//  $query->fields('ed', array('field_extra_data_value'));
+  $query->leftJoin('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
+  $query->fields('ed', array('field_extra_data_value'));
 
 //  $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
 //  $query->addField('b', 'body_value', 'teaser');
