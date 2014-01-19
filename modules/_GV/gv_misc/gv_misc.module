@@ -1085,7 +1085,8 @@ function gv_misc_testPage() {
   $query->fields('ed', array('field_extra_data_value'));
 
   $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
-  $query->addField('b', 'body_value', 'teaser');
+  //$query->addField('b', 'body_value', 'teaser');
+  $query->fields('b', array('body_value'));
 
   $query->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN');
   $query->orderBy('nid');
