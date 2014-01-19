@@ -1264,8 +1264,8 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 
     if (!empty($related_article->src_themed_related_sideblock)) {
       $fragments .='<a class="thumb" href="' . url('node/' . $related_nid) . '">'
-          //. '<img src="' . $related_article->field_main_image_value['src_themed_related'] . '" ' . (!empty($related_article->field_main_image_value['alt']) ? 'alt="' . $related_article->field_main_image_value['alt'] . '" ' : '') . (!empty($related_article->field_main_image_value['title']) ? 'title="' . $related_article->field_main_image_value['title'] . '" ' : '') . '/>'
-          . ($related_article->src_themed_related_sideblock ? '<img src="' . $related_article->src_themed_related_sideblock . '" alt="' . $related_article->title . '" title="' . $related_article->title . '" />' : '')
+          //. ($related_article->src_themed_related_sideblock ? '<img src="' . $related_article->src_themed_related_sideblock . '" alt="' . $related_article->title . '" title="' . $related_article->title . '" />' : '')
+          . ($related_article->src_themed_related_sideblock_beautify ? '<img src="' . $related_article->src_themed_related_sideblock_beautify . '" alt="' . $related_article->title . '" title="' . $related_article->title . '" />' : '')
       . '</a>';
     }
     $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
