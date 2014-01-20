@@ -1097,9 +1097,11 @@ function gv_misc_testPage() {
     
     $out_array = array();
     
-    for($i = 701; $i <= 850; $i++) {
+    for($i = 851; $i <= 1000; $i++) {
       
-    
+      if (!isset($results[$i])) {
+        continue;
+      }
       $results[$i]->extra_data = unserialize($results[$i]->field_extra_data_value);
       
       
