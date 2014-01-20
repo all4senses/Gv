@@ -1118,7 +1118,7 @@ function gv_misc_testPage() {
       $out_array[$i]->new_body = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $results[$i]->body_value);
       //break;
     }
-
+    dpm(time());
     dpm($out_array);
     
     $node = $results[2];
@@ -3649,14 +3649,14 @@ function gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name,
 /**
  * Helper function to rebuild article's extra_data.
  */
-function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE) {
+function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_timestamp = NULL) {
   if (!empty($node->field_extra_data['und'][0]['value'])) {
     $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
   }
   
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
-  if (!isset($extra_data['teaser_beautify'])) {
-    $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
+  if (!isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
+    $teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     
     /*
     $extra_data = array(
@@ -3683,7 +3683,8 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE) {
       'related_articles' => @$old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
       // If related articles should be recalculated, set timestamp to 0, what will make existing related articles expired.
       // -1 for full teasers regenerating, will not use already generated teasers for not changed related articles in function gv_misc_addRelatedArticlesToNode
-      'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'],             
+      'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'],  
+      //'update_timestamp' => time(),
     );
 
     if (!empty($old_extra_data['guest_author'])) {
