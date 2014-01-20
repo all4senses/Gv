@@ -1113,7 +1113,7 @@ function gv_misc_testPage() {
       $node->nid = $results[$i]->nid;
       $node->title = $results[$i]->title;
     
-      $out_array[$i]->new_extra_data = gv_misc_updateArticleExtraData($node, FALSE);
+      $out_array[$i]->new_extra_data = gv_misc_updateArticleExtraData($node, FALSE, 1390187955);
       
       $out_array[$i]->new_body = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $results[$i]->body_value);
       //break;
@@ -3656,7 +3656,8 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
   
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if (!isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
-    $teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
+    //$teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
+    $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     
     /*
     $extra_data = array(
@@ -3684,7 +3685,7 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
       // If related articles should be recalculated, set timestamp to 0, what will make existing related articles expired.
       // -1 for full teasers regenerating, will not use already generated teasers for not changed related articles in function gv_misc_addRelatedArticlesToNode
       'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'],  
-      //'update_timestamp' => time(),
+      'update_timestamp' => time(),
     );
 
     if (!empty($old_extra_data['guest_author'])) {
