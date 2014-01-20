@@ -237,6 +237,7 @@
 <?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'): /* If we are on the final page, after the submission */ ?> 
 
           <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/business-systems'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+            
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
             /* <![CDATA[ */
@@ -256,6 +257,11 @@
             <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
             </div>
             </noscript>
+            
+            <!-- inserted by me on 21.01.2014 -->
+            <script type="text/javascript"> if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script> <script id="mstag_tops" type="text/javascript" src="//flex.msn.com/mstag/site/b2106e00-2863-40e4-844c-f95b8ba90d29/mstag.js"></script> <script type="text/javascript"> mstag.loadTag("analytics", {dedup:"1",domainId:"1856373",type:"1",actionid:"210748"})</script> 
+            <noscript> <iframe src="//flex.msn.com/mstag/tag/b2106e00-2863-40e4-844c-f95b8ba90d29/analytics.html?dedup=1&domainId=1856373&type=1&actionid=210748" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
+            
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
             <script>top.location.href="http://getvoip.com/business-systems";</script>
           <?php endif;*/?>
