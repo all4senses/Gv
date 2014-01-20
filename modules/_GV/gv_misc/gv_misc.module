@@ -1113,12 +1113,12 @@ function gv_misc_testPage() {
       $node->nid = $results[$i]->nid;
       $node->title = $results[$i]->title;
     
-      $out_array[$i]->new_extra_data = gv_misc_updateArticleExtraData($node, FALSE, 1390187955);
+      $out_array[$i]->new_extra_data = gv_misc_updateArticleExtraData($node, FALSE, 1390188453);
       
       $out_array[$i]->new_body = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $results[$i]->body_value);
       //break;
     }
-    dpm(time());
+    //dpm(time());
     dpm($out_array);
     
     $node = $results[2];
@@ -3656,8 +3656,8 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
   
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if (!isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
-    //$teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
-    $teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
+    $teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
+    //$teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     
     /*
     $extra_data = array(
@@ -3697,8 +3697,8 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
       gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
     }
     
-    dpm('Updated article\'s extra_data!');
-    dpm($extra_data);
+    //dpm('Updated article\'s extra_data!');
+    //dpm($extra_data);
   }
   
   return $extra_data;
