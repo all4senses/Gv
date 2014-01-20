@@ -1123,7 +1123,7 @@ function gv_misc_testPage() {
     
     $node = $results[5];
     dpm($node);
-    //gv_misc_fieldSave('body', $node->nid, $node->new_body);
+    gv_misc_fieldBodyUpdate($node->nid, $node->new_body);
   }
   
   
@@ -2989,6 +2989,50 @@ function gv_misc_fieldSave($field_name, $entity_id, $data, $entity_type = 'node'
       ->execute();
   }
 
+  field_cache_clear();
+}
+
+
+/**
+ * Saves or updates a field.
+ */
+function gv_misc_fieldBodyUpdate($entity_id, $data, $entity_type = 'node', $bundle = NULL) {
+  
+  /*if(!$bundle) {
+    $bundle = $entity_type;
+  }
+  */
+  $query = db_select('field_data_body', 'f');
+  $query->fields('f', array('body_value'))
+        ->condition('f.entity_id', $entity_id)
+        ->condition('f.entity_type', $entity_type);
+  $result = $query->execute(); //->fetchField();
+  
+  if ($result->rowCount()) {
+    // Need update an existing field.
+    db_update('field_data_body')
+      ->fields(array(
+        //'entity_id' => $entity_id,
+        //'delta' => 0,  
+        //'revision_id'=> $entity_id,    
+        'body_value' => $data,
+      ))
+      ->condition('entity_id', $entity_id)
+      ->condition('entity_type', $entity_type)
+      ->execute();
+
+    db_update('field_revision_body')
+      ->fields(array(
+        //'entity_id' => $entity_id,
+        //'delta' => 0,  
+        //'revision_id'=> $entity_id,     
+        'body_value' => $data,
+      ))
+      ->condition('entity_id', $entity_id)
+      ->condition('entity_type', $entity_type)
+      ->execute();
+  }
+  
   field_cache_clear();
 }
 
