@@ -5171,11 +5171,17 @@ function gv_blocks_get_requestQuoteForPage_v6() {
                           <div class="select">
                             <div class="question">Amount of lines needed:</div>
                               <select name="phones_amt" id="phones_amt" class="input required">
-                                <option value="1 - 4">1 - 4 Lines</option>
+                              
+                                <option value="1">1 Line</option>
+                                <option value="2 - 4">2 - 4 Lines</option>
+                                
                                 <option selected="selected" value="5 - 10">5 - 10 Lines</option>
                                 <option value="11 - 20">11 - 20 Lines</option>
                                 <option value="21 - 50">21 - 50 Lines</option>
-                                <option value="More than 50">More than 50 Lines</option>
+                                <option value="51 - 99">51 - 99 Lines</option>
+                                <option value="More 100+ Lines">More 100+ Lines</option>
+
+
                               </select>
                            </div>
            
@@ -5242,7 +5248,7 @@ function gv_blocks_get_requestQuoteForPage_v6() {
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="page" />
-                <input type="hidden" name="version" value="6-uk" />
+                <input type="hidden" name="version" value="6-UK-LP" />
                 <input type="hidden" name="referrer" value="" />
                 <input type="hidden" name="url" value="" />
                 

@@ -146,7 +146,7 @@
 
             <div class="quotes one">
               <div class="text">"GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system."</div>
-              <div class="source"><span class="image"></span>Chris Rabbu, VP of Marketing at Vocalocity, Inc.</div>
+              <div class="source"><span class="image"></span>Chris Rabbu, VP of Marketing at Vonage, Inc.</div>
             </div>
             <div class="bottom-clear"></div> 
           </div>
@@ -174,7 +174,7 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/lp-slider-logos-v41.jpg" alt="Supported by Major VoIP Brands" />';
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/lp-slider-logos-v61.jpg" alt="Supported by Major VoIP Brands" />';
 
             ?>
 
