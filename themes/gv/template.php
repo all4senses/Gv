@@ -680,12 +680,12 @@ function gv_process_page(&$variables) {
   // Remote Google fonts.
   // gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500', 'NA', 'text/css');
   // Local fonts, taken from the remote side.  
-  drupal_add_css('sites/all/libraries/fonts/google/open-sans-n-ubuntu/fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  drupal_add_css('sites/all/libraries/fonts/google/open-sans-n-ubuntu/fonts.css', array('group' => /*CSS_DEFAULT*/CSS_THEME, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
-  drupal_add_css('sites/all/libraries/fonts/other/fonts_other.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  drupal_add_css('sites/all/libraries/fonts/other/fonts_other.css', array('group' => /*CSS_DEFAULT*/CSS_THEME, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
   //
   // Add the font-awesome icons font.
-  drupal_add_css('sites/all/libraries/fonts/font-awesome/css/font-awesome.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  drupal_add_css('sites/all/libraries/fonts/font-awesome/css/font-awesome.min.css', array('group' => /*CSS_DEFAULT*/CSS_THEME, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
   // Adding this css will break a little bit a styling on the page!
 //  global $user;
