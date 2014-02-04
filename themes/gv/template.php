@@ -659,6 +659,7 @@ function gv_process_page(&$variables) {
   //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
   //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
   
+  dpm($_SERVER);
   drupal_add_js( $module_path_misc . '/js/gv_add_livechatinc.js'); 
   
   // JS for comparing providers functionality on pages ehere appropriate views are cached and therefore have not loaded js itselves within views.
