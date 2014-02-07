@@ -316,6 +316,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['sitelock-badge'] = array(
+    'info' => 'Sitelock badge',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   return $blocks;
 }
 
@@ -334,16 +339,16 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = 'OM Business VoIP';
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Business VoIP', 'gv_blocks_get_omMenuBlock_Providers');
       break;
-  case 'main_menu_om_res_voip':
-      $block['subject'] = 'OM Residential VoIP';
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Residential VoIP', 'gv_blocks_get_omMenuBlock_Providers');
-      break;    
-    
-  case 'main_menu_om_voip_reviews':
-      $block['subject'] = 'OM VoIP Reviews';
-      $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Reviews', 'gv_blocks_get_omMenuBlock_Providers');
-      break;    
-  case 'mmenu_om_rev':
+    case 'main_menu_om_res_voip':
+        $block['subject'] = 'OM Residential VoIP';
+        $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Residential VoIP', 'gv_blocks_get_omMenuBlock_Providers');
+        break;    
+
+    case 'main_menu_om_voip_reviews':
+        $block['subject'] = 'OM VoIP Reviews';
+        $block['content'] = gv_blocks_get_omMenuBlock_byTitle('VoIP Reviews', 'gv_blocks_get_omMenuBlock_Providers');
+        break;    
+    case 'mmenu_om_rev':
       $block['subject'] = 'OM VoIP Reviews 2';
       $block['content'] = gv_blocks_get_omMenuBlock_byTitle('Reviews', 'gv_blocks_get_omMenuBlock_Providers');
       break;    
@@ -641,7 +646,10 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getSecondaryProvidersSectionBlock();
       break;
     
-    
+    case 'sitelock-badge':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getSitelockBadge();
+      break;
   }
 
   return $block;
@@ -958,6 +966,15 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       break;
   }
   
+}
+
+
+/**
+ * Block with Sitelock Badge.
+ */
+function gv_blocks_getSitelockBadge() {
+  // static
+  return '<div id="sitelock_shield_logo" class="fixed_btm" style="bottom:0;position:fixed;_position:absolute;right:0;"><a href="https://www.sitelock.com/verify.php?site=getvoip.com" onclick="window.open(' . "'https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170'" . ');return false;" ><img alt="PCI Compliance and Malware Removal" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a></div>';
 }
 
 
