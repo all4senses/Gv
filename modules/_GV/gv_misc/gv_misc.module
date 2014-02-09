@@ -6489,18 +6489,18 @@ function gv_misc_SendRequestToRingCentral_UK($submission, $op = 'sendIfAllowed')
   $url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
   
   
-  $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
-  curl_setopt($curl, CURLOPT_POST, TRUE);
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
-  $data_from = curl_exec($curl);
-  if ($data_from === false) {
-    $data_from = 'Error!!! 
-' . curl_error($curl);
-  }
-  curl_close($curl);
+//  $curl = curl_init();
+//  curl_setopt($curl, CURLOPT_URL, $url);
+//  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+//  curl_setopt($curl, CURLOPT_POST, TRUE);
+//  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+//  $data_from = curl_exec($curl);
+//  if ($data_from === false) {
+//    $data_from = 'Error!!! 
+//' . curl_error($curl);
+//  }
+//  curl_close($curl);
  
 
   // Report to a4s.
