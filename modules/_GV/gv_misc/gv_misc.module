@@ -5180,7 +5180,7 @@ double triggerring of a submit form because of double launching almost the same 
 function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
   
   if (in_array($submission['First Name'], array('afs', 'a4s', 'test'))) {
-    return array('TEST submission, was not sent to anywhere' => TRUE);
+    $submission['sentToRemoteProviders'] = array('TEST submission, was not sent to anywhere' => TRUE);
   }
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
    
@@ -5192,7 +5192,7 @@ function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
     }
   }
   
-  $submission['sentToRemoteProviders'] = $allowedProviders;
+  $submission['sentToRemoteProviders'] = !empty($allowedProviders) ? $allowedProviders : array('TEST submission, was not sent to anywhere' => TRUE);
 
 }
 
@@ -5280,7 +5280,7 @@ function gv_misc_isSubmissionToProviderAllowed($submission, $provider_function) 
     }
   }
   
-  if (in_array($submission['source'] . '_' . $submission['version'], $map_function_to_sources[$provider_function]['allowed_sources'])) {
+  if (in_array($submission['Source'] . '_' . $submission['Version'], $map_function_to_sources[$provider_function]['allowed_sources'])) {
     return TRUE;
   }
   else {
