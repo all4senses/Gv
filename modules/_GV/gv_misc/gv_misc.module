@@ -1136,6 +1136,8 @@ function gv_misc_testPage() {
   //$result = gv_misc_calculateDataForRelatedArticlesBlock($result->title, $result->teaser, unserialize($result->field_extra_data_value), $result->created, array('title_not_normalized' => TRUE, 'body_not_stripped' => TRUE));
 
   
+  dpm(__FUNCTION__);
+  
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
@@ -4862,7 +4864,7 @@ function gv_misc_makeRequest_ajax() {
         //'Sumbission page' => $post['url'],
       );
       
-      $submission['sentToRemoteProviders'] = gv_misc_getAllowedProvidersToSendSubmission($submission);
+      gv_misc_getAllowedProvidersToSendSubmission($submission);
       
       foreach ($submission as $key => $value) {
         if (!$value || $value == 'Optional' || $key == $value) {
@@ -5027,7 +5029,7 @@ function gv_misc_makeRequest_ajax() {
     if (!$already_sent) {
       
         if ($post['version'] != '5-IScope') {
-          sendQuoteToProviders($submission, $params);
+          gv_misc_sendQuoteToProviders($submission, $params);
         }
         /*
         if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || $submission['Company'] == 'RC') {
@@ -5175,7 +5177,7 @@ double triggerring of a submit form because of double launching almost the same 
 /*
  * Check it a submission is allowed to be sent to different providers.
  */
-function gv_misc_getAllowedProvidersToSendSubmission($submission) {
+function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
   
   if (in_array($submission['First Name'], array('afs', 'a4s', 'test'))) {
     return array('TEST submission, was not sent to anywhere' => TRUE);
@@ -5184,18 +5186,21 @@ function gv_misc_getAllowedProvidersToSendSubmission($submission) {
    
   $allowedProviders = array();
   
-  foreach ($remoteProvidersSubmissionsSettings as $provider => $providerSendingFunction) {
-    $allowedProviders[$provider] = $providerSendingFunction($submission, 'checkIfShouldBeSent');
+  foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
+    if ($allowedProviders[$provider] = $provider_data['function']($submission, 'checkIfShouldBeSent')) {
+      $submission['sent_via'] .= $provider . ': Quote page (by user); ';
+    }
   }
   
-  return $allowedProviders;
+  $submission['sentToRemoteProviders'] = $allowedProviders;
+
 }
 
 
 /*
  * Send a quote to remote providers.
  */
-function sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetvoipEmail = TRUE, $sendFromBlock = FALSE) {
+function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetvoipEmail = TRUE, $sendFromBlock = FALSE) {
       
   global $language;
   
@@ -5247,8 +5252,9 @@ function sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetv
         $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
       }
       
-      foreach ($remoteProvidersSubmissionsSettings as $provider => $providerSendingFunction) {
-        $providerSendingFunction($submission);
+      
+      foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
+        $provider_data['function']($submission);
       }
       
       /*
@@ -5261,6 +5267,26 @@ function sendQuoteToProviders($submission, $params = NULL, $sendSubmissionToGetv
   }
  
 }        
+
+
+function gv_misc_isSubmissionToProviderAllowed($submission, $provider_function) {
+
+  static $map_function_to_sources;
+  
+  if (!$map_function_to_source) {
+    $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
+    foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
+      $map_function_to_sources[$provider_data['function']] = $provider_data;
+    }
+  }
+  
+  if (in_array($submission['source'] . '_' . $submission['version'], $map_function_to_sources[$provider_function]['allowed_sources'])) {
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
 
 
 function gv_misc_SendRequestToNextiva_test($submission, $op = 'sendIfAllowed') {
@@ -5277,7 +5303,9 @@ function gv_misc_SendRequestToNextiva_test($submission, $op = 'sendIfAllowed') {
 //  if ($submission['Phones needed'] == 'More than 50') {
 //    $allowedToBeSent = FALSE;
 //  }
-  
+
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+    
   if ($op == 'checkIfShouldBeSent') {
     return $allowedToBeSent;
   }
@@ -5899,6 +5927,10 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
     $allowedToBeSent = FALSE;
   }
   
+  
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+  
+  
   if ($op == 'checkIfShouldBeSent') {
     return $allowedToBeSent;
   }
@@ -6022,6 +6054,9 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   if ($submission['Phones needed'] != '1 - 4' && $submission['Phones needed'] != '2 - 4' && $submission['Phones needed'] != '5 - 10' && $submission['Phones needed'] != '11 - 20') {
     $allowedToBeSent = FALSE;
   }
+  
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+  
   
   if ($op == 'checkIfShouldBeSent') {
     return $allowedToBeSent;
@@ -6156,6 +6191,9 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
 //  if ($submission['Phones needed'] != '1 - 4' && $submission['Phones needed'] != '2 - 4' && $submission['Phones needed'] != '5 - 10' && $submission['Phones needed'] != '11 - 20') {
 //    $allowedToBeSent = FALSE;
 //  }
+  
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+  
   
   if ($op == 'checkIfShouldBeSent') {
     return $allowedToBeSent;
@@ -6314,6 +6352,188 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
 
 
 /**
+ * Send a request to RingCentral_UK.
+ */
+function gv_misc_SendRequestToRingCentral_UK($submission, $op = 'sendIfAllowed') {
+  
+  
+  
+//  global $user;
+//  if ($user->uid == 1) {
+//    dpm(__FUNCTION__);
+//    return;
+//  }
+  
+  
+  
+  // If allowedToBeSent...
+  $allowedToBeSent = TRUE;
+  
+ // Send only  '5 - 10' and        '11 - 20'
+//  if ($submission['Phones needed'] != '1 - 4' && $submission['Phones needed'] != '2 - 4' && $submission['Phones needed'] != '5 - 10' && $submission['Phones needed'] != '11 - 20') {
+//    $allowedToBeSent = FALSE;
+//  }
+  
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+  
+  
+  if ($op == 'checkIfShouldBeSent') {
+    return $allowedToBeSent;
+  }
+  elseif ($op == 'sendIfAllowed' && !$allowedToBeSent) {
+    return FALSE;
+  }
+//  elseif ($op == 'mustBeSent') {
+//    // Just sent it unconditionally.
+//  }
+  
+  
+  
+  
+    
+  /*
+  $map_phonesNeeded = array(
+    '1 - 4' => '2-19',
+    '5 - 10' => '2-19',
+    '11 - 20' => '2-19',
+    '21 - 50' => '20-49',
+    'More than 50' => '50-99',
+  );
+  */
+  $map_phonesNeeded = array(
+    '1 - 4' => '2-4',
+    '2 - 4' => '2-4',
+    '5 - 10' => '5-9',
+    '11 - 20' => '11-20',
+    '21 - 50' => '21-49',
+    'More than 50' => '50-99',
+  );
+  
+  
+  $submission['Phones needed'] = $map_phonesNeeded[$submission['Phones needed']];
+  
+  
+  $map_main = array(
+    'First Name' => 'FirstName',
+    'Last Name' => 'LastName',
+    'Phones needed' => 'NumberOfEmployees__c', 
+    //'Quote type' => '', 
+    'Buying Time Frame' => 'Time_Frame__c',
+    'Company' => 'Company',
+    'Email' => 'Email',
+    'Phone #' => 'Phone',
+  );
+ 
+      
+  // Set initial fields.
+  $data_to = array(
+    'lead_source' => 'Lead Generation',
+    'BMID__c' => 'GETVOIPHQL',
+    
+    //'AID__c' => 'GETVOIPHQL',
+    //'PID__c' => 'GETVOIPHQL',
+      
+    'Number_of_Locations__c_lead' => 1,
+      
+    //'oid' => '00D80000000aRUX',
+    //'Campaign_ID' => '70180000000auP8',
+    //'member_status' => 'Responded',
+      
+    'retURL' =>  'http://marketo.ringcentral.com/LeadGen1-ThankYou.html',
+    'returnURL' =>  'http://marketo.ringcentral.com/LeadGen1-ThankYou.html',
+      
+    //'debug' => 1,
+    //'debugEmail' => 'wilson.chu@ringcentral.com',//'all4senses@gmail.com',
+    
+    'lpId' => '4529',//'IpId' => '4529',
+    'subId' => '100',//'subld' => '100',
+    'munchkinId' => '075-DTB-715',//'munkchkinld' => '075-DTB-715',
+    'lpurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',//'Ipurl' => 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html?cr={creative}&kw={keyword}',
+    'formid' => '1163',
+    'returnLPId' => '1947',//'returnLPld' => '1947',
+    '_mkt_disp' => 'return',
+      
+    '_mkt_trk' => 'id:075-DTB-715',
+    //'_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
+      
+      
+    'Title' => 'NA',
+    'Industry' => 'Advertising, Marketing, Media, PR',
+      
+    'City' => 'NA',
+    'State' => 'AK',
+    'Street' => 'NA',
+    //'zip' => 'N/A', 
+    'Country' => 'USA',
+    'Description_of_Your_Business__c' => 'NA',
+    'Notes__c' => 'NA',
+    'Number_Of_Locations__c' => 'NA',
+      
+    //'NumberOfEmployees' => 'N/A',
+      
+    //'kw' => 'not found',
+    //'cr' => 'not found',
+  );
+    
+  
+  // Map data to remote vars names.
+  foreach ($map_main as $getvoip_key => $remote_key) {
+    $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
+  }
+  
+  if (empty($data_to['Company'])) {
+    $data_to['Company'] = 'Unavailable';
+  }
+  
+  //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
+  $url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
+  
+  
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+  curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+  $data_from = curl_exec($curl);
+  if ($data_from === false) {
+    $data_from = 'Error!!! 
+' . curl_error($curl);
+  }
+  curl_close($curl);
+ 
+
+  // Report to a4s.
+  /*
+  $out = 'Quote Request submission form:
+
+';
+  foreach ($submission as $key => $value) {
+   if ($value) {
+      $out .= "$key = $value
+";
+    }
+  }
+ 
+ 
+  
+  $params['report'] = $out . '
+    
+
+' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
+  drupal_mail('gv_misc', 'ringcentral_send_report', 'all4senses@gmail.com', $language->language, $params);
+  
+  return $params['report'];
+  */
+  
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'ringcentral_UK_send_report', $data_to);
+}
+
+
+/**
  * Send a request to Nextiva.
  */
 function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
@@ -6333,6 +6553,9 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
 //  if ($submission['Phones needed'] == 'More than 50') {
 //    $allowedToBeSent = FALSE;
 //  }
+  
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+  
   
   if ($op == 'checkIfShouldBeSent') {
     return $allowedToBeSent;
@@ -6556,6 +6779,10 @@ function gv_misc_mail($key, &$message, $params) {
       break;
     case 'ringcentral_send_report':
       $message['subject'] = 'GV Report from the RingCentral request sending.';
+      $message['body'][] = $params['report'];
+      break;
+    case 'ringcentral_UK_send_report':
+      $message['subject'] = 'GV Report from the RingCentral-UK request sending.';
       $message['body'][] = $params['report'];
       break;
     case '8x8_send_report':
@@ -10331,7 +10558,7 @@ function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
   $class_submitted = 'all-submitted';
   if (!empty($quote_request_data['sentToRemoteProviders'])) {
-    foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_function) {
+    foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
       if (empty($quote_request_data['sentToRemoteProviders'][$provider])) {
         $class_submitted = 'some-not-submitted';
       }
@@ -10353,7 +10580,7 @@ function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_
         '#tree' => TRUE,
       );
 
-          foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_function) {
+          foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
             $form['remoteSubmittions']['providers'][$provider] = array(
               '#type' => 'checkbox',
               '#default_value' => !empty($quote_request_data['sentToRemoteProviders'][$provider]) ? TRUE : FALSE,
@@ -10396,10 +10623,6 @@ function gv_misc_sendCapturedQuotesToProviders_form_validate(&$form, &$form_stat
 //  if (!$form_state['values']['message']) {
 //    form_set_error('message', 'You have to enter a Message, if don\'t want to just subscribe to newsletters');
 //  }
-
-  
-  
-  
 }
 
 
@@ -10424,9 +10647,10 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
   
   $providers_just_sent = NULL;
   
-  foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_function) {
+  foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
     if (empty($quote_request_data['sentToRemoteProviders'][$provider]) && !empty($form_state['values']['providers'][$provider])) {
-      $provider_function($quote_request_data['submission'], 'mustBeSent');
+      $quote_request_data['submission']['sent_via'] .= $quote_request_data['sentToRemoteProviders'][$provider] . ': Admin panel; ';
+      $provider_data['function']($quote_request_data['submission'], 'mustBeSent');
       //dpm($provider_function);
       $providers_just_sent .= ($providers_just_sent ? ', ' : '') . $provider;
     }
@@ -10434,7 +10658,7 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
   
   if ($providers_just_sent) {
       $quote_request_data['submission']['sentToRemoteProviders'] = $form_state['values']['providers'];
-
+      
       // Update the submissions data history.
       $result = db_update('gv_quote_requests')
         ->fields(array(
