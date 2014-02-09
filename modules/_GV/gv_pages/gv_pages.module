@@ -6701,10 +6701,10 @@ function gv_pages_node_view($node, $view_mode) {
       $node->q_data = unserialize($node->field_q_data['und'][0]['value']);
       
       // Redirect old versions Quote pages to the latest version.
-      global $user;
-      if (!$user->uid && (!strpos($node->title, 'Quote page v3') && !strpos($node->title, 'Quote page v4'))) {
-        drupal_goto('compare-voip-solutions', array(), 301);
-      }
+//      global $user;
+//      if (!$user->uid && (!strpos($node->title, 'Quote page v3') && !strpos($node->title, 'Quote page v4'))) {
+//        drupal_goto('compare-voip-solutions', array(), 301);
+//      }
       
       
       break; // End of quote.
