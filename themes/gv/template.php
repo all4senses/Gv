@@ -755,7 +755,7 @@ function gv_preprocess_node(&$variables) {
         $body_classes_add['quote_page'] = 'quote-page v5';
         $variables['theme_hook_suggestions'][] = 'node__quote__v5';
     }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v6' || $variables['node']->title == 'Request a Quote page v5 Final') ) {
+    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v6' || $variables['node']->title == 'Request a Quote page v6 Final') ) {
         global $body_classes_add;
         $body_classes_add['quote_page'] = 'quote-page v6';
         $variables['theme_hook_suggestions'][] = 'node__quote__v6';
