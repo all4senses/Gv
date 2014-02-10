@@ -56,7 +56,7 @@
                             <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
                             <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD Phones</strong></div>
 
-                            <div class="ps"><span>Over 100,000</span> Average business savings of $240/mo</div>
+                            <div class="ps"><span>Over 100,000 Quotes Delivered</span> Average business savings of $240/mo</div>
                     </div>
 
               </div>
