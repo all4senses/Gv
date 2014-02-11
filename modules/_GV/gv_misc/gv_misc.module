@@ -10653,7 +10653,7 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
   $quote_request_data['submission']['sent_via'] = isset($quote_request_data['submission']['sent_via']) ? $quote_request_data['submission']['sent_via'] : '';
   foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
     if (empty($quote_request_data['sentToRemoteProviders'][$provider]) && !empty($form_state['values']['providers'][$provider])) {
-      $quote_request_data['submission']['sent_via'] .= $quote_request_data['sentToRemoteProviders'][$provider] . ': Admin panel; ';
+      $quote_request_data['submission']['sent_via'] .= $provider . ': Admin panel; ';
       $provider_data['function']($quote_request_data['submission'], 'mustBeSent');
       //dpm($provider_function);
       $providers_just_sent .= ($providers_just_sent ? ', ' : '') . $provider;
