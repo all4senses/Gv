@@ -2504,8 +2504,7 @@ function gv_misc_trackClick_ajax() {
  */
 function gv_misc_setReferer_ajax() {
   
-  $status = TRUE;
-  $output = '';
+  //$output = '';
   
   $post = array();
   foreach ($_POST as $key => $value) {
@@ -2516,7 +2515,7 @@ function gv_misc_setReferer_ajax() {
     $_SESSION['gv_current_http_referer'] = $post['referer'];
   }
   
-  drupal_json_output(array('status' => $status, /*'data' => $output*/));
+  drupal_json_output(array('status' => TRUE, /*'data' => $output*/));
 }
 
 
