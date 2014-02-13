@@ -6,10 +6,8 @@
        
        $('body.not-logged-in').one('mouseover', function() {
           console.log('ooooover...');
-        });
-              
-              
-       (jQuery).ajax({
+          
+          (jQuery).ajax({
             
                 url: '/referer', 
                 data: {
@@ -32,6 +30,10 @@
                      */
             }); // end of (jQuery).ajax
         
+
+        });
+              
+              
 
 
 
