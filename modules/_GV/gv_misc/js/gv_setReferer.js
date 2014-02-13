@@ -5,7 +5,7 @@
               
        
        $('body.not-logged-in').one('mouseover', function() {
-          console.log('ooooover...');
+          //console.log('ooooover...');
           
           (jQuery).ajax({
             
