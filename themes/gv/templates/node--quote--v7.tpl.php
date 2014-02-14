@@ -36,8 +36,8 @@
   
 
 
-      <div class="full">
-        
+      <div class="full main">
+        <img src="/images/theme/lp7-back.jpg" style="position: absolute;">
         <div id="main-content">
 
               <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lp7-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
