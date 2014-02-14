@@ -306,6 +306,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['side_social_links'] = array(
+    'info' => 'Follow Us',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['sidebar_related_articles'] = array(
     'info' => 'Related articles for a current post',
     'cache' => DRUPAL_NO_CACHE,
@@ -635,6 +640,13 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = 'Share this Post:';
       $block['content'] = gv_blocks_getSidebarShareStaticBlock();
       break;
+    
+    case 'side_social_links':
+      $block['subject'] = 'Follow Us:';
+      $block['content'] = gv_blocks_getSidebarSocialLinksBlock();
+      break;
+    
+    
     
     case 'sidebar_related_articles':
       $block['subject'] = 'Related posts';
@@ -1298,6 +1310,53 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 //    $blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
 //    return '<div id="related-block"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';
   return '<div class="related-block" id="rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul>' . $fragments . '</div>';
+}
+
+
+/**
+ * Block with social links for sidebar.
+ */
+function gv_blocks_getSidebarSocialLinksBlock() {
+  
+  $out = NULL;
+  /*
+  $source = 'GetVoIP.com';
+  $post_url = url($_GET['q'], array('absolute' => TRUE));
+  $post_title = $node->title;
+  $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags(@$node->body['und'][0]['value']), 0, 200);
+
+  $link_open = 'href="javascript:void(window.open(' . "'";
+  $links = array(
+      'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
+      'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
+      //array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('p[title]' => $post_title, 'p[url]' => $post_url, 'p[summary]' => $summary, 'p[images]' => $image, )),
+      'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
+      'LinkedIn' => array('social_url' => 'http://www.linkedin.com/shareArticle', 'query' => array('title' => $post_title, 'mini' => 'true', 'url' => $post_url, 'summary' => $summary, 'source' => $source)),
+  
+  );
+  
+  foreach ($links as $class => $link) {
+    $out .= l($class, $link['social_url'], array('attributes' => array('class' => array($class), 'rel' => 'nofollow'), 'query' => $link['query']));
+  }
+  */
+  
+  
+  
+  $cid = 'gv_cached_sideSocialLinks';
+  $cache = cache_get($cid, 'cache');
+
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    $out = $cache->data;
+  }
+  else {
+    $menu = menu_build_tree('menu-header-links');
+    dpm($menu);
+    $out = theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
+    
+    cache_set($cid, $out, 'cache', strtotime('+31 day'));
+  } 
+  
+  return '<div class="share-static">' . $out . '</div>';
 }
 
 
