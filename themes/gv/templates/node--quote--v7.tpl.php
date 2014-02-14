@@ -42,7 +42,7 @@
 
               <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lp7-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
-                    <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
+                    <?php //echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
 
                     <div class="left">
                             <h2>Save Up To 80% On a Better<br/> Business Phone System!</h2>
