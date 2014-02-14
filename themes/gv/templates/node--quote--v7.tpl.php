@@ -40,7 +40,7 @@
         
         <div id="main-content">
 
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/business-systems-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lp7-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
                     <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
 
@@ -101,7 +101,7 @@
           
           
 
-              <?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'): ?>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/lp7-final'): ?>
 
                   <div class="right final">
                     <?php  
@@ -234,9 +234,9 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/lp7-final'): /* If we are on the final page, after the submission */ ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/business-systems'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lp7'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
@@ -263,11 +263,11 @@
             <noscript> <iframe src="//flex.msn.com/mstag/tag/b2106e00-2863-40e4-844c-f95b8ba90d29/analytics.html?dedup=1&domainId=1856373&type=1&actionid=210748" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
             
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/business-systems";</script>
+            <script>top.location.href="http://getvoip.com/lp7";</script>
           <?php endif;*/?>
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'):
-// So we are on the lending page '/business-systems' 
+<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lp7-final'):
+// So we are on the lending page '/lp7' 
 ?>
     
   <!-- Google Code for Remarketing tag -->
@@ -288,5 +288,5 @@
   </div>
   </noscript>
   
-<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'):?>
+<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lp7-final'):?>
   
