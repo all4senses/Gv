@@ -307,7 +307,7 @@ function gv_blocks_block_info() {
   );
   
   $blocks['side_social_links'] = array(
-    'info' => 'Follow Us',
+    'info' => 'Follow Us Sideblock',
     'cache' => DRUPAL_NO_CACHE,
   );
   
@@ -1351,6 +1351,8 @@ function gv_blocks_getSidebarSocialLinksBlock() {
   else {
     $menu = menu_build_tree('menu-header-links');
     dpm($menu);
+    // Don't show rss link here.
+    unset($menu['49956 Rss 931']);
     $out = theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
