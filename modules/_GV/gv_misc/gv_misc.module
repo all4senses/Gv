@@ -2511,7 +2511,7 @@ function gv_misc_setReferer_ajax() {
 //    $post[$key] = check_plain(strip_tags($value));
 //  }
 //  
-  if (!empty($_POST['referer']) && strpos($post['$_POST'], 'http://getvoip.com') === FALSE) {
+  if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
   //if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
     
     //$_SESSION['gv_current_http_referer'] = $post['referer'];
