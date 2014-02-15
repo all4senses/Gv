@@ -2511,11 +2511,14 @@ function gv_misc_setReferer_ajax() {
 //    $post[$key] = check_plain(strip_tags($value));
 //  }
 //  
-  if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
-  //if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
+//  
+  $post['referer'] = check_plain(strip_tags($_POST['referer']));
+  
+  //if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
+  if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
     
-    //$_SESSION['gv_current_http_referer'] = $post['referer'];
-    $_SESSION['gv_current_http_referer'] = $_POST['referer'];
+    $_SESSION['gv_current_http_referer'] = $post['referer'];
+    //$_SESSION['gv_current_http_referer'] = $_POST['referer'];
   }
   
   drupal_json_output(array('status' => TRUE, /*'data' => $output*/));
