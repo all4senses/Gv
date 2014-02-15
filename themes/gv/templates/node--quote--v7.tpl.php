@@ -27,10 +27,12 @@
               echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
           </div>
-
+        
+          <div class="ps"><span>Over 100,000 Quotes Delivered</span> Average business savings of $240/mo</div>
+          
       </div>
   
-      <div class="ps"><span>Over 100,000 Quotes Delivered</span> Average business savings of $240/mo</div>
+      
       
       <div class="bottom-clear"></div> 
   
