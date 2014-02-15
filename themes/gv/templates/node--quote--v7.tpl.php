@@ -116,7 +116,7 @@
                   </div>
               <?php else: ?>
 
-                  <div id="verisign"></div>
+                  <!--<div id="verisign"></div> -->
                   
                   <div class="right">
                     <div id="right-bottom">
