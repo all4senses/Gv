@@ -3727,6 +3727,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           // Get all additional data for first/last names extraction.
           //$user = user_load($user->uid);
+          //https://drupal.org/node/1078614
+          //Notice: Undefined property: stdClass::$timestamp in _drupal_session_write()
           $user = (object)array_merge((array)$user, (array)user_load($user->uid));
           
           // Autofill first/last names and email.
