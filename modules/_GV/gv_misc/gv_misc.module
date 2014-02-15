@@ -3473,6 +3473,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     foreach ($matches[1] as $index => $key) {
       $main_image[$key] = $matches[2][$index];
     }
+    // restoreoriginal url from beautify in case it was beautify.
+    $main_image['src'] = gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $main_image['src']);
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   }
   elseif (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
