@@ -48,7 +48,7 @@
               
               <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lp7-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
-                    <?php //echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
+                    <?php echo '<img id="q-image" src="/images/theme/lp7-phone.png" />'; ?>
 
                     <div class="left">
                             
@@ -147,8 +147,8 @@
             <h1>We identify and rank the best business VoIP providers and phone systems.</h1>
 
             <div class="quotes one">
-              <div class="text">"GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system."</div>
-              <div class="source"><span class="image"></span>Chris Rabbu, VP of Marketing at Vonage, Inc.</div>
+              <div class="text"><span></span>"GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system."<div></div></div>
+              <div class="source"><span class="image"></span><div>Chris Rabbu</div> VP of Marketing at Vonage, Inc.</div>
             </div>
             <div class="bottom-clear"></div> 
           </div>
@@ -192,15 +192,18 @@
       <div class="full bottom">
 
           <div id="bottom">
-            <div class="text">
+            <div class="text first">
+              <span></span>
               <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
               <div><?php echo $initialQuotePage_node->q_data['bottom_text']['left_text']; ?></div>
             </div>
             <div class="text">
+              <span></span>
               <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['center_title']; ?></h3>
               <div><?php echo $initialQuotePage_node->q_data['bottom_text']['center_text']; ?></div>
             </div>
             <div class="text last">
+              <span></span>
               <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['right_title']; ?></h3>
               <div><?php echo $initialQuotePage_node->q_data['bottom_text']['right_text']; ?></div>
             </div>
@@ -223,14 +226,20 @@
 
 
           <div class="c">GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.
-            <div>© 2014 GetVoIP.com | All Rights Reserved</div>
+            <div></div>
           </div>
 
         </div>
       </footer> <!-- /#footer -->
   
   
-  
+      <div class="full underfooter">
+        
+        <div id="underfooter-inside">
+          © 2014 GetVoIP.com | All Rights Reserved  
+        </div>
+        
+      </div>
   
   
 
