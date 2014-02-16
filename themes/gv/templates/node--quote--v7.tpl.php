@@ -175,7 +175,7 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/lp-slider-logos-v41.jpg" alt="Supported by Major VoIP Brands" />';
+                echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
 
             ?>
 
