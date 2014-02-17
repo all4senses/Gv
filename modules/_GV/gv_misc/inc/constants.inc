@@ -271,10 +271,10 @@ define('PAGES_410', serialize($pages410));
 
 // Remote submissions data, functions, etc.
 $remoteProvidersSubmissionsSettings = array(
-  'Nextiva' => array('function' => 'gv_misc_SendRequestToNextiva', 'allowed_sources' => array('page_4', 'page_5-IScope')),
-  'Vocalocity' => array('function' => 'gv_misc_SendRequestToVocalocity', 'allowed_sources' => array('page_4', 'page_5-IScope')),
-  '8x8' => array('function' => 'gv_misc_SendRequestTo8x8', 'allowed_sources' => array('page_4', 'page_5-IScope')),
-  'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array('page_4', 'page_5-IScope')),
+  'Nextiva' => array('function' => 'gv_misc_SendRequestToNextiva', 'allowed_sources' => array('page_4'/*, 'page_5-IScope'*/)),
+  'Vocalocity' => array('function' => 'gv_misc_SendRequestToVocalocity', 'allowed_sources' => array('page_4'/*, 'page_5-IScope'*/)),
+  '8x8' => array('function' => 'gv_misc_SendRequestTo8x8', 'allowed_sources' => array('page_4'/*, 'page_5-IScope'*/)),
+  'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array('page_4'/*, 'page_5-IScope'*/)),
   
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP')),
 );
