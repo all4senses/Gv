@@ -5283,7 +5283,24 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     $p_data['logo']['i_logo_uri'] = $logo->uri;
     $p_data['logo']['i_logo_alt'] = $form_state['values']['field_p_logo']['und'][0]['alt'];
     $p_data['logo']['i_logo_title'] = $form_state['values']['field_p_logo']['und'][0]['title'];
+    
+    // Recreate image styled image.
+    $logo_provider_page_themed_image_src = urldecode(str_replace('http://getvoip.com/', '', image_style_url('logo_provider_page', $logo->uri))); 
+    if (file_exists($logo_provider_page_themed_image_src)) {
+      unlink($logo_provider_page_themed_image_src);
+    }
+    gv_misc_createCachedImageIfNotExists($logo_provider_page_themed_image_src, NULL, TRUE);
   }
+  
+  if ($p_image = file_load($form_state['values']['field_p_image']['und'][0]['fid'])) {
+    // Recreate image styled image.
+    $p_image_provider_page_themed_image_src = urldecode(str_replace('http://getvoip.com/', '', image_style_url('image_provider_page', $p_image->uri))); 
+    if (file_exists($p_image_provider_page_themed_image_src)) {
+      unlink($p_image_provider_page_themed_image_src);
+    }
+    gv_misc_createCachedImageIfNotExists($p_image_provider_page_themed_image_src, NULL, TRUE);
+  }
+          
   
   /*
   //$rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);

@@ -5539,11 +5539,11 @@ function gv_misc_testPage_iframe() {
 /**
  * Creates imagecache image if it doesnt exist.
  */
-function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL) {
+function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL, $force_recreate = FALSE) {
   // Assure that the imagecache file is created already, or recreate it.
   $relative_path = str_replace('http://getvoip.com/', '', $relative_path);
   
-  if (!file_exists($relative_path)) {
+  if ($force_recreate || !file_exists($relative_path)) {
     
     
     // Find out the style name from 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
