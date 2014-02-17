@@ -5141,7 +5141,8 @@ function gv_misc_makeRequest_ajax() {
         $output = '<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>'; 
       }
     }
-    elseif ($post['source'] == 'page') {
+    else {
+      // $post['source'] == 'page'
       switch ($post['version']) {
         case '1':
           $output .= '<script>top.location.href="http://getvoip.com/request-voip-phone-system-quote-final";</script>';
@@ -5165,6 +5166,10 @@ function gv_misc_makeRequest_ajax() {
         
         case '6-UK-LP':
           $output .= '<script>top.location.href="http://getvoip.com/business-systems-uk-final";</script>';
+          break;
+        
+        case '7':
+          $output .= '<script>top.location.href="http://getvoip.com/lp7-final";</script>';
           break;
       }
       
