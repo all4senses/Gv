@@ -41,11 +41,11 @@
 
 
       <div class="full main">
-        <img src="/images/theme/service-quotes-back.jpg" style="position: absolute;">
+        <img src="/images/theme/lp7-back.jpg" style="position: absolute;">
         <div id="main-content">
 
               <h2>Save Up To 65% On a Better<br/> Business Phone Service!</h2>
-              <img id="q-image" src="/images/theme/service-quotes-phone.png" />
+              <img id="q-image" src="/images/theme/lp7-phone.png" />
               
               <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/service-quotes-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
