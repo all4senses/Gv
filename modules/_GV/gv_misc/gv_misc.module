@@ -3999,13 +3999,16 @@ function gv_misc_addSocialShareData_toPage($node) {
           $image = $image['src_share_beautify'];
         }
         elseif (!empty($image['src_share'])) {
-          $image = $image['src_themed_share'];
+          //$image = $image['src_share'];
+          $image = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image['src_share']);
         }
         elseif (!empty($image['src_themed'])) {
-          $image = $image['src_themed'];
+          //$image = $image['src_themed'];
+          $image = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image['src_themed']);
         }
         elseif (isset($image['src']) && $image['src']) {
-          $image = $image['src'];
+          //$image = $image['src'];
+          $image = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image['src']);
         }
         else {
           $image = NULL;
@@ -4028,11 +4031,16 @@ function gv_misc_addSocialShareData_toPage($node) {
     case 'provider':
       
       $p_data = unserialize($node->field_p_data['und'][0]['value']);
-      if (isset($p_data['share_src_themed']) && $p_data['share_src_themed']) {
-        $image = $p_data['share_src_themed'];
+      if (!empty($p_data['src_share_beautify'])) {
+        $image = $p_data['src_share_beautify'];
       }
-      elseif(isset($node->field_p_logo['und'][0]['uri']) && $node->field_p_logo['und'][0]['uri']) {
-        $image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
+      if (!empty($p_data['share_src_themed'])) {
+        //$image = $p_data['share_src_themed'];
+        $image = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image['share_src_themed']);
+      }
+      elseif(!empty($node->field_p_logo['und'][0]['uri'])) {
+        //$image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
+        $image = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']));
       }
       
       $og_type = 'company';
@@ -4090,7 +4098,10 @@ function gv_misc_addSocialShareData_toPage($node) {
   if (!$image){
     // Show default image - the logo.
     //$image = '/sites/all/themes/gv_orange/css/images/getvoip-logo.png';
-    $image = '/sites/all/themes/gv_orange/css/images/getvoip-logo4-t.png';
+    
+    //$image = '/sites/all/themes/gv_orange/css/images/getvoip-logo4-t.png';
+    $image = 'http://getvoip.com/images/theme/getvoip-logo4-t.png';
+    
   }
 
   if (!strpos($image, 'getvoip.com')) {
@@ -5236,20 +5247,17 @@ function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissi
       gv_misc_SendRequestToRingCentral($submission);
     }
   }
-  /*
-  elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva') {
+  
+  elseif ($submission['First Name'] == 'Nextiva' || $submission['First Name'] == 'nextiva' || $submission['Company'] == 'Nextiva') {
     // Test for Nextiva
     drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
 
     // Send a lead to Remote providers.
-    if ($submission['Source'] != 'block') {
+    //if ($submission['Source'] != 'block') {
       gv_misc_SendRequestToNextiva($submission);
-    }
-  }*/
-  else
-  
-  
-  if ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s' && $submission['First Name'] != 'test') {
+    //}
+  }
+  elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s' && $submission['First Name'] != 'test') {
     
     if ($sendSubmissionToGetvoipEmail) {
       // Normal send if not a test from a4s
@@ -6662,7 +6670,9 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
   
   //$url = 'http://getvoip.com/request-test';
   //$url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
-  $url = 'http://business-voip.nextiva.com/index.php/leadCapture/save';
+  
+  ////$url = 'http://business-voip.nextiva.com/index.php/leadCapture/save';
+  $url = 'http://business-voip.nextiva.com/getvoip.html';
   
   
   $curl = curl_init();

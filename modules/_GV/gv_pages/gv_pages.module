@@ -5295,9 +5295,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   if ($p_image = file_load($form_state['values']['field_p_image']['und'][0]['fid'])) {
     // Recreate image styled image.
     $p_image_provider_page_themed_image_src = urldecode(str_replace('http://getvoip.com/', '', image_style_url('image_provider_page', $p_image->uri))); 
-    if (file_exists($p_image_provider_page_themed_image_src)) {
-      unlink($p_image_provider_page_themed_image_src);
-    }
+//    if (file_exists($p_image_provider_page_themed_image_src)) {
+//      unlink($p_image_provider_page_themed_image_src);
+//    }
     gv_misc_createCachedImageIfNotExists($p_image_provider_page_themed_image_src, NULL, TRUE);
   }
           
@@ -5395,6 +5395,14 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       $p_data['share_src_themed'] = image_style_url('share', $logo->uri);
     }
     */
+    
+    
+      // Recreate image styled image.
+      $p_share_themed_image_src = urldecode(str_replace('http://getvoip.com/', '', $p_data['share_src_themed'])); 
+      gv_misc_createCachedImageIfNotExists($p_share_themed_image_src, NULL, TRUE);
+      
+      $p_data['src_share_beautify'] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $p_data['share_src_themed']);
+    
   }
   
  
