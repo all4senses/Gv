@@ -41,13 +41,13 @@
 
 
       <div class="full main">
-        <img src="/images/theme/lp7-back.jpg" style="position: absolute;">
+        <img src="/images/theme/service-quotes-back.jpg" style="position: absolute;">
         <div id="main-content">
 
               <h2>Save Up To 65% On a Better<br/> Business Phone Service!</h2>
-              <img id="q-image" src="/images/theme/lp7-phone.png" />
+              <img id="q-image" src="/images/theme/service-quotes-phone.png" />
               
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lp7-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/service-quotes-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
                     <div class="left">
                             
@@ -106,7 +106,7 @@
           
           
 
-              <?php if ($_SERVER['REDIRECT_URL'] == '/lp7-final'): ?>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'): ?>
 
                   <div class="right final">
                     <?php  
@@ -248,9 +248,9 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/lp7-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'): /* If we are on the final page, after the submission */ ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lp7'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/service-quotes'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
@@ -277,11 +277,11 @@
             <noscript> <iframe src="//flex.msn.com/mstag/tag/b2106e00-2863-40e4-844c-f95b8ba90d29/analytics.html?dedup=1&domainId=1856373&type=1&actionid=210748" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
             
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/lp7";</script>
+            <script>top.location.href="http://getvoip.com/service-quotes";</script>
           <?php endif;*/?>
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lp7-final'):
-// So we are on the lending page '/lp7' 
+<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):
+// So we are on the lending page '/service-quotes' 
 ?>
     
   <!-- Google Code for Remarketing tag -->
@@ -302,5 +302,5 @@
   </div>
   </noscript>
   
-<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lp7-final'):?>
+<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):?>
   
