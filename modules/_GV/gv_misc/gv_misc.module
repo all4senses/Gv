@@ -4040,6 +4040,7 @@ function gv_misc_addSocialShareData_toPage($node) {
       elseif (!empty($p_data['share_src_themed'])) {
         //$image = $p_data['share_src_themed'];
         $image = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image['share_src_themed']);
+        dpm($image);
       }
       elseif(!empty($node->field_p_logo['und'][0]['uri'])) {
         //$image = gv_misc_getPathFromStreamUri($node->field_p_logo['und'][0]['uri']);
