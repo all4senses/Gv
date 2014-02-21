@@ -1369,48 +1369,47 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL,
   
   static $out;
   
-  if ($out) {
-    return $out;
-  }
+  if (!$out) {
+    
   
-  if (!$node) {
-    if (strpos($_GET['q'], 'node/') === FALSE) {
-      return NULL;
-    }
-    $node = node_load(str_replace('node/', '', $_GET['q']));
-  }
-  //dpm($_GET);
-  //dpm($node);
   
-  $out = NULL;
-  $source = 'GetVoIP.com';
-  $post_url = url($_GET['q'], array('absolute' => TRUE));
-  $post_title = $node->title;
-  $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags(@$node->body['und'][0]['value']), 0, 200);
+      if (!$node) {
+        if (strpos($_GET['q'], 'node/') === FALSE) {
+          return NULL;
+        }
+        $node = node_load(str_replace('node/', '', $_GET['q']));
+      }
+      //dpm($_GET);
+      //dpm($node);
 
-  $link_open = 'href="javascript:void(window.open(' . "'";
-  $links = array(
-      'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
-      'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
-      //array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('p[title]' => $post_title, 'p[url]' => $post_url, 'p[summary]' => $summary, 'p[images]' => $image, )),
-      'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
-      'LinkedIn' => array('social_url' => 'http://www.linkedin.com/shareArticle', 'query' => array('title' => $post_title, 'mini' => 'true', 'url' => $post_url, 'summary' => $summary, 'source' => $source)),
-  
-    //'http://twitter.com/share?text=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?',
-    //'http://www.linkedin.com/shareArticle?mini=true&url=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&title=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&summary=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.&source=The+Profitable+Practice',
-    //'https://plus.google.com/share?url=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/',
-    //'http://www.facebook.com/sharer.php?s=%20100&p[title]=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&p[url]=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&p[images][0]=http://profitable-practice.softwareadvice.com/files/2013/08/genomedata_thumbnail.jpg&p[summary]=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.',
-  );
-  
-  foreach ($links as $provider => $link) {
-    $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
+      //$out = NULL;
+      $source = 'GetVoIP.com';
+      $post_url = url($_GET['q'], array('absolute' => TRUE));
+      $post_title = $node->title;
+      $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags(@$node->body['und'][0]['value']), 0, 200);
+
+      $link_open = 'href="javascript:void(window.open(' . "'";
+      $links = array(
+          'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
+          'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
+          //array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('p[title]' => $post_title, 'p[url]' => $post_url, 'p[summary]' => $summary, 'p[images]' => $image, )),
+          'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
+          'LinkedIn' => array('social_url' => 'http://www.linkedin.com/shareArticle', 'query' => array('title' => $post_title, 'mini' => 'true', 'url' => $post_url, 'summary' => $summary, 'source' => $source)),
+
+        //'http://twitter.com/share?text=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?',
+        //'http://www.linkedin.com/shareArticle?mini=true&url=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&title=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&summary=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.&source=The+Profitable+Practice',
+        //'https://plus.google.com/share?url=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/',
+        //'http://www.facebook.com/sharer.php?s=%20100&p[title]=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&p[url]=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&p[images][0]=http://profitable-practice.softwareadvice.com/files/2013/08/genomedata_thumbnail.jpg&p[summary]=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.',
+      );
+
+      foreach ($links as $provider => $link) {
+        $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
+      }
+
+      //$out .= '<a ' . $link_open . $links['Facebook']['social_url'] . $links['Facebook']['link_close'] . '">Share</a>';
   }
   
-  //$out .= '<a ' . $link_open . $links['Facebook']['social_url'] . $links['Facebook']['link_close'] . '">Share</a>';
-  
-  $out = '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
-  
-  return $out;
+  return '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
 }
 
 
