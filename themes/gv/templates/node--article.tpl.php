@@ -299,9 +299,9 @@
           
           if ($page) {
             // Top share post links.
-            if ($user->uid == 1) {
+            //if ($user->uid == 1) {
               echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'top bottom');
-            }
+            //}
           }
           else {
             

@@ -1367,6 +1367,12 @@ function gv_blocks_getSidebarFollowLinksBlock() {
  */
 function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL, $class = NULL) {
   
+  static $out;
+  
+  if ($out) {
+    return $out;
+  }
+  
   if (!$node) {
     if (strpos($_GET['q'], 'node/') === FALSE) {
       return NULL;
@@ -1402,7 +1408,9 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL,
   
   //$out .= '<a ' . $link_open . $links['Facebook']['social_url'] . $links['Facebook']['link_close'] . '">Share</a>';
   
-  return '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
+  $out = '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
+  
+  return $out;
 }
 
 
