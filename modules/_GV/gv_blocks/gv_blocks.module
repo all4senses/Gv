@@ -643,7 +643,7 @@ function gv_blocks_block_view($delta = '') {
     
     case 'side_social_links':
       $block['subject'] = 'Follow Us:';
-      $block['content'] = gv_blocks_getSidebarSocialLinksBlock();
+      $block['content'] = gv_blocks_getSidebarFollowLinksBlock();
       break;
     
     
@@ -1316,7 +1316,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 /**
  * Block with social links for sidebar.
  */
-function gv_blocks_getSidebarSocialLinksBlock() {
+function gv_blocks_getSidebarFollowLinksBlock() {
   
   $out = NULL;
   /*
@@ -1358,14 +1358,14 @@ function gv_blocks_getSidebarSocialLinksBlock() {
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
-  return '<div class="share-static">' . $out . '</div>';
+  return '<div class="follow-static">' . $out . '</div>';
 }
 
 
 /**
  * Block with sidebar share links for a current post.
  */
-function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL) {
+function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL, $class = NULL) {
   
   if (!$node) {
     if (strpos($_GET['q'], 'node/') === FALSE) {
@@ -1396,13 +1396,13 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL)
     //'http://www.facebook.com/sharer.php?s=%20100&p[title]=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&p[url]=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&p[images][0]=http://profitable-practice.softwareadvice.com/files/2013/08/genomedata_thumbnail.jpg&p[summary]=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.',
   );
   
-  foreach ($links as $class => $link) {
-    $out .= l($class, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($class), 'rel' => 'nofollow'), 'query' => $link['query']));
+  foreach ($links as $provider => $link) {
+    $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
   }
   
   //$out .= '<a ' . $link_open . $links['Facebook']['social_url'] . $links['Facebook']['link_close'] . '">Share</a>';
   
-  return '<div class="share-static">' . $block_title . $out . '</div>';
+  return '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
 }
 
 
