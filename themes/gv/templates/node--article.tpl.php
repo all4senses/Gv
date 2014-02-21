@@ -296,7 +296,13 @@
             $target_tags = array();
           }
           
-          if (!$page) {
+          
+          if ($page) {
+            // Top share post links.
+            echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'top bottom');
+          }
+          else {
+            
             if ($view_mode == 'side_block_teaser') {
               echo $teaser_data['teaser_side_block'];
             }
@@ -419,7 +425,7 @@
                     */  ?>
                       
                     <?php 
-                      echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'bottom');
+                      echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
                     ?>  
                     
                     </div>
