@@ -8355,18 +8355,12 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'logo_chart':
       
       
-      //dpm('logo_chart');
       // Render a logo from sprite.
-
-      //dpm($_SERVER);
-      
-      
       
       $url_to_sprite = array( '/' => 'home_top_providers', 
-                              //'/providers/reviews' => 'all_reviews_providers', 
+                              
                               '/reviews' => 'all_reviews_providers', 
           
-                              //'/compare-business-voip-providers' => 'top_bu_providers', 
                               '/business' => 'top_bu_providers', 
                               
                               '/get/iframe/business-voip-chart' => 'top_bu_providers', 
@@ -8376,15 +8370,14 @@ function gv_misc_getProviderQuickData($target, $data) {
           
                               '/speed-test-tool' => 'top_bu_providers', 
           
-                              //'/hosted-pbx-providers' => 'top_pbx_providers', 
                               '/hosted-pbx' => 'top_pbx_providers', 
-                              //'/sip-trunking-providers' => 'top_sip_providers',
+
                               '/sip-trunking' => 'top_sip_providers',
-                              //'/internet-fax-service-providers' => 'top_ifa_providers',
+
                               '/fax' => 'top_ifa_providers',
-                              //'/canada-voip' => 'top_ca_providers',
+
                               '/canada' => 'top_ca_providers',
-                              //'/compare-residential-voip-providers' => 'top_re_providers', 
+
                               '/residential' => 'top_re_providers', 
                               
                               '/residential-voip-reviews' => 'top_re_providers',
@@ -8421,6 +8414,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
         $all_data_quick = gv_misc_getProvidersDataQuick();
         
+        /*
         //dpm($all_data_quick[$data['data']->nid]);
         //if (0) {
 //        global $user;
@@ -8429,17 +8423,23 @@ function gv_misc_getProviderQuickData($target, $data) {
 //          {
 //          //dpm($user);
 //          $p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name);
-//          return /*'. ' . $sprite_name . ' - ' . */$p_image;
+//          return $p_image;
 //        }
+        */
+        
         if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name, $all_data_quick)) {
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
         }
+        
+        /*
 //        elseif (!empty($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
 //          $image_style_name = 'logo_provider_chart_main';
 //          $p_image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$data['data']->nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title'] ));
 //          return gv_misc_getTrackingUrl($image, NULL, $data['data']->nid, NULL, 'logo');
 //        }
+        */
+        
       }
         
         
@@ -8462,15 +8462,12 @@ function gv_misc_getProviderQuickData($target, $data) {
       if (isset($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
         
         if ($target == 'logo_chart') {
-          //$image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_main', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
           $image_style_name = 'logo_provider_chart_main';
         } 
         elseif ($target == 'logo_chart_iframe') {
-          //$image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'logo_provider_chart_iframe', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
           $image_style_name = 'logo_provider_chart_iframe';
         }
         elseif ($target == 'logo_article') {
-          //$image = theme('image_style', array( 'path' =>  $all_data_quick[$data['data']->nid]['i_logo_uri'], 'style_name' => 'thumbnail', 'alt' =>  $all_data_quick[$data['data']->nid]['i_logo_alt'], 'title' =>  $all_data_quick[$data['data']->nid]['i_logo_title']));
           $image_style_name = 'thumbnail';
         }
         

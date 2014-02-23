@@ -4,7 +4,7 @@
     attach: function (context, settings) {
               
        
-       $('body.not-logged-in').one('mouseover', function() {
+       $('body').one('mouseover', function() {
           //console.log('ooooover...');
           
           (jQuery).ajax({
@@ -12,7 +12,7 @@
                 url: '/referer', 
                 data: {
                         op: 'set',
-                        //url: window.location.href,
+                        url: window.location.href,
                         referer: document.referrer
                        
                       }, 
