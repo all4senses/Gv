@@ -261,6 +261,7 @@ function _imageapi_optimize_service_internal($image, $dst) {
 
     case 'image/jpeg':
       if ($cmd = variable_get('imageapi_optimize_jpegtran', '')) {
+        // a4a fix, added -progressive
         _imageapi_optimize_exec("$cmd -copy none -optimize -progressive ". escapeshellarg($dst), $dst);
       }
       if ($cmd = variable_get('imageapi_optimize_jfifremove', '')) {
