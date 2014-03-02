@@ -67,7 +67,7 @@
       
     
       <section id="main" role="main" class="clearfix">
-
+        <div id="fix-resp">
           <?php 
             /*
             if ($breadcrumb): 
@@ -141,7 +141,7 @@
           */
 
           ?>
-          
+          </div> <!-- /#fix-resp -->
       </section> <!-- /#main -->
 
 
