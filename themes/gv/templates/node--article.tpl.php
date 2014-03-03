@@ -223,7 +223,7 @@
                                   '<span class="username">' .
                                     'Guest' .
                                   '</span>' .
-                                  ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
+                                  ($node->type == 'article' ? '' : '<span class="delim">|</span><span class="nw">' . $created_str . '</span>') .
                                '</span>';
                   
                 }
