@@ -326,6 +326,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['footer-about'] = array(
+    'info' => 'Footer about GV',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   return $blocks;
 }
 
@@ -662,6 +667,14 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = gv_blocks_getSitelockBadge();
       break;
+    
+    case 'footer-about':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getFooterAbout();
+      break;
+    
+    
+    
   }
 
   return $block;
@@ -978,6 +991,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       break;
   }
   
+}
+
+
+/**
+ * Block with Footer About.
+ */
+function gv_blocks_getFooterAbout() {
+  return '<div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
+            <div>© 2014 GetVoIP.com | All Rights Reserved</div>
+         </div>';
 }
 
 
