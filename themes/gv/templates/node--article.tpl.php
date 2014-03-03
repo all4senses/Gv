@@ -211,7 +211,7 @@
                           
                                   (!$extra_data['guest_author'] ? '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' . $gplus_profile : '<span class="guest-author">' . $author_name . '</span>') .
                           
-                                  ($node->type == 'article' ? '' : '<span class="delim">|</span>' . $created_str) .
+                                  ($node->type == 'article' ? '' : '<span class="delim">|</span>span class="nw">' . $created_str . '</span>') .
                           
                                '</span>';
                   
