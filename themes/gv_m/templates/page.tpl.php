@@ -187,7 +187,7 @@
         if (!$hide_follow_us_links) {
           echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
         }
-        echo render($page['footer']);
+        
     ?>
 
 
@@ -198,7 +198,7 @@
     
             <!--<div id="sitelock"><a href="#" onclick="window.open('https://www.sitelock.com/verify.php?site=getvoip.com','SiteLock','width=600,height=600,left=160,top=170');" ><img alt="website security" title="SiteLock"  src="//shield.sitelock.com/shield/getvoip.com"/></a></div>-->
         <?php
-
+        echo render($page['footer']);
     ?>
    </div>
   </footer> <!-- /#footer -->
