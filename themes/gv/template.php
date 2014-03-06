@@ -1000,7 +1000,7 @@ function gv_preprocess_html(&$variables) {
   }
  
   global $user;
-  $variables['classes_array'][] = $user->name;
+  $variables['classes_array'][] = $user->uid ? $user->name : 'guest';
   
   //dpm($variables);
   //global $user;
