@@ -999,6 +999,8 @@ function gv_preprocess_html(&$variables) {
     $variables['classes_array'][] = 'one-sidebar sidebar-second no-top-sidebar-second';
   }
  
+  global $user;
+  $variables['classes_array'][] = $user->name;
   
   //dpm($variables);
   //global $user;
