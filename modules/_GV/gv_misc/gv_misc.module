@@ -7142,6 +7142,9 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $page
  */
 function gv_misc_theme($existing, $type, $theme, $path) {
   return array(
+    'gv_misc_footerLinksPlain' => array(
+      'variables' => array('vars' => null),
+    ),
     'gv_misc_submenuSimple' => array(
       'variables' => array('vars' => null),
     ),
@@ -7309,6 +7312,56 @@ function theme_gv_misc_headerLinks($vars) {
   $out .= '</ul>';
   return $out;
 }
+
+
+
+/**
+ * Simple theming of plain footer manu.
+ */
+function theme_gv_misc_footerLinksPlain($vars) {
+  if(empty($vars['submenu']['below'])) {
+    return NULL;
+  }
+  $level = isset($vars['level']) ? $vars['level'] : 0;
+  $class = isset($vars['class']) ? $vars['class'] : 'om-links';
+  $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
+  $out = '<span class="gv ' . $class . ' lvl-' . $level . '">';
+  $count = 0;
+  foreach ($vars['submenu']['below'] as $submenu) {
+    if (is_object($submenu)) {
+      $submenu = (array) $submenu;
+    }
+    if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
+      continue;
+    }
+    $out .= ($count ? $delimiter : '') . '<span>';
+    if($level) {
+      for ($i = 0; $i < $level; $i++ ) {
+        $out .= '--';
+      }
+    }
+    $title = t($submenu['link']['link_title']);
+    if(isset($submenu['count']) && $submenu['count']) {
+      $title .= ' (' . $submenu['count'] . ')';
+    }
+    // If the field Description has '<nolink>' don't show link for this item
+    if(isset($submenu['link']['localized_options']['attributes']['title']) && strtolower($submenu['link']['localized_options']['attributes']['title']) == '<nolink>') {
+      $out .= $title;
+    }
+    else {
+      $out .= l($title, $submenu['link']['href']);
+    }
+    $out .= '</span>';
+//    if (!empty($submenu['below'])) {
+//      // Recursion call.
+//      $out .= '<span>' . theme('gv_misc_footerLinksPlain', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter )) . '</span>';
+//    }
+    $count++;
+  }
+  $out .= '</span>';
+  return $out;
+}
+
 
 
 /**

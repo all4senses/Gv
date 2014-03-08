@@ -57,6 +57,10 @@ function gv_blocks_block_info() {
     'info' => 'Footer menu',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['footer_menu_pl'] = array(
+    'info' => 'Footer menu plain',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['header_links'] = array(
     'info' => 'Header links',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -389,6 +393,10 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = 'Footer menu';
       $block['content'] = gv_blocks_get_footerMenu();
       break; 
+    case 'footer_menu_pl':
+      $block['subject'] = 'Footer menu plain';
+      $block['content'] = gv_blocks_get_footerMenuPlain();
+      break;
     case 'header_links':
       $block['subject'] = 'Header links';
       $block['content'] = gv_blocks_get_headerLinks();
@@ -2638,6 +2646,31 @@ function gv_blocks_get_headerLinks() {
   
 //  $menu = menu_build_tree('menu-header-links');
 //  $out = theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
+  return $out;
+}
+
+
+/**
+ * Returns a themed Plain Footer menu.
+ */
+function gv_blocks_get_footerMenuPlain() {
+  
+  $cid = 'gv_footer_menu_pl';
+  $cache = cache_get($cid, 'cache');
+
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    $out = $cache->data;
+  }
+  else {
+    $menu = menu_build_tree('menu-footer-menu');
+    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    
+    cache_set($cid, $out, 'cache', strtotime('+31 day'));
+  } 
+  
+  //$menu = menu_build_tree('menu-footer-menu');
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  
   return $out;
 }
 
