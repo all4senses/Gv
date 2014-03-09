@@ -466,7 +466,9 @@
 <?php if ($page): ?>
       
       <?php 
+      global $user;
       if ($user->uid == 1) {  
+        dpm($node->otherArticles);
         echo $node->otherArticles;
       }
       ?>
