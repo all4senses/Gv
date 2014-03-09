@@ -6466,9 +6466,10 @@ function gv_pages_node_view($node, $view_mode) {
           ->orderBy('created', 'ASC')
           ->range(0, 1)
           ->execute();
-      if ($prev = $data->fetchField()) {
-        dpm('prev = ' . l('prev', 'node/' . $prev));
+      if ($next = $data->fetchField()) {
+        dpm('next = ' . l('next', 'node/' . $next));
       }
+
       
       $data = db_select('node', 'n')
           ->fields('n', array('nid'))
@@ -6478,10 +6479,10 @@ function gv_pages_node_view($node, $view_mode) {
           ->orderBy('created', 'DESC')
           ->range(0, 1)
           ->execute();
-      if ($next = $data->fetchField()) {
-        dpm('next = ' . l('next', 'node/' . $next));
+      if ($prev = $data->fetchField()) {
+        dpm('prev = ' . l('prev', 'node/' . $prev));
       }
-      
+            
       
       global $user;
       if (isset($_GET['disqus'])) {
