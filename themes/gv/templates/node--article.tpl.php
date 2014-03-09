@@ -465,6 +465,9 @@
 
 <?php if ($page): ?>
       
+  </div>  <!-- main-content -->
+  
+  
       <?php 
       global $user;
       if ($user->uid == 1) {  
@@ -472,7 +475,6 @@
         echo $node->otherArticles;
       }
       ?>
-  </div>  <!-- main-content -->
 <?php endif; ?>
     
     
