@@ -6459,15 +6459,15 @@ function gv_pages_node_view($node, $view_mode) {
       
       // Define  prev and next post for the mobile version.
       $data = db_select('node', 'n')
-          ->fields('n', array('nid'))
+          ->fields('n', array('nid', 'title'))
           ->condition('created', $node->created, '>')
           ->condition('type', $node->type)    
           ->condition('status', 1)
           ->orderBy('created', 'ASC')
           ->range(0, 1)
           ->execute();
-      if ($next = $data->fetchField()) {
-        dpm('next = ' . l('next', 'node/' . $next));
+      if ($next = $data->fetchObject()) {
+        dpm('next = ' . l('next ' . $next->title, 'node/' . $next->nid));
       }
 
       
@@ -6479,8 +6479,8 @@ function gv_pages_node_view($node, $view_mode) {
           ->orderBy('created', 'DESC')
           ->range(0, 1)
           ->execute();
-      if ($prev = $data->fetchField()) {
-        dpm('prev = ' . l('prev', 'node/' . $prev));
+      if ($prev = $data->fetchObject()) {
+        dpm('prev = ' . l('prev ' . $prev->title, 'node/' . $prev->nid));
       }
             
       
