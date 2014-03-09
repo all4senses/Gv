@@ -6463,7 +6463,7 @@ function gv_pages_node_view($node, $view_mode) {
           ->condition('created', $node->created, '<')
           ->condition('type', $node->type)    
           ->orderBy('created', 'ASC')
-          ->limit(1)
+          //->limit(1)
           ->execute();
       if ($prev = $data->fetchField()) {
         dpm($prev);
