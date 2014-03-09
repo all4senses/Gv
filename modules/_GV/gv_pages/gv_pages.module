@@ -6458,6 +6458,7 @@ function gv_pages_node_view($node, $view_mode) {
       
       
       // Define  prev and next post for the mobile version.
+      $node->otherArticles = NULL;
       $data = db_select('node', 'n')
           ->fields('n', array('nid', 'title'))
           ->condition('created', $node->created, '>')
@@ -6467,7 +6468,7 @@ function gv_pages_node_view($node, $view_mode) {
           ->range(0, 1)
           ->execute();
       if ($next = $data->fetchObject()) {
-        dpm('next = ' . l('next ' . $next->title, 'node/' . $next->nid));
+        $node->otherArticles .= '<div class="next">' . l($next->title, 'node/' . $next->nid) . '</div>';
       }
 
       
@@ -6480,9 +6481,15 @@ function gv_pages_node_view($node, $view_mode) {
           ->range(0, 1)
           ->execute();
       if ($prev = $data->fetchObject()) {
-        dpm('prev = ' . l('prev ' . $prev->title, 'node/' . $prev->nid));
+        //dpm('prev = ' . l('prev ' . $prev->title, 'node/' . $prev->nid));
+        $node->otherArticles .= '<div class="prev">' . l($prev->title, 'node/' . $prev->nid) . '</div>';
       }
-            
+      
+      if ($node->otherArticles) {
+        $node->otherArticles = '<div id="other-articles">' . $node->otherArticles . '</div>';
+      }
+      
+      dpm($node->otherArticles);
       
       global $user;
       if (isset($_GET['disqus'])) {
