@@ -464,6 +464,12 @@
 
 
 <?php if ($page): ?>
+      
+      <?php 
+      if ($user->uid == 1) {  
+        echo $node->otherArticles;
+      }
+      ?>
   </div>  <!-- main-content -->
 <?php endif; ?>
     
