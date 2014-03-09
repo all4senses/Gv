@@ -6462,6 +6462,7 @@ function gv_pages_node_view($node, $view_mode) {
           ->fields('n', array('nid'))
           ->condition('created', $node->created, '<')
           ->condition('type', $node->type)    
+          ->condition('status', 1)
           ->orderBy('created', 'DESC')
           ->range(0, 1)
           ->execute();
