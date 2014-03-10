@@ -252,6 +252,33 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 
         <div class="content"<?php print $content_attributes; ?>>
           
+          
+          <!--<div class="right-content">-->
+          <div class="review-right">
+            
+            <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
+              <div class="pros-cons">
+                <?php
+                  if ($content['r_data']['pros']) {
+                    echo '<div class="pros frame"><div class="text"><span class="caption">Pros:</span>' . $content['r_data']['pros'] . '</div></div>';
+                  }
+                  if($content['r_data']['pros'] && $content['r_data']['cons']) {
+                    echo '<div class="vs">VS</div>';
+                  }
+                  if ($content['r_data']['cons']) {
+                    echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">Cons:</span>' . $content['r_data']['cons'] . '</div></div>';
+                  }
+                ?>
+              </div>
+            <?php endif; ?>
+            
+            <?php 
+              //echo '<div'. ($page ? ' property="v:description"' : '') . '>' . render($content['body']) . '</div>'; 
+              echo '<div property="v:description">' . render($content['body']) . '</div>'; 
+            ?>
+          </div>
+          
+          
           <div class="gv_votes">
             <?php 
               //echo '<div class="caption"><span>User\'s Rating:</span> <span' . ($page ? ' property="v:rating"' : '') . '>' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); 
@@ -297,30 +324,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             </div>
           </div>
           
-          <!--<div class="right-content">-->
-          <div class="review-right">
-            
-            <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
-              <div class="pros-cons">
-                <?php
-                  if ($content['r_data']['pros']) {
-                    echo '<div class="pros frame"><div class="text"><span class="caption">Pros:</span>' . $content['r_data']['pros'] . '</div></div>';
-                  }
-                  if($content['r_data']['pros'] && $content['r_data']['cons']) {
-                    echo '<div class="vs">VS</div>';
-                  }
-                  if ($content['r_data']['cons']) {
-                    echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">Cons:</span>' . $content['r_data']['cons'] . '</div></div>';
-                  }
-                ?>
-              </div>
-            <?php endif; ?>
-            
-            <?php 
-              //echo '<div'. ($page ? ' property="v:description"' : '') . '>' . render($content['body']) . '</div>'; 
-              echo '<div property="v:description">' . render($content['body']) . '</div>'; 
-            ?>
-          </div>
+          
+          
           <div class="bottom-clear"></div>
           <div class="links">
             <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
