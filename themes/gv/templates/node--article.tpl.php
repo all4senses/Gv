@@ -356,6 +356,13 @@
 //            gv_misc_pushTagsToMetatags($keyword_metatag_name, $content['field_topics']);
 //          }
           
+          global $user;
+          if ($user->uid == 1) {
+            //hide($content['body']);
+            dpm($node);
+          }
+          
+          
           echo render($content);
         ?>
       </div>
