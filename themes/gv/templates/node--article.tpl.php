@@ -116,9 +116,9 @@
           <?php print render($title_prefix); ?>
           
               <?php if ($page): ?>
-              <h1
+              <h1 
               <?php elseif ($view_mode == 'side_block_teaser'): ?>
-              <h4
+              <h4 
               <?php else: ?>
               <h2 
               <?php endif; ?>
