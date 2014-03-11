@@ -148,7 +148,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
-  
+  $blocks['rsl_p_bottom'] = array(
+    'info' => 'Bottom section of resellers providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   $blocks['news_tags'] = array(
     'info' => 'Shows a tag cloud for news tags',
@@ -483,6 +486,12 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('view-reviews-page_all_reviews');
       break;
   
+    case 'rsl_p_bottom':
+      $block['subject'] = 'Bottom section of resellers providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-reseller-providers');
+      break;
+    
+    
 
     case 'news_tags':
       $block['subject'] = 'Shows a tag cloud for news tags';
