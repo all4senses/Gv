@@ -358,6 +358,8 @@
           
 //          global $user;
 //          if ($user->uid == 1) 
+          
+          if ($page)
             {
             hide($content['body']);
             //dpm($node->body['und'][0]['value']);
