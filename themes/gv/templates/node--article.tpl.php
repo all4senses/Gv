@@ -358,8 +358,9 @@
           
           global $user;
           if ($user->uid == 1) {
-            //hide($content['body']);
-            dpm($node->body['und'][0]['value']);
+            hide($content['body']);
+            //dpm($node->body['und'][0]['value']);
+            echo $node->body['und'][0]['value'];
           }
           
           
