@@ -359,7 +359,7 @@
           global $user;
           if ($user->uid == 1) {
             //hide($content['body']);
-            dpm($node);
+            dpm($node->body['und'][0]['value']);
           }
           
           
