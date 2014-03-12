@@ -1022,7 +1022,7 @@ function gv_blocks_getAboutTheAuthor($uid) {
   return '<div id="about_author">
               <div id="left">'
               . theme('image_style', array( 'path' =>  $user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')))
-              . '<div><a id="gplus" href=">' . $user->field_u_gplus_profile['und'][0]['value'] . '></a>
+              . '<div><a id="gplus" href="' . $user->field_u_gplus_profile['und'][0]['value'] . '></a>
                       <a id="ln" href="' . $user->field_u_ln_profile['und'][0]['value'] . '"></a>
                       <a id="tw" href="' . $user->field_u_tw_profile['und'][0]['value'] . '"></a>
                       <a id="fb" href="' . $user->field_u_fb_profile['und'][0]['value'] . '></a>'
