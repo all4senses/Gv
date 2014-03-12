@@ -40,6 +40,7 @@
     //dpm($variables); 
     
     global $user;
+    $user = user_load($user->uid); 
     dpm($user);
     if ($user->uid == 1) {
       echo theme('image_style', array( 'path' =>  $user_profile['field_u_author_img'][0]['#item']['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
