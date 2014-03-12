@@ -36,8 +36,11 @@
   <?php //print render($user_profile); ?>
   
   <?php 
-    //dpm($user_profile); 
-    //dpm($variables); 
+    dpm($user_profile); 
+    dpm($variables); 
+    
+    global $user;
+    dpm($user);
     //dpm($_GET); dpm(arg()); 
     //dpm($_SERVER);
   ?>
