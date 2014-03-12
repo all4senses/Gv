@@ -483,6 +483,7 @@
         //echo $node->otherArticles;
         echo 'x';
         dpm($node);
+        echo gv_blocks_getAboutTheAuthor(1074);
       }
       ?>
       
