@@ -36,13 +36,13 @@
   <?php //print render($user_profile); ?>
   
   <?php 
-    dpm($user_profile); 
-    dpm($variables); 
+    //dpm($user_profile); 
+    //dpm($variables); 
     
     global $user;
     dpm($user);
     if ($user->uid == 1) {
-      echo theme('image_style', array( 'path' =>  $user['field_u_author_img'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
+      echo theme('image_style', array( 'path' =>  $user->field_u_author_img[0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
     }
     //dpm($_GET); dpm(arg()); 
     //dpm($_SERVER);
