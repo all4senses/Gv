@@ -478,7 +478,7 @@
       
       <?php 
       global $user;
-      if ($user->uid == 1) {  
+      if ($user->uid) {  
         //dpm($node->otherArticles);
         //echo $node->otherArticles;
         //echo 'x';
