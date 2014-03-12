@@ -1021,7 +1021,7 @@ function gv_blocks_getAboutTheAuthor($uid) {
   
   return '<div id="about_author">
               <div id="left">'
-              . theme('image_style', array( 'path' =>  $user->field_u_author_img[0]['#item']['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')))
+              . theme('image_style', array( 'path' =>  $user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')))
           
             . '</div>
               <div id="right">' . '</div>
