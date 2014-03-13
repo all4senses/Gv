@@ -8866,6 +8866,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
+      dpm($all_data_quick[$data['data']->nid]);
       return @$all_data_quick[$data['data']->nid][$data['service_type']][$target];
       
       
