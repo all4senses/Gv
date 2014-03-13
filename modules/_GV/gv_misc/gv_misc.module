@@ -3600,7 +3600,9 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     
   } // End of if ($found_image) {
 
-  $body_full_markup = preg_replace('|\<style.*style\>|', '', $body_full_markup);
+  dpm($body_full_markup);
+  $body_full_markup = preg_replace('|(\<style.*style\>)|', '', $body_full_markup);
+  dpm($body_full_markup);
   $teaser = strip_tags($body_full_markup);
   
   if (!$characters_num) {
