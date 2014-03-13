@@ -8859,12 +8859,24 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     //Startup Resources (for Reseller programms)  
     case 'sts':  
+    //'Communication Methods'
+    case 'comet':
+    //'Commissions'
+    case 'commis':
+      
+      $all_data_quick = gv_misc_getProvidersDataQuick();
+      
+      return @$all_data_quick[$data['data']->nid][$data['service_type']][$target];
+      
+      
+      
+            
     //Insert in Secondary Providers Section
     case 'sps':
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
       
-      return !empty($all_data_quick[$data['data']->nid][$data['service_type']][$target]);
+      return !empty($all_data_quick[$data['data']->nid][$data['service_type']]['sps']);
         
         
         
