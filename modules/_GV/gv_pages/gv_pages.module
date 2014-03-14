@@ -6200,6 +6200,7 @@ function gv_pages_node_update($node) {
     
     // Regenerate providers logos sprites (if needed). The data was prepared in gv_pages_submitForm_provider(&$form, &$form_state)
     $p_data = unserialize($node->field_p_data['und'][0]['value']);
+    dpm($p_data);
     if (!empty($p_data['last_erating_fields_different'])) {
       gv_misc_rebuildProvidersLogosSprites($p_data['last_erating_fields_different']);
     }
