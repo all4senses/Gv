@@ -1017,7 +1017,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 function gv_blocks_getAboutTheAuthor($uid) {
   $user = user_load($uid);
   
-  dpm($user);
+  //dpm($user);
   
   return '<div id="about_author">
               <div id="left">'
@@ -1028,7 +1028,7 @@ function gv_blocks_getAboutTheAuthor($uid) {
                       <a id="fb" href="' . @$user->field_u_fb_profile['und'][0]['value'] . '"></a>
                  </div>'
             . '</div>
-              <div id="right"><div class="title">' . $user->realname . '</div><div class="bio">' . $user->field_u_bio['und'][0]['value'] . '</div></div>
+              <div id="right"><div class="title">' . $user->realname . '</div><div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '</div></div>
           </div>';
 }
 
