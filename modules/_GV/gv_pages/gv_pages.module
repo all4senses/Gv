@@ -5254,8 +5254,6 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   $last_erating_fields_different = NULL;
   $erating_fields_before = unserialize($form_state['values']['erating_fields_original']);
   
-  dpm($form_state['values']);
-  dpm($erating_fields_before);
   
   // Find out if some of listing fields have been changed.
   foreach($erating_fields_before as $erating_field_title => $erating_field_before) {
@@ -5266,7 +5264,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   }
 
   //dpm($erating_fields_before);
-  dpm($last_erating_fields_different);
+  //dpm($last_erating_fields_different);
   
   /*
       if (empty($last_erating_fields_different)) {
@@ -6203,7 +6201,7 @@ function gv_pages_node_update($node) {
     
     // Regenerate providers logos sprites (if needed). The data was prepared in gv_pages_submitForm_provider(&$form, &$form_state)
     $p_data = unserialize($node->field_p_data['und'][0]['value']);
-    dpm($p_data);
+    
     if (!empty($p_data['last_erating_fields_different'])) {
       gv_misc_rebuildProvidersLogosSprites($p_data['last_erating_fields_different']);
     }
