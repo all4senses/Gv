@@ -5510,6 +5510,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       }
     }
     
+    $p_data_quick[$service_type_short]['s-url'] = isset($service['s-url']) ? $service['s-url'] : '';  
+    
     $p_data_quick[$service_type_short]['fees'] = array(
       'back' => isset($service['mbg']) ? $service['mbg'] : '',
       'monthly' => isset($service['fees']['mon']) ? $service['fees']['mon'] : '',
