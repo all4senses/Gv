@@ -1022,14 +1022,17 @@ function gv_blocks_getAboutTheAuthor($uid) {
   return '<div id="about_author">
               <div id="left">'
               . theme('image_style', array( 'path' =>  @$user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')))
-              . '<div>' .
+              
+            . '</div>
+              <div id="right">
+                <div class="title">About the author:' . /*$user->realname .*/ '</div><div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>
+                <div class="social">' .
                       (!empty($user->field_u_gplus_profile['und'][0]['value']) ? '<a id="gplus" target="_blank" rel="author" href="' . $user->field_u_gplus_profile['und'][0]['value'] . '"></a>' : '') .
                       (!empty($user->field_u_ln_profile['und'][0]['value']) ? '<a id="ln" target="_blank" href="' . $user->field_u_ln_profile['und'][0]['value'] . '"></a>' : '') .
                       (!empty($user->field_u_tw_profile['und'][0]['value']) ? '<a id="tw" target="_blank" href="' . $user->field_u_tw_profile['und'][0]['value'] . '"></a>' : '') .
                       (!empty($user->field_u_fb_profile['und'][0]['value']) ? '<a id="fb" target="_blank" href="' . $user->field_u_fb_profile['und'][0]['value'] . '"></a>' : '') .
-                 '</div>'
-            . '</div>
-              <div id="right"><div class="title">About the author:' . /*$user->realname .*/ '</div><div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div></div>
+                 '</div>    
+              </div>
           </div>';
 }
 
