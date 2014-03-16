@@ -112,10 +112,10 @@
                 
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
-                  <div class="caption"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
+                  <div class="caption narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
                   <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">Founded In:</span>' . $node->p_data['info']['i_founded']; ?></div>
-                  <div><?php echo '<span class="title">Service Availability:</span>' . $node->p_data['info']['i_availability']; ?></div>
+                  <div><?php echo '<span class="title"><span class="narrow">Service </span>Availability:</span>' . $node->p_data['info']['i_availability']; ?></div>
                   <div>
                     <?php 
                       if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
