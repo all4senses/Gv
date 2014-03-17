@@ -140,7 +140,7 @@
                               '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>',
                               '<div id="positive">', 'Positive<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['positive'], '</div><div id="negative">Negative<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['negative'], '</div>',
                               '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
-                              '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><span style="display: none;">WRITE A REVIEW</span><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>';
+                              '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>';
                       ?>
                       
                     </div>
