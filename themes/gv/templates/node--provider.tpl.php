@@ -114,7 +114,7 @@
                 <div typeof="Organization">
                   <?php 
                     if ($user->uid == 1) {
-                      echo '<div class="narrow">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
+                      echo '<div class="narrow overall">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="/"> Read Reviews</a></div>'; 
                     }
                   ?>
                   <div class="caption not-narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
