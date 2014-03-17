@@ -112,10 +112,15 @@
                 
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
-                  <div class="caption narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
+                  <?php 
+                    if ($user->uid == 1) {
+                      echo '<div class="narrow" style="display:none;">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
+                    }
+                  ?>
+                  <div class="caption not-narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
                   <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">Founded In:</span>' . $node->p_data['info']['i_founded']; ?></div>
-                  <div><?php echo '<span class="title"><span class="narrow">Service </span>Availability:</span>' . $node->p_data['info']['i_availability']; ?></div>
+                  <div><?php echo '<span class="title"><span class="not-narrow">Service </span>Availability:</span>' . $node->p_data['info']['i_availability']; ?></div>
                   <div>
                     <?php 
                       if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
@@ -133,9 +138,9 @@
                     <div class="text">
                       <?php 
                       
-                         echo '<div class="voters"><div class="title"><span class="narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>',
-                              '<div id="positive">', 'Positive<span class="narrow"> reviews</span>: ', $node->gv_recommends['positive'], '</div><div id="negative">Negative<span class="narrow"> reviews</span>: ', $node->gv_recommends['negative'], '</div>',
-                              '<div class="recommend narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
+                         echo '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>',
+                              '<div id="positive">', 'Positive<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['positive'], '</div><div id="negative">Negative<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['negative'], '</div>',
+                              '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
                               '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>';
                       ?>
                       
