@@ -113,8 +113,10 @@
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
                   <?php 
-                      echo '<div class="name-narrow" style="display: none;">' . $provider_name . '</div>',
-                           '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews"> Read Reviews</a></div>'; 
+                      echo '<div class="name-narrow" style="display: none;">' . $provider_name . '</div>';
+                      if (!empty($node->gv_rating_overall)) {
+                        echo '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews"> Read Reviews</a></div>'; 
+                      }
                   ?>
                   <div class="caption not-narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
                   <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
@@ -136,7 +138,7 @@
                   <div class="overall"> 
                     <div class="text">
                       <?php 
-                       dpm($node->p_data);
+                       //dpm($node->p_data);
                          echo '<div class="price narrow">', (empty($node->p_data['s']['bu']['fees']['mon']) ? '' : '$' . $node->p_data['s']['bu']['fees']['mon']), '</div>',
                               '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>',
                               '<div id="positive">', 'Positive<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['positive'], '</div><div id="negative">Negative<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['negative'], '</div>',
@@ -158,7 +160,7 @@
           
               <!--<div class="bottom-clear"></div> -->
 
-              <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+              <?php if (!empty($content['gv_ratings'])): ?>
                   <div class="gv_votes main"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
                     <div class="total">
                       <?php 

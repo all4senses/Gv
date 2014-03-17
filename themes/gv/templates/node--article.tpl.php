@@ -477,8 +477,9 @@
 <?php if ($page): ?>
       
       <?php 
-      global $user;
-      if ($user->uid) {  
+//      global $user;
+//      if ($user->uid) 
+      {  
         //dpm($node->otherArticles);
         //echo $node->otherArticles;
         //echo 'x';
@@ -490,8 +491,9 @@
   </div>  <!-- main-content -->
   
       <?php 
-      global $user;
-      if ($user->uid == 1) {  
+//      global $user;
+//      if ($user->uid == 1) 
+      {  
         //dpm($node->otherArticles);
         echo $node->otherArticles;
       }
