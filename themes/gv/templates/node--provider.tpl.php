@@ -113,7 +113,8 @@
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
                   <?php 
-                      echo '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews"> Read Reviews</a></div>'; 
+                      echo '<div class="name-narrow" style="display: none;">' . $provider_name . '</div>',
+                           '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews"> Read Reviews</a></div>'; 
                   ?>
                   <div class="caption not-narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
                   <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
