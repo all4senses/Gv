@@ -3910,7 +3910,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Let's choose the second variant.
           if(!in_array('administrator', $user->roles)) {
             // Allow to change a provider if the review is not yet approved.
-            if (!$form['field_r_notapproved']['und'][0]['value']['#default_value'])
+            if (!$form['field_r_notapproved']['und'][0]['value']['#default_value']) {
               $form['provider']['field_ref_provider']['#access'] = FALSE;
               $form['provider']['field_r_oprovider']['#access'] = FALSE;  
             }
@@ -3990,7 +3990,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
           
           // Allow to change a provider if the review is not yet approved.
-          if (!$form['field_r_notapproved']['und'][0]['value']['#default_value'])
+          if (!$form['field_r_notapproved']['und'][0]['value']['#default_value']) {
             $form['provider']['field_ref_provider']['#access'] = FALSE;
             $form['provider']['field_r_oprovider']['#access'] = FALSE;  
           }
