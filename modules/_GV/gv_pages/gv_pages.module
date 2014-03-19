@@ -3543,6 +3543,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                   }
                   
                   
+                  // Avatar for logged in via social networks.
                   if ($user->hostname == '37.229.169.239') {
                     dpm($user);
                     //$user_full = user_load($user->uid);
@@ -3905,8 +3906,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
           // Let's choose the second variant.
           if(!in_array('administrator', $user->roles)) {
-            $form['provider']['field_ref_provider']['#access'] = FALSE;
-            $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+//            $form['provider']['field_ref_provider']['#access'] = FALSE;
+//            $form['provider']['field_r_oprovider']['#access'] = FALSE;  
             $form['provider']['provider_title_noedit'] = array(
               '#type' => 'item',
               '#title' => 'Your VoIP Service Provider (*)',
