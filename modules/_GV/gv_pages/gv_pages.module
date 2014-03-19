@@ -3893,11 +3893,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         }
         
         
-          $providers = array();
-          gv_misc_getProviders($providers);
-          $providers[41] = 'OTHER SP';
+        $providers = array();
+        gv_misc_getProviders($providers);
+        $providers[41] = 'OTHER SP';
           
-          $form['provider']['field_ref_provider']['und']['#options'] = $providers;
+        $form['provider']['field_ref_provider']['und']['#options'] = $providers;
           
         if(!isset($form['provider']['field_ref_provider']['und']['#default_value'][0]) || $form['provider']['field_ref_provider']['und']['#default_value'][0] == '_none') {
           // If a provider has not been selected from a list,
@@ -3909,8 +3909,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
           // Let's choose the second variant.
           if(!in_array('administrator', $user->roles)) {
-            $form['provider']['field_ref_provider']['#access'] = FALSE;
-            $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+            // Allow to change a provider if the review is not yet approved.
+            if (!$form['field_r_notapproved']['und'][0]['value']['#default_value'])
+              $form['provider']['field_ref_provider']['#access'] = FALSE;
+              $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+            }
             $form['provider']['provider_title_noedit'] = array(
               '#type' => 'item',
               '#title' => 'Your VoIP Service Provider (*)',
@@ -3986,9 +3989,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             //'#weight' => -100,
           );
           
-//          $form['provider']['field_ref_provider']['#access'] = FALSE;
-//          $form['provider']['field_r_oprovider']['#access'] = FALSE;
-          
+          // Allow to change a provider if the review is not yet approved.
+          if (!$form['field_r_notapproved']['und'][0]['value']['#default_value'])
+            $form['provider']['field_ref_provider']['#access'] = FALSE;
+            $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+          }
+//          
           
         } // End of A provider has been selected from a list.
         
