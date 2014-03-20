@@ -3453,8 +3453,13 @@ img {max-width: 100%;}
    
    
    /* Blog page (teasers) */ 
-   .node-teaser header {position: absolute; bottom: 0; background: black; width: 100%; opacity: 0.8; color: white;}
+   #main .view-taxonomy-term .views-row, #main .view-articles .views-row, #main .view-news .views-row, #main .view-blog .views-row {border: 0;}
+   #main .view-taxonomy-term h2, #main .view-articles h2, #main .view-news h2, #main .view-blog h2 {padding: 10px;}
+   .node-teaser header {position: absolute; bottom: 10px; background: black; width: 100%; opacity: 0.8; color: white; padding: 0;}
    .node-teaser h2 a, .node-teaser h2 a:hover {color: white;}
+   #main .node-teaser .submitted {display: none;}
+   
+   .content.teaser {margin: 0;}
    .content.teaser .thumb {width: 100%;}
    .content.teaser .thumb img {width: 100%;}
    .node-teaser.with_thumb .teaser-content {display: none;}
