@@ -8310,10 +8310,20 @@ function wdg_misc_getProviderQuickData($target, $data) {
  */
 function gv_misc_getProviderQuickData($target, $data) {
   
+  static $mobile_column;
   $out = '';
+  
   
   switch($target) {
     
+    
+    case 'mobile_column':
+      
+      //return $mobile_column;
+      return '.';
+      
+      
+      
     
     case 'compare_check':
       
@@ -8594,6 +8604,8 @@ function gv_misc_getProviderQuickData($target, $data) {
           $out .= '<div class="feature">' . t($term) . '</div>';
         }
       }
+      
+      $mobile_column[$target] = $out;
       
       return $out; // $all_data_quick[$data['data']->nid][$target];
       
