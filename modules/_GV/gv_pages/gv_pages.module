@@ -5507,6 +5507,10 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     $p_data_quick[$service_type_short]['comet'] = isset($service['comet']) ? $service['comet'] : '';
     $p_data_quick[$service_type_short]['commis'] = isset($service['commis']) ? $service['commis'] : '';
     
+    $p_data_quick[$service_type_short]['frtr'] = isset($service['frtr']) ? $service['frtr'] : '';
+    $p_data_quick[$service_type_short]['fxsmo'] = isset($service['fxsmo']) ? $service['fxsmo'] : '';
+    
+    
     // YouTube video ID
     if (isset($service['vr-y']) && $service['vr-y']) {
       // Allow to enter direct YouTube url and then parse it to save just a video ID.
