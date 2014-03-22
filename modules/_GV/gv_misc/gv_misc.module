@@ -8319,6 +8319,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'mobile_column':
       dpm('2');
+      dpm($mobile_column);
       return '.' . $mobile_column['features'];
       //return '.';
       
@@ -8607,6 +8608,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $mobile_column[$target] = $out;
       dpm('1');
+      dpm($mobile_column);
       return $out; // $all_data_quick[$data['data']->nid][$target];
       
       
