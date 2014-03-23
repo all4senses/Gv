@@ -8653,6 +8653,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'rating':
       
+      $stars = NULL;
       
       $all_data_quick = gv_misc_getProvidersDataQuick();
     
@@ -8690,9 +8691,13 @@ function gv_misc_getProviderQuickData($target, $data) {
       else {
         $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div></a></div>';
       }
-
-      $mobile_column[$data['data']->nid][$target] = '<div class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</div>' . @$stars . '<div class="details"><a ' . @$reviews_link_params . '"><div>Read Reviews</div></a></div>';
       
+      if ($stars) {
+        $mobile_column[$data['data']->nid][$target] = '<div class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</div>' . $stars . '<div class="details"><a ' . $reviews_link_params . '"><div>Read Reviews</div></a></div>';
+      }
+      else {
+        $mobile_column[$data['data']->nid][$target] = NULL;
+      }
       return $out;
       
       
