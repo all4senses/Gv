@@ -8310,7 +8310,7 @@ function wdg_misc_getProviderQuickData($target, $data) {
  */
 function gv_misc_getProviderQuickData($target, $data) {
   
-  global $mobile_column;
+  static $mobile_column;
   $out = '';
   
   
@@ -8319,7 +8319,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     
     case 'mobile_column':
 
-      dpm($mobile_column);
+      //dpm($mobile_column);
       return $mobile_column[$data['data']->nid]['features'];
 
       
