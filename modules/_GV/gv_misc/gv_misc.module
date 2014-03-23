@@ -8320,7 +8320,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'mobile_column':
 
       //dpm($mobile_column);
-      return $mobile_column[$data['data']->nid]['rating'] . $mobile_column[$data['data']->nid]['features'];
+      return $mobile_column[$data['data']->nid]['rating'] . $mobile_column[$data['data']->nid]['features'] . $mobile_column[$data['data']->nid]['monthly'];
 
       
       
@@ -8903,7 +8903,13 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       if ($target == 'monthly' && $out) {
         $out = '$'. $out;
+        $mobile_column[$data['data']->nid][$target] = '<div class="mothly">' . $out . '</div>';
       }
+      elseif ($target == 'monthly' && !$out) {
+        $mobile_column[$data['data']->nid][$target] = NULL;
+      }
+      
+      
       return $out;
     
       
