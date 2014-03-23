@@ -8320,7 +8320,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'mobile_column':
 
       //dpm($mobile_column);
-      return $mobile_column[$data['data']->nid]['features'];
+      return $mobile_column[$data['data']->nid]['rating'] . $mobile_column[$data['data']->nid]['features'];
 
       
       
@@ -8687,6 +8687,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       else {
         $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div></a></div>';
       }
+
+      $mobile_column[$data['data']->nid][$target] = '<div class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</div>' . $stars . '<div class="details"><a ' . $reviews_link_params . '"><div>Read Reviews</div></a></div>';
       
       return $out;
       
