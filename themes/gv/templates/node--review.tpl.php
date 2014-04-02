@@ -146,10 +146,21 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 <?php endif; ?>
 
 <?php 
+
+  $provider_data_quick = !empty($node->field_ref_provider['und'][0]['target_id']) ? $all_data_quick[$node->field_ref_provider['und'][0]['target_id']] : NULL;
+  
   $full_title_urls = array('/reviews', '/reviews/business', '/reviews/residential');
   $full_title = (in_array(@$_SERVER['REDIRECT_URL'], $full_title_urls)) ? TRUE : FALSE;
   $provider_url = (!isset($content['provider_url']) || !$content['provider_url']) ? '' : $content['provider_url'];
-  $provider_name = isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'];
+  
+  if ($provider_data_quick) {
+    $provider_name = $provider_data_quick['name'];
+  }
+  else {
+    $provider_name = isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'];
+  }
+  
+  
                       
 ?>
 
@@ -334,7 +345,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
               
               echo '<div class="rlinks">';
               
-                      $provider_data_quick = !empty($node->field_ref_provider['und'][0]['target_id']) ? $all_data_quick[$node->field_ref_provider['und'][0]['target_id']] : NULL;
+                      //$provider_data_quick = !empty($node->field_ref_provider['und'][0]['target_id']) ? $all_data_quick[$node->field_ref_provider['und'][0]['target_id']] : NULL;
                               
                       if($page || $full_title) {
                         dpm($provider_data_quick);
