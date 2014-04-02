@@ -337,7 +337,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                       $provider_data_quick = !empty($node->field_ref_provider['und'][0]['target_id']) ? $all_data_quick[$node->field_ref_provider['und'][0]['target_id']] : NULL;
                               
                       if($page || $full_title) {
-                        
+                        dpm($provider_data_quick);
                         echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
                         //. ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
                         . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick));

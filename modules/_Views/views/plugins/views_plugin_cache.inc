@@ -191,6 +191,8 @@ class views_plugin_cache extends views_plugin {
   /**
    * Gather out of band data, compare it to what we started with and store the difference.
    */
+  
+  
   function gather_headers() {
     // Simple replacement for head
     if (isset($this->storage['head'])) {
@@ -221,6 +223,82 @@ class views_plugin_cache extends views_plugin {
     $this->storage['headers'] = array_diff_assoc(drupal_get_http_header(), $this->storage['headers']);
   }
 
+  
+  
+  
+  
+  
+   /**
+   * Gather out of band data, compare it to what we started with and store the difference.
+   */
+  /*
+  function gather_headers() {
+    // Simple replacement for head
+    if (isset($this->storage['head'])) {
+      $this->storage['head'] = str_replace($this->storage['head'], '', drupal_add_html_head());
+    }
+    else {
+      $this->storage['head'] = '';
+    }
+    // Slightly less simple for CSS:
+    $css = drupal_add_css();
+    $css_start = isset($this->storage['css']) ? $this->storage['css'] : array();
+    //$this->storage['css'] = array_diff_assoc($css, $css_start);
+    $this->storage['css'] = $this->array_diff_assoc_recursive($css, $css_start);
+    // Get javascript after/before views renders.
+    $js = drupal_add_js();
+    $js_start = isset($this->storage['js']) ? $this->storage['js'] : array();
+    // If there are any differences between the old and the new javascript then
+    // store them to be added later.
+    // $this->storage['js'] = array_diff_assoc($js, $js_start);
+    $this->storage['js'] = $this->array_diff_assoc_recursive($js, $js_start);
+    // Special case the settings key and get the difference of the data.
+    $settings = isset($js['settings']['data']) ? $js['settings']['data'] : array();
+    $settings_start = isset($js_start['settings']['data']) ? $js_start['settings']['data'] : array();
+    $settings = is_array($settings) ? $settings : array();
+    $settings_start = is_array($settings_start) ? $settings_start : array();
+    $this->storage['js'] = is_array($this->storage['js']) ? $this->storage['js'] : array();
+    //$this->storage['js']['settings'] = array_diff_assoc($settings, $settings_start);
+    $this->storage['js']['settings'] = $this->array_diff_assoc_recursive($settings, $settings_start);
+    // Get difference of HTTP headers.
+    $this->storage['headers'] = array_diff_assoc(drupal_get_http_header(), $this->storage['headers']);
+  }
+  
+  // complementary function due PHP 5.4 issue 1511396
+  function array_diff_assoc_recursive($array1, $array2) {
+    foreach ($array1 as $key => $value) {
+      if (is_array($value)) {
+        if (!isset($array2[$key])) {
+          $difference[$key] = $value;
+        } elseif (!is_array($array2[$key])) {
+          $difference[$key] = $value;
+        } else {
+          $new_diff = $this->array_diff_assoc_recursive($value, $array2[$key]);
+          if ($new_diff != FALSE) {
+            $difference[$key] = $new_diff;
+          }
+        }
+      } elseif (!isset($array2[$key]) || $array2[$key] != $value) {
+        $difference[$key] = $value;
+      }
+    }
+    return !isset($difference) ? 0 : $difference;
+  }
+  
+  */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   /**
    * Restore out of band data saved to cache. Copied from Panels.
    */
