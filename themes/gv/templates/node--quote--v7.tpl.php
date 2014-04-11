@@ -298,6 +298,9 @@
 
             
             
+            
+            
+            
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
             <script>top.location.href="http://getvoip.com/service-quotes";</script>
           <?php endif;*/?>
@@ -323,6 +326,15 @@
   <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/944838791/?value=0&amp;label=cYn0CNGWnwQQh7HEwgM&amp;guid=ON&amp;script=0"/>
   </div>
   </noscript>
+  
+  
+  
+  
+  <script src="//cdn.optimizely.com/js/786756874.js"></script>
+            
+            
+            
+  
   
 <?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):?>
   
