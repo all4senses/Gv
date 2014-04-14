@@ -382,7 +382,7 @@
                     <?php 
                       $tags = NULL;
                       foreach ($target_tags as $key => $value) {
-                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid']);
+                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid'], array('attributes' => array('rel' => 'nofollow')));
                       }
 
                       if ($tags) {
