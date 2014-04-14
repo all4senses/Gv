@@ -8663,7 +8663,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         $rating_count = number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 );
         $reviews_link_text = format_plural($data['data']->votingapi_cache_node_percent_overall_count_value, '1 Review', '@count Reviews');
-        $reviews_link_params = ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid);
+        $reviews_link_params = ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . ' rel="nofollow" href="' . url('node/' . $data['data']->nid);
         
         
 //        global $user;
