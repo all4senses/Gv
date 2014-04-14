@@ -319,7 +319,8 @@
         <footer>
           <div class="share">
               <?php 
-                echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
+                //echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
+                echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
               ?> 
           </div>
           
