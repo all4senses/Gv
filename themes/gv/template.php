@@ -659,7 +659,7 @@ function gv_process_page(&$variables) {
   //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
   //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
   
-  //dpm($_SERVER);
+  dpm($_SERVER);
   $pages_with_livechatinc = array(/*'/', */'/business', '/hosted-pbx', '/business-systems');
   if (in_array(@$_SERVER['REQUEST_URI'], $pages_with_livechatinc)) {
     drupal_add_js( $module_path_misc . '/js/gv_add_livechatinc.js'); 
