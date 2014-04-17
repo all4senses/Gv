@@ -328,13 +328,7 @@
   </noscript>
   
   
-  
-  
-  <script src="//cdn.optimizely.com/js/786756874.js"></script>
-            
-            
-            
-  
-  
 <?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):?>
   
+
+  <script src="//cdn.optimizely.com/js/786756874.js"></script>
