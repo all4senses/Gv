@@ -339,6 +339,7 @@
         //echo $node->otherArticles;
         echo 'x';
         //dpm($node);
+        echo $node->uid;
         echo gv_blocks_getAboutTheAuthor($node->uid); 
       }
       ?>
