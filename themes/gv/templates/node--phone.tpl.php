@@ -329,6 +329,21 @@
       <?php endif;  ?>
         
       
+<?php if ($page): ?>
+      
+      <?php 
+      global $user;
+      if ($user->uid == 1) 
+      {  
+        //dpm($node->otherArticles);
+        //echo $node->otherArticles;
+        //echo 'x';
+        //dpm($node);
+        echo gv_blocks_getAboutTheAuthor($node->uid); 
+      }
+      ?>
+        
+ <?php endif; ?>
 
   </div> <!-- main-content -->
   

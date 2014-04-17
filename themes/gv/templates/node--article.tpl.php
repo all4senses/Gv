@@ -484,7 +484,7 @@
         //echo $node->otherArticles;
         //echo 'x';
         //dpm($node);
-        echo gv_blocks_getAboutTheAuthor($node->uid); // 1074 white pigeon
+        echo gv_blocks_getAboutTheAuthor($node->uid); 
       }
       ?>
       
