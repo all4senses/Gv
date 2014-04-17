@@ -333,13 +333,13 @@
       
       <?php 
       global $user;
-      if ($user->uid == 1) 
+      if ($user->uid) 
       {  
         //dpm($node->otherArticles);
         //echo $node->otherArticles;
-        echo 'x';
+        //echo 'x';
         //dpm($node);
-        echo $node->uid;
+        //echo $node->uid;
         echo gv_blocks_getAboutTheAuthor($node->uid); 
       }
       ?>
