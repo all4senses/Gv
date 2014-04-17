@@ -332,8 +332,8 @@
 <?php if ($page): ?>
       
       <?php 
-      global $user;
-      if ($user->uid) 
+//      global $user;
+//      if ($user->uid) 
       {  
         //dpm($node->otherArticles);
         //echo $node->otherArticles;
