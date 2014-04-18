@@ -4,7 +4,7 @@
   
     <?php 
     
-        $url = 'http://getvoip.com'. url('node/' . $node->nid);
+        
 
         /*
         if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
@@ -23,6 +23,8 @@
     
           <?php 
           
+            $url = 'http://getvoip.com'. url('node/' . $node->nid);
+            
             if ($page) {
               echo '<h1 ',  $title_attributes, /*'property="dc:title v:summary"',*/ 'property="v:summary"', (!$node->status ? ' class="not-published"' : ''), ' >', $title, '</h1>';
             }
