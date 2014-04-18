@@ -35,7 +35,8 @@
           
             if ($page || $view_mode == 'teaser') {
               
-                $created_str = date('F d, Y \a\t g:ia', $node->created);
+                //$created_str = date('F d, Y \a\t g:ia', $node->created);
+                $created_str = date('F d, Y', $node->created);
                 $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
 
                 $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
@@ -60,14 +61,14 @@
                                   'By: ' .
                                   (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>') 
                                   /*. $gplus_profile */.
-                                  '<span class="delim">|</span>' . $created_str .
+                                  '<span class="delim">/</span>' . $created_str .
                               '</span>';
 
 
                 }
                 else {
                   $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  'By:<span class="username">Guest<span class="delim">|</span>' . $created_str .
+                                  'By:<span class="username">Guest<span class="delim">/</span>' . $created_str .
                                '</span>';
 
                 }
