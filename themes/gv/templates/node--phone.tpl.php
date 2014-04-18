@@ -239,7 +239,10 @@
           
               
               
-          <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Else of if ($page): -->
+          <?php elseif ($user->uid == 1 && $view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
+              <div>...</div>
+          <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Second Elseif of if ($page): -->
+          
           
               <div class="phone photo teaser">
                 <?php
@@ -257,9 +260,6 @@
                     <?php print $node->field_p_name['und'][0]['value']; ?>
                   </a>
               </h3>
-          <?php elseif ($user->uid == 1 && $view_mode == 'teaser'): ?> <!-- Second Elseif of if ($page): -->
-          
-            <div>...</div>
             
           <?php endif; ?>  <!-- end of else of if ($page): -->
            
