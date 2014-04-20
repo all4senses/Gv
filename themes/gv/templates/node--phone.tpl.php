@@ -113,7 +113,8 @@
               <div class="bottom-clear"></div>
 
  
-              <?php /*
+              <?php 
+              /*
               <div class="share">
 
                       <div class="others">
@@ -244,7 +245,18 @@
               
               
           <?php elseif ($user->uid == 1 && $view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
-              <div>...</div>
+              <div></div>
+              
+              <?php
+              dpm($node);
+              dpm($content);
+//                $teaser = strip_tags($body_full_markup);
+//                $teaser_block_chars = 200;
+//                $teaser_block = trim(drupal_substr($teaser, 0, $teaser_block_chars));// . '...';
+//                $last_pos = strrpos($teaser_block, ' ');
+//                $teaser_block = substr_replace ($teaser_block, '...', $last_pos);
+  
+              ?>
           <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Second Elseif of if ($page): -->
           
           
