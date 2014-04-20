@@ -256,6 +256,10 @@
                 $last_pos = strrpos($teaser, ' ');
                 $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
                 dpm($teaser);
+                
+                
+                gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
+                echo $main_image_html_beautify;
               ?>
                 <div class="teaser-content">
                      <?php echo $teaser;?>
