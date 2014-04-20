@@ -1,5 +1,5 @@
 <?php if (!$page): ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes . ($view_mode == 'teaser' ? ' with_thumb' : ''); ?> clearfix"<?php print $attributes; ?>>
 <?php else: ?>
   
     <?php 
