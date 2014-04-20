@@ -35,39 +35,68 @@
             elseif ($view_mode == 'teaser') {
               echo '<h2 ',  $title_attributes, (!$node->status ? ' class="not-published"' : ''), ' ><a href="' . $url .'">' . $title . '</a></h2>';
             }
+            elseif ($view_mode == 'side_block_teaser') {
+              echo '<h4><a href="' . $url .'">' . $title . '</a></h4>';
+            }
             
           
-            if ($page || $view_mode == 'teaser') {
+            if ($page || $view_mode == 'teaser'  || $view_mode == 'side_block_teaser') {
               
+                if ($page) {
+                  $delimiter = '<span class="delim">|</span>';
+                  $created_str = date('F d, Y \a\t g:ia', $node->created);
+                }
+                else {
+                  $created_str = date('F d, Y', $node->created);
+                  switch ($view_mode) {
+                    case 'teaser':
+                      $delimiter = '<span class="delim">/</span>';
+                      break;
+                    
+                    case 'side_block_teaser':
+                      $delimiter = NULL;
+                      break;
+                  }
+                }
+                //$delimiter = $page ? '<span class="delim">|</span>' : '<span class="delim">/</span>';
                 //$created_str = date('F d, Y \a\t g:ia', $node->created);
-                $created_str = $page ? date('F d, Y \a\t g:ia', $node->created) : date('F d, Y', $node->created);
-                $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
-                $delimiter = $page ? '<span class="delim">|</span>' : '<span class="delim">/</span>';
-                $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
-                $author_name = $authorExtendedData->realname;
-                $author_gplus_profile = $authorExtendedData->field_u_gplus_profile_value;
-               
-                /*
-                $author = user_load($node->uid);
-                $author_name = $author->realname;
-                $author_gplus_profile = @$author->field_u_gplus_profile['und'][0]['safe_value'];
-                */
+                //$created_str = $page ? date('F d, Y \a\t g:ia', $node->created) : date('F d, Y', $node->created);
                 
-                $author_url = url('user/' . $node->uid);
-                $author_title = t('!author\'s profile', array('!author' => $author_name));
+                $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
+                
+                if ($view_mode != 'side_block_teaser') {
+                  $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
+                  $author_name = $authorExtendedData->realname;
+                  $author_gplus_profile = $authorExtendedData->field_u_gplus_profile_value;
+                
+                  /*
+                  $author = user_load($node->uid);
+                  $author_name = $author->realname;
+                  $author_gplus_profile = @$author->field_u_gplus_profile['und'][0]['safe_value'];
+                  */
 
-                global $language;
-                $gplus_profile = ($author_gplus_profile) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author_gplus_profile . '?rel=author">(G+)</a>' : '';
+                  $author_url = url('user/' . $node->uid);
+                  $author_title = t('!author\'s profile', array('!author' => $author_name));
 
+                  global $language;
+                  $gplus_profile = ($author_gplus_profile) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author_gplus_profile . '?rel=author">(G+)</a>' : '';
+                }
+                
                 if ($node->uid) {
 
-                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                  if ($view_mode == 'side_block_teaser') {
+                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  $created_str .
+                              '</span>';
+                  }
+                  else {
+                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By: ' .
                                   (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>') 
                                   /*. $gplus_profile */.
                                   $delimiter . $created_str .
                               '</span>';
-
+                  }
 
                 }
                 else {
@@ -251,15 +280,11 @@
           <?php elseif ($view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
              
               <?php
-              //dpm($node);
-              //dpm($content);
                 $teaser = strip_tags($node->body['und'][0]['value']);
                 $teaser_chars = 450;
                 $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
                 $last_pos = strrpos($teaser, ' ');
                 $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
-                //dpm($teaser);
-                
                 
                 gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
                 echo $main_image_html_beautify;
@@ -267,7 +292,20 @@
                 <div class="teaser-content">
                      <?php echo $teaser;?>
                 </div>
-                
+          <?php elseif ($view_mode == 'side_block_teaser'):  ?> <!-- Else of if ($page): -->
+             
+              <?php
+                $teaser = strip_tags($node->body['und'][0]['value']);
+                $teaser_chars = 145;
+                $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
+                $last_pos = strrpos($teaser, ' ');
+                //$teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+                $teaser = substr_replace ($teaser, '... ', $last_pos);
+              ?>
+                <div class="teaser-content">
+                     <?php echo $teaser;?>
+                </div>
+                      
           <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Second Elseif of if ($page): -->
           
           
