@@ -248,14 +248,14 @@
               <div></div>
               
               <?php
-              dpm($node);
-              dpm($content);
-//                $teaser = strip_tags($body_full_markup);
-//                $teaser_block_chars = 200;
-//                $teaser_block = trim(drupal_substr($teaser, 0, $teaser_block_chars));// . '...';
-//                $last_pos = strrpos($teaser_block, ' ');
-//                $teaser_block = substr_replace ($teaser_block, '...', $last_pos);
-  
+              //dpm($node);
+              //dpm($content);
+                $teaser = strip_tags($node->body['und'][0]['value']);
+                $teaser_chars = 450;
+                $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
+                $last_pos = strrpos($teaser, ' ');
+                $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+                dpm($teaser);
               ?>
           <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Second Elseif of if ($page): -->
           
