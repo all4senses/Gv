@@ -257,7 +257,7 @@
                 $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
                 dpm($teaser);
               ?>
-                <div class="content teaser">
+                <div class="content-teaser">
                      <?php echo $teaser;?>
                 </div>
                 
