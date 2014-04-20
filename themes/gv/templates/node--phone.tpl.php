@@ -82,7 +82,7 @@
 
     
 
-        <div class="content"<?php print $content_attributes; ?>>
+        <div class="content<?php echo ($view_mode == 'teaser' ? ' teaser' : ''), '" ', $content_attributes; ?>>
           
            <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
           
