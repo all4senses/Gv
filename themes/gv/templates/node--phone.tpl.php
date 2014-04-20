@@ -249,8 +249,7 @@
               
               
           <?php elseif ($user->uid == 1 && $view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
-              <div></div>
-              
+             
               <?php
               //dpm($node);
               //dpm($content);
@@ -259,7 +258,7 @@
                 $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
                 $last_pos = strrpos($teaser, ' ');
                 $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
-                dpm($teaser);
+                //dpm($teaser);
                 
                 
                 gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
