@@ -248,7 +248,7 @@
           
               
               
-          <?php elseif ($user->uid == 1 && $view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
+          <?php elseif ($view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
              
               <?php
               //dpm($node);
