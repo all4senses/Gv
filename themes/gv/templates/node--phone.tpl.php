@@ -19,7 +19,11 @@
     ?>
 <?php endif; ?>
            
-  <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
+      <?php if ($page): ?>
+        <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
+      <?php endif; ?>
+      
+  
     
           <?php 
           
@@ -287,8 +291,11 @@
             
           <?php endif; ?>  <!-- end of else of if ($page): -->
            
-              
+             
+      <?php if ($page): ?>
         </div> <!-- content -->
+      <?php endif; ?>
+        
 
         
         
