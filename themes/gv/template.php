@@ -935,7 +935,7 @@ function gv_preprocess_views_view_unformatted(&$vars) {
 //    dpm($vars);
 //  }
   
-  //dpm($vars);  
+  dpm($vars);  
 }
 
 
@@ -1033,7 +1033,7 @@ function gv_preprocess_html(&$variables) {
  */
 function gv_preprocess_views_view_table(&$vars) {
   
-  dpm(array_keys($vars));
+  //dpm(array_keys($vars));
   
   /*
   $view     = $vars['view'];
