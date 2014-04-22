@@ -1033,7 +1033,7 @@ function gv_preprocess_html(&$variables) {
  */
 function gv_preprocess_views_view_table(&$vars) {
   
-  dpm($vars);
+  dpm(array_keys($vars));
   
   /*
   $view     = $vars['view'];
