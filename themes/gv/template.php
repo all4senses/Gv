@@ -973,10 +973,17 @@ function gv_captcha($variables) {
 
 function gv_preprocess_views_view(&$vars) {
   
-  if ($vars['view']->current_display == 'block_top_business_cmp') {
-    //dpm($vars);
-    dpm($vars['view']->display['block_top_business_cmp']);
+//  if ($vars['view']->current_display == 'block_top_business_cmp') {
+//    //dpm($vars);
+//    //dpm($vars['view']->display['block_top_business_cmp']);
+//  }
+  
+  if ($vars['view']->display[$vars['view']->current_display]->display_options['use_more']) {
+    //$vars['more'] = '<div class="more-link"><a rel="nofollow" href="'. $more_url . '">' . $link_text .  '</a></div>';
+    $vars['more'] = '<div class="more-link"><a rel="nofollow" href="/'. $vars['view']->display[current_display]->display_options['link_url'] . '">' . $vars['view']->display[current_display]->display_options['use_more_text'] .  '</a></div>';
   }
+  
+  
   
   // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
 //  if ($vars['view']->current_display == 'page_by_tag') {
