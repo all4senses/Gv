@@ -935,7 +935,7 @@ function gv_preprocess_views_view_unformatted(&$vars) {
 //    dpm($vars);
 //  }
   
-  dpm($vars);  
+  //dpm($vars);  
 }
 
 
@@ -970,8 +970,12 @@ function gv_captcha($variables) {
 /**
  * Preprocess the primary theme implementation for a view.
  */
-/*
+
 function gv_preprocess_views_view(&$vars) {
+  
+  if ($vars['view']->current_display == 'block_top_business_cmp') {
+    dpm($vars);
+  }
   
   // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
 //  if ($vars['view']->current_display == 'page_by_tag') {
@@ -982,15 +986,15 @@ function gv_preprocess_views_view(&$vars) {
 
   // hasn't worked out to make use one temlate for different views unformatted
   
-  if (isset($vars['view']->name) && ($vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
-    $function = 'gv_preprocess_views_view_unformatted'; 
-    if (function_exists($function)) {
-     $function($vars);
-    }
-  }
+//  if (isset($vars['view']->name) && ($vars['view']->name == 'blog' || $vars['view']->name == 'news') ) {
+//    $function = 'gv_preprocess_views_view_unformatted'; 
+//    if (function_exists($function)) {
+//     $function($vars);
+//    }
+//  }
   
 }
-*/
+
 
 
 
