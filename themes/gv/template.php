@@ -19,7 +19,7 @@ function gv_preprocess_user_profile(&$profile) {
 function gv_link($variables) {
   //global $user;
   
-  dpm($variables);
+  //dpm($variables);
   
   // 
   if (isset($variables['options']['query']['sort_by']) && !$variables['options']['query']['sort_by']) {

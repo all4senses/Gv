@@ -25,6 +25,9 @@
  *
  * @ingroup views_templates
  */
+
+dpm($header);
+dpm($more);
 ?>
 <div class="<?php print $classes; ?>">
   <?php print render($title_prefix); ?>
