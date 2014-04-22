@@ -292,6 +292,7 @@
                 <div class="teaser-content">
                      <?php echo $teaser;?>
                 </div>
+          
           <?php elseif ($view_mode == 'side_block_teaser'):  ?> <!-- Else of if ($page): -->
              
               <?php
@@ -299,7 +300,6 @@
                 $teaser_chars = 145;
                 $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
                 $last_pos = strrpos($teaser, ' ');
-                //$teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
                 $teaser = substr_replace ($teaser, '... ', $last_pos);
               ?>
                 <div class="content teaser">

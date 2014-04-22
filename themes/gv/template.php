@@ -441,9 +441,11 @@ function gv_html_head_alter(&$head_elements) {
   
   $current_page = NULL;
   
-  // Remove a canonical tag if there next or prev tags are present.
+  
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
-    unset($head_elements['metatag_canonical']);
+    
+    // Remove a canonical tag if there next or prev tags are present.
+    //unset($head_elements['metatag_canonical']);
     
     
     // Define the number of a current page.

@@ -59,7 +59,8 @@
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    $logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))), NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')) . '</div>';
+                    //$logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))), NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')) . '</div>';
+                    $logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
                     echo '<table><tbody><tr><td>' . $logo_block . '</td></tr></tbody></table>';
                   }
                   else {
@@ -115,7 +116,7 @@
                   <?php 
                       echo '<div class="name-narrow" style="display: none;">' . $provider_name . '</div>';
                       if (!empty($node->gv_rating_overall)) {
-                        echo '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews"> Read Reviews</a></div>'; 
+                        echo '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews" rel="nofollow"> Read Reviews</a></div>'; 
                       }
                   ?>
                   <div class="caption not-narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
@@ -143,7 +144,7 @@
                               '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews">', $node->gv_voters, '</a></div></div>',
                               '<div id="positive">', 'Positive<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['positive'], '</div><div id="negative">Negative<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['negative'], '</div>',
                               '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
-                              '<a id="write-review" href="/voip-provider-submit-user-review?id=', $node->nid, '"><span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>';
+                              '<a id="write-review" rel="nofollow" href="/voip-provider-submit-user-review?id=', $node->nid, '"><span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>';
                       ?>
                       
                     </div>
@@ -151,7 +152,7 @@
                   </div>
               
               <? else: ?>
-                  <?php echo '<a id="write-review" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>'; ?>
+                  <?php echo '<a id="write-review" rel="nofollow" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>'; ?>
               <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
              
               

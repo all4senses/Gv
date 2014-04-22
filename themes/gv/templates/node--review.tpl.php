@@ -358,7 +358,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                         echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick);
                       }
                       
-                  echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
+                  echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('attributes' => array('rel' => 'nofollow'), 'query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
                   . '</div>'; 
             ?>
           </div>
