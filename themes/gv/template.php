@@ -935,9 +935,8 @@ function gv_preprocess_views_view_unformatted(&$vars) {
 //    dpm($vars);
 //  }
   
-  dpm($vars);  
+  //dpm($vars);  
 }
-
 
 
 /**
@@ -1033,8 +1032,12 @@ function gv_preprocess_html(&$variables) {
  * Display a view as a table style.
  */
 function gv_preprocess_views_view_table(&$vars) {
+  
+  dpm($vars);
+  
+  /*
   $view     = $vars['view'];
-
+  
   // We need the raw data for this grouping, which is passed in as $vars['rows'].
   // However, the template also needs to use for the rendered fields.  We
   // therefore swap the raw data out to a new variable and reset $vars['rows']
@@ -1244,5 +1247,7 @@ function gv_preprocess_views_view_table(&$vars) {
   else {
     $vars['caption'] = '';
   }
+  
+  */
 }
 
