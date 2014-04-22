@@ -974,7 +974,8 @@ function gv_captcha($variables) {
 function gv_preprocess_views_view(&$vars) {
   
   if ($vars['view']->current_display == 'block_top_business_cmp') {
-    dpm($vars);
+    //dpm($vars);
+    dpm($vars['view']->display['block_top_business_cmp']);
   }
   
   // I set title for preface (at gv_misc_views_pre_render(&$view)) instead of a view itself.
