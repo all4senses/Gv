@@ -2240,6 +2240,10 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   
   if ($subpath) {
     if ($service_type) {
+      // Temporarily redirect pbx to bu
+      if ($service_type == 'pbx') {
+        $service_type = 'bu';
+      }
       $subpath .= '/' . $service_type;
     }
     return '<a href="/go' . $subpath . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : ' rel="nofollow"') . ($a_class ? ' class="' . $a_class . '"' : '') . '>' . $title_or_wrapped_object . '</a>';
