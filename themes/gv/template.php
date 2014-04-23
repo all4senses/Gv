@@ -1047,7 +1047,7 @@ function gv_preprocess_views_view_table(&$vars) {
   
   //dpm(array_keys($vars));
   
-  /*
+  
   $view     = $vars['view'];
   
   // We need the raw data for this grouping, which is passed in as $vars['rows'].
@@ -1260,6 +1260,6 @@ function gv_preprocess_views_view_table(&$vars) {
     $vars['caption'] = '';
   }
   
-  */
+  
 }
 
