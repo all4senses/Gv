@@ -1134,10 +1134,10 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
     
     case 'v3':
       $data = unserialize(variable_get('gv_home_in_hlighted_3', NULL));
-      dpm(strip_tags($data['title']['value']));
+      //dpm(strip_tags($data['title']['value']));
       $out .= '
         <h1>Best VoIP Service Providers</h1>
-        <h2 id="banner_title">' . $data['title']['value'] . '</h2>
+        <h2 id="banner_title">' . strip_tags($data['title']['value']) . '</h2>
         <div id="features">' . $data['features']['value'] . '</div>
         <div id="testimonial">' . $data['testimonial']['value'] . '</div>
       ';
