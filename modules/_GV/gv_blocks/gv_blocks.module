@@ -1138,23 +1138,23 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
       
       global $user;
       
-      if ($user->uid == 1) {
+      //if ($user->uid == 1) 
+        {
         $out .= '
           <h1>Best VoIP Service Providers</h1>
-          <h2 id="banner_title">' . $data['title']['value'] . '</h2>
           <h2 id="banner_title">' . strip_tags($data['title']['value']) . '</h2>
           <div id="features">' . $data['features']['value'] . '</div>
           <div id="testimonial">' . $data['testimonial']['value'] . '</div>
         ';
       }
-      else {
-        $out .= '
-          <h1>Best VoIP Service Providers</h1>
-          <h2 id="banner_title">' .$data['title']['value'] . '</h2>
-          <div id="features">' . $data['features']['value'] . '</div>
-          <div id="testimonial">' . $data['testimonial']['value'] . '</div>
-        ';
-      }
+//      else {
+//        $out .= '
+//          <h1>Best VoIP Service Providers</h1>
+//          <h2 id="banner_title">' .$data['title']['value'] . '</h2>
+//          <div id="features">' . $data['features']['value'] . '</div>
+//          <div id="testimonial">' . $data['testimonial']['value'] . '</div>
+//        ';
+//      }
       break;
   }
   
