@@ -51,11 +51,19 @@
 
                     <div class="left">
                             
+                            <div class="caption">Our Real-time Quotes Include:</div>
+                            <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
+                            <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
+                            <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div>
+                            <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
+                            
+                            <!--
                             <div class="caption">Benefits & Features:</div>
                             <div class="text bullet v1"><strong>Best Rates & Exclusive Offers</strong></div>
                             <div class="text bullet v2"><strong>Custom Quotes From Top Providers</strong></div>
                             <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
                             <div class="text bullet v4"><strong>Feature Loaded HD Phones</strong></div>
+                            -->
 
                             
                     </div>
