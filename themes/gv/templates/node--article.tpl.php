@@ -361,6 +361,7 @@
           
           if ($page)
             {
+            // Trying to savein the content tags <style>, that is cleared for anonymous by default for some reason.
             //hide($content['body']);
             //dpm($node->body['und'][0]['value']);
             //echo $node->body['und'][0]['value'];
