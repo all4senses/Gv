@@ -361,9 +361,9 @@
           
           if ($page)
             {
-            hide($content['body']);
+            //hide($content['body']);
             //dpm($node->body['und'][0]['value']);
-            echo $node->body['und'][0]['value'];
+            //echo $node->body['und'][0]['value'];
           }
           
           
