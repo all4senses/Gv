@@ -429,11 +429,12 @@ function gv_html_head_alter(&$head_elements) {
 
   
   
+  // Will be used in html.tpl.php
+  global $altered_head_title;
+  
   // Quick fix for Metatag, where the local node metatag title for some reason doesnt apply to the page metatag title.
   // Hope it will be solved with the newer version of the Metatag module.
   if (!empty($head_elements['name']['#attributes']['content'])) {
-    // Will be used in html.tpl.php
-    global $altered_head_title;
     $altered_head_title = $head_elements['name']['#attributes']['content'];
   }
   
@@ -443,6 +444,7 @@ function gv_html_head_alter(&$head_elements) {
   
   $current_page = NULL;
   
+  dpm($head_elements);
   
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     
@@ -492,9 +494,8 @@ function gv_html_head_alter(&$head_elements) {
 
       $current_title = str_replace(' - GetVoIP', '', $current_title);
 
-      // Will be used in html.tpl.php
-      global $altered_head_title;
       
+      //global $altered_head_title; // Will be used in html.tpl.php
       $altered_head_title = $current_title . ' - Page ' . $current_page . ' - GetVoIP';
       
       if (isset($head_elements['metatag_description'])) {
