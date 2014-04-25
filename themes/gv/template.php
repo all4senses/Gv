@@ -446,6 +446,8 @@ function gv_html_head_alter(&$head_elements) {
   
   dpm($head_elements);
   
+  dpm($_GET);
+  
   if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     
     // Remove a canonical tag if there next or prev tags are present.
