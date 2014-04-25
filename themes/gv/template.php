@@ -448,13 +448,15 @@ function gv_html_head_alter(&$head_elements) {
   
   dpm($_GET);
   
-  if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
+  if (@$_GET['page'] > 0 ) {
+  //if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
     
     // Remove a canonical tag if there next or prev tags are present.
     //unset($head_elements['metatag_canonical']);
     
     
     // Define the number of a current page.
+    /*
     if (!empty($head_elements['next'])) {
       $next = explode('?', $head_elements['next']['#attributes']['href']);
       //dpm($next);
@@ -483,7 +485,10 @@ function gv_html_head_alter(&$head_elements) {
       
       
     }
+    */
 
+    $current_page = $_GET['page'] + 1;
+    
     if ($current_page > 1) {
       
       // Define a current page title
