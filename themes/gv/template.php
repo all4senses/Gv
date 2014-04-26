@@ -19,7 +19,7 @@ function gv_preprocess_user_profile(&$profile) {
 function gv_link($variables) {
   //global $user;
   
-  //dpm($variables);
+  dpm($variables);
   
   // 
   if (isset($variables['options']['query']['sort_by']) && !$variables['options']['query']['sort_by']) {
@@ -103,6 +103,7 @@ function gv_preprocess_user_picture(&$picture) {
  * @ingroup themeable
  */
 function gv_pager_link($variables) {
+  
   $text = $variables['text'];
   $page_new = $variables['page_new'];
   $element = $variables['element'];
@@ -141,9 +142,9 @@ function gv_pager_link($variables) {
     }
   }
 
-  dpm($_GET['q']);
-  dpm($query);
-  dpm($attributes);
+  //dpm($_GET['q']);
+  //dpm($query);
+  //dpm($attributes);
   
   
   return l($text, $_GET['q'], array('attributes' => $attributes, 'query' => $query));
