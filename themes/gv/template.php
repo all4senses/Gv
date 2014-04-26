@@ -446,7 +446,7 @@ function gv_html_head_alter(&$head_elements) {
   
   dpm($head_elements);
   
-  dpm($_GET);
+  //dpm($_GET);
   
   if (@$_GET['page'] > 0 ) {
   //if (!empty($head_elements['next']) || !empty($head_elements['prev'])) {
@@ -488,6 +488,8 @@ function gv_html_head_alter(&$head_elements) {
     */
 
     $current_page = $_GET['page'] + 1;
+    
+    
     
     if ($current_page > 1) {
       
