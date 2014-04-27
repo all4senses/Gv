@@ -28,6 +28,7 @@ function gv_link($variables) {
     }
     //dpm('url = ' . url($variables['path']));
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
+    unset($variables['options']['query']['page']);
   }
   
   // 
