@@ -33,6 +33,7 @@ function gv_link($variables) {
 
   if ( ($variables['path'] == 'node/add/review') && !empty($variables['options']['query']['id'])) {
     //dpm($variables);
+    $variables['path'] = ltrim(url($variables['path']),'/');
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['id'];
     unset($variables['options']['query']['id']);
   }
