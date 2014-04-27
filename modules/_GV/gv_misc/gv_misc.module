@@ -1143,11 +1143,11 @@ function gv_misc_testPage() {
   
   $output = 'blog/123';
   //$output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
-  $output = preg_replace('|blog\/([0-9])|s', 'blog?page=$1', $output);
+  $output = preg_replace('|blog\/([0-9])$|s', 'blog?page=$1', $output);
   dpm($output);
-  $output = 'blog/123/321';
+  $output = 'blog/1s23/32d1';
   //$output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
-  $output = preg_replace('|blog\/([0-9])|s', 'blog?page=$1', $output);
+  $output = preg_replace('|blog\/([0-9])$|s', 'blog?page=$1', $output);
   dpm($output);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
