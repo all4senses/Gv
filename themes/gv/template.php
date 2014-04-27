@@ -17,11 +17,13 @@ function gv_preprocess_user_profile(&$profile) {
  * Add rel=nofollow to external links.
  */
 function gv_link($variables) {
-  //global $user;
+  
+  global $user;
   
   //dpm($variables);
-  if ( ($variables['path'] == 'blog' || $variables['path'] == 'library') && !empty($variables['options']['query']['page'])) {
+  if ( $user->uid == 1 && ($variables['path'] == 'blog' || $variables['path'] == 'library') && !empty($variables['options']['query']['page'])) {
     dpm($variables);
+    $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
   }
   
   // 
