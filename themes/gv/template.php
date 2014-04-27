@@ -20,9 +20,9 @@ function gv_link($variables) {
   
   global $user;
   
-  //dpm($variables);
+  dpm($variables);
   if ( $user->uid == 1 && ($variables['path'] == 'blog' || $variables['path'] == 'library') && !empty($variables['options']['query']['page'])) {
-    dpm($variables);
+    //dpm($variables);
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
   }
   
