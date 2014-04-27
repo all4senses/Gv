@@ -1142,10 +1142,12 @@ function gv_misc_testPage() {
   // $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   
   $output = 'blog/123';
-  $output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
+  //$output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
+  $output = preg_replace('|blog\/([0-9])|s', 'blog?page=$1', $output);
   dpm($output);
   $output = 'blog/123/321';
-  $output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
+  //$output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
+  $output = preg_replace('|blog\/([0-9])|s', 'blog?page=$1', $output);
   dpm($output);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
