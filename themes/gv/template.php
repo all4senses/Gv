@@ -30,6 +30,15 @@ function gv_link($variables) {
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
     unset($variables['options']['query']['page']);
   }
+
+  if ( ($variables['path'] == 'node/add/review') && !empty($variables['options']['query']['id'])) {
+    //dpm($variables);
+    $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['id'];
+    unset($variables['options']['query']['id']);
+  }
+  
+  
+  
   
   // 
   if (isset($variables['options']['query']['sort_by']) && !$variables['options']['query']['sort_by']) {
