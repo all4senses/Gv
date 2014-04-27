@@ -1137,7 +1137,16 @@ function gv_misc_testPage() {
   //$result = gv_misc_calculateDataForRelatedArticlesBlock($result->title, $result->teaser, unserialize($result->field_extra_data_value), $result->created, array('title_not_normalized' => TRUE, 'body_not_stripped' => TRUE));
 
   
-  dpm(__FUNCTION__);
+  //dpm(__FUNCTION__);
+  
+  // $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
+  
+  $output = 'blog/123';
+  $output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
+  dpm($output);
+  $output = 'blog/123/321';
+  $output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
+  dpm($output);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
