@@ -21,7 +21,7 @@ function gv_link($variables) {
   global $user;
   
   dpm($variables);
-  if ( $user->uid == 1 && ($variables['path'] == 'blog' || $variables['path'] == 'library') && !empty($variables['options']['query']['page'])) {
+  if ( $user->uid == 1 && ($variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
     //dpm($variables);
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
   }
