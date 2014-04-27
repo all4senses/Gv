@@ -23,7 +23,7 @@ function gv_link($variables) {
   //dpm($variables);
   
   
-  // Replace blog?page=xxx and library?page=xxx with blog/xxx and library/xxx
+  // Replace blog?page=xxx and library?page=xxx with blog/xxx and library/xxx in a pager
   // .htaccess should have a backward conversion
   // # Silently replace xxx/yyy with xxx?page=yyy with  
   // RewriteRule ^(blog|library)/([0-9]*)$ index.php?q=$1&page=$2 [L,QSA]
