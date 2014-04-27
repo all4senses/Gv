@@ -2048,7 +2048,7 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
     }
   }
   
-  $get_q = url($_GET['q']);
+  $get_q = '/' . url($_GET['q']);
   
   if ($page_prev !== FALSE) {
     $page_prev = l('Older Posts ›', $get_q, array('query' => array('page' => $page_prev)));
