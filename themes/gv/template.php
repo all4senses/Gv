@@ -21,6 +21,12 @@ function gv_link($variables) {
   //global $user;
   
   //dpm($variables);
+  
+  
+  // Replace blog?page=xxx and library?page=xxx with blog/xxx and library/xxx
+  // .htaccess should have a backward conversion
+  // # Silently replace xxx/yyy with xxx?page=yyy with  
+  // RewriteRule ^(blog|library)/([0-9]*)$ index.php?q=$1&page=$2 [L,QSA]
   if ( ($variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
     //dpm($variables);
     if (strpos($variables['path'], 'ode/')) {
@@ -30,6 +36,11 @@ function gv_link($variables) {
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
     unset($variables['options']['query']['page']);
   }
+
+  // Replace voip-provider-submit-user-review?=63 with voip-provider-submit-user-review/63
+  // .htaccess should have a backward conversion
+  // # Silently replace voip-provider-submit-user-review/xxx  with voip-provider-submit-user-review?id=xxx  
+  // RewriteRule ^(voip-provider-submit-user-review)/([0-9]*)$ index.php?q=$1&id=$2 [L,QSA]
 
   if ( ($variables['path'] == 'node/add/review') && !empty($variables['options']['query']['id'])) {
     //dpm($variables);
