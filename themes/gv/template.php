@@ -18,11 +18,11 @@ function gv_preprocess_user_profile(&$profile) {
  */
 function gv_link($variables) {
   
-  global $user;
+  //global $user;
   
   //dpm($variables);
-  if ( $user->uid == 1 && ($variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
-    dpm($variables);
+  if ( ($variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
+    //dpm($variables);
     if (strpos($variables['path'], 'ode/')) {
       $variables['path'] = ltrim(url($variables['path']),'/');
     }
