@@ -1776,13 +1776,6 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
   elseif ($path == 'voip-phone-submit-user-review') {
     $path = 'node/add/phone-review';
   }
-  else {
-    dpm($path);
-    dpm($original_path);
-    if ($path == 'blog/aaa') {
-      $path = urlencode('blog?page=2');
-    }
-  }
 //  else {
 //    if (strpos($path, 'theme/images/') !== FALSE) {
 //      //dpm($path);
