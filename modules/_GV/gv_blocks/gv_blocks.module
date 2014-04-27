@@ -2048,15 +2048,17 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
     }
   }
   
+  $get_q = url($_GET['q']);
+  
   if ($page_prev !== FALSE) {
-    $page_prev = l('Older Posts ›', $_GET['q'], array('query' => array('page' => $page_prev)));
+    $page_prev = l('Older Posts ›', $get_q, array('query' => array('page' => $page_prev)));
   }
   if ($page_next !== FALSE) {
     if (!$page_next) {
-      $page_next = l('‹ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
+      $page_next = l('‹ Newer Posts', $get_q, array('attributes' => array('class' => array('newer'))));
     }
     else {
-      $page_next = l('‹ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
+      $page_next = l('‹ Newer Posts', $get_q, array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
     }
   }
   
