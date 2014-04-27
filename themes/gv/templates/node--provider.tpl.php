@@ -147,7 +147,7 @@
                               
                                  
                               //'<a id="write-review" rel="nofollow" href="/voip-provider-submit-user-review?id=', $node->nid, '"><span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>'
-                              l('<span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))   
+                              l('<span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))   
                               ;
                       ?>
                       
