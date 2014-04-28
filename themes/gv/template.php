@@ -26,6 +26,9 @@ function gv_link($variables) {
   // Replace blog?page=xxx and library?page=xxx with blog/xxx and library/xxx in a pager
   // .htaccess should have a backward conversion
   // # Silently replace xxx/yyy with xxx?page=yyy with  
+  // http://www.drupal.ru/node/66578
+  // http://www.drupal.ru/node/4875  A lot of discussions... i'm not sure here...
+  // http://www.drupal.ru/node/65274#comments Didn't try this...
   // RewriteRule ^(blog|library)/([0-9]*)$ index.php?q=$1&page=$2 [L,QSA]
   if ( ($variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
     //dpm($variables);
@@ -40,6 +43,7 @@ function gv_link($variables) {
   // Replace voip-provider-submit-user-review?=63 with voip-provider-submit-user-review/63
   // .htaccess should have a backward conversion
   // # Silently replace voip-provider-submit-user-review/xxx  with voip-provider-submit-user-review?id=xxx  
+  // http://www.drupal.ru/node/66578
   // RewriteRule ^(voip-provider-submit-user-review)/([0-9]*)$ index.php?q=$1&id=$2 [L,QSA]
 
   if ( ($variables['path'] == 'node/add/review') && !empty($variables['options']['query']['id'])) {
