@@ -59,8 +59,8 @@
   $last_pos = strrpos($teaser, ' ');
   
   //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
-  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more')))), $last_pos);
-  dpm('xxx = ' . url('node/' . $provider_nid));
+  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+  
   echo '<a href="' . url('node/' . $provider_nid) . '"><h3>'. $node->title . '</h3></a><div class="review">' . $teaser . '</div>';
   
   echo '<div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.</span> / ' . date('F d, Y', $node->created) . '</div>';
