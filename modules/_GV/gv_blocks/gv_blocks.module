@@ -5509,7 +5509,7 @@ function gv_blocks_get_requestQuoteForPage_v6() {
 
 
 /**
- * Block Request a quote FOR PAGE v7 - /lp-7.
+ * Block Request a quote FOR PAGE v7 - /service-quotes ///lp-7.
  * 
  */
 function gv_blocks_get_requestQuoteForPage_v7() {
@@ -5542,7 +5542,10 @@ function gv_blocks_get_requestQuoteForPage_v7() {
   
   drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
   
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v7.js');
+  global $user;
+  if ($user->uid != 1 ) {
+    drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v7.js');
+  }
   
   // No slider with provider on V4.
 
