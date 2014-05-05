@@ -1048,7 +1048,7 @@ function gv_blocks_getHomeServiceTypes() {
     
     
     $query = db_select('field_data_field_preface_key', 'key');
-    $query->condition('key.field_preface_key_value', $data['key']);
+    $query->condition('key.field_preface_key_value', "'" . $data['key'] . "'");
     $query->leftJoin('field_data_body', 'body', "body.entity_id = key.entity_id");
     $query->fields('body', array('entity_id', 'body_summary'));
     $result = $query->execute(); 
