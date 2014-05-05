@@ -6540,20 +6540,20 @@ function gv_misc_SendRequestToRingCentral_UK($submission, $op = 'sendIfAllowed')
     //'_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
       
       
-    'Title' => 'NA',
+    'Title' => '', //'NA',
     'Industry' => 'Advertising, Marketing, Media, PR',
 
-    'Address' => 'NA',
-    'Suite/Apt No.' => 'NA',
-    'Zip Code' => 'NA',
+    'Address' => '',// 'NA',
+    'Suite/Apt No.' => '', // 'NA',
+    'Zip Code' => '', //  'NA',
 
     'City' => 'NA',
     'State' => 'AK',
     'Street' => 'NA',
     //'zip' => 'N/A', 
     'Country' => 'UK',
-    'Description_of_Your_Business__c' => 'NA',
-    'Notes__c' => 'NA',
+    'Description_of_Your_Business__c' => '',  //'NA',
+    'Notes__c' => '', // 'NA',
     'Number_Of_Locations__c' => 'NA',
       
     //'NumberOfEmployees' => 'N/A',
@@ -6569,7 +6569,7 @@ function gv_misc_SendRequestToRingCentral_UK($submission, $op = 'sendIfAllowed')
   }
   
   if (empty($data_to['Company'])) {
-    $data_to['Company'] = 'Unavailable';
+    $data_to['Company'] =  ''; // 'Unavailable';
   }
   
   //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';

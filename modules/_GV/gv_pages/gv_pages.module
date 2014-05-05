@@ -4579,6 +4579,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'article_node_form':
     case 'provider_node_form':
     case 'phone_node_form':
+    case 'preface_node_form':
       
         $form['actions']['submit']['#value'] = 'Save & Publish';
       
@@ -4603,6 +4604,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
+        
+        dpm($form);
+        
         
         break;
       
@@ -5075,7 +5079,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 //  }
   
           
-  //dpm($form_state['values']);
+  dpm($form_state['values']);
   //dpm($form_state['build_info']['args']);
   
   
@@ -5242,7 +5246,7 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
  */
 function gv_pages_validateForm_provider(&$form, &$form_state) {
    
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
    
   $p_data['info'] = $form_state['values']['data_info'];
   //$p_data['quote'] = $form_state['values']['data_quote'];
