@@ -1044,9 +1044,9 @@ function gv_blocks_getHomeServiceTypes() {
   //$service_types_home = serialize(array(/*'smbv' => 'Small Business', */ 're' => 'Residential', 'bu' => 'Business', 'mo' => 'Mobile', 'ifa' => 'Internet Fax', 'pbx' => 'Hosted PBX', 'sip' => 'SIP Trunking', 'cc' => 'Call Center', 're_ca' => 'Residential Canada', 'bu_ca' => 'Business Canada', 'rsl' => 'Reseller'));
   $service_types_home = array('bu' => array('title' => 'Business VoIP', 'key' => 'page-compare-business-voip-providers', 'erating_field' => ''), 'pbx' => array('title' => 'Hosted PBX', 'key' => 'page-compare-pbx-voip-providers', 'erating_field' => 'pbx'), 'sip' => array('title' => 'SIP Trunking', 'key' => 'page-compare-sip-voip-providers', 'erating_field' => 'sip'), 'rsl' => array('title' => 'VoIP Resellers', 'key' => 'page-reseller-providers', 'erating_field' => 'rsl'), 're' => array('title' => 'Residential VoIP', 'key' => 'page-compare-residential-voip-providers', 'erating_field' => 'residential'), 'ifa' => array('title' => 'Online Fax', 'key' => 'page-compare-ifa-voip-providers', 'erating_field' => 'ifa') );
   
-  $query = db_select('field_data_field_preface_key', 'key');
-  $query->fields('key', array('entity_id'));
-  $query->condition('key.entity_id', 1063);
+  $query = db_select('field_data_field_preface_key', 'k');
+  $query->fields('k', array('entity_id'));
+  $query->condition('k.entity_id', 1063);
   //$query->condition('key.field_preface_key_value', 'page-compare-business-voip-providers');
   //$query->leftJoin('field_data_body', 'body', "body.entity_id = key.entity_id");
   //$query->fields('body', array('entity_id', 'body_summary'));
