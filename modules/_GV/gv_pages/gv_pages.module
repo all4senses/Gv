@@ -3368,6 +3368,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       
       // Hide some options for all.
+      $form['field_p_data']['#access'] = FALSE;
       $form['comment_settings']['#access'] = FALSE;
       $form['revision_information']['#access'] = FALSE;
       
@@ -3392,6 +3393,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       foreach ($keys as $key) {
         $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'full_html'; // link Ckeditor
       }
+      
+      $form['body']['und'][0]['summary']['#default_value'] = 'x<strong>xx</strong>yy';
       
     break; // End of case 'preface_node_form':
 
@@ -5079,7 +5082,7 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 //  }
   
           
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   //dpm($form_state['build_info']['args']);
   
   
