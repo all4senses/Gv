@@ -2228,7 +2228,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //    dpm($form_id);  //dpm($form);
 //  }
   
-  dpm($form_id);  dpm($form);
+  //dpm($form_id);  dpm($form);
   // $conf['locale_custom_strings_en']['old string'] = 'new string'
   
   switch ($form_id) {
@@ -3366,6 +3366,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       } // End of if(arg(1) != 'add') {
 */    
       
+      dpm($form);
       
       // Hide some options for all.
       $form['field_p_data']['#access'] = FALSE;
@@ -5060,6 +5061,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 /**
  * Custom validate of preface type form.
  * 
+ * Quick fix of the problem with not saving body summary.
+ * 
  * Save summary text to extradata field, or else it won't be saved
  *
  * @param array &$form
@@ -5072,8 +5075,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_submitForm_preface(&$form, &$form_state) {
-  dpm($form_state['values']);
-  $extra_data['body_summary'] = 'xxx';
+  //dpm($form_state['values']);
+  $extra_data['body_summary'] = $form_state['values']['body']['und'][0]['summary'];
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
 }
 
