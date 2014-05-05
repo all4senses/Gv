@@ -3396,6 +3396,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       $form['body']['und'][0]['summary']['#default_value'] = 'x<strong>xx</strong>yy';
       
+      $form['#submit'][] = 'gv_pages_submitForm_preface';
+      
     break; // End of case 'preface_node_form':
 
   
@@ -4582,7 +4584,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'article_node_form':
     case 'provider_node_form':
     case 'phone_node_form':
-    case 'preface_node_form':
+    //case 'preface_node_form':
       
         $form['actions']['submit']['#value'] = 'Save & Publish';
       
@@ -4605,10 +4607,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
         }
       
-        $form['#submit'][200] = 'gv_pages_submitForm_saveDraft';
+        $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
         
-        dpm($form);
+        //dpm($form);
         
         
         break;
@@ -5050,6 +5052,31 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
 ////  dpm($form);
 //  dpm($form_state['values']);
 //}
+
+
+
+
+
+/**
+ * Custom validate of preface type form.
+ * 
+ * Save summary text to extradata field, or else it won't be saved
+ *
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_submitForm_preface(&$form, &$form_state) {
+  dpm($form_state['values']);
+  $extra_data['body_summary'] = 'xxx';
+  form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
+}
+
 
 
 /**
