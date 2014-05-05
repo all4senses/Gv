@@ -343,6 +343,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['home_service_types'] = array(
+    'info' => 'Home service types',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   return $blocks;
 }
 
@@ -701,6 +706,14 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
+    case 'home_service_types':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getHomeServiceTypes();
+      break;
+    
+    
+    
+    
     
   }
 
@@ -1018,6 +1031,22 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       break;
   }
   
+}
+
+
+/**
+ * Home Service Types block.
+ */
+function gv_blocks_getHomeServiceTypes() {
+  
+  $out = NULL;
+  
+  //$service_types_home = serialize(array(/*'smbv' => 'Small Business', */ 're' => 'Residential', 'bu' => 'Business', 'mo' => 'Mobile', 'ifa' => 'Internet Fax', 'pbx' => 'Hosted PBX', 'sip' => 'SIP Trunking', 'cc' => 'Call Center', 're_ca' => 'Residential Canada', 'bu_ca' => 'Business Canada', 'rsl' => 'Reseller'));
+  $service_types_home = serialize(array('bu' => array('title' => 'Business VoIP', 'key' => 'page-compare-business-voip-providers', ), 'pbx' => array('title' => 'Hosted PBX', 'key' => ''), 'sip' => 'SIP Trunking', 'rsl' => 'VoIP Resellers', 're' => 'Residential VoIP', 'ifa' => 'Online Fax'));
+  
+  foreach ($service_types_home as $service_type => $title) {
+    
+  }
 }
 
 
