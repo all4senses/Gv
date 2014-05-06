@@ -1067,8 +1067,8 @@ function gv_blocks_getHomeServiceTypes() {
       $query->orderBy($field_prefixed, 'DESC');
       
       $query->leftJoin('field_data_field_extra_data', 'd', "d.entity_id = r.entity_id");
-      $query->fields('r', array( $field ));
-      $query->fields('d', array('entity_id', 'field_extra_data_value'));
+      $query->fields('r', array('entity_id', $field ));
+      $query->fields('d', array('field_extra_data_value'));
       $query->range(0, 3);
       $result = $query->execute()->fetchAll(); 
 
