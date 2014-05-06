@@ -1046,6 +1046,8 @@ function gv_blocks_getHomeServiceTypes() {
   
   
   foreach ($service_types_home as $service_type => $data) {
+    
+    $out .= '<div id="s-' . $service_type . '">';
 
       $query = db_select('field_data_field_preface_key', 'k');
       $query->condition('k.field_preface_key_value', $data['key']); //'page-compare-business-voip-providers'
@@ -1080,6 +1082,11 @@ function gv_blocks_getHomeServiceTypes() {
 
       dpm($result);
       
+      foreach ($result as $key => $data) {
+        $out .= '<div class="p"><span>' . $key .'</span>' . $data->field_p_name_value . '</div>';
+      }
+        
+      
       
     
     /*
@@ -1107,7 +1114,7 @@ function gv_blocks_getHomeServiceTypes() {
       */
     
       
-      $out = '<div id="s-' . $service_type . '">' . $out . '</div>';
+      $out .= '</div>';
     
 
   } // End of foreach ($service_types_home as $service_type => $data) {
