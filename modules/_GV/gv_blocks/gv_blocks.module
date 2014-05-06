@@ -1057,32 +1057,30 @@ function gv_blocks_getHomeServiceTypes() {
       $result = $query->execute()->fetchObject(); 
 
       dpm($result);
-
+      $extra_data = unserialize($result->field_extra_data_value);
+      
+      $out .= '<div class="title"><span></span>' . $data['title'] . '</div><div class="summary">' . $extra_data['body_summary'] . '</div>';
       
       $table = 'field_data_field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '');
       $field = 'field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '') . '_value';
       $field_prefixed = 'r.' . $field;
       $query = db_select($table, 'r');
       $query->isNotNull($field_prefixed);
-      $query->orderBy($field_prefixed, 'DESC');
       
       $query->join('node', 'n', "n.nid = r.entity_id AND n.type='provider'");
-      $query->leftJoin('field_data_field_p_data', 'd', "d.entity_id = r.entity_id");
+      //$query->leftJoin('field_data_field_p_data', 'd', "d.entity_id = r.entity_id");
       $query->leftJoin('field_data_field_p_name', 'p', "p.entity_id = r.entity_id");
       $query->fields('r', array('entity_id', $field ));
-      $query->fields('d', array('field_p_data_value'));
+      //$query->fields('d', array('field_p_data_value'));
       $query->fields('p', array('field_p_name_value'));
+      $query->orderBy($field_prefixed, 'DESC');
+      
       $query->range(0, 3);
       $result = $query->execute()->fetchAll(); 
 
       dpm($result);
-
-    
-//    $query = db_select('field_data_field_preface_key', 'key');
-//    $query->condition('key.field_preface_key_value', $data['key']);
-//    $query->leftJoin('field_data_body', 'body', "body.entity_id = key.entity_id");
-//    $query->fields('body', array('entity_id', 'body_summary'));
-//    $result = $query->execute(); 
+      
+      
     
     /*
     $query = db_select('node', 'n');
@@ -1108,11 +1106,13 @@ function gv_blocks_getHomeServiceTypes() {
       $query->condition($or);
       */
     
+      
+      $out = '<div id="s-' . $service_type . '">' . $out . '</div>';
     
 
-  }
+  } // End of foreach ($service_types_home as $service_type => $data) {
   
-  return 'xxx';
+  return $out;
 }
 
 
