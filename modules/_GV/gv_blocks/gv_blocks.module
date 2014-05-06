@@ -1060,7 +1060,7 @@ function gv_blocks_getHomeServiceTypes() {
 
       
       $table = 'field_data_field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '');
-      $field = 'r.field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '') . '_value';
+      $field = 'field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '') . '_value';
       $field_prefixed = 'r.' . $field;
       $query = db_select($table, 'r');
       $query->isNotNull($field_prefixed);
