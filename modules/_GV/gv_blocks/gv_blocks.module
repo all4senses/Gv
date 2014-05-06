@@ -1069,7 +1069,7 @@ function gv_blocks_getHomeServiceTypes() {
       $query->leftJoin('field_data_field_extra_data', 'd', "d.entity_id = k.entity_id");
       $query->fields('r', array('entity_id', $field ));
       $query->fields('d', array('entity_id', 'field_extra_data_value'));
-      $quiery->range(0, 3);
+      $query->range(0, 3);
       $result = $query->execute()->fetchAllAssoc($field_prefixed, 'DESC'); 
 
       dpm($result);
