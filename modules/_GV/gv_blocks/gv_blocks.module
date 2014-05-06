@@ -1049,9 +1049,11 @@ function gv_blocks_getHomeServiceTypes() {
 
       $query = db_select('field_data_field_preface_key', 'k');
       $query->condition('k.field_preface_key_value', $data['key']); //'page-compare-business-voip-providers'
-      $query->leftJoin('field_data_body', 'b', "b.entity_id = k.entity_id");
-      $query->fields('b', array('entity_id', 'body_summary'));
-
+      //$query->leftJoin('field_data_body', 'b', "b.entity_id = k.entity_id");
+      $query->leftJoin('field_data_field_extra_data', 'd', "d.entity_id = k.entity_id");
+      //$query->fields('b', array('entity_id', 'body_summary'));
+      //$query->fields('d', array('entity_id', 'field_p_erating_value' . ($data['erating_field'] ? '_' . $data['erating_field'] : '') ));
+      $query->fields('d', array('entity_id', 'field_extra_data_value'));
       $result = $query->execute()->fetchObject(); 
 
       dpm($result);
