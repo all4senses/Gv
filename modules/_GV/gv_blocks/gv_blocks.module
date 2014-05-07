@@ -1061,7 +1061,7 @@ function gv_blocks_getHomeServiceTypes() {
       dpm($result);
       $extra_data = unserialize($result->field_extra_data_value);
       
-      $out .= '<div class="title"><span></span>' . $data['title'] . '</div><div class="summary">' . $extra_data['body_summary'] . '</div>';
+      $out .= '<div class="title"><span></span>' . $data['title'] . '</div><div class="summary">' . $extra_data['body_summary'] . l('Learn More', 'node/' . $result->entity_id, array('attributes' => array('class' => array('more'))  )) . '</div>';
       
       $table = 'field_data_field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '');
       $field = 'field_p_erating' . ($data['erating_field'] ? '_' . $data['erating_field'] : '') . '_value';
@@ -1083,7 +1083,7 @@ function gv_blocks_getHomeServiceTypes() {
       dpm($result);
       
       foreach ($result as $key => $data) {
-        $out .= '<div class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</div>';
+        $out .= '<a href="' . url('node/' . $data->entity_id) . '" class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</a>';
       }
         
       
