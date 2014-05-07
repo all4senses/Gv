@@ -1083,7 +1083,7 @@ function gv_blocks_getHomeServiceTypes() {
       dpm($result);
       
       foreach ($result as $key => $data) {
-        $out .= '<div class="p"><span>' . $key .'</span>' . $data->field_p_name_value . '</div>';
+        $out .= '<div class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</div>';
       }
         
       
