@@ -1078,16 +1078,16 @@ function gv_blocks_getHomeServiceTypes() {
       $query->orderBy($field_prefixed, 'DESC');
       
       $query->range(0, 3);
-      $result = $query->execute()->fetchAll(); 
+      $results = $query->execute()->fetchAll(); 
 
-      dpm($result);
+      dpm($results);
       
-      foreach ($result as $key => $data) {
+      foreach ($results as $key => $data) {
         $out .= '<a href="' . url('node/' . $data->entity_id) . '" class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</a>';
       }
         
       
-      
+     $out .= '<div class="view-all">' . l('Learn More', 'node/' . $result->entity_id) . '</div>'; 
     
     /*
     $query = db_select('node', 'n');
