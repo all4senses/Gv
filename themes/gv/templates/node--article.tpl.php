@@ -42,7 +42,7 @@
 
     return;
   }
-  elseif($view_mode == 'home_teaser') {
+  elseif($view_mode == 'home_teaser_rotated') {
 
     /*
     $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
