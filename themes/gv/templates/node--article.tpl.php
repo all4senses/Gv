@@ -42,6 +42,22 @@
 
     return;
   }
+  elseif($view_mode == 'home_teaser') {
+
+    /*
+    $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+    $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
+    */
+    $author_name = gv_misc_getNodeAuthor($node);
+    /*
+    echo $teaser_data['home_teaser_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+            . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
+    */
+//    echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+//            . '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>';
+
+    return '---123---';
+  }
   elseif ($view_mode == 'side_block_teaser_latestBlogsOnNews') {
     
     //$main_image = unserialize($node->field_main_image['und'][0]['value']);
