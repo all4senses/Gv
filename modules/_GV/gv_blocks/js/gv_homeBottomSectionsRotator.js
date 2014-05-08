@@ -7,7 +7,9 @@
       
       console.log('hb-rotator...');
       
-      var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 10000, true);
+      var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 100, true);
+      
+      console.log(rtabs);
       //var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
       var ltabs = rtabs.tabs('length');
        
