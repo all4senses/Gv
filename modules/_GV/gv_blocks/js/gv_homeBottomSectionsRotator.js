@@ -5,10 +5,10 @@
        
       //$("#p-rotator > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
       
-      //console.log('p-rotator...');
+      console.log('hb-rotator...');
       
-      //var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 10000, true);
-      var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
+      var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 10000, true);
+      //var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
       var ltabs = rtabs.tabs('length');
        
       // Pause rotation  on hover.
