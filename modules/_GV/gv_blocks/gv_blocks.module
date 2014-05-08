@@ -353,6 +353,13 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['home_bottom_rotated'] = array(
+    'info' => 'Home bottom sections rotated',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  
+  
   
   return $blocks;
 }
@@ -718,10 +725,12 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
-    case 'latest_posts_rotated':
-      $block['subject'] = 'LATEST POSTS';
-      $block['content'] = gv_blocks_getLatestPostsRotated();
+    case 'home_bottom_rotated':
+      $block['subject'] = gv_blocks_getHomeBottomSectionsRotated('title');
+      $block['content'] = gv_blocks_getHomeBottomSectionsRotated('body');
       break;
+    
+    
     
   }
 
@@ -1049,6 +1058,82 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 function gv_blocks_getLatestPostsRotated() {
   
 
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.tabs');
+
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_postsRotator.js');
+
+  $path_to_current_theme = drupal_get_path('theme', $GLOBALS['theme']) . '/css/';
+  drupal_add_css($path_to_current_theme . 'gv_bannerRotator.css');
+
+  
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', 'blog_post');
+  $query->condition('n.status', 1);
+  $query->orderBy('n.created', 'DESC');
+  // 4 pages
+  //$query->range(0, 8);
+  // 3 pages
+  //$query->range(0, 6);
+  
+  $query->range(0, 9);
+  
+  
+  $reviews = $query->execute()->fetchCol();
+  
+  //dpm($reviews);
+  
+  $ui_tabs_nav = '';
+  $fragments = '';
+  
+  // 4 pages
+  //for($i = 0; $i < 7; $i += 2) {
+  // 3 pages
+  //for($i = 0; $i < 5; $i += 2) {
+  for($i = 0; $i < 8; $i += 3) {  
+      //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
+      $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
+      $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
+      //$ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '">' . $i . '</a></li>';
+      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . drupal_render($node_views) . '</div></div>';
+  }
+  //$key += 1; 
+  //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
+  //$blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
+  //return '<div id="p-rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';  
+  return '<div id="p-rotator-wrapper"><div id="prev" class="button">Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button">Next</div></div>';  
+}
+
+
+/**
+ * Block with Rotated home bottom sections.
+ */
+function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
+  
+
+  
+  $seo_welcome_node = gv_misc_getPrefaceByKey('front');
+  $seo_welcome_node->title_no_link = TRUE;
+  $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
+
+  dpm($seo_welcome_node_view);
+
+  
+  if ($target == 'title') {
+    return 'yyyy';
+    
+  }
+  
+  $out = render($seo_welcome_node_view['field_preface_bottom']);
+
+  return $out;
+  
+  
+  
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
   drupal_add_library('system', 'ui.tabs');
