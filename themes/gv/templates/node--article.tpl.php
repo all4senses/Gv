@@ -44,6 +44,7 @@
   }
   elseif($view_mode == 'home_teaser_rotated') {
 
+    //dpm('ccc');
     /*
     $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
     $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
@@ -53,11 +54,11 @@
     echo $teaser_data['home_teaser_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
             . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
     */
-//    echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
-//            . '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>';
+    echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
+            . '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>';
 
-    echo '--333--';
-    return '---123---';
+    //echo '--333--';
+    return;
   }
   elseif ($view_mode == 'side_block_teaser_latestBlogsOnNews') {
     
