@@ -1124,15 +1124,18 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
 
   
   if ($target == 'title') {
-    return 'yyyy';
-    
+    return $seo_welcome_node->title;
   }
   
   $keys = element_children($seo_welcome_node_view['field_preface_bottom']);
   
-  dpm($keys);
+  $out = '';
+  foreach ($keys as $key) {
+    $out .= render($seo_welcome_node_view['field_preface_bottom'][$key]);
+  }
+  //dpm($keys);
   
-  $out = render($seo_welcome_node_view['field_preface_bottom']);
+  //$out = render($seo_welcome_node_view['field_preface_bottom']);
 
   return $out;
   
