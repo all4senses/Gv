@@ -1244,6 +1244,10 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   //foreach ($keys as $i) {
     
     foreach ($sections as $i => $section) {
+      
+      $section = preg_replace('/(.*)<ul>(.*)</ul>(.*)/s', '$1<div>$2</div>$3', $section);
+      dpm($section);
+      
     
       //dpm(render($seo_welcome_node_view['field_preface_bottom'][$i]));
       //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
