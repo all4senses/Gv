@@ -5,12 +5,11 @@
        
       //$("#p-rotator > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
       
-      console.log('hb-rotator...');
+      //console.log('hb-rotator...');
       
-      var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 100, true);
+      //var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 100, true);
       
-      console.log(rtabs);
-      //var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
+      var rtabs = $("#hb-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
       var ltabs = rtabs.tabs('length');
        
       // Pause rotation  on hover.
@@ -27,14 +26,13 @@
         
       $("#hb-rotator-wrapper #next").click(function() {
           var active = $( "#hb-rotator" ).tabs( "option", "selected" );
-          console.log('old active = ' + active);
           if (active == ltabs - 1 ) {
             active = 0;
           }
           else {
             active++;
           }
-          console.log('new active = ' + active);
+
           rtabs.tabs('select', active);
           // Doesn't work - other version (newer)
           //$( "#p-rotator" ).tabs( "option", "active", active + 1 );
