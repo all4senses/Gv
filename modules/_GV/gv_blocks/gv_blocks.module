@@ -1241,14 +1241,14 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   // 3 pages
   //for($i = 0; $i < 5; $i += 2) {
   //for($i = 0; $i < 8; $i += 3) {  
-  //foreach ($keys as $i) {
+  foreach ($keys as $i) {
     
-    foreach ($sections as $i => $section) {
+  //  foreach ($sections as $i => $section) {
       
       //$section = preg_replace('/(.*)\<ul\>(.*)\<\/ul\>(.*)/s', '$1<div>$2</div>$3', $section);
-      $section = str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), $section);
+      //$section = ;
       //$section = preg_replace('/(.*)\li\>(.*)\<\/li\>(.*)/s', '$1<div>$2</div>$3', $section);
-      dpm($section);
+      //dpm($section);
       
     
       //dpm(render($seo_welcome_node_view['field_preface_bottom'][$i]));
@@ -1257,10 +1257,10 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
       ////$node_views = node_view_multiple($nodes, 'home_teaser_rotated');
       //$ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '">' . $i . '</a></li>';
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      ////$fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . render($seo_welcome_node_view['field_preface_bottom'][$i]) . '</div></div>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), render($seo_welcome_node_view['field_preface_bottom'][$i])) . '</div></div>';
       
       //$fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . 'aaa' . $i . '</div></div>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . $section . '</div></div>';
+      //$fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . $section . '</div></div>';
   }
   //$key += 1; 
   //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
