@@ -1105,7 +1105,9 @@ function gv_blocks_getLatestPostsRotated() {
   //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
   //$blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
   //return '<div id="p-rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';  
-  return '<div id="p-rotator-wrapper"><div id="prev" class="button">Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button">Next</div></div>';  
+  return '<div id="p-rotator-wrapper"><div id="prev" class="button">Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button">Next</div></div>'
+          . l('View All', '/blog', array('attributes' => array('class' => array('view-all'))))
+        ;  
 }
 
 
@@ -1120,8 +1122,8 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   $seo_welcome_node->title_no_link = TRUE;
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
 
-  dpm($seo_welcome_node_view);
-  dpm($seo_welcome_node);
+  //dpm($seo_welcome_node_view);
+  //dpm($seo_welcome_node);
 
   
   if ($target == 'title') {
@@ -1129,18 +1131,6 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   }
   
   $keys = element_children($seo_welcome_node_view['field_preface_bottom']);
-  
-  //$out = '';
-//  foreach ($keys as $key) {
-//    $out .= render($seo_welcome_node_view['field_preface_bottom'][$key]);
-//  }
-  //dpm($keys);
-  
-  //$out = render($seo_welcome_node_view['field_preface_bottom']);
-
-  //return $out;
-  
-  
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
