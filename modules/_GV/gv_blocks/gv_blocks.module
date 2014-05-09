@@ -1245,7 +1245,9 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
     
     foreach ($sections as $i => $section) {
       
-      $section = preg_replace('/(.*)\<ul\>(.*)\<\/ul\>(.*)/s', '$1<div>$2</div>$3', $section);
+      //$section = preg_replace('/(.*)\<ul\>(.*)\<\/ul\>(.*)/s', '$1<div>$2</div>$3', $section);
+      $section = str_replace(array('ul>', 'li>'), array('div>', 'p>'), $section);
+      //$section = preg_replace('/(.*)\li\>(.*)\<\/li\>(.*)/s', '$1<div>$2</div>$3', $section);
       dpm($section);
       
     
