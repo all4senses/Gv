@@ -33,7 +33,7 @@
           else {
             active++;
           }
-
+          console.log('active = ' + active);
           rtabs.tabs('select', active);
           // Doesn't work - other version (newer)
           //$( "#p-rotator" ).tabs( "option", "active", active + 1 );
