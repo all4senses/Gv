@@ -61,6 +61,18 @@
     </section>
   <?php endif;  ?>
   
+  <?php  if ($page['content-wide']): ?>
+    <section id="content-wide" class="clearfix">
+      <?php print render($page['content-wide']); ?>
+    </section>
+  <?php endif;  ?>
+  
+  <?php  if ($page['below-content-wide']): ?>
+    <section id="below-content-wide" class="clearfix">
+      <?php print render($page['below-content-wide']); ?>
+    </section>
+  <?php endif;  ?>
+  
   
   <div id="all-content" class="clearfix">
       
