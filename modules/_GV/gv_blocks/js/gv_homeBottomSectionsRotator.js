@@ -27,13 +27,14 @@
         
       $("#hb-rotator-wrapper #next").click(function() {
           var active = $( "#hb-rotator" ).tabs( "option", "selected" );
+          console.log('old active = ' + active);
           if (active == ltabs - 1 ) {
             active = 0;
           }
           else {
             active++;
           }
-          console.log('active = ' + active);
+          console.log('new active = ' + active);
           rtabs.tabs('select', active);
           // Doesn't work - other version (newer)
           //$( "#p-rotator" ).tabs( "option", "active", active + 1 );
