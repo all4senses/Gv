@@ -61,15 +61,15 @@
     </section>
   <?php endif;  ?>
   
-  <?php  if ($page['content-wide']): ?>
+  <?php  if ($page['content_wide']): ?>
     <section id="content-wide" class="clearfix">
-      <?php print render($page['content-wide']); ?>
+      <?php print render($page['content_wide']); ?>
     </section>
   <?php endif;  ?>
   
-  <?php  if ($page['below-content-wide']): ?>
+  <?php  if ($page['below_content_wide']): ?>
     <section id="below-content-wide" class="clearfix">
-      <?php print render($page['below-content-wide']); ?>
+      <?php print render($page['below_content_wide']); ?>
     </section>
   <?php endif;  ?>
   
