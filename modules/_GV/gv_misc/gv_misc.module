@@ -11298,6 +11298,22 @@ function gv_misc_hybridauth_userinfo_alter(&$userinfo, $data) {
 }
 
 
+
+/*
+ * 
+ * Add contextual links to a block contextual menu...
+ * 
+ * Specificly, add edit link to a home preface bottoms bloxk to allow editing the preface node itself via the block contextual links.
+ * 
+ * http://bleen.net/blog/easier-way-add-contextual-links-drupal-7
+ * 
+ * http://drupal.stackexchange.com/questions/33855/how-to-add-contextual-links-to-the-main-content-block
+ * 
+ * http://dominiquedecooman.com/blog/drupal-7-tip-add-contextual-links-anything
+ * 
+ * 
+ * 
+ */
 function gv_misc_contextual_links_view_alter(&$element, &$items) {
   // This hook is called for EVERY set of contextual links
   // on a page.  We first want to check the $element to make
@@ -11312,12 +11328,11 @@ function gv_misc_contextual_links_view_alter(&$element, &$items) {
 //    );
 //  }
   
-  dpm($element['#element']['#block']->delta);
+
   if (isset($element['#element']['#block']) && $element['#element']['#block']->delta == 'home_bottom_rotated') {
-    dpm('xxx----------------');
     $element['#links']['social-networks'] = array(
-      'title' => 'Edit social network links',
-      'href' => url('/admin/config/system/site-information', array('absolute' => TRUE)),
+      'title' => 'Edit home preface and its bottoms',
+      'href' => url('node/79/edit', array('query' => array('destination' => '/'))),
     );
   }
   
