@@ -725,6 +725,12 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
+    case 'latest_posts_rotated':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getLatestPostsRotated();
+      break;
+    
+    
     case 'home_bottom_rotated':
       $block['subject'] = gv_blocks_getHomeBottomSectionsRotated('title');
       $block['content'] = gv_blocks_getHomeBottomSectionsRotated('body');
