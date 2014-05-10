@@ -11332,7 +11332,7 @@ function gv_misc_contextual_links_view_alter(&$element, &$items) {
   if (isset($element['#element']['#block']) && $element['#element']['#block']->delta == 'home_bottom_rotated') {
     $element['#links']['social-networks'] = array(
       'title' => 'Edit home preface and its bottoms',
-      'href' => url('node/79/edit', array('query' => array('destination' => '/'))),
+      'href' => url('/node/79/edit', array('query' => array('destination' => '/'))),
     );
   }
   
