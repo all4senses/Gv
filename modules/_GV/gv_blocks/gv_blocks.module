@@ -1102,7 +1102,7 @@ function gv_blocks_getLatestPostsRotated() {
   for($i = 0; $i < 8; $i += 3) {  
       //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
       $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
-      //$node_views = node_view_multiple($nodes, 'home_teaser_rotated');
+      $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
       dpm($node_views);
       //$node_views = node_view_multiple($nodes, 'home_teaser_rotated');
       
