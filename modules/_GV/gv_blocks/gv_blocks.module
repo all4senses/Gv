@@ -1112,12 +1112,19 @@ function gv_blocks_getLatestPostsRotated() {
         }
         elseif ($count == 2){
           $class = 'last';
+        }
+        else {
+          $class = 'middle';
+        }
+
+        $node_views['nodes'][$key]['#prefix'] = '<div class="section ' . $class . '">';
+        $node_views['nodes'][$key]['#suffix'] = '</div>';
+        
+        if ($count == 2){
           break;
         }
         
         $count++;
-        $node_views['nodes'][$key]['#prefix'] = '<div class="section' . ($class ? ' ' . $class : '') . '">';
-        $node_views['nodes'][$key]['#suffix'] = '</div>';
       }
       dpm($node_views);
       //$node_views = node_view_multiple($nodes, 'home_teaser_rotated');
