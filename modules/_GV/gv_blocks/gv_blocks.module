@@ -1099,11 +1099,26 @@ function gv_blocks_getLatestPostsRotated() {
   //for($i = 0; $i < 7; $i += 2) {
   // 3 pages
   //for($i = 0; $i < 5; $i += 2) {
+  
   for($i = 0; $i < 8; $i += 3) {  
       //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
       $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
       $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
-      $node_views['nodes'][1778]['#prefix'] = '<div>xxx</div>';
+      $count = $class = NULL;
+      foreach ($node_views['nodes'] as $key => $value) {
+
+        if (!$count) {
+          $class = 'first';
+        }
+        elseif ($count == 2){
+          $class = 'last';
+          break;
+        }
+        
+        $count++;
+        $node_views['nodes'][$key]['#prefix'] = '<div class="section' . ($class ? ' ' . $class : '') . '">';
+        $node_views['nodes'][$key]['#suffix'] = '</div>';
+      }
       dpm($node_views);
       //$node_views = node_view_multiple($nodes, 'home_teaser_rotated');
       
