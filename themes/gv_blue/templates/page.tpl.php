@@ -197,9 +197,13 @@
 
     <?php
         if (!$hide_follow_us_links) {
-          echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
+          echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
         }
         echo render($page['footer']);
+        
+        echo '<div class="about">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website.</div>
+<div class="c">© 2014 GetVoIP.com | All Rights Reserved</div>';
+        
     ?>
 
 
