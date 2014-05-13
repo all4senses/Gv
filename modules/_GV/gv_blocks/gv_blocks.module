@@ -1131,7 +1131,7 @@ function gv_blocks_getLatestPostsRotated() {
       
       //$ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '">' . $i . '</a></li>';
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . drupal_render($node_views) . '</div></div>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . ($i ? '' : ' hidden') . '"><div class="info">' . drupal_render($node_views) . '</div></div>';
   }
   //$key += 1; 
   //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
@@ -1180,7 +1180,7 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
  
   foreach ($keys as $i) {
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel"><div class="info">' . str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), render($seo_welcome_node_view['field_preface_bottom'][$i])) . '</div></div>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . ($i ? '' : ' hidden') . '"><div class="info">' . str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), render($seo_welcome_node_view['field_preface_bottom'][$i])) . '</div></div>';
   }
   //$key += 1; 
   //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
