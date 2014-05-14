@@ -95,6 +95,11 @@ function gv_blocks_block_info() {
     'info' => 'Request a quote block v7 (sidebar 1 step)',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['request_quote_v8'] = array(
+    'info' => 'Request a quote block v8 (home, main column, 1 step)',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   
   $blocks['get_access_banner'] = array(
     'info' => 'Get access... Banner',
@@ -462,6 +467,11 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = 'Request a quote block v7 (for a side bar 1 step)';
       $block['content'] = gv_blocks_get_requestQuote_block_v7();
       break;
+    case 'request_quote_v8':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_get_requestQuote_block_v8();
+      break;
+    
     
     case 'get_access_banner':
       $block['subject'] = 'GET ACCESS TO THE LARGEST <br>VOIP FOOTPRINT <br>IN THE NATION';
@@ -794,6 +804,21 @@ function gv_blocks_block_configure($delta = '') {
     
     
     
+    case 'request_quote_v8':
+      
+      $data = unserialize(variable_get('gv_request_quote_v8', NULL));
+      
+      $form['headline'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Headline',
+        '#format' => 'full_html',
+        '#default_value' => $data['headline']['value'],
+      );
+      
+      break;
+    
+    
+    
     case 'home_in_hlighted_2':
     
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
@@ -990,6 +1015,10 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       variable_set('gv_request_quote_v7', serialize($data));
       break;
     
+    case 'request_quote_v8':
+      $data = array('headline' => $edit['headline']);
+      variable_set('gv_request_quote_v8', serialize($data));
+      break;
     
     case 'home_in_hlighted_2':
       $data = array(/*'title' => $edit['banner_title'], 'body' => $edit['body'], */'flying_text_1' => $edit['flying_text_1'], 'flying_text_2' => $edit['flying_text_2'], 'flying_text_3' => $edit['flying_text_3']);
@@ -4496,6 +4525,142 @@ function gv_blocks_get_requestQuote_block_v7() {
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="block" />
                 <input type="hidden" name="version" value="7" />
+                <input type="hidden" name="referrer" value="" />
+                <input type="hidden" name="url" value="" />
+                
+        </form>
+
+        <p id="data"></p>
+</div>
+<div class="block_footer"></div>
+  ';
+  
+  return $out;
+}
+
+
+/**
+ * Block Request a quote with a multistep form v8 - 1 step, New design based on v7
+ */
+function gv_blocks_get_requestQuote_block_v8() {
+  
+//  global $user;
+//  if (!$user->uid) 
+//    {
+//    return NULL;
+//  }
+  
+  // Don't show the block if on the 404 page
+  if ($_GET['q'] == 'node/988') {
+    return NULL;
+  }
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_v8.js');
+  
+  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  // height: 140px; 
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+
+  
+  
+  
+  $data = unserialize(variable_get('gv_request_quote_v8', NULL));
+  
+  
+  $out = '
+   
+   <div id="requestQuoteFormWrapper">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        ' /*. '<form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">' .*/ . '<form class="multipartForm bbq" method="post" action="/request">' . '
+
+                
+                <div id="fieldWrapper">
+                    
+                    <div class="step" id="questions_section">
+                    
+                                <div id="up">
+                                    <div class="text">' . $data['headline']['value'] . '</div>
+                                    <div class="phone-pic"></div>
+                                </div>
+                                <div class="bottom-clear"></div>   
+                           
+                                <div class="wrapper top first">
+                                  <div class="question ui-widget">Service Type:</div>
+                                  <select name="q_type" id="q_type" class="input required ui-state-default ui-helper-reset">
+                                    <option selected="selected" value="Business">Business</option>
+                                    <option value="Home-Based Business">Home-Based Business</option>
+                                  </select>
+                                </div>
+
+                                <div class="wrapper top last">
+                                  <div class="question ui-widget">Lines Needed:</div>
+                                  <select name="phones_amt" id="phones_amt" class="input required ui-state-default ui-helper-reset">
+                                    <!-- <option value="1 - 4">1 - 4</option> -->
+                                    <option value="2 - 4">2 - 4</option>
+                                    <option selected="selected" value="5 - 10">5 - 10</option>
+                                    <option value="11 - 20">11 - 20</option>
+                                    <option value="21 - 50">21 - 50</option>
+                                    <option value="More than 50">More than 50</option>
+                                  </select>
+                                </div>
+
+                            <div class="bottom-clear"></div>
+                            
+                            <!--<img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" /> -->
+
+
+                            <div class="bottom-clear"></div>
+                            
+                                <div class="wrapper middle first left">
+                                    <input class="after required firstname" name="firstname" id="firstname" title="First Name" />
+                                </div>
+
+                                <div class="wrapper middle right">
+                                    <input class="after required lastname" name="lastname" id="lastname" title="Last Name" />
+                                </div>
+
+                                <div class="wrapper middle left">
+                                    <input class="after email required" name="email" id="email" title="Email Address" />
+                                </div>
+
+                                <div class="wrapper middle phone right">
+                                    <input class="after required phone" name="phone" id="phone" value="" title="Phone Number" />
+                                </div>
+                                
+                           <div class="bottom-clear"></div>    
+                           <div class="guide ps"><div class="text"><span>Free guide with submission</span> Business VoIP Start-up Guide</div><div class="pdf-icon"></div></div>
+                           <div class="verisign"></div>
+                    </div>
+
+                
+                </div>
+                
+                
+            
+                <div id="Navigation"> 							
+                        <input class="navigation_button" id="next" value="Quote Me" type="submit" />
+                </div>
+                
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="block" />
+                <input type="hidden" name="version" value="8" />
                 <input type="hidden" name="referrer" value="" />
                 <input type="hidden" name="url" value="" />
                 
