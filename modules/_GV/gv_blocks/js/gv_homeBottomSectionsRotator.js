@@ -4,7 +4,7 @@
     attach: function (context, settings) {
        
        
-      $("#hb-rotator .ui-tabs-panel").removeClass('hidden'); 
+      
       
       //$("#p-rotator > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
       
@@ -53,6 +53,11 @@
 
           rtabs.tabs('select', active);
       });
+       
+       
+       
+      $("#hb-rotator .ui-tabs-panel").removeClass('hidden');  
+       
        
     }
   };
