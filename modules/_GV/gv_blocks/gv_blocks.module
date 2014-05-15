@@ -318,6 +318,10 @@ function gv_blocks_block_info() {
     'info' => 'As featured in SIDE block',
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['as_featured_in_home'] = array(
+    'info' => 'As featured in Home',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   $blocks['sidebar_share_block'] = array(
     'info' => 'Share this Post Static',
@@ -702,6 +706,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getAsFeaturedInBlock('side');
       break;
     
+    case 'as_featured_in_home':
+      $block['subject'] = 'As Featured In Home';
+      $block['content'] = gv_blocks_getAsFeaturedInBlock('home');
+      break;
+    
     case 'sidebar_share_block':
       $block['subject'] = 'Share this Post:';
       $block['content'] = gv_blocks_getSidebarShareStaticBlock();
@@ -945,7 +954,23 @@ function gv_blocks_block_configure($delta = '') {
       
       break;
       
+    
       
+      
+     case 'as_featured_in_home':
+      
+      $data = unserialize(variable_get('gv_as_featured_in_home', NULL));
+          
+      $form['html_images'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Images',
+        '#format' => 'full_html',
+        '#default_value' => $data['html_images']['value'],
+      );
+      
+      break;
+    
+    
       
     case 'as_featured_in_side':
       
@@ -1048,6 +1073,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
     case 'as_featured_in_side':
       //dpm($edit);
       
+      if ($delta == 'as_featured_in_side') {
+        $data_variable = 'gv_as_featured_in_side';
+        $style_name = 'as_featured_in_sideblock';
+        
+      }
+      elseif ($delta == 'as_featured_in_home') {
+        $data_variable = 'gv_as_featured_in_home';
+        $style_name = 'as_featured_in_sideblock';
+        
+      }
       
       // Save files using plupload multiple load.
       /*
@@ -1097,7 +1132,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           $stream_path = gv_misc_getStreamUriFromRelativePath($main_image['src']);
           //$main_image['uri'] = $stream_path;
           
-          $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => 'as_featured_in_sideblock'));
+          $main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
           //$main_image_html = '<div>' . $main_image_html;
           
           //$images[] = $main_image_html;
@@ -1107,10 +1142,10 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       
       //dpm($images);
       $data = array('html_images' => $edit['html_images'], 'images' => $images);
-      variable_set('gv_as_featured_in_side', serialize($data));
+      variable_set($data_variable, serialize($data));
       
       // Reset (clear) old styled images so that new images will be created on the next access to those images.
-      $style_to_flush = 'as_featured_in_sideblock';
+      $style_to_flush = $style_name;
       // Cut from function image_style_flush($style) {
       // Delete the style directory in each registered wrapper.
       $wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_WRITE_VISIBLE);
@@ -1707,12 +1742,15 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
       $out = '<div class="title">As featured In</div><div class="body">' . $data['body']['value'] . '</body>'; // . '<div class="more">' . l('See all of the recent buzz about us >>>', '') . '</div>';
       break;
     
+    case 'home':
     case 'side':
       $out = '';//$data['html_images']['value'];
       foreach ($data['images'] as $image) {
         $out .= $image;
       }
       break;
+      
+    
   }
   
 
