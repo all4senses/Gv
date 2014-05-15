@@ -708,7 +708,7 @@ function gv_blocks_block_view($delta = '') {
     
     case 'as_featured_in_home':
       $block['subject'] = 'As Featured In Home';
-      $block['content'] = 'xxx '. gv_blocks_getAsFeaturedInBlock('home');
+      $block['content'] = gv_blocks_getAsFeaturedInBlock('home');
       break;
     
     case 'sidebar_share_block':
@@ -1728,6 +1728,11 @@ $handler->display->display_options['fields']['php_1']['php_click_sortable'] = ''
  */
 function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
   
+  global $user;
+  if ($user->uid != 1 && $key == 'home') {
+    return NULL;
+  }
+  
   if ($key == 'bottom') {
     if (!$data = unserialize(variable_get('gv_as_featured_in_bottom', NULL))) {
       $data = unserialize(variable_get('gv_as_featured_in', NULL));
@@ -1753,8 +1758,12 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
     
   }
   
+  if ($key == 'home') {
+    $out = 'xxxy ' . $out;
+  }
+    
+  return 'xxxy ' . $out;
 
-  return $out;
 }
 
 
