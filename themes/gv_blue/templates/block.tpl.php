@@ -4,7 +4,9 @@
 <section id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
-    <?php echo ($block->region == 'content' ? '<h2 ' : '<h3 ') . $title_attributes; ?>><?php echo $title . ($block->region == 'content' ? '</h2>' : '</h3>'); ?>
+    <?php $h_tag = in_array($block->region, array('content', 'content-wide', 'above_footer')) ? 'h2' : 'h3'; ?>
+    <<?php echo $h_tag . ' ' . $title_attributes; ?>>
+    <?php echo $title . '</' . $h_tag . '>'; ?>
   <?php endif;?>
   <?php print render($title_suffix); ?>
 
