@@ -3544,6 +3544,13 @@ function gv_misc_file_put_contents_createAllSubdirs($file_local_abs, $data) {
   foreach ($file_parts as $file_part) {
     $current_path .= '/' . $file_part;
     dpm($current_path);
+    if (file_exists($current_path)) {
+      dpm('--- Exists');
+      
+    }
+    else {
+      dpm('--- NOT Exists');
+    }
   }
   file_put_contents($file_local_abs, $data);
   
