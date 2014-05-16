@@ -3550,6 +3550,8 @@ function gv_misc_file_put_contents_createAllSubdirs($file_local_abs, $data) {
     }
     else {
       dpm('--- NOT Exists');
+      //mkdir ( string $pathname [, int $mode = 0777 [, bool $recursive = false [, resource $context ]]] )
+      mkdir($current_path);
     }
   }
   file_put_contents($file_local_abs, $data);
