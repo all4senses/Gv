@@ -3,8 +3,21 @@
   Drupal.behaviors.gv_requestquote_block_v8 = {
     attach: function (context, settings) {
       
+      
+        // Styling select forms
+
+        //$('select').selectmenu();
+        $('select').selectmenu({
+          //style:'popup', 
+          maxHeight: 300
+  			});
+        
+        
+      
         //$('#requestQuoteFormWrapper #Navigation #back').css('display', 'block');
         
+        
+        /*
         captcha_val = 'kjhjhkgsjdhgjk';
         
         $('input[name="ct_captcha"]').focus(function(){
@@ -31,7 +44,7 @@
             }); // end of (jQuery).ajax
        
         });
-        
+        */
         
        
         $('input[name="referrer"]').val(document.referrer);
