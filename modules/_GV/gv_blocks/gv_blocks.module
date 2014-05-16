@@ -1745,6 +1745,7 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
     
     case 'home':
     case 'side':
+      dpm($data);
       $out = '';//$data['html_images']['value'];
       foreach ($data['images'] as $image) {
         $out .= $image;
