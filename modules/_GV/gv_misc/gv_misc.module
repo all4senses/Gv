@@ -3468,7 +3468,7 @@ function gv_misc_AddContentSection_form() {
 /**
  * Get a picture from a remote server.
  */
-function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = NULL)
+function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = NULL, $create_subdirs = FALSE)
 {
 	
     $curl = curl_init();
@@ -3519,8 +3519,10 @@ function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = 
 
     // write content to a file
     if ($file_local_abs) {
-      global $user;
-      if ($user->uid != 1) {
+//      global $user;
+//      if ($user->uid != 1) 
+//      {
+      if (!$create_subdirs) {
         file_put_contents($file_local_abs, $data);
       }
       else {
@@ -3532,32 +3534,24 @@ function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = 
 }
 
 
-
-
+/**
+ * Tries to save the file with creating all subdirs if they don't exist.
+ */
 function gv_misc_file_put_contents_createAllSubdirs($file_local_abs, $data) {
   
   $file_parts = explode('/', ltrim($file_local_abs, '/'));
   unset($file_parts[count($file_parts) - 1]);
-  dpm($file_parts);
   
   $current_path = NULL;
   foreach ($file_parts as $file_part) {
     $current_path .= '/' . $file_part;
-    dpm($current_path);
-    if (file_exists($current_path)) {
-      dpm('--- Exists');
-      
-    }
-    else {
-      dpm('--- NOT Exists');
+    if (!file_exists($current_path)) {
       //mkdir ( string $pathname [, int $mode = 0777 [, bool $recursive = false [, resource $context ]]] )
       mkdir($current_path);
     }
   }
   file_put_contents($file_local_abs, $data);
-  
 }
-
 
 
 /**
@@ -5673,13 +5667,6 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
   // Assure that the imagecache file is created already, or recreate it.
   $relative_path = str_replace('http://getvoip.com/', '', $relative_path);
   
-  dpm('$relative_path = ' . $relative_path);
-  if (file_exists($relative_path)) {
-    dpm('Exists');
-  }
-  else {
-    dpm('Not Exists');
-  }
   if ($force_recreate || !file_exists($relative_path)) {
     
     
@@ -5690,20 +5677,14 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
       $style_name = $path_part[0];
     }
     $style = image_style_load($style_name);
-    dpm($style);
     //$styled_file_path = 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
     //$original_file_path = 'sites/default/files/p/logos/Nextiva-Logo.png';
     $file_path = str_replace('styles/' . $style_name . '/public/', '', $relative_path);
-    dpm('$file_path = ' . $file_path);
     $source = gv_misc_getStreamUriFromRelativePath($file_path);
-    dpm('$source = ' . $source);
     $destination = image_style_path($style_name, $source);
-    dpm('$destination = ' . $destination);
     if (!image_style_create_derivative($style, $source, $destination)) {
-      dpm('Not generated');
       return FALSE;
     }
-    dpm('Generated');
     return 'updated';
   }
   
