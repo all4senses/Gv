@@ -3444,7 +3444,7 @@ function gv_misc_AddContentSection_form() {
 /**
  * Get a picture from a remote server.
  */
-function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs)
+function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = NULL)
 {
 	
     $curl = curl_init();
@@ -3494,7 +3494,9 @@ function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs)
     curl_close($curl);
 
     // write content to a file
-    file_put_contents($file_local_abs, $data);
+    if ($file_local_abs) {
+      file_put_contents($file_local_abs, $data);
+    }
 
     return null; //OK
 }
