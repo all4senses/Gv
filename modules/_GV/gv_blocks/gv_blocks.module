@@ -1146,10 +1146,10 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           
           //if ($output = file_get_contents($source_fpath)) {
           if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, NULL)) {
-            dpm('--- Got file ' . $source_fpath);
+            dpm('--- Got file ' . 'http://getvoip.com/' . $image_styled_url);
           }
           else {
-            dpm('--- No file ' . $source_fpath . ' ----- RESULT: ' . $output);
+            dpm('--- No file ' . 'http://getvoip.com/' . $image_styled_url . ' ----- RESULT: ' . $output);
           }
             
             
