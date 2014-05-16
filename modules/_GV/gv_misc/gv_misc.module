@@ -3536,7 +3536,7 @@ function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = 
 
 function gv_misc_file_put_contents_createAllSubdirs($file_local_abs, $data) {
   
-  $file_parts = explode('/', $file_local_abs);
+  $file_parts = explode('/', ltrim($file_local_abs, '/'));
   dpm($file_parts);
   file_put_contents($file_local_abs, $data);
   
