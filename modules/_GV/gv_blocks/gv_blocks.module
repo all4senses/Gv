@@ -1138,7 +1138,8 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           
           
           $image_styled_url = str_replace('http://getvoip.com/', '', image_style_url($style_name, $stream_path));
-                  
+          dpm($stream_path . ' => ' . $image_styled_url);  
+          
           // Assure that the imagecache file is created already, or recreate it.
           gv_misc_createCachedImageIfNotExists($image_styled_url);
           
