@@ -1138,31 +1138,31 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           
           
           $image_styled_url = str_replace('http://getvoip.com/', '', image_style_url($style_name, $stream_path));
-          dpm($stream_path . ' => ' . $image_styled_url);  
-          
-          $source_fpath = DRUPAL_ROOT . '/' . $image_styled_url;
-      
-          
-          $file_default_scheme = file_default_scheme();
-          $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
-  
-  
-          $file_local = $default_file_path . '/temp/aaa_' . $key_0 . '.jpg';
-          $file_local_abs = DRUPAL_ROOT . '/' . $file_local;
-  
-  
-          //if ($output = file_get_contents($source_fpath)) {
-          if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, $source_fpath)) {
-          //if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, $file_local_abs)) {
-            dpm('--- Got file ' . 'http://getvoip.com/' . $image_styled_url);
-          }
-          else {
-            dpm('--- No file ' . 'http://getvoip.com/' . $image_styled_url . ' ----- RESULT: ' . $output);
-          }
-            
+//          dpm($stream_path . ' => ' . $image_styled_url);  
+//          
+//          $source_fpath = DRUPAL_ROOT . '/' . $image_styled_url;
+//      
+//          
+//          $file_default_scheme = file_default_scheme();
+//          $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
+//  
+//  
+//          $file_local = $default_file_path . '/temp/aaa_' . $key_0 . '.jpg';
+//          $file_local_abs = DRUPAL_ROOT . '/' . $file_local;
+//  
+//  
+//          //if ($output = file_get_contents($source_fpath)) {
+//          if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, $source_fpath)) {
+//          //if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, $file_local_abs)) {
+//            dpm('--- Got file ' . 'http://getvoip.com/' . $image_styled_url);
+//          }
+//          else {
+//            dpm('--- No file ' . 'http://getvoip.com/' . $image_styled_url . ' ----- RESULT: ' . $output);
+//          }
+//            
             
           // Assure that the imagecache file is created already, or recreate it.
-          //gv_misc_createCachedImageIfNotExists($image_styled_url, $style_name, TRUE);
+          gv_misc_createCachedImageIfNotExists($image_styled_url, $style_name, TRUE);
           
           //$images[] = $main_image_html;
           $images[] = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
@@ -1177,10 +1177,10 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       $style_to_flush = $style_name;
       // Cut from function image_style_flush($style) {
       // Delete the style directory in each registered wrapper.
-      $wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_WRITE_VISIBLE);
-      foreach ($wrappers as $wrapper => $wrapper_data) {
-        file_unmanaged_delete_recursive($wrapper . '://styles/' . $style_to_flush);
-      }
+//      $wrappers = file_get_stream_wrappers(STREAM_WRAPPERS_WRITE_VISIBLE);
+//      foreach ($wrappers as $wrapper => $wrapper_data) {
+//        file_unmanaged_delete_recursive($wrapper . '://styles/' . $style_to_flush);
+//      }
       
       // TO-DO IMPORTANT! Need to regenerate file!
       // Assure that the imagecache file is created already, or recreate it.
