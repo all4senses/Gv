@@ -1141,6 +1141,7 @@ function gv_misc_testPage() {
   
   // $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
   
+  /*
   $output = 'blog/123';
   //$output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
   $output = preg_replace('|blog\/([0-9])$|s', 'blog?page=$1', $output);
@@ -1149,6 +1150,29 @@ function gv_misc_testPage() {
   //$output = preg_replace('|blog\/([^\/]*)|s', 'blog?page=$1', $output);
   $output = preg_replace('|blog\/([0-9])$|s', 'blog?page=$1', $output);
   dpm($output);
+  */
+  
+  
+  
+  
+  $file_default_scheme = file_default_scheme();
+  $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
+
+
+//  $file_local = $default_file_path . '/temp/aaa_' . $key_0 . '.jpg';
+//  $file_local_abs = DRUPAL_ROOT . '/' . $file_local;
+  
+  $image_styled_url = 'sites/default/files/styles/as_featured_in_sideblock/public/a/polycom-logo-h-cmyk_highres.jpg';
+  $file_local_abs = DRUPAL_ROOT . '/' . $image_styled_url;
+
+  $image_styled_url_full = 'http://getvoip.com/' . $image_styled_url;
+
+  if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser($image_styled_url_full, $file_local_abs)) {
+    dpm('--- Got file ' . $image_styled_url_full);
+  }
+  else {
+    dpm('--- No file ' . $image_styled_url_full . ' ----- RESULT: ' . $output);
+  }
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -3495,11 +3519,29 @@ function gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs = 
 
     // write content to a file
     if ($file_local_abs) {
-      file_put_contents($file_local_abs, $data);
+      global $user;
+      if ($user->uid != 1) {
+        file_put_contents($file_local_abs, $data);
+      }
+      else {
+        gv_misc_file_put_contents_createAllSubdirs($file_local_abs, $data);
+      }
     }
 
     return null; //OK
 }
+
+
+
+
+function gv_misc_file_put_contents_createAllSubdirs($file_local_abs, $data) {
+  
+  $file_parts = explode('/', $file_local_abs);
+  dpm($file_parts);
+  file_put_contents($file_local_abs, $data);
+  
+}
+
 
 
 /**
