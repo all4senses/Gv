@@ -1122,7 +1122,7 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
       if (preg_match_all('/<img[^>]+>/i', $edit['html_images']['value'], $matches)) {
         $found_image = TRUE;
         //dpm($matches);
-        foreach ($matches[0] as $i) {
+        foreach ($matches[0] as $key => $i) {
           preg_match_all('/(alt|title|src)="([^"]*)"/i',$i, $matches2);
           //dpm($matches2);
           foreach ($matches2[1] as $index => $key) {
@@ -1143,9 +1143,16 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
           $source_fpath = DRUPAL_ROOT . '/' . $image_styled_url;
       
           
-          
+          $file_default_scheme = file_default_scheme();
+          $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
+  
+  
+          $file_local = $default_file_path . '/temp/aaa_' . $key . '.jpg';
+          $file_local_abs = DRUPAL_ROOT . '/' . $file_local;
+  
+  
           //if ($output = file_get_contents($source_fpath)) {
-          if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, NULL)) {
+          if (!$output = gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/' . $image_styled_url, $file_local_abs)) {
             dpm('--- Got file ' . 'http://getvoip.com/' . $image_styled_url);
           }
           else {
