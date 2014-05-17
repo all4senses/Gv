@@ -6426,6 +6426,155 @@ function gv_blocks_get_requestQuoteForPage_v7_uk() {
 }
 
 
+
+/**
+ * Block Request a quote with a multistep form FOR lpv8,  Based on PAGE v1 - /request-voip-phone-system-quote.
+ */
+function gv_blocks_get_requestQuoteForPage_v8() {
+
+  drupal_add_library('system', 'ui.widget');
+
+  //drupal_add_library('system', 'effects.bounce');
+  
+  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  //drupal_add_js($path_to_custom_js . 'bbq.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  
+  drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
+  drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page.js');
+  
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+  
+  $out = '
+   <div id="requestQuoteFormWrapper">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        <form class="multipartForm bbq" method="post" action="/request" style="height: 300px; overflow: hidden;">
+
+                
+                <div id="fieldWrapper">
+                    
+                    <div class="step" id="phones_amt_section">
+                        
+                            <div class="question">How many phones do you need?<span class="form-required">*</span></div>
+                              <select name="phones_amt" id="phones_amt" class="input required">
+                                <!--<option value="">- Select a value -</option>-->
+                                <option value="1 - 4">1 - 4</option>
+                                <option value="5 - 10">5 - 10</option>
+                                <option selected="selected" value="11 - 20">11 - 20</option>
+                                <option value="21 - 50">21 - 50</option>
+                                <option value="More than 50">More than 50</option>
+                              </select>
+                            
+                            
+                            <div class="question">What is your current phone needs?<span class="form-required">*</span></div>
+                              <select name="q_for" id="q_for" class="input required">
+                                <!--<option value="">- Select a value -</option>-->
+                                <option value="Replace current phone system">Replace current phone system</option>
+                                <option value="Need a phone system for a new office">Need a phone system for a new office</option>
+                                <option value="Expand on our current phone system">Expand on our current phone system</option>
+                              </select>
+
+                            <div class="question">What type of quote do you need?<span class="form-required">*</span></div>
+                              <select name="q_type" id="q_type" class="input required">
+                                <!--<option value="">- Select a value -</option>-->
+                                <option value="Both phones and service">Both phones and service</option>
+                                <option value="Phone system only">Phone system only</option>
+                                <option value="Service provider only">Service provider only</option>
+                              </select>
+                            
+                            <div class="question">What is your buying time frame?<span class="form-required">*</span></div>
+                              <select name="buying_time" id="buying_time" class="input required">
+                                <!--<option value="">- Select a value -</option>-->
+                                <option value="ASAP">ASAP</option>
+                                <option value="1-3 Months">1-3 Months</option>
+                                <option value="3-6 Months">3-6 Months</option>
+                              </select>
+                            
+                            <!--<div id="on_error"></div>-->
+                            
+                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
+                    </div>
+                    
+                    <div class="step" id="personal_info">
+                        
+                            <div class="question">Fill out the form below:</div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before required">First Name<span class="form-required">*</span></div>
+                                <input class="after required name" name="firstname" id="firstname" />
+                            </div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before required">Last Name<span class="form-required">*</span></div>
+                                <input class="after required" name="lastname" id="lastname" />
+                            </div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before required">Company</div>
+                                <input class="after" name="company" id="company" />
+                            </div>
+
+                            <div class="wrapper">
+                              <div class="label_before required">Email<span class="form-required">*</span></div>
+                                <input class="after email required" name="email" id="email" />
+                            </div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before">Website</div>
+                                <input class="after" name="website" id="website" />
+                            </div>
+                            
+                            <div class="wrapper">
+                              <div class="label_before required">Phone<span class="form-required">*</span></div>
+                              <div id="phone">
+                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
+                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
+                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
+                               </div>
+                            </div>
+                         
+                           <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 2, '!second' => 2)) . '</div>-->
+                           <div class="protected"></div>
+                    </div>
+                    
+                </div>
+            
+                <div id="Navigation"> 							
+                        <input class="navigation_button" id="back" value="Back" type="reset" />
+                        <input class="navigation_button" id="next" value="No Risk Quote" type="submit" />
+                </div>
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="page" />
+                <input type="hidden" name="version" value="8" />
+                <input type="hidden" name="referrer" value="" />
+                <input type="hidden" name="url" value="" />
+                
+        </form>
+
+        <p id="data"></p>
+</div>
+<div class="block_footer"></div>
+  ';
+  
+  return $out;
+}
+
+
 /**
  * Block with providers banner ads.
  */

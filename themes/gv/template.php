@@ -902,6 +902,11 @@ function gv_preprocess_node(&$variables) {
         $body_classes_add['quote_page'] = 'quote-page v7 uk';
         $variables['theme_hook_suggestions'][] = 'node__quote__v7_uk';
     }
+    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v8' || $variables['node']->title == 'Request a Quote page v8 Final') ) {
+        global $body_classes_add;
+        $body_classes_add['quote_page'] = 'quote-page v8';
+        $variables['theme_hook_suggestions'][] = 'node__quote__v8';
+    }
     // Speed test page have its own template
     elseif($variables['node']->type == 'preface' && @$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
       $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
