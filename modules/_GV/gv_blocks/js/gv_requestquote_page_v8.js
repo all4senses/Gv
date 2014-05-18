@@ -27,8 +27,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'Submit & Get Quotes',
-          textNext: 'No Risk Quote',
+          textSubmit : 'Get My Free Quote',
+          textNext: "Let's Get Started",
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
