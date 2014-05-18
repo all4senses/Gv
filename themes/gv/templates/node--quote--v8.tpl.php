@@ -39,9 +39,10 @@
 
       <div class="full main">
         <!--<img src="/images/theme/lp7-back.jpg" style="position: absolute;"> -->
-        <div id="main-content">
+        <div id="main-content"> 
 
-              <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
+              <h2><span>Save Up To 65%</span> on an Award Winning Business Phone Solution!!</h2>
+              
               <div class="subtitle">In just a few minutes we will match you with VoIP vendors that offer the best systems for your exact needs.</div>
               <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): ?>
 
