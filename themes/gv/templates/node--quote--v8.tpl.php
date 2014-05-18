@@ -84,7 +84,7 @@
       <div class="full bottom">
 
         
-          <div id="bottom">
+
             <div class="left">
                   
               <div class="caption">Our Real-time Quotes Include:</div>
@@ -96,31 +96,14 @@
             </div>
             
             <div class="right">
-              <div>Some block</div>
+              <div>We've Been Featured In</div>
+              <img src="/images/theme/lp7-phone.png" />
             </div>
             
-          </div>
+
 
       </div> <!-- of Full --> 
       
-      
-      
-      <div class="full brands">
-          
-          <div id="brands">
-            <h2>Supported by Major Brands:</h2>
-            <?php
-                echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
-
-            ?>
-
-          </div>
-        
-      </div> <!-- of Full -->        
-
-  
-  
-
 
       <div class="full excerpt">
         
@@ -145,12 +128,6 @@
       <footer id="footer" role="contentinfo" class="region-footer clearfix">
         <div id="footer-inside">
 
-          <?php
-              //echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
-              //echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'footer_menu', 'no_subject' => TRUE, /*'class' => 'block-om-maximenu',*/ 'shadow' => FALSE), TRUE, '+31 day');
-          ?>
-
-
           <div class="c">GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.
             <div>© 2014 GetVoIP.com | All Rights Reserved</div>
           </div>
@@ -158,15 +135,6 @@
         </div>
       </footer> <!-- /#footer -->
   
-  <!--
-      <div class="full underfooter">
-        
-        <div id="underfooter-inside">
-          
-        </div>
-        
-      </div>
-  -->
   
 
   </div> <!-- End of <div id="quote-content"> -->
