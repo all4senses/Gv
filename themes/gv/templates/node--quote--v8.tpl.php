@@ -123,7 +123,7 @@
                 ?>
                 <div class="bottom-clear"></div> 
 
-          </div> <-- <div id="main-content"> -->
+          </div> <!-- <div id="main-content"> -->
 
       </div> <!-- of Full -->
 
