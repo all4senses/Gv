@@ -83,7 +83,7 @@
       
       <div class="full bottom">
 
-        
+        <div id="bottom-inside">
 
             <div class="left">
                   
@@ -100,7 +100,7 @@
               <img src="/images/theme/lp7-phone.png" />
             </div>
             
-
+        </div>
 
       </div> <!-- of Full --> 
       
