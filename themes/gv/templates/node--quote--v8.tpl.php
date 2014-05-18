@@ -45,73 +45,24 @@
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
-              
-              
           
-          
-          
-              <!--
-              <div style="display: none;">
-                <div id="exitIntent"> 
-                  <div id="line-1">Do You Want To Save BIG On</div>
-                  <div id="line-2">Reliable Business Phone Service?</div>
-
-                  <div id="line-3">Get Voice, Fax, Text and Video Conferencing for $19/mo.</div>
-
-                  <a href="/business" id="yes" target="_top">YES</a>
-                  <div id="no">NO - I like overpaying for my old phone service.</div>
-                </div>
-              </div>
-              -->
-              
-              <?php
-              
-                // Exit intent Ad popup block.
-                // 
-                //global $user; 
-                //if ($user->uid) 
-                {
-                  /*
-                  // Colorbox for popup window.
-                  //1, 3, 4, 
-                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-                  // Exit intent Ad block main js.
-                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
-                  */
-                }
-
-              
-              ?>
-          
-          
-          
-          
-
               <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): ?>
 
                   <div class="left final">
                     <?php  
-                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+                      echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
                     ?>
                   </div>
+              
               <?php else: ?>
-
-                  <!--<div id="verisign"></div> -->
                   
                   <div class="left">
-                    <div id="left-bottom">
-                      <?php echo gv_blocks_get_requestQuoteForPage_v8(); ?>
-                      <div class="bottom-clear"></div> 
-                    </div>
+                     <?php echo gv_blocks_get_requestQuoteForPage_v8(); ?>
                   </div>
 
                   <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
 
-
-                <?php endif; ?>
+              <?php endif; ?>
                 
                         
                 <div class="right">
@@ -121,7 +72,6 @@
                 <?php
                   echo render($content['metatags']);
                 ?>
-                <div class="bottom-clear"></div> 
 
           </div> <!-- <div id="main-content"> -->
 
