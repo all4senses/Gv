@@ -6517,41 +6517,28 @@ function gv_blocks_get_requestQuoteForPage_v8() {
                     
                     <div class="step" id="personal_info">
                         
-                            <div class="question">Fill out the form below:</div>
                             
-                            <div class="wrapper">
-                              <div class="label_before required">First Name<span class="form-required">*</span></div>
-                                <input class="after required name" name="firstname" id="firstname" />
-                            </div>
-                            
-                            <div class="wrapper">
-                              <div class="label_before required">Last Name<span class="form-required">*</span></div>
-                                <input class="after required" name="lastname" id="lastname" />
-                            </div>
-                            
-                            <div class="wrapper">
-                              <div class="label_before required">Company</div>
-                                <input class="after" name="company" id="company" />
-                            </div>
+                            <div class="text-h-group">
+                              <div class="wrapper input-border">
+                                <input class="after required firstname" name="firstname" id="firstname" title="First Name" />
+                              </div>
 
-                            <div class="wrapper">
-                              <div class="label_before required">Email<span class="form-required">*</span></div>
-                                <input class="after email required" name="email" id="email" />
+                              <div class="wrapper input-border second">
+                                <input class="after required lastname" name="lastname" id="lastname" title="Last Name" />
+                              </div>
                             </div>
                             
-                            <div class="wrapper">
-                              <div class="label_before">Website</div>
-                                <input class="after" name="website" id="website" />
+                            <div class="text-h-group">
+                              <div class="wrapper input-border">
+                                <input class="after email required" name="email" id="email" title="Email Address" />
+                              </div>
+
+                              <div class="wrapper phone input-border  second">
+                                  <input class="after required phone" name="phone" id="phone" value="" title="Phone Number" />
+                              </div>
                             </div>
                             
-                            <div class="wrapper">
-                              <div class="label_before required">Phone<span class="form-required">*</span></div>
-                              <div id="phone">
-                                <input class="after required phone" name="phone_1" id="phone_1" value="" />
-                                <input class="after required phone" name="phone_2" id="phone_2" value="" />
-                                <input class="after required phone" name="phone_3" id="phone_3" value="" />
-                               </div>
-                            </div>
+
                          
                            <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 2, '!second' => 2)) . '</div>-->
                            <div class="protected"></div>
