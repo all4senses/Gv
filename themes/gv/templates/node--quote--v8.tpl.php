@@ -24,7 +24,7 @@
 
           <div id="gv-logo">
             <?php 
-              echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
+              echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
             <!--<div class="ps"><span>Over 100,000 Quotes Delivered</span> Average business savings of $240/mo</div> -->
           </div>
@@ -41,13 +41,13 @@
 
 
       <div class="full main">
-        <img src="/images/theme/lp8-back.jpg" style="position: absolute;">
+        <img src="/images/theme/lp4-back.jpg" style="position: absolute;">
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
               <img id="q-image" src="/images/theme/lp8-phone.png" />
               
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lpv8-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lpv4-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
                     <div class="left">
                             
@@ -194,7 +194,7 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="/images/theme/lp-slider-logos-v8.png" alt="Supported by Major VoIP Brands" />';
+                echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
 
             ?>
 
