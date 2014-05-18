@@ -42,8 +42,8 @@
         <div id="main-content"> 
 
               <h2><span>Save Up To 65%</span> on an Award Winning Business Phone Solution!!</h2>
-              
               <div class="subtitle">In just a few minutes we will match you with VoIP vendors that offer the best systems for your exact needs.</div>
+
               <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): ?>
 
                   <div class="left final">
@@ -86,10 +86,10 @@
             <div class="left">
                   
               <div class="caption">Our Real-time Quotes Include:</div>
-              <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
-              <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
-              <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div>
-              <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
+              <div class="text bullet v1"><strong>Lowest Rates & Exclusive Discounts</strong><div>Lowest Rates & Exclusive Discounts</div></div>
+              <div class="text bullet v2"><strong>Personalized Quotes From Top Providers</strong><div>Personalized Quotes From Top Providers</div></div>
+              <div class="text bullet v3"><strong>No Contracts, Risk Free Guarantee</strong><div>No Contracts, Risk Free Guarantee</div></div>
+              <div class="text bullet v4"><strong>Intuitive Feature-Loaded HD Phones</strong><div>Intuitive Feature-Loaded HD Phones</div></div>
                             
             </div>
             
@@ -109,7 +109,7 @@
             <!--<h1>We identify and rank the best business VoIP providers and phone systems.</h1>-->
 
             <div class="quotes one">
-              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
+              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature.<div></div></div>
               <div class="source"><span class="image"></span><div>Chris Rabbu</div> VP of Marketing at Vonage, Inc.</div>
             </div>
             <div class="bottom-clear"></div> 
