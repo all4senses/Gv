@@ -23,10 +23,7 @@
       <div class="full logo">
 
           <div id="gv-logo">
-            <?php 
-              echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
-            ?>
-            <!--<div class="ps"><span>Over 100,000 Quotes Delivered</span> Average business savings of $240/mo</div> -->
+            <div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /></div>
           </div>
         
           
@@ -66,7 +63,7 @@
                 
                         
                 <div class="right">
-                    <img src="/images/theme/lp7-phone.png" />
+                    <img src="/images/theme/lp8-image.png" />
                     <div>Our team of 59 unbiased VoIP analysts have reviewed <span>108</span> business phone systems.</div>
                 </div>
                 
@@ -97,7 +94,7 @@
             
             <div class="right">
               <div>We've Been Featured In</div>
-              <img src="/images/theme/lp7-phone.png" />
+              <img src="/images/theme/lp7-image2.png" />
             </div>
             
         </div>
@@ -128,9 +125,8 @@
       <footer id="footer" role="contentinfo" class="region-footer clearfix">
         <div id="footer-inside">
 
-          <div class="c">GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.
-            <div>© 2014 GetVoIP.com | All Rights Reserved</div>
-          </div>
+          <div class="left">GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.</div>
+          <div class="right"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /><div>© 2014 GetVoIP.com | All Rights Reserved</div></div>
 
         </div>
       </footer> <!-- /#footer -->
