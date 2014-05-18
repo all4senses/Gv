@@ -45,7 +45,7 @@
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
-          
+              <div class="subtitle">In just a few minutes we will match you with VoIP vendors that offer the best systems for your exact needs.</div>
               <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): ?>
 
                   <div class="left final">
@@ -66,7 +66,8 @@
                 
                         
                 <div class="right">
-                    <img id="q-image" src="/images/theme/lp7-phone.png" />
+                    <img src="/images/theme/lp7-phone.png" />
+                    <div>Our team of 59 unbiased VoIP analysts have reviewed <span>108</span> business phone systems.</div>
                 </div>
                 
                 <?php
