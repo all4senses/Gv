@@ -45,37 +45,12 @@
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
-              <img id="q-image" src="/images/theme/lp7-phone.png" />
               
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lpv8-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
-
-                    <div class="left">
-                            
-                            <div class="caption">Our Real-time Quotes Include:</div>
-                            <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
-                            <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
-                            <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div>
-                            <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
-                            
-                            <!--
-                            <div class="caption">Benefits & Features:</div>
-                            <div class="text bullet v1"><strong>Best Rates & Exclusive Offers</strong></div>
-                            <div class="text bullet v2"><strong>Custom Quotes From Top Providers</strong></div>
-                            <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
-                            <div class="text bullet v4"><strong>Feature Loaded HD Phones</strong></div>
-                            -->
-
-                            
-                    </div>
-
-              </div>
+              
           
           
           
-          
-          
-          
-          
+              <!--
               <div style="display: none;">
                 <div id="exitIntent"> 
                   <div id="line-1">Do You Want To Save BIG On</div>
@@ -87,7 +62,8 @@
                   <div id="no">NO - I like overpaying for my old phone service.</div>
                 </div>
               </div>
-          
+              -->
+              
               <?php
               
                 // Exit intent Ad popup block.
@@ -116,7 +92,7 @@
 
               <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): ?>
 
-                  <div class="right final">
+                  <div class="left final">
                     <?php  
                     echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
                     ?>
@@ -125,24 +101,29 @@
 
                   <!--<div id="verisign"></div> -->
                   
-                  <div class="right">
-                    <div id="right-bottom">
+                  <div class="left">
+                    <div id="left-bottom">
                       <?php echo gv_blocks_get_requestQuoteForPage_v8(); ?>
                       <div class="bottom-clear"></div> 
                     </div>
                   </div>
 
-                <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
+                  <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
 
 
                 <?php endif; ?>
-
+                
+                        
+                <div class="right">
+                    <img id="q-image" src="/images/theme/lp7-phone.png" />
+                </div>
+                
                 <?php
                   echo render($content['metatags']);
                 ?>
                 <div class="bottom-clear"></div> 
 
-          </div>
+          </div> <-- <div id="main-content"> -->
 
       </div> <!-- of Full -->
 
@@ -151,25 +132,22 @@
       
       <div class="full bottom">
 
+        
           <div id="bottom">
-            <div class="text first">
-              <span></span>
-              <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
-              <div><?php echo $initialQuotePage_node->q_data['bottom_text']['left_text']; ?></div>
+            <div class="left">
+                  
+              <div class="caption">Our Real-time Quotes Include:</div>
+              <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
+              <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
+              <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div>
+              <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
+                            
             </div>
-            <div class="text">
-              <span></span>
-              <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['center_title']; ?></h3>
-              <div><?php echo $initialQuotePage_node->q_data['bottom_text']['center_text']; ?></div>
+            
+            <div class="right">
+              <div>Some block</div>
             </div>
-            <div class="text last">
-              <span></span>
-              <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['right_title']; ?></h3>
-              <div><?php echo $initialQuotePage_node->q_data['bottom_text']['right_text']; ?></div>
-            </div>
-
-
-            <div class="bottom-clear"></div>
+            
           </div>
 
       </div> <!-- of Full --> 
@@ -181,24 +159,10 @@
           <div id="brands">
             <h2>Supported by Major Brands:</h2>
             <?php
-                /*
-                if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
-                  echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
-                 
-                  $image_style = 'landing_page_logos_slider_gray'; //'thumbnail'
-                  foreach ($initialQuotePage_node->field_q_image2['und'] as $brand) {
-                    echo '<li>', '<table><tbody><tr><td>', 
-                            theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => $image_style, 'alt' => $brand['alt'], 'title' => $brand['title'])),
-                        '</td></tr></tbody></table>', '</li>'; 
-                  }
-                  echo '</ul>';
-                }
-                */
                 echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
 
             ?>
 
-            <div class="bottom-clear"></div> 
           </div>
         
       </div> <!-- of Full -->        
