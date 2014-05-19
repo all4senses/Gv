@@ -26,7 +26,7 @@
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
-				 	focusFirstInput: true,
+				 	//focusFirstInput: true,
           textSubmit : 'Get My Free Quote',
           textNext: "Let's Get Started",
           
