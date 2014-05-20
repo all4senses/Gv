@@ -208,6 +208,22 @@
               connection: Drupal.t('Make your choice!'),
               */
              
+             
+             
+              //Works
+              firstname: Drupal.t('First Name is required'),
+              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
+              phone: Drupal.t('Enter a valid phone number'),
+              //company: Drupal.t('Company name is required'),
+
+
+              // Works!
+              /*
+              firstname: {
+                notEqualsTo: Drupal.t("xxxx")
+              },
+              */
+             
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
                 email: Drupal.t("Email format must be name@domain.com")
