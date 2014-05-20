@@ -13,6 +13,55 @@
 				maxHeight: 300
   			});
        
+       
+       
+       
+       
+        $('input[id="phone"]').keydown(function (event) { 
+            
+            //console.log($(this).val());
+            //console.log(event.keyCode);
+            
+            //var l = $(this).val().length;
+            if( !(     event.keyCode == 8                                // backspace
+                    || event.keyCode == 9
+                    || event.keyCode == 46                              // delete
+                    || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
+
+                    || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+                  
+                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190 || event.keyCode == 173)    // space, dash, dot
+                 )   
+              ) {
+                    event.preventDefault();     // Prevent character input
+            }
+
+        });        
+        
+        $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
+            
+            //console.log($(this).val());
+            //console.log(event.keyCode);
+            
+            if( 
+                    (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
+                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
+                    || (event.keyCode == 186) // :
+                    || (event.keyCode == 191) // /
+                    || (event.keyCode == 190) // .
+              ) {
+                    event.preventDefault();     // Prevent character input
+            }
+
+        });
+        
+        
+       jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
+          return !(this.optional(element) || value === param);
+        //}, jQuery.format("You must not enter {0}"));
+        }, "All fields with * are required");
+
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')
@@ -44,7 +93,7 @@
           
           validationOptions: {
             groups: {
-              username: "firstname lastname email phone_1 phone_2 phone_3"
+              username: "firstname lastname email phone"
               ,first_step: "phones_amt q_for q_type buying_time"
             },
             errorPlacement: function(error, element) {
@@ -55,7 +104,7 @@
                 error.insertAfter(".step");
               
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
-              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone_1" || element.attr("name") == "phone_2" || element.attr("name") == "phone_3")
+              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 //alert(error.html() +  ': ' + element.prev().html());
                 error.insertAfter("#phone");
                 //alert(Drupal.t('All fields with * are required'));
@@ -96,20 +145,22 @@
               buying_time: "required",
               connection: "required",
              
-              phone_1: {
-                number: true,
-                minlength: 3,
-                maxlength: 3
+             firstname: {
+                required: true,
+                minlength: 2,
+                notEqualsTo: $('input[id="firstname"]').attr('title')
 							},
-              phone_2: {
-                number: true,
-                minlength: 3,
-                maxlength: 3
+              lastname: {
+                required: true,
+                minlength: 2,
+                notEqualsTo: $('input[id="lastname"]').attr('title')
 							},
-              phone_3: {
-                number: true,
-                minlength: 4,
-                maxlength: 4
+              phone: {
+                required: true,
+                //number: true,
+                minlength: 10,
+                maxlength: 15,
+                notEqualsTo: $('input[id="phone"]').attr('title')
 							}
               // works
               /* 
