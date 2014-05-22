@@ -753,13 +753,13 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     
     if ($variables['node']->type == 'preface') {
-      $pages_with_separate_tpl = array('page-compare-business-voip-providers', 'page-compare-pbx-voip-providers', 'page-compare-residential-voip-providers', 'page-compare-sip-voip-providers', 'page-compare-cc-voip-providers', 'view-reviews-page_all_reviews', 'page-reseller-providers', 'page-compare-ifa-voip-providers');
+      $pages_with_separate_tpl = array('page-compare-business-voip-providers', 'page-compare-pbx-voip-providers', 'page-compare-residential-voip-providers', 'page-compare-sip-voip-providers', 'page-compare-cc-voip-providers', 'view-reviews-page_all_reviews', 'page-reseller-providers', 'page-compare-ifa-voip-providers', 'web-conferencing-voip-providers');
       if (in_array(@$variables['node']->field_preface_key['und'][0]['value'], $pages_with_separate_tpl) && arg(2) != 'edit') {
         $variables['theme_hook_suggestions'][] = 'page__compare_providers';
       }
     }
             
-    if ($variables['node']->type == 'quote') {
+    elseif ($variables['node']->type == 'quote') {
       drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
     }
     
