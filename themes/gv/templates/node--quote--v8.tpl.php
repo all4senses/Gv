@@ -94,7 +94,7 @@
               <div class="caption">Our Real-time Quotes Include:</div>
               <div class="text bullet v1"><strong>Lowest Rates & Exclusive Discounts</strong><div>Discover the lowest possible rates from industry leaders.</div></div>
               <div class="text bullet v2"><strong>Personalized Quotes From Top Providers</strong><div>Get quotes from verified providers that will meet your needs.</div></div>
-              <div class="text bullet v3"><strong>No Contracts, Risk-Free Guarantee</strong><div>We gurantee each service to be contract free and hassle free.</div></div>
+              <div class="text bullet v3"><strong>No Contracts, Risk-Free Guarantee</strong><div>We guarantee each service to be contract free and hassle free.</div></div>
               <div class="text bullet v4"><strong>Free Trials on All-inclusive Phone Systems</strong><div>Voice, fax, text, web collaboration, and HD Video Meetings.</div></div>
                             
             </div>
