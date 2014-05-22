@@ -132,6 +132,10 @@ function gv_blocks_block_info() {
     'info' => 'Bottom section of CC providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['wc_provider_p_bottom'] = array(
+    'info' => 'Bottom section of WC providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   
   $blocks['best_voip_p_bottom'] = array(
@@ -506,6 +510,10 @@ function gv_blocks_block_view($delta = '') {
     case 'cc_provider_p_bottom':
       $block['subject'] = 'Bottom section of CC providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-cc-voip-providers');
+      break;
+    case 'wc_provider_p_bottom':
+      $block['subject'] = 'Bottom section of WC providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('web-conferencing-voip-providers');
       break;
     
     
