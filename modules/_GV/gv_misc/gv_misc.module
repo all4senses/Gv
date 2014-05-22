@@ -4907,7 +4907,7 @@ function gv_misc_makeRequest_ajax() {
      ) {
     $output = t('<div class="not-verified"><p class="error">The form is not filled!</p><p>Please, reload the page and try again.</p></div>'); 
   }
-  elseif ($post['source'] == 'block' && ( (empty($post['ct_captcha']) && !empty($_SESSION['securimage_code_value']['default']) ) || strtolower($post['ct_captcha']) != strtolower($_SESSION['securimage_code_value']['default']) )){
+  elseif ($post['source'] == 'block' && ( (empty($post['ct_captcha']) && !empty($_SESSION['securimage_code_value']['default']) ) || ( isset($post['ct_captcha']) && isset($_SESSION['securimage_code_value']['default']) && strtolower($post['ct_captcha']) != strtolower($_SESSION['securimage_code_value']['default'])   ) )){
     $output = t('<div class="not-verified"><p class="error">A Captcha code is wrong!</p><p> Please, reload the page and try again.</p><div class="not-verified">'); 
   }
   elseif (!isset($post['token']) /*|| !isset($_SESSION['requestQuoteToken']) || $post['token'] != $_SESSION['requestQuoteToken']*/) {
@@ -5353,7 +5353,7 @@ function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissi
   
   // Test submissions.
   
-  if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || $submission['Company'] == 'RC') {
+  if ($submission['First Name'] == 'RingCentral' || $submission['First Name'] == 'ringcentral' || @$submission['Company'] == 'RC') {
     // Test for Nextiva
     drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
 
