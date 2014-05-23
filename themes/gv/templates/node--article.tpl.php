@@ -57,8 +57,6 @@
     //echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
             //. '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>'
     
-    dpm($extra_data);
-    dpm($node);
     echo $extra_data['teaser_main_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>' 
             ;
 
