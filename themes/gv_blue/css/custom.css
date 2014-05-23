@@ -56,9 +56,14 @@ padding: 0 5px 0 0px;
 margin: 0 !important;
 }
 
-ul.nice-menu-main-menu li  li {background: none !important; position: static !important; padding: 0 !important;}
+ul.nice-menu-main-menu li.last {
+  background: none !important;
+}
 
-ul.nice-menu-main-menu li:hover {
+
+ul.nice-menu-main-menu li li {background: none !important; position: static !important; padding: 0 !important;}
+
+ul.nice-menu-main-menu li:hover, ul.nice-menu-main-menu li.last:hover {
 background: #ecf3f5 !important;
 position: relative;
 left: -4px;
