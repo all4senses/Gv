@@ -49,7 +49,7 @@
     $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
     $teaser_data = gv_misc_getArticleTeaserData('all', $body, $node->nid, 270);
     */
-    $author_name = gv_misc_getNodeAuthor($node);
+    //$author_name = gv_misc_getNodeAuthor($node);
     /*
     echo $teaser_data['home_teaser_image'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
             . '<div class="teaser">' . $teaser_data['teaser_only'] . '</div>';
@@ -57,6 +57,8 @@
     //echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
             //. '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>'
     
+    dpm($extra_data);
+    dpm($node);
     echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>' 
             ;
 
