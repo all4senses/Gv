@@ -42,7 +42,7 @@
         <div id="main-content"> 
 
               
-              <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): ?>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-uk-final'): ?>
 
                   <div class="left final">
                     
@@ -146,7 +146,7 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/lpv8-uk-final'): /* If we are on the final page, after the submission */ ?> 
 
           <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lpv8'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
