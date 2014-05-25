@@ -61,7 +61,7 @@
                     <h2><span>Save Up To 65%</span> on an Award Winning Business Phone Solution!</h2>
                     <div class="subtitle">In just a few minutes we will match you with VoIP vendors that offer the best systems for your exact needs.</div>
 
-                     <?php echo gv_blocks_get_requestQuoteForPage_v8(); ?>
+                     <?php echo gv_blocks_get_requestQuoteForPage_v8_uk(); ?>
                   </div>
 
                   <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
