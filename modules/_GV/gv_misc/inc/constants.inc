@@ -276,7 +276,7 @@ $remoteProvidersSubmissionsSettings = array(
   '8x8' => array('function' => 'gv_misc_SendRequestTo8x8', 'allowed_sources' => array('page_4', 'page_7', 'page_8'/*, 'page_5-IScope'*/)),
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array('page_4', 'page_7', 'page_8'/*, 'page_5-IScope'*/)),
   
-  'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk')),
+  'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk')),
 );
 
 define('REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS', serialize($remoteProvidersSubmissionsSettings));

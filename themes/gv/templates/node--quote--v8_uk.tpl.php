@@ -196,11 +196,11 @@
             
             
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/lpv8";</script>
+            <script>top.location.href="http://getvoip.com/lpv8-uk";</script>
           <?php endif;*/?>
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'):
-// So we are on the lending page '/lpv8' 
+<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lpv8-uk-final'):
+// So we are on the lending page '/lpv8-uk' 
 ?>
     
   <!-- Google Code for Remarketing tag -->
@@ -222,7 +222,7 @@
   </noscript>
   
   
-<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lpv8-final'):?>
+<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lpv8-uk-final'):?>
   
 
   <script src="//cdn.optimizely.com/js/786756874.js"></script>
