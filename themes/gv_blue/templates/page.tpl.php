@@ -196,7 +196,8 @@
    <div id="footer-inside">
 
     <?php
-        if (!$hide_follow_us_links) {
+        //if (!$hide_follow_us_links) 
+          {
           echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
         }
         echo render($page['footer']);
