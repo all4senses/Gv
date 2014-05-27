@@ -38,7 +38,12 @@ h1{margin-top: 5px; margin-bottom: 5px; line-height: 40px;}
 strong{font-weight: bold;}
 em, p em{font-style: italic;}
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: raleway;}
+
+
 h2, .h2, h4 {line-height: 25px;}
+
+
 
 a{color: #478AFD;}
 a:visited{color: #478AFD;}
@@ -226,7 +231,7 @@ ul.header-links a,
 
 #block-gv-blocks-sidebar-share-block .content {padding: 10px 10px 0 10px; overflow: hidden;}
 
-#block-gv-blocks-side-social-links .content {padding-left: 10px;}
+#block-gv-blocks-side-social-links .content {padding: 20px 0 15px 10px;}
 #block-gv-blocks-side-social-links li {clear: none;}
 #block-gv-blocks-side-social-links li a {margin: 0 5px 5px 0; width: 40px; height: 37px; float: left; padding: 0 !important;}
 
@@ -1050,16 +1055,17 @@ body.sidebar-second .sidebar{float: right; margin: 0 18px 0 0; padding: 18px 0 0
 
 .sidebar .top-line {background: url("images/sprite-04.png") no-repeat scroll 0 -2px transparent; height: 5px; margin: 12px 0 10px; width: 100%;}
 
-.sidebar .block, 
-#highlighted .block#block-gv-blocks-request-quote-v6 {box-shadow: 1px 3px 10px -4px black; border: 1px solid orange; overflow: hidden; background: white; border-radius: /*5px*/0; margin-bottom: 12px; position: relative; padding-bottom: 10px; z-index: 1; margin-top: 15px;}
-
-.sidebar .block {box-shadow: none; border: 1px solid lightgray; border-radius: 0; background: #fafafa;}
+.sidebar .block {border: none; overflow: hidden; position: relative; font-family: raleway;}
 
 .sidebar .block.first {margin-top: 14px;}
 /*.front .sidebar .block.first {margin-top: 25px;}*/
 
 
-.sidebar .block-title{background: url("images/sprite-04.png") no-repeat 0px -720px #fbd8ba; border-radius: 5px 5px 0 0; padding: 10px; margin: 0; font-size: 16px; font-weight: bold; text-transform: capitalize; line-height: 18px; color: white;}
+.sidebar .block-title {padding: 10px; margin: 0;}
+
+.sidebar h3.block-title {background: url(/sites/all/themes/gv_blue/css/images/sprite-04.png) no-repeat 0px -1889px transparent; color: #c2c2c2; padding: 23px 10px 7px 10px; border-radius: 0; font-size: 19px;}
+
+
 .sidebar .block li {list-style: none; clear: both;}
 
 .block-thumb{float: left; margin: 10px 10px 0 5px; min-height: 60px;}
@@ -1107,7 +1113,9 @@ body.one-sidebar.sidebar-second .sidebar{background: none; padding: 10px 10px 0 
 
 
 .sidebar #block-views-articles-block-1 .content,
-.sidebar .block .content{padding-top: 5px;}
+.sidebar .block .content{padding-top: 5px; border: 1px solid lightgray; border-radius: 0 0 5px 5px;}
+
+.sidebar #block-views-articles-block-1 .content .content, .sidebar .block .content .content {border: none;}
 
 
 
@@ -2947,17 +2955,9 @@ a.yt-direct:active{outline: none;}
 
 
 
-/* new fonts for preface and block titles */
-.sidebar h3.block-title{font-family: arial; font-size: 20px; font-weight: normal; text-shadow: 1px 1px 1px gray;}
-
-.sidebar h3.block-title {background: url(/sites/all/themes/gv_blue/css/images/sprite-04.png) no-repeat 0px -1122px transparent; font-weight: normal; text-shadow: none; color: #444444; padding: 23px 10px 7px 10px; border-radius: 0; font-size: 19px;}
-
-
 
 /* Newsletters subscribe */
-#block-gv-blocks-newsletters-subscribe{border: 1px solid #3677d1;}
-#block-gv-blocks-newsletters-subscribe h3{/*background: url('images/sprite-04.png') no-repeat 0px -625px lightBlue;*/}
-#block-gv-blocks-newsletters-subscribe .content{padding: 3px 0 0 10px;}
+#block-gv-blocks-newsletters-subscribe .content {padding: 10px 0 20px 10px;}
 #block-gv-blocks-newsletters-subscribe .content .title{color: gray; font-size: 15px; margin-bottom: 7px; font-family: arial;}
 #block-gv-blocks-newsletters-subscribe .content .form-item-email{/*width: 150px; */float: left; margin: 0;}
 
