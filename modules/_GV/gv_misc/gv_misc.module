@@ -9705,7 +9705,7 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   
   $form['title'] = array(
     //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
-    '#markup' => '<div class="title">Stay informed - <br>Sign up for our newsletter.</div>',
+    '#markup' => '<div class="title"><span>Stay informed - </span><br>Sign up for our newsletter.</div>',
       
   );
   
@@ -9717,7 +9717,7 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
     //'#element_validate' => array('gv_misc_validate_email'),
     '#required' => TRUE,
     //'#access' => $user->uid ? FALSE : TRUE,
-    '#attributes' => array('title' => 'Email'),
+    '#attributes' => array('title' => 'EMAIL'),
   );
   
   $form['actions'] = array('#type' => 'actions');
