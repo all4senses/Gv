@@ -9,7 +9,7 @@
         <?php/* if ($block->region == 'sidebar_second'): ?>
           <span class="block-icon pngfix"></span>
         <?php endif; */?>
-    <?php echo '<span>' . $title . '</span></' . $h_tag . '>'; ?>
+    <?php echo '<span class="block-icon">' . $title . '</span></' . $h_tag . '>'; ?>
   <?php endif;?>
   <?php print render($title_suffix); ?>
 
