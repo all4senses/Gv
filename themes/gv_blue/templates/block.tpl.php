@@ -6,10 +6,10 @@
   <?php if ($title): ?>
     <?php $h_tag = in_array($block->region, array('content', 'content_wide', 'above_footer')) ? 'h2' : 'h3'; ?>
     <<?php echo $h_tag . ' ' . $title_attributes; ?>>
-        <?php if ($block->region == 'sidebar_second'): ?>
+        <?php/* if ($block->region == 'sidebar_second'): ?>
           <span class="block-icon pngfix"></span>
-        <?php endif;?>
-    <?php echo $title . '</' . $h_tag . '>'; ?>
+        <?php endif; */?>
+    <?php echo '<span>' . $title . '</span></' . $h_tag . '>'; ?>
   <?php endif;?>
   <?php print render($title_suffix); ?>
 
