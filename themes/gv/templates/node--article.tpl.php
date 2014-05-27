@@ -460,7 +460,8 @@
                     */  ?>
                       
                     <?php 
-                      echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
+                      //echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
+                      echo gv_blocks_getSidebarShareStaticBlock($node, '', 'bottom');
                     ?>  
                     
                     </div>
