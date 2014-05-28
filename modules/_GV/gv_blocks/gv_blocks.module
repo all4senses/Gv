@@ -1358,11 +1358,11 @@ function gv_blocks_getBlogTopRotated() {
   
   $posts = $query->execute()->fetchAllAssoc('nid');
   
-  foreach ($posts as $nid => $post) {
-    $posts[$nid]->field_extra_data_value = unserialize($post->field_extra_data_value);
-    $posts[$nid]->main_image_url = $posts[$nid]->field_extra_data_value['main_image']['src_beautify'];
-  }
-  
+//  foreach ($posts as $nid => $post) {
+//    $posts[$nid]->field_extra_data_value = unserialize($post->field_extra_data_value);
+//    $posts[$nid]->main_image_url = $posts[$nid]->field_extra_data_value['main_image']['src_beautify'];
+//  }
+//  
   dpm($posts);
   
   $ui_tabs_nav = '';
