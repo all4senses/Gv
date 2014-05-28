@@ -1346,9 +1346,12 @@ function gv_blocks_getBlogTopRotated() {
 
   
   $query = db_select('node', 'n');
-  $query->fields('n', array('nid'));
+  
   $query->condition('n.type', 'blog_post');
   $query->condition('n.status', 1);
+  $query->leftJoin('field_data_field_extra_data', 'd', 'd.entity_id = n.nid');
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('d', array('field_extra_data_value'));
   $query->orderBy('n.created', 'DESC');
   // 4 pages
   //$query->range(0, 8);
@@ -1357,8 +1360,12 @@ function gv_blocks_getBlogTopRotated() {
   
   $query->range(0, 9);
   
+  $posts = $query->execute()->fetchAllAssoc('nid');
   
-  $reviews = $query->execute()->fetchCol();
+  dpm($posts);
+  
+  return 'xxx';
+  //$reviews = $query->execute()->fetchCol();
   
   //dpm($reviews);
   
