@@ -1353,10 +1353,6 @@ function gv_blocks_getBlogTopRotated() {
   $query->fields('n', array('nid', 'title'));
   $query->fields('d', array('field_extra_data_value'));
   $query->orderBy('n.created', 'DESC');
-  // 4 pages
-  //$query->range(0, 8);
-  // 3 pages
-  //$query->range(0, 6);
   
   $query->range(0, 9);
   
@@ -1369,21 +1365,22 @@ function gv_blocks_getBlogTopRotated() {
   
   dpm($posts);
   
-  return 'xxx';
-  //$reviews = $query->execute()->fetchCol();
-  
-  //dpm($reviews);
-  
   $ui_tabs_nav = '';
   $fragments = '';
   
-  // 4 pages
-  //for($i = 0; $i < 7; $i += 2) {
-  // 3 pages
-  //for($i = 0; $i < 5; $i += 2) {
+  $i = 0;
+  foreach ($posts as $nid => $post) {
+      $extra_data = unserialize($post->field_extra_data_value);
+      $main_image_url = $extra_data['main_image']['src_beautify'];
+      
+      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info"><img src="' . $main_image_url . '" /><div class="title">' . $post->title . '</div></div></div>';
+      $i++;
+  }
+
   
+  /*
   for($i = 0; $i < 8; $i += 3) {  
-      //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
       $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
       $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
       $count = $class = NULL;
@@ -1408,23 +1405,15 @@ function gv_blocks_getBlogTopRotated() {
         
         $count++;
       }
-      //dpm($node_views);
-      //$node_views = node_view_multiple($nodes, 'home_teaser_rotated');
-      
-      //$ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '">' . $i . '</a></li>';
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
       $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . drupal_render($node_views) . '</div></div>';
   }
-  //$key += 1; 
-  //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
-  //$blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
-  //return '<div id="p-rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';  
-  
+*/  
   $out = '<div id="p-rotator-wrapper"><div id="prev" class="button">Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button">Next</div></div>'
           . l('View All', 'blog', array('attributes' => array('class' => array('view-all'))))
         ;
   
-  $out .= gv_blocks_render_block('views', '785f423dc4ad7c3130530376c18daf4b');
+  //$out .= gv_blocks_render_block('views', '785f423dc4ad7c3130530376c18daf4b');
   
   return $out;
 }
