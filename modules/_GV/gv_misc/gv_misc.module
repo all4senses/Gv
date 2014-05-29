@@ -8201,7 +8201,11 @@ function gv_misc_views_pre_render(&$view) {
         $view->build_info['title'] = $preface_node->title;
       }
       
+      
       dpm('$key ======> ' . $key);
+      if ($key == 'view-blog-page') {
+        $view->build_info['title'] = NULL;
+      }
     }
     
     
