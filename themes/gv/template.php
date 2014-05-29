@@ -1181,7 +1181,9 @@ function gv_preprocess_html(&$variables) {
   // Works!
 
   if ($user->uid == 1 || ($user->uid && in_array('administrator', $user->roles)) ) {
-    $variables['classes_array'][] = 'admin';
+    if (!in_array('admin', $variables['classes_array'])) {
+      $variables['classes_array'][] = 'admin';
+    }
   }
   elseif ($user->uid && in_array('writer', $user->roles) ) {
     $variables['classes_array'][] = 'writer';
@@ -1199,7 +1201,14 @@ function gv_preprocess_html(&$variables) {
   //Uncomment to add a classes for the browser and platform.
   //$variables['classes_array'][] = css_browser_selector();
 
-  dpm($_GET);
+  //dpm($_GET);
+  if (!isset($_GET['page'])) {
+    $variables['classes_array'][] = 'paginated page-' . $_GET['page'];
+  }
+  else {
+    $variables['classes_array'][] = 'not-paginated';
+  }
+  
 }
  
 
