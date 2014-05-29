@@ -1378,7 +1378,7 @@ if (isset($_GET['page'])) {
       $main_image_url = $extra_data['main_image']['src_beautify'];
       
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info"><img src="' . $main_image_url . '" /><div class="title">' . $post->title . '</div></div></div>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info"><img src="' . $main_image_url . '" /><div class="title">' . l($post->title, 'node/' .  $post->nid) . '</div></div></div>';
       $i++;
   }
 
@@ -1413,7 +1413,7 @@ if (isset($_GET['page'])) {
       $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . drupal_render($node_views) . '</div></div>';
   }
 */  
-  $out = '<div id="p-rotator-wrapper"><div id="prev" class="button">Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button">Next</div></div>'
+  $out = '<div id="p-rotator-wrapper"><div id="prev" class="button"><div>Prev</div></div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button"><div>Next</div></div></div>'
           //. l('View All', 'blog', array('attributes' => array('class' => array('view-all'))))
         ;
   
