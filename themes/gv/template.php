@@ -1202,7 +1202,7 @@ function gv_preprocess_html(&$variables) {
   //$variables['classes_array'][] = css_browser_selector();
 
   //dpm($_GET);
-  if (!isset($_GET['page'])) {
+  if (isset($_GET['page'])) {
     $variables['classes_array'][] = 'paginated page-' . $_GET['page'];
   }
   else {
