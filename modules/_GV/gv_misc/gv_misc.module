@@ -8138,6 +8138,7 @@ function gv_misc_views_pre_render(&$view) {
     }
 
   }
+  
   if ($do_attach_preface && $preface_node = gv_misc_getPrefaceByKey($key)) {
    
     if ($view->current_display == 'page_by_tag') {
@@ -8199,6 +8200,8 @@ function gv_misc_views_pre_render(&$view) {
       else{
         $view->build_info['title'] = $preface_node->title;
       }
+      
+      dpm('$key ======> ' . $key);
     }
     
     
