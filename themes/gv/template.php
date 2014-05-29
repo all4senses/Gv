@@ -1158,7 +1158,7 @@ function gv_preprocess_html(&$variables) {
   }
  
   global $user;
-  $variables['classes_array'][] = $user->uid ? $user->name : 'guest';
+  $variables['classes_array'][] = $user->uid ? $user->name . ' uid' . $user->uid : 'guest';
   
   //dpm($variables);
   //global $user;
@@ -1172,7 +1172,34 @@ function gv_preprocess_html(&$variables) {
 //    }
     //die;
   //}
+  
+  
+  // Add class for the active theme name
+  // Uncomment to add a class for the active theme name.
+  //$variables['classes_array'][] = drupal_html_class($theme_key);
+  
+  // Works!
 
+  if ($user->uid == 1 || ($user->uid && in_array('administrator', $user->roles)) ) {
+    $variables['classes_array'][] = 'admin';
+  }
+  elseif ($user->uid && in_array('writer', $user->roles) ) {
+    $variables['classes_array'][] = 'writer';
+  }
+  else {
+    $variables['classes_array'][] = 'not-admin';
+  }
+  
+  global $body_classes_add;
+  if (!empty($body_classes_add)) {
+    $variables['classes_array'] += $body_classes_add;
+  }
+
+  // Browser/platform sniff - adds body classes such as ipad, webkit, chrome etc.
+  //Uncomment to add a classes for the browser and platform.
+  //$variables['classes_array'][] = css_browser_selector();
+
+  dpm($_GET);
 }
  
 
