@@ -1413,7 +1413,7 @@ if (isset($_GET['page'])) {
       $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . drupal_render($node_views) . '</div></div>';
   }
 */  
-  $out = '<div id="p-rotator-wrapper"><div id="prev" class="button"><div>Prev</div></div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next" class="button"><div>Next</div></div></div>'
+  $out = '<div id="p-rotator-wrapper"><div id="prev-wrapper" class="button"></div><div id="prev" >Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next-wrapper" class="button"></div><div id="next">Next</div></div>'
           //. l('View All', 'blog', array('attributes' => array('class' => array('view-all'))))
         ;
   
