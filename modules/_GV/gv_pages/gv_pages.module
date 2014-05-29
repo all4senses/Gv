@@ -1993,7 +1993,7 @@ function gv_pages_buildHome($name, $data) {
     
   // Test compare providers functionality.  
   global $user;
-  if (!$user->uid) {  
+  if (!$user->uid || $user->uid == 15) {  
     $block_data = array('module' => 'views', 'delta' => 'providers-block_top_business_cmp', 'shadow' => FALSE);
     $out .= gv_blocks_getBlockThemed($block_data);
   
