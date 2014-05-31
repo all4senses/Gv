@@ -8860,6 +8860,13 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       
       
+    case 'visit_n_reviews': // For Top 5 hosting sites block on a provider page/
+      //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL, $provider_data_quick = NULL, $service_type = NULL, $forse_direct_link = FALSE)
+      $out .= '<div class="p-links">' . gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'reviews visit-site-btn', NULL, NULL, @$data['service_type']) . '<a class="review-link" href="' . url('node/' . $data['data']->nid) . '">READ REVIEWS</a></div>';
+      
+      return $out;
+    
+      
       
       
     case 'details':
