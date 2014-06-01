@@ -8414,6 +8414,12 @@ function gv_misc_getProviderQuickData($target, $data) {
   
   static $mobile_column;
   $out = '';
+  global $user;
+  
+  static $all_data_quick;
+  if (!$all_data_quick) {
+    $all_data_quick = gv_misc_getProvidersDataQuick();
+  }
   
   
   switch($target) {
@@ -8435,9 +8441,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         return NULL;
       }
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
       $out = '<input type="checkbox" class="p-compare" id="' . $data['data']->nid . '" name="' . $all_data_quick[$data['data']->nid]['name'] . '" />';
-      
       
       return $out;
       
@@ -8451,8 +8455,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       //dpm('name_n_logo_chart ' . $count++);
       
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      $out = '';
       /*
       if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
         $link = $all_data_quick[$data['data']->nid]['i_web'];
@@ -8516,9 +8518,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       //$count = 1;
       //dpm('name_n_logo_chart ' . $count++);
     
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      $out = '';
-      
       if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
         $link = $all_data_quick[$data['data']->nid]['i_web'];
       }
@@ -8606,7 +8605,6 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         */
       
-        $all_data_quick = gv_misc_getProvidersDataQuick();
         
         //dpm($all_data_quick[$data['data']->nid]);
         
@@ -8643,11 +8641,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         
     case 'logo_article':
     case 'logo_chart_iframe':
-    
-      if (!isset($all_data_quick)) {
-        $all_data_quick = gv_misc_getProvidersDataQuick();
-      }
-      $out = '';
+  
       
       //dpm($all_data_quick[$data['data']->nid]);
       if (isset($all_data_quick[$data['data']->nid]['i_web']) && $all_data_quick[$data['data']->nid]['i_web']) {
@@ -8698,10 +8692,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       
     case 'features':
-      
-      $out = '';
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      //dpm($all_data_quick);
+  
       
       $plan_title = isset($all_data_quick[$data['data']->nid][$data['service_type']]['plan']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['plan'] : '';
       $features = isset($all_data_quick[$data['data']->nid][$data['service_type']]['feat']) ?  $all_data_quick[$data['data']->nid][$data['service_type']]['feat'] : '';
@@ -8723,10 +8714,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
     case 'bottom_line':
-      
-      $out = '';
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      //dpm($all_data_quick);
       
       $plan_title = isset($all_data_quick[$data['data']->nid][$data['service_type']]['plan']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['plan'] : '';
       
@@ -8750,7 +8737,6 @@ function gv_misc_getProviderQuickData($target, $data) {
         return NULL;
       }
 
-      $out = '';
       if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
         $out = gv_misc_getProviderGradeFromRating($data['data']->votingapi_cache_node_percent_overall_average_value);
       }
@@ -8764,8 +8750,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $stars = NULL;
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-    
       if (!empty($data['data']->votingapi_cache_node_percent_overall_average_value)) {
                 
         $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
@@ -8814,8 +8798,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     case 'rating_n_visit':
     
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-
       if (isset($data['data']->votingapi_cache_node_percent_overall_average_value) && $data['data']->votingapi_cache_node_percent_overall_average_value) {
                 
         $out = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
@@ -8841,9 +8823,6 @@ function gv_misc_getProviderQuickData($target, $data) {
        
     case 'phone_n_visit':
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      
-      $out = NULL;
      /*
       if (!empty($all_data_quick[$data['data']->nid]['i_phone'])) {
         //$out .= '<div class="phone"><div class="title">Call</div><div itemprop="telephone"><a href="callto:' . (strpos($all_data_quick[$data['data']->nid]['i_phone'], '+') !== FALSE ? '' : '+1') . (str_replace(array(' ', '(', ')', '-'), '', strip_tags($all_data_quick[$data['data']->nid]['i_phone']))) . '">' . $all_data_quick[$data['data']->nid]['i_phone'] . '</a></div></div>';
@@ -8865,8 +8844,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
      case 'name_n_stars':
        
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      
       $out = '<div class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</div>';
       // Add stars
       if (!empty($data['data']->votingapi_cache_node_percent_overall_average_value)) {
@@ -8889,9 +8866,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       $details = NULL;
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      
-      global $user;
       if (empty($all_data_quick[$data['data']->nid]['details']) && $user->uid == 1) {
 
         $query = db_select('field_data_body', 'b')
@@ -8935,9 +8909,6 @@ function gv_misc_getProviderQuickData($target, $data) {
         //dpm($all_data_quick[$data['data']->nid]);
         $details = @$all_data_quick[$data['data']->nid]['details'];
       }
-      
-      
-      
         
       //return isset($all_data_quick[$data['data']->nid]['details']) ? $all_data_quick[$data['data']->nid]['details'] : '';
       
@@ -8951,8 +8922,6 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'details2':
       
       $details = NULL;
-      
-      $all_data_quick = gv_misc_getProvidersDataQuick();
       
       if (empty($all_data_quick[$data['data']->nid]['details2'])) {
         $details = l('Read a Review', 'node/' . $data['data']->nid, array('attributes' => array('class' => array('more'))));
@@ -8971,11 +8940,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       
     case 'i_availability':
-      
-      //dpm($data); 
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      //dpm($all_data_quick);
-      
       
       $query = db_select('field_data_field_p_data', 'pd')
         ->fields('pd', array('field_p_data_value'));
@@ -8998,10 +8962,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     case 'plan':
       
-      //dpm($data); 
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      //dpm($all_data_quick);
-      
       return isset($all_data_quick[$data['data']->nid][$data['service_type']]['plan']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['plan'] : '';
       
       
@@ -9013,8 +8973,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       if ($_GET['q'] == 'home') {
         return NULL;
       }
-      
-      $all_data_quick = gv_misc_getProvidersDataQuick();
       
       gv_misc_loadColorboxForVideoLinks();
       
@@ -9030,7 +8988,6 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'back':
     case 'setup':
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
       $out = isset($all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target]) ? $all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target] : '';
       
       if ($target == 'monthly' && $out) {
@@ -9040,7 +8997,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       elseif ($target == 'monthly' && !$out) {
         $mobile_column[$data['data']->nid][$target] = NULL;
       }
-      
       
       return $out;
     
@@ -9055,9 +9011,6 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'frtr': //'Free Trial'
     case 'fxsmo': // 'Faxes/mo'
       
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      
-//      global $user;
 //      if (!$user->uid && ($target == 'frtr' || $target == 'fxsmo')) {
 //        return NULL;
 //      }
@@ -9080,8 +9033,6 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     // One of a provider options.
     case 'options':
-      
-      $all_data_quick = gv_misc_getProvidersDataQuick();
       
       if (isset($all_data_quick[$data['data']->nid][$data['service_type']]['options'][$data['option_name']])) {
         $out = $all_data_quick[$data['data']->nid][$data['service_type']]['options'][$data['option_name']];
@@ -9106,20 +9057,19 @@ function gv_misc_getProviderQuickData($target, $data) {
       return $out;
     
       
+      
+      
     // Deprecated.
     case 'i_web':
-      
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      
+            
       $url = isset($all_data_quick[$data['data']->nid][$target]) ? $all_data_quick[$data['data']->nid][$target] : '';
       
       return $url;
       
       
+      
+      
     case 'i_web2':
-      
-      $all_data_quick = gv_misc_getProvidersDataQuick();
-      
      
       $url = isset($all_data_quick[$data['data']->nid]['i_web']) ? $all_data_quick[$data['data']->nid]['i_web'] : '';
       if ($url) {
