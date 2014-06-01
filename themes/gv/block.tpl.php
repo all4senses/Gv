@@ -2,7 +2,7 @@
 
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
-    <?php if ($block->region == 'sidebar_first' || $block->region == 'sidebar_second'): ?>
+    <?php if ($block->region == 'sidebar_first' || $block->region == 'sidebar_second' || $block->region == 'highlighted'): ?>
       <div class="block-icon pngfix"></div>
     <?php endif;?>
     <h2<?php print $title_attributes; ?>><?php print $title; ?></h2>
