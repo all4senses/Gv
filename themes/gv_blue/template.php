@@ -112,6 +112,7 @@ function gv_blue_process_comment(&$vars) {
  * Override or insert variables into the block templates.
  */
 function gv_blue_preprocess_block(&$vars) {
+  dpm($vars);
  // add odd/even zebra classes into the array of classes
   $vars['classes_array'][] = $vars['block_zebra'];
   if ($vars['block_id'] == 1) {
