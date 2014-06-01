@@ -265,7 +265,7 @@
                       echo 'By' , ': ' , $author_name;
                     }
                     else {
-                      echo 'By <span class="author">' , $author_name, '</span><span class="delim"> / |</span>', $created_str;
+                      echo 'By <span class="author">' , $author_name, '</span><span class="delim"> / </span>', $created_str;
                     }
                   }
               }
