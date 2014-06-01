@@ -951,6 +951,7 @@ function gv_preprocess_region(&$variables, $hook) {
  *   The name of the template being rendered ("block" in this case.)
  */
 function gv_preprocess_block(&$variables, $hook) {
+  dpm($variables);
   // Use a bare template for the page's main content.
   if ($variables['block_html_id'] == 'block-system-main') {
     $variables['theme_hook_suggestions'][] = 'block__bare';
