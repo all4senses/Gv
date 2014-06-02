@@ -253,7 +253,7 @@
               }
               else {
                   if ($view_mode == 'side_block_teaser') {
-                    echo date('F d, Y', $node->created);;
+                    echo date('F d\t\h, Y', $node->created);;
                   }
                   elseif ($paths_with_latest_article) {
                     // Home page articles teasers.
