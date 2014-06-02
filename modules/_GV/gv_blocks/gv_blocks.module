@@ -2914,17 +2914,18 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
 //        }
       }
       //class="view-articles"
-//      if ($user->uid) {
+      if ($user->uid) {
         $latest_reviews = '<div id="compare-providers-reviews" class="block"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '</div></div>';
-//      }
-//      else {
-//        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
-//      }
+      }
+      else {
+        //$latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
+        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3><div class="view-content">' . $latest_reviews . '</div></div>';
+      }
     }
 
   }
   
-  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views sidebar">' . $latest_reviews . $latest_articles . '</div>' : NULL;
+  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views' . ($user->uid ? ' sidebar' : '') . '">' . $latest_reviews . $latest_articles . '</div>' : NULL;
 
   $content = '<div id="bottom-with-latest-articles" class="preface' . (($latest_articles || $latest_reviews) ? ' with-articles' : '') . '">'
             . $right_col
