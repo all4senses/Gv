@@ -789,7 +789,12 @@ function gv_process_page(&$variables) {
   $pages_with_livechatinc = array(/*'/', */'/business', '/hosted-pbx', '/business-systems', '/sip-trunking');
   if (in_array(@$_SERVER['REQUEST_URI'], $pages_with_livechatinc)) {
     //dpm('REQUEST_URI = ' . @$_SERVER['REQUEST_URI']);
-    drupal_add_js( $module_path_misc . '/js/gv_add_livechatinc.js'); 
+    
+    global $user;
+    // Don't show chat for the root.
+    if ($user->uid != 1) {
+      drupal_add_js( $module_path_misc . '/js/gv_add_livechatinc.js'); 
+    }
   }
   
   // JS for comparing providers functionality on pages ehere appropriate views are cached and therefore have not loaded js itselves within views.
