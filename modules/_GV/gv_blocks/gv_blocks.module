@@ -383,6 +383,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['latest_reviews_service'] = array(
+    'info' => 'latest_reviews on service pages (from views home reviews)',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   
   return $blocks;
 }
@@ -783,6 +788,13 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = gv_blocks_getBlogTopRotated();
       break;
+    
+    case 'latest_reviews_service':
+      $block['subject'] = gv_blocks_getBlockFromViews_title($delta);
+      $block['content'] = gv_blocks_getBlockFromViews($delta);
+      break;
+    
+    
     
   }
 
@@ -1194,6 +1206,35 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
   
 }
 
+
+
+/**
+ * Blocks from Views blocks by delta Get Title.
+ */
+function gv_blocks_getBlockFromViews_title($delta) {
+  return '';
+}
+
+
+/**
+ * Blocks from Views blocks by delta.
+ */
+function gv_blocks_getBlockFromViews($delta) {
+  
+  $out = NULL;
+  
+  switch ($delta) {
+    case 'reviews-block_home_latest_reviews':
+      
+      $block_data = array('module' => 'views', 'delta' => 'reviews-block_home_latest_reviews', 'shadow' => FALSE); 
+      $block_data['subject'] = $_GET['q'];
+      $out .= gv_blocks_getBlockThemed($block_data);
+   
+      break;
+  }
+  
+  return $out;
+}
 
 
 /**
@@ -2262,7 +2303,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           }
           
           //$out .= '<div class="rank" style="background: #2c7bbf; color: white; margin-top: 5px;">#' . ($cols_num - $i - 1) . '</div>';
-          $out .= '<div class="rank">#' . ($cols_num - $i - 1) . '</div>';
+          $out .= '<div class="rank"><span>#</span>' . ($cols_num - $i - 1) . '</div>';
           
           $out .= '</th>';
         }
