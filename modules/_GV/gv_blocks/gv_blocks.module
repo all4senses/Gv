@@ -1227,10 +1227,14 @@ function gv_blocks_getBlockFromViews($delta) {
     case 'reviews-block_home_latest_reviews':
       
       $block_data = array('module' => 'views', 'delta' => 'reviews-block_home_latest_reviews', 'shadow' => FALSE); 
-      dpm($_SERVER);
-      switch ($_GET['q']) {
-        case 'node/287':
+
+      switch (@$_SERVER['REQUEST_URI']) {
+        case '/business':
           $block_data['subject'] = 'Latest Business VoIP Reviews...';
+          break;
+        
+        case '/sip-trunking':
+          $block_data['subject'] = 'Latest SIP Trunking Reviews...';
           break;
         
         default:
