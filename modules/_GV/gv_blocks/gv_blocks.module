@@ -790,7 +790,7 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     case 'latest_reviews_service':
-      $block['subject'] = gv_blocks_getBlockFromViews_title('reviews-block_home_latest_reviews');
+      $block['subject'] = ''; //gv_blocks_getBlockFromViews_title('reviews-block_home_latest_reviews');
       $block['content'] = gv_blocks_getBlockFromViews('reviews-block_home_latest_reviews');
       break;
     
@@ -1227,7 +1227,18 @@ function gv_blocks_getBlockFromViews($delta) {
     case 'reviews-block_home_latest_reviews':
       
       $block_data = array('module' => 'views', 'delta' => 'reviews-block_home_latest_reviews', 'shadow' => FALSE); 
-      $block_data['subject'] = $_GET['q'];
+      dpm($_SERVER);
+      switch ($_GET['q']) {
+        case 'node/287':
+          $block_data['subject'] = 'Latest Business VoIP Reviews...';
+          break;
+        
+        default:
+          $block_data['subject'] = 'Latest Consumer Reviews...';
+          break;
+      }
+      
+      
       $out .= gv_blocks_getBlockThemed($block_data);
    
       break;
