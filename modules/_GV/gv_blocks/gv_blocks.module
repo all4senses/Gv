@@ -1250,7 +1250,8 @@ function gv_blocks_getBlockFromViews($delta) {
     case 'reviews-block_home_latest_reviews':
       
       $block_data = array('module' => 'views', 'delta' => 'reviews-block_home_latest_reviews', 'shadow' => FALSE); 
-      $block_data['subject'] = '';
+      //$block_data['subject'] = '';
+      $block_data['no_subject'] = TRUE;
       /*
       switch (@$_SERVER['REQUEST_URI']) {
         case '/business':
