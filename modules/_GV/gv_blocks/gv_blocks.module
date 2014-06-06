@@ -2411,7 +2411,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         
         $out .= '<td class="v-bars">';
 
-            $v_max_height = 130;
+            $v_max_height = $user->uid ? 130: 100;
             $out .= '<div class="v-graphs">';
             foreach ($provider['p_votes'] as $vote_tag => $p_vote_value) {
               $out .= '<div class="v-bar" title="' . $v_titles[$vote_tag] . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 10px; background: ' . $v_colors[$vote_tag] . ';"></div>';
