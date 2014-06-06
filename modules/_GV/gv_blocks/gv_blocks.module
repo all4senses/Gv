@@ -2201,7 +2201,9 @@ function gv_blocks_reviewsCounter() {
  */
 function gv_blocks_compareTopProviders($service_type) {
   
-  $cid = 'gv_blocks_compareTopProviders_' . $service_type;
+  global $user;
+  
+  $cid = 'gv_blocks_compareTopProviders_' . $service_type . ($user->uid ? '_admin' : '_anonim');
   $cache = cache_get($cid, 'cache');
   
   // Stick table header to the page top.
