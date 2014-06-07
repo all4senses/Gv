@@ -4,20 +4,7 @@
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 <?php else: ?>
      <?php 
-    
       $url = 'http://getvoip.com'. url('node/' . $node->nid);
-      //$url = 'http://getvoip.com' . ($_GET['q'] == 'home' ? '' : $_SERVER['REQUEST_URI']);
-     
-
-//          if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-//            $share_title = $node->metatags['title']['value'];
-//          }
-//          else {
-//            $share_title = $title;
-//          }
-//
-//        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
-
     ?>
 <?php endif; ?>
 
@@ -35,8 +22,7 @@
           <header>
         
             <h2<?php 
-                  //echo /*$title_attributes .*/ ' property="dc:title v:summary"'; 
-                  echo /*$title_attributes .*/ ' property="v:summary"'; 
+                  echo ' property="v:summary"'; 
                 ?>>
                 <a href="<?php print $node_url; ?>">
                   <?php print $title; ?>
@@ -59,70 +45,30 @@
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
-                    //$logo_block = '<div class="logo">' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $content['field_p_logo'][0]['#item']['alt'], 'title' => $content['field_p_logo'][0]['#item']['title'], 'attributes' => array('rel' => 'v:photo'))), NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')) . '</div>';
                     $logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
                     echo '<table><tbody><tr><td>' . $logo_block . '</td></tr></tbody></table>';
                   }
                   else {
-                    echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name /*$content['field_p_name'][0]['#markup']*/, '</h2>', render($title_suffix);
+                    echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name, '</h2>', render($title_suffix);
                   }
+                  
+                  echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
                   
                 ?>
                 
-                <?php /*
-                <div class="share main">
-                  
-                  <div id="facebook-b">
-                    <div id="fb-root"></div>
-                    <div id="fb">
-                      <script>(function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=138241656284512";
-                        fjs.parentNode.insertBefore(js, fjs);
-                      }(document, 'script', 'facebook-jssdk'));</script>
-                      <div class="fb-like" data-href="<?php echo $url?>" data-send="false" data-layout="button_count" data-width="80" data-show-faces="false"></div>
-                    </div>
-                  </div>
-
-                  <div id="gplus-b">
-                    <script type="text/javascript">
-                      (function() {
-                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                        po.src = 'https://apis.google.com/js/plusone.js';
-                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                      })();
-                    </script>
-                    <g:plusone size="medium" href="<?php echo $url?>"></g:plusone>
-                  </div>
-
-                  <div id="linkedin-b">
-                    <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-                    <script type="IN/Share" data-url="<?php echo $url?>" data-counter="right" data-showzero="true"></script>
-                  </div>
-
-                  <div id="twitter-b">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url?>">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                  </div>
-                  
-                </div> <!-- main share buttons -->
-                */ ?>
+                
               </div> <!-- <div class="logo share">-->
                 
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
                   <?php 
-                      echo '<div class="name-narrow" style="display: none;">' . $provider_name . '</div>';
+                      echo '<div class="name">' . $provider_name . '</div>';
                       if (!empty($node->gv_rating_overall)) {
-                        echo '<div class="narrow stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<a href="#reviews" rel="nofollow"> Read Reviews</a></div>'; 
+                        echo '<div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<span>' . $node->gv_rating_overall . '/5</span></div>'; 
                       }
                   ?>
-                  <div class="caption not-narrow"><?php echo t('!p Corporate Info:', array('!p' => '<span property="v:itemreviewed">' . $provider_name . '</span>')); ?></div>
                   <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
                   <div><?php echo '<span class="title">Founded In:</span>' . $node->p_data['info']['i_founded']; ?></div>
-                  <div><?php echo '<span class="title"><span class="not-narrow">Service </span>Availability:</span>' . $node->p_data['info']['i_availability']; ?></div>
                   <div>
                     <?php 
                       if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
@@ -142,12 +88,10 @@
                        //dpm($node->p_data);
                          echo '<div class="price narrow">', (empty($node->p_data['s']['bu']['fees']['mon']) ? '' : '$' . $node->p_data['s']['bu']['fees']['mon']), '</div>',
                               '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews" rel="nofollow" >', $node->gv_voters, '</a></div></div>',
-                              '<div id="positive">', 'Positive<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['positive'], '</div><div id="negative">Negative<span class="not-narrow"> reviews</span>: ', $node->gv_recommends['negative'], '</div>',
                               '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
                               
                                  
-                              //'<a id="write-review" rel="nofollow" href="/voip-provider-submit-user-review?id=', $node->nid, '"><span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>'
-                              l('<span style="display: none;">WRITE A REVIEW</span><img class="not-narrow" src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))   
+                              l('Write a review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))   
                               ;
                       ?>
                       
@@ -156,24 +100,17 @@
                   </div>
               
               <? else: ?>
-                  <?php echo l('<img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))
-                  //'<a id="write-review" rel="nofollow" href="/voip-provider-submit-user-review?id=' . $node->nid . '"><img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" /></a>'; ?>
+                  <?php echo l('<img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))); ?>
               <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
              
               
             </div>
           
-          
-              <!--<div class="bottom-clear"></div> -->
-
               <?php if (!empty($content['gv_ratings'])): ?>
                   <div class="gv_votes main"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
                     <div class="total">
                       <?php 
-                        //$stars_overall = theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-                        //echo '<span class="title">' . $provider_name . ' Rated: </span>' . $stars_overall . '<span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span> out of 5'; 
-                        
-//                        if ($node->gv_voters == 1) {
+
                           echo '<span class="title">' . $provider_name . ' Rated: </span>
                           <span class="count" rel="v:rating">
                             <span typeof="v:Rating">
@@ -182,10 +119,7 @@
                               <span property="v:best">5</span>
                             </span>
                           </span>'; 
-//                        }
-//                        else {
-//                          echo '<span class="title">' . $provider_name . ' Rated: </span><span class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</span> out of 5'; 
-//                        }
+
                       ?>
                     </div>
                   </div>
@@ -241,9 +175,7 @@
                   
                   $provider_options_re = isset($node->p_data['provider_options_re']) ? $node->p_data['provider_options_re'] : NULL;
                   
-                  //if (!empty($provider_options_re) && (!isset($provider_options_re['enabled']) || !empty($provider_options_re['enabled']))) {
                   if (!empty($provider_options_re) && !empty($provider_options_re['enabled'])) {
-                    //echo '<li><a href="#tabs-3">Residential Service Details</a></li>';
                     echo '<li><a href="#tabs-3">Available Services</a></li>';
                   }
                   
