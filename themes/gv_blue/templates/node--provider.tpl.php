@@ -115,14 +115,14 @@
                     <div class="total">
                       <?php 
 
-                          echo '
+                          echo '<div class="caption">OVERALL SCORE</div>
                           <span class="count" rel="v:rating">
                             <span typeof="v:Rating">
                               <span property="v:worst" content="0"></span>
                               <span property="v:value">' . $node->gv_rating_overall . '</span>
                               <span property="v:best"  content="0"></span>
                             </span>
-                          </span><div class="stars-rating"><div class="caption">OVERALL SCORE</div>' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
+                          </span><div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
 
                       ?>
                     </div>
