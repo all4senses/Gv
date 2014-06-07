@@ -101,7 +101,9 @@
                 </div> <!-- End of <div typeof="Organization"> -->
                 
                 <div class="links">
-                  <?php echo l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   ?>
+                  <?php echo l('Request a Demo', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
+                          l('Request a Quote', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-quote', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
+                          l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   ?>
                 </div>
                 
               </div> <!-- End of <div class="basic-info" rel="v:itemreviewed"> -->
@@ -120,7 +122,7 @@
                               <span property="v:value">' . $node->gv_rating_overall . '</span>
                               <span property="v:best"  content="0"></span>
                             </span>
-                          </span><div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
+                          </span><div class="stars-rating"><div class="caption">OVERALL SCORE</div>' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
 
                       ?>
                     </div>
