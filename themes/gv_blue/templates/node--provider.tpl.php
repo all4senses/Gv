@@ -52,7 +52,7 @@
                     echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name, '</h2>', render($title_suffix);
                   }
                   
-                  echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
+                  echo gv_misc_getTrackingUrl('Visit Site', NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
                   
                 ?>
                 
@@ -91,7 +91,7 @@
                               '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>',
                               
                                  
-                              l('Write a review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))   
+                              l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))   
                               ;
                       ?>
                       
