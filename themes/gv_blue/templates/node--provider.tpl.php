@@ -39,9 +39,11 @@
           
           
           
-           <?php if ($page): ?>
+         <?php if ($page): ?>
           <div id="provider-main">
+            
             <div id="provider-top">
+              
               <div class="logo-share">
                 <?php
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
@@ -67,38 +69,51 @@
                         echo '<div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<span>' . $node->gv_rating_overall . '/5</span></div>'; 
                       }
                   ?>
-                  <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
-                  <div><?php echo '<span class="title">Founded In:</span>' . $node->p_data['info']['i_founded']; ?></div>
-                  <div>
-                    <?php 
-                      if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
-                        $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
-                        echo '<span class="title">Website:</span>' . gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'v:url nofollow'));
-                      }
-                      ?>
-                  </div>
-                </div>
-              </div>
-             
-            <?php if (!empty($content['gv_ratings'])): ?>
-
-                  <div class="overall"> 
-                      <?php 
-                         echo '<div class="price narrow">', (empty($node->p_data['s']['bu']['fees']['mon']) ? '' : '$' . $node->p_data['s']['bu']['fees']['mon']), '</div>',
-                              '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews" rel="nofollow" >', $node->gv_voters, '</a></div></div>',
-                              '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>'
-                              ;
-                      ?>
+                  
+                  <div id="info-n-reviews">
                     
-                  </div>
-              
-              <? else: ?>
-                  <?php echo l('<img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))); ?>
-              <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                    <div class="company">
+                        <div><?php echo '<span class="title">Headquarters:</span><span property="v:address">' . $node->p_data['info']['i_heads'] . '</span>'; ?></div>
+                        <div><?php echo '<span class="title">Founded In:</span>' . $node->p_data['info']['i_founded']; ?></div>
+                        <div>
+                          <?php 
+                            if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
+                              $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
+                              echo '<span class="title">Website:</span>' . gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'v:url nofollow'));
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    
+                    <div class="overall"> 
+                        <?php if (!empty($content['gv_ratings'])): ?>
+
+                              <?php 
+                                 echo '<div class="price narrow">', (empty($node->p_data['s']['bu']['fees']['mon']) ? '' : '$' . $node->p_data['s']['bu']['fees']['mon']), '</div>',
+                                      '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews" rel="nofollow" >', $node->gv_voters, '</a></div></div>',
+                                      '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>'
+                                      ;
+                              ?>
+
+                        <? else: ?>
+                            <?php echo l('<img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))); ?>
+                        <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                    </div>
+                    
+                  </div> <!-- End of <div id="info-n-reviews"> -->
+                  
+                  
+                  
+                </div> <!-- End of <div typeof="Organization"> -->
+                
+                <div class="links">
+                  <?php echo l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   ?>
+                </div>
+                
+              </div> <!-- End of <div class="basic-info" rel="v:itemreviewed"> -->
              
-              <?php echo l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   ?>
-            </div>
-          
+              
+              
               <?php if (!empty($content['gv_ratings'])): ?>
                   <div class="gv_votes main"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
                     <div class="total">
@@ -116,28 +131,16 @@
                       ?>
                     </div>
                   </div>
-              <?php endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
-             
+              <?php endif; // end of if (!empty($content['gv_ratings'])): ?>
               
-              <div class="image">
-                <?php
-                
-                  if (isset($content['field_p_image'][0]['#item']['uri'])) {
-                    echo '<div>' . gv_misc_getTrackingUrl(theme('image_style', array( 'path' =>  $content['field_p_image'][0]['#item']['uri'], 'style_name' => 'image_provider_page', 'alt' =>  $content['field_p_image'][0]['#item']['alt'], 'title' =>  $content['field_p_image'][0]['#item']['title'])), NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')), '</div>';
-                  }
+              
+            </div> <!-- End of <div id="provider-top"> -->
+          
                   
-                  if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
-                    echo '<div class="site">' , gv_misc_getTrackingUrl('Visit ' . $provider_name, NULL, NULL, NULL, NULL, array('key' => 'rel', 'value' => 'nofollow')), '</div>';
-                  }
-                ?>  
-                
-              </div>
-                  
-              <div class="bottom-clear"></div>
-            </div>
+          </div> <!-- End of <div id="provider-main"> -->
               
                       
-              <div class="data tabs">
+          <div class="data tabs">
                 
                 <ul>
                   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
