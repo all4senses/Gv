@@ -11,14 +11,8 @@
            
   <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
     
-        <?php if ($page): ?>
-          <h1<?php 
-                echo ' property="v:summary"'; 
-                if (!$node->status) {echo ' class="not-published"';}?> ><?php 
-                  print $title; 
-                ?></h1>
-   
-        <?php else: ?>
+        <?php if (!$page): ?>
+
           <header>
         
             <h2<?php 
@@ -64,7 +58,7 @@
               <div class="basic-info" rel="v:itemreviewed">
                 <div typeof="Organization">
                   <?php 
-                      echo '<div class="name">' . $provider_name . '</div>';
+                      echo '<h1 class="name" property="v:summary">' . $provider_name . '</h1>';
                       if (!empty($node->gv_rating_overall)) {
                         echo '<div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '<span>' . $node->gv_rating_overall . '/5</span></div>'; 
                       }
