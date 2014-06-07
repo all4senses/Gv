@@ -109,18 +109,18 @@
               
               
               <?php if (!empty($content['gv_ratings'])): ?>
-                  <div class="gv_votes main"><?php echo '<div class="caption">Overall Consumer Ratings</div>' . render($content['gv_ratings']); ?>
+                  <div class="gv_votes main"><?php echo render($content['gv_ratings']); ?>
                     <div class="total">
                       <?php 
 
-                          echo '<span class="title">' . $provider_name . ' Rated: </span>
+                          echo '
                           <span class="count" rel="v:rating">
                             <span typeof="v:Rating">
                               <span property="v:worst" content="0"></span>
-                              <span property="v:value">' . $node->gv_rating_overall . '</span> out of 
-                              <span property="v:best">5</span>
+                              <span property="v:value">' . $node->gv_rating_overall . '</span>
+                              <span property="v:best"  content="0"></span>
                             </span>
-                          </span>'; 
+                          </span><div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
 
                       ?>
                     </div>
