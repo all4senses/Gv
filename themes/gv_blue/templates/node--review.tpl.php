@@ -276,22 +276,22 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
           
           
           <div class="gv_votes">
+            
+            <?php echo render($content['gv_ratings']); ?>
             <div class="caption">
                 <?php 
               
                   $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value'];
-                  echo '<span>User\'s Rating:</span>';
-
-                        echo  '<span rel="v:rating">',
-                                '<span typeof="v:Rating">',
-                                  '<span property="v:value">', $r, '</span>', 
-                                  '<span property="v:best" content="5"></span>',
-                                  '<span property="v:worst" content="0"></span>',
-                                '</span>',
-                              '</span>'; 
+                  echo '<span>Overall Score:</span>
+                        <span rel="v:rating">',
+                          '<span typeof="v:Rating">',
+                            '<span property="v:value">', $r, '</span> Out of ', 
+                            '<span property="v:best" content="5">5</span>',
+                            '<span property="v:worst" content="0"></span>',
+                          '</span>',
+                        '</span>'; 
                 ?>
             </div>
-            <?php echo render($content['gv_ratings']); ?>
             
           </div> <!-- End of <div class="gv_votes"> -->
           
