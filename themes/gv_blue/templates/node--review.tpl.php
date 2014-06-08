@@ -211,35 +211,19 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                       <?php print render($title_suffix); ?>
 
                         <div class="submitted">
-                        <?php 
-                          //echo '<span property="v:reviewer">', $reviewer, '</span>, <span property="v:dtreviewed" content="', date('Y-m-d', $node->created), '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
-                          echo '<span property="v:reviewer">', $reviewer, '</span>, <span property="v:dtreviewed" content="', date('Y-m-d', $node->created), '">', date('F d, Y', $node->created), '</span>';
-                        ?>
+                          <?php 
+                            echo '<span property="v:reviewer">', $reviewer, '</span>, <span property="v:dtreviewed" content="', date('Y-m-d', $node->created), '">', date('F d, Y', $node->created), '</span>';
+                          ?>
                         </div>
               </div>
                         
               <div class="links">
-               <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
-               <!--<span class="delim">|</span> -->
                <?php 
 
-                 echo '<div class="rlinks">';
+                    echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
+                    . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick));
 
-                         //$provider_data_quick = !empty($node->field_ref_provider['und'][0]['target_id']) ? $all_data_quick[$node->field_ref_provider['und'][0]['target_id']] : NULL;
-
-                         if($page || $full_title) {
-                           //dpm($provider_data_quick);
-                           echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>')
-                           //. ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id']));
-                           . ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick));
-                         }
-                         else {
-                           //echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider"'. ($page ? ' property="v:itemreviewed"' : '') . '>' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id']);
-                           echo !$provider_url ? '' : gv_misc_getTrackingUrl('Visit <span class="review-provider" property="v:itemreviewed">' . $provider_name . '</span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick);
-                         }
-
-                     echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('attributes' => array('rel' => 'nofollow'), 'query' => array('id' => $node->field_ref_provider['und'][0]['target_id'])))
-                     . '</div>'; 
+                    echo '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('attributes' => array('rel' => 'nofollow'), 'query' => array('id' => $node->field_ref_provider['und'][0]['target_id']))); 
                ?>
              </div>           
 
@@ -260,43 +244,11 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             ?>
     
     
-            <?php if ($page): ?>
-              <span class="submitted">
-              <?php 
-                /*
-                $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created);
-                global $user;
-                if ($user->uid && $node->uid) {
-                  //echo preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ":$3$created_str$5", $submitted);
-                  $submitted = preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": " . $node->field_r_fname['und'][0]['safe_value'] . "$created_str$5", $submitted);
-                }
-                elseif (!$node->uid) {
-                  //echo preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": $3 $created_str$5", $submitted);
-                  $submitted = preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1" . t('Reviewer') . ": " . $node->field_r_fname['und'][0]['safe_value'] . "$created_str$5", $submitted);
-                }
-                // Make a link for an authors profile from just a Name.
-                else {
-                  //echo preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1" . t('Reviewer') . ":<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
-                  $submitted = preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1" . t('Reviewer') . ": " . $node->field_r_fname['und'][0]['safe_value'] . "$created_str$8", $submitted);
-                }
-                
-                echo $submitted;
-                */
-              
-                echo 'Reviewer: <span property="v:reviewer">' . $reviewer, '</span><span class="delim">|</span><span property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
-              ?>
-            </span>
-          <?php endif; ?>
-    
 
-        <div class="content"<?php print $content_attributes; ?>>
           
-          
-          <!--<div class="right-content">-->
-          <div class="review-right">
+          <div class="review-block">
             
             <?php 
-              //echo '<div'. ($page ? ' property="v:description"' : '') . '>' . render($content['body']) . '</div>'; 
               echo '<div property="v:description">' . render($content['body']) . '</div>'; 
             ?>
             
@@ -318,55 +270,30 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             
           </div>
           
-        </div> 
+
         
         </div> <!-- End of  <div class="left-wrapper"> -->
           
           
           <div class="gv_votes">
-            <?php 
-              //echo '<div class="caption"><span>User\'s Rating:</span> <span' . ($page ? ' property="v:rating"' : '') . '>' , (empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']), '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>' , render($content['gv_ratings']); 
+            <div class="caption">
+                <?php 
               
-              $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value'];
-              echo '<div class="caption"><span>User\'s Rating:</span>';
-              
-                    //echo '<span property="v:rating">' , $r, '</span>' /* render($content['gv_rating_overall'])*/;
-                
-                    echo  //'<span class="count" rel="v:rating">',
-                          '<span rel="v:rating">',
-                            '<span typeof="v:Rating">',
-                              //'<span property="v:worst" content="' . $r . '"></span>',
-                              '<span property="v:value">', $r, '</span>', //' out of', 
-                              //'<span property="v:best">5</span>',
-                              '<span property="v:best" content="5"></span>',
-                              '<span property="v:worst" content="0"></span>',
-                            '</span>',
-                          '</span>'; 
-                    
-                    
-                echo '<div class="bottom-clear"></div>
-               </div>', 
-               render($content['gv_ratings']); 
-            
-            ?>
-            <div class="rate-other">
-              <?php if (!$page): ?>
-                <div class="text">
-                  <?php 
-                    //echo '<div class="title">Date:</div><div' . ($page ? ' property="v:dtreviewed"' : '') . ' content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; 
-                    echo '<div class="title">Date:</div><div property="v:dtreviewed" content="' . date('Y-m-d', $node->created) . '">' , date('F j, Y', $node->created) , '</div>'; 
-                  ?>
-                </div>
-                <div class="text">
-                  <?php 
-                    //echo '<div class="title">Reviewer:</div><div' . ($page ? ' property="v:reviewer"' : '') . '>', $reviewer , '</div>'; 
-                    echo '<div class="title">Reviewer:</div><div property="v:reviewer">', $reviewer , '</div>'; 
-                  ?>
-                </div>
-              <?php endif; ?>
-              <div class="text"><?php echo '<div class="title">Recommend: </div><div class="data">' . $node->gv_recommend . '</div>'?></div>
+                  $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value'];
+                  echo '<span>User\'s Rating:</span>';
+
+                        echo  '<span rel="v:rating">',
+                                '<span typeof="v:Rating">',
+                                  '<span property="v:value">', $r, '</span>', 
+                                  '<span property="v:best" content="5"></span>',
+                                  '<span property="v:worst" content="0"></span>',
+                                '</span>',
+                              '</span>'; 
+                ?>
             </div>
-          </div>
+            <?php echo render($content['gv_ratings']); ?>
+            
+          </div> <!-- End of <div class="gv_votes"> -->
           
           
          </div> <!-- End of review-wrapper -->
@@ -380,7 +307,6 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             hide($content['field_tags']);
             
             echo render($content['metatags']);
-            //echo render($content);
           ?>
           
         </div> <!-- content -->
