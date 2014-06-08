@@ -166,7 +166,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 
   <div class="main-content" <?php echo ($full_title ? '' : 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'); /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
     
-
+      <div class="left-wrapper">
+        
               <header>
 
                 
@@ -177,33 +178,15 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                           if (!$node->status) {echo ' class="not-published"';}
                       ?>
                 <?php else: ?>
-                    <?php /*if($full_title): ?>
-                      <h2 <?php 
-                              //echo 'class="rcaption" property="dc:title v:summary"';
-                              //echo 'class="rcaption"' . (@$_SERVER['REDIRECT_URL'] == '/providers/reviews' ? '' : ' property="v:summary"');
-                              echo 'class="rcaption"';
-                           ?>
-                    <?php else: */?>
                       <h3 <?php 
-                              //echo 'class="rcaption" property="dc:title v:summary"';
-                              //echo 'class="rcaption" property="v:summary"';
                               echo 'class="rcaption"';
                            ?>
                     <?php /*endif;*/ ?>
                 <?php endif; ?>
                   
                 <?php /*print $title_attributes;*/ ?>><?php 
-                /*if (!$page): ?>
-                      <a href="<?php print ($full_title && isset($node->field_ref_provider['und'][0]['target_id']) ? url('node/' . $node->field_ref_provider['und'][0]['target_id']) : $node_url); ?>">
-                    <?php endif; */
+
                         echo ( ($full_title || $page) ? $provider_name . ' - ' : '') . $title; 
-                        //if ($page) {
-                        //  drupal_set_title($node->field_r_provider_name['und'][0]['safe_value'] . ': ' . $title);
-                        //}
-                      
-                     /*if (!$page): ?>
-                      </a>
-                    <?php endif;*/
                 if ($page) {
                   echo '</h1>';
                 }
@@ -312,6 +295,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             <?php endif; ?>
             
           </div>
+          
+        </div> <!-- End of  <div class="left"> -->
           
           
           <div class="gv_votes">
