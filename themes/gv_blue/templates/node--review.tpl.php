@@ -220,9 +220,9 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
               <div class="links">
                <?php 
                     if($page || $full_title) {
-                      echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a><span class="delim">|</span>');
+                      echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a>');
                     }
-                    echo ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick)) . '<span class="delim">|</span>' . l('Write a Review', 'node/add/review', array('attributes' => array('rel' => 'nofollow'), 'query' => array('id' => $node->field_ref_provider['und'][0]['target_id']))); 
+                    echo ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick)) . l('Write a Review', 'node/add/review', array('attributes' => array('rel' => 'nofollow'), 'query' => array('id' => $node->field_ref_provider['und'][0]['target_id']))); 
                ?>
              </div>           
 
