@@ -179,34 +179,43 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             <div class="pointer"></div>
         
               <header>
-
                 
-                <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
-                  <h1 <?php 
-                          //echo 'property="dc:title v:summary"';
-                          echo $full_title ? '' : 'property="v:summary"';
-                          if (!$node->status) {echo ' class="not-published"';}
-                      ?>
-                <?php else: ?>
-                      <h3 <?php 
-                              echo 'class="rcaption"';
-                           ?>
-                    <?php /*endif;*/ ?>
-                <?php endif; ?>
-                  
-                <?php /*print $title_attributes;*/ ?>><?php 
-
-                        echo ( ($full_title || $page) ? $provider_name . ' - ' : '') . $title; 
-                if ($page) {
-                  echo '</h1>';
-                }
-                else {
-                  echo '</h3>';
-                }
-                ?>
+                <div class="title-block">
                 
-            <?php print render($title_suffix); ?>
-            
+                          <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
+                            <h1 <?php 
+                                    //echo 'property="dc:title v:summary"';
+                                    echo $full_title ? '' : 'property="v:summary"';
+                                    if (!$node->status) {echo ' class="not-published"';}
+                                ?>
+                          <?php else: ?>
+                                <h3 <?php 
+                                        echo 'class="rcaption"';
+                                     ?>
+                              <?php /*endif;*/ ?>
+                          <?php endif; ?>
+
+                          <?php /*print $title_attributes;*/ ?>><?php 
+
+                                  echo ( ($full_title || $page) ? $provider_name . ' - ' : '') . $title; 
+                          if ($page) {
+                            echo '</h1>';
+                          }
+                          else {
+                            echo '</h3>';
+                          }
+                          ?>
+
+                      <?php print render($title_suffix); ?>
+
+                        <div class="submitted">
+                        <?php 
+                          //echo '<span property="v:reviewer">', $reviewer, '</span>, <span property="v:dtreviewed" content="', date('Y-m-d', $node->created), '">', date('F d, Y \a\t g:sa', $node->created), '</span>';
+                          echo '<span property="v:reviewer">', $reviewer, '</span>, <span property="v:dtreviewed" content="', date('Y-m-d', $node->created), '">', date('F d, Y', $node->created), '</span>';
+                        ?>
+                        </div>
+              </div>
+                        
               <div class="links">
                <?php //echo l(t('Visit Just Host'), $content['provider_url']); ?>
                <!--<span class="delim">|</span> -->
@@ -232,6 +241,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                ?>
              </div>           
 
+                        
            </header>
 
    
