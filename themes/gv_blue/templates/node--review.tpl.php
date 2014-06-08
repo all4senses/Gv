@@ -159,11 +159,11 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
   else {
     $provider_name = isset($node->field_r_provider_name[0]['value']) ? $node->field_r_provider_name[0]['value'] : $node->field_r_provider_name['und'][0]['value'];
   }
-  
-  
                       
 ?>
 
+    
+    
   <div class="main-content" <?php echo ($full_title ? '' : 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'); /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
     
       <?php
@@ -308,39 +308,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             echo render($content['metatags']);
           ?>
           
-        </div> <!-- content -->
-
-        
-        
-      <?php if ($page): ?>
-    
-        
-
-          <?php 
-//            echo '<footer>';
-//          
-//                if (isset($content['field_topics'])) {
-//                  $tags = NULL;
-//                  foreach (element_children($content['field_topics']) as $key) {
-//                    $tags .= ($tags ? '<div class="delim">|</div>' : '') . l(t($content['field_topics'][$key]['#title']), 'articles/tags/' . str_replace(' ', '-', drupal_strtolower($content['field_topics'][$key]['#title'])));
-//                  }
-//                  if ($tags) {
-//                    echo '<div class="topics"><div class="title">' . t('TAGS:') . '</div>' . $tags . '</div>';
-//                  }
-//                }
-//                //print render($content['field_topics']); 
-//                //print render($content['links']);
-//
-//            echo '</footer>'
-          ?>
-    
-      <?php endif; ?>
-        
-      
 
   </div> <!-- main-content -->
-  
-  <!--<div class="shadow"></div> -->
   
 
 <?php if (!$page): ?>
