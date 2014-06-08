@@ -178,6 +178,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
         
             <div class="pointer"></div>
         
+            <div class="left-wrapper">
+              
               <header>
                 
                 <div class="title-block">
@@ -318,7 +320,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
           
         </div> 
         
-        </div> <!-- End of  <div class="left"> -->
+        </div> <!-- End of  <div class="left-wrapper"> -->
           
           
           <div class="gv_votes">
@@ -367,9 +369,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
           </div>
           
           
-          
-          <div class="bottom-clear"></div>
-          
+         </div> <!-- End of review-wrapper -->
+                
            
               
           <?php
