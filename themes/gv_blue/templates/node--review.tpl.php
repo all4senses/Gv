@@ -296,6 +296,8 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             
           </div>
           
+        </div> 
+        
         </div> <!-- End of  <div class="left"> -->
           
           
