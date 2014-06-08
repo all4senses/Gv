@@ -166,7 +166,17 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 
   <div class="main-content" <?php echo ($full_title ? '' : 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'); /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
     
-      <div class="left-wrapper">
+      <?php
+        $reviewer = (isset($node->field_r_fname[0]['value']) ? $node->field_r_fname[0]['value'] : $node->field_r_fname['und'][0]['value'] );
+      ?>
+      <div class="reviewer">
+        <div class="r-avatar"><img src="/sites/all/themes/gv_blue/css/images/avatar.jpg"></div>
+        <div class="name"><?php echo $reviewer; ?></div>
+      </div>
+    
+      <div class="review-wrapper">
+        
+            <div class="pointer"></div>
         
               <header>
 
