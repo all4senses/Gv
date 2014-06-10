@@ -283,10 +283,10 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
               
                   $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value'];
                   echo '<span>Overall Score:</span>
-                        <span rel="v:rating">',
+                        <span rel="v:rating" style="margin-right: 0;">',
                           '<span typeof="v:Rating">',
-                            '<span property="v:value">', $r, '</span> Out of ', 
-                            '<span property="v:best" content="5">5</span>',
+                            '<span property="v:value" style="font-weight: bold;">', $r, '</span> Out of ', 
+                            '<span property="v:best" content="5" style="float: right; font-weight: bold;">5</span>',
                             '<span property="v:worst" content="0"></span>',
                           '</span>',
                         '</span>'; 
