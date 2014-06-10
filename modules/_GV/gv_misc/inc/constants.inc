@@ -132,7 +132,7 @@ $provider_options_bu = array(
           ),
           
           
-          'Available Features (some features cost extra, as per provider rates)' => array(
+          'Available Features <span>(some features cost extra, as per provider rates)</span>' => array(
               'Advanced Call Forwarding' => 'checkbox',
               'Anonymous Call Rejection' => 'checkbox',
               'Auto Attendant' => 'checkbox',
