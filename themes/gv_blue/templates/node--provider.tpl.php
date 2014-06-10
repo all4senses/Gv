@@ -255,7 +255,7 @@
 
                       foreach ($provider_options_re as $options_set => $options_data) {
 
-                        $provider_options_re_out .= '<tr><td colspan="2"></td></tr><tr class="caption"><td colspan="2">' . $options_set . '</td></tr>';
+                        $provider_options_re_out .= '<tr><td colspan="2"></td></tr><tr class="caption"><td colspan="2">' . str_replace(array('(', ')'), array('<span>(', ')</span>'), $options_set) . '</td></tr>';
 
                         $odd = TRUE;
 
