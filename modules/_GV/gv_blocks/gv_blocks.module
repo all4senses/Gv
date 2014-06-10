@@ -2494,7 +2494,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         $out .= '</tr>';
         
         
-        $out .= '<tr class="divider"><td colspan="' . $cols_num . '"></td></tr><tr class="caption"><td colspan="' . $cols_num . '">' . $options_set . '</td></tr>';
+        $out .= '<tr class="divider"><td colspan="' . $cols_num . '"></td></tr><tr class="caption"><td colspan="' . $cols_num . '">' . str_replace(array('(', ')'), array('<span>(', ')</span>'), $options_set) . '</td></tr>';
 
         
         
