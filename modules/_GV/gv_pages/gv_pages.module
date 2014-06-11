@@ -4096,7 +4096,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         '#type' => 'container',
         '#attributes' => array(
           'class' => array(
-              'step first',
+              'step about_you',
           ),
         ),
         '#weight' => -15,
@@ -4184,7 +4184,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         '#type' => 'container',
         '#attributes' => array(
           'class' => array(
-              'step second',
+              'step provider',
           ),
         ),
         '#weight' => -10,
@@ -4222,13 +4222,19 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       //$vote_keys = array('features', 'sound', 'rely', 'money', 'service');
       $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, );
       $votes = array();
+     
+          
       $form['ureview'] = array(
-        '#type' => 'fieldset',
-        '#title' => 'Step 3: Rate and Review Your VoIP Provider',
+        '#type' => 'container',
+        '#attributes' => array(
+          'class' => array(
+              'step ureview',
+          ),
+        ),
         '#weight' => -4,
       );
+          $form['provider']['title']['#markup'] = '<div class="title">Rate and Review Your VoIP Provider</div>';
           
-      
           $form['ureview']['u_input'] = array(
               '#type' => 'container',
           );
