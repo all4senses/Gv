@@ -4094,9 +4094,14 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       
       $form['about_you'] = array(
         '#type' => 'container',
-        '#title' => 'Your Information',
+        '#attributes' => array(
+          'class' => array(
+              'step first',
+          ),
+        ),
         '#weight' => -15,
       );
+          $form['about_you']['title']['#markup'] = '<div class="title">Your Information</div>';
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
           $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, 'field_r_lname' => LNAME_HINT, 'field_r_email' => EMAIL_HINT);
           foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
