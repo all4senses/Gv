@@ -4043,13 +4043,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       //$form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       //$form['#suffix'] = '</div></fieldset>';
       
-      $form['#prefix'] = '<div>xxx</div>';
+      $form['#prefix'] = '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>';
       
       //dpm($form);
-      $form['actions']['submit']['#value'] = t('Submit Review');
+      $form['actions']['submit']['#value'] = 'Submit Review';
       
       // Make some small corrections.
-      $form['title']['#title'] = t('Review title');
+      $form['title']['#title'] = 'Review title';
       $form['title']['#weight'] = -1;
       
       
@@ -4063,7 +4063,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         if ($current_user_is_admin) {
           $form['field_r_notapproved_checkbox'] = array(
             '#type' => 'checkbox',
-            '#title' => t('This review is approved'),
+            '#title' => 'This review is approved',
             '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
             '#weight' => 30,
           );
@@ -4071,7 +4071,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         elseif(arg(1) != 'add') {
           $form['field_r_notapproved_info'] = array(
             '#type' => 'item',
-            '#title' => t('Approval status for this review:'),
+            '#title' => 'Approval status for this review:',
             '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
             '#weight' => 30,
           );
@@ -4093,8 +4093,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       // Group fields
       
       $form['about_you'] = array(
-        '#type' => 'fieldset',
-        '#title' => 'Step 1: Your Information',
+        '#type' => 'container',
+        '#title' => 'Your Information',
         '#weight' => -15,
       );
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
