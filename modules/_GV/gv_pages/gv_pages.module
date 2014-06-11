@@ -4179,13 +4179,18 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           }
           
           
+  
       $form['provider'] = array(
-        '#type' => 'fieldset',
-        '#title' => 'Step 2: Your VoIP Provider Details',
-        //'#collapsible' => TRUE,
-        //'#collapsed' => FALSE,
+        '#type' => 'container',
+        '#attributes' => array(
+          'class' => array(
+              'step second',
+          ),
+        ),
         '#weight' => -10,
       );
+          $form['provider']['title']['#markup'] = '<div class="title">Your VoIP Provider Details</div>';
+          
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
