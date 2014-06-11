@@ -3418,7 +3418,1231 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'review_node_form':
       
       // Control the editing of review pages.
+      global $user;
+      gv_page_alterSubmitReviewPage_v1($form);
+      
+      dpm($GLOBALS['theme']);
+      
+    break; // End of Review of provider
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    case 'phone_review_node_form':
+//      die;
+//      break;
+      
+      // Control the editing of phone review pages.
+      
+      
+      // Metatags.
+      gv_misc_addMetatag('title', 'Submit VoIP Phone Review');
+      gv_misc_addMetatag('description', 'Share your VoIP phone experience with others. Use this quick form to submit your review and share your feedback');
+      gv_misc_addMetatag('keywords', 'submit phone reviews, phone reviews from users');
+      
+      
+      
+      global $user;
+      
+      
+      if (in_array('administrator', $user->roles)) {
+        $current_user_is_admin = TRUE;
+      }
+      else {
+        $current_user_is_admin = FALSE;
+      }
+      
+      
+     
+      if (!$current_user_is_admin) {
+        $form['title']['#access'] = FALSE;
+        // Show authoring info (including a date) only for administrator.
+        $form['author']['#access'] = FALSE;
+      }
+     
+      
+      //$breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
+      
+      // Set outer fieldset with the main caption for the Submit a Review page.
+      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of this VoIP Phone?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
+      $form['#suffix'] = '</div></fieldset>';
+      
+      //dpm($form);
+      $form['actions']['submit']['#value'] = t('Submit Review');
+      
+      // Make some small corrections.
+      $form['title']['#title'] = t('Review title');
+      $form['title']['#weight'] = 100;
+      
+      
+      
+      
+      
+      // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
+      if (isset($form['field_r_notapproved'])) {
+        // Only admin can approve it.
+        $form['field_r_notapproved']['#access'] = FALSE;
+        if ($current_user_is_admin) {
+          $form['field_r_notapproved_checkbox'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('This review is approved'),
+            '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
+            '#weight' => 30,
+          );
+        }
+        elseif(arg(1) != 'add') {
+          $form['field_r_notapproved_info'] = array(
+            '#type' => 'item',
+            '#title' => t('Approval status for this review:'),
+            '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
+            '#weight' => 30,
+          );
+        }
+      }
+      
+      // Hide some fields, so that even super admin could not see and change it.
+      $form['field_r_rating_overall']['#access'] = FALSE;
+      $form['options']['promote']['#access'] = FALSE;
+      $form['options']['sticky']['#access'] = FALSE;
+      $form['revision_information']['#access'] = FALSE;
+      $form['comment_settings']['#access'] = FALSE;
+      $form['field_p_name']['#access'] = FALSE;
+      
+      
+      
+      
+      
+      // Group fields
+      
+      $form['about_you'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Step 1: Your Information'),
+        '#weight' => -15,
+      );
+          // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
+          $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, /*'field_r_lname' => LNAME_HINT,*/ 'field_r_email' => EMAIL_HINT);
+          foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
+            $temp_field = $form[$field_to_rebuild]['und'][0];
+            $form['about_you'][$field_to_rebuild . '_temp'] = array(
+                '#type' => 'textfield',
+                '#title' => t($temp_field['#title']),
+                '#default_value' => $temp_field['value']['#default_value'],
+                '#description' => $temp_field['#description'],
+                '#required' => $temp_field['value']['#required'],
+                '#attributes' => array('title' => t($field_hint)),
+            );
+            $form[$field_to_rebuild]['#access'] = FALSE;
+          }
+          //$form['about_you']['field_r_fname_temp']['#title'] = t('Your name');
+          //$form['about_you']['field_r_lname_temp']['#title'] = '';
+          
+          
+        
+      $form['phone'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Step 2: Your VoIP Phone Details'),
+        //'#collapsible' => TRUE,
+        //'#collapsed' => FALSE,
+        '#weight' => -10,
+      );
+          $form['phone']['field_ref_phone'] = $form['field_ref_phone'];
+          unset($form['field_ref_phone']);
+      
+          $form['field_r_data']['#access'] = FALSE;
+          
+          
+          
+          
+          
+          
+//          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
+//          $form['phone']['lines'] = array(
+//            '#type' => 'radios',
+//            //'#title' => t('How many lines do you have:'),
+//            '#options' => $lines_options,
+//            '#default_value' => FALSE,
+//            '#weight' => 100,
+//            '#prefix' => '<div class="label left">' . t('How many lines do you have:') . '</div>',
+//          );
+          
+          
+      
+      
+          
+                
+          
+      // Rate and vote group.
+      $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
+      $weight = 8;
+     
+      //$vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE);
+      $vote_keys = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE);
+      
+      $votes = array();
+      $form['ureview'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Step 3: Rate and Review Your VoIP Phone'),
+        '#weight' => -9,
+      );
+          
+          $form['ureview']['votes'] = array(
+              '#type' => 'container',
+              '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
+          );
+          foreach ($vote_keys as $vote_key => $vote_title) {
+            $form['ureview']['votes']['rating_' . $vote_key] = array(
+              '#type' => 'select',
+              '#options' => $rating_options,
+              '#default_value' => $rating_options[''],
+              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
+              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+            );
+          }
+      
+          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+          $form['ureview']['rating_recommend'] = array(
+              '#type' => 'radios',
+              '#options' => $rating_recommend_options,
+              '#default_value' => FALSE,
+              '#prefix' => '<div class="label left">' . RECOMMEND_PHONE . '</div>',
+          );
+          
+          // just for reference from a below call
+          //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
+      
+          
+          
+          
+          
+          
+//          $form['ureview']['pros'] = array(
+//            '#type' => 'textfield',
+//            '#title' => t('Pros'),
+//            '#default_value' => '',
+//            '#attributes' => array('title' => t(PROS_HINT)),
+//          );
+//          $form['ureview']['cons'] = array(
+//            '#type' => 'textfield',
+//            '#title' => t('Cons'),
+//            '#default_value' => '',
+//            '#attributes' => array('title' => t(CONS_HINT)),
+//          );
+          
+          
+          
+          
+          
+          
+          
+          //$form['body']['#weight'] = 2;
+          $form['body']['und'][0]['value']['#rows'] = 5;
+          // Unlink Ckeditor
+          // Bad trial...
+          //$form['body']['und'][0]['#type'] = 'textarea';
+          // Good trial! :)
+          ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
+          $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+          
+          $form['ureview']['body'] = $form['body'];
+          unset($form['body']);
+          
+      
+      // Hide approvecode field (used for unauthorized user email approve).
+      // It should be empty if a user has approved email.
+      $form['field_r_approvecode']['#access'] = FALSE;
+      
+      
+      
+      if(arg(1) == 'add') {
+        
+        // Add a phone review page.
+      
+        // This TEMPORARY title will see only Administrators.
+        if (!$current_user_is_admin) {
+          $form['title']['#default_value'] = 'Unapproved review ' . time();
+        }
+        
+        // Generate an approval code for email verification.
+        if (!$user->uid) {
+          $form['field_r_approvecode']['und'][0]['value']['#default_value'] = md5(time());
+        }
+        
+        if ($user->uid) {
+          // Get all additional data for first/last names extraction.
+          $user = user_load($user->uid);
+          // Autofill first/last names and email.
+          //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+          $form['about_you']['field_r_fname_temp']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          //////$form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
+          
+          // Disallow to choose another email for a registered user.
+          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
+          $form['about_you']['email_autofilled'] = array(
+              '#type' => 'item',
+              '#title' => t('Your email'),
+              '#markup' => $user->mail,
+          );
 
+        }
+//        else {
+//          // Options for not logged in users.
+//          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user", array('query' => array('destination' => url($_GET['q']))) ), '!register' => l(t('register'), "user/register", array('query' => array('destination' => url($_GET['q']))) )) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
+//          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
+//          $form['#suffix'] = '</div></fieldset>';
+//        }
+        if ($current_user_is_admin) {
+          $form['about_you']['user_ip_show'] = array(
+              '#type' => 'item',
+              '#title' => t('User IP:'),
+              '#markup' => $_SERVER['REMOTE_ADDR'],
+          );
+        }
+        $form['user_ip'] = array(
+          '#type' => 'hidden',
+          '#value' => $_SERVER['REMOTE_ADDR'],
+        );
+        
+        
+        // Set a select of available phones.
+        // As we use the entityReference field for phones and use only existing phones nodes
+        // we can just use prefilled field data.
+        //////////$phones['_none'] = t('- Select a value -');
+        ///////////gv_misc_getPhones($phones);
+        // $phones[41] = t('OTHER SP'); // we don't use it for phones. just for providers.
+        ////$form['phone']['field_ref_phone']['und']['#options'] = $phones;
+        ////$form['phone']['field_ref_phone']['und']['#default_value'][0] = '_none';
+        $phones = $form['phone']['field_ref_phone']['und']['#options'];
+        
+        // Check if the review is added via a button on a phone's page.
+        $phone_nid = NULL;
+        if (isset($_GET['id'])) {
+          $phone_nid = check_plain($_GET['id']);
+          if(!isset($phones[$phone_nid])) {
+            $phone_nid = NULL;
+          }
+          else {
+            $phone_id_source = t('your choice while viewing this phone\'s page');
+          }
+        }
+        elseif ($_SERVER['HTTP_REFERER']) {
+          // If a user has clicked "Submit a review" on the phone's page, treat it as choice of that phone.
+          $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
+          if (isset($refferer[1]) && $refferer[1]) {
+            $query = db_select('url_alias', 'ua')
+              ->fields('ua', array('source'))
+              ->condition('alias', $refferer[1]);
+            $source = $query->execute()->fetchField();
+            $source = str_replace('node/', '', $source);
+            if (is_numeric($source)) {
+              $query = db_select('node', 'n')
+                ->fields('n', array('type'))
+                ->condition('nid', $source);
+              $type = $query->execute()->fetchField();
+              if ($type == 'phone') {
+                $phone_nid = $source;
+                $phone_id_source = t('the page you have been viewing when clicked a Submit review button');
+              }
+            }
+          } // End of if (isset($refferer[1]) && $refferer[1]) {
+        } // End of elseif ($_SERVER['HTTP_REFERER']) {
+        
+        
+        // If a target phone has been defined by id from url or by referrer (previous) page,
+        // set this phone as selected by default and show its info and preview.
+        if ($phone_nid) {
+          
+          /*
+          $form['phone']['id_source'] = array(
+            '#markup' => '<div class="id-source">' . t('A taget phone has been chosen based on !source.', array('!source' => $phone_id_source)) . '<div>' . t('If You want to chose an other phone, please click !here.', array('!here' => l(t('here'), 'node/add/phone_review'))) . '</div></div>',
+          ); 
+          
+          $phone_node = node_load($phone_nid);
+          $form['phone']['phone_title'] = array(
+            '#type' => 'item',
+            '#title' => t('A phone You have chosen'),
+            '#markup' => l($phone_node->title, 'node/' . $phone_node->nid),
+          ); 
+          
+          $phone_preview = '<div class="p-preview">' . render(node_view($phone_node, 'teaser')) . '</div>';
+          $form['phone']['preview'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Phone preview') . ': ' . $phone_node->title,
+            '#collapsible' => TRUE,
+            '#collapsed' => TRUE,
+          );
+              $form['phone']['preview']['phone_preview'] = array(
+                '#markup' => $phone_preview,
+                '#weight' => -100,
+              ); 
+          */
+          
+          //$form['field_ref_phone']['und']['#options'] = array($phone_nid => $phones[$phone->nid]);
+          $form['phone']['field_ref_phone']['und']['#default_value'][0] = $phone_nid;
+          //$form['phone']['field_ref_phone']['#access'] = FALSE;
+          
+        } // End of if($phone_nid) { // // If a target phone has been defined by id from url or by referrer (previous) page,
+        
+        
+      } // End of if(arg(1) == 'add') {
+      else {
+        
+        
+        // Edit a Phone review page.
+        
+        
+        
+        // Show saved it a hidden field other data
+        if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
+          $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
+          
+          
+          
+          
+//          $form['phone']['lines']['#default_value'] = $other_data['lines'];
+//          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
+//          $form['ureview']['cons']['#default_value'] = $other_data['cons'];
+          
+          
+          
+          
+          $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
+          if ($current_user_is_admin) {
+            $form['about_you']['user_ip_show'] = array(
+                '#type' => 'item',
+                '#title' => t('User IP:'),
+                '#markup' => $user_ip,
+            );
+          }
+          $form['user_ip'] = array(
+            '#type' => 'hidden',
+            '#value' => $user_ip,
+          );
+        }
+
+        // Save the current email... in case it will be changes now, we could delete old it's votes connected to the old email.
+        $form['email_old'] = array(
+          '#type' => 'hidden',
+          '#value' => $form['about_you']['field_r_email_temp']['#default_value'],
+        );
+        
+        // Disallow to choose another email for a registered user.
+        if (!$current_user_is_admin) {
+          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
+          $form['about_you']['email_autofilled'] = array(
+              '#type' => 'item',
+              '#title' => t('Your email'),
+              '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
+          );
+        }
+        
+          
+        // If this review is not approved OR this review is NOT published.
+        // Load votes data from a local field $other_data['saved_ratings'] (field_r_data), not from Voting api tables.
+        if ($form['field_r_notapproved']['und'][0]['value']['#default_value'] || !$form['options']['status']['#default_value']) {
+          $saved_ratings = $other_data['saved_ratings'];
+          foreach ($saved_ratings as $tag => $value) {
+            if ($tag == 'recommend') {
+              $recommend = $value;
+              continue;
+            }
+            $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
+          }
+        }
+        else {
+          // Else load saved votes for a phone of this review.
+          $criteria = array(
+            'entity_type' => 'node',
+            'entity_id' => $form['phone']['field_ref_phone']['und']['#default_value'][0],
+            'uid' => $form['uid']['#value'],
+            // Make it possible to count votes of different unauthorized (uid = 0, but with different emails) users.
+            'vote_source' => $form['about_you']['field_r_email_temp']['#default_value'],
+          );
+
+          $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria)
+
+          if ($votes) {
+            foreach ($votes as $vote) {
+              if ($vote['tag'] == 'recommend') {
+                $recommend = $vote['value'];
+                continue;
+              }
+              $form['ureview']['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+            }
+          }
+        } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
+        if (isset($recommend)) {
+          $form['ureview']['rating_recommend']['#default_value'] = $recommend;
+        }
+
+        // Show preview of the phone (as a teaser) on the edit form.
+        $phone_node = node_load($form['phone']['field_ref_phone']['und']['#default_value'][0]);
+        /*
+        $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
+        $form['provider']['provider_preview'] = array(
+            '#markup' => $provider_preview,
+            '#weight' => -100,
+        ); 
+        */
+        $form['phone']['phone_title_noedit'] = array(
+          '#type' => 'item',
+          '#title' => t('Your VoIP Phone:'),
+          '#markup' => '<div class="text">' . l(html_entity_decode($phone_node->field_p_name['und'][0]['safe_value']), 'node/' . $phone_node->nid) . '</div>',
+          //'#weight' => -100,
+        );
+
+        $form['phone']['field_ref_phone']['#access'] = FALSE;
+
+        
+      } // End of Edit a review page.
+      
+      
+      
+      // Add stars widgets to a Rating block
+      $module_path = drupal_get_path('module', 'gv_pages');
+      $module_misc_path = drupal_get_path('module', 'gv_misc');
+      
+      $form['#attached']['js'] = array(
+
+        // Add a characters counter.
+        //$module_misc_path . '/js/gv_misc_charCount.js',
+        //'sites/all/libraries/jquery.plugins/charCount.js',
+
+        // Add hints inside some fields
+        $module_path . '/js/gv_review_fieldHints.js',
+
+        // Add stars widgets to a Rating block
+        $module_path . '/js/gv_phone_review_stars.js',
+        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+      );
+
+      $form['#attached']['library'][] = array('system', 'ui.widget');
+
+      $form['#attached']['css'] = array(
+        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+      );
+
+      
+      
+
+  
+      $form['#attributes']['class'][] = 'gv-edit-review-page';
+  
+      $form['#validate'][] = 'gv_pages_validateForm_phoneReview';
+      $form['#submit'][] = 'gv_pages_submitForm_phoneReview';
+      
+      
+      //dpm($form);
+      
+    break; // End of Phone review node edit.
+    
+    
+  } // End of switch ($form_id) {
+  
+  
+  // Add a Save Draft and Invisible buttons.
+  switch ($form_id) {
+    
+    case 'news_post_node_form':
+    case 'blog_post_node_form':
+    case 'article_node_form':
+    case 'provider_node_form':
+    case 'phone_node_form':
+    //case 'preface_node_form':
+      
+        $form['actions']['submit']['#value'] = 'Save & Publish';
+      
+        $form['actions']['save_draft'] = array(
+          '#type' => 'submit',
+          '#value' => 'Save Draft',
+          '#submit' => array('node_form_submit'),
+          '#weight' => 6,
+        );
+      
+        if (isset($form['field_invisible'])) {
+          
+          $form['field_invisible']['#access'] = FALSE;
+          
+          $form['actions']['published_but_invisible'] = array(
+            '#type' => 'submit',
+            '#value' => 'Published, but invisible in lists',
+            '#submit' => array('node_form_submit'),
+            '#weight' => 7,
+          );
+        }
+      
+        $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
+        //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
+        
+        //dpm($form);
+        
+        
+        break;
+      
+  } // End of switch ($form_id) { // Save Draft button
+  
+  
+  // Convert beautiful urls back to originals
+  if (!empty($form['body']['und'][0]['#default_value'])) {
+    $form['body']['und'][0]['#default_value'] = gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $form['body']['und'][0]['#default_value']);
+    $form['#submit'][] = 'gv_pages_submitForm_convertBeautifulUrls';
+  }
+  
+}
+
+
+function gv_page_alterSubmitReviewPage_v2(&$form) {
+  
+  
+      // Metatags.
+      gv_misc_addMetatag('title', 'Review Your VoIP Provider');
+      gv_misc_addMetatag('description', 'Share your feedback with others. Rate and review your user experience with your current VoIP Provider. Let others know.');
+      gv_misc_addMetatag('keywords', 'submit voip review, review my voip provider, rate my provider, voip provider submit review');
+      
+      global $user;
+      
+      if (in_array('administrator', $user->roles)) {
+        $current_user_is_admin = TRUE;
+      }
+      else {
+        $current_user_is_admin = FALSE;
+      }
+      
+      
+     
+      if (!$current_user_is_admin) {
+        $form['title']['#access'] = FALSE;
+        // Show authoring info (including a date) only for administrator.
+        $form['author']['#access'] = FALSE;
+      }
+//      else {
+//        // Or connect datepicker to a post date field
+//        $module_path = drupal_get_path('module', 'gv_pages');
+//  
+//        $form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
+//        $form['#attached']['js'][] = $module_path . '/js/gv_review_datepicker.js';
+//        $form['#attached']['library'][] = array('system', 'ui.datepicker');
+//      }
+      
+      //$breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Provider Review' )));
+      
+      // Set outer fieldset with the main caption for the Submit a Review page.
+      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
+      $form['#suffix'] = '</div></fieldset>';
+      
+      //dpm($form);
+      $form['actions']['submit']['#value'] = t('Submit Review');
+      
+      // Make some small corrections.
+      $form['title']['#title'] = t('Review title');
+      $form['title']['#weight'] = -1;
+      
+      
+      
+      
+      
+      // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
+      if (isset($form['field_r_notapproved'])) {
+        // Only admin can approve it.
+        $form['field_r_notapproved']['#access'] = FALSE;
+        if ($current_user_is_admin) {
+          $form['field_r_notapproved_checkbox'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('This review is approved'),
+            '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
+            '#weight' => 30,
+          );
+        }
+        elseif(arg(1) != 'add') {
+          $form['field_r_notapproved_info'] = array(
+            '#type' => 'item',
+            '#title' => t('Approval status for this review:'),
+            '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
+            '#weight' => 30,
+          );
+        }
+      }
+      
+      // Hide some fields, so that even super admin could not see and change it.
+      $form['field_r_rating_overall']['#access'] = FALSE;
+      $form['options']['promote']['#access'] = FALSE;
+      $form['options']['sticky']['#access'] = FALSE;
+      $form['revision_information']['#access'] = FALSE;
+      $form['comment_settings']['#access'] = FALSE;
+      $form['field_r_provider_name']['#access'] = FALSE;
+      
+      
+      
+      
+      
+      // Group fields
+      
+      $form['about_you'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Step 1: Your Information',
+        '#weight' => -15,
+      );
+          // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
+          $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, 'field_r_lname' => LNAME_HINT, 'field_r_email' => EMAIL_HINT);
+          foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
+            $temp_field = $form[$field_to_rebuild]['und'][0];
+            $form['about_you'][$field_to_rebuild . '_temp'] = array(
+                '#type' => 'textfield',
+                '#title' => t($temp_field['#title']),
+                '#default_value' => $temp_field['value']['#default_value'],
+                '#description' => $temp_field['#description'],
+                '#required' => $temp_field['value']['#required'],
+                '#attributes' => array('title' => t($field_hint)),
+            );
+            $form[$field_to_rebuild]['#access'] = FALSE;
+          }
+          $form['about_you']['field_r_fname_temp']['#title'] = t('Your name');
+          $form['about_you']['field_r_lname_temp']['#title'] = '';
+          
+          
+          if (isset($_GET['social'])) {
+                if (!$user->uid) {
+          //        $form['social_login'] = array(
+          //          '#markup' => '<div class="user-header">'. gv_blocks_userBlock(). '</div>',
+          //        );
+
+                  $form['about_you']['hybridauth'] = array(
+                    '#type' => 'hybridauth_widget',
+                  );
+                }
+                else {
+                  //dpm($_GET);
+                  //dpm($_SERVER);
+                  
+                  
+                  
+                  if (is_object($user->picture)) {
+                    $avatar = $user->picture;
+                  }
+                  elseif($user->picture) {
+                    $avatar = file_load($user->picture);
+                  }
+                  else {
+                    $avatar = NULL;
+                  }
+                  
+                  
+                  // Avatar for logged in via social networks.
+                  if ($user->hostname == '37.229.169.239') {
+                    //dpm($user);
+                    //$user_full = user_load($user->uid);
+                    //dpm($user_full);
+                    
+                    if ($avatar) {
+                      //dpm($avatar);
+                      $avatar_themed = theme('image_style', array( 'path' =>  $avatar->uri, 'style_name' => 'avatar_reviewer', 'alt' => '', 'title' => '', 'attributes' => array('class' => 'avatar reviewer', 'rel' => 'v:photo')));
+                    }
+                    else {
+                      $avatar_themed = NULL;
+                    }
+                    
+                    
+                    
+                  }
+                  
+                  //dpm($_SESSION);
+                  //dpm(unserialize($_SESSION['HA::CONFIG']['config']));
+                  
+                  //dpm($user->session);
+                  //dpm(unserialize($user->session));
+                  
+                  $form['about_you']['logout'] = array(
+                    '#markup' => 'You are logged in as ' . $avatar_themed . l($user->name, 'user/' . $user->uid) . (!empty($user->data['hybridauth']['provider']) ? ', registered via ' . l($user->data['hybridauth']['provider'], $user->data['hybridauth']['profileURL'], array('external' => TRUE)) : '') . '. ' . l('Log out...', 'user/logout', array('query' => array('destination' => ltrim($_SERVER['REQUEST_URI'], '/')))),
+                    '#weight' => 10,
+                  );
+                }
+          }
+          
+          
+      $form['provider'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Step 2: Your VoIP Provider Details',
+        //'#collapsible' => TRUE,
+        //'#collapsed' => FALSE,
+        '#weight' => -10,
+      );
+          $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
+          $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
+          unset($form['field_ref_provider'], $form['field_r_oprovider']);
+      
+          $form['field_r_data']['#access'] = FALSE;
+          
+          
+          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
+          $form['provider']['lines'] = array(
+            '#type' => 'radios',
+            //'#title' => t('How many lines do you have:'),
+            '#options' => $lines_options,
+            '#default_value' => FALSE,
+            '#weight' => 10,
+            '#prefix' => '<div class="label left">How many lines do you have:</div>',
+          );
+          
+          
+      
+          
+      // Rate and vote group.
+      //$rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
+      
+          
+      //$rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
+      $rating_options = array(/*'' => FALSE,*/ '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
+      $weight = 8;
+     
+      //$vote_keys = array('features', 'sound', 'rely', 'money', 'service');
+      $vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, );
+      $votes = array();
+      $form['ureview'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Step 3: Rate and Review Your VoIP Provider',
+        '#weight' => -4,
+      );
+          
+      
+          $form['ureview']['u_input'] = array(
+              '#type' => 'container',
+          );
+          
+              $form['ureview']['u_input']['votes'] = array(
+                  '#type' => 'container',
+                  '#prefix' => '<div class="rate-caption"><div class="col-2">Click Stars To Start Reviewing</div><div class="col-3">Rate it</div></div>',
+              );
+              foreach ($vote_keys as $vote_key => $vote_title) {
+                $form['ureview']['u_input']['votes']['rating_' . $vote_key] = array(
+                  '#type' => 'select',
+                  '#options' => $rating_options,
+                  // Commented because caused errors on w3 html validation.
+                  //'#default_value' => $rating_options[''],
+                  '#prefix' => '<div class="vote"><div class="vote-title">' . $vote_title . '</div>',
+                  '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+                );
+    //            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
+    //              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
+    //              //'#weight' => $weight++,
+    //            );
+              }
+
+              //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
+              $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
+              $form['ureview']['u_input']['rating_recommend'] = array(
+                  '#type' => 'radios',
+                  '#options' => $rating_recommend_options,
+                  '#default_value' => FALSE,
+                  '#prefix' => '<div class="label left">' . RECOMMEND . '</div>',
+              );
+
+              // just for reference from a below call
+              //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
+
+              $form['ureview']['u_input']['pros'] = array(
+                '#type' => 'textfield',
+                '#title' => 'Pros',
+                '#default_value' => '',
+                '#attributes' => array('title' => PROS_HINT),
+              );
+              $form['ureview']['u_input']['cons'] = array(
+                '#type' => 'textfield',
+                '#title' => 'Cons',
+                '#default_value' => '',
+                '#attributes' => array('title' => CONS_HINT),
+              );
+
+
+              //$form['body']['#weight'] = 2;
+              $form['body']['und'][0]['value']['#rows'] = 5;
+              // Unlink Ckeditor
+              // Bad trial...
+              //$form['body']['und'][0]['#type'] = 'textarea';
+              // Good trial! :)
+              ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
+              $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+
+              $form['ureview']['u_input']['body'] = $form['body'];
+              unset($form['body']);
+
+          $form['ureview']['tips'] = array(
+              '#type' => 'container',
+          );
+            
+              $form['ureview']['tips']['data'] = array(
+                '#markup' => "<div id='tips-block'><div class='title'>Review Tips:</div>
+<span>What do you like about your provider?</span>
+<span>What do you dislike and why?</span>
+<span>Talk about the advantages & disadvantages of the specific plan you have.</span>
+<span>How long have you been with the provider.</span>
+<span>Write as if you're literally telling a friend about the provider/service.</span>
+</div>
+<div id='about'><div class='title'>About Reviews:</div>
+<span>We will only accept and publish honest, detailed, and appropriate reviews.</span>
+<span>We will not publish reviews that use profanity. We reserve the right to refuse any review that is not verified by the reviewer.</span>
+<span>Your review will be published after it's been approved by one of our editors.</span>
+<span>Submissions that do not follow the above guidelines will not be posted.</span></div>",
+              );
+          
+          
+      // Hide helper hidden field (for saving temporary serialized ratings data)
+      $form['field_ratings_oprovider']['#access'] = FALSE;
+      
+      // Hide approvecode field (used for unauthorized user email approve).
+      // It should be empty if a user has approved email.
+      $form['field_r_approvecode']['#access'] = FALSE;
+      
+      
+      
+      if(arg(1) == 'add') {
+        
+        // Add a review page.
+      
+        // This TEMPORARY title will see only Administrators.
+        if (!$current_user_is_admin) {
+          $form['title']['#default_value'] = 'Unapproved review ' . time();
+        }
+        
+        // Generate an approval code for email verification.
+        if (!$user->uid) {
+          $form['field_r_approvecode']['und'][0]['value']['#default_value'] = md5(time());
+        }
+        
+        if ($user->uid) {
+          
+          // Get all additional data for first/last names extraction.
+          //$user = user_load($user->uid);
+          //https://drupal.org/node/1078614
+          //Notice: Undefined property: stdClass::$timestamp in _drupal_session_write()
+          $user = (object)array_merge((array)$user, (array)user_load($user->uid));
+          
+          // Autofill first/last names and email.
+          //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
+          $form['about_you']['field_r_fname_temp']['#default_value'] = $user->field_u_fname['und'][0]['value'];
+          $form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
+          $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
+          
+          // Disallow to choose another email for a registered user.
+          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
+          $form['about_you']['email_autofilled'] = array(
+              '#type' => 'item',
+              '#title' => 'Your email',
+              '#markup' => $user->mail,
+          );
+
+        }
+//        else {
+//          // Options for not logged in users.
+//          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user", array('query' => array('destination' => url($_GET['q']))) ), '!register' => l(t('register'), "user/register", array('query' => array('destination' => url($_GET['q']))) )) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
+//          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
+//          $form['#suffix'] = '</div></fieldset>';
+//        }
+        if ($current_user_is_admin) {
+          $form['about_you']['user_ip_show'] = array(
+              '#type' => 'item',
+              '#title' => 'User IP:',
+              '#markup' => $_SERVER['REMOTE_ADDR'],
+          );
+        }
+        $form['user_ip'] = array(
+          '#type' => 'hidden',
+          '#value' => $_SERVER['REMOTE_ADDR'],
+        );
+        
+        
+        // Set a select of available providers.
+        $providers['_none'] = '- Select a value -';
+        gv_misc_getProviders($providers);
+        $providers[41] = 'OTHER SP';
+        $form['provider']['field_ref_provider']['und']['#options'] = $providers;
+        $form['provider']['field_ref_provider']['und']['#default_value'][0] = '_none';
+
+        // Check if the review is added via a button on a provider's page.
+        $provider_nid = NULL;
+        if (isset($_GET['id'])) {
+          $provider_nid = check_plain($_GET['id']);
+          if(!isset($providers[$provider_nid])) {
+            $provider_nid = NULL;
+          }
+          else {
+            $provider_id_source = 'your choice while viewing this provider\'s page';
+            
+            // Correct Metatags for a specific provider.
+            //gv_misc_addMetatag('title', 'Review Your VoIP Provider');
+            gv_misc_addMetatag('title', 'Submit Your Review for ' . $providers[$provider_nid]);
+            gv_misc_addMetatag('description', 'Rate and review your user experience with ' . $providers[$provider_nid] . '. Share with others what you like and dislike about ' . $providers[$provider_nid] . '.');
+            gv_misc_addMetatag('keywords', 'submit voip review, review my voip provider, rate my provider, voip provider submit review, ' . $providers[$provider_nid]);
+      
+          }
+        }
+        elseif ($_SERVER['HTTP_REFERER']) {
+          // If a user has clicked "Submit a review" on the Provider's page, treat it as choice of that provider.
+          $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
+          if (isset($refferer[1]) && $refferer[1]) {
+            $query = db_select('url_alias', 'ua')
+              ->fields('ua', array('source'))
+              ->condition('alias', $refferer[1]);
+            $source = $query->execute()->fetchField();
+            $source = str_replace('node/', '', $source);
+            if (is_numeric($source)) {
+              $query = db_select('node', 'n')
+                ->fields('n', array('type'))
+                ->condition('nid', $source);
+              $type = $query->execute()->fetchField();
+              if ($type == 'provider') {
+                $provider_nid = $source;
+                $provider_id_source = 'the page you have been viewing when clicked a Submit review button';
+              }
+            }
+          } // End of if (isset($refferer[1]) && $refferer[1]) {
+        } // End of elseif ($_SERVER['HTTP_REFERER']) {
+        
+        
+        // If a target provider has been defined by id from url or by referrer (previous) page,
+        // set this provider as selected by default and show its info and preview.
+        if ($provider_nid) {
+          
+          /*
+          $form['provider']['id_source'] = array(
+            '#markup' => '<div class="id-source">' . t('A taget provider has been chosen based on !source.', array('!source' => $provider_id_source)) . '<div>' . t('If You want to chose an other provider, please click !here.', array('!here' => l(t('here'), 'node/add/review'))) . '</div></div>',
+          ); 
+          
+          $provider_node = node_load($provider_nid);
+          $form['provider']['provider_title'] = array(
+            '#type' => 'item',
+            '#title' => t('A provider You have chosen'),
+            '#markup' => l($provider_node->title, 'node/' . $provider_node->nid),
+          ); 
+          
+          $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
+          $form['provider']['preview'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Provider preview') . ': ' . $provider_node->title,
+            '#collapsible' => TRUE,
+            '#collapsed' => TRUE,
+          );
+              $form['provider']['preview']['provider_preview'] = array(
+                '#markup' => $provider_preview,
+                '#weight' => -100,
+              ); 
+          */
+          
+          //$form['field_ref_provider']['und']['#options'] = array($provider_nid => $providers[$provider->nid]);
+          //$form['field_r_oprovider']['und'][0]['value']['#default_value'] = $provider_nid;
+          $form['provider']['field_ref_provider']['und']['#default_value'][0] = $provider_nid;
+          //$form['provider']['field_ref_provider']['#access'] = FALSE;
+          //$form['provider']['field_r_oprovider']['#access'] = FALSE;
+          
+        } // End of if($provider_nid) { // // If a target provider has been defined by id from url or by referrer (previous) page,
+        
+        
+      } // End of if(arg(1) == 'add') {
+      else {
+        
+        
+        // Edit a review page.
+        
+        
+        // Show saved it a hidden field other data
+        if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
+          $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
+          $form['provider']['lines']['#default_value'] = $other_data['lines'];
+          $form['ureview']['u_input']['pros']['#default_value'] = $other_data['pros'];
+          $form['ureview']['u_input']['cons']['#default_value'] = $other_data['cons'];
+          
+          $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
+          if ($current_user_is_admin) {
+            $form['about_you']['user_ip_show'] = array(
+                '#type' => 'item',
+                '#title' => 'User IP:',
+                '#markup' => $user_ip,
+            );
+          }
+          $form['user_ip'] = array(
+            '#type' => 'hidden',
+            '#value' => $user_ip,
+          );
+        }
+
+        // Save the current email... in case it will be changes now, we could delete old it's votes connected to the old email.
+        $form['email_old'] = array(
+          '#type' => 'hidden',
+          '#value' => $form['about_you']['field_r_email_temp']['#default_value'],
+        );
+        
+        // Disallow to choose another email for a registered user.
+        if (!$current_user_is_admin) {
+          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
+          $form['about_you']['email_autofilled'] = array(
+              '#type' => 'item',
+              '#title' => 'Your email',
+              //'#markup' => $form['about_you']['field_r_email']['und'][0]['value']['#default_value'],
+              '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
+          );
+        }
+        
+        
+        $providers = array();
+        gv_misc_getProviders($providers);
+        $providers[41] = 'OTHER SP';
+          
+        $form['provider']['field_ref_provider']['und']['#options'] = $providers;
+          
+        if(!isset($form['provider']['field_ref_provider']['und']['#default_value'][0]) || $form['provider']['field_ref_provider']['und']['#default_value'][0] == '_none') {
+          // If a provider has not been selected from a list,
+          // then it has been set manually in the field field_r_oprovider
+          
+          $form['provider']['field_ref_provider']['und']['#default_value'][0] = 41;
+          
+          // Should we allow to a regular user to edit the name in the text field / reselect from the list?
+          // Or once chosen it could not be changed by the user (for example, it could be changed only by an admin)?
+          // Let's choose the second variant.
+          if(!in_array('administrator', $user->roles)) {
+            // Allow to change a provider if the review is not yet approved.
+            if (!$form['field_r_notapproved']['und'][0]['value']['#default_value']) {
+              $form['provider']['field_ref_provider']['#access'] = FALSE;
+              $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+            }
+            $form['provider']['provider_title_noedit'] = array(
+              '#type' => 'item',
+              '#title' => 'Your VoIP Service Provider (*)',
+              '#markup' => '<div class="text">' . $form['provider']['field_r_oprovider']['und'][0]['value']['#default_value'] . '</div>',
+              //'#weight' => -100,
+            ); 
+          }
+          
+          // Load saved votes from this node's field_ratings_oprovider
+          $field_ratings_oprovider = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
+
+          foreach ($field_ratings_oprovider as $tag => $value) {
+            $form['ureview']['u_input']['votes']['rating_' . $tag]['#default_value'] = $value;
+          }
+          
+          $form['ureview']['u_input']['rating_recommend']['#default_value'] = $field_ratings_oprovider['recommend'];
+          
+        } // End of if(!isset($form['field_ref_provider']['und']['#default_value'][0]) || $form['field_ref_provider']['und']['#default_value'][0] == '_none') {
+        else {
+          // A provider has been selected from a list.
+          
+          // If this review is not approved OR this review is NOT published.
+          // Load votes data from a local field_ratings_oprovider, not from Voting api tables.
+          if ($form['field_r_notapproved']['und'][0]['value']['#default_value'] || !$form['options']['status']['#default_value']) {
+            $saved_ratings = unserialize($form['field_ratings_oprovider']['und'][0]['value']['#default_value']);
+            foreach ($saved_ratings as $tag => $value) {
+              if ($tag == 'recommend') {
+                $recommend = $value;
+                continue;
+              }
+              $form['ureview']['u_input']['votes']['rating_' . $tag]['#default_value'] = $value;
+            }
+          }
+          else {
+            // Else load saved votes for a provider of this review.
+            $criteria = array(
+              'entity_type' => 'node',
+              'entity_id' => $form['provider']['field_ref_provider']['und']['#default_value'][0],
+              'uid' => $form['uid']['#value'],
+              // Make it possible to count votes of several unauthorized (uid = 0, but with different emails) users.
+              'vote_source' => $form['about_you']['field_r_email_temp']['#default_value'],
+            );
+            
+            $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria)
+            
+            if ($votes) {
+              foreach ($votes as $vote) {
+                if ($vote['tag'] == 'recommend') {
+                  $recommend = $vote['value'];
+                  continue;
+                }
+                $form['ureview']['u_input']['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
+              }
+            }
+          } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
+          if (isset($recommend)) {
+            $form['ureview']['u_input']['rating_recommend']['#default_value'] = $recommend;
+          }
+          
+          // Show preview of the provider (as a teaser) on the edit form.
+          $provider_node = node_load($form['provider']['field_ref_provider']['und']['#default_value'][0]);
+          /*
+          $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
+          $form['provider']['provider_preview'] = array(
+              '#markup' => $provider_preview,
+              '#weight' => -100,
+          ); 
+          */
+          $form['provider']['provider_title_noedit'] = array(
+            '#type' => 'item',
+            '#title' => 'Your VoIP Service Provider:',
+            '#markup' => '<div class="text">' . l(html_entity_decode($provider_node->field_p_name['und'][0]['safe_value']), 'node/' . $provider_node->nid) . '</div>',
+            //'#weight' => -100,
+          );
+          
+          // Allow to change a provider if the review is not yet approved.
+          if (!$form['field_r_notapproved']['und'][0]['value']['#default_value']) {
+            $form['provider']['field_ref_provider']['#access'] = FALSE;
+            $form['provider']['field_r_oprovider']['#access'] = FALSE;  
+          }
+//          
+          
+        } // End of A provider has been selected from a list.
+        
+      } // End of Edit a review page.
+      
+      
+      
+      // Add stars widgets to a Rating block
+      $module_path = drupal_get_path('module', 'gv_pages');
+      $module_misc_path = drupal_get_path('module', 'gv_misc');
+      
+      $form['#attached']['js'] = array(
+
+        // Add a characters counter.
+        //$module_misc_path . '/js/gv_misc_charCount.js',
+        //'sites/all/libraries/jquery.plugins/charCount.js',
+
+        // Add hints inside some fields
+        $module_path . '/js/gv_review_fieldHints.js',
+
+        // Add stars widgets to a Rating block
+        $module_path . '/js/gv_review_stars.js',
+        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+      );
+
+      $form['#attached']['library'][] = array('system', 'ui.widget');
+
+      $form['#attached']['css'] = array(
+        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+      );
+
+      
+      
+
+  
+      $form['#attributes']['class'][] = 'gv-edit-review-page';
+  
+      $form['#validate'][] = 'gv_pages_validateForm_review';
+      $form['#submit'][] = 'gv_pages_submitForm_review';
+      
+      
+      //dpm($form);
+}
+
+
+function gv_page_alterSubmitReviewPage_v1(&$form) {
+
+  
       // Metatags.
       gv_misc_addMetatag('title', 'Review Your VoIP Provider');
       gv_misc_addMetatag('description', 'Share your feedback with others. Rate and review your user experience with your current VoIP Provider. Let others know.');
@@ -4053,581 +5277,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       
       //dpm($form);
-      
-    break; // End of Review of provider
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    case 'phone_review_node_form':
-//      die;
-//      break;
-      
-      // Control the editing of phone review pages.
-      
-      
-      // Metatags.
-      gv_misc_addMetatag('title', 'Submit VoIP Phone Review');
-      gv_misc_addMetatag('description', 'Share your VoIP phone experience with others. Use this quick form to submit your review and share your feedback');
-      gv_misc_addMetatag('keywords', 'submit phone reviews, phone reviews from users');
-      
-      
-      
-      global $user;
-      
-      
-      if (in_array('administrator', $user->roles)) {
-        $current_user_is_admin = TRUE;
-      }
-      else {
-        $current_user_is_admin = FALSE;
-      }
-      
-      
-     
-      if (!$current_user_is_admin) {
-        $form['title']['#access'] = FALSE;
-        // Show authoring info (including a date) only for administrator.
-        $form['author']['#access'] = FALSE;
-      }
-     
-      
-      //$breadcrumb = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Phone Review' )));
-      
-      // Set outer fieldset with the main caption for the Submit a Review page.
-      $form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of this VoIP Phone?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
-      $form['#suffix'] = '</div></fieldset>';
-      
-      //dpm($form);
-      $form['actions']['submit']['#value'] = t('Submit Review');
-      
-      // Make some small corrections.
-      $form['title']['#title'] = t('Review title');
-      $form['title']['#weight'] = 100;
-      
-      
-      
-      
-      
-      // Convert the field_r_notapproved (if it is set) to a checkbox temporarily.
-      if (isset($form['field_r_notapproved'])) {
-        // Only admin can approve it.
-        $form['field_r_notapproved']['#access'] = FALSE;
-        if ($current_user_is_admin) {
-          $form['field_r_notapproved_checkbox'] = array(
-            '#type' => 'checkbox',
-            '#title' => t('This review is approved'),
-            '#default_value' => !$form['field_r_notapproved']['und'][0]['value']['#default_value'],
-            '#weight' => 30,
-          );
-        }
-        elseif(arg(1) != 'add') {
-          $form['field_r_notapproved_info'] = array(
-            '#type' => 'item',
-            '#title' => t('Approval status for this review:'),
-            '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
-            '#weight' => 30,
-          );
-        }
-      }
-      
-      // Hide some fields, so that even super admin could not see and change it.
-      $form['field_r_rating_overall']['#access'] = FALSE;
-      $form['options']['promote']['#access'] = FALSE;
-      $form['options']['sticky']['#access'] = FALSE;
-      $form['revision_information']['#access'] = FALSE;
-      $form['comment_settings']['#access'] = FALSE;
-      $form['field_p_name']['#access'] = FALSE;
-      
-      
-      
-      
-      
-      // Group fields
-      
-      $form['about_you'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Step 1: Your Information'),
-        '#weight' => -15,
-      );
-          // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
-          $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, /*'field_r_lname' => LNAME_HINT,*/ 'field_r_email' => EMAIL_HINT);
-          foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
-            $temp_field = $form[$field_to_rebuild]['und'][0];
-            $form['about_you'][$field_to_rebuild . '_temp'] = array(
-                '#type' => 'textfield',
-                '#title' => t($temp_field['#title']),
-                '#default_value' => $temp_field['value']['#default_value'],
-                '#description' => $temp_field['#description'],
-                '#required' => $temp_field['value']['#required'],
-                '#attributes' => array('title' => t($field_hint)),
-            );
-            $form[$field_to_rebuild]['#access'] = FALSE;
-          }
-          //$form['about_you']['field_r_fname_temp']['#title'] = t('Your name');
-          //$form['about_you']['field_r_lname_temp']['#title'] = '';
-          
-          
-        
-      $form['phone'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Step 2: Your VoIP Phone Details'),
-        //'#collapsible' => TRUE,
-        //'#collapsed' => FALSE,
-        '#weight' => -10,
-      );
-          $form['phone']['field_ref_phone'] = $form['field_ref_phone'];
-          unset($form['field_ref_phone']);
-      
-          $form['field_r_data']['#access'] = FALSE;
-          
-          
-          
-          
-          
-          
-//          $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
-//          $form['phone']['lines'] = array(
-//            '#type' => 'radios',
-//            //'#title' => t('How many lines do you have:'),
-//            '#options' => $lines_options,
-//            '#default_value' => FALSE,
-//            '#weight' => 100,
-//            '#prefix' => '<div class="label left">' . t('How many lines do you have:') . '</div>',
-//          );
-          
-          
-      
-      
-          
-                
-          
-      // Rate and vote group.
-      $rating_options = array('' => FALSE, '20' => 'Horrible', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Excellent');
-      $weight = 8;
-     
-      //$vote_keys = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE);
-      $vote_keys = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE);
-      
-      $votes = array();
-      $form['ureview'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Step 3: Rate and Review Your VoIP Phone'),
-        '#weight' => -9,
-      );
-          
-          $form['ureview']['votes'] = array(
-              '#type' => 'container',
-              '#prefix' => '<div class="rate-caption"><div class="col-2">' . t('Click Stars To Start Reviewing') . '</div><div class="col-3">' . t('Rate it') . '</div></div>',
-          );
-          foreach ($vote_keys as $vote_key => $vote_title) {
-            $form['ureview']['votes']['rating_' . $vote_key] = array(
-              '#type' => 'select',
-              '#options' => $rating_options,
-              '#default_value' => $rating_options[''],
-              '#prefix' => '<div class="vote"><div class="vote-title">' . t($vote_title) . '</div>',
-              '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
-            );
-          }
-      
-          $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
-          $form['ureview']['rating_recommend'] = array(
-              '#type' => 'radios',
-              '#options' => $rating_recommend_options,
-              '#default_value' => FALSE,
-              '#prefix' => '<div class="label left">' . RECOMMEND_PHONE . '</div>',
-          );
-          
-          // just for reference from a below call
-          //$form['ureview']['rating_recommend']['#default_value'] = $recommend;
-      
-          
-          
-          
-          
-          
-//          $form['ureview']['pros'] = array(
-//            '#type' => 'textfield',
-//            '#title' => t('Pros'),
-//            '#default_value' => '',
-//            '#attributes' => array('title' => t(PROS_HINT)),
-//          );
-//          $form['ureview']['cons'] = array(
-//            '#type' => 'textfield',
-//            '#title' => t('Cons'),
-//            '#default_value' => '',
-//            '#attributes' => array('title' => t(CONS_HINT)),
-//          );
-          
-          
-          
-          
-          
-          
-          
-          //$form['body']['#weight'] = 2;
-          $form['body']['und'][0]['value']['#rows'] = 5;
-          // Unlink Ckeditor
-          // Bad trial...
-          //$form['body']['und'][0]['#type'] = 'textarea';
-          // Good trial! :)
-          ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
-          $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
-          
-          $form['ureview']['body'] = $form['body'];
-          unset($form['body']);
-          
-      
-      // Hide approvecode field (used for unauthorized user email approve).
-      // It should be empty if a user has approved email.
-      $form['field_r_approvecode']['#access'] = FALSE;
-      
-      
-      
-      if(arg(1) == 'add') {
-        
-        // Add a phone review page.
-      
-        // This TEMPORARY title will see only Administrators.
-        if (!$current_user_is_admin) {
-          $form['title']['#default_value'] = 'Unapproved review ' . time();
-        }
-        
-        // Generate an approval code for email verification.
-        if (!$user->uid) {
-          $form['field_r_approvecode']['und'][0]['value']['#default_value'] = md5(time());
-        }
-        
-        if ($user->uid) {
-          // Get all additional data for first/last names extraction.
-          $user = user_load($user->uid);
-          // Autofill first/last names and email.
-          //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
-          //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
-          $form['about_you']['field_r_fname_temp']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          //////$form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
-          $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
-          
-          // Disallow to choose another email for a registered user.
-          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
-          $form['about_you']['email_autofilled'] = array(
-              '#type' => 'item',
-              '#title' => t('Your email'),
-              '#markup' => $user->mail,
-          );
-
-        }
-//        else {
-//          // Options for not logged in users.
-//          $info_for_notlogged = '<fieldset id="not-logged-info" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('You are not logged in...') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;"><div>' . t('You may !login or !register to have a full control over your submitted reviews...', array('!login' => l(t('log in'), "user", array('query' => array('destination' => url($_GET['q']))) ), '!register' => l(t('register'), "user/register", array('query' => array('destination' => url($_GET['q']))) )) ) . '</div><div>' . t('Or submit a review as a guest (right below), but you will not be avle to edit or cancel it.') . '</div></div></fieldset>';
-//          $form['#prefix'] = $info_for_notlogged . '<fieldset id="submit-guest" class="collapsible form-wrapper"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#">' . t('Submit a review as a guest') . '</a></span></legend><div class="fieldset-wrapper" style="display: block;">';
-//          $form['#suffix'] = '</div></fieldset>';
-//        }
-        if ($current_user_is_admin) {
-          $form['about_you']['user_ip_show'] = array(
-              '#type' => 'item',
-              '#title' => t('User IP:'),
-              '#markup' => $_SERVER['REMOTE_ADDR'],
-          );
-        }
-        $form['user_ip'] = array(
-          '#type' => 'hidden',
-          '#value' => $_SERVER['REMOTE_ADDR'],
-        );
-        
-        
-        // Set a select of available phones.
-        // As we use the entityReference field for phones and use only existing phones nodes
-        // we can just use prefilled field data.
-        //////////$phones['_none'] = t('- Select a value -');
-        ///////////gv_misc_getPhones($phones);
-        // $phones[41] = t('OTHER SP'); // we don't use it for phones. just for providers.
-        ////$form['phone']['field_ref_phone']['und']['#options'] = $phones;
-        ////$form['phone']['field_ref_phone']['und']['#default_value'][0] = '_none';
-        $phones = $form['phone']['field_ref_phone']['und']['#options'];
-        
-        // Check if the review is added via a button on a phone's page.
-        $phone_nid = NULL;
-        if (isset($_GET['id'])) {
-          $phone_nid = check_plain($_GET['id']);
-          if(!isset($phones[$phone_nid])) {
-            $phone_nid = NULL;
-          }
-          else {
-            $phone_id_source = t('your choice while viewing this phone\'s page');
-          }
-        }
-        elseif ($_SERVER['HTTP_REFERER']) {
-          // If a user has clicked "Submit a review" on the phone's page, treat it as choice of that phone.
-          $refferer = explode('http://getvoip.com/', $_SERVER['HTTP_REFERER']);
-          if (isset($refferer[1]) && $refferer[1]) {
-            $query = db_select('url_alias', 'ua')
-              ->fields('ua', array('source'))
-              ->condition('alias', $refferer[1]);
-            $source = $query->execute()->fetchField();
-            $source = str_replace('node/', '', $source);
-            if (is_numeric($source)) {
-              $query = db_select('node', 'n')
-                ->fields('n', array('type'))
-                ->condition('nid', $source);
-              $type = $query->execute()->fetchField();
-              if ($type == 'phone') {
-                $phone_nid = $source;
-                $phone_id_source = t('the page you have been viewing when clicked a Submit review button');
-              }
-            }
-          } // End of if (isset($refferer[1]) && $refferer[1]) {
-        } // End of elseif ($_SERVER['HTTP_REFERER']) {
-        
-        
-        // If a target phone has been defined by id from url or by referrer (previous) page,
-        // set this phone as selected by default and show its info and preview.
-        if ($phone_nid) {
-          
-          /*
-          $form['phone']['id_source'] = array(
-            '#markup' => '<div class="id-source">' . t('A taget phone has been chosen based on !source.', array('!source' => $phone_id_source)) . '<div>' . t('If You want to chose an other phone, please click !here.', array('!here' => l(t('here'), 'node/add/phone_review'))) . '</div></div>',
-          ); 
-          
-          $phone_node = node_load($phone_nid);
-          $form['phone']['phone_title'] = array(
-            '#type' => 'item',
-            '#title' => t('A phone You have chosen'),
-            '#markup' => l($phone_node->title, 'node/' . $phone_node->nid),
-          ); 
-          
-          $phone_preview = '<div class="p-preview">' . render(node_view($phone_node, 'teaser')) . '</div>';
-          $form['phone']['preview'] = array(
-            '#type' => 'fieldset',
-            '#title' => t('Phone preview') . ': ' . $phone_node->title,
-            '#collapsible' => TRUE,
-            '#collapsed' => TRUE,
-          );
-              $form['phone']['preview']['phone_preview'] = array(
-                '#markup' => $phone_preview,
-                '#weight' => -100,
-              ); 
-          */
-          
-          //$form['field_ref_phone']['und']['#options'] = array($phone_nid => $phones[$phone->nid]);
-          $form['phone']['field_ref_phone']['und']['#default_value'][0] = $phone_nid;
-          //$form['phone']['field_ref_phone']['#access'] = FALSE;
-          
-        } // End of if($phone_nid) { // // If a target phone has been defined by id from url or by referrer (previous) page,
-        
-        
-      } // End of if(arg(1) == 'add') {
-      else {
-        
-        
-        // Edit a Phone review page.
-        
-        
-        
-        // Show saved it a hidden field other data
-        if (isset($form['field_r_data']['und'][0]['value']['#default_value'])) {
-          $other_data = unserialize($form['field_r_data']['und'][0]['value']['#default_value']);
-          
-          
-          
-          
-//          $form['phone']['lines']['#default_value'] = $other_data['lines'];
-//          $form['ureview']['pros']['#default_value'] = $other_data['pros'];
-//          $form['ureview']['cons']['#default_value'] = $other_data['cons'];
-          
-          
-          
-          
-          $user_ip = isset($other_data['user_ip']) ? $other_data['user_ip'] : 'N/A';
-          if ($current_user_is_admin) {
-            $form['about_you']['user_ip_show'] = array(
-                '#type' => 'item',
-                '#title' => t('User IP:'),
-                '#markup' => $user_ip,
-            );
-          }
-          $form['user_ip'] = array(
-            '#type' => 'hidden',
-            '#value' => $user_ip,
-          );
-        }
-
-        // Save the current email... in case it will be changes now, we could delete old it's votes connected to the old email.
-        $form['email_old'] = array(
-          '#type' => 'hidden',
-          '#value' => $form['about_you']['field_r_email_temp']['#default_value'],
-        );
-        
-        // Disallow to choose another email for a registered user.
-        if (!$current_user_is_admin) {
-          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
-          $form['about_you']['email_autofilled'] = array(
-              '#type' => 'item',
-              '#title' => t('Your email'),
-              '#markup' => $form['about_you']['field_r_email_temp']['#default_value'],
-          );
-        }
-        
-          
-        // If this review is not approved OR this review is NOT published.
-        // Load votes data from a local field $other_data['saved_ratings'] (field_r_data), not from Voting api tables.
-        if ($form['field_r_notapproved']['und'][0]['value']['#default_value'] || !$form['options']['status']['#default_value']) {
-          $saved_ratings = $other_data['saved_ratings'];
-          foreach ($saved_ratings as $tag => $value) {
-            if ($tag == 'recommend') {
-              $recommend = $value;
-              continue;
-            }
-            $form['ureview']['votes']['rating_' . $tag]['#default_value'] = $value;
-          }
-        }
-        else {
-          // Else load saved votes for a phone of this review.
-          $criteria = array(
-            'entity_type' => 'node',
-            'entity_id' => $form['phone']['field_ref_phone']['und']['#default_value'][0],
-            'uid' => $form['uid']['#value'],
-            // Make it possible to count votes of different unauthorized (uid = 0, but with different emails) users.
-            'vote_source' => $form['about_you']['field_r_email_temp']['#default_value'],
-          );
-
-          $votes = gv_misc_getVotesIDs($criteria); // = votingapi_select_votes($criteria)
-
-          if ($votes) {
-            foreach ($votes as $vote) {
-              if ($vote['tag'] == 'recommend') {
-                $recommend = $vote['value'];
-                continue;
-              }
-              $form['ureview']['votes']['rating_' . $vote['tag']]['#default_value'] = $vote['value'];
-            }
-          }
-        } // End of else of if ($form['field_r_notapproved']['und'][0]['#default_value']) {
-        if (isset($recommend)) {
-          $form['ureview']['rating_recommend']['#default_value'] = $recommend;
-        }
-
-        // Show preview of the phone (as a teaser) on the edit form.
-        $phone_node = node_load($form['phone']['field_ref_phone']['und']['#default_value'][0]);
-        /*
-        $provider_preview = '<div class="p-preview">' . render(node_view($provider_node, 'teaser')) . '</div>';
-        $form['provider']['provider_preview'] = array(
-            '#markup' => $provider_preview,
-            '#weight' => -100,
-        ); 
-        */
-        $form['phone']['phone_title_noedit'] = array(
-          '#type' => 'item',
-          '#title' => t('Your VoIP Phone:'),
-          '#markup' => '<div class="text">' . l(html_entity_decode($phone_node->field_p_name['und'][0]['safe_value']), 'node/' . $phone_node->nid) . '</div>',
-          //'#weight' => -100,
-        );
-
-        $form['phone']['field_ref_phone']['#access'] = FALSE;
-
-        
-      } // End of Edit a review page.
-      
-      
-      
-      // Add stars widgets to a Rating block
-      $module_path = drupal_get_path('module', 'gv_pages');
-      $module_misc_path = drupal_get_path('module', 'gv_misc');
-      
-      $form['#attached']['js'] = array(
-
-        // Add a characters counter.
-        //$module_misc_path . '/js/gv_misc_charCount.js',
-        //'sites/all/libraries/jquery.plugins/charCount.js',
-
-        // Add hints inside some fields
-        $module_path . '/js/gv_review_fieldHints.js',
-
-        // Add stars widgets to a Rating block
-        $module_path . '/js/gv_phone_review_stars.js',
-        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
-      );
-
-      $form['#attached']['library'][] = array('system', 'ui.widget');
-
-      $form['#attached']['css'] = array(
-        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-      );
-
-      
-      
-
-  
-      $form['#attributes']['class'][] = 'gv-edit-review-page';
-  
-      $form['#validate'][] = 'gv_pages_validateForm_phoneReview';
-      $form['#submit'][] = 'gv_pages_submitForm_phoneReview';
-      
-      
-      //dpm($form);
-      
-    break; // End of Phone review node edit.
-    
-    
-  } // End of switch ($form_id) {
-  
-  
-  // Add a Save Draft and Invisible buttons.
-  switch ($form_id) {
-    
-    case 'news_post_node_form':
-    case 'blog_post_node_form':
-    case 'article_node_form':
-    case 'provider_node_form':
-    case 'phone_node_form':
-    //case 'preface_node_form':
-      
-        $form['actions']['submit']['#value'] = 'Save & Publish';
-      
-        $form['actions']['save_draft'] = array(
-          '#type' => 'submit',
-          '#value' => 'Save Draft',
-          '#submit' => array('node_form_submit'),
-          '#weight' => 6,
-        );
-      
-        if (isset($form['field_invisible'])) {
-          
-          $form['field_invisible']['#access'] = FALSE;
-          
-          $form['actions']['published_but_invisible'] = array(
-            '#type' => 'submit',
-            '#value' => 'Published, but invisible in lists',
-            '#submit' => array('node_form_submit'),
-            '#weight' => 7,
-          );
-        }
-      
-        $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
-        //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
-        
-        //dpm($form);
-        
-        
-        break;
-      
-  } // End of switch ($form_id) { // Save Draft button
-  
-  
-  // Convert beautiful urls back to originals
-  if (!empty($form['body']['und'][0]['#default_value'])) {
-    $form['body']['und'][0]['#default_value'] = gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $form['body']['und'][0]['#default_value']);
-    $form['#submit'][] = 'gv_pages_submitForm_convertBeautifulUrls';
-  }
-  
 }
 
 
