@@ -7,7 +7,7 @@
         // Styling select forms
 
         //$('select').selectmenu();
-        $('select').selectmenu({
+        $('#edit-field-ref-provider select').selectmenu({
           //style:'popup', 
           maxHeight: 300
   			});
