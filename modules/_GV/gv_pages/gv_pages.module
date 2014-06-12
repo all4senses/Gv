@@ -4043,7 +4043,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       //$form['#prefix'] = '<fieldset id="outer-box" class="form-wrapper"><legend><span class="fieldset-legend">' . t('Share Your Feedback - What Do You Think of Your VoIP Provider?') . '</span></legend><div class="fieldset-wrapper" style="display: block;">';
       //$form['#suffix'] = '</div></fieldset>';
       
-      $form['#prefix'] = '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>';
+      //$form['#prefix'] = '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>';
       
       //dpm($form);
       $form['actions']['submit']['#value'] = 'Submit Review';
@@ -4091,6 +4091,11 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       
       
       // Group fields
+      
+      $form['header'] = array(
+        '#markup' => '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>',
+        '#weight' => -25,
+      );
       
       $form['about_you'] = array(
         '#type' => 'container',
