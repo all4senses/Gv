@@ -4315,7 +4315,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 <span>Submissions that do not follow the above guidelines will not be posted.</span></div>",
               );
           
-          
+          $form['ureview']['closing_tag']['#markup'] = '<div class="bottom-clear"></div>  ';
+              
+              
       // Hide helper hidden field (for saving temporary serialized ratings data)
       $form['field_ratings_oprovider']['#access'] = FALSE;
       
