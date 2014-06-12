@@ -4645,7 +4645,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         $module_path . '/js/gv_review_fieldHints.js',
           
          // Styling select boxes.
-        $module_path . '/js/gv_stylingSelectBoxes.js',
+        //$module_path . '/js/gv_stylingSelectBoxes.js',
 
         // Add stars widgets to a Rating block
         $module_path . '/js/gv_review_stars.js',
@@ -4654,18 +4654,18 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
       
            // Styling select boxes.
-//      $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
-//      drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
-//      drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
+      $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
+      drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
+      drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
       
       //$path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
-      //drupal_add_js($path_to_custom_js . 'gv_stylingSelectBoxes.js');
+      drupal_add_js($path_to_custom_js . 'gv_stylingSelectBoxes.js');
   
   
       
       
       $form['#attached']['library'][] = array('system', 'ui.widget');
-      $form['#attached']['library'][] = array('system', 'ui.selectmenu');
+      //$form['#attached']['library'][] = array('system', 'ui.selectmenu');
 
       $form['#attached']['css'] = array(
         'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
