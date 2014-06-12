@@ -4006,15 +4006,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 
 function gv_page_alterSubmitReviewPage_v2(&$form) {
   
-      // Styling select boxes.
-      $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
-      drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
-      drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
-      
-      $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
-      drupal_add_js($path_to_custom_js . 'gv_stylingSelectBoxes.js');
-  
-  
+ 
       // Metatags.
       gv_misc_addMetatag('title', 'Review Your VoIP Provider');
       gv_misc_addMetatag('description', 'Share your feedback with others. Rate and review your user experience with your current VoIP Provider. Let others know.');
@@ -4651,13 +4643,29 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
         // Add hints inside some fields
         $module_path . '/js/gv_review_fieldHints.js',
+          
+         // Styling select boxes.
+        $module_path . '/js/gv_stylingSelectBoxes.js',
 
         // Add stars widgets to a Rating block
         $module_path . '/js/gv_review_stars.js',
         'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
       );
 
+      
+           // Styling select boxes.
+//      $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
+//      drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
+//      drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
+      
+      //$path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
+      //drupal_add_js($path_to_custom_js . 'gv_stylingSelectBoxes.js');
+  
+  
+      
+      
       $form['#attached']['library'][] = array('system', 'ui.widget');
+      $form['#attached']['library'][] = array('system', 'ui.selectmenu');
 
       $form['#attached']['css'] = array(
         'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
