@@ -4113,11 +4113,11 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             $temp_field = $form[$field_to_rebuild]['und'][0];
             $form['about_you'][$field_to_rebuild . '_temp'] = array(
                 '#type' => 'textfield',
-                '#title' => t($temp_field['#title']),
+                //'#title' => $temp_field['#title'],
                 '#default_value' => $temp_field['value']['#default_value'],
                 '#description' => $temp_field['#description'],
                 '#required' => $temp_field['value']['#required'],
-                '#attributes' => array('title' => t($field_hint)),
+                '#attributes' => array('title' => $field_hint),
             );
             $form[$field_to_rebuild]['#access'] = FALSE;
           }
@@ -4200,6 +4200,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
+          dpm($form['provider']);
+          
           $form['field_r_data']['#access'] = FALSE;
           
           
