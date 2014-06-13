@@ -4207,6 +4207,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           unset($form['provider']['field_r_oprovider']['und']['#title']);
           $form['provider']['field_r_oprovider']['und'][0]['#attributes']['title'] = $form['provider']['field_r_oprovider']['und'][0]['#title'];
           unset($form['provider']['field_r_oprovider']['und'][0]['#title']);
+          $form['provider']['field_r_oprovider']['und'][0]['value']['#attributes']['title'] = $form['provider']['field_r_oprovider']['und'][0]['value']['#title'];
+          unset($form['provider']['field_r_oprovider']['und'][0]['value']['#title']);
                   
           //dpm($form['provider']);
           
