@@ -4124,7 +4124,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           //$form['about_you']['field_r_fname_temp']['#title'] = 'Your name';
           //$form['about_you']['field_r_lname_temp']['#title'] = '';
           
-          //dpm($form['about_you']);
+          dpm($form['about_you']);
           
           if (isset($_GET['social'])) {
                 if (!$user->uid) {
@@ -4210,14 +4210,14 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $lines_options = array(1 => '1 - 5', 2 => '6 - 10', 3 => '11+');
           $form['provider']['lines'] = array(
             '#type' => 'radios',
-            //'#title' => t('How many lines do you have:'),
+            //'#title' => 'How many lines do you have:,
             '#options' => $lines_options,
             '#default_value' => FALSE,
             '#weight' => 10,
-            //'#prefix' => '<div class="label left">How many lines do you have:</div>',
+            '#prefix' => '<div class="label left">How many lines do you have:</div>',
           );
           
-          
+         dpm($form['provider']); 
       
           
       // Rate and vote group.
