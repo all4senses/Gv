@@ -4310,6 +4310,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
               $form['ureview']['u_input']['body'] = $form['body'];
               unset($form['body']);
+              
+              dpm($form['ureview']);
+              
 
           $form['ureview']['tips'] = array(
               '#type' => 'container',
