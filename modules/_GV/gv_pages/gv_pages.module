@@ -4205,7 +4205,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           
           $form['provider']['field_r_oprovider']['und'][0]['value']['#attributes']['title'] = str_replace('&quot;', '"',$form['provider']['field_r_oprovider']['und'][0]['value']['#title']);
           unset($form['provider']['field_r_oprovider']['und'][0]['value']['#title']);
-                  
+          
           //dpm($form['provider']);
           
           $form['field_r_data']['#access'] = FALSE;
@@ -4218,7 +4218,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             '#options' => $lines_options,
             '#default_value' => FALSE,
             '#weight' => 10,
-            '#prefix' => '<div class="label left">HOW MANY LINES DO YOU HAVE:</div>',
+            '#prefix' => '<div class="bottom-clear"></div><div class="label left">HOW MANY LINES DO YOU HAVE:</div>',
           );
           
          //dpm($form['provider']); 
