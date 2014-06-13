@@ -4200,7 +4200,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
-          dpm($form['provider']);
+          unset($form['provider']['field_ref_provider']['und']['#title']);
+          //dpm($form['provider']);
           
           $form['field_r_data']['#access'] = FALSE;
           
@@ -4212,7 +4213,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             '#options' => $lines_options,
             '#default_value' => FALSE,
             '#weight' => 10,
-            '#prefix' => '<div class="label left">How many lines do you have:</div>',
+            //'#prefix' => '<div class="label left">How many lines do you have:</div>',
           );
           
           
