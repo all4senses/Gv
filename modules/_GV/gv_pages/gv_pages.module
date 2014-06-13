@@ -4121,9 +4121,10 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             );
             $form[$field_to_rebuild]['#access'] = FALSE;
           }
-          $form['about_you']['field_r_fname_temp']['#title'] = t('Your name');
-          $form['about_you']['field_r_lname_temp']['#title'] = '';
+          //$form['about_you']['field_r_fname_temp']['#title'] = 'Your name';
+          //$form['about_you']['field_r_lname_temp']['#title'] = '';
           
+          dpm($form['about_you']);
           
           if (isset($_GET['social'])) {
                 if (!$user->uid) {
