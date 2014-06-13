@@ -4202,6 +4202,10 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
           unset($form['provider']['field_ref_provider']['und']['#title']);
+          
+          $form['provider']['field_r_oprovider']['und'][0]['#attributes']['title'] = $form['provider']['field_r_oprovider']['und'][0]['#title'];
+          unset($form['provider']['field_r_oprovider']['und'][0]['#title']);
+                  
           //dpm($form['provider']);
           
           $form['field_r_data']['#access'] = FALSE;
