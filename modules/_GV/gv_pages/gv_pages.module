@@ -4072,7 +4072,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $form['field_r_notapproved_info'] = array(
             '#type' => 'item',
             '#title' => 'Approval status for this review:',
-            '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? t('Is not approved') : t('Is approved'),
+            '#markup' => $form['field_r_notapproved']['und'][0]['value']['#default_value'] ? 'Is not approved' : 'Is approved',
             '#weight' => 30,
           );
         }
@@ -4108,7 +4108,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       );
           $form['about_you']['title']['#markup'] = '<div class="title">Your Information</div>';
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
-          $fields_to_rebuild = array('field_r_fname' => FNAME_HINT, 'field_r_lname' => LNAME_HINT, 'field_r_email' => EMAIL_HINT);
+          $fields_to_rebuild = array('field_r_fname' => 'FIRST NAME', 'field_r_lname' => 'LAST NAME', 'field_r_email' => 'YOUR EMAIL');
           foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
             $temp_field = $form[$field_to_rebuild]['und'][0];
             $form['about_you'][$field_to_rebuild . '_temp'] = array(
@@ -4124,7 +4124,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           //$form['about_you']['field_r_fname_temp']['#title'] = 'Your name';
           //$form['about_you']['field_r_lname_temp']['#title'] = '';
           
-          dpm($form['about_you']);
+          //dpm($form['about_you']);
           
           if (isset($_GET['social'])) {
                 if (!$user->uid) {
