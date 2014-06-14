@@ -8,6 +8,8 @@ Drupal.behaviors.selectmenu = {
         $(this).selectmenu(Drupal.settings.selectmenu.options).addClass('selectmenu-whitelisted');
       });
 
+
+      /*
       $('select:not(.selectmenu-whitelisted)', context).each(function(context){
         form = $(this).parents('form');
         var apply_selectmenu = true;
@@ -48,6 +50,8 @@ Drupal.behaviors.selectmenu = {
           }
         }
       });
+      
+      */
 
       function in_array (needle, haystack, argStrict) {
         // Checks if the given value exists in the array
