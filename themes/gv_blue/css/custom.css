@@ -104,7 +104,7 @@ form#user-login, form#user-login input{text-align: center;}
 .form-item .description{color: gray; font-size: 12px;}
 
 /* Fields hints */
-input.blur,
+input.blur, textarea.blur,
 .ui-state-default.blur, .ui-widget-content .ui-state-default.blur, .ui-widget-header .ui-state-default.blur{color: lightgray;}
 
 
@@ -3964,7 +3964,7 @@ img {max-width: 100%;}
 .gv-edit-review-page #edit-field-r-oprovider input{width: 320px;}
 
 
-#edit-u-input {float: left; width: 490px;}
+#edit-u-input {float: left; width: 490px; text-transform: uppercase;}
 #edit-tips {float: right; width: 190px;}
 
 #tips-block {margin-bottom: 15px;}
@@ -3974,15 +3974,15 @@ img {max-width: 100%;}
 
 
 .gv-edit-review-page .rate-caption{font-size: 12px; margin: 0 0 10px 347px;}
-#review-node-form.gv-edit-review-page .rate-caption{margin: 0 0 10px 200px;}
+#review-node-form.gv-edit-review-page .rate-caption {margin: 0 0 0 209px; font-size: 10px; color: #c5c5c5;}
 
-.gv-edit-review-page .rate-caption .col-2{float: left; margin-right: 60px; text-align: center; width: 120px;}
+.gv-edit-review-page .rate-caption .col-2 {float: left; margin-right: 60px; text-align: center; width: 110px;}
 .gv-edit-review-page .rate-caption .col-3{padding-top: 20px;}
 
 .gv-edit-review-page #edit-votes{margin: 0 0 60px 145px;}
-#review-node-form.gv-edit-review-page #edit-votes{margin: 0 0 60px 0;}
+#review-node-form.gv-edit-review-page #edit-votes {margin: 0 0 30px 0; font-size: 13px; color: gray; font-weight: bold;}
 
-.gv-edit-review-page #edit-votes .vote{clear: both; position: relative;}
+.gv-edit-review-page #edit-votes .vote {clear: both; position: relative; overflow: hidden; margin-bottom: 10px;}
 .gv-edit-review-page #edit-votes .vote .form-item{ clear: none; left: 220px; margin-top: 3px; position: absolute;}
 .gv-edit-review-page #edit-votes .vote-title{float: left;}
 .gv-edit-review-page #edit-votes .choice{position: absolute; left: 380px;}
@@ -3992,8 +3992,7 @@ img {max-width: 100%;}
 .gv-edit-review-page #edit-rating-recommend{padding-bottom: 30px;}
 .gv-edit-review-page .form-item-rating-recommend.form-type-radios{margin: 0 0 80px 200px; clear: both;}
 
-.gv-edit-review-page #edit-ureview .label.left{float: left; margin: 0 20px 0 145px;}
-#review-node-form.gv-edit-review-page #edit-ureview .label.left{margin: 0 20px 0 0;}
+.gv-edit-review-page .label.left {float: left; margin: 4px 15px 0 0; font-size: 13px; font-weight: bold; color: gray;}
 
 .gv-edit-review-page #edit-rating-recommend div{float: left; margin-right: 0px; margin-top: 0; width: 70px;}
 
@@ -4002,12 +4001,14 @@ img {max-width: 100%;}
 .gv-edit-review-page #edit-ureview .form-item-pros{margin-bottom: 0; margin-top: 30px;}
 .gv-edit-review-page #edit-ureview .form-item-cons{ margin-bottom: 40px;}
 
-.gv-edit-review-page #edit-ureview .form-type-textfield{margin-top: 10px;}
+.gv-edit-review-page #edit-ureview .form-type-textfield {margin-top: 10px;}
 #review-node-form.gv-edit-review-page #edit-ureview .form-type-textfield{margin-left: 0;}
 
-.gv-edit-review-page #edit-ureview .form-type-textfield input {width: 395px;}
+.gv-edit-review-page #edit-ureview .form-type-textfield input {width: 440px;}
 
-.gv-edit-review-page #edit-ureview .text-format-wrapper{margin-left: 145px; margin-top: 25px; width: 450px;}
+.gv-edit-review-page textarea {padding: 10px; font-size: 15px; font-family: raleway; border: 1px solid lightgray; border-radius: 5px;}
+
+.gv-edit-review-page #edit-ureview .text-format-wrapper{margin-left: 145px; margin-top: 25px; width: 452px;}
 #review-node-form.gv-edit-review-page #edit-ureview .text-format-wrapper{margin-left: 0;}
 
 .gv-edit-review-page #edit-ureview #edit-body .form-item,
@@ -4019,8 +4020,8 @@ img {max-width: 100%;}
 
 
 .gv-edit-review-page input[type=radio] {display: none; margin: 10px;}
-.gv-edit-review-page input[type=radio]:checked + label {background: url(/sites/all/themes/gv_blue/css/images/sprite-r.png) no-repeat -38px -1312px transparent;}
-.gv-edit-review-page input[type=radio] + label {background: url(/sites/all/themes/gv_blue/css/images/sprite-r.png) no-repeat -38px -1340px transparent;cursor: pointer; border: 1px solid lightgray; border-radius: 5px; padding: 2px 7px 0 30px; margin: 0 10px 0 0 !important; display: block; float: none;}
+.gv-edit-review-page input[type=radio]:checked + label {background: url(/sites/all/themes/gv_blue/css/images/sprite-r.png) no-repeat -37px -1312px transparent; color: gray; font-weight: bold;}
+.gv-edit-review-page input[type=radio] + label {background: url(/sites/all/themes/gv_blue/css/images/sprite-r.png) no-repeat -37px -1340px transparent; cursor: pointer; border: 1px solid lightgray; border-radius: 5px; padding: 2px 7px 2px 27px; margin: 0 10px 0 0 !important; display: block; float: none; font-family: open sans; font-size: 15px; color: #c5c5c5;}
 
 .gv-edit-review-page .step {border: 1px solid lightgray; border-radius: 5px; padding: 10px 60px; margin-bottom: 20px; position: relative;}
 .gv-edit-review-page .step#edit-ureview {padding: 10px 20px 10px 50px;}
