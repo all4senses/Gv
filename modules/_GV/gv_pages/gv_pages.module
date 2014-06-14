@@ -4124,6 +4124,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           //$form['about_you']['field_r_fname_temp']['#title'] = 'Your name';
           //$form['about_you']['field_r_lname_temp']['#title'] = '';
           
+          unset($form['about_you']['field_r_email_temp']['#description']);
+          
           //dpm($form['about_you']);
           
           if (isset($_GET['social'])) {
@@ -4382,7 +4384,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
           $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
           
-          unset($form['about_you']['field_r_email_temp']['#description']);
+          
           
           // Disallow to choose another email for a registered user.
 //          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
@@ -4653,7 +4655,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         } // End of A provider has been selected from a list.
         
       } // End of Edit a review page.
-      
       
       
       $form['title']['#prefix'] = '<div class="step admin-section form-wrapper" id="admin-section"><div class="title">Admin Section</div>';
