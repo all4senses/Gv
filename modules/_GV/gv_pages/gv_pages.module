@@ -4654,6 +4654,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       
       
       
+      $form['title']['#prefix'] = '<div>xxx</div>';
+      $form['field_r_notapproved_checkbox']['#suffix'] = '<div>yyy</div>';
+      
       // Add stars widgets to a Rating block
       $module_path = drupal_get_path('module', 'gv_pages');
       $module_misc_path = drupal_get_path('module', 'gv_misc');
