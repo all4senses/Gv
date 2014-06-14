@@ -9,6 +9,8 @@ Drupal.behaviors.selectmenu = {
       });
 
 
+      // a4s fix, allow to apply select menu only to whitelisted select boxes.
+      
       /*
       $('select:not(.selectmenu-whitelisted)', context).each(function(context){
         form = $(this).parents('form');
