@@ -4383,12 +4383,12 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
           
           // Disallow to choose another email for a registered user.
-          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
-          $form['about_you']['email_autofilled'] = array(
-              '#type' => 'item',
-              '#title' => 'Your email',
-              '#markup' => $user->mail,
-          );
+//          $form['about_you']['field_r_email_temp']['#access'] = FALSE;
+//          $form['about_you']['email_autofilled'] = array(
+//              '#type' => 'item',
+//              '#title' => 'Your email',
+//              '#markup' => $user->mail,
+//          );
 
         }
 //        else {
