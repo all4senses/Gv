@@ -11,6 +11,7 @@
             console.log('Show...');
             $.fn.colorbox({inline:true, href:"#exitIntent", width:780, height:440});  
             turned_off = false;
+            return false;
         });
         
         
@@ -18,6 +19,7 @@
             console.log('Closed...');
             $.fn.colorbox.close();
             turned_off = true;
+            return false;
         });
         
        
