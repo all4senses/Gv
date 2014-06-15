@@ -127,13 +127,9 @@
                             <!-- Popup windows for Request links above -->
                             
                             <div style="display: none;">
-                              <div id="exitIntent"> 
+                              <div id="block-gv-blocks-request-quote-v8" class="popup-request quote"> 
                                 <?php echo gv_blocks_get_requestQuote_block_v8_popup(); ?>
-                                <div id="line-1">Do You Want To Save BIG On</div>
-                                <div id="line-2">Reliable Business Phone Service?</div>
-
-                                <div id="line-3">Get Voice, Fax, Text and Video Conferencing for $19/mo.</div>
-
+                                
                                 <a href="/business" id="yes" target="_top">YES</a>
                                 <div id="no">NO - I like overpaying for my old phone service.</div>
                               </div>
