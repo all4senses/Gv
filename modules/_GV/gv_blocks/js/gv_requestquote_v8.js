@@ -7,7 +7,7 @@
         // Styling select forms
 
         //$('select').selectmenu();
-        $('select').selectmenu({
+        $('#requestQuoteFormWrapper select').selectmenu({
           //style:'popup', 
           maxHeight: 300
   			});
