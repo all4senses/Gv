@@ -9,8 +9,10 @@
         
         $("#request-quote").click(function(){
             console.log('Show...');
+            $("body").css('overflow', 'hidden');
             $.fn.colorbox({inline:true, href:"#exitIntent", width:780, height:440});  
             turned_off = false;
+            
             return false;
         });
         
