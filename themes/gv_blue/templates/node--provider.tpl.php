@@ -103,7 +103,43 @@
                 <div class="links">
                   <?php echo l('Request a Demo', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
                           l('Request a Quote', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-quote', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
-                          l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   ?>
+                          l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
+                  
+                  
+                  
+                          global $user; 
+                          if ($user->uid) {
+                            
+                            // Colorbox for popup window.
+                            //1, 3, 4, 
+                            drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+                            drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+
+                            // Exit intent Ad block main js.
+                            $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
+                            drupal_add_js($path_to_custom_js . 'gv_provider_popup_requestLinks.js');
+                            
+                          }
+
+                  
+                  ?>
+                  
+                            <!-- Popup windows for Request links above -->
+                            
+                            <div style="display: none;">
+                              <div id="exitIntent"> 
+                                <div id="line-1">Do You Want To Save BIG On</div>
+                                <div id="line-2">Reliable Business Phone Service?</div>
+
+                                <div id="line-3">Get Voice, Fax, Text and Video Conferencing for $19/mo.</div>
+
+                                <a href="/business" id="yes" target="_top">YES</a>
+                                <div id="no">NO - I like overpaying for my old phone service.</div>
+                              </div>
+                            </div>
+
+                  
+                  
                 </div>
                 
               </div> <!-- End of <div class="basic-info" rel="v:itemreviewed"> -->
