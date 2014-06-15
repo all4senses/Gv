@@ -130,8 +130,9 @@
                               <div id="block-gv-blocks-request-quote-v8" class="popup-request quote"> 
                                 <?php echo gv_blocks_get_requestQuote_block_v8_popup(); ?>
                                 
-                                <a href="/business" id="yes" target="_top">YES</a>
-                                <div id="no">NO - I like overpaying for my old phone service.</div>
+                                <!-- <a href="/business" id="yes" target="_top">YES</a>
+                                <div id="no">NO - I like overpaying for my old phone service.</div> -->
+                                
                               </div>
                             </div>
 
