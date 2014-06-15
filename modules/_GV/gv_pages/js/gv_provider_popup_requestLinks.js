@@ -19,11 +19,17 @@
         
         $("#no").click(function(){
             console.log('Closed...');
+            $("body").css('overflow', 'inherit');
             $.fn.colorbox.close();
             turned_off = true;
             return false;
         });
         
+        $("#cboxOverlay").click(function(){
+            console.log('Closed...');
+            $("body").css('overflow', 'inherit');
+            turned_off = true;
+        });
        
     }
   };
