@@ -8,8 +8,15 @@
         
         
         $("#request-quote").click(function(){
-            console.log('Show...');
+            //console.log('Show...');
+            
+            // Disable page scrolling
+            // Other ways of scrolling disabling - 
+            // http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+            // http://stackoverflow.com/questions/19817899/jquery-or-javascript-how-to-disable-window-scroll-without-overflowhidden
             $("body").css('overflow', 'hidden');
+            
+          
             $.fn.colorbox({inline:true, href:"#exitIntent", width:780, height:440});  
             turned_off = false;
             
@@ -18,15 +25,19 @@
         
         
         $("#no").click(function(){
-            console.log('Closed...');
+            //console.log('Closed...');
+            
+            // Enabling back the page scrolling
             $("body").css('overflow', 'inherit');
+            
             $.fn.colorbox.close();
             turned_off = true;
             return false;
         });
         
         $("#cboxOverlay").click(function(){
-            console.log('Closed...');
+            //console.log('Closed via body click...');
+            // Enabling back the page scrolling
             $("body").css('overflow', 'inherit');
             turned_off = true;
         });
