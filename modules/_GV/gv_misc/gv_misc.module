@@ -5076,8 +5076,13 @@ function gv_misc_makeRequest_ajax() {
         'Quote type' => isset($post['q_type']) ? $post['q_type'] : '',
         'Buying Time Frame' => (isset($post['buying_time']) && $post['buying_time']) ? $post['buying_time'] : 'ASAP',
         'Connection type' => isset($post['connection']) ? $post['connection'] : '',
-        'First Name' => $post['firstname'],
-        'Last Name' => $post['lastname'],
+          
+        'Industry' => isset($post['industry']) ? $post['industry'] : '',
+        'Employees amount' => isset($post['employees_amt']) ? $post['employees_amt'] : '',
+        
+        'First Name' => isset($post['firstname']) ? $post['firstname'] : '',
+        'Last Name' => isset($post['lastname']) ? $post['lastname'] : '',
+        'Name' => isset($post['name']) ? $post['name'] : '', 
           
         'Company' => isset($post['company']) ? $post['company'] : '',
         'Website' => isset($post['website']) ? $post['website'] : '',
@@ -5389,7 +5394,7 @@ function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissi
       gv_misc_SendRequestToNextiva($submission);
     //}
   }
-  elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s' && $submission['First Name'] != 'test') {
+  elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s' && $submission['First Name'] != 'test' && $submission['Name'] != 'afs' && $submission['Name'] != 'a4s' && $submission['Name'] != 'test') {
     
     if ($sendSubmissionToGetvoipEmail) {
       // Normal send if not a test from a4s
