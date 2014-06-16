@@ -133,8 +133,15 @@
                                 <div class="bottom-clear"></div>
                                 <?php echo gv_blocks_get_requestQuote_block_v8_popup_provider(); ?>
                                 
-                                <!-- <a href="/business" id="yes" target="_top">YES</a>
-                                <div id="no">NO - I like overpaying for my old phone service.</div> -->
+                              </div>
+                            </div>
+                            
+                            
+                            <div style="display: none;">
+                              <div id="block-gv-blocks-request-quote-v8" class="popup-request demo"> 
+                                <?php echo $logo_block, '<div class="header"><div class="title">Request a Demo</div><div class="subtitle">From ', $provider_name, '</div><div class="descr">In order to schedule your Demo, we need some information about your company</div></div>'; ?>
+                                <div class="bottom-clear"></div>
+                                <?php echo gv_blocks_get_requestDemo_block_v1_popup_provider(); ?>
                                 
                               </div>
                             </div>
