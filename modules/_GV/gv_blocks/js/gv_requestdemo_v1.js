@@ -159,8 +159,9 @@
           validationOptions: {
             groups: {
               //username: "firstname lastname email phone"
-              username: "name email phone ct_captcha"
-              ,first_step: "industry employees_amt"
+              username: "name email phone ct_captcha industry employees_amt"
+              //username: "name email phone ct_captcha"
+              //,first_step: "industry employees_amt"
             },
             errorPlacement: function(error, element) {
               /*
