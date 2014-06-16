@@ -1,13 +1,13 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_block_v8 = {
+  Drupal.behaviors.gv_requestdemo_block_v1 = {
     attach: function (context, settings) {
       
       
         // Styling select forms
 
         //$('select').selectmenu();
-        $('.popup-request.quote select').selectmenu({
+        $('.popup-request.demo select').selectmenu({
           //style:'popup', 
           maxHeight: 300
   			});
@@ -50,9 +50,9 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
+        $('input[id="name"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+        $('input[id="tname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
           if ($(this).val() == '') {
             $(this).val($(this).attr('title'));
           }
@@ -62,8 +62,8 @@
         });
 
 
-        // After reloading a page (ctrl-R) hints mecome normal texts and it should be cleared additionally.
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').focus(function(){
+        // After reloading a page (ctrl-R) hints become normal texts and it should be cleared additionally.
+        $('input[id="name"], input[id="email"], input[id="company"], input[id="phone"]').focus(function(){
           if ($(this).val() == $(this).attr('title')) {
             $(this).val('');
           }
@@ -137,12 +137,12 @@
           $(this).prev().click();
         });
         
-        $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
+        $(".popup-request.demo .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
-          textSubmit : 'Quote Me',// 'Submit & Get Quotes',
-          textNext: 'Quote Me',//'Submit & Get Quotes',
+          textSubmit : 'SUBMIT',// 'Submit & Get Quotes',
+          textNext: 'SUBMIT',//'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
@@ -159,10 +159,11 @@
           validationOptions: {
             groups: {
               //username: "firstname lastname email phone"
-              username: "firstname lastname email phone ct_captcha"
+              username: "name email phone ct_captcha"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
+              /*
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 ////error.insertAfter("#buying_time");
@@ -171,7 +172,9 @@
               
               
               //else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
-              else if(element.attr("name") == "ct_captcha" || element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
+              else 
+                */
+                if (element.attr("name") == "ct_captcha" || element.attr("name") == "name" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 error.insertAfter("#phone");
               else
                 error.insertAfter(element);
@@ -210,15 +213,10 @@
               buying_time: "required",
               connection: "required",
              
-              firstname: {
+              name: {
                 required: true,
                 minlength: 2,
-                notEqualsTo: $('input[id="firstname"]').attr('title')
-							},
-              lastname: {
-                required: true,
-                minlength: 2,
-                notEqualsTo: $('input[id="lastname"]').attr('title')
+                notEqualsTo: $('input[id="name"]').attr('title')
 							},
               phone: {
                 required: true,
@@ -295,8 +293,7 @@
               */
              
              //Works
-             firstname: Drupal.t('First Name is required'),
-             lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
+             name: Drupal.t('Name is required'),
              phone: Drupal.t('Enter a valid phone number'),
              
              // Works!
@@ -315,11 +312,11 @@
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
             //success: function(data){$('#requestQuoteFormWrapper .sending').hide('clip'); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show('clip');},
             
-            success: function(data){$('#requestQuoteFormWrapper .sending').hide(); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show();},
+            success: function(data){$('.popup-request.demo .sending').hide(); $(".popup-request.demo .success").append(data.data); $(".popup-request.demo .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
-            beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide(); $("#requestQuoteFormWrapper .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); $("#requestQuoteFormWrapper .sending").show(); },
+            beforeSubmit: function(data){$('.popup-request.demo .multipartForm').hide(); $(".popup-request.demo .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); $("#requestQuoteFormWrapper .sending").show(); },
             
             
             dataType: 'json',

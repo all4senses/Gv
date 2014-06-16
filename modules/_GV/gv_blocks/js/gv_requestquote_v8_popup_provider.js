@@ -1,6 +1,6 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_block_v8 = {
+  Drupal.behaviors.gv_requestquote_v8_popup_provider = {
     attach: function (context, settings) {
       
       
@@ -137,7 +137,7 @@
           $(this).prev().click();
         });
         
-        $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
+        $(".popup-request.quote .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
@@ -315,11 +315,11 @@
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
             //success: function(data){$('#requestQuoteFormWrapper .sending').hide('clip'); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show('clip');},
             
-            success: function(data){$('#requestQuoteFormWrapper .sending').hide(); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show();},
+            success: function(data){$('.popup-request.quote .sending').hide(); $(".popup-request.quote .success").append(data.data); $(".popup-request.quote .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
-            beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide(); $("#requestQuoteFormWrapper .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); $("#requestQuoteFormWrapper .sending").show(); },
+            beforeSubmit: function(data){$('.popup-request.quote .multipartForm').hide(); $(".popup-request.quote .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); $(".popup-request.quote .sending").show(); },
             
             
             dataType: 'json',
