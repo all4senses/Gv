@@ -292,8 +292,11 @@
               buying_time: Drupal.t('Make your choice!'),
               connection: Drupal.t('Make your choice!'),
               */
-             
+
+              
              //Works
+             industry: Drupal.t('Industry is required'),
+             employees_amt: Drupal.t('Employees amount is required'),
              name: Drupal.t('Name is required'),
              phone: Drupal.t('Enter a valid phone number'),
              
