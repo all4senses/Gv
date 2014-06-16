@@ -52,7 +52,7 @@
         
         $('input[id="name"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
-        $('input[id="tname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+        $('input[id="name"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
           if ($(this).val() == '') {
             $(this).val($(this).attr('title'));
           }
@@ -100,7 +100,7 @@
         });
         
         
-        $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
+        $('input[id="name"]').keydown(function (event) { 
             
             if( 
                     (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
@@ -160,7 +160,7 @@
             groups: {
               //username: "firstname lastname email phone"
               username: "name email phone ct_captcha"
-              ,first_step: "phones_amt q_type buying_time"
+              ,first_step: "industry employees_amt"
             },
             errorPlacement: function(error, element) {
               /*
@@ -174,7 +174,7 @@
               //else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
               else 
                 */
-                if (element.attr("name") == "ct_captcha" || element.attr("name") == "name" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
+                if (element.attr("name") == "ct_captcha" || element.attr("name") == "name" || element.attr("name") == "industry"  || element.attr("name") == "employees_amt"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 error.insertAfter("#phone");
               else
                 error.insertAfter(element);
@@ -206,12 +206,13 @@
               },
               */
               
-              
-              phones_amt: "required",
-              q_for: "required",
-              q_type: "required",
-              buying_time: "required",
-              connection: "required",
+              industry: "required",
+              employees_amt: "required",
+              //phones_amt: "required",
+              //q_for: "required",
+              //q_type: "required",
+              //buying_time: "required",
+              //connection: "required",
              
               name: {
                 required: true,
