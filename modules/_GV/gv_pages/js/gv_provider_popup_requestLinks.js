@@ -84,6 +84,8 @@
             // Enabling back the page scrolling
             $("body").css('overflow', 'inherit');
             
+            $('.popup-request').hide();
+            
             $('.popup-request .sending').hide();
             $(".popup-request .success").hide();
             $('.popup-request .multipartForm').show();
