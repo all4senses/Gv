@@ -100,6 +100,7 @@
 //            $(".popup-request .success").hide();
 //            $('.popup-request .multipartForm').show();
             turned_off = true;
+            return false;
         });
         
         
