@@ -5402,7 +5402,7 @@ function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissi
       gv_misc_SendRequestToNextiva($submission);
     //}
   }
-  elseif ($submission['First Name'] != 'afs' && $submission['First Name'] != 'a4s' && $submission['First Name'] != 'test' && $submission['Name'] != 'afs' && $submission['Name'] != 'a4s' && $submission['Name'] != 'test') {
+  elseif (@$submission['First Name'] != 'afs' && @$submission['First Name'] != 'a4s' && @$submission['First Name'] != 'test' && @$submission['Name'] != 'afs' && @$submission['Name'] != 'a4s' && @$submission['Name'] != 'test') {
     
     if ($sendSubmissionToGetvoipEmail) {
       // Normal send if not a test from a4s
