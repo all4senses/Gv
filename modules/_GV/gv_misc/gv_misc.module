@@ -5000,6 +5000,9 @@ function gv_misc_makeRequest_ajax() {
 
         'Source' => $post['source'],
         'Version' => $post['version'],
+          
+        'Goal' => isset($post['goal']) ? $post['goal'] : 'quote',
+          
         //'Sumbission page' => $post['url'],
       );
       
@@ -5092,6 +5095,9 @@ function gv_misc_makeRequest_ajax() {
           
         'Source' => $post['source'],
         'Version' => $post['version'],
+        
+        'Goal' => isset($post['goal']) ? $post['goal'] : 'quote',
+        
         //'Sumbission page' => $post['url'],
         'sentToRemoteProviders' => array(),
       );      
