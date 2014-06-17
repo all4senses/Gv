@@ -83,6 +83,10 @@
             //console.log('Closed via body click...');
             // Enabling back the page scrolling
             $("body").css('overflow', 'inherit');
+            
+            $('.popup-request .sending').hide();
+            $(".popup-request .success").hide();
+            $('.popup-request .multipartForm').show();
             turned_off = true;
         });
         
