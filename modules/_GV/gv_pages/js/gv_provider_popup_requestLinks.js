@@ -86,9 +86,9 @@
             
             //$('.popup-request').hide();
             
-            $('.popup-request .sending').hide();
-            $(".popup-request .success").hide();
-            $('.popup-request .multipartForm').show();
+//            $('.popup-request .sending').hide();
+//            $(".popup-request .success").hide();
+//            $('.popup-request .multipartForm').show();
             turned_off = true;
         });
         
