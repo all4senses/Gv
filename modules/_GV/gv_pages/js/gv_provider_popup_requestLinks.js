@@ -22,7 +22,7 @@
             
             turned_off = false;
             
-            if ($jQuery(".popup-request.quote form").css('display') == 'block') {
+            if ($(".popup-request.quote form").css('display') == 'block') {
               $('.popup-request.quote .results').hide();
             }
             
@@ -42,15 +42,7 @@
             return false;
         });
         */
-        
-        $("#cboxOverlay").click(function(){
-            //console.log('Closed via body click...');
-            // Enabling back the page scrolling
-            $("body").css('overflow', 'inherit');
-            turned_off = true;
-        });
-        
-        
+    
         
         
         
@@ -68,7 +60,7 @@
             $.fn.colorbox({inline:true, href:".popup-request.demo", width:650, height:500});  
             turned_off = false;
             
-            if ($jQuery(".popup-request.demo form").css('display') == 'block') {
+            if ($(".popup-request.demo form").css('display') == 'block') {
               $('.popup-request.demo .results').hide();
             }
             
@@ -100,7 +92,7 @@
 //            $(".popup-request .success").hide();
 //            $('.popup-request .multipartForm').show();
             turned_off = true;
-            return false;
+            //return false;
         });
         
         
