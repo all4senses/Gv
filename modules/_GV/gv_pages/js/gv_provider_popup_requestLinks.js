@@ -16,9 +16,15 @@
             // http://stackoverflow.com/questions/19817899/jquery-or-javascript-how-to-disable-window-scroll-without-overflowhidden
             $("body").css('overflow', 'hidden');
             
-          
+            
             $.fn.colorbox({inline:true, href:".popup-request.quote", width:650, height:500});  
+            
+            
             turned_off = false;
+            
+            if ($jQuery(".popup-request.quote form").css('display') == 'block') {
+              $('.popup-request.quote .results').hide();
+            }
             
             return false;
         });
@@ -61,6 +67,10 @@
           
             $.fn.colorbox({inline:true, href:".popup-request.demo", width:650, height:500});  
             turned_off = false;
+            
+            if ($jQuery(".popup-request.demo form").css('display') == 'block') {
+              $('.popup-request.demo .results').hide();
+            }
             
             return false;
         });
