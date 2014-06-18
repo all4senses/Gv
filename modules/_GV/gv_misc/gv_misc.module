@@ -1154,7 +1154,7 @@ function gv_misc_testPage() {
   
   
   
-  
+  /*
   $file_default_scheme = file_default_scheme();
   $default_file_path = variable_get('file_' . $file_default_scheme . '_path', conf_path() . '/files');
 
@@ -1173,6 +1173,32 @@ function gv_misc_testPage() {
   else {
     dpm('--- No file ' . $image_styled_url_full . ' ----- RESULT: ' . $output);
   }
+  */
+  
+  echo '<form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+
+<input type=hidden name="oid" value="00D50000000JVXK">
+<input type=hidden name="retURL" value="http://">
+
+<label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
+
+<label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
+
+<label for="company">Company</label><input  id="company" maxlength="40" name="company" size="20" type="text" /><br>
+
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+
+<label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+
+<label for="lead_source">Lead Source</label><select  id="lead_source" name="lead_source"><option value="">Inside - GetVoip Email</option><option value="Inside - GetVoip Email">Inside - GetVoip Email</option>
+</select><br>
+
+Lead Tier:<input  id="00N50000002p9b2" maxlength="50" name="00N50000002p9b2" size="20" type="text" /><br>
+
+<label for="description">Description</label><textarea name="description"></textarea><br>
+<input type="submit" name="submit">
+
+</form>';
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
