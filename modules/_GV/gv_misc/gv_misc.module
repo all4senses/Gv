@@ -5360,7 +5360,7 @@ function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
   
   foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
     if ($allowedProviders[$provider] = $provider_data['function']($submission, 'checkIfShouldBeSent')) {
-      $submission['sent_via'] .= $provider . ': Quote page (by user); ';
+      $submission['sent_via'] = @$submission['sent_via'] . $provider . ': Quote page (by user); ';
     }
   }
   
@@ -5459,7 +5459,7 @@ function gv_misc_isSubmissionToProviderAllowed($submission, $provider_function) 
     }
   }
   
-  if (in_array($submission['Source'] . '_' . $submission['Version'], $map_function_to_sources[$provider_function]['allowed_sources'])) {
+  if (!empty($map_function_to_sources[$provider_function]['allowed_sources']) && in_array($submission['Source'] . '_' . $submission['Version'], $map_function_to_sources[$provider_function]['allowed_sources'])) {
     return TRUE;
   }
   else {
