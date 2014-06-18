@@ -5351,16 +5351,21 @@ double triggerring of a submit form because of double launching almost the same 
  */
 function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
   
+  $allowedProviders = array();
+  $submission['sent_via'] = '';
+  
   if (in_array($submission['First Name'], array('afs', 'a4s', 'test'))) {
     $submission['sentToRemoteProviders'] = array('TEST submission, was not sent to anywhere' => TRUE);
+    return;
   }
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
    
-  $allowedProviders = array();
+  
   
   foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
-    if ($allowedProviders[$provider] = $provider_data['function']($submission, 'checkIfShouldBeSent')) {
-      $submission['sent_via'] = @$submission['sent_via'] . $provider . ': Quote page (by user); ';
+    if ($provider_data['function']($submission, 'checkIfShouldBeSent')) {
+      $allowedProviders[$provider] = TRUE;
+      $submission['sent_via'] .= $provider . ': Quote page (by user); ';
     }
   }
   
@@ -5383,11 +5388,11 @@ function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissi
   // Test submissions.
   if ($submission['First Name'] == 'JC' || $submission['First Name'] == 'jc' || @$submission['Company'] == 'JC') {
     // Test for Jive Communications
-    drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
+    //drupal_mail('gv_misc', 'request_quote', 'leads@getvoip.com', $language->language, $params);
 
     // Send a lead to Remote providers.
     if ($submission['Source'] != 'block') {
-      gv_misc_SendRequestToJiveCommunications($submission);
+      gv_misc_SendRequestToJiveCommunications($submission, 'mustBeSent');
     }
   }
   
