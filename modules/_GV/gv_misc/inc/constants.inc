@@ -277,6 +277,7 @@ $remoteProvidersSubmissionsSettings = array(
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array('page_4', 'page_7', 'page_8'/*, 'page_5-IScope'*/)),
   
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk')),
+  'Jive' => array('function' => 'gv_misc_SendRequestToJiveCommunications', 'allowed_sources' => array()),
 );
 
 define('REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS', serialize($remoteProvidersSubmissionsSettings));

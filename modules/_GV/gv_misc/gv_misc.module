@@ -7062,7 +7062,7 @@ function gv_misc_SendRequestToJiveCommunications($submission, $op = 'sendIfAllow
   return $params['report'];
   */
   
-  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'ringcentral_send_report', $data_to);
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'jive_send_report', $data_to);
 }
 
 
@@ -7145,6 +7145,10 @@ function gv_misc_mail($key, &$message, $params) {
       $message['body'][] = theme('gv_misc_requestQuote_mail', $params['request_data']);
       break;
     
+    case 'jive_send_report':
+      $message['subject'] = 'GV Report from the Jive request sending.';
+      $message['body'][] = $params['report'];
+      break;
     case 'vocalocity_send_report':
       $message['subject'] = 'GV Report from the Vocalocity request sending.';
       $message['body'][] = $params['report'];
