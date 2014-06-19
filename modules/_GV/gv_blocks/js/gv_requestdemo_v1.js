@@ -16,10 +16,10 @@
                 console.log($('#industry-button .ui-selectmenu-status').html());
                 
                 if ($('#industry-button .ui-selectmenu-status').html() == '- Industry -') {
-                  $('#industry-button').addClass('none');
+                  $('#industry-button .ui-selectmenu-status').addClass('none');
                 }
                 else {
-                  $('#industry-button').removeClass('none');
+                  $('#industry-button .ui-selectmenu-status').removeClass('none');
                 }
                 
             }
