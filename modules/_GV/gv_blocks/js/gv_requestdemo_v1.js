@@ -10,6 +10,9 @@
         $('.popup-request.demo select').selectmenu({
           //style:'popup', 
           maxHeight: 300
+          ,change: function() {
+                console.log('xxx');
+            }
   			});
         
         
