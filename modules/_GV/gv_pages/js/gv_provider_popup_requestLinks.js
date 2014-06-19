@@ -6,6 +6,16 @@
         //var turned_off = null;
         var turned_off = true;
         
+        $("#industry-menu li").click(function(){
+          console.log('li click');
+          if ($(this).hasClass('none')) {
+            console.log('has none');
+          }
+          else {
+            console.log('has NO none');
+          }
+        });
+        
         
         $("#request-quote").click(function(){
             //console.log('Show...');
