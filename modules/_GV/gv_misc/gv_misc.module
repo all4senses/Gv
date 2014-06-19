@@ -5033,7 +5033,9 @@ function gv_misc_makeRequest_ajax() {
         //'Sumbission page' => $post['url'],
       );
       
+      watchdog('--Jive test 2', print_r($submission, TRUE), NULL, WATCHDOG_WARNING);
       gv_misc_getAllowedProvidersToSendSubmission($submission);
+      watchdog('--Jive test 3', print_r($submission, TRUE), NULL, WATCHDOG_WARNING);
       
       foreach ($submission as $key => $value) {
         if (!$value || $value == 'Optional' || $key == $value) {
@@ -5386,7 +5388,7 @@ function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
   }
   $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
    
-  
+  watchdog('--Jive test 4', print_r($remoteProvidersSubmissionsSettings, TRUE), NULL, WATCHDOG_WARNING);
   
   foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
     if ($provider_data['function']($submission, 'checkIfShouldBeSent')) {
@@ -5395,8 +5397,12 @@ function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
     }
   }
   
+  watchdog('--Jive test 5', print_r($allowedProviders, TRUE), NULL, WATCHDOG_WARNING);
+  
   $submission['sentToRemoteProviders'] = !empty($allowedProviders) ? $allowedProviders : array('TEST submission, was not sent to anywhere' => TRUE);
 
+  watchdog('--Jive test 6', print_r($submission, TRUE), NULL, WATCHDOG_WARNING);
+  
 }
 
 
@@ -5418,6 +5424,7 @@ function gv_misc_sendQuoteToProviders($submission, $params = NULL, $sendSubmissi
 
     // Send a lead to Remote providers.
     if ($submission['Source'] != 'block') {
+      watchdog('--Jive test 1', print_r($submission, TRUE), NULL, WATCHDOG_WARNING);
       gv_misc_SendRequestToJiveCommunications($submission, 'mustBeSent');
     }
   }
@@ -5483,17 +5490,23 @@ function gv_misc_isSubmissionToProviderAllowed($submission, $provider_function) 
 
   static $map_function_to_sources;
   
+  watchdog('--Jive test 11', print_r($map_function_to_sources, TRUE), NULL, WATCHDOG_WARNING);
+  
   if (!$map_function_to_sources) {
     $remoteProvidersSubmissionsSettings = unserialize(REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS);
+    watchdog('--Jive test 12', print_r($remoteProvidersSubmissionsSettings, TRUE), NULL, WATCHDOG_WARNING);
     foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
       $map_function_to_sources[$provider_data['function']] = $provider_data;
     }
+    watchdog('--Jive test 13', print_r($map_function_to_sources, TRUE), NULL, WATCHDOG_WARNING);
   }
   
   if (!empty($map_function_to_sources[$provider_function]['allowed_sources']) && in_array($submission['Source'] . '_' . $submission['Version'], $map_function_to_sources[$provider_function]['allowed_sources'])) {
+    watchdog('--Jive test 14', 'TRUE', NULL, WATCHDOG_WARNING);
     return TRUE;
   }
   else {
+    watchdog('--Jive test 15', 'FALSE', NULL, WATCHDOG_WARNING);
     return FALSE;
   }
 }
@@ -6937,6 +6950,8 @@ function gv_misc_SendRequestToJiveCommunications($submission, $op = 'sendIfAllow
   if ($submission['Phones needed'] == '1 - 4' || $submission['Phones needed'] == '2 - 4') {
     $allowedToBeSent = FALSE;
   }
+  
+  watchdog('--Jive test 10', print_r($submission, TRUE), NULL, WATCHDOG_WARNING);
   
   $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : FALSE;
   
