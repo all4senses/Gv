@@ -14,6 +14,14 @@
                 console.log('xxx');
                 //console.log(this);
                 console.log($('#industry-button .ui-selectmenu-status').html());
+                
+                if ($('#industry-button .ui-selectmenu-status').html() == '- Industry -') {
+                  $('#industry-button').addClass('none');
+                }
+                else {
+                  $('#industry-button').removeClass('none');
+                }
+                
             }
   			});
         
