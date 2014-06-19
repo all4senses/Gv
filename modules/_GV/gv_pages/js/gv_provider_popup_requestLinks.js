@@ -6,7 +6,8 @@
         //var turned_off = null;
         var turned_off = true;
         
-        $("#industry-menu li").click(function(){
+        //$("#industry-menu li").click(function(){
+        $("li").mouseover(function(){
           console.log('li click');
           if ($(this).hasClass('none')) {
             console.log('has none');
