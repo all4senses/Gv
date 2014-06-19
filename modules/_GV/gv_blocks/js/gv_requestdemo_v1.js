@@ -13,7 +13,7 @@
           ,change: function() {
                 console.log('xxx');
                 //console.log(this);
-                console.log($('#industry-button .ui-selectmenu-status').val());
+                console.log($('#industry-button .ui-selectmenu-status').html());
             }
   			});
         
