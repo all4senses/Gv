@@ -12,6 +12,7 @@
           maxHeight: 300
           ,change: function() {
                 console.log('xxx');
+                console.log(this);
             }
   			});
         
