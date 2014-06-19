@@ -12,7 +12,8 @@
           maxHeight: 300
           ,change: function() {
                 console.log('xxx');
-                console.log(this);
+                //console.log(this);
+                console.log($('#industry-button .ui-selectmenu-status').val());
             }
   			});
         
