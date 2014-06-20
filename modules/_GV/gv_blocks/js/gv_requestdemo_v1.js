@@ -10,10 +10,11 @@
         $('.popup-request.demo select').selectmenu({
           //style:'popup', 
           maxHeight: 300
+          // Make gray unchoosen option.
           ,change: function() {
-                console.log('xxx');
+                //console.log('xxx');
                 //console.log(this);
-                console.log($('#industry-button .ui-selectmenu-status').html());
+                //console.log($('#industry-button .ui-selectmenu-status').html());
                 
                 if ($('#industry-button .ui-selectmenu-status').html() == '- Industry -') {
                   $('#industry-button .ui-selectmenu-status').addClass('none');
