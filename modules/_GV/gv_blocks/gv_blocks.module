@@ -4679,11 +4679,12 @@ function gv_blocks_get_requestQuote_block_v6() {
  */
 function gv_blocks_get_requestQuote_block_v7() {
   
-//  global $user;
-//  if (!$user->uid) 
-//    {
-//    return NULL;
-//  }
+  global $user;
+  // don't show for registered users/
+  if ($user->uid) 
+    {
+    return NULL;
+  }
   
   // Don't show the block if on the 404 page
   if ($_GET['q'] == 'node/988') {
