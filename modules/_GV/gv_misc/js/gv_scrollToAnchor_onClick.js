@@ -3,7 +3,7 @@
   Drupal.behaviors.gv_scrollToAnchor_onClick = {
     attach: function (context, settings) {
 
-        console.log('Scroll to anchor...');
+        //console.log('Scroll to anchor...');
         
         // http://stackoverflow.com/questions/4198041/jquery-smooth-scroll-to-an-anchor
         var hashTagActive = "";
@@ -20,7 +20,7 @@
                 //go to destination
                 $('html,body').animate({
                     scrollTop: dest
-                }, 2000, 'swing');
+                }, 1200, 'swing');
                 hashTagActive = this.hash;
             }
         });
