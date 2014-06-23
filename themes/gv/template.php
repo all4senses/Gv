@@ -797,13 +797,17 @@ function gv_process_page(&$variables) {
     }
   }
   
-  // JS for comparing providers functionality on pages ehere appropriate views are cached and therefore have not loaded js itselves within views.
+  // JS for comparing providers functionality on pages wehere appropriate views are cached and therefore have not loaded js itselves within views.
   $pages_with_compare_provider_functionality = array('/providers/reviews');
   if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $pages_with_compare_provider_functionality)) {
     $module_path_pages = drupal_get_path('module', 'gv_misc');
     drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
   }
   
+  if ($_SERVER['REQUEST_URI'] == '/') {
+    $module_path_pages = drupal_get_path('module', 'gv_misc');
+    drupal_add_js( $module_path_pages . '/js/gv_scrollToAnchor_onClick.js'); 
+  }
   
   /* Add Google's fonts */
   //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');
