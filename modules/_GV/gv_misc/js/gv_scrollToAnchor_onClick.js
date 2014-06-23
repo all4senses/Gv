@@ -21,7 +21,7 @@
                 $('html,body').animate({
                     scrollTop: dest
                 }, 1200, 'swing');
-                hashTagActive = this.hash;
+                //////hashTagActive = this.hash;
             }
         });
         
