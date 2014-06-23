@@ -1249,7 +1249,7 @@ Lead Tier:<input  id="00N50000002p9b2" maxlength="50" name="00N50000002p9b2" siz
   
   $out .= '<br><br><div style="font-weight: bold;">The form source</div><div>'
           
-          . '<code><form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+          . htmlentities('<form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
 
 <input type=hidden name="oid" value="00D50000000JVXK">
 <input type=hidden name="retURL" value="http://">
@@ -1293,7 +1293,7 @@ Email = email
 Phone # = phone
 
 "Lead Source" is a fixed value.'
-          . '</code></div>';
+          . '</div>');
   
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
