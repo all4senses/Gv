@@ -1550,7 +1550,7 @@ function gv_blocks_getHomeServiceTypes() {
       $query->range(0, 3);
       $results = $query->execute()->fetchAll(); 
 
-      //dpm($results);
+      dpm($results);
       
       foreach ($results as $key => $data) {
         $out .= '<a href="' . url('node/' . $data->entity_id) . '" class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</a>';
