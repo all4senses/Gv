@@ -1236,10 +1236,10 @@ function gv_misc_testPage_Jive_submissionOriginalForm() {
 
 <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
 
-<label for="lead_source">Lead Source</label><select  id="lead_source" name="lead_source"><option value="">Inside - GetVoip Email</option><option value="Inside - GetVoip Email">Inside - GetVoip Email</option>
+<label for="lead_source">Lead Source</label><select  id="lead_source" name="lead_source"><option value="GetVoIP Lead">GetVoIP Lead</option>
 </select><br>
 
-Lead Tier:<input  id="00N50000002p9b2" maxlength="50" name="00N50000002p9b2" size="20" type="text" /><br>
+Lead Tier:<input id="00N50000002p9b2" maxlength="50" name="00N50000002p9b2" size="20" type="text" /><br>
 
 <label for="description">Description</label><textarea name="description"></textarea><br>
 <input type="submit" name="submit">
@@ -7090,7 +7090,7 @@ function gv_misc_SendRequestToJiveCommunications($submission, $op = 'sendIfAllow
       
   // Set initial fields.
   $data_to = array(
-    'lead_source' => 'Inside - GetVoip Email', //'Lead Generation',
+    'lead_source' => 'GetVoIP Lead', // 'Inside - GetVoip Email', //'Lead Generation',
     //'BMID__c' => 'GETVOIPHQL',
     
     //'AID__c' => 'GETVOIPHQL',
