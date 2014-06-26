@@ -1545,7 +1545,7 @@ function gv_blocks_getHomeServiceTypes() {
       $query->fields('r', array('entity_id', $field ));
       //$query->fields('d', array('field_p_data_value'));
       $query->fields('p', array('field_p_name_value'));
-      $query->orderBy($field_prefixed, 'DESC');
+      $query->orderBy($field_prefixed, 'ASC');
       
       $query->range(0, 3);
       $results = $query->execute()->fetchAll(); 
