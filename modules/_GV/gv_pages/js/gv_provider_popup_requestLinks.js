@@ -19,7 +19,7 @@
             $("body").css('overflow', 'hidden');
             
             
-            $.fn.colorbox({inline:true, href:".popup-request.quote", width:730, height:500});  
+            $.fn.colorbox({inline:true, href:".popup-request.quote", width:730, height:600});  
             
             
             turned_off = false;

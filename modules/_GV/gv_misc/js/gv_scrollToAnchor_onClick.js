@@ -20,7 +20,7 @@
                 //go to destination
                 $('html,body').animate({
                     scrollTop: dest
-                }, 1200, 'swing');
+                }, 800, 'swing');
                 //////hashTagActive = this.hash;
             }
         });
