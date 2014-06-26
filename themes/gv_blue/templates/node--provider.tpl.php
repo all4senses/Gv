@@ -101,7 +101,7 @@
                 </div> <!-- End of <div typeof="Organization"> -->
                 
                 <div class="links">
-                  <?php echo l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
+                  <?php echo '<a href="#" id="request-demo" rel="nofollow">Request a Demo</a>', // l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'))), 
                           l('Request a Quote', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-quote', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
                           l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
                   
