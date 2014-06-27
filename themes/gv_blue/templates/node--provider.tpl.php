@@ -129,7 +129,7 @@
                             
                             <div style="display: none;">
                               <div id="block-gv-blocks-request-quote-v8" class="popup-request quote"> 
-                                <?php echo $logo_block, '<div class="header"><div class="title">Request a Quote</div><div class="subtitle">From ', $provider_name, '</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>'; ?>
+                                <?php echo $logo_block, '<div class="header"><div class="title">Request ', $provider_name, ' Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>'; ?>
                                 <div class="bottom-clear"></div>
                                 <?php echo gv_blocks_get_requestQuote_block_v8_popup_provider(); ?>
                                 
