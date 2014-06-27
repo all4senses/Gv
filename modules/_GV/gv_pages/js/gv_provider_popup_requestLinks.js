@@ -59,7 +59,7 @@
             $("body").css('overflow', 'hidden');
             
           
-            $.fn.colorbox({inline:true, href:".popup-request.demo", width:730, height:500});  
+            $.fn.colorbox({inline:true, href:".popup-request.demo", width:730, height:550});  
             turned_off = false;
             
             if ($(".popup-request.demo form").css('display') == 'block') {
