@@ -1538,7 +1538,7 @@ function gv_blocks_getHomeServiceTypes() {
       $field_prefixed = 'r.' . $field;
       $query = db_select($table, 'r');
       $query->isNotNull($field_prefixed);
-      $query->condition($field_prefixed, '', '!=');
+      //$query->condition($field_prefixed, '', '!=');
       
       $query->join('node', 'n', "n.nid = r.entity_id AND n.type='provider'");
       //$query->leftJoin('field_data_field_p_data', 'd', "d.entity_id = r.entity_id");
@@ -1551,7 +1551,7 @@ function gv_blocks_getHomeServiceTypes() {
       $query->range(0, 3);
       $results = $query->execute()->fetchAll(); 
 
-      dpm($results);
+      //dpm($results);
       
       foreach ($results as $key => $data) {
         $out .= '<a href="' . url('node/' . $data->entity_id) . '" class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</a>';
