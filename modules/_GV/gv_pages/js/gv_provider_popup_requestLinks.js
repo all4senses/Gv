@@ -23,7 +23,7 @@
               inline:true, 
               href:".popup-request.quote", 
               width:730, 
-              height:600, 
+              height:606, 
               onClosed: function() {
                //console.log('closed...');
                $("body").css('overflow', 'inherit');
