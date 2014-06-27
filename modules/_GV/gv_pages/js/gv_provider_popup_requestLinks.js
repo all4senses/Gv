@@ -24,7 +24,7 @@
               href:".popup-request.quote", 
               width:730, 
               height:600, 
-              onClose: function() {
+              onClosed: function() {
                 console.log('closed...');
                $("body").css('overflow', 'inherit');
               }
