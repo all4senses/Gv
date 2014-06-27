@@ -25,6 +25,7 @@
               width:730, 
               height:600, 
               onClose: function() {
+                console.log('closed...');
                $("body").css('overflow', 'inherit');
               }
             });  
