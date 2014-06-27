@@ -2741,16 +2741,6 @@ function gv_blocks_librarySections() {
   }
   $out .= '</div>';
   
-  
-  
-  
-  
-//  $query = db_select('field_data_field_funnel_sections', 's')
-//        //->fields('s', array('entity_id'));
-//        ->fields('s');
-//  $results = $query->execute()->fetchAllAssoc('entity_id');
-//  dpm($results);
-  
   return $out;
 }
 
@@ -2805,20 +2795,13 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   $latest_reviews = NULL;
   
   $map_path_to_preface_type = array(
-    //'/compare-business-voip-providers' => 'page-compare-business-voip-providers',
     '/business' => 'page-compare-business-voip-providers',
-    //'/compare-residential-voip-providers' => 'page-compare-residential-voip-providers',
     '/residential' => 'page-compare-residential-voip-providers',
-    //'/sip-trunking-providers' => 'page-compare-sip-voip-providers',
     '/sip-trunking' => 'page-compare-sip-voip-providers',
-    //'/internet-fax-service-providers' => 'page-compare-ifa-voip-providers',
     '/fax' => 'page-compare-ifa-voip-providers',
     '/business-voip-features' => 'business-voip-features',
-    //'/canada-voip' => 'canada-voip',
     '/canada' => 'canada-voip',
-    //'/hosted-pbx-providers' => 'page-compare-pbx-voip-providers',
     '/hosted-pbx' => 'page-compare-pbx-voip-providers',
-    //'/small-business-voip' => 'page-compare-smbv-voip-providers',
   );
   
   $map_preface_type_to_service_type = array(
@@ -2832,19 +2815,13 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
   );
   
   $map_path_to_type = array(
-    //'/compare-business-voip-providers' => 'Business VoIP',
     '/business' => 'Business VoIP',  
-    //'/compare-residential-voip-providers' => 'Residential VoIP',
     '/residential' => 'Residential VoIP',
     '/business-voip-features' => 'Business VoIP Features',
-    //'/sip-trunking-providers' => 'SIP Trunking Providers',
     '/sip-trunking' => 'SIP Trunking Providers',
-    //'/canada-voip' => 'Canada VoIP',
     '/canada' => 'Canada VoIP',
-    //'/internet-fax-service-providers' => 'Internet Fax',
     '/fax' => 'Internet Fax',
-    //'/hosted-pbx-providers' => 'Hosted PBX Providers',
-    '/hosted-pbx' => 'Hosted PBX Providers',
+   '/hosted-pbx' => 'Hosted PBX Providers',
     '/small-business-voip' => 'Small Business VoIP',
   );
  
@@ -2875,45 +2852,29 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     return $cache_content->data;
   }
   
-  //dpm('no cache');
-  
   $map_path_to_articles_limit = array(
-    //'/compare-business-voip-providers' => 7,
     '/business' => 2,
-    //'/compare-residential-voip-providers' => 5,
     '/residential' => 2,
-    //'/sip-trunking-providers' => 4,
     '/sip-trunking' => 4,
-    //'/internet-fax-service-providers' => NULL,
     '/fax' => NULL,
     '/business-voip-features' => 4,
-    //'/canada-voip' => 2,
     '/canada' => 2,
-    //'/hosted-pbx-providers' => 4,
     '/hosted-pbx' => 2,
     '/small-business-voip' => 5,
   );
   
   
   $map_path_to_title = array(
-    //'/compare-business-voip-providers' => 'Business VoIP',
     '/business' => 'Business VoIP',
-    //'/compare-residential-voip-providers' => 'Residential VoIP',
     '/residential' => 'Residential VoIP',
     '/business-voip-features' => 'Business VoIP Features',
-    //'/sip-trunking-providers' => 'SIP Trunking',
     '/sip-trunking' => 'SIP Trunking',
-    //'/canada-voip' => 'Canada VoIP',
     '/canada' => 'Canada VoIP',
-    //'/internet-fax-service-providers' => 'Internet Fax',
     '/fax' => 'Internet Fax',
-    //'/hosted-pbx-providers' => 'Hosted PBX',
     '/hosted-pbx' => 'Hosted PBX',
     '/small-business-voip' => 'Small Business VoIP',
   );
  
-  
-  
   $map_preface_type_to_latest_reviews = array(
     'page-compare-business-voip-providers' => 4,
     'page-compare-residential-voip-providers' => 4,
@@ -2924,8 +2885,6 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     'page-compare-pbx-voip-providers' => 4,
     //'page-compare-smbv-voip-providers' => NULL,
   );
-  
-  
   
   // Find latest posts.
   $query = db_select('field_data_field_pin_article_to', 'a')
@@ -2948,25 +2907,144 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
     $count = count($results) - 1;
     foreach ($results as $key => $result) {
       $node = node_load($result->entity_id);
-//      if ($user->uid) {
-        $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'side_block_teaser')) . '</div>';
-//      }
-//      else {
-//        $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
-//      }
+      $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'side_block_teaser')) . '</div>';
     }
-
-    //$latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Articles</h2>' . $latest_articles . '</div>';
     if ($user->uid) {
       $latest_articles = '<div class="view-articles block"><h3 class="block-title"><span class="block-icon">Latest Posts</span></h3><div class="view-content content">' . $latest_articles . '<div class="more-link"><a href="/articles" rel="nofollow">View All</a></div></div></div>';
     }
     else {
-      //$latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h2 class="block-title">Latest From Our Blog</h2>' . $latest_articles . '</div>';
       $latest_articles = '<div class="view-articles"><a href="/articles" class="more-link">View All</a><h3 class="block-title">Latest Posts</h3><div class="view-content">' . $latest_articles . '</div></div>';
     }
   }
   
   
+  
+  
+  
+  // Find latest reviews
+  if ($map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]) {
+    
+    $query = db_select('node', 'n')
+            ->fields('n', array('nid', 'created'));
+    $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
+    
+    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
+    
+    $query->condition('n.status', 1);
+    $query->addTag('a4s');
+    $query->addTag('reviews');
+    $query->condition('n.type', 'review');
+    $query->orderBy('n.created', 'DESC');
+    $query->range(0, $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]);
+
+    $results = $query->execute()->fetchAll();
+    
+    if (!empty($results)) {
+
+      $count = count($results) - 1;
+      foreach ($results as $key => $result) {
+        $node = node_load($result->nid);
+          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
+      }
+      // if ($GLOBALS['theme'] == 'gv_blue') {
+      if ($user->uid) {
+        $latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
+      }
+      else {
+        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3><div class="view-content">' . $latest_reviews . '</div></div>';
+      }
+    }
+
+  }
+  
+  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views' . ($user->uid ? ' sidebar' : '') . '">' . $latest_reviews . $latest_articles . '</div>' : NULL;
+
+  $content = '<div id="bottom-with-latest-articles" class="preface' . (($latest_articles || $latest_reviews) ? ' with-articles' : '') . '">'
+            . $right_col
+            . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
+            . '<div class="bottom-clear"></div>'
+          . '</div>';
+ 
+  cache_set($cache_name, $content, 'cache', time() + 14400);
+  
+  return $content;
+}
+
+
+/**
+ * Copy of Latest reviews part of the function gv_blocks_prefaceBottomWithLatestArticles() (from preface Bottom Latest Articles block.)
+ */
+function gv_blocks_latestReviews_byPathAndPrefaceAsServiceType() {
+  
+  $latest_articles = NULL;
+  $latest_reviews = NULL;
+  
+  $map_path_to_preface_type = array(
+    '/business' => 'page-compare-business-voip-providers',
+    '/residential' => 'page-compare-residential-voip-providers',
+    '/sip-trunking' => 'page-compare-sip-voip-providers',
+    '/fax' => 'page-compare-ifa-voip-providers',
+    '/business-voip-features' => 'business-voip-features',
+    '/canada' => 'canada-voip',
+    '/hosted-pbx' => 'page-compare-pbx-voip-providers',
+  );
+  
+  $map_preface_type_to_service_type = array(
+    'page-compare-business-voip-providers' => 'business',
+    'page-compare-residential-voip-providers' => 'residential',
+    'page-compare-sip-voip-providers' => 'sip',
+    'page-compare-ifa-voip-providers' => 'ifa',
+    'canada-voip' => 'ca',
+    'page-compare-pbx-voip-providers' => 'pbx',
+    //'page-compare-smbv-voip-providers' => NULL,
+  );
+  
+  $map_path_to_type = array(
+    '/business' => 'Business VoIP',  
+    '/residential' => 'Residential VoIP',
+    '/business-voip-features' => 'Business VoIP Features',
+    '/sip-trunking' => 'SIP Trunking Providers',
+    '/canada' => 'Canada VoIP',
+    '/fax' => 'Internet Fax',
+    '/hosted-pbx' => 'Hosted PBX Providers',
+    '/small-business-voip' => 'Small Business VoIP',
+  );
+ 
+  
+  
+  global $language;
+  global $user;
+  $logged_in = $user->uid ? '_logged' : '';
+  $cache_name = 'gv_latest_reviews_for_' . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . $language->language . $logged_in;
+  
+  $cache_content = cache_get($cache_name);
+  if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+    return $cache_content->data;
+  }
+  
+  $map_path_to_title = array(
+    '/business' => 'Business VoIP',
+    '/residential' => 'Residential VoIP',
+    '/business-voip-features' => 'Business VoIP Features',
+    '/sip-trunking' => 'SIP Trunking',
+    '/canada' => 'Canada VoIP',
+    '/fax' => 'Internet Fax',
+    '/hosted-pbx' => 'Hosted PBX',
+    '/small-business-voip' => 'Small Business VoIP',
+  );
+ 
+  
+  
+  $map_preface_type_to_latest_reviews = array(
+    'page-compare-business-voip-providers' => 4,
+    'page-compare-residential-voip-providers' => 4,
+    'page-compare-sip-voip-providers' => NULL,
+    'page-compare-ifa-voip-providers' => NULL,
+    'business-voip-features' => NULL,
+    'canada-voip' => NULL,
+    'page-compare-pbx-voip-providers' => 4,
+    //'page-compare-smbv-voip-providers' => NULL,
+  );
   
   
   
@@ -2997,39 +3075,23 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       $count = count($results) - 1;
       foreach ($results as $key => $result) {
         $node = node_load($result->nid);
-//        $sprite_names = unserialize(SPRITE_NAMES);
-//        $node->sprite_name = $sprite_names[$map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]];
-        
-//        if ($user->uid) {
-          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
-//        }
-//        else {
-//          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'home_teaser')) . '</div>';
-//        }
+         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
       }
-      //class="view-articles"
+
       if ($user->uid) {
         $latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
       }
       else {
-        //$latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h2 class="block-title">Latest ' . $map_path_to_title[$_SERVER['REDIRECT_URL']] . ' Reviews</h2>' . $latest_reviews . '</div>';
         $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3><div class="view-content">' . $latest_reviews . '</div></div>';
       }
     }
 
   }
   
-  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views' . ($user->uid ? ' sidebar' : '') . '">' . $latest_reviews . $latest_articles . '</div>' : NULL;
-
-  $content = '<div id="bottom-with-latest-articles" class="preface' . (($latest_articles || $latest_reviews) ? ' with-articles' : '') . '">'
-            . $right_col
-            . '<div class="field-name-field-preface-bottom">' . gv_misc_getPrefaceBottomSection($map_path_to_preface_type[$_SERVER['REDIRECT_URL']]) . '</div>'
-            . '<div class="bottom-clear"></div>'
-          . '</div>';
  
-  cache_set($cache_name, $content, 'cache', time() + 14400);
+  cache_set($cache_name, $latest_reviews, 'cache', time() + 14400);
   
-  return $content;
+  return $latest_reviews;
 }
 
 
