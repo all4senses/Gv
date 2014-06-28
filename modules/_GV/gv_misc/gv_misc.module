@@ -3753,11 +3753,15 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       $style_name = 'article_thumbnail_h';
       ////$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
       //$main_image['src_themed'] = image_style_url($style_name, $stream_path);
+      
+      $style_name_home_teasers_rotated = 'home_teasers_rotated_h';
     }
     else {
       $style_name = 'article_thumbnail_v';
       ////$main_image_html = theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name));
       //$main_image['src_themed'] = image_style_url($style_name, $stream_path);
+      
+      $style_name_home_teasers_rotated = 'home_teasers_rotated_v';
     }
     
     // Image for sharing.
@@ -3781,7 +3785,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     
     // Clear existing thumbnails image_cached files.
     $default_file_path = variable_get('file_' . file_default_scheme() . '_path', conf_path() . '/files');
-    $styles_to_delete = array($style_name, $style_name_share, 'block_thumb', 'article_thumbnail_side_block', 'article_thumbnail_home_teaser');
+    $styles_to_delete = array($style_name, $style_name_home_teasers_rotated, $style_name_share, 'block_thumb', 'article_thumbnail_side_block', 'article_thumbnail_home_teaser');
     foreach ($styles_to_delete as $style_to_delete) {
       $to_delete = str_replace($default_file_path, $default_file_path . '/styles/' . $style_to_delete . '/public' , $main_image['src']);
       if (file_exists($to_delete)) {
@@ -3797,6 +3801,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     $main_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
     */
     gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, $main_image_html, $main_image_html_beautify, $title);
+    
+    gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name_home_teasers_rotated, $home_teasers_rotated_image_html, $home_teasers_rotated_image_html_beautify, $title);
     
     $main_image['src_themed'] = $main_image['src_share'] = image_style_url($style_name_share, $stream_path);
     gv_misc_createCachedImageIfNotExists($main_image['src_themed']);
@@ -3922,6 +3928,11 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
         
       'home_teaser_image' => @$home_teaser_image_html,
       'home_teaser_image_beautify' => @$home_teaser_image_html_beautify,
+      
+      'home_teaser_image' => @$home_teasers_rotated_image_html,
+      'home_teaser_image_beautify' => @$home_teasers_rotated_image_html_beautify,
+        
+        
     );
   }
   

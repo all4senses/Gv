@@ -2909,7 +2909,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
       $node = node_load($result->entity_id);
       $latest_articles .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'side_block_teaser')) . '</div>';
     }
-    if ($user->uid) {
+    if ($GLOBALS['theme'] == 'gv_blue') {
+      //if ($user->uid) {
       $latest_articles = '<div class="view-articles block"><h3 class="block-title"><span class="block-icon">Latest Posts</span></h3><div class="view-content content">' . $latest_articles . '<div class="more-link"><a href="/articles" rel="nofollow">View All</a></div></div></div>';
     }
     else {
@@ -2946,8 +2947,8 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
         $node = node_load($result->nid);
           $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
       }
-      // if ($GLOBALS['theme'] == 'gv_blue') {
-      if ($user->uid) {
+      if ($GLOBALS['theme'] == 'gv_blue') {
+      //if ($user->uid) {
         $latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
       }
       else {
@@ -3055,7 +3056,6 @@ function gv_blocks_latestReviews_byPathAndPrefaceAsServiceType() {
             ->fields('n', array('nid', 'created'));
     $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
     
-    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value = '" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "'");
     $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
     
     $query->condition('n.status', 1);
@@ -3078,7 +3078,8 @@ function gv_blocks_latestReviews_byPathAndPrefaceAsServiceType() {
          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
       }
 
-      if ($user->uid) {
+      if ($GLOBALS['theme'] == 'gv_blue') {
+      //if ($user->uid) {
         $latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
       }
       else {
