@@ -232,6 +232,13 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
+  
+  $blocks['latest_reviews_by_path'] = array(
+    'info' => 'gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType()',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  
   $blocks['newsletters_subscribe'] = array(
     'info' => 'Newsletters subscribe',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -629,6 +636,12 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = gv_blocks_prefaceBottomWithLatestArticles();
       break;
+    
+    case 'latest_reviews_by_path':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType();
+      break;
+    
     
     case 'newsletters_subscribe':
       $block['subject'] = 'Newsletter Sign Up';
@@ -2975,7 +2988,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
 /**
  * Copy of Latest reviews part of the function gv_blocks_prefaceBottomWithLatestArticles() (from preface Bottom Latest Articles block.)
  */
-function gv_blocks_latestReviews_byPathAndPrefaceAsServiceType() {
+function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   
   $latest_articles = NULL;
   $latest_reviews = NULL;
