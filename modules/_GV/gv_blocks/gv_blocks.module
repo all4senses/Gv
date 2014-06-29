@@ -3092,13 +3092,8 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
          $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render(node_view($node, 'teaser_onPrefaceBottomLatest')) . '</div>';
       }
 
-      if ($GLOBALS['theme'] == 'gv_blue') {
-      //if ($user->uid) {
-        $latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
-      }
-      else {
-        $latest_reviews = '<div id="compare-providers-reviews"><a href="/reviews/business" class="more-link">View All</a><h3 class="block-title">Latest Reviews</h3><div class="view-content">' . $latest_reviews . '</div></div>';
-      }
+      //$latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
+      $latest_reviews = $latest_reviews . '<div class="more-link"><a href="/reviews" rel="nofollow">View All</a></div>';
     }
 
   }
