@@ -3790,8 +3790,9 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     foreach ($styles_to_delete as $style_to_delete) {
       $to_delete = str_replace($default_file_path, $default_file_path . '/styles/' . $style_to_delete . '/public' , $main_image['src']);
       dpm($style_to_delete);
-      dpm($to_delete);
+      
       if (file_exists($to_delete)) {
+        dpm($to_delete);
         unlink($to_delete);
       } 
     }
@@ -3799,7 +3800,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     /*
     //$main_image_html = '<div class="thumb">' . theme('image_style', array( 'path' => $stream_path, 'style_name' => $style_name)) . '</div>';
     $main_image_html = image_style_url($style_name, $stream_path);
-    gv_misc_createCachedImageIfNotExists($main_image_html);
+    gv_misc_createCachedImd ageIfNotExists($main_image_html);
     $main_image_html = '<div class="thumb"><image src="' . $main_image_html . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
     $main_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
     */
