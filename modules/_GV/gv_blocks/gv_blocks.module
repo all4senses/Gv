@@ -815,7 +815,7 @@ function gv_blocks_block_view($delta = '') {
     
     case 'top5prov_fromviews':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_render_block('views', 'providers-block_top_bu_small');
+      $block['content'] = ($_GET['q'] == 'blog' && isset($_GET['page'])) ? NULL : gv_blocks_render_block('views', 'providers-block_top_bu_small');
       break;
     
     
