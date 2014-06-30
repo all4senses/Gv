@@ -395,6 +395,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['top5prov_fromviews'] = array(
+    'info' => 'Top 5 providers (from views providers-block_top_bu_small) for main blog page',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  
   
   return $blocks;
 }
@@ -807,8 +813,14 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getBlockFromViews('reviews-block_home_latest_reviews');
       break;
     
+    case 'top5prov_fromviews':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_render_block('views', 'providers-block_top_bu_small');
+      break;
     
     
+            
+            
   }
 
   return $block;
@@ -3699,6 +3711,7 @@ function gv_blocks_contextual_links_view_alter(&$element, &$items) {
 
 /**
  * Returns themed block using standard drupal functions.
+ * drupal get block programmatically
  */
 function gv_blocks_render_block($module, $delta) {
 //  $block = module_invoke($module, 'block_view', $delta);
