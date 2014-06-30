@@ -3770,10 +3770,9 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     $styles_to_delete = array($style_name, $style_name_home_teasers_rotated, $style_name_share, 'block_thumb', 'article_thumbnail_side_block', 'article_thumbnail_home_teaser');
     foreach ($styles_to_delete as $style_to_delete) {
       $to_delete = str_replace($default_file_path, $default_file_path . '/styles/' . $style_to_delete . '/public' , $main_image['src']);
-      dpm($style_to_delete);
       $to_delete = ltrim($to_delete, '/');
       if (file_exists($to_delete)) {
-        dpm($to_delete);
+        //dpm($to_delete);
         unlink($to_delete);
       } 
     }
