@@ -1757,7 +1757,7 @@ function gv_misc_flush_caches() {
     }
   }
   */
-  variable_del('gv_minified_js');
+  /////variable_del('gv_minified_js');
   
   
   
@@ -3944,6 +3944,9 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
   
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if (!isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
+    
+    watchdog('a4s article extra_data update', 'nid: ' . $node->nid . ', update_timestamp: ' . @$extra_data['update_timestamp'], NULL, WATCHDOG_WARNING);
+    
     $teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     //$teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     
