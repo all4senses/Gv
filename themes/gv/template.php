@@ -164,7 +164,7 @@ function gv_pager_link($variables) {
     if (!isset($titles)) {
       $titles = array(
         t('« first') => t('Go to first page'),
-        t('‹ previous..') => t('Go to previous page'),
+        t('‹ previous') => t('Go to previous page'),
         t('next ›') => t('Go to next page'),
         t('last »') => t('Go to last page'),
       );
