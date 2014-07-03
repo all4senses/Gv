@@ -691,6 +691,23 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           global $user;
           if ($user->uid == 1 ){
             $p_by_ip = $results->fetchAllAssoc('timestamp');
+            $current_from = $from;
+            $current_timeframe = array();
+            $all_time = array();
+            foreach ($p_by_ip as $p) {
+              if ($p->timestamp > $current_from + 60*60*24 - 1) {
+                $current_from += 60*60*24;
+                $current_timeframe[] = $p->ip;
+                $all_time[] = $p->ip;
+              }
+              else {
+                if(!in_array($p->ip, $current_timeframe)) {
+                  $current_timeframe[] = $p->ip;
+                  $all_time[] = $p->ip;
+                }
+              }
+            }
+            dpm($all_time);
           }
           else {
             $p_by_ip = $results->fetchAllAssoc('ip');
