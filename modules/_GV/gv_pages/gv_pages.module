@@ -531,7 +531,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
       //    $filter_by_track_id_url = $_GET + array('op' => 'filter_by_track_id', 'track_id' => $result->track_id);
       //    unset($filter_by_track_id_url['q']);
-
+          unset($filter_temp_get['provider']);
           $filter_by_provider_name_url = $filter_temp_get + array('only_featured' => 0, 'provider' => urlencode(str_replace(' Video Review', '', $result->object_name)));
 
           $form['item_' . ($key + 1) . 'c'] = array(
@@ -739,7 +739,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         );
 
         $filter_temp_get['stat_type'] = 'full';
-        unset($filter_temp_get['sort'], $filter_temp_get['order']);
+        unset($filter_temp_get['sort'], $filter_temp_get['order'], $filter_temp_get['provider']);
         
         $tr_class = 'even';
         
