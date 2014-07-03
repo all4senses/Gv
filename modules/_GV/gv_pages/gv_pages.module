@@ -688,11 +688,14 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           }
           */
           
+          global $user;
+          if ($user->uid == 1 ){
+            $p_by_ip = $results->fetchAllAssoc('timestamp');
+          }
+          else {
+            $p_by_ip = $results->fetchAllAssoc('ip');
+          }
           
-          $p_by_timestamp = $results->fetchAllAssoc('timestamp');
-          dpm($p_by_timestamp);
-          
-          $p_by_ip = $results->fetchAllAssoc('ip');
           dpm($p_by_ip);
           
           
