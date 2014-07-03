@@ -720,10 +720,11 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $total_items = $results->rowCount();
           $all_total_items += $total_items;
           if ($user->uid ==1) {
-            $total_items_unique = count($p_by_ip);
+            $total_items_unique = count($all_time);
+            
           }
           else {
-            $total_items_unique = count($all_time);
+            $total_items_unique = count($p_by_ip);
           }
           $all_total_items_unique += $total_items_unique;
           
