@@ -698,7 +698,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               if ($p->timestamp > $current_from + 60*60*24 - 1) {
                 $current_from += 60*60*24;
                 dpm($current_timeframe);
-                $current_timeframe[] = $p->ip;
+                $current_timeframe = array($p->ip);
                 
                 $all_time[] = $p->ip;
               }
