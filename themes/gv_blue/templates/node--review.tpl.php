@@ -126,7 +126,8 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   
   
   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-  $stars = '<div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>';
+  //$stars = '<div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>';
+  $stars = '<div class="rating">' . $stars . '</div>';
 
       
   echo '<a href="' . url('node/' . $provider_nid) . '"><h3>'. $node->title . '</h3></a>' . $stars . '<div class="review">' . $teaser . '</div>';
