@@ -130,9 +130,13 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   $stars = '<div class="rating">' . $stars . '</div>';
 
       
-  echo '<a href="' . url('node/' . $provider_nid) . '"><h3>'. $node->title . '</h3></a>' . $stars . '<div class="review">' . $teaser . '</div>';
-  
-  echo '<div class="submitted"><span class="author">- by ' . $node->field_r_fname['und'][0]['value'] . ' ' . strtoupper($node->field_r_lname['und'][0]['value'][0]) . '.</span> / ' . date('F d, Y', $node->created) . '</div>';
+  echo '<div class="right">', 
+          '<a href="', url('node/' . $provider_nid), '"><h3>', $node->title, '</h3></a>', 
+          $stars, 
+          '<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> says:</div>',
+          '<div class="review">', $teaser, '</div>',
+          //'<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> / ', date('F d, Y', $node->created), '</div>',
+       '</div>';
   
   return;
 }
