@@ -678,6 +678,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           $query->orderBy('timestamp');
           
+          //print_r($query->__toString());
+          //print_r($query->arguments());
+
           $results = $query->execute();
           
           /*
