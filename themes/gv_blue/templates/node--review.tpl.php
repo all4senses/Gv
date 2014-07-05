@@ -99,6 +99,8 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
         echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       }
       
+      echo gv_misc_getTrackingUrl('Visit', NULL, $provider_nid, NULL, 'link', NULL, $all_data_quick[$provider_nid]);
+      
       //$out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
       
       
@@ -122,12 +124,13 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   $last_pos = strrpos($teaser, ' ');
   
   //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
-  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+  ////$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+  $teaser = substr_replace ($teaser, '... ', $last_pos);
   
   
   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
   //$stars = '<div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>';
-  $stars = '<div class="rating">' . $stars . '</div>';
+  $stars = '<div class="rating">' . $stars . l('See All Ratings', 'node/' . $provider_nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))) . '</div>';
 
       
   echo '<div class="right">', 
