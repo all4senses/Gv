@@ -99,7 +99,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
         echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       }
       
-      echo gv_misc_getTrackingUrl('Visit', NULL, $provider_nid, NULL, 'link', NULL, $all_data_quick[$provider_nid]);
+      echo gv_misc_getTrackingUrl('VISIT', NULL, $provider_nid, NULL, 'link', NULL, $all_data_quick[$provider_nid]);
       
       //$out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
       
