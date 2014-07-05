@@ -137,7 +137,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
           '<a href="', url('node/' . $provider_nid), '"><h3>', $node->title, '</h3></a>', 
           $stars, 
           '<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> says:</div>',
-          '<div class="review">', $teaser, '</div>',
+          '<div class="review">"', $teaser, '"</div>',
           //'<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> / ', date('F d, Y', $node->created), '</div>',
        '</div>';
   
