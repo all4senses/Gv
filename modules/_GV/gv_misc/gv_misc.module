@@ -3698,6 +3698,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     
     // Fix the problem when there remote image link used... We just ignore that image.
     if (strpos($main_image['src'], 'ttp:') || strpos($main_image['src'], 'ttps:')) {
+      $main_image = NULL;
       $found_image = FALSE;
       drupal_set_message('One or more images you have put in the text is a remote link. Please upload images locally instead and resave the article.', 'error');
     }
