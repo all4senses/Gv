@@ -2721,9 +2721,13 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
     $out .= '<div class="views-row' . $class_add . '">' . render(node_view($node, 'teaser')) . '</div>';
   }
   $out .= '</div>';
-  //$out .= '<div class="pager custom">' . $page_next . ' ' . $page_prev . '</div>';
-  $out .= '<ul class="pager custom"><li class="pager-previous first">' . $page_next . '</li><li class="pager-next last">' . $page_prev . '</li></ul>';
-        
+  if (!$GLOBALS['theme'] == 'gv_blue') {
+    $out .= '<div class="pager custom">' . $page_next . ' ' . $page_prev . '</div>';
+  }
+  else {
+    $out .= '<ul class="pager custom"><li class="pager-previous first">' . $page_next . '</li><li class="pager-next last">' . $page_prev . '</li></ul>';
+  }
+  
   return $out;
 }
 
