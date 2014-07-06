@@ -1188,7 +1188,7 @@ function gv_misc_testPage() {
   
   if (file_exists($to_delete)) {
     dpm($to_delete);
-    //unlink($to_delete);
+    unlink($to_delete);
   }
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
