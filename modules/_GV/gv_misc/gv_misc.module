@@ -3357,12 +3357,15 @@ function gv_misc_getPrefaceBottomSection($key) {
  */
 function gv_misc_getUserRealName($uid) {
   
-  $query = db_select('realname', 'rn')
-      ->fields('rn', array('realname'));
-  $query->condition('rn.uid', $uid);
-  $realname = $query->execute()->fetchfield();
-  
-  return $realname;
+  static $realnames;
+  if (empty($realnames[$uid])) {
+    $query = db_select('realname', 'rn')
+        ->fields('rn', array('realname'));
+    $query->condition('rn.uid', $uid);
+    $realname = $query->execute()->fetchfield();
+    $realnames[$uid] = $realname;
+  }
+  return $realnames[$uid];
 }
 
 
@@ -3699,7 +3702,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     $body_full_markup = preg_replace('/<img[^>]+>/i', '', $body_full_markup);
     
     // Fix the problem when there remote image link used... We just ignore that image.
-    if (strpos($main_image['src'], 'ttp:') || strpos($main_image['src'], 'ttps:')) {
+    if ( (strpos($main_image['src'], 'ttp:') || strpos($main_image['src'], 'ttps:')) && !strpos($main_image['src'], 'getvoip.com/')) {
       $main_image = NULL;
       $found_image = FALSE;
       drupal_set_message('One or more images you have put in the text is a remote link. Please upload images locally instead and resave the article.', 'error');
@@ -3877,17 +3880,37 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $teaser_side_block = '<div class="teaser-content">' . substr_replace ($teaser_side_block, '...', $last_pos) . '</div>';
   
   
+  
+  
+  $read_more_html = l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow')));
+  
+  
+  
+  // Rss teaser.
+  $teaser_rss = trim(drupal_substr($teaser, 0, 400));
+  $last_pos = strrpos($teaser_rss, ' ');
+  $teaser_rss = substr_replace ($teaser_rss, '... ' . $read_more_html, $last_pos);
+  $teaser_rss = @$main_image_html_beautify . $teaser_rss;
+  // Clear attribute typeof="foaf:Image" from the img tag (which iss added by the core rdf module via hook_preprocess_image).
+  $teaser_rss = preg_replace('|typeof="foaf:Image" |', '', $teaser_rss);
+  // Convert relative links to absolute.
+  $teaser_rss = preg_replace('|href="/|', 'href="http://getvoip.com/', $teaser_rss);
+  // Restore a normal state of a YouTube url from a token.
+  // [video: http://www.youtube.com/watch?v=SoMS77zE7iE]
+  $teaser_rss =  preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $teaser_rss);
+  $teaser_rss = check_plain(htmlspecialchars_decode($teaser_rss));
+  
+  
+  
   // $teaser = text_summary($body_full_markup, 'full_html', $characters_num);
   $teaser = trim(drupal_substr($teaser, 0, $characters_num));
-  
-  
   // Replace the last word with ...
   // preg_match('/^.*\s(.*)$/i', trim(strip_tags($teaser)), $matches);
   // $last_pos = strrpos($teaser, $matches[1]);
   $last_pos = strrpos($teaser, ' ');
   
   // $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
-  $teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+  $teaser = substr_replace ($teaser, '... ' . $read_more_html, $last_pos);
 
   
   $teaser_with_image = @$main_image_html . $teaser;
@@ -3932,7 +3955,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
       'home_teaser_image' => @$home_teasers_rotated_image_html,
       'home_teaser_image_beautify' => @$home_teasers_rotated_image_html_beautify,
         
-        
+      'teaser_rss_beautify' => $teaser_rss,
     );
   }
   
@@ -3958,9 +3981,9 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
     $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
   }
   
-  /*
+  
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
-  if (!isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
+  if (!isset($extra_data['teaser_rss_beautify']) || !isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
     
     watchdog('a4s article extra_data update', 'nid: ' . $node->nid . ', update_timestamp: ' . @$extra_data['update_timestamp'], NULL, WATCHDOG_WARNING);
     
@@ -3992,7 +4015,7 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
     //dpm('Updated article\'s extra_data!');
     //dpm($extra_data);
   }
-  */
+  
   
   return $extra_data;
 }

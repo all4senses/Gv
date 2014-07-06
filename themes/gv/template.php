@@ -1057,6 +1057,7 @@ function gv_preprocess_views_view_rss(&$vars) {
 function gv_preprocess_views_view_row_rss(&$vars) {
   
   $node = $vars['view']->style_plugin->row_plugin->nodes[$vars['row']->nid];
+  /*
   //$vars['description'] = check_plain(htmlspecialchars_decode($node->field_a_teaser['und'][0]['value']));
   if (isset($node->body['und'][0]['value'])) {
     $rss_teaser = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $vars['row']->nid, 400, TRUE);
@@ -1069,9 +1070,15 @@ function gv_preprocess_views_view_row_rss(&$vars) {
     $rss_teaser =   preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $rss_teaser);
     $vars['description'] = check_plain(htmlspecialchars_decode($rss_teaser));
   }
+  */
+  
+  $extra_data = gv_misc_updateArticleExtraData($node, TRUE, 1397495323);
+  $vars['description'] = $extra_data['teaser_rss_beautify'];
   
   // Replace username with real user name for <dc:creator>
   $vars['item_elements'] = preg_replace('|<dc:creator>.*</dc:creator>|', '<dc:creator>' . gv_misc_getUserRealName($node->uid) . '</dc:creator>', $vars['item_elements']);
+  
+  
 }
 
 
