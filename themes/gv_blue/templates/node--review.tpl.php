@@ -77,7 +77,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
  
 
 
-  echo '<div class="header">';
+  echo '<div class="header"><table><tbody><tr><td>';
   
       // Use a logo from providers sprite for monimizing loaded images amount.
       $sprite_name = isset($node->sprite_name) ? $node->sprite_name : 'home_top_providers'; 
@@ -109,7 +109,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
       
 
       
-  echo '</div>';
+  echo '</td></tr></tbody></table></div>';
   
   
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
