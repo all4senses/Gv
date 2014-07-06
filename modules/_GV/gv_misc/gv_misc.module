@@ -3686,7 +3686,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $found_image = NULL;
   
   if (preg_match('/<img[^>]+>/i', $body_full_markup, $matches)) {
-    dpm($matches);
+    //dpm($matches);
     $found_image = TRUE;
     preg_match_all('/(alt|title|src)="([^"]*)"/i',$matches[0], $matches);
     
