@@ -3798,6 +3798,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     $main_image_html = '<div class="thumb"><image src="' . $main_image_html . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
     $main_image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $main_image_html);
     */
+    watchdog('###' . $stream_path, ', $_server -------> '. @$_SERVER['REQUEST_URI'] . ' / ' . @$_SERVER['REDIRECT_URL'], NULL, WATCHDOG_WARNING);
+    
     gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, $main_image_html, $main_image_html_beautify, $title);
     
     gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name_home_teasers_rotated, $home_teasers_rotated_image_html, $home_teasers_rotated_image_html_beautify, $title);
@@ -5839,6 +5841,7 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
   
   if ($force_recreate || !file_exists($relative_path)) {
     
+    watchdog('.....' . $relative_path, ', $_server -------> '. @$_SERVER['REQUEST_URI'] . ' / ' . @$_SERVER['REDIRECT_URL'], NULL, WATCHDOG_WARNING);
     
     // Find out the style name from 'sites/default/files/styles/logo_provider_chart_main/public/p/logos/Nextiva-Logo2.png';
     if (!$style_name) {
