@@ -1184,12 +1184,15 @@ function gv_misc_testPage() {
   }
   */
   
+  
+  /*
   $to_delete = 'sites/default/files/styles/article_thumbnail_side_block/public/xo.gif';// 'sites/default/files/styles/article_thumbnail_h/public/viatalk_vs_vonage.jpg';
   
   if (file_exists($to_delete)) {
     dpm($to_delete);
     unlink($to_delete);
   }
+  */
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -3985,7 +3988,7 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if (!isset($extra_data['teaser_rss_beautify']) || !isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
     
-    watchdog('a4s article extra_data update', 'nid: ' . $node->nid . ', update_timestamp: ' . @$extra_data['update_timestamp'], NULL, WATCHDOG_WARNING);
+    ///watchdog('$$$ a4s article extra_data update', 'nid: ' . $node->nid . ', update_timestamp: ' . @$extra_data['update_timestamp'], NULL, WATCHDOG_WARNING);
     
     $teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     //$teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
