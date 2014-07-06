@@ -3955,6 +3955,7 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
     $extra_data = $old_extra_data = unserialize($node->field_extra_data['und'][0]['value']);
   }
   
+  /*
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if (!isset($extra_data['teaser_beautify']) || ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) ) {
     
@@ -3963,23 +3964,7 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
     $teaser_data = gv_misc_getArticleTeaserData('all', gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $node->body['und'][0]['value']), $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     //$teaser_data = gv_misc_getArticleTeaserData('all', $node->body['und'][0]['value'], $node->nid, NULL, NULL, htmlspecialchars_decode($node->title, ENT_QUOTES));
     
-    /*
-    $extra_data = array(
-      'title' => $title, 
-      'teaser_block' => $teaser_data['teaser_block'], 
-      'teaser_home' => $teaser_data['teaser_home'],
-      'teaser_side_block' => $teaser_data['teaser_side_block'],
-      'side_block_main_image' => $teaser_data['side_block_main_image'],
-
-      'teaser_only' => $teaser_data['teaser_only'],
-      'teaser_main_image' => $teaser_data['teaser_main_image'],
-
-
-      // Don't recalculate related articles..
-      'related_articles' => @$old_extra_data['related_articles'], //@$form_state['values']['related_articles'],
-      'related_articles_timestamp' => @$old_extra_data['related_articles_timestamp'], //time(),
-    );
-    */
+  
     
     // Look at function gv_pages_validateForm_article(&$form, &$form_state).
     $extra_data = $teaser_data 
@@ -4004,6 +3989,7 @@ function gv_misc_updateArticleExtraData($node, $save_to_node = TRUE, $update_tim
     //dpm('Updated article\'s extra_data!');
     //dpm($extra_data);
   }
+  */
   
   return $extra_data;
 }
