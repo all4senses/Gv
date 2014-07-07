@@ -1466,7 +1466,7 @@ if (isset($_GET['page'])) {
   $query->condition('n.status', 1);
   $query->leftJoin('field_data_field_extra_data', 'd', 'd.entity_id = n.nid');
   $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-  //$query->condition('i.field_invisible_value', 1, '!='); 
+  $query->condition('i.field_invisible_value', 1, '!='); 
   $query->leftJoin('field_data_field_main_image', 'p', 'p.entity_id = n.nid');
   $query->isNotNull('p.field_main_image_value');
   $query->condition('p.field_main_image_value', 'N;', '!=');
@@ -1484,7 +1484,7 @@ if (isset($_GET['page'])) {
 //    $posts[$nid]->main_image_url = $posts[$nid]->field_extra_data_value['main_image']['src_beautify'];
 //  }
 //  
-  dpm($posts);
+  //dpm($posts);
   
   $ui_tabs_nav = '';
   $fragments = '';
