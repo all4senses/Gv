@@ -182,7 +182,7 @@
                       
           <div class="data tabs">
                 
-                <ul>
+                <ul class="data-tabs-ul">
                   <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
                     <li><a id="tab0" href="#tabs-0">
                       <?php 
