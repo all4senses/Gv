@@ -1467,6 +1467,8 @@ if (isset($_GET['page'])) {
   $query->leftJoin('field_data_field_extra_data', 'd', 'd.entity_id = n.nid');
   $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
   //$query->condition('i.field_invisible_value', 1, '!='); 
+  $query->leftJoin('field_data_field_main_image', 'p', 'p.entity_id = n.nid');
+  $query->isNotNull('p.field_main_image_value');
   $query->fields('n', array('nid', 'title'));
   $query->fields('d', array('field_extra_data_value'));
   $query->orderBy('n.created', 'DESC');
