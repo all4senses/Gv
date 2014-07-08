@@ -9467,7 +9467,10 @@ function gv_misc_getProviderQuickData($target, $data) {
           
           
           //$url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'visit-site-btn');
-          $url = gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+          
+        
+        $link_label = @$data['service_type'] == 'wc' ? 'Visit Site' : '';
+        $url = gv_misc_getTrackingUrl($link_label, NULL, $data['data']->nid, NULL, 'visit-site-btn', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
       }
                         
       return $url;
