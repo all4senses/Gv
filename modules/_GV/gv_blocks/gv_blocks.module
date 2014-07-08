@@ -2370,7 +2370,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
-          $out .= '<th style="border: none; vertical-align: bottom; text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
+          //$out .= '<th style="border: none; vertical-align: bottom; text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
+          $out .= '<th class="th-all" style="border: none; vertical-align: bottom; text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
           if ($sprite_name) {
             $image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name, array($provider['nid'] => array('name' => $provider['p_name'])));
           }
