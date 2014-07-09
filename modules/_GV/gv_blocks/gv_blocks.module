@@ -2525,6 +2525,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       foreach ($provider_options_structure as $options_set => $options_data) {
         
         if (in_array($options_set, $options_sets_to_exclude)) {
+          dpm($options_set);
           continue;
         }
         
