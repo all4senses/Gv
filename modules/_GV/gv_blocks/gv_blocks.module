@@ -2523,10 +2523,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       //$provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
       
       foreach ($provider_options_structure as $options_set => $options_data) {
-        dpm($options_set);
+
         if (in_array($options_set, $options_sets_to_exclude)) {
-          dpm('xxx');
-          dpm($options_set);
           continue;
         }
         
@@ -2554,6 +2552,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         foreach ($options_data as $option_title => $option_type) {
           
           if (in_array($option_title, $options_to_exclude)) {
+            dpm($option_title);
             continue;
           }
           
