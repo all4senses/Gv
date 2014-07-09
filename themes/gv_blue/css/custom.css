@@ -1072,7 +1072,7 @@ body.sidebar-second .sidebar{float: right; margin: 0 18px 0 0; padding: 18px 0 0
 
 .sidebar .top-line {background: url("images/sprite-04.png") no-repeat scroll 0 -2px transparent; height: 5px; margin: 12px 0 10px; width: 100%;}
 
-.sidebar .block {border: none; overflow: hidden; position: relative; font-family: raleway; margin: 0 0 7px 0;}
+.sidebar .block {border: none; overflow: hidden; position: relative; font-family: raleway; margin: 0 0 10px 0;}
 
 .sidebar .block.first {margin-top: 14px;}
 /*.front .sidebar .block.first {margin-top: 25px;}*/
@@ -1220,7 +1220,8 @@ body.one-sidebar.sidebar-second .sidebar{background: none; padding: 10px 10px 0 
 
 
 /* COntent with sidebar below main content */
-#below-content-with-sidebar {float: left; width: 815px;}
+/*#below-content-with-sidebar {float: left; width: 815px;}*/
+.page-compare-providers #below-content-with-sidebar {float: left; width: 725px;}
 
 
 
@@ -2545,9 +2546,13 @@ body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
 
 
 
-/* Quote block v8 a bit wider on the preface on a wide provider page */
+/* Quote block v8  on a wide provider page */
 
-.page-compare-providers #block-gv-blocks-request-quote-v8 {width: 370px; float: right; margin: 0; background: url("/sites/all/themes/gv_blue/css/images/gradient-bottom-to-top.png") repeat-x 0 bottom transparent; clear: none;}
+.page-compare-providers #block-gv-blocks-request-quote-v8 {
+  /*width: 370px; float: right; margin: 0; */
+  background: url("/sites/all/themes/gv_blue/css/images/gradient-bottom-to-top.png") repeat-x 0 bottom transparent; clear: none;
+  width: 328px; margin: 0 0 10px 0;
+}
 
 .page-compare-providers #block-gv-blocks-request-quote-v8 .block-title {padding: 2px 0 0 0px; width: inherit; margin: 12px 0 0 7px; font-weight: bold; font-size: 26px; background: url(/sites/all/themes/gv_blue/css/images/sprite-04.png) no-repeat -204px -2268px transparent; color: #626262; text-align: center; line-height: 29px;}
 .page-compare-providers #block-gv-blocks-request-quote-v8 .block-icon {background: none; padding: 0; text-align: center;}
@@ -2558,7 +2563,6 @@ body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
 
 .page-compare-providers #block-gv-blocks-request-quote-v8 #requestQuoteFormWrapper {height: 340px;}
 
-/*.page-compare-providers #block-gv-blocks-request-quote-v8 .wrapper.top select {width: 163px; height: 20px;}*/
 .page-compare-providers #block-gv-blocks-request-quote-v8 .wrapper.top select {width: 163px; height: 42px;}
 
 
@@ -2589,8 +2593,6 @@ body.sidebar-second.node-type-quote #main{margin: 0; padding: 0;}
 /* Quote block v8 a bit wider on the preface on a wide provider page BELOW THE CHART NEAR LATEST REVIEWS */
 /*.page-compare-providers #main #block-gv-blocks-request-quote-v8 {}*/
 
-/* latest-reviews-by-path and service type */
-#block-gv-blocks-latest-reviews-by-path {width: 670px; float: left;}
 
 
 
@@ -3287,7 +3289,10 @@ body.one-sidebar.sidebar-second .page-compare-providers #main {width: 1070px;}
 /* Wider sidebar in the oreface for the wider quote block */
 body.sidebar-second .page-compare-providers .sidebar {padding: 0; width: 385px;}
 /* But same narrow sidebar for the below chart sidebar  */
-#sidebar-second-below-chart {width: 240px;}
+
+
+/*#sidebar-second-below-chart {width: 240px;}*/
+.page-compare-providers #sidebar-second-below-chart {width: 330px;}
 
 
 /* Repeat the same for the case without second sidebar - kind of universal solution */
@@ -4195,14 +4200,14 @@ img {max-width: 100%;}
 
 
 /* Reviews on Service types pages in bottom main section near the quote block */
-#block-gv-blocks-latest-reviews-by-path {width: 675px; float: left;}
+#block-gv-blocks-latest-reviews-by-path {/*width: 670px; */float: left;}
 #block-gv-blocks-latest-reviews-by-path .views-row {overflow: hidden; margin: 0px 0 0 0; padding: 15px 0; border-bottom: 1px solid lightgray;}
 #block-gv-blocks-latest-reviews-by-path .views-row.last {border: none;}
 #block-gv-blocks-latest-reviews-by-path .header {width: 145px; height: 145px; float: left; text-align: center; border: 1px solid lightgray; margin: 0 20px 0 0;}
 #block-gv-blocks-latest-reviews-by-path table {width: inherit; height: 100%;}
 #block-gv-blocks-latest-reviews-by-path td {border: none !important;}
 #block-gv-blocks-latest-reviews-by-path .link {display: block; width: 60px; margin: 10px auto; background: #fd9500; color: white; padding: 2px 8px 1px; border-radius: 4px; font-weight: bold; font-size: 12px;}
-#block-gv-blocks-latest-reviews-by-path .right {float: left; width: 500px;}
+#block-gv-blocks-latest-reviews-by-path .right {float: left; width: /*500px*/555px;}
 #block-gv-blocks-latest-reviews-by-path h3 {margin: 0; font-size: 17px;}
 #block-gv-blocks-latest-reviews-by-path .fivestar {float: left; margin: 6px 5px 0 0;}
 #block-gv-blocks-latest-reviews-by-path .more {font-size: 12px; text-decoration: underline;}
