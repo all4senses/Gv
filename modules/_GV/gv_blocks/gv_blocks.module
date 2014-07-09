@@ -2512,6 +2512,12 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
               'Call Me Now',
             );
           }
+          else { 
+            // PBX
+            $options_to_exclude = array(
+              'Amount of Lines Per Price Tier',
+            );
+          }
           
           break;
         
@@ -2550,9 +2556,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         
         $odd = TRUE;
         foreach ($options_data as $option_title => $option_type) {
-          dpm($option_title);
           if (in_array($option_title, $options_to_exclude)) {
-            dpm('xxx');
             dpm($option_title);
             continue;
           }
