@@ -3374,7 +3374,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           
           // Fields to check if we need to rebuild providers sprites with this provider logo.
-          $erating_fields_names = array('field_p_erating', 'field_p_erating_residential', 'field_p_erating_sip', 'field_p_erating_pbx', 'field_p_erating_mo', 'field_p_erating_ifa', 'field_p_erating_cc', 'field_p_erating_bu_ca', 'field_p_erating_re_ca', 'field_p_erating_smbv', 'field_p_erating_rsl');
+          $erating_fields_names = array('field_p_erating', 'field_p_erating_residential', 'field_p_erating_sip', 'field_p_erating_pbx', 'field_p_erating_mo', 'field_p_erating_ifa', 'field_p_erating_cc', 'field_p_erating_bu_ca', 'field_p_erating_re_ca', 'field_p_erating_smbv', 'field_p_erating_rsl', 'field_p_erating_wc');
 
           foreach ($erating_fields_names as $erating_field) {
             $erating_fields[$erating_field] = $form[$erating_field]['und'][0]['value']['#default_value'];
@@ -6101,7 +6101,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   }
 
   //dpm($erating_fields_before);
-  //dpm($last_erating_fields_different);
+  dpm($last_erating_fields_different);
   
   /*
       if (empty($last_erating_fields_different)) {
