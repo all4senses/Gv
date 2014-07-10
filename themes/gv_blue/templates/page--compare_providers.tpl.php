@@ -6,7 +6,8 @@
       
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" />
+          <!-- <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /> -->
+          <img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />
         </a>
       </div>
       

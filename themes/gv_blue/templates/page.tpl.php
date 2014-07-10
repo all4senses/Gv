@@ -21,7 +21,8 @@
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
           <?php
               //echo '<img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
-              echo '<img src="/images/theme/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
+              ////echo '<img src="/images/theme/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
+              echo '<img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />';
           ?>
         </a>
         <div class="descr">
