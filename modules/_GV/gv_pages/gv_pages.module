@@ -6357,7 +6357,7 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
       'back' => isset($service['mbg']) ? $service['mbg'] : '',
       'monthly' => isset($service['fees']['mon']) ? $service['fees']['mon'] : '',
       'setup' => isset($service['fees']['set']) ? $service['fees']['set'] : '',
-      'discount' => isset($service['fees']['pdis']) ? $service['fees']['pdis'] : '',
+      'discount' => isset($service['pdis']) ? $service['pdis'] : '',
     );
     
     if (isset($service['weights_' . $service_type_short . '_features'])) {
