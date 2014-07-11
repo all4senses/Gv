@@ -9380,7 +9380,8 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'back':
     case 'setup':
     case 'discount':
-      dpm($data['data']);
+      //dpm($data['data']);
+      dpm($all_data_quick[$data['data']->nid][$data['service_type']]);
       $out = isset($all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target]) ? $all_data_quick[$data['data']->nid][$data['service_type']]['fees'][$target] : '';
       
       if ($target == 'monthly' && $out) {
