@@ -404,6 +404,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['top5prov_by_type'] = array(
+    'info' => 'Top 5 providers by type/path',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   
   
   return $blocks;
@@ -826,6 +831,10 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = ($_GET['q'] == 'blog' && isset($_GET['page'])) ? NULL : gv_blocks_render_block('views', 'providers-block_top_bu_small');
       break;
     
+    case 'top5prov_by_type':
+      $block['subject'] = 'Top 5 VoIP Providers';
+      $block['content'] = gv_blocks_getTop5Providers_byTypeAndPath();
+      break;
     
             
             
@@ -2246,7 +2255,105 @@ function gv_blocks_reviewsCounter() {
 
 
 /**
- * Returns block with comparing TOP BUSINESS providers table.
+ * Returns block with Top 5 Providers block by service type/path.
+ */
+function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
+  
+  if (!$service_type) {
+    
+    $map_path_to_preface_type = array(
+      '/business' => 'page-compare-business-voip-providers',
+      '/residential' => 'page-compare-residential-voip-providers',
+      '/sip-trunking' => 'page-compare-sip-voip-providers',
+      '/fax' => 'page-compare-ifa-voip-providers',
+      //'/business-voip-features' => 'business-voip-features',
+      '/canada' => 'canada-voip',
+      '/hosted-pbx' => 'page-compare-pbx-voip-providers',
+      '/web-conferencing' => 'web-conferencing-voip-providers',
+    );
+
+    $map_preface_type_to_service_type = array(
+      'page-compare-business-voip-providers' => 'business',
+      'page-compare-residential-voip-providers' => 'residential',
+      'page-compare-sip-voip-providers' => 'sip',
+      'page-compare-ifa-voip-providers' => 'ifa',
+      'canada-voip' => 'ca',
+      'page-compare-pbx-voip-providers' => 'pbx',
+       //'page-compare-smbv-voip-providers' => NULL,
+    );
+
+    $map_path_to_title = array(
+      '/business' => 'Business VoIP',  
+      '/residential' => 'Residential VoIP',
+      //'/business-voip-features' => 'Business VoIP Features',
+      '/sip-trunking' => 'SIP Trunking Providers',
+      '/canada' => 'Canada VoIP',
+      '/fax' => 'Internet Fax',
+      '/hosted-pbx' => 'Hosted PBX Providers',
+      '/web-conferencing' => 'Web Conferencing Providers',
+       //'/small-business-voip' => 'Small Business VoIP',
+    );
+    
+    $map_path_to_type = array(
+      '/business' => 'business',  
+      '/residential' => 'residential',
+      //'/business-voip-features' => 'Business VoIP Features',
+      '/sip-trunking' => 'sip',
+      '/canada' => 'ca',
+      '/fax' => 'ifa',
+      '/hosted-pbx' => 'pbx',
+      '/web-conferencing' => 'wc',
+      //'/small-business-voip' => 'smbv',
+    );
+    
+    if(!$service_type = @$map_path_to_type($_SERVER['REDIRECT_URL'])) {
+      return NULL;
+    }
+
+  }
+  
+  $services_data = array (
+    'business' => array (
+      'rating_table' => 'field_data_field_p_erating',
+      'rating_field' => 'field_p_erating_value',
+    ),
+    'residential' => array (
+      'rating_table' => 'field_data_field_p_erating_residential',
+      'rating_field' => 'field_p_erating_residential_value',
+    ),
+    'pbx' => array (
+      'rating_table' => 'field_data_field_p_erating_pbx',
+      'rating_field' => 'field_p_erating_pbx_value',
+    ),
+    'sip' => array (
+      'rating_table' => 'field_data_field_p_erating_sip',
+      'rating_field' => 'field_p_erating_sip_value',
+    ),
+    'ifa' => array (
+      'rating_table' => 'field_data_field_p_erating_ifa',
+      'rating_field' => 'field_p_erating_ifa_value',
+    ),
+  );
+  
+  
+  $query = db_select($services_data[$service_type]['rating_table'], 'r');
+  $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
+
+  $query->fields('pn', array('field_p_name_value'));
+  $query->condition('r.bundle', 'provider');
+  $query->orderBy($services_data[$service_type]['rating_field']);
+  $query->range(0, 4);
+
+  $p_names = $query->execute()->fetchCol();
+  
+  dpm($p_names);
+  return $map_path_to_title($_SERVER['REDIRECT_URL']);
+}
+
+
+
+/**
+ * Returns block with comparing TOP BUSINESS or Other type providers table.
  */
 function gv_blocks_compareTopProviders($service_type) {
   
