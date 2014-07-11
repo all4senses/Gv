@@ -38,8 +38,10 @@ define('RECOMMEND_PHONE', 'Would you recommend this VoIP phone?');
 define('FNAME_HINT', 'First');
 define('LNAME_HINT', 'Last');
 define('EMAIL_HINT', 'Enter a valid email');
-define('PROS_HINT', 'Optional');
-define('CONS_HINT', 'Optional');
+//define('PROS_HINT', 'Optional');
+define('PROS_HINT', 'PROS (OPTIONAL)');
+//define('CONS_HINT', 'Optional');
+define('CONS_HINT', 'CONS (OPTIONAL)');
 
 // Provider data
 
