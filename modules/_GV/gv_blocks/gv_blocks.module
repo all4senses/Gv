@@ -2344,12 +2344,13 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $query = db_select($services_data[$service_type]['rating_table'], 'r');
   $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
 
-  $query->fields('pn', array('field_p_name_value'));
+  $query->fields('pn', array('field_p_name_value', 'entity_id'));
   $query->condition('r.bundle', 'provider');
   $query->orderBy($services_data[$service_type]['rating_field']);
+  $query->addField('r', $services_data[$service_type]['rating_field'], 'erating');
   $query->range(0, 5);
 
-  $p_names = $query->execute()->fetchCol();
+  $p_names = $query->execute()->fetchAllAssoc('entity_id');
   
   dpm($p_names);
   return $map_path_to_title[$_SERVER['REDIRECT_URL']];
