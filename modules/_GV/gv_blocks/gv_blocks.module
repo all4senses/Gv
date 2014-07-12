@@ -2306,7 +2306,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       //'/small-business-voip' => 'smbv',
     );
     
-    if(!$service_type = @$map_path_to_type($_SERVER['REDIRECT_URL'])) {
+    if(!$service_type = @$map_path_to_type[$_SERVER['REDIRECT_URL']]) {
       return NULL;
     }
 
