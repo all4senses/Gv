@@ -2347,7 +2347,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $query->fields('pn', array('field_p_name_value'));
   $query->condition('r.bundle', 'provider');
   $query->orderBy($services_data[$service_type]['rating_field']);
-  $query->range(0, 4);
+  $query->range(0, 5);
 
   $p_names = $query->execute()->fetchCol();
   
