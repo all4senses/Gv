@@ -2339,7 +2339,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     ),
   );
   
-  return $map_path_to_title($_SERVER['REDIRECT_URL']);
+  //return $map_path_to_title[$_SERVER['REDIRECT_URL']];
   
   
   $query = db_select($services_data[$service_type]['rating_table'], 'r');
@@ -2353,7 +2353,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $p_names = $query->execute()->fetchCol();
   
   dpm($p_names);
-  return $map_path_to_title($_SERVER['REDIRECT_URL']);
+  return $map_path_to_title[$_SERVER['REDIRECT_URL']];
 }
 
 
