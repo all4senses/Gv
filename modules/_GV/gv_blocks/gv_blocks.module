@@ -832,7 +832,7 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     case 'top5prov_by_type':
-      $block['subject'] = 'Top 5 VoIP Providers';
+      $block['subject'] = ''; // 'Top 5 VoIP Providers';
       $block['content'] = gv_blocks_getTop5Providers_byTypeAndPath();
       break;
     
@@ -2260,7 +2260,7 @@ function gv_blocks_reviewsCounter() {
 function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   if (!$service_type) {
-    
+    /*
     $map_path_to_preface_type = array(
       '/business' => 'page-compare-business-voip-providers',
       '/residential' => 'page-compare-residential-voip-providers',
@@ -2271,7 +2271,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/hosted-pbx' => 'page-compare-pbx-voip-providers',
       '/web-conferencing' => 'web-conferencing-voip-providers',
     );
-
+    */
+    /*
     $map_preface_type_to_service_type = array(
       'page-compare-business-voip-providers' => 'business',
       'page-compare-residential-voip-providers' => 'residential',
@@ -2281,6 +2282,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       'page-compare-pbx-voip-providers' => 'pbx',
        //'page-compare-smbv-voip-providers' => NULL,
     );
+    */
 
     $map_path_to_title = array(
       '/business' => 'Business VoIP',  
@@ -2361,11 +2363,31 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $providers = $query->execute()->fetchAllAssoc('entity_id');
   
   
+  $out = '<section id="block-views-providers-block-top-bu-small" class="block block-views contextual-links-region odd first">
+  <h3 class="block-title">
+  <span class="block-icon">Top Providers</span></h3> 
+  <div class="contextual-links-wrapper contextual-links-processed">
+    <a class="contextual-links-trigger" href="#">Configure</a>
+    <ul class="contextual-links">
+      <li class="views-ui-edit first">
+        <a href="/admin/structure/views/view/providers/edit/block_top_bu_small?destination=blog">Edit view</a>
+      </li>
+      <li class="block-configure last">
+        <a href="/admin/structure/block/manage/views/providers-block_top_bu_small/configure?destination=blog">Configure block</a>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="view view-providers view-id-providers view-display-id-block_top_bu_small bu-providers view-dom-id-cb39c150aa1db478decae445be6b3572">
+      <div class="view-content">
+        <table class="views-table cols-0">
+          <tbody>';
   
-  
+  $zebra = 'even';
+  $count = NULL;
   foreach ($providers as $nid => $provider) {
-    
-      $providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
+      
+      $zebra = ($zebra == 'odd') ? 'even' : 'odd';
     
       $criteria = array(
         'entity_type' => 'node',
@@ -2376,18 +2398,66 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
 
       foreach ($votes as $vote) {
         if ($vote['tag'] == 'overall') {
+          $stars = theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
           $providers[$nid]->p_vote_overall = number_format($vote['value'] * 0.05, 1);
         }
-//        elseif ($vote['tag'] == 'recommend') {
-//          $p_vote_recommend = $vote['value'];
-//        }
-//        else {
-//          $p_votes[$vote['tag']] = $vote['value']; // number_format($vote['value'] * 0.05, 1);
-//        }
+        /*
+        elseif ($vote['tag'] == 'recommend') {
+          $p_vote_recommend = $vote['value'];
+        }
+        else {
+          $p_votes[$vote['tag']] = $vote['value']; // number_format($vote['value'] * 0.05, 1);
+        }
+        */
       }
+      
+      $providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
+      
+      $out .= '
+          <tr class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') . '">
+          
+            <td class="views-field views-field-field-p-erating">
+              <span>' . $provider->erating . '</span> 
+            </td>
+            
+            <td class="views-field views-field-php-4">
+            
+              <div class="name">' . $provider->field_p_name_value . '</div>
+                
+              <div class="rating">' . $stars . 
+                
+//                 '<div class="fivestar fivestar-stars">
+//                   <div class="fivestar-widget-static fivestar-widget-static-overall fivestar-widget-static-5 clearfix">
+//                    <div class="star star-1 star-odd star-first">
+//                      <span class="on">4.816325</span>
+//                    </div>
+//                    <div class="star star-2 star-even">
+//                      <span class="on"></span>
+//                      </div><div class="star star-3 star-odd"><span class="on"></span></div><div class="star star-4 star-even"><span class="on"></span></div><div class="star star-5 star-odd star-last"><span class="on" style="width: 81.6325%"></span></div></div>
+//                  </div>' .
+                  
+               '</div> 
+            </td>
+            
+            <td class="views-field views-field-php-5">
+              <div class="p-links">
+                <a href="/go/nextiva" target="_blank" rel="nofollow" class="reviews visit-site-btn"></a>
+                ' . l('READ REVIEWS', 'node/' . $nid, array('attributes' => array('class' => array('review-link')))) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
+              . '</div> 
+            </td>
+          </tr>
+          ';
 
   }
   
+  
+  $out .= '</tbody>
+          </table>
+        </div>
+      </div> 
+    </div>
+  </section>';
+          
   dpm($providers);
       
   return $map_path_to_title[$_SERVER['REDIRECT_URL']];
