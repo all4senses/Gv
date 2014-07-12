@@ -2360,7 +2360,36 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $providers = $query->execute()->fetchAllAssoc('entity_id');
   
+  
+  
+  
+  foreach ($providers as $nid => $provider) {
+    
+      $providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
+    
+      $criteria = array(
+        'entity_type' => 'node',
+        'entity_id' => $nid,
+        'function' => 'average',
+      );
+      $votes = votingapi_select_results($criteria);
+
+      foreach ($votes as $vote) {
+        if ($vote['tag'] == 'overall') {
+          $providers[$nid]->p_vote_overall = number_format($vote['value'] * 0.05, 1);
+        }
+//        elseif ($vote['tag'] == 'recommend') {
+//          $p_vote_recommend = $vote['value'];
+//        }
+//        else {
+//          $p_votes[$vote['tag']] = $vote['value']; // number_format($vote['value'] * 0.05, 1);
+//        }
+      }
+
+  }
+  
   dpm($providers);
+      
   return $map_path_to_title[$_SERVER['REDIRECT_URL']];
 }
 
