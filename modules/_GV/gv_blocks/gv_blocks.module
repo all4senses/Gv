@@ -2259,6 +2259,7 @@ function gv_blocks_reviewsCounter() {
  */
 function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
+  
   if (!$service_type) {
     /*
     $map_path_to_preface_type = array(
@@ -2288,11 +2289,11 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/business' => 'Business VoIP',  
       '/residential' => 'Residential VoIP',
       //'/business-voip-features' => 'Business VoIP Features',
-      '/sip-trunking' => 'SIP Trunking Providers',
+      '/sip-trunking' => 'SIP Trunking',
       '/canada' => 'Canada VoIP',
       '/fax' => 'Internet Fax',
-      '/hosted-pbx' => 'Hosted PBX Providers',
-      '/web-conferencing' => 'Web Conferencing Providers',
+      '/hosted-pbx' => 'Hosted PBX',
+      '/web-conferencing' => 'Web Conferencing',
        //'/small-business-voip' => 'Small Business VoIP',
     );
     
@@ -2315,6 +2316,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     }
 
   }
+  
+  $current_theme = $GLOBALS['theme'];
+  $cid = 'gv_blocks_getTop5Providers_' . $service_type;
+  $cache = cache_get($cid, 'cache');
   
   $services_data = array (
     //'business' => array (
@@ -2356,8 +2361,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $query->fields('pn', array('field_p_name_value', 'entity_id'));
   
   
-  $query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = r.entity_id");
-  $query->fields('pd', array('field_p_data_value', 'entity_id'));
+  //$query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = r.entity_id");
+  //$query->fields('pd', array('field_p_data_value', 'entity_id'));
   
   $query->orderBy($services_data[$service_type]['rating_field']);
   $query->range(0, 5);
@@ -2392,7 +2397,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $count = NULL;
   foreach ($providers as $nid => $provider) {
       
-      $zebra = ($zebra == 'odd') ? 'even' : 'odd';
+      ////$zebra = ($zebra == 'odd') ? 'even' : 'odd';
     
       $criteria = array(
         'entity_type' => 'node',
@@ -2404,7 +2409,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       foreach ($votes as $vote) {
         if ($vote['tag'] == 'overall' && $vote['value']) {
           $stars = theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-          $providers[$nid]->p_vote_overall = number_format($vote['value'] * 0.05, 1);
+          ////$providers[$nid]->p_vote_overall = number_format($vote['value'] * 0.05, 1);
         }
         /*
         elseif ($vote['tag'] == 'recommend') {
@@ -2416,10 +2421,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
         */
       }
       
-      $providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
+      ////$providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
       
       $out .= '
-          <tr class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') . '">
+          <tr' .  /*' class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') .*/ '">
           
             <td class="views-field views-field-field-p-erating">
               <span>' . $provider->erating . '</span> 
@@ -2463,6 +2468,9 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       </div> 
     </div>
   </section>';
+  
+  
+  cache_set($cid, $out, 'cache', strtotime('+31 day'));
           
   //dpm($providers);
       
@@ -2476,9 +2484,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
  */
 function gv_blocks_compareTopProviders($service_type) {
   
-  global $user;
+  //global $user;
   $current_theme = $GLOBALS['theme'];
-  $cid = 'gv_blocks_compareTopProviders_' . $service_type . ($user->uid ? '_admin' : '_anonim') . '_' . $current_theme;
+  //$cid = 'gv_blocks_compareTopProviders_' . $service_type . ($user->uid ? '_admin' : '_anonim') . '_' . $current_theme;
+  $cid = 'gv_blocks_compareTopProviders_' . $service_type . '_' . $current_theme;
   $cache = cache_get($cid, 'cache');
   
   // Stick table header to the page top.
