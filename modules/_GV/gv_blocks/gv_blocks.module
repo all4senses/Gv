@@ -2395,9 +2395,9 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
         'function' => 'average',
       );
       $votes = votingapi_select_results($criteria);
-
+      $stars = NULL;
       foreach ($votes as $vote) {
-        if ($vote['tag'] == 'overall') {
+        if ($vote['tag'] == 'overall' && $vote['value']) {
           $stars = theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
           $providers[$nid]->p_vote_overall = number_format($vote['value'] * 0.05, 1);
         }
