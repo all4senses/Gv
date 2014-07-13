@@ -2297,8 +2297,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     );
     
     $map_path_to_type = array(
-      '/business' => 'business',  
-      '/residential' => 'residential',
+      //'/business' => 'business',  
+      '/business' => 'bu',  
+      //'/residential' => 'residential',
+      '/residential' => 're',
       //'/business-voip-features' => 'Business VoIP Features',
       '/sip-trunking' => 'sip',
       '/canada' => 'ca',
@@ -2315,11 +2317,13 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   }
   
   $services_data = array (
-    'business' => array (
+    //'business' => array (
+    'bu' => array (
       'rating_table' => 'field_data_field_p_erating',
       'rating_field' => 'field_p_erating_value',
     ),
-    'residential' => array (
+    //'residential' => array (
+    're' => array (
       'rating_table' => 'field_data_field_p_erating_residential',
       'rating_field' => 'field_p_erating_residential_value',
     ),
