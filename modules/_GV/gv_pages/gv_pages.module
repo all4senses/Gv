@@ -4145,7 +4145,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       // Group fields
       
       $form['header'] = array(
-        '#markup' => '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>',
+        //'#markup' => '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>',
+        '#markup' => '<h1>Share Your Feedback</h1><h2>What Do You Think of Your Provider?</h2>',
         '#weight' => -25,
       );
       
@@ -4775,7 +4776,8 @@ function gv_page_alterSubmitReviewPage_v1(&$form) {
 
   
       // Metatags.
-      gv_misc_addMetatag('title', 'Review Your VoIP Provider');
+      //gv_misc_addMetatag('title', 'Review Your VoIP Provider');
+  gv_misc_addMetatag('title', 'Review Your Provider');
       gv_misc_addMetatag('description', 'Share your feedback with others. Rate and review your user experience with your current VoIP Provider. Let others know.');
       gv_misc_addMetatag('keywords', 'submit voip review, review my voip provider, rate my provider, voip provider submit review');
       

@@ -2375,7 +2375,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $out = '<section id="block-views-providers-block-top-bu-small" class="block block-views contextual-links-region odd first">
   <h3 class="block-title">
-  <span class="block-icon">Top Providers</span></h3> 
+  <span class="block-icon">Top 5 Providers</span></h3> 
   <div class="contextual-links-wrapper contextual-links-processed">
     <a class="contextual-links-trigger" href="#">Configure</a>
     <ul class="contextual-links">
@@ -2432,7 +2432,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
             
             <td class="views-field views-field-php-4">
             
-              <div class="name">' . $provider->field_p_name_value . '</div>
+              <div class="name">' . gv_misc_getTrackingUrl($provider->field_p_name_value, NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], $service_type) . '</div>
                 
               <div class="rating">' . $stars . 
                 
@@ -2452,7 +2452,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
             <td class="views-field views-field-php-5">
               <div class="p-links">'
                 //. '<a href="/go/nextiva" target="_blank" rel="nofollow" class="reviews visit-site-btn"></a>'
-              . gv_misc_getTrackingUrl('', NULL, $nid, NULL, 'visit-site-btn reviews', NULL, $all_data_quick[$nid], $service_type)
+                 . gv_misc_getTrackingUrl('', NULL, $nid, NULL, 'visit-site-btn reviews', NULL, $all_data_quick[$nid], $service_type)
                  . l('READ REVIEWS', 'node/' . $nid, array('attributes' => array('class' => array('review-link')))) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
               . '</div> 
             </td>
