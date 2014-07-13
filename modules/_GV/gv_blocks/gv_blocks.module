@@ -2362,6 +2362,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $providers = $query->execute()->fetchAllAssoc('entity_id');
   
+  $all_data_quick = gv_misc_getProvidersDataQuick();
   
   $out = '<section id="block-views-providers-block-top-bu-small" class="block block-views contextual-links-region odd first">
   <h3 class="block-title">
@@ -2440,9 +2441,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
             </td>
             
             <td class="views-field views-field-php-5">
-              <div class="p-links">
-                <a href="/go/nextiva" target="_blank" rel="nofollow" class="reviews visit-site-btn"></a>
-                ' . l('READ REVIEWS', 'node/' . $nid, array('attributes' => array('class' => array('review-link')))) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
+              <div class="p-links">' .
+                //'<a href="/go/nextiva" target="_blank" rel="nofollow" class="reviews visit-site-btn"></a>'
+              . gv_misc_getTrackingUrl('', NULL, $nid, NULL, 'visit-site-btn reviews', NULL, $all_data_quick[$nid], $service_type)
+                 . l('READ REVIEWS', 'node/' . $nid, array('attributes' => array('class' => array('review-link')))) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
               . '</div> 
             </td>
           </tr>
