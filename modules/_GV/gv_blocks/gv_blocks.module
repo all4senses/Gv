@@ -2605,11 +2605,12 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       }
 
       
-      if (!$user->uid) {
-        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title" style="background: #2c7bbf; color: white; text-align: left; font-size: 12px; font-weight: bold; padding: 3px 0 3px 7px;">Rank</div></th>';
+      //if (!$user->uid) {
+      if ($GLOBALS['theme'] == 'gv_blue') {
+        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title"><span>Rank</span></div></th>';
       }
       else {
-        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title"><span>Rank</span></div></th>';
+        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title" style="background: #2c7bbf; color: white; text-align: left; font-size: 12px; font-weight: bold; padding: 3px 0 3px 7px;">Rank</div></th>';
       }
         
         //$out .= '<thead><tr class="logos" ><th class="back" style="border: none; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
@@ -3255,7 +3256,7 @@ function gv_blocks_prefaceBottomWithLatestArticles() {
 
   }
   
-  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views' . ($user->uid ? ' sidebar' : '') . '">' . $latest_reviews . $latest_articles . '</div>' : NULL;
+  $right_col = ($latest_articles || $latest_reviews) ? '<div class="block-views' . ($GLOBALS['theme'] == 'gv_blue' ? ' sidebar' : '') . '">' . $latest_reviews . $latest_articles . '</div>' : NULL;
 
   $content = '<div id="bottom-with-latest-articles" class="preface' . (($latest_articles || $latest_reviews) ? ' with-articles' : '') . '">'
             . $right_col
