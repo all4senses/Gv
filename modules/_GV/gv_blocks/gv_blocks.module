@@ -2317,9 +2317,13 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
 
   }
   
-  $current_theme = $GLOBALS['theme'];
-  $cid = 'gv_blocks_getTop5Providers_' . $service_type;
+  //$current_theme = $GLOBALS['theme'];
+  $cid = 'gv_blocks_getTop5Providers_data';// . $service_type;
   $cache = cache_get($cid, 'cache');
+  
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    return $cache->data;
+  }
   
   $services_data = array (
     //'business' => array (
