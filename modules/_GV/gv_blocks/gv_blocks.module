@@ -2428,12 +2428,13 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       }
       
       ////$providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
+      $count++;
       
       $out .= '
           <tr' .  /*' class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') .*/ '">
           
             <td class="views-field views-field-field-p-erating">
-              <span>' . $provider->erating . '</span> 
+              <span>' . $count /*$provider->erating*/ . '</span> 
             </td>
             
             <td class="views-field views-field-php-4">
