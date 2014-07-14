@@ -4258,6 +4258,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
+          $form['provider']['field_r_oprovider']['#suffix'] = '<div class="bottom-clear"></div>';
           unset($form['field_ref_provider'], $form['field_r_oprovider']);
       
           unset($form['provider']['field_ref_provider']['und']['#title']);
