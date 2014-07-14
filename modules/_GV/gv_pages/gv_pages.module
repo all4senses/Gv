@@ -4161,6 +4161,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         ),
         '#weight' => -15,
       );
+      
           $form['about_you']['title']['#markup'] = '<div class="title">Your Information</div>';
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
           $fields_to_rebuild = array('field_r_fname' => 'FIRST NAME', 'field_r_lname' => 'LAST NAME', 'field_r_email' => 'YOUR EMAIL');
@@ -4252,7 +4253,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         ),
         '#weight' => -10,
       );
-          $form['provider']['title']['#markup'] = '<div class="title">Your VoIP Provider Details</div>';
+          //$form['provider']['title']['#markup'] = '<div class="title">Your VoIP Provider Details</div>';
+          $form['provider']['title']['#markup'] = '<div class="title">Your Service Provider Details</div>';
           
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
@@ -4276,6 +4278,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             '#default_value' => FALSE,
             '#weight' => 10,
             '#prefix' => '<div class="bottom-clear"></div><div class="label left">HOW MANY LINES DO YOU HAVE:</div>',
+              
+            '#access' => FALSE,
           );
           
          //dpm($form['provider']); 
@@ -4303,8 +4307,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         ),
         '#weight' => -4,
       );
-          $form['ureview']['title']['#markup'] = '<div class="title">Rate and Review Your VoIP Provider</div>';
-          
+          //$form['ureview']['title']['#markup'] = '<div class="title">Rate and Review Your VoIP Provider</div>';
+          $form['ureview']['title']['#markup'] = '<div class="title">Rate and Review Your Experience</div>';
+      
           $form['ureview']['u_input'] = array(
               '#type' => 'container',
           );
@@ -4471,7 +4476,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         
         // Set a select of available providers.
         //$providers['_none'] = '- Select a value -';
-        $providers['_none'] = '- SELECT YOUR VOIP PROVIDER -';
+        $providers['_none'] = '- SELECT YOUR PROVIDER -'; //'- SELECT YOUR VOIP PROVIDER -';
         gv_misc_getProviders($providers);
         $providers[41] = 'OTHER SP';
         $form['provider']['field_ref_provider']['und']['#options'] = $providers;
@@ -4965,6 +4970,8 @@ function gv_page_alterSubmitReviewPage_v1(&$form) {
             '#default_value' => FALSE,
             '#weight' => 10,
             '#prefix' => '<div class="label left">How many lines do you have:</div>',
+              
+            '#access' => FALSE,
           );
           
           

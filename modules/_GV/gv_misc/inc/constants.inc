@@ -17,12 +17,14 @@ define('PRICE', 'Price');
 define('OVERALL', 'Overall Average Rating');
 
 //define('SOUND', 'Sound/Call Quality');
-define('SOUND', 'Call Quality');
+////define('SOUND', 'Call Quality');
+define('SOUND', 'Quality');
 //define('CUSTOMER', 'Customer Experience');
 define('CUSTOMER', 'Support');
 //define('RELY', 'Service Reliability');
 define('RELY', 'Reliability');
-define('RECOMMEND', 'Would you recommend this VoIP provider?');
+////define('RECOMMEND', 'Would you recommend this VoIP provider?');
+define('RECOMMEND', 'Would you recommend this service provider?');
 
 
 // Phones only
