@@ -3468,7 +3468,7 @@ body:last-child:not(:root:root) .s-test-black {color: black;} /* Doesn't work no
 
 
 /* Similar posts block with rotator, but base css is defined in other file */
-#rotator {overflow: inherit; padding: 0;}
+#rotator {overflow: inherit; padding: 0; height: 100%;}
 #rotator ul.ui-tabs-nav li {width: 17px; height: 20px;}
 #rotator li.ui-tabs-nav-item a {height: 15px; width: 15px; background: url(/sites/all/themes/gv_blue/css/images/sprite-04.png) no-repeat -208px -166px transparent;}
 #rotator ul.ui-tabs-nav li.ui-tabs-selected a, #rotator ul.ui-tabs-nav li.ui-tabs-active a {cursor: alias; background: url(/sites/all/themes/gv_blue/css/images/sprite-04.png) no-repeat -190px -166px transparent;}
@@ -3476,7 +3476,10 @@ body:last-child:not(:root:root) .s-test-black {color: black;} /* Doesn't work no
 #rotator .ui-tabs-panel.first {left: 0;}
 
 /*#rotator ul.ui-tabs-nav {position: absolute; top: -28px; right: 5px;}*/
-#rotator ul.ui-tabs-nav {margin: 0 0 0 100px; float: none;}
+#rotator ul.ui-tabs-nav {margin: 0 0 0 100px; float: none; position: absolute; bottom: 0;}
+#rotator ul.ui-tabs-nav.c2 {margin-left: 102px;}
+#rotator ul.ui-tabs-nav.c3 {margin-left: 95px;}
+#rotator ul.ui-tabs-nav.c4 {margin-left: 85px;}
 
                          
 #block-gv-blocks-sidebar-related-articles.block .content {height: 472px; padding-top: 0;}

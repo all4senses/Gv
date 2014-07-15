@@ -2077,7 +2077,9 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   $ui_tabs_nav = '';
   $fragments = '';
 
+  $count = NULL;
   foreach ($node->related_articles as $related_nid => $related_article) {
+    ++$count;
     $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
 
     $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel' . (!$fragments ? ' first': '') . '">';
@@ -2101,7 +2103,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 //    return '<div id="related-block"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';
   
   //return '<div class="related-block" id="rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul>' . $fragments . '</div>';
-  return '<div class="related-block" id="rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div>';
+  return '<div class="related-block" id="rotator">' . $fragments . '<ul class="ui-tabs-nav c' . $count . '">' . $ui_tabs_nav . '</ul></div>';
 }
 
 
