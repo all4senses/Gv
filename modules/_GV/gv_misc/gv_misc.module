@@ -9016,7 +9016,7 @@ function gv_misc_getProviderQuickData($target, $data) {
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 // Provider name with a link to provider page
-                 ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
+                 . l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
                 ;
         }
         
