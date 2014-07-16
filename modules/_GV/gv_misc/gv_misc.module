@@ -9237,10 +9237,16 @@ function gv_misc_getProviderQuickData($target, $data) {
       
      case 'name_n_stars':
        
-      $out = '<div class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</div>';
+      if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
+        $out = gv_misc_getTrackingUrl($all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+      }
+      else {
+        $out = '<div class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</div>';
+      }
+       
       // Add stars
       if (!empty($data['data']->votingapi_cache_node_percent_overall_average_value)) {
-          $out .= '<div class="rating">' . theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>';
+        $out .= '<div class="rating">' . theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>';
       }
       return $out;
       
