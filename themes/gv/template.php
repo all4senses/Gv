@@ -772,7 +772,8 @@ function gv_process_page(&$variables) {
   
   
   // Set breadcrumb
-  gv_misc_setBreadcrumbs($variables);
+  // Uncomment it to set breadcrumbs
+  ////gv_misc_setBreadcrumbs($variables);
   
   
   
@@ -799,7 +800,7 @@ function gv_process_page(&$variables) {
   
   // JS for comparing providers functionality on pages wehere appropriate views are cached and therefore have not loaded js itselves within views.
   $pages_with_compare_provider_functionality = array('/providers/reviews');
-  if ($_SERVER['REQUEST_URI'] == '/' || in_array(@$_SERVER['REDIRECT_URL'], $pages_with_compare_provider_functionality)) {
+  if (/*$_SERVER['REQUEST_URI'] == '/' || */in_array(@$_SERVER['REDIRECT_URL'], $pages_with_compare_provider_functionality)) {
     $module_path_pages = drupal_get_path('module', 'gv_misc');
     drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
   }
@@ -870,64 +871,62 @@ function gv_preprocess_node(&$variables) {
     elseif($variables['node']->type == 'webform') {
       $variables['theme_hook_suggestions'][] = 'node__admin_page';
     }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v2' || $variables['node']->title == 'Request a Quote page v2 Final') ) {
-      $variables['theme_hook_suggestions'][] = 'node__quote__v2';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') ) {
-        
-//        global $user;
-//        if ($user->uid != 1) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v33';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v33';
-//        }
-//        else {
-//        $variables['theme_hook_suggestions'][] = 'node__quote__v3';
-//        }
+    
+    
+    
+    
+    elseif($variables['node']->type == 'quote') {
+    
+            global $body_classes_add;
+            if($variables['node']->title == 'Request a Quote page v8' || $variables['node']->title == 'Request a Quote page v8 Final') {
+                $body_classes_add['quote_page'] = 'quote-page v8';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v8';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v8_uk' || $variables['node']->title == 'Request a Quote page v8_uk Final') {
+                $body_classes_add['quote_page'] = 'quote-page v8 uk';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v8_uk';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v7' || $variables['node']->title == 'Request a Quote page v7 Final') {
+                $body_classes_add['quote_page'] = 'quote-page v7';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v7';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v7_uk' || $variables['node']->title == 'Request a Quote page v7_uk Final') {
+                $body_classes_add['quote_page'] = 'quote-page v7 uk';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v7_uk';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') {
+                $body_classes_add['quote_page'] = 'quote-page v33';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v33';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v4' || $variables['node']->title == 'Request a Quote page v4 Final') {
+                $body_classes_add['quote_page'] = 'quote-page v4';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v4';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v5' || $variables['node']->title == 'Request a Quote page v5 Final') {
+                $body_classes_add['quote_page'] = 'quote-page v5';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v5';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v6' || $variables['node']->title == 'Request a Quote page v6 Final') {
+                $body_classes_add['quote_page'] = 'quote-page v6';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v6';
+            }
+            elseif($variables['node']->title == 'Request a Quote page v2' || $variables['node']->title == 'Request a Quote page v2 Final') {
+              $variables['theme_hook_suggestions'][] = 'node__quote__v2';
+            }
 
+    
     }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v4' || $variables['node']->title == 'Request a Quote page v4 Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v4';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v4';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v5' || $variables['node']->title == 'Request a Quote page v5 Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v5';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v5';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v6' || $variables['node']->title == 'Request a Quote page v6 Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v6';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v6';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v7' || $variables['node']->title == 'Request a Quote page v7 Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v7';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v7';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v7_uk' || $variables['node']->title == 'Request a Quote page v7_uk Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v7 uk';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v7_uk';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v8' || $variables['node']->title == 'Request a Quote page v8 Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v8';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v8';
-    }
-    elseif($variables['node']->type == 'quote' && ($variables['node']->title == 'Request a Quote page v8_uk' || $variables['node']->title == 'Request a Quote page v8_uk Final') ) {
-        global $body_classes_add;
-        $body_classes_add['quote_page'] = 'quote-page v8 uk';
-        $variables['theme_hook_suggestions'][] = 'node__quote__v8_uk';
-    }
+    
+    
     // Speed test page have its own template
-    elseif($variables['node']->type == 'preface' && @$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
-      $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
-    }
-    // Custom 404 page.
-    elseif($variables['node']->type == 'preface' && @$variables['node']->field_preface_key['und'][0]['value'] == 'page-not-found') {
-      $variables['theme_hook_suggestions'][] = 'node__preface__page404';
+    elseif($variables['node']->type == 'preface') {
+        if(@$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
+          $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
+        }
+        // Custom 404 page.
+        elseif(@$variables['node']->field_preface_key['und'][0]['value'] == 'page-not-found') {
+          $variables['theme_hook_suggestions'][] = 'node__preface__page404';
+        }
     }
     
   }
