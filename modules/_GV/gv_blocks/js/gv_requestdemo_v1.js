@@ -342,6 +342,8 @@
                     function(){
                       //turned_off = null; 
                       console.log('popup is turned offffff DEMO');
+                      $.fn.colorbox.close();
+                      turned_off = true;
                     },
                    18000
                  ); 
