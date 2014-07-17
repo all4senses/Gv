@@ -337,15 +337,15 @@
               $(".popup-request.demo .success").append(data.data); 
               $(".popup-request.demo .success").show();
               
-              console.log('Start timer DEMO...');
+              //console.log('Start timer DEMO...');
               setTimeout(
                     function(){
                       //turned_off = null; 
-                      console.log('popup is turned offffff DEMO');
+                      //console.log('popup is turned offffff DEMO');
                       $.fn.colorbox.close();
                       turned_off = true;
                     },
-                   18000
+                   5000
                  ); 
             },
 						

@@ -320,13 +320,15 @@
               $('.popup-request.quote .sending').hide(); 
               $(".popup-request.quote .success").append(data.data); 
               $(".popup-request.quote .success").show();
-              console.log('Start timer...');
+              //console.log('Start timer...');
               setTimeout(
                     function(){
                       //turned_off = null; 
-                      console.log('popup is turned offffff');
+                      //console.log('popup is turned offffff');
+                      $.fn.colorbox.close();
+                      turned_off = true;
                     },
-                   18000
+                   5000
                  ); 
             },
 						
