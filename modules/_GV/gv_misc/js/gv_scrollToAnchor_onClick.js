@@ -8,6 +8,8 @@
         // http://stackoverflow.com/questions/4198041/jquery-smooth-scroll-to-an-anchor
         var hashTagActive = "";
         $(".scroll-to-link").click(function (event) {
+            console.log(this.hash);
+            console.log($(this.hash));
             if(hashTagActive != this.hash) { //this will prevent if the user click several times the same link to freeze the scroll.
                 event.preventDefault();
                 //calculate destination place
