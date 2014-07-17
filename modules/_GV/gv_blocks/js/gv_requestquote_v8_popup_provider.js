@@ -326,7 +326,7 @@
                       //turned_off = null; 
                       console.log('popup is turned offffff');
                     },
-                   1800
+                   18000
                  ); 
             },
 						
