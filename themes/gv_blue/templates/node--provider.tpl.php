@@ -221,7 +221,11 @@
                 
                 
                 
-                <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
+                <?php
+                    $first_section_is_set = FALSE;
+                    if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): 
+                      $first_section_is_set = TRUE;
+                ?>
                   <div id="tabs-0">
                     <div class="reviews">
                         <a id="reviews"></a>
@@ -232,7 +236,14 @@
                   </div>
                 <?php endif; ?>
                 
-                <div id="tabs-1">
+                <div id="tabs-1" class="<?php 
+                                            if ($first_section_is_set) {
+                                              echo 'ui-tabs-hide';
+                                            }
+                                            else {
+                                              $first_section_is_set = TRUE;
+                                            }
+                                        ?>">
                   <?php echo render($content['body']); ?>
                 </div>
                 
@@ -242,7 +253,7 @@
                 
                   if (!empty($provider_options_bu) && !empty($provider_options_bu['enabled'])) {
                   
-                    echo '<div id="tabs-2">';
+                    echo '<div id="tabs-2" class="ui-tabs-hide">';
 
                       $provider_options_bu_out = '';
 
