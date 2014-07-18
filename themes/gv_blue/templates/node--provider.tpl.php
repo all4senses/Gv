@@ -238,7 +238,7 @@
                 
                 <div id="tabs-1" class="<?php 
                                             if ($first_section_is_set) {
-                                              echo 'ui-tabs-hide';
+                                              echo 'ui-tabs-hide aaa';
                                             }
                                             else {
                                               $first_section_is_set = TRUE;
@@ -253,7 +253,7 @@
                 
                   if (!empty($provider_options_bu) && !empty($provider_options_bu['enabled'])) {
                   
-                    echo '<div id="tabs-2" class="ui-tabs-hide">';
+                    echo '<div id="tabs-2" class="ui-tabs-hide aaa">';
 
                       $provider_options_bu_out = '';
 
@@ -302,7 +302,7 @@
                   
                   if ($user->uid && !empty($provider_options_re) && !empty($provider_options_re['enabled'])) {
                   
-                    echo '<div id="tabs-3">';
+                    echo '<div id="tabs-3" class="ui-tabs-hide aaa">';
 
                       $provider_options_re_out = '';
 
