@@ -138,13 +138,13 @@
                 
               <div class="pros-and-cons">
                 <div>
-                  <div>THE GOOD</div><?php /*dpm($node);*/ echo $node->extra_data['pros_and_cons']['The good']; ?>
+                  <div class="title good">THE GOOD</div><?php /*dpm($node);*/ echo $node->extra_data['pros_and_cons']['The good']; ?>
                 </div>
                 <div>
-                  <div>THE BAD</div><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
+                  <div class="title bad">THE BAD</div><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
                 </div>
                 <div>
-                  <div>THE BOTTOM LINE</div><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?>
+                  <div class="title bottom">THE BOTTOM LINE</div><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?>
                 </div>
                 
               </div>
