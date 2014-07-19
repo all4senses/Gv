@@ -120,7 +120,12 @@
           
            <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
           
-           <?php if ($page): ?>
+           <?php if ($page): 
+             
+              // Top share post links.
+              echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'top bottom');
+             
+            ?>
             <div id="phone-top">
               <div class="phone photo">
                 <?php
@@ -133,13 +138,13 @@
                 
               <div class="pros-and-cons">
                 <div>
-                  <span>The good:</span><?php /*dpm($node);*/ echo $node->extra_data['pros_and_cons']['The good']; ?>
+                  <div>THE GOOD</div><?php /*dpm($node);*/ echo $node->extra_data['pros_and_cons']['The good']; ?>
                 </div>
                 <div>
-                  <span>The bad:</span><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
+                  <div>THE BAD</div><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
                 </div>
                 <div>
-                  <span>The bottom line:</span><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?>
+                  <div>THE BOTTOM LINE</div><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?>
                 </div>
                 
               </div>
