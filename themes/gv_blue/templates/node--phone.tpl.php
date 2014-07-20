@@ -198,7 +198,7 @@
               
                       
               <div class="data tabs">
-                    <ul>
+                    <ul class="data-tabs-ul">
                       <li><a class="a-tab" href="#tabs-1">Editor's Review</a></li>
                       <li><a class="a-tab" href="#tabs-2">Technical Specs</a></li>
                       <?php if ($node->extra_data['downloads']): ?><li><a class="a-tab" href="#tabs-3">Downloads</a></li><?php endif; ?>
