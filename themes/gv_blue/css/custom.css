@@ -1511,8 +1511,10 @@ margin-top: 150px;
 .node-type-phone .ui-widget-header, .node-type-phone .data.tabs ul.data-tabs-ul
 {border: none; background: url(/sites/all/themes/gv_blue/css/images/sprite-r.png) repeat-x 0px -900px transparent; border-bottom: 1px solid lightgray; border-radius: 0px !important; padding: 0; overflow: hidden;}
 
-.node-type-provider .content .tabs,
-.node-type-phone .content .tabs {padding: 0; border: 0; box-shadow: 1px 1px 10px -1px lightgray; border-radius: 5px; overflow: hidden;}
+.node-type-provider .content .tabs/*,
+.node-type-phone .content .tabs*/ {padding: 0; border: 0; box-shadow: 1px 1px 10px -1px lightgray; border-radius: 5px; overflow: hidden;}
+
+.node-type-phone .content .tabs {border: 1px solid lightgray;}
 
 .data.tabs .ui-tabs-hide {display: none;}
 
@@ -2792,7 +2794,7 @@ a.yt-direct:active{outline: none;}
 
 /* Phones */
 
-.page-node.node-type-phone #main .main-content{border: 1px solid lightgray; padding: 0 15px 10px;}
+.page-node.node-type-phone #main .main-content {/*border: 1px solid lightgray; */padding: 0 25px 10px;}
 
 .page-node.node-type-phone #main .node-phone-review .main-content{padding: 0;}
 
