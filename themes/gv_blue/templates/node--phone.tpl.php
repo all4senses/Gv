@@ -348,7 +348,8 @@
           <div class="share">
               <?php 
                 //echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
-                echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
+                //echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
+              echo gv_blocks_getSidebarShareStaticBlock($node, '', 'bottom');
               ?> 
           </div>
           
@@ -367,12 +368,6 @@
       <?php endif;  ?>
         
   </div> <!-- main-content -->
-  
-  <?php if ($page): ?>
-    <div class="shadow"></div>  
-  <?php endif; ?>
-  
-  
   
 
 <?php if (!$page): ?>
