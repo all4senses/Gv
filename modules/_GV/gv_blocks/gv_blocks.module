@@ -1698,8 +1698,10 @@ function gv_blocks_getAboutTheAuthor($uid) {
             . '</div>
               <div id="right">' .
                 //'<div class="title">About <span style="white-space: nowrap;">the author:</span>' . /*$user->realname .*/ '</div><div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>'
-                '<div class="title">' . $user->realname . '</div><div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>'
+                '<div class="title">' . $user->realname . '</div>'
                 . (!empty($user->field_u_position['und'][0]['value']) ? '<div class="subtitle">' . $user->field_u_position['und'][0]['value'] . '</div>' : '')
+                . '<div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>'
+                
                 . '<div class="social">' .
                       (!empty($user->field_u_gplus_profile['und'][0]['value']) ? '<a id="gplus" target="_blank" rel="author" href="' . (strpos($user->field_u_gplus_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_gplus_profile['und'][0]['value'] . '"></a>' : '') .
                       (!empty($user->field_u_ln_profile['und'][0]['value']) ? '<a id="ln" target="_blank" href="' . (strpos($user->field_u_ln_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_ln_profile['und'][0]['value'] . '"></a>' : '') .
