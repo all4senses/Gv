@@ -4029,7 +4029,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
         if (isset($form['field_invisible'])) {
           
-          $form['field_invisible']['#access'] = FALSE;
+          //$form['field_invisible']['#access'] = FALSE;
+          $form['field_invisible']['#disabled'] = TRUE;
           
           $form['actions']['published_but_invisible'] = array(
             '#type' => 'submit',
@@ -4042,7 +4043,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
         
-        //dpm($form);
+        dpm($form);
         
         
         break;
