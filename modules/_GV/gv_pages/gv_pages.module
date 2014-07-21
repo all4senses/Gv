@@ -4031,7 +4031,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           
           //$form['field_invisible']['#access'] = FALSE;
           $form['field_invisible']['#disabled'] = TRUE;
-          
+          $form['field_invisible']['#description'] = 'Please, use the button "Published, but invisible in lists" to make the article invisible.';
+
+                  
           $form['actions']['published_but_invisible'] = array(
             '#type' => 'submit',
             '#value' => 'Published, but invisible in lists',
