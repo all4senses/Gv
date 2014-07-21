@@ -218,7 +218,13 @@
                           <?php echo '<div class="voters editor"><div class="count" property="v:count">' . (!empty($node->gv_voters) ? $node->gv_voters : 1) . '</div></div>';?>
                         </div>
                       </div>
-                      <?php echo render($content['body']); ?>
+                      <?php 
+                      echo render($content['body']); 
+                      
+                      dpm($content);
+                      dpm($node);
+                      ?>
+                      
                       <div class="bottom-clear"></div>
                     </div>
                     <div id="tabs-2">
