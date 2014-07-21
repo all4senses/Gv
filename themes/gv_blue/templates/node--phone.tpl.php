@@ -219,10 +219,11 @@
                         </div>
                       </div>
                       <?php 
-                      echo render($content['body']); 
-                      
-                      dpm($content);
-                      dpm($node);
+                        dpm($node->extra_data);
+                        echo render($content['body']); 
+
+                        //dpm($content);
+                        //dpm($node);
                       ?>
                       
                       <div class="bottom-clear"></div>
