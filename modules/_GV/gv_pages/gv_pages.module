@@ -3451,8 +3451,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'full_html'; // link Ckeditor
       }
       
-      $extra_data = unserialize(@$form['field_extra_data']['und'][0]['value']['#default_value']);
-      $form['body']['und'][0]['summary']['#default_value'] = @$extra_data['body_summary'];
       
       $form['#submit'][] = 'gv_pages_submitForm_preface';
       
@@ -4016,8 +4014,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'article_node_form':
     case 'provider_node_form':
     case 'phone_node_form':
-    //case 'preface_node_form':
-      
+    
+        
+        
         $form['actions']['submit']['#value'] = 'Save & Publish';
       
         $form['actions']['save_draft'] = array(
@@ -4041,12 +4040,24 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             '#weight' => 7,
           );
         }
-      
+     
+     
+        
         $form['#submit'][] = 'gv_pages_submitForm_saveDraft';
         //$form['#validate'][] = 'gv_pages_validateForm_saveDraft';
         
-        dpm($form);
+        // Plus apply the below...
         
+     case 'preface_node_form':   
+        //Everything from above + this will apply to above cases (we don't have "break" above this)
+        if (!empty($form['field_extra_data']['und'][0]['value'])) {
+          $extra_data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
+          if (!empty($extra_data['body_summary'])) {
+            $form['body']['und'][0]['summary']['#default_value'] = $extra_data['body_summary'];
+          }
+        }
+     
+        //dpm($form);
         
         break;
       
@@ -6061,7 +6072,11 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   }
   
   
-  $extra_data = array('share_src_themed' => $share_src_themed, 'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 'specs' => $form_state['values']['data_specs'], 'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 'downloads' => $form_state['values']['downloads']['value'], 'in_the_box' => $form_state['values']['in_the_box']['value']);
+  $extra_data = array('body_summary' => @$form_state['values']['body']['und'][0]['summary'],
+                      'share_src_themed' => $share_src_themed, 
+                      'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 'specs' => $form_state['values']['data_specs'], 'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 'downloads' => $form_state['values']['downloads']['value'], 
+                      'in_the_box' => $form_state['values']['in_the_box']['value']
+                    );
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data)))), $form_state);
 }
