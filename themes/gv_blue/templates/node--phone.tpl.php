@@ -199,11 +199,11 @@
                       
               <div class="data tabs">
                     <ul class="data-tabs-ul">
-                      <li><a class="a-tab" href="#tabs-1">Editor's Review</a></li>
-                      <li><a class="a-tab" href="#tabs-2">Technical Specs</a></li>
-                      <?php if ($node->extra_data['downloads']): ?><li><a class="a-tab" href="#tabs-3">Downloads</a></li><?php endif; ?>
-                      <?php if ($node->extra_data['in_the_box']): ?><li><a class="a-tab" href="#tabs-4">In the Box</a></li><?php endif; ?>
-                      <li><a class="a-tab" href="#user-reviews">User Reviews</a></li>
+                      <li><a id="tab1" class="a-tab" href="#tabs-1">Editor's Review</a></li>
+                      <li><a id="tab2" class="a-tab" href="#tabs-2">Technical Specs</a></li>
+                      <?php if ($node->extra_data['downloads']): ?><li><a id="tab3" class="a-tab" href="#tabs-3">Downloads</a></li><?php endif; ?>
+                      <?php if ($node->extra_data['in_the_box']): ?><li><a id="tab4" class="a-tab" href="#tabs-4">In the Box</a></li><?php endif; ?>
+                      <li><a id="tab5" class="a-tab" href="#user-reviews">User Reviews</a></li>
                     </ul>
                 
                 
