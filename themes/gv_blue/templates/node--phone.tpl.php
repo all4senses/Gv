@@ -219,7 +219,7 @@
                         </div>
                       </div>
                       <?php 
-                        dpm($node);
+                        echo @$node->extra_data['body_summary'];
                         echo render($content['body']); 
 
                         //dpm($content);
