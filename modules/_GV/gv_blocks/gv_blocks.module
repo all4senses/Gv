@@ -1345,6 +1345,8 @@ function gv_blocks_getLatestPostsRotated() {
   $query->fields('n', array('nid'));
   $query->condition('n.type', 'blog_post');
   $query->condition('n.status', 1);
+  $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+  $query->condition('i.field_invisible_value', 1, '!='); 
   $query->orderBy('n.created', 'DESC');
   // 4 pages
   //$query->range(0, 8);
