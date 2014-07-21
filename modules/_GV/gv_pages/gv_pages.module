@@ -6676,10 +6676,11 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   
   
-  if (!$form_state['values']['lines']) {
-    form_set_error('lines',t('Please set a numbers of lines'));
-  }
-  else {
+//  if (!$form_state['values']['lines']) {
+//    form_set_error('lines',t('Please set a numbers of lines'));
+//  }
+//  else 
+    {
     // Save several vars in the field
     $field_r_data = serialize(array('lines' => $form_state['values']['lines'], 'pros' => $form_state['values']['pros'], 'cons' => $form_state['values']['cons'], 'user_ip' => $form_state['values']['user_ip']));
     form_set_value($form['field_r_data'], array('und' => array(0 => array('value' => $field_r_data))), $form_state);
