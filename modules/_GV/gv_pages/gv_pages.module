@@ -8306,7 +8306,7 @@ function gv_pages_addPhoneRatingsToNodeThemed($node, $votes, $counts = NULL, $se
         $recommend_vote = $vote;
         continue;
       }
-      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote ' . (in_array($zebra, $zebra_odd) ? 'odd' : 'even') .'"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
+      $node->content['gv_ratings']['#markup'] .= '<div class="gv_vote ' . (in_array($zebra, $zebra_odd) ? 'odd' : 'even') . ' ' . $vote['tag'] .'"><div class="title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
         . theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'stars', 'css' => 'stars.css')))
         // Using the original fivestar theme function.
