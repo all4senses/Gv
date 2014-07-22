@@ -29,9 +29,11 @@ define('RECOMMEND', 'Would you recommend this service provider?');
 
 // Phones only
 define('USE_EASE', 'Ease of Use');
-define('VOICE', 'Voice Quality');
+//define('VOICE', 'Voice Quality');
+define('VOICE', 'Voice');
 define('DURABILITY', 'Durability');
-define('PERFORMANCE', 'Value Performance');
+//define('PERFORMANCE', 'Value Performance');
+define('PERFORMANCE', 'Performance');
 define('RECOMMEND_PHONE', 'Would you recommend this VoIP phone?');
 
 
