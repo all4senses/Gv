@@ -2553,7 +2553,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 7,
       );
       foreach($our_top_5_pros_and_cons as $our_top_5_pros_and_cons_title) {
-        $form['data_our_top_5_pros_and_cons'][$pros_and_cons_title] = array(
+        $form['data_our_top_5_pros_and_cons'][$our_top_5_pros_and_cons_title] = array(
           '#type' => 'textarea',
           '#title' => $our_top_5_pros_and_cons_title,
           '#default_value' => isset($extra_data['our_top_5_pros_and_cons'][$our_top_5_pros_and_cons_title]) ? $extra_data['our_top_5_pros_and_cons'][$our_top_5_pros_and_cons_title] : '',
