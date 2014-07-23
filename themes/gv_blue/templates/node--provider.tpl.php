@@ -80,9 +80,13 @@
                     </div>
                     
                     <div class="overall"> 
-                        <?php if (!empty($content['gv_ratings'])): ?>
+                        <?php 
+                            $no_reviews_class = ' no-reviews';
+                            if (!empty($content['gv_ratings'])): 
+                        ?>
 
                               <?php 
+                                 $no_reviews_class = NULL;
                                  echo '<div class="price narrow">', (empty($node->p_data['s']['bu']['fees']['mon']) ? '' : '$' . $node->p_data['s']['bu']['fees']['mon']), '</div>',
                                       '<div class="voters"><div class="title"><span class="not-narrow">Number of </span>Reviews:</div><div class="count" property="v:count"><a href="#reviews" rel="nofollow" >', $node->gv_voters, '</a></div></div>',
                                       '<div class="recommend not-narrow"><div class="title">Would recommend: </div><div class="data">', $node->gv_recommend, '% of Users</div></div>'
@@ -100,7 +104,7 @@
                   
                 </div> <!-- End of <div typeof="Organization"> -->
                 
-                <div class="links">
+                <div class="links<?php echo $no_reviews_class;?>">
                   <?php echo '<a href="#" id="request-demo" rel="nofollow">Request a Demo</a>', // l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'))), 
                           l('Request a Quote', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-quote', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
                           l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
