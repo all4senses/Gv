@@ -2554,12 +2554,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       );
       foreach($our_top_5_pros_and_cons as $our_top_5_pros_and_cons_title) {
         $form['data_our_top_5_pros_and_cons'][$our_top_5_pros_and_cons_title] = array(
-          '#type' => 'textarea',
+          //'#type' => 'textarea',
+          '#type' => 'text_format', 
+          '#format' => 'full_html',
           '#title' => $our_top_5_pros_and_cons_title,
           '#default_value' => isset($extra_data['our_top_5_pros_and_cons'][$our_top_5_pros_and_cons_title]) ? $extra_data['our_top_5_pros_and_cons'][$our_top_5_pros_and_cons_title] : '',
         );
       }
       
+            
       
       $specs = array(
         //'Manufacturer' => 'textfield', //Cisco
@@ -6087,7 +6090,7 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
     $share_src_themed = gv_misc_getShareSrcThemed_fromUri($photo->uri);
   }
   
-  
+  dpm($form_state['values']);
   $extra_data = array('body_summary' => @$form_state['values']['body']['und'][0]['summary'],
                       'share_src_themed' => $share_src_themed, 
                       'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 
