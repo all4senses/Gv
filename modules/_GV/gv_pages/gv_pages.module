@@ -6090,7 +6090,11 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   
   $extra_data = array('body_summary' => @$form_state['values']['body']['und'][0]['summary'],
                       'share_src_themed' => $share_src_themed, 
-                      'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 'specs' => $form_state['values']['data_specs'], 'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 'downloads' => $form_state['values']['downloads']['value'], 
+                      'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 
+                      'specs' => $form_state['values']['data_specs'], 
+                      'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 
+                      'our_top_5_pros_and_cons' => $form_state['values']['data_our_top_5_pros_and_cons'],
+                      'downloads' => $form_state['values']['downloads']['value'], 
                       'in_the_box' => $form_state['values']['in_the_box']['value']
                     );
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
