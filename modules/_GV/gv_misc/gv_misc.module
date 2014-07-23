@@ -9185,28 +9185,14 @@ function gv_misc_getProviderQuickData($target, $data) {
         $reviews_link_text = format_plural($data['data']->votingapi_cache_node_percent_overall_count_value, '1 Review', '@count Reviews');
         $reviews_link_params = ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . ' rel="nofollow" href="' . url('node/' . $data['data']->nid);
         
-        
-//        global $user;
-//        
-//        if (!$user->uid) {
-//          $out = '
-//            <div class="details"><a ' . $reviews_link_params . '"><div>' . $reviews_link_text . '</div></a></div>
-//            <div class="fivestars_n_count">' . 
-//                $stars . 
-//              ' <div class="count">(' . $rating_count . ')</div>
-//            </div>';
-//        }
-//        else 
-          {
+        $out = '
+          <div class="fivestars_n_count">
+              <div class="count">' . $rating_count . '<span> / 5</span></div>' .
+              $stars . 
+          '</div>
+          <div class="details"><a ' . $reviews_link_params . '"><div>Read Reviews</div></a></div>
+          ';
 
-          $out = '
-            <div class="fivestars_n_count">
-                <div class="count">' . $rating_count . '<span> / 5</span></div>' .
-                $stars . 
-            '</div>
-            <div class="details"><a ' . $reviews_link_params . '"><div>Read Reviews</div></a></div>
-            ';
-        }
       }
       else {
         $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div></a></div>';
@@ -9526,7 +9512,30 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
                         
       return $url;
+      
+      
+      
+      
+    case 'i_web3':
+      
+      if (!empty($data['data']->votingapi_cache_node_percent_overall_average_value)) {
+        $reviews_link_params = ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . ' rel="nofollow" href="' . url('node/' . $data['data']->nid);
+        $out = '<div class="details"><a ' . $reviews_link_params . '"><div>Read Reviews</div></a></div>';
+      }
+      else {
+        $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div></a></div>';
+      }
+      
+      
+      $url = isset($all_data_quick[$data['data']->nid]['i_web']) ? $all_data_quick[$data['data']->nid]['i_web'] : '';
+      if ($url) {
+        $link_label = ''; //@$data['service_type'] == 'wc' ? 'Visit Site' : '';
+        $out .= gv_misc_getTrackingUrl($link_label, NULL, $data['data']->nid, NULL, 'visit-site-btn', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+      }
+      
+      return $out;
 
+      
   }
 }
 
