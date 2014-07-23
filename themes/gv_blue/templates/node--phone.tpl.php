@@ -129,6 +129,7 @@
             <div id="phone-top">
               <div class="phone photo">
                 <?php
+                dpm($node->extra_data);
                   if (isset($node->field_p_image['und'][0]['uri'])) {
                     echo '<a class="zoom" title="' . $node->field_p_image['und'][0]['title'] . '" href="/' . gv_misc_getPathFromStreamUri($node->field_p_image['und'][0]['uri']) . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_page_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a>'; 
                     
