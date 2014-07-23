@@ -91,7 +91,7 @@
 
                         <? /*else: ?>
                             <?php echo l('<img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))); ?>
-                        <?php endif;*/ // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                        <?php */endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
                     </div>
                     
                   </div> <!-- End of <div id="info-n-reviews"> -->
