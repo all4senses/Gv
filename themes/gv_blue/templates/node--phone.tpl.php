@@ -129,7 +129,7 @@
             <div id="phone-top">
               <div class="phone photo">
                 <?php
-                dpm($node->extra_data);
+                
                   if (isset($node->field_p_image['und'][0]['uri'])) {
                     echo '<a class="zoom" title="' . $node->field_p_image['und'][0]['title'] . '" href="/' . gv_misc_getPathFromStreamUri($node->field_p_image['und'][0]['uri']) . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_page_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a>'; 
                     
@@ -238,6 +238,15 @@
                       </div>
                       <?php 
                         echo @$node->extra_data['body_summary'];
+                        
+                        
+                        global $user;
+                        if ($user->uid == 1) {
+                          if (!empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value']) && !empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'])) {
+                            echo '<div id="top-pros-cons"><div id="top-pros">', $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value'], '</div><div id="top-cons">',
+                                  $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value'], '</div></div>';
+                          }
+                        }
                         echo render($content['body']); 
 
                         //dpm($content);
