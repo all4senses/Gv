@@ -7939,7 +7939,7 @@ function gv_pages_node_view($node, $view_mode) {
             $spec_value = (is_int($spec_value) ? ($spec_value ? 'Yes' : 'No') : ($spec_value ? $spec_value : 'N/A'));
             $node->specs .= '<tr><td class="title">' . $spec_title . '</td><td class="value">' . $spec_value . '</td></tr>';
           }
-          $node->specs = '<table class="specs"><tbody>' . $node->specs . '</tbody></table>';
+          $node->specs = '<table class="specs"><tbody><tr class="caption Specifications"><td colspan="2">Specifications List</td></tr>' . $node->specs . '</tbody></table>';
 
 
 
