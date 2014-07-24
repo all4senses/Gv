@@ -240,8 +240,9 @@
                         echo @$node->extra_data['body_summary'];
                         
                         
-                        global $user;
-                        if ($user->uid == 1) {
+                        //global $user;
+                        //if ($user->uid == 1) 
+                          {
                           if (!empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value']) && !empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'])) {
                             echo '<div id="top-pros-cons"><div id="top-pros"><div class="title">OUR TOP 5 <span>PROS</span></div>', $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value'], '</div><div id="top-cons"><div class="title">OUR TOP 5 <span>CONS</span></div>',
                                   $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value'], '</div></div>';
