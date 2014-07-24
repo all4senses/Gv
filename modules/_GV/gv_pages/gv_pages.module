@@ -7927,6 +7927,7 @@ function gv_pages_node_view($node, $view_mode) {
           $node->specs = '<tr class="' . $class . '"><td class="title">Manufacturer</td><td class="value">' . $node->field_manufacturer['und'][0]['taxonomy_term']->name . '</td></tr>';
           if (isset($node->field_phone_type['und'][0])) {
             $phone_types = '';
+            dpm($node->field_phone_type['und']);
             foreach ($node->field_phone_type['und'] as $phone_type) {
               $phone_types .= $phone_types ? ', ' . $phone_type['value'] : $phone_type['value'];
             }
