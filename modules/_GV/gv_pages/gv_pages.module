@@ -7923,21 +7923,24 @@ function gv_pages_node_view($node, $view_mode) {
           // Phone specs
 
           // Add a Manufacturer and a type first.
+          $class = 'even';
           $node->specs = '<tr><td class="title">Manufacturer</td><td class="value">' . $node->field_manufacturer['und'][0]['taxonomy_term']->name . '</td></tr>';
           if (isset($node->field_phone_type['und'][0])) {
             $phone_types = '';
             foreach ($node->field_phone_type['und'] as $phone_type) {
               $phone_types .= $phone_types ? ', ' . $phone_type['value'] : $phone_type['value'];
             }
-            $node->specs .= '<tr><td class="title">Phone type</td><td class="value">' . $phone_types . '</td></tr>';
+            $class = 'odd';
+            $node->specs .= '<tr class="' . $class . '"><td class="title">Phone type</td><td class="value">' . $phone_types . '</td></tr>';
           }
 
 
 
           foreach ($extra_data['specs'] as $spec_title => $spec_value) {
+            $class = $class == 'odd' ? 'even' : 'odd';
             $spec_title = str_replace('Num ', '# ', $spec_title);
             $spec_value = (is_int($spec_value) ? ($spec_value ? 'Yes' : 'No') : ($spec_value ? $spec_value : 'N/A'));
-            $node->specs .= '<tr><td class="title">' . $spec_title . '</td><td class="value">' . $spec_value . '</td></tr>';
+            $node->specs .= '<tr class="' . $class . '"><td class="title">' . $spec_title . '</td><td class="value">' . $spec_value . '</td></tr>';
           }
           $node->specs = '<table class="specs"><tbody><tr class="caption Specifications"><td colspan="2">Specifications List</td></tr>' . $node->specs . '</tbody></table>';
 
