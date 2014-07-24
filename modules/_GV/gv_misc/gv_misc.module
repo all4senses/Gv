@@ -8077,6 +8077,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
       $query->leftJoin('field_data_field_p_erating_cc', 'er_cc', "er_cc.entity_id = n.nid");
       $query->leftJoin('field_data_field_p_erating_bu_ca', 'er_bu_ca', "er_bu_ca.entity_id = n.nid");
       $query->leftJoin('field_data_field_p_erating_re_ca', 'er_re_ca', "er_re_ca.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_wc', 'er_wc', "er_wc.entity_id = n.nid");
       
       $or = db_or()->isNotNull('field_p_erating_value')
                    ->isNotNull('field_p_erating_smbv_value')
@@ -8088,6 +8089,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
                    ->isNotNull('field_p_erating_cc_value')
                    ->isNotNull('field_p_erating_bu_ca_value')
                    ->isNotNull('field_p_erating_re_ca_value')
+                   ->isNotNull('field_p_erating_wc_value')
               ;
       $query->condition($or);
     }
