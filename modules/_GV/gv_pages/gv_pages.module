@@ -6091,6 +6091,8 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   }
   
   dpm($form_state['values']);
+  gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, 'article_thumbnail_home_teaser', $home_teaser_image_html, $home_teaser_image_html_beautify, $title);      
+    
   $extra_data = array('body_summary' => @$form_state['values']['body']['und'][0]['summary'],
                       'share_src_themed' => $share_src_themed, 
                       'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 
@@ -6098,7 +6100,9 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
                       'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 
                       'our_top_5_pros_and_cons' => $form_state['values']['data_our_top_5_pros_and_cons'],
                       'downloads' => $form_state['values']['downloads']['value'], 
-                      'in_the_box' => $form_state['values']['in_the_box']['value']
+                      'in_the_box' => $form_state['values']['in_the_box']['value'],
+                      'home_teaser_image_beautify' => 
+      //theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_page_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'])),
                     );
   // Save collected data from temporary fields and weights to a real placeholder field field_p_data as a serialized data.
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data)))), $form_state);
