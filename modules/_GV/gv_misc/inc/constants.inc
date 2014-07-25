@@ -270,7 +270,7 @@ $provider_options_re = array(
       
 define('PROVIDER_OPTIONS_RE', serialize($provider_options_re));
 
-$pages410 = array('compare-residential-voip-providers', 'compare-business-voip-providers', 'providers/reviews', 'best-voip-service-providers');
+$pages410 = array('compare-residential-voip-providers', 'compare-business-voip-providers', /*'providers/reviews',*/ 'best-voip-service-providers');
 define('PAGES_410', serialize($pages410));
 
 
