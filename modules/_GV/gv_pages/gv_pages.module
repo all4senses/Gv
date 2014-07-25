@@ -6710,6 +6710,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
   dpm($form_state['values']);
   foreach ($rating_options as $rating_option => $rating_option_title) {
+    dpm('rating_' . $rating_option . ' = ' . $form_state['values']['rating_' . $rating_option]);
     if ($form_state['values']['rating_' . $rating_option] === FALSE) {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
     }
