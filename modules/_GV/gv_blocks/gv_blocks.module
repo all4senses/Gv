@@ -1344,7 +1344,10 @@ function gv_blocks_getLatestPostsRotated() {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));
   //$query->condition('n.type', 'blog_post');
-  $query->condition('n.type', array('blog_post', 'phone'), 'IN');
+  global $user;
+  if ($user->uid == 1) {
+    $query->condition('n.type', array('blog_post', 'phone'), 'IN');
+  }
   $query->condition('n.status', 1);
   $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
   $query->condition('i.field_invisible_value', 1, '!='); 
