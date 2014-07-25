@@ -6708,7 +6708,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   //$rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
   //$rating_options = array('rating_features' => FEATURES, 'rating_sound' => SOUND, 'rating_rely' => RELY, 'rating_money' => PRICE, 'rating_service' => CUSTOMER, 'rating_recommend' => RECOMMEND);
   $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
-  
+  dpm($form_state['values']);
   foreach ($rating_options as $rating_option => $rating_option_title) {
     if ($form_state['values']['rating_' . $rating_option] === FALSE) {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
