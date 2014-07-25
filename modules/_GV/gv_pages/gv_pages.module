@@ -6971,7 +6971,7 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     if (!$form_state['values']['uid']) {
       gv_misc_sendMessage('email_verification', array('verification_code' => $form_state['values']['field_r_approvecode']['und'][0]['value'] . '=' . urlencode($form_state['values']['field_r_email']['und'][0]['value']), 'email' => $form_state['values']['field_r_email']['und'][0]['value']));
       //$text .= '<div class="emailed">To assist in getting your review published faster, we have sent you an email verification with 1-click instructions for immediate publishing of your review.</div>';
-      $text .= '<span class="approve"> Please check your inbox for a verification email with 1-click validation for immediate publishing of your review.</span><div class="contact">For assistance you may email us at contact@getvoip.com.</div>';
+      $text .= '<span class="approve"> Please check your inbox for a verification email with 1-click validation for immediate publishing of your review.</span><br/><div class="contact">For assistance you may email us at contact@getvoip.com.</div>';
       
     }
     $text .= '</span>';
