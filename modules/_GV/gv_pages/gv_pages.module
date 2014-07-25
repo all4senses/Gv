@@ -6696,6 +6696,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   form_set_value($form['field_r_lname'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_lname_temp']) ? $form_state['values']['field_r_lname_temp'] : NULL ))), $form_state);
   form_set_value($form['field_r_email'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_email_temp']) ? $form_state['values']['field_r_email_temp'] : NULL ))), $form_state);
 
+  /*
   // Check if a not logged in user has entered an email which is already is taken with one of our registered user.
   if (!$current_is_administrator && !$form_state['values']['uid'] && isset($form_state['values']['field_r_email_temp']) && $form_state['values']['field_r_email_temp']) {
     //if (gv_misc_emailIsRegistered($form_state['values']['field_r_email']['und'][0]['value'])) {
@@ -6704,6 +6705,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
       return;
     }
   }
+  */
   
   //$rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
   //$rating_options = array('rating_features' => FEATURES, 'rating_sound' => SOUND, 'rating_rely' => RELY, 'rating_money' => PRICE, 'rating_service' => CUSTOMER, 'rating_recommend' => RECOMMEND);
