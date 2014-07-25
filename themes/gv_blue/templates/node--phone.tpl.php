@@ -3,8 +3,8 @@
 if($view_mode == 'home_teaser_rotated') {
     
     
-    if (!empty($node->extra_data['home_teaser_image_beautify'])) {
-      echo $node->extra_data['home_teaser_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
+    if (!empty($node->extra_data['home_teaser_rotated_image_beautify'])) {
+      echo $node->extra_data['home_teaser_rotated_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
     }
 //    else {
 //      echo $extra_data['teaser_main_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
