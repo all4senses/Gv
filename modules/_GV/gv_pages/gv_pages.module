@@ -6708,9 +6708,9 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   //$rating_options = array('rating_features' => 'Features Rating', 'rating_sound' => 'Sound Rating', 'rating_rely' => 'Rely Rating', 'rating_money' => 'Money Rating', 'rating_service' => 'Service Rating', 'rating_recommend' => 'Would you recommend this VoIP provider?');
   //$rating_options = array('rating_features' => FEATURES, 'rating_sound' => SOUND, 'rating_rely' => RELY, 'rating_money' => PRICE, 'rating_service' => CUSTOMER, 'rating_recommend' => RECOMMEND);
   $rating_options = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   foreach ($rating_options as $rating_option => $rating_option_title) {
-    dpm('rating_' . $rating_option . ' = ' . $form_state['values']['rating_' . $rating_option]);
+    //dpm('rating_' . $rating_option . ' = ' . $form_state['values']['rating_' . $rating_option]);
     //if ($form_state['values']['rating_' . $rating_option] === FALSE) {
     if (!$form_state['values']['rating_' . $rating_option]) {
       form_set_error($rating_option, t('Please make your choice for "' . $rating_option_title . '"'));
@@ -6965,11 +6965,14 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
   global $user;
   // Just submitted new review.
   if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
-    $text = '<span class="review"><span class="success">Your review has been successfully submitted. Thank you for your time and efforts in sharing your much appreciated feedback.</span> <span class="approve">It will be published as soon as our administrators have approved it.</span> <span class="contact">If we may be of any further assistance please email us at contact@getvoip.com</span>';
+    //$text = '<span class="review"><span class="success">Your review has been successfully submitted. Thank you for your time and efforts in sharing your much appreciated feedback.</span> <span class="approve">It will be published as soon as our administrators have approved it.</span> <span class="contact">If we may be of any further assistance please email us at contact@getvoip.com</span>';
+    $text = '<span class="review"><span class="success">Thank you for your time and efforts in submitting your review.</span>';
     // Send verification code to approve email for an unregistered user.
     if (!$form_state['values']['uid']) {
       gv_misc_sendMessage('email_verification', array('verification_code' => $form_state['values']['field_r_approvecode']['und'][0]['value'] . '=' . urlencode($form_state['values']['field_r_email']['und'][0]['value']), 'email' => $form_state['values']['field_r_email']['und'][0]['value']));
-      $text .= '<div class="emailed">To assist in getting your review published faster, we have sent you an email verification with 1-click instructions for immediate publishing of your review.</div>';
+      //$text .= '<div class="emailed">To assist in getting your review published faster, we have sent you an email verification with 1-click instructions for immediate publishing of your review.</div>';
+      $text .= '<span class="approve"> Please check your inbox for a verification email with 1-click validation for immediate publishing of your review.</span><div class="contact">For assistance you may email us at contact@getvoip.com.</div>';
+      
     }
     $text .= '</span>';
     drupal_set_message($text);
