@@ -23,7 +23,7 @@
       <div class="full logo">
 
           <div id="gv-logo">
-            <div class="logo"><img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" /></div>
+            <div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /></div>
           </div>
         
           
