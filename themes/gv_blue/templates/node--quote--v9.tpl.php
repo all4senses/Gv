@@ -42,7 +42,7 @@
         <div id="main-content"> 
 
               
-              <?php if ($_SERVER['REDIRECT_URL'] == '/lpv9-final'): ?>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/lp9-final'): ?>
 
                   <div class="left final">
                     
@@ -146,9 +146,9 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/lpv9-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/lp9-final'): /* If we are on the final page, after the submission */ ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lpv9'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lp9'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
@@ -196,11 +196,11 @@
             
             
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/lpv9";</script>
+            <script>top.location.href="http://getvoip.com/lp9";</script>
           <?php endif;*/?>
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lpv9-final'):
-// So we are on the lending page '/lpv9' 
+<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lp9-final'):
+// So we are on the lending page '/lp9' 
 ?>
     
   <!-- Google Code for Remarketing tag -->
@@ -222,7 +222,7 @@
   </noscript>
   
   
-<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lpv9-final'):?>
+<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lp9-final'):?>
   
 
   <script src="//cdn.optimizely.com/js/786756874.js"></script>
