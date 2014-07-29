@@ -250,7 +250,7 @@
     
     
     
-      $("#requestQuoteFormWrapper").removeClass('hidden'); 
+      $("#requestQuoteFormWrapper, .select").removeClass('hidden'); 
     
 
     
