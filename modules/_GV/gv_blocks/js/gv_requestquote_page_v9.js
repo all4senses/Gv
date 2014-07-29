@@ -77,7 +77,7 @@
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
           textSubmit : 'Get My Free Quote',
-          textNext: "Let's Get Started",
+          textNext: "Get My Free Quote",
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
