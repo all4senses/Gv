@@ -7860,10 +7860,10 @@ function gv_blocks_get_requestQuoteForPage_v9() {
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
-  
+  // class="hidden"
   $out = //$exitIntent_block . 
           '
-   <div id="requestQuoteFormWrapper" class="hidden">
+   <div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
