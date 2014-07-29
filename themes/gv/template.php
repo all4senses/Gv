@@ -20,7 +20,7 @@ function gv_link($variables) {
   
   //global $user;
   
-  dpm($variables);
+  //dpm($variables);
   
   
   // Replace blog?page=xxx and library?page=xxx with blog/xxx and library/xxx in a pager
