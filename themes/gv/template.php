@@ -32,9 +32,12 @@ function gv_link($variables) {
   // RewriteRule ^(blog|library)/([0-9]*)$ index.php?q=$1&page=$2 [L,QSA]
   if ( (strpos($variables['path'], 'user/') !== FALSE || $variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
     dpm($variables);
-    if (strpos($variables['path'], 'ode/')) {
+    if (strpos($variables['path'], 'ode/') || strpos($variables['path'], 'user/') !== FALSE) {
       $variables['path'] = ltrim(url($variables['path']),'/');
     }
+    //elseif () {
+      
+    //}
     //dpm('url = ' . url($variables['path']));
     $variables['path'] = $variables['path'] . '/' . $variables['options']['query']['page'];
     unset($variables['options']['query']['page']);
