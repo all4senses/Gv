@@ -30,8 +30,8 @@ function gv_link($variables) {
   // http://www.drupal.ru/node/4875  A lot of discussions... i'm not sure here...
   // http://www.drupal.ru/node/65274#comments Didn't try this...
   // RewriteRule ^(blog|library)/([0-9]*)$ index.php?q=$1&page=$2 [L,QSA]
-  if ( ($variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
-    //dpm($variables);
+  if ( (strpos($variables['path'], 'user/') !== FALSE || $variables['path'] == 'blog' || $variables['path'] == 'library' || $variables['path'] == 'node/75') && !empty($variables['options']['query']['page'])) {
+    dpm($variables);
     if (strpos($variables['path'], 'ode/')) {
       $variables['path'] = ltrim(url($variables['path']),'/');
     }
