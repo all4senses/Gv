@@ -111,7 +111,7 @@ if($view_mode == 'home_teaser_rotated') {
                   else {
                     $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By ' .
-                                  $extra_data['guest_author'] 
+                                  '<span class="guest-author">' . $extra_data['guest_author'] . '</span>' 
                                   /*. $gplus_profile */.
                                   $delimiter . $created_str .
                               '</span>';
