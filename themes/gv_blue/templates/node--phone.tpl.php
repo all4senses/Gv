@@ -101,7 +101,24 @@ if($view_mode == 'home_teaser_rotated') {
                   $gplus_profile = ($author_gplus_profile) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author_gplus_profile . '?rel=author">(G+)</a>' : '';
                 }
                 
-                if ($node->uid) {
+                if (!empty($extra_data['guest_author'])) {
+                  
+                  if ($view_mode == 'side_block_teaser') {
+                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  $created_str .
+                              '</span>';
+                  }
+                  else {
+                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  'By ' .
+                                  $extra_data['guest_author'] 
+                                  /*. $gplus_profile */.
+                                  $delimiter . $created_str .
+                              '</span>';
+                  }
+                  
+                }
+                elseif ($node->uid) {
 
                   if ($view_mode == 'side_block_teaser') {
                     $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
