@@ -409,7 +409,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
-  
+  $blocks['ourteam_header_footer'] = array(
+    'info' => 'Our Team header and footer',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   return $blocks;
 }
@@ -835,8 +838,12 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = ''; // 'Top 5 VoIP Providers';
       $block['content'] = gv_blocks_getTop5Providers_byTypeAndPath();
       break;
-    
-            
+   
+    case 'ourteam_header_footer':
+      $block['subject'] = ''; 
+      $block['content'] = gv_blocks_getBlockFromVariable('gv_ourteam_header_data');
+      break;
+   
             
   }
 
@@ -852,6 +859,57 @@ function gv_blocks_block_configure($delta = '') {
   $form = array();
   
   switch ($delta) {
+    
+    case 'ourteam_header_footer':
+      
+      
+      $data = unserialize(variable_get('gv_ourteam_data', NULL));
+      
+      $form['banner_title'] = array(
+        '#type' => 'textfield', 
+        '#title' => 'Banner title',
+        '#default_value' => $data['banner_title'],
+      );
+      $form['banner_subtitle'] = array(
+        '#type' => 'textfield', 
+        '#title' => 'Banner subtitle',
+        '#default_value' => $data['banner_subtitle'],
+      );
+      $form['banner_text'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Banner text',
+        '#format' => 'full_html',
+        '#default_value' => $data['banner_text']['value'],
+      );
+      
+      $form['main_title'] = array(
+        '#type' => 'textfield', 
+        '#title' => 'Main title',
+        '#default_value' => $data['main_title'],
+      );
+      $form['main_text'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Main text',
+        '#format' => 'full_html',
+        '#default_value' => $data['main_text']['value'],
+      );
+      
+      $form['footer_title'] = array(
+        '#type' => 'textfield', 
+        '#title' => 'Footer title',
+        '#default_value' => $data['footer_title'],
+      );
+      $form['footer_text'] = array(
+        '#type' => 'text_format', 
+        '#title' => 'Footer text',
+        '#format' => 'full_html',
+        '#default_value' => $data['footer_text']['value'],
+      );
+      
+
+      break;
+    
+    
     
     case 'secondary_p_section':
       
@@ -1097,7 +1155,13 @@ function gv_blocks_block_save($delta = '', $edit = array()) {
 
   switch ($delta) {
     
-    
+     case 'ourteam_header_footer':
+      
+      $data = array('banner_title' => $edit['banner_title'], 'banner_subtitle' => $edit['banner_subtitle'], 'features' => $edit['features']);
+      variable_set('gv_ourteam_data', serialize($data));
+      
+       
+       
     case 'secondary_p_section':
       $data = unserialize(variable_get('gv_secondary_p_section_data', NULL));
       $data['chart_title'][$_GET['destination']] = $edit['chart_title'];
@@ -3577,6 +3641,19 @@ function gv_blocks_weeklyVideoBlock() {
   //$out = '<object width="238" height="160"><param name="movie" value="http://www.youtube.com/v/' . $youtube_video_id . '?version=3&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/' . $youtube_video_id . '?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="238" height="160" allowscriptaccess="always" allowfullscreen="true"></embed></object>';
   
   return $out;
+}
+
+
+/**
+ * Returns an ad block by its name.
+ */
+function gv_blocks_getBlockFromVariable($var_name) {
+  switch ($var_name) {
+    
+    case 'gv_ourteam_header_data':
+      
+      return '<a href="/speed-test-tool"><div title="VoIP Speed Test Tool" ></div></a>';
+  }
 }
 
 

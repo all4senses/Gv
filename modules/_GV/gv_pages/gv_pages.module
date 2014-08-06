@@ -2507,6 +2507,26 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       //dpm($extra_data);
       $form['field_extra_data']['#access'] = FALSE;
       
+      
+      
+      
+        if (!empty($form['field_guest_author']['und'][0]['value']['#default_value'])) {
+          $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'];
+        }
+        else {
+          $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'] = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : '';
+        }
+        $form['field_guest_author']['#access'] = FALSE;
+        
+        $form['author']['guest_author'] = array(
+          '#type' => 'textfield',
+          '#title' => 'Guest Post author',
+          '#default_value' => $guest_author, //!empty($extra_data['guest_author']) ? $extra_data['guest_author'] : '',
+        );
+        
+        
+        
+      
       $form['field_p_name']['#weight'] = 1;
       
       $form['field_phone_type']['#weight'] = 2;

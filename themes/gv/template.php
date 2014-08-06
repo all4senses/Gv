@@ -867,6 +867,8 @@ function gv_preprocess_node(&$variables) {
   }
   if(isset($variables['node'])) {
     
+    global $user;
+    
     if($variables['node']->type == 'blog_post' || $variables['node']->type == 'news_post') {
       $variables['theme_hook_suggestions'][] = 'node__article';
     }
@@ -934,6 +936,12 @@ function gv_preprocess_node(&$variables) {
           $variables['theme_hook_suggestions'][] = 'node__preface__page404';
         }
     }
+    // Our team page
+    elseif($variables['node']->nid == 80 && $user->uid == 1) {
+      $variables['theme_hook_suggestions'][] = 'node__our_team';
+    }
+    
+    
     
   }
   
