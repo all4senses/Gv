@@ -40,6 +40,7 @@
               
               <div class="logo-share">
                 <?php
+                  $logo_block = NULL;
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     $logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
                     echo '<table><tbody><tr><td>' . $logo_block . '</td></tr></tbody></table>';

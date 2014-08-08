@@ -45,7 +45,7 @@
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
-              <h4>- No contracts or set-up fees -</h4>
+              <h4>No contracts or set-up fees</h4>
               
               <img id="q-image" src="/images/theme/lp7-phone.png" />
               
