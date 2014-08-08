@@ -2898,7 +2898,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                 $provider_options = isset($provider['p_data'][$provider_options_index]) ? $provider['p_data'][$provider_options_index] : NULL;
               }
               
-              $option_value = $provider_options[$options_set][$option_title];
+              $option_value = @$provider_options[$options_set][$option_title];
               
               $is_checkbox = is_int($option_value);
               $option_value = ($is_checkbox ? ($option_value ? 'Yes' : 'No') : ($option_value ? $option_value : 'N/A'));
