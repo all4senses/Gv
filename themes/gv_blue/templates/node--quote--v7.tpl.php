@@ -45,6 +45,7 @@
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
+              
               <img id="q-image" src="/images/theme/lp7-phone.png" />
               
               <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/service-quotes-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
