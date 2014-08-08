@@ -143,6 +143,7 @@ $provider_options_bu = array(
               'Anonymous Call Rejection' => 'checkbox',
               'Auto Attendant' => 'checkbox',
               'Busy Lamp Field' => 'checkbox',
+              'Business SMS' => 'checkbox', // New
               'Call Queuing' => 'checkbox',
               'Call Me Now' => 'checkbox',
               'Call Notifications' => 'checkbox',
@@ -173,9 +174,10 @@ $provider_options_bu = array(
               'Switchboard Software for Live Receptionist' => 'checkbox',
               'Three-way Calling' => 'checkbox',
               'Unlimited Extensions' => 'checkbox',
-              'Voicemail Transcriptions' => 'checkbox',
+              'Video Conferencing' => 'checkbox',
               'Virtual Extensions' => 'checkbox',
               //'Virtual Numbers' => 'checkbox',
+              'Voicemail Transcriptions' => 'checkbox',
           ),
           
           'Integrations' => array(
@@ -185,6 +187,9 @@ $provider_options_bu = array(
               'NetSuite' => 'checkbox',
               'SalesForce' => 'checkbox',
               'SugarCRM' => 'checkbox',
+              'Box' => 'checkbox',
+              'Dropbox' => 'checkbox',
+              'Google Drive' => 'checkbox',
           ),
           
           'Support' => array(
