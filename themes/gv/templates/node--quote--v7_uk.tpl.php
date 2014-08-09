@@ -22,7 +22,7 @@
     
       <div class="full logo">
 
-          <div id="gv-logo"> 
+          <div id="gv-logo">
             <?php 
               echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
@@ -45,8 +45,6 @@
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
-              <h4>No contracts or set-up fees</h4>
-              
               <img id="q-image" src="/images/theme/lp7-phone.png" />
               
               <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/service-quotes-uk-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
@@ -54,10 +52,9 @@
                     <div class="left">
                             
                             <div class="caption">Our Real-time Quotes Include:</div>
-                            <div class="text bullet v3"><strong>Side-by-side comparison of each solution</strong></div>
                             <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
                             <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
-                            <!-- <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div> -->
+                            <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div>
                             <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
                             
                             <!--
