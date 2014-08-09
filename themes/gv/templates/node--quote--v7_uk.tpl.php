@@ -22,7 +22,7 @@
     
       <div class="full logo">
 
-          <div id="gv-logo">
+          <div id="gv-logo"> 
             <?php 
               echo '<div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
