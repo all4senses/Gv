@@ -1861,17 +1861,15 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
       $data = unserialize(variable_get('gv_home_in_hlighted_4', NULL));
       
       
-//        $seo_welcome_node = gv_misc_getPrefaceByKey('front');
-//        $seo_welcome_node->title_no_link = TRUE;
-//        $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
-//        dpm($seo_welcome_node_view);
-  
+//       Add front metatags from Metatags module settings (filled by the root user).  
+//       
+//       
         //gv_misc_addMetatag('description', 'Share your VoIP phone experience with others. Use this quick form to submit your review and share your feedback');
       
         $metatags = metatag_metatags_view('global:frontpage', array());
         gv_misc_addMetatag('title', $metatags['title']['#attached']['metatag_set_preprocess_variable'][0][2]);
         gv_misc_addMetatag('description', $metatags['description']['#attached']['drupal_add_html_head'][0][0]['#value']);
-        dpm($metatags);
+        //dpm($metatags);
         
         // Metatags.
 //      gv_misc_addMetatag('title', 'Submit VoIP Phone Review');
