@@ -3772,7 +3772,11 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         if ($user->uid) {
           // Get all additional data for first/last names extraction.
-          $user = user_load($user->uid);
+          //$user = user_load($user->uid);
+          //https://drupal.org/node/1078614
+          //Notice: Undefined property: stdClass::$timestamp in _drupal_session_write()
+          $user = (object)array_merge((array)$user, (array)user_load($user->uid));
+          
           // Autofill first/last names and email.
           //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
           //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
@@ -8553,7 +8557,11 @@ function gv_pages_addReviewButton_form_submit(&$form, &$form_state) {
 function gv_pages_addPhoneReview_form($form, &$form_state, $node) {
   
   global $user;
-  $user = user_load($user->uid);
+  // Get all additional data .
+  //$user = user_load($user->uid);
+  //https://drupal.org/node/1078614
+  //Notice: Undefined property: stdClass::$timestamp in _drupal_session_write()
+  $user = (object)array_merge((array)$user, (array)user_load($user->uid));
   
   $form['phone_nid'] = array(
     '#type' => 'hidden',
