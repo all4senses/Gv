@@ -49,7 +49,8 @@
                     echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name, '</h2>', render($title_suffix);
                   }
                   
-                  echo gv_misc_getTrackingUrl('Visit Site', NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
+                  //echo gv_misc_getTrackingUrl('Visit Site', NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
+                  echo gv_misc_getTrackingUrl('', NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
                   
                 ?>
                 
