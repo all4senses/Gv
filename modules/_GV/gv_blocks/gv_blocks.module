@@ -414,6 +414,12 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['shopperapproved_badge'] = array(
+    'info' => 'Shopperapproved badge',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  
   return $blocks;
 }
 
@@ -844,7 +850,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getBlockFromVariable('gv_ourteam_header_data');
       break;
    
-            
+    case 'shopperapproved_badge':
+      $block['subject'] = ''; 
+      $block['content'] = gv_blocks_getBlockFromVariable('gv_shopperapproved_badge_data');
+      break;
+    
   }
 
   return $block;
@@ -3667,8 +3677,12 @@ function gv_blocks_getBlockFromVariable($var_name) {
   switch ($var_name) {
     
     case 'gv_ourteam_header_data':
-      
       return '<a href="/speed-test-tool"><div title="VoIP Speed Test Tool" ></div></a>';
+      
+      
+      
+    case 'gv_shopperapproved_badge_data':
+      return '<a href="http://www.shopperapproved.com/reviews/getvoip.com/" onclick="var nonwin=navigator.appName!=' . " 'Microsoft Internet Explorer'?'yes':'no'; var certheight=screen.availHeight-90; window.open(this.href,'shopperapproved','location='+nonwin+',scrollbars=yes,width=620,height='+certheight+',menubar=no,toolbar=no'); return false;" . ' "><img src="https://c683207.ssl.cf2.rackcdn.com/12265-r.gif" style="border: 0" alt="" oncontextmenu="var d = new Date(); alert(' . "'Copying Prohibited by Law - This image and all included logos are copyrighted by Shopper Approved \251 '+d.getFullYear()+'.'); return false;" . '" /></a>';
   }
 }
 
