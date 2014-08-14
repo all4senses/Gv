@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Schema.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function resource_schema() {
+  $schema = array();
+
+  $schema['resource_aggregation'] = array(
+    'description' => t("Table for aggregation dynamic resource tracking"),
+    'fields' => array(
+      'hash' => array(
+        'description' => 'Primary identifier',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'map' => array(
+        'description' => 'File map, serialized array of file path',
+        'type' => 'text',
+      ),
+      'type' => array(
+        'description' => "File type, e.g. 'css' or 'js', could be extended",
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'version' => array(
+        'description' => 'Current version number.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'created' => array(
+        'description' => 'Unix timestamp of creation.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'If set to 0, this entry needs refresh.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'lifetime' => array(
+        'description' => 'Entry lifetime.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('hash'),
+    'indexes' => array(
+      'aggregation_type_idx' => array('type'),
+      'aggregation_created_idx' => array('created'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Adds the '{resource_aggregation}.version'
+ * and '{resource_aggregation}.status' fields.
+ */
+function resource_update_7001() {
+  db_add_field('resource_aggregation', 'version', array(
+    'description' => 'Current version number.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 1,
+  ));
+  db_add_field('resource_aggregation', 'status', array(
+    'description' => 'If set to 0, this entry needs refresh.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 1,
+  ));
+}

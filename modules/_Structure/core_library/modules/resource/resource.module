@@ -1,0 +1,272 @@
+<?php
+
+/**
+ * @file
+ * Core Library module.
+ */
+
+use Resource\Exception\LockConflict;
+use Resource\Exception\NotFound;
+use Resource\Provider\Registry as ProviderRegistry;
+
+/**
+ * Register our own autoloader.
+ */
+spl_autoload_register(function($classname) {
+  $parts = explode('\\', $classname);
+  if ('Resource' === $parts[0] || 'Image' === $parts[0] || 'Aggregation' === $parts[0] || 'Fortune' === $parts[0]) {
+    $filename = __DIR__ . '/lib/' . implode('/', $parts) . '.php';
+    return (bool) include_once $filename;
+  }
+  return false;
+});
+
+/**
+ * Implements hook_menu().
+ */
+function resource_menu() {
+  $items = array();
+  foreach (ProviderRegistry::getSupportedSchemes() as $scheme) {
+    $items[ProviderRegistry::getInstance($scheme)->getWorkingPath()] = array(
+      'page callback'     => 'resource_void',
+      'delivery callback' => 'resource_deliver',
+      'access callback'   => TRUE,
+      'type'              => MENU_CALLBACK,
+    );
+  }
+  return $items;
+}
+
+/**
+ * Implements menu_alter().
+ * 
+ * Removes core image style URL.
+ */
+function resource_menu_alter(&$items) {
+  unset($items[ProviderRegistry::getInstance('public')->getWorkingPath() . '/styles/%image_style']);
+}
+
+/**
+ * Implements hook_stream_wrappers().
+ * 
+ * Adds 'resource' stream wrapper that will be the base of DynamicResource API.
+ */
+function resource_stream_wrappers() {
+  return array(
+    'resource' => array(
+      'name'        => t('Public resources'), 
+      'class'       => 'Resource\StreamWrapper', 
+      'description' => t('Public local files generated and served by the webserver.'), 
+      'type'        => STREAM_WRAPPERS_LOCAL_NORMAL,
+    ),
+  );
+}
+
+/**
+ * Implements hook_resource_provider_info().
+ * 
+ * Provide some default and samples implementation of provider and various
+ * business logic that can be implemented using the DynamicResource API.
+ */
+function resource_resource_provider_info() {
+  return array(
+    'fortunes'    => 'Fortune\Resource\FortuneProvider',
+    'aggregation' => 'Aggregation\Resource\AggregationProvider',
+    'styles'      => 'Image\Resource\ImageProvider',
+  );
+}
+
+/**
+ * Void menu item.
+ */
+function resource_void() {}
+
+/**
+ * Delivery callback for files.
+ */
+function resource_deliver() {
+  $lockName = NULL;
+  $path = $_GET['q'];
+
+  try {
+    $resource = ProviderRegistry::getInstanceByPath($path)->getResource($path);
+
+    if ($resource->needsLock()) {
+      // Attempt the lock. Because semaphore names are limited to 255 chars, we
+      // need to use a shorten predictable algorithm. MD5 seems perfect because
+      // PHP strings do not have a hashcode generation function.
+      $lockName = md5($path);
+      if (!lock_acquire($lockName, 15)) {
+        throw new LockConflict("Resource '" . $path . "' is locked.");
+      }
+    }
+
+    // We need this temporary step in order for the lock to be released later.
+    $resource->build();
+
+    // Never forget to release the lock, even if the page exit will gracefully
+    // release it anyway, we never are protected against race conditions nor
+    // fatal errors.
+    if (isset($lockName)) {
+      lock_release($lockName);
+    }
+
+    // Allow modules to alter headers.
+    $headers = $resource->getHttpHeaders();
+    drupal_alter('resource_http_headers', $headers, $uri);
+
+    // Set valid HTTP headers for the current resource.
+    foreach ($headers as $name => $value) {
+      drupal_add_http_header($name, $value, FALSE);
+    }
+
+    // Magic function that will mostly do an echo of the file. For huge file,
+    // this function should probably display it using a buffered algorithm.
+    drupal_send_headers();
+    $resource->display();
+  }
+  catch (LockConflict $e) {
+    // A 503 code seems wise enough here, still open to discuss this though.
+    // The Retry-After seems not to be widely used, but at least some bots
+    // will use it.
+    drupal_add_http_header('Status', '503 Service Unavailable');
+    drupal_add_http_header('Retry-After', '15');
+    echo "503 Service Unavailable";
+  }
+  catch (NotFound $e) {
+    drupal_add_http_header('Status', '404 Not Found');
+    echo "404 Not Found";
+  }
+  catch (Exception $e) {
+    drupal_add_http_header('Status', '500 Internal Server Error');
+    echo "500 Internal Server Error";
+  }
+  // Force exit, do not allow any further operation on 404.
+  exit();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function resource_form_system_file_system_settings_alter(&$form, &$form_state) {
+  $form['file_resource_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Dynamic resources file system path'),
+    '#default_value' => variable_get('file_resource_path'),
+    '#maxlength' => 255,
+    '#description' => t('A local file system path where dyanmically generated resources files will be stored. This directory must exist and be writable by Drupal. This directory must be relative to the Drupal installation directory and be accessible over the web.'),
+    '#after_build' => array('system_check_directory'),
+  );
+  $form['actions']['#weight'] = 1000;
+}
+
+/**
+ * Implementation of hook_flush_caches().
+ * 
+ * Force aggregated files refresh.
+ */
+function resource_flush_caches() {
+  db_update('resource_aggregation')->fields(array('status' => 0))->execute();
+  return array();
+}
+
+/**
+ * Implements hook_element_info_alter().
+ * 
+ * @package Aggregation
+ */
+function resource_element_info_alter(&$items) {
+  $items['styles']['#aggregate_callback'] = 'resource_aggregation_aggregate_callback';
+} 
+
+/**
+ * This where the aggregation plugin messes up with core badly in order to
+ * get and save predictable files maps.
+ * 
+ * @package Aggregation
+ */
+function resource_aggregation_aggregate_callback(&$css_groups) {
+  // This should be removed from here and set up in core.
+  $preprocess_css = (variable_get('preprocess_css', FALSE) && (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'update'));
+
+  foreach ($css_groups as $key => $group) {
+    switch ($group['type']) {
+      case 'file':
+        if ($group['preprocess'] && $preprocess_css) {
+          // Skip this group if empty.
+          if ($url = resource_aggregation_create_url($group['items'])) {
+            $css_groups[$key]['data'] = $url;
+          }
+        }
+        break;
+      case 'inline':
+        $css_groups[$key]['data'] = '';
+        foreach ($group['items'] as $item) {
+          $css_groups[$key]['data'] .= drupal_load_stylesheet_content($item['data'], $item['preprocess']);
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Custom 'style' element '#aggregate_callback' handler.
+ * 
+ * @package Aggregation
+ */
+function resource_aggregation_create_url($files) {
+  if (empty($files)) {
+    return;
+  }
+
+  $map = array();
+
+  foreach ($files as $name => $info) {
+    $map[] = $info['data'];
+  }
+
+  // Compute our unique hash.
+  $hash = drupal_hash_base64(serialize($map));
+
+  // Check if already exists.
+  $existing = db_select('resource_aggregation', 'a')
+    ->fields('a', array('created', 'version', 'status'))
+    ->condition('hash', $hash)
+    ->execute()
+    ->fetchObject();
+
+  $version = (int)(isset($existing->version) ? $existing->version : 1);
+
+  if (FALSE === $existing) {
+    // Create new record if does not exists.
+    $record = array(
+      'hash' => $hash,
+      'created' => time(),
+      'map' => serialize($map),
+      'type' => 'css',
+      'version' => $version,
+    );
+    drupal_write_record('resource_aggregation', $record);
+  }
+  else if (!$existing->status) {
+    // If already exists, check the latest file modification date to be lower
+    // than the current created date. If so, we can safely assume file didn't
+    // changed in between.
+    foreach ($map as $file) {
+      if (filemtime($file) > $existing->created) {
+        // Update the entry.
+        db_update('resource_aggregation')
+          ->fields(array(
+            'created' => time(),
+            'version' => ++$version,
+          ))
+          ->condition('hash', $hash)
+          ->execute();
+        break;
+      }
+    }
+  }
+
+  // Create the final URL.
+  return file_create_url('resource://aggregation/' . $version . '/' . $hash . '.css');
+}
