@@ -34,7 +34,7 @@ function googlenews_admin_settings() {
   $form['googlenews_cache_timeout'] = array(
     '#type' => 'textfield',
     '#title' => t('Cache timeout (minutes)'),
-    '#default_value' => variable_get('googlenews_cache_timeout', 15),
+    '#default_value' => variable_get('googlenews_cache', 15),
     '#description' => t('The number of minutes that the sitemap file will be cached for before it is regenerated.'),
   );
 
