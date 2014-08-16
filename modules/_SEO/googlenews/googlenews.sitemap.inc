@@ -21,12 +21,9 @@ function googlenews_getgooglenews() {
 
   // If nothing loaded from the cache, build it now.
   if (empty($content)) {
-    // Get a list of all nodes to be output.
-    $nodes = googlenews_list_nodes();
-
     $content = '<?xml version="1.0" encoding="UTF-8"?>';
     $content .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-    $content .= '  xmlns:n="http://www.google.com/schemas/sitemap-news/0.9">';
+    $content .= '  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
 
     // Load the publication name.
     $publication_name = variable_get('googlenews_publication_name', '');
@@ -43,18 +40,27 @@ function googlenews_getgooglenews() {
       }
     }
 
-    // Loop through each node.
-    foreach ($nodes as $node) {
+    // Loop through each record.
+    foreach (googlenews_list_nodes() as $record) {
+      // Load the node.
+      $node = node_load($record->nid);
+
+      // Get the node's language, use the global language string if the node
+      // does not have one assigned.
+      $langcode = entity_language('node', $node);
+      if ($langcode == LANGUAGE_NONE) {
+        $langcode = $GLOBALS['language']->language;
+      }
+
       $content .= '<url>';
       $content .= '<loc>' . url('node/' . $node->nid, array('absolute' => TRUE)) . '</loc>';
       $content .= '<news:news>';
       $content .= '<news:publication>';
       $content .= '<news:name>' . $publication_name . '</news:name>';
-      $content .= '<news:language>' . check_plain(entity_language('node', $node)) . '</news:language>';
+      $content .= '<news:language>' . check_plain($langcode) . '</news:language>';
 
       // Insert any added tags if they have values; processing tokens first.
       if (!empty($tags)) {
-        $node = node_load($node->nid);
         foreach ($tags as $tag => $value) {
           // Some items can be output as a comma-separated list.
           if (is_array($value)) {
@@ -76,7 +82,7 @@ function googlenews_getgooglenews() {
 
     // Cache the output for later.
     $timeout = time() + (intval(variable_get('googlenews_cache_timeout', 15)) * 60);
-    cache_set($cid, $content, $timeout);
+    cache_set($cid, $content, 'cache', $timeout);
   }
 
   drupal_add_http_header('Content-Type', 'text/xml; charset=utf-8');

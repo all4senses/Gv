@@ -37,7 +37,8 @@ function node_noindex_node_load($nodes, $types) {
  * Implements hook_node_view().
  */
 function node_noindex_node_view($node, $view_mode = 'full') {
-  if (_node_noindex_node_has_noindex($node) && $view_mode == 'full') {
+  // We make sure we are on the node page.
+  if (_node_noindex_node_has_noindex($node) && $view_mode == 'full' && ($node_mgo = menu_get_object()) && $node->nid == $node_mgo->nid) {
     $element = array(
       '#tag' => 'meta',
       '#attributes' => array(
@@ -134,6 +135,9 @@ function node_noindex_form_node_type_form_alter(&$form, $form_state) {
  *  true if the node has the noindex setting.
  */
 function _node_noindex_node_has_noindex($node) {
+  if (!isset($node->nid)) {
+    return FALSE;
+  }
   if (isset($node->noindex)) {
     return $node->noindex;
   }

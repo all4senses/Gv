@@ -270,7 +270,6 @@ function autocomplete_deluxe_element_process($element) {
 
   $js_settings['autocomplete_deluxe'][$html_id] = array(
     'input_id' => $html_id,
-    'min_length' => isset($element['#autocomplete_min_length']) ? $element['#autocomplete_min_length'] : 0,
     'multiple' => $element['#multiple'],
     'required' => $element['#required'],
     'limit' => isset($element['#limit']) ? $element['#limit'] : 10,
@@ -316,6 +315,7 @@ function autocomplete_deluxe_element_process($element) {
     return $element;
   }
   $element['#attached']['js'][] = array('data' => $js_settings, 'type' => 'setting');
+  $element['#tree'] = TRUE;
 
   return $element;
 }
@@ -352,6 +352,7 @@ function autocomplete_deluxe_after_build($element, &$form_state) {
     // Replace all double double quotes and space with a comma. This will allows
     // us to keep entries in double quotes.
     $element['#value'] = str_replace('"" ""', ',', $element['#value']);
+    $element['#value'] = str_replace('""  ""', ',', $element['#value']);
     // Remove the double quotes at the beginning and the end from the first and
     // the last term.
     $element['#value'] = substr($element['#value'], 2, strlen($element['#value']) - 4);

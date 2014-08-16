@@ -1,17 +1,25 @@
-name = Meta tags
+name = Metatag
 description = "Adds support and an API to implement meta tags."
-package = Meta tags
+package = SEO
 core = 7.x
-dependencies[] = token
+
+; This requires Drupal 7.28 or newer as it fixes the [node:summary] token that
+; was previously broken.
+dependencies[] = system (>=7.28)
+
+; CTools and Token are also required.
 dependencies[] = ctools
+dependencies[] = token
+
 configure = admin/config/search/metatags
 
 files[] = metatag.inc
+files[] = metatag.migrate.inc
 files[] = metatag.test
 
-; Information added by drupal.org packaging script on 2012-04-25
-version = "7.x-1.0-alpha6"
+; Information added by Drupal.org packaging script on 2014-08-05
+version = "7.x-1.0-rc2"
 core = "7.x"
 project = "metatag"
-datestamp = "1335375980"
+datestamp = "1407246828"
 

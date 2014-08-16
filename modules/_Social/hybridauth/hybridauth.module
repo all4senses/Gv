@@ -11,6 +11,7 @@ define('HYBRIDAUTH_HASH_SALT', 'hybridauth_hash_salt');
  */
 function hybridauth_hook_info() {
   $hooks = array(
+    'hybridauth_provider_config_alter',
     'hybridauth_username_alter',
     'hybridauth_profile_alter',
     'hybridauth_userinfo_alter',
@@ -74,14 +75,14 @@ function hybridauth_menu() {
 
   $items['hybridauth/endpoint'] = array(
     'page callback' => 'hybridauth_endpoint',
-    'access callback' => TRUE,
+    'access arguments' => array('use hybridauth'),
     'file' => 'hybridauth.pages.inc',
     'type' => MENU_CALLBACK,
   );
   $items['hybridauth/window/%hybridauth_provider'] = array(
     'page callback' => 'hybridauth_window_start',
     'page arguments' => array(2),
-    'access callback' => TRUE,
+    'access arguments' => array('use hybridauth'),
     'file' => 'hybridauth.pages.inc',
     'type' => MENU_CALLBACK,
   );
@@ -128,12 +129,23 @@ function hybridauth_provider_load($requested_provider_id) {
 }
 
 /**
+ * Implements hook_menu_site_status_alter().
+ */
+function hybridauth_menu_site_status_alter(&$menu_site_status, $path) {
+  // Allow access to ulogin path even if site is in offline mode.
+  if ($menu_site_status == MENU_SITE_OFFLINE && user_is_anonymous() && substr($path, 0, 10) == 'hybridauth') {
+    $menu_site_status = MENU_SITE_ONLINE;
+  }
+}
+
+/**
  * Implements hook_block_info().
  */
 function hybridauth_block_info() {
-  $blocks['hybridauth']['info'] = t('User login - HybridAuth widget only');
-  // Shouldn't be cached.
-  $blocks['hybridauth']['cache'] = DRUPAL_NO_CACHE;
+  $blocks['hybridauth'] = array(
+    'info' => t('User login - HybridAuth widget only'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -145,8 +157,11 @@ function hybridauth_block_view($delta = '') {
   if ($delta == 'hybridauth' && !user_is_logged_in() && user_access('use hybridauth')) {
     $block = array();
     $block['subject'] = t('User login');
-    $element['#type'] = 'hybridauth_widget';
-    $block['content'] = drupal_render($element);
+    $block['content'] = array(
+      'hybridauth' => array(
+        '#type' => 'hybridauth_widget',
+      ),
+    );
     return $block;
   }
 }
@@ -273,6 +288,7 @@ function hybridauth_element_info() {
     '#hybridauth_widget_icon_pack' => variable_get('hybridauth_widget_icon_pack', 'hybridauth_32'),
     '#hybridauth_destination' => variable_get('hybridauth_destination', ''),
     //'#hybridauth_destination_error' => '',
+    '#hybridauth_query' => array(),
     '#hybridauth_onclick' => '',
     '#attached' => array(
       // Add cookie library for last used provider feature.
@@ -335,6 +351,9 @@ function hybridauth_username_alter(&$name, $account) {
       $pattern = str_replace('[user:name]', $account2->name, $hybridauth_pattern);
       $hybridauth_name = token_replace($pattern, array('user' => $account2), array('clear' => TRUE));
       $name = trim(strip_tags($hybridauth_name));
+    }
+    if (empty($name)) {
+      $name = $account2->name;
     }
   }
 }
@@ -407,10 +426,23 @@ function hybridauth_user_view($account, $view_mode, $langcode) {
 function hybridauth_ctools_plugin_type() {
   return array(
     'icon_pack' => array(
+      'cache' => TRUE,
       // Themes can offer this plugin.
       'load themes' => TRUE,
     ),
+    'provider' => array(
+      'cache' => TRUE,
+    ),
   );
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hybridauth_ctools_plugin_directory($module, $type) {
+  if ($module == 'hybridauth' && ($type == 'icon_pack' || $type == 'provider')) {
+    return 'plugins/' . $type;
+  }
 }
 
 /**
@@ -430,12 +462,11 @@ function hybridauth_get_icon_packs() {
 }
 
 /**
- * Implements hook_ctools_plugin_directory().
+ * Load metadata for a single provider without loading all providers.
  */
-function hybridauth_ctools_plugin_directory($module, $type) {
-  if ($module == 'hybridauth' && $type == 'icon_pack') {
-    return 'plugins/icon_pack';
-  }
+function hybridauth_get_provider($name) {
+  ctools_include('plugins');
+  return ctools_get_plugins('hybridauth', 'provider', $name);
 }
 
 /**
@@ -486,7 +517,6 @@ function hybridauth_providers_list() {
       'Geni' => t('Geni'),
       'GitHub' => t('GitHub'),
       'Goodreads' => t('Goodreads'),
-      // 'Gowalla' => t('Gowalla'), //RIP
       'Identica' => t('Identica'),
       'Instagram' => t('Instagram'),
       'LastFM' => t('LastFM'),
@@ -509,7 +539,7 @@ function hybridauth_providers_list() {
     );
     foreach (hybridauth_providers_files() as $name => $file) {
       if (!array_key_exists($name, $raw_providers)) {
-        $raw_providers[$name] = $name;
+        $raw_providers[$name] = t($name);
       }
     }
 
@@ -517,7 +547,7 @@ function hybridauth_providers_list() {
     $weights = array();
 
     foreach ($raw_providers as $provider_id => $provider_name) {
-      $weights[$provider_id] = variable_get('hybridauth_provider_' . $provider_id . '_weight', 0);
+      $weights[$provider_id] = variable_get('hybridauth_provider_' . $provider_id . '_weight', 50);
     }
     asort($weights);
 
@@ -670,10 +700,12 @@ function hybridauth_get_config() {
 /**
  * Returns provider config.
  */
-function hybridauth_get_provider_config($provider_id, $enabled_only = TRUE) {
+function hybridauth_get_provider_config($provider_id) {
   $config = NULL;
   $enabled = variable_get('hybridauth_provider_' . $provider_id . '_enabled', 0);
-  if (!$enabled_only || $enabled) {
+  if ($enabled) {
+    $language_default = language_default();
+    $language_default->prefix = '';
     $config = array(
       'enabled' => $enabled,
       'keys' => array(
@@ -683,11 +715,20 @@ function hybridauth_get_provider_config($provider_id, $enabled_only = TRUE) {
       ),
       'scope' => variable_get('hybridauth_provider_' . $provider_id . '_scope', ''),
       'display' => variable_get('hybridauth_provider_' . $provider_id . '_display', ''),
-      'hauth_return_to' => url('hybridauth/endpoint'),
+      'hauth_return_to' => url('hybridauth/endpoint', array('absolute' => TRUE, 'language' => $language_default)),
     );
     if (is_array($config['scope'])) {
       $config['scope'] = array_filter($config['scope']);
     }
+
+    if ($provider = hybridauth_get_provider($provider_id)) {
+      if ($function = ctools_plugin_get_function($provider, 'configuration_callback')) {
+        $function($config, $provider_id);
+      }
+    }
+
+    // Allow other modules to alter the provider config.
+    drupal_alter('hybridauth_provider_config', $config, $provider_id);
   }
 
   return $config;
@@ -716,7 +757,24 @@ function _hybridauth_library_path() {
   $library_path = &drupal_static(__FUNCTION__, NULL);
 
   if (!isset($library_path)) {
-    $library_path = variable_get('hybridauth_library_path', module_exists('libraries') ? libraries_get_path('hybridauth') : 'sites/all/libraries/hybridauth');
+    // Check if the variable is set.
+    $library_path = variable_get('hybridauth_library_path', '');
+
+    if (empty($library_path)) {
+      // Use libraries module or profile directory, fallback to standard directory.
+      if (module_exists('libraries')) {
+        $library_path = libraries_get_path('hybridauth');
+      }
+      else {
+        $profile = drupal_get_path('profile', drupal_get_profile());
+        $library_path = $profile . '/libraries/hybridauth';
+        if (!file_exists($library_path)) {
+          $library_path = 'sites/all/libraries/hybridauth';
+        }
+      }
+    }
+
+    // Check for the /Hybrid/Auth.php file.
     if (file_exists($library_path . '/Hybrid/Auth.php')) {
     }
     elseif (file_exists($library_path . '/hybridauth/Hybrid/Auth.php')) {
@@ -741,6 +799,9 @@ function _hybridauth_add_icon_pack_files($name) {
     }
     if (!empty($icon_pack['js'])) {
       drupal_add_js($icon_pack['path'] . '/' . $icon_pack['js']);
+    }
+    if ($function = ctools_plugin_get_function($icon_pack, 'initialize_callback')) {
+      $function();
     }
   }
 }
