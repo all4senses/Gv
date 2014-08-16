@@ -41,6 +41,7 @@ function themekey_ui_get_path_theme($path) {
       ->condition('parent', 0)
       ->execute()
   ) {
+  
     foreach ($result as $row) {
       $query = db_select('themekey_properties', 'tp')
       ->condition('parent', $row->id);
@@ -49,6 +50,7 @@ function themekey_ui_get_path_theme($path) {
         return array($row->id, $row->theme);
       }
     }
+    
   }
 
   return array(0, 'default');

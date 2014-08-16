@@ -28,15 +28,15 @@ function themekey_ui_settings_form() {
   themekey_ui_theme_build_select_form(
     $form,
     t('Selectable Themes'),
-    t('Select all the themes that should be provided in theme selectors.'),
+    t('Select all the the themes that should be provided in theme selectors.'),
     variable_get('themekey_ui_selectable_themes', array('default')),
     NULL,
     TRUE,
     'themekey_ui_selectable_themes',
     list_themes(),
-    FALSE,
-    TRUE
-  );
+    FALSE);
+
+  $form['themekey_ui_themes']['themekey_ui_selectable_themes']['#type'] = 'checkboxes';
 
   $form['themekey_ui'] = array(
     '#type' => 'fieldset',
@@ -83,10 +83,19 @@ function themekey_ui_settings_form() {
 
   $form['themekey_ui']['themekey_ui_author'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Let the user select a theme that will be used to display all content she creates.'),
+    '#title' => t('Let the user select a theme for her nodes in her user profile'),
     '#default_value' => variable_get('themekey_ui_author', 0),
-    '#description' => t("Assign themes from user profile. All content created by a user will be shown to all visitors using the theme they selected in their profile. This also includes the user's contact form, profile page, and blog pages. If Administrative theme selection options are used ThemeKey Compatibility must be enabled and configured to allow ThemeKey to retain control in the theme switching rule chain for 'edit' and 'add' pages."),
+    '#description' => t('Assign themes from user profile. All nodes created by a user will be shown to all visitors using the theme she selected in her profile.'),
   );
+
+  if (module_exists('blog')) {
+    $form['themekey_ui']['themekey_ui_blog_author'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Let the user select a theme for her blog pages'),
+      '#default_value' => variable_get('themekey_ui_blog_author', 0),
+      '#description' => t('Assign themes to personal blogs from user profile. Requires "%themekey_ui_author" to be activated.', array('%themekey_ui_author' => t('Let the user select a theme for her nodes in her user profile'))),
+    );
+  }
 
   $form['buttons']['submit'] = array(
     '#type' => 'submit',
@@ -143,7 +152,7 @@ function themekey_ui_settings_form_submit($form, &$form_state) {
   }
 
   themekey_update_static_rule('themekey_ui:node_triggers_theme', $form_state['values']['themekey_ui_nodeform']);
-  themekey_update_static_rule('themekey_ui:author_triggers_theme', $form_state['values']['themekey_ui_author']);
+  themekey_update_static_rule('themekey_ui:node_author_triggers_theme', $form_state['values']['themekey_ui_author']);
   themekey_update_static_rule('themekey_ui:blog_author_triggers_theme', array_key_exists('themekey_ui_blog_author', $form_state['values']) ? $form_state['values']['themekey_ui_blog_author'] : FALSE);
 
   drupal_set_message(t('The configuration options have been saved.'));
@@ -181,7 +190,7 @@ function themekey_ui_theme_select_form(&$form, $title, $description, $default = 
       unset($themes[$name]);
     }
   }
-  themekey_ui_theme_build_select_form($form, $title, $description, $default, $weight, $collapsed, $element_key, $themes, /* add_default */ TRUE);
+  themekey_ui_theme_build_select_form($form, $title, $description, $default, $weight, $collapsed, $element_key, $themes, /*add_default*/ TRUE);
 }
 
 
@@ -216,11 +225,8 @@ function themekey_ui_theme_select_form(&$form, $title, $description, $default = 
  * @param $add_default
  *   boolean, TRUE if 'System default' should be
  *   be provided as options in the select form
- *
- * @param $multiple
- *   boolean, TRUE if multiple themes should be selectable
  */
-function themekey_ui_theme_build_select_form(&$form, $title, $description, $default, $weight, $collapsed, $element_key, $themes, $add_default, $multiple = FALSE) {
+function themekey_ui_theme_build_select_form(&$form, $title, $description, $default, $weight, $collapsed, $element_key, $themes, $add_default) {
   $theme_options = themekey_theme_options();
 
   $form['themekey_ui_themes'] = array(
@@ -271,7 +277,7 @@ function themekey_ui_theme_build_select_form(&$form, $title, $description, $defa
   }
 
   $form['themekey_ui_themes'][$element_key] = array(
-    '#type' => $multiple ? 'checkboxes' : 'radios',
+    '#type' => 'radios',
     '#options' => $options,
     '#default_value' => $default,
   );
