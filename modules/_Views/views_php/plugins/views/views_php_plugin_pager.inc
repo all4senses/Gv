@@ -10,7 +10,13 @@ class views_php_plugin_pager extends views_php_plugin_wrapper  {
   /**
    * Perform any needed actions just prior to the query executing.
    */
-  public function pre_execute($query) {
+  
+  // a4s patch
+  // https://www.drupal.org/node/2276165
+  // original
+  //public function pre_execute($query) {
+  public function pre_execute(&$query) {
+    
     $this->wrapped->pre_execute($query);
 
     foreach (array(/*'argument',*/ 'field', 'filter', 'sort', /*'relationship'*/) as $type) {
@@ -23,6 +29,9 @@ class views_php_plugin_pager extends views_php_plugin_wrapper  {
 
     $this->wrapped->view->query->set_limit(0);
     $this->wrapped->view->query->set_offset(0);
+    
+    // a4s patch
+    $query->range(0,666666);
   }
 
   /**
