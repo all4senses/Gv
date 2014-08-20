@@ -9055,7 +9055,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         
         if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name, $all_data_quick)) {
-          watchdog('p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
+          //watchdog('p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 // Provider name with a link to provider page
@@ -9064,7 +9064,6 @@ function gv_misc_getProviderQuickData($target, $data) {
                 ;
         }
         
-        watchdog('--- p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
         
         /*
 //        elseif (!empty($all_data_quick[$data['data']->nid]['i_logo_uri'])) {
@@ -9075,6 +9074,9 @@ function gv_misc_getProviderQuickData($target, $data) {
         */
         
       }
+      
+      watchdog('--- p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
+        
         
         
     case 'logo_article':
