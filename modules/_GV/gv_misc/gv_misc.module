@@ -9116,7 +9116,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       if ($target == 'logo_chart') {
            // Provider name with a link to provider page
-          $out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))));
+          //$out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))));
+          $out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
       } 
           
       return $out;
