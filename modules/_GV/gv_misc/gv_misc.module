@@ -9075,7 +9075,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         
       }
       
-      watchdog('--- p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
+      watchdog('--- p logos bu', 'server_uri = ' . @$_SERVER['REQUEST_URI'] . ', server_urL = ' . @$_SERVER['REDIRECT_URL'] . ', nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
         
         
         
