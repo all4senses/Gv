@@ -1,5 +1,9 @@
   <?php
-    if ($node->title == 'Request a Quote page v5 Final') {
+  // Same as V4 but only for UK
+   
+  
+  
+    if ($node->title == 'Request a Quote page v6 Final') {
 //      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
 //      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
 //      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
@@ -16,7 +20,7 @@
 
 
 
-<div id="v5">
+<div id="v6">
   <div id="quote-content">
 
     
@@ -40,11 +44,10 @@
         
         <div id="main-content">
 
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/business-systems-uk-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
-                    <?php //echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
-                    <!--<div class="field-name-field-q-image"><img typeof="foaf:Image" src="http://getvoip.com/sites/default/files/qp-v4-girl2.png" alt="" title=""></div>-->
-                    
+                    <?php echo '<div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div>'; ?>
+
                     <div class="left">
                             <h2>Save Up To 80% On a Better<br/> Business Phone System!</h2>
                             <div class="caption">Benefits & Features:</div>
@@ -82,16 +85,18 @@
                 // 
                 //global $user; 
                 //if ($user->uid) 
-//                {
-//                  // Colorbox for popup window.
-//                  //1, 3, 4, 
-//                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-//                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-//
-//                  // Exit intent Ad block main js.
-//                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-//                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
-//                }
+                {
+                  /*
+                  // Colorbox for popup window.
+                  //1, 3, 4, 
+                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+
+                  // Exit intent Ad block main js.
+                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
+                  */
+                }
 
               
               ?>
@@ -100,24 +105,19 @@
           
           
 
-              <?php if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'): ?>
+              <?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-uk-final'): ?>
 
                   <div class="right final">
                     <?php  
-                    //
-                    //
-                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+                    //echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
                     
-                    
-//                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
-//                            , '<img src="/sites/all/themes/bvc/css/images/click-here-button.png" />'
-//                        , '</a>'
-//                        , '<div class="quote-final">' 
-//                          , '<p><strong>Thank you</strong> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote.</p>'
-//                          , '<p>In the meantime, visit <a href="http://getvoip.com/business">GetVoIP.com</a> to browse featured business phone providers.</p>' 
-//                        , '</div>';
-                    
-                    
+                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
+                            , '<img src="/sites/all/themes/bvc/css/images/click-here-button.png" />'
+                        , '</a>'
+                        , '<div class="quote-final">' 
+                          , '<p><strong>Thank you</strong> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote.</p>'
+                          , '<p>In the meantime, visit <a href="http://getvoip.com/business">GetVoIP.com</a> to browse featured business phone providers.</p>' 
+                        , '</div>';
                     ?>
                   </div>
               <?php else: ?>
@@ -126,7 +126,7 @@
                   
                   <div class="right">
                     <div id="right-bottom">
-                      <?php echo gv_blocks_get_requestQuoteForPage_v5(); ?>
+                      <?php echo gv_blocks_get_requestQuoteForPage_v6(); ?>
                       <div class="bottom-clear"></div> 
                     </div>
                   </div>
@@ -154,7 +154,7 @@
 
             <div class="quotes one">
               <div class="text">"GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system."</div>
-              <div class="source"><span class="image"></span>Chris Rabbu, VP of Marketing at Vocalocity, Inc.</div>
+              <div class="source"><span class="image"></span>Chris Rabbu, VP of Marketing at Vonage, Inc.</div>
             </div>
             <div class="bottom-clear"></div> 
           </div>
@@ -182,7 +182,7 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/lp-slider-logos-v41.jpg" alt="Supported by Major VoIP Brands" />';
+                echo '<img src="http://getvoip.com/sites/all/themes/gv_orange/css/images/lp-slider-logos-v61.jpg" alt="Supported by Major VoIP Brands" />';
 
             ?>
 
@@ -242,13 +242,14 @@
 
   </div> <!-- End of <div id="quote-content"> -->
   
-</div> <!-- End of <div id="v4"> -->
+</div> <!-- End of <div id="v6"> -->
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($_SERVER['REDIRECT_URL'] == '/business-systems-uk-final'): /* If we are on the final page, after the submission */ ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/lp-iscope'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/business-systems'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
+            
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
             /* <![CDATA[ */
@@ -268,12 +269,17 @@
             <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
             </div>
             </noscript>
+            
+            <!-- inserted by me on 21.01.2014 -->
+            <script type="text/javascript"> if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script> <script id="mstag_tops" type="text/javascript" src="//flex.msn.com/mstag/site/b2106e00-2863-40e4-844c-f95b8ba90d29/mstag.js"></script> <script type="text/javascript"> mstag.loadTag("analytics", {dedup:"1",domainId:"1856373",type:"1",actionid:"210748"})</script> 
+            <noscript> <iframe src="//flex.msn.com/mstag/tag/b2106e00-2863-40e4-844c-f95b8ba90d29/analytics.html?dedup=1&domainId=1856373&type=1&actionid=210748" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
+            
           <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/lp-iscope";</script>
+            <script>top.location.href="http://getvoip.com/business-systems";</script>
           <?php endif;*/?>
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'):
-// So we are on the lending page '/lp-iscope' 
+<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'):
+// So we are on the lending page '/business-systems' 
 ?>
     
   <!-- Google Code for Remarketing tag -->
@@ -294,5 +300,5 @@
   </div>
   </noscript>
   
-<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/lp-iscope-final'):?>
+<?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/business-systems-final'):?>
   
