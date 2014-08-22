@@ -108,7 +108,7 @@
                     
                     
                     echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
-                            , '<img src="/sites/all/themes/bvc/css/images/click-here-button.png" />'
+                            , '<img src="/sites/all/themes/gv_blue/css/images/click-here-button.png" />'
                         , '</a>'
                         , '<div class="quote-final">' 
                           , '<p><strong>Thank you</strong> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote.</p>'
