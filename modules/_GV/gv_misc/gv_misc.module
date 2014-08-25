@@ -5076,8 +5076,8 @@ function gv_misc_leadRoute_REST_IN() {
   
     
       $submission = array(
-        'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : '',
-        'Quote for' => isset($post['q_for']) ? $post['q_for'] : '',
+        'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : 'xxxxxxxxxxxxxxxxx',
+        'Quote for' => isset($post['q_for']) ? $post['q_for'] : 'yyyyy',
         'Quote type' => isset($post['q_type']) ? $post['q_type'] : '',
         'Buying Time Frame' => (isset($post['buying_time']) && $post['buying_time']) ? $post['buying_time'] : 'ASAP',
         //'Buying Time Frame' => isset($post['buying_time']) ? $post['buying_time'] : '',
@@ -5128,7 +5128,8 @@ function gv_misc_leadRoute_REST_IN() {
     $submission['Time'] = date('Y-m-d, H:i:s', $current_time);
     
     $params['request_data'] = $submission;
-    drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
+    
+    drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params);
     echo 'testtt...';
 }
 
