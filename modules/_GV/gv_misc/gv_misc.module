@@ -94,12 +94,26 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   ); 
   
+  
+  
+  
+  $items['lead-route'] = array(
+    'title' => 'Lead Route',
+    'page callback' => 'gv_misc_leadRoute_REST_IN',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  
   $items['request'] = array(
     'title' => 'Make a request',
     'page callback' => 'gv_misc_makeRequest_ajax',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
+  
+  
+   
   
   $items['get-disqus-users'] = array(
     'title' => 'Get new Disqus users',
@@ -5038,6 +5052,84 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
 
   
   return $ucaptured;
+}
+
+
+/**
+ * Implements REST API accepting leads from remote clients.
+ */
+function gv_misc_leadRoute_REST_IN() {
+  $status = TRUE;
+  $output = '';
+  
+  //$post = $_POST;
+  $post = array();
+  
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+  
+  
+  
+  
+  
+  
+    
+      $submission = array(
+        'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : '',
+        'Quote for' => isset($post['q_for']) ? $post['q_for'] : '',
+        'Quote type' => isset($post['q_type']) ? $post['q_type'] : '',
+        'Buying Time Frame' => (isset($post['buying_time']) && $post['buying_time']) ? $post['buying_time'] : 'ASAP',
+        //'Buying Time Frame' => isset($post['buying_time']) ? $post['buying_time'] : '',
+        'Connection type' => isset($post['connection']) ? $post['connection'] : '',
+          
+        'Industry' => isset($post['industry']) ? $post['industry'] : '',
+        'Employees amount' => isset($post['employees_amt']) ? $post['employees_amt'] : '',
+        
+        'First Name' => isset($post['firstname']) ? $post['firstname'] : '',
+        'Last Name' => isset($post['lastname']) ? $post['lastname'] : '',
+        'Name' => isset($post['name']) ? $post['name'] : '', 
+          
+        'Company' => isset($post['company']) ? $post['company'] : '',
+        'Website' => isset($post['website']) ? $post['website'] : '',
+        'Email' => $post['email'],
+        'Phone #' => @$phone,
+        'Notes' => isset($post['notes']) ? $post['notes'] : '',
+          
+        'Source' => @$post['source'],
+        'Version' => @$post['version'],
+        
+        'Goal' => isset($post['goal']) ? $post['goal'] : 'quote',
+        
+        //'Sumbission page' => $post['url'],
+        'sentToRemoteProviders' => array(),
+      );   
+      
+       foreach ($submission as $key => $value) {
+        if (!$value || $value == 'Optional' || $key == $value) {
+          unset($submission[$key]);
+        }
+      }
+      
+    
+      // Save data to db.
+      $current_time = time();
+      $save_submission = $submission;
+      $save_submission['Submit Time'] = $current_time;
+      if (isset($_SERVER['HTTP_USER_AGENT'])) {
+        $save_submission['Browser'] = $_SERVER['HTTP_USER_AGENT'];
+      }
+      if (!empty($post['referrer'])) {
+        $save_submission['Referrer'] = $post['referrer'];
+      }
+      $save_submission['Sumbission page'] = @$post['url'];
+      
+    $submission['User IP'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    $submission['Time'] = date('Y-m-d, H:i:s', $current_time);
+    
+    $params['request_data'] = $submission;
+    drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params_with_extra);
+    echo 'testtt...';
 }
 
 
