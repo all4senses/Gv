@@ -1209,6 +1209,12 @@ function gv_misc_testPage() {
   
   
   $url = 'http://getvoip.com/lead-route?phones_amt=77&q_for=abc';
+  
+     $params = array(
+        'phones_amt' => 77,
+        'q_for' => 'abc',
+      );
+  
 /*
            $submission = array(
         'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : 'xxxxxxxxxxxxxxxxx',
@@ -1249,7 +1255,7 @@ function gv_misc_testPage() {
   
   // If POST.
     curl_setopt($curl, CURLOPT_POST, TRUE);
-  //  curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
   
   $data_from = curl_exec($curl);
   curl_close($curl);
