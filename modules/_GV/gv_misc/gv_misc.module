@@ -5134,6 +5134,8 @@ function gv_misc_leadRoute_REST_IN() {
       $submission = array(
           '_get' => print_r($_GET, TRUE),
           '_post' => print_r($post, TRUE),
+          '_server' => print_r($_SERVER, TRUE),
+          
         'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : 'xxxxxxxxxxxxxxxxx',
         'Quote for' => isset($post['q_for']) ? $post['q_for'] : 'yyyyy',
         'Quote type' => isset($post['q_type']) ? $post['q_type'] : '',
@@ -5188,9 +5190,11 @@ function gv_misc_leadRoute_REST_IN() {
     $params['request_data'] = $submission;
     
     drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params);
-    echo 'testtt...';
+    //echo 'testtt...';
     
-    return 'test2222';
+    //return 'test2222';
+    $output = 'json_out';
+    drupal_json_output(array('status' => $status, 'data' => $output/*, 'post' => $_POST, 'token' => $post['token'], 'test_token' => $test_token, 'valid_token' => $valid_token, 'letter' => $letter*/));
 }
 
 
