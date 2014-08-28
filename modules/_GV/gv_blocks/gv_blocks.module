@@ -429,6 +429,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['buchart_alteredview'] = array(
+    'info' => 'Altered bu chart from view - now with rotated first 4 providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   return $blocks;
 }
@@ -871,6 +875,12 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = ''; 
       $block['content'] = gv_blocks_getBlockFromVariable('gv_shopperapproved_badge_data');
       break;
+    
+    case 'buchart_alteredview':
+      $block['subject'] = ''; 
+      $block['content'] = gv_blocks_chartFromView_altered_rotatedFirst4providers(array('view' => 'providers', 'display' => 'block_top_bu_cmp_wide'));
+      break;
+ 
     
   }
 
@@ -1919,6 +1929,30 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
   }
   
   return $out;
+}
+
+
+
+/**
+ * chartFromView_altered_rotatedFirst4providers.
+ */
+function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display) {
+  $chart_themed = NULL;
+
+  $view = views_get_view($view_n_display['view']);
+  
+  
+  // Run view's query.
+  $view->execute();
+
+  dpm($view->result);
+
+
+  $chart_themed = $view->preview($view_n_display['display']);
+  //dpm($view->result);
+  
+  
+  return $chart_themed;
 }
 
 
