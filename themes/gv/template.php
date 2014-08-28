@@ -771,7 +771,7 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
     drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   }
-  elseif ($_SERVER['REDIRECT_URL'] == '/lead-route') {
+  elseif (@$_SERVER['REDIRECT_URL'] == '/lead-route') {
     $variables['theme_hook_suggestions'][] = 'page__clean';
   }
   
