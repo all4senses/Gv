@@ -3402,6 +3402,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   
   $map_path_to_preface_type = array(
     '/business' => 'page-compare-business-voip-providers',
+    '/ppc/business-voip' => 'page-compare-business-voip-providers-v2',
     '/residential' => 'page-compare-residential-voip-providers',
     '/sip-trunking' => 'page-compare-sip-voip-providers',
     '/fax' => 'page-compare-ifa-voip-providers',
@@ -3413,6 +3414,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   
   $map_preface_type_to_service_type = array(
     'page-compare-business-voip-providers' => 'business',
+    'page-compare-business-voip-providers-v2' => 'business',
     'page-compare-residential-voip-providers' => 'residential',
     'page-compare-sip-voip-providers' => 'sip',
     'page-compare-ifa-voip-providers' => 'ifa',
@@ -3423,7 +3425,8 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   );
   
   $map_path_to_type = array(
-    '/business' => 'Business VoIP',  
+    '/business' => 'Business VoIP',
+    '/ppc/business-voip' => 'Business VoIP',
     '/residential' => 'Residential VoIP',
     '/business-voip-features' => 'Business VoIP Features',
     '/sip-trunking' => 'SIP Trunking Providers',
