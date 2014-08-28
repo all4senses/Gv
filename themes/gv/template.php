@@ -771,8 +771,11 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
     drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   }
+  elseif ($_SERVER['REDIRECT_URL'] == '/lead-route') {
+    $variables['theme_hook_suggestions'][] = 'page__clean';
+  }
   
-  dpm(arg());
+  //dpm(arg());
   
   // Set breadcrumb
   // Uncomment it to set breadcrumbs
@@ -789,7 +792,7 @@ function gv_process_page(&$variables) {
   //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
   //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
   
-  dpm($_SERVER);
+  //dpm($_SERVER);
   $pages_with_livechatinc = array(/*'/', */ '/business', '/hosted-pbx', '/business-systems', '/sip-trunking');
   if (in_array(@$_SERVER['REQUEST_URI'], $pages_with_livechatinc)) {
     //dpm('REQUEST_URI = ' . @$_SERVER['REQUEST_URI']);
