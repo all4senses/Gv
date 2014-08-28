@@ -1,1 +1,1 @@
-<?php print render($page['content']); dpm($page); ?>  
+<?php print render($page['content']); ?>  
