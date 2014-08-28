@@ -9030,7 +9030,7 @@ function gv_misc_getProviderQuickData($target, $data) {
     case 'compare_check':
       
       // Hide compare column on Home and Business page.
-      if ($_GET['q'] == 'home' || @$_SERVER['REQUEST_URI'] == '/business' || @$_SERVER['REDIRECT_URL'] == '/business') {
+      if ($_GET['q'] == 'home' || @$_SERVER['REQUEST_URI'] == '/business' || @$_SERVER['REDIRECT_URL'] == '/business' || @$_SERVER['REQUEST_URI'] == '/ppc/business-voip') {
         return NULL;
       }
       
