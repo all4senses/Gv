@@ -112,14 +112,24 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );  
   
+  
+  
   $blocks['r_provider_p_bottom'] = array(
     'info' => 'Bottom section of Residential providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  
+  
   $blocks['b_provider_p_bottom'] = array(
     'info' => 'Bottom section of Business providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['b_provider_p_bottom2'] = array(
+    'info' => 'Bottom section of Business providers page preface v2 with rotated randomly first 4 providers',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['sip_provider_p_bottom'] = array(
     'info' => 'Bottom section of SIP providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -531,10 +541,17 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = 'Main section of the Front page preface';
       $block['content'] = gv_misc_getPrefaceMainSection('front'); // Arg - preface's key
       break;
+    
     case 'b_provider_p_bottom':
       $block['subject'] = 'Bottom section of Business providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers');
       break;
+    case 'b_provider_p_bottom2':
+      $block['subject'] = 'Bottom section of Business providers page preface v2 with rotated randomly first 4 providers';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers-v2');
+      break;
+    
+    
     case 'r_provider_p_bottom':
       $block['subject'] = 'Bottom section of Residential providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-residential-voip-providers');
