@@ -5195,13 +5195,13 @@ function gv_misc_leadRoute_REST_IN() {
     //echo 'Out echo';
     
     //return 'Return Out';
-    /*
+    
     //
-    ///$output = 'json_out';
-    ////drupal_json_output(array('status' => $status, 'data' => $output));
-    */
-    drupal_add_http_header('Content-Type', 'application/json');
-    echo 'Out like json..';
+    $output = 'json_out';
+    drupal_json_output(array('status' => $status, 'data' => $output));
+    
+    ///drupal_add_http_header('Content-Type', 'application/json');
+    ///echo 'Out like json..';
     
 }
 
