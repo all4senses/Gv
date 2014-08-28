@@ -5152,7 +5152,7 @@ function gv_misc_leadRoute_REST_IN() {
           
         'Company' => isset($post['company']) ? $post['company'] : '',
         'Website' => isset($post['website']) ? $post['website'] : '',
-        'Email' => $post['email'],
+        'Email' => @$post['email'],
         'Phone #' => @$phone,
         'Notes' => isset($post['notes']) ? $post['notes'] : '',
           
@@ -5188,6 +5188,8 @@ function gv_misc_leadRoute_REST_IN() {
     $submission['Time'] = date('Y-m-d, H:i:s', $current_time);
     
     $params['request_data'] = $submission;
+    
+    global $language;
     
     drupal_mail('gv_misc', 'request_quote', 'all4senses@gmail.com', $language->language, $params);
     //echo 'testtt...';
