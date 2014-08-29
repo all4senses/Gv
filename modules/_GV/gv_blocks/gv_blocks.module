@@ -1937,6 +1937,7 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
  * chartFromView_altered_rotatedFirst4providers.
  */
 function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display) {
+  
   $chart_themed = NULL;
 
   $view = views_get_view($view_n_display['view']);
@@ -1946,26 +1947,21 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   $view->execute($view_n_display['display']);
 
   //dpm($view);
-  dpm($view->result);
+  //dpm($view->result);
   
   
   $random_array = array_slice($view->result, 0, 4);
   
-  dpm($random_array);
+  //dpm($random_array);
   $random_index = array(0, 1, 2, 3);
   shuffle($random_index);
-  dpm($random_index);
+  //dpm($random_index);
   
   foreach ($random_index as $key => $value) {
     $view->result[$key] = $random_array[$value];
   }
-  dpm($view->result);
-          
-          
-//  $temp = $view->result[0];
-//  $view->result[0] = $view->result[1];
-//  $view->result[1] = $temp;
-  
+  //dpm($view->result);
+    
 
   $chart_themed = $view->preview($view_n_display['display']);
   //dpm($view->result);
