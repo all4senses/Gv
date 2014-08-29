@@ -1952,7 +1952,8 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   $random_array = array_slice($view->result, 0, 3);
   
   dpm($random_array);
-  $random_index = shuffle(array(0, 1, 2, 3));
+  $random_index = array(0, 1, 2, 3);
+  shuffle($random_index);
   dpm($random_index);
           
           
