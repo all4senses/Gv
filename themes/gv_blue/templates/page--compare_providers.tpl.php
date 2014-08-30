@@ -88,7 +88,9 @@
 
       <?php
         dpm($_SERVER);
-        echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
+        if (!in_array($_SERVER['REQUEST_URI'], array('/ppc/business-voip', '/business'))) {
+          echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
+        }
         echo render($page['footer']);
         
         echo '<div class="about">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website.</div>
