@@ -9227,11 +9227,26 @@ function gv_misc_getProviderQuickData($target, $data) {
         if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name, $all_data_quick)) {
           //watchdog('p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
+          
+          
+          if ($current_url == '/ppc/business-voip') {
+            $out = $p_image;
+          }
+          else {
+            $out = gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+          }
+          
+          // Provider name with a link to provider page
+          ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
+          $out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+          
+          /*
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 // Provider name with a link to provider page
                  ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
                  . gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 ;
+          */
         }
         
         
