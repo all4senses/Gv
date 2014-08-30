@@ -87,7 +87,7 @@
    <div id="footer-inside">
 
       <?php
-        dpm($_GET);
+        dpm($_SERVER);
         echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
         echo render($page['footer']);
         
