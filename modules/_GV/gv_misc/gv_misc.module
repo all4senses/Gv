@@ -5268,10 +5268,10 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     $output = t('<div class="not-verified"><p class="error">The form is not filled!</p><p>Please, reload the page and try again.</p></div>'); 
   }
   elseif ($post['source'] == 'block' && ( (empty($post['ct_captcha']) && !empty($_SESSION['securimage_code_value']['default']) ) || ( isset($post['ct_captcha']) && isset($_SESSION['securimage_code_value']['default']) && strtolower($post['ct_captcha']) != strtolower($_SESSION['securimage_code_value']['default'])   ) )){
-    $output = t('<div class="not-verified"><p class="error">A Captcha code is wrong!</p><p> Please, reload the page and try again.</p><div class="not-verified">'); 
+    $output = t('<div class="not-verified"><p class="error">A Captcha code is wrong!</p><p> Please, reload the page and try again.</p>'); 
   }
   elseif (!isset($post['token']) /*|| !isset($_SESSION['requestQuoteToken']) || $post['token'] != $_SESSION['requestQuoteToken']*/) {
-    $output = t('<div class="not-verified"><p class="error">The form is outdated or broken.</p><p> Please, reload the page and try again.</p><div class="not-verified">'); 
+    $output = t('<div class="not-verified"><p class="error">The form is outdated or broken.</p><p> Please, reload the page and try again.</p>'); 
   }
   // Silently filter by the Spammer's phone number.
   // Or if the first name = last name.
@@ -5283,7 +5283,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     // The data is all OK, so we may Process the submission...
     
-    $status = TRUE;
+    
     
     $post['email'] = strtolower($post['email']);
     
@@ -5293,7 +5293,20 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     // allow dublicate of test@test.test address for testing purposes.
     if ($post['email'] != 'test@test.test' && gv_misc_isSubmissionAlreadySent($post['email'])) {
       $already_sent = TRUE;
+      
+      if ($post['source'] == 'partner') {
+        $output = 'Sumbission email has already been used/sent.'; 
+      }
+      else {
+        $output = '<div class="not-verified"><p class="error">Sumbission email has already been used.</p>'; 
+      }
+      
+      drupal_json_output(array('status' => $status, 'data' => $output));
+      return;
+      
     }
+    
+    $status = TRUE;
     
     // Check if there is already a submission in the DB with such an email.
     /*
