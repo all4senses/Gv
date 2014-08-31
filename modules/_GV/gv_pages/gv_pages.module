@@ -1628,8 +1628,11 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       }
       $data .= "<div>$title: $value</div>";
     }
+    
+    //dpm($ucaptured->via_block);
+    
     $form['item_' . ($key + 1) . 'a'] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : 'Via block' ) . '</td>',
+      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
     );
     
     $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);

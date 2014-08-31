@@ -5397,6 +5397,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
             'status' => 2, // Submitted and sent.
             'checked' => 1, // Reviewed, because is sent.
             'email_presented' => $save_submission['Email'],
+            'via_block' => 0, // via page
           ))
           ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
           ->execute();
@@ -5413,6 +5414,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
             'data' => serialize($save_submission),
             'checked' => 1, // Reviewed, because is sent.
             'email_presented' => $save_submission['Email'],
+            'via_block' => $post['source'] == 'page' ? 0 : 2, // via page - o, from partner - 2
           ))
           ->execute();
       }  
@@ -5484,7 +5486,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
           'data' => serialize($save_submission),
           'checked' => 1, // Reviewed, because is alerted.
           'email_presented' => $save_submission['Email'],
-          'via_block' => TRUE,
+          'via_block' => 1, //TRUE,
         ))
         ->execute();
       
@@ -5766,7 +5768,7 @@ function gv_misc_getAllowedProvidersToSendSubmission(&$submission) {
     }
   }
   
-  $submission['sentToRemoteProviders'] = !empty($allowedProviders) ? $allowedProviders : array('TEST submission, was not sent to anywhere' => TRUE);
+  $submission['sentToRemoteProviders'] = !empty($allowedProviders) ? $allowedProviders : array('Was not sent to anywhere: TEST submission OR no allowed providers for autolead...' => TRUE);
 }
 
 
