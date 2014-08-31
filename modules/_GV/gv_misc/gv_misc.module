@@ -5144,10 +5144,11 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
  * Implements REST API accepting leads from remote clients.
  */
 function gv_misc_leadRoute_REST_IN() {
+  
+  /*
   $status = TRUE;
   $output = '';
   
-  //$post = $_POST;
   $post = array();
   //dpm($_GET);
   foreach ($_POST as $key => $value) {
@@ -5231,7 +5232,9 @@ function gv_misc_leadRoute_REST_IN() {
     
     ///drupal_add_http_header('Content-Type', 'application/json');
     ///echo 'Out like json..';
-    
+    */
+  
+  gv_misc_makeRequest_ajax($_POST);
 }
 
 
@@ -5240,14 +5243,15 @@ function gv_misc_leadRoute_REST_IN() {
  * 
  * Returns json result data with OK or error.
  */
-function gv_misc_makeRequest_ajax() {
-  $status = TRUE;
+function gv_misc_makeRequest_ajax($post = NULL) {
+  $status = FALSE;
   $output = '';
   
-  //$post = $_POST;
-  $post = array();
-  foreach ($_POST as $key => $value) {
-    $post[$key] = check_plain(strip_tags($value));
+  if (!$post) {
+    $post = array();
+    foreach ($_POST as $key => $value) {
+      $post[$key] = check_plain(strip_tags($value));
+    }
   }
   
   if (empty($post) 
@@ -5276,6 +5280,10 @@ function gv_misc_makeRequest_ajax() {
     $output = '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide!!!<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final"><p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p></div>';
   }
   else {
+    
+    // The data is all OK, so we may Process the submission...
+    
+    $status = TRUE;
     
     $post['email'] = strtolower($post['email']);
     
@@ -5321,7 +5329,7 @@ function gv_misc_makeRequest_ajax() {
       $post[$post_name] = htmlspecialchars_decode($post_value, ENT_QUOTES);
     }
     
-    if ($post['source'] == 'page') {
+    if ($post['source'] == 'page' || $post['source'] == 'partner') {
       
       
       
@@ -5568,54 +5576,55 @@ function gv_misc_makeRequest_ajax() {
     
     
     // Check for new captured but not sent data with emails in db, more than 1 hour old
-
-    $query = db_select('gv_quote_requests', 'qr')
-      ->fields('qr', array('data', 'ip', 'timestamp'));
-    $query->condition('qr.status', 0);
-    $query->condition('qr.checked', 0);
-    
-    
-    //$query->condition('qr.email_presented', 1);
-    
-    $query->condition('qr.email_presented', '0', '!=');
-    $query->condition('qr.email_presented', '', '!=');
-    $query->isNotNull('qr.email_presented');
-    
-    $query->condition('qr.timestamp', $current_time - 3600, '<'); // 1 hour old
-    $not_sents = $query->execute();
-
-    foreach ($not_sents as $not_sent) {
-      $ucaptured = unserialize($not_sent->data);
-
-      // Send email.
-      $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured, TRUE);
-      $ucaptured_data += array(
-        'User IP' => $not_sent->ip,
-        'Start Submission Time' => date('Y-m-d, H:i:s', $not_sent->timestamp),
-      );
-
-      $params['ucaptured_data'] = $ucaptured_data;
-
-      // Normal send
-      if ($submission['First Name'] != 'afs') {
-        drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'leads@getvoip.com', $language->language, $params);
-      }
-      // Test letter to the root
-      drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
+    if ($post['source'] != 'partner') {
       
-      // Update a status in DB.
-      $result = db_update('gv_quote_requests')
-        ->fields(array(
-          'status' => 1, // Unsubmitted, sent.
-          'checked' => 1, // Reviewed, because is sent.
-        ))
-        ->condition('timestamp', $not_sent->timestamp)
-        ->execute();
+          $query = db_select('gv_quote_requests', 'qr')
+            ->fields('qr', array('data', 'ip', 'timestamp'));
+          $query->condition('qr.status', 0);
+          $query->condition('qr.checked', 0);
 
-    } // foreach ($not_sents as $not_sent) {
+
+          //$query->condition('qr.email_presented', 1);
+
+          $query->condition('qr.email_presented', '0', '!=');
+          $query->condition('qr.email_presented', '', '!=');
+          $query->isNotNull('qr.email_presented');
+
+          $query->condition('qr.timestamp', $current_time - 3600, '<'); // 1 hour old
+          $not_sents = $query->execute();
+
+          foreach ($not_sents as $not_sent) {
+            $ucaptured = unserialize($not_sent->data);
+
+            // Send email.
+            $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured, TRUE);
+            $ucaptured_data += array(
+              'User IP' => $not_sent->ip,
+              'Start Submission Time' => date('Y-m-d, H:i:s', $not_sent->timestamp),
+            );
+
+            $params['ucaptured_data'] = $ucaptured_data;
+
+            // Normal send
+            if ($submission['First Name'] != 'afs') {
+              drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'leads@getvoip.com', $language->language, $params);
+            }
+            // Test letter to the root
+            drupal_mail('gv_misc', 'request_quote_ucaptured_data', 'all4senses@gmail.com', $language->language, $params);
+
+            // Update a status in DB.
+            $result = db_update('gv_quote_requests')
+              ->fields(array(
+                'status' => 1, // Unsubmitted, sent.
+                'checked' => 1, // Reviewed, because is sent.
+              ))
+              ->condition('timestamp', $not_sent->timestamp)
+              ->execute();
+
+          } // foreach ($not_sents as $not_sent) {
 
     
-    
+    } // end of Check for new captured but not sent data with emails in db, more than 1 hour old
     
     
     $status = TRUE;
@@ -5664,7 +5673,7 @@ function gv_misc_makeRequest_ajax() {
       
       
     }
-    else {
+    elseif ($post['source'] == 'page') {
       // $post['source'] == 'page'
       switch ($post['version']) {
         case '1':
@@ -5714,6 +5723,15 @@ function gv_misc_makeRequest_ajax() {
           break;
       }
       
+    }
+    elseif ($post['source'] == 'partner') {
+      switch ($post['version']) {
+        
+        default:
+          $output = 'Dear Partner, Thnak you for the submission. We will contact you in case of nesessity.'; 
+          break;
+        
+      }
     }
     
   }
