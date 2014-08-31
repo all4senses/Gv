@@ -5,10 +5,14 @@
     <nav id="navigation" role="navigation" class="clearfix">
       
       <div id="logo-block">
-        <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <!-- <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo4.png" alt="GetVoIP" title="GetVoIP" /> -->
-          <img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />
-        </a>
+        <?php
+          if (@$_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
+            echo "<img src='/images/theme/get-voip-logo5.png' alt='GetVoIP' title='GetVoIP' />";
+          }
+          else {
+            echo "<a href='$front_page' title='GetVoIP Home' id='logo'><img src=/images/theme/get-voip-logo5.png alt=GetVoIP title=GetVoIP /></a>";
+          }
+        ?>
       </div>
       
       <?php 
@@ -87,7 +91,7 @@
    <div id="footer-inside">
 
       <?php
-        dpm($_SERVER);
+        //dpm($_SERVER);
         if (!in_array($_SERVER['REQUEST_URI'], array('/ppc/business-voip', '/business'))) {
           echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
         }

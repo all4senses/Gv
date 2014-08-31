@@ -1211,10 +1211,39 @@ function gv_misc_testPage() {
   //$url = 'http://getvoip.com/lead-route?phones_amt=22&q_for=zzzzz';
   $url = 'http://getvoip.com/lead-route';
   
-     $params = array(
-        'phones_amt' => 88,
-        'q_for' => 'abcde',
+  
+  
+  
+     $post = array(
+        'source' => 'partner',
+        'version' => 'partner_name_unique',
+        'goal' => 'quote',
+        'token' => 'getvoip_partner',
+        'phones_amt' => '1 - 4',
+        'q_type' => 'Both phones and service',
+        'firstname' => 'User first name',
+        'lastname' => 'User last name',
+        'email' => 'unique@user.email',
+        'phone' => '1374678736',
       );
+     
+     
+     
+     /*
+     if (empty($post) 
+      || empty($post['source'])
+      //|| empty($post['phones_amt'])
+      || (isset($post['phones_amt']) && !$post['phones_amt'])
+      //|| !isset($post['q_for']) || !$post['q_for']
+      //|| !isset($post['buying_time']) || !$post['buying_time']
+      || ( (isset($post['firstname']) && !$post['firstname']) || (isset($post['lastname']) && !$post['lastname']) || (isset($post['name']) && !$post['name']) )
+      || ( strpos(@$post['firstname'], '/')  || strpos(@$post['lastname'], '/') || strpos(@$post['name'], '/') ) // name contains /, like in urls
+      || (empty($post['email']) || !strpos($post['email'], '@') )
+      || ( (empty($post['phone_1']) || empty($post['phone_2']) || empty($post['phone_3'])) && empty($post['phone']) )
+     ) {
+    $output = t('<div class="not-verified"><p class="error">The form is not filled!</p><p>Please, reload the page and try again.</p></div>'); 
+  }
+  */
   
 /*
            $submission = array(
@@ -1256,7 +1285,7 @@ function gv_misc_testPage() {
   
   // If POST.
     curl_setopt($curl, CURLOPT_POST, TRUE);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
   
   $data_from = curl_exec($curl);
   curl_close($curl);
@@ -9229,26 +9258,13 @@ function gv_misc_getProviderQuickData($target, $data) {
           //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
           
           
-          if ($current_url == '/ppc/business-voip') {
-            $out = $p_image;
-          }
-          else {
-            $out = gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
-          }
           
-          // Provider name with a link to provider page
-          ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
-          $out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
-          
-          return $out;
-          
-          /*
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 // Provider name with a link to provider page
                  ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
                  . gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 ;
-          */
+          
         }
         
         
