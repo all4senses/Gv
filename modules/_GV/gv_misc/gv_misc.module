@@ -1299,7 +1299,7 @@ function gv_misc_testPage() {
   
   $path = 'public://avatars/author/charlessamuel.png'; // @$user->field_u_author_img['und'][0]['uri'];
   dpm($path);
-  $out = theme('image_style', array( 'path' =>  @$user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
+  $out = theme('image_style', array( 'path' =>  $path, 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
           
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
