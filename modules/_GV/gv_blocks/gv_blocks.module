@@ -1787,13 +1787,13 @@ var google_remarketing_only = true;
  */
 function gv_blocks_getAboutTheAuthor($uid) {
   $user = user_load($uid);
-  dpm($uid);
-  dpm($user);
+  //dpm($uid);
+  //dpm($user);
   
   if (empty($user->field_u_bio_on_article['und'][0]['value'])) {
     return NULL;
   }
-  dpm($user);
+  //dpm($user);
   dpm(@$user->field_u_author_img['und'][0]['uri']);
   return '<div id="about_author">
               <div id="left">'
