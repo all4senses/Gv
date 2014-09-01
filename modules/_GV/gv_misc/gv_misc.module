@@ -1208,24 +1208,6 @@ function gv_misc_testPage() {
   */
   
   
-  //$url = 'http://getvoip.com/lead-route?phones_amt=22&q_for=zzzzz';
-  $url = 'http://getvoip.com/lead-route';
-  
-  
-  
-  
-     $post = array(
-        'source' => 'partner',
-        'version' => 'partner_name_unique',
-        'goal' => 'quote',
-        'token' => 'getvoip_partner',
-        'phones_amt' => '1 - 4',
-        'q_type' => 'Both phones and service',
-        'firstname' => 'User first name',
-        'lastname' => 'User last name',
-        'email' => 'unique@user.email',
-        'phone' => '1374678736',
-      );
      
      
      
@@ -1277,6 +1259,27 @@ function gv_misc_testPage() {
       );   
            */
   
+  /*
+  
+  //$url = 'http://getvoip.com/lead-route?phones_amt=22&q_for=zzzzz';
+  $url = 'http://getvoip.com/lead-route';
+  
+  
+  
+  
+     $post = array(
+        'source' => 'partner',
+        'version' => 'partner_name_unique',
+        'goal' => 'quote',
+        'token' => 'getvoip_partner',
+        'phones_amt' => '1 - 4',
+        'q_type' => 'Both phones and service',
+        'firstname' => 'User first name',
+        'lastname' => 'User last name',
+        'email' => 'unique@user.email',
+        'phone' => '1374678736',
+      );
+     
   // GET.
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
@@ -1292,6 +1295,12 @@ function gv_misc_testPage() {
   
   dpm($data_from);
   
+  */
+  
+  $path = 'public://avatars/author/charlessamuel.png'; // @$user->field_u_author_img['und'][0]['uri'];
+  dpm($path);
+  $out = theme('image_style', array( 'path' =>  @$user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')));
+          
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 

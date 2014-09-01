@@ -514,7 +514,7 @@
       {  
         //dpm($node->otherArticles);
         //echo $node->otherArticles;
-        echo '-';
+        //echo '-';
         //dpm('----');
         //dpm($node);
         echo gv_blocks_getAboutTheAuthor($node->uid); 
