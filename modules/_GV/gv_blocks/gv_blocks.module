@@ -1947,7 +1947,7 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   $view->execute($view_n_display['display']);
 
   //dpm($view);
-  dpm($view->result);
+  //dpm($view->result);
   
   $fixed_positions = array();
   
@@ -1959,12 +1959,12 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   foreach ($random_array as $key => $result) {
     if ($result->nid == 12) {
       //RingCentral page nid is 12
-      // Key is should be always 1 (2nd position)
+      // Key should be always 1 (2nd position)
       $fixed_positions['RingCentral_key'] = $key;
     }
     elseif ($result->nid == 36) {
       //Vonage page nid is 36
-      // Key is should be always 0 OR 2 (1sr or 3nd position)
+      // Key should be always 0 OR 2 (1st or 3nd position)
       $fixed_positions['Vonage_key'] = $key;
     }
   }
@@ -1976,13 +1976,15 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   do {
     shuffle($random_index);
   }while (
-          (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
-          ||
-          (
-            isset($fixed_positions['Vonage_key']) 
-            && 
-            !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key'])
-          )
+            // RingCentral_key should be always 1 (2nd position)
+            (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
+            ||
+            // Vonage_key should be always 0 OR 2 (1st or 3nd position)
+            (
+              isset($fixed_positions['Vonage_key']) 
+              && 
+              !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key'])
+            )
           );
   
   //dpm($random_index);
