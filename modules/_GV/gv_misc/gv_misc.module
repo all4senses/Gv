@@ -6536,7 +6536,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
   $allowedToBeSent = TRUE;
   
   // Skip sending if "More than 50".
-  if ($submission['Phones needed'] == 'More than 50') {
+  if (@$submission['Phones needed'] == 'More than 50') {
     $allowedToBeSent = FALSE;
   }
   
@@ -6591,7 +6591,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
       $data_to[$remote_key] = $map_timeframe[$submission[$getvoip_key]];
     }
     elseif ($getvoip_key == 'Phones needed') {
-      $data_to[$remote_key] = $map_phonesNeeded[$submission[$getvoip_key]];
+      $data_to[$remote_key] = @$map_phonesNeeded[@$submission[$getvoip_key]];
     }
     elseif ($getvoip_key == 'Company' && empty($submission[$getvoip_key])) {
       $data_to[$remote_key] = 'Unavailable';
@@ -6669,7 +6669,7 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   $allowedToBeSent = TRUE;
   
   // Send only  '5 - 10' and        '11 - 20'
-  if ($submission['Phones needed'] != '1 - 4' && $submission['Phones needed'] != '2 - 4' && $submission['Phones needed'] != '5 - 10' && $submission['Phones needed'] != '11 - 20') {
+  if (@$submission['Phones needed'] != '1 - 4' && @$submission['Phones needed'] != '2 - 4' && @$submission['Phones needed'] != '5 - 10' && @$submission['Phones needed'] != '11 - 20') {
     $allowedToBeSent = FALSE;
   }
   
@@ -6690,7 +6690,7 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
   
   
   
-  if ($submission['Phones needed'] == '1 - 4') {
+  if (@$submission['Phones needed'] == '1 - 4') {
     $submission['Phones needed'] = '2 - 4';
   }
     
@@ -6846,7 +6846,7 @@ function gv_misc_SendRequestToRingCentral($submission, $op = 'sendIfAllowed') {
   );
   
   
-  $submission['Phones needed'] = $map_phonesNeeded[$submission['Phones needed']];
+  $submission['Phones needed'] = @$map_phonesNeeded[@$submission['Phones needed']];
   
   
   $map_main = array(
