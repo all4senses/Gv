@@ -1949,12 +1949,34 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   //dpm($view);
   dpm($view->result);
   
+  $fixed_positions = array();
+  
+  
   
   $random_array = array_slice($view->result, 0, 4);
   
+  
+  foreach ($random_array as $key => $result) {
+    if ($result->nid == 12) {
+      //RingCentral page nid is 12
+      // Key is should be always 1 (2nd position)
+      $fixed_positions['RingCentral_key'] = $key;
+    }
+    elseif ($result->nid == 36) {
+      //Vonage page nid is 36
+      // Key is should be always 0 OR 2 (1sr or 3nd position)
+      $fixed_positions['Vonage_key'] = $key;
+    }
+  }
+  
   //dpm($random_array);
   $random_index = array(0, 1, 2, 3);
-  shuffle($random_index);
+  //shuffle($random_index);
+  
+  do {
+    shuffle($random_index);
+  }while (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key']);
+  
   //dpm($random_index);
   
   foreach ($random_index as $key => $value) {
