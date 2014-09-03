@@ -1975,7 +1975,15 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
   
   do {
     shuffle($random_index);
-  }while (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key']);
+  }while (
+          (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
+          ||
+          (
+            isset($fixed_positions['Vonage_key']) 
+            && 
+            !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key'])
+          )
+          );
   
   //dpm($random_index);
   
