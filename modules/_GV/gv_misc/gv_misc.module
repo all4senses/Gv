@@ -6601,6 +6601,20 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
     }
   }
   
+  // Convert Name field to to two fields First Name and Last Name
+  if (empty($submission['First Name']) && !empty($submission['Name'])) {
+    $name = explode(' ', $submission['Name']);
+    if (count($name) > 1) {
+      $data_to[$map_main['First Name']] = $name[0];
+      $data_to[$map_main['Last Name']] = $name[1];
+    }
+    else {
+      // If the Name field contain only one word, copy this word into both First and Last names fields, becasue Vocalocity demands both those fields.
+      $data_to[$map_main['First Name']] = $name[0];
+      $data_to[$map_main['Last Name']] = $name[0];
+    }
+  }
+  
   // Old Vocalocity url, before 15.03.2014
   //$url = 'http://ww3.vocalocity.com/l/7772/2012-10-01/36gsq6';
   
