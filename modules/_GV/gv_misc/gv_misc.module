@@ -5353,7 +5353,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
       
       
       $submission = array(
-        'Phones needed' => $post['phones_amt'],
+        'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : (isset($post['employees_amt']) ? $post['employees_amt'] : ''), //$post['phones_amt'],
         'Quote for' => isset($post['q_for']) ? $post['q_for'] : '',
         'Quote type' => isset($post['q_type']) ? $post['q_type'] : '',
         'Buying Time Frame' => (isset($post['buying_time']) && $post['buying_time']) ? $post['buying_time'] : 'ASAP',
@@ -5448,7 +5448,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
       // Quote Blocks...
       
       $submission = array(
-        'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : '',
+        'Phones needed' => isset($post['phones_amt']) ? $post['phones_amt'] : (isset($post['employees_amt']) ? $post['employees_amt'] : ''), //$post['phones_amt'],
         'Quote for' => isset($post['q_for']) ? $post['q_for'] : '',
         'Quote type' => isset($post['q_type']) ? $post['q_type'] : '',
         'Buying Time Frame' => (isset($post['buying_time']) && $post['buying_time']) ? $post['buying_time'] : 'ASAP',
