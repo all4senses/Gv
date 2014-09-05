@@ -1615,7 +1615,7 @@ if (isset($_GET['page'])) {
       $main_image_url = $extra_data['main_image']['src_beautify'];
       
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info"><img src="' . $main_image_url . '" /><div class="title">' . l($post->title, 'node/' .  $post->nid) . '</div></div></div>';
+      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info"><img src="' . $main_image_url . '" alt="' . $post->title . '" /><div class="title">' . l($post->title, 'node/' .  $post->nid) . '</div></div></div>';
       $i++;
   }
 
