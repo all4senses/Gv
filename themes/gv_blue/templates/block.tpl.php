@@ -3,7 +3,7 @@
 <?php if (!strpos($classes, 'first')): ?>
   <div class="top-line <?php print $block_html_id; ?>"></div>
 <?php endif; ?>
-<section id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
     <?php $h_tag = in_array($block->region, array('content', 'content_wide', 'above_footer')) ? 'h2' : 'h3'; ?>
@@ -16,4 +16,4 @@
     <?php print $content ?>
   </div>
   
-</section> <!-- /.block -->
+</div> <!-- /.block -->

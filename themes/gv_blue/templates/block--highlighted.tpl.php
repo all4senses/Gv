@@ -1,5 +1,5 @@
 <?php //dpm($block); ?>
-<section id="<?php print $block_html_id; ?>" class="<?php print $classes; print ' xxx'; ?>"<?php print $attributes; ?>>
+<div id="<?php print $block_html_id; ?>" class="<?php print $classes; print ' xxx'; ?>"<?php print $attributes; ?>>
   <div class="inside">
     <?php print render($title_prefix); ?>
     
@@ -26,4 +26,4 @@
     </div>
   </div> <!-- /.inside -->
   <div class="shadow"></div>
-</section> <!-- /.block -->
+</div> <!-- /.block -->
