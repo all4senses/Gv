@@ -246,7 +246,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
         $reviewer = (isset($node->field_r_fname[0]['value']) ? $node->field_r_fname[0]['value'] : $node->field_r_fname['und'][0]['value'] );
       ?>
       <div class="reviewer">
-        <div class="r-avatar"><img src="/sites/all/themes/gv_blue/css/images/avatar.jpg"></div>
+        <div class="r-avatar"><img src="/sites/all/themes/gv_blue/css/images/avatar.jpg" alt="avatar" /></div>
         <div class="name"><?php echo $reviewer; ?></div>
       </div>
     
