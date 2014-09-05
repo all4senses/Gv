@@ -2629,7 +2629,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       ////$providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
       
       $out .= '
-          <tr' .  /*' class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') .*/ '">
+          <tr' .  /*' class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') . '"' . */ '>
           
             <td class="views-field views-field-field-p-erating">
               <span>' . $provider->erating . '</span> 
