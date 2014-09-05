@@ -170,7 +170,7 @@
                             <span typeof="v:Rating">
                               <span property="v:worst" content="0"></span>
                               <span property="v:value">' . $node->gv_rating_overall . '</span>
-                              <span property="v:best"  content="5"></span>
+                              <span property="v:best" content="5"></span>
                             </span>
                           </span><div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
 

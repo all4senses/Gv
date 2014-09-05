@@ -59,6 +59,7 @@
             //. '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>'
     
     //if (!empty($extra_data['home_teaser_image_beautify'])) {
+    dpm($extra_data);
     if (!empty($extra_data['home_teaser_rotated_image_beautify'])) {
       echo $extra_data['home_teaser_rotated_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
     }
