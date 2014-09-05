@@ -27,7 +27,7 @@
       ); 
       */  
         
-      $("#hb-rotator-wrapper #next").click(function() {
+      $("#hb-rotator-wrapper #next2").click(function() {
           var active = $( "#hb-rotator" ).tabs( "option", "selected" );
           if (active == ltabs - 1 ) {
             active = 0;
@@ -42,7 +42,7 @@
 
       });
       
-      $("#hb-rotator-wrapper #prev").click(function() {
+      $("#hb-rotator-wrapper #prev2").click(function() {
           var active = $( "#hb-rotator" ).tabs( "option", "selected" );
           if (active == 0 ) {
             active = ltabs - 1;
