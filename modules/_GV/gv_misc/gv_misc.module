@@ -4077,6 +4077,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
 function gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, &$image_html, &$image_html_beautify, $title = NULL, $class = 'thumb') {
   $image_url = image_style_url($style_name, $stream_path);
   gv_misc_createCachedImageIfNotExists($image_url, $style_name);
+  $title = str_replace('"', '`', title);
   $image_html = '<div class="' .$class . '"><img src="' . $image_url . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
   $image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image_html);
 }
