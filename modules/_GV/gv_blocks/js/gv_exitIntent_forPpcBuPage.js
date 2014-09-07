@@ -74,10 +74,10 @@
         $('#requestQuoteFormWrapper-ppc input[name="url"]').val(document.URL);
        
         //$('select').selectmenu();
-//        $('#requestQuoteFormWrapper-ppc select').selectmenu({
-//          //style:'popup', 
-//          maxHeight: 300
-//  			});
+        $('#requestQuoteFormWrapper-ppc select').selectmenu({
+          //style:'popup', 
+          maxHeight: 300
+  			});
        
        
        
