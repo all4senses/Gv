@@ -148,11 +148,11 @@
         
         
         
-        $("#requestQuoteFormWrapper-ppc #first_step.next_custom").click(function(){
+        $("#requestQuoteFormWrapper-ppc #first_step .next_custom").click(function(){
           $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
         });
         
-        $("#requestQuoteFormWrapper-ppc #second_step.next_custom").click(function(){
+        $("#requestQuoteFormWrapper-ppc #second_step .next_custom").click(function(){
           console.log($('#requestQuoteFormWrapper-ppc select').val());
           $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
         });
