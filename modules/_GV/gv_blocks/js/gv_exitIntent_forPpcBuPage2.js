@@ -156,123 +156,123 @@
           //easing: 'slide',
           //easing: 'easeOutExpo',
           
-          
-          validationOptions: {
-            groups: {
-              username: "firstname lastname email phone"
-              ,first_step: "phones_amt q_for q_type buying_time"
-            },
-            errorPlacement: function(error, element) {
-              if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
-                //error.insertAfter( $(".last_radio", element.parent()) );
-                ////error.insertAfter("#buying_time");
-                ////error.insertAfter("#on_error");
-                error.insertAfter(".step");
-              
-                //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
-              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
-                //alert(error.html() +  ': ' + element.prev().html());
-                error.insertAfter("#phone");
-                //alert(Drupal.t('All fields with * are required'));
-              else
-                error.insertAfter(element);
-            },
-//            showErrors: function(errorMap, errorList) {
-//              alert("Your form contains " + this.numberOfInvalids());
-//              console.log(this);
-//              console.log(this.invalidElements());
+          /*
+////          validationOptions: {
+////            groups: {
+////              username: "firstname lastname email phone"
+////              ,first_step: "phones_amt q_for q_type buying_time"
+////            },
+////            errorPlacement: function(error, element) {
+////              if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
+////                //error.insertAfter( $(".last_radio", element.parent()) );
+////                ////error.insertAfter("#buying_time");
+////                ////error.insertAfter("#on_error");
+////                error.insertAfter(".step");
+////              
+////                //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
+////              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
+////                //alert(error.html() +  ': ' + element.prev().html());
+////                error.insertAfter("#phone");
+////                //alert(Drupal.t('All fields with * are required'));
+////              else
+////                error.insertAfter(element);
+////            },
+//////            showErrors: function(errorMap, errorList) {
+//////              alert("Your form contains " + this.numberOfInvalids());
+//////              console.log(this);
+//////              console.log(this.invalidElements());
+//////              
+//////              this.defaultShowErrors();
+//////            },
+////            rules: {
+////              
+//////              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
+//////                        
+////              // Rules from jquery.validate.js              
+////              
+////              classRuleSettings: {
+////                required: {required: true},
+////                email: {email: true},
+////                url: {url: true},
+////                date: {date: true},
+////                dateISO: {dateISO: true},
+////                dateDE: {dateDE: true},
+////                number: {number: true},
+////                numberDE: {numberDE: true},
+////                digits: {digits: true},
+////                creditcard: {creditcard: true}
+////              },
 //              
-//              this.defaultShowErrors();
-//            },
-            rules: {
+//              
+//              
+//              phones_amt: "required",
+//              q_for: "required",
+//              q_type: "required",
+//              buying_time: "required",
+//              connection: "required",
+//             
+//             firstname: {
+//                required: true,
+//                minlength: 2,
+//                notEqualsTo: $('input[id="firstname"]').attr('title')
+//							},
+//              lastname: {
+//                required: true,
+//                minlength: 2,
+//                notEqualsTo: $('input[id="lastname"]').attr('title')
+//							},
+//              phone: {
+//                required: true,
+//                //number: true,
+//                minlength: 10,
+//                maxlength: 15,
+//                notEqualsTo: $('input[id="phone"]').attr('title')
+//							}
+//              // works
+////              
+////							myemail: {
+////								required: true,
+////								email: false,
+////                number: true
+////							}
+//              
+//						},
+//						messages: {
+//              
+//              // Rules from jquery.validate.js
+////              
+////              messages: {
+////                required: "This field is required.",
+////                remote: "Please fix this field.",
+////                email: "Please enter a valid email address.",
+////                url: "Please enter a valid URL.",
+////                date: "Please enter a valid date.",
+////                dateISO: "Please enter a valid date (ISO).",
+////                number: "Please enter a valid number.",
+////                digits: "Please enter only digits.",
+////                creditcard: "Please enter a valid credit card number.",
+////                equalTo: "Please enter the same value again.",
+////                accept: "Please enter a value with a valid extension.",
+////                maxlength: $.validator.format("Please enter no more than {0} characters."),
+////                minlength: $.validator.format("Please enter at least {0} characters."),
+////                rangelength: $.validator.format("Please enter a value between {0} and {1} characters long."),
+////                range: $.validator.format("Please enter a value between {0} and {1}."),
+////                max: $.validator.format("Please enter a value less than or equal to {0}."),
+////                min: $.validator.format("Please enter a value greater than or equal to {0}.")
+//              },   
+//              
+//             
+//              // Doesn't work... Used snipped above for it.
+//              //required: Drupal.t('All fields with * are required'),
+//              
+//              
+//              // Works!
               
-//              http://docs.jquery.com/Plugins/Validation#List_of_built-in_Validation_methods    
-//                        
-              // Rules from jquery.validate.js              
-              /*
-              classRuleSettings: {
-                required: {required: true},
-                email: {email: true},
-                url: {url: true},
-                date: {date: true},
-                dateISO: {dateISO: true},
-                dateDE: {dateDE: true},
-                number: {number: true},
-                numberDE: {numberDE: true},
-                digits: {digits: true},
-                creditcard: {creditcard: true}
-              },
-              */
+//              phones_amt: Drupal.t('Make your choice!'),
+//              q_for: Drupal.t('Make your choice!'),
+//              buying_time: Drupal.t('Make your choice!'),
+//              connection: Drupal.t('Make your choice!'),
               
-              
-              phones_amt: "required",
-              q_for: "required",
-              q_type: "required",
-              buying_time: "required",
-              connection: "required",
-             
-             firstname: {
-                required: true,
-                minlength: 2,
-                notEqualsTo: $('input[id="firstname"]').attr('title')
-							},
-              lastname: {
-                required: true,
-                minlength: 2,
-                notEqualsTo: $('input[id="lastname"]').attr('title')
-							},
-              phone: {
-                required: true,
-                //number: true,
-                minlength: 10,
-                maxlength: 15,
-                notEqualsTo: $('input[id="phone"]').attr('title')
-							}
-              // works
-              /* 
-							myemail: {
-								required: true,
-								email: false,
-                number: true
-							}
-              */
-						},
-						messages: {
-              
-              // Rules from jquery.validate.js
-              /*
-              messages: {
-                required: "This field is required.",
-                remote: "Please fix this field.",
-                email: "Please enter a valid email address.",
-                url: "Please enter a valid URL.",
-                date: "Please enter a valid date.",
-                dateISO: "Please enter a valid date (ISO).",
-                number: "Please enter a valid number.",
-                digits: "Please enter only digits.",
-                creditcard: "Please enter a valid credit card number.",
-                equalTo: "Please enter the same value again.",
-                accept: "Please enter a value with a valid extension.",
-                maxlength: $.validator.format("Please enter no more than {0} characters."),
-                minlength: $.validator.format("Please enter at least {0} characters."),
-                rangelength: $.validator.format("Please enter a value between {0} and {1} characters long."),
-                range: $.validator.format("Please enter a value between {0} and {1}."),
-                max: $.validator.format("Please enter a value less than or equal to {0}."),
-                min: $.validator.format("Please enter a value greater than or equal to {0}.")
-              },   
-              */
-             
-              // Doesn't work... Used snipped above for it.
-              //required: Drupal.t('All fields with * are required'),
-              
-              
-              // Works!
-              /*
-              phones_amt: Drupal.t('Make your choice!'),
-              q_for: Drupal.t('Make your choice!'),
-              buying_time: Drupal.t('Make your choice!'),
-              connection: Drupal.t('Make your choice!'),
-              */
              
              
              
@@ -284,11 +284,11 @@
 
 
               // Works!
-              /*
-              firstname: {
-                notEqualsTo: Drupal.t("xxxx")
-              },
-              */
+              
+//              firstname: {
+//                notEqualsTo: Drupal.t("xxxx")
+//              },
+              
              
               email: {
                 //required: Drupal.t("We need your email address to contact you"),
@@ -296,7 +296,9 @@
               }
             }
           },
-				 	formOptions :{
+				 	
+          */
+          formOptions :{
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
             //success: function(data){$('#requestQuoteFormWrapper .sending').hide('clip'); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show('clip');},
             
