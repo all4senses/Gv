@@ -77,6 +77,9 @@
         $('#requestQuoteFormWrapper-ppc select').selectmenu({
           //style:'popup', 
           maxHeight: 300
+          ,change: function( event, ui ) {
+                      console.log(ui);
+                   }
   			});
        
        
