@@ -166,7 +166,7 @@
 				 }
 				);
     
-        console.log($("#requestQuoteFormWrapper .multipartForm").formwizard("state"));
+        //console.log($("#requestQuoteFormWrapper .multipartForm").formwizard("state"));
     
     
     
