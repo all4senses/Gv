@@ -888,10 +888,6 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_chartFromView_altered_rotatedFirst4providers(array('view' => 'providers', 'display' => 'block_top_bu_ppc'));
       break;
  
-    case 'buchart_alteredview':
-      $block['subject'] = ''; 
-      $block['content'] = gv_blocks_chartFromView_altered_rotatedFirst4providers(array('view' => 'providers', 'display' => 'block_top_bu_ppc'));
-      break;
     
     case 'exitintent_bu_ppc':
       $block['subject'] = ''; 
@@ -8257,12 +8253,12 @@ function gv_blocks_get_exitIntent_forPpcBuPage() {
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
-        <form class="multipartForm bbq" method="post" action="/request" style="height: 300px; overflow: hidden;">
+        <form class="multipartForm" method="post" action="/request" style="height: 300px; overflow: hidden;">
 
                 
                 <div id="fieldWrapper">
                 
-                    <div class="step" id="start">
+                    <div class="step" id="first_step">
                         
                            <div>We Will SAVE you! :)</div> 
                          
@@ -8380,8 +8376,7 @@ function gv_blocks_get_exitIntent_forPpcBuPage() {
                 <div id="Navigation"> 							
                         <input class="navigation_button" id="back" value="Back" type="reset" />
                         <input class="navigation_button" id="next" value="Let\'s Get Started" type="submit" />
-                        <div class="guide ps"><div id="pdf-icon"></div><div class="text">Receive a <strong>FREE 6-page</strong> Business VoIP Start Up Guide with submission!</div></div>
-                   
+                        
                 </div>
                 
                 <input type="hidden" name="token" value="' . $token . '" />

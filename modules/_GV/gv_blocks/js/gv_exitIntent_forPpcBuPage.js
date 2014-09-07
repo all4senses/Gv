@@ -7,7 +7,7 @@
        
        
        // Exit intent functionality.
-       console.log('xxx');
+       //console.log('xxx');
        
        //var turned_off = null;
         var turned_off = true;
@@ -16,7 +16,7 @@
         setTimeout(
                     function(){
                       turned_off = null; 
-                      console.log('popup is turned on');
+                      //console.log('popup is turned on');
                     },
                    1800 //180000
                  ); 
@@ -142,8 +142,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
-          textSubmit : 'Get My Free Quote',
-          textNext: "Let's Get Started",
+          textSubmit : 'Send me my Free Quote',
+          textNext: "Next",
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
@@ -313,6 +313,7 @@
 				 }
 				);
     
+        console.log($("#requestQuoteFormWrapper .multipartForm").formwizard("state"));
     
     
     
