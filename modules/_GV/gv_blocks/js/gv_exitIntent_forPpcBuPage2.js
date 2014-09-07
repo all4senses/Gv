@@ -73,6 +73,7 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
        
+       /*
         //$('select').selectmenu();
         $('select').selectmenu({
           //style:'popup', 
@@ -137,7 +138,7 @@
         $(".label_after").click(function(){
           $(this).prev().click();
         });
-        
+        */
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
