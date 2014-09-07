@@ -173,7 +173,8 @@
           validationOptions: {
             groups: {
               username: "firstname lastname email phone"
-              ,first_step: "phones_amt q_for q_type buying_time"
+              //,first_step: "phones_amt q_for q_type buying_time"
+              ,first_step: "q_for q_type buying_time"
             },
             errorPlacement: function(error, element) {
               if (element.attr("name") == "phones_amt" || element.attr("name") == "q_for" || element.attr("name") == "buying_time" || element.attr("name") == "q_type" )
