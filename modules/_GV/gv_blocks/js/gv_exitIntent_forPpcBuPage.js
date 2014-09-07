@@ -79,6 +79,10 @@
           maxHeight: 300
           ,change: function( event, ui ) {
                       console.log(ui.value);
+                      console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("menuWidget"));
+                      if (ui.value != '') {
+                        $("#second_step .error").hide();
+                      }
                    }
   			});
        
