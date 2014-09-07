@@ -78,7 +78,7 @@
           //style:'popup', 
           maxHeight: 300
           ,change: function( event, ui ) {
-                      console.log(ui);
+                      console.log(ui.value);
                    }
   			});
        
@@ -218,7 +218,7 @@
               */
               
               
-              phones_amt: "required",
+              //phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
