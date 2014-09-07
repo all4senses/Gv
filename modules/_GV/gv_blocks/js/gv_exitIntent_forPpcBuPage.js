@@ -138,6 +138,10 @@
           $(this).prev().click();
         });
         
+        $("#requestQuoteFormWrapper-ppc .next_custom").click(function(){
+          $("#requestQuoteFormWrapper-ppc .next_custom").formwizard("next");
+        });
+        
         $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
