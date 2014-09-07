@@ -1,7 +1,7 @@
 (function ($) {
 
 // Based on 2-step form of the page v1.
-  Drupal.behaviors.gv_exitIntent_forPpcBuPage = {
+  Drupal.behaviors.gv_exitIntent_forPpcBuPage2 = {
     attach: function (context, settings) {
        
        
