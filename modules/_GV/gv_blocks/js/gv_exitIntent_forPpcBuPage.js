@@ -18,7 +18,7 @@
                       turned_off = null; 
                       console.log('popup is turned on');
                     },
-                   180000
+                   1800 //180000
                  ); 
        
         $(document).bind("mouseleave", function(e)
