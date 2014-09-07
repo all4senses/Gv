@@ -7,8 +7,9 @@
        
        
        // Exit intent functionality.
-       console.log('123');
+       console.log('123456');
        
+       /*
        //var turned_off = null;
         var turned_off = true;
         
@@ -62,7 +63,7 @@
 //            }
 //        }
         
-        
+        */
        
        
        
