@@ -38,7 +38,7 @@
                         
                         ////$.fn.colorbox({iframe:true, width:650, height:400, href: 'get/iframe/exitIntent_lpV4', open: true});  
                         
-                        $.fn.colorbox({inline:true, href:"#exitIntent", width:780, height:440});  
+                        $.fn.colorbox({inline:true, href:"#exitIntent", width:780, height:540});  
                         
                         //$.fn.colorbox.close();
                         //alert('test');
