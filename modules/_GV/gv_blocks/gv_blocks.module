@@ -8209,11 +8209,21 @@ function gv_blocks_get_exitIntent_forPpcBuPage() {
 
   //drupal_add_library('system', 'effects.bounce');
   
-  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+//  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+//  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+//  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+//  //drupal_add_js($path_to_custom_js . 'bbq.js');
+//  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  $path_to_custom_js = 'sites/all/libraries/jquery.plugins/formwizard-307/js/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
   drupal_add_js($path_to_custom_js . 'jquery.validate.js');
   //drupal_add_js($path_to_custom_js . 'bbq.js');
   drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
@@ -8239,7 +8249,7 @@ function gv_blocks_get_exitIntent_forPpcBuPage() {
   drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
   // multistep form and exit intent specific using functionality.
-  drupal_add_js($path_to_custom_js . 'gv_exitIntent_forPpcBuPage2.js');
+  drupal_add_js($path_to_custom_js . 'gv_exitIntent_forPpcBuPage.js');
   
   
   $token = md5(time()); //drupal_get_token('test');

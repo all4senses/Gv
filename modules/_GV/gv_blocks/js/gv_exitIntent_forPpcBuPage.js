@@ -7,7 +7,7 @@
        
        
        // Exit intent functionality.
-       console.log('123');
+       console.log('456');
        
        //var turned_off = null;
         var turned_off = true;
