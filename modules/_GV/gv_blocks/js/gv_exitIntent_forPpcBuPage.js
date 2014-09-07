@@ -138,8 +138,14 @@
           $(this).prev().click();
         });
         
+        
+        
         $("#requestQuoteFormWrapper-ppc .next_custom").click(function(){
           $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
+        });
+        
+        $("#requestQuoteFormWrapper-ppc .back_custom").click(function(){
+          $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("back");
         });
         
         $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard({ 
