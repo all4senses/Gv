@@ -80,7 +80,7 @@
           ,change: function( event, ui ) {
                       console.log(ui.value);
                       console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("option" ));
-                      console.log($('#requestQuoteFormWrapper-ppc select').val());
+                      //console.log($('#requestQuoteFormWrapper-ppc select').val());
                       if (ui.value != '') {
                         $("#second_step .error").hide();
                       }
@@ -148,9 +148,16 @@
         
         
         
-        $("#requestQuoteFormWrapper-ppc .next_custom").click(function(){
+        $("#requestQuoteFormWrapper-ppc #first_step.next_custom").click(function(){
           $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
         });
+        
+        $("#requestQuoteFormWrapper-ppc #second_step.next_custom").click(function(){
+          console.log($('#requestQuoteFormWrapper-ppc select').val());
+          $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
+        });
+        
+        
         
         $("#requestQuoteFormWrapper-ppc .back_custom").click(function(){
           $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("back");
