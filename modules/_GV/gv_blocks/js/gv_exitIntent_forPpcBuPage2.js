@@ -7,9 +7,8 @@
        
        
        // Exit intent functionality.
-       console.log('123456');
+       console.log('123');
        
-       /*
        //var turned_off = null;
         var turned_off = true;
         
@@ -63,7 +62,7 @@
 //            }
 //        }
         
-        */
+        
        
        
        
@@ -144,8 +143,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
-          textSubmit : 'Send me my Free Quote',
-          textNext: "Next",
+          //textSubmit : 'Send me my Free Quote',
+          //textNext: "Next",
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
