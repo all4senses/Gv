@@ -141,7 +141,7 @@
         });
         
         */
-        
+        /*
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
@@ -165,7 +165,7 @@
 				 	}	
 				 }
 				);
-    
+    */
         //console.log($("#requestQuoteFormWrapper .multipartForm").formwizard("state"));
     
     
