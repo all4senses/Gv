@@ -7,7 +7,8 @@
        
        
        // Exit intent functionality.
-
+       console.log('xxx');
+       
        //var turned_off = null;
         var turned_off = true;
         
@@ -15,7 +16,7 @@
         setTimeout(
                     function(){
                       turned_off = null; 
-                      //console.log('popup is turned on');
+                      console.log('popup is turned on');
                     },
                    180000
                  ); 
