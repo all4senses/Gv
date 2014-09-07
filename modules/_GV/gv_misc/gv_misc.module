@@ -1856,7 +1856,8 @@ function gv_misc_flush_caches() {
   // Remove all minified files from jsmin-gv folder.
   // Uncomment in case of changing any js on the site.
   
-  /* // No need to delete files as they are deleted on rebuilding after gv_minified_js variable reset.
+   // No need to delete files as they are deleted on rebuilding after gv_minified_js variable reset.
+  
   $dir = 'sites/default/files/jsmin-gv';
   $objects = scandir($dir);
   foreach ($objects as $object) {
@@ -1864,7 +1865,7 @@ function gv_misc_flush_caches() {
       unlink($dir . "/" . $object);
     }
   }
-  */
+  
   // Uncomment in case of changing any js on the site.
   variable_del('gv_minified_js');
   
