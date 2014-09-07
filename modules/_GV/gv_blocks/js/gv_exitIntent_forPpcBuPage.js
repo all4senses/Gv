@@ -154,7 +154,12 @@
         
         $("#requestQuoteFormWrapper-ppc #second_step .next_custom").click(function(){
           console.log($('#requestQuoteFormWrapper-ppc select').val());
-          $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
+          if (('#requestQuoteFormWrapper-ppc select').val() == '') {
+            $("#second_step .error").show();
+          }
+          else {
+            $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
+          }
         });
         
         
