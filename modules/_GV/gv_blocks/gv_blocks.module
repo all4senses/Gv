@@ -8253,6 +8253,9 @@ function gv_blocks_get_exitIntent_forPpcBuPage() {
   drupal_add_js($path_to_custom_js . 'gv_exitIntent_forPpcBuPage.js');
   
   
+  //exitIntent-ppc-bu
+  drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+  
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
   
