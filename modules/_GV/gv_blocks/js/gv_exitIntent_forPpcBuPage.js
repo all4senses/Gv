@@ -353,11 +353,30 @@
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
             //success: function(data){$('#requestQuoteFormWrapper-ppc .sending').hide('clip'); $("#requestQuoteFormWrapper-ppc .success").append(data.data); $("#requestQuoteFormWrapper-ppc .success").show('clip');},
             
-            success: function(data){$('#requestQuoteFormWrapper-ppc .sending').hide(); $("#requestQuoteFormWrapper-ppc .success").append(data.data); $("#requestQuoteFormWrapper-ppc .success").show();},
+            success: function(data){
+              $('#requestQuoteFormWrapper-ppc .sending').hide(); 
+              $("#requestQuoteFormWrapper-ppc .success").append(data.data); 
+              $("#requestQuoteFormWrapper-ppc .success").show();
+              
+              //console.log('Start timer DEMO...');
+              setTimeout(
+                    function(){
+                      //turned_off = null; 
+                      //console.log('popup is turned offffff DEMO');
+                      $.fn.colorbox.close();
+                      turned_off = true;
+                    },
+                   5000
+                 ); 
+            },
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper-ppc .multipartForm').hide('clip'); $("#requestQuoteFormWrapper-ppc .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper-ppc .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper-ppc .multipartForm').hide('clip'); $("#requestQuoteFormWrapper-ppc .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper-ppc .sending").show('clip'); },
-            beforeSubmit: function(data){$('#requestQuoteFormWrapper-ppc .multipartForm').hide(); $("#requestQuoteFormWrapper-ppc .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); $("#requestQuoteFormWrapper-ppc .sending").show(); },
+            beforeSubmit: function(data){
+              $('#requestQuoteFormWrapper-ppc .multipartForm').hide(); 
+              $("#requestQuoteFormWrapper-ppc .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $("#requestQuoteFormWrapper-ppc .sending").show(); 
+            },
             
             
             dataType: 'json',
