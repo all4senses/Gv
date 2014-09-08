@@ -38,7 +38,25 @@
                         
                         ////$.fn.colorbox({iframe:true, width:650, height:400, href: 'get/iframe/exitIntent_lpV4', open: true});  
                         
-                        $.fn.colorbox({inline:true, href:"#exitIntent", width:780, height:540});  
+                        
+                        // Disable page scrolling
+                        // Other ways of scrolling disabling - 
+                        // http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+                        // http://stackoverflow.com/questions/19817899/jquery-or-javascript-how-to-disable-window-scroll-without-overflowhidden
+                        $("body").css('overflow', 'hidden');
+            
+            
+                        $.fn.colorbox({
+                          inline:true, 
+                          href:"#exitIntent", 
+                          width:780, 
+                          height:540
+                          ,onClosed: function() {
+                                //console.log('closed...');
+                                $("body").css('overflow', 'inherit');
+                                turned_off = true;
+                               }
+                        });  
                         
                         //$.fn.colorbox.close();
                         //alert('test');
@@ -48,7 +66,7 @@
         });
         
         
-        $("#no").click(function(){
+        $("#requestQuoteFormWrapper-ppc .no").click(function(){
             //console.log('Closedddddd');
             $.fn.colorbox.close();
         });
