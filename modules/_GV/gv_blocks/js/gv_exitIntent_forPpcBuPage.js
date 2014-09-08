@@ -381,6 +381,7 @@
             beforeSubmit: function(data){
               //$('#requestQuoteFormWrapper-ppc .multipartForm').hide();
               $('#requestQuoteFormWrapper-ppc .multipartForm .control').html('');
+              $('#requestQuoteFormWrapper-ppc .multipartForm #Navigation').hide();
               $("#requestQuoteFormWrapper-ppc .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $("#requestQuoteFormWrapper-ppc .sending").show(); 
             },
