@@ -6115,13 +6115,14 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   $photo = file_load($form_state['values']['field_p_image']['und'][0]['fid']);
   if ($photo) {
     $share_src_themed = gv_misc_getShareSrcThemed_fromUri($photo->uri);
+    
+    //dpm($form_state['values']);
+    gv_misc_regenerateStyledAndBeautifyImageHtml($photo->uri, 'home_teasers_rotated', $home_teasers_rotated_image_html, $home_teasers_rotated_image_html_beautify, $form_state['values']['title']);      
   }
   
-  //dpm($form_state['values']);
-  gv_misc_regenerateStyledAndBeautifyImageHtml($photo->uri, 'home_teasers_rotated', $home_teasers_rotated_image_html, $home_teasers_rotated_image_html_beautify, $form_state['values']['title']);      
     
   $extra_data = array('body_summary' => @$form_state['values']['body']['und'][0]['summary'],
-                      'share_src_themed' => $share_src_themed, 
+                      'share_src_themed' => @$share_src_themed, 
                       'editor_rating_overall' => $editor_rating_overall, 'editor_ratings' => $votes, 
                       'specs' => $form_state['values']['data_specs'], 
                       'pros_and_cons' => $form_state['values']['data_pros_and_cons'], 
