@@ -158,7 +158,7 @@
           //console.log(('#requestQuoteFormWrapper-ppc select').val());
           if (amt_choosen == '') {
             console.log('bad');
-            $("#second_step .error").show();
+            $("#second_step .err").show();
           }
           else {
             console.log('good');
