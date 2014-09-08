@@ -46,7 +46,7 @@
                         
                 
                         // Uncomment to stop scrolling.
-                        /////////$("body").css('overflow', 'hidden');
+                        $("body").css('overflow', 'hidden');
             
             
                         $.fn.colorbox({
@@ -363,7 +363,7 @@
               $("#requestQuoteFormWrapper-ppc .success").show();
               
               //console.log('Start timer DEMO...');
-              /*
+              
               setTimeout(
                     function(){
                       //turned_off = null; 
@@ -373,7 +373,7 @@
                     },
                    15000
                  ); 
-               */
+               
             },
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper-ppc .multipartForm').hide('clip'); $("#requestQuoteFormWrapper-ppc .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper-ppc .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
