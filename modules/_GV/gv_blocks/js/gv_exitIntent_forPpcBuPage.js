@@ -78,8 +78,8 @@
           //style:'popup', 
           maxHeight: 300
           ,change: function( event, ui ) {
-                      console.log(ui.value);
-                      console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("option" ));
+                      //console.log(ui.value);
+                      //console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("option" ));
                       //console.log($('#requestQuoteFormWrapper-ppc select').val());
                       if (ui.value != '') {
                         $("#second_step .err").hide();
@@ -154,14 +154,14 @@
         
         $("#requestQuoteFormWrapper-ppc #second_step .next_custom").click(function(){
           amt_choosen = $('#requestQuoteFormWrapper-ppc select').val();
-          console.log('amt_choosen = ' + amt_choosen);
+          //console.log('amt_choosen = ' + amt_choosen);
           //console.log(('#requestQuoteFormWrapper-ppc select').val());
           if (amt_choosen == '') {
-            console.log('bad');
+            //console.log('bad');
             $("#second_step .err").show();
           }
           else {
-            console.log('good');
+            //console.log('good');
             $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
           }
         });
