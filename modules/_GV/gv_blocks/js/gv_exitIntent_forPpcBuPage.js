@@ -82,7 +82,7 @@
                       console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("option" ));
                       //console.log($('#requestQuoteFormWrapper-ppc select').val());
                       if (ui.value != '') {
-                        $("#second_step .error").hide();
+                        $("#second_step .err").hide();
                       }
                    }
   			});
