@@ -43,7 +43,10 @@
                         // Other ways of scrolling disabling - 
                         // http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
                         // http://stackoverflow.com/questions/19817899/jquery-or-javascript-how-to-disable-window-scroll-without-overflowhidden
-                        $("body").css('overflow', 'hidden');
+                        
+                
+                        // Uncomment to stop scrolling.
+                        /////////$("body").css('overflow', 'hidden');
             
             
                         $.fn.colorbox({
