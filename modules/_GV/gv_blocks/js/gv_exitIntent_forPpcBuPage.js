@@ -153,11 +153,15 @@
         });
         
         $("#requestQuoteFormWrapper-ppc #second_step .next_custom").click(function(){
-          console.log($('#requestQuoteFormWrapper-ppc select').val());
-          if (('#requestQuoteFormWrapper-ppc select').val() == '') {
+          amt_choosen = $('#requestQuoteFormWrapper-ppc select').val();
+          console.log('amt_choosen = ' + amt_choosen);
+          //console.log(('#requestQuoteFormWrapper-ppc select').val());
+          if (amt_choosen == '') {
+            console.log('bad');
             $("#second_step .error").show();
           }
           else {
+            console.log('good');
             $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
           }
         });
