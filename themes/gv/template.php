@@ -814,10 +814,10 @@ function gv_process_page(&$variables) {
   
   
   // Scroll to anchor on the home page
-//  if ($_SERVER['REQUEST_URI'] == '/') {
-//    $module_path_pages = drupal_get_path('module', 'gv_misc');
-//    drupal_add_js( $module_path_pages . '/js/gv_scrollToAnchor_onClick.js'); 
-//  }
+  if ($_SERVER['REQUEST_URI'] == '/') {
+    $module_path_pages = drupal_get_path('module', 'gv_misc');
+    drupal_add_js( $module_path_pages . '/js/gv_scrollToAnchor_onClick.js'); 
+  }
   
   /* Add Google's fonts */
   //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');
