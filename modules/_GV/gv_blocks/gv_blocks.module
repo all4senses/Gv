@@ -439,6 +439,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['find_solution_anchor'] = array(
+    'info' => 'find-solution anchor for the home page',
+    'cache' => DRUPAL_NO_CACHE,
+  );
 
   
   return $blocks;
@@ -894,9 +898,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_get_exitIntent_forPpcBuPage();
       break;
     
+    case 'find_solution_anchor':
+      $block['subject'] = ''; 
+      $block['content'] = '<div id="find-solution"></div>';
+      break;
 
-
-      
       
   }
 
