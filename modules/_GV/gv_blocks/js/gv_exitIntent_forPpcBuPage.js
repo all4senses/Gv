@@ -11,12 +11,28 @@
        
        //var turned_off = null;
         var turned_off = true;
+        var turned_off_suppressed = null;
+        
+        $(".visit-site-btn, table .company a, table a.logo, table a.link").click(function(){
+            console.log('Exit intent is suppressed by clicking on provider links');
+            console.log(this);
+            turned_off = true;
+            turned_off_suppressed = true;
+        });
+        
+        
         
         // 3 mins delay before turn on the exitIntent popup.
         setTimeout(
                     function(){
-                      turned_off = null; 
-                      //console.log('popup is turned on');
+                      if (!turned_off_suppressed) {
+                        turned_off = null; 
+                        //console.log('popup is turned on');
+                      }
+                      else {
+                        //console.log('popup is NOT turned on, because suppressed - clicked on some outer provider links before exit');
+                      }
+                      
                     },
                    1800 //180000
                  ); 
