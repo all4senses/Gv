@@ -34,7 +34,7 @@
                       }
                       
                     },
-                   1800 //180000
+                   5800 //180000
                  ); 
        
         $(document).bind("mouseleave", function(e)
