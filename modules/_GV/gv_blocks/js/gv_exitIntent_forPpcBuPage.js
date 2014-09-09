@@ -27,10 +27,10 @@
                     function(){
                       if (!turned_off_suppressed) {
                         turned_off = null; 
-                        //console.log('popup is turned on');
+                        console.log('popup is turned on');
                       }
                       else {
-                        //console.log('popup is NOT turned on, because suppressed - clicked on some outer provider links before exit');
+                        console.log('popup is NOT turned on, because suppressed - clicked on some outer provider links before exit');
                       }
                       
                     },
