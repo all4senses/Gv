@@ -65,7 +65,8 @@
                         // Uncomment to stop scrolling.
                         $("body").css('overflow', 'hidden');
             
-            
+                        console.log($.fn.colorbox);
+                        
                         $.fn.colorbox({
                           inline:true, 
                           href:"#exitIntent", 
@@ -79,6 +80,7 @@
                         });  
                         
                         //$.fn.colorbox.close();
+                        console.log($.fn.colorbox);
                         //alert('test');
                     }    
                 }
