@@ -8257,8 +8257,8 @@ function gv_blocks_get_exitIntent_forPpcBuPage() {
   
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  $js_object = drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
-  dpm($js_object);
+  drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
   
   // Colorbox for popup window for exit intent.
   //possible versions for the design: 1, 3, 4, 
