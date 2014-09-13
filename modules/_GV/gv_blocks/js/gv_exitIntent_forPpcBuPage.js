@@ -65,7 +65,7 @@
                         // Uncomment to stop scrolling.
                         $("body").css('overflow', 'hidden');
             
-                        console.log($.fn.colorbox);
+                        //console.log($.fn.colorbox);
                         
                         var cb1;
                         
