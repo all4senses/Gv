@@ -67,7 +67,9 @@
             
                         console.log($.fn.colorbox);
                         
-                        $.fn.colorbox({
+                        var cb1;
+                        
+                        cb1 = $.fn.colorbox({
                           inline:true, 
                           href:"#exitIntent", 
                           width:780, 
@@ -79,8 +81,9 @@
                                }
                         });  
                         
+                        //console.log(cb1);
                         //$.fn.colorbox.close();
-                        console.log($.fn.colorbox);
+                        //console.log($.fn.colorbox);
                         //alert('test');
                     }    
                 }
