@@ -2491,6 +2491,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['field_funnel_sections']['#prefix'] = '<fieldset class="collapsible form-wrapper" id="edit-funnel-sections"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Hide</span> Funnel Sections</a></span></legend>';
         $form['field_funnel_sections']['#suffix'] = '</fieldset>';    
         
+        
+        
+        $form['field_pin_article_to']['#prefix'] = '<fieldset class="collapsible form-wrapper" id="edit-pin-article-to"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Hide</span> Pin article to</a></span></legend>';
+        $form['field_pin_article_to']['#suffix'] = '</fieldset>';    
+        
+        
         $form['show_exit_intent'] = array(
           '#type' => 'checkbox',
           '#title' => 'Show Exit Intent popup window',
