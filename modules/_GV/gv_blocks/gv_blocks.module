@@ -8266,8 +8266,8 @@ function gv_blocks_get_exitIntent_v2() {
       //possible versions for the design: 1, 3, 4, 
       drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
   }
-      //drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-      drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example2/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  //drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example2/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
   
   
   // multistep form and exit intent specific using functionality.
@@ -8277,8 +8277,9 @@ function gv_blocks_get_exitIntent_v2() {
 //  dpm($current_js_array);
   
   //exitIntent-ppc-bu
-  drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+  $css_object = drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
   //drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); 
+  dpm($css_object);
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
