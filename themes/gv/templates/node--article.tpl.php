@@ -524,7 +524,8 @@
       
       
       // Exit intent v2 if turned on for this article.
-      if (!empty($extra_data['show_exit_intent'])) {
+      global $user;
+      if ($user->uid && !empty($extra_data['show_exit_intent'])) {
         echo gv_blocks_get_exitIntent_v2();
       }
       ?>
