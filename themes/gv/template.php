@@ -771,7 +771,7 @@ function gv_process_page(&$variables) {
 //      dpm($variables['node']->type);
 //      
 //      //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
-//      drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+      drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
     }
     
   }
