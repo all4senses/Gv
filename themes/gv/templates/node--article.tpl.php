@@ -523,13 +523,10 @@
       }
       
       
+      // Exit intent v2 if turned on for this article.
       if (!empty($extra_data['show_exit_intent'])) {
-        dpm('Yes');
+        echo gv_blocks_get_exitIntent_v2();
       }
-      else {
-        dpm('No');
-      }
-      
       ?>
       
   </div>  <!-- main-content -->
