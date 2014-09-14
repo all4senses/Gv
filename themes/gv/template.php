@@ -764,6 +764,13 @@ function gv_process_page(&$variables) {
     elseif ($variables['node']->type == 'quote') {
       drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
     }
+    else {
+//      case 'article':
+//    case 'blog_post':
+//    case 'news_post':
+      
+      drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+    }
     
   }
   elseif (arg(0) == 'get' && @arg(1) == 'iframe') {
