@@ -524,7 +524,10 @@
       
       
       if (!empty($extra_data['show_exit_intent'])) {
-        
+        dpm('Yes');
+      }
+      else {
+        dpm('No');
       }
       
       ?>
