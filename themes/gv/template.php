@@ -773,6 +773,8 @@ function gv_process_page(&$variables) {
       if ($extradata = unserialize(@$variables['node']->field_extra_data['und'][0]['value'])) {
         dpm($extradata);
         if (!empty($extradata['show_exit_intent'])) {
+          $css_object = drupal_add_css();
+          dpm($css_object);
           //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
           drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
         }
