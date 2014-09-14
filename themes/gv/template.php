@@ -768,13 +768,13 @@ function gv_process_page(&$variables) {
 //      case 'article':
 //    case 'blog_post':
 //    case 'news_post':
-      dpm($variables['node']);
+      //dpm($variables['node']);
       
-      dpm(unserialize(@$variables['node']->field_extra_data['und'][0]['value']));
-      
-//      
-//      //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
-      drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+      if ($extradata = unserialize(@$variables['node']->field_extra_data['und'][0]['value']) && !empty($extradata['show_exit_intent'])) {
+        //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+        drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+      }
+
     }
     
   }
