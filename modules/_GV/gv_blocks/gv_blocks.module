@@ -8277,9 +8277,14 @@ function gv_blocks_get_exitIntent_v2() {
 //  dpm($current_js_array);
   
   //exitIntent-ppc-bu
-  $css_object = drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
-  //drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); 
-  dpm($css_object);
+  $css_object = drupal_add_css();
+  if (!isset($css_object['sites/all/themes/gv_blue/css/exit-intent-v2.css'])) {
+    //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+    drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE)); 
+  }
+  
+  
+
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;

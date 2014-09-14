@@ -765,18 +765,15 @@ function gv_process_page(&$variables) {
       drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
     }
     else {
-//      case 'article':
-//    case 'blog_post':
-//    case 'news_post':
-      //dpm($variables['node']);
       
       if ($extradata = unserialize(@$variables['node']->field_extra_data['und'][0]['value'])) {
-        dpm($extradata);
+
         if (!empty($extradata['show_exit_intent'])) {
           $css_object = drupal_add_css();
-          dpm($css_object);
-          //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
-          drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+          if (!isset($css_object['sites/all/themes/gv_blue/css/exit-intent-v2.css'])) {
+            //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+            drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE)); 
+          }
         }
       }
 
