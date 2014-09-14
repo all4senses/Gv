@@ -521,6 +521,12 @@
         //dpm($node);
         echo gv_blocks_getAboutTheAuthor($node->uid); 
       }
+      
+      
+      if (!empty($extra_data['show_exit_intent'])) {
+        
+      }
+      
       ?>
       
   </div>  <!-- main-content -->

@@ -2504,7 +2504,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => 45,
         );
         
-        dpm($form);
+        //dpm($form);
         
         
         $form['#validate'][] = 'gv_pages_validateForm_article';
@@ -5839,6 +5839,9 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
       'related_articles_timestamp' => (@$form_state['values']['related_articles']['recalculate'] ? (@$form_state['values']['related_articles']['recalculate_full'] ? -1 : 0) : $old_extra_data['related_articles_timestamp']), //time(),             
       'update_timestamp' => time(),
   );
+  
+  //show_exit_intent
+  dpm($form_state['values']);
   
   //dpm($extra_data);
   

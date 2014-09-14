@@ -434,7 +434,7 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
-  $blocks['exitintent_bu_ppc'] = array(
+  $blocks['exitintent_v2'] = array(
     'info' => 'Exit intent for Ppc Bu page',
     'cache' => DRUPAL_NO_CACHE,
   );
@@ -893,9 +893,9 @@ function gv_blocks_block_view($delta = '') {
       break;
  
     
-    case 'exitintent_bu_ppc':
+    case 'exitintent_v2':
       $block['subject'] = ''; 
-      $block['content'] = gv_blocks_get_exitIntent_forPpcBuPage();
+      $block['content'] = gv_blocks_get_exitIntent_v2();
       break;
     
     case 'find_solution_anchor':
@@ -8209,7 +8209,7 @@ function gv_blocks_get_requestQuoteForPage_v9() {
 /**
  * Ppc bu page /ppc/business-voip exit intent block.
  */
-function gv_blocks_get_exitIntent_forPpcBuPage() {
+function gv_blocks_get_exitIntent_v2() {
 
   drupal_add_library('system', 'ui.widget');
 
