@@ -923,6 +923,10 @@ function gv_preprocess_node(&$variables) {
                 $body_classes_add['quote_page'] = 'quote-page v7 uk';
                 $variables['theme_hook_suggestions'][] = 'node__quote__v7_uk';
             }
+            elseif($variables['node']->title == 'Request a Quote page v7_ca' || $variables['node']->title == 'Request a Quote page v7_ca Final') {
+                $body_classes_add['quote_page'] = 'quote-page v7 ca';
+                $variables['theme_hook_suggestions'][] = 'node__quote__v7_ca';
+            }
             elseif($variables['node']->title == 'Request a Quote page v3' || $variables['node']->title == 'Request a Quote page v3 Final') {
                 $body_classes_add['quote_page'] = 'quote-page v33';
                 $variables['theme_hook_suggestions'][] = 'node__quote__v33';
