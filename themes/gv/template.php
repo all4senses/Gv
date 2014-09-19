@@ -756,6 +756,7 @@ function gv_process_page(&$variables) {
     
     if ($user->uid && in_array($variables['node']->type, array('blog_post', 'news_post', 'article'))) {
       dpm($variables['node']);
+      dpm($variables['classes_array']);
       $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
     }
     
