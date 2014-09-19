@@ -752,8 +752,12 @@ function gv_process_page(&$variables) {
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
   
   if(isset($variables['node'])) {
+    global $user;
     
-    dpm($variables['node']->type);
+    if ($user->uid && in_array($variables['node']->type, array('blog_post', 'news_post', 'article'))) {
+      dpm($variables['node']);
+      $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
+    }
     
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     
