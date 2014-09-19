@@ -79,7 +79,7 @@
       
       
     
-      <section id="main" role="main" class="clearfix">
+      <section id="main" role="main" class="clearfix no-sidebars">
         <div id="fix-resp">
           <?php 
             /*
