@@ -752,6 +752,9 @@ function gv_process_page(&$variables) {
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
   
   if(isset($variables['node'])) {
+    
+    dpm($variables['node']->type);
+    
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     
     if ($variables['node']->type == 'preface') {
