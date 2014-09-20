@@ -753,15 +753,14 @@ function gv_process_page(&$variables) {
   
   if(isset($variables['node'])) {
     
-    global $user;
     if (in_array($variables['node']->type, array('blog_post', 'news_post', 'article'))) {
       //dpm($variables['node']);
       if (arg(2) == 'edit') {
         $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
       }
-      elseif ($user->uid) {
+      else {
         $extra_data = unserialize($variables['node']->field_extra_data['und'][0]['value']);
-        dpm($extra_data);
+        //dpm($extra_data);
         if (!empty($extra_data['hide_sidebars'])) {
           $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
         }
