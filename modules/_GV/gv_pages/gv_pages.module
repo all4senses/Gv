@@ -3308,9 +3308,21 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       
       $form['field_p_erating']['#prefix'] = '<div id="listings">';
       //$form['field_p_erating_cc']['#suffix'] = '<div class="bottom-clear"></div></div>';
-      $form['field_p_erating_re_ca']['#suffix'] = '<div class="bottom-clear"></div></div>';
+      ////$form['field_p_erating_re_ca']['#suffix'] = '<div class="bottom-clear"></div></div>';
+      $form['field_p_erating_re_ca']['#suffix'] = '</div><div class="bottom-clear"></div>';
       //$form['field_p_erating_smbv']['#suffix'] = '<div class="bottom-clear"></div></div>';
        
+      
+      
+        /*
+        $form['field_p_types']['#prefix'] = '<div id="types-n-feat">';
+        $form['field_p_listposition']['#suffix'] = '</div>';
+         
+            
+        $form['field_p_listposition_ch']['#prefix'] = '<div id="listpositions">';
+        $form['field_p_listposition_sh']['#suffix'] = '</div><div class="bottom-clear"></div>';
+        */
+        
       
       // Hide smbv service checkbox and list position.
       $form['field_p_erating_smbv']['#access'] = FALSE;
