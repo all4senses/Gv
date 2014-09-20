@@ -2504,6 +2504,13 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           '#weight' => 45,
         );
         
+        $form['hide_sidebars'] = array(
+          '#type' => 'checkbox',
+          '#title' => 'Hide sidebars for this article',
+          '#default_value' => @$extra_data['hide_sidebars'],
+          '#weight' => 46,
+        );
+        
         //dpm($form);
         
         
@@ -5839,9 +5846,10 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
       'related_articles_timestamp' => (@$form_state['values']['related_articles']['recalculate'] ? (@$form_state['values']['related_articles']['recalculate_full'] ? -1 : 0) : $old_extra_data['related_articles_timestamp']), //time(),             
       'update_timestamp' => time(),
       'show_exit_intent' => @$form_state['values']['show_exit_intent'],
+      'hide_sidebars' => @$form_state['values']['hide_sidebars'],
   );
   
-  //show_exit_intent
+
   //dpm($form_state['values']);
   
   //dpm($extra_data);

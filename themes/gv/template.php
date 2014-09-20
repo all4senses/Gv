@@ -762,6 +762,9 @@ function gv_process_page(&$variables) {
       elseif ($user->uid) {
         $extra_data = unserialize($variables['node']->field_extra_data['und'][0]['value']);
         dpm($extra_data);
+        if (!empty($extra_data['hide_sidebars'])) {
+          $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
+        }
       }
     }
     
