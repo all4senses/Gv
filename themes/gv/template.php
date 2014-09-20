@@ -752,18 +752,16 @@ function gv_process_page(&$variables) {
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
   
   if(isset($variables['node'])) {
-    global $user;
     
-    if ($user->uid && in_array($variables['node']->type, array('blog_post', 'news_post', 'article'))) {
-      dpm($variables['node']);
-      
-      dpm(arg());
-      
-      //$variables['classes_array'][] = 'no-sidebars';
-      //dpm($variables['classes_array']);
+    global $user;
+    if (in_array($variables['node']->type, array('blog_post', 'news_post', 'article'))) {
+      //dpm($variables['node']);
       if (arg(2) == 'edit') {
-      
-      $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
+        $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
+      }
+      elseif ($user->uid) {
+        $extra_data = unserialize($variables['node']->field_extra_data['und'][0]['value']);
+        dpm($extra_data);
       }
     }
     
