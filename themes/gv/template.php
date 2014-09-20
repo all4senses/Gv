@@ -761,7 +761,10 @@ function gv_process_page(&$variables) {
       
       //$variables['classes_array'][] = 'no-sidebars';
       //dpm($variables['classes_array']);
+      if (arg(2) == 'edit') {
+      
       $variables['theme_hook_suggestions'][] = 'page__no_sidebars';
+      }
     }
     
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
