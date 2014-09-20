@@ -3300,11 +3300,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //        }
 //      }
             
-*/            
-         global $user;
-      if ($user->uid == 1) {
-        break;
-      }   
+*/        
             
                   
      // //$form['field_p_types']['#suffix'] = '<div class="bottom-clear"></div>';
@@ -3318,7 +3314,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_p_erating']['#prefix'] = '<div id="listings">';
       //$form['field_p_erating_cc']['#suffix'] = '<div class="bottom-clear"></div></div>';
       ////$form['field_p_erating_re_ca']['#suffix'] = '<div class="bottom-clear"></div></div>';
-      $form['field_p_erating_re_ca']['#suffix'] = '</div><div class="bottom-clear"></div></fieldset>';
+      $form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset><div class="bottom-clear"></div>';
       //$form['field_p_erating_smbv']['#suffix'] = '<div class="bottom-clear"></div></div>';
        
       
