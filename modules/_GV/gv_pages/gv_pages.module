@@ -3310,15 +3310,15 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //      $form['field_funnel_sections']['#suffix'] = '</fieldset>';    
 //      $form['field_funnel_sections']['und']['#title'] = '';
       
-      //$form['field_p_types']['#prefix'] = '<fieldset class="collapsible form-wrapper" id="edit-service-typesn class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Hide</span> Service Types Available</a></span></legend>';
-      $form['field_p_types']['#prefix'] = '<fieldset>';
+      $form['field_p_types']['#prefix'] = '<fieldset class="collapsible form-wrapper" id="edit-service-types" class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Hide</span> Service Types Available</a></span></legend><div class="fieldset-wrapper">';
+      //$form['field_p_types']['#prefix'] = '<fieldset>';
       //$form['field_p_types']['und']['#title'] = '';
       
       
       $form['field_p_erating']['#prefix'] = '<div id="listings">';
       //$form['field_p_erating_cc']['#suffix'] = '<div class="bottom-clear"></div></div>';
       ////$form['field_p_erating_re_ca']['#suffix'] = '<div class="bottom-clear"></div></div>';
-      $form['field_p_erating_re_ca']['#suffix'] = '</div><div class="bottom-clear"></div>'; //$form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset><div class="bottom-clear"></div>';
+      $form['field_p_erating_re_ca']['#suffix'] = '</div></div></fieldset><div class="bottom-clear"></div>'; //$form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset><div class="bottom-clear"></div>';
       //$form['field_p_erating_smbv']['#suffix'] = '<div class="bottom-clear"></div></div>';
        
       
