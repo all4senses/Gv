@@ -2950,10 +2950,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             
             
       
-      global $user;
-      if ($user->uid == 1) {
-        break;
-      }
+      
             
       $service_types = unserialize(SERVICE_TYPES);
       $service_descriptions = unserialize(SERVICE_DESCRIPTIONS);
@@ -3304,7 +3301,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //      }
             
 */            
-            
+         global $user;
+      if ($user->uid == 1) {
+        break;
+      }   
             
                   
      // //$form['field_p_types']['#suffix'] = '<div class="bottom-clear"></div>';
