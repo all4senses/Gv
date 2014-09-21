@@ -150,7 +150,10 @@ function gv_blocks_block_info() {
     'info' => 'Bottom section of WC providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+  $blocks['crm_provider_p_bottom'] = array(
+    'info' => 'Bottom section of CRM providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   $blocks['best_voip_p_bottom'] = array(
     'info' => 'Bottom section of best-voip-service-providers page preface',
@@ -590,6 +593,10 @@ function gv_blocks_block_view($delta = '') {
     case 'wc_provider_p_bottom':
       $block['subject'] = 'Bottom section of WC providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('web-conferencing-voip-providers');
+      break;
+    case 'crm_provider_p_bottom':
+      $block['subject'] = 'Bottom section of CRM providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('crm-voip-providers');
       break;
     
     
@@ -2530,6 +2537,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/fax' => 'ifa',
       '/hosted-pbx' => 'pbx',
       '/web-conferencing' => 'wc',
+      '/crm-software' => 'crm',
       //'/small-business-voip' => 'smbv',
     );
     
@@ -2573,6 +2581,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     'wc' => array (
       'rating_table' => 'field_data_field_p_erating_wc',
       'rating_field' => 'field_p_erating_wc_value',
+    ),
+    'crm' => array (
+      'rating_table' => 'field_data_field_p_erating_crm',
+      'rating_field' => 'field_p_erating_crm_value',
     ),
   );
   
@@ -3528,6 +3540,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     'page-compare-pbx-voip-providers' => 'pbx',
     //'page-compare-smbv-voip-providers' => NULL,
     'web-conferencing-voip-providers' => 'wc',
+    'crm-voip-providers' => 'crm',
   );
   
   $map_path_to_type = array(
