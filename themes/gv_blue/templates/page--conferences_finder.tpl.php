@@ -57,7 +57,7 @@
 
   
   
-  <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
+  <footer id="footer" role="contentinfo" class="clearfix">
    <div id="footer-inside">
 
     <?php
