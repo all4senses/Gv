@@ -774,6 +774,9 @@ function gv_process_page(&$variables) {
       if (in_array(@$variables['node']->field_preface_key['und'][0]['value'], $pages_with_separate_tpl) && arg(2) != 'edit') {
         $variables['theme_hook_suggestions'][] = 'page__compare_providers';
       }
+      elseif (@$variables['node']->field_preface_key['und'][0]['value'] == 'tech-conferences-finder') {
+        $variables['theme_hook_suggestions'][] = 'page__conferences_finder';
+      }
     }
             
     elseif ($variables['node']->type == 'quote') {
