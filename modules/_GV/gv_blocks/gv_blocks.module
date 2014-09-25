@@ -446,6 +446,11 @@ function gv_blocks_block_info() {
     'info' => 'find-solution anchor for the home page',
     'cache' => DRUPAL_NO_CACHE,
   );
+  
+  $blocks['conf_search'] = array(
+    'info' => 'Search block for main conf page',
+    'cache' => DRUPAL_NO_CACHE,
+  );
 
   
   return $blocks;
@@ -910,6 +915,13 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = '<div id="find-solution"></div>';
       break;
 
+    
+    case 'conf_search':
+      $block['subject'] = ''; 
+      $block['content'] = gv_blocks_get_confMainSearch();
+      break;
+    
+    
       
   }
 
@@ -8740,3 +8752,136 @@ function gv_blocks_userBlock() {
   return $out;
 }
 
+
+
+function gv_blocks_get_confMainSearch() {
+  
+  return drupal_get_form('gv_blocks_get_confMainSearch_form');
+}
+
+
+/**
+ * Implements hook_form().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_blocks_get_confMainSearch_form($form, &$form_state) {
+  
+  global $user;
+  
+  $form['title'] = array(
+    //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
+    '#markup' => '<div class="title"><div>Stay informed - </div>Sign up for our newsletter.</div>',
+      
+  );
+  
+  $form['email'] = array(
+    '#type' => 'textfield',
+    //'#title' => 'Sign up to receive weekly updates',
+    //'#default_value' => $user->uid ? $user->mail : NULL,
+    //'#description' => '',
+    //'#element_validate' => array('gv_misc_validate_email'),
+    '#required' => TRUE,
+    //'#access' => $user->uid ? FALSE : TRUE,
+    '#attributes' => array('title' => 'EMAIL'),
+  );
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Sign Up'),
+  ); 
+  
+  
+  // Add stars widgets to a Rating block
+  $module_path = drupal_get_path('module', 'gv_misc');
+
+  $form['#attached']['js'] = array(
+    // Add hints inside some fields
+    $module_path . '/js/gv_newsletterSubscribe_fieldHints.js',
+  );
+
+  
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_validate().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_blocks_get_confMainSearch_form_validate(&$form, &$form_state) {
+
+  //drupal_set_message('In Validate!', 'warning');
+  //dpm($form_state['values']);
+  //dpm($form);
+    
+  global $user;
+  
+  // Clear hints, if any.
+  $fields_to_clear_hints = array('email' => array('hint' => @$form['email']['#attributes']['title']));
+  foreach ($fields_to_clear_hints as $fname => $fdata) {
+   
+    if ($form_state['values'][$fname] == $fdata['hint']) {
+      
+      // This clear the field.
+      $form[$fname]['#value'] = NULL;
+      
+      // Just in case.
+      // BUT! It causes fatal eror with #parent index absence
+      //form_set_value($form[$fdata['set']][$fname], array('#value' => NULL), $form_state);
+      
+      // Just in case on more.
+      $form_state['values'][$fname] = NULL;
+      
+      if (isset($form[$fname]['#required']) && $form[$fname]['#required']) {
+        form_set_error($fname, t('Please fill the field "' . $fname . '"'));
+        return;
+      }
+      
+    }
+    elseif ($fname == 'email' && !preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $form_state['values'][$fname])) {
+      form_set_error($fname, 'Wrong email format!');
+      return;
+    }
+    
+  }
+  
+  // Check if submitted email was submitted previously.
+  $query = db_select('gv_emails_subscribed', 'e')  
+        ->fields('e', array('email'));
+  $query->condition('e.email', $form_state['values']['email']);
+  $email = $query->execute()->fetchField();
+  if ($email) {
+    form_set_error('email', 'Email ' . $form_state['values']['email'] . ' has been submitted already!');
+    return;
+  }
+  
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_blocks_get_confMainSearch_form_submit(&$form, &$form_state) {
+  
+  $verification_code = md5(time());
+  db_insert('gv_emails_subscribed')
+    ->fields(array(
+      'email'=> $form_state['values']['email'],
+      'timestamp'=> time(),
+      'code' => $verification_code,
+    ))
+    ->execute();
+    
+  //gv_misc_sendMessage('email_verification', array('verification_code' => $verification_code . '=' . urlencode($form_state['values']['email']), 'email' => $form_state['values']['email']));
+  
+  drupal_set_message('Thank you for subscribing to our newsletter.');
+  drupal_goto(ltrim(@$_SERVER['REDIRECT_URL'], '/'), array('query' => array('nocache' => 1)));
+}

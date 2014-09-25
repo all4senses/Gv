@@ -37,8 +37,13 @@
           <?php print render($page['help']); ?>
           <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
           
-          <?php print render($page['above_content']); ?>
-          <?php print render($page['content']); ?>
+          <?php 
+            echo render($page['above_content']);
+            echo render($page['content']); 
+            
+            echo gv_blocks_get_confMainSearch();
+            
+          ?>
         
           </div> <!-- /#fix-resp -->
       </section> <!-- /#main -->
