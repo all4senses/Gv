@@ -51,9 +51,7 @@
 
       <div class="bottom-clear"></div>
       
-      <div id="above_footer">
-          <?php echo render($page['above_footer']); ?>
-      </div>
+      
 
   </div> <!-- /#all-content -->
 
@@ -67,7 +65,7 @@
 
     <?php
        
-        echo render($page['footer']);
+        //echo render($page['footer']);
         
         echo '<div class="c"><div>Copyright</div> 2014 GetVoIP.com | All Rights Reserved</div>';
         

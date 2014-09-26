@@ -8772,7 +8772,12 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   
   $form['title'] = array(
     //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
-    '#markup' => '<div class="title"><div>Stay informed - </div>Sign up for our newsletter.</div>',
+    '#markup' => '<div class="title"><div>Stay informed - </div>Sign up for our newsletter.</div>'
+      . '<div id="project-label">Select a project (type "j" for a start):</div>
+<img id="project-icon" src="images/transparent_1x1.png" class="ui-state-default" alt="">
+<input id="project">
+<input type="hidden" id="project-id">
+<p id="project-description"></p>',
       
   );
   
@@ -8795,12 +8800,23 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   
   
   // Add stars widgets to a Rating block
-  $module_path = drupal_get_path('module', 'gv_misc');
+  $gv_misc_path = drupal_get_path('module', 'gv_misc');
+  $gv_blocks_path = drupal_get_path('module', 'gv_blocks');
 
-  $form['#attached']['js'] = array(
-    // Add hints inside some fields
-    $module_path . '/js/gv_newsletterSubscribe_fieldHints.js',
-  );
+  
+  $form['#attached'] = array(
+      'library' => array(
+        array('system', 'ui.autocomplete'),
+      ),
+      'js' => array(
+        // Add hints inside some fields
+        $gv_misc_path . '/js/gv_newsletterSubscribe_fieldHints.js',
+        // Autocomplete custom functionality
+        $gv_blocks_path . '/js/gv_conf_main_page.js',
+      ),
+    );
+  
+  
 
   
   return $form;
