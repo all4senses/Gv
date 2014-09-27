@@ -46,7 +46,7 @@
         return false;
       }
     })
-    
+    /*
     // doesnt work! See below working...
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
       console.log('a1...');
@@ -54,23 +54,24 @@
         .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
         .appendTo( ul );
     }
-    
+    */
     ;
     
     
  
- /*
+ 
  $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
             // span uses the class found in the "highlightClass" option.
-//            var re = new RegExp( "(" + this.term + ")", "gi" ),
-//                cls = this.options.highlightClass,
-//                template = "<span style='color: red;' class='" + cls + "'>$1</span>",
-//                label = item.label.replace( re, template ) + "<br>" + item.desc,
-//                $li = $( "<li/>" )
-//                     //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-//                      .appendTo( ul );
+            var re = new RegExp( "(" + this.term + ")", "gi" ),
+                cls = this.options.highlightClass,
+                template = "<span style='color: red;' class='" + cls + "'>$1</span>",
+                //label = item.label.replace( re, template ) + "<br>" + item.desc,
+                label = item.label.replace( re, template );
+                $li = $( "<li/>" )
+                     //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+                      .appendTo( ul );
             
             // Create and return the custom menu item content.
 //            $( "<a/>" ).attr( "href", "#" )
@@ -79,13 +80,13 @@
             
             //console.log('a1...');
             
-//            return $li;
-            return $( "<li>" )
-                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-                  .appendTo( ul );
+            return $li;
+//            return $( "<li>" )
+//                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+//                  .appendTo( ul );
             
   }
- */
+ 
  
  
  /*
