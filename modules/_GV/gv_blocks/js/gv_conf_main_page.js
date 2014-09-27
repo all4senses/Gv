@@ -84,6 +84,8 @@
                        .html( label )
                        .appendTo( $li );
             
+            console.log('a2...');
+            
             return $li;
             
         }
