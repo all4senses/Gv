@@ -59,7 +59,7 @@
     
     
  
- 
+ /*
  $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
@@ -84,8 +84,8 @@
                   .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
                   .appendTo( ul );
             
-        }
- 
+  }
+ */
  
  
  /*
