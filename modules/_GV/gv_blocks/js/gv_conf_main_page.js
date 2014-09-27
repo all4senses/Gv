@@ -67,7 +67,9 @@
                 cls = this.options.highlightClass,
                 template = "<span style='color: red;' class='" + cls + "'>$1</span>",
                 label = item.label.replace( re, template ),
-                $li = $( "<li/>" ).appendTo( ul );
+                $li = $( "<li/>" )
+                      .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+                      .appendTo( ul );
             
             // Create and return the custom menu item content.
             $( "<a/>" ).attr( "href", "#" )
@@ -76,10 +78,10 @@
             
             console.log('a1...');
             
-            //return $li;
-            return $( "<li>" )
-                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-                  .appendTo( ul );
+            return $li;
+//            return $( "<li>" )
+//                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+//                  .appendTo( ul );
             
         }
  
