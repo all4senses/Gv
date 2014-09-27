@@ -45,6 +45,7 @@
       }
     })
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      console.log('a1...');
       return $( "<li>" )
         .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
         .appendTo( ul );
