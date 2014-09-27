@@ -88,7 +88,7 @@
  
  
  
- 
+ /*
  // Custom autocomplete instance.
     $.widget( "app.autocomplete", $.ui.autocomplete, {
         
@@ -119,7 +119,7 @@
         }
         
     });
-    
+    */
     
     
        
