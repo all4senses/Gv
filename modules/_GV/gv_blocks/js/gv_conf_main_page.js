@@ -46,6 +46,7 @@
       }
     })
     /*
+     * doesnt work! See below working...
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
       console.log('a1...');
       return $( "<li>" )
@@ -75,7 +76,10 @@
             
             console.log('a1...');
             
-            return $li;
+            //return $li;
+            return $( "<li>" )
+                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+                  .appendTo( ul );
             
         }
  
