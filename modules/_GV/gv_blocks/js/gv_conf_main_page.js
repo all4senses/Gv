@@ -37,8 +37,8 @@
         return false;
       },
       select: function( event, ui ) {
-        console.log(ui);
-        console.log(event);
+        //console.log(ui);
+        //console.log(event);
         $( "#project" ).val( ui.item.label );
         $( "#project-id" ).val( ui.item.value );
         $( "#project-description" ).html( ui.item.desc );
@@ -61,8 +61,7 @@
     
  
  
- $("#project").data( "autocomplete" )
-         ._renderItem = function( ul, item ) {
+ $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
             // span uses the class found in the "highlightClass" option.
@@ -79,7 +78,7 @@
                        .html( label )
                        .appendTo( $li );
             
-            //console.log('a1...');
+            console.log('a1...');
             
             return $li;
 //            return $( "<li>" )
