@@ -56,12 +56,12 @@
         .appendTo( ul );
     }
     */
-//    ;
-//    
-//    
-// 
-// 
-// $("#project").data( "autocomplete" )
+    ;
+    
+    
+ 
+ 
+ $("#project").data( "autocomplete" )
          ._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
@@ -79,7 +79,7 @@
                        .html( label )
                        .appendTo( $li );
             
-            console.log('a1...');
+            //console.log('a1...');
             
             return $li;
 //            return $( "<li>" )
