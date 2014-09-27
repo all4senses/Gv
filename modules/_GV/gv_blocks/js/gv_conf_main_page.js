@@ -56,12 +56,13 @@
         .appendTo( ul );
     }
     */
-    ;
-    
-    
- 
- 
- $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
+//    ;
+//    
+//    
+// 
+// 
+// $("#project").data( "autocomplete" )
+         ._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
             // span uses the class found in the "highlightClass" option.
