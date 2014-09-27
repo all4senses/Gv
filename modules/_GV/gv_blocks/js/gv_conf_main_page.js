@@ -29,6 +29,7 @@
     ];
  
     $( "#project" ).autocomplete({
+      highlightClass: "bold-text",
       minLength: 0,
       source: projects,
       focus: function( event, ui ) {
@@ -39,18 +40,58 @@
         $( "#project" ).val( ui.item.label );
         $( "#project-id" ).val( ui.item.value );
         $( "#project-description" ).html( ui.item.desc );
-        $( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
+        //$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
  
         return false;
       }
     })
+    /*
     .autocomplete( "instance" )._renderItem = function( ul, item ) {
       console.log('a1...');
       return $( "<li>" )
         .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
         .appendTo( ul );
-    };
+    }
+    */
+    ;
  
+ 
+ 
+ 
+ 
+ 
+ 
+ // Custom autocomplete instance.
+    $.widget( "app.autocomplete", $.ui.autocomplete, {
+        
+        // Which class get's applied to matched text in the menu items.
+        options: {
+            highlightClass: "ui-state-highlight"
+        },
+        
+        _renderItem: function( ul, item ) {
+
+            // Replace the matched text with a custom span. This
+            // span uses the class found in the "highlightClass" option.
+            var re = new RegExp( "(" + this.term + ")", "gi" ),
+                cls = this.options.highlightClass,
+                template = "<span class='" + cls + "'>$1</span>",
+                label = item.label.replace( re, template ),
+                $li = $( "<li/>" ).appendTo( ul );
+            
+            // Create and return the custom menu item content.
+            $( "<a/>" ).attr( "href", "#" )
+                       .html( label )
+                       .appendTo( $li );
+            
+            return $li;
+            
+        }
+        
+    });
+    
+    
+    
        
     }
   };
