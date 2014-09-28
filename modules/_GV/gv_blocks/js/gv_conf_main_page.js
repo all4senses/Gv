@@ -55,6 +55,7 @@
         .appendTo( ul );
     }
     */
+   /*
    //.data("ui-autocomplete")._renderItem = function( ul, item ) {
    .data("autocomplete")._renderItem = function( ul, item ) {
         console.log('a5...');
@@ -63,6 +64,7 @@
            .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
            .appendTo( ul );
       }
+      */
     ;
     
     
@@ -70,7 +72,7 @@
  // http://www.boduch.ca/2013/11/jquery-ui-highlighting-autocomplete-text.html
  // http://forum.jquery.com/topic/autocomplete-and-bold-highlight
  // http://jsfiddle.net/adamboduch/jhZ6E/
- /*
+ 
  $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
@@ -81,23 +83,24 @@
                 //label = item.label.replace( re, template ) + "<br>" + item.desc,
                 label = item.label.replace( re, template );
                 $li = $( "<li/>" )
-                     //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+                      .data("item.autocomplete", item) // !!!!!!!!!!!!!
                       .appendTo( ul );
             
             // Create and return the custom menu item content.
-//            $( "<a/>" ).attr( "href", "#" )
-//                       .html( label )
-//                       .appendTo( $li );
+            $( "<a/>" ).attr( "href", "#" )
+                       .html( label )
+                       .appendTo( $li );
             
-            console.log('a1...');
+            console.log('a8...');
             
-//            return $li;
-            return $( "<li>" )
-                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-                  .appendTo( ul );
+            return $li;
+//            return $( "<li>" )
+//                  .data("item.autocomplete", item)
+//                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+//                  .appendTo( ul );
             
   }
- */
+ 
  
  
  /*
