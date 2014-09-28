@@ -38,7 +38,6 @@
       },
       select: function( event, ui ) {
         //console.log(ui);
-        //console.log(event);
         $( "#project" ).val( ui.item.label );
         $( "#project-id" ).val( ui.item.value );
         $( "#project-description" ).html( ui.item.desc );
@@ -71,19 +70,20 @@
                 //label = item.label.replace( re, template ) + "<br>" + item.desc,
                 label = item.label.replace( re, template );
                 $li = $( "<li/>" )
+                     //.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
                       .appendTo( ul );
             
             // Create and return the custom menu item content.
-            $( "<a/>" ).attr( "href", "#" )
-                       .html( label )
-                       .appendTo( $li );
+//            $( "<a/>" ).attr( "href", "#" )
+//                       .html( label )
+//                       .appendTo( $li );
             
-            console.log('a1...');
+            //console.log('a1...');
             
-            return $li;
-//            return $( "<li>" )
-//                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-//                  .appendTo( ul );
+//            return $li;
+            return $( "<li>" )
+                  .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
+                  .appendTo( ul );
             
   }
  
