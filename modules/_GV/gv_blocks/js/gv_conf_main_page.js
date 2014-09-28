@@ -80,8 +80,8 @@
             var re = new RegExp( "(" + this.term + ")", "gi" ),
                 cls = this.options.highlightClass,
                 template = "<span style='color: red;' class='" + cls + "'>$1</span>",
-                //label = item.label.replace( re, template ) + "<br>" + item.desc,
-                label = item.label.replace( re, template );
+                label = item.label.replace( re, template ) + "<br>" + item.desc,
+                //label = item.label.replace( re, template );
                 $li = $( "<li/>" )
                       .data("item.autocomplete", item) // !!!!!!!!!!!!!
                       .appendTo( ul );
