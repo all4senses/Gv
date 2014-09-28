@@ -59,7 +59,9 @@
     
     
  
- 
+ // http://www.boduch.ca/2013/11/jquery-ui-highlighting-autocomplete-text.html
+ // http://forum.jquery.com/topic/autocomplete-and-bold-highlight
+ // http://jsfiddle.net/adamboduch/jhZ6E/
  $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
