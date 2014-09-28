@@ -80,7 +80,7 @@
 //                       .html( label )
 //                       .appendTo( $li );
             
-            //console.log('a1...');
+            console.log('a1...');
             
 //            return $li;
             return $( "<li>" )
