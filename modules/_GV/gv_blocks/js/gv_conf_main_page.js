@@ -55,9 +55,11 @@
         .appendTo( ul );
     }
     */
-   .data("ui-autocomplete")._renderItem = function( ul, item ) {
+   //.data("ui-autocomplete")._renderItem = function( ul, item ) {
+   .data("autocomplete")._renderItem = function( ul, item ) {
         console.log('a5...');
         return $( "<li>" )
+           .data("item.autocomplete", item)
            .append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
            .appendTo( ul );
       }
