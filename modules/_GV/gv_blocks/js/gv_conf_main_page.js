@@ -31,7 +31,7 @@
     $( "#project" ).autocomplete({
       highlightClass: "bold-text",
       minLength: 0,
-      source: projects,
+      
       focus: function( event, ui ) {
         $( "#project" ).val( ui.item.label );
         return false;
@@ -45,6 +45,25 @@
  
         return false;
       }
+      //,source: projects,
+      /*
+      ,source: function( request, response ) {
+          $.ajax({
+              url: "get-conferences-ac",
+              data: {term: request.term},
+              dataType: "json",
+              success: function( data ) {
+                  response( $.map( data.myData, function( item ) {
+                      return {
+                          label: item.title,
+                          value: item.turninId
+                      }
+                  }));
+              }
+          });
+      }
+      */
+      ,source: "get-conferences-ac"
     })
     /*
     // doesnt work! See below working...
@@ -72,6 +91,9 @@
  // http://www.boduch.ca/2013/11/jquery-ui-highlighting-autocomplete-text.html
  // http://forum.jquery.com/topic/autocomplete-and-bold-highlight
  // http://jsfiddle.net/adamboduch/jhZ6E/
+ 
+ // !!!!!!!!!!!
+ // http://stackoverflow.com/questions/18231474/customize-autocomplete-display-in-jquery-ui-1-8
  
  $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
 

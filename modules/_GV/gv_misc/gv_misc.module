@@ -19,6 +19,14 @@ function gv_misc_menu() {
  
   gv_misc_setPagesToShow410($items);
   
+  // Get conferences autocomplete ajax
+  $items['get-conferences-ac'] = array(
+    'title' => 'Get conferences autocomplete ajax',
+    'page callback' => 'gv_misc_getConferences_autocomplete_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['get-popup-on-exit-intent'] = array(
     'title' => 'Pop up iframe for exit intent',
     'page callback' => 'gv_misc_getPopupOnExitIntent_iframe',
@@ -634,6 +642,42 @@ function gv_mics_page404CustomContent() {
       </div>
   </div>';
 
+}
+
+
+/**
+ * Return conferences for autoselect via ajax request.. 
+ */
+function gv_misc_getConferences_autocomplete_ajax() {
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+
+  if ($post['op'] != 'get') {
+    return FALSE;
+  }
+  
+  $conferences = array(
+       0 => array(
+           'value' => "jquery",
+        'label' => "jQuery",
+        'desc' => "the 222 write less, do more, JavaScript library",
+        
+      ),
+      1 => array(
+        'value' => "jquery-ui",
+        'label' => "jQuery UI",
+        'desc' => "the official user interface library for jQuery",
+      ),
+      2 => array (
+        'value' => "sizzlejs",
+        'label' => "Sizzle JS",
+        'desc' => "a... pure-JavaScript CSS selector engine",
+      ),
+  );
+  drupal_json_output($conferences);
 }
 
 

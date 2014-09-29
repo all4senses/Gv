@@ -8768,6 +8768,10 @@ function gv_blocks_get_confMainSearch() {
  */
 function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   
+  // Date range formatting
+  // http://forums.phpfreaks.com/topic/267102-multi-date-range-format/
+  // http://stackoverflow.com/questions/3654101/format-a-date-string-in-php
+  
   global $user;
   
   $form['title'] = array(
