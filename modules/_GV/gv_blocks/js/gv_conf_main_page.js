@@ -6,6 +6,7 @@
       
       //console.log('gv_conf_main_page...');
   
+      var cache = {};
   
       var projects = [
       {
@@ -30,8 +31,7 @@
  
     $( "#project" ).autocomplete({
       highlightClass: "bold-text",
-      minLength: 0,
-      
+      minLength: 2,
       focus: function( event, ui ) {
         $( "#project" ).val( ui.item.label );
         return false;
@@ -63,7 +63,42 @@
           });
       }
       */
-      ,source: "get-conferences-ac"
+      ,source: function( request, response ) {
+        var term = request.term;
+        if ( term in cache ) {
+          response( cache[ term ] );
+          return;
+        }
+ 
+        $.getJSON( "search.php", request, function( data, status, xhr ) {
+          cache[ term ] = data;
+          response( data );
+        });
+        
+      
+        $.ajax({
+              url: "get-conferences-ac",
+              data: {term: request.term},
+              dataType: "json",
+              success: function( data ) {
+                
+                  cache[ term ] = data;
+                  response( data );
+                  /*
+                  response( 
+                          
+                        $.map( data.myData, function( item ) {
+                          return {
+                              label: item.title,
+                              value: item.turninId
+                          }
+                      })
+                  );*/
+              }
+          });
+        
+      }
+      //,source: "get-conferences-ac"
     })
     /*
     // doesnt work! See below working...
