@@ -148,7 +148,7 @@
                        .html( label )
                        .appendTo( $li );
             
-            console.log('a8...');
+            //console.log('a8...');
             
             return $li;
 //            return $( "<li>" )
