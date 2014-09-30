@@ -69,12 +69,12 @@
           response( cache[ term ] );
           return;
         }
- 
+        /*
         $.getJSON( "search.php", request, function( data, status, xhr ) {
           cache[ term ] = data;
           response( data );
         });
-        
+        */
       
         $.ajax({
               url: "get-conferences-ac",
