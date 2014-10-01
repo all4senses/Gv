@@ -7849,6 +7849,10 @@ function gv_misc_mail($key, &$message, $params) {
       $message['subject'] = 'GV Report from the RingCentral-UK request sending.';
       $message['body'][] = $params['report'];
       break;
+    case 'ringcentral_CA_send_report':
+      $message['subject'] = 'GV Report from the RingCentral-CA request sending.';
+      $message['body'][] = $params['report'];
+      break;
     case '8x8_send_report':
       $message['subject'] = 'GV Report from the 8x8 request sending.';
       $message['body'][] = $params['report'];
