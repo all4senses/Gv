@@ -284,7 +284,8 @@
             var google_conversion_format = "2";
             var google_conversion_color = "ffffff";
             var google_conversion_label = "cXd0CMHGnAYQh7HEwgM";
-            var google_conversion_value = 0;
+            var google_conversion_value = 1.00;
+            var google_conversion_currency = "USD";
             var google_remarketing_only = false;
             /* ]]> */
             </script>
@@ -292,7 +293,7 @@
             </script>
             <noscript>
             <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=0&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
+            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=1.00&amp;currency_code=USD&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
             </div>
             </noscript>
             
