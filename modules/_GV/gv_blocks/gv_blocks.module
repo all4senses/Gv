@@ -2644,8 +2644,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   
   
-  global $user;
-  if ($service_type == 'ca' && $user->uid == 1) {
+  //global $user;
+  if ($service_type == 'ca') {
     $query = db_select('field_data_field_p_erating_re_ca', 'r');
     $query->addField('r', 'field_p_erating_re_ca_value', 'erating');
     $query->condition('r.bundle', 'provider');
