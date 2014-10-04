@@ -2660,7 +2660,23 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     $providers2 = $query->execute()->fetchAllAssoc('entity_id');
 
     dpm($providers2);
-  }
+    
+    foreach ($providers2 as $nid2 => $provider2) {
+      if (isset($providers[$nid2])) {
+        if ($providers[$nid2]->erating > $providers2[$nid2]->erating) {
+          unset($providers2[$nid2]);
+        }
+        else {
+          unset($providers[$nid2]);
+        }
+      }
+    }
+    
+    $providers += $providers2;
+    
+    dpm($providers);
+  } // End of if ($service_type == 'ca' && $user->uid == 1) {
+  
   
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
