@@ -10470,10 +10470,10 @@ function wdg_misc_sortArrayByWeight($a, $b)
  * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayProvidersByErating');
  */
 function gv_misc_sortArrayProvidersByErating($a, $b) {
-  if ($a['erating'] == $b['erating']) {
+  if ($a->erating == $b->erating) {
       return 0;
   }
-  return ($a['erating'] < $b['erating']) ? -1 : 1;
+  return ($a->erating < $b->erating) ? -1 : 1;
 }
 
 /**
