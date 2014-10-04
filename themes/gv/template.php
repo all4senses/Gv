@@ -770,7 +770,7 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     
     if ($variables['node']->type == 'preface') {
-      $pages_with_separate_tpl = array('page-compare-business-voip-providers', 'page-compare-business-voip-providers-v2', 'page-compare-pbx-voip-providers', 'page-compare-residential-voip-providers', 'page-compare-sip-voip-providers', 'page-compare-cc-voip-providers', 'view-reviews-page_all_reviews', 'page-reseller-providers', 'page-compare-ifa-voip-providers', 'web-conferencing-voip-providers', 'crm-voip-providers');
+      $pages_with_separate_tpl = array('page-compare-business-voip-providers', 'page-compare-business-voip-providers-v2', 'page-compare-pbx-voip-providers', 'page-compare-residential-voip-providers', 'page-compare-sip-voip-providers', 'page-compare-cc-voip-providers', 'view-reviews-page_all_reviews', 'page-reseller-providers', 'page-compare-ifa-voip-providers', 'web-conferencing-voip-providers', 'crm-voip-providers', 'canada-voip');
       if (in_array(@$variables['node']->field_preface_key['und'][0]['value'], $pages_with_separate_tpl) && arg(2) != 'edit') {
         $variables['theme_hook_suggestions'][] = 'page__compare_providers';
       }
