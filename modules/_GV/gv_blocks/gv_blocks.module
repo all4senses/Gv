@@ -2605,18 +2605,20 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   );
   
    
-  global $user;
+  
   
   $query = db_select($services_data[$service_type]['rating_table'], 'r');
   $query->addField('r', $services_data[$service_type]['rating_field'], 'erating');
   $query->condition('r.bundle', 'provider');
   
-  if ($user->uid == 1) {
-    $query->leftJoin('field_data_field_p_erating_re_ca', 'r2', "r2.bundle = 'provider'");
-    $query->addField('r2', 'field_p_erating_re_ca_value', 'erating');
-    $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id OR pn.entity_id = r2.entity_id");
-  }
-  else {
+//  global $user;
+//  if ($user->uid == 1) {
+//    $query->leftJoin('field_data_field_p_erating_re_ca', 'r2', "r2.bundle = 'provider'");
+//    $query->addField('r2', 'field_p_erating_re_ca_value', 'erating');
+//    $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id OR pn.entity_id = r2.entity_id");
+//  }
+//  else 
+    {
     $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
   }
   
@@ -2635,6 +2637,31 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $providers = $query->execute()->fetchAllAssoc('entity_id');
   
   dpm($providers);
+  
+  
+  
+  
+  
+  
+  
+  global $user;
+  if ($service_type == 'ca' && $user->uid == 1) {
+    $query = db_select('field_data_field_p_erating_re_ca', 'r');
+    $query->addField('r', 'field_p_erating_re_ca_value', 'erating');
+    $query->condition('r.bundle', 'provider');
+
+    $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
+
+    $query->fields('pn', array('field_p_name_value', 'entity_id'));
+
+    $query->orderBy('field_p_erating_re_ca_value');
+    $query->range(0, 5);
+
+    $providers2 = $query->execute()->fetchAllAssoc('entity_id');
+
+    dpm($providers2);
+  }
+  
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
