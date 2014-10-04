@@ -2674,6 +2674,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     
     $providers += $providers2;
     
+    uasort($providers, 'gv_misc_sortArrayProvidersByErating');
+    
     dpm($providers);
   } // End of if ($service_type == 'ca' && $user->uid == 1) {
   
