@@ -2636,7 +2636,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $providers = $query->execute()->fetchAllAssoc('entity_id');
   
-  dpm($providers);
+  //dpm($providers);
   
   
   
@@ -2659,7 +2659,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
 
     $providers2 = $query->execute()->fetchAllAssoc('entity_id');
 
-    dpm($providers2);
+    //dpm($providers2);
     
     foreach ($providers2 as $nid2 => $provider2) {
       if (isset($providers[$nid2])) {
@@ -2676,7 +2676,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     
     uasort($providers, 'gv_misc_sortArrayProvidersByErating');
     
-    dpm($providers);
+    //dpm($providers);
   } // End of if ($service_type == 'ca' && $user->uid == 1) {
   
   
@@ -2709,6 +2709,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $count = NULL;
   foreach ($providers as $nid => $provider) {
       
+      if ($count == 5) {
+        break;
+      }
+
       ////$zebra = ($zebra == 'odd') ? 'even' : 'odd';
     
       $criteria = array(
