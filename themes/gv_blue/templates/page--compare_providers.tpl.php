@@ -92,7 +92,7 @@
 
       <?php
         //dpm($_SERVER);
-        if (!in_array($_SERVER['REQUEST_URI'], array('/ppc/business-voip', '/business'))) {
+        if (!in_array($_SERVER['REQUEST_URI'], array('/ppc/business-voip', '/business', '/canada'))) {
           echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
         }
         echo render($page['footer']);
