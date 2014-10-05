@@ -65,10 +65,13 @@
       */
       ,source: function( request, response ) {
         var term = request.term;
+        
+        // Uncomment to use caching.
 //        if ( term in cache ) {
 //          response( cache[ term ] );
 //          return;
 //        }
+
         /*
         $.getJSON( "search.php", request, function( data, status, xhr ) {
           cache[ term ] = data;
@@ -86,7 +89,7 @@
               dataType: "json",
               success: function( data ) {
                   
-                  console.log(data);
+                  //console.log(data);
                   
                   cache[ term ] = data;
                   response( data );
@@ -150,9 +153,9 @@
                 if (item.desc) {
                   label = label + "<br>" + item.desc;
                 }
-                else {
-                  label = label + "<br>...";
-                }
+//                else {
+//                  label = label + "<br>...";
+//                }
                 
                 
                 //label = item.label.replace( re, template );
