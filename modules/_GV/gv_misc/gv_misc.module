@@ -675,7 +675,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $query->range(0, 9);
 
 
-    $out_array = $query->execute()->fetchAllAssoc('t.tid');
+    $out_array = $query->execute()->fetchAllAssoc('tid');
   
   }
   elseif ($post['op'] == 'title') {
