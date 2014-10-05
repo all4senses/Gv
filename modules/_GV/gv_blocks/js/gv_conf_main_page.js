@@ -79,7 +79,7 @@
         $.ajax({
               url: "get-conferences-ac",
               data: {
-                op: 'title',
+                op: 'industry',
                 term: request.term
               },
               dataType: "json",
