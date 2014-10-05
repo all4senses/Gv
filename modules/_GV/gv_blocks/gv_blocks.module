@@ -2643,7 +2643,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   
   
-  // Are_ca for the canada page
+  // Re_ca for the canada page
   /*
   if ($service_type == 'ca') {
     $query = db_select('field_data_field_p_erating_re_ca', 'r');
@@ -8842,13 +8842,13 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
     //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
     '#markup' => '<div class="title"><div>Stay informed - </div>Sign up for our newsletter.</div>'
       . '<div id="project-label">Select a project (type "j" for a start):</div>
-<img id="project-icon" src="images/transparent_1x1.png" class="ui-state-default" alt="">
-<input id="project">
-<input type="hidden" id="project-id">
+
+<input id="project" /><div class="shift" id="c-industry"></div><div class="shift" id="c-title"></div>
+<input type="hidden" id="project-id" />
 <p id="project-description"></p>',
       
   );
-  
+  /*
   $form['email'] = array(
     '#type' => 'textfield',
     //'#title' => 'Sign up to receive weekly updates',
@@ -8859,11 +8859,12 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
     //'#access' => $user->uid ? FALSE : TRUE,
     '#attributes' => array('title' => 'EMAIL'),
   );
+  */
   
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Sign Up'),
+    '#value' => 'Submit',
     '#disabled' => TRUE,
   ); 
   
@@ -8904,8 +8905,6 @@ function gv_blocks_get_confMainSearch_form_validate(&$form, &$form_state) {
   //dpm($form_state['values']);
   //dpm($form);
     
-  global $user;
-  
   // Clear hints, if any.
   $fields_to_clear_hints = array('email' => array('hint' => @$form['email']['#attributes']['title']));
   foreach ($fields_to_clear_hints as $fname => $fdata) {
@@ -8921,28 +8920,11 @@ function gv_blocks_get_confMainSearch_form_validate(&$form, &$form_state) {
       
       // Just in case on more.
       $form_state['values'][$fname] = NULL;
-      
-      if (isset($form[$fname]['#required']) && $form[$fname]['#required']) {
-        form_set_error($fname, t('Please fill the field "' . $fname . '"'));
-        return;
-      }
+   
       
     }
-    elseif ($fname == 'email' && !preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $form_state['values'][$fname])) {
-      form_set_error($fname, 'Wrong email format!');
-      return;
-    }
+   
     
-  }
-  
-  // Check if submitted email was submitted previously.
-  $query = db_select('gv_emails_subscribed', 'e')  
-        ->fields('e', array('email'));
-  $query->condition('e.email', $form_state['values']['email']);
-  $email = $query->execute()->fetchField();
-  if ($email) {
-    form_set_error('email', 'Email ' . $form_state['values']['email'] . ' has been submitted already!');
-    return;
   }
   
 }
@@ -8955,7 +8937,7 @@ function gv_blocks_get_confMainSearch_form_validate(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_blocks_get_confMainSearch_form_submit(&$form, &$form_state) {
-  
+  /*
   $verification_code = md5(time());
   db_insert('gv_emails_subscribed')
     ->fields(array(
@@ -8964,9 +8946,9 @@ function gv_blocks_get_confMainSearch_form_submit(&$form, &$form_state) {
       'code' => $verification_code,
     ))
     ->execute();
-    
+    */
   //gv_misc_sendMessage('email_verification', array('verification_code' => $verification_code . '=' . urlencode($form_state['values']['email']), 'email' => $form_state['values']['email']));
   
-  drupal_set_message('Thank you for subscribing to our newsletter.');
+  drupal_set_message('Submitted conf page.');
   drupal_goto(ltrim(@$_SERVER['REDIRECT_URL'], '/'), array('query' => array('nocache' => 1)));
 }
