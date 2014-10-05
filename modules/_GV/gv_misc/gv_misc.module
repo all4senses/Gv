@@ -651,7 +651,7 @@ function gv_mics_page404CustomContent() {
 function gv_misc_getConferences_autocomplete_ajax() {
   
   $post = array();
-  $conferences = array();
+  $out_array = array();
   
   foreach ($_POST as $key => $value) {
     $post[$key] = check_plain(strip_tags($value));
@@ -675,11 +675,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $query->range(0, 9);
 
 
-    $reviews = $query->execute()->fetchCol();
+    $out_array = $query->execute()->fetchAllAssoc('t.tid');
   
   }
   elseif ($post['op'] == 'title') {
-      $conferences = array(
+      $out_array = array(
            0 => array(
                'value' => "jquery",
             'label' => "jQuery",
@@ -699,7 +699,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
       );
   }
   
-  drupal_json_output($conferences);
+  drupal_json_output($out_array);
 }
 
 
