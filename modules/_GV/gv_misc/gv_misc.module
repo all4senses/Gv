@@ -662,7 +662,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
     
     $query = db_select('taxonomy_term_data', 't');
     $query->fields('t', array('tid', 'name'));
-    $query->condition('t.vid', 8);
+    $query->condition('t.vid', $vid);
     $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
 //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
 //    $query->condition('i.field_invisible_value', 1, '!='); 
@@ -1364,6 +1364,28 @@ function gv_misc_testPage() {
   */
   
         
+  
+  $vid = 8;
+    
+    $query = db_select('taxonomy_term_data', 't');
+    $query->fields('t', array('tid', 'name'));
+    $query->condition('t.vid', $vid);
+    $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
+//    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+//    $query->condition('i.field_invisible_value', 1, '!='); 
+    $query->orderBy('t.name', 'ASC');
+    // 4 pages
+    //$query->range(0, 8);
+    // 3 pages
+    //$query->range(0, 6);
+
+    $query->range(0, 9);
+
+
+    $out_array = $query->execute()->fetchAllAssoc('t.tid');
+    
+    dpm($out_array);
+            
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
