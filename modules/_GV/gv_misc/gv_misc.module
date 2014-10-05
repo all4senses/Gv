@@ -663,7 +663,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $query = db_select('taxonomy_term_data', 't');
     $query->fields('t', array('tid', 'name'));
     $query->condition('t.vid', 8);
-    $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE',);
+    $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
 //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
 //    $query->condition('i.field_invisible_value', 1, '!='); 
     $query->orderBy('t.name', 'ASC');
