@@ -653,7 +653,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
   $post = array();
   $out_array = array();
   
-  foreach ($_POST as $key => $value) {
+  foreach ($_GET as $key => $value) {
     $post[$key] = check_plain(strip_tags($value));
   }
 
