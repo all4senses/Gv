@@ -147,7 +147,7 @@
                 //label = item.label.replace( re, template ) + "<br>" + item.desc;
                 label = item.label.replace( re, template );
                 
-                if (item.desc != 'undefined') {
+                if (item.desc) {
                   label = label + "<br>" + item.desc;
                 }
                 
