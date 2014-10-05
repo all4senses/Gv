@@ -657,6 +657,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $post[$key] = check_plain(strip_tags($value));
   }
 
+  $out_array = $post;
   if ($post['op'] == 'industry') {
     $vid = 8;
     
