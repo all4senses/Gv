@@ -1364,7 +1364,7 @@ function gv_misc_testPage() {
   */
   
         
-  
+  $post['term'] = 'Web';
   $vid = 8;
     
     $query = db_select('taxonomy_term_data', 't');
@@ -1382,7 +1382,7 @@ function gv_misc_testPage() {
     $query->range(0, 9);
 
 
-    $out_array = $query->execute()->fetchAllAssoc('t.tid');
+    $out_array = $query->execute()->fetchAllAssoc('tid');
     
     dpm($out_array);
             
