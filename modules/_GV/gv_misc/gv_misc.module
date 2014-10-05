@@ -682,7 +682,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           'label' => $result->name,
       );
     }
-  
+    $out_array = $post['term'];
   }
   elseif ($post['op'] == 'title') {
       $out_array = array(
