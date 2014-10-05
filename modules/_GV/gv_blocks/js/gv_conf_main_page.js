@@ -150,6 +150,9 @@
                 if (item.desc) {
                   label = label + "<br>" + item.desc;
                 }
+                else {
+                  label = label + "<br>...";
+                }
                 
                 
                 //label = item.label.replace( re, template );
