@@ -651,28 +651,54 @@ function gv_mics_page404CustomContent() {
 function gv_misc_getConferences_autocomplete_ajax() {
   
   $post = array();
+  $conferences = array();
+  
   foreach ($_POST as $key => $value) {
     $post[$key] = check_plain(strip_tags($value));
   }
 
-  $conferences = array(
-       0 => array(
-           'value' => "jquery",
-        'label' => "jQuery",
-        'desc' => "the 222 write less, do more, JavaScript library",
-        
-      ),
-      1 => array(
-        'value' => "jquery-ui",
-        'label' => "jQuery UI",
-        'desc' => "the official user interface library for jQuery",
-      ),
-      2 => array (
-        'value' => "sizzlejs",
-        'label' => "Sizzle JS",
-        'desc' => "a... pure-JavaScript CSS selector engine",
-      ),
-  );
+  if ($post['op'] == 'industry') {
+    $vid = 8;
+    
+    $query = db_select('taxonomy_term_data', 't');
+    $query->fields('t', array('tid', 'name'));
+    $query->condition('t.vid', 8);
+    $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE',);
+//    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+//    $query->condition('i.field_invisible_value', 1, '!='); 
+    $query->orderBy('t.name', 'ASC');
+    // 4 pages
+    //$query->range(0, 8);
+    // 3 pages
+    //$query->range(0, 6);
+
+    $query->range(0, 9);
+
+
+    $reviews = $query->execute()->fetchCol();
+  
+  }
+  elseif ($post['op'] == 'title') {
+      $conferences = array(
+           0 => array(
+               'value' => "jquery",
+            'label' => "jQuery",
+            'desc' => "the 222 write less, do more, JavaScript library",
+
+          ),
+          1 => array(
+            'value' => "jquery-ui",
+            'label' => "jQuery UI",
+            'desc' => "the official user interface library for jQuery",
+          ),
+          2 => array (
+            'value' => "sizzlejs",
+            'label' => "Sizzle JS",
+            'desc' => "a... pure-JavaScript CSS selector engine",
+          ),
+      );
+  }
+  
   drupal_json_output($conferences);
 }
 
