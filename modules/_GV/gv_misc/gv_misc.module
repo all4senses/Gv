@@ -657,6 +657,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $post[$key] = check_plain(strip_tags($value));
   }
 
+  
+  // Db queries doc
+  // https://www.drupal.org/node/310086
+  // https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_like/7
+  
   if ($post['op'] == 'industry') {
     $vid = 8;
     
