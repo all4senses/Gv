@@ -64,7 +64,7 @@
       }
       */
       ,source: function( request, response ) {
-//        var term = request.term;
+        var term = request.term;
 //        if ( term in cache ) {
 //          response( cache[ term ] );
 //          return;
