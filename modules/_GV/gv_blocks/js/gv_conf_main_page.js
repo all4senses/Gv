@@ -80,6 +80,7 @@
               url: "get-conferences-ac",
               data: {
                 op: 'industry',
+                //op: 'title',
                 term: request.term
               },
               dataType: "json",
@@ -142,9 +143,17 @@
             var re = new RegExp( "(" + this.term + ")", "gi" ),
                 cls = this.options.highlightClass,
                 template = "<span style='color: red;' class='" + cls + "'>$1</span>",
-                label = item.label.replace( re, template ) + "<br>" + item.desc,
+                
+                //label = item.label.replace( re, template ) + "<br>" + item.desc;
+                label = item.label.replace( re, template );
+                
+                if (item.desc != 'undefined') {
+                  label = label + "<br>" + item.desc;
+                }
+                
+                
                 //label = item.label.replace( re, template );
-                $li = $( "<li/>" )
+                var $li = $( "<li/>" )
                       .data("item.autocomplete", item) // !!!!!!!!!!!!!
                       .appendTo( ul );
             
