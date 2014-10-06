@@ -64,7 +64,7 @@
       }
     ];
  
-    $( "#confe" ).autocomplete({
+    $( "#conf" ).autocomplete({
       highlightClass: "bold-text",
       minLength: 2,
       focus: function( event, ui ) {
