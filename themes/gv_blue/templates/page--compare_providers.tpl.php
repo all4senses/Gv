@@ -6,7 +6,8 @@
       
       <div id="logo-block">
         <?php
-          if (@$_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
+          //if (@$_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
+          if (in_array(@$_SERVER['REDIRECT_URL'], array('/ppc/business-voip', '/canada') )) {
             echo "<img src='/images/theme/get-voip-logo5.png' alt='GetVoIP' title='GetVoIP' />";
           }
           else {
