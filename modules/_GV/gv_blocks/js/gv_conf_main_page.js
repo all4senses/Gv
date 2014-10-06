@@ -6,6 +6,41 @@
       
       //console.log('gv_conf_main_page...');
   
+  
+  
+  
+  
+      // Fields hints
+      $('input[id="conf"]').each(function(){
+        if ($(this).val() == '') {
+          $(this).val($(this).attr('title'));
+          $(this).addClass('blur');
+        }
+      });
+      
+      $('input[id="conf"]').focus(function(){
+        
+        if ($(this).val() == $(this).attr('title')) {
+          $(this).val('');
+          $(this).removeClass('blur');
+        }
+        
+      });
+      
+      $('input[id="conf"]').blur(function(){
+        
+        if ($(this).val() == '') {
+          $(this).val($(this).attr('title'));
+          $(this).addClass('blur');
+        }
+        
+      });
+  
+  
+  
+  
+  
+  
       var cache = {};
   
       var projects = [
@@ -29,19 +64,19 @@
       }
     ];
  
-    $( "#project" ).autocomplete({
+    $( "#confe" ).autocomplete({
       highlightClass: "bold-text",
       minLength: 2,
       focus: function( event, ui ) {
-        $( "#project" ).val( ui.item.label );
+        $( "#conf" ).val( ui.item.label );
         return false;
       },
       select: function( event, ui ) {
         //console.log(ui);
-        $( "#project" ).val( ui.item.label );
-        $( "#project-id" ).val( ui.item.value );
-        $( "#project-description" ).html( ui.item.desc );
-        //$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
+        $( "#conf" ).val( ui.item.label );
+        $( "#conf-id" ).val( ui.item.value );
+        $( "#conf-description" ).html( ui.item.desc );
+        //$( "#conf-icon" ).attr( "src", "images/" + ui.item.icon );
  
         return false;
       }
@@ -139,7 +174,7 @@
  // !!!!!!!!!!!
  // http://stackoverflow.com/questions/18231474/customize-autocomplete-display-in-jquery-ui-1-8
  
- $("#project").data( "autocomplete" )._renderItem = function( ul, item ) {
+ $("#conf").data( "autocomplete" )._renderItem = function( ul, item ) {
 
             // Replace the matched text with a custom span. This
             // span uses the class found in the "highlightClass" option.
