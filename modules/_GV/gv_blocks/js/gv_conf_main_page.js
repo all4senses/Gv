@@ -7,19 +7,51 @@
       //console.log('gv_conf_main_page...');
   
   
+      
+      // Switch the source of autocomplete...
+      sw = 'industry';
+      
+      $('#c-industry').click(function(){
+
+        if (sw != 'industry') {
+          sw = 'industry';
+          search_field_title = 'Search by Industry';
+          $(this).addClass('active');
+          $('#c-title').removeClass('active');
+          $('input[id="conf"]').attr('title', search_field_title);
+        }
+        
+      });
+  
+      $('#c-title').click(function(){
+
+        if (sw != 'title') {
+          sw = 'title';
+          search_field_title = 'Search by Title';
+          $(this).addClass('active');
+          $('#c-industry').removeClass('active');
+          $('input[id="conf"]').attr('title', search_field_title);
+        }
+        
+      });
+  
   
   
   
       // Fields hints
       $('input[id="conf"]').each(function(){
         if ($(this).val() == '') {
-          $(this).val($(this).attr('title'));
+          
+          //$(this).val($(this).attr('title'));
+          $(this).val(search_field_title);
+          
           $(this).addClass('blur');
         }
       });
       
       $('input[id="conf"]').focus(function(){
         
+        //if ($(this).val() == $(this).attr('title')) {
         if ($(this).val() == $(this).attr('title')) {
           $(this).val('');
           $(this).removeClass('blur');
@@ -37,31 +69,8 @@
       });
   
       
-      sw = 'title';// 'industry';
-      console.log('0');
-//      
-      // Switch the source of autocomplete...
-      $('#c-industry').click(function(){
-        console.log('1');
-        if (sw != 'industry') {
-          console.log('2');
-          sw = 'industry';
-          $(this).addClass('active');
-          $('#c-title').removeClass('active');
-        }
-        
-      });
-  
-      $('#c-title').click(function(){
-        console.log('3');
-        if (sw != 'title') {
-          console.log('4');
-          sw = 'title';
-          $(this).addClass('active');
-          $('#c-industry').removeClass('active');
-        }
-        
-      });
+      
+
   
   
       var cache = {};
