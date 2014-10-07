@@ -37,7 +37,7 @@
       });
   
       
-      switcher = 'industry';
+      switcher = 'title';// 'industry';
       console.log('0');
 //      
       // Switch the source of autocomplete...
@@ -54,12 +54,12 @@
   
       $('#c-title').click(function(){
         console.log('3');
-//        if (switcher != 'c-title') {
-//          console.log('4');
-//          switcher = 'c-title';
-//          $(this).addClass('active');
-//          $('#c-industry').removeClass('active');
-//        }
+        if (switcher != 'title') {
+          console.log('4');
+          switcher = 'title';
+          $(this).addClass('active');
+          $('#c-industry').removeClass('active');
+        }
         
       });
   
