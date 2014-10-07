@@ -14,7 +14,7 @@
       //$('input[id="conf"]').val('Search by Industry');
       $('input[id="conf"]').attr('title', search_field_title);
 
-      console.log($('input[id="conf"]').attr('title'));
+      //console.log($('input[id="conf"]').attr('title'));
 
       $('#c-industry').click(function(){
 
@@ -85,7 +85,8 @@
   
   
       var cache = {};
-  
+      
+      /*
       var projects = [
       {
         value: "jquery",
@@ -106,7 +107,8 @@
         icon: "sizzlejs_32x32.png"
       }
     ];
- 
+    */
+    
     $( "#conf" ).autocomplete({
       highlightClass: "bold-text",
       minLength: 2,
@@ -160,8 +162,7 @@
         $.ajax({
               url: "get-conferences-ac",
               data: {
-                op: 'industry',
-                //op: 'title',
+                op: sw, //'industry', //op: 'title',
                 term: request.term
               },
               dataType: "json",
