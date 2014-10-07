@@ -11,8 +11,8 @@
       // Switch the source of autocomplete...
       sw = 'industry';
       search_field_title = 'Search by Industry';
-      $('input[id="conf"]').val('Search by Industry');
-      
+      //$('input[id="conf"]').val('Search by Industry');
+      $('input[id="conf"]').attr('title', search_field_title);
 
       $('#c-industry').click(function(){
 
