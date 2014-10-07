@@ -40,17 +40,17 @@
       switcher = 'industry';
       console.log('0');
 //      
-//      // Switch the source of autocomplete...
-//      $('#c-industry').click(function(){
-//        console.log('1');
-//        if (switcher != 'industry') {
-//          console.log('2');
-//          switcher = 'industry';
-//          $(this).addClass('active');
-//          $('#c-title').removeClass('active');
-//        }
-//        
-//      });
+      // Switch the source of autocomplete...
+      $('#c-industry').click(function(){
+        console.log('1');
+        if (switcher != 'industry') {
+          console.log('2');
+          switcher = 'industry';
+          $(this).addClass('active');
+          $('#c-title').removeClass('active');
+        }
+        
+      });
 //  
 //      $('#c-title').click(function(){
 //        console.log('3');
