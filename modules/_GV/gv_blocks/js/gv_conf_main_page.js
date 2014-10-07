@@ -24,6 +24,9 @@
           $(this).addClass('active');
           $('#c-title').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
+          if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Title') {
+            $('input[id="conf"]').val(search_field_title);
+          }
         }
         
       });
@@ -36,6 +39,9 @@
           $(this).addClass('active');
           $('#c-industry').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
+          if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Industry') {
+            $('input[id="conf"]').val(search_field_title);
+          }
         }
         
       });
