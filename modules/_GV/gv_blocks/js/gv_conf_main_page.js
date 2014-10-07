@@ -37,15 +37,15 @@
       });
   
       
-      switcher = 'title';// 'industry';
+      sw = 'title';// 'industry';
       console.log('0');
 //      
       // Switch the source of autocomplete...
       $('#c-industry').click(function(){
         console.log('1');
-        if (switcher != 'industry') {
+        if (sw != 'industry') {
           console.log('2');
-          switcher = 'industry';
+          sw = 'industry';
           $(this).addClass('active');
           $('#c-title').removeClass('active');
         }
@@ -54,9 +54,9 @@
   
       $('#c-title').click(function(){
         console.log('3');
-        if (switcher != 'title') {
+        if (sw != 'title') {
           console.log('4');
-          switcher = 'title';
+          sw = 'title';
           $(this).addClass('active');
           $('#c-industry').removeClass('active');
         }
