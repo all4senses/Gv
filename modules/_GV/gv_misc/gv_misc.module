@@ -690,6 +690,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
     
   }
   elseif ($post['op'] == 'title') {
+      /*
       $out_array = array(
            0 => array(
                'value' => "jquery",
@@ -708,6 +709,26 @@ function gv_misc_getConferences_autocomplete_ajax() {
             'desc' => "a... pure-JavaScript CSS selector engine",
           ),
       );
+      */
+      
+      $query = db_select('node', 'n');
+      $query->fields('n', array('nid', 'title'));
+      $query->condition('n.status', 1);
+      $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+  //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+  //    $query->condition('i.field_invisible_value', 1, '!='); 
+      $query->orderBy('n.title', 'ASC');
+      $query->range(0, 9);
+
+
+      $results = $query->execute()->fetchAllAssoc('nid');
+      foreach ($results as $result) {
+        $out_array[] = array(
+            'value' => $result->nid,
+            'label' => $result->title,
+        );
+      }
+    
   }
   
   drupal_json_output($out_array);
