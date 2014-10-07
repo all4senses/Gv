@@ -53,7 +53,7 @@
       $('input[id="conf"]').focus(function(){
         
         //if ($(this).val() == $(this).attr('title')) {
-        if ($(this).val() == $(this).attr('title')) {
+        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Title') {
           $(this).val('');
           $(this).removeClass('blur');
         }
