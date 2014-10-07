@@ -14,6 +14,8 @@
       //$('input[id="conf"]').val('Search by Industry');
       $('input[id="conf"]').attr('title', search_field_title);
 
+      console.log($('input[id="conf"]').attr('title'));
+
       $('#c-industry').click(function(){
 
         if (sw != 'industry') {
