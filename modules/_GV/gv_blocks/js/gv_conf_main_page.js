@@ -37,30 +37,31 @@
       });
   
       
-      var switcher = 'industry';
-      
-      // Switch the source of autocomplete...
-      $('#c-industry').click(function(){
-        console.log('1');
-        if (switcher != 'industry') {
-          console.log('2');
-          switcher = 'industry';
-          $(this).addClass('active');
-          $('#c-title').removeClass('active');
-        }
-        
-      });
-  
-      $('#c-title').click(function(){
-        console.log('3');
-        if (switcher != '#c-title') {
-          console.log('4');
-          switcher = '#c-title';
-          $(this).addClass('active');
-          $('#c-industry').removeClass('active');
-        }
-        
-      });
+      switcher = 'industry';
+      console.log('0');
+//      
+//      // Switch the source of autocomplete...
+//      $('#c-industry').click(function(){
+//        console.log('1');
+//        if (switcher != 'industry') {
+//          console.log('2');
+//          switcher = 'industry';
+//          $(this).addClass('active');
+//          $('#c-title').removeClass('active');
+//        }
+//        
+//      });
+//  
+//      $('#c-title').click(function(){
+//        console.log('3');
+//        if (switcher != '#c-title') {
+//          console.log('4');
+//          switcher = '#c-title';
+//          $(this).addClass('active');
+//          $('#c-industry').removeClass('active');
+//        }
+//        
+//      });
   
   
       var cache = {};
