@@ -780,7 +780,7 @@ function gv_process_page(&$variables) {
     }
             
     elseif ($variables['node']->type == 'quote') {
-      drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+      drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
     }
     else {
       
