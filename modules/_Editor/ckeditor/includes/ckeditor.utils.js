@@ -2,9 +2,16 @@
 Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
-if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
-  window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
-}
+
+
+// a4s fix of Drupal undefined, depaecated
+window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path; 
+
+//if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
+//  window.CKEDITOR_BASEPATH = Drupal.settings.ckeditor.editor_path;
+//}
+
+
 (function ($) {
   Drupal.ckeditor = (typeof(CKEDITOR) != 'undefined');
   Drupal.ckeditor_ver = false;
