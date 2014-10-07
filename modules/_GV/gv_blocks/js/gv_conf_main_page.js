@@ -19,7 +19,7 @@
           search_field_title = 'Search by Industry';
           $(this).addClass('active');
           $('#c-title').removeClass('active');
-          //$('input[id="conf"]').attr('title', search_field_title);
+          $('input[id="conf"]').attr('title', search_field_title);
         }
         
       });
@@ -31,7 +31,7 @@
           search_field_title = 'Search by Title';
           $(this).addClass('active');
           $('#c-industry').removeClass('active');
-          //$('input[id="conf"]').attr('title', search_field_title);
+          $('input[id="conf"]').attr('title', search_field_title);
         }
         
       });
