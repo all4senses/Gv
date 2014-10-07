@@ -2290,6 +2290,12 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   //dpm($form_id);  dpm($form);
   // $conf['locale_custom_strings_en']['old string'] = 'new string'
   
+  
+    global $user;
+      if($user->uid == 1) {
+        return;
+      }
+      
   switch ($form_id) {
     
     
@@ -2337,10 +2343,6 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
     case 'news_post_node_form':
     case 'blog_post_node_form':
       
-    global $user;
-      if($user->uid == 1) {
-        return;
-      }
           // Set a select of available providers.
         $providers['_none'] = t('- Select a value -');
         gv_misc_getProviders($providers);
