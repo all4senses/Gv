@@ -27,7 +27,7 @@
           //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Title') 
           {
             $('input[id="conf"]').val(search_field_title);
-            $(this).addClass('blur');
+            $('input[id="conf"]').addClass('blur');
           }
         }
         
@@ -44,7 +44,7 @@
           //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Industry') 
           {
             $('input[id="conf"]').val(search_field_title);
-            $(this).addClass('blur');
+            $('input[id="conf"]').addClass('blur');
           }
         }
         
