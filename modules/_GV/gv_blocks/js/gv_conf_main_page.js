@@ -36,9 +36,29 @@
         
       });
   
+      
+      var switcher = 'industry';
+      
+      // Switch the source of autocomplete...
+      $('#c-industry').click(function(){
+        
+        if (switcher != 'industry') {
+          switcher = 'industry';
+          $(this).addClass('active');
+          $('#c-title').removeClass('active');
+        }
+        
+      });
   
-  
-  
+      $('#c-title').click(function(){
+        
+        if (switcher != '#c-title') {
+          switcher = '#c-title';
+          $(this).addClass('active');
+          $('#c-industry').removeClass('active');
+        }
+        
+      });
   
   
       var cache = {};
