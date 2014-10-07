@@ -10,6 +10,7 @@
       
       // Switch the source of autocomplete...
       sw = 'industry';
+      search_field_title = 'Search by Industry';
       
       $('#c-industry').click(function(){
 
@@ -18,7 +19,7 @@
           search_field_title = 'Search by Industry';
           $(this).addClass('active');
           $('#c-title').removeClass('active');
-          $('input[id="conf"]').attr('title', search_field_title);
+          //$('input[id="conf"]').attr('title', search_field_title);
         }
         
       });
@@ -30,7 +31,7 @@
           search_field_title = 'Search by Title';
           $(this).addClass('active');
           $('#c-industry').removeClass('active');
-          $('input[id="conf"]').attr('title', search_field_title);
+          //$('input[id="conf"]').attr('title', search_field_title);
         }
         
       });
@@ -38,35 +39,35 @@
   
   
   
-//      // Fields hints
-//      $('input[id="conf"]').each(function(){
-//        if ($(this).val() == '') {
-//          
-//          //$(this).val($(this).attr('title'));
-//          $(this).val(search_field_title);
-//          
-//          $(this).addClass('blur');
-//        }
-//      });
-//      
-//      $('input[id="conf"]').focus(function(){
-//        
-//        //if ($(this).val() == $(this).attr('title')) {
-//        if ($(this).val() == $(this).attr('title')) {
-//          $(this).val('');
-//          $(this).removeClass('blur');
-//        }
-//        
-//      });
-//      
-//      $('input[id="conf"]').blur(function(){
-//        
-//        if ($(this).val() == '') {
-//          $(this).val($(this).attr('title'));
-//          $(this).addClass('blur');
-//        }
-//        
-//      });
+      // Fields hints
+      $('input[id="conf"]').each(function(){
+        if ($(this).val() == '') {
+          
+          //$(this).val($(this).attr('title'));
+          $(this).val(search_field_title);
+          
+          $(this).addClass('blur');
+        }
+      });
+      
+      $('input[id="conf"]').focus(function(){
+        
+        //if ($(this).val() == $(this).attr('title')) {
+        if ($(this).val() == $(this).attr('title')) {
+          $(this).val('');
+          $(this).removeClass('blur');
+        }
+        
+      });
+      
+      $('input[id="conf"]').blur(function(){
+        
+        if ($(this).val() == '') {
+          $(this).val($(this).attr('title'));
+          $(this).addClass('blur');
+        }
+        
+      });
   
       
       
