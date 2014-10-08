@@ -748,6 +748,12 @@ function gv_breadcrumb($variables) {
  */
 function gv_process_page(&$variables) {
   
+  global $user;
+    //Don't show chat for the root.
+    if ($user->uid == 1) {
+      return;
+    }
+  
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
   
@@ -829,7 +835,7 @@ function gv_process_page(&$variables) {
   if (in_array(@$_SERVER['REQUEST_URI'], $pages_with_livechatinc)) {
     //dpm('REQUEST_URI = ' . @$_SERVER['REQUEST_URI']);
     
-    global $user;
+    //global $user;
     // Don't show chat for the root.
     //if ($user->uid != 1) 
       {
