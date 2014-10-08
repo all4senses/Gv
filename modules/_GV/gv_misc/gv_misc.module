@@ -2373,8 +2373,8 @@ function gv_misc_css_alter(&$css) {
  */
 function gv_misc_js_alter(&$javascript) {
 
-//  global $user;
-//  if (!$user->uid) 
+  global $user;
+  if (!$user->uid) 
     {
     
     // Minify all js on the page.
