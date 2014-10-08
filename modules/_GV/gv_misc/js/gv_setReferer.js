@@ -3,6 +3,7 @@
   Drupal.behaviors.gv_setReferer = {
     attach: function (context, settings) {
               
+       console.log('ref...');
        
        $('body').one('mouseover', function() {
           //console.log('ooooover...');

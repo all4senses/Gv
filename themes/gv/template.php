@@ -748,11 +748,11 @@ function gv_breadcrumb($variables) {
  */
 function gv_process_page(&$variables) {
   
-  global $user;
-    //Don't show chat for the root.
-    if ($user->uid == 1) {
-      return;
-    }
+//  global $user;
+//    //Don't show chat for the root.
+//    if ($user->uid == 1) {
+//      return;
+//    }
   
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
