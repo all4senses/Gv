@@ -126,7 +126,7 @@
         $( "#conf-id" ).val( ui.item.value );
         $( "#conf-description" ).html( ui.item.desc );
         //$( "#conf-icon" ).attr( "src", "images/" + ui.item.icon );
- 
+        
         return false;
       }
       //,source: projects,
@@ -151,10 +151,12 @@
         var term = request.term;
         
         // Uncomment to use caching.
-//        if ( term in cache ) {
-//          response( cache[ term ] );
-//          return;
-//        }
+        //if ( term in cache ) {
+        if ( sw + '_' + term in cache ) {
+          //response( cache[ term ] );
+          response( cache[ sw + '_' + term ] );
+          return;
+        }
 
         /*
         $.getJSON( "search.php", request, function( data, status, xhr ) {
@@ -174,7 +176,8 @@
                   
                   //console.log(data);
                   
-                  cache[ term ] = data;
+                  //cache[ term ] = data;
+                  cache[ sw + '_' + term ] = data;
                   response( data );
                   /*
                   response( 
