@@ -280,11 +280,11 @@
               dataType: "json",
               success: function( data ) {
                   
-                  //console.log(data);
+                  console.log(data);
                   
                   //cache[ term ] = data;
-                  cache[ sw + '_' + term ] = data;
-                  response( data );
+                  //cache[ sw + '_' + term ] = data;
+                  //response( data );
                   /*
                   response( 
                           
