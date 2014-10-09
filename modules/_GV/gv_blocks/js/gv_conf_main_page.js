@@ -127,6 +127,8 @@
         $( "#conf-description" ).html( ui.item.desc );
         //$( "#conf-icon" ).attr( "src", "images/" + ui.item.icon );
         
+        get_conf(ui.item.label);
+        
         return false;
       }
       //,source: projects,
@@ -168,7 +170,8 @@
         $.ajax({
               url: "get-conferences-ac",
               data: {
-                op: sw, //'industry', //op: 'title',
+                type: sw, //'industry', //op: 'title',
+                op: 'auto',
                 term: request.term
               },
               dataType: "json",
@@ -265,6 +268,37 @@
   }
  
  
+ function get_conf(label) {
+   
+   $.ajax({
+              url: "get-conferences-ac",
+              data: {
+                type: sw, //'industry', //op: 'title',
+                op: 'get', 
+                term: label
+              },
+              dataType: "json",
+              success: function( data ) {
+                  
+                  //console.log(data);
+                  
+                  //cache[ term ] = data;
+                  cache[ sw + '_' + term ] = data;
+                  response( data );
+                  /*
+                  response( 
+                          
+                        $.map( data.myData, function( item ) {
+                          return {
+                              label: item.title,
+                              value: item.turninId
+                          }
+                      })
+                  );*/
+              }
+          });
+          
+ } // End of 
  
  /*
  // Custom autocomplete instance.

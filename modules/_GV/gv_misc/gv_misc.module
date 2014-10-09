@@ -662,74 +662,82 @@ function gv_misc_getConferences_autocomplete_ajax() {
   // https://www.drupal.org/node/310086
   // https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_like/7
   
-  if ($post['op'] == 'industry') {
-    $vid = 8;
+  if ($post['op'] == 'auto') {
     
-    $query = db_select('taxonomy_term_data', 't');
-    $query->fields('t', array('tid', 'name'));
-    $query->condition('t.vid', $vid);
-    $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
-//    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-//    $query->condition('i.field_invisible_value', 1, '!='); 
-    $query->orderBy('t.name', 'ASC');
-    // 4 pages
-    //$query->range(0, 8);
-    // 3 pages
-    //$query->range(0, 6);
+  
+        if ($post['type'] == 'industry') {
+          $vid = 8;
 
-    $query->range(0, 9);
+          $query = db_select('taxonomy_term_data', 't');
+          $query->fields('t', array('tid', 'name'));
+          $query->condition('t.vid', $vid);
+          $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
+      //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+      //    $query->condition('i.field_invisible_value', 1, '!='); 
+          $query->orderBy('t.name', 'ASC');
+          // 4 pages
+          //$query->range(0, 8);
+          // 3 pages
+          //$query->range(0, 6);
+
+          $query->range(0, 9);
 
 
-    $results = $query->execute()->fetchAllAssoc('tid');
-    foreach ($results as $result) {
-      $out_array[] = array(
-          'value' => $result->tid,
-          'label' => $result->name,
-      );
-    }
+          $results = $query->execute()->fetchAllAssoc('tid');
+          foreach ($results as $result) {
+            $out_array[] = array(
+                'value' => $result->tid,
+                'label' => $result->name,
+            );
+          }
+
+        }
+        elseif ($post['type'] == 'title') {
+            /*
+            $out_array = array(
+                 0 => array(
+                     'value' => "jquery",
+                  'label' => "jQuery",
+                  'desc' => "the 222 write less, do more, JavaScript library",
+
+                ),
+                1 => array(
+                  'value' => "jquery-ui",
+                  'label' => "jQuery UI",
+                  'desc' => "the official user interface library for jQuery",
+                ),
+                2 => array (
+                  'value' => "sizzlejs",
+                  'label' => "Sizzle JS",
+                  'desc' => "a... pure-JavaScript CSS selector engine",
+                ),
+            );
+            */
+
+            $query = db_select('node', 'n');
+            $query->fields('n', array('nid', 'title'));
+            $query->condition('n.status', 1);
+            $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+        //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+        //    $query->condition('i.field_invisible_value', 1, '!='); 
+            $query->orderBy('n.title', 'ASC');
+            $query->range(0, 9);
+
+
+            $results = $query->execute()->fetchAllAssoc('nid');
+            foreach ($results as $result) {
+              $out_array[] = array(
+                  'value' => $result->nid,
+                  'label' => $result->title,
+              );
+            }
+
+        }
+  }
+  elseif ('op' == 'get') {
     
   }
-  elseif ($post['op'] == 'title') {
-      /*
-      $out_array = array(
-           0 => array(
-               'value' => "jquery",
-            'label' => "jQuery",
-            'desc' => "the 222 write less, do more, JavaScript library",
-
-          ),
-          1 => array(
-            'value' => "jquery-ui",
-            'label' => "jQuery UI",
-            'desc' => "the official user interface library for jQuery",
-          ),
-          2 => array (
-            'value' => "sizzlejs",
-            'label' => "Sizzle JS",
-            'desc' => "a... pure-JavaScript CSS selector engine",
-          ),
-      );
-      */
-      
-      $query = db_select('node', 'n');
-      $query->fields('n', array('nid', 'title'));
-      $query->condition('n.status', 1);
-      $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-  //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-  //    $query->condition('i.field_invisible_value', 1, '!='); 
-      $query->orderBy('n.title', 'ASC');
-      $query->range(0, 9);
-
-
-      $results = $query->execute()->fetchAllAssoc('nid');
-      foreach ($results as $result) {
-        $out_array[] = array(
-            'value' => $result->nid,
-            'label' => $result->title,
-        );
-      }
-    
-  }
+  
   
   drupal_json_output($out_array);
 
