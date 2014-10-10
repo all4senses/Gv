@@ -738,10 +738,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
   elseif ($post['op'] == 'get') {
     
         if ($post['type'] == 'title') {
-              $out_array[] = array(
-                  'value' => 'aaa',
-                  'label' => 'bbb',
-              );
+          
+//              $out_array[] = array(
+//                  'value' => 'aaa',
+//                  'label' => 'bbb',
+//              );
               
             $query = db_select('node', 'n');
             $query->fields('n', array('nid', 'title'));
@@ -765,8 +766,29 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->leftJoin('field_data_field_conf_twitter_hashtag', 'th', 'th.entity_id = n.nid');
             $query->fields('th', array('field_conf_twitter_hashtag_value'));
             
-            $results = $query->execute()->fetchObject();
-            $out_array = $results;
+            if($results = $query->execute()->fetchObject()) {
+              $out_array = $results;
+            }
+            else {
+              $query = db_select('node', 'n');
+              $query->fields('n', array('nid', 'title'));
+              $query->condition('n.status', 1);
+              $query->condition('n.type', 'conference', '=');
+              $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+          //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+          //    $query->condition('i.field_invisible_value', 1, '!='); 
+              $query->orderBy('n.title', 'ASC');
+              $query->range(0, 9);
+
+
+              $results = $query->execute()->fetchAllAssoc('nid');
+              foreach ($results as $result) {
+                $out_array[] = array(
+                    'value' => $result->nid,
+                    'label' => $result->title,
+                );
+              }
+            }
         }
         elseif ($post['type'] == 'industry') {
               $out_array[] = array(

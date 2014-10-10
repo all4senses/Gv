@@ -8843,7 +8843,7 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
     '#markup' => '<input id="conf" title="Industry" />
       <div id="label">Start typing "web" for a start</div>
       <div class="switch active" id="c-industry"> - By industry</div>
-      <div class="switch" id="c-title"> - By title</div>
+      <div class="switch" id="c-title"> - By title</div><div id="submit">Submit</div>
 <input type="hidden" id="conf-id" />
 <p id="conf-description"></p>',
       
@@ -8861,12 +8861,12 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   );
   */
   
-  $form['actions'] = array('#type' => 'actions');
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Submit',
-    '#disabled' => TRUE,
-  ); 
+//  $form['actions'] = array('#type' => 'actions');
+//  $form['actions']['submit'] = array(
+//    '#type' => 'submit',
+//    '#value' => 'Submit',
+//    '#disabled' => TRUE,
+//  ); 
   
   
   // Add stars widgets to a Rating block
