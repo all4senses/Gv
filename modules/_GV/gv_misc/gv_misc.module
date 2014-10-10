@@ -741,6 +741,16 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   'value' => 'aaa',
                   'label' => 'bbb',
               );
+              
+            $query = db_select('node', 'n');
+            $query->fields('n', array('nid', 'title'));
+            $query->condition('n.status', 1);
+            $query->condition('n.title', $post['term']);
+            $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
+            $query->fields('b', array('bidy_value'));
+
+            $results = $query->execute()->fetchObject();
+            $out_array = $results;
         }
         elseif ($post['type'] == 'industry') {
               $out_array[] = array(
