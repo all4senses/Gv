@@ -717,7 +717,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query = db_select('node', 'n');
             $query->fields('n', array('nid', 'title'));
             $query->condition('n.status', 1);
-            $query->condition('n.type', 'conference');
+            $query->condition('n.type', 'conference', '=');
             $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
         //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
         //    $query->condition('i.field_invisible_value', 1, '!='); 
