@@ -287,6 +287,29 @@
               success: function( data ) {
                   
                   console.log(data);
+                  // Uncomment to stop scrolling.
+                 $("body").css('overflow', 'hidden');
+                  
+                  var cb1;
+                        
+                  cb1 = $.fn.colorbox({
+                    inline:true, 
+                    href:"#cb-popup_1", 
+                    width:780, 
+                    height:540
+                    ,onClosed: function() {
+                          //console.log('closed...');
+                          $("body").css('overflow', 'inherit');
+                          turned_off = true;
+                         }
+                  });  
+
+                  //console.log(cb1);
+                  //$.fn.colorbox.close();
+                  //console.log($.fn.colorbox);
+                  //alert('test');
+                        
+                        
                   
                   //cache[ term ] = data;
                   //cache[ sw + '_' + term ] = data;

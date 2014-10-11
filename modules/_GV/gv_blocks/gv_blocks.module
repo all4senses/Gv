@@ -8494,7 +8494,7 @@ function gv_blocks_get_requestQuoteForPage_v9() {
  */
 function gv_blocks_get_exitIntent_v2() {
 
-  drupal_add_library('system', 'ui.widget');
+  //drupal_add_library('system', 'ui.widget');
 
   //drupal_add_library('system', 'effects.bounce');
   
@@ -8836,18 +8836,50 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   // http://forums.phpfreaks.com/topic/267102-multi-date-range-format/
   // http://stackoverflow.com/questions/3654101/format-a-date-string-in-php
   
-  global $user;
+  //global $user;
   
-  $form['title'] = array(
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  
+  
+  $current_js_array = drupal_add_js();
+  if (!isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js']) && !isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) ) {
+      //dpm($current_js_array);
+      // Colorbox for popup window for exit intent.
+      //possible versions for the design: 1, 3, 4, 
+      drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+  }
+  //drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example2/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  
+  
+  
+  // test
+  drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE)); 
+  
+  $popup_1 = '
+   <div style="display: none;">
+    <div id="cb-popup_1"> 
+      <div id="results_1">
+       results #1  
+      </div>
+    </div>
+   </div>
+  ';
+  
+  $form['search_section'] = array(
     //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
     '#markup' => '<input id="conf" title="Industry" />
       <div id="label">Start typing "web" for a start</div>
       <div class="switch active" id="c-industry"> - By industry</div>
       <div class="switch" id="c-title"> - By title</div><div id="submit">Submit</div>
 <input type="hidden" id="conf-id" />
-<p id="conf-description"></p>',
+<p id="conf-description"></p>'
+      .$popup_1,
       
   );
+  
+  
   /*
   $form['email'] = array(
     '#type' => 'textfield',
