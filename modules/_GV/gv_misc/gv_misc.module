@@ -766,8 +766,29 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->leftJoin('field_data_field_conf_twitter_hashtag', 'th', 'th.entity_id = n.nid');
             $query->fields('th', array('field_conf_twitter_hashtag_value'));
             
-            if($results = $query->execute()->fetchObject()) {
-              $out_array = $results;
+            if($result = $query->execute()->fetchObject()) {
+              $out_html = '
+                    <div class="top">
+                      <div class="title">' . $result->title . '</div>
+                      <div class="date">' . $result->field_conf_date_value . '</div>
+                      <div class="twitter"><div class="name">' . $result->field_conf_twitter_value . '</div><div class="hash">' . $result->ield_conf_twitter_hashtag_value . '</div></div>
+                    </div>
+                    <div class="middle">
+                      <div class="url">' . $result->field_conf_link_value . '</div>
+                      <div class="price">' . $result->field_conf_price_value . '</div>
+                      <div class="place">' . $result->field_conf_city_value . ', ' . $result->field_state_value .  '</div>
+                    </div>
+                    <div class="main">
+                      <div class="descr">' . $result->body_value . '</div>
+                      <div class="more">' . l('More', 'noode/' . $result->nid) . '</div>
+                    </div>
+                      ';
+              
+              $out_array = array(
+                  'type' => 'conference',
+                  'out' => $out_html,
+                  
+              );
             }
             else {
               $query = db_select('node', 'n');
@@ -781,13 +802,21 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->range(0, 9);
 
 
-              $results = $query->execute()->fetchAllAssoc('nid');
-              foreach ($results as $result) {
-                $out_array[] = array(
-                    'value' => $result->nid,
-                    'label' => $result->title,
-                );
+              if ($results = $query->execute()->fetchAllAssoc('nid')) {
+              
+                  foreach ($results as $result) {
+                    $conferences_list[] = array(
+                        'value' => $result->nid,
+                        'label' => $result->title,
+                    );
+                  }
+                  $out_array = array(
+                      'type' => 'list',
+                      'out' => $conferences_list,
+
+                  );
               }
+              
             }
         }
         elseif ($post['type'] == 'industry') {
