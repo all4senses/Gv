@@ -288,7 +288,8 @@
                   
                   console.log(data);
                   
-                  if (data.type == 'conference') {
+                  //if (data.type == 'conference') 
+                  {
                   
                   
                         $('#cb-popup_1 #results_1').html(data.out);
