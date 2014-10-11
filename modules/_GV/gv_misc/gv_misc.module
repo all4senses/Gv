@@ -780,7 +780,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                     </div>
                     <div class="main">
                       <div class="descr">' . $result->body_value . '</div>
-                      <div class="more">' . l('More', 'noode/' . $result->nid) . '</div>
+                      <div class="more">' . l('More', 'node/' . $result->nid) . '</div>
                     </div>
                       ';
               
@@ -804,12 +804,22 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
               if ($results = $query->execute()->fetchAllAssoc('nid')) {
               
+                  $conferences_list = '<table><tbody><thead><th>Title</th><th>More Details</th><thead>';
+                  
                   foreach ($results as $result) {
-                    $conferences_list[] = array(
-                        'value' => $result->nid,
-                        'label' => $result->title,
-                    );
+//                    $conferences_list[] = array(
+//                        'value' => $result->nid,
+//                        'label' => $result->title,
+//                    );
+                    
+                    
+                      $conferences_list .= '<row><td>' . $result->title . '</td><td>' . l('More', 'node/' . $result->nid) . '</td>';
+                    
+                    
                   }
+                  
+                  $conferences_list .= '</tbody></table>';
+                  
                   $out_array = array(
                       'type' => 'list',
                       'out' => $conferences_list,
