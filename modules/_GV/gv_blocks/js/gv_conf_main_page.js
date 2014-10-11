@@ -291,7 +291,7 @@
                   if (data.type == 'conference') {
                   
                   
-                        $('#cb-popup_1 #results_1').html(data.type);
+                        $('#cb-popup_1 #results_1').html(data.out);
                         
                         // Uncomment to stop scrolling.
                         $("body").css('overflow', 'hidden');
