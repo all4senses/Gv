@@ -3,6 +3,61 @@
   Drupal.behaviors.gv_conf_main_page = {
     attach: function (context, settings) {
        
+       
+       
+       
+       
+       
+       
+       
+       // Shift in/out conferences list
+
+       var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+
+       //open team-member bio
+       /*
+       $('#cd-team').find('ul a').on('click', function(event){
+          event.preventDefault();
+          //var selected_member = $(this).data('type');
+          $('.cd-member-bio.'+selected_member+'').addClass('slide-in');
+          //$('.cd-member-bio-close').addClass('is-visible');
+
+          // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
+          if( is_firefox ) {
+            $('main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+              $('body').addClass('overflow-hidden');
+            });
+          } else {
+            $('main').addClass('slide-out');
+            $('body').addClass('overflow-hidden');
+          }
+
+        });
+        */
+
+        //close team-member bio
+        /*
+        $(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
+          event.preventDefault();
+          $('.cd-member-bio').removeClass('slide-in');
+          $('.cd-member-bio-close').removeClass('is-visible');
+
+          if( is_firefox ) {
+            $('main').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+              $('body').removeClass('overflow-hidden');
+            });
+          } else {
+            $('main').removeClass('slide-out');
+            $('body').removeClass('overflow-hidden');
+          }
+        });
+        */
+
+       
+       
+       
+       
+       
       
       //console.log('gv_conf_main_page...');
   
@@ -96,28 +151,6 @@
   
       cache = {};
       
-      /*
-      var projects = [
-      {
-        value: "jquery",
-        label: "jQuery",
-        desc: "the write less, do more, JavaScript library",
-        icon: "jquery_32x32.png"
-      },
-      {
-        value: "jquery-ui",
-        label: "jQuery UI",
-        desc: "the official user interface library for jQuery",
-        icon: "jqueryui_32x32.png"
-      },
-      {
-        value: "sizzlejs",
-        label: "Sizzle JS",
-        desc: "a pure-JavaScript CSS selector engine",
-        icon: "sizzlejs_32x32.png"
-      }
-    ];
-    */
     
     $( "#conf" ).autocomplete({
       highlightClass: "bold-text",
@@ -166,13 +199,6 @@
           return;
         }
 
-        /*
-        $.getJSON( "search.php", request, function( data, status, xhr ) {
-          cache[ term ] = data;
-          response( data );
-        });
-        */
-      
         $.ajax({
               url: "get-conferences-ac",
               data: {
@@ -274,6 +300,31 @@
   }
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ //close team-member bio
+	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
+		event.preventDefault();
+		$('.cd-member-bio').removeClass('slide-in');
+		$('.cd-member-bio-close').removeClass('is-visible');
+
+		if( is_firefox ) {
+			$('#bshadow').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+				$('body').removeClass('overflow-hidden');
+			});
+		} else {
+			$('#bshadow').removeClass('slide-out');
+			$('body').removeClass('overflow-hidden');
+		}
+	});
+  
+  
+  
+  
  function get_conf(label) {
    
    $.ajax({
@@ -288,7 +339,7 @@
                   
                   console.log(data);
                   
-                  //if (data.type == 'conference') 
+                  if (data.type == 'conference') 
                   {
                   
                   
@@ -313,6 +364,20 @@
                          });  
                   
                   } // End of if (data.type == 'conference') {
+                  else {
+                        $('.cd-member-bio').addClass('slide-in');
+                        //$('.cd-member-bio-close').addClass('is-visible');
+
+                        // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
+                        if( is_firefox ) {
+                          $('#bshadow').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+                            $('body').addClass('overflow-hidden');
+                          });
+                        } else {
+                          $('#bshadow').addClass('slide-out');
+                          $('body').addClass('overflow-hidden');
+                        }
+                  }
 
                   //console.log(cb1);
                   //$.fn.colorbox.close();
