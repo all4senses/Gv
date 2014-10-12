@@ -4,30 +4,10 @@
 
 
 /* Conference list shifn in/out */
-/* -------------------------------- 
 
-Primary style
 
--------------------------------- */
-html * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-/*
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-*/
 body {
-  /*
-  font-size: 100%;
-  font-family: "Droid Serif", serif;
-  color: #333333;
-  background-color: white;
-  */
   /* prevent ie from showing the horizontal scrollbar */
   overflow-x: hidden;
 }
@@ -35,35 +15,8 @@ body.overflow-hidden {
   /* when author bio is visible, the out-of-focus content won't scroll */
   overflow: hidden;
 }
-/*
-a {
-  color: #f25f5c;
-  text-decoration: none;
-}
 
-img {
-  max-width: 100%;
-}
 
-*/
-
-/* -------------------------------- 
-
-Modules - reusable parts of our design
-
--------------------------------- */
-.cd-container {
-  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.cd-container::after {
-  /* clearfix */
-  content: '';
-  display: table;
-  clear: both;
-}
 
 /* -------------------------------- 
 
@@ -87,6 +40,8 @@ Main components
   -ms-transform: translateX(-270px);
   -o-transform: translateX(-270px);
   transform: translateX(-270px);
+  
+  width: 100%;
 }
 #bshadow.slide-out .cd-overlay {
   /* the overlay layer gets visible when the author bio slides in */
@@ -118,6 +73,7 @@ Main components
 
 
 .cd-member-bio {
+  padding-top: 40px;
   position: fixed;
   top: 0;
   right: 0;
@@ -126,7 +82,7 @@ Main components
   overflow-y: auto;
   /* smooth scrolling on mobile phones and tablets */
   -webkit-overflow-scrolling: touch;
-  background: #5c4b51;
+  background: white;
   z-index: 1;
   /* this how we move the author bio section off the canvas */
   -webkit-transform: translateX(270px);
@@ -255,7 +211,7 @@ Main components
   left: 0;
   width: 100%;
   height: 100%;
-  background: black;
+  background: gray;
   cursor: pointer;
   display: none;
 }
