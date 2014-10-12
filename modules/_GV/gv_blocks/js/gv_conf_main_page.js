@@ -307,7 +307,8 @@
  
  
  //close team-member bio
-	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
+ $('.cd-overlay, .cd-member-bio-close').click(function(event){
+//	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
 		event.preventDefault();
 		$('.cd-member-bio').removeClass('slide-in');
 		$('.cd-member-bio-close').removeClass('is-visible');
