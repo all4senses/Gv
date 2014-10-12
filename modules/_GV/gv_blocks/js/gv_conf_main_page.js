@@ -366,6 +366,7 @@
                   
                   } // End of if (data.type == 'conference') {
                   else {
+                        $('.cd-member-bio').html(data.out);
                         $('.cd-member-bio').addClass('slide-in');
                         //$('.cd-member-bio-close').addClass('is-visible');
 
