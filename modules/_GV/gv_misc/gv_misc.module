@@ -791,6 +791,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               );
             }
             else {
+              // Search for all conferences (a list) containing a term in titles.
               $query = db_select('node', 'n');
               $query->fields('n', array('nid', 'title'));
               $query->condition('n.status', 1);
@@ -828,7 +829,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               
             }
-        }
+        } // End of if ($post['type'] == 'title') {
         elseif ($post['type'] == 'industry') {
               $out_array[] = array(
                   'value' => 'xxx',
