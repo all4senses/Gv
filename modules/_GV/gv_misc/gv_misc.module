@@ -645,204 +645,6 @@ function gv_mics_page404CustomContent() {
 }
 
 
-/**
- * Return conferences for autoselect via ajax request.. 
- */
-function gv_misc_getConferences_autocomplete_ajax() {
-  
-  $post = array();
-  $out_array = array();
-  
-  foreach ($_GET as $key => $value) {
-    $post[$key] = check_plain(strip_tags($value));
-  }
-
-  
-  // Db queries doc
-  // https://www.drupal.org/node/310086
-  // https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_like/7
-  
-  if ($post['op'] == 'auto') {
-    
-  
-        if ($post['type'] == 'industry') {
-          $vid = 8;
-
-          $query = db_select('taxonomy_term_data', 't');
-          $query->fields('t', array('tid', 'name'));
-          $query->condition('t.vid', $vid);
-          $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
-      //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-      //    $query->condition('i.field_invisible_value', 1, '!='); 
-          $query->orderBy('t.name', 'ASC');
-          // 4 pages
-          //$query->range(0, 8);
-          // 3 pages
-          //$query->range(0, 6);
-
-          $query->range(0, 9);
-
-
-          $results = $query->execute()->fetchAllAssoc('tid');
-          foreach ($results as $result) {
-            $out_array[] = array(
-                'value' => $result->tid,
-                'label' => $result->name,
-            );
-          }
-
-        }
-        elseif ($post['type'] == 'title') {
-            /*
-            $out_array = array(
-                 0 => array(
-                     'value' => "jquery",
-                  'label' => "jQuery",
-                  'desc' => "the 222 write less, do more, JavaScript library",
-
-                ),
-                1 => array(
-                  'value' => "jquery-ui",
-                  'label' => "jQuery UI",
-                  'desc' => "the official user interface library for jQuery",
-                ),
-                2 => array (
-                  'value' => "sizzlejs",
-                  'label' => "Sizzle JS",
-                  'desc' => "a... pure-JavaScript CSS selector engine",
-                ),
-            );
-            */
-
-            $query = db_select('node', 'n');
-            $query->fields('n', array('nid', 'title'));
-            $query->condition('n.status', 1);
-            $query->condition('n.type', 'conference', '=');
-            $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-        //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-        //    $query->condition('i.field_invisible_value', 1, '!='); 
-            $query->orderBy('n.title', 'ASC');
-            $query->range(0, 9);
-
-
-            $results = $query->execute()->fetchAllAssoc('nid');
-            foreach ($results as $result) {
-              $out_array[] = array(
-                  'value' => $result->nid,
-                  'label' => $result->title,
-              );
-            }
-
-        }
-  }
-  elseif ($post['op'] == 'get') {
-    
-        if ($post['type'] == 'title') {
-          
-//              $out_array[] = array(
-//                  'value' => 'aaa',
-//                  'label' => 'bbb',
-//              );
-              
-            $query = db_select('node', 'n');
-            $query->fields('n', array('nid', 'title'));
-            $query->condition('n.status', 1);
-            $query->condition('n.type', 'conference', '=');
-            $query->condition('n.title', $post['term']);
-            $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
-            $query->fields('b', array('body_value'));
-            $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
-            $query->fields('st', array('field_state_value'));
-            $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
-            $query->fields('ci', array('field_conf_city_value'));
-            $query->leftJoin('field_data_field_conf_price', 'pr', 'pr.entity_id = n.nid');
-            $query->fields('pr', array('field_conf_price_value'));
-            $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
-            $query->fields('da', array('field_conf_date_value'));
-            $query->leftJoin('field_data_field_conf_link', 'li', 'li.entity_id = n.nid');
-            $query->fields('li', array('field_conf_link_value'));
-            $query->leftJoin('field_data_field_conf_twitter', 'tw', 'tw.entity_id = n.nid');
-            $query->fields('tw', array('field_conf_twitter_value'));
-            $query->leftJoin('field_data_field_conf_twitter_hashtag', 'th', 'th.entity_id = n.nid');
-            $query->fields('th', array('field_conf_twitter_hashtag_value'));
-            
-            if($result = $query->execute()->fetchObject()) {
-              $out_html = '
-                    <div class="top">
-                      <div class="title">' . $result->title . '</div>
-                      <div class="date">' . $result->field_conf_date_value . '</div>
-                      <div class="twitter"><div class="name">' . $result->field_conf_twitter_value . '</div><div class="hash">' . $result->ield_conf_twitter_hashtag_value . '</div></div>
-                    </div>
-                    <div class="middle">
-                      <div class="url">' . $result->field_conf_link_value . '</div>
-                      <div class="price">' . $result->field_conf_price_value . '</div>
-                      <div class="place">' . $result->field_conf_city_value . ', ' . $result->field_state_value .  '</div>
-                    </div>
-                    <div class="main">
-                      <div class="descr">' . $result->body_value . '</div>
-                      <div class="more">' . l('More', 'node/' . $result->nid) . '</div>
-                    </div>
-                      ';
-              
-              $out_array = array(
-                  'type' => 'conference',
-                  'out' => $out_html,
-                  
-              );
-            }
-            else {
-              // Search for all conferences (a list) containing a term in titles.
-              $query = db_select('node', 'n');
-              $query->fields('n', array('nid', 'title'));
-              $query->condition('n.status', 1);
-              $query->condition('n.type', 'conference', '=');
-              $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-          //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-          //    $query->condition('i.field_invisible_value', 1, '!='); 
-              $query->orderBy('n.title', 'ASC');
-              $query->range(0, 9);
-
-
-              if ($results = $query->execute()->fetchAllAssoc('nid')) {
-              
-                  $conferences_list = '<table><tbody><thead><th>Title</th><th>More Details</th><thead>';
-                  
-                  foreach ($results as $result) {
-//                    $conferences_list[] = array(
-//                        'value' => $result->nid,
-//                        'label' => $result->title,
-//                    );
-                    
-                    
-                      $conferences_list .= '<tr><td>' . $result->title . '</td><td>' . l('More', 'node/' . $result->nid) . '</td></tr>';
-                    
-                    
-                  }
-                  
-                  $conferences_list .= '</tbody></table>';
-                  
-                  $out_array = array(
-                      'type' => 'list',
-                      'out' => $conferences_list,
-
-                  );
-              }
-              
-            }
-        } // End of if ($post['type'] == 'title') {
-        elseif ($post['type'] == 'industry') {
-              $out_array[] = array(
-                  'value' => 'xxx',
-                  'label' => 'yyy',
-              );
-        }
-  }
-  
-  
-  drupal_json_output($out_array);
-
-}
-
 
 /**
  * Return section articles via ajax request.. 
@@ -12551,4 +12353,203 @@ function gv_misc_contextual_links_view_alter(&$element, &$items) {
     );
   }
   
+}
+
+
+/**
+ * Return conferences for autoselect via ajax request.. 
+ */
+function gv_misc_getConferences_autocomplete_ajax() {
+  
+  $post = array();
+  $out_array = array();
+  
+  foreach ($_GET as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }
+
+  
+  // Db queries doc
+  // https://www.drupal.org/node/310086
+  // https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_like/7
+  
+  if ($post['op'] == 'auto') {
+    
+  
+        if ($post['type'] == 'industry') {
+          $vid = 8;
+
+          $query = db_select('taxonomy_term_data', 't');
+          $query->fields('t', array('tid', 'name'));
+          $query->condition('t.vid', $vid);
+          $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
+      //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+      //    $query->condition('i.field_invisible_value', 1, '!='); 
+          $query->orderBy('t.name', 'ASC');
+          // 4 pages
+          //$query->range(0, 8);
+          // 3 pages
+          //$query->range(0, 6);
+
+          $query->range(0, 9);
+
+
+          $results = $query->execute()->fetchAllAssoc('tid');
+          foreach ($results as $result) {
+            $out_array[] = array(
+                'value' => $result->tid,
+                'label' => $result->name,
+            );
+          }
+
+        }
+        elseif ($post['type'] == 'title') {
+            /*
+            $out_array = array(
+                 0 => array(
+                     'value' => "jquery",
+                  'label' => "jQuery",
+                  'desc' => "the 222 write less, do more, JavaScript library",
+
+                ),
+                1 => array(
+                  'value' => "jquery-ui",
+                  'label' => "jQuery UI",
+                  'desc' => "the official user interface library for jQuery",
+                ),
+                2 => array (
+                  'value' => "sizzlejs",
+                  'label' => "Sizzle JS",
+                  'desc' => "a... pure-JavaScript CSS selector engine",
+                ),
+            );
+            */
+
+            $query = db_select('node', 'n');
+            $query->fields('n', array('nid', 'title'));
+            $query->condition('n.status', 1);
+            $query->condition('n.type', 'conference', '=');
+            $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+        //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+        //    $query->condition('i.field_invisible_value', 1, '!='); 
+            $query->orderBy('n.title', 'ASC');
+            $query->range(0, 9);
+
+
+            $results = $query->execute()->fetchAllAssoc('nid');
+            foreach ($results as $result) {
+              $out_array[] = array(
+                  'value' => $result->nid,
+                  'label' => $result->title,
+              );
+            }
+
+        }
+  }
+  elseif ($post['op'] == 'get') {
+    
+        if ($post['type'] == 'title') {
+          
+//              $out_array[] = array(
+//                  'value' => 'aaa',
+//                  'label' => 'bbb',
+//              );
+              
+            $query = db_select('node', 'n');
+            $query->fields('n', array('nid', 'title'));
+            $query->condition('n.status', 1);
+            $query->condition('n.type', 'conference', '=');
+            $query->condition('n.title', $post['term']);
+            $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
+            $query->fields('b', array('body_value'));
+            $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+            $query->fields('st', array('field_state_value'));
+            $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+            $query->fields('ci', array('field_conf_city_value'));
+            $query->leftJoin('field_data_field_conf_price', 'pr', 'pr.entity_id = n.nid');
+            $query->fields('pr', array('field_conf_price_value'));
+            $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
+            $query->fields('da', array('field_conf_date_value'));
+            $query->leftJoin('field_data_field_conf_link', 'li', 'li.entity_id = n.nid');
+            $query->fields('li', array('field_conf_link_value'));
+            $query->leftJoin('field_data_field_conf_twitter', 'tw', 'tw.entity_id = n.nid');
+            $query->fields('tw', array('field_conf_twitter_value'));
+            $query->leftJoin('field_data_field_conf_twitter_hashtag', 'th', 'th.entity_id = n.nid');
+            $query->fields('th', array('field_conf_twitter_hashtag_value'));
+            
+            if($result = $query->execute()->fetchObject()) {
+              $out_html = '
+                    <div class="top">
+                      <div class="title">' . $result->title . '</div>
+                      <div class="date">' . $result->field_conf_date_value . '</div>
+                      <div class="twitter"><div class="name">' . $result->field_conf_twitter_value . '</div><div class="hash">' . $result->ield_conf_twitter_hashtag_value . '</div></div>
+                    </div>
+                    <div class="middle">
+                      <div class="url">' . $result->field_conf_link_value . '</div>
+                      <div class="price">' . $result->field_conf_price_value . '</div>
+                      <div class="place">' . $result->field_conf_city_value . ', ' . $result->field_state_value .  '</div>
+                    </div>
+                    <div class="main">
+                      <div class="descr">' . $result->body_value . '</div>
+                      <div class="more">' . l('More', 'node/' . $result->nid) . '</div>
+                    </div>
+                      ';
+              
+              $out_array = array(
+                  'type' => 'conference',
+                  'out' => $out_html,
+                  
+              );
+            }
+            else {
+              // Search for all conferences (a list) containing a term in titles.
+              $query = db_select('node', 'n');
+              $query->fields('n', array('nid', 'title'));
+              $query->condition('n.status', 1);
+              $query->condition('n.type', 'conference', '=');
+              $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+          //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+          //    $query->condition('i.field_invisible_value', 1, '!='); 
+              $query->orderBy('n.title', 'ASC');
+              $query->range(0, 9);
+
+
+              if ($results = $query->execute()->fetchAllAssoc('nid')) {
+              
+                  $conferences_list = '<table><tbody><thead><th>Title</th><th>More Details</th><thead>';
+                  
+                  foreach ($results as $result) {
+//                    $conferences_list[] = array(
+//                        'value' => $result->nid,
+//                        'label' => $result->title,
+//                    );
+                    
+                    
+                      $conferences_list .= '<tr><td>' . $result->title . '</td><td>' . l('More', 'node/' . $result->nid) . '</td></tr>';
+                    
+                    
+                  }
+                  
+                  $conferences_list .= '</tbody></table>';
+                  
+                  $out_array = array(
+                      'type' => 'list',
+                      'out' => $conferences_list,
+
+                  );
+              }
+              
+            }
+        } // End of if ($post['type'] == 'title') {
+        elseif ($post['type'] == 'industry') {
+              $out_array[] = array(
+                  'value' => 'xxx',
+                  'label' => 'yyy',
+              );
+        }
+  }
+  
+  
+  drupal_json_output($out_array);
+
 }
