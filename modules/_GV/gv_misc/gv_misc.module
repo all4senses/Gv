@@ -696,12 +696,12 @@ function gv_misc_get_sectionArticles($section, $limit = NULL) {
     if ($limit) {
       $query->range(0, $limit);
     }
-    $results = $query->execute()->fetchAllAssoc('entity_id');
+    $result = $query->execute()->fetchAllAssoc('entity_id');
     
     $max_len = 37;
     
-    if (!empty($results)) {
-      foreach ($results as $nid => $article) {
+    if (!empty($result)) {
+      foreach ($result as $nid => $article) {
         $len = strlen($article->title);
         if ($len > $max_len) {
           $title = drupal_substr($article->title, 0, $max_len);
@@ -1064,8 +1064,8 @@ function gv_misc_testPage() {
       //$filters = $view->get_items('filter', $display_name);
       //dpm($filters);
 
-      $results = $view->preview($display_name);
-      $out .= $results;
+      $result = $view->preview($display_name);
+      $out .= $result;
       //dpm($view->result);
       break;
     }
@@ -1088,10 +1088,10 @@ function gv_misc_testPage() {
   
   /*
   $output = "
-#block-gv-blocks-request-quote-v6 .results .guide{position: relative; color: black; font-size: 14px; left: 0; padding: 040px 0 0 0; top: 0; width: 200px; background: none;}
+#block-gv-blocks-request-quote-v6 .result .guide{position: relative; color: black; font-size: 14px; left: 0; padding: 040px 0 0 0; top: 0; width: 200px; background: none;}
 #block-gv-blocks-request-quote-v6 .phone-pic{background: url(/sites/all/themes/gv_orange/css/images/sprite-04.png) no-repeat -4px -246px transparent; position: absolute; right: 10px; top: 97px; width: 90px; height: 80px;}
 #block-gv-blocks-request-quote-v6 #personal_data .phone-pic{background: url('images/sprite-04.png') no-repeat -4px -246px transparent; position: absolute; right: 0; top: 60px; width: 90px; height: 80px;}
-#block-gv-blocks-request-quote-v6 .results .guide img{width: 80px; padding: 0 63px; margin: 2px 0 0 0;}
+#block-gv-blocks-request-quote-v6 .result .guide img{width: 80px; padding: 0 63px; margin: 2px 0 0 0;}
 ";
   
   $output = preg_replace('|sites\/all\/themes\/gv_orange\/css\/images|s', 'images/theme', $output);
@@ -1123,33 +1123,33 @@ function gv_misc_testPage() {
   $query->condition('n.type', array('article', 'blog_post', 'news_post'), 'IN');
   $query->orderBy('nid');
 
-  //if ($results = $query->execute()->fetchAllAssoc('nid')) {
-  if ($results = $query->execute()->fetchAll()) {
-    //dpm($results);
+  //if ($result = $query->execute()->fetchAllAssoc('nid')) {
+  if ($result = $query->execute()->fetchAll()) {
+    //dpm($result);
     
     $out_array = array();
     
     for($i = 851; $i <= 1000; $i++) {
       
-      if (!isset($results[$i])) {
+      if (!isset($result[$i])) {
         continue;
       }
-      $results[$i]->extra_data = unserialize($results[$i]->field_extra_data_value);
+      $result[$i]->extra_data = unserialize($result[$i]->field_extra_data_value);
       
       
       
 
-      $out_array[$i] = $results[$i];
+      $out_array[$i] = $result[$i];
       
       $node = new stdClass();
-      $node->field_extra_data['und'][0]['value'] = $results[$i]->field_extra_data_value;
-      $node->body['und'][0]['value'] = $results[$i]->body_value;//gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $results[$i]->body_value);
-      $node->nid = $results[$i]->nid;
-      $node->title = $results[$i]->title;
+      $node->field_extra_data['und'][0]['value'] = $result[$i]->field_extra_data_value;
+      $node->body['und'][0]['value'] = $result[$i]->body_value;//gv_pages_convertBeautifulUrls('from_beautiful_to_originals', $result[$i]->body_value);
+      $node->nid = $result[$i]->nid;
+      $node->title = $result[$i]->title;
     
       $out_array[$i]->new_extra_data = gv_misc_updateArticleExtraData($node, TRUE, 1390188453);
       
-      $out_array[$i]->new_body = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $results[$i]->body_value);
+      $out_array[$i]->new_body = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $result[$i]->body_value);
       
       gv_misc_fieldBodyUpdate($out_array[$i]->nid, $out_array[$i]->new_body);
       //break;
@@ -1158,7 +1158,7 @@ function gv_misc_testPage() {
     dpm($out_array);
     
     
-//    $node = $results[5];
+//    $node = $result[5];
 //    dpm($node);
 //    gv_misc_fieldBodyUpdate($node->nid, $node->new_body);
   }
@@ -1349,8 +1349,8 @@ function gv_misc_testPage() {
   $query->range(0, 9);
 
 
-  if ($results = $query->execute()->fetchAllAssoc('nid')) {
-    dpm($results);
+  if ($result = $query->execute()->fetchAllAssoc('nid')) {
+    dpm($result);
   }
             
   return $out . '</div>';// . '<br><div>End of Test</div>';
@@ -4761,10 +4761,10 @@ function gv_misc_getVotesRecommendPosVsNeg($nid) {
     $query->condition('value_type', 'percent');
     $query->condition('tag', 'recommend');
     
-    $results = $query->execute()->fetchCol();
+    $result = $query->execute()->fetchCol();
 
     $recommend = array('positive' => 0, 'negative' => 0);
-    foreach ($results as $result) {
+    foreach ($result as $result) {
       if ($result) {
         $recommend['positive'] += 1;
       }
@@ -4786,9 +4786,9 @@ function gv_misc_getVotesIDs($criteria) {
     foreach ($criteria as $field => $value) {
       $query->condition($field, $value);
     }
-    $results = $query->execute()->fetchAllAssoc('vote_id');
+    $result = $query->execute()->fetchAllAssoc('vote_id');
     $votes = array();
-    foreach ($results as $result) {
+    foreach ($result as $result) {
       //$votes[] = array('vote_id' => $result->vote_id);
       $votes[] = (array) $result;
     }
@@ -4852,11 +4852,11 @@ function gv_misc_approveContent($type, $id) {
         ->fields('re', array('entity_id'));
       $query->condition('field_r_email_value', $email);
       //$review_nid = $query->execute()->fetchField();
-      $results = $query->execute();
+      $result = $query->execute();
       
       //$found_nid = FALSE;
       $error = FALSE;
-      foreach ($results as $result) {
+      foreach ($result as $result) {
         $found_nid = TRUE;
         $review_nid = $result->entity_id;
         
@@ -7880,7 +7880,7 @@ function gv_misc_mail($key, &$message, $params) {
       break;
     
     case 'new_disqus_user':
-      $message['subject'] = 'GV Disqus users check up results';
+      $message['subject'] = 'GV Disqus users check up result';
       $message['body'][] = $params['report'];
       break;
     
@@ -8136,7 +8136,7 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $page
   $main_topics_voc = taxonomy_vocabulary_machine_name_load(TOPICS);
   
   // Old style query, for reference.
-  // $results = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name LIMIT $limit", array(':vid' => $voc->vid, ':type' => $content_type));
+  // $result = db_query("SELECT td.name, COUNT(n.nid) AS count FROM {taxonomy_term_data} td LEFT JOIN {taxonomy_index} ti ON ti.tid = td.tid INNER JOIN {node} n ON (n.nid = ti.nid AND n.type = :type) WHERE td.vid = :vid GROUP BY td.name LIMIT $limit", array(':vid' => $voc->vid, ':type' => $content_type));
     
   $types = array();
 
@@ -8164,12 +8164,12 @@ function gv_misc_getTopics($content_type, $base_url = NULL, $limit = NULL, $page
   if ($limit) {
     $query->range(0, $limit);
   }
-  $results = $query->execute();
+  $result = $query->execute();
 
   // Necessary for pathauto_cleanstring().
   module_load_include('inc', 'pathauto');
 
-  foreach($results as $result) {
+  foreach($result as $result) {
     
     // Translate terms to the current language.
     // $result->name = i18n_string_translate(array('taxonomy', 'term', $result->tid, 'name'), $result->name);
@@ -11066,15 +11066,15 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $query->condition('n.status', 1);
       
       $query->orderBy('n.created', 'DESC');
-      $results = $query->execute()->fetchAllAssoc('nid');
+      $result = $query->execute()->fetchAllAssoc('nid');
       
-      //dpm($results);
-      if (empty($results)) {
+      //dpm($result);
+      if (empty($result)) {
         //dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
       }
       else {
-        foreach($results as $key => $value) {
+        foreach($result as $key => $value) {
           $value->similar_tags_count = 1;
           $all_nids_sets[1][$value->created] = $value;
         }
@@ -11172,16 +11172,16 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           $query->condition('n.status', 1);
           
           $query->condition('n.nid', $article_nid, '!=');
-          //$results = $query->execute()->fetchAllAssoc('nid');
-          $results = $query->execute()->fetchAllAssoc('created');
+          //$result = $query->execute()->fetchAllAssoc('nid');
+          $result = $query->execute()->fetchAllAssoc('created');
           
           
           
-          if (!empty($results)) {
-            foreach($results as $key => $result) {
+          if (!empty($result)) {
+            foreach($result as $key => $result) {
               //if (!in_array($result, $articles)) {
               if (isset($articles[$key]) && $articles[$key]->similar_tags_count > $index) {
-                unset($results[$key]);
+                unset($result[$key]);
               }
               else {
                 if (isset($all_nids_sets[1][$key])) {
@@ -11323,23 +11323,23 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       //$query->orderBy('n.created', 'DESC');
       //$query->range(0, $max_articles);
       
-      //$results = $query->execute()->fetchAllAssoc('nid');
-      $results = $query->execute()->fetchAllAssoc('created');
+      //$result = $query->execute()->fetchAllAssoc('nid');
+      $result = $query->execute()->fetchAllAssoc('created');
       
       //if ($i == 1)
-//      if (!empty($results))
+//      if (!empty($result))
 //      {
 //        dpm('$max_articles = ' . $max_articles);
 //        dpm('$map_nodeType_to_tagsTable[$node_type] = ' . $map_nodeType_to_tagsTable[$node_type]);
 //        dpm ('$index_tag = ' . $index_tag);
-//        dpm($results);
+//        dpm($result);
 //      }
       
-      if ($results) {
+      if ($result) {
 
-//        foreach ($results as $key => $result) {
+//        foreach ($result as $key => $result) {
 //          if (isset($articles[$key])) {
-//            unset($results[$key]);
+//            unset($result[$key]);
 //          }
 //          elseif ($max_articles) {
 //            $articles_by_index[$i][$key] = $result;
@@ -11348,10 +11348,10 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 //          }
 //        }
         
-        foreach ($results as $key => $result) {
+        foreach ($result as $key => $result) {
           //if (in_array($result, $articles)) {
           if (isset($articles[$key])) {
-            unset($results[$key]);
+            unset($result[$key]);
           }
           elseif ($max_articles) {
             $result->similar_tags_count = $i;
@@ -12220,15 +12220,15 @@ function gv_misc_filter_url_onlywebaddresses_tips($filter, $format, $long = FALS
 
 
 /**
- * Adding possibility to get total results count from a paged query without qeriing it again without pager.
+ * Adding possibility to get total result count from a paged query without qeriing it again without pager.
  * 
- * http://drupal.stackexchange.com/questions/80381/can-we-get-full-count-of-results-from-a-query-that-is-extended-by-pagerdefault
+ * http://drupal.stackexchange.com/questions/80381/can-we-get-full-count-of-result-from-a-query-that-is-extended-by-pagerdefault
  * 
  * Example of call:
  * 
  * $query = db_select('gv_track_links', 'tl')->extend('GvPager'); // Instead of $query = db_select('gv_track_links', 'tl')->extend('PagerDefault');
  * ...
- * $results = $query->orderBy($sort, $order)->limit(20)->execute();
+ * $result = $query->orderBy($sort, $order)->limit(20)->execute();
  * $total_items = $query->getTotalItemCount();
  */
 // 
@@ -12262,7 +12262,7 @@ class GvPager extends PagerDefault {
   }
 
   /**
-   * Cache the results of PagerDefault::getCountQuery().
+   * Cache the result of PagerDefault::getCountQuery().
    */
   public function getTotalItemCount() {
     static $total_items = NULL;
@@ -12418,8 +12418,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
           $query->range(0, 9);
 
 
-          $results = $query->execute()->fetchAllAssoc('tid');
-          foreach ($results as $result) {
+          $result = $query->execute()->fetchAllAssoc('tid');
+          foreach ($result as $result) {
             $out_array[] = array(
                 'value' => $result->tid,
                 'label' => $result->name,
@@ -12460,8 +12460,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->range(0, 9);
 
 
-            $results = $query->execute()->fetchAllAssoc('nid');
-            foreach ($results as $result) {
+            $result = $query->execute()->fetchAllAssoc('nid');
+            foreach ($result as $result) {
               $out_array[] = array(
                   'value' => $result->nid,
                   'label' => $result->title,
@@ -12501,21 +12501,21 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->leftJoin('field_data_field_conf_twitter_hashtag', 'th', 'th.entity_id = n.nid');
             $query->fields('th', array('field_conf_twitter_hashtag_value'));
             
-            if($results = $query->execute()->fetchObject()) {
+            if($result = $query->execute()->fetchObject()) {
               $out_html = '
                     <div class="top">
-                      <div class="title">' . $results->title . '</div>
-                      <div class="date">' . $results->field_conf_date_value . '</div>
-                      <div class="twitter"><div class="name">' . $results->field_conf_twitter_value . '</div><div class="hash">' . $results->ield_conf_twitter_hashtag_value . '</div></div>
+                      <div class="title">' . $result->title . '</div>
+                      <div class="date">' . $result->field_conf_date_value . '</div>
+                      <div class="twitter"><div class="name">' . $result->field_conf_twitter_value . '</div><div class="hash">' . $result->ield_conf_twitter_hashtag_value . '</div></div>
                     </div>
                     <div class="middle">
-                      <div class="url">' . $results->field_conf_link_value . '</div>
-                      <div class="price">' . $results->field_conf_price_value . '</div>
-                      <div class="place">' . $results->field_conf_city_value . ', ' . $results->field_state_value .  '</div>
+                      <div class="url">' . $result->field_conf_link_value . '</div>
+                      <div class="price">' . $result->field_conf_price_value . '</div>
+                      <div class="place">' . $result->field_conf_city_value . ', ' . $result->field_state_value .  '</div>
                     </div>
                     <div class="main">
-                      <div class="descr">' . $results->body_value . '</div>
-                      <div class="more">' . l('More', 'node/' . $results->nid) . '</div>
+                      <div class="descr">' . $result->body_value . '</div>
+                      <div class="more">' . l('More', 'node/' . $result->nid) . '</div>
                     </div>
                       ';
               
@@ -12543,18 +12543,18 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->range(0, 9);
 
 
-              if ($results = $query->execute()->fetchAllAssoc('nid')) {
+              if ($result = $query->execute()->fetchAllAssoc('nid')) {
               
                   $conferences_list = '<table><tbody><thead><th>Name</th><th>Industry</th><th>Dates</th><th>Location</th><thead>';
                   
-                  foreach ($results as $result) {
+                  foreach ($result as $result) {
 //                    $conferences_list[] = array(
 //                        'value' => $result->nid,
 //                        'label' => $result->title,
 //                    );
                     
                     
-                      $conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . '' . '</td><td>' . $results->field_conf_date_value . '</td><td>' . $results->field_conf_city_value . ', ' . $results->field_state_value . '</td></tr>';
+                      $conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . '' . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
                     
                     
                   }
