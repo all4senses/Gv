@@ -1349,7 +1349,7 @@ function gv_misc_testPage() {
   $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
   
   $query->groupBy('n.nid');
-  $query->addExpression('GROUP_CONCAT(ti.tid)', 'terms');
+  $query->addExpression('GROUP_CONCAT(ti.tid SEPARATOR ", ")', 'terms');
   
   $query->orderBy('n.title', 'ASC');
   $query->range(0, 9);
