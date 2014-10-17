@@ -1344,7 +1344,13 @@ function gv_misc_testPage() {
   $query->fields('ci', array('field_conf_city_value'));
   $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
   $query->fields('da', array('field_conf_date_value'));
-
+  
+  
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+  
+  $query->groupBy('n.nid');
+  $query->addExpression('GROUP_CONCAT(ti.tid)', 'terms');
+  
   $query->orderBy('n.title', 'ASC');
   $query->range(0, 9);
 
