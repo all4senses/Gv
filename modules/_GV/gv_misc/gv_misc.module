@@ -1306,7 +1306,9 @@ function gv_misc_testPage() {
   
   */
   
-        
+   
+  
+  /*
   $post['term'] = 'Web';
   $vid = 8;
     
@@ -1328,6 +1330,28 @@ function gv_misc_testPage() {
     $out_array = $query->execute()->fetchAllAssoc('tid');
     
     dpm($out_array);
+    */
+  
+  $post['term'] = 'Web';
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'conference', '=');
+  $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+  $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+  $query->fields('st', array('field_state_value'));
+  $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+  $query->fields('ci', array('field_conf_city_value'));
+  $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
+  $query->fields('da', array('field_conf_date_value'));
+
+  $query->orderBy('n.title', 'ASC');
+  $query->range(0, 9);
+
+
+  if ($results = $query->execute()->fetchAllAssoc('nid')) {
+    dpm($results);
+  }
             
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
