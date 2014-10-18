@@ -12609,10 +12609,16 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
 
               $query->groupBy('n.nid');
-              //$query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ', ')", 'terms');
+              // V1
+              // Works!
+              $query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ',')", 'terms');
+              // Works!
               //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
+              // Works!
               //$query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ', ')", 'terms');
-              $query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
+              // V2
+              // Works excellently!
+              //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
 
               $query->orderBy('n.title', 'ASC');
               $query->range(0, 9);
@@ -12630,11 +12636,18 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //                        'label' => $result->title,
 //                    );
                     
-                      $terms = explode(';', $result->terms);
                       $term_links = NULL;
+                      // V2
+                      // Works
+//                      $terms = explode(';', $result->terms);
+//                      foreach ($terms as $term) {
+//                        $term_data = explode(':', $term);
+//                        $term_links .= ($term_links ? ', ' : '') . l($term_data[0], 'taxonomy/term/' . $term_data[1]);
+//                      }
+                      // V1, simple
+                      $terms = explode(',', $result->terms);
                       foreach ($terms as $term) {
-                        $term_data = explode(':', $term);
-                        $term_links .= ($term_links ? ', ' : '') . l($term_data[0], 'taxonomy/term/' . $term_data[1]);
+                        $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
                       $conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
@@ -12647,8 +12660,6 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $out_array = array(
                       'type' => 'list',
                       'out' => $conferences_list,
-                      'terms' => $result->terms,
-
                   );
               }
               
