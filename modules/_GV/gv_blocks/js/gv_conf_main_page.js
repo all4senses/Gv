@@ -348,7 +348,7 @@
 // for jQuery 1.7
 
    //console.log($(this).html());
-   console.log($(this).text());
+   //console.log($(this).text());
    
    $( "#conf" ).val($(this).text());
    
@@ -366,7 +366,30 @@
  }); 
       
       
-      
+ 
+ 
+ $('body').delegate('.conf-title', 'click', function(){
+// Replace with   
+// $('body').on('click', '.term-link', function(){    
+// for jQuery 1.7
+
+   //console.log($(this).html());
+   //console.log($(this).text());
+   
+   slideOutRightWin();
+   
+   sw = 'title';
+//   search_field_title = 'Search by Industry';
+//   $('#c-industry').addClass('active');
+//   $('#c-title').removeClass('active');
+//   $('input[id="conf"]').attr('title', search_field_title);
+          
+          
+   get_conf($(this).text());
+   
+ }); 
+ 
+ 
       
  function get_conf(label) {
    
