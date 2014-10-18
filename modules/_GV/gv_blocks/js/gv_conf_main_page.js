@@ -324,10 +324,10 @@
 	});
   
   
- $('.cd-member-bio').on('click', '.term-link', function(){
-   console.log(this.html());
-   console.log(this);
-   console.log($(this));
+ $('body').on('click', '.term-link', function(){
+//   console.log(this.html());
+//   console.log(this);
+//   console.log($(this));
    console.log('aaa');
    //alert('a');
  }); 
