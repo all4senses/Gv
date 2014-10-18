@@ -381,9 +381,15 @@
               success: function( data ) {
                   
                   //console.log(data);
-                  
-                  if (data.type == 'conference') 
-                  {
+                  if (!data.out) {
+                    if (sw == 'title') {
+                      alert('No conference found with a title (or title containing) <' + label + '>');
+                    }
+                    else {
+                      alert('No conferences found tagged with an industry <' + label + '>');
+                    }
+                  }
+                  else if (data.type == 'conference') {
                   
                   
                         $('#cb-popup_1 #results_1').html(data.out);
