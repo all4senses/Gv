@@ -324,7 +324,10 @@
 	});
   
   
-  
+ $(".term-link").click(function(){
+   //console.log(this.html());
+   console.log(this);
+ }); 
   
  function get_conf(label) {
    
