@@ -324,7 +324,7 @@
 	});
   
   
- $('.term-link').on('click', function(){
+ $('.cd-member-bio').on('click', '.term-link', function(){
    console.log(this.html());
    console.log(this);
    console.log($(this));
