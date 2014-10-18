@@ -1359,7 +1359,7 @@ http://www.dbforums.com/showthread.php?1655801-Subquerry-inside-GROUP_CONCAT
 http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.html
 
    */
-  
+  /*
   $post['term'] = 'Web';
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'));
@@ -1390,6 +1390,49 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 
   if ($result = $query->execute()->fetchAllAssoc('nid')) {
     dpm($result);
+  }
+  */
+  
+  
+  $post['term'] = 'User Experience';
+  $query = db_select('taxonomy_index', 't');
+  $query->condition('t.tid', $post['term'], '=');
+  $query->leftJoin('node', 'n', 'n.nid = t.nid');
+  $query->fields('n', array('nid', 'title'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'conference', '=');
+  //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+  $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+  $query->fields('st', array('field_state_value'));
+  $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+  $query->fields('ci', array('field_conf_city_value'));
+  $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
+  $query->fields('da', array('field_conf_date_value'));
+
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+
+
+  $query->groupBy('n.nid');
+  // V0
+  // Works!
+  //$query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ',')", 'terms');
+  // Works!
+  //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
+  // V1
+  // Works!
+  $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ',')", 'terms');
+  // V2
+  // Works excellently!
+  //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
+
+  $query->orderBy('n.title', 'ASC');
+  $query->range(0, 9);
+
+
+
+
+  if ($result = $query->execute()->fetchAllAssoc('nid')) {
+   dpm($result);
   }
             
   return $out . '</div>';// . '<br><div>End of Test</div>';
@@ -12667,12 +12710,89 @@ function gv_misc_getConferences_autocomplete_ajax() {
             }
         } // End of if ($post['type'] == 'title') {
         elseif ($post['type'] == 'industry') {
-              $out_array[] = array(
-                  'value' => 'xxx',
-                  'label' => 'yyy',
-              );
-        }
-  }
+          
+          
+          
+              // Search for all conferences (a list) with a tag $post['term'].
+              $query = db_select('taxonomy_index', 't');
+              $query->condition('t.tid', $post['term'], '=');
+              $query->leftJoin('node', 'n', 'n.nid = t.nid');
+              $query->fields('n', array('nid', 'title'));
+              $query->condition('n.status', 1);
+              $query->condition('n.type', 'conference', '=');
+              //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+              $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+              $query->fields('st', array('field_state_value'));
+              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+              $query->fields('ci', array('field_conf_city_value'));
+              $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
+              $query->fields('da', array('field_conf_date_value'));
+
+              $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+              
+
+              $query->groupBy('n.nid');
+              // V0
+              // Works!
+              //$query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ',')", 'terms');
+              // Works!
+              //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
+              // V1
+              // Works!
+              $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ',')", 'terms');
+              // V2
+              // Works excellently!
+              //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
+
+              $query->orderBy('n.title', 'ASC');
+              $query->range(0, 9);
+              
+              
+              
+
+              if ($result = $query->execute()->fetchAllAssoc('nid')) {
+              
+                  $conferences_list = '<table><tbody><thead><th>Name</th><th>Industry</th><th>Dates</th><th>Location</th><thead>';
+                  
+                  foreach ($result as $result) {
+//                    $conferences_list[] = array(
+//                        'value' => $result->nid,
+//                        'label' => $result->title,
+//                    );
+                    
+                      $term_links = NULL;
+                      // V2
+                      // Works
+//                      $terms = explode(';', $result->terms);
+//                      foreach ($terms as $term) {
+//                        $term_data = explode(':', $term);
+//                        $term_links .= ($term_links ? ', ' : '') . l($term_data[0], 'taxonomy/term/' . $term_data[1]);
+//                      }
+                      // V1
+                      $terms = explode(',', $result->terms);
+                      foreach ($terms as $term) {
+                        $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
+                      }
+                      
+                      $conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
+                    
+                    
+                  }
+                  
+                  $conferences_list .= '</tbody></table>';
+                  
+                  $out_array = array(
+                      'type' => 'list',
+                      'out' => $conferences_list,
+                  );
+                  
+              } // End of if ($result = $query->execute()->fetchAllAssoc('nid')) {
+                       
+              
+        } // End of elseif ($post['type'] == 'industry') {
+        
+        
+  } // End of elseif ($post['op'] == 'get') {
   
   
   drupal_json_output($out_array);

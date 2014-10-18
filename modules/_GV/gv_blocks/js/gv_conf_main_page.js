@@ -350,6 +350,9 @@
    
    slideOutRightWin();
    
+   sw = 'industry';
+   get_conf($(this).text());
+   
  }); 
       
       
