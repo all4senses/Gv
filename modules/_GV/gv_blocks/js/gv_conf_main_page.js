@@ -325,9 +325,9 @@
   
   
  $(".term-link").click(function(){
-   console.log(this.html());
-   console.log(this);
-   console.log($(this));
+//   console.log(this.html());
+//   console.log(this);
+//   console.log($(this));
    console.log('aaa');
  }); 
   
