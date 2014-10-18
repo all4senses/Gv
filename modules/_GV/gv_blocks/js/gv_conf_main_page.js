@@ -325,8 +325,10 @@
   
   
  $(".term-link").click(function(){
-   //console.log(this.html());
+   console.log(this.html());
    console.log(this);
+   console.log($(this));
+   console.log('aaa');
  }); 
   
  function get_conf(label) {
@@ -341,7 +343,7 @@
               dataType: "json",
               success: function( data ) {
                   
-                  console.log(data);
+                  //console.log(data);
                   
                   if (data.type == 'conference') 
                   {
