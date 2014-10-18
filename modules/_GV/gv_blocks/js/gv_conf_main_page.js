@@ -329,7 +329,8 @@
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
 
-   console.log(this.html());
+   console.log($(this).html());
+   console.log($(this).text());
    console.log(this);
    console.log($(this));
    console.log('aaa');
