@@ -337,6 +337,10 @@
 //		}
   });
     
+    
+    
+    
+    
       
   $('body').delegate('.term-link', 'click', function(){
 // Replace with   
@@ -351,6 +355,12 @@
    slideOutRightWin();
    
    sw = 'industry';
+   search_field_title = 'Search by Industry';
+   $('#c-industry').addClass('active');
+   $('#c-title').removeClass('active');
+   $('input[id="conf"]').attr('title', search_field_title);
+          
+          
    get_conf($(this).text());
    
  }); 
