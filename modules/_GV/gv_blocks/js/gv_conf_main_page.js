@@ -322,22 +322,16 @@
 			$('body').removeClass('overflow-hidden');
 		}
 	});
-  
-  
-// $('body').on('click', '.term-link', function(){
-////   console.log(this.html());
-////   console.log(this);
-////   console.log($(this));
-//   console.log('aaa');
-//   //alert('a');
-// }); 
-
-      
+    
       
   $('body').delegate('.term-link', 'click', function(){
-//   console.log(this.html());
-//   console.log(this);
-//   console.log($(this));
+// Replace with   
+// $('body').on('click', '.term-link', function(){    
+// for jQuery 1.7
+
+   console.log(this.html());
+   console.log(this);
+   console.log($(this));
    console.log('aaa');
    //alert('a');
  }); 
