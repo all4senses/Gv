@@ -12717,8 +12717,10 @@ function gv_misc_getConferences_autocomplete_ajax() {
           
           
               // Search for all conferences (a list) with a tag $post['term'].
-              $query = db_select('taxonomy_index', 't');
-              $query->condition('t.tid', $post['term'], '=');
+              $query = db_select('taxonomy_term_data', 'td');
+              $query->condition('td.name', $post['term'], '=');
+              $query->leftJoin('taxonomy_index', 't', 't.tid = td.tid');
+
               $query->leftJoin('node', 'n', 'n.nid = t.nid');
               $query->fields('n', array('nid', 'title'));
               $query->condition('n.status', 1);
