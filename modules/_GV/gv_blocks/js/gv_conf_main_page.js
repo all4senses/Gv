@@ -329,6 +329,7 @@
 //   console.log(this);
 //   console.log($(this));
    console.log('aaa');
+   alert('a');
  }); 
   
  function get_conf(label) {
