@@ -324,14 +324,24 @@
 	});
   
   
- $('body').on('click', '.term-link', function(){
+// $('body').on('click', '.term-link', function(){
+////   console.log(this.html());
+////   console.log(this);
+////   console.log($(this));
+//   console.log('aaa');
+//   //alert('a');
+// }); 
+
+      
+      
+  $('body').delegate('.term-link', 'click', function(){
 //   console.log(this.html());
 //   console.log(this);
 //   console.log($(this));
    console.log('aaa');
    //alert('a');
  }); 
-  
+      
  function get_conf(label) {
    
    $.ajax({
