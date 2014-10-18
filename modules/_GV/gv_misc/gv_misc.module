@@ -12630,7 +12630,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //                        'label' => $result->title,
 //                    );
                     
-                      $terms = explode(';', $result->term);
+                      $terms = explode(';', $result->terms);
                       $term_links = NULL;
                       foreach ($terms as $term) {
                         $term_data = explode(':', $term);
@@ -12647,6 +12647,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $out_array = array(
                       'type' => 'list',
                       'out' => $conferences_list,
+                      'terms' => $result->terms,
 
                   );
               }
