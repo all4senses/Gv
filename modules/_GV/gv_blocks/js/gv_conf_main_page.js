@@ -378,6 +378,7 @@
    
    slideOutRightWin();
    
+   var save_sw = sw;
    sw = 'title';
 //   search_field_title = 'Search by Industry';
 //   $('#c-industry').addClass('active');
@@ -386,7 +387,7 @@
           
           
    get_conf($(this).text());
-   
+   sw = save_sw;
  }); 
  
  
