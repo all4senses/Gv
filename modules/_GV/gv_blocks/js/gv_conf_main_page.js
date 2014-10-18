@@ -324,12 +324,12 @@
 	});
   
   
- $('.term-link').click(function(){
-//   console.log(this.html());
-//   console.log(this);
-//   console.log($(this));
+ $('.term-link').on('click', function(){
+   console.log(this.html());
+   console.log(this);
+   console.log($(this));
    console.log('aaa');
-   alert('a');
+   //alert('a');
  }); 
   
  function get_conf(label) {
