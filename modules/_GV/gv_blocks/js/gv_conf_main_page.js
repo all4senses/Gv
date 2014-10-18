@@ -303,14 +303,8 @@
  
  
  
- 
- 
- 
- //close team-member bio
- $('.cd-overlay, .cd-member-bio-close').click(function(event){
-//	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
-		event.preventDefault();
-		$('.cd-member-bio').removeClass('slide-in');
+ function slideOutRightWin() {
+    $('.cd-member-bio').removeClass('slide-in');
 		$('.cd-member-bio-close').removeClass('is-visible');
 
 		if( is_firefox ) {
@@ -321,7 +315,27 @@
 			$('#bshadow').removeClass('slide-out');
 			$('body').removeClass('overflow-hidden');
 		}
-	});
+ }
+ 
+ 
+ //close team-member bio
+ $('.cd-overlay, .cd-member-bio-close').click(function(event){
+//	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
+		event.preventDefault();
+    slideOutRightWin();
+    
+//		$('.cd-member-bio').removeClass('slide-in');
+//		$('.cd-member-bio-close').removeClass('is-visible');
+//
+//		if( is_firefox ) {
+//			$('#bshadow').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+//				$('body').removeClass('overflow-hidden');
+//			});
+//		} else {
+//			$('#bshadow').removeClass('slide-out');
+//			$('body').removeClass('overflow-hidden');
+//		}
+  });
     
       
   $('body').delegate('.term-link', 'click', function(){
@@ -329,13 +343,17 @@
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
 
-   console.log($(this).html());
+   //console.log($(this).html());
    console.log($(this).text());
-   console.log(this);
-   console.log($(this));
-   console.log('aaa');
-   //alert('a');
+   
+   $( "#conf" ).val($(this).text());
+   
+   slideOutRightWin();
+   
  }); 
+      
+      
+      
       
  function get_conf(label) {
    
