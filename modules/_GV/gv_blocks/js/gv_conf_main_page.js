@@ -402,7 +402,8 @@
      // List in SlidingIn right window.
      slideInRightWin(cache[ sw + '_' + label ]);
    }  
-     
+   
+   
    $.ajax({
               url: "get-conferences-ac",
               data: {
