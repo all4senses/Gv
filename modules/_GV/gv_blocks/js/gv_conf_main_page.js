@@ -393,7 +393,16 @@
  
       
  function get_conf(label) {
-   
+
+   if ( 'conf_' + label in cache ) {
+     // cache[ 'conf_' + label ]
+     showConfInPopUp(cache[ 'conf_' + label ]);
+   }
+   else if ( sw + '_' + label in cache ) {
+     // List in SlidingIn right window.
+     slideInRightWin(cache[ sw + '_' + label ]);
+   }  
+     
    $.ajax({
               url: "get-conferences-ac",
               data: {
@@ -415,7 +424,11 @@
                   }
                   else if (data.type == 'conference') {
                   
-                  
+                        cache[ 'conf_' + label ] = data.out;
+                        
+                        showConfInPopUp(data.out);
+                        
+                        /*
                         $('#cb-popup_1 #results_1').html(data.out);
                         
                         // Uncomment to stop scrolling.
@@ -435,9 +448,17 @@
                                  turned_off = true;
                                 }
                          });  
+                         */
                   
                   } // End of if (data.type == 'conference') {
                   else {
+                        // Lists
+                        
+                        cache[ sw + '_' + label ] = data.out;
+                        
+                        slideInRightWin(data.out);
+                        
+                        /*
                         $('.cd-member-bio').html(data.out);
                         $('.cd-member-bio').addClass('slide-in');
                         //$('.cd-member-bio-close').addClass('is-visible');
@@ -451,6 +472,7 @@
                           $('#bshadow').addClass('slide-out');
                           $('body').addClass('overflow-hidden');
                         }
+                        */
                   }
 
                   //console.log(cb1);
@@ -477,6 +499,52 @@
           });
           
  } // End of 
+ 
+ 
+ 
+ function showConfInPopUp(html_data) {
+   
+  $('#cb-popup_1 #results_1').html(html_data);
+                        
+  // Uncomment to stop scrolling.
+  $("body").css('overflow', 'hidden');
+
+
+   var cb1;
+
+   cb1 = $.fn.colorbox({
+     inline:true, 
+     href:"#cb-popup_1", 
+     width:780, 
+     height:540
+     ,onClosed: function() {
+           //console.log('closed...');
+           $("body").css('overflow', 'inherit');
+           turned_off = true;
+          }
+   });  
+ }
+ 
+ 
+ function slideInRightWin(html_out) {
+   
+    $('.cd-member-bio').html(html_out);
+    $('.cd-member-bio').addClass('slide-in');
+    //$('.cd-member-bio-close').addClass('is-visible');
+
+    // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
+    if( is_firefox ) {
+      $('#bshadow').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+        $('body').addClass('overflow-hidden');
+      });
+    } else {
+      $('#bshadow').addClass('slide-out');
+      $('body').addClass('overflow-hidden');
+    }
+    
+ }
+ 
+ 
  
  /*
  // Custom autocomplete instance.
