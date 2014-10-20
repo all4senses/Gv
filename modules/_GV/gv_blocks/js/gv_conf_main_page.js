@@ -440,20 +440,12 @@
               success: function( data ) {
                   
                   //console.log(data);
-                  if (!data.out) {
-                    if (sw == 'title') {
-                      alert('No conference found with a title (or title containing) <' + label + '>');
-                    }
-                    else {
-                      alert('No conferences found tagged with an industry <' + label + '>');
-                    }
-                  }
-                  else if (data.type == 'conference') {
+                  if (data.type == 'conference') {
                   
                   
-                        cache[ 'content_conf_' + label ] = data.out;
-                        
-                        showConfInPopUp(data.out);
+                        if(cache[ 'content_conf_' + label ] = data.out) {
+                          showConfInPopUp(data.out);
+                        }
                         
                         /*
                         $('#cb-popup_1 #results_1').html(data.out);
@@ -481,9 +473,10 @@
                   else {
                         // Lists
                         
-                        cache[ 'content_' + sw + '_' + label ] = data.out;
-                        
-                        slideInRightWin(data.out);
+                        if (cache[ 'content_' + sw + '_' + label ] = data.out) {
+                          slideInRightWin(data.out);
+                        }
+
                         
                         /*
                         $('.cd-member-bio').html(data.out);
@@ -501,6 +494,16 @@
                         }
                         */
                   }
+                  
+                  if (!data.out) {
+                    if (sw == 'title') {
+                      alert('No conference found with a title (or title containing) <' + label + '>');
+                    }
+                    else {
+                      alert('No conferences found tagged with an industry <' + label + '>');
+                    }
+                  }
+
 
                   //console.log(cb1);
                   //$.fn.colorbox.close();
