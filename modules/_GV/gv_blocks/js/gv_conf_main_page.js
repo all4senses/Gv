@@ -424,6 +424,8 @@
      return;
    }  
    
+   console.log(label);
+   console.log(cache);
    
    console.log('Trying to get new data via ajax');
    
