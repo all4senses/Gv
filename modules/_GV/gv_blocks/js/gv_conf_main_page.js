@@ -593,7 +593,9 @@
 //                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190 || event.keyCode == 173)    // space, dash, dot
 //                 )   
 //              ) 
-            {
+            
+        if( event.keyCode == 13 ) // Enter
+        {
                     event.preventDefault();     // Prevent character input
             }
             //else 
