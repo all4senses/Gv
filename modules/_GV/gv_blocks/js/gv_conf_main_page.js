@@ -578,8 +578,8 @@
       
       $('#conf').keydown(function (event) { 
             
-            console.log($(this).val());
-            console.log(event.keyCode);
+            //console.log($(this).val());
+            //console.log(event.keyCode);
             
             //var l = $(this).val().length;
 //            if( !(     event.keyCode == 8                                // backspace
@@ -594,7 +594,7 @@
 //                 )   
 //              ) 
             
-        if( event.keyCode == 13 ) // Enter
+        if( event.keyCode == 13 || event.keyCode == 108 ) // Enter, Enter on NumPad
         {
                     event.preventDefault();     // Prevent character input
             }
