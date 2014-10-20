@@ -166,7 +166,7 @@
         $( "#conf-description" ).html( ui.item.desc );
         //$( "#conf-icon" ).attr( "src", "images/" + ui.item.icon );
         
-        ////get_conf(ui.item.label);
+        get_conf(ui.item.label);
         
         return false;
       }
