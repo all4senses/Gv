@@ -78,7 +78,7 @@
           
           
           
-          
+              <?php /*
               <div style="display: none;">
                 <div id="exitIntent"> 
                   <div id="line-1">Do You Want To Save BIG On</div>
@@ -90,7 +90,7 @@
                   <div id="no">NO - I like overpaying for my old phone service.</div>
                 </div>
               </div>
-          
+              */ ?>
               <?php
               
                 // Exit intent Ad popup block.
