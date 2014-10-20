@@ -78,7 +78,7 @@
                 
                         
                 <div class="right-side">
-                    <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp8-image.png" />
+                    <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp9-image.png" />
                     <div>Our team of 59 unbiased VoIP analysts have reviewed <span>108</span> business phone systems.</div>
                 </div>
                 
@@ -109,7 +109,7 @@
             
             <div class="right">
               <div>As Featured In</div>
-              <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp9-image2.png" />
+              <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp8-image2.png" />
             </div>
             
         </div>
