@@ -397,12 +397,30 @@
    if ( 'content_conf_' + label in cache ) {
      // cache[ 'conf_' + label ]
      console.log(cache[ 'content_conf_' + label ]);
-     showConfInPopUp(cache[ 'content_conf_' + label ]);
+     if (cache[ 'content_conf_' + label ]) {
+        showConfInPopUp(cache[ 'content_conf_' + label ]);
+     }
+     else {
+       alert('No conference found with a title (or title containing) <' + label + '>');
+     }
+     return;
    }
    else if ( sw + '_' + label in cache ) {
      // List in SlidingIn right window.
      console.log(cache[ 'content_' + sw + '_' + label ]);
-     slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
+     if (cache[ 'content_' + sw + '_' + label ]) {
+        slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
+     }
+     else {
+ 
+          if (sw == 'title') {
+            alert('No conference found with a title (or title containing) <' + label + '>');
+          }
+          else {
+            alert('No conferences found tagged with an industry <' + label + '>');
+          }
+     }
+     return;
    }  
    
    
@@ -426,6 +444,7 @@
                     }
                   }
                   else if (data.type == 'conference') {
+                  
                   
                         cache[ 'content_conf_' + label ] = data.out;
                         
