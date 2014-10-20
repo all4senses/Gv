@@ -393,13 +393,15 @@
  
       
  function get_conf(label) {
-
+   console.log(cache);
    if ( 'conf_' + label in cache ) {
      // cache[ 'conf_' + label ]
+     console.log(cache[ 'conf_' + label ]);
      showConfInPopUp(cache[ 'conf_' + label ]);
    }
    else if ( sw + '_' + label in cache ) {
      // List in SlidingIn right window.
+     console.log(cache[ sw + '_' + label ]);
      slideInRightWin(cache[ sw + '_' + label ]);
    }  
    
