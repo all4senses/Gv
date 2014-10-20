@@ -142,8 +142,10 @@
       
       // Custom Submit button.
       $('#submit').click(function(){
-        console.log($('input[id="conf"]').val());
-        get_conf($('input[id="conf"]').val());
+        //console.log($('input[id="conf"]').val());
+        if ($(this).val() != 'Search by Industry' && $(this).val() != 'Search by Title') {
+          get_conf($('input[id="conf"]').val());
+        }
         
       });
 
@@ -393,10 +395,10 @@
  
       
  function get_conf(label) {
-   console.log(cache);
+   //console.log(cache);
    if ( 'content_conf_' + label in cache ) {
      // cache[ 'conf_' + label ]
-     console.log(cache[ 'content_conf_' + label ]);
+     //console.log(cache[ 'content_conf_' + label ]);
      if (cache[ 'content_conf_' + label ]) {
         showConfInPopUp(cache[ 'content_conf_' + label ]);
      }
@@ -407,7 +409,7 @@
    }
    else if ( sw + '_' + label in cache ) {
      // List in SlidingIn right window.
-     console.log(cache[ 'content_' + sw + '_' + label ]);
+     //console.log(cache[ 'content_' + sw + '_' + label ]);
      if (cache[ 'content_' + sw + '_' + label ]) {
         slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
@@ -423,6 +425,8 @@
      return;
    }  
    
+   
+   console.log('Trying to get new data via ajax');
    
    $.ajax({
               url: "get-conferences-ac",
