@@ -397,7 +397,6 @@
  function get_conf(label) {
    //console.log(cache);
    if ( 'content_conf_' + label in cache ) {
-     // cache[ 'conf_' + label ]
      //console.log(cache[ 'content_conf_' + label ]);
      if (cache[ 'content_conf_' + label ]) {
         showConfInPopUp(cache[ 'content_conf_' + label ]);
@@ -407,7 +406,7 @@
      }
      return;
    }
-   else if ( sw + '_' + label in cache ) {
+   else if ( 'content_' + sw + '_' + label in cache ) {
      // List in SlidingIn right window.
      //console.log(cache[ 'content_' + sw + '_' + label ]);
      if (cache[ 'content_' + sw + '_' + label ]) {
