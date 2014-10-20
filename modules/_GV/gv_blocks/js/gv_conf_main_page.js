@@ -394,15 +394,15 @@
       
  function get_conf(label) {
    console.log(cache);
-   if ( 'conf_' + label in cache ) {
+   if ( 'content_conf_' + label in cache ) {
      // cache[ 'conf_' + label ]
-     console.log(cache[ 'conf_' + label ]);
-     showConfInPopUp(cache[ 'conf_' + label ]);
+     console.log(cache[ 'content_conf_' + label ]);
+     showConfInPopUp(cache[ 'content_conf_' + label ]);
    }
    else if ( sw + '_' + label in cache ) {
      // List in SlidingIn right window.
-     console.log(cache[ sw + '_' + label ]);
-     slideInRightWin(cache[ sw + '_' + label ]);
+     console.log(cache[ 'content_' + sw + '_' + label ]);
+     slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
    }  
    
    
@@ -427,7 +427,7 @@
                   }
                   else if (data.type == 'conference') {
                   
-                        cache[ 'conf_' + label ] = data.out;
+                        cache[ 'content_conf_' + label ] = data.out;
                         
                         showConfInPopUp(data.out);
                         
@@ -457,7 +457,7 @@
                   else {
                         // Lists
                         
-                        cache[ sw + '_' + label ] = data.out;
+                        cache[ 'content_' + sw + '_' + label ] = data.out;
                         
                         slideInRightWin(data.out);
                         
