@@ -11409,7 +11409,7 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       //$query->range(0, $max_articles);
       
       //$result = $query->execute()->fetchAllAssoc('nid');
-      $result = $query->execute()->fetchAllAssoc('created');
+      $results = $query->execute()->fetchAllAssoc('created');
       
       //if ($i == 1)
 //      if (!empty($result))
@@ -11420,11 +11420,11 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 //        dpm($result);
 //      }
       
-      if ($result) {
+      if ($results) {
 
-//        foreach ($result as $key => $result) {
+//        foreach ($results as $key => $result) {
 //          if (isset($articles[$key])) {
-//            unset($result[$key]);
+//            unset($results[$key]);
 //          }
 //          elseif ($max_articles) {
 //            $articles_by_index[$i][$key] = $result;
@@ -11433,10 +11433,10 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
 //          }
 //        }
         
-        foreach ($result as $key => $result) {
+        foreach ($results as $key => $result) {
           //if (in_array($result, $articles)) {
           if (isset($articles[$key])) {
-            unset($result[$key]);
+            unset($results[$key]);
           }
           elseif ($max_articles) {
             $result->similar_tags_count = $i;
