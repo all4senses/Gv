@@ -109,7 +109,7 @@
             
             <div class="right">
               <div>As Featured In</div>
-              <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp8uk-image2.png" />
+              <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp8uk-image2.jpg" />
             </div>
             
         </div>
