@@ -9408,7 +9408,7 @@ function gv_blocks_get_confMainSearch_form_validate(&$form, &$form_state) {
   //dpm($form);
     
   // Clear hints, if any.
-  $fields_to_clear_hints = array('email' => array('hint' => @$form['email']['#attributes']['title']));
+  $fields_to_clear_hints = array(); //array('email' => array('hint' => @$form['email']['#attributes']['title']));
   foreach ($fields_to_clear_hints as $fname => $fdata) {
    
     if ($form_state['values'][$fname] == $fdata['hint']) {

@@ -601,6 +601,7 @@ function disqus_block_view($delta = '') {
                     'node',
                     (int) $object->nid,
                     variable_get('disqus_sso', FALSE) ? 'sso_' . $user->uid : 'no_sso',
+                    // a4s fix  https://www.drupal.org/node/2144035
                     user_access('administer blocks') ? 1 : 0,
                   ),
                 ),
@@ -623,6 +624,7 @@ function disqus_block_view($delta = '') {
                     'user',
                     (int) $object->uid,
                     variable_get('disqus_sso', FALSE) ? 'sso_' . $user->uid : 'no_sso',
+                    // a4s fix  https://www.drupal.org/node/2144035
                     user_access('administer blocks') ? 1 : 0,
                   ),
                 ),

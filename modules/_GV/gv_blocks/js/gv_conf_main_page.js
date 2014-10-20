@@ -142,7 +142,7 @@
       
       // Custom Submit button.
       $('#submit').click(function(){
-
+        console.log($('input[id="conf"]').val());
         get_conf($('input[id="conf"]').val());
         
       });
