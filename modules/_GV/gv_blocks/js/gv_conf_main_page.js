@@ -432,6 +432,7 @@
  function slideInRightWin(html_out) {
    
     $('.cd-member-bio').html(html_out);
+    console.log($('.cd-member-bio').attr('class'));
     $('.cd-member-bio').addClass('slide-in');
     //$('.cd-member-bio-close').addClass('is-visible');
 
