@@ -280,7 +280,7 @@
 // Replace with   
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
-   event.preventDefault();
+   //event.preventDefault();
    
    //console.log('term click: ' + $(this).text());
    $( "#conf" ).val($(this).text());
@@ -435,7 +435,7 @@
     $('.cd-member-bio').html(html_out);
     //console.log($('.cd-member-bio').attr('class'));
     $('.cd-member-bio').addClass('slide-in');
-    console.log($('.cd-member-bio').attr('class'));
+    //console.log($('.cd-member-bio').attr('class'));
     //$('.cd-member-bio-close').addClass('is-visible');
 
     // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
