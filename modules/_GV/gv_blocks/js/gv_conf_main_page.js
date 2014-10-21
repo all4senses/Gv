@@ -282,9 +282,9 @@
 // for jQuery 1.7
    event.preventDefault();
    
-   console.log('term click: ' + $(this).text());
+   //console.log('term click: ' + $(this).text());
    $( "#conf" ).val($(this).text());
-   console.log($('.cd-member-bio').attr('class'));
+   //console.log($('.cd-member-bio').attr('class'));
    slideOutRightWin();
    //console.log($('.cd-member-bio').attr('class'));
     
@@ -333,9 +333,9 @@
    else if ( 'content_' + sw + '_' + label in cache ) {
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
-        console.log('Get LIST from cache...');
-        console.log($('.cd-member-bio').attr('class'));
-        setTimeout(function() {slideInRightWin(cache[ 'content_' + sw + '_' + label ]);}, 10000);
+        //console.log('Get LIST from cache...');
+        //console.log($('.cd-member-bio').attr('class'));
+        setTimeout(function() {slideInRightWin(cache[ 'content_' + sw + '_' + label ]);}, 1000);
         //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
