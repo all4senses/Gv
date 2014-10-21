@@ -255,11 +255,11 @@
 		$('.cd-member-bio-close').removeClass('is-visible');
 
 		if( is_firefox ) {
-			$('#bshadow').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+			$('#main').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
 				$('body').removeClass('overflow-hidden');
 			});
 		} else {
-			$('#bshadow').removeClass('slide-out');
+			$('#main').removeClass('slide-out');
 			$('body').removeClass('overflow-hidden');
 		}
  }
@@ -431,11 +431,11 @@
 
     // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
     if( is_firefox ) {
-      $('#bshadow').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+      $('#main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
         $('body').addClass('overflow-hidden');
       });
     } else {
-      $('#bshadow').addClass('slide-out');
+      $('#main').addClass('slide-out');
       $('body').addClass('overflow-hidden');
     }
     
