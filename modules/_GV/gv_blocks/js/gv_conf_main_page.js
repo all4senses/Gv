@@ -14,62 +14,12 @@
 
        var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
 
-       //open team-member bio
-       /*
-       $('#cd-team').find('ul a').on('click', function(event){
-          event.preventDefault();
-          //var selected_member = $(this).data('type');
-          $('.cd-member-bio.'+selected_member+'').addClass('slide-in');
-          //$('.cd-member-bio-close').addClass('is-visible');
-
-          // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
-          if( is_firefox ) {
-            $('main').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-              $('body').addClass('overflow-hidden');
-            });
-          } else {
-            $('main').addClass('slide-out');
-            $('body').addClass('overflow-hidden');
-          }
-
-        });
-        */
-
-        //close team-member bio
-        /*
-        $(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
-          event.preventDefault();
-          $('.cd-member-bio').removeClass('slide-in');
-          $('.cd-member-bio-close').removeClass('is-visible');
-
-          if( is_firefox ) {
-            $('main').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-              $('body').removeClass('overflow-hidden');
-            });
-          } else {
-            $('main').removeClass('slide-out');
-            $('body').removeClass('overflow-hidden');
-          }
-        });
-        */
-
-       
-       
-       
-       
-       
-      
-      //console.log('gv_conf_main_page...');
-  
-  
       
       // Switch the source of autocomplete...
       sw = 'industry';
       search_field_title = 'Search by Industry';
       //$('input[id="conf"]').val('Search by Industry');
       $('input[id="conf"]').attr('title', search_field_title);
-
-      //console.log($('input[id="conf"]').attr('title'));
 
       $('#c-industry').click(function(){
 
@@ -112,7 +62,6 @@
       $('input[id="conf"]').each(function(){
         if ($(this).val() == '') {
           
-          //$(this).val($(this).attr('title'));
           $(this).val(search_field_title);
           
           $(this).addClass('blur');
@@ -142,7 +91,6 @@
       
       // Custom Submit button.
       $('#submit').click(function(){
-        //console.log($('input[id="conf"]').val());
         if ($(this).val() != 'Search by Industry' && $(this).val() != 'Search by Title') {
           get_conf($('input[id="conf"]').val());
         }
@@ -162,7 +110,6 @@
         return false;
       },
       select: function( event, ui ) {
-        //console.log(ui);
         $( "#conf" ).val( ui.item.label );
         $( "#conf-id" ).val( ui.item.value );
         $( "#conf-description" ).html( ui.item.desc );
@@ -211,7 +158,6 @@
               dataType: "json",
               success: function( data ) {
                   
-                  //console.log(data);
                   
                   //cache[ term ] = data;
                   cache[ sw + '_' + term ] = data;
@@ -291,7 +237,6 @@
                        .html( label )
                        .appendTo( $li );
             
-            //console.log('a8...');
             
             return $li;
 //            return $( "<li>" )
@@ -322,21 +267,8 @@
  
  //close team-member bio
  $('.cd-overlay, .cd-member-bio-close').click(function(event){
-//	$(document).on('click', '.cd-overlay, .cd-member-bio-close', function(event){
 		event.preventDefault();
     slideOutRightWin();
-    
-//		$('.cd-member-bio').removeClass('slide-in');
-//		$('.cd-member-bio-close').removeClass('is-visible');
-//
-//		if( is_firefox ) {
-//			$('#bshadow').removeClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-//				$('body').removeClass('overflow-hidden');
-//			});
-//		} else {
-//			$('#bshadow').removeClass('slide-out');
-//			$('body').removeClass('overflow-hidden');
-//		}
   });
     
     
@@ -348,9 +280,6 @@
 // Replace with   
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
-
-   //console.log($(this).html());
-   //console.log($(this).text());
    
    $( "#conf" ).val($(this).text());
    
@@ -374,19 +303,11 @@
 // Replace with   
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
-
-   //console.log($(this).html());
-   //console.log($(this).text());
    
    slideOutRightWin();
    
    var save_sw = sw;
    sw = 'title';
-//   search_field_title = 'Search by Industry';
-//   $('#c-industry').addClass('active');
-//   $('#c-title').removeClass('active');
-//   $('input[id="conf"]').attr('title', search_field_title);
-          
           
    get_conf($(this).text());
    sw = save_sw;
@@ -395,9 +316,8 @@
  
       
  function get_conf(label) {
-   //console.log(cache);
+
    if ( 'content_conf_' + label in cache ) {
-     //console.log(cache[ 'content_conf_' + label ]);
      if (cache[ 'content_conf_' + label ]) {
         showConfInPopUp(cache[ 'content_conf_' + label ]);
      }
@@ -408,7 +328,6 @@
    }
    else if ( 'content_' + sw + '_' + label in cache ) {
      // List in SlidingIn right window.
-     //console.log(cache[ 'content_' + sw + '_' + label ]);
      if (cache[ 'content_' + sw + '_' + label ]) {
         slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
@@ -423,11 +342,6 @@
      }
      return;
    }  
-   
-   //console.log(label);
-   //console.log(cache);
-   
-   //console.log('Trying to get new data via ajax');
    
    $.ajax({
               url: "get-conferences-ac",
@@ -447,27 +361,6 @@
                           showConfInPopUp(data.out);
                         }
                         
-                        /*
-                        $('#cb-popup_1 #results_1').html(data.out);
-                        
-                        // Uncomment to stop scrolling.
-                        $("body").css('overflow', 'hidden');
-
-
-                         var cb1;
-
-                         cb1 = $.fn.colorbox({
-                           inline:true, 
-                           href:"#cb-popup_1", 
-                           width:780, 
-                           height:540
-                           ,onClosed: function() {
-                                 //console.log('closed...');
-                                 $("body").css('overflow', 'inherit');
-                                 turned_off = true;
-                                }
-                         });  
-                         */
                   
                   } // End of if (data.type == 'conference') {
                   else {
@@ -477,22 +370,6 @@
                           slideInRightWin(data.out);
                         }
 
-                        
-                        /*
-                        $('.cd-member-bio').html(data.out);
-                        $('.cd-member-bio').addClass('slide-in');
-                        //$('.cd-member-bio-close').addClass('is-visible');
-
-                        // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
-                        if( is_firefox ) {
-                          $('#bshadow').addClass('slide-out').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-                            $('body').addClass('overflow-hidden');
-                          });
-                        } else {
-                          $('#bshadow').addClass('slide-out');
-                          $('body').addClass('overflow-hidden');
-                        }
-                        */
                   }
                   
                   if (!data.out) {
@@ -503,18 +380,8 @@
                       alert('No conferences found tagged with an industry <' + label + '>');
                     }
                   }
-
-
-                  //console.log(cb1);
-                  //$.fn.colorbox.close();
-                  //console.log($.fn.colorbox);
-                  //alert('test');
-                        
-                        
+  
                   
-                  //cache[ term ] = data;
-                  //cache[ sw + '_' + term ] = data;
-                  //response( data );
                   /*
                   response( 
                           
@@ -578,73 +445,14 @@
       
       $('#conf').keydown(function (event) { 
             
-            //console.log($(this).val());
-            //console.log(event.keyCode);
-            
-            //var l = $(this).val().length;
-//            if( !(     event.keyCode == 8                                // backspace
-//                    || event.keyCode == 9
-//                    || event.keyCode == 46                              // delete
-//                    || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
-//
-//                    || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
-//                    || (event.keyCode >= 96 && event.keyCode <= 105)    // number on keypad
-//                  
-//                    || (event.keyCode == 32 || event.keyCode == 189 || event.keyCode == 190 || event.keyCode == 173)    // space, dash, dot
-//                 )   
-//              ) 
             
         if( event.keyCode == 13 || event.keyCode == 108 ) // Enter, Enter on NumPad
-        {
+            {
                     event.preventDefault();     // Prevent character input
             }
-            //else 
-            {
-              /*
-              if (l >= 3 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                  event.preventDefault();
-              }
-              */
-            }
+           
         });
  
- /*
- // Custom autocomplete instance.
-    $.widget( "app.autocomplete", $.ui.autocomplete, {
-        
-        // Which class get's applied to matched text in the menu items.
-        options: {
-            highlightClass: "ui-state-highlight"
-        },
-        
-        _renderItem: function( ul, item ) {
-
-            // Replace the matched text with a custom span. This
-            // span uses the class found in the "highlightClass" option.
-            var re = new RegExp( "(" + this.term + ")", "gi" ),
-                cls = this.options.highlightClass,
-                template = "<span style='color: green;' class='" + cls + "'>$1</span>",
-                label = item.label.replace( re, template ),
-                $li = $( "<li/>" ).appendTo( ul );
-            
-            // Create and return the custom menu item content.
-            $( "<a/>" ).attr( "href", "#" )
-                       .html( label )
-                       .appendTo( $li );
-            
-            console.log('a3...');
-            
-            return $li;
-            
-        }
-        
-    });
-    */
-    
-    
-       
     }
   };
 
