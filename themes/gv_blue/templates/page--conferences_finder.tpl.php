@@ -1,20 +1,3 @@
-<?php 
-  //echo render($page['above_content']);
-  //echo render($page['content']); 
-  echo '<table class="conf-table"><tbody>',
-          '<tr><td class="header">Logo</td></tr>',
-          '<tr><td class="search">', gv_blocks_get_confMainSearch(), '</td></tr>',
-          '<tr><td class="copy">Copy</td></tr>',
-          '<tr><td class="add">Add/td></tr>',
-          '<tr><td class="footer"><div class="c"><div>Copyright</div> 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
-
-       '</tbody></table>';
-
-  return;
-
-?>
-
-
 <div id="bshadow">
  
 
@@ -43,7 +26,7 @@
                     '<tr><td class="header">Logo</td></tr>',
                     '<tr><td class="search">', gv_blocks_get_confMainSearch(), '</td></tr>',
                     '<tr><td class="copy">Copy</td></tr>',
-                    '<tr><td class="add">Add/td></tr>',
+                    '<tr><td class="add">Add</td></tr>',
                     '<tr><td class="footer"><div class="c"><div>Copyright</div> 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
                     
                  '</tbody></table>';
