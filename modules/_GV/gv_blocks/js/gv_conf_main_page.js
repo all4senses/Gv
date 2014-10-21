@@ -333,8 +333,9 @@
    else if ( 'content_' + sw + '_' + label in cache ) {
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
-       
-        slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
+     
+        window.setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]),100)
+        //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
  
