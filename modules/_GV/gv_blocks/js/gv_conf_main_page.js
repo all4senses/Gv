@@ -334,7 +334,7 @@
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
      
-        window.setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]),10000)
+        window.setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]),100000)
         //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
