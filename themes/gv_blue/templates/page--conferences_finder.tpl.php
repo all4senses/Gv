@@ -7,7 +7,7 @@
       
     
       <section id="main" role="main" class="clearfix">
-        <div id="fix-resp">
+
        
           <?php print $messages; ?>
           
@@ -34,7 +34,6 @@
             
           ?>
         
-          </div> <!-- /#fix-resp -->
       </section> <!-- /#main -->
 
 
