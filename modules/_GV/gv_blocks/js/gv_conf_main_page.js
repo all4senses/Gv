@@ -335,7 +335,7 @@
      if (cache[ 'content_' + sw + '_' + label ]) {
         console.log('Get LIST from cache...');
         console.log($('.cd-member-bio').attr('class'));
-        setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]), 9900000)
+        setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]), 100000);
         //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
