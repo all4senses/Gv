@@ -13,7 +13,7 @@
           
           <a id="main-content"></a>
           
-          <img src="/sites/all/themes/gv_blue/css/images/tc_back.jpg" style="position: absolute;">
+          <img src="/sites/all/themes/gv_blue/css/images/tc_back.jpg" style="position: absolute; z-index: -10;">
                     
           <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
           <?php print render($page['help']); ?>
