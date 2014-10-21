@@ -286,7 +286,7 @@
    $( "#conf" ).val($(this).text());
    console.log($('.cd-member-bio').attr('class'));
    slideOutRightWin();
-   console.log($('.cd-member-bio').attr('class'));
+   //console.log($('.cd-member-bio').attr('class'));
     
    
    sw = 'industry';
@@ -333,8 +333,9 @@
    else if ( 'content_' + sw + '_' + label in cache ) {
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
-     
-        setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]),100000)
+        console.log('Get LIST from cache...');
+        console.log($('.cd-member-bio').attr('class'));
+        setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]), 9900000)
         //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
@@ -432,8 +433,9 @@
  function slideInRightWin(html_out) {
    
     $('.cd-member-bio').html(html_out);
-    console.log($('.cd-member-bio').attr('class'));
+    //console.log($('.cd-member-bio').attr('class'));
     $('.cd-member-bio').addClass('slide-in');
+    console.log($('.cd-member-bio').attr('class'));
     //$('.cd-member-bio-close').addClass('is-visible');
 
     // firefox transitions break when parent overflow is changed, so we need to wait for the end of the trasition to give the body an overflow hidden
