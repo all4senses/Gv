@@ -20,8 +20,8 @@
           <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
           
           <?php 
-            echo render($page['above_content']);
-            echo render($page['content']); 
+            //echo render($page['above_content']);
+            //echo render($page['content']); 
             
             echo gv_blocks_get_confMainSearch();
             
@@ -31,7 +31,6 @@
       </section> <!-- /#main -->
 
 
-      <div class="bottom-clear"></div>
       
       
 
