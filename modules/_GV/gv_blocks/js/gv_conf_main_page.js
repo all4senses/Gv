@@ -284,9 +284,9 @@
    
    console.log('term click: ' + $(this).text());
    $( "#conf" ).val($(this).text());
-   
+   console.log($('.cd-member-bio').attr('class'));
    slideOutRightWin();
-   
+   console.log($('.cd-member-bio').attr('class'));
     
    
    sw = 'industry';
@@ -334,7 +334,7 @@
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
      
-        ///window.setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]),100000)
+        setTimeout(slideInRightWin(cache[ 'content_' + sw + '_' + label ]),100000)
         //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
