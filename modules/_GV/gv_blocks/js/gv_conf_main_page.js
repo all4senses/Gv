@@ -276,10 +276,11 @@
     
     
       
-  $('body').delegate('.term-link', 'click', function(){
+  $('body').delegate('.term-link', 'click', function(event){
 // Replace with   
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
+   event.preventDefault();
    
    $( "#conf" ).val($(this).text());
    
