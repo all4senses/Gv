@@ -2,26 +2,6 @@
  
 
   
-  <header id="header" role="banner" class="clearfix">
-
-    <nav id="navigation" role="navigation" class="clearfix">
-      
-      <div id="logo-block">
-        <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <?php
-              echo '<img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP Conferences" />';
-          ?>
-        </a>
-  
-      </div>
-   
-    </nav> <!-- /#navigation -->
-
-    <?php ////if ($breadcrumb): print $breadcrumb; endif;?>
-  </header> <!-- /#header -->
-
-  
-  
   <div id="all-content" class="clearfix">
       
       
