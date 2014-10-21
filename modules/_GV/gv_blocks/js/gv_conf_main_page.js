@@ -282,6 +282,7 @@
 // for jQuery 1.7
    event.preventDefault();
    
+   console.log('term click: ' + $(this).text());
    $( "#conf" ).val($(this).text());
    
    slideOutRightWin();
