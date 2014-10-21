@@ -91,7 +91,7 @@
       
       // Custom Submit button.
       $('#submit').click(function(){
-        if ($(this).val() != 'Search by Industry' && $(this).val() != 'Search by Title') {
+        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Title') {
           get_conf($('input[id="conf"]').val());
         }
         
