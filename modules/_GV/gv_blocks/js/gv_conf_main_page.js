@@ -287,6 +287,8 @@
    
    slideOutRightWin();
    
+    return;
+   
    sw = 'industry';
    search_field_title = 'Search by Industry';
    $('#c-industry').addClass('active');
