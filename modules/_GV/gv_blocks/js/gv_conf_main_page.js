@@ -10,7 +10,7 @@
       $(".embed .link, .add-conf .link").click(function(){
         
         $(this).find(".open").css('visibility', 'visible');
-        console.log('click!!!');
+        //console.log('click!!!');
       });
 
 
@@ -19,18 +19,40 @@
         timerEmbed = setTimeout(function() {
             $(".embed .link .open").css('visibility', 'hidden');
           }, 2000);
-          conssole.log(timerEmbed);
+          console.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
+      
+      
       
       $(".add-conf .link .open").mouseleave(function(){ 
       
         timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 2000);
-        conssole.log(timerAddConf);
+        console.log(timerAddConf);
         //$(this).css('visibility', 'hidden');
       });
 
-       
+
+
+
+       $(".embed .link .open").mouseenter(function(){ 
+         if (timerEmbed) {
+          clearTimeout(timerEmbed);
+          timerEmbed = null;
+          console.log('clear embed');
+         }
+      });
+      
+      $(".add-conf .link .open").mouseenter(function(){ 
+        if (timerAddConf) {
+          clearTimeout(timerAddConf);
+          timerAddConf = null;
+          console.log('clear add-conf');
+        }
+      });
+      
+      
+      
        
        // Shift in/out conferences list
 
