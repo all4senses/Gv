@@ -11,7 +11,7 @@
       $(".embed .link").click(function(){
         
         $(".embed .link .open").show();
-        $(".embed .link .open").attr('visibility', 'visible');
+        $(".embed .link .open").css('visibility', 'visible');
         
         $(this).find(".open").show();
         console.log('click!!!');
