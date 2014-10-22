@@ -11,7 +11,7 @@
       $(".embed .link").click(function(){
         console.log('click!!!');
         //$('.embed .link .open').show();
-        //$(this).find('.open').show();
+        $(this).find(".open").show();
       });
 
 
