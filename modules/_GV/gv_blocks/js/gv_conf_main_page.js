@@ -7,7 +7,15 @@
        
        
        
-       
+             //$('.embed .link, .add-conf .link').click(function(){
+      $(".embed .link").click(function(){
+        console.log('click!!!');
+        //$('.embed .link .open').show();
+        //$(this).find('.open').show();
+      });
+
+
+
        
        
        // Shift in/out conferences list
@@ -476,12 +484,6 @@
 
 
 
-      //$('.embed .link, .add-conf .link').click(function(){
-      $('.embed .link').click(function(){
-        console.log('click!!!');
-        $('.embed .link .open').show();
-        //$(this).find('.open').show();
-      });
 
 
 
