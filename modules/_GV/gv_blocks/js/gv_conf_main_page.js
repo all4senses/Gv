@@ -10,10 +10,11 @@
              //$('.embed .link, .add-conf .link').click(function(){
       $(".embed .link").click(function(){
         
-        $(".embed .link .open").show();
-        $(".embed .link .open").css('visibility', 'visible');
+        //$(".embed .link .open").show();
+        ////$(".embed .link .open").css('visibility', 'visible');
         
-        $(this).find(".open").show();
+        //$(this).find(".open").show();
+        $(this).find(".open").css('visibility', 'visible');
         console.log('click!!!');
       });
 
