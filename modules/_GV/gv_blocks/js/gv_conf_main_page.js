@@ -39,6 +39,7 @@
       });
       
       
+      
 
        $(".embed .link .open").mouseenter(function(){ 
          if (timerEmbed) {
