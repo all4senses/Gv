@@ -474,6 +474,16 @@
  }
  
 
+
+
+
+      $('.embed .link, .add-conf .link').click(function(){
+        //$('.embed .link .hidden').show();
+        $(this).find('.open').show();
+      });
+
+
+
       
            
  
