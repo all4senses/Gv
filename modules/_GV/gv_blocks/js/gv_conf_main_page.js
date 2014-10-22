@@ -7,7 +7,7 @@
        
       timerEmbed = timerAddConf = null; 
        
-      $(".embed .link, .add-conf .link").click(function(){
+      $(".embed .link, .add-conf .link").mouseenter(function(){
         
         $(this).find(".open").css('visibility', 'visible');
         //console.log('click!!!');
