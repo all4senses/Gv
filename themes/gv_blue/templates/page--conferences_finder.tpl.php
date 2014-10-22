@@ -16,7 +16,7 @@
             echo '<table class="conf-table"><tbody>',
                     '<tr><td class="header">Logo</td></tr>',
                     '<tr><td class="search">', gv_blocks_get_confMainSearch(), '</td></tr>',
-                    '<tr><td class="embed"><div class="link">EMBED<div class="hidden open">Copy code!</div></div></td></tr>',
+                    '<tr><td class="embed"><div class="link">EMBED<div class="hidden open"><span>COPY</span><input type="text" readonly="readonly" value="' . '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>' . '"/></div></div></td></tr>',
                     '<tr><td class="add-conf"><div class="link">ADD CONFERENCE<div class="hidden open">Copy Email!</div></div></td></tr>',
                     '<tr><td class="footer"><div class="c"><div>Copyright</div> 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
                     
