@@ -103,6 +103,7 @@
         
             if( event.keyCode == 13 || event.keyCode == 108 ) { // Enter, Enter on NumPad
               event.preventDefault();     // Prevent character input
+              $('.ui-autocomplete.ui-menu.ui-widget.ui-widget-content').hide();
               doSubmitTerm();
             }
            
