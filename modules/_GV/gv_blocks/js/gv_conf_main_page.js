@@ -5,7 +5,7 @@
        
        
        
-       
+      timerEmbed = timerAddConf = null; 
        
       $(".embed .link, .add-conf .link").click(function(){
         
@@ -14,8 +14,16 @@
       });
 
 
-      $(".embed .link .open, .add-conf .link .open").mouseleave(function() {
-        $(this).css('visibility', 'hidden');
+      $(".embed .link .open").mouseleave(function() {
+      
+        timerEmbed = setTimeout(function() {$(this).css('visibility', 'hidden');}, 9000);
+        //$(this).css('visibility', 'hidden');
+      });
+      
+      $(".add-conf .link .open").mouseleave(function(){ 
+      
+        timerAddConf = setTimeout(function() {$(this).css('visibility', 'hidden');}, 9000);
+        //$(this).css('visibility', 'hidden');
       });
 
        
