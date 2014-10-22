@@ -476,10 +476,10 @@
 
 
 
-
-      $('.embed .link, .add-conf .link').click(function(){
-        //$('.embed .link .hidden').show();
-        $(this).find('.open').show();
+      //$('.embed .link, .add-conf .link').click(function(){
+      $('.embed .link').click(function(){
+        $('.embed .link .open').show();
+        //$(this).find('.open').show();
       });
 
 
