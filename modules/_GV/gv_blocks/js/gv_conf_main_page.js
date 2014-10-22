@@ -467,6 +467,9 @@
  
  function slideInRightWin(html_out) {
    
+   // Just in case, double hiding.
+    $('.ui-autocomplete.ui-menu.ui-widget.ui-widget-content').hide();
+   
     $('.cd-member-bio').html(html_out);
     //console.log($('.cd-member-bio').attr('class'));
     $('.cd-member-bio').addClass('slide-in');
