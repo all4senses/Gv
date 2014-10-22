@@ -478,6 +478,7 @@
 
       //$('.embed .link, .add-conf .link').click(function(){
       $('.embed .link').click(function(){
+        console.log('click!!!');
         $('.embed .link .open').show();
         //$(this).find('.open').show();
       });
