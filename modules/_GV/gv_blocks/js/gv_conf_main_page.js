@@ -8,7 +8,7 @@
        
        
              //$('.embed .link, .add-conf .link').click(function(){
-      $(".embed .link").click(function(){
+      $(".embed .link, .add-conf .link").click(function(){
         
         //$(".embed .link .open").show();
         ////$(".embed .link .open").css('visibility', 'visible');
