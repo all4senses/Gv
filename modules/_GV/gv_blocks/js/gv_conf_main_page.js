@@ -91,15 +91,37 @@
       
       // Custom Submit button.
       $('#submit').click(function(){
+        doSubmitTerm();
+      });
+
+
+
+
+
+
+      $('#conf').keydown(function (event) { 
+        
+            if( event.keyCode == 13 || event.keyCode == 108 ) { // Enter, Enter on NumPad
+              event.preventDefault();     // Prevent character input
+              doSubmitTerm();
+            }
+           
+      });
+      
+      
+      
+
+      function doSubmitTerm() {
         if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Title') {
           get_conf($('input[id="conf"]').val());
         }
-        
-      });
-
+      }
+      
+      
+      
+      
   
-  
-      cache = {};
+    cache = {};
       
     
     $( "#conf" ).autocomplete({
@@ -452,15 +474,7 @@
  
 
       
-      $('#conf').keydown(function (event) { 
-            
-            
-        if( event.keyCode == 13 || event.keyCode == 108 ) // Enter, Enter on NumPad
-            {
-                    event.preventDefault();     // Prevent character input
-            }
            
-        });
  
     }
   };
