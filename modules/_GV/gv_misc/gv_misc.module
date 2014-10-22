@@ -11151,15 +11151,15 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
       $query->condition('n.status', 1);
       
       $query->orderBy('n.created', 'DESC');
-      $result = $query->execute()->fetchAllAssoc('nid');
+      $results = $query->execute()->fetchAllAssoc('nid');
       
       //dpm($result);
-      if (empty($result)) {
+      if (empty($results)) {
         //dpm('tag ' . $tag . ' has no related');
         unset($arr[$key]);
       }
       else {
-        foreach($result as $key => $value) {
+        foreach($results as $key => $value) {
           $value->similar_tags_count = 1;
           $all_nids_sets[1][$value->created] = $value;
         }
@@ -11258,15 +11258,15 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
           
           $query->condition('n.nid', $article_nid, '!=');
           //$result = $query->execute()->fetchAllAssoc('nid');
-          $result = $query->execute()->fetchAllAssoc('created');
+          $results = $query->execute()->fetchAllAssoc('created');
           
           
           
-          if (!empty($result)) {
-            foreach($result as $key => $result) {
+          if (!empty($results)) {
+            foreach($results as $key => $result) {
               //if (!in_array($result, $articles)) {
               if (isset($articles[$key]) && $articles[$key]->similar_tags_count > $index) {
-                unset($result[$key]);
+                unset($results[$key]);
               }
               else {
                 if (isset($all_nids_sets[1][$key])) {
@@ -11318,29 +11318,29 @@ function gv_misc_get_relatedArticles_dividedByIndex($article_nid, $node_type) {
   // Amountof tags is less than 7 (original or filtered by excluding 0ne tag)
   $current_article_index = count($arr);
 
-  $result = array();
+  $results = array();
 
   for ($i = 0; $i<count($arr); $i++) {
-    gv_misc_findAllArrayElementsCombinations($arr, $i+1, $result);
+    gv_misc_findAllArrayElementsCombinations($arr, $i+1, $results);
   }
 
   $min_index = 1; //$current_article_index > 1 ? 2 : 1;
   $max_index = 0;
 
   
-  foreach ($result as $key => $array) {
+  foreach ($results as $key => $array) {
     $temp_array = array();
     foreach ($array as $key2 => $item) {
       if (in_array($item, $temp_array)) {
-        unset($result[$key]);
+        unset($results[$key]);
         break;
       }
       $temp_array[] = $item;
     }
 
-    if (isset($result[$key])) {
-      $index = count($result[$key]);
-      $tags[$index][] = $result[$key];
+    if (isset($results[$key])) {
+      $index = count($results[$key]);
+      $tags[$index][] = $results[$key];
       if ($max_index < $index) {
         $max_index = $index;
       }
