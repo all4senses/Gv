@@ -9,9 +9,12 @@
        
              //$('.embed .link, .add-conf .link').click(function(){
       $(".embed .link").click(function(){
-        console.log('click!!!');
+        
         $(".embed .link .open").show();
-        //$(this).find(".open").show();
+        $(".embed .link .open").attr('visibility', 'visible');
+        
+        $(this).find(".open").show();
+        console.log('click!!!');
       });
 
 
