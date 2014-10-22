@@ -16,13 +16,17 @@
 
       $(".embed .link .open").mouseleave(function() {
       
-        timerEmbed = setTimeout(function() {$(this).css('visibility', 'hidden');}, 9000);
+        timerEmbed = setTimeout(function() {
+            $(".embed .link .open").css('visibility', 'hidden');
+          }, 2000);
+          conssole.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
       
       $(".add-conf .link .open").mouseleave(function(){ 
       
-        timerAddConf = setTimeout(function() {$(this).css('visibility', 'hidden');}, 9000);
+        timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 2000);
+        conssole.log(timerAddConf);
         //$(this).css('visibility', 'hidden');
       });
 
