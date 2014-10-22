@@ -34,6 +34,11 @@
 
 
 
+      $(".embed .link .open span").click(function(){ 
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>');
+      });
+      
+      
 
        $(".embed .link .open").mouseenter(function(){ 
          if (timerEmbed) {
