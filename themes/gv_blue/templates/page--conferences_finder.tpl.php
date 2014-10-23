@@ -15,9 +15,15 @@
           <?php 
             echo '<table class="conf-table"><tbody>',
                     '<tr><td class="header">Logo</td></tr>',
-                    '<tr><td class="search">', gv_blocks_get_confMainSearch(), '</td></tr>',
-                    '<tr><td class="embed"><div class="link">EMBED<div class="hidden open"><span>COPY</span><input type="text" readonly="readonly" value="' . '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>' . '"/></div></div></td></tr>',
-                    '<tr><td class="add-conf"><div class="link">ADD CONFERENCE<div class="hidden open"><a href="mailto:contact@getvoip.com?subject=Add Conference" target="_blank">EMAIL US</a><span>contact@getvoip.com</span></div></div></td></tr>',
+                    '<tr><td class="search">', 
+                      '<div class="title">Find Your <span>Technology</span> Conference</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 330 tech conferences & shows in the US</div>',
+                      gv_blocks_get_confMainSearch(), 
+                    '</td></tr>',
+                    '<tr><td class="links">',
+                      '<div class="embed"><div class="link">EMBED<div class="hidden open"><span>COPY</span><input type="text" readonly="readonly" value="', '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>', '"/></div></div></div>',
+                      '<div class="add-conf"><div class="link">ADD CONFERENCE<div class="hidden open"><a href="mailto:contact@getvoip.com?subject=Add Conference" target="_blank">EMAIL US</a><span>contact@getvoip.com</span></div></div></div>',
+                    '</td></tr>',
+
                     '<tr><td class="footer"><div class="c"><div>Copyright</div> 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
                     
                  '</tbody></table>';
