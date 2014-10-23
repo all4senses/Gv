@@ -59,6 +59,28 @@
       
       
       
+      
+      $("#conf").mouseenter(function(){ 
+         $("#h-search").show();
+      });
+      $("#conf").mouseleave(function(){ 
+         $("#h-search").hide();
+      });
+      
+      $("#c-industry").mouseenter(function(){ 
+         $("#h-industry").show();
+      });
+      $("#c-industry").mouseleave(function(){ 
+         $("#h-industry").hide();
+      });
+      
+      $("#c-title").mouseenter(function(){ 
+         $("#h-name").show();
+      });
+      $("#c-title").mouseleave(function(){ 
+         $("#h-name").hide();
+      });
+      
        
        // Shift in/out conferences list
 
