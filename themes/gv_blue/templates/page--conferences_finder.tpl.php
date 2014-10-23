@@ -14,7 +14,10 @@
           
           <?php 
             echo '<table class="conf-table"><tbody>',
-                    '<tr><td class="header"><img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" /></td></tr>',
+                    '<tr><td class="header">',
+                      '<table><tbody><tr><td><img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" /></td><td></td><td></td></tr></tbody></table>',
+                      //'<img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />',
+                      '</td></tr>',
                     '<tr><td class="search">', 
                       '<div class="title">Find Your <span>Technology</span> Conference</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 330 tech conferences & shows in the US</div>',
                       gv_blocks_get_confMainSearch(), 
