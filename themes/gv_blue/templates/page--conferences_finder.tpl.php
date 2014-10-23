@@ -19,7 +19,7 @@
                       //'<img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />',
                       '</td></tr>',
                     '<tr><td class="search">', 
-                      '<div class="title">Find Your <span>Technology</span> Conference</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 330 tech conferences & shows in the US</div>',
+                      '<div class="title">FIND YOUR <span>TECHNOLOGY</span> CONFERENCE</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 330 tech conferences & shows in the US</div>',
                       gv_blocks_get_confMainSearch(), 
                     '</td></tr>',
                     '<tr><td class="links">',
@@ -27,7 +27,7 @@
                       '<div class="add-conf"><div class="link">ADD CONFERENCE<div class="hidden open"><a href="mailto:contact@getvoip.com?subject=Add Conference" target="_blank">EMAIL US</a><span>contact@getvoip.com</span></div></div></div>',
                     '</td></tr>',
 
-                    '<tr><td class="footer"><div class="c"><div>Copyright</div> 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
+                    '<tr><td class="footer">© Copyright 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
                     
                  '</tbody></table>';
 
