@@ -15,7 +15,7 @@
           <?php 
             echo '<table class="conf-table"><tbody>',
                     '<tr><td class="header">',
-                      '<table><tbody><tr><td class="side"><img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" /></td><td></td><td class="side"></td></tr></tbody></table>',
+                      '<table><tbody><tr><td class="side"><img src="/sites/all/themes/gv_blue/css/images/c-logo-getvoip.png" alt="GetVoIP" title="GetVoIP" /></td><td></td><td class="side"></td></tr></tbody></table>',
                       //'<img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />',
                       '</td></tr>',
                     '<tr><td class="search">', 
