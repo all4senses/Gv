@@ -253,9 +253,50 @@ cursor: text;
 
 
 /* Side table - results */
+
+table#side-table, table#side-table-bottom {
+margin: 0;
+}
+
+table#side-table-bottom {
+height: 100%;
+}
+
 table#side-table th, table#side-table td {
 text-align: center;
 }
+
+table#side-table th, table#side-table td, table#side-table-bottom td {
+text-align: center;
+border: 1px solid lightgray;
+width: 25%;
+}
+
+table#side-table th {
+height: 100px;
+color: #3c9ef3;
+font-weight: bold;
+font-size: 20px;
+}
+
+#side-table .icon {
+width: 30px;
+height: 30px;
+background: url(/sites/all/themes/gv_blue/css/images/c-sprite.png) no-repeat -101px -162px transparent;
+margin: 10px auto 10px;
+}
+
+.conf-title:hover, .term-link:hover {
+color: #3c9ef3;
+text-decoration: underline;
+}
+
+.conf-title, .term-link {
+cursor: pointer;
+}
+
+
+
 
 
 
