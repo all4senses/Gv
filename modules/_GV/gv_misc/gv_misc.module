@@ -12625,7 +12625,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               
               if ($result->field_conf_twitter_value) {
-                $twitter = '<div class="icon"></div><div class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</div><span> - </span><div class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</div>';
+                $twitter = '<div class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</div><span> - </span><div class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</div>';
               }
               else {
                 $twitter = NULL;
@@ -12641,7 +12641,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                     . '</tbody></table></div>
                     <div class="middle">
                       <table><tbody><tr>'
-                      . ($url ? '<td><div class="url"><div clas="icon"></div>' . $url . '</div></td>' : '')
+                      . ($url ? '<td><div class="url">' . $url . '</div></td>' : '')
                       . ( ($result->field_conf_price_value && $result->field_conf_price_value != '0' && $result->field_conf_price_value != '0.00') ? '<td><div class="price">' . $result->field_conf_price_value . '</div></td>' : '')
                       . ($location ? '<td><div class="place">' . $location .  '</div></td>' : '')
                       . '</tr></tbody></table>
