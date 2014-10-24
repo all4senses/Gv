@@ -12599,16 +12599,43 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->fields('th', array('field_conf_twitter_hashtag_value'));
             
             if($result = $query->execute()->fetchObject()) {
+              
+              if ($result->field_conf_link_value) {
+                if(strpos($result->field_conf_link_value, '//')) {
+                  $url_title = explode('//', $result->field_conf_link_value);
+                  $url_title = $url_title[1];
+                }
+                else {
+                  $url_title = $result->field_conf_link_value;
+                }
+                
+                $url = l($url_title, $result->field_conf_link_value, array('external' => TRUE));
+              }
+              else {
+                $url = NULL;
+              }
+              
+              if ($result->field_conf_twitter_value) {
+                $twitter = '<div class="icon"></div><div class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</div><div class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</div>';
+              }
+              else {
+                $twitter = NULL;
+              }
+              $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
+              
               $out_html = '
                     <div class="top">
-                      <div class="title">' . $result->title . '</div>
-                      <div class="date">' . $result->field_conf_date_value . '</div>
-                      <div class="twitter"><div class="name">' . $result->field_conf_twitter_value . '</div><div class="hash">' . $result->ield_conf_twitter_hashtag_value . '</div></div>
-                    </div>
+                      <table><tbody>
+                      <tr><td><div class="title">' . $result->title . '</div></td></tr>
+                      <tr><td><div class="date">' . $result->field_conf_date_value . '</div></td></tr>'
+                      . ($twitter ? '<tr><td><div class="twitter">' . $twitter . '</div></td></tr>' : '')
+                    . '</tbody></table></div>
                     <div class="middle">
-                      <div class="url">' . $result->field_conf_link_value . '</div>
-                      <div class="price">' . $result->field_conf_price_value . '</div>
-                      <div class="place">' . $result->field_conf_city_value . ', ' . $result->field_state_value .  '</div>
+                      <table><tbody><tr>'
+                      . ($url ? '<td><div class="url"><div clas="icon"></div>' . $url . '</div></td>' : '')
+                      . ($result->field_conf_price_value ? '<td><div class="price"><div clas="icon"></div>' . $result->field_conf_price_value . '</div></td>' : '')
+                      . ($location ? '<td><div class="place"><div clas="icon"></div>' . $location .  '</div></td>' : '')
+                      . '</tr></tbody></table>
                     </div>
                     <div class="main">
                       <div class="descr">' . $result->body_value . '</div>
@@ -12712,7 +12739,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
-                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value || $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $location . '</td></tr>';
                     
@@ -12801,7 +12828,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
-                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value || $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $location . '</td></tr>';
