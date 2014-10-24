@@ -12477,6 +12477,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $post[$key] = check_plain(strip_tags($value));
   }
 
+  if (!empty($post['results_num'])) {
+    $results_num = $post['results_num'];
+  }
+  else {
+    $results_num = 3; // Default autocomplete results number.
+  }
+  
   
   // Db queries doc
   // https://www.drupal.org/node/310086
@@ -12500,7 +12507,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           // 3 pages
           //$query->range(0, 6);
 
-          $query->range(0, 9);
+          $query->range(0, $results_num);
 
 
           $result = $query->execute()->fetchAllAssoc('tid');
@@ -12542,7 +12549,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
         //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
         //    $query->condition('i.field_invisible_value', 1, '!='); 
             $query->orderBy('n.title', 'ASC');
-            $query->range(0, 9);
+            $query->range(0, $results_num);
 
 
             $result = $query->execute()->fetchAllAssoc('nid');
@@ -12668,7 +12675,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
 
               $query->orderBy('n.title', 'ASC');
-              $query->range(0, 9);
+              $query->range(0, $results_num);
               
               
               
@@ -12751,7 +12758,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
 
               $query->orderBy('n.title', 'ASC');
-              $query->range(0, 9);
+              $query->range(0, $results_num);
               
               
               
