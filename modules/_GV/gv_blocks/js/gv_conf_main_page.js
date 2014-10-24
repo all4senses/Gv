@@ -101,7 +101,7 @@
           $(this).addClass('active');
           $('#c-title').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
-          //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Title') 
+          //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Name') 
           {
             $('input[id="conf"]').val(search_field_title);
             $('input[id="conf"]').addClass('blur');
@@ -114,7 +114,7 @@
 
         if (sw != 'title') {
           sw = 'title';
-          search_field_title = 'Search by Title';
+          search_field_title = 'Search by Name';
           $(this).addClass('active');
           $('#c-industry').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
@@ -143,7 +143,7 @@
       $('input[id="conf"]').focus(function(){
         
         //if ($(this).val() == $(this).attr('title')) {
-        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Title') {
+        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name') {
           $(this).val('');
           $(this).removeClass('blur');
         }
@@ -185,7 +185,7 @@
       
 
       function doSubmitTerm() {
-        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Title') {
+        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name') {
           get_conf($('input[id="conf"]').val());
         }
       }
