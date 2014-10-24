@@ -248,7 +248,8 @@
               data: {
                 type: sw, //'industry', //op: 'title',
                 op: 'auto',
-                term: request.term
+                term: request.term,
+                results_num: 3
               },
               dataType: "json",
               success: function( data ) {
