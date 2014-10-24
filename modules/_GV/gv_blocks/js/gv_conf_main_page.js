@@ -516,7 +516,7 @@
      inline:true, 
      href:"#cb-popup_1", 
      width:550, 
-     height:540
+     height:470
      ,onClosed: function() {
            //console.log('closed...');
            $("body").css('overflow', 'inherit');
