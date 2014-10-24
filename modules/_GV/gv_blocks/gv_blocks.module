@@ -9339,10 +9339,12 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
       <div class="hints">
         <div id="h-search">Find Conference</div><div id="h-industry">By Industry</div><div id="h-name">By Name</div>
       </div>
+      <div id="search-wrapper">
       <input id="conf" title="Industry" />'
       //. '<div id="label">Start typing "web" for a start</div>'.
-      . '<div class="switch active" id="c-industry"> - By industry</div>
-      <div class="switch" id="c-title"> - By title</div><div id="submit">Submit</div>
+      . '<div id="buttons"><div class="switch active" id="c-industry"> - By industry</div>
+      <div class="switch" id="c-title"> - By title</div><div id="submit">Submit</div></div>
+      </div>
 <input type="hidden" id="conf-id" />
 <p id="conf-description"></p>'
       .$popup_1,
