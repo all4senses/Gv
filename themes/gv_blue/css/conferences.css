@@ -95,16 +95,23 @@ td.footer {text-align: right; color: #696c77; font-size: 13px; padding: 0 5px 5p
 #results_1 {padding: 20px;}
 
 
-.embed .link, .add-conf .link {width: 100px; height: 100%; position: relative; text-indent: 50px;}
+.embed .link, .add-conf .link {width: 40px; height: 100%; position: relative; text-indent: 50px;}
 .add-conf .link {width: 200px;}
 
-.embed .link .open, .add-conf .link .open {background: orange; position: absolute; top: 0; left: 0; width: 300px; height: 100%;}
+.embed .link .open, .add-conf .link .open {position: absolute;
+top: 0;
+left: 0;
+width: 320px;
+height: 100%;
+text-indent: 0;
+float: left;}
 
 .embed {
-background: url(/sites/all/themes/gv_blue/css/images/c-sprite.png) no-repeat 2px -111px transparent;
+background: url(/sites/all/themes/gv_blue/css/images/c-sprite.png) no-repeat -107px -13px transparent;
 width: 45px;
-height: 42px;
+height: 39px;
 cursor: pointer;
+margin-bottom: 20px;
 }
 
 .add-conf {
@@ -113,6 +120,24 @@ width: 45px;
 height: 42px;
 cursor: pointer;
 }
+
+
+.icon {width: 35px;
+height: 40px;
+background: url(/sites/all/themes/gv_blue/css/images/c-sprite.png) no-repeat -107px -163px transparent;
+float: left;}
+
+.data {background: white;
+color: gray;
+float: left;
+height: 100%;
+border-radius: 0 30px 30px 0;
+width: 250px;}
+
+
+
+
+
 
 /* Conference list shift in/out */
 
