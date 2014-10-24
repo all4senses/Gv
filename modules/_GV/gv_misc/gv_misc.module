@@ -12600,6 +12600,15 @@ function gv_misc_getConferences_autocomplete_ajax() {
             
             if($result = $query->execute()->fetchObject()) {
               
+              global $user;
+              if ($user->uid == 1) {
+                $result->field_conf_twitter_value = '@Conference';
+                $result->field_conf_twitter_hashtag_value = '#Hashtag';
+                $result->field_conf_city_value = 'New York';
+                $result->field_state_value = 'NY';
+                $result->body_value = 'This is Photoshop\'s version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.';
+              }
+              
               if ($result->field_conf_link_value) {
                 if(strpos($result->field_conf_link_value, '//')) {
                   $url_title = explode('//', $result->field_conf_link_value);
@@ -12608,7 +12617,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 else {
                   $url_title = $result->field_conf_link_value;
                 }
-                
+                $url_title = rtrim($url_title, '/');
                 $url = l($url_title, $result->field_conf_link_value, array('external' => TRUE));
               }
               else {
@@ -12616,7 +12625,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               
               if ($result->field_conf_twitter_value) {
-                $twitter = '<div class="icon"></div><div class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</div><div class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</div>';
+                $twitter = '<div class="icon"></div><div class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</div><span> - </span><div class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</div>';
               }
               else {
                 $twitter = NULL;
@@ -12633,8 +12642,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                     <div class="middle">
                       <table><tbody><tr>'
                       . ($url ? '<td><div class="url"><div clas="icon"></div>' . $url . '</div></td>' : '')
-                      . ($result->field_conf_price_value ? '<td><div class="price"><div clas="icon"></div>' . $result->field_conf_price_value . '</div></td>' : '')
-                      . ($location ? '<td><div class="place"><div clas="icon"></div>' . $location .  '</div></td>' : '')
+                      . ( ($result->field_conf_price_value && $result->field_conf_price_value != '0' && $result->field_conf_price_value != '0.00') ? '<td><div class="price">' . $result->field_conf_price_value . '</div></td>' : '')
+                      . ($location ? '<td><div class="place">' . $location .  '</div></td>' : '')
                       . '</tr></tbody></table>
                     </div>
                     <div class="main">
