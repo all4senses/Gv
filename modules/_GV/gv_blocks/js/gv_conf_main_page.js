@@ -515,7 +515,7 @@
    cb1 = $.fn.colorbox({
      inline:true, 
      href:"#cb-popup_1", 
-     width:780, 
+     width:550, 
      height:540
      ,onClosed: function() {
            //console.log('closed...');
