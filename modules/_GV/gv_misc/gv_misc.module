@@ -12713,7 +12713,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
               $query->fields('ci', array('field_conf_city_value'));
               $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
-              $query->fields('da', array('field_conf_date_value'));
+              $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
 
               $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
 
@@ -12763,9 +12763,23 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
+                      if ($result->field_conf_date_value == $result->field_conf_date_value2) {
+                        $dates = date('F j\t\h\, Y', strtotime($result->field_conf_date_value));
+                      }
+                      else {
+                        $date1 = strtotime($result->field_conf_date_value);
+                        $date2 = strtotime($result->field_conf_date_value2);
+                        if ($date1 > $date2) {
+                          $dates = date('F j\t\h\, Y', $date1);
+                        }
+                        else {
+                          $dates = '<div>' . date('F j\t\h\, Y', $date1) . ' - </div><div>' . $dates = date('F j\t\h\, Y', $date2) . '</div>';
+                        }
+                      }
+                      
                       $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
-                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $location . '</td></tr>';
+                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
                     
                     
                   }
@@ -12801,7 +12815,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
               $query->fields('ci', array('field_conf_city_value'));
               $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
-              $query->fields('da', array('field_conf_date_value'));
+              $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
 
               $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
               
@@ -12852,10 +12866,24 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
+                      if ($result->field_conf_date_value == $result->field_conf_date_value2) {
+                        $dates = date('F j\t\h\, Y', strtotime($result->field_conf_date_value));
+                      }
+                      else {
+                        $date1 = strtotime($result->field_conf_date_value);
+                        $date2 = strtotime($result->field_conf_date_value2);
+                        if ($date1 > $date2) {
+                          $dates = date('F j\t\h\, Y', $date1);
+                        }
+                        else {
+                          $dates = '<div>' . date('F j\t\h\, Y', $date1) . ' - </div><div>' . $dates = date('F j\t\h\, Y', $date2) . '</div>';
+                        }
+                      }
+                      
                       $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
-                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $location . '</td></tr>';
+                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
                     
                   }
                   
