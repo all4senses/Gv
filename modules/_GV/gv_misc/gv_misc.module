@@ -12682,7 +12682,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
               if ($result = $query->execute()->fetchAllAssoc('nid')) {
               
-                  $conferences_list = '<table><tbody><thead><th>Name</th><th>Industry</th><th>Dates</th><th>Location</th><thead>';
+                  $conferences_list = '<table id="side-table"><thead><th class="name"><div class="icon"></div>NAME</th><th class="industry"><div class="icon"></div>INDUSTRY</th><th class="dates"><div class="icon"></div>DATES</th><th class="location"><div class="icon"></div>LOCATION</th><thead><tbody>';
                   
                   foreach ($result as $result) {
 //                    $conferences_list[] = array(
@@ -12765,7 +12765,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
               if ($result = $query->execute()->fetchAllAssoc('nid')) {
               
-                  $conferences_list = '<table><tbody><thead><th>Name</th><th>Industry</th><th>Dates</th><th>Location</th><thead>';
+                  $conferences_list = '<table id="side-table"><thead><th class="name"><div class="icon"></div>NAME</th><th class="industry"><div class="icon"></div>INDUSTRY</th><th class="dates"><div class="icon"></div>DATES</th><th class="location"><div class="icon"></div>LOCATION</th><thead><tbody>';
                   
                   foreach ($result as $result) {
 //                    $conferences_list[] = array(
