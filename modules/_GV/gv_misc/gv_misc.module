@@ -12712,8 +12712,9 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
+                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value || $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
-                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
+                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $location . '</td></tr>';
                     
                     
                   }
@@ -12800,8 +12801,10 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
+                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value || $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
-                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
+                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $location . '</td></tr>';
                     
                   }
                   
