@@ -877,8 +877,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   //$form['#attached']['js'][] = '/misc/collapse.js';
                   
   // http://jqueryui.com/datepicker/#date-formats
-  $form['#attached']['library'][] = array('system', 'ui.datepicker');
-  drupal_add_library('drupal.collapse');
+  $form['#attached']['library'][] = array('system', 'ui.datepicker', 'drupal.collapse');
+  drupal_add_library('system', 'drupal.collapse');
   
 //  
 //  http://jonthornton.github.io/jquery-timepicker/
