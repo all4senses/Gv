@@ -874,9 +874,10 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   //$form['#attached']['css'][] = $module_path . '/css/gv_pages.css';
   $form['#attached']['js'][] = $module_path . '/js/gv_track_links_datepicker.js';
   
-          
+  $form['#attached']['js'][] = '/misc/collapse.js';
+                  
   // http://jqueryui.com/datepicker/#date-formats
-  $form['#attached']['library'][] = array('system', 'ui.datepicker', 'collapse');
+  $form['#attached']['library'][] = array('system', 'ui.datepicker');
   
   
 //  
