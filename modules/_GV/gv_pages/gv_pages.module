@@ -702,6 +702,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             $current_timeframe_providers = array();
             $all_time_providers = array();
             $day_seconds = 60*60*24;
+            $all_time_providers_by_page = array();
             foreach ($p_by_ip as $timestamp_key => $p) {
               
               $click_page = empty($p->click_page) ? 'Others' : $p->click_page;
@@ -715,6 +716,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               }
               if (strpos($click_page, 'getvoip.com') !== FALSE) {
                 $click_page = str_replace('getvoip.com', '', $click_page);
+              }
+              if ($click_page == '/') {
+                $click_page = '/home';
               }
               
               if ($p->timestamp >= $current_from + $day_seconds) {
@@ -754,7 +758,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 //          }
           $all_total_items_unique += $total_items_unique;
           
-          $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique); 
+          $by_click_pages = '';
+          foreach ($all_time_providers_by_page as $page_url => $page_click_num) {
+            $by_click_pages .= '<div>' . $page_url . ' -' . $page_click_num . '</div>';
+          }
+                  
+          $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique, 'by_click_pages' => $by_click_pages); 
           //dpm($providers_clicks[$p_nid]);
           
         } // End of foreach ($providers as $p_nid => $selected_provider) {
@@ -819,7 +828,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
               <td>' . $count . '</td>
               <td class="name">' . $selected_provider['name'] . '</td>
-              <td>' . $selected_provider['clicks_unique'] . '</td>
+              <td>' . $selected_provider['clicks_unique'] . $selected_provider['by_click_pages'] . '</td>
               <td>' . $selected_provider['clicks'] . '</td>',
           );
 
