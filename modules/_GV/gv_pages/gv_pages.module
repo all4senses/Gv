@@ -702,17 +702,19 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
             $current_timeframe_providers = array();
             $all_time_providers = array();
             $day_seconds = 60*60*24;
-            foreach ($p_by_ip as $p) {
+            foreach ($p_by_ip as $timestamp_key => $p) {
               if ($p->timestamp >= $current_from + $day_seconds) {
                 $current_from += $day_seconds;
                 //dpm($current_timeframe);
                 $current_timeframe_providers = array($p->ip);
                 $all_time_providers[] = $p->ip;
+                $all_time_providers_by_page[$p->click_page] += 1;
               }
               else {
                 if(!in_array($p->ip, $current_timeframe_providers)) {
                   $current_timeframe_providers[] = $p->ip;
                   $all_time_providers[] = $p->ip;
+                  $all_time_providers_by_page[$p->click_page] += 1;
                 }
               }
             }
@@ -724,7 +726,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           //dpm($p_by_ip);
           
-          
+          dpm($all_time_providers_by_page);
           
           $total_items = $results->rowCount();
           $all_total_items += $total_items;
@@ -739,7 +741,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique); 
           //dpm($providers_clicks[$p_nid]);
-        }
+          
+        } // End of foreach ($providers as $p_nid => $selected_provider) {
         
         switch ($url_sort) {
           case 'object_name':
