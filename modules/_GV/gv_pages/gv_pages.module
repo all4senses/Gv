@@ -835,6 +835,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           $count++;
           
+          $selected_provider['by_click_pages'] = '<fieldset class=" collapsible collapsed"><legend>+</legend>' . $selected_provider['by_click_pages'] . '</fieldset>';
+          
           $form['nid_' . $p_nid . '_data'] = array(
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
               <td>' . $count . '</td>
@@ -858,6 +860,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           '#markup' => '</tbody></table></div>',
         );    
         
+        
+        
   } // End of elseif ($statistics_type == 'per_provider') {
   
 
@@ -872,7 +876,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   
           
   // http://jqueryui.com/datepicker/#date-formats
-  $form['#attached']['library'][] = array('system', 'ui.datepicker');
+  $form['#attached']['library'][] = array('system', 'ui.datepicker', 'collapse');
   
   
 //  
