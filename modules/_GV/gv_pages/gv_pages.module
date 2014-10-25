@@ -697,7 +697,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           //if ($user->uid == 1 )
             {
             $p_by_ip = $results->fetchAllAssoc('timestamp');
-            dpm($p_by_ip);
+            //dpm($p_by_ip);
             $current_from = $from;
             $current_timeframe_providers = array();
             $all_time_providers = array();
@@ -745,7 +745,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           //dpm($p_by_ip);
           
-          dpm($all_time_providers_by_page);
+          //dpm($all_time_providers_by_page);
           
           $total_items = $results->rowCount();
           $all_total_items += $total_items;
@@ -759,14 +759,20 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $all_total_items_unique += $total_items_unique;
           
           $by_click_pages = '';
-          if (in_array('Others', $all_time_providers_by_page)) {
+          if (!empty($all_time_providers_by_page['Others'])) {
             $others = $all_time_providers_by_page['Others'];
             unset($all_time_providers_by_page['Others']);
             $all_time_providers_by_page[] = $others;
           }
           foreach ($all_time_providers_by_page as $page_url => $page_click_num) {
-            $by_click_pages .= '<div>' . $page_url . ' -' . $page_click_num . '</div>';
+//            if ($page_url == 'Others') {
+//              continue;
+//            }
+            $by_click_pages .= '<div>' . $page_url . ' - ' . $page_click_num . '</div>';
           }
+//          if (!empty($all_time_providers_by_page['Others'])) {
+//            $by_click_pages .= '<div>Others - ' . $all_time_providers_by_page['Others'] . '</div>';
+//          }
                   
           $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique, 'by_click_pages' => $by_click_pages); 
           //dpm($providers_clicks[$p_nid]);
