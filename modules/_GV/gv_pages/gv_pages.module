@@ -835,7 +835,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           
           $count++;
           
-          $selected_provider['by_click_pages'] = '<fieldset class=" collapsible collapsed"><legend>+</legend><div class="fieldset-wrapper">' . $selected_provider['by_click_pages'] . '</div></fieldset>';
+          $selected_provider['by_click_pages'] = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">More Info</span></legend><div class="fieldset-wrapper">' . $selected_provider['by_click_pages'] . '</div></fieldset>';
           
           $form['nid_' . $p_nid . '_data'] = array(
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
