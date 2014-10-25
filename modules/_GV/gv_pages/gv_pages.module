@@ -713,6 +713,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
                 $click_page = explode('?', $click_page);
                 $click_page = $click_page[0];
               }
+              if (strpos($click_page, 'getvoip.com') !== FALSE) {
+                $click_page = str_replace('getvoip.com', '', $click_page);
+              }
               
               if ($p->timestamp >= $current_from + $day_seconds) {
                 $current_from += $day_seconds;
