@@ -762,7 +762,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           if (!empty($all_time_providers_by_page['Others'])) {
             $others = $all_time_providers_by_page['Others'];
             unset($all_time_providers_by_page['Others']);
-            $all_time_providers_by_page[] = $others;
+            $all_time_providers_by_page['Others'] = $others;
           }
           foreach ($all_time_providers_by_page as $page_url => $page_click_num) {
 //            if ($page_url == 'Others') {
