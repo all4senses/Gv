@@ -3,7 +3,7 @@
   Drupal.behaviors.gv_track_direct_link = {
     attach: function (context, settings) {
       
-       console.log('Click tracking...');
+//       console.log('Click tracking...');
        
        // GV track provider direct link.
        //alert('.');
@@ -11,9 +11,9 @@
          
          event.preventDefault();
          
-         console.log('direct link click');
-         console.log('href = ' + $(this).attr('href'));
-         console.log('title = ' + $(this).attr('title'));
+//         console.log('direct link click');
+//         console.log('href = ' + $(this).attr('href'));
+//         console.log('title = ' + $(this).attr('title'));
          
          var provider_direct_url = $(this).attr('href');
          var click_page = window.location.href;
@@ -33,14 +33,14 @@
                     type: 'POST', 
                     dataType: 'json'
                     
-                    , 
-                    success: function(data) 
-                            { 
-                                if(!data.error) {
-                                    console.log('Provider click is tracked');
-                                }
-                                return false;
-                            } 
+//                    , 
+//                    success: function(data) 
+//                            { 
+//                                if(!data.error) {
+//                                    console.log('Provider click is tracked');
+//                                }
+//                                return false;
+//                            } 
                      
             }); // end of (jQuery).ajax
         
