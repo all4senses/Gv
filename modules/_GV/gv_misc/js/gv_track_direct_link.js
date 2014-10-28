@@ -2,7 +2,8 @@
 
   Drupal.behaviors.gv_track_direct_link = {
     attach: function (context, settings) {
-       
+      
+       console.log('Click tracking...');
        
        // GV track provider direct link.
        //alert('.');
