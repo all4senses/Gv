@@ -71,7 +71,16 @@ function gv_misc_menu() {
     'access callback' => 'gv_misc_userIsAdmin',
     'type' => MENU_CALLBACK,
   );
-    $items['go/%'] = array(
+  
+  
+  $items['click'] = array(
+    'title' => 'Track a click',
+    'page callback' => 'gv_misc_trackClick_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['go/%'] = array(
     'title' => 'Redirect to an external link',
     'page callback' => 'gv_misc_goToExternalUrl2',
     'access arguments' => array('access content'),
@@ -88,12 +97,7 @@ function gv_misc_menu() {
   
    
   
-  $items['click'] = array(
-    'title' => 'Track a click',
-    'page callback' => 'gv_misc_trackClick_ajax',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
+  
   
   $items['referer'] = array(
     'title' => 'Set user external referer',
@@ -2584,8 +2588,9 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   }
   
   
+  global $user;
   
-  if ($provider_data_quick && ($force_direct_link || ($service_type && !empty($provider_data_quick[$service_type]['fl'])) ) ) {
+  if ($provider_data_quick && ($user->uid == 1 || $force_direct_link || ($service_type && !empty($provider_data_quick[$service_type]['fl'])) ) ) {
     // Direct link.
     gv_misc_loadTrackingHandlerForDirectLinks();
     return $trackingUrl = '<a id="oid' . $nid . 'xxx' . $count_id . '" title="' . $provider_data_quick['name'] . '" href="' . (strpos($provider_data_quick['i_web'], '://') ? $provider_data_quick['i_web'] : 'http://' . $provider_data_quick['i_web']) . '" target = "_blank"' . ($a_attr ? ' ' . $a_attr['key'] . '="' . $a_attr['value'] . '"' : '' /*' rel="nofollow"'*/) . ' class="' . ($a_class ? $a_class . ' direct-link' : 'direct-link') . '">' . $title_or_wrapped_object . '</a>';
@@ -2667,17 +2672,48 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
 
 
 /**
- * Loads js handler for tracking direct links via ajax.
+ * Track a click.
  */
-function gv_misc_loadTrackingHandlerForDirectLinks() {
-  static $js_already_loaded;
-
-  if (!$js_already_loaded) {
-    $js_already_loaded = TRUE;
-
-    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-    drupal_add_js($path_to_custom_js . 'gv_track_direct_link.js');
+function gv_misc_trackClick_ajax() {
+  
+  $status = TRUE;
+  $output = '';
+  
+  $post = array();
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
   }
+  
+  if (!empty($post['type']) && !empty($post['url'])) {
+    
+      global $user;
+      $data = NULL;
+//      $data = serialize(array(
+//        'referer' => @$_SESSION['gv_current_http_referer'],
+//        'click_page' => $post['click_page'],
+//        'user' => array('name' => $user->name, 'hostname' => $user->hostname),
+//      ));
+
+      db_insert('gv_track_links')
+        ->fields(array(
+          'object_id' => str_replace('oid', '', preg_replace('/.*oid(.*)xxx.*/s', '$1', $post['oid'])), //str_replace('oid', '', $post['oid']),
+          'type' => $post['type'],
+          'object_name' => $post['title'],
+          'url' => $post['url'],
+          'timestamp' => time(),
+          
+          'referer' => @$_SESSION['gv_current_http_referer'],
+          'click_page' => $post['click_page'],
+          'uname' => isset($user->name) ? $user->name : '',
+          'ip' => $user->hostname,
+            
+          'data' => $data,
+        ))
+        ->execute();
+
+  }
+  
+  drupal_json_output(array('status' => $status, /*'data' => $output*/));
 }
 
 
@@ -2762,6 +2798,21 @@ function gv_misc_goToExternalUrl2() {
   drupal_goto(@$_SERVER['HTTP_REFERER']);
   
   return '';
+}
+
+
+/**
+ * Loads js handler for tracking direct links via ajax.
+ */
+function gv_misc_loadTrackingHandlerForDirectLinks() {
+  static $js_already_loaded;
+
+  if (!$js_already_loaded) {
+    $js_already_loaded = TRUE;
+
+    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+    drupal_add_js($path_to_custom_js . 'gv_track_direct_link.js');
+  }
 }
 
 
@@ -2887,52 +2938,6 @@ function gv_misc_flushCache() {
   
   drupal_set_message('Cache is flushed.', 'warning');
   drupal_goto('');
-}
-
-
-/**
- * Track a click.
- */
-function gv_misc_trackClick_ajax() {
-  
-  $status = TRUE;
-  $output = '';
-  
-  $post = array();
-  foreach ($_POST as $key => $value) {
-    $post[$key] = check_plain(strip_tags($value));
-  }
-  
-  if (!empty($post['type']) && !empty($post['url'])) {
-    
-      global $user;
-      $data = NULL;
-//      $data = serialize(array(
-//        'referer' => @$_SESSION['gv_current_http_referer'],
-//        'click_page' => $post['click_page'],
-//        'user' => array('name' => $user->name, 'hostname' => $user->hostname),
-//      ));
-
-      db_insert('gv_track_links')
-        ->fields(array(
-          'object_id' => str_replace('oid', '', preg_replace('/.*oid(.*)xxx.*/s', '$1', $post['oid'])), //str_replace('oid', '', $post['oid']),
-          'type' => $post['type'],
-          'object_name' => $post['title'],
-          'url' => $post['url'],
-          'timestamp' => time(),
-          
-          'referer' => @$_SESSION['gv_current_http_referer'],
-          'click_page' => $post['click_page'],
-          'uname' => isset($user->name) ? $user->name : '',
-          'ip' => $user->hostname,
-            
-          'data' => $data,
-        ))
-        ->execute();
-
-  }
-  
-  drupal_json_output(array('status' => $status, /*'data' => $output*/));
 }
 
 
