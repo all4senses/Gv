@@ -828,7 +828,7 @@ function gv_process_page(&$variables) {
   drupal_add_js( $module_path_misc . '/js/gv_setReferer.js'); 
   
   //gv_misc_loadTrackingHandlerForDirectLinks();
-  drupal_add_js($path_to_custom_js . 'gv_track_direct_link.js');
+  drupal_add_js($module_path_misc . '/js/gv_track_direct_link.js');
   
   //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
   //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
