@@ -2690,6 +2690,12 @@ function gv_misc_trackClick_ajax() {
     
       global $user;
       $data = NULL;
+      $data = serialize(array(
+        'server' => print_r($_SERVER, true),
+        'referer' => @$_SESSION['gv_current_http_referer'],
+        'click_page' => $post['click_page'],
+        //'user' => array('name' => $user->name, 'hostname' => $user->hostname),
+      ));
 //      $data = serialize(array(
 //        'referer' => @$_SESSION['gv_current_http_referer'],
 //        'click_page' => $post['click_page'],
