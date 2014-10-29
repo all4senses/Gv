@@ -514,7 +514,7 @@
 
    cb1 = $.fn.colorbox({
      transition: 'fade' , //'elastic',
-     speed: 9800,
+     speed: 800,
      inline:true, 
      href:"#cb-popup_1", 
      width:550, 
