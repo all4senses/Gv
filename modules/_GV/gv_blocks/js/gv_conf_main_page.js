@@ -9,14 +9,16 @@
        
       $(".embed .link, .add-conf .link").mouseenter(function(){
         
-        $(this).find(".open").css('visibility', 'visible');
+        //$(this).find(".open").css('visibility', 'visible');
+        $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block"}).animate({opacity: 1}, 200);
         //console.log('click!!!');
       });
 
 
       $(".embed .link .open").mouseleave(function() {
       
-        timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
+        //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
+        timerEmbed = setTimeout(function() {$(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block"}).animate({opacity: 0}, 200);}, 1000);
         console.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
