@@ -16,10 +16,8 @@
 
       $(".embed .link .open").mouseleave(function() {
       
-        timerEmbed = setTimeout(function() {
-            $(".embed .link .open").css('visibility', 'hidden');
-          }, 2000);
-          console.log(timerEmbed);
+        timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
+        console.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
       
@@ -27,7 +25,7 @@
       
       $(".add-conf .link .open").mouseleave(function(){ 
       
-        timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 2000);
+        timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
         console.log(timerAddConf);
         //$(this).css('visibility', 'hidden');
       });
