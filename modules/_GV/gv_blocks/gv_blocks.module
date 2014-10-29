@@ -9398,7 +9398,9 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
     );
   
   
-
+  // Add some Google fonts.
+  // <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Lato:300,400', 'NA', 'text/css');
   
   return $form;
 }
@@ -9460,6 +9462,9 @@ function gv_blocks_get_confMainSearch_form_submit(&$form, &$form_state) {
     */
   //gv_misc_sendMessage('email_verification', array('verification_code' => $verification_code . '=' . urlencode($form_state['values']['email']), 'email' => $form_state['values']['email']));
   
-  drupal_set_message('Submitted conf page.');
+  global $user;
+  if ($user->uid == 1) {
+    drupal_set_message('Submitted conf page.');
+  }
   drupal_goto(ltrim(@$_SERVER['REDIRECT_URL'], '/'), array('query' => array('nocache' => 1)));
 }
