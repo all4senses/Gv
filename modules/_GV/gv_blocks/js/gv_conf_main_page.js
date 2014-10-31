@@ -205,6 +205,9 @@
         $( "#conf" ).val( ui.item.label );
         return false;
       },
+      create: function( event, ui ) {
+        console.log('Created...');
+      },
       select: function( event, ui ) {
         $( "#conf" ).val( ui.item.label );
         $( "#conf-id" ).val( ui.item.value );
