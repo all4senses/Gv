@@ -19,7 +19,7 @@
       
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
         timerEmbed = setTimeout(function() {$(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);}, 1000);
-        console.log(timerEmbed);
+        //console.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
       
@@ -29,7 +29,7 @@
       
         //timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
         timerAddConf = setTimeout(function() {$(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);}, 1000);
-        console.log(timerAddConf);
+        //console.log(timerAddConf);
         //$(this).css('visibility', 'hidden');
       });
 
@@ -46,7 +46,7 @@
          if (timerEmbed) {
           clearTimeout(timerEmbed);
           timerEmbed = null;
-          console.log('clear embed');
+          //console.log('clear embed');
          }
       });
       
@@ -54,7 +54,7 @@
         if (timerAddConf) {
           clearTimeout(timerAddConf);
           timerAddConf = null;
-          console.log('clear add-conf');
+          //console.log('clear add-conf');
         }
       });
       
