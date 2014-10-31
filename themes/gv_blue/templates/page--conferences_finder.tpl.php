@@ -13,6 +13,14 @@
           <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
           
           <?php 
+          
+            global $user;
+            if ($user->uid == 1) {
+              echo '<button id="again">Again</button>
+                    <br>
+                    <canvas id="link-1" width=100 height=100></canvas><canvas id="link-2" width=100 height=100></canvas>';
+            }
+          
             echo '<table class="conf-table"><tbody>',
                     '<tr><td class="header">',
                       '<table><tbody><tr><td class="side"><img src="/sites/all/themes/gv_blue/css/images/c-logo-getvoip.png" alt="GetVoIP" title="GetVoIP" /></td><td></td><td class="side"></td></tr></tbody></table>',
