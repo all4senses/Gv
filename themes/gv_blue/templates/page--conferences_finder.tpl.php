@@ -15,10 +15,10 @@
           <?php 
           
             global $user;
-            if ($user->uid == 1) {
-              echo '<canvas id="link-1" width=100 height=100></canvas><canvas id="link-2" width=100 height=100></canvas>
-                    <br><button id="again">Again</button>';
-            }
+//            if ($user->uid == 1) {
+//              echo '<canvas id="link-1" width=100 height=100></canvas><canvas id="link-2" width=100 height=100></canvas>
+//                    <br><button id="again">Again</button>';
+//            }
           
             echo '<table class="conf-table"><tbody>',
                     '<tr><td class="header">',
@@ -30,7 +30,10 @@
                       gv_blocks_get_confMainSearch(), 
                     '</td></tr>',
                     '<tr><td class="links">',
-                      '<div class="embed"><div class="link">EMBED<div class="hidden open"><div class="icon"></div><div class="data"><span>COPY</span><input type="text" readonly="readonly" value="', '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>', '"/></div></div></div></div>',
+                      '<div class="embed"><div class="link">'
+                    . ($user->uid == 1 ? '<canvas id="link-1" width=100 height=100></canvas><canvas id="link-2" width=100 height=100></canvas>
+                    <br><button id="again">Again</button>' : '')
+                    . 'EMBED<div class="hidden open"><div class="icon"></div><div class="data"><span>COPY</span><input type="text" readonly="readonly" value="', '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>', '"/></div></div></div></div>',
                       '<div class="add-conf"><div class="link">ADD CONFERENCE<div class="hidden open"><div class="icon"></div><div class="data"><a href="mailto:contact@getvoip.com?subject=Add Conference" target="_blank">EMAIL US</a><span>contact@getvoip.com</span></div></div></div></div>',
                     '</td></tr>',
 
