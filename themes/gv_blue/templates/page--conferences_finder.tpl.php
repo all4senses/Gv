@@ -16,9 +16,8 @@
           
             global $user;
             if ($user->uid == 1) {
-              echo '<button id="again">Again</button>
-                    <br>
-                    <canvas id="link-1" width=100 height=100></canvas><canvas id="link-2" width=100 height=100></canvas>';
+              echo '<canvas id="link-1" width=100 height=100></canvas><canvas id="link-2" width=100 height=100></canvas>
+                    <br><button id="again">Again</button>';
             }
           
             echo '<table class="conf-table"><tbody>',
