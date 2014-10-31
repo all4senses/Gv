@@ -200,7 +200,7 @@
     
     $( "#conf" ).autocomplete({
       highlightClass: "bold-text",
-      minLength: 3,
+      minLength: 2,
       focus: function( event, ui ) {
         $( "#conf" ).val( ui.item.label );
         return false;
