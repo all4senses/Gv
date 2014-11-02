@@ -110,7 +110,7 @@
 
           // redraw all guages with the current percent
 
-          drawAll(percent, 1);
+          drawAll(percent_1, 1);
 
           // increase percent for the next frame
 
@@ -128,7 +128,7 @@
 
           // redraw all guages with the current percent
 
-          drawAll(percent, 2);
+          drawAll(percent_2, 2);
 
           // increase percent for the next frame
 
