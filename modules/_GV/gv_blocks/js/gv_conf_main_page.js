@@ -38,10 +38,11 @@
           
           var quart = Math.PI / 2;
           var PI2 = Math.PI * 2;
-          var percent_1 = percent_2 = 0;
+          var percent_1 = 0;
+          var percent_2 = 0;
 
           var guages_1 = [];
-          guages.push({
+          guages_1.push({
               x: 50,
               y: 50,
               radius: 40,
