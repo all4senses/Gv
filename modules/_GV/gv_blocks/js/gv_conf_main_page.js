@@ -7,29 +7,40 @@
        
       canvasPresent = false;  
        
-      var canvas = document.getElementById("link-1");
+      var canvas_1 = document.getElementById("link-1");
+      var canvas_2 = document.getElementById("link-2");
 
-      if (canvas.getContext){ 
+      if (canvas_1.getContext){ 
 
           canvasPresent = true;
 
-          var ctx = canvas.getContext("2d");
+          var ctx_1 = canvas_1.getContext("2d");
+          var ctx_2 = canvas_2.getContext("2d");
 
           // set context styles
-          ctx.lineWidth = 15;
-          ctx.background = "red";
-          //ctx.strokeStyle = '#85c3b8';
-          //ctx.shadowColor = "black"
-          //ctx.shadowOffsetX = 0;
-          //ctx.shadowOffsetY = 0;
-          //ctx.shadowBlur = 0;
-          ctx.font = "12px verdana";
+          ctx_1.lineWidth = 15;
+          ctx_1.background = "red";
+          //ctx_1.strokeStyle = '#85c3b8';
+          //ctx_1.shadowColor = "black"
+          //ctx_1.shadowOffsetX = 0;
+          //ctx_1.shadowOffsetY = 0;
+          //ctx_1.shadowBlur = 0;
+          ctx_1.font = "12px verdana";
 
+          ctx_2.lineWidth = 15;
+          ctx_2.background = "red";
+          //ctx_2.strokeStyle = '#85c3b8';
+          //ctx_2.shadowColor = "black"
+          //ctx_2.shadowOffsetX = 0;
+          //ctx_2.shadowOffsetY = 0;
+          //ctx_2.shadowBlur = 0;
+          ctx_2.font = "12px verdana";
+          
           var quart = Math.PI / 2;
           var PI2 = Math.PI * 2;
-          var percent = 0;
+          var percent_1 = percent_2 = 0;
 
-          var guages = [];
+          var guages_1 = [];
           guages.push({
               x: 50,
               y: 50,
@@ -39,61 +50,111 @@
               color: "gray"
           });
 
+          var guages_2 = guages_1;
+          
           //animate();
       }
 
-      function drawAll(percent) {
+      function drawAll(percent, target) {
 
-          // clear the canvas
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if (target == 1) {
+            // clear the canvas
+            ctx_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
 
-          // draw all the guages
-          render(guages[0], percent);
+            // draw all the guages
+            render(guages_1[0], percent, 1);
+          }
+          else {
+            // clear the canvas
+            ctx_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
+
+            // draw all the guages
+            render(guages_2[0], percent, 2);
+          }
       }
+      
+      
 
-      function render(guage, percent) {
+      function render(guage, percent, target) {
+        
           var pct = percent / 100;
           var extent = parseInt((guage.end - guage.start) * pct);
           var current = (guage.end - guage.start) / 100 * PI2 * pct - quart;
-          ctx.beginPath();
-          ctx.arc(guage.x, guage.y, guage.radius, -quart, current);
-          ctx.strokeStyle = guage.color;
-          ctx.stroke();
-          ctx.fillStyle = guage.color;
-          ctx.fillText(extent, guage.x - 15, guage.y + 5);
+          if (target == 1) {
+            ctx_1.beginPath();
+            ctx_1.arc(guage.x, guage.y, guage.radius, -quart, current);
+            ctx_1.strokeStyle = guage.color;
+            ctx_1.stroke();
+            ctx_1.fillStyle = guage.color;
+            ctx_1.fillText(extent, guage.x - 15, guage.y + 5);
+          }
+          else {
+            ctx_2.beginPath();
+            ctx_2.arc(guage.x, guage.y, guage.radius, -quart, current);
+            ctx_2.strokeStyle = guage.color;
+            ctx_2.stroke();
+            ctx_2.fillStyle = guage.color;
+            ctx_2.fillText(extent, guage.x - 15, guage.y + 5);
+          }
       }
 
 
-      function animate() {
+      function animate_1() {
 
           // if the animation is not 100% then request another frame
 
-          if (percent < 100) {
-              requestAnimationFrame(animate);
+          if (percent_1 < 100) {
+              requestAnimationFrame(animate_1);
           }
 
           // redraw all guages with the current percent
 
-          drawAll(percent);
+          drawAll(percent, 1);
 
           // increase percent for the next frame
 
-          percent += 1;
+          percent_1 += 1;
+
+      }
+      
+      function animate_2() {
+
+          // if the animation is not 100% then request another frame
+
+          if (percent_2 < 100) {
+              requestAnimationFrame(animate_2);
+          }
+
+          // redraw all guages with the current percent
+
+          drawAll(percent, 2);
+
+          // increase percent for the next frame
+
+          percent_2 += 1;
 
       }
 
 
-      function drawCircle() {
+      function drawCircle(target) {
 
-        if (canvasPresent) {
-          percent = 0;
-          animate();
-        }
+        
+          if (canvasPresent) {
+            if (target == 1) {
+              percent_1 = 0;
+              animate_1();
+            }
+            else {
+              percent_2 = 0;
+              animate_2();
+            }
+          }
+        
       }
 
 
       $("#again").click(function () {
-          drawCircle();
+          drawCircle(1);
       });
        
        
@@ -109,14 +170,23 @@
        
       timerEmbed = timerAddConf = null; 
        
-      $(".embed .link, .add-conf .link").mouseenter(function(){
+      $(".embed .link").mouseenter(function(){
         
         //$(this).find(".open").css('visibility', 'visible');
-        drawCircle();
+        drawCircle(1);
         $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         //console.log('click!!!');
       });
 
+
+      $(".add-conf .link").mouseenter(function(){
+        
+        //$(this).find(".open").css('visibility', 'visible');
+        drawCircle(2);
+        $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+        //console.log('click!!!');
+      });
+      
 
       $(".embed .link .open").mouseleave(function() {
       
@@ -124,7 +194,7 @@
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
         timerEmbed = setTimeout(function() {
             // clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
             $(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
           }
           , 1000);
@@ -139,7 +209,7 @@
         //timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
         timerAddConf = setTimeout(function() {
             // clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
             $(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
           }
           , 1000);
