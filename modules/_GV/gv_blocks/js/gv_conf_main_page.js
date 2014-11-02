@@ -120,8 +120,14 @@
 
       $(".embed .link .open").mouseleave(function() {
       
+        
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
-        timerEmbed = setTimeout(function() {$(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);}, 1000);
+        timerEmbed = setTimeout(function() {
+            // clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            $(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
+          }
+          , 1000);
         //console.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
@@ -131,7 +137,12 @@
       $(".add-conf .link .open").mouseleave(function(){ 
       
         //timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
-        timerAddConf = setTimeout(function() {$(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);}, 1000);
+        timerAddConf = setTimeout(function() {
+            // clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            $(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
+          }
+          , 1000);
         //console.log(timerAddConf);
         //$(this).css('visibility', 'hidden');
       });
