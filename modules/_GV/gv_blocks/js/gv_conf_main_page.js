@@ -5,90 +5,96 @@
        
        
        
+      canvasPresent = false;  
        
-       
-var canvas = document.getElementById("link-1");
+      var canvas = document.getElementById("link-1");
 
-if (canvas.getContext){ 
-         
-       
-    var ctx = canvas.getContext("2d");
+      if (canvas.getContext){ 
 
-    // set context styles
-    ctx.lineWidth = 15;
-    ctx.background = "red";
-    //ctx.strokeStyle = '#85c3b8';
-    //ctx.shadowColor = "black"
-    //ctx.shadowOffsetX = 0;
-    //ctx.shadowOffsetY = 0;
-    //ctx.shadowBlur = 0;
-    ctx.font = "12px verdana";
+          canvasPresent = true;
 
-    var quart = Math.PI / 2;
-    var PI2 = Math.PI * 2;
-    var percent = 0;
+          var ctx = canvas.getContext("2d");
 
-    var guages = [];
-    guages.push({
-        x: 50,
-        y: 50,
-        radius: 40,
-        start: 0,
-        end: 100,
-        color: "gray"
-    });
+          // set context styles
+          ctx.lineWidth = 15;
+          ctx.background = "red";
+          //ctx.strokeStyle = '#85c3b8';
+          //ctx.shadowColor = "black"
+          //ctx.shadowOffsetX = 0;
+          //ctx.shadowOffsetY = 0;
+          //ctx.shadowBlur = 0;
+          ctx.font = "12px verdana";
 
+          var quart = Math.PI / 2;
+          var PI2 = Math.PI * 2;
+          var percent = 0;
 
-    animate();
-}
+          var guages = [];
+          guages.push({
+              x: 50,
+              y: 50,
+              radius: 40,
+              start: 0,
+              end: 100,
+              color: "gray"
+          });
 
-function drawAll(percent) {
+          //animate();
+      }
 
-    // clear the canvas
+      function drawAll(percent) {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+          // clear the canvas
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // draw all the guages
+          // draw all the guages
+          render(guages[0], percent);
+      }
 
-     render(guages[0], percent);
-    
-}
-
-function render(guage, percent) {
-    var pct = percent / 100;
-    var extent = parseInt((guage.end - guage.start) * pct);
-    var current = (guage.end - guage.start) / 100 * PI2 * pct - quart;
-    ctx.beginPath();
-    ctx.arc(guage.x, guage.y, guage.radius, -quart, current);
-    ctx.strokeStyle = guage.color;
-    ctx.stroke();
-    ctx.fillStyle = guage.color;
-    ctx.fillText(extent, guage.x - 15, guage.y + 5);
-}
+      function render(guage, percent) {
+          var pct = percent / 100;
+          var extent = parseInt((guage.end - guage.start) * pct);
+          var current = (guage.end - guage.start) / 100 * PI2 * pct - quart;
+          ctx.beginPath();
+          ctx.arc(guage.x, guage.y, guage.radius, -quart, current);
+          ctx.strokeStyle = guage.color;
+          ctx.stroke();
+          ctx.fillStyle = guage.color;
+          ctx.fillText(extent, guage.x - 15, guage.y + 5);
+      }
 
 
-function animate() {
+      function animate() {
 
-    // if the animation is not 100% then request another frame
+          // if the animation is not 100% then request another frame
 
-    if (percent < 100) {
-        requestAnimationFrame(animate);
-    }
+          if (percent < 100) {
+              requestAnimationFrame(animate);
+          }
 
-    // redraw all guages with the current percent
+          // redraw all guages with the current percent
 
-    drawAll(percent);
+          drawAll(percent);
 
-    // increase percent for the next frame
+          // increase percent for the next frame
 
-    percent += 1;
+          percent += 1;
 
-}
+      }
 
-$("#again").click(function () {
-    percent = 0;
-    animate();
-});
+
+      function drawCircle() {
+
+        if (canvasPresent) {
+          percent = 0;
+          animate();
+        }
+      }
+
+
+      $("#again").click(function () {
+          drawCircle();
+      });
        
        
        
@@ -106,6 +112,7 @@ $("#again").click(function () {
       $(".embed .link, .add-conf .link").mouseenter(function(){
         
         //$(this).find(".open").css('visibility', 'visible');
+        drawCircle();
         $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         //console.log('click!!!');
       });
