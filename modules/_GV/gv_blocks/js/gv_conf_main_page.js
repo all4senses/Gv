@@ -24,8 +24,8 @@
       window.requestAnimationFrame = requestAnimationFrame;
     })();
  
-    var radius = 20;
-    var lineThickness = 6;
+    var radius = 18;
+    var lineThickness = 5;
     var lineColor = 'white';
     var counterClockwise = false;
     var circ = Math.PI * 2;
