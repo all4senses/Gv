@@ -4,7 +4,7 @@
     attach: function (context, settings) {
        
        
-    console.log('1111');
+    //console.log('1111');
     
  // requestAnimationFrame Shim
  
@@ -37,7 +37,7 @@
     var y_1 = canvas_1.height / 2;
     var endPercent_1 = 120;
     var curPerc_1 = 0;
-    context_1.lineWidth = 20;
+    context_1.lineWidth = 3;
     context_1.strokeStyle = 'white';//'#ad2323';
     //context_1.shadowOffsetX = 0;
     //context_1.shadowOffsetY = 0;
@@ -49,7 +49,7 @@
     var y_2 = canvas_2.height / 2;
     var endPercent_2 = 120;
     var curPerc_2 = 0;
-    context_2.lineWidth = 20;
+    context_2.lineWidth = 3;
     context_2.strokeStyle = 'white';//'#ad2323';
     //context_2.shadowOffsetX = 0;
     //context_2.shadowOffsetY = 0;
