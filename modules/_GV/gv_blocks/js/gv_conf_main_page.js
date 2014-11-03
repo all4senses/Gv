@@ -235,6 +235,7 @@ var canvas = document.getElementById('myCanvas');
         
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(1);
+        animate();
         $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         //console.log('click!!!');
       });
@@ -255,6 +256,7 @@ var canvas = document.getElementById('myCanvas');
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
         timerEmbed = setTimeout(function() {
             // clear the canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
             ////ctx_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
             $(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
           }
