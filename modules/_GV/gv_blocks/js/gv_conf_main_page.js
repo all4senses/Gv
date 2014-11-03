@@ -4,19 +4,69 @@
     attach: function (context, settings) {
        
        
-       
-      $('#circle').circleProgress({
-          value: 0.75,
-          size: 80,
-          fill: {
-              gradient: ["red", "orange"]
-          }
-      });
+    
+    
+    // requestAnimationFrame Shim
+(function() {
+  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  window.requestAnimationFrame = requestAnimationFrame;
+})();
+ 
+
+var canvas = document.getElementById('myCanvas');
+ var context = canvas.getContext('2d');
+ var x = canvas.width / 2;
+ var y = canvas.height / 2;
+ var radius = 55;
+ var endPercent = 120;
+ var curPerc = 0;
+ var counterClockwise = false;
+ var circ = Math.PI * 2;
+ var quart = Math.PI / 2;
+
+ context.lineWidth = 20;
+ context.strokeStyle = 'red';//'#ad2323';
+ //context.shadowOffsetX = 0;
+ //context.shadowOffsetY = 0;
+ //context.shadowBlur = 10;
+ //context.shadowColor = '#656565';
+
+
+ function animate(current) {
+     context.clearRect(0, 0, canvas.width, canvas.height);
+     context.beginPath();
+     context.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
+     context.stroke();
+     curPerc+= 10;
+     if (curPerc < endPercent) {
+         requestAnimationFrame(function () {
+             animate(curPerc / 100)
+         });
+     }
+     
+     else {
+         console.log('xxx1');
+     }
+     
+ }
+
+ animate();
+ 
+ 
+ 
+    
+    
     
     
        
+       
+      // http://stackoverflow.com/questions/21765240/loading-circle-through-canvas
+      
       canvasPresent = false;  
-       
+      
+      
+      /*
       var canvas_1 = document.getElementById("link-1");
       var canvas_2 = document.getElementById("link-2");
 
@@ -169,7 +219,7 @@
       });
        
        
-       
+      */ 
        
        
        
@@ -184,7 +234,7 @@
       $(".embed .link").mouseenter(function(){
         
         //$(this).find(".open").css('visibility', 'visible');
-        drawCircle(1);
+        ////drawCircle(1);
         $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         //console.log('click!!!');
       });
@@ -193,7 +243,7 @@
       $(".add-conf .link").mouseenter(function(){
         
         //$(this).find(".open").css('visibility', 'visible');
-        drawCircle(2);
+        ////drawCircle(2);
         $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         //console.log('click!!!');
       });
@@ -205,7 +255,7 @@
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
         timerEmbed = setTimeout(function() {
             // clear the canvas
-            ctx_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
+            ////ctx_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
             $(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
           }
           , 1000);
@@ -220,7 +270,7 @@
         //timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
         timerAddConf = setTimeout(function() {
             // clear the canvas
-            ctx_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
+            ////ctx_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
             $(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
           }
           , 1000);
