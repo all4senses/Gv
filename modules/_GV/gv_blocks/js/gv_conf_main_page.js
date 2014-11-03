@@ -5,6 +5,16 @@
        
        
        
+      $('#circle').circleProgress({
+          value: 0.75,
+          size: 80,
+          fill: {
+              gradient: ["red", "orange"]
+          }
+      });
+    
+    
+       
       canvasPresent = false;  
        
       var canvas_1 = document.getElementById("link-1");
