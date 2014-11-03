@@ -6,52 +6,102 @@
        
     
     
-    // requestAnimationFrame Shim
-(function() {
-  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-  window.requestAnimationFrame = requestAnimationFrame;
-})();
+ // requestAnimationFrame Shim
  
+ canvasPresent = false;  
 
-var canvas = document.getElementById('myCanvas');
- var context = canvas.getContext('2d');
- var x = canvas.width / 2;
- var y = canvas.height / 2;
- var radius = 55;
- var endPercent = 120;
- var curPerc = 0;
- var counterClockwise = false;
- var circ = Math.PI * 2;
- var quart = Math.PI / 2;
+ var canvas_1 = document.getElementById('link-1');
+ 
+ if (canvas_1.getContext){ 
+   
+    canvasPresent = true;  
+   
+    (function() {
+      var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                                  window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      window.requestAnimationFrame = requestAnimationFrame;
+    })();
+ 
+    var radius = 55;
+    var counterClockwise = false;
+    var circ = Math.PI * 2;
+    var quart = Math.PI / 2;
+ 
+    var canvas_2 = document.getElementById('link-2');
+ 
+    var context_1 = canvas_1.getContext('2d');
+    var x_1 = canvas_1.width / 2;
+    var y_1 = canvas_1.height / 2;
+    var endPercent_1 = 120;
+    var curPerc_1 = 0;
+    context_1.lineWidth = 20;
+    context_1.strokeStyle = 'red';//'#ad2323';
+    //context_1.shadowOffsetX = 0;
+    //context_1.shadowOffsetY = 0;
+    //context_1.shadowBlur = 10;
+    //context_1.shadowColor = '#656565';
+    
+    var context_2 = canvas_2.getContext('2d');
+    var x_2 = canvas_2.width / 2;
+    var y_2 = canvas_2.height / 2;
+    var endPercent_2 = 120;
+    var curPerc_2 = 0;
+    context_2.lineWidth = 20;
+    context_2.strokeStyle = 'red';//'#ad2323';
+    //context_2.shadowOffsetX = 0;
+    //context_2.shadowOffsetY = 0;
+    //context_2.shadowBlur = 10;
+    //context_2.shadowColor = '#656565';
 
- context.lineWidth = 20;
- context.strokeStyle = 'red';//'#ad2323';
- //context.shadowOffsetX = 0;
- //context.shadowOffsetY = 0;
- //context.shadowBlur = 10;
- //context.shadowColor = '#656565';
+ }
 
 
- function animate(current) {
-     context.clearRect(0, 0, canvas.width, canvas.height);
-     context.beginPath();
-     context.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
-     context.stroke();
-     curPerc+= 10;
-     if (curPerc < endPercent) {
+ function animate_1(current) {
+     context_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
+     context_1.beginPath();
+     context_1.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
+     context_1.stroke();
+     curPerc_1+= 10;
+     if (curPerc_1 < endPercent_1) {
          requestAnimationFrame(function () {
-             animate(curPerc / 100)
+             animate_1(curPerc_1 / 100)
          });
      }
-     
      else {
-         console.log('xxx1');
+         console.log('link-1 finished.');
      }
      
  }
+ 
+ function animate_2(current) {
+     context_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
+     context_2.beginPath();
+     context_2.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
+     context_2.stroke();
+     curPerc_2+= 10;
+     if (curPerc_2 < endPercent_2) {
+         requestAnimationFrame(function () {
+             animate_2(curPerc_2 / 100)
+         });
+     }
+     else {
+         console.log('link-2 finished.');
+     }
+     
+ }
+ 
+ function clearCircle(target_num) {
+   if (target_num == 1) {
+      context_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
+      curPerc_1 = 0;
+   }
+   else {
+     context_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
+     curPerc_2 = 0;
+   }
+ }
 
- //animate();
+ //animate_1();
  
  
  
@@ -63,7 +113,7 @@ var canvas = document.getElementById('myCanvas');
        
       // http://stackoverflow.com/questions/21765240/loading-circle-through-canvas
       
-      canvasPresent = false;  
+      
       
       
       /*
@@ -230,14 +280,18 @@ var canvas = document.getElementById('myCanvas');
        
        
       timerEmbed = timerAddConf = null; 
+      addConf_hidden = timerEmbed_hidden = true;
        
       $(".embed .link").mouseenter(function(){
         
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(1);
-        curPerc = 0;
-        animate();
-        $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+        if (embed_hidden) {
+          //curPerc_1 = 0;
+          animate_1();
+          $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+        }
+        embed_hidden = false;
         //console.log('click!!!');
       });
 
@@ -246,7 +300,12 @@ var canvas = document.getElementById('myCanvas');
         
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(2);
-        $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+        if (addConf_hidden) {
+          //curPerc_2 = 0;
+          animate_2();
+          $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+        }
+        addConf_hidden = true;
         //console.log('click!!!');
       });
       
@@ -257,9 +316,10 @@ var canvas = document.getElementById('myCanvas');
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
         timerEmbed = setTimeout(function() {
             // clear the canvas
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            clearCircle(1);
             ////ctx_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
             $(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
+            embed_hidden = true;
           }
           , 1000);
         //console.log(timerEmbed);
@@ -273,8 +333,10 @@ var canvas = document.getElementById('myCanvas');
         //timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
         timerAddConf = setTimeout(function() {
             // clear the canvas
+            clearCircle(2);
             ////ctx_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
             $(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
+            addConf_hidden = true;
           }
           , 1000);
         //console.log(timerAddConf);
