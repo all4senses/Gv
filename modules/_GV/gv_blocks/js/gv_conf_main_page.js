@@ -11,6 +11,7 @@
  canvasPresent = false;  
 
  var canvas_1 = document.getElementById('link-1');
+ var canvas_2 = document.getElementById('link-2');
  
  //if (canvas_1.getContext)
  //{ 
@@ -28,7 +29,7 @@
     var circ = Math.PI * 2;
     var quart = Math.PI / 2;
  
-    var canvas_2 = document.getElementById('link-2');
+    
  
     var context_1 = canvas_1.getContext('2d');
     var x_1 = canvas_1.width / 2;
@@ -60,7 +61,7 @@
  function animate_1(current) {
      context_1.clearRect(0, 0, canvas_1.width, canvas_1.height);
      context_1.beginPath();
-     context_1.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
+     context_1.arc(x_1, y_1, radius, -(quart), ((circ) * current) - quart, false);
      context_1.stroke();
      curPerc_1+= 10;
      if (curPerc_1 < endPercent_1) {
@@ -77,7 +78,7 @@
  function animate_2(current) {
      context_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
      context_2.beginPath();
-     context_2.arc(x, y, radius, -(quart), ((circ) * current) - quart, false);
+     context_2.arc(x_2, y_2, radius, -(quart), ((circ) * current) - quart, false);
      context_2.stroke();
      curPerc_2+= 10;
      if (curPerc_2 < endPercent_2) {
@@ -288,7 +289,8 @@
         console.log('Embed hover');
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(1);
-        if (embed_hidden) {
+        if (embed_hidden) 
+        {
           //curPerc_1 = 0;
           animate_1(0);
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
