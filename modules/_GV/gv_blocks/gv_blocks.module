@@ -9399,6 +9399,12 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
     );
   
   
+  drupal_add_library('system', 'ui.core');
+  //drupal_add_library('system', 'ui.widget');
+  //drupal_add_library('system', 'ui.position'); 
+  drupal_add_library('system', 'effects.bounce');
+  
+  
   // Add some Google fonts.
   // <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
   gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Lato:300,400,700', 'NA', 'text/css');
