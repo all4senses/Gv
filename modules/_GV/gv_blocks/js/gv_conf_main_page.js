@@ -12,8 +12,8 @@
 
  var canvas_1 = document.getElementById('link-1');
  
- 
- 
+ // http://stackoverflow.com/questions/15692353/animate-a-canvas-circle-to-draw-on-load
+ // http://jsfiddle.net/loktar/uhVj6/4/
  if (canvas_1.getContext) { 
    
     canvasPresent = true;  
@@ -74,7 +74,7 @@
      }
      else {
          //console.log('link-1 finished.');
-         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200, "linear");
      }
      
  }
@@ -120,9 +120,7 @@
        
        
       // http://stackoverflow.com/questions/21765240/loading-circle-through-canvas
-      
-      
-      
+      // http://jsfiddle.net/m1erickson/mYKp5/
       
       /*
       var canvas_1 = document.getElementById("link-1");
