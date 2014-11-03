@@ -280,7 +280,7 @@
        
        
       timerEmbed = timerAddConf = null; 
-      addConf_hidden = timerEmbed_hidden = true;
+      embed_hidden = addConf_hidden = true;
        
       $(".embed .link").mouseenter(function(){
         
