@@ -292,7 +292,7 @@
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         embed_hidden = false;
-        //console.log('click!!!');
+        console.log('Embed hover');
       });
 
 
@@ -306,7 +306,7 @@
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         addConf_hidden = false;
-        //console.log('click!!!');
+        console.log('addConf hover');
       });
       
 
