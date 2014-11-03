@@ -4,7 +4,7 @@
     attach: function (context, settings) {
        
        
-    
+    console.log('1111');
     
  // requestAnimationFrame Shim
  
@@ -12,7 +12,8 @@
 
  var canvas_1 = document.getElementById('link-1');
  
- if (canvas_1.getContext){ 
+ //if (canvas_1.getContext)
+ //{ 
    
     canvasPresent = true;  
    
@@ -53,7 +54,7 @@
     //context_2.shadowBlur = 10;
     //context_2.shadowColor = '#656565';
 
- }
+ //}
 
 
  function animate_1(current) {
@@ -284,6 +285,7 @@
        
       $(".embed .link").mouseenter(function(){
         
+        console.log('Embed hover');
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(1);
         if (embed_hidden) {
@@ -292,11 +294,13 @@
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         embed_hidden = false;
-        console.log('Embed hover');
+        
       });
 
 
       $(".add-conf .link").mouseenter(function(){
+        
+        console.log('addConf hover');
         
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(2);
@@ -306,7 +310,7 @@
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         addConf_hidden = false;
-        console.log('addConf hover');
+        
       });
       
 

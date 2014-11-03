@@ -38,7 +38,7 @@
                     . 'ADD CONFERENCE<div class="hidden open"><div class="icon"></div><div class="data"><a href="mailto:contact@getvoip.com?subject=Add Conference" target="_blank">EMAIL US</a><span>contact@getvoip.com</span></div></div></div></div>',
                     '</td></tr>',
 
-                    '<tr><td class="footer"><canvas id="myCanvas" width="250" height="250"></canvas>© Copyright 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
+                    '<tr><td class="footer">© Copyright 2014 GetVoIP.com | All Rights Reserved</div></td></tr>',
                     
                  '</tbody></table>';
 
