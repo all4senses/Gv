@@ -71,6 +71,7 @@
      }
      else {
          console.log('link-1 finished.');
+         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
      }
      
  }
@@ -294,7 +295,9 @@
         {
           //curPerc_1 = 0;
           animate_1();
-          $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+          //$(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+          ////$(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+          
         }
         embed_hidden = false;
         
