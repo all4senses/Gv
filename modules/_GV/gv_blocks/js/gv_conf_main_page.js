@@ -80,7 +80,7 @@
  }
  
  function animate_2(current) {
-   console.log('a2 ' +  current);
+    //console.log('a2 ' +  current);
      context_2.clearRect(0, 0, canvas_2.width, canvas_2.height);
      context_2.beginPath();
      context_2.arc(x_2, y_2, radius, -(quart), ((circ) * current) - quart, false);
@@ -323,7 +323,8 @@
       });
       
 
-      $(".embed .link .open").mouseleave(function() {
+      //$(".embed .link .open, .embed .link").mouseleave(function() {
+      $(".embed .link").mouseleave(function() {
       
         
         //timerEmbed = setTimeout(function() {$(".embed .link .open").css('visibility', 'hidden');}, 1000);
