@@ -235,6 +235,7 @@ var canvas = document.getElementById('myCanvas');
         
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(1);
+        curPerc = 0;
         animate();
         $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         //console.log('click!!!');
