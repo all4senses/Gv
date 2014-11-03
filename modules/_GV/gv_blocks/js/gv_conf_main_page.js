@@ -25,7 +25,7 @@
     })();
  
     var radius = 16;
-    var lineThickness = 5;
+    var lineThickness = 6;
     var lineColor = 'white';
     var counterClockwise = false;
     var circ = Math.PI * 2;
