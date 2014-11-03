@@ -13,6 +13,7 @@
  var canvas_1 = document.getElementById('link-1');
  
  
+ 
  if (canvas_1.getContext) { 
    
     canvasPresent = true;  
@@ -23,11 +24,11 @@
       window.requestAnimationFrame = requestAnimationFrame;
     })();
  
-    var radius = 55;
+    var radius = 10;
     var counterClockwise = false;
     var circ = Math.PI * 2;
     var quart = Math.PI / 2;
- 
+    var percentsStep = 2;
     
     var canvas_2 = document.getElementById('link-2');
  
@@ -37,7 +38,7 @@
     var endPercent_1 = 120;
     var curPerc_1 = 0;
     context_1.lineWidth = 20;
-    context_1.strokeStyle = 'red';//'#ad2323';
+    context_1.strokeStyle = 'white';//'#ad2323';
     //context_1.shadowOffsetX = 0;
     //context_1.shadowOffsetY = 0;
     //context_1.shadowBlur = 10;
@@ -49,7 +50,7 @@
     var endPercent_2 = 120;
     var curPerc_2 = 0;
     context_2.lineWidth = 20;
-    context_2.strokeStyle = 'red';//'#ad2323';
+    context_2.strokeStyle = 'white';//'#ad2323';
     //context_2.shadowOffsetX = 0;
     //context_2.shadowOffsetY = 0;
     //context_2.shadowBlur = 10;
@@ -63,14 +64,14 @@
      context_1.beginPath();
      context_1.arc(x_1, y_1, radius, -(quart), ((circ) * current) - quart, false);
      context_1.stroke();
-     curPerc_1+= 10;
+     curPerc_1+= percentsStep;
      if (curPerc_1 < endPercent_1) {
          requestAnimationFrame(function () {
              animate_1(curPerc_1 / 100)
          });
      }
      else {
-         console.log('link-1 finished.');
+         //console.log('link-1 finished.');
          $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
      }
      
@@ -82,14 +83,15 @@
      context_2.beginPath();
      context_2.arc(x_2, y_2, radius, -(quart), ((circ) * current) - quart, false);
      context_2.stroke();
-     curPerc_2+= 10;
+     curPerc_2+= percentsStep;
      if (curPerc_2 < endPercent_2) {
          requestAnimationFrame(function () {
              animate_2(curPerc_2 / 100)
          });
      }
      else {
-         console.log('link-2 finished.');
+         //console.log('link-2 finished.');
+         $(".add-conf .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
      }
      
  }
@@ -313,7 +315,8 @@
         if (addConf_hidden) {
           //curPerc_2 = 0;
           animate_2();
-          $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+          //$(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
+          ////$(".add-conf .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         addConf_hidden = false;
         
