@@ -290,7 +290,7 @@
         ////drawCircle(1);
         if (embed_hidden) {
           //curPerc_1 = 0;
-          //animate_1();
+          animate_1(0);
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         embed_hidden = false;
