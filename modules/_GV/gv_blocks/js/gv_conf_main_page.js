@@ -51,7 +51,7 @@ var canvas = document.getElementById('myCanvas');
      
  }
 
- animate();
+ //animate();
  
  
  
