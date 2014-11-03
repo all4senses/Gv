@@ -11,10 +11,9 @@
  canvasPresent = false;  
 
  var canvas_1 = document.getElementById('link-1');
- var canvas_2 = document.getElementById('link-2');
  
- //if (canvas_1.getContext)
- //{ 
+ 
+ if (canvas_1.getContext) { 
    
     canvasPresent = true;  
    
@@ -30,6 +29,7 @@
     var quart = Math.PI / 2;
  
     
+    var canvas_2 = document.getElementById('link-2');
  
     var context_1 = canvas_1.getContext('2d');
     var x_1 = canvas_1.width / 2;
@@ -286,13 +286,13 @@
        
       $(".embed .link").mouseenter(function(){
         
-        console.log('Embed hover');
+        //console.log('Embed hover');
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(1);
         if (embed_hidden) 
         {
           //curPerc_1 = 0;
-          animate_1(0);
+          animate_1();
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         embed_hidden = false;
@@ -302,13 +302,13 @@
 
       $(".add-conf .link").mouseenter(function(){
         
-        console.log('addConf hover');
+        //console.log('addConf hover');
         
         //$(this).find(".open").css('visibility', 'visible');
         ////drawCircle(2);
         if (addConf_hidden) {
           //curPerc_2 = 0;
-          //animate_2();
+          animate_2();
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
         addConf_hidden = false;
