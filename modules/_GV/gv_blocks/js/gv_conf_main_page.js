@@ -341,8 +341,8 @@
       });
       
       
-      
-      $(".add-conf .link .open").mouseleave(function(){ 
+      //$(".add-conf .link .open").mouseleave(function(){ 
+      $(".add-conf .link").mouseleave(function(){ 
       
         //timerAddConf = setTimeout(function() {$(".add-conf .link .open").css('visibility', 'hidden');}, 1000);
         timerAddConf = setTimeout(function() {
