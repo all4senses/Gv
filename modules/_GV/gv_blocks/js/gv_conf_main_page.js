@@ -305,7 +305,7 @@
           animate_2();
           $(this).find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 200);
         }
-        addConf_hidden = true;
+        addConf_hidden = false;
         //console.log('click!!!');
       });
       
