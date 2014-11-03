@@ -74,7 +74,7 @@
      }
      else {
          //console.log('link-1 finished.');
-         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeInBounce");
+         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeOutBounce");
      }
      
  }
