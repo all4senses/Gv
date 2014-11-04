@@ -215,13 +215,13 @@
                 }
                 */
                 
-                global $user;
-                if ($user->uid == 1) {
+//                global $user;
+//                if ($user->uid == 1) {
                   echo '<h2>Top 5 Rated Business Phone Providers:</h2>', gv_blocks_get_topProvidersForLP('Top 5');
-                }
-                else {
-                  echo '<h2>Supported by Major Brands:</h2><img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
-                }
+//                }
+//                else {
+//                  echo '<h2>Supported by Major Brands:</h2><img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
+//                }
 
             ?>
 
