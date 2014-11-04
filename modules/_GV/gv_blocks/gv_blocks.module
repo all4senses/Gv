@@ -9493,7 +9493,7 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     $query->range(0, 5);
     //$top5 = $query->execute()->fetchAllAssoc('entity_id'); 
     $top5 = $query->execute()->fetchCol(); 
-    dpm($top5);
+    //dpm($top5);
     //dpm(array('data' => (object) array('nid' => 12)));
     
     $out = '<table><tbody><tr>';
