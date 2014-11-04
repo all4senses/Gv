@@ -166,8 +166,8 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
-          textNext: 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          textSubmit : 'Compare Your Savings Now!', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          textNext: 'Compare Your Savings Now!', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
