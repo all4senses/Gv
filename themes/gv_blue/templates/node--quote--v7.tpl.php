@@ -168,7 +168,7 @@
 
 
 
-      
+      <?php /*
       <div class="full bottom">
 
           <div id="bottom">
@@ -193,7 +193,7 @@
           </div>
 
       </div> <!-- of Full --> 
-      
+      */?>
       
       
       <div class="full brands">
