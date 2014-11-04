@@ -215,6 +215,10 @@
                 }
                 */
                 echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
+                global $user;
+                if ($user->uid == 1) {
+                  echo gv_blocks_get_topProvidersForLP('Top 5');
+                }
 
             ?>
 
