@@ -199,7 +199,7 @@
       <div class="full brands">
           
           <div id="brands">
-            <h2>Supported by Major Brands:</h2>
+            
             <?php
                 /*
                 if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
@@ -214,10 +214,13 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
+                
                 global $user;
                 if ($user->uid == 1) {
                   echo gv_blocks_get_topProvidersForLP('Top 5');
+                }
+                else {
+                  echo '<h2>Supported by Major Brands:</h2><img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
                 }
 
             ?>
