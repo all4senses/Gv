@@ -9623,8 +9623,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       $current_url = $_SERVER['REDIRECT_URL'];
       //$current_url = explode('?', $current_url);
       
-      dpm('$current_url = ' . $current_url);
-      dpm($_SERVER);
+      
+      //dpm($_SERVER);
       
       if (isset($url_to_sprite[$current_url]) || $_GET['q'] == 'home') {
       
@@ -9680,7 +9680,7 @@ function gv_misc_getProviderQuickData($target, $data) {
           return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 // Provider name with a link to provider page
                  ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
-                 . gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
+                 . ($current_url == '/service-quotes' ? '' : gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']))
                 ;
           
         }
@@ -9743,8 +9743,8 @@ function gv_misc_getProviderQuickData($target, $data) {
         }
       }
       
-      if ($target == 'logo_chart' && $current_url != '/service-quotes') {
-        dpm($current_url);
+      if ($target == 'logo_chart') {
+
            // Provider name with a link to provider page
           //$out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))));
           $out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
