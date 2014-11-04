@@ -16,7 +16,7 @@
 
 
 
-<div id="v7">
+<div id="v7" class="us">
   <div id="quote-content">
 
     
