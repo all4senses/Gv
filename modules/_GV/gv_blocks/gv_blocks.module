@@ -9496,13 +9496,13 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     dpm($top5);
     //dpm(array('data' => (object) array('nid' => 12)));
     
-    $out = '';
+    $out = '<table><tbody><tr>';
     foreach ($top5 as $nid) {
       $logo = gv_misc_getProviderQuickData('logo_chart', array('data' => (object) array('nid' => $nid)));
       $out .= $logo;
     }
     //dpm($logo);
     
-    return $out;
+    return $out . '</tr></tbody></table>';
   }
 }
