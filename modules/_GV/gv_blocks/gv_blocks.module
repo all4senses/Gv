@@ -9491,7 +9491,7 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     $query->range(0, 5);
     $top5 = $query->execute()->fetchAllAssoc('entity_id'); 
     dpm($top5);
-    
+    dpm(array('data' => (object) array('nid' => 12)));
     dpm(gv_misc_getProviderQuickData('logo_chart', array('data' => (object) array('nid' => 12))));
   }
 }
