@@ -9482,18 +9482,26 @@ function gv_blocks_get_confMainSearch_form_submit(&$form, &$form_state) {
 
 function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
   if ($type == 'Top 5') {
-    $allProvidersData = gv_misc_getProvidersDataQuick();
-    dpm($allProvidersData);
+    //$allProvidersData = gv_misc_getProvidersDataQuick();
+    //dpm($allProvidersData);
     
     $query = db_select('field_data_field_p_erating', 'r');
-    $query->fields('r', array('entity_id', 'field_p_erating_value'))
+    //$query->fields('r', array('entity_id', 'field_p_erating_value'))
+    $query->fields('r', array('entity_id'))
           ->condition('r.bundle', 'provider');
+    $query->orderBy('r.field_p_erating_value', 'ASC');
     $query->range(0, 5);
-    $top5 = $query->execute()->fetchAllAssoc('entity_id'); 
+    //$top5 = $query->execute()->fetchAllAssoc('entity_id'); 
+    $top5 = $query->execute()->fetchRow(); 
     dpm($top5);
     //dpm(array('data' => (object) array('nid' => 12)));
-    $logo = gv_misc_getProviderQuickData('logo_chart', array('data' => (object) array('nid' => 12)));
-    dpm($logo);
+    
+    $out = '';
+    foreach ($top5 as $nid) {
+      $logo = gv_misc_getProviderQuickData('logo_chart', array('data' => (object) array('nid' => $nid)));
+      $out .= $logo;
+    }
+    //dpm($logo);
     
     return $logo;
   }
