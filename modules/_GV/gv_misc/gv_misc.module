@@ -9624,6 +9624,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       //$current_url = explode('?', $current_url);
       
       
+      
       if (isset($url_to_sprite[$current_url]) || $_GET['q'] == 'home') {
       
         if ($_GET['q'] == 'home') {
@@ -9741,7 +9742,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         }
       }
       
-      if ($target == 'logo_chart') {
+      if ($target == 'logo_chart' && $current_url != '/service-quotes') {
            // Provider name with a link to provider page
           //$out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))));
           $out .= gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
