@@ -728,7 +728,7 @@
  }); 
       
       
- 
+ var save_sw;
  
  $('body').delegate('.conf-title', 'click', function(){
 // Replace with   
@@ -741,7 +741,7 @@
    // Set to return to the side slide window after a colorbox popup will be closed.
    return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
    
-   var save_sw = sw;
+   save_sw = sw;
    sw = 'title';
                         
    get_conf($(this).text());
@@ -750,7 +750,7 @@
  
  
       
- function get_conf(label) {
+ function get_conf(label, temp_sw) {
 
    if ( 'content_conf_' + label in cache ) {
      if (cache[ 'content_conf_' + label ]) {
@@ -793,6 +793,9 @@
               dataType: "json",
               success: function( data ) {
                   
+                  current_sw = save_sw ? save_sw : sw;
+                  save_sw = false;
+                  
                   //console.log(data);
                   $("input#conf").removeClass('ui-autocomplete-loading');
                   
@@ -808,14 +811,14 @@
                   else {
                         // Lists
                         
-                        if (cache[ 'content_' + sw + '_' + label ] = data.out) {
+                        if (cache[ 'content_' + current_sw + '_' + label ] = data.out) {
                           slideInRightWin(data.out);
                         }
 
                   }
                   
                   if (!data.out) {
-                    if (sw == 'title') {
+                    if (current_sw == 'title') {
                       alert('No conference found with a title (or title containing) <' + label + '>');
                     }
                     else {
@@ -834,6 +837,8 @@
                           }
                       })
                   );*/
+                
+                
               }
           });
           
