@@ -12495,7 +12495,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
   $out_array = array();
   
   foreach ($_GET as $key => $value) {
-    $post[$key] = check_plain(strip_tags($value));
+    $post[$key] = $value; // check_plain(strip_tags($value));
   }
   
   $post['term_decoded2'] = utf8_decode($post['term']); //urldecode($post['term']);
@@ -12931,6 +12931,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
         
         $out_array['in'] = $post;
         $out_array['in_2'] = $_GET;
+//        $post['term_decoded2'] = utf8_decode($post['term']); //urldecode($post['term']);
+//  $post['term_decoded3'] = html_entity_decode($post['term']);
+//  //$post['term'] = str_replace('\u0026amp;', '&', $post['term']);
+//  $post['term2'] = str_replace('0026', '&', $post['term']);
+  
   } // End of elseif ($post['op'] == 'get') {
   
   
