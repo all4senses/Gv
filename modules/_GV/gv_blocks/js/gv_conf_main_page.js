@@ -415,6 +415,9 @@
       // Switch the source of autocomplete...
       sw = 'industry';
       search_field_title = 'Search by Industry';
+      
+      return_to_sidewindow = false;
+      
       //$('input[id="conf"]').val('Search by Industry');
       $('input[id="conf"]').attr('title', search_field_title);
 
@@ -734,9 +737,11 @@
    
    slideOutRightWin();
    
+   return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
+   
    var save_sw = sw;
    sw = 'title';
-          
+                        
    get_conf($(this).text());
    sw = save_sw;
  }); 
@@ -852,9 +857,14 @@
      width:550, 
      height:470
      ,onClosed: function() {
-           //console.log('closed...');
-           $("body").css('overflow', 'inherit');
-           turned_off = true;
+            //console.log('closed...');
+            $("body").css('overflow', 'inherit');
+            turned_off = true;
+            // Return to Side Slide window, if the popup was called from a side slide window.
+            if (return_to_sidewindow) {
+               return_to_sidewindow = false;
+               slideInRightWin(return_to_sidewindow);
+            }
           }
    });  
  }
