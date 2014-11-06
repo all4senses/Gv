@@ -750,24 +750,38 @@
  }); 
  
  
-      
+ function return_to_sidewindow_if_needed() {
+    if (return_to_sidewindow) {
+      slideInRightWin(cache[return_to_sidewindow]);
+      return_to_sidewindow = false;
+    }
+ } 
+
  function get_conf(label) {
 
    if ( 'content_conf_' + label in cache ) {
+     save_sw = new_sw = false;
      if (cache[ 'content_conf_' + label ]) {
         showConfInPopUp(cache[ 'content_conf_' + label ]);
      }
      else {
        alert('No conference found with a title (or title containing) <' + label + '>');
+       
+       return_to_sidewindow_if_needed();
      }
      return;
    }
    else if ( 'content_' + sw + '_' + label in cache ) {
+     save_sw = new_sw = false;
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
         //console.log('Get LIST from cache...');
         //console.log($('.cd-member-bio').attr('class'));
-        setTimeout(function() {slideInRightWin(cache[ 'content_' + sw + '_' + label ]);}, 1000);
+        setTimeout(function() {
+          slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
+        }, 1000);
+        
+        return_to_sidewindow = false;
         //slideInRightWin(cache[ 'content_' + sw + '_' + label ]);
      }
      else {
@@ -778,6 +792,8 @@
           else {
             alert('No conferences found tagged with an industry <' + label + '>');
           }
+          
+          return_to_sidewindow_if_needed();
      }
      return;
    }  
@@ -881,10 +897,7 @@
             $("body").css('overflow', 'inherit');
             turned_off = true;
             // Return to Side Slide window, if the popup was called from a side slide window.
-            if (return_to_sidewindow) {
-               slideInRightWin(cache[return_to_sidewindow]);
-               return_to_sidewindow = false;
-            }
+            return_to_sidewindow_if_needed();
           }
    });  
  }
