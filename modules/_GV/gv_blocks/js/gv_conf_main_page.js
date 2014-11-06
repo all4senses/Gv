@@ -744,7 +744,8 @@
    new_sw = 'title';
    save_sw = sw;
    sw = new_sw;
-                        
+            
+   console.log($(this).attr('id'));
    get_conf($(this).text());
    sw = save_sw;
  }); 
@@ -800,6 +801,7 @@
    
    $("input#conf").addClass('ui-autocomplete-loading');
    
+   console.log(label);
    $.ajax({
               url: "get-conferences-ac",
               data: {
