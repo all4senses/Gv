@@ -12499,7 +12499,9 @@ function gv_misc_getConferences_autocomplete_ajax() {
   }
   
   $post['term_decoded2'] = utf8_decode($post['term']); //urldecode($post['term']);
-  $post['term'] = str_replace('\u0026amp;', '&', $post['term']);
+  $post['term_decoded3'] = html_entity_decode($post['term']);
+  //$post['term'] = str_replace('\u0026amp;', '&', $post['term']);
+  $post['term2'] = str_replace('0026', '&', $post['term']);
 
   if (!empty($post['results_num'])) {
     $results_num = $post['results_num'];
