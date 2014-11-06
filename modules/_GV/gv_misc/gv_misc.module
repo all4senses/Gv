@@ -12498,7 +12498,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $post[$key] = check_plain(strip_tags($value));
   }
   
-  $post['term'] = urldecode($post['term']);
+  $post['term_decoded'] = urldecode($post['term']);
 
   if (!empty($post['results_num'])) {
     $results_num = $post['results_num'];
@@ -12695,7 +12695,6 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $out_array = array(
                   'type' => 'conference',
                   'out' => $out_html,
-                  'in' => $post['term'],
               );
             }
             else {
@@ -12816,7 +12815,6 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $out_array = array(
                       'type' => 'list',
                       'out' => $conferences_list,
-                      'in' => $post['term'],
                   );
               }
               
@@ -12928,10 +12926,10 @@ function gv_misc_getConferences_autocomplete_ajax() {
               
         } // End of elseif ($post['type'] == 'industry') {
         
-        
+        $out_array['in'] = $post;
   } // End of elseif ($post['op'] == 'get') {
   
-  $out_array['in'] = $post;
+  
   
   drupal_json_output($out_array);
 
