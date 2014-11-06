@@ -737,7 +737,8 @@
    
    slideOutRightWin();
    
-   console.log(sw + ' ->' + $( "#conf" ).val());
+   //console.log(sw + ' ->' + $( "#conf" ).val());
+   // Set to return to the side slide window after a colorbox popup will be closed.
    return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
    
    var save_sw = sw;
