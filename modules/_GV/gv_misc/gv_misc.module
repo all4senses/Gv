@@ -12655,9 +12655,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 }
                 $url_title = rtrim($url_title, '/');
                 $url = l($url_title, $result->field_conf_link_value, array('external' => TRUE));
+                $more_details_button = l('More Details', $result->field_conf_link_value, array('external' => TRUE, 'attributes' => array('target' => '_blank')));
               }
               else {
                 $url = NULL;
+                $more_details_button = NULL;
               }
               
               if ($result->field_conf_twitter_value) {
@@ -12684,7 +12686,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                     </div>
                     <div class="main">
                       <div class="descr">' . $result->body_value . '</div>
-                      <div class="more">' . l('More', 'node/' . $result->nid) . '</div>
+                      <div class="more">' . /*l('More', 'node/' . $result->nid)*/ $more_details_button . '</div>
                     </div>
                       ';
               
