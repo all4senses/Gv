@@ -12693,7 +12693,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $out_array = array(
                   'type' => 'conference',
                   'out' => $out_html,
-                  
+                  'in' => $post['term'],
               );
             }
             else {
@@ -12814,6 +12814,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $out_array = array(
                       'type' => 'list',
                       'out' => $conferences_list,
+                      'in' => $post['term'],
                   );
               }
               
