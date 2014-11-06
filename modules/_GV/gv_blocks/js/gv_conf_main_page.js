@@ -813,6 +813,7 @@
                         
                         if (cache[ 'content_' + current_sw + '_' + label ] = data.out) {
                           slideInRightWin(data.out);
+                          return_to_sidewindow = false;
                         }
 
                   }
@@ -824,7 +825,14 @@
                     else {
                       alert('No conferences found tagged with an industry <' + label + '>');
                     }
+                    
+                    if (return_to_sidewindow) {
+                      slideInRightWin(cache[return_to_sidewindow]);
+                      return_to_sidewindow = false;
+                    }
                   }
+                  
+                  
   
                   
                   /*
@@ -873,8 +881,8 @@
             turned_off = true;
             // Return to Side Slide window, if the popup was called from a side slide window.
             if (return_to_sidewindow) {
-               return_to_sidewindow = false;
                slideInRightWin(cache[return_to_sidewindow]);
+               return_to_sidewindow = false;
             }
           }
    });  
