@@ -728,7 +728,7 @@
  }); 
       
       
- var save_sw;
+ var save_sw, new_sw;
  
  $('body').delegate('.conf-title', 'click', function(){
 // Replace with   
@@ -741,8 +741,9 @@
    // Set to return to the side slide window after a colorbox popup will be closed.
    return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
    
+   new_sw = 'title';
    save_sw = sw;
-   sw = 'title';
+   sw = new_sw;
                         
    get_conf($(this).text());
    sw = save_sw;
@@ -750,7 +751,7 @@
  
  
       
- function get_conf(label, temp_sw) {
+ function get_conf(label) {
 
    if ( 'content_conf_' + label in cache ) {
      if (cache[ 'content_conf_' + label ]) {
@@ -793,8 +794,8 @@
               dataType: "json",
               success: function( data ) {
                   
-                  current_sw = save_sw ? save_sw : sw;
-                  save_sw = false;
+                  current_sw = new_sw ? new_sw : sw;
+                  save_sw = new_sw = false;
                   
                   //console.log(data);
                   $("input#conf").removeClass('ui-autocomplete-loading');
