@@ -12499,6 +12499,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
   }
   
   $post['term_decoded'] = urldecode($post['term']);
+  $post['term'] = str_replace('\u0026amp;', '&', $post['term']);
 
   if (!empty($post['results_num'])) {
     $results_num = $post['results_num'];
