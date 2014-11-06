@@ -781,6 +781,8 @@
      return;
    }  
    
+   $("input#conf").addClass('ui-autocomplete-loading');
+   
    $.ajax({
               url: "get-conferences-ac",
               data: {
@@ -792,6 +794,8 @@
               success: function( data ) {
                   
                   //console.log(data);
+                  $("input#conf").removeClass('ui-autocomplete-loading');
+                  
                   if (data.type == 'conference') {
                   
                   
