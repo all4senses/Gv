@@ -746,7 +746,7 @@
    sw = new_sw;
             
    console.log($(this).attr('id'));
-   get_conf($(this).text());
+   get_conf($(this).text(), $(this).attr('id'));
    sw = save_sw;
  }); 
  
@@ -758,7 +758,7 @@
     }
  } 
 
- function get_conf(label) {
+ function get_conf(label, id) {
 
    if ( 'content_conf_' + label in cache ) {
      save_sw = new_sw = false;
@@ -807,7 +807,8 @@
               data: {
                 type: sw, //'industry', //op: 'title',
                 op: 'get', 
-                term: label
+                term: label,
+                id: id
               },
               dataType: "json",
               success: function( data ) {

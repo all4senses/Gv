@@ -12497,6 +12497,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
   foreach ($_GET as $key => $value) {
     $post[$key] = check_plain(strip_tags($value));
   }
+  
+  $post['term'] = urldecode($post['term']);
 
   if (!empty($post['results_num'])) {
     $results_num = $post['results_num'];
