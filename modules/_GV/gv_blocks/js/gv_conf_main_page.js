@@ -816,7 +816,7 @@
                   current_sw = new_sw ? new_sw : sw;
                   save_sw = new_sw = false;
                   
-                  console.log(data);
+                  //console.log(data);
                   $("input#conf").removeClass('ui-autocomplete-loading');
                   
                   if (data.type == 'conference') {
