@@ -737,6 +737,7 @@
    
    slideOutRightWin();
    
+   console.log(sw + ' ->' + $( "#conf" ).val());
    return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
    
    var save_sw = sw;
@@ -863,7 +864,7 @@
             // Return to Side Slide window, if the popup was called from a side slide window.
             if (return_to_sidewindow) {
                return_to_sidewindow = false;
-               slideInRightWin(return_to_sidewindow);
+               slideInRightWin(cache[return_to_sidewindow]);
             }
           }
    });  
