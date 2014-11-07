@@ -895,7 +895,7 @@
 
    // Custom background animate - to test/use...
    // http://stackoverflow.com/questions/2760453/jquery-colorbox-background-transition-effect
-   
+   /*
    cb1 = $.fn.colorbox({
      transition: 'fade' , //'elastic',
      speed: 800,
@@ -911,7 +911,52 @@
             // Return to Side Slide window, if the popup was called from a side slide window.
             return_to_sidewindow_if_needed();
           }
-   });  
+   }); 
+   */
+  
+  cb1 = $.fn.colorbox({
+     transition: 'fade' , //'elastic',
+     speed: 800,
+     fadeOut: 1700,
+     inline:true, 
+     href:"#cb-popup_1", 
+     width:550, 
+     height:470
+     
+     ,//added to remove initial flickering
+    opacity : 0,
+    //use the onOpen event...
+    onOpen: function() {
+        // prevent Overlay from being displayed...
+        $('#cboxOverlay,#colorbox').css('visibility', 'hidden');
+        // make the overlay visible and
+        // re-add all it's original properties!
+        $('#cboxOverlay').css({
+            'visibility': 'visible',
+            'opacity': 0.9,
+            'cursor': 'pointer'
+            // execute our original animation on the overlay!
+            // animate it you can use here all the
+            // possible animate combination or plugin...
+        }).animate({
+            height: ['toggle', 'swing'],
+            opacity: 'toggle'
+        }, 1000 , function() {
+            $('#colorbox').css({
+            'visibility': 'visible'
+        }).fadeIn(1000);
+        });
+     }
+     ,onClosed: function() {
+            //console.log('closed...');
+            $("body").css('overflow', 'inherit');
+            turned_off = true;
+            // Return to Side Slide window, if the popup was called from a side slide window.
+            return_to_sidewindow_if_needed();
+          }
+   }); 
+   
+   
  }
  
  
