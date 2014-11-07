@@ -929,8 +929,8 @@
     onOpen: function() {
       
       
-      $("#colorbox").addClass('md-modal md-effect-6');
-            $("#cboxWrapper").addClass('md-content');
+        $("#colorbox").addClass('md-modal md-effect-6');
+        $("#cboxWrapper").addClass('md-content');
             
         // prevent Overlay from being displayed...
         ////$('#cboxOverlay,#colorbox').css('visibility', 'hidden');
@@ -951,7 +951,7 @@
             //opacity: 'toggle'
             opacity: 0.7
         }, 1000 , function() {
-            $('#colorbox')
+            //$('#colorbox')
                 //.css({'visibility': 'visible'})
                 //.fadeIn(1000)
         
@@ -959,14 +959,18 @@
                 ////.animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
                 //.fadeIn(1000)
                 
-                .css({visibility: "visible", display: "block"})
+                //.css({visibility: "visible", display: "block"})
                 ;
             //$("#colorbox").addClass('md-modal md-effect-6');
             //$("#cboxWrapper").addClass('md-content');
-            $("#colorbox").addClass('md-show');
+            
+            // Works!
+            //$("#colorbox").addClass('md-show');
         
                 
-        });
+        }); // End of animate of $('#cboxOverlay')
+        
+        $("#colorbox").addClass('md-show');
      }
      ,onClosed: function() {
             $("#colorbox").removeClass('md-show');
