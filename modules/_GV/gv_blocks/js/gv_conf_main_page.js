@@ -969,6 +969,7 @@
         });
      }
      ,onClosed: function() {
+            $("#colorbox").removeClass('md-show');
             //console.log('closed...');
             $("body").css('overflow', 'inherit');
             turned_off = true;
