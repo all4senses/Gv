@@ -927,8 +927,13 @@
     opacity : 0,
     //use the onOpen event...
     onOpen: function() {
+      
+      
+      $("#colorbox").addClass('md-modal md-effect-6');
+            $("#cboxWrapper").addClass('md-content');
+            
         // prevent Overlay from being displayed...
-        $('#cboxOverlay,#colorbox').css('visibility', 'hidden');
+        ////$('#cboxOverlay,#colorbox').css('visibility', 'hidden');
         // make the overlay visible and
         // re-add all it's original properties!
         $('#cboxOverlay').css({
@@ -956,8 +961,8 @@
                 
                 .css({visibility: "visible", display: "block"})
                 ;
-            $("#colorbox").addClass('md-modal md-effect-6');
-            $("#cboxWrapper").addClass('md-content');
+            //$("#colorbox").addClass('md-modal md-effect-6');
+            //$("#cboxWrapper").addClass('md-content');
             $("#colorbox").addClass('md-show');
         
                 
