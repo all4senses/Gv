@@ -933,7 +933,7 @@
         // re-add all it's original properties!
         $('#cboxOverlay').css({
             'visibility': 'visible',
-            'opacity': 0.9,
+            'opacity': 0.2,
             'height': 0,
             'cursor': 'pointer',
             
@@ -943,7 +943,8 @@
         }).animate({
             //height: ['toggle', 'swing'],
             height: ['100%', 'swing'],
-            opacity: 'toggle'
+            //opacity: 'toggle'
+            opacity: 0.7
         }, 1000 , function() {
             $('#colorbox').css({
             'visibility': 'visible'
