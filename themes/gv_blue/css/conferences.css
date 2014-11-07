@@ -754,10 +754,9 @@ xkeyframes
 
 
 
-
-
-
 /* Effect 6: side fall */
+
+
 
 .md-perspective,
 .md-perspective body {
@@ -772,12 +771,9 @@ xkeyframes
 	perspective: 600px;
 }
 
-.container {
-	background: #e74c3c;
-	min-height: 100%;
-}
 
 .md-modal {
+  /*
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -786,6 +782,7 @@ xkeyframes
 	min-width: 320px;
 	height: auto;
 	z-index: 2000;
+  */
 	visibility: hidden;
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
@@ -815,6 +812,7 @@ xkeyframes
 	-moz-transform: translate(30%) translateZ(600px) rotate(10deg);
 	-ms-transform: translate(30%) translateZ(600px) rotate(10deg);
 	transform: translate(30%) translateZ(600px) rotate(10deg); 
+  transition: all 0.3s ease-in;
 	opacity: 0;
 }
 
@@ -827,4 +825,17 @@ xkeyframes
 	-ms-transform: translate(0%) translateZ(0) rotate(0deg);
 	transform: translate(0%) translateZ(0) rotate(0deg);
 	opacity: 1;
+}
+
+
+
+
+.md-content {
+  /*
+	color: #fff;
+	background: #e74c3c;
+	border-radius: 3px;
+	margin: 0 auto;
+  */
+  position: relative;
 }

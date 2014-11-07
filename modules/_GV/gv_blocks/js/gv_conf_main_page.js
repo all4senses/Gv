@@ -946,15 +946,19 @@
             //opacity: 'toggle'
             opacity: 0.7
         }, 1000 , function() {
-            $('#colorbox')
+            ////$('#colorbox')
                 //.css({'visibility': 'visible'})
                 //.fadeIn(1000)
         
-                .css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
-                .animate({/*opacity: 1, */left: '30%'}, 1000, "easeOutBounce")
-                .fadeIn(1000)
-        
+                ////.css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
+                ////.animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
+                //.fadeIn(1000)
                 ;
+            $("#colorbox").addClass('md-modal md-effect-6');
+            $("#cboxWrapper").addClass('md-content');
+            $("#colorbox").addClass('md-show');
+        
+                
         });
      }
      ,onClosed: function() {
