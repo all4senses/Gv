@@ -947,10 +947,10 @@
             // possible animate combination or plugin...
         }).animate({
             //height: ['toggle', 'swing'],
-            height: ['100%', 'swing'],
+            ////height: ['100%', 'swing'],
             //opacity: 'toggle'
             opacity: 0.7
-        }, 1000 , function() {
+        }, 100 , function() {
             //$('#colorbox')
                 //.css({'visibility': 'visible'})
                 //.fadeIn(1000)
