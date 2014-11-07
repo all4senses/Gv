@@ -941,7 +941,8 @@
             // animate it you can use here all the
             // possible animate combination or plugin...
         }).animate({
-            height: ['toggle', 'swing'],
+            //height: ['toggle', 'swing'],
+            height: ['100%', 'swing'],
             opacity: 'toggle'
         }, 1000 , function() {
             $('#colorbox').css({
