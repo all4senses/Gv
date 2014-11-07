@@ -951,7 +951,7 @@
                 //.fadeIn(1000)
         
                 .css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
-                .animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
+                .animate({opacity: 1/*, left: '30%'*/}, 1000, "easeOutBounce")
         
                 ;
         });
