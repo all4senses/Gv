@@ -948,7 +948,7 @@
         }).animate({
             //height: ['toggle', 'swing'],
             ////height: ['100%', 'swing'],
-            //opacity: 'toggle'
+            opacity: 'toggle',
             opacity: 0.7
         }, 1000 , function() {
             //$('#colorbox')
