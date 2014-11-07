@@ -920,7 +920,7 @@
      fadeOut: 1700,
      inline:true, 
      href:"#cb-popup_1", 
-     width:550, 
+     width: '50%', //550, 
      height:470
      
      ,//added to remove initial flickering
@@ -950,8 +950,8 @@
                 //.css({'visibility': 'visible'})
                 //.fadeIn(1000)
         
-                .css({opacity: 0, visibility: "visible", display: "block", left: "-350px"})
-                .animate({opacity: 1, left: '50%'}, 2000, "easeOutBounce")
+                .css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
+                .animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
         
                 ;
         });
