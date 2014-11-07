@@ -939,7 +939,7 @@
         $('#cboxOverlay').css({
             'visibility': 'visible',
             'opacity': 0.2,
-            'height': 0,
+            //'height': 0,
             'cursor': 'pointer',
             
             // execute our original animation on the overlay!
@@ -948,7 +948,7 @@
         }).animate({
             //height: ['toggle', 'swing'],
             ////height: ['100%', 'swing'],
-            opacity: 'toggle',
+            //opacity: 'toggle',
             opacity: 0.7
         }, 1000 , function() {
             //$('#colorbox')
