@@ -946,9 +946,14 @@
             //opacity: 'toggle'
             opacity: 0.7
         }, 1000 , function() {
-            $('#colorbox').css({
-            'visibility': 'visible'
-        }).fadeIn(1000);
+            $('#colorbox')
+                //.css({'visibility': 'visible'})
+                //.fadeIn(1000)
+        
+                .css({opacity: 0, visibility: "visible", display: "block", left: "-350px"})
+                .animate({opacity: 1, left: '50%'}, 2000, "easeOutBounce")
+        
+                ;
         });
      }
      ,onClosed: function() {
