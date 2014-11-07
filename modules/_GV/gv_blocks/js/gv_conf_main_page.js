@@ -965,12 +965,10 @@
             //$("#cboxWrapper").addClass('md-content');
             
             // Works!
-            //$("#colorbox").addClass('md-show');
+            $("#colorbox").addClass('md-show');
         
                 
         }); // End of animate of $('#cboxOverlay')
-        
-        $("#colorbox").addClass('md-show');
      }
      ,onClosed: function() {
             $("#colorbox").removeClass('md-show');
