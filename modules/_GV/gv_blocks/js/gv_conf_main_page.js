@@ -74,6 +74,9 @@
      }
      else {
          //console.log('link-1 finished.');
+         // Easing 
+         // http://api.jquery.com/animate/
+         // not tested yet https://github.com/gdsmith/jquery.easing
          $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeOutBounce");
      }
      
@@ -523,7 +526,9 @@
       
   
     cache = {};
-      
+    
+    // http://api.jqueryui.com/autocomplete/#event-create
+    // http://stackoverflow.com/questions/11852282/jquery-ui-autocomplete-with-json-and-ajax
     
     $( "#conf" ).autocomplete({
       highlightClass: "bold-text",
@@ -799,6 +804,10 @@
      return;
    }  
    
+   // Progress indicators
+   // http://stackoverflow.com/questions/15838525/how-to-create-custom-css3-loading-circle
+   // http://cssload.net/
+   // 
    $("input#conf").addClass('ui-autocomplete-loading');
    
    console.log(label);
