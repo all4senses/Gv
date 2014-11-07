@@ -950,7 +950,7 @@
             ////height: ['100%', 'swing'],
             //opacity: 'toggle'
             opacity: 0.7
-        }, 100 , function() {
+        }, 1000 , function() {
             //$('#colorbox')
                 //.css({'visibility': 'visible'})
                 //.fadeIn(1000)
