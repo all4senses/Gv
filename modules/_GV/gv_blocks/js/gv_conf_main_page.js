@@ -934,7 +934,9 @@
         $('#cboxOverlay').css({
             'visibility': 'visible',
             'opacity': 0.9,
-            'cursor': 'pointer'
+            'height': 0,
+            'cursor': 'pointer',
+            
             // execute our original animation on the overlay!
             // animate it you can use here all the
             // possible animate combination or plugin...
