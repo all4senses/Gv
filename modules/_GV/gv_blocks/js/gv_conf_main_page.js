@@ -920,7 +920,7 @@
      fadeOut: 1700,
      inline:true, 
      href:"#cb-popup_1", 
-     width: '50%', //550, 
+     width: '30%', //550, 
      height:470
      
      ,//added to remove initial flickering
