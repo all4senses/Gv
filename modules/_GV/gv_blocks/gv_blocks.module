@@ -9488,14 +9488,18 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     $query = db_select('field_data_field_p_erating', 'r');
     //$query->fields('r', array('entity_id', 'field_p_erating_value'))
     $query->fields('r', array('entity_id'))
-          ->condition('r.entity_id', 63, '!=')
+          ->condition('r.entity_id', 63, '!=') // Exlude Nextiva
+          ->condition('r.entity_id', 12, '!=') // Exlude Ringcentral
           ->condition('r.bundle', 'provider');
     $query->orderBy('r.field_p_erating_value', 'ASC');
-    $query->range(0, 5);
+    $query->range(0, 4);
     //$top5 = $query->execute()->fetchAllAssoc('entity_id'); 
     $top5 = $query->execute()->fetchCol(); 
     //dpm($top5);
     //dpm(array('data' => (object) array('nid' => 12)));
+    
+    // Add VoipStudio
+    $top5[] = 2054;
     
     $out = '<table><tbody><tr>';
     foreach ($top5 as $nid) {
