@@ -9511,13 +9511,13 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     // Rearrange providers with a new order.
     $new_top5 = array();
     foreach ($new_providers_order as $new_index => $nid) {
-      if (in_array($nid, $top5)) {
+      if ( ($old_index = array_search($nid, $top5)) !== FALSE ) {
          $new_top5[$new_index] = $nid;
-         unset($top5[$nid]);
+         unset($top5[$old_index]);
       }
     }
-    //dpm($new_top5);
-    //dpm($top5);
+    dpm($new_top5);
+    dpm($top5);
     if (!empty($top5)) {
       foreach ($top5 as $nid) {
         $new_top5[] = $nid;
