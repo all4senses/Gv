@@ -9633,7 +9633,8 @@ function gv_misc_getProviderQuickData($target, $data) {
                               '/reviews/residential' => 'top_re_providers_rev',
           
                               // LP pages
-                              '/service-quotes' => 'top_bu_providers', 
+                              '/service-quotes' => 'top_bu_providers',
+                              '/service-quotes-ca' => 'top_bu_providers',
                             );
 
       //$current_url = $_SERVER['REQUEST_URI'];
@@ -12959,3 +12960,289 @@ function gv_misc_getConferences_autocomplete_ajax() {
   drupal_json_output($out_array);
 
 }
+
+
+
+
+/**
+ * Imports blog_posts from a wp table.
+ */
+function ch_misc_import_wp_blogPosts() { 
+  
+  $query = db_select('wp_posts', 'p')
+        ->fields('p', array('ID', 'post_content', 'post_title', 'post_name', 'post_parent', 'post_date', 'post_modified'));
+//  $query->leftJoin('wp_term_relationships', 'tr', 'tr.object_id = p.ID');
+//  $query->fields('tr', array('term_taxonomy_id'));
+//  $query->leftJoin('wp_term_taxonomy', 'tt', 'tt.term_id = tr.object_id');
+//  $query->fields('tt', array('taxonomy'));
+  
+//  $query->condition('tt.taxonomy', 'category');
+  $query->condition('p.post_status', 'publish');
+  $query->condition('p.post_type', 'post');
+  //$query->condition('tr.term_taxonomy_id', 4); // 3 - Features, 4 - News
+  
+  $query->orderBy('ID');
+  //$query->range(0, 20);
+  $results = $query->execute()->fetchAllAssoc('ID');
+  
+  //dpm($results);
+  
+  
+
+$drupal_categories = array (  
+  'Articles' => 1,
+  'Conferences' => 2,
+  'Education' => 3,
+  'General' => 4,
+  'Rackspace CloudSites' => 5,
+  'State of the Cloud' => 6,
+  'Testimonials' => 7,
+  'Uncategorized' => 8,
+  'Videos' => 9,
+  'vps.net' => 10,
+);
+
+$wp_categories = array (  
+  7 => 'Articles',
+  13 => 'Conferences',
+  9 => 'Education',
+  12 => 'General',
+  11 => 'Rackspace CloudSites',
+  10 => 'State of the Cloud',
+  3 => 'Testimonials',
+  1 => 'Uncategorized',
+  8 => 'Videos',
+  4 => 'vps.net',
+);
+
+
+
+$drupal_tags = array (
+	'Cloud Computing Infographic' => 11,
+	'cloud hosting' => 12,
+	'Cloud Hosting History' => 13,
+	'Cloud Hosting Infographic' => 14,
+	'Cloud Hosting Timeline' => 15,
+	'Cloud Infographic' => 16,
+	'cloudsites' => 17,
+	'infographics' => 18,
+	'rackspace' => 19,
+	'vps.net' => 20,
+);
+
+$wp_tags = array (
+	14 => 'Cloud Computing Infographic',
+	15 => 'cloud hosting',
+	16 => 'Cloud Hosting History',
+	17 => 'Cloud Hosting Infographic',
+	18 => 'Cloud Hosting Timeline',
+	19 => 'Cloud Infographic',
+	6 => 'cloudsites',
+	20 => 'infographics',
+	5 => 'rackspace',
+	4 => 'vps.net',
+);
+  
+  
+//  $category_map = array(
+//    3 => 1, // Features
+//    4 => 2, // News
+//  );
+  
+  $form_states = array();
+  
+  foreach ($results as $result) {
+    
+    $query = db_select('wp_term_relationships', 'tr')
+        ->fields('tr', array('term_taxonomy_id'));
+    
+    $query->leftJoin('wp_term_taxonomy', 'tt', 'tt.term_taxonomy_id = tr.term_taxonomy_id');
+    $query->fields('tt', array('taxonomy', 'term_id'));
+    $query->leftJoin('wp_terms', 't', 't.term_id = tt.term_id');
+    $query->fields('t', array('name'));
+    $query->condition('tr.object_id', $result->ID);
+    $query->condition('tt.taxonomy', 'category');
+    $cats = $query->execute()->fetchAllAssoc('term_id');
+    
+    foreach ($cats as $key => $value) {
+      $cats[$key]->drupal_tid = @$drupal_categories[$wp_categories[$value->term_id]];
+    }
+    
+    $query = db_select('wp_term_relationships', 'tr')
+        ->fields('tr', array('term_taxonomy_id'));
+    
+    $query->leftJoin('wp_term_taxonomy', 'tt', 'tt.term_taxonomy_id = tr.term_taxonomy_id');
+    $query->fields('tt', array('taxonomy', 'term_id'));
+    $query->leftJoin('wp_terms', 't', 't.term_id = tt.term_id');
+    $query->fields('t', array('name'));
+    $query->condition('tr.object_id', $result->ID);
+    $query->condition('tt.taxonomy', 'post_tag');
+    $tags = $query->execute()->fetchAllAssoc('term_id');
+    
+    foreach ($tags as $key => $value) {
+      $tags[$key]->drupal_tid = @$drupal_tags[$wp_tags[$value->term_id]];
+    }
+    
+    //dpm($terms);
+    
+    $form_state['values'] = array(
+      'title' => $result->post_title,
+      'post_date' => $result->post_date,
+      'created' => strtotime($result->post_date),
+      'changed' => strtotime($result->post_modified),
+      //'category' => @$drupal_categories[$wp_categories[$result->term_taxonomy_id]],
+      //'category_name' => @$wp_categories[$result->term_taxonomy_id],
+      //'url_alias' => date('Y\/m', strtotime($result->post_date)) . '/' . $result->post_name,
+      'url_alias' => 'blog/' . $result->post_name,
+      'ID' => $result->ID,
+      'categories' => $cats,
+      'tags' => $tags,
+    );
+    
+    $form_state['values']['body']['und'][0]['value'] = str_replace('--', '-', $result->post_content);
+    
+    if (preg_match('/(.*)<!--more-->(.*)/s', $form_state['values']['body']['und'][0]['value'], $matches)) {
+      //dpm($matches);
+      ////$form_state['values']['body']['und'][0]['value'] = $matches[1] . /*'<span id="more"></span>' .*/ $matches[2];
+      ////////$form_state['values']['body']['und'][0]['summary'] = $matches[1] . '<p><a href="/' . $form_state['values']['url_alias'] . '#more" class="more-link">Read the rest of this entry Р В Р’В Р вЂ™Р’В Р В РІР‚в„ўР вЂ™Р’В Р В Р’В Р В РІР‚В Р В Р’В Р Р†Р вЂљРЎв„ўР В Р вЂ Р Р†Р вЂљРЎвЂєР РЋРЎвЂєР В Р’В Р вЂ™Р’В Р В Р вЂ Р В РІР‚С™Р Р†РІР‚С›РЎС›Р В Р’В Р Р†Р вЂљРІвЂћСћР В РІР‚в„ўР вЂ™Р’В»</a></p>';
+      $form_state['values']['body']['und'][0]['summary'] = $matches[1];
+      //$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
+    }
+    else {
+      $form_state['values']['body']['und'][0]['summary'] = '';
+    }
+    
+    $form_states[] = $form_state;
+    // Add only one node.
+    ch_misc_createNode_BlogPost($form_state);
+//    if ($result->ID == 49) {
+//      break;
+//    }
+    
+  }
+  
+  //dpm($form_states);
+}
+
+
+/**
+ * Creates a node blog_post.
+ */
+function ch_misc_createNode_BlogPost($form_state) { 
+
+  
+  // Creating a node via drupal_form_submit()
+  // http://api.drupal.org/api/drupal/includes%21form.inc/function/drupal_form_submit/7
+  
+  /*
+  
+
+  
+  define('DRUPAL_ROOT', getcwd());
+  include_once 
+
+  DRUPAL_ROOT . '/includes/bootstrap.inc';
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+  bootstrap_invoke_all('init');
+  ini_set('memory_limit', '512M');
+  //Authenticate as user 1
+  user_authenticate('user', 'password');
+  module_load_include('inc', 'node', 'node.pages');  // new for Drupal 6
+
+
+  $form_state = array();
+  $nodeTmp = array('type' => testimonial); // a variable holding the content type
+   
+
+   $form_state['values']['type'] = 'testimonial';
+   $form_state['values']['status'] = 1;
+   $form_state['values']['title'] = 'test1';   // the node's title
+   $form_state['values']['body'] = 'just my test node'; // the body, not required
+   $form_state['values']['field_name'] =  t('adham allam');
+   $form_state['values']['status'] = 1; //publish all imported nodes
+   $form_state['values']['promote'] = 1; //promote all imported nodes
+   $form_state['values']['sticky'] = 0; //remove sticky from imported nodes
+   $form_state['values']['image'] = array();
+   $form_state['values']['name'] = 'adham';
+   $form_state['values']['op'] = t('Save');  // this seems to be a required value
+  
+   drupal_form_submit('testimonial_node_form', $form_state, (object)$nodeTmp);
+  
+  */
+  
+  
+  global $user;
+  
+  $node = new stdClass();
+  $node->type = 'blog_post';
+  node_object_prepare($node);
+  
+  $node->date = $form_state['values']['post_date'];
+  $node->created = $form_state['values']['created'];
+  $node->changed = $form_state['values']['changed'];
+  
+          
+  $node->title = $form_state['values']['title'];
+  $node->language = LANGUAGE_NONE;
+  $node->uid = $user->uid;
+  $node->status = 1;
+  $node->promote = 0;
+  $node->sticky = 0;
+  $node->comment = 0;
+  
+  $node->body[$node->language][0]['format'] = 'full_html';
+  $node->body[$node->language][0]['value'] = $form_state['values']['body']['und'][0]['value'];
+  $node->body[$node->language][0]['summary'] = $form_state['values']['body']['und'][0]['summary'];
+  $node->body[$node->language][0]['safe_summary'] = check_plain($form_state['values']['body']['und'][0]['summary']);
+  $node->body[$node->language][0]['safe_value'] = check_plain($form_state['values']['body']['und'][0]['value']);
+  
+  $node->field_extra_data[$node->language][0] = array(
+    'value' => NULL,
+    'safe_value' => NULL,
+    'format' => 'full_html',
+  );
+  $node->field_main_image[$node->language][0] = array(
+    'value' => NULL,
+    'safe_value' => NULL,
+    'format' => 'full_html',
+  );
+  $node->field_a_teaser[$node->language][0] = array(
+    'value' => NULL,
+    'safe_value' => NULL,
+    'format' => 'full_html',
+  );
+  
+  $node->field_old_id[$node->language][0]['value'] = $form_state['values']['ID'];
+  
+  //$node->field_categories[$node->language][0]['tid'] = $form_state['values']['category'];
+  
+  foreach ($form_state['values']['categories'] as $key => $value) {
+    $node->field_categories[$node->language][] = array('tid' => $value->drupal_tid);
+  }
+  
+  foreach ($form_state['values']['tags'] as $key => $value) {
+    $node->field_tags[$node->language][] = array('tid' => $value->drupal_tid);
+  }
+  
+  
+  $node->path = array(
+    'alias' => $form_state['values']['url_alias'],
+    'language' => $node->language,
+    'pathauto' => 0,
+  );
+  
+//  dpm($node);
+//  return;
+  
+  if ($node = node_submit($node)) {
+    node_save($node);
+    drupal_set_message('Saved, Ok!', 'warning');
+  }
+  
+}
+
+
+
+
+
+
