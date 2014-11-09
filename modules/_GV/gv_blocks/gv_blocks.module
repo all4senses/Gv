@@ -7886,7 +7886,8 @@ function gv_blocks_get_requestQuoteForPage_v7_ca() {
   $out = //$exitIntent_block . 
           //'<h3>See How Much You Could Save<span>It only takes a few minutes.</span></h3>'
           //'<h3>See How Much You Could Save</h3>'
-          '<h3>How Much Will I Save?</h3>'
+          '<h3>How Much Will You Save?</h3>'
+          //'<h3>How Much Will I Save?<span>- No contracts or set-up fees -</span></h3>'
    . '<div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
         <div class="success results" style="display: none;"></div>
@@ -9516,8 +9517,8 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
          unset($top5[$old_index]);
       }
     }
-    dpm($new_top5);
-    dpm($top5);
+    //dpm($new_top5);
+    //dpm($top5);
     if (!empty($top5)) {
       foreach ($top5 as $nid) {
         $new_top5[] = $nid;

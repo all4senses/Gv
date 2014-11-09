@@ -16,7 +16,7 @@
 
 
 
-<div id="v7">
+<div id="v7" class="ca">
   <div id="quote-content">
 
     
@@ -53,12 +53,12 @@
 
                     <div class="left">
                             
-                            <div class="caption">Our Real-time Quotes Include:</div>
-                             <div class="text bullet v3"><strong>Side-by-side comparison of each solution</strong></div>
-                            <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
-                            <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
+                            <div class="caption">Simplify Your VoIP Buying Process</div>
+                            <div class="text bullet v3"><strong>Fast, Free VoIP Solution Quotes</strong></div>
+                            <div class="text bullet v1"><strong>Free Number Porting, & Instant Setup</strong></div>
+                            <div class="text bullet v2"><strong>Tap into Prescreened Solutions</strong></div>
                             <!-- <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div> -->
-                            <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
+                            <div class="text bullet v4"><strong>Full-featured HD Phones Included</strong></div>
                             
                             <!--
                             <div class="caption">Benefits & Features:</div>
@@ -190,7 +190,7 @@
       <div class="full brands">
           
           <div id="brands">
-            <h2>Supported by Major Brands:</h2>
+            
             <?php
                 /*
                 if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
@@ -205,7 +205,14 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
+                
+//                global $user;
+//                if ($user->uid == 1) {
+                  echo '<h2>Top 5 Rated Business Phone Providers:</h2>', gv_blocks_get_topProvidersForLP('Top 5');
+//                }
+//                else {
+//                  echo '<h2>Supported by Major Brands:</h2><img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
+//                }
 
             ?>
 
