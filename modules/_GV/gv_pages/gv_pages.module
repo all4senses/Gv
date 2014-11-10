@@ -8993,3 +8993,100 @@ function gv_pages_createNode_phoneReview($form_state) {
   }
   
 }
+
+
+
+// -----------------------------------
+
+// Import Conferences from a file in bulk functions.
+
+
+/**
+ * Import Conferences from a file page.
+ */
+function gv_pages_importConferencesInBulk_form($form, &$form_state) {
+  
+  
+  
+  if (@$_GET['action'] == 'done') {
+    $form['submit_again'] = array('#type' => 'submit', '#value' => 'Import again');
+  } else {
+    
+    // http://www.lilianagaete.com/how-to-do-a-file-upload-in-drupal-7/
+
+    // Use the #managed_file FAPI element to upload a file.
+    $form['file_fid'] = array(
+      '#title' => t('File'),
+      '#type' => 'managed_file',
+      '#description' => 'Conferences from an uploaded file will be imported to the system.',
+      '#default_value' => variable_get('file_fid', ''),
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('csv'),
+        ),
+      '#upload_location' => 'public://docs/conferences',
+       // Remove the original element "Upload" button.
+      '#process' => array('gv_misc_import_my_file_element_process')
+    );
+    
+    $form['submit'] = array('#type' => 'submit', '#value' => 'Import from file');
+  }
+  
+  $form['#validate'][] = 'gv_pages_importConferencesInBulk_formValidate';
+  
+  //dpm($form);
+  
+  return $form;
+}
+
+/**
+ * 
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
+
+  //dpm($_POST);
+  //dpm($form_state);
+  
+  $get = $_GET;
+  unset($get['q'], $get['action']);
+  
+  if ($form_state['values']['op'] == 'Import from file') {
+    $get['action'] = 'done';
+    
+    // Load the file.
+    $file = file_load($form_state['values']['file_fid']);
+    //dpm($file);
+    // Change status to permanent.
+    $file->status = FILE_STATUS_PERMANENT;
+    // Save.
+    $uploaded = file_save($file);
+    if ($uploaded == TRUE) {
+      drupal_set_message('The file has been uploaded.');
+      
+      if (($handle = fopen(gv_misc_getPathFromStreamUri($file->uri), "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $file_data[] = $data;
+        }
+        fclose($handle);
+        //dpm($file_data);
+        
+        gv_misc_addConferences_fromVar($file_data);
+      }
+      
+    }
+    else {
+      drupal_set_message('The file could not be uploaded. Please contact the site administrator.', 'error');
+    }
+
+    $file_path = $file->uri;
+  }
+  
+  drupal_goto($_GET['q'], array('query' => $get));
+}

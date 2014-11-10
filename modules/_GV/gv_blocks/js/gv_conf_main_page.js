@@ -8,12 +8,18 @@
     
  // requestAnimationFrame Shim
  
+ 
+ 
  canvasPresent = false;  
 
  var canvas_1 = document.getElementById('link-1');
  
  // http://stackoverflow.com/questions/15692353/animate-a-canvas-circle-to-draw-on-load
  // http://jsfiddle.net/loktar/uhVj6/4/
+ // 
+ // Animationframe test
+ // http://jsfiddle.net/wMkJg/
+ 
  if (canvas_1.getContext) { 
    
     canvasPresent = true;  
@@ -913,6 +919,12 @@
           }
    }); 
    */
+  
+  
+  
+  // Custom colorbox appearing transitions. 
+  // Implemented and Works!
+  //http://stackoverflow.com/questions/2760453/jquery-colorbox-background-transition-effect
   
   cb1 = $.fn.colorbox({
      transition: 'fade' , //'elastic',
