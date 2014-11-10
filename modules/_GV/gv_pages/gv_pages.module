@@ -63,6 +63,14 @@ function gv_pages_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['admin/content/import-conferences-in-bulk'] = array(
+    'title' => 'Import conferences from a file In Bulk to GV',
+    'description' => 'Import conferences from a file In Bulk to GV page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gv_pages_importConferencesInBulk_form'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
   
   /*
   // Deprecated.
@@ -8999,6 +9007,7 @@ function gv_pages_createNode_phoneReview($form_state) {
 // -----------------------------------
 
 // Import Conferences from a file in bulk functions.
+
 
 
 /**
