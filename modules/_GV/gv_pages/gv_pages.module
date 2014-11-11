@@ -9063,6 +9063,7 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
   //dpm($_POST);
   //dpm($form_state);
   
+  $file_data = array();
   $get = $_GET;
   unset($get['q'], $get['action']);
   
@@ -9080,8 +9081,19 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
       drupal_set_message('The file has been uploaded.');
       
       if (($handle = fopen(gv_misc_getPathFromStreamUri($file->uri), "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-            $file_data[] = $data;
+        if (($titles = fgetcsv($handle, 1000, ";")) !== FALSE) {
+          
+          if ($titles[0] == 'Conference Name' && in_array('Applicable Industry', $titles)) {
+            
+            while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                $row = array();
+                foreach ($titles as $key => $title) {
+                  $row[$title] = $data[$key];
+                }
+                $file_data[] = $row;
+            }
+          }
+          
         }
         fclose($handle);
         //dpm($file_data);
