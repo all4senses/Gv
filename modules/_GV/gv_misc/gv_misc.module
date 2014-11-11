@@ -12998,8 +12998,8 @@ function gv_misc_addConferences_fromVar($conferences) {
   
   foreach ($conferences as $conference) {
     
-    //if ($existing_nid = gv_misc_conferenceAlreadyExists($conference)) {
-    if ($existing_nid = gv_misc_conferenceAlreadyExists(array('Conference Name' => 'NetApp Insight 14'))) {
+    if ($existing_nid = gv_misc_conferenceAlreadyExists($conference)) {
+    //if ($existing_nid = gv_misc_conferenceAlreadyExists(array('Conference Name' => 'NetApp Insight 14'))) {
       drupal_set_message('Conference "' . $conference['Conference Name'] .  '" already ' . l('exists', 'node/' . $existing_nid) . '!', 'error');
       continue;
     }
