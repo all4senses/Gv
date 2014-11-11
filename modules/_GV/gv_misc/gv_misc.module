@@ -12685,7 +12685,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               
               if ($result->field_conf_twitter_value) {
-                $twitter = '<span class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</span><span> - </span><span class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</span>';
+                if (!empty($result->field_conf_twitter_hashtag_value )) {
+                  $hash = '<span> - </span><span class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</span>';
+                }
+                else {
+                  $hash = NULL;
+                }
+                $twitter = '<span class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</span>' . $hash;
               }
               else {
                 $twitter = NULL;
