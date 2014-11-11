@@ -13131,16 +13131,18 @@ function gv_misc_createNode_conference($form_state) {
   }
   */
   
+  
+  //$alias = pathauto_create_alias('node', 'return', 'node/' . $node->nid, array('node' => $node), $node->type);
+  $alias = pathauto_create_alias('node', 'return', NULL, array('node' => $node), $node->type);
+  dpm($alias);
+  
   $node->path = array(
-    'alias' => $form_state['values']['url_alias'],
+    'alias' => $alias,
     'language' => $node->language,
     'pathauto' => 0,
   );
   
-  
   dpm($node);
-  $alias = pathauto_create_alias('node', 'return', 'node/' . $node->nid, array('node' => $node), $node->type);
-  dpm($alias);
   return;
   
   if ($node = node_submit($node)) {
