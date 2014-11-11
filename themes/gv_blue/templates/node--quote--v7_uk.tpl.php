@@ -16,7 +16,7 @@
 
 
 
-<div id="v7">
+<div id="v7" class="uk">
   <div id="quote-content">
 
     
@@ -53,12 +53,12 @@
 
                     <div class="left">
                             
-                            <div class="caption">Our Real-time Quotes Include:</div>
-                             <div class="text bullet v3"><strong>Side-by-side comparison of each solution</strong></div>
-                            <div class="text bullet v1"><strong>Lowest Possible Rates & Exclusive Offers</strong></div>
-                            <div class="text bullet v2"><strong>Dedicated Rep from Top Providers</strong></div>
+                            <div class="caption">Simplify Your VoIP Buying Process</div>
+                            <div class="text bullet v3"><strong>Fast, Free VoIP Solution Quotes</strong></div>
+                            <div class="text bullet v1"><strong>Free Number Porting, & Instant Setup</strong></div>
+                            <div class="text bullet v2"><strong>Tap into Prescreened Solutions</strong></div>
                             <!-- <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div> -->
-                            <div class="text bullet v4"><strong>Guaranteed Free HD Phones</strong></div>
+                            <div class="text bullet v4"><strong>Full-featured HD Phones Included</strong></div>
                             
                             <!--
                             <div class="caption">Benefits & Features:</div>
@@ -160,6 +160,7 @@
 
 
       
+     <?php /*
       <div class="full bottom">
 
           <div id="bottom">
@@ -184,7 +185,26 @@
           </div>
 
       </div> <!-- of Full --> 
+      */?>
       
+      
+      
+
+      <div class="full excerpt">
+        
+          <div id="upper-block">
+            <!--<h1>We identify and rank the best business VoIP providers and phone systems.</h1>-->
+
+            <div class="quotes one">
+              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
+              <div class="source"><span class="image"></span><div>Chris Rabbu</div> VP of Marketing at Vonage, Inc.</div>
+            </div>
+            <div class="bottom-clear"></div> 
+          </div>
+
+      </div> <!-- of Full -->
+
+
       
       
       <div class="full brands">
@@ -216,22 +236,6 @@
 
   
   
-
-
-      <div class="full excerpt">
-        
-          <div id="upper-block">
-            <!--<h1>We identify and rank the best business VoIP providers and phone systems.</h1>-->
-
-            <div class="quotes one">
-              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
-              <div class="source"><span class="image"></span><div>Chris Rabbu</div> VP of Marketing at Vonage, Inc.</div>
-            </div>
-            <div class="bottom-clear"></div> 
-          </div>
-
-      </div> <!-- of Full -->
-
 
       
       
