@@ -12983,7 +12983,7 @@ function gv_misc_conferenceAlreadyExists($conference) {
           ->execute();
   
   $nid = $query->fetchField();
-  dpm($nid);
+  //dpm($nid);
   return $nid;
 }
 
@@ -13044,7 +13044,7 @@ function gv_misc_addConferences_fromVar($conferences) {
  */
 function gv_misc_createNode_conference($conference) { 
 
-  dpm($conference);
+  //dpm($conference);
   //return;
   // Creating a node via drupal_form_submit()
   // http://api.drupal.org/api/drupal/includes%21form.inc/function/drupal_form_submit/7
@@ -13151,7 +13151,7 @@ function gv_misc_createNode_conference($conference) {
   
   //$alias = pathauto_create_alias('node', 'return', 'node/' . $node->nid, array('node' => $node), $node->type);
   $alias = pathauto_create_alias('node', 'return', NULL, array('node' => $node), $node->type);
-  dpm($alias);
+  //dpm($alias);
   
   $node->path = array(
     'alias' => $alias,
