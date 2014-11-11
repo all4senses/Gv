@@ -12978,7 +12978,8 @@ function gv_misc_import_my_file_element_process($element, &$form_state, $form) {
 function gv_misc_conferenceAlreadyExists($conference) {
   $query = db_select('node', 'n')
           ->fields('n', array('nid'))
-          ->condition('type', 'conference')    
+          ->condition('n.type', 'conference')
+          ->condition('n.title', $conference['Conference Name'])
           ->execute();
   
   $nid = $query->fetchField();
