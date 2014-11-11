@@ -13013,7 +13013,11 @@ function gv_misc_findOutConferenceTids($source_tags) {
       $tids[] = $tid;
     }
     else {
-      drupal_set_message('No term "' . $tag . '" defined. Will be added to the systrem.', 'warning');
+      drupal_set_message('No term "' . $tag . '" defined. Will be added to the system.', 'warning');
+      $term = (object) array('name' => $tag, 'vid' => $vid);
+      if (taxonomy_term_save($term)) {
+        $tids[] = $term->tid;
+      }
     }
 
 
