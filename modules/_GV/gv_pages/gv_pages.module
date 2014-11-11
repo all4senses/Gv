@@ -9100,7 +9100,7 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
                   if ($data[$key] == 'TBD') {
                     $data[$key] = '';
                   }
-                  $row[$title] = $data[$key];
+                  $row[$title] = trim($data[$key]);
                 }
                 $file_data[] = $row;
             }

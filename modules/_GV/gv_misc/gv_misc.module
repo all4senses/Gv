@@ -13202,7 +13202,11 @@ function gv_misc_createNode_conference($conference) {
     }
   }
   
-  
+  if (!empty($conference['Price']) && $conference['Price'] != '0.00') {
+    $node->field_conf_price[$node->language][0] = array(
+      'value' => $conference['Price'],
+    );
+  }
   
   /*
   $node->field_extra_data[$node->language][0] = array(
