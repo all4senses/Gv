@@ -12988,6 +12988,43 @@ function gv_misc_conferenceAlreadyExists($conference) {
 }
 
 
+function gv_misc_findOutConferenceTids($source_tags) {
+  
+  if (empty($source_tags)) {
+    return NULL;
+  }
+  
+  $tags = explode(',', $source_tags);
+  if (empty($tags[1])) {
+    $tags[0] = $source_tags; 
+  }
+
+  $vid = 8; // industries
+  foreach ($tags as $tag) {
+    // Find out tids.
+    $query = db_select('taxonomy_term_data', 'td')
+        ->fields('td', array('tid'))
+        ->condition('td.vid', $vid)
+        ->condition('td.name', $tag)
+        ->execute();
+
+    if ($tid = $query->fetchField()) {
+      $tids[] = $tid;
+    }
+    else {
+      drupal_set_message('No term "' . $tag . '" defined. Will be added to the systrem.', 'warning');
+    }
+
+
+  }
+  
+  
+  dpm($tids);
+  return $tids;
+}
+
+
+
 /**
  * Creates conferences from a var (loaded from csv).
  */
@@ -13032,7 +13069,7 @@ function gv_misc_addConferences_fromVar($conferences) {
     gv_misc_createNode_conference($conference);
     
     // Break on the first iteration.
-    return;
+    //return;
   }
   
   //dpm($form_states);
@@ -13119,15 +13156,24 @@ function gv_misc_createNode_conference($conference) {
   );
   
   $location = explode(',', $conference['Upcoming Location']);
-  $node->field_state[$node->language][0] = array(
-    'value' => $location[1],
-  );
-  
-  $node->field_conf_city[$node->language][0] = array(
-    'value' => $location[0],
-    'safe_value' => check_plain($location[0]),
-    'format' => NULL,
-  );
+  if (empty($location[1])) {
+    $node->field_conf_city[$node->language][0] = array(
+      'value' => $conference['Upcoming Location'],
+      'safe_value' => check_plain($conference['Upcoming Location']),
+      'format' => NULL,
+    );
+  }
+  else {
+    $node->field_state[$node->language][0] = array(
+      'value' => trim($location[1]),
+    );
+
+    $node->field_conf_city[$node->language][0] = array(
+      'value' => $location[0],
+      'safe_value' => check_plain($location[0]),
+      'format' => NULL,
+    );
+  }
   
   
   
@@ -13142,6 +13188,16 @@ function gv_misc_createNode_conference($conference) {
     'safe_value' => check_plain($conference['Hashtag']),
     'format' => NULL,
   );
+  
+  if($tids = gv_misc_findOutConferenceTids($conference['Applicable Industry'])) {
+    foreach ($tids as $tid) {
+      $node->field_industry[$node->language][] = array(
+        'tid' => $tid,
+      );
+    }
+  }
+  
+  
   
   /*
   $node->field_extra_data[$node->language][0] = array(

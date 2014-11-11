@@ -9089,7 +9089,12 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
                 unset($titles[$key]);
               }
             }
+            
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                // Skip empty rows (or rows with empty Title column).
+                if (empty($data[0])) {
+                  continue;
+                }
                 $row = array();
                 foreach ($titles as $key => $title) {
                   $row[$title] = $data[$key];
