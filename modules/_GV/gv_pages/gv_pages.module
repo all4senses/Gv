@@ -9084,7 +9084,11 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
         if (($titles = fgetcsv($handle, 1000, ";")) !== FALSE) {
           
           if ($titles[0] == 'Conference Name' && in_array('Applicable Industry', $titles)) {
-            
+            foreach ($titles as $key => $value) {
+              if (!$value) {
+                unset($titles[$key]);
+              }
+            }
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
                 $row = array();
                 foreach ($titles as $key => $title) {
