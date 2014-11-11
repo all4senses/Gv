@@ -12994,6 +12994,7 @@ function gv_misc_findOutConferenceTids($source_tags) {
     return NULL;
   }
   
+  $tids = NULL;
   $tags = explode(',', $source_tags);
   if (empty($tags[1])) {
     $tags[0] = $source_tags; 
@@ -13005,7 +13006,7 @@ function gv_misc_findOutConferenceTids($source_tags) {
     $query = db_select('taxonomy_term_data', 'td')
         ->fields('td', array('tid'))
         ->condition('td.vid', $vid)
-        ->condition('td.name', $tag)
+        ->condition('td.name', trim($tag))
         ->execute();
 
     if ($tid = $query->fetchField()) {
@@ -13245,7 +13246,7 @@ function gv_misc_createNode_conference($conference) {
   
   if ($node = node_submit($node)) {
     node_save($node);
-    drupal_set_message('Conference "' . l($node->title, 'node/' . $node->nid) .  '" has been imported!', 'warning');
+    drupal_set_message('Conference "' . l($node->title, 'node/' . $node->nid) .  '" has been imported!');
   }
   
 }
