@@ -13003,7 +13003,7 @@ function gv_misc_addConferences_fromVar($conferences) {
       drupal_set_message('Conference "' . $conference['Conference Name'] .  '" already ' . l('exists', 'node/' . $existing_nid) . '!', 'error');
       continue;
     }
-    
+    /*
     $form_state['values'] = array(
       'title' => $conference['Conference Name'],
 //      'post_date' => $result->post_date,
@@ -13019,15 +13019,17 @@ function gv_misc_addConferences_fromVar($conferences) {
     );
     
     $form_state['values']['body']['und'][0]['value'] = $conference['Description'];
-    
-    
     $form_state['values']['body']['und'][0]['summary'] = '';
+    */
     
-    
-    $form_states[] = $form_state;
+    //$form_states[] = $form_state;
+    //$form_states[] = $conference;
     // Add only one node.
-    gv_misc_createNode_conference($form_state);
-
+    //gv_misc_createNode_conference($form_state);
+    gv_misc_createNode_conference($conference);
+    
+    // Break on the first iteration.
+    return;
   }
   
   //dpm($form_states);
@@ -13037,9 +13039,9 @@ function gv_misc_addConferences_fromVar($conferences) {
 /**
  * Creates a node conference.
  */
-function gv_misc_createNode_conference($form_state) { 
+function gv_misc_createNode_conference($conference) { 
 
-  dpm($form_state);
+  dpm($conference);
   //return;
   // Creating a node via drupal_form_submit()
   // http://api.drupal.org/api/drupal/includes%21form.inc/function/drupal_form_submit/7
@@ -13088,11 +13090,12 @@ function gv_misc_createNode_conference($form_state) {
   node_object_prepare($node);
   
   //$node->date = $form_state['values']['post_date'];
-  $node->created = $form_state['values']['created'];
-  $node->changed = $form_state['values']['changed'];
+  $time = time();
+  $node->created = $time; //$form_state['values']['created'];
+  $node->changed = $time; //$form_state['values']['changed'];
   
           
-  $node->title = $form_state['values']['title'];
+  $node->title = $conference['Conference Name']; //$form_state['values']['title'];
   $node->language = LANGUAGE_NONE;
   $node->uid = $user->uid;
   $node->status = 1;
@@ -13101,10 +13104,17 @@ function gv_misc_createNode_conference($form_state) {
   $node->comment = 0;
   
   $node->body[$node->language][0]['format'] = 'full_html';
-  $node->body[$node->language][0]['value'] = $form_state['values']['body']['und'][0]['value'];
-  $node->body[$node->language][0]['summary'] = $form_state['values']['body']['und'][0]['summary'];
-  $node->body[$node->language][0]['safe_summary'] = check_plain($form_state['values']['body']['und'][0]['summary']);
-  $node->body[$node->language][0]['safe_value'] = check_plain($form_state['values']['body']['und'][0]['value']);
+  $node->body[$node->language][0]['value'] = $conference['Description'];
+  $node->body[$node->language][0]['summary'] = '';
+  $node->body[$node->language][0]['safe_summary'] = '';
+  $node->body[$node->language][0]['safe_value'] = check_plain($conference['Description']);
+  
+  $node->field_conf_link[$node->language][0] = array(
+    'value' => $conference['Site'],
+    'safe_value' => l($conference['Site'], $conference['Site'], array('absolute' => TRUE, 'external' => TRUE)),
+    'format' => 'plain_text',
+  );
+  
   /*
   $node->field_extra_data[$node->language][0] = array(
     'value' => NULL,
@@ -13146,8 +13156,8 @@ function gv_misc_createNode_conference($form_state) {
     'pathauto' => 0,
   );
   
-  dpm($node);
-  return;
+  //dpm($node);
+  //return;
   
   if ($node = node_submit($node)) {
     node_save($node);
