@@ -9097,6 +9097,9 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
                 }
                 $row = array();
                 foreach ($titles as $key => $title) {
+                  if ($data[$key] == 'TBD') {
+                    $data[$key] = '';
+                  }
                   $row[$title] = $data[$key];
                 }
                 $file_data[] = $row;
