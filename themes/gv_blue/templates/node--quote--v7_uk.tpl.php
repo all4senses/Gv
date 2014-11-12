@@ -225,7 +225,7 @@
                   echo '</ul>';
                 }
                 */
-                echo '<img src="/images/theme/lp-slider-logos-v7-2.png" alt="Supported by Major VoIP Brands" />';
+                echo '<img src="/sites/all/themes/gv_blue/css/images/lp-slider-logos-v7-2.png" alt="Supported by Major VoIP Brands" />';
 
             ?>
 
