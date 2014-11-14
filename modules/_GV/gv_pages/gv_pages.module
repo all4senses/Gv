@@ -6791,7 +6791,7 @@ function gv_pages_validateForm_phoneReview(&$form, &$form_state) {
  */
 function gv_pages_validateForm_review(&$form, &$form_state) {
   
-  //dpm($form); dpm($form_state);
+  dpm($form); dpm($form_state);
 
   // Don't check anything if we delete the node.
   if ($form_state['submit_handlers'][0] == 'node_form_delete_submit') {
