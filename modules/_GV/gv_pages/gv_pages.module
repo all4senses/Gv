@@ -4426,8 +4426,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           
           unset($form['field_ref_provider'], 
                 $form['field_r_oprovider'],
-                $form['provider']['field_ref_provider']['und']['#title'],
-                $form['provider']['field_r_oprovider']['und'][0]['value']['#title']);
+                //$form['provider']['field_ref_provider']['und']['#title'],
+                //$form['provider']['field_r_oprovider']['und'][0]['value']['#title']
+                  );
           
           //dpm($form['provider']);
           
@@ -4944,6 +4945,11 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 }
 
 
+/**
+ * 
+ * @global type $user
+ * @param type $formDeprecated in favor of v2.
+ */
 function gv_page_alterSubmitReviewPage_v1(&$form) {
 
   
