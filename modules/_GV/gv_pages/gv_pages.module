@@ -6808,7 +6808,11 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
 
   
   // Clear hints, if any.
-  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
+  //  $fields_to_rebuild = array('field_r_fname' => 'FIRST NAME', 'field_r_lname' => 'LAST NAME', 'field_r_email' => 'YOUR EMAIL');
+  
+  //$fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
+  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => 'FIRST NAME', 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => 'LAST NAME', 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => 'YOUR EMAIL', 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
+  
   foreach ($fields_to_clear_hints as $fname => $fdata) {
    
     if ($form_state['values'][$fname] == t($fdata['hint'])) {
@@ -7163,12 +7167,12 @@ function gv_pages_submitForm_review(&$form, &$form_state) {
     }
     
     
-    //watchdog('Capture review submission values', print_r($form_state['values'], TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+    watchdog('-> GV New review for ' . $provider_name, print_r($form_state['values'], TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
     gv_misc_sendMessage('new_review_admin_notify', array('provider_name' => $provider_name, 'review' => $form_state['values']['body']['und'][0]['value'], 'spam' => $spam));
     
   } // End of if (!isset($form_state['values']['nid']) OR !$form_state['values']['nid']) {
   else {
-    // clear previous votes if an email has been chabged
+    // clear previous votes if an email has been changed
     // Some excessive code, that duplicates almost the same in hook_update, but only in case if an email has been changed
     if ($form_state['values']['email_old'] != $form_state['values']['field_r_email_temp']) {
       

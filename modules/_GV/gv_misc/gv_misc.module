@@ -8019,7 +8019,7 @@ GetVoIP Team
       $message['subject'] = t('GV New Provider review for "!provider" has been submitted', array('!provider' => $params['provider_name']));
       $message['body'][] = t('Dear administrator!
 
-A new review for the provider "!provider" just has been submitted' . ($params['spam'] ? ' (perhaps it is SPAM)' : '') . ':
+A new review for the provider "!provider" just has been submitted' . ($params['spam'] ? ' (perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') . ':
 
 ' . 
 
