@@ -4421,8 +4421,12 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
           $form['provider']['field_r_oprovider']['#suffix'] = '<div class="bottom-clear"></div>';
       
-          
+          $form['provider']['field_ref_provider']['#title_display'] = 'invisible';
+          $form['provider']['field_r_oprovider']['#title_display'] = 'invisible';
+                  
           $form['provider']['field_r_oprovider']['und'][0]['value']['#attributes']['title'] = str_replace('&quot;', '"',$form['provider']['field_r_oprovider']['und'][0]['value']['#title']);
+          
+          
           
           unset($form['field_ref_provider'], 
                 $form['field_r_oprovider']
