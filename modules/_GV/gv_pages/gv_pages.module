@@ -6811,7 +6811,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   //  $fields_to_rebuild = array('field_r_fname' => 'FIRST NAME', 'field_r_lname' => 'LAST NAME', 'field_r_email' => 'YOUR EMAIL');
   
   //$fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
-  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => 'FIRST NAME', 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => 'LAST NAME', 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => 'YOUR EMAIL', 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
+  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => 'FIRST NAME', 'set' => 'about_you', 'itle' => 'FIRST NAME'), 'field_r_lname_temp' => array('hint' => 'LAST NAME', 'set' => 'about_you', 'title' => 'LAST NAME'), 'field_r_email_temp' => array('hint' => 'YOUR EMAIL', 'set' => 'about_you', 'title' => 'YOUR EMAIL'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview', 'title' => 'PROS'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview', 'title' => 'CONS'));
   
   foreach ($fields_to_clear_hints as $fname => $fdata) {
    
@@ -6827,8 +6827,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
       // Just in case on more.
       $form_state['values'][$fname] = NULL;
       
-      if (isset($form[$fdata['set']][$fname]['#required']) && $form[$fdata['set']][$fname]['#required']) {
-        form_set_error($fname, t('Please fill the field "' . ($form[$fdata['set']][$fname]['#title'] ? $form[$fdata['set']][$fname]['#title'] : $fdata['title'] ) . '"'));
+      if (!empty($form[$fdata['set']][$fname]['#required'])) {
+        form_set_error($fname, t('Please fill the field "' . (@$form[$fdata['set']][$fname]['#title'] ? $form[$fdata['set']][$fname]['#title'] : $fdata['title'] ) . '"'));
       }
     }
     
