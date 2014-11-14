@@ -233,7 +233,7 @@
             <!--<h1>We identify and rank the best business VoIP providers and phone systems.</h1>-->
 
             <div class="quotes one">
-              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert analysis and unparalleled information along with hands-on reviews and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
+              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert price point analysis, and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
               <div class="source"><span class="image"></span><div>Chris Rabbu</div> VP of Marketing at Vonage, Inc.</div>
             </div>
             <div class="bottom-clear"></div> 
