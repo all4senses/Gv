@@ -6934,9 +6934,12 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // On node_presave it field may be cleared and its data will be pushed to Voting API tables.
   // OR it its data may remain, if the review is not approved OR it's for not listed provider
   form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
-    
+  
+  dpm('$author_uid - ' . $author_uid);
+  dpm('$author_email - ' . $author_email);
+  
   // If OTHER SP has been set.
-  if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
+  if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && !empty($form_state['values']['field_r_oprovider']['und'][0]['value'])) {
     // Check if author of this review has already submitted a review for a selected provider.
     $review = gv_misc_userHasSubmittedReview(NULL, $author_uid, $author_email, $form_state['values']['field_r_oprovider']['und'][0]['value'], $current_review_nid);
   } // End of if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && isset($form_state['values']['field_r_oprovider']['und'][0]['value']) && $form_state['values']['field_r_oprovider']['und'][0]['value']) {
