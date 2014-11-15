@@ -6846,7 +6846,32 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // Doesnot affect the for after errors
   //$form_state['rebuild'] = TRUE;
   
+  
+  
+  
+  if ($form_state['values']['field_r_oprovider']['und'][0]['value'] == $form['provider']['field_r_oprovider']['und'][0]['value']['#attributes']['title']) {
+  //if ($form_state['values']['field_r_oprovider']['und'][0]['value'] == 'IF SELECTED "OTHER", ENTER HERE') {
+      
+      // This clear the field.
+      //$form[$fdata['set']][$fname]['#value'] = NULL;
+      $form['provider']['field_r_oprovider']['und'][0]['value']['#value'] = NULL;
+      $form_state['values']['field_r_oprovider']['und'][0]['value'] = NULL;
+  }
     
+  
+  
+  if ($form_state['values']['body']['und'][0]['value'] == $form['ureview']['u_input']['body']['und'][0]['value']['#attributes']['title']) { // REVIEW
+      
+      // This clear the field.
+      //$form[$fdata['set']][$fname]['#value'] = NULL;
+      $form['ureview']['u_input']['body']['und'][0]['value']['#value'] = NULL;
+      $form_state['values']['body']['und'][0]['value'] = NULL;
+      
+      //form_set_error($form['ureview']['u_input']['body'], 'Please write a review');
+      form_set_error('body', 'Please write a review.');
+  }
+  
+  
    // Rebuild original fields field_r_fname, field_r_lname, field_r_email from temporary fields fields field_r_fname_temp, field_r_lname_temp, field_r_email_temp
   // Without this (with just rewriting those field with its simplified versions) Drupal will fire errors like eg Warning: array_values() expects parameter 1 to be array, string given in _field_filter_items()...)
   form_set_value($form['field_r_fname'], array('und' => array(0 => array('value' => isset($form_state['values']['field_r_fname_temp']) ? $form_state['values']['field_r_fname_temp'] : NULL ))), $form_state);
@@ -6935,8 +6960,8 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   // OR it its data may remain, if the review is not approved OR it's for not listed provider
   form_set_value($form['field_ratings_oprovider'], array('und' => array(0 => array('value' => serialize($votes)))), $form_state);
   
-  dpm('$author_uid - ' . $author_uid);
-  dpm('$author_email - ' . $author_email);
+  //dpm('$author_uid - ' . $author_uid);
+  //dpm('$author_email - ' . $author_email);
   
   // If OTHER SP has been set.
   if($form_state['values']['field_ref_provider']['und'][0]['target_id'] == 41 && !empty($form_state['values']['field_r_oprovider']['und'][0]['value'])) {
