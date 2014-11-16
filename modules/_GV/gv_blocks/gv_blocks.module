@@ -3620,6 +3620,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/hosted-pbx' => 'page-compare-pbx-voip-providers',
     '/web-conferencing' => 'web-conferencing-voip-providers',
     '/crm-software' => 'crm-voip-providers',
+    '/cloud-backup' => 'cloud-backup',
   );
   
   $map_preface_type_to_service_type = array(
@@ -3633,6 +3634,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     //'page-compare-smbv-voip-providers' => NULL,
     'web-conferencing-voip-providers' => 'wc',
     'crm-voip-providers' => 'crm',
+    'cloud-backup' => 'cb',
   );
   
   $map_path_to_type = array(
@@ -3647,6 +3649,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/small-business-voip' => 'Small Business VoIP',
     '/web-conferencing' => 'Video Web Conferencing Solutions',
     '/crm-software' => 'CRM Solutions',
+    '/cloud-backup' => 'Cloud Backup Providers',
   );
  
   
@@ -3672,6 +3675,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/small-business-voip' => 'Small Business VoIP',
     '/web-conferencing' => 'Video Web Conferencing Solutions',
     '/crm-software' => 'CRM Solutions',
+    '/cloud-backup' => 'Cloud Backup',
   );
  
   
@@ -3688,6 +3692,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     //'page-compare-smbv-voip-providers' => NULL,
     'web-conferencing-voip-providers' => 2,
     'crm-voip-providers' => 2,
+    'cloud-backup' => 3,
   );
   
   
@@ -5542,8 +5547,12 @@ function gv_blocks_get_requestQuote_block_v8() {
 //    return NULL;
 //  }
   
-  // Don't show the block if on the 404 page
-  if ($_GET['q'] == 'node/988') {
+  
+  if (
+       $_GET['q'] == 'node/988' // Don't show the block if on the 404 page
+       || 
+       $_GET['q'] == 'node/2488' // Don't show on /cloud-backup
+      ) {
     return NULL;
   }
   
