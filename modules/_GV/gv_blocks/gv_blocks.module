@@ -154,6 +154,11 @@ function gv_blocks_block_info() {
     'info' => 'Bottom section of CRM providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['cb_p_bottom'] = array(
+    'info' => 'Bottom section of CB providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   
   $blocks['best_voip_p_bottom'] = array(
     'info' => 'Bottom section of best-voip-service-providers page preface',
@@ -630,6 +635,10 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('page-reseller-providers');
       break;
     
+    case 'cb_p_bottom':
+      $block['subject'] = 'Bottom section of CB providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('cloud-backup');
+      break;
     
 
     case 'news_tags':
