@@ -6546,10 +6546,11 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
     
     $p_data_quick[$service_type_short]['frtr'] = isset($service['frtr']) ? $service['frtr'] : '';
     $p_data_quick[$service_type_short]['fxsmo'] = isset($service['fxsmo']) ? $service['fxsmo'] : '';
+    $p_data_quick[$service_type_short]['stor'] = isset($service['stor']) ? $service['stor'] : '';
     
     
     // YouTube video ID
-    if (isset($service['vr-y']) && $service['vr-y']) {
+    if (!empty($service['vr-y'])) {
       // Allow to enter direct YouTube url and then parse it to save just a video ID.
       if (preg_match('|^.*v=(.*)&.*$|', $service['vr-y'], $matches)) {
         $p_data_quick[$service_type_short]['vr-y'] = $matches[1];
