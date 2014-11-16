@@ -2544,6 +2544,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/hosted-pbx' => 'Hosted PBX',
       '/web-conferencing' => 'Web Conferencing',
        //'/small-business-voip' => 'Small Business VoIP',
+      '/cloud-backup' => 'Cloud Backup',
     );
     
     $map_path_to_type = array(
@@ -2560,6 +2561,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/web-conferencing' => 'wc',
       '/crm-software' => 'crm',
       //'/small-business-voip' => 'smbv',
+      '/cloud-backup' => 'cb',
     );
     
     if(!$service_type = @$map_path_to_type[$_SERVER['REDIRECT_URL']]) {
@@ -2610,6 +2612,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     'ca' => array (
       'rating_table' => 'field_data_field_p_erating_bu_ca',
       'rating_field' => 'field_p_erating_bu_ca_value',
+    ),
+    'cb' => array (
+      'rating_table' => 'field_data_field_p_erating_cb',
+      'rating_field' => 'field_p_erating_cb_value',
     ),
   );
   
