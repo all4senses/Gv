@@ -6377,6 +6377,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
       
     //'all_reviews_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
     'all_reviews_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
+      
+    'top_cb_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_cb'), 'listing_pos_fields' => array('field_p_erating_cb')),
   );
   
   
@@ -9629,6 +9631,9 @@ function gv_misc_getProviderQuickData($target, $data) {
                               '/canada' => 'top_ca_providers',
 
                               '/residential' => 'top_re_providers', 
+          
+                              '/cloud-backup' => 'top_cb_providers', 
+                                
                               
                               '/residential-voip-reviews' => 'top_re_providers',
                               '/reviews/residential' => 'top_re_providers_rev',
@@ -9636,6 +9641,7 @@ function gv_misc_getProviderQuickData($target, $data) {
                               // LP pages
                               '/service-quotes' => 'top_bu_providers',
                               '/service-quotes-ca' => 'top_bu_providers',
+          
                             );
 
       //$current_url = $_SERVER['REQUEST_URI'];
