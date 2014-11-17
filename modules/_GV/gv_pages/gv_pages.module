@@ -9279,10 +9279,10 @@ function gv_pages_gvSettings_form($node, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_gvSettings_form_submit(&$form, &$form_state) {
-  dpm($form_state['values']);
+  //dpm($form_state['values']);
   
   $gv_settings = variable_get('gv_settings', NULL);
-  dpm($gv_settings);
+  //dpm($gv_settings);
   
   foreach($gv_settings as $section_name => $section) {
     foreach($section as $value_set_name => $value_set) {
