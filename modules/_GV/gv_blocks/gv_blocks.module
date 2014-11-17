@@ -462,6 +462,11 @@ function gv_blocks_block_info() {
     'info' => 'Search block for main conf page',
     'cache' => DRUPAL_NO_CACHE,
   );
+  
+  $blocks['sip_chart_alteredview'] = array(
+    'info' => 'Altered SIP chart from view - with rotated first providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
 
   
   return $blocks;
@@ -942,6 +947,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_get_confMainSearch();
       break;
     
+    case 'sip_chart_alteredview':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_chartFromView_altered_rotatedProviders(array('view' => 'providers', 'display' => 'bl_p_sip_rotated'));
+      break;
+    
     
       
   }
@@ -1209,6 +1219,8 @@ function gv_blocks_block_configure($delta = '') {
         '#format' => 'full_html',
         '#default_value' => $data['html_images']['value'],
       );
+      
+      
       
       
       // Upload images using 'managed_file' form api element. 
@@ -9524,6 +9536,9 @@ function gv_blocks_get_confMainSearch_form_submit(&$form, &$form_state) {
 }
 
 
+/**
+ * Get top providers logos for LP.
+ */
 function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
   if ($type == 'Top 5') {
     //$allProvidersData = gv_misc_getProvidersDataQuick();
@@ -9577,4 +9592,281 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     
     return $out . '</tr></tbody></table>';
   }
+}
+
+
+
+/**
+ * chartFromView_altered_rotatedProviders.
+ */
+function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
+  
+  
+  $hr_settings = variable_get('gv_settings', NULL);
+  
+  
+  if (empty($hr_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+    $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
+      'descr' => 'Turn On the SIP page chart ab-testing rotation',
+      'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0, 'descr' => 'Turn on Rotation for logged In users'),
+      'Turn_On_for_logged_Out' => array('field_type' => 'checkbox', 'value' => 0),
+      'Remain_Top_Rating_For_First_Position' => array('field_type' => 'checkbox', 'value' => 0),
+    );
+    variable_set('gv_settings', $gv_settings);
+  }
+  
+  
+  global $user;
+  if ( ($user->uid && !$hr_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_In']['value']) || (!$user->uid && !$hr_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_Out']['value'])) {
+    // Show turned Off, simple chart without rotation
+  
+    dpm('Cached: ' . $user->uid);
+    //global $language;
+    $cache_name = 'gv_SIPOriginal_notAlteredChart_' . $view_n_display['display'];
+    
+    $info = '<div class="info cached" style="display: none;"></div>';
+    $cache_content = cache_get($cache_name);
+    if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+      return '<div class="info cached" style="display: none;"></div>'. $cache_content->data;
+    }
+    
+    // Or build the original char, save and  return it.
+    $chart_themed = NULL;
+
+    $view = views_get_view($view_n_display['view']);
+    // Run view's query.
+    $view->execute($view_n_display['display']);
+    
+    $chart_themed = $view->preview($view_n_display['display']);
+  
+    cache_set($cache_name, $chart_themed, 'cache', time() + 14400);
+    
+    return '<div class="info cached rebuilt" style="display: none;"></div>' . $chart_themed;
+  }
+  
+  dpm('Not cached: ' . $user->uid);
+  
+  // Else show rotating chart with ab-testing turned ON.
+  
+  $chart_themed = NULL;
+
+  $view = views_get_view($view_n_display['view']);
+    
+  
+  // Run view's query.
+  $view->execute($view_n_display['display']);
+
+  //dpm($view);
+  //dpm($view->result);
+  
+  $fixed_positions = array();
+  
+  
+  
+  // ---------------------------
+  // iPage should be first 3 of 4 consecutive page loadings.
+  // Bluehost should be first 1 of 4 consecutive page loadings.
+  $random_array = array_slice($view->result, 0, 3);
+  
+  dpm($random_array);
+  
+  foreach ($random_array as $key => $result) {
+    if ($result->nid == 63) {
+      //Nextiva page nid is 63
+      // Key should be always 1 (2nd position)
+      $fixed_positions['Nextiva_key'] = $key;
+    }
+    elseif ($result->nid == 88) {
+      // 8x8 page nid is 88
+      // Key should be always 0 OR 2 (1st or 3nd position)
+      $fixed_positions['8x8_key'] = $key;
+    }
+  }
+  
+  
+  
+  if (!$current_top_positions_counter = variable_get('gv_current_top_positions_counter')) {
+    $current_top_positions_counter = array(
+        'Nextiva_top' => 0,
+        '8x8_top' => 0,
+    );
+  }
+  
+  
+  if ($current_top_positions_counter['Nextiva_top'] + 1 == 2) { // 50/50 for i/b
+  //if ($current_top_positions_counter['Nextiva_top'] + 1 > 3) { // 75/25 for i/b
+    // 25%
+    $current_top_positions_counter = array(
+        'Nextiva_top' => 0,
+        '8x8_top' => 1,
+    );
+  }
+  else {
+    // 75%
+    $current_top_positions_counter = array(
+        'Nextiva_top' => $current_top_positions_counter['Nextiva_top'] + 1,
+        '8x8_top' => 0,
+    );
+  }
+  
+  dpm($current_top_positions_counter);
+  
+  variable_set('gv_current_top_positions_counter', $current_top_positions_counter);
+  
+  
+  return 'xxx';
+  
+  
+  
+  
+  //if ($user->uid) 
+    {
+  
+    if ($current_top_positions_counter['Nextiva_top']) {
+      $view->result[0] = $random_array[$fixed_positions['Nextiva_key']];
+      $view->result[1] = $random_array[$fixed_positions['8x8_key']];
+    }
+    else {
+      
+      //Change urls to alternative.
+      //dpm($random_array[$fixed_positions['Nextiva_key']]);
+      //dpm($random_array[$fixed_positions['Nextiva_key']]->views_php_4);
+      
+      //dpm(str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4));
+      $Nextiva_p_data = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
+      //dpm($Nextiva_p_data);
+      // Change url in cnaged position to alternative one
+      if (!empty($Nextiva_p_data['s']['sh']['s-url2'])) {
+        $random_array[$fixed_positions['Nextiva_key']]->views_php_4 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4);
+        $random_array[$fixed_positions['Nextiva_key']]->views_php_11 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_11);
+      }
+      // Change position list number to 2
+      $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 2;
+      $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 2;
+      
+      //$Nextiva_p_data_quick = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
+      //dpm($Nextiva_p_data_quick);
+      
+      //dpm($random_array[$fixed_positions['8x8_key']]);
+      //dpm($random_array[$fixed_positions['8x8_key']]->views_php_4);
+      $_8x8_p_data = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
+      //dpm($_8x8_p_data);
+      // Change url in cnaged position to alternative one
+      if (!empty($_8x8_p_data['s']['sh']['s-url2'])) {
+        $random_array[$fixed_positions['8x8_key']]->views_php_4 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_4);
+        $random_array[$fixed_positions['8x8_key']]->views_php_11 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_11);
+      }
+      // Change position list number to 1
+      $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 1;
+      $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 1;
+      
+      //$_8x8_p_data_quick = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
+      //dpm($_8x8_p_data_quick);
+      
+      //dpm($random_array);
+      
+      
+      // Swap ratings to remain the better rating to the new top provider.
+      if ($gv_settings['Alter_Charts']['AB_Testing_on_Home']['Remain_Top_Rating_For_First_Position']['value']) {
+        $old_bluehost_rating = $random_array[$fixed_positions['8x8_key']]->views_php_10;
+        $random_array[$fixed_positions['8x8_key']]->views_php_10 = $random_array[$fixed_positions['Nextiva_key']]->views_php_10;
+        $random_array[$fixed_positions['Nextiva_key']]->views_php_10 = $old_bluehost_rating;
+      }
+      
+      // And finally swap corrected rows.
+      $view->result[1] = $random_array[$fixed_positions['Nextiva_key']];
+      $view->result[0] = $random_array[$fixed_positions['8x8_key']];
+    }
+    
+    // Try to cope with cached pages table (just starting thoughts).
+      $current_top_positions_counter['current_uid'] = $user->uid;
+//    drupal_add_js(array('gv_blocks' => array(
+//      'gv_current_top_positions_counter' => $current_top_positions_counter,
+//    )), 'setting');
+
+    // Update (reRequest) the cached page only for logged out users.
+    // For admins cached copy is not created so no need to repeat recreate the page (and extra increment the counter), that would cause losing of steps.
+    if (!$user->uid) {
+      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+      drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
+    }
+    
+    
+  }
+  
+  
+
+  
+  
+  
+  //-----------------------------------------
+  
+  
+  // ----------------------------------------
+  // Like on GV initial case...
+  // iPage should be always second
+  // Bluehost should be always in 1 or 3 position.
+  /*
+  $random_array = array_slice($view->result, 0, 4);
+  
+  
+  foreach ($random_array as $key => $result) {
+    if ($result->nid == 86) {
+      // iPage page nid is 12
+      // Key should be always 1 (2nd position)
+      $fixed_positions['iPage_key'] = $key;
+    }
+    elseif ($result->nid == 69) {
+      // Bluehost page nid is 36
+      // Key should be always 0 OR 2 (1st or 3nd position)
+      $fixed_positions['Bluehost_key'] = $key;
+    }
+  }
+  
+  //dpm($random_array);
+  $random_index = array(0, 1, 2, 3);
+  //shuffle($random_index);
+  
+  do {
+    shuffle($random_index);
+  }while (
+            // iPage_key should be always 1 (2nd position)
+            (isset($fixed_positions['iPage_key']) && $random_index[1] != $fixed_positions['iPage_key'])
+            ||
+            // Bluehost_key should be always 0 OR 2 (1st or 3nd position)
+            (
+              isset($fixed_positions['Bluehost_key']) 
+              && 
+              !($random_index[0] == $fixed_positions['Bluehost_key'] || $random_index[2] == $fixed_positions['Bluehost_key'])
+            )
+          );
+  
+  //dpm($random_index);
+  
+  foreach ($random_index as $key => $value) {
+    $view->result[$key] = $random_array[$value];
+  }
+  //dpm($view->result);
+  */ 
+  //----------------------------------------------------------------------
+  
+  
+  
+
+  $chart_themed = $view->preview($view_n_display['display']);
+  //dpm($view->result);
+  
+  
+  //watchdog('HR Home Rotation iteration', print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+    watchdog('i-' . $current_top_positions_counter['iPage_top'] . ',b-' . $current_top_positions_counter['Bluehost_top'] . ',u-' . $current_top_positions_counter['current_uid'], print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+    
+    // $current_top_positions_counter = array(
+//        'iPage_top' => $current_top_positions_counter['iPage_top'] + 1,
+//        'Bluehost_top' => 0,
+//    );
+    
+  $info = '<div class="info" style="display: none;">iPage_top = ' . $current_top_positions_counter['iPage_top'] . ', Bluehost_top = ' . $current_top_positions_counter['Bluehost_top'] . '</div>';
+  
+  
+  return $info . $chart_themed;
 }

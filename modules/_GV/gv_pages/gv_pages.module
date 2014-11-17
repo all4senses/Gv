@@ -72,6 +72,16 @@ function gv_pages_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   
+  $items['admin/content/gv_settings'] = array(
+    'title' => 'GV Settings',
+    'description' => 'Different GV values and settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gv_pages_hrSettings_form'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  
   /*
   // Deprecated.
   $items['voip-speed-test'] = array(
@@ -9165,4 +9175,123 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
   }
   
   drupal_goto($_GET['q'], array('query' => $get));
+}
+
+
+
+/**
+ * Implements hook_form().
+ *
+ * GV global custom settings for admins.
+ * 
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_hrSettings_form($node, &$form_state, $provider_nid) {
+  
+  
+  $gv_settings = variable_get('gv_settings', NULL);
+  
+  //dpm($hr_settings);
+  
+  //variable_del('hr_settings');
+  
+  if (empty($hr_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+    $hr_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
+      'descr' => 'Turn On the SIP page chart ab-testing rotation',
+      'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0),
+      'Turn_On_for_logged_Out' => array('field_type' => 'checkbox', 'value' => 0),
+    );
+    variable_set('gv_settings', $hr_settings);
+  }
+  
+  //dpm($gv_settings);
+  
+  //$hr_settings = variable_get('gv_settings', NULL);
+  //dpm($gv_settings);
+  
+  foreach ($gv_settings as $section_label => $section) {
+      $form[$section_label] = array(
+        '#type' => 'fieldset',
+        '#title' => str_replace('_', ' ', $section_label),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#tree' => TRUE,
+      );
+      
+            foreach($section as $value_set_name => $value_set) {
+              
+
+                
+                
+                $form[$section_label][$value_set_name] = array(
+                    '#type' => 'container',
+                    //'#title' => str_replace('_', ' ', $value_set_name),
+                    //'#default_value' => $value,
+                    //'#description' => @$value_set['description'],
+                  );
+                $form[$section_label][$value_set_name]['title'] = array(
+                  '#markup' => '<div class="title">' . str_replace('_', ' ', $value_set_name) . '</div><div class="description">' . @$value_set['descr'] . '</div>',
+                );
+                if (isset($value_set['descr'])) {
+                  unset($value_set['descr']);
+                }
+                foreach($value_set as $key => $value) {
+                  if (is_array($value)) {
+                    $field_type = $value['field_type'];
+                    $default_value = $value['value'];
+                    $description = @$value['descr'];
+                  }
+                  else {
+                    $field_type = 'textfield';
+                    $default_value = $value;
+                  }
+                  $title = str_replace('_', ' ', $key);
+                  
+                  $form[$section_label][$value_set_name][$key] = array(
+                    '#type' => $field_type,
+                    '#title' => $title,
+                    '#default_value' => $default_value,
+                    '#description' => @$description,
+                    
+                  );
+                }
+            }
+  }
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save settings',
+  );
+  
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * 
+ * 
+ * @return $form
+ *   Return nothing.
+ */
+function gv_pages_hrSettings_form_submit(&$form, &$form_state) {
+  //dpm($form_state['values']);
+  
+  $hr_settings = variable_get('gv_settings', NULL);
+  //dpm($hr_settings);
+  
+  foreach($gv_settings as $section_name => $section) {
+    foreach($section as $value_set_name => $value_set) {
+      foreach($value_set as $key => $value) {
+        $gv_settings[$section_name][$value_set_name][$key]['value'] = $form_state['values'][$section_name][$value_set_name][$key];
+      }
+    }
+  }
+  drupal_set_message('The settings have been saved.', 'warning');
+  variable_set('gv_settings', $hr_settings);
+  //dpm($gv_settings);
+  //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
 }
