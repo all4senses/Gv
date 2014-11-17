@@ -9287,7 +9287,9 @@ function gv_pages_gvSettings_form_submit(&$form, &$form_state) {
   foreach($gv_settings as $section_name => $section) {
     foreach($section as $value_set_name => $value_set) {
       foreach($value_set as $key => $value) {
-        $gv_settings[$section_name][$value_set_name][$key]['value'] = $form_state['values'][$section_name][$value_set_name][$key];
+        if (isset($form_state['values'][$section_name][$value_set_name][$key])) {
+          $gv_settings[$section_name][$value_set_name][$key]['value'] = $form_state['values'][$section_name][$value_set_name][$key];
+        }
       }
     }
   }
