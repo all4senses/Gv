@@ -9698,6 +9698,39 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   }
   
   
+  
+  $positions_sets = array(
+      array(0, 1, 2),
+      array(1, 0, 2),
+      array(0, 2, 1),
+      array(1, 2, 0),
+      array(2, 1, 0),
+      array(2, 0, 1),
+  );
+  
+  $current_positions_set = variable_get('gv_current_top_positions_counter', 0);
+  if ($current_positions_set + 1 > 5) {
+    $current_positions_set = 0;
+  }
+  else {
+    $current_positions_set += 1;
+  }
+  
+  dpm($positions_sets[$current_positions_set]);
+  
+  $view->result[0] = $random_array[$positions_sets[$current_positions_set][0]];
+  $view->result[1] = $random_array[$positions_sets[$current_positions_set][1]];
+  $view->result[2] = $random_array[$positions_sets[$current_positions_set][2]];
+  
+  if (!$user->uid) {
+    $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+    drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
+  }
+  
+  /*
+  variable_get('gv_current_top_positions_counter', $current_positions_set);
+  
+  
   if ($current_top_positions_counter['Nextiva_top'] + 1 == 2) { // 50/50 for i/b
   //if ($current_top_positions_counter['Nextiva_top'] + 1 > 3) { // 75/25 for i/b
     // 25%
@@ -9718,12 +9751,12 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
   variable_set('gv_current_top_positions_counter', $current_top_positions_counter);
   
-  
-  return 'xxx';
-  
-  
+  */
+  //return 'xxx';
   
   
+  
+  /*
   //if ($user->uid) 
     {
   
@@ -9798,7 +9831,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
     
     
   }
-  
+  */
   
 
   
@@ -9863,14 +9896,14 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
   
   //watchdog('HR Home Rotation iteration', print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
-    watchdog('i-' . $current_top_positions_counter['iPage_top'] . ',b-' . $current_top_positions_counter['Bluehost_top'] . ',u-' . $current_top_positions_counter['current_uid'], print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+    ////watchdog('i-' . $current_top_positions_counter['iPage_top'] . ',b-' . $current_top_positions_counter['Bluehost_top'] . ',u-' . $current_top_positions_counter['current_uid'], print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
     
     // $current_top_positions_counter = array(
 //        'iPage_top' => $current_top_positions_counter['iPage_top'] + 1,
 //        'Bluehost_top' => 0,
 //    );
     
-  $info = '<div class="info" style="display: none;">iPage_top = ' . $current_top_positions_counter['iPage_top'] . ', Bluehost_top = ' . $current_top_positions_counter['Bluehost_top'] . '</div>';
+  $info = '';// '<div class="info" style="display: none;">iPage_top = ' . $current_top_positions_counter['iPage_top'] . ', Bluehost_top = ' . $current_top_positions_counter['Bluehost_top'] . '</div>';
   
   
   return $info . $chart_themed;
