@@ -9601,11 +9601,6 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
  */
 function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
-  global $user;
-  
-  if ($user->uid != 1) {
-    return NULL;
-  }
   
   $gv_settings = variable_get('gv_settings', NULL);
   
