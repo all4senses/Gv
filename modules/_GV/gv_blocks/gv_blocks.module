@@ -9601,11 +9601,16 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
  */
 function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
+  global $user;
   
-  $hr_settings = variable_get('gv_settings', NULL);
+  if ($user->uid != 1) {
+    return NULL;
+  }
+  
+  $gv_settings = variable_get('gv_settings', NULL);
   
   
-  if (empty($hr_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+  if (empty($gv_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
     $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
       'descr' => 'Turn On the SIP page chart ab-testing rotation',
       'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0, 'descr' => 'Turn on Rotation for logged In users'),
@@ -9617,7 +9622,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
   
   global $user;
-  if ( ($user->uid && !$hr_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_In']['value']) || (!$user->uid && !$hr_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_Out']['value'])) {
+  if ( ($user->uid && !$gv_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_In']['value']) || (!$user->uid && !$gv_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_Out']['value'])) {
     // Show turned Off, simple chart without rotation
   
     dpm('Cached: ' . $user->uid);
@@ -9708,13 +9713,14 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
       array(2, 0, 1),
   );
   
-  $current_positions_set = variable_get('gv_current_top_positions_counter', 0);
+  $current_positions_set = variable_get('current_positions_set', 0);
   if ($current_positions_set + 1 > 5) {
     $current_positions_set = 0;
   }
   else {
     $current_positions_set += 1;
   }
+  variable_set('current_positions_set', $current_positions_set);
   
   dpm($positions_sets[$current_positions_set]);
   
