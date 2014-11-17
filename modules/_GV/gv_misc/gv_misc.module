@@ -228,6 +228,22 @@ function gv_misc_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  
+  
+  $items['update-cached-sip-page'] = array(
+    'title' => 'Update Boost cached SIP page',
+    'page callback' => 'gv_misc_updateCachedSIPpage',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  
+  $items['update-cached-sip-page-ajax'] = array(
+    'title' => 'Update Boost cached SIP page, to be called via ajax',
+    'page callback' => 'gv_misc_updateCachedSIPpage_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  
   return $items;
 }
 
@@ -13292,6 +13308,39 @@ function gv_misc_createNode_conference($conference) {
 
 
 
+/**
+ * Update Boost cached homepage.
+ * To be called via exec(
+ */
+function gv_misc_updateCachedSIPpage() {
+  
+   unlink('cache/normal/getvoip.com/sip-trunking___.html');
+  
+   gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/sip-trunking');
+   
+   return '.';
+}
+
+
+/**
+ * Update Boost cached homepage.
+ * Middle function, To be called via ajax
+ */
+function gv_misc_updateCachedSIPpage_ajax() {
+  
+  $status = TRUE;
+  
+  // launch and leave in background, let make everything in background
+  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-homepage > /dev/null &');
+  
+  // Problems with boost that doesn't cache pages if there are POST request from ajax on them.
+  // So make it GET somehow solve the problem.
+  // Here some discussing related to DRUPAL_UID set for anonimous users...
+  // https://www.drupal.org/node/1807818
+  
+  
+  drupal_json_output(array('status' => $status /*, 'data' => $output*/));
+}
 
 
 
