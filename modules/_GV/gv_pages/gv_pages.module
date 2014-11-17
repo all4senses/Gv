@@ -9192,7 +9192,7 @@ function gv_pages_gvSettings_form($node, &$form_state) {
   
   $gv_settings = variable_get('gv_settings', NULL);
   
-  if (empty($hr_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+  if (empty($gv_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
     $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
       'descr' => 'Turn On the SIP page chart ab-testing rotation',
       'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0, 'descr' => 'Turn on Rotation for logged In users'),
@@ -9201,22 +9201,22 @@ function gv_pages_gvSettings_form($node, &$form_state) {
     );
     variable_set('gv_settings', $gv_settings);
   }
-  //dpm($hr_settings);
+  //dpm($gv_settings);
   
-  //variable_del('hr_settings');
+  //variable_del('gv_settings');
   
-  if (empty($hr_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
-    $hr_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
+  if (empty($gv_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+    $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
       'descr' => 'Turn On the SIP page chart ab-testing rotation',
       'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0),
       'Turn_On_for_logged_Out' => array('field_type' => 'checkbox', 'value' => 0),
     );
-    variable_set('gv_settings', $hr_settings);
+    variable_set('gv_settings', $gv_settings);
   }
   
   //dpm($gv_settings);
   
-  //$hr_settings = variable_get('gv_settings', NULL);
+  //$gv_settings = variable_get('gv_settings', NULL);
   //dpm($gv_settings);
   
   foreach ($gv_settings as $section_label => $section) {
