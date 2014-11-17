@@ -57,10 +57,16 @@ function gv_blocks_block_info() {
     'info' => 'Footer menu',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
   $blocks['footer_menu_pl'] = array(
     'info' => 'Footer menu plain',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['footer_menu_pl_v2'] = array(
+    'info' => 'Footer menu plain v2 (without Our Team)',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   $blocks['header_links'] = array(
     'info' => 'Header links',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -516,10 +522,16 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = 'Footer menu';
       $block['content'] = gv_blocks_get_footerMenu();
       break; 
+    
     case 'footer_menu_pl':
       $block['subject'] = 'Footer menu plain';
       $block['content'] = gv_blocks_get_footerMenuPlain();
       break;
+    case 'footer_menu_pl_v2':
+      $block['subject'] = 'Footer menu plain v2 (without Our Team)';
+      $block['content'] = gv_blocks_get_footerMenuPlain(2);
+      break;
+    
     case 'header_links':
       $block['subject'] = 'Header links';
       $block['content'] = gv_blocks_get_headerLinks();
@@ -4105,13 +4117,12 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
     $out = $cache->data;
   }
   else {
-    if ($version == 1) {
-      $menu = menu_build_tree('menu-footer-menu');
+    $menu = menu_build_tree('menu-footer-menu');
+    if ($version == 2) {
+      unset($menu['49955 Our Team 933']);
       dpm($menu);
     }
-    else {
-      $menu = menu_build_tree('menu-footer-menu');
-    }
+    
     $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
