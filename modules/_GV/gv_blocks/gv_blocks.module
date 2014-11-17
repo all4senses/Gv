@@ -4119,8 +4119,9 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
   else {
     $menu = menu_build_tree('menu-footer-menu');
     if ($version == 2) {
+      // Hide Our Team menu item on the /cloud-backup page
       unset($menu['49955 Our Team 933']);
-      dpm($menu);
+      //dpm($menu);
     }
     
     $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
