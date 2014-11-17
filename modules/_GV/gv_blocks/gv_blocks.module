@@ -4096,16 +4096,22 @@ function gv_blocks_get_headerLinks() {
 /**
  * Returns a themed Plain Footer menu.
  */
-function gv_blocks_get_footerMenuPlain() {
+function gv_blocks_get_footerMenuPlain($version = 1) {
   
-  $cid = 'gv_footer_menu_pl';
+  $cid = 'gv_footer_menu_pl' . '_v' . $version;
   $cache = cache_get($cid, 'cache');
 
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
     $out = $cache->data;
   }
   else {
-    $menu = menu_build_tree('menu-footer-menu');
+    if ($version == 1) {
+      $menu = menu_build_tree('menu-footer-menu');
+      dpm($menu);
+    }
+    else {
+      $menu = menu_build_tree('menu-footer-menu');
+    }
     $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
