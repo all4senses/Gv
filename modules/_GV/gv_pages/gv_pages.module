@@ -76,7 +76,7 @@ function gv_pages_menu() {
     'title' => 'GV Settings',
     'description' => 'Different GV values and settings',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('gv_pages_hrSettings_form'),
+    'page arguments' => array('gv_pages_gvSettings_form'),
     'access callback' => 'gv_misc_userIsAdmin',
     'type' => MENU_NORMAL_ITEM,
   );
@@ -9187,11 +9187,20 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
  * @return $form
  *   Return nothing.
  */
-function gv_pages_hrSettings_form($node, &$form_state, $provider_nid) {
+function gv_pages_gvSettings_form($node, &$form_state, $provider_nid) {
   
   
   $gv_settings = variable_get('gv_settings', NULL);
   
+  if (empty($hr_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+    $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
+      'descr' => 'Turn On the SIP page chart ab-testing rotation',
+      'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0, 'descr' => 'Turn on Rotation for logged In users'),
+      'Turn_On_for_logged_Out' => array('field_type' => 'checkbox', 'value' => 0),
+      'Remain_Top_Rating_For_First_Position' => array('field_type' => 'checkbox', 'value' => 0),
+    );
+    variable_set('gv_settings', $gv_settings);
+  }
   //dpm($hr_settings);
   
   //variable_del('hr_settings');
@@ -9277,7 +9286,7 @@ function gv_pages_hrSettings_form($node, &$form_state, $provider_nid) {
  * @return $form
  *   Return nothing.
  */
-function gv_pages_hrSettings_form_submit(&$form, &$form_state) {
+function gv_pages_gvSettings_form_submit(&$form, &$form_state) {
   //dpm($form_state['values']);
   
   $hr_settings = variable_get('gv_settings', NULL);
