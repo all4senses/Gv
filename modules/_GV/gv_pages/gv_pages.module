@@ -9205,14 +9205,6 @@ function gv_pages_gvSettings_form($node, &$form_state) {
   
   //variable_del('gv_settings');
   
-  if (empty($gv_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
-    $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
-      'descr' => 'Turn On the SIP page chart ab-testing rotation',
-      'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0),
-      'Turn_On_for_logged_Out' => array('field_type' => 'checkbox', 'value' => 0),
-    );
-    variable_set('gv_settings', $gv_settings);
-  }
   
   //dpm($gv_settings);
   
