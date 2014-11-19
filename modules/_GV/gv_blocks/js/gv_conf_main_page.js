@@ -547,8 +547,8 @@
       
 
       function doSubmitTerm() {
-        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name') {
-          get_conf($('input[id="conf"]').val());
+        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name' && $(this).val() != 'Search by City/State') {
+          get_conf($('#conf').val());
         }
       }
       
@@ -826,8 +826,11 @@
           if (sw == 'title') {
             alert('No conference found with a title (or title containing) <' + label + '>');
           }
-          else {
+          else if (sw == 'industry') {
             alert('No conferences found tagged with an industry <' + label + '>');
+          }
+          else if (sw == 'city-state') {
+            alert('No conferences found in the city/state <' + label + '>');
           }
           
           return_to_sidewindow_if_needed();
