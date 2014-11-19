@@ -1458,7 +1458,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
    dpm($result);
   }
   */
- 
+ /*
   $out = '<div class="md-modal md-effect-6" id="modal-6">
 			<div class="md-content">
 				<h3>Modal Dialog</h3>
@@ -1473,6 +1473,15 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 				</div>
 			</div>
 		</div>';
+  */
+  
+  $query = db_select('field_config', 'fc');
+    $query->fields('fc', array('data'));
+    $query->condition('fc.field_name', 'field_state');
+    
+    $result = $query->execute()->fetchField();
+     dpm(unserialize($result));     
+          
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
