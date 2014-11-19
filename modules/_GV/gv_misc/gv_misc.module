@@ -12683,8 +12683,18 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->fields('b', array('body_value'));
             $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
             $query->fields('st', array('field_state_value'));
+            // City via text field
             $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
             $query->fields('ci', array('field_conf_city_value'));
+            
+            // City via taxonomy
+            $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
+            $query->fields('ci2', array('field_city_tid'));
+
+            $query->leftJoin('taxonomy_term_data', 'tdt', 'tdt.tid = ci2.field_city_tid');
+            $query->addField('tdt', 'name', 'city');
+
+            
             $query->leftJoin('field_data_field_conf_price', 'pr', 'pr.entity_id = n.nid');
             $query->fields('pr', array('field_conf_price_value'));
             $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
@@ -12751,7 +12761,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
               else {
                 $twitter = NULL;
               }
-              $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
+              //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
+              $location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
               
               $out_html = '
                     <div class="top">
@@ -12926,12 +12937,14 @@ function gv_misc_getConferences_autocomplete_ajax() {
               // City via text field
 //              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
 //              $query->fields('ci', array('field_conf_city_value'));
+//              
               // City via taxonomy
               $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
               $query->fields('ci2', array('field_city_tid'));
               
               $query->leftJoin('taxonomy_term_data', 'tdt', 'tdt.tid = ci2.field_city_tid');
               $query->addField('tdt', 'name', 'city');
+              
               
               $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
               $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
