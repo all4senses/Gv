@@ -415,6 +415,14 @@
          $("#h-name").hide();
       });
       
+      $("#c-city-state").mouseenter(function(){ 
+         $("#h-name").show();
+      });
+      $("#c-city-state").mouseleave(function(){ 
+         $("#h-name").hide();
+      });
+      
+      
        
        // Shift in/out conferences list
 
@@ -454,6 +462,23 @@
           search_field_title = 'Search by Name';
           $(this).addClass('active');
           $('#c-industry').removeClass('active');
+          $('input[id="conf"]').attr('title', search_field_title);
+          //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Industry') 
+          {
+            $('input[id="conf"]').val(search_field_title);
+            $('input[id="conf"]').addClass('blur');
+          }
+        }
+        
+      });
+      
+      $('#c-city-state').click(function(){
+
+        if (sw != 'city-state') {
+          sw = 'city-state';
+          search_field_title = 'Search by City/State';
+          $(this).addClass('active');
+          $('#c-industry, #c-title').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
           //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Industry') 
           {
@@ -544,7 +569,7 @@
         return false;
       },
       open: function( event, ui ) {
-        console.log('Opened...');
+        ///console.log('Opened...');
       },
       select: function( event, ui ) {
         $( "#conf" ).val( ui.item.label );
