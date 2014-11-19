@@ -502,17 +502,17 @@
         }
       });
       
-      $('input[id="conf"]').focus(function(){
+      $('#conf').focus(function(){
         
         //if ($(this).val() == $(this).attr('title')) {
-        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name') {
+        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name' || $(this).val() == 'Search by City/State') {
           $(this).val('');
           $(this).removeClass('blur');
         }
         
       });
       
-      $('input[id="conf"]').blur(function(){
+      $('#conf').blur(function(){
         
         if ($(this).val() == '') {
           $(this).val($(this).attr('title'));
