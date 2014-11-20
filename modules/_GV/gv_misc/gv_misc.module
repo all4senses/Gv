@@ -12999,7 +12999,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 }
                 else {
                   $target = 'state';
-                  $post['term'] = explode('(', $post['term']);
+                  $post['term'] = explode(' (', $post['term']);
                   $post['term'] = array_search(strtolower($post['term'][0]),array_map('strtolower', $states));  //array_search($post['term'][0], $states);
                 }
               }
