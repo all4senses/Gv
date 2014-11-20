@@ -12564,6 +12564,58 @@ function gv_misc_getConferences_autocomplete_ajax() {
     $results_num = NULL; //1000; // Default autocomplete results number.
   }
   
+  $states = array(
+              'AL' => 'Alabama',
+              'AK' => 'Alaska',
+              'AZ' => 'Arizona',
+              'AR' => 'Arkansas',
+              'CA' => 'California',
+              'CO' => 'Colorado',
+              'CT' => 'Connecticut',
+              'DE' => 'Delaware',
+              'FL' => 'Florida',
+              'GA' => 'Georgia',
+              'HI' => 'Hawaii',
+              'ID' => 'Idaho',
+              'IL' => 'Illinois',
+              'IN' => 'Indiana',
+              'IA' => 'Iowa',
+              'KS' => 'Kansas',
+              'KY' => 'Kentucky',
+              'LA' => 'Louisiana',
+              'ME' => 'Maine',
+              'MD' => 'Maryland',
+              'MA' => 'Massachusetts',
+              'MI' => 'Michigan',
+              'MN' => 'Minnesota',
+              'MS' => 'Mississippi',
+              'MO' => 'Missouri',
+              'MT' => 'Montana',
+              'NE' => 'Nebraska',
+              'NV' => 'Nevada',
+              'NH' => 'New Hampshire',
+              'NJ' => 'New Jersey',
+              'NM' => 'New Mexico',
+              'NY' => 'New York',
+              'NC' => 'North Carolina',
+              'ND' => 'North Dakota',
+              'OH' => 'Ohio',
+              'OK' => 'Oklahoma',
+              'OR' => 'Oregon',
+              'PA' => 'Pennsylvania',
+              'RI' => 'Rhode Island',
+              'SC' => 'South Carolina',
+              'SD' => 'South Dakota',
+              'TN' => 'Tennessee',
+              'TX' => 'Texas',
+              'UT' => 'Utah',
+              'VT' => 'Vermont',
+              'VA' => 'Virginia',
+              'WA' => 'Washington',
+              'WV' => 'West Virginia',
+              'WI' => 'Wisconsin',
+              'WY' => 'Wyoming',
+          );
   
   // Db queries doc
   // https://www.drupal.org/node/310086
@@ -12674,59 +12726,6 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 'label' => $result->name,
             );
           }
-          
-          $states = array(
-              'AL' => 'Alabama',
-              'AK' => 'Alaska',
-              'AZ' => 'Arizona',
-              'AR' => 'Arkansas',
-              'CA' => 'California',
-              'CO' => 'Colorado',
-              'CT' => 'Connecticut',
-              'DE' => 'Delaware',
-              'FL' => 'Florida',
-              'GA' => 'Georgia',
-              'HI' => 'Hawaii',
-              'ID' => 'Idaho',
-              'IL' => 'Illinois',
-              'IN' => 'Indiana',
-              'IA' => 'Iowa',
-              'KS' => 'Kansas',
-              'KY' => 'Kentucky',
-              'LA' => 'Louisiana',
-              'ME' => 'Maine',
-              'MD' => 'Maryland',
-              'MA' => 'Massachusetts',
-              'MI' => 'Michigan',
-              'MN' => 'Minnesota',
-              'MS' => 'Mississippi',
-              'MO' => 'Missouri',
-              'MT' => 'Montana',
-              'NE' => 'Nebraska',
-              'NV' => 'Nevada',
-              'NH' => 'New Hampshire',
-              'NJ' => 'New Jersey',
-              'NM' => 'New Mexico',
-              'NY' => 'New York',
-              'NC' => 'North Carolina',
-              'ND' => 'North Dakota',
-              'OH' => 'Ohio',
-              'OK' => 'Oklahoma',
-              'OR' => 'Oregon',
-              'PA' => 'Pennsylvania',
-              'RI' => 'Rhode Island',
-              'SC' => 'South Carolina',
-              'SD' => 'South Dakota',
-              'TN' => 'Tennessee',
-              'TX' => 'Texas',
-              'UT' => 'Utah',
-              'VT' => 'Vermont',
-              'VA' => 'Virginia',
-              'WA' => 'Washington',
-              'WV' => 'West Virginia',
-              'WI' => 'Wisconsin',
-              'WY' => 'Wyoming',
-          );
           
           foreach ($states as $key => $state) {
             if (strpos(drupal_strtolower($state), drupal_strtolower($post['term'])) !== FALSE) {
@@ -12991,62 +12990,130 @@ function gv_misc_getConferences_autocomplete_ajax() {
           
               if ($post['type'] == 'industry') {
                 $vid = 8;
+                $target = 'industry';
               }
               else {
-                $vid = 9;
+                if (strpos($post['term'], ')') == FALSE) {
+                  $vid = 9;
+                  $target = 'city';
+                }
+                else {
+                  $target = 'state';
+                  $post['term'] = explode('(', $post['term']);
+                  $post['term'] = array_search($post['term'][0], $states);
+                }
               }
           
-              // Search for all conferences (a list) with a tag $post['term'].
-              $query = db_select('taxonomy_term_data', 'td');
-              $query->condition('td.name', $post['term'], '=');
-              $query->condition('td.vid', $vid);
-              $query->leftJoin('taxonomy_index', 't', 't.tid = td.tid');
+              if ($target == 'industry' || $target == 'city') {
+                
+                  // Search for all conferences (a list) with a tag $post['term'].
+                  $query = db_select('taxonomy_term_data', 'td');
+                  $query->condition('td.name', $post['term'], '=');
+                  $query->condition('td.vid', $vid);
+                  $query->leftJoin('taxonomy_index', 't', 't.tid = td.tid');
 
-              $query->leftJoin('node', 'n', 'n.nid = t.nid');
-              $query->fields('n', array('nid', 'title'));
-              $query->condition('n.status', 1);
-              $query->condition('n.type', 'conference', '=');
-              //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-              $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
-              $query->fields('st', array('field_state_value'));
-              // City via text field
-//              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
-//              $query->fields('ci', array('field_conf_city_value'));
-//              
-              // City via taxonomy
-              $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
-              $query->fields('ci2', array('field_city_tid'));
-              
-              $query->leftJoin('taxonomy_term_data', 'tdt', 'tdt.tid = ci2.field_city_tid');
-              $query->addField('tdt', 'name', 'city');
-              
-              
-              $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
-              $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
+                  $query->leftJoin('node', 'n', 'n.nid = t.nid');
+                  $query->fields('n', array('nid', 'title'));
+                  $query->condition('n.status', 1);
+                  $query->condition('n.type', 'conference', '=');
+                  //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+                  $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+                  $query->fields('st', array('field_state_value'));
+                  // City via text field
+    //              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+    //              $query->fields('ci', array('field_conf_city_value'));
+    //              
+                  // City via taxonomy
+                  $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
+                  $query->fields('ci2', array('field_city_tid'));
 
-              $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
-              
+                  $query->leftJoin('taxonomy_term_data', 'tdt', 'tdt.tid = ci2.field_city_tid');
+                  $query->addField('tdt', 'name', 'city');
 
-              $query->groupBy('n.nid');
-              // V0
-              // Works!
-              //$query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ',')", 'terms');
-              // Works!
-              //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
-              // V1
-              // Works!
-              $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ',')", 'terms');
-              // V2
-              // Works excellently!
-              //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
 
-              $query->orderBy('n.title', 'ASC');
-              
-              if ($results_num) {
-                $query->range(0, $results_num);
-              }
-              
-              
+                  $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
+                  $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
+
+                  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+
+
+                  $query->groupBy('n.nid');
+                  // V0
+                  // Works!
+                  //$query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ',')", 'terms');
+                  // Works!
+                  //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
+                  // V1
+                  // Works!
+                  $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ',')", 'terms');
+                  // V2
+                  // Works excellently!
+                  //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
+
+                  $query->orderBy('n.title', 'ASC');
+
+                  if ($results_num) {
+                    $query->range(0, $results_num);
+                  }
+
+              } // End of City or Industry
+              else {
+                // State
+                // Search for all conferences (a list) with a tag $post['term'].
+//                  $query = db_select('taxonomy_term_data', 'td');
+//                  $query->condition('td.name', $post['term'], '=');
+//                  $query->condition('td.vid', $vid);
+//                  $query->leftJoin('taxonomy_index', 't', 't.tid = td.tid');
+
+                  
+                  $query = db_select('field_data_field_state', 'st');
+                  $query->condition('st.field_state_value', $post['term'], '=');
+                  
+                  //$query->leftJoin('node', 'n', 'n.nid = t.nid');
+                  $query->leftJoin('node', 'n', 'n.nid = st.entity_id');
+                  $query->fields('n', array('nid', 'title'));
+                  $query->condition('n.status', 1);
+                  $query->condition('n.type', 'conference', '=');
+                  //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
+                  $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+                  $query->fields('st', array('field_state_value'));
+                  // City via text field
+    //              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+    //              $query->fields('ci', array('field_conf_city_value'));
+    //              
+                  // City via taxonomy
+                  $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
+                  $query->fields('ci2', array('field_city_tid'));
+
+                  $query->leftJoin('taxonomy_term_data', 'tdt', 'tdt.tid = ci2.field_city_tid');
+                  $query->addField('tdt', 'name', 'city');
+
+
+                  $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
+                  $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
+
+                  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+
+
+                  $query->groupBy('n.nid');
+                  // V0
+                  // Works!
+                  //$query->addExpression("GROUP_CONCAT(ti.tid SEPARATOR ',')", 'terms');
+                  // Works!
+                  //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
+                  // V1
+                  // Works!
+                  $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ',')", 'terms');
+                  // V2
+                  // Works excellently!
+                  //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
+
+                  $query->orderBy('n.title', 'ASC');
+
+                  if ($results_num) {
+                    $query->range(0, $results_num);
+                  }
+              } // Else of // State
               
 
               if ($results = $query->execute()->fetchAllAssoc('nid')) {
