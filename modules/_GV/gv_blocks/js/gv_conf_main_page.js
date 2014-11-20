@@ -885,8 +885,11 @@
                     if (current_sw == 'title') {
                       alert('No conference found with a title (or title containing) <' + label + '>');
                     }
-                    else {
+                    else if (sw == 'industry') {
                       alert('No conferences found tagged with an industry <' + label + '>');
+                    }
+                    else if (sw == 'city-state') {
+                      alert('No conferences found in the city/state <' + label + '>');
                     }
                     
                     if (return_to_sidewindow) {
