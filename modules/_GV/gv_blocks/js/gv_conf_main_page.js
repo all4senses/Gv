@@ -964,7 +964,7 @@
      inline:true, 
      href:"#cb-popup_1", 
      width: 550,  //'40%'
-     height: 520//545///470
+     height: 510//545///470
      
      ,//added to remove initial flickering
     opacity : 0,
