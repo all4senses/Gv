@@ -755,7 +755,7 @@
    sw = 'industry';
    search_field_title = 'Search by Industry';
    $('#c-industry').addClass('active');
-   $('#c-title').removeClass('active');
+   $('#c-title, #c-city-state').removeClass('active');
    $('input[id="conf"]').attr('title', search_field_title);
           
           
