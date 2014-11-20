@@ -444,7 +444,7 @@
           sw = 'industry';
           search_field_title = 'Search by Industry';
           $(this).addClass('active');
-          $('#c-title').removeClass('active');
+          $('#c-title, #c-city-state').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
           //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Name') 
           {
@@ -461,7 +461,7 @@
           sw = 'title';
           search_field_title = 'Search by Name';
           $(this).addClass('active');
-          $('#c-industry').removeClass('active');
+          $('#c-industry, #c-city-state').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
           //if ($('input[id="conf"]').val() == '' || $('input[id="conf"]').val() == 'Search by Industry') 
           {
