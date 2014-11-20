@@ -8729,6 +8729,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
       $query->leftJoin('field_data_field_p_erating_re_ca', 'er_re_ca', "er_re_ca.entity_id = n.nid");
       $query->leftJoin('field_data_field_p_erating_wc', 'er_wc', "er_wc.entity_id = n.nid");
       $query->leftJoin('field_data_field_p_erating_crm', 'er_crm', "er_crm.entity_id = n.nid");
+      $query->leftJoin('field_data_field_p_erating_cb', 'er_cb', "er_cb.entity_id = n.nid");
       
       $or = db_or()->isNotNull('field_p_erating_value')
                    ->isNotNull('field_p_erating_smbv_value')
@@ -8742,6 +8743,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
                    ->isNotNull('field_p_erating_re_ca_value')
                    ->isNotNull('field_p_erating_wc_value')
                    ->isNotNull('field_p_erating_crm_value')
+                   ->isNotNull('field_p_erating_cb_value')
               ;
       $query->condition($or);
     }
@@ -12665,12 +12667,66 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
 
           $result = $query->execute()->fetchAllAssoc('tid');
+          
           foreach ($result as $result) {
             $out_array[] = array(
                 'value' => $result->tid,
                 'label' => $result->name,
             );
           }
+          
+          $states = array(
+              'AL' => 'Alabama',
+              'AK' => 'Alaska',
+              'AZ' => 'Arizona',
+              'AR' => 'Arkansas',
+              'CA' => 'California',
+              'CO' => 'Colorado',
+              'CT' => 'Connecticut',
+              'DE' => 'Delaware',
+              'FL' => 'Florida',
+              'GA' => 'Georgia',
+              'HI' => 'Hawaii',
+              'ID' => 'Idaho',
+              'IL' => 'Illinois',
+              'IN' => 'Indiana',
+              'IA' => 'Iowa',
+              'KS' => 'Kansas',
+              'KY' => 'Kentucky',
+              'LA' => 'Louisiana',
+              'ME' => 'Maine',
+              'MD' => 'Maryland',
+              'MA' => 'Massachusetts',
+              'MI' => 'Michigan',
+              'MN' => 'Minnesota',
+              'MS' => 'Mississippi',
+              'MO' => 'Missouri',
+              'MT' => 'Montana',
+              'NE' => 'Nebraska',
+              'NV' => 'Nevada',
+              'NH' => 'New Hampshire',
+              'NJ' => 'New Jersey',
+              'NM' => 'New Mexico',
+              'NY' => 'New York',
+              'NC' => 'North Carolina',
+              'ND' => 'North Dakota',
+              'OH' => 'Ohio',
+              'OK' => 'Oklahoma',
+              'OR' => 'Oregon',
+              'PA' => 'Pennsylvania',
+              'RI' => 'Rhode Island',
+              'SC' => 'South Carolina',
+              'SD' => 'South Dakota',
+              'TN' => 'Tennessee',
+              'TX' => 'Texas',
+              'UT' => 'Utah',
+              'VT' => 'Vermont',
+              'VA' => 'Virginia',
+              'WA' => 'Washington',
+              'WV' => 'West Virginia',
+              'WI' => 'Wisconsin',
+              'WY' => 'Wyoming',
+                  );
 
         }
   }
