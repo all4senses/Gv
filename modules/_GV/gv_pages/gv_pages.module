@@ -8199,7 +8199,8 @@ function gv_pages_node_view($node, $view_mode) {
           
           //global $user;
           //if ($_SERVER['REMOTE_ADDR'] == '91.200.156.91') {
-            $node->addPhoneReviewForm = render(drupal_get_form('gv_pages_addPhoneReview_form', $node));
+            $gv_pages_addPhoneReview_form = drupal_get_form('gv_pages_addPhoneReview_form', $node);
+            $node->addPhoneReviewForm = render($gv_pages_addPhoneReview_form);
           //}
 
 
