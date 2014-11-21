@@ -1719,7 +1719,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . render(drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data)))
+            . render($gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data)))
         . '</td>'
       . '</tr>',
     );
