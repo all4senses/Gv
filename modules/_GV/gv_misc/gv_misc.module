@@ -9298,7 +9298,8 @@ function gv_misc_views_pre_render(&$view) {
     // Hide the title of the preface.
     // $preface_node->title = '';
     // Works, but it's shown after exposed filters.
-    $view->attachment_before = render(node_view($preface_node, 'full'));
+    $preface_node_view = node_view($preface_node, 'full');
+    $view->attachment_before = render($preface_node_view);
     
 //    global $user;
 //    if ($user->uid == 1) {
