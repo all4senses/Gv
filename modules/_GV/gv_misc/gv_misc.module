@@ -13540,7 +13540,7 @@ function gv_misc_updateCachedSIPpage_ajax() {
   $status = TRUE;
   
   // launch and leave in background, let make everything in background
-  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-homepage > /dev/null &');
+  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-sip-page > /dev/null &');
   
   // Problems with boost that doesn't cache pages if there are POST request from ajax on them.
   // So make it GET somehow solve the problem.
