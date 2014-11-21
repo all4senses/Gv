@@ -5607,6 +5607,9 @@ function gv_misc_makeRequest_ajax($post = NULL) {
         $save_submission['Referrer'] = $_SERVER['HTTP_REFERER'];
       }
       */
+      
+      $save_submission['$_SERVER'] = $_SERVER;
+      
       if (isset($_SESSION['ucaptured_timestamp'])) {
         $start_submission_time = $_SESSION['ucaptured_timestamp'];
         //$save_submission['Submission Duration'] = number_format((($current_time - $start_submission_time) / 60), 2, '.', '') . ' min';
@@ -5696,6 +5699,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
         $save_submission['Referrer'] = $post['referrer'];
       }
       $save_submission['Sumbission page'] = @$post['url'];
+      
+      $save_submission['$_SERVER'] = $_SERVER;
       
       $start_submission_time = $current_time;
       $result = db_insert('gv_quote_requests')

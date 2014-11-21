@@ -771,13 +771,13 @@
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
 
-   /*
+   /**/
    slideOutRightWin();
    
    //console.log(sw + ' ->' + $( "#conf" ).val());
    // Set to return to the side slide window after a colorbox popup will be closed.
    return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
-   */
+   /**/
   
    new_sw = 'title';
    save_sw = sw;
@@ -796,7 +796,9 @@
     }
  } 
 
- function get_conf(label, id) {
+ function get_conf(label, id, left_position) {
+
+   left_position = typeof left_position !== 'undefined' ? left_position : false;
 
    if ( 'content_conf_' + label in cache ) {
      save_sw = new_sw = false;
