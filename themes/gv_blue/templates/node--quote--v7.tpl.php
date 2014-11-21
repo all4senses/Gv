@@ -50,7 +50,7 @@
 
 
       <div class="full main">
-        <img src="/images/theme/lp7-back.jpg" style="position: absolute;">
+        <!-- <img src="/images/theme/lp7-back.jpg" style="position: absolute;"> -->
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
