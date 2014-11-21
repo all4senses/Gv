@@ -9359,8 +9359,8 @@ function gv_blocks_userBlock() {
 
 
 function gv_blocks_get_confMainSearch() {
-  
-  return render(drupal_get_form('gv_blocks_get_confMainSearch_form'));
+  $gv_blocks_get_confMainSearch_form = drupal_get_form('gv_blocks_get_confMainSearch_form');
+  return render($gv_blocks_get_confMainSearch_form);
 }
 
 
