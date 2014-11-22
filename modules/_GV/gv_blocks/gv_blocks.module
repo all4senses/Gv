@@ -4325,6 +4325,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
       return null;
   }
   dpm($block_data);
+  dpm($block);
   if (is_array($block['content'])) {
     
     $block['content'] = render($block);
