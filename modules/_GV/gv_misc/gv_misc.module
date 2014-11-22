@@ -1475,6 +1475,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 		</div>';
   */
   
+  /*
   $query = db_select('field_config', 'fc');
     $query->fields('fc', array('data'));
     $query->condition('fc.field_name', 'field_state');
@@ -1482,6 +1483,11 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
     $result = $query->execute()->fetchField();
      dpm(unserialize($result));     
           
+   */
+  
+  $target_path_short = 'tmp/gv_requests.log';
+  file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
+     
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
