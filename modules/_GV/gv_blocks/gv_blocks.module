@@ -4328,7 +4328,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   dpm($block);
   if (is_array($block['content'])) {
     
-    $block['content'] = render($block);
+    $block['content'] = drupal_render($block);
   }
   if(isset($block_data['subjectTag']) && $block_data['subjectTag']) {
     $subjectTag = $block_data['subjectTag'];
