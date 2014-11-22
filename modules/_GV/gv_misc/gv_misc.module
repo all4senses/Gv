@@ -13577,7 +13577,7 @@ function gv_misc_init() {
 function gv_misc_exit() {
   global $start_time, $user_name;
   $finish_time = time();
-  if ($finish_time != $start_time) {
+  if ($finish_time > $start_time + 1) {
     file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' ' . $_SERVER['REMOTE_ADDR']  . $user_name . ' - -> ' . $_SERVER['REQUEST_URI'] . '
 ', FILE_APPEND | LOCK_EX);
   }
