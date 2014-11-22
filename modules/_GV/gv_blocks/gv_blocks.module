@@ -4324,18 +4324,9 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   if(!isset($block['content']) || !$block['content']) {
       return null;
   }
-  //dpm($block_data);
- // dpm($block);
+
   if (is_array($block['content'])) {
-    if ($block_data['delta'] == 'providers-block_top_bu_ar_cmp') {
-      $block['content'] = 'xxx';
-    }
-    elseif ($block_data['delta'] == 'providers-block_top_re_ar') {
-      $block['content'] = drupal_render($block['content']); //'yyy';
-    }
-    else {
-      $block['content'] = drupal_render($block);
-    }
+    $block['content'] = drupal_render($block['content']);
   }
   if(isset($block_data['subjectTag']) && $block_data['subjectTag']) {
     $subjectTag = $block_data['subjectTag'];
