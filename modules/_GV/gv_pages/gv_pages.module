@@ -1689,7 +1689,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         $value = $submissions_list;
       }
       elseif ($title == '$_SERVER') {
-        $value = print_r($value, TRUE);
+        $value = '[hidden]';//print_r($value, TRUE);
       }
       $data .= "<div>$title: $value</div>";
     }
