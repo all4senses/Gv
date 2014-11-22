@@ -13562,7 +13562,8 @@ function gv_misc_updateCachedSIPpage_ajax() {
  * 
  */
 function gv_misc_init() {
-  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
+  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'] . '
+', FILE_APPEND | LOCK_EX);
 }
 
 
