@@ -680,8 +680,8 @@ function gv_blocks_block_view($delta = '') {
     
     
     case 't_pick_providers_ar':
-      $block['subject'] = 'Top pick providers for the all providers reviews page';
-      $block['content'] = gv_pages_getTopPickProvidersBlocksForAllReviewsPage();
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getTopPickProvidersBlocksForAllReviewsPage();
       break;
   
     case 'google_all_reviews_snippet':
@@ -3352,7 +3352,8 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
       $views_row_odd = TRUE;
       $class_add = '';
     }
-    $out .= '<div class="views-row' . $class_add . '">' . render(node_view($node, 'teaser')) . '</div>';
+    $node_teaser = node_view($node, 'teaser');
+    $out .= '<div class="views-row' . $class_add . '">' . render($node_teaser) . '</div>';
   }
   $out .= '</div>';
   if (!$GLOBALS['theme'] == 'gv_blue') {
@@ -4007,7 +4008,7 @@ function gv_blocks_getGoogleAllReviewsSnippet() {
 /**
  * Returns a two themed blocks with Top pick providers for the All Reviews page
  */
-function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
+function gv_blocks_getTopPickProvidersBlocksForAllReviewsPage() {
 
   
   global $language;
@@ -4015,8 +4016,9 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
   
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
-    $module_path_pages = drupal_get_path('module', 'gv_misc');
-    drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
+    // Uncomment if chart(s) will have compare check boxes and should have compare functionality.
+    //$module_path_pages = drupal_get_path('module', 'gv_misc');
+    //drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
     return $cache_content->data;
   }
   
@@ -4030,6 +4032,8 @@ function gv_pages_getTopPickProvidersBlocksForAllReviewsPage() {
   // Get block for Top pick residential providers.
   $block_data = array('module' => 'views', 'delta' => 'providers-block_top_re_ar', 'shadow' => FALSE/*, 'subject' => 'Top Residential VoIP Providers Reviews'*/); 
   $out .= gv_blocks_getBlockThemed($block_data);
+  
+  $out = 'xxx';
   
   cache_set($cache_name, $out, 'cache', time() + 14400);
   
