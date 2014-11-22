@@ -1484,9 +1484,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
      dpm(unserialize($result));     
           
    */
-  
-  $target_path_short = 'tmp/gv_requests.log';
-  file_put_contents(DRUPAL_ROOT . '/' . $target_path_short, $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
+  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
      
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -13564,8 +13562,7 @@ function gv_misc_updateCachedSIPpage_ajax() {
  * 
  */
 function gv_misc_init() {
-dpm($_SERVER);
-dpm($_GET);
+  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
 }
 
 
