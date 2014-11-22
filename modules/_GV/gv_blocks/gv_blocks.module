@@ -4327,8 +4327,15 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
   dpm($block_data);
   dpm($block);
   if (is_array($block['content'])) {
-    
-    $block['content'] = drupal_render($block);
+    if ($block_data['delta'] == 'providers-block_top_bu_ar_cmp') {
+      $block['content'] = 'xxx';
+    }
+    elseif ($block_data['delta'] == 'providers-block_top_re_ar') {
+      $block['content'] = 'yyy';
+    }
+    else {
+      $block['content'] = drupal_render($block);
+    }
   }
   if(isset($block_data['subjectTag']) && $block_data['subjectTag']) {
     $subjectTag = $block_data['subjectTag'];
