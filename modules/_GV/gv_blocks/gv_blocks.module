@@ -4010,6 +4010,8 @@ function gv_blocks_getGoogleAllReviewsSnippet() {
  */
 function gv_blocks_getTopPickProvidersBlocksForAllReviewsPage() {
 
+  $out = 'xxx'; 
+  
   
   global $language;
   $cache_name = 'gv_topPickProvidersBlocksForAllReviews_' . $language->language;
@@ -4033,7 +4035,7 @@ function gv_blocks_getTopPickProvidersBlocksForAllReviewsPage() {
   $block_data = array('module' => 'views', 'delta' => 'providers-block_top_re_ar', 'shadow' => FALSE/*, 'subject' => 'Top Residential VoIP Providers Reviews'*/); 
   $out .= gv_blocks_getBlockThemed($block_data);
   
-  $out = 'xxx';
+  //$out = 'xxx';
   
   cache_set($cache_name, $out, 'cache', time() + 14400);
   
