@@ -4013,7 +4013,7 @@ function gv_blocks_getTopPickProvidersBlocksForAllReviewsPage() {
 
   global $language;
   $cache_name = 'gv_topPickProvidersBlocksForAllReviews_' . $language->language;
-  /*
+ 
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
     // Uncomment if chart(s) will have compare check boxes and should have compare functionality.
@@ -4021,10 +4021,9 @@ function gv_blocks_getTopPickProvidersBlocksForAllReviewsPage() {
     //drupal_add_js( $module_path_pages . '/js/gv_compareProviders.js'); 
     return $cache_content->data;
   }
-  */
+  
   //dpm('no cache');
   
-  $out = '';
   // Business providers reviews.
   $block_data = array('module' => 'views', 'delta' => 'providers-block_top_bu_ar_cmp', 'shadow' => FALSE/*, 'subject' => 'Top Business VoIP Providers Reviews'*/);
   $out = gv_blocks_getBlockThemed($block_data);
@@ -4033,7 +4032,6 @@ function gv_blocks_getTopPickProvidersBlocksForAllReviewsPage() {
   $block_data = array('module' => 'views', 'delta' => 'providers-block_top_re_ar', 'shadow' => FALSE/*, 'subject' => 'Top Residential VoIP Providers Reviews'*/); 
   $out .= gv_blocks_getBlockThemed($block_data);
   
-  //$out = 'xxx';
   
   cache_set($cache_name, $out, 'cache', time() + 14400);
   
