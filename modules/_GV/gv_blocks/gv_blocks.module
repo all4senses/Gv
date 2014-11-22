@@ -4331,7 +4331,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
       $block['content'] = 'xxx';
     }
     elseif ($block_data['delta'] == 'providers-block_top_re_ar') {
-      $block['content'] = 'yyy';
+      $block['content'] = drupal_render($block['content']); //'yyy';
     }
     else {
       $block['content'] = drupal_render($block);
