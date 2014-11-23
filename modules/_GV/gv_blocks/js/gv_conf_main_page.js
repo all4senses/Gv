@@ -968,6 +968,7 @@
   
   
   if (!popup_stick_to_left) {
+    console.log('height: 500');
         // Usual appearing, in the middle with the background shading.
         cb1 = $.fn.colorbox({
            transition: 'fade' , //'elastic',
@@ -1038,7 +1039,8 @@
    } // End of if (!popup_stick_to_left) {
    else {
   
-  
+    console.log('height: 600...');
+    
       // Usual appearing, in the middle with the background shading.
       cb1 = $.fn.colorbox({
         transition: 'fade' , //'elastic',
