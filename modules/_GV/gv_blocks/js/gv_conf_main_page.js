@@ -1091,7 +1091,7 @@
                //height: ['toggle', 'swing'],
                ////height: ['100%', 'swing'],
                //opacity: 'toggle',
-               opacity: 0.7
+               opacity: 0.3
            }, 1000 , function() {
                //$('#colorbox')
                    //.css({'visibility': 'visible'})
