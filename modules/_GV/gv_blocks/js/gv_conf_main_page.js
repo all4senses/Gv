@@ -577,7 +577,7 @@
         $( "#conf-description" ).html( ui.item.desc );
         //$( "#conf-icon" ).attr( "src", "images/" + ui.item.icon );
         
-        get_conf(ui.item.label);
+        get_conf(ui.item.label, ui.item.value);
         
         return false;
       }
@@ -784,8 +784,8 @@
    sw = new_sw;
             
    //console.log($(this).attr('id'));
-   //get_conf($(this).text(), $(this).attr('id'));
-   get_conf($(this).text(), true);
+   
+   get_conf($(this).text(), $(this).attr('id'), true);
    sw = save_sw;
  }); 
  
@@ -799,6 +799,7 @@
 
  function get_conf(label, id, popup_stick_to_left) {
 
+   id = typeof id !== 'undefined' ? id : null;
    popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false;
 
    if (popup_stick_to_left) {
