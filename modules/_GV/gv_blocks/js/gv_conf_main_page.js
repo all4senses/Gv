@@ -783,7 +783,7 @@
    save_sw = sw;
    sw = new_sw;
             
-   console.log($(this).attr('id'));
+   //console.log($(this).attr('id'));
    get_conf($(this).text(), $(this).attr('id'));
    sw = save_sw;
  }); 
@@ -796,10 +796,12 @@
     }
  } 
 
- function get_conf(label, id, left_position) {
+ function get_conf(label, id, popup_stick_to_left) {
 
-   left_position = typeof left_position !== 'undefined' ? left_position : false;
+   popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false;
 
+   // Caching.
+   /*
    if ( 'content_conf_' + label in cache ) {
      save_sw = new_sw = false;
      if (cache[ 'content_conf_' + label ]) {
@@ -841,6 +843,7 @@
      }
      return;
    }  
+   */
    
    // Progress indicators
    // http://stackoverflow.com/questions/15838525/how-to-create-custom-css3-loading-circle
@@ -866,11 +869,13 @@
                   //console.log(data);
                   $("input#conf").removeClass('ui-autocomplete-loading');
                   
+                  
+                  
                   if (data.type == 'conference') {
                   
                   
                         if(cache[ 'content_conf_' + label ] = data.out) {
-                          showConfInPopUp(data.out);
+                          showConfInPopUp(data.out, popup_stick_to_left);
                         }
                         
                   
@@ -924,7 +929,9 @@
  
  
  
- function showConfInPopUp(html_data) {
+ function showConfInPopUp(html_data, popup_stick_to_left) {
+   
+  popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false; 
    
   $('#cb-popup_1 #results_1').html(html_data);
                         
@@ -934,8 +941,6 @@
 
    var cb1;
 
-   // Custom background animate - to test/use...
-   // http://stackoverflow.com/questions/2760453/jquery-colorbox-background-transition-effect
    /*
    cb1 = $.fn.colorbox({
      transition: 'fade' , //'elastic',
@@ -961,73 +966,151 @@
   // Implemented and Works!
   //http://stackoverflow.com/questions/2760453/jquery-colorbox-background-transition-effect
   
-  cb1 = $.fn.colorbox({
-     transition: 'fade' , //'elastic',
-     speed: 800,
-     fadeOut: 1700,
-     inline:true, 
-     href:"#cb-popup_1", 
-     width: 550,  //'40%'
-     height: 500//545///470
-     
-     ,//added to remove initial flickering
-    opacity : 0,
-    //use the onOpen event...
-    onOpen: function() {
-      
-      
-        $("#colorbox").addClass('md-modal md-effect-6');
-        $("#cboxWrapper").addClass('md-content');
-            
-        // prevent Overlay from being displayed...
-        ////$('#cboxOverlay,#colorbox').css('visibility', 'hidden');
-        // make the overlay visible and
-        // re-add all it's original properties!
-        $('#cboxOverlay').css({
-            'visibility': 'visible',
-            'opacity': 0.2,
-            //'height': 0,
-            'cursor': 'pointer',
-            
-            // execute our original animation on the overlay!
-            // animate it you can use here all the
-            // possible animate combination or plugin...
-        }).animate({
-            //height: ['toggle', 'swing'],
-            ////height: ['100%', 'swing'],
-            //opacity: 'toggle',
-            opacity: 0.7
-        }, 1000 , function() {
-            //$('#colorbox')
-                //.css({'visibility': 'visible'})
-                //.fadeIn(1000)
+  
+  if (!popup_stick_to_left) {
+        // Usual appearing, in the middle with the background shading.
+        cb1 = $.fn.colorbox({
+           transition: 'fade' , //'elastic',
+           speed: 800,
+           fadeOut: 1700,
+           inline:true, 
+           href:"#cb-popup_1", 
+           width: 550,  //'40%'
+           height: 500//545///470
+
+           ,//added to remove initial flickering
+          opacity : 0,
+          //use the onOpen event...
+          onOpen: function() {
+
+
+              $("#colorbox").addClass('md-modal md-effect-6');
+              $("#cboxWrapper").addClass('md-content');
+
+              // prevent Overlay from being displayed...
+              ////$('#cboxOverlay,#colorbox').css('visibility', 'hidden');
+              // make the overlay visible and
+              // re-add all it's original properties!
+              $('#cboxOverlay').css({
+                  'visibility': 'visible',
+                  'opacity': 0.2,
+                  //'height': 0,
+                  'cursor': 'pointer',
+
+                  // execute our original animation on the overlay!
+                  // animate it you can use here all the
+                  // possible animate combination or plugin...
+              }).animate({
+                  //height: ['toggle', 'swing'],
+                  ////height: ['100%', 'swing'],
+                  //opacity: 'toggle',
+                  opacity: 0.7
+              }, 1000 , function() {
+                  //$('#colorbox')
+                      //.css({'visibility': 'visible'})
+                      //.fadeIn(1000)
+
+                      ////.css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
+                      ////.animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
+                      //.fadeIn(1000)
+
+                      //.css({visibility: "visible", display: "block"})
+                      ;
+                  //$("#colorbox").addClass('md-modal md-effect-6');
+                  //$("#cboxWrapper").addClass('md-content');
+
+                  // Works!
+                  $("#colorbox").addClass('md-show');
+
+
+              }); // End of animate of $('#cboxOverlay')
+           }
+           ,onClosed: function() {
+                  $("#colorbox").removeClass('md-show');
+                  //console.log('closed...');
+                  $("body").css('overflow', 'inherit');
+                  turned_off = true;
+                  // Return to Side Slide window, if the popup was called from a side slide window.
+                  return_to_sidewindow_if_needed();
+                }
+         }); 
+
+   } // End of if (!popup_stick_to_left) {
+   else {
+  
+  
+      // Usual appearing, in the middle with the background shading.
+      cb1 = $.fn.colorbox({
+        transition: 'fade' , //'elastic',
+        speed: 800,
+        fadeOut: 1700,
+        inline:true, 
+        href:"#cb-popup_1", 
+        width: 550,  //'40%'
+        height: 500//545///470
         
-                ////.css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
-                ////.animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
-                //.fadeIn(1000)
-                
-                //.css({visibility: "visible", display: "block"})
-                ;
-            //$("#colorbox").addClass('md-modal md-effect-6');
-            //$("#cboxWrapper").addClass('md-content');
-            
-            // Works!
-            $("#colorbox").addClass('md-show');
+        ,right: 100
         
-                
-        }); // End of animate of $('#cboxOverlay')
-     }
-     ,onClosed: function() {
-            $("#colorbox").removeClass('md-show');
-            //console.log('closed...');
-            $("body").css('overflow', 'inherit');
-            turned_off = true;
-            // Return to Side Slide window, if the popup was called from a side slide window.
-            return_to_sidewindow_if_needed();
-          }
-   }); 
+        ,//added to remove initial flickering
+       opacity : 0,
+       //use the onOpen event...
+       onOpen: function() {
+
+
+           $("#colorbox").addClass('md-modal md-effect-6');
+           $("#cboxWrapper").addClass('md-content');
+
+           // prevent Overlay from being displayed...
+           ////$('#cboxOverlay,#colorbox').css('visibility', 'hidden');
+           // make the overlay visible and
+           // re-add all it's original properties!
+           $('#cboxOverlay').css({
+               'visibility': 'visible',
+               'opacity': 0.2,
+               //'height': 0,
+               'cursor': 'pointer',
+
+               // execute our original animation on the overlay!
+               // animate it you can use here all the
+               // possible animate combination or plugin...
+           }).animate({
+               //height: ['toggle', 'swing'],
+               ////height: ['100%', 'swing'],
+               //opacity: 'toggle',
+               opacity: 0.7
+           }, 1000 , function() {
+               //$('#colorbox')
+                   //.css({'visibility': 'visible'})
+                   //.fadeIn(1000)
+
+                   ////.css({opacity: 0, visibility: "visible", display: "block", left: "10%"})
+                   ////.animate({opacity: 1, left: '30%'}, 1000, "easeOutBounce")
+                   //.fadeIn(1000)
+
+                   //.css({visibility: "visible", display: "block"})
+                   ;
+               //$("#colorbox").addClass('md-modal md-effect-6');
+               //$("#cboxWrapper").addClass('md-content');
+
+               // Works!
+               $("#colorbox").addClass('md-show');
+
+
+           }); // End of animate of $('#cboxOverlay')
+        }
+        ,onClosed: function() {
+               $("#colorbox").removeClass('md-show');
+               //console.log('closed...');
+               $("body").css('overflow', 'inherit');
+               turned_off = true;
+               // Return to Side Slide window, if the popup was called from a side slide window.
+               return_to_sidewindow_if_needed();
+             }
+      }); 
+      
+   } // End of Else of if (!popup_stick_to_left) {
    
-   
+  
  }
  
  
