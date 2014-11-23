@@ -784,7 +784,8 @@
    sw = new_sw;
             
    //console.log($(this).attr('id'));
-   get_conf($(this).text(), $(this).attr('id'));
+   //get_conf($(this).text(), $(this).attr('id'));
+   get_conf($(this).text(), true);
    sw = save_sw;
  }); 
  
@@ -799,6 +800,13 @@
  function get_conf(label, id, popup_stick_to_left) {
 
    popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false;
+
+   if (popup_stick_to_left) {
+     console.log('popup_stick_to_left = true');
+   }
+   else{
+     console.log('popup_stick_to_left = FALSE');
+   }
 
    // Caching.
    /*
@@ -875,6 +883,7 @@
                   
                   
                         if(cache[ 'content_conf_' + label ] = data.out) {
+                          console.log('Conf presents!');
                           showConfInPopUp(data.out, popup_stick_to_left);
                         }
                         
