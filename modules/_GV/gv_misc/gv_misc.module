@@ -3072,7 +3072,7 @@ function gv_misc_drupal_not_found() {
   watchdog('page not found (GV)', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
 
   global $start_time, $user_name;
-  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', $start_time . ' ' . $_SERVER['REMOTE_ADDR']  . $user_name . ' * -> ' . $_SERVER['REQUEST_URI'] . ' {404 PAGE NOT FOUND}
+  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', $start_time) . ' ' . $_SERVER['REMOTE_ADDR']  . $user_name . ' * -> ' . $_SERVER['REQUEST_URI'] . ' {404 PAGE NOT FOUND}
 ', FILE_APPEND | LOCK_EX);
   
   
