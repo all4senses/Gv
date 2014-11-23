@@ -989,6 +989,8 @@
            width: 550,  //'40%'
            height: 500//545///470
 
+           ,left: "50%"
+           
            ,//added to remove initial flickering
           opacity : 0,
           //use the onOpen event...
