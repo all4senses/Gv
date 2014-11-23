@@ -1061,7 +1061,7 @@
         width: 550,  //'40%'
         height: 500//545///470
         
-        ,right: 20
+        ,right: 220
         
         ,//added to remove initial flickering
        opacity : 0,
