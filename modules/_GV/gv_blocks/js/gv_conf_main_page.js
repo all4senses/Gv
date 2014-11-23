@@ -771,13 +771,13 @@
 // $('body').on('click', '.term-link', function(){    
 // for jQuery 1.7
 
-   /**/
+   /*
    slideOutRightWin();
    
    //console.log(sw + ' ->' + $( "#conf" ).val());
    // Set to return to the side slide window after a colorbox popup will be closed.
    return_to_sidewindow = 'content_' + sw + '_' + $( "#conf" ).val();
-   /**/
+   */
   
    new_sw = 'title';
    save_sw = sw;
