@@ -742,7 +742,7 @@
     
     
     
-    
+  var cb1 = null;
       
   $('body').delegate('.term-link', 'click', function(event){
 // Replace with   
@@ -803,6 +803,7 @@
    
    
    // Close prev colorbox, if opened.
+   if (cb1) {
    $.fn.colorbox.close();
    turned_off = true;
   
@@ -812,7 +813,11 @@
           }
           , 1000);
           
-          
+   }
+   else {
+      get_conf($(this).text(), $(this).attr('id'), true);
+      sw = save_sw;
+   }
           
    
  }); 
@@ -980,7 +985,7 @@
   $("body").css('overflow', 'hidden');
 
 
-   var cb1;
+   
 
    /*
    cb1 = $.fn.colorbox({
