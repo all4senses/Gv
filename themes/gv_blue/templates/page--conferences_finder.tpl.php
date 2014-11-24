@@ -46,7 +46,7 @@
           ?>
           
           <div class="cd-overlay"></div>
-          <div id="top-loading-indicator"></div>
+          
         
       </section> <!-- /#main -->
 
@@ -63,4 +63,5 @@
 
 
 <div class="cd-member-bio member-1"></div>
+<div id="top-loading-indicator"></div>
   
