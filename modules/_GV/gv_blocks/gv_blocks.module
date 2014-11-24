@@ -3693,12 +3693,12 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/cloud-backup' => 'Cloud Backup Providers',
   );
  
-  
+  $service_type_name_origin = $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]];
   
   global $language;
   global $user;
   $logged_in = $user->uid ? '_logged' : '';
-  $cache_name = 'gv_latest_reviews_for_' . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . $language->language . $logged_in;
+  $cache_name = 'gv_latest_reviews_for_' . $service_type_name_origin . $language->language . $logged_in;
   
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
@@ -3745,7 +3745,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
             ->fields('n', array('nid', 'created'));
     $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
     
-    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
+    $query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $service_type_name_origin . "%%'");
     
     $query->condition('n.status', 1);
     $query->addTag('a4s');
@@ -3760,12 +3760,13 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     //dpm($results);
     
     if (!empty($results)) {
-
+      $sprite_name = 'top_' . str_replace(array('business', 'residential'), array('bu', 're'), $service_type_name_origin) . '_providers';
       $count = count($results) - 1;
       foreach ($results as $key => $result) {
         $node = node_load($result->nid);
+        $node->sprite_name = $sprite_name;
         $servicePage_bottomMainReviewTeaser = node_view($node, 'servicePage_bottomMainReviewTeaser');
-         $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render($servicePage_bottomMainReviewTeaser) . '</div>';
+        $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render($servicePage_bottomMainReviewTeaser) . '</div>';
       }
 
       //$latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
