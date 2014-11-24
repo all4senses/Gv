@@ -884,7 +884,7 @@
                   
                   
                         if(cache[ 'content_conf_' + label ] = data.out) {
-                          console.log('Conf presents!');
+                          //console.log('Conf presents!');
                           showConfInPopUp(data.out, popup_stick_to_left);
                         }
                         
@@ -943,6 +943,11 @@
    
   popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false; 
    
+   
+  // Close prev colorbox, if opened.
+  $.fn.colorbox.close();
+  turned_off = true;
+   
   $('#cb-popup_1 #results_1').html(html_data);
                         
   // Uncomment to stop scrolling.
@@ -978,7 +983,8 @@
   
   
   if (!popup_stick_to_left) {
-    console.log('height: 500');
+        //console.log('popup in the middle');
+        
         // Usual appearing, in the middle with the background shading.
         cb1 = $.fn.colorbox({
            transition: 'fade' , //'elastic',
@@ -1051,7 +1057,7 @@
    } // End of if (!popup_stick_to_left) {
    else {
   
-    console.log('height: 600...');
+    //console.log('popup stick to left');
     
       // Usual appearing, in the middle with the background shading.
       cb1 = $.fn.colorbox({
