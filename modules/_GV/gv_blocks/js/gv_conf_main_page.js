@@ -765,14 +765,12 @@
           
    
    // Close prev colorbox, if opened.
-   $.fn.colorbox.close();
-   turned_off = true;
-  
-   setTimeout(function() {
-            get_conf($(this).text());
-          }
-          , 1000);
-   
+   if (cb1) {
+      $.fn.colorbox.close();
+      cb = null;
+   }
+          
+    get_conf($(this).text());
    
  }); 
       
@@ -804,28 +802,13 @@
    
    // Close prev colorbox, if opened.
    if (cb1) {
-     
       $.fn.colorbox.close();
       cb = null;
-      //cb1.close();
-      //turned_off = true;
-  
-  get_conf($(this).text(), $(this).attr('id'), true);
-            sw = save_sw;
-  
-//      setTimeout(function() {
-//            get_conf($(this).text(), $(this).attr('id'), true);
-//            sw = save_sw;
-//          }
-//          , 1000);
-          
-   }
-   else {
-      get_conf($(this).text(), $(this).attr('id'), true);
-      sw = save_sw;
    }
           
-   
+   get_conf($(this).text(), $(this).attr('id'), true);
+   sw = save_sw;
+      
  }); 
  
  
