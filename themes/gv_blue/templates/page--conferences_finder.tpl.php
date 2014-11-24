@@ -63,5 +63,5 @@
 
 
 <div class="cd-member-bio member-1"></div>
-<div id="top-loading-indicator"></div>
+<div id="top-loading-indicator"><div></div></div>
   
