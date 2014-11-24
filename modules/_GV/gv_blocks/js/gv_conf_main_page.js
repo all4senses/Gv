@@ -368,6 +368,11 @@
 
 
 
+  
+          
+          
+  
+
       $(".embed .link .open span").click(function(){ 
         window.prompt("Copy to clipboard: Ctrl+C, Enter", '<a href=http://getvoip.com/tech-conferences-finder>GetVoip Tech Conferences Finder</a>');
       });
@@ -758,10 +763,21 @@
    $('#c-title, #c-city-state').removeClass('active');
    $('input[id="conf"]').attr('title', search_field_title);
           
-          
-   get_conf($(this).text());
+   
+   // Close prev colorbox, if opened.
+   $.fn.colorbox.close();
+   turned_off = true;
+  
+   setTimeout(function() {
+            get_conf($(this).text());
+          }
+          , 1000);
+   
    
  }); 
+      
+      
+      
       
       
  var save_sw, new_sw;
@@ -785,8 +801,20 @@
             
    //console.log($(this).attr('id'));
    
-   get_conf($(this).text(), $(this).attr('id'), true);
-   sw = save_sw;
+   
+   // Close prev colorbox, if opened.
+   $.fn.colorbox.close();
+   turned_off = true;
+  
+   setTimeout(function() {
+            get_conf($(this).text(), $(this).attr('id'), true);
+            sw = save_sw;
+          }
+          , 1000);
+          
+          
+          
+   
  }); 
  
  
@@ -802,12 +830,12 @@
    id = typeof id !== 'undefined' ? id : null;
    popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false;
 
-   if (popup_stick_to_left) {
-     console.log('popup_stick_to_left = true');
-   }
-   else{
-     console.log('popup_stick_to_left = FALSE');
-   }
+//   if (popup_stick_to_left) {
+//     console.log('popup_stick_to_left = true');
+//   }
+//   else{
+//     console.log('popup_stick_to_left = FALSE');
+//   }
 
    // Caching.
    /*
@@ -944,9 +972,7 @@
   popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false; 
    
    
-  // Close prev colorbox, if opened.
-  $.fn.colorbox.close();
-  turned_off = true;
+  
    
   $('#cb-popup_1 #results_1').html(html_data);
                         
