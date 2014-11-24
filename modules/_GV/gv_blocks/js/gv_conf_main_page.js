@@ -805,16 +805,19 @@
    // Close prev colorbox, if opened.
    if (cb1) {
      
-      $.fn.colorbox.remove();
+      $.fn.colorbox.close();
       cb = null;
       //cb1.close();
       //turned_off = true;
   
-      setTimeout(function() {
-            get_conf($(this).text(), $(this).attr('id'), true);
+  get_conf($(this).text(), $(this).attr('id'), true);
             sw = save_sw;
-          }
-          , 1000);
+  
+//      setTimeout(function() {
+//            get_conf($(this).text(), $(this).attr('id'), true);
+//            sw = save_sw;
+//          }
+//          , 1000);
           
    }
    else {
