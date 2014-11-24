@@ -742,7 +742,7 @@
     
     
     
-  var cb1 = null;
+  cb1 = null;
       
   $('body').delegate('.term-link', 'click', function(event){
 // Replace with   
@@ -804,7 +804,8 @@
    
    // Close prev colorbox, if opened.
    if (cb1) {
-   $.fn.colorbox.close();
+   //$.fn.colorbox.close();
+   cb1.close();
    turned_off = true;
   
    setTimeout(function() {
