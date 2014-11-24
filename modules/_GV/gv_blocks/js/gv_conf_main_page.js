@@ -804,11 +804,12 @@
    
    // Close prev colorbox, if opened.
    if (cb1) {
-   //$.fn.colorbox.close();
-   cb1.close();
-   turned_off = true;
+     
+      $.fn.colorbox.close();
+      //cb1.close();
+      //turned_off = true;
   
-   setTimeout(function() {
+      setTimeout(function() {
             get_conf($(this).text(), $(this).attr('id'), true);
             sw = save_sw;
           }
