@@ -805,7 +805,9 @@
       $.fn.colorbox.close();
       cb = null;
    }
-          
+    
+   $("#top-loading-indicator").addClass('ui-autocomplete-loading');
+   
    get_conf($(this).text(), $(this).attr('id'), true);
    sw = save_sw;
       
@@ -882,7 +884,7 @@
    // 
    $("input#conf").addClass('ui-autocomplete-loading');
    
-   console.log(label);
+   //console.log(label);
    $.ajax({
               url: "get-conferences-ac",
               data: {
@@ -898,7 +900,7 @@
                   save_sw = new_sw = false;
                   
                   //console.log(data);
-                  $("input#conf").removeClass('ui-autocomplete-loading');
+                  $("input#conf, #top-loading-indicator").removeClass('ui-autocomplete-loading');
                   
                   
                   

@@ -46,6 +46,7 @@
           ?>
           
           <div class="cd-overlay"></div>
+          <div id="top-loading-indicator"></div>
         
       </section> <!-- /#main -->
 
