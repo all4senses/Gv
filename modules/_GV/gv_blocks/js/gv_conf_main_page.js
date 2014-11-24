@@ -805,7 +805,8 @@
    // Close prev colorbox, if opened.
    if (cb1) {
      
-      $.fn.colorbox.close();
+      $.fn.colorbox.remove();
+      cb = null;
       //cb1.close();
       //turned_off = true;
   
