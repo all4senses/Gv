@@ -17,7 +17,7 @@
                         referer: document.referrer
                        
                       }, 
-                    type: 'POST', 
+                    type: 'GET', //'POST', 
                     dataType: 'json'
                     /*
                     , 
