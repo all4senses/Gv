@@ -5015,11 +5015,11 @@ function gv_misc_approveContent($type, $id) {
         ->fields('re', array('entity_id'));
       $query->condition('field_r_email_value', $email);
       //$review_nid = $query->execute()->fetchField();
-      $result = $query->execute();
+      $results = $query->execute();
       
       //$found_nid = FALSE;
       $error = FALSE;
-      foreach ($result as $result) {
+      foreach ($results as $result) {
         $found_nid = TRUE;
         $review_nid = $result->entity_id;
         
