@@ -8226,8 +8226,9 @@ function gv_pages_node_view($node, $view_mode) {
       // Log 404 request to GV log file.
       if ($preface_key == 'page-not-found') {
         global $start_time, $user_name;
-        $start_time = time();
-        $user_name = $user->uid ? ' [' . $user->name . ']' : '';
+//        global $user;
+//        $start_time = time();
+//        $user_name = $user->uid ? ' [' . $user->name . ']' : '';
         file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', $start_time) . ' ' . $_SERVER['REMOTE_ADDR']  . $user_name . ' * -> ' . $_SERVER['REQUEST_URI'] . ' {404 PAGE NOT FOUND}
 ', FILE_APPEND | LOCK_EX);
  
