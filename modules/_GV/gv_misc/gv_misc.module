@@ -13571,19 +13571,19 @@ function gv_misc_updateCachedSIPpage_ajax() {
  * 
  */
 function gv_misc_init() {
-//  global $start_time, $user, $user_name, $no_log;
-//  
-//  $excluded_paths = array('/referer', '/rss.xml', '/blog/rss.xml', '/news/rss.xml', '/library/rss.xml', '/about-voip-services/rss.xml');
-//  if (!in_array($_SERVER['REQUEST_URI'], $excluded_paths)) {
-//    $no_log = FALSE;
-//    $start_time = time();
-//    $user_name = $user->uid ? ' [' . $user->name . ']' : '';
-//    file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', $start_time) . ' ' . $_SERVER['REMOTE_ADDR'] . $user_name . ' + -> ' . $_SERVER['REQUEST_URI'] . '
-//', FILE_APPEND | LOCK_EX);
-//  }
-//  else {
-//    $no_log = TRUE;
-//  }
+  global $start_time, $user, $user_name, $no_log;
+  
+  $excluded_paths = array('/referer', '/rss.xml', '/blog/rss.xml', '/news/rss.xml', '/library/rss.xml', '/about-voip-services/rss.xml');
+  if (!in_array($_SERVER['REQUEST_URI'], $excluded_paths)) {
+    $no_log = FALSE;
+    $start_time = time();
+    $user_name = $user->uid ? ' [' . $user->name . ']' : '';
+    file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', $start_time) . ' ' . $_SERVER['REMOTE_ADDR'] . $user_name . ' + -> ' . $_SERVER['REQUEST_URI'] . '
+', FILE_APPEND | LOCK_EX);
+  }
+  else {
+    $no_log = TRUE;
+  }
 }
 
 
@@ -13592,14 +13592,14 @@ function gv_misc_init() {
  * 
  */
 function gv_misc_exit() {
-//  global $start_time, $user_name, $no_log;
-//  if ($no_log) {
-//    return;
-//  }
-//  $finish_time = time();
-//  if ($finish_time > $start_time + 1) {
-//    file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', $finish_time) . ' ' . $_SERVER['REMOTE_ADDR']  . $user_name . ' - -> ' . $_SERVER['REQUEST_URI'] . '
-//', FILE_APPEND | LOCK_EX);
-//  }
+  global $start_time, $user_name, $no_log;
+  if ($no_log) {
+    return;
+  }
+  $finish_time = time();
+  if ($finish_time > $start_time + 1) {
+    file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', $finish_time) . ' ' . $_SERVER['REMOTE_ADDR']  . $user_name . ' - -> ' . $_SERVER['REQUEST_URI'] . '
+', FILE_APPEND | LOCK_EX);
+  }
 }
 

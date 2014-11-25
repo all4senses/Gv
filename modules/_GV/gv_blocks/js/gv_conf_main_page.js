@@ -826,19 +826,13 @@
    id = typeof id !== 'undefined' ? id : null;
    popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false;
 
-//   if (popup_stick_to_left) {
-//     console.log('popup_stick_to_left = true');
-//   }
-//   else{
-//     console.log('popup_stick_to_left = FALSE');
-//   }
 
    // Caching.
-   /*
+   
    if ( 'content_conf_' + label in cache ) {
      save_sw = new_sw = false;
      if (cache[ 'content_conf_' + label ]) {
-        showConfInPopUp(cache[ 'content_conf_' + label ]);
+        showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
      }
      else {
        alert('No conference found with a title (or title containing) <' + label + '>');
@@ -847,6 +841,7 @@
      }
      return;
    }
+   /*
    else if ( 'content_' + sw + '_' + label in cache ) {
      save_sw = new_sw = false;
      // List in SlidingIn right window.
