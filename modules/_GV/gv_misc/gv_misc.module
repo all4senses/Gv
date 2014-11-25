@@ -3006,13 +3006,25 @@ function gv_misc_setReferer_ajax() {
 //  }
 //  
 //  
-  $post['referer'] = check_plain(strip_tags($_POST['referer']));
+  if (!empty($_POST['referer'])) {
+    $post['referer'] = $_POST['referer'];
+  }
+  elseif (!empty($_GET['referer'])) {
+    $post['referer'] = $_GET['referer'];
+  }
   
-  //if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
-  if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
+  if (!empty($post['referer'])) {
     
-    $_SESSION['gv_current_http_referer'] = $post['referer'];
-    //$_SESSION['gv_current_http_referer'] = $_POST['referer'];
+  
+        $post['referer'] = check_plain(strip_tags($post['referer']));
+
+        //if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
+        if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
+
+          $_SESSION['gv_current_http_referer'] = $post['referer'];
+          //$_SESSION['gv_current_http_referer'] = $_POST['referer'];
+        }
+  
   }
   
   drupal_json_output(array('status' => TRUE, /*'data' => $output*/));
