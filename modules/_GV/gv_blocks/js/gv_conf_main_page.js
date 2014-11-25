@@ -421,10 +421,10 @@
       });
       
       $("#c-city-state").mouseenter(function(){ 
-         $("#h-name").show();
+         $("#h-city-state").show();
       });
       $("#c-city-state").mouseleave(function(){ 
-         $("#h-name").hide();
+         $("#h-city-state").hide();
       });
       
       
