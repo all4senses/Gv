@@ -871,6 +871,7 @@ function gv_process_page(&$variables) {
   
   // Remote Google fonts.
   // gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500', 'NA', 'text/css');
+  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu:500', 'NA', 'text/css');
   // 
   // hr_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500|Roboto:500|Raleway:300,500,700', 'NA', 'text/css');
   gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Raleway:300,500,600,700', 'NA', 'text/css');
