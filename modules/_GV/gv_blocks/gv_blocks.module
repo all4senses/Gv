@@ -9622,8 +9622,9 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
           ->condition('r.tag', 'overall')
           ->condition('r.function', 'average')
           ->condition('r.entity_id', $new_top5, 'IN');
-    $top5_votes = $query->execute()->fetchCol();
+    $top5_votes = $query->execute()->fetchAllAssoc('entity_id');
     
+    dpm($new_top5);
     dpm($top5_votes);
     
     $out = '<table><tbody><tr>';
