@@ -9564,11 +9564,11 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
   
   
   
-  $view = views_get_view($view_n_display['providers']);
+  $view = views_get_view('providers');
     
   
   // Run view's query.
-  $view->execute($view_n_display['block_top_bu_small']);
+  $view->execute('block_top_bu_small');
 
   dpm($view);
   dpm($view->result);
