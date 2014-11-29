@@ -9617,7 +9617,7 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
     
     $query = db_select('votingapi_cache', 'r');
     //$query->fields('r', array('entity_id', 'field_p_erating_value'))
-    $query->fields('r', array('entity_id'))
+    $query->fields('r', array('value'))
           ->condition('r.value_type', 'percent')
           ->condition('r.tag', 'overall')
           ->condition('r.function', 'average')
