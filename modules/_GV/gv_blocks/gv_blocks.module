@@ -9624,14 +9624,16 @@ function gv_blocks_get_topProvidersForLP($type = 'Top 5') {
           ->condition('r.entity_id', $new_top5, 'IN');
     $top5_votes = $query->execute()->fetchAllAssoc('entity_id');
     
-    dpm($new_top5);
+    //dpm($new_top5);
     dpm($top5_votes);
-    
+    global $user;
     $out = '<table><tbody><tr>';
     //foreach ($top5 as $nid) {
     foreach ($new_top5 as $nid) {
+      $stars = theme('gv_misc_fivestar_static', array('rating' => $top5_votes[$nid]->value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+        
       $logo = gv_misc_getProviderQuickData('logo_chart', array('data' => (object) array('nid' => $nid)));
-      $out .= '<td>' . $logo . '</td>';
+      $out .= '<td>' . $logo . ($user->uid == 1 ? $stars : '') . '</td>';
     }
     //dpm($logo);
     
