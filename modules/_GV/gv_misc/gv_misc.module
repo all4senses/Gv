@@ -236,13 +236,26 @@ function gv_misc_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
-  
   $items['update-cached-sip-page-ajax'] = array(
     'title' => 'Update Boost cached SIP page, to be called via ajax',
     'page callback' => 'gv_misc_updateCachedSIPpage_ajax',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   ); 
+ 
+  
+   $items['update-cached-ppc-page'] = array(
+    'title' => 'Update Boost cached PPC page',
+    'page callback' => 'gv_misc_updateCachedPPCpage',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
+  $items['update-cached-ppc-page-ajax'] = array(
+    'title' => 'Update Boost cached PPC page, to be called via ajax',
+    'page callback' => 'gv_misc_updateCachedPPCpage_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   
   return $items;
 }
@@ -13543,7 +13556,7 @@ function gv_misc_createNode_conference($conference) {
 
 
 /**
- * Update Boost cached homepage.
+ * Update Boost cached SIP page.
  * To be called via exec(
  */
 function gv_misc_updateCachedSIPpage() {
@@ -13557,7 +13570,7 @@ function gv_misc_updateCachedSIPpage() {
 
 
 /**
- * Update Boost cached homepage.
+ * Update Boost cached SIP page.
  * Middle function, To be called via ajax
  */
 function gv_misc_updateCachedSIPpage_ajax() {
@@ -13576,6 +13589,42 @@ function gv_misc_updateCachedSIPpage_ajax() {
   drupal_json_output(array('status' => $status /*, 'data' => $output*/));
 }
 
+
+
+
+/**
+ * Update Boost cached SIP page.
+ * To be called via exec(
+ */
+function gv_misc_updateCachedPPCpage() {
+  
+   unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
+  
+   gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/ppc/business-voip');
+   
+   return '.';
+}
+
+
+/**
+ * Update Boost cached SIP page.
+ * Middle function, To be called via ajax
+ */
+function gv_misc_updateCachedPPCpage_ajax() {
+  
+  $status = TRUE;
+  
+  // launch and leave in background, let make everything in background
+  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-PPC-page > /dev/null &');
+  
+  // Problems with boost that doesn't cache pages if there are POST request from ajax on them.
+  // So make it GET somehow solve the problem.
+  // Here some discussing related to DRUPAL_UID set for anonimous users...
+  // https://www.drupal.org/node/1807818
+  
+  
+  drupal_json_output(array('status' => $status /*, 'data' => $output*/));
+}
 
 
 /**

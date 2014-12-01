@@ -9673,7 +9673,8 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
  $chart_themed = NULL;
  $info = '';
-  
+ global $user;
+ 
  // For now only sip page have settings for turning on/off rotation
  if ($view_n_display['display'] == 'bl_p_sip_rotated') {
     
@@ -10035,6 +10036,11 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
 
                 foreach ($random_index as $key => $value) {
                   $view->result[$key] = $random_array[$value];
+                }
+                
+                if (!$user->uid) {
+                  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+                  drupal_add_js($path_to_custom_js . 'gv_rotate_ppc_cached_page_table.js');
                 }
                 //dpm($view->result);
 
