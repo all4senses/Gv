@@ -8153,12 +8153,15 @@ function theme_gv_misc_requestQuote_mail($data, $with_title = TRUE) {
      if ($key == 'sentToRemoteProviders') {
        $submissions_list = NULL;
        foreach ($value as $provider => $submitted) {
-         $submissions_list .= ($submissions_list && $submitted ? ', ' : '') . ($submitted ? $provider : ''); 
+         $submissions_list .= ( ($submissions_list && $submitted) ? ', ' : '') . ($submitted ? $provider : ''); 
        }
         $out .= "$key = $submissions_list
 ";
      }
      else {
+      if (is_array($value)) {
+        $value = print_r($value, TRUE);
+      }
       $out .= "$key = $value
 ";
      }
