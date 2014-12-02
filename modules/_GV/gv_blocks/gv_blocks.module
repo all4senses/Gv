@@ -2782,9 +2782,11 @@ function gv_blocks_compareTopProviders($service_type) {
   
   // Try to get the data from cache.
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    // Strange, but seems that adding tis dpm info line has increased the cached page loadding tim in several times!!!
     dpm('Cached ...' . $cid);
     return $cache->data;
   }
+  // Strange, but seems that adding tis dpm info line has increased the cached page loadding tim in several times!!!
   dpm('No cache Compare...' . $cid);
   
   // No cached data... rebuilding...
