@@ -2522,9 +2522,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               
               $a = node_load($nid);
               $a->related_articles_teaser = TRUE;
+              $n_view = node_view($a, 'teaser');
               $form['related_articles']['index_' . $index][$nid] = array(
                 '#type' => 'checkbox',
-                '#title' => render(node_view($a, 'teaser')),
+                '#title' => render($n_view),
                 //'#default_value' => !empty($extra_data['related_articles']['index_' . $index][$nid]) ? 1 : 0,
                 '#default_value' => is_object($article) ? 1 : 0,
                 '#disabled' => TRUE,
