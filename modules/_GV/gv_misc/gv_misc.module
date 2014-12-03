@@ -1497,7 +1497,11 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
      dpm(unserialize($result));     
           
    */
-  file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
+  
+  ///file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
+  
+  
+  $out = '<iframe src="//fast.wistia.net/embed/iframe/32l4uklpln" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>';
      
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
