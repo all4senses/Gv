@@ -272,7 +272,7 @@ if($view_mode == 'home_teaser_rotated') {
                         
                       </div>
                       <?php 
-                        echo @$node->extra_data['body_summary'];
+                        echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
                         
                         
                         //global $user;
