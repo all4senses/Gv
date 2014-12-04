@@ -262,7 +262,7 @@ if($view_mode == 'home_teaser_rotated') {
                               <span typeof="v:Rating">
                                 <span property="v:worst" content="0"></span>
                                 <span property="v:value">' . $editor_overall_rating . '</span>
-                                <span property="v:best"  content="0"></span>
+                                <span property="v:best" content="5"></span>
                               </span>
                             </span><div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $editor_overall_rating * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
 
