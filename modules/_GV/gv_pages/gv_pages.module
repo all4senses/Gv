@@ -8217,6 +8217,7 @@ function gv_pages_node_view($node, $view_mode) {
           global $user;
           if ($user->uid == 1 && $node->nid == 838) {
             dpm($node);
+            $node->body['und'][0]['value'] .= '...';
           }
           
       } // End of if ($view_mode == 'full') 
