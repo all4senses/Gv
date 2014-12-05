@@ -272,7 +272,8 @@ if($view_mode == 'home_teaser_rotated') {
                         
                       </div>
                       <?php 
-                        echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
+                      // Review snippet for counting an Editor review as a review #1
+                        echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
                         
                         
                         //global $user;
