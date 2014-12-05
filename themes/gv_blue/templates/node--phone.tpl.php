@@ -50,7 +50,7 @@ if($view_mode == 'home_teaser_rotated') {
             
             if ($page) {
               echo '<h1 ',  $title_attributes, /*'property="dc:title v:summary"',*/ /*'property="v:summary"',*/ (!$node->status ? ' class="not-published"' : ''), ' >', $title, '</h1>',
-                    '<span itemprop="itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span>';
+                    '<span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span>';
             }
             elseif ($view_mode == 'teaser') {
               echo '<h2 ',  $title_attributes, (!$node->status ? ' class="not-published"' : ''), ' ><a href="' . $url .'">' . $title . '</a></h2>';
