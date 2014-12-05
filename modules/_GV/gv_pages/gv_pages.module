@@ -8213,6 +8213,12 @@ function gv_pages_node_view($node, $view_mode) {
           
           gv_misc_addZoomableImagesJs();
           
+          
+          global $user;
+          if ($user->uid == 1 && $node->nid == 838) {
+            dpm($node);
+          }
+          
       } // End of if ($view_mode == 'full') 
       
     break; // End of phone.
