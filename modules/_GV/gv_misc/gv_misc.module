@@ -13684,8 +13684,9 @@ function gv_misc_addGoogleVideoSnippetIfHasVideo($body_full_markup) {
     $video_id = $matches[1];
     if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
       $found_image = TRUE;
+      //$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
       $body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
-      dpm($body_full_markup);
+      //dpm($body_full_markup);
     }
     
   }

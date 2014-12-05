@@ -6209,9 +6209,14 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
  *   Return nothing.
  */
 function gv_pages_validateForm_phone(&$form, &$form_state) {
-  dpm($form_state); dpm($form_state);
+  //dpm($form_state); dpm($form_state);
   
-  gv_misc_addGoogleVideoSnippetIfHasVideo($form_state['values']['body']['und'][0]['value']);
+  global $user;
+  if ($user->uid == 1) {
+    gv_misc_addGoogleVideoSnippetIfHasVideo($form_state['values']['body']['und'][0]['value']);
+    $form_state['values']['body']['und'][0]['value'] = $form_state['values']['body']['und'][0]['value'] . '..';
+  }
+  
   
   $rating_options = array('performance' => PERFORMANCE, 'voice' => VOICE, 'install' => INSTALL, 'use_ease' => USE_EASE, 'durability' => DURABILITY, 'features' => FEATURES, 'price' => PRICE, 'recommend' => RECOMMEND_PHONE);
   
