@@ -48,7 +48,8 @@ if($view_mode == 'home_teaser_rotated') {
             $url = 'http://getvoip.com'. url('node/' . $node->nid);
             
             if ($page) {
-              echo '<h1 ',  $title_attributes, /*'property="dc:title v:summary"',*/ 'property="v:summary"', (!$node->status ? ' class="not-published"' : ''), ' >', $title, '</h1>';
+              echo '<h1 ',  $title_attributes, /*'property="dc:title v:summary"',*/ /*'property="v:summary"',*/ (!$node->status ? ' class="not-published"' : ''), ' >', $title, '</h1>',
+                    '<span itemprop="itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span>';
             }
             elseif ($view_mode == 'teaser') {
               echo '<h2 ',  $title_attributes, (!$node->status ? ' class="not-published"' : ''), ' ><a href="' . $url .'">' . $title . '</a></h2>';
@@ -104,7 +105,7 @@ if($view_mode == 'home_teaser_rotated') {
                 if (!empty($extra_data['guest_author'])) {
                   
                   if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   $created_str .
                               '</span>';
                   }
@@ -121,7 +122,7 @@ if($view_mode == 'home_teaser_rotated') {
                 elseif ($node->uid) {
 
                   if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   $created_str .
                               '</span>';
                   }
@@ -136,7 +137,7 @@ if($view_mode == 'home_teaser_rotated') {
 
                 }
                 else {
-                  $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By:<span class="username">Guest' . $delimiter . $created_str .
                                '</span>';
 
@@ -174,7 +175,7 @@ if($view_mode == 'home_teaser_rotated') {
                 
               <div class="pros-and-cons">
                 <div>
-                  <div class="title good">THE GOOD</div><?php /*dpm($node);*/ echo $node->extra_data['pros_and_cons']['The good']; ?>
+                  <div class="title good">THE GOOD</div><?php /*dpm($node);*/ echo '<div property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; ?>
                 </div>
                 <div>
                   <div class="title bad">THE BAD</div><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
