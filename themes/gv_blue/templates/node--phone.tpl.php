@@ -296,6 +296,7 @@ if($view_mode == 'home_teaser_rotated') {
                                   '</div>';
                           }
                         }
+                        dpm($content['body']);
                         echo render($content['body']); 
 
                         //dpm($content);
