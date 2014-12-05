@@ -104,12 +104,12 @@ if($view_mode == 'home_teaser_rotated') {
                 if (!empty($extra_data['guest_author'])) {
                   
                   if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   $created_str .
                               '</span>';
                   }
                   else {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By ' .
                                   '<span class="guest-author">' . $extra_data['guest_author'] . '</span>' 
                                   /*. $gplus_profile */.
@@ -121,12 +121,12 @@ if($view_mode == 'home_teaser_rotated') {
                 elseif ($node->uid) {
 
                   if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   $created_str .
                               '</span>';
                   }
                   else {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By ' .
                                   (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>') 
                                   /*. $gplus_profile */.
@@ -136,7 +136,7 @@ if($view_mode == 'home_teaser_rotated') {
 
                 }
                 else {
-                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                  $submitted = '<span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By:<span class="username">Guest' . $delimiter . $created_str .
                                '</span>';
 
