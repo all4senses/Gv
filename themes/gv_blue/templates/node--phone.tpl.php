@@ -273,7 +273,7 @@ if($view_mode == 'home_teaser_rotated') {
                       </div>
                       <?php 
                       // Review snippet for counting an Editor review as a review #1
-                        echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span itemprop="datePublished" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime"></span><span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
+                        echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span itemprop="dtreviewed" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime"></span><span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
                         
                         
                         //global $user;
