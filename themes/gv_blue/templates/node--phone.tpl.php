@@ -38,7 +38,8 @@ if($view_mode == 'home_teaser_rotated') {
 <?php endif; ?>
            
       <?php if ($page): ?>
-        <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
+        <!--<div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"> -->
+        <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review">
       <?php endif; ?>
       
   
@@ -105,15 +106,16 @@ if($view_mode == 'home_teaser_rotated') {
                 if (!empty($extra_data['guest_author'])) {
                   
                   if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   $created_str .
                               '</span>';
                   }
                   else {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By ' .
-                                  '<span class="guest-author">' . $extra_data['guest_author'] . '</span>' 
-                                  /*. $gplus_profile */.
+                                  //'<span class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
+                                  '<span property="v:reviewer" class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
+                                  /* $gplus_profile .*/
                                   $delimiter . $created_str .
                               '</span>';
                   }
@@ -122,14 +124,14 @@ if($view_mode == 'home_teaser_rotated') {
                 elseif ($node->uid) {
 
                   if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   $created_str .
                               '</span>';
                   }
                   else {
-                    $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By ' .
-                                  (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>') 
+                                  (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name v:reviewer">' . $author_name . '</a>') 
                                   /*. $gplus_profile */.
                                   $delimiter . $created_str .
                               '</span>';
@@ -137,8 +139,8 @@ if($view_mode == 'home_teaser_rotated') {
 
                 }
                 else {
-                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  'By:<span class="username">Guest' . $delimiter . $created_str .
+                  $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  'By:<span class="username" property="v:reviewer">Guest' . $delimiter . $created_str .
                                '</span>';
 
                 }
@@ -175,7 +177,11 @@ if($view_mode == 'home_teaser_rotated') {
                 
               <div class="pros-and-cons">
                 <div>
-                  <div class="title good">THE GOOD</div><?php /*dpm($node);*/ echo '<div property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; ?>
+                  <div class="title good">THE GOOD</div>
+                    <?php /*dpm($node);*/ 
+                          echo '<div property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; 
+                          //echo $node->extra_data['pros_and_cons']['The good']; 
+                    ?>
                 </div>
                 <div>
                   <div class="title bad">THE BAD</div><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
@@ -273,8 +279,9 @@ if($view_mode == 'home_teaser_rotated') {
                         
                       </div>
                       <?php 
-                      // Review snippet for counting an Editor review as a review #1
-                        echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span itemprop="dtreviewed" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime"></span><span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
+                        // Review snippet for counting an Editor review as a review #1
+                        //echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span itemprop="dtreviewed" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime"></span><span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
+                        echo '<div property="v:description">', @$node->extra_data['body_summary'], '</div>';
                         
                         
                         //global $user;
