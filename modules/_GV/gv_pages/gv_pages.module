@@ -2641,9 +2641,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['body']['und'][0]['summary']['#default_value'] = '';
       }
       
-      dpm($form['body']['und'][0]['#default_value']);
+      //dpm($form['body']['und'][0]['#default_value']);
       
-      gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form['body']['und'][0]['#default_value']);
+      $form['body']['und'][0]['#default_value'] = gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form['body']['und'][0]['#default_value']);
       
       
       $pros_and_cons_descrs = array('The good', 'The bad', 'The bottom line');
