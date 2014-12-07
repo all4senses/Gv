@@ -2641,10 +2641,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['body']['und'][0]['summary']['#default_value'] = '';
       }
       
-      dpm($form['body']);
+      dpm($form['body']['und'][0]['#default_value']);
       
-      //$body_full_markup = preg_replace('|(\<div class="gv-video".*\>)|', '<div class="gv-video-2">', $body_full_markup);
-      //dpm($body_full_markup); 
+      gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form['body']['und'][0]['#default_value']);
+      
       
       $pros_and_cons_descrs = array('The good', 'The bad', 'The bottom line');
       $form['data_pros_and_cons'] = array(
