@@ -13702,10 +13702,11 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
   // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
   
   //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-  if (preg_match('/\<div class="gv-video"(.*)\<\/div\>\<\/div\>/i', $body_full_markup, $matches)) {
+  if (preg_match('/\<div class="gv-video".*(\[.*\])\<\/div\>\<\/div\>/i', $body_full_markup, $matches)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     dpm($matches);
-    $body_full_markup = preg_replace('|(\<div class="gv-video".*\>)|', '<div class="gv-video-2">', $body_full_markup);
+    //$body_full_markup = preg_replace('|(\<div class="gv-video".*\>)|', '<div class="gv-video-2">', $body_full_markup);
+    $body_full_markup = preg_replace('|\<div class="gv-video".*(\[.*\])\<\/div\>\<\/div\>|', '$1', $body_full_markup);
     dpm($body_full_markup);    
   }
 }
