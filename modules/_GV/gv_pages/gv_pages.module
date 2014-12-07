@@ -6216,13 +6216,8 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   
   global $user;
   if ($user->uid == 1) {
-    
-    // Works!
-    ///$form_state['values']['body']['und'][0]['value'] = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
-    
-    //$form_state['values']['body']['und'][0]['value'] = $form_state['values']['body']['und'][0]['value'] . '.';
-    
-    gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
+    // Wrap vodeo token in gv-video google snippet.
+    $form_state['values']['body']['und'][0]['value'] = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
   }
   
   
