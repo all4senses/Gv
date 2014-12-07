@@ -13684,7 +13684,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     dpm($matches_1);
     
-    if (preg_match('/.*\?v=(.*)[ \t]+.*\]/i', $matches_1[1], $matches_2)) {
+    if (preg_match('/.*\?v=(.*)[ \t]?.*\]/i', $matches_1[1], $matches_2)) {
       dpm($matches_2);
     }
     return $body_full_markup;
