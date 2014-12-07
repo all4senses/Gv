@@ -13685,7 +13685,7 @@ function gv_misc_addGoogleVideoSnippetIfHasVideo($body_full_markup) {
     if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
       $found_image = TRUE;
       ////$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
-      $body_full_markup = preg_replace('|(\[video:.*http.*\])|', '<div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">$1</div>', $body_full_markup);
+      $body_full_markup = preg_replace('|(\[video:.*http.*\])|', '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"><span itemprop="name" content="Cisco SPA 303"></span><span itemprop="description" content="Unboxing Cisco SPA 303"></span><meta itemprop="thumbnailUrl" content="/images/posts/CiscoSPA303_outofthebox_0.PNG" ></meta>$1</div>', $body_full_markup);
       dpm($body_full_markup);
     }
     
