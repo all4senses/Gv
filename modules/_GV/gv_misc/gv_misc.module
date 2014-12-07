@@ -13680,11 +13680,11 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
   
   //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-  if (preg_match('/\[video:(.*)\]/i', $body_full_markup, $matches_1)) {
+  if (preg_match('/\[video:(.*\])/i', $body_full_markup, $matches_1)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     dpm($matches_1);
     
-    if (preg_match('/.*\?v=(.*)\t?.*\]/i', $matches_1[1], $matches_2)) {
+    if (preg_match('/.*\?v=(.*)\s?.*\]/i', $matches_1[1], $matches_2)) {
       dpm($matches_2);
     }
     return $body_full_markup;
