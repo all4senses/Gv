@@ -13704,7 +13704,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
           //dpm($data_from);
           dpm($data_from->entry->{'media$group'});
           $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
-          $descr = $data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
+          $descr = 'xxx';//$data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
           $duration = $data_from->entry->{'media$group'}->{'yt$duration'}->{'seconds'};
           $contentUrl = $data_from->entry->{'media$group'}->{'media$content'}[0]->url;
         }
@@ -13737,6 +13737,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
                 . '<meta itemprop="contentUrl" content="' . $contentUrl . '" ></meta>' 
                 . '$1' 
             . '</div>', $body_full_markup);
+      
+      
       //dpm($body_full_markup);
     }
   }
