@@ -13683,12 +13683,12 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   $title = $descr = $duration = $contentUrl = NULL;
   
   //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-  if (preg_match('/\[video:(.*\])/i', $body_full_markup, $matches_1)) {
+  if (preg_match('/\[video:(.*\])/is', $body_full_markup, $matches_1)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     //dpm($matches_1);
     
     // YouTube.com
-    if (preg_match('/.*\?v=(.*)\s?.*\]/i', $matches_1[1], $matches_2)) {
+    if (preg_match('/.*\?v=(.*)\s?.*\]/is', $matches_1[1], $matches_2)) {
       dpm($matches_2);
       $video_id = $matches_2[1];
       if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
@@ -13706,9 +13706,10 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
           //dpm($data_from);
           dpm($data_from->entry->{'media$group'});
           $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
-          dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
-          $descr = htmlspecialchars($data_from->entry->{'media$group'}->{'media$description'}->{'$t'}, ENT_QUOTES);
-          dpm($descr);
+          //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
+          //$descr = htmlspecialchars($data_from->entry->{'media$group'}->{'media$description'}->{'$t'}, ENT_QUOTES);
+          $descr = $data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
+          //dpm($descr);
           $duration = $data_from->entry->{'media$group'}->{'yt$duration'}->{'seconds'};
           $contentUrl = $data_from->entry->{'media$group'}->{'media$content'}[0]->url;
         }
@@ -13720,7 +13721,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       }
     }
     // Wistia.com
-    elseif (preg_match('/.*\/medias\/(.*)\?.*\]/i', $matches_1[1], $matches_2)) {
+    elseif (preg_match('/.*\/medias\/(.*)\?.*\]/is', $matches_1[1], $matches_2)) {
       dpm($matches_2);
       $video_id = $matches_2[1];
 //      if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
@@ -13732,7 +13733,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     
     if ($found_image) {
       //dpm($thumbnail_src);
-      $body_full_markup = preg_replace('|(\[video:.*http.*\])|', 
+      $body_full_markup = preg_replace('|(\[video:.*http.*\])|is', 
               '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
                 . '<span itemprop="name" content="' . $title . '"></span>' 
                 . '<span itemprop="description" content="' . $descr . '"></span>' 
@@ -13757,12 +13758,12 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
   
   // $form_state['values']['body']['und'][0]['value']
   // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
-  dpm('a1');
+  //dpm('a1');
   //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
   if (preg_match('/\<div class="gv-video".*(\[.*\])\<\/div\>/is', $body_full_markup, $matches)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     dpm($matches);
-    dpm('a2');
+    //dpm('a2');
     //$body_full_markup = preg_replace('|(\<div class="gv-video".*\>)|', '<div class="gv-video-2">', $body_full_markup);
     $body_full_markup = preg_replace('|\<div class="gv-video".*(\[.*\])\<\/div\>|is', '$1', $body_full_markup);
     //dpm($body_full_markup);    
