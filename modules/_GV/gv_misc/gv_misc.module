@@ -13701,9 +13701,11 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
 
         if ($data_from) {
           $data_from = json_decode($data_from);
-          dpm($data_from);
-          $title = $data_from->entry->{'media$group'};
+          //dpm($data_from);
           dpm($data_from->entry->{'media$group'});
+          $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
+          $descr = $data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
+          
         }
   
   
@@ -13725,7 +13727,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     
     if ($found_image) {
       dpm($thumbnail_src);
-      $body_full_markup = preg_replace('|(\[video:.*http.*\])|', '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"><span itemprop="name" content="Cisco SPA 303"></span><span itemprop="description" content="Unboxing Cisco SPA 303"></span><meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $thumbnail_src . '" ></meta>$1</div>', $body_full_markup);
+      $body_full_markup = preg_replace('|(\[video:.*http.*\])|', '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"><span itemprop="name" content="' . $title . '"></span><span itemprop="description" content="' . $descr . '"></span><meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $thumbnail_src . '" ></meta>$1</div>', $body_full_markup);
       //dpm($body_full_markup);
     }
   }
