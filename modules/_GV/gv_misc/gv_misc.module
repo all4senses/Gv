@@ -13680,6 +13680,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
   
   $found_image = FALSE;
+  $title = $descr = NULL;
   
   //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
   if (preg_match('/\[video:(.*\])/i', $body_full_markup, $matches_1)) {
@@ -13701,7 +13702,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         if ($data_from) {
           $data_from = json_decode($data_from);
           dpm($data_from);
-
+          $title = $data_from->entry->{'media$group'};
+          dpm($data_from->entry->{'media$group'});
         }
   
   
