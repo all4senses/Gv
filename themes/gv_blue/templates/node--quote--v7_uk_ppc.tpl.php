@@ -280,24 +280,26 @@
           <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/ppc/service-quotes'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
             
-            <!-- Google Code for GV - LP -UK Conversion Page -->
-            <script type="text/javascript">
-            /* <![CDATA[ */
-            var google_conversion_id = 944838791;
-            var google_conversion_language = "en";
-            var google_conversion_format = "2";
-            var google_conversion_color = "ffffff";
-            var google_conversion_label = "5VyqCOnUoQoQh7HEwgM";
-            var google_remarketing_only = false;
-            /* ]]> */
-            </script>
-            <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-            </script>
-            <noscript>
-            <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?label=5VyqCOnUoQoQh7HEwgM&amp;guid=ON&amp;script=0"/>
-            </div>
-            </noscript>
+          <!-- Google Code for GV Lead - LP Conversion Page -->
+          <script type="text/javascript">
+          /* <![CDATA[ */
+          var google_conversion_id = 944838791;
+          var google_conversion_language = "en";
+          var google_conversion_format = "2";
+          var google_conversion_color = "ffffff";
+          var google_conversion_label = "cXd0CMHGnAYQh7HEwgM";
+          var google_conversion_value = 1.00;
+          var google_conversion_currency = "USD";
+          var google_remarketing_only = false;
+          /* ]]> */
+          </script>
+          <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+          </script>
+          <noscript>
+          <div style="display:inline;">
+          <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/944838791/?value=1.00&amp;currency_code=USD&amp;label=cXd0CMHGnAYQh7HEwgM&amp;guid=ON&amp;script=0"/>
+          </div>
+          </noscript>
             
             
             
