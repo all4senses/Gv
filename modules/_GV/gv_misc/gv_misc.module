@@ -13669,7 +13669,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     
     // YouTube.com
     if (preg_match('/.*\?v=(.*)\s?.*\]/is', $matches_1[1], $matches_2)) {
-      dpm($matches_2);
+      //dpm($matches_2);
       $video_id = $matches_2[1];
       if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
         $found_image = TRUE;
@@ -13704,7 +13704,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     elseif (preg_match('/.*\/medias\/(.*)\?.*\]/is', $matches_1[1], $matches_2)) {
       
       
-      dpm($matches_2);
+      //dpm($matches_2);
       $video_id = $matches_2[1];
       
       
@@ -13714,7 +13714,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       if ($video_data = gv_misc_getWistiaVideoInfo($video_id)) {
         
           if ($thumbnail_src = gv_misc_getVideoThumb($video_id, 'Wistia', $video_data->thumbnail->url)) {
-            dpm($thumbnail_src);
+            //dpm($thumbnail_src);
             // $found_image = TRUE;
   //        dpm($data_from->entry->{'media$group'});
   //        $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
@@ -13801,7 +13801,7 @@ function gv_misc_getWistiaVideoInfo($video_id) {
     
     // correct size param
     $thumb_url = explode('image_crop_resized=', $data_from->thumbnail->url);
-    dpm($thumb_url);
+    //dpm($thumb_url);
     $data_from->thumbnail->url = $thumb_url[0] . 'image_crop_resized=300x180';
       
     dpm($data_from);
