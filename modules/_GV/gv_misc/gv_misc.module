@@ -13719,7 +13719,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
 
             $descr = $video_data->description;
             //dpm($descr);
-            $duration = (int) $video_data->duration;
+            $duration = /*(int)*/ $video_data->duration;
             $contentUrl = $video_data->assets[3]->url;
 
           }

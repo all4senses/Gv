@@ -7793,6 +7793,198 @@ function gv_blocks_get_requestQuoteForPage_v7_uk() {
 }
 
 
+
+/**
+ * Block Request a quote FOR PAGE v7_uk_ppc at /ppc/service-quotes, same as v7_uk - but for ppc.
+ * 
+ */
+function gv_blocks_get_requestQuoteForPage_v7_uk_ppc() {
+
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  
+  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  //drupal_add_js($path_to_custom_js . 'bbq.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  
+  
+  
+//  drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
+//  drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  
+  $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
+  drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
+  drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
+  
+  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  
+  drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
+  
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v7.js');
+  
+  
+  // No slider with provider on V4.
+
+//  drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
+//  
+//  drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
+//  drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
+  
+  
+  
+  
+//  // Exit intent Ad popup block.
+//  global $user; 
+//  
+//  if ($user->uid) {
+//    // Colorbox for popup window.
+//    //1, 3, 4, 
+//    drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+//    drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+//
+//    // Exit intent Ad block main js.
+//    $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
+//    drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
+//  }
+//  
+  
+  
+  
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+  
+  
+  
+//  $exitIntent_block = '
+//  <div style="display: none;">
+//   <div id="exitIntent"> 
+//    <div id="line-1">Do You Want To Save BIG On</div>
+//    <div id="line-2">Reliable Business Phone Service?</div>
+//    
+//    <div id="line-3">Get voice, fax, text and conferencing</div>
+//    <div id="line-4">in one phone system for $19/mo.</div>
+//    
+//    <a href="/business" id="yes" target="_top">YES</a>
+//    <div id="no">NO - I like overpaying for my old phone service.</div>
+//   </div>
+//  </div>
+//';
+  
+  $out = //$exitIntent_block . 
+          //'<h3>See How Much You Could Save<span>It only takes a few minutes.</span></h3>'
+          //'<h3>See How Much You Could Save</h3>'
+         '<h3>How Much Will You Save?</h3>'
+          //'<h3>How Much Will I Save?<span>- No contracts or set-up fees -</span></h3>'
+   . '<div id="requestQuoteFormWrapper">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        <form class="multipartForm bbq" method="post" action="/request">
+
+                
+                <div id="fieldWrapper">
+                    
+                    <div class="step" id="questions_section">
+
+                          <div class="select">
+                            <div class="question">Amount of lines needed:</div>
+                              <select name="phones_amt" id="phones_amt" class="input required">
+                                <option value="1 - 4">1 - 4 Lines</option>
+                                <option selected="selected" value="5 - 10">5 - 10 Lines</option>
+                                <option value="11 - 20">11 - 20 Lines</option>
+                                <option value="21 - 50">21 - 50 Lines</option>
+                                <option value="More than 50">More than 50 Lines</option>
+                              </select>
+                           </div>
+           
+                           <div class="select last">
+                            <div class="question">Show me:</div>
+                              <select name="q_type" id="q_type" class="input required">
+                                <option value="Both phones and service">Both Phones & Services</option>
+                                <option value="Phone system only">Phone System Only</option>
+                                <option value="Service provider only">Service Provider Only</option>
+                              </select>
+                            </div>
+                            
+                            
+                            <div class="bottom-clear"></div>
+
+                            <div class="text-h-group">
+                              <div class="wrapper input-border">
+                                <input class="after required firstname" name="firstname" id="firstname" title="First Name" />
+                              </div>
+
+                              <div class="wrapper input-border second">
+                                <input class="after required lastname" name="lastname" id="lastname" title="Last Name" />
+                              </div>
+                            </div>
+                            
+                            <div class="text-h-group">
+                              <div class="wrapper input-border">
+                                <input class="after email required" name="email" id="email" title="Email Address" />
+                              </div>
+
+                              <div class="wrapper phone input-border  second">
+                                  <input class="after required phone" name="phone" id="phone" value="" title="Phone Number" />
+                              </div>
+                            </div>' 
+                            
+
+//                            . '<div class="text-h-group">
+//                              <div class="wrapper input-border">
+//                                <input class="after company" name="company" id="company" value="" title="Company Name" />
+//                              </div>
+//
+//                              <div class="wrapper input-border  second">
+//                                  <input class="after q-title" name="q-title" id="q-title" value="" title="Title" />
+//                              </div>
+//                            </div>'
+                            
+                            .'
+                            
+                            
+                    </div>
+
+                    
+                
+                </div>
+                
+                
+                <div id="Navigation"> 							
+                        <input class="navigation_button" id="next" value="GET MY QUICK QUOTE" type="submit" />
+                </div>
+                
+                
+                <div class="guide ps"><div id="pdf-icon"></div><div class="text">Receive a <strong>FREE 6-page</strong> Business VoIP Start Up Guide with submission!</div></div>
+                
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="page" />
+                <input type="hidden" name="version" value="7_uk_ppc" />
+                <input type="hidden" name="referrer" value="" />
+                <input type="hidden" name="url" value="" />
+                
+        </form>
+
+        <p id="data"></p>
+</div>
+<div class="block_footer"></div>
+  ';
+  
+  return $out;
+}
+
 /**
  * Block Request a quote FOR PAGE v7_ca at /service-quotes-ca, same as v7 - /service-quotes but only for CA
  * 
