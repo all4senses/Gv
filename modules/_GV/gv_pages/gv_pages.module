@@ -2421,6 +2421,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         
         //dpm($form);
         
+        $form['body']['und'][0]['#default_value'] = gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form['body']['und'][0]['#default_value']);
+      
         
         if (!empty($form['field_guest_author']['und'][0]['value']['#default_value'])) {
           $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'];
