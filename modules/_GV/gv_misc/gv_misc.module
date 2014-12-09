@@ -13858,6 +13858,10 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
   $file_local = $default_file_path . '/vthumbs/' . $video_id . '.jpg';
   $file_local_abs = DRUPAL_ROOT . '/' . $file_local;
   if (!gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs)) {
+    if ($provider == 'Wistia'){
+      // Doubled request from Wistia to get correct altered sized thumbnail.
+      gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs);
+    }
     return $file_local;
   }
   else {
