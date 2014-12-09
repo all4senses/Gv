@@ -2951,6 +2951,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       if (trim($form['body']['und'][0]['summary']['#default_value']) == '<br />') {
         $form['body']['und'][0]['summary']['#default_value'] = '';
       }
+      
+      $form['body']['und'][0]['#default_value'] = gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form['body']['und'][0]['#default_value']);
+      
+      
       // Doesn't work.
       //$form['body']['und'][0]['summary']['#format'] = 'plain_text';
       // Doesn't work.
@@ -6308,6 +6312,12 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
    
   //dpm($form_state['values']);
    
+  global $user;
+  if ($user->uid == 1) {
+    // Wrap vodeo token in gv-video google snippet.
+    $form_state['values']['body']['und'][0]['value'] = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
+  }
+  
   $p_data['info'] = $form_state['values']['data_info'];
   //$p_data['quote'] = $form_state['values']['data_quote'];
   
