@@ -13716,7 +13716,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
           if ($thumbnail_src = gv_misc_getVideoThumb($video_id, 'Wistia', $video_data->thumbnail->url)) {
             //dpm($thumbnail_src);
             // $found_image = TRUE;
-  //        dpm($data_from->entry->{'media$group'});
+            dpm($video_data);
   //        $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
   //        //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
   //        //$descr = htmlspecialchars($data_from->entry->{'media$group'}->{'media$description'}->{'$t'}, ENT_QUOTES);
@@ -13804,7 +13804,7 @@ function gv_misc_getWistiaVideoInfo($video_id) {
     //dpm($thumb_url);
     $data_from->thumbnail->url = $thumb_url[0] . 'image_crop_resized=300x180';
       
-    dpm($data_from);
+    //dpm($data_from);
   }
 
   return $data_from;
