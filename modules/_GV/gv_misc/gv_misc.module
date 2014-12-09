@@ -4057,7 +4057,9 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   elseif (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     $video_id = $matches[1];
-    if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
+    
+    //if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
+    if($main_image['src'] = gv_misc_getVideoThumb($video_id)) {
       $found_image = TRUE;
     }
     $body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
@@ -13671,18 +13673,15 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     if (preg_match('/.*\?v=(.*)\s?.*\]/is', $matches_1[1], $matches_2)) {
       //dpm($matches_2);
       $video_id = $matches_2[1];
-      if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
+      
+      //if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
+      if($thumbnail_src = gv_misc_getVideoThumb($video_id)) {
         $found_image = TRUE;
         
-        //  Get video info via API REST
-        // https://developers.google.com/youtube/2.0/developers_guide_protocol_video_entries
-        
-        $url = 'https://gdata.youtube.com/feeds/api/videos/' . $video_id . '?v=2&alt=json';
+        // Get YouTube video info via Google API REST
+        if ($video_data = gv_misc_getVideoInfo($video_id, 'YouTube')) {
 
-        $data_from = gv_misc_curlGET($url);
-
-        if ($data_from) {
-          $data_from = json_decode($data_from);
+          $data_from = json_decode($video_data);
           //dpm($data_from);
           dpm($data_from->entry->{'media$group'});
           $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
@@ -13709,21 +13708,19 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       
       
       // Get Video info via Wistia API
-      
-
-      if ($video_data = gv_misc_getWistiaVideoInfo($video_id)) {
+      if ($video_data = gv_misc_getVideoInfo($video_id, 'Wistia')) {
         
           if ($thumbnail_src = gv_misc_getVideoThumb($video_id, 'Wistia', $video_data->thumbnail->url)) {
             //dpm($thumbnail_src);
-            // $found_image = TRUE;
+            $found_image = TRUE;
             dpm($video_data);
-  //        $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
-  //        //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
-  //        //$descr = htmlspecialchars($data_from->entry->{'media$group'}->{'media$description'}->{'$t'}, ENT_QUOTES);
-  //        $descr = $data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
-  //        //dpm($descr);
-  //        $duration = $data_from->entry->{'media$group'}->{'yt$duration'}->{'seconds'};
-  //        $contentUrl = $data_from->entry->{'media$group'}->{'media$content'}[0]->url;
+            $title = $video_data->name;
+            //dpm($title);
+
+            $descr = $video_data->description;
+            //dpm($descr);
+            $duration = $video_data->duration;
+            $contentUrl = $video_data->assets[3]->url;
 
           }
       }
@@ -13784,26 +13781,37 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
 /**
  * Get Wistia video data by video_id (medias hash)
  */
-function gv_misc_getWistiaVideoInfo($video_id) {
-  // Get Video info via Wistia API
-  // https://getvoip.wistia.com/projects/ke00milhl6
-  // http://wistia.com/doc/data-api
-  // http://wistia.com/doc/data-api#medias_show
+function gv_misc_getVideoInfo($video_id, $provider) {
+  
+  if ($provider == 'Wistia') {
+    // Get Video info via Wistia API
+    // https://getvoip.wistia.com/projects/ke00milhl6
+    // http://wistia.com/doc/data-api
+    // http://wistia.com/doc/data-api#medias_show
 
-  // read token gv_read is managed via https://getvoip.wistia.com/account/access_tokens
-  $url = 'https://api.wistia.com/v1/medias/' . $video_id . '.json?api_password=4edb66be76e45f63784ddb6f955380ece99a7674e85846cbcd3b6f075d181ef5';
+    // read token gv_read is managed via https://getvoip.wistia.com/account/access_tokens
+    $url = 'https://api.wistia.com/v1/medias/' . $video_id . '.json?api_password=4edb66be76e45f63784ddb6f955380ece99a7674e85846cbcd3b6f075d181ef5';
+  }
+  elseif ($provider == 'YouTube') {
+    // Get YouTube video info via Google API REST  
+    // https://developers.google.com/youtube/2.0/developers_guide_protocol_video_entries
 
-
+    $url = 'https://gdata.youtube.com/feeds/api/videos/' . $video_id . '?v=2&alt=json';
+  }
+  
   $data_from = gv_misc_curlGET($url);
 
+  
   if ($data_from) {
     $data_from = json_decode($data_from);
     
-    // correct size param
-    $thumb_url = explode('image_crop_resized=', $data_from->thumbnail->url);
-    //dpm($thumb_url);
-    $data_from->thumbnail->url = $thumb_url[0] . 'image_crop_resized=300x180';
-      
+    if ($provider == 'Wistia') {
+      // correct size param
+      $thumb_url = explode('image_crop_resized=', $data_from->thumbnail->url);
+      //dpm($thumb_url);
+      $data_from->thumbnail->url = $thumb_url[0] . 'image_crop_resized=300x180';
+    }
+    
     //dpm($data_from);
   }
 
@@ -13845,7 +13853,7 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
     if ($thumb_url) {
       $url = $thumb_url;
     }
-    elseif ($video_data = gv_misc_getWistiaVideoInfo($video_id)) {
+    elseif ($video_data = gv_misc_getVideoInfo($video_id, 'Wistia')) {
       // Get video thumb url via Wistia API
       $url = $video_data->thumbnail->url;
     }
