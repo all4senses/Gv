@@ -13722,8 +13722,38 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     }
     // Wistia.com
     elseif (preg_match('/.*\/medias\/(.*)\?.*\]/is', $matches_1[1], $matches_2)) {
+      
+      
       dpm($matches_2);
       $video_id = $matches_2[1];
+      
+      
+      // Get Video info via Wistia API
+      // https://getvoip.wistia.com/projects/ke00milhl6
+      // http://wistia.com/doc/data-api
+      // http://wistia.com/doc/data-api#medias_show
+      
+      
+      $url = 'https://gdata.youtube.com/feeds/api/videos/' . $video_id . '?v=2&alt=json';
+      // read token gv_read is managed via https://getvoip.wistia.com/account/access_tokens
+      $url = 'https://api.wistia.com/v1/medias/' . $video_id . '.json?api_password=4edb66be76e45f63784ddb6f955380ece99a7674e85846cbcd3b6f075d181ef5';
+      
+
+      $data_from = gv_misc_curlGET($url);
+
+      if ($data_from) {
+        $data_from = json_decode($data_from);
+        dpm($data_from);
+//        dpm($data_from->entry->{'media$group'});
+//        $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
+//        //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
+//        //$descr = htmlspecialchars($data_from->entry->{'media$group'}->{'media$description'}->{'$t'}, ENT_QUOTES);
+//        $descr = $data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
+//        //dpm($descr);
+//        $duration = $data_from->entry->{'media$group'}->{'yt$duration'}->{'seconds'};
+//        $contentUrl = $data_from->entry->{'media$group'}->{'media$content'}[0]->url;
+      }
+        
 //      if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
 //        $found_image = TRUE;
 //        ////$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
@@ -13732,6 +13762,15 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     }
     
     if ($found_image) {
+      
+      // Google video rich snippet
+      // https://support.google.com/webmasters/answer/2413309?hl=en&ref_topic=4603851
+      // 
+      // http://www.google.com/webmasters/tools/richsnippets?q=http%3A%2F%2Fgetvoip.com%2Freviews%2Fphone%2Fcisco-spa303
+      // 
+      // http://stackoverflow.com/questions/18886947/schema-org-having-video-object-nested-inside-product
+      // http://googlewebmastercentral.blogspot.ru/2012/02/using-schemaorg-markup-for-videos.html
+      
       //dpm($thumbnail_src);
       $body_full_markup = preg_replace('|(\[video:.*http.*\])|is', 
               '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
