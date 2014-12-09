@@ -13848,10 +13848,6 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
     elseif ($video_data = gv_misc_getWistiaVideoInfo($video_id)) {
       // Get video thumb url via Wistia API
       $url = $video_data->thumbnail->url;
-      // correct size param
-      $url = explode('image_crop_resized=', $url);
-      $url = $url[0] . 'image_crop_resized=300x180';
-      dpm('xxx = ' . $url);
     }
   }
   
