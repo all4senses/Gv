@@ -13679,9 +13679,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         $found_image = TRUE;
         
         // Get YouTube video info via Google API REST
-        if ($video_data = gv_misc_getVideoInfo($video_id, 'YouTube')) {
+        if ($data_from = gv_misc_getVideoInfo($video_id, 'YouTube')) {
 
-          $data_from = json_decode($video_data);
           //dpm($data_from);
           dpm($data_from->entry->{'media$group'});
           $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
