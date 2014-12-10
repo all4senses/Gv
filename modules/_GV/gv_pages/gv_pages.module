@@ -6029,8 +6029,9 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
   //form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize(array('title' => $form_state['values']['title'], 'teaser_block' => $data['teaser_block'], 'teaser_home' => $data['teaser_home'])), 'format' => 'full_html') )), $form_state);
   form_set_value($form['field_extra_data'], array('und' => array(0 => array('value' => serialize($extra_data), 'format' => 'full_html') )), $form_state);
   
-  global $user;
-  if ($user->uid == 1) {
+//  global $user;
+//  if ($user->uid == 1) 
+    {
     // Wrap vodeo token in gv-video google snippet.
     $form_state['values']['body']['und'][0]['value'] = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
   }
@@ -6226,8 +6227,9 @@ function gv_pages_submitForm_saveDraft(&$form, &$form_state) {
 function gv_pages_validateForm_phone(&$form, &$form_state) {
   //dpm($form_state); dpm($form_state);
   
-  global $user;
-  if ($user->uid == 1) {
+//  global $user;
+//  if ($user->uid == 1) 
+    {
     // Wrap vodeo token in gv-video google snippet.
     $form_state['values']['body']['und'][0]['value'] = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
   }
@@ -6312,8 +6314,9 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
    
   //dpm($form_state['values']);
    
-  global $user;
-  if ($user->uid == 1) {
+//  global $user;
+//  if ($user->uid == 1) 
+    {
     // Wrap vodeo token in gv-video google snippet.
     $form_state['values']['body']['und'][0]['value'] = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($form_state['values']['body']['und'][0]['value']);
   }
