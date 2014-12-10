@@ -631,7 +631,8 @@ function _video_filter_instructions() {
 function video_filter_oembed_request($endpoint, array $arguments) {
   // Make HTTP request.
   $result = drupal_http_request(url($endpoint, array('query' => $arguments)));
-  
+  //a4s
+  dpm($arguments);
   if ($data = json_decode($result->data)) {
     // a4s
     dpm($data);
