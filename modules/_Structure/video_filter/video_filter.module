@@ -198,6 +198,7 @@ function _video_filter_process($text, $filter, $format, $langcode, $cache, $cach
           $video['height'] = $filter->settings['video_filter_height'] != '' ? $filter->settings['video_filter_height'] : 400;
         }
 
+        dpm($video);
         // Default value for control bar height.
         $control_bar_height = 0;
         if (isset($video['control_bar_height'])) {
@@ -219,6 +220,8 @@ function _video_filter_process($text, $filter, $format, $langcode, $cache, $cach
           $video['width'] = round($scale_factor * $ratio);
         }
 
+        dpm($video);
+        
         $video['autoplay'] = (bool) $video['autoplay'];
         $video['align'] = (isset($video['align']) && in_array($video['align'], array(
           'left',
