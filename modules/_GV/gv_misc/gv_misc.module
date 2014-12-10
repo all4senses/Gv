@@ -13699,10 +13699,10 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       }
     }
     // Wistia.com
-    elseif (preg_match('/.*\/medias\/(.*)\?.*\]/is', $matches_1[1], $matches_2)) {
+    elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $matches_1[1], $matches_2)) {
       
       
-      //dpm($matches_2);
+      dpm($matches_2);
       $video_id = $matches_2[1];
       
       
