@@ -197,6 +197,7 @@ function video_filter_codec_info() {
     'callback' => 'video_filter_wistia_html5',
     'html5_callback' => 'video_filter_wistia_html5',
     'regexp' => '@https?://(.+\.)?(wistia\.com|wi\.st)/((m|medias|projects)|embed/(iframe|playlists))/([a-zA-Z0-9]+)@',
+    'ratio' => 16 / 9,
   );
 
   $codecs['youtube'] = array(
