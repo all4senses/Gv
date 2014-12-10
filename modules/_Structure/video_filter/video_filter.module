@@ -158,11 +158,15 @@ function _video_filter_process($text, $filter, $format, $langcode, $cache, $cach
       if (isset($video['codec'])) {
         // Override default attributes.
         if ($matches_code[3][$ci] && preg_match_all('/\s+([a-zA-Z_]+)\:(\s+)?([0-9a-zA-Z\/]+)/i', $matches_code[3][$ci], $matches_attributes)) {
+          dpm($matches_attributes);
           foreach ($matches_attributes[0] as $ai => $attribute) {
             $video[$matches_attributes[1][$ai]] = $matches_attributes[3][$ai];
           }
         }
-
+        
+        dpm($filter);
+        dpm($video);
+        
         // Use configured ratio if present, otherwise use that from the codec,
         // if set. Fall back to 1.
         $ratio = 1;

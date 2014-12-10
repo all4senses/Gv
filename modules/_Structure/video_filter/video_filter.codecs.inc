@@ -584,6 +584,7 @@ function video_filter_youtube_playlist_html5($video) {
  * @see video_filter_codec_info()
  */
 function video_filter_wistia_html5($video) {
+  dpm($video);
   $video_code = $video['codec']['matches'][6];
   $matches = $video['codec']['matches'];
   $embed_type = ($matches[3] == 'projects' || $matches[5] == 'playlists') ? 'playlists' : 'iframe';
