@@ -13883,12 +13883,23 @@ function gv_misc_ckeditor_plugin() {
   return array(
     'dragresize' => array(
       'name'    => 'dragresize',
-      'desc'    => t('Image DragResize with CKeditor in Chrome'),
+      'desc'    => t('Image DragResize with CKeditor in Chrome  (added via gv_misc)'),
       'path'    => 'sites/all/libraries/ckeditor_plugins/ck-dragresize/',
       'buttons' => array(
         'addTab' => array(
           'icon'  => 'icon.png', //'icons/tabber.png',
           'label' => t('Image DragResize with CKeditor in Chrome'),
+        ),
+      )
+    ),
+    'oembed' => array(
+      'name'    => 'oembed',
+      'desc'    => t('Place oEmbed media (added via gv_misc)'),
+      'path'    => 'sites/all/libraries/ckeditor_plugins/ck-CKEditor-oEmbed/',
+      'buttons' => array(
+        'addTab' => array(
+          'icon'  => 'icons/oembed.png', //'icons/tabber.png',
+          'label' => t('Place oEmbed media'),
         ),
       )
     )
