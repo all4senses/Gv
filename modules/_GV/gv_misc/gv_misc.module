@@ -13877,6 +13877,30 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
 }
 
 /**
+ * Hook to register the CKEditor plugin - it would appear in the plugins list on the profile setting page.
+ */
+/*
+function hook_ckeditor_plugin() {
+  return array(
+    'plugin_name' => array(
+      // Name of the plugin used to write it.
+      'name' => 'plugin_name',
+      // Description of the plugin - it would be displayed in the plugins management section of profile settings.
+      'desc' => t('Plugin description'),
+      // The full path to the CKEditor plugins directory, with the trailing slash.
+      'path' => drupal_get_path('module', 'my_module') . '/plugin_dir/',
+      'buttons' => array(
+        'button_name' => array(
+          'icon' => 'path to button icon',
+          'label' => 'Button Label',
+        )
+      )
+    )
+  );
+}
+*/
+
+/**
  * Hook to register the CKEditor plugin.
  */
 function gv_misc_ckeditor_plugin() {
@@ -13886,7 +13910,7 @@ function gv_misc_ckeditor_plugin() {
       'desc'    => t('Image DragResize with CKeditor in Chrome  (added via gv_misc)'),
       'path'    => 'sites/all/libraries/ckeditor_plugins/ck-dragresize/',
       'buttons' => array(
-        'addTab' => array(
+        'dragResize' => array(
           'icon'  => 'icon.png', //'icons/tabber.png',
           'label' => t('Image DragResize with CKeditor in Chrome'),
         ),
@@ -13897,7 +13921,7 @@ function gv_misc_ckeditor_plugin() {
       'desc'    => t('Place oEmbed media (added via gv_misc)'),
       'path'    => 'sites/all/libraries/ckeditor_plugins/ckeditor_oembed/',
       'buttons' => array(
-        'addTab2' => array(
+        'oEmbed' => array(
           'icon'  => 'icons/oembed.png', //'icons/tabber.png',
           'label' => t('Place oEmbed media'),
         ),
