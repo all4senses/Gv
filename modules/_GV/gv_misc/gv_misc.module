@@ -13702,7 +13702,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $matches_1[1], $matches_2)) {
       
       
-      dpm($matches_2);
+      //dpm($matches_2);
       $video_id = $matches_2[1];
       
       
@@ -13712,7 +13712,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
           if ($thumbnail_src = gv_misc_getVideoThumb($video_id, 'Wistia', $video_data->thumbnail->url)) {
             //dpm($thumbnail_src);
             $found_image = TRUE;
-            dpm($video_data);
+            //dpm($video_data);
             $title = $video_data->name;
             //dpm($title);
 
