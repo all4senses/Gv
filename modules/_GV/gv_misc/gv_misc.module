@@ -13875,3 +13875,22 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
     return NULL; // Failed.
   }
 }
+
+/**
+ * Hook to register the CKEditor plugin.
+ */
+function gv_misc_ckeditor_plugin() {
+  return array(
+    'dragresize' => array(
+      'name'    => 'dragresize',
+      'desc'    => t('Image DragResize with CKeditor in Chrome'),
+      'path'    => '/sites/all/libraries/ckeditor_plugins/ck-dragresize/',
+      'buttons' => array(
+        'addTab' => array(
+          'icon'  => '/sites/all/themes/gv_blue/css/images/positive.png', //'icons/tabber.png',
+          'label' => t('Image DragResize with CKeditor in Chrome'),
+        ),
+      )
+    )
+  );
+}
