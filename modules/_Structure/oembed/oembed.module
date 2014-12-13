@@ -5,21 +5,19 @@
  * Core functionality for oEmbed
  */
 
-// Load all Field module hooks for oEmbed.
-require_once dirname(__FILE__) . '/oembed.field.inc';
-
 require_once dirname(__FILE__) . '/oembed.filter.inc';
 
 /**
  * Implements hook_hook_info().
  */
 function oembed_hook_info() {
-  $hooks = array(
-    'oembed_request_alter',
-    'oembed_response_alter',
+  $hooks['oembed_request_alter'] = array(
+    'group' => 'oembed',
   );
-
-  return array_fill_keys($hooks, array('group' => 'oembed'));
+  $hooks['oembed_response_alter'] = array(
+    'group' => 'oembed',
+  );
+  return $hooks;
 }
 
 /**
@@ -86,6 +84,8 @@ function oembed_cron() {
  * Implements hook_menu().
  */
 function oembed_menu() {
+  $items = array();
+
   $items['admin/config/media/oembed'] = array(
     'title' => 'oEmbed',
     'description' => 'Settings for oEmbed',
@@ -123,24 +123,24 @@ function oembed_menu() {
  * the callback items to have a common menu item.
  */
 function oembed_menu_alter(&$items) {
+
   // Create a new menu item where all oembed export UIs will be local tasks by
   // copying the export UI's menu item that will become the default local task.
-  if (!empty($items['admin/config/media/oembed/provider/default'])) {
-    $items['admin/config/media/oembed/provider'] += $items['admin/config/media/oembed/provider/default'];
-    $items['admin/config/media/oembed/provider']['type'] = MENU_LOCAL_TASK;
+  $items['admin/config/media/oembed/provider'] += $items['admin/config/media/oembed/provider/default'];
+  $items['admin/config/media/oembed/provider']['type'] = MENU_LOCAL_TASK;
 
-    $items['admin/config/media/oembed/provider/default']['type'] = MENU_DEFAULT_LOCAL_TASK;
-  }
+  $items['admin/config/media/oembed/provider/default']['type'] = MENU_DEFAULT_LOCAL_TASK;
 }
 
 /**
  * Implements of hook_theme().
  */
-function oembed_theme($existing, $type, $theme, $path) {
+function oembed_theme() {
+  $path = drupal_get_path('module', 'oembed') . '/theme';
   return array(
     'oembed' => array(
       'file' => 'oembed.theme.inc',
-      'path' => $path . '/theme',
+      'path' => $path,
       'variables' => array('embed' => NULL),
     ),
     'oembed__photo' => array(
@@ -162,11 +162,7 @@ function oembed_theme($existing, $type, $theme, $path) {
  * Returns the provider for a url.
  *
  * @param string $url
- *   The url to get the provider for.
- * @param array $matches
- *   Array reference for providers that capture arguments from URL.
- * @param string $role
- *
+ *  Teh url to get the provider for.
  * @return mixed
  *  A valid callback or FALSE
  */
@@ -180,27 +176,23 @@ function oembed_get_provider($url, &$matches, $role = 'consumer') {
   // returns the name of the child plugin that can fulfill the request.
   foreach ($plugins as $plugin) {
 
-    // A plugin with no schemes is effectively disabled.
-    if ($plugin[$role] && !empty($plugin['scheme'])) {
+    // Plugins will only be checked if they are enabled for the role.
+    if ($plugin[$role] && preg_match($plugin['scheme'], $url, $matches)) {
 
-      // Plugins will only be checked if they are enabled for the role.
-      if (preg_match($plugin['scheme'], $url, $matches)) {
+      // A scheme map is used to match a URL to a specific child plugin.
+      if (!empty($plugin['scheme map'])) {
+        foreach ($plugin['scheme map'] as $id => $scheme) {
+          if (preg_match($scheme, $url, $matches)) {
 
-        // A scheme map is used to match a URL to a specific child plugin.
-        if (!empty($plugin['scheme map'])) {
-          foreach ($plugin['scheme map'] as $id => $scheme) {
-            if (preg_match($scheme, $url, $matches)) {
-
-              // This forces the 'get child' callback to the loaded.
-              ctools_plugin_get_function($plugin, 'get child');
-              $plugin = ctools_get_plugins('oembed', 'providers', $id);
-              break;
-            }
+            // This forces the 'get child' callback to the loaded.
+            ctools_plugin_get_function($plugin, 'get child');
+            $plugin = ctools_get_plugins('oembed', 'providers', $id);
+            break;
           }
         }
-
-        return $plugin;
       }
+
+      return $plugin;
     }
   }
   return FALSE;
@@ -228,17 +220,15 @@ function oembed_providers_reset() {
  *   - 'maxheight'
  *       The maximum height of the embed, in pixels.
  *   Other keys may be supported by some providers (twitter, youtube, wordpress).
- * @return bool|array
- *   False or an array representing the embeddable data of the URL.
+ * @return
+ *   False or an object representing the embeddable data of the URL.
  */
 function oembed_get_data($url, $parameters = array()) {
   $matches = array();
   $parameters = array_filter($parameters);
-
   if ($plugin = oembed_get_provider($url, $matches)) {
     return oembed_oembed_fetch($plugin, $url, $matches, $parameters);
   }
-
   return FALSE;
 }
 
@@ -324,6 +314,7 @@ function oembed_oembed_fetch($plugin, $url, $matches, $parameters = array()) {
  * Implements hook_element_info().
  */
 function oembed_element_info() {
+
   // Standard oEmbed that changes its theme based on response.
   $types['oembed'] = array(
     '#theme' => 'oembed',
@@ -345,6 +336,7 @@ function oembed_element_info() {
     '#alt' => '',
     '#title' => NULL,
     '#attributes' => array(),
+
     '#embed' => NULL,
     '#parameters' => array(),
     '#pre_render' => array(
@@ -353,13 +345,38 @@ function oembed_element_info() {
     ),
   );
 
+  if (module_exists('media')) {
+    // Retrieves an image (photo or thumbnail) with a fallback.
+    $types['oembed_wysiwyg'] = array(
+      '#theme' => 'image',
+      '#path' => NULL,
+      '#width' => NULL,
+      '#height' => NULL,
+      '#alt' => '',
+      '#title' => NULL,
+      '#attributes' => array(),
+
+      '#embed' => NULL,
+      '#parameters' => array(),
+      '#pre_render' => array(
+        'oembed_pre_render_fetch',
+        'oembed_pre_render_wysiwyg',
+      ),
+    );
+  }
+
   return $types;
 }
 
 /**
  * Change oEmbed request into a thumbnail.
+ *
+ * This is here for Media module WYSIWYG support. When a video or image is added
+ * to a text area, this step makes sure the WYSIWYG receives an image to stand
+ * in for the real media. It must be an actual img element.
  */
 function oembed_pre_render_thumbnail($element) {
+
   // Only act when the oEmbed response is true.
   if (!empty($element['#printed'])) {
     return $element;
@@ -390,22 +407,53 @@ function oembed_pre_render_image_helper(&$element, $prefix = '') {
   $element['#path'] = $embed[$prefix .'url'];
   $element['#alt'] = oembed_alt_attr($embed);
   $element['#title'] = $embed['title'];
+  $element['#attributes'] = $element['#attributes'];
   $element['#height'] = isset($embed[$prefix .'height']) ? $embed[$prefix .'height'] : NULL;
   $element['#width'] = isset($embed[$prefix .'width']) ? $embed[$prefix .'width'] : NULL;
+}
 
-  // theme_image() prefers width, height, alt and title element properties over
-  // attributes so we manually override them if an associated attribute is set.
-  foreach (array('width', 'height', 'alt', 'title') as $key) {
-    if (isset($element['#attributes'][$key])) {
-      $element['#' . $key] = $element['#attributes'][$key];
+/**
+ * Converts oEmbed response to a plain image.
+ *
+ * This is here for Media module WYSIWYG support. When a video or image is added
+ * to a text area, this step makes sure the WYSIWYG receives an image to stand
+ * in for the real media. It must be an actual img element.
+ */
+function oembed_pre_render_wysiwyg($element) {
+  // Only act when the oEmbed response is true.
+  if (!empty($element['#printed'])) {
+    return $element;
+  }
+
+  $embed = $element['#embed'];
+
+  if ($embed['type'] == 'photo') {
+    oembed_pre_render_image_helper($element);
+  }
+  else {
+    $element = oembed_pre_render_thumbnail($element);
+  }
+
+  // oembed_pre_render_image() sets #printed to TRUE when there's no
+  // thumbnail to render.
+  if (!empty($element['#printed']) && !isset($element['#path'])) {
+    $element['#theme'] = 'media_formatter_large_icon';
+    $element['#printed'] = FALSE;
+
+    // To select an icon, there must be a file object.
+    if (!isset($element['#file'])) {
+      $element['#file'] = oembed_url_to_file($element['#url']);
     }
   }
+
+  return $element;
 }
 
 /**
  * Rewrite the theme parameter based on the response.
  */
 function oembed_pre_render_retheme($element) {
+
   // Only act when the oEmbed response is true.
   if (!empty($element['#printed'])) {
     return $element;
@@ -413,7 +461,6 @@ function oembed_pre_render_retheme($element) {
 
   $embed = $element['#embed'];
   $element['#theme'] = 'oembed__'. $embed['type'] .'__'. implode('__', explode(':', $embed['provider'], 2));
-
   return $element;
 }
 
@@ -444,13 +491,14 @@ function oembed_pre_render_fetch($element) {
  * @param $parameters
  *   oEmbed request parameters.
  *
- * @return array
+ * @return
  *   A renderable array with the following keys and values:
  *   - #type: The passed-in element $type.
  *   - #url: The passed-in $url.
  *   - #parameters: The passed-in $parameters.
  */
 function oembed_render_element($type, $url, $parameters = array()) {
+
   return array(
     '#type' => $type,
     '#url' => $url,
@@ -468,11 +516,9 @@ function oembed_alt_attr($embed) {
   if (isset($embed['title'])) {
     $string = '@title';
     $options['@title'] = $embed['title'];
-  }
-  else {
+  } else {
     $string = 'Embedded @type';
   }
-
   if (isset($embed['provider_name'])) {
     $string .= ' on @provider_name';
     $options['@provider_name'] = $embed['provider_name'];
@@ -501,9 +547,6 @@ function oembed_ctools_plugin_api($module, $api) {
     return array('version' => 1);
   }
   if ($module == 'file_entity' && $api == 'file_type') {
-    return array('version' => 1);
-  }
-  if ($module == 'file_entity' && $api == 'file_default_displays') {
     return array('version' => 1);
   }
 }
@@ -535,10 +578,9 @@ function oembed_ctools_plugin_type() {
  * Implement hook_preprocess_file_entity().
  */
 function oembed_preprocess_file_entity(&$vars, $hook) {
-  if (isset($vars['file']->metadata['oembed'])) {
-    $vars['oembed_response'] = $embed = $vars['file']->metadata['oembed'];
+  if (isset($vars['file']->oembed)) {
+    $vars['oembed_response'] = $embed = $vars['file']->oembed;
     $vars['classes_array'][] = 'oembed-'. $embed['type'];
-
     if (strpos($embed['provider'], ':')) {
       list($parent, $child) = explode(':', $embed['provider'], 2);
       $vars['classes_array'][] = 'oembed-'. $parent;
@@ -547,7 +589,6 @@ function oembed_preprocess_file_entity(&$vars, $hook) {
     else {
       $vars['classes_array'][] = 'oembed-'. $embed['provider'];
     }
-
     $vars['title_attributes_array']['class'][] = 'oembed-title';
 
     // This conflicts with default file_entity.tpl.php which hardcodes a class attribute.
@@ -574,13 +615,13 @@ function oembed_stream_wrappers() {
  */
 function oembed_file_formatter_view($file, $display, $langcode) {
   $scheme = file_uri_scheme($file->uri);
-
   if ($scheme == 'oembed') {
     $wrapper = file_stream_wrapper_get_instance_by_uri($file->uri);
 
     // Build render attributes array. Prefer file-specific overrides to display settings.
     $attributes = (isset($file->override) ? $file->override : array()) + $display['settings'];
     unset($attributes['attributes']);
+    unset($attributes['wysiwyg']);
     unset($attributes['wmode']);
 
     $parameters = array();
@@ -599,8 +640,20 @@ function oembed_file_formatter_view($file, $display, $langcode) {
       }
     }
 
-    $element = oembed_render_element($display['type'], $wrapper->getExternalUrl(), $parameters);
-    $element['#attributes'] = $attributes;
+    // Not a WYSIWYG editor instance.
+    if (empty($file->override['wysiwyg'])) {
+      $element = oembed_render_element($display['type'], $wrapper->getExternalUrl(), $parameters);
+      $element['#attributes'] = $attributes;
+    }
+
+    // WYSIWYG does not yet support video inside a running editor instance, send
+    // thumbnails.
+    else {
+      $element = oembed_render_element('oembed_wysiwyg', $wrapper->getExternalUrl(), array());
+      if (!empty($file->override['attributes'])) {
+        $element['#attributes'] = $file->override['attributes'];
+      }
+    }
 
     // Unfortunately, it's necessary to validate the oEmbed response before rendering
     // so that file_view_file() can continue to the next formatter.
@@ -617,109 +670,48 @@ function oembed_file_formatter_view($file, $display, $langcode) {
  */
 function oembed_remote_file_formatter_view($file, $display, $langcode) {
   $scheme = file_uri_scheme($file->uri);
-
   if ($scheme == 'oembed') {
-    // URI of local copy of remote file must be stored because it may be
-    // different from the oEmbed URLs. If the URL does not have a valid
-    // extension, it will redirect to a URL that does.
-    if (!isset($file->metadata['oembed_remote_file_image']) || !file_exists($file->metadata['oembed_remote_file_image'])) {
-      $embed = $file->metadata['oembed'];
-
-      if ($embed['type'] == 'photo' && !empty($embed['url'])) {
-        $url = $embed['url'];
-      }
-      else if (isset($embed['thumbnail_url'])) {
-        $url = $embed['thumbnail_url'];
-      }
-
-      if (isset($url)) {
-        $result = drupal_http_request($url);
-
-        // Using the redirect URL's basename might guarantee a path with an
-        // appropriate file extension.
-        if (isset($result->redirect_url)) {
-
-          // If the redirect and original basenames are identical, do nothing.
-          if (drupal_basename($result->redirect_url) != drupal_basename($url)) {
-            $url .= '/'. drupal_basename($result->redirect_url);
-          }
-        }
-
-        $parsed_url = parse_url($url);
-
-        // Store local copies of images using hostname, path and filename of source.
-        $path = $parsed_url['host'];
-        $path .= drupal_dirname($parsed_url['path']);
-
-        if (substr($path, -1) != '/') {
-          $path .= '/';
-        }
-
-        $filename = drupal_basename($parsed_url['path']);
-
-        if (strpos($filename, '.') !== FALSE) {
-          $filename = file_munge_filename($filename, 'jpg jpeg gif png', FALSE);
-        }
-
-        $path .= $filename;
-        $local_uri = file_stream_wrapper_uri_normalize(file_default_scheme() . '://oembed/'. $path);
-
-        if (!file_exists($local_uri)) {
-          // Drupal dislikes protocol relative URL schemes. Everything should
-          // be accessible without HTTPS.
-          if (strpos($url, '//') === 0) {
-            $url = 'http:'. $url;
-          }
-
-          /// Ensure filesystem has directories for new file.
-          $dirname = drupal_dirname($local_uri);
-          file_prepare_directory($dirname, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-
-          // Save the file data to the local directory.
-          $files = entity_load('file', FALSE, array('uri' => $local_uri));
-          if (!empty($files)) {
-            file_unmanaged_save_data($result->data, $local_uri);
-          }
-          else {
-            file_save_data($result->data, $local_uri);
-          }
-        }
-
-        $file->metadata['oembed_remote_file_image'] = $local_uri;
-
-        // Redundantish. See file_entity_file_insert and related hooks.
-        foreach (array('oembed_remote_file_image') as $name) {
-          if (!empty($file->metadata[$name])) {
-            $value = $file->metadata[$name];
-            db_merge('file_metadata')
-              ->fields(array(
-                'value' => serialize($value),
-              ))
-              ->key(array(
-                'fid' => $file->fid,
-                'name' => $name,
-              ))
-              ->execute();
-          }
-        }
-      }
+    $embed = $file->oembed;
+    if ($embed['type'] == 'photo') {
+      $url = $embed['url'];
+    }
+    else if (isset($embed['thumbnail_url'])) {
+      $url = $embed['thumbnail_url'];
     }
 
-    if (isset($file->metadata['oembed_remote_file_image'])) {
-      $local_uri = $file->metadata['oembed_remote_file_image'];
+    if (isset($url)) {
+      $parsed_url = parse_url($url);
+
+      $path = $parsed_url['host'];
+      $path .= drupal_dirname($parsed_url['path']);
+      $filename = drupal_basename($parsed_url['path']);
+      if (strpos($filename, '.') !== FALSE) {
+        $filename = file_munge_filename($filename, 'jpg jpeg gif png', FALSE);
+      }
+      $path .= '/'. $filename;
+      $local_uri = file_stream_wrapper_uri_normalize(file_default_scheme() . '://oembed/'. $path);
+
+      if (!file_exists($local_uri)) {
+        if (strpos($url, '//') === 0) {
+          $url = 'http:'. $url;
+        }
+        $dirname = drupal_dirname($local_uri);
+        file_prepare_directory($dirname, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+        $data = drupal_http_request($url);
+        file_unmanaged_save_data($data->data, $local_uri);
+      }
 
       $image_file = file_uri_to_object($local_uri);
-      $image_file->metadata = array();
-
-      // Forcing the image file's type is perhaps no longer necessary.
       if (!isset($image_file->type) || $image_file->type === FILE_TYPE_NONE) {
-        $image_file->type = 'image';
+        $type = file_get_type($image_file);
+        if (isset($type)) {
+          $image_file->type = $type;
+        }
       }
 
       if ($image_file->filesize) {
-        $image_file->metadata = image_get_info($image_file->uri);
-        $image_file->filemime = $image_file->metadata['mime_type'];
-
+        $image_file->image_dimensions = image_get_info($image_file->uri);
+        $image_file->filemime = $image_file->image_dimensions['mime_type'];
         return file_entity_file_formatter_file_image_view($image_file, $display, $langcode);
       }
     }
@@ -731,7 +723,6 @@ function oembed_remote_file_formatter_view($file, $display, $langcode) {
  */
 function oembed_file_formatter_oembed_settings($form, &$form_state, $settings) {
   $element = array();
-
   $element['width'] = array(
     '#title' => t('Width'),
     '#type' => 'textfield',
@@ -750,7 +741,6 @@ function oembed_file_formatter_oembed_settings($form, &$form_state, $settings) {
     '#description' => t('Controls layering, transparency, and playback performance of content rendered by the Flash player. For more information, view <a href="http://kb2.adobe.com/cps/127/tn_12701.html#main_Using_Window_Mode__wmode__values_">Adobe\'s documentation</a>.'),
     '#default_value' => $settings['wmode'],
   );
-
   return $element;
 }
 
@@ -759,7 +749,6 @@ function oembed_file_formatter_oembed_settings($form, &$form_state, $settings) {
  */
 function oembed_file_formatter_oembed_thumbnail_settings($form, &$form_state, $settings) {
   $element = array();
-
   $element['width'] = array(
     '#title' => t('Width'),
     '#type' => 'textfield',
@@ -770,7 +759,6 @@ function oembed_file_formatter_oembed_thumbnail_settings($form, &$form_state, $s
     '#type' => 'textfield',
     '#default_value' => $settings['height'],
   );
-
   return $element;
 }
 
@@ -788,7 +776,6 @@ function oembed_cache_clear($fids) {
     ->execute();
 
   $files = file_load_multiple(array_keys($results['file']));
-
   foreach ($files as $file) {
     $wrapper = file_stream_wrapper_get_instance_by_uri($file->uri);
     $url = $wrapper->getExternalUrl();
@@ -800,14 +787,16 @@ function oembed_cache_clear($fids) {
 /**
  * Checks that the oEmbed response has required standard properties for its type.
  *
- * @param \stdClass $file
+ * @param $file
  *   A Drupal file object.
+ * @param $embed
+ *   An oEmbed response.
  *
- * @return array
- *   If the oEmbed response is invalid, the array will contain at least one error message.
+ * @return
+ *   An array. If the oEmbed response is invalid, it will contain an error message.
  */
 function oembed_file_validator_type(stdClass $file) {
-  return oembed_validate_response($file->metadata['oembed']);
+  return oembed_validate_response($file->oembed);
 }
 
 /**
@@ -856,28 +845,21 @@ function oembed_validate_response($embed) {
 /**
  * Return a file entity for a URL. Create the file if necessary.
  *
- * @param string $url
- *   URL of oEmbed request.
- * @param boolean $create
- *   Flag to create the file entity if it does not already exist.
- *
- * @return \stdClass
+ * @param type $url
+ * @param type $create
+ * @return type
  */
 function oembed_url_to_file($url, $create = FALSE) {
   $uri = 'oembed://'. drupal_encode_path($url);
   $file = file_uri_to_object($uri);
-  $file->metadata = array();
-
-  if (!isset($file->metadata['oembed'])) {
-    $file->metadata['oembed'] = oembed_get_data($url);
+  if (!isset($file->oembed)) {
+    $file->oembed = oembed_get_data($url);
   }
-
   // New URLs need to be validated before being saved.
   if ($create && !isset($file->fid)) {
     // Save the new file.
     file_save($file);
   }
-
   return $file;
 }
 
@@ -896,4 +878,75 @@ function oembed_system_info_alter(&$info, $file, $type) {
       $info['dependencies'][] = 'media (>1.99)';
     }
   }
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function oembed_field_formatter_info() {
+  $formatters = array(
+    'oembed_default' => array(
+      'label' => t('OEmbed'),
+      'field types' => array('link_field'),
+      'description' => t('Embeds links if possible - otherwise just links them.'),
+      'settings' => array('maxwidth' => '', 'maxheight' => ''),
+    ),
+  );
+
+  return $formatters;
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function oembed_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $element = array();
+  $element['maxwidth'] = array(
+    '#title' => t('Maximum Width'),
+    '#type' => 'textfield',
+    '#default_value' => $settings['maxwidth'],
+  );
+  $element['maxheight'] = array(
+    '#title' => t('Maximum Height'),
+    '#type' => 'textfield',
+    '#default_value' => $settings['maxheight'],
+  );
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function oembed_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $summary = '';
+
+  $summary .= t('Max Width') . ': ' . (!empty($settings['maxwidth']) ?  $settings['maxwidth'] : 'default');
+  $summary .= '<br />';
+  $summary .= t('Max Height') . ': ' . (!empty($settings['maxheight']) ?  $settings['maxheight'] : 'default');
+
+  return $summary;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function oembed_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  foreach ($items as $delta => $item) {
+    $parameters = array();
+    $url = url($item['url'], $item + array('external' => TRUE));
+    $parameters = $display['settings'];
+
+    $element[$delta] = oembed_render_element('oembed', $url, $parameters);
+  }
+
+  return $element;
 }
