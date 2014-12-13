@@ -1002,6 +1002,9 @@ function gv_preprocess_node(&$variables) {
         if(@$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test') {
           $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test';
         }
+        elseif(@$variables['node']->field_preface_key['und'][0]['value'] == 'voip-speed-test-mini') {
+          $variables['theme_hook_suggestions'][] = 'node__preface__voip_speed_test_mini';
+        }
         // Custom 404 page.
         elseif(@$variables['node']->field_preface_key['und'][0]['value'] == 'page-not-found') {
           $variables['theme_hook_suggestions'][] = 'node__preface__page404';
