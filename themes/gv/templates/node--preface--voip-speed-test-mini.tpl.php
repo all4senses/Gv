@@ -38,7 +38,7 @@
   
   
 <!-- BEGIN SPEED TEST - DO NOT ALTER BELOW-->
-<script type="text/javascript" src="ookla-mini/speedtest/swfobject.js?v=2.2"></script>
+<script type="text/javascript" src="http://getvoip.com/ookla-mini/speedtest/swfobject.js?v=2.2"></script>
 	  <div id="mini-demo">
 		  Speedtest.net Mini requires at least version 8 of Flash. Please <a href="http://get.adobe.com/flashplayer/">update your client</a>.
 	  </div><!--/mini-demo-->
@@ -53,7 +53,7 @@
 			allowScriptAccess: "always"
 		};
 		var attributes = {};
-		swfobject.embedSWF("speedtest.swf?v=2.1.8", "mini-demo", "350", "200", "9.0.0", "speedtest/expressInstall.swf", flashvars, params, attributes);
+		swfobject.embedSWF("http://getvoip.com/ookla-mini/speedtest/speedtest.swf?v=2.1.8", "mini-demo", "350", "200", "9.0.0", "http://getvoip.com/ookla-mini/speedtest/expressInstall.swf", flashvars, params, attributes);
 	</script>
 <!-- END SPEED TEST - DO NOT ALTER ABOVE -->
 
