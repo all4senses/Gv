@@ -26,7 +26,7 @@ CKEDITOR.editorConfig = function(config) {
 
   // [#1762328] Uncomment the line below to protect <code> tags in CKEditor (hide them in wysiwyg mode).
   // config.protectedSource.push(/<code>[\s\S]*?<\/code>/gi);
-  ////config.extraPlugins = 'oembed,widget';
+  config.extraPlugins = 'oembed,widget,dragresize';
 
   /*
     * Append here extra CSS rules that should be applied into the editing area.
@@ -80,7 +80,8 @@ Drupal.settings.cke_toolbar_DrupalAdvanced = [
   ['Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','RemoveFormat'],
   ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
   ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl'],
-  ['Link','Unlink','Anchor','Linkit','LinkToNode','LinkToMenu']
+  ['Link','Unlink','Anchor','Linkit','LinkToNode','LinkToMenu'],
+  ['oembed']
 ];
 
 // Toolbar definition for all buttons
@@ -99,5 +100,5 @@ Drupal.settings.cke_toolbar_DrupalFull = [
   ['TextColor','BGColor'],
   ['Maximize', 'ShowBlocks'],
   ['DrupalBreak', 'DrupalPageBreak'],
-  ['oembed']
+  ['oembed', 'dragresize']
 ];
