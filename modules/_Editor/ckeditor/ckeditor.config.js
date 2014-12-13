@@ -26,7 +26,18 @@ CKEDITOR.editorConfig = function(config) {
 
   // [#1762328] Uncomment the line below to protect <code> tags in CKEditor (hide them in wysiwyg mode).
   // config.protectedSource.push(/<code>[\s\S]*?<\/code>/gi);
-  config.extraPlugins = 'oembed,widget,dragresize';
+  ////config.extraPlugins = 'oembed,widget,dragresize';
+  config.extraPlugins = '';
+  
+  
+  /*
+   * 
+   // Defines a toolbar with only one strip containing the "Source" button, a
+// separator, and the "Bold" and "Italic" buttons.
+config.toolbar = [
+    [ 'Source', '-', 'Bold', 'Italic', 'oembed', 'Maximize', 'dragresize']
+];
+   */
 
   /*
     * Append here extra CSS rules that should be applied into the editing area.
@@ -100,5 +111,5 @@ Drupal.settings.cke_toolbar_DrupalFull = [
   ['TextColor','BGColor'],
   ['Maximize', 'ShowBlocks'],
   ['DrupalBreak', 'DrupalPageBreak'],
-  ['oembed', 'dragresize']
+  ['oembed']
 ];
