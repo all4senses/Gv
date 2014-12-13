@@ -1,19 +1,15 @@
-name = oEmbed
-description = Common functionality for oEmbed client and provider
 package = oEmbed
+name = oEmbed Filter
+description = Replaces oEmbed-enabled URL:s with embedded content
+dependencies[] = oembedcore
+dependencies[] = filter
 core = 7.x
+files[] = oembed.module
+files[] = oembed.inc
 
-dependencies[] = ctools
-
-files[] = oembed.test
-files[] = OEmbedStreamWrapper.inc
-files[] = MediaInternetOEmbedHandler.inc
-
-configure = admin/config/media/oembed
-
-; Information added by Drupal.org packaging script on 2014-11-24
-version = "7.x-1.0-rc2+30-dev"
+; Information added by drupal.org packaging script on 2012-08-10
+version = "7.x-0.1-beta3"
 core = "7.x"
 project = "oembed"
-datestamp = "1416815283"
+datestamp = "1344637348"
 

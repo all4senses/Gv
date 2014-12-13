@@ -1,12 +1,12 @@
 <?php
 
 $plugin = array(
-  'schema' => 'oembed_provider',
+  'schema' => 'oembedcore_provider',
   'access' => 'administer oembed',
   'menu' => array(
-    'menu prefix' => 'admin/config/media/oembed/provider',
-    'menu item' => 'default',
-    'menu title' => 'Remote endpoints',
+    'menu prefix' => 'admin/config/media/oembed',
+    'menu item' => 'provider',
+    'menu title' => 'Providers',
     'menu description' => 'Add, edit and remove oembed providers from the system.',
   ),
   'handler' => array(
