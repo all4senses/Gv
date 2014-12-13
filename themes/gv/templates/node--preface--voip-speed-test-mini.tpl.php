@@ -37,6 +37,8 @@
 <div id="speedtest-main-window">
   
   
+<?php // http://www.speedtest.net/mini.php ?>
+  
 <!-- BEGIN SPEED TEST - DO NOT ALTER BELOW-->
 <script type="text/javascript" src="http://getvoip.com/ookla-mini/speedtest/swfobject.js?v=2.2"></script>
 	  <div id="mini-demo">
