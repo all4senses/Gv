@@ -9141,7 +9141,7 @@ function gv_pages_importConferencesInBulk_form($form, &$form_state) {
       '#description' => 'Conferences from an uploaded file will be imported to the system.',
       '#default_value' => variable_get('file_fid', ''),
       '#upload_validators' => array(
-        'file_validate_extensions' => array('csv'),
+        'file_validate_extensions' => array('csv xls xlsx'),
         ),
       '#upload_location' => 'public://docs/conferences',
        // Remove the original element "Upload" button.
