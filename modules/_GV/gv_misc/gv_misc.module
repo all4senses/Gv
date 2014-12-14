@@ -1501,7 +1501,23 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   ///file_put_contents(DRUPAL_ROOT . '/tmp/gv_requests.log', date('m-d-Y H:i:s', time()) . ' -> ' . $_SERVER['REQUEST_URI'], FILE_APPEND | LOCK_EX);
   
   
-  $out = '<iframe src="//fast.wistia.net/embed/iframe/32l4uklpln" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>';
+  //$out = '<iframe src="//fast.wistia.net/embed/iframe/32l4uklpln" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>';
+  
+ 
+  module_load_include('inc', 'phpexcel');
+  
+  // The path to the excel file
+  $path = 'tmp/conf_31.xls';
+  
+  $result = phpexcel_import($path);
+  
+  dpm($result);
+  if (is_array($result)) {
+    drupal_set_message(t("We did it !"));
+  }
+  else {
+    drupal_set_message(t("Oops ! An error occured !"), 'error');
+  }
      
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
