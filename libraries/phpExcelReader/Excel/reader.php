@@ -28,7 +28,12 @@
 
 
 //require_once 'PEAR.php';
-require_once 'Spreadsheet/Excel/Reader/OLERead.php';
+
+// a4s fix
+//require_once 'Spreadsheet/Excel/Reader/OLERead.php';
+require_once 'Excel/oleread.inc';
+
+
 //require_once 'OLE.php';
 
 define('SPREADSHEET_EXCEL_READER_BIFF8',             0x600);
