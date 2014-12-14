@@ -29,15 +29,6 @@ class FeedsExcelParser extends FeedsParser {
   protected $sheets;
 
   /**
-   * @var string
-   *   indicator for the last item parsed.
-   */
-  protected $pointer = ':';
-  protected $sheet_count = 0;
-  protected $completed_sheets = 0;
-  protected $max_sheet_items = 0;
-
-  /**
    * Implementation of FeedsParser::parse().
    */
   public function parse(FeedsSource $source, FeedsFetcherResult $fetcher_result) {
@@ -53,15 +44,39 @@ class FeedsExcelParser extends FeedsParser {
     $this->reader = new Spreadsheet_Excel_Reader();
     $this->reader->read($this->filepath);
 
-    $start = $state->pointer ? $state->pointer : $this->pointer;
     $limit = $source->importer->getLimit();
 
-    $rows = $this->parseItems($start, $limit);
+    // Populated state with default values.
+    if (!isset($state->sheet_states)) {
+      $state->sheet_states = array();
+    }
+    // Popuplate state with the sheet ids, as this will be the only time, so
+    // we do process and count with the inital state.
+    if (!isset($state->sheet_ids)) {
+      $state->sheet_ids = $this->getSheetIDs();
+    }
+
+    $rows = $this->parseItems($state, $limit);
+
+    // Get progress.
+    $total = 0;
+    $progress = 0;
+    $max = 10;
+    $no_count = 0;
+    foreach ($state->sheet_ids as $id) {
+      if (!empty($state->sheet_states[$id]['max'])) {
+        $total += $state->sheet_states[$id]['max'];
+        $progress += $state->sheet_states[$id]['offset'];
+        $max = max($max, $state->sheet_states[$id]['max']);
+      }
+      else {
+        $no_count++;
+      }
+    }
+    $total += $no_count * $max;
 
     // Report progress.
-    $state->total = $this->sheet_count * $this->max_sheet_items;
-    $state->pointer = $this->pointer;
-    $progress = $this->completed_sheets * $this->max_sheet_items + count($rows);
+    $state->total = $total;
     $state->progress($state->total, $progress);
 
     // Create a result object and return it.
@@ -71,68 +86,45 @@ class FeedsExcelParser extends FeedsParser {
 
   /**
    * Parse items from the given reader source respecting processing limits.
-   * @param string $pointer
-   *   indicator for starting point for parsing items. Combination of sheet id
-   *   and item offset. e.g. '5:0' for sheet id 5 and no offset
-   *
+   * @param $state
+   *   state object that comes from source and holds the parsed points.
+   * @param integer $limit
+   *   maximum number of items to process in one step
+   * @return array
    */
-  public function parseItems($pointer, $limit) {
+  public function parseItems(&$state, $limit) {
     $count = 0;
 
-    list($last_sheet_id, $last_sheet_item) = explode(':', $pointer);
-    $sheet_ids = $this->getSheetIDs();
-    $this->sheet_count = count($sheet_ids);
-
-    // Indicates if we have to wait until we got to the last parsed sheet.
-    $found_sheet = (!array_key_exists($last_sheet_id, $sheet_ids));
-
-    $parsed_items = array();
-
+    $return = array();
     // Run through each sheet until we got enough items.
-    foreach ($sheet_ids as $sheet_id) {
-      $this->completed_sheets++;
-      if ($found_sheet || $sheet_id == $last_sheet_id) {
-        $found_sheet = TRUE;
-        // Start off after the last element for known sheets.
-        if ($sheet_id == $last_sheet_id) {
-          $offset = $last_sheet_item + 1;
-        }
-        // Start off at 0 for new sheets.
-        else {
-          $offset = 0;
-        }
-
+    foreach ($state->sheet_ids as $sheet_id) {
+      // Process only not yet completed sheets.
+      if (empty($state->sheet_states[$sheet_id]['complete'])) {
+        $offset = (!empty($state->sheet_states[$sheet_id]['offset'])) ? $state->sheet_states[$sheet_id]['offset'] : 0;
         $sheet = $this->getSheet($sheet_id);
 
         // For the moment we parse the whole sheet at once.
         // @TODO: parse single rows to avoid unnecessary processing.
         $items = $this->getItems($sheet);
-        $count_items = count($items);
-        $this->max_sheet_items = max($this->max_sheet_items, $count_items);
-        $left = $limit - $count;
+        $state->sheet_states[$sheet_id]['max'] = count($items);
 
-        $sub = array_slice($items, $offset, $left, FALSE);
-        $count_sub = count($sub);
-        $parsed_items = array_merge($parsed_items, $sub);
+        $add = array_slice($items, $offset, $limit - $count, FALSE);
+        $return = array_merge($return, $add);
 
-        $count += $count_sub;
-        $new_offset = $offset + count($sub);
-        $this->pointer = $sheet_id .':'. ($new_offset - 1);
-
-        // If we did not finish the sheet, do not count it.
-        if ($count_items > $count_sub) {
-          $this->completed_sheets--;
+        $count += count($add);
+        // Set new offset.
+        $state->sheet_states[$sheet_id]['offset'] = $offset + count($add);
+        if ($state->sheet_states[$sheet_id]['offset'] >= $state->sheet_states[$sheet_id]['max']) {
+          $state->sheet_states[$sheet_id]['complete'] = TRUE;
         }
 
         // If we got enough items, return them.
         if ($limit <= $count) {
-          return $parsed_items;
+          return $return;
         }
-        // Else go on with running through the sheets.
-        $last_sheet_id = $sheet_id;
       }
     }
-    return $parsed_items;
+    return $return;
   }
 
   /**

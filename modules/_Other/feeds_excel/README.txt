@@ -20,7 +20,8 @@ Installation
 ============
 - Install Feeds, Feeds Admin UI and its dependecnies
 - Copy this module to your modules directory
-- Place the phpExcelReader in this modules' libraries-folder
+- Place the phpExcelReader in sites/all/libraries, so reader.php is located at
+  sites/all/libraries/phpExcelReader/Excel/reader.php
 - Enable feeds_excel
 
 Now it can be used as Parser in Feeds.
