@@ -80,6 +80,8 @@ class FeedsExcelParser extends FeedsParser {
     $state->progress($state->total, $progress);
 
     // Create a result object and return it.
+    dpm($source);
+    dpm($rows);
     return new FeedsParserResult($rows, $source->feed_nid);
   }
 
