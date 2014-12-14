@@ -31,7 +31,7 @@
 
 // a4s fix
 //require_once 'Spreadsheet/Excel/Reader/OLERead.php';
-require_once 'Excel/oleread.inc';
+require_once 'oleread.inc';
 
 
 //require_once 'OLE.php';
