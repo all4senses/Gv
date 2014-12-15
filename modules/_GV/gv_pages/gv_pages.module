@@ -9218,6 +9218,13 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
                     $col_data = preg_replace('/.*\=HYPERLINK\(\"(.*)\"\).*/iU', '$1', $col_data);
                     $col_data = explode('","', $col_data);
                   }
+                  elseif ($col_name == 'Upcoming Location') {
+                    if (strpos($col_data, ',')) {
+                      $col_data = explode(',', $col_data);
+                      $col_data[1] = trim($col_data[1]);
+                    }
+                    
+                  }
                   $row_data[$col_name] = $col_data;
                 }
               }
