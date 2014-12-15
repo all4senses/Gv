@@ -9215,7 +9215,8 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
                 }
                 else {
                   if (strpos($col_data, 'HYPERLINK(')) {
-                    $col_data = preg_replace('/.*\=HYPERLINK\((.*)\).*/iU', '$1', $col_data);
+                    $col_data = preg_replace('/.*\=HYPERLINK\(\"(.*)\"\).*/iU', '$1', $col_data);
+                    $col_data = explode('","', $col_data);
                   }
                   $row_data[$col_name] = $col_data;
                 }
