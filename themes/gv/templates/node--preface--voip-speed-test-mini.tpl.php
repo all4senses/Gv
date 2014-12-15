@@ -1,3 +1,25 @@
+<?php
+
+      $url = 'http://getvoip.com' . $_SERVER['REQUEST_URI'];
+        
+      if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
+        $share_title = $node->metatags['title']['value'];
+      }
+      else {
+        $share_title = $title;
+      }
+
+      echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
+      
+      // Floating share buttons box.
+      //drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.min.js');
+      ////drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.js');
+      drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat2.js');
+      $module_path = drupal_get_path('module', 'gv_misc');
+      drupal_add_js( $module_path . '/js/gv_floatingSocials.js'); 
+
+?>
+
 
 <h1 class="preface" <?php //echo preg_replace('/datatype=""/', '', $title_attributes); ?>>
       <?php 

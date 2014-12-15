@@ -9194,14 +9194,14 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
       
       if (($handle = fopen(gv_misc_getPathFromStreamUri($file->uri), "r")) !== FALSE) {
         
-        dpm($file);
+        //dpm($file);
         
         if ($file->filemime == 'application/vnd.ms-excel' || $file->filemime == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
           fclose($handle);
           // Module pxpexcel module needed, and phpexcel library downloaded.
           module_load_include('inc', 'phpexcel');
           $excel_data = phpexcel_import(gv_misc_getPathFromStreamUri($file->uri));
-          dpm(gv_misc_getPathFromStreamUri($file->uri));
+          //dpm(gv_misc_getPathFromStreamUri($file->uri));
           if (is_array($excel_data)) {
             // Use only the first sheet ([0])
             foreach ($excel_data[0] as $row) {
