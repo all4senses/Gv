@@ -53,20 +53,7 @@ function _feeds_excel_include_libraries() {
  */
 function feeds_excel_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'feeds_ui_mapping_form') {
-    // We only extend the mapping form, if there is an importer.
-    if (empty($form['#importer'])) {
-      watchdog("feeds_excel", "No #importer specified in form. Will not apply excel feed processing.");
-      return;
-    }
-
-    try {
-      $importer = feeds_importer($form['#importer']);
-    }
-    catch (Exception $e) {
-      watchdog("feeds_excel", "Failed to load importer %id", array('id' => $form['#importer']));
-    }
-    $config = $importer->getConfig();
-
+    $config = $form['#importer']->getConfig();
     if ($config['parser']['plugin_key'] == 'ExcelParser') {
 
       $form['legend_sources'] = array(
