@@ -17,14 +17,26 @@ function feeds_excel_requirements($phase) {
     );
   }
 
-  $path = !module_exists('libraries') ? 'sites/all/libaries/phpExcelReader' : libraries_get_path('phpExcelReader');
-  if (!file_exists($path .'/Excel/reader.php')) {
-    $requirements['feeds_excel:libraries'] = array(
-      'title' => $t('phpExcelReader'),
-      'description' => $t('The phpExcelReader library is not located in %path!. You can download it from !link. For more information look in Feeds Excel\'s README.txt.', array('%path' => $path, '!link' => l(t('here'), 'https://github.com/derhasi/phpExcelReader/zipball/interim2'))),
-      'severity' => REQUIREMENT_ERROR,
-      //'value' => 'interim2',
-    );
+  if (module_exists('libraries')) {
+    $path = libraries_get_path('phpExcelReader');
+    if (empty($path)) {
+      $requirements['feeds_excel:libraries'] = array(
+        'title' => $t('phpExcelReader'),
+        'description' => $t('The phpExcelReader library is not present. It should be placed in a path supported by libraries API (e.g. sites/all/libraries/phpExcelReader)! You can download it from @link. For more information look in Feeds Excel\'s README.txt.', array('%path' => $path, '@link' => 'https://github.com/derhasi/phpExcelReader/zipball/interim2')),
+        'severity' => REQUIREMENT_ERROR,
+        //'value' => 'interim2',
+      );
+    }
+    // reader.php is on the wrong spot.
+    elseif (!file_exists($path . '/Excel/reader.php')) {
+      $reader_path = $path . '/Excel/reader.php';
+      $requirements['feeds_excel:libraries'] = array(
+        'title' => $t('phpExcelReader'),
+        'description' => $t('The phpExcelReader library\'s reader.php is not located at the correct spot. It should be placed at @path. For more information look in Feeds Excel\'s README.txt.', array('@path' => $reader_path, '@link' => 'https://github.com/derhasi/phpExcelReader/zipball/interim2')),
+        'severity' => REQUIREMENT_ERROR,
+        //'value' => 'interim2',
+      );
+    }
   }
 
   return $requirements;
@@ -86,4 +98,27 @@ function feeds_excel_update_6101() {
     );
   }
   return $ret;
+}
+
+
+/**
+ * Remind user to enable libraries and relocate the phpExcelReader library.
+ */
+function feeds_excel_update_6102() {
+  $return = array();
+  $t = get_t();
+  if (!module_exists('libraries')) {
+    $return[] = array(
+      'success' => FALSE,
+      'query' => $t('The libraries module has to be enabled.'),
+    );
+  }
+  $path = !module_exists('libraries') ? 'sites/all/libraries/phpExcelReader' : libraries_get_path('phpExcelReader');
+  if (!file_exists($path .'/Excel/reader.php')) {
+    $return[] = array(
+      'success' => FALSE,
+      'query' => $t('The phpExcelReader library has to be located or relocated at %path.', array('%path' => $path)),
+    );
+  }
+  return $return;
 }
