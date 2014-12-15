@@ -9188,47 +9188,79 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
     $file->status = FILE_STATUS_PERMANENT;
     // Save.
     $uploaded = file_save($file);
+    
     if ($uploaded == TRUE) {
       drupal_set_message('The file has been uploaded.');
       
       if (($handle = fopen(gv_misc_getPathFromStreamUri($file->uri), "r")) !== FALSE) {
         
         dpm($file);
-        fclose($handle);
-        drupal_goto($_GET['q'], array('query' => $get));
-        return;
         
-        
-        if (($titles = fgetcsv($handle, 1000, ";")) !== FALSE) {
-          
-          if ($titles[0] == 'Conference Name' && in_array('Applicable Industry', $titles)) {
-            foreach ($titles as $key => $value) {
-              if (!$value) {
-                unset($titles[$key]);
+        if ($file->filemime == 'application/vnd.ms-excel' || $file->filemime == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+          fclose($handle);
+          // Module pxpexcel module needed, and phpexcel library downloaded.
+          module_load_include('inc', 'phpexcel');
+          $excel_data = phpexcel_import(gv_misc_getPathFromStreamUri($file->uri));
+          dpm(gv_misc_getPathFromStreamUri($file->uri));
+          if (is_array($excel_data)) {
+            // Use only the first sheet ([0])
+            foreach ($excel_data[0] as $row) {
+              if (empty($row['Conference Name'])) {
+                continue;
               }
-            }
-            
-            while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-                // Skip empty rows (or rows with empty Title column).
-                if (empty($data[0])) {
+              $row_data = array();
+              foreach ($row as $col_name => $col_data) {
+                if (is_numeric($col_name)) {
                   continue;
                 }
-                $row = array();
-                foreach ($titles as $key => $title) {
-                  if ($data[$key] == 'TBD') {
-                    $data[$key] = '';
-                  }
-                  $row[$title] = trim($data[$key]);
+                else {
+                  
+                  $row_data[$col_name] = $col_data;
                 }
-                $file_data[] = $row;
+              }
+              $file_data[] = $row_data;
             }
           }
+        }
+        elseif ($file->filemime == 'text/csv') {
+          
+          if (($titles = fgetcsv($handle, 1000, ";")) !== FALSE) {
+          
+            if ($titles[0] == 'Conference Name' && in_array('Applicable Industry', $titles)) {
+              foreach ($titles as $key => $value) {
+                if (!$value) {
+                  unset($titles[$key]);
+                }
+              }
+
+              while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                  // Skip empty rows (or rows with empty Title column).
+                  if (empty($data[0])) {
+                    continue;
+                  }
+                  $row = array();
+                  foreach ($titles as $key => $title) {
+                    if ($data[$key] == 'TBD') {
+                      $data[$key] = '';
+                    }
+                    $row[$title] = trim($data[$key]);
+                  }
+                  $file_data[] = $row;
+              }
+            }
+
+          }
+          fclose($handle);
           
         }
-        fclose($handle);
-        //dpm($file_data);
         
-        gv_misc_addConferences_fromVar($file_data);
+        
+        dpm($file_data);
+        if (!empty($file_data)) {
+          //gv_misc_addConferences_fromVar($file_data);
+          dpm('Got the data! Ready for importing.');
+        }
+        
       }
       
     }
