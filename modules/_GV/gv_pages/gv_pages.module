@@ -63,8 +63,8 @@ function gv_pages_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['admin/content/import-conferences-in-bulk'] = array(
-    'title' => 'Import conferences from a file In Bulk to GV',
+  $items['admin/content/import-conferences'] = array(
+    'title' => 'Import conferences',
     'description' => 'Import conferences from a file In Bulk to GV page',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('gv_pages_importConferencesInBulk_form'),
@@ -9197,10 +9197,16 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
         //dpm($file);
         
         if ($file->filemime == 'application/vnd.ms-excel' || $file->filemime == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+          
+          // Close because it will  be opened by importer function
           fclose($handle);
-          // Module pxpexcel module needed, and phpexcel library downloaded.
+          
+          // Import the data from Excel
+          // Module phpexcel module needed, and phpexcel library downloaded.
+          // https://www.drupal.org/node/1351450
           module_load_include('inc', 'phpexcel');
           $excel_data = phpexcel_import(gv_misc_getPathFromStreamUri($file->uri));
+          
           //dpm(gv_misc_getPathFromStreamUri($file->uri));
           if (is_array($excel_data)) {
             // Use only the first sheet ([0])
@@ -9265,10 +9271,10 @@ function gv_pages_importConferencesInBulk_formValidate(&$form, &$form_state) {
         }
         
         
-        dpm($file_data);
+        //dpm($file_data);
         if (!empty($file_data)) {
-          //gv_misc_addConferences_fromVar($file_data);
           dpm('Got the data! Ready for importing.');
+          gv_misc_addConferences_fromVar($file_data);
         }
         
       }
