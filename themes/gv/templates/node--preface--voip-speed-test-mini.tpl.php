@@ -55,7 +55,8 @@
 			allowScriptAccess: "always"
 		};
 		var attributes = {};
-		swfobject.embedSWF("http://getvoip.com/ookla-mini/speedtest.swf?v=2.1.8", "mini-demo", "350", "200", "9.0.0", "http://getvoip.com/ookla-mini/speedtest/expressInstall.swf", flashvars, params, attributes);
+		//swfobject.embedSWF("http://getvoip.com/ookla-mini/speedtest.swf?v=2.1.8", "mini-demo", "350", "200", "9.0.0", "http://getvoip.com/ookla-mini/speedtest/expressInstall.swf", flashvars, params, attributes);
+    swfobject.embedSWF("http://getvoip.com/ookla-mini/speedtest.swf?v=2.1.8", "mini-demo", "750", "400", "9.0.0", "http://getvoip.com/ookla-mini/speedtest/expressInstall.swf", flashvars, params, attributes);
 	</script>
 <!-- END SPEED TEST - DO NOT ALTER ABOVE -->
 
