@@ -87,26 +87,3 @@ function feeds_excel_update_6101() {
   }
   return $ret;
 }
-
-
-/**
- * Remind user to enable libraries and relocate the phpExcelReader library.
- */
-function feeds_excel_update_6102() {
-  $return = array();
-  $t = get_t();
-  if (!module_exists('libraries')) {
-    $return[] = array(
-      'success' => FALSE,
-      'query' => $t('The libraries module has to be enabled.'),
-    );
-  }
-  $path = !module_exists('libraries') ? 'sites/all/libraries/phpExcelReader' : libraries_get_path('phpExcelReader');
-  if (!file_exists($path .'/Excel/reader.php')) {
-    $return[] = array(
-      'success' => FALSE,
-      'query' => $t('The phpExcelReader library has to be located or relocated at %path.', array('%path' => $path)),
-    );
-  }
-  return $return;
-}

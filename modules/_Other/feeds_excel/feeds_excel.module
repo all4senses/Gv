@@ -9,10 +9,9 @@ function feeds_excel_ctools_plugin_api($owner, $api) {
   }
 }
 
-
 /**
-* Implements hook_feeds_plugins().
-*/
+ * Implements hook_feeds_plugins().
+ */
 function feeds_excel_feeds_plugins() {
   $info = array();
   $info['ExcelParser'] = array(
@@ -53,7 +52,18 @@ function _feeds_excel_include_libraries() {
  */
 function feeds_excel_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'feeds_ui_mapping_form') {
-    $config = $form['#importer']->getConfig();
+
+    if (empty($form['#importer'])) {
+      watchdog("feeds_excel", "No #importer specified in form. Will not apply excel feed processing.");
+      return;
+    }
+
+    try {
+      $importer = feeds_importer($form['#importer']);
+    } catch (Exception $e) {
+      watchdog("feeds_excel", "Failed to load importer %id", array('id' => $form['#importer']));
+    }
+    $config = $importer->getConfig();
     if ($config['parser']['plugin_key'] == 'ExcelParser') {
 
       $form['legend_sources'] = array(
@@ -95,7 +105,6 @@ function feeds_excel_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 }
-
 
 /**
  * Implements of hook_token_info().
@@ -314,7 +323,7 @@ function _feeds_excel_token_values__excel_sheet($object, $token_name, $original_
   }
   // A special fixed cell.
   elseif (is_array($object->fixed_cells)
-          && preg_match('&^cell-([0-9]+)-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
+      && preg_match('&^cell-([0-9]+)-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
     $row = $subpattern[1];
     $column = $subpattern[2];
     $formatted = !empty($subpattern[3]);
@@ -360,7 +369,7 @@ function _feeds_excel_token_values__excel_row($object, $token_name, $original_to
   }
   // Token name is somtehing like x-111-formatted or x-111
   elseif (is_array($object->cells)
-          && preg_match('&^x-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
+      && preg_match('&^x-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
     $x = $subpattern[1];
     $formatted = !empty($subpattern[2]);
     foreach ($object->cells as $id => $cell) {
@@ -374,7 +383,7 @@ function _feeds_excel_token_values__excel_row($object, $token_name, $original_to
   }
   // Token name is somtheing like column-111-formatted or column-111
   elseif (is_array($object->cells)
-          && preg_match('&^column-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
+      && preg_match('&^column-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
     $column = $subpattern[1];
     $formatted = !empty($subpattern[2]);
     foreach ($object->cells as $id => $cell) {
@@ -419,7 +428,7 @@ function _feeds_excel_token_values__excel_column($object, $token_name, $original
   }
   // Token name is somtehing like y-111-formatted or y-111
   elseif (is_array($object->cells)
-          && preg_match('&^y-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
+      && preg_match('&^y-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
     $y = $subpattern[1];
     $formatted = !empty($subpattern[2]);
     foreach ($object->cells as $id => $cell) {
@@ -433,7 +442,7 @@ function _feeds_excel_token_values__excel_column($object, $token_name, $original
   }
   // Token name is somtehing like row-111-formatted or row-111
   elseif (is_array($object->cells)
-          && preg_match('&^row-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
+      && preg_match('&^row-([0-9]+)(-formatted)?$&is', $token_name, $subpattern)) {
     $row = $subpattern[1];
     $formatted = !empty($subpattern[2]);
     foreach ($object->cells as $id => $cell) {

@@ -83,26 +83,24 @@ class FeedsExcelParser extends FeedsParser {
     $sheet_ids = $this->getSheetIDs();
     $this->sheet_count = count($sheet_ids);
 
-    // If the last sheet id cannot be found, we start over from the beginning.
-    $start_over = (!array_key_exists($last_sheet_id, $sheet_ids));
+    // Indicates if we have to wait until we got to the last parsed sheet.
+    $found_sheet = (!array_key_exists($last_sheet_id, $sheet_ids));
 
     $parsed_items = array();
 
     // Run through each sheet until we got enough items.
     foreach ($sheet_ids as $sheet_id) {
       $this->completed_sheets++;
-      // Process if
-      if ($start_over || ($sheet_id == $last_sheet_id)) {
+      if ($found_sheet || $sheet_id == $last_sheet_id) {
+        $found_sheet = TRUE;
         // Start off after the last element for known sheets.
-        if (!$start_over) {
+        if ($sheet_id == $last_sheet_id) {
           $offset = $last_sheet_item + 1;
         }
         // Start off at 0 for new sheets.
         else {
           $offset = 0;
         }
-        // Once we found the correct sheet, we can go through each remaining.
-        $start_over = TRUE;
 
         $sheet = $this->getSheet($sheet_id);
 
