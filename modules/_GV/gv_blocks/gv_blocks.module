@@ -10244,6 +10244,26 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 }
                 
                 dpm($view->result);
+                // Set fixed rating score for each position
+                // And correspondingly recreate fields with ratings
+                $fixed_ratings = array(4.9, 4.8, 4.6, 4.5, 4.4, 4.2, 3.9);
+                
+                if ($user->uid == 1) {
+                  foreach ($view->result as $position => $field) {
+                    
+                      $rating_count = $fixed_ratings[$position];
+                      $stars = theme('gv_misc_fivestar_static', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+        
+                      $view->result[$position]->views_php_10 = '
+                        <div class="fivestars_n_count">
+                            <div class="count">' . $rating_count . '<span> / 5</span></div>' .
+                            $stars . 
+                        '</div>
+                        <div class="details"><a target="_blank"  rel="nofollow" href="' . url('node/' . $field->nid) . '"><div>Read Reviews</div></a></div>
+                        ';
+                    
+                  }
+                }
                 
                 if (!$user->uid) {
                   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
