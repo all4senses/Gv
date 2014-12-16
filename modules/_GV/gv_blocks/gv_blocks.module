@@ -2712,6 +2712,12 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       }
       
       ////$providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
+      if ($_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
+        $reviews_link_attributes = array('attributes' => array('class' => array('review-link'), 'target' => '_blank'));
+      }
+      else {
+        $reviews_link_attributes = array('attributes' => array('class' => array('review-link')));
+      }
       
       $out .= '
           <tr' .  /*' class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') . '"' . */ '>
