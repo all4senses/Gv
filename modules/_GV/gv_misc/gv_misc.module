@@ -1532,7 +1532,10 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
      
   */
   
-  unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
+  //unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
+  
+  dpm(glob("cache/normal/getvoip.com/ppc/business-voip*.txt"));
+  
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
