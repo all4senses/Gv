@@ -132,10 +132,10 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   //$stars = '<div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>';
   
   if ($_SERVER['REQUEST_URI'] == '/ppc/business-voip') {
-    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow');
+    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow', 'target' => '_blank');
   }
   else {
-    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow', 'target' => '_blank');
+    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow');
   }
   
   $stars = '<div class="rating">' . $stars . l('See All ' . $all_data_quick[$provider_nid]['name'] . ' Reviews', 'node/' . $provider_nid, array('attributes' => $reviews_attributes)) . '</div>';
