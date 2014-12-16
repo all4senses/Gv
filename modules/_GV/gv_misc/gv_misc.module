@@ -1534,8 +1534,8 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   //unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
   
-  dpm(glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
-  array_map('unlink', glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
+  //dpm(glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
+  //array_map('unlink', glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -13588,7 +13588,8 @@ function gv_misc_createNode_conference($conference) {
  */
 function gv_misc_updateCachedSIPpage() {
   
-   unlink('cache/normal/getvoip.com/sip-trunking___.html');
+   //unlink('cache/normal/getvoip.com/sip-trunking___.html');
+   array_map('unlink', glob("cache/normal/getvoip.com/sip-trunking*.html"));
   
    gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/sip-trunking');
    
@@ -13625,7 +13626,8 @@ function gv_misc_updateCachedSIPpage_ajax() {
  */
 function gv_misc_updateCachedPPCpage() {
   
-   unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
+   //unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
+   array_map('unlink', glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
   
    gv_misc_curl_file_from_remote_site_likeBrowser('http://getvoip.com/ppc/business-voip');
    
