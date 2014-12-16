@@ -2679,7 +2679,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $zebra = 'even';
   $count = NULL;
   
-  dpm($_SERVER['REDIRECT_URL']);
+  //dpm($_SERVER['REDIRECT_URL']);
   
   foreach ($providers as $nid => $provider) {
       
@@ -2749,7 +2749,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
               <div class="p-links">'
                 //. '<a href="/go/nextiva" target="_blank" rel="nofollow" class="reviews visit-site-btn"></a>'
                  . gv_misc_getTrackingUrl('', NULL, $nid, NULL, 'visit-site-btn reviews', NULL, $all_data_quick[$nid], $service_type)
-                 . l('READ REVIEWS', 'node/' . $nid, array('attributes' => array('class' => array('review-link')))) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
+                 . l('READ REVIEWS', 'node/' . $nid, $reviews_link_attributes) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
               . '</div> 
             </td>
           </tr>
