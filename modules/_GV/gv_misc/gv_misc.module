@@ -1523,13 +1523,16 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
     drupal_set_message(t("Oops ! An error occured !"), 'error');
   }
   */
-  
+  /*
   $str = date_parse("2006-12-12 10:00:00.5");
   dpm($str);
   
   $str = date_parse("September 9-11, 2015");
   dpm($str);
      
+  */
+  
+  unlink('cache/normal/getvoip.com/ppc/business-voip___.html');
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
@@ -13635,7 +13638,7 @@ function gv_misc_updateCachedPPCpage_ajax() {
   $status = TRUE;
   
   // launch and leave in background, let make everything in background
-  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-PPC-page > /dev/null &');
+  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-ppc-page > /dev/null &');
   
   // Problems with boost that doesn't cache pages if there are POST request from ajax on them.
   // So make it GET somehow solve the problem.
