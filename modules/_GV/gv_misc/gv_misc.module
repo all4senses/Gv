@@ -13636,17 +13636,20 @@ function gv_misc_updateCachedPPCpage() {
 function gv_misc_updateCachedPPCpage_ajax() {
   
   $status = TRUE;
+  global $user;
   
-  // launch and leave in background, let make everything in background
-  exec('wget -O - -q -t 1 http://getvoip.com/update-cached-ppc-page > /dev/null &');
+  // Clear cache only for anonimous, for avoiding double regeneration
+  if (!$user->uid) {
+    // launch and leave in background, let make everything in background
+    exec('wget -O - -q -t 1 http://getvoip.com/update-cached-ppc-page > /dev/null &');
+
+    // Problems with boost that doesn't cache pages if there are POST request from ajax on them.
+    // So make it GET somehow solve the problem.
+    // Here some discussing related to DRUPAL_UID set for anonimous users...
+    // https://www.drupal.org/node/1807818
+  }
   
-  // Problems with boost that doesn't cache pages if there are POST request from ajax on them.
-  // So make it GET somehow solve the problem.
-  // Here some discussing related to DRUPAL_UID set for anonimous users...
-  // https://www.drupal.org/node/1807818
-  
-  
-  drupal_json_output(array('status' => $status /*, 'data' => $output*/));
+  drupal_json_output(array('status' => $status, 'u' => $user->uid /*, 'data' => $output*/));
 }
 
 
