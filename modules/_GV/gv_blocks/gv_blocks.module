@@ -2678,6 +2678,9 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $zebra = 'even';
   $count = NULL;
+  
+  dpm($_SERVER['REDIRECT_URL']);
+  
   foreach ($providers as $nid => $provider) {
       
       if ($count == 5) {
