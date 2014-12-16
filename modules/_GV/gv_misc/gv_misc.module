@@ -1537,7 +1537,77 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   //dpm(glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
   //array_map('unlink', glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
   
+
+    // March 3, 2015
+// October 3-7, 2015
+// September 28-October 1, 2015
+
+  $dates = 'October 3-7, 2015';
+  
+  $dates = gv_misc_parseDateRange($dates);
+  
+  
+  
   return $out . '</div>';// . '<br><div>End of Test</div>';
+}
+
+
+/*
+ *   Parses dates in formats: 
+ * 
+ *   March 3, 2015
+ *   October 3-7, 2015
+ *   September 28-October 1, 2015
+ * 
+ */
+function gv_misc_parseDateRange($dates) {
+  
+
+  if (!strpos($dates, ',')) {
+    return NULL;
+  }
+  
+  $dates = explode(',', $dates);
+  // $dates[0] = 'October 3-7', $dates[1] = ' 2015'
+  
+  $year = trim($dates[1]); // '2015'
+  if(!is_numeric($year)) {
+    return NULL;
+  }
+  $date_first['year'] = $date_second['year'] = $year;
+  if (strpos($dates[0], '-')) {
+    // 'October 3-7' OR 'September 28-October 1'
+    $dates = explode('-', $dates[0]);
+    
+    if (is_numeric(trim($dates[1]))) {
+      // $dates[0] = 'October 3', $dates[1] = '7'
+      $date_second['day'] = trim($dates[1]); // '7'
+      $dates = explode(' ', trim($dates[0]));
+      // $dates[0] = 'October', $dates[1] = '3'
+      $date_first['day'] = trim($dates[1]); // '3'
+      $date_first['month'] = $date_second['month'] = trim($dates[0]); // 'October'
+    } // End of if (is_numeric(trim($dates[1]))) {
+    else {
+      // $dates[0] = 'September 28', $dates[1] = 'October 1'
+      $date_tmp = explode(' ', trim($dates[0]));
+      $date_first['day'] = trim($date_tmp[1]); // '28'
+      $date_first['month'] = trim($date_tmp[0]); // 'September'
+      
+      $date_tmp = explode(' ', trim($dates[1]));
+      $date_second['day'] = trim($date_tmp[1]); // '1'
+      $date_second['month'] = trim($date_tmp[0]); // 'October'
+    }
+  } // End of if (strpos($dates[0], '-')) {
+  else {
+    // 'March 3'
+    $dates = explode(' ', trim($dates[0]));
+    // $dates[0] = 'March', $dates[1] = '3'
+    $date_first['day'] = trim($dates[1]); // '3'
+    $date_first['month'] = trim($dates[0]); // 'March'
+    $date_second = $date_first;
+  }
+  
+  return array('first' => $date_first, 'second' => $date_second);
 }
 
 
@@ -13457,11 +13527,19 @@ function gv_misc_createNode_conference($conference) {
   $node->body[$node->language][0]['safe_summary'] = '';
   $node->body[$node->language][0]['safe_value'] = check_plain($conference['Description']);
   
+  $node->field_conf_site[$node->language][0] = array(
+    'url' => is_array($conference['Site']) ? $conference['Site'][0] : $conference['Site'],
+    'title' => is_array($conference['Site']) ? $conference['Site'][1] : NULL,
+    'attributes' => array(),
+  );
+  /*
   $node->field_conf_link[$node->language][0] = array(
     'value' => $conference['Site'],
     'safe_value' => l($conference['Site'], $conference['Site'], array('absolute' => TRUE, 'external' => TRUE)),
     'format' => 'plain_text',
   );
+  */
+
   
   $location = explode(',', $conference['Upcoming Location']);
   if (empty($location[1])) {
@@ -13484,18 +13562,27 @@ function gv_misc_createNode_conference($conference) {
   }
   
   
-  
   $node->field_conf_twitter[$node->language][0] = array(
-    'value' => $conference['Twitter Page'],
-    'safe_value' => check_plain($conference['Twitter Page']),
-    'format' => NULL,
+    'url' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][0] : $conference['Twitter Page'],
+    'title' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][1] : NULL,
+    'attributes' => array(),
   );
+//  $node->field_conf_twitter[$node->language][0] = array(
+//    'value' => $conference['Twitter Page'],
+//    'safe_value' => check_plain($conference['Twitter Page']),
+//    'format' => NULL,
+//  );
   
   $node->field_conf_twitter_hashtag[$node->language][0] = array(
-    'value' => $conference['Hashtag'],
-    'safe_value' => check_plain($conference['Hashtag']),
-    'format' => NULL,
+    'url' => is_array($conference['Hashtag']) ? $conference['Hashtag'][0] : $conference['Hashtag'],
+    'title' => is_array($conference['Hashtag']) ? $conference['Hashtag'][1] : NULL,
+    'attributes' => array(),
   );
+//  $node->field_conf_twitter_hashtag[$node->language][0] = array(
+//    'value' => $conference['Hashtag'],
+//    'safe_value' => check_plain($conference['Hashtag']),
+//    'format' => NULL,
+//  );
   
   if($tids = gv_misc_findOutConferenceTids($conference['Applicable Industry'])) {
     foreach ($tids as $tid) {
@@ -13513,6 +13600,9 @@ function gv_misc_createNode_conference($conference) {
   
   if (!empty($conference['Upcoming Date'])) {
     $dates = explode(' - ', $conference['Upcoming Date']);
+    
+    
+    
     if (!empty($dates[1])) {
       $date1 = date('Y-m-d', strtotime($dates[0])) . '  00:00:00';
       $date2 = date('Y-m-d', strtotime($dates[1])) . '  00:00:00';
