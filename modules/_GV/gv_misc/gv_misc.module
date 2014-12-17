@@ -1609,6 +1609,7 @@ function gv_misc_parseDateRange($dates) {
     $date_second = $date_first;
   }
   
+  
   return array('first' => $date_first, 'second' => $date_second);
 }
 
@@ -13614,8 +13615,8 @@ function gv_misc_createNode_conference($conference) {
     }
     */
     $node->field_conf_date[$node->language][0] = array(
-      'value' => $dates['first']['year'] . '-' . $dates['first']['month'] . '-' . $dates['first']['day'] . ' 00:00:00', //$date1,
-      'value2' => $dates['second']['year'] . '-' . $dates['second']['month'] . '-' . $dates['second']['day'] . ' 00:00:00', //$date2,
+      'value' => date('Y-m-d', strtotime($dates['first']['month'] . ' ' . $dates['first']['day'] . ', ' . $dates['first']['year'])) . '  00:00:00', //$dates['first']['year'] . '-' . $dates['first']['month'] . '-' . $dates['first']['day'] . ' 00:00:00', //$date1,
+      'value2' => date('Y-m-d', strtotime($dates['second']['month'] . ' ' . $dates['second']['day'] . ', ' . $dates['second']['year'])) . '  00:00:00', //$dates['second']['year'] . '-' . $dates['second']['month'] . '-' . $dates['second']['day'] . ' 00:00:00', //$date2,
       'timezone' => 'America/New York',
       'timezone_db' => 'America/New York',
       'date_type' => 'datetime',
