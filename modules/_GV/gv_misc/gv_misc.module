@@ -13601,10 +13601,10 @@ function gv_misc_createNode_conference($conference) {
   }
   
   if (!empty($conference['Upcoming Date'])) {
+    
+    $dates = gv_misc_parseDateRange($conference['Upcoming Date']);
+    /*
     $dates = explode(' - ', $conference['Upcoming Date']);
-    
-    
-    
     if (!empty($dates[1])) {
       $date1 = date('Y-m-d', strtotime($dates[0])) . '  00:00:00';
       $date2 = date('Y-m-d', strtotime($dates[1])) . '  00:00:00';
@@ -13612,9 +13612,10 @@ function gv_misc_createNode_conference($conference) {
     else {
       $date1 = $date2 = date('Y-m-d', strtotime($conference['Upcoming Date'])) . '  00:00:00';
     }
+    */
     $node->field_conf_date[$node->language][0] = array(
-      'value' => $date1,
-      'value2' => $date2,
+      'value' => $dates['first']['year'] . '-' . $dates['first']['month'] . '-' . $dates['first']['day'] . ' 00:00:00', //$date1,
+      'value2' => $dates['second']['year'] . '-' . $dates['second']['month'] . '-' . $dates['second']['day'] . ' 00:00:00', //$date2,
       'timezone' => 'America/New York',
       'timezone_db' => 'America/New York',
       'date_type' => 'datetime',
