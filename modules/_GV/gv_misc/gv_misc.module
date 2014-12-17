@@ -13363,6 +13363,121 @@ function gv_misc_conferenceAlreadyExists($conference) {
 }
 
 
+function gv_misc_findOutTids($source_tags, $voc_name = 'Industries') {
+  
+  if (empty($source_tags)) {
+    return NULL;
+  }
+  
+  $tids = NULL;
+  $tags = explode(',', $source_tags);
+  if (empty($tags[1])) {
+    $tags[0] = $source_tags; 
+  }
+  
+  $voc_name_to_vid = array(
+      'Industries' => 8,
+      'Cities' => 9,
+      'States and Countries' => 10,
+  );
+
+  $vid = $voc_name_to_vid[$voc_name]; //8; // industries
+  
+  $states = array(
+      'AL' => 'Alabama',
+      'AK' => 'Alaska',
+      'AZ' => 'Arizona',
+      'AR' => 'Arkansas',
+      'CA' => 'California',
+      'CO' => 'Colorado',
+      'CT' => 'Connecticut',
+      'DE' => 'Delaware',
+      'FL' => 'Florida',
+      'GA' => 'Georgia',
+      'HI' => 'Hawaii',
+      'ID' => 'Idaho',
+      'IL' => 'Illinois',
+      'IN' => 'Indiana',
+      'IA' => 'Iowa',
+      'KS' => 'Kansas',
+      'KY' => 'Kentucky',
+      'LA' => 'Louisiana',
+      'ME' => 'Maine',
+      'MD' => 'Maryland',
+      'MA' => 'Massachusetts',
+      'MI' => 'Michigan',
+      'MN' => 'Minnesota',
+      'MS' => 'Mississippi',
+      'MO' => 'Missouri',
+      'MT' => 'Montana',
+      'NE' => 'Nebraska',
+      'NV' => 'Nevada',
+      'NH' => 'New Hampshire',
+      'NJ' => 'New Jersey',
+      'NM' => 'New Mexico',
+      'NY' => 'New York',
+      'NC' => 'North Carolina',
+      'ND' => 'North Dakota',
+      'OH' => 'Ohio',
+      'OK' => 'Oklahoma',
+      'OR' => 'Oregon',
+      'PA' => 'Pennsylvania',
+      'RI' => 'Rhode Island',
+      'SC' => 'South Carolina',
+      'SD' => 'South Dakota',
+      'TN' => 'Tennessee',
+      'TX' => 'Texas',
+      'UT' => 'Utah',
+      'VT' => 'Vermont',
+      'VA' => 'Virginia',
+      'WA' => 'Washington',
+      'WV' => 'West Virginia',
+      'WI' => 'Wisconsin',
+      'WY' => 'Wyoming',
+  );
+  
+  foreach ($tags as $tag) {
+    
+    if ($voc_name == 'States and Countries' && isset($states[$tag])) {
+      $abbreviation = $tag;
+      $tag = $states[$tag];
+    }
+    else {
+      $abbreviation = $tag;
+    }
+    
+    
+    
+    // Find out tids.
+    $query = db_select('taxonomy_term_data', 'td')
+        ->fields('td', array('tid'))
+        ->condition('td.vid', $vid)
+        ->condition('td.name', trim($tag))
+        ->execute();
+
+    if ($tid = $query->fetchField()) {
+      $tids[] = $tid;
+    }
+    else {
+      drupal_set_message('No term "' . $tag . '" defined. Will be added to the system.', 'warning');
+      $term = (object) array('name' => $tag, 'vid' => $vid);
+      if (taxonomy_term_save($term)) {
+        $tids[] = $term->tid;
+        // Add abbreviation if it is a state.
+        if ($abbreviation) {
+          gv_misc_fieldSave('abbreviation', $term->tid, $abbreviation, 'taxonomy_term', 'states_and_countries');
+        }
+      }
+    }
+
+
+  }
+  
+  //dpm($tids);
+  return $tids;
+}
+
+
 function gv_misc_findOutConferenceTids($source_tags) {
   
   if (empty($source_tags)) {
@@ -13543,16 +13658,42 @@ function gv_misc_createNode_conference($conference) {
   );
   */
 
+  $city = $state_or_country = NULL;
   
   $location = explode(',', $conference['Upcoming Location']);
   if (empty($location[1])) {
+    $city = $conference['Upcoming Location'];
+  }
+  else {
+    $city = trim($location[0]); 
+    $state_or_country = trim($location[1]);
+  } 
+  
+  if($city && $tids = gv_misc_findOutTids($city, 'cities')) {
+    foreach ($tids as $tid) {
+      $node->field_city[$node->language][] = array(
+        'tid' => $tid,
+      );
+    }
+  }
+  
+  if($state_or_country && $tids = gv_misc_findOutTids($city, 'states_and_countries')) {
+    foreach ($tids as $tid) {
+      $node->field_city[$node->language][] = array(
+        'tid' => $tid,
+      );
+    }
+  }
+  
+  
+  {
     $node->field_conf_city[$node->language][0] = array(
       'value' => $conference['Upcoming Location'],
       'safe_value' => check_plain($conference['Upcoming Location']),
       'format' => NULL,
     );
   }
-  else {
+  {
     $node->field_state[$node->language][0] = array(
       'value' => trim($location[1]),
     );
@@ -13587,7 +13728,7 @@ function gv_misc_createNode_conference($conference) {
 //    'format' => NULL,
 //  );
   
-  if($tids = gv_misc_findOutConferenceTids($conference['Applicable Industry'])) {
+  if($conference['Applicable Industry'] && $tids = gv_misc_findOutConferenceTids($conference['Applicable Industry'])) {
     foreach ($tids as $tid) {
       $node->field_industry[$node->language][] = array(
         'tid' => $tid,
