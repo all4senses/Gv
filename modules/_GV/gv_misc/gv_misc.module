@@ -13239,7 +13239,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       
                       $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
-                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $result->field_state_value;
+                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
                       
                       
                       
@@ -13477,7 +13477,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       //$location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       
                       $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
-                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $result->field_state_value;
+                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
                       
                       
                       
