@@ -12883,8 +12883,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
           $query->fields('t', array('tid', 'name'));
           $query->condition('t.vid', $vid);
           $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
-      //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+          $query->leftJoin('field_data_field_abbreviation', 'abbr', 'abbr.bundle = "states_and_countries" AND abbr.entity_id = t.tid');
+          //$query->fields('abbr', array('field_abbreviation_value'));
+          $query->addField('abbr', 'field_abbreviation_value', 'abbr');
       //    $query->condition('i.field_invisible_value', 1, '!='); 
+          
           $query->orderBy('t.name', 'ASC');
           // 4 pages
           //$query->range(0, 8);
@@ -12901,7 +12904,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           foreach ($result as $result) {
             $out_array[] = array(
                 'value' => $result->tid,
-                'label' => $result->name  . ' (state))',
+                'label' => $result->name  . (empty($result->abbr) ? ' (state) ' . $result->abbr : ' (country)') ,
             );
           }
           
