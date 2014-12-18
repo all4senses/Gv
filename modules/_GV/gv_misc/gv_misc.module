@@ -13059,8 +13059,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $more_details_button = NULL;
               }
               
-              if ($result->field_conf_twitter_value) {
-                if (!empty($result->field_conf_twitter_hashtag_value )) {
+              if ($result->field_conf_twitter_url) {
+                if (!empty($result->field_conf_twitter_hashtag_url )) {
                   //$hash = '<span> - </span><span class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</span>';
                   $hash = '<span> - </span><span class="hash">' . l((strpos($result->field_conf_twitter_hashtag_title, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_title, $result->field_conf_twitter_hashtag_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow'))) . '</span>';
                 }
