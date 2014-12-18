@@ -821,6 +821,10 @@
     }
  } 
 
+
+/*
+ * Main get conf func.
+ */
  function get_conf(label, id, popup_stick_to_left) {
 
    id = typeof id !== 'undefined' ? id : null;
@@ -841,6 +845,7 @@
      }
      return;
    }
+   // Correct and uncomment!!!
    /*
    else if ( 'content_' + sw + '_' + label in cache ) {
      save_sw = new_sw = false;

@@ -12904,7 +12904,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           foreach ($result as $result) {
             $out_array[] = array(
                 'value' => $result->tid,
-                'label' => $result->name  . (!empty($result->abbr) ? ' (state) ' . $result->abbr : ' (country)') ,
+                'label' => $result->name  . (!empty($result->abbr) ? ' (US state)' : ' (country)') ,
             );
           }
           
@@ -12930,7 +12930,9 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //                  'value' => 'aaa',
 //                  'label' => 'bbb',
 //              );
-              
+            
+            // Search by an exact conference title.
+            
             $query = db_select('node', 'n');
             $query->fields('n', array('nid', 'title'));
             $query->condition('n.status', 1);
@@ -12938,11 +12940,24 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->condition('n.title', $post['term']);
             $query->leftJoin('field_data_body', 'b', 'b.entity_id = n.nid');
             $query->fields('b', array('body_value'));
-            $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
-            $query->fields('st', array('field_state_value'));
+            
+            // State via list (deprecated)
+            //$query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+            //$query->fields('st', array('field_state_value'));
+            
+            // State/country via taxonomy
+            $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.entity_id = n.nid');
+            $query->fields('st2', array('field_state_or_country_tid'));
+
+            $query->leftJoin('taxonomy_term_data', 'tdt2', 'tdt2.tid = st2.field_state_or_country_tid');
+            $query->addField('tdt2', 'name', 'state_or_country');
+            
+            $query->leftJoin('field_data_field_abbreviation', 'abbr', 'abbr.entity_id = st2.field_state_or_country_tid');
+            $query->addField('abbr', 'field_abbreviation_value', 'abbr');
+            
             // City via text field
-            $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
-            $query->fields('ci', array('field_conf_city_value'));
+            //$query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+            //$query->fields('ci', array('field_conf_city_value'));
             
             // City via taxonomy
             $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
@@ -12956,24 +12971,41 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->fields('pr', array('field_conf_price_value'));
             $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
             $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
-            $query->leftJoin('field_data_field_conf_link', 'li', 'li.entity_id = n.nid');
-            $query->fields('li', array('field_conf_link_value'));
+            
+            // Site link
+            //$query->leftJoin('field_data_field_conf_link', 'li', 'li.entity_id = n.nid');
+            //$query->fields('li', array('field_conf_link_value'));
+            $query->leftJoin('field_data_field_conf_site', 'li', 'li.entity_id = n.nid');
+            $query->fields('li', array('field_conf_site_url', 'field_conf_site_title'));
+            
+            
+            // Twitter
+            // Twitter page
+            //$query->leftJoin('field_data_field_conf_twitter', 'tw', 'tw.entity_id = n.nid');
             $query->leftJoin('field_data_field_conf_twitter', 'tw', 'tw.entity_id = n.nid');
-            $query->fields('tw', array('field_conf_twitter_value'));
+            $query->fields('tw', array('field_conf_twitter_url', 'field_conf_twitter_title'));
+            
+            // Twitter hashtag
             $query->leftJoin('field_data_field_conf_twitter_hashtag', 'th', 'th.entity_id = n.nid');
-            $query->fields('th', array('field_conf_twitter_hashtag_value'));
+            //$query->fields('th', array('field_conf_twitter_hashtag_value'));
+            $query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
+            
             
             if($result = $query->execute()->fetchObject()) {
               
-//              global $user;
-//              if ($user->uid == 1) {
-//                $result->field_conf_twitter_value = '@Conference';
-//                $result->field_conf_twitter_hashtag_value = '#Hashtag';
-//                $result->field_conf_city_value = 'New York';
-//                $result->field_state_value = 'NY';
-//                $result->body_value = 'This is Photoshop\'s version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.';
-//                $result->field_conf_price_value = '99.99';
-//              }
+              // Found by an exact conference title.
+              
+            /*  
+              global $user;
+              if ($user->uid == 1) {
+                $result->field_conf_twitter_value = '@Conference';
+                $result->field_conf_twitter_hashtag_value = '#Hashtag';
+                $result->field_conf_city_value = 'New York';
+                $result->field_state_value = 'NY';
+                $result->body_value = 'This is Photoshop\'s version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Etiam pharetra, erat sed fermentum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque. Suspendisse in orci enim.';
+                $result->field_conf_price_value = '99.99';
+              }
+              */
               
               if ($result->field_conf_date_value == $result->field_conf_date_value2) {
                 $dates = date('F j\t\h\, Y', strtotime($result->field_conf_date_value));
@@ -12989,6 +13021,26 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 }
               }
               
+              
+              if ($result->field_conf_site_url) {
+                if ($result->field_conf_site_title) {
+                  $url_title = $result->field_conf_site_title;
+                }
+                elseif(strpos($result->field_conf_site_url, '//')) {
+                  $url_title = explode('//', $result->field_conf_site_url);
+                  $url_title = $url_title[1];
+                }
+                else {
+                  $url_title = $result->field_conf_site_url;
+                }
+                
+                $url_title = rtrim($url_title, '/');
+                $url_value = strpos($result->field_conf_site_url, '//') ? $result->field_conf_site_url : 'http://' . $result->field_conf_site_url;
+                
+                $url = l($url_title, $url_value, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow')));
+                $more_details_button = l('More Details', $url_value, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow')));
+              }
+              /*
               if ($result->field_conf_link_value) {
                 if(strpos($result->field_conf_link_value, '//')) {
                   $url_title = explode('//', $result->field_conf_link_value);
@@ -13001,6 +13053,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $url = l($url_title, $result->field_conf_link_value, array('external' => TRUE));
                 $more_details_button = l('More Details', $result->field_conf_link_value, array('external' => TRUE, 'attributes' => array('target' => '_blank')));
               }
+              */
               else {
                 $url = NULL;
                 $more_details_button = NULL;
@@ -13008,18 +13061,25 @@ function gv_misc_getConferences_autocomplete_ajax() {
               
               if ($result->field_conf_twitter_value) {
                 if (!empty($result->field_conf_twitter_hashtag_value )) {
-                  $hash = '<span> - </span><span class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</span>';
+                  //$hash = '<span> - </span><span class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</span>';
+                  $hash = '<span> - </span><span class="hash">' . l((strpos($result->field_conf_twitter_hashtag_title, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_title, $result->field_conf_twitter_hashtag_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow'))) . '</span>';
                 }
                 else {
                   $hash = NULL;
                 }
-                $twitter = '<span class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</span>' . $hash;
+                //$twitter = '<span class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</span>' . $hash;
+                $twitter = '<span class="nick">' . l((strpos($result->field_conf_twitter_title, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_title, $result->field_conf_twitter_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow'))) .  '</span>' . $hash;
               }
               else {
                 $twitter = NULL;
               }
               //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
-              $location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
+              
+              //$state_or_country = $result->field_state_value;
+              $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+              
+              $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $result->field_state_value;
+              
               
               $out_html = '
                     <div class="top">
@@ -13051,28 +13111,28 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
               // Doc on group_concast
               /*
-               http://drupal.stackexchange.com/questions/39672/drupal-dynamic-query-with-group-concat
+                http://drupal.stackexchange.com/questions/39672/drupal-dynamic-query-with-group-concat
 
-            http://www.percona.com/blog/2013/10/22/the-power-of-mysqls-group_concat/
+                http://www.percona.com/blog/2013/10/22/the-power-of-mysqls-group_concat/
 
-            http://www.zimplicit.se/en/knowledge/mysql-group-concat-join-select
+                http://www.zimplicit.se/en/knowledge/mysql-group-concat-join-select
 
-            http://stackoverflow.com/questions/276927/can-i-concatenate-multiple-mysql-rows-into-one-field
-
-
+                http://stackoverflow.com/questions/276927/can-i-concatenate-multiple-mysql-rows-into-one-field
 
 
-            http://drupal.stackexchange.com/questions/19032/d7-bug-with-db-select-addexpression-and-having-conditions
-            http://drupal.stackexchange.com/questions/100229/what-is-the-difference-between-havingcondition-and-having
-            http://drupal.stackexchange.com/questions/33609/how-to-write-a-drupal-7-query-with-count-and-having-properties
 
-            http://bugs.mysql.com/bug.php?id=3543
 
-            http://stackoverflow.com/questions/19311679/sql-group-concat-and-subquery
+                http://drupal.stackexchange.com/questions/19032/d7-bug-with-db-select-addexpression-and-having-conditions
+                http://drupal.stackexchange.com/questions/100229/what-is-the-difference-between-havingcondition-and-having
+                http://drupal.stackexchange.com/questions/33609/how-to-write-a-drupal-7-query-with-count-and-having-properties
 
-            http://www.dbforums.com/showthread.php?1655801-Subquerry-inside-GROUP_CONCAT
+                http://bugs.mysql.com/bug.php?id=3543
 
-            http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.html
+                http://stackoverflow.com/questions/19311679/sql-group-concat-and-subquery
+
+                http://www.dbforums.com/showthread.php?1655801-Subquerry-inside-GROUP_CONCAT
+
+                http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.html
 
                */
 
@@ -13081,10 +13141,35 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->condition('n.status', 1);
               $query->condition('n.type', 'conference', '=');
               $query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-              $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
-              $query->fields('st', array('field_state_value'));
-              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
-              $query->fields('ci', array('field_conf_city_value'));
+              
+              // State via list (deprecated)
+              //$query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+              //$query->fields('st', array('field_state_value'));
+
+              // State/country via taxonomy
+              $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.entity_id = n.nid');
+              $query->fields('st2', array('field_state_or_country_tid'));
+
+              $query->leftJoin('taxonomy_term_data', 'tdt2', 'tdt2.tid = st2.field_state_or_country_tid');
+              $query->addField('tdt2', 'name', 'state_or_country');
+
+              $query->leftJoin('field_data_field_abbreviation', 'abbr', 'abbr.entity_id = st2.field_state_or_country_tid');
+              $query->addField('abbr', 'field_abbreviation_value', 'abbr');
+
+              // City via text field
+              //$query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
+              //$query->fields('ci', array('field_conf_city_value'));
+
+              // City via taxonomy
+              $query->leftJoin('field_data_field_city', 'ci2', 'ci2.entity_id = n.nid');
+              $query->fields('ci2', array('field_city_tid'));
+
+              $query->leftJoin('taxonomy_term_data', 'tdt', 'tdt.tid = ci2.field_city_tid');
+              $query->addField('tdt', 'name', 'city');
+
+              
+              
+              
               $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
               $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
 
@@ -13150,7 +13235,14 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         }
                       }
                       
-                      $location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      
+                      //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      
+                      $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $result->field_state_value;
+                      
+                      
+                      
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
                     
@@ -13181,9 +13273,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $target = 'city';
                 }
                 else {
-                  $target = 'state';
+                  
                   $post['term'] = explode(' (', $post['term']);
-                  $post['term'] = array_search(strtolower($post['term'][0]),array_map('strtolower', $states));  //array_search($post['term'][0], $states);
+                  //$target = 'state';
+                  $target = srtolower(trim($post['term'][1], ')')); // 'state' or 'country'
+                  $vid = 10; // states_and_countries
+                  //$post['term'] = array_search(strtolower($post['term'][0]),array_map('strtolower', $states));  //array_search($post['term'][0], $states);
+                  $post['term'] = $post['term'][1];
                 }
               }
           
@@ -13200,8 +13296,22 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $query->condition('n.status', 1);
                   $query->condition('n.type', 'conference', '=');
                   //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-                  $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
-                  $query->fields('st', array('field_state_value'));
+                  
+                  // State via list (deprecated)
+                  //$query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+                  //$query->fields('st', array('field_state_value'));
+
+                  // State/country via taxonomy
+                  $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.entity_id = n.nid');
+                  $query->fields('st2', array('field_state_or_country_tid'));
+
+                  $query->leftJoin('taxonomy_term_data', 'tdt2', 'tdt2.tid = st2.field_state_or_country_tid');
+                  $query->addField('tdt2', 'name', 'state_or_country');
+
+                  $query->leftJoin('field_data_field_abbreviation', 'abbr', 'abbr.entity_id = st2.field_state_or_country_tid');
+                  $query->addField('abbr', 'field_abbreviation_value', 'abbr');
+              
+              
                   // City via text field
     //              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
     //              $query->fields('ci', array('field_conf_city_value'));
@@ -13241,7 +13351,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
               } // End of City or Industry
               else {
-                // State
+                // State or country
+
                 // Search for all conferences (a list) with a tag $post['term'].
 //                  $query = db_select('taxonomy_term_data', 'td');
 //                  $query->condition('td.name', $post['term'], '=');
@@ -13249,17 +13360,42 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //                  $query->leftJoin('taxonomy_index', 't', 't.tid = td.tid');
 
                   
-                  $query = db_select('field_data_field_state', 'st');
-                  $query->condition('st.field_state_value', $post['term'], '=');
+                
+                
+                  //$query = db_select('field_data_field_state', 'st');
+                  //$query->condition('st.field_state_value', $post['term'], '=');
+                
+                  $query = db_select('taxonomy_term_data', 'td1');
+                  $query->condition('td1.name', $post['term'], '=');
+                  
+                  $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.field_state_or_country_tid = td1.tid');
+                  $query->fields('st2', array('field_state_or_country_tid'));
                   
                   //$query->leftJoin('node', 'n', 'n.nid = t.nid');
-                  $query->leftJoin('node', 'n', 'n.nid = st.entity_id');
+                  $query->leftJoin('node', 'n', 'n.nid = st2.entity_id');
                   $query->fields('n', array('nid', 'title'));
                   $query->condition('n.status', 1);
                   $query->condition('n.type', 'conference', '=');
                   //$query->condition('n.title', '%' . db_like($post['term']) . '%', 'LIKE');
-                  $query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
-                  $query->fields('st', array('field_state_value'));
+                  
+                  
+                  
+                  // State via list (deprecated)
+                  //$query->leftJoin('field_data_field_state', 'st', 'st.entity_id = n.nid');
+                  //$query->fields('st', array('field_state_value'));
+
+                  // Set above...
+                  // State/country via taxonomy
+                  //$query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.entity_id = n.nid');
+                  //$query->fields('st2', array('field_state_or_country_tid'));
+
+                  $query->leftJoin('taxonomy_term_data', 'tdt2', 'tdt2.tid = st2.field_state_or_country_tid');
+                  $query->addField('tdt2', 'name', 'state_or_country');
+
+                  $query->leftJoin('field_data_field_abbreviation', 'abbr', 'abbr.entity_id = st2.field_state_or_country_tid');
+                  $query->addField('abbr', 'field_abbreviation_value', 'abbr');
+              
+                  
                   // City via text field
     //              $query->leftJoin('field_data_field_conf_city', 'ci', 'ci.entity_id = n.nid');
     //              $query->fields('ci', array('field_conf_city_value'));
@@ -13338,7 +13474,12 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       }
                       
                       //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
-                      $location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      //$location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
+                      
+                      $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $result->field_state_value;
+                      
+                      
                       
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
