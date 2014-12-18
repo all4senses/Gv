@@ -12904,7 +12904,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           foreach ($result as $result) {
             $out_array[] = array(
                 'value' => $result->tid,
-                'label' => $result->name  . (empty($result->abbr) ? ' (state) ' . $result->abbr : ' (country)') ,
+                'label' => $result->name  . (!empty($result->abbr) ? ' (state) ' . $result->abbr : ' (country)') ,
             );
           }
           
