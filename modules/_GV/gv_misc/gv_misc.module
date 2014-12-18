@@ -12841,7 +12841,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
         }
         elseif ($post['type'] == 'city-state') {
-          $vid = 9;
+          
+          
+          // Search for citiesfirst.
+          
+          $vid = 9; // Cities.
 
           $query = db_select('taxonomy_term_data', 't');
           $query->fields('t', array('tid', 'name'));
@@ -12869,6 +12873,39 @@ function gv_misc_getConferences_autocomplete_ajax() {
             );
           }
           
+          
+          
+          // Now search for states/countries.
+          
+          $vid = 10; // States and Countries.
+
+          $query = db_select('taxonomy_term_data', 't');
+          $query->fields('t', array('tid', 'name'));
+          $query->condition('t.vid', $vid);
+          $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
+      //    $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+      //    $query->condition('i.field_invisible_value', 1, '!='); 
+          $query->orderBy('t.name', 'ASC');
+          // 4 pages
+          //$query->range(0, 8);
+          // 3 pages
+          //$query->range(0, 6);
+
+          if ($results_num) {
+            $query->range(0, $results_num);
+          }
+
+
+          $result = $query->execute()->fetchAllAssoc('tid');
+          
+          foreach ($result as $result) {
+            $out_array[] = array(
+                'value' => $result->tid,
+                'label' => $result->name  . ' (state))',
+            );
+          }
+          
+          /*
           foreach ($states as $key => $state) {
             if (strpos(drupal_strtolower($state), drupal_strtolower($post['term'])) !== FALSE) {
               
@@ -12878,6 +12915,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               );  
             }
           }
+          */
 
         }
   }
