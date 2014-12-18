@@ -13669,7 +13669,7 @@ function gv_misc_createNode_conference($conference) {
     $state_or_country = trim($location[1]);
   } 
   
-  if($city && $tids = gv_misc_findOutTids($city, 'cities')) {
+  if($city && $tids = gv_misc_findOutTids($city, 'Cities')) {
     foreach ($tids as $tid) {
       $node->field_city[$node->language][] = array(
         'tid' => $tid,
@@ -13677,15 +13677,24 @@ function gv_misc_createNode_conference($conference) {
     }
   }
   
-  if($state_or_country && $tids = gv_misc_findOutTids($city, 'states_and_countries')) {
+  if($state_or_country && $tids = gv_misc_findOutTids($state_or_country, 'States and Countries')) {
     foreach ($tids as $tid) {
-      $node->field_city[$node->language][] = array(
+      $node->field_state_or_country[$node->language][] = array(
         'tid' => $tid,
       );
     }
   }
   
   
+  if($conference['Applicable Industry'] && $tids = gv_misc_findOutTids($conference['Applicable Industry'], 'Industries')) {
+    foreach ($tids as $tid) {
+      $node->field_industry[$node->language][] = array(
+        'tid' => $tid,
+      );
+    }
+  }
+  
+  /*
   {
     $node->field_conf_city[$node->language][0] = array(
       'value' => $conference['Upcoming Location'],
@@ -13704,7 +13713,7 @@ function gv_misc_createNode_conference($conference) {
       'format' => NULL,
     );
   }
-  
+  */
   
   $node->field_conf_twitter[$node->language][0] = array(
     'url' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][0] : $conference['Twitter Page'],
@@ -13728,13 +13737,6 @@ function gv_misc_createNode_conference($conference) {
 //    'format' => NULL,
 //  );
   
-  if($conference['Applicable Industry'] && $tids = gv_misc_findOutConferenceTids($conference['Applicable Industry'])) {
-    foreach ($tids as $tid) {
-      $node->field_industry[$node->language][] = array(
-        'tid' => $tid,
-      );
-    }
-  }
   
   if (!empty($conference['Price']) && $conference['Price'] != '0.00') {
     $node->field_conf_price[$node->language][0] = array(
