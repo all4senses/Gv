@@ -1566,7 +1566,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   //$query->fields('mi', array('field_main_image_value'));
   $query->condition('n.type', 'conference');
 
-  $results = $query->execute()->fetchAllAssoc('nid');
+  $results = $query->execute()->fetchCol();
   
   dpm($results);
  
