@@ -1537,7 +1537,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   //dpm(glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
   //array_map('unlink', glob("cache/normal/getvoip.com/ppc/business-voip*.html"));
   
-
+/*
     // March 3, 2015
 // October 3-7, 2015
 // September 28-October 1, 2015
@@ -1549,6 +1549,16 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   dpm($dates = gv_misc_parseDateRange('March 3, 2015'));
   dpm($dates = gv_misc_parseDateRange('October 3-7, 2015'));
   dpm($dates = gv_misc_parseDateRange('September 28-October 1, 2015'));
+  */
+  
+  $query = db_select('node', 'n')
+    ->fields('n', array('title', 'nid'));
+  //$query->fields('mi', array('field_main_image_value'));
+  $query->condition('n.type', 'conference');
+
+  $results = $query->execute()->fetchAllAssoc('nid');
+  
+  dpm($results);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
