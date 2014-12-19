@@ -1570,8 +1570,17 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   dpm($results);
  
-  node_delete_multiple(array(2078, 2080));
+  node_delete_multiple($results);
  
+ 
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid'));
+  //$query->fields('mi', array('field_main_image_value'));
+  $query->condition('n.type', 'conference');
+
+  $results = $query->execute()->fetchCol();
+  
+  dpm($results);
  
   
   
