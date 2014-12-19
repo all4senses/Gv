@@ -1562,7 +1562,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   
    $query = db_select('node', 'n')
-    ->fields('n', array('title', 'nid'));
+    ->fields('n', array('nid'));
   //$query->fields('mi', array('field_main_image_value'));
   $query->condition('n.type', 'conference');
 
@@ -1571,14 +1571,6 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   dpm($results);
  
   
-   $query = db_select('node', 'n')
-    ->fields('n', array('nid'));
-  //$query->fields('mi', array('field_main_image_value'));
-  $query->condition('n.type', 'conference');
-
-  $results = $query->execute()->fetchCol('nid');
-  
-  dpm($results);
  
  
   
