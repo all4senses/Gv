@@ -13857,11 +13857,17 @@ function gv_misc_createNode_conference($conference) {
   $node->body[$node->language][0]['safe_value'] = check_plain($conference['Description']);
   
   if (!empty($conference['Site'])) {
-    $node->field_conf_site[$node->language][0] = array(
-      'url' => is_array($conference['Site']) ? $conference['Site'][0] : $conference['Site'],
-      'title' => is_array($conference['Site']) ? $conference['Site'][1] : NULL,
-      'attributes' => array(),
-    );
+    
+    if (!is_array($conference['Site']) && in_array(strtoupper($conference['Site']), $tbd_fields_options)) {
+        $tbd_fields['Site'] = strtoupper($conference['Site']);
+      }
+      else {
+          $node->field_conf_site[$node->language][0] = array(
+            'url' => is_array($conference['Site']) ? $conference['Site'][0] : $conference['Site'],
+            'title' => is_array($conference['Site']) ? $conference['Site'][1] : NULL,
+            'attributes' => array(),
+          );
+      }
   }
   /*
   $node->field_conf_link[$node->language][0] = array(
@@ -13874,7 +13880,7 @@ function gv_misc_createNode_conference($conference) {
 
   if (!empty($conference['Upcoming Location'])) {
     
-      if (in_array(strtoupper($conference['Upcoming Location']), $tbd_fields_options)) {
+      if (!is_array($conference['Upcoming Location']) && in_array(strtoupper($conference['Upcoming Location']), $tbd_fields_options)) {
         $tbd_fields['Upcoming Location'] = strtoupper($conference['Upcoming Location']);
       }
       else {
@@ -13943,7 +13949,7 @@ function gv_misc_createNode_conference($conference) {
   
   if (!empty($conference['Twitter Page'])) {
     
-    if (in_array(strtoupper($conference['Twitter Page']), $tbd_fields_options)) {
+    if (!is_array($conference['Twitter Page']) && in_array(strtoupper($conference['Twitter Page']), $tbd_fields_options)) {
         $tbd_fields['Twitter Page'] = strtoupper($conference['Twitter Page']);
       }
       else {
@@ -13963,7 +13969,7 @@ function gv_misc_createNode_conference($conference) {
   
   if (!empty($conference['Hashtag'])) {
     
-    if (in_array(strtoupper($conference['Hashtag']), $tbd_fields_options)) {
+    if (!is_array($conference['Hashtag']) && in_array(strtoupper($conference['Hashtag']), $tbd_fields_options)) {
         $tbd_fields['Hashtag'] = strtoupper($conference['Hashtag']);
       }
       else {
@@ -13989,7 +13995,7 @@ function gv_misc_createNode_conference($conference) {
   
   if (!empty($conference['Upcoming Date'])) {
     
-    if (in_array(strtoupper($conference['Upcoming Date']), $tbd_fields_options)) {
+    if (!is_array($conference['Upcoming Date']) && in_array(strtoupper($conference['Upcoming Date']), $tbd_fields_options)) {
         $tbd_fields['Upcoming Date'] = strtoupper($conference['Upcoming Date']);
       }
       else {
