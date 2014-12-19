@@ -13351,6 +13351,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   }
 
               } // End of City or Industry
+              /*
               else {
                 // State or country
 
@@ -13372,13 +13373,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.field_state_or_country_tid = td1.tid');
                   $query->fields('st2', array('field_state_or_country_tid'));
                   
-                  
-                  
                   //$query->leftJoin('node', 'n', 'n.nid = t.nid');
                   $query->leftJoin('node', 'n', 'n.nid = st2.entity_id');
-                  
-                  
-                  
                   $query->fields('n', array('nid', 'title'));
                   $query->condition('n.status', 1);
                   $query->condition('n.type', 'conference', '=');
@@ -13439,7 +13435,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                     $query->range(0, $results_num);
                   }
               } // Else of // State
-              
+              */
 
               if ($results = $query->execute()->fetchAllAssoc('nid')) {
               
