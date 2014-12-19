@@ -13830,6 +13830,8 @@ function gv_misc_createNode_conference($conference) {
   
   global $user;
   
+  $tbd_fields = array();
+  $tbd_fields_options = array('TBD', 'N/A');
   $node = new stdClass();
   $node->type = 'conference';
   node_object_prepare($node);
@@ -13854,11 +13856,13 @@ function gv_misc_createNode_conference($conference) {
   $node->body[$node->language][0]['safe_summary'] = '';
   $node->body[$node->language][0]['safe_value'] = check_plain($conference['Description']);
   
-  $node->field_conf_site[$node->language][0] = array(
-    'url' => is_array($conference['Site']) ? $conference['Site'][0] : $conference['Site'],
-    'title' => is_array($conference['Site']) ? $conference['Site'][1] : NULL,
-    'attributes' => array(),
-  );
+  if (!empty($conference['Site'])) {
+    $node->field_conf_site[$node->language][0] = array(
+      'url' => is_array($conference['Site']) ? $conference['Site'][0] : $conference['Site'],
+      'title' => is_array($conference['Site']) ? $conference['Site'][1] : NULL,
+      'attributes' => array(),
+    );
+  }
   /*
   $node->field_conf_link[$node->language][0] = array(
     'value' => $conference['Site'],
@@ -13866,34 +13870,45 @@ function gv_misc_createNode_conference($conference) {
     'format' => 'plain_text',
   );
   */
+  
 
-  $city = $state_or_country = NULL;
-  
-  $location = explode(',', $conference['Upcoming Location']);
-  if (empty($location[1])) {
-    $city = $conference['Upcoming Location'];
-  }
-  else {
-    $city = trim($location[0]); 
-    $state_or_country = trim($location[1]);
-  } 
-  
-  if($city && $tids = gv_misc_findOutTids($city, 'Cities')) {
-    foreach ($tids as $tid) {
-      $node->field_city[$node->language][] = array(
-        'tid' => $tid,
-      );
-    }
-  }
-  
-  if($state_or_country && $tids = gv_misc_findOutTids($state_or_country, 'States and Countries')) {
-    foreach ($tids as $tid) {
-      $node->field_state_or_country[$node->language][] = array(
-        'tid' => $tid,
-      );
-    }
-  }
-  
+  if (!empty($conference['Upcoming Location'])) {
+    
+      if (in_array(strtoupper($conference['Upcoming Location']), $tbd_fields_options)) {
+        $tbd_fields['Upcoming Location'] = strtoupper($conference['Upcoming Location']);
+      }
+      else {
+    
+            $city = $state_or_country = NULL;
+
+            $location = explode(',', $conference['Upcoming Location']);
+            if (empty($location[1])) {
+              $city = $conference['Upcoming Location'];
+            }
+            else {
+              $city = trim($location[0]); 
+              $state_or_country = trim($location[1]);
+            } 
+
+            if($city && $tids = gv_misc_findOutTids($city, 'Cities')) {
+              foreach ($tids as $tid) {
+                $node->field_city[$node->language][] = array(
+                  'tid' => $tid,
+                );
+              }
+            }
+
+            if($state_or_country && $tids = gv_misc_findOutTids($state_or_country, 'States and Countries')) {
+              foreach ($tids as $tid) {
+                $node->field_state_or_country[$node->language][] = array(
+                  'tid' => $tid,
+                );
+              }
+            }
+
+      } // End of Else of if (in_array(strtoupper($conference['Upcoming Location']), $tbd_fields_options)) {
+      
+  } // End of if (!empty($conference['Upcoming Location'])) {
   
   if($conference['Applicable Industry'] && $tids = gv_misc_findOutTids($conference['Applicable Industry'], 'Industries')) {
     foreach ($tids as $tid) {
@@ -13901,7 +13916,8 @@ function gv_misc_createNode_conference($conference) {
         'tid' => $tid,
       );
     }
-  }
+    
+  } // End of if (!empty($conference['Upcoming Location'])) {
   
   /*
   {
@@ -13924,22 +13940,40 @@ function gv_misc_createNode_conference($conference) {
   }
   */
   
-  $node->field_conf_twitter[$node->language][0] = array(
-    'url' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][0] : $conference['Twitter Page'],
-    'title' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][1] : NULL,
-    'attributes' => array(),
-  );
+  
+  if (!empty($conference['Twitter Page'])) {
+    
+    if (in_array(strtoupper($conference['Twitter Page']), $tbd_fields_options)) {
+        $tbd_fields['Twitter Page'] = strtoupper($conference['Twitter Page']);
+      }
+      else {
+          $node->field_conf_twitter[$node->language][0] = array(
+            'url' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][0] : NULL,
+            'title' => is_array($conference['Twitter Page']) ? $conference['Twitter Page'][1] : $conference['Twitter Page'],
+            'attributes' => array(),
+          );
+      }
+      
+  }
 //  $node->field_conf_twitter[$node->language][0] = array(
 //    'value' => $conference['Twitter Page'],
 //    'safe_value' => check_plain($conference['Twitter Page']),
 //    'format' => NULL,
 //  );
   
-  $node->field_conf_twitter_hashtag[$node->language][0] = array(
-    'url' => is_array($conference['Hashtag']) ? $conference['Hashtag'][0] : $conference['Hashtag'],
-    'title' => is_array($conference['Hashtag']) ? $conference['Hashtag'][1] : NULL,
-    'attributes' => array(),
-  );
+  if (!empty($conference['Hashtag'])) {
+    
+    if (in_array(strtoupper($conference['Hashtag']), $tbd_fields_options)) {
+        $tbd_fields['Hashtag'] = strtoupper($conference['Hashtag']);
+      }
+      else {
+          $node->field_conf_twitter_hashtag[$node->language][0] = array(
+            'url' => is_array($conference['Hashtag']) ? $conference['Hashtag'][0] : NULL,
+            'title' => is_array($conference['Hashtag']) ? $conference['Hashtag'][1] : $conference['Hashtag'],
+            'attributes' => array(),
+          );
+      }
+  }
 //  $node->field_conf_twitter_hashtag[$node->language][0] = array(
 //    'value' => $conference['Hashtag'],
 //    'safe_value' => check_plain($conference['Hashtag']),
@@ -13955,25 +13989,32 @@ function gv_misc_createNode_conference($conference) {
   
   if (!empty($conference['Upcoming Date'])) {
     
-    $dates = gv_misc_parseDateRange($conference['Upcoming Date']);
-    /*
-    $dates = explode(' - ', $conference['Upcoming Date']);
-    if (!empty($dates[1])) {
-      $date1 = date('Y-m-d', strtotime($dates[0])) . '  00:00:00';
-      $date2 = date('Y-m-d', strtotime($dates[1])) . '  00:00:00';
-    }
-    else {
-      $date1 = $date2 = date('Y-m-d', strtotime($conference['Upcoming Date'])) . '  00:00:00';
-    }
-    */
-    $node->field_conf_date[$node->language][0] = array(
-      'value' => date('Y-m-d', strtotime($dates['first']['month'] . ' ' . $dates['first']['day'] . ', ' . $dates['first']['year'])) . '  00:00:00', //$dates['first']['year'] . '-' . $dates['first']['month'] . '-' . $dates['first']['day'] . ' 00:00:00', //$date1,
-      'value2' => date('Y-m-d', strtotime($dates['second']['month'] . ' ' . $dates['second']['day'] . ', ' . $dates['second']['year'])) . '  00:00:00', //$dates['second']['year'] . '-' . $dates['second']['month'] . '-' . $dates['second']['day'] . ' 00:00:00', //$date2,
-      'timezone' => 'America/New York',
-      'timezone_db' => 'America/New York',
-      'date_type' => 'datetime',
-    );
-  }
+    if (in_array(strtoupper($conference['Upcoming Date']), $tbd_fields_options)) {
+        $tbd_fields['Upcoming Date'] = strtoupper($conference['Upcoming Date']);
+      }
+      else {
+        
+          $dates = gv_misc_parseDateRange($conference['Upcoming Date']);
+          /*
+          $dates = explode(' - ', $conference['Upcoming Date']);
+          if (!empty($dates[1])) {
+            $date1 = date('Y-m-d', strtotime($dates[0])) . '  00:00:00';
+            $date2 = date('Y-m-d', strtotime($dates[1])) . '  00:00:00';
+          }
+          else {
+            $date1 = $date2 = date('Y-m-d', strtotime($conference['Upcoming Date'])) . '  00:00:00';
+          }
+          */
+          $node->field_conf_date[$node->language][0] = array(
+            'value' => date('Y-m-d', strtotime($dates['first']['month'] . ' ' . $dates['first']['day'] . ', ' . $dates['first']['year'])) . '  00:00:00', //$dates['first']['year'] . '-' . $dates['first']['month'] . '-' . $dates['first']['day'] . ' 00:00:00', //$date1,
+            'value2' => date('Y-m-d', strtotime($dates['second']['month'] . ' ' . $dates['second']['day'] . ', ' . $dates['second']['year'])) . '  00:00:00', //$dates['second']['year'] . '-' . $dates['second']['month'] . '-' . $dates['second']['day'] . ' 00:00:00', //$date2,
+            'timezone' => 'America/New York',
+            'timezone_db' => 'America/New York',
+            'date_type' => 'datetime',
+          );
+      }
+    
+  } // End of if (!empty($conference['Upcoming Date'])) {
   
   /*
   $node->field_extra_data[$node->language][0] = array(
@@ -14004,7 +14045,13 @@ function gv_misc_createNode_conference($conference) {
     $node->field_tags[$node->language][] = array('tid' => $value->drupal_tid);
   }
   */
-  
+  if (!empty($tbd_fields)) {
+    
+    foreach ($tbd_fields as $key => $value) {
+      $node->field_tbd_fields[$node->language][] = array('value' => $key . ' - ' . $value);  
+    }
+    
+  }
   
   //$alias = pathauto_create_alias('node', 'return', 'node/' . $node->nid, array('node' => $node), $node->type);
   $alias = pathauto_create_alias('node', 'return', NULL, array('node' => $node), $node->type);
