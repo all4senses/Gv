@@ -13276,14 +13276,15 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   
                   $post['term'] = explode(' (', $post['term']);
                   //$target = 'state';
-                  $target = srtolower(trim($post['term'][1], ')')); // 'state' or 'country'
+                  $target = 'state_or_country';
+                  //$target = srtolower(trim($post['term'][1], ')')); // 'state' or 'country'
                   $vid = 10; // states_and_countries
                   //$post['term'] = array_search(strtolower($post['term'][0]),array_map('strtolower', $states));  //array_search($post['term'][0], $states);
                   $post['term'] = $post['term'][1];
                 }
               }
           
-              if ($target == 'industry' || $target == 'city') {
+              if ($target == 'industry' || $target == 'city' || $target == 'state_or_country') {
                 
                   // Search for all conferences (a list) with a tag $post['term'].
                   $query = db_select('taxonomy_term_data', 'td');
@@ -13371,8 +13372,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.field_state_or_country_tid = td1.tid');
                   $query->fields('st2', array('field_state_or_country_tid'));
                   
+                  
+                  
                   //$query->leftJoin('node', 'n', 'n.nid = t.nid');
                   $query->leftJoin('node', 'n', 'n.nid = st2.entity_id');
+                  
+                  
+                  
                   $query->fields('n', array('nid', 'title'));
                   $query->condition('n.status', 1);
                   $query->condition('n.type', 'conference', '=');
@@ -13386,8 +13392,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
                   // Set above...
                   // State/country via taxonomy
-                  //$query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.entity_id = n.nid');
-                  //$query->fields('st2', array('field_state_or_country_tid'));
+                  $query->leftJoin('field_data_field_state_or_country', 'st2', 'st2.entity_id = n.nid');
+                  $query->fields('st2', array('field_state_or_country_tid'));
 
                   $query->leftJoin('taxonomy_term_data', 'tdt2', 'tdt2.tid = st2.field_state_or_country_tid');
                   $query->addField('tdt2', 'name', 'state_or_country');
