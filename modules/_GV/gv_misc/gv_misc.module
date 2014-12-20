@@ -13047,10 +13047,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $dates = date('F j\t\h\, Y', strtotime($result->field_conf_date_value));
               }
               else {
-                $date1 = strtotime($result->field_conf_date_value);
-                $date2 = strtotime($result->field_conf_date_value2);
                 
-                $dates = gv_misc_dateRangeFormatter($date1, $date2);
+                $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
+                
+                //$date1 = strtotime($result->field_conf_date_value);
+                //$date2 = strtotime($result->field_conf_date_value2);
+                
+                
                 
                 /*
                 if ($date1 > $date2) {
