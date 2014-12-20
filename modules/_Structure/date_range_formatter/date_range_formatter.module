@@ -97,8 +97,18 @@ function date_range_formatter_field_formatter_view($entity_type, $entity, $field
 
   switch ($formatter) {
     case 'date_range_without_time':
+      dpm($items);
       foreach ($items as $delta => $item) {
         $date_item = date_formatter_process('format_interval', $entity_type, $entity, $field, $instance, $langcode, $item, $display);
+        
+        dpm($entity_type);
+        dpm($entity);
+        dpm($field);
+        dpm($instance);
+        dpm($langcode);
+        dpm($item);
+        dpm($display);
+        dpm($date_item);
         if (empty($item['value2']) || $item['value'] == $item['value2']) {
           $element[$delta] = array('#markup' => htmlspecialchars(format_date(strtotime($date_item['value']['formatted_iso']), 'custom', $settings['single'])));
         }

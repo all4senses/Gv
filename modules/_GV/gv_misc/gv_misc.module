@@ -1551,6 +1551,8 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   dpm($dates = gv_misc_parseDateRange('September 28-October 1, 2015'));
   */
   
+  
+  /*
   $query = db_select('node', 'n')
     ->fields('n', array('title', 'nid', 'type'));
   //$query->fields('mi', array('field_main_image_value'));
@@ -1570,7 +1572,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   dpm($results);
  
-  node_delete_multiple($results);
+  //node_delete_multiple($results);
  
  
   $query = db_select('node', 'n')
@@ -1581,7 +1583,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   $results = $query->execute()->fetchCol();
   
   dpm($results);
- 
+ */
   
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
@@ -13217,7 +13219,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
               // V1
               // Works!
-              $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid) SEPARATOR ',')", 'terms');
+              $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
               // V2
               // Works excellently!
               //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
@@ -13583,14 +13585,14 @@ function gv_misc_conferenceAlreadyExists($conference) {
 
 function gv_misc_findOutTids($source_tags, $voc_name = 'Industries') {
   
-  if (empty($source_tags)) {
+  if (empty(trim($source_tags))) {
     return NULL;
   }
   
   $tids = NULL;
   $tags = explode(',', $source_tags);
   if (empty($tags[1])) {
-    $tags[0] = $source_tags; 
+    $tags[0] = trim($source_tags); 
   }
   
   $voc_name_to_vid = array(
@@ -13655,7 +13657,7 @@ function gv_misc_findOutTids($source_tags, $voc_name = 'Industries') {
   );
   
   foreach ($tags as $tag) {
-    
+    $tag = trim($tag);
     if ($voc_name == 'States and Countries' && isset($states[$tag])) {
       $abbreviation = $tag;
       $tag = $states[$tag];
@@ -13670,7 +13672,7 @@ function gv_misc_findOutTids($source_tags, $voc_name = 'Industries') {
     $query = db_select('taxonomy_term_data', 'td')
         ->fields('td', array('tid'))
         ->condition('td.vid', $vid)
-        ->condition('td.name', trim($tag))
+        ->condition('td.name', $tag)
         ->execute();
 
     if ($tid = $query->fetchField()) {
