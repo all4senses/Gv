@@ -13042,7 +13042,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
             
             
             $query->leftJoin('field_data_field_tbd_fields', 'tbd1', 'tbd1.entity_id = n.nid');
-            $query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd2 WHERE tbd2.entity_id = tbd2.entity_id) SEPARATOR ',')", 'tbd_fields');
+            $query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd2 WHERE tbd2.entity_id = tbd1.entity_id) SEPARATOR ',')", 'tbd_fields');
             
             
             
