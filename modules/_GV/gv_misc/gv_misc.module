@@ -14548,7 +14548,7 @@ function gv_misc_dateRangeFormatter($date1, $date2) {
   }
   else {
     $date1 = strtotime($date1);
-    $date2 = strtotime($date1);
+    $date2 = strtotime($date2);
 
     $format = $settings['several_years'];
     if (date('Y', $date1) === date('Y', $date2)) {
