@@ -13037,10 +13037,19 @@ function gv_misc_getConferences_autocomplete_ajax() {
             //$query->fields('th', array('field_conf_twitter_hashtag_value'));
             $query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
             
+            // TBD fields
+            $query->addExpression("GROUP_CONCAT( (SELECT name FROM field_data_field_conf_twitter_hashtag AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd');
+            //$query->leftJoin('field_data_field_tbd_fields', 'tbd', 'tbd.entity_id = n.nid');
+            //$query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
+            
+            
             
             if($result = $query->execute()->fetchObject()) {
               
               // Found by an exact conference title.
+              
+              
+              watchdog('GV TBD for nid ' . $result->nid, $result->tbd, NULL, WATCHDOG_WARNING);
               
             /*  
               global $user;
@@ -13934,6 +13943,15 @@ function gv_misc_createNode_conference($conference) {
             else {
               $city = trim($location[0]); 
               $state_or_country = trim($location[1]);
+              
+              if (in_array(strtoupper($city), $tbd_fields_options)) {
+                $tbd_fields['City'] = strtoupper($city);
+                $city = NULL;
+              }
+              if (in_array(strtoupper($state_or_country), $tbd_fields_options)) {
+                $tbd_fields['State or Country'] = strtoupper($state_or_country);
+                $state_or_country = NULL;
+              }
             } 
 
             if($city && $tids = gv_misc_findOutTids($city, 'Cities')) {
