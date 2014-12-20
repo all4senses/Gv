@@ -1552,7 +1552,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   */
   
   
-  
+  /*
   $query = db_select('node', 'n')
     ->fields('n', array('title', 'nid', 'type'));
   //$query->fields('mi', array('field_main_image_value'));
@@ -1561,7 +1561,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   $results = $query->execute()->fetchAllAssoc('nid');
   
   dpm($results);
-  
+  */
   
    $query = db_select('node', 'n')
     ->fields('n', array('nid'));
@@ -1572,7 +1572,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   dpm($results);
  
-  //node_delete_multiple($results);
+  node_delete_multiple($results);
  
  
   $query = db_select('node', 'n')
