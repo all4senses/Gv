@@ -13038,11 +13038,19 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
             
             // TBD fields
-            $query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd_fields');
-            //$query->leftJoin('field_data_field_tbd_fields', 'tbd', 'tbd.entity_id = n.nid');
-            //$query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
+            //$query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd_fields');
             
             
+            $query->leftJoin('field_data_field_tbd_fields', 'tbd1', 'tbd1.entity_id = n.nid');
+            $query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd2 WHERE tbd2.entity_id = tbd2.entity_id) SEPARATOR ',')", 'tbd_fields');
+            
+            
+            
+            
+            //$query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+            //$query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
+              
+              
             
             if($result = $query->execute()->fetchObject()) {
               
