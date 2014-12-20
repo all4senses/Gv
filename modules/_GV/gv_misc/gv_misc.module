@@ -13038,7 +13038,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
             
             // TBD fields
-            $query->addExpression("GROUP_CONCAT( (SELECT name FROM field_data_field_conf_twitter_hashtag AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd');
+            $query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_conf_twitter_hashtag AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd');
             //$query->leftJoin('field_data_field_tbd_fields', 'tbd', 'tbd.entity_id = n.nid');
             //$query->fields('th', array('field_conf_twitter_hashtag_url', 'field_conf_twitter_hashtag_title'));
             
