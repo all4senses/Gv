@@ -14578,6 +14578,10 @@ function gv_misc_ckeditor_plugin() {
 
 function gv_misc_dateRangeFormatter($date1 /*str*/, $date2/*str*/) {
   
+  if (empty($date1)) {
+    return NULL;
+  }
+  
   $settings = array(
         'single' => 'F j, Y',
         'one_month' => 'F j-{j}, Y',
