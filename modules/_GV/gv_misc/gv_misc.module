@@ -1552,7 +1552,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   */
   
   
-  /*
+  
   $query = db_select('node', 'n')
     ->fields('n', array('title', 'nid', 'type'));
   //$query->fields('mi', array('field_main_image_value'));
@@ -1583,12 +1583,12 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   $results = $query->execute()->fetchCol();
   
   dpm($results);
- */
+ 
   
+  /*
   $dates = gv_misc_dateRangeFormatter('2015-01-06 00:00:00', '2015-01-09 00:00:00');
-  
   dpm($dates);
-  
+  */
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
 
@@ -13675,13 +13675,16 @@ function gv_misc_findOutTids($source_tags, $voc_name = 'Industries') {
   );
   
   foreach ($tags as $tag) {
+    
     $tag = trim($tag);
+    
+    // Set if this is a State or a Country?
     if ($voc_name == 'States and Countries' && isset($states[$tag])) {
       $abbreviation = $tag;
       $tag = $states[$tag];
     }
     else {
-      $abbreviation = $tag;
+      $abbreviation = NULL;
     }
     
     
