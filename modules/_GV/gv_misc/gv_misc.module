@@ -1585,7 +1585,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   dpm($results);
  */
   
-  $dates = gv_misc_dateRangeFormatter('2015-01-06T00:00:00-05:00', '2015-01-09T00:00:00-05:00');
+  $dates = gv_misc_dateRangeFormatter('2015-01-06 00:00:00', '2015-01-09 00:00:00');
   
   dpm($dates);
   
@@ -14534,13 +14534,13 @@ function gv_misc_ckeditor_plugin() {
 }
 
 
-function gv_misc_dateRangeFormatter($date1, $date2) {
+function gv_misc_dateRangeFormatter($date1 /*str*/, $date2/*str*/) {
   
   $settings = array(
-        'single' => 'd F Y',
-        'one_month' => 'd - {d} F Y',
-        'several_months' => 'd F - {d} {F} Y',
-        'several_years' => 'd F Y - {d} {F} {Y}',
+        'single' => 'F j, Y',
+        'one_month' => 'F j-{j}, Y',
+        'several_months' => 'F j - {F} {j}, Y',
+        'several_years' => 'F j, Y - {F} {j}, {Y}',
       );
   
   if (empty($date2) || $date1 == $date2) {
@@ -14558,8 +14558,6 @@ function gv_misc_dateRangeFormatter($date1, $date2) {
       $format = $settings['one_month'];
     }
 
-    dpm($date1);
-    dpm($date2);
     $date_str = format_date($date1, 'custom', preg_replace('/\{([a-zA-Z])\}/', '{\\\$1}', $format));
 
     $matches = array();
