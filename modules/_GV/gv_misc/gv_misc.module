@@ -13046,28 +13046,26 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               */
               
+              /*
               if ($result->field_conf_date_value == $result->field_conf_date_value2) {
                 $dates = date('F j\t\h\, Y', strtotime($result->field_conf_date_value));
               }
               else {
                 
-                $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
-                
                 //$date1 = strtotime($result->field_conf_date_value);
                 //$date2 = strtotime($result->field_conf_date_value2);
                 
-                
-                
-                /*
                 if ($date1 > $date2) {
                   $dates = date('F j\t\h\, Y', $date1);
                 }
                 else {
                   $dates = date('F j\t\h\, Y', $date1) . ' - ' . $dates = date('F j\t\h\, Y', $date2);
                 }
-                */
+                
               }
+              */
               
+              $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
               
               if ($result->field_conf_site_url) {
                 if ($result->field_conf_site_title) {
@@ -13267,7 +13265,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       foreach ($terms as $term) {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
-                      
+
+                      /*
                       if ($result->field_conf_date_value == $result->field_conf_date_value2) {
                         $dates = date('M j\t\h\, Y', strtotime($result->field_conf_date_value));
                       }
@@ -13281,7 +13280,9 @@ function gv_misc_getConferences_autocomplete_ajax() {
                           $dates = '<div>' . date('M j\t\h\, Y', $date1) . ' - </div><div>' . $dates = date('M j\t\h\, Y', $date2) . '</div>';
                         }
                       }
+                      */
                       
+                      $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
                       
                       //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       
@@ -13508,6 +13509,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
                       
+                      /*
                       if ($result->field_conf_date_value == $result->field_conf_date_value2) {
                         $dates = date('M j\t\h\, Y', strtotime($result->field_conf_date_value));
                       }
@@ -13521,6 +13523,9 @@ function gv_misc_getConferences_autocomplete_ajax() {
                           $dates = '<div>' . date('M j\t\h\, Y', $date1) . ' - </div><div>' . $dates = date('M j\t\h\, Y', $date2) . '</div>';
                         }
                       }
+                      */
+                      
+                      $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
                       
                       //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
                       //$location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
