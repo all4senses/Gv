@@ -14121,7 +14121,7 @@ function gv_misc_createNode_conference($conference) {
     $tbd_fields_str = NULL;
     foreach ($tbd_fields as $key => $value) {
       $node->field_tbd_fields[$node->language][] = array('value' => $key . ' - ' . $value); 
-      $tbd_fields_str = ($tbd_fields_str ? ',' : '') . $key . ' - ' . $value;
+      $tbd_fields_str .= ($tbd_fields_str ? ',' : '') . $key . ' - ' . $value;
     }
     $node->field_tbd_fields_str[$node->language][0] = array(
       'value' => $tbd_fields_str,
