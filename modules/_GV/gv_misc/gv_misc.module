@@ -13044,20 +13044,45 @@ function gv_misc_getConferences_autocomplete_ajax() {
             //$query->leftJoin('field_data_field_tbd_fields', 'tbd1', 'tbd1.entity_id = n.nid');
             //$query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd2 WHERE tbd2.entity_id = tbd1.entity_id) SEPARATOR ',')", 'tbd_fields');
             
-            
-            
-            
+            // Working example... strange, it works, and above - not...
             //$query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
             //$query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
               
-              
+            $query->leftJoin('field_data_field_tbd_fields_str', 'tbd', 'tbd.entity_id = n.nid');
+            $query->fields('tbd', array('field_tbd_fields_str_value'));  
             
             if($result = $query->execute()->fetchObject()) {
               
               // Found by an exact conference title.
               
               
-              ////watchdog('GV TBD for nid ' . $result->nid, $result->tbd_fields, NULL, WATCHDOG_WARNING);
+              // Get TBD fields info
+              /*
+              Site - TBD|Site - TBD
+                Site - N/A
+                Twitter Page - TBD
+                Twitter Page - N/A
+                Hashtag - TBD
+                Hashtag - N/A
+                Upcoming Date - TBD
+                Upcoming Date - N/A
+                Upcoming Location - TBD
+                Upcoming Location - N/A
+                City - TBD
+                City - N/A
+                State or Country - TBD
+                State or Country - N/A
+              */
+              $tbd_fields = array();
+              if ($result->field_tbd_fields_str_value) {
+              $tbd_fields_str = explode(',', $result->field_tbd_fields_str_value);
+                foreach ($tbd_fields_str as $tbd) {
+                  $tbd = explode(' - ', $tbd);
+                  $tbd_fields[$tbd[0]] = $tbd[1];
+                }
+              }
+              
+              watchdog('GV TBD for nid ' . $result->nid, $result->field_tbd_fields_str_value, NULL, WATCHDOG_WARNING);
               
             /*  
               global $user;
@@ -13090,9 +13115,20 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               */
               
-              $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
+              if (isset($tbd_fields['Upcoming Date'])) {
+                $dates = $tbd_fields['Upcoming Date'];
+              }
+              else {
+                $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
+              }
               
-              if ($result->field_conf_site_url) {
+              
+              $url = NULL;
+              $more_details_button = NULL;
+              if (isset($tbd_fields['Site'])) {
+                $url = $tbd_fields['Site'];
+              }
+              elseif ($result->field_conf_site_url) {
                 if ($result->field_conf_site_title) {
                   $url_title = $result->field_conf_site_title;
                 }
@@ -13124,10 +13160,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $more_details_button = l('More Details', $result->field_conf_link_value, array('external' => TRUE, 'attributes' => array('target' => '_blank')));
               }
               */
-              else {
-                $url = NULL;
-                $more_details_button = NULL;
-              }
+    
               
               if ($result->field_conf_twitter_url) {
                 if (!empty($result->field_conf_twitter_hashtag_url )) {
