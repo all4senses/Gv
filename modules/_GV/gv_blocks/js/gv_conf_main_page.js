@@ -841,7 +841,12 @@
      save_sw = new_sw = false;
      
      if (cache[ 'content_conf_' + label ]) {
-        showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
+        //showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
+        
+        timerEmbed = setTimeout(function() {
+          showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
+        }
+        , 1000);
      }
      else {
        alert('No conference found with a title (or title containing) <' + label + '>');
