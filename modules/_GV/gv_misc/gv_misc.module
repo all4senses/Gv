@@ -12973,6 +12973,16 @@ function gv_misc_getConferences_autocomplete_ajax() {
   elseif ($post['op'] == 'get') {
     
         if ($post['type'] == 'title') {
+          
+          $out_array = array(
+              'type' => 'conference',
+              'out' => 'xxx',
+          );
+          
+          drupal_json_output($out_array);
+          
+          return;
+          
           //return NULL;
           
 //              $out_array[] = array(
