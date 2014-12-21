@@ -13056,6 +13056,17 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->leftJoin('field_data_field_tbd_fields_str', 'tbd', 'tbd.entity_id = n.nid');
             $query->fields('tbd', array('field_tbd_fields_str_value'));  
             
+            
+            $out_array = array(
+                  'type' => 'conference',
+                  'out' => 'yyy',
+              );
+
+              drupal_json_output($out_array);
+
+              return;
+              
+              
             if($result = $query->execute()->fetchObject()) {
               
               // Found by an exact conference title.
@@ -13144,14 +13155,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               
               
-              $out_array = array(
-                  'type' => 'conference',
-                  'out' => 'yyy',
-              );
-
-              drupal_json_output($out_array);
-
-              return;
+              
               
               //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
               //$state_or_country = $result->field_state_value;
