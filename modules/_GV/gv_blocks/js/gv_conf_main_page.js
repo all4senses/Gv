@@ -970,9 +970,16 @@
  
  function showConfInPopUp(html_data, popup_stick_to_left) {
    
-  while (cb_closing_in_progress) {
-    ; // Wait until the prev cb will be closed.
-  }
+//  while (cb_closing_in_progress) {
+//    ; // Wait until the prev cb will be closed.
+//  }
+   
+   if (cb_closing_in_progress){
+     console.log('cb_closing_in_progress=' + '1');
+   }
+   else {
+     console.log('cb_closing_in_progress=' + '0');
+   }
    
   popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false; 
    
