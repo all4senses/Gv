@@ -13060,15 +13060,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
             if($result = $query->execute()->fetchObject()) {
               
               // Found by an exact conference title.
-              
-              
-            
-              
-              
-              // Get TBD fields info
-              $tbd_fields = gv_misc_parseTBDfieldsFromStr($result);
-              
-            
+
 //              global $user;
 //              if ($user->uid == 1) {
 //                $result->field_conf_twitter_value = '@Conference';
@@ -13079,16 +13071,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //                $result->field_conf_price_value = '99.99';
 //              }
               
-              
-//              $out_array = array(
-//                  'type' => 'conference',
-//                  'out' => 'yyy222' . (!empty($result->field_tbd_fields_str_value) ? $result->field_tbd_fields_str_value : ' zzz'),
-//              );
-//
-//              drupal_json_output($out_array);
-//
-//              return;
-              
+              // Get TBD fields info
+              $tbd_fields = gv_misc_parseTBDfieldsFromStr($result);
               
               if (isset($tbd_fields['Upcoming Date'])) {
                 $dates = $tbd_fields['Upcoming Date'];
@@ -13209,30 +13193,30 @@ function gv_misc_getConferences_autocomplete_ajax() {
               // Search for all conferences (a list) containing a term in titles.
 
               // Doc on group_concast
-              
-//                http://drupal.stackexchange.com/questions/39672/drupal-dynamic-query-with-group-concat
-//
-//                http://www.percona.com/blog/2013/10/22/the-power-of-mysqls-group_concat/
-//
-//                http://www.zimplicit.se/en/knowledge/mysql-group-concat-join-select
-//
-//                http://stackoverflow.com/questions/276927/can-i-concatenate-multiple-mysql-rows-into-one-field
-//
-//
-//
-//
-//                http://drupal.stackexchange.com/questions/19032/d7-bug-with-db-select-addexpression-and-having-conditions
-//                http://drupal.stackexchange.com/questions/100229/what-is-the-difference-between-havingcondition-and-having
-//                http://drupal.stackexchange.com/questions/33609/how-to-write-a-drupal-7-query-with-count-and-having-properties
-//
-//                http://bugs.mysql.com/bug.php?id=3543
-//
-//                http://stackoverflow.com/questions/19311679/sql-group-concat-and-subquery
-//
-//                http://www.dbforums.com/showthread.php?1655801-Subquerry-inside-GROUP_CONCAT
-//
-//                http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.html
+              /*
+                http://drupal.stackexchange.com/questions/39672/drupal-dynamic-query-with-group-concat
 
+                http://www.percona.com/blog/2013/10/22/the-power-of-mysqls-group_concat/
+
+                http://www.zimplicit.se/en/knowledge/mysql-group-concat-join-select
+
+                http://stackoverflow.com/questions/276927/can-i-concatenate-multiple-mysql-rows-into-one-field
+
+
+
+
+                http://drupal.stackexchange.com/questions/19032/d7-bug-with-db-select-addexpression-and-having-conditions
+                http://drupal.stackexchange.com/questions/100229/what-is-the-difference-between-havingcondition-and-having
+                http://drupal.stackexchange.com/questions/33609/how-to-write-a-drupal-7-query-with-count-and-having-properties
+
+                http://bugs.mysql.com/bug.php?id=3543
+
+                http://stackoverflow.com/questions/19311679/sql-group-concat-and-subquery
+
+                http://www.dbforums.com/showthread.php?1655801-Subquerry-inside-GROUP_CONCAT
+
+                http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.html
+              */  
                
 
               $query = db_select('node', 'n');
@@ -13272,6 +13256,24 @@ function gv_misc_getConferences_autocomplete_ajax() {
               $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
               $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
 
+              
+              
+              
+              // TBD fields
+              // Doesn't work...
+              //$query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd_fields');
+              // Doesn't work...
+              //$query->leftJoin('field_data_field_tbd_fields', 'tbd1', 'tbd1.entity_id = n.nid');
+              //$query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd2 WHERE tbd2.entity_id = tbd1.entity_id) SEPARATOR ',')", 'tbd_fields');
+
+              // Working example... strange, it works, and above - not...
+              //$query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+              //$query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
+
+              $query->leftJoin('field_data_field_tbd_fields_str', 'tbd', 'tbd.entity_id = n.nid');
+              $query->fields('tbd', array('field_tbd_fields_str_value'));  
+            
+            
               $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
 
               $query->groupBy('n.nid');
@@ -13293,16 +13295,22 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $query->range(0, $results_num);
               }
 
-              if ($result = $query->execute()->fetchAllAssoc('nid')) {
+              if ($results = $query->execute()->fetchAllAssoc('nid')) {
               
                   $conferences_list = '<table id="side-table"><thead><th class="name"><div class="icon"></div>NAME</th><th class="industry"><div class="icon"></div>INDUSTRY</th><th class="dates"><div class="icon"></div>DATES</th><th class="location"><div class="icon"></div>LOCATION</th></thead><tbody>';
                   
-                  foreach ($result as $result) {
+                  foreach ($results as $result) {
 //                    $conferences_list[] = array(
 //                        'value' => $result->nid,
 //                        'label' => $result->title,
 //                    );
                     
+                    
+                      // Get TBD fields info
+                      $tbd_fields = gv_misc_parseTBDfieldsFromStr($result);
+
+                      
+                      
                       $term_links = NULL;
                       // V2
                       // Works
@@ -13317,11 +13325,33 @@ function gv_misc_getConferences_autocomplete_ajax() {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
 
+                      if (isset($tbd_fields['Upcoming Date'])) {
+                        $dates = $tbd_fields['Upcoming Date'];
+                      }
+                      else {
+                        $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
+                      }
                       
-                      $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
                       
-                      $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
-                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
+                      //$state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+                      //$location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
+                      
+                      if (isset($tbd_fields['Upcoming Location'])) {
+                        $location = $tbd_fields['Upcoming Location'];
+                      }
+                      else {
+                        if (isset($tbd_fields['City'])) {
+                          $result->city = $tbd_fields['City'];
+                        }
+                        if (isset($tbd_fields['State or Country'])) {
+                          $state_or_country = $tbd_fields['State or Country'];
+                        }
+                        else {
+                          $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+                        }
+
+                        $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
+                      }
                       
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
                   }
@@ -13407,6 +13437,22 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $query->leftJoin('field_data_field_conf_date', 'da', 'da.entity_id = n.nid');
                   $query->fields('da', array('field_conf_date_value', 'field_conf_date_value2'));
 
+                  
+                  // TBD fields
+                  // Doesn't work...
+                  //$query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd WHERE tbd.entity_id = n.nid) SEPARATOR ',')", 'tbd_fields');
+                  // Doesn't work...
+                  //$query->leftJoin('field_data_field_tbd_fields', 'tbd1', 'tbd1.entity_id = n.nid');
+                  //$query->addExpression("GROUP_CONCAT( (SELECT field_tbd_fields_value FROM field_data_field_tbd_fields AS tbd2 WHERE tbd2.entity_id = tbd1.entity_id) SEPARATOR ',')", 'tbd_fields');
+
+                  // Working example... strange, it works, and above - not...
+                  //$query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
+                  //$query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
+
+                  $query->leftJoin('field_data_field_tbd_fields_str', 'tbd', 'tbd.entity_id = n.nid');
+                  $query->fields('tbd', array('field_tbd_fields_str_value'));  
+                  
+                  
                   $query->leftJoin('taxonomy_index', 'ti', 'ti.nid = n.nid');
 
 
@@ -13526,6 +13572,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //                        'label' => $result->title,
 //                    );
                     
+                    
+                      // Get TBD fields info
+                      $tbd_fields = gv_misc_parseTBDfieldsFromStr($result);
+
+                    
                       $term_links = NULL;
                       // V2
                       // Works
@@ -13539,32 +13590,33 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       foreach ($terms as $term) {
                         $term_links .= ($term_links ? ', ' : '') . '<span class="term-link">' . $term . '</span>';
                       }
-                      
-                      /*
-                      if ($result->field_conf_date_value == $result->field_conf_date_value2) {
-                        $dates = date('M j\t\h\, Y', strtotime($result->field_conf_date_value));
+                     
+                      if (isset($tbd_fields['Upcoming Date'])) {
+                        $dates = $tbd_fields['Upcoming Date'];
                       }
                       else {
-                        $date1 = strtotime($result->field_conf_date_value);
-                        $date2 = strtotime($result->field_conf_date_value2);
-                        if ($date1 > $date2) {
-                          $dates = date('M j\t\h\, Y', $date1);
+                        $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
+                      }
+                      
+                      //$state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+                      //$location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
+                      
+                      if (isset($tbd_fields['Upcoming Location'])) {
+                        $location = $tbd_fields['Upcoming Location'];
+                      }
+                      else {
+                        if (isset($tbd_fields['City'])) {
+                          $result->city = $tbd_fields['City'];
+                        }
+                        if (isset($tbd_fields['State or Country'])) {
+                          $state_or_country = $tbd_fields['State or Country'];
                         }
                         else {
-                          $dates = '<div>' . date('M j\t\h\, Y', $date1) . ' - </div><div>' . $dates = date('M j\t\h\, Y', $date2) . '</div>';
+                          $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
                         }
+
+                        $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
                       }
-                      */
-                      
-                      $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
-                      
-                      //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
-                      //$location = $result->city . ( ($result->city && $result->field_state_value) ? ', ' : '') . $result->field_state_value;
-                      
-                      $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
-                      $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
-                      
-                      
                       
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
