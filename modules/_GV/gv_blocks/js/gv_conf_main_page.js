@@ -768,7 +768,7 @@
    // Close prev colorbox, if opened.
    if (cb1) {
       $.fn.colorbox.close();
-      cb = null;
+      cb1 = null;
    }
           
     get_conf($(this).text());
@@ -805,7 +805,7 @@
    if (cb1) {
       //cb_closing_in_progress = true;
       $.fn.colorbox.close();
-      cb = null;
+      cb1 = null;
    }
     
    $("#top-loading-indicator").addClass('ui-autocomplete-loading');
