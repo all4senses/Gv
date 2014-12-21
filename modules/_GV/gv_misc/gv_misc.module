@@ -13094,8 +13094,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $dates = $tbd_fields['Upcoming Date'];
               }
               else {
-                //$dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
-                $dates = $result->field_conf_date_value . ' - ' . $result->field_conf_date_value2;
+                $dates = gv_misc_dateRangeFormatter($result->field_conf_date_value, $result->field_conf_date_value2);
+                //$dates = $result->field_conf_date_value . ' - ' . $result->field_conf_date_value2;
               }
               
               
