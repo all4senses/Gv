@@ -12972,8 +12972,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
   elseif ($post['op'] == 'get') {
     
         if ($post['type'] == 'title') {
-          return NULL;
-          /*
+          //return NULL;
+          
 //              $out_array[] = array(
 //                  'value' => 'aaa',
 //                  'label' => 'bbb',
@@ -13274,9 +13274,6 @@ function gv_misc_getConferences_autocomplete_ajax() {
               if ($results_num) {
                 $query->range(0, $results_num);
               }
-              
-              
-              
 
               if ($result = $query->execute()->fetchAllAssoc('nid')) {
               
@@ -13308,12 +13305,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
                       $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
                       
-                      
-                      
-                      
                       $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
-                    
-                    
                   }
                   
                   $conferences_list .= '</tbody></table>'
@@ -13324,11 +13316,11 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       'type' => 'list',
                       'out' => $conferences_list,
                   );
-              }
+              } // End of if ($result = $query->execute()->fetchAllAssoc('nid')) {
               
             }
             
-            */
+            
         } // End of if ($post['type'] == 'title') {
         elseif ($post['type'] == 'industry' || $post['type'] == 'city-state') {
           
