@@ -13057,32 +13057,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               
               
               // Get TBD fields info
-              /*
-              Site - TBD|Site - TBD
-                Site - N/A
-                Twitter Page - TBD
-                Twitter Page - N/A
-                Hashtag - TBD
-                Hashtag - N/A
-                Upcoming Date - TBD
-                Upcoming Date - N/A
-                Upcoming Location - TBD
-                Upcoming Location - N/A
-                City - TBD
-                City - N/A
-                State or Country - TBD
-                State or Country - N/A
-              */
-              $tbd_fields = array();
-              if ($result->field_tbd_fields_str_value) {
-              $tbd_fields_str = explode(',', $result->field_tbd_fields_str_value);
-                foreach ($tbd_fields_str as $tbd) {
-                  $tbd = explode(' - ', $tbd);
-                  $tbd_fields[$tbd[0]] = $tbd[1];
-                }
-              }
-              
-              watchdog('GV TBD for nid ' . $result->nid, $result->field_tbd_fields_str_value, NULL, WATCHDOG_WARNING);
+              $tbd_fields = gv_misc_parseTBDfieldsFromStr($result);
               
             /*  
               global $user;
@@ -13162,27 +13137,71 @@ function gv_misc_getConferences_autocomplete_ajax() {
               */
     
               
+              if (isset($tbd_fields['Twitter Page'])) {
+                $twitter = $tbd_fields['Twitter Page'];
+              }
+              elseif ($result->field_conf_twitter_title) {
+                $twitter = (strpos($result->field_conf_twitter_title, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_title;
+                if ($result->field_conf_twitter_url) {
+                  $twitter = l($twitter, $result->field_conf_twitter_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow')));
+                }
+              }
+              else {
+                $twitter = NULL;
+              }
+              
+              if (isset($tbd_fields['Hashtag'])) {
+                $hash = $tbd_fields['Hashtag'];
+              }
+              elseif ($result->field_conf_twitter_hashtag_title) {
+                $hash = (strpos($result->field_conf_twitter_hashtag_title, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_hashtag_title;
+                if ($result->field_conf_twitter_hashtag_url) {
+                  $hash = l($hash, $result->field_conf_twitter_hashtag_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow')));
+                }
+              }
+              else {
+                $hash = NULL;
+              }
+              
+              if ($twitter || $hash) {
+                $twitter = '<span class="nick">' . $twitter . '</span>'. ($twitter && $hash ? '<span> - </span>' : '') . '<span class="hash">' . $hash . '</span>';
+              }
+              
+              /*
               if ($result->field_conf_twitter_url) {
                 if (!empty($result->field_conf_twitter_hashtag_url )) {
-                  //$hash = '<span> - </span><span class="hash">' . (strpos($result->field_conf_twitter_hashtag_value, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_value . '</span>';
                   $hash = '<span> - </span><span class="hash">' . l((strpos($result->field_conf_twitter_hashtag_title, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_title, $result->field_conf_twitter_hashtag_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow'))) . '</span>';
                 }
                 else {
                   $hash = NULL;
                 }
-                //$twitter = '<span class="nick">' . (strpos($result->field_conf_twitter_value, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_value .  '</span>' . $hash;
                 $twitter = '<span class="nick">' . l((strpos($result->field_conf_twitter_title, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_title, $result->field_conf_twitter_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow'))) .  '</span>' . $hash;
               }
               else {
                 $twitter = NULL;
               }
+              */
+              
+              
               //$location = $result->field_conf_city_value . ( ($result->field_conf_city_value && $result->field_state_value) ? ', ' : '' ) . $result->field_state_value;
-              
               //$state_or_country = $result->field_state_value;
-              $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
               
-              $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
-              
+              if (isset($tbd_fields['Upcoming Location'])) {
+                $location = $tbd_fields['Upcoming Location'];
+              }
+              else {
+                if (isset($tbd_fields['City'])) {
+                  $result->city = $tbd_fields['City'];
+                }
+                if (isset($tbd_fields['State or Country'])) {
+                  $state_or_country = $tbd_fields['State or Country'];
+                }
+                else {
+                  $state_or_country = $result->abbr ? $result->abbr : $result->state_or_country;
+                }
+
+                $location = $result->city . ( ($result->city && $state_or_country) ? ', ' : '' ) . $state_or_country;
+              }
               
               $out_html = '
                     <div class="top">
