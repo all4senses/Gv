@@ -743,6 +743,7 @@
     
     
   cb1 = null;
+  cb_closing_in_progress = false;
       
   $('body').delegate('.term-link', 'click', function(event){
 // Replace with   
@@ -802,6 +803,7 @@
    
    // Close prev colorbox, if opened.
    if (cb1) {
+      cb_closing_in_progress = true;
       $.fn.colorbox.close();
       cb = null;
    }
@@ -968,6 +970,10 @@
  
  function showConfInPopUp(html_data, popup_stick_to_left) {
    
+  while (cb_closing_in_progress) {
+    ; // Wait until the prev cb will be closed.
+  }
+   
   popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false; 
    
    
@@ -1070,6 +1076,7 @@
               }); // End of animate of $('#cboxOverlay')
            }
            ,onClosed: function() {
+                  cb_closing_in_progress = true;
                   $(".ui-autocomplete-loading").removeClass('ui-autocomplete-loading');
                   $("#colorbox").removeClass('md-show');
                   //console.log('closed...');
@@ -1077,6 +1084,7 @@
                   turned_off = true;
                   // Return to Side Slide window, if the popup was called from a side slide window.
                   return_to_sidewindow_if_needed();
+                  cb_closing_in_progress = false;
                 }
          }); 
 
@@ -1145,12 +1153,14 @@
            }); // End of animate of $('#cboxOverlay')
         }
         ,onClosed: function() {
+               cb_closing_in_progress = true;
                $("#colorbox").removeClass('md-show');
                //console.log('closed...');
                $("body").css('overflow', 'inherit');
                turned_off = true;
                // Return to Side Slide window, if the popup was called from a side slide window.
                return_to_sidewindow_if_needed();
+               cb_closing_in_progress = false;
              }
       }); 
       
