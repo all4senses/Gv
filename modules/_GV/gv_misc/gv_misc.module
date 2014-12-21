@@ -14674,3 +14674,37 @@ function gv_misc_dateRangeFormatter($date1 /*str*/, $date2/*str*/) {
 
   return $date_str;
 }
+
+
+/*
+ * Get TBD fields info.
+ */
+function  gv_misc_parseTBDfieldsFromStr($query_result) {
+  $tbd_fields = array();
+  if ($query_result->field_tbd_fields_str_value) {
+  $tbd_fields_str = explode(',', $query_result->field_tbd_fields_str_value);
+    foreach ($tbd_fields_str as $tbd) {
+      $tbd = explode(' - ', $tbd);
+      $tbd_fields[$tbd[0]] = $tbd[1];
+    }
+  }
+
+  watchdog('GV TBD for nid ' . $query_result->nid, $query_result->field_tbd_fields_str_value, NULL, WATCHDOG_WARNING);
+  return $tbd_fields;
+   /*
+    Site - TBD|Site - TBD
+    Site - N/A
+    Twitter Page - TBD
+    Twitter Page - N/A
+    Hashtag - TBD
+    Hashtag - N/A
+    Upcoming Date - TBD
+    Upcoming Date - N/A
+    Upcoming Location - TBD
+    Upcoming Location - N/A
+    City - TBD
+    City - N/A
+    State or Country - TBD
+    State or Country - N/A
+  */
+}

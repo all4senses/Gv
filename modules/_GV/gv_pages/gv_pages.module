@@ -9406,36 +9406,3 @@ function gv_pages_gvSettings_form_submit(&$form, &$form_state) {
   //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
 }
 
-
-/*
- * Get TBD fields info.
- */
-function  gv_misc_parseTBDfieldsFromStr($query_result) {
-  $tbd_fields = array();
-  if ($result->field_tbd_fields_str_value) {
-  $tbd_fields_str = explode(',', $result->field_tbd_fields_str_value);
-    foreach ($tbd_fields_str as $tbd) {
-      $tbd = explode(' - ', $tbd);
-      $tbd_fields[$tbd[0]] = $tbd[1];
-    }
-  }
-
-  watchdog('GV TBD for nid ' . $result->nid, $result->field_tbd_fields_str_value, NULL, WATCHDOG_WARNING);
-  return $tbd_fields;
-   /*
-    Site - TBD|Site - TBD
-    Site - N/A
-    Twitter Page - TBD
-    Twitter Page - N/A
-    Hashtag - TBD
-    Hashtag - N/A
-    Upcoming Date - TBD
-    Upcoming Date - N/A
-    Upcoming Location - TBD
-    Upcoming Location - N/A
-    City - TBD
-    City - N/A
-    State or Country - TBD
-    State or Country - N/A
-  */
-}
