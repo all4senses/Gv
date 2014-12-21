@@ -834,13 +834,15 @@
    // Caching.
    
    if ( 'content_conf_' + label in cache ) {
+     
+     $(".ui-autocomplete-loading").removeClass('ui-autocomplete-loading');
      save_sw = new_sw = false;
+     
      if (cache[ 'content_conf_' + label ]) {
         showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
      }
      else {
        alert('No conference found with a title (or title containing) <' + label + '>');
-       
        return_to_sidewindow_if_needed();
      }
      return;
@@ -900,7 +902,8 @@
                   save_sw = new_sw = false;
                   
                   //console.log(data);
-                  $("input#conf, #top-loading-indicator").removeClass('ui-autocomplete-loading');
+                  //$("input#conf, #top-loading-indicator").removeClass('ui-autocomplete-loading');
+                  $(".ui-autocomplete-loading").removeClass('ui-autocomplete-loading');
                   
                   
                   
