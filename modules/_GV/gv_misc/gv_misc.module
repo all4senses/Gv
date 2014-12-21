@@ -13057,19 +13057,19 @@ function gv_misc_getConferences_autocomplete_ajax() {
             $query->fields('tbd', array('field_tbd_fields_str_value'));  
             
             
+            if($result = $query->execute()->fetchObject()) {
+              
+              // Found by an exact conference title.
+              
+              
             $out_array = array(
                   'type' => 'conference',
-                  'out' => 'yyy',
+                  'out' => 'yyy111',
               );
 
               drupal_json_output($out_array);
 
               return;
-              
-              
-            if($result = $query->execute()->fetchObject()) {
-              
-              // Found by an exact conference title.
               
               
               // Get TBD fields info
