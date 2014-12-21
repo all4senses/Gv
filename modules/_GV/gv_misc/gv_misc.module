@@ -13062,14 +13062,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               // Found by an exact conference title.
               
               
-            $out_array = array(
-                  'type' => 'conference',
-                  'out' => 'yyy111',
-              );
-
-              drupal_json_output($out_array);
-
-              return;
+            
               
               
               // Get TBD fields info
@@ -13087,6 +13080,14 @@ function gv_misc_getConferences_autocomplete_ajax() {
 //              }
               
               
+              $out_array = array(
+                  'type' => 'conference',
+                  'out' => 'yyy222',
+              );
+
+              drupal_json_output($out_array);
+
+              return;
               
               
               if (isset($tbd_fields['Upcoming Date'])) {
