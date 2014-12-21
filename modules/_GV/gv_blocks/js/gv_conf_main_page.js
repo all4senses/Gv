@@ -1070,6 +1070,7 @@
               }); // End of animate of $('#cboxOverlay')
            }
            ,onClosed: function() {
+                  $(".ui-autocomplete-loading").removeClass('ui-autocomplete-loading');
                   $("#colorbox").removeClass('md-show');
                   //console.log('closed...');
                   $("body").css('overflow', 'inherit');
