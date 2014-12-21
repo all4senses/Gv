@@ -803,7 +803,7 @@
    
    // Close prev colorbox, if opened.
    if (cb1) {
-      cb_closing_in_progress = true;
+      //cb_closing_in_progress = true;
       $.fn.colorbox.close();
       cb = null;
    }
