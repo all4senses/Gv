@@ -13082,7 +13082,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               
               $out_array = array(
                   'type' => 'conference',
-                  'out' => 'yyy222',
+                  'out' => 'yyy222' . $result->field_tbd_fields_str_value,
               );
 
               drupal_json_output($out_array);
