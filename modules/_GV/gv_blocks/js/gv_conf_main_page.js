@@ -994,7 +994,7 @@
    
   $('#cb-popup_1 #results_1').html(html_data);
   
-  $('.top .title span').textfill({
+  $('.top .textfill').textfill({
     maxFontPixels: 11
   });
 
