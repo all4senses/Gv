@@ -1003,20 +1003,22 @@
   
   //$(".top .textfill").bigText({maximumFontSize: 40});
   
-  if (jQuery('.top .textfill').height() > 40) {
-    var initial_font_size = 20;
+  //if (jQuery('.top .textfill').height() > 40) {
+    initial_font_size = 20;
     while(jQuery('.top .textfill').height() < 80) {
       initial_font_size++;
       
-      jQuery('.top .textfill').css('font-size', (initial_font_size) + 'px');
-      jQuery('.top .textfill').css('line-height', (initial_font_size) + 'px');
+      jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
+      jQuery('.top .textfill').css('line-height', initial_font_size + 'px');
       console.log('f:' + jQuery('.top .textfill').css('font-size'));
       console.log('h:' + jQuery('.top .textfill').height());
     }
-    jQuery('.top .textfill').css('font-size', (initial_font_size-1) + 'px');
+//    initial_font_size--;
+//    jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
+//    jQuery('.top .textfill').css('line-height', initial_font_size + 'px');
     console.log('f:' + jQuery('.top .textfill').css('font-size'));
-      console.log('h:' + jQuery('.top .textfill').height());
-  }
+    console.log('h:' + jQuery('.top .textfill').height());
+  //}
   
    //console.log('fill');                     
    
