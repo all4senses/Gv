@@ -29,8 +29,9 @@ CKEDITOR.editorConfig = function(config) {
   ////config.extraPlugins = 'oembed,widget,dragresize';
   config.extraPlugins = 'tableresize,tabletools,colordialog,dialog,dialogadvtab,div,dialogui'; //,showborders
   
+  // a4s Doesn't work for some reason...
   // For a definition in an external file.
-  config.stylesSet = 'gv_styles:http://getvoip.com/sites/all/modules/_Editor/ckeditor/ckeditor.gv_styles.js';
+  //config.stylesSet = 'gv_styles:http://getvoip.com/sites/all/modules/_Editor/ckeditor/ckeditor.gv_styles.js';
   
   
   /*
