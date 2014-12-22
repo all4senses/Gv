@@ -43,6 +43,8 @@ if(typeof(CKEDITOR) !== 'undefined') {
             { name : 'Superscript'		, element : 'sup' },
             */
 
+            { name : 'Table padding'	, element : 'table', styles : { 'border-collapse' : 'separate', 'border-spacing' : '35px' } },
+            
             { name : 'Marker: Yellow'	, element : 'span', styles : { 'background-color' : 'Yellow' } },
             { name : 'Marker: Green'	, element : 'span', styles : { 'background-color' : 'Lime' } },
 
