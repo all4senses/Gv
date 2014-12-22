@@ -842,7 +842,8 @@
      
      if (cache[ 'content_conf_' + label ]) {
         //showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
-        
+        //
+        // Set timeout to prevent closing popup before its opening.
         timerEmbed = setTimeout(function() {
           showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
         }
@@ -979,12 +980,12 @@
 //    ; // Wait until the prev cb will be closed.
 //  }
    
-   if (cb_closing_in_progress){
-     console.log('cb_closing_in_progress=' + '1');
-   }
-   else {
-     console.log('cb_closing_in_progress=' + '0');
-   }
+//   if (cb_closing_in_progress){
+//     console.log('cb_closing_in_progress=' + '1');
+//   }
+//   else {
+//     console.log('cb_closing_in_progress=' + '0');
+//   }
    
   popup_stick_to_left = typeof popup_stick_to_left !== 'undefined' ? popup_stick_to_left : false; 
    
@@ -1088,7 +1089,7 @@
               }); // End of animate of $('#cboxOverlay')
            }
            ,onClosed: function() {
-                  cb_closing_in_progress = true;
+                  //cb_closing_in_progress = true;
                   $(".ui-autocomplete-loading").removeClass('ui-autocomplete-loading');
                   $("#colorbox").removeClass('md-show');
                   //console.log('closed...');
@@ -1096,7 +1097,7 @@
                   turned_off = true;
                   // Return to Side Slide window, if the popup was called from a side slide window.
                   return_to_sidewindow_if_needed();
-                  cb_closing_in_progress = false;
+                  //cb_closing_in_progress = false;
                 }
          }); 
 
@@ -1165,14 +1166,14 @@
            }); // End of animate of $('#cboxOverlay')
         }
         ,onClosed: function() {
-               cb_closing_in_progress = true;
+               //cb_closing_in_progress = true;
                $("#colorbox").removeClass('md-show');
                //console.log('closed...');
                $("body").css('overflow', 'inherit');
                turned_off = true;
                // Return to Side Slide window, if the popup was called from a side slide window.
                return_to_sidewindow_if_needed();
-               cb_closing_in_progress = false;
+               //cb_closing_in_progress = false;
              }
       }); 
       
