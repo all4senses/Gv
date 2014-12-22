@@ -13126,7 +13126,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $hash = $tbd_fields['Hashtag'];
               }
               elseif ($result->field_conf_twitter_hashtag_title) {
-                $hash = (strpos($result->field_conf_twitter_hashtag_title, '@') !== FALSE ? '' : '@') . $result->field_conf_twitter_hashtag_title;
+                $hash = (strpos($result->field_conf_twitter_hashtag_title, '#') !== FALSE ? '' : '#') . $result->field_conf_twitter_hashtag_title;
                 if ($result->field_conf_twitter_hashtag_url) {
                   $hash = l($hash, $result->field_conf_twitter_hashtag_url, array('external' => TRUE, 'absolute' => TRUE, 'attributes' => array('target' => '_blank', 'rel' => 'nofollow')));
                 }
