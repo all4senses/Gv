@@ -9518,7 +9518,8 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   //drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
   drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example2/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
   
-  // Remote Google fonts.
+   // Add some Google fonts.
+  // <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
   gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Lato:300,400,700', 'NA', 'text/css');
   
   // test
@@ -9590,6 +9591,9 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
         //https://github.com/kottenator/jquery-circle-progress
         //'/sites/all/libraries/jquery.plugins/jquery-circle-progress/dist/circle-progress.js',
         //
+        //https://github.com/jquery-textfill/jquery-textfill
+        '/sites/all/libraries/jquery.plugins/jquery-textfill/jquery.textfill.min.js',
+        //
         // Autocomplete custom functionality
         $gv_blocks_path . '/js/gv_conf_main_page.js',
       ),
@@ -9606,9 +9610,7 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   drupal_add_library('system', 'effects.bounce');
   
   
-  // Add some Google fonts.
-  // <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
-  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Lato:300,400,700', 'NA', 'text/css');
+  
   
   return $form;
 }

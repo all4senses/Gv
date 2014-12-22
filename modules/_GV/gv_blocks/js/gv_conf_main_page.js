@@ -993,7 +993,13 @@
   
    
   $('#cb-popup_1 #results_1').html(html_data);
-                        
+  
+  $('.top .title span').textfill({
+    maxFontPixels: 11
+  });
+
+   console.log('fill');                     
+   
   // Uncomment to stop scrolling.
   $("body").css('overflow', 'hidden');
 
