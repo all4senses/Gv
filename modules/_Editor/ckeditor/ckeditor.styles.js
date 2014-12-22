@@ -80,7 +80,7 @@ if(typeof(CKEDITOR) !== 'undefined') {
             },
             
             {
-                    name : 'Image on Left',
+                    name : 'Image on Left---',
                     element : 'img',
                     attributes :
                     {
@@ -91,7 +91,7 @@ if(typeof(CKEDITOR) !== 'undefined') {
             },
 
             {
-                    name : 'Image on Right',
+                    name : 'Image on Right+++',
                     element : 'img',
                     attributes :
                     {
