@@ -43,9 +43,9 @@ if(typeof(CKEDITOR) !== 'undefined') {
             { name : 'Superscript'		, element : 'sup' },
             */
 
-            { name : 'Table padding'	, element : 'table', styles : { 'border-collapse' : 'separate', 'border-spacing' : '35px' } },
+            //{ name : 'Table padding'	, element : 'table', styles : { 'border-collapse' : 'separate', 'border-spacing' : '35px' } },
             
-            { name : 'Marker: Yellow'	, element : 'span', styles : { 'background-color' : 'Yellow' } },
+            { name : 'Marker: Yellow'	, element : 'span', styles : { 'background-color' : 'Red' } },
             { name : 'Marker: Green'	, element : 'span', styles : { 'background-color' : 'Lime' } },
 
             { name : 'Big'				, element : 'big' },
@@ -68,6 +68,17 @@ if(typeof(CKEDITOR) !== 'undefined') {
 
             /* Object Styles */
 
+            {
+                    name : 'Table padding',
+                    element : 'table',
+                    attributes :
+                    {
+                            'style' : 'border-collapse:separate;border-spacing:30px;'//,
+                            //'border' : '2',
+                            //'align' : 'left'
+                    }
+            },
+            
             {
                     name : 'Image on Left',
                     element : 'img',
