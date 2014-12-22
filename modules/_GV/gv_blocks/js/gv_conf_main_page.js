@@ -1001,7 +1001,7 @@
   
   
   
-  $(".top .textfill").bigText();
+  $(".top .textfill").bigText({maximumFontSize: 40});
   
    console.log('fill');                     
    
