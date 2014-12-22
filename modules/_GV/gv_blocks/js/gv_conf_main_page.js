@@ -998,7 +998,11 @@
     maxFontPixels: 11,
     debug: true
   });
-
+  
+  
+  
+  $(".top .textfill").bigText();
+  
    console.log('fill');                     
    
   // Uncomment to stop scrolling.
