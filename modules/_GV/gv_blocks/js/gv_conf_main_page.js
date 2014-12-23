@@ -481,7 +481,7 @@
 
         if (sw != 'city-state') {
           sw = 'city-state';
-          search_field_title = 'Search by City/State';
+          search_field_title = 'Search by City/State/Country';
           $(this).addClass('active');
           $('#c-industry, #c-title').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
@@ -510,7 +510,7 @@
       $('#conf').focus(function(){
         
         //if ($(this).val() == $(this).attr('title')) {
-        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name' || $(this).val() == 'Search by City/State') {
+        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name' || $(this).val() == 'Search by City/State/Country') {
           $(this).val('');
           $(this).removeClass('blur');
         }
@@ -552,7 +552,7 @@
       
 
       function doSubmitTerm() {
-        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name' && $(this).val() != 'Search by City/State') {
+        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name' && $(this).val() != 'Search by City/State/Country') {
           get_conf($('#conf').val());
         }
       }
@@ -879,7 +879,7 @@
             alert('No conferences found tagged with an industry <' + label + '>');
           }
           else if (sw == 'city-state') {
-            alert('No conferences found in the city/state <' + label + '>');
+            alert('No conferences found in the city/state/country <' + label + '>');
           }
           
           return_to_sidewindow_if_needed();
@@ -943,7 +943,7 @@
                       alert('No conferences found tagged with an industry <' + label + '>');
                     }
                     else if (sw == 'city-state') {
-                      alert('No conferences found in the city/state <' + label + '>');
+                      alert('No conferences found in the city/state/country <' + label + '>');
                     }
                     
                     if (return_to_sidewindow) {
@@ -1000,45 +1000,58 @@
 //  });
   
   
+  // Recalculate a conference titles (of different lenghts) size to fit it in the fixed size parent block
+  
+  // Lots of efforts didn't work because of hidden parent element
+  // Solution that worked out
+  // http://stackoverflow.com/questions/2345784/jquery-get-height-of-hidden-element-in-jquery
+  // // Allow to calculate a height of a hidden object
+  // http://dreamerslab.com/blog/en/get-hidden-elements-width-and-height-with-jquery/
   
   //$(".top .textfill").bigText({maximumFontSize: 40});
   
   //if (jQuery('.top .textfill').height() > 40) {
-    initial_font_size = 20;
-    jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
-      //jQuery('.top .textfill').css('line-height', 1);
-      
-    //while(jQuery('.top .textfill').height() < 80) {  
-    while(jQuery('.top .textfill').actual('height') < 80 && initial_font_size < 45) {
-      
-      initial_font_size++;
-      
-      jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
-      //jQuery('.top .textfill').css('line-height', initial_font_size + 'px');
-      console.log('f:' + jQuery('.top .textfill').css('font-size'));
-      //console.log('h:' + jQuery('.top .textfill').height());
-      console.log('h:' + jQuery('.top .textfill').actual('height'));
-    }
-    initial_font_size--;
-   jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
-//    jQuery('.top .textfill').css('line-height', initial_font_size + 'px');
-    console.log('f:' + jQuery('.top .textfill').css('font-size'));
-    //console.log('h:' + jQuery('.top .textfill').height());
-      console.log('h:' + jQuery('.top .textfill').actual('height'));
-      
-      if (initial_font_size < 30) {
-        jQuery('.top .title').css('line-height', '0.7');
-        jQuery('.top td.first').css('padding-top', '0');
-      }
-      else {
-        jQuery('.top .title').css('line-height', '0.9');
-        jQuery('.top td.first').css('padding-top', '10px');
-      }
+          initial_font_size = 20;
+          jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
+            //jQuery('.top .textfill').css('line-height', 1);
+
+          // Doesn't work
+          //while(jQuery('.top .textfill').height() < 80) {  
+          // Works
+          while(jQuery('.top .textfill').actual('height') < 80 && initial_font_size < 45) {
+
+                  initial_font_size++;
+
+                  jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
+                  //jQuery('.top .textfill').css('line-height', initial_font_size + 'px');
+                  ////console.log('f:' + jQuery('.top .textfill').css('font-size'));
+                  //console.log('h:' + jQuery('.top .textfill').height());
+                  ////console.log('h:' + jQuery('.top .textfill').actual('height'));
+          }
+          
+          initial_font_size--;
+          jQuery('.top .textfill').css('font-size', initial_font_size + 'px');
+          // jQuery('.top .textfill').css('line-height', initial_font_size + 'px');
+          ////console.log('f:' + jQuery('.top .textfill').css('font-size'));
+          //console.log('h:' + jQuery('.top .textfill').height());
+          ////console.log('h:' + jQuery('.top .textfill').actual('height'));
+
+
+          if (initial_font_size < 30) {
+            jQuery('.top .title').css('line-height', '0.7');
+            jQuery('.top td.first').css('padding-top', '0');
+          }
+          else {
+            jQuery('.top .title').css('line-height', '0.9');
+            jQuery('.top td.first').css('padding-top', '10px');
+          }
   //}
-  
-   //console.log('fill');                     
+                 
    
-  // Uncomment to stop scrolling.
+   
+   
+   
+  // Uncomment to stop background scrolling.
   $("body").css('overflow', 'hidden');
 
 
