@@ -1030,6 +1030,10 @@
         jQuery('.top .title').css('line-height', '0.7');
         jQuery('.top td.first').css('padding-top', '0');
       }
+      else {
+        jQuery('.top .title').css('line-height', '0.9');
+        jQuery('.top td.first').css('padding-top', '10px');
+      }
   //}
   
    //console.log('fill');                     
