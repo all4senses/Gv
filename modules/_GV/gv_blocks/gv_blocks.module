@@ -9527,10 +9527,13 @@ function gv_blocks_get_confMainSearch_form($form, &$form_state) {
   
   // https://github.com/jquery-textfill/jquery-textfill
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery-textfill/source/jquery.textfill.min.js');
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery-textfill/source/jquery.textfill.js');
+  ////drupal_add_js('sites/all/libraries/jquery.plugins/jquery-textfill/source/jquery.textfill.js');
   // https://github.com/DanielHoffmann/jquery-bigtext
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery-bigtext/jquery-bigtext.js');
   
+  // Allow to calculate a height of a hidden object
+  // http://dreamerslab.com/blog/en/get-hidden-elements-width-and-height-with-jquery/
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.actual/jquery.actual.js');
   
   $popup_1 = '
    <div style="display: none;">
