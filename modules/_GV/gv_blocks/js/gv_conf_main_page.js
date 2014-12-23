@@ -1025,6 +1025,11 @@
     console.log('f:' + jQuery('.top .textfill').css('font-size'));
     //console.log('h:' + jQuery('.top .textfill').height());
       console.log('h:' + jQuery('.top .textfill').actual('height'));
+      
+      if (initial_font_size < 30) {
+        jQuery('.top .title').css('line-height', '0.7');
+        jQuery('.top td.first').css('padding-top', '0');
+      }
   //}
   
    //console.log('fill');                     
