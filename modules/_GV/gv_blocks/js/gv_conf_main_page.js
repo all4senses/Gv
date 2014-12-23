@@ -1009,7 +1009,7 @@
       //jQuery('.top .textfill').css('line-height', 1);
       
     //while(jQuery('.top .textfill').height() < 80) {  
-    while(jQuery('.top .textfill').actual('height') < 80) {
+    while(jQuery('.top .textfill').actual('height') < 80 && initial_font_size < 45) {
       
       initial_font_size++;
       
