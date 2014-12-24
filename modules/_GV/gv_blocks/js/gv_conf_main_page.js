@@ -1093,8 +1093,8 @@
            fadeOut: 1700,
            inline:true, 
            href:"#cb-popup_1", 
-           width: 550,  //'40%'
-           height: 500//545///470
+           width: 532,//550,  //'40%'
+           height: 518,//500//545///470
 
            ,left: "50%"
            
@@ -1170,8 +1170,8 @@
         fadeOut: 1700,
         inline:true, 
         href:"#cb-popup_1", 
-        width: 550,  //'40%'
-        height: 500//545///470
+        width: 532,//550,  //'40%'
+        height: 518,//500//545///470
         
         ,right: 530
         
