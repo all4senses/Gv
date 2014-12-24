@@ -13565,7 +13565,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
               if ($results = $query->execute()->fetchAllAssoc('nid')) {
               
-                  $conferences_list = '<table id="side-table"><thead><th class="name"><div class="icon"></div>NAME</th><th class="industry"><div class="icon"></div>INDUSTRY</th><th class="dates"><div class="icon"></div>DATES</th><th class="location"><div class="icon"></div>LOCATION</th></thead><tbody>';
+                  if ($post['type'] == 'industry') {
+                    // Exclude the Industries if the reauest is filtered by Industry
+                    $conferences_list = '<table class="col-3" id="side-table"><thead><th class="name"><div class="icon"></div>NAME</th><th class="dates"><div class="icon"></div>DATES</th><th class="location"><div class="icon"></div>LOCATION</th></thead><tbody>';
+                  }
+                  else {
+                    $conferences_list = '<table id="side-table"><thead><th class="name"><div class="icon"></div>NAME</th><th class="industry"><div class="icon"></div>INDUSTRY</th><th class="dates"><div class="icon"></div>DATES</th><th class="location"><div class="icon"></div>LOCATION</th></thead><tbody>';
+                  }
                   
                   foreach ($results as $result) {
 //                    $conferences_list[] = array(
@@ -13620,13 +13626,30 @@ function gv_misc_getConferences_autocomplete_ajax() {
                       }
                       
                       //$conferences_list .= '<tr><td>' . l( $result->title, 'node/' . $result->nid) . '</td><td>' . $term_links . '</td><td>' . $result->field_conf_date_value . '</td><td>' . $result->field_conf_city_value . ', ' . $result->field_state_value . '</td></tr>';
-                      $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
+                      if ($post['type'] == 'industry') {
+                        // Exclude the Industries if the reauest is filtered by Industry
+                        $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
+                      }
+                      else {
+                        $conferences_list .= '<tr><td><span class="conf-title" id="' . $result->nid . '">' . $result->title . '</span></td><td>' . $term_links . '</td><td>' . $dates . '</td><td>' . $location . '</td></tr>';
+                      }
                     
                   }
                   
-                  $conferences_list .= '</tbody></table>'
+                  // Close the table block
+                  if ($post['type'] == 'industry') {
+                        // Exclude the Industries if the reauest is filtered by Industry
+                        // Minus a one column
+                        $conferences_list .= '</tbody></table>'
+                          // Dummy table for vertical columns lines all over the result section under the main result table.
+                          . '<table id="side-table-bottom"><tbody><tr><td></td><td></td><td></td></tr></tbody></table>';
+                  }
+                  else {
+                        // Exclude the Industries if the reauest is filtered by Industry
+                        $conferences_list .= '</tbody></table>'
                           // Dummy table for vertical columns lines all over the result section under the main result table.
                           . '<table id="side-table-bottom"><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table>';
+                  }
                   
                   
                   $out_array = array(
