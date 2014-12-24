@@ -1094,7 +1094,7 @@
            inline:true, 
            href:"#cb-popup_1", 
            width: 532,//550,  //'40%'
-           height: 518,//500//545///470
+           height: 518//500//545///470
 
            ,left: "50%"
            
@@ -1171,7 +1171,7 @@
         inline:true, 
         href:"#cb-popup_1", 
         width: 532,//550,  //'40%'
-        height: 518,//500//545///470
+        height: 518//500//545///470
         
         ,right: 530
         
