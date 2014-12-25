@@ -12817,6 +12817,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
   $cache_content = cache_get($cache_name);
   if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
     $out_array = $cache_content->data;
+    watchdog($cache_name, print_r($out_array, TRUE), NULL, WATCHDOG_WARNING);
   }
   elseif ($post['op'] == 'auto') {
       
