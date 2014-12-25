@@ -12901,6 +12901,41 @@ function gv_misc_getConferences_autocomplete_ajax() {
         }
         elseif ($post['type'] == 'city-state') {
           
+          // Combined citites/staes/countries search
+
+          //$vid = 9 || 10; // Cities or states/countries
+
+          $query = db_select('taxonomy_term_data', 't');
+          $query->fields('t', array('tid', 'name'));
+          
+          //$query->condition('t.vid', $vid);
+          
+          $or = db_or()->condition('td.vid', 9) // cities
+                       ->condition('td.vid', 10) // states and countries
+                       ;
+          $query->condition($or);
+          
+          $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
+          $query->orderBy('t.name', 'ASC');
+
+          if ($results_num) {
+            $query->range(0, $results_num);
+          }
+
+          $result = $query->execute()->fetchAllAssoc('tid');
+          
+          foreach ($result as $result) {
+            $out_array[] = array(
+                'value' => $result->tid,
+                'label' => $result->name,
+            );
+          }
+          
+          
+          
+          
+          // Splitted search for cities, then for states/countries with marking states and countries
+          /*
           
           // Search for citiesfirst.
           
@@ -12967,20 +13002,23 @@ function gv_misc_getConferences_autocomplete_ajax() {
             );
           }
           
-          /*
-          foreach ($states as $key => $state) {
-            if (strpos(drupal_strtolower($state), drupal_strtolower($post['term'])) !== FALSE) {
-              
-              $out_array[] = array(
-                'value' => $key,
-                'label' => $state . ' (state)',
-              );  
-            }
-          }
+          
+//          foreach ($states as $key => $state) {
+//            if (strpos(drupal_strtolower($state), drupal_strtolower($post['term'])) !== FALSE) {
+//              
+//              $out_array[] = array(
+//                'value' => $key,
+//                'label' => $state . ' (state)',
+//              );  
+//            }
+//          }
+          
           */
-
-        }
-  }
+          
+          
+        } // End of elseif ($post['type'] == 'city-state') {
+        
+  } // End of elseif ($post['op'] == 'auto') {
   elseif ($post['op'] == 'get') {
     
         if ($post['type'] == 'title') {
@@ -13390,6 +13428,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
               }
               else {
                 
+                // Splitted search by  city or state/country
                 /*
                 if (strpos($post['term'], ')') == FALSE) {
                   $vid = 9;
@@ -13406,6 +13445,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $post['term'] = $post['term'][0];
                 }
                 */
+                
+                // Combined search by city/state/country
                 
                 $target = 'city_state_country';
                 //$vid = 9 || 10;
