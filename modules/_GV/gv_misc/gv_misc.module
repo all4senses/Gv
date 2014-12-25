@@ -12927,7 +12927,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           
           $collected_terms_temp = array();
           foreach ($result as $result) {
-            if (in_array($result->name, $collected_terms_temp)) {
+            if (!in_array($result->name, $collected_terms_temp)) {
               $out_array[] = array(
                   'value' => $result->tid,
                   'label' => $result->name,
