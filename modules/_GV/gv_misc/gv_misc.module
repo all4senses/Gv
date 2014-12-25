@@ -12917,9 +12917,6 @@ function gv_misc_getConferences_autocomplete_ajax() {
           
           $query->condition('t.name', '%' . db_like($post['term']) . '%', 'LIKE');
           
-          // Exclude duplicates.
-          $query->distinct();
-          
           $query->orderBy('t.name', 'ASC');
 
           if ($results_num) {
@@ -12928,11 +12925,15 @@ function gv_misc_getConferences_autocomplete_ajax() {
 
           $result = $query->execute()->fetchAllAssoc('tid');
           
+          $collected_terms_temp = array();
           foreach ($result as $result) {
-            $out_array[] = array(
-                'value' => $result->tid,
-                'label' => $result->name,
-            );
+            if (in_array($result->name, $collected_terms_temp)) {
+              $out_array[] = array(
+                  'value' => $result->tid,
+                  'label' => $result->name,
+              );
+              $collected_terms_temp[] = $result->name;
+            }
           }
           
           
