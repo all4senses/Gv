@@ -12736,10 +12736,13 @@ function gv_misc_getConferences_autocomplete_ajax() {
   
   $post = array();
   $out_array = array();
+  $cache_name = 'gv_conf_get_';
   
   foreach ($_GET as $key => $value) {
     //$post[$key] = $value; // check_plain(strip_tags($value));
     $post[$key] = strip_tags($value); // check_plain(strip_tags($value));
+    
+    $cache_name .= $key . ':' . $value;
   }
   
 //  $post['term_decoded2'] = utf8_decode($post['term']); //urldecode($post['term']);
@@ -12807,12 +12810,19 @@ function gv_misc_getConferences_autocomplete_ajax() {
               'WY' => 'Wyoming',
           );
   
-  // Db queries doc
-  // https://www.drupal.org/node/310086
-  // https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_like/7
   
-  if ($post['op'] == 'auto') {
+  
+  
     
+  $cache_content = cache_get($cache_name);
+  if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+    $out_array = $cache_content->data;
+  }
+  elseif ($post['op'] == 'auto') {
+      
+        // Db queries doc
+        // https://www.drupal.org/node/310086
+        // https://api.drupal.org/api/drupal/includes!database!database.inc/function/db_like/7
   
         if ($post['type'] == 'industry') {
           $vid = 8;
@@ -13674,6 +13684,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
   } // End of elseif ($post['op'] == 'get') {
   
   
+  cache_set($cache_name, $out_array, 'cache', time() + '7 days');
   
   drupal_json_output($out_array);
 
