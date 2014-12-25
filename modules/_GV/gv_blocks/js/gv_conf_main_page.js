@@ -858,7 +858,10 @@
    // Correct and uncomment!!!
    /*
    else if ( 'content_' + sw + '_' + label in cache ) {
+   
      save_sw = new_sw = false;
+     $(".ui-autocomplete-loading").removeClass('ui-autocomplete-loading');
+   
      // List in SlidingIn right window.
      if (cache[ 'content_' + sw + '_' + label ]) {
         //console.log('Get LIST from cache...');

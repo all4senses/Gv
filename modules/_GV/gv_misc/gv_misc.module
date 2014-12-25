@@ -13389,6 +13389,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 $target = 'industry';
               }
               else {
+                
+                /*
                 if (strpos($post['term'], ')') == FALSE) {
                   $vid = 9;
                   $target = 'city';
@@ -13403,14 +13405,34 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   //$post['term'] = array_search(strtolower($post['term'][0]),array_map('strtolower', $states));  //array_search($post['term'][0], $states);
                   $post['term'] = $post['term'][0];
                 }
+                */
+                
+                $target = 'city_state_country';
+                //$vid = 9 || 10;
+                if (strpos($post['term'], ')') != FALSE) {
+                  $post['term'] = explode(' (', $post['term']);
+                  $post['term'] = $post['term'][0];
+                }
+                
               }
           
-              if ($target == 'industry' || $target == 'city' || $target == 'state_or_country') {
+              if ($target == 'industry' || $target == 'city' || $target == 'state_or_country' || $target == 'city_state_country') {
                 
                   // Search for all conferences (a list) with a tag $post['term'].
                   $query = db_select('taxonomy_term_data', 'td');
                   $query->condition('td.name', $post['term'], '=');
-                  $query->condition('td.vid', $vid);
+                  
+                  if ($target == 'city_state_country') {
+                    $or = db_or()->condition('td.vid', 9) // cities
+                                 ->condition('td.vid', 10) // states and countries
+                                 ;
+                    $query->condition($or);
+                  }
+                  else {
+                    $query->condition('td.vid', $vid);
+                  }
+                  
+                  
                   $query->leftJoin('taxonomy_index', 't', 't.tid = td.tid');
 
                   $query->leftJoin('node', 'n', 'n.nid = t.nid');
