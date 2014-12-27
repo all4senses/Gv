@@ -481,7 +481,7 @@
 
         if (sw != 'city-state') {
           sw = 'city-state';
-          search_field_title = 'Search by City/State/Country';
+          search_field_title = 'Search by City and/or State';
           $(this).addClass('active');
           $('#c-industry, #c-title').removeClass('active');
           $('input[id="conf"]').attr('title', search_field_title);
@@ -510,7 +510,7 @@
       $('#conf').focus(function(){
         
         //if ($(this).val() == $(this).attr('title')) {
-        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name' || $(this).val() == 'Search by City/State/Country') {
+        if ($(this).val() == 'Search by Industry' || $(this).val() == 'Search by Name' || $(this).val() == 'Search by City and/or State') {
           $(this).val('');
           $(this).removeClass('blur');
         }
@@ -552,7 +552,7 @@
       
 
       function doSubmitTerm() {
-        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name' && $(this).val() != 'Search by City/State/Country') {
+        if ($('input[id="conf"]').val() != 'Search by Industry' && $(this).val() != 'Search by Name' && $(this).val() != 'Search by City and/or State') {
           get_conf($('#conf').val());
         }
       }
@@ -882,7 +882,7 @@
             alert('No conferences found tagged with an industry <' + label + '>');
           }
           else if (sw == 'city-state') {
-            alert('No conferences found in the city/state/country <' + label + '>');
+            alert('No conferences found in the City and/or State <' + label + '>');
           }
           
           return_to_sidewindow_if_needed();
@@ -946,7 +946,7 @@
                       alert('No conferences found tagged with an industry <' + label + '>');
                     }
                     else if (sw == 'city-state') {
-                      alert('No conferences found in the city/state/country <' + label + '>');
+                      alert('No conferences found in the City and/or State <' + label + '>');
                     }
                     
                     if (return_to_sidewindow) {
