@@ -13482,7 +13482,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $post_term = strtoupper($post['term']);
                   if (isset($states[$post_term])) {
                     $or2 = db_or()->condition('td.name', $post['term'], '=')
-                                  ->condition('td.name', $post['term'], $states[$post_term])
+                                  ->condition('td.name', $states[$post_term], '=')
                                  ;
                     $query->condition($or2);
                   }
