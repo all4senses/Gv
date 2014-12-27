@@ -12931,6 +12931,10 @@ function gv_misc_getConferences_autocomplete_ajax() {
           $post_term = strtoupper($post['term']);
           if (isset($states[$post_term])) {
             $collected_terms_temp[] = $states[$post_term];
+            $out_array[] = array(
+                  'value' => NULL,
+                  'label' => $states[$post_term],
+              );
           }
           
           foreach ($result as $result) {
