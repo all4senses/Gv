@@ -13477,7 +13477,18 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 
                   // Search for all conferences (a list) with a tag $post['term'].
                   $query = db_select('taxonomy_term_data', 'td');
-                  $query->condition('td.name', $post['term'], '=');
+                  
+                  
+                  $post_term = strtoupper($post['term']);
+                  if (isset($states[$post_term])) {
+                    $or2 = db_or()->condition('td.name', $post['term'], '=')
+                                  ->condition('td.name', $post['term'], $states[$post_term])
+                                 ;
+                    $query->condition($or2);
+                  }
+                  else {
+                    $query->condition('td.name', $post['term'], '=');
+                  }
                   
                   if ($target == 'city_state_country') {
                     $or = db_or()->condition('td.vid', 9) // cities
