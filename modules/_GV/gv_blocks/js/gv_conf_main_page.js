@@ -83,7 +83,10 @@
          // Easing 
          // http://api.jquery.com/animate/
          // not tested yet https://github.com/gdsmith/jquery.easing
-         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeOutBounce");
+         
+         // Works with easing!
+         //$(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeOutBounce");
+         $(".embed .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000);
      }
      
  }
@@ -102,7 +105,9 @@
      }
      else {
          //console.log('link-2 finished.');
-         $(".add-conf .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeOutBounce");
+         // Works!
+        //$(".add-conf .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000, "easeOutBounce");
+        $(".add-conf .link").find(".open").css({opacity: 0, visibility: "visible", display: "block", left: "-350px"}).animate({opacity: 1, left: 0}, 2000);
      }
      
  }
