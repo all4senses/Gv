@@ -36,7 +36,7 @@
     var counterClockwise = false;
     var circ = Math.PI * 2;
     var quart = Math.PI / 2;
-    var percentsStep = 10; //2;
+    var percentsStep = 7; //2;
     
     var canvas_2 = document.getElementById('link-2');
  
