@@ -349,7 +349,9 @@
             $(".embed .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
             embed_hidden = true;
           }
-          , 1000);
+          //, 1000);
+          , 500);
+          
         //console.log(timerEmbed);
         //$(this).css('visibility', 'hidden');
       });
@@ -366,7 +368,10 @@
             $(".add-conf .link .open").css({opacity: 1, visibility: "visible", display: "block", left: 0}).animate({opacity: 0, left: "-350px"}, 200);
             addConf_hidden = true;
           }
-          , 1000);
+          //, 1000);
+          , 500);
+          
+          
         //console.log(timerAddConf);
         //$(this).css('visibility', 'hidden');
       });
