@@ -75,7 +75,8 @@
      curPerc_1+= percentsStep;
      if (curPerc_1 < endPercent_1) {
          requestAnimationFrame(function () {
-             animate_1(curPerc_1 / 100)
+             //animate_1(curPerc_1 / 100)
+             animate_1(curPerc_1 / 50)
          });
      }
      else {
