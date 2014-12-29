@@ -36,7 +36,7 @@
     var counterClockwise = false;
     var circ = Math.PI * 2;
     var quart = Math.PI / 2;
-    var percentsStep = 2;
+    var percentsStep = 10; //2;
     
     var canvas_2 = document.getElementById('link-2');
  
@@ -75,9 +75,8 @@
      curPerc_1+= percentsStep;
      if (curPerc_1 < endPercent_1) {
          requestAnimationFrame(function () {
-             //animate_1(curPerc_1 / 100)
-             animate_1(curPerc_1 / 50)
-         });
+             animate_1(curPerc_1 / 100)
+        });
      }
      else {
          //console.log('link-1 finished.');
