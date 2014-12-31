@@ -1113,7 +1113,7 @@
           href:"#cb-popup_1", 
           width: 532, 
           height: 518
-          ,left: "50%"
+          //,left: "50%"
 
           ,onClosed: function() {
                  //console.log('closed...');
