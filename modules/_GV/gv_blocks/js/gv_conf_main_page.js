@@ -1107,10 +1107,10 @@
            
         cb1 = $.fn.colorbox({
           transition: 'fade' , //'elastic',
-          speed: 800,
-          fadeOut: 1700,
-          inline:true, 
-          href:"#cb-popup_1", 
+          //speed: 800,
+          //fadeOut: 1700,
+          inline: true, 
+          href: "#cb-popup_1", 
           width: 532, 
           height: 518
           //,left: "50%"
@@ -1210,14 +1210,14 @@
       // Usual appearing
       cb1 = $.fn.colorbox({
         transition: 'fade' , //'elastic',
-        speed: 800,
-        fadeOut: 1700,
+        //speed: 800,
+        //fadeOut: 1700,
         inline:true, 
         href:"#cb-popup_1", 
         width: 532, 
         height: 518
         
-        ,right: 750
+        ,right: 770
 
         ,onClosed: function() {
                //console.log('closed...');
