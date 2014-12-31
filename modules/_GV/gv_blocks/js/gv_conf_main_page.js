@@ -1100,6 +1100,7 @@
         //console.log('popup in the middle');
         
         // Usual appearing
+        /*
         cb1 = $.fn.colorbox({
           transition: 'fade' , //'elastic',
           speed: 800,
@@ -1118,9 +1119,11 @@
                  return_to_sidewindow_if_needed();
                }
         }); 
+        */
         
         // Custom effect appearing, in the middle with the background shading.
-        /*
+        /* 
+         */ 
         cb1 = $.fn.colorbox({
            transition: 'fade' , //'elastic',
            speed: 800,
@@ -1191,6 +1194,7 @@
                   //cb_closing_in_progress = false;
                 }
          });
+         /*
          */
 
    } // End of if (!popup_stick_to_left) {
