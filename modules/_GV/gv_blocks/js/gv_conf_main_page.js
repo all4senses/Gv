@@ -854,10 +854,10 @@
         //showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
         //
         // Set timeout to prevent closing popup before its opening.
-        timerEmbed = setTimeout(function() {
+        ////timerEmbed = setTimeout(function() {
           showConfInPopUp(cache[ 'content_conf_' + label ], popup_stick_to_left);
-        }
-        , 1000);
+        ////}
+        ////, 1000);
      }
      else {
        alert('No conference found with a title (or title containing) <' + label + '>');
