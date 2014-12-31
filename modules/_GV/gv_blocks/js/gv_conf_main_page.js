@@ -1101,6 +1101,10 @@
         
         // Usual appearing
         // /*
+        
+        $("#colorbox").removeClass('md-modal md-effect-6');
+        $("#cboxWrapper").removeClass('md-content');
+           
         cb1 = $.fn.colorbox({
           transition: 'fade' , //'elastic',
           speed: 800,
