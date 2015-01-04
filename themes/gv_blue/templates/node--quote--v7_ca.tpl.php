@@ -257,7 +257,7 @@
 
 
           <div class="c"><!--GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.-->
-            <div>© 2014 GetVoIP.com | All Rights Reserved</div>
+            <div>© 2015 GetVoIP.com | All Rights Reserved</div>
           </div>
 
         </div>

@@ -141,7 +141,7 @@
         <div id="footer-inside">
 
           <div class="left">GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.</div>
-          <div class="right"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /><div>© 2014 | All Rights Reserved</div></div>
+          <div class="right"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /><div>© 2015 | All Rights Reserved</div></div>
 
         </div>
       </footer> <!-- /#footer -->
