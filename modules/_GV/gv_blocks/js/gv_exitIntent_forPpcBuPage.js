@@ -66,7 +66,7 @@
                         $("body").css('overflow', 'hidden');
             
                         console.log('a1...');
-                        console.log($.fn.colorbox);
+                        //console.log($.fn.colorbox);
                         
                         var cb1;
                         
