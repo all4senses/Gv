@@ -12939,7 +12939,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           
           foreach ($result as $result) {
             if ($result->name == 'New York' && $result->vid == 9) {
-              $result->name == 'New York City';
+              $result->name = 'New York City';
             }
             $in_array = in_array($result->name, $collected_terms_temp);
             //if (!in_array($result->name, $collected_terms_temp)) {
