@@ -26,7 +26,7 @@
                       //'<img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />',
                       '</td></tr>',
                     '<tr><td class="search">', 
-                      '<div class="title">FIND YOUR <span>TECHNOLOGY</span> CONFERENCE</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 330 tech conferences & shows in the US</div>',
+                      '<div class="title">FIND YOUR <span>TECHNOLOGY</span> CONFERENCE</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 700 tech conferences & shows in the US</div>',
                       gv_blocks_get_confMainSearch(), 
                     '</td></tr>',
                     '<tr><td class="links">',
