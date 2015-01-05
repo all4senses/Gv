@@ -12906,7 +12906,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
           //$vid = 9 || 10; // Cities or states/countries
 
           $query = db_select('taxonomy_term_data', 't');
-          $query->fields('t', array('tid', 'name'));
+          $query->fields('t', array('tid', 'name', 'vid'));
           
           //$query->condition('t.vid', $vid);
           
@@ -12938,7 +12938,12 @@ function gv_misc_getConferences_autocomplete_ajax() {
           }
           
           foreach ($result as $result) {
-            if (!in_array($result->name, $collected_terms_temp)) {
+            if ($result->name == 'New York' && $result->vid == 9) {
+              $result->name == 'New York City';
+            }
+            $in_array = in_array($result->name, $collected_terms_temp);
+            //if (!in_array($result->name, $collected_terms_temp)) {
+            if (!$in_array) {
               $out_array[] = array(
                   'value' => $result->tid,
                   'label' => $result->name,
