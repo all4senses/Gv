@@ -65,7 +65,8 @@
                         // Uncomment to stop scrolling.
                         $("body").css('overflow', 'hidden');
             
-                        //console.log($.fn.colorbox);
+                        console.log('a1...');
+                        console.log($.fn.colorbox);
                         
                         var cb1;
                         
@@ -81,7 +82,7 @@
                                }
                         });  
                         
-                        //console.log(cb1);
+                        console.log(cb1);
                         //$.fn.colorbox.close();
                         //console.log($.fn.colorbox);
                         //alert('test');
