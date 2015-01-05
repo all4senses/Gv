@@ -13443,6 +13443,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
         } // End of if ($post['type'] == 'title') {
         elseif ($post['type'] == 'industry' || $post['type'] == 'city-state') {
           
+              $post_term = strtoupper($post['term']);
+              
               if ($post['type'] == 'industry') {
                 $vid = 8;
                 $target = 'industry';
@@ -13471,7 +13473,12 @@ function gv_misc_getConferences_autocomplete_ajax() {
                 
                 $target = 'city_state_country';
                 //$vid = 9 || 10;
-                if (strpos($post['term'], ')') != FALSE) {
+                $vid = NULL;
+                if ($post_term == 'NEW YORK CITY') {
+                  $vid = 9;
+                  $post_term = $post['term'] = 'NEW YORK';
+                }
+                elseif (strpos($post['term'], ')') != FALSE) {
                   $post['term'] = explode(' (', $post['term']);
                   $post['term'] = $post['term'][0];
                 }
@@ -13484,7 +13491,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   $query = db_select('taxonomy_term_data', 'td');
                   
                   
-                  $post_term = strtoupper($post['term']);
+                  //$post_term = strtoupper($post['term']);
                   if (isset($states[$post_term])) {
                     $or2 = db_or()->condition('td.name', $post['term'], '=')
                                   ->condition('td.name', $states[$post_term], '=')
@@ -13495,7 +13502,8 @@ function gv_misc_getConferences_autocomplete_ajax() {
                     $query->condition('td.name', $post['term'], '=');
                   }
                   
-                  if ($target == 'city_state_country') {
+                  //if ($target == 'city_state_country') {
+                  if (!$vid) {
                     $or = db_or()->condition('td.vid', 9) // cities
                                  ->condition('td.vid', 10) // states and countries
                                  ;
