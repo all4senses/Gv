@@ -13579,7 +13579,7 @@ function gv_misc_getConferences_autocomplete_ajax() {
                   //$query->addExpression("GROUP_CONCAT(CONCAT( 'tid:', ti.tid, 'x' ) SEPARATOR ', ')", 'terms');
                   // V1
                   // Works!
-                  $query->addExpression("GROUP_CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
+                  $query->addExpression("GROUP_CONCAT( (SELECT DISTINCT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid AND vid = 8) SEPARATOR ',')", 'terms');
                   // V2
                   // Works excellently!
                   //$query->addExpression("GROUP_CONCAT( CONCAT( (SELECT name FROM taxonomy_term_data AS td WHERE td.tid = ti.tid), ':', ti.tid) SEPARATOR ';')", 'terms');
