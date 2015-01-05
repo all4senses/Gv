@@ -76,7 +76,7 @@
                           width:780, 
                           height:540
                           ,onClosed: function() {
-                                //console.log('closed...');
+                                console.log('closed...');
                                 $("body").css('overflow', 'inherit');
                                 turned_off = true;
                                }
