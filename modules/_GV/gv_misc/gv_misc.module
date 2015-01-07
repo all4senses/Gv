@@ -4062,7 +4062,7 @@ function gv_misc_AddContentSection_form() {
   global $user;
   
   $types = node_type_get_types();
-  
+  dpm($types);
   // Hide some content tupes if not a root.
   //dpm($user);
   if ($user->uid != 1) {
