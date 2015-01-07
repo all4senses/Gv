@@ -4068,6 +4068,9 @@ function gv_misc_AddContentSection_form() {
   if ($user->uid != 1) {
     unset($types['admin_page'], $types['preface'], $types['quote'], $types['webform']);
   }
+  if (in_array('Writer', $user->roles) && !in_array('administrator', $user->roles)) {
+    $types = array('blog_post', 'article', 'provider', 'phone');
+  }
   
   $options = array('' => '- Select a content type -');
   foreach ($types as $type => $value) {
