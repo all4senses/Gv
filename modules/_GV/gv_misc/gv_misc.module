@@ -4064,11 +4064,12 @@ function gv_misc_AddContentSection_form() {
   $types = node_type_get_types();
   
   // Hide some content tupes if not a root.
-  dpm($user);
+  //dpm($user);
   if ($user->uid != 1) {
     unset($types['admin_page'], $types['preface'], $types['quote'], $types['webform']);
   }
-  if (in_array('Writer', $user->roles) && !in_array('administrator', $user->roles)) {
+  if (in_array('root', $user->roles)) {
+  //if (in_array('Writer', $user->roles) && !in_array('administrator', $user->roles)) {
     $types = array('blog_post', 'article', 'provider', 'phone');
   }
   
