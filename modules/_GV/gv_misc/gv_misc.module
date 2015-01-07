@@ -14564,7 +14564,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   
   // preg_match_all('/(alt|title|src)="([^"]*)"/i',$matches[0], $matches);
   // '/<iframe.*</iframe>|<embed.*</embed>/is'
-  if (preg_match_all('~<iframe.*</iframe>|<embed.*</embed>~is', $body_full_markup, $matches_1)) {
+  if (preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches_1)) {
   //if (preg_match_all('/\<iframe([^iframe]*iframe\>)/is', $body_full_markup, $matches_1)) {
     dpm($matches_1);
   }
