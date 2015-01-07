@@ -4070,7 +4070,12 @@ function gv_misc_AddContentSection_form() {
   }
   if (in_array('root', $user->roles)) {
   //if (in_array('Writer', $user->roles) && !in_array('administrator', $user->roles)) {
-    $types = array('blog_post', 'article', 'provider', 'phone');
+    $types_to_show = array('blog_post', 'article', 'provider', 'phone');
+    foreach ($types as $type => $value) {
+      if (!in_array($type, $types_to_show)) {
+        unset($types[$type]);
+      }
+    }
   }
   
   $options = array('' => '- Select a content type -');
