@@ -14562,11 +14562,17 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     } // End of if ($found_image) {
   } // if (preg_match('/\[video:(.*\])/is', $body_full_markup, $matches_1)) {
   
-  // preg_match_all('/(alt|title|src)="([^"]*)"/i',$matches[0], $matches);
-  // '/<iframe.*</iframe>|<embed.*</embed>/is'
-  if (preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches_1)) {
-  //if (preg_match_all('/\<iframe([^iframe]*iframe\>)/is', $body_full_markup, $matches_1)) {
-    dpm($matches_1);
+  if (preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches)) {
+    dpm($matches);
+    foreach($matches[0] as $key => $match) {
+      
+      $body_full_markup = preg_replace($match, 
+              '<div class="gv-video-iframe" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                . '<meta itemprop="contentUrl" content="' . 'xxx-' . $key . '" ></meta>' 
+                . $match 
+            . '</div>', $body_full_markup);
+      
+    }
   }
   
   return $body_full_markup;
