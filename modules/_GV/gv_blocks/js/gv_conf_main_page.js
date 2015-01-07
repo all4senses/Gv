@@ -1217,7 +1217,7 @@
         width: 532, 
         height: 518
         
-        ,right: 725//765
+        ,right: 720//765
 
         ,onClosed: function() {
                //console.log('closed...');
