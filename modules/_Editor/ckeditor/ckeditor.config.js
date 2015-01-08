@@ -27,7 +27,7 @@ CKEDITOR.editorConfig = function(config) {
   // [#1762328] Uncomment the line below to protect <code> tags in CKEditor (hide them in wysiwyg mode).
   // config.protectedSource.push(/<code>[\s\S]*?<\/code>/gi);
   ////config.extraPlugins = 'oembed,widget,dragresize';
-  config.extraPlugins = 'tableresize,tabletools,colordialog,dialog,dialogadvtab,div,dialogui,textselection,codemirror'; //,showborders,sourcedialog
+  config.extraPlugins = 'tableresize,tabletools,colordialog,dialog,dialogadvtab,div,dialogui,textselection,codemirror,sourcedialog'; //,showborders
   
   
   
