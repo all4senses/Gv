@@ -14607,8 +14607,10 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
   }
   
   global $user;
-  if ($user->uid == 1 && preg_match('/\<div class="gv-video-iframe".*(\[.*\])\<\/div\>/is', $body_full_markup, $matches)) {
+  if ($user->uid == 1) {
+    preg_match('/<div class="gv-video-iframe".*(<iframe.*<\/iframe>)<\/div>/is', $body_full_markup, $matches);
     dpm($matches);
+    dpm('xxx');
   }
   return $body_full_markup;
 }
