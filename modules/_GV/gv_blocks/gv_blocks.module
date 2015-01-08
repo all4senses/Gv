@@ -2501,6 +2501,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/web-conferencing' => 'Web Conferencing',
        //'/small-business-voip' => 'Small Business VoIP',
       '/cloud-backup' => 'Cloud Backup',
+      '/call-center-solutions' => 'Call Center Software',
     );
     
     $map_path_to_type = array(
@@ -2518,6 +2519,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/crm-software' => 'crm',
       //'/small-business-voip' => 'smbv',
       '/cloud-backup' => 'cb',
+      '/call-center-solutions' => 'cc',// 'page-compare-cc-voip-providers',
     );
     
     if(!$service_type = @$map_path_to_type[$_SERVER['REDIRECT_URL']]) {
@@ -2572,6 +2574,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     'cb' => array (
       'rating_table' => 'field_data_field_p_erating_cb',
       'rating_field' => 'field_p_erating_cb_value',
+    ),
+    'cc' => array (
+      'rating_table' => 'field_data_field_p_erating_cc',
+      'rating_field' => 'field_p_erating_cc_value',
     ),
   );
   
