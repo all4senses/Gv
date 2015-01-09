@@ -14466,12 +14466,12 @@ function gv_misc_exit() {
 }
 
 
-function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($videoToken_html_fragment) {
+function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($videoToken_html_url_fragment) {
  
   $snippetVideoData = NULL;
   
     // YouTube.com
-  if (preg_match('/.*\?v=(.*)\s?.*\]/is', $videoToken_html_fragment, $matches_2)) {
+  if (preg_match('/.*\?v=(.*)\s?.*\]/is', $videoToken_html_url_fragment, $matches_2)) {
     //dpm($matches_2);
     $video_id = $matches_2[1];
 
@@ -14503,7 +14503,7 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
     }
   }
   // Wistia.com
-  elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $videoToken_html_fragment, $matches_2)) {
+  elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $videoToken_html_url_fragment, $matches_2)) {
 
     //dpm($matches_2);
     $video_id = $matches_2[1];
@@ -14545,11 +14545,55 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   global $user;
   
   if ($user->uid == 1 && preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
+    
     dpm($matches_all);
+    
+    // Every url
+    foreach ($matches_all[1] as $key => $match_url) {
+      
+      if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($match_url)) {
+    
+        // Google video rich snippet
+        /*
+         https://support.google.com/webmasters/answer/2413309?hl=en&ref_topic=4603851
+
+         http://www.google.com/webmasters/tools/richsnippets?q=http%3A%2F%2Fgetvoip.com%2Freviews%2Fphone%2Fcisco-spa303
+
+         http://stackoverflow.com/questions/18886947/schema-org-having-video-object-nested-inside-product
+         http://googlewebmastercentral.blogspot.ru/2012/02/using-schemaorg-markup-for-videos.html
+        */
+
+        //dpm($thumbnail_src);
+        /*
+        $body_full_markup = preg_replace('|(\[video:.*http.*\])|is', 
+                '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
+                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
+                  . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
+                  . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
+                  . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
+                  . '$1' 
+              . '</div>', $body_full_markup);
+        */
+        
+        $body_full_markup = str_replace($matches_all[0][$key], 
+                '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
+                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
+                  . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
+                  . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
+                  . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
+                  . $matches_all[0][$key] 
+              . '</div>', $body_full_markup);
+
+      }
+      
+      
+    }
   }
   
   //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-  if (preg_match('/\[video:(.*\])/is', $body_full_markup, $matches_1)) {
+  elseif (preg_match('/\[video:(.*\])/is', $body_full_markup, $matches_1)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
     // or with Wistia link, etc
     dpm($matches_1);
