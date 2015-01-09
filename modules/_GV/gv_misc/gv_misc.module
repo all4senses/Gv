@@ -14544,7 +14544,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   
   global $user;
   
-  if ($user->uid == 1 && preg_match_all('/\[video:(.*\])/isU', $body_full_markup, $matches_all)) {
+  if ($user->uid == 1 && preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
     dpm($matches_all);
   }
   
