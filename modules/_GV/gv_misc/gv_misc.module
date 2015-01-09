@@ -14553,6 +14553,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       
       if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($match_url)) {
     
+        dpm($snippetVideoData);
+        
         // Google video rich snippet
         /*
          https://support.google.com/webmasters/answer/2413309?hl=en&ref_topic=4603851
