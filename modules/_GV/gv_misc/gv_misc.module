@@ -14604,6 +14604,8 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
       dpm($matches);
       dpm('a1');
       foreach($matches[0] as $key => $match){
+        dpm($match);
+        dpm($matches[1][$key]);
         $body_full_markup = preg_replace('|' . $match . '|isU', $matches[1][$key], $body_full_markup);
       }
       //dpm('a2');
