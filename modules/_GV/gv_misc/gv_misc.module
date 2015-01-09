@@ -14596,36 +14596,39 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
 function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($body_full_markup) {
   
   
-  global $user;
+  //global $user;
   
   
-  if($user->uid == 1) {
-    if (preg_match_all('/<div class="gv-video".*(\[.*\])<\/div>/isU', $body_full_markup, $matches)) {
-      dpm($matches);
-      dpm('a1');
-      foreach($matches[0] as $key => $match){
-        dpm($match);
-        dpm($matches[1][$key]);
-        // Doesn't work!
-        //$body_full_markup = preg_replace('|' . $match . '|is', $matches[1][$key], $body_full_markup);
-        $body_full_markup = str_replace($match, $matches[1][$key], $body_full_markup);
-      }
-      //dpm('a2');
+
+  if (preg_match_all('/<div class="gv-video".*(\[.*\])<\/div>/isU', $body_full_markup, $matches)) {
+    //dpm($matches);
+    //dpm('a1');
+    foreach($matches[0] as $key => $match){
+      //dpm($match);
+      //dpm($matches[1][$key]);
+      // Doesn't work!
+      //$body_full_markup = preg_replace('|' . $match . '|is', $matches[1][$key], $body_full_markup);
+      $body_full_markup = str_replace($match, $matches[1][$key], $body_full_markup);
     }
+    //dpm('a2');
   }
-  
+ 
   // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
-  //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-  elseif (preg_match('/\<div class="gv-video".*(\[.*\])\<\/div\>/is', $body_full_markup, $matches)) {
-    dpm('c1');
-    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-    $body_full_markup = preg_replace('|\<div class="gv-video".*(\[.*\])\<\/div\>|is', '$1', $body_full_markup);
-  }
   
   
   
-  if($user->uid == 1 && preg_match_all('/<div class="gv-video-iframe".*(<iframe.*src=\"(.*)\".*><\/iframe>)<\/div>/isU', $body_full_markup, $matches)) {
-    dpm($matches);
+  // Wrong way!, replace just first occurance
+//  //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
+//  elseif (preg_match('/\<div class="gv-video".*(\[.*\])\<\/div\>/is', $body_full_markup, $matches)) {
+//    dpm('c1');
+//    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
+//    $body_full_markup = preg_replace('|\<div class="gv-video".*(\[.*\])\<\/div\>|is', '$1', $body_full_markup);
+//  }
+  
+  
+  
+  if(preg_match_all('/<div class="gv-video-iframe".*(<iframe.*src=\"(.*)\".*><\/iframe>)<\/div>/isU', $body_full_markup, $matches)) {
+    //dpm($matches);
     //dpm('xxx');
     foreach($matches[0] as $key => $match){
       // Works!
