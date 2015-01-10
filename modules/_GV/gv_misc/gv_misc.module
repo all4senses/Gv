@@ -14546,16 +14546,15 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   
   global $user;
   
-  if ($user->uid == 1 && preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
+  if (preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
     
-    dpm($matches_all);
+    //dpm($matches_all);
     
-    // Every url
+    // Go through Every url
     foreach ($matches_all[1] as $key => $match_url) {
       
       if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($match_url)) {
     
-        dpm($snippetVideoData);
         
         // Google video rich snippet
         /*
@@ -14596,130 +14595,6 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     }
   }
   
-  //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-  elseif (preg_match('/\[video:(.*\])/is', $body_full_markup, $matches_1)) {
-    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-    // or with Wistia link, etc
-    dpm($matches_1);
-    
-    
-    /*
-    // YouTube.com
-    if (preg_match('/.*\?v=(.*)\s?.*\]/is', $matches_1[1], $matches_2)) {
-      //dpm($matches_2);
-      $video_id = $matches_2[1];
-      
-      //if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
-      if($thumbnail_src = gv_misc_getVideoThumb($video_id)) {
-        $found_image = TRUE;
-        
-        // Get YouTube video info via Google API REST
-        if ($data_from = gv_misc_getVideoInfo($video_id, 'YouTube')) {
-
-          //dpm($data_from);
-          dpm($data_from->entry->{'media$group'});
-          $title = $data_from->entry->{'media$group'}->{'media$title'}->{'$t'};
-          //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
-          //$descr = htmlspecialchars($data_from->entry->{'media$group'}->{'media$description'}->{'$t'}, ENT_QUOTES);
-          $descr = $data_from->entry->{'media$group'}->{'media$description'}->{'$t'};
-          //dpm($descr);
-          $duration = $data_from->entry->{'media$group'}->{'yt$duration'}->{'seconds'};
-          $contentUrl = $data_from->entry->{'media$group'}->{'media$content'}[0]->url;
-        }
-  
-  
-        ////$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
-        ////////$body_full_markup = preg_replace('|(\[video:.*http.*\])|', '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"><span itemprop="name" content="Cisco SPA 303"></span><span itemprop="description" content="Unboxing Cisco SPA 303"></span><meta itemprop="thumbnailUrl" content="/images/posts/CiscoSPA303_outofthebox_0.PNG" ></meta>$1</div>', $body_full_markup);
-        
-      }
-    }
-    // Wistia.com
-    elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $matches_1[1], $matches_2)) {
-      
-      
-      //dpm($matches_2);
-      $video_id = $matches_2[1];
-      
-      
-      // Get Video info via Wistia API
-      if ($video_data = gv_misc_getVideoInfo($video_id, 'Wistia')) {
-        
-          if ($thumbnail_src = gv_misc_getVideoThumb($video_id, 'Wistia', $video_data->thumbnail->url)) {
-            //dpm($thumbnail_src);
-            $found_image = TRUE;
-            //dpm($video_data);
-            $title = $video_data->name;
-            //dpm($title);
-
-            $descr = $video_data->description;
-            //dpm($descr);
-            $duration = $video_data->duration; //(int) $video_data->duration;
-            $contentUrl = $video_data->assets[3]->url;
-
-          }
-      }
-        
-    }
-    
-    */
-    
-    
-    if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($matches_1[1])) {
-    
-      // Google video rich snippet
-      /*
-       https://support.google.com/webmasters/answer/2413309?hl=en&ref_topic=4603851
-       
-       http://www.google.com/webmasters/tools/richsnippets?q=http%3A%2F%2Fgetvoip.com%2Freviews%2Fphone%2Fcisco-spa303
-       
-       http://stackoverflow.com/questions/18886947/schema-org-having-video-object-nested-inside-product
-       http://googlewebmastercentral.blogspot.ru/2012/02/using-schemaorg-markup-for-videos.html
-      */
-      
-      //dpm($thumbnail_src);
-      
-      $body_full_markup = preg_replace('|(\[video:.*http.*\])|is', 
-              '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
-                . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
-                . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
-                . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
-                . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
-                . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
-                . '$1' 
-            . '</div>', $body_full_markup);
-      
-    } 
-    
-    /*
-    if ($found_image) {
-      
-      // Google video rich snippet
-      // https://support.google.com/webmasters/answer/2413309?hl=en&ref_topic=4603851
-      // 
-      // http://www.google.com/webmasters/tools/richsnippets?q=http%3A%2F%2Fgetvoip.com%2Freviews%2Fphone%2Fcisco-spa303
-      // 
-      // http://stackoverflow.com/questions/18886947/schema-org-having-video-object-nested-inside-product
-      // http://googlewebmastercentral.blogspot.ru/2012/02/using-schemaorg-markup-for-videos.html
-      
-      //dpm($thumbnail_src);
-      $body_full_markup = preg_replace('|(\[video:.*http.*\])|is', 
-              '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
-                . '<span itemprop="name" content="' . $title . '"></span>' 
-                . '<span itemprop="description" content="' . $descr . '"></span>' 
-                . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $thumbnail_src . '" ></meta>'
-                . '<meta itemprop="duration" content="T' . $duration . 'S" ></meta>'
-                . '<meta itemprop="contentUrl" content="' . $contentUrl . '" ></meta>' 
-                . '$1' 
-            . '</div>', $body_full_markup);
-      
-      
-      
-      //dpm($body_full_markup);
-      // https://www.youtube.com/watch?v=oTBvd5jIAWI
-    } // End of if ($found_image) {
-    */
-    
-  } // if (preg_match('/\[video:(.*\])/is', $body_full_markup, $matches_1)) {
   
   
   if ($user->uid == 1 && preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches)) {
