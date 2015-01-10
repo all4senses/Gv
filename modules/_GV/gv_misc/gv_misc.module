@@ -14471,7 +14471,8 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
   $snippetVideoData = NULL;
   
     // YouTube.com
-  if (preg_match('/.*\?v=(.*)\s?.*\]/is', $videoToken_html_url_fragment, $matches_2)) {
+  //if (preg_match('/.*\?v=(.*)\s?.*\]/is', $videoToken_html_url_fragment, $matches_2)) {
+  if (preg_match('/.*\?v=(.*)\s?.*/is', $videoToken_html_url_fragment, $matches_2)) {
     //dpm($matches_2);
     $video_id = $matches_2[1];
 
@@ -14503,7 +14504,8 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
     }
   }
   // Wistia.com
-  elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $videoToken_html_url_fragment, $matches_2)) {
+  //elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $videoToken_html_url_fragment, $matches_2)) {
+  elseif (preg_match('/.*\/medias\/(.*)\?(.*)/is', $videoToken_html_url_fragment, $matches_2)) {
 
     //dpm($matches_2);
     $video_id = $matches_2[1];
