@@ -119,13 +119,16 @@ class SassCompactRenderer extends SassCompressedRenderer
     $indent = $this->getIndent($node);
     $debug = '';
 
-    if ($node->getDebug_info()) {
-      $debug .= $indent . self::DEBUG_INFO_RULE . '{';
-      $debug .= 'filename{' . self::DEBUG_INFO_PROPERTY . ':' . preg_replace('/([^-\w])/', '\\\\\1', "file://{$node->filename}") . ';}';
-      $debug .= 'line{' . self::DEBUG_INFO_PROPERTY . ":'{$node->line}';}";
-      $debug .= "}\n";
-    } elseif ($node->getLine_numbers()) {
-      $debug .= "$indent/* line {$node->line} {$node->filename} */\n";
+    // a4s patch
+//    if ($node->getDebug_info()) {
+//      $debug .= $indent . self::DEBUG_INFO_RULE . '{';
+//      $debug .= 'filename{' . self::DEBUG_INFO_PROPERTY . ':' . preg_replace('/([^-\w])/', '\\\\\1', "file://{$node->filename}") . ';}';
+//      $debug .= 'line{' . self::DEBUG_INFO_PROPERTY . ":'{$node->line}';}";
+//      $debug .= "}\n";
+//    } elseif ($node->getLine_numbers()) {
+//      $debug .= "$indent/* line {$node->line} {$node->filename} */\n";
+    if ($node->getDebug_info() || $node->getLine_numbers()) {
+      $debug .= "$indent/* line {$node->line}, {$node->filename} */\n";
     }
 
     return $debug;

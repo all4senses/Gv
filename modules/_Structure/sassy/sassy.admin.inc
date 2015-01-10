@@ -18,7 +18,10 @@ function sassy_preprocessor_settings_form($form, $form_state) {
   $form['debug'] = array(
     '#type' => 'checkbox',
     '#title' => t('Include debug information in output'),
-    '#description' => t('Should the compiler include debugging text, ' . l('usable by Firebug', 'https://github.com/nex3/firesass') . ' for enhanced debugging.'),
+    // a4s patch
+    //'#description' => t('Should the compiler include debugging text, ' . l('usable by Firebug', 'https://github.com/nex3/firesass') . ' for enhanced debugging.'),
+    '#description' => t('Should the compiler include debugging text, ' . l('usable by Firebug', 'https://github.com/is-already-taken/firecompass') . ' for enhanced debugging.'),
+      
     '#default_value' => $local['debug'],
   );
   $form['errors'] = array(
