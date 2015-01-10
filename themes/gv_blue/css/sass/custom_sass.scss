@@ -9,7 +9,15 @@ and open the template in the editor.
 */
 
 $background: #ff0000;
+$color: purple;
  
 body.test {
   background: darken($background, 20%);
+}
+
+.aaa {
+  color: $background;
+  .bbb {
+    color: $color;
+  }
 }
