@@ -1,5 +1,9 @@
   <?php
-    if ($node->title == 'Request a Quote page v7 Final') {
+    $final_page = (!empty($variables['node']->field_version['und'][2]['value']) && $variables['node']->field_version['und'][2]['value'] == 'final') ? TRUE : FALSE;
+  
+  
+    //if ($node->title == 'Request a Quote page v7 Final') {
+    if ($final_page) {
 //      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
 //      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
 //      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
@@ -26,19 +30,8 @@
             <?php 
               echo '<div class="logo"><img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
-            <!--<div class="ps"><span>Over 100,000 Quotes Delivered</span> Average business savings of $240/mo</div> -->
-            
-            <!--
-            <section id="block-gv-blocks-shopperapproved-badge" class="block block-gv-blocks contextual-links-region odd first">
-              <div class="content">
-                <a href="http://www.shopperapproved.com/reviews/getvoip.com/" onclick="var nonwin=navigator.appName!= 'Microsoft Internet Explorer'?'yes':'no'; var certheight=screen.availHeight-90; window.open(this.href,'shopperapproved','location='+nonwin+',scrollbars=yes,width=620,height='+certheight+',menubar=no,toolbar=no'); return false; "><img src="https://c683207.ssl.cf2.rackcdn.com/12265-r.gif" style="border: 0" alt="" oncontextmenu="var d = new Date(); alert('Copying Prohibited by Law - This image and all included logos are copyrighted by Shopper Approved � '+d.getFullYear()+'.'); return false;"></a> 
-              </div>
-            </section>
-            -->
             
           </div>
-        
-          
           
       </div>
   
@@ -50,7 +43,7 @@
 
 
       <div class="full main">
-        <!-- <img src="/images/theme/lp7-back.jpg" style="position: absolute;"> -->
+
         <div id="main-content">
 
               <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
@@ -58,7 +51,7 @@
               
               <img id="q-image" src="/images/theme/lp7-phone.png" />
               
-              <div class="content<?php echo ($_SERVER['REDIRECT_URL'] == '/service-quotes-final' ? ' final' : '')?>"<?php print $content_attributes; ?>>
+              <div class="content<?php echo ($final_page ? ' final' : '')?>"<?php print $content_attributes; ?>>
 
                     <div class="left">
                             
@@ -66,67 +59,13 @@
                             <div class="text bullet v3"><strong>Fast, Free VoIP Solution Quotes</strong></div>
                             <div class="text bullet v1"><strong>Free Number Porting, & Instant Setup</strong></div>
                             <div class="text bullet v2"><strong>Tap into Prescreened Solutions</strong></div>
-                            <!-- <div class="text bullet v3"><strong>No Contracts & No Set-up Fees</strong></div> -->
                             <div class="text bullet v4"><strong>Full-featured HD Phones Included</strong></div>
-                            
-                            <!--
-                            <div class="caption">Benefits & Features:</div>
-                            <div class="text bullet v1"><strong>Best Rates & Exclusive Offers</strong></div>
-                            <div class="text bullet v2"><strong>Custom Quotes From Top Providers</strong></div>
-                            <div class="text bullet v3"><strong>No Contracts Or Set-Up Fees</strong></div>
-                            <div class="text bullet v4"><strong>Feature Loaded HD Phones</strong></div>
-                            -->
-
                             
                     </div>
 
               </div>
           
-          
-          
-          
-          
-          
-              <?php /*
-              <div style="display: none;">
-                <div id="exitIntent"> 
-                  <div id="line-1">Do You Want To Save BIG On</div>
-                  <div id="line-2">Reliable Business Phone Service?</div>
-
-                  <div id="line-3">Get Voice, Fax, Text and Video Conferencing for $19/mo.</div>
-
-                  <a href="/business" id="yes" target="_top">YES</a>
-                  <div id="no">NO - I like overpaying for my old phone service.</div>
-                </div>
-              </div>
-              */ ?>
-              <?php
-              
-                // Exit intent Ad popup block.
-                // 
-                //global $user; 
-                //if ($user->uid) 
-                {
-                  /*
-                  // Colorbox for popup window.
-                  //1, 3, 4, 
-                  drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-                  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-                  // Exit intent Ad block main js.
-                  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-                  drupal_add_js($path_to_custom_js . 'gv_exitIntent_lpV4.js');
-                  */
-                }
-
-              
-              ?>
-          
-          
-          
-          
-
-              <?php if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'): ?>
+              <?php if ($final_page): ?>
 
                   <div class="right final">
                     <?php  
@@ -168,32 +107,6 @@
 
 
 
-      <?php /*
-      <div class="full bottom">
-
-          <div id="bottom">
-            <div class="text first">
-              <span></span>
-              <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['left_title']; ?></h3>
-              <div><?php echo $initialQuotePage_node->q_data['bottom_text']['left_text']; ?></div>
-            </div>
-            <div class="text">
-              <span></span>
-              <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['center_title']; ?></h3>
-              <div><?php echo $initialQuotePage_node->q_data['bottom_text']['center_text']; ?></div>
-            </div>
-            <div class="text last">
-              <span></span>
-              <h3><?php echo $initialQuotePage_node->q_data['bottom_text']['right_title']; ?></h3>
-              <div><?php echo $initialQuotePage_node->q_data['bottom_text']['right_text']; ?></div>
-            </div>
-
-
-            <div class="bottom-clear"></div>
-          </div>
-
-      </div> <!-- of Full --> 
-      */?>
       
       
       <div class="full brands">
@@ -201,28 +114,7 @@
           <div id="brands">
             
             <?php
-                /*
-                if (isset($initialQuotePage_node->field_q_image2['und'][0])) {
-                  echo '<ul id="mycarousel" class="jcarousel-skin-tango">';
-                 
-                  $image_style = 'landing_page_logos_slider_gray'; //'thumbnail'
-                  foreach ($initialQuotePage_node->field_q_image2['und'] as $brand) {
-                    echo '<li>', '<table><tbody><tr><td>', 
-                            theme('image_style', array( 'path' =>  $brand['uri'], 'style_name' => $image_style, 'alt' => $brand['alt'], 'title' => $brand['title'])),
-                        '</td></tr></tbody></table>', '</li>'; 
-                  }
-                  echo '</ul>';
-                }
-                */
-                
-//                global $user;
-//                if ($user->uid == 1) {
                   echo '<h2>Top 5 Recommended Business Phone Providers:</h2>', gv_blocks_get_topProvidersForLP('Top 5');
-//                }
-//                else {
-//                  echo '<h2>Supported by Major Brands:</h2><img src="/images/theme/lp-slider-logos-v7.png" alt="Supported by Major VoIP Brands" />';
-//                }
-
             ?>
 
             <div class="bottom-clear"></div> 
@@ -237,7 +129,6 @@
       <div class="full excerpt">
         
           <div id="upper-block">
-            <!--<h1>We identify and rank the best business VoIP providers and phone systems.</h1>-->
 
             <div class="quotes one">
               <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert price point analysis, and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
@@ -257,28 +148,12 @@
       <footer id="footer" role="contentinfo" class="region-footer clearfix">
         <div id="footer-inside">
 
-          <?php
-              //echo '<div id="block-gv-blocks-follow-links"><div class="follow-us">Follow Us</div>', gv_blocks_get_headerLinks(), '</div>';
-              //echo gv_blocks_getBlockThemed(array('module' => 'gv_blocks', 'delta' => 'footer_menu', 'no_subject' => TRUE, /*'class' => 'block-om-maximenu',*/ 'shadow' => FALSE), TRUE, '+31 day');
-          ?>
-
-
-          <div class="c"><!--GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.-->
+          <div class="c">
             <div>© 2015 GetVoIP.com | All Rights Reserved</div>
           </div>
 
         </div>
       </footer> <!-- /#footer -->
-  
-  <!--
-      <div class="full underfooter">
-        
-        <div id="underfooter-inside">
-          
-        </div>
-        
-      </div>
-  -->
   
 
   </div> <!-- End of <div id="quote-content"> -->
@@ -287,7 +162,7 @@
 
 
 
-<?php if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'): /* If we are on the final page, after the submission */ ?> 
+<?php if ($final_page): ?> 
 
           <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/service-quotes'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
