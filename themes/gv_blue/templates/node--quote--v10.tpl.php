@@ -1,7 +1,15 @@
   <?php
   dpm('xxxxx');
-    $final_page = (!empty($variables['node']->field_version['und'][2]['value']) && $variables['node']->field_version['und'][2]['value'] == 'final') ? TRUE : FALSE;
-  
+    $final_page = (!empty($variables['node']->field_version['und'][1]['value']) && $variables['node']->field_version['und'][1]['value'] == 'final') ? TRUE : FALSE;
+    if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
+      $version = explode('_', $variables['node']->field_version['und'][0]['value']);
+      $version = $version[0];
+      $subversion = $version[1];
+     }
+     else {
+      $version = $variables['node']->field_version['und'][0]['value'];
+      $subversion = NULL;
+     }
   
     //if ($node->title == 'Request a Quote page v7 Final') {
     if ($final_page) {
@@ -21,7 +29,7 @@
 
 
 
-<div id="v7" class="us">
+<div <?php echo 'id="v' . $version . '" class="' . $subversion . '"';?>>
   <div id="quote-content">
 
     
