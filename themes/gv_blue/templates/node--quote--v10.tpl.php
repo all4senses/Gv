@@ -37,125 +37,51 @@
           <div class="clearfix-dk"></div>
         </div>
       </header>
+
+
+
       
-      <div class="bottom-clear"></div> 
-  
-  
-
-
-      <div class="full main">
-
-        <div id="main-content">
-
-              <h2><span>Save Up To 65%</span> on a Better<br/> Business Phone Solution!</h2>
-              <h4>No contracts or set-up fees</h4>
-              
-              <img id="q-image" src="/images/theme/lp7-phone.png" />
-              
-              <div class="content<?php echo ($final_page ? ' final' : '')?>"<?php print $content_attributes; ?>>
-
-                    <div class="left">
-                            
-                            <div class="caption">Simplify Your VoIP Buying Process</div>
-                            <div class="text bullet v3"><strong>Fast, Free VoIP Solution Quotes</strong></div>
-                            <div class="text bullet v1"><strong>Free Number Porting, & Instant Setup</strong></div>
-                            <div class="text bullet v2"><strong>Tap into Prescreened Solutions</strong></div>
-                            <div class="text bullet v4"><strong>Full-featured HD Phones Included</strong></div>
-                            
-                    </div>
-
+      <section class="section below-fold">
+        <div class="testimonials">
+          <h1 class="boost">Over <span>1 Million</span> Happy Businesses Served.</h1>
+          <h2 class="boost">Here's what a few of them have to say about GetVoip</h2>
+          <div class="wrap">
+            <div class="testimonial">
+              <div class="wrap">
+                <div class="quote">
+                  <p>GetVoIP's comparison guides made it easy to make an informed and cost-effective decision.</p>
+                </div>
+                <div class="person">
+                  <div class="photo">
+                    <div class="circle"><img src="img/richard.png" alt="Richard Janes"></div>
+                  </div>
+                  <div class="name-meta">
+                    <p class="full-name">Richard Janes</p>
+                    <p class="job">Fanology Social, Inc.</p>
+                  </div>
+                </div>
               </div>
-          
-              <?php if ($final_page): ?>
-
-                  <div class="right final">
-                    <?php  
-                    //echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
-                    
-                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
-                            , '<img src="/sites/all/themes/gv_blue/css/images/click-here-button.png" />'
-                        , '</a>'
-                        , '<div class="quote-final">' 
-                          , '<p><strong>Thank you</strong> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote.</p>'
-                          , '<p>In the meantime, visit <a href="http://getvoip.com/business">GetVoIP.com</a> to browse featured business phone providers.</p>' 
-                        , '</div>';
-                    ?>
-                  </div>
-              <?php else: ?>
-
-                  <!--<div id="verisign"></div> -->
-                  
-                  <div class="right">
-                    <div id="right-bottom">
-                      <?php echo gv_blocks_get_requestQuoteForPage_v7(); ?>
-                      <div class="bottom-clear"></div> 
-                    </div>
-                  </div>
-
-                <form action="http://ww3.vocalocity.com/l/7772/2012-09-28/36c856" method="post"></form>
-
-
-                <?php endif; ?>
-
-                <?php
-                  echo render($content['metatags']);
-                ?>
-                <div class="bottom-clear"></div> 
-
-          </div>
-
-      </div> <!-- of Full -->
-
-
-
-      
-      
-      <div class="full brands">
-          
-          <div id="brands">
-            
-            <?php
-                  echo '<h2>Top 5 Recommended Business Phone Providers:</h2>', gv_blocks_get_topProvidersForLP('Top 5');
-            ?>
-
-            <div class="bottom-clear"></div> 
-          </div>
-        
-      </div> <!-- of Full -->        
-
-  
-  
-
-
-      <div class="full excerpt">
-        
-          <div id="upper-block">
-
-            <div class="quotes one">
-              <div class="text"><span></span>GetVoIP stands out in the business VoIP implementation space by providing expert price point analysis, and feature explanations, which ultimately translates into an easy to setup and manage phone system.<div></div></div>
-              <div class="source"><span class="image"></span><div>Chris Rabbu</div> VP of Marketing at Vonage, Inc.</div>
             </div>
-            <div class="bottom-clear"></div> 
+            <div class="testimonial">
+              <div class="wrap">
+                <div class="quote">
+                  <p>I had no idea where to start looking. GetVoIP found exactly what we needed in under 5 mins.</p>
+                </div>
+                <div class="person">
+                  <div class="photo">
+                    <div class="circle"><img src="img/mark.png" alt="Mark Crosbie"></div>
+                  </div>
+                  <div class="name-meta">
+                    <p class="full-name">Mark Crosbie</p>
+                    <p class="job">Flux Recruitment</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix-dk"></div>
           </div>
-
-      </div> <!-- of Full -->
-
-
-      
-      
-            
-
-  
-      <footer id="footer" role="contentinfo" class="region-footer clearfix">
-        <div id="footer-inside">
-
-          <div class="c">
-            <div>© 2015 GetVoIP.com | All Rights Reserved</div>
-          </div>
-
         </div>
-      </footer> <!-- /#footer -->
-  
+      </section>
 
 
 
