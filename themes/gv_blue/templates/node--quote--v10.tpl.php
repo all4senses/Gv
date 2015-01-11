@@ -42,7 +42,7 @@
         <div class="wrap">
 
           <div class="logo">
-            <img src="/images/theme/get-voip-logo5.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
+            <img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/logo" width="210" height="58" alt="GetVoIP" title="GetVoIP">
           </div>
 
           <div class="slogan-wrap">
