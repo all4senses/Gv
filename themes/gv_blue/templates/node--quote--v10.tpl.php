@@ -5,10 +5,11 @@
       $version = explode('_', $variables['node']->field_version['und'][0]['value']);
       $version = $version[0];
       $subversion = $version[1];
+      dpm($subversion);
      }
      else {
       $version = $variables['node']->field_version['und'][0]['value'];
-      $subversion = NULL;
+      $subversion = '';
      }
   
     //if ($node->title == 'Request a Quote page v7 Final') {
