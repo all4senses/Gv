@@ -435,3 +435,671 @@ h1.boost span {
 			}
 	}
 }
+
+
+
+
+
+
+
+/* THe Form */
+.form-main {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.form {
+	width: 90%;
+	max-width: 560px;
+	margin: 0 auto;
+
+		.step {
+			width: 100%;
+			padding-top: 50px;
+		}
+
+		.step.two,
+		.step.three,
+		.checkbox,
+		.radio {
+			display: none;
+		}
+}
+
+
+
+/* ==========================================================================
+   Global
+   ========================================================================== */
+
+
+
+.fieldset {
+	width: 100%;
+	position: relative;
+
+		p.question {
+			font-weight: 600;
+			font-size: 16px;
+			color: $grey-blue;
+			line-height: 1em;
+			padding: 0 0 11px;
+		}
+
+		input[type="text"],
+		.choice,
+		.checkbox-choice {
+			height: 100%;
+			background: $white;
+			border: 1px solid $divider-color;
+			border-radius: 3px;
+			box-sizing:border-box;
+			height: 55px;
+			color: $grey-mid;
+		}
+
+		.button {
+			width: 100%;
+			height: 55px;
+			margin-top: 30px;
+			font-weight: 600;
+			font-size: 19px;
+			text-align: center;
+			background: $contrast-color;
+			color: #fff;
+			border-radius: 3px;
+			cursor: pointer;
+			transition:background 0.2s;
+
+				p {
+					line-height: 60px;
+					height: 100%;
+				}
+
+				span:before {
+					position: relative;
+					font-size: 25px;
+					top: 5px;
+					right: 5px;
+				}
+
+			&:hover {
+				background: $contrast-color-dark;
+			}
+		}
+
+	.choice {
+		width: 180px / 560px * 100%;
+		float: left;
+		margin-left: 1.75%;
+		margin-left: 10px / 560px * 100%;
+		cursor: pointer;
+
+			label {
+			    -webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+			    pointer-events:none;
+			}
+
+		&.first {
+			margin-left: 0;
+		}
+
+		&.checked {
+			position: relative;
+			border-color: $primary-color;
+			border-color: #fff;
+
+				label,
+				div {
+					color: $primary-color;
+				}
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: -2px;
+					left: -2px;
+					display: block;
+					width: 100%;
+					height: 100%;
+					border: 2px solid $primary-color;
+					border-radius: 3px;
+					box-sizing: content-box;
+					z-index: 1;
+				}
+		}
+	}
+}
+
+/* 
+   
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   1. STEP ONE
+   ========================================================================== */
+
+.step.one {
+
+	.choice {
+
+		div,
+		label {
+			float: left;
+			cursor: pointer;
+			z-index: 2;
+			position: relative;
+			// height: 100%;
+		}
+
+		div {
+			width: 50px / 180px * 100%;
+			position: relative;
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+			-o-transform: translateY(-50%);
+			transform: translateY(-50%);
+			text-align: center;
+			font-size: 1.6em;
+
+
+				&:before {
+					top: 1px;
+					position: relative;
+					padding-left: 3px;
+				}
+		}
+
+		label {
+			width: 130px / 180px * 100%;
+			padding: 14px 0;
+			font-size: 11.5px;
+			line-height: 14px;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+	}
+
+	.choice.both {
+
+		div {
+			font-size: 1.6em;
+		}
+
+		label {
+			padding: 14px 8px 14px 0;
+			box-sizing:border-box;
+
+				@media screen and (max-width:600px) {
+					padding: 5px 0px 14px 0;
+				}
+
+				&:before {
+					// padding-left: 5px;
+				}
+
+				@media screen and (max-width:600px) {
+					// font-size: 1.8em;
+					padding-top: 8px;
+				}
+		}
+	}
+
+	.choice.service-only {
+		div {
+			font-size: 1.6em;
+
+				@media screen and (max-width:600px) {
+					// font-size: 1.8em;
+					padding-top: 13px;
+				}
+		}
+	}
+
+
+	@media screen and (max-width:600px) {
+		.choice {
+			height: 85px;
+
+			div,
+			label {
+				float: none;
+				width: 95%;
+				max-width: 130px;
+				margin: 0 auto;
+				text-align: center;
+				top: 0;
+				-webkit-transform: translateY(0%);
+				-o-transform: translateY(0%);
+				transform: translateY(0%);
+				display: block;
+				padding: 0;
+			}
+
+			div {
+				font-size: 1.8em;
+				padding-top: 10px;
+
+				&:before {
+					padding-left: 0;
+				}
+			}
+
+			label {
+				padding-top: 5px;
+				font-size: 10.5px;
+			} 
+		}
+	}
+
+	@media screen and (max-width:380px) {
+		.choice label span {display: none;}
+	}
+
+}
+
+/* ========================================================================== */
+
+
+
+
+
+
+/* ==========================================================================
+   2. STEP TWO
+   ========================================================================== */
+
+
+.step.two {
+
+		.choice {
+			width: 104px / 560px * 100%;
+			text-align: center;
+
+				label {
+					line-height: 55px;
+					font-weight: 600;
+
+					@media screen and (max-width:400px) {
+							
+							span {
+								display: none;
+							}
+					}
+				}
+		}
+
+		.fieldset.checkboxes {
+			margin-top: 35px;
+		}
+
+		.wrap.top5 {
+			margin-top: 5px;
+		}
+
+		.wrap.column {
+			width: 50%;
+			float: left;
+
+			&.right {
+				padding-left: 12px;
+			}
+		}
+
+		.choice-checkbox {
+			position: relative;
+			height: 19px;
+			margin-top: 14px;
+			cursor: pointer;
+
+				.checkbox-new {
+					position: relative;
+					@include size(19);
+					// display: inline-block;
+					background: $white;
+					border: 1px solid $divider-color;
+					border-radius: 3px;
+					margin-right: 10px;
+					float: left;
+					box-sizing: border-box;		
+				}
+
+				label {
+					font-size: 14px;
+					font-weight: 500;
+					padding-top: 2px;
+					display: block;
+					color: $grey;
+
+						@media screen and (max-width:500px) {
+							span { display: none; }
+						}
+
+						@media screen and (max-width:380px) {
+							font-size: 13px;
+						}
+				}
+
+			&.first {
+				margin-top: 0;
+			}
+
+			&:active .checkbox-new {
+				background: darken($white, 5);
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+
+			&.checked {
+
+					.checkbox-new:after {
+						content: 'h';
+						position: absolute;
+						top: 0.5px;
+						display: block;
+						margin: 0 auto;
+						text-align: center;
+						width: 100%;
+						font-family: gvcons;
+						color: $primary-color;
+						font-size: .8em;
+					}
+			}
+		}
+
+		.button {
+			float: left;
+		}
+
+		.button.back {
+			width: 20%;
+			background: $grey-x-light;
+
+				&:hover {
+					background: darken($grey-x-light, 10);
+				}
+		}
+
+		.button.next {
+			width: 78.2%;
+			margin-left: 10px / 560px * 100%;
+		}
+
+}
+
+
+/* ========================================================================== */
+
+
+
+
+
+
+/* ==========================================================================
+   3. Step Three
+   ========================================================================== */
+
+
+.fieldset.half {
+	width: 49.1%;
+	float: left;
+	margin-top: 22px;
+
+		input {
+			width: 100%;
+			font-size: 17px;
+			padding: 13px;
+
+			&:focus {
+				border: 1px solid $contrast-color;
+			}
+		}
+
+	&:nth-of-type(2), &:nth-of-type(5){
+		margin-left: perc(10, 560);
+	}
+
+	&.first {
+		margin-top: 0;
+	}
+}
+
+
+.step.three {
+	width: 100%;
+	max-width: 412px;
+	margin: 0 auto;
+	padding-top: 30px;
+
+		.button {
+			margin-top: 25px;
+		}
+
+		.inform-text {
+			font-size: 13.5px;
+			font-weight: 300;
+			line-height: 1.3em;
+			color: $grey-light;
+			text-align: center;
+			margin-top: 13px;
+		}
+}
+
+
+.title-loading {
+	padding-top: 200px;
+	
+	.loading-gif {
+		background-image: url(../img/loading.gif);
+		width: 64px;
+		height: 64px;
+		margin: 0 auto;
+	}
+}
+
+.title-second {
+
+		.result {
+			position: relative;
+			color: $contrast-color;
+			padding: 0 8px;
+			display: inline-block;
+
+				.number {
+					font-size: 36px;
+				}
+
+			&:after {
+				content: '';
+				position: absolute;
+				top: -5px;
+				left: -1px;
+				width: 33px;
+				height: 40px;
+				border: 2px solid $contrast-color;
+			}
+
+			@media screen and (max-width:540px) {
+
+						.number {
+							font-size: 32px;
+						}
+				
+					&:after {
+						width: 31px;
+						height: 34px;
+					}
+			}
+		}
+}
+
+
+/* ========================================================================== */
+
+
+
+
+
+
+/* ==========================================================================
+   Error styling
+   ========================================================================== */
+
+
+.step.two.radio-error {
+
+		.choices {
+			
+			p.question:after {
+				content: 'Please Select';
+				position: relative;
+				top: -3px;
+				padding: 4px 4px 3px 5px;
+				font-weight: 600;
+				font-size: 11px;
+				float: right;
+				line-height: 11px;
+				letter-spacing: .5px;
+				text-transform: uppercase;
+				color: #e34515;
+				border: 2px solid #e34515;
+				border-radius: 3px;
+			}
+		}
+}
+
+.step.two.checkbox-error {
+
+		.checkboxes {
+			
+			p.question:after {
+				content: 'Please Select';
+				position: relative;
+				top: -3px;
+				padding: 4px 4px 3px 5px;
+				font-weight: 600;
+				font-size: 11px;
+				float: right;
+				line-height: 11px;
+				letter-spacing: .5px;
+				text-transform: uppercase;
+				color: #e34515;
+				border: 2px solid #e34515;
+				border-radius: 3px;
+			}
+		}
+
+		&.no-show {
+
+			.checkboxes {
+
+				p.question:after {
+					display: none;
+				}
+			}
+		}
+}
+
+
+
+/* ========================================================================== */
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Thank You Page
+   ========================================================================== */
+
+.pdf-page .step {
+	padding-top: 40px !important;
+}
+
+.pdf {
+	padding-top: 50px;
+
+}
+
+.download {
+	@include size(147);
+	background: $white;
+	border: 1px solid $divider-color;
+	border-radius: 20px;
+	margin: 0 auto;
+	cursor: pointer;
+
+		span {
+			text-align: center;
+			display: block;
+			font-size: 15px;
+			line-height: 18px;
+			text-transform: uppercase;
+			font-weight: 600;
+			color: $grey;
+			box-sizing: border-box;
+			padding: 0 20px;
+		}
+
+	&:hover {
+
+			span {
+				color: $contrast-color;
+			}
+	}
+}
+
+.pdf-page a {
+	text-decoration: none !important;
+}
+
+.icon-download {
+	background-image: url(../img/icon-download.svg);
+	background-size: 100%;
+	margin: 18px auto 15px;
+	@include size(72,69);
+}
+
+
+.thanks {
+	width: 90%;
+	max-width: 420px;
+	margin: 0 auto;
+	padding-top: 50px;
+	text-align: center;
+	font-size: 18px;
+	line-height: 1.2em;
+	color: darken($grey, 10);
+
+		span {
+			font-weight: 700;
+		}
+}
+
+/* ========================================================================== */
+
+
+
+
+ 
