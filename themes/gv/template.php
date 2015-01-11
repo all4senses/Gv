@@ -786,8 +786,13 @@ function gv_process_page(&$variables) {
     }
             
     elseif ($variables['node']->type == 'quote') {
-      dpm($variables['node']);
-      drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+      //dpm($variables['node']);
+      if (strpos($variables['node']->title, 'v10')) {
+        drupal_add_css(path_to_theme() . '/css/sass/lpv10.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+      }
+      else {
+        drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+      }
     }
     else {
       
@@ -934,6 +939,7 @@ function gv_preprocess_node(&$variables) {
     elseif($variables['node']->type == 'quote') {
     
             global $body_classes_add;
+            dpm($variables['node']);
             if($variables['node']->title == 'Request a Quote page v9' || $variables['node']->title == 'Request a Quote page v9 Final') {
                 $body_classes_add['quote_page'] = 'quote-page v9';
                 $variables['theme_hook_suggestions'][] = 'node__quote__v9';
