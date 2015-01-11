@@ -959,7 +959,7 @@ function gv_preprocess_node(&$variables) {
             //dpm($variables['node']);
             
             if(!empty($variables['node']->field_version['und'][0]['value'])) {
-              dpm($variables['node']);
+              //dpm($variables['node']);
               if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
                $version = explode('_', $variables['node']->field_version['und'][0]['value']);
                $subversion = $version[1];
@@ -972,7 +972,7 @@ function gv_preprocess_node(&$variables) {
               }
               $body_classes_add['quote_page'] = 'quote-page v' . $version . (!$subversion ? '' : ' ' . $subversion);
               $variables['theme_hook_suggestions'][] = 'node__quote__v' . $version . (!$subversion ? '' : '_' . $subversion);
-              dpm($variables['theme_hook_suggestions']);
+              //dpm($variables['theme_hook_suggestions']);
             }
             elseif($variables['node']->title == 'Request a Quote page v9' || $variables['node']->title == 'Request a Quote page v9 Final') {
                 $body_classes_add['quote_page'] = 'quote-page v9';

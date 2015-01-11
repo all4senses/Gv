@@ -31,7 +31,7 @@
 
           <div id="gv-logo">
             <?php 
-              echo '<div class="logo"><img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
+              echo '<div class="logo"><img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/logo.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
             ?>
             
           </div>
