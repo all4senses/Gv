@@ -751,7 +751,10 @@ function gv_breadcrumb($variables) {
 function gv_css_alter(&$css) {
   // Remove defaults.css file.
   //unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
-  //dpm($css);
+  
+  dpm($_GET);
+  dpm($_SERVER);
+  dpm($css);
 }
 
 
