@@ -9202,8 +9202,17 @@ function gv_blocks_get_requestQuoteForPage_v10() {
   
   
   $out = 
-          '<h3>How Much Will You Save?</h3>'
-   .'<div id="requestQuoteFormWrapper">
+   '<div class="form-main">
+      <div class="title-first">
+        <h1>Simplify your Business VoIP buying process by letting us do the work for you.</h1>
+        <h2>Answer a few questions and we\'ll find the best business phone solution for your specific needs.</h2>
+      </div>
+      <div class="title-loading">
+        <div class="loading-gif"></div>
+      </div>
+
+          
+      <div id="requestQuoteFormWrapper">
         <div class="sending results" style="display: none;"></div>
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
@@ -9298,6 +9307,7 @@ function gv_blocks_get_requestQuoteForPage_v10() {
         <p id="data"></p>
 </div>
 <div class="block_footer"></div>
+</div>
   ';
   
   return $out;
