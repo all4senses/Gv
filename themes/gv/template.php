@@ -792,8 +792,9 @@ function gv_process_page(&$variables) {
         //if (strpos($variables['node']->title, 'v10')) {
         if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
           $version = explode('_', $variables['node']->field_version['und'][0]['value']);
-          $version = $version[0];
           $subversion = $version[1];
+          $version = $version[0];
+          
          }
          else {
           $version = $variables['node']->field_version['und'][0]['value'];
@@ -961,8 +962,9 @@ function gv_preprocess_node(&$variables) {
               dpm($variables['node']);
               if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
                $version = explode('_', $variables['node']->field_version['und'][0]['value']);
-               $version = $version[0];
                $subversion = $version[1];
+               $version = $version[0];
+               
               }
               else {
                $version = $variables['node']->field_version['und'][0]['value'];

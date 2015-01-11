@@ -1,11 +1,12 @@
   <?php
-  dpm('xxxxx');
+  //dpm('xxxxx');
     $final_page = (!empty($variables['node']->field_version['und'][1]['value']) && $variables['node']->field_version['und'][1]['value'] == 'final') ? TRUE : FALSE;
     if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
       $version = explode('_', $variables['node']->field_version['und'][0]['value']);
-      $version = $version[0];
       $subversion = $version[1];
-      dpm($subversion);
+      $version = $version[0];
+      
+      //dpm($subversion);
      }
      else {
       $version = $variables['node']->field_version['und'][0]['value'];
