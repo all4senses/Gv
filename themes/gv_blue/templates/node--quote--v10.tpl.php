@@ -161,16 +161,7 @@
             </div>
           </form>
         </div>
-        <div class="video" style="height: 386px; display: block;">
-          <div class="wrap">
-            <div class="placeholder">
-              <div class="play-button">
-                <div class="icon-triangle"></div>
-              </div>
-            </div>
-            <iframe class="real-video" width="560" height="315" video-src="//www.youtube.com/embed/QJnKs2cZ1Io?autoplay=1&amp;autohide=2&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;playsinline=1" frameborder="0" allowfullscreen=""></iframe>
-          </div>
-        </div>
+    
         <div class="feature">
           <div class="wrap">
             <h5>Featured In:</h5>
