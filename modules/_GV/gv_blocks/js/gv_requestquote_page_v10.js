@@ -162,6 +162,12 @@
           $(this).prev().click();
         });
         
+        jQuery('.service-type .choice').click(function(){
+          jQuery(this).parent().find('.choice').removeClass('checked'); 
+          jQuery(this).addClass('checked').find('input').attr('checked',true);
+          console.log(jQuery("input[type='radio'][name='service']:checked").val());
+        });
+        
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
