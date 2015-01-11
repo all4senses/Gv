@@ -18,7 +18,7 @@ function sassy_preprocessor_settings_form($form, $form_state) {
   $form['debug'] = array(
     '#type' => 'checkbox',
     '#title' => t('Include debug information in output'),
-    // a4s patch
+    // a4s patch https://www.drupal.org/node/2312869
     '#description' => t('Should the compiler include debugging text, ' . l('usable by Firebug', 'https://github.com/nex3/firesass') . ' for enhanced debugging.'),
     //'#description' => t('Should the compiler include debugging text, ' . l('usable by Firebug', 'https://github.com/is-already-taken/firecompass') . ' for enhanced debugging.'),
       

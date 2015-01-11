@@ -119,7 +119,7 @@ class SassCompactRenderer extends SassCompressedRenderer
     $indent = $this->getIndent($node);
     $debug = '';
 
-    // a4s patch
+    // a4s patch https://www.drupal.org/node/2312869
     if ($node->getDebug_info()) {
       $debug .= $indent . self::DEBUG_INFO_RULE . '{';
       $debug .= 'filename{' . self::DEBUG_INFO_PROPERTY . ':' . preg_replace('/([^-\w])/', '\\\\\1', "file://{$node->filename}") . ';}';
