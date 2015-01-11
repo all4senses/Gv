@@ -1,25 +1,16 @@
   <?php
-  //dpm('xxxxx');
     $final_page = (!empty($variables['node']->field_version['und'][1]['value']) && $variables['node']->field_version['und'][1]['value'] == 'final') ? TRUE : FALSE;
     if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
       $version = explode('_', $variables['node']->field_version['und'][0]['value']);
       $subversion = $version[1];
       $version = $version[0];
-      
-      //dpm($subversion);
      }
      else {
       $version = $variables['node']->field_version['und'][0]['value'];
       $subversion = '';
      }
   
-    //if ($node->title == 'Request a Quote page v7 Final') {
     if ($final_page) {
-//      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-//      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
-//      drupal_add_js('sites/all/libraries/jquery.plugins/jcarousel/jquery.jcarousel.min.js');
-//      drupal_add_css('sites/all/libraries/jquery.plugins/jcarousel/skins/tango/skin.css');
-  
       $initialQuotePage_node = gv_misc_getInitialQuotePageNode($node->title);
       $initialQuotePage_node->q_data = unserialize($initialQuotePage_node->field_q_data['und'][0]['value']);
     }
@@ -31,10 +22,11 @@
 
 
 
-<div <?php echo 'id="v' . $version . '" class="' . $subversion . '"';?>>
+<div <?php echo 'id="v' . $version . '" class="version-wrapper ' . $subversion . '"';?>>
+  
   <div id="quote-content">
 
-    
+      <!--
       <div class="full logo">
 
           <div id="gv-logo">
@@ -45,8 +37,21 @@
           </div>
           
       </div>
-  
-      
+      -->
+      <header id="masthead" class="site-header" role="banner">
+        <div class="wrap">
+
+          <div class="logo">
+            <img src="/images/theme/get-voip-logo5.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
+          </div>
+
+          <div class="slogan-wrap">
+            <div class="slogan">The VoIP Authority Trusted by <span>Millions</span></div>
+          </div>
+
+          <div class="clearfix-dk"></div>
+        </div>
+      </header>
       
       <div class="bottom-clear"></div> 
   
