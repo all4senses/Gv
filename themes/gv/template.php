@@ -970,7 +970,7 @@ function gv_preprocess_node(&$variables) {
                $version = $variables['node']->field_version['und'][0]['value'];
                $subversion = NULL;
               }
-              $body_classes_add['quote_page'] = 'quote-page v' . $version . (!$subversion ? '' : ' ' . $subversion);
+              $body_classes_add['quote_page'] = 'quote-page v' . $version . (!$subversion ? '' : ' ' . $subversion . ' v' . $version);
               $variables['theme_hook_suggestions'][] = 'node__quote__v' . $version . (!$subversion ? '' : '_' . $subversion);
               //dpm($variables['theme_hook_suggestions']);
             }

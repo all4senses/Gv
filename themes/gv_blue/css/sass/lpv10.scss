@@ -60,6 +60,110 @@ $white: #fff;
 
 
 
+
+
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+body {
+	background: $white;
+	font-family: avenir;
+	line-height: 1em;
+	// overflow-x: hidden;
+}
+
+#page {
+	width: 100%;
+	overflow: hidden;
+}
+
+main {
+	min-height: 993px - 265px;
+	background: url(../img/bg-img.jpg) 50% 100%  / cover;
+	background-repeat: no-repeat;
+	position: relative;
+
+		@media screen and (max-height:669px) {
+			min-height: 993px - 210px;
+			
+		}
+}
+
+.clearfix-dk {
+	clear: both;
+	float: none;
+}
+
+h1 {
+	font-size: 32px;
+	font-weight: 300;
+	line-height: 1.2em;
+	color: $grey;
+	text-align: center;
+	width: 86%;
+	max-width: 620px;
+	padding-top: 65px;
+	margin: 0 auto;
+
+		&.boost {
+			font-size: 30px;
+			padding-top: 90px;
+			margin: 0 auto;
+		}
+
+	@media screen and (max-width:700px) {
+		font-size: 4.6vw;
+			&.boost {
+				font-size: 4.4vw;
+			}
+	}
+
+	@media screen and (max-width:540px) {
+		font-size: 26px;
+			&.boost {
+				font-size: 24px;
+			}
+	}
+
+	@media screen and (max-width:420px) {
+		// font-size: 24px;
+	}
+}
+
+h2 {
+	font-size: 19px;
+	font-weight: 300;
+	color: $grey-light;
+	line-height: 1.2em;
+	text-align: center;
+	width: 90%;
+	max-width: 480px;
+	margin: 0 auto;
+	padding-top: 12px;
+
+		&.boost {
+			padding-top: 8px;
+		}
+
+	@media screen and (max-width:700px) {
+		font-size: 2.7vw;
+		width: 75%;
+	}
+
+	@media screen and (max-width:620px) {
+		font-size: 16px;
+	}
+}
+ 
+
+
+
+
+
+
+
 h1, h2 {color: green;}
 
 body.quote-page #all-content {
@@ -75,9 +179,11 @@ margin: auto;
 position: relative;
 }
 
+/*
 .node-type-quote .version-wrapper {
 height: 800px;
 }
+*/
 
 
 

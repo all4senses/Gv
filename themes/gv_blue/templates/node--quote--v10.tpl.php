@@ -22,27 +22,12 @@
 
 
 
-<div <?php echo 'id="v' . $version . '" class="version-wrapper ' . $subversion . '"';?>>
-  
-  <div id="quote-content">
 
-      <!--
-      <div class="full logo">
-
-          <div id="gv-logo">
-            <?php 
-              echo '<div class="logo"><img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/logo.png" alt="GetVoIP" title="GetVoIP" /></div>'; 
-            ?>
-            
-          </div>
-          
-      </div>
-      -->
       <header id="masthead" class="site-header" role="banner">
         <div class="wrap">
 
           <div class="logo">
-            <img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/logo" width="210" height="58" alt="GetVoIP" title="GetVoIP">
+            <img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/logo.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
           </div>
 
           <div class="slogan-wrap">
@@ -172,12 +157,13 @@
       </footer> <!-- /#footer -->
   
 
-  </div> <!-- End of <div id="quote-content"> -->
-  
-</div> <!-- End of <div id="v7"> -->
 
 
 
+
+
+
+<!-- Footer with js codes -->
 <?php if ($final_page): ?> 
 
           <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/service-quotes'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
