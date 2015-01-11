@@ -743,6 +743,18 @@ function gv_breadcrumb($variables) {
 }
 
 
+
+
+/**
+ * Implements hook_css_alter.
+ */
+function gv_css_alter(&$css) {
+  // Remove defaults.css file.
+  //unset($css[drupal_get_path('module', 'system') . '/defaults.css']);
+  dpm($css);
+}
+
+
 /**
  * Override or insert variables into the page template.
  */
@@ -802,7 +814,6 @@ function gv_process_page(&$variables) {
          }
          if ($version > 9) {
           drupal_add_css(path_to_theme() . '/css/sass/lpv' . $version . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
-          dpm($variables['styles']);
          }
          else {
            drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
