@@ -1,4 +1,5 @@
   <?php
+  dpm('xxxxx');
     $final_page = (!empty($variables['node']->field_version['und'][2]['value']) && $variables['node']->field_version['und'][2]['value'] == 'final') ? TRUE : FALSE;
   
   
