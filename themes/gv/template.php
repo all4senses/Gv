@@ -944,6 +944,7 @@ function gv_preprocess_node(&$variables) {
             //dpm($variables['node']);
             
             if(!empty($variables['node']->field_version['und'][0]['value'])) {
+              dpm($variables['node']);
               $body_classes_add['quote_page'] = 'quote-page v' . $variables['node']->field_version['und'][0]['value'] . (empty($variables['node']->field_version['und'][1]['value']) ? '' : ' ' . $variables['node']->field_version['und'][1]['value']);
               $variables['theme_hook_suggestions'][] = 'node__quote__v' . $variables['node']->field_version['und'][0]['value'] . (empty($variables['node']->field_version['und'][1]['value']) ? '' : '_' . $variables['node']->field_version['und'][1]['value']);
             }
