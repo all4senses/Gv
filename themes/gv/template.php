@@ -788,7 +788,7 @@ function gv_process_page(&$variables) {
     elseif ($variables['node']->type == 'quote') {
       //dpm($variables['node']);
       
-      if (!empty($variables['node']->field_version['und'][0]['value']) && $variables['node']->field_version['und'][3]['value'] > 9 ) {
+      if (!empty($variables['node']->field_version['und'][0]['value']) && $variables['node']->field_version['und'][0]['value'] > 9 ) {
       //if (strpos($variables['node']->title, 'v10')) {
         drupal_add_css(path_to_theme() . '/css/sass/lpv' . $variables['node']->field_version['und'][0]['value'] . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
       }
