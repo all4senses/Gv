@@ -802,6 +802,7 @@ function gv_process_page(&$variables) {
          }
          if ($version > 9) {
           drupal_add_css(path_to_theme() . '/css/sass/lpv' . $version . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+          dpm($variables['styles']);
          }
          else {
            drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
