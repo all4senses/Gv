@@ -788,9 +788,9 @@ function gv_process_page(&$variables) {
     elseif ($variables['node']->type == 'quote') {
       //dpm($variables['node']);
       
-      if (!empty($variables['node']->field_version['und'][0]['value'])) {
+      if (!empty($variables['node']->field_version['und'][0]['value']) && $variables['node']->field_version['und'][3]['value'] > 9 ) {
       //if (strpos($variables['node']->title, 'v10')) {
-        drupal_add_css(path_to_theme() . '/css/sass/lp' . $variables['node']->field_version['und'][0]['value'] . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+        drupal_add_css(path_to_theme() . '/css/sass/lpv' . $variables['node']->field_version['und'][0]['value'] . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
       }
       else {
         drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
@@ -944,8 +944,8 @@ function gv_preprocess_node(&$variables) {
             //dpm($variables['node']);
             
             if(!empty($variables['node']->field_version['und'][0]['value'])) {
-              $body_classes_add['quote_page'] = 'quote-page ' . $variables['node']->field_version['und'][0]['value'];
-              $variables['theme_hook_suggestions'][] = 'node__quote__' . $variables['node']->field_version['und'][0]['value'];
+              $body_classes_add['quote_page'] = 'quote-page v' . $variables['node']->field_version['und'][0]['value'] . (empty($variables['node']->field_version['und'][1]['value']) ? '' : ' ' . $variables['node']->field_version['und'][1]['value']);
+              $variables['theme_hook_suggestions'][] = 'node__quote__v' . $variables['node']->field_version['und'][0]['value'] . (empty($variables['node']->field_version['und'][1]['value']) ? '' : '_' . $variables['node']->field_version['und'][1]['value']);
             }
             elseif($variables['node']->title == 'Request a Quote page v9' || $variables['node']->title == 'Request a Quote page v9 Final') {
                 $body_classes_add['quote_page'] = 'quote-page v9';
