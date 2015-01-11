@@ -9212,17 +9212,15 @@ function gv_blocks_get_requestQuoteForPage_v10() {
       </div>
 
           
-      <div id="requestQuoteFormWrapper" class="hidden">
+      <div id="requestQuoteFormWrapper" class="hidden form">
         <div class="sending results" style="display: none;"></div>
         <div class="success results" style="display: none;"></div>
         <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
         <form class="multipartForm bbq" method="post" action="/request" style="height: 300px; overflow: hidden;">
 
-                
-                <div id="fieldWrapper">
                     
-                    <div class="step" id="phones_amt_section">
+                    <div class="step one radio-filled" id="phones_amt_section">
                         
 
 
@@ -9287,9 +9285,7 @@ function gv_blocks_get_requestQuoteForPage_v10() {
                               
                           </div>
                             
-                          
-                          <!--<div class="step-notice">' . t('Step <span class="f">!first</span>of<span class="s">!second</span>', array('!first' => 1, '!second' => 2)) . '</div> -->
-                            
+                               
                     </div>
                     
                     <div class="step" id="personal_info">
@@ -9325,7 +9321,7 @@ function gv_blocks_get_requestQuoteForPage_v10() {
                            <div class="protected"></div>
                     </div>
                     
-                </div>
+                
             
                 <div id="Navigation"> 							
                         <input class="navigation_button" id="back" value="Back" type="reset" />
