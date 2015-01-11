@@ -162,6 +162,10 @@
           $(this).prev().click();
         });
         
+        
+        
+        
+        
         $('.service-type .choice').click(function(){
           $(this).parent().find('.choice').removeClass('checked'); 
           $(this).addClass('checked').find('input').attr('checked',true);
@@ -169,12 +173,20 @@
         });
         console.log($("input[type='radio'][name='service']:checked").val());
         
+        
+        $('.button.next').click(function(){
+          $(".multipartForm").formwizard("next");
+        });
+        $('.button.back').click(function(){
+          $(".multipartForm").formwizard("back");
+        });
+        
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'Compare Your Savings Now!', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
-          textNext: 'Compare Your Savings Now!', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          textSubmit : 'Let\'s Get Started', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          textNext: 'Find Me Solutions', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
