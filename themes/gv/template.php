@@ -788,9 +788,23 @@ function gv_process_page(&$variables) {
     elseif ($variables['node']->type == 'quote') {
       //dpm($variables['node']);
       
-      if (!empty($variables['node']->field_version['und'][0]['value']) && $variables['node']->field_version['und'][0]['value'] > 9 ) {
-      //if (strpos($variables['node']->title, 'v10')) {
-        drupal_add_css(path_to_theme() . '/css/sass/lpv' . $variables['node']->field_version['und'][0]['value'] . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+      if (!empty($variables['node']->field_version['und'][0]['value'])) {
+        //if (strpos($variables['node']->title, 'v10')) {
+        if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
+          $version = explode('_', $variables['node']->field_version['und'][0]['value']);
+          $version = $version[0];
+          $subversion = $version[1];
+         }
+         else {
+          $version = $variables['node']->field_version['und'][0]['value'];
+          $subversion = NULL;
+         }
+         if ($version > 9) {
+          drupal_add_css(path_to_theme() . '/css/sass/lpv' . $version . '.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+         }
+         else {
+           drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+         }
       }
       else {
         drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
@@ -945,8 +959,17 @@ function gv_preprocess_node(&$variables) {
             
             if(!empty($variables['node']->field_version['und'][0]['value'])) {
               dpm($variables['node']);
-              $body_classes_add['quote_page'] = 'quote-page v' . $variables['node']->field_version['und'][0]['value'] . (empty($variables['node']->field_version['und'][1]['value']) ? '' : ' ' . $variables['node']->field_version['und'][1]['value']);
-              $variables['theme_hook_suggestions'][] = 'node__quote__v' . $variables['node']->field_version['und'][0]['value'] . (empty($variables['node']->field_version['und'][1]['value']) ? '' : '_' . $variables['node']->field_version['und'][1]['value']);
+              if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
+               $version = explode('_', $variables['node']->field_version['und'][0]['value']);
+               $version = $version[0];
+               $subversion = $version[1];
+              }
+              else {
+               $version = $variables['node']->field_version['und'][0]['value'];
+               $subversion = NULL;
+              }
+              $body_classes_add['quote_page'] = 'quote-page v' . $version . (!$subversion ? '' : ' ' . $subversion);
+              $variables['theme_hook_suggestions'][] = 'node__quote__v' . $version . (!$subversion ? '' : '_' . $subversion);
               dpm($variables['theme_hook_suggestions']);
             }
             elseif($variables['node']->title == 'Request a Quote page v9' || $variables['node']->title == 'Request a Quote page v9 Final') {
