@@ -255,4 +255,178 @@ header {
 
 
 
-/* Section Below fold */
+
+
+/* Section Below fold, Testimonials */
+.testimonials {
+	padding-bottom: 100px;
+
+		> .wrap {
+			width: 100%;
+			max-width: 1000px;
+			margin: 0 auto;
+			// padding: 0 54px;
+		}
+
+	@media screen and (max-width:800px) {
+		padding-bottom: 0px;
+	}
+}
+
+h2.boost {
+	padding-bottom: 125px;
+}
+
+h1.boost span {
+	color: $primary-color;
+}
+
+
+.testimonial {
+	width: 50%;
+	float: left;
+
+		.wrap {
+			width: 100%;
+			max-width: 330px;
+			margin: 0 auto;
+		}
+
+		.quote {
+			width: 100%;
+
+				p {
+					position: relative;
+					font-size: 20px;
+					line-height: 1.2em;
+					letter-spacing: 0.4px;
+					color: $grey;
+
+						&:before {
+							content: 'd';
+							position: absolute;
+							top: -12px;
+							left: -39px;
+							display: block;
+							font-family: gvcons;
+							font-size: 1.5em;
+							color: #ebebeb;
+						}
+
+						&:after {
+							content: 'e';
+							position: absolute;
+							bottom: -12px;
+							right: -34px;
+							display: block;
+							font-family: gvcons;
+							font-size: 1.5em;
+							color: #ebebeb;
+						}
+				}
+		}
+
+		.person {
+			padding-top: 45px;
+			height: 98px;
+
+				> div {
+					float: left;
+				}
+		}
+
+		.photo {
+				padding-right: 7.8%;
+				
+				.circle {
+					position: relative;
+					@include size(88);
+
+						img {
+							width: 100%;
+							height: 100%;
+							border-radius: 50%;
+							overflow: hidden;
+						}
+
+					&:before {
+						content: '';
+						position: absolute;
+						bottom: -6px;
+						right: -6px;
+						margin: 0 auto;
+						display: block;
+						@include size(98);
+						border: 1px solid $divider-color;
+						border-radius: 50%;
+					}
+				}
+		}
+
+		.name-meta {
+			position: relative;
+			top: 45%;
+			-webkit-transform: translateY(-50%);
+			-o-transform: translateY(-50%);
+			transform: translateY(-50%);
+
+			.full-name {
+				font-size: 17px;
+				font-weight: 700;
+				letter-spacing: 0.3px;
+				color: $grey;
+				padding-bottom: 6px;
+			}
+
+			.job {
+				font-size: 15px;
+				font-weight: 500;
+				color: $grey;
+			}
+		}
+
+	@media screen and (max-width:800px) {
+		width: 100%;
+		float: none;
+		margin-bottom: 60px;
+
+			.wrap {
+				width: 70%;
+			}
+	}
+
+	@media screen and (max-width:500px) {
+
+			.person {
+				width: 130%;
+			}
+
+			.quote p {
+				font-size: 18px;
+			}
+			
+			.photo {
+				padding-right: 6%;
+
+				.circle {
+					@include size(75);
+
+						&:before {
+							@include size(85);
+						}
+				}
+			}
+
+			.name-meta {
+				top: 40%;
+
+					.full-name {
+						font-size: 16px;
+					}
+
+					.job {
+						font-size: 14px;
+					}
+			}
+	}
+}

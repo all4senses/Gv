@@ -53,7 +53,7 @@
                 </div>
                 <div class="person">
                   <div class="photo">
-                    <div class="circle"><img src="img/richard.png" alt="Richard Janes"></div>
+                    <div class="circle"><img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/richard.png" alt="Richard Janes"></div>
                   </div>
                   <div class="name-meta">
                     <p class="full-name">Richard Janes</p>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="person">
                   <div class="photo">
-                    <div class="circle"><img src="img/mark.png" alt="Mark Crosbie"></div>
+                    <div class="circle"><img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/mark.png" alt="Mark Crosbie"></div>
                   </div>
                   <div class="name-meta">
                     <p class="full-name">Mark Crosbie</p>
