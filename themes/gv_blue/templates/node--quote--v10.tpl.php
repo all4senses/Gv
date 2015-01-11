@@ -47,7 +47,7 @@
       
       <main class="main section full-height" role="main" style="height: 728px;/* display: none; */">
         
-        <?php if (!$final): ?>
+        <?php if (!$final_page): ?>
           <div class="form-main">
             <div class="title-first">
               <h1>Simplify your Business VoIP buying process by letting us do the work for you.</h1>
