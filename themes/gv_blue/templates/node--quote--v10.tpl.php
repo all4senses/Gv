@@ -59,7 +59,7 @@
             <form class="form">
               <div class="step one radio-filled">
                 <div class="wrap">
-                  <a href="http://getvoip.com/pdfs/SMBVOIPAdvantagesWhitePaper.pdf"><div class="download"><div class="icon-download"></div><span>Download PDF</span></div></a>
+                  <a href="http://getvoip.com/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank"><div class="download"><div class="icon-download"></div><span>Download PDF</span></div></a>
                 </div>
                 <p class="thanks"><span>Thank you</span> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote. <br><br>In the meantime, visit <a href="http://getvoip.com/business">GetVoIP.com</a> to browse featured business phone providers.</p>
               </div>
