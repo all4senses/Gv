@@ -285,19 +285,21 @@
               
               if (step2_amt_errors) {
                 $('.people .error-warn').show();
-                console.log('step2_amt_errors');
+                console.log('step2_amt_errors - show warn');
 //                return false;
               }
               else {
                 $('.people .error-warn').hide();
+                console.log('NO step2_amt_errors - Hide Warn');
               }
               if (step2_features_errors) {
                 $('.checkboxes .error-warn').show();
-                console.log('step2_features_errors');
+                console.log('step2_features_errors - show warn');
 //                return false;
               }
               else {
                 $('.checkboxes .error-warn').hide();
+                console.log('NO step2_features_errors - Hide Warn');
               }
               if (!step2_amt_errors && !step2_features_errors) {
                 console.log('No Errors step 2');
