@@ -322,7 +322,7 @@
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	focusFirstInput: true,
-          textSubmit : 'Let\'s Get Started', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          textSubmit : 'Show Me Results', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           textNext: 'Find Me Solutions', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           
           //inAnimation : {height: 'show'},
