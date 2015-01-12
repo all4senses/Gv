@@ -224,17 +224,29 @@
         $('.step.two .button.next').click(function(){
           $('.title-first').hide();
           $('.step.two').hide();
+          $('.title-loading').show();
+          
+          
           // Get some data from the server
           // ...
           // ...
           // ... and then show the Step three
-          $(".multipartForm").formwizard("next");
+          
+          setTimeout(function() {
+            $('.title-loading').hide();
+            $('.title-second').show();
+            $(".multipartForm").formwizard("next");
+          }
+          , 500);
+          
+          
         });
         
         $('.step.two .button.back').click(function(){
           $(".multipartForm").formwizard("back");
         });
         $('.step.three .button.back').click(function(){
+          $('.title-second').hide();
           $(".multipartForm").formwizard("back");
           $('.title-first').show();
         });
