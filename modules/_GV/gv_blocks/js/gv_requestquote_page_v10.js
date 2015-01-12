@@ -228,24 +228,26 @@
             $('.title-first').hide();
             $('.step.two').hide();
             $('.title-loading').show();
+            
+            // Get some data from the server
+            // ...
+            // ...
+            // ... and then show the Step three
+
+            setTimeout(function() {
+              do {
+                x= Math.floor((Math.random() * 5) + 1);
+              } while (x < 3); 
+              //console.log(x);
+              $('.title-second .number, .title-second .number2').html(x);
+              $('.title-loading').hide();
+              $('.title-second').show();
+              $(".multipartForm").formwizard("next");
+            }
+            , 2000);
           }
           
-          // Get some data from the server
-          // ...
-          // ...
-          // ... and then show the Step three
           
-          setTimeout(function() {
-            do {
-              x= Math.floor((Math.random() * 5) + 1);
-            } while (x < 3); 
-            //console.log(x);
-            $('.title-second .number, .title-second .number2').html(x);
-            $('.title-loading').hide();
-            $('.title-second').show();
-            $(".multipartForm").formwizard("next");
-          }
-          , 2000);
           
           
         });
