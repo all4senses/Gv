@@ -224,6 +224,7 @@
         
         $('.step.two .button.next').click(function(){
           if (!step_ok(2)) {
+            console.log('step2 check...');
             $('.title-first').hide();
             $('.step.two').hide();
             $('.title-loading').show();
@@ -264,13 +265,15 @@
         function step_ok(step) {
           switch (step) {
             case 2:
-              $('.people .choice input:checked').each(function() {
+              $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
                 step2_errors = true;
+                console.log($(this).val());
               });
               $('.top5 .choice input:checked').each(function() {
                 //allVals.push($(this).val());
                 step3_errors = true;
+                console.log($(this).val());
               });
               return step2_errors && step3_errors;
             case 3:
