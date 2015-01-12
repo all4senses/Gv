@@ -304,7 +304,13 @@
         }
         
         
-        
+        /* ==========================================================================
+            Input Mask
+            ========================================================================== */
+
+         $('.fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+
+         /* ========================================================================== */
         
         
         
@@ -480,6 +486,7 @@
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
               $('#requestQuoteFormWrapper .multipartForm').hide(); 
+              $('.title-second').hide();
               $("#requestQuoteFormWrapper .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $("#requestQuoteFormWrapper .sending").show(); 
             },
