@@ -45,7 +45,8 @@
       
 
       
-      <main class="main section full-height" role="main" style="height: 728px;/* display: none; */">
+      <!-- <main class="main section full-height" role="main" style="height: 728px;/* display: none; */"> -->
+      <main class="main section full-height" role="main">
         
         <?php if (!$final_page): ?>
         
