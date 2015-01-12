@@ -174,11 +174,26 @@
         console.log($("input[type='radio'][name='service']:checked").val());
         
         
-        $('.button.next').click(function(){
+        $('.step.one .button.next, .step.three .button.next').click(function(){
           $(".multipartForm").formwizard("next");
         });
-        $('.button.back').click(function(){
+        
+        $('.step.two .button.next').click(function(){
+          $('.title-first').hide();
+          $('.step.two').hide();
+          // Get some data from the server
+          // ...
+          // ...
+          // ... and then show the Step three
+          $(".multipartForm").formwizard("next");
+        });
+        
+        $('.step.two .button.back').click(function(){
           $(".multipartForm").formwizard("back");
+        });
+        $('.step.three .button.back').click(function(){
+          $(".multipartForm").formwizard("back");
+          $('.title-first').show();
         });
         
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
