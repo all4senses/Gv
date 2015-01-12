@@ -261,22 +261,53 @@
         
         
         
-        var step2_errors = false;
-        var step3_errors = false;
+        var step2_errors = true;
+        var step3_errors = true;
         function step_ok(step) {
           switch (step) {
             case 2:
               $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
-                step2_errors = true;
+                step2_errors = false;
+                console.log('a');
                 console.log($(this).val());
               });
-              $('.top5 .choice input:checked').each(function() {
+              $('.top5 .choice-checkbox input:checked').each(function() {
                 //allVals.push($(this).val());
-                step3_errors = true;
+                step3_errors = false;
                 console.log($(this).val());
               });
-              return step2_errors && step3_errors;
+              if (step2_errors || step3_errors) {
+                console.log('Error');
+                return false;
+              }
+              else {
+                console.log('NO Error');
+                return true;
+              }
+              
+              /*
+              
+              jQuery('.people .choice :checked').each(function() {
+                //allVals.push(jQuery(this).val());
+                step2_errors = true;
+                console.log('a');
+                console.log(jQuery(this).val());
+              });
+              jQuery('.top5 .choice-checkbox input:checked').each(function() {
+                //allVals.push(jQuery(this).val());
+                step3_errors = true;
+                console.log(jQuery(this).val());
+              });
+              if (step2_errors || step3_errors) {
+                console.log('Error');
+                return false;
+              }
+              else {
+                console.log('NO Error');
+                return true;
+              }
+              */
             case 3:
               
               return step2_errors;
