@@ -9234,19 +9234,19 @@ function gv_blocks_get_requestQuoteForPage_v10() {
                                                                           <div class="choice phone-only first">
                                                                             <div class="icon-replace"></div>
                                                                             <label for="replace">Replace current system</label>
-                                                                            <input type="radio" class="radio" name="service" id="replace" value="replace">
+                                                                            <input type="radio" class="radio" name="q_for" id="replace" value="Replace current phone system">
                                                                           </div>
 
                                                                           <div class="choice both checked">
                                                                             <div class="icon-new"></div>
                                                                             <label for="new"><span>Find</span> new system &amp; service</label>
-                                                                            <input type="radio" class="radio" name="service" id="new" value="new" checked="checked">
+                                                                            <input type="radio" class="radio" name="q_for" id="new" value="Need a phone system for a new office" checked="checked">
                                                                           </div>
 
                                                                           <div class="choice service-only">
                                                                             <div class="icon-expand"></div>
                                                                             <label for="expand-only">Expand current system</label>
-                                                                            <input type="radio" class="radio" name="service" id="expand-only" value="expand-only">
+                                                                            <input type="radio" class="radio" name="q_for" id="expand-only" value="Expand on our current phone system">
                                                                           </div>
 
                                                           </div>
@@ -9279,11 +9279,11 @@ function gv_blocks_get_requestQuoteForPage_v10() {
                                               <div class="fieldset choices people first">
                                                 <p class="question">How many people will be using your phone system?</p>
                                                 <div class="wrap">
-                                                  <div class="choice first"><label for="1-4">1<span> </span>-<span> </span>4</label><input type="radio" class="radio" name="people" value="1-4" id="1-4"></div>
-                                                  <div class="choice second"><label for="5-10">5<span> </span>-<span> </span>10</label><input type="radio" class="radio" name="people" value="5-10" id="5-10"></div>
-                                                  <div class="choice third"><label for="11-20">11<span> </span>-<span> </span>20</label><input type="radio" class="radio" name="people" value="11-20" id="11-20"></div>
-                                                  <div class="choice fourth"><label for="21-49">21<span> </span>-<span> </span>49</label><input type="radio" class="radio" name="people" value="21-49" id="21-49"></div>
-                                                  <div class="choice fifth"><label for="50">50 +</label><input type="radio" class="radio" name="people" value="50" id="50"></div>
+                                                  <div class="choice first"><label for="1-4">1<span> </span>-<span> </span>4</label><input type="radio" class="radio" name="phones_amt" value="1 - 4" id="1-4"></div>
+                                                  <div class="choice second"><label for="5-10">5<span> </span>-<span> </span>10</label><input type="radio" class="radio" name="phones_amt" value="5 - 10" id="5-10"></div>
+                                                  <div class="choice third"><label for="11-20">11<span> </span>-<span> </span>20</label><input type="radio" class="radio" name="phones_amt" value="11 - 20" id="11-20"></div>
+                                                  <div class="choice fourth"><label for="21-49">21<span> </span>-<span> </span>49</label><input type="radio" class="radio" name="phones_amt" value="21 - 49" id="21-49"></div>
+                                                  <div class="choice fifth"><label for="50">50 +</label><input type="radio" class="radio" name="phones_amt" value="More than 50" id="50"></div>
                                                   <div class="clearfix-dk"></div>
                                                 </div>
                                               </div>
@@ -9326,16 +9326,16 @@ function gv_blocks_get_requestQuoteForPage_v10() {
                             <div class="wrap">
                                               <div class="fieldset input half first firstname error">
                                                 <p class="question">First Name</p>
-                                                <div class="wrap"><input type="text" class="field"></div>
+                                                <div class="wrap"><input type="text" class="field required firstname" name="firstname" id="firstname"></div>
                                               </div>
                                               <div class="fieldset input half first lastname error">
                                                 <p class="question">Last Name</p>
-                                                <div class="wrap"><input type="text" class="field"></div>
+                                                <div class="wrap"><input type="text" class="field required lastname" name="lastname" id="lastname"></div>
                                               </div>
                                               <div class="clearfix-dk"></div>
                                               <div class="fieldset input half email error">
                                                 <p class="question">Email Address</p>
-                                                <div class="wrap"><input type="text" class="field"></div>
+                                                <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
                                               </div>
                                               <div class="fieldset input half phone error">
                                                 <p class="question">Phone Number</p>
