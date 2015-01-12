@@ -268,24 +268,27 @@
         function step_ok(step) {
           switch (step) {
             case 2:
+              step2_errors = true;
+              step3_errors = true;
               $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
                 step2_errors = false;
-                console.log('a');
+                console.log('amt..');
                 console.log($(this).val());
               });
               $('.top5 .choice-checkbox :checked').each(function() {
                 //allVals.push($(this).val());
                 step3_errors = false;
+                console.log('feature..');
                 console.log($(this).val());
               });
-              if (step2_errors || step3_errors) {
-                console.log('Error');
-                return false;
+              if (!step2_errors && !step3_errors) {
+                console.log('No Error');
+                return true;
               }
               else {
-                console.log('NO Error');
-                return true;
+                console.log('Error');
+                return false;
               }
               
               /*
