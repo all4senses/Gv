@@ -5681,6 +5681,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     }
   }
   
+  watchdog('--> GV Request POST', print_r($_POST, TRUE), NULL, WATCHDOG_WARNING);
+  
   if (empty($post) 
       || empty($post['source'])
       //|| empty($post['phones_amt'])
