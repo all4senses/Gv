@@ -210,7 +210,7 @@
         
         $('.step.two .button.next').click(function(){
           if (step_ok(2)) {
-            console.log('step2 check...');
+            //console.log('step2 check...');
             $('.title-first').hide();
             $('.step.two').hide();
             $('.title-loading').show();
@@ -304,9 +304,8 @@
                 return false;
               }
              
-            case 3:
-              
-              return step2_errors;
+//            case 3:
+//              return step2_errors;
 
           }
         }
