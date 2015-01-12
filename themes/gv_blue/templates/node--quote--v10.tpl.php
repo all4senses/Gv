@@ -17,6 +17,18 @@
     else {
       $initialQuotePage_node = $node;
     }
+    
+    /*
+        $tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' =>  'viewport',
+            'content' => 'initial-scale=1.0, width=device-width,  minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
+          ),
+        );
+        drupal_add_html_head($tag, 'meta_viewport');
+    */
   ?>
 
 
@@ -88,7 +100,7 @@
       <section class="section below-fold">
         <div class="testimonials">
           <h1 class="boost">Over <span>1 Million</span> Happy Businesses Served.</h1>
-          <h2 class="boost">Here's what a few of them have to say about GetVoip</h2>
+          <h2 class="boost">Here's what a few of them have to say about GetVoIP</h2>
           <div class="wrap">
             <div class="testimonial">
               <div class="wrap">
