@@ -171,8 +171,12 @@
           $(this).addClass('checked').find('input').attr('checked',true);
           console.log($("input[type='radio'][name='service']:checked").val());
         });
-        console.log($("input[type='radio'][name='service']:checked").val());
         
+        $('.people .choice').click(function(){
+          $(this).parent().find('.choice').removeClass('checked'); 
+          $(this).addClass('checked').find('input').attr('checked',true);
+          console.log($("input[type='radio'][name='people']:checked").val());
+        });
         
         $('.step.one .button.next, .step.three .button.next').click(function(){
           $(".multipartForm").formwizard("next");
