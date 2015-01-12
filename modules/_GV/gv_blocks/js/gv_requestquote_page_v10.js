@@ -279,11 +279,11 @@
               });
               if (step2_errors || step3_errors) {
                 console.log('Error');
-                return false;
+                return true;
               }
               else {
                 console.log('NO Error');
-                return true;
+                return false;
               }
               
               /*
