@@ -233,6 +233,10 @@
           // ... and then show the Step three
           
           setTimeout(function() {
+            do {
+              x= Math.floor((Math.random() * 5) + 1);
+            } while (x < 3); 
+            console.log(x);
             $('.title-loading').hide();
             $('.title-second').show();
             $(".multipartForm").formwizard("next");
