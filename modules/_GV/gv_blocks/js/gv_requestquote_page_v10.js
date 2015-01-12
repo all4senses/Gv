@@ -1,8 +1,87 @@
 (function ($) {
 
+
   Drupal.behaviors.gv_requestquote_page_v10 = {
     
     attach: function (context, settings) {
+       
+       
+       
+       
+       
+          /* ==========================================================================
+             Main Section Height
+             ========================================================================== */
+ 
+ 
+          jQuery(document).ready(function($){
+
+
+              var $windowHeightTrue = $(window).height();
+              var $windowHeight = $windowHeightTrue - 87;
+
+
+              if ($windowHeightTrue > 815) { //Check if window is lower than 1080px
+                  $('.full-height').height($windowHeight); //Greater than 1080px
+                  var $videoHeight = $windowHeight - 607; //Set Video VAR
+              } else if ($windowHeightTrue < 815) {
+                  $('.full-height').height(728); //Less than 1080px
+                  var $videoHeight = 473; //Set Video VAR 473
+              }
+
+              $('.video').height($videoHeight);//Set Video Height
+
+          });
+
+          $(window).on('resize', function(){
+              var $windowHeightTrue = $(window).height();
+              var $windowHeight = $windowHeightTrue - 87;
+
+              if ($windowHeightTrue > 815) { //Check if window is lower than 1080px
+                  $('.full-height').height($windowHeight); //Greater than 1080px
+                  var $videoHeight = $windowHeight - 607; //Set Video VAR
+              } else if ($windowHeightTrue < 815) {
+                  $('.full-height').height(728); //Less than 1080px
+                  var $videoHeight = 386; //Set Video VAR 473
+              }
+
+              $('.video').height($videoHeight);//Set Video Height
+
+          });
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
        
         //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="phone"], input[id="company"], input[id="website"]').hint();
        
@@ -325,12 +404,13 @@
           textSubmit : 'Show Me Results', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           textNext: 'Find Me Solutions', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           
+          
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
 //          inAnimation : {left: 100},
 //          outAnimation: {left: 100},
-//				inDuration : 700,
-//					outDuration: 700,
+				  inDuration : 0, //700,
+					outDuration: 0, //700,
           //easing: 'slide',// 'easeOutBounce',
           //easing: 'easeOutBounce',
           //easing: 'slide',
