@@ -124,6 +124,9 @@
             <div class="clearfix-dk"></div>
           </div>
         </div>
+        
+        <div class="footer">© 2015 GetVoIP.com | All Rights Reserved</div>
+        
       </section>
 
 
