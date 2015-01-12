@@ -9171,6 +9171,7 @@ function gv_blocks_get_requestQuoteForPage_v9_uk() {
  */
 function gv_blocks_get_requestQuoteForPage_v10() {
 
+  global $user;
   
   drupal_add_library('system', 'ui.core');
   drupal_add_library('system', 'ui.widget');
@@ -9368,7 +9369,7 @@ function gv_blocks_get_requestQuoteForPage_v10() {
                                                 </div>
                                               </div>
                                               <p class="inform-text">You will also receive a FREE 6-Page business VoIP guide to help analyze and compare your results.</p>
-                                              <div class="button back">Back</div>
+                                              ' . ($user->uid == 1 ? '<div class="button back">Back</div>' : '') . '
                             </div>
 
 
