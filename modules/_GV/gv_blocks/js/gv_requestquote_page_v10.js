@@ -261,7 +261,8 @@
         
         
         
-        var step2_errors = step3_errors = false;
+        var step2_errors = false;
+        var step3_errors = false;
         function step_ok(step) {
           switch (step) {
             case 2:
