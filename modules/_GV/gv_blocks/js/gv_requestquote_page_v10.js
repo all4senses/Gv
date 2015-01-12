@@ -288,10 +288,16 @@
                 console.log('step2_amt_errors');
 //                return false;
               }
+              else {
+                $('.people .error-warn').hide();
+              }
               if (step2_features_errors) {
                 $('.checkboxes .error-warn').show();
                 console.log('step2_features_errors');
 //                return false;
+              }
+              else {
+                $('.checkboxes .error-warn').hide();
               }
               if (!step2_amt_errors && !step2_features_errors) {
                 console.log('No Errors step 2');
