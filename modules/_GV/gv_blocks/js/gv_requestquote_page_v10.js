@@ -169,13 +169,13 @@
         $('.service-type .choice').click(function(){
           $(this).parent().find('.choice').removeClass('checked'); 
           $(this).addClass('checked').find('input').attr('checked',true);
-          console.log($("input[type='radio'][name='service']:checked").val());
+          //console.log($("input[type='radio'][name='service']:checked").val());
         });
         
         $('.people .choice').click(function(){
           $(this).parent().find('.choice').removeClass('checked'); 
           $(this).addClass('checked').find('input').attr('checked',true);
-          console.log($("input[type='radio'][name='people']:checked").val());
+          //console.log($("input[type='radio'][name='people']:checked").val());
         });
         
         
@@ -202,13 +202,13 @@
           checkb = $(this).find('input');
           if ($(checkb).attr('checked')) {
               $(checkb).removeAttr('checked');
-              console.log('unchecked');
+              //console.log('unchecked');
               $(this).removeClass('checked');
             }
           else {
             $(checkb).attr('checked', true); 
             $(this).addClass('checked');
-            console.log('checked');
+            //console.log('checked');
           }
 
           //console.log($("input[type='checkbox'][name='people']:checked").val());
@@ -221,11 +221,13 @@
           $(".multipartForm").formwizard("next");
         });
         
+        
         $('.step.two .button.next').click(function(){
-          $('.title-first').hide();
-          $('.step.two').hide();
-          $('.title-loading').show();
-          
+          if (!step_ok(2)) {
+            $('.title-first').hide();
+            $('.step.two').hide();
+            $('.title-loading').show();
+          }
           
           // Get some data from the server
           // ...
@@ -236,7 +238,7 @@
             do {
               x= Math.floor((Math.random() * 5) + 1);
             } while (x < 3); 
-            console.log(x);
+            //console.log(x);
             $('.title-second .number, .title-second .number2').html(x);
             $('.title-loading').hide();
             $('.title-second').show();
@@ -255,6 +257,34 @@
           $(".multipartForm").formwizard("back");
           $('.title-first').show();
         });
+        
+        
+        
+        var step2_errors = step3_errors = false;
+        function step_ok(step) {
+          switch (step) {
+            case 2:
+              $('.people .choice input:checked').each(function() {
+                //allVals.push($(this).val());
+                step2_errors = true;
+              });
+              $('.top5 .choice input:checked').each(function() {
+                //allVals.push($(this).val());
+                step3_errors = true;
+              });
+              return step2_errors && step3_errors;
+            case 3:
+              
+              return step2_errors;
+
+          }
+        }
+        
+        
+        
+        
+        
+        
         
         $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
