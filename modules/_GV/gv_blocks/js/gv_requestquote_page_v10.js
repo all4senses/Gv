@@ -237,6 +237,7 @@
               x= Math.floor((Math.random() * 5) + 1);
             } while (x < 3); 
             console.log(x);
+            $('.title-second .number, .title-second .number2').html(x);
             $('.title-loading').hide();
             $('.title-second').show();
             $(".multipartForm").formwizard("next");
