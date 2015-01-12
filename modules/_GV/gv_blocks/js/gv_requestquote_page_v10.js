@@ -276,7 +276,7 @@
                 console.log('amt..');
                 console.log($(this).val());
               });
-              $('.top5 .choice-checkbox :checked').each(function() {
+              $('.checkboxes.choice-checkbox :checked').each(function() {
                 //allVals.push($(this).val());
                 step3_errors = false;
                 console.log('feature..');
@@ -288,16 +288,16 @@
 //                return false;
               }
               if (step3_errors) {
-                $('.top5 .error-warn').show();
-//                console.log('Error');
+                $('.checkboxes .error-warn').show();
+                console.log('step3_error Error');
 //                return false;
               }
               if (!step2_errors && !step3_errors) {
-                console.log('No Error');
+                console.log('No Errors');
                 return true;
               }
               else {
-                console.log('Error');
+                console.log('Errors');
                 return false;
               }
               
