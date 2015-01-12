@@ -13,8 +13,11 @@
 <head>
   <title><?php global $altered_head_title; if ($altered_head_title) {print $altered_head_title;} else {print $head_title;} ?></title>
   <?php print $head; ?>
+  
   <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="width=device-width" />
+  <!--<meta name="viewport" content="width=device-width" />-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  
   <?php print $styles; ?>
   <?php $args = arg(); 
         if ($args[0] == 'node' && (@$args[1] == 'add' || isset($args[2]) && $args[2] == 'edit')) { $top = TRUE; print $scripts; } 
