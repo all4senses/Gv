@@ -272,7 +272,7 @@
                 console.log('a');
                 console.log($(this).val());
               });
-              $('.top5 .choice-checkbox input:checked').each(function() {
+              $('.top5 .choice-checkbox :checked').each(function() {
                 //allVals.push($(this).val());
                 step3_errors = false;
                 console.log($(this).val());
