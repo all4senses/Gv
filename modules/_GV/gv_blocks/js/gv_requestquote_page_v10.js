@@ -175,28 +175,12 @@
         $('.people .choice').click(function(){
           $(this).parent().find('.choice').removeClass('checked'); 
           $(this).addClass('checked').find('input').attr('checked',true);
+          $('.people .error-warn').hide();
+          var step2_amt_errors = false;
           //console.log($("input[type='radio'][name='people']:checked").val());
         });
         
         
-        /*
-        jQuery('.top5 .choice-checkbox').click(function(){
-          
-          checkb = jQuery(this).find('input');
-          if (jQuery(checkb).attr('checked')) {
-              jQuery(checkb).removeAttr('checked');
-              console.log('unchecked');
-              jQuery(this).removeClass('checked');
-            }
-          else {
-            jQuery(checkb).attr('checked', true); 
-            jQuery(this).addClass('checked');
-            console.log('checked');
-          }
-
-          //console.log(jQuery("input[type='checkbox'][name='people']:checked").val());
-        });
-        */
         $('.top5 .choice-checkbox').click(function(){
           
           checkb = $(this).find('input');
@@ -208,6 +192,8 @@
           else {
             $(checkb).attr('checked', true); 
             $(this).addClass('checked');
+            $('.checkboxes .error-warn').hide();
+            step2_features_errors = false;
             //console.log('checked');
           }
 
@@ -268,7 +254,7 @@
         function step_ok(step) {
           switch (step) {
             case 2:
-              step2_amt_errors = true;
+              //step2_amt_errors = true;
               step2_features_errors = true;
               $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
