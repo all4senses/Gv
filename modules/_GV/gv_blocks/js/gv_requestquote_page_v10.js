@@ -282,14 +282,24 @@
                 console.log('feature..');
                 console.log($(this).val());
               });
-              if (!step2_errors && !step3_errors) {
-                console.log('No Error');
-                return true;
-              }
-              else {
+              if (step2_errors) {
+                $('.people .error-warn').show();
                 console.log('Error');
                 return false;
               }
+              if (step3_errors) {
+                $('.top5 .error-warn').show();
+                console.log('Error');
+                return false;
+              }
+//              if (!step2_errors && !step3_errors) {
+//                console.log('No Error');
+//                return true;
+//              }
+//              else {
+//                console.log('Error');
+//                return false;
+//              }
               
               /*
               
