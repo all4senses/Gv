@@ -263,41 +263,42 @@
         
         
         
-        var step2_errors = true;
-        var step3_errors = true;
+        var step2_amt_errors = true;
+        var step2_features_errors = true;
         function step_ok(step) {
           switch (step) {
             case 2:
-              step2_errors = true;
-              step3_errors = true;
+              step2_amt_errors = true;
+              step2_features_errors = true;
               $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
-                step2_errors = false;
+                step2_amt_errors = false;
                 console.log('amt..');
                 console.log($(this).val());
               });
-              $('.checkboxes.choice-checkbox :checked').each(function() {
+              $('.checkboxes .choice-checkbox :checked').each(function() {
                 //allVals.push($(this).val());
-                step3_errors = false;
+                step2_features_errors = false;
                 console.log('feature..');
                 console.log($(this).val());
               });
-              if (step2_errors) {
+              
+              if (step2_amt_errors) {
                 $('.people .error-warn').show();
-//                console.log('Error');
+                console.log('step2_amt_errors');
 //                return false;
               }
-              if (step3_errors) {
+              if (step2_features_errors) {
                 $('.checkboxes .error-warn').show();
-                console.log('step3_error Error');
+                console.log('step2_features_errors');
 //                return false;
               }
-              if (!step2_errors && !step3_errors) {
-                console.log('No Errors');
+              if (!step2_amt_errors && !step2_features_errors) {
+                console.log('No Errors step 2');
                 return true;
               }
               else {
-                console.log('Errors');
+                console.log('Errors step 2');
                 return false;
               }
               
