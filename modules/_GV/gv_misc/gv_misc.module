@@ -5677,6 +5677,14 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   if (!$post) {
     $post = array();
     foreach ($_POST as $key => $value) {
+      if ($key == 'features' && is_array($value)) {
+        $features = NULL;
+        foreach ($value as $feature) {
+          $features .= ($features ? ', ' : '') . $feature;
+        }
+        $value = $features;
+      }
+      
       $post[$key] = check_plain(strip_tags($value));
     }
   }
