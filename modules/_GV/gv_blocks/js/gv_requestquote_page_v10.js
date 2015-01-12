@@ -259,65 +259,43 @@
               $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
                 step2_amt_errors = false;
-                console.log('amt..');
-                console.log($(this).val());
+                //console.log('amt..');
+                //console.log($(this).val());
               });
               $('.checkboxes .choice-checkbox :checked').each(function() {
                 //allVals.push($(this).val());
                 step2_features_errors = false;
-                console.log('feature..');
-                console.log($(this).val());
+                //console.log('feature..');
+                //console.log($(this).val());
               });
               
               if (step2_amt_errors) {
                 $('.people .error-warn').show();
-                console.log('step2_amt_errors - show warn');
+                //console.log('step2_amt_errors - show warn');
 //                return false;
               }
               else {
                 $('.people .error-warn').hide();
-                console.log('NO step2_amt_errors - Hide Warn');
+                //console.log('NO step2_amt_errors - Hide Warn');
               }
               if (step2_features_errors) {
                 $('.checkboxes .error-warn').show();
-                console.log('step2_features_errors - show warn');
+                //console.log('step2_features_errors - show warn');
 //                return false;
               }
               else {
                 $('.checkboxes .error-warn').hide();
-                console.log('NO step2_features_errors - Hide Warn');
+                //console.log('NO step2_features_errors - Hide Warn');
               }
               if (!step2_amt_errors && !step2_features_errors) {
-                console.log('No Errors step 2');
+                //console.log('No Errors step 2');
                 return true;
               }
               else {
-                console.log('Errors step 2');
+                //console.log('Errors step 2');
                 return false;
               }
-              
-              /*
-              
-              jQuery('.people .choice :checked').each(function() {
-                //allVals.push(jQuery(this).val());
-                step2_errors = true;
-                console.log('a');
-                console.log(jQuery(this).val());
-              });
-              jQuery('.top5 .choice-checkbox input:checked').each(function() {
-                //allVals.push(jQuery(this).val());
-                step3_errors = true;
-                console.log(jQuery(this).val());
-              });
-              if (step2_errors || step3_errors) {
-                console.log('Error');
-                return false;
-              }
-              else {
-                console.log('NO Error');
-                return true;
-              }
-              */
+             
             case 3:
               
               return step2_errors;
@@ -365,7 +343,7 @@
                 //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
               else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
                 //alert(error.html() +  ': ' + element.prev().html());
-                error.insertAfter("#phone");
+                error.insertAfter("#email");
                 //alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
