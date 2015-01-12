@@ -178,6 +178,45 @@
           console.log($("input[type='radio'][name='people']:checked").val());
         });
         
+        
+        /*
+        jQuery('.top5 .choice-checkbox').click(function(){
+          
+          checkb = jQuery(this).find('input');
+          if (jQuery(checkb).attr('checked')) {
+              jQuery(checkb).removeAttr('checked');
+              console.log('unchecked');
+              jQuery(this).removeClass('checked');
+            }
+          else {
+            jQuery(checkb).attr('checked', true); 
+            jQuery(this).addClass('checked');
+            console.log('checked');
+          }
+
+          //console.log(jQuery("input[type='checkbox'][name='people']:checked").val());
+        });
+        */
+        $('.top5 .choice-checkbox').click(function(){
+          
+          checkb = $(this).find('input');
+          if ($(checkb).attr('checked')) {
+              $(checkb).removeAttr('checked');
+              console.log('unchecked');
+              $(this).removeClass('checked');
+            }
+          else {
+            $(checkb).attr('checked', true); 
+            $(this).addClass('checked');
+            console.log('checked');
+          }
+
+          //console.log($("input[type='checkbox'][name='people']:checked").val());
+        });
+        
+        
+        
+        
         $('.step.one .button.next, .step.three .button.next').click(function(){
           $(".multipartForm").formwizard("next");
         });
