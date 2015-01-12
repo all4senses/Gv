@@ -241,7 +241,7 @@
             $('.title-second').show();
             $(".multipartForm").formwizard("next");
           }
-          , 500);
+          , 2000);
           
           
         });
