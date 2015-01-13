@@ -10115,7 +10115,7 @@ function gv_misc_getProviderQuickData($target, $data) {
 
       }
       else {
-        $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '"><div>Write Review</div></a></div>';
+        $out = '<div class="details"><a ' . ( (isset($data['target']) && $data['target'] == 'iframe') ? 'target="_blank" ' : '') . 'href="' . url('node/' . $data['data']->nid) . '" style="float: none;"><div>Write Review</div></a></div>';
       }
       
       if ($stars) {
