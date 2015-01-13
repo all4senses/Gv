@@ -10188,8 +10188,8 @@ function gv_misc_getProviderQuickData($target, $data) {
       if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
         $out .= gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
       }
-      dpm($data['data']);
-      dpm($all_data_quick[$data['data']->nid]);
+      //dpm($data['data']);
+      //dpm($all_data_quick[$data['data']->nid]);
       //$logo = gv_misc_getProviderQuickData('logo_chart', array('data' => $data['data']));
       $out = '<div class="get_quote_popup"><span class="hidden"><span class="nid">' . $data['data']->nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</span></span></div>';
       return $out;
