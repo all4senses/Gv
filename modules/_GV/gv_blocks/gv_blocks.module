@@ -468,6 +468,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
 
+  $blocks['getQuotePopup_onLists'] = array(
+    'info' => 'Get quote popup on providers lists',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   
   return $blocks;
 }
@@ -951,6 +956,11 @@ function gv_blocks_block_view($delta = '') {
     case 'sip_chart_alteredview':
       $block['subject'] = '';
       $block['content'] = gv_blocks_chartFromView_altered_rotatedProviders(array('view' => 'providers', 'display' => 'bl_p_sip_rotated'));
+      break;
+    
+    case 'getQuotePopup_onLists':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getQuotePopup_onLists();
       break;
     
     
