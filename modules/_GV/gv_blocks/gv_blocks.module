@@ -5817,6 +5817,8 @@ function gv_blocks_get_requestQuote_block_v8_popup_provider() {
                 <input type="hidden" name="goal" value="quote" />
                 <input type="hidden" name="referrer" value="" />
                 <input type="hidden" name="url" value="" />
+                <input type="hidden" name="provider_name" value="" />
+                <input type="hidden" name="provider_id" value="" />
                 
         </form>
 
@@ -10562,4 +10564,44 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   $chart_themed = $view->preview($view_n_display['display']);
   
   return $info . $chart_themed;
+}
+
+
+/*
+ * Show popup Get quote for every provider in list by click on the Get Quote link.
+ */
+function gv_blocks_getQuotePopup_onLists() {
+  
+  // Colorbox for popup window.
+  //1, 3, 4, 
+  
+  //$current_js_array = drupal_add_js();
+  if (!isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js']) && !isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) ) 
+    {
+      //dpm($current_js_array);
+      // Colorbox for popup window for exit intent.
+      //possible versions for the design: 1, 3, 4, 
+      drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+  }
+  //drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+
+  // Exit intent Ad block main js.
+  $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
+  
+  //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
+  $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
+  $provider_name = 'Name';
+  $out = 
+  '<div style="display: none;">
+    <div id="block-gv-blocks-request-quote-v8" class="popup-request quote">' 
+      . $logo_block. '<div class="header"><div class="title">Request '. $provider_name. ' Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>
+      <div class="bottom-clear"></div>'
+      . gv_blocks_get_requestQuote_block_v8_popup_provider() .
+
+    '</div>
+  </div>';
+  
+  return $out;
 }
