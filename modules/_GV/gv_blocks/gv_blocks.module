@@ -2511,7 +2511,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/web-conferencing' => 'Web Conferencing',
        //'/small-business-voip' => 'Small Business VoIP',
       '/cloud-backup' => 'Cloud Backup',
-      '/call-center-solutions' => 'Call Center Software',
+      '/cloud-contact-center' => 'Call Center Software',
     );
     
     $map_path_to_type = array(
@@ -2529,7 +2529,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/crm-software' => 'crm',
       //'/small-business-voip' => 'smbv',
       '/cloud-backup' => 'cb',
-      '/call-center-solutions' => 'cc',// 'page-compare-cc-voip-providers',
+      '/cloud-contact-center' => 'cc',// 'page-compare-cc-voip-providers',
     );
     
     if(!$service_type = @$map_path_to_type[$_SERVER['REDIRECT_URL']]) {
@@ -3607,7 +3607,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/web-conferencing' => 'web-conferencing-voip-providers',
     '/crm-software' => 'crm-voip-providers',
     '/cloud-backup' => 'cloud-backup',
-    '/call-center-solutions' => 'page-compare-cc-voip-providers',
+    '/cloud-contact-center' => 'page-compare-cc-voip-providers',
   );
   
   $map_preface_type_to_service_type = array(
@@ -3638,7 +3638,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/web-conferencing' => 'Video Web Conferencing Solutions',
     '/crm-software' => 'CRM Solutions',
     '/cloud-backup' => 'Cloud Backup Providers',
-    '/call-center-solutions' => 'Call Center Software',
+    '/cloud-contact-center' => 'Call Center Software',
   );
  
   $service_type_name_origin = $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]];
@@ -3665,7 +3665,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/web-conferencing' => 'Video Web Conferencing Solutions',
     '/crm-software' => 'CRM Solutions',
     '/cloud-backup' => 'Cloud Backup',
-    '/call-center-solutions' => 'Call Center Software',
+    '/cloud-contact-center' => 'Call Center Software',
   );
  
   
@@ -9459,6 +9459,7 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_real/jquery.inputmask.min.js');
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   
+  // Turn off input phone mask for UK
   drupal_add_js(array('gv_turn_on_phone_input_mask' => FALSE), 'setting');  
   
   $token = md5(time()); //drupal_get_token('test');
