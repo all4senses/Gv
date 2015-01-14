@@ -9459,7 +9459,12 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_real/jquery.inputmask.min.js');
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   
-  
+  drupal_add_js(array('gv_blocks' => array(
+    'from_last_month' => array(
+      'date' => date('m\/d\/Y', strtotime(date('m\/01\/Y 00\:00\:00', strtotime('last month')))),
+      'time' => '00:00:00',
+    ),
+  )), 'setting');  
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
