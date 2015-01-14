@@ -19,6 +19,24 @@
             $("body").css('overflow', 'hidden');
             
             
+            
+            
+            
+            // Reset previous submission state.
+            $('.popup-request.quote .results').hide(); 
+            $('.popup-request.quote .multipartForm').show(); 
+            
+            // Recreatehints if it they were cleared on the previous submission.
+            $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+              if ($(this).val() == '') {
+                $(this).val($(this).attr('title'));
+              }
+              if ($(this).val() == $(this).attr('title')) {
+                $(this).addClass('blur');
+              }
+            });
+
+            
 //            jQuery('.get_quote_popup').parent().parent().find('img');
 //            console.log(jQuery('.multipartForm input[name="provider_id"]').val());
             
