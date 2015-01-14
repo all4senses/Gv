@@ -2609,8 +2609,8 @@ function gv_misc_css_alter(&$css) {
   //dpm($_GET);
   //dpm($_SERVER);
   //dpm($css);
-  // unset main custom css for lpv10 page
-  $pages_to_exclude_custom_css = array('node/5203', 'node/5204');
+  // unset main custom css for lpv10, lpv10uk page
+  $pages_to_exclude_custom_css = array('node/5203', 'node/5204', 'node/5210', 'node/5211');
   if (in_array($_GET['q'], $pages_to_exclude_custom_css)) {
     unset($css['sites/all/themes/gv_blue/css/custom.css'], $css['sites/all/themes/gv/css/style.css']); 
   }
