@@ -314,7 +314,7 @@
                   Input Mask
                   ========================================================================== */
 
-               console.log('turn off: ' + Drupal.settings['gv_blocks']['turn_off_input_mask']);
+               console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
                //$('.fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
 
                /* ========================================================================== */
