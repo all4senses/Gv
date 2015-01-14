@@ -336,7 +336,7 @@
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
               
-              $('#block-gv-blocks-request-quote-v8.popup-request.quote .caption').hide(); 
+              $('.popup-request.quote .caption').hide(); 
               
               $('.popup-request.quote .multipartForm').hide(); 
               $(".popup-request.quote .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 

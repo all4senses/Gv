@@ -26,8 +26,8 @@
               jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('img').clone());
               jQuery('.popup-request.quote .header .title span').html(jQuery(this).find('.name').html());
               
-              jQuery('.multipartForm input[name="provider_id"]').val(jQuery(this).find('.nid').html());
-              jQuery('.multipartForm input[name="provider_name"]').val(jQuery(this).find('.name').html());
+              jQuery('.popup-request.quote .multipartForm input[name="provider_id"]').val(jQuery(this).find('.nid').html());
+              jQuery('.popup-request.quote .multipartForm input[name="provider_name"]').val(jQuery(this).find('.name').html());
             //});
             
             $.fn.colorbox({
