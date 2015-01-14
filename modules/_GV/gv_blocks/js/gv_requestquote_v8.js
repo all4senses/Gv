@@ -137,7 +137,7 @@
           $(this).prev().click();
         });
         
-        $("#requestQuoteFormWrapper .multipartForm").formwizard({ 
+        $("#block-gv-blocks-request-quote-v8 #requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,

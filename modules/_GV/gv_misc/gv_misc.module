@@ -5730,6 +5730,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     $already_sent = FALSE;
     // allow dublicate of test@test.test address for testing purposes.
+    /*
     if ($post['email'] != 'test@test.test' && gv_misc_isSubmissionAlreadySent($post['email'])) {
       $already_sent = TRUE;
       
@@ -5744,6 +5745,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
       return;
       
     }
+    */
     
     $status = TRUE;
     
@@ -5916,6 +5918,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
         
         //'Sumbission page' => $post['url'],
         'sentToRemoteProviders' => array(),
+        'Provider Name' => isset($post['provider_name']) ? $post['provider_name'] : NULL,
+        'Provider ID' => isset($post['provider_id']) ? $post['provider_id'] : NULL,
       );      
       
       foreach ($submission as $key => $value) {
