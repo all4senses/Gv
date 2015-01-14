@@ -19,6 +19,15 @@
             $("body").css('overflow', 'hidden');
             
             
+//            jQuery('.get_quote_popup').parent().parent().find('img');
+//            console.log(jQuery('.multipartForm input[name="provider_id"]').val());
+            
+            //jQuery('.get_quote_popup').click(function() {
+              jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('img').clone());
+              jQuery('.multipartForm input[name="provider_id"]').val(jQuery(this).find('.nid').html().clone());
+              jQuery('.multipartForm input[name="provider_name"]').val(jQuery(this).find('.name').html().clone());
+            //});
+            
             $.fn.colorbox({
               inline:true, 
               href:".popup-request.quote", 
