@@ -19,7 +19,35 @@
             $("body").css('overflow', 'hidden');
             
             
+            // Track click.
             
+         (jQuery).ajax({
+            
+                url: '/click', 
+                data: {
+                        type: 'quote_popup_on_list_click',
+                        oid: jQuery(this).find('.nid').html(),
+                        click_page: window.location.href,
+                        url: '',//$(this).attr('href'),
+                        title: jQuery(this).find('.name').html()
+                        //,referer: document.referrer
+                       
+                      }, 
+                    type: 'POST', 
+                    dataType: 'json'
+                    
+                    , 
+                    success: function(data) 
+                            { 
+                                if(!data.error) {
+                                    console.log('Track clicked!');
+                                }
+                                return false;
+                            } 
+                     
+            }); // end of (jQuery).ajax
+        
+
             
             
             // Reset previous submission state.

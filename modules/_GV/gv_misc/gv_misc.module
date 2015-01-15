@@ -2935,7 +2935,7 @@ function gv_misc_trackClick_ajax() {
           'object_id' => str_replace('oid', '', preg_replace('/.*oid(.*)xxx.*/s', '$1', $post['oid'])), //str_replace('oid', '', $post['oid']),
           'type' => $post['type'],
           'object_name' => $post['title'],
-          'url' => $post['url'],
+          'url' => @$post['url'],
           'timestamp' => time(),
           
           'referer' => @$_SESSION['gv_current_http_referer'],
