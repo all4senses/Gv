@@ -318,7 +318,7 @@
             
             success: function(data){
               $('.popup-request.quote .sending').hide(); 
-              $(".popup-request.quote .success").append(data.data); 
+              $(".popup-request.quote .success").html(data.data); 
               $(".popup-request.quote .success").show();
               //console.log('Start timer...');
               setTimeout(
@@ -339,7 +339,7 @@
               $('.popup-request.quote .caption').hide(); 
               
               $('.popup-request.quote .multipartForm').hide(); 
-              $(".popup-request.quote .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $(".popup-request.quote .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $(".popup-request.quote .sending").show(); 
             },
             

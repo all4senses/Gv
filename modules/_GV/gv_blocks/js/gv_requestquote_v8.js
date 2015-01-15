@@ -317,14 +317,14 @@
             
             success: function(data){
               $('.sidebar #requestQuoteFormWrapper .sending').hide(); 
-              $(".sidebar #requestQuoteFormWrapper .success").append(data.data); 
+              $(".sidebar #requestQuoteFormWrapper .success").html(data.data); 
               $(".sidebar #requestQuoteFormWrapper .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
               $('.sidebar #requestQuoteFormWrapper .multipartForm').hide(); 
-              $(".sidebar #requestQuoteFormWrapper .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $(".sidebar #requestQuoteFormWrapper .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $(".sidebar #requestQuoteFormWrapper .sending").show(); },
             
             
