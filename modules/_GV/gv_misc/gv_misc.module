@@ -2914,7 +2914,7 @@ function gv_misc_trackClick_ajax() {
     $post[$key] = check_plain(strip_tags($value));
   }
   
-  if (!empty($post['type']) && !empty($post['url'])) {
+  if (!empty($post['type'])/* && !empty($post['url'])*/) {
     
       global $user;
       $data = NULL;
@@ -2929,9 +2929,9 @@ function gv_misc_trackClick_ajax() {
 //        'click_page' => $post['click_page'],
 //        'user' => array('name' => $user->name, 'hostname' => $user->hostname),
 //      ));
-
-      db_insert('gv_track_links')
-        ->fields(array(
+      
+      
+      $db_object = array(
           'object_id' => str_replace('oid', '', preg_replace('/.*oid(.*)xxx.*/s', '$1', $post['oid'])), //str_replace('oid', '', $post['oid']),
           'type' => $post['type'],
           'object_name' => $post['title'],
@@ -2944,12 +2944,15 @@ function gv_misc_trackClick_ajax() {
           'ip' => $user->hostname,
             
           'data' => $data,
-        ))
+        );
+
+      db_insert('gv_track_links')
+        ->fields($db_object)
         ->execute();
 
   }
   
-  drupal_json_output(array('status' => $status, /*'data' => $output*/));
+  drupal_json_output(array('status' => $status/*, 'data' => $db_object*/));
 }
 
 
