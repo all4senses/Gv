@@ -6643,6 +6643,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     'all_reviews_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
       
     'top_cb_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_cb'), 'listing_pos_fields' => array('field_p_erating_cb')),
+    
+    'top_cc_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_cc_page'), 'listing_pos_fields' => array('field_p_erating_cc')),  
   );
   
   
@@ -9903,6 +9905,8 @@ function gv_misc_getProviderQuickData($target, $data) {
                               '/residential' => 'top_re_providers', 
           
                               '/cloud-backup' => 'top_cb_providers', 
+          
+                              '/cloud-contact-center' => 'top_cc_providers', 
                                 
                               
                               '/residential-voip-reviews' => 'top_re_providers',
