@@ -21,7 +21,7 @@
             
             // Track click.
             
-         (jQuery).ajax({
+            (jQuery).ajax({
             
                 url: '/click', 
                 data: {
@@ -69,7 +69,8 @@
 //            console.log(jQuery('.multipartForm input[name="provider_id"]').val());
             
             //jQuery('.get_quote_popup').click(function() {
-              jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('img').clone());
+              //jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('img').clone());
+              jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('.sprite-div').clone());
               jQuery('.popup-request.quote .header .title span').html(jQuery(this).find('.name').html());
               
               jQuery('.popup-request.quote .multipartForm input[name="provider_id"]').val(jQuery(this).find('.nid').html());
