@@ -6718,6 +6718,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   $out_sprite_path = 'sites/default/files/p/';
   $out_sprite_ext = 'png';
   
+  dpm($input_providers_data);
+  
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
