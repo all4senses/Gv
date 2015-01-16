@@ -1594,15 +1594,29 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   dpm($dates);
   */
   
-  $source = 'public://p/logos/CorvisaCloud-logo.jpg';
-  $image = image_load($source);
-  
-  dpm($image);
+//  $source = 'public://p/logos/CorvisaCloud-logo.jpg';
+//  $image = image_load($source);
+//  
+//  dpm($image);
   
   $source = 'sites/default/files/p/logos/CorvisaCloud-logo.jpg';
   $image = image_load($source);
   
   dpm($image);
+  
+  $res = image_gd_create_tmp($image, $image->info['width'], $image->info['height']);
+
+  if (!imagecopyresampled($res, $image->resource, 0, 0, 0, 0, $width, $height, $image->info['width'], $image->info['height'])) {
+    dpm('Error');
+  }
+  
+  dpm($res);
+
+//  imagedestroy($image->resource);
+//  // Update image object.
+//  $image->resource = $res;
+//  $image->info['width'] = $width;
+//  $image->info['height'] = $height;
           
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
