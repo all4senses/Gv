@@ -1604,7 +1604,9 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   dpm($image);
   
-  $res = image_gd_create_tmp($image, $image->info['width'], $image->info['height']);
+  $width = 128;
+  $height = 60;
+  $res = image_gd_create_tmp($image, $width, $height);
 
   if (!imagecopyresampled($res, $image->resource, 0, 0, 0, 0, $width, $height, $image->info['width'], $image->info['height'])) {
     dpm('Error');
