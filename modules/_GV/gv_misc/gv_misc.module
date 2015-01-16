@@ -6698,6 +6698,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
           
+          $input_providers_data[$providers_logos_sprite_name][$provider->nid]['i_logo_uri'] = $all_data_quick[$provider->nid]['i_logo_uri'];
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = str_replace('http://getvoip.com/', '', image_style_url($image_style_name, $all_data_quick[$provider->nid]['i_logo_uri']));
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src'] = urldecode($input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']); //str_replace('%20', ' ', $input_providers_data[$providers_logos_sprite_name][$provider->nid]['themed_image_src']);
                   
