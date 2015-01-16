@@ -1600,6 +1600,9 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 //  dpm($image);
   
   $source = 'sites/default/files/p/logos/CorvisaCloud-logo.jpg';
+  $dest_jpeg = 'sites/default/files/p/logos/CorvisaCloud-logo_2.jpg';
+  $dest_png = 'sites/default/files/p/logos/CorvisaCloud-logo_2.png';
+  
   $image = image_load($source);
   
   dpm($image);
@@ -1614,6 +1617,12 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   dpm($res);
 
+  
+  // Save a new sprite file.
+  imagejpeg($res, $dest_jpeg);
+  imagejpeg($res, $dest_png);
+    
+    
 //  imagedestroy($image->resource);
 //  // Update image object.
 //  $image->resource = $res;
