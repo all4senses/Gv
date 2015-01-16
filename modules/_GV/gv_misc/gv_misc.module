@@ -1601,6 +1601,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   $source = 'sites/default/files/p/logos/CorvisaCloud-logo.jpg';
   $dest_jpeg = 'sites/default/files/p/logos/CorvisaCloud-logo_2.jpg';
+  $dest_jpeg_100 = 'sites/default/files/p/logos/CorvisaCloud-logo_3.jpg';
   $dest_png = 'sites/default/files/p/logos/CorvisaCloud-logo_2.png';
   
   $image = image_load($source);
@@ -1620,6 +1621,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   // Save a new sprite file.
   imagejpeg($res, $dest_jpeg);
+  imagejpeg($res, $dest_jpeg_100, 100);
   imagepng($res, $dest_png);
     
     
