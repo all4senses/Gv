@@ -6774,7 +6774,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     imagepng($out_sprite['img'], $out_sprite['file']);
     
     // Optimize the image.
-    gv_misc_imageOptimizeOnServer(array('uri' => $out_sprite['uri'], 'filemime' => 'image/png'));
+    
+    /////////gv_misc_imageOptimizeOnServer(array('uri' => $out_sprite['uri'], 'filemime' => 'image/png'));
 
     // Show image.
     //Header("Content-type: image/png");
