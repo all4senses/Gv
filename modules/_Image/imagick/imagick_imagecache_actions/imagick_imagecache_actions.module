@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Imagick toolkit for image manipulation that rewrites Imagecache Actions functionalities
+ */
+
+/**
+ * @ingroup image
+ * @{
+ */
+
+/**
+ * Implements hook_init().
+ */
+function imagick_imagecache_actions_init() {
+  require_once 'effects/imagick_imagecache_actions.colorshift.inc';
+  require_once 'effects/imagick_imagecache_actions.convert.inc';
+  require_once 'effects/imagick_imagecache_actions.definecanvas.inc';
+  require_once 'effects/imagick_imagecache_actions.inverse.inc';
+  require_once 'effects/imagick_imagecache_actions.posterize.inc';
+}
+
+/**
+ * Implements hook_image_effect_info_alter()
+ */
+function imagick_imagecache_actions_image_effect_info_alter(&$effects) {
+  unset($effects['coloractions_brightness']);
+  unset($effects['imagecache_coloroverlay']);
+  unset($effects['canvasactions_roundedcorners']);
+}
+
+/**
+ * @} End of "ingroup image".
+ */
