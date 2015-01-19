@@ -3,11 +3,11 @@
   $class_thumb_presented = NULL;
   $return = FALSE;
   
-  dpm(time());
+  //dpm(time());
   
-  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1397495323);
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309);
   
-  dpm($extra_data);
+  //dpm($extra_data);
   
   $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
               
