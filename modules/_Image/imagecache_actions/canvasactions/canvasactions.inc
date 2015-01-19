@@ -144,7 +144,12 @@ function image_gd_imagemask(stdClass $image, stdClass $mask) {
  */
 function image_imagemagick_imagemask(stdClass $image, stdClass $mask) {
   $image->ops[] = escapeshellarg($mask->source);
-  $image->ops[] = '-alpha Off -compose CopyOpacity -composite';
+  
+  
+  //$image->ops[] = '-alpha Off -compose CopyOpacity -composite';
+  // a4s patch
+  // http://www.imagemagick.org/discourse-server/viewtopic.php?t=15604#p61313
+  $image->ops[] = '-matte Off -compose CopyOpacity -composite';
   return TRUE;
 }
 
