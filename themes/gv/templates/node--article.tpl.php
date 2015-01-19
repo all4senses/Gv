@@ -3,6 +3,7 @@
   $class_thumb_presented = NULL;
   $return = FALSE;
   
+  dpm(time());
   
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1397495323);
   
