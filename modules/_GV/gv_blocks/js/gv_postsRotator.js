@@ -7,7 +7,7 @@
        
       //$("#p-rotator > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true); // for a Version of UI > 1.9
       
-      console.log('p-rotator...');
+      //console.log('p-rotator...');
       
       //var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 1000, true);
       var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
