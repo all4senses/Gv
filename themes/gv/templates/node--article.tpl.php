@@ -5,6 +5,9 @@
   
   
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1397495323);
+  
+  dpm($extra_data);
+  
   $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
               
   //dpm(time());
