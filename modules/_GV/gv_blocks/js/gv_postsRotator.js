@@ -9,8 +9,8 @@
       
       console.log('p-rotator...');
       
-      var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 1000, true);
-      //var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
+      //var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 1000, true);
+      var rtabs = $("#p-rotator").tabs({fx:{opacity: "toggle"}}); // Without auto rotation
       var ltabs = rtabs.tabs('length');
        
       // Pause rotation  on hover.
@@ -40,6 +40,7 @@
 
       });
       
+
       $("#p-rotator-wrapper #prev3").click(function() {
           var active = $( "#p-rotator" ).tabs( "option", "selected" );
           if (active == 0 ) {
