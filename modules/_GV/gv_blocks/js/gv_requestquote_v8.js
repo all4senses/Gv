@@ -139,7 +139,7 @@
           $(this).prev().click();
         });
         
-        $(".sidebar #block-gv-blocks-request-quote-v8 #requestQuoteFormWrapper .multipartForm").formwizard({ 
+        $(".sidebar #block-gv-blocks-request-quote-v8 #requestQuoteFormWrapper .multipartForm, .page-home #requestQuoteFormWrapper .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
 				 	//focusFirstInput: true,
@@ -318,16 +318,16 @@
             //success: function(data){$('#requestQuoteFormWrapper .sending').hide('clip'); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show('clip');},
             
             success: function(data){
-              $('.sidebar #requestQuoteFormWrapper .sending').hide(); 
-              $(".sidebar #requestQuoteFormWrapper .success").html(data.data); 
-              $(".sidebar #requestQuoteFormWrapper .success").show();},
+              $('.sidebar #requestQuoteFormWrapper .sending, .page-home #requestQuoteFormWrapper .sending').hide(); 
+              $(".sidebar #requestQuoteFormWrapper .success, .page-home #requestQuoteFormWrapper .success").html(data.data); 
+              $(".sidebar #requestQuoteFormWrapper .success, .page-home #requestQuoteFormWrapper .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
-              $('.sidebar #requestQuoteFormWrapper .multipartForm').hide(); 
-              $(".sidebar #requestQuoteFormWrapper .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
-              $(".sidebar #requestQuoteFormWrapper .sending").show(); },
+              $('.sidebar #requestQuoteFormWrapper .multipartForm, .page-home #requestQuoteFormWrapper .multipartForm').hide(); 
+              $(".sidebar #requestQuoteFormWrapper .sending, .page-home #requestQuoteFormWrapper .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $(".sidebar #requestQuoteFormWrapper .sending, .page-home #requestQuoteFormWrapper .sending").show(); },
             
             
             dataType: 'json',
