@@ -26,7 +26,7 @@
       */  
       
       //$("#p-rotator-wrapper #next3").click(function() {
-      $("#p-rotator-wrapper #next").click(function() {
+      $("#p-rotator-wrapper #next, #p-rotator-wrapper #next3").click(function() {
           var active = $( "#p-rotator" ).tabs( "option", "selected" );
           if (active == ltabs - 1 ) {
             active = 0;
@@ -42,7 +42,7 @@
       });
       
       //$("#p-rotator-wrapper #prev3").click(function() {
-      $("#p-rotator-wrapper #prev").click(function() {
+      $("#p-rotator-wrapper #prev, #p-rotator-wrapper #prev3").click(function() {
           var active = $( "#p-rotator" ).tabs( "option", "selected" );
           if (active == 0 ) {
             active = ltabs - 1;
