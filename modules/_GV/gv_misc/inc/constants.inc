@@ -282,7 +282,7 @@ define('PAGES_410', serialize($pages410));
 
 // Remote submissions data, functions, etc.
 $remoteProvidersSubmissionsSettings = array(
-  'Nextiva' => array('function' => 'gv_misc_SendRequestToNextiva', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
+  'Nextiva' => array('function' => 'gv_misc_SendRequestToNextiva', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9'/*, 'page_10'*/)),
   'Vocalocity' => array('function' => 'gv_misc_SendRequestToVocalocity', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   '8x8' => array('function' => 'gv_misc_SendRequestTo8x8', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
