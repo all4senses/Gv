@@ -11097,8 +11097,8 @@ function gv_blocks_getQuotePopup_onLists() {
     
     $out = 
     '<div style="display: none;">
-      <div id="' . ($user->uid == 1 ? 'block-gv-blocks-request-quote-v10' : 'block-gv-blocks-request-quote-v8') . '" class="popup-request quote on-list">' 
-        . //gv_blocks_get_requestQuote_block_v10_popup_provider() .
+      <div id="block-gv-blocks-request-quote-v10" class="popup-request quote on-list">' 
+        . gv_blocks_get_requestQuote_block_v10_popup_provider() .
      '</div>
     </div>';
   }
@@ -11115,7 +11115,7 @@ function gv_blocks_getQuotePopup_onLists() {
 
     $out = 
     '<div style="display: none;">
-      <div id="' . ($user->uid == 1 ? 'block-gv-blocks-request-quote-v10' : 'block-gv-blocks-request-quote-v8') . '" class="popup-request quote on-list">' 
+      <div id="block-gv-blocks-request-quote-v8" class="popup-request quote on-list">' 
         . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>
         <div class="bottom-clear"></div>'
         . gv_blocks_get_requestQuote_block_v8_popup_provider() .
