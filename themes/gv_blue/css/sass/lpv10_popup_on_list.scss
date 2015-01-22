@@ -109,7 +109,7 @@ font-family: inherit !important;
 }
 
 
-h1 {
+.title-first {
 	font-size: 32px;
 	font-weight: 300;
 	line-height: 1.2em;
@@ -120,55 +120,47 @@ h1 {
 	padding-top: 65px;
 	margin: 0 auto;
 
-		&.boost {
-			font-size: 30px;
-			padding-top: 90px;
-			margin: 0 auto;
-		}
 
 	@media screen and (max-width:700px) {
 		font-size: 4.6vw;
-			&.boost {
-				font-size: 4.4vw;
-			}
+	
 	}
 
 	@media screen and (max-width:540px) {
 		font-size: 26px;
-			&.boost {
-				font-size: 24px;
-			}
 	}
 
 	@media screen and (max-width:420px) {
 		// font-size: 24px;
 	}
+  
+  
+  .subtitle {
+      font-size: 19px;
+      font-weight: 300;
+      color: $grey-light;
+      line-height: 1.2em;
+      text-align: center;
+      width: 90%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding-top: 12px;
+
+
+
+      @media screen and (max-width:700px) {
+        font-size: 2.7vw;
+        width: 75%;
+      }
+
+      @media screen and (max-width:620px) {
+        font-size: 16px;
+      }
+    }
+    
 }
 
-h2 {
-	font-size: 19px;
-	font-weight: 300;
-	color: $grey-light;
-	line-height: 1.2em;
-	text-align: center;
-	width: 90%;
-	max-width: 480px;
-	margin: 0 auto;
-	padding-top: 12px;
 
-		&.boost {
-			padding-top: 8px;
-		}
-
-	@media screen and (max-width:700px) {
-		font-size: 2.7vw;
-		width: 75%;
-	}
-
-	@media screen and (max-width:620px) {
-		font-size: 16px;
-	}
-}
  
 
 
@@ -505,6 +497,8 @@ h1.boost span {
 			height: 55px;
 			color: $grey-mid;
 		}
+    
+    input.company {width: 100%;}
 
 		.button {
 			width: 100%;
