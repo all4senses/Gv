@@ -11079,8 +11079,7 @@ function gv_blocks_getQuotePopup_onLists() {
       //possible versions for the design: 1, 3, 4, 
       drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
   }
-  //drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  
 
   // Exit intent Ad block main js.
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
@@ -11088,6 +11087,8 @@ function gv_blocks_getQuotePopup_onLists() {
   global $user;
   if ($user->uid == 1) {
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
+    
+    drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example3/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
     
     $out = 
     '<div style="display: none;">
@@ -11098,6 +11099,9 @@ function gv_blocks_getQuotePopup_onLists() {
   }
   else {
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
+    
+    drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  
     
     //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
     $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
