@@ -70,8 +70,8 @@
             
             //jQuery('.get_quote_popup').click(function() {
               //jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('img').clone());
-              jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('.sprite-div').clone());
-              jQuery('.popup-request.quote .header .title span').html(jQuery(this).find('.name').html());
+              //jQuery('.popup-request.quote .logo').html(jQuery(this).parent().parent().find('.sprite-div').clone());
+              jQuery('.popup-request.quote .title-first span, .popup-request.quote .title-second span span').html(jQuery(this).find('.name').html());
               
               jQuery('.popup-request.quote .multipartForm input[name="provider_id"]').val(jQuery(this).find('.nid').html());
               jQuery('.popup-request.quote .multipartForm input[name="provider_name"]').val(jQuery(this).find('.name').html());
