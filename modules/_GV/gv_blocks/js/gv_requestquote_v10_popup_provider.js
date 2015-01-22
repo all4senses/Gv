@@ -283,12 +283,12 @@
         
         
         
-        $('.step.one .button.next, .step.three .button.next').click(function(){
-          $(".multipartForm").formwizard("next");
+        $('.popup-request.quote .step.one .button.next, .popup-request.quote .step.three .button.next').click(function(){
+          $(".popup-request.quote .multipartForm").formwizard("next");
         });
         
         
-        $('.step.two .button.next').click(function(){
+        $('.popup-request.quote .step.two .button.next').click(function(){
           if (step_ok(2)) {
             //console.log('step2 check...');
             $('.title-first').hide();
@@ -308,7 +308,7 @@
               $('.title-second .number, .title-second .number2').html(x);
               $('.title-loading').hide();
               $('.title-second').show();
-              $(".multipartForm").formwizard("next");
+              $(".popup-request.quote .multipartForm").formwizard("next");
               
               /* ==========================================================================
                   Input Mask
@@ -316,7 +316,7 @@
 
                //console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
                if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
-                  $('.fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+                  $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
                }
 
                /* ========================================================================== */
@@ -330,11 +330,11 @@
         });
         
         $('.step.two .button.back').click(function(){
-          $(".multipartForm").formwizard("back");
+          $(".popup-request.quote .multipartForm").formwizard("back");
         });
         $('.step.three .button.back').click(function(){
           $('.title-second').hide();
-          $(".multipartForm").formwizard("back");
+          $(".popup-request.quote .multipartForm").formwizard("back");
           $('.title-first').show();
         });
         
