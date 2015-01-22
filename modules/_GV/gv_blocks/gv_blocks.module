@@ -11091,14 +11091,14 @@ function gv_blocks_getQuotePopup_onLists() {
     
     //return '';
     
-    //drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
+    drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
     
     drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example3/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
     
     $out = 
     '<div style="display: none;">
       <div id="' . ($user->uid == 1 ? 'block-gv-blocks-request-quote-v10' : 'block-gv-blocks-request-quote-v8') . '" class="popup-request quote on-list">' 
-        . gv_blocks_get_requestQuote_block_v10_popup_provider() .
+        . //gv_blocks_get_requestQuote_block_v10_popup_provider() .
      '</div>
     </div>';
   }
