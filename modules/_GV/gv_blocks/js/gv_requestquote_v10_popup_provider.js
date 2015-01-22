@@ -1,73 +1,190 @@
 (function ($) {
 
-  Drupal.behaviors.gv_requestquote_v10_popup_provider = {
-    attach: function (context, settings) {
-      
-      
-        // Styling select forms
 
+  Drupal.behaviors.gv_requestquote_v10_popup_provider = {
+    
+    attach: function (context, settings) {
+       
+       
+       
+       
+       
+          /* ==========================================================================
+             Main Section Height
+             ========================================================================== */
+ 
+ 
+          jQuery(document).ready(function($){
+
+
+              var $windowHeightTrue = $(window).height();
+              var $windowHeight = $windowHeightTrue - 87;
+
+
+              if ($windowHeightTrue > 815) { //Check if window is lower than 1080px
+                  $('.full-height').height($windowHeight); //Greater than 1080px
+                  var $videoHeight = $windowHeight - 607; //Set Video VAR
+              } else if ($windowHeightTrue < 815) {
+                  $('.full-height').height(728); //Less than 1080px
+                  var $videoHeight = 473; //Set Video VAR 473
+              }
+
+              $('.video').height($videoHeight);//Set Video Height
+
+          });
+
+            //$(window).on('resize', function(){
+          $(window).resize(function(){
+              var $windowHeightTrue = $(window).height();
+              var $windowHeight = $windowHeightTrue - 87;
+
+              if ($windowHeightTrue > 815) { //Check if window is lower than 1080px
+                  $('.full-height').height($windowHeight); //Greater than 1080px
+                  var $videoHeight = $windowHeight - 607; //Set Video VAR
+              } else if ($windowHeightTrue < 815) {
+                  $('.full-height').height(728); //Less than 1080px
+                  var $videoHeight = 386; //Set Video VAR 473
+              }
+
+              $('.video').height($videoHeight);//Set Video Height
+
+          });
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="phone"], input[id="company"], input[id="website"]').hint();
+       
+        //console.log('document.referrer = ' + document.referrer);
+        $('input[name="referrer"]').val(document.referrer);
+        $('input[name="url"]').val(document.URL);
+        
+        
         //$('select').selectmenu();
-        $('.popup-request.quote select').selectmenu({
+        $('select').selectmenu({
           //style:'popup', 
           maxHeight: 300
   			});
-        
-        //console.log('popup_pro...');
-      
-        //$('#requestQuoteFormWrapper #Navigation #back').css('display', 'block');
-        
-        
-        /*
-        captcha_val = 'kjhjhkgsjdhgjk';
-        
-        $('input[name="ct_captcha"]').focus(function(){
+       
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="website"], input[id="company"], input[id="q-title"], input[id="phone"], #phones_amt, #q_type, #buying_time').blur(function () { 
           
-           // Get a current captcha value.
+          //console.log($(this).val());
+          
           (jQuery).ajax({
             
-                url: '/check_ctcaptcha', 
+                url: '/request/capture', 
                 data: {
-                        op: 'get'
+                        op: 'set',
+                        url: window.location.href,
+                        
+                        
+                        email: $('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        firstname: $('input[id="firstname"]').val() != $('input[id="firstname"]').attr('title') ? $('input[id="firstname"]').val() : '',
+                        lastname: $('input[id="lastname"]').val() != $('input[id="lastname"]').attr('title') ? $('input[id="lastname"]').val() : '',
+                        
+                        website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
+                        company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
+                        
+                        company: $('input[id="q-title"]').val() != $('input[id="q-title"]').attr('title') ? $('input[id="q-title"]').val() : '',
+                        
+                        phone: $('input[id="phone"]').val() != $('input[id="phone"]').attr('title') ? $('input[id="phone"]').val() : '',
+                        
+                        phones_amt: $('#phones_amt').val(),
+                        q_type: $('#q_type').val(),
+                        buying_time: $('#buying_time').val(),
+                        
+                        source: $('input[name="source"]').val(),
+                        version: $('input[name="version"]').val(),
+                        referrer: document.referrer
+                       
                       }, 
                     type: 'POST', 
                     dataType: 'json'
+                    /*
                     , 
                     success: function(data) 
                             { 
                                 if(!data.error) {
-                                    captcha_val = data.cap + '';
-                                    //console.log('The header is arrived: ' + captcha_val);
+                                    console.log('The header is arrived!');
                                 }
                                 return false;
                             } 
-                    
+                     */
             }); // end of (jQuery).ajax
-       
+        
+        });
+
+
+        /*
+        $(window).unload( function () { 
+          
+          //console.log('before unload send');
+          
+          (jQuery).ajax({
+            
+                url: '/request/capture', 
+                data: {
+                        op: 'exit',
+                        url: window.location.href,
+                        //async: false,
+                        
+                        email: $('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        firstname: $('input[id="firstname"]').val() != $('input[id="firstname"]').attr('title') ? $('input[id="firstname"]').val() : '',
+                        lastname: $('input[id="lastname"]').val() != $('input[id="lastname"]').attr('title') ? $('input[id="lastname"]').val() : '',
+                        
+                        website: $('input[id="website"]').val() != $('input[id="website"]').attr('title') ? $('input[id="website"]').val() : '',
+                        company: $('input[id="company"]').val() != $('input[id="company"]').attr('title') ? $('input[id="company"]').val() : '',
+                        
+                        phone: $('input[id="phone"]').val() != $('input[id="phone"]').attr('title') ? $('input[id="phone"]').val() : '',
+                        
+                        phones_amt: $('#phones_amt').val(),
+                        q_type: $('#q_type').val(),
+                        buying_time: $('#buying_time').val(),
+                        
+                        source: $('input[name="source"]').val(),
+                        version: $('input[name="version"]').val(),
+                        referrer: document.referrer
+                      }, 
+                    type: 'POST', 
+                    dataType: 'json'
+            }); // end of (jQuery).ajax
+            
+            //console.log('after unload send');
+          
         });
         */
         
-       
-        $('input[name="referrer"]').val(document.referrer);
-        $('input[name="url"]').val(document.URL);
-        
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
-        
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
-          if ($(this).val() == '') {
-            $(this).val($(this).attr('title'));
-          }
-          if ($(this).val() == $(this).attr('title')) {
-            $(this).addClass('blur');
-          }
-        });
-
-
-        // After reloading a page (ctrl-R) hints mecome normal texts and it should be cleared additionally.
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').focus(function(){
-          if ($(this).val() == $(this).attr('title')) {
-            $(this).val('');
-          }
-        });
        
         $('input[id="phone"]').keydown(function (event) { 
             
@@ -88,19 +205,13 @@
               ) {
                     event.preventDefault();     // Prevent character input
             }
-            else {
-              /*
-              if (l >= 3 
-                  && !(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 46 || (event.keyCode >= 35 && event.keyCode <= 40) ) 
-                  ) {
-                  event.preventDefault();
-              }
-              */
-            }
-        });
-        
+
+        });        
         
         $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
+            
+            //console.log($(this).val());
+            //console.log(event.keyCode);
             
             if( 
                     (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
@@ -113,20 +224,14 @@
             }
 
         });
-
+        
+        
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
-        }, "All fields with are required");
+        }, "All fields with * are required");
 
-        jQuery.validator.addMethod("wrongCaptcha", function(value, element, param) {
-          //console.log('captcha_val = ' + captcha_val);
-          //console.log('va = ' + value.toLowerCase());
-          return value.toLowerCase() === captcha_val;
-        //}, jQuery.format("You must not enter {0}"));
-        }, "Code Error");
-        
-        console.log('popuuuup');
+
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')
@@ -137,19 +242,179 @@
           $(this).prev().click();
         });
         
+        
+        
+        
+        
+        $('.service-type .choice').click(function(){
+          $(this).parent().find('.choice').removeClass('checked'); 
+          $(this).addClass('checked').find('input').attr('checked',true);
+          //console.log($("input[type='radio'][name='service']:checked").val());
+        });
+        
+        $('.people .choice').click(function(){
+          $(this).parent().find('.choice').removeClass('checked'); 
+          $(this).addClass('checked').find('input').attr('checked',true);
+          $('.people .error-warn').hide();
+          var step2_amt_errors = false;
+          //console.log($("input[type='radio'][name='people']:checked").val());
+        });
+        
+        
+        $('.top5 .choice-checkbox').click(function(){
+          
+          checkb = $(this).find('input');
+          if ($(checkb).attr('checked')) {
+              $(checkb).removeAttr('checked');
+              //console.log('unchecked');
+              $(this).removeClass('checked');
+            }
+          else {
+            $(checkb).attr('checked', true); 
+            $(this).addClass('checked');
+            $('.checkboxes .error-warn').hide();
+            step2_features_errors = false;
+            //console.log('checked');
+          }
+
+          //console.log($("input[type='checkbox'][name='people']:checked").val());
+        });
+        
+        
+        
+        
+        $('.step.one .button.next, .step.three .button.next').click(function(){
+          $(".multipartForm").formwizard("next");
+        });
+        
+        
+        $('.step.two .button.next').click(function(){
+          if (step_ok(2)) {
+            //console.log('step2 check...');
+            $('.title-first').hide();
+            $('.step.two').hide();
+            $('.title-loading').show();
+            
+            // Get some data from the server
+            // ...
+            // ...
+            // ... and then show the Step three
+
+            setTimeout(function() {
+              do {
+                x= Math.floor((Math.random() * 5) + 1);
+              } while (x < 3); 
+              //console.log(x);
+              $('.title-second .number, .title-second .number2').html(x);
+              $('.title-loading').hide();
+              $('.title-second').show();
+              $(".multipartForm").formwizard("next");
+              
+              /* ==========================================================================
+                  Input Mask
+                  ========================================================================== */
+
+               //console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
+               if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
+                  $('.fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+               }
+
+               /* ========================================================================== */
+            }
+            , 2000);
+          }
+          
+          
+          
+          
+        });
+        
+        $('.step.two .button.back').click(function(){
+          $(".multipartForm").formwizard("back");
+        });
+        $('.step.three .button.back').click(function(){
+          $('.title-second').hide();
+          $(".multipartForm").formwizard("back");
+          $('.title-first').show();
+        });
+        
+        
+        
+        var step2_amt_errors = true;
+        var step2_features_errors = true;
+        function step_ok(step) {
+          switch (step) {
+            case 2:
+              //step2_amt_errors = true;
+              step2_features_errors = true;
+              $('.people .choice :checked').each(function() {
+                //allVals.push($(this).val());
+                step2_amt_errors = false;
+                //console.log('amt..');
+                //console.log($(this).val());
+              });
+              $('.checkboxes .choice-checkbox :checked').each(function() {
+                //allVals.push($(this).val());
+                step2_features_errors = false;
+                //console.log('feature..');
+                //console.log($(this).val());
+              });
+              
+              if (step2_amt_errors) {
+                $('.people .error-warn').show();
+                //console.log('step2_amt_errors - show warn');
+//                return false;
+              }
+              else {
+                $('.people .error-warn').hide();
+                //console.log('NO step2_amt_errors - Hide Warn');
+              }
+              if (step2_features_errors) {
+                $('.checkboxes .error-warn').show();
+                //console.log('step2_features_errors - show warn');
+//                return false;
+              }
+              else {
+                $('.checkboxes .error-warn').hide();
+                //console.log('NO step2_features_errors - Hide Warn');
+              }
+              if (!step2_amt_errors && !step2_features_errors) {
+                //console.log('No Errors step 2');
+                return true;
+              }
+              else {
+                //console.log('Errors step 2');
+                return false;
+              }
+             
+//            case 3:
+//              return step2_errors;
+
+          }
+        }
+        
+        
+        
+        
+        
+        
+        
+        // http://thecodemine.org/#
+        
         $(".popup-request.quote .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
-				 	//focusFirstInput: true,
-          textSubmit : 'Quote Me',// 'Submit & Get Quotes',
-          textNext: 'Quote Me',//'Submit & Get Quotes',
+				 	focusFirstInput: true,
+          textSubmit : 'Show Me Results', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          textNext: 'Find Me Solutions', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
+          
           
           //inAnimation : {height: 'show'},
           //outAnimation: {height: 'hide'},
 //          inAnimation : {left: 100},
 //          outAnimation: {left: 100},
-//				inDuration : 700,
-//					outDuration: 700,
+				  inDuration : 0, //700,
+					outDuration: 0, //700,
           //easing: 'slide',// 'easeOutBounce',
           //easing: 'easeOutBounce',
           //easing: 'slide',
@@ -158,8 +423,7 @@
           
           validationOptions: {
             groups: {
-              //username: "firstname lastname email phone"
-              username: "firstname lastname email phone ct_captcha"
+              username: "firstname lastname email phone"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
@@ -167,12 +431,13 @@
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 ////error.insertAfter("#buying_time");
                 ////error.insertAfter("#on_error");
-              error.insertAfter(".step");
+                error.insertAfter(".step");
               
-              
-              //else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
-              else if(element.attr("name") == "ct_captcha" || element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
-                error.insertAfter("#phone");
+                //alert(error.html() +  ': ' + $(".question", element.parent()).html() );
+              else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
+                //alert(error.html() +  ': ' + element.prev().html());
+                error.insertAfter("#email");
+                //alert(Drupal.t('All fields with * are required'));
               else
                 error.insertAfter(element);
             },
@@ -204,7 +469,7 @@
               */
               
               
-              phones_amt: "required",
+              //phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
@@ -226,26 +491,12 @@
                 minlength: 10,
                 maxlength: 15,
                 notEqualsTo: $('input[id="phone"]').attr('title')
-							},
-              ct_captcha: {
-                required: true,
-                wrongCaptcha: 'aaa'
 							}
               /*
-              phone_1: {
-                number: true,
-                minlength: 3,
-                maxlength: 3
-							},
-              phone_2: {
-                number: true,
-                minlength: 3,
-                maxlength: 3
-							},
-              phone_3: {
-                number: true,
-                minlength: 4,
-                maxlength: 4
+              ,
+              company: {
+                required: true,
+                notEqualsTo: $('input[id="company"]').attr('title')
 							}
               */
               // works
@@ -298,6 +549,7 @@
              firstname: Drupal.t('First Name is required'),
              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
              phone: Drupal.t('Enter a valid phone number'),
+             //company: Drupal.t('Company name is required'),
              
              // Works!
              /*
@@ -311,35 +563,21 @@
               }
             }
           },
-				 	
-          formOptions :{
+				 	formOptions :{
 						//success: function(data){alert('Success!'); $("#status").fadeTo(50,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
             //success: function(data){$('#requestQuoteFormWrapper .sending').hide('clip'); $("#requestQuoteFormWrapper .success").append(data.data); $("#requestQuoteFormWrapper .success").show('clip');},
             
             success: function(data){
               $('.popup-request.quote .sending').hide(); 
-              $(".popup-request.quote .success").html(data.data); 
-              $(".popup-request.quote .success").show();
-              //console.log('Start timer...');
-              setTimeout(
-                    function(){
-                      //turned_off = null; 
-                      //console.log('popup is turned offffff');
-                      $.fn.colorbox.close();
-                      turned_off = true;
-                    },
-                   5000
-                 ); 
-            },
+              $(".popup-request.quote .success").append(data.data); 
+              $(".popup-request.quote .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
-              
-              $('.popup-request.quote .caption').hide(); 
-              
               $('.popup-request.quote .multipartForm').hide(); 
-              $(".popup-request.quote .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $('.title-second').hide();
+              $(".popup-request.quote .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $(".popup-request.quote .sending").show(); 
             },
             
