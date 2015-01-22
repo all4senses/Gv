@@ -9713,17 +9713,12 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
   
   $out = 
    '<div class="form-main">
-      <!--<div class="title-first">
-        <h1>Simplify your Business VoIP buying process by letting us do the work for you.</h1>
-        <h2>Answer a few questions and we\'ll find the best business phone solution for your specific needs.</h2>
-      </div>-->
-      <div class="title-loading">
-        <h1>Searching our database of providers...</h1>
-        <div class="loading-gif"></div>
+      <div class="title-first">
+        <h1>Get Your Hassle Free, Custom Quote From <span>Nextiva</span> below.</h1>
+        <h2>Just Tell Us The Basics:</h2>
       </div>
       <div class="title-second" style="display: none;">
-        <h1>We have found <span class="result"><span class="number">3</span></span> VoIP companies matching your requirements!</h1>
-        <h2>Where do we send the details for your <span class="number2">4</span> matches?</h2>
+        <h1>Where do we send the details for your <span>custom <span>Nextiva</span> quote?</span> </h1>
       </div>
 
           
@@ -11093,25 +11088,34 @@ function gv_blocks_getQuotePopup_onLists() {
   global $user;
   if ($user->uid == 1) {
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
+    
+    $out = 
+    '<div style="display: none;">
+      <div id="' . ($user->uid == 1 ? 'block-gv-blocks-request-quote-v10' : 'block-gv-blocks-request-quote-v8') . '" class="popup-request quote on-list">' 
+        . gv_blocks_get_requestQuote_block_v10_popup_provider() .
+     '</div>
+    </div>';
   }
   else {
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
+    
+    //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
+    $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
+    $provider_name = 'Name';
+
+
+    $out = 
+    '<div style="display: none;">
+      <div id="' . ($user->uid == 1 ? 'block-gv-blocks-request-quote-v10' : 'block-gv-blocks-request-quote-v8') . '" class="popup-request quote on-list">' 
+        . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>
+        <div class="bottom-clear"></div>'
+        . gv_blocks_get_requestQuote_block_v8_popup_provider() .
+
+      '</div>
+    </div>';
   }
   
-  //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
-  $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
-  $provider_name = 'Name';
   
-  
-  $out = 
-  '<div style="display: none;">
-    <div id="' . ($user->uid == 1 ? 'block-gv-blocks-request-quote-v10' : 'block-gv-blocks-request-quote-v8') . '" class="popup-request quote on-list">' 
-      . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>
-      <div class="bottom-clear"></div>'
-      . ($user->uid == 1 ? gv_blocks_get_requestQuote_block_v10_popup_provider() : gv_blocks_get_requestQuote_block_v8_popup_provider()) .
-
-    '</div>
-  </div>';
   
   return $out;
 }

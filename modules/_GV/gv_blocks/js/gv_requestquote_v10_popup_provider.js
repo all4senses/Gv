@@ -7,82 +7,7 @@
        
        
        
-       
-       
-          /* ==========================================================================
-             Main Section Height
-             ========================================================================== */
- 
- 
-          jQuery(document).ready(function($){
-
-
-              var $windowHeightTrue = $(window).height();
-              var $windowHeight = $windowHeightTrue - 87;
-
-
-              if ($windowHeightTrue > 815) { //Check if window is lower than 1080px
-                  $('.full-height').height($windowHeight); //Greater than 1080px
-                  var $videoHeight = $windowHeight - 607; //Set Video VAR
-              } else if ($windowHeightTrue < 815) {
-                  $('.full-height').height(728); //Less than 1080px
-                  var $videoHeight = 473; //Set Video VAR 473
-              }
-
-              $('.video').height($videoHeight);//Set Video Height
-
-          });
-
-            //$(window).on('resize', function(){
-          $(window).resize(function(){
-              var $windowHeightTrue = $(window).height();
-              var $windowHeight = $windowHeightTrue - 87;
-
-              if ($windowHeightTrue > 815) { //Check if window is lower than 1080px
-                  $('.full-height').height($windowHeight); //Greater than 1080px
-                  var $videoHeight = $windowHeight - 607; //Set Video VAR
-              } else if ($windowHeightTrue < 815) {
-                  $('.full-height').height(728); //Less than 1080px
-                  var $videoHeight = 386; //Set Video VAR 473
-              }
-
-              $('.video').height($videoHeight);//Set Video Height
-
-          });
-
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+         
        
         //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="phone"], input[id="company"], input[id="website"]').hint();
        
@@ -293,35 +218,21 @@
             //console.log('step2 check...');
             $('.title-first').hide();
             $('.step.two').hide();
-            $('.title-loading').show();
-            
-            // Get some data from the server
-            // ...
-            // ...
-            // ... and then show the Step three
+         
+            $('.title-second').show();
+            $(".popup-request.quote .multipartForm").formwizard("next");
 
-            setTimeout(function() {
-              do {
-                x= Math.floor((Math.random() * 5) + 1);
-              } while (x < 3); 
-              //console.log(x);
-              $('.title-second .number, .title-second .number2').html(x);
-              $('.title-loading').hide();
-              $('.title-second').show();
-              $(".popup-request.quote .multipartForm").formwizard("next");
-              
-              /* ==========================================================================
-                  Input Mask
-                  ========================================================================== */
+            /* ==========================================================================
+                Input Mask
+                ========================================================================== */
 
-               //console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
-               if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
-                  $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
-               }
+             //console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
+             if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
+                $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+             }
 
-               /* ========================================================================== */
-            }
-            , 2000);
+             /* ========================================================================== */
+
           }
           
           
