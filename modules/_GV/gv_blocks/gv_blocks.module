@@ -9665,6 +9665,252 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
 
 
 /**
+ * Block Request a quote FOR block popup-provider v10
+ * 
+ */
+function gv_blocks_get_requestQuote_block_v10_popup_provider() {
+
+  global $user;
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  
+  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  //drupal_add_js($path_to_custom_js . 'bbq.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
+  drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
+  drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
+  
+  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  
+  drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
+  
+  //drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
+  
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_v10_popup_provider.js');
+  
+  drupal_add_css(path_to_theme() . '/css/sass/lpv10.scss', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+  
+  //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/dist/inputmask/jquery.inputmask.min.js');
+  //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/dist/inputmask/jquery.inputmask.phone.extensions.js');
+  //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_real/jquery.inputmask.min.js');
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
+  
+  
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+  
+  
+  $out = 
+   '<div class="form-main">
+      <div class="title-first">
+        <h1>Simplify your Business VoIP buying process by letting us do the work for you.</h1>
+        <h2>Answer a few questions and we\'ll find the best business phone solution for your specific needs.</h2>
+      </div>
+      <div class="title-loading">
+        <h1>Searching our database of providers...</h1>
+        <div class="loading-gif"></div>
+      </div>
+      <div class="title-second" style="display: none;">
+        <h1>We have found <span class="result"><span class="number">3</span></span> VoIP companies matching your requirements!</h1>
+        <h2>Where do we send the details for your <span class="number2">4</span> matches?</h2>
+      </div>
+
+          
+      <div id="requestQuoteFormWrapper" class="hidden form">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        <form class="multipartForm bbq" method="post" action="/request" style="background: none; border: none;">
+
+                    
+                    <div class="step one radio-filled" id="phones_amt_section">
+                        
+
+                                  <div class="wrap">
+                                  
+                                              <div class="fieldset choices service-type first">
+
+                                                          <p class="question">How can we help you?</p>
+
+                                                          <div class="wrap">
+
+                                                                          <div class="choice phone-only first">
+                                                                            <div class="icon-replace"></div>
+                                                                            <label for="replace">Replace current system</label>
+                                                                            <input type="radio" class="radio" name="q_for" id="replace" value="Replace current phone system">
+                                                                          </div>
+
+                                                                          <div class="choice both checked">
+                                                                            <div class="icon-new"></div>
+                                                                            <label for="new"><span>Find</span> new system &amp; service</label>
+                                                                            <input type="radio" class="radio" name="q_for" id="new" value="Need a phone system for a new office" checked="checked">
+                                                                          </div>
+
+                                                                          <div class="choice service-only">
+                                                                            <div class="icon-expand"></div>
+                                                                            <label for="expand-only">Expand current system</label>
+                                                                            <input type="radio" class="radio" name="q_for" id="expand-only" value="Expand on our current phone system">
+                                                                          </div>
+
+                                                          </div>
+                                                          
+                                                          <div class="clearfix-dk"></div>
+
+                                              </div>
+                                    
+                                    
+                                              
+
+                                              <div class="fieldset button-field next">
+                                                <div class="wrap">
+                                                  <div class="button next">
+                                                    <p>Let\'s Get Started <span class="icon-angle-double-right"></span></p>
+                                                  </div>
+                                                </div>
+                                              </div>
+          
+                                  </div>                      
+
+
+
+                               
+                    </div>
+                    
+                    <div class="step two" id="quesions">
+                        
+                            <div class="wrap">
+                                              <div class="fieldset choices people first">
+                                                <p class="question">
+                                                  How many people will be using your phone system?
+                                                  <span class="error-warn">Please Select</span>
+                                                </p>
+                                                <div class="wrap">
+                                                  <div class="choice first"><label for="1-4">1<span> </span>-<span> </span>4</label><input type="radio" class="radio" name="phones_amt" value="1 - 4" id="1-4"></div>
+                                                  <div class="choice second"><label for="5-10">5<span> </span>-<span> </span>10</label><input type="radio" class="radio" name="phones_amt" value="5 - 10" id="5-10"></div>
+                                                  <div class="choice third"><label for="11-20">11<span> </span>-<span> </span>20</label><input type="radio" class="radio" name="phones_amt" value="11 - 20" id="11-20"></div>
+                                                  <div class="choice fourth"><label for="21-49">21<span> </span>-<span> </span>49</label><input type="radio" class="radio" name="phones_amt" value="21 - 49" id="21-49"></div>
+                                                  <div class="choice fifth"><label for="50">50 +</label><input type="radio" class="radio" name="phones_amt" value="More than 50" id="50"></div>
+                                                  <div class="clearfix-dk"></div>
+                                                </div>
+                                              </div>
+                                              <div class="fieldset checkboxes">
+                                                <p class="question">
+                                                  What features are important to you?
+                                                  <span class="error-warn">Please Select</span>
+                                                </p>
+                                                <div class="wrap top5">
+                                                  <div class="wrap column left">
+                                                    <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="mobile">Mobile Capabilities</label><input type="checkbox" class="checkbox" name="features[]" value="Mobile Capabilities" id="mobile"></div>
+                                                    <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="fax">Online Fax</label><input type="checkbox" class="checkbox" name="features[]" value="Online Fax" id="fax"></div>
+                                                    <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="monitoring">Call Management<span>/Monitoring</span></label><input type="checkbox" class="checkbox" name="features[]" value="Call Management" id="monitoring"></div>
+                                                  </div>
+                                                  <div class="wrap column right">
+                                                    <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="voicemail">Voicemail-to-email</label><input type="checkbox" class="checkbox" name="features[]" value="Voicemail-to-email" id="voicemail"></div>
+                                                    <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="auto">Auto Attendant</label><input type="checkbox" class="checkbox" name="features[]" value="Auto Attendant" id="auto"></div>
+                                                    <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="none">No Preference</label><input type="checkbox" class="checkbox" name="features[]" value="No Preference" id="none"></div>
+                                                  </div>
+                                                  <div class="clearfix-dk"></div>
+                                                </div>
+                                              </div>
+                                              <div class="fieldset button-field top10">
+                                                <div class="wrap">
+                                                  <div class="button fixed left back to-step-1">
+                                                    <p>Back</p>
+                                                  </div>
+                                                  <div class="button right next to-step-3">
+                                                    <p>Find Me Solutions <span class="icon-angle-double-right"></span></p>
+                                                  </div>
+                                                  <div class="clearfix-dk"></div>
+                                                </div>
+                                              </div>
+                            </div>
+                    </div>
+                    
+
+                    
+
+                    
+                    <div class="step three" id="personal_info">
+                    
+                            <div class="wrap">
+                                              <div class="fieldset input half first firstname error">
+                                                <p class="question">First Name</p>
+                                                <div class="wrap"><input type="text" class="field required firstname" name="firstname" id="firstname"></div>
+                                              </div>
+                                              <div class="fieldset input half first lastname error">
+                                                <p class="question">Last Name</p>
+                                                <div class="wrap"><input type="text" class="field required lastname" name="lastname" id="lastname"></div>
+                                              </div>
+                                              <div class="clearfix-dk"></div>
+                                              <div class="fieldset input half email error">
+                                                <p class="question">Email Address</p>
+                                                <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
+                                              </div>
+                                              <div class="fieldset input half phone error">
+                                                <p class="question">Phone Number</p>
+                                                <div class="wrap"><input type="text" class="field phone required" name="phone" id="phone"></div>
+                                              </div>
+                                              <div class="clearfix-dk"></div>
+                                              <div class="fieldset button-field">
+                                                <div class="wrap">
+                                                  <div class="button right next to-step-3">
+                                                    <p>Show Me Results <span class="icon-angle-double-right"></span></p>
+                                                  </div>
+                                                  <input type="submit" value="Show Me Results" class="button" style="display: none;">
+
+                                                </div>
+                                              </div>
+                                              <p class="inform-text">You will also receive a FREE 6-Page business VoIP guide to help analyze and compare your results.</p>
+                                              ' . ($user->uid == 1 ? '<div class="button back">Back</div>' : '') . '
+                            </div>
+
+
+                    </div>
+                    
+                <!--
+                <div id="Navigation" class="fieldset button-field next"> 	
+                  <div class="wrap">
+                    <div class="button">
+                        <input class="navigation_button" id="back" value="Back" type="reset" />
+                        <input class="navigation_button" id="next" value="Let\'s Get Started" type="submit" />
+                    </div>
+                  </div>
+                </div>
+                -->
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="page" />
+                <input type="hidden" name="version" value="10-popup-provider" />
+                <input type="hidden" name="referrer" value="" />
+                <input type="hidden" name="url" value="" />
+                <input type="hidden" name="provider_name" value="" />
+                <input type="hidden" name="provider_id" value="" />
+                
+        </form>
+
+        <p id="data"></p>
+</div>
+<div class="block_footer"></div>
+</div>
+  ';
+  
+  return $out;
+}
+
+
+/**
  * Ppc bu page /ppc/business-voip exit intent block.
  */
 function gv_blocks_get_exitIntent_v2() {
@@ -10848,12 +11094,14 @@ function gv_blocks_getQuotePopup_onLists() {
   //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
   $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
   $provider_name = 'Name';
+  
+  global $user;
   $out = 
   '<div style="display: none;">
     <div id="block-gv-blocks-request-quote-v8" class="popup-request quote on-list">' 
       . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>
       <div class="bottom-clear"></div>'
-      . gv_blocks_get_requestQuote_block_v8_popup_provider() .
+      . ($user->uid == 1 ? gv_blocks_get_requestQuote_block_v10_popup_provider() : gv_blocks_get_requestQuote_block_v8_popup_provider()) .
 
     '</div>
   </div>';
