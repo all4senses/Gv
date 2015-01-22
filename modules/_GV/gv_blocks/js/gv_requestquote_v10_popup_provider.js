@@ -126,7 +126,7 @@
         //}, jQuery.format("You must not enter {0}"));
         }, "Code Error");
         
-        
+        console.log('popuuuup');
         // Overriding the default Required message.
         jQuery.extend(jQuery.validator.messages, {
             required: Drupal.t('All fields with * are required')
