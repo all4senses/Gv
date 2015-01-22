@@ -11068,8 +11068,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
  */
 function gv_blocks_getQuotePopup_onLists() {
   
+  
   // Colorbox for popup window.
   //1, 3, 4, 
+  
   
   //$current_js_array = drupal_add_js();
   if (!isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js']) && !isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) ) 
@@ -11086,6 +11088,9 @@ function gv_blocks_getQuotePopup_onLists() {
   
   global $user;
   if ($user->uid == 1) {
+    
+    return '';
+    
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
     
     drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example3/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
