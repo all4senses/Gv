@@ -58,6 +58,7 @@
             //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
             console.log($('input[id="company"]'));
             
+            /*
             $('input[id="company"]').each(function(){
               
               if ($(this).val() == '') {
@@ -68,6 +69,16 @@
                 $(this).addClass('blur');
               }
             });
+            /*
+
+            if ($('input[id="company"]').val() == '') {
+              $('input[id="company"]').val($('input[id="company"]').attr('title'));
+            }
+            console.log('title = ' + $('input[id="company"]').attr('title'));
+            if ($('input[id="company"]').val() == $('input[id="company"]').attr('title')) {
+              $('input[id="company"]').addClass('blur');
+            }
+
 
             
 //            jQuery('.get_quote_popup').parent().parent().find('img');
