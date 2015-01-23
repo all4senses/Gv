@@ -391,6 +391,7 @@
             
             success: function(data){
               $('.popup-request.quote .sending').hide(); 
+              console.log(data);
               $(".popup-request.quote .success").append(data.data); 
               $(".popup-request.quote .success").show();},
 						
