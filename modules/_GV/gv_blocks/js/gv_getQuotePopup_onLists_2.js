@@ -79,7 +79,8 @@
             
             
             // Reset checkboxes.
-            jQuery('.choice-checkbox').each(function(){
+            /*
+            jQuery('.choice-checkbox ').each(function(){
               checkb = jQuery(this).find('input');
               checked = jQuery(checkb).attr('checked')
               //console.log(checked);
@@ -94,7 +95,7 @@
                 jQuery(checkb).removeAttr('checked');
                 jQuery(this).removeClass('checked');
             });
-           
+           */
 
 
             
