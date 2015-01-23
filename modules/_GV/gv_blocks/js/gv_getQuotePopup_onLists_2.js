@@ -71,14 +71,24 @@
             });
             */
 
-            if ($('.popup-request.quote input[id="company"]').val() == '') {
-              $('.popup-request.quote input[id="company"]').val($('.popup-request.quote input[id="company"]').attr('title'));
-            }
-            console.log('title = ' + $('.popup-request.quote input[id="company"]').attr('title'));
-            console.log('val = ' + $('.popup-request.quote input[id="company"]').val());
+            company_title = $('.popup-request.quote input[id="company"]').attr('title');
+            company_value = $('.popup-request.quote input[id="company"]').val();
+            console.log('val = ' + company_value);
+            console.log('title = ' + company_title);
             
-            if ($('.popup-request.quote input[id="company"]').val() == $('.popup-request.quote input[id="company"]').attr('title')) {
+            if (company_value == '') {
+              $('.popup-request.quote input[id="company"]').val(company_title);
+            }
+            company_value = $('.popup-request.quote input[id="company"]').val();
+            console.log('val = ' + company_value);
+
+            
+            if (company_value == company_title) {
+              console.log('Company Hint!');
               $('.popup-request.quote input[id="company"]').addClass('blur');
+            }
+            else {
+              console.log('Company user input!');
             }
 
 

@@ -13,14 +13,14 @@
         //$('input[id="company"]').hint();
         
         //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
-        $('.popup-request.quote input[id="company"]').each(function(){
-          if ($(this).val() == '') {
-            $(this).val($(this).attr('title'));
-          }
-          if ($(this).val() == $(this).attr('title')) {
-            $(this).addClass('blur');
-          }
-        });
+//        $('.popup-request.quote input[id="company"]').each(function(){
+//          if ($(this).val() == '') {
+//            $(this).val($(this).attr('title'));
+//          }
+//          if ($(this).val() == $(this).attr('title')) {
+//            $(this).addClass('blur');
+//          }
+//        });
        
        
         //console.log('document.referrer = ' + document.referrer);
