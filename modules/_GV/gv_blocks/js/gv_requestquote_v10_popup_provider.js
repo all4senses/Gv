@@ -401,7 +401,8 @@
             beforeSubmit: function(data){
               $('.popup-request.quote .multipartForm').hide(); 
               //$('.title-second').hide();
-              $(".popup-request.quote .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              //$('.title-loading').show();
+              //$(".popup-request.quote .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $(".popup-request.quote .sending").show(); 
             },
             
