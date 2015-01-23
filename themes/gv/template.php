@@ -770,19 +770,31 @@ function gv_process_page(&$variables) {
 //    }
   
   
-  global $user;
-  //if ($user->uid == 1) 
-    {
+  
+  // Set different meta viewport for Mobile optimized pages lpv10, lpv10uk page
+  $pages_to_exclude_custom_css = array('node/5203', 'node/5204', 'node/5210', 'node/5211');
+  if (in_array($_GET['q'], $pages_to_exclude_custom_css)) {
+    // <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     $viewport = array(
       '#type' => 'html_tag',
       '#tag' => 'meta',
       '#attributes' => array(
       'name' =>  'viewport',
-      'content' =>  'width=device-width, initial-scale=1, maximum-scale=3')
-      );
-
-    drupal_add_html_head($viewport, 'viewport');
+      'content' =>  'width=device-width, initial-scale=1, maximum-scale=0')
+    );
   }
+  else {
+    // <meta name="viewport" content="width=device-width" />
+    $viewport = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' =>  'viewport',
+      'content' =>  'width=device-width')
+    );
+  }
+  drupal_add_html_head($viewport, 'viewport');
+  
         
         
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
