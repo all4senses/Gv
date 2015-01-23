@@ -10,6 +10,18 @@
          
        
         //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="phone"], input[id="company"], input[id="website"]').hint();
+        $('input[id="company"]').hint();
+        
+        //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+        $('input[id="company"]').each(function(){
+              if ($(this).val() == '') {
+                $(this).val($(this).attr('title'));
+              }
+              if ($(this).val() == $(this).attr('title')) {
+                $(this).addClass('blur');
+              }
+            });
+       
        
         //console.log('document.referrer = ' + document.referrer);
         $('input[name="referrer"]').val(document.referrer);

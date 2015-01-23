@@ -9744,31 +9744,31 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
 
                                               <div class="fieldset input company">
                                                 <p class="question">What is your organization’s name?</p>
-                                                <div class="wrap"><input type="text" class="field company" name="company" id="company"></div>
+                                                <div class="wrap"><input type="text" class="field company" name="company" id="company" title="Organization Name"></div>
                                               </div>
                                               
 
                                               <div class="fieldset choices service-type first">
 
-                                                          <p class="question">How can we help you?</p>
+                                                          <p class="question">What are your call center needs?</p>
 
                                                           <div class="wrap">
 
                                                                           <div class="choice phone-only first">
                                                                             <div class="icon-replace"></div>
-                                                                            <label for="replace">Replace current system</label>
+                                                                            <label for="replace">Outbound Calling</label>
                                                                             <input type="radio" class="radio" name="q_for" id="replace" value="Replace current phone system">
                                                                           </div>
 
                                                                           <div class="choice both checked">
                                                                             <div class="icon-new"></div>
-                                                                            <label for="new"><span>Find</span> new system &amp; service</label>
+                                                                            <label for="new">Both Outbound &amp; Inbound</label>
                                                                             <input type="radio" class="radio" name="q_for" id="new" value="Need a phone system for a new office" checked="checked">
                                                                           </div>
 
                                                                           <div class="choice service-only">
                                                                             <div class="icon-expand"></div>
-                                                                            <label for="expand-only">Expand current system</label>
+                                                                            <label for="expand-only">Inbound Calling</label>
                                                                             <input type="radio" class="radio" name="q_for" id="expand-only" value="Expand on our current phone system">
                                                                           </div>
 
@@ -9806,15 +9806,16 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                             <div class="wrap">
                                               <div class="fieldset choices people first">
                                                 <p class="question">
-                                                  How many people will be using your phone system?
+                                                  How many employees do you have?
                                                   <span class="error-warn">Please Select</span>
                                                 </p>
                                                 <div class="wrap">
-                                                  <div class="choice first"><label for="1-4">1<span> </span>-<span> </span>4</label><input type="radio" class="radio" name="phones_amt" value="1 - 4" id="1-4"></div>
-                                                  <div class="choice second"><label for="5-10">5<span> </span>-<span> </span>10</label><input type="radio" class="radio" name="phones_amt" value="5 - 10" id="5-10"></div>
-                                                  <div class="choice third"><label for="11-20">11<span> </span>-<span> </span>20</label><input type="radio" class="radio" name="phones_amt" value="11 - 20" id="11-20"></div>
-                                                  <div class="choice fourth"><label for="21-49">21<span> </span>-<span> </span>49</label><input type="radio" class="radio" name="phones_amt" value="21 - 49" id="21-49"></div>
-                                                  <div class="choice fifth"><label for="50">50 +</label><input type="radio" class="radio" name="phones_amt" value="More than 50" id="50"></div>
+                                                  <div class="choice first"><label for="1-19">1<span> </span>-<span> </span>19</label><input type="radio" class="radio" name="phones_amt" value="1 - 19" id="1-19"></div>
+                                                  <div class="choice second"><label for="20-49">20<span> </span>-<span> </span>49</label><input type="radio" class="radio" name="phones_amt" value="20 - 49" id="20-49"></div>
+                                                  <div class="choice third"><label for="50-99">50<span> </span>-<span> </span>99</label><input type="radio" class="radio" name="phones_amt" value="50 - 99" id="50-99"></div>
+                                                  <div class="choice fourth"><label for="100-499">100<span> </span>-<span> </span>499</label><input type="radio" class="radio" name="phones_amt" value="100 - 499" id="100-499"></div>
+                                                  <div class="choice fourth"><label for="500-999">500<span> </span>-<span> </span>999</label><input type="radio" class="radio" name="phones_amt" value="500 - 999" id="500-999"></div>
+                                                  <div class="choice fifth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
                                                   <div class="clearfix-dk"></div>
                                                 </div>
                                               </div>
@@ -9851,7 +9852,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                             </div>
                             -->
                             <div class="button right next to-step-3">
-                              <p>Find Me Solutions <span class="icon-angle-double-right"></span></p>
+                              <p>Continue to Pricing Info <span class="icon-angle-double-right"></span></p>
                             </div>
                             <div class="clearfix-dk"></div>
                           </div>
@@ -9882,17 +9883,18 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                                                 <div class="wrap"><input type="text" class="field required lastname" name="lastname" id="lastname"></div>
                                               </div>
                                               <div class="clearfix-dk"></div>
-                                              <div class="fieldset input half email error">
-                                                <p class="question">Email Address</p>
-                                                <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
-                                              </div>
                                               <div class="fieldset input half phone error">
                                                 <p class="question">Phone Number</p>
                                                 <div class="wrap"><input type="text" class="field phone required" name="phone" id="phone"></div>
                                               </div>
+                                              <div class="fieldset input half email error">
+                                                <p class="question">Email Address</p>
+                                                <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
+                                              </div>
+                                              
                                               <div class="clearfix-dk"></div>
                                               
-                                              <p class="inform-text">You will also receive a FREE 6-Page business VoIP guide to help analyze and compare your results.</p>
+                                              <p class="inform-text">You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.</p>
                                               
                             </div>
                             
@@ -9902,9 +9904,9 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                         <div class="fieldset button-field">
                           <div class="wrap">
                             <div class="button right next to-step-3">
-                              <p>Show Me Results <span class="icon-angle-double-right"></span></p>
+                              <p>Send Me My Quote Now <span class="icon-angle-double-right"></span></p>
                             </div>
-                            <input type="submit" value="Show Me Results" class="button" style="display: none;">
+                            <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
 
                           </div>
                         </div>
