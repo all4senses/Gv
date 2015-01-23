@@ -15,8 +15,8 @@
   <?php print $head; ?>
   
   <!-- Set the viewport width to device width for mobile -->
+  <?php // Will be set in gv_process_page() in template.php ?>
   <!--<meta name="viewport" content="width=device-width" />-->
-  
   <!--<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">-->
   
   <?php print $styles; ?>
