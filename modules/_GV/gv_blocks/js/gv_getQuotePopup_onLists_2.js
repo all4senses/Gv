@@ -56,7 +56,10 @@
             
             // Recreatehints if it they were cleared on the previous submission.
             //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+            console.log($('input[id="company"]'));
+            
             $('input[id="company"]').each(function(){
+              
               if ($(this).val() == '') {
                 $(this).val($(this).attr('title'));
               }
