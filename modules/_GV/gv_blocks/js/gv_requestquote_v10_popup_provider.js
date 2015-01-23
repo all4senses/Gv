@@ -391,7 +391,7 @@
             
             success: function(data){
               $('.popup-request.quote .sending').hide(); 
-              console.log(data);
+              //console.log(data);
               $(".popup-request.quote .success").append(data.data); 
               $(".popup-request.quote .success").show();},
 						
@@ -399,7 +399,7 @@
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
               $('.popup-request.quote .multipartForm').hide(); 
-              $('.title-second').hide();
+              //$('.title-second').hide();
               $(".popup-request.quote .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $(".popup-request.quote .sending").show(); 
             },
