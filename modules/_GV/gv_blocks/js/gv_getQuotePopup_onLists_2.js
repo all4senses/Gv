@@ -91,6 +91,7 @@
               console.log('Company user input!');
             }
 
+            $('.popup-request.quote input[id="company"]').blur();
 
             
 //            jQuery('.get_quote_popup').parent().parent().find('img');
