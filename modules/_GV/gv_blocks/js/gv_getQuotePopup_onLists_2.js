@@ -109,6 +109,11 @@
                 jQuery(this).removeClass('checked');
             });
            */
+            
+            jQuery(".popup-request.quote .multipartForm").formwizard("show","phones_amt_section");
+          
+          
+          
 
 
             
