@@ -769,6 +769,21 @@ function gv_process_page(&$variables) {
 //      return;
 //    }
   
+  
+  global $user;
+  if ($user->uid == 1) {
+    $viewport = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' =>  'viewport',
+      'content' =>  'width=device-width, initial-scale=1, maximum-scale=3')
+      );
+
+    drupal_add_html_head($viewport, 'viewport');
+  }
+        
+        
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
   
