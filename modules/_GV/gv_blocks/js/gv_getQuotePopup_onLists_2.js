@@ -110,7 +110,8 @@
             });
            */
             
-            jQuery(".popup-request.quote .multipartForm").formwizard("show","phones_amt_section");
+            //jQuery(".popup-request.quote .multipartForm").formwizard("show","phones_amt_section");
+            $(".popup-request.quote .multipartForm").formwizard("reset");
           
           
           
