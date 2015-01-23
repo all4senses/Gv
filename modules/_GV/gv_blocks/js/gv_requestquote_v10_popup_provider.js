@@ -127,7 +127,7 @@
         $('.popup-request.quote .step.two .button.next').click(function(){
           if (step_ok(2)) {
             //console.log('step2 check...');
-            $('.title-first').hide();
+            //$('.title-first').hide();
             $('.step.two').hide();
          
             $('.title-second').show();
@@ -154,6 +154,7 @@
         $('.step.two .button.back').click(function(){
           $(".popup-request.quote .multipartForm").formwizard("back");
         });
+        
         $('.step.three .back').click(function(){
           $('.title-second').hide();
           $(".popup-request.quote .multipartForm").formwizard("back");
@@ -392,7 +393,7 @@
             success: function(data){
               $('.popup-request.quote .sending').hide(); 
               //console.log(data);
-              $(".popup-request.quote .success").append(data.data); 
+              $(".popup-request.quote .success").html(data.data); 
               $(".popup-request.quote .success").show();},
 						
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
@@ -400,7 +401,7 @@
             beforeSubmit: function(data){
               $('.popup-request.quote .multipartForm').hide(); 
               //$('.title-second').hide();
-              $(".popup-request.quote .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $(".popup-request.quote .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $(".popup-request.quote .sending").show(); 
             },
             
