@@ -4,7 +4,7 @@
     attach: function (context, settings) {
       
       
-        console.log('gv_requestquote_block_v8');
+        //console.log('gv_requestquote_block_v8');
       
         // Styling select forms
 

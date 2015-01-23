@@ -55,44 +55,7 @@
             $('.popup-request.quote .multipartForm').show(); 
             
             // Recreatehints if it they were cleared on the previous submission.
-            //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
-            console.log($('input[id="company"]'));
             
-            /*
-            $('input[id="company"]').each(function(){
-              
-              if ($(this).val() == '') {
-                $(this).val($(this).attr('title'));
-              }
-              console.log('title = ' + $(this).attr('title'));
-              if ($(this).val() == $(this).attr('title')) {
-                $(this).addClass('blur');
-              }
-            });
-            */
-
-            company_title = $('.popup-request.quote input[id="company"]').attr('title');
-            company_value = $('.popup-request.quote input[id="company"]').val();
-            console.log('val = ' + company_value);
-            console.log('title = ' + company_title);
-            
-            if (company_value == '') {
-              $('.popup-request.quote input[id="company"]').val(company_title);
-            }
-            company_value = $('.popup-request.quote input[id="company"]').val();
-            console.log('val = ' + company_value);
-
-            
-            if (company_value == company_title) {
-              console.log('Company Hint!');
-              $('.popup-request.quote input[id="company"]').addClass('blur');
-            }
-            else {
-              console.log('Company user input!');
-            }
-
-            $('.popup-request.quote input[id="company"]').blur();
-
             
 //            jQuery('.get_quote_popup').parent().parent().find('img');
 //            console.log(jQuery('.multipartForm input[name="provider_id"]').val());
@@ -107,39 +70,14 @@
             //});
             
             
-            // Reset checkboxes.
-            /*
-            jQuery('.top5 .choice-checkbox.checked, .people .choice.checked').each(function(){
-              checkb = jQuery(this).find('input');
-              jQuery(checkb).removeAttr('checked');
-              jQuery(this).removeClass('checked');
-            });
-            */
             $('.top5 .choice-checkbox.checked, .people .choice.checked').each(function(){
               checkb = $(this).find('input');
               $(checkb).removeAttr('checked');
               $(this).removeClass('checked');
             });
             
-            /*
-            jQuery('.choice-checkbox ').each(function(){
-              checkb = jQuery(this).find('input');
-              checked = jQuery(checkb).attr('checked')
-              //console.log(checked);
-              if (checked) {
-                jQuery(checkb).removeAttr('checked');
-                jQuery(this).removeClass('checked');
-              }
-            });
+       
             
-            jQuery('.choice.checked').each(function(){
-              checkb = jQuery(this).find('input');
-                jQuery(checkb).removeAttr('checked');
-                jQuery(this).removeClass('checked');
-            });
-           */
-            
-            //jQuery(".popup-request.quote .multipartForm").formwizard("show","phones_amt_section");
             $(".popup-request.quote .multipartForm").formwizard("reset");
           
           
@@ -166,7 +104,54 @@
               $('.popup-request.quote .results').hide();
             }
             
+            
+            
+            
+            
+            
+            //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
+            console.log($('.popup-request.quote input[id="company"]'));
+            
+            
+            $('.popup-request.quote input[id="company"]').each(function(){
+              
+              if ($(this).val() == '') {
+                $(this).val($(this).attr('title'));
+              }
+              console.log('title = ' + $(this).attr('title'));
+              if ($(this).val() == $(this).attr('title')) {
+                $(this).addClass('blur');
+              }
+            });
+            
+           /*
+            company_title = $('.popup-request.quote input[id="company"]').attr('title');
+            company_value = $('.popup-request.quote input[id="company"]').val();
+            console.log('val = ' + company_value);
+            console.log('title = ' + company_title);
+            
+            if (company_value == '') {
+              $('.popup-request.quote input[id="company"]').val(company_title);
+            }
+            company_value = $('.popup-request.quote input[id="company"]').val();
+            console.log('val = ' + company_value);
+
+            
+            if (company_value == company_title) {
+              console.log('Company Hint!');
+              $('.popup-request.quote input[id="company"]').addClass('blur');
+            }
+            else {
+              console.log('Company user input!');
+            }
+            */
+            $('.popup-request.quote input[id="company"]').blur();
+
+
+            
             return false;
+            
+            
         });
         
         
