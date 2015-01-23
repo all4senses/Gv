@@ -110,41 +110,21 @@
             
             
             //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
-            console.log($('.popup-request.quote input[id="company"]'));
+            //console.log($('.popup-request.quote input[id="company"]'));
             
             
-            $('.popup-request.quote input[id="company"]').each(function(){
-              
-              if ($(this).val() == '') {
-                $(this).val($(this).attr('title'));
-              }
-              console.log('title = ' + $(this).attr('title'));
-              if ($(this).val() == $(this).attr('title')) {
-                $(this).addClass('blur');
-              }
-            });
+//            $('.popup-request.quote input[id="company"]').each(function(){
+//              
+//              if ($(this).val() == '') {
+//                $(this).val($(this).attr('title'));
+//              }
+//              console.log('title = ' + $(this).attr('title'));
+//              if ($(this).val() == $(this).attr('title')) {
+//                $(this).addClass('blur');
+//              }
+//            });
             
-           /*
-            company_title = $('.popup-request.quote input[id="company"]').attr('title');
-            company_value = $('.popup-request.quote input[id="company"]').val();
-            console.log('val = ' + company_value);
-            console.log('title = ' + company_title);
-            
-            if (company_value == '') {
-              $('.popup-request.quote input[id="company"]').val(company_title);
-            }
-            company_value = $('.popup-request.quote input[id="company"]').val();
-            console.log('val = ' + company_value);
-
-            
-            if (company_value == company_title) {
-              console.log('Company Hint!');
-              $('.popup-request.quote input[id="company"]').addClass('blur');
-            }
-            else {
-              console.log('Company user input!');
-            }
-            */
+            // Quick hack for missed hint in the Compane field. It doesn't appear without this blur for some reason
             $('.popup-request.quote input[id="company"]').blur();
 
 

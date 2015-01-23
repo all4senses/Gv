@@ -170,6 +170,8 @@
         $('.step .back').click(function(){
           //$('.title-second').hide();
           $(".popup-request.quote .multipartForm").formwizard("back");
+          // Quick hack for missed hint in the Compane field. It doesn't appear without this blur for some reason...
+          $('.popup-request.quote input[id="company"]').blur();
           //$('.title-first').show();
         });
         
