@@ -780,10 +780,12 @@ function gv_process_page(&$variables) {
       '#tag' => 'meta',
       '#attributes' => array(
       'name' =>  'viewport',
-      'content' =>  'width=device-width, initial-scale=1, maximum-scale=0')
+      //'content' =>  'width=device-width, initial-scale=1, maximum-scale=0')
+      'content' =>  'width=device-width, maximum-scale=0')
     );
   }
-  else {
+  else 
+    {
     // <meta name="viewport" content="width=device-width" />
     $viewport = array(
       '#type' => 'html_tag',
