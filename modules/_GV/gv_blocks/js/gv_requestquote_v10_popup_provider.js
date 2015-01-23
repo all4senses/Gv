@@ -151,14 +151,14 @@
           
         });
         
-        $('.step.two .button.back').click(function(){
-          $(".popup-request.quote .multipartForm").formwizard("back");
-        });
+//        $('.step.two .button.back').click(function(){
+//          $(".popup-request.quote .multipartForm").formwizard("back");
+//        });
         
-        $('.step.three .back').click(function(){
-          $('.title-second').hide();
+        $('.step .back').click(function(){
+          //$('.title-second').hide();
           $(".popup-request.quote .multipartForm").formwizard("back");
-          $('.title-first').show();
+          //$('.title-first').show();
         });
         
         
