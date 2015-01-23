@@ -80,6 +80,19 @@
             
             // Reset checkboxes.
             /*
+            jQuery('.top5 .choice-checkbox.checked, .people .choice.checked').each(function(){
+              checkb = jQuery(this).find('input');
+              jQuery(checkb).removeAttr('checked');
+              jQuery(this).removeClass('checked');
+            });
+            */
+            $('.top5 .choice-checkbox.checked, .people .choice.checked').each(function(){
+              checkb = $(this).find('input');
+              $(checkb).removeAttr('checked');
+              $(this).removeClass('checked');
+            });
+            
+            /*
             jQuery('.choice-checkbox ').each(function(){
               checkb = jQuery(this).find('input');
               checked = jQuery(checkb).attr('checked')
