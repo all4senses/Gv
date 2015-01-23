@@ -71,14 +71,14 @@
             });
             */
 
-            if ($('input[id="company"]').val() == '') {
-              $('input[id="company"]').val($('input[id="company"]').attr('title'));
+            if ($('.popup-request.quote input[id="company"]').val() == '') {
+              $('.popup-request.quote input[id="company"]').val($('.popup-request.quote input[id="company"]').attr('title'));
             }
-            console.log('title = ' + $('input[id="company"]').attr('title'));
-            console.log('val = ' + $('input[id="company"]').val());
+            console.log('title = ' + $('.popup-request.quote input[id="company"]').attr('title'));
+            console.log('val = ' + $('.popup-request.quote input[id="company"]').val());
             
-            if ($('input[id="company"]').val() == $('input[id="company"]').attr('title')) {
-              $('input[id="company"]').addClass('blur');
+            if ($('.popup-request.quote input[id="company"]').val() == $('.popup-request.quote input[id="company"]').attr('title')) {
+              $('.popup-request.quote input[id="company"]').addClass('blur');
             }
 
 
