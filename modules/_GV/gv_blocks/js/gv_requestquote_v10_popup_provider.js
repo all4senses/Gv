@@ -413,6 +413,12 @@
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('Data is sendingt: ' + $.param(data)); $("#requestQuoteFormWrapper .sending").show('clip'); },//function(data){$("#data").html("data sent to the server: " + $.param(data));},
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
+              
+              // Replace hint with empty value for Company
+              if($('.popup-request.quote input[id="company"]').val() == $('.popup-request.quote input[id="company"]').attr('title')) {
+                $('.popup-request.quote input[id="company"]').val('');
+              }
+              
               $('.popup-request.quote .multipartForm').hide(); 
               //$('.title-second').hide();
               //$('.title-loading').show();
