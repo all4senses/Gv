@@ -69,7 +69,7 @@
                 $(this).addClass('blur');
               }
             });
-            /*
+            */
 
             if ($('input[id="company"]').val() == '') {
               $('input[id="company"]').val($('input[id="company"]').attr('title'));
