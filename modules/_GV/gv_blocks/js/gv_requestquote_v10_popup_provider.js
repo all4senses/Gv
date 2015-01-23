@@ -154,7 +154,7 @@
         $('.step.two .button.back').click(function(){
           $(".popup-request.quote .multipartForm").formwizard("back");
         });
-        $('.step.three .button.back').click(function(){
+        $('.step.three .back').click(function(){
           $('.title-second').hide();
           $(".popup-request.quote .multipartForm").formwizard("back");
           $('.title-first').show();
