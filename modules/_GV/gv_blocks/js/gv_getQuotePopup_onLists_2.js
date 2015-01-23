@@ -75,6 +75,8 @@
               $('input[id="company"]').val($('input[id="company"]').attr('title'));
             }
             console.log('title = ' + $('input[id="company"]').attr('title'));
+            console.log('val = ' + $('input[id="company"]').val());
+            
             if ($('input[id="company"]').val() == $('input[id="company"]').attr('title')) {
               $('input[id="company"]').addClass('blur');
             }
