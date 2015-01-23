@@ -77,6 +77,27 @@
               jQuery('.popup-request.quote .multipartForm input[name="provider_name"]').val(jQuery(this).find('.name').html());
             //});
             
+            
+            // Reset checkboxes.
+            jQuery('.choice-checkbox').each(function(){
+              checkb = jQuery(this).find('input');
+              checked = jQuery(checkb).attr('checked')
+              //console.log(checked);
+              if (checked) {
+                jQuery(checkb).removeAttr('checked');
+                jQuery(this).removeClass('checked');
+              }
+            });
+            
+            jQuery('.choice.checked').each(function(){
+              checkb = jQuery(this).find('input');
+                jQuery(checkb).removeAttr('checked');
+                jQuery(this).removeClass('checked');
+            });
+           
+
+
+            
             $.fn.colorbox({
               inline:true, 
               href:".popup-request.quote", 
