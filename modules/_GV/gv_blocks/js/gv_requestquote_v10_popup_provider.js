@@ -131,10 +131,27 @@
         
         
         
-        $('.popup-request.quote .step.one .button.next, .popup-request.quote .step.three .button.next').click(function(){
+        $('.popup-request.quote .step.one .button.next').click(function(){
           $(".popup-request.quote .multipartForm").formwizard("next");
         });
         
+        
+        $('.popup-request.quote .step.three .button.next').click(function(){
+          // Replace hint with empty value for Company
+          company_title = $('.popup-request.quote input[id="company"]').attr('title');
+          company_value = $('.popup-request.quote input[id="company"]').val();
+          console.log('company title = ' + company_title);
+          console.log('company value = ' + company_value);
+          if(company_value == company_title) {
+            console.log('Hinted company');
+            $('.popup-request.quote input[id="company"]').val('');
+          }
+          $(".popup-request.quote .multipartForm").formwizard("next");
+        });
+        
+        
+
+
         
         $('.popup-request.quote .step.two .button.next').click(function(){
           if (step_ok(2)) {
@@ -171,6 +188,7 @@
           //$('.title-second').hide();
           $(".popup-request.quote .multipartForm").formwizard("back");
           // Quick hack for missed hint in the Compane field. It doesn't appear without this blur for some reason...
+          $('.popup-request.quote input[id="company"]').focus();
           $('.popup-request.quote input[id="company"]').blur();
           //$('.title-first').show();
         });
@@ -414,16 +432,7 @@
             //beforeSubmit: function(data){$('#requestQuoteFormWrapper .multipartForm').hide('clip'); $("#requestQuoteFormWrapper .sending").append('<p>Please wait a moment while processing your request.</p>'); $("#requestQuoteFormWrapper .sending").show('clip'); },
             beforeSubmit: function(data){
               
-              // Replace hint with empty value for Company
               
-              company_title = $('.popup-request.quote input[id="company"]').attr('title');
-              company_value = $('.popup-request.quote input[id="company"]').val();
-              console.log('company title = ' + company_title);
-              console.log('company value = ' + company_value);
-              if(company_value == company_title) {
-                console.log('Hinted company');
-                $('.popup-request.quote input[id="company"]').val('');
-              }
               
               $('.popup-request.quote .multipartForm').hide(); 
               //$('.title-second').hide();

@@ -125,6 +125,7 @@
 //            });
             
             // Quick hack for missed hint in the Compane field. It doesn't appear without this blur for some reason
+            
             $('.popup-request.quote input[id="company"]').blur();
 
 
