@@ -771,7 +771,8 @@ function gv_process_page(&$variables) {
   
   
   global $user;
-  if ($user->uid == 1) {
+  //if ($user->uid == 1) 
+    {
     $viewport = array(
       '#type' => 'html_tag',
       '#tag' => 'meta',
