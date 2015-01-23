@@ -60,6 +60,7 @@
               if ($(this).val() == '') {
                 $(this).val($(this).attr('title'));
               }
+              console.log('title = ' + $(this).attr('title'));
               if ($(this).val() == $(this).attr('title')) {
                 $(this).addClass('blur');
               }
