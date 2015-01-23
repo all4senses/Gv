@@ -415,9 +415,12 @@
             beforeSubmit: function(data){
               
               // Replace hint with empty value for Company
-              if($('.popup-request.quote input[id="company"]').val() == $('.popup-request.quote input[id="company"]').attr('title')) {
-                $('.popup-request.quote input[id="company"]').val('');
-              }
+              
+//              company_title = $('.popup-request.quote input[id="company"]').attr('title');
+//              
+//              if($('.popup-request.quote input[id="company"]').val() == $('.popup-request.quote input[id="company"]').attr('title')) {
+//                $('.popup-request.quote input[id="company"]').val('');
+//              }
               
               $('.popup-request.quote .multipartForm').hide(); 
               //$('.title-second').hide();
