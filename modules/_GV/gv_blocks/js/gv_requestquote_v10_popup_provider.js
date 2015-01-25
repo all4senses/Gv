@@ -171,6 +171,7 @@
                 $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
              }
 
+             jQuery('.step.three .firstname input').blur();
              /* ========================================================================== */
 
           }
