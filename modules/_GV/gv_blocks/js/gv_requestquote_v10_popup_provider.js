@@ -250,7 +250,7 @@
         
         
         // Highlight personal info input fields label on focus input
-        jQuery('.step.three .firstname input').blur();
+        //jQuery('.step.three .firstname input').blur();
         jQuery('.step.three input').focus(function(){jQuery(this).parent().parent().find('.question').css('color', '#f4ad49')});
         jQuery('.step.three input').blur(function(){jQuery(this).parent().parent().find('.question').css('color', 'gray')});
         
@@ -262,7 +262,7 @@
         $(".popup-request.quote .multipartForm").formwizard({ 
 				 	formPluginEnabled: true,
 				 	validationEnabled: true,
-				 	focusFirstInput: true,
+				 	//focusFirstInput: true,
           textSubmit : 'Show Me Results', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           textNext: 'Find Me Solutions', // 'GET MY QUICK QUOTE',// 'Submit & Get Quotes',
           
