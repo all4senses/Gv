@@ -249,24 +249,34 @@
             case 1:
               company_title = $('.popup-request.quote input[id="company"]').attr('title');
               company_value = $('.popup-request.quote input[id="company"]').val();
-              console.log('company title = ' + company_title);
-              console.log('company value = ' + company_value);
+              //console.log('company title = ' + company_title);
+              //console.log('company value = ' + company_value);
               if(company_value == company_title || company_value == '') {
-                console.log('company Not filled');
+                //console.log('company Not filled');
+                $('.step.one .error-warn').show();
                 return false;
               }
+              $('.step.one .error-warn').hide();
               return true;
 
           }
         }
         
         
+        jQuery('.popup-request.quote input[id="company"]').blur(function(){
+          company_title = $('.popup-request.quote input[id="company"]').attr('title');
+          company_value = $('.popup-request.quote input[id="company"]').val();
+          if(company_value != company_title && company_value != '') {
+            $('.step.one .error-warn').hide();
+          }
+        });
+        
         // Highlight personal info input fields label on focus input
         //jQuery('.step.three .firstname input').blur();
         jQuery('.step.three input').focus(function(){jQuery(this).parent().parent().find('.question').css('color', '#f4ad49')});
         jQuery('.step.three input').blur(function(){jQuery(this).parent().parent().find('.question').css('color', 'gray')});
-        
-        
+              
+              
         
         
         // http://thecodemine.org/#
