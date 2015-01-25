@@ -132,7 +132,9 @@
         
         
         $('.popup-request.quote .step.one .button.next').click(function(){
-          $(".popup-request.quote .multipartForm").formwizard("next");
+          if (step_ok(1)) {
+            $(".popup-request.quote .multipartForm").formwizard("next");
+          }
         });
         
         
@@ -157,9 +159,9 @@
           if (step_ok(2)) {
             //console.log('step2 check...');
             //$('.title-first').hide();
-            $('.step.two').hide();
+            //$('.step.two').hide();
          
-            $('.title-second').show();
+            //$('.title-second').show();
             $(".popup-request.quote .multipartForm").formwizard("next");
 
             /* ==========================================================================
@@ -171,6 +173,7 @@
                 $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
              }
 
+             // Explicitely make the field of blur color text
              jQuery('.step.three .firstname input').blur();
              /* ========================================================================== */
 
@@ -243,8 +246,16 @@
                 return false;
               }
              
-//            case 3:
-//              return step2_errors;
+            case 1:
+              company_title = $('.popup-request.quote input[id="company"]').attr('title');
+              company_value = $('.popup-request.quote input[id="company"]').val();
+              console.log('company title = ' + company_title);
+              console.log('company value = ' + company_value);
+              if(company_value == company_title || company_value == '') {
+                console.log('company Not filled');
+                return false;
+              }
+              return step2_errors;
 
           }
         }
