@@ -250,6 +250,7 @@
         
         
         // Highlight personal info input fields label on focus input
+        jQuery('.step.three .firstname input').blur();
         jQuery('.step.three input').focus(function(){jQuery(this).parent().parent().find('.question').css('color', '#f4ad49')});
         jQuery('.step.three input').blur(function(){jQuery(this).parent().parent().find('.question').css('color', 'gray')});
         
