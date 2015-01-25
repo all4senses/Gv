@@ -40,7 +40,7 @@
                     success: function(data) 
                             { 
                                 if(!data.error) {
-                                    console.log('Track clicked!');
+                                    //console.log('Track clicked!');
                                 }
                                 return false;
                             } 

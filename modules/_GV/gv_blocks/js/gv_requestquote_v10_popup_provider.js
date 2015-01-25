@@ -142,10 +142,10 @@
           // Replace hint with empty value for Company
           company_title = $('.popup-request.quote input[id="company"]').attr('title');
           company_value = $('.popup-request.quote input[id="company"]').val();
-          console.log('company title = ' + company_title);
-          console.log('company value = ' + company_value);
+          //console.log('company title = ' + company_title);
+          //console.log('company value = ' + company_value);
           if(company_value == company_title) {
-            console.log('Hinted company');
+            //console.log('Hinted company');
             $('.popup-request.quote input[id="company"]').val('');
           }
           $(".popup-request.quote .multipartForm").formwizard("next");
