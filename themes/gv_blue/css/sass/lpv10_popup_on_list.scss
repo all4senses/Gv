@@ -556,7 +556,7 @@ font-family: inherit !important;
 						width: 100%;
 						font-family: gvcons;
 						color: $primary-color;
-						font-size: .8em;
+						font-size: 1.1em;
 					}
 			}
 		}
@@ -595,31 +595,6 @@ font-family: inherit !important;
    ========================================================================== */
 
 
-.popup-request.quote .fieldset.half {
-	width: 49.1%;
-	float: left;
-	margin-top: 10px; //22px;
-
-    
-    
-		input {
-			width: 100%;
-			font-size: 17px;
-			padding: 13px;
-
-			&:focus {
-				border: 1px solid $contrast-color;
-			}
-		}
-
-	&:nth-of-type(2), &:nth-of-type(5){
-		margin-left: perc(10, 560);
-	}
-
-	&.first {
-		margin-top: 0;
-	}
-}
 
 
 .popup-request.quote .step.three {
@@ -645,6 +620,34 @@ font-family: inherit !important;
 			text-align: center;
 			margin-top: 13px;
 		}
+    
+    .fieldset.half {
+      width: 49.1%;
+      float: left;
+      margin-top: 10px; //22px;
+
+
+
+        input {
+          width: 100%;
+          font-size: 17px;
+          padding: 13px;
+          color: #878787 !important;
+          
+          &:focus {
+            border: 1px solid $contrast-color;
+          }
+        }
+
+      &:nth-of-type(2), &:nth-of-type(5){
+        margin-left: perc(10, 560);
+      }
+
+      &.first {
+        margin-top: 0;
+      }
+    }
+
 }
 
 
