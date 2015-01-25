@@ -255,7 +255,7 @@
                 console.log('company Not filled');
                 return false;
               }
-              return step2_errors;
+              return true;
 
           }
         }
