@@ -288,7 +288,7 @@ $remoteProvidersSubmissionsSettings = array(
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk', 'page_9_uk', 'page_10_uk')),
-  'RingCentral-CA' => array('function' => 'gv_misc_SendRequestToRingCentral_CA', 'allowed_sources' => array('page_7_ca', 'page_8_ca', 'page_9_ca')),
+  'RingCentral-CA' => array('function' => 'gv_misc_SendRequestToRingCentral_CA', 'allowed_sources' => array('page_7_ca', 'page_8_ca', 'page_9_ca', 'page_10_ca')),
   'Jive' => array('function' => 'gv_misc_SendRequestToJiveCommunications', 'allowed_sources' => array()),
 );
 
