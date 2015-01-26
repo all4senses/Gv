@@ -43,7 +43,7 @@
           </div>
 
           <div class="slogan-wrap">
-            <div class="slogan">Canada #1 VoIP Authority Trusted by <span>Millions</span></div>
+            <div class="slogan">Canada's #1 VoIP Authority Trusted by <span>Millions</span></div>
           </div>
 
           <div class="clearfix-dk"></div>
