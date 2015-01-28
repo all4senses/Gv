@@ -7396,6 +7396,8 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
  
   $submission['Phones needed'] = @$map_phonesNeeded[@$submission['Phones needed']];
   
+  $submission['Company'] = !empty($submission['Company']) ? $submission['Company'] : 'Unavailable';
+
   
   $map_main = array(
     'First Name' => 'first_name',
@@ -7458,7 +7460,7 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
     ////'_mkt_trk' => 'id:075-DTB-715',
     //'_mkt_trk' => 'id:075-DTB-715&token:_mch-ringcentral.com-1363383929343-15901',
       
-      
+    /*  
     'Title' => 'NA',
     ////'Industry' => 'Advertising, Marketing, Media, PR',
       
@@ -7467,6 +7469,8 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
     'Street' => 'NA',
     //'zip' => 'N/A', 
     'Country' => 'USA',
+     */ 
+      
     ////'Description_of_Your_Business__c' => 'NA',
     ///'Notes__c' => 'NA',
     ////'Number_Of_Locations__c' => 'NA',
@@ -7483,9 +7487,7 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
     $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
-  if (empty($data_to['Company'])) {
-    $data_to['Company'] = 'Unavailable';
-  }
+  
   
   //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
   //$url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
