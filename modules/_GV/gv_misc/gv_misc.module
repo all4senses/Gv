@@ -7500,6 +7500,7 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_TIMEOUT, 300);
   curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_HEADER, TRUE);
   curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
   $data_from = curl_exec($curl);
   if ($data_from === false) {
