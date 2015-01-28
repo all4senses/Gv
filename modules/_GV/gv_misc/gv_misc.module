@@ -7398,6 +7398,7 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
   
   $submission['Company'] = !empty($submission['Company']) ? $submission['Company'] : 'Unavailable';
 
+  $submission['Phone #'] = str_replace(array('(', ')', ' ', '-'), '', $submission['Phone #']);
   
   $map_main = array(
     'First Name' => 'first_name',
