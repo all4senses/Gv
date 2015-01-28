@@ -7384,19 +7384,13 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
   );
   */
   
-  /*
+  
   $map_phonesNeeded = array(
-    '1 - 4' => '2-4',
-    '2 - 4' => '2-4',
-    '5 - 10' => '5-9',
-    '11 - 20' => '11-20',
-    '21 - 50' => '21-49',
-    'More than 50' => '50-99',
+    '1-25' => '10-25',
+    '26-50' => '25-50',
   );
-  */
-  
-  
-  //$submission['Phones needed'] = @$map_phonesNeeded[@$submission['Phones needed']];
+ 
+  $submission['Phones needed'] = @$map_phonesNeeded[@$submission['Phones needed']];
   
   
   $map_main = array(
