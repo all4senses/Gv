@@ -7384,7 +7384,10 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
   );
   */
   
-  
+  if (isset($submission['theme_hook_original'])) {
+    unset($submission['theme_hook_original']);
+  }
+          
   $map_phonesNeeded = array(
     '1-24' => '10-25',
     '25-49' => '25-50',
@@ -7447,8 +7450,8 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
     'retURL' =>  'http://', // 'http://marketo.ringcentral.com/LeadGen1-ThankYou.html',
     ////'returnURL' =>  'http://marketo.ringcentral.com/LeadGen1-ThankYou.html',
       
-    'debug' => 1,
-    'debugEmail' => 'jacob.brushafer@corvisa.com', //'wilson.chu@ringcentral.com',
+    ////'debug' => 1,
+    ////'debugEmail' => 'jacob.brushafer@corvisa.com', //'wilson.chu@ringcentral.com',
     
     ////'lpId' => '4529',//'IpId' => '4529',
     ////'subId' => '100',//'subld' => '100',
