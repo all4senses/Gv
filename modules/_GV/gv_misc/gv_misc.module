@@ -7450,8 +7450,8 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
     'retURL' =>  'http://', // 'http://marketo.ringcentral.com/LeadGen1-ThankYou.html',
     ////'returnURL' =>  'http://marketo.ringcentral.com/LeadGen1-ThankYou.html',
       
-    ////'debug' => 1,
-    ////'debugEmail' => 'jacob.brushafer@corvisa.com', //'wilson.chu@ringcentral.com',
+    'debug' => 1,
+    'debugEmail' => 'jacob.brushafer@corvisa.com', //'wilson.chu@ringcentral.com',
     
     ////'lpId' => '4529',//'IpId' => '4529',
     ////'subId' => '100',//'subld' => '100',
@@ -7491,7 +7491,7 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
     $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
-  
+  watchdog('Corvisa -->', print_r($submission, TRUE), NULL, WATCHDOG_WARNING);
   
   //$url = 'http://marketo.ringcentral.com/HQLLeadSubmissionform.html';
   //$url = 'http://marketo.ringcentral.com/index.php/leadCapture/save';
