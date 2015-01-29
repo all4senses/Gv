@@ -34,6 +34,21 @@
           maxHeight: 300
   			});
          
+         
+        // Quick hack for prevent scrolling down of colorbox popup window on press the tab key in the Company field (first step)
+        jQuery('input[id="company"]').keydown(function (event) { 
+            
+            //console.log(jQuery(this).val());
+            //console.log(event.keyCode);
+   
+            if(event.keyCode == 9){ // Tab
+              jQuery(this).blur();
+              event.preventDefault();     // Prevent character input
+            }
+
+        }); 
+         
+         
         $('input[id="phone"]').keydown(function (event) { 
             
             //console.log($(this).val());
