@@ -7386,6 +7386,10 @@ function gv_misc_SendRequestTo8x8_callCenter($submission, $op = 'sendIfAllowed')
  
   $submission['Quote for'] = @$map_quoteFor[@$submission['Quote for']];
   
+  if(!empty($submission['Features'])) { 
+    $submission['Features'] = 'Features: ' . $submission['Features'];
+  }
+  
   $map_main = array(
     'First Name' => 'first_name',
     'Last Name' => 'last_name',
@@ -7397,6 +7401,7 @@ function gv_misc_SendRequestTo8x8_callCenter($submission, $op = 'sendIfAllowed')
     'Email' => 'email',
     //'Website' => 'URL',
     'Phone #' => 'phone',
+    'Features' => '00N50000001PrEA',
   );
  
   

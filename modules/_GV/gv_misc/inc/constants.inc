@@ -286,7 +286,7 @@ $remoteProvidersSubmissionsSettings = array(
   'Vocalocity' => array('function' => 'gv_misc_SendRequestToVocalocity', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   
   '8x8' => array('function' => 'gv_misc_SendRequestTo8x8', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
-  '8x8_CallCenter' => array('function' => 'gv_misc_SendRequestTo8x8_callCenter', 'allowed_sources' => array()),  
+  
     
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   
@@ -295,6 +295,8 @@ $remoteProvidersSubmissionsSettings = array(
   'Jive' => array('function' => 'gv_misc_SendRequestToJiveCommunications', 'allowed_sources' => array()),
     
   'Corvisa' => array('function' => 'gv_misc_SendRequestToCorvisa', 'allowed_sources' => array()),  
+    
+  '8x8_CallCenter' => array('function' => 'gv_misc_SendRequestTo8x8_callCenter', 'allowed_sources' => array()),  
 );
 
 define('REMOTE_PROVIDERS_SUBMISSIONS_SETTINGS', serialize($remoteProvidersSubmissionsSettings));
