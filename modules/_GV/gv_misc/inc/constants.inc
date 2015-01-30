@@ -284,7 +284,10 @@ define('PAGES_410', serialize($pages410));
 $remoteProvidersSubmissionsSettings = array(
   'Nextiva' => array('function' => 'gv_misc_SendRequestToNextiva', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9'/*, 'page_10'*/)),
   'Vocalocity' => array('function' => 'gv_misc_SendRequestToVocalocity', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
+  
   '8x8' => array('function' => 'gv_misc_SendRequestTo8x8', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
+  '8x8_CallCenter' => array('function' => 'gv_misc_SendRequestTo8x8_callCenter', 'allowed_sources' => array()),  
+    
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk', 'page_9_uk', 'page_10_uk')),

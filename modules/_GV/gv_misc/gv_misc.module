@@ -7335,6 +7335,154 @@ function gv_misc_SendRequestTo8x8($submission, $op = 'sendIfAllowed') {
 
 
 /**
+ * Send a request to 8x8.
+ */
+function gv_misc_SendRequestTo8x8_callCenter($submission, $op = 'sendIfAllowed') {
+  
+  
+//  global $user;
+//  if ($user->uid == 1) {
+//    dpm(__FUNCTION__);
+//    return;
+//  }
+  
+  
+  // If allowedToBeSent...
+  $allowedToBeSent = TRUE;
+  
+  // Send only  '5 - 10' and        '11 - 20'
+  if (@$submission['Phones needed'] != '1 - 4' && @$submission['Phones needed'] != '2 - 4' && @$submission['Phones needed'] != '5 - 10' && @$submission['Phones needed'] != '11 - 20') {
+    $allowedToBeSent = FALSE;
+  }
+  
+  $allowedToBeSent = $allowedToBeSent ? gv_misc_isSubmissionToProviderAllowed($submission, __FUNCTION__) : $allowedToBeSent;
+  
+  
+  if ($op == 'checkIfShouldBeSent') {
+    return $allowedToBeSent;
+  }
+  elseif ($op == 'sendIfAllowed' && !$allowedToBeSent) {
+    return FALSE;
+  }
+//  elseif ($op == 'mustBeSent') {
+//    // Just sent it unconditionally.
+//  }
+  
+  
+  
+  
+  
+  if (@$submission['Phones needed'] == '1 - 4') {
+    $submission['Phones needed'] = '2 - 4';
+  }
+    
+  
+  
+      Inbound, Outbound, Blended
+  $map_quoteFor = array(
+    'Inbound Calling' => 'Inbound',
+    'Outbound Calling' => 'Outbound',
+    'Both Outbound & Inbound' => 'Blended',
+  );
+ 
+  $submission['Quote for'] = @$map_quoteFor[@$submission['Quote for']];
+  
+  $map_main = array(
+    'First Name' => 'first_name',
+    'Last Name' => 'last_name',
+    'Phones needed' => '00N50000002aHYf'; //Number of users  // '00N50000001Pxsf', // Number of Phone Lines  
+    'Quote type' => '00N50000001PrEA', // Comments
+    'Quote for' => '00N50000002aHYQ',
+    'Buying Time Frame' => '00N50000001ya9a',
+    'Company' => 'company',
+    'Email' => 'email',
+    //'Website' => 'URL',
+    'Phone #' => 'phone',
+  );
+ 
+  
+  
+  // Set initial fields.
+  $data_to = array(
+    'lead_source' =>  'LG-GetVoIP-CallCenter'; //'LG-GetVoIP',
+    'oid' => '00D300000006Mvt', 
+    'retURL' =>  'http://go.8x8.com/getvoip', //'http://getvoip.com',
+      
+    'Campaign_ID' => '70150000000iSHz'; //'70150000000fg2g', 
+    'member_status' => 'Responded',
+      
+    'debug' => 1,
+    'debugEmail' => 'jessica.weimer@8x8.com',//'all4senses@gmail.com',
+      
+    'title' => 'N/A',
+    'industry' => 'N/A',
+      
+    'city' => 'N/A',
+    'state' => 'N/A',
+    'street' => 'N/A',
+    'zip' => 'N/A', 
+    'title' => 'N/A',
+    'country' => 'N/A',
+    'employees' => 'N/A',
+  );
+  
+  
+  // Map data to remote vars names.
+  foreach ($map_main as $getvoip_key => $remote_key) {
+    $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
+  }
+  
+  $url = 'https://salesforce.ringlead.com/cgi-bin/797/1/dedup.pl';
+  //$url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  
+  //$url = 'http://getvoip.com/request-test';
+  
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+  curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+  $data_from = curl_exec($curl);
+  if ($data_from === false) {
+    $data_from = 'Error!!! 
+' . curl_error($curl);
+  }
+  curl_close($curl);
+ 
+
+
+  // Report to a4s.
+  /*
+  $out = 'Quote Request submission form:
+
+';
+  foreach ($submission as $key => $value) {
+   if ($value) {
+      $out .= "$key = $value
+";
+    }
+  }
+ 
+ 
+  
+  $params['report'] = $out . '
+    
+
+' . $data_from;
+  
+  // Send a report to admin.
+  global $language;
+  drupal_mail('gv_misc', '8x8_send_report', 'all4senses@gmail.com', $language->language, $params);
+  
+  return $params['report'];
+  */
+  
+  return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, '8x8_send_report', $data_to);
+}
+
+
+/**
  * Send a request to Corvisa.
  */
 function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
