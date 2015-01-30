@@ -453,6 +453,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['exitintent_v3'] = array(
+    'info' => 'Exit intent v3 with quote 3 step', // for cloud contact center
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['find_solution_anchor'] = array(
     'info' => 'find-solution anchor for the home page',
     'cache' => DRUPAL_NO_CACHE,
@@ -940,6 +945,11 @@ function gv_blocks_block_view($delta = '') {
     case 'exitintent_v2':
       $block['subject'] = ''; 
       $block['content'] = gv_blocks_get_exitIntent_v2();
+      break;
+    
+    case 'exitintent_v3':
+      $block['subject'] = ''; 
+      $block['content'] = gv_blocks_get_exitIntent_v3();
       break;
     
     case 'find_solution_anchor':
@@ -10441,6 +10451,242 @@ function gv_blocks_get_exitIntent_v2() {
   return $out;
 }
 
+
+
+/**
+ *  exit intent block v3 for Cloud contact center
+ */
+function gv_blocks_get_exitIntent_v3() {
+
+  //drupal_add_library('system', 'ui.widget');
+
+  //drupal_add_library('system', 'effects.bounce');
+  
+//  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
+//  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+//  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+//  //drupal_add_js($path_to_custom_js . 'bbq.js');
+//  drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  
+  
+  $path_to_custom_js = 'sites/all/libraries/jquery.plugins/formwizard-307/js/';
+  drupal_add_js($path_to_custom_js . 'jquery.form.js');
+  drupal_add_js($path_to_custom_js . 'jquery.validate.js');
+  //drupal_add_js($path_to_custom_js . 'bbq.js');
+  //drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
+  drupal_add_js($path_to_custom_js . 'jquery.form.wizard.js');
+  
+  // Docs
+  // http://thecodemine.org/#_demoForm=norway
+  // http://stackoverflow.com/questions/14067693/submit-form-at-each-step-using-jquery-form-wizard
+  // http://forum.jquery.com/topic/form-wizard-not-working-after-duplicating-steps
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  drupal_add_library('system', 'ui.core');
+  drupal_add_library('system', 'ui.widget');
+  drupal_add_library('system', 'ui.position');  
+  
+  //drupal_add_js('sites/all/libraries/jquery.plugins/ui/jquery.ui.selectmenu.js');
+  //drupal_add_css('sites/all/libraries/jquery.plugins/ui/themes/base/jquery.ui.selectmenu.css');
+  
+  $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
+  drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
+  drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
+  
+  
+  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
+  
+  
+  $current_js_array = drupal_add_js();
+  if (!isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js']) && !isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) ) {
+      //dpm($current_js_array);
+      // Colorbox for popup window for exit intent.
+      //possible versions for the design: 1, 3, 4, 
+    
+     drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
+
+  }
+  //drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example2/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
+  
+  
+  // multistep form and exit intent specific using functionality.
+  drupal_add_js($path_to_custom_js . 'gv_exitIntent_v3_for_cloudContactCenter.js');
+  
+//  $current_js_array = drupal_add_js();
+//  dpm($current_js_array);
+  
+  //exitIntent-ppc-bu
+  $css_object = drupal_add_css();
+  if (!isset($css_object['sites/all/themes/gv_blue/css/exit-intent-v3.css'])) {
+    //drupal_add_css(path_to_theme() . '/css/exitIntent-ppc-bu.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+    drupal_add_css(path_to_theme() . '/css/exit-intent-v3.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE)); 
+  }
+  
+  
+
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+  
+  $out = '
+   <div style="display: none;">
+    <div id="exitIntent"> 
+      <div id="requestQuoteFormWrapper-ppc" class="hidden">
+        <div class="sending results" style="display: none;"></div>
+        <div class="success results" style="display: none;"></div>
+        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
+        
+        <form class="multipartForm" method="post" action="/request" style="height: 300px; overflow: hidden;">
+
+                
+                <div id="fieldWrapper">
+                
+                    <div class="step" id="first_step">
+                        
+                           <div class="line-1">Want To See Exactly How Much</div>
+                           <div class="line-2">BUSINESS VOIP</div>
+                           <div class="line-3">Will <span>Save</span> You?</div>
+                           <div class="line"></div>
+                           <div class="line-4">We provide bottom line quotes from award-winning providers.</div>
+                           
+                           <div class="control">
+                              <div class="next_custom">Next</div>
+                              <div class="no">No</div>
+                           </div>
+                    </div>
+
+
+
+                    
+                    <div class="step" id="second_step">
+                       
+                      <div class="line-1">We provide bottom line quotes from award-winning providers.</div>
+                      <div class="line"></div>
+                      <div class="line-2">To Get Started On Your</div>
+                      <div class="line-3">SAVINGS QUOTE</div>
+                      <div class="line-4">Tell us:</div>
+                        
+
+                      <div class="control">
+                      
+                            <div class="text-h-group">
+
+
+                                <div class="field-group left">
+
+                                  <div class="wrapper input-border">
+                                    <input class="after company" name="company" id="company" title="Company Name" />
+                                  </div>
+
+                                </div>
+
+                                <div class="field-group right">
+
+                                   <!--<div class="question">How many phones do you need?</div>-->
+                                     <select name="phones_amt" id="phones_amt" class="input">
+                                       <option value="">- Number of Lines -</option>
+                                       <option value="1 - 4">1 - 4</option>
+                                       <option value="5 - 10">5 - 10</option>
+                                       <option value="11 - 20">11 - 20</option>
+                                       <option value="21 - 50">21 - 50</option>
+                                       <option value="More than 50">More than 50</option>
+                                     </select>
+
+                                 </div>
+                           
+                              
+                              </div>
+                              
+                              <div class="back_custom">Back</div>
+                              <div class="next_custom">Next</div>
+                              <div class="err" style="display: none;">Please select a Number of lines.</div>
+                         
+                         </div>
+                         
+                         
+                    </div>
+                    
+
+
+                    <div class="step" id="third_step">
+                        
+                           <div class="line-1">After we match you with qualified providers,</div>
+                           <div class="line-2">Where should we send your</div>
+                           <div class="line-3">FREE QUOTE?</div>
+                           <div class="line"></div>
+                           <div class="line-4">Your quotes will be delivered within minutes.</div>
+                           
+                          <div class="control">
+                          
+                                  <div class="text-h-group">
+                                    <div class="wrapper input-border">
+                                      <input class="after required firstname" name="firstname" id="firstname" title="First Name" />
+                                    </div>
+
+                                    <div class="wrapper input-border second">
+                                      <input class="after required lastname" name="lastname" id="lastname" title="Last Name" />
+                                    </div>
+                                  </div>
+
+                                  <div class="text-h-group">
+                                    <div class="wrapper input-border">
+                                      <input class="after email required" name="email" id="email" title="Email Address" />
+                                    </div>
+
+                                    <div class="wrapper phone input-border  second">
+                                        <input class="after required phone" name="phone" id="phone" value="" title="Phone Number" />
+                                    </div>
+                                  </div>
+                                  
+                                  
+                                  <div class="back_custom">Back</div>
+                                  
+                          </div>
+                         
+                          
+
+                    </div>
+                    
+
+
+                    
+                </div>
+            
+                <div id="Navigation"> 							
+                        <!-- <input class="navigation_button" id="back" value="Back" type="reset" /> -->
+                        <input class="navigation_button" id="next" value="Next" type="submit" />
+                        
+                </div>
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="block" />
+                <input type="hidden" name="version" value="exit-intent-v3-cloudContactCenter" />
+                <input type="hidden" name="referrer" value="" />
+                <input type="hidden" name="url" value="" />
+                
+        </form>
+
+        <p id="data"></p>
+      </div>
+    </div>
+ </div>
+<div class="block_footer"></div>
+  ';
+  
+  return $out;
+}
 
 
 /**
