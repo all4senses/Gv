@@ -202,11 +202,11 @@
           //console.log(('#requestQuoteFormWrapper-ppc select').val());
           if (amt_choosen == '') {
             //console.log('bad');
-            $("#second_step .err").show();
+            $("#requestQuoteFormWrapper-ppc #second_step .err").show();
           }
           else {
             //console.log('good');
-            $('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+            //$('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999"});
             $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
           }
         });
@@ -383,7 +383,7 @@
             success: function(data){
               $('#requestQuoteFormWrapper-ppc .sending').hide(); 
               $('#requestQuoteFormWrapper-ppc .multipartForm').html('');
-              $("#requestQuoteFormWrapper-ppc .success").append(data.data); 
+              $("#requestQuoteFormWrapper-ppc .success").html(data.data); 
               $("#requestQuoteFormWrapper-ppc .success").show();
               
               //console.log('Start timer DEMO...');
@@ -406,7 +406,7 @@
               //$('#requestQuoteFormWrapper-ppc .multipartForm').hide();
               $('#requestQuoteFormWrapper-ppc .multipartForm .control').html(''); 
               $('#requestQuoteFormWrapper-ppc .multipartForm #Navigation').hide();
-              $("#requestQuoteFormWrapper-ppc .sending").append('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
+              $("#requestQuoteFormWrapper-ppc .sending").html('<div class="wait"><p><strong>Please wait</strong> a moment while processing your request...</p></div>'); 
               $("#requestQuoteFormWrapper-ppc .sending").show(); 
             },
             
