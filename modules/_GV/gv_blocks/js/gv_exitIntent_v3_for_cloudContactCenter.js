@@ -206,6 +206,7 @@
           }
           else {
             //console.log('good');
+            $('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999"});
             $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
           }
         });
