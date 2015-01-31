@@ -19,8 +19,8 @@
         
         if ($(this).val() == $(this).attr('title')) {
           $(this).val('');
-          $(this).removeClass('blur');
         }
+        $(this).removeClass('blur');
         
       });
       
