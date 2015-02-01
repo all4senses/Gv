@@ -11600,7 +11600,8 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                             isset($fixed_positions['Mitel_key']) 
                             && 
                             // Mitel should only rotate between position 1 and 2. 
-                            !($random_index[0] == $fixed_positions['Mitel_key'] || $random_index[1] == $fixed_positions['Mitel_key'])
+                            // ... When Vonage ends up in Position 3, Mitel should always be in Position 1, 
+                            !($random_index[0] == $fixed_positions['Mitel_key'] || ($random_index[1] == $fixed_positions['Mitel_key'] && $random_index[2] != $fixed_positions['Vonage_key']) )
                           )
                           ||
                           (
