@@ -11566,15 +11566,16 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                           (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
                           ||
                           */
-                          /*
+                          
                           // old - RingCentral_key should be always 1,2,3 (2,3,4 positions)
                           (
                             isset($fixed_positions['RingCentral_key']) 
                             &&
-                            !($random_index[1] == $fixed_positions['RingCentral_key'] || $random_index[2] == $fixed_positions['RingCentral_key'] || $random_index[3] == $fixed_positions['RingCentral_key'])
+                            //!($random_index[1] == $fixed_positions['RingCentral_key'] || $random_index[2] == $fixed_positions['RingCentral_key'] || $random_index[3] == $fixed_positions['RingCentral_key'])
+                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                            !($random_index[1] != $fixed_positions['RingCentral_key'] && $random_index[2] == $fixed_positions['Vonage_key'] )
                           )
                           ||
-                          */
                           // old - Vonage_key should be always 0 OR 2 (1st or 3nd position)
                           (
                             isset($fixed_positions['Vonage_key']) 
