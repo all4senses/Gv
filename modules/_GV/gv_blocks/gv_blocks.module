@@ -11610,6 +11610,20 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                             // Corvisa should not rotate at all. Should stay in Position 7 at all times. 
                             !($random_index[6] == $fixed_positions['Corvisa_key'])
                           )
+                          ||
+                          (
+                            isset($fixed_positions['Jive_key']) 
+                            && 
+                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                            !($random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+                          )
+                          ||
+                          (
+                            isset($fixed_positions['8x8_key']) 
+                            && 
+                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                            !($random_index[1] != $fixed_positions['8x8_key'] || ($random_index[1] == $fixed_positions['8x8_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+                          )
                         );
 
                 //dpm($random_index);
