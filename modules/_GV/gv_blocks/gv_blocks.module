@@ -11564,6 +11564,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 dpm($gv_rotate_data___block_top_bu_ppc);
                 $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
                 $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
+                if ($vonage_is_2 > 1) {
+                  $iteration_count = $vonage_is_2 = 1;
+                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+                }
                 
                 $count_cur = 0;
                 do {
