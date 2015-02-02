@@ -11559,9 +11559,12 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 //shuffle($random_index);
                 
                 
-                $iteration_count = $vonage_is_2 = 0;
-                //variable_get('gv');
-
+                //$iteration_count = $vonage_is_2 = 0;
+                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 'vonage_is_2' => 0));
+                dpm($gv_rotate_data___block_top_bu_ppc);
+                $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
+                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
+                
                 do {
                   shuffle($random_index);
                 }while (
@@ -11654,6 +11657,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 if ($random_index[2] == $fixed_positions['Vonage_key']) {
                   $vonage_is_2 +=1;
                 }
+                variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
                 
                 
 
