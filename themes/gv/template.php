@@ -796,7 +796,14 @@ function gv_process_page(&$variables) {
   }
   drupal_add_html_head($viewport, 'viewport');
   
-        
+  dpm($_GET);
+  dpm($_SERVER);
+  
+//  switch()  {
+//    case
+//  }     
+//  drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+  
         
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
   //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
