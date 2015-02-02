@@ -11592,14 +11592,14 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                             // But should show up in Position 3 about 10% of the time. 
                             // When Vonage ends up in Position 3, Mitel should always be in Position 1, 
                             // and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
-                            !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[1] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key']  )
+                            !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[1] == $fixed_positions['Vonage_key'] || ($random_index[2] == $fixed_positions['Vonage_key'] && $vonage_is_2 == 0) )
                           )
                           ||
                           // ... But Vonage should show up in Position 3 about 10% of the time. 
                           // So Vonage should appear not less often than 1 time per 10 iterations
                           // and on the 10th iteration there is should be already shown at least 1 time
                           (
-                            !( ($iteration_count < 9 && $vonage_is_2 <= 1) || ($iteration_count == 9 && $vonage_is_2 > 0 && $random_index[2] != $fixed_positions['Vonage_key']) || ($iteration_count == 9 && $vonage_is_2 == 0 && $random_index[2] == $fixed_positions['Vonage_key']) )
+                            !( ($iteration_count < 9 && $vonage_is_2 <= 1) || ($iteration_count == 9 && $vonage_is_2 > 0 && $random_index[2] != $fixed_positions['Vonage_key']) )
                           )
                           ||
                           // old - Nextiva never rotates into Position 1 or 3 (key 0 or 2) and stays in rotation only in P4 & 5 (key 3 or 4)
