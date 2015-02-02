@@ -11565,9 +11565,13 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
                 $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
                 
+                $count_cur = 0;
                 do {
                   shuffle($random_index);
+                  $count_cur++;
                 }while (
+                        $count_cur<1000
+                        ||
                           /*
                           // very old - RingCentral_key should be always 1 (2nd position)
                           (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
