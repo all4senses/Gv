@@ -5567,12 +5567,11 @@ function gv_blocks_get_requestQuote_block_v8() {
     return NULL;
   }
   
-  global $user;
-  if (!$user->uid)  {
-    drupal_add_library('system', 'ui.core');
-    drupal_add_library('system', 'ui.widget');
-    drupal_add_library('system', 'ui.position');  
-  }
+  
+//  drupal_add_library('system', 'ui.core');
+//  drupal_add_library('system', 'ui.widget');
+//  drupal_add_library('system', 'ui.position');  
+  
   
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
