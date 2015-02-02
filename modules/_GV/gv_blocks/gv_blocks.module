@@ -11568,10 +11568,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 $count_cur = 0;
                 do {
                   shuffle($random_index);
-                  $count_cur++;
+                  if($count_cur++ >1000) {
+                    break;
+                  };
                 }while (
-                        $count_cur<1000
-                        ||
                           /*
                           // very old - RingCentral_key should be always 1 (2nd position)
                           (isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
