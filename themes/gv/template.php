@@ -799,10 +799,12 @@ function gv_process_page(&$variables) {
   dpm($_GET);
   dpm($_SERVER);
   
-//  switch()  {
-//    case
+//  switch($_GET['q'])  {
+//    case 'home':
+//      //drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+//      break;
 //  }     
-//  drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
+  
   
         
   //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
