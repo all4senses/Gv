@@ -527,13 +527,10 @@
       }
       
       
-      // Exit intent v2 if turned on for this article.
+      // exit_intent is defined in node_view().
       //global $user;
-      if (!empty($extra_data['show_exit_intent_v2'])) {
-        echo gv_blocks_get_exitIntent_v2();
-      }
-      elseif (!empty($extra_data['show_exit_intent_v3'])) {
-        echo gv_blocks_get_exitIntent_v3();
+      if (!empty($node->exit_intent)) {
+        echo $node->exit_intent;
       }
       ?>
       

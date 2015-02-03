@@ -7615,6 +7615,14 @@ function gv_pages_node_view($node, $view_mode) {
         return;
       }
       
+      $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
+      if(!empty($extra_data['show_exit_intent_v2'])) {
+        $node->exit_intent = gv_blocks_get_exitIntent_v2();
+      }
+      elseif (!empty($extra_data['show_exit_intent_v3'])) {
+        $node->exit_intent = gv_blocks_get_exitIntent_v3();
+      }
+      
       //drupal_add_css(path_to_theme() . '/css/exit-intent-v2.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE)); 
       
       // multistep form and exit intent specific using functionality.
