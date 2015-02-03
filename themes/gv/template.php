@@ -796,8 +796,8 @@ function gv_process_page(&$variables) {
   }
   drupal_add_html_head($viewport, 'viewport');
   
-  dpm($_GET);
-  dpm($_SERVER);
+//  dpm($_GET);
+//  dpm($_SERVER);
   
 //  switch($_GET['q'])  {
 //    case 'home':
