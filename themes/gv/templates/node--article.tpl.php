@@ -531,7 +531,7 @@
       global $user;
       if ($user->uid == 1 && !empty($node->exit_intent)) {
         echo $node->exit_intent;
-        dpm($node->exit_intent);
+        dpm($node);
       }
       ?>
       
