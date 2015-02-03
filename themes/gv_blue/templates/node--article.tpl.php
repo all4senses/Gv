@@ -527,9 +527,9 @@
       }
       
       
-      // Exit intent v2 if turned on for this article.
+      // Exit intent blocks if turned on for this article.
       //global $user;
-      
+      // Warning! To work correctly, in node_view additionally added their css files, because they are mot pulled in where kust called here, in template file.
       if (!empty($extra_data['show_exit_intent_v2'])) {
         echo gv_blocks_get_exitIntent_v2();
       }
