@@ -4,7 +4,7 @@
   $return = FALSE;
   
   //dpm(time());
-  
+  dpm($node);
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309);
   
   //dpm($extra_data);
@@ -529,7 +529,7 @@
       
       // exit_intent is defined in node_view().
       global $user;
-      dpm($node);
+      //dpm($node);
       if ($user->uid == 1 && !empty($node->exit_intent)) {
         echo $node->exit_intent;
         
