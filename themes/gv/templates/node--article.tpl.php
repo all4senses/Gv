@@ -4,7 +4,7 @@
   $return = FALSE;
   
   //dpm(time());
-  dpm($node);
+  dpm($node->exit_intent);
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309);
   
   //dpm($extra_data);
