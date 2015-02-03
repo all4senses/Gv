@@ -2575,18 +2575,25 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $form['field_pin_article_to']['#access'] = FALSE;
         
         
-        $form['show_exit_intent'] = array(
+        $form['show_exit_intent_v2'] = array(
           '#type' => 'checkbox',
-          '#title' => 'Show Exit Intent popup window',
-          '#default_value' => @$extra_data['show_exit_intent'],
+          '#title' => 'Enable Business VoIP Exit Intent Window',
+          '#default_value' => @$extra_data['show_exit_intent_v2'],
           '#weight' => 45,
+        );
+        
+        $form['show_exit_intent_v3'] = array(
+          '#type' => 'checkbox',
+          '#title' => 'Enable Call Center Exit Intent Window',
+          '#default_value' => @$extra_data['show_exit_intent_v3'],
+          '#weight' => 46,
         );
         
         $form['hide_sidebars'] = array(
           '#type' => 'checkbox',
           '#title' => 'Hide sidebars for this article',
           '#default_value' => @$extra_data['hide_sidebars'],
-          '#weight' => 46,
+          '#weight' => 47,
         );
         
         //dpm($form);
@@ -5961,7 +5968,8 @@ function gv_pages_validateForm_article(&$form, &$form_state) {
       // -1 for full teasers regenerating, will not use already generated teasers for not changed related articles in function gv_misc_addRelatedArticlesToNode
       'related_articles_timestamp' => (@$form_state['values']['related_articles']['recalculate'] ? (@$form_state['values']['related_articles']['recalculate_full'] ? -1 : 0) : $old_extra_data['related_articles_timestamp']), //time(),             
       'update_timestamp' => time(),
-      'show_exit_intent' => @$form_state['values']['show_exit_intent'],
+      'show_exit_intent_v2' => @$form_state['values']['show_exit_intent_v2'],
+      'show_exit_intent_v3' => @$form_state['values']['show_exit_intent_v3'],
       'hide_sidebars' => @$form_state['values']['hide_sidebars'],
   );
   
