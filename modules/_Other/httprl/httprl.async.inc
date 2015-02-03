@@ -39,22 +39,44 @@ function httprl_async_page() {
     if ($tries > 5) {
       httprl_fast403();
     }
-    usleep(500000); // Sleep for 500 miliseconds;
+    // Sleep for 500 miliseconds.
+    usleep(500000);
   }
 
   // If request was a non blocking one, cut the connection right here.
-  if (empty($_POST['mode'])) {
+  if (empty($_POST['mode']) && !empty($_POST['context']['session'])) {
     httprl_background_processing('httprl async function callback running', FALSE);
   }
 
   // Release the lock.
   httprl_lock_release($_POST['temp_key']);
 
-  $args = unserialize($_POST['args']);
+  // Set time limit.
+  if (isset($_POST['php_timeout']) && is_numeric($_POST['php_timeout'])) {
+    // Copy of drupal_set_time_limit().
+    if (function_exists('set_time_limit')) {
+      @set_time_limit($_POST['php_timeout']);
+    }
+  }
+
+  // Set context.
+  if (!empty($_POST['context']) && is_array($_POST['context'])) {
+    if (!empty($_POST['context']['uid'])) {
+      httprl_set_user($_POST['context']['uid']);
+    }
+    if (!empty($_POST['context']['q'])) {
+      httprl_set_q($_POST['context']['q']);
+    }
+  }
+
+  // Extract Data.
+  // Follow rfc4648 for base64url
+  // @see http://tools.ietf.org/html/rfc4648#page-7
+  $args = unserialize(base64_decode(strtr($_POST['args'], array('-' => '+', '_' => '/'))));
 
   // Run the function.
   if (!empty($_POST['function'])) {
-     $data = httprl_run_function($_POST['function'], $args);
+    $data = httprl_run_function($_POST['function'], $args);
   }
   // Run an array of functions.
   else {
@@ -65,10 +87,11 @@ function httprl_async_page() {
   // Return data to caller.
   if (!empty($_POST['mode']) && isset($data)) {
     header('Content-Type: application/x-www-form-urlencoded');
-    echo http_build_query(array(0 => serialize($data)), '', '&');
+    // Follow rfc4648 for base64url
+    // @see http://tools.ietf.org/html/rfc4648#page-7
+    echo http_build_query(array(0 => strtr(base64_encode(serialize($data)), array('+' => '-', '/' => '_'))), '', '&');
   }
 
   // Exit Script.
   httprl_call_exit();
 }
-
