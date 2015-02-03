@@ -529,9 +529,10 @@
       
       // exit_intent is defined in node_view().
       global $user;
+      dpm($node);
       if ($user->uid == 1 && !empty($node->exit_intent)) {
         echo $node->exit_intent;
-        dpm($node);
+        
       }
       ?>
       
