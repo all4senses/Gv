@@ -11772,7 +11772,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                             isset($fixed_positions['Jive_key']) 
                             && 
                            // Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
-                           !($random_index[2] == $fixed_positions['Jive_key'] || $random_index[3] == $fixed_positions['Jive_key'])
+                           !( ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] <= 5) || ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive_is_4'] <= 5) )
                           )
                           ||
                           (
