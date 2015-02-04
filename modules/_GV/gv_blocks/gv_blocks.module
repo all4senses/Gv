@@ -11685,8 +11685,22 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
 // ---------------------------------------  Rotation v3                
                 
                 //$iteration_count = $vonage_is_2 = 0;
-//                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 'vonage_is_2' => 0));
-//                dpm($gv_rotate_data___block_top_bu_ppc);
+                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', 
+                        array('iteration_count' => 0, 
+                            
+                              'RingCentral_is_3' => 0,
+                              'RingCentral_is_4' => 0,
+                              'Jive_is_3' => 0,
+                              'Jive_is_4' => 0,
+                            
+                              'Nextiva_is_6' => 0,
+                              'Nextiva_is_7' => 0,
+                              'Corvisa_is_6' => 0,
+                              'Corvisa_is_7' => 0,
+                            )
+                        );
+                
+                dpm($gv_rotate_data___block_top_bu_ppc);
 //                $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
 //                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
 //                if ($vonage_is_2 > 1) {
@@ -11768,7 +11782,67 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 
                 
                 // Count times when Vonage is in 3rd position
+                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', 
+                        array('iteration_count' => 0, 
+                            
+                              'RingCentral_is_3' => 0,
+                              'RingCentral_is_4' => 0,
+                              'Jive_is_3' => 0,
+                              'Jive_is_4' => 0,
+                            
+                              'Nextiva_is_6' => 0,
+                              'Nextiva_is_7' => 0,
+                              'Corvisa_is_6' => 0,
+                              'Corvisa_is_7' => 0,
+                            )
+                        );
                 
+                $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+                if ($gv_rotate_data___block_top_bu_ppc['iteration_count'] > 9) {
+                  $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', 
+                        array('iteration_count' => 0, 
+                            
+                              'RingCentral_is_3' => 0,
+                              'RingCentral_is_4' => 0,
+                              'Jive_is_3' => 0,
+                              'Jive_is_4' => 0,
+                            
+                              'Nextiva_is_6' => 0,
+                              'Nextiva_is_7' => 0,
+                              'Corvisa_is_6' => 0,
+                              'Corvisa_is_7' => 0,
+                            )
+                        );
+                }
+                else {
+                      if ($random_index[2] == $fixed_positions['RingCentral_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] +=1;
+                      }
+                      elseif ($random_index[2] == $fixed_positions['Jive_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] +=1;
+                      }
+                      if ($random_index[3] == $fixed_positions['RingCentral_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] +=1;
+                      }
+                      elseif ($random_index[3] == $fixed_positions['Jive_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] +=1;
+                      }  
+
+                      if ($random_index[5] == $fixed_positions['Nextiva_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['Nextiva_is_6'] +=1;
+                      }
+                      elseif ($random_index[5] == $fixed_positions['Corvisa_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['Corvisa_is_6'] +=1;
+                      }
+                      if ($random_index[6] == $fixed_positions['Nextiva_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['Nextiva_is_7'] +=1;
+                      }
+                      elseif ($random_index[6] == $fixed_positions['Corvisa_key']) {
+                        $gv_rotate_data___block_top_bu_ppc['Corvisa_is_7'] +=1;
+                      }  
+                }
+                variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
+                  
 //                $iteration_count+=1;
 //                if ($iteration_count >9) {
 //                  $iteration_count = 0;
