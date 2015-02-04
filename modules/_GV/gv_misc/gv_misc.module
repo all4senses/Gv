@@ -2714,7 +2714,7 @@ function gv_misc_js_alter(&$javascript) {
       include_once DRUPAL_ROOT . '/sites/all/libraries/minify/min/lib/JSMin.php';
       foreach($add_to_minified as $filename => $attr){
 
-        if(!$from_scratch || (strpos($filename, '.js') && !strpos($attr['data'], 'min.js') && !strpos($attr['data'], 'http') && !strpos($attr['data'], 'jsmin-gv'))) {
+        if(!$from_scratch || (strpos($filename, '.js') && !strpos($attr['data'], 'min.js') && !strpos($attr['data'], 'ttp') && !strpos($attr['data'], 'jsmin-gv'))) {
 
           $source_fpath_short = $attr['data'];
           $source_fpath = DRUPAL_ROOT . '/' . $source_fpath_short;
