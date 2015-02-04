@@ -11685,9 +11685,22 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
 // ---------------------------------------  Rotation v3                
                 
                 //$iteration_count = $vonage_is_2 = 0;
-                if(!$gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', NULL) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 10) {
+                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 
+                            
+                              'RingCentral_is_3' => 0,
+                              'RingCentral_is_4' => 0,
+                              'Jive_is_3' => 0,
+                              'Jive_is_4' => 0,
+                            
+                              'Nextiva_is_6' => 0,
+                              'Nextiva_is_7' => 0,
+                              'Corvisa_is_6' => 0,
+                              'Corvisa_is_7' => 0,
+                            ));
+                
+                if($gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 10) {
                         
-                  $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                    $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
                             
                               'RingCentral_is_3' => 0,
                               'RingCentral_is_4' => 0,
