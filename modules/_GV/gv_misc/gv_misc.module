@@ -1639,7 +1639,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
   
   
   
-  gv_misc_saleseforce_gv_test();
+  gv_misc_saleseforce_gv_test(array());
   
   $out .= '...ok';
   
@@ -1690,6 +1690,8 @@ function gv_misc_saleseforce_gv_test($submission) {
       
     'debug' => 1,
     'debugEmail' => 'all4senses@gmail.com',
+      
+    'encoding' => 'UTF-8',
     
   );
     
@@ -1704,7 +1706,9 @@ function gv_misc_saleseforce_gv_test($submission) {
   
   //watchdog('Corvisa -->', print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
   
-  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  //$url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  
+  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead';
   
   
     $curl = curl_init();
