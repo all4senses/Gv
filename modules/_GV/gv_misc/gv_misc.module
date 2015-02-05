@@ -1654,7 +1654,7 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 function gv_misc_saleseforce_gv_test($submission) {
   
   $submission = array(
-    'First Name' => 'b2',
+    'First Name' => 'b3',
   );
   
   $map_main = array(
@@ -1703,6 +1703,12 @@ function gv_misc_saleseforce_gv_test($submission) {
     }
   }
   
+  $data_to_str = NULL;
+  foreach ($data_to as $key => $value) {
+    $data_to_str .= ($data_to_str ? '&' : '') . $key . '=' . $value;
+    
+  }
+  
   
   //watchdog('Corvisa -->', print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
   
@@ -1746,11 +1752,12 @@ function gv_misc_saleseforce_gv_test($submission) {
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     
     curl_setopt($curl, CURLOPT_POST, TRUE);
-    curl_setopt($curl, CURLOPT_HEADER, TRUE);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+    curl_setopt($curl, CURLOPT_HEADER, FALSE); //curl_setopt($curl, CURLOPT_HEADER, TRUE);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to_str); //curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
     
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+            
+    //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
 
     $data_from = curl_exec($curl);
     if ($data_from === false) {
