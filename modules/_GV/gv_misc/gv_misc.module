@@ -1648,132 +1648,6 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 }
 
 
-/**
- * Send a request to Corvisa.
- */
-function gv_misc_saleseforce_gv_test($submission) {
-  
-  $submission = array(
-    'First Name' => 'b6',
-  );
-  
-  $map_main = array(
-    'First Name' => 'first_name',
-//    'Last Name' => 'last_name',
-//    'Phones needed' => '00NG0000009aRRw', 
-//    //'Quote type' => '', 
-//    'Quote for' => 'description', 
-//    ////'Buying Time Frame' => 'Time_Frame__c',
-//    'Company' => 'company',
-//    'Email' => 'email',
-//    'Phone #' => 'phone',
-  );
- 
-      
-  // Set initial fields.
-  $data_to = array(
-    
-     
-//    '00NG000000DG1eA' => 'Cloud',  
-//    '00NA0000001MMX9' => 'Contact Center',    
-//    '00NG0000008wUpk' => 'Inbound', 
-//    '00NG0000008Prfg' => 'Webform', 
-//      
-//    '00NG0000008Q0NW' => 'unavailable',   // Lead Cost
-//      
-//    'lead_source' => 'CPL-GetVoIP',
-   
-    'oid' => '00Dj0000001ro7B',
-
-      
-    'retURL' =>  'http://', 
-      
-    'debug' => 1,
-    'debugEmail' => 'all4senses@gmail.com',
-      
-    //'encoding' => 'UTF-8',
-    
-  );
-    
-  
-  // Map data to remote vars names.
-  foreach ($map_main as $getvoip_key => $remote_key) {
-    if (isset($submission[$getvoip_key])) {
-      $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
-    }
-  }
-  
-  $data_to_str = NULL;
-  foreach ($data_to as $key => $value) {
-    $data_to_str .= ($data_to_str ? '&' : '') . $key . '=' . $value;
-    
-  }
-  
-  
-  //watchdog('Corvisa -->', print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
-  
-  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
-  
-  //$url = 'https://www.salesforce.com/servlet/servlet.WebToLead';
-  
-  
-    $curl = curl_init();
-
-    // Setup headers - I used the same headers from Firefox version 2.0.0.6
-    // below was split up because php.net said the line was too long. :/
-    $header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";
-    $header[0] .= "text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
-    $header[] = "Cache-Control: max-age=0";
-    $header[] = "Connection: keep-alive";
-    $header[] = "Keep-Alive: 300";
-    $header[] = "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7";
-    $header[] = "Accept-Language: en-us,en;q=0.5";
-    $header[] = "Pragma: ";
-    // browsers keep this blank.
-
-    $referers = array("google.com", "yahoo.com", "msn.com", "ask.com", "live.com");
-    $choice = array_rand($referers);
-  	//if ($referer == "") 
-    $referer = "http://www." . $referers[$choice] . "/";
-
-    //$browsers = array("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092510 Ubuntu/8.04 (hardy) Firefox/3.0.3", "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1) Gecko/20060918 Firefox/2.0", "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)");
-    //$choice2 = array_rand($browsers);
-    //$lines = file('/home/xxx/public_html/sites/all/modules/xxx/ua.txt');
-    //$browser = trim($lines[$agentid]);
-
-    curl_setopt($curl, CURLOPT_URL, $url);
-    //curl_setopt($curl, CURLOPT_USERAGENT, $browser);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($curl, CURLOPT_REFERER, $referer);
-    //curl_setopt($curl, CURLOPT_AUTOREFERER, true);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_TIMEOUT, 300);
-    curl_setopt($curl, CURLOPT_MAXREDIRS, 7);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-    
-    curl_setopt($curl, CURLOPT_POST, TRUE);
-    curl_setopt($curl, CURLOPT_HEADER, TRUE); //curl_setopt($curl, CURLOPT_HEADER, FALSE);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to_str); //curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
-    
-            
-    //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-
-    $data_from = curl_exec($curl);
-    if ($data_from === false) {
-      $data_from = 'Error!!! 
-  ' . curl_error($curl);
-    }
-    curl_close($curl);
- 
-    
-    dpm($data_from);
-
-  // Report to a4s.
-  
-  //return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'corvisa_send_report', $data_to);
-}
-
 
 /*
  *   Parses dates in formats: 
@@ -7850,6 +7724,92 @@ function gv_misc_SendRequestToCorvisa($submission, $op = 'sendIfAllowed') {
   return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'corvisa_send_report', $data_to);
 }
 
+
+
+/**
+ * Send a request to Corvisa.
+ */
+function gv_misc_saleseforce_gv_test($submission) {
+  
+  $submission = array(
+    'First Name' => 'b7',
+  );
+  
+  $map_main = array(
+    'First Name' => 'first_name',
+//    'Last Name' => 'last_name',
+//    'Phones needed' => '00NG0000009aRRw', 
+//    //'Quote type' => '', 
+//    'Quote for' => 'description', 
+//    ////'Buying Time Frame' => 'Time_Frame__c',
+//    'Company' => 'company',
+//    'Email' => 'email',
+//    'Phone #' => 'phone',
+  );
+ 
+      
+  // Set initial fields.
+  $data_to = array(
+    
+     
+//    '00NG000000DG1eA' => 'Cloud',  
+//    '00NA0000001MMX9' => 'Contact Center',    
+//    '00NG0000008wUpk' => 'Inbound', 
+//    '00NG0000008Prfg' => 'Webform', 
+//      
+//    '00NG0000008Q0NW' => 'unavailable',   // Lead Cost
+//      
+//    'lead_source' => 'CPL-GetVoIP',
+   
+    'oid' => '00Dj0000001ro7B',
+
+      
+    'retURL' =>  'http://', 
+      
+    'debug' => 1,
+    'debugEmail' => 'all4senses@gmail.com',
+    
+  );
+    
+  
+  // Map data to remote vars names.
+  foreach ($map_main as $getvoip_key => $remote_key) {
+    if (isset($submission[$getvoip_key])) {
+      $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
+    }
+  }
+  
+  $data_to_str = NULL;
+  foreach ($data_to as $key => $value) {
+    $data_to_str .= ($data_to_str ? '&' : '') . $key . '=' . $value;
+    
+  }
+  
+  
+  //watchdog('Corvisa -->', print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
+  
+  $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
+  curl_setopt($curl, CURLOPT_POST, TRUE);
+  curl_setopt($curl, CURLOPT_HEADER, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to_str);
+  $data_from = curl_exec($curl);
+  if ($data_from === false) {
+    $data_from = 'Error!!! 
+' . curl_error($curl);
+  }
+  curl_close($curl);
+    
+  dpm($data_from);
+
+  // Report to a4s.
+  
+  //return gv_misc_prepareReportAboutSubmissionA_andSendToAdmin($submission, $data_from, 'corvisa_send_report', $data_to);
+}
 
 
 /**
