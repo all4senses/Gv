@@ -112,8 +112,11 @@
                 </div> <!-- End of <div typeof="Organization"> -->
                 
                 <div class="links<?php echo $no_reviews_class;?>">
-                  <?php echo '<a href="#" id="request-demo" rel="nofollow">Request a Demo</a>', // l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'))), 
-                          l('Request a Quote', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-quote', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))), 
+                  <?php echo 
+                          (!empty($node->p_data['disable_buttons']['demo']) ? '' : '<a href="#" id="request-demo" rel="nofollow">Request a Demo</a>'), 
+                          // l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'))), 
+                          (!empty($node->p_data['disable_buttons']['quote']) ? '' : l('Request a Quote', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'request-quote', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))) , 
+                         
                           l('Write a Review', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
                   
                   
