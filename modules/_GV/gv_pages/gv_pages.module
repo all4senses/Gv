@@ -3564,9 +3564,29 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           );
           
           
+          
+          
+          $form['disable_buttons'] = array(
+          '#type' => 'fieldset',
+          '#title' => 'Disable request buttons',
+          '#collapsible' => TRUE,
+          '#collapsed' => TRUE,
+          '#tree' => TRUE,
+          //'#weight' => 12,
+        );
+              $form['disable_buttons']['quote'] = array(
+                '#title' => 'Disable Request Quote Button',
+                '#type' => 'checkbox',
+                '#default_value' => isset($p_data['disable_buttons']['quote']) ? $p_data['disable_buttons']['quote'] : NULL,
+              );
+              $form['disable_buttons']['demo'] = array(
+                '#title' => 'Disable Request Demo Button',
+                '#type' => 'checkbox',
+                '#default_value' => isset($p_data['disable_buttons']['demo']) ? $p_data['disable_buttons']['demo'] : NULL,
+              );
+          
+          
           $form['#attributes']['class'][] = 'gv-edit-review-page';
-
-
             
       
       $form['#validate'][] = 'gv_pages_validateForm_provider';
@@ -6345,7 +6365,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   //dpm($form_state['values']);
   
   
-  
+  $p_data['disable_buttons'] = $form_state['values']['disable_buttons'];
+
   
   
   
