@@ -2,7 +2,7 @@
 
   $provider_name = isset($node->field_p_name['und'][0]['value']) ? $node->field_p_name['und'][0]['value'] : $node->field_p_name[0]['value']; 
   
-  dpm($node->p_data);
+  //dpm($node->p_data);
 ?>
 
 <?php if (!$page): ?>
