@@ -20,7 +20,19 @@
         });
         
         
-        
+        // Quick hack for prevent scrolling down of colorbox popup window on press the tab key in the Company field (first step)
+        jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').keydown(function (event) { 
+            
+            //console.log(jQuery(this).val());
+            //console.log(event.keyCode);
+   
+            if(event.keyCode == 9){ // Tab
+              jQuery(this).blur();
+              //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
+              event.preventDefault();     // Prevent character input
+            }
+
+        }); 
         // 3 mins delay before turn on the exitIntent popup.
         /*
         setTimeout(
