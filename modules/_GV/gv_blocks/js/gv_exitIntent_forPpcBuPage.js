@@ -46,7 +46,7 @@
             }
 
         }); 
-        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button span').keydown(function (event) { 
+        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
             console.log(event.keyCode);
@@ -65,7 +65,11 @@
             //console.log(jQuery(this).val());
             console.log(event.keyCode);
             console.log(event);
-   
+            
+            if(event.keyCode == 9 && event.target.id == "phones_amt-button") {
+              console.log('xxx');
+              event.preventDefault();     // Prevent character input
+            }
 //            if(event.keyCode == 9){ // Tab
 //              
 //              //jQuery(this).blur();
