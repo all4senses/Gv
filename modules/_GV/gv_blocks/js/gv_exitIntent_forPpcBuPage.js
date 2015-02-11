@@ -33,6 +33,22 @@
             }
 
         }); 
+        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').keydown(function (event) { 
+            
+            //console.log(jQuery(this).val());
+            //console.log(event.keyCode);
+   
+            if(event.keyCode == 9){ // Tab
+              jQuery(this).blur();
+              jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
+              event.preventDefault();     // Prevent character input
+            }
+
+        }); 
+        
+        
+        
+        
         // 3 mins delay before turn on the exitIntent popup.
         /*
         setTimeout(
