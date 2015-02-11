@@ -64,6 +64,7 @@
             
             //console.log(jQuery(this).val());
             console.log(event.keyCode);
+            console.log(jQuery(this));
    
 //            if(event.keyCode == 9){ // Tab
 //              
