@@ -28,7 +28,7 @@
    
             if(event.keyCode == 9){ // Tab
               jQuery(this).blur();
-              //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
+              jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
               event.preventDefault();     // Prevent character input
             }
 
