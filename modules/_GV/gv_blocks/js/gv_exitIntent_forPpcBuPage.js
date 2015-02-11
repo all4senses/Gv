@@ -38,8 +38,8 @@
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
-            console.log(event.keyCode);
-            console.log(event);
+            //console.log(event.keyCode);
+            //console.log(event);
             
             if(event.keyCode == 9) {
                 if(event.target.id == "company") {
