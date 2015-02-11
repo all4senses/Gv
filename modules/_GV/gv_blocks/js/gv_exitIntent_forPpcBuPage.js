@@ -24,7 +24,7 @@
         jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
-            //console.log(event.keyCode);
+            console.log(event.keyCode);
    
             if(event.keyCode == 9){ // Tab
               jQuery(this).blur();
@@ -36,10 +36,10 @@
         jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
-            
+            console.log(event.keyCode);
    
             if(event.keyCode == 9){ // Tab
-              console.log(event.keyCode);
+              
               //jQuery(this).blur();
               //jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
               event.preventDefault();     // Prevent character input
