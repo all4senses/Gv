@@ -21,44 +21,19 @@
         
         
         // Quick hack for prevent scrolling down of colorbox popup window on press the tab key in the Company field (first step)
-        jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').keydown(function (event) { 
-            
-            //console.log(jQuery(this).val());
-            console.log(event.keyCode);
-   
-            if(event.keyCode == 9){ // Tab
-              jQuery(this).blur();
-              jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
-              event.preventDefault();     // Prevent character input
-            }
-
-        }); 
-        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').keydown(function (event) { 
-            
-            //console.log(jQuery(this).val());
-            console.log(event.keyCode);
-   
-            if(event.keyCode == 9){ // Tab
-              
-              //jQuery(this).blur();
-              //jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
-              event.preventDefault();     // Prevent character input
-            }
-
-        }); 
-        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').keydown(function (event) { 
-            
-            //console.log(jQuery(this).val());
-            console.log(event.keyCode);
-   
-            if(event.keyCode == 9){ // Tab
-              
-              //jQuery(this).blur();
-              //jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
-              event.preventDefault();     // Prevent character input
-            }
-
-        }); 
+//        jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').keydown(function (event) { 
+//            
+//            //console.log(jQuery(this).val());
+//            console.log(event.keyCode);
+//   
+//            if(event.keyCode == 9){ // Tab
+//              jQuery(this).blur();
+//              jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
+//              event.preventDefault();     // Prevent character input
+//            }
+//
+//        }); 
+        
         
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
@@ -66,9 +41,19 @@
             console.log(event.keyCode);
             console.log(event);
             
-            if(event.keyCode == 9 && event.target.id == "phones_amt-button") {
-              console.log('xxx');
-              event.preventDefault();     // Prevent character input
+            if(event.keyCode == 9) {
+                if(event.target.id == "company") {
+                   jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').blur();
+                   jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
+                   //event.preventDefault();     // Prevent character input
+                }
+                else if(event.target.id == "phones_amt-button") {
+                   console.log('xxx');
+                   jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').blur();
+                   jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
+                   //event.preventDefault();     // Prevent character input
+                }
+                event.preventDefault();     // Prevent character input
             }
 //            if(event.keyCode == 9){ // Tab
 //              
