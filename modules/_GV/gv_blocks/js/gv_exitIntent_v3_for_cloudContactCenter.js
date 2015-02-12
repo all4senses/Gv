@@ -5,6 +5,18 @@
     attach: function (context, settings) {
        
        
+       jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
+            
+            //console.log(jQuery(this).val());
+            //console.log(event.keyCode);
+            //console.log(event);
+
+            // Stop changing focus on the last element in the form section
+            if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
+              event.preventDefault();     // Prevent character input
+            }
+            
+       });
        
        // Exit intent functionality.
        //console.log('xxx');
