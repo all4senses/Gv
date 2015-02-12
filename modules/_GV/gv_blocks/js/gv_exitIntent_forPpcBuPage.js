@@ -41,6 +41,12 @@
             //console.log(event.keyCode);
             //console.log(event);
             
+            // Stop changing focus on the last element in the form section
+            if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
+              event.preventDefault();     // Prevent character input
+            }
+            
+            /*
             if(event.keyCode == 9) {
                 xxx = jQuery(this).find('#' + event.target.id);
                 console.log('+++');
@@ -60,6 +66,7 @@
                 }
                 event.preventDefault();     // Prevent character input
             }
+            */
 //            if(event.keyCode == 9){ // Tab
 //              
 //              //jQuery(this).blur();
