@@ -23,7 +23,7 @@
       <div class="full logo">
 
           <div id="gv-logo">
-            <div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /></div>
+            <div class="logo"><img src="http://getvoip.com/sites/all/themes/gv_sky/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /></div>
           </div>
         
           
@@ -53,7 +53,7 @@
                       //echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
                     
                     echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
-                            , '<img src="/sites/all/themes/gv_blue/css/images/click-here-button.png" />'
+                            , '<img src="/sites/all/themes/gv_sky/css/images/click-here-button.png" />'
                         , '</a>'
                         , '<div class="quote-final">' 
                           , '<p><strong>Thank you</strong> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote.</p>'
@@ -78,7 +78,7 @@
                 
                         
                 <div class="right-side">
-                    <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp8-image.png" />
+                    <img src="http://getvoip.com/sites/all/themes/gv_sky/css/images/lp8-image.png" />
                     <div>Our team of 59 unbiased VoIP analysts have reviewed <span>108</span> business phone systems.</div>
                 </div>
                 
@@ -109,7 +109,7 @@
             
             <div class="right">
               <div>As Featured In</div>
-              <img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/lp8uk-image2.jpg" />
+              <img src="http://getvoip.com/sites/all/themes/gv_sky/css/images/lp8uk-image2.jpg" />
             </div>
             
         </div>
@@ -141,7 +141,7 @@
         <div id="footer-inside">
 
           <div class="left">GetVoIP is an independent VoIP service comparison guide, offering unbiased personalized quotes and exclusive reports.</div>
-          <div class="right"><img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /><div>© 2015 | All Rights Reserved</div></div>
+          <div class="right"><img src="http://getvoip.com/sites/all/themes/gv_sky/css/images/getvoip-logo8.png" alt="GetVoIP" title="GetVoIP" /><div>© 2015 | All Rights Reserved</div></div>
 
         </div>
       </footer> <!-- /#footer -->
