@@ -45,6 +45,7 @@
                 xxx = jQuery(this).find('#' + event.target.id);
                 console.log('+++');
                 console.log(xxx);
+                console.log('target id = ' + event.target.id);
                 
                 if(event.target.id == "company") {
                    jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').blur();
