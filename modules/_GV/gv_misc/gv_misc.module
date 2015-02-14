@@ -15142,7 +15142,11 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
   
     // YouTube.com
   //if (preg_match('/.*\?v=(.*)\s?.*\]/is', $videoToken_html_url_fragment, $matches_2)) {
-  if (preg_match('/.*\?v=(.*)\s?.*/is', $videoToken_html_url_fragment, $matches_2)) {
+  if (
+         preg_match('/.*\?v=(.*)\s?.*/is', $videoToken_html_url_fragment, $matches_2)
+         ||
+         preg_match('/.*youtube\.com\/embed\/(.*)/is', $videoToken_html_url_fragment, $matches_2) 
+      ) {
     //dpm($matches_2);
     $video_id = $matches_2[1];
 
