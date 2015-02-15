@@ -39,7 +39,7 @@ if($view_mode == 'home_teaser_rotated') {
            
       <?php if ($page): ?>
         <!--<div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"> -->
-        <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review">
+        <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review" itemprop="review" itemscope itemtype="http://schema.org/Review">
       <?php endif; ?>
       
   
