@@ -5,7 +5,13 @@
   
   //dpm(time());
   
+  
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309);
+  
+  global $user;
+  if ($user->uid == 1) {
+    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, 1421703309);
+  }
   
   //dpm($extra_data);
   
