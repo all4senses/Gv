@@ -5,10 +5,7 @@
   $itemscope = ' itemscope itemtype="http://schema.org/' . ($schema_org_type ? $schema_org_type : 'WebPage') . '"';
 ?>
 
-<!--[if lt IE 7]> <html <?php echo $itemscope; ?> class="ie6 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
-<!--[if IE 7]>    <html <?php echo $itemscope; ?> class="ie7 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
-<!--[if IE 8]>    <html <?php echo $itemscope; ?> class="ie8 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
-<!--[if gt IE 8]> <!--> <html <?php echo $itemscope; ?> class="" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <!--<![endif]-->
+<html <?php echo $itemscope; ?> class="" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
   
 <head>
   <title><?php global $altered_head_title; if ($altered_head_title) {print $altered_head_title;} else {print $head_title;} ?></title>
@@ -27,7 +24,10 @@
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  
+<script type="text/javascript" src="http://localhost:48626/takana.js"></script>
+     <script type="text/javascript">
+       takanaClient.run({host: 'localhost:48626'});
+     </script>  
 </head>
 
 <body <?php //echo $itemscope; ?> class="<?php print $classes; ?>" <?php print $attributes;?>>

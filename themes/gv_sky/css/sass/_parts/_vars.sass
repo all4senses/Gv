@@ -1,0 +1,209 @@
+// color
+
+$primary-color: #268ad3
+$primary-color-dark: darken($primary-color, 7)
+$contrast-color: #e39315
+$contrast-color-dark: darken($contrast-color, 7)
+$grey: #7a7a7a
+$grey-mid: #878787
+$grey-blue: #606466
+$grey-blue-light: #9da8ad
+$grey-light: #909090
+$grey-x-light: #d0d0d0
+$divider-color: $grey-x-light
+$white: #fff
+
+// helper vars
+
+$first: first-child
+$last: last-child
+
+// mixins
+
+=m($size: 760, $max: max, $dimension:width)
+  @media screen and (#{$max}-#{$dimension}: #{$size}px)
+    @content
+
+=center($top: 0, $bottom: 0)
+  @if $top == 0 and $bottom == 0
+    margin: 0 auto
+  @else
+    margin: #{$top} auto #{$bottom}
+
+=unvalign
+  top: 0
+  -webkit-transform: translateY(0)
+  -o-transform: translateY(0)
+  transform: translateY(0)
+
+=ratio($percentual-height)
+  // Wrapper
+  position: relative
+  display: block
+  vertical-align: top
+  &:before
+    padding-top: $percentual-height
+    content: ''
+    display: block
+  // Content
+  > *
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+
+=size($width, $height: $width)
+  width: #{$width}px
+  height: #{$height}px
+
+=clearfix-dk
+  &:before,
+  &:after
+    content: ""
+    display: table
+  &:after
+    clear: both
+
+=ellipsis($width: 100%)
+  display: inline-block
+  max-width: $width
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  word-wrap: normal
+
+=hypens($opt)
+  -webkit-hyphens: $opt
+  -moz-hyphens: $opt
+  -o-hyphens: $opt
+  hyphens: $opt
+
+=user-select($opt)
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+=linear-gradient($fromColor, $toColor)
+  background-color: $toColor
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor))
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor)
+  background-image: -moz-linear-gradient(top, $fromColor, $toColor)
+  background-image: -ms-linear-gradient(top, $fromColor, $toColor)
+  background-image: -o-linear-gradient(top, $fromColor, $toColor)
+  background-image: linear-gradient(top, $fromColor, $toColor)
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}')
+
+=appearance($appearance: none)
+  -webkit-appearance: $appearance
+  -moz-appearance: $appearance
+  -ms-appearance: $appearance
+  -o-appearance: $appearance
+  appearance: $appearance
+
+=transition($transition)
+  -webkit-transition: $transition
+  -moz-transition: $transition
+  transition: $transition
+
+=transform($transform: none)
+  -webkit-transform: $transform
+  -moz-transform: $transform
+  -ms-transform: $transform
+  -o-transform: $transform
+  transform: $transform
+
+=arrow_helper($arrowSize, $arrowColor, $margin, $side, $align)
+  @if $side == "top"
+    border-bottom-color: $arrowColor
+    top: -2 * $arrowSize
+  @if $side == "bottom"
+    border-top-color: $arrowColor
+    bottom: -2 * $arrowSize
+  @if $side == "left"
+    border-right-color: $arrowColor
+    left: -2 * $arrowSize
+  @if $side == "right"
+    border-left-color: $arrowColor
+    right: -2 * $arrowSize
+  @if $side == "right" or $side == "left"
+    @if $align == "center"
+      top: 50%
+      margin-top: -$arrowSize
+    @else if $align == "top"
+      top: $margin
+    @else if $align == "bottom"
+      bottom: $margin
+  @if $side == "bottom" or $side == "top"
+    @if $align == "center"
+      right: 50%
+      margin-right: -$arrowSize
+    @else if $align == "left"
+      left: $margin
+    @else if $align == "right"
+      right: $margin
+
+=arrow($side: "right", $align: "center", $size: 20px, $color: #f6f6f6, $borderColor: "none", $borderSize: 3px)
+  $selector: "&:after, &:before"
+  @if $borderColor == "none"
+    $selector: "&:after"
+  #{$selector}
+    border: solid transparent
+    content: " "
+    height: 0
+    width: 0
+    position: absolute
+    pointer-events: none
+    visibility: visible
+  &:after
+    border-width: $size
+    +arrow_helper($size, $color, $size, $side, $align)
+  @if $borderColor != "none"
+    &:before
+      border-width: $borderSize + $size
+      +arrow_helper($size + $borderSize, $borderColor, $size - $borderSize, $side, $align)
+
+//functions
+
+@function perc($target, $parent)
+  @return $target / $parent * 100%
+
+@function golden($target)
+  @return #{$target * 1.618}px
+
+@function golden-down($target)
+  @return #{$target / 1.618}px
+
+//Easings
+
+// EASE IN
+$ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53)
+$ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19)
+$ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22)
+$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06)
+$ease-in-sine: cubic-bezier(0.47, 0, 0.745, 0.715)
+$ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035)
+$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335)
+$ease-in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045)
+
+// EASE OUT
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94)
+$ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1)
+$ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1)
+$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1)
+$ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1)
+$ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1)
+$ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1)
+$ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275)
+
+// EASE IN OUT
+$ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955)
+$ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1)
+$ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1)
+$ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1)
+$ease-in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95)
+$ease-in-out-expo: cubic-bezier(1, 0, 0, 1)
+$ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86)
+$ease-in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55)
