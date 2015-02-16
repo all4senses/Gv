@@ -20,7 +20,7 @@
       <div id="logo-block">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
           <?php
-              //echo '<img src="http://getvoip.com/sites/all/themes/gv_sky/css/images/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
+              //echo '<img src="http://getvoip.com/sites/all/themes/gv_blue/css/images/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
               ////echo '<img src="/images/theme/get-voip-logo.png" alt="GetVoIP" title="GetVoIP" />';
               echo '<img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />';
           ?>
@@ -30,7 +30,7 @@
           <!--<div class="title">VoIP Decisions</div>
           <div class="subtitle">Made Easy!</div> -->
           
-          <!--<div class="stars"><img src="/sites/all/themes/gv_sky/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>-->
+          <!--<div class="stars"><img src="/sites/all/themes/gv_blue/css/images/sprite-0.png" alt="Provider Reviews From Consumers" title="VoIP Reviews"/></div>-->
           
         </div>
       </div>
@@ -149,7 +149,7 @@
           );
 
           if($is_front || in_array($_SERVER['REDIRECT_URL'], $pages_with_timestamp)) {
-            echo gv_skyisc_lastUpdatedStamp();
+            echo gv_blueisc_lastUpdatedStamp();
           }
           */
 

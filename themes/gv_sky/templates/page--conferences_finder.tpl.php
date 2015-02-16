@@ -7,7 +7,7 @@
           <?php print $messages; ?>
           
           
-          <!-- <img src="/sites/all/themes/gv_sky/css/images/tc_back.jpg" style="position: absolute; z-index: -10;"> -->
+          <!-- <img src="/sites/all/themes/gv_blue/css/images/tc_back.jpg" style="position: absolute; z-index: -10;"> -->
                     
           <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
           <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
@@ -22,8 +22,8 @@
           
             echo '<table class="conf-table"><tbody>',
                     '<tr><td class="header">',
-                      '<table><tbody><tr><td class="side"><img src="/sites/all/themes/gv_sky/css/images/c-logo-getvoip.png" alt="GetVoIP" title="GetVoIP" /></td><td></td><td class="side"></td></tr></tbody></table>',
-                      //'<img src="/sites/all/themes/gv_sky/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />',
+                      '<table><tbody><tr><td class="side"><img src="/sites/all/themes/gv_blue/css/images/c-logo-getvoip.png" alt="GetVoIP" title="GetVoIP" /></td><td></td><td class="side"></td></tr></tbody></table>',
+                      //'<img src="/sites/all/themes/gv_blue/css/images/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />',
                       '</td></tr>',
                     '<tr><td class="search">', 
                       '<div class="title">FIND YOUR <span>TECHNOLOGY</span> CONFERENCE</div><div class="subtitle">Use our comprehensive conference finder tool to quickly browse over 700 tech conferences & shows in the US</div>',
