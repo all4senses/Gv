@@ -763,53 +763,6 @@ function gv_css_alter(&$css) {
  */
 function gv_process_page(&$variables) {
   
-//  global $user;
-//    //Don't show chat for the root.
-//    if ($user->uid == 1) {
-//      return;
-//    }
-  
-  
-  
-  // Set different meta viewport for Mobile optimized pages lpv10, lpv10uk page
-//  $pages_to_exclude_custom_css = array('node/5203', 'node/5204', 'node/5210', 'node/5211');
-//  if (in_array($_GET['q'], $pages_to_exclude_custom_css)) {
-//    // <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-//    $viewport = array(
-//      '#type' => 'html_tag',
-//      '#tag' => 'meta',
-//      '#attributes' => array(
-//      'name' =>  'viewport',
-//      'content' =>  'width=device-width, initial-scale=1, maximum-scale=0')
-//    );
-//  }
-//  else 
-    {
-    // <meta name="viewport" content="width=device-width" />
-    $viewport = array(
-      '#type' => 'html_tag',
-      '#tag' => 'meta',
-      '#attributes' => array(
-      'name' =>  'viewport',
-      'content' =>  'width=device-width')
-    );
-  }
-  drupal_add_html_head($viewport, 'viewport');
-  
-//  dpm($_GET);
-//  dpm($_SERVER);
-  
-//  switch($_GET['q'])  {
-//    case 'home':
-//      //drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT/*, 'every_page' => TRUE)*/));
-//      break;
-//  }     
-  
-  
-        
-  //$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
-  //array(l(t('Home'), NULL), l(t('Blogs'), 'blog'), l(t("!name's blog", array('!name' => format_username($node))), 'blog/' . $node->uid))
-  
   if(isset($variables['node'])) {
     
     if (in_array($variables['node']->type, array('blog_post', 'news_post', 'article'))) {
@@ -889,7 +842,6 @@ function gv_process_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__clean';
   }
   
-  //dpm(arg());
   
   // Set breadcrumb
   // Uncomment it to set breadcrumbs
@@ -901,20 +853,11 @@ function gv_process_page(&$variables) {
   
   // set a user referer on every page.
   $module_path_misc = drupal_get_path('module', 'gv_misc');
-  ////drupal_add_js( $module_path_misc . '/js/gv_setReferer.js'); 
-  
-  //gv_misc_loadTrackingHandlerForDirectLinks();
   drupal_add_js($module_path_misc . '/js/gv_track_direct_link.js');
   
-  //drupal_add_js( $module_path_misc . '/js/gv_add_adroll.js'); 
-  //drupal_add_js( $module_path_misc . '/js/gv_add_fb.js'); 
-  
-  //dpm($_SERVER);
   $pages_with_livechatinc = array(/*'/', */ '/business', '/hosted-pbx', '/business-systems', '/sip-trunking');
   if (in_array(@$_SERVER['REQUEST_URI'], $pages_with_livechatinc)) {
-    //dpm('REQUEST_URI = ' . @$_SERVER['REQUEST_URI']);
     
-    //global $user;
     // Don't show chat for the root.
     //if ($user->uid != 1) 
       {
@@ -936,41 +879,6 @@ function gv_process_page(&$variables) {
     drupal_add_js( $module_path_pages . '/js/gv_scrollToAnchor_onClick.js'); 
   }
   
-  /* Add Google's fonts */
-  //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans', 'NA', 'text/css');
-  //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500italic', 'NA', 'text/css');
-  // Cufon's, via font-face
-  //drupal_add_css(path_to_theme() . '/css/remote-fonts.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
-  
-  
-  //gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:500', 'NA', 'text/css');
-  
-  // Remote Google fonts.
-  // gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500', 'NA', 'text/css');
-  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu:500', 'NA', 'text/css');
-  // 
-  // hr_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Open+Sans:normal,bold|Ubuntu:500|Roboto:500|Raleway:300,500,700', 'NA', 'text/css');
-  ////gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Raleway:300,500,600,700', 'NA', 'text/css');
-  
-  gv_misc_addMetatag('stylesheet', NULL, 'http://fonts.googleapis.com/css?family=Raleway:300,500,600,700|Open+Sans:400,700|Ubuntu:500', 'NA', 'text/css');
-  
-  
-  // Local fonts, taken from the remote side.  
-  // Commented out here and moved to style.css
-  ////drupal_add_css('sites/all/libraries/fonts/google/open-sans-n-ubuntu/fonts.css', array('group' => /*CSS_DEFAULT*/CSS_THEME, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-  drupal_add_css('sites/all/libraries/fonts/other/fonts_other.css', array('group' => /*CSS_DEFAULT*/CSS_THEME, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-  //
-  // Add the font-awesome icons font.
-  drupal_add_css('sites/all/libraries/fonts/font-awesome/css/font-awesome.min.css', array('group' => /*CSS_DEFAULT*/CSS_THEME, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-
-  // Adding this css will break a little bit a styling on the page!
-//  global $user;
-//  if ($user->uid == 1) {
-//    // Add a twitter-bootstrap styles.
-//    //gv_misc_addMetatag('stylesheet', NULL, '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css', 'NA', 'text/css');
-//    drupal_add_css('sites/all/libraries/twitter-bootstrap/css/bootstrap-combined.no-icons.min.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-//  }
   
   
   
