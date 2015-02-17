@@ -13,24 +13,24 @@
         </div>
       </div>
       
-      <?php 
-          echo render($page['header']); 
-      ?>
+      <?php echo render($page['header']); ?>
+      <?php  if ($page['highlighted']): ?>
+
+        <div class="hero-header">
+          <?php print render($page['highlighted']); ?>
+        </div>
+
+      <?php endif;  ?>
     </nav> 
 
   </header>
 
-  
-  <?php  if ($page['highlighted']): ?>
-    <section id="highlighted" class="clearfix">
-      <?php print render($page['highlighted']); ?>
-    </section>
-  <?php endif;  ?>
+  <main role="main">
   
   <?php  if ($page['content_wide']): ?>
-    <main id="content-wide" class="clearfix">
+    <section id="content-wide" class="clearfix">
       <?php print render($page['content_wide']); ?>
-    </main>
+    </section>
   <?php endif;  ?>
   
   <?php  if ($page['below_content_wide']): ?>
@@ -38,7 +38,7 @@
       <?php print render($page['below_content_wide']); ?>
     </section>
   <?php endif;  ?>
-  
+  </main>
   
   <div id="all-content" class="clearfix">
       
