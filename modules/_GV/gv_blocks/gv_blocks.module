@@ -1526,16 +1526,6 @@ function gv_blocks_getBlockFromViews($delta) {
 function gv_blocks_getLatestPostsRotated() {
   
 
-  drupal_add_library('system', 'ui.core');
-  drupal_add_library('system', 'ui.widget');
-  drupal_add_library('system', 'ui.tabs');
-
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_postsRotator.js');
-
-  $path_to_current_theme = drupal_get_path('theme', $GLOBALS['theme']) . '/css/';
-  drupal_add_css($path_to_current_theme . 'gv_bannerRotator.css');
-
   
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'));
