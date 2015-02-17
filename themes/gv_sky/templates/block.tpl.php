@@ -1,5 +1,5 @@
 
-<div id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
     <?php $h_tag = in_array($block->region, array('content', 'content_wide', 'above_footer')) ? 'h2' : 'h3'; ?>
@@ -8,8 +8,8 @@
   <?php endif;?>
   <?php print render($title_suffix); ?>
 
-  <div class="content"<?php print $content_attributes; ?>>
-    <?php print $content ?>
-  </div>
   
-</div> <!-- /.block -->
+    <?php print $content ?>
+  
+  
+
