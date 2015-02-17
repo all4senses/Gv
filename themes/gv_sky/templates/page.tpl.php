@@ -1,8 +1,3 @@
-<div id="bshadow">
-    
-
-
-  
   <header id="header" role="banner" class="clearfix">
 
     <nav id="navigation" role="navigation" class="clearfix">
@@ -21,9 +16,9 @@
       <?php 
           echo render($page['header']); 
       ?>
-    </nav> <!-- /#navigation -->
+    </nav> 
 
-  </header> <!-- /#header -->
+  </header>
 
   
   <?php  if ($page['highlighted']): ?>
@@ -33,9 +28,9 @@
   <?php endif;  ?>
   
   <?php  if ($page['content_wide']): ?>
-    <section id="content-wide" class="clearfix">
+    <main id="content-wide" class="clearfix">
       <?php print render($page['content_wide']); ?>
-    </section>
+    </main>
   <?php endif;  ?>
   
   <?php  if ($page['below_content_wide']): ?>
@@ -93,7 +88,7 @@
 
   </div> <!-- /#all-content -->
 
-</div> <!-- <div id="bshadow"> -->
+
 
 
   <?php
