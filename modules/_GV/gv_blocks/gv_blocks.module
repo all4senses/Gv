@@ -1495,21 +1495,7 @@ function gv_blocks_getBlockFromViews($delta) {
       $block_data = array('module' => 'views', 'delta' => 'reviews-block_home_latest_reviews', 'shadow' => FALSE); 
       //$block_data['subject'] = '';
       $block_data['no_subject'] = TRUE;
-      /*
-      switch (@$_SERVER['REQUEST_URI']) {
-        case '/business':
-          $block_data['subject'] = 'Latest Business VoIP Reviews...';
-          break;
-        
-        case '/sip-trunking':
-          $block_data['subject'] = 'Latest SIP Trunking Reviews...';
-          break;
-        
-        default:
-          $block_data['subject'] = 'Latest Consumer Reviews...';
-          break;
-      }
-      */
+
       
       $out .= gv_blocks_getBlockThemed($block_data);
    
@@ -1603,17 +1589,6 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   
   $keys = element_children($seo_welcome_node_view['field_preface_bottom']);
   
-  drupal_add_library('system', 'ui.core');
-  drupal_add_library('system', 'ui.widget');
-  drupal_add_library('system', 'ui.tabs');
-
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_homeBottomSectionsRotator.js');
-
-  $path_to_current_theme = drupal_get_path('theme', $GLOBALS['theme']) . '/css/';
-  drupal_add_css($path_to_current_theme . 'gv_bannerRotator.css');
-
-  
   $ui_tabs_nav = '';
   $fragments = '';
  
@@ -1621,10 +1596,6 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
       $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
       $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), render($seo_welcome_node_view['field_preface_bottom'][$i])) . '</div></div>';
   }
-  //$key += 1; 
-  //$blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
-  //$blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
-  //return '<div id="p-rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';  
   return '<div id="hb-rotator-wrapper"><div id="prev2" class="button">Prev</div><div id="hb-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next2" class="button">Next</div></div>';  
 }
 
