@@ -1,6 +1,4 @@
-<?php //dpm($block); ?>
-<div id="<?php print $block_html_id; ?>" class="<?php print $classes; print ' xxx'; ?>"<?php print $attributes; ?>>
-  <div class="inside">
+
     <?php print render($title_prefix); ?>
     
     <?php if ($title): ?>
@@ -20,10 +18,5 @@
     <?php endif;?>
       
     <?php print render($title_suffix); ?>
+    <?php print $content ?>
 
-    <div class="content"<?php print $content_attributes; ?>>
-      <?php print $content ?>
-    </div>
-  </div> <!-- /.inside -->
-  <div class="shadow"></div>
-</div> <!-- /.block -->

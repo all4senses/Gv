@@ -1850,11 +1850,8 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
   
         $out .= '
           <h1>Best VoIP Service Providers</h1>
-          <h2 id="banner_title">' . strip_tags($data['title']['value'], '<br><br/><br />') . '</h2>
-          <div id="features">' . $data['features']['value'] . '</div>
-          <div id="testimonial">' . $data['testimonial']['value'] . '</div>
-          ' 
-          . '<a href="#find-solution" class="link scroll-to-link"></a>'
+          <h2 class="hero-title-heading">' . strip_tags($data['title']['value'], '<br><br/><br />') . '</h2>
+          <p class="hero-title-desc">' . $data['features']['value'] . '</p>'
         ;
 
       break;
