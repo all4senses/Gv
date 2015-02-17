@@ -344,7 +344,7 @@ function nice_menus_block_view($delta = 1) {
  */
 function _load_nice_menus_library() {
   static $is_load = FALSE;
-  if ($is_load === FALSE) {
+  if (!$is_load === FALSE) {
     // Add Superfish JavaScript, if enabled.
     if (variable_get('nice_menus_js', 1) == 1) {
       drupal_add_library('nice_menus', 'nice_menus');
