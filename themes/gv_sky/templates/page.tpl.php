@@ -1,16 +1,14 @@
-  <header id="header" role="banner" class="clearfix">
+  <header id="header" role="banner">
 
-    <nav id="navigation" role="navigation" class="clearfix">
-      <div id="header-menu-back"></div>
-      
-      <div id="logo-block">
-        <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
+    <nav id="navigation" role="navigation">
+
+      <div id="logo">
+        <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" class="logo-link">
           <?php
-              echo '<img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />';
+              echo '<img src="/sites/all/themes/gv_sky/css/images/getvoip-logo.png" width="206" height="53" class="logo-link-img" alt="GetVoIP" title="GetVoIP" />';
           ?>
         </a>
-        <div class="descr">
-        </div>
+        <div class="logo-slogan">Cloud Communications Advisor</div>
       </div>
       
       <?php echo render($page['header']); ?>
@@ -26,69 +24,65 @@
   </header>
 
   <main role="main">
-  
-  <?php  if ($page['content_wide']): ?>
-    <section id="content-wide" class="clearfix">
-      <?php print render($page['content_wide']); ?>
-    </section>
-  <?php endif;  ?>
-  
-  <?php  if ($page['below_content_wide']): ?>
-    <section id="below-content-wide" class="clearfix">
-      <?php print render($page['below_content_wide']); ?>
-    </section>
-  <?php endif;  ?>
-  </main>
-  
-  <div id="all-content" class="clearfix">
-      
-      
     
-      <section id="main" role="main" class="clearfix">
-        <div id="fix-resp">
-          <div id="breadcrumbs-dummy"></div>
+    <?php  if ($page['content_wide']): ?>
+      <section id="content-wide">
+        <?php print render($page['content_wide']); ?>
+      </section>
+    <?php endif;  ?>
+    
+    <?php  if ($page['below_content_wide']): ?>
+      <section id="below-content-wide">
+        <?php print render($page['below_content_wide']); ?>
+      </section>
+    <?php endif;  ?>
+    
+    
+    <section id="all-content">
         
-          <?php 
-          
-            print $messages; 
-            
-          ?>
-          <a id="main-content"></a>
-          
-          
-          <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
-          <?php print render($page['help']); ?>
-          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-          
-          <?php print render($page['above_content']); ?>
-          <?php print render($page['content']); ?>
-          
-         
-        </div> <!-- /#fix-resp -->
-      </section> <!-- /#main -->
-
-
-      <?php if ($page['sidebar_first']): ?>
-        <aside id="sidebar-first" role="complementary" class="sidebar clearfix">
-          <?php print render($page['sidebar_first']); ?>
-        </aside>  <!-- /#sidebar-first -->
-      <?php endif; ?>
-
-      <?php if ($page['sidebar_second']): ?>
-        <aside id="sidebar-second" role="complementary" class="sidebar clearfix">
-          <?php print render($page['sidebar_second']); ?>
-        </aside>  <!-- /#sidebar-second -->
-      <?php endif; ?>
-
-      <div class="bottom-clear"></div>
+        
       
-      <div id="above_footer">
-          <?php echo render($page['above_footer']); ?>
-      </div>
+        <div>
+            <div id="breadcrumbs-dummy"></div>
+            
+            <!-- Error Messegaes -->
+            <?php print $messages; ?>
 
-  </div> <!-- /#all-content -->
+            <a id="main-content"></a>
+            
+            
+            <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper "><?php print render($tabs); ?></div><?php endif; ?>
+            <?php print render($page['help']); ?>
+            <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+            
+            <?php print render($page['above_content']); ?>
+            <?php print render($page['content']); ?>
+            
+           
+        </div>
 
 
+        <?php if ($page['sidebar_first']): ?>
+          <aside id="sidebar-first" role="complementary" class="sidebar ">
+            <?php print render($page['sidebar_first']); ?>
+          </aside>  <!-- /#sidebar-first -->
+        <?php endif; ?>
+
+        <?php if ($page['sidebar_second']): ?>
+          <aside id="sidebar-second" role="complementary" class="sidebar ">
+            <?php print render($page['sidebar_second']); ?>
+          </aside>  <!-- /#sidebar-second -->
+        <?php endif; ?>
+
+        <div class="bottom-clear"></div>
+        
+        <div id="above_footer">
+            <?php echo render($page['above_footer']); ?>
+        </div>
+
+    </section> <!-- /#all-content -->
+
+  </main>
 
 
   <?php
@@ -98,7 +92,7 @@
     
   
   
-  <footer id="footer" role="contentinfo" class="clearfix<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
+  <footer id="footer" role="contentinfo" class="<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
    <div id="footer-inside">
 
     <?php
