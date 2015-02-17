@@ -1579,8 +1579,6 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   $seo_welcome_node->title_no_link = TRUE;
   $seo_welcome_node_view = node_view($seo_welcome_node, 'full');
 
-  //dpm($seo_welcome_node_view);
-  //dpm($seo_welcome_node);
 
   
   if ($target == 'title') {
@@ -1610,15 +1608,6 @@ function gv_blocks_getBlogTopRotated() {
 if (isset($_GET['page'])) {
   return NULL;
 }
-  drupal_add_library('system', 'ui.core');
-  drupal_add_library('system', 'ui.widget');
-  drupal_add_library('system', 'ui.tabs');
-
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_postsRotator.js');
-
-  $path_to_current_theme = drupal_get_path('theme', $GLOBALS['theme']) . '/css/';
-  drupal_add_css($path_to_current_theme . 'gv_bannerRotator.css');
 
   
   $query = db_select('node', 'n');
@@ -1636,16 +1625,10 @@ if (isset($_GET['page'])) {
   $query->fields('d', array('field_extra_data_value'));
   $query->orderBy('n.created', 'DESC');
   
-  $query->range(0, 9);
+  $query->range(0, 4);
   
   $posts = $query->execute()->fetchAllAssoc('nid');
   
-//  foreach ($posts as $nid => $post) {
-//    $posts[$nid]->field_extra_data_value = unserialize($post->field_extra_data_value);
-//    $posts[$nid]->main_image_url = $posts[$nid]->field_extra_data_value['main_image']['src_beautify'];
-//  }
-//  
-  //dpm($posts);
   
   $ui_tabs_nav = '';
   $fragments = '';
@@ -1662,41 +1645,9 @@ if (isset($_GET['page'])) {
   }
 
   
-  /*
-  for($i = 0; $i < 8; $i += 3) {  
-      $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
-      $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
-      $count = $class = NULL;
-      foreach ($node_views['nodes'] as $key => $value) {
-
-        if (!$count) {
-          $class = 'first';
-        }
-        elseif ($count == 2){
-          $class = 'last';
-        }
-        else {
-          $class = 'middle';
-        }
-
-        $node_views['nodes'][$key]['#prefix'] = '<div class="section ' . $class . '">';
-        $node_views['nodes'][$key]['#suffix'] = '</div>';
-        
-        if ($count == 2){
-          break;
-        }
-        
-        $count++;
-      }
-      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . drupal_render($node_views) . '</div></div>';
-  }
-*/  
   $out = '<div id="p-rotator-wrapper"><div id="prev-wrapper" class="button"></div><div id="prev" >Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next-wrapper" class="button"></div><div id="next">Next</div></div>'
-          //. l('View All', 'blog', array('attributes' => array('class' => array('view-all'))))
         ;
   
-  //$out .= gv_blocks_render_block('views', '785f423dc4ad7c3130530376c18daf4b');
   
   return $out;
 }
@@ -1709,7 +1660,6 @@ function gv_blocks_getHomeServiceTypes() {
   
   $out = NULL;
   
-  //$service_types_home = serialize(array(/*'smbv' => 'Small Business', */ 're' => 'Residential', 'bu' => 'Business', 'mo' => 'Mobile', 'ifa' => 'Internet Fax', 'pbx' => 'Hosted PBX', 'sip' => 'SIP Trunking', 'cc' => 'Call Center', 're_ca' => 'Residential Canada', 'bu_ca' => 'Business Canada', 'rsl' => 'Reseller'));
   $service_types_home = array('bu' => array('title' => 'Business VoIP', 'key' => 'page-compare-business-voip-providers', 'erating_field' => ''), 'pbx' => array('title' => 'Hosted PBX', 'key' => 'page-compare-pbx-voip-providers', 'erating_field' => 'pbx'), 'sip' => array('title' => 'SIP Trunking', 'key' => 'page-compare-sip-voip-providers', 'erating_field' => 'sip'), 'wc' => array('title' => 'Web Conferencing', 'key' => 'web-conferencing-voip-providers', 'erating_field' => 'wc'), 're' => array('title' => 'Residential VoIP', 'key' => 'page-compare-residential-voip-providers', 'erating_field' => 'residential'), 'ifa' => array('title' => 'Online Fax', 'key' => 'page-compare-ifa-voip-providers', 'erating_field' => 'ifa') );
   
   
@@ -1719,10 +1669,7 @@ function gv_blocks_getHomeServiceTypes() {
 
       $query = db_select('field_data_field_preface_key', 'k');
       $query->condition('k.field_preface_key_value', $data['key']); //'page-compare-business-voip-providers'
-      //$query->leftJoin('field_data_body', 'b', "b.entity_id = k.entity_id");
       $query->leftJoin('field_data_field_extra_data', 'd', "d.entity_id = k.entity_id");
-      //$query->fields('b', array('entity_id', 'body_summary'));
-      //$query->fields('d', array('entity_id', 'field_p_erating_value' . ($data['erating_field'] ? '_' . $data['erating_field'] : '') ));
       $query->fields('d', array('entity_id', 'field_extra_data_value'));
       $result = $query->execute()->fetchObject(); 
 
@@ -1739,20 +1686,16 @@ function gv_blocks_getHomeServiceTypes() {
       $field_prefixed = 'r.' . $field;
       $query = db_select($table, 'r');
       $query->isNotNull($field_prefixed);
-      //$query->condition($field_prefixed, '', '!=');
       
       $query->join('node', 'n', "n.nid = r.entity_id AND n.type='provider'");
-      //$query->leftJoin('field_data_field_p_data', 'd', "d.entity_id = r.entity_id");
       $query->leftJoin('field_data_field_p_name', 'p', "p.entity_id = r.entity_id");
       $query->fields('r', array('entity_id', $field ));
-      //$query->fields('d', array('field_p_data_value'));
       $query->fields('p', array('field_p_name_value'));
       $query->orderBy($field_prefixed, 'ASC');
       
       $query->range(0, 3);
       $results = $query->execute()->fetchAll(); 
 
-      //dpm($results);
       
       foreach ($results as $key => $data) {
         $out .= '<a href="' . url('node/' . $data->entity_id) . '" class="p"><span>' . ($key + 1) .'</span>' . $data->field_p_name_value . '</a>';
@@ -1760,30 +1703,6 @@ function gv_blocks_getHomeServiceTypes() {
         
       
      $out .= '<div class="view-all">' . l('View All', 'node/' . $result->entity_id) . '</div>'; 
-    
-    /*
-    $query = db_select('node', 'n');
-    $query->join('field_data_field_p_name', 'pn', "pn.entity_id = n.nid");
-    $query->fields('n', array('nid', 'title'))  
-          ->fields('pn', array('field_p_name_value')) 
-          ->condition('n.type', 'provider')
-          ->condition('n.status', 1); 
-    
-      // Get only featured providers.
-      $query->leftJoin('field_data_field_p_erating', 'er_bu', "er_bu.entity_id = n.nid");
-      $query->leftJoin('field_data_field_p_erating_residential', 'er_re', "er_re.entity_id = n.nid");
-      $query->leftJoin('field_data_field_p_erating_sip', 'er_sip', "er_sip.entity_id = n.nid");
-      $query->leftJoin('field_data_field_p_erating_pbx', 'er_pbx', "er_pbx.entity_id = n.nid");
-      $query->leftJoin('field_data_field_p_erating_ifa', 'er_ifa', "er_ifa.entity_id = n.nid");
-      
-      $or = db_or()->isNotNull('field_p_erating_value')
-                   ->isNotNull('field_p_erating_residential_value')
-                   ->isNotNull('field_p_erating_sip_value')
-                   ->isNotNull('field_p_erating_pbx_value')
-                   ->isNotNull('field_p_erating_ifa_value')
-              ;
-      $query->condition($or);
-      */
     
       
       $out .= '</div>';
