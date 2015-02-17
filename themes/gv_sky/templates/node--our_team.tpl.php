@@ -22,7 +22,7 @@
             
               
               
-          <?php echo render($content['metatags']); //gv_misc_renderMetatags_newOrder($content['metatags']);?>
+          <?php echo render($content['metatags']); ?>
           
           
               
@@ -35,7 +35,6 @@
         
   </div> <!-- main-content -->
   
-  <!--<div class="shadow"></div> -->
   
 <?php if (!$page): ?>
   </article> <!-- /.node -->

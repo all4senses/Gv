@@ -16,28 +16,8 @@
 
           <?php if ($page): ?>
           <h1<?php else: ?>
-          <h2<?php endif; ?><?php //print /*$title_attributes;*/ preg_replace('/datatype=""/', '', $title_attributes); ?>><?php if (!isset($node->title_no_link) && !$page): ?><a href="<?php print $node_url; ?>"><?php print $title; ?></a><?php else: ?><?php print $title; ?><?php endif; ?><?php if ($page): ?></h1><?php else: ?></h2>
+          <h2<?php endif; ?><?php if (!isset($node->title_no_link) && !$page): ?><a href="<?php print $node_url; ?>"><?php print $title; ?></a><?php else: ?><?php print $title; ?><?php endif; ?><?php if ($page): ?></h1><?php else: ?></h2>
           <?php endif; ?>
-        <!--
-          <span class="submitted">
-            <?php 
-              /*
-              $created_str = '<span class="delim">|</span>' . date('F d, Y \a\t g:sa', $node->created); 
-              global $user;
-              if ($user->uid && $node->uid) {
-                print preg_replace('/(<span.*>)(.*)(<a.*a>)(.*)(<\/span>)/', "$1By$3$created_str$5", $submitted);
-              }
-              elseif (!$node->uid) {
-                print preg_replace('/(<span.*>)(.*)(<span.*span>)(.*)(<\/span>)/', "$1By $3 $created_str$5", $submitted);
-              }
-              // Make a link for an authors profile from just a Name.
-              else {
-                print preg_replace('/(<span.*>)(.*)<span(.*)(about=")(.*)(".*)>(.*)<\/span>.*(<\/span>)/', "$1By<a href=" . '"$5"' . "$3$4$5$6>$7</a>$created_str$8", $submitted);
-              }
-              */
-            ?>
-          </span>
-        -->
 
       <?php if (!$page): ?>
         </header>
@@ -59,8 +39,6 @@
   
 
 <?php if (!$page): ?>
-  <!-- </div> --> <!-- /.inside -->
-  <!-- <div class="shadow"></div> -->
   </article> <!-- /.node -->
 <?php else: ?>
   </div> <!-- <div class="main-content"> -->

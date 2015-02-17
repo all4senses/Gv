@@ -2,7 +2,6 @@
 
   $provider_name = isset($node->field_p_name['und'][0]['value']) ? $node->field_p_name['und'][0]['value'] : $node->field_p_name[0]['value']; 
   
-  //dpm($node->p_data);
 ?>
 
 <?php if (!$page): ?>
@@ -54,7 +53,6 @@
                     echo render($title_prefix), '<h2', $title_attributes,'>', $provider_name, '</h2>', render($title_suffix);
                   }
                   
-                  //echo gv_misc_getTrackingUrl('Visit Site', NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
                   echo gv_misc_getTrackingUrl('', NULL, NULL, NULL, 'visit-site', array('key' => 'rel', 'value' => 'v:url nofollow'));
                   
                 ?>
@@ -100,9 +98,7 @@
                                       ;
                               ?>
 
-                        <?php /*else: ?>
-                            <?php echo l('<img src="/sites/all/themes/gv_orange/css/images/writeareview2.png" alt="Write a Review" />', 'node/add/review', array('html' => TRUE, 'attributes' => array('id' => 'write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid))); ?>
-                        <?php */endif; // end of if ($page && isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+                        <?php endif;?>
                     </div>
                     
                   </div> <!-- End of <div id="info-n-reviews"> -->
@@ -121,12 +117,8 @@
                   
                   
                   
-//                          global $user; 
-//                          if ($user->uid) 
-                            {
                             
                             // Colorbox for popup window.
-                            //1, 3, 4, 
                             drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
                             drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
@@ -134,8 +126,6 @@
                             $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
                             drupal_add_js($path_to_custom_js . 'gv_provider_popup_requestLinks.js');
                             
-                          }
-
                   
                   ?>
                   

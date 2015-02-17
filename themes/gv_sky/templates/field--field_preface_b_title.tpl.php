@@ -50,11 +50,6 @@ HTML comment.
 -->
 <h2 class="preface">
   <?php 
-
-    //dpm($element);
-    //dpm($items);
-
-    //echo render($items[0]); 
     echo $element['#items'][0]['value']; 
  ?>
 </h2>
