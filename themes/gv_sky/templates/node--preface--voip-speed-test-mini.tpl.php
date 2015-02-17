@@ -11,9 +11,6 @@
 
       echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
       
-      // Floating share buttons box.
-      //drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.min.js');
-      ////drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat.js');
       drupal_add_js('sites/all/libraries/jquery.plugins/stickyfloat/stickyfloat2.js');
       $module_path = drupal_get_path('module', 'gv_misc');
       drupal_add_js( $module_path . '/js/gv_floatingSocials.js'); 
@@ -49,7 +46,6 @@
 // Ookla speed test page original content. -------------------------------------------------------------------------------
     
   
-  //$path_to_lib = 'sites/all/libraries/ookla/';
   $path_to_lib = 'ookla-mini/';
   
   ?>
@@ -77,7 +73,6 @@
 			allowScriptAccess: "always"
 		};
 		var attributes = {};
-		//swfobject.embedSWF("http://getvoip.com/ookla-mini/speedtest.swf?v=2.1.8", "mini-demo", "350", "200", "9.0.0", "http://getvoip.com/ookla-mini/speedtest/expressInstall.swf", flashvars, params, attributes);
     swfobject.embedSWF("http://getvoip.com/ookla-mini/speedtest.swf?v=2.1.8", "mini-demo", "750", "400", "9.0.0", "http://getvoip.com/ookla-mini/speedtest/expressInstall.swf", flashvars, params, attributes);
 	</script>
 <!-- END SPEED TEST - DO NOT ALTER ABOVE -->
@@ -103,19 +98,7 @@
      <div class="share">
        <div class="main">
         
-              <?php
-              
-//                if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-//                  $share_title = $node->metatags['title']['value'];
-//                }
-//                else {
-//                  $share_title = $title;
-//                }
-//
-//                $url = 'http://getvoip.com' . $_SERVER['REQUEST_URI']; 
-//                echo gv_blocks_getSocialiteButtons($url, $share_title); 
-//              
-              ?> 
+             
 
            </div> <!-- main -->
       </div> <!-- share buttons -->

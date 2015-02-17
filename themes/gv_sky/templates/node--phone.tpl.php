@@ -6,10 +6,6 @@ if($view_mode == 'home_teaser_rotated') {
     if (!empty($node->extra_data['home_teaser_rotated_image_beautify'])) {
       echo $node->extra_data['home_teaser_rotated_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
     }
-//    else {
-//      echo $extra_data['teaser_main_image_beautify'] . /*$extra_data['home_teaser_image_beautify'] .*/ '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
-//    }
-    
 
     return;
   }
@@ -19,26 +15,10 @@ if($view_mode == 'home_teaser_rotated') {
 <?php if (!$page): ?>
   <article id="node-<?php print $node->nid; ?>" class="<?php print $classes . ($view_mode == 'teaser' ? ' with_thumb' : ''); ?> clearfix"<?php print $attributes; ?>>
 <?php else: ?>
-  
-    <?php 
-    
-        
 
-        /*
-        if (isset($node->metatags['title']['value']) && $node->metatags['title']['value']) {
-          $share_title = $node->metatags['title']['value'];
-        }
-        else {
-          $share_title = $title;
-        }
-
-        echo '<div class="float share">' . gv_blocks_getSocialiteButtons($url, $share_title) . '</div>';
-        */
-    ?>
 <?php endif; ?>
            
       <?php if ($page): ?>
-        <!--<div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"> -->
         <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review" itemprop="review" itemscope itemtype="http://schema.org/Review">
       <?php endif; ?>
       
@@ -79,22 +59,13 @@ if($view_mode == 'home_teaser_rotated') {
                       break;
                   }
                 }
-                //$delimiter = $page ? '<span class="delim">|</span>' : '<span class="delim">/</span>';
-                //$created_str = date('F d, Y \a\t g:ia', $node->created);
-                //$created_str = $page ? date('F d, Y \a\t g:ia', $node->created) : date('F d, Y', $node->created);
-                
+               
                 $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
                 
                 if ($view_mode != 'side_block_teaser') {
                   $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
                   $author_name = $authorExtendedData->realname;
                   $author_gplus_profile = $authorExtendedData->field_u_gplus_profile_value;
-                
-                  /*
-                  $author = user_load($node->uid);
-                  $author_name = $author->realname;
-                  $author_gplus_profile = @$author->field_u_gplus_profile['und'][0]['safe_value'];
-                  */
 
                   $author_url = url('user/' . $node->uid);
                   $author_title = t('!author\'s profile', array('!author' => $author_name));
@@ -113,9 +84,7 @@ if($view_mode == 'home_teaser_rotated') {
                   else {
                     $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By ' .
-                                  //'<span class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
                                   '<span property="v:reviewer" class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
-                                  /* $gplus_profile .*/
                                   $delimiter . $created_str .
                               '</span>';
                   }
@@ -154,7 +123,7 @@ if($view_mode == 'home_teaser_rotated') {
 
     
 
-        <div class="content<?php echo ($view_mode == 'teaser' ? ' teaser' : ''), '" ', $content_attributes; ?>>
+        <div class="content<?php echo ($view_mode == 'teaser' ? ' teaser' : ''), '" ', $content_attributes; ?>">
           
            <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
           
@@ -180,7 +149,6 @@ if($view_mode == 'home_teaser_rotated') {
                   <div class="title good">THE GOOD</div>
                     <?php /*dpm($node);*/ 
                           echo '<div property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; 
-                          //echo $node->extra_data['pros_and_cons']['The good']; 
                     ?>
                 </div>
                 <div>
@@ -195,47 +163,6 @@ if($view_mode == 'home_teaser_rotated') {
               <div class="bottom-clear"></div>
 
  
-              <?php 
-              /*
-              <div class="share">
-
-                      <div class="others">
-                        <!-- ADDTHIS BUTTON BEGIN -->
-                        <script type="text/javascript">
-                        var addthis_config = {
-                            //pubid: "all4senses"
-                        }
-                        var addthis_share =
-                        {
-                          // ... members go here
-                          url: "<?php echo $url?>"
-                        }
-                        </script>
-
-                        <div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo $url?>">
-                          <a href="http://addthis.com/bookmark.php?v=250&amp;pub=all4senses"></a>
-                          <a class="addthis_button_email" title="E-mail this page link"><?php echo t('Email This Post'); ?></a>
-                          <a class="addthis_button_tumblr"></a>
-                          <a class="addthis_button_hackernews"></a>
-                          <a class="addthis_button_digg"></a>
-                          <a class="addthis_button_reddit"></a>
-                          <a class="addthis_button_stumbleupon"></a>
-
-                          <a class="addthis_button_compact"></a>
-                        </div>
-                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=all4senses"></script>
-                        <!-- ADDTHIS BUTTON END -->
-
-                      </div>
-
-                
-                      <div class="main">
-                          <?php //echo gv_blocks_getSocialiteButtons($url, $title); ?> 
-                      </div> <!-- main share buttons -->
-
-              </div>
-              
-              */ ?>
               
              </div>
               
@@ -254,7 +181,6 @@ if($view_mode == 'home_teaser_rotated') {
                       
                       <div class="gv_votes editor phone">
                         <?php echo 
-                                //'<div class="caption"><span><span property="v:reviewer">Editor</span>\'s Overall Rating:</span> <span property="v:rating">' , $editor_overall_rating, '</span>' /* render($content['gv_rating_overall'])*/ , '<div class="bottom-clear"></div></div>', 
                                 render($node->editor->content['gv_ratings']); 
                         ?>
                         <div class="rate-other">
@@ -279,13 +205,9 @@ if($view_mode == 'home_teaser_rotated') {
                         
                       </div>
                       <?php 
-                        // Review snippet for counting an Editor review as a review #1
-                        //echo '<div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"><span itemprop="dtreviewed" property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime"></span><span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span><span property="v:reviewer" content="Editor"></span><div property="v:description">' . @$node->extra_data['body_summary'] .'</div></div>';
                         echo '<div property="v:description">', @$node->extra_data['body_summary'], '</div>';
                         
                         
-                        //global $user;
-                        //if ($user->uid == 1) 
                           {
                           if (!empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value']) && !empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'])) {
                             echo '<div id="top-pros-cons">',
@@ -296,11 +218,8 @@ if($view_mode == 'home_teaser_rotated') {
                                   '</div>';
                           }
                         }
-                        //dpm($content['body']);
                         echo render($content['body']); 
 
-                        //dpm($content);
-                        //dpm($node);
                       ?>
                       
                       <div class="bottom-clear"></div>
@@ -325,7 +244,6 @@ if($view_mode == 'home_teaser_rotated') {
                             <div class="overall"> 
                               <div class="text">
                                 <?php 
-                                  //echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count" property="v:count">' . $node->gv_voters . '</div></div>';
                                   echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $node->gv_voters . '</div></div>';
                                 ?>
                                 <?php echo '<div class="recommend"><div class="title">' . t('Would recommend') . ': </div><div class="data">' . $node->gv_recommend . '% ' . t('of all voters') . '</div></div>'; ?>
@@ -333,7 +251,6 @@ if($view_mode == 'home_teaser_rotated') {
                               </div>
                               <div class="star-big">
                                 <?php 
-                                  //echo '<div class="count" content="' . $node->gv_rating_overall . '" property="v:rating">' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>';
                                   echo '<div class="count" content="' . $node->gv_rating_overall . '" >' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>';
                                 ?>
                               </div>
@@ -353,7 +270,7 @@ if($view_mode == 'home_teaser_rotated') {
                           <div class="header">
                               <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
                           </div>
-                          <?php echo $node->userReviews; // . '<br/>' . l('Rate it', 'voip-phone-submit-user-review', array('attributes' => array('target' => '_blank'), 'query' => array('id' => $node->nid)));  ?>
+                          <?php echo $node->userReviews; ?>
                         </div>
 
                       <?php endif; ?>
@@ -431,8 +348,6 @@ if($view_mode == 'home_teaser_rotated') {
         <footer>
           <div class="share">
               <?php 
-                //echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>');
-                //echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share This Post:</span>', 'bottom');
               echo gv_blocks_getSidebarShareStaticBlock($node, '', 'bottom');
               ?> 
           </div>
@@ -441,8 +356,6 @@ if($view_mode == 'home_teaser_rotated') {
     
         
         <?php 
-  //      global $user;
-  //      if ($user->uid) 
         {  
           echo gv_blocks_getAboutTheAuthor($node->uid); 
         }

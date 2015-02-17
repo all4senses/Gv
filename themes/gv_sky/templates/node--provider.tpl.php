@@ -360,7 +360,7 @@
               
               
               
-          <?php echo render($content['metatags']); //gv_misc_renderMetatags_newOrder($content['metatags']);?>
+          <?php echo render($content['metatags']);?>
           
           
               
@@ -387,7 +387,6 @@
           <?php endif; ?>  <!-- if ($page): -->
            
               
-          <?php //echo render($content); ?>
           
         </div> <!-- content -->
 

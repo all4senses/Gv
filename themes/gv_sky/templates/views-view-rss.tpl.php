@@ -1,17 +1,3 @@
-<?php
-/**
- * @file views-view-rss.tpl.php
- * Default template for feed displays that use the RSS style.
- *
- * @ingroup views_templates
- */
-
-//global $user;
-//if ($user->uid == 1) {
-//  dpr($link);
-//  
-//}
-?>
 <?php print "<?xml"; ?> version="1.0" encoding="utf-8" <?php print "?>"; ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xml:base="<?php print $link; ?>"<?php print $namespaces; ?>>
   <channel>

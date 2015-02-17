@@ -18,17 +18,6 @@
       $initialQuotePage_node = $node;
     }
     
-    /*
-        $tag = array(
-          '#type' => 'html_tag',
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'name' =>  'viewport',
-            'content' => 'initial-scale=1.0, width=device-width,  minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
-          ),
-        );
-        drupal_add_html_head($tag, 'meta_viewport');
-    */
   ?>
 
 
@@ -57,7 +46,6 @@
       
 
       
-      <!-- <main class="main section full-height" role="main" style="height: 728px;/* display: none; */"> -->
       <main class="main section full-height" role="main">
         
         <?php if (!$final_page): ?>
@@ -151,7 +139,6 @@
 <!-- Footer with js codes -->
 <?php if ($final_page): ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/service-quotes'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
@@ -195,9 +182,6 @@
 
             
             
-            <!-- Added 14.08.2014 -->
-            <!-- <img src='https://trending.revcontent.com/ads/tracker.php?t=MzE5Njs2MjIy'/> -->
-            
             
             <!-- Added 14.08.2014 -->
             <!-- 7Search Code for Conversion Page (start) -->
@@ -213,9 +197,7 @@
             
             
             
-          <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/service-quotes";</script>
-          <?php endif;*/?>
+      
     
 <?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):
 // So we are on the lending page '/service-quotes' 

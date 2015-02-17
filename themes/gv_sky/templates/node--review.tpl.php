@@ -3,8 +3,6 @@
  $all_data_quick = gv_misc_getProvidersDataQuick();
  
  if($view_mode == 'home_teaser') {
-  //dpm($content);
-  //dpm($node);
   
   
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
@@ -17,8 +15,6 @@
       // Use a logo from providers sprite for monimizing loaded images amount.
       $sprite_name = isset($node->sprite_name) ? $node->sprite_name : 'home_top_providers'; 
       
-      //dpm($_GET);
-      //dpm($_SERVER);
       
       // Only for /hosted-pbx don't take thumbs from the current sprite, but generate it with different sizes (bigger than on that page sprite).
       if ($_SERVER['REQUEST_URI'] == '/hosted-pbx' || !$image = gv_misc_getProviderLogoFromSprite($provider_nid, $sprite_name, $all_data_quick)) {
@@ -33,12 +29,6 @@
       else {
         echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       }
-      
-      //$out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
-      
-      
-      //echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
-      //echo '<a class="logo" href="' . $logo_link . '">' . $image . '</a>';
       
 
       $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
@@ -68,8 +58,6 @@
   return;
 }
 elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
-  //dpm($content);
-  //dpm($node);
   
   
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
@@ -82,8 +70,6 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
       // Use a logo from providers sprite for minimizing loaded images amount.
       $sprite_name = isset($node->sprite_name) ? $node->sprite_name : 'home_top_providers'; 
       
-      //dpm($_GET);
-      //dpm($_SERVER);
       
       // Only for /hosted-pbx don't take thumbs from the current sprite, but generate it with different sizes (bigger than on that page sprite).
       if ($_SERVER['REQUEST_URI'] == '/hosted-pbx' || !$image = gv_misc_getProviderLogoFromSprite($provider_nid, $sprite_name, $all_data_quick)) {
@@ -101,12 +87,6 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
       
       echo gv_misc_getTrackingUrl('VISIT', NULL, $provider_nid, NULL, 'link', array('key' => 'rel', 'value' => 'nofollow'), $all_data_quick[$provider_nid]);
       
-      //$out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
-      
-      
-      //echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
-      //echo '<a class="logo" href="' . $logo_link . '">' . $image . '</a>';
-      
 
       
   echo '</td></tr></tbody></table></div>';
@@ -123,13 +103,10 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   
   $last_pos = strrpos($teaser, ' ');
   
-  //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
-  ////$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
   $teaser = substr_replace ($teaser, '... ', $last_pos);
   
   
   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-  //$stars = '<div class="rating">' . $stars . '<span class="count">' . $node->field_r_rating_overall['und'][0]['value'] . ' out of 5</span></div>';
   
   if ($_SERVER['REQUEST_URI'] == '/ppc/business-voip') {
     $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow', 'target' => '_blank');
@@ -146,55 +123,17 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
           $stars, 
           '<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> says:</div>',
           '<div class="review">"', $teaser, '"</div>',
-          //'<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> / ', date('F d, Y', $node->created), '</div>',
        '</div>';
   
   return;
 }
 elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
-  //dpm($content);
-  //dpm($node);
   
   
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
   
  
 
-
-  //echo '<div class="header">';
-  
-      /*
-      // Use a logo from providers sprite for monimizing loaded images amount.
-      $sprite_name = isset($node->sprite_name) ? $node->sprite_name : 'home_top_providers'; 
-      
-      //dpm($_GET);
-      //dpm($_SERVER);
-      
-      // Only for /hosted-pbx don't take thumbs from the current sprite, but generate it with different sizes (bigger than on that page sprite).
-      if ($_SERVER['REQUEST_URI'] == '/hosted-pbx' || !$image = gv_misc_getProviderLogoFromSprite($provider_nid, $sprite_name, $all_data_quick)) {
-        $image_style_name = 'logo_provider_chart_main'; //'thumbnail';
-        $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
-      }
-      
-      if (!empty($all_data_quick[$provider_nid]['i_web'])) {
-        //$logo_link = $all_data_quick[$provider_nid]['i_web'];
-        echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo', NULL, $all_data_quick[$provider_nid]);
-      }
-      else {
-        echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
-      }
-      */
-      
-      //$out = gv_misc_getTrackingUrl($image, NULL, $data['data']->nid);
-      
-      
-      //echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
-      //echo '<a class="logo" href="' . $logo_link . '">' . $image . '</a>';
-      
-
-      
-  //echo '</div>';
-  
   
   $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
   $teaser = strip_tags($body);
@@ -207,12 +146,9 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
   
   $last_pos = strrpos($teaser, ' ');
   
-  //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))), $last_pos);
   
-  //$teaser = substr_replace ($teaser, '... ' . l(t('Read More'), 'node/' . $provider_nid, array('attributes' => array('class' => array('more')))), $last_pos);
   $teaser = substr_replace ($teaser, '...', $last_pos);
   
-  //dpm($all_data_quick[$provider_nid]['name']);
   
   $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
       

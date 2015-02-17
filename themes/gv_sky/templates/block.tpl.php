@@ -1,4 +1,3 @@
-<?php //dpm($block); ?>
 
 <?php if (!strpos($classes, 'first')): ?>
   <div class="top-line <?php print $block_html_id; ?>"></div>
