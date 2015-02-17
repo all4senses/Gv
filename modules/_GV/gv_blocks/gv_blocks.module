@@ -1533,7 +1533,7 @@ function gv_blocks_getLatestPostsRotated() {
   // 3 pages
   //for($i = 0; $i < 5; $i += 2) {
   
-  for($i = 0; $i < 8; $i += 3) {  
+  for($i = 0; $i < 3; $i += 3) {  
       //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
       $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
       $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
