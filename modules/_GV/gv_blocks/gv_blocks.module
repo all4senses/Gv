@@ -1761,7 +1761,6 @@ function gv_blocks_getAboutTheAuthor($uid) {
               
             . '</div>
               <div id="right">' .
-                //'<div class="title">About <span style="white-space: nowrap;">the author:</span>' . /*$user->realname .*/ '</div><div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>'
                 '<div class="title">' . $user->realname . '</div>'
                 . (!empty($user->field_u_position['und'][0]['value']) ? '<div class="subtitle">' . $user->field_u_position['und'][0]['value'] . '</div>' : '')
                 . '<div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>'
@@ -1824,18 +1823,11 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
   switch ($key) {
     case 'v2':
       $data = unserialize(variable_get('gv_home_in_hlighted_2', NULL));
-      //$out = '<h1 class="preface">' . $data['title'] . '</h1>' . $data['body']['value'] . '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div>';
-      ////$out .= '<div id="flying_text_1">' . $data['flying_text_1']['value'] . '</div><div id="flying_text_2">' . $data['flying_text_2']['value'] . '</div>';
       $out .= '<div id="flying_text_3">' . $data['flying_text_3']['value'] . '</div>';
       break;
     
     case 'v3':
       $data = unserialize(variable_get('gv_home_in_hlighted_3', NULL));
-      //dpm(strip_tags($data['title']['value']));
-      
-      //global $user;
-      
-      //if ($user->uid == 1) 
         {
         $out .= '
           <h1>Best VoIP Service Providers</h1>
@@ -1844,14 +1836,7 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
           <div id="testimonial">' . $data['testimonial']['value'] . '</div>
         ';
       }
-//      else {
-//        $out .= '
-//          <h1>Best VoIP Service Providers</h1>
-//          <h2 id="banner_title">' .$data['title']['value'] . '</h2>
-//          <div id="features">' . $data['features']['value'] . '</div>
-//          <div id="testimonial">' . $data['testimonial']['value'] . '</div>
-//        ';
-//      }
+
       break;
     
     
@@ -1859,30 +1844,16 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
       $data = unserialize(variable_get('gv_home_in_hlighted_4', NULL));
       
       
-//       Add front metatags from Metatags module settings (filled by the root user).  
-//       
-//       
-        //gv_misc_addMetatag('description', 'Share your VoIP phone experience with others. Use this quick form to submit your review and share your feedback');
-      
         $metatags = metatag_metatags_view('global:frontpage', array());
         gv_misc_addMetatag('title', $metatags['title']['#attached']['metatag_set_preprocess_variable'][0][2]);
         gv_misc_addMetatag('description', $metatags['description']['#attached']['drupal_add_html_head'][0][0]['#value']);
-        //dpm($metatags);
-        
-        // Metatags.
-//      gv_misc_addMetatag('title', 'Submit VoIP Phone Review');
-//      gv_misc_addMetatag('description', 'Share your VoIP phone experience with others. Use this quick form to submit your review and share your feedback');
-//      gv_misc_addMetatag('keywords', 'submit phone reviews, phone reviews from users');
-      
+  
         $out .= '
           <h1>Best VoIP Service Providers</h1>
           <h2 id="banner_title">' . strip_tags($data['title']['value'], '<br><br/><br />') . '</h2>
           <div id="features">' . $data['features']['value'] . '</div>
           <div id="testimonial">' . $data['testimonial']['value'] . '</div>
           ' 
-          //. l('Find a VoIP service', 'business', array('attributes' => array('class' => array('link')))) 
-          //. '<a href="#" class="link"><span>Find a VoIP service</span><div></div></a>
-          //. '<a href="#block-gv-blocks-home-service-types" class="link scroll-to-link"></a>'
           . '<a href="#find-solution" class="link scroll-to-link"></a>'
         ;
 
@@ -1899,9 +1870,6 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
  * Secondary Providers section for a current page.
  */
 function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
-  
-  //dpm($_GET);
-  //dpm($_SERVER);
   
   if ($op == 'title') {
     $data = unserialize(variable_get('gv_secondary_p_section_data', NULL));
@@ -1931,13 +1899,7 @@ function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
   $display_name = $map_url_to_viewsDisplay_name[$_SERVER['REQUEST_URI']];
   $view = views_get_view($view_name);
   
-  //dpm($view);
-  
-  // Remove almost all existing fields. We will add some new fields instead for the second chart.
-  //$types = views_object_types();
-  //dpm($types);
   $fields = $view->get_items('field', $display_name);
-  //dpm($fields);
   
   // Delete all header fields, in this case some js scripts (for example, gv_compareProviders.js)
   $header = $view->get_items('header', $display_name);
@@ -1953,9 +1915,6 @@ function gv_blocks_getSecondaryProvidersSectionBlock($op = NULL) {
     }
   }
   
-  //$viewsFilterOptions_nodeNid = array('id' => 'field_ref_phone_target_id', 'value' => array('value' => $node->nid));
-  //$view->add_item($display_name, 'filter', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
-  
   $php_field_options = array(
     'id' => 'php_title', 
     'label' => 'Company',
@@ -1970,7 +1929,6 @@ return $value;',
 echo $value;
 ?>',
   );
-  //$view->add_item($display_name, 'field', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
   $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
   
   
@@ -1988,7 +1946,6 @@ return $value;',
 echo $value;
 ?>',
   );
-  //$view->add_item($display_name, 'field', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
   $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
   
   
@@ -1998,37 +1955,16 @@ echo $value;
     'use_php_setup' => 0, 
     'use_php_click_sortable' => '0',
     'php_click_sortable' => '',
-    // details2 - shorter details.
     'php_value' => '$value = gv_misc_getProviderQuickData(\'details2\', array(\'data\' => $data));
 return $value;',
     'php_output' => '<?php 
 echo $value;
 ?>',
   );
-  //$view->add_item($display_name, 'field', 'field_data_field_ref_phone', 'field_ref_phone_target_id', $viewsFilterOptions_nodeNid);
   $view->add_item($display_name, 'field', 'views', 'php', $php_field_options);
   
   
   
-  /*
-  
-  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
-$handler->display->display_options['fields']['php_1']['table'] = 'views';
-$handler->display->display_options['fields']['php_1']['field'] = 'php';
-$handler->display->display_options['fields']['php_1']['label'] = 'Video';
-$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
-$handler->display->display_options['fields']['php_1']['php_value'] = '$value = gv_misc_getProviderQuickData(\'vr-y\', array(\'data\' => $data, \'service_type\' =>\'re\'));
-
-return $value;';
-$handler->display->display_options['fields']['php_1']['php_output'] = '<?php 
-echo $value;
-?>';
-$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '3';
-$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
-
-  
-  
-  */
   
   
   $filters = $view->get_items('filter', $display_name);
@@ -2100,14 +2036,6 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
       break;
       
     case 'side':
-      
-      //dpm($data);
-      /*
-      $out = '';//$data['html_images']['value'];
-      foreach ($data['images'] as $image) {
-        $out .= $image;
-      }
-      */
       $out = '<img class="side" src="/sites/all/themes/gv_blue/css/images/as-featured-in-home.jpg" />';
       break;
       
@@ -2132,7 +2060,6 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     $query = db_select('node', 'n')
       ->fields('n', array('nid', 'type'));
     $query->join('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
-    //$query->fields('ed', array('field_extra_data_value'));
     $query->addField('ed', 'field_extra_data_value', 'field_extra_data');
     
     $query->condition('n.nid', $nid);
@@ -2146,20 +2073,6 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   if (empty($node->related_articles)) {
     return NULL;
   }
-    
-  //dpm($node);
-
-  drupal_add_library('system', 'ui.core');
-  drupal_add_library('system', 'ui.widget');
-  drupal_add_library('system', 'ui.tabs');
-  //drupal_add_library('system', 'effects.bounce');
-
-
-  $path_to_custom_js = drupal_get_path('module', 'gv_misc') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_relatedArticlesRotator.js');
-
-  $path_to_current_theme = drupal_get_path('theme', $GLOBALS['theme']) . '/css/';
-  drupal_add_css($path_to_current_theme . 'gv_relatedArticlesRotator.css');
 
   $ui_tabs_nav = '';
   $fragments = '';
@@ -2184,12 +2097,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 
     </div>';
   }
-//    $key += 1; 
-//    $blog_tab = '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $key . '"><a href="#fragment-' . $key . '">Blog</a></li>';
-//    $blog_fragment = '<div id="fragment-' . $key . '" class="ui-tabs-panel"><div class="info">' . vr_misc_getHomeBlogPostsForBannerRotator() . '</div></div>';
-//    return '<div id="related-block"><ul class="ui-tabs-nav">' . $ui_tabs_nav . $blog_tab . '</ul>' . $fragments . $blog_fragment . '</div>';
-  
-  //return '<div class="related-block" id="rotator"><ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul>' . $fragments . '</div>';
+
   return '<div class="related-block" id="rotator">' . $fragments . '<ul class="ui-tabs-nav c' . $count . '">' . $ui_tabs_nav . '</ul></div>';
 }
 
@@ -2200,27 +2108,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
 function gv_blocks_getSidebarFollowLinksBlock() {
   
   $out = NULL;
-  /*
-  $source = 'GetVoIP.com';
-  $post_url = url($_GET['q'], array('absolute' => TRUE));
-  $post_title = $node->title;
-  $summary = !empty($node->metatags['description']['value']) ? $node->metatags['description']['value'] : drupal_substr(strip_tags(@$node->body['und'][0]['value']), 0, 200);
 
-  $link_open = 'href="javascript:void(window.open(' . "'";
-  $links = array(
-      'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
-      'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
-      //array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('p[title]' => $post_title, 'p[url]' => $post_url, 'p[summary]' => $summary, 'p[images]' => $image, )),
-      'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
-      'LinkedIn' => array('social_url' => 'http://www.linkedin.com/shareArticle', 'query' => array('title' => $post_title, 'mini' => 'true', 'url' => $post_url, 'summary' => $summary, 'source' => $source)),
-  
-  );
-  
-  foreach ($links as $class => $link) {
-    $out .= l($class, $link['social_url'], array('attributes' => array('class' => array($class), 'rel' => 'nofollow'), 'query' => $link['query']));
-  }
-  */
-  
   
   
   $cid = 'gv_cached_sideSocialLinks';
@@ -2231,7 +2119,6 @@ function gv_blocks_getSidebarFollowLinksBlock() {
   }
   else {
     $menu = menu_build_tree('menu-header-links');
-    //dpm($menu);
     // Don't show rss link here.
     unset($menu['49956 Rss 931']);
     $out = theme('gv_misc_headerLinks', array('submenu' => array('below' => $menu)));
@@ -2260,10 +2147,6 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL,
         }
         $node = node_load(str_replace('node/', '', $_GET['q']));
       }
-      //dpm($_GET);
-      //dpm($node);
-
-      //$out = NULL;
       $source = 'GetVoIP.com';
       $post_url = url($_GET['q'], array('absolute' => TRUE));
       $post_title = $node->title;
@@ -2273,21 +2156,15 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL,
       $links = array(
           'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
           'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
-          //array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('p[title]' => $post_title, 'p[url]' => $post_url, 'p[summary]' => $summary, 'p[images]' => $image, )),
           'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
           'LinkedIn' => array('social_url' => 'http://www.linkedin.com/shareArticle', 'query' => array('title' => $post_title, 'mini' => 'true', 'url' => $post_url, 'summary' => $summary, 'source' => $source)),
 
-        //'http://twitter.com/share?text=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?',
-        //'http://www.linkedin.com/shareArticle?mini=true&url=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&title=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&summary=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.&source=The+Profitable+Practice',
-        //'https://plus.google.com/share?url=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/',
-        //'http://www.facebook.com/sharer.php?s=%20100&p[title]=What%20is%20%E2%80%9CBig%20Data%E2%80%9D%20in%20Healthcare,%20and%20Who%E2%80%99s%20Already%20Doing%20It?&p[url]=http://profitable-practice.softwareadvice.com/what-is-big-data-in-healthcare-0813/&p[images][0]=http://profitable-practice.softwareadvice.com/files/2013/08/genomedata_thumbnail.jpg&p[summary]=What+will+big+data+mean+for+healthcare%3F+I+talked+to+expert+Dr.+Russell+Richmond%2C+and+looked+at+5+companies+using+big+data+today.',
       );
 
       foreach ($links as $provider => $link) {
         $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
       }
 
-      //$out .= '<a ' . $link_open . $links['Facebook']['social_url'] . $links['Facebook']['link_close'] . '">Share</a>';
   }
   
   return '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
@@ -2350,30 +2227,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   
   if (!$service_type) {
-    /*
-    $map_path_to_preface_type = array(
-      '/business' => 'page-compare-business-voip-providers',
-      '/residential' => 'page-compare-residential-voip-providers',
-      '/sip-trunking' => 'page-compare-sip-voip-providers',
-      '/fax' => 'page-compare-ifa-voip-providers',
-      //'/business-voip-features' => 'business-voip-features',
-      '/canada' => 'canada-voip',
-      '/hosted-pbx' => 'page-compare-pbx-voip-providers',
-      '/web-conferencing' => 'web-conferencing-voip-providers',
-    );
-    */
-    /*
-    $map_preface_type_to_service_type = array(
-      'page-compare-business-voip-providers' => 'business',
-      'page-compare-residential-voip-providers' => 'residential',
-      'page-compare-sip-voip-providers' => 'sip',
-      'page-compare-ifa-voip-providers' => 'ifa',
-      'canada-voip' => 'ca',
-      'page-compare-pbx-voip-providers' => 'pbx',
-       //'page-compare-smbv-voip-providers' => NULL,
-    );
-    */
-
+  
     $map_path_to_title = array(
       '/business' => 'Business VoIP', 
       '/ppc/business-voip' => 'Business VoIP', 
