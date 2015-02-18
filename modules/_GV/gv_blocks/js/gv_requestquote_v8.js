@@ -8,11 +8,6 @@
       
         // Styling select forms
 
-        //$('select').selectmenu();
-        $('#requestQuoteFormWrapper select').selectmenu({
-          //style:'popup', 
-          maxHeight: 300
-  			});
         
         
       
@@ -52,7 +47,7 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
+        // $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
           if ($(this).val() == '') {
@@ -116,23 +111,18 @@
 
         });
 
-        jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
-          return !(this.optional(element) || value === param);
-        //}, jQuery.format("You must not enter {0}"));
-        }, "All fields with are required");
+        // jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
+        //   return !(this.optional(element) || value === param);
+        // }, "All fields with are required");
 
-        jQuery.validator.addMethod("wrongCaptcha", function(value, element, param) {
-          //console.log('captcha_val = ' + captcha_val);
-          //console.log('va = ' + value.toLowerCase());
-          return value.toLowerCase() === captcha_val;
-        //}, jQuery.format("You must not enter {0}"));
-        }, "Code Error");
+        // jQuery.validator.addMethod("wrongCaptcha", function(value, element, param) {
+        //   return value.toLowerCase() === captcha_val;
+        // }, "Code Error");
         
         
-        // Overriding the default Required message.
-        jQuery.extend(jQuery.validator.messages, {
-            required: Drupal.t('All fields with * are required')
-        });
+        // jQuery.extend(jQuery.validator.messages, {
+        //     required: Drupal.t('All fields with * are required')
+        // });
 
         // Click on a label will click on a radio button.
         $(".label_after").click(function(){
