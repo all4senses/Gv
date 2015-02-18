@@ -1847,11 +1847,14 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
         $metatags = metatag_metatags_view('global:frontpage', array());
         gv_misc_addMetatag('title', $metatags['title']['#attached']['metatag_set_preprocess_variable'][0][2]);
         gv_misc_addMetatag('description', $metatags['description']['#attached']['drupal_add_html_head'][0][0]['#value']);
+          
+          // <h2 class="hero-title-heading">' . strip_tags($data['title']['value'], '<br><br/><br />') . '</h2>
   
         $out .= '
           <h1>Best VoIP Service Providers</h1>
-          <h2 class="hero-title-heading">' . strip_tags($data['title']['value'], '<br><br/><br />') . '</h2>
-          <p class="hero-title-desc">' . $data['features']['value'] . '</p>'
+          <div class="hero-title">
+          <h2 class="hero-title-heading">' . $data['title']['value'] . '</h2>
+          <p class="hero-title-desc">' . $data['features']['value'] . '</p></div>'
         ;
 
       break;
