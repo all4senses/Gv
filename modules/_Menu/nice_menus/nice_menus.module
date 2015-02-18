@@ -563,6 +563,7 @@ function theme_nice_menus_build($variables) {
       $class = str_replace(array('http', 'https', '://', 'www'), '', $menu_item['link']['href']);
       // Strip funny symbols.
       $class = drupal_html_class('menu-path-' . $class);
+      $class .= ' main-menu-item';
       if ($trail && in_array($mlid, $trail)) {
         $class .= ' active-trail';
       }
@@ -576,7 +577,7 @@ function theme_nice_menus_build($variables) {
         if ($menu_item['link']['depth'] <= $depth || $depth == -1) {
           $children = array(
             '#theme' => 'nice_menus_build',
-            '#prefix' => '<ul>',
+            '#prefix' => '<ul class="solution-nav">',
             '#suffix' => '</ul>',
             '#menu' => $menu_item['below'],
             '#depth' => $depth,
@@ -604,7 +605,7 @@ function theme_nice_menus_build($variables) {
               $last_class,
             ),
           ),
-          '#original_link' => $menu_item['link'],
+          '#original_link' => $menu_item['link'] . 'asdfasdf',
         );
         $variables['element'] = $element;
 
@@ -697,7 +698,7 @@ function theme_nice_menus($variables) {
     'menu' => $menu,
     'respect_expanded' => $respect_expanded))) {
     if ($menu_tree['content']) {
-      $output['content'] = '<ul class="nice-menu nice-menu-' . $direction . ' nice-menu-' . $menu_name . '" id="nice-menu-' . $id . '">' . $menu_tree['content'] . '</ul>' . "\n";
+      $output['content'] = '<ul class="main-menu nice-menu-' . $direction . ' nice-menu-' . $menu_name . '">' . $menu_tree['content'] . '</ul>' . "\n";
       $output['subject'] = $menu_tree['subject'];
     }
   }
