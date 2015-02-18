@@ -1,26 +1,32 @@
 <?php drupal_add_js('/sites/all/themes/gv_sky/js/global.js') ?>
   <header id="header" role="banner">
 
-    <nav id="navigation" role="navigation">
+    <nav class="navigation" role="navigation">
+      <div class="navigation-wrap">
 
-      <div id="logo">
-        <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" class="logo-link">
-          <?php
-              echo '<img src="/sites/all/themes/gv_sky/images/getvoip-logo.png" width="206" height="53" class="logo-link-img" alt="GetVoIP" title="GetVoIP" />';
-          ?>
-        </a>
-        <div class="logo-slogan">Cloud Communications Advisor</div>
+        <div class="navigation-logo">
+          <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" class="navigation-logo-link">
+            <?php
+                echo '<img src="/sites/all/themes/gv_sky/images/getvoip-logo.png" width="206" height="53" class="navigation-logo-link-img" alt="GetVoIP" title="GetVoIP" />';
+            ?>
+          </a>
+          <div class="navigation-logo-slogan">Cloud Communications Advisor</div>
+          <div class="clearfix"></div>
+        </div>
+        
+        <?php echo render($page['header']); ?>
+
+        <div class="clearfix"></div>
+      </div>
+    </nav> 
+
+    <?php  if ($page['highlighted']): ?>
+
+      <div class="hero-header">
+        <?php print render($page['highlighted']); ?>
       </div>
       
-      <?php echo render($page['header']); ?>
-      <?php  if ($page['highlighted']): ?>
-
-        <div class="hero-header">
-          <?php print render($page['highlighted']); ?>
-        </div>
-
-      <?php endif;  ?>
-    </nav> 
+    <?php endif;  ?>
 
   </header>
 

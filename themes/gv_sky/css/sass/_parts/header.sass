@@ -1,0 +1,92 @@
+.navigation 
+	height: 94px
+	background-color: white
+	border-bottom: 3px solid $primary
+
+	&-wrap
+		position: relative
+		width: 100%
+		height: 100%
+		max-width: 1170px
+		+center
+		padding: 0 20px
+		box-sizing: border-box
+
+
+	&-logo
+		position: relative
+		float: left
+		+valign
+		top: 48%
+
+		&-slogan
+			float: left
+			height: 100%
+			padding-top: 27px
+			padding-left: 30px
+			font-size: 15px
+			font-weight: 500
+			color: $grey
+
+		&-link
+			position: relative
+			float: left
+
+			&:after 
+				content: ''
+				position: absolute
+				top: 15px
+				right: -16px
+				height: 40px
+				border-right: 1px solid $divider
+
+
+	.main-menu
+		float: right
+		position: absolute
+		+valign
+		top: 53%
+		right: 20px
+
+		&-item
+			float: left
+			cursor: pointer
+			+user-select(none)
+			+clearfix
+
+			a
+				color: $grey-darker
+				font-size: 15px
+				font-weight: 700
+				text-transform: uppercase
+
+			&.first
+				position: relative
+				margin-right: 15px
+				padding-right: 15px
+				border-right: 1px solid $divider
+
+				&:before 
+					content: 'v'
+					position: absolute
+					top: -4px
+					left: -34px
+					font-family: gvcons
+					font-size: 23px
+					color: $primary
+
+
+
+
+
+.solution-nav 
+	height: 0
+	overflow: hidden
+
+	&.open
+		height: 185px
+
+
+
+
+

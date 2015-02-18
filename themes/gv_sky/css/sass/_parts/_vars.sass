@@ -1,22 +1,20 @@
 // color
 
-$primary-color: #268ad3
-$primary-color-dark: darken($primary-color, 7)
-$contrast-color: #e39315
-$contrast-color-dark: darken($contrast-color, 7)
-$grey: #7a7a7a
-$grey-mid: #878787
-$grey-blue: #606466
-$grey-blue-light: #9da8ad
-$grey-light: #909090
-$grey-x-light: #d0d0d0
-$divider-color: $grey-x-light
+$primary: #045da0
+$contrast: #e39315
+$grey-darker: #595959
+$grey-dark: #666666
+$grey-other: #979797
+$grey: #777777
+$grey-light: #b2b2b2
+$grey-lighter: #d1d1d1
+$divider: #bfbfbf
+$black: #2f2f2f
+$cloud: #34bbd1
+$voip: #86cc3b
+$business: #d39f01
 $white: #fff
 
-// helper vars
-
-$first: first-child
-$last: last-child
 
 // mixins
 
@@ -29,6 +27,12 @@ $last: last-child
     margin: 0 auto
   @else
     margin: #{$top} auto #{$bottom}
+
+=valign
+  top: 50%
+  -webkit-transform: translateY(-50%)
+  -o-transform: translateY(-50%)
+  transform: translateY(-50%)
 
 =unvalign
   top: 0
@@ -57,7 +61,7 @@ $last: last-child
   width: #{$width}px
   height: #{$height}px
 
-=clearfix-dk
+=clearfix
   &:before,
   &:after
     content: ""
@@ -80,11 +84,11 @@ $last: last-child
   hyphens: $opt
 
 =user-select($opt)
-  -webkit-user-select: none
-  -khtml-user-select: none
-  -moz-user-select: none
-  -ms-user-select: none
-  user-select: none
+  -webkit-user-select: $opt
+  -khtml-user-select: $opt
+  -moz-user-select: $opt
+  -ms-user-select: $opt
+  user-select: $opt
 
 =linear-gradient($fromColor, $toColor)
   background-color: $toColor
