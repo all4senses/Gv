@@ -202,8 +202,15 @@ function _imagemagick_check_path($file) {
  */
 
 function image_imagemagick_resize(stdClass $image, $width, $height) {
-  dpm($image);
-  $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '!';
+  // a4s patch
+//  dpm($image);
+//  if ($image->info['extension'] == 'png') {
+//    $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '! -depth 8';
+//  }
+//  else 
+    {
+    $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '!';
+  }
   $image->info['width'] = $width;
   $image->info['height'] = $height;
   //image_gd_resize();
