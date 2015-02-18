@@ -18,10 +18,11 @@
         if ($args[0] == 'node' && (@$args[1] == 'add' || isset($args[2]) && $args[2] == 'edit')) { $top = TRUE; print $scripts; } 
   ?>
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/global.css">
 <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
      <script type="text/javascript">
        takanaClient.run({host: 'localhost:48626'});
-     </script>  
+     </script>
 </head>
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>

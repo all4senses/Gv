@@ -6,7 +6,7 @@
       <div id="logo">
         <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" class="logo-link">
           <?php
-              echo '<img src="/sites/all/themes/gv_sky/css/images/getvoip-logo.png" width="206" height="53" class="logo-link-img" alt="GetVoIP" title="GetVoIP" />';
+              echo '<img src="/sites/all/themes/gv_sky/images/getvoip-logo.png" width="206" height="53" class="logo-link-img" alt="GetVoIP" title="GetVoIP" />';
           ?>
         </a>
         <div class="logo-slogan">Cloud Communications Advisor</div>
