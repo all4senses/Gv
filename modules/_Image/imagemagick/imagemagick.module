@@ -200,10 +200,14 @@ function _imagemagick_check_path($file) {
  *
  * @see image_resize()
  */
+
 function image_imagemagick_resize(stdClass $image, $width, $height) {
+  dpm($image);
   $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '!';
   $image->info['width'] = $width;
   $image->info['height'] = $height;
+  //image_gd_resize();
+  //ImageConvolution();
   return TRUE;
 }
 
