@@ -1,0 +1,230 @@
+/* ==========================================================================
+   1. Solutions Section
+   ========================================================================== */
+
+.section 
+	background-color: white
+	min-height: 495px
+	padding: 95px 0 115px
+	box-sizing: border-box
+	border-bottom: 1px solid $grey-lighter
+
+	+m(620)
+		padding: 75px 0 70px
+
+	&-wrap
+		width: 100%
+		max-width: 1170px
+		+center
+		padding: 0 20px
+		box-sizing: border-box
+
+
+
+	//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+	=section-title($direc: center)
+		
+		@if $direc == left
+
+			float: left
+
+			&-heading
+				font-weight: 500
+				font-size: 39px
+				color: $primary
+
+			&-desc
+				font-size: 18px
+				line-height: 25px
+				font-weight: 500
+				color: $grey-darker
+
+	&-title
+		+section-title(left)
+
+		&-heading
+			&-inner
+				color: $contrast
+
+		&-desc
+			max-width: 350px
+			margin: 4px 0 0 2px
+
+
+		+m(1000)
+
+			&-heading
+				font-size: 36px
+
+			&-desc
+				max-width: 290px
+
+		+m(900)
+			float: none !important
+			clear: both
+			+center
+			text-align: center
+
+			&-heading
+				font-size: 35px
+				padding-bottom: 4px
+
+			&-desc
+				+center
+				width: 90%
+				max-width: 500px
+				font-size: 17px
+				line-height: 23px
+
+
+
+
+
+
+.solutions-list
+	float: right
+	width: perc(700px, 1130px)
+	padding: 0 6%
+	box-sizing: border-box
+	+clearfix
+
+	&-item
+		cursor: pointer
+		width: 50%
+		float: left
+		margin-bottom: 50px
+
+		&-link
+			+clearfix
+			position: relative
+			top: 0
+			display: block
+			padding: 0 30px
+			box-sizing: border-box
+			+user-select(none)
+			transition: top 0.2s
+
+			&-title
+				position: absolute
+				color: $grey-darker
+				font-size: 19px
+				font-weight: 600
+				left: 108px
+				+valign
+				transition: color 0.2s
+
+			&-icon
+				float: left
+				+size(60)
+				border: 1px solid $primary
+				border-radius: 50%
+				color: $primary
+				box-sizing: border-box
+				
+
+				&-inner
+					position: relative
+					width: 100%
+					height: 100%
+					overflow: hidden
+					border: 3px solid white
+					border-radius: 50%
+					box-sizing: border-box
+
+					&:before
+						position: absolute
+						left: 0
+						right: 0
+						text-align: center
+
+		&:hover
+
+			.solutions-list-item-link
+				top: -5px
+
+				&-title
+					color: $primary
+
+
+	+m(1170, min)
+		width: perc(750px, 1130px)
+		padding: 0 8%
+
+	+m(1000)
+		width: perc(680px, 1130px)
+		padding: 0 4%
+
+	+m(900)
+		width: 90%
+		max-width: 600px
+		padding: 0
+		float: none
+		clear: both
+		+center
+		margin-top: 60px
+
+		.solutions-list-item-link
+			padding: 0 10%
+
+
+	+m(620)
+		.solutions-list-item-link-title
+			left: 40%
+			left: 97px
+			font-size: 18px
+
+	+m(520)
+		.solutions-list-item
+			float: none
+			clear: both
+			width: 300px
+			+center(0, 35px)
+			// +center
+
+			&-link-title
+				left: 106px
+
+
+
+
+
+
+.icon-solution-bu:before
+	font-size: 46px
+	bottom: -6px
+
+
+.icon-solution-pbx:before
+	font-size: 40px
+	top: 6px
+	left: 3px
+
+
+.icon-solution-sip:before
+	font-size: 44px
+	top: 4px
+	left: 11px
+
+
+.icon-solution-wc:before
+	font-size: 63px
+	bottom: -6px
+	left: -6px
+
+
+.icon-solution-re:before
+	font-size: 40px
+	top: 7px
+
+
+.icon-solution-cc:before
+	font-size: 57px
+	bottom: -11px
+	left: -3px
+
+
+
+
+
+
+

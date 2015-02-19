@@ -386,10 +386,10 @@ th {
 .icon-pinterest:before {
   content: "Z"; }
 
-.icon-solution-callcenter:before {
+.icon-solution-cc:before {
   content: "0"; }
 
-.icon-solution-business:before {
+.icon-solution-bu:before {
   content: "1"; }
 
 .icon-sip:before {
@@ -425,13 +425,13 @@ th {
 .icon-price:before {
   content: "#"; }
 
-.icon-solution-conferencing:before {
+.icon-solution-wc:before {
   content: "$"; }
 
 .icon-solution-pbx:before {
   content: "%"; }
 
-.icon-solution-residential:before {
+.icon-solution-re:before {
   content: "&"; }
 
 .icon-solution-sip:before {
@@ -760,6 +760,9 @@ th {
   .hero-header h1 {
     position: absolute;
     top: 700px;
+    left: 0;
+    right: 0;
+    text-align: center;
     z-index: -1; }
 
 .hero-title {
@@ -801,6 +804,190 @@ th {
     width: 90%;
     max-width: 540px;
     margin: 0 auto; }
+
+/* ==========================================================================
+ * 1. Solutions Section
+ * ========================================================================== */
+.section {
+  background-color: white;
+  min-height: 495px;
+  padding: 95px 0 115px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #d1d1d1; }
+  @media screen and (max-width: 620px) {
+    .section {
+      padding: 75px 0 70px; } }
+  .section-wrap {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box; }
+  .section-title {
+    float: left; }
+    .section-title-heading {
+      font-weight: 500;
+      font-size: 39px;
+      color: #045da0; }
+    .section-title-desc {
+      font-size: 18px;
+      line-height: 25px;
+      font-weight: 500;
+      color: #595959; }
+    .section-title-heading-inner {
+      color: #e39315; }
+    .section-title-desc {
+      max-width: 350px;
+      margin: 4px 0 0 2px; }
+    @media screen and (max-width: 1000px) {
+      .section-title-heading {
+        font-size: 36px; }
+      .section-title-desc {
+        max-width: 290px; } }
+    @media screen and (max-width: 900px) {
+      .section-title {
+        float: none !important;
+        clear: both;
+        margin: 0 auto;
+        text-align: center; }
+        .section-title-heading {
+          font-size: 35px;
+          padding-bottom: 4px; }
+        .section-title-desc {
+          margin: 0 auto;
+          width: 90%;
+          max-width: 500px;
+          font-size: 17px;
+          line-height: 23px; } }
+
+.solutions-list {
+  float: right;
+  width: 61.9469026549%;
+  padding: 0 6%;
+  box-sizing: border-box; }
+  .solutions-list:before, .solutions-list:after {
+    content: "";
+    display: table; }
+  .solutions-list:after {
+    clear: both; }
+  .solutions-list-item {
+    cursor: pointer;
+    width: 50%;
+    float: left;
+    margin-bottom: 50px; }
+    .solutions-list-item-link {
+      position: relative;
+      top: 0;
+      display: block;
+      padding: 0 30px;
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      transition: top 0.2s; }
+      .solutions-list-item-link:before, .solutions-list-item-link:after {
+        content: "";
+        display: table; }
+      .solutions-list-item-link:after {
+        clear: both; }
+      .solutions-list-item-link-title {
+        position: absolute;
+        color: #595959;
+        font-size: 19px;
+        font-weight: 600;
+        left: 108px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        transition: color 0.2s; }
+      .solutions-list-item-link-icon {
+        float: left;
+        width: 60px;
+        height: 60px;
+        border: 1px solid #045da0;
+        border-radius: 50%;
+        color: #045da0;
+        box-sizing: border-box; }
+        .solutions-list-item-link-icon-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          border: 3px solid white;
+          border-radius: 50%;
+          box-sizing: border-box; }
+          .solutions-list-item-link-icon-inner:before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center; }
+    .solutions-list-item:hover .solutions-list-item-link {
+      top: -5px; }
+      .solutions-list-item:hover .solutions-list-item-link-title {
+        color: #045da0; }
+  @media screen and (min-width: 1170px) {
+    .solutions-list {
+      width: 66.3716814159%;
+      padding: 0 8%; } }
+  @media screen and (max-width: 1000px) {
+    .solutions-list {
+      width: 60.1769911504%;
+      padding: 0 4%; } }
+  @media screen and (max-width: 900px) {
+    .solutions-list {
+      width: 90%;
+      max-width: 600px;
+      padding: 0;
+      float: none;
+      clear: both;
+      margin: 0 auto;
+      margin-top: 60px; }
+      .solutions-list .solutions-list-item-link {
+        padding: 0 10%; } }
+  @media screen and (max-width: 620px) {
+    .solutions-list .solutions-list-item-link-title {
+      left: 40%;
+      left: 97px;
+      font-size: 18px; } }
+  @media screen and (max-width: 520px) {
+    .solutions-list .solutions-list-item {
+      float: none;
+      clear: both;
+      width: 300px;
+      margin: 0 auto 35px; }
+      .solutions-list .solutions-list-item-link-title {
+        left: 106px; } }
+
+.icon-solution-bu:before {
+  font-size: 46px;
+  bottom: -6px; }
+
+.icon-solution-pbx:before {
+  font-size: 40px;
+  top: 6px;
+  left: 3px; }
+
+.icon-solution-sip:before {
+  font-size: 44px;
+  top: 4px;
+  left: 11px; }
+
+.icon-solution-wc:before {
+  font-size: 63px;
+  bottom: -6px;
+  left: -6px; }
+
+.icon-solution-re:before {
+  font-size: 40px;
+  top: 7px; }
+
+.icon-solution-cc:before {
+  font-size: 57px;
+  bottom: -11px;
+  left: -3px; }
 
 /* ==========================================================================
  * Body
