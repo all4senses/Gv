@@ -6699,58 +6699,35 @@ function gv_misc_testPage_iframe_sip() {
   
 }
 
+
+/*
 function gv_misc_imagemagick_save_alter($image, $context) {
 // dpm($image);
 // dpm($context);
-// 
-// global $user;
-// 
-// if ($image->info['extension'] == 'png') {
-//   // If it is png, find out if it's indexed or true color image
-//   
-//   // Load image resource via GD lib, to make it possible to use GD functions.
-//   image_gd_load($image);
-//   dpm($image);
-//   
-//   if ($is_indexed_png = imagecolorstotal($image->resource)) {
-//     // $is_indexed_png = number of color in indexed png image, or 0 for TRUECOLOR image 
-//     // if it's indexed coolors png, we have to add png8: to the file name
-//   }
-//   
-//   
-//   
-//   
-//   
-//
-//
-//   // 
-//    //$image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '! -depth 8';
-//  }
-////  else 
-////    {
-////    $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '!';
-////  }
-// 
-// //
 }
+*/
 
+/*
+ * Work around for fixing problem with imagemagic, 
+ * where it by default converts png images of any colors sets (indexed or truecolor) with any depth to 16bit rgb image, that increasing the image size in several times.
+*/
 function gv_misc_imagemagick_arguments_alter(&$args, $context) {
- dpm($args);
- dpm($context);
+ //dpm($args);
+ //dpm($context);
  
  
  global $user;
- if ($user->uid == 1) {
+ if ($user->uid == 1) 
+ {
    
       $ext = explode('.', $context['source_original']);
       $ext = $ext[count($ext) - 1];
-      dpm('ext = ' . $ext);
+      //dpm('ext = ' . $ext);
+      
       if ($ext == 'png') {
               // If it is png, find out if it's indexed or true color image
               
-              ////$args[] = '-depth 8';
-        
-        //dpm($args);
+              $args[] = '-depth 8';
         
               $test_image = new stdClass();
               $test_image->toolkit = 'gd';
@@ -6760,39 +6737,22 @@ function gv_misc_imagemagick_arguments_alter(&$args, $context) {
 
               if (is_array($test_image->info)) {
 
-
-        //        function image_gd_load(stdClass $image) {
-        //  $extension = str_replace('jpg', 'jpeg', $image->info['extension']);
-        //  $function = 'imagecreatefrom' . $extension;
-        //  return (function_exists($function) && $image->resource = $function($image->source));
-        //}
-
                 // Load image resource via GD lib, to make it possible to use GD functions.
                 image_gd_load($test_image);
-        //        dpm($test_image);
-
-
 
                 if ($is_indexed_png = imagecolorstotal($test_image->resource)) {
                   // $is_indexed_png = number of color in indexed png image, or 0 for TRUECOLOR image 
                   // if it's indexed coolors png, we have to add png8: to the file name
-                  ////$context['destination_format'] = 'png8';
+                  $context['destination_format'] = 'png8';
                 }
 
 
               } // End of if (isset($test_image->info) && is_array($test_image->info)) {
-
       
       } // End of // End of if ($ext == 'png') {
         
-      
-     
- 
  } // End of if ($user->uid == 1) {
- 
-// if ($image->info['extension'] == 'png') {
-//    //$image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '! -depth 8';
-//  }
+
 }
 
 
