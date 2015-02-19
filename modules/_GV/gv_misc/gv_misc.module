@@ -6776,7 +6776,7 @@ function gv_misc_imagemagick_arguments_alter(&$args, $context) {
                 if ($is_indexed_png = imagecolorstotal($test_image->resource)) {
                   // $is_indexed_png = number of color in indexed png image, or 0 for TRUECOLOR image 
                   // if it's indexed coolors png, we have to add png8: to the file name
-                  $context['destination_format'] = 'png8';
+                  ////$context['destination_format'] = 'png8';
                 }
 
 
