@@ -476,9 +476,9 @@ function theme_nice_menus_tree($variables) {
   // Assume depth == 0 by default, overriden if mlid is specified.
   $parent_depth = 0;
 
-  // For custom $menus and menus built all the way from the top-level we.
-  // don't need to "create" the specific sub-menu and we need to get the title.
-  // from the $menu_name since there is no "parent item" array.
+  // For custom $menus and menus built all the way from the top-level we
+  // don't need to "create" the specific sub-menu and we need to get the title
+  // from the $menu_name since there is no "parent item" array
   // Create the specific menu if we have a mlid.
   if (!empty($mlid)) {
     // Load the parent menu item.
@@ -577,8 +577,8 @@ function theme_nice_menus_build($variables) {
         if ($menu_item['link']['depth'] <= $depth || $depth == -1) {
           $children = array(
             '#theme' => 'nice_menus_build',
-            '#prefix' => '<ul class="solution-nav">',
-            '#suffix' => '</ul>',
+            '#prefix' => '<div class="solution-nav"><ul class="solution-nav-wrap">',
+            '#suffix' => '</ul></div>',
             '#menu' => $menu_item['below'],
             '#depth' => $depth,
             '#trail' => $trail,
@@ -650,7 +650,8 @@ function theme_nice_menus_build($variables) {
           }
         }
 
-        $output .= theme('menu_link', $variables);
+        // $output .= theme('menu_link', $variables);
+        $output .= gv_sky_theme_links($variables);
       }
     }
   }
