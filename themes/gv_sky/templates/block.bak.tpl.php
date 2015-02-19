@@ -1,5 +1,3 @@
-
-
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
     <?php $h_tag = in_array($block->region, array('content', 'content_wide', 'above_footer')) ? 'h2' : 'h3'; ?>
