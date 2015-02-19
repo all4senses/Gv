@@ -202,15 +202,8 @@ function _imagemagick_check_path($file) {
  */
 
 function image_imagemagick_resize(stdClass $image, $width, $height) {
-  // a4s patch
-//  dpm($image);
-//  if ($image->info['extension'] == 'png') {
-//    $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '! -depth 8';
-//  }
-//  else 
-    {
-    $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '!';
-  }
+
+  $image->ops[] = '-resize ' . (int) $width . 'x' . (int) $height . '!';
   $image->info['width'] = $width;
   $image->info['height'] = $height;
   //image_gd_resize();
@@ -399,8 +392,8 @@ function _imagemagick_convert($source, $destination, $args) {
   drupal_alter('imagemagick_arguments', $args, $context);
 
   // a4s patch
-  dpm($args);
-  dpm($context);
+  //dpm($args);
+  //dpm($context);
   
   // If the format of the derivative image was changed, concatenate the new
   // image format and the destination path, delimited by a colon.
