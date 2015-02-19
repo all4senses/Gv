@@ -399,6 +399,7 @@ function _imagemagick_convert($source, $destination, $args) {
   drupal_alter('imagemagick_arguments', $args, $context);
 
   // a4s patch
+  dpm($args);
   dpm($context);
   
   // If the format of the derivative image was changed, concatenate the new
