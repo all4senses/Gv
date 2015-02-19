@@ -618,8 +618,8 @@ function theme_nice_menus_build($variables) {
             $variables['element']['#attributes']['class'][] = ' active-trail';
           }
         }
-
-        $output .= theme('menu_link', $variables);
+        // $output .= theme('menu_link', $variables);
+        $output .= gv_sky_theme_links($variables);
       }
       else {
         $element = array(

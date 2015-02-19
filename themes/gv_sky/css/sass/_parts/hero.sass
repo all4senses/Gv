@@ -1,6 +1,19 @@
 .hero-header 
 	height: 504px
 	background-image: url(../images/img-hero.jpg)	
+	background-position: 80% 50%
+	background-size: cover
+
+	+m(768)
+		height: 404px
+
+	+m(620) 
+		background-image: url(../images/img-hero-m.jpg)	
+
+	+m(450)
+		height: 375px
+
+
 
 	h1
 		position: absolute
@@ -10,6 +23,9 @@
 
 
 
+
+
+// MIXIN MIXIN MIXIN MIXIN 
 =hero-title($pos)
 	position: relative
 	text-align: $pos
@@ -20,6 +36,7 @@
 		font-weight: 300
 		font-size: 42px
 
+
 	&-desc
 		padding-top: 15px
 		font-size: 19px
@@ -28,13 +45,32 @@
 		opacity: .7
 
 
+	+m(768)
+		&-heading
+			font-size: 36px
+
+		&-desc
+			font-size: 17px
+			line-height: 23px
+
+
+	+m(450)
+		&-heading
+			font-size: 30px
+
+		&-desc
+			font-size: 16px
+			line-height: 21px
+
+
+
 
 
 .hero-title
 	+hero-title(center)
 
 	&-heading
-		width: 100%
+		width: 90%
 		max-width: 750px
 		+center
 
