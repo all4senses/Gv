@@ -7,16 +7,45 @@
 		top: 700px
 		z-index: -1		// TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP 
 
+
+
+
 =hero-title($pos)
+	position: relative
 	text-align: $pos
 	color: white
+	+valign
 
 	&-heading 
 		font-weight: 300
 		font-size: 42px
 
+	&-desc
+		padding-top: 15px
+		font-size: 19px
+		line-height: 25px
+		font-weight: 500
+		opacity: .7
+
+
+
+
 .hero-title
 	+hero-title(center)
-	
+
+	&-heading
+		width: 100%
+		max-width: 750px
+		+center
+
+
+		&-strong
+			font-weight: 600
+
+
+	&-desc
+		width: 90%
+		max-width: 540px
+		+center
 
 	

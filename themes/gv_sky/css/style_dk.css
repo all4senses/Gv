@@ -578,9 +578,73 @@ th {
 
 .solution-nav {
   height: 0;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #045da0;
+  box-sizing: border-box;
+  transition: height 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86); }
+  @media screen and (min-width: 1400px) {
+    .solution-nav {
+      padding: 0 60px; } }
   .solution-nav.open {
     height: 185px; }
+  .solution-nav .main-menu-item {
+    position: relative;
+    float: left;
+    width: 14.2857142857%;
+    height: 100%;
+    background-color: #045da0;
+    text-align: center;
+    transition: background-color 0.15s;
+    cursor: pointer; }
+    .solution-nav .main-menu-item:hover {
+      background-color: #023e6b; }
+    .solution-nav .main-menu-item a {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 45px;
+      display: block;
+      font-size: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: white;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
+      .solution-nav .main-menu-item a:before {
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        bottom: 60px;
+        font-weight: 400;
+        line-height: 0;
+        font-family: gvcons;
+        text-transform: none; }
+      .solution-nav .main-menu-item a[href="/business"]:before {
+        content: "w";
+        font-size: 88px; }
+      .solution-nav .main-menu-item a[href="/hosted-pbx"]:before {
+        content: "Y";
+        font-size: 59px; }
+      .solution-nav .main-menu-item a[href="/fax"]:before {
+        content: "E";
+        font-size: 63px; }
+      .solution-nav .main-menu-item a[href="/residential"]:before {
+        content: "7";
+        font-size: 62px; }
+      .solution-nav .main-menu-item a[href="/sip-trunking"]:before {
+        content: "2";
+        font-size: 66px; }
+      .solution-nav .main-menu-item a[href="/cloud-contact-center"]:before {
+        content: "y";
+        font-size: 82px; }
+      .solution-nav .main-menu-item a[href="/web-conferencing"]:before {
+        content: "L";
+        font-size: 99px; }
 
 .hero-header {
   height: 504px;
@@ -591,11 +655,32 @@ th {
     z-index: -1; }
 
 .hero-title {
+  position: relative;
   text-align: center;
-  color: white; }
+  color: white;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%); }
   .hero-title-heading {
     font-weight: 300;
     font-size: 42px; }
+  .hero-title-desc {
+    padding-top: 15px;
+    font-size: 19px;
+    line-height: 25px;
+    font-weight: 500;
+    opacity: 0.7; }
+  .hero-title-heading {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto; }
+    .hero-title-heading-strong {
+      font-weight: 600; }
+  .hero-title-desc {
+    width: 90%;
+    max-width: 540px;
+    margin: 0 auto; }
 
 /* ==========================================================================
  * Body
