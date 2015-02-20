@@ -13,7 +13,12 @@
   
   global $user;
   if ($user->uid == 1) {
-    dpm($content);
+    
+    if ($page) {
+      dpm($content);
+      dpm($node);
+    }
+    
     gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data);
   }
   
