@@ -3,11 +3,17 @@
   $class_thumb_presented = NULL;
   $return = FALSE;
   
-  //dpm(time());
+  dpm(time());
   
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
-  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309); 
+  if ($page) {
+    $update_timestamp = 1421703309; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
+  }
+  else {
+    $update_timestamp = 1421703309;
+  }
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, $update_timestamp); 
   // $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1424424340); // 1424424340 - update fixing huge images thumbs with IM default settings, https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
   
   
@@ -15,11 +21,7 @@
   if ($user->uid == 1) {
     
     if ($page) {
-      //dpm($content);
-      //dpm($node);
-      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data)) 
-      {
-        //dpm($updated_body);
+      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data)) {
         $content['body'][0]['#markup'] = check_markup($updated_body, 'full_html'/*$format_id = NULL, $langcode = '', $cache = FALSE*/); //$node->body[0]['value'];
       }
     }
