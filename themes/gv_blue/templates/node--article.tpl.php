@@ -7,7 +7,9 @@
   
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
-  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1424424340); // 1424424340 - update fixing huge images thumbs with IM default settings, https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309); 
+  // $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1424424340); // 1424424340 - update fixing huge images thumbs with IM default settings, https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
+  
   
   global $user;
   if ($user->uid == 1) {
