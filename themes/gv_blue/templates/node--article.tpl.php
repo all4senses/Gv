@@ -22,7 +22,7 @@
   if ($user->uid == 1) {
     
     if ($page) {
-      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, 1424468002, $extra_data)) {
+      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data)) {
         $content['body'][0]['#markup'] = check_markup($updated_body, 'full_html'/*$format_id = NULL, $langcode = '', $cache = FALSE*/); //$node->body[0]['value'];
       }
     }
