@@ -3,7 +3,7 @@
   $class_thumb_presented = NULL;
   $return = FALSE;
   
-  dpm(time());
+  //dpm(time());
   
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
@@ -15,9 +15,12 @@
   if ($user->uid == 1) {
     
     if ($page) {
-      dpm($content);
-      dpm($node);
-      gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data);
+      //dpm($content);
+      //dpm($node);
+      if(gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data)) {
+        dpm($node->body[0]);
+        $content['body'][0]['#markup'] = $node->body[0]['value'];
+      }
     }
     
     
