@@ -15407,7 +15407,7 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
     // Find out if there is already video snippet(s) added
     if (!gv_misc_isVideoRichSnippetAdded($current_body_full_markup)) {
       
-      $new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($current_body_full_markup);
+      $new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($current_body_full_markup, TRUE); // TRUE for centering the div
       if ($current_body_full_markup != $new_body_full_markup) {
         dpm('Video snippet was added.');
         // if there are any video tokens or iframe, add snippets to them
