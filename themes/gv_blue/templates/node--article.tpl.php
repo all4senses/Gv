@@ -13,7 +13,8 @@
   
   global $user;
   if ($user->uid == 1) {
-    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, 1421703309);
+    dpm($content);
+    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data);
   }
   
   //dpm($extra_data);
@@ -412,7 +413,7 @@
             //echo $node->body['und'][0]['value'];
           }
           
-          
+          //echo $node->body['und'][0]['value'];
           echo render($content);
         ?>
       </div>
