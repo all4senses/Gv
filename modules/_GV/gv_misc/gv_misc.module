@@ -6710,6 +6710,7 @@ function gv_misc_imagemagick_save_alter($image, $context) {
 /*
  * Work around for fixing problem with imagemagic, 
  * where it by default converts png images of any colors sets (indexed or truecolor) with any depth to 16bit rgb image, that increasing the image size in several times.
+ * https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
  * http://www.imagemagick.org/script/command-line-options.php?#depth
  * http://www.imagemagick.org/Usage/formats/#png_formats
 */
