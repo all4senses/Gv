@@ -15392,7 +15392,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
 function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, $update_timestamp = NULL, $extra_data = NULL) {
   //dpm($node);
   //return;
-  $current_body_full_markup = $node->body['und'][0]['value'];
+  $current_body_full_markup = @$node->body['und'][0]['value'];
   
   $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
   
