@@ -15412,7 +15412,7 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
         dpm('Video snippet was added.');
         // if there are any video tokens or iframe, add snippets to them
         // and update the body field
-        gv_misc_fieldBodyUpdate($node->nid, $node->body['und'][0]['value']);
+        gv_misc_fieldBodyUpdate($node->nid, $new_body_full_markup);
         return $new_body_full_markup; 
       }
       else {
