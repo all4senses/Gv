@@ -17,7 +17,8 @@
     if ($page) {
       //dpm($content);
       //dpm($node);
-      if(gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data)) {
+      //if(gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data)) 
+      {
         dpm($node->body[0]);
         $content['body'][0]['#markup'] = $node->body[0]['value'];
       }
