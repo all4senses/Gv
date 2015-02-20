@@ -16,10 +16,11 @@
     
     if ($page) {
       dpm($content);
-      dpm($node);
+      //dpm($node);
+      gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data);
     }
     
-    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, NULL, $extra_data);
+    
   }
   
   //dpm($extra_data);
