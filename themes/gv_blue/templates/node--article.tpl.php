@@ -3,7 +3,7 @@
   $class_thumb_presented = NULL;
   $return = FALSE;
   
-  dpm(time());
+  //dpm(time());
   
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
