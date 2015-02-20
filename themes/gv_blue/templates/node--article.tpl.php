@@ -8,6 +8,7 @@
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
   if ($page) {
+    // 1424468002
     $update_timestamp = 1421703309; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
   }
   else {
