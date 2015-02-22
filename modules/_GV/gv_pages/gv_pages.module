@@ -6306,7 +6306,7 @@ function gv_pages_validateForm_phone(&$form, &$form_state) {
   
   $body_without_video_token = $form_state['values']['body']['und'][0]['value'];
   if (preg_match('/\[video:.*v=(.*)\]/isU', $body_without_video_token, $matches)) {
-    $body_without_video_token = preg_replace_all('|\[video:.*(http.*)\]|isU', '', $body_without_video_token);
+    $body_without_video_token = preg_replace('|\[video:.*(http.*)\]|isU', '', $body_without_video_token);
   }
   
   $body_without_video_token = strip_tags($body_without_video_token);
