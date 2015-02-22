@@ -3,11 +3,12 @@
   $class_thumb_presented = NULL;
   $return = FALSE;
   
-  //dpm(time());
+  
   
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
   if ($page) {
+    dpm(time());
     // 1424468002 - newer date
     $update_timestamp = 1424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
   }
