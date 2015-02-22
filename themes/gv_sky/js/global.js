@@ -23,8 +23,11 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 		$this.data('clicks', !clicks);
 	});
 
-	$$('.hero-header').on('click',function(){
-			$$('.solution-nav').removeClass('open');
+	$$('.hero-header').on('click, touchstart',function(){
+		var clicks = $$('.main-menu-item.first').data('clicks');
+
+		$$('.solution-nav').removeClass('open');
+		$$('.main-menu-item.first').data('clicks', !clicks);
 	});
 
 // }

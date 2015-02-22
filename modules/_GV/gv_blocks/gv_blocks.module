@@ -1510,61 +1510,99 @@ function gv_blocks_getBlockFromViews($delta) {
  * Block with Rotated latest posts.
  */
 function gv_blocks_getLatestPostsRotated() {
-  
-
-  
   $query = db_select('node', 'n');
-  $query->fields('n', array('nid'));
-  $query->condition('n.type', array('blog_post', 'phone'), 'IN');
+  
+  $query->condition('n.type', 'blog_post');
   $query->condition('n.status', 1);
+  $query->leftJoin('field_data_field_extra_data', 'd', 'd.entity_id = n.nid');
   $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
   $query->condition('i.field_invisible_value', 1, '!='); 
+  $query->leftJoin('field_data_field_main_image', 'p', 'p.entity_id = n.nid');
+  $query->isNotNull('p.field_main_image_value');
+  $query->condition('p.field_main_image_value', 'N;', '!=');
+  $query->fields('p', array('field_main_image_value'));
+  $query->fields('n', array('nid', 'title', 'created'));
+  $query->fields('d', array('field_extra_data_value'));
   $query->orderBy('n.created', 'DESC');
+  
   $query->range(0, 4);
   
+  $posts = $query->execute()->fetchAllAssoc('nid');
   
-  $reviews = $query->execute()->fetchCol();
-    
+  
   $ui_tabs_nav = '';
   $fragments = '';
   
-  // 4 pages
-  //for($i = 0; $i < 7; $i += 2) {
-  // 3 pages
-  //for($i = 0; $i < 5; $i += 2) {
-  
-  for($i = 0; $i < 3; $i += 3) {  
-      //$nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1]));
-      $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2]));
-      $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
-      $count = $class = NULL;
-      foreach ($node_views['nodes'] as $key => $value) {
+  function dk_post_title($title){
+    $temp = strlen($title);
 
-        if (!$count) {
-          $class = 'first';
-        }
-        elseif ($count == 2){
-          $class = 'last';
-        }
-        else {
-          $class = 'middle';
-        }
+    if ($temp > 60) {
+      return substr($title, 0, 50) . '...';
+    } else {
+      return $title;
+    }
+  };
 
-        $node_views['nodes'][$key]['#prefix'] = '<div class="section ' . $class . '">';
-        $node_views['nodes'][$key]['#suffix'] = '</div>';
-        
-        if ($count == 2){
-          break;
-        }
-        
-        $count++;
-      }
-      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment3-' . $i . '"><a href="#fragment3-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment3-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . drupal_render($node_views) . '</div></div>';
+  $i = 0;
+  foreach ($posts as $nid => $post) {
+
+      $extra_data = unserialize($post->field_extra_data_value);
+      $main_image_url = $extra_data['main_image']['src_beautify'];
+      $date = date('M\ \<\/\s\p\a\n\>\<\s\p\a\n\>d\t\h\,\<\/\s\p\a\n\>\ Y', $post->created);
+      $content = substr($extra_data['teaser_block'], 0, 108) . '...';
+      $clean_title = str_replace('"', '`', $post->title);
+      $post_title = dk_post_title($post->title);
+      $item_path = 'node/' . $post->nid;
+      $link = check_plain(url($item_path));
+
+      $fragments .= '<li class="latest-posts-item"><a href="' . $link . '" class="latest-posts-item-img"><img class="latest-posts-item-img-actual" width="304" height="176" src="' . $main_image_url . '" alt="' . $clean_title . '" /></a><div class="latest-posts-item-date"><div class="icon-calendar"></div>' . $date . '</div><h4 class="latest-posts-item-title"><a href="' . $link . '" class="latest-posts-item-title-link">' . $post_title . '</a></h4><p class="latest-posts-item-content">' . $content . '</p></li>';
+      $i++;
   }
-  return '<div id="p-rotator-wrapper"><div id="prev3" class="button">Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next3" class="button">Next</div></div>'
-          . l('View All', 'blog', array('attributes' => array('class' => array('view-all'))))
-        ;  
+
+  $out = '<section class="section four posts"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></div></section>';  
+  return $out;
+  // $out = '<div id="p-rotator-wrapper"><div id="prev-wrapper" class="button"></div><div id="prev" >Prev</div><div id="p-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next-wrapper" class="button"></div><div id="next">Next</div></div>'
+  //       ;
+  
+  
+  // return $out;
+
+
+  // $query = db_select('node', 'n');
+  // $query->fields('n', array('nid'));
+  // $query->condition('n.type', array('blog_post', 'phone'), 'IN');
+  // $query->condition('n.status', 1);
+  // $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+  // $query->condition('i.field_invisible_value', 1, '!='); 
+  // $query->orderBy('n.created', 'DESC');
+  // $query->range(0, 4);
+  
+  
+  // $reviews = $query->execute()->fetchCol();
+    
+  // $ui_tabs_nav = '';
+  // $fragments = '';
+
+  //   $i = 0; 
+  //     $nodes = node_load_multiple(array($reviews[$i], $reviews[$i+1], $reviews[$i+2], $reviews[$i+3]));
+  //     $node_views = node_view_multiple($nodes, 'home_teaser_rotated');
+  //     $count = $class = NULL;
+  //     foreach ($node_views['nodes'] as $key => $value) {
+
+
+  //       $node_views['nodes'][$key]['#prefix'] = '<li class="latest-posts-item">';
+  //       $node_views['nodes'][$key]['#suffix'] = '</li>';
+        
+  //       if ($count == 2){
+  //         break;
+  //       }
+        
+  //       $count++;
+  //     }
+  //     $fragments .= drupal_render($node_views);
+
+  // $out = '<section class="section.four.posts"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></section>';  
+  // return $out;
 }
 
 
@@ -1689,6 +1727,84 @@ function gv_blocks_getHomeServiceTypes() {
   } // End of foreach ($service_types_home as $service_type => $data) {
 
   $out .= '</ul></div></section>';
+  $out .= '
+  <section class="section two steps">
+    <div class="section-title section-title__center">
+      <h2 class="section-title-heading">How Does GetVoIP Work?</h2>
+      <p class="section-title-desc">Good question! GetVoIP is <span class="section-title-desc-highlight">100% free</span> for users. We get paid from carriers only when we find you a good match.</p>
+    </div>
+    <div class="section-wrap">
+      <div class="step one">
+        <div class="step-icon">
+          <div class="step-icon-primary icon-step-browse"></div>
+          <div class="step-icon-secondary icon-step-browse-2"></div>
+        </div>
+        <h5 class="step-title">Browse &amp; Compare</h5>
+        <p class="step-desc">Our experts analyze solutions and make the findings easily digestible.</p>
+      </div>
+      <div class="step two">
+        <div class="step-icon">
+          <div class="step-icon-primary icon-step-advice"></div>
+          <div class="step-icon-secondary icon-step-advice-2"></div>
+        </div>
+        <h5 class="step-title">Get Unbiased Advice</h5>
+        <p class="step-desc">Access our trusted buyer\'s guides and user reviews to evaluate all options.</p>
+      </div>
+      <div class="step three">
+        <div class="step-icon">
+          <div class="step-icon-primary icon-step-winner"></div>
+          <div class="step-icon-secondary icon-step-winner-2"></div>
+        </div>
+        <h5 class="step-title">Find a Winner &amp; Book</h5>
+        <p class="step-desc">Narrow recommendations to your specific needs. Instantly review and signup. </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section three testimonials">
+    <div class="section-title section-title__center">
+      <h2 class="section-title-heading">Over <span class="section-title-heading-highlight">1 Million</span> Happy Businesses Served.</h2>
+      <p class="section-title-desc">Here\'s what a few of them have to say about GetVoIP.</p>
+    </div>
+    <div class="section-wrap testimonials-wrap">
+      <div class="testimonial">
+        <div class="testimonial-wrap">
+          <div class="testimonial-quote">
+            <p class="testimonial-quote-text">GetVoIP\'s comparison guides made it easy to make an informed and cost-effective decision.</p>
+          </div>
+          <div class="testimonial-person">
+            <div class="testimonial-person-img">
+              <div class="testimonial-person-img-wrap">
+                <img src="/sites/all/themes/gv_sky/images/img-richard.jpg" width="78" height="78" alt="Richard Janes" class="testimonial-person-img-image">
+              </div>
+            </div>
+            <div class="testimonial-person-details">
+              <div class="testimonial-person-details-name">Richard Janes</div>
+              <div class="testimonial-person-details-company">Fanology Social, Inc.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-wrap">
+          <div class="testimonial-quote">
+            <p class="testimonial-quote-text">I had no idea where to start looking. GetVoIP found exactly what we needed in under 5 mins.</p>
+          </div>
+          <div class="testimonial-person">
+            <div class="testimonial-person-img">
+              <div class="testimonial-person-img-wrap">
+                <img src="/sites/all/themes/gv_sky/images/img-mark.jpg" width="78" height="78" alt="Richard Janes" class="testimonial-person-img-image">
+              </div>
+            </div>
+            <div class="testimonial-person-details">
+              <div class="testimonial-person-details-name">Mark Crosbie</div>
+              <div class="testimonial-person-details-company">Flux Recruitment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>';
   
   return $out;
 }
