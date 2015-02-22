@@ -15401,9 +15401,9 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if ($current_body_full_markup && (!$update_timestamp || @$extra_data['update_video_timestamp'] < $update_timestamp)) {
     // Update $extra_data['update_timestamp'] in the db so the next time it won't be tested again.
-    dpm($extra_data);
+    //dpm($extra_data);
     $extra_data['update_video_timestamp'] = time();
-    dpm($extra_data);
+    //dpm($extra_data);
     gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
   
     // Find out if there is already video snippet(s) added
