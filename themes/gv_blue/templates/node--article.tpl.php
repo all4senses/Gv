@@ -8,7 +8,7 @@
   // The last var - time, if it's bigger thanarticles update time, the article will be updated
   // Used for update thumbnails, vars. etc
   if ($page) {
-    dpm(time());
+    //dpm(time());
     // 1424468002 - newer date
     $update_timestamp = 1424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
   }
@@ -25,7 +25,7 @@
   {
     
     if ($page) {
-      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, /*$update_timestamp*/-1, $extra_data)) {
+      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, /*$update_timestamp*/1424633514, $extra_data)) {
         $content['body'][0]['#markup'] = check_markup($updated_body, 'full_html'/*$format_id = NULL, $langcode = '', $cache = FALSE*/); //$node->body[0]['value'];
       }
     }
