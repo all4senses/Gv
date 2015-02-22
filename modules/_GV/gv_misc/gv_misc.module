@@ -15340,9 +15340,9 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         dpm('No rich snippet added to the [video:...] token with the url ' . $match_url . ', because a video provider wasn\'t  identified');
       }
       
-      
-    }
-  }
+    } // End of foreach ($matches_all[1] as $key => $match_url) {
+    
+  } // End of if (preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
   
   
   
