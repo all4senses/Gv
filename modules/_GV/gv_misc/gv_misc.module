@@ -15385,9 +15385,6 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
                   . $match
               . '</div>', $body_full_markup);
         
-        
-        $temp[$match] = $body_full_markup;
-        dpm($temp);
         $added_snippet = TRUE;
       }
       else {
@@ -15609,7 +15606,7 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
   
   if ($provider == 'YouTube') {
     $url = 'http://img.youtube.com/vi/' . $video_id . '/0.jpg'; //'/maxresdefault.jpg';
-    dpm('$url thumb = ' . $url);
+    //dpm('$url thumb = ' . $url);
   }
   elseif ($provider == 'Wistia') {
     if ($thumb_url) {
@@ -15632,7 +15629,7 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
       // Doubled request from Wistia to get correct altered sized thumbnail.
       gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs);
     }
-    dpm('$file_local = ' . $file_local);
+    //dpm('$file_local = ' . $file_local);
     return $file_local;
   }
   else {
