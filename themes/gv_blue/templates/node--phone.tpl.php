@@ -370,30 +370,48 @@ if($view_mode == 'home_teaser_rotated') {
           <?php elseif ($view_mode == 'teaser'):  ?> <!-- Else of if ($page): -->
              
               <?php
-                $teaser = strip_tags($node->body['und'][0]['value']);
-                $teaser_chars = 450;
-                $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
-                $last_pos = strrpos($teaser, ' ');
-                $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
-                
-                gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
-                echo $main_image_html_beautify;
+                if (!empty($node->extra_data['main_image_html_beautify'])) {
+                  echo $node->extra_data['main_image_html_beautify'];
+                }
+                else {
+                  gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
+                  echo $main_image_html_beautify;
+                }
               ?>
                 <div class="teaser-content">
-                     <?php echo $teaser;?>
+                     <?php 
+                     
+                     if (!empty($node->extra_data['teaser'])) {
+                        echo $node->extra_data['teaser'];
+                     }
+                     else {
+                        $teaser = strip_tags($node->body['und'][0]['value']);
+                        $teaser_chars = 450;
+                        $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
+                        $last_pos = strrpos($teaser, ' ');
+                        $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+                        echo $teaser;
+                     }
+                     
+                     ?>
                 </div>
           
           <?php elseif ($view_mode == 'side_block_teaser'):  ?> <!-- Else of if ($page): -->
              
-              <?php
-                $teaser = strip_tags($node->body['und'][0]['value']);
-                $teaser_chars = 145;
-                $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
-                $last_pos = strrpos($teaser, ' ');
-                $teaser = substr_replace ($teaser, '... ', $last_pos);
-              ?>
                 <div class="content teaser">
-                     <?php echo $teaser;?>
+                     <?php 
+                        if (!empty($node->extra_data['side_block_teaser'])) {
+                          echo $node->extra_data['side_block_teaser'];
+                        }
+                        else {
+                          $teaser = strip_tags($node->body['und'][0]['value']);
+                          $teaser_chars = 145;
+                          $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
+                          $last_pos = strrpos($teaser, ' ');
+                          $teaser = substr_replace ($teaser, '... ', $last_pos);
+                          echo $teaser;
+                        }
+                     ?>
                 </div>
                       
           <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Second Elseif of if ($page): -->
