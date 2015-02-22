@@ -15401,7 +15401,9 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
   if ($current_body_full_markup && (!$update_timestamp || @$extra_data['update_video_timestamp'] < $update_timestamp)) {
     // Update $extra_data['update_timestamp'] in the db so the next time it won't be tested again.
+    dpm($extra_data);
     $extra_data['update_video_timestamp'] = time();
+    dpm($extra_data);
     gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
   
     // Find out if there is already video snippet(s) added
@@ -15409,10 +15411,11 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
       
       $new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($current_body_full_markup, TRUE); // TRUE for centering the div
       if ($current_body_full_markup != $new_body_full_markup) {
-        dpm('Video snippet was added.');
+        
         // if there are any video tokens or iframe, add snippets to them
         // and update the body field
         gv_misc_fieldBodyUpdate($node->nid, $new_body_full_markup);
+        dpm('Video snippet was added.');
         return $new_body_full_markup; 
       }
       else {
