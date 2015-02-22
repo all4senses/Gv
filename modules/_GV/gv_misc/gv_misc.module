@@ -15407,12 +15407,13 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
     //dpm($a);
   }
   
-  if ($added_snippet) {
+//  if ($added_snippet) 
+//  {
     return $body_full_markup;
-  }
-  else {
-    return FALSE;
-  }
+//  }
+//  else {
+//    return FALSE;
+//  }
 }
 
 
@@ -15439,8 +15440,8 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
     // Find out if there is already video snippet(s) added
     if (!gv_misc_isVideoRichSnippetAdded($current_body_full_markup)) {
       
-      if ($new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($current_body_full_markup, TRUE)) { // TRUE for centering the div
-      //if ($current_body_full_markup != $new_body_full_markup) {
+      $new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($current_body_full_markup, TRUE); // TRUE for centering the div
+      if ($current_body_full_markup != $new_body_full_markup) {
         
         // if there are any video tokens or iframe, add snippets to them
         // and update the body field
