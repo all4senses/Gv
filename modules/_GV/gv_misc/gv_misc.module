@@ -15227,7 +15227,7 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
               'thumbnail_src' => $thumbnail_src,
           );
 
-          dpm($snippetVideoData);
+          //dpm($snippetVideoData);
            
           //dpm($data_from);
           //dpm($data_from->entry->{'media$group'});
@@ -15359,7 +15359,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       dpm($match); 
           
       if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($matches[1][$key])) {
-        //dpm($snippetVideoData);
+        dpm($snippetVideoData);
         
         //$body_full_markup = preg_replace('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', 
         $body_full_markup = preg_replace('|' . $match . '|isU', 
@@ -15371,7 +15371,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
                   . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>'  
                 . $match 
             . '</div>', $body_full_markup);
-        
+        $temp[$match] = $body_full_markup;
+        dpm($temp);
         $added_snippet = TRUE;
       }
       else {
