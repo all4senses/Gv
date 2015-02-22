@@ -15362,6 +15362,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         dpm($snippetVideoData);
         
         //$body_full_markup = preg_replace('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', 
+        /*
         $body_full_markup = preg_replace('|' . $match . '|isU', 
               '<div class="gv-video-iframe' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
                   . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
@@ -15371,6 +15372,20 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
                   . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>'  
                 . $match 
             . '</div>', $body_full_markup);
+        */
+        
+        
+        $body_full_markup = str_replace($match, 
+                '<div class="gv-video' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
+                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
+                  . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
+                  . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
+                  . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
+                  . $match
+              . '</div>', $body_full_markup);
+        
+        
         $temp[$match] = $body_full_markup;
         dpm($temp);
         $added_snippet = TRUE;
