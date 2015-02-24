@@ -8683,9 +8683,9 @@ function theme_gv_misc_headerLinks($vars) {
     return NULL;
   }
 
-  $class = isset($vars['class']) ? $vars['class'] : 'header-links';
+  $class = isset($vars['class']) ? $vars['class'] : 'footer-social-links';
   $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
-  $out = '<ul class="' . $class . '">';
+  $out = '<ul class="footer-social-links">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
@@ -8693,10 +8693,10 @@ function theme_gv_misc_headerLinks($vars) {
     }
     
     if ($submenu['link']['link_title'] == 'GooglePlus') {
-      $out .= ($count ? $delimiter : '') . '<li>' . l($submenu['link']['link_title'], $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'], 'target' => '_blank', 'rel' => 'publisher' ))) . '</li>';
+      $out .= ($count ? $delimiter : '') . '<li class="footer-social-links-item">' . l($submenu['link']['link_title'], $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'], 'target' => '_blank', 'rel' => 'publisher' ))) . '</li>';
     }
     else {
-      $out .= ($count ? $delimiter : '') . '<li>' . l($submenu['link']['link_title'], $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'], 'target' => '_blank' ))) . '</li>';
+      $out .= ($count ? $delimiter : '') . '<li class="footer-social-links-item">' . l($submenu['link']['link_title'], $submenu['link']['href'], array('attributes' => array('class' => array($submenu['link']['link_title']), 'title' => $submenu['link']['options']['attributes']['title'], 'target' => '_blank' ))) . '</li>';
     }
     
     $count++;
