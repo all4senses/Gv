@@ -8716,8 +8716,8 @@ function theme_gv_misc_footerLinksPlain($vars) {
   }
   $level = isset($vars['level']) ? $vars['level'] : 0;
   $class = isset($vars['class']) ? $vars['class'] : 'om-links';
-  $delimiter = isset($vars['delimiter']) ? $vars['delimiter'] : '';
-  $out = '<span class="gv ' . $class . ' lvl-' . $level . '">';
+  $delimiter = isset($vars['delimiter']) ? '' : '';
+  $out = '<ul class="footer-nav">';
   $count = 0;
   foreach ($vars['submenu']['below'] as $submenu) {
     if (is_object($submenu)) {
@@ -8726,7 +8726,7 @@ function theme_gv_misc_footerLinksPlain($vars) {
     if (isset($submenu['link']['hidden']) && $submenu['link']['hidden']) {
       continue;
     }
-    $out .= ($count ? $delimiter : '') . '<span>';
+    $out .= ($count ? $delimiter : '') . '<li class="footer-nav-item">';
     if($level) {
       for ($i = 0; $i < $level; $i++ ) {
         $out .= '--';
@@ -8741,16 +8741,16 @@ function theme_gv_misc_footerLinksPlain($vars) {
       $out .= $title;
     }
     else {
-      $out .= l($title, $submenu['link']['href']);
+      $out .= '<a href="' . check_plain(url($submenu['link']['href'])) . '" class="footer-nav-item-link">' . $title . '</a>';
     }
-    $out .= '</span>';
+    $out .= '</li>';
 //    if (!empty($submenu['below'])) {
 //      // Recursion call.
 //      $out .= '<span>' . theme('gv_misc_footerLinksPlain', array('submenu' => $submenu, 'level' => ($level + 1), 'class' => $class, 'delimiter' => $delimiter )) . '</span>';
 //    }
     $count++;
   }
-  $out .= '</span>';
+  $out .= '</ul>';
   return $out;
 }
 
