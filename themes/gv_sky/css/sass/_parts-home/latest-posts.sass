@@ -1,0 +1,116 @@
+.section.four.posts
+	+section($subwhite)
+	padding: 105px 0
+
+	.section-title-button
+		+button(outline)
+		margin-top: 38px
+
+	+m(1065)
+		.section-title
+			float: none
+			
+			&-heading
+				+center
+				text-align: center
+
+			&-desc 
+				+center 
+				text-align: center
+				max-width: 490px
+				margin-top: 5px
+
+			&-button
+				+center(25px, 50px)
+				text-align: left
+				width: 160px
+				height: 44px
+
+.latest-posts
+	float: right
+	// width: perc(640px, 1130px)
+	width: 640px
+
+	&-item
+		width: perc(303px, 640px)
+		height: 368px
+		box-shadow: 0 0 3.8px 0.2px rgba(0, 0, 0, 0.2)
+		float: left
+		background-color: white
+		border-radius: 3px
+		overflow: hidden
+		box-sizing: border-box
+
+		&:nth-child(2n)
+			float: right
+
+		&:nth-child(3),
+		&:nth-child(4)
+			margin-top: perc(31px, 606px)
+
+		&-img
+			margin-bottom: 20px
+			display: block
+
+			&-actual
+				width: 100%
+				height: auto
+
+		&-date
+			padding: 0 16px
+			font-size: 12px
+			line-height: 18px
+			font-weight: 600
+			color: $grey-light
+
+		&-title
+			padding: 15px 16px 0
+			box-sizing: border-box
+			font-size: 18px
+			line-height: 24px
+			font-weight: 600
+
+			&-link
+				color: $grey-darker
+
+		&-content
+			padding: 8px 16px 0
+			box-sizing: border-box
+			font-size: 14px
+			line-height: 19px
+			font-weight: 500
+			color: $grey-darker
+
+	+m(1065)
+		float: none
+		clear: both
+		+center
+
+	+m(680)
+		width: 100%
+
+		&-item
+			float: none !important
+			width: 100%
+			max-width: 303px
+			+center
+			margin-top: 31px !important
+
+
+.icon-calendar
+	float: left
+	font-size: 14px
+	line-height: 1
+	margin-right: 7px
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+// MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN 
+=section($bg:white)
+	background-color: $bg
+	border-bottom: 1px solid $grey-lighter
+	box-sizing: border-box
+
+
+
+//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+=section-title($direc: center)
+	
+	@if $direc == left
+		float: left
+		box-sizing: border-box
+
+	@if $direc == center
+		text-align: center
+		box-sizing: border-box
+
+
+
+//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+=section-title-heading($direc: center, $size: 39px, $weight: 500, $color: $primary)
+	text-align: $direc
+	font-weight: $weight
+	font-size: $size
+	color: $color
+
+
+
+//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+=section-title-desc($direc: center, $size: 18px, $weight: 500, $color: $grey-darker)
+	font-size: $size
+	line-height: 25px
+	font-weight: $weight
+	color: $grey-darker
+
+
+
+
+//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+=button($style: outline, $color: $contrast, $width: 193px, $height: 53px)
+	
+	@if $style == outline 
+		position: relative
+		display: block
+		width: $width
+		height: $height
+		border: 2px solid $color
+		border-radius: 3px
+		color: $color
+		transition: all 0.2s
+		box-sizing: border-box
+
+		&-text
+			position: absolute
+			+valign
+			top: 51%
+			width: 100%
+			text-transform: uppercase
+			font-size: 14px
+			font-weight: 700
+			text-align: center
+
+		&:hover
+			background-color: $color
+			color: white
+
+
+	@if $style == solid
+		display: block
+
+
+.section	
+
+	&-wrap
+		width: 100%
+		max-width: 1170px
+		+center
+		padding: 0 20px
+		+clearfix
+		box-sizing: border-box
+
+
+	&-title__left
+		+section-title(left)
+
+		.section-title-heading
+			+section-title-heading(left)
+			&-inner
+				color: $contrast
+
+		.section-title-desc
+			+section-title-desc()
+			max-width: 350px
+			margin: 4px 0 0 2px
+
+
+		+m(1000)
+
+			.section-title-heading
+				font-size: 36px
+
+			.section-title-desc
+				max-width: 290px
+
+		+m(900)
+			float: none !important
+			clear: both
+			+center
+			text-align: center
+
+			.section-title-heading
+				font-size: 35px
+				padding-bottom: 4px
+
+			.section-title-desc
+				+center
+				width: 90%
+				max-width: 500px
+				font-size: 17px
+				line-height: 23px
+	
+
+	&-title__center
+		+section-title
+
+		.section-title-heading
+			width: 90%
+			+center
+
+		.section-title-desc
+			width: 90%
+			max-width: 550px
+			+center(5px,0)
+
+			.section-title-desc-highlight
+				font-weight: 600
+				color: $primary
+
