@@ -95,19 +95,16 @@
     
   
   
-  <footer id="footer" role="contentinfo" class="<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
-   <div id="footer-inside">
+  <footer class="footer" role="contentinfo" class="<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
+   <div class="footer-wrap">
 
     <?php
-        //if (!$hide_follow_us_links) 
-          {
-          echo '<div id="block-gv-blocks-follow-links">', gv_blocks_get_headerLinks(), '</div>';
-        }
-        echo render($page['footer']);
-        
-        echo '<div class="about">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website.</div>
-<div class="c"><div>Copyright</div> 2015 GetVoIP.com | All Rights Reserved</div>';
-        
+        echo '<div class="footer-wrap-left">' . render($page['footer']) . '</div>';
+
+        echo '<div class="footer-wrap-right">';
+        echo '<div class="footer-social-links">' . gv_blocks_get_headerLinks() . '</div>';
+        echo '<div class="copyright">© GetVoIP.com 2015 | All Right Reserved</div>';
+        echo '</div>';
     ?>
     
         <?php
