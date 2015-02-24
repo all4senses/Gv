@@ -2128,7 +2128,17 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
       break;
     
     case 'home':
-      $out = '<img src="/sites/all/themes/gv_blue/css/images/as-featured-in-home.jpg" alt="As Featured in..." />';
+      $out = '<section class="section five featured">
+                  <div class="featured-wrap">
+                    <div class="featured-title">Featured In:</div>
+                    <div class="featured-companies">
+                      <div class="featured-companies-item"><img src="/sites/all/themes/gv_sky/images/img-cm-binsider.png" alt="Featured In Business Insider" width="132" height="53" class="featured-companies-item-img binsider"></div>
+                      <div class="featured-companies-item"><img src="/sites/all/themes/gv_sky/images/img-cm-forbes.png" alt="Featured In Forbes" width="137" height="34" class="featured-companies-item-img forbes"></div>
+                      <div class="featured-companies-item"><img src="/sites/all/themes/gv_sky/images/img-cm-pcworld.png" alt="Featured In PCWorld" width="134" height="30" class="featured-companies-item-img pcworld"></div>
+                      <div class="featured-companies-item"><img src="/sites/all/themes/gv_sky/images/img-cm-fox.png" alt="Featured In Fox Business" width="104" height="51" class="featured-companies-item-img fox"></div>
+                    </div>
+                  </div>
+              </section>';
       break;
       
     case 'side':

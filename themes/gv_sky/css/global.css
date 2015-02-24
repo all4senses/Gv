@@ -1508,6 +1508,88 @@ th {
   margin-right: 7px; }
 
 /* ==========================================================================
+ * 5.Featured In
+ * ========================================================================== */
+.featured-wrap {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 102px;
+  box-sizing: border-box; }
+  .featured-wrap:before, .featured-wrap:after {
+    content: "";
+    display: table; }
+  .featured-wrap:after {
+    clear: both; }
+  @media screen and (max-width: 920px) {
+    .featured-wrap {
+      padding: 0; } }
+.featured-title {
+  float: left;
+  width: 25%;
+  padding: 45px 0 38px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 23px;
+  line-height: 19px;
+  font-weight: 600;
+  color: #666666;
+  box-sizing: border-box; }
+.featured-companies {
+  width: 75%;
+  height: 100%;
+  float: left; }
+  .featured-companies-item {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    float: left;
+    opacity: 0.17; }
+    .featured-companies-item-img {
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      left: 0;
+      right: 0;
+      display: block;
+      margin: 0 auto; }
+@media screen and (max-width: 920px) {
+  .featured {
+    height: 120px; }
+    .featured-title, .featured-companies {
+      float: none;
+      width: 100%; }
+    .featured-title {
+      padding: 20px 0 5px; }
+    .featured-companies {
+      height: 65%; } }
+@media screen and (max-width: 720px) {
+  .featured-companies-item-img {
+    height: auto; }
+    .featured-companies-item-img.binsider {
+      width: 110px; }
+    .featured-companies-item-img.forbes {
+      width: 113px; }
+    .featured-companies-item-img.pcworld {
+      width: 111px; }
+    .featured-companies-item-img.fox {
+      width: 86px; } }
+@media screen and (max-width: 550px) {
+  .featured-companies {
+    box-sizing: border-box;
+    padding-left: 10px; }
+  .featured-companies-item-img.binsider {
+    width: 85%; }
+  .featured-companies-item-img.forbes {
+    width: 86%; }
+  .featured-companies-item-img.pcworld {
+    width: 85%; }
+  .featured-companies-item-img.fox {
+    width: 64%; } }
+
+/* ==========================================================================
  * Body
  * ========================================================================== */
 body {
