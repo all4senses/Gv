@@ -1625,14 +1625,28 @@ function gv_blocks_getHomeBottomSectionsRotated($target = 'body') {
   
   $keys = element_children($seo_welcome_node_view['field_preface_bottom']);
   
-  $ui_tabs_nav = '';
   $fragments = '';
  
   foreach ($keys as $i) {
-      $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $i . '"><a href="#fragment-' . $i . '"></a></li>';
-      $fragments .= '<div id="fragment-' . $i . '" class="ui-tabs-panel' . (!$i ? '' : ' hidden') . '"><div class="info">' . str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), render($seo_welcome_node_view['field_preface_bottom'][$i])) . '</div></div>';
+      $fragments .= '<div id="tab-' . $i . '-c" class="learn-box-content-section">' . str_replace(array('ul>', '<li>', '</li>'), array('div>', '<p class="rteindent1">', '</p>'), render($seo_welcome_node_view['field_preface_bottom'][$i])) . '</div>';
   }
-  return '<div id="hb-rotator-wrapper"><div id="prev2" class="button">Prev</div><div id="hb-rotator">' . $fragments . '<ul class="ui-tabs-nav">' . $ui_tabs_nav . '</ul></div><div id="next2" class="button">Next</div></div>';  
+  return '<section class="section six learn">
+            <div class="section-wrap">
+              <div class="section-title">
+                <h2 class="section-title-heading">New to VoIP? <span class="section-title-heading-highlight">Start Here.</span></h2>
+              </div>
+              <div class="learn-box">
+                <ul class="learn-box-tabs">
+                  <li class="learn-box-tabs-item" id="tab-0">What is VoIP?</li>
+                  <li class="learn-box-tabs-item" id="tab-1">Save money with VoIP</li>
+                  <li class="learn-box-tabs-item" id="tab-2">What to look for</li>
+                  <li class="learn-box-tabs-item" id="tab-3">Get Started with VoIP</li>
+                </ul> 
+                <div class="learn-box-content">' . $fragments . '</div>
+              </div>
+            </div>
+          </section>
+  ';  
 }
 
 

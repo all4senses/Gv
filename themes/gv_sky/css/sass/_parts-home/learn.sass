@@ -1,0 +1,76 @@
+.section.learn
+	+section($subwhite)
+	border-top: 1px solid $divider
+	padding: 85px 0 95px
+	
+	.section-title
+		+section-title
+
+		&-heading
+			+section-title-heading($size:36px, $weight: 400, $color: $grey-dark)
+
+			&-highlight
+				color: $primary
+
+	+m(920)
+		display: none
+
+.learn-box
+	width: 100%
+	min-height: 322px
+	height: auto
+	max-height: 415px
+	margin-top: 48px
+	border-radius: 4px
+	// box-shadow: 0 0 3.8px 0.2px rgba(0, 0, 0, 0.2)
+	border: 1px solid $divider
+	background-color: white	
+	overflow: hidden
+
+	&-tabs
+		float: left
+		width: perc(240px, 1130px)
+		min-height: 322px
+		height: 100%
+		border-right: 1px solid $divider
+		box-sizing: border-box
+
+		&-item
+			padding: 22px 15px 18px
+			border-bottom: 1px solid $divider
+			font-size: 14px
+			line-height: 14px
+			font-weight: 700
+			text-transform: uppercase
+			box-sizing: border-box
+			cursor: pointer
+			// transition: background-color 0.1s
+
+			&.active,
+			&:hover
+				background-color: $primary
+				color: white
+
+			+m(1000)
+				font-size: 13px
+				padding: 18px 9px 14px
+
+	&-content
+		position: relative
+		left: -1px
+		float: left
+		width: perc(890px, 1130px)
+		border-left: 1px solid $divider
+		padding: 40px
+		box-sizing: border-box
+
+		&-section
+			display: none
+
+			&.active
+				display: block
+
+		h5
+			font-size: 19px
+			font-weight: 600
+			padding-bottom: 6px

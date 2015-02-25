@@ -20,6 +20,9 @@
 				max-width: 490px
 				margin-top: 5px
 
+				+m(414)
+					display: none
+
 			&-button
 				+center(25px, 50px)
 				text-align: left
@@ -34,7 +37,8 @@
 	&-item
 		width: perc(303px, 640px)
 		height: 368px
-		box-shadow: 0 0 3.8px 0.2px rgba(0, 0, 0, 0.2)
+		box-shadow: 0 0 5px .5px rgba(0, 0, 0, 0.2)
+		// border: 1px solid $divider
 		float: left
 		background-color: white
 		border-radius: 3px
@@ -80,6 +84,23 @@
 			line-height: 19px
 			font-weight: 500
 			color: $grey-darker
+
+		+m(732)
+			height: 260px
+
+			&-content,
+			&-date
+				display: none
+
+			&-title
+				padding: 15px 16px
+				font-size: 18px
+
+			&-img
+				margin-bottom: 0
+
+		+m(680)
+			height: auto
 
 	+m(1065)
 		float: none

@@ -4,7 +4,8 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 // jQuery Selector Cache
 !function(n,r){var $={};$$=function(u){var t=$[u];return t!==r?t:$[u]=n(u)},$$.clear=function(n){$[n]=r},$$.fresh=function(n){return $[n]=r,$$(n)}}(jQuery);
 
-// function($){
+
+
 	var $window = $$(window);
 	var $this = $$(this);
 
@@ -30,4 +31,31 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 		$$('.main-menu-item.first').data('clicks', !clicks);
 	});
 
-// }
+
+
+
+
+
+
+
+//HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   HOME PAGE   
+
+	$$('#tab-0-c, #tab-0').addClass('active');
+
+	$$('.learn-box-tabs-item').click(function(){
+		var $tabNum = jQuery(this).prop('id');
+		var $assocTab = '#' + $tabNum + '-c';
+
+		$$('.learn-box-tabs-item').removeClass('active');
+		$$('.learn-box-content-section').removeClass('active');
+
+		jQuery(this).addClass('active');
+		$$($assocTab).addClass('active');
+
+	});
+
+
+
+
+
+

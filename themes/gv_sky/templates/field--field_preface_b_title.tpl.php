@@ -1,5 +1,5 @@
-<h2 class="preface">
+<h5 class="preface">
   <?php 
     echo $element['#items'][0]['value']; 
  ?>
-</h2>
+</h5>
