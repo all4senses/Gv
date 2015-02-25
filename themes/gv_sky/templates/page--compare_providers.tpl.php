@@ -28,7 +28,7 @@
     </nav> 
       <div class="hero-header left">
         <div class="hero-title">
-          <h2 class="hero-title-heading"><?php print render($title); ?></h2>
+          <h1 class="hero-title-heading"><?php print render($title); ?></h1>
           <p class="hero-title-desc"><?php print field_get_items('node',$node, 'body')[0]['value']; ?></p>
         </div>
       </div>

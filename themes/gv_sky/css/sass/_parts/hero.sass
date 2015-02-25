@@ -1,27 +1,40 @@
 .hero-header 
-	height: 504px
-	background-image: url(../images/img-hero.jpg)	
-	background-position: 80% 50%
 	background-size: cover
 
-	+m(768)
-		height: 404px
+	&.center
+		background-image: url(../images/img-hero.jpg)	
+		background-position: 80% 50%
+		height: 504px
 
-	+m(620) 
-		background-image: url(../images/img-hero-m.jpg)	
+		+m(768)
+			height: 404px
 
-	+m(450)
-		height: 375px
+		+m(620) 
+			background-image: url(../images/img-hero-m.jpg)	
+
+		+m(450)
+			height: 375px
+
+
+	&.left
+		padding: 60px 0 55px
+
+
+	.page-node-287 &
+		background-image: url(../images/img-business.jpg)
+		background-position: 80% 0%	
+
+		+m(620) 
+			background-image: url(../images/img-business-m.jpg)	
 
 
 
-	h1
+
+	h1:not(.hero-title-heading)
 		position: absolute
 		top: 700px
 		left: 0
 		right: 0
-		text-align: center
-		z-index: -1		// TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP 
 
 
 
@@ -29,20 +42,22 @@
 
 
 // MIXIN MIXIN MIXIN MIXIN 
-=hero-title($pos)
+=hero-title($pos, $heading-size:42px, $desc-size:19px)
 	position: relative
 	text-align: $pos
 	color: white
-	+valign
+	
+	@if $pos == center
+		+valign
 
 	&-heading 
 		font-weight: 300
-		font-size: 42px
+		font-size: $heading-size
 
 
 	&-desc
 		padding-top: 15px
-		font-size: 19px
+		font-size: $desc-size
 		line-height: 25px
 		font-weight: 500
 		opacity: .7
@@ -69,7 +84,7 @@
 
 
 
-.hero-title
+.center .hero-title
 	+hero-title(center)
 
 	&-heading
@@ -86,5 +101,32 @@
 		width: 90%
 		max-width: 540px
 		+center
+
+
+.left .hero-title
+	+hero-title(left, 36px, 17px)
+	max-width: 1170px
+	padding: 0 20px
+	+center
+	box-sizing: border-box
+
+	&-heading
+		max-width: 650px
+		// &-strong
+		// 	font-weight: 600
+
+		+m(738)
+			text-align: center
+
+
+	&-desc
+		max-width: 910px
+		margin-top: 8px
+
+		.disclosure
+			display: none
+
+		+m(738)
+			display: none
 
 	
