@@ -22,7 +22,7 @@
 
     <?php  if ($page['highlighted']): ?>
 
-      <div class="hero-header">
+      <div class="hero-header <?php if ($is_front) {echo 'center';} ?>">
         <?php print render($page['highlighted']); ?>
       </div>
       
@@ -40,18 +40,12 @@
         <?php print render($page['below_content_wide']); ?>
     <?php endif;  ?>
     
-    
-    <section id="all-content">
-        
-        
-      
-        <div>
-            <div id="breadcrumbs-dummy"></div>
+            <!-- <div id="breadcrumbs-dummy"></div> -->
             
             <!-- Error Messegaes -->
             <?php print $messages; ?>
 
-            <a id="main-content"></a>
+            <!-- <a id="main-content"></a> -->
             
             
             <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper "><?php print render($tabs); ?></div><?php endif; ?>
@@ -62,7 +56,6 @@
             <?php print render($page['content']); ?>
             
            
-        </div>
 
 
         <?php if ($page['sidebar_first']): ?>
@@ -82,8 +75,6 @@
         <div id="above_footer">
             <?php echo render($page['above_footer']); ?>
         </div>
-
-    </section> <!-- /#all-content -->
 
   </main>
 

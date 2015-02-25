@@ -21,45 +21,23 @@
           <div class="clearfix"></div>
         </div>
         
-        <?php echo render($page['header']); ?>
+        <?php //echo render($page['header']); ?>
 
         <div class="clearfix"></div>
       </div>
     </nav> 
-
-    <?php  if ($page['highlighted']): ?>
-
-      <div class="hero-header">
-        <?php print render($page['highlighted']); ?>
+      <div class="hero-header left">
+        <div class="hero-title">
+          <h2 class="hero-title-heading"><?php print render($title); ?></h2>
+          <p class="hero-title-desc"><?php print field_get_items('node',$node, 'body')[0]['value']; ?></p>
+        </div>
       </div>
-      
-    <?php endif;  ?>
-
   </header>
 
   <main role="main">
-    
-    <?php  if ($page['content_wide']): ?>
-        <?php print render($page['content_wide']); ?>
-    <?php endif;  ?>
-    
-    <?php  if ($page['below_content_wide']): ?>
-        <?php print render($page['below_content_wide']); ?>
-    <?php endif;  ?>
-    
-    
-    <section id="all-content">
-        
-        
-      
-        <div>
-            <div id="breadcrumbs-dummy"></div>
-            
+       
             <!-- Error Messegaes -->
-            <?php print $messages; ?>
-
-            <a id="main-content"></a>
-            
+            <?php print $messages; ?>            
             
             <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper "><?php print render($tabs); ?></div><?php endif; ?>
             <?php print render($page['help']); ?>
@@ -69,28 +47,31 @@
             <?php print render($page['content']); ?>
             
            
-        </div>
 
+          <?php if ($page['below_content_with_sidebar'] || $page['sidebar_second_below_chart']): ?>
+            
+            <div id="below-content-with-second-sidebar">
 
-        <?php if ($page['sidebar_first']): ?>
-          <aside id="sidebar-first" role="complementary" class="sidebar ">
-            <?php print render($page['sidebar_first']); ?>
-          </aside>  <!-- /#sidebar-first -->
-        <?php endif; ?>
+                <?php if ($page['below_content_with_sidebar']): ?>
+                  <div id="below-content-with-sidebar">
+                    <?php print render($page['below_content_with_sidebar']); ?>
+                  </div>
+                <?php endif; ?>
 
-        <?php if ($page['sidebar_second']): ?>
-          <aside id="sidebar-second" role="complementary" class="sidebar ">
-            <?php print render($page['sidebar_second']); ?>
-          </aside>  <!-- /#sidebar-second -->
-        <?php endif; ?>
+                <?php if ($page['sidebar_second_below_chart']): ?>
+                  <aside id="sidebar-second-below-chart" role="complementary" class="sidebar clearfix">
+                    <?php print render($page['sidebar_second_below_chart']); ?>
+                  </aside> 
+                <?php endif; ?>
 
-        <div class="bottom-clear"></div>
+            </div>
+            
+          <?php endif; ?>  
+
         
         <div id="above_footer">
             <?php echo render($page['above_footer']); ?>
         </div>
-
-    </section> <!-- /#all-content -->
 
   </main>
 
@@ -110,7 +91,9 @@
 
         echo '<div class="footer-wrap-right">';
         echo '<div class="footer-copyright">© GetVoIP.com 2015 | All Right Reserved</div>';
-        echo gv_blocks_get_headerLinks();
+        if (!in_array($_SERVER['REQUEST_URI'], array('/ppc/business-voip', '/business', '/canada', '/cloud-contact-center'))) {
+          echo gv_blocks_get_headerLinks();
+        }
         echo '</div>';
     ?>
     
