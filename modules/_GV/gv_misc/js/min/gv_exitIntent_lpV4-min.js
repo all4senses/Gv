@@ -1,0 +1,1 @@
+!function($){Drupal.behaviors.gv_exitIntent_lpV4={attach:function(n,o){var e=!0;setTimeout(function(){e=null},18e4),$(document).bind("mouseleave",function(n){!e&&n.pageY-$(window).scrollTop()<=1&&(e=!0,$.fn.colorbox({inline:!0,href:"#exitIntent",width:780,height:440}))}),$("#no").click(function(){$.fn.colorbox.close()})}}}(jQuery);

@@ -102,16 +102,6 @@
             if (!turned_off && e.pageY - $(window).scrollTop() <= 1)
             {    
                 turned_off = true;
-                //now = new Date();           
-                //for (i=0; i < times.length; i++)
-                {
-                    //if (now.getTime() > times[i][0] && now.getTime() < times[i][1])
-                    {
-                        //$.fn.colorbox({iframe:true, width:650, height:600, href: "get-popup-on-exit-intent", open: true});  
-                        
-                        ////$.fn.colorbox({iframe:true, width:650, height:400, href: 'get/iframe/exitIntent_lpV4', open: true});  
-                        
-                        
                         // Disable page scrolling
                         // Other ways of scrolling disabling - 
                         // http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
@@ -119,31 +109,23 @@
                         
                 
                         // Uncomment to stop scrolling.
-                        $("body").css('overflow', 'hidden');
+                        // $("body").css('overflow', 'hidden');
             
-                        //console.log('a1...');
-                        //console.log($.fn.colorbox);
+
                         
-                        var cb1;
+                        // var cb1;
                         
-                        cb1 = $.fn.colorbox({
-                          inline:true, 
-                          href:"#exitIntent", 
-                          width:780, 
-                          height:540
-                          ,onClosed: function() {
-                                //console.log('closed...');
-                                $("body").css('overflow', 'inherit');
-                                turned_off = true;
-                               }
-                        });  
+                        // cb1 = $.fn.colorbox({
+                        //   inline:true, 
+                        //   href:"#exitIntent", 
+                        //   width:780, 
+                        //   height:540
+                        //   ,onClosed: function() {
+                        //         $("body").css('overflow', 'inherit');
+                        //         turned_off = true;
+                        //        }
+                        // });  
                         
-                        //console.log(cb1);
-                        //$.fn.colorbox.close();
-                        //console.log($.fn.colorbox);
-                        //alert('test');
-                    }    
-                }
             }
         });
         
@@ -173,19 +155,14 @@
         $('#requestQuoteFormWrapper-ppc input[name="referrer"]').val(document.referrer);
         $('#requestQuoteFormWrapper-ppc input[name="url"]').val(document.URL);
        
-        //$('select').selectmenu();
-        $('#requestQuoteFormWrapper-ppc select').selectmenu({
-          //style:'popup', 
-          maxHeight: 300
-          ,change: function( event, ui ) {
-                      //console.log(ui.value);
-                      //console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("option" ));
-                      //console.log($('#requestQuoteFormWrapper-ppc select').val());
-                      if (ui.value != '') {
-                        $("#second_step .err").hide();
-                      }
-                   }
-  			});
+     //    $('#requestQuoteFormWrapper-ppc select').selectmenu({
+     //      maxHeight: 300
+     //      ,change: function( event, ui ) {
+     //                  if (ui.value != '') {
+     //                    $("#second_step .err").hide();
+     //                  }
+     //               }
+  			// });
        
        
        

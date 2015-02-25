@@ -1,0 +1,1 @@
+!function($){Drupal.behaviors.gv_exitIntentBlock={attach:function(n,o){var e=null;$(document).bind("mouseleave",function(n){console.log(n.pageY),!e&&n.pageY-$(window).scrollTop()<=1&&(e=!0)})}}}(jQuery);
