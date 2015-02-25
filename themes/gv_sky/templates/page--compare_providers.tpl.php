@@ -21,7 +21,7 @@
           <div class="clearfix"></div>
         </div>
         
-        <?php //echo render($page['header']); ?>
+        <?php // echo render($page['header']); ?>
 
         <div class="clearfix"></div>
       </div>
@@ -35,6 +35,7 @@
   </header>
 
   <main role="main">
+    <div class="main-wrap">
        
             <!-- Error Messegaes -->
             <?php print $messages; ?>            
@@ -72,7 +73,7 @@
         <div id="above_footer">
             <?php echo render($page['above_footer']); ?>
         </div>
-
+    </div>
   </main>
 
 
