@@ -21,7 +21,7 @@
           <div class="clearfix"></div>
         </div>
         
-        <?php // echo render($page['header']); ?>
+        <?php echo render($page['header']); ?>
 
         <div class="clearfix"></div>
       </div>
