@@ -861,7 +861,7 @@ function gv_process_page(&$variables) {
     // Don't show chat for the root.
     //if ($user->uid != 1) 
       {
-      drupal_add_js( $module_path_misc . '/js/gv_add_livechatinc.js'); 
+      // drupal_add_js( $module_path_misc . '/js/gv_add_livechatinc.js'); 
     }
   }
   

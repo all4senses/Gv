@@ -643,10 +643,10 @@ function template_preprocess_views_view_table(&$vars) {
   }
 
 
-  if (!empty($options['sticky'])) {
-    drupal_add_js('misc/tableheader.js');
-    $vars['classes_array'][] = "sticky-enabled";
-  }
+  // if (!empty($options['sticky'])) {
+  //   drupal_add_js('misc/tableheader.js');
+  //   $vars['classes_array'][] = "sticky-enabled";
+  // }
   $vars['classes_array'][] = 'cols-'. count($vars['header']);
 
   // Add the summary to the list if set.
