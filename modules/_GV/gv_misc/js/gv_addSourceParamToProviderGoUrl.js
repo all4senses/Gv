@@ -9,10 +9,11 @@
        $(".visit-site-btn").click(function(){
          
 //         console.log('click');
-//         console.log('href = ' + $(this).attr('href'));
+         console.log('href = ' + $(this).attr('href'));
          if(!$(this).attr('href').split('from=')[1]) {
            $(this).attr('href', $(this).attr('href') + '?from=' + window.location.href + '&ref=' + document.referrer);
          }
+         console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
          
          /*
