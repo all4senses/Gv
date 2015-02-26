@@ -3,7 +3,7 @@
   Drupal.behaviors.gv_addSourceParamToProviderGoUrl = {
     attach: function (context, settings) {
        
-       consol.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
+       console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
        
        
        $(".visit-site-btn").click(function(){
