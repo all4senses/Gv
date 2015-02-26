@@ -6,7 +6,7 @@
        //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
        
        
-       $(".visit-site-btn").click(function(){
+       $(".visit-provider-url").click(function(){
          
 //         console.log('click');
          //console.log('href = ' + $(this).attr('href'));
