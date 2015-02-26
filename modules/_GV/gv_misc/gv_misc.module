@@ -3123,6 +3123,10 @@ function gv_misc_goToExternalUrl2() {
               $referrer = $_GET['ref'];
             }
             
+            if ($referrer == $click_page) {
+              $referrer = NULL;
+            }
+            
             $data = NULL;
 //            $data = serialize(array(
 //              'referer' => @$_SESSION['gv_current_http_referer'],
