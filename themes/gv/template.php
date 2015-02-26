@@ -1409,7 +1409,7 @@ function gv_preprocess_views_view_table(&$vars) {
       $vars['header_classes'][$field] = '';
       // Set up the header label class.
       if ($fields[$field]->options['element_default_classes']) {
-        $vars['header_classes'][$field] .= "views-field views-field-" . $vars['fields'][$field];
+        $vars['header_classes'][$field] .= "thead-item thead-item-" . $vars['fields'][$field];
       }
       $class = $fields[$field]->element_label_classes(0);
       if ($class) {
@@ -1443,7 +1443,7 @@ function gv_preprocess_views_view_table(&$vars) {
       // Add field classes
       $vars['field_classes'][$field][$num] = '';
       if ($fields[$field]->options['element_default_classes']) {
-        $vars['field_classes'][$field][$num] = "views-field views-field-" . $vars['fields'][$field];
+        $vars['field_classes'][$field][$num] = "tbody-item tbody-item-" . $vars['fields'][$field];
       }
       if ($classes = $fields[$field]->element_classes($num)) {
         if ($vars['field_classes'][$field][$num]) {
@@ -1516,7 +1516,7 @@ function gv_preprocess_views_view_table(&$vars) {
     $vars['row_classes'][count($vars['row_classes']) - 1][] = 'views-row-last';
   }
 
-  $vars['classes_array'] = array('views-table');
+  $vars['classes_array'] = array('chart horizontal');
   if (empty($vars['rows']) && !empty($options['empty_table'])) {
     $vars['rows'][0][0] = $view->display_handler->render_area('empty');
     // Calculate the amounts of rows with output.

@@ -9930,17 +9930,11 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         
         if ($p_image = gv_misc_getProviderLogoFromSprite($data['data']->nid, $sprite_name, $all_data_quick)) {
-          //watchdog('p logos bu', 'nid = ' . $data['data']->nid . ', $sprite_name = ' . $sprite_name . ', $all_data_quick = ' . $all_data_quick, NULL, WATCHDOG_WARNING);
-          //gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL) {
-          
-//          if ($current_url == '/cloud-contact-center') {
-//            return $p_image;
-//          }
-//          else
+
            return gv_misc_getTrackingUrl($p_image, NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type'])
                 // Provider name with a link to provider page
                  ////. l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid, array('attributes' => array('class' => array('pname'))))
-                 . ( ($current_url == '/service-quotes' || $current_url == '/service-quotes-ca') ? '' : gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type'], NULL, 'Visit ' . @$all_data_quick[$data['data']->nid]['name'] ))
+                 // . ( ($current_url == '/service-quotes' || $current_url == '/service-quotes-ca') ? '' : gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, 'pname', NULL, $all_data_quick[$data['data']->nid], @$data['service_type'], NULL, 'Visit ' . @$all_data_quick[$data['data']->nid]['name'] ))
                 ;
           
         }
@@ -10021,11 +10015,11 @@ function gv_misc_getProviderQuickData($target, $data) {
       $features = isset($all_data_quick[$data['data']->nid][$data['service_type']]['feat']) ?  $all_data_quick[$data['data']->nid][$data['service_type']]['feat'] : '';
       //dpm($features);
       if ($plan_title) {
-        $out .= '<div class="plan">' . $plan_title . '</div>';
+        $out .= '<div class="tbody-item-feature">' . $plan_title . '</div>';
       }
       if (!empty($features)) {
         foreach($features as $tid => $term) {
-          $out .= '<div class="feature">' . t($term) . '</div>';
+          $out .= '<div class="tbody-item-feature-item">' . t($term) . '</div>';
         }
       }
       
@@ -10140,7 +10134,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       }
       */
       if (!empty($all_data_quick[$data['data']->nid]['i_web'])) {
-        $out .= gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
+        $out .= gv_misc_getTrackingUrl('', NULL, $data['data']->nid, NULL, 'visit-site-btn details-button', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
       }
                         
       return $out;
