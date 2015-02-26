@@ -2964,18 +2964,29 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   // So we prevent it.
   
   static $drupal_alredy_loaded_js;
+  global $user;
   
-  if (!$drupal_alredy_loaded_js) {
+  if ($user->uid == 1 && !$drupal_alredy_loaded_js) {
     
-    $path_to_js = drupal_get_path('module', 'gv_misc') . '/js/gv_makeImagesZoomable.js';
+    $path_to_js = drupal_get_path('module', 'gv_misc') . '/js/gv_addSourceParamToProviderGoUrl.js';
     dpm($path_to_js);
+    
+    
+    
+    drupal_add_js(array('gv_misc' => array(
+      'addParamToProviderUrl' => array(
+        'uid' => $user->uid,
+      ),
+    )), 'setting'); 
+    
+    
     
     $drupal_alredy_loaded_js = drupal_add_js();
     dpm($drupal_alredy_loaded_js);
     
-//    if (!isset($drupal_alredy_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) && !isset($drupal_alredy_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js'])) {
-//      drupal_add_js($path_to_js);
-//    }
+    if (!isset($drupal_alredy_loaded_js[$path_to_js])) {
+      drupal_add_js($path_to_js);
+    }
 
   }
   
