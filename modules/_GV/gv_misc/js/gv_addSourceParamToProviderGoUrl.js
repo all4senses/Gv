@@ -10,6 +10,9 @@
          
          console.log('click');
          console.log('href = ' + $(this).attr('href'));
+         if(!$(this).attr('href').split('from=')[1]) {
+           $(this).attr('href', $(this).attr('href') + '?from=' + window.location.href);
+         }
          //console.log('title = ' + $(this).attr('title'));
          
          /*
