@@ -51,6 +51,7 @@
 		color: $color
 		transition: all 0.2s
 		box-sizing: border-box
+		+user-select(none)
 
 		&-text
 			position: absolute
@@ -67,8 +68,148 @@
 			color: white
 
 
+
 	@if $style == solid
+		position: relative
 		display: block
+		width: $width
+		height: $height
+		background-color: $color
+		border-radius: 3px
+		color: white
+		transition: all 0.15s
+		box-sizing: border-box
+		+user-select(none)
+
+		&-text
+			position: absolute
+			+valign
+			left: 0
+			right: 0
+			top: 51%
+			width: 100%
+			text-transform: uppercase
+			font-size: 14px
+			font-weight: 700
+			text-align: center
+
+		&:hover
+			background-color: darken($color, 8)
+			color: white
+
+
+//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+=button-chart($style: outline, $color: $contrast, $width: 193px, $height: 53px, $font-size: 19px)
+	
+	@if $style == outline 
+		position: relative
+		display: block
+		width: $width
+		height: $height
+		border: 2px solid $color
+		border-radius: 3px
+		color: $color
+		transition: all 0.2s
+		box-sizing: border-box
+		+user-select(none)
+
+		&-text
+			position: absolute
+			+valign
+			top: 51%
+			width: 100%
+			font-size: 19px
+			font-weight: 600
+			text-align: center
+
+		&:hover
+			background-color: $color
+			color: white
+
+
+
+	@if $style == solid
+		position: relative
+		display: block
+		width: $width
+		height: $height
+		background-color: $color
+		border-radius: 3px
+		color: white
+		transition: all 0.15s
+		box-sizing: border-box
+		+user-select(none)
+
+		&-text
+			position: absolute
+			+valign
+			left: 0
+			right: 0
+			top: 55%
+			width: 100%
+			font-size: 19px
+			font-weight: 600
+			text-align: center
+
+		&:hover
+			background-color: darken($color, 8)
+			color: white
+
+
+
+//	MIXIN MIXIN MIXIN MIXIN MIXIN 
+=fivestar($size:14px)
+	$width: $size
+	$height: $size * (15 / 14)
+	$font-size: $size * (16 / 14)
+	// width: 84px
+	width: $size * 6
+	+clearfix
+	+center
+
+	&-item
+		position: relative
+		float: left
+		display: block
+		overflow: visible
+		width: $width
+		height: $height
+		margin-left: 3px
+
+		&:nth-child(1)
+			margin-left: 0
+
+		&:after
+			content: '('
+			position: absolute
+			top: -2px
+			left: 0
+			font-family: gvcons
+			font-size: $font-size
+			color: $grey-lighter
+			z-index: 1
+
+		&-on
+			position: relative
+			z-index: 2
+			display: block
+			width: $width
+			height: $height
+			overflow: hidden
+
+			&:after
+				overflow: visible
+				content: '('
+				position: absolute
+				top: -2px
+				left: 0
+				display: block
+				font-family: gvcons
+				font-size: $font-size
+				color: $yellow
+
+
+
 
 
 .section	
