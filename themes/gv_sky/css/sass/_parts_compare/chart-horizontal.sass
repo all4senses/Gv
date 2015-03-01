@@ -114,9 +114,11 @@
 			border-top: 0
 
 			tr
+				position: relative
 				display: block
 				width: 100%
-				padding: 20px
+				min-height: 300px
+				padding: 30px 20px
 				border-top: 1px solid $divider
 				box-sizing: border-box
 
@@ -132,7 +134,9 @@
 
 			&[class^="tbody-item tbody-item-php-"]
 				text-align: center
+			
 
+			// Features list
 			&-feature
 				font-size: 14px
 				font-weight: 600
@@ -146,6 +150,13 @@
 					color: $grey
 					padding-left: 22px
 
+					+m(736)
+						// display: inline-block
+						padding-left: 0
+						margin: 2px 0
+						width: auto
+						// display: inline-block
+
 					&:after
 						content: 'M'
 						position: absolute
@@ -154,6 +165,10 @@
 						font-family: gvcons
 						font-size: 14px
 						color: $contrast
+
+						+m(736)
+							content: ''
+
 
 			&-rating
 
@@ -171,7 +186,42 @@
 						color: $primary
 
 				.fivestar
-					+fivestar(14px)
+					+m(736, min)
+						+fivestar(14px)
+
+				+m(736)
+					position: relative
+					right: -10px
+					margin-top: 5px
+
+					&-text
+						font-size: 18px
+						line-height: 18px
+						display: inline-block
+
+					&-link
+						position: relative
+						top: -4px
+						right: -10px
+						font-size: 10px
+						letter-spacing: .9px
+						color: lighten($grey-darker, 25)
+
+
+					.fivestar
+						display: inline-block
+						+fivestar(11px)
+						margin-left: 5px
+
+				+m(375)
+					&-text
+						position: relative
+						top: -1px
+						font-size: 15px
+						line-height: 15px
+
+					.fivestar
+						margin-left: 3px
 
 
 			&-button
@@ -193,39 +243,158 @@
 							font-size: 17px
 
 				+m(736)
-					width: 142px
+					width: 100%
+					min-width: 142px
+					// max-width: 400px
 
 
 					
-
+			// Provider Logo
 			&-php-6
+				position: relative
+
+				a
+					display: block
+				 
+				.sprite-div
+					+center
+
 				+m(1024)
-					// +m(737, min)
 					@media screen and (min-width:737px)
 						.sprite-div
+							-webkit-transform: scale(0.89)
+							-ms-transform: scale(0.89)
 							transform: scale(0.89)
 
+				+m(736)
+					width: 60%
+					min-height: 65px
+					float: left
+
+					&:after 
+						content: ''
+						position: absolute
+						top: 0
+						left: 0
+						width: 100%
+						height: 100%
+						border-right: 1px solid $divider
+
+					.sprite-div
+						position: absolute
+						right: 0
+						left: -10px
+						+valign
+
+						+m(375)
+							-webkit-transform: scale(0.89)
+							-ms-transform: scale(0.89)
+							transform: scale(0.89)
+							-webkit-transform-origin: 50% -400%
+							-ms-transform-origin: 50% -400%
+							transform-origin: 50% -400%
+
+						+m(320)
+							-webkit-transform: scale(0.73)
+							-ms-transform: scale(0.73)
+							transform: scale(0.73)
+							-webkit-transform-origin: 35% -150%
+							-ms-transform-origin: 35% -150%
+							transform-origin: 35% -150%
+
+
+			// Price
 			&-php-2
 				font-size: 22px
 				font-weight: 700
 				color: $primary
 
+				+m(736)
+					position: relative
+					right: -10px
+					top: -2px
+					width: 40%
+					float: right
+
+					&:after
+						content: '/mo'
+						position: relative
+						left: -5px
+						font-size: 18px
+						font-weight: 400
+
+					&:before
+						content: ''
+						position: absolute
+						left: -5px
+						right: 0
+						bottom: -2px
+						width: 108px
+						// width: 100%
+						+center
+						border-bottom: 1px solid $divider
+
+				+m(375)
+					font-size: 19px
+
+					&:after
+						font-size: 14px
+					&:before
+						width: 90px
+
+
+
+
+			// Setup
 			&-php-3
 				text-transform: uppercase
 
+
+			// Money Back
 			&-php-11
 				padding: 0 10px
 				box-sizing: border-box
 
+
+			// Setup & Money Back
 			&-php-3,
 			&-php-11
 				font-size: 17px
 
 				+m(920)
-					display: none
+					&.tbody-item
+						display: none
 
+			// Rating (Wrapper), actual stars code is above (&-rating)
+			&-php-4
+				+m(736)
+					// float: left
+					float: right
+					width: 40%
+
+			// Button (Wrapper), actual button code is above (&-button)
+			&-php-5
+				+m(736)
+					position: absolute
+					left: 0
+					right: 0
+					width: 100%
+					bottom: 30px
+					padding: 0 20px
+					box-sizing: border-box
+
+			// Feautres
 			&-php
 				padding: 15px 0
+
+				+m(736)
+					position: absolute
+					top: 110px
+					left: 20px
+					left: 0
+					right: 0
+					text-align: center
+					+center
 
 
 			+m(736)
@@ -237,10 +406,24 @@
 
 	//	Remove first row's top border
 	tr:nth-child(1) .tbody-item
-		border-top: none
+		border-top: 0
 
 
+.chart.sticky-table
+	position: fixed
+	display: none
+	top: 0
+	left: 0
+	right: 0
+	max-width: 1130px
+	+center(0)
+	background-color: white
+	border-bottom: 0
+	border-radius: 0
+	z-index: 5
 
+	&.show 
+		display: table
 
 
 

@@ -2478,9 +2478,9 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
-  $out = '<section id="block-views-providers-block-top-bu-small" class="block block-views contextual-links-region odd first">
-  <h3 class="block-title">
-  <span class="block-icon">Top 5 Providers</span></h3>' .
+  $out = '<aside class="top-providers">
+  <h3 class="top-providers-heading">
+  <span class="top-providers-heading-text">Top 5 Providers</span></h3>' .
   /*        
   '<div class="contextual-links-wrapper contextual-links-processed">
     <a class="contextual-links-trigger" href="#">Configure</a>
@@ -2587,7 +2587,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
         </div>
       </div> 
     </div>
-  </section>';
+  </aside>';
   
   
   cache_set($cid, $out, 'cache', strtotime('+31 day'));
@@ -3524,11 +3524,13 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
         $node = node_load($result->nid);
         $node->sprite_name = $sprite_name;
         $servicePage_bottomMainReviewTeaser = node_view($node, 'servicePage_bottomMainReviewTeaser');
-        $latest_reviews .= '<div class="views-row' . ($key == $count ? ' last' : '') . '">' . render($servicePage_bottomMainReviewTeaser) . '</div>';
+        $latest_reviews .= '<li class="latest-reviews-list-item' . ($key == $count ? ' last' : '') . '">' . render($servicePage_bottomMainReviewTeaser) . '</li>';
       }
 
       //$latest_reviews = '<div id="compare-providers-reviews" class="block"><h3 class="block-title"><span class="block-icon">Latest Reviews</span></h3><div class="view-content content">' . $latest_reviews . '<div class="more-link"><a href="/reviews/business" rel="nofollow">View All</a></div></div></div>';
       ////$latest_reviews = $latest_reviews . '<div class="more-link"><a href="/reviews" rel="nofollow">View All</a></div>';
+
+      $latest_reviews = '<section class="latest-reviews"><h2 class="latest-reviews-title">Latest Reviews</h2><ul class="latest-reviews-list">' . $latest_reviews . '</ul></section>';
     }
 
   }

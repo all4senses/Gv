@@ -1,4 +1,8 @@
-<?php drupal_add_js('/sites/all/themes/gv_sky/js/global.js') ?>
+<?php 
+drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
+drupal_add_js('/sites/all/themes/gv_sky/js/comparison_page.js');
+// drupal_add_css('/sites/all/themes/gv_sky/css/global.css'); 
+?>
   <header id="header" role="banner">
 
     <nav class="navigation" role="navigation">
@@ -34,7 +38,7 @@
       </div>
   </header>
 
-  <main role="main">
+  <main role="main" id="main">
     <div class="main-wrap">
        
             <!-- Error Messegaes -->
@@ -51,21 +55,13 @@
 
           <?php if ($page['below_content_with_sidebar'] || $page['sidebar_second_below_chart']): ?>
             
-            <div id="below-content-with-second-sidebar">
-
                 <?php if ($page['below_content_with_sidebar']): ?>
-                  <div id="below-content-with-sidebar">
                     <?php print render($page['below_content_with_sidebar']); ?>
-                  </div>
                 <?php endif; ?>
 
                 <?php if ($page['sidebar_second_below_chart']): ?>
-                  <aside id="sidebar-second-below-chart" role="complementary" class="sidebar clearfix">
                     <?php print render($page['sidebar_second_below_chart']); ?>
-                  </aside> 
                 <?php endif; ?>
-
-            </div>
             
           <?php endif; ?>  
 

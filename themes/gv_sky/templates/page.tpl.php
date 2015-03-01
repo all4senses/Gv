@@ -30,7 +30,7 @@
 
   </header>
 
-  <main role="main">
+  <main role="main" <?php if (!$is_front) {echo 'id="main"';} ?> >
     
     <?php  if ($page['content_wide']): ?>
         <?php print render($page['content_wide']); ?>

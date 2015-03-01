@@ -6,8 +6,8 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 
 
-	var $window = $$(window);
-	var $this = $$(this);
+	$window = $$(window);
+	$this = $$(this);
 
 	$$('.solution-nav').insertAfter('.navigation');
 
@@ -53,6 +53,20 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 		$$($assocTab).addClass('active');
 
 	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
