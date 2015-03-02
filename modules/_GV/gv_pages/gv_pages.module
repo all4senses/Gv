@@ -1274,8 +1274,16 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query = db_select('gv_emails_subscribed', 'e')
           ->fields('e', array('email'));
     //$query->condition('e.source', NULL);
+    
+    global $user;
+    if ($user->uid == 1 && !empty($_GET['email-contains'])) {
+      $query->condition('e.email', '%%biex%%', 'LIKE');
+    }
+    
     $email = $query->execute()->fetchField();
-
+    
+    dpm($email);
+    
     $results = $query->execute();
 
     $emails = '<br/><div><strong>Newsletter emails.</strong></div><br/>';
