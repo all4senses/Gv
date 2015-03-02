@@ -1270,11 +1270,11 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   );
   
   //'<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>'
-  $out = '<div class="type">';
+  $out = NULL;
   foreach ($sections as $section => $data) {
     $out .= ($out ? ' - ' : '') . ($section == $current_section ? $section : $data);
   }
-  $out .= '</div><br/>';
+  $out = '<div class="type">' . $out . '</div><br/>';
   
   return $out;
 }
@@ -1295,8 +1295,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
           ->fields('e', array('email'));
     //$query->condition('e.source', NULL);
     
-    global $user;
-    if ($user->uid == 1 && !empty($_GET['email-contains'])) {
+//    global $user;
+    if (!empty($_GET['email-contains'])) {
       $query->condition('e.email', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
     }
     
@@ -1318,18 +1318,19 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
   
-    if ($user->uid == 1) {
+    //if ($user->uid == 1) 
+    {
       $form['emails'] = array(
         '#type' => 'markup',
         '#markup' => gv_pages_quoteRequestsList_form_header('Newsletter emails') . $emails,
       );
     }
-    else {
-      $form['emails'] = array(
-        '#type' => 'markup',
-        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') .  ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
-      );
-    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') .  ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+//      );
+//    }
     
     return $form;
   }
@@ -1378,10 +1379,31 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
   
 
-    $form['emails'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
-    );
+//    $form['emails'] = array(
+//      '#type' => 'markup',
+//      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+//    );
+    
+    
+    
+    
+    
+     if ($user->uid == 1) {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => gv_pages_quoteRequestsList_form_header('Quote requests emails only') . $emails,
+      );
+    }
+    else {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+      );
+    }
+    
+    
+    
+    
     
     return $form;
   }
