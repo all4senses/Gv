@@ -1272,7 +1272,7 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   //'<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>'
   $out = NULL;
   foreach ($sections as $section => $data) {
-    $out .= ($out ? ' - ' : '') . ($section == $current_section ? $section : $data);
+    $out .= ($out ? ' - ' : '') . ($section == $current_section ? '<strong>' . $section . '</strong>' : $data);
   }
   $out = '<div class="type">' . $out . '</div><br/>';
   
