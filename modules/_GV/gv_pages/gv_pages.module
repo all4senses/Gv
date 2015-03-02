@@ -1277,7 +1277,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     global $user;
     if ($user->uid == 1 && !empty($_GET['email-contains'])) {
-      $query->condition('e.email', '%%biex%%', 'LIKE');
+      $query->condition('e.email', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
     }
     
     $email = $query->execute()->fetchField();
