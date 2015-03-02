@@ -1276,6 +1276,11 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   }
   $out = '<div class="type">' . $out . '</div><br/>';
   
+  global $user;
+  if ($user->uid == 1) {
+    $out .= '<div class="extra-filters"><div class="email-contains"><div class="title"></div><input type="text" /></div><div class="apply">Apply filters</div><div class="clear">Clear filters</div></div>';
+  }
+  
   return $out;
 }
 
@@ -1287,7 +1292,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   //$args = arg();
   //dpm($args);
-  global $user;
+  //global $user;
   
   // Show newsletter emails
   if (arg(3) == 'newsletter-emails') {
