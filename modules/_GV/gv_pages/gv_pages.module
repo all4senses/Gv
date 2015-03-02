@@ -1278,7 +1278,10 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   
   global $user;
   if ($user->uid == 1) {
-    $out .= '<div class="extra-filters"><div class="email-contains"><div class="title"></div><input type="text" /></div><div class="apply">Apply filters</div><div class="clear">Clear filters</div></div>';
+    if (!empty($_GET['email-contains'])) {
+      $email_contains = !empty($_GET['email-contains']) ? $_GET['email-contains'] : NULL;
+    }
+    $out .= '<div class="extra-filters"><div class="email-contains"><div class="title"></div><input type="text" value="' . $email_contains . '"/></div><div class="apply">Apply filters</div><div class="clear">Clear filters</div></div>';
   }
   
   return $out;
