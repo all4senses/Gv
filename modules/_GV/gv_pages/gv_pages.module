@@ -1305,7 +1305,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     $results = $query->execute();
 
-    $emails = '<br/><div><strong>Newsletter emails.</strong></div><br/>';
+    $emails = '<br/><br/>';//'<br/><div><strong>Newsletter emails.</strong></div><br/>';
     
     $count = NULL;
     $all_emails = array();
@@ -1351,7 +1351,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         //->limit(20)
         ->execute();
 
-    $emails = '<br/><div><strong>Quote requests emails only.</strong></div><br/>';
+    $emails = '<br/><br/>';// '<br/><div><strong>Quote requests emails only.</strong></div><br/>';
 //    foreach ($ucaptureds as $ucaptured) {
 //      $data = unserialize($ucaptured->data);
 //      $emails .= '<div>' . $data['Email'] . '</div>';
@@ -1419,7 +1419,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         //->limit(20)
         ->execute();
 
-    $emails = '<br/><div><strong>Reviews emails.</strong></div><br/>';
+    $emails = '<br/><br/>';//'<br/><div><strong>Reviews emails.</strong></div><br/>';
 //    foreach ($ucaptureds as $ucaptured) {
 //      $data = unserialize($ucaptured->data);
 //      $emails .= '<div>' . $data['Email'] . '</div>';
@@ -1479,7 +1479,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $gv_disqus_users = unserialize(variable_get('gv_disqus_users', serialize(array())));
     
-    $emails = '<br/><div><strong>Disqus emails.</strong></div><br/>';
+    $emails = '<br/><br/>';//'<br/><div><strong>Disqus emails.</strong></div><br/>';
 
     $count = NULL;
     $all_emails = array();
@@ -1499,19 +1499,19 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     
     
-    if ($user->uid == 1) 
+    //if ($user->uid == 1) 
     {
       $form['emails'] = array(
         '#type' => 'markup',
         '#markup' => gv_pages_quoteRequestsList_form_header('Disqus emails') . $emails,
       );
     }
-    else {
-      $form['emails'] = array(
-        '#type' => 'markup',
-        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
-      );
-    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+//      );
+//    }
     
     
     
@@ -1670,23 +1670,23 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   
   
-  if ($user->uid == 1) 
+    //if ($user->uid == 1) 
     {
       $form['emails'] = array(
         '#type' => 'markup',
         '#markup' => gv_pages_quoteRequestsList_form_header('All Quote Requests data') 
-          . '<div><strong>All Quote Requests data.</strong></div><br/>'
+          . '<br/>' //. '<div><strong>All Quote Requests data.</strong></div><br/>'
           . '<div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
       );
     }
-    else {
-      $form['emails'] = array(
-    '#type' => 'markup',
-    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>'
-      . '<div><strong>All Quote Requests data.</strong></div><br/>'
-      . '<div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
-  );
-    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>'
+//          . '<div><strong>All Quote Requests data.</strong></div><br/>'
+//          . '<div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
+//      );
+//    }
     
   
   
