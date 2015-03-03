@@ -125,9 +125,39 @@
         if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
           //console.log("ph valid...");
           //$('#block-gv-blocks-request-quote-v8 .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+          
+          
+          
+
+            var buttonLoaded = false;
+
+            $('#header').one('mouseenter', function() {
+               if (!buttonLoaded) {
+                 buttonLoaded = true;            
+                 $('#block-gv-blocks-request-quote-v8 .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+               }
+             });
+            $('.content.page').one('mouseenter', function() {
+               if (!buttonLoaded) {
+                 buttonLoaded = true;            
+                 $('#block-gv-blocks-request-quote-v8 .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+               }
+             });
+        
+        
+          
+          
+          
         }
 
 
+
+
+
+
+
+        
+        
 
 
 
