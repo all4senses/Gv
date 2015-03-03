@@ -5575,8 +5575,6 @@ function gv_blocks_get_requestQuote_block_v8() {
   
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
-  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_v8.js');
   
   $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
   drupal_add_js($path_to_custom_js . 'jquery.form.js');
@@ -5594,7 +5592,21 @@ function gv_blocks_get_requestQuote_block_v8() {
   $_SESSION['requestQuoteToken'] = $token;
 
   
+  // Turn off input phone mask
+  global $user;
+  if ($user->uid == 1) {
+    drupal_add_js(array('gv_turn_on_phone_input_mask' => TRUE), 'setting');  
+  }
+  
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
+  
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_v8.js');
+  
+  
+  
+  
   
   
   $data = unserialize(variable_get('gv_request_quote_v8', NULL));
