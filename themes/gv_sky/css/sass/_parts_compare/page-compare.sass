@@ -1,5 +1,36 @@
 .field-name-field-preface-bottom
 	margin-top: 39px
+	float: left
+	width: perc(762px, 1130px)
 
-.sidebar-right
-	float: right
+	.js &
+		width: 100%
+		float: none
+
+		> .field-items 
+			> .field-item:nth-of-type(1)
+				float: left
+				width: perc(762px, 1130px)
+
+				ul li
+					padding: 0 0 20px 40px
+
+			> .field-item:nth-of-type(2)
+				+clearfix
+				clear: both
+
+			p
+				margin-bottom: 15px
+
+
+#above_footer
+	clear: both
+
+.paragraph-title
+	font-size: 24px
+	font-weight: 600
+	margin-top: 20px
+	margin-bottom: 5px
+
+	.field-item:nth-of-type(1) &
+		margin-top: 0

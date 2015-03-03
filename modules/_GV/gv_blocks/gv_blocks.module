@@ -2478,7 +2478,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
-  $out = '<aside class="top-providers">
+  $out = '<aside class="top-providers" role="complementary">
   <h3 class="top-providers-heading">
   <span class="top-providers-heading-text">Top 5 Providers</span></h3>' .
   /*        
@@ -2494,11 +2494,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     </ul>
   </div>' .
    */       
-  '<div class="content">
-    <div class="view view-providers view-id-providers view-display-id-block_top_bu_small bu-providers view-dom-id-cb39c150aa1db478decae445be6b3572">
-      <div class="view-content">
-        <table class="views-table cols-0">
-          <tbody>';
+  '<ul class="top-providers-list">';
   
   $zebra = 'even';
   $count = NULL;
@@ -2522,20 +2518,10 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       $stars = NULL;
       foreach ($votes as $vote) {
         if ($vote['tag'] == 'overall' && $vote['value']) {
-          $stars = theme('gv_misc_fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-          ////$providers[$nid]->p_vote_overall = number_format($vote['value'] * 0.05, 1);
+          $stars = theme('gv_misc_fivestar_static_top5_providers', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
         }
-        /*
-        elseif ($vote['tag'] == 'recommend') {
-          $p_vote_recommend = $vote['value'];
-        }
-        else {
-          $p_votes[$vote['tag']] = $vote['value']; // number_format($vote['value'] * 0.05, 1);
-        }
-        */
       }
       
-      ////$providers[$nid]->field_p_data_value = unserialize($providers[$nid]->field_p_data_value); 
       if ($_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
         $reviews_link_attributes = array('attributes' => array('class' => array('review-link'), 'target' => '_blank'));
       }
@@ -2543,50 +2529,31 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
         $reviews_link_attributes = array('attributes' => array('class' => array('review-link')));
       }
       
-      $out .= '
-          <tr' .  /*' class="' . $zebra . (!$count++ ? ' views-row-first views-row-last' : '') . '"' . */ '>
-          
-            <td class="views-field views-field-field-p-erating">
-              <span>' . /*$provider->erating*/ ++$count . '</span> 
-            </td>
+      $out .= '          
+          <li class="top-providers-list-item">
+            <div class="top-providers-list-item-details">
+              <div class="top-providers-list-item-details-rating">' . ++$count . '</div> 
+              <div class="top-providers-list-item-details-text">
+                <div class="top-providers-list-item-details-text-provider-name">' . gv_misc_getTrackingUrl($provider->field_p_name_value, NULL, $nid, NULL, 'top-providers-list-item-details-text-provider-name-link', NULL, $all_data_quick[$nid], $service_type) . '</div>
+                <div class="top-providers-list-item-details-text-stars">
+                  ' . $stars . '
+                  <a href="' . url('node/' . $nid, $reviews_link_attributes) . '" class="top-providers-list-item-details-text-stars-read">Read Reviews</a>
+                </div> 
+              </div>
+            </div>
             
-            <td class="views-field views-field-php-4">
-            
-              <div class="name">' . gv_misc_getTrackingUrl($provider->field_p_name_value, NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], $service_type) . '</div>
-                
-              <div class="rating">' . $stars . 
-                
-//                 '<div class="fivestar fivestar-stars">
-//                   <div class="fivestar-widget-static fivestar-widget-static-overall fivestar-widget-static-5 clearfix">
-//                    <div class="star star-1 star-odd star-first">
-//                      <span class="on">4.816325</span>
-//                    </div>
-//                    <div class="star star-2 star-even">
-//                      <span class="on"></span>
-//                      </div><div class="star star-3 star-odd"><span class="on"></span></div><div class="star star-4 star-even"><span class="on"></span></div><div class="star star-5 star-odd star-last"><span class="on" style="width: 81.6325%"></span></div></div>
-//                  </div>' .
-                  
-               '</div> 
-            </td>
-            
-            <td class="views-field views-field-php-5">
-              <div class="p-links">'
-                //. '<a href="/go/nextiva" target="_blank" rel="nofollow" class="reviews visit-site-btn"></a>'
-                 . gv_misc_getTrackingUrl('', NULL, $nid, NULL, 'visit-site-btn reviews', NULL, $all_data_quick[$nid], $service_type)
-                 . l('READ REVIEWS', 'node/' . $nid, $reviews_link_attributes) //. '<a class="review-link" href="/reviews/nextiva">READ REVIEWS</a>
-              . '</div> 
-            </td>
-          </tr>
+            <div class="top-providers-list-item-cta">'
+                 . gv_misc_getTrackingUrl('Visit', NULL, $nid, NULL, 'top-providers-list-item-cta-text', NULL, $all_data_quick[$nid], $service_type)
+              . '
+            </div>
+          </li>
           ';
 
   }
   
   
-  $out .= '</tbody>
-          </table>
-        </div>
-      </div> 
-    </div>
+  $out .= '
+    </ul>
   </aside>';
   
   

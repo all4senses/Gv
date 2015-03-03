@@ -29,7 +29,7 @@
 				left: 0
 				right: 0
 				bottom: 10px
-				font-size: 13px
+				font-size: 13px 
 				font-weight: 700
 				color: $primary
 				text-transform: uppercase
@@ -417,13 +417,27 @@
 	right: 0
 	max-width: 1130px
 	+center(0)
-	background-color: white
+	background: 0
 	border-bottom: 0
 	border-radius: 0
 	z-index: 5
+	box-sizing: border-box
 
 	&.show 
 		display: table
+
+	tr
+		background-color: white
+
+
+	+m(1130)
+		width: 100%
+		padding: 0 20px
+		border-top: 0 
+
+	@media screen and (max-width:1170px) and (min-width: 1131px) 
+		width: 96.5%
+
 
 
 

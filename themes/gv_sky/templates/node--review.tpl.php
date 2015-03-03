@@ -62,10 +62,38 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
   
+  
+  $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+  $teaser = strip_tags($body);
+  
+  $characters_num = 112;
+  
+  // Replaces & with &amp;
+  $teaser = htmlspecialchars(trim(drupal_substr($teaser, 0, $characters_num)));
+  
+  
+  $last_pos = strrpos($teaser, ' ');
+  
+  $teaser = substr_replace ($teaser, '... ', $last_pos);
+  
+  
+  $stars = theme('gv_misc_fivestar_static_latest_reviews', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+  
+  if ($_SERVER['REQUEST_URI'] == '/ppc/business-voip') {
+    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow', 'target' => '_blank');
+  }
+  else {
+    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow');
+  }
+  
+
+  // $reviewsLink = l('More Reviews', 'node/' . $provider_nid, array('attributes' => $reviews_attributes));
+  $reviewsLink = '<a href="' . url('node/' . $provider_nid) . '" class="latest-reviews-list-item-more">More Reviews</a>';
+  // latest-reviews-list-item-header-cta-fivestar
  
 
 
-  echo '<div class="header"><table><tbody><tr><td>';
+  echo '<div class="latest-reviews-list-item-header">';
   
       // Use a logo from providers sprite for minimizing loaded images amount.
       $sprite_name = isset($node->sprite_name) ? $node->sprite_name : 'home_top_providers'; 
@@ -79,51 +107,29 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
       
       if (!empty($all_data_quick[$provider_nid]['i_web'])) {
         //$logo_link = $all_data_quick[$provider_nid]['i_web'];
-        echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo', NULL, $all_data_quick[$provider_nid]);
+        // echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo', NULL, $all_data_quick[$provider_nid]);
+        echo '<a class="latest-reviews-list-item-header-logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       }
       else {
-        echo '<a class="logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
+        echo '<a class="latest-reviews-list-item-header-logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
       }
       
-      echo gv_misc_getTrackingUrl('VISIT', NULL, $provider_nid, NULL, 'link', array('key' => 'rel', 'value' => 'nofollow'), $all_data_quick[$provider_nid]);
+      echo '<div class="latest-reviews-list-item-header-cta">' .
+              $stars .
+              '<div class="latest-reviews-list-item-header-cta-button">' . gv_misc_getTrackingUrl('Visit', NULL, $provider_nid, NULL, 'latest-reviews-list-item-header-cta-button-text', array('key' => 'rel', 'value' => 'nofollow'), $all_data_quick[$provider_nid]) . 
+              '</div>
+            </div>';
       
 
       
-  echo '</td></tr></tbody></table></div>';
+  echo '</div>';
   
-  
-  $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
-  $teaser = strip_tags($body);
-  
-  $characters_num = 160;
-  
-  // Replaces & with &amp;
-  $teaser = htmlspecialchars(trim(drupal_substr($teaser, 0, $characters_num)));
-  
-  
-  $last_pos = strrpos($teaser, ' ');
-  
-  $teaser = substr_replace ($teaser, '... ', $last_pos);
-  
-  
-  $stars = theme('gv_misc_fivestar_static', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-  
-  if ($_SERVER['REQUEST_URI'] == '/ppc/business-voip') {
-    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow', 'target' => '_blank');
-  }
-  else {
-    $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow');
-  }
-  
-  $stars = '<div class="rating">' . $stars . l('See All ' . $all_data_quick[$provider_nid]['name'] . ' Reviews', 'node/' . $provider_nid, array('attributes' => $reviews_attributes)) . '</div>';
 
       
-  echo '<div class="right">', 
-          '<a href="', url('node/' . $provider_nid), '"><h3>', $node->title, '</h3></a>', 
-          $stars, 
-          '<div class="submitted"><span class="author">', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</span> says:</div>',
-          '<div class="review">"', $teaser, '"</div>',
-       '</div>';
+  echo    '<h3 class="latest-reviews-list-item-title"><a href="' . url('node/' . $provider_nid) . '" class="latest-reviews-list-item-title-link"></a>' . $node->title . '</h3>',
+          '<div class="latest-reviews-list-item-content">"', $teaser, '"</div>',
+          '<div class="latest-reviews-list-item-author"> - ', $node->field_r_fname['und'][0]['value'], ' ', $node->field_r_lname['und'][0]['value'][0], '.</div>',
+          $reviewsLink;
   
   return;
 }

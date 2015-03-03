@@ -10,7 +10,7 @@
                 echo '<img src="/sites/all/themes/gv_sky/images/getvoip-logo.png" width="206" height="53" class="navigation-logo-link-img" alt="GetVoIP" title="GetVoIP" />';
             ?>
           </a>
-          <div class="navigation-logo-slogan">Cloud Communications Advisor</div>
+          <div class="navigation-logo-slogan">Cloud Communication Advisor</div>
           <div class="clearfix"></div>
         </div>
         

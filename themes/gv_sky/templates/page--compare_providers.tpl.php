@@ -21,7 +21,7 @@ drupal_add_js('/sites/all/themes/gv_sky/js/comparison_page.js');
                 echo '</a>';
               }
           ?>
-          <div class="navigation-logo-slogan">Cloud Communications Advisor</div>
+          <div class="navigation-logo-slogan">Cloud Communication Advisor</div>
           <div class="clearfix"></div>
         </div>
         

@@ -1,3 +1,14 @@
+// Sidebar Append
+
+	$$('.top-providers').prependTo('.field-name-field-preface-bottom > .field-items');
+
+
+
+
+
+
+// Sticky Table Head
+
 	var $windowOffset = $window.scrollTop();
 	var $tableOffset = $$('.chart').offset().top;
 	var $tableSticky = '<table class="chart horizontal sticky-table"></table>';

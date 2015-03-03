@@ -1,0 +1,125 @@
+.latest-reviews
+	padding-top: 70px
+
+	&-title
+		+section-title-heading($weight: 400, $color: $grey-dark)
+		margin-bottom: 17px
+
+	&-list
+		+clearfix
+
+		&-item
+			position: relative
+			float: left
+			width: perc(359px, 1130px)
+			min-height: 230px
+			margin-right: perc(26px, 1130px)
+			padding: 25px
+			background-color: white
+			border: 1px solid $divider
+			border-radius: 3px
+			box-sizing: border-box
+
+			&.last 
+				margin-right: 0
+
+				+m(920)
+					+center
+
+			&-header
+				+clearfix
+
+				&-logo
+					position: relative
+					display: block
+					min-height: 65px
+					width: 60%
+					float: left
+					border-right: 1px solid $divider
+					box-sizing: border-box
+
+					.sprite-div
+						position: absolute
+						+valign
+						left: -10px
+						right: 0
+						+center
+
+						+m(1064)
+							@media screen and (min-width:920px)
+								-webkit-transform: scale(0.75)
+								-ms-transform: scale(0.75)
+								transform: scale(0.75)
+								-webkit-transform-origin: 35% -150%
+								-ms-transform-origin: 35% -150%
+								transform-origin: 35% -150%
+
+
+				&-cta 
+					display: block
+					width: 40%
+					float: left
+
+					&-fivestar
+						position: relative
+						right: -10px
+						+fivestar(15px)
+						+center(6px, 0)
+
+					&-button
+						position: relative
+						right: -10px
+						display: block
+						+button(solid, $contrast, 100px, 30px)
+						max-width: 100%
+						+center(6px, 0)
+
+						&-text 
+							color: white
+							letter-spacing: .4px
+							height: 100%
+							line-height: 30px
+
+			
+			&-title
+				font-size: 16px
+				font-weight: 600
+				+ellipsis(100%)
+				margin-top: 20px
+
+			&-content
+				display: inline
+				font-size: 14px
+				font-weight: 500
+
+			&-author
+				display: inline
+				font-size: 14px
+				font-weight: 500
+				color: $primary
+
+			&-more
+				position: absolute
+				right: 25px
+				bottom: 10px
+				display: block
+				font-size: 11px
+				font-weight: 600
+				letter-spacing: .4px
+				text-transform: uppercase
+				color: $primary
+
+				&:hover
+					text-decoration: underline
+
+			+m(920)
+				float: none
+				margin-right: 0
+				+center(0, 23px)
+				width: 100%
+				max-width: 359px
+
+		+m(736)
+			display: none
+
+
