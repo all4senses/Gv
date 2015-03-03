@@ -5594,6 +5594,7 @@ function gv_blocks_get_requestQuote_block_v8() {
   $_SESSION['requestQuoteToken'] = $token;
 
   
+  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   
   
   $data = unserialize(variable_get('gv_request_quote_v8', NULL));
@@ -8253,7 +8254,14 @@ function gv_blocks_get_requestQuoteForPage_v8() {
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
   
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v8.js');
+  
+  // Turn off input phone mask 
+  global $user;
+  if ($user->uid == 1) {
+    drupal_add_js(array('gv_turn_on_phone_input_mask' => TRUE), 'setting');  
+    drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v8.js');
+  }
+  
   
   
   $token = md5(time()); //drupal_get_token('test');
@@ -9219,7 +9227,7 @@ function gv_blocks_get_requestQuoteForPage_v10() {
   drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
   
   
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
+  
   
   
   
@@ -9228,7 +9236,7 @@ function gv_blocks_get_requestQuoteForPage_v10() {
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_real/jquery.inputmask.min.js');
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   
-  
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
@@ -9462,7 +9470,6 @@ function gv_blocks_get_requestQuoteForPage_v10_ca() {
   drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
   
   
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
   
   
   
@@ -9472,6 +9479,7 @@ function gv_blocks_get_requestQuoteForPage_v10_ca() {
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   
   
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
@@ -9704,7 +9712,6 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
   drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
   
   
-  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
   
   
   
@@ -9712,6 +9719,11 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/dist/inputmask/jquery.inputmask.phone.extensions.js');
   //drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_real/jquery.inputmask.min.js');
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
+  
+  
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_page_v10.js');
+  
+  
   
   // Turn off input phone mask for UK
   drupal_add_js(array('gv_turn_on_phone_input_mask' => FALSE), 'setting');  

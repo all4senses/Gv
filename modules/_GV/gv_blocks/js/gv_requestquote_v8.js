@@ -115,6 +115,12 @@
             }
 
         });
+        
+        
+        //console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
+        if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
+           $('.fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+        }
 
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
