@@ -13113,19 +13113,19 @@ function gv_misc_quoteRequestsAdminPage_extraFilters_form($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => 'Extra Filters',
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsed' => !empty($_GET['email-contains']) || !empty($_GET['campaign-contains']) ? FALSE : TRUE,
     //'#attributes' => array('class' => array($class_submitted)),
   );
       $form['extraFilters']['email-contains'] = array(
         '#type' => 'textfield',
         '#title' => 'Email contains',  
-        '#default_value' => 'xxx',
+        '#default_value' => @$_GET['email-contains'],
       );
       
       $form['extraFilters']['campaign-contains'] = array(
         '#type' => 'textfield',
         '#title' => 'Campaign contains',  
-        '#default_value' => 'yyy',
+        '#default_value' => @$_GET['campaign-contains'],
       );
 
   

@@ -1361,6 +1361,10 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.email_presented', '', '!=');
     $query->isNotNull('qr.email_presented');
 
+    if (!empty($_GET['email-contains'])) {
+      $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+    }
+    
     $ucaptureds = 
       $query
         //->orderBy($sort, $order)
@@ -1428,6 +1432,11 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     // Show reviews emails.
     $query = db_select('field_data_field_r_email', 're'); //->extend('PagerDefault');
     $query->fields('re', array('field_r_email_value'));
+    
+    
+    if (!empty($_GET['email-contains'])) {
+      $query->condition('re.field_r_email_value', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+    }
     
     $results = 
       $query
@@ -1499,7 +1508,11 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $count = NULL;
     $all_emails = array();
+    $email_contains = @$_GET['email-contains'];
     foreach ($gv_disqus_users as $disqus_user) {
+      if ($email_contains && strpos($disqus_user['email'], $email_contains) === FALSE) {
+        continue;
+      }
       $emails .= '<div>' . $disqus_user['email'] . '</div>';
       $all_emails[] = $disqus_user['email'];
       $count++;
@@ -1760,6 +1773,11 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.email_presented', '', '!=');
     $query->isNotNull('qr.email_presented');
   }
+  
+  if (!empty($_GET['email-contains'])) {
+    $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+  }
+  
   $ucaptureds = 
     $query
       ->orderBy($sort, $order)
