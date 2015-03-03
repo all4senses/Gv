@@ -130,7 +130,7 @@
           
 
             var buttonLoaded = false;
-            $('block-gv-blocks-request-quote-v8').one('mouseenter', function() {
+            $('#block-gv-blocks-request-quote-v8').one('mouseenter', function() {
                if (!buttonLoaded) {
                  buttonLoaded = true;            
                  $('#block-gv-blocks-request-quote-v8 .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
