@@ -1799,6 +1799,9 @@ h1.preface {
   .field-item:nth-of-type(1) .paragraph-title {
     margin-top: 0; }
 
+.more-link.hidden {
+  display: none; }
+
 .chart.horizontal {
   width: 100%;
   background: white;
@@ -2633,6 +2636,77 @@ h1.preface {
           top: 54%;
           letter-spacing: 0.4px;
           color: white; }
+
+.resources {
+  position: relative;
+  margin-top: 55px; }
+  .resources .section-title-heading {
+    text-align: center;
+    font-weight: 400;
+    font-size: 36px;
+    color: #666666;
+    margin-bottom: 45px; }
+    .resources .section-title-heading-highlight {
+      color: #045da0; }
+  .resources-box {
+    position: relative;
+    padding: 30px 42px;
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid #d1d1d1;
+    box-sizing: border-box; }
+    .resources-box:before, .resources-box:after {
+      content: "";
+      display: table; }
+    .resources-box:after {
+      clear: both; }
+    .resources-box-list {
+      float: left;
+      width: 48%; }
+      .resources-box-list_first {
+        margin-right: 4%; }
+      .resources-box-list-item {
+        position: relative;
+        margin-top: 25px; }
+        .resources-box-list-item:nth-child(1) {
+          margin-top: 0; }
+        .resources-box-list-item:before {
+          content: "A";
+          position: absolute;
+          top: -2px;
+          left: 0;
+          font-family: gvcons;
+          font-size: 19px;
+          line-height: 19px;
+          color: #045da0; }
+        .resources-box-list-item-text {
+          padding-left: 32px;
+          font-size: 14px;
+          font-weight: 600;
+          display: inline-block;
+          max-width: 90%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-wrap: normal;
+          display: block;
+          line-height: 19px; }
+          .resources-box-list-item-text a {
+            color: #595959; }
+        .resources-box-list-item:hover a {
+          color: #045da0; }
+  .resources-more {
+    position: absolute;
+    bottom: 10px;
+    right: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.4px; }
+    .resources-more-link {
+      color: #777777; }
+      .resources-more-link:hover {
+        color: #045da0; }
 
 /* ==========================================================================
  * Body

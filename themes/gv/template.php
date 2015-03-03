@@ -1227,8 +1227,7 @@ function gv_preprocess_views_view(&$vars) {
 //  }
   
   if (!empty($vars['view']->display[$vars['view']->current_display]->display_options['use_more']) && !empty($vars['view']->display[$vars['view']->current_display]->display_options['link_url']) ) {
-    //$vars['more'] = '<div class="more-link"><a rel="nofollow" href="'. $more_url . '">' . $link_text .  '</a></div>';
-    $vars['more'] = '<div class="more-link"><a rel="nofollow" href="/'. $vars['view']->display[$vars['view']->current_display]->display_options['link_url'] . '">' . $vars['view']->display[$vars['view']->current_display]->display_options['use_more_text'] .  '</a></div>';
+    $vars['more'] = '<div class="more-link hidden"><a rel="nofollow" href="/'. $vars['view']->display[$vars['view']->current_display]->display_options['link_url'] . '">' . $vars['view']->display[$vars['view']->current_display]->display_options['use_more_text'] .  '</a></div>';
   }
   
   

@@ -1,0 +1,80 @@
+.resources
+	position: relative
+	margin-top: 55px
+
+	.section-title
+		&-heading
+			+section-title-heading($size: 36px, $color: $grey-dark, $weight: 400)
+			margin-bottom: 45px
+
+			&-highlight
+				color: $primary
+
+	&-box
+		position: relative
+		padding: 30px 42px
+		background-color: white
+		border-radius: 4px
+		border: 1px solid $divider
+		box-sizing: border-box
+		+clearfix
+
+		&-list
+			float: left
+			width: 48%
+
+			&_first
+				margin-right: 4%
+
+			&-item
+				position: relative
+				margin-top: 25px
+
+				&:nth-child(1)
+					margin-top: 0
+
+				&:before
+					content: 'A'
+					position: absolute
+					top: -2px
+					left: 0
+					font-family: gvcons
+					font-size: 19px
+					line-height: 19px
+					color: $primary
+
+				&-text
+					padding-left: 32px
+					font-size: 14px
+					font-weight: 600
+					+ellipsis(90%)
+					display: block
+					line-height: 19px
+
+					a 
+						color: $grey-darker
+
+				&:hover
+					a
+						color: $primary
+
+	&-more
+		position: absolute
+		bottom: 10px
+		right: 16px
+		text-transform: uppercase
+		font-weight: 700
+		font-size: 11px
+		letter-spacing: .4px
+
+		&-link
+			color: $grey
+
+			&:hover
+				color: $primary
+
+
+
+
+
+

@@ -15,16 +15,19 @@ $half_count = ceil(count($rows)/2);
 			Learn VoIP - <span class="section-title-heading-highlight">Additional Resources</span>
 		</h2>
 	</div>
-	<ul class="resources-list resources-list_first">  
-	<?php foreach ($rows as $id => $row): ?>
-	  <?php 
-	    if ($id == $half_count) {
-	      echo '</ul><ul class="resources-list resources-list_second">';
-	    }
-	  ?>
-	  <li class="resources-list-item">
-	    <?php print $row; ?>
-	  </li>
-	<?php endforeach; ?>
-	</ul>
+	<div class="resources-box">
+		<ul class="resources-box-list resources-box-list_first">  
+		<?php foreach ($rows as $id => $row): ?>
+		  <?php 
+		    if ($id == $half_count) {
+		      echo '</ul><ul class="resources-box-list resources-box-list_second">';
+		    }
+		  ?>
+		  <li class="resources-box-list-item">
+		    <?php print $row; ?>
+		  </li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+	<div class="resources-more"><a class="resources-more-link" rel="nofollow" href="/library">View All</a></div>
 </section>
