@@ -1288,8 +1288,8 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
 //            . '<div class="campaign-contains"><div class="title">Campaign contains:</div><input type="text" value="' . $campaign_contains . '"/></div>'
 //            . '<div class="apply">Apply filters</div><div class="clear">Clear filters</div>'
 //          . '</div>';
-    
-    $out .= drupal_render(drupal_get_form('gv_misc_quoteRequestsAdminPage_extraFilters_form'));
+    $quoteRequestsAdminPage_extraFilters_form = drupal_get_form('gv_misc_quoteRequestsAdminPage_extraFilters_form');
+    $out .= drupal_render($quoteRequestsAdminPage_extraFilters_form);
   }
   
   return $out;
