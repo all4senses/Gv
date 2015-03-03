@@ -13081,6 +13081,115 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Implements hook_form().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_quoteRequestsAdminPage_extraFilters_form($form, &$form_state, $quote_request_data) {
+  
+  $form = array();
+  
+  $form['extraFilters'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Extra Filters',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    //'#attributes' => array('class' => array($class_submitted)),
+  );
+      $form['extraFilters']['email-contains'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Email contains',  
+        '#default_value' => 'xxx',
+      );
+      
+      $form['extraFilters']['campaign-contains'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Campaign contains',  
+        '#default_value' => 'yyy',
+      );
+
+  
+      $form['extraFilters']['actions'] = array('#type' => 'actions');
+      $form['extraFilters']['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Apply',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+      $form['extraFilters']['actions']['clear'] = array(
+        '#type' => 'submit',
+        '#value' => 'Clear',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+  
+ 
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_validate().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_quoteRequestsAdminPage_extraFilters_form_validate(&$form, &$form_state) {
+  
+  //drupal_set_message('In Validate!', 'warning');
+  //dpm($form_state['values']);
+  //dpm($form);
+    
+  //global $user;
+  
+  
+//  if (!$form_state['values']['message']) {
+//    form_set_error('message', 'You have to enter a Message, if don\'t want to just subscribe to newsletters');
+//  }
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_quoteRequestsAdminPage_extraFilters_form_submit(&$form, &$form_state) {
+ 
+  //dpm($form_state['values']);
+  // Redirect back to the current page.
+  $get = $_GET;
+  unset($get['q']);
+  //$get['filter'] = $form_state['values']['filter'];
+  drupal_goto($_GET['q'], array('query' => $get));
+}
+
+
+
+
+
+
+
+
 /**
  * Check if  a node exists.
  *
