@@ -10,6 +10,9 @@
 	.js &
 		margin-top: 35px
 
+	+m(1024)
+		display: none
+
 	&-heading
 		height: 40px
 		background-color: $primary
@@ -42,6 +45,7 @@
 			&-details
 				float: left
 				position: relative
+				width: 68%
 
 				&-rating
 					position: absolute
@@ -59,15 +63,18 @@
 				&-text
 					float: left
 					margin-left: 33px
+					width: 100%
 
 					&-provider-name
 						font-size: 19px
 						font-weight: 500
+						width: 100%
 						// display: inline-block
 
 						&-link
 							color: $grey-darker
-							+ellipsis(165px)
+							// +ellipsis(165px)
+							+ellipsis(75%)
 							display: block
 							// line-height: 20px
 

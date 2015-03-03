@@ -1,0 +1,27 @@
+.latest-blog-posts
+	margin-top: 80px
+
+	+m(768)
+		display: none
+
+	.section-title
+
+		&-heading
+			+section-title-heading($size: 36px, $weight: 400, $color: $grey-dark)
+
+	&-list
+		margin-top: 22px
+
+		&-item
+			float: left
+			width: perc(359px, 1130px)
+			margin-right: perc(26px, 1130px)
+			padding: 25px 22px 22px
+			background-color: white
+			border: 1px solid $divider
+			border-radius: 3px
+			box-sizing: border-box
+
+			&:nth-of-type(3)
+				margin-right: 0
+
