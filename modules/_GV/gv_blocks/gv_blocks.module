@@ -1641,7 +1641,7 @@ function gv_blocks_getLatestPostsSidebar_2() {
   }
   //dpm($node_views);
 
-  return  '<div><h3>Some title</h3>' . drupal_render($node_views) . l('View All', 'blog', array('attributes' => array('class' => array('view-all')))) . '</div>'; 
+  return drupal_render($node_views) . l('View All', 'blog', array('attributes' => array('class' => array('view-all'))));
 }
 
 
