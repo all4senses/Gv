@@ -478,6 +478,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['getLatestPostsSidebar_2'] = array(
+    'info' => 'Latest Posts at Sidebar 2',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   return $blocks;
 }
@@ -973,8 +977,13 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getQuotePopup_onLists();
       break;
     
+    case 'getLatestPostsSidebar_2':
+      $block['subject'] = 'Latest Posts';
+      $block['content'] = gv_blocks_getLatestPostsSidebar_2();
+      break;
     
-      
+  
+  
   }
 
   return $block;
@@ -1605,6 +1614,36 @@ function gv_blocks_getLatestPostsRotated() {
           . l('View All', 'blog', array('attributes' => array('class' => array('view-all'))))
         ;  
 }
+
+
+
+/**
+ * Sidebar Block with latest posts.
+ */
+function gv_blocks_getLatestPostsSidebar_2() {
+  
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', array('blog_post', 'phone'), 'IN');
+  $query->condition('n.status', 1);
+  $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+  $query->condition('i.field_invisible_value', 1, '!='); 
+  $query->orderBy('n.created', 'DESC');
+  $query->range(0, 3);
+  $posts = $query->execute()->fetchCol();
+  
+  $nodes = node_load_multiple($posts);
+  $node_views = node_view_multiple($nodes, 'side_block_teaser');
+
+  foreach ($node_views['nodes'] as $key => $value) {
+    $node_views['nodes'][$key]['#prefix'] = '<div class="some-class ' . $key . '-row">';
+    $node_views['nodes'][$key]['#suffix'] = '</div>';
+  }
+  //dpm($node_views);
+
+  return  '<div><h3>Some title</h3>' . drupal_render($node_views) . l('View All', 'blog', array('attributes' => array('class' => array('view-all')))) . '</div>'; 
+}
+
 
 
 /**
@@ -5593,10 +5632,10 @@ function gv_blocks_get_requestQuote_block_v8() {
 
   
   // Turn off input phone mask
-  global $user;
-  if ($user->uid == 1) {
-    drupal_add_js(array('gv_turn_on_phone_input_mask' => TRUE), 'setting');  
-  }
+//  global $user;
+//  if ($user->uid == 1) {
+//    drupal_add_js(array('gv_turn_on_phone_input_mask' => TRUE), 'setting');  
+//  }
   
   drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   
