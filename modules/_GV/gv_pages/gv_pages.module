@@ -1278,8 +1278,8 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   
   global $user;
   if ($user->uid == 1) {
-//    $path_to_js = drupal_get_path('module', 'gv_page') . '/js/gv_quoteRequestsAdminPage_extraFilters.js';
-//    drupal_add_js($path_to_js);
+    $path_to_js = drupal_get_path('module', 'gv_page') . '/js/gv_quoteRequestsAdminPage_extraFilters.js';
+    drupal_add_js($path_to_js);
     
     $email_contains = !empty($_GET['email-contains']) ? $_GET['email-contains'] : NULL;
     $out .= '<div class="extra-filters"><div class="email-contains"><div class="title">Emails contain:</div><input type="text" value="' . $email_contains . '"/></div><div class="apply">Apply filters</div><div class="clear">Clear filters</div></div>';
