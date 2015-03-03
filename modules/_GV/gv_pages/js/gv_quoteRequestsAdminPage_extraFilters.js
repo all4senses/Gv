@@ -15,7 +15,7 @@
 //           $(this).attr('href', $(this).attr('href') + '?from=' + window.location.href + '&ref=' + document.referrer);
 //         }
           
-         //console.log(window.location);
+         console.log(window.location);
           
          //console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));
