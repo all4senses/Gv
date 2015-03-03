@@ -1634,7 +1634,7 @@ function gv_blocks_getLatestPostsSidebar_2() {
   
   $nodes = node_load_multiple($posts);
   $node_views = node_view_multiple($nodes, 'side_block_teaser');
-
+  dpm($node_views);
   foreach ($node_views['nodes'] as $key => $value) {
     $node_views['nodes'][$key]['#prefix'] = '<div class="some-class ' . $key . '-row">';
     $node_views['nodes'][$key]['#suffix'] = '</div>';
