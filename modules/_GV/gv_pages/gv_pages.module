@@ -1289,7 +1289,7 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
 //            . '<div class="apply">Apply filters</div><div class="clear">Clear filters</div>'
 //          . '</div>';
     
-    $out .= drupal_get_form('gv_misc_quoteRequestsAdminPage_extraFilters_form');
+    $out .= drupal_render(drupal_get_form('gv_misc_quoteRequestsAdminPage_extraFilters_form'));
   }
   
   return $out;
