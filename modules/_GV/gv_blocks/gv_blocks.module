@@ -5635,12 +5635,13 @@ function gv_blocks_get_requestQuote_block_v8() {
   global $user;
   if ($user->uid == 1) {
     drupal_add_js(array('gv_turn_on_phone_input_mask' => TRUE), 'setting');  
+    drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
   }
   else {
     drupal_add_js(array('gv_turn_on_phone_input_mask' => FALSE), 'setting'); 
   }
   
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.inputmask/_v1/jquery.inputmask.js');
+  
   
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
