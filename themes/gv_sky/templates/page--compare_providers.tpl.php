@@ -66,9 +66,7 @@ drupal_add_js('/sites/all/themes/gv_sky/js/comparison_page.js');
           <?php endif; ?>  
 
         
-        <div id="above_footer">
-            <?php echo render($page['above_footer']); ?>
-        </div>
+          <?php echo render($page['above_footer']); ?>
     </div>
   </main>
 

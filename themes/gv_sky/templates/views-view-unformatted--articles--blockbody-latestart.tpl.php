@@ -6,20 +6,25 @@
  *
  * @ingroup views_templates
  */
+// print_r($rows);
 $half_count = ceil(count($rows)/2);
 ?>
-<?php if (!empty($title)): ?>
-  <h3><?php print $title; ?></h3>
-<?php endif; ?>
-<div class="col one">  
-<?php foreach ($rows as $id => $row): ?>
-  <?php 
-    if ($id == $half_count) {
-      echo '</div><div class="col two">';
-    }
-  ?>
-  <div<?php if ($classes_array[$id]) { print ' class="' . $classes_array[$id] .'"';  } ?>>
-    <?php print $row; ?>
-  </div>
-<?php endforeach; ?>
-</div>
+<section class="resources">
+	<div class="section-title">
+		<h2 class="section-title-heading">
+			Learn VoIP - <span class="section-title-heading-highlight">Additional Resources</span>
+		</h2>
+	</div>
+	<ul class="resources-list resources-list_first">  
+	<?php foreach ($rows as $id => $row): ?>
+	  <?php 
+	    if ($id == $half_count) {
+	      echo '</ul><ul class="resources-list resources-list_second">';
+	    }
+	  ?>
+	  <li class="resources-list-item">
+	    <?php print $row; ?>
+	  </li>
+	<?php endforeach; ?>
+	</ul>
+</section>

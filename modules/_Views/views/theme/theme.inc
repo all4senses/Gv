@@ -208,7 +208,7 @@ function template_preprocess_views_view_fields(&$vars) {
 
         $pre = '<' . $object->element_type;
         if ($class) {
-          $pre .= ' class="' . $class . '"';
+          $pre .= ' class="resources-list-item-text ' . $class . '"';
         }
         $field_output = $pre . '>' . $field_output . '</' . $object->element_type . '>';
       }
