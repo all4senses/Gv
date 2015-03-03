@@ -17,7 +17,7 @@
           
           // if current url already has a query, add to the query
          emailContains = jQuery(".extra-filters .email-contains input").val();
-         campaignContains = ''; //jQuery(".extra-filters .campaign-contains input").val();
+         campaignContains = jQuery(".extra-filters .campaign-contains input").val();
          if(window.location.href.split('?')[1]) {
           hrefToGo = window.location.href + (emailContains ? '&email-contains=' + emailContains : '') + (campaignContains ? '&campaign-contains=' + campaignContains : '');
          }
