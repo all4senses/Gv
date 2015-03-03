@@ -1,4 +1,4 @@
-gv_addSourceParamToProviderGoUrl<?php
+<?php
 
 /**
  * @file
@@ -2985,7 +2985,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
     //dpm($drupal_alredy_loaded_js);
     
     if (!isset($drupal_alredy_loaded_js[$path_to_js])) {
-      //drupal_add_js($path_to_js);
+      drupal_add_js($path_to_js);
     }
 
   }
