@@ -13176,7 +13176,7 @@ function gv_misc_QRextraFilters_form_validate(&$form, &$form_state) {
  */
 function gv_misc_QRextraFilters_form_submit(&$form, &$form_state) {
  
-  dpm($form_state['values']['op']);
+  //dpm($form_state['values']['op']);
   // Redirect back to the current page.
   $get = $_GET;
   unset($get['q']);
@@ -13191,8 +13191,8 @@ function gv_misc_QRextraFilters_form_submit(&$form, &$form_state) {
 //    }
 //  }
   //$get['filter'] = $form_state['values']['filter'];
-  //drupal_goto($_GET['q'], array('query' => $get));
-  drupal_goto();
+  drupal_goto($_GET['q'], array('query' => $get));
+  //drupal_goto();
 }
 
 
