@@ -11,10 +11,12 @@
 
 	&-list
 		margin-top: 22px
+		+clearfix
 
 		&-item
 			float: left
 			width: perc(359px, 1130px)
+			min-height: 189px
 			margin-right: perc(26px, 1130px)
 			padding: 25px 22px 22px
 			background-color: white
@@ -25,3 +27,37 @@
 			&:nth-of-type(3)
 				margin-right: 0
 
+			&-date
+				font-size: 12px
+				line-height: 18px
+				font-weight: 600
+				color: $grey-light
+
+
+			&-heading
+				margin-top: 11px
+				font-size: 17px
+				line-height: 24px
+				font-weight: 600
+
+				&-link
+					color: $grey-darker
+
+					&:hover
+						color: $primary
+			
+
+			&-content
+				font-size: 14px
+				margin-top: 6px
+				font-weight: 500
+				line-height: 19px
+
+
+
+
+.icon-calendar
+	float: left
+	font-size: 14px
+	line-height: 1
+	margin-right: 7px

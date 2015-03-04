@@ -1,7 +1,9 @@
 <?php 
 
+
   $class_thumb_presented = NULL;
   $return = FALSE;
+
   
   
   
@@ -67,8 +69,7 @@
 
 
 <?php if (!$page): ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes . $class_thumb_presented; ?> clearfix"<?php //print $attributes; ?>>
-  <!-- <div class="inside"> -->
+  <article>
 <?php else: ?>
   
     <?php 
@@ -91,49 +92,9 @@
             echo $teaser_data['side_block_main_image_beautify']; 
           }
         ?>
-        <header>
       <?php endif; ?>
-
-          <?php print render($title_prefix); ?>
-          
-              <?php if ($page): ?>
-              <h1 
-              <?php elseif ($view_mode == 'side_block_teaser'): ?>
-              <h4 
-              <?php else: ?>
-              <h2 
-              <?php endif; ?>
-
-                <?php print ' '; 
-                
-                $custom_classes = array();
-
-                if (!$node->status) {
-                  $custom_classes[] = 'not-published';
-                }
-                if (!empty($node->field_invisible['und'][0]['value'])) {
-                  $custom_classes[] = 'invisible-in-lists';
-                }
-                if (!empty($custom_classes)) {
-                  echo ' class="' . implode(' ', $custom_classes) . '"';
-                }
-                 
-                
-                ?>><?php if (!isset($node->title_no_link) && !$page): ?><a href="<?php print $node_url; ?>"><?php print $title; ?></a>
-                <?php else: ?><?php print $title; ?><?php endif; ?>
-                
-             <?php if ($page): ?>
-               </h1>
-             <?php elseif ($view_mode == 'side_block_teaser'): ?>
-               </h4>
-             <?php else: ?>
-                </h2>
-             <?php endif; ?> 
-
-          <?php print render($title_suffix); ?>  
-            
-            
-          <span class="submitted">
+       
+          <div class="latest-blog-posts-list-item-date"><div class="icon-calendar"></div>
             <?php 
             
               $created_str = date('F d, Y', $node->created);
@@ -212,16 +173,57 @@
               }
               
             ?>
-          </span>
+          </div>
+
+          <?php print render($title_prefix); ?>
+          
+              <?php if ($page): ?>
+              <h1 
+              <?php elseif ($view_mode == 'side_block_teaser'): ?>
+              <h4 class="latest-blog-posts-list-item-heading"
+              <?php else: ?>
+              <h2 
+              <?php endif; ?>
+
+                <?php print ' '; 
+                
+                $custom_classes = array();
+
+                if (!$node->status) {
+                  $custom_classes[] = 'not-published';
+                }
+                if (!empty($node->field_invisible['und'][0]['value'])) {
+                  $custom_classes[] = 'invisible-in-lists';
+                }
+                if (!empty($custom_classes)) {
+                  echo ' class="' . implode(' ', $custom_classes) . '"';
+                }
+                 
+                $title_shorter = dk_shorten_title($title);
+                
+
+                ?>><?php if (!isset($node->title_no_link) && !$page): ?><a class="latest-blog-posts-list-item-heading-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
+                <?php else: ?><?php print $title; ?><?php endif; ?>
+                
+             <?php if ($page): ?>
+               </h1>
+             <?php elseif ($view_mode == 'side_block_teaser'): ?>
+               </h4>
+             <?php else: ?>
+                </h2>
+             <?php endif; ?> 
+
+          <?php print render($title_suffix); ?>  
+            
+            
 
 
       <?php if (!$page): ?>
-        </header>
       <?php endif; ?>
 
 
 
-      <div class="content <?php echo ($page ? 'page' : 'teaser'); ?>"<?php print $content_attributes; ?>>
+      <div class="latest-blog-posts-list-item-content <?php echo ($page ? 'page' : 'teaser'); ?>"<?php print $content_attributes; ?>>
         <?php
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
@@ -266,7 +268,12 @@
           else {
             
             if ($view_mode == 'side_block_teaser') {
-              echo $teaser_data['teaser_side_block'];
+              if (strlen($title) < 36 ) {
+                $content_shortened = substr($teaser_data['teaser_side_block'], 0, 176);
+              } else {
+                $content_shortened = substr($teaser_data['teaser_side_block'], 0, 156) . '...';
+              }
+              echo $content_shortened;
             }
             // $path_with_latest_article is defined above.
             elseif ($paths_with_latest_article) {
@@ -282,7 +289,7 @@
               
               if ($class_thumb_presented) {
                 //echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
-                echo $extra_data['teaser_main_image_beautify'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
+                echo $extra_data['teaser_main_image_beautify'] . $extra_data['teaser_only'];
               }
               else {
                 echo $teaser_data['teaser_beautify']; //echo $teaser_data['teaser'];
@@ -344,9 +351,7 @@
     
     
       <?php endif; ?>
-    
-      <div class="bottom-clear"></div>
- 
+     
 
   
 

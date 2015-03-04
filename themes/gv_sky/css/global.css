@@ -42,7 +42,8 @@ template {
 
 a {
   background-color: transparent;
-  text-decoration: none; }
+  text-decoration: none;
+  color: #045da0; }
 
 a:active,
 a:hover {
@@ -2532,6 +2533,8 @@ h1.preface {
           text-align: center;
           line-height: 22px;
           box-sizing: border-box; }
+          .webkit .top-providers-list-item-details-rating {
+            line-height: 24px; }
         .top-providers-list-item-details-text {
           float: left;
           margin-left: 33px;
@@ -2746,9 +2749,15 @@ h1.preface {
     color: #666666; }
   .latest-blog-posts-list {
     margin-top: 22px; }
+    .latest-blog-posts-list:before, .latest-blog-posts-list:after {
+      content: "";
+      display: table; }
+    .latest-blog-posts-list:after {
+      clear: both; }
     .latest-blog-posts-list-item {
       float: left;
       width: 31.7699115044%;
+      min-height: 189px;
       margin-right: 2.3008849558%;
       padding: 25px 22px 22px;
       background-color: white;
@@ -2757,6 +2766,31 @@ h1.preface {
       box-sizing: border-box; }
       .latest-blog-posts-list-item:nth-of-type(3) {
         margin-right: 0; }
+      .latest-blog-posts-list-item-date {
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 600;
+        color: #b2b2b2; }
+      .latest-blog-posts-list-item-heading {
+        margin-top: 11px;
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 600; }
+        .latest-blog-posts-list-item-heading-link {
+          color: #595959; }
+          .latest-blog-posts-list-item-heading-link:hover {
+            color: #045da0; }
+      .latest-blog-posts-list-item-content {
+        font-size: 14px;
+        margin-top: 6px;
+        font-weight: 500;
+        line-height: 19px; }
+
+.icon-calendar {
+  float: left;
+  font-size: 14px;
+  line-height: 1;
+  margin-right: 7px; }
 
 /* ==========================================================================
  * Body

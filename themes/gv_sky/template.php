@@ -67,3 +67,13 @@ function gv_sky_l($text, $path, array $options = array()) {
   }
   return '<a class="main-menu-item-link" href="' . check_plain(url($path, $options)) . '"' . drupal_attributes($options ['attributes']) . '><span class="main-menu-item-link-text">' . ($options ['html'] ? $text : check_plain($text)) . '</span></a>';
 }
+
+  function dk_shorten_title($title){
+    $temp = strlen($title);
+
+    if ($temp > 60) {
+      return substr($title, 0, 50) . '...';
+    } else {
+      return $title;
+    }
+  }

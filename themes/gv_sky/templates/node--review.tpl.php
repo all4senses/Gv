@@ -108,7 +108,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
       if (!empty($all_data_quick[$provider_nid]['i_web'])) {
         //$logo_link = $all_data_quick[$provider_nid]['i_web'];
         // echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo', NULL, $all_data_quick[$provider_nid]);
-        echo '<a class="latest-reviews-list-item-header-logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
+        echo '<a class="latest-reviews-list-item-header-logo" href="' . str_replace('reviews/', 'go/', url('node/' . $provider_nid)) . '">' . $image . '</a>';
       }
       else {
         echo '<a class="latest-reviews-list-item-header-logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
