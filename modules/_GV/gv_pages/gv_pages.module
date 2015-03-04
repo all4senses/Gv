@@ -1953,6 +1953,17 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
   
+  unset($get['email-contains'], $get['campaign-contains']);
+  if ($form_state['values']['op'] != 'Clear') {
+  
+    if (!empty($form_state['values']['email-contains'])) {
+      $get['email-contains'] = $form_state['values']['email-contains'];
+    }
+    if (!empty($form_state['values']['campaign-contains'])) {
+      $get['campaign-contains'] = $form_state['values']['campaign-contains'];
+    }
+  }
+  
   drupal_goto($_GET['q'], array('query' => $get));
 }
 
