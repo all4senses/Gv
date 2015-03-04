@@ -1779,7 +1779,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   }
   
   if (!empty($_GET['campaign-contains'])) {
-    $query->condition('qr.data', '.*' . $_GET['campaign-contains'] . '.*', 'REGEX');
+    $query->condition('qr.data', '' . $_GET['campaign-contains'] . '', 'REGEX');
   }
   
   $ucaptureds = 
