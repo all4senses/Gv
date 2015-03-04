@@ -1,0 +1,327 @@
+.vertical
+	width: 100%
+	background: white
+	margin-top: 30px
+	border: 1px solid $divider
+	border-radius: 4px
+	border-collapse: separate
+
+	&-left
+		width: perc(150px, 1130px)
+		max-width: 150px
+		border-bottom: 1px solid $divider
+		padding-left: 20px
+		padding: 8px 0 6px 20px
+		font-size: 12px
+		font-weight: 700
+		letter-spacing: .4px
+		text-transform: uppercase
+		box-sizing: border-box
+
+	&-item
+		border-left: 1px solid $divider
+		border-bottom: 1px solid $divider
+
+	.cols4 &-item
+		width: perc(245px, 1130px)
+
+	.cols5 &-item
+		width: perc(196px, 1130px)
+
+	.cols6 &-item
+		width: perc(163px, 1130px)
+
+	.cols7 &-item
+		width: perc(140px, 1130px)
+
+	.cols8 &-item
+		width: perc(122.5px, 1130px)
+
+	&-thead
+
+		&-logos
+
+			&-empty
+				position: relative
+				border-bottom: 0 !important
+				padding-left: 0
+				
+				&-rank
+					position: absolute
+					bottom: 0
+					width: 100%
+					height: 60px
+					background-color: $primary
+
+					&-title
+						position: absolute
+						+valign
+						top: 53%
+						padding-left: 25px
+						font-size: 18px
+						line-height: 18px
+						font-weight: 700
+						letter-spacing: .6px
+						color: white
+						text-transform: uppercase
+			&-item
+				border-bottom: 0 !important
+				border-left: 0
+
+				&-logo
+					position: relative
+					display: block
+					height: 107px
+
+					&-img .sprite-div
+						position: absolute
+						+valign
+						left: 0
+						right: 0
+						+center
+
+				&-rank
+					position: relative
+					height: 60px
+					background-color: $primary
+					color: white
+					text-align: center
+					font-size: 30px
+					font-weight: 700
+					padding: 15px 0
+					box-sizing: border-box
+					z-index: 1
+
+					&-hash
+						font-size: 16px
+						line-height: 1
+						vertical-align: text-top
+						z-index: 2
+
+
+				&:nth-child(2) 
+
+					.vertical-thead-logos-item-rank
+						font-size: 25px
+						padding: 17px 0
+						
+						&:before
+							content: 'd'
+							position: absolute
+							top: 6px
+							left: 2px
+							right: 0
+							font-size: 45px
+							font-weight: 400
+							font-family: gvcons
+							color: $yellow
+							z-index: -1
+
+
+
+	&-tbody
+
+		&-caption
+			background-color: $primary
+			height: 36px
+			font-size: 14px
+			font-weight: 700
+			letter-spacing: .4px
+			text-transform: uppercase
+			color: white
+
+			&-text
+				padding-left: 20px
+				padding-top: 4px
+				box-sizing: border-box
+
+		&-divider
+			height: 42px
+			// height: 42px
+
+		&-graphs
+
+			&-legend
+
+				&-list
+					font-size: 14px
+					line-height: 16px
+					font-weight: 600
+					text-transform: none
+
+					&-item
+						position: relative
+						height: 13px
+						margin: 10px 0 0
+						padding-left: 21px
+						box-sizing: border-box
+
+						&:nth-child(1)
+							margin: 0
+
+						&:before
+							content: ''
+							position: absolute
+							left: 0
+							top: 0
+							display: block
+							+size(13)
+
+
+						&:nth-child(1):before
+							background-color: $grey-light
+
+						&:nth-child(2):before
+							background-color: $grey-dark
+
+						&:nth-child(3):before
+							background-color: $grey-darker
+
+						&:nth-child(4):before
+							background-color: #85caff
+
+						&:nth-child(5):before
+							background-color: #0984e0
+
+						&:nth-child(6):before
+							background-color: $primary	
+
+			&-item 
+				height: 162px
+				position: relative
+
+				&-wrap
+					position: absolute
+					left: 0
+					right: 0
+					bottom: 0
+					width: 131px
+					height: perc(120px, 164px)
+					+center
+					+clearfix
+
+
+				&-bar
+					position: absolute
+					float: left
+					vertical-align: bottom
+					width: 16px
+					background-color: #000
+
+					&:nth-child(1)
+						background-color: $grey-light
+
+					&:nth-child(2)
+						background-color: $grey-dark
+
+					&:nth-child(3)
+						background-color: $grey-darker
+
+					&:nth-child(4)
+						background-color: #85caff
+
+					&:nth-child(5)
+						background-color: #0984e0
+
+					&:nth-child(6)
+						background-color: $primary
+
+					@for $i from 1 through 6
+						&:nth-child(#{$i})
+							left: (($i * 16) + ($i * 7) - 23) * 1px
+							bottom: 0
+
+
+		&-reviews
+			
+			&-item 
+				padding: 9px 0
+				text-align: center
+				box-sizing: border-box
+
+				&-rating
+					font-size: 24px
+					line-height: 1.1
+					font-weight: 600
+
+					&-fivestar
+						+fivestar(15px)
+						margin-bottom: 1px
+
+
+				&-read
+					font-size: 11px
+					font-weight: 600
+					color: $primary
+					text-transform: uppercase
+					letter-spacing: .4px
+
+					&:hover
+						text-decoration: underline
+
+
+		&-details
+
+			&-item
+				padding: 10px 0
+				box-sizing: border-box
+
+				&-button
+					+button(solid, $contrast, 90%, 33px)
+					max-width: 116px
+					+center
+
+					&-text
+						left: 5px
+						// padding-top: 2px
+						font-size: 16px
+						font-weight: 600
+						text-transform: none
+						color: white
+
+						&-icon
+							position: relative
+							left: -5px
+							top: 2px
+							font-size: 15px
+
+
+
+		&-option
+			background: white !important
+
+			&-value
+				font-size: 14px
+				padding: 3px 8px 0
+
+				&-icon
+					content: 'C'
+					// text-indent: -9999px
+
+					&_yes
+						&:before
+							content: 'C'
+							color: $green
+
+					&_no
+						&:before
+							content: 'F'
+							color: $grey
+
+					&:before
+						font-family: gvcons
+						text-indent: 1px !important
+						font-size: 21px
+
+				&-additional span
+					display: block
+					padding: 1px 0 4px
+
+
+
+
+
+
+
+
+

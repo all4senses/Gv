@@ -11,14 +11,40 @@
 
 	var $windowOffset = $window.scrollTop();
 	var $tableOffset = $$('.chart').offset().top;
-	var $tableSticky = '<table class="chart horizontal sticky-table"></table>';
+
+	if ( $$('.chart').hasClass('horizontal') ) {
+		var $tableSticky = '<table class="chart horizontal sticky-table"></table>';
+	}
+
+	if ( $$('.chart').hasClass('vertical') ) {
+		var $tableSticky = '<table class="chart vertical sticky-table"></table>';
+	}
 	
+	if ( $$('.chart').hasClass('cols4') ) {
+		var $cols = 'cols4'
+	}
+	if ( $$('.chart').hasClass('cols5') ) {
+		var $cols = 'cols5'
+	}
+	if ( $$('.chart').hasClass('cols6') ) {
+		var $cols = 'cols6'
+	}
+	if ( $$('.chart').hasClass('cols7') ) {
+		var $cols = 'cols7'
+	}
+	if ( $$('.chart').hasClass('cols8') ) {
+		var $cols = 'cols8'
+	}
+
 	$$('.chart').before($tableSticky);
 	$$('.chart thead').clone().addClass('sticky-table-thead').appendTo('.sticky-table');
 
 	if ( $tableOffset - $windowOffset < 0 && $windowOffset - $tableEnd < 74 ) {
 		$$('.sticky-table').addClass('show');
 	}
+
+	$$('.sticky-table').addClass($cols);
+
 
 	$window.scroll(function(){
 		var $windowOffset = $window.scrollTop();
@@ -34,15 +60,35 @@
 			$$('.sticky-table').removeClass('show');
 		}
 
-		if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 74 ) {
-			$$('.sticky-table').css('top', $topHideAmount);
+		if ( $$('.chart').hasClass('horizontal') ) {
+			
+			if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 74 ) {
+				$$('.sticky-table').css('top', $topHideAmount);
+			}
+
+			if ( $windowOffset - $tableEnd < 0 ) {
+				$$('.sticky-table').css('top', 0);
+			}
+
+			if ( $windowOffset - $tableEnd > 74 ) {
+				$$('.sticky-table').removeClass('show');
+			}
+
 		}
 
-		if ( $windowOffset - $tableEnd < 0 ) {
-			$$('.sticky-table').css('top', 0);
-		}
+		if ( $$('.chart').hasClass('vertical') ) {
 
-		if ( $windowOffset - $tableEnd > 74 ) {
-			$$('.sticky-table').removeClass('show');
+			if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 168 ) {
+				$$('.sticky-table').css('top', $topHideAmount);
+			}
+
+			if ( $windowOffset - $tableEnd < 0 ) {
+				$$('.sticky-table').css('top', 0);
+			}
+
+			if ( $windowOffset - $tableEnd > 168 ) {
+				$$('.sticky-table').removeClass('show');
+			}
+
 		}
 	});

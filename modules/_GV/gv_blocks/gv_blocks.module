@@ -2742,12 +2742,12 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       }
 
       
-        $out .= '<thead class="vertical-thead"><tr class="vertical-thead-logos" ><th class="vertical-thead-logos-empty">' . $back_button . '<div class="vertical-thead-logos-empty-rank"><div class="vertical-thead-logos-empty-rank-title">Rank</div></div></th>';
+        $out .= '<thead class="vertical-thead"><tr class="vertical-thead-logos" ><th class="vertical-thead-logos-empty vertical-left">' . $back_button . '<div class="vertical-thead-logos-empty-rank"><div class="vertical-thead-logos-empty-rank-title">Rank</div></div></th>';
         
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
           --$i;
-          $out .= '<th class="vertical-thead-logos-item">';
+          $out .= '<th class="vertical-thead-logos-item vertical-item">';
           if ($sprite_name) {
             $image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name, array($provider['nid'] => array('name' => $provider['p_name'])));
           }
@@ -2810,7 +2810,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             
       
       // Ratings graphs row.
-      $out .= '<tr class="vertical-tbody-graphs"><td class="vertical-tbody-graphs-legend">';
+      $out .= '<tr class="vertical-tbody-graphs"><td class="vertical-tbody-graphs-legend vertical-left">';
       
       // Ratings graphs title td.
       $out .= '<ul class="vertical-tbody-graphs-legend-list">';
@@ -2823,12 +2823,12 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       foreach ($providers as $nid => $provider) {
         
-        $out .= '<td class="vertical-tbody-graphs-item">';
+        $out .= '<td class="vertical-tbody-graphs-item vertical-item">';
 
             
             $out .= '<div class="vertical-tbody-graphs-item-wrap">';
             foreach ($provider['p_votes'] as $vote_tag => $p_vote_value) {
-              $out .= '<div class="vertical-tbody-graphs-item-bar" title="' . $v_titles[$vote_tag] . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px;"></div>';
+              $out .= '<div class="vertical-tbody-graphs-item-bar" title="' . $v_titles[$vote_tag] . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  '%;"></div>';
             }
             $out .= '</div>';
 
@@ -2842,11 +2842,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       
       // User Reviews Row
-      $out .= '<tr class="vertical-tbody-reviews"><td class="vertical-tbody-title">User Reviews</td>';
+      $out .= '<tr class="vertical-tbody-reviews"><td class="vertical-tbody-reviews-title vertical-left">User Reviews</td>';
 
       foreach ($providers as $nid => $provider) {
             $provider_rating = $save_vote[$nid] * 20;
-            $out .= '<td class="vertical-tbody-reviews-item">
+            $out .= '<td class="vertical-tbody-reviews-item vertical-item">
               <div class="vertical-tbody-reviews-item-rating">' . $save_vote[$nid] . '</div>' . 
 
               theme('gv_misc_fivestar_static_vertical_chart', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '
@@ -2917,14 +2917,23 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           continue;
         }
 
-        $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-title">Details</td>';
+        $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-details-item-title vertical-left">Details</td>';
           foreach ($providers as $nid => $provider) {
-            $out .= '<td class="vertical-tbody-details-wrap"><div class="vertical-tbody-details-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+            $out .= '<td class="vertical-tbody-details-item vertical-item"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
           }
         $out .= '</tr>';
         
-        
-        $out .= '<tr class="vertical-tbody-divider"><td colspan="' . $cols_num . '"></td></tr><tr class="vertical-tbody-caption"><td colspan="' . $cols_num . '">' . str_replace(array('(', ')'), array('<span>(', ')</span>'), $options_set) . '</td></tr>';
+
+        //For the FOR Loop 5 lines below this comment
+        $my_cols = $cols_num - 1;
+
+        $divider_cols = '';
+
+        for ($i=0; $i < $my_cols; $i++) { 
+            $divider_cols .= '<td class="vertical-item"></td>';
+        }
+
+        $out .= '<tr class="vertical-tbody-divider"><td class="vertical-left"></td>' . $divider_cols . '</tr><tr class="vertical-tbody-caption"><td class="vertical-tbody-caption-text" colspan="' . $cols_num . '">' . str_replace(array('(', ')'), array('<span>(', ')</span>'), $options_set) . '</td></tr>';
 
         
         
@@ -2943,7 +2952,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           // Refine a title to show.
           $title_alias = isset($provider_options_titles_aliases[$option_title])? $provider_options_titles_aliases[$option_title] : $option_title;
           $title_alias = str_replace('Num ', '# ', $title_alias);
-          $out .= '<tr class="vertical-tbody-option ' . $row_class . '"><td class="vertical-tbody-option-title">' . $title_alias . '</td>';
+          $out .= '<tr class="vertical-tbody-option ' . $row_class . '"><td class="vertical-tbody-option-title vertical-left">' . $title_alias . '</td>';
           
           foreach ($providers as $nid => $provider) {
             
@@ -2971,7 +2980,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                 $option_value = $option_value['value'];
               }
               
-              $out .= '<td style="text-align: center;' . (!empty($additional_options_td_style[$option_title]) ? $additional_options_td_style[$option_title] : '') . '" class="vertical-tbody-option-value"><div'. ($is_checkbox ? ' class="vertical-tbody-option-value-icon vertical-tbody-option-value-icon_' . ($option_value == 'Yes' ? 'yes' : ($option_value == 'No' ? 'no' : '')) . '"' : '') . '>' . $option_value . '</div><div class="vertical-tbody-option-value-additional">' . $additional_text . '</div></td>';
+              $out .= '<td style="text-align: center;' . (!empty($additional_options_td_style[$option_title]) ? $additional_options_td_style[$option_title] : '') . '" class="vertical-tbody-option-value vertical-item"><div'. ($is_checkbox ? ' class="vertical-tbody-option-value-icon vertical-tbody-option-value-icon_' . ($option_value == 'Yes' ? 'yes' : ($option_value == 'No' ? 'no' : '')) . '"' : '') . '>' . (($option_value == 'Yes') ? '' : (($option_value == 'No') ? '' : $option_value)) . '</div><div class="vertical-tbody-option-value-additional">' . $additional_text . '</div></td>';
 
           }
           
@@ -2982,7 +2991,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
       $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-title">Details</td>';
         foreach ($providers as $nid => $provider) {
-          $out .= '<td class="vertical-tbody-details-wrap"><div class="vertical-tbody-details-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+          $out .= '<td class="vertical-tbody-details-item vertical-item"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
         }
       $out .= '</tr>';
         
