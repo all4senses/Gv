@@ -16,7 +16,7 @@
         
         
       
-        //$('#requestQuoteFormWrapper #Navigation #back').css('display', 'block');
+          //$('#requestQuoteFormWrapper #Navigation #back').css('display', 'block');
         
         
         /*
@@ -52,7 +52,8 @@
         $('input[name="referrer"]').val(document.referrer);
         $('input[name="url"]').val(document.URL);
         
-        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
+        //$('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').hint();
+        $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"]').hint();
         
         $('input[id="firstname"], input[id="lastname"], input[id="email"], input[id="company"], input[id="phone"]').each(function(){
           if ($(this).val() == '') {
