@@ -1777,9 +1777,9 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   if (!empty($_GET['email-contains'])) {
     $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
   }
-  
-  if (!empty($_GET['campaign-contains'])) {
-    $query->condition('qr.data', '' . $_GET['campaign-contains'] . '', 'REGEX');
+  global $user;
+  if ($user->uid == 1 && !empty($_GET['campaign-contains'])) {
+    $query->condition('qr.data', '' . $_GET['campaign-contains'] . '', 'REGEXP');
   }
   
   $ucaptureds = 
