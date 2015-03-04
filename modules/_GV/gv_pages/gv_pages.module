@@ -1805,7 +1805,19 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#default_value' => @$_GET['campaign-contains'],
   );
  
-  
+  $form['actions'] = array('#type' => 'actions');
+      $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Apply',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+      $form['actions']['clear'] = array(
+        '#type' => 'submit',
+        '#value' => 'Clear',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+      
+      
     
   $form['table_start'] = array(
     '#type' => 'markup',
