@@ -1785,7 +1785,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       ->execute();
   
   
-  $form['filter'] = array(
+  $form['filters'] = array(
+    '#type' => 'container',
+    //'#title' => 'Filters',
+  );
+  
+  
+  $form['filters']['filter'] = array(
     '#type' => 'radios',
     '#title' => t('Filter by: '),
     '#default_value' => $current_filter,
@@ -1793,25 +1799,25 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#attributes' =>  array('class' =>array('filter_by'), 'onClick' => array('javascript:this.form.submit();')),
   );
   
-  $form['email-contains'] = array(
+  $form['filters']['email-contains'] = array(
     '#type' => 'textfield',
     '#title' => 'Email contains',  
     '#default_value' => @$_GET['email-contains'],
   );
       
-  $form['campaign-contains'] = array(
+  $form['filters']['campaign-contains'] = array(
     '#type' => 'textfield',
     '#title' => 'Campaign contains',  
     '#default_value' => @$_GET['campaign-contains'],
   );
  
-  $form['actions'] = array('#type' => 'actions');
-      $form['actions']['submit'] = array(
+  $form['filters']['actions'] = array('#type' => 'actions');
+      $form['filters']['actions']['submit'] = array(
         '#type' => 'submit',
         '#value' => 'Apply',
         //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
       );
-      $form['actions']['clear'] = array(
+      $form['filters']['actions']['clear'] = array(
         '#type' => 'submit',
         '#value' => 'Clear',
         //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
