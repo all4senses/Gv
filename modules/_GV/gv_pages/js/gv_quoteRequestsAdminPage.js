@@ -6,7 +6,7 @@
        //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
        
        
-       $("select.campaign_name").click(function(){
+       $("select.campaign_name").change(function(){
          
 //         console.log('click');
          //console.log('href = ' + $(this).attr('href'));
