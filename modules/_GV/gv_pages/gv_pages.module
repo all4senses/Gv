@@ -1777,8 +1777,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   if (!empty($_GET['email-contains'])) {
     $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
   }
-  global $user;
-  if ($user->uid == 1 && !empty($_GET['campaign-v-contains'])) {
+  
+  if (!empty($_GET['campaign-v-contains'])) {
     $campaign_v_contains = $_GET['campaign-v-contains'];
     //dpm($_GET);
     if(strpos($campaign_v_contains, '$') !== FALSE && strpos($campaign_v_contains, '^') !== FALSE) {
@@ -1809,6 +1809,18 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.data', $pattern, 'REGEXP'); // "Version";s:1:"1";
   }
   
+  
+  
+  if (!empty($_GET['campaign-s-contains'])) {
+    $campaign_s_contains = $_GET['campaign-s-contains'];
+    //dpm($_GET);
+    
+    $pattern = '.*"Source";s:[^"]*:"' . $campaign_s_contains . '".*';
+    dpm($pattern);
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Source";s:4:"page";
+  }
+  
+  
   $ucaptureds = 
     $query
       ->orderBy($sort, $order)
@@ -1835,18 +1847,24 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#title' => 'Email contains',  
     '#default_value' => @$_GET['email-contains'],
   );
-      
+  
+  
+  $form['filters']['campaign-s-contains'] = array(
+    '#type' => 'select',
+    '#options' => array('' => '- Any -', 'block' => 'Block', 'page' => 'Page', 'partner' => 'Partner'),
+    '#title' => 'Campaign Source contains',  
+    '#default_value' => @$_GET['campaign-s-contains'],
+  );
+  
+  
+  
   $form['filters']['campaign-v-contains'] = array(
     '#type' => 'textfield',
     '#title' => 'Campaign Version contains',  
     '#default_value' => @$_GET['campaign-v-contains'],
   );
   
-  $form['filters']['campaign-s-contains'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Campaign Source contains',  
-    '#default_value' => @$_GET['campaign-s-contains'],
-  );
+  
  
   $form['filters']['actions'] = array('#type' => 'actions');
       $form['filters']['actions']['submit'] = array(
