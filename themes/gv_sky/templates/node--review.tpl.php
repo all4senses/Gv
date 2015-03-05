@@ -105,13 +105,13 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
         $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $all_data_quick[$provider_nid]['i_logo_uri'], 'alt' =>  $all_data_quick[$provider_nid]['i_logo_alt'], 'title' =>  $all_data_quick[$provider_nid]['i_logo_title'] ));
       }
       
-      if (!empty($all_data_quick[$provider_nid]['i_web'])) {
+      if (!empty($image)) {
         //$logo_link = $all_data_quick[$provider_nid]['i_web'];
         // echo gv_misc_getTrackingUrl($image, NULL, $provider_nid, NULL, 'logo', NULL, $all_data_quick[$provider_nid]);
         echo '<a class="latest-reviews-list-item-header-logo" href="' . str_replace('reviews/', 'go/', url('node/' . $provider_nid)) . '">' . $image . '</a>';
       }
       else {
-        echo '<a class="latest-reviews-list-item-header-logo" href="' . url('node/' . $provider_nid) . '">' . $image . '</a>';
+        echo '<a class="latest-reviews-list-item-header-logo-alt" href="' . str_replace('reviews/', 'go/', url('node/' . $provider_nid)) . '"><span class="latest-reviews-list-item-header-logo-alt-text">' . $all_data_quick[$provider_nid]['name'] . '</span></a>';
       }
       
       echo '<div class="latest-reviews-list-item-header-cta">' .

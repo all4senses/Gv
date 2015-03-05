@@ -517,7 +517,8 @@ h1.preface {
 
 .hero-title .disclosure,
 .hero-title .preface-title,
-.hero-title .preface-paragraph {
+.hero-title .preface-paragraph,
+.hero-title .review-criteria {
   display: none; }
 
 .field-name-body.field > .field-items > .field-item p:nth-of-type(1) {
@@ -960,6 +961,12 @@ h1.preface {
     @media screen and (max-width: 620px) {
       .page-node-288 .hero-header {
         background-image: url(../images/img-residential-m.jpg); } }
+  .page-node-98 .hero-header {
+    background-image: url(../images/img-reviews.jpg);
+    background-position: 80% 0%; }
+    @media screen and (max-width: 620px) {
+      .page-node-98 .hero-header {
+        background-image: url(../images/img-reviews-m.jpg); } }
   .hero-header h1:not(.hero-title-heading) {
     position: absolute;
     top: 700px;
@@ -2898,6 +2905,35 @@ h1.preface {
       display: table; }
     .latest-reviews-list-item-header:after {
       clear: both; }
+    .latest-reviews-list-item-header-logo-alt {
+      position: relative;
+      float: left;
+      display: block;
+      min-height: 65px;
+      width: 60%;
+      border-right: 1px solid #d1d1d1;
+      box-sizing: border-box; }
+      .latest-reviews-list-item-header-logo-alt-text {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        top: 55%;
+        left: 0;
+        right: 0;
+        display: block;
+        padding: 0 10px;
+        font-size: 22px;
+        line-height: 1;
+        font-weight: 600;
+        text-align: center;
+        color: #034f87;
+        box-sizing: border-box;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -o-hyphens: auto;
+        hyphens: auto; }
     .latest-reviews-list-item-header-logo {
       position: relative;
       display: block;
@@ -3028,6 +3064,7 @@ h1.preface {
       text-overflow: ellipsis;
       white-space: nowrap;
       word-wrap: normal;
+      display: block;
       margin-top: 20px; }
     .latest-reviews-list-item-content {
       display: inline;

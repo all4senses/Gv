@@ -3549,7 +3549,8 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     $query->condition('n.type', 'review');
     $query->orderBy('n.created', 'DESC');
     // Show only specific number of  latest reviews
-    $query->range(0, $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]);
+    // $query->range(0, $map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]);
+    $query->range(0, 3);
 
     $results = $query->execute()->fetchAll();
 
