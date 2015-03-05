@@ -1503,7 +1503,7 @@ function gv_preprocess_views_view_table(&$vars) {
   foreach ($vars['rows'] as $num => $row) {
     $vars['row_classes'][$num] = array();
     if ($row_class_special) {
-      $vars['row_classes'][$num][] = ($count++ % 2 == 0) ? 'odd' : 'even';
+      $vars['row_classes'][$num][] = ($count++ % 2 == 0) ? '' : '';
     }
     if ($row_class = $handler->get_row_class($num)) {
       $vars['row_classes'][$num][] = $row_class;
@@ -1511,8 +1511,8 @@ function gv_preprocess_views_view_table(&$vars) {
   }
 
   if ($row_class_special) {
-    $vars['row_classes'][0][] = 'views-row-first';
-    $vars['row_classes'][count($vars['row_classes']) - 1][] = 'views-row-last';
+    $vars['row_classes'][0][] = '';
+    $vars['row_classes'][count($vars['row_classes']) - 1][] = '';
   }
 
   $vars['classes_array'] = array('chart horizontal');
