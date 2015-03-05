@@ -1778,8 +1778,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
   }
   global $user;
-  if ($user->uid == 1 && !empty($_GET['campaign-contains'])) {
-    $query->condition('qr.data', '.*\"Version\";s:.*:\"' . $_GET['campaign-contains'] . '\".*', 'REGEXP'); // "Version";s:1:"1";
+  if ($user->uid == 1 && !empty($_GET['campaign-v-contains'])) {
+    $campaign_contains = $_GET['campaign-contains'];
+    if(strpos($campaign_contains, '$') !== FALSE) {
+      $campaign_contains = explode('$', $campaign_contains);
+      $campaign_contains = $campaign_contains[0];
+    }
+    $query->condition('qr.data', '.*\"Version\";s:.*:\"' . $campaign_contains . '\".*', 'REGEXP'); // "Version";s:1:"1";
   }
   
   $ucaptureds = 
@@ -1809,10 +1814,16 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#default_value' => @$_GET['email-contains'],
   );
       
-  $form['filters']['campaign-contains'] = array(
+  $form['filters']['campaign-v-contains'] = array(
     '#type' => 'textfield',
-    '#title' => 'Campaign contains',  
-    '#default_value' => @$_GET['campaign-contains'],
+    '#title' => 'Campaign Version contains',  
+    '#default_value' => @$_GET['campaign-v-contains'],
+  );
+  
+  $form['filters']['campaign-s-contains'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Campaign Source contains',  
+    '#default_value' => @$_GET['campaign-s-contains'],
   );
  
   $form['filters']['actions'] = array('#type' => 'actions');
@@ -1957,14 +1968,17 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
   
-  unset($get['email-contains'], $get['campaign-contains']);
+  unset($get['email-contains'], $get['campaign-s-contains'], $get['campaign-v-contains']);
   if ($form_state['values']['op'] != 'Clear') {
   
     if (!empty($form_state['values']['email-contains'])) {
       $get['email-contains'] = $form_state['values']['email-contains'];
     }
-    if (!empty($form_state['values']['campaign-contains'])) {
-      $get['campaign-contains'] = $form_state['values']['campaign-contains'];
+    if (!empty($form_state['values']['campaign-s-contains'])) {
+      $get['campaign-s-contains'] = $form_state['values']['campaign-s-contains'];
+    }
+    if (!empty($form_state['values']['campaign-v-contains'])) {
+      $get['campaign-v-contains'] = $form_state['values']['campaign-v-contains'];
     }
   }
   
