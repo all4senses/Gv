@@ -2722,6 +2722,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   
   $v_colors = array('features' => '#a7a7a7', 'install' => '#6b6a6a', 'money' => 'black', 'rely' => '#85caff', 'service' => '#3099e9', 'sound' => '#046da7');
   $v_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
+
+
   
   $out = '<table class="chart vertical cols' . ($cols_num - 1) . '">';
   
@@ -2980,7 +2982,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                 $option_value = $option_value['value'];
               }
               
-              $out .= '<td style="text-align: center;' . (!empty($additional_options_td_style[$option_title]) ? $additional_options_td_style[$option_title] : '') . '" class="vertical-tbody-option-value vertical-item"><div'. ($is_checkbox ? ' class="vertical-tbody-option-value-icon vertical-tbody-option-value-icon_' . ($option_value == 'Yes' ? 'yes' : ($option_value == 'No' ? 'no' : '')) . '"' : '') . '>' . (($option_value == 'Yes') ? '' : (($option_value == 'No') ? '' : $option_value)) . '</div><div class="vertical-tbody-option-value-additional">' . $additional_text . '</div></td>';
+              $out .= '<td class="vertical-tbody-option-value vertical-item"><div'. ($is_checkbox ? ' class="vertical-tbody-option-value-icon vertical-tbody-option-value-icon_' . ($option_value == 'Yes' ? 'yes' : ($option_value == 'No' ? 'no' : '')) . '"' : '') . '>' . (($option_value == 'Yes') ? '' : (($option_value == 'No') ? '' : $option_value)) . '</div><div class="vertical-tbody-option-value-additional">' . $additional_text . '</div></td>';
 
           }
           
@@ -2991,14 +2993,42 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
       $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-title">Details</td>';
         foreach ($providers as $nid => $provider) {
-          $out .= '<td class="vertical-tbody-details-item vertical-item"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+          $out .= '<td class="vertical-tbody-details-item vertical-item vertical-item-last"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
         }
       $out .= '</tr>';
         
       
   $out .= '</tbody></table>';
+
+  $mobile_version = '<table class="vertical-mobile">
+    <thead class="vertical-mobile-thead"></thead>
+    <tbody class="vertical-mobile-tbody">';
+
+  foreach ($providers as $nid => $provider) {
+    $provider_rating = $save_vote[$nid] * 20;
+    $mobile_version .= '<tr class="vertical-mobile-tbody-row">
+          <td class="vertical-mobile-tbody-row-logo">' .
+              // gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'vertical-mobile-tbody-row-logo-img', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type))
+           '</td>
+          <td class="vertical-mobile-tbody-row-price"></td>
+          <td class="vertical-mobile-tbody-row-rating">
+              <div class="vertical-mobile-tbody-row-rating-details"><div class="vertical-mobile-tbody-row-rating-details-rating">' . $save_vote[$nid] . '</div>' . 
+
+              theme('gv_misc_fivestar_static_vertical_chart', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '
+              </div>
+
+              <a class="vertical-mobile-tbody-row-rating-read" href="' . url('node/' . $nid) . '">Read Reviews</a>
+          </td>
+          <td class="vertical-mobile-tbody-row-features"></td>
+          <td class="vertical-mobile-tbody-row-details">
+            <div class="vertical-mobile-tbody-row-details-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-mobile-tbody-row-details-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-mobile-tbody-row-details-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div>
+          </td>
+        </tr>';
+  }
+
+  $mobile_version .= '</tbody></table>';
     
-  return $out;
+  return $out . $mobile_version;
 }
 
 

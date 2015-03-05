@@ -10,7 +10,11 @@
 // Sticky Table Head
 
 	var $windowOffset = $window.scrollTop();
-	var $tableOffset = $$('.chart').offset().top;
+	var $tableOffset = $$('.chart').not('.sticky-table').offset().top;
+	var $tableHeight = $$('.chart').not('.sticky-table').height();
+	var $theadHeight = $$('.chart thead').height();
+	var $tableEnd = ($tableOffset + $tableHeight) - $theadHeight;
+	var $topHideAmount = $tableEnd - $windowOffset;
 
 	if ( $$('.chart').hasClass('horizontal') ) {
 		var $tableSticky = '<table class="chart horizontal sticky-table"></table>';
@@ -92,3 +96,10 @@
 
 		}
 	});
+	
+	for (var i = 1; i <= $$('.vertical-tbody-reviews-item-rating').length; i++) {
+		var n = i +1;
+		$$('.vertical-thead-logos-item:nth-child('+ n +') .vertical-thead-logos-item-logo').first().clone().appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-logo');
+		$$('.vertical-tbody-option:nth-child(15) .vertical-item:nth-child('+ n +') div:first').clone().addClass('vertical-mobile-tbody-row-price-text').appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-price');
+	};
+	// $$('')
