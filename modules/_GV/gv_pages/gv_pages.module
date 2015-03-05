@@ -1884,11 +1884,14 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       
   //Google US/LP, Google UK/LP, 7Search, Bing, Google PPC/Site, Organic, Other
   $gv_settings = variable_get('gv_settings');
-  $campaign_names = array('' => '- Other -');
+  $gv_settings['Campaigns']['Campaign_Names']['Names'] = explode(',', $gv_settings['Campaigns']['Campaign_Names']['Names']['value']);
+  
   dpm($gv_settings['Campaigns']['Campaign_Names']['Names']);
-//  foreach ($gv_settings['Campaigns']['Campaign_Names']['Names'] as $campaign_name) {
-//    $campaign_names[$campaign_name] = $campaign_name;
-//  }
+  foreach ($gv_settings['Campaigns']['Campaign_Names']['Names'] as $campaign_name) {
+    $campaign_name = trim($campaign_name);
+    $campaign_names[$campaign_name] = $campaign_name;
+  }
+  $campaign_names = array('' => '- Other -') + $campaign_names;
     
   $form['table_start'] = array(
     '#type' => 'markup',
