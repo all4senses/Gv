@@ -1805,7 +1805,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       $pattern = '[^"]*' . $campaign_v_contains . '[^"]*';
     }
     $pattern = '.*"Version";s:[^"]*:"' . $pattern . '".*';
-    dpm($pattern);
+    //dpm($pattern);
     $query->condition('qr.data', $pattern, 'REGEXP'); // "Version";s:1:"1";
   }
   
@@ -1816,7 +1816,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     //dpm($_GET);
     
     $pattern = '.*"Source";s:[^"]*:"' . $campaign_s_contains . '".*';
-    dpm($pattern);
+    //dpm($pattern);
     $query->condition('qr.data', $pattern, 'REGEXP'); // "Source";s:4:"page";
   }
   
