@@ -1780,17 +1780,17 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   global $user;
   if ($user->uid == 1 && !empty($_GET['campaign-v-contains'])) {
     $campaign_contains = $_GET['campaign-v-contains'];
-    dpm($_GET);
+    //dpm($_GET);
     if(strpos($campaign_contains, '$') !== FALSE) {
       $campaign_contains = explode('$', $campaign_contains);
       $campaign_contains = $campaign_contains[0];
-      $query->condition('qr.data', '.*"Version";s:.*:"' . $campaign_contains . '".*', 'REGEXP'); // "Version";s:1:"1";
+      $pattern = '.*"Version";s:[^"]*:"' . $campaign_contains . '".*';
     }
     else {
-      $query->condition('qr.data', '.*"Version";s:.*:"' . $campaign_contains . '[^"]*".*', 'REGEXP'); // "Version";s:1:"1";
-      
+      $pattern = '.*"Version";s:[^"]*:"' . $campaign_contains . '[^"]*".*';
     }
-    
+    dpm($pattern);
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Version";s:1:"1";
   }
   
   $ucaptureds = 
