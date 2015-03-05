@@ -1794,7 +1794,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_v_contains . '".*';
       $pattern = '[^"]*' . $campaign_v_contains . '';
     }
-    elseif(strpos($campaign_v_contains, '^') == 0) {
+    elseif(strpos($campaign_v_contains, '^') !== FALSE) {
       $campaign_v_contains = explode('^', $campaign_v_contains);
       $campaign_v_contains = $campaign_v_contains[1];
       //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_v_contains . '".*';
