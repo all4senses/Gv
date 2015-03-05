@@ -1957,6 +1957,17 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
     );
     
+    
+    
+    //Google US/LP, Google UK/LP, 7Search, Bing, Google PPC/Site, Organic, Other
+    
+    $campaign_select_op = array(
+      '#type' => 'select',
+      '#options' => array('' => '- Other -', 'Google US/LP' => 'Google US/LP', 'Google UK/LP' => 'Google UK/LP', '7Search' => '7Search', 'Bing' => 'Bing', 'Google PPC/Site' => 'Google PPC/Site', 'Organic' => 'Organic'),
+      '#title' => 'Campaign Name',  
+      '#default_value' => @$ucaptured_data['Campaign name'],
+    );
+    
     // Ips, User input data, Operations.
     $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
     $form['item_' . ($key + 1) . 'c'] = array(
@@ -1964,6 +1975,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
             . render($gv_misc_sendCapturedQuotesToProviders_form_x)
+            . render($campaign_select_op)
         . '</td>'
       . '</tr>',
     );
@@ -1978,6 +1990,12 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#theme' => 'pager',
     //'#weight' => 5,
   );
+  
+  $form['#attached'] = array(
+      'library' => array(
+        array('system', 'ui.autocomplete'),
+      ),
+  );    
   
   //$form['actions']['submit']['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
   //$form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
