@@ -1784,7 +1784,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     if(strpos($campaign_contains, '$') !== FALSE) {
       $campaign_contains = explode('$', $campaign_contains);
       $campaign_contains = $campaign_contains[0];
-      $pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_contains . '".*';
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_contains . '".*';
+      $pattern = '.*"Version";s:[^"]*:"' . $campaign_contains . '".*';
     }
     else {
       $pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_contains . '[^"]*".*';
@@ -1947,7 +1948,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   //$form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
   $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
   
-  dpm($form);
+  //dpm($form);
   
   return $form;
 }
