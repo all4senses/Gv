@@ -134,6 +134,9 @@
                if (!buttonLoaded) {
                  buttonLoaded = true;        
                  $('#block-gv-blocks-request-quote-v8 .phone input').unbind('blur');
+                 $('#block-gv-blocks-request-quote-v8 .phone input').blur(function(){
+                    console.log($(this).val());
+                 });
                  $('#block-gv-blocks-request-quote-v8 .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
                }
             });
