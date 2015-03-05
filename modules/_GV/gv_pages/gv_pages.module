@@ -1784,7 +1784,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     if(strpos($campaign_contains, '$') !== FALSE) {
       $campaign_contains = explode('$', $campaign_contains);
       $campaign_contains = $campaign_contains[0];
-      $query->condition('qr.data', '.*\"Version\";s:.*:\"' . $campaign_contains . '\".*', 'REGEXP'); // "Version";s:1:"1";
+      $query->condition('qr.data', '.*\"Version\";s:.*:"' . $campaign_contains . '[^"]*".*', 'REGEXP'); // "Version";s:1:"1";
     }
     else {
       $query->condition('qr.data', '.*\"Version\";s:.*:\".*' . $campaign_contains . '.*\".*', 'REGEXP'); // "Version";s:1:"1";
