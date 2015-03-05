@@ -135,7 +135,6 @@
                  buttonLoaded = true;        
                  $('#block-gv-blocks-request-quote-v8 .phone input').unbind('blur');
                  $('#block-gv-blocks-request-quote-v8 .phone input').blur(function(){
-                    console.log($(this).val());
                     if ($(this).val() == '') {
                       //$(this).val($(this).attr('title'));
                       $(this).addClass('blur');
