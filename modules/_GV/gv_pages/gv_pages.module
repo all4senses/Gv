@@ -9661,6 +9661,15 @@ function gv_pages_gvSettings_form($node, &$form_state) {
     );
     variable_set('gv_settings', $gv_settings);
   }
+  
+  
+  if (empty($gv_settings['Campaigns']['Campaign_Names'])) {
+    $gv_settings['Campaigns']['Campaign_Names'] = array(
+      'descr' => 'Set available campaign names',
+      'Names' => array('field_type' => 'textarea', 'value' => "", 'descr' => 'Write campaign name devided by coma'),
+    );
+    variable_set('gv_settings', $gv_settings);
+  }
   //dpm($gv_settings);
   
   //variable_del('gv_settings');
@@ -9681,9 +9690,6 @@ function gv_pages_gvSettings_form($node, &$form_state) {
       );
       
             foreach($section as $value_set_name => $value_set) {
-              
-
-                
                 
                 $form[$section_label][$value_set_name] = array(
                     '#type' => 'container',
