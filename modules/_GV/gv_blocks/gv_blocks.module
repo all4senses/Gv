@@ -4151,26 +4151,7 @@ function gv_blocks_wrapInBlockThemed($block_data, $block)
       </section>';
   }
   else {
-    return 
-      '<section id="block-' . $block_data['module'] . '-' . $block_data['delta'] . '" class="block gv block-' . $block_data['module'] . (isset($block_data['class']) ? ' ' . $block_data['class'] : '') . '">' 
-            /*
-         . '<div class="contextual-links-wrapper">
-              <a class="contextual-links-trigger" href="#">Configure</a>
-              <ul class="contextual-links">
-                <li class="block-configure first last">
-                    <a href="/admin/structure/block/manage/gv_blocks/home_in_highlighted/configure?destination=home">Configure block</a>
-                </li>
-              </ul>
-            </div>'   
-            */
-            
-         . ( ($block['subject'] && (!isset($block_data['subject_visible']) || $block_data['subject_visible']) )
-            ? 
-            '<div class="block-icon pngfix"></div><' . $subjectTag . ' class="block-title">' . $block['subject'] . '</' . $subjectTag . '>'
-            :
-            '') 
-         . '<div class="content">' . $block['content'] . '</div>
-      </section>';
+    return '<h3 class="chart-title">'. $block['subject'] .'</h3>'. $block['content'];
   }
 }
 
