@@ -20,7 +20,7 @@
          //campaignContains = jQuery(".extra-filters .campaign-contains input").val();
          
          ts = $(this)[0].id.split('-')[1];
-         ip = $(this)[0].id.split('-')[3];
+         ip = encodeURIComponent($(this)[0].id.split('-')[3]);
          campaign_name = encodeURIComponent($(this)[0].selectedOptions[0].value);
          console.log('campaign_name = ' + campaign_name);
          if(window.location.href.split('?')[1]) {
@@ -29,9 +29,9 @@
          else {
            hrefToGo = window.location.href + '?op=campaign-name-set&timestamp=' + ts + '&ip=' + ip + '&campaign-name=' + campaign_name;// + $(this);
          }
-         console.log($(this));
+         //console.log($(this));
          console.log('hrefToGo = ' + hrefToGo);
-         console.log(window.location);
+         //console.log(window.location);
          top.location.href = hrefToGo;
           
          //console.log('href = ' + $(this).attr('href'));
