@@ -1957,6 +1957,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $campaign_names[$campaign_name] = $campaign_name;
   }
   $campaign_names = array('' => '- Other -') + $campaign_names;
+  dpm($campaign_names);
   
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
   drupal_add_js($path_to_js);
@@ -2038,6 +2039,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     
     
+    dpm('$ucaptured_data[Campaign Name] = ' . @$ucaptured_data['Campaign Name']);
     
     $campaign_select_op = array(
       '#type' => 'select',
