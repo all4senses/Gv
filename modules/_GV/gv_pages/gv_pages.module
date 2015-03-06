@@ -2050,6 +2050,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
     );
     
+    dpm($campaign_select_op);
+    
     // Ips, User input data, Operations.
     $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
     $form['item_' . ($key + 1) . 'c'] = array(
