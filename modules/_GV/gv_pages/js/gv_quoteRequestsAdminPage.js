@@ -23,15 +23,15 @@
          campaign_name = $(this)[0].selectedOptions[0].value;
          console.log('campaign_name = ' + campaign_name);
          if(window.location.href.split('?')[1]) {
-          hrefToGo = window.location.href + '&op=campaign-name-set&ts=' + ts + '&campaign-name=' + campaign_name;// + $(this);
+          hrefToGo = window.location.href + '&op=campaign-name-set&timestamp=' + ts + '&campaign-name=' + campaign_name;// + $(this);
          }
          else {
-           hrefToGo = window.location.href + '?op=campaign-name-set&ts=' + ts + '&campaign-name=' + campaign_name;// + $(this);
+           hrefToGo = window.location.href + '?op=campaign-name-set&timestamp=' + ts + '&campaign-name=' + campaign_name;// + $(this);
          }
          console.log($(this));
          console.log('hrefToGo = ' + hrefToGo);
          console.log(window.location);
-         //top.location.href = hrefToGo;
+         top.location.href = hrefToGo;
           
          //console.log('href = ' + $(this).attr('href'));
          //console.log('title = ' + $(this).attr('title'));

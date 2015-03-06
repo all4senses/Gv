@@ -1678,6 +1678,26 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
+  elseif (@$_GET['op'] == 'campaign-name-set' && @$_GET['timestamp'] && @$_GET['campaign-name']) {
+    
+//    $result = db_update('gv_quote_requests')
+//      ->fields(array(
+//        'checked' => 0,
+//      ))
+//      ->condition('timestamp', $_GET['timestamp'])
+//      ->execute();
+//    
+//    if ($result) {
+//      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" is now unchecked.');
+//    }
+//    else {
+//      drupal_set_message('Something wrong has happened while updating the row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". Check the data.', 'warning');
+//    }
+    dpm($_GET);
+    unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+  }
+  
   
   // Remove all useless rows (without emails).
 //  $current_time = time();
