@@ -96,6 +96,10 @@
 			&-php-1
 				width: perc(177px, 1130px)
 
+				// The 'Bottom Line' column on the reviews page
+				.page-node-98 &
+					width: perc(387px, 1130px)
+
 			&-php-9
 				width: perc(68px, 1130px)
 
@@ -167,13 +171,16 @@
 					color: $grey
 					padding-left: 22px
 
+					.page-node-98 &
+						padding-left: 0
+
 					+m(736)
-						// display: inline-block
 						padding-left: 0
 						margin: 2px 0
 						width: auto
-						// display: inline-block
+					
 
+					// Icon Checkmark
 					&:after
 						content: 'M'
 						position: absolute
@@ -182,6 +189,11 @@
 						font-family: gvcons
 						font-size: 14px
 						color: $contrast
+						
+
+						// Hide Checkmark on reviews page
+						.page-node-98 &
+							content: ''
 
 						+m(736)
 							content: ''
@@ -419,6 +431,12 @@
 				border-top: 0
 				height: auto
 
+			// 'Bottom Line' Column on the Reviews page
+			.page-node-98 &-php-1
+				padding: 25px 0
+				text-align: left
+				font-size: 13px
+
 
 
 	//	Remove first row's top border
@@ -442,6 +460,10 @@
 
 	&.show 
 		display: table
+
+	// Hide on Reviews page where there are two tables. Loss will be greater than the benefit if I revise the JS sticky header code. Better to hide it.
+	.page-node-98 &
+		display: none
 
 	tr
 		background-color: white

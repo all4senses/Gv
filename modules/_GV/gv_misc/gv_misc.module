@@ -10160,12 +10160,12 @@ function gv_misc_getProviderQuickData($target, $data) {
       $plan_title = isset($all_data_quick[$data['data']->nid][$data['service_type']]['plan']) ? $all_data_quick[$data['data']->nid][$data['service_type']]['plan'] : '';
       
       if ($plan_title) {
-        $out .= '<div class="plan">' . $plan_title . '</div>';
+        $out .= '<div class="tbody-item-feature">' . $plan_title . '</div>';
       }
       
       
       if (isset($all_data_quick[$data['data']->nid]['the_bottom_line'])) {
-        $out .= '<div class="feature">' . $all_data_quick[$data['data']->nid]['the_bottom_line'] . '</div>';
+        $out .= '<div class="tbody-item-feature-item">' . $all_data_quick[$data['data']->nid]['the_bottom_line'] . '</div>';
       }
                 
       
