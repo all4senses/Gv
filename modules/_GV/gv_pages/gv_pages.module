@@ -1678,7 +1678,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
-  elseif (@$_GET['op'] == 'campaign-name-set' && @$_GET['timestamp'] && @$_GET['campaign-name']) {
+  elseif (@$_GET['op'] == 'campaign-name-set' && @$_GET['timestamp'] && @$_GET['campaign-name'] && @$_GET['ip']) {
     
 //    $result = db_update('gv_quote_requests')
 //      ->fields(array(
@@ -1699,6 +1699,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->fields('qr', array('data', 'email_presented', 'ip', 'timestamp'));
     
     $query->condition('qr.timestamp', $_GET['timestamp']);
+    $query->condition('qr.ip', $_GET['ip']);
     $results =  $query->execute()->fetchAllAssoc('ip');
     
     
@@ -1708,7 +1709,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     dpm($_GET);
     dpm($results);
     
-    unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name']);
+    unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name'], $_GET['ip']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
   
@@ -2012,7 +2013,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#options' => $campaign_names, //array('' => '- Other -', 'Google US/LP' => 'Google US/LP', 'Google UK/LP' => 'Google UK/LP', '7Search' => '7Search', 'Bing' => 'Bing', 'Google PPC/Site' => 'Google PPC/Site', 'Organic' => 'Organic'),
       '#title' => 'Campaign Name',  
       '#default_value' => @$campaign_names[@$ucaptured_data['Campaign name']],
-      '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp, 'class' => array('campaign_name')),
+      '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
     );
     
     // Ips, User input data, Operations.
