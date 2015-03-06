@@ -1973,7 +1973,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#title' => 'Campaign Name contains',  
     '#default_value' => @$_GET['campaign-n-contains'],
     //'#description' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)',  
-    '#attributes' => array('title' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)'),
+    '#attributes' => array('title' => 'Examples: Google US/LP, Google UK/LP, 7Search, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)'),
   );
  
  
@@ -2000,7 +2000,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $campaign_names[$campaign_name] = $campaign_name;
   }
   $campaign_names = array('' => '- Other -') + $campaign_names;
-  dpm($campaign_names);
+  //dpm($campaign_names);
   
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
   drupal_add_js($path_to_js);
