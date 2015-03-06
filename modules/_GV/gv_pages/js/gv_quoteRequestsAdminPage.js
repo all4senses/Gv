@@ -4,10 +4,12 @@
     attach: function (context, settings) {
        
        //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
+       console.log(Drupal.settings['gv_campaign_names']);
        
        $(".form-item-campaign-n-contains input").autocomplete({
           minLength: 0,
-          source: [ 'Google US/LP', 'Google UK/LP', '7Search', 'Bing', 'Google PPC/Site', 'Organic', 'Other' ]
+          //source: [ 'Google US/LP', 'Google UK/LP', '7Search', 'Bing', 'Google PPC/Site', 'Organic', 'Other' ]
+          source: Drupal.settings['gv_campaign_names']
        });
 
        $("select.campaign_name").change(function(){

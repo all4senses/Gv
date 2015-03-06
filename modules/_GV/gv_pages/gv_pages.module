@@ -1995,6 +1995,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   $gv_settings = variable_get('gv_settings');
   $gv_settings['Campaigns']['Campaign_Names']['Names'] = explode(',', $gv_settings['Campaigns']['Campaign_Names']['Names']['value']);
  
+  
   foreach ($gv_settings['Campaigns']['Campaign_Names']['Names'] as $campaign_name) {
     $campaign_name = trim($campaign_name);
     $campaign_names[$campaign_name] = $campaign_name;
@@ -2002,6 +2003,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   $campaign_names = array('' => '- Other -') + $campaign_names;
   //dpm($campaign_names);
   
+  drupal_add_js(array('gv_campaign_names' => $gv_settings['Campaigns']['Campaign_Names']['Names']), 'setting');
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
   drupal_add_js($path_to_js);
   
