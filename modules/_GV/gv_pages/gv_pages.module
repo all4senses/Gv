@@ -1680,6 +1680,28 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   }
   elseif (@$_GET['op'] == 'campaign-name-set' && @$_GET['timestamp'] && @$_GET['campaign-name'] && @$_GET['ip']) {
     
+    
+    
+    $query = db_select('gv_quote_requests', 'qr');
+    $query->fields('qr', array('data', 'email_presented', 'ip', 'timestamp'));
+    
+    $query->condition('qr.timestamp', $_GET['timestamp']);
+    $query->condition('qr.ip', $_GET['ip']);
+    //$results =  $query->execute()->fetchAllAssoc('ip');
+    $result =  $query->execute()->fetchObject();
+    
+    
+//    foreach ($results as $key => $value) {
+//      $results[$key]->data = unserialize($results[$key]->data);
+//    }
+//    dpm($results);
+    if ($result) {
+      $result->data = unserialize($result->data);
+      dpm($result);
+    }
+    
+    
+    
 //    $result = db_update('gv_quote_requests')
 //      ->fields(array(
 //        'checked' => 0,
@@ -1695,19 +1717,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //    }
     
     
-    $query = db_select('gv_quote_requests', 'qr');
-    $query->fields('qr', array('data', 'email_presented', 'ip', 'timestamp'));
-    
-    $query->condition('qr.timestamp', $_GET['timestamp']);
-    $query->condition('qr.ip', $_GET['ip']);
-    $results =  $query->execute()->fetchAllAssoc('ip');
-    
-    
-    foreach ($results as $key => $value) {
-      $results[$key]->data = unserialize($results[$key]->data);
-    }
     dpm($_GET);
-    dpm($results);
+    
     
     unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name'], $_GET['ip']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
