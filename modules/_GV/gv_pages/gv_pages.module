@@ -1844,6 +1844,18 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
   }
   
+  
+  
+  if (!empty($_GET['campaign-s-contains'])) {
+    $campaign_s_contains = $_GET['campaign-s-contains'];
+    //dpm($_GET);
+    
+    $pattern = '.*"Source";s:[^"]*:"' . $campaign_s_contains . '".*';
+    //dpm($pattern);
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Source";s:4:"page";
+  }
+  
+  
   if (!empty($_GET['campaign-v-contains'])) {
     $campaign_v_contains = $_GET['campaign-v-contains'];
     //dpm($_GET);
@@ -1877,13 +1889,36 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   
   
-  if (!empty($_GET['campaign-s-contains'])) {
-    $campaign_s_contains = $_GET['campaign-s-contains'];
+  
+  if (!empty($_GET['campaign-n-contains'])) {
+    $campaign_n_contains = $_GET['campaign-n-contains'];
     //dpm($_GET);
-    
-    $pattern = '.*"Source";s:[^"]*:"' . $campaign_s_contains . '".*';
+    if(strpos($campaign_n_contains, '$') !== FALSE && strpos($campaign_n_contains, '^') !== FALSE) {
+      $campaign_n_contains = explode('$', $campaign_n_contains);
+      $campaign_n_contains = explode('^', $campaign_n_contains[0]);
+      $campaign_n_contains = $campaign_n_contains[1];
+      //$pattern = '.*"Version";s:[^"]*:"' . $campaign_n_contains . '".*';
+      $pattern = '' . $campaign_n_contains . '';
+    }
+    elseif(strpos($campaign_n_contains, '$') !== FALSE) {
+      $campaign_n_contains = explode('$', $campaign_n_contains);
+      $campaign_n_contains = $campaign_n_contains[0];
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_n_contains . '".*';
+      $pattern = '[^"]*' . $campaign_n_contains . '';
+    }
+    elseif(strpos($campaign_n_contains, '^') !== FALSE) {
+      $campaign_n_contains = explode('^', $campaign_n_contains);
+      $campaign_n_contains = $campaign_n_contains[1];
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_n_contains . '".*';
+      $pattern = '' . $campaign_n_contains . '[^"]*';
+    }
+    else {
+      //$pattern = '.*"Version";s:[^"]*:"[^"]*' . $campaign_n_contains . '[^"]*".*';
+      $pattern = '[^"]*' . $campaign_n_contains . '[^"]*';
+    }
+    $pattern = '.*"Campaign Name";s:[^"]*:"' . $pattern . '".*';
     //dpm($pattern);
-    $query->condition('qr.data', $pattern, 'REGEXP'); // "Source";s:4:"page";
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Version";s:1:"1";
   }
   
   
@@ -1933,6 +1968,14 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   );
   
   
+ $form['filters']['campaign-n-contains'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Campaign Name contains',  
+    '#default_value' => @$_GET['campaign-n-contains'],
+    //'#description' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)',  
+    '#attributes' => array('title' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)'),
+  );
+ 
  
   $form['filters']['actions'] = array('#type' => 'actions');
       $form['filters']['actions']['submit'] = array(
@@ -2039,8 +2082,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     
     
-    dpm('$ucaptured_data[Campaign Name] = ' . @$ucaptured_data['Campaign Name']);
-    dpm('@$campaign_names[@$ucaptured_data[Campaign Name]] = ' .  @$campaign_names[@$ucaptured_data['Campaign Name']]);
+    //dpm('$ucaptured_data[Campaign Name] = ' . @$ucaptured_data['Campaign Name']);
+    //dpm('@$campaign_names[@$ucaptured_data[Campaign Name]] = ' .  @$campaign_names[@$ucaptured_data['Campaign Name']]);
             
     $campaign_select_op = array(
       '#type' => 'select',
@@ -2051,7 +2094,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
     );
     
-    dpm($campaign_select_op);
+    //dpm($campaign_select_op);
     
     // Ips, User input data, Operations.
     $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
@@ -2113,7 +2156,7 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
   
-  unset($get['email-contains'], $get['campaign-s-contains'], $get['campaign-v-contains']);
+  unset($get['email-contains'], $get['campaign-s-contains'], $get['campaign-v-contains'], $get['campaign-v-contains']);
   if ($form_state['values']['op'] != 'Clear email/campaign') {
   
     if (!empty($form_state['values']['email-contains'])) {
@@ -2124,6 +2167,9 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
     }
     if (!empty($form_state['values']['campaign-v-contains'])) {
       $get['campaign-v-contains'] = $form_state['values']['campaign-v-contains'];
+    }
+    if (!empty($form_state['values']['campaign-n-contains'])) {
+      $get['campaign-n-contains'] = $form_state['values']['campaign-n-contains'];
     }
   }
   
