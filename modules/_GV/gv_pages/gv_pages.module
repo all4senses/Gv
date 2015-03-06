@@ -1693,6 +1693,15 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //    else {
 //      drupal_set_message('Something wrong has happened while updating the row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". Check the data.', 'warning');
 //    }
+    
+    
+    $query = db_select('gv_quote_requests', 'qr');
+    $query->fields('qr', array('data', 'email_presented', 'ip', 'timestamp'));
+    
+    $query->condition('qr.timestamp', $_GET['timestamp']);
+    $results =  $query->execute()->fetchAllAssoc('ip');
+    
+    dpm($results);
     dpm($_GET);
     unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
