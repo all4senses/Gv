@@ -30,7 +30,7 @@
            hrefToGo = window.location.href + '?op=campaign-name-set&timestamp=' + ts + '&ip=' + ip + '&campaign-name=' + campaign_name;// + $(this);
          }
          //console.log($(this));
-         console.log('hrefToGo = ' + hrefToGo);
+         //console.log('hrefToGo = ' + hrefToGo);
          //console.log(window.location);
          top.location.href = hrefToGo;
           

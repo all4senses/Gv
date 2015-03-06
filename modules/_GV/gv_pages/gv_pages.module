@@ -2156,7 +2156,7 @@ function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
   
-  unset($get['email-contains'], $get['campaign-s-contains'], $get['campaign-v-contains'], $get['campaign-v-contains']);
+  unset($get['email-contains'], $get['campaign-s-contains'], $get['campaign-v-contains'], $get['campaign-n-contains']);
   if ($form_state['values']['op'] != 'Clear email/campaign') {
   
     if (!empty($form_state['values']['email-contains'])) {
