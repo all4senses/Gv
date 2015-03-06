@@ -99,6 +99,14 @@
 				// The 'Bottom Line' column on the reviews page
 				.page-node-98 &
 					width: perc(387px, 1130px)
+					
+					+m(920)
+						display: none
+
+			// Button on reviews page
+			.page-node-98 &-php 
+				width: perc(217px, 1130px)
+
 
 			&-php-9
 				width: perc(68px, 1130px)
@@ -145,6 +153,8 @@
 
 				&:nth-child(1)
 					border-top: 0
+		.page-node-98 & tr
+			min-height: 225px
 
 	.tbody
 
@@ -173,6 +183,9 @@
 
 					.page-node-98 &
 						padding-left: 0
+
+						+m(736)
+							display: none
 
 					+m(736)
 						padding-left: 0
@@ -426,10 +439,6 @@
 					+center
 
 
-			+m(736)
-				display: block
-				border-top: 0
-				height: auto
 
 			// 'Bottom Line' Column on the Reviews page
 			.page-node-98 &-php-1
@@ -437,11 +446,44 @@
 				text-align: left
 				font-size: 13px
 
+				+m(920)
+					@media screen and (min-width:737px)
+						display: none
+
+				+m(736)
+					position: absolute
+					top: 130px
+					left: 20px
+					left: 0
+					right: 0
+					padding: 0 20px
+					text-align: center
+					+center
+
+			// tbody 736px query
+			+m(736)
+				display: block
+				border-top: 0
+				height: auto
+
 
 
 	//	Remove first row's top border
 	tr:nth-child(1) .tbody-item
 		border-top: 0
+
+// Reviews page second chart button fix on mobile version
+
+.page-node-98 .chart:nth-of-type(4) .tbody-item-php
+	+m(736)
+		position: absolute
+		top: auto
+		left: 0
+		right: 0
+		width: 100%
+		bottom: 30px
+		padding: 0 20px
+		box-sizing: border-box
 
 
 .chart.sticky-table

@@ -13,4 +13,213 @@
 // Graph Image
 .img-graph-min
 	display: block
-	+center(75px,0)
+	+center(75px,40px)
+	max-width: 100%
+	height: auto
+
+	+m(736)
+		display: none
+
+
+.factors
+	+clearfix
+	margin-bottom: 50px
+	
+
+	&-item
+		float: left
+		width: perc(282px, 1130px)
+		margin-top: perc(60px, 1130px)
+		padding: 0 perc(30px, 1130px)
+		text-align: center
+		box-sizing: border-box
+		+hyphens(auto)
+
+		&:nth-child(5)
+			clear: left
+
+			+m(920)
+				clear: none
+
+		&:nth-child(4),
+		&:nth-child(7)
+
+			+m(920)
+				clear: left
+				+clearfix
+
+			+m(736)
+				clear: none
+
+		&:nth-child(3),
+		&:nth-child(5),
+		&:nth-child(7)
+
+			+m(736)
+				clear: left
+				+clearfix
+
+			// +m(736)
+			// 	clear: none
+
+		+m(920)
+			width: perc(376px, 1130px)
+
+		+m(736)
+			width: perc(565px, 1130px)
+
+		+m(480)
+			width: 100%
+			margin-top: 50px
+
+		+m(414)
+			margin-top: 90px
+
+
+
+		&-title
+			+center
+			font-weight: 500
+			font-size: 22px
+			color: $primary
+
+		&-text
+			+center(10px, 0)
+			font-size: 15px
+			line-height: 21px
+			font-weight: 500
+			color: $grey-darker
+
+			+m(414)
+				display: none
+
+		&-icon
+			position: relative
+			+center(0, 25px)
+
+			&-primary
+				position: absolute
+				top: 0
+				left: 0
+				color: $primary
+
+				&:before
+					position: absolute
+					top: 0
+					left: 0
+
+			&-secondary
+				position: absolute
+				color: $contrast
+
+
+
+
+
+
+
+			&_quality
+				+size(66, 69)
+
+				&-primary
+					font-size: 66px
+
+				&-secondary
+					font-size: 21px
+					top: 13px
+					left: 20px
+
+
+			&_refund
+				+size(65)
+
+				&-primary
+					font-size: 65px
+
+				&-secondary
+					font-size: 26px
+					top: 19px
+					left: 20px
+
+
+			&_setup
+				+size(59)
+
+				&-primary
+					font-size: 59px
+
+				&-secondary
+					font-size: 15px
+					left: -3px
+					bottom: -8px
+
+
+			&_pricing
+				+size(62)
+
+				&-primary
+					font-size: 62px
+
+				&-secondary
+					font-size: 20px
+					top: 13px
+					left: 28px
+
+
+			&_customer-xp
+				+size(65, 63)
+
+				&-primary
+					font-size: 65px
+
+				&-secondary
+					font-size: 27px
+					top: 12px
+					left: 19px
+
+
+			&_reliability
+				+size(58, 62)
+
+				&-primary
+					font-size: 58px
+
+				&-secondary
+					font-size: 59px
+					top: 33px
+
+
+			&_uptime
+				+size(60)
+
+				&-primary
+					font-size: 60px
+					z-index: 2
+
+				&-secondary
+					font-size: 16px
+					top: 9px
+					right: 10px
+					z-index: 1
+
+
+
+			&_features
+				+size(57)
+
+				&-primary
+					font-size: 57px
+
+				&-secondary
+					font-size: 57px
+
+
+
+
+
+
+
+
+
+
+
