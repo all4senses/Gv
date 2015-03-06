@@ -1697,7 +1697,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //    dpm($results);
     if ($result) {
       $result->data = unserialize($result->data);
-      dpm($result);
+      //dpm($result);
       
       $result->data['Campaign Name'] = $_GET['campaign-name'];
               
@@ -1737,7 +1737,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 //    }
     
     
-    dpm($_GET);
+    //dpm($_GET);
     
     
     unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name'], $_GET['ip']);
