@@ -1698,8 +1698,28 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     if ($result) {
       $result->data = unserialize($result->data);
       dpm($result);
+      
+      $result->data['Campaign Name'] = $_GET['campaign-name'];
+              
+      $result = db_update('gv_quote_requests')
+        ->fields(array(
+          'data' => serialize($result->data),
+        ))
+        ->condition('timestamp', $_GET['timestamp'])
+        ->condition('ip', $_GET['ip'])
+        ->execute();
+      
+      if ($result) {
+        drupal_set_message('The submission data with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" was modified with the new Campaign name (' . $_GET['campaign-name'] . ').');
+      }
+      else {
+        drupal_set_message('Something wrong has happened while updating the submission with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". The new Campaign name (' . $_GET['campaign-name'] . ') has not been set. Check the data.', 'warning');
+      }
+      
     }
-    
+    else {
+      drupal_set_message('Wrong data. There is no the submission with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". The new Campaign name (' . $_GET['campaign-name'] . ') has not been set. Check the data.', 'warning');
+    }
     
     
 //    $result = db_update('gv_quote_requests')
@@ -2023,7 +2043,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '#type' => 'select',
       '#options' => $campaign_names, //array('' => '- Other -', 'Google US/LP' => 'Google US/LP', 'Google UK/LP' => 'Google UK/LP', '7Search' => '7Search', 'Bing' => 'Bing', 'Google PPC/Site' => 'Google PPC/Site', 'Organic' => 'Organic'),
       '#title' => 'Campaign Name',  
-      '#default_value' => @$campaign_names[@$ucaptured_data['Campaign name']],
+      '#default_value' => @$campaign_names[@$ucaptured_data['Campaign Name']],
       '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
     );
     
