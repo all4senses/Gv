@@ -1701,8 +1701,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.timestamp', $_GET['timestamp']);
     $results =  $query->execute()->fetchAllAssoc('ip');
     
-    dpm($results);
+    
+    foreach ($results as $key => $value) {
+      $results[$key]->data = unserialize($results[$key]->data);
+    }
     dpm($_GET);
+    dpm($results);
+    
     unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
