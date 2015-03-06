@@ -5,7 +5,11 @@
        
        //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
        
-       
+       $(".form-item-campaign-n-contains input").autocomplete({
+          minLength: 0,
+          source: [ 'Google US/LP', 'Google UK/LP', '7Search', 'Bing', 'Google PPC/Site', 'Organic', 'Other' ]
+       });
+
        $("select.campaign_name").change(function(){
          
          $("select.campaign_name").attr('disabled', 'disabled');
