@@ -2059,7 +2059,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
           <td class="ops">' 
             . l('Delete', $_GET['q'], array('query' => $delete_url)) 
             . render($gv_misc_sendCapturedQuotesToProviders_form_x)
-            . render($campaign_select_op)
+            . drupal_render($campaign_select_op)
         . '</td>'
       . '</tr>',
     );
