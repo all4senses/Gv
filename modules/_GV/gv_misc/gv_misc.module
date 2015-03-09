@@ -16061,8 +16061,16 @@ function gv_misc_xmlsitemap_link_alter(array &$link, array $context) {
 //    $link['priority'] += 0.5;
 //  }
   
-  if (!$flag) {
-    $flag = TRUE;
+  dpm($link);
+  
+//  if (!$flag) {
+//    $flag = TRUE;
+//    dpm($link);
+//  }
+  
+  
+  if ($link['id'] == 527) {
+    //$link['priority'] += 0.5;
     dpm($link);
   }
 }
