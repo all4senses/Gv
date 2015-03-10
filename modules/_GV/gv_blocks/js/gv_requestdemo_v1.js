@@ -129,6 +129,9 @@
                       //$(this).val($(this).attr('title'));
                       $(this).addClass('blur');
                     }
+                    else {
+                      $(this).removeClass('blur');
+                    }
                  });
                  $('#block-gv-blocks-request-quote-v8.popup-request.demo .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
 

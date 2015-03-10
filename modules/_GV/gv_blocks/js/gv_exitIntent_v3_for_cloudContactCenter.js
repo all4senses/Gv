@@ -238,9 +238,7 @@
                       //$(this).val($(this).attr('title'));
                       $(this).addClass('blur');
                     }
-                    else {
-                      $(this).removeClass('blur');
-                    }
+                    
                  });
                  $('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
 
