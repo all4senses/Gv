@@ -124,6 +124,9 @@
 
       
                  $('#block-gv-blocks-request-quote-v8.popup-request.demo .phone input').unbind('blur');
+                 $('#block-gv-blocks-request-quote-v8.popup-request.demo .phone input').focus(function(){
+                    $(this).removeClass('blur');
+                 });
                  $('#block-gv-blocks-request-quote-v8.popup-request.demo .phone input').blur(function(){
                     if ($(this).val() == '') {
                       //$(this).val($(this).attr('title'));
