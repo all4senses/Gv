@@ -220,9 +220,32 @@
             //console.log('good');
             
             $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
-            $('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+            
+            ////$('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
           }
         });
+        
+        
+        
+        
+        // Turn on phone validator only on the event, because it cause all page js fail if is turned on on page loading!!!
+            //var buttonLoaded = false;
+            $('#requestQuoteFormWrapper-ppc .phone').one('mouseenter', function() {
+
+      
+                 $('#requestQuoteFormWrapper-ppc .phone input').unbind('blur');
+                 $('#requestQuoteFormWrapper-ppc .phone input').blur(function(){
+                    if ($(this).val() == '') {
+                      //$(this).val($(this).attr('title'));
+                      $(this).addClass('blur');
+                    }
+                 });
+                 $('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+
+            });
+            
+            
+            
         
         
         
