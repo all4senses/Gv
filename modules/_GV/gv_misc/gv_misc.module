@@ -16060,13 +16060,15 @@ function gv_misc_xmlsitemap_link_alter(array &$link, array $context) {
 //    //$link['access'] = FALSE;
 //  }
   
-  if ($link['access']) {
-     $query = db_select('node', 'n')
-       ->fields('n', array('status'))
-       ->condition('nid', $link['id']);
-     if (!$source = $query->execute()->fetchField()) {
-       dpm($link['id']);
-       dpm($link);
-     }
-  }
+  
+  // Check for unpublished in xml sitemap - success - no unpublished.
+//  if ($link['access']) {
+//     $query = db_select('node', 'n')
+//       ->fields('n', array('status'))
+//       ->condition('nid', $link['id']);
+//     if (!$source = $query->execute()->fetchField()) {
+//       dpm($link['id']);
+//       dpm($link);
+//     }
+//  }
 }
