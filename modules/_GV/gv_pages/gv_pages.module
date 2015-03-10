@@ -2007,110 +2007,183 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
   drupal_add_js($path_to_js);
   
+  
+  
+  
+  
+  $data_cells = array(
+    'Lines Needed' => 'Phones needed',
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Email Address' => 'Email',
+    'Company Name' => 'Company',
+    'Source' => 'Source',
+    'Version' => 'Version',
+    'Sent To' => 'sentToRemoteProviders',
+      
+    'Operations', // (with drop down for submitting to each provider)
+    'Campaign', // (with drop down options in each line)
+    'User IP',
+    
+  );
+  
+  
+  $table_cells_1 = array(
+      '<th>Num</th>',
+      '<th>' . $sort_links['timestamp'] . '</th>',
+      '<th>' . $sort_links['status'] . '</th>',
+      '<th>' . $sort_links['via_block'] . '</th>',
+      '<th>' . $sort_links['checked'] . '</th>',
+      '<th class="data">Full Data</th>',
+      '<th class="ops" style="width: 300px;">Operations</th>',
+      '<th class="campaign">Campaign</th>',
+      '<th>' . $sort_links['ip'] . '</th>',
+  );
+  
+  $table_start = '';
+  
+  foreach ($table_cells_1 as $table_cell) {
+    $table_start .= $table_cell;
+  }
+
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table quote-requests"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['via_block'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th class="ops" style="width: 300px;">Operations</th></tr></thead><tbody>',
+    '#markup' => 
+      '<table class="views-table quote-requests">'
+      . '<thead>'
+          . '<tr>'
+            . $table_start //. '<th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['via_block'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th class="ops" style="width: 300px;">Operations</th>'
+          . '</tr>'
+      . '</thead>'
+      . '<tbody>',
   );
+  
+  
+  
   
   $tr_class = 'even';
   foreach ($ucaptureds as $key => $ucaptured) {
-    switch ($ucaptured->status) {
-      case 0:
-        $status = 'Captured, NOT alerted';
-        $status_class = 'not-alerted';
-        break;
-      case 1:
-        $status = 'Captured, alerted';
-        $status_class = 'alerted';
-        break;
-      case 2:
-        $status = 'Submitted';
-        $status_class = 'submitted';
-        break;
-    }
-    $data = '';
-    $ucaptured_data = unserialize($ucaptured->data);
     
-    // Correct the phone field data.
-    $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
     
-    //dpm($ucaptured);
-    //dpm($ucaptured_data);
-    
-    // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
-    // is filtered from the outer tags <form> for some reason.
-    // So here i just put a dummy form for this to save the real forms.
-    $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
-    
-    foreach ($ucaptured_data as $title => $value) {
-      if ($title == 'Submit Time' && is_numeric($value)) {
-        $value = date('Y-m-d, H:i:s', $value);
-      }
-      elseif ($title == 'Submission Duration' && is_numeric($value)) {
-        $value = number_format($value / 60, 2, '.', '') . ' min';
-      }
-      elseif ($title == 'sentToRemoteProviders') {
-        $submissions_list = NULL;
-        foreach ($value as $data_provider => $data_submitted) {
-          $submissions_list .= ($submissions_list && $data_submitted ? ', ' : '') . ($data_submitted ? $data_provider : ''); 
-        }
-        $value = $submissions_list;
-      }
-      elseif ($title == '$_SERVER') {
-        $value = '[hidden]';//print_r($value, TRUE);
-      }
-      $data .= "<div>$title: $value</div>";
-    }
-    
-    //dpm($ucaptured->via_block);
-    
-    $form['item_' . ($key + 1) . 'a'] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
-    );
-    
-    $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
-    $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=check&timestamp=' . $ucaptured->timestamp;
-    $uncheck_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
-    unset($delete_url['q']);
+                                switch ($ucaptured->status) {
+                                  case 0:
+                                    $status = 'Captured, NOT alerted';
+                                    $status_class = 'not-alerted';
+                                    break;
+                                  case 1:
+                                    $status = 'Captured, alerted';
+                                    $status_class = 'alerted';
+                                    break;
+                                  case 2:
+                                    $status = 'Submitted';
+                                    $status_class = 'submitted';
+                                    break;
+                                }
+                                $data = '';
+                                $ucaptured_data = unserialize($ucaptured->data);
 
-    
-    $form['item_' . ($key + 1) . 'b'] = array(
-      '#type' => 'checkbox',
-      '#default_value' => $ucaptured->checked,
-      '#prefix' => '<td>',
-      '#suffix' => '</td>',
-      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
-    );
-    
-    
-    
-    //dpm('$ucaptured_data[Campaign Name] = ' . @$ucaptured_data['Campaign Name']);
-    //dpm('@$campaign_names[@$ucaptured_data[Campaign Name]] = ' .  @$campaign_names[@$ucaptured_data['Campaign Name']]);
-            
-    $campaign_select_op = array(
-      '#type' => 'select',
-      '#options' => $campaign_names, //array('' => '- Other -', 'Google US/LP' => 'Google US/LP', 'Google UK/LP' => 'Google UK/LP', '7Search' => '7Search', 'Bing' => 'Bing', 'Google PPC/Site' => 'Google PPC/Site', 'Organic' => 'Organic'),
-      '#title' => 'Campaign Name',  
-      '#default_value' => array(@$campaign_names[@$ucaptured_data['Campaign Name']]),
-      '#value' => array(@$campaign_names[@$ucaptured_data['Campaign Name']]),
-      '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
-    );
-    
-    //dpm($campaign_select_op);
-    
-    // Ips, User input data, Operations.
-    $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
-    $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
-          <td class="ops">' 
-            . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . render($gv_misc_sendCapturedQuotesToProviders_form_x)
-            . drupal_render($campaign_select_op)
-        . '</td>'
-      . '</tr>',
-    );
-  }
+                                // Correct the phone field data.
+                                $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
 
+                                //dpm($ucaptured);
+                                //dpm($ucaptured_data);
+
+                                // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
+                                // is filtered from the outer tags <form> for some reason.
+                                // So here i just put a dummy form for this to save the real forms.
+                                $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
+
+                                foreach ($ucaptured_data as $title => $value) {
+                                      if ($title == 'Submit Time' && is_numeric($value)) {
+                                        $value = date('Y-m-d, H:i:s', $value);
+                                      }
+                                      elseif ($title == 'Submission Duration' && is_numeric($value)) {
+                                        $value = number_format($value / 60, 2, '.', '') . ' min';
+                                      }
+                                      elseif ($title == 'sentToRemoteProviders') {
+                                        $submissions_list = NULL;
+                                        foreach ($value as $data_provider => $data_submitted) {
+                                          $submissions_list .= ($submissions_list && $data_submitted ? ', ' : '') . ($data_submitted ? $data_provider : ''); 
+                                        }
+                                        $value = $submissions_list;
+                                      }
+                                      elseif ($title == '$_SERVER') {
+                                        $value = '[hidden]';//print_r($value, TRUE);
+                                      }
+                                      $data .= "<div>$title: $value</div>";
+                                }
+
+                                //dpm($ucaptured->via_block);
+
+                                $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
+                                $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=check&timestamp=' . $ucaptured->timestamp;
+                                $uncheck_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
+                                unset($delete_url['q']);
+                                
+                                //dpm('$ucaptured_data[Campaign Name] = ' . @$ucaptured_data['Campaign Name']);
+                                //dpm('@$campaign_names[@$ucaptured_data[Campaign Name]] = ' .  @$campaign_names[@$ucaptured_data['Campaign Name']]);
+                                $campaign_select_op = array(
+                                  '#type' => 'select',
+                                  '#options' => $campaign_names, //array('' => '- Other -', 'Google US/LP' => 'Google US/LP', 'Google UK/LP' => 'Google UK/LP', '7Search' => '7Search', 'Bing' => 'Bing', 'Google PPC/Site' => 'Google PPC/Site', 'Organic' => 'Organic'),
+                                  '#title' => 'Campaign Name',  
+                                  '#default_value' => array(@$campaign_names[@$ucaptured_data['Campaign Name']]),
+                                  '#value' => array(@$campaign_names[@$ucaptured_data['Campaign Name']]),
+                                  '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
+                                );
+                                
+                                
+                                /*
+                                $form['item_' . ($key + 1) . 'a'] = array(
+                                  '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">'
+                                    . '<td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
+                                );
+                                */
+                                
+                                $form['item_' . ($key + 1) . 'a'] = array(
+                                  '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">',
+                                );
+                                
+                                
+                                              $form['item_' . ($key + 1) . 'b'] = array(
+                                                '#markup' => '<td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
+                                              );
+
+
+
+                                              $form['item_' . ($key + 1) . 'c'] = array(
+                                                '#type' => 'checkbox',
+                                                '#default_value' => $ucaptured->checked,
+                                                '#prefix' => '<td>',
+                                                '#suffix' => '</td>',
+                                                '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
+                                              );
+
+
+                                              // Ips, User input data, Operations.
+                                              $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
+                                              $form['item_' . ($key + 1) . 'd'] = array(
+                                                '#markup' => '<td class="data">' . $data . '</td>
+                                                    <td class="ops">' 
+                                                      . l('Delete', $_GET['q'], array('query' => $delete_url)) 
+                                                      . render($gv_misc_sendCapturedQuotesToProviders_form_x)
+                                                  . '</td>'
+                                                  . '<td class="campaign">' 
+                                                      . drupal_render($campaign_select_op)
+                                                  . '</td>'
+                                                  . '<td>' 
+                                                      . $ucaptured->ip
+                                                  . '</td>',
+                                                //. '</tr>',
+                                              );
+
+                                $form['item_' . ($key + 1) . 'e'] = array(
+                                  '#markup' => '</tr>',
+                                );
+                                
+  } // End of foreach ($ucaptureds as $key => $ucaptured) {
+
+  
+  
   $form['table_close'] = array(
     '#type' => 'markup',
     '#markup' => '</tbody></table></div>',
