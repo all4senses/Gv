@@ -100,6 +100,40 @@
         });
         
         
+        
+        
+        
+        
+        
+            // Turn on phone validator only on the event, because it cause all page js fail if is turned on on page loading!!!
+            $('#block-gv-blocks-request-quote-v8.popup-request.quote .phone').one('mouseenter', function() {
+
+      
+                 $('#block-gv-blocks-request-quote-v8.popup-request.quote .phone input').unbind('blur');
+                 $('#block-gv-blocks-request-quote-v8.popup-request.quote .phone input').focus(function(){
+                    $(this).removeClass('blur');
+                 });
+                 $('#block-gv-blocks-request-quote-v8.popup-request.quote .phone input').blur(function(){
+                    if ($(this).val() == '') {
+                      //$(this).val($(this).attr('title'));
+                      $(this).addClass('blur');
+                    }
+                    else {
+                      $(this).removeClass('blur');
+                    }
+                 });
+                 $('#block-gv-blocks-request-quote-v8.popup-request.quote .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+
+            });
+        
+        
+        
+        
+        
+        
+        
+        
+        
         $('input[id="firstname"], input[id="lastname"]').keydown(function (event) { 
             
             if( 
