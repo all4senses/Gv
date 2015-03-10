@@ -16059,11 +16059,14 @@ function gv_misc_xmlsitemap_link_alter(array &$link, array $context) {
 //    // Will remove the url from xml sitemap
 //    //$link['access'] = FALSE;
 //  }
- $query = db_select('node', 'n')
-  ->fields('n', array('status'))
-  ->condition('nid', $link['id']);
-  if (!$source = $query->execute()->fetchField()) {
-    dpm($link['id']);
-    dpm($link);
+  
+  if ($link['access']) {
+     $query = db_select('node', 'n')
+       ->fields('n', array('status'))
+       ->condition('nid', $link['id']);
+     if (!$source = $query->execute()->fetchField()) {
+       dpm($link['id']);
+       dpm($link);
+     }
   }
 }
