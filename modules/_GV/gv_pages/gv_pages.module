@@ -7831,7 +7831,7 @@ function gv_pages_node_presave($node) {
   if ($node->type == 'review') {
     
     // Unpublish, if is not approved... and publish if approved.
-    $is_approved = (isset($node->field_r_notapproved['und'][0]['value']) && $node->field_r_notapproved['und'][0]['value']) ? 0 : 1;
+    $is_approved = !empty($node->field_r_notapproved['und'][0]['value']) ? 0 : 1;
     if ($is_approved) {
       $node->status = 1;
     }
