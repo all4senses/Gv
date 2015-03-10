@@ -231,6 +231,30 @@
         });
         
         
+        
+        
+        
+        
+        
+                // Turn on phone validator only on the event, because it cause all page js fail if is turned on on page loading!!!
+            $('#requestQuoteFormWrapper-ppc .phone').one('mouseenter', function() {
+
+      
+                 $('#requestQuoteFormWrapper-ppc .phone input').unbind('blur');
+                 $('#requestQuoteFormWrapper-ppc .phone input').blur(function(){
+                    if ($(this).val() == '') {
+                      //$(this).val($(this).attr('title'));
+                      $(this).addClass('blur');
+                    }
+                 });
+                 $('#requestQuoteFormWrapper-ppc .phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+
+            });
+        
+        
+        
+        
+        
        jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
