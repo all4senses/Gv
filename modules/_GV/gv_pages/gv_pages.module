@@ -2031,7 +2031,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     'Phones needed' => 'Lines Needed',
     'First Name' => 'First Name',
     'Last Name' => 'Last Name',
-    'Email' => 'Email Address',
+    'Email' => '<th class="email">Email Address</th>',
     'Company' => 'Company Name',
     'Source' => 'Source',
     'Version' => 'Version',
@@ -2058,19 +2058,19 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   */
   
   $table_cells_1 = array(
-      '<th>Num</th>',
-      '<th>' . $sort_links['timestamp'] . '</th>',
-      '<th>' . $sort_links['status'] . '</th>',
-      '<th>' . $sort_links['via_block'] . '</th>',
-      '<th>' . $sort_links['checked'] . '</th>',
+      0 => '<th>Num</th>',
+      1 => '<th>' . $sort_links['timestamp'] . '</th>',
+      2 => '<th>' . $sort_links['status'] . '</th>',
+      //3 => '<th>' . $sort_links['via_block'] . '</th>',
+      4 => '<th>' . $sort_links['checked'] . '</th>',
       
   );
   
   $table_cells_3 = array(
-      '<th class="data">Full Data</th>',
-      '<th class="ops" style="width: 160px;">Operations</th>',
-      '<th class="campaign">Campaign</th>',
-      '<th>' . $sort_links['ip'] . '</th>',
+      5 => '<th class="data">Full Data</th>',
+      6 => '<th class="ops" style="width: 160px;">Operations</th>',
+      7 => '<th class="campaign">Campaign</th>',
+      8 => '<th>' . $sort_links['ip'] . '</th>',
   );
   
   $table_cells_1 += $map_captured_dataIndex_to_tableTitle + $table_cells_3;
@@ -2189,7 +2189,9 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 
                                 
                                               $form['item_' . ($key + 1) . 'b'] = array(
-                                                '#markup' => '<td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
+                                                '#markup' => '<td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td>'
+                                                  //. '<td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>'
+                                                  ,
                                               );
 
 
