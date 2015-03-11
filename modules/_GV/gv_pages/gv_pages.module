@@ -2010,7 +2010,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   
   
-  
+  /*
   $data_cells = array(
     'Lines Needed' => 'Phones needed',
     'First Name' => 'First Name',
@@ -2021,13 +2021,29 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     'Version' => 'Version',
     'Sent To' => 'sentToRemoteProviders',
       
-    'Operations', // (with drop down for submitting to each provider)
-    'Campaign', // (with drop down options in each line)
-    'User IP',
+    //'Operations', // (with drop down for submitting to each provider)
+    //'Campaign', // (with drop down options in each line)
+    //'User IP',
+  );
+  */
+  
+  $map_captured_dataIndex_to_tableTitle = array(
+    'Phones needed' => 'Lines Needed',
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Email' => 'Email Address',
+    'Company' => 'Company Name',
+    'Source' => 'Source',
+    'Version' => 'Version',
+    'sentToRemoteProviders' => 'Sent To',
+      
+    //'Operations', // (with drop down for submitting to each provider)
+    //'Campaign', // (with drop down options in each line)
+    //'User IP',
     
   );
   
-  
+  /*
   $table_cells_1 = array(
       '<th>Num</th>',
       '<th>' . $sort_links['timestamp'] . '</th>',
@@ -2035,10 +2051,29 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       '<th>' . $sort_links['via_block'] . '</th>',
       '<th>' . $sort_links['checked'] . '</th>',
       '<th class="data">Full Data</th>',
-      '<th class="ops" style="width: 300px;">Operations</th>',
+      '<th class="ops" style="width: 160px;">Operations</th>',
       '<th class="campaign">Campaign</th>',
       '<th>' . $sort_links['ip'] . '</th>',
   );
+  */
+  
+  $table_cells_1 = array(
+      '<th>Num</th>',
+      '<th>' . $sort_links['timestamp'] . '</th>',
+      '<th>' . $sort_links['status'] . '</th>',
+      '<th>' . $sort_links['via_block'] . '</th>',
+      '<th>' . $sort_links['checked'] . '</th>',
+      
+  );
+  
+  $table_cells_3 = array(
+      '<th class="data">Full Data</th>',
+      '<th class="ops" style="width: 160px;">Operations</th>',
+      '<th class="campaign">Campaign</th>',
+      '<th>' . $sort_links['ip'] . '</th>',
+  );
+  
+  $table_cells_1 += $map_captured_dataIndex_to_tableTitle + $table_cells_3;
   
   $table_start = '';
   
@@ -2110,11 +2145,18 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                       elseif ($title == '$_SERVER') {
                                         $value = '[hidden]';//print_r($value, TRUE);
                                       }
+                                      $ucaptured_data[$title] = $value;
                                       $data .= "<div>$title: $value</div>";
                                 }
                                 // Wrap full data in a closed fieldset
                                 $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $data . '</div></fieldset>';
-
+                                
+                                // Detailed data tds
+                                $data_detailed = '';
+                                foreach ($data_cells as $data_index => $table_title) {
+                                  $data_detailed .= '<td>' . $ucaptured_data[$data_index] . '</td>';
+                                }
+                                
                                 //dpm($ucaptured->via_block);
 
                                 $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
