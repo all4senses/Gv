@@ -3735,6 +3735,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $providers_with_options = array(
           'bu' => unserialize(PROVIDER_OPTIONS_BU),
           're' => unserialize(PROVIDER_OPTIONS_RE),
+          'cc' => unserialize(PROVIDER_OPTIONS_CC),
       );      
             
       foreach ($providers_with_options as $service_type_index => $provider_options_structure) {
