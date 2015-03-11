@@ -2112,6 +2112,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                       }
                                       $data .= "<div>$title: $value</div>";
                                 }
+                                // Wrap full data in a closed fieldset
+                                $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $data . '</div></fieldset>';
 
                                 //dpm($ucaptured->via_block);
 
