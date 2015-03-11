@@ -15637,22 +15637,22 @@ function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented
         // if there are any video tokens or iframe, add snippets to them
         // and update the body field
         gv_misc_fieldBodyUpdate($node->nid, $new_body_full_markup);
-        dpm('Video snippet was added.');
+        //dpm('Video snippet was added.');
         watchdog('=> GV Video snippet added - ' . $node->nid, 'type = ' . $node->type . ', ' . 'nid = ' . $node->nid . ', ' . $node->title, NULL, WATCHDOG_WARNING);
         return $new_body_full_markup; 
       }
       else {
-        dpm('No Video in the article has been found');
+        //dpm('No Video in the article has been found');
         return FALSE; 
       }
     }
     else {
-      dpm('Video snippet was already added before.');
+      //dpm('Video snippet was already added before.');
       return FALSE;
     }
   }
 
-  dpm('Video snippet - not processed because of smaller timestamp');
+  //dpm('Video snippet - not processed because of smaller timestamp');
   return FALSE;
 }
 
