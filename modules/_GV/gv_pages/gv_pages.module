@@ -2078,7 +2078,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   $table_start = '';
   
   foreach ($table_cells_1 as $table_cell) {
-    $table_start .= $table_cell;
+    $table_start .= strpos($table_cell, '</th>') ? $table_cell : '<th>' . $table_cell . '</th>';
   }
 
   $form['table_start'] = array(
@@ -2154,7 +2154,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 // Detailed data tds
                                 $data_detailed = '';
                                 foreach ($map_captured_dataIndex_to_tableTitle as $data_index => $table_title) {
-                                  $data_detailed .= '<td>' . $ucaptured_data[$data_index] . '</td>';
+                                  $data_detailed .= '<td>' . @$ucaptured_data[$data_index] . '</td>';
                                 }
                                 
                                 //dpm($ucaptured->via_block);
@@ -2206,7 +2206,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                               // Ips, User input data, Operations.
                                               $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
                                               $form['item_' . ($key + 1) . 'd'] = array(
-                                                '#markup' => '<td class="data">' . $data . '</td>
+                                                '#markup' => $data_detailed . '<td class="data">' . $data . '</td>
                                                     <td class="ops">' 
                                                       . l('Delete', $_GET['q'], array('query' => $delete_url)) 
                                                       . render($gv_misc_sendCapturedQuotesToProviders_form_x)
