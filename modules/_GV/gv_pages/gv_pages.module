@@ -2154,13 +2154,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 // Detailed data tds
                                 $data_detailed = '';
                                 foreach ($map_captured_dataIndex_to_tableTitle as $data_index => $table_title) {
-//                                  if ($data_index == 'Email') {
-//                                    $data_detailed .= '<td>' . @$ucaptured_data[$data_index] . '</td>';
-//                                  }
-//                                  else
-                                    {
                                     $data_detailed .= '<td style="max-width: 150px; overflow-x: auto;">' . @$ucaptured_data[$data_index] . '</td>';
-                                  }
                                 }
                                 
                                 //dpm($ucaptured->via_block);
@@ -2189,8 +2183,21 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 );
                                 */
                                 
+                                // Possibly a spam?
+                                if (
+                                       @$ucaptured_data['First Name'] == @$ucaptured_data['Last Name']
+                                    || strpos(@$ucaptured_data['Last Name'], @$ucaptured_data['First Name']) !== FALSE    
+                                    || strpos(@$ucaptured_data['Sumbission page'], 'http') === FALSE
+                                        
+                                   ) {
+                                  $spam_class = ' spam'; 
+                                }
+                                else {
+                                  $spam_class = '';
+                                }
+                                
                                 $form['item_' . ($key + 1) . 'a'] = array(
-                                  '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">',
+                                  '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . $spam_class . '">',
                                 );
                                 
                                 
