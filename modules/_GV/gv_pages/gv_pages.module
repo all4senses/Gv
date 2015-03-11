@@ -2128,6 +2128,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 // So here i just put a dummy form for this to save the real forms.
                                 $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
 
+                                $ucaptured_data_changed = array();
                                 foreach ($ucaptured_data as $title => $value) {
                                       if ($title == 'Submit Time' && is_numeric($value)) {
                                         $value = date('Y-m-d, H:i:s', $value);
@@ -2145,7 +2146,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                       elseif ($title == '$_SERVER') {
                                         $value = '[hidden]';//print_r($value, TRUE);
                                       }
-                                      $ucaptured_data[$title] = $value;
+                                      $ucaptured_data_changed[$title] = $value;
                                       $data .= "<div>$title: $value</div>";
                                 }
                                 // Wrap full data in a closed fieldset
@@ -2154,7 +2155,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 // Detailed data tds
                                 $data_detailed = '';
                                 foreach ($map_captured_dataIndex_to_tableTitle as $data_index => $table_title) {
-                                    $data_detailed .= '<td style="max-width: 150px; overflow-x: auto;">' . @$ucaptured_data[$data_index] . '</td>';
+                                    $data_detailed .= '<td style="max-width: 150px; overflow-x: auto;">' . @$ucaptured_data_changed[$data_index] . '</td>';
                                 }
                                 
                                 //dpm($ucaptured->via_block);
