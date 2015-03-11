@@ -2186,9 +2186,10 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 
                                 // Possibly a spam?
                                 if (
-                                       @$ucaptured_data['First Name'] == @$ucaptured_data['Last Name']
-                                    || strpos(@$ucaptured_data['Last Name'], @$ucaptured_data['First Name']) !== FALSE    
-                                    || strpos(@$ucaptured_data['Sumbission page'], 'http') === FALSE
+                                       //@$ucaptured_data['First Name'] == @$ucaptured_data['Last Name']
+                                    //|| strpos(@$ucaptured_data['Last Name'], @$ucaptured_data['First Name']) !== FALSE    
+                                    //|| 
+                                        strpos(@$ucaptured_data['Sumbission page'], 'http') === FALSE
                                     || @$ucaptured_data['Spam'] == 'Yes'
                                         
                                    ) {
