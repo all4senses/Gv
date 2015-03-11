@@ -2031,7 +2031,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     'Phones needed' => 'Lines Needed',
     'First Name' => 'First Name',
     'Last Name' => 'Last Name',
-    'Email' => '<th style="width: 100px !important; overflow-x: auto;">Email Address</th>',
+    'Email' => 'Email Address',
     'Company' => 'Company Name',
     'Source' => 'Source',
     'Version' => 'Version',
@@ -2154,7 +2154,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 // Detailed data tds
                                 $data_detailed = '';
                                 foreach ($map_captured_dataIndex_to_tableTitle as $data_index => $table_title) {
-                                  $data_detailed .= '<td>' . @$ucaptured_data[$data_index] . '</td>';
+//                                  if ($data_index == 'Email') {
+//                                    $data_detailed .= '<td>' . @$ucaptured_data[$data_index] . '</td>';
+//                                  }
+//                                  else
+                                    {
+                                    $data_detailed .= '<td style="max-width: 150px;">' . @$ucaptured_data[$data_index] . '</td>';
+                                  }
                                 }
                                 
                                 //dpm($ucaptured->via_block);
