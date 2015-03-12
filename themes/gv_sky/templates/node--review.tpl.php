@@ -168,7 +168,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 ?>
 
 <?php if (!$page): ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+  <article class="reviews-list-item"<?php print $attributes; ?>>
 <?php endif; ?>
 
 <?php 
@@ -190,73 +190,19 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
 
     
     
-  <div class="main-content" <?php echo ( ($full_title) ? '' : 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'); /*echo ($page ? ' xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"' : '');*/  ?>>
+  <div <?php echo ( ($full_title) ? '' : 'xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review"'); ?>>
     
       <?php
         $reviewer = (isset($node->field_r_fname[0]['value']) ? $node->field_r_fname[0]['value'] : $node->field_r_fname['und'][0]['value'] );
       ?>
-      <div class="reviewer">
-        <div class="r-avatar"><img src="/sites/all/themes/gv_blue/css/images/avatar.jpg" alt="avatar" /></div>
-        <div class="name"><?php echo $reviewer; ?></div>
-      </div>
-    
-      <div class="review-wrapper">
-        
-            <div class="pointer"></div>
-        
-            <div class="left-wrapper">
+        <div class="reviews-list-item-details">
+            <h3 class="reviews-list-item-details-title"><?php echo ( ($full_title || $page) ? $provider_name . ' - ' : '') . $title; ?></h3>
+            <?php print render($title_suffix); ?>
+            <div class="reviews-list-item-details-meta">
+              <span class="reviews-list-item-details-meta-author" property="v:reviewer"><?php echo $reviewer; ?></span>
+              <span class="reviews-list-item-details-meta-date" property="v:dtreviewed" content="<?php echo date('Y-m-d', $node->created);?>"><?php echo date('F d, Y', $node->created); ?></span>
+            </div>
               
-              <header>
-                
-                <div class="title-block">
-                
-                          <?php if ($page): /* <span class="pname" property="v:itemreviewed"><?php echo $node->field_r_provider_name['und'][0]['safe_value'] ?></span><span class="pname delim">:</span><h1 property="v:summary" */?>
-                            <h1 <?php 
-                                    //echo 'property="dc:title v:summary"';
-                                    echo $full_title ? '' : 'property="v:summary"';
-                                    if (!$node->status) {echo ' class="not-published"';}
-                                ?>
-                          <?php else: ?>
-                                <h3 <?php 
-                                        echo 'class="rcaption"';
-                                     ?>
-                              <?php /*endif;*/ ?>
-                          <?php endif; ?>
-
-                          <?php /*print $title_attributes;*/ ?>><?php 
-
-                                  echo ( ($full_title || $page) ? $provider_name . ' - ' : '') . $title; 
-                          if ($page) {
-                            echo '</h1>';
-                          }
-                          else {
-                            echo '</h3>';
-                          }
-                          ?>
-
-                      <?php print render($title_suffix); ?>
-
-                        <div class="submitted">
-                          <?php 
-                            echo '<span property="v:reviewer">', $reviewer, '</span>, <span property="v:dtreviewed" content="', date('Y-m-d', $node->created), '">', date('F d, Y', $node->created), '</span>';
-                          ?>
-                        </div>
-              </div>
-                        
-              <div class="links">
-               <?php 
-                    if($page || $full_title) {
-                      echo ( empty($node->field_ref_provider['und'][0]['target_id']) ? '' : '<a href="' . url('node/' . $node->field_ref_provider['und'][0]['target_id']) . '"><span class="review-provider">' . $provider_name . '</span> Reviews</a>');
-                    }
-                    echo ( !$provider_url ? '' : gv_misc_getTrackingUrl('<span class="review-provider">Visit <span property="v:itemreviewed">' . $provider_name . '</span></span>', NULL, $node->field_ref_provider['und'][0]['target_id'], NULL, NULL, NULL, $provider_data_quick)) . l('Write a Review', 'node/add/review', array('attributes' => array('rel' => 'nofollow'), 'query' => array('id' => $node->field_ref_provider['und'][0]['target_id']))); 
-               ?>
-             </div>           
-
-                        
-           </header>
-
-   
-    
             <?php 
     
                 if (isset($node->field_r_fname[0]['value'])) {
@@ -268,62 +214,51 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
     
             ?>
     
-    
-
-          
-          <div class="review-block">
-            
-            <?php 
-              echo '<div property="v:description">' . render($content['body']) . '</div>'; 
-            ?>
-            
-            <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
-              <div class="pros-cons">
-                <?php
-
-                  $cons_add_class = ($content['r_data']['pros'] && $content['r_data']['cons']) ? ' border' : '';
-                  
-                  if ($content['r_data']['pros']) {
-                    echo '<div class="pros frame' . $cons_add_class . '"><div class="text"><span class="caption">Pros:</span>' . $content['r_data']['pros'] . '</div></div>';
-                  }
-
-                  if ($content['r_data']['cons']) {
-                    echo '<div class="' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . ' frame"><div class="text"><span class="caption">Cons:</span>' . $content['r_data']['cons'] . '</div></div>';
-                  }
-                ?>
-              </div>
-            <?php endif; ?>
-            
-          </div>
-          
-
-        
-        </div> <!-- End of  <div class="left-wrapper"> -->
-          
-          
-          <div class="gv_votes">
-            
-            <?php echo render($content['gv_ratings']); ?>
-            <div class="caption">
-                <?php 
+            <div class="reviews-list-item-details-content">
               
-                  $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value'];
-                  echo '<span>Overall Score:</span>
-                        <span rel="v:rating" style="margin-right: 0;">',
-                          '<span typeof="v:Rating">',
-                            '<span property="v:value" style="font-weight: bold;">', $r, '</span> Out of ', 
-                            '<span property="v:best" content="5" style="float: right; font-weight: bold;">5</span>',
-                            '<span property="v:worst" content="0"></span>',
-                          '</span>',
-                        '</span>'; 
-                ?>
+              <?php 
+                echo '<div property="v:description">' . render($content['body']) . '</div>'; 
+              ?>
+              
+              <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
+                <div class="reviews-list-item-details-content-summary">
+                  <?php
+                    
+                    if ($content['r_data']['pros']) {
+                      echo '<div class="reviews-list-item-details-content-summary-item pros"><span class="reviews-list-item-details-content-summary-item-title">Pros: </span>' . $content['r_data']['pros'] . '</div>';
+                    }
+
+                    if ($content['r_data']['cons']) {
+                      echo '<div class="reviews-list-item-details-content-summary-item ' . (!$content['r_data']['pros'] ? 'pros' : 'cons') . '"><span class="reviews-list-item-details-content-summary-item-title">Cons: </span>' . $content['r_data']['cons'] . '</div>';
+                    }
+                  ?>
+                </div>
+              <?php endif; ?>
+              
             </div>
-            
-          </div> <!-- End of <div class="gv_votes"> -->
+      
+        </div> <!-- End of <div class="reviews-list-item-details"></div> -->
           
+        <div class="reviews-list-item-rating">
           
-         </div> <!-- End of review-wrapper -->
-                
+            <?php echo render($content['gv_ratings']); ?>
+            <div class="reviews-list-item-rating-score">
+                <?php $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']; ?>
+
+                <div class="reviews-list-item-rating-score-caption">Overall</div>
+                <div class="reviews-list-item-rating-score-number" rel="v:rating">
+                  <span typeof="v:Rating">
+                    <span property="v:worst" content="0"></span>
+                    <span property="v:value"> <?php echo $node->gv_rating_overall; ?> </span>
+                    <span property="v:best" content="5"></span>
+                  </span>
+                </div>
+                </div>
+            </div>
+          
+        </div> 
+        
+                          
            
               
           <?php
@@ -336,7 +271,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
           ?>
           
 
-  </div> <!-- main-content -->
+  <!-- </div>  -->
   
 
 <?php if (!$page): ?>

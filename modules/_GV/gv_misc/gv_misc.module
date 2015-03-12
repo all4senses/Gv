@@ -8562,6 +8562,9 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_fivestar_provider' => array(
       'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
     ),
+    'gv_misc_fivestar_provider_small' => array(
+      'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
+    ),
     // Compose a mail with a Request for a quote page/block.
     'gv_misc_requestQuote_mail' => array(
       'variables' => array(),
@@ -9016,22 +9019,61 @@ function theme_gv_misc_fivestar_provider($variables) {
     $zebra = ($n % 2 == 0) ? 'even' : 'odd';
     $first = $n == 1 ? ' star-first' : '';
     $last = $n == $stars ? ' star-last' : '';
-    $output .= '<div class="provider-box-provider-review-score-fivestar-item star-'. $n .'">';
+    $output .= '<div class="provider-box-provider-review-score-fivestar-item provider-box-provider-review-score-fivestar-item star-'. $n .'">';
     if ($rating < $star_value && $rating > $prev_star_value) {
       $percent = (($rating - $prev_star_value) / ($star_value - $prev_star_value)) * 100;
-      $output .= '<span class="provider-box-provider-review-score-fivestar-item-on vertical-tbody-reviews-item-rating-fivestar-on__partial" style="width: '. $percent .'%">';
+      $output .= '<span class="provider-box-provider-review-score-fivestar-item provider-box-provider-review-score-fivestar-item-on vertical-tbody-reviews-item-rating-fivestar-on__partial" style="width: '. $percent .'%">';
     }
     elseif ($rating >= $star_value) {
-      $output .= '<span class="provider-box-provider-review-score-fivestar-item-on">';
+      $output .= '<span class="provider-box-provider-review-score-fivestar-item provider-box-provider-review-score-fivestar-item-on">';
     }
     else {
-      $output .= '<span class="provider-box-provider-review-score-fivestar-item-off">';
+      $output .= '<span class="provider-box-provider-review-score-fivestar-item provider-box-provider-review-score-fivestar-item-off">';
     }
     // if ($n == 1)$output .= $numeric_rating;
     $output .= '</span></div>';
   }
   return $output;
 }
+
+
+function theme_gv_misc_fivestar_provider_small($variables) {
+  $rating  = $variables['rating'];
+  $stars = $variables['stars'];
+  $tag = $variables['tag'];
+  $widget = $variables['widget'];
+
+
+  
+  $output = '<div class="provider-box-provider-review-scores-list-item-fivestar">';
+  if (empty($stars)) {
+    $stars = 5;
+  }
+  $numeric_rating = $rating/(100/$stars);
+  for ($n=1; $n <= $stars; $n++) {
+    $star_value = ceil((100/$stars) * $n);
+    $prev_star_value = ceil((100/$stars) * ($n-1));
+    $zebra = ($n % 2 == 0) ? 'even' : 'odd';
+    $first = $n == 1 ? ' star-first' : '';
+    $last = $n == $stars ? ' star-last' : '';
+    $output .= '<div class="provider-box-provider-review-scores-list-item-fivestar-item star-'. $n .'">';
+    if ($rating < $star_value && $rating > $prev_star_value) {
+      $percent = (($rating - $prev_star_value) / ($star_value - $prev_star_value)) * 100;
+      $output .= '<span class="provider-box-provider-review-scores-list-item-fivestar-item-on provider-box-provider-review-scores-list-item-fivestar-on__partial" style="width: '. $percent .'%">';
+    }
+    elseif ($rating >= $star_value) {
+      $output .= '<span class="provider-box-provider-review-scores-list-item-fivestar-item-on">';
+    }
+    else {
+      $output .= '<span class="provider-box-provider-review-scores-list-item-fivestar-item-off">';
+    }
+    // if ($n == 1)$output .= $numeric_rating;
+    $output .= '</span></div>';
+  }
+  $output .= '</div>';
+  return $output;
+}
+
 
 
 /**

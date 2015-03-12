@@ -6,9 +6,6 @@
     print $q;
   ?>
 <?php endif; ?>
-<div class="views-exposed-form">
-  <div class="views-exposed-widgets clearfix">
-    
     <?php foreach ($widgets as $id => $widget): ?>
       <div id="<?php print $widget->id; ?>-wrapper" class="views-exposed-widget views-widget-<?php print $id; ?>">
         <?php if (!empty($widget->label)): ?>
@@ -28,7 +25,7 @@
     <?php endforeach; ?>
     
     <?php if (!empty($sort_by)): ?>
-      <div class="views-exposed-widget views-widget-sort-by">
+      <div class="reviews-filter-object reviews-filter-sort">
         <?php 
           // a4s changes 
           $gv_sort_by = NULL;
@@ -38,11 +35,22 @@
           elseif(strpos($sort_by, 'selected="selected">Rating')) {
             $gv_sort_by = 'Rating';
           }
-          print $sort_by; 
+
+          // dk version
+          $dk_sort_by = '<span class="reviews-filter-object-title">Sort By</span>
+                          <span class="reviews-filter-object-option date active">Date</span>
+                          <span class="reviews-filter-object-option-divider"></span>
+                          <span class="reviews-filter-object-option rating">Rating</span>
+          ';
+          
+
+
+          // print $sort_by; 
+          print $dk_sort_by; 
         
         ?>
       </div>
-      <div class="views-exposed-widget views-widget-sort-order">
+      <div class="reviews-filter-object reviews-filter-order">
         <?php 
           // a4s changes 
           switch ($gv_sort_by) {
@@ -56,29 +64,17 @@
               $sort_order = str_replace('>Desc<', '>Highest Rating<', $sort_order);
               break;
           }
-          print $sort_order; 
+
+          // dk version
+          $dk_sort_order = '<span class="reviews-filter-object-title">Order By</span>
+                          <span class="reviews-filter-object-option asc">Asc</span>
+                          <span class="reviews-filter-object-option-divider"></span>
+                          <span class="reviews-filter-object-option desc active">Desc</span>
+          ';
+
+          // print $sort_order; 
+          print $dk_sort_order; 
         ?>
       </div>
     <?php endif; ?>
     
-    
-    <?php if (!empty($items_per_page)): ?>
-      <div class="views-exposed-widget views-widget-per-page">
-        <?php print $items_per_page; ?>
-      </div>
-    <?php endif; ?>
-    <?php if (!empty($offset)): ?>
-      <div class="views-exposed-widget views-widget-offset">
-        <?php print $offset; ?>
-      </div>
-    <?php endif; ?>
-    <div class="views-exposed-widget views-submit-button">
-      <?php print $button; ?>
-    </div>
-    <?php if (!empty($reset_button)): ?>
-      <div class="views-exposed-widget views-reset-button">
-        <?php print $reset_button; ?>
-      </div>
-    <?php endif; ?>
-  </div>
-</div>

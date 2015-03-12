@@ -1,4 +1,10 @@
-<?php drupal_add_js('/sites/all/themes/gv_sky/js/global.js') ?>
+<?php drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
+
+if ($is_front) {
+  drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
+}
+
+?>
   <header id="header" role="banner">
 
     <nav class="navigation" role="navigation">
