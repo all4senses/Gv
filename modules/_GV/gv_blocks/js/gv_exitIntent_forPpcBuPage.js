@@ -48,6 +48,11 @@
           console.log('#phones_amt-button focused');
         });
         
+        jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus(function () {
+          console.log('.next_custom focused');
+        });
+        
+        
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
             console.log(jQuery(this).val());
@@ -148,7 +153,9 @@
                           height:540
                           ,onOpen: function() {
                                 console.log('open...');
-                                jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
+                                //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
+                                jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
+                                
 //                                $("body").css('overflow', 'inherit');
 //                                turned_off = true;
                                }
