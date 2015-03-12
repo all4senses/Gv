@@ -6,10 +6,6 @@
 
 
 
-// Tempoarary Unwrapping until alex removes all unneccessary 'views' wraps
-$$('.reviews-filter-sort').unwrap().unwrap();
-$$('.reviews-filter').unwrap();
-$$('.reviews-list-item').unwrap();
 
 
 
@@ -105,9 +101,167 @@ $$('.reviews-list-item').unwrap();
 		}
 	});
 	
-	for (var i = 1; i <= $$('.vertical-tbody-reviews-item-rating').length; i++) {
-		var n = i +1;
-		$$('.vertical-thead-logos-item:nth-child('+ n +') .vertical-thead-logos-item-logo').first().clone().appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-logo');
-		$$('.vertical-tbody-option:nth-child(15) .vertical-item:nth-child('+ n +') div:first').clone().addClass('vertical-mobile-tbody-row-price-text').appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-price');
-	};
-	// $$('')
+
+
+
+
+
+
+
+/* ==========================================================================
+   Vertical chart mobile version markup
+   ========================================================================== */
+
+
+for (var i = 1; i <= $$('.vertical-tbody-reviews-item-rating').length; i++) {
+	var n = i +1;
+	$$('.vertical-thead-logos-item:nth-child('+ n +') .vertical-thead-logos-item-logo').first().clone().appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-logo');
+	$$('.vertical-tbody-option:nth-child(15) .vertical-item:nth-child('+ n +') div:first').clone().addClass('vertical-mobile-tbody-row-price-text').appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-price');
+};
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Reviews List Additional Markup
+   ========================================================================== */
+
+
+// Tempoarary Unwrapping until alex removes all unneccessary 'views' wraps
+$$('.reviews-filter-sort').unwrap().unwrap();
+// $$('.reviews-filter').unwrap();
+$$('.reviews-list-item').unwrap();
+
+
+
+$$('.reviews-filter').before('<div class="reviews-title">Customer Reviews</div>');
+
+$$('.reviews-list-item').wrapAll('<div class="reviews-list" />');
+
+$$('.reviews-list').after('<div class="reviews-load">Load More</div>')
+
+$$('.reviews-list, .reviews-filter, .reviews-title').wrapAll('<div class="reviews" />');
+
+
+
+
+
+
+
+/* ==========================================================================
+   AJAX Loading
+   ========================================================================== */
+
+
+
+
+
+// reviews-filter
+$$('body').data('sort', 'created');
+$$('body').data('order', 'DESC');
+$$('body').data('page', 1);
+
+$$('.reviews-filter-object-option.rating').click(function(){
+	
+	jQuery(this).siblings().removeClass('active');
+	jQuery(this).addClass('active');
+	$$('.reviews-list').addClass('disabled');
+
+	$$('body').data('sort', 'field_r_rating_overall_value');
+
+	jQuery.get('', 
+		
+		{sort_by: $$('body').data('sort'), sort_order: $$('body').data('order'), items_per_page: 10}, 
+		
+		function(data){
+			var $loadedReviews = $$(data).find('.reviews-list-item');
+			$$('.reviews-list').removeClass('disabled').html($loadedReviews);
+		}
+	);
+});
+
+$$('.reviews-filter-object-option.date').click(function(){
+	
+	jQuery(this).siblings().removeClass('active');
+	jQuery(this).addClass('active');
+	$$('.reviews-list').addClass('disabled');
+
+	$$('body').data('sort', 'created');
+
+	jQuery.get('', 
+		
+		{sort_by: $$('body').data('sort'), sort_order: $$('body').data('order'), items_per_page: 10}, 
+		
+		function(data){
+			var $loadedReviews = $$(data).find('.reviews-list-item');
+			$$('.reviews-list').removeClass('disabled').html($loadedReviews);
+		}
+	);
+});
+
+$$('.reviews-filter-object-option.asc').click(function(){
+	
+	jQuery(this).siblings().removeClass('active');
+	jQuery(this).addClass('active');
+	$$('.reviews-list').addClass('disabled');
+
+	$$('body').data('order', 'ASC');
+
+	jQuery.get('', 
+		
+		{sort_by: $$('body').data('sort'), sort_order: $$('body').data('order'), items_per_page: 10}, 
+		
+		function(data){
+			var $loadedReviews = $$(data).find('.reviews-list-item');
+			$$('.reviews-list').removeClass('disabled').html($loadedReviews);
+		}
+	);
+});
+
+$$('.reviews-filter-object-option.desc').click(function(){
+	
+	jQuery(this).siblings().removeClass('active');
+	jQuery(this).addClass('active');
+	$$('.reviews-list').addClass('disabled');
+
+	$$('body').data('order', 'DESC');
+
+	jQuery.get('', 
+		
+		{sort_by: $$('body').data('sort'), sort_order: $$('body').data('order'), items_per_page: 10}, 
+		
+		function(data){
+			var $loadedReviews = $$(data).find('.reviews-list-item');
+			$$('.reviews-list').removeClass('disabled').html($loadedReviews);
+		}
+	);
+});
+
+
+
+
+
+
+// Reviews Load 
+$$('.reviews-load').click(function(){
+	$$(this).addClass('loading');
+	var $pageNum = $$('body').data('page');
+	$$('body').data('page', $pageNum + 1);
+
+	jQuery.get('', 
+		
+		{sort_by: $$('body').data('sort'), sort_order: $$('body').data('order'), items_per_page: 5, page: $$('body').data('page')}, 
+		
+		function(data){
+			var $loadedReviews = jQuery(data).find('.reviews-list-item');
+			jQuery($loadedReviews).css('display', 'none').appendTo('.reviews-list').slideDown();
+			$$('.reviews-load').removeClass('loading');
+		}
+	);
+});

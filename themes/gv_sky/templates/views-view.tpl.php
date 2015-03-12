@@ -29,9 +29,7 @@
   
 
   <?php if ($rows): ?>
-    <div class="reviews-list">
       <?php print $rows; ?>
-    </div>
   <?php elseif ($empty): ?>
     <div class="view-empty">
       <?php print $empty; ?>
