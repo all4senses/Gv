@@ -35,6 +35,14 @@
 //        }); 
         
         
+        jQuery('#colorbox').keydown(function (event) { 
+            console.log(jQuery(this).val());
+            console.log(event.keyCode);
+            console.log(event);
+            console.log(event.target.id);
+            
+        });
+        
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
