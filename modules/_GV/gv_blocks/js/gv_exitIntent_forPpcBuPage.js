@@ -48,7 +48,7 @@
           console.log('form focused');
         });
         
-        jQuery('#requestQuoteFormWrapper-ppc .multipartForm').keydown(function (event) { 
+        jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
             console.log(jQuery(this).val());
             //console.log(event.keyCode);
