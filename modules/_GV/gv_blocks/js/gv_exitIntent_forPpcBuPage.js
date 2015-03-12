@@ -44,8 +44,8 @@
 //            
 //        });
         
-        jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus(function () {
-          console.log('form focused');
+        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus(function () {
+          console.log('#phones_amt-button focused');
         });
         
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
@@ -58,6 +58,7 @@
             // Stop changing focus on the last element in the form section
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
               event.preventDefault();     // Prevent character input
+              console.log('prevented pass');
             }
             
             /*
@@ -147,7 +148,7 @@
                           height:540
                           ,onOpen: function() {
                                 console.log('open...');
-                                jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
+                                jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
 //                                $("body").css('overflow', 'inherit');
 //                                turned_off = true;
                                }
