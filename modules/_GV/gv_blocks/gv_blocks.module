@@ -318,6 +318,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['compare_providers_top_cc'] = array(
+    'info' => 'Compare Top CC providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['reviews_counter'] = array(
     'info' => 'Reviews counter',
     'cache' => DRUPAL_NO_CACHE,
@@ -806,6 +811,13 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareTopProviders('pbx');
       break;
+    
+    case 'compare_providers_top_cc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('cc');
+      break;
+    
+    
     
   
     case 'reviews_counter':
@@ -2879,6 +2891,10 @@ function gv_blocks_compareTopProviders($service_type) {
     case 'pbx':
       $rating_table = 'field_data_field_p_erating_pbx';
       $rating_field = 'field_p_erating_pbx_value';
+      break;
+    case 'cc':
+      $rating_table = 'field_data_field_p_erating_cc';
+      $rating_field = 'field_p_erating_cc_value';
       break;
   }
   
