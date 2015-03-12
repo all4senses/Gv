@@ -71,6 +71,7 @@ $sprite_names = serialize(array(
   'pbx' => 'top_pbx_providers',
   'bu_ca' => 'top_ca_providers',
   're_ca' => 'top_ca_providers',
+  'cc' => 'top_cc_providers',
   //'smbv' => '',  
 ));
 
