@@ -77,3 +77,13 @@ function gv_sky_l($text, $path, array $options = array()) {
       return $title;
     }
   }
+
+  function dk_shorten_body($text){
+    $temp = strlen($text);
+
+    if ($temp > 115) {
+      return substr($text, 0, 115) . '...';
+    } else {
+      return $text;
+    }
+  }

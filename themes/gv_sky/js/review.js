@@ -1,0 +1,1 @@
+$$('article').unwrap().wrapAll('<div class="review-posts" />');

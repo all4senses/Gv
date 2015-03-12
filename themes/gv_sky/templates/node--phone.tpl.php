@@ -13,7 +13,7 @@ if($view_mode == 'home_teaser_rotated') {
 ?>
 
 <?php if (!$page): ?>
-  <article id="node-<?php print $node->nid; ?>" class="<?php print $classes . ($view_mode == 'teaser' ? ' with_thumb' : ''); ?> clearfix"<?php print $attributes; ?>>
+  <article class="review-posts-item"<?php print $attributes; ?>>
 <?php else: ?>
 
 <?php endif; ?>
@@ -123,8 +123,6 @@ if($view_mode == 'home_teaser_rotated') {
 
     
 
-        <div class="content<?php echo ($view_mode == 'teaser' ? ' teaser' : ''), '" ', $content_attributes; ?>">
-          
            <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
           
            <?php if ($page): 
@@ -316,28 +314,28 @@ if($view_mode == 'home_teaser_rotated') {
           <?php elseif ($view_mode == 'teaser_phonePicAndRating'): ?> <!-- Second Elseif of if ($page): -->
           
           
-              <div class="phone photo teaser">
                 <?php
                   if (isset($node->field_p_image['und'][0]['uri'])) {
-                    echo '<a href="' . $node_url . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_teaser_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a>'; 
+                    echo '<a class="review-posts-item-img" href="' . $node_url . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_teaser_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo', 'class' => 'review-posts-item-img-actual'))) . '</a>'; 
                   }
                 ?>
-              </div>
-              <?php
-                  $stars = theme('gv_misc_fivestar_static', array('rating' => $node->extra_data['editor_rating_overall'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-                  echo '<div class="rating">' . $stars . ' <span class="count">(' . $editor_overall_rating . ')</span></div>';
-              ?>
-              <h3<?php //print $title_attributes; ?> property="dc:title v:summary">
-                  <a href="<?php print $node_url; ?>">
+              <h3 class="review-posts-item-title" property="dc:title v:summary">
+                  <a class="review-posts-item-title-link" href="<?php print $node_url; ?>">
                     <?php print $node->field_p_name['und'][0]['value']; ?>
                   </a>
               </h3>
+              <?php
+                  $stars = theme('gv_misc_fivestar_dk', array('rating' => $node->extra_data['editor_rating_overall'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'review-posts-item-rating'));
+                  echo '<div class="review-posts-item-rating">' . $stars . ' <span class="review-posts-item-rating-number">' . $editor_overall_rating . '</span></div>';
+              ?>
+              <div class="review-posts-item-content">
+                <?php echo dk_shorten_body($node->extra_data['pros_and_cons']['The bottom line']); ?>
+              </div>
             
           <?php endif; ?>  <!-- end of else of if ($page): -->
            
              
       <?php if ($page): ?>
-        </div> <!-- content -->
       <?php endif; ?>
         
 

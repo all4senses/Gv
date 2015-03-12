@@ -2564,7 +2564,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       $stars = NULL;
       foreach ($votes as $vote) {
         if ($vote['tag'] == 'overall' && $vote['value']) {
-          $stars = theme('gv_misc_fivestar_static_top5_providers', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+          $stars = theme('gv_misc_fivestar_dk', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'top-providers-list-item-details-text-stars'));
         }
       }
       
@@ -2851,7 +2851,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             $out .= '<td class="vertical-tbody-reviews-item vertical-item">
               <div class="vertical-tbody-reviews-item-rating">' . $save_vote[$nid] . '</div>' . 
 
-              theme('gv_misc_fivestar_static_vertical_chart', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '
+              theme('gv_misc_fivestar_dk', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'vertical-tbody-reviews-item-rating')) . '
 
               <a class="vertical-tbody-reviews-item-read" href="' . url('node/' . $nid) . '">Read Reviews</a>
 
@@ -3014,7 +3014,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           <td class="vertical-mobile-tbody-row-rating">
               <div class="vertical-mobile-tbody-row-rating-details"><div class="vertical-mobile-tbody-row-rating-details-rating">' . $save_vote[$nid] . '</div>' . 
 
-              theme('gv_misc_fivestar_static_vertical_chart', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '
+              theme('gv_misc_fivestar_dk', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'vertical-tbody-reviews-item-rating')) . '
               </div>
 
               <a class="vertical-mobile-tbody-row-rating-read" href="' . url('node/' . $nid) . '">Read Reviews</a>

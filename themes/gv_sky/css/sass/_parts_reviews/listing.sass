@@ -1,0 +1,78 @@
+.review-posts
+	+clearfix
+
+	+m(920)
+		max-width: 830px
+		+center
+
+	&-item
+		+blog-box( perc(355px ,1130px), 388px, 20px, 5px )
+		margin-right: perc(30px, 1130px)
+		margin-bottom: perc(30px, 1130px)
+
+		+m(921, min)
+
+			&:nth-child(3n)
+				margin-right: 0
+
+		+m(1024)
+			@media screen and (min-width:921px) 
+				height: 330px
+
+		+m(920)
+			width: perc(400px, 822px)
+			&:nth-child(2n)
+				margin-right: 0
+
+			&:nth-child(2n+1)
+				clear: left
+
+		+m(620)
+			width: perc(500px, 822px)
+			clear: none
+			float: none
+			margin: 0 auto 30px !important
+
+			
+
+
+		&-img
+			display: block
+			height: perc(238px, 388px)
+			overflow: hidden
+
+			+m(1024)
+				@media screen and (min-width:921px) 
+					height: perc(216px, 388px)
+
+			&-actual
+				width: 100%
+				min-width: 100%
+				height: auto
+				min-height: 100%
+
+
+		&-title
+			+ellipsis(100%)
+			display: block
+
+		&-rating
+			text-align: left
+			padding: 7px 16px 0
+			// box-sizing: border-box
+			+clearfix
+
+			&-fivestar
+				+fivestar()
+				float: left
+
+			&-number
+				display: none
+				// float: left
+				// font-size: 16px
+				// line-height: 1
+				// font-weight: 600
+				// color: $grey-darker
+
+		&-content
+			padding-bottom: 19px

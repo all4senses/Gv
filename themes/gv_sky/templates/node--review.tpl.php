@@ -77,7 +77,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   $teaser = substr_replace ($teaser, '... ', $last_pos);
   
   
-  $stars = theme('gv_misc_fivestar_static_latest_reviews', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+  $stars = theme('gv_misc_fivestar_dk', array('rating' => $node->field_r_rating_overall['und'][0]['value'] * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'latest-reviews-list-item-header-cta'));
   
   if ($_SERVER['REQUEST_URI'] == '/ppc/business-voip') {
     $reviews_attributes = array('class' => array('more'), 'rel' => 'nofollow', 'target' => '_blank');

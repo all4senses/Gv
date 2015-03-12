@@ -26,18 +26,26 @@ if ($is_front) {
       </div>
     </nav> 
 
-    <?php  if ($page['highlighted']): ?>
+    <?php if ( current_path() == 'node/804' ) { ?>
+      <?php drupal_add_js('/sites/all/themes/gv_sky/js/review.js'); ?>
+      <div class="hero-header left">
+        <div class="hero-title">
+          <h1 class="hero-title-heading"><?php print render($title); ?></h1>
+          <p class="hero-title-desc"><?php print field_get_items('node',$node, 'body')[0]['value']; ?></p>
+        </div>
+      </div>
+    <?php } ?>
 
+    <?php  if ($page['highlighted']): ?>
       <div class="hero-header <?php if ($is_front) {echo 'center';} ?>">
         <?php print render($page['highlighted']); ?>
       </div>
-      
     <?php endif;  ?>
 
   </header>
 
   <main role="main" <?php if (!$is_front) {echo 'id="main"';} ?> >
-    
+    <?php echo (($is_front) ? '' : '<div class="main-wrap">')  ?>
     <?php  if ($page['content_wide']): ?>
         <?php print render($page['content_wide']); ?>
     <?php endif;  ?>
@@ -76,22 +84,19 @@ if ($is_front) {
           </aside>  <!-- /#sidebar-second -->
         <?php endif; ?>
 
-        <div class="bottom-clear"></div>
         
         <div id="above_footer">
             <?php echo render($page['above_footer']); ?>
         </div>
 
+    <?php echo (($is_front) ? '' : '</div>') ?>
   </main>
-
 
   <?php
   
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
   ?>
-    
-  
-  
+
   <footer class="footer" role="contentinfo" class="<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
    <div class="footer-wrap">
 
