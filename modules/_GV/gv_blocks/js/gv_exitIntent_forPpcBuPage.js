@@ -51,7 +51,9 @@
         jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus(function () {
           console.log('.next_custom focused');
         });
-        
+        jQuery('#requestQuoteFormWrapper-ppc .no').focus(function () {
+          console.log('.no focused');
+        });
         
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
