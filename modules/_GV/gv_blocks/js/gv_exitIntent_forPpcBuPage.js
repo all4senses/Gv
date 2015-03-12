@@ -37,10 +37,10 @@
         
         jQuery('body').keydown(function (event) { 
             //console.log(jQuery(this).val());
-            console.log(jQuery(this));
+            //console.log(jQuery(this));
             console.log(event.keyCode);
             console.log(event);
-            console.log(event.target.id);
+            console.log("event.target.id = " + event.target.id);
             
         });
         
@@ -140,6 +140,11 @@
                           href:"#exitIntent", 
                           width:780, 
                           height:540
+                          ,onOpen: function() {
+                                console.log('open...');
+//                                $("body").css('overflow', 'inherit');
+//                                turned_off = true;
+                               }
                           ,onClosed: function() {
                                 //console.log('closed...');
                                 $("body").css('overflow', 'inherit');
