@@ -44,6 +44,10 @@
 //            
 //        });
         
+        jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus(function () {
+          console.log('form focused');
+        });
+        
         jQuery('#requestQuoteFormWrapper-ppc .multipartForm').keydown(function (event) { 
             
             console.log(jQuery(this).val());
