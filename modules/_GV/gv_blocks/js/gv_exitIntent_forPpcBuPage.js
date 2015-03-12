@@ -35,15 +35,16 @@
 //        }); 
         
         
-        jQuery('#colorbox').keydown(function (event) { 
-            console.log(jQuery(this).val());
+        jQuery('body').keydown(function (event) { 
+            //console.log(jQuery(this).val());
+            console.log(jQuery(this));
             console.log(event.keyCode);
             console.log(event);
             console.log(event.target.id);
             
         });
         
-        jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
+        jQuery('#requestQuoteFormWrapper-ppc .multipartForm').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
             //console.log(event.keyCode);
