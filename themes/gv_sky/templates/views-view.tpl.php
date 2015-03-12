@@ -20,7 +20,7 @@
   
   
   <?php if ($exposed): ?>
-    <div class="view-filters">
+    <div class="reviews-filter">
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>
@@ -29,7 +29,9 @@
   
 
   <?php if ($rows): ?>
+    <div class="reviews-list">
       <?php print $rows; ?>
+    </div>
   <?php elseif ($empty): ?>
     <div class="view-empty">
       <?php print $empty; ?>

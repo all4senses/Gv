@@ -35,10 +35,10 @@ $window.scroll(function(){
 	var $scrollDiff = $windowScroll - $tabsScroll + 20;
 
 	if ( $scrollDiff > 0 ) {
-		$$('.provider-box-data-tabs').css('padding-top', $scrollDiff);
+		$$('.provider-box-data-tabs').css('margin-top', $scrollDiff);
 	}
 	if ( $scrollDiff < 0 ) {
-		$$('.provider-box-data-tabs').css('padding-top', 0);
+		$$('.provider-box-data-tabs').css('margin-top', 0);
 	}
 	if ( ($scrollDiff - 70) > 0 ) {
 		$$('.provider-box-data-tabs').addClass('move');

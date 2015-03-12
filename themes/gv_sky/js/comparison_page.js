@@ -6,6 +6,14 @@
 
 
 
+// Tempoarary Unwrapping until alex removes all unneccessary 'views' wraps
+$$('.reviews-filter-sort').unwrap().unwrap();
+$$('.reviews-filter').unwrap();
+$$('.reviews-list-item').unwrap();
+
+
+
+
 
 // Sticky Table Head
 

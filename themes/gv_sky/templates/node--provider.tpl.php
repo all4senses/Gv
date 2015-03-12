@@ -205,14 +205,14 @@
                 <?php if ($page && isset($content['reviews_entity_view_1']) && $content['reviews_entity_view_1']): ?>
                   <li id="tab-0" class="provider-box-data-tabs-item active">
                     <?php 
-                      echo 'Customer Reviews';
+                      echo '<span class="provider-box-data-tabs-item-mobile_hide">Customer </span>Reviews';
                     ?>
                   </li>
                 <?php endif; ?>
                   
                 <li id="tab-1" class="provider-box-data-tabs-item">
                   <?php 
-                    echo 'Provider Overview';
+                    echo '<span class="provider-box-data-tabs-item-mobile_hide">Provider </span>Overview';
                   ?>
                 </li>
                 
@@ -222,7 +222,7 @@
                 $provider_options_bu = isset($node->p_data['provider_options_bu']) ? $node->p_data['provider_options_bu'] : (isset($node->p_data['provider_options']) ? $node->p_data['provider_options'] : NULL);
                 
                 if (!empty($provider_options_bu) && !empty($provider_options_bu['enabled'])) {
-                  echo '<li id="tab-2" class="provider-box-data-tabs-item">Available Services</li>';
+                  echo '<li id="tab-2" class="provider-box-data-tabs-item"><span class="provider-box-data-tabs-item-mobile_hide">Available </span>Services</li>';
                 }
                 
                 $provider_options_re = isset($node->p_data['provider_options_re']) ? $node->p_data['provider_options_re'] : NULL;

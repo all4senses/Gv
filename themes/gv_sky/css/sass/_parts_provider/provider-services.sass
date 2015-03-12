@@ -24,6 +24,7 @@
 		border: 1px solid $divider
 		border-radius: 4px
 		border-collapse: separate
+		overflow: hidden
 
 		&:nth-child(3),
 		&:nth-child(5),
@@ -56,10 +57,14 @@
 					&:after
 						position: absolute
 						+valign
+						top: 55%
 						right: 10px
 						font-family: gvcons
 						font-weight: 400
 						text-transform: none
+
+						.gecko &
+							top: 52%
 
 					&.provider-info:after
 						content: '!'

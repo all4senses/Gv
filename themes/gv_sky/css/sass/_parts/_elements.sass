@@ -282,3 +282,195 @@
 				font-weight: 600
 				color: $primary
 
+
+
+=review
+	margin-top: 85px
+	position: relative
+	+clearfix
+
+	&:nth-child(1)
+		margin-top: 0
+
+	+m(736)
+		margin-top: 30px
+		padding-top: 30px
+		border-top: 1px solid $divider
+
+		&:nth-child(1)
+			padding-top: 15px
+
+
+	&-details
+		float: left
+		width: perc(650px, 870px)
+		min-height: 196px
+		padding-right: perc(18px, 870px)
+		border-right: 1px solid $divider
+
+		+m(1024)
+			width: perc(610px, 870px)
+
+		+m(820)
+			width: 100%
+			border-right: 0
+
+		&-title
+			font-size: 18px
+			font-weight: 600
+			line-height: 1
+
+			&.desktop
+				+m(720)
+					display: none
+
+			&.mobile
+				display: none
+
+				+m(720)
+					display: block
+
+					.field-item p
+						+ellipsis(44%)
+						display: block
+						
+
+
+		&-meta
+			margin: 6px 0 16px
+			font-size: 12px
+			line-height: 18px
+			font-weight: 600
+			color: $grey-light
+
+			&-author
+				position: relative
+				padding-left: 18px
+				margin-right: 18px
+
+				&:before
+					content: 'K'
+					position: absolute
+					top: -2px
+					left: 0
+					font-family: gvcons
+					font-weight: 400
+					font-size: 13px
+					line-height: 1
+
+			&-date
+				position: relative
+				padding-left: 18px
+
+				&:before
+					content: 'x'
+					position: absolute
+					top: -2px
+					left: 0
+					font-family: gvcons
+					font-weight: 400
+					font-size: 14px
+					line-height: 1
+
+		&-content
+			font-size: 14px
+			line-height: 20px
+			font-weight: 500
+
+			&-summary
+				margin-top: 20px
+
+				&-item
+					
+					&-title
+						font-weight: 700
+
+
+					.pros &-title
+						color: $pros
+
+					.cons &-title
+						color: $cons
+
+
+
+
+
+
+	&-rating
+		float: right
+		width: perc(180px, 870px)
+
+		+m(1024)
+			width: perc(220px, 870px)
+
+		+m(820)
+			position: absolute
+			width: 125px
+			right: 0
+
+
+		.provider-box-provider-review-scores-list
+			display: block
+
+			+m(820)
+				display: none
+
+			&-item
+				width: 100%
+				float: none
+				text-align: left
+				+clearfix
+
+				&-title
+					float: left
+					font-size: 14px
+					line-height: 1.2
+					letter-spacing: .4px
+					text-transform: none
+
+					+m(920)
+						width: 46%
+						+ellipsis(100%)
+						display: block
+
+
+				&-fivestar
+					float: right
+
+		
+
+		&-score
+			margin-top: 13px
+			position: relative
+			+clearfix
+
+			+m(414)
+				margin-top: 0
+
+
+
+			&-caption
+				font-weight: 700
+				font-size: 16px
+				letter-spacing: .4px
+				text-transform: uppercase
+				color: $grey
+				float: left
+
+			&-number
+				float: right
+				font-size: 36px
+				line-height: 0.6
+				font-weight: 500
+				color: $yellow
+
+				+m(820)
+					margin-top: 1px
+					font-size: 28px
+					font-weight: 600
+					font-family: avenir
+
+
+
+// =blog-box

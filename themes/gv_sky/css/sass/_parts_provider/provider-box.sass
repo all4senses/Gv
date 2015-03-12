@@ -16,6 +16,7 @@
 
 		+m(736)
 			height: auto
+			padding: 0 30px 30px
 
 
 		&-logo
@@ -26,17 +27,20 @@
 			border-right: 1px solid $divider
 
 			+m(736)
-				+clearfix
+				height: 80px
 				border-right: 0
 				border-bottom: 1px solid $divider
 				padding-bottom: 20px
 				padding-right: 0
-				box-sizing: border-box
+				+clearfix
+				// box-sizing: border-box
 
 			&-wrap
 				height: perc(183px, 230px)
 
 				+m(736)
+					position: absolute
+					+valign
 					height: auto
 					float: left
 
@@ -64,12 +68,11 @@
 				+center
 
 				+m(736)
-					// position: absolute
-					// right: 30px
-					// +valign
+					+valign
 					width: 160px
-					position: relative
-					top: 15px
+					// position: relative
+					position: absolute
+					right: 0
 					height: 43px
 					float: right
 
@@ -77,7 +80,7 @@
 					width: 130px
 
 				+m(360)
-					top: 20px
+					// top: 20px
 					height: 36px
 					width: 100px
 
@@ -124,7 +127,8 @@
 				padding-left: 19px
 
 				&-link
-					color: $grey-darker
+					// color: $grey-darker
+					color: $primary
 
 					&:hover
 						color: $primary
@@ -237,11 +241,13 @@
 			+m(920)
 				position: absolute
 				width: 100%
+				height: auto
 
 			+m(736)
 				top: 135px
 
 			+m(480)
+				width: 93%
 				top: 230px
 				height: auto
 
@@ -310,8 +316,10 @@
 
 					+m(480)
 						float: left
-						font-size: 32px
-						margin-top: -5px
+						font-size: 28px
+						font-weight: 600
+						font-family: avenir
+						margin-top: -3px
 						padding: 0 10px
 
 						
@@ -333,10 +341,16 @@
 		+center
 		background-color: white
 		z-index: 10
+		-webkit-transform: translateY(-109px)
+		-ms-transform: translateY(-109px)
 		transform: translateY(-109px)
+		transition: -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s
+		transition: -ms-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s
 		transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s
 
 		&.show
+			-webkit-transform: translateY(0)
+			-ms-transform: translateY(0)
 			transform: translateY(0)
 
 		+m(736)
@@ -353,6 +367,7 @@
 
 		&-logo
 			width: 200px
+			height: 60px
 
 			+m(820)
 				width: 150px
@@ -360,8 +375,6 @@
 			&-wrap
 				height: 100%
 
-			.provider-box-provider-logo-wrap-img
-				+unvalign
 
 
 		&-details
@@ -421,14 +434,28 @@
 		box-sizing: border-box
 		+clearfix
 
+		+m(620)
+			position: relative
+
 		&-tabs
+			position: relative
 			float: left
 			width: perc(200px, 1070px)
+			// -webkit-transform: translateY(0)
+			// -ms-transform: translateY(0)
 			transform: translateY(0)
+			// transition: -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s
+			// transition: -ms-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s
 			transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s
 
 			&.move
+				// -webkit-transform: translateY(109px)
+				// -ms-transform: translateY(109px)
 				transform: translateY(109px)
+
+			.webkit &
+				margin-top: 0 !important
+
 
 			+m(920)
 				width: perc(250px, 1070px)
@@ -436,11 +463,15 @@
 			+m(736)
 				float: none
 				width: 100%
+				-webkit-transform: translateY(0) !important
+				-ms-transform: translateY(0) !important
 				transform: translateY(0) !important
-				padding-top: 0 !important
+				margin-top: 0 !important
 				margin: -25px 0 20px
 				+clearfix
 
+			+m(620)
+				text-align: center
 
 
 
@@ -473,6 +504,14 @@
 
 					&:nth-child(3)
 						border-right: 0
+
+				+m(620)
+					font-size: 15px
+					padding-right: 10px
+					padding-left: 10px
+
+					&-mobile_hide
+						display: none
 
 
 
