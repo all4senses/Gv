@@ -35,20 +35,21 @@
 //        }); 
         
         
-        jQuery('body').keydown(function (event) { 
-            //console.log(jQuery(this).val());
-            //console.log(jQuery(this));
-            console.log(event.keyCode);
-            console.log(event);
-            console.log("event.target.id = " + event.target.id);
-            
-        });
+//        jQuery('body').keydown(function (event) { 
+//            //console.log(jQuery(this).val());
+//            //console.log(jQuery(this));
+//            console.log(event.keyCode);
+//            console.log(event);
+//            console.log("event.target.id = " + event.target.id);
+//            
+//        });
         
         jQuery('#requestQuoteFormWrapper-ppc .multipartForm').keydown(function (event) { 
             
-            //console.log(jQuery(this).val());
+            console.log(jQuery(this).val());
             //console.log(event.keyCode);
-            //console.log(event);
+            console.log(event);
+            console.log("event.target.id = " + event.target.id);
             
             // Stop changing focus on the last element in the form section
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
@@ -142,6 +143,7 @@
                           height:540
                           ,onOpen: function() {
                                 console.log('open...');
+                                jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
 //                                $("body").css('overflow', 'inherit');
 //                                turned_off = true;
                                }
