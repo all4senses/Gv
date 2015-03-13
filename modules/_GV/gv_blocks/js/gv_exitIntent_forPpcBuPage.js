@@ -45,6 +45,7 @@
             console.log(focused);
             
             a = jQuery(":focus");
+            console.log(jQuery(a).next(":tabbable"));
             //if(cb_opened) 
             {
               console.log("turned_off = " + turned_off);
@@ -140,7 +141,7 @@
          */
        
        
-       cb_opened = 0;
+        turned_off = true;
        
         $(document).bind("mouseleave", function(e)
         {
@@ -149,7 +150,7 @@
             //if (!turned_off && e.pageY <= 1)
             if (!turned_off && e.pageY - $(window).scrollTop() <= 1)
             {    
-                turned_off = true;
+                ////turned_off = true;
                 //now = new Date();           
                 //for (i=0; i < times.length; i++)
                 {
@@ -179,7 +180,7 @@
                           href:"#exitIntent", 
                           width:780, 
                           height:540
-                          ,onOpened: function() {
+                          ,onOpen: function() {
                                 console.log('open...');
                                 //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
                                 jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
