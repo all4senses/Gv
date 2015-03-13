@@ -8,8 +8,6 @@
        
        // Exit intent functionality.
        
-        var cb1;
-        
         var turned_off = null; //true;
         var turned_off_suppressed = null;
         
@@ -42,15 +40,11 @@
             }
             */ 
             
-            console.log(cb1);
-            console.log($("#colorbox"));
-            console.log($("#colorbox").css("display"));
-            
             
             //if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
             if ($("#colorbox").css("display")=="block" && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
-              console.log("Prevented Tab!");
+              //console.log("Prevented Tab!");
             }
             
           } // End of if (event.keyCode == 9) {
@@ -92,8 +86,6 @@
                    5800 //180000
                  ); 
          */
-       
-        cb_opened = false;
         
         $(document).bind("mouseleave", function(e)
         {
@@ -125,7 +117,7 @@
                         //console.log('a1...');
                         //console.log($.fn.colorbox);
                         
-                        
+                        var cb1;
                         
                         cb1 = $.fn.colorbox({
                           inline:true, 
@@ -133,18 +125,9 @@
                           width:780, 
                           height:540
                           ,onOpen: function() {
-                                cb_opened = true;
-                                console.log('open...');
-                                //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
-                                jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
-                                
-                                //jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
-                                
-//                                $("body").css('overflow', 'inherit');
-                                //turned_off = false;
+                                //console.log('open...');
                                }
                           ,onClosed: function() {
-                                cb_opened = false;
                                 //console.log('closed...');
                                 $("body").css('overflow', 'inherit');
                                 turned_off = true;
