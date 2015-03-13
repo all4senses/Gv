@@ -45,6 +45,13 @@
             console.log(focused);
             
             a = jQuery(":focus");
+            //if(cb_opened) 
+            {
+              console.log("cb_opened = " + cb_opened);
+            }
+//            else {
+//              
+//            }
             if(jQuery(a).is(".multipartForm *")) {
               console.log("Is child of .multipartForm");
             }
@@ -53,6 +60,13 @@
             }
         });
         
+        
+        
+        jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus(function () {
+          console.log('.multipartForm focused');
+        });
+
+
         jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus(function () {
           console.log('#phones_amt-button focused');
         });
@@ -125,6 +139,9 @@
                  ); 
          */
        
+       
+       cb_opened = 0;
+       
         $(document).bind("mouseleave", function(e)
         {
             //console.log(e.pageY);
@@ -163,14 +180,18 @@
                           width:780, 
                           height:540
                           ,onOpen: function() {
+                                cb_opened = 1;
                                 console.log('open...');
                                 //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
                                 jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
+                                
+                                jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
                                 
 //                                $("body").css('overflow', 'inherit');
 //                                turned_off = true;
                                }
                           ,onClosed: function() {
+                                cb_opened = 0;
                                 //console.log('closed...');
                                 $("body").css('overflow', 'inherit');
                                 turned_off = true;
