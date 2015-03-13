@@ -7,7 +7,6 @@
        
        
        // Exit intent functionality.
-       //console.log('xxx');
        
         var turned_off = null; //true;
         var turned_off_suppressed = null;
@@ -20,132 +19,57 @@
         });
         
         
-        // Quick hack for prevent scrolling down of colorbox popup window on press the tab key in the Company field (first step)
-//        jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').keydown(function (event) { 
-//            
-//            //console.log(jQuery(this).val());
-//            console.log(event.keyCode);
-//   
-//            if(event.keyCode == 9){ // Tab
-//              jQuery(this).blur();
-//              jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
-//              event.preventDefault();     // Prevent character input
-//            }
-//
-//        }); 
         
         
+        // More efficient way of preventing losing focus and breaking colorbox on tab key,
+        // when this function prevent exiting and hiding colorbox caused by pressing tab
         jQuery('body').keydown(function (event) { 
           
           if (event.keyCode == 9) {
+            /*  
             console.log(event);
             console.log("event.target.id = " + event.target.id);
             focused = $(':focus');
             console.log(focused);
+            if(jQuery(focused).next(":tabbable").is(".multipartForm *")) {
+              console.log("Next Focused Is child of .multipartForm");
+            }
             
-//            if (cb_opened && (  !jQuery(focused).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
-//              event.preventDefault();
-//            }
+            if (cb_opened && (  !jQuery(focused).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
+              event.preventDefault();
+            }
+            */ 
+            
+            colsole.log(cb1);
+            colsole.log($("#colorbox"));
             
             if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
               console.log("Prevented Tab!");
             }
             
-            
-          }
+          } // End of if (event.keyCode == 9) {
           
-          return;
-          
-            //console.log(jQuery(this).val());
-            //console.log(jQuery(this));
-            console.log("event.keyCode = " + event.keyCode);
-            
-            a = jQuery(":focus");
-            console.log(jQuery(a).next(":tabbable"));
-            //if(cb_opened) 
-            {
-              console.log("cb_opened = " + cb_opened);
-            }
-//            else {
-//              
-//            }
-            if(jQuery(a).is(".multipartForm *")) {
-              console.log("Focused Is child of .multipartForm");
-            }
-            else {
-              console.log("Focused is NOT child of .multipartForm");
-            }
-            
-            if(jQuery(a).next(":tabbable").is(".multipartForm *")) {
-              console.log("Next Focused Is child of .multipartForm");
-            }
-            else {
-              console.log("Next Focused is NOT child of .multipartForm");
-            }
         });
+       
         
-//        
-//        
-//        jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus(function () {
-//          console.log('.multipartForm focused');
-//        });
-//
-//
-//        jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus(function () {
-//          console.log('#phones_amt-button focused');
-//        });
-//        
-//        jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus(function () {
-//          console.log('.next_custom focused');
-//        });
-//        jQuery('#requestQuoteFormWrapper-ppc .no').focus(function () {
-//          console.log('.no focused');
-//        });
-        
+        // Obsolete. Used above more efficient function jQuery('body').keydown(function (event) { .
+        /*
         jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
-            console.log(jQuery(this).val());
+            //console.log(jQuery(this).val());
             //console.log(event.keyCode);
-            console.log(event);
-            console.log("event.target.id = " + event.target.id);
+            //console.log(event);
+            //console.log("event.target.id = " + event.target.id);
             
             // Stop changing focus on the last element in the form section
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
               event.preventDefault();     // Prevent character input
               console.log('prevented pass');
             }
-            
-            /*
-            if(event.keyCode == 9) {
-                xxx = jQuery(this).find('#' + event.target.id);
-                console.log('+++');
-                console.log(xxx);
-                console.log('target id = ' + event.target.id);
-                
-                if(event.target.id == "company") {
-                   jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').blur();
-                   jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
-                   //event.preventDefault();     // Prevent character input
-                }
-                else if(event.target.id == "phones_amt-button") {
-                   console.log('xxx');
-                   jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').blur();
-                   jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
-                   //event.preventDefault();     // Prevent character input
-                }
-                event.preventDefault();     // Prevent character input
-            }
-            */
-//            if(event.keyCode == 9){ // Tab
-//              
-//              //jQuery(this).blur();
-//              //jQuery('#requestQuoteFormWrapper-ppc input[id="company"]').focus();
-//              event.preventDefault();     // Prevent character input
-//            }
 
         }); 
-        
+        */
         
         // 3 mins delay before turn on the exitIntent popup.
         /*
