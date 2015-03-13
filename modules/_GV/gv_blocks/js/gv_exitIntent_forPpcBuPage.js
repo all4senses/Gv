@@ -47,7 +47,7 @@
             a = jQuery(":focus");
             //if(cb_opened) 
             {
-              console.log("cb_opened = " + cb_opened);
+              console.log("turned_off = " + turned_off);
             }
 //            else {
 //              
@@ -180,7 +180,6 @@
                           width:780, 
                           height:540
                           ,onOpen: function() {
-                                cb_opened = 1;
                                 console.log('open...');
                                 //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
                                 jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
@@ -191,7 +190,6 @@
 //                                turned_off = true;
                                }
                           ,onClosed: function() {
-                                cb_opened = 0;
                                 //console.log('closed...');
                                 $("body").css('overflow', 'inherit');
                                 turned_off = true;
