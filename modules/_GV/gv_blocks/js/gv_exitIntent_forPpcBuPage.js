@@ -35,14 +35,15 @@
 //        }); 
         
         
-//        jQuery('body').keydown(function (event) { 
-//            //console.log(jQuery(this).val());
-//            //console.log(jQuery(this));
-//            console.log(event.keyCode);
-//            console.log(event);
-//            console.log("event.target.id = " + event.target.id);
-//            
-//        });
+        jQuery('body').keydown(function (event) { 
+            //console.log(jQuery(this).val());
+            //console.log(jQuery(this));
+            console.log("event.keyCode = " + event.keyCode);
+            console.log(event);
+            console.log("event.target.id = " + event.target.id);
+            focused = $(':focus');
+            console.log(focused);
+        });
         
         jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus(function () {
           console.log('#phones_amt-button focused');
