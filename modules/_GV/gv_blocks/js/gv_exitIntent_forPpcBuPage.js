@@ -46,10 +46,10 @@
             
             a = jQuery(":focus");
             if(jQuery(a).is(".multipartForm *")) {
-              "Is child of .multipartForm";
+              console.log("Is child of .multipartForm");
             }
             else {
-              "is NOT child of .multipartForm";
+              console.log("is NOT child of .multipartForm");
             }
         });
         
