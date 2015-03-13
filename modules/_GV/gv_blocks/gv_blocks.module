@@ -2991,12 +2991,13 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
       
       //if (!$user->uid) {
-      if ($GLOBALS['theme'] == 'gv_blue') {
+//      if ($GLOBALS['theme'] == 'gv_blue') 
+        {
         $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title"><span>Rank</span></div></th>';
       }
-      else {
-        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title" style="background: #2c7bbf; color: white; text-align: left; font-size: 12px; font-weight: bold; padding: 3px 0 3px 7px;">Rank</div></th>';
-      }
+//      else {
+//        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title" style="background: #2c7bbf; color: white; text-align: left; font-size: 12px; font-weight: bold; padding: 3px 0 3px 7px;">Rank</div></th>';
+//      }
         
         //$out .= '<thead><tr class="logos" ><th class="back" style="border: none; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
 
@@ -3174,7 +3175,10 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           foreach ($providers as $nid => $provider) {
             //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
             //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid) . '</td>';
-            $out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
+            
+            //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
+            $out .= '<td style="text-align: center;"><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
+            //'<div class="get_quote_popup"><span class="hidden"><span class="nid">' . $data['data']->nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</span></span></div>';
           }
         $out .= '</tr>';
         
