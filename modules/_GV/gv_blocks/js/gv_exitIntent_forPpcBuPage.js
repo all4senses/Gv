@@ -46,7 +46,9 @@
             console.log($("#colorbox"));
             console.log($("#colorbox").css("display"));
             
-            if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
+            
+            //if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
+            if ($("#colorbox").css("display")=="block" && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
               console.log("Prevented Tab!");
             }
