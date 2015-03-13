@@ -268,7 +268,9 @@
                 //number: true,
                 minlength: 10,
                 maxlength: 15,
-                notEqualsTo: $('input[id="phone"]').attr('title')
+                //notEqualsTo: $('input[id="phone"]').attr('title')
+                notEqualsTo: '(___) ___-____'
+                
 							},
               ct_captcha: {
                 required: true,
