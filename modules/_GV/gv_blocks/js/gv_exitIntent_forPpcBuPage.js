@@ -8,6 +8,8 @@
        
        // Exit intent functionality.
        
+        var cb1;
+        
         var turned_off = null; //true;
         var turned_off_suppressed = null;
         
@@ -120,7 +122,7 @@
                         //console.log('a1...');
                         //console.log($.fn.colorbox);
                         
-                        var cb1;
+                        
                         
                         cb1 = $.fn.colorbox({
                           inline:true, 
