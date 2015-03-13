@@ -43,6 +43,14 @@
             console.log("event.target.id = " + event.target.id);
             focused = $(':focus');
             console.log(focused);
+            
+            a = jQuery(":focus");
+            if(jQuery(a).is(".multipartForm *")) {
+              "Is child of .multipartForm";
+            }
+            else {
+              "is NOT child of .multipartForm";
+            }
         });
         
         jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus(function () {
