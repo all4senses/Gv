@@ -2872,11 +2872,11 @@ function gv_blocks_compareTopProviders($service_type) {
   // Try to get the data from cache.
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
     // Strange, but seems that adding tis dpm info line has increased the cached page loadding tim in several times!!!
-    dpm('Cached ...' . $cid);
+    //dpm('Cached ...' . $cid);
     return $cache->data;
   }
   // Strange, but seems that adding tis dpm info line has increased the cached page loadding tim in several times!!!
-  dpm('No cache Compare...' . $cid);
+  //dpm('No cache Compare...' . $cid);
   
   // No cached data... rebuilding...
   switch ($service_type) {
@@ -2911,6 +2911,7 @@ function gv_blocks_compareTopProviders($service_type) {
   
   // Replace defaults with bigger logos.
   $sprite_names['residential'] = 'top_re_providers_chart_big';
+  $sprite_names['cc'] = 'top_cc_providers_vertical_chart';
   
   if (!empty($p_names)) {
     //return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
