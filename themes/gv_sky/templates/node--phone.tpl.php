@@ -1,4 +1,8 @@
+
 <?php
+if ( current_path() != 'node/804' ) {
+      drupal_add_js('/sites/all/themes/gv_sky/js/review.js');
+}
 
 if($view_mode == 'home_teaser_rotated') {
     
@@ -19,147 +23,163 @@ if($view_mode == 'home_teaser_rotated') {
 <?php endif; ?>
            
       <?php if ($page): ?>
-        <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review" itemprop="review" itemscope itemtype="http://schema.org/Review">
-      <?php endif; ?>
+        <div xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review" itemprop="review" itemscope itemtype="http://schema.org/Review">
+          <div class="hero-review">
+            <div class="hero-review-wrap">
+            <div class="hero-review-content">
       
   
-    
-          <?php 
-          
-            $url = 'http://getvoip.com'. url('node/' . $node->nid);
-            
-            if ($page) {
-              echo '<h1 ',  $title_attributes, /*'property="dc:title v:summary"',*/ /*'property="v:summary"',*/ (!$node->status ? ' class="not-published"' : ''), ' >', $title, '</h1>',
-                    '<span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span>';
-            }
-            elseif ($view_mode == 'teaser') {
-              echo '<h2 ',  $title_attributes, (!$node->status ? ' class="not-published"' : ''), ' ><a href="' . $url .'">' . $title . '</a></h2>';
-            }
-            elseif ($view_mode == 'side_block_teaser') {
-              echo '<h4><a href="' . $url .'">' . $title . '</a></h4>';
-            }
-            
-          
-            if ($page || $view_mode == 'teaser'  || $view_mode == 'side_block_teaser') {
+              <?php 
               
-                if ($page) {
-                  $delimiter = '<span class="delim">|</span>';
-                  //$created_str = date('F d, Y \a\t g:ia', $node->created);
-                  $created_str = date('F d, Y', $node->created);
+                $url = 'http://getvoip.com'. url('node/' . $node->nid);
+
+                if (isset($node->field_p_image['und'][0]['uri'])) {
+                  echo '<a class="hero-review-content-img" title="' . $node->field_p_image['und'][0]['title'] . '" href="/' . gv_misc_getPathFromStreamUri($node->field_p_image['und'][0]['uri']) . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_page_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo', 'class' => 'hero-review-content-img-actual'))) . '</a>'; 
                 }
-                else {
-                  $created_str = date('F d, Y', $node->created);
-                  switch ($view_mode) {
-                    case 'teaser':
-                      $delimiter = '<span class="delim">/</span>';
-                      break;
-                    
-                    case 'side_block_teaser':
-                      $delimiter = NULL;
-                      break;
-                  }
-                }
-               
-                $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
-                
-                if ($view_mode != 'side_block_teaser') {
-                  $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
-                  $author_name = $authorExtendedData->realname;
-                  $author_gplus_profile = $authorExtendedData->field_u_gplus_profile_value;
-
-                  $author_url = url('user/' . $node->uid);
-                  $author_title = t('!author\'s profile', array('!author' => $author_name));
-
-                  global $language;
-                  $gplus_profile = ($author_gplus_profile) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author_gplus_profile . '?rel=author">(G+)</a>' : '';
-                }
-                
-                if (!empty($extra_data['guest_author'])) {
-                  
-                  if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  $created_str .
-                              '</span>';
-                  }
-                  else {
-                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  'By ' .
-                                  '<span property="v:reviewer" class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
-                                  $delimiter . $created_str .
-                              '</span>';
-                  }
-                  
-                }
-                elseif ($node->uid) {
-
-                  if ($view_mode == 'side_block_teaser') {
-                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  $created_str .
-                              '</span>';
-                  }
-                  else {
-                    $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  'By ' .
-                                  (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name v:reviewer">' . $author_name . '</a>') 
-                                  /*. $gplus_profile */.
-                                  $delimiter . $created_str .
-                              '</span>';
-                  }
-
-                }
-                else {
-                  $submitted = '<span property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  'By:<span class="username" property="v:reviewer">Guest' . $delimiter . $created_str .
-                               '</span>';
-
-                }
-
-                echo '<span class="submitted">', $submitted, '</span>';
-            }
-          
-          ?>
-    
-    
-
-    
-
-           <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
-          
-           <?php if ($page): 
-             
-              // Top share post links.
-              echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'top bottom');
-             
-            ?>
-            <div id="phone-top">
-              <div class="phone photo">
+                ?> 
+                <div class="hero-review-content-wrap">
                 <?php
+                if ($page) {
+                  echo '<h1 class="hero-review-content-title" ',  $title_attributes, /*'property="dc:title v:summary"',*/ /*'property="v:summary"',*/ (!$node->status ? ' class="not-published"' : ''), ' >', $node->field_p_name['und'][0]['value'], '</h1>',
+                        '<span property="v:itemreviewed" content="' . $node->field_p_name['und'][0]['value'] . '"></span>';
+                }
+                elseif ($view_mode == 'teaser') {
+                  echo '<h2 ',  $title_attributes, (!$node->status ? ' class="not-published"' : ''), ' ><a href="' . $url .'">' . $title . '</a></h2>';
+                }
+                elseif ($view_mode == 'side_block_teaser') {
+                  echo '<h4><a href="' . $url .'">' . $title . '</a></h4>';
+                }
                 
-                  if (isset($node->field_p_image['und'][0]['uri'])) {
-                    echo '<a class="zoom" title="' . $node->field_p_image['und'][0]['title'] . '" href="/' . gv_misc_getPathFromStreamUri($node->field_p_image['und'][0]['uri']) . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_page_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo'))) . '</a>'; 
+      endif;
+              
+                if ($page || $view_mode == 'teaser'  || $view_mode == 'side_block_teaser') {
+                  
+                    if ($page) {
+                      $delimiter = '<span class="delim">|</span>';
+                      //$created_str = date('F d, Y \a\t g:ia', $node->created);
+                      $created_str = date('F d, Y', $node->created);
+                    }
+                    else {
+                      $created_str = date('F d, Y', $node->created);
+                      switch ($view_mode) {
+                        case 'teaser':
+                          $delimiter = '<span class="delim">/</span>';
+                          break;
+                        
+                        case 'side_block_teaser':
+                          $delimiter = NULL;
+                          break;
+                      }
+                    }
+                   
+                    $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
                     
-                  }
+                    if ($view_mode != 'side_block_teaser') {
+                      $authorExtendedData = gv_misc_loadUserExtendedData($node->uid);
+                      $author_name = $authorExtendedData->realname;
+                      $author_gplus_profile = $authorExtendedData->field_u_gplus_profile_value;
+
+                      $author_url = url('user/' . $node->uid);
+                      $author_title = t('!author\'s profile', array('!author' => $author_name));
+
+                      global $language;
+                      $gplus_profile = ($author_gplus_profile) ? ' <a class="gplus" title="Google+ profile of ' . $author_name . '" href="' . $author_gplus_profile . '?rel=author">(G+)</a>' : '';
+                    }
+                    
+                    if (!empty($extra_data['guest_author'])) {
+                      
+                      if ($view_mode == 'side_block_teaser') {
+                        $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                      $created_str .
+                                  '</div>';
+                      }
+                      else {
+                        $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">'
+                                      . '<span property="v:reviewer" class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
+                                      $created_str .
+                                  '</div>';
+                      }
+                      
+                    }
+                    elseif ($node->uid) {
+
+                      if ($view_mode == 'side_block_teaser') {
+                        $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                      $created_str .
+                                  '</div>';
+                      }
+                      else {
+                        $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">'
+                                      . (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="hero-review-content-meta-author" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name v:reviewer">' . $author_name . '</a>') 
+                                      . '<div class="hero-review-content-meta-date">' . $created_str . '</div>' .
+                                  '</div>';
+                      }
+
+                    }
+                    else {
+                      $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                      '<span class="hero-review-content-meta-author" property="v:reviewer">Guest' . $created_str .
+                                   '</div>';
+
+                    }
+
+                    echo $submitted;
+                }
+              
+              ?>
+        
+        
+
+        
+
+               <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
+              
+               <?php if ($page): 
+                  // Top share post links.
+                  // echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'top bottom');
                 ?>
+                <div class="hero-review-content-summary">
+                  <?php 
+                      // echo substr(render($content['body']), 0, 251) . '...';
+                  ?>
+                </div>
+
+                <div class="hero-review-content-more">Read More</div>
+                </div> <!-- <div class="hero-review-content-wrap"> -->
+            </div> <!-- <div class="hero-review-content"> -->
+
+            <div class="hero-review-rating">
+              <div class="hero-review-rating-score">
+                        <?php echo '
+                            <span class="hero-review-rating-number" rel="v:rating">
+                              <span typeof="v:Rating">
+                                <span property="v:worst" content="0"></span>
+                                <span property="v:value">' . $editor_overall_rating . '</span>
+                                <span property="v:best" content="5"></span>
+                              </span>
+                            </span>' . theme('gv_misc_fivestar_dk', array('rating' => $editor_overall_rating * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'hero-review-rating')); 
+                        ?>
               </div>
+              <?php echo render($node->editor->content['gv_ratings']); ?>
+            </div>
+            </div> <!-- <div class="hero-review-wrap"></div> -->
+          </div> <!-- <div class="hero-review"></div> -->
                 
-              <div class="pros-and-cons">
-                <div>
-                  <div class="title good">THE GOOD</div>
-                    <?php /*dpm($node);*/ 
-                          echo '<div property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; 
-                    ?>
+              <div class="phone-summary">
+                <div class="phone-summary-fact phone-summary-fact_good">
+                  <div class="phone-summary-fact-title phone-summary-fact-title_good">The Good</div>
+                    <?php echo '<div class="phone-summary-fact-content" property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; ?>
                 </div>
-                <div>
-                  <div class="title bad">THE BAD</div><?php echo $node->extra_data['pros_and_cons']['The bad']; ?>
+                <div class="phone-summary-fact phone-summary-fact_bad">
+                  <div class="phone-summary-fact-title phone-summary-fact-title_bad">The Bad</div><div class="phone-summary-fact-content"><?php echo $node->extra_data['pros_and_cons']['The bad']; ?></div>
                 </div>
-                <div>
-                  <div class="title bottom">THE BOTTOM LINE</div><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?>
+                <div class="phone-summary-fact phone-summary-fact_bottom-line">
+                  <div class="phone-summary-fact-title phone-summary-fact-title_bottom-line">The Bottom Line</div><div class="phone-summary-fact-content"><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?></div>
                 </div>
                 
               </div>
              
-              <div class="bottom-clear"></div>
-
+          
  
               
              </div>
@@ -177,28 +197,7 @@ if($view_mode == 'home_teaser_rotated') {
                 
                     <div id="tabs-1">
                       
-                      <div class="gv_votes editor phone">
-                        <?php echo 
-                                render($node->editor->content['gv_ratings']); 
-                        ?>
-                        <div class="rate-other">
-                          <?php echo '<div class="voters editor"><div class="count" property="v:count">' . (!empty($node->gv_voters) ? $node->gv_voters : 1) . '</div></div>';?>
-                        </div>
-                        
-                        <div class="total">
-                        <?php 
 
-                            echo '<div class="caption">OVERALL SCORE</div>
-                            <span class="count" rel="v:rating">
-                              <span typeof="v:Rating">
-                                <span property="v:worst" content="0"></span>
-                                <span property="v:value">' . $editor_overall_rating . '</span>
-                                <span property="v:best" content="5"></span>
-                              </span>
-                            </span><div class="stars-rating">' . theme('gv_misc_fivestar_static', array('rating' => $editor_overall_rating * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))) . '</div>'; 
-
-                        ?>
-                      </div>
                         
                         
                       </div>

@@ -1,0 +1,49 @@
+.phone-summary
+	max-width: 596px
+	+center
+	padding: 55px 20px
+	text-align: center
+	box-sizing: border-box
+
+	&-fact
+		margin-top: 40px
+
+		&:nth-child(1)
+			margin-top: 0
+
+		&-title
+			font-size: 23px
+			font-weight: 500
+			border-bottom: 1px solid $divider
+			padding-bottom: 3px
+			margin-bottom: 10px
+
+			&:before
+				content: ''
+				position: relative
+				top: 3px
+				padding-right: 9px
+				font-family: gvcons
+				font-size: 25px
+				font-weight: 400
+
+			&_good
+				color: $pros
+
+				&:before
+					content: 'C'
+
+			&_bad
+				color: $cons
+				
+				&:before
+					content: 'F'
+
+			&_bottom-line
+				color: #444
+				
+				&:before
+					content: 'u'
+
+		&-content
+			font-weight: 500
