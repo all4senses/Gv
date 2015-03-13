@@ -54,10 +54,17 @@
 //              
 //            }
             if(jQuery(a).is(".multipartForm *")) {
-              console.log("Is child of .multipartForm");
+              console.log("Focused Is child of .multipartForm");
             }
             else {
-              console.log("is NOT child of .multipartForm");
+              console.log("Focused is NOT child of .multipartForm");
+            }
+            
+            if(jQuery(a).next(":tabbable").is(".multipartForm *")) {
+              console.log("Next Focused Is child of .multipartForm");
+            }
+            else {
+              console.log("Next Focused is NOT child of .multipartForm");
             }
         });
         
