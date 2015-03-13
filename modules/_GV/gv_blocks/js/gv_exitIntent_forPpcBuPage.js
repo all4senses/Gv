@@ -44,6 +44,7 @@
             
             console.log(cb1);
             console.log($("#colorbox"));
+            console.log($("#colorbox").css("display"));
             
             if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
