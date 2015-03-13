@@ -179,15 +179,15 @@
                           href:"#exitIntent", 
                           width:780, 
                           height:540
-                          ,onOpen: function() {
+                          ,onOpened: function() {
                                 console.log('open...');
                                 //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
                                 jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
                                 
-                                jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
+                                //jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
                                 
 //                                $("body").css('overflow', 'inherit');
-//                                turned_off = true;
+                                turned_off = false;
                                }
                           ,onClosed: function() {
                                 //console.log('closed...');
