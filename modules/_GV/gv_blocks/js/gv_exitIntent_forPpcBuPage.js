@@ -40,8 +40,8 @@
             }
             */ 
             
-            colsole.log(cb1);
-            colsole.log($("#colorbox"));
+            console.log(cb1);
+            console.log($("#colorbox"));
             
             if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
