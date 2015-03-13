@@ -48,7 +48,7 @@
             console.log(jQuery(a).next(":tabbable"));
             //if(cb_opened) 
             {
-              console.log("turned_off = " + turned_off);
+              console.log("cb_opened = " + cb_opened);
             }
 //            else {
 //              
@@ -147,9 +147,8 @@
                  ); 
          */
        
-       
-        turned_off = true;
-       
+        cb_opened = false;
+        
         $(document).bind("mouseleave", function(e)
         {
             //console.log(e.pageY);
@@ -157,7 +156,7 @@
             //if (!turned_off && e.pageY <= 1)
             if (!turned_off && e.pageY - $(window).scrollTop() <= 1)
             {    
-                ////turned_off = true;
+                turned_off = true;
                 //now = new Date();           
                 //for (i=0; i < times.length; i++)
                 {
@@ -188,6 +187,7 @@
                           width:780, 
                           height:540
                           ,onOpen: function() {
+                                cb_opened = true;
                                 console.log('open...');
                                 //jQuery('#requestQuoteFormWrapper-ppc #phones_amt-button').focus();
                                 jQuery('#requestQuoteFormWrapper-ppc .next_custom').focus();
@@ -195,9 +195,10 @@
                                 //jQuery('#requestQuoteFormWrapper-ppc .multipartForm').focus();
                                 
 //                                $("body").css('overflow', 'inherit');
-                                turned_off = false;
+                                //turned_off = false;
                                }
                           ,onClosed: function() {
+                                cb_opened = false;
                                 //console.log('closed...');
                                 $("body").css('overflow', 'inherit');
                                 turned_off = true;
