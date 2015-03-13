@@ -5,6 +5,43 @@
     attach: function (context, settings) {
        
        
+       
+       
+       
+       
+        // More efficient way of preventing losing focus and breaking colorbox on tab key,
+        // when this function prevent exiting and hiding colorbox caused by pressing tab
+        jQuery('body').keydown(function (event) { 
+          
+          if (event.keyCode == 9) {
+            /*  
+            console.log(event);
+            console.log("event.target.id = " + event.target.id);
+            focused = $(':focus');
+            console.log(focused);
+            if(jQuery(focused).next(":tabbable").is(".multipartForm *")) {
+              console.log("Next Focused Is child of .multipartForm");
+            }
+            
+            if (cb_opened && (  !jQuery(focused).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
+              event.preventDefault();
+            }
+            */ 
+            
+            
+            //if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
+            if ($("#colorbox").css("display")=="block" && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
+              event.preventDefault();
+              //console.log("Prevented Tab!");
+            }
+            
+          } // End of if (event.keyCode == 9) {
+          
+        });
+       
+        
+       // Obsolete. Used above more efficient function jQuery('body').keydown(function (event) { .
+       /*
        jQuery('#requestQuoteFormWrapper-ppc').keydown(function (event) { 
             
             //console.log(jQuery(this).val());
@@ -17,6 +54,11 @@
             }
             
        });
+       */
+       
+       
+       
+       
        
        // Exit intent functionality.
        //console.log('xxx');
