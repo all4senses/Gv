@@ -10466,27 +10466,22 @@ function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick =
 
 
 function gv_misc_changeBlogCategory_ajax() {
-  
-//   if (!empty($_POST['referer'])) {
-//    $post['referer'] = $_POST['referer'];
-//  }
-//  elseif (!empty($_GET['referer'])) {
-//    $post['referer'] = $_GET['referer'];
-//  }
-//  
-//  if (!empty($post['referer'])) {
-//    
-//  
-//        $post['referer'] = check_plain(strip_tags($post['referer']));
-//
-//        //if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
-//        if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
-//
-//          $_SESSION['gv_current_http_referer'] = $post['referer'];
-//          //$_SESSION['gv_current_http_referer'] = $_POST['referer'];
-//        }
-//  
-//  }
+  $status = FALSE;
+  if (!empty($_POST['nid']) && !empty($_POST['category'])) {
+    $post['nid'] = check_plain($_POST['nid']);
+    $post['category'] = check_plain($_POST['category']);
+    
+    $categories = array(
+      'VoIP & Unified Communications' => 'VoIP & Unified Communications',
+      'Cloud Computing & Web Services' => 'Cloud Computing & Web Services',
+      'Business Insights & Tips'=> 'Business Insights & Tips'
+    );
+    
+    if (isset($categories[$post['category']])) {
+      gv_misc_fieldSave('field_data_field_blog_category', $post['nid'], $post['category']);
+      $status = TRUE;
+    }
+  }
   
   drupal_json_output(array('status' => TRUE, /*'data' => $output*/));
   
