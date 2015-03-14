@@ -10473,22 +10473,35 @@ function  gv_misc_getCellBlock_forGVcontent($target, $data) {
     
     case 'changeBlogCategory':
       
-      dpm($data);
-      dpm($data['data']->node_type);
+      //dpm($data);
+      //dpm($data['data']->node_type);
       if (in_array($data['data']->node_type, array('blog_post', 'news_post', 'article'))) {
-        dpm('In array');
+        //dpm('In array');
         $query = db_select('field_data_field_blog_category', 'n')
           ->fields('n', array('field_blog_category_value'));
         $query->condition('n.entity_id', $data['data']->nid);
+        $category = $query->execute()->fetchField();
         
-        if($category = $query->execute()->fetchField()) {
-          return $category;
-        }
-        else {
-          return 'none';
-        }
+        
+        $categories = array(
+          '' => '- Not Set - ',
+          'VoIP & Unified Communications' => 'VoIP & Unified Communications',
+          'Cloud Computing & Web Services' => 'Cloud Computing & Web Services',
+          'Business Insights & Tips'=> 'Business Insights & Tips'
+        );
+        
+        $form_categories = array(
+          '#type' => 'select',
+          //'#title' => 'Blog category',
+          '#default_value' => $category,
+          '#value' => $category,
+          '#options' => $categories,
+          //'#attributes' =>  array('class' =>array('provider'), 'onChange' => array('javascript:this.form.submit();')),
+        );
+        
+        return render($form_categories);
       }
-      return '..'; //'<div class="reviews">' . $mobile_column[$data['data']->nid]['rating'] . '</div><div class="features">' . $mobile_column[$data['data']->nid]['features'] . '</div><div class="monthly">' . $mobile_column[$data['data']->nid]['monthly'] . '</div>';
+      return ULL; //'<div class="reviews">' . $mobile_column[$data['data']->nid]['rating'] . '</div><div class="features">' . $mobile_column[$data['data']->nid]['features'] . '</div><div class="monthly">' . $mobile_column[$data['data']->nid]['monthly'] . '</div>';
 
       
   }
