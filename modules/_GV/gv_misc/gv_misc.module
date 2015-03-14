@@ -19,6 +19,14 @@ function gv_misc_menu() {
  
   gv_misc_setPagesToShow410($items);
   
+  $items['gv-content-set-blog-category'] = array(
+    'title' => 'GV content set blog category',
+    'page callback' => '',
+    //'access arguments' => array('access content'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_CALLBACK,
+  );
+  
   // Get conferences autocomplete ajax
   $items['get-conferences-ac'] = array(
     'title' => 'Get conferences autocomplete ajax',
@@ -10457,21 +10465,53 @@ function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick =
         
 
 
+function gv_misc_changeBlogCategory_ajax() {
+  
+//   if (!empty($_POST['referer'])) {
+//    $post['referer'] = $_POST['referer'];
+//  }
+//  elseif (!empty($_GET['referer'])) {
+//    $post['referer'] = $_GET['referer'];
+//  }
+//  
+//  if (!empty($post['referer'])) {
+//    
+//  
+//        $post['referer'] = check_plain(strip_tags($post['referer']));
+//
+//        //if (!empty($_POST['referer']) && strpos($_POST['referer'], 'http://getvoip.com') === FALSE) {
+//        if (!empty($post['referer']) && strpos($post['referer'], 'http://getvoip.com') === FALSE) {
+//
+//          $_SESSION['gv_current_http_referer'] = $post['referer'];
+//          //$_SESSION['gv_current_http_referer'] = $_POST['referer'];
+//        }
+//  
+//  }
+  
+  drupal_json_output(array('status' => TRUE, /*'data' => $output*/));
+  
+}
 
 /**
  * Return specific variable value from p_data_quick for a provider depending on the filter value (business OR residential, etc)
  */
 function  gv_misc_getCellBlock_forGVcontent($target, $data) {
   
-  //static $mobile_column;
-  $out = '';
-  global $user;
+  static $js_is_loaded;
+  //$out = '';
+  //global $user;
   
 
   
   switch($target) {
     
     case 'changeBlogCategory':
+      
+      if (!$js_is_loaded) {
+        $js_is_loaded = TRUE;
+        $path_to_js = drupal_get_path('module', 'gv_misc') . '/js/gv_GVcontentAdminPage.js';
+        drupal_add_js($path_to_js);
+      }
       
       //dpm($data);
       //dpm($data['data']->node_type);
@@ -10496,12 +10536,14 @@ function  gv_misc_getCellBlock_forGVcontent($target, $data) {
           '#default_value' => $category,
           '#value' => $category,
           '#options' => $categories,
-          //'#attributes' =>  array('class' =>array('provider'), 'onChange' => array('javascript:this.form.submit();')),
+          //'#attributes' =>  array('class' => array('set-blog-category'), 'onChange' => array('javascript:this.form.submit();')),
+          '#prefix' => '<div class="set-blog-category">',
+          '#suffix' => '<div class="nid">' . $data['data']->nid . '</div></div>',  
         );
         
         return render($form_categories);
       }
-      return ULL; //'<div class="reviews">' . $mobile_column[$data['data']->nid]['rating'] . '</div><div class="features">' . $mobile_column[$data['data']->nid]['features'] . '</div><div class="monthly">' . $mobile_column[$data['data']->nid]['monthly'] . '</div>';
+      return NULL; //'<div class="reviews">' . $mobile_column[$data['data']->nid]['rating'] . '</div><div class="features">' . $mobile_column[$data['data']->nid]['features'] . '</div><div class="monthly">' . $mobile_column[$data['data']->nid]['monthly'] . '</div>';
 
       
   }
