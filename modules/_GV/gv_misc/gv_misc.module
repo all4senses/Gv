@@ -10478,12 +10478,12 @@ function gv_misc_changeBlogCategory_ajax() {
     );
     
     if (isset($categories[$post['category']])) {
-      gv_misc_fieldSave('field_data_field_blog_category', $post['nid'], $post['category']);
+      gv_misc_fieldSave('blog_category', $post['nid'], $post['category']);
       $status = TRUE;
     }
   }
   
-  drupal_json_output(array('status' => TRUE, /*'data' => $output*/));
+  drupal_json_output(array('status' => TRUE, 'post' => $post));
   
 }
 
