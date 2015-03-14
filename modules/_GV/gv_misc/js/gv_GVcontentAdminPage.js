@@ -18,11 +18,13 @@
          console.log($(wait).html());
          $(wait).removeClass('hidden');
          
+         console.log($(this).val());
+         
          (jQuery).ajax({
             
                 url: '/gv-content-set-blog-category', 
                 data: {
-                        nid: 'xxx',
+                        nid: $(nid).html(),
                         category: $(this).val()
                       }, 
                     type: 'POST', 
