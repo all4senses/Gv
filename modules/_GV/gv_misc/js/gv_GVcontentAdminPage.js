@@ -10,15 +10,15 @@
          
          //$(this).attr('disabled', 'disabled');
          
-         console.log('changed');
-         console.log($(this));
+         //console.log('changed');
+         //console.log($(this));
          nid = $(this).parent().parent().find('.nid');
-         console.log($(nid).html());
+         //console.log($(nid).html());
          wait = $(this).parent().parent().find('.wait');
-         console.log($(wait).html());
+         //console.log($(wait).html());
          $(wait).removeClass('hidden');
          
-         console.log($(this).val());
+         //console.log($(this).val());
          
          (jQuery).ajax({
             
@@ -34,9 +34,9 @@
                     success: function(data) 
                             { 
                                 if(!data.error) {
-                                    console.log('The header is arrived!');
-                                    console.log(data);
-                                    console.log(data.status);
+                                    //console.log('The header is arrived!');
+                                    //console.log(data);
+                                    //console.log(data.status);
                                     $(wait).addClass('hidden');
                                 }
                                 return false;
