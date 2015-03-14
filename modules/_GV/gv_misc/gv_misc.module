@@ -21,7 +21,7 @@ function gv_misc_menu() {
   
   $items['gv-content-set-blog-category'] = array(
     'title' => 'GV content set blog category',
-    'page callback' => '',
+    'page callback' => 'gv_misc_changeBlogCategory_ajax',
     //'access arguments' => array('access content'),
     'access callback' => 'gv_misc_userIsAdmin',
     'type' => MENU_CALLBACK,
