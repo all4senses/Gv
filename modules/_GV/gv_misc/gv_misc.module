@@ -10469,7 +10469,7 @@ function gv_misc_changeBlogCategory_ajax() {
   $status = FALSE;
   if (!empty($_POST['nid']) && !empty($_POST['category'])) {
     $post['nid'] = check_plain($_POST['nid']);
-    $post['category'] = check_plain($_POST['category']);
+    $post['category'] = $_POST['category']; //check_plain($_POST['category']);
     
     $categories = array(
       'VoIP & Unified Communications' => 'VoIP & Unified Communications',
