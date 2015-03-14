@@ -12,8 +12,10 @@
          
          console.log('changed');
          console.log($(this));
-         console.log($(this).parent().find('.nid').html());
-         console.log($(this).parent().find('.wait').html());
+         nid = $(this).parent().parent().find('.nid').html();
+         console.log(nid);
+         wait = $(this).parent().find('.wait').parent().html();
+         console.log(wait);
          (jQuery).ajax({
             
                 url: '/gv-content-set-blog-category', 
