@@ -10474,7 +10474,9 @@ function  gv_misc_getCellBlock_forGVcontent($target, $data) {
     case 'changeBlogCategory':
       
       //dpm($data);
+      dpm($data->node_type);
       if (in_array($data->node_type, array('blog_post', 'news_post', 'article'))) {
+        dpm('In array');
         $query = db_select('field_data_field_blog_category', 'n')
           ->fields('n', array('field_blog_category_value'));
         $query->condition('n.entity_id', $data->nid);
@@ -10486,7 +10488,7 @@ function  gv_misc_getCellBlock_forGVcontent($target, $data) {
           return 'none';
         }
       }
-      return NULL; //'<div class="reviews">' . $mobile_column[$data['data']->nid]['rating'] . '</div><div class="features">' . $mobile_column[$data['data']->nid]['features'] . '</div><div class="monthly">' . $mobile_column[$data['data']->nid]['monthly'] . '</div>';
+      return '..'; //'<div class="reviews">' . $mobile_column[$data['data']->nid]['rating'] . '</div><div class="features">' . $mobile_column[$data['data']->nid]['features'] . '</div><div class="monthly">' . $mobile_column[$data['data']->nid]['monthly'] . '</div>';
 
       
   }
