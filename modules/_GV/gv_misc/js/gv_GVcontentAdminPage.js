@@ -12,10 +12,12 @@
          
          console.log('changed');
          console.log($(this));
-         nid = $(this).parent().parent().find('.nid').html();
-         console.log(nid);
-         wait = $(this).parent().find('.wait').parent().html();
-         console.log(wait);
+         nid = $(this).parent().parent().find('.nid');
+         console.log($(nid).html());
+         wait = $(this).parent().parent().find('.wait');
+         console.log($(wait).html());
+         $(wait).removeClass('hidden');
+         
          (jQuery).ajax({
             
                 url: '/gv-content-set-blog-category', 
@@ -33,6 +35,7 @@
                                     console.log('The header is arrived!');
                                     console.log(data);
                                     console.log(data.status);
+                                    $(wait).addClass('hidden');
                                 }
                                 return false;
                             } 
