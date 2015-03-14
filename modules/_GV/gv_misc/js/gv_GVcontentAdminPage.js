@@ -12,7 +12,8 @@
          
          console.log('changed');
          console.log($(this));
-         
+         console.log($(this).parent().find('.nid').html());
+         console.log($(this).parent().find('.wait').html());
          (jQuery).ajax({
             
                 url: '/gv-content-set-blog-category', 
@@ -29,6 +30,7 @@
                                 if(!data.error) {
                                     console.log('The header is arrived!');
                                     console.log(data);
+                                    console.log(data.status);
                                 }
                                 return false;
                             } 
