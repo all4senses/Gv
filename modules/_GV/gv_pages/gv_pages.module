@@ -3658,6 +3658,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                       
                     );
                     
+                    if ($service_description_type == 'textfield') {
+                      $form['s'][$service_type_key][$service_description_key]['#maxlength'] = 400;
+                    }
+                    
                   }
                   
                   // Fees
@@ -3787,10 +3791,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                           '#default_value' => isset($provider_options[$options_set][$option_title]) ? $provider_options[$options_set][$option_title] : NULL,
                         );
 
-                        if ($option_type == 'textfield') {
-                          $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#maxlength'] = 400;
-                        }
-                        elseif ($option_type == 'textarea') {
+                        
+                        if ($option_type == 'textarea') {
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#default_value'] = !empty($provider_options[$options_set][$option_title]) ? (is_array($provider_options[$options_set][$option_title]) ? $provider_options[$options_set][$option_title]['value'] : $provider_options[$options_set][$option_title]) : NULL;
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#type'] = 'text_format';
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
@@ -3820,6 +3822,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                         }
 
                     }
+                    
 
               }            
 
