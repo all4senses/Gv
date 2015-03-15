@@ -323,6 +323,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['compare_providers_top_wc'] = array(
+    'info' => 'Compare Top WC providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['reviews_counter'] = array(
     'info' => 'Reviews counter',
     'cache' => DRUPAL_NO_CACHE,
@@ -815,6 +820,11 @@ function gv_blocks_block_view($delta = '') {
     case 'compare_providers_top_cc':
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareTopProviders('cc');
+      break;
+    
+    case 'compare_providers_top_wc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('wc');
       break;
     
     
@@ -2896,6 +2906,10 @@ function gv_blocks_compareTopProviders($service_type) {
       $rating_table = 'field_data_field_p_erating_cc';
       $rating_field = 'field_p_erating_cc_value';
       break;
+    case 'wc':
+      $rating_table = 'field_data_field_p_erating_wc';
+      $rating_field = 'field_p_erating_wc_value';
+      break;
   }
   
   $query = db_select($rating_table, 'r');
@@ -2912,6 +2926,7 @@ function gv_blocks_compareTopProviders($service_type) {
   // Replace defaults with bigger logos.
   $sprite_names['residential'] = 'top_re_providers_chart_big';
   $sprite_names['cc'] = 'top_cc_providers_vertical_chart';
+  $sprite_names['wc'] = 'top_wc_providers_vertical_chart';
   
   if (!empty($p_names)) {
     //return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
@@ -3154,6 +3169,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         case 'cc':
           $provider_options_structure = unserialize(PROVIDER_OPTIONS_CC);
           $provider_options_index = 'provider_options_cc';
+          break;
+        
+        case 'wc':
+          $provider_options_structure = unserialize(PROVIDER_OPTIONS_WC);
+          $provider_options_index = 'provider_options_wc';
           break;
       }
       //$provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
