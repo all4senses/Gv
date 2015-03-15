@@ -28,10 +28,12 @@
 				clear: left
 
 		+m(620)
-			width: perc(500px, 822px)
+			width: 100%
+			max-width: 355px
 			clear: none
 			float: none
 			margin: 0 auto 30px !important
+
 
 			
 
@@ -46,10 +48,15 @@
 					height: perc(216px, 388px)
 
 			&-actual
-				width: 100%
-				min-width: 100%
+				position: relative
+				+balign
+				width: auto
 				height: auto
+				max-width: 110%
 				min-height: 100%
+
+				+m(620)
+					max-width: 115%
 
 
 		&-title

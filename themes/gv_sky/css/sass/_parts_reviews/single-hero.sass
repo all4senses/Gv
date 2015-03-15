@@ -19,9 +19,20 @@
 		float: left
 		width: perc(834px, 1130px)
 
+		+m(920)
+			width: 100%
+			float: 0
+
 		&-wrap
 			float: left
 			width: perc(540px, 834px)
+
+			+m(920)
+				width: perc(580px, 834px)
+
+			+m(680)
+				float: none
+				width: auto
 
 		&-img
 			float: left
@@ -34,7 +45,9 @@
 			overflow: hidden
 
 			&-actual
-				min-height: 100%
+				// min-height: 100%
+				// max-height: 100%
+				height: 100%
 				width: auto
 				display: block
 				-webkit-transform: translateX(-50%)
@@ -44,10 +57,28 @@
 				left: 50%
 				// position: relative
 
+			+m(680)
+				width: 20%
+				min-width: 108px
+
+			+m(580)
+				margin-right: perc(50px, 834px)
+
+
 		&-title
+			position: relative
+			left: -2px
 			font-size: 38px
 			font-weight: 400
 			line-height: 1
+
+			+m(920)
+				+ellipsis(58%)
+				display: block
+
+			+m(580)
+				font-size: 32px
+				max-width: 100%
 
 		&-meta
 			margin-top: 10px
@@ -73,6 +104,9 @@
 					font-weight: 400
 					line-height: 1
 
+				+m(580)
+					display: none
+
 			&-date
 				position: relative
 				float: left
@@ -88,18 +122,15 @@
 					font-size: 15px
 
 		&-summary
-			margin-top: 25px
-			font-size: 17px
-			line-height: 24px
+			margin-top: 23px
+			font-size: 16px
+			line-height: 22px
 			font-weight: 500
 			
 
 		&-more
-			// float: none
-			// float: left
-			position: absolute
-			left: perc(187px, 834px)
-			bottom: -5px
+			position: relative
+			bottom: -15px
 			font-size: 16px
 			font-weight: 500
 			opacity: 0.7
@@ -123,9 +154,35 @@
 		border-left: 1px solid rgba(255,255,255, 0.2)
 		box-sizing: border-box
 
+		+m(920)
+			position: absolute
+			top: 0
+			right: 0
+			float: none
+			width: 245px
+			border-left: 0
+			height: 40px
+
+		+m(768)
+			width: 230px
+
+		+m(680)
+			left: 21.5%
+			width: 215px
+			top: 80px
+
+		+m(580)
+			left: 104px
+			top: 73px
+			margin-left: perc(50px, 834px)
+
+
 		&-score
-			padding: 25px 33px
+			padding: 25px 11%
 			position: relative
+
+			+m(920)
+				padding: 0 11%
 
 		&-number
 			position: relative
@@ -136,21 +193,72 @@
 			line-height: .6
 			letter-spacing: -3px
 
+			+m(1024)
+				font-size: 54px
+
+			+m(768)
+				font-size: 44px
+				font-family: avenir
+				font-weight: 500
+
+			+m(680)
+				font-size: 34px
+				padding-left: 112px
+
+			+m(580)
+				font-size: 27px
+				letter-spacing: -1px
+				font-weight: 600
+
 		&-fivestar
+			position: absolute
 			+valign
 			right: 33px
-			+fivestar(21px)
 			margin-left: 14px
-			position: absolute
+			
+			+m(1131, min)
+				+fivestar(21px)
+
+			+m(1130, max)
+				+fivestar(17.5px)
+
+			+m(680)
+				left: 11%
+				right: auto
+				margin-left: 0
+
+			+m(590)
+				left: 20px
 
 
-		.provider-box-provider-review-scores-list
-			padding-top: 23px
-			padding: 23px 13% 0
-			border-top: 1px solid rgba(255,255,255, 0.2)
 
-			&-item-title
+	.provider-box-provider-review-scores-list
+		padding-top: 23px
+		padding: 23px 13% 0
+		border-top: 1px solid rgba(255,255,255, 0.2)
+		+clearfix
+
+		+m(920)
+			display: none
+
+
+		&-item
+			width: 50%
+			float: left
+			text-align: center
+			margin-bottom: 11px
+
+			&-title
+				margin-bottom: 1px
+				font-size: 11px
+				font-weight: 600
+				text-transform: uppercase
 				color: white
 
-			.voice
-				display: none
+			&-fivestar
+				+fivestar(12px)
+
+
+		.voice
+			display: none
+		

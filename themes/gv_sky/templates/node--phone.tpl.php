@@ -185,94 +185,96 @@ if($view_mode == 'home_teaser_rotated') {
              </div>
               
                       
-              <div class="data tabs">
-                    <ul class="data-tabs-ul">
-                      <li><a id="tab1" class="a-tab" href="#tabs-1">Editor's Review</a></li>
-                      <li><a id="tab2" class="a-tab" href="#tabs-2">Technical Specs</a></li>
-                      <?php if ($node->extra_data['downloads']): ?><li><a id="tab3" class="a-tab" href="#tabs-3">Downloads</a></li><?php endif; ?>
-                      <?php if ($node->extra_data['in_the_box']): ?><li><a id="tab4" class="a-tab" href="#tabs-4">In the Box</a></li><?php endif; ?>
-                      <li><a id="tab5" class="a-tab" href="#user-reviews">User Reviews</a></li>
+              <div class="phone-box">
+                    <ul class="phone-box-tabs">
+                      <li id="tab-0" class="phone-box-tabs-item active">Editor's Review</li>
+                      <li id="tab-1" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">Technical </span>Specs</li>
+                      <?php if ($node->extra_data['downloads']): ?><li id="tab-2" class="phone-box-tabs-item">Downloads</li><?php endif; ?>
+                      <?php if ($node->extra_data['in_the_box']): ?><li id="tab-3" class="phone-box-tabs-item">In the Box</li><?php endif; ?>
+                      <li id="tab-4" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">User </span>Reviews</li>
                     </ul>
                 
-                
-                    <div id="tabs-1">
-                      
+                    <div class="phone-box-content">
+                      <div id="tab-0-c" class="phone-box-content-section phone-box-content-section-review active">
+                        <div class="phone-box-content-section-title review-title">Editor's Review</div>
+                        
 
-                        
-                        
-                      </div>
-                      <?php 
-                        echo '<div property="v:description">', @$node->extra_data['body_summary'], '</div>';
-                        
-                        
-                          {
-                          if (!empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value']) && !empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'])) {
-                            echo '<div id="top-pros-cons">',
-                                    '<div id="top-pros">',
-                                      '<div class="title">OUR TOP 5 <span>PROS</span></div>', $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value'], '</div>',
-                                    '<div id="top-cons">',
-                                      '<div class="title">OUR TOP 5 <span>CONS</span></div>', $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'], '</div>',
-                                  '</div>';
+                          
+                                                                                                                                              
+                        <?php 
+                          echo '<div class="phone-box-content-section-review-intro" property="v:description">', @$node->extra_data['body_summary'], '</div>';
+                          
+                          
+                            {
+                            if (!empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value']) && !empty($node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'])) {
+                              echo '<div class="phone-box-content-section-review-summary">',
+                                      '<div class="phone-box-content-section-review-summary-pros">',
+                                        '<div class="phone-box-content-section-review-summary-title phone-box-content-section-review-summary-pros-title">Top 5 Pros</div><div class="phone-box-content-section-review-summary-list">', $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Pros']['value'], '</div></div>',
+                                      '<div class="phone-box-content-section-review-summary-cons">',
+                                        '<div class="phone-box-content-section-review-summary-title phone-box-content-section-review-summary-cons-title">Top 5 Cons</div><div class="phone-box-content-section-review-summary-list">', $node->extra_data['our_top_5_pros_and_cons']['Our Top 5 Cons']['value'], '</div></div>',
+                                    '</div>';
+                            }
                           }
-                        }
-                        echo render($content['body']); 
+                          echo render($content['body']); 
 
-                      ?>
-                      
-                      <div class="bottom-clear"></div>
-                    </div>
-                    <div id="tabs-2">
-                      <?php echo $node->specs; ?>
-                    </div>
-                    <?php if ($node->extra_data['downloads']): ?>
-                      <div id="tabs-3">
-                        <?php echo $node->extra_data['downloads']; ?>
-                      </div>
-                    <?php endif; ?>
-                    <?php if ($node->extra_data['in_the_box']): ?>
-                      <div id="tabs-4">
-                        <?php echo $node->extra_data['in_the_box']; ?>
-                      </div>
-                    <?php endif; ?>
-                    <div id="user-reviews">
-                      <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
-
-                            <div class="gv_votes users_overall"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
-                            <div class="overall"> 
-                              <div class="text">
-                                <?php 
-                                  echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $node->gv_voters . '</div></div>';
-                                ?>
-                                <?php echo '<div class="recommend"><div class="title">' . t('Would recommend') . ': </div><div class="data">' . $node->gv_recommend . '% ' . t('of all voters') . '</div></div>'; ?>
-                                <div class="overall title"><?php $node->field_p_name['und'][0]['value'] . ' ' . t('Overall Rated:'); ?></div>
-                              </div>
-                              <div class="star-big">
-                                <?php 
-                                  echo '<div class="count" content="' . $node->gv_rating_overall . '" >' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>';
-                                ?>
-                              </div>
-                            </div>
-
-                      <?php endif; // end of if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
-
-                        <div class="bottom-clear"></div>
-              
-                      <?php echo $node->addPhoneReviewForm; ?>
+                        ?>
                         
-                      <div class="bottom-clear"></div>
-                      
-                      <?php if ($node->userReviews): ?> 
-
-                        <div class="reviews">
-                          <div class="header">
-                              <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
-                          </div>
-                          <?php echo $node->userReviews; ?>
+                      </div>
+                      <div id="tab-1-c" class="phone-box-content-section phone-box-content-section-specs">
+                        <div class="phone-box-content-section-title specs-title">Technical Specs</div>
+                        <?php echo $node->specs; ?>
+                      </div>
+                      <?php if ($node->extra_data['downloads']): ?>
+                        <div id="tab-2-c" class="phone-box-content-section phone-box-content-section-downloads">
+                          <div class="phone-box-content-section-title downloads-title">Downlaods</div>
+                          <?php echo $node->extra_data['downloads']; ?>
                         </div>
-
                       <?php endif; ?>
+                      <?php if ($node->extra_data['in_the_box']): ?>
+                        <div id="tab-3-c" class="phone-box-content-section phone-box-content-section-box">
+                          <div class="phone-box-content-section-title box-title">In the Box</div>
+                          <?php echo $node->extra_data['in_the_box']; ?>
+                        </div>
+                      <?php endif; ?>
+                      <div id="tab-4-c" class="phone-box-content-section phone-box-content-section-user-reviews">
+                        <div class="phone-box-content-section-title user-reviews-title">User Reviews</div>
+                        <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
 
-                    </div> <!-- <div id="user-reviews"> -->
+                              <div class="gv_votes users_overall"><?php echo '<div class="caption">' . t('Overall Consumer Ratings') . '</div>' . render($content['gv_ratings']); ?></div>
+                              <div class="overall"> 
+                                <div class="text">
+                                  <?php 
+                                    echo '<div class="voters"><div class="title">' . t('Number of Reviews') . ':</div><div class="count">' . $node->gv_voters . '</div></div>';
+                                  ?>
+                                  <?php echo '<div class="recommend"><div class="title">' . t('Would recommend') . ': </div><div class="data">' . $node->gv_recommend . '% ' . t('of all voters') . '</div></div>'; ?>
+                                  <div class="overall title"><?php $node->field_p_name['und'][0]['value'] . ' ' . t('Overall Rated:'); ?></div>
+                                </div>
+                                <div class="star-big">
+                                  <?php 
+                                    echo '<div class="count" content="' . $node->gv_rating_overall . '" >' . $node->gv_rating_overall . '</div>' . '<div class="descr">' . t('Out of 5 stars') . '</div>';
+                                  ?>
+                                </div>
+                              </div>
+
+                        <?php endif; // end of if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
+
+                
+                        <?php echo $node->addPhoneReviewForm; ?>
+                          
+                        
+                        <?php if ($node->userReviews): ?> 
+
+                          <div class="reviews">
+                            <div class="header">
+                                <h2 class="button"><?php echo $node->field_p_name['und'][0]['value'], ' ', t('User Reviews'); ?></h2>
+                            </div>
+                            <?php echo $node->userReviews; ?>
+                          </div>
+
+                        <?php endif; ?>
+
+                      </div> <!-- <div id="tab-4-c"> -->
+                    </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>
               
@@ -333,33 +335,8 @@ if($view_mode == 'home_teaser_rotated') {
             
           <?php endif; ?>  <!-- end of else of if ($page): -->
            
-             
-      <?php if ($page): ?>
-      <?php endif; ?>
         
-
-        
-        
-      <?php  if ($page): ?>
-    
-        <footer>
-          <div class="share">
-              <?php 
-              echo gv_blocks_getSidebarShareStaticBlock($node, '', 'bottom');
-              ?> 
-          </div>
-          
-        </footer>
-    
-        
-        <?php 
-        {  
-          echo gv_blocks_getAboutTheAuthor($node->uid); 
-        }
-        
-      ?>
-        
-      <?php endif;  ?>
+      <?php // if ($page) { echo gv_blocks_getAboutTheAuthor($node->uid); } ?>
         
   </div> <!-- main-content -->
   

@@ -4,6 +4,9 @@ if ($is_front) {
   drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
 }
 
+if ( current_path() == 'blog' ) {
+  drupal_add_js('/sites/all/themes/gv_sky/js/blog.js');
+}
 ?>
   <header id="header" role="banner">
 
@@ -68,8 +71,7 @@ if ($is_front) {
             
             <?php print render($page['above_content']); ?>
             <?php print render($page['content']); ?>
-            
-           
+
 
 
         <?php if ($page['sidebar_first']): ?>
