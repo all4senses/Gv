@@ -3738,6 +3738,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
           'bu' => unserialize(PROVIDER_OPTIONS_BU),
           're' => unserialize(PROVIDER_OPTIONS_RE),
           'cc' => unserialize(PROVIDER_OPTIONS_CC),
+          'wc' => unserialize(PROVIDER_OPTIONS_WC),
       );      
             
       foreach ($providers_with_options as $service_type_index => $provider_options_structure) {
@@ -6931,6 +6932,8 @@ function gv_pages_validateForm_provider(&$form, &$form_state) {
   unset($form_state['values']['s']['re']['provider_options_re']);
   $p_data['provider_options_cc'] = $form_state['values']['s']['cc']['provider_options_cc'];
   unset($form_state['values']['s']['cc']['provider_options_cc']);
+  $p_data['provider_options_wc'] = $form_state['values']['s']['wc']['provider_options_wc'];
+  unset($form_state['values']['s']['wc']['provider_options_wc']);
   
   //dpm($p_data['provider_options_bu']);
   //dpm($form_state['values']);

@@ -72,6 +72,7 @@ $sprite_names = serialize(array(
   'bu_ca' => 'top_ca_providers',
   're_ca' => 'top_ca_providers',
   'cc' => 'top_cc_providers',
+  'wc' => 'top_cc_providers',
   //'smbv' => '',  
 ));
 
@@ -349,6 +350,77 @@ $provider_options_cc = array(
 
 define('PROVIDER_OPTIONS_CC', serialize($provider_options_cc));
 
+
+
+
+$provider_options_wc = array(
+          
+          'Provider Info' => array(
+              'Year Founded' => 'textfield',
+              'Headquarters' => 'textfield',
+              'Service Location' => 'textfield',
+              'Service Type Availability' => 'textfield',
+              'Most Popular Plan' => 'textfield',
+              'Money Back Guarantee' => 'textfield',
+              'Enterprise Solution' => 'textfield',
+              'Free Trial' => 'textfield',
+              'Prepay Discount' => 'textfield',
+              'Price Range Min-Max' => 'textfield',
+          ),
+    
+    
+          'Available Features & Services' => array(
+                
+              'Breakout Participants' => 'checkbox',
+              'Data Encryption' => 'checkbox',
+              'Designate Presenter' => 'checkbox',
+              'File Transfer' => 'checkbox',
+              'Max Participants - Biggest Plan' => 'checkbox',
+              'Max Participants - Smallest Plan' => 'checkbox',
+              'Mobile App' => 'checkbox',
+              'No Conference Codes' => 'checkbox',
+              'Online Data Backup' => 'checkbox',
+              'Participant Annotation' => 'checkbox',
+              'Participant Download' => 'checkbox',
+              'Post Call Reporting' => 'checkbox',
+              'Preparation Mode' => 'checkbox',
+              'Record Meetings' => 'checkbox',
+              'Screenshots' => 'checkbox',
+              'Social Media Integration' => 'checkbox',
+              'Specific Window Sharing' => 'checkbox',
+              'Survey/Polling' => 'checkbox',
+              'Toll Free Number' => 'checkbox',
+          ),
+    
+          'Integrations' => array(
+              
+              'Outlook' => 'checkbox',
+              'NetSuite' => 'checkbox',
+              'SalesForce' => 'checkbox',
+              'SugarCRM' => 'checkbox',
+              'Box' => 'checkbox',
+              'Dropbox' => 'checkbox',
+              'Microsoft Dynamics' => 'checkbox',
+              'Zoho' => 'checkbox',
+              'Zendesk' => 'checkbox',
+          ),
+    
+    
+          'Support' => array(
+              'Hours' => 'textfield',
+              'Telephone Support' => 'checkbox',
+              'Email Support' => 'checkbox',
+              'Instant Chat' => 'checkbox',
+              '24/7 Call-in Support' => 'checkbox',
+              'FAQs Section' => 'checkbox',
+              'Video Tutorials' => 'checkbox',
+              'E-Guides' => 'checkbox',
+              'Online Ticket Submissions' => 'checkbox',
+        ),
+    
+      );
+
+define('PROVIDER_OPTIONS_WC', serialize($provider_options_wc));
 
 
 
