@@ -202,7 +202,7 @@
           validationOptions: {
             groups: {
               //username: "firstname lastname email phone"
-              username: "firstname lastname email phone ct_captcha"
+              username: "firstname lastname email phone ct_captcha company"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
@@ -344,6 +344,7 @@
               */
              
              //Works
+             company: Drupal.t('Company is required'),
              firstname: Drupal.t('First Name is required'),
              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
              phone: Drupal.t('Enter a valid phone number'),
