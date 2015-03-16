@@ -158,6 +158,8 @@
 
 
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
+          console.log('param = ' + param);
+          console.log('value = ' + value);
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
         }, "All fields with are required");
@@ -210,12 +212,12 @@
                 //error.insertAfter( $(".last_radio", element.parent()) );
                 ////error.insertAfter("#buying_time");
                 ////error.insertAfter("#on_error");
-              error.insertAfter(".step");
+              error.insertAfter(".sidebar #block-gv-blocks-request-quote-v8 .step");
               
               
               //else if(element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
               else if(element.attr("name") == "ct_captcha" || element.attr("name") == "firstname" || element.attr("name") == "lastname"  || element.attr("name") == "company" || element.attr("name") == "email" || element.attr("name") == "phone")
-                error.insertAfter("#phone");
+                error.insertAfter(".sidebar #block-gv-blocks-request-quote-v8 #phone");
               else
                 error.insertAfter(element);
             },
@@ -255,7 +257,7 @@
              company: {
                 required: true,
                 minlength: 2,
-                notEqualsTo: $('input[id="company"]').attr('title')
+                notEqualsTo: $('.sidebar #block-gv-blocks-request-quote-v8 input[id="company"]').attr('title')
 							},
               firstname: {
                 required: true,
