@@ -246,13 +246,17 @@
               },
               */
               
-              company: "required",
               phones_amt: "required",
               q_for: "required",
               q_type: "required",
               buying_time: "required",
               connection: "required",
              
+             company: {
+                required: true,
+                minlength: 2,
+                notEqualsTo: $('input[id="company"]').attr('title')
+							},
               firstname: {
                 required: true,
                 minlength: 2,
