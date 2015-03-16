@@ -5642,7 +5642,7 @@ function gv_blocks_get_requestQuote_block_v7() {
  */
 function gv_blocks_get_requestQuote_block_v8() {
   
-//  global $user;
+  global $user;
 //  if (!$user->uid) 
 //    {
 //    return NULL;
@@ -5726,7 +5726,25 @@ function gv_blocks_get_requestQuote_block_v8() {
                                 <div id="up">
                                     <div class="text">' . $data['headline']['value'] . '</div>
                                 </div>
-                                <div class="bottom-clear"></div>   
+                                <div class="bottom-clear"></div> ' .
+          
+          
+          
+                                ($user->uid == 1 ? 
+                                '
+                                  
+                                    
+                                <input class="after company" name="company" id="company" title="Company" />
+
+
+                                ' 
+          
+          
+          
+                                : 
+          
+          
+                                '  
                            
                                 <div class="wrapper top first">
                                   <div class="question ui-widget">Service Type:</div>
@@ -5746,7 +5764,12 @@ function gv_blocks_get_requestQuote_block_v8() {
                                     <option value="21 - 50">21 - 50</option>
                                     <option value="More than 50">More than 50</option>
                                   </select>
-                                </div>
+                                </div>' 
+                                    )
+          
+          
+          
+                          .'
 
                             <div class="bottom-clear"></div>
                             
