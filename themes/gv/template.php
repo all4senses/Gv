@@ -362,11 +362,12 @@ function gv_pager($variables) {
     return NULL;
   }
   else {
-    return '<h2 class="element-invisible">' . t('Pages') . '</h2>' 
-          . theme('item_list', array(
-            'items' => $items,
-            'attributes' => array('class' => array('pager')),
-          ));
+    return NULL;
+    // return '<h2 class="element-invisible">' . t('Pages') . '</h2>' 
+    //       . theme('item_list', array(
+    //         'items' => $items,
+    //         'attributes' => array('class' => array('pager')),
+    //       ));
   }
   
   
