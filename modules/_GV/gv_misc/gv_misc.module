@@ -5842,7 +5842,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   $clear_phone = str_replace(array('(', ')', '-', '_', ' '), '', $phone);
   
   global $user;
-  if ($user->uid == 1) {
+  if ($user->uid) {
     
     if (
                 !$clear_phone

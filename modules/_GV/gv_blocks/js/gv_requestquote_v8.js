@@ -204,7 +204,7 @@
           validationOptions: {
             groups: {
               //username: "firstname lastname email phone"
-              username: "firstname lastname email phone ct_captcha company"
+              username: "company firstname lastname email phone ct_captcha"
               ,first_step: "phones_amt q_type buying_time"
             },
             errorPlacement: function(error, element) {
