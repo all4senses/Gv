@@ -118,7 +118,16 @@
 
         });
         
-        
+        $('.sidebar #block-gv-blocks-request-quote-v8 input[id="company"]').keydown(function (event) { 
+            
+            if( 
+                event.keyCode == 9     // tab
+              ) {
+                event.preventDefault();     // Prevent character input
+                $('.sidebar #block-gv-blocks-request-quote-v8 input[id="firstname"]').focus();
+            }
+
+        });
         
         
         
