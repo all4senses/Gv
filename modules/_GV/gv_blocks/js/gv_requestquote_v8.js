@@ -158,8 +158,8 @@
 
 
         jQuery.validator.addMethod("notEqualsTo", function(value, element, param) {
-          console.log('param = ' + param);
-          console.log('value = ' + value);
+          //console.log('param = ' + param);
+          //console.log('value = ' + value);
           return !(this.optional(element) || value === param);
         //}, jQuery.format("You must not enter {0}"));
         }, "All fields with are required");
