@@ -251,7 +251,7 @@
               q_type: "required",
               buying_time: "required",
               connection: "required",
-             
+              
              company: {
                 required: true,
                 minlength: 2,
