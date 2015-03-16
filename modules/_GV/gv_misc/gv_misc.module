@@ -5846,9 +5846,9 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     if (
                 !$clear_phone
-             || strpos($clear_phone, '3847') !== FALSE
+             || strpos($clear_phone, '3847') != FALSE
              || ($clear_phone[0] == $clear_phone[1] && $clear_phone[0] == $clear_phone[2])
-             || strpos($clear_phone, '123') === NULL // starts from 123
+             || strpos($clear_phone, '123') != FALSE // starts from 123
         )
     {
       $phone = NULL;
