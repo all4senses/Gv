@@ -72,7 +72,7 @@ $sprite_names = serialize(array(
   'bu_ca' => 'top_ca_providers',
   're_ca' => 'top_ca_providers',
   'cc' => 'top_cc_providers',
-  'wc' => 'top_cc_providers',
+  'wc' => 'top_wc_providers',
   //'smbv' => '',  
 ));
 
