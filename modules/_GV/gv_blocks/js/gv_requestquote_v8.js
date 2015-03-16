@@ -246,7 +246,7 @@
               },
               */
               
-              
+              company: "required",
               phones_amt: "required",
               q_for: "required",
               q_type: "required",
