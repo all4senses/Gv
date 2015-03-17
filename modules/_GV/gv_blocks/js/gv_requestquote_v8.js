@@ -266,7 +266,7 @@
              company: {
                 required: true,
                 minlength: 2,
-                notEqualsTo: $('.sidebar #block-gv-blocks-request-quote-v8 input[id="company"]').attr('title')
+                notEqualsTo: $('#block-gv-blocks-request-quote-v8 input[id="company"]').attr('title')
 							},
               firstname: {
                 required: true,
