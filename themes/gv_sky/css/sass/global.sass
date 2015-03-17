@@ -26,6 +26,8 @@
 
 @import 'review'
 
+@import 'blog'
+
 
 
 /* ==========================================================================
@@ -49,7 +51,7 @@ body
 	box-sizing: border-box
 
 #main
-	background-color: $subwhite
+	// background-color: $subwhite
 	background-color: white
 	padding: 60px 0
 	min-height: 79.1%
@@ -59,6 +61,20 @@ body
 	+center
 	padding: 0 20px
 	box-sizing: border-box
+
+
+@-moz-keyframes spin
+	100% 
+		-moz-transform: rotate(360deg)
+
+@-webkit-keyframes spin
+	100% 
+		-webkit-transform: rotate(360deg)
+
+@keyframes spin
+	100% 
+		-webkit-transform: rotate(360deg)
+		transform: rotate(360deg)
 
 // main
 // 	display: none

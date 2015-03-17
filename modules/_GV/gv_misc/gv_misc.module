@@ -3824,14 +3824,14 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   
   
   
-  $read_more_html = l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow')));
+  $read_more_html = '<div class="blog-posts-item-more">' . l('Continue Reading', 'node/' . $nid, array('attributes' => array('class' => array('blog-posts-item-more-text'), 'rel' => 'nofollow'))) . '</div>';
   
   
   
   // Rss teaser.
   $teaser_rss = trim(drupal_substr($teaser, 0, 400));
   $last_pos = strrpos($teaser_rss, ' ');
-  $teaser_rss = substr_replace ($teaser_rss, '... ' . $read_more_html, $last_pos);
+  $teaser_rss = substr_replace ($teaser_rss, '...', $last_pos) . $read_more_html;
   $teaser_rss = @$main_image_html_beautify . $teaser_rss;
   // Clear attribute typeof="foaf:Image" from the img tag (which iss added by the core rdf module via hook_preprocess_image).
   $teaser_rss = preg_replace('|typeof="foaf:Image" |', '', $teaser_rss);
@@ -3852,7 +3852,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $last_pos = strrpos($teaser, ' ');
   
   // $teaser = substr_replace ($teaser, '...' . l(t('Read More'), 'node/' . $nid, array('attributes' => array('class' => array('more')))) , $last_pos, strlen($matches[1]));
-  $teaser = substr_replace ($teaser, '... ' . $read_more_html, $last_pos);
+  $teaser = substr_replace ($teaser, '...', $last_pos);
 
   
   $teaser_with_image = @$main_image_html . $teaser;
@@ -3865,6 +3865,8 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   else {
     $out = array(
       'title' => $title,
+
+      'read_more_html' => $read_more_html,
         
       'teaser_only' => $teaser, 
       'teaser' => $teaser_with_image, 
@@ -3909,11 +3911,12 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
 /**
  * Helper function to regenerate Styled And Beautify Image Html.
  */
-function gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, &$image_html, &$image_html_beautify, $title = NULL, $class = 'thumb') {
+function gv_misc_regenerateStyledAndBeautifyImageHtml($stream_path, $style_name, &$image_html, &$image_html_beautify, $title = NULL, $class = 'thumb', $class2 = 'blog-posts-item-img-actual') {
   $image_url = image_style_url($style_name, $stream_path);
   gv_misc_createCachedImageIfNotExists($image_url, $style_name);
   $title = str_replace('"', '`', $title);
-  $image_html = '<div class="' .$class . '"><img src="' . $image_url . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
+  // $image_html = '<div class="' .$class . '"><img src="' . $image_url . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' /></div>';
+  $image_html = '<img class="' . $class2 . '" src="' . $image_url . '"' . (!$title ? '' : ' alt="' . $title . '" title="' . $title . '"') . ' />';
   $image_html_beautify = gv_pages_convertBeautifulUrls('from_originals_to_beautiful', $image_html);
 }
 

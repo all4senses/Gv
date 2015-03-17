@@ -28,13 +28,24 @@
 				margin-right: 0
 
 			&-date
+				position: relative
+				padding: 0 16px 0 21px
 				font-size: 12px
 				line-height: 18px
 				font-weight: 600
 				color: $grey-light
 
+				&:before
+					content: 'x'
+					position: absolute
+					left: 0
+					font-family: gvcons
+					font-weight: 400
+					font-size: 14px
+					line-height: 1
 
-			&-heading
+
+			&-title
 				margin-top: 11px
 				font-size: 17px
 				line-height: 24px
@@ -52,12 +63,3 @@
 				margin-top: 6px
 				font-weight: 500
 				line-height: 19px
-
-
-
-
-.icon-calendar
-	float: left
-	font-size: 14px
-	line-height: 1
-	margin-right: 7px

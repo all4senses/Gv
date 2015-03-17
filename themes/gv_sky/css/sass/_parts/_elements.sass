@@ -473,52 +473,156 @@
 
 
 
-=blog-box($width:perc(303px, 640px), $height:368px, $title: 18px, $img-margin: 20px)
-
-	float: left
-	width: $width
-	height: $height
-	box-shadow: 0 0 3.8px .3px rgba(0, 0, 0, 0.2)
-	// border: 1px solid $divider
-	background-color: white
-	border-radius: 3px
-	overflow: hidden
-	box-sizing: border-box
+=blog-box($width:perc(303px, 640px), $height:368px, $title: 18px, $img-margin: 20px, $img-height: false, $author: false, $item-style: true, $child-style: true)
+	@if $item-style == true
+		float: left
+		width: $width
+		height: $height
+		// box-shadow: 0 0 3.8px .3px rgba(0, 0, 0, 0.2)
+		border: 1px solid $divider
+		background-color: white
+		border-radius: 3px
+		overflow: hidden
+		box-sizing: border-box
 
 	
-	&-img
-		margin-bottom: $img-margin
-		display: block
+	@if $child-style == true
+		&-img
+			margin-bottom: $img-margin
+			display: block
+			@if $img-height == false
+				+ratio(57.9%)
+			@else 
+				height: $img-height
 
-		&-actual
-			width: 100%
-			height: auto
+			&-actual
+				// display: block
+				width: auto
+				height: 100%
+				// height: 206px
+				width: 100%
+				// height: auto
+				// min-height: 100%
 
-	&-date
-		padding: 0 16px
-		font-size: 12px
-		line-height: 18px
-		font-weight: 600
-		color: $grey-light
 
-	&-title
-		padding: 15px 16px 0
-		box-sizing: border-box
-		font-size: $title
-		line-height: 24px
-		font-weight: 600
+		@if $author == false
+			&-date
+				position: relative
+				margin-left: 16px
+				padding: 0 16px 0 21px
+				font-size: 12px
+				line-height: 18px
+				font-weight: 600
+				color: $grey-light
 
-		&-link
+				&:before
+					content: 'x'
+					position: absolute
+					left: 0
+					font-family: gvcons
+					font-weight: 400
+					font-size: 14px
+					line-height: 1
+					cursor: default
+
+		@if $author == true	
+
+			&-meta 
+				padding-left: 16px
+				+clearfix
+
+				&-date
+					position: relative
+					float: left
+					// margin-left: 16px
+					padding: 0 16px 0 21px
+					font-size: 12px
+					line-height: 18px
+					font-weight: 600
+					color: $grey-light
+
+					&:before
+						content: 'x'
+						position: absolute
+						left: 0
+						font-family: gvcons
+						font-weight: 400
+						font-size: 14px
+						line-height: 1
+						cursor: default
+
+				&-author
+					position: relative
+					float: left
+					// margin-left: 16px
+					padding: 0 16px 0 21px
+					font-size: 12px
+					line-height: 18px
+					font-weight: 600
+					color: $grey-light
+
+					&:before
+						content: 'K'
+						position: absolute
+						// top: -2px
+						left: 0
+						font-family: gvcons
+						font-weight: 400
+						font-size: 13px
+						line-height: 1
+						cursor: default
+
+		&-title
+			padding: 15px 16px 0
+			box-sizing: border-box
+			font-size: $title
+			line-height: 24px
+			font-weight: 600
+
+			&-link
+				color: $grey-darker
+
+				&:hover
+					color: $primary
+
+		&-content
+			padding: 8px 16px 0
+			box-sizing: border-box
+			font-size: 14px
+			line-height: 19px
+			font-weight: 500
 			color: $grey-darker
 
-			&:hover
-				color: $primary
 
-	&-content
-		padding: 8px 16px 0
-		box-sizing: border-box
-		font-size: 14px
-		line-height: 19px
-		font-weight: 500
-		color: $grey-darker
+
+
+=load-more
+	position: relative
+	+center(50px, 20px)
+	width: 140px
+	padding-left: 40px
+	font-size: 15px
+	font-weight: 700
+	letter-spacing: .4px
+	color: $primary
+	text-transform: uppercase
+	box-sizing: border-box
+	cursor: pointer
+	+user-select(none)
+
+	&:before
+		content: 'R'
+		position: absolute
+		top: -8px
+		left: 0
+		font-size: 29px
+		font-family: gvcons
+		font-weight: 400
+		line-height: 1
+
+	&.loading:before 
+		-webkit-animation: spin 1.5s linear infinite
+		-moz-animation: spin 1.5s linear infinite
+		animation: spin 1.5s linear infinite
+
 

@@ -93,8 +93,13 @@
           }
         ?>
       <?php endif; ?>
-       
-          <div class="latest-blog-posts-list-item-date"><div class="icon-calendar"></div>
+
+          <?php if (current_path() == 'blog') {     // Blog Page Only
+            echo '<div class="blog-posts-item-img">' . $extra_data['teaser_main_image_beautify'] . '</div>';
+            echo '<div class="blog-posts-item-wrap">';
+          } ?>
+
+          <div class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item-meta' : 'latest-blog-posts-list-item-date') ?>">
             <?php 
             
               $created_str = date('F d, Y', $node->created);
@@ -167,7 +172,8 @@
                       echo 'By' , ': ' , $author_name;
                     }
                     else {
-                      echo 'By <span class="author">' , $author_name, '</span><span class="delim"> / </span>', $created_str;
+                      echo '<div class="blog-posts-item-meta-author">' . $author_name . '</div>';
+                      echo '<div class="blog-posts-item-meta-date">' . $created_str . '</div>';
                     }
                   }
               }
@@ -180,9 +186,9 @@
               <?php if ($page): ?>
               <h1 
               <?php elseif ($view_mode == 'side_block_teaser'): ?>
-              <h4 class="latest-blog-posts-list-item-heading"
+              <h4 class="latest-blog-posts-list-item-title"
               <?php else: ?>
-              <h2 
+              <h2 class="blog-posts-item-title"
               <?php endif; ?>
 
                 <?php print ' '; 
@@ -202,7 +208,7 @@
                 $title_shorter = dk_shorten_title($title);
                 
 
-                ?>><?php if (!isset($node->title_no_link) && !$page): ?><a class="latest-blog-posts-list-item-heading-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
+                ?>><?php if (!isset($node->title_no_link) && !$page): ?><a class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-title-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
                 <?php else: ?><?php print $title; ?><?php endif; ?>
                 
              <?php if ($page): ?>
@@ -223,7 +229,7 @@
 
 
 
-      <div class="latest-blog-posts-list-item-content <?php echo ($page ? 'page' : 'teaser'); ?>"<?php print $content_attributes; ?>>
+      <div class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-content"<?php print $content_attributes; ?>>
         <?php
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
@@ -288,10 +294,20 @@
             else {
               
               if ($class_thumb_presented) {
-                //echo $extra_data['teaser_main_image'] . '<div class="teaser-content">' . $extra_data['teaser_only'] . '</div>';
-                echo $extra_data['teaser_main_image_beautify'] . $extra_data['teaser_only'];
-              }
-              else {
+                // echo $extra_data['teaser_main_image_beautify'] . $extra_data['teaser_only'];  // Old Blog Page thumb rendering
+                echo $extra_data['teaser_only'];
+                
+
+                // if (strlen($extra_data['teaser_only']) < 120 ) {
+                //   // $content_shortened = substr($extra_data['teaser_only'], 0, 176);
+                //   $content_shortened = $extra_data['teaser_only'];
+                // } else {
+                //   $content_shortened = substr($extra_data['teaser_only'], 0, 120) . '...';
+                // }
+
+                // echo $content_shortened;
+
+              } else {
                 echo $teaser_data['teaser_beautify']; //echo $teaser_data['teaser'];
               }
               
@@ -316,6 +332,8 @@
           echo render($content);
         ?>
       </div>
+      <?php echo ( current_path() == 'blog' ? $extra_data['read_more_html'] : ''); ?>
+      </div> <!-- End of content wrap -->
 
 
 

@@ -17,7 +17,7 @@ if($view_mode == 'home_teaser_rotated') {
 ?>
 
 <?php if (!$page): ?>
-  <article class="review-posts-item"<?php print $attributes; ?>>
+  <article class="<?php echo (current_path() == 'blog' ? '' : 'review-posts-item') ?>"<?php print $attributes; ?>>
 <?php else: ?>
 
 <?php endif; ?>
@@ -71,6 +71,10 @@ if($view_mode == 'home_teaser_rotated') {
                           break;
                       }
                     }
+
+                    if (current_path() == 'blog') {
+                      echo '<div class="blog-posts-item-img">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_teaser_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo', 'class' => 'blog-posts-item-img-actual'))) . '</div>'; 
+                    }
                    
                     $created_rdf = preg_replace('|(.*)content=\"(.*)\"\s(.*)|', '$2', $date); //date('Y-m-d\TH:i:s', $node->created); 
                     
@@ -109,9 +113,9 @@ if($view_mode == 'home_teaser_rotated') {
                                   '</div>';
                       }
                       else {
-                        $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">'
-                                      . (!$page ? $author_name : '<a href="' . $author_url . '" title="' . $author_title . '" class="hero-review-content-meta-author" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name v:reviewer">' . $author_name . '</a>') 
-                                      . '<div class="hero-review-content-meta-date">' . $created_str . '</div>' .
+                        $submitted = '<div class="' . ( current_path() == 'blog' ? 'blog-posts-item' : 'hero-review-content' ) . '-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">'
+                                      . (!$page ? '<div class="blog-posts-item-meta-author">' . $author_name . '</div>': '<a href="' . $author_url . '" title="' . $author_title . '" class="hero-review-content-meta-author" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name v:reviewer">' . $author_name . '</a>') 
+                                      . '<div class="' . ( current_path() == 'blog' ? 'blog-posts-item' : 'hero-review-content' ) . '-meta-date">' . $created_str . '</div>' .
                                   '</div>';
                       }
 
@@ -290,12 +294,24 @@ if($view_mode == 'home_teaser_rotated') {
                 $teaser_chars = 450;
                 $teaser = trim(drupal_substr($teaser, 0, $teaser_chars));// . '...';
                 $last_pos = strrpos($teaser, ' ');
-                $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+  
+                if (current_path() == 'blog') {
+                  $teaser = substr_replace ($teaser, '... ', $last_pos);
+                } else {
+                  $teaser = substr_replace ($teaser, '... ' . l('Read More', 'node/' . $node->nid, array('attributes' => array('class' => array('more'), 'rel' => 'nofollow'))), $last_pos);
+                }
                 
-                gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
-                echo $main_image_html_beautify;
+                if (current_path() != 'blog') {
+                  gv_misc_regenerateStyledAndBeautifyImageHtml($node->field_p_image['und'][0]['uri'], 'article_thumbnail_h', $main_image_html, $main_image_html_beautify, $node->title);
+                  echo $main_image_html_beautify;
+                } else {
+                  echo '<div class="blog-posts-item-title">' . l($node->field_p_name['und'][0]['value'], 'node/' . $node->nid, array('attributes' => array('class' => array('blog-posts-item-title-link')))) . '</div>';
+                }
+
+                // if (current_path() == 'blog') {
+                // }
               ?>
-                <div class="teaser-content">
+                <div class="<?php echo (current_path() == 'blog' ? 'blog-posts-item' : 'teaser') ?>-content">
                      <?php echo $teaser;?>
                 </div>
           
@@ -316,7 +332,7 @@ if($view_mode == 'home_teaser_rotated') {
           
           
                 <?php
-                  if (isset($node->field_p_image['und'][0]['uri'])) {
+                  if (isset($node->field_p_image['und'][0]['uri']) && current_path() != 'blog') {
                     echo '<a class="review-posts-item-img" href="' . $node_url . '">' . theme('image_style', array( 'path' =>  $node->field_p_image['und'][0]['uri'], 'style_name' => 'phone_teaser_main', 'alt' => $node->field_p_image['und'][0]['alt'], 'title' => $node->field_p_image['und'][0]['title'], 'attributes' => array('rel' => 'v:photo', 'class' => 'review-posts-item-img-actual'))) . '</a>'; 
                   }
                 ?>

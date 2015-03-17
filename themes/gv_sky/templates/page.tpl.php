@@ -70,7 +70,9 @@ if ( current_path() == 'blog' ) {
             <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
             
             <?php print render($page['above_content']); ?>
+            <?php echo ( current_path() == 'blog' ? '<div class="blog-posts">' : '') ?>
             <?php print render($page['content']); ?>
+            <?php echo ( current_path() == 'blog' ? '</div><div class="blog-posts-load">Load More</div>' : '') ?>
 
 
 

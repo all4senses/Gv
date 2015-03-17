@@ -1,0 +1,225 @@
+.blog-posts
+	margin-top: 50px
+	+clearfix
+
+	article
+		height: 100%
+
+
+	// Desktop
+	+m(941, min)
+		// First Post
+		&-item:nth-child(1)
+			position: relative
+			float: left
+			width: 100%
+			height: auto
+			// box-shadow: 0 0 3.8px .3px rgba(0, 0, 0, 0.2)
+			border: 1px solid $divider
+			background-color: white
+			border-radius: 3px
+			overflow: hidden
+			box-sizing: border-box
+			
+		// First Post Children
+		&-item:nth-child(1) &-item
+
+			&-img
+				width: perc(635px, 1130px)
+				float: left
+				display: block
+
+				&-actual
+					width: 100%
+					height: auto
+					display: block
+
+
+
+			&-wrap
+				float: right
+				width: perc(495px, 1130px)
+				height: 100%
+				padding: 30px 30px
+				box-sizing: border-box
+
+			&-meta 
+				+clearfix
+
+				&-date
+					position: relative
+					float: left
+					padding: 0 16px 0 21px
+					font-size: 12px
+					line-height: 18px
+					font-weight: 600
+					color: $grey-light
+
+					&:before
+						content: 'x'
+						position: absolute
+						left: 0
+						font-family: gvcons
+						font-weight: 400
+						font-size: 14px
+						line-height: 1
+
+				&-author
+					position: relative
+					float: left
+					padding: 0 16px 0 21px
+					font-size: 12px
+					line-height: 18px
+					font-weight: 600
+					color: $grey-light
+
+					&:before
+						content: 'K'
+						position: absolute
+						// top: -2px
+						left: 0
+						font-family: gvcons
+						font-weight: 400
+						font-size: 13px
+						line-height: 1
+
+			&-title
+				padding: 15px 0 0
+				box-sizing: border-box
+				font-size: 20px
+				line-height: 24px
+				font-weight: 600
+
+				&-link
+					color: $grey-darker
+
+					&:hover
+						color: $primary
+
+			&-content
+				padding: 8px 0 0
+				box-sizing: border-box
+				font-size: 14px
+				line-height: 19px
+				font-weight: 500
+				color: $grey-darker
+				max-height: 120px
+
+				&.mobile
+					display: none
+
+				&.desktop
+					display: block
+
+
+			&-more
+				+button(outline, $primary, 160px, 40px)
+				position: absolute
+				bottom: 30px
+
+				+m(1080)
+					display: none
+
+				&-text 
+					font-size: 12px
+					letter-spacing: .4px
+					height: 100%
+					line-height: .9
+					padding: 13px 0
+					box-sizing: border-box
+					transition: color 0.2s
+
+					&:hover
+						color: white
+
+
+
+
+
+		// Rest of the posts
+		&-item:nth-child(n+2)
+			+blog-box($width:perc(355px, 1130px), $height:398px, $item-style: true, $child-style: false)
+			margin-right: perc(30px, 1050px)
+			margin-top: perc(30px, 1050px)
+
+			&:nth-child(3n+1)
+				margin-right: 0
+
+
+
+		&-item:nth-child(n+2) &-item
+			+blog-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true, $item-style: false)
+
+			// +m(1024)
+			// 	&-img
+			// 		height: perc(185px, 399px)
+
+			&-meta-author
+				+m(980)
+					display: none
+
+
+
+
+
+
+	// Mobile
+	+m(940)
+
+		&-item
+			+blog-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true)
+			margin-right: perc(30px, 1050px)
+			margin-top: perc(30px, 1050px)
+
+			@media screen and (min-width:769px)
+
+				&:nth-child(3n)
+					margin-right: 0
+		
+
+			&-meta-author
+				display: none
+
+			&-content
+
+				&.mobile
+					display: block
+
+				&.desktop
+					display: none
+			
+			&-more
+				display: none
+
+
+	+m(768)
+
+		&-item
+			width: perc(548px, 1130px)
+
+			@media screen and (min-width:581px)
+
+				&:nth-child(2n)
+					margin-right: 0
+
+	+m(580)
+
+		&-item
+			float: none
+			width: 100%
+			+center
+			margin-top: 25px
+			max-width: 355px
+		
+
+
+
+
+	// Load More
+	&-load
+		+load-more
+		margin-top: 70px
+
+
+
+
