@@ -2062,15 +2062,15 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       1 => '<th>' . $sort_links['timestamp'] . '</th>',
       2 => '<th>' . $sort_links['status'] . '</th>',
       //3 => '<th>' . $sort_links['via_block'] . '</th>',
-      4 => '<th>' . $sort_links['checked'] . '</th>',
+      //4 => '<th>' . $sort_links['checked'] . '</th>',
       
   );
   
   $table_cells_3 = array(
       5 => '<th class="data">Full Data</th>',
       6 => '<th class="ops" style="width: 160px;">Operations</th>',
-      7 => '<th class="campaign">Campaign</th>',
-      8 => '<th>' . $sort_links['ip'] . '</th>',
+      //7 => '<th class="campaign">Campaign</th>',
+      //8 => '<th>' . $sort_links['ip'] . '</th>',
   );
   
   $table_cells_1 += $map_captured_dataIndex_to_tableTitle + $table_cells_3;
@@ -2129,9 +2129,11 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
 
                                 $ucaptured_data_changed = array();
+                                $ucaptured_data['IP'] = $ucaptured->ip;
                                 foreach ($ucaptured_data as $title => $value) {
                                       if ($title == 'Submit Time' && is_numeric($value)) {
-                                        $value = date('Y-m-d, H:i:s', $value);
+                                        //$value = date('Y-m-d, H:i:s', $value);
+                                        $value = date('m\/d\/y, H:i:s', $value);
                                       }
                                       elseif ($title == 'Submission Duration' && is_numeric($value)) {
                                         $value = number_format($value / 60, 2, '.', '') . ' min';
@@ -2205,13 +2207,13 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 
                                 
                                               $form['item_' . ($key + 1) . 'b'] = array(
-                                                '#markup' => '<td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td>'
+                                                '#markup' => '<td>' . ($key + 1) . '</td><td>' . date('m\/d\/y, H:i:s', $ucaptured->timestamp) /*date('Y-m-d, H:i:s', $ucaptured->timestamp)*/ . '</td><td class="' . $status_class . '">' . $status . '</td>'
                                                   //. '<td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>'
                                                   ,
                                               );
 
 
-
+                                              /*
                                               $form['item_' . ($key + 1) . 'c'] = array(
                                                 '#type' => 'checkbox',
                                                 '#default_value' => $ucaptured->checked,
@@ -2219,6 +2221,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                                 '#suffix' => '</td>',
                                                 '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
                                               );
+                                              */
 
 
                                               // Ips, User input data, Operations.
@@ -2229,12 +2232,12 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                                       . l('Delete', $_GET['q'], array('query' => $delete_url)) 
                                                       . render($gv_misc_sendCapturedQuotesToProviders_form_x)
                                                   . '</td>'
-                                                  . '<td class="campaign">' 
-                                                      . drupal_render($campaign_select_op)
-                                                  . '</td>'
-                                                  . '<td>' 
-                                                      . $ucaptured->ip
-                                                  . '</td>',
+                                                  //. '<td class="campaign">' 
+                                                  //    . drupal_render($campaign_select_op)
+                                                  //. '</td>'
+                                                  //. '<td>' 
+                                                  //    . $ucaptured->ip
+                                                  //. '</td>',
                                                 //. '</tr>',
                                               );
 
