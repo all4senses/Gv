@@ -1,0 +1,83 @@
+.related-posts
+	width: perc(820px, 1066px)
+	float: right
+	margin-top: 32px
+
+	+m(1100)
+		float: left
+
+	+m(940)
+		width: 73%
+
+	+m(820)
+		width: 70%
+
+	+m(736)
+		display: none
+
+	&-title
+		color: $black
+		margin-bottom: 15px
+		font-size: 32px
+		font-weight: 600
+
+
+	&-list
+		padding: 30px
+		border: 1px solid $divider
+		border-radius: 3px
+		box-sizing: border-box
+		+clearfix
+		
+		&-item
+			margin-left: perc(43px, 734px)
+			float: left
+			box-sizing: border-box
+			
+			&:first-child
+				margin-left: 0
+
+			.c1 &
+				width: 50%
+			.c2 &
+				width: perc(345px, 734px)
+			.c3 &
+				width: perc(218px, 734px)
+			.c4 &
+				width: 20%
+
+			+m(940)
+				.c3 &,
+				.c4 &
+					width: perc(345px, 734px)
+
+					&:nth-child(3),
+					&:nth-child(4)
+						display: none
+
+
+			&-img
+				width: 100%
+				+ratio(58%)
+				overflow: hidden
+
+				&-actual
+					// max-width: 100%
+					width: auto
+					height: 100%
+					+balign
+
+			&-title
+				margin: 10px 0
+				display: block
+				font-size: 15px
+				font-weight: 600
+				color: $black
+				transition: color 0.2s
+
+				&:hover
+					color: $primary
+
+			&-content
+				font-size: 13px
+				+hyphens(auto )

@@ -1,5 +1,7 @@
 <?php 
-
+  if ($page) {
+    drupal_add_js('/sites/all/themes/gv_sky/js/article.js');
+  }
 
   $class_thumb_presented = NULL;
   $return = FALSE;
@@ -78,8 +80,8 @@
 
       
     ?>
-
-  <div class="main-content"> 
+  <div class="article-page-wrapper">
+  <div class="article"> 
 <?php endif; ?>
 
  
@@ -130,7 +132,7 @@
             echo '<div class="blog-posts-item-wrap">';
           } ?>
 
-          <div class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item-meta' : 'latest-blog-posts-list-item-date') ?>">
+          <?php $submitted = '<div class="' . ( current_path() == 'blog' ? 'blog-posts-item-meta' : ( $page ? 'article-meta' : 'latest-blog-posts-list-item-date')) . '">'; ?>
             <?php 
             
               $created_str = date('F d, Y', $node->created);
@@ -165,32 +167,31 @@
                     $author_title = t('!author\'s profile', array('!author' => $author_name));
                   }
                   
-                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
-                                  'By' .
+                  $submitted .= '<div property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                                  // (!$extra_data['guest_author'] ? '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<span class="guest-author">' . $author_name . '</span>') .
+                                  '<div class="article-meta-category ' . $category_class . '" data-category="' . $category_class . '">' . $category_text . '</div>' .
+                                  ($node->type == 'article' ? '' : '<div class="article-meta-date">' . $created_str . '</div>') .
                           
-                                  (!$extra_data['guest_author'] ? '<a href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<span class="guest-author">' . $author_name . '</span>') .
-                          
-                                  ($node->type == 'article' ? '' : '<span class="delim">|</span><span class="nw">' . $created_str . '</span>') .
-                          
-                               '</span>';
+                               '</div></div>';
                   
                  
                 }
                 else {
-                  $submitted = '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
+                  $submitted .= '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   'By' .
                                   '<span class="username">' .
                                     'Guest' .
                                   '</span>' .
                                   ($node->type == 'article' ? '' : '<span class="delim">|</span><span class="nw">' . $created_str . '</span>') .
-                               '</span>';
+                               '</span></div>';
                   
                 }
                 
-                echo $submitted;
+                // echo $submitted;
               }
               else {
                   if ($view_mode == 'side_block_teaser') {
+                    echo $submitted;
                     echo date('F d\t\h, Y', $node->created);;
                   }
                   elseif ($paths_with_latest_article) {
@@ -203,6 +204,7 @@
                       echo 'By' , ': ' , $author_name;
                     }
                     else {
+                      echo $submitted;
                       echo '<div class="blog-posts-item-meta-author">' . $author_name . '</div>';
                       echo '<div class="blog-posts-item-meta-date">' . $created_str . '</div>';
                     }
@@ -210,12 +212,14 @@
               }
               
             ?>
+          <?php if (!$page): ?>
           </div>
+          <?php endif; ?>
 
           <?php print render($title_prefix); ?>
           
               <?php if ($page): ?>
-              <h1 
+              <h1 class="article-title"
               <?php elseif ($view_mode == 'side_block_teaser'): ?>
               <h4 class="latest-blog-posts-list-item-title"
               <?php else: ?>
@@ -250,17 +254,20 @@
                 </h2>
              <?php endif; ?> 
 
-          <?php print render($title_suffix); ?>  
+          <?php print render($title_suffix);
+          if ($page) {
+            echo $submitted;
+          }
+           ?>  
+
             
             
 
 
       <?php if (!$page): ?>
+      <div class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-content"<?php print $content_attributes; ?>>
       <?php endif; ?>
 
-
-
-      <div class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-content"<?php print $content_attributes; ?>>
         <?php
           // Hide comments, tags, and links now so that we can render them later.
           hide($content['comments']);
@@ -300,7 +307,7 @@
           
           if ($page) {
             // Top share post links.
-              echo gv_blocks_getSidebarShareStaticBlock($node, '<span>Share:</span>', 'top bottom');
+              echo gv_blocks_getSidebarShareStaticBlock($node);
           }
           else {
             
@@ -362,58 +369,26 @@
           
           echo render($content);
         ?>
-      </div>
+      <!-- </div> -->
       <?php echo ( current_path() == 'blog' ? $extra_data['read_more_html'] : ''); ?>
       <?php // echo print_r($extra_data) ?>
       </div> <!-- End of content wrap -->
 
-
-
-      <?php if ($page): ?>
-    
-                  <footer>
-                    
-                   
-                    
-                    <?php 
-                      $tags = NULL;
-                      foreach ($target_tags as $key => $value) {
-                        $tags .= ($tags ? '<div class="delim">|</div>' : '') . l($field_tags_current[$key]['#title'], 'taxonomy/term/' . $value['tid'], array('attributes' => array('rel' => 'nofollow')));
-                      }
-
-                      if ($tags) {
-                        echo '<div class="topics"><div class="title">TAGS:</div>' . $tags . '<div class="bottom-clear"></div></div>';
-                      }
-                      
-                    ?>
-
-
-                    <div class="share">
-
-                      
-                    <?php 
-                      echo gv_blocks_getSidebarShareStaticBlock($node, '', 'bottom');
-                    ?>  
-                    
-                    </div>
-                    
-                  </footer>
-    
-    
-      <?php endif; ?>
-     
 
   
 
 
 <?php if ($page): ?>
       
+
+      <aside class="sidebar" role="complementary">
       <?php 
-      {  
-        
         echo gv_blocks_getAboutTheAuthor($node->uid); 
-      }
-      
+        echo gv_blocks_getTop5Providers_article('bu'); 
+        echo '<div class="scroll-detector"></div>';
+      ?>
+      </aside>
+      <?php      
       
       // Warning! To work correctly, in node_view additionally added their css files, because they are mot pulled in where kust called here, in template file.
       if (!empty($extra_data['show_exit_intent_v2'])) {
@@ -423,8 +398,11 @@
         echo gv_blocks_get_exitIntent_v3();
       }
       
-
       ?>
+      <?php echo gv_blocks_getSidebarRelatedArticlesBlock(); ?>
+
+
+  </div> <!-- article-page-wrapper -->
       
   </div>  <!-- main-content -->
   

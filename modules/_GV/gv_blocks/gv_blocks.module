@@ -937,7 +937,9 @@ function gv_blocks_block_view($delta = '') {
     
     case 'top5prov_fromviews':
       $block['subject'] = '';
-      $block['content'] = ($_GET['q'] == 'blog' && isset($_GET['page'])) ? NULL : gv_blocks_render_block('views', 'providers-block_top_bu_small');
+      // $block['content'] = ($_GET['q'] == 'blog' && isset($_GET['page'])) ? NULL : gv_blocks_render_block('views', 'providers-block_top_bu_small');
+      // $block['content'] = ($_GET['q'] == 'blog' && isset($_GET['page'])) ? NULL : gv_blocks_render_block('views', 'providers-block_top_bu_small');
+      $block['content'] = gv_blocks_getTop5Providers_article();
       break;
     
     case 'top5prov_by_type':
@@ -1957,23 +1959,30 @@ function gv_blocks_getAboutTheAuthor($uid) {
     return NULL;
   }
   
-  return '<div id="about_author">
-              <div id="left">'
-              . theme('image_style', array( 'path' =>  @$user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo')))
+  $socialCount = 0;
+  (!empty($user->field_u_gplus_profile['und'][0]['value']) ? $socialCount++ : '');
+  (!empty($user->field_u_ln_profile['und'][0]['value']) ? $socialCount++ : '');
+  (!empty($user->field_u_tw_profile['und'][0]['value']) ? $socialCount++ : '');
+  (!empty($user->field_u_fb_profile['und'][0]['value']) ? $socialCount++ : '');
+
+
+  return '<div class="sidebar-author">
+              <div class="sidebar-author-img">'
+              . theme('image_style', array( 'path' =>  @$user->field_u_author_img['und'][0]['uri'], 'style_name' => 'author_avatar_article_circle', 'alt' => '', 'title' => '', 'attributes' => array('rel' => 'v:photo', 'class' => 'sidebar-author-img-actual')))
               
-            . '</div>
-              <div id="right">' .
-                '<div class="title">' . $user->realname . '</div>'
-                . (!empty($user->field_u_position['und'][0]['value']) ? '<div class="subtitle">' . $user->field_u_position['und'][0]['value'] . '</div>' : '')
-                . '<div class="bio">' . @$user->field_u_quick_bio['und'][0]['value'] . '.. ' . l('Read More', 'user/' . $uid) . '</div>'
-                
-                . '<div class="social">' .
-                      (!empty($user->field_u_gplus_profile['und'][0]['value']) ? '<a id="gplus" target="_blank" rel="author" href="' . (strpos($user->field_u_gplus_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_gplus_profile['und'][0]['value'] . '"></a>' : '') .
-                      (!empty($user->field_u_ln_profile['und'][0]['value']) ? '<a id="ln" target="_blank" href="' . (strpos($user->field_u_ln_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_ln_profile['und'][0]['value'] . '"></a>' : '') .
-                      (!empty($user->field_u_tw_profile['und'][0]['value']) ? '<a id="tw" target="_blank" href="' . (strpos($user->field_u_tw_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_tw_profile['und'][0]['value'] . '"></a>' : '') .
-                      (!empty($user->field_u_fb_profile['und'][0]['value']) ? '<a id="fb" target="_blank" href="' . (strpos($user->field_u_fb_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_fb_profile['und'][0]['value'] . '"></a>' : '') .
-                 '</div>    
-              </div>' .
+            . '</div>' .
+              '<div class="sidebar-author-name">' . $user->realname . '</div>'
+              . (!empty($user->field_u_position['und'][0]['value']) ? '<div class="sidebar-author-position">' . $user->field_u_position['und'][0]['value'] . '</div>' : '')
+            
+            . '<div class="sidebar-author-social social-' . $socialCount . '-items">' .
+                  (!empty($user->field_u_gplus_profile['und'][0]['value']) ? '<a class="sidebar-author-social-item sidebar-author-social-item_gplus" target="_blank" rel="author" href="' . (strpos($user->field_u_gplus_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_gplus_profile['und'][0]['value'] . '"></a>' : '') .
+                  (!empty($user->field_u_ln_profile['und'][0]['value']) ? '<a class="sidebar-author-social-item sidebar-author-social-item_ln" target="_blank" href="' . (strpos($user->field_u_ln_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_ln_profile['und'][0]['value'] . '"></a>' : '') .
+                  (!empty($user->field_u_tw_profile['und'][0]['value']) ? '<a class="sidebar-author-social-item sidebar-author-social-item_tw" target="_blank" href="' . (strpos($user->field_u_tw_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_tw_profile['und'][0]['value'] . '"></a>' : '') .
+                  (!empty($user->field_u_fb_profile['und'][0]['value']) ? '<a class="sidebar-author-social-item sidebar-author-social-item_fb" target="_blank" href="' . (strpos($user->field_u_fb_profile['und'][0]['value'], '://') ? '' : 'http://') . $user->field_u_fb_profile['und'][0]['value'] . '"></a>' : '') .
+             '</div>
+
+              <div class="sidebar-author-more">' . l('All Posts', 'user/' . $uid, array('attributes' => array('class' => 'sidebar-author-more-text'))) . '</div>' .
+
           '</div>';
 }
 
@@ -2327,25 +2336,22 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   $count = NULL;
   foreach ($node->related_articles as $related_nid => $related_article) {
     ++$count;
-    $ui_tabs_nav .= '<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-' . $related_nid . '"><a href="#fragment-' . $related_nid . '" title="' . $related_article->title . '"></a></li>';
-
-    $fragments .= '<div id="fragment-' . $related_nid . '" class="ui-tabs-panel' . (!$fragments ? ' first': '') . '">';
+    $fragments .= '<li class="related-posts-list-item"><article>';
 
     if (!empty($related_article->src_themed_related_sideblock)) {
-      $fragments .='<a class="thumb" href="' . url('node/' . $related_nid) . '">'
-          //. ($related_article->src_themed_related_sideblock ? '<img src="' . $related_article->src_themed_related_sideblock . '" alt="' . $related_article->title . '" title="' . $related_article->title . '" />' : '')
-          . ($related_article->src_themed_related_sideblock_beautify ? '<img src="' . $related_article->src_themed_related_sideblock_beautify . '" alt="' . $related_article->title . '" title="' . $related_article->title . '" />' : '')
+      $fragments .='<a class="related-posts-list-item-img" href="' . url('node/' . $related_nid) . '">'
+          . ($related_article->src_themed_related_sideblock_beautify ? '<img src="' . $related_article->src_themed_related_sideblock_beautify . '" alt="' . $related_article->title . '" title="' . $related_article->title . '" class="related-posts-list-item-img-actual" />' : '')
       . '</a>';
     }
-    $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('title')))) .
+    $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('related-posts-list-item-title')))) .
 
-      '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div>
-      <div class="teaser">' . (!isset($related_article->teaser) ? '' : $related_article->teaser) . ' ' . l('Read more', 'node/' . $related_nid, array('attributes' => array('class' => array('more')))) . '</div>
+      // '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div>' .
+      '<div class="related-posts-list-item-content">' . (!isset($related_article->teaser) ? '' : $related_article->teaser). '</div>
 
-    </div>';
+    </article></li>';
   }
 
-  return '<div class="related-block" id="rotator">' . $fragments . '<ul class="ui-tabs-nav c' . $count . '">' . $ui_tabs_nav . '</ul></div>';
+  return '<div class="related-posts"><div class="related-posts-title">Related Posts</div><ul class="related-posts-list c' . $count . '">' . $fragments . '</ul></div>';
 }
 
 
@@ -2380,14 +2386,15 @@ function gv_blocks_getSidebarFollowLinksBlock() {
 /**
  * Block with sidebar share links for a current post.
  */
-function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL, $class = NULL) {
+function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
   
   static $out;
   
   if (!$out) {
     
   
-  
+      $block_title = '<div class="social-share-title">Share</div>';
+
       if (!$node) {
         if (strpos($_GET['q'], 'node/') === FALSE) {
           return NULL;
@@ -2401,20 +2408,34 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL, $block_title = NULL,
 
       $link_open = 'href="javascript:void(window.open(' . "'";
       $links = array(
-          'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
           'Facebook' => array('social_url' => 'http://www.facebook.com/sharer.php', 'query' => array('u' => $post_url), 'link_close' => "','ShareThis','toolbar=0,status=0,width=626,height=436'))"),
+          'Twitter' => array('social_url' => 'http://twitter.com/share', 'query' => array('text' => $post_title, 'via' => 'getvoipreviews')),
           'GooglePlus' => array('social_url' => 'https://plus.google.com/share', 'query' => array('url' => $post_url)),
           'LinkedIn' => array('social_url' => 'http://www.linkedin.com/shareArticle', 'query' => array('title' => $post_title, 'mini' => 'true', 'url' => $post_url, 'summary' => $summary, 'source' => $source)),
 
       );
 
-      foreach ($links as $provider => $link) {
-        $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
-      }
+      // foreach ($links as $provider => $link) {
+      //   $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
+      // }
+      $out .= '<a href="http://www.facebook.com/sharer.php?u=' . $post_url . '" rel="nofollow" class="social-share-item facebook"><span class="social-share-item-text">Facebook</span></a>';
+      $out .= '<a href="http://twitter.com/share?text='. $post_title.'&via=getvoipreviews" rel="nofollow" class="social-share-item twitter"><span class="social-share-item-text">Twitter</span></a>';
+      $out .= '<a href="https://plus.google.com/share?url=' . $post_url . '" rel="nofollow" class="social-share-item gplus"><span class="social-share-item-text">Google Plus</span></a>';
+      $out .= '<span class="social-share-item expand"></span>';
+      
+      
+
+      $out .= '<span class="social-share-items-hidden"><span class="social-share-items-hidden-wrap">';
+      
+      $out .= '<a href="mailto:?subject=' . $post_title . '?body=Check Out GetVoIP\'s article:%3Ca&20href=%22' . $post_url . '%22%3E' . $post_title . '%3C/a%3E" rel="nofollow" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
+      $out .= '<a href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '&title=' . $post_title . '&summary=' . $summary . '" rel="nofollow" class="social-share-item linkedin"><span class="social-share-item-text">Linkedin</span></a>';
+      $out .= '<a href="http://www.stumbleupon.com/submit?url=' . $post_url . '&title=' . $post_title . '" rel="nofollow" class="social-share-item stumbleupon"><span class="social-share-item-text">Stumbleupon</span></a>';
+      
+      $out .= '</span></span>';
 
   }
   
-  return '<div class="share-static' . ($class ? ' ' . $class : '') . '">' . $block_title . $out . '</div>';
+  return '<div class="social-share">' . $block_title . $out . '</div>';
 }
 
 
@@ -2464,6 +2485,205 @@ function gv_blocks_reviewsCounter() {
     $counter .= '<span>' . $char . '</span>';
   }
   return '<div class="r-counter">' . $counter . '</div><div class="title">Real user reviews</div>';
+}
+
+
+/**
+ * Returns block with Top 5 Providers block by service type/path.
+ */
+function gv_blocks_getTop5Providers_article($service_type = NULL) {
+  
+  
+  if (!$service_type) {
+  
+    $map_path_to_title = array(
+      '/business' => 'Business VoIP', 
+      '/ppc/business-voip' => 'Business VoIP', 
+      '/residential' => 'Residential VoIP',
+      //'/business-voip-features' => 'Business VoIP Features',
+      '/sip-trunking' => 'SIP Trunking',
+      '/canada' => 'Canada VoIP',
+      '/fax' => 'Internet Fax',
+      '/hosted-pbx' => 'Hosted PBX',
+      '/web-conferencing' => 'Web Conferencing',
+       //'/small-business-voip' => 'Small Business VoIP',
+      '/cloud-backup' => 'Cloud Backup',
+      '/cloud-contact-center' => 'Call Center Software',
+    );
+    
+    $map_path_to_type = array(
+      //'/business' => 'business',  
+      '/business' => 'bu', 
+      '/ppc/business-voip' => 'bu', 
+      //'/residential' => 'residential',
+      '/residential' => 're',
+      //'/business-voip-features' => 'Business VoIP Features',
+      '/sip-trunking' => 'sip',
+      '/canada' => 'ca',
+      '/fax' => 'ifa',
+      '/hosted-pbx' => 'pbx',
+      '/web-conferencing' => 'wc',
+      '/crm-software' => 'crm',
+      //'/small-business-voip' => 'smbv',
+      '/cloud-backup' => 'cb',
+      '/cloud-contact-center' => 'cc',// 'page-compare-cc-voip-providers',
+    );
+    
+    if(!$service_type = @$map_path_to_type[$_SERVER['REDIRECT_URL']]) {
+      return NULL;
+    }
+
+  }
+  
+  //$current_theme = $GLOBALS['theme'];
+  $cid = 'gv_blocks_getTop5Providers_data_' . $service_type;
+  $cache = cache_get($cid, 'cache');
+  
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    return $cache->data;
+  }
+  
+  $services_data = array (
+    //'business' => array (
+    'bu' => array (
+      'rating_table' => 'field_data_field_p_erating',
+      'rating_field' => 'field_p_erating_value',
+    ),
+    //'residential' => array (
+    're' => array (
+      'rating_table' => 'field_data_field_p_erating_residential',
+      'rating_field' => 'field_p_erating_residential_value',
+    ),
+    'pbx' => array (
+      'rating_table' => 'field_data_field_p_erating_pbx',
+      'rating_field' => 'field_p_erating_pbx_value',
+    ),
+    'sip' => array (
+      'rating_table' => 'field_data_field_p_erating_sip',
+      'rating_field' => 'field_p_erating_sip_value',
+    ),
+    'ifa' => array (
+      'rating_table' => 'field_data_field_p_erating_ifa',
+      'rating_field' => 'field_p_erating_ifa_value',
+    ),
+    'wc' => array (
+      'rating_table' => 'field_data_field_p_erating_wc',
+      'rating_field' => 'field_p_erating_wc_value',
+    ),
+    'crm' => array (
+      'rating_table' => 'field_data_field_p_erating_crm',
+      'rating_field' => 'field_p_erating_crm_value',
+    ),
+    'ca' => array (
+      'rating_table' => 'field_data_field_p_erating_bu_ca',
+      'rating_field' => 'field_p_erating_bu_ca_value',
+    ),
+    'cb' => array (
+      'rating_table' => 'field_data_field_p_erating_cb',
+      'rating_field' => 'field_p_erating_cb_value',
+    ),
+    'cc' => array (
+      'rating_table' => 'field_data_field_p_erating_cc',
+      'rating_field' => 'field_p_erating_cc_value',
+    ),
+  );
+  
+   
+  
+  
+  $query = db_select($services_data[$service_type]['rating_table'], 'r');
+  $query->addField('r', $services_data[$service_type]['rating_field'], 'erating');
+  $query->condition('r.bundle', 'provider');
+  
+
+    {
+    $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
+  }
+  
+  
+  $query->fields('pn', array('field_p_name_value', 'entity_id'));
+  
+
+  $query->orderBy($services_data[$service_type]['rating_field']);
+  $query->range(0, 5);
+
+  
+  
+  $providers = $query->execute()->fetchAllAssoc('entity_id');
+  
+  
+  $all_data_quick = gv_misc_getProvidersDataQuick();
+  
+  $out = '<div class="sidebar-top-providers">
+  <h3 class="sidebar-top-providers-heading">
+  <span class="sidebar-top-providers-heading-text">Top 5 Providers</span></h3>' .
+  '<ul class="sidebar-top-providers-list">';
+  
+  $zebra = 'even';
+  $count = NULL;
+  
+  //dpm($_SERVER['REDIRECT_URL']);
+  
+  foreach ($providers as $nid => $provider) {
+      
+      if ($count == 5) {
+        break;
+      }
+
+      ////$zebra = ($zebra == 'odd') ? 'even' : 'odd';
+    
+      $criteria = array(
+        'entity_type' => 'node',
+        'entity_id' => $nid,
+        'function' => 'average',
+      );
+      $votes = votingapi_select_results($criteria);
+      $stars = NULL;
+      foreach ($votes as $vote) {
+        if ($vote['tag'] == 'overall' && $vote['value']) {
+          $stars = theme('gv_misc_fivestar_dk', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'sidebar-top-providers-list-item-details-text-stars'));
+        }
+      }
+      
+      if ($_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
+        $reviews_link_attributes = array('attributes' => array('class' => array('review-link'), 'target' => '_blank'));
+      }
+      else {
+        $reviews_link_attributes = array('attributes' => array('class' => array('review-link')));
+      }
+      
+      $out .= '          
+          <li class="sidebar-top-providers-list-item">
+            <div class="sidebar-top-providers-list-item-details">
+              <div class="sidebar-top-providers-list-item-details-rating">' . ++$count . '</div> 
+              <div class="sidebar-top-providers-list-item-details-text">
+                <div class="sidebar-top-providers-list-item-details-text-provider-name">' . gv_misc_getTrackingUrl($provider->field_p_name_value, NULL, $nid, NULL, 'sidebar-top-providers-list-item-details-text-provider-name-link', NULL, $all_data_quick[$nid], $service_type) . '</div>
+                <div class="sidebar-top-providers-list-item-details-text-stars">
+                  ' . $stars . '
+                  <a href="' . url('node/' . $nid, $reviews_link_attributes) . '" class="sidebar-top-providers-list-item-details-text-stars-read">Read Reviews</a>
+                </div> 
+              </div>
+            </div>
+            
+            <div class="sidebar-top-providers-list-item-cta">'
+                 . gv_misc_getTrackingUrl('Visit', NULL, $nid, NULL, 'sidebar-top-providers-list-item-cta-text', NULL, $all_data_quick[$nid], $service_type)
+              . '
+            </div>
+          </li>
+          ';
+
+  }
+  
+  
+  $out .= '
+    </ul>
+    </div>';
+  
+  
+  cache_set($cid, $out, 'cache', strtotime('+31 day'));
+          
+      
+  return $out;//$map_path_to_title[$_SERVER['REDIRECT_URL']];
 }
 
 
@@ -2574,13 +2794,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   $query->addField('r', $services_data[$service_type]['rating_field'], 'erating');
   $query->condition('r.bundle', 'provider');
   
-//  global $user;
-//  if ($user->uid == 1) {
-//    $query->leftJoin('field_data_field_p_erating_re_ca', 'r2', "r2.bundle = 'provider'");
-//    $query->addField('r2', 'field_p_erating_re_ca_value', 'erating');
-//    $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id OR pn.entity_id = r2.entity_id");
-//  }
-//  else 
+
     {
     $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
   }
@@ -2588,10 +2802,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $query->fields('pn', array('field_p_name_value', 'entity_id'));
   
-  
-  //$query->leftJoin('field_data_field_p_data', 'pd', "pd.entity_id = r.entity_id");
-  //$query->fields('pd', array('field_p_data_value', 'entity_id'));
-  
+
   $query->orderBy($services_data[$service_type]['rating_field']);
   $query->range(0, 5);
 
@@ -2599,69 +2810,12 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $providers = $query->execute()->fetchAllAssoc('entity_id');
   
-  //dpm($providers);
-  
-  
-  
-  
-  
-  
-  // Re_ca for the canada page
-  /*
-  if ($service_type == 'ca') {
-    $query = db_select('field_data_field_p_erating_re_ca', 'r');
-    $query->addField('r', 'field_p_erating_re_ca_value', 'erating');
-    $query->condition('r.bundle', 'provider');
-
-    $query->leftJoin('field_data_field_p_name', 'pn', "pn.entity_id = r.entity_id");
-
-    $query->fields('pn', array('field_p_name_value', 'entity_id'));
-
-    $query->orderBy('field_p_erating_re_ca_value');
-    $query->range(0, 5);
-
-    $providers2 = $query->execute()->fetchAllAssoc('entity_id');
-
-    //dpm($providers2);
-    
-    foreach ($providers2 as $nid2 => $provider2) {
-      if (isset($providers[$nid2])) {
-        if ($providers[$nid2]->erating > $providers2[$nid2]->erating) {
-          unset($providers2[$nid2]);
-        }
-        else {
-          unset($providers[$nid2]);
-        }
-      }
-    }
-    
-    $providers += $providers2;
-    
-    uasort($providers, 'gv_misc_sortArrayProvidersByErating');
-    
-    //dpm($providers);
-  } // End of if ($service_type == 'ca' && $user->uid == 1) {
-  */
-  
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
   $out = '<aside class="top-providers" role="complementary">
   <h3 class="top-providers-heading">
   <span class="top-providers-heading-text">Top 5 Providers</span></h3>' .
-  /*        
-  '<div class="contextual-links-wrapper contextual-links-processed">
-    <a class="contextual-links-trigger" href="#">Configure</a>
-    <ul class="contextual-links">
-      <li class="views-ui-edit first">
-        <a href="/admin/structure/views/view/providers/edit/block_top_bu_small?destination=blog">Edit view</a>
-      </li>
-      <li class="block-configure last">
-        <a href="/admin/structure/block/manage/views/providers-block_top_bu_small/configure?destination=blog">Configure block</a>
-      </li>
-    </ul>
-  </div>' .
-   */       
   '<ul class="top-providers-list">';
   
   $zebra = 'even';

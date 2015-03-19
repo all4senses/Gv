@@ -25,6 +25,9 @@
 /* ==========================================================================
    Post item Markup Editing
    ========================================================================== */
+	
+	// Initial Category set
+   	var $cat = 'all';
 
 	// First post markup editing
 		var $firstPost = $$('.blog-posts-item').first();
@@ -53,7 +56,7 @@
 		fixPostMarkup($allPosts);
 
 	// Add blank gap items to compensate for the missing space on rows that have less than 3 items.
-		var $blankGap = '<div class="blog-posts-gap"></div><div class="blog-posts-gap"></div>'
+		var $blankGap = '<div class="blog-posts-gap"></div><div class="blog-posts-gap"></div>';
 		$$($blankGap).appendTo('.blog-posts');
 
 
@@ -118,7 +121,7 @@
    Apply Category Filters to post items
    ========================================================================== */
 
-   filterApplication($$('.blog-posts-item'));
+   filterApplication($$('.blog-posts-item'), true);
 
 
 
@@ -205,8 +208,7 @@ function fixPostMarkup($subject) {
 
 
 // Filter Functiong
-$cat = 'all';
-function filterApplication($subject, $category = true) {
+function filterApplication($subject, $category) {
 	
 	$$('.cat-filter-list-item').click(function(){
 		

@@ -1,0 +1,129 @@
+.article-page-wrapper
+	width: 100%
+	max-width: 1066px
+	+center
+	+clearfix
+
+.article 
+	float: right
+	width: perc(820px, 1066px)
+
+	+m(1100)
+		float: none
+		width: 100%
+		max-width: 820px
+		+center
+
+	p
+		margin-bottom: 15px
+
+	&-meta
+		padding-bottom: 34px
+		+clearfix
+
+		&-category
+			float: left
+			padding-left: 18px
+			margin-right: 16px
+			padding: 5px 7px 3px
+			border-radius: 3px
+			font-size: 11px
+			font-weight: 700
+			color: white
+			line-height: 19px
+			line-height: 1
+			letter-spacing: .9px
+			text-transform: uppercase
+			z-index: 5
+			+user-select(none)
+
+			&.voip
+				background-color: $voip
+
+			&.cloud
+				background-color: $cloud
+
+			&.business
+				background-color: $business
+
+
+		&-date
+			position: relative
+			float: left
+			margin-top: 1px
+			padding-left: 18px
+			font-size: 12px
+			line-height: 18px
+			font-weight: 600
+			color: $grey-light
+
+			&:before
+				content: 'x'
+				position: absolute
+				top: 1px
+				left: 0
+				font-family: gvcons
+				font-weight: 400
+				font-size: 14px
+				line-height: 1
+
+
+	&-title
+		font-size: 36px
+		font-weight: 600
+		margin-top: -4px
+		margin-bottom: 8px
+		color: $black
+
+		+m(540)
+			font-size: 30px
+			+hyphens(auto)
+
+
+
+
+.sidebar
+	width: perc(197px, 1066px)
+
+	+m(1100)
+		width: 197px
+		float: right
+
+	+m(736)
+		float: none
+		width: 100%
+		max-width: 250px
+		+center
+
+
+.node-type-blog-post #main
+	+clearfix
+
+
+.disqus-wrap
+	width: 100%
+	max-width: 1066px
+	+center(45px)
+	+clearfix
+
+.node-type-blog-post #disqus_thread
+	width: perc(820px, 1066px)
+	margin: 0
+	padding: 0
+	float: right
+
+	+m(1110)
+		width: 100%
+		max-width: 820px
+		+center
+		float: none
+		padding: 20px
+
+
+.node-type-blog-post
+	.field-name-body
+		> .field-items > .field-item
+			> p:first-child > img
+				width: 100% !important
+				height: auto !important
+				max-width: 700px
