@@ -32,8 +32,8 @@
             //if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
             if ($("#colorbox").css("display")=="block" && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
-              //event.stopPropagation();
-              //event.stopImmediatePropagation();
+              event.stopPropagation();
+              event.stopImmediatePropagation();
               //console.log("Prevented Tab CC!");
               return false;
             }
