@@ -1,19 +1,77 @@
 .blog-posts
 	margin-top: 50px
-	+clearfix
+	text-align: justify
+	text-justify: distribute-all-lines
+	font-size: 0px
+	vertical-align: top
+
+	&:after
+		content: ''
+		display: inline-block
+		width: 100%
 
 	article
 		height: 100%
 
 
+
+
+	// Universal Screen Size
+	&-item
+		position: relative
+		display: inline-block
+		text-align: left
+		vertical-align: top
+		margin-top: perc(30px, 1050px)
+		
+		&-category
+			position: absolute
+			left: 0
+			top: 0
+			padding: 5px 7px 3px
+			border-radius: 0 0 3px 0
+			font-size: 11px
+			font-weight: 700
+			color: white
+			line-height: 19px
+			line-height: 1
+			letter-spacing: .9px
+			text-transform: uppercase
+			z-index: 5
+			+user-select(none)
+
+			&.voip
+				background-color: $voip
+
+			&.cloud
+				background-color: $cloud
+
+			&.business
+				background-color: $business
+
+		&-img
+			cursor: pointer
+
+
+
+	// Gap fix for proper inline-block justficiation on incomplete rows
+	&-gap
+		width: perc(355px, 1130px)
+		display: inline-block
+
+
+
+
+
 	// Desktop
 	+m(941, min)
+
 		// First Post
 		&-item:nth-child(1)
-			position: relative
-			float: left
 			width: 100%
 			height: auto
+			margin: 0
+
 			// box-shadow: 0 0 3.8px .3px rgba(0, 0, 0, 0.2)
 			border: 1px solid $divider
 			background-color: white
@@ -138,21 +196,12 @@
 
 		// Rest of the posts
 		&-item:nth-child(n+2)
-			+blog-box($width:perc(355px, 1130px), $height:398px, $item-style: true, $child-style: false)
-			margin-right: perc(30px, 1050px)
-			margin-top: perc(30px, 1050px)
-
-			&:nth-child(3n+1)
-				margin-right: 0
-
-
+			+content-box($width:perc(355px, 1130px), $height:398px, $item-style: true, $child-style: false, $float: false)
+			// margin-right: perc(30px, 1050px)
+			// margin-top: perc(30px, 1050px)
 
 		&-item:nth-child(n+2) &-item
-			+blog-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true, $item-style: false)
-
-			// +m(1024)
-			// 	&-img
-			// 		height: perc(185px, 399px)
+			+content-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true, $item-style: false)
 
 			&-meta-author
 				+m(980)
@@ -163,19 +212,17 @@
 
 
 
-	// Mobile
+
+
+
+
+
+	// Tablet Landscape-Semi
 	+m(940)
 
 		&-item
-			+blog-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true)
-			margin-right: perc(30px, 1050px)
-			margin-top: perc(30px, 1050px)
+			+content-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true, $float:none)
 
-			@media screen and (min-width:769px)
-
-				&:nth-child(3n)
-					margin-right: 0
-		
 
 			&-meta-author
 				display: none
@@ -192,6 +239,7 @@
 				display: none
 
 
+	// Tablet Portrait
 	+m(768)
 
 		&-item
@@ -199,15 +247,16 @@
 
 			@media screen and (min-width:581px)
 
-				&:nth-child(2n)
+				&.marginless
 					margin-right: 0
 
+
+	// Mobile
 	+m(580)
+		text-align: center
 
 		&-item
-			float: none
 			width: 100%
-			+center
 			margin-top: 25px
 			max-width: 355px
 		

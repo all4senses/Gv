@@ -75,6 +75,7 @@
     <?php 
     
       $url = 'http://getvoip.com'. url('node/' . $node->nid);
+
       
     ?>
 
@@ -93,8 +94,38 @@
           }
         ?>
       <?php endif; ?>
+      <?php 
+        // $category = $node->field_blog_category['und'][0]['value'];
+
+        if (isset($node->field_blog_category[LANGUAGE_NONE])) {
+          $category = $node->field_blog_category[LANGUAGE_NONE][0]['value'];
+        } else {
+          $category = '';
+        }
+
+        if ($category == 'VoIP & Unified Communications') {
+          $category_text = 'VoIP & UC';
+          $category_class = 'voip';
+        }
+        if ($category == 'Cloud Computing & Web Services') {
+          $category_text = 'Cloud Computing';
+          $category_class = 'cloud';
+        }
+        if ($category == 'Business Insights & Tips') {
+          $category_text = 'Business Insights';
+          $category_class = 'business';
+        }
+        if ($category == NULL) {
+          $category_text = '';
+          $category_class = 'hide';
+        }
+
+      ?>
 
           <?php if (current_path() == 'blog') {     // Blog Page Only
+            // if ($view_mode != 'side_block_teaser') {
+              echo '<div class="blog-posts-item-category ' . $category_class . '" data-category="' . $category_class . '">' . $category_text . '</div>';
+            // }
             echo '<div class="blog-posts-item-img">' . $extra_data['teaser_main_image_beautify'] . '</div>';
             echo '<div class="blog-posts-item-wrap">';
           } ?>
@@ -333,6 +364,7 @@
         ?>
       </div>
       <?php echo ( current_path() == 'blog' ? $extra_data['read_more_html'] : ''); ?>
+      <?php // echo print_r($extra_data) ?>
       </div> <!-- End of content wrap -->
 
 

@@ -473,9 +473,9 @@
 
 
 
-=blog-box($width:perc(303px, 640px), $height:368px, $title: 18px, $img-margin: 20px, $img-height: false, $author: false, $item-style: true, $child-style: true)
+=content-box($width:perc(303px, 640px), $height:368px, $title: 18px, $img-margin: 20px, $img-height: false, $author: false, $item-style: true, $child-style: true, $float: true)
+		
 	@if $item-style == true
-		float: left
 		width: $width
 		height: $height
 		// box-shadow: 0 0 3.8px .3px rgba(0, 0, 0, 0.2)
@@ -484,6 +484,9 @@
 		border-radius: 3px
 		overflow: hidden
 		box-sizing: border-box
+
+		@if $float == true
+			float: left
 
 	
 	@if $child-style == true
