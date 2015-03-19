@@ -44,7 +44,7 @@
             //if (cb_opened && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
             if ($("#colorbox").css("display")=="block" && (  !jQuery(event.target).is("#colorbox *") || event.target.id == "phones_amt-button" || event.target.id == "phone")  ) {
               event.preventDefault();
-              console.log("Prevented Tab Business!");
+              //console.log("Prevented Tab Business!");
             }
             
           } // End of if (event.keyCode == 9) {
