@@ -1,91 +1,67 @@
-<div id="bshadow">
+  <header id="header" role="banner">
+    <nav class="navigation" role="navigation">
+      <div class="navigation-wrap">
 
-
-  
-  <header id="header" role="banner" class="clearfix">
-
-    <nav id="navigation" role="navigation" class="clearfix">
-      <div id="header-menu-back"></div>
-      
-      <div id="logo-block">
-        <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" id="logo">
-          <?php
-              echo '<img src="/images/theme/get-voip-logo5.png" alt="GetVoIP" title="GetVoIP" />';
-          ?>
-        </a>
-        <div class="descr">
-          
+        <div class="navigation-logo">
+          <a href="<?php print $front_page; ?>" title="<?php print 'GetVoIP Home'; ?>" class="navigation-logo-link">
+            <?php
+                echo '<img src="/sites/all/themes/gv_sky/images/getvoip-logo.png" width="206" height="53" class="navigation-logo-link-img" alt="GetVoIP" title="GetVoIP" />';
+            ?>
+          </a>
+          <div class="navigation-logo-slogan">Cloud Communication Advisor</div>
+          <div class="clearfix"></div>
         </div>
+        
+        <?php echo render($page['header']); ?>
+
+        <div class="clearfix"></div>
       </div>
-      
-      <?php 
-          echo  render($page['header']); 
-      ?>
-    </nav> <!-- /#navigation -->
+    </nav> 
+</header> <!-- /#header -->
 
-  </header> <!-- /#header -->
 
-  
-  <?php  if ($page['highlighted']): ?>
-    <section id="highlighted" class="clearfix">
-      <?php print render($page['highlighted']); ?>
-    </section>
-  <?php endif;  ?>
-  
-  <?php  if ($page['content_wide']): ?>
-    <section id="content-wide" class="clearfix">
-      <?php print render($page['content_wide']); ?>
-    </section>
-  <?php endif;  ?>
-  
-  <?php  if ($page['below_content_wide']): ?>
-    <section id="below-content-wide" class="clearfix">
-      <?php print render($page['below_content_wide']); ?>
-    </section>
-  <?php endif;  ?>
-  
-  
-  <div id="all-content" class="clearfix">
-      
-      
+<?php  if ($page['highlighted']): ?>
+  <section id="highlighted" class="clearfix">
+    <?php print render($page['highlighted']); ?>
+  </section>
+<?php endif;  ?>
+
+<?php  if ($page['content_wide']): ?>
+  <section id="content-wide" class="clearfix">
+    <?php print render($page['content_wide']); ?>
+  </section>
+<?php endif;  ?>
+
+<?php  if ($page['below_content_wide']): ?>
+  <section id="below-content-wide" class="clearfix">
+    <?php print render($page['below_content_wide']); ?>
+  </section>
+<?php endif;  ?>
+
+
+<main role="main" <?php if (!$is_front) {echo 'id="main"';} ?> >
+  <div class="main-wrap">
+
+        <?php  
+          print $messages; 
+        ?>        
+        
+        <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
+        <?php print render($page['help']); ?>
+        <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+        
+        <?php print render($page['above_content']); ?>
+        <?php print render($page['content']); ?>
+        
+
     
-      <section id="main" role="main" class="clearfix no-sidebars">
-        <div id="fix-resp">
-          <?php 
-          ?>
-          <div id="breadcrumbs-dummy"></div>
-        
-          <?php 
-          
-            print $messages; 
- 
-            
-          ?>
-          <a id="main-content"></a>
-          
-          
-          <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
-          <?php print render($page['help']); ?>
-          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-          
-          <?php print render($page['above_content']); ?>
-          <?php print render($page['content']); ?>
-          
-        
-          </div> <!-- /#fix-resp -->
-      </section> <!-- /#main -->
+    <div id="above_footer">
+        <?php echo render($page['above_footer']); ?>
+    </div>
+  </div>
+</main> <!-- /#all-content -->
 
-     
-        
-      <div class="bottom-clear"></div>
-      
-      <div id="above_footer">
-          <?php echo render($page['above_footer']); ?>
-      </div>
 
-  </div> <!-- /#all-content -->
-
-</div> <!-- <div id="bshadow"> -->
 
 
   <?php
