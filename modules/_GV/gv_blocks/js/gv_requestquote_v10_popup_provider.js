@@ -268,6 +268,7 @@
               company_value = $('.popup-request.quote .company input[id="company"]').val();
               console.log('company title = ' + company_title);
               console.log('company value = ' + company_value);
+              company_errors = false;
               if(company_value == company_title || company_value == '') {
                 //console.log('company Not filled');
                 company_errors = true;
@@ -302,9 +303,11 @@
               }
               
               if (!company_errors && !step1_amt_errors) {
+                console.log('!company_errors && !step1_amt_errors');
                 return true;
               }
               else {
+                console.log(' NO !company_errors && !step1_amt_errors');
                 return false;
               }
 
