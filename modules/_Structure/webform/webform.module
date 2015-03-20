@@ -12,7 +12,7 @@
 
 /**
  * Implements hook_help().
- */
+ */ 
 function webform_help($section = 'admin/help#webform', $arg = NULL) {
   $output = '';
   switch ($section) {
@@ -1876,7 +1876,7 @@ function webform_client_form($form, &$form_state, $node, $submission, $is_draft 
   $form['#theme'] = array('webform_form_' . $node->nid, 'webform_form');
 
   // Add a css class for all client forms.
-  $form['#attributes'] = array('class' => array('webform-client-form'));
+  $form['#attributes'] = array('class' => array('form'));
 
   // Set the encoding type (necessary for file uploads).
   $form['#attributes']['enctype'] = 'multipart/form-data';
@@ -1992,7 +1992,7 @@ function webform_client_form($form, &$form_state, $node, $submission, $is_draft 
       if ($page_num == $page_count) {
         $form['actions']['submit'] = array(
           '#type' => 'submit',
-          '#value' => empty($node->webform['submit_text']) ? t('Submit') : t($node->webform['submit_text']),
+          '#value' => empty($node->webform['submit_text']) ? t('Submit Message') : t($node->webform['submit_text']),
           '#weight' => 10,
         );
       }
@@ -2008,7 +2008,7 @@ function webform_client_form($form, &$form_state, $node, $submission, $is_draft 
       // Add the submit button.
       $form['actions']['submit'] = array(
         '#type' => 'submit',
-        '#value' => empty($node->webform['submit_text']) ? t('Submit') : t($node->webform['submit_text']),
+        '#value' => empty($node->webform['submit_text']) ? t('Submit Message') : t($node->webform['submit_text']),
         '#weight' => 10,
       );
     }
@@ -2146,7 +2146,7 @@ function _webform_client_form_add_component($node, $component, $component_value,
         $display_element['#parents'] = $parents;
       }
       if (!isset($display_element['#id'])) {
-        $display_element['#id'] = drupal_clean_css_identifier('edit-' . implode('-', $display_element['#parents']));
+        $display_element['#id'] = drupal_clean_css_identifier('form-field-input-' . implode('-', $display_element['#parents']));
       }
 
       // Add the element into the proper parent in the display.
@@ -2701,13 +2701,13 @@ function theme_webform_element($variables) {
 
   $wrapper_classes = array(
    'form-item',
-   'webform-component',
-   'webform-component-' . $type,
+   'form-field',
+   'form-field-' . $type,
   );
   if (isset($element['#title_display']) && strcmp($element['#title_display'], 'inline') === 0) {
-    $wrapper_classes[] = 'webform-container-inline';
+    $wrapper_classes[] = 'form-container-inline';
   }
-  $output = '<div class="' . implode(' ', $wrapper_classes) . '" id="webform-component-' . $parents . '">' . "\n";
+  $output = '<div class="' . implode(' ', $wrapper_classes) . '" id="form-field-' . $parents . '">' . "\n";
 
   // If #title is not set, we don't display any label or required marker.
   if (!isset($element['#title'])) {
@@ -2956,7 +2956,7 @@ function _webform_filter_values($string, $node = NULL, $submission = NULL, $emai
         $display_element['#parents'] = array_merge(array('submitted'), $parents);
       }
       if (empty($display_element['#id'])) {
-        $display_element['#id'] = drupal_html_id('edit-' . implode('-', $display_element['#parents']));
+        $display_element['#id'] = drupal_html_id('form-field-' . implode('-', $display_element['#parents']));
       }
       $replacements['email'][$format]['%email[' . $form_key . ']'] = render($display_element);
       $display_element['#theme_wrappers'] = array(); // Remove label and wrappers.
