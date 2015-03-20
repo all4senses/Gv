@@ -6650,6 +6650,33 @@ h1.preface {
         background-color: #34bbd1; }
       .article-meta-category.business {
         background-color: #d39f01; }
+    .article-meta-author {
+      position: relative;
+      float: left;
+      margin-top: 1px;
+      padding-left: 18px;
+      margin-right: 16px;
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 600;
+      color: #b2b2b2; }
+      .article-meta-author-link {
+        color: #b2b2b2; }
+      .article-meta-author:before {
+        content: "K";
+        position: absolute;
+        top: 1px;
+        left: 0;
+        font-family: gvcons;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1; }
+      @media screen and (min-width: 737px) {
+        .article-meta-author {
+          display: none; } }
+      @media screen and (max-width: 736px) {
+        .article-meta-author {
+          display: block; } }
     .article-meta-date {
       position: relative;
       float: left;
@@ -6690,10 +6717,7 @@ h1.preface {
       float: right; } }
   @media screen and (max-width: 736px) {
     .sidebar {
-      float: none;
-      width: 100%;
-      max-width: 250px;
-      margin: 0 auto; } }
+      display: none; } }
 
 .node-type-blog-post #main:before, .node-type-blog-post #main:after {
   content: "";
@@ -6719,7 +6743,6 @@ h1.preface {
   @media screen and (max-width: 1110px) {
     .node-type-blog-post #disqus_thread {
       width: 100%;
-      max-width: 820px;
       margin: 0 auto;
       float: none;
       padding: 20px; } }
@@ -6852,41 +6875,22 @@ h1.preface {
   position: fixed;
   z-index: 1000;
   background-color: white;
-  bottom: -1px;
-  left: 5%;
-  padding: 10px 0;
+  right: 0;
+  top: 45%;
+  padding: 0 10px;
   border: 1px solid #d1d1d1;
-  border-radius: 3px 3px 0 0;
-  -webkit-transform: translateY(51px);
-  -moz-transform: translateY(51px);
-  -ms-transform: translateY(51px);
-  transform: translateY(51px);
-  transition: -webkit-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: -moz-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: -ms-transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: transform 500ms cubic-bezier(0.19, 1, 0.22, 1) 0s; }
+  border-radius: 3px 0 0 3px; }
   .social-share:before, .social-share:after {
     content: "";
     display: table; }
   .social-share:after {
     clear: both; }
-  .social-share.show {
-    -webkit-transform: translateY(0);
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0); }
-  @media screen and (max-width: 1110px) {
+  @media screen and (max-width: 940px) {
     .social-share {
-      -webkit-transform: translateY(0);
-      -moz-transform: translateY(0);
-      -ms-transform: translateY(0);
-      transform: translateY(0); } }
+      display: none; } }
   .social-share-title {
-    float: left;
-    display: block;
-    height: 30px;
-    padding: 0 14px;
-    line-height: 34px;
+    display: none;
+    padding: 14px 0;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.4px;
@@ -6901,9 +6905,8 @@ h1.preface {
     width: 30px;
     height: 30px;
     display: block;
-    float: left;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-bottom: 10px;
     cursor: pointer; }
     .social-share-item-text {
       display: none; }
@@ -6923,6 +6926,7 @@ h1.preface {
       line-height: 1;
       color: white; }
     .social-share-item.facebook {
+      margin-top: 10px;
       background-color: #3b5998; }
       .social-share-item.facebook:after {
         content: "G"; }
@@ -6965,21 +6969,20 @@ h1.preface {
       -ms-transform: rotate(135deg);
       transform: rotate(135deg); }
   .social-share-items-hidden {
-    float: left;
-    width: 0px;
+    height: 0px;
     display: block;
     overflow: hidden;
-    transition: width 0.2s; }
+    transition: height 0.2s; }
     .social-share-items-hidden-wrap {
       display: block;
-      width: 120px; }
+      height: 120px; }
       .social-share-items-hidden-wrap:before, .social-share-items-hidden-wrap:after {
         content: "";
         display: table; }
       .social-share-items-hidden-wrap:after {
         clear: both; }
     .social-share-items-hidden.show {
-      width: 120px; }
+      height: 120px; }
 
 .sidebar-top-providers {
   width: 100%;

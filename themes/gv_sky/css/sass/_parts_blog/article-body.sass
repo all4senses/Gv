@@ -47,6 +47,36 @@
 				background-color: $business
 
 
+		&-author
+			position: relative
+			float: left
+			margin-top: 1px
+			padding-left: 18px
+			margin-right: 16px
+			font-size: 12px
+			line-height: 18px
+			font-weight: 600
+			color: $grey-light
+			
+			&-link
+				color: $grey-light
+
+			&:before
+				content: 'K'
+				position: absolute
+				top: 1px
+				left: 0
+				font-family: gvcons
+				font-weight: 400
+				font-size: 14px
+				line-height: 1
+
+			+m(737, min)
+				display: none
+
+			+m(736)
+				display: block
+
 		&-date
 			position: relative
 			float: left
@@ -90,10 +120,11 @@
 		float: right
 
 	+m(736)
-		float: none
-		width: 100%
-		max-width: 250px
-		+center
+		// float: none
+		// width: 100%
+		// max-width: 250px
+		// +center
+		display: none
 
 
 .node-type-blog-post #main
@@ -114,7 +145,7 @@
 
 	+m(1110)
 		width: 100%
-		max-width: 820px
+		// max-width: 820px
 		+center
 		float: none
 		padding: 20px
