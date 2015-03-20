@@ -180,15 +180,15 @@
             //$('.title-second').show();
             $(".popup-request.quote .multipartForm").formwizard("next");
 
-            /* ==========================================================================
-                Input Mask
-                ========================================================================== */
-
-             console.log('inputmask turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
-             if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
-               console.log('inputmask ON');
-                $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
-             }
+//            /* ==========================================================================
+//                Input Mask
+//                ========================================================================== */
+//
+//             console.log('inputmask turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
+//             if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
+//               console.log('inputmask ON');
+//                $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
+//             }
 
              // Explicitely make the field of blur color text
              jQuery('.step.three .firstname input').blur();
@@ -200,6 +200,28 @@
           
           
         });
+        
+        
+        
+        // Turn on phone validator only on the event, because it cause all page js fail if is turned on on page loading!!!
+        $('.popup-request.quote .fieldset.phone').one('mouseenter', function() {
+
+
+             $('.popup-request.quote .fieldset.phone input').unbind('blur');
+             $('.popup-request.quote .fieldset.phone input').blur(function(){
+                if ($(this).val() == '') {
+                  //$(this).val($(this).attr('title'));
+                  $(this).addClass('blur');
+                }
+             });
+             $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999", "clearMaskOnLostFocus": false});
+
+        });
+            
+            
+            
+            
+            
         
 //        $('.step.two .button.back').click(function(){
 //          $(".popup-request.quote .multipartForm").formwizard("back");
