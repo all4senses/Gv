@@ -210,7 +210,7 @@
              $('.popup-request.quote .fieldset.phone input').unbind('blur');
              $('.popup-request.quote .fieldset.phone input').blur(function(){
                 console.log($(this).val());
-                if ($(this).val() == '' || $(this).val() == '(___) ___-____') {
+                if ($(this).val() == '') {
                   //$(this).val($(this).attr('title'));
                   $(this).addClass('blur');
                 }

@@ -443,6 +443,7 @@
               lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
               phone: Drupal.t('Enter a valid phone number'),
               //company: Drupal.t('Company name is required'),
+              phones_amt: Drupal.t('Please select a value'),
 
 
               // Works!
