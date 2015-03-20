@@ -120,7 +120,7 @@
           $(this).parent().find('.choice').removeClass('checked'); 
           $(this).addClass('checked').find('input').attr('checked',true);
           $('.people .error-warn').hide();
-          var step2_amt_errors = false;
+          var amt_errors = false;
           //console.log($("input[type='radio'][name='people']:checked").val());
         });
         
@@ -137,7 +137,7 @@
             $(checkb).attr('checked', true); 
             $(this).addClass('checked');
             $('.checkboxes .error-warn').hide();
-            step2_features_errors = false;
+            features_errors = false;
             //console.log('checked');
           }
 
@@ -215,45 +215,46 @@
         
         
         
-        var step2_amt_errors = true;
-        var step2_features_errors = true;
+        var amt_errors = true;
+        var features_errors = true;
+        var company_errors = true;
         function step_ok(step) {
           switch (step) {
             case 2:
-              //step2_amt_errors = true;
-              step2_features_errors = true;
+              //amt_errors = true;
+              features_errors = true;
               $('.people .choice :checked').each(function() {
                 //allVals.push($(this).val());
-                step2_amt_errors = false;
+                amt_errors = false;
                 //console.log('amt..');
                 //console.log($(this).val());
               });
               $('.checkboxes .choice-checkbox :checked').each(function() {
                 //allVals.push($(this).val());
-                step2_features_errors = false;
+                features_errors = false;
                 //console.log('feature..');
                 //console.log($(this).val());
               });
               
-              if (step2_amt_errors) {
+              if (amt_errors) {
                 $('.people .error-warn').show();
-                //console.log('step2_amt_errors - show warn');
+                //console.log('amt_errors - show warn');
 //                return false;
               }
               else {
                 $('.people .error-warn').hide();
-                //console.log('NO step2_amt_errors - Hide Warn');
+                //console.log('NO amt_errors - Hide Warn');
               }
-              if (step2_features_errors) {
+              if (features_errors) {
                 $('.checkboxes .error-warn').show();
-                //console.log('step2_features_errors - show warn');
+                //console.log('features_errors - show warn');
 //                return false;
               }
               else {
                 $('.checkboxes .error-warn').hide();
-                //console.log('NO step2_features_errors - Hide Warn');
+                //console.log('NO features_errors - Hide Warn');
               }
-              if (!step2_amt_errors && !step2_features_errors) {
+              if (!amt_errors && !features_errors) {
                 //console.log('No Errors step 2');
                 return true;
               }
@@ -263,17 +264,39 @@
               }
              
             case 1:
-              company_title = $('.popup-request.quote input[id="company"]').attr('title');
-              company_value = $('.popup-request.quote input[id="company"]').val();
+              company_title = $('.popup-request.quote .company input[id="company"]').attr('title');
+              company_value = $('.popup-request.quote .company input[id="company"]').val();
               //console.log('company title = ' + company_title);
               //console.log('company value = ' + company_value);
               if(company_value == company_title || company_value == '') {
                 //console.log('company Not filled');
-                $('.step.one .error-warn').show();
+                company_errors = false;
+                $('.company .error-warn').show();
+                //return false;
+              }
+              else {
+                $('.company .error-warn').hide();
+              }
+              
+              
+              var step1_amt_errors = false;
+              // If the people (amount of employees) is on the first step, we have to check if it's set.
+              if (!jQuery('.popup-request.quote .people').is(".step.one *")) {
+                step1_amt_errors = true;
+                $('.people .choice :checked').each(function() {
+                  //allVals.push($(this).val());
+                  step1_amt_errors = false;
+                  //console.log('amt..');
+                  //console.log($(this).val());
+                });
+              }
+              
+              if (!company_errors && !step1_amt_errors) {
+                return true;
+              }
+              else {
                 return false;
               }
-              $('.step.one .error-warn').hide();
-              return true;
 
           }
         }
