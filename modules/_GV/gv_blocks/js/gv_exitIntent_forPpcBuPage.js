@@ -179,6 +179,7 @@
         $('#requestQuoteFormWrapper-ppc select').selectmenu({
           //style:'popup', 
           maxHeight: 300
+          ,disabled: false     
           ,change: function( event, ui ) {
                       //console.log(ui.value);
                       //console.log($('#requestQuoteFormWrapper-ppc select').selectmenu("option" ));
