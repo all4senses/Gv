@@ -289,6 +289,16 @@
                   //console.log('amt..');
                   //console.log($(this).val());
                 });
+                
+                if (step1_amt_errors) {
+                  $('.people .error-warn').show();
+                  //console.log('amt_errors - show warn');
+  //                return false;
+                }
+                else {
+                  $('.people .error-warn').hide();
+                  //console.log('NO amt_errors - Hide Warn');
+                }
               }
               
               if (!company_errors && !step1_amt_errors) {
