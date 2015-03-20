@@ -250,6 +250,7 @@
         
         
         $("#requestQuoteFormWrapper-ppc #first_step .next_custom").click(function(){
+          jQuery( "#requestQuoteFormWrapper-ppc select" ).selectmenu( "enable" );
           $("#requestQuoteFormWrapper-ppc .multipartForm").formwizard("next");
         });
         
