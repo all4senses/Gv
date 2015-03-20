@@ -184,8 +184,9 @@
                 Input Mask
                 ========================================================================== */
 
-             //console.log('turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
+             console.log('inputmask turn off: ' + Drupal.settings['gv_turn_on_phone_input_mask']);
              if (typeof Drupal.settings['gv_turn_on_phone_input_mask'] === "undefined" || Drupal.settings['gv_turn_on_phone_input_mask'] == true) {
+               console.log('inputmask ON');
                 $('.popup-request.quote .fieldset.phone input').inputmask("mask", {"mask": "(999) 999-9999"});
              }
 
@@ -266,8 +267,8 @@
             case 1:
               company_title = $('.popup-request.quote .company input[id="company"]').attr('title');
               company_value = $('.popup-request.quote .company input[id="company"]').val();
-              console.log('company title = ' + company_title);
-              console.log('company value = ' + company_value);
+              //console.log('company title = ' + company_title);
+              //console.log('company value = ' + company_value);
               company_errors = false;
               if(company_value == company_title || company_value == '') {
                 //console.log('company Not filled');
@@ -303,11 +304,11 @@
               }
               
               if (!company_errors && !step1_amt_errors) {
-                console.log('!company_errors && !step1_amt_errors');
+                //console.log('!company_errors && !step1_amt_errors');
                 return true;
               }
               else {
-                console.log(' NO !company_errors && !step1_amt_errors');
+                //console.log(' NO !company_errors && !step1_amt_errors');
                 return false;
               }
 
@@ -483,6 +484,7 @@
              lastname: Drupal.t('Last Name is required'), //Drupal.t('All fields with * are required'),
              phone: Drupal.t('Enter a valid phone number'),
              //company: Drupal.t('Company name is required'),
+             //phones_amt: Drupal.t('Please select a value'),
              
              // Works!
              /*
