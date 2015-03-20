@@ -270,7 +270,7 @@
               console.log('company value = ' + company_value);
               if(company_value == company_title || company_value == '') {
                 //console.log('company Not filled');
-                company_errors = false;
+                company_errors = true;
                 $('.company .error-warn').show();
                 //return false;
               }
@@ -281,7 +281,7 @@
               
               var step1_amt_errors = false;
               // If the people (amount of employees) is on the first step, we have to check if it's set.
-              if (!jQuery('.popup-request.quote .people').is(".step.one *")) {
+              if (jQuery('.popup-request.quote .people').is(".step.one *")) {
                 step1_amt_errors = true;
                 $('.people .choice :checked').each(function() {
                   //allVals.push($(this).val());
