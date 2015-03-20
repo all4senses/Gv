@@ -484,7 +484,12 @@ function gv_blocks_block_info() {
   );
 
   $blocks['getQuotePopup_onLists'] = array(
-    'info' => 'Get quote popup on providers lists',
+    'info' => 'Get quote popup on providers lists CC',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  $blocks['getQuotePopup_onLists_wc'] = array(
+    'info' => 'Get quote popup on providers lists WC',
     'cache' => DRUPAL_NO_CACHE,
   );
   
@@ -996,7 +1001,12 @@ function gv_blocks_block_view($delta = '') {
     
     case 'getQuotePopup_onLists':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_getQuotePopup_onLists();
+      $block['content'] = gv_blocks_getQuotePopup_onLists('cc');
+      break;
+    
+    case 'getQuotePopup_onLists_wc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getQuotePopup_onLists('wc');
       break;
     
     case 'getLatestPostsSidebar_2':
@@ -10076,7 +10086,7 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
  * Block Request a quote FOR block popup-provider v10
  * 
  */
-function gv_blocks_get_requestQuote_block_v10_popup_provider() {
+function gv_blocks_get_requestQuote_block_v10_popup_provider($type = 'cc') {
 
   global $user;
   
@@ -10119,254 +10129,519 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
   $_SESSION['requestQuoteToken'] = $token;
   
   
-  $out = 
-   '<div class="form-main">
-      
-      
+  switch ($type) {
+    
+                case 'cc':
 
-          
-      <div id="requestQuoteFormWrapper" class="form">
-        <div class="sending results" style="display: none;">
-            <div class="title-loading">
-              <div class="title-first">Please wait a moment <div>while processing your request...</div></div>
-              <div class="loading-gif"></div>
-            </div>
-        </div>
-        <div class="success results" style="display: none;"></div>
-        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
-        
-        <form class="multipartForm bbq" method="post" action="/request" style="border: none;">
+                $out = 
+                 '<div class="form-main">
 
-                    
-                    <div class="step one radio-filled" id="phones_amt_section">
-                    
-                             <div class="top"> 
-                             
-                                  <div class="title-first">
-                                    Get Your Hassle Free, <div>Custom Quote From <span>Nextiva</span>.</div>
-                                    <div class="title-delim"></div>
-                                    <div class="subtitle">Just Tell Us The Basics:</div>
-                                  </div>
 
-                                  <div class="wrap">
-                                  
 
-                                              <div class="fieldset input company">
-                                                <p class="question">What is your organization’s name?</p>
-                                                <span class="error-warn">Please Enter</span>
-                                                <div class="wrap"><input type="text" class="field company" name="company" id="company" title="Organization Name" value="Organization Name"></div>
-                                              </div>
-                                              
 
-                                              <div class="fieldset choices service-type first">
+                    <div id="requestQuoteFormWrapper" class="form">
+                      <div class="sending results" style="display: none;">
+                          <div class="title-loading">
+                            <div class="title-first">Please wait a moment <div>while processing your request...</div></div>
+                            <div class="loading-gif"></div>
+                          </div>
+                      </div>
+                      <div class="success results" style="display: none;"></div>
+                      <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
 
-                                                          <p class="question">What are your call center needs?</p>
+                      <form class="multipartForm bbq" method="post" action="/request" style="border: none;">
 
-                                                          <div class="wrap">
 
-                                                                          <div class="choice phone-only first">
-                                                                            <!--<div class="icon-replace"></div>-->
-                                                                            <span class="ico"></span>
-                                                                            <label for="replace">Outbound Calling</label>
-                                                                            <input type="radio" class="radio" name="q_for" id="replace" value="Outbound Calling">
-                                                                          </div>
+                                  <div class="step one radio-filled" id="phones_amt_section">
 
-                                                                          <div class="choice both checked">
-                                                                            <!--<div class="icon-new"></div>-->
-                                                                            <span class="ico"></span>
-                                                                            <label for="new">Both Outbound &amp; Inbound</label>
-                                                                            <input type="radio" class="radio" name="q_for" id="new" value="Both Outbound &amp; Inbound" checked="checked">
-                                                                          </div>
+                                           <div class="top"> 
 
-                                                                          <div class="choice service-only">
-                                                                            <!--<div class="icon-expand"></div>-->
-                                                                            <span class="ico"></span>
-                                                                            <label for="expand-only">Inbound Calling</label>
-                                                                            <input type="radio" class="radio" name="q_for" id="expand-only" value="Inbound Calling">
-                                                                          </div>
+                                                <div class="title-first">
+                                                  Get Your Hassle Free, <div>Custom Quote From <span>Nextiva</span>.</div>
+                                                  <div class="title-delim"></div>
+                                                  <div class="subtitle">Just Tell Us The Basics:</div>
+                                                </div>
 
-                                                          </div>
-                                                          
-                                                          <div class="clearfix-dk"></div>
-
-                                              </div>
-                                    
-                          
-          
-                                  </div>                      
-                                
-                                </div> <!-- end of .top -->
-
-                                  <div class="fieldset button-field next">
-                                    <div class="wrap">
-                                      <div class="button next">
-                                        <p>Let\'s Get Started <span class="icon-angle-double-right"></span></p>
-                                      </div>
-                                    </div>
-                                  </div>
-                               
-                    </div>
-                    
-                    <div class="step two" id="quesions">
-                    
-                        <div class="top"> 
-
-                            <div class="title-first">
-                              Get Your Hassle Free, <div>Custom Quote From <span>Nextiva</span>.</div>
-                              <div class="title-delim"></div>
-                              <div class="subtitle">Just Tell Us The Basics:</div>
-                            </div>
-                        
-                            <div class="wrap outer">
-                                              <div class="fieldset choices people first">
-                                                <p class="question">
-                                                  How many employees do you have?
-                                                  <span class="error-warn">Please Select</span>
-                                                </p>
                                                 <div class="wrap">
-                                                  <!--
-                                                  <div class="choice first"><label for="1-19">1-19</label><input type="radio" class="radio" name="phones_amt" value="1-19" id="1-19"></div>
-                                                  <div class="choice second"><label for="20-49">20-49</label><input type="radio" class="radio" name="phones_amt" value="20-49" id="20-49"></div>
-                                                  <div class="choice third"><label for="50-99">50-99</label><input type="radio" class="radio" name="phones_amt" value="50-99" id="50-99"></div>
-                                                  <div class="choice fourth"><label for="100-499">100-499</label><input type="radio" class="radio" name="phones_amt" value="100-499" id="100-499"></div>
-                                                  <div class="choice fifth"><label for="500-999">500-999</label><input type="radio" class="radio" name="phones_amt" value="500-999" id="500-999"></div>
-                                                  <div class="choice sixth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
-                                                  -->
 
-                                                  <div class="choice first"><label for="1-24">1-24</label><input type="radio" class="radio" name="phones_amt" value="1-24" id="1-24"></div>
-                                                  <div class="choice second"><label for="25-49">25-49</label><input type="radio" class="radio" name="phones_amt" value="25-49" id="25-49"></div>
-                                                  <div class="choice third"><label for="50-99">50-99</label><input type="radio" class="radio" name="phones_amt" value="50-99" id="50-99"></div>
-                                                  <div class="choice fourth"><label for="100-499">100-499</label><input type="radio" class="radio" name="phones_amt" value="100-499" id="100-499"></div>
-                                                  <div class="choice fifth"><label for="500-999">500-999</label><input type="radio" class="radio" name="phones_amt" value="500-999" id="500-999"></div>
-                                                  <div class="choice sixth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
-                                                  
 
-                                                  <div class="clearfix-dk"></div>
-                                                </div>
-                                              </div>
-                                              <div class="fieldset checkboxes">
-                                                <p class="question">
-                                                  What features are important to you?
-                                                  <span class="error-warn">Please Select</span>
-                                                </p>
-                                                <div class="wrap top5">
-                                                  <div class="wrap column left">
-                                                    <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="mobile">Mobile Capabilities</label><input type="checkbox" class="checkbox" name="features[]" value="Mobile Capabilities" id="mobile"></div>
-                                                    <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="fax">Online Fax</label><input type="checkbox" class="checkbox" name="features[]" value="Online Fax" id="fax"></div>
-                                                    <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="monitoring">Call Management<span>/Monitoring</span></label><input type="checkbox" class="checkbox" name="features[]" value="Call Management" id="monitoring"></div>
+                                                            <div class="fieldset input company">
+                                                              <p class="question">What is your organization’s name?</p>
+                                                              <span class="error-warn">Please Enter</span>
+                                                              <div class="wrap"><input type="text" class="field company" name="company" id="company" title="Organization Name" value="Organization Name"></div>
+                                                            </div>
+
+
+                                                            <div class="fieldset choices service-type first">
+
+                                                                        <p class="question">What are your call center needs?</p>
+
+                                                                        <div class="wrap">
+
+                                                                                        <div class="choice phone-only first">
+                                                                                          <!--<div class="icon-replace"></div>-->
+                                                                                          <span class="ico"></span>
+                                                                                          <label for="replace">Outbound Calling</label>
+                                                                                          <input type="radio" class="radio" name="q_for" id="replace" value="Outbound Calling">
+                                                                                        </div>
+
+                                                                                        <div class="choice both checked">
+                                                                                          <!--<div class="icon-new"></div>-->
+                                                                                          <span class="ico"></span>
+                                                                                          <label for="new">Both Outbound &amp; Inbound</label>
+                                                                                          <input type="radio" class="radio" name="q_for" id="new" value="Both Outbound &amp; Inbound" checked="checked">
+                                                                                        </div>
+
+                                                                                        <div class="choice service-only">
+                                                                                          <!--<div class="icon-expand"></div>-->
+                                                                                          <span class="ico"></span>
+                                                                                          <label for="expand-only">Inbound Calling</label>
+                                                                                          <input type="radio" class="radio" name="q_for" id="expand-only" value="Inbound Calling">
+                                                                                        </div>
+
+                                                                        </div>
+
+                                                                        <div class="clearfix-dk"></div>
+
+                                                            </div>
+
+
+
+                                                </div>                      
+
+                                              </div> <!-- end of .top -->
+
+                                                <div class="fieldset button-field next">
+                                                  <div class="wrap">
+                                                    <div class="button next">
+                                                      <p>Let\'s Get Started <span class="icon-angle-double-right"></span></p>
+                                                    </div>
                                                   </div>
-                                                  <div class="wrap column right">
-                                                    <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="voicemail">Voicemail-to-email</label><input type="checkbox" class="checkbox" name="features[]" value="Voicemail-to-email" id="voicemail"></div>
-                                                    <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="auto">Auto Attendant</label><input type="checkbox" class="checkbox" name="features[]" value="Auto Attendant" id="auto"></div>
-                                                    <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="none">No Preference</label><input type="checkbox" class="checkbox" name="features[]" value="No Preference" id="none"></div>
-                                                  </div>
-                                                  <div class="clearfix-dk"></div>
                                                 </div>
-                                              </div>
-                                              
-                            </div>
-                            
 
-                        </div> <!-- end of .top -->
-                                
-                        <div class="fieldset button-field top10">
-                          <div class="wrap">
-                            <!--
-                            <div class="button fixed left back to-step-1">
-                              <p>Back</p>
-                            </div>
-                            -->
-                            <div class="button right next to-step-3">
-                              <p>Continue to Pricing Info <span class="icon-angle-double-right"></span></p>
-                            </div>
-                            <div class="clearfix-dk"></div>
+                                  </div>
+
+                                  <div class="step two" id="quesions">
+
+                                      <div class="top"> 
+
+                                          <div class="title-first">
+                                            Get Your Hassle Free, <div>Custom Quote From <span>Nextiva</span>.</div>
+                                            <div class="title-delim"></div>
+                                            <div class="subtitle">Just Tell Us The Basics:</div>
+                                          </div>
+
+                                          <div class="wrap outer">
+                                                            <div class="fieldset choices people first">
+                                                              <p class="question">
+                                                                How many employees do you have?
+                                                                <span class="error-warn">Please Select</span>
+                                                              </p>
+                                                              <div class="wrap">
+                                                                <!--
+                                                                <div class="choice first"><label for="1-19">1-19</label><input type="radio" class="radio" name="phones_amt" value="1-19" id="1-19"></div>
+                                                                <div class="choice second"><label for="20-49">20-49</label><input type="radio" class="radio" name="phones_amt" value="20-49" id="20-49"></div>
+                                                                <div class="choice third"><label for="50-99">50-99</label><input type="radio" class="radio" name="phones_amt" value="50-99" id="50-99"></div>
+                                                                <div class="choice fourth"><label for="100-499">100-499</label><input type="radio" class="radio" name="phones_amt" value="100-499" id="100-499"></div>
+                                                                <div class="choice fifth"><label for="500-999">500-999</label><input type="radio" class="radio" name="phones_amt" value="500-999" id="500-999"></div>
+                                                                <div class="choice sixth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
+                                                                -->
+
+                                                                <div class="choice first"><label for="1-24">1-24</label><input type="radio" class="radio" name="phones_amt" value="1-24" id="1-24"></div>
+                                                                <div class="choice second"><label for="25-49">25-49</label><input type="radio" class="radio" name="phones_amt" value="25-49" id="25-49"></div>
+                                                                <div class="choice third"><label for="50-99">50-99</label><input type="radio" class="radio" name="phones_amt" value="50-99" id="50-99"></div>
+                                                                <div class="choice fourth"><label for="100-499">100-499</label><input type="radio" class="radio" name="phones_amt" value="100-499" id="100-499"></div>
+                                                                <div class="choice fifth"><label for="500-999">500-999</label><input type="radio" class="radio" name="phones_amt" value="500-999" id="500-999"></div>
+                                                                <div class="choice sixth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
+
+
+                                                                <div class="clearfix-dk"></div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="fieldset checkboxes">
+                                                              <p class="question">
+                                                                What features are important to you?
+                                                                <span class="error-warn">Please Select</span>
+                                                              </p>
+                                                              <div class="wrap top5">
+                                                                <div class="wrap column left">
+                                                                  <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="mobile">Mobile Capabilities</label><input type="checkbox" class="checkbox" name="features[]" value="Mobile Capabilities" id="mobile"></div>
+                                                                  <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="fax">Online Fax</label><input type="checkbox" class="checkbox" name="features[]" value="Online Fax" id="fax"></div>
+                                                                  <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="monitoring">Call Management<span>/Monitoring</span></label><input type="checkbox" class="checkbox" name="features[]" value="Call Management" id="monitoring"></div>
+                                                                </div>
+                                                                <div class="wrap column right">
+                                                                  <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="voicemail">Voicemail-to-email</label><input type="checkbox" class="checkbox" name="features[]" value="Voicemail-to-email" id="voicemail"></div>
+                                                                  <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="auto">Auto Attendant</label><input type="checkbox" class="checkbox" name="features[]" value="Auto Attendant" id="auto"></div>
+                                                                  <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="none">No Preference</label><input type="checkbox" class="checkbox" name="features[]" value="No Preference" id="none"></div>
+                                                                </div>
+                                                                <div class="clearfix-dk"></div>
+                                                              </div>
+                                                            </div>
+
+                                          </div>
+
+
+                                      </div> <!-- end of .top -->
+
+                                      <div class="fieldset button-field top10">
+                                        <div class="wrap">
+                                          <!--
+                                          <div class="button fixed left back to-step-1">
+                                            <p>Back</p>
+                                          </div>
+                                          -->
+                                          <div class="button right next to-step-3">
+                                            <p>Continue to Pricing Info <span class="icon-angle-double-right"></span></p>
+                                          </div>
+                                          <div class="clearfix-dk"></div>
+                                        </div>
+                                      </div>
+
+                                      ' . ($user->uid == 1 ? '<div class="back">Back</div>' : '') . '
+                                  </div>
+
+
+
+
+
+                                  <div class="step three" id="personal_info">
+
+                                      <div class="top"> 
+
+                                          <div class="title-second" style="display: block !important;">
+                                            Where do we send the details for <div>your <span>custom <span>Nextiva</span> quote?</span></div>
+                                          </div>
+
+                                          <div class="wrap outer">
+                                                            <div class="fieldset input half first firstname error">
+                                                              <p class="question">First Name</p>
+                                                              <div class="wrap"><input type="text" class="field required firstname" name="firstname" id="firstname"></div>
+                                                            </div>
+                                                            <div class="fieldset input half first lastname error">
+                                                              <p class="question">Last Name</p>
+                                                              <div class="wrap"><input type="text" class="field required lastname" name="lastname" id="lastname"></div>
+                                                            </div>
+                                                            <div class="clearfix-dk"></div>
+                                                            <div class="fieldset input half phone error">
+                                                              <p class="question">Phone Number</p>
+                                                              <div class="wrap"><input type="text" class="field phone required" name="phone" id="phone"></div>
+                                                            </div>
+                                                            <div class="fieldset input half email error">
+                                                              <p class="question">Email Address</p>
+                                                              <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
+                                                            </div>
+
+                                                            <div class="clearfix-dk"></div>
+
+                                                            <p class="inform-text">You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.</p>
+
+                                          </div>
+
+
+                                      </div> <!-- end of .top -->
+
+                                      <div class="fieldset button-field">
+                                        <div class="wrap">
+                                          <div class="button right next to-step-3">
+                                            <p>Send Me My Quote Now <span class="icon-angle-double-right"></span></p>
+                                          </div>
+                                          <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
+
+                                        </div>
+                                      </div>
+
+                                      ' . ($user->uid == 1 ? '<div class="back">Back</div>' : '') . '
+
+
+                                  </div>
+
+                              <!--
+                              <div id="Navigation" class="fieldset button-field next"> 	
+                                <div class="wrap">
+                                  <div class="button">
+                                      <input class="navigation_button" id="back" value="Back" type="reset" />
+                                      <input class="navigation_button" id="next" value="Let\'s Get Started" type="submit" />
+                                  </div>
+                                </div>
+                              </div>
+                              -->
+
+                              <input type="hidden" name="token" value="' . $token . '" />
+                              <input type="hidden" name="source" value="block" />
+                              <input type="hidden" name="version" value="10-popup-provider" />
+                              <input type="hidden" name="referrer" value="" />
+                              <input type="hidden" name="url" value="" />
+                              <input type="hidden" name="provider_name" value="" />
+                              <input type="hidden" name="provider_id" value="" />
+
+                      </form>
+
+                      <p id="data"></p>
+              </div>
+              <div class="block_footer"></div>
+              </div>
+                ';
+
+                break;
+              
+              
+              
+              
+              
+              case 'wc':
+
+                $out = 
+                 '<div class="form-main">
+
+
+
+
+                    <div id="requestQuoteFormWrapper" class="form">
+                      <div class="sending results" style="display: none;">
+                          <div class="title-loading">
+                            <div class="title-first">Please wait a moment <div>while processing your request...</div></div>
+                            <div class="loading-gif"></div>
                           </div>
-                        </div>
+                      </div>
+                      <div class="success results" style="display: none;"></div>
+                      <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
 
-                        ' . ($user->uid == 1 ? '<div class="back">Back</div>' : '') . '
-                    </div>
-                    
-
-                    
-
-                    
-                    <div class="step three" id="personal_info">
-                    
-                        <div class="top"> 
-
-                            <div class="title-second" style="display: block !important;">
-                              Where do we send the details for <div>your <span>custom <span>Nextiva</span> quote?</span></div>
-                            </div>
-                    
-                            <div class="wrap outer">
-                                              <div class="fieldset input half first firstname error">
-                                                <p class="question">First Name</p>
-                                                <div class="wrap"><input type="text" class="field required firstname" name="firstname" id="firstname"></div>
-                                              </div>
-                                              <div class="fieldset input half first lastname error">
-                                                <p class="question">Last Name</p>
-                                                <div class="wrap"><input type="text" class="field required lastname" name="lastname" id="lastname"></div>
-                                              </div>
-                                              <div class="clearfix-dk"></div>
-                                              <div class="fieldset input half phone error">
-                                                <p class="question">Phone Number</p>
-                                                <div class="wrap"><input type="text" class="field phone required" name="phone" id="phone"></div>
-                                              </div>
-                                              <div class="fieldset input half email error">
-                                                <p class="question">Email Address</p>
-                                                <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
-                                              </div>
-                                              
-                                              <div class="clearfix-dk"></div>
-                                              
-                                              <p class="inform-text">You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.</p>
-                                              
-                            </div>
-                            
-
-                        </div> <!-- end of .top -->
-                                
-                        <div class="fieldset button-field">
-                          <div class="wrap">
-                            <div class="button right next to-step-3">
-                              <p>Send Me My Quote Now <span class="icon-angle-double-right"></span></p>
-                            </div>
-                            <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
-
-                          </div>
-                        </div>
-
-                        ' . ($user->uid == 1 ? '<div class="back">Back</div>' : '') . '
+                      <form class="multipartForm bbq" method="post" action="/request" style="border: none;">
 
 
-                    </div>
-                    
-                <!--
-                <div id="Navigation" class="fieldset button-field next"> 	
-                  <div class="wrap">
-                    <div class="button">
-                        <input class="navigation_button" id="back" value="Back" type="reset" />
-                        <input class="navigation_button" id="next" value="Let\'s Get Started" type="submit" />
-                    </div>
-                  </div>
-                </div>
-                -->
-                
-                <input type="hidden" name="token" value="' . $token . '" />
-                <input type="hidden" name="source" value="block" />
-                <input type="hidden" name="version" value="10-popup-provider" />
-                <input type="hidden" name="referrer" value="" />
-                <input type="hidden" name="url" value="" />
-                <input type="hidden" name="provider_name" value="" />
-                <input type="hidden" name="provider_id" value="" />
-                
-        </form>
+                                  <div class="step one radio-filled" id="phones_amt_section">
 
-        <p id="data"></p>
-</div>
-<div class="block_footer"></div>
-</div>
-  ';
+                                           <div class="top"> 
+
+                                                <div class="title-first">
+                                                  Get Your Hassle Free, <div>Custom Quote From <span>Nextiva</span>.</div>
+                                                  <div class="title-delim"></div>
+                                                  <div class="subtitle">Just Tell Us The Basics:</div>
+                                                </div>
+
+                                                <div class="wrap">
+
+
+                                                            <div class="fieldset input company">
+                                                              <p class="question">What is your organization’s name?</p>
+                                                              <span class="error-warn">Please Enter</span>
+                                                              <div class="wrap"><input type="text" class="field company" name="company" id="company" title="Organization Name" value="Organization Name"></div>
+                                                            </div>
+
+
+                                                            <div class="fieldset choices service-type first">
+
+                                                                        <p class="question">What are your call center needs?</p>
+
+                                                                        <div class="wrap">
+
+                                                                                        <div class="choice phone-only first">
+                                                                                          <!--<div class="icon-replace"></div>-->
+                                                                                          <span class="ico"></span>
+                                                                                          <label for="replace">Outbound Calling</label>
+                                                                                          <input type="radio" class="radio" name="q_for" id="replace" value="Outbound Calling">
+                                                                                        </div>
+
+                                                                                        <div class="choice both checked">
+                                                                                          <!--<div class="icon-new"></div>-->
+                                                                                          <span class="ico"></span>
+                                                                                          <label for="new">Both Outbound &amp; Inbound</label>
+                                                                                          <input type="radio" class="radio" name="q_for" id="new" value="Both Outbound &amp; Inbound" checked="checked">
+                                                                                        </div>
+
+                                                                                        <div class="choice service-only">
+                                                                                          <!--<div class="icon-expand"></div>-->
+                                                                                          <span class="ico"></span>
+                                                                                          <label for="expand-only">Inbound Calling</label>
+                                                                                          <input type="radio" class="radio" name="q_for" id="expand-only" value="Inbound Calling">
+                                                                                        </div>
+
+                                                                        </div>
+
+                                                                        <div class="clearfix-dk"></div>
+
+                                                            </div>
+
+
+
+                                                </div>                      
+
+                                              </div> <!-- end of .top -->
+
+                                                <div class="fieldset button-field next">
+                                                  <div class="wrap">
+                                                    <div class="button next">
+                                                      <p>Let\'s Get Started <span class="icon-angle-double-right"></span></p>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
+                                  </div>
+
+                                  <div class="step two" id="quesions">
+
+                                      <div class="top"> 
+
+                                          <div class="title-first">
+                                            Get Your Hassle Free, <div>Custom Quote From <span>Nextiva</span>.</div>
+                                            <div class="title-delim"></div>
+                                            <div class="subtitle">Just Tell Us The Basics:</div>
+                                          </div>
+
+                                          <div class="wrap outer">
+                                                            <div class="fieldset choices people first">
+                                                              <p class="question">
+                                                                How many employees do you have?
+                                                                <span class="error-warn">Please Select</span>
+                                                              </p>
+                                                              <div class="wrap">
+                                                                <!--
+                                                                <div class="choice first"><label for="1-19">1-19</label><input type="radio" class="radio" name="phones_amt" value="1-19" id="1-19"></div>
+                                                                <div class="choice second"><label for="20-49">20-49</label><input type="radio" class="radio" name="phones_amt" value="20-49" id="20-49"></div>
+                                                                <div class="choice third"><label for="50-99">50-99</label><input type="radio" class="radio" name="phones_amt" value="50-99" id="50-99"></div>
+                                                                <div class="choice fourth"><label for="100-499">100-499</label><input type="radio" class="radio" name="phones_amt" value="100-499" id="100-499"></div>
+                                                                <div class="choice fifth"><label for="500-999">500-999</label><input type="radio" class="radio" name="phones_amt" value="500-999" id="500-999"></div>
+                                                                <div class="choice sixth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
+                                                                -->
+
+                                                                <div class="choice first"><label for="1-24">1-24</label><input type="radio" class="radio" name="phones_amt" value="1-24" id="1-24"></div>
+                                                                <div class="choice second"><label for="25-49">25-49</label><input type="radio" class="radio" name="phones_amt" value="25-49" id="25-49"></div>
+                                                                <div class="choice third"><label for="50-99">50-99</label><input type="radio" class="radio" name="phones_amt" value="50-99" id="50-99"></div>
+                                                                <div class="choice fourth"><label for="100-499">100-499</label><input type="radio" class="radio" name="phones_amt" value="100-499" id="100-499"></div>
+                                                                <div class="choice fifth"><label for="500-999">500-999</label><input type="radio" class="radio" name="phones_amt" value="500-999" id="500-999"></div>
+                                                                <div class="choice sixth"><label for="1000+">1000+</label><input type="radio" class="radio" name="phones_amt" value="1000+" id="1000+"></div>
+
+
+                                                                <div class="clearfix-dk"></div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="fieldset checkboxes">
+                                                              <p class="question">
+                                                                What features are important to you?
+                                                                <span class="error-warn">Please Select</span>
+                                                              </p>
+                                                              <div class="wrap top5">
+                                                                <div class="wrap column left">
+                                                                  <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="mobile">Mobile Capabilities</label><input type="checkbox" class="checkbox" name="features[]" value="Mobile Capabilities" id="mobile"></div>
+                                                                  <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="fax">Online Fax</label><input type="checkbox" class="checkbox" name="features[]" value="Online Fax" id="fax"></div>
+                                                                  <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="monitoring">Call Management<span>/Monitoring</span></label><input type="checkbox" class="checkbox" name="features[]" value="Call Management" id="monitoring"></div>
+                                                                </div>
+                                                                <div class="wrap column right">
+                                                                  <div class="choice-checkbox first"><div class="checkbox-new"></div><label for="voicemail">Voicemail-to-email</label><input type="checkbox" class="checkbox" name="features[]" value="Voicemail-to-email" id="voicemail"></div>
+                                                                  <div class="choice-checkbox second"><div class="checkbox-new"></div><label for="auto">Auto Attendant</label><input type="checkbox" class="checkbox" name="features[]" value="Auto Attendant" id="auto"></div>
+                                                                  <div class="choice-checkbox third"><div class="checkbox-new"></div><label for="none">No Preference</label><input type="checkbox" class="checkbox" name="features[]" value="No Preference" id="none"></div>
+                                                                </div>
+                                                                <div class="clearfix-dk"></div>
+                                                              </div>
+                                                            </div>
+
+                                          </div>
+
+
+                                      </div> <!-- end of .top -->
+
+                                      <div class="fieldset button-field top10">
+                                        <div class="wrap">
+                                          <!--
+                                          <div class="button fixed left back to-step-1">
+                                            <p>Back</p>
+                                          </div>
+                                          -->
+                                          <div class="button right next to-step-3">
+                                            <p>Continue to Pricing Info <span class="icon-angle-double-right"></span></p>
+                                          </div>
+                                          <div class="clearfix-dk"></div>
+                                        </div>
+                                      </div>
+
+                                      ' . ($user->uid == 1 ? '<div class="back">Back</div>' : '') . '
+                                  </div>
+
+
+
+
+
+                                  <div class="step three" id="personal_info">
+
+                                      <div class="top"> 
+
+                                          <div class="title-second" style="display: block !important;">
+                                            Where do we send the details for <div>your <span>custom <span>Nextiva</span> quote?</span></div>
+                                          </div>
+
+                                          <div class="wrap outer">
+                                                            <div class="fieldset input half first firstname error">
+                                                              <p class="question">First Name</p>
+                                                              <div class="wrap"><input type="text" class="field required firstname" name="firstname" id="firstname"></div>
+                                                            </div>
+                                                            <div class="fieldset input half first lastname error">
+                                                              <p class="question">Last Name</p>
+                                                              <div class="wrap"><input type="text" class="field required lastname" name="lastname" id="lastname"></div>
+                                                            </div>
+                                                            <div class="clearfix-dk"></div>
+                                                            <div class="fieldset input half phone error">
+                                                              <p class="question">Phone Number</p>
+                                                              <div class="wrap"><input type="text" class="field phone required" name="phone" id="phone"></div>
+                                                            </div>
+                                                            <div class="fieldset input half email error">
+                                                              <p class="question">Email Address</p>
+                                                              <div class="wrap"><input type="text" class="field email required" name="email" id="email"></div>
+                                                            </div>
+
+                                                            <div class="clearfix-dk"></div>
+
+                                                            <p class="inform-text">You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.</p>
+
+                                          </div>
+
+
+                                      </div> <!-- end of .top -->
+
+                                      <div class="fieldset button-field">
+                                        <div class="wrap">
+                                          <div class="button right next to-step-3">
+                                            <p>Send Me My Quote Now <span class="icon-angle-double-right"></span></p>
+                                          </div>
+                                          <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
+
+                                        </div>
+                                      </div>
+
+                                      ' . ($user->uid == 1 ? '<div class="back">Back</div>' : '') . '
+
+
+                                  </div>
+
+                              <!--
+                              <div id="Navigation" class="fieldset button-field next"> 	
+                                <div class="wrap">
+                                  <div class="button">
+                                      <input class="navigation_button" id="back" value="Back" type="reset" />
+                                      <input class="navigation_button" id="next" value="Let\'s Get Started" type="submit" />
+                                  </div>
+                                </div>
+                              </div>
+                              -->
+
+                              <input type="hidden" name="token" value="' . $token . '" />
+                              <input type="hidden" name="source" value="block" />
+                              <input type="hidden" name="version" value="10-popup-provider" />
+                              <input type="hidden" name="referrer" value="" />
+                              <input type="hidden" name="url" value="" />
+                              <input type="hidden" name="provider_name" value="" />
+                              <input type="hidden" name="provider_id" value="" />
+
+                      </form>
+
+                      <p id="data"></p>
+              </div>
+              <div class="block_footer"></div>
+              </div>
+                ';
+
+                break;
+  
+  }
   
   return $out;
 }
@@ -12184,11 +12459,9 @@ else { // User->uid == 1
 /*
  * Show popup Get quote for every provider in list by click on the Get Quote link.
  */
-function gv_blocks_getQuotePopup_onLists() {
+function gv_blocks_getQuotePopup_onLists($type = 'cc') {
   
   
-  // Colorbox for popup window.
-  //1, 3, 4, 
   
   
   //$current_js_array = drupal_add_js();
@@ -12204,31 +12477,31 @@ function gv_blocks_getQuotePopup_onLists() {
   // Exit intent Ad block main js.
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   
-  global $user;
-  if (1)
+  //global $user;
+  //if (1)
   //if ($user->uid == 1) 
-    {
-    
-    //return '';
-    
+  {
+
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
-    
+
+    //1, 3, 4, 
     //drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example3/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
     drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example2/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-    
+
     $out = 
     '<div style="display: none;">
       <div id="block-gv-blocks-request-quote-v10" class="popup-request quote on-list">' 
-        . gv_blocks_get_requestQuote_block_v10_popup_provider() .
+        . gv_blocks_get_requestQuote_block_v10_popup_provider($type) .
      '</div>
     </div>';
   }
+  /*
   else {
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
-    
+
     drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-  
-    
+
+
     //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
     $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
     $provider_name = 'Name';
@@ -12244,7 +12517,7 @@ function gv_blocks_getQuotePopup_onLists() {
       '</div>
     </div>';
   }
-  
+  */
   
   
   return $out;
