@@ -372,6 +372,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['contact_info'] = array(
+    'info' => 'Contact Page - Contact Info',
+    'cache' => DRUPAL_NO_CACHE,
+  );  
+
   $blocks['sidebar_related_articles'] = array(
     'info' => 'Related articles for a current post',
     'cache' => DRUPAL_NO_CACHE,
@@ -871,6 +876,11 @@ function gv_blocks_block_view($delta = '') {
     
     
     
+    case 'contact_info':
+      $block['subject'] = 'Contact Page - Contact Info';
+      $block['content'] = gv_blocks_getContactInfo();
+      break;    
+
     case 'sidebar_related_articles':
       $block['subject'] = 'Related posts';
       $block['content'] = gv_blocks_getSidebarRelatedArticlesBlock();
@@ -2302,6 +2312,34 @@ return $wrap_pre . drupal_render($node_views) . $wrap_end;
 }
 
 
+function gv_blocks_getContactInfo() {
+  return '
+          <section class="contact-info">
+            <div class="contact-info-wrap">
+              <div class="contact-info-item address">
+                <div class="contact-info-item-title">Mailing Address</div>
+                <div class="contact-info-item-content">
+                  BizMedia Central LLC<br />
+                  GetVoIP.com<br />
+                  1 Great Neck Rd. Suite 8<br />
+                  Great Neck, NY 11021
+                </div>
+              </div>
+              <div class="contact-info-item contact">
+                <div class="contact-info-item-title">Contact Info</div>
+                <div class="contact-info-item-content">
+                  <a href="tel:516-708-4770" class="contact-info-item-link">(516) 708-4770</a><br />
+                  <a href="mailto:contact@getvoip.com" class="contact-info-item-link">contact@getvoip.com</a>
+                </div>
+              </div>
+            </div>
+            <div class="contact-info-map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.8729002099262!2d-73.72666990000003!3d40.7868083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c289979b8ef555%3A0xdece2d1d0e904d97!2s1+Great+Neck+Rd%2C+Great+Neck+Plaza%2C+NY+11021!5e0!3m2!1sen!2sus!4v1426867481754" width="100%" height="345" frameborder="0" style="border:0"></iframe>
+            </div>
+          </section>
+  ';
+}
+
 /**
  * Block with sidebar related posts for a current post.
  */
@@ -2336,6 +2374,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   $count = NULL;
   foreach ($node->related_articles as $related_nid => $related_article) {
     ++$count;
+    $content = dk_shorten_body($related_article->teaser);
     $fragments .= '<li class="related-posts-list-item"><article>';
 
     if (!empty($related_article->src_themed_related_sideblock)) {
@@ -2346,7 +2385,7 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     $fragments .= l($related_article->title, 'node/' . $related_nid, array('attributes' => array('class' => array('related-posts-list-item-title')))) .
 
       // '<div class="submitted">' . (!isset($related_article->created) ? '': date('D, F d, Y', $related_article->created)) . '</div>' .
-      '<div class="related-posts-list-item-content">' . (!isset($related_article->teaser) ? '' : $related_article->teaser). '</div>
+      '<div class="related-posts-list-item-content">' . (!isset($related_article->teaser) ? '' : $content). '</div>
 
     </article></li>';
   }

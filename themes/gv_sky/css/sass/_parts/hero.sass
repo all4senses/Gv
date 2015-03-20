@@ -1,7 +1,15 @@
 .hero-header 
 	background-size: cover
 
-	&.center
+	// &.center
+		
+
+	&.left
+		padding: 60px 0 55px
+
+	
+	// Home Page
+	.front &
 		background-image: url(../images/img-hero.jpg)	
 		background-position: 80% 50%
 		height: 504px
@@ -14,12 +22,6 @@
 
 		+m(450)
 			height: 375px
-
-
-	&.left
-		padding: 60px 0 55px
-
-
 
 	// Business VoIP
 	.page-node-287 &,
@@ -59,6 +61,19 @@
 
 		+m(620) 
 			background-image: url(../images/img-voip-m.jpg)	
+
+	// Contact and Advertise page
+	.page-node-62 &,
+	.page-node-91 &
+		background-image: url(../images/img-team.jpg)	
+		background-position: 80% 50%
+		height: 340px
+
+		+m(620) 
+			background-image: url(../images/img-team-m.jpg)	
+
+		+m(450)
+			height: 300px
 
 
 

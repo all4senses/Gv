@@ -68,17 +68,6 @@
 
 	});
 
-	// $$('.social-share-item.expand, .social-share-items-hidden').mouseenter(function(){
-	// 		$$('.social-share-item.expand').addClass('open');
-	// 		$$('.social-share-items-hidden').addClass('show');
-	// })
-	// .mouseleave(function(){
-	// 		setTimeout(function(){
-	// 			$$('.social-share-item.expand').removeClass('open');
-	// 			$$('.social-share-items-hidden').removeClass('show');
-	// 		}, 1000);
-	// });
-
 
 
 

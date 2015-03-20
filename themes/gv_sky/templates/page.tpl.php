@@ -7,9 +7,9 @@ if ($is_front) {
 if ( current_path() == 'blog' ) {
   drupal_add_js('/sites/all/themes/gv_sky/js/blog.js');
 }
+
 ?>
   <header id="header" role="banner">
-
     <nav class="navigation" role="navigation">
       <div class="navigation-wrap">
 
@@ -35,6 +35,17 @@ if ( current_path() == 'blog' ) {
         <div class="hero-title">
           <h1 class="hero-title-heading"><?php print render($title); ?></h1>
           <p class="hero-title-desc"><?php print field_get_items('node',$node, 'body')[0]['value']; ?></p>
+        </div>
+      </div>
+    <?php } ?>
+
+    <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page?>
+      <?php drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
+      <?php drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js'); ?>
+      <div class="hero-header center">
+        <div class="hero-title">
+          <h1 class="hero-title-heading"><?php print ( current_path() == 'node/62' ? 'Contact Us' : 'Advertise With Us' ) ?></h1>
+          <p class="hero-title-desc"><?php print ( current_path() == 'node/62' ? 'Questions or Comments?' : 'Want to Advertise?' ) ?> Get In Touch.</p>
         </div>
       </div>
     <?php } ?>
@@ -87,6 +98,11 @@ if ( current_path() == 'blog' ) {
             <?php print render($page['sidebar_second']); ?>
           </aside>  <!-- /#sidebar-second -->
         <?php endif; ?>
+
+        <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { 
+          echo gv_blocks_getContactInfo();
+        } ?>
+        
 
         
         <div id="above_footer">
