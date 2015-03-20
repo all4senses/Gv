@@ -266,8 +266,8 @@
             case 1:
               company_title = $('.popup-request.quote .company input[id="company"]').attr('title');
               company_value = $('.popup-request.quote .company input[id="company"]').val();
-              //console.log('company title = ' + company_title);
-              //console.log('company value = ' + company_value);
+              console.log('company title = ' + company_title);
+              console.log('company value = ' + company_value);
               if(company_value == company_title || company_value == '') {
                 //console.log('company Not filled');
                 company_errors = false;
