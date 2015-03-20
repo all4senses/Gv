@@ -1,6 +1,12 @@
 .contact-info
 	width: perc(513px, 1130px)
 	float: right
+	
+	+m(820)
+		float: none
+		width: 100%
+		max-width: 513px
+		+center(80px)
 
 	&-wrap
 		+clearfix
@@ -21,3 +27,10 @@
 		&-content
 			line-height: 20px
 			font-weight: 500
+
+		&-link
+			color: $grey-darker
+			transition: color 0.2s
+
+			&:hover
+				color: $primary

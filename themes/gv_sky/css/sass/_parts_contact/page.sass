@@ -1,5 +1,6 @@
 // TEMP Page Reference
-.page-node-62
+.page-node-62,
+.page-node-91
 
 	.hero-title-heading
 		font-size: 53px
@@ -16,6 +17,15 @@
 	.main-content
 		width: perc(513px, 1130px)
 		float: left
+
+		+m(820)
+			float: none
+			width: 100%
+			max-width: 513px
+			+center
+
+	.messages.error
+		display: none
 
 .main-wrap
 	+clearfix
