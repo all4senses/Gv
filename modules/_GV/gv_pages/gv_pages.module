@@ -5150,9 +5150,12 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
               // Good trial! :)
               ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
               
+              
+              
               // Connect a Rich Editor (cKeditor) to the Review text area.
+              $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+              // Disconnect a rich editor.
               $form['body']['und'][0]['#type'] = 'textarea';
-              //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
 
               $form['ureview']['u_input']['body'] = $form['body'];
            
