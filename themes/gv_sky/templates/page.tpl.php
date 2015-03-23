@@ -8,6 +8,11 @@ if ( current_path() == 'blog' ) {
   drupal_add_js('/sites/all/themes/gv_sky/js/blog.js');
 }
 
+if ( current_path() == 'node/add/review' ) {
+  drupal_add_js('/sites/all/themes/gv_sky/js/submit-review.js');
+}
+
+
 ?>
   <header id="header" role="banner">
     <nav class="navigation" role="navigation">
@@ -67,14 +72,9 @@ if ( current_path() == 'blog' ) {
     <?php  if ($page['below_content_wide']): ?>
         <?php print render($page['below_content_wide']); ?>
     <?php endif;  ?>
-    
-            <!-- <div id="breadcrumbs-dummy"></div> -->
-            
+                
             <!-- Error Messegaes -->
-            <?php print $messages; ?>
-
-            <!-- <a id="main-content"></a> -->
-            
+            <?php print $messages; ?>            
             
             <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper "><?php print render($tabs); ?></div><?php endif; ?>
             <?php print render($page['help']); ?>

@@ -2161,7 +2161,7 @@ function gv_pages_buildHome($name, $data) {
   //        $block_data = array('module' => 'views', 'delta' => 'blog-block_home_latest_blogs', 'shadow' => FALSE);
   //        $out .= gv_blocks_getBlockThemed($block_data);
   //
-  //    $out .='<div class="bottom-clear"></div></div>';
+  //    $out .='</div>';
   //
   //  }
     }
@@ -2639,7 +2639,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $form['field_p_name']['#weight'] = 1;
       
       $form['field_phone_type']['#weight'] = 2;
-      $form['field_phone_type']['#suffix'] = '<div class="bottom-clear"></div>';
+      $form['field_phone_type']['#suffix'] = '';
       
       $form['field_manufacturer']['#weight'] = 3;
       $form['field_p_image']['#weight'] = 4;
@@ -3291,171 +3291,25 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       }
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-  /*    
-      $provider_options_bu_structure = unserialize(PROVIDER_OPTIONS_BU);
-      $provider_options_bu = isset($p_data['provider_options_bu']) ? $p_data['provider_options_bu'] : $p_data['provider_options'];
-      
-      $form['s']['bu']['provider_options_bu'] = array(
-        '#type' => 'fieldset',
-        '#title' => 'Business Provider options',
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-        '#tree' => TRUE,
-        '#weight' => 11,
-      );
-            $form['s']['bu']['provider_options_bu']['enabled'] = array(
-              '#title' => 'Enable Option Tab',
-              '#type' => 'checkbox',
-              '#default_value' => isset($provider_options_bu['enabled']) ? $provider_options_bu['enabled'] : NULL,
-            );
-            
-            foreach ($provider_options_bu_structure as $options_set => $options_data) {
-              
-                  $form['s']['bu']['provider_options_bu'][$options_set] = array(
-                    '#type' => 'fieldset',
-                    '#title' => $options_set,
-                    '#collapsible' => TRUE,
-                    '#collapsed' => TRUE,
-                    '#states' => array(
-                                'invisible' => array(
-                                    //':input[name="' . "provider_options_bu[enabled]" . '"]' => array('checked' => FALSE),
-                                    ':input[name="' . "s[bu][provider_options_bu][enabled]" . '"]' => array('checked' => FALSE),
-                              ),
-                          ),
-                  );
-      
-                  
-                  foreach ($options_data as $option_title => $option_type) {
-                    
-                      $form['s']['bu']['provider_options_bu'][$options_set][$option_title] = array(
-                        '#title' => $option_title,
-                        '#type' => $option_type,
-                        '#default_value' => isset($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title] : NULL,
-                      );
-                      
-                      if ($option_type == 'textarea') {
-                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#default_value'] = !empty($provider_options_bu[$options_set][$option_title]) ? (is_array($provider_options_bu[$options_set][$option_title]) ? $provider_options_bu[$options_set][$option_title]['value'] : $provider_options_bu[$options_set][$option_title]) : NULL;
-                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#type'] = 'text_format';
-                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
-                      }
-                      
-                      if ($option_type == 'checkbox') {
-                        
-                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#prefix'] = '<div style="overflow: hidden;"><div style="float: left;">';
-                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title]['#suffix'] = '</div>';
-                        
-                        $form['s']['bu']['provider_options_bu'][$options_set][$option_title . ' -text-'] = array(
-                          //'#title' => $option_title . ' -text-',
-                          '#type' => 'textfield',
-                          '#default_value' => isset($provider_options_bu[$options_set][$option_title . ' -text-']) ? $provider_options_bu[$options_set][$option_title . ' -text-'] : NULL,
-                            
-                          '#states' => array(
-                                'invisible' => array(
-                                    ':input[name="' . "provider_options_bu[$options_set][$option_title]" . '"]' => array('checked' => FALSE),
 
-                              ),
-                          ),
-                          '#attributes' => array('class' => array('-text-'), 'style' => 'background: #eee; border: none; padding: 3px;'),
-                          '#prefix' => '<div style="float: left; margin-left: 20px;">',
-                          '#suffix' => '</div></div>',
-                            
-                        );
-                      }
-                    
-                  }
-                  
-            }            
-            
-      
-//      // Find out overall rating for the provider.
-//      $criteria = array(
-//        'entity_type' => 'node',
-//        'entity_id' => $form['nid']['#value'],
-//        'function' => 'average',
-//      );
-//      $votes = votingapi_select_results($criteria);
-//     
-//      foreach ($votes as $vote) {
-//        if ($vote['tag'] == 'overall') {
-//          $form['s']['bu']['provider_options_bu']['Provider Info']['Overall Rating']['#default_value'] = number_format($vote['value'] * 0.05, 1);
-//          break;
-//        }
-//      }
-            
-*/        
-            
-                  
-     // //$form['field_p_types']['#suffix'] = '<div class="bottom-clear"></div>';
-      
-      
-//      $form['field_funnel_sections']['#prefix'] = '<fieldset class="collapsible form-wrapper" id="edit-funnel-sections"><legend><span class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Hide</span> Funnel Sections</a></span></legend>';
-//      $form['field_funnel_sections']['#suffix'] = '</fieldset>';    
-//      $form['field_funnel_sections']['und']['#title'] = '';
-      
-      //$form['field_p_types']['#prefix'] = '<fieldset class="collapsible form-wrapper" id="edit-service-types" class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Hide</span> Service Types Available</a></span></legend><div class="fieldset-wrapper">';
       $form['field_p_types']['#prefix'] = '<fieldset>';
       //$form['field_p_types']['und']['#title'] = '';
       
       
       $form['field_p_erating']['#prefix'] = '<div id="listings">';
-      //$form['field_p_erating_cc']['#suffix'] = '<div class="bottom-clear"></div></div>';
-      ////$form['field_p_erating_re_ca']['#suffix'] = '<div class="bottom-clear"></div></div>';
-      $form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset><div class="bottom-clear"></div>'; //$form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset><div class="bottom-clear"></div>';
-      //$form['field_p_erating_smbv']['#suffix'] = '<div class="bottom-clear"></div></div>';
+      //$form['field_p_erating_cc']['#suffix'] = '</div>';
+      ////$form['field_p_erating_re_ca']['#suffix'] = '</div>';
+      $form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset>'; //$form['field_p_erating_re_ca']['#suffix'] = '</div></fieldset>';
+      //$form['field_p_erating_smbv']['#suffix'] = '</div>';
        
       
-      
-        /*
-        $form['field_p_types']['#prefix'] = '<div id="types-n-feat">';
-        $form['field_p_listposition']['#suffix'] = '</div>';
-         
-            
-        $form['field_p_listposition_ch']['#prefix'] = '<div id="listpositions">';
-        $form['field_p_listposition_sh']['#suffix'] = '</div><div class="bottom-clear"></div>';
-        */
-        
+ 
       
       // Hide smbv service checkbox and list position.
       $form['field_p_erating_smbv']['#access'] = FALSE;
       unset($form['field_p_types']['und']['#options']['smbv']);
       
-          
-      /*
-      $form['data_quote'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Quote and Its Author'),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-        '#tree' => TRUE,
-        '#weight' => 12,
-      );
-            $form['data_quote']['q_text'] = array(
-              '#type' => 'textarea',
-              //'#type' => 'text_format',
-              //'#format' => 'full_html',
-                
-              '#title' => t('Quote text'),
-              '#default_value' => isset($p_data['quote']['q_text']) ? $p_data['quote']['q_text'] : '',
-            );
-            $form['data_quote']['q_author'] = array(
-              '#type' => 'textfield',
-              '#title' => t('Quote author'),
-              '#default_value' => isset($p_data['quote']['q_author']) ? $p_data['quote']['q_author'] : '',
-            );
-            
-        */    
-            
-            
+
             
             
 
@@ -4169,31 +4023,31 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $module_path = drupal_get_path('module', 'gv_pages');
       $module_misc_path = drupal_get_path('module', 'gv_misc');
       
-      $form['#attached']['js'] = array(
+      // $form['#attached']['js'] = array(
 
         // Add a characters counter.
         //$module_misc_path . '/js/gv_misc_charCount.js',
         //'sites/all/libraries/jquery.plugins/charCount.js',
 
         // Add hints inside some fields
-        $module_path . '/js/gv_review_fieldHints.js',
+        // $module_path . '/js/gv_review_fieldHints.js',
 
         // Add stars widgets to a Rating block
-        $module_path . '/js/gv_phone_review_stars.js',
-        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
-      );
+        // $module_path . '/js/gv_phone_review_stars.js',
+        // 'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
+      // );
 
-      $form['#attached']['library'][] = array('system', 'ui.widget');
+      // $form['#attached']['library'][] = array('system', 'ui.widget');
 
-      $form['#attached']['css'] = array(
-        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-      );
+      // $form['#attached']['css'] = array(
+      //   'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
+      // );
 
       
       
 
   
-      $form['#attributes']['class'][] = 'gv-edit-review-page';
+      $form['#attributes']['class'][] = 'review-form';
   
       $form['#validate'][] = 'gv_pages_validateForm_phoneReview';
       $form['#submit'][] = 'gv_pages_submitForm_phoneReview';
@@ -4316,7 +4170,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       //$form['#prefix'] = '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>';
       
       //dpm($form);
-      $form['actions']['submit']['#value'] = 'SUBMIT'; //'Submit Review';
+      $form['actions']['submit']['#value'] = 'Submit Review'; //'Submit Review';
       
       // Make some small corrections.
       $form['title']['#title'] = 'Review title';
@@ -4363,8 +4217,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       // Group fields
       
       $form['header'] = array(
-        //'#markup' => '<h1>Share Your Feedback</h1><h2>What Do You Think of Your VoIP Provider?</h2>',
-        '#markup' => '<h1>Share Your Feedback</h1><h2>What Do You Think of Your Provider?</h2>',
+        '#markup' => '<div class="form-intro"><h1 class="form-intro-title">Share Your Feedback</h1><h2 class="form-intro-desc">What Do You Think of Your Provider?</h2></div>',
         '#weight' => -25,
       );
       
@@ -4372,24 +4225,24 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         '#type' => 'container',
         '#attributes' => array(
           'class' => array(
-              'step about_you',
+              'review-form-about',
           ),
         ),
         '#weight' => -15,
       );
       
-          $form['about_you']['title']['#markup'] = '<div class="title">Your Information</div>';
+          $form['about_you']['title']['#markup'] = '';
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
-          $fields_to_rebuild = array('field_r_fname' => 'FIRST NAME', 'field_r_lname' => 'LAST NAME', 'field_r_email' => 'YOUR EMAIL');
+          $fields_to_rebuild = array('field_r_fname' => 'John', 'field_r_lname' => 'Doe', 'field_r_email' => 'example@email.com');
           foreach ($fields_to_rebuild as $field_to_rebuild => $field_hint) {
             $temp_field = $form[$field_to_rebuild]['und'][0];
             $form['about_you'][$field_to_rebuild . '_temp'] = array(
                 '#type' => 'textfield',
-                //'#title' => $temp_field['#title'],
+                '#title' => $temp_field['#title'],
                 '#default_value' => $temp_field['value']['#default_value'],
-                '#description' => $temp_field['#description'],
+                // '#description' => $temp_field['#description'],
                 '#required' => $temp_field['value']['#required'],
-                '#attributes' => array('title' => $field_hint),
+                '#attributes' => array('title' => $field_hint, 'placeholder' => $field_hint),
             );
             $form[$field_to_rebuild]['#access'] = FALSE;
           }
@@ -4464,20 +4317,19 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         '#type' => 'container',
         '#attributes' => array(
           'class' => array(
-              'step provider',
+              'review-form-provider',
           ),
         ),
         '#weight' => -10,
       );
-          //$form['provider']['title']['#markup'] = '<div class="title">Your VoIP Provider Details</div>';
-          $form['provider']['title']['#markup'] = '<div class="title">Your Service Provider Details</div>';
+          $form['provider']['title']['#markup'] = '';
           
           $form['provider']['field_ref_provider'] = $form['field_ref_provider'];
           $form['provider']['field_r_oprovider'] = $form['field_r_oprovider'];
-          $form['provider']['field_r_oprovider']['#suffix'] = '<div class="bottom-clear"></div>';
-      
-          $form['provider']['field_ref_provider']['und']['#title_display'] = 'invisible';
-          $form['provider']['field_r_oprovider']['und'][0]['value']['#title_display'] = 'invisible';
+          $form['provider']['field_r_oprovider']['#suffix'] = '';
+          $form['provider']['field_ref_provider']['und']['#title_display'] = 'before';
+          $form['provider']['field_r_oprovider']['und'][0]['value']['#title_display'] = 'before';
+          // dpm($form['provider']['field_ref_provider']);
                   
           $form['provider']['field_r_oprovider']['und'][0]['value']['#attributes']['title'] = str_replace('&quot;', '"',$form['provider']['field_r_oprovider']['und'][0]['value']['#title']);
           
@@ -4501,7 +4353,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             '#options' => $lines_options,
             '#default_value' => FALSE,
             '#weight' => 10,
-            '#prefix' => '<div class="bottom-clear"></div><div class="label left">HOW MANY LINES DO YOU HAVE:</div>',
+            '#prefix' => '<div class="label left">HOW MANY LINES DO YOU HAVE:</div>',
               
             '#access' => FALSE,
           );
@@ -4526,13 +4378,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         '#type' => 'container',
         '#attributes' => array(
           'class' => array(
-              'step ureview',
+              'review-form-ureview',
           ),
         ),
         '#weight' => -4,
       );
           //$form['ureview']['title']['#markup'] = '<div class="title">Rate and Review Your VoIP Provider</div>';
-          $form['ureview']['title']['#markup'] = '<div class="title">Rate and Review Your Experience</div>';
+          $form['ureview']['title']['#markup'] = '';
       
           $form['ureview']['u_input'] = array(
               '#type' => 'container',
@@ -4540,7 +4392,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           
               $form['ureview']['u_input']['votes'] = array(
                   '#type' => 'container',
-                  '#prefix' => '<div class="rate-caption"><div class="col-2">Click Stars To Start Reviewing</div><div class="col-3">Rate it</div></div>',
+                  '#prefix' => '<div class="form-item form-item-rating"><label class="review-form-rating-title-text">Rate and Review Your Experience</label>',
+                  // '#suffix' => '</div>',
               );
               foreach ($vote_keys as $vote_key => $vote_title) {
                 $form['ureview']['u_input']['votes']['rating_' . $vote_key] = array(
@@ -4548,22 +4401,18 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
                   '#options' => $rating_options,
                   // Commented because caused errors on w3 html validation.
                   //'#default_value' => $rating_options[''],
-                  '#prefix' => '<div class="vote"><div class="vote-title">' . $vote_title . '</div>',
-                  '#suffix' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div></div>',
+                  '#prefix' => '<div class="review-form-rating-item"><div class="review-form-rating-item-title">' . $vote_title . '</div>',
+                  '#suffix' => '<div class="review-form-rating-item-name"></div></div>',
                 );
-    //            $form['ureview']['votes']['rating_' . $vote_key . '_choice1'] = array(
-    //              '#markup' => '<div class="choice" id="edit-rating-' . $vote_key . '-choice">Rate it!</div>',
-    //              //'#weight' => $weight++,
-    //            );
               }
 
-              //$rating_recommend_options = $rating_options = array('' => '- ' . t('Select a value') . ' -', '100' => 'Yes', '0' => 'No');
               $rating_recommend_options = $rating_options = array('100' => 'Yes', '0' => 'No');
               $form['ureview']['u_input']['rating_recommend'] = array(
                   '#type' => 'radios',
                   '#options' => $rating_recommend_options,
                   '#default_value' => FALSE,
-                  '#prefix' => '<div class="label left">' . RECOMMEND . '</div>',
+                  '#prefix' => '</div><div class="form-item form-item-recommend"><label class="form-item-label">' . RECOMMEND . '</label>',
+                  '#suffix' => '</div>',
               );
 
               // just for reference from a below call
@@ -4571,14 +4420,14 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
               $form['ureview']['u_input']['pros'] = array(
                 '#type' => 'textfield',
-                //'#title' => 'Pros',
+                '#title' => 'Pros (optional)',
                 '#default_value' => '',
                '#attributes' => array('title' => PROS_HINT),
                 //'#attributes' => array('title' => 'PROS (OPTIONAL)'),
               );
               $form['ureview']['u_input']['cons'] = array(
                 '#type' => 'textfield',
-                //'#title' => 'Cons',
+                '#title' => 'Cons (optional)',
                 '#default_value' => '',
                 '#attributes' => array('title' => CONS_HINT),
                 //'#attributes' => array('title' => 'CONS (OPTIONAL)'),
@@ -4589,18 +4438,18 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
               $form['body']['und'][0]['value']['#rows'] = 5;
               // Unlink Ckeditor
               // Bad trial...
-              //$form['body']['und'][0]['#type'] = 'textarea';
+              $form['body']['und'][0]['#type'] = 'textarea';
               // Good trial! :)
               ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
-              $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
+              // $form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
 
               $form['ureview']['u_input']['body'] = $form['body'];
            
               $form['ureview']['u_input']['body']['und'][0]['#attributes']['title'] = 'REVIEW';
+              // dpm($form);
               
               
-              unset($form['body'],
-                    $form['ureview']['u_input']['body']['und'][0]['#title']);
+              unset($form['body']);
           
           
           
@@ -4610,24 +4459,34 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
           $form['ureview']['tips'] = array(
               '#type' => 'container',
+              '#attributes' => array(
+                'class' => array(
+                    'review-form-tips',
+                ),
+              ),
           );
             
               $form['ureview']['tips']['data'] = array(
-                '#markup' => "<div id='tips-block'><div class='title'>Review Tips:</div>
-<span>What do you like about your provider?</span>
-<span>What do you dislike and why?</span>
-<span>Talk about the advantages & disadvantages of the specific plan you have.</span>
-<span>How long have you been with the provider.</span>
-<span>Write as if you're literally telling a friend about the provider/service.</span>
-</div>
-<div id='about'><div class='title'>About Reviews:</div>
-<span>We will only accept and publish honest, detailed, and appropriate reviews.</span>
-<span>We will not publish reviews that use profanity. We reserve the right to refuse any review that is not verified by the reviewer.</span>
-<span>Your review will be published after it's been approved by one of our editors.</span>
-<span>Submissions that do not follow the above guidelines will not be posted.</span></div>",
-              );
+                '#markup' => "<div class='review-form-tips-tips'><div class='review-form-tips-title'>Review Tips</div>
+                                <div class='review-form-tips-content'>
+                                  What do you like about your provider?<br />
+                                  What do you dislike and why?<br />
+                                  Talk about the advantages & disadvantages of the specific plan you have.<br />
+                                  How long have you been with the provider.<br />
+                                  Write as if you're literally telling a friend about the provider/service.
+                                </div>
+                              </div>
+                              <div class='review-form-tips-about'><div class='review-form-tips-title'>About Reviews</div>
+                                <div class='review-form-tips-content'>
+                                  We will only accept and publish honest, detailed, and appropriate reviews.<br />
+                                  We will not publish reviews that use profanity. We reserve the right to refuse any review that is not verified by the reviewer.<br />
+                                  Your review will be published after it's been approved by one of our editors.<br />
+                                  Submissions that do not follow the above guidelines will not be posted.
+                                </div>
+                              </div>",
+                );
           
-          $form['ureview']['closing_tag']['#markup'] = '<div class="bottom-clear"></div>  ';
+          $form['ureview']['closing_tag']['#markup'] = '  ';
               
               
       // Hide helper hidden field (for saving temporary serialized ratings data)
@@ -4701,9 +4560,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         
         // Set a select of available providers.
         //$providers['_none'] = '- Select a value -';
-        $providers['_none'] = '- SELECT YOUR PROVIDER -'; //'- SELECT YOUR VOIP PROVIDER -';
+        $providers['_none'] = 'Select Your Service Provider'; //'- SELECT YOUR VOIP PROVIDER -';
         gv_misc_getProviders($providers);
-        $providers[41] = 'OTHER SP';
+        $providers[41] = 'Other';
         $form['provider']['field_ref_provider']['und']['#options'] = $providers;
         $form['provider']['field_ref_provider']['und']['#default_value'][0] = '_none';
 
@@ -4941,60 +4800,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         
       } // End of Edit a review page.
       
-      // Correct styling of the Captcha section, if it's present.
-//      if (!empty($form['captcha'])) {
-//        $form['captcha']['#prefix'] = '<div class="step captcha-section form-wrapper" id="captcha-section"><div class="title">Captcha Confirmation</div>';
-//        $form['captcha']['#suffix'] = '</div>';
-//      }
       
       $form['title']['#prefix'] = '<div class="step admin-section form-wrapper" id="admin-section"><div class="title">Admin Section</div>';
       $form['field_r_notapproved_checkbox']['#suffix'] = '</div>';
       
-      // Add stars widgets to a Rating block
-      $module_path = drupal_get_path('module', 'gv_pages');
-      $module_misc_path = drupal_get_path('module', 'gv_misc');
-      
-      $form['#attached']['js'] = array(
-
-        // Add a characters counter.
-        //$module_misc_path . '/js/gv_misc_charCount.js',
-        //'sites/all/libraries/jquery.plugins/charCount.js',
-
-        // Add hints inside some fields
-        $module_path . '/js/gv_review_fieldHints2.js', // 2 has also a hint for the other provider field
-          
-         // Styling select boxes.
-        //$module_path . '/js/gv_stylingSelectBoxes.js',
-
-        // Add stars widgets to a Rating block
-        $module_path . '/js/gv_review_stars.js',
-        'sites/all/libraries/jquery.ui.stars/jquery.ui.stars.min.js',
-      );
-
-      
-      // Styling select boxes.
-//      $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
-//      drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
-//      drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
-//      
-//      $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
-//      drupal_add_js($path_to_custom_js . 'gv_stylingSelectBoxes.js');
-  
-  
-      
-      
-      $form['#attached']['library'][] = array('system', 'ui.widget');
-      //$form['#attached']['library'][] = array('system', 'ui.selectmenu');
-
-      $form['#attached']['css'] = array(
-        'sites/all/libraries/jquery.ui.stars/css/jquery.ui.stars.css',
-      );
-
-      
-      
 
   
-      $form['#attributes']['class'][] = 'gv-edit-review-page';
+      $form['#attributes']['class'][] = 'review-form';
   
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#submit'][] = 'gv_pages_submitForm_review';
@@ -6902,7 +6714,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   //  $fields_to_rebuild = array('field_r_fname' => 'FIRST NAME', 'field_r_lname' => 'LAST NAME', 'field_r_email' => 'YOUR EMAIL');
   
   //$fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => FNAME_HINT, 'set' => 'about_you'), 'field_r_lname_temp' => array('hint' => LNAME_HINT, 'set' => 'about_you', 'title' => t('Last name')), 'field_r_email_temp' => array('hint' => EMAIL_HINT, 'set' => 'about_you'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview'));
-  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => 'FIRST NAME', 'set' => 'about_you', 'title' => 'FIRST NAME'), 'field_r_lname_temp' => array('hint' => 'LAST NAME', 'set' => 'about_you', 'title' => 'LAST NAME'), 'field_r_email_temp' => array('hint' => 'YOUR EMAIL', 'set' => 'about_you', 'title' => 'YOUR EMAIL'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview', 'title' => 'PROS'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview', 'title' => 'CONS'));
+  $fields_to_clear_hints = array('field_r_fname_temp' => array('hint' => 'FIRST NAME', 'set' => 'about_you', 'title' => 'FIRST NAME'), 'field_r_lname_temp' => array('hint' => 'LAST NAME', 'set' => 'about_you', 'title' => 'Last Name'), 'field_r_email_temp' => array('hint' => 'Your Email', 'set' => 'about_you', 'title' => 'Your Email'), 'pros' => array('hint' => PROS_HINT, 'set' => 'ureview', 'title' => 'Pros'), 'cons' => array('hint' => CONS_HINT, 'set' => 'ureview', 'title' => 'Cons'));
   
   foreach ($fields_to_clear_hints as $fname => $fdata) {
    
@@ -6931,7 +6743,7 @@ function gv_pages_validateForm_review(&$form, &$form_state) {
   
   
   if ($form_state['values']['field_r_oprovider']['und'][0]['value'] == $form['provider']['field_r_oprovider']['und'][0]['value']['#attributes']['title']) {
-  //if ($form_state['values']['field_r_oprovider']['und'][0]['value'] == 'IF SELECTED "OTHER", ENTER HERE') {
+  // if ($form_state['values']['field_r_oprovider']['und'][0]['value'] == 'Enter Provider\'s Name') {
       
       // This clear the field.
       //$form[$fdata['set']][$fname]['#value'] = NULL;

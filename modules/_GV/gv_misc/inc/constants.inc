@@ -23,8 +23,9 @@ define('SOUND', 'Quality');
 define('CUSTOMER', 'Support');
 //define('RELY', 'Service Reliability');
 define('RELY', 'Reliability');
-////define('RECOMMEND', 'Would you recommend this VoIP provider?');
-define('RECOMMEND', 'Would you recommend this service provider?');
+// define('RECOMMEND', 'Would you recommend this VoIP provider?');
+// define('RECOMMEND', 'Would you recommend this service provider?');
+define('RECOMMEND', 'Would you recommend this provider?');
 
 
 // Phones only
