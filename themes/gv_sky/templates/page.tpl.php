@@ -44,6 +44,15 @@ if ( current_path() == 'node/add/review' ) {
       </div>
     <?php } ?>
 
+    <?php if ( current_path() == 'node/38' ) { // About Page?>
+      <div class="hero-header center">
+        <div class="hero-title">
+          <h1 class="hero-title-heading">Meet the <span class="hero-title-heading-highlight">GetVoIP</span> Team</h1>
+          <p class="hero-title-desc">How did GetVoIP reach its success? Who‘s the brains behind GetVoiP‘s operations? What made GetVoIP standout from the rest of the phone review companies? What‘s our main philosophy and what are our future plans? </p>
+        </div>
+      </div>
+    <?php } ?>
+
     <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page?>
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js'); ?>
