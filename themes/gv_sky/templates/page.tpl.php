@@ -53,6 +53,11 @@ if ( current_path() == 'node/add/review' ) {
       </div>
     <?php } ?>
 
+    <?php if ( strpos(current_path(), 'user/') !== FALSE ) { // Team Member Page?>
+      <?php drupal_add_js('/sites/all/themes/gv_sky/js/team-member.js'); ?>
+      <div class="hero-header center"></div>
+    <?php } ?>
+
     <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page?>
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js'); ?>

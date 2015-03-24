@@ -240,7 +240,8 @@
                   echo ' class="' . implode(' ', $custom_classes) . '"';
                 }
                  
-                $title_shorter = dk_shorten_title($title);
+                // $title_shorter = dk_shorten_title($title);
+                $title_shorter = $title;
                 
 
                 ?>><?php if (!isset($node->title_no_link) && !$page): ?><a class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-title-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
