@@ -88,6 +88,7 @@ jQuery(document).ready(function($){
 			$(this).addClass('hover');
 			$(this).prevAll().addClass('hover');
 			$(this).parent().siblings('.review-form-rating-item-name').html($name);	// Append hover name to .review-form-rating-item-name
+			reviewTipsShow();
 	}, function(){
 			$$('.review-form-rating-item-fivestar-item').removeClass('hover');
 			$(this).parent().siblings('.review-form-rating-item-name').html('');	// Empty name
@@ -126,7 +127,29 @@ jQuery(document).ready(function($){
 		$(this).addClass('checked');
 		$(this).find('input').prop('checked', true);
 	});	
+
+
+
+
+
+
+
+
+
+
+	// ==== Review Tips Appearance =================================================================================
+	$tipsShow = false
+	function reviewTipsShow() {
+		if ( !$tipsShow ) {
+			$$('#edit-tips').addClass('show');
+			$tipsShow = true;
+		}
+	}
 })
+
+
+
+
 
 
 

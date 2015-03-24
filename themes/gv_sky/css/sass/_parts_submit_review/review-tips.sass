@@ -1,0 +1,32 @@
+.review-form-tips
+	position: absolute
+	left: 645px
+	top: 430px
+	width: 300px
+	opacity: 0
+	transition: all 0.35s
+	
+	&.show
+		left: 595px
+		opacity: 1
+
+	&-about
+		margin-top: 34px
+
+	&-title
+		font-size: 20px
+		font-weight: 500
+		color: $contrast
+
+	&-content
+		font-size: 15px
+		line-height: 21px
+		font-weight: 500
+
+	+m(1250)
+		width: 250px
+	+m(1150)
+		width: 180px
+	+m(1023)
+		display: none
+

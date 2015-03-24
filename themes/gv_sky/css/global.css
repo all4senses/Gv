@@ -1805,7 +1805,6 @@ h1.preface {
   width: 100%;
   min-height: 322px;
   height: auto;
-  max-height: 415px;
   margin-top: 48px;
   border-radius: 4px;
   border: 1px solid #d1d1d1;
@@ -3181,7 +3180,7 @@ h1.preface {
           color: white;
           letter-spacing: 0.4px;
           height: 100%;
-          line-height: 30px; }
+          line-height: 33px; }
     .latest-reviews-list-item-title {
       font-size: 16px;
       font-weight: 600;
@@ -7539,6 +7538,7 @@ h1.preface {
   outline: 0;
   border-color: #e39315; }
 .page-node-add-review .review-form {
+  position: relative;
   width: 100%;
   max-width: 565px;
   margin: 0 auto; }
@@ -7696,14 +7696,42 @@ h1.preface {
           color: #ffba00; }
   .page-node-add-review .review-form #edit-body {
     clear: both; }
-  .page-node-add-review .review-form-tips {
-    display: none; }
   .page-node-add-review .review-form .form-item-pros {
     clear: both; }
 .page-node-add-review .form-required {
   display: none; }
 .page-node-add-review .grippie {
   display: none; }
+
+.review-form-tips {
+  position: absolute;
+  left: 645px;
+  top: 430px;
+  width: 300px;
+  opacity: 0;
+  transition: all 0.35s; }
+  .review-form-tips.show {
+    left: 595px;
+    opacity: 1; }
+  .review-form-tips-about {
+    margin-top: 34px; }
+  .review-form-tips-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #e39315; }
+  .review-form-tips-content {
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 500; }
+  @media screen and (max-width: 1250px) {
+    .review-form-tips {
+      width: 250px; } }
+  @media screen and (max-width: 1150px) {
+    .review-form-tips {
+      width: 180px; } }
+  @media screen and (max-width: 1023px) {
+    .review-form-tips {
+      display: none; } }
 
 a[href="/cc"],
 a[href^="/admin/content-gv"] {
