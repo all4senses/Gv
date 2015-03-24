@@ -1,6 +1,8 @@
 <?php 
 drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
 drupal_add_js('/sites/all/themes/gv_sky/js/comparison_page.js');
+drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
+drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js');
 // drupal_add_css('/sites/all/themes/gv_sky/css/global.css'); 
 ?>
   <header id="header" role="banner">
