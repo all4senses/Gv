@@ -1,0 +1,111 @@
+.js-controlled-form
+
+	.step
+		display: none
+
+		&.show
+			display: block
+
+.loading
+	width: 100%
+	position: absolute
+	+valign
+	text-align: center
+
+	&-title
+		font-size: 36px
+		font-weight: 500
+
+	&-gif
+		background-image: url(/sites/all/themes/gv_sky/images/loading.gif)
+		+size(64)
+		background-size: cover
+		+center
+
+
+.error input,
+.error select,
+.error textarea
+	position: relative
+	-webkit-animation-name: shakey
+	-webkit-animation-timing-function: linear
+	-webkit-animation-duration: 200ms
+	-moz-animation-name: shakey
+	-moz-animation-timing-function: linear
+	-moz-animation-duration: 200ms
+	-ms-animation-name: shakey
+	-ms-animation-timing-function: linear
+	-ms-animation-duration: 200ms
+	animation-name: shakey
+	animation-timing-function: linear
+	animation-duration: 200ms
+
+
+
+@-webkit-keyframes shakey 
+	0%  
+		left: -10px
+	
+	25% 
+		left: 10px
+	
+	50% 
+		left: -10px
+	
+	75% 
+		left: 10px
+	
+	100% 
+		left: 0px
+	
+
+@-moz-keyframes shakey 
+	0%  
+		left: -10px
+	
+	25% 
+		left: 10px
+	
+	50% 
+		left: -10px
+	
+	75% 
+		left: 10px
+	
+	100% 
+		left: 0px
+	
+
+@-ms-keyframes shakey 
+	0%  
+		left: -10px
+	
+	25% 
+		left: 10px
+	
+	50% 
+		left: -10px
+	
+	75% 
+		left: 10px
+	
+	100% 
+		left: 0px
+	
+
+@keyframes shakey 
+	0%  
+		left: -10px
+	
+	25% 
+		left: 10px
+	
+	50% 
+		left: -10px
+	
+	75% 
+		left: 10px
+	
+	100% 
+		left: 0px
+	

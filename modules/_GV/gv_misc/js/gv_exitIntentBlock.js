@@ -16,6 +16,9 @@
             {    
                 done = true;
                 // $.fn.colorbox({iframe:true, width:650, height:600, href: 'get/iframe/business-voip-chart', open: true});  
+                $$("body").css('overflow', 'hidden');
+
+                $.fn.popup("exit");
             }
         });
        

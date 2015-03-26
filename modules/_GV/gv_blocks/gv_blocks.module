@@ -10411,131 +10411,106 @@ function gv_blocks_get_exitIntent_v2() {
    <div style="display: none;">
     <div class="exit-intent" id="exitIntent"> 
       <div id="exit-intent-ppc" class="exit-intent-ppc">
-        <div class="sending results" style="display: none;"></div>
-        <div class="success results" style="display: none;"></div>
-        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
         
-        <form class="multipartForm" method="post" action="/request" style="height: 300px; overflow: hidden;">
+        <form class="exit-intent-form js-controlled-form" method="post" action="/request">
+                <div class="exit-intent-form-wrap">
+                
+                    <div class="step step-one">
+                          <div class="exit-intent-intro">
+                            <div class="exit-intent-intro-line-1 one">Want To See Exactly How Much</div>
+                            <div class="exit-intent-intro-line-2 one">Business VoIP</div>
+                            <div class="exit-intent-intro-line-3 one">Will <span class="exit-intent-intro-line-3-highlight">Save</span> You?</div>
+                            <div class="exit-intent-intro-line-4 one">We provide bottom line quotes from award-winning providers.</div>
+                          </div>
 
-                
-                <div id="fieldWrapper">
-                
-                    <div class="step" id="first_step">
-                        
-                           <div class="line-1">Want To See Exactly How Much</div>
-                           <div class="line-2">BUSINESS VOIP</div>
-                           <div class="line-3">Will <span>Save</span> You?</div>
-                           <div class="line"></div>
-                           <div class="line-4">We provide bottom line quotes from award-winning providers.</div>
-                           
-                           <div class="control">
-                              <div class="next_custom">Next</div>
-                              <div class="no">No</div>
-                           </div>
+                          <div class="exit-intent-control">
+                            <div class="exit-intent-control-button next"><div class="exit-intent-control-button-large">Yes</div><div class="exit-intent-control-button-small">Let\'s do this.</div></div>
+
+                            <div class="exit-intent-control-button no"><div class="exit-intent-control-button-large">No</div><div class="exit-intent-control-button-small">I like to overpay.</div></div>
+                          </div>
                     </div>
 
 
 
-                    
-                    <div class="step" id="second_step">
-                       
-                      <div class="line-1">We provide bottom line quotes from award-winning providers.</div>
-                      <div class="line"></div>
-                      <div class="line-2">To Get Started On Your</div>
-                      <div class="line-3">SAVINGS QUOTE</div>
-                      <div class="line-4">Tell us:</div>
-                        
 
-                      <div class="control">
-                      
-                            <div class="text-h-group">
-
-
-                                <div class="field-group left">
-
-                                  <div class="wrapper input-border">
-                                    <input class="after company" name="company" id="company" title="Company Name" />
+                    <div class="step step-two">
+                          <div class="exit-intent-intro">
+                            <div class="exit-intent-intro-line-1 two">We provide bottom line quotes from award-winning providers.</div>
+                            <div class="exit-intent-intro-line-2 two">To Get Started On Your</div>
+                            <div class="exit-intent-intro-line-3 two">Savings Quote</div>
+                            <div class="exit-intent-intro-line-4 two">Tell us:</div>
+                          </div>
+                            
+                          <div class="exit-intent-control">
+                              <div class="exit-intent-control-fieldset secure fieldset required">
+                                  <div class="exit-intent-control-fieldset-wrap">
+                                    <input class="exit-intent-control-fieldset-input input" name="company" id="company" placeholder="Company Name" />
                                   </div>
-
-                                </div>
-
-                                <div class="field-group right">
-
-                                   <!--<div class="question">How many phones do you need?</div>-->
-                                     <select name="phones_amt" id="phones_amt" class="input">
-                                       <option value="">- Number of Lines -</option>
+                              </div>
+                              <div class="exit-intent-control-fieldset select fieldset required">
+                                  <div class="exit-intent-control-fieldset-wrap">
+                                    <select name="phones_amt" id="phones_amt" class="exit-intent-control-fieldset-select input">
+                                       <option value="">Number of Lines</option>
                                        <option value="1 - 4">1 - 4</option>
                                        <option value="5 - 10">5 - 10</option>
                                        <option value="11 - 20">11 - 20</option>
                                        <option value="21 - 50">21 - 50</option>
                                        <option value="More than 50">More than 50</option>
-                                     </select>
+                                    </select>
+                                  </div>
 
-                                 </div>
-                           
-                              
-                              </div>
-                              
-                              <div class="back_custom">Back</div>
-                              <div class="next_custom">Next</div>
-                              <div class="err" style="display: none;">Please select a Number of lines.</div>
-                         
-                         </div>
-                         
-                         
+                               </div>                            
+                            <div class="exit-intent-control-button next"><div class="exit-intent-control-button-text">Go To Last Step</div></div>
+                       </div>
                     </div>
                     
 
 
-                    <div class="step" id="third_step">
-                        
-                           <div class="line-1">After we match you with qualified providers,</div>
-                           <div class="line-2">Where should we send your</div>
-                           <div class="line-3">FREE QUOTE?</div>
-                           <div class="line"></div>
-                           <div class="line-4">Your quotes will be delivered within minutes.</div>
-                           
-                          <div class="control">
-                          
-                                  <div class="text-h-group">
-                                    <div class="wrapper input-border">
-                                      <input class="after required firstname" name="firstname" id="firstname" title="First Name" />
-                                    </div>
 
-                                    <div class="wrapper input-border second">
-                                      <input class="after required lastname" name="lastname" id="lastname" title="Last Name" />
-                                    </div>
-                                  </div>
 
-                                  <div class="text-h-group">
-                                    <div class="wrapper input-border">
-                                      <input class="after email required" name="email" id="email" title="Email Address" />
-                                    </div>
-
-                                    <div class="wrapper phone input-border  second">
-                                        <input class="after required phone" name="phone" id="phone" value="" title="Phone Number" />
-                                    </div>
-                                  </div>
-                                  
-                                  
-                                  <div class="back_custom">Back</div>
-                                  
+                    <div class="step step-three">
+                          <div class="exit-intent-intro">
+                            <div class="exit-intent-intro-line-1 three">After we match you with qualified providers,</div>
+                            <div class="exit-intent-intro-line-2 three">Where should we send your</div>
+                            <div class="exit-intent-intro-line-3 three">Free Quote?</div>
+                            <div class="exit-intent-intro-line-4 three">Your quotes will be delivered within minutes.</div>
                           </div>
-                         
-                          
 
+                          <div class="exit-intent-control">
+                                  <div class="exit-intent-control-fieldset fieldset required">
+                                      <div class="exit-intent-control-fieldset-wrap">
+                                        <input class="exit-intent-control-fieldset-input input" name="firstname" id="firstname" autocomplete="given-name" placeholder="First Name" />
+                                      </div>
+                                  </div>
+
+                                  <div class="exit-intent-control-fieldset fieldset required">
+                                      <div class="exit-intent-control-fieldset-wrap">
+                                        <input class="exit-intent-control-fieldset-input input" name="lastname" id="lastname" autocomplete="family-name" placeholder="Last Name" />
+                                      </div>
+                                  </div>
+
+                                  <div class="exit-intent-control-fieldset fieldset required">
+                                      <div class="exit-intent-control-fieldset-wrap">
+                                        <input class="exit-intent-control-fieldset-input input" name="email" id="email" autocomplete="email" placeholder="Email Address" />
+                                      </div>
+                                  </div>
+
+                                  <div class="exit-intent-control-fieldset fieldset required">
+                                      <div class="exit-intent-control-fieldset-wrap">
+                                          <input class="exit-intent-control-fieldset-input input phone" name="phone" id="phone" value="" autocomplete="tel" placeholder="Phone Number" />
+                                      </div>
+                                  </div>
+                                  <div class="exit-intent-control-button submit">
+                                    <input class="exit-intent-control-button-input" id="next" value="Send me my Free Quote" type="submit" />
+                                  </div>
+                          </div>
                     </div>
-                    
+                    <div class="results"></div>
 
 
+
                     
-                </div>
-            
-                <div id="Navigation"> 							
-                        <!-- <input class="navigation_button" id="back" value="Back" type="reset" /> -->
-                        <input class="navigation_button" id="next" value="Next" type="submit" />
-                        
-                </div>
+                </div> <!-- <div class="exit-intent-form-wrap"></div> -->
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="block" />
@@ -12124,19 +12099,6 @@ else { // User->uid == 1
 function gv_blocks_getQuotePopup_onLists() {
   
   
-  // Colorbox for popup window.
-  //1, 3, 4, 
-  
-  
-  //$current_js_array = drupal_add_js();
-  if (!isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js']) && !isset($current_js_array['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) ) 
-    {
-      //dpm($current_js_array);
-      // Colorbox for popup window for exit intent.
-      //possible versions for the design: 1, 3, 4, 
-      // drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-  }
-  
 
   // Exit intent Ad block main js.
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
@@ -12149,9 +12111,7 @@ function gv_blocks_getQuotePopup_onLists() {
     //return '';
     
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
-    
-    drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example3/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-    
+        
     $out = 
     '<div style="display: none;">
       <div id="block-gv-blocks-request-quote-v10" class="popup-request quote on-list">' 
@@ -12161,9 +12121,7 @@ function gv_blocks_getQuotePopup_onLists() {
   }
   else {
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
-    
-    drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
-  
+      
     
     //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
     $logo_block = '<div class="logo">'. 'LOGO' . '</div>';

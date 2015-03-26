@@ -1,7 +1,7 @@
 (function($){
 
 	var $popup_overlay = '<div class="popup-overlay"></div>';
-	var $popup = '<div class="popup"><div class="popup-close"></div><div class="popup-inner"></div></div>';
+	var $popup = '<div class="popup"><div class="popup-close"></div><div class="popup-content"></div></div>';
 	$('body').prepend($popup_overlay + $popup);	
 
 	var popOpen = false;
@@ -31,28 +31,32 @@
 			popOpen = true;
 			
 			if (quote) {
+				$$('.popup, .popup-overlay').addClass('show quote');
 				
 			}
 
 
 			if (demo) {
+				$$('.popup, .popup-overlay').addClass('show demo');
 				
 			}
 
 
 			if (exit) {
-				$$('.popup, .popup-overlay').addClass('show', 'noanimate', 'exit');
-				// $('.popup-inner').load('#exitIntent');
+				$$('.popup, .popup-overlay').addClass('show exit');
+				$('#exitIntent').appendTo($('.popup-content'));
 			}
 
-
-			if (close) {
-				$('.popup, .popup-overlay').removeClass('show', 'noanimate', 'quote', 'demo', 'exit');
-				$$("body").css('overflow', 'visible');
-				popOpen = false;
-			}
 
 		} else {
+
+			if (close) {
+				$$('.popup, .popup-overlay').removeClass('show quote demo exit');
+				$$("body").css('overflow', 'visible');
+				popOpen = false;
+				setTimeout(function(){ $$('.popup').empty(); }, 400);
+			}
+
 			return;
 		}
 
