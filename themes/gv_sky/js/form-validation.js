@@ -1,6 +1,6 @@
 (function($){
 
-	$.fn.form = function($arg) {
+	$.fn.form = function($arg, $url) {
 		var prepare = false;
 		var next = false;
 		var back = false;
@@ -19,7 +19,7 @@
 			this.find('.fieldset').each(function(){
 
 				if ( $(this).hasClass('required') ) {
-					$(this).find('.input').change(function(){
+					$(this).find('.input').not('.phone, .email').on('change keydown', function(){
 						if ( $(this).val() == "" || $(this).val() == null) {
 							$(this).parents('.fieldset').removeClass('valid');
 						} else{
@@ -35,7 +35,10 @@
 			this.find('.phone').each(function(){
 				$(this).keydown(function (event) {
 		            if( !(     event.keyCode == 8                                // backspace
-		                    || event.keyCode == 9
+		                    || event.keyCode == 9 								// tab
+		                    || event.keyCode == 16 								// shift
+		                    || event.keyCode == 17 								// ctrl
+		                    || event.keyCode == 18 								// alt
 		                    || event.keyCode == 46                              // delete
 		                    || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
 
@@ -47,6 +50,25 @@
 		              ) {
 		                    event.preventDefault();     // Prevent character input
 			            }
+				});
+				$(this).change(function(){
+					if ( $(this).val() == "" || $(this).val().length < 7 ) {
+						$(this).parents('.fieldset').removeClass('valid');
+					} else {
+						$(this).parents('.fieldset').addClass('valid').removeClass('error');
+					}
+				});
+			});
+
+			this.find('.email').each(function(){
+				$(this).on('change keydown', function(){
+				    var email = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+					if ( $(this).val() == "" || !email.test($(this).val()) ) {
+						$(this).parents('.fieldset').removeClass('valid');
+					} else {
+						$(this).parents('.fieldset').addClass('valid').removeClass('error');
+					}
 				});
 			});
 		}
@@ -98,11 +120,12 @@
 					$results.html($loading);
 					$currentStep.removeClass('show');
 
-					if ( this.hasClass('exit-intent-form') ) {
-						$.get('/request', data, function(data){
-							$results.html(data);
-						});
-					}
+					$.post($url, data, function(data){
+						$results.html('<div class="results-success">' + data.data + '</div>')
+					}, 'json')
+							.fail(function(){
+								$results.html('<div class="loading-title">An unknown error has occured on the server, please contact customer support for help.</div>')
+							});
 
 				}
 			}
@@ -122,21 +145,6 @@
 			$currentStep.removeClass('show');
 			$previousStep.addClass('show');
 		}
-
-
-
-
-
-
-
-
-		// if (submit) {
-		// 	var $currentStep = this.find('.step.show');
-		// 	var $previousStep = $currentStep.prev();
-
-		// 	$currentStep.removeClass('show');
-		// 	$previousStep.addClass('show');
-		// }
 
 
 	}

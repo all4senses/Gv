@@ -69,6 +69,7 @@ drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js');
 
         
           <?php echo render($page['above_footer']); ?>
+          <?php echo gv_blocks_getQuotePopup_onLists(); ?>
     </div>
   </main>
 
