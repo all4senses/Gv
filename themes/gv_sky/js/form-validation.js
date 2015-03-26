@@ -16,7 +16,7 @@
 		if (prepare) {
 			this.find('.step-one').addClass('show');
 
-			this.find('.fieldset').each(function(){
+			this.find('.fieldset').not('.radio, .checkbox').each(function(){
 
 				if ( $(this).hasClass('required') ) {
 					$(this).find('.input').not('.phone, .email').on('change keydown', function(){
@@ -29,6 +29,32 @@
 				} else {
 					$(this).addClass('valid');
 				}
+			});
+
+			this.find('.fieldset.radio').each(function(){
+				$(this).find('.input-button').click(function(){
+					$(this).siblings().removeClass('checked');
+					$(this).addClass('checked');
+					$(this).find('.input').prop('checked', true);
+					$(this).parents('.fieldset').addClass('valid').removeClass('error');
+				});
+			});
+
+			this.find('.fieldset.checkbox').each(function(){
+				$(this).find('.input-button').click(function(){
+					if ( !$(this).hasClass('checked') ) {
+						$(this).addClass('checked');
+						$(this).find('.checkbox').prop('checked', true);
+						$(this).find('.input').prop('checked', true);
+						$(this).parents('.fieldset').addClass('valid').removeClass('error');
+					} else {		
+						$(this).removeClass('checked');
+						$(this).find('.input').prop('checked', true);
+						if ( !$(this).hasClass('checked') && !$(this).siblings().hasClass('checked') ) {
+							$(this).parents('.fieldset').removeClass('valid');
+						}
+					}
+				});
 			});
 
 

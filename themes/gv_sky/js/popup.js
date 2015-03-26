@@ -32,6 +32,7 @@
 			
 			if (quote) {
 				$$('.popup, .popup-overlay').addClass('show quote');
+				$('#popup-request').appendTo($('.popup-content'));
 				
 			}
 
