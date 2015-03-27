@@ -5730,78 +5730,55 @@ function gv_blocks_get_requestQuote_block_v8() {
   
   $out = '
    
-   <div id="requestQuoteFormWrapper">
-        <div class="sending results" style="display: none;"></div>
-        <div class="success results" style="display: none;"></div>
-        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
-        
-        ' /*. '<form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">' .*/ . '<form class="multipartForm bbq" method="post" action="/request">' . '
+   <div class="get-quote">
+           
+           <div class="get-quote-title"><div class="get-quote-title-text">Get VoIP Quick Quotes</div></div>
 
-                
-                <div id="fieldWrapper">
+           <form class="get-quote-form" method="post" action="/request">
                     
-                    <div class="step" id="questions_section">
-                    
-                                <div id="up">
-                                    <div class="text">' . $data['headline']['value'] . '</div>
+                    <div class="step step-one show" id="questions_section">
+                                                       
+                                <div class="get-quote-fieldset fieldset required">
+                                    <label for="company" class="get-quote-fieldset-label">Company</label>
+                                    <div class="get-quote-fieldset-wrap">
+                                      <input class="get-quote-fieldset-input input"  type="text" name="company" placeholder="Company" />
+                                    </div>
+                                </div>                                                       
+                                <div class="get-quote-fieldset fieldset half required">
+                                    <label for="firstname" class="get-quote-fieldset-label">First Name</label>
+                                    <div class="get-quote-fieldset-wrap">
+                                      <input class="get-quote-fieldset-input input"  type="text" name="firstname" placeholder="John" />
+                                    </div>
                                 </div>
-                                <div class="bottom-clear"></div>   
-                           
-                                <div class="wrapper top first">
-                                  <div class="question ui-widget">Service Type:</div>
-                                  <select name="q_type" id="q_type" class="input required ui-state-default ui-helper-reset">
-                                    <option selected="selected" value="Business">Business</option>
-                                    <option value="Home-Based Business">Home-Based Business</option>
-                                  </select>
+                                <div class="get-quote-fieldset fieldset half required">
+                                    <label for="lastname" class="get-quote-fieldset-label">Last Name</label>
+                                    <div class="get-quote-fieldset-wrap">
+                                      <input class="get-quote-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
+                                    </div>
                                 </div>
-
-                                <div class="wrapper top last">
-                                  <div class="question ui-widget">Lines Needed:</div>
-                                  <select name="phones_amt" id="phones_amt" class="input required ui-state-default ui-helper-reset">
-                                    <!-- <option value="1 - 4">1 - 4</option> -->
-                                    <option value="2 - 4">2 - 4</option>
-                                    <option selected="selected" value="5 - 10">5 - 10</option>
-                                    <option value="11 - 20">11 - 20</option>
-                                    <option value="21 - 50">21 - 50</option>
-                                    <option value="More than 50">More than 50</option>
-                                  </select>
+                                <div class="get-quote-fieldset fieldset half required">
+                                    <label for="phone" class="get-quote-fieldset-label">Phone Number</label>
+                                    <div class="get-quote-fieldset-wrap">
+                                      <input class="get-quote-fieldset-input input phone"  type="text" name="phone" />
+                                    </div>
                                 </div>
-
-                            <div class="bottom-clear"></div>
-                            
-                            <!--<img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" /> -->
-
-
-                            <div class="bottom-clear"></div>
-                            
-                                <div class="wrapper middle first left">
-                                    <input class="after required firstname" name="firstname" id="firstname" title="First Name" />
+                                <div class="get-quote-fieldset fieldset half required">
+                                    <label for="email" class="get-quote-fieldset-label">Email Address</label>
+                                    <div class="get-quote-fieldset-wrap">
+                                      <input class="get-quote-fieldset-input input email"  type="text" name="email" />
+                                    </div>
                                 </div>
-
-                                <div class="wrapper middle right">
-                                    <input class="after required lastname" name="lastname" id="lastname" title="Last Name" />
+                                <div class="get-quote-upsale">
+                                    <div class="get-quote-upsale-icon"></div>
+                                    <div class="get-quote-upsale-text">
+                                      Free guide with submission Business VoIP Start-up Guide.
+                                    </div>
                                 </div>
-
-                                <div class="wrapper middle left">
-                                    <input class="after email required" name="email" id="email" title="Email Address" />
-                                </div>
-
-                                <div class="wrapper middle phone right">
-                                    <input class="after required phone" name="phone" id="phone" value="" title="Phone Number" />
-                                </div>
-                                
-                           <div class="bottom-clear"></div>    
-                           <div class="guide ps"><div class="text"><span>Free guide with submission</span> Business VoIP Start-up Guide</div><div class="pdf-icon"></div></div>
+                            <input class="get-quote-form-button submit" value="Quote Me" type="submit" />
                     </div>
 
                 
-                </div>
-                
-                
             
-                <div id="Navigation"> 							
-                        <input class="navigation_button" id="next" value="Quote Me" type="submit" />
-                </div>
                 
                 
                 <input type="hidden" name="token" value="' . $token . '" />

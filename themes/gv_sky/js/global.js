@@ -5,7 +5,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 !function(n,r){var $={};$$=function(u){var t=$[u];return t!==r?t:$[u]=n(u)},$$.clear=function(n){$[n]=r},$$.fresh=function(n){return $[n]=r,$$(n)}}(jQuery);
 
 
-
+// ==== Main Menu =================================================================================
 	$window = $$(window);
 	$this = $$(this);
 	$$('.solution-nav').insertAfter('.navigation');
@@ -33,6 +33,56 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 
 
+
+
+
+// ==== Get Quote popup =================================================================================
+	jQuery('.get-quote').form('prepare');
+	var $target = '';
+	var $position = 'right'; 
+	var open = true;
+
+	if ( $$('body').hasClass('front') ) {
+
+		$target = $$('.section.two');
+		var $showAfter = $target.offset().top + 100;
+
+	} else {
+
+		$target = $$('.chart').not('.sticky-table');
+		var $showAfter = ($target.offset().top + $target.height()) - $window.height();
+		$position = 'left';
+		open = false;
+	}
+
+	var $displayed = false;
+	
+	$window.scroll(function(){
+		var $scrolled = $window.scrollTop();
+		
+		if ( $scrolled > $showAfter && !$displayed) {
+			$$('.get-quote').addClass('show');
+			$$('.get-quote').addClass($position);
+			if (!open) {
+				$$('.get-quote').addClass('closed');
+			}
+			$displayed = true;
+		}
+	});
+
+
+
+	$$('.get-quote-title').click(function(){
+		
+		if (open) {
+			jQuery(this).parent().addClass('closed');
+		} else {
+			jQuery(this).parent().removeClass('closed');
+		}
+
+		open = !open;
+
+	});
 
 
 
