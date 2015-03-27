@@ -10068,7 +10068,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                             <div class="popup-request-intro-title">Get Your Hassle Free, <br />Custom Quote From <span class="popup-request-intro-title-highlight">Nextiva</span>.</div>
                             <div class="popup-request-intro-subtitle">Just Tell Us The Basics:</div>
                               
-                            <div class="popup-request-intro-fieldset fieldset">
+                            <div class="popup-request-intro-fieldset fieldset required">
                                 <label for="company" class="popup-request-intro-fieldset-label">What is your organization\'s name?</label>
                                 <div class="popup-request-intro-fieldset-wrap">
                                   <input class="popup-request-intro-fieldset-input input" type="text" name="company" id="company" placeholder="Organization Name" />
@@ -10186,29 +10186,33 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                     <div class="step step-three" id="personal_info">
                           <div class="popup-request-intro">
                             <div class="popup-request-intro-title">Where do we send the details for your custom <span class="popup-request-intro-title-highlight">Nextiva</span> quote?</div>
-                              
-                            <div class="popup-request-intro-fieldset fieldset half required">
-                                <label for="firstname" class="popup-request-intro-fieldset-label">First Name</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                  <input class="popup-request-intro-fieldset-input input"  type="text" name="firstname" placeholder="John" />
+                            <div class="popup-request-intro-wrap">
+                                <div class="popup-request-intro-fieldset fieldset half required">
+                                    <label for="firstname" class="popup-request-intro-fieldset-label">First Name</label>
+                                    <div class="popup-request-intro-fieldset-wrap">
+                                      <input class="popup-request-intro-fieldset-input input"  type="text" name="firstname" placeholder="John" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="popup-request-intro-fieldset fieldset half required">
-                                <label for="lastname" class="popup-request-intro-fieldset-label">Last Name</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                  <input class="popup-request-intro-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
+                                <div class="popup-request-intro-fieldset fieldset half required">
+                                    <label for="lastname" class="popup-request-intro-fieldset-label">Last Name</label>
+                                    <div class="popup-request-intro-fieldset-wrap">
+                                      <input class="popup-request-intro-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="popup-request-intro-fieldset fieldset half required">
-                                <label for="phone" class="popup-request-intro-fieldset-label">Phone Number</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                  <input class="popup-request-intro-fieldset-input input phone"  type="text" name="phone" />
+                                <div class="popup-request-intro-fieldset fieldset half required">
+                                    <label for="phone" class="popup-request-intro-fieldset-label">Phone Number</label>
+                                    <div class="popup-request-intro-fieldset-wrap">
+                                      <input class="popup-request-intro-fieldset-input input phone"  type="text" name="phone" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="popup-request-intro-fieldset fieldset half required">
-                                <label for="email" class="popup-request-intro-fieldset-label">Email Address</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                  <input class="popup-request-intro-fieldset-input input email"  type="text" name="email" />
+                                <div class="popup-request-intro-fieldset fieldset half required">
+                                    <label for="email" class="popup-request-intro-fieldset-label">Email Address</label>
+                                    <div class="popup-request-intro-fieldset-wrap">
+                                      <input class="popup-request-intro-fieldset-input input email"  type="text" name="email" />
+                                    </div>
+                                </div>
+                                <div class="popup-request-intro-upsale">
+                                  You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.
                                 </div>
                             </div>
                           </div>
@@ -10220,6 +10224,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider() {
                             <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
                           </div>
                     </div>
+                    <div class="results"></div>
 
                 
                 <input type="hidden" name="token" value="' . $token . '" />

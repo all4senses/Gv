@@ -27,9 +27,14 @@
 			font-size: 35px
 			font-weight: 500
 			padding-top: 30px
+			max-width: 550px
+			+center
 
 			&-highlight
 				color: $contrast
+
+				.step-three &
+					color: $primary
 
 			&:after
 				content: ''
@@ -37,7 +42,7 @@
 				top: 17px
 				display: block
 				+center
-				width: perc(200px, 1100px)
+				width: 135px
 				border-bottom: 2px solid darken($divider, 10)
 
 
@@ -45,6 +50,17 @@
 			padding-top: 35px
 			font-size: 20px
 
+		&-upsale
+			max-width: 85%
+			+center(270px)
+			font-size: 15px
+			font-weight: 500
+			color: $grey
+
+		&-wrap
+			width: 530px
+			+center
+			+clearfix
 
 
 		&-fieldset
@@ -60,14 +76,14 @@
 
 			&.half 
 				float: left
-				width: perc(380px, 1100px)
+				width: perc(260px, 530px)
 
 				&:nth-child(1),
-				&:nth-child(3),
-					margin-left: perc(152.5px, 1100px)
+				&:nth-child(2)
+					margin-top: 15px
 
 				&:nth-child(2n)
-					margin-left: perc(18px, 807px)
+					margin-left: perc(10px, 530px)
 
 			&.error
 				color: #E34B4F

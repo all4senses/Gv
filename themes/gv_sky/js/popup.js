@@ -29,10 +29,12 @@
 		if (close && popOpen) {
 
 			if ( $$('.popup').hasClass('exit') ) {
-				setTimeout(function(){ $('.popup-content').empty(); }, 300);
+				$('.popup-content').empty();
 			}
 			if ( $$('.popup').hasClass('demo') || $$('.popup').hasClass('quote') ) {
-				setTimeout(function(){ $('.popup-request').appendTo('.popup-request-container'); }, 300);
+				$('.popup-request').appendTo('.popup-request-container');
+				$('.popup-request .step.show').removeClass('show');
+				$('.popup-request .step-one').addClass('show');
 			}
 			$$('.popup, .popup-overlay').removeClass('show quote demo exit');
 			$$("body").css('overflow', 'visible');
@@ -43,7 +45,7 @@
 			
 			if (quote) {
 				$$('.popup, .popup-overlay').addClass('show quote');
-				$('#popup-request').appendTo($('.popup-content'));
+				$('.popup-request').appendTo($('.popup-content'));
 				popOpen = true;
 				
 			}

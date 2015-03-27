@@ -117,26 +117,23 @@
 				if ( !$(this).hasClass('valid') ) {
 					problem = true;
 					$(this).addClass('error');
-					console.log('show errors');
-					console.log($(this));
+					console.log('invalid');
+					console.log($(this).attr('class'));
 
 				} else {
 					$(this).removeClass('error');
-					console.log('remove errors if any');
 				}
 			});
 
 			if ( problem ) {
 				proceed = false;
-				console.log('set problem to true');
+				console.log('stop');
 			} else {
 				proceed = true;
-				console.log('set problem to false');
+				console.log('proceed');
 			}
 
 			if ( proceed ) {
-				console.log('proceed');
-
 				if ( next ) {
 					var $currentStep = this.find('.step.show');
 					var $nextStep = $currentStep.next();
