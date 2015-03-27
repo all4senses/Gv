@@ -52,6 +52,8 @@
 						$(this).find('.input').prop('checked', true);
 						if ( !$(this).hasClass('checked') && !$(this).siblings().hasClass('checked') ) {
 							$(this).parents('.fieldset').removeClass('valid');
+						} else {
+							$(this).parents('.fieldset').addClass('valid');
 						}
 					}
 				});
@@ -115,23 +117,31 @@
 				if ( !$(this).hasClass('valid') ) {
 					problem = true;
 					$(this).addClass('error');
+					console.log('show errors');
+					console.log($(this));
 
 				} else {
 					$(this).removeClass('error');
+					console.log('remove errors if any');
 				}
 			});
 
 			if ( problem ) {
 				proceed = false;
+				console.log('set problem to true');
 			} else {
 				proceed = true;
+				console.log('set problem to false');
 			}
 
 			if ( proceed ) {
+				console.log('proceed');
 
 				if ( next ) {
 					var $currentStep = this.find('.step.show');
 					var $nextStep = $currentStep.next();
+					console.log($currentStep);
+					console.log($nextStep);
 
 					$currentStep.removeClass('show');
 					$nextStep.addClass('show');
