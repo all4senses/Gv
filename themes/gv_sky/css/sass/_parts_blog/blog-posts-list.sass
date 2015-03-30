@@ -23,6 +23,7 @@
 		text-align: left
 		vertical-align: top
 		margin-top: perc(30px, 1050px)
+		height: auto
 		
 		&-category
 			position: absolute
@@ -134,7 +135,7 @@
 					&:before
 						content: 'K'
 						position: absolute
-						// top: -2px
+						top: 1px
 						left: 0
 						font-family: gvcons
 						font-weight: 400
@@ -197,13 +198,21 @@
 		// Rest of the posts
 		&-item:nth-child(n+2)
 			+content-box($width:perc(355px, 1130px), $height:398px, $item-style: true, $child-style: false, $float: false)
+			// height: auto
 
 		&-item:nth-child(n+2) &-item
 			+content-box($width:perc(355px, 1130px), $height:398px, $title: 18px, $img-margin: 23px, $author: true, $item-style: false)
 
+			// &-content
+				// padding: 8px 16px 23px
+
 			&-meta-author
+				&:before
+					top: 1px
+					
 				+m(980)
 					display: none
+
 
 
 
