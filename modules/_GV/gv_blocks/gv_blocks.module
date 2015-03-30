@@ -503,6 +503,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['blog_page_filter'] = array(
+    'info' => 'Blog Page Category Filter',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   return $blocks;
 }
 
@@ -1025,6 +1030,10 @@ function gv_blocks_block_view($delta = '') {
       break;
     
   
+    case 'blog_page_filter':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getBlogFilter();
+      break;
   
   }
 
@@ -12480,4 +12489,66 @@ function gv_blocks_getQuotePopup_onLists($type = 'cc') {
   
   
   return $out;
+}
+
+
+/**
+ * Blog page (/blog) article listing
+ */
+function gv_blocks_getBlogFilter() {
+ 
+  $out = '';
+ 
+  $out .= '<div class="cat-filter">';
+ 
+  $out .= '<div class="cat-filter-wrap">
+            <ul class="cat-filter-list">
+              <li class="cat-filter-list-item category-all active" data-category="all">
+                <span class="cat-filter-list-item-text all">All<span class="desktop"> Categories</span></span>
+              </li>
+ 
+              <li class="cat-filter-list-item category-voip" data-category="voip">
+                <span class="cat-filter-list-item-text voip">VoIP & <span class="desktop">Unified Communications</span><span class="mobile">UC</span></span>
+              </li>
+ 
+              <li class="cat-filter-list-item category-cloud" data-category="cloud">
+                <span class="cat-filter-list-item-text cloud">Cloud<span class="mobile-extra"> Computing</span><span class="desktop"> & Web Services</span></span>
+              </li>
+ 
+              <li class="cat-filter-list-item category-business" data-category="business">
+                <span class="cat-filter-list-item-text business">Business<span class="mobile-extra"> Insights</span><span class="desktop"> & Tips</span></span>
+              </li>
+            </ul>
+          </div>';
+ 
+  $out .= '</div>';
+ 
+  $out .= '<div class="cat-filter cat-filter-header">';
+ 
+  $out .= '<div class="cat-filter-wrap cat-filter-header">
+            <ul class="cat-filter-list cat-filter-header">
+               
+              <li class="cat-filter-list-item category-all cat-filter-header active" data-category="all">
+                <span class="cat-filter-list-item-text all cat-filter-header">All<span class="desktop"> Categories</span></span>
+              </li>
+ 
+              <li class="cat-filter-list-item category-voip cat-filter-header" data-category="voip">
+                <span class="cat-filter-list-item-text voip cat-filter-header">VoIP & <span class="desktop">Unified Communications</span><span class="mobile">UC</span></span>
+              </li>
+ 
+              <li class="cat-filter-list-item category-cloud cat-filter-header" data-category="cloud">
+                <span class="cat-filter-list-item-text cloud cat-filter-header">Cloud<span class="mobile-extra"> Computing</span><span class="desktop"> & Web Services</span>
+              </li>
+ 
+              <li class="cat-filter-list-item category-business cat-filter-header" data-category="business">
+                <span class="cat-filter-list-item-text business cat-filter-header">Business<span class="mobile-extra"> Insights</span><span class="desktop"> & Tips</span></span>
+              </li>
+ 
+            </ul>
+          </div>';
+ 
+  $out .= '</div>';
+ 
+  return $out;
+ 
 }
