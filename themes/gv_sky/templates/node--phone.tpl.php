@@ -98,9 +98,9 @@ if($view_mode == 'home_teaser_rotated') {
                                   '</div>';
                       }
                       else {
-                        $submitted = '<div class="hero-review-content-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">'
-                                      . '<span property="v:reviewer" class="guest-author">' . $extra_data['guest_author'] . '</span>'. 
-                                      $created_str .
+                        $submitted = '<div class="' . ( current_path() == 'blog' ? 'blog-posts-item' : 'hero-review-content' ) . '-meta" property="dc:date dc:created v:dtreviewed" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">'
+                                      . (!$page ? '<div class="blog-posts-item-meta-author">' . $extra_data['guest_author'] . '</div>': '<a title="' . $extra_data['guest_author'] . '" class="hero-review-content-meta-author" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name v:reviewer">' . $author_name . '</a>') 
+                                      . '<div class="' . ( current_path() == 'blog' ? 'blog-posts-item' : 'hero-review-content' ) . '-meta-date">' . $created_str . '</div>' .
                                   '</div>';
                       }
                       
