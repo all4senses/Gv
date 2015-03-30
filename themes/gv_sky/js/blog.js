@@ -195,8 +195,9 @@ function fixPostMarkup($subject) {
 		jQuery(this).after(' ');
 
 		// Trim Text
-		var $item = $subject.find('.blog-posts-item-content');
+		var $item = jQuery(this).find('.blog-posts-item-content');
 		var $text = $item.html();
+		// console.log($item.html());
 		
 		if ($text.length >= 126 ) {
 			$text = $text.substring(0, 126) + '...';
