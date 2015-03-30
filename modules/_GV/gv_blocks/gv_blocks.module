@@ -1655,57 +1655,6 @@ function gv_blocks_getBlogFilter() {
   $out .= '</div>';
 
   return $out;
-  // $query = db_select('node', 'n');
-
-  // $query->condition('n.type', 'blog_post');
-  // $query->condition('n.status', 1);
-  // $query->leftJoin('field_data_field_extra_data', 'd', 'd.entity_id = n.nid');
-  // $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-  // $query->condition('i.field_invisible_value', 1, '!='); 
-  // $query->leftJoin('field_data_field_main_image', 'p', 'p.entity_id = n.nid');
-  // $query->isNotNull('p.field_main_image_value');
-  // $query->condition('p.field_main_image_value', 'N;', '!=');
-  // $query->fields('p', array('field_main_image_value'));
-  // $query->fields('n', array('nid', 'title', 'created'));
-  // $query->fields('d', array('field_extra_data_value'));
-  // $query->orderBy('n.created', 'DESC');
-
-  // $query->range(0, 10);
-
-  // $posts = $query->execute()->fetchAllAssoc('nid');
-
-
-  // $ui_tabs_nav = '';
-  // $fragments = '';
-
-  // function dk_post_title($title){
-  //   $temp = strlen($title);
-
-  //   if ($temp > 60) {
-  //     return substr($title, 0, 50) . '...';
-  //   } else {
-  //     return $title;
-  //   }
-  // };
-
-  // $i = 0;
-  // foreach ($posts as $nid => $post) {
-
-  //     $extra_data = unserialize($post->field_extra_data_value);
-  //     $main_image_url = $extra_data['main_image']['src_beautify'];
-  //     $date = date('M\ \<\/\s\p\a\n\>\<\s\p\a\n\>d\t\h\,\<\/\s\p\a\n\>\ Y', $post->created);
-  //     $content = substr($extra_data['teaser_block'], 0, 108) . '...';
-  //     $clean_title = str_replace('"', '`', $post->title);
-  //     $post_title = dk_post_title($post->title);
-  //     $item_path = 'node/' . $post->nid;
-  //     $link = check_plain(url($item_path));
-
-  //     $fragments .= '<li class="latest-posts-item"><a href="' . $link . '" class="latest-posts-item-img"><img class="latest-posts-item-img-actual" width="304" height="176" src="' . $main_image_url . '" alt="' . $clean_title . '" /></a><div class="latest-posts-item-date">' . $date . '</div><h4 class="latest-posts-item-title"><a href="' . $link . '" class="latest-posts-item-title-link">' . $post_title . '</a></h4><p class="latest-posts-item-content">' . $content . '</p></li>';
-  //     $i++;
-  // }
-
-  // $out = '<section class="section four posts"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></div></section>';  
-  // return $out;
 
 }
 
@@ -2281,34 +2230,34 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
 */
 function gv_blocks_getLatestPostsSidebar_2() {
 
-$query = db_select('node', 'n');
-$query->fields('n', array('nid'));
-$query->condition('n.type', array('blog_post', 'phone'), 'IN');
-$query->condition('n.status', 1);
-$query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
-$query->condition('i.field_invisible_value', 1, '!='); 
-$query->orderBy('n.created', 'DESC');
-$query->range(0, 3);
-$posts = $query->execute()->fetchCol();
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid'));
+  $query->condition('n.type', array('blog_post', 'phone'), 'IN');
+  $query->condition('n.status', 1);
+  $query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+  $query->condition('i.field_invisible_value', 1, '!='); 
+  $query->orderBy('n.created', 'DESC');
+  $query->range(0, 3);
+  $posts = $query->execute()->fetchCol();
 
-$nodes = node_load_multiple($posts);
-$node_views = node_view_multiple($nodes, 'side_block_teaser');
-dpm($node_views);
-foreach ($node_views['nodes'] as $key => $value) {
-  if (!is_array($value)) {
-    continue;
+  $nodes = node_load_multiple($posts);
+  $node_views = node_view_multiple($nodes, 'side_block_teaser');
+  dpm($node_views);
+  foreach ($node_views['nodes'] as $key => $value) {
+    if (!is_array($value)) {
+      continue;
+    }
+    $node_views['nodes'][$key]['#prefix'] = '<li class="latest-blog-posts-list-item ' . $key . '-row">';
+    $node_views['nodes'][$key]['#suffix'] = '</li>';
   }
-  $node_views['nodes'][$key]['#prefix'] = '<li class="latest-blog-posts-list-item ' . $key . '-row">';
-  $node_views['nodes'][$key]['#suffix'] = '</li>';
-}
-//dpm($node_views);
+  //dpm($node_views);
 
-$wrap_pre = '<section class="latest-blog-posts">
-                <h2 class="section-title-heading">Latest Blog Posts</h2>
-                <ul class="latest-blog-posts-list">';
-$wrap_end = '</ul></section>';
+  $wrap_pre = '<section class="latest-blog-posts">
+                  <h2 class="section-title-heading">Latest Blog Posts</h2>
+                  <ul class="latest-blog-posts-list">';
+  $wrap_end = '</ul></section>';
 
-return $wrap_pre . drupal_render($node_views) . $wrap_end;
+  return $wrap_pre . drupal_render($node_views) . $wrap_end;
 }
 
 

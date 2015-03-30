@@ -37,7 +37,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 
 // ==== Get Quote popup =================================================================================
-	jQuery('.get-quote').form('prepare');
+	jQuery('.get-quote-form').form('prepare');
 	var $target = '';
 	var $position = 'right'; 
 	var open = true;
@@ -83,6 +83,16 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 		open = !open;
 
 	});
+
+	$$('.get-quote-form').submit(function(e){
+		console.log('submit');
+		e.preventDefault();
+		$$('.get-quote-form').form('submit', '/request');
+	});
+
+   
+   
+
 
 
 

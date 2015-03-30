@@ -1256,6 +1256,11 @@ h1.preface {
   .get-quote-fieldset {
     width: 100%;
     margin-top: 22px; }
+    .get-quote-fieldset.error {
+      color: #666666;
+      border-radius: 5px;
+      background-image: none;
+      background-color: transparent; }
     .get-quote-fieldset:first-child {
       margin-top: 2px; }
     .get-quote-fieldset.half {
@@ -1283,6 +1288,8 @@ h1.preface {
       padding: 12px 11px 10px;
       font-size: 14px;
       font-weight: 500; }
+      .error .get-quote-fieldset-input, .error .get-quote-fieldset-select {
+        border-color: #E34B4F; }
   .get-quote-upsale {
     position: relative;
     top: 20px;
@@ -8757,9 +8764,10 @@ a[href="/cc"] {
 .admin textarea {
   font-weight: 500;
   font-size: 16px; }
-.admin input {
+.admin .form-item input,
+.admin input.form-submit {
   height: 45px; }
-.admin label {
+.admin .form-item label {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 10px; }
