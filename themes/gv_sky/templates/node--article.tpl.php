@@ -9,13 +9,13 @@
   
   
   
-  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1427740066/*1421703309*/);
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1427742745/*1421703309*/);
   
   //global $user;
   //if ($user->uid == 1) 
   {
-    dpm(time());
-    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node,  1427740066/*1421703309*/);
+    //dpm(time());
+    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node,  1427742745/*1421703309*/);
   }
   
   
