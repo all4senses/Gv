@@ -39,21 +39,22 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 // ==== Get Quote popup =================================================================================
 	jQuery('.get-quote-form').form('prepare');
 	var $target = '';
-	var $position = 'right'; 
+	var $animate = ''; 
 	var open = true;
 
 	if ( $$('body').hasClass('front') ) {
 
 		$target = $$('.section.two');
-		var $showAfter = $target.offset().top + 100;
+		var $showAfter = $target.offset().top + 50;
 
 	} else {
 
 		$target = $$('.chart').not('.sticky-table');
 		var $showAfter = ($target.offset().top + $target.height()) - $window.height();
-		$position = 'left';
+		$animate = 'animate';
 		open = false;
 	}
+	$$('.get-quote').addClass($animate);
 
 	var $displayed = false;
 	
@@ -62,7 +63,6 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 		
 		if ( $scrolled > $showAfter && !$displayed) {
 			$$('.get-quote').addClass('show');
-			$$('.get-quote').addClass($position);
 			if (!open) {
 				$$('.get-quote').addClass('closed');
 			}

@@ -1185,9 +1185,12 @@ h1.preface {
     display: block; }
   .get-quote.closed {
     bottom: -405px; }
-  .get-quote.left {
-    right: auto;
-    left: 5%; }
+  .get-quote.animate {
+    display: block;
+    bottom: -457px;
+    transition: bottom 0.5s cubic-bezier(1, 0, 0, 1); }
+    .get-quote.animate.closed {
+      bottom: -405px; }
   .get-quote-title {
     position: relative;
     height: 52px;
@@ -7556,7 +7559,7 @@ h1.preface {
   font-weight: 500;
   line-height: 1.3;
   color: #2f2f2f; }
-  .node-type-blog-post .field-name-body > .field-items > .field-item > p:first-child > img {
+  .node-type-blog-post .field-name-body > .field-items > .field-item > .rtecenter:first-child > img {
     width: 100% !important;
     height: auto !important;
     max-width: 700px; }
