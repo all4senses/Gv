@@ -904,7 +904,7 @@ function gv_blocks_block_view($delta = '') {
     
     case 'sidebar_latest_posts':
       $block['subject'] = 'Latest Posts Sidebar';
-      $block['content'] = gv_blocks_getLatestPostsSidebar_2();
+      $block['content'] = gv_blocks_getLatestPostsSidebar_2_2();
       break;
     
     case 'secondary_p_section':
@@ -2339,7 +2339,7 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
 /**
 * Sidebar Block with latest posts.
 */
-function gv_blocks_getLatestPostsSidebar_2() {
+function gv_blocks_getLatestPostsSidebar_2_2() {
 
 $query = db_select('node', 'n');
 $query->fields('n', array('nid'));
