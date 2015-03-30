@@ -387,6 +387,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+ $blocks['sidebar_latest_posts'] = array(
+    'info' => 'Latest posts for the comparison pages.',
+    'cache' => DRUPAL_NO_CACHE,
+  ); 
+  
   $blocks['secondary_p_section'] = array(
     'info' => 'Secondary providers section',
     'cache' => DRUPAL_NO_CACHE,
@@ -895,6 +900,11 @@ function gv_blocks_block_view($delta = '') {
     case 'sidebar_related_articles':
       $block['subject'] = 'Related posts';
       $block['content'] = gv_blocks_getSidebarRelatedArticlesBlock();
+      break;
+    
+    case 'sidebar_latest_posts':
+      $block['subject'] = 'Latest Posts Sidebar';
+      $block['content'] = gv_blocks_getLatestPostsSidebar_2();
       break;
     
     case 'secondary_p_section':
@@ -2324,6 +2334,41 @@ function gv_blocks_getAsFeaturedInBlock($key = 'bottom') {
   }
   
   return $out;
+}
+
+/**
+* Sidebar Block with latest posts.
+*/
+function gv_blocks_getLatestPostsSidebar_2() {
+
+$query = db_select('node', 'n');
+$query->fields('n', array('nid'));
+$query->condition('n.type', array('blog_post', 'phone'), 'IN');
+$query->condition('n.status', 1);
+$query->leftJoin('field_data_field_invisible', 'i', 'i.entity_id = n.nid');
+$query->condition('i.field_invisible_value', 1, '!='); 
+$query->orderBy('n.created', 'DESC');
+$query->range(0, 3);
+$posts = $query->execute()->fetchCol();
+
+$nodes = node_load_multiple($posts);
+$node_views = node_view_multiple($nodes, 'side_block_teaser');
+dpm($node_views);
+foreach ($node_views['nodes'] as $key => $value) {
+  if (!is_array($value)) {
+    continue;
+  }
+  $node_views['nodes'][$key]['#prefix'] = '<li class="latest-blog-posts-list-item ' . $key . '-row">';
+  $node_views['nodes'][$key]['#suffix'] = '</li>';
+}
+//dpm($node_views);
+
+$wrap_pre = '<section class="latest-blog-posts">
+                <h2 class="section-title-heading">Latest Blog Posts</h2>
+                <ul class="latest-blog-posts-list">';
+$wrap_end = '</ul></section>';
+
+return $wrap_pre . drupal_render($node_views) . $wrap_end;
 }
 
 
