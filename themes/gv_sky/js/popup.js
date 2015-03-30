@@ -8,15 +8,19 @@
 
 	$.fn.popup = function($arg) {
 		var quote = false;
-		var demo = false;
+		var provider_demo = false;
+		var provider_quote = false;
 		var exit = false;
 		var close = false;
 		
-		if ( $arg == "quote" ) {
+		if ( $arg == "quote" ) { // Comparison Chart Popup
 			var quote = true;
 		} 
-		if ( $arg == "demo" ) {
-			var demo = true;
+		if ( $arg == "provider_demo" ) { // Provider Page Demo/Quote Popup
+			var provider_demo = true;
+		}  
+		if ( $arg == "provider_quote" ) { // Provider Page Demo/Quote Popup
+			var provider_quote = true;
 		} 
 		if ( $arg == "exit" ) {
 			var exit = true;
@@ -31,12 +35,22 @@
 			if ( $$('.popup').hasClass('exit') ) {
 				$('.popup-content').empty();
 			}
-			if ( $$('.popup').hasClass('demo') || $$('.popup').hasClass('quote') ) {
+			if ( $$('.popup').hasClass('quote') ) {
 				$('.popup-request').appendTo('.popup-request-container');
 				$('.popup-request .step.show').removeClass('show');
 				$('.popup-request .step-one').addClass('show');
 			}
-			$$('.popup, .popup-overlay').removeClass('show quote demo exit');
+			if ( $$('.popup').hasClass('provider_demo') ) {
+				$('.provider-demo').appendTo('.provider-demo-container');
+				$('.provider-demo .step.show').removeClass('show');
+				$('.provider-demo .step-one').addClass('show');
+			}
+			if ( $$('.popup').hasClass('provider_quote') ) {
+				$('.provider-quote').appendTo('.provider-quote-container');
+				$('.provider-quote .step.show').removeClass('show');
+				$('.provider-quote .step-one').addClass('show');
+			}
+			$$('.popup, .popup-overlay').removeClass('show quote provider_demo provider_quote exit');
 			$$("body").css('overflow', 'visible');
 			popOpen = false;
 		}
@@ -51,8 +65,18 @@
 			}
 
 
-			if (demo) {
-				$$('.popup, .popup-overlay').addClass('show demo');
+			if (provider_demo) {
+				$$('.popup, .popup-overlay').addClass('show provider_demo');
+				$('.provider-demo').appendTo($('.popup-content'));
+				popOpen = true;
+				
+			}
+
+
+
+			if (provider_quote) {
+				$$('.popup, .popup-overlay').addClass('show provider_quote');
+				$('.provider-quote').appendTo($('.popup-content'));
 				popOpen = true;
 				
 			}

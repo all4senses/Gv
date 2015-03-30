@@ -4846,7 +4846,7 @@ function gv_blocks_get_requestQuote_block_v3() {
   // drupal_add_library('system', 'ui.widget');
   // drupal_add_library('system', 'ui.position');  
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  // drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   // drupal_add_js($path_to_custom_js . 'gv_requestquote_v2.js');
@@ -4981,7 +4981,7 @@ function gv_blocks_get_requestQuote_block_v4() {
   // drupal_add_library('system', 'ui.widget');
   // drupal_add_library('system', 'ui.position');  
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  // drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   // drupal_add_js($path_to_custom_js . 'gv_requestquote_v4.js');
@@ -5108,7 +5108,7 @@ function gv_blocks_get_requestQuote_block_v5() {
   // drupal_add_library('system', 'ui.widget');
   // drupal_add_library('system', 'ui.position');  
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  // drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   // drupal_add_js($path_to_custom_js . 'gv_requestquote_v5.js');
@@ -5307,7 +5307,7 @@ function gv_blocks_get_requestQuote_block_v6() {
   // drupal_add_library('system', 'ui.widget');
   // drupal_add_library('system', 'ui.position');  
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  // drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   // drupal_add_js($path_to_custom_js . 'gv_requestquote_v5.js');
@@ -5515,7 +5515,7 @@ function gv_blocks_get_requestQuote_block_v7() {
   // drupal_add_library('system', 'ui.widget');
   // drupal_add_library('system', 'ui.position');  
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+  // drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   // drupal_add_js($path_to_custom_js . 'gv_requestquote_v7.js');
@@ -5752,32 +5752,9 @@ function gv_blocks_get_requestQuote_block_v8() {
  */
 function gv_blocks_get_requestQuote_block_v8_popup_provider() {
   
-//  global $user;
-//  if (!$user->uid) 
-//    {
-//    return NULL;
-//  }
-  
- 
-  
-  // drupal_add_library('system', 'ui.core');
-  // drupal_add_library('system', 'ui.widget');
-  // drupal_add_library('system', 'ui.position');  
-
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  // drupal_add_js($path_to_custom_js . 'gv_requestquote_v8_popup_provider.js');
-  
-  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
-  // drupal_add_js($path_to_custom_js . 'jquery.form.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.validate.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
-  
-  
-//  $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
-//  drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
-//  drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
+  drupal_add_js($path_to_custom_js . 'gv_requestquote_v8_popup_provider.js');
   
   
   // height: 140px; 
@@ -5788,105 +5765,89 @@ function gv_blocks_get_requestQuote_block_v8_popup_provider() {
   
   
   $out = '
-   
-   <div id="requestQuoteFormWrapper">
-        <div class="sending results" style="display: none;"></div>
-        <div class="success results" style="display: none;"></div>
-        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
-        <div class="caption">Your Information</div>
-        ' /*. '<form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">' .*/ . '<form class="multipartForm bbq" method="post" action="/request">' . '
+        <form class="provider-popup-form provider-quote-form js-controlled-form" method="post" action="/request">
+              <div class="provider-popup-form-wrap">
 
-                
-                <div id="fieldWrapper">
-                    
-                    <div class="step" id="questions_section">
-                    
-                               <!--
-                                <div class="wrapper top first">
-                                  <div class="question ui-widget">Service Type:</div>
-                                  <select name="q_type" id="q_type" class="input required ui-state-default ui-helper-reset">
-                                    <option selected="selected" value="Business">Business</option>
-                                    <option value="Home-Based Business">Home-Based Business</option>
+                    <div class="step step-one show">
+
+                            <div class="provider-popup-fieldset select fieldset half required valid">
+                                <label for="q_for" class="provider-popup-fieldset-label">Your Current Needs</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <select name="q_for" id="q_for" class="provider-popup-fieldset-select input">
+                                     <option value="Need a phone system for a new office">System For New Office</option>
+                                     <option value="Replace current phone system">Replace Current System</option>
+                                     <option value="Expand on our current phone system">Expand Current System</option>
                                   </select>
                                 </div>
-                                -->
-                                
-                                <div class="wrapper top first"> 
-                                 <div class="question">Current Needs:</div>
-                                 <select name="q_for" id="q_for" class="input required">
-                                   <option value="Need a phone system for a new office">System For New Office</option>
-                                   <option value="Replace current phone system">Replace Current System</option>
-                                   <option value="Expand on our current phone system">Expand Current System</option>
-                                 </select>
-                                </div>
-
-                                <div class="wrapper top last">
-                                  <div class="question ui-widget">Lines Needed:</div>
-                                  <select name="phones_amt" id="phones_amt" class="input required ui-state-default ui-helper-reset">
-                                    <!-- <option value="1 - 4">1 - 4</option> -->
-                                    <option value="2 - 4">2 - 4</option>
-                                    <option selected="selected" value="5 - 10">5 - 10</option>
-                                    <option value="11 - 20">11 - 20</option>
-                                    <option value="21 - 50">21 - 50</option>
-                                    <option value="More than 50">More than 50</option>
+                            </div> 
+                            <div class="provider-popup-fieldset select fieldset half required valid">
+                                <label for="phones_amt" class="provider-popup-fieldset-label">Lines Needed</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <select name="phones_amt" id="phones_amt" class="provider-popup-fieldset-select input">
+                                     <option value="1 - 4">1 - 4</option>
+                                     <option value="5 - 10">5 - 10</option>
+                                     <option value="11 - 20">11 - 20</option>
+                                     <option value="21 - 50">21 - 50</option>
+                                     <option value="More than 50">More than 50</option>
                                   </select>
                                 </div>
-
-                            <div class="bottom-clear"></div>
-                            
-
-                            <div class="wrapper top first"> 
-                             <div class="question">Type of Quote:</div>
-                              <select name="q_type" id="q_type" class="input required">
-                                <option value="Both phones and service">Both Phones & Services</option>
-                                <option value="Phone system only">Phone System Only</option>
-                                <option value="Service provider only">Service Provider Only</option>
-                              </select>
+                            </div> 
+                            <div class="provider-popup-fieldset select fieldset half required valid">
+                                <label for="q_type" class="provider-popup-fieldset-label">Your Current Needs</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <select name="q_type" id="q_type" class="provider-popup-fieldset-select input">
+                                     <option value="Both phones and service">Both Phones & Services</option>
+                                     <option value="Phone system only">Phone System Only</option>
+                                     <option value="Service provider only">Service Provider Only</option>
+                                  </select>
+                                </div>
+                            </div> 
+                            <div class="provider-popup-fieldset select fieldset half required valid">
+                                <label for="buying_time" class="provider-popup-fieldset-label">Buying Timeframe</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <select name="buying_time" id="buying_time" class="provider-popup-fieldset-select input">
+                                     <option value="ASAP">ASAP</option>
+                                     <option value="1-3 Months">1-3 Months</option>
+                                     <option value="3-6 Months">3-6 Months</option>
+                                  </select>
+                                </div>
+                            </div> 
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="firstname" class="provider-popup-fieldset-label">First Name</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input" type="text" name="firstname" id="firstname" placeholder="First Name" autocomplete="given-name" />
+                                </div>
                             </div>
-                            
-                           <div class="wrapper top last"> 
-                             <div class="question">Buying Timeframe:</div>
-                              <select name="buying_time" id="buying_time" class="input required">
-                                <option value="ASAP">ASAP</option>
-                                <option value="1-3 Months">1-3 Months</option>
-                                <option value="3-6 Months">3-6 Months</option>
-                              </select>
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="lastname" class="provider-popup-fieldset-label">Last Name</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input" type="text" name="lastname" id="lastname" placeholder="Last Name" autocomplete="family-name" />
+                                </div>
                             </div>
-                            
-                            <!--<img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" /> -->
-
-
-                            <div class="bottom-clear"></div>
-                            
-                                <div class="wrapper middle first left">
-                                    <input class="after required firstname" name="firstname" id="firstname" title="FIRST NAME" />
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="email" class="provider-popup-fieldset-label">Email Address</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input email" type="text" name="email" id="email" placeholder="Email Address" autocomplete="email" />
                                 </div>
-
-                                <div class="wrapper middle right">
-                                    <input class="after required lastname" name="lastname" id="lastname" title="LAST NAME" />
+                            </div>
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="phone" class="provider-popup-fieldset-label">Phone Number</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input phone" type="text" name="phone" id="phone" placeholder="Phone Number" autocomplete="tel" />
                                 </div>
+                            </div>
+                            <div class="clearfix"></div>
 
-                                <div class="wrapper middle left">
-                                    <input class="after email required" name="email" id="email" title="EMAIL ADDRESS" />
-                                </div>
 
-                                <div class="wrapper middle phone right">
-                                    <input class="after required phone" name="phone" id="phone" value="" title="PHONE NUMBER" />
-                                </div>
-                                
-                           <div class="bottom-clear"></div>    
-                           <div class="guide ps"><div class="text"><span>Free guide with submission</span> Business VoIP Start-up Guide</div><div class="pdf-icon"></div></div>
+
+                          <div class="provider-popup-control">
+                            <div class="provider-popup-control-button submit">
+                              <div class="provider-popup-control-button-text">Quote Me</div>
+                            </div>
+                          </div>
                     </div>
+                    <div class="results"></div>
 
-                
-                </div>
-                
-                
-            
-                <div id="Navigation"> 							
-                        <input class="navigation_button" id="next" value="Quote Me" type="submit" />
-                </div>
-                
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="block" />
@@ -5898,10 +5859,8 @@ function gv_blocks_get_requestQuote_block_v8_popup_provider() {
                 <input type="hidden" name="provider_id" value="" />
                 
         </form>
-
         <p id="data"></p>
 </div>
-<div class="block_footer"></div>
   ';
   
   return $out;
@@ -5913,35 +5872,12 @@ function gv_blocks_get_requestQuote_block_v8_popup_provider() {
  */
 function gv_blocks_get_requestDemo_block_v1_popup_provider() {
   
-//  global $user;
-//  if (!$user->uid) 
-//    {
-//    return NULL;
-//  }
-  
- 
-  
-  // drupal_add_library('system', 'ui.core');
-  // drupal_add_library('system', 'ui.widget');
-  // drupal_add_library('system', 'ui.position');  
 
-  drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-  // drupal_add_js($path_to_custom_js . 'gv_requestdemo_v1.js');
+  drupal_add_js($path_to_custom_js . 'gv_requestdemo_v1.js');
   
-  $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
-  // drupal_add_js($path_to_custom_js . 'jquery.form.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.validate.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
-  
-  
-//  $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
-//  drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
-//  drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
-  
-  
-  // height: 140px; 
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
@@ -5949,78 +5885,71 @@ function gv_blocks_get_requestDemo_block_v1_popup_provider() {
   
   
   $out = '
-   
-   <div id="requestQuoteFormWrapper">
-        <div class="sending results" style="display: none;"></div>
-        <div class="success results" style="display: none;"></div>
-        <div class="fail results" style="display: none;">The Request has failed! <br>Something went wrong. <br>Please, contact the site administrator.</div>
-        <div class="caption">Your Information</div>
-        ' /*. '<form class="multipartForm bbq" method="post" action="/request" style="overflow: hidden;">' .*/ . '<form class="multipartForm bbq" method="post" action="/request">' . '
+        <form class="provider-popup-form provider-demo-form js-controlled-form" method="post" action="/request">
+              <div class="provider-popup-form-wrap">
 
-                
-                <div id="fieldWrapper">
-                    
-                    <div class="step" id="questions_section">
-                    
-                                <div class="wrapper top first">
-                                  <!-- <div class="question ui-widget">Industry:</div> -->
-                                  <select name="industry" id="industry" class="input required ui-state-default ui-helper-reset">
-                                    <option value="" class="none demo">- Industry -</option>
-                                    ' . gv_blocks_getIndustryOptions_text() . 
+                    <div class="step step-one show">
 
-                                  '</select>
-                                </div>
-
-                                <div class="wrapper top last">
-                                  <!-- <div class="question ui-widget">Number of Employees:</div> -->
-                                  <select name="employees_amt" id="employees_amt" class="input required ui-state-default ui-helper-reset">
-                                    <option value="" class="none">- Number of Employees -</option>
-                                    <option value="2 - 4">2 - 4</option>
-                                    <option value="5 - 10">5 - 10</option>
-                                    <option value="11 - 20">11 - 20</option>
-                                    <option value="21 - 50">21 - 50</option>
-                                    <option value="51 - 99">51 - 99</option>
-                                    <option value="100 - 499">100 - 499</option>
-                                    <option value="500+">500+</option>
+                            <div class="provider-popup-fieldset select fieldset half required">
+                                <label for="industry" class="provider-popup-fieldset-label">Your Current Needs</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <select name="industry" id="industry" class="provider-popup-fieldset-select input">
+                                     <option value="">Industry</option>
+                                     ' . gv_blocks_getIndustryOptions_text() . '
                                   </select>
                                 </div>
-
-                            <div class="bottom-clear"></div>
-                            
-                            <!--<img class="guide" src="/sites/all/themes/gv_orange/css/images/quote-phone2.jpg" /> -->
-
-
-                            <div class="bottom-clear"></div>
-                            
-                                <div class="wrapper middle first left">
-                                    <input class="after required name" name="name" id="name" title="YOUR NAME" />
+                            </div> 
+                            <div class="provider-popup-fieldset select fieldset half required valid">
+                                <label for="employees_amt" class="provider-popup-fieldset-label">Lines Needed</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <select name="employees_amt" id="employees_amt" class="provider-popup-fieldset-select input">
+                                     <option value="2 - 4">2 - 4</option>
+                                     <option value="5 - 10">5 - 10</option>
+                                     <option value="11 - 20">11 - 20</option>
+                                     <option value="21 - 50">21 - 50</option>
+                                     <option value="51 - 99">51 - 99</option>
+                                     <option value="100 - 499">100 - 499</option>
+                                     <option value="500+">500+</option>
+                                  </select>
                                 </div>
-
-                                <div class="wrapper middle right">
-                                    <input class="after required company" name="company" id="company" title="COMPANY NAME" />
+                            </div> 
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="firstname" class="provider-popup-fieldset-label">First Name</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input" type="text" name="firstname" id="firstname" placeholder="First Name" autocomplete="given-name" />
                                 </div>
-
-                                <div class="wrapper middle left">
-                                    <input class="after email required" name="email" id="email" title="YOUR EMAIL" />
+                            </div>
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="lastname" class="provider-popup-fieldset-label">Last Name</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input" type="text" name="lastname" id="lastname" placeholder="Last Name" autocomplete="family-name" />
                                 </div>
-
-                                <div class="wrapper middle phone right">
-                                    <input class="after required phone" name="phone" id="phone" value="" title="PHONE NUMBER" />
+                            </div>
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="email" class="provider-popup-fieldset-label">Email Address</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input email" type="text" name="email" id="email" placeholder="Email Address" autocomplete="email" />
                                 </div>
-                                
-                           <div class="bottom-clear"></div>    
-                           <div class="notice">Your Name and Email WILL NOT be displayed</div>
+                            </div>
+                            <div class="provider-popup-fieldset fieldset half required">
+                                <label for="phone" class="provider-popup-fieldset-label">Phone Number</label>
+                                <div class="provider-popup-fieldset-wrap">
+                                  <input class="provider-popup-fieldset-input input phone" type="text" name="phone" id="phone" placeholder="Phone Number" autocomplete="tel" />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+
+
+
+                          <div class="provider-popup-control">
+                            <div class="provider-popup-control-button submit">
+                              <div class="provider-popup-control-button-text">Request Demo</div>
+                            </div>
+                          </div>
                     </div>
+                    <div class="results"></div>
 
-                
-                </div>
-                
-                
-            
-                <div id="Navigation"> 							
-                        <input class="navigation_button" id="next" value="Quote Me" type="submit" />
-                </div>
-                
                 
                 <input type="hidden" name="token" value="' . $token . '" />
                 <input type="hidden" name="source" value="block" />
@@ -6033,7 +5962,6 @@ function gv_blocks_get_requestDemo_block_v1_popup_provider() {
 
         <p id="data"></p>
 </div>
-<div class="block_footer"></div>
   ';
   
   return $out;
@@ -11831,7 +11759,7 @@ function gv_blocks_getQuotePopup_onLists() {
     $out = 
     '<div style="display: none;">
       <div id="popup-request" class="popup-request quote on-list">' 
-        . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>'
+        . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you.</div></div>'
         . gv_blocks_get_requestQuote_block_v8_popup_provider() .
 
       '</div>

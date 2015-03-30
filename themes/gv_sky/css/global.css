@@ -132,6 +132,9 @@ button,
 select {
   text-transform: none; }
 
+select {
+  cursor: pointer; }
+
 button,
 html input[type="button"],
 input[type="reset"],
@@ -2090,6 +2093,7 @@ h1.preface {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: pointer;
     margin-top: 38px; }
     .section.four.posts .section-title-button-text {
       position: absolute;
@@ -5019,7 +5023,8 @@ h1.preface {
         -khtml-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
-        user-select: none; }
+        user-select: none;
+        cursor: pointer; }
         .provider-box-provider-details-button-text {
           position: absolute;
           top: 50%;
@@ -5035,7 +5040,7 @@ h1.preface {
         .provider-box-provider-details-button:hover {
           background-color: #045da0;
           color: white; }
-        .provider-box-provider-details-button:nth-of-type(2) {
+        .provider-box-provider-details-button.write-review {
           margin-right: 0; }
         @media screen and (max-width: 736px) {
           .provider-box-provider-details-button {
@@ -5044,7 +5049,7 @@ h1.preface {
           .provider-box-provider-details-button {
             width: 48.7%;
             height: 42px; }
-            .provider-box-provider-details-button:nth-of-type(4) {
+            .provider-box-provider-details-button.demo-trigger {
               display: none; } }
         .provider-box-provider-details-button-text {
           padding-top: 2px;
@@ -5848,6 +5853,159 @@ h1.preface {
         font-family: gvcons;
         font-size: 20px;
         line-height: 1; }
+
+.provider-popup {
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box; }
+  .provider-popup.final {
+    padding: 0; }
+    .provider-popup.final .results {
+      height: 360px; }
+  .provider-popup-logo {
+    position: relative;
+    float: left;
+    width: 25%;
+    height: 80px;
+    padding-right: 2.1897810219%;
+    border-right: 1px solid #d1d1d1; }
+    .final .provider-popup-logo {
+      display: none; }
+    .provider-popup-logo-img {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      width: 90%;
+      height: auto; }
+  .provider-popup-header {
+    position: relative;
+    float: left;
+    margin-left: 2.1897810219%;
+    width: 70%;
+    height: 80px;
+    margin-bottom: 20px; }
+    .final .provider-popup-header {
+      display: none; }
+    .provider-popup-header-wrap {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      width: 100%; }
+    .provider-popup-header-title {
+      font-size: 28px;
+      font-weight: 500; }
+  .provider-popup-form {
+    clear: both;
+    border-top: 1px solid #d1d1d1;
+    margin-top: 30px; }
+    .final .provider-popup-form {
+      border-top: 0; }
+    .provider-popup-form-wrap:before, .provider-popup-form-wrap:after {
+      content: "";
+      display: table; }
+    .provider-popup-form-wrap:after {
+      clear: both; }
+    .provider-popup-form-wrap .step {
+      width: 100%;
+      float: none; }
+  .provider-popup-fieldset {
+    border: 0;
+    text-align: left;
+    width: 90%;
+    max-width: 430px;
+    margin: 0 auto; }
+    .provider-popup-fieldset:before, .provider-popup-fieldset:after {
+      content: "";
+      display: table; }
+    .provider-popup-fieldset:after {
+      clear: both; }
+    .provider-popup-fieldset.half {
+      float: left;
+      width: 49.0566037736%;
+      margin-top: 24px; }
+      .provider-popup-fieldset.half:nth-child(2n) {
+        margin-left: 1.8867924528%; }
+    .provider-popup-fieldset.error {
+      color: #E34B4F;
+      border-radius: 5px;
+      background-image: none;
+      background-color: transparent; }
+    .provider-popup-fieldset-wrap {
+      position: relative; }
+      .select .provider-popup-fieldset-wrap:after {
+        content: "b";
+        position: absolute;
+        right: 17px;
+        top: 20px;
+        font-family: gvcons;
+        font-size: 18px; }
+        .error .select .provider-popup-fieldset-wrap:after {
+          color: #E34B4F; }
+      .secure .provider-popup-fieldset-wrap:after {
+        content: "T";
+        position: absolute;
+        right: 12px;
+        top: 14px;
+        font-family: gvcons;
+        font-size: 22px;
+        color: #d1d1d1; }
+    .provider-popup-fieldset-label {
+      margin: 0px 0 7px;
+      font-size: 15px; }
+    .provider-popup-fieldset-input, .provider-popup-fieldset-select {
+      width: 100%;
+      border: 1px solid #d1d1d1;
+      background-color: white;
+      border-radius: 3px;
+      height: 55px;
+      display: block;
+      padding: 12px 17px 8px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #595959; }
+      .provider-popup-fieldset-input:focus, .provider-popup-fieldset-select:focus {
+        border-color: #e39315; }
+      .error .provider-popup-fieldset-input, .error .provider-popup-fieldset-select {
+        border-color: #E34B4F; }
+  .provider-popup-control {
+    clear: both;
+    margin-top: 25px; }
+    .provider-popup-control-button {
+      position: relative;
+      left: 0;
+      right: 0;
+      width: 53.9033457249%;
+      height: 55px;
+      width: 49.0566037736%;
+      float: right;
+      border-radius: 3px;
+      background-color: #e39315;
+      color: white;
+      cursor: pointer; }
+      .provider-popup-control-button-text {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        top: 56%;
+        left: 0;
+        right: 18px;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1; }
+        .provider-popup-control-button-text:after {
+          content: "aa";
+          position: absolute;
+          top: 0px;
+          font-family: gvcons;
+          font-size: 17px;
+          font-weight: 600;
+          letter-spacing: -10px; }
 
 .review-posts:before, .review-posts:after {
   content: "";
@@ -6901,6 +7059,7 @@ h1.preface {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      cursor: pointer;
       position: absolute;
       bottom: 30px; }
       .blog-posts-item:nth-child(1) .blog-posts-item-more-text {

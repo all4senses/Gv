@@ -146,10 +146,12 @@
 
 				if ( submit ) {
 					var $currentStep = this.find('.step.show');
+					var $form = this.parent();
 					var $results = this.find('.results');
 					var $loading = '<div class="loading"><div class="loading-title">Processing your information...</div><div class="loading-gif"></div></div>';
 					var data = this.serialize();
 
+					$form.addClass('final');
 					$results.html($loading);
 					$currentStep.removeClass('show');
 

@@ -1,0 +1,184 @@
+.provider-popup
+	width: 100%
+	padding: 30px
+	box-sizing: border-box
+
+	
+	&.final 
+		padding: 0
+
+		.results
+			height: 360px
+
+	&-logo
+		position: relative
+		float: left
+		width: 25%
+		height: 80px
+		padding-right: perc(15px, 685px)
+		border-right: 1px solid $divider
+
+		.final &
+			display: none
+
+		&-img
+			position: absolute
+			+valign
+			width: 90%
+			height: auto
+
+	&-header
+		position: relative
+		float: left
+		margin-left: perc(15px, 685px)
+		width: 70%
+		height: 80px
+		margin-bottom: 20px
+
+		.final &
+			display: none
+
+		&-wrap
+			position: absolute
+			+valign
+			width: 100%
+
+		&-title
+			font-size: 28px
+			font-weight: 500
+
+	&-form
+		clear: both
+		border-top: 1px solid $divider
+		margin-top: 30px
+
+		.final &
+			border-top: 0
+
+		&-wrap
+			+clearfix
+
+			.step
+				width: 100%
+				float: none
+
+	&-fieldset
+		border: 0
+		text-align: left
+		width: 90%
+		max-width: 430px
+		+center
+		+clearfix
+
+		// &.checkbox,
+		// &.radio
+
+		&.half 
+			float: left
+			width: perc(260px, 530px)
+			margin-top: 24px
+
+			&:nth-child(1),
+			&:nth-child(2)
+				// margin-top: 0px
+
+			&:nth-child(2n)
+				margin-left: perc(10px, 530px)
+
+		&.error
+			color: #E34B4F
+			border-radius: 5px
+			background-image: none
+			background-color: transparent
+
+		&-wrap
+			position: relative
+
+			.select &:after
+				content: 'b'
+				position: absolute
+				right: 17px
+				top: 20px
+				font-family: gvcons
+				font-size: 18px
+
+				.error &
+					color: #E34B4F
+
+			.secure &:after
+				content: 'T'
+				position: absolute
+				right: 12px
+				top: 14px
+				font-family: gvcons
+				font-size: 22px
+				color: $divider
+
+		&-label
+			margin: 0px 0 7px
+			font-size: 15px
+
+		&-input,
+		&-select
+			width: 100%
+			border: 1px solid $divider
+			background-color: white
+			// background-color: $subberwhite
+			border-radius: 3px
+			height: 55px
+			display: block
+			padding: 12px 17px 8px
+			font-size: 16px
+			font-weight: 500
+			color: $grey-darker
+
+			&:focus
+				border-color: $contrast
+
+			.error &
+				border-color: #E34B4F
+
+
+
+
+
+	&-control
+		clear: both
+		margin-top: 25px
+		
+		&-button
+			position: relative
+			left: 0
+			right: 0
+			width: perc(435px, 807px)
+			height: 55px
+			// +center
+			width: perc(260px, 530px)
+			float: right
+			border-radius: 3px
+			background-color: $contrast
+			color: white
+			cursor: pointer
+
+
+
+			&-text
+				position: absolute
+				+valign
+				top: 56%
+				left: 0
+				right: 18px
+				font-size: 22px
+				font-weight: 600
+				line-height: 1
+
+				&:after
+					content: 'aa'
+					position: absolute
+					top: 0px
+					font-family: gvcons
+					font-size: 17px
+					font-weight: 600
+					letter-spacing: -10px		
+
+
