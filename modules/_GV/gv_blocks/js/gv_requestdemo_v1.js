@@ -25,10 +25,6 @@
             jQuery.fn.popup("close");
         });
 
-        jQuery(".step-three .provider-demo-control-button").click(function(){
-            jQuery('.provider-demo-form').submit();
-        });
-
         jQuery(".provider-popup-control-button").click(function(){
             jQuery(this).parents('form').submit();
         });

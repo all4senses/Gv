@@ -1,6 +1,5 @@
 <?php 
       drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
-      drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js');
       drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
 
 if ($is_front) {
