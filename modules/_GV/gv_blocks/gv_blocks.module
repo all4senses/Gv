@@ -12420,7 +12420,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
  global $user;
  
  // For now only sip page have settings for turning on/off rotation
- gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display/*$display*/, 'v1'/*$version*/, 1/*$step*/, NULL);
+ $final_result = gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display/*$display*/, 'v1'/*$version*/, 1/*$step*/, NULL);
+ if ($final_result) {
+   return $final_result;
+ }
  
  /*
  if ($view_n_display['display'] == 'bl_p_sip_rotated') {
@@ -12500,7 +12503,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
       
   }
   
-  gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display/*$display*/, $version/*$version*/, 2/*$step*/, $view);
+  $final_result = gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display/*$display*/, $version/*$version*/, 2/*$step*/, $view);
+  if ($final_result) {
+    return $final_result;
+  }
   
   /*
   if ($view_n_display['display'] == 'bl_p_sip_rotated') {                
