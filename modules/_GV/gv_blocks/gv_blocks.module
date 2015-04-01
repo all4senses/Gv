@@ -2243,7 +2243,6 @@ function gv_blocks_getLatestPostsSidebar_2() {
 
   $nodes = node_load_multiple($posts);
   $node_views = node_view_multiple($nodes, 'side_block_teaser');
-  dpm($node_views);
   foreach ($node_views['nodes'] as $key => $value) {
     if (!is_array($value)) {
       continue;
