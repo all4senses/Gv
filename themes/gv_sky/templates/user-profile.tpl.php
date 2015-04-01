@@ -15,7 +15,7 @@
     <div class="team-member-details">
       <h1 class="team-member-details-name"><?php echo $user_name ?></h1>
       <ul class="team-member-details-meta">
-        <li class="team-member-details-meta-item"><?php echo $user_profile['field_u_position']['#items']['0']['value'] ?></li>
+        <li class="team-member-details-meta-item"><?php echo ( isset($user_profile['field_u_position']['#items']['0']['value']) ? $user_profile['field_u_position']['#items']['0']['value'] : 'GetVoIP Staff Member'); ?></li>
         <li class="team-member-details-meta-item"><?php echo 'Member for ' . $user_profile['summary']['member_for']['#markup'] ?></li>
       </ul>
     </div>
