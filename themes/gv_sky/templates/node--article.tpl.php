@@ -171,7 +171,7 @@
                   
                   $submitted .= '<div property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   '<div class="article-meta-category ' . $category_class . '" data-category="' . $category_class . '">' . $category_text . '</div>' .
-                                  (!$extra_data['guest_author'] ? '<div class="article-meta-author"><a class="article-meta-author-link" href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<div class="article-meta-author">' . $author_name) . '</div>' .
+                                  (!$extra_data['guest_author'] ? '<div class="article-meta-author"><a class="article-meta-author-link" href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<div class="article-meta-author guest-author">' . $author_name) . '</div>' .
                                   ($node->type == 'article' ? '' : '<div class="article-meta-date">' . $created_str . '</div>') .
                           
                                '</div></div>';
