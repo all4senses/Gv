@@ -80,7 +80,8 @@ main
 .ui-widget
   font-family: inherit !important
 
-h1
+h1,
+.loading-title
   font-size: 32px
   font-weight: 500
   letter-spacing: -.2px
@@ -152,7 +153,7 @@ header
     padding: 0 13px
     display: table
   .logo
-    padding-top: 5px
+    padding-top: 10px
     display: table-cell
     @media screen and (max-width: 460px)
       padding-top: 10px
@@ -310,13 +311,17 @@ form
   // max-width: 560px
   margin: 0 auto
 
-.step
+.step,
   width: 100% !important
   text-align: left !important
   display: none !important
 
   &.show
     display: block !important
+
+.results
+  width: 100%
+  text-align: center
 
 .step-wrap
   max-width: 560px
@@ -614,7 +619,7 @@ form
 
 
 /* ==========================================================================
-   3. Step Three
+   4. Step Four
    ========================================================================== */
 
 
@@ -647,13 +652,15 @@ form
     text-align: center
     margin-top: 13px
 
+
 .title-loading
   padding-top: 200px
-  .loading-gif
-    background-image: url(../images/lpv10/loading.gif)
-    width: 64px
-    height: 64px
-    margin: 0 auto
+
+.loading-gif
+  background-image: url(../images/lpv10/loading.gif)
+  width: 64px
+  height: 64px
+  margin: 0 auto
 
 .title-second
   .result
@@ -785,7 +792,7 @@ label.error
    ========================================================================== */
 
 .pdf-page .step
-  padding-top: 40px !important
+  // padding-top: 40px !important
 
 .pdf
   padding-top: 50px
@@ -822,6 +829,9 @@ label.error
   //@include size(72,69);
   width: 72px !important
   height: 69px !important
+
+  &:before
+    content: '' !important
 
 .thanks
   width: 90%

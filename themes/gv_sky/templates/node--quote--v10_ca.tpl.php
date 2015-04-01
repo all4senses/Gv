@@ -29,6 +29,7 @@
         );
         drupal_add_html_head($tag, 'meta_viewport');
     */
+    drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css');
   ?>
 
 
@@ -39,7 +40,7 @@
         <div class="wrap">
 
           <div class="logo">
-            <img src="/sites/all/themes/gv_sky/images/lpv10/logo.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
+            <img src="/sites/all/themes/gv_sky/images/lpv10/logo-lp.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
           </div>
 
           <div class="slogan-wrap">
