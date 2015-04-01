@@ -191,6 +191,7 @@
 			position: relative
 			float: left
 			width: 100 / 7 * 1%
+			// width: 100 / 8 * 1%
 			height: 100%
 			background-color: $primary
 			text-align: center
@@ -223,6 +224,10 @@
 					letter-spacing: .4px
 					color: white
 					+user-select(none)
+
+					// +m(1171, min)
+					// 	@media screen and (max-width:1260px)
+					// 		font-size: 14px
 
 					&:before
 						position: absolute
@@ -263,6 +268,10 @@
 				&[href="/web-conferencing"] .main-menu-item-link-text:before
 					content: 'L'
 					font-size: 99px
+
+				// &[href="/cloud-backup"] .main-menu-item-link-text:before
+				// 	content: 'L'
+				// 	font-size: 99px
 
 
 
@@ -310,6 +319,11 @@
 				content: 'L'
 				font-size: 99px * .8
 				bottom: 52px
+
+			// &-link[href="/cloud-backup"] .main-menu-item-link-text:before
+			// 	content: 'L'
+			// 	font-size: 99px * .8
+			// 	bottom: 52px
 
 
 
