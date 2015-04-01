@@ -3,7 +3,8 @@
 	z-index: 900
 	display: none
 	right: 5%
-	bottom: 0
+	// bottom: 0
+	bottom: -457px
 	width: 80%
 	max-width: 350px
 	background-color: white
@@ -14,13 +15,13 @@
 
 	&.show
 		display: block
+		bottom: 0
 
 	&.closed
 		bottom: -405px
 
 	&.animate
 		display: block
-		bottom: -457px
 		transition: bottom 0.5s $ease-in-out-expo
 
 		&.closed

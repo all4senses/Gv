@@ -1,9 +1,8 @@
 <?php
 
 
-
 function gv_sky_preprocess_html(&$vars) {
-
+  
 }
 
 /**
@@ -48,7 +47,6 @@ function gv_sky_l($text, $path, array $options = array()) {
     'attributes' => array(),
     'html' => FALSE,
   );
-
 
   if (($path == $_GET ['q'] || ($path == '<front>' && drupal_is_front_page())) && 
     (empty($options ['language']) || $options ['language']->language == $language_url->language)) {

@@ -1,5 +1,6 @@
 <?php 
   drupal_add_js('sites/all/themes/gv_sky/js/provider.js');
+  drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
 
   $provider_name = isset($node->field_p_name['und'][0]['value']) ? $node->field_p_name['und'][0]['value'] : $node->field_p_name[0]['value']; 
   

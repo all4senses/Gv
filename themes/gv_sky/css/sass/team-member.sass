@@ -1,6 +1,11 @@
-.page-user 
+@import '_parts/_vars'
+@import '_parts/_elements'
+@import '_parts_compare/latest-blog-posts'
+
+.page-user
 	#main
 		background-color: $subwhite
+		padding: 0
 
 	.main-wrap
 		position: relative
@@ -9,7 +14,9 @@
 		+m(620)
 			height: 260px
 
-
+// .profile
+// 	clear: both
+// 	margin: 1em 0
 .team-member
 	position: absolute
 	top: -219px
@@ -235,3 +242,19 @@
 			font-weight: 400
 			font-size: 14px
 			line-height: 1
+
+
+
+.blog-posts-load
+	position: relative
+	margin: 70px auto 20px
+	width: 140px
+	padding-left: 40px
+	font-size: 15px
+	font-weight: 700
+	letter-spacing: 0.4px
+	color: #045DA0
+	text-transform: uppercase
+	box-sizing: border-box
+	cursor: pointer
+	-moz-user-select: none

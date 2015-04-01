@@ -1,3 +1,6 @@
+<?php 
+?>
+
   <header id="header" role="banner">
     <nav class="navigation" role="navigation">
       <div class="navigation-wrap">
