@@ -25,7 +25,7 @@
   <?php if ( current_path() == 'blog' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
-  <?php if ( strpos(request_path(), 'blog/') !== FALSE ) {?>
+  <?php if ( strpos(request_path(), 'blog/') !== FALSE || strpos(request_path(), 'library/') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
   <?php if ( current_path() == 'node/add/review' ) {?>
