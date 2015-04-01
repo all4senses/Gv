@@ -6257,12 +6257,12 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     $gv_providers_sprites[$providers_logos_sprite_name] = array();
     
     foreach ($providers_logos_sprite as $nid => $provider) {
-      $itokPos = strpos($provider['themed_image_src'], "?itok");
-      $newStr = substr($provider['themed_image_src'], 0, $itokPos);
+      // $itokPos = strpos($provider['themed_image_src'], "?itok");
+      // $newStr = substr($provider['themed_image_src'], 0, $itokPos);
       
 
-      // if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) {
-      if ($input_image['img'] = gv_misc_loadImage($newStr)) {
+      if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) {
+      // if ($input_image['img'] = gv_misc_loadImage($newStr)) {
         //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
         $input_image['info'] = getimagesize(urldecode($provider['themed_image_src']));
         imagecopy($out_sprite['img'], $input_image['img'], 0, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
