@@ -2721,6 +2721,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     }
 
   }
+  // Add service type class name to body for styling
+  ctools_class_add(array($service_type));
   
   //$current_theme = $GLOBALS['theme'];
   $cid = 'gv_blocks_getTop5Providers_data_' . $service_type;
