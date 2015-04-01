@@ -7503,6 +7503,11 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
   
   // If allowedToBeSent...
   $allowedToBeSent = TRUE;
+  // Test submissions allowed only, for logged in users.
+  global $user;
+  if (!$user->uid) {
+    $allowedToBeSent = FALSE;
+  }
   
   // Send only  '5 - 10' and        '11 - 20'
 //  if (@$submission['Phones needed'] != '1 - 4' && @$submission['Phones needed'] != '2 - 4' && @$submission['Phones needed'] != '5 - 10' && @$submission['Phones needed'] != '11 - 20') {
