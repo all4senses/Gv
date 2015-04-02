@@ -268,6 +268,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 		$target = $$('.section.two');
 		var $showAfter = $target.offset().top + 50;
+		console.log($showAfter);
 
 	} else {
 
