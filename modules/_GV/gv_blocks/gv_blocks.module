@@ -318,6 +318,16 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['compare_providers_top_cc'] = array(
+    'info' => 'Compare Top CC providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  $blocks['compare_providers_top_wc'] = array(
+    'info' => 'Compare Top WC providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
   $blocks['reviews_counter'] = array(
     'info' => 'Reviews counter',
     'cache' => DRUPAL_NO_CACHE,
@@ -817,6 +827,17 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareTopProviders('pbx');
       break;
+    
+    case 'compare_providers_top_cc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('cc');
+      break;
+    
+    case 'compare_providers_top_wc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('wc');
+      break;
+    
     
   
     case 'reviews_counter':
@@ -2924,6 +2945,14 @@ function gv_blocks_compareTopProviders($service_type) {
       $rating_table = 'field_data_field_p_erating_pbx';
       $rating_field = 'field_p_erating_pbx_value';
       break;
+    case 'cc':
+      $rating_table = 'field_data_field_p_erating_cc';
+      $rating_field = 'field_p_erating_cc_value';
+      break;
+    case 'wc':
+      $rating_table = 'field_data_field_p_erating_wc';
+      $rating_field = 'field_p_erating_wc_value';
+      break;
   }
   
   $query = db_select($rating_table, 'r');
@@ -2939,6 +2968,8 @@ function gv_blocks_compareTopProviders($service_type) {
   
   // Replace defaults with bigger logos.
   $sprite_names['residential'] = 'top_re_providers_chart_big';
+  $sprite_names['cc'] = 'top_cc_providers_vertical_chart';
+  $sprite_names['wc'] = 'top_wc_providers_vertical_chart';
   
   if (!empty($p_names)) {
     //return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
@@ -2997,10 +3028,8 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
   
   $v_colors = array('features' => '#a7a7a7', 'install' => '#6b6a6a', 'money' => 'black', 'rely' => '#85caff', 'service' => '#3099e9', 'sound' => '#046da7');
   $v_titles = array('sound' => SOUND, 'install' => INSTALL, 'service' => CUSTOMER, 'rely' => RELY, 'features' => FEATURES, 'money' => PRICE, 'recommend' => RECOMMEND);  
-
-
   
-  $out = '<table class="chart vertical cols' . ($cols_num - 1) . '">';
+  $out = '<table class="specs sticky-enabled sticky-table p' . ($cols_num - 1) . '">';
   
       if ($back_button) {
         if ($back_button = '<none>') {
@@ -3019,12 +3048,21 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       }
 
       
-        $out .= '<thead class="vertical-thead"><tr class="vertical-thead-logos" ><th class="vertical-thead-logos-empty vertical-left">' . $back_button . '<div class="vertical-thead-logos-empty-rank"><div class="vertical-thead-logos-empty-rank-title">Rank</div></div></th>';
+      //if (!$user->uid) {
+//      if ($GLOBALS['theme'] == 'gv_blue') 
+        {
+        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title"><span>Rank</span></div></th>';
+      }
+//      else {
+//        $out .= '<thead><tr class="logos" ><th class="back" style="border: none; vertical-align: bottom; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '<div class="rank title" style="background: #2c7bbf; color: white; text-align: left; font-size: 12px; font-weight: bold; padding: 3px 0 3px 7px;">Rank</div></th>';
+//      }
         
+        //$out .= '<thead><tr class="logos" ><th class="back" style="border: none; padding: 8px 0 3px; border-radius: 10px 0 0 0;">' . $back_button . '</th>';
+
         $i = $cols_num - 1;
         foreach ($providers as $nid => $provider) {
-          --$i;
-          $out .= '<th class="vertical-thead-logos-item vertical-item">';
+          //$out .= '<th style="border: none; vertical-align: bottom; text-align: center; padding: 8px 0 3px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
+          $out .= '<th class="th-all" style="border: none; vertical-align: bottom; text-align: center; padding: 8px 0 2px; ' . (--$i <= 0 ? ' border-radius: 0 10px 0 0;' : '') . '">';
           if ($sprite_name) {
             $image = gv_misc_getProviderLogoFromSprite($provider['nid'], $sprite_name, array($provider['nid'] => array('name' => $provider['p_name'])));
           }
@@ -3033,12 +3071,15 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
           }
           
-          if (!empty($image)) {            
-            $out .= gv_misc_getTrackingUrl('<div class="vertical-thead-logos-item-logo-img">' . $image . '</div>', NULL, $provider['nid'], NULL, 'vertical-thead-logos-item-logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
+          if (!empty($image)) {
+            // gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid = NULL, $target_name = NULL, $a_class = NULL, $a_attr = NULL)
+            
+            //$out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo');
+            $out .= gv_misc_getTrackingUrl('<div style="min-height: 45px;">' . $image . '</div>', NULL, $provider['nid'], NULL, 'logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
           }
           
           //$out .= '<div class="rank" style="background: #2c7bbf; color: white; margin-top: 5px;">#' . ($cols_num - $i - 1) . '</div>';
-          $out .= '<div class="vertical-thead-logos-item-rank"><span class="vertical-thead-logos-item-rank-hash">#</span>' . ($cols_num - $i - 1) . '</div>';
+          $out .= '<div class="rank"><span>#</span>' . ($cols_num - $i - 1) . '</div>';
           
           $out .= '</th>';
         }
@@ -3048,11 +3089,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       
   
-      $out .= '<tbody class="vertical-tbody">';
-      
-      //Save Vote for later fivestar use
-      $save_vote = array();
-      
+      $out .= '<tbody><tr class="overall"><td class="title">Ratings</td>';
       foreach ($providers as $nid => $provider) {
               
             $criteria = array(
@@ -3065,9 +3102,6 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             foreach ($votes as $vote) {
               if ($vote['tag'] == 'overall') {
                 $p_vote_overall = number_format($vote['value'] * 0.05, 1);
-
-
-                //Save Vote for later fivestar use
               }
               elseif ($vote['tag'] == 'recommend') {
                 $p_vote_recommend = $vote['value'];
@@ -3076,36 +3110,46 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                 $p_votes[$vote['tag']] = $vote['value']; // number_format($vote['value'] * 0.05, 1);
               }
             }
-
-            $save_vote[$nid] = $p_vote_overall;
             
             $providers[$nid]['p_votes'] = $p_votes;
             $providers[$nid]['p_vote_overall'] = $p_vote_overall;
             $providers[$nid]['p_vote_recommend'] = $p_vote_recommend;
+            
+            $out .= '<td style="text-align: center;">' . $p_vote_overall . '/5</td>';
+          
       }
-            
-            
+      $out .= '</tr>';
+      
+      
+      
+      
       
       // Ratings graphs row.
-      $out .= '<tr class="vertical-tbody-graphs"><td class="vertical-tbody-graphs-legend vertical-left">';
+      $out .= '<tr class="rating-graphs"><td class="titles">';
       
       // Ratings graphs title td.
-      $out .= '<ul class="vertical-tbody-graphs-legend-list">';
+      $out .= '<div class="graph-titles" style="float: left; padding-top: 1px;">';
         foreach ($p_votes as $vote_tag => $vote_value) {
-          $out .= '<li class="vertical-tbody-graphs-legend-list-item"><span class="vertical-tbody-graphs-legend-list-item-text">' . $v_titles[$vote_tag] . '</span></li>';
+          $out .= '<div style="overflow: hidden;"><div class="marker" style="background: ' . $v_colors[$vote_tag] . ';"></div><div class="title">' . $v_titles[$vote_tag] . '</div></div>';
         } 
-      $out .= '</ul></td>';      
+      $out .= '</div>';
+      
+      $out .= '<div class="graph-grades"><div class="first">5</div><div>4</div><div>3</div><div>2</div><div class="last">1</div></div>';
+      
+      
+      $out .= '</td>';
+      
       
       $v_max_height = $GLOBALS['theme'] == 'gv_blue' ? 130 : 100;
       
       foreach ($providers as $nid => $provider) {
         
-        $out .= '<td class="vertical-tbody-graphs-item vertical-item">';
+        $out .= '<td class="v-bars">';
 
             
-            $out .= '<div class="vertical-tbody-graphs-item-wrap">';
+            $out .= '<div class="v-graphs">';
             foreach ($provider['p_votes'] as $vote_tag => $p_vote_value) {
-              $out .= '<div class="vertical-tbody-graphs-item-bar" title="' . $v_titles[$vote_tag] . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  '%;"></div>';
+              $out .= '<div class="v-bar" title="' . $v_titles[$vote_tag] . ': ' . number_format($p_vote_value * 0.05, 1) . '" style="float: left; height: ' . number_format($v_max_height * ($p_vote_value/100), 0) .  'px; margin-top: ' . ($v_max_height - number_format($v_max_height * ($p_vote_value/100), 0)) . 'px; margin-left: 3px; width: 10px; background: ' . $v_colors[$vote_tag] . ';"></div>';
             }
             $out .= '</div>';
 
@@ -3118,33 +3162,12 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
       
       
       
-      // User Reviews Row
-      $out .= '<tr class="vertical-tbody-reviews"><td class="vertical-tbody-reviews-title vertical-left">User Reviews</td>';
-
-      foreach ($providers as $nid => $provider) {
-            $provider_rating = $save_vote[$nid] * 20;
-            $out .= '<td class="vertical-tbody-reviews-item vertical-item">
-              <div class="vertical-tbody-reviews-item-rating">' . $save_vote[$nid] . '</div>' . 
-
-              theme('gv_misc_fivestar_dk', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'vertical-tbody-reviews-item-rating')) . '
-
-              <a class="vertical-tbody-reviews-item-read" href="' . url('node/' . $nid) . '">Read Reviews</a>
-
-            </td>';
-          
-      }
-      $out .= '</tr>';
-      
-
-
-
-
      
       $options_to_exclude = array();
       $options_sets_to_exclude = array();
       
       $additional_options_td_style = array(
-        'Monthly Cost of Cheapest Service' => '',
+        'Monthly Cost of Cheapest Service' => ' font-size: 14px; font-weight: bold;',
       );
       $provider_options_titles_aliases = unserialize(PROVIDER_OPTIONS_TITLES_ALIASES);
           
@@ -3185,6 +3208,16 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           $provider_options_structure = unserialize(PROVIDER_OPTIONS_RE);
           $provider_options_index = 'provider_options_re';
           break;
+        
+        case 'cc':
+          $provider_options_structure = unserialize(PROVIDER_OPTIONS_CC);
+          $provider_options_index = 'provider_options_cc';
+          break;
+        
+        case 'wc':
+          $provider_options_structure = unserialize(PROVIDER_OPTIONS_WC);
+          $provider_options_index = 'provider_options_wc';
+          break;
       }
       //$provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
       
@@ -3193,24 +3226,27 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         if (in_array($options_set, $options_sets_to_exclude)) {
           continue;
         }
-
-        $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-details-item-title vertical-left">Details</td>';
+        
+        $out .= '<tr class="reviews"><td class="title">User Reviews</td>';
           foreach ($providers as $nid => $provider) {
-            $out .= '<td class="vertical-tbody-details-item vertical-item"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+            $out .= '<td style="text-align: center;">' . l('Read Reviews', 'node/' . $nid) . '</td>';
+          }
+        $out .= '</tr>';
+
+
+        $out .= '<tr class="visit"><td class="title">Details</td>';
+          foreach ($providers as $nid => $provider) {
+            //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
+            //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid) . '</td>';
+            
+            //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
+            $out .= '<td style="text-align: center;"><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
+           
           }
         $out .= '</tr>';
         
-
-        //For the FOR Loop 5 lines below this comment
-        $my_cols = $cols_num - 1;
-
-        $divider_cols = '';
-
-        for ($i=0; $i < $my_cols; $i++) { 
-            $divider_cols .= '<td class="vertical-item"></td>';
-        }
-
-        $out .= '<tr class="vertical-tbody-divider"><td class="vertical-left"></td>' . $divider_cols . '</tr><tr class="vertical-tbody-caption"><td class="vertical-tbody-caption-text" colspan="' . $cols_num . '">' . str_replace(array('(', ')'), array('<span>(', ')</span>'), $options_set) . '</td></tr>';
+        
+        $out .= '<tr class="divider"><td colspan="' . $cols_num . '"></td></tr><tr class="caption"><td colspan="' . $cols_num . '">' . str_replace(array('(', ')'), array('<span>(', ')</span>'), $options_set) . '</td></tr>';
 
         
         
@@ -3229,7 +3265,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           // Refine a title to show.
           $title_alias = isset($provider_options_titles_aliases[$option_title])? $provider_options_titles_aliases[$option_title] : $option_title;
           $title_alias = str_replace('Num ', '# ', $title_alias);
-          $out .= '<tr class="vertical-tbody-option ' . $row_class . '"><td class="vertical-tbody-option-title vertical-left">' . $title_alias . '</td>';
+          $out .= '<tr class="options ' . $row_class . '"><td class="title">' . $title_alias . '</td>';
           
           foreach ($providers as $nid => $provider) {
             
@@ -3257,7 +3293,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
                 $option_value = $option_value['value'];
               }
               
-              $out .= '<td class="vertical-tbody-option-value vertical-item"><div'. ($is_checkbox ? ' class="vertical-tbody-option-value-icon vertical-tbody-option-value-icon_' . ($option_value == 'Yes' ? 'yes' : ($option_value == 'No' ? 'no' : '')) . '"' : '') . '>' . (($option_value == 'Yes') ? '' : (($option_value == 'No') ? '' : $option_value)) . '</div><div class="vertical-tbody-option-value-additional">' . $additional_text . '</div></td>';
+              $out .= '<td style="text-align: center;' . (!empty($additional_options_td_style[$option_title]) ? $additional_options_td_style[$option_title] : '') . '" class="option value' . ($option_value == 'Yes' ? ' yes' : ($option_value == 'No' ? ' no' : '')) . '"><div'. ($is_checkbox ? ' class="check"' : '') . '>' . $option_value . '</div><div>' . $additional_text . '</div></td>';
 
           }
           
@@ -3266,44 +3302,30 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         }
       }
 
-      $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-details-item-title vertical-left">Details</td>';
+      $out .= '<tr class="reviews"><td class="title">User Reviews</td>';
         foreach ($providers as $nid => $provider) {
-          $out .= '<td class="vertical-tbody-details-item vertical-item vertical-item-last"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+          $out .= '<td style="text-align: center;">' . l('Read Reviews', 'node/' . $nid) . '</td>';
+        }
+      $out .= '</tr>';
+
+
+      $out .= '<tr class="visit"><td class="title">Details</td>';
+        foreach ($providers as $nid => $provider) {
+          //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl($provider['p_name'], NULL, $nid) . '</td>';
+          
+          //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid) . '</td>';
+          
+          //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
+          $out .= '<td style="text-align: center;"><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
         }
       $out .= '</tr>';
         
       
   $out .= '</tbody></table>';
-
-  $mobile_version = '<table class="vertical-mobile">
-    <thead class="vertical-mobile-thead"></thead>
-    <tbody class="vertical-mobile-tbody">';
-
-  foreach ($providers as $nid => $provider) {
-    $provider_rating = $save_vote[$nid] * 20;
-    $mobile_version .= '<tr class="vertical-mobile-tbody-row">
-          <td class="vertical-mobile-tbody-row-logo">' .
-              // gv_misc_getTrackingUrl($image, NULL, $provider['nid'], NULL, 'vertical-mobile-tbody-row-logo-img', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type))
-           '</td>
-          <td class="vertical-mobile-tbody-row-price"></td>
-          <td class="vertical-mobile-tbody-row-rating">
-              <div class="vertical-mobile-tbody-row-rating-details"><div class="vertical-mobile-tbody-row-rating-details-rating">' . $save_vote[$nid] . '</div>' . 
-
-              theme('gv_misc_fivestar_dk', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'vertical-tbody-reviews-item-rating')) . '
-              </div>
-
-              <a class="vertical-mobile-tbody-row-rating-read" href="' . url('node/' . $nid) . '">Read Reviews</a>
-          </td>
-          <td class="vertical-mobile-tbody-row-features"></td>
-          <td class="vertical-mobile-tbody-row-details">
-            <div class="vertical-mobile-tbody-row-details-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-mobile-tbody-row-details-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-mobile-tbody-row-details-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div>
-          </td>
-        </tr>';
-  }
-
-  $mobile_version .= '</tbody></table>';
-    
-  return $out . $mobile_version;
+  
+  $out = '<div class="compare-providers-top-wrapper">' . $out . '</div>';
+  
+  return $out;
 }
 
 
