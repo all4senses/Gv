@@ -30,6 +30,7 @@
         </div>
         
         <?php echo render($page['header']); ?>
+        <?php dpm($node); ?>
 
         <div class="clearfix"></div>
       </div>
