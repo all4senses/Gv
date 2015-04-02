@@ -7532,6 +7532,7 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
   );
   
   
+  
   // Map data to remote vars names.
   foreach ($map_main as $getvoip_key => $remote_key) {
     $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
@@ -7542,6 +7543,7 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
     $data_to_str .= ($data_to_str ? '&' : '') . $key . '=' . $value;
   }
   
+  watchdog(' --> Autolead Mitel', $data_to_str . ', ' .  print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
   
   $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   
@@ -7552,14 +7554,16 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
   curl_setopt($curl, CURLOPT_POST, TRUE);
   curl_setopt($curl, CURLOPT_HEADER, TRUE);
   curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to_str);
+  
   $data_from = curl_exec($curl);
   if ($data_from === false) {
     $data_from = 'Error!!! 
 ' . curl_error($curl);
   }
   curl_close($curl);
- 
-
+  
+  
+  
 
   // Report to a4s.
   /*
