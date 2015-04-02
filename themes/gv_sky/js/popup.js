@@ -3,6 +3,9 @@
 	var $popup_overlay = '<div class="popup-overlay"></div>';
 	var $popup = '<div class="popup"><div class="popup-close"></div><div class="popup-content"></div></div>';
 	$('body').prepend($popup_overlay + $popup);	
+	$('.popup-close').click(function(){
+		$.fn.popup('close');
+	});
 
 	var popOpen = false;
 

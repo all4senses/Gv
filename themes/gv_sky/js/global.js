@@ -285,7 +285,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 	
 	$window.scroll(function(){
 		var $scrolled = $window.scrollTop();
-		
+
 		if ( $scrolled > $showAfter && !$displayed) {
 			$$('.get-quote').addClass('show');
 			if (!open) {
@@ -314,3 +314,8 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 		e.preventDefault();
 		$$('.get-quote-form').form('submit', '/request');
 	});
+
+
+
+
+
