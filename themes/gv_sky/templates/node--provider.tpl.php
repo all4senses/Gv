@@ -1,5 +1,6 @@
 <?php 
   drupal_add_js('sites/all/themes/gv_sky/js/provider.js');
+  drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
 
   $provider_name = isset($node->field_p_name['und'][0]['value']) ? $node->field_p_name['und'][0]['value'] : $node->field_p_name[0]['value']; 
   
@@ -42,8 +43,10 @@
               <div class="provider-box-provider-logo provider-box-provider-sticky-logo">
                 <?php
                   $logo_block = NULL;
+                  $logo_block2 = NULL;
                   if (isset($content['field_p_logo'][0]['#item']['uri'])) {
                     $logo_block = '<div class="provider-box-provider-logo-wrap provider-box-provider-sticky-logo-wrap">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo', 'class' => 'provider-box-provider-logo-wrap-img'))) . '</div>';
+                    $logo_block2 = '<div class="provider-popup-logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo', 'class' => 'provider-popup-logo-img'))) . '</div>';
                     echo $logo_block;
                   }
                   else {
@@ -58,9 +61,10 @@
                     <?php echo
                       gv_misc_getTrackingUrl('<span class="provider-box-provider-details-button-text provider-box-provider-sticky-details-button-text">Visit Provider</span>', NULL, NULL, NULL, 'provider-box-provider-details-button provider-box-provider-sticky-details-button', array('key' => 'rel', 'value' => 'v:url nofollow')) .
 
-                      (!empty($node->p_data['disable_buttons']['quote']) ? '' : l('<span class="provider-box-provider-details-button-text provider-box-provider-sticky-details-button-text">Request a Quote</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button provider-box-provider-sticky-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))) . 
+                      // (!empty($node->p_data['disable_buttons']['quote']) ? '' : l('<span class="provider-box-provider-details-button-text provider-box-provider-sticky-details-button-text">Request a Quote</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button provider-box-provider-sticky-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))) . 
+                      '<div class="provider-box-provider-details-button provider-box-provider-sticky-details-button quote-trigger trigger"><span class="provider-box-provider-details-button-text provider-box-provider-sticky-details-button-text">Request a Quote</span></div>'.
                      
-                      l('<span class="provider-box-provider-details-button-text provider-box-provider-sticky-details-button-text">Write Review</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button provider-box-provider-sticky-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
+                      l('<span class="provider-box-provider-details-button-text provider-box-provider-sticky-details-button-text write-review">Write Review</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button provider-box-provider-sticky-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
                     ?>
             
               </div> <!-- End of <div class="provider-box-provider-details" -->
@@ -135,11 +139,12 @@
 
               
                   <?php echo 
-                    (!empty($node->p_data['disable_buttons']['demo']) ? '' : '<div class="provider-box-provider-details-button"><span class="provider-box-provider-details-button-text">Request a Demo</span></div>'), 
+                    (!empty($node->p_data['disable_buttons']['demo']) ? '' : '<div class="provider-box-provider-details-button demo-trigger trigger"><span class="provider-box-provider-details-button-text">Request a Demo</span></div>'), 
+                    (!empty($node->p_data['disable_buttons']['demo']) ? '' : '<div class="provider-box-provider-details-button quote-trigger trigger"><span class="provider-box-provider-details-button-text">Request a Quote</span></div>'), 
                     // l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'))), 
-                    (!empty($node->p_data['disable_buttons']['quote']) ? '' : l('<span class="provider-box-provider-details-button-text">Request a Quote</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))) , 
+                    // (!empty($node->p_data['disable_buttons']['quote']) ? '' : l('<span class="provider-box-provider-details-button-text">Request a Quote</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))) , 
                    
-                    l('<span class="provider-box-provider-details-button-text">Write Review</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
+                    l('<span class="provider-box-provider-details-button-text">Write Review</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
             
                       // Colorbox for popup window.
                       // drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
@@ -152,19 +157,17 @@
                   ?>
           
                           <!-- Popup windows for Request links above -->
-                          <div style="display: none;">
-                            <div id="block-gv-blocks-request-quote-v8" class="popup-request quote"> 
-                              <?php echo $logo_block, '<div class="header"><div class="title">Request ', $provider_name, ' Quote</div><div class="descr">In order to prepare a quote, we need some information about you</div></div>'; ?>
-                              <div class="bottom-clear"></div>
+                          <div style="display: none;" class="provider-quote-container">
+                            <div class="provider-popup provider-quote"> 
+                              <?php echo $logo_block2, '<div class="provider-popup-header"><div class="provider-popup-header-wrap"><div class="provider-popup-header-title">Request ', $provider_name, ' Quote</div><div class="provider-popup-header-desc">In order to prepare a quote, we need some information about you.</div></div></div>'; ?>
                               <?php echo gv_blocks_get_requestQuote_block_v8_popup_provider(); ?>
                               
                             </div>
                           </div>
                           
-                          <div style="display: none;">
-                            <div id="block-gv-blocks-request-quote-v8" class="popup-request demo"> 
-                              <?php echo $logo_block, '<div class="header"><div class="title">Request ', $provider_name, ' Demo</div><div class="descr">In order to schedule your demo, we need some information from you:</div></div>'; ?>
-                              <div class="bottom-clear"></div>
+                          <div style="display: none;" class="provider-demo-container">
+                            <div class="provider-popup provider-demo"> 
+                              <?php echo $logo_block2, '<div class="provider-popup-header"><div class="provider-popup-header-wrap"><div class="provider-popup-header-title">Request ', $provider_name, ' Demo</div><div class="provider-popup-header-desc">In order to schedule your demo, we need some information from you.</div></div></div>'; ?>
                               <?php echo gv_blocks_get_requestDemo_block_v1_popup_provider(); ?>
                               
                             </div>

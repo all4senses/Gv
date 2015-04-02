@@ -52,6 +52,7 @@
 		transition: all 0.2s
 		box-sizing: border-box
 		+user-select(none)
+		cursor: pointer
 
 		&-text
 			position: absolute
@@ -315,6 +316,9 @@
 			width: 100%
 			border-right: 0
 
+		+m(736)
+			min-height: 0
+
 		&-title
 			font-size: 18px
 			font-weight: 600
@@ -330,9 +334,12 @@
 				+m(720)
 					display: block
 
-					.field-item p
-						+ellipsis(44%)
-						display: block
+					.field-item 
+						height: 18px
+						overflow: hidden
+						p
+							+ellipsis(44%)
+							display: block
 						
 
 
@@ -446,7 +453,7 @@
 			+clearfix
 
 			+m(414)
-				margin-top: 0
+				margin-top: 2px
 
 
 

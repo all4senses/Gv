@@ -16,6 +16,7 @@
 
 	p
 		margin-bottom: 15px
+		line-height: 1.35
 
 	&-meta
 		padding-bottom: 34px
@@ -49,7 +50,6 @@
 			&.hide
 				display: none
 
-
 		&-author
 			position: relative
 			float: left
@@ -79,6 +79,9 @@
 
 			+m(736)
 				display: block
+
+			+m(520)
+				margin-bottom: 7px
 
 		&-date
 			position: relative
@@ -153,6 +156,8 @@
 		float: none
 		padding: 20px
 
+.rtecenter
+	text-align: center
 
 .node-type-blog-post
 	.field-name-body
@@ -171,15 +176,23 @@
 			table
 				width: 100% !important
 				margin: 30px 0
+				border: 0
 				border: 1px solid $divider
 				border-radius: 4px
 				border-collapse: separate
 				overflow: hidden
 
+
 			tr 
 				td
-					border-bottom: 1px solid $divider
-					padding: 10px 20px
+					border: 0 !important
+					border-bottom: 1px solid $divider !important
+					border-left: 1px solid $divider !important
+					padding: 10px 20px !important
+					box-sizing: border-box
+
+					&:first-child
+						border-left: 0 !important
 
 					p
 						margin-bottom: 0

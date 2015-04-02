@@ -1,6 +1,11 @@
-.page-user 
+@import '_parts/_vars'
+@import '_parts/_elements'
+@import '_parts_compare/latest-blog-posts'
+
+.page-user
 	#main
 		background-color: $subwhite
+		padding: 60px 0
 
 	.main-wrap
 		position: relative
@@ -9,22 +14,24 @@
 		+m(620)
 			height: 260px
 
-
+// .profile
+// 	clear: both
+// 	margin: 1em 0
 .team-member
 	position: absolute
-	top: -219px
+	top: -279px
 	width: 100%
 	+clearfix
 	box-sizing: border-box
 
 	+m(768)
-		top: -200px
+		top: -260px
 
 	+m(620)
-		top: -185px
+		top: -215px
 
 	+m(520)
-		top: -275px
+		top: -255px
 
 	&-pic
 		position: relative
@@ -235,3 +242,9 @@
 			font-weight: 400
 			font-size: 14px
 			line-height: 1
+
+
+
+.blog-posts-load
+	+load-more
+	padding-bottom: 70px

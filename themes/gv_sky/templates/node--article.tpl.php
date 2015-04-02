@@ -9,13 +9,13 @@
   
   
   
-  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1427745238/*1421703309*/);
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309);
   
   //global $user;
   //if ($user->uid == 1) 
   {
     //dpm(time());
-    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node,  1427745238/*1421703309*/);
+    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node,  1421703309);
   }
   
   
@@ -171,7 +171,7 @@
                   
                   $submitted .= '<div property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
                                   '<div class="article-meta-category ' . $category_class . '" data-category="' . $category_class . '">' . $category_text . '</div>' .
-                                  (!$extra_data['guest_author'] ? '<div class="article-meta-author"><a class="article-meta-author-link" href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<span class="guest-author">' . $author_name . '</span>') . '</div>' .
+                                  (!$extra_data['guest_author'] ? '<div class="article-meta-author"><a class="article-meta-author-link" href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<div class="article-meta-author guest-author">' . $author_name) . '</div>' .
                                   ($node->type == 'article' ? '' : '<div class="article-meta-date">' . $created_str . '</div>') .
                           
                                '</div></div>';

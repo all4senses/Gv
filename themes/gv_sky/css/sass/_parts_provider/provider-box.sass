@@ -56,11 +56,11 @@
 
 					+m(520)
 						width: 130px
-						padding-top: 10px
+						// padding-top: 10px
 
 					+m(360)
 						width: 110px
-						padding-top: 15px
+						// padding-top: 15px
 
 			&-button
 				+button(solid, $primary, 200px, perc(47px, 230px))
@@ -193,7 +193,7 @@
 				// +button(outline, $primary, perc(170px, 630px), 48px)
 				+button(outline, $primary, perc(170px, 548px), 48px)
 
-				&:nth-of-type(2)
+				&.write-review
 					margin-right: 0
 
 
@@ -203,7 +203,7 @@
 				+m(520)
 					width: 48.7%
 					height: 42px
-					&:nth-of-type(4)
+					&.demo-trigger
 						display: none
 
 				&-text
@@ -327,6 +327,8 @@
 					+fivestar(18px)
 
 					+m(480)
+						position: relative
+						top: -2px
 						float: left
 
 

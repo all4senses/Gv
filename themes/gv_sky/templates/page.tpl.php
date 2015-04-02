@@ -1,7 +1,10 @@
 <?php 
-      drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
-      drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js');
+
+      // drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
       drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
+      if (!$is_admin) {
+        drupal_static_reset('drupal_add_css');
+      }
 
 if ($is_front) {
   drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
@@ -14,7 +17,6 @@ if ( current_path() == 'blog' ) {
 if ( current_path() == 'node/add/review' ) {
   drupal_add_js('/sites/all/themes/gv_sky/js/submit-review.js');
 }
-
 
 ?>
   <header id="header" role="banner">
@@ -63,7 +65,6 @@ if ( current_path() == 'node/add/review' ) {
 
     <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page?>
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
-      <?php drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js'); ?>
       <div class="hero-header center">
         <div class="hero-title">
           <h1 class="hero-title-heading"><?php print ( current_path() == 'node/62' ? 'Contact Us' : 'Advertise With Us' ) ?></h1>

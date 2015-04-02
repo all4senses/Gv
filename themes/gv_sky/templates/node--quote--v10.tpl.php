@@ -17,7 +17,7 @@
     else {
       $initialQuotePage_node = $node;
     }
-    
+    drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css');
   ?>
 
 
@@ -28,7 +28,7 @@
         <div class="wrap">
 
           <div class="logo">
-            <img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/logo.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
+            <img src="/sites/all/themes/gv_sky/images/lpv10/logo-lp.png" width="206" height="53" alt="GetVoIP" title="GetVoIP">
           </div>
 
           <div class="slogan-wrap">
@@ -58,7 +58,7 @@
               <h1>Download Your Free VoIP Buyer's Guide</h1>
             </div>
             <form class="form">
-              <div class="step one radio-filled">
+              <div class="step one show">
                 <div class="wrap">
                   <a href="http://getvoip.com/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank"><div class="download"><div class="icon-download"></div><span>Download PDF</span></div></a>
                 </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="person">
                   <div class="photo">
-                    <div class="circle"><img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/richard.png" alt="Richard Janes"></div>
+                    <div class="circle"><img src="/sites/all/themes/gv_sky/images/lpv10/richard.png" alt="Richard Janes"></div>
                   </div>
                   <div class="name-meta">
                     <p class="full-name">Richard Janes</p>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="person">
                   <div class="photo">
-                    <div class="circle"><img src="/sites/all/themes/gv_blue/css/sass/lpv10-img/mark.png" alt="Mark Crosbie"></div>
+                    <div class="circle"><img src="/sites/all/themes/gv_sky/images/lpv10/mark.png" alt="Mark Crosbie"></div>
                   </div>
                   <div class="name-meta">
                     <p class="full-name">Mark Crosbie</p>

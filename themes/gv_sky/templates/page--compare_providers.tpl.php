@@ -1,10 +1,12 @@
 <?php 
-drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
-drupal_add_js('/sites/all/themes/gv_sky/js/form-validation.js');
-drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
-drupal_add_js('/sites/all/themes/gv_sky/js/comparison_page.js');
-// drupal_add_css('/sites/all/themes/gv_sky/css/global.css'); 
+  drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
+  drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
+  drupal_add_js('/sites/all/themes/gv_sky/js/comparison_page.js');
+  if (!$is_admin) {
+    drupal_static_reset('drupal_add_css');
+  }
 ?>
+<link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css"
   <header id="header" role="banner">
 
     <nav class="navigation" role="navigation">
