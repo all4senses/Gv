@@ -1662,38 +1662,11 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 //  
 //  $out .= '...ok';
   
+  global $theme;
   
+  dpm('theme = ' . $theme);
   
-  $url = 'http://100.65.21.29?access=xxx&op=4&lamp=0';
-  
-//  $url = 'http://100.65.21.29:88';
-  
-//  $curl = curl_init();
-//  curl_setopt($curl, CURLOPT_URL, $url);
-//  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-//  curl_setopt($curl, CURLOPT_TIMEOUT, 300);
-//  //curl_setopt($curl, CURLOPT_POST, FALSE);
-//  //curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
-//  $data_from = curl_exec($curl);
-//  if ($data_from === false) {
-//    $data_from = 'Error!!! 
-//' . curl_error($curl);
-//  }
-//  curl_close($curl);
-// 
-//  dpm($data_from);   
-  
-  
-  $url = 'http://smart1977.ddns.net/?access=xxx&op=4&lamp=0';
-  
-  $data_from = file_get_contents($url);
-  
-  if ($data_from) {
-    $data_from = json_decode($data_from);
-  }
-  
-   dpm($data_from); 
-  
+  dpm($_GLOBALS);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
