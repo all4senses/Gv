@@ -52,11 +52,11 @@
   <?php if ($is_front) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/home.css">
   <?php } ?>
+<!--[if IE 8]>
+    <script type="text/javascript" src="/sites/all/themes/gv_sky/js/selectivizr-min.js"></script>
+    <link rel="stylesheet" href="sites/all/themes/gv_sky/css/ie8.css" />
+<![endif]--> 
 
-      <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
-     <script type="text/javascript">
-       takanaClient.run({host: 'localhost:48626'});
-     </script>
 
 
 
@@ -66,7 +66,6 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
-  
   <?php if (!isset($top)) { print $scripts; } ?>
   <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6005656184574&amp;value=0" /></noscript>
   

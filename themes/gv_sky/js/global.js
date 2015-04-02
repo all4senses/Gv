@@ -167,8 +167,8 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 				if ( !$(this).hasClass('valid') ) {
 					problem = true;
 					$(this).addClass('error');
-					console.log('invalid');
-					console.log($(this).attr('class'));
+					// console.log('invalid');
+					// console.log($(this).attr('class'));
 
 				} else {
 					$(this).removeClass('error');
@@ -177,10 +177,10 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 			if ( problem ) {
 				proceed = false;
-				console.log('stop');
+				// console.log('stop');
 			} else {
 				proceed = true;
-				console.log('proceed');
+				// console.log('proceed');
 			}
 
 			if ( proceed ) {
@@ -268,7 +268,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 		$target = $$('.section.two');
 		var $showAfter = $target.offset().top + 50;
-		console.log($showAfter);
+		// console.log($showAfter);
 
 	} else {
 
@@ -314,7 +314,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 	});
 
 	$$('.get-quote-form').submit(function(e){
-		console.log('submit');
+		// console.log('submit');
 		e.preventDefault();
 		$$('.get-quote-form').form('submit', '/request');
 	});
