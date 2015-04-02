@@ -23,9 +23,8 @@ define('SOUND', 'Quality');
 define('CUSTOMER', 'Support');
 //define('RELY', 'Service Reliability');
 define('RELY', 'Reliability');
-// define('RECOMMEND', 'Would you recommend this VoIP provider?');
-// define('RECOMMEND', 'Would you recommend this service provider?');
-define('RECOMMEND', 'Would you recommend this provider?');
+////define('RECOMMEND', 'Would you recommend this VoIP provider?');
+define('RECOMMEND', 'Would you recommend this service provider?');
 
 
 // Phones only
@@ -72,6 +71,8 @@ $sprite_names = serialize(array(
   'pbx' => 'top_pbx_providers',
   'bu_ca' => 'top_ca_providers',
   're_ca' => 'top_ca_providers',
+  'cc' => 'top_cc_providers',
+  'wc' => 'top_wc_providers',
   //'smbv' => '',  
 ));
 
@@ -101,6 +102,7 @@ $provider_options_to_quick_save = array(
 define('PROVIDER_OPTIONS_TO_QUICK_SAVE', serialize($provider_options_to_quick_save));
 
 $provider_options_bu = array(
+    
           'Provider Info' => array(
               'Year Founded' => 'textfield',
               'Headquarters Location' => 'textfield',
@@ -276,6 +278,152 @@ $provider_options_re = array(
       
 define('PROVIDER_OPTIONS_RE', serialize($provider_options_re));
 
+
+$provider_options_cc = array(
+          
+          'Provider Info' => array(
+              'Year Founded' => 'textfield',
+              'Headquarters Location' => 'textfield',
+              'Service Location' => 'textfield',
+              'Service Type Availability' => 'textfield',
+              'Popular Service Plan' => 'textfield',
+              'Money Back Guarantee' => 'textfield',
+          ),
+    
+    
+          'Available Features & Services' => array(
+              
+              'Advanced Call Routing Options' => 'checkbox',
+              'Busy Lamp Field' => 'checkbox',
+              'Call Parking' => 'checkbox',
+              'Call Recording' => 'checkbox',
+              'Conference Bridge' => 'checkbox',
+              'Configurable Call Handling' => 'checkbox',
+              'CTI (Computer Telephony Integration)' => 'checkbox',
+              'DNC (do-not-call) Compliance' => 'checkbox',
+              'Historical Call Reporting' => 'checkbox',
+              'Intelligent ACD (Automated Call Distribution)' => 'checkbox',
+              'IVR (Interactive Voice Responce)' => 'checkbox',
+              'Multichannel Support' => 'checkbox',
+              'One-Click Transfer' => 'checkbox',
+              'Outbound Call Control' => 'checkbox',
+              'Priority Queue Routing' => 'checkbox',
+              'Professional Greeting' => 'checkbox', 
+              'Real-Time Call Monitoring' => 'checkbox',
+              'Receptionist Dashboard' => 'checkbox',
+              'Supervisor Dashboard' => 'checkbox',
+              'Text to Speech' => 'checkbox',
+              'Virtual Queue' => 'checkbox',
+              'Voice ACD (Automatic Call Distributor)' => 'checkbox',
+              'Voicemail to Email' => 'checkbox',
+              'Web Callback' => 'checkbox',
+              'Workforce Management' => 'checkbox',
+              'Workforce Management' => 'checkbox',
+          ),
+    
+          'Integrations' => array(
+              'Box' => 'checkbox',
+              'Dropbox' => 'checkbox',
+              'Microsoft Dynamics' => 'checkbox',
+              'NetSuite' => 'checkbox',
+              'Outlook' => 'checkbox',
+              'SalesForce' => 'checkbox',
+              'SugarCRM' => 'checkbox',
+              'Zoho' => 'checkbox',
+              'Zendesk' => 'checkbox',
+          ),
+    
+    
+          'Support' => array(
+              'Hours' => 'textfield',
+              'Telephone Support' => 'checkbox',
+              'Email Support' => 'checkbox',
+              'Instant Chat' => 'checkbox',
+              '24/7 Call-in Support' => 'checkbox',
+              'FAQs Section' => 'checkbox',
+              'Video Tutorials' => 'checkbox',
+              'E-Guides' => 'checkbox',
+              'Online Ticket Submissions' => 'checkbox',
+        ),
+    
+      );
+
+define('PROVIDER_OPTIONS_CC', serialize($provider_options_cc));
+
+
+
+
+$provider_options_wc = array(
+          
+          'Provider Info' => array(
+              'Year Founded' => 'textfield',
+              'Headquarters' => 'textfield',
+              'Service Location' => 'textfield',
+              'Service Type Availability' => 'textfield',
+              'Most Popular Plan' => 'textfield',
+              'Money Back Guarantee' => 'textfield',
+              'Enterprise Solution' => 'textfield',
+              'Free Trial' => 'textfield',
+              'Prepay Discount' => 'textfield',
+              'Price Range Min-Max' => 'textfield',
+          ),
+    
+    
+          'Available Features & Services' => array(
+                
+              'Breakout Participants' => 'checkbox',
+              'Data Encryption' => 'checkbox',
+              'Designate Presenter' => 'checkbox',
+              'File Transfer' => 'checkbox',
+              'Max Participants - Biggest Plan' => 'checkbox',
+              'Max Participants - Smallest Plan' => 'checkbox',
+              'Mobile App' => 'checkbox',
+              'No Conference Codes' => 'checkbox',
+              'Online Data Backup' => 'checkbox',
+              'Participant Annotation' => 'checkbox',
+              'Participant Download' => 'checkbox',
+              'Post Call Reporting' => 'checkbox',
+              'Preparation Mode' => 'checkbox',
+              'Record Meetings' => 'checkbox',
+              'Screenshots' => 'checkbox',
+              'Social Media Integration' => 'checkbox',
+              'Specific Window Sharing' => 'checkbox',
+              'Survey/Polling' => 'checkbox',
+              'Toll Free Number' => 'checkbox',
+          ),
+    
+          'Integrations' => array(
+              
+              'Outlook' => 'checkbox',
+              'NetSuite' => 'checkbox',
+              'SalesForce' => 'checkbox',
+              'SugarCRM' => 'checkbox',
+              'Box' => 'checkbox',
+              'Dropbox' => 'checkbox',
+              'Microsoft Dynamics' => 'checkbox',
+              'Zoho' => 'checkbox',
+              'Zendesk' => 'checkbox',
+          ),
+    
+    
+          'Support' => array(
+              'Hours' => 'textfield',
+              'Telephone Support' => 'checkbox',
+              'Email Support' => 'checkbox',
+              'Instant Chat' => 'checkbox',
+              '24/7 Call-in Support' => 'checkbox',
+              'FAQs Section' => 'checkbox',
+              'Video Tutorials' => 'checkbox',
+              'E-Guides' => 'checkbox',
+              'Online Ticket Submissions' => 'checkbox',
+        ),
+    
+      );
+
+define('PROVIDER_OPTIONS_WC', serialize($provider_options_wc));
+
+
+
 $pages410 = array(/*'compare-residential-voip-providers',*/ /*'compare-business-voip-providers',*/ /*'providers/reviews',*/ /*'best-voip-service-providers'*/);
 define('PAGES_410', serialize($pages410));
 
@@ -293,6 +441,10 @@ $remoteProvidersSubmissionsSettings = array(
   
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk', 'page_9_uk', 'page_10_uk')),
   'RingCentral-CA' => array('function' => 'gv_misc_SendRequestToRingCentral_CA', 'allowed_sources' => array('page_7_ca', 'page_8_ca', 'page_9_ca', 'page_10_ca')),
+  
+  'Mitel' => array('function' => 'gv_misc_SendRequestToMitel', 'allowed_sources' => array('page_10')),
+    
+    
   'Jive' => array('function' => 'gv_misc_SendRequestToJiveCommunications', 'allowed_sources' => array()),
     
   'Corvisa' => array('function' => 'gv_misc_SendRequestToCorvisa', 'allowed_sources' => array()),  
