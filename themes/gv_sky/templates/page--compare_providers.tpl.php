@@ -41,8 +41,6 @@
         </div>
       </div>
   </header>
-<?php dpm($page) ?>
-<?php dpm($node) ?>
 <?php //echo $node->field_extra_data['und'][0]['value'] ?>
 <?php if (NULL !== $node->field_extra_data['und'][0]['value']) {echo 'null';} ?>
   <main role="main" id="main">
