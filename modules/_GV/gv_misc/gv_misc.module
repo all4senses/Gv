@@ -7525,7 +7525,7 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
     'Product_Suite_Category__c' => 'Cloud',
     'Region__c' => 'United States',
     'US_Region__c' => 'Direct Cloud',
-    'Owner' => '00Gd0000001owyL',
+    //'Owner' => '00Gd0000001owyL',
     
     'RecordType' => '012U0000000aMzQ',
     'Campaign' => '701U0000000LSyB',
@@ -7538,6 +7538,12 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
     $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
+  $data_to_str = NULL;
+  foreach ($data_to as $key => $value) {
+    $data_to_str .= ($data_to_str ? '&' : '') . $key . '=' . $value;
+  }
+  
+  
   $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   
   $curl = curl_init();
@@ -7545,7 +7551,8 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_TIMEOUT, 300);
   curl_setopt($curl, CURLOPT_POST, TRUE);
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to);
+  curl_setopt($curl, CURLOPT_HEADER, TRUE);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $data_to_str);
   $data_from = curl_exec($curl);
   if ($data_from === false) {
     $data_from = 'Error!!! 
