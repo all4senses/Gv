@@ -7,6 +7,10 @@
 	&.left
 		padding: 60px 0 55px
 
+		+max(878, height)
+			padding: 50px 0 50px
+
+
 	
 	// Home Page
 	.front &
@@ -14,13 +18,16 @@
 		background-position: 80% 50%
 		height: 504px
 
-		+m(768)
+		+max(878, height)
 			height: 404px
 
-		+m(620) 
+		+max(768)
+			height: 404px
+
+		+max(620) 
 			background-image: url(../images/img-hero-m.jpg)	
 
-		+m(450)
+		+max(450)
 			height: 375px
 
 	// Business VoIP
@@ -33,7 +40,7 @@
 		background-image: url(../images/img-business.jpg)
 		background-position: 80% 0%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-business-m.jpg)	
 
 
@@ -42,7 +49,7 @@
 		background-image: url(../images/img-residential.jpg)
 		background-position: 80% 0%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-residential-m.jpg)	
 
 
@@ -51,7 +58,7 @@
 		background-image: url(../images/img-fax.jpg)
 		background-position: 100% 100%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-fax-m.jpg)	
 
 
@@ -60,7 +67,7 @@
 		background-image: url(../images/img-call-center.jpg)
 		background-position: 0% 50%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-call-center-m.jpg)	
 
 
@@ -69,7 +76,7 @@
 		background-image: url(../images/img-wc.jpg)
 		background-position: 50% 35%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-wc-m.jpg)	
 
 	// Reviews page
@@ -77,7 +84,7 @@
 		background-image: url(../images/img-reviews.jpg)
 		background-position: 80% 45%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-reviews-m.jpg)	
 	
 
@@ -86,7 +93,7 @@
 		background-image: url(../images/img-voip.jpg)
 		background-position: 80% 45%	
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-voip-m.jpg)	
 
 	// Contact and Advertise page & Team Member Page
@@ -97,10 +104,10 @@
 		background-position: 80% 50%
 		height: 340px
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-getvoip-m.jpg)	
 
-		+m(450)
+		+max(450)
 			height: 300px
 
 
@@ -110,10 +117,10 @@
 		background-position: 80% 50%
 		height: 465px
 
-		+m(620) 
+		+max(620) 
 			background-image: url(../images/img-getvoip-m.jpg)	
 
-		+m(450)
+		+max(450)
 			height: 340px
 
 
@@ -153,7 +160,7 @@
 		opacity: .7
 
 
-	+m(768)
+	+max(768)
 		&-heading
 			font-size: 36px
 
@@ -162,7 +169,7 @@
 			line-height: 23px
 
 
-	+m(450)
+	+max(450)
 		&-heading
 			font-size: 30px
 
@@ -205,7 +212,7 @@
 		// &-strong
 		// 	font-weight: 600
 
-		+m(738)
+		+max(738)
 			text-align: center
 
 
@@ -216,7 +223,7 @@
 		.disclosure
 			display: none
 
-		+m(738)
+		+max(738)
 			display: none
 
 	
