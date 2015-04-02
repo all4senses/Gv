@@ -1,8 +1,12 @@
 <?php
 
 
-function gv_sky_preprocess_html(&$vars) {
-  
+function gv_sky_preprocess_page(&$vars) {
+  if ($node = menu_get_object() && $node->type == 'page') {
+    $view = node_view($node);
+    $vars['hero_title'] = render($view['field_hero_title']);
+    $vars['hero_subtitle'] = render($view['field_hero_subtitle']);
+  }
 }
 
 /**
