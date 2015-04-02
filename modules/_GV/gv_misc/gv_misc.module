@@ -1662,11 +1662,10 @@ http://forums.devshed.com/mysql-help-4/howto-count-items-group_concat-812213.htm
 //  
 //  $out .= '...ok';
   
-  global $theme;
+  $node = node_load(287);
   
-  dpm('theme = ' . $theme);
-  
-  dpm($_GLOBALS);
+  $field = field_get_items('node',$node, 'field_hero_subtitle');
+  dpm($field);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
