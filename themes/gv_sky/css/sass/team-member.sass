@@ -6,6 +6,7 @@
 	#main
 		background-color: $subwhite
 		padding: 60px 0
+		position: relative
 
 	.main-wrap
 		position: relative
@@ -24,6 +25,9 @@
 	+clearfix
 	box-sizing: border-box
 
+	+maxmin(1250, 520)
+		right: 20px
+
 	+m(768)
 		top: -260px
 
@@ -32,6 +36,7 @@
 
 	+m(520)
 		top: -255px
+		right: 20px
 
 	&-pic
 		position: relative
@@ -42,6 +47,9 @@
 		box-shadow: 0.5px 0.9px 2px rgba(22, 16, 22, 0.37)
 		box-sizing: border-box
 
+		+maxmin(1250, 520)
+			margin-left: 40px
+
 		+m(768)
 			+size(190)
 
@@ -49,7 +57,7 @@
 			+size(160)
 
 		+m(520)
-			right: 20px
+			left: 20px
 			+size(115)
 			border: 3px solid white
 			+center
@@ -71,6 +79,9 @@
 		+valign
 		left: 243px
 
+		+maxmin(1250, 520)
+			margin-left: 40px
+
 		+m(768)
 			left: 209px
 
@@ -78,9 +89,9 @@
 			left: 179px
 
 		+m(520)
-			left: 0
+			left: 40px
 			top: 160px
-			right: 40px
+			right: 0px
 			text-align: center
 
 

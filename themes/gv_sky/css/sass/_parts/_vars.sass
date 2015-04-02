@@ -30,6 +30,18 @@ $subberwhite: #f8f8f8
   @media screen and (#{$max}-#{$dimension}: #{$size}px)
     @content
 
+=min($size: 760, $dimension:width)
+  @media screen and (min-#{$dimension}: #{$size}px)
+    @content
+
+=max($size: 760, $dimension:width)
+  @media screen and (max-#{$dimension}: #{$size}px)
+    @content
+
+=maxmin($maxsize: 760, $minsize: 760, $maxdimension:width, $mindimension:width)
+  @media screen and (max-#{$maxdimension}: #{$maxsize}px) and (min-#{$mindimension}: #{$minsize}px)
+    @content
+
 // =e($element)
 //   &-#{$element}
 //     @content

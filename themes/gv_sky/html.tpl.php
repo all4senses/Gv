@@ -53,6 +53,13 @@
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/home.css">
   <?php } ?>
 
+      <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
+     <script type="text/javascript">
+       takanaClient.run({host: 'localhost:48626'});
+     </script>
+
+
+
 
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
