@@ -174,15 +174,23 @@
 			table
 				width: 100% !important
 				margin: 30px 0
+				border: 0
 				border: 1px solid $divider
 				border-radius: 4px
 				border-collapse: separate
 				overflow: hidden
 
+
 			tr 
 				td
-					border-bottom: 1px solid $divider
-					padding: 10px 20px
+					border: 0 !important
+					border-bottom: 1px solid $divider !important
+					border-left: 1px solid $divider !important
+					padding: 10px 20px !important
+					box-sizing: border-box
+
+					&:first-child
+						border-left: 0 !important
 
 					p
 						margin-bottom: 0
