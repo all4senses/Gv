@@ -309,13 +309,15 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 	});
 
+	$$('.get-quote-form-button').click(function(){
+		$$('.get-quote-form').submit();
+	});
+
 	$$('.get-quote-form').submit(function(e){
 		console.log('submit');
 		e.preventDefault();
 		$$('.get-quote-form').form('submit', '/request');
 	});
-
-
 
 
 

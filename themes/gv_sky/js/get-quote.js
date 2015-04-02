@@ -50,6 +50,10 @@ $window = $$(window);
 
 	});
 
+	$$('.get-quote-form-button').click(function(){
+		$$('.get-quote-form').submit();
+	});
+
 	$$('.get-quote-form').submit(function(e){
 		console.log('submit');
 		e.preventDefault();
