@@ -1,7 +1,12 @@
 .provider-popup
 	width: 100%
+	max-height: 100vh
+	overflow-x: hidden
+	overflow-y: scroll
 	padding: 30px
 	box-sizing: border-box
+
+	// +
 
 	
 	&.final 
@@ -21,11 +26,30 @@
 		.final &
 			display: none
 
+		+m(520)
+			float: none
+			width: 100%
+			max-width: 180px
+			height: auto
+			+center(25px, 10px)
+			padding: 0 0 10px
+			border: 0
+			border-bottom: 1px solid $divider
+
+
 		&-img
 			position: absolute
 			+valign
 			width: 90%
 			height: auto
+
+			+m(520)
+				width: 100%
+				position: static
+				+unvalign
+
+
+
 
 	&-header
 		position: relative
@@ -38,14 +62,30 @@
 		.final &
 			display: none
 
+		+m(520)
+			width: 100%
+			text-align: center
+			height: auto
+
 		&-wrap
 			position: absolute
 			+valign
 			width: 100%
 
+			+m(520)
+				position: static
+				+unvalign
+
 		&-title
 			font-size: 28px
 			font-weight: 500
+
+			+m(736)
+				font-size: 22px
+
+		// &-desc
+		// 	+m(736)
+		// 		display: none
 
 	&-form
 		clear: both
@@ -85,6 +125,11 @@
 			&:nth-child(2n)
 				margin-left: perc(10px, 530px)
 
+			+m(520)
+				float: none
+				width: 100%
+				margin-left: 0 !important
+
 		&.error
 			color: #E34B4F
 			border-radius: 5px
@@ -97,10 +142,12 @@
 			.select &:after
 				content: 'b'
 				position: absolute
-				right: 17px
+				right: 7px
 				top: 20px
 				font-family: gvcons
 				font-size: 18px
+				background-color: #fff
+				padding: 0 10px
 
 				.error &
 					color: #E34B4F
@@ -159,6 +206,9 @@
 			background-color: $contrast
 			color: white
 			cursor: pointer
+
+			+m(520)
+				width: 100%
 
 
 
