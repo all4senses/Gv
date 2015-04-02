@@ -1,7 +1,6 @@
 .phone-box
 	width: 100%
 	max-width: 1130px
-	min-height: 900px
 	+center(0, 30px)
 	background-color: white
 	border: 1px solid $divider
@@ -9,6 +8,9 @@
 	padding: 35px 30px 30px
 	box-sizing: border-box
 	+clearfix
+
+	+m(736, min)
+		min-height: 900px
 
 	+m(620)
 		position: relative
