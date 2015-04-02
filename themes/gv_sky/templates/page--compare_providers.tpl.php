@@ -36,8 +36,8 @@
     </nav> 
       <div class="hero-header left">
         <div class="hero-title">
-          <h1 class="hero-title-heading"><?php print (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
-          <p class="hero-title-desc"><?php  print (isset($node->field_hero_subtitle['und'][0]['value']) ? $node->field_hero_subtitle['und'][0]['value'] : field_get_items('node',$node, 'body')[0]['value']); ?></p>
+          <h1 class="hero-title-heading"><?php print (NULL !== (field_view_field('node', $node, 'field_hero_title')) ? field_view_field('node', $node, 'field_hero_title') : render($title)); ?></h1>
+          <p class="hero-title-desc"><?php  print (NULL !== (field_view_field('node', $node, 'field_hero_subtitle')) ? field_view_field('node', $node, 'field_hero_subtitle') : field_get_items('node',$node, 'body')[0]['value']); ?></p>
         </div>
       </div>
   </header>
