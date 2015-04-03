@@ -3326,7 +3326,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
       $out .= '<tr class="vertical-tbody-details"><td class="vertical-tbody-details-item-title vertical-left">Details</td>';
         foreach ($providers as $nid => $provider) {
-          $out .= '<td class="vertical-tbody-details-item vertical-item vertical-item-last"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+            if ($popup_quote) {
+              $out .= '<td class="vertical-tbody-details-item vertical-item quote-trigger"><div class="vertical-tbody-details-item-button"><span class="vertical-tbody-details-item-button-text">Get Quote <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span></span></div><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
+            } else {
+              $out .= '<td class="vertical-tbody-details-item vertical-item"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+            }
         }
       $out .= '</tr>';
         
@@ -3352,11 +3356,13 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
               <a class="vertical-mobile-tbody-row-rating-read" href="' . url('node/' . $nid) . '">Read Reviews</a>
           </td>
-          <td class="vertical-mobile-tbody-row-features"></td>
-          <td class="vertical-mobile-tbody-row-details">
-            <div class="vertical-mobile-tbody-row-details-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-mobile-tbody-row-details-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-mobile-tbody-row-details-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div>
-          </td>
-        </tr>';
+          <td class="vertical-mobile-tbody-row-features"></td>';
+    if ($popup_quote) {
+      $mobile_version .= '<td class="vertical-tbody-details-item vertical-item quote-trigger"><div class="vertical-tbody-details-item-button"><span class="vertical-tbody-details-item-button-text">Get Quote <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span></span></div><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
+    } else {
+      $mobile_version .= '<td class="vertical-tbody-details-item vertical-item"><div class="vertical-tbody-details-item-button">' . gv_misc_getTrackingUrl('Order Now <span class="vertical-tbody-details-item-button-text-icon icon-arrow"></span>', NULL, $nid, NULL, 'vertical-tbody-details-item-button-text', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</div></td>';
+    }
+    $mobile_version .= '</tr>';
   }
 
   $mobile_version .= '</tbody></table>';
