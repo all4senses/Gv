@@ -9891,7 +9891,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider($case = 'cc') {
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
-  if ($case = 'cc') {
+  if ($case == 'cc') {
 
     $out = 
      '
@@ -10078,7 +10078,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider($case = 'cc') {
 
 
 
-  if ($case = 'wc') {
+  if ($case == 'wc') {
 
     $out = 
      '
