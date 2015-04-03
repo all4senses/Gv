@@ -74,7 +74,11 @@
 		.step
 			width: 100%
 			float: none
+			display: none
 			text-align: left
+
+			&.show
+				display: block
 
 		&-button
 			position: relative
@@ -183,7 +187,21 @@
 			float: left
 			width: 70%
 
+	.results
+		height: 400px
 
+	.results-success
+		position: absolute
+		+valign
+		left: 0
+		right: 0
+		max-width: 70%
+		+center
+		font-size: 22px
+		text-align: center
+
+		p
+			margin-bottom: 20px
 
 
 
