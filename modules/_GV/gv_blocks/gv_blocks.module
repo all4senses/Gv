@@ -3267,7 +3267,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             if ($popup_quote) {
               $out .= '<td style="text-align: center;"><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
             } else {
-              $out .= '<td style="text-align: center;"' . gv_misc_getTrackingUrl('', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
+              $out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
             }
            
           }
@@ -3344,7 +3344,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
           //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid) . '</td>';
           
           //$out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('Visit Site', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
-          $out .= '<td style="text-align: center;"><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
+            if ($popup_quote) {
+              $out .= '<td style="text-align: center;"><div class="get_quote_popup"><span class="hidden"><span class="nid">' . $nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$nid]['name'] . '</span></span></div></td>';
+            } else {
+              $out .= '<td style="text-align: center;">' . gv_misc_getTrackingUrl('', NULL, $nid, NULL, NULL, NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type)) . '</td>';
+            }
         }
       $out .= '</tr>';
         
