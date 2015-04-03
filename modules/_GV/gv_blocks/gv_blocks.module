@@ -499,7 +499,12 @@ function gv_blocks_block_info() {
   );
 
   $blocks['getQuotePopup_onLists'] = array(
-    'info' => 'Get quote popup on providers lists',
+    'info' => 'Get quote popup on providers lists CC',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  $blocks['getQuotePopup_onLists_wc'] = array(
+    'info' => 'Get quote popup on providers lists WC',
     'cache' => DRUPAL_NO_CACHE,
   );
   
@@ -1023,7 +1028,12 @@ function gv_blocks_block_view($delta = '') {
     
     case 'getQuotePopup_onLists':
       $block['subject'] = '';
-      $block['content'] = gv_blocks_getQuotePopup_onLists();
+      $block['content'] = gv_blocks_getQuotePopup_onLists('cc');
+      break; 
+
+    case 'getQuotePopup_onLists_wc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getQuotePopup_onLists('wc');
       break;
     
     
@@ -9873,195 +9883,315 @@ function gv_blocks_get_requestQuoteForPage_v10_uk() {
  * Block Request a quote FOR block popup-provider v10
  * 
  */
-function gv_blocks_get_requestQuote_block_v10_popup_provider() {
+function gv_blocks_get_requestQuote_block_v10_popup_provider($case = 'cc') {
 
   global $user;
   
   
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
-  
-  $out = 
-   '
-        <form class="popup-request-form js-controlled-form" method="post" action="/request">
-              <div class="popup-request-form-wrap">
 
-                    <div class="step step-one" id="phones_amt_section">
-                          <div class="popup-request-intro">
-                            <div class="popup-request-intro-title">Get Your Hassle Free, <br />Custom Quote From <span class="popup-request-intro-title-highlight">Nextiva</span>.</div>
-                            <div class="popup-request-intro-subtitle">Just Tell Us The Basics:</div>
-                              
-                            <div class="popup-request-intro-fieldset fieldset required">
-                                <label for="company" class="popup-request-intro-fieldset-label">What is your organization\'s name?</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                  <input class="popup-request-intro-fieldset-input input" type="text" name="company" id="company" placeholder="Organization Name" />
-                                </div>
+  if ($case = 'cc') {
+
+    $out = 
+     '
+          <form class="popup-request-form js-controlled-form" method="post" action="/request">
+                <div class="popup-request-form-wrap">
+
+                      <div class="step step-one" id="phones_amt_section">
+                            <div class="popup-request-intro">
+                              <div class="popup-request-intro-title">Get Your Hassle Free, <br />Custom Quote From <span class="popup-request-intro-title-highlight">Nextiva</span>.</div>
+                              <div class="popup-request-intro-subtitle">Just Tell Us The Basics:</div>
+                                
+                              <div class="popup-request-intro-fieldset fieldset required">
+                                  <label for="company" class="popup-request-intro-fieldset-label">What is your organization\'s name?</label>
+                                  <div class="popup-request-intro-fieldset-wrap">
+                                    <input class="popup-request-intro-fieldset-input input" type="text" name="company" id="company" placeholder="Organization Name" />
+                                  </div>
+                              </div>
+
+                              <div class="popup-request-intro-fieldset radio needs fieldset">
+                                  <label for="q_for" class="popup-request-intro-fieldset-label">What are your call center needs?</label>
+                                  <div class="popup-request-intro-fieldset-wrap">
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text outbound has-icon">Outbound Calling</div>
+                                        <input class="input" type="radio" name="q_for" id="outbound" value="Outbound Calling">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button checked">
+                                        <div class="popup-request-intro-fieldset-radio-text bothbound has-icon">Both Outbound &amp; Inbound</div>
+                                        <input class="input" type="radio" name="q_for" id="bothbound" value="Both Outbound &amp; Inbound" checked="checked">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text inbound has-icon">Inbound Calling</div>
+                                        <input class="input" type="radio" name="q_for" id="inbound" value="Inbound Calling">
+                                      </div>
+                                  </div>
+
+                               </div> 
                             </div>
 
-                            <div class="popup-request-intro-fieldset radio needs fieldset">
-                                <label for="q_for" class="popup-request-intro-fieldset-label">What are your call center needs?</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text outbound has-icon">Outbound Calling</div>
-                                      <input class="input" type="radio" name="q_for" id="outbound" value="Outbound Calling">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button checked">
-                                      <div class="popup-request-intro-fieldset-radio-text bothbound has-icon">Both Outbound &amp; Inbound</div>
-                                      <input class="input" type="radio" name="q_for" id="bothbound" value="Both Outbound &amp; Inbound" checked="checked">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text inbound has-icon">Inbound Calling</div>
-                                      <input class="input" type="radio" name="q_for" id="inbound" value="Inbound Calling">
-                                    </div>
-                                </div>
-
-                             </div> 
-                          </div>
-
-                          <div class="popup-request-control">
-                            <div class="popup-request-control-button next">
-                              <div class="popup-request-control-button-text">Let\'s Get Started</div>
+                            <div class="popup-request-control">
+                              <div class="popup-request-control-button next">
+                                <div class="popup-request-control-button-text">Let\'s Get Started</div>
+                              </div>
                             </div>
-                          </div>
-                    </div>
+                      </div>
 
 
-                    <div class="step step-two" id="quesions">
-                          <div class="popup-request-intro">
-                            <div class="popup-request-intro-title">Get Your Hassle Free, <br />Custom Quote From <span class="popup-request-intro-title-highlight">Nextiva</span>.</div>
-                            <div class="popup-request-intro-subtitle">Just Tell Us The Basics:</div>
+                      <div class="step step-two" id="quesions">
+                            <div class="popup-request-intro">
+                              <div class="popup-request-intro-title">Get Your Hassle Free, <br />Custom Quote From <span class="popup-request-intro-title-highlight">Nextiva</span>.</div>
+                              <div class="popup-request-intro-subtitle">Just Tell Us The Basics:</div>
 
-                            <div class="popup-request-intro-fieldset radio employees fieldset required">
-                                <label for="phones_amt" class="popup-request-intro-fieldset-label">How many employees do you have?</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text">1-24</div>
-                                      <input class="input" type="radio" name="phones_amt" value="1-24">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text">25-49</div>
-                                      <input class="input" type="radio" name="phones_amt" value="25-49">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text">50-99</div>
-                                      <input class="input" type="radio" name="phones_amt" value="50-99">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text">100-499</div>
-                                      <input class="input" type="radio" name="phones_amt" value="100-499">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text">500-999</div>
-                                      <input class="input" type="radio" name="phones_amt" value="500-999">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-radio input-button">
-                                      <div class="popup-request-intro-fieldset-radio-text">1000+</div>
-                                      <input class="input" type="radio" name="phones_amt" value="1000+">
-                                    </div>
-                                </div>
+                              <div class="popup-request-intro-fieldset radio employees fieldset required">
+                                  <label for="phones_amt" class="popup-request-intro-fieldset-label">How many employees do you have?</label>
+                                  <div class="popup-request-intro-fieldset-wrap">
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">1-24</div>
+                                        <input class="input" type="radio" name="phones_amt" value="1-24">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">25-49</div>
+                                        <input class="input" type="radio" name="phones_amt" value="25-49">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">50-99</div>
+                                        <input class="input" type="radio" name="phones_amt" value="50-99">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">100-499</div>
+                                        <input class="input" type="radio" name="phones_amt" value="100-499">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">500-999</div>
+                                        <input class="input" type="radio" name="phones_amt" value="500-999">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">1000+</div>
+                                        <input class="input" type="radio" name="phones_amt" value="1000+">
+                                      </div>
+                                  </div>
 
-                             </div> 
-                            <div class="popup-request-intro-fieldset checkbox fieldset required">
-                                <label for="features[]" class="popup-request-intro-fieldset-label">What features are important to you?</label>
-                                <div class="popup-request-intro-fieldset-wrap">
-                                    <div class="popup-request-intro-fieldset-checkbox input-button">
-                                      <div class="popup-request-intro-fieldset-checkbox-box"></div>
-                                      <div class="popup-request-intro-fieldset-checkbox-text">Mobile Capabilities</div>
-                                      <input class="input" type="checkbox" name="features[]" value="Mobile Capabilities">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-checkbox input-button">
-                                      <div class="popup-request-intro-fieldset-checkbox-box"></div>
-                                      <div class="popup-request-intro-fieldset-checkbox-text">Online Fax</div>
-                                      <input class="input" type="checkbox" name="features[]" value="Online Fax">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-checkbox input-button">
-                                      <div class="popup-request-intro-fieldset-checkbox-box"></div>
-                                      <div class="popup-request-intro-fieldset-checkbox-text">Call Management</div>
-                                      <input class="input" type="checkbox" name="features[]" value="Call Management">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-checkbox input-button">
-                                      <div class="popup-request-intro-fieldset-checkbox-box"></div>
-                                      <div class="popup-request-intro-fieldset-checkbox-text">Voicemail-to-email</div>
-                                      <input class="input" type="checkbox" name="features[]" value="Voicemail-to-email">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-checkbox input-button">
-                                      <div class="popup-request-intro-fieldset-checkbox-box"></div>
-                                      <div class="popup-request-intro-fieldset-checkbox-text">Auto Attendant</div>
-                                      <input class="input" type="checkbox" name="features[]" value="Auto Attendant">
-                                    </div>
-                                    <div class="popup-request-intro-fieldset-checkbox input-button">
-                                      <div class="popup-request-intro-fieldset-checkbox-box"></div>
-                                      <div class="popup-request-intro-fieldset-checkbox-text">No Preference</div>
-                                      <input class="input" type="checkbox" name="features[]" value="No Preference">
-                                    </div>
-                                </div>
+                               </div> 
+                              <div class="popup-request-intro-fieldset checkbox fieldset required">
+                                  <label for="features[]" class="popup-request-intro-fieldset-label">What features are important to you?</label>
+                                  <div class="popup-request-intro-fieldset-wrap">
+                                      <div class="popup-request-intro-fieldset-checkbox input-button">
+                                        <div class="popup-request-intro-fieldset-checkbox-box"></div>
+                                        <div class="popup-request-intro-fieldset-checkbox-text">Mobile Capabilities</div>
+                                        <input class="input" type="checkbox" name="features[]" value="Mobile Capabilities">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-checkbox input-button">
+                                        <div class="popup-request-intro-fieldset-checkbox-box"></div>
+                                        <div class="popup-request-intro-fieldset-checkbox-text">Online Fax</div>
+                                        <input class="input" type="checkbox" name="features[]" value="Online Fax">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-checkbox input-button">
+                                        <div class="popup-request-intro-fieldset-checkbox-box"></div>
+                                        <div class="popup-request-intro-fieldset-checkbox-text">Call Management</div>
+                                        <input class="input" type="checkbox" name="features[]" value="Call Management">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-checkbox input-button">
+                                        <div class="popup-request-intro-fieldset-checkbox-box"></div>
+                                        <div class="popup-request-intro-fieldset-checkbox-text">Voicemail-to-email</div>
+                                        <input class="input" type="checkbox" name="features[]" value="Voicemail-to-email">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-checkbox input-button">
+                                        <div class="popup-request-intro-fieldset-checkbox-box"></div>
+                                        <div class="popup-request-intro-fieldset-checkbox-text">Auto Attendant</div>
+                                        <input class="input" type="checkbox" name="features[]" value="Auto Attendant">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-checkbox input-button">
+                                        <div class="popup-request-intro-fieldset-checkbox-box"></div>
+                                        <div class="popup-request-intro-fieldset-checkbox-text">No Preference</div>
+                                        <input class="input" type="checkbox" name="features[]" value="No Preference">
+                                      </div>
+                                  </div>
 
-                             </div> 
-                          </div>
-
-                          <div class="popup-request-control">
-                            <div class="popup-request-control-button next">
-                              <div class="popup-request-control-button-text">Continue to Pricing Info</div>
+                               </div> 
                             </div>
-                          </div>
-                    </div>
 
-                    <div class="step step-three" id="personal_info">
-                          <div class="popup-request-intro">
-                            <div class="popup-request-intro-title">Where do we send the details for your custom <span class="popup-request-intro-title-highlight">Nextiva</span> quote?</div>
-                            <div class="popup-request-intro-wrap">
-                                <div class="popup-request-intro-fieldset fieldset half required">
-                                    <label for="firstname" class="popup-request-intro-fieldset-label">First Name</label>
-                                    <div class="popup-request-intro-fieldset-wrap">
-                                      <input class="popup-request-intro-fieldset-input input"  type="text" name="firstname" placeholder="John" />
-                                    </div>
-                                </div>
-                                <div class="popup-request-intro-fieldset fieldset half required">
-                                    <label for="lastname" class="popup-request-intro-fieldset-label">Last Name</label>
-                                    <div class="popup-request-intro-fieldset-wrap">
-                                      <input class="popup-request-intro-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
-                                    </div>
-                                </div>
-                                <div class="popup-request-intro-fieldset fieldset half required">
-                                    <label for="phone" class="popup-request-intro-fieldset-label">Phone Number</label>
-                                    <div class="popup-request-intro-fieldset-wrap">
-                                      <input class="popup-request-intro-fieldset-input input phone"  type="text" name="phone" />
-                                    </div>
-                                </div>
-                                <div class="popup-request-intro-fieldset fieldset half required">
-                                    <label for="email" class="popup-request-intro-fieldset-label">Email Address</label>
-                                    <div class="popup-request-intro-fieldset-wrap">
-                                      <input class="popup-request-intro-fieldset-input input email"  type="text" name="email" />
-                                    </div>
-                                </div>
-                                <div class="popup-request-intro-upsale">
-                                  You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.
-                                </div>
+                            <div class="popup-request-control">
+                              <div class="popup-request-control-button next">
+                                <div class="popup-request-control-button-text">Continue to Pricing Info</div>
+                              </div>
                             </div>
-                          </div>
+                      </div>
 
-                          <div class="popup-request-control">
-                            <div class="popup-request-control-button next">
-                              <div class="popup-request-control-button-text">Send Me My Quote Now</div>
+                      <div class="step step-three" id="personal_info">
+                            <div class="popup-request-intro">
+                              <div class="popup-request-intro-title">Where do we send the details for your custom <span class="popup-request-intro-title-highlight">Nextiva</span> quote?</div>
+                              <div class="popup-request-intro-wrap">
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="firstname" class="popup-request-intro-fieldset-label">First Name</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input"  type="text" name="firstname" placeholder="John" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="lastname" class="popup-request-intro-fieldset-label">Last Name</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="phone" class="popup-request-intro-fieldset-label">Phone Number</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input phone"  type="text" name="phone" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="email" class="popup-request-intro-fieldset-label">Email Address</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input email"  type="text" name="email" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-upsale">
+                                    You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.
+                                  </div>
+                              </div>
                             </div>
-                            <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
-                          </div>
-                    </div>
-                    <div class="results"></div>
 
-                
-                <input type="hidden" name="token" value="' . $token . '" />
-                <input type="hidden" name="source" value="block" />
-                <input type="hidden" name="version" value="10-popup-provider" />
-                <input type="hidden" name="referrer" value="" />
-                <input type="hidden" name="url" value="" />
-                <input type="hidden" name="provider_name" value="" />
-                <input type="hidden" name="provider_id" value="" />
-                
-          </div>
-        </form>
-        <p id="data"></p>
-  ';
+                            <div class="popup-request-control">
+                              <div class="popup-request-control-button next">
+                                <div class="popup-request-control-button-text">Send Me My Quote Now</div>
+                              </div>
+                              <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
+                            </div>
+                      </div>
+                      <div class="results"></div>
+
+                  
+                  <input type="hidden" name="token" value="' . $token . '" />
+                  <input type="hidden" name="source" value="block" />
+                  <input type="hidden" name="version" value="10-popup-provider" />
+                  <input type="hidden" name="referrer" value="" />
+                  <input type="hidden" name="url" value="" />
+                  <input type="hidden" name="provider_name" value="" />
+                  <input type="hidden" name="provider_id" value="" />
+                  
+            </div>
+          </form>
+    ';
+    
+  }
+
+
+
+  if ($case = 'wc') {
+
+    $out = 
+     '
+          <form class="popup-request-form js-controlled-form" method="post" action="/request">
+                <div class="popup-request-form-wrap">
+
+                      <div class="step step-one" id="phones_amt_section">
+                            <div class="popup-request-intro">
+                              <div class="popup-request-intro-title">Get Your Hassle Free, <br />Custom Quote From <span class="popup-request-intro-title-highlight">Nextiva</span>.</div>
+                              <div class="popup-request-intro-subtitle">Just Tell Us The Basics:</div>
+                                
+                              <div class="popup-request-intro-fieldset fieldset required">
+                                  <label for="company" class="popup-request-intro-fieldset-label">What is your organization\'s name?</label>
+                                  <div class="popup-request-intro-fieldset-wrap">
+                                    <input class="popup-request-intro-fieldset-input input" type="text" name="company" id="company" placeholder="Organization Name" />
+                                  </div>
+                              </div>
+
+                              <div class="popup-request-intro-fieldset radio employees fieldset required">
+                                  <label for="phones_amt" class="popup-request-intro-fieldset-label">How many employees do you have?</label>
+                                  <div class="popup-request-intro-fieldset-wrap">
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">1-24</div>
+                                        <input class="input" type="radio" name="phones_amt" value="1-24">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">25-49</div>
+                                        <input class="input" type="radio" name="phones_amt" value="25-49">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">50-99</div>
+                                        <input class="input" type="radio" name="phones_amt" value="50-99">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">100-499</div>
+                                        <input class="input" type="radio" name="phones_amt" value="100-499">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">500-999</div>
+                                        <input class="input" type="radio" name="phones_amt" value="500-999">
+                                      </div>
+                                      <div class="popup-request-intro-fieldset-radio input-button">
+                                        <div class="popup-request-intro-fieldset-radio-text">1000+</div>
+                                        <input class="input" type="radio" name="phones_amt" value="1000+">
+                                      </div>
+                                  </div>
+
+                               </div> 
+
+                            <div class="popup-request-control">
+                              <div class="popup-request-control-button next">
+                                <div class="popup-request-control-button-text">Let\'s Get Started</div>
+                              </div>
+                            </div>
+                      </div>
+
+                      <div class="step step-three" id="personal_info">
+                            <div class="popup-request-intro">
+                              <div class="popup-request-intro-title">Where do we send the details for your custom <span class="popup-request-intro-title-highlight">Nextiva</span> quote?</div>
+                              <div class="popup-request-intro-wrap">
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="firstname" class="popup-request-intro-fieldset-label">First Name</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input"  type="text" name="firstname" placeholder="John" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="lastname" class="popup-request-intro-fieldset-label">Last Name</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="phone" class="popup-request-intro-fieldset-label">Phone Number</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input phone"  type="text" name="phone" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-fieldset fieldset half required">
+                                      <label for="email" class="popup-request-intro-fieldset-label">Email Address</label>
+                                      <div class="popup-request-intro-fieldset-wrap">
+                                        <input class="popup-request-intro-fieldset-input input email"  type="text" name="email" />
+                                      </div>
+                                  </div>
+                                  <div class="popup-request-intro-upsale">
+                                    You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="popup-request-control">
+                              <div class="popup-request-control-button next">
+                                <div class="popup-request-control-button-text">Send Me My Quote Now</div>
+                              </div>
+                              <input type="submit" value="Send Me My Quote Now" class="button" style="display: none;">
+                            </div>
+                      </div>
+                      <div class="results"></div>
+
+                  
+                  <input type="hidden" name="token" value="' . $token . '" />
+                  <input type="hidden" name="source" value="block" />
+                  <input type="hidden" name="version" value="10-popup-provider" />
+                  <input type="hidden" name="referrer" value="" />
+                  <input type="hidden" name="url" value="" />
+                  <input type="hidden" name="provider_name" value="" />
+                  <input type="hidden" name="provider_id" value="" />
+                  
+            </div>
+          </form>
+    ';
+
+  }
 
   return $out;
 }
@@ -11692,7 +11822,7 @@ else { // User->uid == 1
 /*
  * Show popup Get quote for every provider in list by click on the Get Quote link.
  */
-function gv_blocks_getQuotePopup_onLists() {
+function gv_blocks_getQuotePopup_onLists($type = 'cc') {
   
   
 
@@ -11711,7 +11841,7 @@ function gv_blocks_getQuotePopup_onLists() {
     $out = 
     '<div class="popup-request-container" style="display: none;">
       <div id="popup-request" class="popup-request quote on-list">' 
-        . gv_blocks_get_requestQuote_block_v10_popup_provider() .
+        . gv_blocks_get_requestQuote_block_v10_popup_provider($type) .
      '</div>
     </div>';
   }
