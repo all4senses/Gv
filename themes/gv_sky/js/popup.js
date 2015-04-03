@@ -35,6 +35,8 @@
 
 		if (close && popOpen) {
 			$$('.popup-content').find('input').val('');
+			$$('.popup-content').find('.input-button.checked').removeClass('checked');
+			$$('.popup-content').find('.fieldset.valid, .fieldset.error').removeClass('valid error');
 			if ( $$('.popup').hasClass('exit') ) {
 				$('.popup-content').empty();
 			}
