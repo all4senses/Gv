@@ -2434,10 +2434,6 @@ function gv_misc_trackClick_ajax() {
 /**
  * Redirect to an external url and track the data without params.
  */
-
-/**
- * Redirect to an external url and track the data without params.
- */
 function gv_misc_goToExternalUrl2() {
 
   $args = arg();
@@ -2566,74 +2562,59 @@ function gv_misc_loadTrackingHandlerForDirectLinks() {
 /**
  * Redirect to an external url and track the data without params.
  */
-function gv_misc_goToExternalUrl2() {
-
-  $args = arg();
+function gv_misc_goToExternalUrl() {
   
-  //dpm($args);
+  //dpm($_SESSION['gv_current_http_referer']);
+  //dpm($_GET);
   
-  //if ($args[1] == 'reviews' && !empty($args[2])) {
-  if (!empty($args[1])) {
+  // Save a tracked redirection.
+  if (!empty($_GET['t']) && !empty($_GET['n'])/* && !empty($_GET['url'])*/) {
     
-    $query = db_select('url_alias', 'a')
-        ->fields('a', array('source'));
-    //$query->condition('a.alias', $args[1] .  '/' . $args[2]);
-    $query->condition('a.alias', 'reviews/' . $args[1]);
-    $node_id = str_replace('node/', '', $query->execute()->fetchField());
+    switch ($_GET['t']) {
+      
+      case 'provider':
+    
+        // Preserve a compatibility with the old tracking link... goto?t=provider&n=nextiva
+        /// but redirect to the new tracking url... /go/nextiva
+        
+        $query = db_select('field_data_field_p_name', 'pn')
+          ->fields('pn', array('entity_id'));
+        $query->condition('pn.bundle', 'provider');
+        $query->condition('pn.field_p_name_value', urldecode($_GET['n']));
+        $node_id = $query->execute()->fetchField();
+        
+        $query = db_select('url_alias', 'a')
+          ->fields('a', array('alias'));
+        //$query->condition('a.alias', $args[1] .  '/' . $args[2]);
+        $query->condition('a.source', 'node/' . $node_id);
+        $path = 'go/' . str_replace('reviews/', '', $query->execute()->fetchField());
 
-    $query = db_select('field_data_field_p_data_quick', 'pd');
-    $query->condition('pd.entity_id', $node_id);
-    $query->fields('pd', array('entity_id', 'field_p_data_quick_value'));
-    $p_data_quick = $query->execute()->fetchObject();
-
-    //dpm($p_data_quick);
+        if ($path) {
+          drupal_goto($path, array(), 301);
+        }
+        else {
+          drupal_goto(@$_SERVER['HTTP_REFERER']);
+        }
+        
+        
+        /*
+        $query = db_select('field_data_field_p_name', 'pn');
+          //->fields('pn', array(''))
+        $query->condition('pn.bundle', 'provider');
+        $query->condition('pn.field_p_name_value', urldecode($_GET['n']));
+        $query->leftJoin('field_data_field_p_data_quick', 'pd', 'pd.entity_id = pn.entity_id');
+        $query->fields('pd', array('entity_id', 'field_p_data_quick_value'));
+        $p_data_quick = $query->execute()->fetchObject();
+        
+        if ($p_data_quick) {
+          $object_id = $p_data_quick->entity_id;
+          $p_data_quick = unserialize($p_data_quick->field_p_data_quick_value);
+          $url = $p_data_quick['i_web'];
+        }
     
-    if ($p_data_quick) {
-      
-      $object_id = $p_data_quick->entity_id;
-      $p_data_quick = unserialize($p_data_quick->field_p_data_quick_value);
-      $object_name = $p_data_quick['name'];
-      
-      
-      //$url = (strpos($p_data_quick['i_web'], '://') ? $p_data_quick['i_web'] : 'http://' . $p_data_quick['i_web']); //$p_data_quick['i_web'];
-      
-      if (!empty($args[2]) && !empty($p_data_quick[$args[2]]['s-url'])) {
-        $url = $p_data_quick[$args[2]]['s-url'];
-      }
-      else {
-        $url = $p_data_quick['i_web'];
-      }
-      
-      $url = strpos($url, '://') ? $url : 'http://' . $url; 
-    }
-    
-    
-    if (@$url) {
-      
+        if (@$url) {
+          
             global $user;
-            
-            $click_page = @$_SERVER['HTTP_REFERER'];
-            
-            if (!$click_page) {
-              
-              $watch_str = 'u' . $user->uid . ', $_server -------> '. print_r($_SERVER, TRUE) . ', $_session -------> '. print_r(@$_SESSION, TRUE);
-              
-              if (!empty($_GET['from'])) {
-                $click_page = $_GET['from'];
-                $watch_str = 'from = ' .  $_GET['from'] . ', ' . $watch_str;
-              }
-              watchdog('-###> GV click via go/' . $object_name, $watch_str, NULL, WATCHDOG_WARNING);
-            }
-            
-            $referrer = @$_SESSION['gv_current_http_referer'];
-            if(!$referrer && !empty($_GET['ref'])) {
-              $referrer = $_GET['ref'];
-            }
-            
-            if ($referrer == $click_page) {
-              $referrer = NULL;
-            }
-            
             $data = NULL;
 //            $data = serialize(array(
 //              'referer' => @$_SESSION['gv_current_http_referer'],
@@ -2645,12 +2626,12 @@ function gv_misc_goToExternalUrl2() {
               ->fields(array(
                 'object_id' => $object_id,
                 'type' => 'provider_link',
-                'object_name' => $object_name,
+                'object_name' => urldecode($_GET['n']),
                 'url' => $url,
                 'timestamp' => time(),
                   
-                'referer' => $referrer, //@$_SESSION['gv_current_http_referer'],
-                'click_page' => $click_page, //@$_SERVER['HTTP_REFERER'],
+                'referer' => @$_SESSION['gv_current_http_referer'],
+                'click_page' => @$_SERVER['HTTP_REFERER'],
                 'uname' => isset($user->name) ? $user->name : '',
                 'ip' => $user->hostname,
           
@@ -2658,10 +2639,12 @@ function gv_misc_goToExternalUrl2() {
               ))
               ->execute();
             
-            drupal_goto($url, array('external' => TRUE), 301);
+            drupal_goto($url, array('external' => TRUE));
         }
-     
-    
+        */
+        
+        break; // End of case 'provider':
+    }
   }
   
   drupal_goto(@$_SERVER['HTTP_REFERER']);
@@ -9381,7 +9364,7 @@ function gv_misc_getProviders(&$providers, $scope = 'all', $data = NULL, $cache_
       return;
     }
   }
-  dpm('plist no cache');
+  // dpm('plist no cache');
   
   
   
@@ -15394,7 +15377,7 @@ function gv_misc_isVideoRichSnippetAdded($body_full_markup) {
 }
 
 
-//**
+/**
  * Remove GvVideo Wrapper with Google rich snippet from video tokens.
  * OR
  * only_check_if_the body contains_snippet
