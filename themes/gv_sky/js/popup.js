@@ -53,6 +53,7 @@
 				$('.provider-quote .step.show').removeClass('show');
 				$('.provider-quote .step-one').addClass('show');
 			}
+			$$('popup-content').find('input').val('');
 			$$('.popup, .popup-overlay').removeClass('show quote provider_demo provider_quote exit');
 			$$("body").css('overflow', 'visible');
 			popOpen = false;
