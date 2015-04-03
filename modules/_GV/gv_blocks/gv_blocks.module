@@ -2932,8 +2932,6 @@ function gv_blocks_compareTopProviders($service_type) {
   // dpm('No cache Compare...' . $cid);
   
   // No cached data... rebuilding...
-  global $popup_quote;
-  $popup_quote = FALSE;
   switch ($service_type) {
     case 'business':
       $rating_table = 'field_data_field_p_erating';
@@ -2977,7 +2975,7 @@ function gv_blocks_compareTopProviders($service_type) {
   
   if (!empty($p_names)) {
     //return gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
-    $out = gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field);
+    $out = gv_blocks_compareProviders($p_names, '<none>', $sprite_names[$service_type], $service_type, $rating_table, $rating_field, $popup_quote);
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
     return $out;
   }
@@ -2988,10 +2986,9 @@ function gv_blocks_compareTopProviders($service_type) {
 /**
  * Returns block with comparing providers table.
  */
-function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business', $rating_table = 'field_data_field_p_erating', $rating_field = 'field_p_erating_value') {
+function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business', $rating_table = 'field_data_field_p_erating', $rating_field = 'field_p_erating_value', $popup_quote = FALSE) {
   
   global $user;
-  global $popup_quote;
   
   if (empty($p_names)) {
   
@@ -3223,13 +3220,11 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
         case 'cc':
           $provider_options_structure = unserialize(PROVIDER_OPTIONS_CC);
           $provider_options_index = 'provider_options_cc';
-          $popup_quote = TRUE;
           break;
         
         case 'wc':
           $provider_options_structure = unserialize(PROVIDER_OPTIONS_WC);
           $provider_options_index = 'provider_options_wc';
-          $popup_quote = TRUE;
           break;
       }
       //$provider_options_bu = unserialize(PROVIDER_OPTIONS_BU);
