@@ -14,7 +14,7 @@
   if ($page) {
     //dpm(time());
     // 1424468002 - newer date
-    $update_timestamp = 1424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
+    $update_timestamp = 14424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
   }
   else {
     // older date - to skip updating
