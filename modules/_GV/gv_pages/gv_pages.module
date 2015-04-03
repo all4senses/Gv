@@ -1258,6 +1258,42 @@ Edit index.html to change or remove this example content that will <strong>not a
 
   return $out;  
 }
+function gv_pages_quoteRequestsList_form_header($current_section) {
+  $sections  = array(
+    'All Quote Requests data' => l('All Quote Requests data', 'admin/content/quote-requests'),
+    'Quote requests emails only' => l('Quote requests emails only', 'admin/content/quote-requests/emails'),
+    'Disqus emails' => l('Disqus emails', 'admin/content/quote-requests/disqus-emails'),
+    'Newsletter emails' => l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails'),
+    'Reviews emails' => l('Reviews emails', 'admin/content/quote-requests/reviews-emails'),
+  );
+  
+  //'<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>'
+  $out = NULL;
+  foreach ($sections as $section => $data) {
+    $out .= ($out ? ' - ' : '') . ($section == $current_section ? '<strong>' . $section . '</strong>' : $data);
+  }
+  $out = '<div class="type">' . $out . '</div><br/>';
+  
+  global $user;
+  if ($user->uid == 1) {
+//    $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage_extraFilters.js';
+//    drupal_add_js($path_to_js);
+//    
+//    $email_contains = !empty($_GET['email-contains']) ? $_GET['email-contains'] : NULL;
+//    $campaign_contains = !empty($_GET['campaign-contains']) ? $_GET['campaign-contains'] : NULL;
+//    $out .= '<div class="extra-filters">'
+//            . '<div class="email-contains"><div class="title">Email contains:</div><input type="text" value="' . $email_contains . '"/></div>'
+//            . '<div class="campaign-contains"><div class="title">Campaign contains:</div><input type="text" value="' . $campaign_contains . '"/></div>'
+//            . '<div class="apply">Apply filters</div><div class="clear">Clear filters</div>'
+//          . '</div>';
+//    $quoteRequestsAdminPage_extraFilters_form = drupal_get_form('gv_misc_QRextraFilters_form');
+//    $out .= drupal_render($quoteRequestsAdminPage_extraFilters_form);
+  }
+  
+  return $out;
+}
+
+
 
 
 /**
@@ -1274,11 +1310,20 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query = db_select('gv_emails_subscribed', 'e')
           ->fields('e', array('email'));
     //$query->condition('e.source', NULL);
+
+    if (!empty($_GET['email-contains'])) {
+      $query->condition('e.email', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+    }
+    
+    //$email = $query->execute()->fetchField();
+    //dpm($email);
+
     $email = $query->execute()->fetchField();
 
     $results = $query->execute();
 
-    $emails = '<br/><div><strong>Newsletter emails.</strong></div><br/>';
+    $emails = '<br/><br/>';//'<br/><div><strong>Newsletter emails.</strong></div><br/>';
+
     
     $count = NULL;
     $all_emails = array();
@@ -1290,13 +1335,21 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     }
     $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
-  
 
-    $form['emails'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') .  ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
-    );
-    
+    //if ($user->uid == 1) 
+    {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => gv_pages_quoteRequestsList_form_header('Newsletter emails') . $emails,
+      );
+    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') .  ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . '</div><br/>' . $emails,
+//      );
+//    }
+
     return $form;
   }
   // Show emails only.
@@ -1309,6 +1362,10 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.email_presented', '0', '!=');
     $query->condition('qr.email_presented', '', '!=');
     $query->isNotNull('qr.email_presented');
+    if (!empty($_GET['email-contains'])) {
+      $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+    }
+    
 
     $ucaptureds = 
       $query
@@ -1316,7 +1373,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         //->limit(20)
         ->execute();
 
-    $emails = '<br/><div><strong>Quote requests emails only.</strong></div><br/>';
+    $emails = '<br/><br/>';// '<br/><div><strong>Quote requests emails only.</strong></div><br/>';
 //    foreach ($ucaptureds as $ucaptured) {
 //      $data = unserialize($ucaptured->data);
 //      $emails .= '<div>' . $data['Email'] . '</div>';
@@ -1344,10 +1401,30 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
   
 
-    $form['emails'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
-    );
+    // $form['emails'] = array(
+    //   '#type' => 'markup',
+    //   '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+    // );
+    
+    
+    
+    
+    
+    //if ($user->uid == 1) 
+    {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => gv_pages_quoteRequestsList_form_header('Quote requests emails only') . $emails,
+      );
+    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+//      );
+//    }
+
+
     
     return $form;
   }
@@ -1355,6 +1432,12 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     // Show reviews emails.
     $query = db_select('field_data_field_r_email', 're'); //->extend('PagerDefault');
     $query->fields('re', array('field_r_email_value'));
+
+    
+    if (!empty($_GET['email-contains'])) {
+      $query->condition('re.field_r_email_value', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+    }
+
     
     $results = 
       $query
@@ -1362,7 +1445,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
         //->limit(20)
         ->execute();
 
-    $emails = '<br/><div><strong>Reviews emails.</strong></div><br/>';
+    $emails = '<br/><br/>';//'<br/><div><strong>Reviews emails.</strong></div><br/>';
 //    foreach ($ucaptureds as $ucaptured) {
 //      $data = unserialize($ucaptured->data);
 //      $emails .= '<div>' . $data['Email'] . '</div>';
@@ -1390,10 +1473,30 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
   
 
-    $form['emails'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
-    );
+    // $form['emails'] = array(
+    //   '#type' => 'markup',
+    //   '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+//    );
+    
+    
+    
+    //if ($user->uid == 1) 
+    {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => gv_pages_quoteRequestsList_form_header('Reviews emails') . $emails,
+      );
+    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+//      );
+//    }
+    
+    
+    
+   
     
     return $form;
   }
@@ -1402,11 +1505,15 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     $gv_disqus_users = unserialize(variable_get('gv_disqus_users', serialize(array())));
     
-    $emails = '<br/><div><strong>Disqus emails.</strong></div><br/>';
+    $emails = '<br/><br/>';//'<br/><div><strong>Disqus emails.</strong></div><br/>';
 
     $count = NULL;
     $all_emails = array();
+    $email_contains = @$_GET['email-contains'];
     foreach ($gv_disqus_users as $disqus_user) {
+      if ($email_contains && strpos($disqus_user['email'], $email_contains) === FALSE) {
+        continue;
+      }
       $emails .= '<div>' . $disqus_user['email'] . '</div>';
       $all_emails[] = $disqus_user['email'];
       $count++;
@@ -1415,10 +1522,28 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
   
 
-    $form['emails'] = array(
-      '#type' => 'markup',
-      '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails')  . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
-    );
+    // $form['emails'] = array(
+    //   '#type' => 'markup',
+    //   '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Quote requests emails only', 'admin/content/quote-requests/emails')  . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+    // );
+        
+    
+    
+    //if ($user->uid == 1) 
+    {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => gv_pages_quoteRequestsList_form_header('Disqus emails') . $emails,
+      );
+    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('All Quote requests data', 'admin/content/quote-requests') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>' . $emails,
+//      );
+//    }
+    
+
     
     return $form;
   }
@@ -1554,6 +1679,72 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
+  elseif (@$_GET['op'] == 'campaign-name-set' && @$_GET['timestamp'] && @$_GET['campaign-name'] && @$_GET['ip']) {
+    
+    
+    
+    $query = db_select('gv_quote_requests', 'qr');
+    $query->fields('qr', array('data', 'email_presented', 'ip', 'timestamp'));
+    
+    $query->condition('qr.timestamp', $_GET['timestamp']);
+    $query->condition('qr.ip', $_GET['ip']);
+    //$results =  $query->execute()->fetchAllAssoc('ip');
+    $result =  $query->execute()->fetchObject();
+    
+    
+//    foreach ($results as $key => $value) {
+//      $results[$key]->data = unserialize($results[$key]->data);
+//    }
+//    dpm($results);
+    if ($result) {
+      $result->data = unserialize($result->data);
+      //dpm($result);
+      
+      $result->data['Campaign Name'] = $_GET['campaign-name'];
+              
+      $result = db_update('gv_quote_requests')
+        ->fields(array(
+          'data' => serialize($result->data),
+        ))
+        ->condition('timestamp', $_GET['timestamp'])
+        ->condition('ip', $_GET['ip'])
+        ->execute();
+      
+      if ($result) {
+        drupal_set_message('The submission data with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" was modified with the new Campaign name (' . $_GET['campaign-name'] . ').');
+      }
+      else {
+        drupal_set_message('Something wrong has happened while updating the submission with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". The new Campaign name (' . $_GET['campaign-name'] . ') has not been set. Check the data.', 'warning');
+      }
+      
+    }
+    else {
+      drupal_set_message('Wrong data. There is no the submission with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". The new Campaign name (' . $_GET['campaign-name'] . ') has not been set. Check the data.', 'warning');
+    }
+    
+    
+//    $result = db_update('gv_quote_requests')
+//      ->fields(array(
+//        'checked' => 0,
+//      ))
+//      ->condition('timestamp', $_GET['timestamp'])
+//      ->execute();
+//    
+//    if ($result) {
+//      drupal_set_message('The data row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '" is now unchecked.');
+//    }
+//    else {
+//      drupal_set_message('Something wrong has happened while updating the row with the timestamp "' . date('Y-m-d, H:i:s', $_GET['timestamp']) . '". Check the data.', 'warning');
+//    }
+    
+    
+    //dpm($_GET);
+    
+    
+    unset($_GET['q'], $_GET['op'], $_GET['timestamp'], $_GET['campaign-name'], $_GET['ip']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+  }
+
   
   // Remove all useless rows (without emails).
 //  $current_time = time();
@@ -1564,11 +1755,37 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   
   
   
-  $form['emails'] = array(
-    '#type' => 'markup',
-    '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div>'
-      . '<br/><div><strong>All Quote Requests data.</strong></div><br/><div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
-  );
+  // $form['emails'] = array(
+  //   '#type' => 'markup',
+  //   '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div>'
+  //     . '<br/><div><strong>All Quote Requests data.</strong></div><br/><div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
+  //  );
+  
+  
+  
+  
+  
+    //if ($user->uid == 1) 
+    {
+      $form['emails'] = array(
+        '#type' => 'markup',
+        '#markup' => gv_pages_quoteRequestsList_form_header('All Quote Requests data') 
+          . '<br/>' //. '<div><strong>All Quote Requests data.</strong></div><br/>'
+          . '<div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
+      );
+    }
+//    else {
+//      $form['emails'] = array(
+//        '#type' => 'markup',
+//        '#markup' => '<div class="type">' . l('Quote requests emails only', 'admin/content/quote-requests/emails') . ' - ' . l('Reviews emails', 'admin/content/quote-requests/reviews-emails') . ' - ' . l('Disqus emails', 'admin/content/quote-requests/disqus-emails') . ' - ' . l('Newsletter emails', 'admin/content/quote-requests/newsletter-emails') . '</div><br/>'
+//          . '<div><strong>All Quote Requests data.</strong></div><br/>'
+//          . '<div class="email-captured">' . l('Check and email captured but not submitted requests', 'admin/content/quote-requests', array('query' => array('op' => 'email-captured'))) . '</div>',
+//      );
+//    }
+    
+  
+  
+
   
   $sort = @$_GET['sort'] ? $_GET['sort'] : 'timestamp';
   
@@ -1623,6 +1840,89 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $query->condition('qr.email_presented', '', '!=');
     $query->isNotNull('qr.email_presented');
   }
+  
+  if (!empty($_GET['email-contains'])) {
+    $query->condition('qr.email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
+  }
+  
+  
+  
+  if (!empty($_GET['campaign-s-contains'])) {
+    $campaign_s_contains = $_GET['campaign-s-contains'];
+    //dpm($_GET);
+    
+    $pattern = '.*"Source";s:[^"]*:"' . $campaign_s_contains . '".*';
+    //dpm($pattern);
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Source";s:4:"page";
+  }
+  
+  
+  if (!empty($_GET['campaign-v-contains'])) {
+    $campaign_v_contains = $_GET['campaign-v-contains'];
+    //dpm($_GET);
+    if(strpos($campaign_v_contains, '$') !== FALSE && strpos($campaign_v_contains, '^') !== FALSE) {
+      $campaign_v_contains = explode('$', $campaign_v_contains);
+      $campaign_v_contains = explode('^', $campaign_v_contains[0]);
+      $campaign_v_contains = $campaign_v_contains[1];
+      //$pattern = '.*"Version";s:[^"]*:"' . $campaign_v_contains . '".*';
+      $pattern = '' . $campaign_v_contains . '';
+    }
+    elseif(strpos($campaign_v_contains, '$') !== FALSE) {
+      $campaign_v_contains = explode('$', $campaign_v_contains);
+      $campaign_v_contains = $campaign_v_contains[0];
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_v_contains . '".*';
+      $pattern = '[^"]*' . $campaign_v_contains . '';
+    }
+    elseif(strpos($campaign_v_contains, '^') !== FALSE) {
+      $campaign_v_contains = explode('^', $campaign_v_contains);
+      $campaign_v_contains = $campaign_v_contains[1];
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_v_contains . '".*';
+      $pattern = '' . $campaign_v_contains . '[^"]*';
+    }
+    else {
+      //$pattern = '.*"Version";s:[^"]*:"[^"]*' . $campaign_v_contains . '[^"]*".*';
+      $pattern = '[^"]*' . $campaign_v_contains . '[^"]*';
+    }
+    $pattern = '.*"Version";s:[^"]*:"' . $pattern . '".*';
+    //dpm($pattern);
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Version";s:1:"1";
+  }
+  
+  
+  
+  
+  if (!empty($_GET['campaign-n-contains'])) {
+    $campaign_n_contains = $_GET['campaign-n-contains'];
+    //dpm($_GET);
+    if(strpos($campaign_n_contains, '$') !== FALSE && strpos($campaign_n_contains, '^') !== FALSE) {
+      $campaign_n_contains = explode('$', $campaign_n_contains);
+      $campaign_n_contains = explode('^', $campaign_n_contains[0]);
+      $campaign_n_contains = $campaign_n_contains[1];
+      //$pattern = '.*"Version";s:[^"]*:"' . $campaign_n_contains . '".*';
+      $pattern = '' . $campaign_n_contains . '';
+    }
+    elseif(strpos($campaign_n_contains, '$') !== FALSE) {
+      $campaign_n_contains = explode('$', $campaign_n_contains);
+      $campaign_n_contains = $campaign_n_contains[0];
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_n_contains . '".*';
+      $pattern = '[^"]*' . $campaign_n_contains . '';
+    }
+    elseif(strpos($campaign_n_contains, '^') !== FALSE) {
+      $campaign_n_contains = explode('^', $campaign_n_contains);
+      $campaign_n_contains = $campaign_n_contains[1];
+      //$pattern = '.*"Version";s:[^"]*:"[^"]' . $campaign_n_contains . '".*';
+      $pattern = '' . $campaign_n_contains . '[^"]*';
+    }
+    else {
+      //$pattern = '.*"Version";s:[^"]*:"[^"]*' . $campaign_n_contains . '[^"]*".*';
+      $pattern = '[^"]*' . $campaign_n_contains . '[^"]*';
+    }
+    $pattern = '.*"Campaign Name";s:[^"]*:"' . $pattern . '".*';
+    //dpm($pattern);
+    $query->condition('qr.data', $pattern, 'REGEXP'); // "Version";s:1:"1";
+  }
+  
+
   $ucaptureds = 
     $query
       ->orderBy($sort, $order)
@@ -1630,102 +1930,327 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       ->execute();
   
   
-  $form['filter'] = array(
+  $form['filters'] = array(
+    '#type' => 'container',
+    //'#title' => 'Filters',
+  );
+  
+  
+  $form['filters']['filter'] = array(
     '#type' => 'radios',
     '#title' => t('Filter by: '),
     '#default_value' => $current_filter,
     '#options' => $filter_by,
     '#attributes' =>  array('class' =>array('filter_by'), 'onClick' => array('javascript:this.form.submit();')),
   );
+  
+  $form['filters']['email-contains'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Email contains',  
+    '#default_value' => @$_GET['email-contains'],
+  );
+  
+  
+  $form['filters']['campaign-s-contains'] = array(
+    '#type' => 'select',
+    '#options' => array('' => '- Any -', 'block' => 'Block', 'page' => 'Page', 'partner' => 'Partner'),
+    '#title' => 'Campaign Source',  
+    '#default_value' => @$_GET['campaign-s-contains'],
+  );
+  
+  
+  
+  $form['filters']['campaign-v-contains'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Campaign Version contains',  
+    '#default_value' => @$_GET['campaign-v-contains'],
+    //'#description' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)',  
+    '#attributes' => array('title' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)'),
+  );
+  
+  
+ $form['filters']['campaign-n-contains'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Campaign Name contains',  
+    '#default_value' => @$_GET['campaign-n-contains'],
+    //'#description' => 'Examples: 8, 7_uk, exit-intent-ppc-bu-1, 1-demo-popup-provider, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)',  
+    '#attributes' => array('title' => 'Examples: Google US/LP, Google UK/LP, 7Search, etc. Use ^ to define start position (^1 will show 10, but won\'t show 21), $ - to define end position (1$ will show 21, but won\'n show 15)'),
+  );
+ 
+ 
+  $form['filters']['actions'] = array('#type' => 'actions');
+      $form['filters']['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Apply',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+      $form['filters']['actions']['clear'] = array(
+        '#type' => 'submit',
+        '#value' => 'Clear email/campaign',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+      
+     
+      
+  //Google US/LP, Google UK/LP, 7Search, Bing, Google PPC/Site, Organic, Other
+  $gv_settings = variable_get('gv_settings');
+  $gv_settings['Campaigns']['Campaign_Names']['Names'] = explode(',', $gv_settings['Campaigns']['Campaign_Names']['Names']['value']);
+        
+  
+  foreach ($gv_settings['Campaigns']['Campaign_Names']['Names'] as $campaign_name) {
+    $campaign_name = trim($campaign_name);
+    $campaign_names[$campaign_name] = $campaign_name;
+  }
+  $campaign_names = array('' => '- Other -')  $campaign_names;
+  //dpm($campaign_names);
+  
+  drupal_add_js(array('gv_campaign_names' => $gv_settings['Campaigns']['Campaign_Names']['Names']), 'setting');
+  $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
+  drupal_add_js($path_to_js);
+  
+  
+  
+  
+  /*
+  $data_cells = array(
+    'Lines Needed' => 'Phones needed',
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Email Address' => 'Email',
+    'Company Name' => 'Company',
+    'Source' => 'Source',
+    'Version' => 'Version',
+    'Sent To' => 'sentToRemoteProviders',
+      
+    //'Operations', // (with drop down for submitting to each provider)
+    //'Campaign', // (with drop down options in each line)
+    //'User IP',
+  );
+  */
+  
+  $map_captured_dataIndex_to_tableTitle = array(
+    'Phones needed' => 'Lines Needed',
+    'First Name' => 'First Name',
+    'Last Name' => 'Last Name',
+    'Email' => 'Email Address',
+    'Phone #' => 'Phone Number',  
+    'Company' => 'Company Name',
+    'Source' => 'Source',
+    'Version' => 'Version',
+    'sentToRemoteProviders' => 'Sent To',
+      
+    //'Operations', // (with drop down for submitting to each provider)
+    //'Campaign', // (with drop down options in each line)
+    //'User IP',
+             
+  );
+  
+  /*
+  $table_cells_1 = array(
+      '<th>Num</th>',
+      '<th>' . $sort_links['timestamp'] . '</th>',
+      '<th>' . $sort_links['status'] . '</th>',
+      '<th>' . $sort_links['via_block'] . '</th>',
+      '<th>' . $sort_links['checked'] . '</th>',
+      '<th class="data">Full Data</th>',
+      '<th class="ops" style="width: 160px;">Operations</th>',
+      '<th class="campaign">Campaign</th>',
+      '<th>' . $sort_links['ip'] . '</th>',
+  );
+  */
+  
+  $table_cells_1 = array(
+      0 => '<th>Num</th>',
+      1 => '<th>' . $sort_links['timestamp'] . '</th>',
+      2 => '<th>' . $sort_links['status'] . '</th>',
+      //3 => '<th>' . $sort_links['via_block'] . '</th>',
+      //4 => '<th>' . $sort_links['checked'] . '</th>',
+      
+  );
+  
+  $table_cells_3 = array(
+      5 => '<th class="data">Full Data</th>',
+      6 => '<th class="ops" style="width: 160px;">Operations</th>',
+      //7 => '<th class="campaign">Campaign</th>',
+      //8 => '<th>' . $sort_links['ip'] . '</th>',
+  );
+  
+  $table_cells_1 += $map_captured_dataIndex_to_tableTitle + $table_cells_3;
+  
+  $table_start = '';
+  
+  foreach ($table_cells_1 as $table_cell) {
+    $table_start .= strpos($table_cell, '</th>') ? $table_cell : '<th>' . $table_cell . '</th>';
+  }
+
  
     
   $form['table_start'] = array(
     '#type' => 'markup',
-    '#markup' => '<table class="views-table quote-requests"><thead><tr><th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['via_block'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th class="ops" style="width: 300px;">Operations</th></tr></thead><tbody>',
+    '#markup' => 
+      '<table class="views-table quote-requests">'
+      . '<thead>'
+          . '<tr>'
+            . $table_start //. '<th>Num</th><th>' . $sort_links['timestamp'] . '</th><th>' . $sort_links['status'] . '</th><th>' . $sort_links['via_block'] . '</th><th>' . $sort_links['checked'] . '</th><th>' . $sort_links['ip'] . '</th><th class="data">Data</th><th class="ops" style="width: 300px;">Operations</th>'
+          . '</tr>'
+      . '</thead>'
+      . '<tbody>'
   );
   
+
+
+
   $tr_class = 'even';
   foreach ($ucaptureds as $key => $ucaptured) {
-    switch ($ucaptured->status) {
-      case 0:
-        $status = 'Captured, NOT alerted';
-        $status_class = 'not-alerted';
-        break;
-      case 1:
-        $status = 'Captured, alerted';
-        $status_class = 'alerted';
-        break;
-      case 2:
-        $status = 'Submitted';
-        $status_class = 'submitted';
-        break;
-    }
-    $data = '';
-    $ucaptured_data = unserialize($ucaptured->data);
-    
-    // Correct the phone field data.
-    $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
-    
-    //dpm($ucaptured);
-    //dpm($ucaptured_data);
-    
-    // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
-    // is filtered from the outer tags <form> for some reason.
-    // So here i just put a dummy form for this to save the real forms.
-    $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
-    
-    foreach ($ucaptured_data as $title => $value) {
-      if ($title == 'Submit Time' && is_numeric($value)) {
-        $value = date('Y-m-d, H:i:s', $value);
-      }
-      elseif ($title == 'Submission Duration' && is_numeric($value)) {
-        $value = number_format($value / 60, 2, '.', '') . ' min';
-      }
-      elseif ($title == 'sentToRemoteProviders') {
-        $submissions_list = NULL;
-        foreach ($value as $data_provider => $data_submitted) {
-          $submissions_list .= ($submissions_list && $data_submitted ? ', ' : '') . ($data_submitted ? $data_provider : ''); 
-        }
-        $value = $submissions_list;
-      }
-      elseif ($title == '$_SERVER') {
-        $value = '[hidden]';//print_r($value, TRUE);
-      }
-      $data .= "<div>$title: $value</div>";
-    }
-    
-    //dpm($ucaptured->via_block);
-    
-    $form['item_' . ($key + 1) . 'a'] = array(
-      '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '"><td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
-    );
-    
-    $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
-    $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=check&timestamp=' . $ucaptured->timestamp;
-    $uncheck_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
-    unset($delete_url['q']);
+                                switch ($ucaptured->status) {
+                                  case 0:
+                                    $status = 'Captured, NOT alerted';
+                                    $status_class = 'not-alerted';
+                                    break;
+                                  case 1:
+                                    $status = 'Captured, alerted';
+                                    $status_class = 'alerted';
+                                    break;
+                                  case 2:
+                                    $status = 'Submitted';
+                                    $status_class = 'submitted';
+                                    break;
+                                }
+                                $data = '';
+                                $ucaptured_data = unserialize($ucaptured->data);
 
-    
-    $form['item_' . ($key + 1) . 'b'] = array(
-      '#type' => 'checkbox',
-      '#default_value' => $ucaptured->checked,
-      '#prefix' => '<td>',
-      '#suffix' => '</td>',
-      '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
-    );
-    
-    // Ips, User input data, Operations.
-    $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
-    $form['item_' . ($key + 1) . 'c'] = array(
-      '#markup' => '<td>' . $ucaptured->ip . '</td><td class="data">' . $data . '</td>
-          <td class="ops">' 
-            . l('Delete', $_GET['q'], array('query' => $delete_url)) 
-            . render($gv_misc_sendCapturedQuotesToProviders_form_x)
-        . '</td>'
-      . '</tr>',
-    );
-  }
+                                // Correct the phone field data.
+                                $ucaptured_data = gv_misc_setUcapturedVariable(NULL, $ucaptured_data, TRUE);
 
+                                //dpm($ucaptured);
+                                //dpm($ucaptured_data);
+
+                                // Fix for a strange bug, where any first nested form in this main form (nested forms here - small providers submitting forms)
+                                // is filtered from the outer tags <form> for some reason.
+                                // So here i just put a dummy form for this to save the real forms.
+                                $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
+
+                                $ucaptured_data_changed = array();
+                                $ucaptured_data['IP'] = $ucaptured->ip;
+                                foreach ($ucaptured_data as $title => $value) {
+                                      if ($title == 'Submit Time' && is_numeric($value)) {
+                                        //$value = date('Y-m-d, H:i:s', $value);
+                                        $value = date('m\/d\/y, H:i:s', $value);
+                                      }
+                                      elseif ($title == 'Submission Duration' && is_numeric($value)) {
+                                        $value = number_format($value / 60, 2, '.', '') . ' min';
+                                      }
+                                      elseif ($title == 'sentToRemoteProviders') {
+                                        $submissions_list = NULL;
+                                        foreach ($value as $data_provider => $data_submitted) {
+                                          $submissions_list .= ($submissions_list && $data_submitted ? ', ' : '') . ($data_submitted ? $data_provider : ''); 
+                                        }
+                                        $value = $submissions_list;
+                                      }
+                                      elseif ($title == '$_SERVER') {
+                                        $value = '[hidden]';//print_r($value, TRUE);
+                                      }
+                                      $ucaptured_data_changed[$title] = $value;
+                                      $data .= "<div>$title: $value</div>";
+                                }
+                                // Wrap full data in a closed fieldset
+                                $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $data . '</div></fieldset>';
+                                
+                                // Detailed data tds
+                                $data_detailed = '';
+                                foreach ($map_captured_dataIndex_to_tableTitle as $data_index => $table_title) {
+                                    $data_detailed .= '<td style="max-width: 150px; overflow-x: auto;">' . @$ucaptured_data_changed[$data_index] . '</td>';
+                                }
+                                
+                                //dpm($ucaptured->via_block);
+
+                                $delete_url = $_GET + array('op' => 'delete', 'timestamp' => $ucaptured->timestamp);
+                                $check_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=check&timestamp=' . $ucaptured->timestamp;
+                                $uncheck_url = $_SERVER['REQUEST_URI'] . ($_SERVER['REQUEST_URI'] == $_SERVER['REDIRECT_URL'] ? '?' : '&') . 'op=uncheck&timestamp=' . $ucaptured->timestamp;
+                                unset($delete_url['q']);
+                                
+                                //dpm('$ucaptured_data[Campaign Name] = ' . @$ucaptured_data['Campaign Name']);
+                                //dpm('@$campaign_names[@$ucaptured_data[Campaign Name]] = ' .  @$campaign_names[@$ucaptured_data['Campaign Name']]);
+                                $campaign_select_op = array(
+                                  '#type' => 'select',
+                                  '#options' => $campaign_names, //array('' => '- Other -', 'Google US/LP' => 'Google US/LP', 'Google UK/LP' => 'Google UK/LP', '7Search' => '7Search', 'Bing' => 'Bing', 'Google PPC/Site' => 'Google PPC/Site', 'Organic' => 'Organic'),
+                                  '#title' => 'Campaign Name',  
+                                  '#default_value' => array(@$campaign_names[@$ucaptured_data['Campaign Name']]),
+                                  '#value' => array(@$campaign_names[@$ucaptured_data['Campaign Name']]),
+                                  '#attributes' =>  array('id' => 'ts-' . $ucaptured->timestamp . '-ip-' . $ucaptured->ip, 'class' => array('campaign_name')),
+                                );
+                                
+                                
+                                /*
+                                $form['item_' . ($key + 1) . 'a'] = array(
+                                  '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">'
+                                    . '<td>' . ($key + 1) . '</td><td>' . date('Y-m-d, H:i:s', $ucaptured->timestamp) . '</td><td class="' . $status_class . '">' . $status . '</td><td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>',
+                                );
+                                */
+                                
+                                // Possibly a spam?
+                                if (
+                                       //@$ucaptured_data['First Name'] == @$ucaptured_data['Last Name']
+                                    //|| strpos(@$ucaptured_data['Last Name'], @$ucaptured_data['First Name']) !== FALSE    
+                                    //|| 
+                                        strpos(@$ucaptured_data['Sumbission page'], 'http') === FALSE
+                                    || @$ucaptured_data['Spam'] == 'Yes'
+                                        
+                                   ) {
+                                  $spam_class = ' spam'; 
+                                }
+                                else {
+                                  $spam_class = '';
+                                }
+                                
+                                $form['item_' . ($key + 1) . 'a'] = array(
+                                  '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . $spam_class . '">',
+                                );
+                                
+                                
+                                              $form['item_' . ($key + 1) . 'b'] = array(
+                                                '#markup' => '<td>' . ($key + 1) . '</td><td>' . date('m\/d\/y, H:i:s', $ucaptured->timestamp) /*date('Y-m-d, H:i:s', $ucaptured->timestamp)*/ . '</td><td class="' . $status_class . '">' . $status . '</td>'
+                                                  //. '<td>' . (empty($ucaptured->via_block) ? 'Via page' : ($ucaptured->via_block == 1 ? 'Via block' : 'From Partner') ) . '</td>'
+                                                  ,
+                                              );
+
+
+                                              /*
+                                              $form['item_' . ($key + 1) . 'c'] = array(
+                                                '#type' => 'checkbox',
+                                                '#default_value' => $ucaptured->checked,
+                                                '#prefix' => '<td>',
+                                                '#suffix' => '</td>',
+                                                '#attributes' =>  array('class' =>array('checked'), 'onClick' => array('javascript:window.location.href = "http://getvoip.com' . ($ucaptured->checked ? $uncheck_url : $check_url) . '";')),
+                                              );
+                                              */
+
+
+                                              // Ips, User input data, Operations.
+                                              $gv_misc_sendCapturedQuotesToProviders_form_x = drupal_get_form('gv_misc_sendCapturedQuotesToProviders_form_' . $key, array('timestamp' => $ucaptured->timestamp, 'ip' => $ucaptured->ip, 'sentToRemoteProviders' => @$ucaptured_data['sentToRemoteProviders'], 'submission' => $ucaptured_data));
+                                              $form['item_' . ($key + 1) . 'd'] = array(
+                                                '#markup' => $data_detailed . '<td class="data">' . $data . '</td>
+                                                    <td class="ops">' 
+                                                      . l('Delete', $_GET['q'], array('query' => $delete_url)) 
+                                                      . render($gv_misc_sendCapturedQuotesToProviders_form_x)
+                                                  . '</td>'
+                                                  //. '<td class="campaign">' 
+                                                  //    . drupal_render($campaign_select_op)
+                                                  //. '</td>'
+                                                  //. '<td>' 
+                                                  //    . $ucaptured->ip
+                                                  //. '</td>',
+                                                //. '</tr>',
+                                              );
+
+                                $form['item_' . ($key + 1) . 'e'] = array(
+                                  '#markup' => '</tr>',
+                                );
+                                
+  } // End of foreach ($ucaptureds as $key => $ucaptured) {
+
+  
+  
   $form['table_close'] = array(
     '#type' => 'markup',
     '#markup' => '</tbody></table></div>',
@@ -1735,12 +2260,20 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     '#theme' => 'pager',
     //'#weight' => 5,
   );
+
+  $form['#attached'] = array(
+      'library' => array(
+        array('system', 'ui.autocomplete'),
+      ),
+  );    
+  
   
   //$form['actions']['submit']['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
   //$form['#submit'][] = 'gv_pages_quoteRequestsList_formSubmit';
   $form['#validate'][] = 'gv_pages_quoteRequestsList_formValidate';
   
-  
+  //dpm($form);
+
   return $form;
 }
 
@@ -1755,15 +2288,33 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
  *
  * @param array &$form_state
  *   Array with current form state.
-
+ *
  * @return void
  *   Return nothing.
  */
 function gv_pages_quoteRequestsList_formValidate(&$form, &$form_state) {
 
+  //dpm($form_state['values']);
   $get = $_GET;
   unset($get['q']);
   $get['filter'] = $form_state['values']['filter'];
+  unset($get['email-contains'], $get['campaign-s-contains'], $get['campaign-v-contains'], $get['campaign-n-contains']);
+  if ($form_state['values']['op'] != 'Clear email/campaign') {
+  
+    if (!empty($form_state['values']['email-contains'])) {
+      $get['email-contains'] = $form_state['values']['email-contains'];
+    }
+    if (!empty($form_state['values']['campaign-s-contains'])) {
+      $get['campaign-s-contains'] = $form_state['values']['campaign-s-contains'];
+    }
+    if (!empty($form_state['values']['campaign-v-contains'])) {
+      $get['campaign-v-contains'] = $form_state['values']['campaign-v-contains'];
+    }
+    if (!empty($form_state['values']['campaign-n-contains'])) {
+      $get['campaign-n-contains'] = $form_state['values']['campaign-n-contains'];
+    }
+  }
+
   
   drupal_goto($_GET['q'], array('query' => $get));
 }
@@ -3009,6 +3560,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               '#description' => t('Please, use a format "http://example.com" strictly!'),
               '#default_value' => isset($p_data['info']['i_web']) ? $p_data['info']['i_web'] : '',
               '#element_validate' => array('wdg_misc_elementValidate_url'),
+              '#maxlength' => 400,
             );
             $form['data_info']['i_web_display'] = array(
               '#type' => 'textfield',
@@ -3111,6 +3663,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                                           //$p_data['services']['s_residential']['re_preface_title']
                       
                     );
+
+                    if ($service_description_type == 'textfield') {
+                      $form['s'][$service_type_key][$service_description_key]['#maxlength'] = 400;
+                    }
                     
                   }
                   
@@ -3191,6 +3747,8 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       $providers_with_options = array(
           'bu' => unserialize(PROVIDER_OPTIONS_BU),
           're' => unserialize(PROVIDER_OPTIONS_RE),
+          'cc' => unserialize(PROVIDER_OPTIONS_CC),
+          'wc' => unserialize(PROVIDER_OPTIONS_WC),
       );      
             
       foreach ($providers_with_options as $service_type_index => $provider_options_structure) {
@@ -3244,8 +3802,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#type'] = 'text_format';
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#format'] = 'full_html';//'filtered_html'; //'gv_full_html'; 
                         }
-
-                        if ($option_type == 'checkbox') {
+                        elseif ($option_type == 'checkbox') {
 
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#prefix'] = '<div style="overflow: hidden;"><div style="float: left;">';
                           $form['s'][$service_type_index]['provider_options_' . $service_type_index][$options_set][$option_title]['#suffix'] = '</div>';
