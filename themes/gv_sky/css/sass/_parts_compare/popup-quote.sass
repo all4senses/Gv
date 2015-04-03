@@ -142,19 +142,23 @@
 					margin-right: perc(16px, 574px)
 					height: 87px
 
-					&:nth-child(1)
-						:before
-							content: '>'
-							font-size: 27px
-					&:nth-child(2)
-						:before
-							content: '?'
-							font-size: 31px
-							margin-bottom: 5px
-					&:nth-child(3)
-						:before
-							font-size: 27px
-							content: '@'
+					&:before
+						display: block
+						margin: 3px 0 8px
+						text-align: center
+						font-family: gvcons
+						font-weight: 400
+
+					&:nth-child(1):before
+						content: '>'
+						font-size: 27px
+					&:nth-child(2):before
+						content: '?'
+						font-size: 31px
+						margin-bottom: 5px
+					&:nth-child(3):before
+						font-size: 27px
+						content: '@'
 
 				.employees &
 					width: perc(65px, 430px)
@@ -187,11 +191,7 @@
 						font-size: 12px
 						font-weight: 700
 
-						&:before
-							display: block
-							margin: 3px 0 8px
-							font-family: gvcons
-							font-weight: 400
+
 
 					.employees &
 						position: absolute

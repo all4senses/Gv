@@ -2932,6 +2932,8 @@ function gv_blocks_compareTopProviders($service_type) {
   // dpm('No cache Compare...' . $cid);
   
   // No cached data... rebuilding...
+  global $popup_quote;
+  $popup_quote = FALSE;
   switch ($service_type) {
     case 'business':
       $rating_table = 'field_data_field_p_erating';
@@ -2948,10 +2950,12 @@ function gv_blocks_compareTopProviders($service_type) {
     case 'cc':
       $rating_table = 'field_data_field_p_erating_cc';
       $rating_field = 'field_p_erating_cc_value';
+      $popup_quote = TRUE;
       break;
     case 'wc':
       $rating_table = 'field_data_field_p_erating_wc';
       $rating_field = 'field_p_erating_wc_value';
+      $popup_quote = TRUE;
       break;
   }
   
@@ -2987,6 +2991,7 @@ function gv_blocks_compareTopProviders($service_type) {
 function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business', $rating_table = 'field_data_field_p_erating', $rating_field = 'field_p_erating_value') {
   
   global $user;
+  global $popup_quote;
   
   if (empty($p_names)) {
   
@@ -3169,7 +3174,6 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
 
 
-      $popup_quote = FALSE;
       $options_to_exclude = array();
       $options_sets_to_exclude = array();
       
