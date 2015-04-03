@@ -114,6 +114,11 @@
         left: 5px; }
       .solutions-list-item-link:hover .solutions-list-item-link-title {
         color: #045da0; }
+      .solutions-list-item-link:hover .solutions-list-item-link-icon-inner {
+        background-color: #045da0; }
+        .solutions-list-item-link:hover .solutions-list-item-link-icon-inner:after {
+          left: 2px;
+          opacity: 1; }
       .solutions-list-item-link-title {
         position: absolute;
         color: #595959;
@@ -151,6 +156,20 @@
             right: 0;
             text-align: center;
             cursor: pointer; }
+          .solutions-list-item-link-icon-inner:after {
+            content: "a";
+            position: absolute;
+            text-align: center;
+            top: 12px;
+            left: 2px;
+            left: -6px;
+            width: 100%;
+            font-family: gvcons;
+            font-size: 26px;
+            line-height: 1;
+            color: white;
+            opacity: 0;
+            transition: all 0.2s; }
   @media screen and (min-width: 1170px) {
     .solutions-list {
       width: 66.3716814159%;

@@ -43,8 +43,14 @@
 			&:hover &-title
 				color: $primary
 
-			// &:hover &-icon-inner
-			// 	background-color: $primary
+			&:hover &-icon-inner
+				background-color: $primary
+				// background-color: rgba(4,93,160,0.8)
+
+				&:after
+					// transform: rotate(-0deg)
+					left: 2px
+					opacity: 1
 				
 			&-title
 				position: absolute
@@ -81,6 +87,22 @@
 						right: 0
 						text-align: center
 						cursor: pointer
+
+					&:after
+						content: 'a'
+						position: absolute
+						text-align: center
+						top: 12px
+						left: 2px
+						left: -6px
+						width: 100%
+						font-family: gvcons
+						font-size: 26px
+						line-height: 1
+						color: white
+						// transform: rotate(270deg)
+						opacity: 0
+						transition: all 0.2s
 
 		// &:hover
 
