@@ -34,7 +34,7 @@
 
 
 		if (close && popOpen) {
-			$$('popup-content').find('input').val('');
+			$$('.popup-content').find('input').val('');
 			if ( $$('.popup').hasClass('exit') ) {
 				$('.popup-content').empty();
 			}
