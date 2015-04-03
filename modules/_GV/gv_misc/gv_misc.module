@@ -6066,6 +6066,62 @@ function gv_misc_testPage_iframe_sip() {
   
 }
 
+function gv_misc_imagemagick_save_alter($image, $context) {
+// dpm($image);
+// dpm($context);
+}
+
+
+/*
+ * Work around for fixing problem with imagemagic, 
+ * where it by default converts png images of any colors sets (indexed or truecolor) with any depth to 16bit rgb image, that increasing the image size in several times.
+ * https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
+ * http://www.imagemagick.org/script/command-line-options.php?#depth
+ * http://www.imagemagick.org/Usage/formats/#png_formats
+*/
+function gv_misc_imagemagick_arguments_alter(&$args, $context) {
+ //dpm($args);
+ //dpm($context);
+ 
+ 
+// global $user;
+// if ($user->uid == 1) 
+ {
+   
+      $ext = explode('.', $context['source_original']);
+      $ext = $ext[count($ext) - 1];
+      //dpm('ext = ' . $ext);
+      
+      if ($ext == 'png') {
+              // If it is png, find out if it's indexed or true color image
+              
+              $args[] = '-depth 8';
+        
+              $test_image = new stdClass();
+              $test_image->toolkit = 'gd';
+              $test_image->source = $context['source_original'];
+              $test_image->info = image_get_info($context['source_original'], $test_image->toolkit);
+              //$image->info['extension'] = $ext;
+
+              if (is_array($test_image->info)) {
+
+                // Load image resource via GD lib, to make it possible to use GD functions.
+                image_gd_load($test_image);
+
+                if ($is_indexed_png = imagecolorstotal($test_image->resource)) {
+                  // $is_indexed_png = number of color in indexed png image, or 0 for TRUECOLOR image 
+                  // if it's indexed coolors png, we have to add png8: to the file name
+                  $context['destination_format'] = 'png8';
+                }
+
+
+              } // End of if (isset($test_image->info) && is_array($test_image->info)) {
+      
+      } // End of // End of if ($ext == 'png') {
+        
+ } // End of if ($user->uid == 1) {
+
+}
 
 /**
  * Creates imagecache image if it doesnt exist.
@@ -14609,11 +14665,14 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
          preg_match('/.*youtube\.com\/embed\/(.*)/is', $videoToken_html_url_fragment, $matches_2) 
       ) {
     //dpm($matches_2);
-    $video_id = $matches_2[1];
+    $video_id = explode('?', $matches_2[1]);
+    //dpm($video_id);
+    $video_id = $video_id[0];
+    //dpm($video_id);
 
     //if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
     if($thumbnail_src = gv_misc_getVideoThumb($video_id)) {
-
+      //dpm('$thumbnail_src = ' . $thumbnail_src);
       // Get YouTube video info via Google API REST
       if ($data_from = gv_misc_getVideoInfo($video_id, 'YouTube')) {
         
@@ -14626,6 +14685,8 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
               'thumbnail_src' => $thumbnail_src,
           );
 
+          //dpm($snippetVideoData);
+           
           //dpm($data_from);
           //dpm($data_from->entry->{'media$group'});
           //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
@@ -14791,43 +14852,56 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
  * return False - not updated
  * return Body - updated
  */
-function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, $timestamp_update) {
+function gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, $update_timestamp = -1, $extra_data = NULL) {
   //dpm($node);
-  return;
-  $body_full_markup = $node->body['und'][0]['value'];
-  
+  //return;
+  $current_body_full_markup = !empty($node->body[0]['value']) ? $node->body[0]['value'] : (!empty($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : NULL);
+  //return $current_body_full_markup;
   $extra_data = unserialize($node->field_extra_data['und'][0]['value']);
   
   // If not all image url beautify are regenerated, regenerate it and save to the node after that.
-  if ($update_timestamp && @$extra_data['update_timestamp'] < $update_timestamp) {
+  if ($current_body_full_markup && ($update_timestamp == -1 || @$extra_data['update_video_timestamp'] < $update_timestamp)) {
     // Update $extra_data['update_timestamp'] in the db so the next time it won't be tested again.
-    $extra_data['update_timestamp'] = time();
-    ////gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
+    //dpm($extra_data);
+    $extra_data['update_video_timestamp'] = time();
+    //dpm($extra_data);
+    gv_misc_fieldSave('extra_data', $node->nid, serialize($extra_data));
   
     // Find out if there is already video snippet(s) added
-    if (!gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($body_full_markup, TRUE)) {
-      $new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_full_markup);
-      if ($body_full_markup != $new_body_full_markup) {
-        dpm('Video snippet was added.');
+    if (!gv_misc_isVideoRichSnippetAdded($current_body_full_markup)) {
+      
+      $new_body_full_markup = gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($current_body_full_markup, TRUE); // TRUE for centering the div
+      if ($current_body_full_markup != $new_body_full_markup) {
+        
         // if there are any video tokens or iframe, add snippets to them
         // and update the body field
-        ////gv_misc_fieldSave('body', $node->nid, serialize($new_body_full_markup));
-       return $new_body_full_markup; 
+        gv_misc_fieldBodyUpdate($node->nid, $new_body_full_markup);
+        //dpm('Video snippet was added.');
+        watchdog('=> GV Video snippet added - ' . $node->nid, 'type = ' . $node->type . ', ' . 'nid = ' . $node->nid . ', ' . $node->title, NULL, WATCHDOG_WARNING);
+        return $new_body_full_markup; 
       }
       else {
-        dpm('No Video in the article has been found');
+        //dpm('No Video in the article has been found');
+        return FALSE; 
       }
     }
     else {
-      dpm('Video snippet was already presented before.');
+      //dpm('Video snippet was already added before.');
+      return FALSE;
     }
   }
 
+  //dpm('Video snippet - not processed because of smaller timestamp');
   return FALSE;
 }
 
 
-/**
+function gv_misc_isVideoRichSnippetAdded($body_full_markup) {
+  return gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($body_full_markup, TRUE);
+}
+
+
+//**
  * Remove GvVideo Wrapper with Google rich snippet from video tokens.
  * OR
  * only_check_if_the body contains_snippet
@@ -14839,7 +14913,7 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
   
   $contains_snippet = FALSE;
 
-  if (preg_match_all('/<div class="gv-video".*(\[.*\])<\/div>/isU', $body_full_markup, $matches)) {
+  if (preg_match_all('/<div class="gv-video.*(\[.*\])<\/div>/isU', $body_full_markup, $matches)) {
     
     
     $contains_snippet = TRUE;
@@ -14870,7 +14944,7 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
   
   
   
-  if(preg_match_all('/<div class="gv-video-iframe".*(<iframe.*src=\"(.*)\".*><\/iframe>)<\/div>/isU', $body_full_markup, $matches)) {
+  if(preg_match_all('/<div class="gv-video-iframe.*(<iframe.*src=\"(.*)\".*><\/iframe>)<\/div>/isU', $body_full_markup, $matches)) {
     
     $contains_snippet = TRUE;
     
@@ -14964,6 +15038,7 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
   
   if ($provider == 'YouTube') {
     $url = 'http://img.youtube.com/vi/' . $video_id . '/0.jpg'; //'/maxresdefault.jpg';
+    //dpm('$url thumb = ' . $url);
   }
   elseif ($provider == 'Wistia') {
     if ($thumb_url) {
@@ -14986,6 +15061,7 @@ function gv_misc_getVideoThumb($video_id, $provider = 'YouTube', $thumb_url = NU
       // Doubled request from Wistia to get correct altered sized thumbnail.
       gv_misc_curl_file_from_remote_site_likeBrowser($url, $file_local_abs);
     }
+    //dpm('$file_local = ' . $file_local);
     return $file_local;
   }
   else {

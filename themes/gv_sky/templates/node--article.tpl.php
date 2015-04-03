@@ -9,15 +9,33 @@
   
   
   
-  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1421703309);
-  
-  //global $user;
-  //if ($user->uid == 1) 
-  {
+  // The last var - time, if it's bigger thanarticles update time, the article will be updated
+  // Used for update thumbnails, vars. etc
+  if ($page) {
     //dpm(time());
-    gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node,  1421703309);
+    // 1424468002 - newer date
+    $update_timestamp = 1424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
   }
+  else {
+    // older date - to skip updating
+    $update_timestamp = 1421703309;
+  }
+  $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, $update_timestamp); 
+  // $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1424424340); // 1424424340 - update fixing huge images thumbs with IM default settings, https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
   
+  
+//  global $user;
+//  if ($user->uid == 1) 
+  {
+    
+    if ($page) {
+      if($updated_body = gv_misc_UpdateNodeBody_add_GvVideoGoogleSnippetWrapper_ifVideoPresented($node, /*$update_timestamp*/1424634167, $extra_data)) {
+        $content['body'][0]['#markup'] = check_markup($updated_body, 'full_html'/*$format_id = NULL, $langcode = '', $cache = FALSE*/); //$node->body[0]['value'];
+      }
+    }
+    
+    
+  }
   
   $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
               
