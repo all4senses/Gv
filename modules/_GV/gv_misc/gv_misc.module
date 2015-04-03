@@ -12829,6 +12829,127 @@ function gv_misc_sendCapturedQuotesToProviders_form_submit(&$form, &$form_state)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Implements hook_form().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_QRextraFilters_form($form, &$form_state) {
+  
+  $form = array();
+  
+  $form['extraFilters'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Extra Filters',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE, //!empty($_GET['email-contains']) || !empty($_GET['campaign-contains']) ? FALSE : TRUE,
+    //'#attributes' => array('class' => array($class_submitted)),
+    '#tree' => TRUE,
+  );
+      $form['extraFilters']['email-contains'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Email contains',  
+        '#default_value' => @$_GET['email-contains'],
+      );
+      
+      $form['extraFilters']['campaign-contains'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Campaign contains',  
+        '#default_value' => @$_GET['campaign-contains'],
+      );
+
+  
+      $form['extraFilters']['actions'] = array('#type' => 'actions');
+      $form['extraFilters']['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Apply',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+      $form['extraFilters']['actions']['clear'] = array(
+        '#type' => 'submit',
+        '#value' => 'Clear',
+        //'#disabled' => $class_submitted == 'all-submitted' ? TRUE : FALSE,
+      );
+  
+ 
+  return $form;
+}
+
+
+/**
+ * Implements hook_form_validate().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_QRextraFilters_form_validate(&$form, &$form_state) {
+  
+  //drupal_set_message('In Validate!', 'warning');
+  //dpm($form_state['values']);
+  //dpm($form);
+    
+  //global $user;
+  
+  
+//  if (!$form_state['values']['message']) {
+//    form_set_error('message', 'You have to enter a Message, if don\'t want to just subscribe to newsletters');
+//  }
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ */
+function gv_misc_QRextraFilters_form_submit(&$form, &$form_state) {
+ 
+  //dpm($form_state['values']['op']);
+  // Redirect back to the current page.
+  $get = $_GET;
+  unset($get['q']);
+  unset($get['email-contains'], $get['campaign-contains']);
+  if ($form_state['values']['op'] != 'Clear') {
+  
+    if (!empty($form_state['values']['email-contains'])) {
+      $get['email-contains'] = $form_state['values']['email-contains'];
+    }
+    if (!empty($form_state['values']['campaign-contains'])) {
+      $get['campaign-contains'] = $form_state['values']['campaign-contains'];
+    }
+  }
+  //$get['filter'] = $form_state['values']['filter'];
+  drupal_goto($_GET['q'], array('query' => $get));
+  //drupal_goto();
+}
+
+
+
+
+
+
+
+
+
 /**
  * Check if  a node exists.
  *
@@ -15092,15 +15213,18 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
 /**
  * Wrap a video with Google rich snippet elements for Video.
   */
-function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_full_markup) {
+function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_full_markup, $add_center_class = NULL) {
   // $form_state['values']['body']['und'][0]['value']
   // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
   
   //$found_image = FALSE;
   //$title = $descr = $duration = $contentUrl = NULL;
   
-  
-  global $user;
+  $added_snippet = FALSE;
+  if ($add_center_class) {
+    $add_center_class = ' rtecenter';
+  }
+  // global $user;
   
   if (preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
     
@@ -15124,7 +15248,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
 
         //dpm($thumbnail_src);
         /*
-        $body_full_markup = preg_replace('|(\[video:.*http.*\])|is', 
+        $body_full_markup = preg_replace('|(\[video:.*http.*\])|isU'
                 '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
                   . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
                   . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
@@ -15136,7 +15260,7 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         */
         
         $body_full_markup = str_replace($matches_all[0][$key], 
-                '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                '<div class="gv-video' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
                   . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
                   . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
                   . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
@@ -15144,16 +15268,15 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
                   . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
                   . $matches_all[0][$key] 
               . '</div>', $body_full_markup);
-
+        $added_snippet = TRUE;
       }
       else {
         dpm('No rich snippet added to the [video:...] token with the url ' . $match_url . ', because a video provider wasn\'t  identified');
       }
+    } // End of foreach ($matches_all[1] as $key => $match_url) {
+
+  } // End of if (preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
       
-      
-    }
-  }
-  
   
   
   if (preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches)) {
@@ -15167,8 +15290,10 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($matches[1][$key])) {
         //dpm($snippetVideoData);
         
-        $body_full_markup = preg_replace('|' . $match . '|is', 
-              '<div class="gv-video-iframe" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+        //$body_full_markup = preg_replace('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', 
+        /*
+        $body_full_markup = preg_replace('|' . $match . '|isU', 
+              '<div class="gv-video-iframe' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">'
                   . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
                   . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
                   . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
@@ -15176,6 +15301,20 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
                   . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>'  
                 . $match 
             . '</div>', $body_full_markup);
+        */
+        
+        
+        $body_full_markup = str_replace($match, 
+                '<div class="gv-video' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
+                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
+                  . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
+                  . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
+                  . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
+                  . $match
+              . '</div>', $body_full_markup);
+        
+        $added_snippet = TRUE;
       }
       else {
       
@@ -15638,3 +15777,33 @@ function gv_misc_writeGvAccessLog($action) {
         break;
     }
   }
+  
+  
+/**
+ * Alter the data of a sitemap link before the link is saved.
+ *
+ * @param array $link
+ *   An array with the data of the sitemap link.
+ * @param array $context
+ *   An optional context array containing data related to the link.
+ */
+function gv_misc_xmlsitemap_link_alter(array &$link, array $context) {
+  
+//  if ($link['id'] == 966) {
+//    //dpm($link);
+//    // Will remove the url from xml sitemap
+//    //$link['access'] = FALSE;
+//  }
+  
+  
+  // Check for unpublished in xml sitemap - success - no unpublished.
+//  if ($link['access']) {
+//     $query = db_select('node', 'n')
+//       ->fields('n', array('status'))
+//       ->condition('nid', $link['id']);
+//     if (!$source = $query->execute()->fetchField()) {
+//       dpm($link['id']);
+//       dpm($link);
+//     }
+//  }
+}
