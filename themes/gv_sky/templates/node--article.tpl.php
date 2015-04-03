@@ -14,11 +14,11 @@
   if ($page) {
     //dpm(time());
     // 1424468002 - newer date
-    $update_timestamp = 14424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
+    $update_timestamp = 1424468002; // Update only in the page mode,  to decrease the updating time of the whole page and update only the main article, not teasers.
   }
   else {
     // older date - to skip updating
-    $update_timestamp = 1421703309;
+    $update_timestamp = 14421703309;
   }
   $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, $update_timestamp); 
   // $extra_data = $teaser_data = gv_misc_updateArticleExtraData($node, TRUE, 1424424340); // 1424424340 - update fixing huge images thumbs with IM default settings, https://www.google.ru/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#newwindow=1&q=imagemagick+resize+increases+file+size
