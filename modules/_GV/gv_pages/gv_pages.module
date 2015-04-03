@@ -4057,7 +4057,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
       // Connect a Rich Editor (cKeditor) to the Review text area.
       //$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
       // Disconnect a rich editor. 
-      $form['body']['und'][0]['#type'] = 'textarea';
+      // $form['body']['und'][0]['#type'] = 'textarea';
       $keys = element_children($form['field_preface_bottom']['und']);
       foreach ($keys as $key) {
         $form['field_preface_bottom']['und'][$key]['field_preface_b_body']['und'][0]['#format'] = 'full_html'; // link Ckeditor
