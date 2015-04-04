@@ -6872,26 +6872,34 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
 //  }
     
   $map_main = array(
-    'First Name' => 'FirstName',
-    'Last Name' => 'LastName',
+    'First Name' => 'first_name',// 'FirstName',
+    'Last Name' => 'last_name',// 'LastName',
     'Phones needed' => 'Number_of_Seats__c', // Number of Seats
-    'Email' => 'Email',
-    'Phone #' => 'Phone',
+    'Email' => 'email',// 'Email',
+    'Phone #' => 'phone',// 'Phone',
+    'Company' => 'company',
   );
  
       
   // Set initial fields.
   $data_to = array(
     'oid' => '00Dd0000000eyog',
-    'LeadSource' => 'Lead Aggregator',
-    'lead_source_description__c' => 'GetVoip CPL',
-    'Product_Suite_Category__c' => 'Cloud',
-    'Region__c' => 'United States',
-    'US_Region__c' => 'Direct Cloud',
+    'retURL' => 'http://',  
+    'lead_source' => 'Lead Aggregator', // 'LeadSource' => 'Lead Aggregator',
+      
+    '00Nd00000073FDw' => 'GetVoip CPL', //'lead_source_description__c' => 'GetVoip CPL',
+    '00NU0000004n3vy' => 'Cloud', //'Product_Suite_Category__c' => 'Cloud',
+    '00Nd0000006rUck' => 'United States', // 'Region__c' => 'United States',
+    '00Nd0000007PsIv' => 'Direct Cloud', //'US_Region__c' => 'Direct Cloud',
     //'Owner' => '00Gd0000001owyL',
     
     'RecordType' => '012U0000000aMzQ',
-    'Campaign' => '701U0000000LSyB',
+    'Campaign_ID' => '701U0000000LSyB', //'Campaign' => '701U0000000LSyB',
+    'city' => 'N/A',
+    'state' => 'N/A', 
+      
+    'debug' => 1,
+    'debugEmail' => 'amanda_clague@mitel.com',
       
   );
   
