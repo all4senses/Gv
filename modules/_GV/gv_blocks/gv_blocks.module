@@ -11007,6 +11007,977 @@ function gv_blocks_chartFromView_altered_rotatedFirst4providers($view_n_display)
 /**
  * chartFromView_altered_rotatedProviders.
  */
+function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display, $version, $step, $view) {
+  
+  global $user;
+  
+  switch ($view_n_display['display']) {
+    
+
+    case 'bl_p_sip_rotated':
+      
+      
+      switch ($step) {
+      
+              case 1: // Sip step 1
+                
+                    $gv_settings = variable_get('gv_settings', NULL);
+
+                    if (empty($gv_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
+                      $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
+                        'descr' => 'Turn On the SIP page chart ab-testing rotation',
+                        'Turn_On_for_logged_In' => array('field_type' => 'checkbox', 'value' => 0, 'descr' => 'Turn on Rotation for logged In users'),
+                        'Turn_On_for_logged_Out' => array('field_type' => 'checkbox', 'value' => 0),
+                        'Remain_Top_Rating_For_First_Position' => array('field_type' => 'checkbox', 'value' => 0),
+                      );
+                      variable_set('gv_settings', $gv_settings);
+                    }
+                    
+                
+                    if ( ($user->uid && !$gv_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_In']['value']) || (!$user->uid && !$gv_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_Out']['value'])) {
+                      // Show turned Off, simple chart without rotation
+
+                      dpm('Cached: ' . $user->uid);
+                      //global $language;
+                      $cache_name = 'gv_SIPOriginal_notAlteredChart_' . $view_n_display['display'];
+
+                      $info = '<div class="info cached" style="display: none;"></div>';
+                      $cache_content = cache_get($cache_name);
+                      if ($cache_content && !empty($cache_content->data) && $cache_content->expire > time()) {
+                        return '<div class="info cached" style="display: none;"></div>'. $cache_content->data;
+                      }
+
+                      // Or build the original char, save and  return it.
+                      $chart_themed = NULL;
+
+                      $view = views_get_view($view_n_display['view']);
+                      // Run view's query.
+                      $view->execute($view_n_display['display']);
+
+                      $chart_themed = $view->preview($view_n_display['display']);
+
+                      cache_set($cache_name, $chart_themed, 'cache', time() + 14400);
+
+                      return '<div class="info cached rebuilt" style="display: none;"></div>' . $chart_themed;
+                    }
+
+                    dpm('Not cached: ' . $user->uid);
+                    
+                    break; // End of Step 1 of 'bl_p_sip_rotated'
+                    
+                    
+                    
+                    
+                    
+              case 2: // Sip Step 2
+                
+                    // ---------------------------
+                    // iPage should be first 3 of 4 consecutive page loadings.
+                    // Bluehost should be first 1 of 4 consecutive page loadings.
+                    $random_array = array_slice($view->result, 0, 3);
+
+                    //dpm($random_array);
+
+                    foreach ($random_array as $key => $result) {
+                      if ($result->nid == 63) {
+                        //Nextiva page nid is 63
+                        // Key should be always 1 (2nd position)
+                        $fixed_positions['Nextiva_key'] = $key;
+                      }
+                      elseif ($result->nid == 88) {
+                        // 8x8 page nid is 88
+                        // Key should be always 0 OR 2 (1st or 3nd position)
+                        $fixed_positions['8x8_key'] = $key;
+                      }
+                      elseif ($result->nid == 1731) {
+                        // Flowroute page nid is 731
+                        // Key should be always 0 OR 2 (1st or 3nd position)
+                        $fixed_positions['Flowroute_key'] = $key;
+                      }
+                    }
+
+
+                    $positions_sets = array(
+                        array(0, 1, 2),
+                        array(1, 0, 2),
+                        array(0, 2, 1),
+                        array(1, 2, 0),
+                        array(2, 1, 0),
+                        array(2, 0, 1),
+                    );
+
+                    $current_positions_set = variable_get('current_positions_set', 0);
+                    if ($current_positions_set + 1 > 5) {
+                      $current_positions_set = 0;
+                    }
+                    else {
+                      $current_positions_set += 1;
+                    }
+                    variable_set('current_positions_set', $current_positions_set);
+
+                    //dpm($positions_sets[$current_positions_set]);
+
+                    $view->result[0] = $random_array[$positions_sets[$current_positions_set][0]];
+                    $view->result[1] = $random_array[$positions_sets[$current_positions_set][1]];
+                    $view->result[2] = $random_array[$positions_sets[$current_positions_set][2]];
+
+                    if (!$user->uid) {
+                      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+                      drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
+                    }
+
+                    /*
+
+
+                    if (!$current_top_positions_counter = variable_get('gv_current_top_positions_counter')) {
+                      $current_top_positions_counter = array(
+                          'Nextiva_top' => 0,
+                          '8x8_top' => 0,
+                      );
+                    }
+
+                    if ($current_top_positions_counter['Nextiva_top'] + 1 == 2) { // 50/50 for i/b
+                    //if ($current_top_positions_counter['Nextiva_top'] + 1 > 3) { // 75/25 for i/b
+                      // 25%
+                      $current_top_positions_counter = array(
+                          'Nextiva_top' => 0,
+                          '8x8_top' => 1,
+                      );
+                    }
+                    else {
+                      // 75%
+                      $current_top_positions_counter = array(
+                          'Nextiva_top' => $current_top_positions_counter['Nextiva_top'] + 1,
+                          '8x8_top' => 0,
+                      );
+                    }
+
+                    dpm($current_top_positions_counter);
+
+                    variable_set('gv_current_top_positions_counter', $current_top_positions_counter);
+
+                    */
+                    //return 'xxx';
+
+
+
+                    /*
+                    //if ($user->uid) 
+                      {
+
+                      if ($current_top_positions_counter['Nextiva_top']) {
+                        $view->result[0] = $random_array[$fixed_positions['Nextiva_key']];
+                        $view->result[1] = $random_array[$fixed_positions['8x8_key']];
+                      }
+                      else {
+
+                        //Change urls to alternative.
+                        //dpm($random_array[$fixed_positions['Nextiva_key']]);
+                        //dpm($random_array[$fixed_positions['Nextiva_key']]->views_php_4);
+
+                        //dpm(str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4));
+                        $Nextiva_p_data = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
+                        //dpm($Nextiva_p_data);
+                        // Change url in cnaged position to alternative one
+                        if (!empty($Nextiva_p_data['s']['sh']['s-url2'])) {
+                          $random_array[$fixed_positions['Nextiva_key']]->views_php_4 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4);
+                          $random_array[$fixed_positions['Nextiva_key']]->views_php_11 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_11);
+                        }
+                        // Change position list number to 2
+                        $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 2;
+                        $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 2;
+
+                        //$Nextiva_p_data_quick = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
+                        //dpm($Nextiva_p_data_quick);
+
+                        //dpm($random_array[$fixed_positions['8x8_key']]);
+                        //dpm($random_array[$fixed_positions['8x8_key']]->views_php_4);
+                        $_8x8_p_data = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
+                        //dpm($_8x8_p_data);
+                        // Change url in cnaged position to alternative one
+                        if (!empty($_8x8_p_data['s']['sh']['s-url2'])) {
+                          $random_array[$fixed_positions['8x8_key']]->views_php_4 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_4);
+                          $random_array[$fixed_positions['8x8_key']]->views_php_11 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_11);
+                        }
+                        // Change position list number to 1
+                        $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 1;
+                        $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 1;
+
+                        //$_8x8_p_data_quick = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
+                        //dpm($_8x8_p_data_quick);
+
+                        //dpm($random_array);
+
+
+                        // Swap ratings to remain the better rating to the new top provider.
+                        if ($gv_settings['Alter_Charts']['AB_Testing_on_Home']['Remain_Top_Rating_For_First_Position']['value']) {
+                          $old_bluehost_rating = $random_array[$fixed_positions['8x8_key']]->views_php_10;
+                          $random_array[$fixed_positions['8x8_key']]->views_php_10 = $random_array[$fixed_positions['Nextiva_key']]->views_php_10;
+                          $random_array[$fixed_positions['Nextiva_key']]->views_php_10 = $old_bluehost_rating;
+                        }
+
+                        // And finally swap corrected rows.
+                        $view->result[1] = $random_array[$fixed_positions['Nextiva_key']];
+                        $view->result[0] = $random_array[$fixed_positions['8x8_key']];
+                      }
+
+                      // Try to cope with cached pages table (just starting thoughts).
+                        $current_top_positions_counter['current_uid'] = $user->uid;
+                  //    drupal_add_js(array('gv_blocks' => array(
+                  //      'gv_current_top_positions_counter' => $current_top_positions_counter,
+                  //    )), 'setting');
+
+                      // Update (reRequest) the cached page only for logged out users.
+                      // For admins cached copy is not created so no need to repeat recreate the page (and extra increment the counter), that would cause losing of steps.
+                      if (!$user->uid) {
+                        $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+                        drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
+                      }
+
+
+                    }
+                    */
+
+
+                    //-----------------------------------------
+
+
+                    // ----------------------------------------
+                    // Like on GV initial case...
+                    // iPage should be always second
+                    // Bluehost should be always in 1 or 3 position.
+                    /*
+                    $random_array = array_slice($view->result, 0, 4);
+
+
+                    foreach ($random_array as $key => $result) {
+                      if ($result->nid == 86) {
+                        // iPage page nid is 12
+                        // Key should be always 1 (2nd position)
+                        $fixed_positions['iPage_key'] = $key;
+                      }
+                      elseif ($result->nid == 69) {
+                        // Bluehost page nid is 36
+                        // Key should be always 0 OR 2 (1st or 3nd position)
+                        $fixed_positions['Bluehost_key'] = $key;
+                      }
+                    }
+
+                    //dpm($random_array);
+                    $random_index = array(0, 1, 2, 3);
+                    //shuffle($random_index);
+
+                    do {
+                      shuffle($random_index);
+                    }while (
+                              // iPage_key should be always 1 (2nd position)
+                              (isset($fixed_positions['iPage_key']) && $random_index[1] != $fixed_positions['iPage_key'])
+                              ||
+                              // Bluehost_key should be always 0 OR 2 (1st or 3nd position)
+                              (
+                                isset($fixed_positions['Bluehost_key']) 
+                                && 
+                                !($random_index[0] == $fixed_positions['Bluehost_key'] || $random_index[2] == $fixed_positions['Bluehost_key'])
+                              )
+                            );
+
+                    //dpm($random_index);
+
+                    foreach ($random_index as $key => $value) {
+                      $view->result[$key] = $random_array[$value];
+                    }
+                    //dpm($view->result);
+                    */ 
+                    //----------------------------------------------------------------------
+
+
+                    ////$chart_themed = $view->preview($view_n_display['display']);
+                    //dpm($view->result);
+
+                    /*
+                    //watchdog('HR Home Rotation iteration', print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+                      ////watchdog('i-' . $current_top_positions_counter['iPage_top'] . ',b-' . $current_top_positions_counter['Bluehost_top'] . ',u-' . $current_top_positions_counter['current_uid'], print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+
+                      // $current_top_positions_counter = array(
+                  //        'iPage_top' => $current_top_positions_counter['iPage_top'] + 1,
+                  //        'Bluehost_top' => 0,
+                  //    );
+                    */
+                    //$info = '<div class="info" style="display: none;">iPage_top = ' . $current_top_positions_counter['iPage_top'] . ', Bluehost_top = ' . $current_top_positions_counter['Bluehost_top'] . '</div>';
+
+                    break; // End of Step 2 of 'bl_p_sip_rotated'
+                    
+      } // End of switch ($step) {
+      
+      break; // End of case 'bl_p_sip_rotated':
+      
+      
+      
+      
+    case 'block_top_bu_ppc': 
+      
+      // 'block_top_bu_ppc has just one (2) step.
+      if ($step != 2) {
+        return;
+      }
+      
+      $random_array = array_slice($view->result, 0, 7);
+
+      foreach ($random_array as $key => $result) {
+
+        // Define original providers positions
+
+        if ($result->nid == 5212) {
+          //Mitel page nid is 5212
+          // Key should be always 0 or 1 (1st or 2nd position)
+          $fixed_positions['Mitel_key'] = $key;
+        }
+        elseif ($result->nid == 2062) {
+          //Corvisa page nid is 2062
+          // Key should be always 6 (7nd position)
+          $fixed_positions['Corvisa_key'] = $key;
+        }
+        elseif ($result->nid == 12) {
+          //RingCentral page nid is 12
+          // old -> Key should be always 1 (2nd position)
+          $fixed_positions['RingCentral_key'] = $key;
+        }
+        elseif ($result->nid == 36) {
+          //Vonage page nid is 36
+          // Key should be always 0 OR 1 or 2 (1st or 2nd or 3nd position)
+          //  Vonage should mostly only rotate in Position 1 and 2. 
+          //  But should show up in Position 3 about 10% of the time. 
+          //  When Vonage ends up in Position 3, Mitel should always be in Position 1, 
+          //  and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+          $fixed_positions['Vonage_key'] = $key;
+        }
+        elseif ($result->nid == 63) {
+          // Nextiva page nid is 63
+          // Key should be always 3 OR 4 or 5 (4st or 5nd or 6nd position)
+          $fixed_positions['Nextiva_key'] = $key;
+        }
+        elseif ($result->nid == 88) {
+          // 8x8 page nid is 88
+          $fixed_positions['8x8_key'] = $key;
+        }
+        elseif ($result->nid == 191) {
+          // Jive page nid is 191
+          $fixed_positions['Jive_key'] = $key;
+        }
+      }
+
+      //dpm($random_array);
+      //dpm($fixed_positions);
+      
+      //dpm($random_array);
+      $random_index = array(0, 1, 2, 3, 4, 5, 6);
+      //shuffle($random_index);
+
+      switch ($version) {
+        
+        case 'v2':
+          
+          //$iteration_count = $vonage_is_2 = 0;
+          $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 'vonage_is_2' => 0));
+          dpm($gv_rotate_data___block_top_bu_ppc);
+          $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
+          $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
+          if ($vonage_is_2 > 1) {
+            $vonage_is_2 = 1;
+            variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+          }
+
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            if($count_cur++ >1000) {
+              break;
+            };
+          }while (
+
+                    // very old - RingCentral_key should be always 1 (2nd position)
+                    //(isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
+                    //||
+
+
+                    // old - RingCentral_key should be always 1,2,3 (2,3,4 positions)
+                    (
+                      isset($fixed_positions['RingCentral_key']) 
+                      &&
+                      //!($random_index[1] == $fixed_positions['RingCentral_key'] || $random_index[2] == $fixed_positions['RingCentral_key'] || $random_index[3] == $fixed_positions['RingCentral_key'])
+                      // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                      !( $random_index[2] != $fixed_positions['Vonage_key'] || ($random_index[1] != $fixed_positions['RingCentral_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+                    )
+                    ||
+                    // old - Vonage_key should be always 0 OR 2 (1st or 3nd position)
+                    (
+                      isset($fixed_positions['Vonage_key']) 
+                      && 
+                      //!($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key'])
+                      // Vonage should mostly only rotate in Position 1 and 2. 
+                      // But should show up in Position 3 about 10% of the time. 
+                      // When Vonage ends up in Position 3, Mitel should always be in Position 1, 
+                      // and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                      !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[1] == $fixed_positions['Vonage_key'] || ($random_index[2] == $fixed_positions['Vonage_key'] && $vonage_is_2 == 0) )
+                    )
+                    ||
+                    // ... But Vonage should show up in Position 3 about 10% of the time. 
+                    // So Vonage should appear not less often than 1 time per 10 iterations
+                    // and on the 10th iteration there is should be already shown at least 1 time
+                    (
+                      !( ($iteration_count < 9 && $vonage_is_2 <= 1) || ($iteration_count == 9 && $vonage_is_2 > 0 && $random_index[2] != $fixed_positions['Vonage_key']) )
+                    )
+                    ||
+                    // old - Nextiva never rotates into Position 1 or 3 (key 0 or 2) and stays in rotation only in P4 & 5 (key 3 or 4)
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                      //!($random_index[3] == $fixed_positions['Nextiva_key'] || $random_index[4] == $fixed_positions['Nextiva_key'])
+                      // Nextiva should only rotate in position 4, 5, and 6
+                      !($random_index[3] == $fixed_positions['Nextiva_key'] || $random_index[4] == $fixed_positions['Nextiva_key'] || $random_index[5] == $fixed_positions['Nextiva_key'])
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Mitel_key']) 
+                      && 
+                      // Mitel should only rotate between position 1 and 2. 
+                      // ... When Vonage ends up in Position 3, Mitel should always be in Position 1, 
+                      !($random_index[0] == $fixed_positions['Mitel_key'] || ($random_index[1] == $fixed_positions['Mitel_key'] && $random_index[2] != $fixed_positions['Vonage_key']) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Corvisa_key']) 
+                      && 
+                      // Corvisa should not rotate at all. Should stay in Position 7 at all times. 
+                      !($random_index[6] == $fixed_positions['Corvisa_key'])
+                    )
+                    ||
+
+                    //(
+                     // isset($fixed_positions['Jive_key']) 
+                     // && 
+                     // // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                     // !($random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+                   // )
+                    //||
+
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+                      !($random_index[1] != $fixed_positions['8x8_key'] || $random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) || ($random_index[1] == $fixed_positions['8x8_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+                    )
+                  );
+
+
+          // Count times when Vonage is in 3rd position
+
+          $iteration_count+=1;
+          if ($iteration_count >9) {
+            $iteration_count = 0;
+            $vonage_is_2 = 0;
+          }
+          // Vonage should appear not more often than 1 time per 10 iterations
+          if ($random_index[2] == $fixed_positions['Vonage_key']) {
+            $vonage_is_2 +=1;
+          }
+          variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+
+          
+          break; // End of case 'v2':
+        
+        
+          
+          
+          
+        
+        case 'v3-1':
+          //                Position 1 - Mitel (no rotation)
+          //                Position 2 - Vonage (no rotation)
+          //                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+          //                Position 5 - 8x8 (no rotation)
+          //                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                
+                
+          //$iteration_count = $vonage_is_2 = 0;
+          $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 11) {
+
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+
+                        'RingCentral_is_3' => 0,
+                        'RingCentral_is_4' => 0,
+                        'Jive_is_3' => 0,
+                        'Jive_is_4' => 0,
+
+                        'Nextiva_is_6' => 0,
+                        'Nextiva_is_7' => 0,
+                        'Corvisa_is_6' => 0,
+                        'Corvisa_is_7' => 0,
+                      );
+          }
+
+//                $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
+//                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
+//                if ($vonage_is_2 > 1) {
+//                  $vonage_is_2 = 1;
+//                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+//                }
+
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+//                  if($count_cur++ >1000) {
+//                    break;
+//                  };
+          }while (
+                    (
+                      isset($fixed_positions['RingCentral_key']) 
+                      &&
+                      // Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+                      !( ($random_index[2] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] <= 5) || ($random_index[3] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral_is_4'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Vonage_key']) 
+                      && 
+                      // Position 2 - Vonage (no rotation)
+                      !($random_index[1] == $fixed_positions['Vonage_key'])
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                      // Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                      //!($random_index[5] == $fixed_positions['Nextiva_key'] || $random_index[6] == $fixed_positions['Nextiva_key'])
+                       !( ($random_index[5] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva_is_6'] <= 5) || ($random_index[6] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva_is_7'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Mitel_key']) 
+                      && 
+                      // Position 1 - Mitel (no rotation)
+                      !($random_index[0] == $fixed_positions['Mitel_key'])
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Corvisa_key']) 
+                      && 
+                      // Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                      //!($random_index[5] == $fixed_positions['Corvisa_key'] || $random_index[6] == $fixed_positions['Corvisa_key'])
+                      !( ($random_index[5] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa_is_6'] <= 5) || ($random_index[6] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa_is_7'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     // Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+                     !( ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] <= 5) || ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive_is_4'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      // Position 5 - 8x8 (no rotation)
+                      !($random_index[4] == $fixed_positions['8x8_key'])
+                    )
+                  );
+
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+
+          if ($random_index[2] == $fixed_positions['RingCentral_key']) {
+            $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] +=1;
+          }
+          elseif ($random_index[2] == $fixed_positions['Jive_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] +=1;
+          }
+          if ($random_index[3] == $fixed_positions['RingCentral_key']) {
+            $gv_rotate_data___block_top_bu_ppc['RingCentral_is_4'] +=1;
+          }
+          elseif ($random_index[3] == $fixed_positions['Jive_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Jive_is_4'] +=1;
+          }  
+
+          if ($random_index[5] == $fixed_positions['Nextiva_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Nextiva_is_6'] +=1;
+          }
+          elseif ($random_index[5] == $fixed_positions['Corvisa_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Corvisa_is_6'] +=1;
+          }
+          if ($random_index[6] == $fixed_positions['Nextiva_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Nextiva_is_7'] +=1;
+          }
+          elseif ($random_index[6] == $fixed_positions['Corvisa_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Corvisa_is_7'] +=1;
+          }  
+
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          //dpm('Random counter = ' . $count_cur);
+
+          variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v3-1':
+        
+          
+          
+          
+          
+          
+          
+        case 'v3-2':
+          
+          // Semms it's same as v3-1, but called only for root
+          
+          //                Position 1 - Mitel (no rotation)
+          //                Position 2 - Vonage (no rotation)
+          //                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+          //                Position 5 - 8x8 (no rotation)
+          //                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                
+                
+          //$iteration_count = $vonage_is_2 = 0;
+          $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 11) {
+
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+
+                        'RingCentral_is_3' => 0,
+                        'RingCentral_is_4' => 0,
+                        'Jive_is_3' => 0,
+                        'Jive_is_4' => 0,
+
+                        'Nextiva_is_6' => 0,
+                        'Nextiva_is_7' => 0,
+                        'Corvisa_is_6' => 0,
+                        'Corvisa_is_7' => 0,
+                      );
+          }
+
+  //                $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
+  //                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
+  //                if ($vonage_is_2 > 1) {
+  //                  $vonage_is_2 = 1;
+  //                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+  //                }
+
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+  //                  if($count_cur++ >1000) {
+  //                    break;
+  //                  };
+          }while (
+                    (
+                      isset($fixed_positions['RingCentral_key']) 
+                      &&
+                      // Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+                      !( ($random_index[2] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] <= 5) || ($random_index[3] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral_is_4'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Vonage_key']) 
+                      && 
+                      // Position 2 - Vonage (no rotation)
+                      !($random_index[1] == $fixed_positions['Vonage_key'])
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                      // Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                      //!($random_index[5] == $fixed_positions['Nextiva_key'] || $random_index[6] == $fixed_positions['Nextiva_key'])
+                       !( ($random_index[5] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva_is_6'] <= 5) || ($random_index[6] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva_is_7'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Mitel_key']) 
+                      && 
+                      // Position 1 - Mitel (no rotation)
+                      !($random_index[0] == $fixed_positions['Mitel_key'])
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Corvisa_key']) 
+                      && 
+                      // Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                      //!($random_index[5] == $fixed_positions['Corvisa_key'] || $random_index[6] == $fixed_positions['Corvisa_key'])
+                      !( ($random_index[5] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa_is_6'] <= 5) || ($random_index[6] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa_is_7'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     // Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+                     !( ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] <= 5) || ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive_is_4'] <= 5) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      // Position 5 - 8x8 (no rotation)
+                      !($random_index[4] == $fixed_positions['8x8_key'])
+                    )
+                  );
+
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+
+          if ($random_index[2] == $fixed_positions['RingCentral_key']) {
+            $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] +=1;
+          }
+          elseif ($random_index[2] == $fixed_positions['Jive_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] +=1;
+          }
+          if ($random_index[3] == $fixed_positions['RingCentral_key']) {
+            $gv_rotate_data___block_top_bu_ppc['RingCentral_is_4'] +=1;
+          }
+          elseif ($random_index[3] == $fixed_positions['Jive_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Jive_is_4'] +=1;
+          }  
+
+          if ($random_index[5] == $fixed_positions['Nextiva_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Nextiva_is_6'] +=1;
+          }
+          elseif ($random_index[5] == $fixed_positions['Corvisa_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Corvisa_is_6'] +=1;
+          }
+          if ($random_index[6] == $fixed_positions['Nextiva_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Nextiva_is_7'] +=1;
+          }
+          elseif ($random_index[6] == $fixed_positions['Corvisa_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Corvisa_is_7'] +=1;
+          }  
+
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          //dpm('Random counter = ' . $count_cur);
+
+          variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v3-2':
+          
+         
+          
+          
+          
+          
+          
+        case 'v4':
+          
+          // Old v3-2
+          
+          //                Position 1 - Mitel (no rotation)
+          //                Position 2 - Vonage (no rotation)
+          //                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+          //                Position 5 - 8x8 (no rotation)
+          //                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+         
+          // New 
+          //Position 1 - RingCentral
+          //Position 2 - Mitel
+          //Position 3 - Vonage
+          //Position 4 - 8x8
+          //Position 5, 6 ,7 - should evenly rotate between Jive, Nextiva, and Corvisa. 
+                
+          //$iteration_count = $vonage_is_2 = 0;
+          if ($user->uid == 1) {
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root'; 
+          }
+          elseif ($user->uid) {
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn';
+          }
+          else {
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut';
+          }
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 9) {
+              /*
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'Jive_is_5' => 0,
+                        'Jive_is_6' => 0,
+                        'Jive_is_7' => 0,
+                        'Nextiva_is_5' => 0,
+                        'Nextiva_is_6' => 0,
+                        'Nextiva_is_7' => 0,
+                        'Corvisa_is_5' => 0,
+                        'Corvisa_is_6' => 0,
+                        'Corvisa_is_7' => 0,
+                      );
+              */
+              
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'Jive' => array('5' => 0, '6' => 0, '7' => 0),
+                        'Nextiva' => array('5' => 0, '6' => 0, '7' => 0),
+                        'Corvisa' => array('5' => 0, '6' => 0, '7' => 0),
+                      );
+          }
+
+          $random_index = array($fixed_positions['Nextiva_key'], $fixed_positions['Corvisa_key'], $fixed_positions['Jive_key']);
+          
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+                    if($count_cur++ >10000) {
+                      break;
+                    };
+          }while (
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                       !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][5] < 3) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][6] < 3) || ($random_index[2] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][7] < 3) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Corvisa_key']) 
+                      && 
+                      !( ($random_index[0] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][5] < 3) || ($random_index[1] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][6] < 3) || ($random_index[2] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][7] < 3) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[0] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][5] < 3) || ($random_index[1] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 3) || ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 3) ) 
+                    )
+
+                  );
+
+          $result_index = array(
+              0 => $fixed_positions['RingCentral_key'],
+              1 => $fixed_positions['Mitel_key'],
+              2 => $fixed_positions['Vonage_key'],
+              3 => $fixed_positions['8x8_key'],
+              
+              4 => $random_index[0],
+              5 => $random_index[1],
+              6 => $random_index[2],
+          );
+          
+          
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+
+          foreach ($random_index as $random_position => $fixed_index) {
+            switch ($fixed_index) {
+              case $fixed_positions['Nextiva_key']:
+                $gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 5] += 1;
+                break;
+              case $fixed_positions['Jive_key']:
+                $gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 5] += 1;
+                break;
+              case $fixed_positions['Corvisa_key']:
+                $gv_rotate_data___block_top_bu_ppc['Corvisa'][$random_position + 5] += 1;
+                break;
+            }
+          }
+          
+          $random_index = $result_index;
+          
+          /*
+          if ($random_index[2] == $fixed_positions['RingCentral_key']) {
+            $gv_rotate_data___block_top_bu_ppc['RingCentral_is_3'] +=1;
+          }
+          elseif ($random_index[2] == $fixed_positions['Jive_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Jive_is_3'] +=1;
+          }
+          if ($random_index[3] == $fixed_positions['RingCentral_key']) {
+            $gv_rotate_data___block_top_bu_ppc['RingCentral_is_4'] +=1;
+          }
+          elseif ($random_index[3] == $fixed_positions['Jive_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Jive_is_4'] +=1;
+          }  
+
+          if ($random_index[5] == $fixed_positions['Nextiva_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Nextiva_is_6'] +=1;
+          }
+          elseif ($random_index[5] == $fixed_positions['Corvisa_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Corvisa_is_6'] +=1;
+          }
+          if ($random_index[6] == $fixed_positions['Nextiva_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Nextiva_is_7'] +=1;
+          }
+          elseif ($random_index[6] == $fixed_positions['Corvisa_key']) {
+            $gv_rotate_data___block_top_bu_ppc['Corvisa_is_7'] +=1;
+          }  
+          */
+          
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          //dpm('Random counter = ' . $count_cur);
+
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v4':
+        
+
+      } // End of switch ($version) {
+      
+      
+      
+      
+
+      //dpm($random_index);
+
+      foreach ($random_index as $key => $value) {
+        $view->result[$key] = $random_array[$value];
+      }
+
+      //dpm($view->result);
+      // Set fixed rating score for each position
+      // And correspondingly recreate fields with ratings
+      $fixed_ratings = array(4.9, 4.7, 4.6, 4.5, 4.4, 4.2, 3.9, 3.9, 3.7);
+
+      //if ($user->uid == 1) 
+      {
+        foreach ($view->result as $position => $field) {
+            // Copy of the code at views for reviews in ppc providers: $value = gv_misc_getProviderQuickData('rating', array('data' => $data, 'target' => 'iframe')); // 'target' => 'iframe' is for _blank target for a link
+
+
+            $rating_count = $fixed_ratings[$position];
+            $stars = theme('gv_misc_fivestar_static', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+
+            $view->result[$position]->views_php_10 = '
+              <div class="fivestars_n_count">
+                  <div class="count">' . $rating_count . '<span> / 5</span></div>' .
+                  $stars . 
+              '</div>
+              <div class="details"><a target="_blank"  rel="nofollow" href="' . url('node/' . $field->nid) . '"><div>Read Reviews</div></a></div>
+              ';
+
+        }
+      }
+
+      //if (!$user->uid) 
+      {
+        $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+        drupal_add_js($path_to_custom_js . 'gv_rotate_ppc_cached_page_table.js');
+      }
+      //dpm($view->result);
+
+
+      ////$chart_themed = $view->preview($view_n_display['display']);
+
+      
+      break; // End of case 'block_top_bu_ppc': 
+    
+  } // End of switch ($display) {
+  
+} // End of function gv_blocks_chartFromView_altered_rotatedProviders__byType($display, $version, $step) {
+
+
+/**
+ * chartFromView_altered_rotatedProviders.
+ */
 function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   
  $chart_themed = NULL;
@@ -11014,10 +11985,15 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
  global $user;
  
  // For now only sip page have settings for turning on/off rotation
+ $final_result = gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display/*$display*/, 'v1'/*$version*/, 1/*$step*/, NULL);
+ if ($final_result) {
+   return $final_result;
+ }
+ 
+ /*
  if ($view_n_display['display'] == 'bl_p_sip_rotated') {
     
                 $gv_settings = variable_get('gv_settings', NULL);
-
 
                 if (empty($gv_settings['Alter_Charts']['AB_Testing_on_SIP'])) {
                   $gv_settings['Alter_Charts']['AB_Testing_on_SIP'] = array(
@@ -11030,7 +12006,6 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 }
 
 
-                global $user;
                 if ( ($user->uid && !$gv_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_In']['value']) || (!$user->uid && !$gv_settings['Alter_Charts']['AB_Testing_on_SIP']['Turn_On_for_logged_Out']['value'])) {
                   // Show turned Off, simple chart without rotation
 
@@ -11059,10 +12034,11 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 }
 
                 dpm('Not cached: ' . $user->uid);
-
+                
+                
                 
   } // End of if ($view_n_display['display'] == 'bl_p_sip_rotated') {
-                
+  */              
   
   
   // Init views
@@ -11076,9 +12052,28 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
   $fixed_positions = array();
 
 
+  // Now here's different rotation logics for different cases (displays) and versions.
   
-  // Now here's different rotation logics for different cases (displays)
-
+  // Select version.
+  switch ($view_n_display['display']) {
+    case 'bl_p_sip_rotated';
+        $version = 'v1';
+        break;
+      
+    case 'block_top_bu_ppc':
+        //$version = 'v2';
+        //$version = 'v3-1';
+        $version = 'v4'; //$user->uid == 1 ? 'v4' : 'v3-1'; //$user->uid == 1 ? 'v3-2' : 'v3-1'; //'v3-1';
+        break;
+      
+  }
+  
+  $final_result = gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_display/*$display*/, $version/*$version*/, 2/*$step*/, $view);
+  if ($final_result) {
+    return $final_result;
+  }
+  
+  /*
   if ($view_n_display['display'] == 'bl_p_sip_rotated') {                
 
                 // ---------------------------
@@ -11136,117 +12131,117 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                   drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
                 }
 
-                /*
+                
 
 
-                if (!$current_top_positions_counter = variable_get('gv_current_top_positions_counter')) {
-                  $current_top_positions_counter = array(
-                      'Nextiva_top' => 0,
-                      '8x8_top' => 0,
-                  );
-                }
+//                if (!$current_top_positions_counter = variable_get('gv_current_top_positions_counter')) {
+//                  $current_top_positions_counter = array(
+//                      'Nextiva_top' => 0,
+//                      '8x8_top' => 0,
+//                  );
+//                }
+//
+//                if ($current_top_positions_counter['Nextiva_top'] + 1 == 2) { // 50/50 for i/b
+//                //if ($current_top_positions_counter['Nextiva_top'] + 1 > 3) { // 75/25 for i/b
+//                  // 25%
+//                  $current_top_positions_counter = array(
+//                      'Nextiva_top' => 0,
+//                      '8x8_top' => 1,
+//                  );
+//                }
+//                else {
+//                  // 75%
+//                  $current_top_positions_counter = array(
+//                      'Nextiva_top' => $current_top_positions_counter['Nextiva_top'] + 1,
+//                      '8x8_top' => 0,
+//                  );
+//                }
+//
+//                dpm($current_top_positions_counter);
+//
+//                variable_set('gv_current_top_positions_counter', $current_top_positions_counter);
 
-                if ($current_top_positions_counter['Nextiva_top'] + 1 == 2) { // 50/50 for i/b
-                //if ($current_top_positions_counter['Nextiva_top'] + 1 > 3) { // 75/25 for i/b
-                  // 25%
-                  $current_top_positions_counter = array(
-                      'Nextiva_top' => 0,
-                      '8x8_top' => 1,
-                  );
-                }
-                else {
-                  // 75%
-                  $current_top_positions_counter = array(
-                      'Nextiva_top' => $current_top_positions_counter['Nextiva_top'] + 1,
-                      '8x8_top' => 0,
-                  );
-                }
-
-                dpm($current_top_positions_counter);
-
-                variable_set('gv_current_top_positions_counter', $current_top_positions_counter);
-
-                */
-                //return 'xxx';
-
-
-
-                /*
-                //if ($user->uid) 
-                  {
-
-                  if ($current_top_positions_counter['Nextiva_top']) {
-                    $view->result[0] = $random_array[$fixed_positions['Nextiva_key']];
-                    $view->result[1] = $random_array[$fixed_positions['8x8_key']];
-                  }
-                  else {
-
-                    //Change urls to alternative.
-                    //dpm($random_array[$fixed_positions['Nextiva_key']]);
-                    //dpm($random_array[$fixed_positions['Nextiva_key']]->views_php_4);
-
-                    //dpm(str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4));
-                    $Nextiva_p_data = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
-                    //dpm($Nextiva_p_data);
-                    // Change url in cnaged position to alternative one
-                    if (!empty($Nextiva_p_data['s']['sh']['s-url2'])) {
-                      $random_array[$fixed_positions['Nextiva_key']]->views_php_4 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4);
-                      $random_array[$fixed_positions['Nextiva_key']]->views_php_11 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_11);
-                    }
-                    // Change position list number to 2
-                    $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 2;
-                    $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 2;
-
-                    //$Nextiva_p_data_quick = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
-                    //dpm($Nextiva_p_data_quick);
-
-                    //dpm($random_array[$fixed_positions['8x8_key']]);
-                    //dpm($random_array[$fixed_positions['8x8_key']]->views_php_4);
-                    $_8x8_p_data = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
-                    //dpm($_8x8_p_data);
-                    // Change url in cnaged position to alternative one
-                    if (!empty($_8x8_p_data['s']['sh']['s-url2'])) {
-                      $random_array[$fixed_positions['8x8_key']]->views_php_4 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_4);
-                      $random_array[$fixed_positions['8x8_key']]->views_php_11 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_11);
-                    }
-                    // Change position list number to 1
-                    $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 1;
-                    $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 1;
-
-                    //$_8x8_p_data_quick = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
-                    //dpm($_8x8_p_data_quick);
-
-                    //dpm($random_array);
+                
+//                //return 'xxx';
 
 
-                    // Swap ratings to remain the better rating to the new top provider.
-                    if ($gv_settings['Alter_Charts']['AB_Testing_on_Home']['Remain_Top_Rating_For_First_Position']['value']) {
-                      $old_bluehost_rating = $random_array[$fixed_positions['8x8_key']]->views_php_10;
-                      $random_array[$fixed_positions['8x8_key']]->views_php_10 = $random_array[$fixed_positions['Nextiva_key']]->views_php_10;
-                      $random_array[$fixed_positions['Nextiva_key']]->views_php_10 = $old_bluehost_rating;
-                    }
 
-                    // And finally swap corrected rows.
-                    $view->result[1] = $random_array[$fixed_positions['Nextiva_key']];
-                    $view->result[0] = $random_array[$fixed_positions['8x8_key']];
-                  }
-
-                  // Try to cope with cached pages table (just starting thoughts).
-                    $current_top_positions_counter['current_uid'] = $user->uid;
-              //    drupal_add_js(array('gv_blocks' => array(
-              //      'gv_current_top_positions_counter' => $current_top_positions_counter,
-              //    )), 'setting');
-
-                  // Update (reRequest) the cached page only for logged out users.
-                  // For admins cached copy is not created so no need to repeat recreate the page (and extra increment the counter), that would cause losing of steps.
-                  if (!$user->uid) {
-                    $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-                    drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
-                  }
-
-
-                }
-                */
+//                
+//                //if ($user->uid) 
+//                  {
+//
+//                  if ($current_top_positions_counter['Nextiva_top']) {
+//                    $view->result[0] = $random_array[$fixed_positions['Nextiva_key']];
+//                    $view->result[1] = $random_array[$fixed_positions['8x8_key']];
+//                  }
+//                  else {
+//
+//                    //Change urls to alternative.
+//                    //dpm($random_array[$fixed_positions['Nextiva_key']]);
+//                    //dpm($random_array[$fixed_positions['Nextiva_key']]->views_php_4);
+//
+//                    //dpm(str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4));
+//                    $Nextiva_p_data = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
+//                    //dpm($Nextiva_p_data);
+//                    // Change url in cnaged position to alternative one
+//                    if (!empty($Nextiva_p_data['s']['sh']['s-url2'])) {
+//                      $random_array[$fixed_positions['Nextiva_key']]->views_php_4 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_4);
+//                      $random_array[$fixed_positions['Nextiva_key']]->views_php_11 = str_replace('/click/ipage/sh', '/click/ipage/sh?alt=2', $random_array[$fixed_positions['Nextiva_key']]->views_php_11);
+//                    }
+//                    // Change position list number to 2
+//                    $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 2;
+//                    $random_array[$fixed_positions['Nextiva_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 2;
+//
+//                    //$Nextiva_p_data_quick = unserialize($random_array[$fixed_positions['Nextiva_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
+//                    //dpm($Nextiva_p_data_quick);
+//
+//                    //dpm($random_array[$fixed_positions['8x8_key']]);
+//                    //dpm($random_array[$fixed_positions['8x8_key']]->views_php_4);
+//                    $_8x8_p_data = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data['und'][0]['value']);
+//                    //dpm($_8x8_p_data);
+//                    // Change url in cnaged position to alternative one
+//                    if (!empty($_8x8_p_data['s']['sh']['s-url2'])) {
+//                      $random_array[$fixed_positions['8x8_key']]->views_php_4 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_4);
+//                      $random_array[$fixed_positions['8x8_key']]->views_php_11 = str_replace('/click/bluehost/sh', '/click/bluehost/sh?alt=2', $random_array[$fixed_positions['8x8_key']]->views_php_11);
+//                    }
+//                    // Change position list number to 1
+//                    $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['rendered']['#markup'] = 1;
+//                    $random_array[$fixed_positions['8x8_key']]->field_field_p_listposition_sh[0]['raw']['value'] = 1;
+//
+//                    //$_8x8_p_data_quick = unserialize($random_array[$fixed_positions['8x8_key']]->_field_data['nid']['entity']->field_p_data_quick['und'][0]['value']);
+//                    //dpm($_8x8_p_data_quick);
+//
+//                    //dpm($random_array);
+//
+//
+//                    // Swap ratings to remain the better rating to the new top provider.
+//                    if ($gv_settings['Alter_Charts']['AB_Testing_on_Home']['Remain_Top_Rating_For_First_Position']['value']) {
+//                      $old_bluehost_rating = $random_array[$fixed_positions['8x8_key']]->views_php_10;
+//                      $random_array[$fixed_positions['8x8_key']]->views_php_10 = $random_array[$fixed_positions['Nextiva_key']]->views_php_10;
+//                      $random_array[$fixed_positions['Nextiva_key']]->views_php_10 = $old_bluehost_rating;
+//                    }
+//
+//                    // And finally swap corrected rows.
+//                    $view->result[1] = $random_array[$fixed_positions['Nextiva_key']];
+//                    $view->result[0] = $random_array[$fixed_positions['8x8_key']];
+//                  }
+//
+//                  // Try to cope with cached pages table (just starting thoughts).
+//                    $current_top_positions_counter['current_uid'] = $user->uid;
+//              //    drupal_add_js(array('gv_blocks' => array(
+//              //      'gv_current_top_positions_counter' => $current_top_positions_counter,
+//              //    )), 'setting');
+//
+//                  // Update (reRequest) the cached page only for logged out users.
+//                  // For admins cached copy is not created so no need to repeat recreate the page (and extra increment the counter), that would cause losing of steps.
+//                  if (!$user->uid) {
+//                    $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+//                    drupal_add_js($path_to_custom_js . 'gv_rotate_cached_page_table.js');
+//                  }
+//
+//
+//                }
+                
 
 
                 //-----------------------------------------
@@ -11256,68 +12251,75 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 // Like on GV initial case...
                 // iPage should be always second
                 // Bluehost should be always in 1 or 3 position.
-                /*
-                $random_array = array_slice($view->result, 0, 4);
-
-
-                foreach ($random_array as $key => $result) {
-                  if ($result->nid == 86) {
-                    // iPage page nid is 12
-                    // Key should be always 1 (2nd position)
-                    $fixed_positions['iPage_key'] = $key;
-                  }
-                  elseif ($result->nid == 69) {
-                    // Bluehost page nid is 36
-                    // Key should be always 0 OR 2 (1st or 3nd position)
-                    $fixed_positions['Bluehost_key'] = $key;
-                  }
-                }
-
-                //dpm($random_array);
-                $random_index = array(0, 1, 2, 3);
-                //shuffle($random_index);
-
-                do {
-                  shuffle($random_index);
-                }while (
-                          // iPage_key should be always 1 (2nd position)
-                          (isset($fixed_positions['iPage_key']) && $random_index[1] != $fixed_positions['iPage_key'])
-                          ||
-                          // Bluehost_key should be always 0 OR 2 (1st or 3nd position)
-                          (
-                            isset($fixed_positions['Bluehost_key']) 
-                            && 
-                            !($random_index[0] == $fixed_positions['Bluehost_key'] || $random_index[2] == $fixed_positions['Bluehost_key'])
-                          )
-                        );
-
-                //dpm($random_index);
-
-                foreach ($random_index as $key => $value) {
-                  $view->result[$key] = $random_array[$value];
-                }
-                //dpm($view->result);
-                */ 
+                
+//                $random_array = array_slice($view->result, 0, 4);
+//
+//
+//                foreach ($random_array as $key => $result) {
+//                  if ($result->nid == 86) {
+//                    // iPage page nid is 12
+//                    // Key should be always 1 (2nd position)
+//                    $fixed_positions['iPage_key'] = $key;
+//                  }
+//                  elseif ($result->nid == 69) {
+//                    // Bluehost page nid is 36
+//                    // Key should be always 0 OR 2 (1st or 3nd position)
+//                    $fixed_positions['Bluehost_key'] = $key;
+//                  }
+//                }
+//
+//                //dpm($random_array);
+//                $random_index = array(0, 1, 2, 3);
+//                //shuffle($random_index);
+//
+//                do {
+//                  shuffle($random_index);
+//                }while (
+//                          // iPage_key should be always 1 (2nd position)
+//                          (isset($fixed_positions['iPage_key']) && $random_index[1] != $fixed_positions['iPage_key'])
+//                          ||
+//                          // Bluehost_key should be always 0 OR 2 (1st or 3nd position)
+//                          (
+//                            isset($fixed_positions['Bluehost_key']) 
+//                            && 
+//                            !($random_index[0] == $fixed_positions['Bluehost_key'] || $random_index[2] == $fixed_positions['Bluehost_key'])
+//                          )
+//                        );
+//
+//                //dpm($random_index);
+//
+//                foreach ($random_index as $key => $value) {
+//                  $view->result[$key] = $random_array[$value];
+//                }
+//                //dpm($view->result);
+//                
+                
+                
                 //----------------------------------------------------------------------
 
                 
                 ////$chart_themed = $view->preview($view_n_display['display']);
                 //dpm($view->result);
 
-                /*
-                //watchdog('HR Home Rotation iteration', print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
-                  ////watchdog('i-' . $current_top_positions_counter['iPage_top'] . ',b-' . $current_top_positions_counter['Bluehost_top'] . ',u-' . $current_top_positions_counter['current_uid'], print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
-
-                  // $current_top_positions_counter = array(
-              //        'iPage_top' => $current_top_positions_counter['iPage_top'] + 1,
-              //        'Bluehost_top' => 0,
-              //    );
-                */
+//                
+//                //watchdog('HR Home Rotation iteration', print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+//                  ////watchdog('i-' . $current_top_positions_counter['iPage_top'] . ',b-' . $current_top_positions_counter['Bluehost_top'] . ',u-' . $current_top_positions_counter['current_uid'], print_r($current_top_positions_counter, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
+//
+//                  // $current_top_positions_counter = array(
+//              //        'iPage_top' => $current_top_positions_counter['iPage_top'] + 1,
+//              //        'Bluehost_top' => 0,
+//              //    );
+//                
+                
                 //$info = '<div class="info" style="display: none;">iPage_top = ' . $current_top_positions_counter['iPage_top'] . ', Bluehost_top = ' . $current_top_positions_counter['Bluehost_top'] . '</div>';
   
   } // End of if ($view_n_display['display'] == 'bl_p_sip_rotated') {
   
-  elseif ($view_n_display['display'] == 'block_top_bu_ppc') {
+  else
+  */  
+  
+  /*
+  if ($view_n_display['display'] == 'block_top_bu_ppc') {
   
   
                 $random_array = array_slice($view->result, 0, 7);
@@ -11372,116 +12374,116 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 
                 
 // ---------------------------------------  Rotation v2                  
-                /*
-                //$iteration_count = $vonage_is_2 = 0;
-                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 'vonage_is_2' => 0));
-                dpm($gv_rotate_data___block_top_bu_ppc);
-                $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
-                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
-                if ($vonage_is_2 > 1) {
-                  $vonage_is_2 = 1;
-                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
-                }
                 
-                $count_cur = 0;
-                do {
-                  shuffle($random_index);
-                  if($count_cur++ >1000) {
-                    break;
-                  };
-                }while (
-                          
-                          // very old - RingCentral_key should be always 1 (2nd position)
-                          //(isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
-                          //||
-                          
-                          
-                          // old - RingCentral_key should be always 1,2,3 (2,3,4 positions)
-                          (
-                            isset($fixed_positions['RingCentral_key']) 
-                            &&
-                            //!($random_index[1] == $fixed_positions['RingCentral_key'] || $random_index[2] == $fixed_positions['RingCentral_key'] || $random_index[3] == $fixed_positions['RingCentral_key'])
-                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
-                            !( $random_index[2] != $fixed_positions['Vonage_key'] || ($random_index[1] != $fixed_positions['RingCentral_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
-                          )
-                          ||
-                          // old - Vonage_key should be always 0 OR 2 (1st or 3nd position)
-                          (
-                            isset($fixed_positions['Vonage_key']) 
-                            && 
-                            //!($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key'])
-                            // Vonage should mostly only rotate in Position 1 and 2. 
-                            // But should show up in Position 3 about 10% of the time. 
-                            // When Vonage ends up in Position 3, Mitel should always be in Position 1, 
-                            // and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
-                            !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[1] == $fixed_positions['Vonage_key'] || ($random_index[2] == $fixed_positions['Vonage_key'] && $vonage_is_2 == 0) )
-                          )
-                          ||
-                          // ... But Vonage should show up in Position 3 about 10% of the time. 
-                          // So Vonage should appear not less often than 1 time per 10 iterations
-                          // and on the 10th iteration there is should be already shown at least 1 time
-                          (
-                            !( ($iteration_count < 9 && $vonage_is_2 <= 1) || ($iteration_count == 9 && $vonage_is_2 > 0 && $random_index[2] != $fixed_positions['Vonage_key']) )
-                          )
-                          ||
-                          // old - Nextiva never rotates into Position 1 or 3 (key 0 or 2) and stays in rotation only in P4 & 5 (key 3 or 4)
-                          (
-                            isset($fixed_positions['Nextiva_key']) 
-                            && 
-                            //!($random_index[3] == $fixed_positions['Nextiva_key'] || $random_index[4] == $fixed_positions['Nextiva_key'])
-                            // Nextiva should only rotate in position 4, 5, and 6
-                            !($random_index[3] == $fixed_positions['Nextiva_key'] || $random_index[4] == $fixed_positions['Nextiva_key'] || $random_index[5] == $fixed_positions['Nextiva_key'])
-                          )
-                          ||
-                          (
-                            isset($fixed_positions['Mitel_key']) 
-                            && 
-                            // Mitel should only rotate between position 1 and 2. 
-                            // ... When Vonage ends up in Position 3, Mitel should always be in Position 1, 
-                            !($random_index[0] == $fixed_positions['Mitel_key'] || ($random_index[1] == $fixed_positions['Mitel_key'] && $random_index[2] != $fixed_positions['Vonage_key']) )
-                          )
-                          ||
-                          (
-                            isset($fixed_positions['Corvisa_key']) 
-                            && 
-                            // Corvisa should not rotate at all. Should stay in Position 7 at all times. 
-                            !($random_index[6] == $fixed_positions['Corvisa_key'])
-                          )
-                          ||
-                          
-                          //(
-                           // isset($fixed_positions['Jive_key']) 
-                           // && 
-                           // // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
-                           // !($random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
-                         // )
-                          //||
-                          
-                          (
-                            isset($fixed_positions['Jive_key']) 
-                            && 
-                            isset($fixed_positions['8x8_key']) 
-                            && 
-                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
-                            !($random_index[1] != $fixed_positions['8x8_key'] || $random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) || ($random_index[1] == $fixed_positions['8x8_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
-                          )
-                        );
-                
-                
-                // Count times when Vonage is in 3rd position
-                
-                $iteration_count+=1;
-                if ($iteration_count >9) {
-                  $iteration_count = 0;
-                  $vonage_is_2 = 0;
-                }
-                // Vonage should appear not more often than 1 time per 10 iterations
-                if ($random_index[2] == $fixed_positions['Vonage_key']) {
-                  $vonage_is_2 +=1;
-                }
-                variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
-                
-                */
+//                //$iteration_count = $vonage_is_2 = 0;
+//                $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 'vonage_is_2' => 0));
+//                dpm($gv_rotate_data___block_top_bu_ppc);
+//                $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
+//                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
+//                if ($vonage_is_2 > 1) {
+//                  $vonage_is_2 = 1;
+//                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+//                }
+//                
+//                $count_cur = 0;
+//                do {
+//                  shuffle($random_index);
+//                  if($count_cur++ >1000) {
+//                    break;
+//                  };
+//                }while (
+//                          
+//                          // very old - RingCentral_key should be always 1 (2nd position)
+//                          //(isset($fixed_positions['RingCentral_key']) && $random_index[1] != $fixed_positions['RingCentral_key'])
+//                          //||
+//                          
+//                          
+//                          // old - RingCentral_key should be always 1,2,3 (2,3,4 positions)
+//                          (
+//                            isset($fixed_positions['RingCentral_key']) 
+//                            &&
+//                            //!($random_index[1] == $fixed_positions['RingCentral_key'] || $random_index[2] == $fixed_positions['RingCentral_key'] || $random_index[3] == $fixed_positions['RingCentral_key'])
+//                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+//                            !( $random_index[2] != $fixed_positions['Vonage_key'] || ($random_index[1] != $fixed_positions['RingCentral_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+//                          )
+//                          ||
+//                          // old - Vonage_key should be always 0 OR 2 (1st or 3nd position)
+//                          (
+//                            isset($fixed_positions['Vonage_key']) 
+//                            && 
+//                            //!($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[2] == $fixed_positions['Vonage_key'])
+//                            // Vonage should mostly only rotate in Position 1 and 2. 
+//                            // But should show up in Position 3 about 10% of the time. 
+//                            // When Vonage ends up in Position 3, Mitel should always be in Position 1, 
+//                            // and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+//                            !($random_index[0] == $fixed_positions['Vonage_key'] || $random_index[1] == $fixed_positions['Vonage_key'] || ($random_index[2] == $fixed_positions['Vonage_key'] && $vonage_is_2 == 0) )
+//                          )
+//                          ||
+//                          // ... But Vonage should show up in Position 3 about 10% of the time. 
+//                          // So Vonage should appear not less often than 1 time per 10 iterations
+//                          // and on the 10th iteration there is should be already shown at least 1 time
+//                          (
+//                            !( ($iteration_count < 9 && $vonage_is_2 <= 1) || ($iteration_count == 9 && $vonage_is_2 > 0 && $random_index[2] != $fixed_positions['Vonage_key']) )
+//                          )
+//                          ||
+//                          // old - Nextiva never rotates into Position 1 or 3 (key 0 or 2) and stays in rotation only in P4 & 5 (key 3 or 4)
+//                          (
+//                            isset($fixed_positions['Nextiva_key']) 
+//                            && 
+//                            //!($random_index[3] == $fixed_positions['Nextiva_key'] || $random_index[4] == $fixed_positions['Nextiva_key'])
+//                            // Nextiva should only rotate in position 4, 5, and 6
+//                            !($random_index[3] == $fixed_positions['Nextiva_key'] || $random_index[4] == $fixed_positions['Nextiva_key'] || $random_index[5] == $fixed_positions['Nextiva_key'])
+//                          )
+//                          ||
+//                          (
+//                            isset($fixed_positions['Mitel_key']) 
+//                            && 
+//                            // Mitel should only rotate between position 1 and 2. 
+//                            // ... When Vonage ends up in Position 3, Mitel should always be in Position 1, 
+//                            !($random_index[0] == $fixed_positions['Mitel_key'] || ($random_index[1] == $fixed_positions['Mitel_key'] && $random_index[2] != $fixed_positions['Vonage_key']) )
+//                          )
+//                          ||
+//                          (
+//                            isset($fixed_positions['Corvisa_key']) 
+//                            && 
+//                            // Corvisa should not rotate at all. Should stay in Position 7 at all times. 
+//                            !($random_index[6] == $fixed_positions['Corvisa_key'])
+//                          )
+//                          ||
+//                          
+//                          //(
+//                           // isset($fixed_positions['Jive_key']) 
+//                           // && 
+//                           // // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+//                           // !($random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+//                         // )
+//                          //||
+//                          
+//                          (
+//                            isset($fixed_positions['Jive_key']) 
+//                            && 
+//                            isset($fixed_positions['8x8_key']) 
+//                            && 
+//                            // ... and only Jive and 8x8 should alternate into Position 2 during the time when Vonage is in Position 3.
+//                            !($random_index[1] != $fixed_positions['8x8_key'] || $random_index[1] != $fixed_positions['Jive_key'] || ($random_index[1] == $fixed_positions['Jive_key'] && $random_index[2] == $fixed_positions['Vonage_key']) || ($random_index[1] == $fixed_positions['8x8_key'] && $random_index[2] == $fixed_positions['Vonage_key']) )
+//                          )
+//                        );
+//                
+//                
+//                // Count times when Vonage is in 3rd position
+//                
+//                $iteration_count+=1;
+//                if ($iteration_count >9) {
+//                  $iteration_count = 0;
+//                  $vonage_is_2 = 0;
+//                }
+//                // Vonage should appear not more often than 1 time per 10 iterations
+//                if ($random_index[2] == $fixed_positions['Vonage_key']) {
+//                  $vonage_is_2 +=1;
+//                }
+//                variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+//                
+//                
 // ---------------------------------------  End of Rotation v2                  
                 
                 
@@ -11494,18 +12496,17 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
                 
                 
                 
-                
-global $user;                 
              
 
-if ($user->uid != 1) {
-// ---------------------------------------  Rotation v3-1             
-                
-//                Position 1 - Mitel (no rotation)
-//                Position 2 - Vonage (no rotation)
-//                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
-//                Position 5 - 8x8 (no rotation)
-//                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+          if ($user->uid != 1) {
+            
+                // ---------------------------------------  Rotation v3-1             
+
+                //                Position 1 - Mitel (no rotation)
+                //                Position 2 - Vonage (no rotation)
+                //                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+                //                Position 5 - 8x8 (no rotation)
+                //                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
                 
                 
                 //$iteration_count = $vonage_is_2 = 0;
@@ -11629,22 +12630,17 @@ if ($user->uid != 1) {
 
                 variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
                  
-// ---------------------------------------  End of Rotation v3-1               
+                // ---------------------------------------  End of Rotation v3-1               
+        }
+        else { // User->uid == 1
                 
-                
-}
-else { // User->uid == 1
-                
-                
-                
-                
-// ---------------------------------------  Rotation v3-2              
-                
-//                Position 1 - Mitel (no rotation)
-//                Position 2 - Vonage (no rotation)
-//                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
-//                Position 5 - 8x8 (no rotation)
-//                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
+                // ---------------------------------------  Rotation v3-2              
+
+                //                Position 1 - Mitel (no rotation)
+                //                Position 2 - Vonage (no rotation)
+                //                Positions 3 & 4 - 50/50 rotation of RingCentral and Jive
+                //                Position 5 - 8x8 (no rotation)
+                //                Position 6 & 7 - 50/50 rotation of Nextiva and Corvisa
                 
                 
                 //$iteration_count = $vonage_is_2 = 0;
@@ -11768,64 +12764,66 @@ else { // User->uid == 1
 
                 variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
                  
-// ---------------------------------------  End of Rotation v3-2               
+          // ---------------------------------------  End of Rotation v3-2               
+
+
+          }  // End of else { // User->uid == 1
+
+
+
+
+
                 
-                
-}  // End of else { // User->uid == 1
-                
+
+          //dpm($random_index);
+
+          foreach ($random_index as $key => $value) {
+            $view->result[$key] = $random_array[$value];
+          }
+
+          //dpm($view->result);
+          // Set fixed rating score for each position
+          // And correspondingly recreate fields with ratings
+          $fixed_ratings = array(4.9, 4.7, 4.6, 4.5, 4.4, 4.2, 3.9, 3.9, 3.7);
+
+          //if ($user->uid == 1) 
+          {
+            foreach ($view->result as $position => $field) {
+                // Copy of the code at views for reviews in ppc providers: $value = gv_misc_getProviderQuickData('rating', array('data' => $data, 'target' => 'iframe')); // 'target' => 'iframe' is for _blank target for a link
 
 
+                $rating_count = $fixed_ratings[$position];
+                $stars = theme('gv_misc_fivestar_static', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+
+                $view->result[$position]->views_php_10 = '
+                  <div class="fivestars_n_count">
+                      <div class="count">' . $rating_count . '<span> / 5</span></div>' .
+                      $stars . 
+                  '</div>
+                  <div class="details"><a target="_blank"  rel="nofollow" href="' . url('node/' . $field->nid) . '"><div>Read Reviews</div></a></div>
+                  ';
+
+            }
+          }
+
+          //if (!$user->uid) 
+          {
+            $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+            drupal_add_js($path_to_custom_js . 'gv_rotate_ppc_cached_page_table.js');
+          }
+          //dpm($view->result);
 
 
-                
-
-                //dpm($random_index);
-
-                foreach ($random_index as $key => $value) {
-                  $view->result[$key] = $random_array[$value];
-                }
-                
-                //dpm($view->result);
-                // Set fixed rating score for each position
-                // And correspondingly recreate fields with ratings
-                $fixed_ratings = array(4.9, 4.8, 4.6, 4.5, 4.4, 4.2, 3.9, 3.9, 3.7);
-                
-                //if ($user->uid == 1) 
-                {
-                  foreach ($view->result as $position => $field) {
-                      // Copy of the code at views for reviews in ppc providers: $value = gv_misc_getProviderQuickData('rating', array('data' => $data, 'target' => 'iframe')); // 'target' => 'iframe' is for _blank target for a link
-                    
-                    
-                      $rating_count = $fixed_ratings[$position];
-                      $stars = theme('gv_misc_fivestar_static', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
-        
-                      $view->result[$position]->views_php_10 = '
-                        <div class="rating tbody-item-rating">
-                            <div class="rating-text tbody-item-rating-text">' . $rating_count . '<span></span></div>' .
-                            $stars . 
-                        '</div>
-                        <a class="rating-link tbody-item-rating-link" target="_blank"  rel="nofollow" href="' . url('node/' . $field->nid) . '">Read Reviews</a>
-                        ';
-                    
-                  }
-                }
-                
-                //if (!$user->uid) 
-                {
-                  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
-                  drupal_add_js($path_to_custom_js . 'gv_rotate_ppc_cached_page_table.js');
-                }
-                //dpm($view->result);
-
-
-                ////$chart_themed = $view->preview($view_n_display['display']);
+          ////$chart_themed = $view->preview($view_n_display['display']);
                 
   } // End of elseif ($view_n_display['display'] == 'block_top_bu_ppc') {
+  */
   
   $chart_themed = $view->preview($view_n_display['display']);
   
   return $info . $chart_themed;
 }
+
 
 
 /*
