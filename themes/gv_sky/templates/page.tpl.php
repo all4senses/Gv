@@ -43,8 +43,8 @@ if ( current_path() == 'node/add/review' ) {
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/review.js'); ?>
       <div class="hero-header left">
         <div class="hero-title">
-          <h1 class="hero-title-heading"><?php print render($title); ?></h1>
-          <p class="hero-title-desc"><?php print field_get_items('node',$node, 'body')[0]['value']; ?></p>
+          <h1 class="hero-title-heading"><?php echo (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
+          <p class="hero-title-desc"><?php echo (isset($node->field_hero_subtitle['und'][0]['value']) ? $node->field_hero_subtitle['und'][0]['value'] : field_get_items('node',$node, 'body')[0]['value']); ?></p>
         </div>
       </div>
     <?php } ?>
