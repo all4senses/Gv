@@ -10613,7 +10613,14 @@ function gv_misc_getProviderQuickData($target, $data) {
       $stars = NULL;
       
       if (!empty($data['data']->votingapi_cache_node_percent_overall_average_value)) {
-                
+        
+        if ($data['data']->nid == 63) {
+          dpm($data['data']);
+          dpm($_SERVER);
+          dpm($_GET);
+        }
+        
+        
         $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
         
         $rating_count = number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 );
