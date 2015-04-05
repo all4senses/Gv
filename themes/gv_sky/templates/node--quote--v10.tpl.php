@@ -16,6 +16,10 @@
     }
     else {
       $initialQuotePage_node = $node;
+      
+      // Add exit intent
+      drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
+      drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
     }
     drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css');
   ?>
