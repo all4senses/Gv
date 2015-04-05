@@ -87,6 +87,12 @@ body
 	.wc & 
 		padding: 25px 0 60px
 
+// Fix problem where the tracking pixel is causing unwanted whitespace below footer on safari browsers
+script[src="//www.googleadservices.com/pagead/conversion.js"] ~ img
+	position: fixed
+	top: 1px
+
+
 
 #disqus_thread
 	max-width: 1170px
