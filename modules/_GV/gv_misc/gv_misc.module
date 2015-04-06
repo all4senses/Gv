@@ -374,6 +374,7 @@ function gv_misc_imageOptimizeOnServer($file) {
     case 'image/jpeg':
       if ($cmd = variable_get('imageapi_optimize_jpegtran', '')) { // /usr/bin/jpegtran, should be installed in system
         _imageapi_optimize_exec("$cmd -copy none -optimize -progressive ". escapeshellarg($dst), $dst);
+        drupal_set_message('Optimized jpeg ' . $dst, 'warning');
       }
       if ($cmd = variable_get('imageapi_optimize_jfifremove', '')) {
         _imageapi_optimize_exec("$cmd < ". escapeshellarg($dst), $dst);
