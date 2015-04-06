@@ -888,9 +888,9 @@ function gv_misc_disqusGetThreadDetails($nid = NULL, $thread = NULL, $threadIdTy
   // Change api_key to api_secret when using your secret key
 
 //                DIFFERENT TYPES OF THREAD LOOKUPS:
-//                1. By DISQUS thread ID (default): thread=%s — thread IDs are universally unique in DISQUS, so you can remove 'forum' param if you like
-//                2. By identifier: thread:ident=%s — requires the forum parameter
-//                3. By URL: thread:link=%s — requires the forum parameter
+//                1. By DISQUS thread ID (default): thread=%s вЂ” thread IDs are universally unique in DISQUS, so you can remove 'forum' param if you like
+//                2. By identifier: thread:ident=%s вЂ” requires the forum parameter
+//                3. By URL: thread:link=%s вЂ” requires the forum parameter
 
 
 
@@ -2330,7 +2330,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
       
       
       
-    // if оы has been already loaded, and now we will add it again, it won't work.
+    // if РѕС‹ has been already loaded, and now we will add it again, it won't work.
     // So we prevent it.
     
     static $drupal_alredy_loaded_js;
@@ -6262,7 +6262,7 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
       return FALSE;
     }
     global $user;
-    if ($user->uid == 1) {
+    if ($user->uid == 1 && $destination == 'public://styles/article_thumbnail_h/public/vonage-channel-partners2015.jpg') {
       dpm($source);
       dpm($destination);
       //gv_misc_imageOptimizeOnServer(array('uri' =>$destination, 'filemime' => 'image/png'));
@@ -10622,9 +10622,15 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
         
-        if ($_GET['q'] == 'node/287' && $data['data']->nid == 12) {
-          // Set fixed rating for RingCentral on /business.
-          $rating_count = 4.6;
+        if ($_GET['q'] == 'node/287') {
+          if ($data['data']->nid == 12) {
+            // Set fixed rating for RingCentral on /business.
+            $rating_count = 4.6;
+          }
+          elseif ($data['data']->nid == 5212) {
+            // Set fixed rating for Mitel on /business.
+            $rating_count = 4.1;
+          }
         }
         else {
           $rating_count = number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 );
@@ -11440,7 +11446,7 @@ function gv_misc_sortArrayProvidersByErating($a, $b) {
  * 
  * Example of using:
  * 
- * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByСlicks');
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByРЎlicks');
  */
 function gv_misc_sortArrayByClicks($a, $b) {
   if ($a['clicks'] == $b['clicks']) {
