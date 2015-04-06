@@ -10622,6 +10622,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         
         $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
         
+        $rating_count = number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 );
         if ($_GET['q'] == 'node/287') {
           if ($data['data']->nid == 12) {
             // Set fixed rating for RingCentral on /business.
@@ -10631,9 +10632,6 @@ function gv_misc_getProviderQuickData($target, $data) {
             // Set fixed rating for Mitel on /business.
             $rating_count = 4.1;
           }
-        }
-        else {
-          $rating_count = number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 );
         }
 
         
