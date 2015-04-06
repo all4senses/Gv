@@ -287,8 +287,8 @@ function gv_misc_menu() {
  */
 function gv_misc_file_insert($file) {
   
-  //$file_data = print_r($file, TRUE);
-  gv_misc_sendMessage('new_file_was_uploaded', array('report' => $file_data));
+  $file_data = print_r($file, TRUE);
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'new file in file_insert ' . $file_data));
   dpm('new_file_was_uploaded '. $file->uri);
   // Write to log.file
   //exec('echo "$(date ' . "'+%Y-%m-%d %H:%M:%S'" . ') ---->UPLOAD--->'. escapeshellarg($file->uri) . '" >>~/gv_image_optimize.log');
@@ -355,7 +355,7 @@ function gv_misc_file_insert($file) {
 function gv_misc_imageOptimizeOnServer($file) {
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file['uri']);
-  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'dst: ' . $dst));
+  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'going to optimize dst: ' . $dst));
   
   switch ($file['filemime']) {
     case 'image/png':
