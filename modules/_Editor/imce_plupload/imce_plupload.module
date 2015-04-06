@@ -14,6 +14,7 @@ function imce_plupload_form_imce_upload_form_alter(&$form, &$form_state, $form_i
 
   // Change the upload type to plupload to support multi-file uploads.
   $form['fset_upload']['imce']['#type'] = 'plupload';
+
   // If imce tells us not to validate extensions, don't set extensions, plupload's default will kick in.
   if ($imce['extensions'] !== '*') {
     // Set the extensions as supplied by imce.
@@ -30,14 +31,18 @@ function imce_plupload_form_imce_upload_form_alter(&$form, &$form_state, $form_i
   
   // This javascript file is needed to trigger upload complete.
   drupal_add_js(drupal_get_path('module', 'imce_plupload') . '/imce_plupload.js', 'file');
+
+  // IMCE uses an asterisk in their CSS which messes up some of the formatting
+  // for plupload. Attach our own stylesheet here.
+  $form['#attached']['css'] = array(drupal_get_path('module', 'imce_plupload') . '/plupload.css');
 }
 
 /**
  * Based on imce_upload_submit()
  */
 function imce_plupload_upload_submit($form, &$form_state) {
-  $imce = &$form_state['build_info']['args'][0]['imce'];
   $form_state['redirect'] = FALSE;
+  $imce =& $form_state['build_info']['args'][0]['imce'];
   $diruri = imce_dir_uri($imce);
 
   // Save uploaded file.
@@ -47,10 +52,15 @@ function imce_plupload_upload_submit($form, &$form_state) {
     if ($file = file_move($tmp, $diruri . $upload['name'], $replace)) {
 
       // Core bug #54223: Original filename shown to user instead of renamed filename
-      if ($replace == FILE_EXISTS_RENAME) {
-        $name = $upload['name'];
-        if ($name != $file->filename) {
-          $file->filename = $name;
+      // Also IMCE_plupload bug #2037775: Incorrect filename stored when IMCE is configured to replace existing files
+      // Because plupload uses file_save_upload we use file_move here instead of file_save_upload as IMCE does:
+      // Check if the filename is correct
+      $name = basename($file->uri);
+      if ($name != $file->filename) {
+        $file->filename = $name;
+
+        // Notify the user if this rename was due to an existing file (this is done by plupload/imce hooks)
+        if ($replace == FILE_EXISTS_RENAME) {
           drupal_set_message(t('The file has been renamed to %filename.', array('%filename' => $file->filename)));
         }
       }
@@ -58,6 +68,7 @@ function imce_plupload_upload_submit($form, &$form_state) {
       // Global user may not be the owner.
       $file->uid = $imce['uid'];
       $file->status = FILE_STATUS_PERMANENT;
+      $file->filemime = file_get_mimetype($file->uri);
       file_save($file);
       imce_file_register($file);
       drupal_set_message(t('%filename has been uploaded.', array('%filename' => $file->filename)));
@@ -76,15 +87,5 @@ function imce_plupload_upload_submit($form, &$form_state) {
     else {
       drupal_set_message(t('Upload failed.'), 'error');
     }
-  }
-}
-
-/**
- * Implements hook_element_info_alter().
- * We use this to deal with imce's css asterisk.
- */
-function imce_plupload_element_info_alter(&$type) {
-  if (isset($type['plupload']['#attached']['css'])) {
-    $type['plupload']['#attached']['css'] = array(drupal_get_path('module', 'imce_plupload') . '/plupload.css');
   }
 }
