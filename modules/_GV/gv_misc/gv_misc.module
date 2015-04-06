@@ -6261,6 +6261,12 @@ function gv_misc_createCachedImageIfNotExists($relative_path, $style_name = NULL
     if (!image_style_create_derivative($style, $source, $destination)) {
       return FALSE;
     }
+    global $user;
+    if ($user->uid == 1) {
+      dpm($source);
+      dpm($destination);
+      //gv_misc_imageOptimizeOnServer(array('uri' =>$destination, 'filemime' => 'image/png'));
+    }  
     return 'updated';
   }
   
