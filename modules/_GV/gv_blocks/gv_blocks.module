@@ -4529,8 +4529,11 @@ function gv_blocks_render_block($module, $delta) {
 //      );
 //  return theme('block', $vars);
   
-  $block = block_load($module, $delta);      
+  $block = block_load($module, $delta);  
+  dpm($block);
+  dpm(_block_render_blocks(array($block)));
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  dpm($block_array);
   //dpm($block_array);
   $output = drupal_render($block_array);
   return $output; 
