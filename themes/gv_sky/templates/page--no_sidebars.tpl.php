@@ -20,6 +20,12 @@
         <div class="clearfix"></div>
       </div>
     </nav> 
+    
+    <?php 
+      global $main_menu_inner_ul_removed;
+      echo $main_menu_inner_ul_removed;
+    ?>
+    
 </header> <!-- /#header -->
 
 
