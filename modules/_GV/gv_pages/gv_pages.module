@@ -2912,6 +2912,9 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //      if($user->uid == 1) {
 //        return;
 //      }
+  
+  // Make working main menu on edit pages
+  drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
       
   switch ($form_id) {
     
