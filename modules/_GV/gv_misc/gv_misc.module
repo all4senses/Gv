@@ -1020,13 +1020,13 @@ function gv_misc_testPage() {
 //  $field = field_get_items('node',$node, 'field_hero_subtitle');
 //  dpm($field);
   
-  $block = gv_blocks_render_block('nice_menus', 1);
-  dpm($block);
+//  $block = gv_blocks_render_block('nice_menus', 1);
+//  dpm($block);
   
   
   $block = block_load('nice_menus', 1);  
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  
+  dpm($block_array);
   dpm($block_array[0]['#markup']);
   if (preg_match('/(.*)<div class=\"solution-nav\">(.*)<\/div>](.*)/isU', $block_array[0]['#markup'], $matches)) {
     dpm($matches);
