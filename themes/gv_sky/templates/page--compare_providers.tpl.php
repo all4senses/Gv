@@ -34,6 +34,12 @@
         <div class="clearfix"></div>
       </div>
     </nav> 
+    
+    <?php 
+      global $main_menu_inner_ul_removed;
+      echo $main_menu_inner_ul_removed;
+    ?>
+    
       <div class="hero-header left">
         <div class="hero-title">
           <h1 class="hero-title-heading"><?php echo (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
