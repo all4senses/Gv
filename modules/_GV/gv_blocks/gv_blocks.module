@@ -509,6 +509,12 @@ function gv_blocks_block_info() {
   );
   
   
+  $blocks['main_menu_splitted'] = array(
+    'info' => 'Main menu splitted, without removed global $main_menu_inner_ul_removed',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  
   return $blocks;
 }
 
@@ -1036,7 +1042,10 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getQuotePopup_onLists('wc');
       break;
     
-    
+    case 'main_menu_splitted':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getMainMenu_splitted();
+      break;
       
   }
 
@@ -12877,4 +12886,17 @@ function gv_blocks_getQuotePopup_onLists($type = 'cc') {
   
   
   return $out;
+}
+
+
+function gv_blocks_getMainMenu_splitted() {
+  $main_menu = NULL;
+  $block = block_load('nice_menus', 1);  
+  $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  if (preg_match('/(.*)(\<div class=\"solution-nav\"\>.*\<\/div\>)(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
+    $nice_menu = str_replace($matches[2], '', $block_array['nice_menus_1']['#markup']);
+    global $main_menu_inner_ul_removed;
+    $main_menu_inner_ul_removed = $matches[2];
+  }
+  return $main_menu;
 }

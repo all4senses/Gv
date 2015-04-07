@@ -38,6 +38,11 @@ if ( current_path() == 'node/add/review' ) {
         <div class="clearfix"></div>
       </div>
     </nav> 
+    
+    <?php 
+      global $main_menu_inner_ul_removed;
+      echo $main_menu_inner_ul_removed;
+    ?>
 
     <?php if ( current_path() == 'node/804' ) { ?>
       <?php drupal_add_js('/sites/all/themes/gv_sky/js/review.js'); ?>
