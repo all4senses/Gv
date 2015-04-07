@@ -13,7 +13,7 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 // ==== Main Menu =================================================================================
 	$window = $$(window);
 	$this = $$(this);
-	$$('.solution-nav').insertAfter('.navigation');
+	//$$('.solution-nav').insertAfter('.navigation');
 
 	$$('.main-menu-item.first').on('click',function(){
 
