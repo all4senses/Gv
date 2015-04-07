@@ -1026,11 +1026,11 @@ function gv_misc_testPage() {
   
   $block = block_load('nice_menus', 1);  
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  dpm($block_array);
+  //dpm($block_array);
   dpm($block_array['nice_menus_1']['#markup']);
   if (preg_match('/(.*)\<div class=\"solution-nav\"\>(.*)\<\/div\>(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
     dpm($matches);
-    $nice_menu = preg_replace('(.*)<div class=\"solution-nav\">(.*)<\/div>(.*)/isU', '$1$3', $block_array['nice_menus_1']['#markup']);
+    $nice_menu = preg_replace('/(.*)\<div class=\"solution-nav\"\>(.*)\<\/div\>(.*)/isU', '$1$3', $block_array['nice_menus_1']['#markup']);
     dpm($nice_menu);
   }
   
