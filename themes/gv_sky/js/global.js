@@ -8,7 +8,6 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 
 
-console.log('In global.js...');
 
 // ==== Main Menu =================================================================================
 	$window = $$(window);

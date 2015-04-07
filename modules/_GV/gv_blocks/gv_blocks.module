@@ -3005,7 +3005,7 @@ function gv_blocks_compareTopProviders($service_type) {
 
 
 /**
- * Returns block with comparing providers table.
+ * Returns block with VERTICAL comparing providers table.
  */
 function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprite_name = NULL, $service_type = 'business', $rating_table = 'field_data_field_p_erating', $rating_field = 'field_p_erating_value', $popup_quote = FALSE) {
   
@@ -3086,8 +3086,13 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
             $image = theme('gv_misc_image_style', array('style_name' => $image_style_name, 'path' => $provider['p_data']['logo']['i_logo_uri'], 'alt' =>  'Visit ' . $provider['p_name'], 'title' =>  'Visit ' . $provider['p_name'] ));
           }
           
-          if (!empty($image)) {            
-            $out .= gv_misc_getTrackingUrl('<div class="vertical-thead-logos-item-logo-img">' . $image . '</div>', NULL, $provider['nid'], NULL, 'vertical-thead-logos-item-logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
+          if (!empty($image)) {   
+            if ($service_type == 'cc') {
+              $out .= '<div class="vertical-thead-logos-item-logo"><div class="vertical-thead-logos-item-logo-img">' . $image . '</div></div>';
+            }
+            else {
+              $out .= gv_misc_getTrackingUrl('<div class="vertical-thead-logos-item-logo-img">' . $image . '</div>', NULL, $provider['nid'], NULL, 'vertical-thead-logos-item-logo', NULL, $all_data_quick[$nid], gv_misc_refineServiceTypeKey($service_type));
+            }
           }
           
           //$out .= '<div class="rank" style="background: #2c7bbf; color: white; margin-top: 5px;">#' . ($cols_num - $i - 1) . '</div>';
