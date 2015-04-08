@@ -11982,13 +11982,19 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
                     (
                       isset($fixed_positions['8x8_key']) 
                       && 
-                       !( ($random_index[0] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][4] < 1) || ($random_index[1] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][5] < 1) )
+                       !( ($random_index[0] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][4] < 1) || ($random_index[1] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][5] < 1) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][4] < 1) || ($random_index[1] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][5] < 1) ) 
                     )
                     ||
                     (
                       isset($fixed_positions['Nextiva_key']) 
                       && 
-                       !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][4] < 1) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][5] < 1) )
+                       !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][6] < 1) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][7] < 1) )
                     )
                     ||
                     (
@@ -11996,12 +12002,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
                       && 
                       !( ($random_index[2] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][6] < 1) || ($random_index[3] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][7] < 1) )
                     )
-                    ||
-                    (
-                      isset($fixed_positions['Jive_key']) 
-                      && 
-                     !( ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 1) || ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 1) ) 
-                    )
+                    
 
                   );
 
@@ -12026,11 +12027,11 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
               case $fixed_positions['8x8_key']:
                 $gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 4] += 1;
                 break;
-              case $fixed_positions['Nextiva_key']:
-                $gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 4] += 1;
-                break;
               case $fixed_positions['Jive_key']:
                 $gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 4] += 1;
+                break;
+              case $fixed_positions['Nextiva_key']:
+                $gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 4] += 1;
                 break;
               case $fixed_positions['Corvisa_key']:
                 $gv_rotate_data___block_top_bu_ppc['Corvisa'][$random_position + 4] += 1;
