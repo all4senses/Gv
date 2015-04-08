@@ -2,6 +2,8 @@
 
 
   
+function gv_m_preprocess_html(&$vars) {
+ 
   // Works!
   global $user;
   if ($user->uid == 1 || ($user->uid && in_array('administrator', $user->roles)) ) {

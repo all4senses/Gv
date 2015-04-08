@@ -11818,19 +11818,6 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
           if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 9) {
-              /*
-              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
-                        'Jive_is_5' => 0,
-                        'Jive_is_6' => 0,
-                        'Jive_is_7' => 0,
-                        'Nextiva_is_5' => 0,
-                        'Nextiva_is_6' => 0,
-                        'Nextiva_is_7' => 0,
-                        'Corvisa_is_5' => 0,
-                        'Corvisa_is_6' => 0,
-                        'Corvisa_is_7' => 0,
-                      );
-              */
               
               $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
                         'Jive' => array('5' => 0, '6' => 0, '7' => 0),
@@ -11935,6 +11922,117 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
           
           break; // End of case 'v4':
+        
+        
+        
+        
+         
+        case 'v5':
+         
+          // Old 
+          //Position 1 - RingCentral
+          //Position 2 - Mitel
+          //Position 3 - Vonage
+          //Position 4 - 8x8
+          //Position 5, 6 ,7 - should evenly rotate between Jive, Nextiva, and Corvisa. 
+                
+          
+          // New
+
+          //- Jive and 8x8 should rotate evenly between position 4 and 5 only. 
+
+          //- Nextiva and Corvisa should rotate evenly between position 6 and 7 only.  
+          
+          if ($user->uid == 1) {
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root'; 
+          }
+          elseif ($user->uid) {
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn';
+          }
+          else {
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut';
+          }
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 9) {
+              
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'Jive' => array('5' => 0, '6' => 0, '7' => 0),
+                        'Nextiva' => array('5' => 0, '6' => 0, '7' => 0),
+                        'Corvisa' => array('5' => 0, '6' => 0, '7' => 0),
+                      );
+          }
+
+          $random_index = array($fixed_positions['Nextiva_key'], $fixed_positions['Corvisa_key'], $fixed_positions['Jive_key']);
+          
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+                    if($count_cur++ >10000) {
+                      break;
+                    };
+          }while (
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                       !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][5] < 3) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][6] < 3) || ($random_index[2] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][7] < 3) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Corvisa_key']) 
+                      && 
+                      !( ($random_index[0] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][5] < 3) || ($random_index[1] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][6] < 3) || ($random_index[2] == $fixed_positions['Corvisa_key'] && $gv_rotate_data___block_top_bu_ppc['Corvisa'][7] < 3) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[0] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][5] < 3) || ($random_index[1] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 3) || ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 3) ) 
+                    )
+
+                  );
+
+          $result_index = array(
+              0 => $fixed_positions['RingCentral_key'],
+              1 => $fixed_positions['Mitel_key'],
+              2 => $fixed_positions['Vonage_key'],
+              3 => $fixed_positions['8x8_key'],
+              
+              4 => $random_index[0],
+              5 => $random_index[1],
+              6 => $random_index[2],
+          );
+          
+          
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+
+          foreach ($random_index as $random_position => $fixed_index) {
+            switch ($fixed_index) {
+              case $fixed_positions['Nextiva_key']:
+                $gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 5] += 1;
+                break;
+              case $fixed_positions['Jive_key']:
+                $gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 5] += 1;
+                break;
+              case $fixed_positions['Corvisa_key']:
+                $gv_rotate_data___block_top_bu_ppc['Corvisa'][$random_position + 5] += 1;
+                break;
+            }
+          }
+          
+          $random_index = $result_index;
+         
+          
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          //dpm('Random counter = ' . $count_cur);
+
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v5':
         
 
       } // End of switch ($version) {
