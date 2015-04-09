@@ -5383,9 +5383,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       if ($user->uid == 1) {
         $form['#attributes']['class'][] = 'page-node-add-review';
       }
-      dpm($form);
-      drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
-      /*
+      //dpm($form);
+      //drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+      
       $form['#attached'] = array(
         'library' => array(
           //
@@ -5395,11 +5395,11 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         ),
         'css' => array(
             //drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
-            //path_to_theme() . '/css/submit-review.css',
-            '/sites/all/themes/gv_sky/css/submit-review.css',
+            path_to_theme() . '/css/submit-review.css',
+            //'/sites/all/themes/gv_sky/css/submit-review.css',
         ),
       );
-      */
+      
       
       
       dpm($form);
