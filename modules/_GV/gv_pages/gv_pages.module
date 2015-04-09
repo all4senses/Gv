@@ -5379,8 +5379,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#submit'][] = 'gv_pages_submitForm_review';
       
-      
-      if ($user->uid == 1) {
+
+      if ($user->uid == 1 && arg(1) != 'add') {
         $form['#attributes']['class'][] = 'page-node-add-review';
       }
       //dpm($form);
@@ -5391,7 +5391,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           //
         ),
         'js' => array(
-          //
+          path_to_theme() . '/js/submit-review.js',
         ),
         'css' => array(
             //drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
