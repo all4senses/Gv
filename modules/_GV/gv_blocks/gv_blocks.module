@@ -1597,7 +1597,7 @@ function gv_blocks_getLatestPostsRotated() {
   $query->fields('d', array('field_extra_data_value'));
   $query->orderBy('n.created', 'DESC');
   
-  $query->range(0, 4);
+  $query->range(0, 2);
   
   $posts = $query->execute()->fetchAllAssoc('nid');
   
