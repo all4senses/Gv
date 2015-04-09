@@ -5379,20 +5379,22 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       $form['#validate'][] = 'gv_pages_validateForm_review';
       $form['#submit'][] = 'gv_pages_submitForm_review';
       
-      
+      drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+      /*
       $form['#attached'] = array(
-      'library' => array(
-        //
-      ),
-      'js' => array(
-        //
-      ),
-      'css' => array(
-          //drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
-          //path_to_theme() . '/css/submit-review.css',
-          '/sites/all/themes/gv_sky/css/submit-review.css',
-      ),
-    );
+        'library' => array(
+          //
+        ),
+        'js' => array(
+          //
+        ),
+        'css' => array(
+            //drupal_add_css('/sites/all/themes/gv_sky/css/submit-review.css', array('group' => CSS_DEFAULT, 'every_page' => FALSE));
+            //path_to_theme() . '/css/submit-review.css',
+            '/sites/all/themes/gv_sky/css/submit-review.css',
+        ),
+      );
+      */
       
       
       //dpm($form);
