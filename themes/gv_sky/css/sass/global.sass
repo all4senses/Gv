@@ -88,9 +88,11 @@ body
 		padding: 25px 0 60px
 
 // Fix problem where the tracking pixel is causing unwanted whitespace below footer on safari browsers
-script[src="//www.googleadservices.com/pagead/conversion.js"] ~ img
+script[src="//www.googleadservices.com/pagead/conversion.js"] ~ img,
+#google_conversion_110451053
 	position: fixed
-	top: 1px
+	z-index: -100
+	top: 0
 
 
 
