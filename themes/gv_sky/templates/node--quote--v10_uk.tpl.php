@@ -71,7 +71,7 @@
               <h1>Download Your Free VoIP Buyer's Guide</h1>
             </div>
             <form class="form">
-              <div class="step one radio-filled">
+              <div class="step one show">
                 <div class="wrap">
                   <a href="http://getvoip.com/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank"><div class="download"><div class="icon-download"></div><span>Download PDF</span></div></a>
                 </div>

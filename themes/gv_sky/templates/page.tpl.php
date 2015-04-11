@@ -126,7 +126,16 @@ if ( current_path() == 'node/add/review' ) {
           echo gv_blocks_getContactInfo();
         } ?>
         
-
+        
+          
+        <?php if ($page['disqus']): ?>
+          <div class="main-wrap">
+            <div class="article-page-wrapper">
+             <?php print render($page['disqus']); ?>
+            </div>
+          </div>
+        <?php endif; ?>
+          
         
         <div id="above_footer">
             <?php echo render($page['above_footer']); ?>

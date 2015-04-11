@@ -127,14 +127,16 @@
                       <span class="provider-box-provider-details-stats-item-number"><?php echo $node->p_data['info']['i_founded']; ?></span>
                       <span class="provider-box-provider-details-stats-item-desc">Year Founded</span>
                     </li>
-                    <li class="provider-box-provider-details-stats-item">
-                      <span class="provider-box-provider-details-stats-item-number"><?php echo $node->gv_recommend; ?>%</span>
-                      <span class="provider-box-provider-details-stats-item-desc">Recommend</span>
-                    </li>
-                    <li class="provider-box-provider-details-stats-item">
-                      <span class="provider-box-provider-details-stats-item-number"><?php echo $node->gv_voters; ?></span>
-                      <span class="provider-box-provider-details-stats-item-desc">User Reviews</span>
-                    </li>
+                    <?php if ($node->gv_voters) { ?>
+                          <li class="provider-box-provider-details-stats-item">
+                            <span class="provider-box-provider-details-stats-item-number"><?php echo $node->gv_recommend; ?>%</span>
+                            <span class="provider-box-provider-details-stats-item-desc">Recommend</span>
+                          </li>
+                          <li class="provider-box-provider-details-stats-item">
+                            <span class="provider-box-provider-details-stats-item-number"><?php echo $node->gv_voters; ?></span>
+                            <span class="provider-box-provider-details-stats-item-desc">User Reviews</span>
+                          </li>
+                    <?php } ?>
                   </ul>
 
               
