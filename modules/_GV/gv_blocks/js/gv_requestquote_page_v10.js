@@ -130,12 +130,20 @@
                         website: $('#website').val() != $('#website').attr('placeholder') ? $('#website').val() : '',
                         company: $('#company').val() != $('#company').attr('placeholder') ? $('#company').val() : '',
                         
-                        company: $('#q-title').val() != $('#q-title').attr('placeholder') ? $('#q-title').val() : '',
+                        q_title: $('#q-title').val() != $('#q-title').attr('placeholder') ? $('#q-title').val() : '',
                         
                         phone: $('#phone').val() != $('#phone').attr('placeholder') ? $('#phone').val() : '',
                         
-                        phones_amt: $('#phones_amt').val(),
+                        phones_amt: ('input[name="phones_amt"]:checked').val(), //$('#phones_amt').val(),
+                        
+                        features: jQuery('input[name="features[]"]:checked').map(function(){
+                                          return jQuery(this).val();
+                                        }).get().toString(),
+                                
                         q_type: $('#q_type').val(),
+                        
+                        q_for: jQuery('input[name="q_for"]:checked').val(),
+                        
                         buying_time: $('#buying_time').val(),
                         
                         source: $('input[name="source"]').val(),
