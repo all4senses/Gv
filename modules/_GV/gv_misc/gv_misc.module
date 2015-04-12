@@ -4910,7 +4910,7 @@ function gv_misc_makeRequestCapture_ajax() {
     
     } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
 
-    
+    watchdog('-->GV Captured 3 ', print_r($ucaptured, TRUE) . ', timestamp -------> '. $_SESSION['ucaptured_timestamp'] . ', post = ' . print_r($post, TRUE), NULL, WATCHDOG_WARNING);
     
     
   } // End of if (@$post['op'] == 'exit') {
@@ -4964,6 +4964,8 @@ function gv_misc_makeRequestCapture_ajax() {
           ->execute();
       } // End of Else of if ($ucaptured) {
       
+      watchdog('-->GV Captured 1 ', print_r($ucaptured, TRUE) . ', timestamp -------> '. $_SESSION['ucaptured_timestamp'] . ', post = ' . print_r($post, TRUE), NULL, WATCHDOG_WARNING);
+      
     } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
     else {
       
@@ -5004,6 +5006,8 @@ function gv_misc_makeRequestCapture_ajax() {
 //      }
       
       $ucaptured = gv_misc_setUcapturedVariable($post);
+      
+      
       $result = db_insert('gv_quote_requests')
         ->fields(array(
           'timestamp' => $_SESSION['ucaptured_timestamp'],
@@ -5015,7 +5019,10 @@ function gv_misc_makeRequestCapture_ajax() {
         ))
         ->execute();
       
+      watchdog('-->GV Captured 0 ', print_r($ucaptured, TRUE) . ', timestamp -------> '. $_SESSION['ucaptured_timestamp'] . ', post = ' . print_r($post, TRUE), NULL, WATCHDOG_WARNING);
+      
     } // End of Else of if (isset($_SESSION['ucaptured_timestamp'])) {
+    
     
   } // End of Else of if (@$post['op'] == 'exit' && $ucaptured && @$ucaptured['email']) {
   
