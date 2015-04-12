@@ -9,10 +9,12 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 
 
+$window = $$(window);
+$this = $$(this);
+
+
 // ==== Main Menu =================================================================================
 	jQuery(document).ready(function($){ 
-		$window = $$(window);
-		$this = $$(this);
 	  
 		//$$('.solution-nav').insertAfter('.navigation');
 
