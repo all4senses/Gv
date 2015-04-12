@@ -5077,6 +5077,11 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
       //$ucaptured['Email'] = (isset($post['email']) && $post['email']) ? $post['email'] : $ucaptured['Email'];
       $ucaptured[$key1] = !empty($post[$key2]) ? $post[$key2] : (isset($ucaptured[$key1]) ? $ucaptured[$key1] : '');
     }
+    foreach ($post as $post_key => $post_value) {
+      if (empty($ucaptured[$fields[$post_key]])) {
+        $ucaptured[$fields[$post_key]] = $post_value;
+      }
+    }
   }
   else {
     foreach ($fields as $key1 => $key2) {
