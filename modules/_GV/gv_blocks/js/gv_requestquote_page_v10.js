@@ -123,31 +123,31 @@
                         url: window.location.href,
                         
                         
-                        email: $('#email').val() != $('#email').attr('placeholder') ? $('#email').val() : '',
-                        firstname: $('#firstname').val() != $('#firstname').attr('placeholder') ? $('#firstname').val() : '',
-                        lastname: $('#lastname').val() != $('#lastname').attr('placeholder') ? $('#lastname').val() : '',
+                        email: $('.lpv10-form #email').val() != $('.lpv10-form #email').attr('placeholder') ? $('.lpv10-form #email').val() : '',
+                        firstname: $('.lpv10-form #firstname').val() != $('.lpv10-form #firstname').attr('placeholder') ? $('.lpv10-form #firstname').val() : '',
+                        lastname: $('.lpv10-form #lastname').val() != $('.lpv10-form #lastname').attr('placeholder') ? $('.lpv10-form #lastname').val() : '',
                         
-                        website: $('#website').val() != $('#website').attr('placeholder') ? $('#website').val() : '',
-                        company: $('#company').val() != $('#company').attr('placeholder') ? $('#company').val() : '',
+                        website: $('.lpv10-form #website').val() != $('.lpv10-form #website').attr('placeholder') ? $('.lpv10-form #website').val() : '',
+                        company: $('.lpv10-form #company').val() != $('.lpv10-form #company').attr('placeholder') ? $('.lpv10-form #company').val() : '',
                         
-                        q_title: $('#q-title').val() != $('#q-title').attr('placeholder') ? $('#q-title').val() : '',
+                        q_title: $('.lpv10-form #q-title').val() != $('.lpv10-form #q-title').attr('placeholder') ? $('.lpv10-form #q-title').val() : '',
                         
-                        phone: $('#phone').val() != $('#phone').attr('placeholder') ? $('#phone').val() : '',
+                        phone: $('.lpv10-form #phone').val() != $('.lpv10-form #phone').attr('placeholder') ? $('.lpv10-form #phone').val() : '',
                         
-                        phones_amt: $('input[name="phones_amt"]:checked').val(), //$('#phones_amt').val(),
+                        phones_amt: $('.lpv10-form input[name="phones_amt"]:checked').val(), //$('#phones_amt').val(),
                         
-                        features: $('input[name="features[]"]:checked').map(function(){
+                        features: $('.lpv10-form input[name="features[]"]:checked').map(function(){
                                           return $(this).val();
                                         }).get().toString(),
                                 
-                        q_type: $('#q_type').val(),
+                        q_type: $('.lpv10-form #q_type').val(),
                         
-                        q_for: $('input[name="q_for"]:checked').val(),
+                        q_for: $('.lpv10-form input[name="q_for"]:checked').val(),
                         
-                        buying_time: $('#buying_time').val(),
+                        buying_time: $('.lpv10-form #buying_time').val(),
                         
-                        source: $('input[name="source"]').val(),
-                        version: $('input[name="version"]').val(),
+                        source: $('.lpv10-form input[name="source"]').val(),
+                        version: $('.lpv10-form input[name="version"]').val(),
                         referrer: document.referrer
                        
                       }, 
