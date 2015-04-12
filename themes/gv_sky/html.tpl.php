@@ -37,6 +37,9 @@
   <?php if ( strpos(request_path(), 'reviews/phone') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/review.css">
   <?php } ?>
+  <?php if ( strpos(request_path(), 'how-we-rank') !== FALSE ) {?>
+    <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css">
+  <?php } ?>
   <?php if ( current_path() == 'node/38' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/about.css">
   <?php } ?>
