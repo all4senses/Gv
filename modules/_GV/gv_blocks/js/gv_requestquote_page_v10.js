@@ -134,10 +134,10 @@
                         
                         phone: $('#phone').val() != $('#phone').attr('placeholder') ? $('#phone').val() : '',
                         
-                        phones_amt: ('input[name="phones_amt"]:checked').val(), //$('#phones_amt').val(),
+                        phones_amt: $('input[name="phones_amt"]:checked').val(), //$('#phones_amt').val(),
                         
-                        features: jQuery('input[name="features[]"]:checked').map(function(){
-                                          return jQuery(this).val();
+                        features: $('input[name="features[]"]:checked').map(function(){
+                                          return $(this).val();
                                         }).get().toString(),
                                 
                         q_type: $('#q_type').val(),
