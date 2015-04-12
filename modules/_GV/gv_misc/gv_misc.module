@@ -4944,6 +4944,7 @@ function gv_misc_makeRequestCapture_ajax() {
           ->condition('timestamp', $_SESSION['ucaptured_timestamp'])
           ->execute();
 
+        watchdog('-->GV Captured 1-1 ', print_r($ucaptured, TRUE) . ', timestamp -------> '. $_SESSION['ucaptured_timestamp'] . ', post = ' . print_r($post, TRUE), NULL, WATCHDOG_WARNING);
       } // End of if ($ucaptured) {
       else {
         $ucaptured = gv_misc_setUcapturedVariable($post);
@@ -4962,9 +4963,11 @@ function gv_misc_makeRequestCapture_ajax() {
             'email_presented' => $ucaptured['Email'] ? $ucaptured['Email'] : NULL,
           ))
           ->execute();
+        
+        watchdog('-->GV Captured 1-2 ', print_r($ucaptured, TRUE) . ', timestamp -------> '. $_SESSION['ucaptured_timestamp'] . ', post = ' . print_r($post, TRUE), NULL, WATCHDOG_WARNING);
       } // End of Else of if ($ucaptured) {
       
-      watchdog('-->GV Captured 1 ', print_r($ucaptured, TRUE) . ', timestamp -------> '. $_SESSION['ucaptured_timestamp'] . ', post = ' . print_r($post, TRUE), NULL, WATCHDOG_WARNING);
+      
       
     } // End of if (isset($_SESSION['ucaptured_timestamp'])) {
     else {
