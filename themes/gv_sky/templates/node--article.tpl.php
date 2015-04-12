@@ -391,7 +391,7 @@
           echo render($content);
         ?>
       <!-- </div> -->
-      <?php echo ( current_path() == 'blog' ? $extra_data['read_more_html'] : ''); ?>
+      <?php echo (  (current_path() == 'blog' && !empty($extra_data['read_more_html']) ) ? $extra_data['read_more_html'] : ''); ?>
       <?php // echo print_r($extra_data) ?>
       </div> <!-- End of content wrap -->
 
