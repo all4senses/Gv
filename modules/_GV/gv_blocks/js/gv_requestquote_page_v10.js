@@ -142,7 +142,7 @@
                                 
                         q_type: $('#q_type').val(),
                         
-                        q_for: jQuery('input[name="q_for"]:checked').val(),
+                        q_for: $('input[name="q_for"]:checked').val(),
                         
                         buying_time: $('#buying_time').val(),
                         

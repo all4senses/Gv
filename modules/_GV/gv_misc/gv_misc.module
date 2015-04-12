@@ -5055,6 +5055,7 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
       'Buying Time Frame' => 'buying_time',
 
       'Quote for' => 'q_for',
+      'Features' => 'features',
       
       'Source' => 'source',
       'Version' => 'version',
@@ -5064,7 +5065,7 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
   if ($ucaptured) {
     foreach ($fields as $key1 => $key2) {
       //$ucaptured['Email'] = (isset($post['email']) && $post['email']) ? $post['email'] : $ucaptured['Email'];
-      $ucaptured[$key1] = (isset($post[$key2]) && $post[$key2]) ? $post[$key2] : (isset($ucaptured[$key1]) ? $ucaptured[$key1] : '');
+      $ucaptured[$key1] = !empty($post[$key2]) ? $post[$key2] : (isset($ucaptured[$key1]) ? $ucaptured[$key1] : '');
     }
   }
   else {
