@@ -5085,9 +5085,7 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
         $ucaptured[$map_key] = $post_value;
       }
     }
-    if (isset($ucaptured[''])) {
-      unset($ucaptured['']);
-    }
+    
   }
   else {
     foreach ($fields as $key1 => $key2) {
@@ -5108,7 +5106,8 @@ function gv_misc_setUcapturedVariable($post, $ucaptured = NULL, $combine_phone =
     */
   }
   
-
+  
+  unset($ucaptured[''], $ucaptured['op'], $ucaptured['referrer']);
   
   return $ucaptured;
 }
