@@ -1620,7 +1620,7 @@ function gv_blocks_getLatestPostsRotated() {
 
       $extra_data = unserialize($post->field_extra_data_value);
       $main_image_url = $extra_data['main_image']['src_beautify'];
-      $date = date('M\ \<\/\s\p\a\n\>\<\s\p\a\n\>d\t\h\,\<\/\s\p\a\n\>\ Y', $post->created);
+      $date = date('M\ \<\s\p\a\n\>d\t\h\,\<\/\s\p\a\n\>\ Y', $post->created);
       $content = substr($extra_data['teaser_block'], 0, 108) . '...';
       $clean_title = str_replace('"', '`', $post->title);
       $post_title = dk_post_title($post->title);
@@ -2455,9 +2455,9 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
       // foreach ($links as $provider => $link) {
       //   $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
       // }
-      $out .= '<a href="http://www.facebook.com/sharer.php?u=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item facebook"><span class="social-share-item-text">Facebook</span></a>';
       $out .= '<a href="http://twitter.com/share?text='. $post_title.'&via=getvoipreviews" rel="nofollow" target="_blank" class="social-share-item twitter"><span class="social-share-item-text">Twitter</span></a>';
-      $out .= '<a href="https://plus.google.com/share?url=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item gplus"><span class="social-share-item-text">Google Plus</span></a>';
+      $out .= '<a href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '&title=' . $post_title . '&summary=' . $summary . '" rel="nofollow" target="_blank" class="social-share-item linkedin"><span class="social-share-item-text">Linkedin</span></a>';
+      $out .= '<a href="http://www.facebook.com/sharer.php?u=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item facebook"><span class="social-share-item-text">Facebook</span></a>';
       $out .= '<span class="social-share-item expand"></span>';
       
       
@@ -2465,9 +2465,9 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
       $out .= '<span class="social-share-items-hidden"><span class="social-share-items-hidden-wrap">';
       
       // $out .= '<a href="mailto:?subject=' . $post_title . '&body=Check Out GetVoIP\'s article:%3Ca%20href=%22' . $post_url . '%22%3E' . $post_title . '%3C/a%3E" rel="nofollow" target="_blank" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
-      $out .= '<a href="mailto:?subject=' . $post_title . '&body=Check Out GetVoIP\'s article \'' . $post_title . '\' at: ' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
-      $out .= '<a href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '&title=' . $post_title . '&summary=' . $summary . '" rel="nofollow" target="_blank" class="social-share-item linkedin"><span class="social-share-item-text">Linkedin</span></a>';
+      $out .= '<a href="https://plus.google.com/share?url=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item gplus"><span class="social-share-item-text">Google Plus</span></a>';
       $out .= '<a href="http://www.stumbleupon.com/submit?url=' . $post_url . '&title=' . $post_title . '" rel="nofollow" target="_blank" class="social-share-item stumbleupon"><span class="social-share-item-text">Stumbleupon</span></a>';
+      $out .= '<a href="mailto:?subject=' . $post_title . '&body=Check Out GetVoIP\'s article \'' . $post_title . '\' at: ' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
       
       $out .= '</span></span>';
 
@@ -2969,12 +2969,12 @@ function gv_blocks_compareTopProviders($service_type) {
     case 'cc':
       $rating_table = 'field_data_field_p_erating_cc';
       $rating_field = 'field_p_erating_cc_value';
-      // $popup_quote = TRUE;
+      $popup_quote = TRUE;
       break;
     case 'wc':
       $rating_table = 'field_data_field_p_erating_wc';
       $rating_field = 'field_p_erating_wc_value';
-      // $popup_quote = TRUE;
+      $popup_quote = TRUE;
       break;
   }
   
@@ -5772,72 +5772,81 @@ function gv_blocks_get_requestQuote_block_v8() {
   
   
   $out = '
-   
-   <div class="get-quote">
-           
-           <div class="get-quote-title"><div class="get-quote-title-text">Save Time - Get Instant Quotes</div></div>
+   <div class="get-quote-wrapper">
+     <div class="get-quote">
+             <div class="get-quote-heading">
+               <div class="get-quote-heading-title">Want to See Exactly How Much You Can Save?</div>
+               <div class="get-quote-heading-subtitle">We provide bottom line quotes from award-winning providers.</div>
+             </div>
 
-           <form class="get-quote-form" method="post" action="/request">
-                    
-                    <div class="step step-one show" id="questions_section">
-                                                       
-                                <div class="get-quote-fieldset fieldset required">
-                                    <label for="company" class="get-quote-fieldset-label">Company</label>
-                                    <div class="get-quote-fieldset-wrap">
-                                      <input class="get-quote-fieldset-input input"  type="text" name="company" placeholder="Company" />
-                                    </div>
-                                </div>                                                       
-                                <div class="get-quote-fieldset fieldset half required">
-                                    <label for="firstname" class="get-quote-fieldset-label">First Name</label>
-                                    <div class="get-quote-fieldset-wrap">
-                                      <input class="get-quote-fieldset-input input"  type="text" name="firstname" placeholder="John" />
-                                    </div>
-                                </div>
-                                <div class="get-quote-fieldset fieldset half required">
-                                    <label for="lastname" class="get-quote-fieldset-label">Last Name</label>
-                                    <div class="get-quote-fieldset-wrap">
-                                      <input class="get-quote-fieldset-input input"  type="text" name="lastname" placeholder="Doe" />
-                                    </div>
-                                </div>
-                                <div class="get-quote-fieldset fieldset half required">
-                                    <label for="phone" class="get-quote-fieldset-label">Phone Number</label>
-                                    <div class="get-quote-fieldset-wrap">
-                                      <input class="get-quote-fieldset-input input phone"  type="text" name="phone" />
-                                    </div>
-                                </div>
-                                <div class="get-quote-fieldset fieldset half required">
-                                    <label for="email" class="get-quote-fieldset-label">Email Address</label>
-                                    <div class="get-quote-fieldset-wrap">
-                                      <input class="get-quote-fieldset-input input email"  type="text" name="email" />
-                                    </div>
-                                </div>
-                                <div class="get-quote-upsale">
-                                    <div class="get-quote-upsale-icon"></div>
-                                    <div class="get-quote-upsale-text">
-                                      Free guide with submission Business VoIP Start-up Guide.
-                                    </div>
-                                </div>
-                            <div class="get-quote-form-button submit" value="Quote Me" type="submit">
-                              <div class="get-quote-form-button-text">Quote Me Now</div>
-                            </div>
-                            <input class="get-quote-form-button input" value="Quote Me" type="submit" />
-                    </div>
-                    <div class="results"></div>
+             <form class="get-quote-form" method="post" action="/request">
+                      
+                      <div class="step step-one show" id="questions_section">
+                                  <div class="get-quote-fieldset fieldset half select required">
+                                      <label for="phones_amt" class="get-quote-fieldset-label">Number of Lines</label>
+                                      <div class="get-quote-fieldset-wrap">
+                                        <select name="phones_amt" id="phones_amt" class="get-quote-fieldset-select input">
+                                           <option value="">Number of Lines</option>
+                                           <option value="1 - 4">1 - 4</option>
+                                           <option value="5 - 10">5 - 10</option>
+                                           <option value="11 - 20">11 - 20</option>
+                                           <option value="21 - 50">21 - 50</option>
+                                           <option value="More than 50">More than 50</option>
+                                        </select>
+                                      </div>
+                                  </div>
+                                                         
+                                  <div class="get-quote-fieldset fieldset half required">
+                                      <label for="company" class="get-quote-fieldset-label">Company</label>
+                                      <div class="get-quote-fieldset-wrap">
+                                        <input class="get-quote-fieldset-input input"  type="text" name="company" placeholder="Company" />
+                                      </div>
+                                  </div>                                                       
+                                  <div class="get-quote-fieldset fieldset half required">
+                                      <label for="firstname" class="get-quote-fieldset-label">First Name</label>
+                                      <div class="get-quote-fieldset-wrap">
+                                        <input class="get-quote-fieldset-input input"  type="text" name="firstname" placeholder="First Name" />
+                                      </div>
+                                  </div>
+                                  <div class="get-quote-fieldset fieldset half required">
+                                      <label for="lastname" class="get-quote-fieldset-label">Last Name</label>
+                                      <div class="get-quote-fieldset-wrap">
+                                        <input class="get-quote-fieldset-input input"  type="text" name="lastname" placeholder="Last Name" />
+                                      </div>
+                                  </div>
+                                  <div class="get-quote-fieldset fieldset half required">
+                                      <label for="phone" class="get-quote-fieldset-label">Phone Number</label>
+                                      <div class="get-quote-fieldset-wrap">
+                                        <input class="get-quote-fieldset-input input phone"  type="text" name="phone" placeholder="Phone Number" />
+                                      </div>
+                                  </div>
+                                  <div class="get-quote-fieldset fieldset half required">
+                                      <label for="email" class="get-quote-fieldset-label">Email Address</label>
+                                      <div class="get-quote-fieldset-wrap">
+                                        <input class="get-quote-fieldset-input input email"  type="text" name="email" placeholder="Email Address" />
+                                      </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                              <div class="get-quote-form-button submit" value="Quote Me" type="submit">
+                                <div class="get-quote-form-button-text">Show Me My <span class="get-quote-form-button-text-highlight">Savings</span></div>
+                              </div>
+                              <input class="get-quote-form-button input" value="Quote Me" type="submit" />
+                      </div>
+                      <div class="results"></div>
 
-                
-            
-                
-                
-                <input type="hidden" name="token" value="' . $token . '" />
-                <input type="hidden" name="source" value="block" />
-                <input type="hidden" name="version" value="8" />
-                <input type="hidden" name="referrer" value="" />
-                <input type="hidden" name="url" value="" />
-                
-        </form>
-
-        <p id="data"></p>
-</div>
+                  
+              
+                  
+                  
+                  <input type="hidden" name="token" value="' . $token . '" />
+                  <input type="hidden" name="source" value="block" />
+                  <input type="hidden" name="version" value="8" />
+                  <input type="hidden" name="referrer" value="" />
+                  <input type="hidden" name="url" value="" />
+                  
+          </form>
+    </div>
+  </div>
   ';
   
   return $out;

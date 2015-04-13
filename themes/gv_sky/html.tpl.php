@@ -25,7 +25,7 @@
   <?php if ( current_path() == 'blog' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
-  <?php if ( strpos(request_path(), 'blog/') !== FALSE || strpos(request_path(), 'library/') !== FALSE ) {?>
+  <?php if ( strpos(request_path(), 'blog/') !== FALSE || strpos(request_path(), 'library/') !== FALSE || strpos(request_path(), 'news/') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
   <?php if ( current_path() == 'node/add/review' ) {?>
@@ -36,6 +36,9 @@
   <?php } ?>
   <?php if ( strpos(request_path(), 'reviews/phone') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/review.css">
+  <?php } ?>
+  <?php if ( strpos(request_path(), 'how-we-rank') !== FALSE ) {?>
+    <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css">
   <?php } ?>
   <?php if ( current_path() == 'node/38' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/about.css">
@@ -53,7 +56,10 @@
     <script type="text/javascript" src="/sites/all/themes/gv_sky/js/selectivizr-min.js"></script>
     <link rel="stylesheet" href="sites/all/themes/gv_sky/css/ie8.css" />
 <![endif]--> 
-
+     <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
+     <script type="text/javascript">
+       takanaClient.run({host: 'localhost:48626'});
+     </script>
 
 
 
