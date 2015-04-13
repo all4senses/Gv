@@ -149,7 +149,7 @@ if ( current_path() == 'node/add/review' ) {
     $hide_follow_us_links = ( !isset($node->type) || !in_array($node->type, array('blog_post', 'news_post', 'article')) ) ? FALSE : TRUE;
   ?>
 
-  <footer class="footer" role="contentinfo" class="<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
+  <footer role="contentinfo" class="footer<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
    <div class="footer-wrap">
 
     <?php
