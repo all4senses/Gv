@@ -319,6 +319,14 @@ $this = $$(this);
 		jQuery(this).blur(function(){
 			jQuery(this).parents('.fieldset').removeClass('focus');
 		});
+
+		jQuery(this).keyup(function(){
+			if ( jQuery(this).val() === '' ) {
+				jQuery(this).parents('.fieldset').removeClass('filled');
+			} else {
+				jQuery(this).parents('.fieldset').addClass('filled');
+			}
+		});
 	});
 
 	$$('.get-quote-form-button').click(function(){
