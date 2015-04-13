@@ -1189,18 +1189,28 @@ th {
       font-weight: 600;
       color: #045da0; }
 
+.get-quote-wrapper {
+  background-color: #fbfbfb;
+  padding: 55px 95px; }
+  .get-quote-wrapper-wrap {
+    width: 100%;
+    max-width: 1130px;
+    margin: 0 auto; }
+    .get-quote-wrapper-wrap:before, .get-quote-wrapper-wrap:after {
+      content: "";
+      display: table; }
+    .get-quote-wrapper-wrap:after {
+      clear: both; }
+.get-quote-values {
+  width: 45%;
+  float: left; }
+
 .get-quote {
-  position: fixed;
-  z-index: 900;
-  display: none;
-  right: 5%;
-  bottom: -457px;
-  width: 80%;
-  max-width: 350px;
+  width: 45%;
+  float: right;
   background-color: white;
-  border: 1px solid #045da0;
-  border-bottom: 0;
-  border-radius: 5px 5px 0 0;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
   overflow: hidden; }
   @media screen and (max-width: 736px) {
     .get-quote {
@@ -1223,10 +1233,7 @@ th {
     cursor: pointer; }
     .get-quote-title-text {
       position: absolute;
-      font-size: 19px;
-      font-weight: 600;
-      padding-left: 4.6%;
-      line-height: 1;
+      width: 100%;
       top: 50%;
       -webkit-transform: translateY(-50%);
       -moz-transform: translateY(-50%);
@@ -1234,37 +1241,15 @@ th {
       -o-transform: translateY(-50%);
       transform: translateY(-50%);
       top: 53%;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1;
+      text-align: center;
       -webkit-user-select: none;
       -khtml-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none; }
-    .get-quote-title:after {
-      content: "b";
-      position: absolute;
-      top: 50%;
-      -webkit-transform: translateY(-50%);
-      -moz-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      -o-transform: translateY(-50%);
-      transform: translateY(-50%);
-      top: 43%;
-      right: 4.6%;
-      width: 21px;
-      height: 12px;
-      font-family: gvcons;
-      font-size: 21px;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none; }
-      .closed .get-quote-title:after {
-        top: 52%;
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        transform: rotate(180deg); }
   .get-quote-form {
     box-sizing: border-box;
     padding: 26px; }

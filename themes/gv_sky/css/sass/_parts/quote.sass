@@ -1,16 +1,23 @@
 .get-quote
-	position: fixed
-	z-index: 900
-	display: none
-	right: 5%
-	// bottom: 0
-	bottom: -457px
-	width: 80%
-	max-width: 350px
+	&-wrapper
+		background-color: $subwhite
+		padding: 55px 95px
+
+		&-wrap 
+			width: 100%
+			max-width: 1130px
+			+center
+			+clearfix
+	&-values
+		width: 45%
+		float: left
+
+.get-quote
+	width: 45%
+	float: right
 	background-color: white
-	border: 1px solid $primary
-	border-bottom: 0
-	border-radius: 5px 5px 0 0
+	border: 1px solid $divider
+	border-radius: 5px
 	overflow: hidden
 
 	+m(736)
@@ -40,31 +47,16 @@
 
 		&-text
 			position: absolute
-			font-size: 19px
-			font-weight: 600
-			padding-left: 4.6%
-			line-height: 1
+			width: 100%
 			+valign
 			top: 53%
+			font-size: 24px
+			font-weight: 600
+			line-height: 1
+			text-align: center
 			+user-select(none)
 
-		&:after
-			content: 'b'
-			position: absolute
-			+valign
-			top: 43%
-			right: 4.6%
-			+size(21, 12)
-			font-family: gvcons
-			font-size: 21px
-			+user-select(none)
 
-			.closed &
-				top: 52%
-				-webkit-transform: rotate(180deg)
-				-moz-transform: rotate(180deg)
-				-ms-transform: rotate(180deg)
-				transform: rotate(180deg)
 
 
 	&-form
@@ -206,6 +198,217 @@
 
 		p
 			margin-bottom: 20px
+
+
+
+// .get-quote
+// 	position: fixed
+// 	z-index: 900
+// 	display: none
+// 	right: 5%
+// 	// bottom: 0
+// 	bottom: -457px
+// 	width: 80%
+// 	max-width: 350px
+// 	background-color: white
+// 	border: 1px solid $primary
+// 	border-bottom: 0
+// 	border-radius: 5px 5px 0 0
+// 	overflow: hidden
+
+// 	+m(736)
+// 		display: none !important
+
+// 	&.show
+// 		display: block
+// 		bottom: 0
+
+// 	&.closed
+// 		bottom: -405px
+
+// 	&.animate
+// 		display: block
+// 		transition: bottom 0.5s $ease-in-out-expo
+
+// 		&.closed
+// 			bottom: -405px
+
+
+// 	&-title
+// 		position: relative
+// 		height: 52px
+// 		background-color: $primary
+// 		color: white
+// 		cursor: pointer
+
+// 		&-text
+// 			position: absolute
+// 			font-size: 19px
+// 			font-weight: 600
+// 			padding-left: 4.6%
+// 			line-height: 1
+// 			+valign
+// 			top: 53%
+// 			+user-select(none)
+
+// 		&:after
+// 			content: 'b'
+// 			position: absolute
+// 			+valign
+// 			top: 43%
+// 			right: 4.6%
+// 			+size(21, 12)
+// 			font-family: gvcons
+// 			font-size: 21px
+// 			+user-select(none)
+
+// 			.closed &
+// 				top: 52%
+// 				-webkit-transform: rotate(180deg)
+// 				-moz-transform: rotate(180deg)
+// 				-ms-transform: rotate(180deg)
+// 				transform: rotate(180deg)
+
+
+// 	&-form
+// 		box-sizing: border-box
+// 		padding: 26px
+
+// 		.step
+// 			width: 100%
+// 			float: none
+// 			display: none
+// 			text-align: left
+
+// 			&.show
+// 				display: block
+
+// 		&-button
+// 			position: relative
+// 			float: none
+// 			clear: both
+// 			display: block
+// 			width: 100%
+// 			height: 53px
+// 			border-radius: 3px
+// 			background-color: $contrast
+// 			font-size: 19px
+// 			font-weight: 600
+// 			line-height: 55px
+// 			color: white
+// 			cursor: pointer
+// 			+user-select(none)
+
+// 			&-text
+// 				position: absolute
+// 				+valign
+// 				top: 54%
+// 				left: 0
+// 				right: 16px
+// 				font-size: 19px
+// 				font-weight: 600
+// 				line-height: 1
+// 				text-align: center
+
+// 				&:after
+// 					content: 'aa'
+// 					position: absolute
+// 					top: 0px
+// 					font-family: gvcons
+// 					font-size: 16px
+// 					font-weight: 600
+// 					letter-spacing: -10px		
+
+
+// 			&.input
+// 				display: none
+
+	
+// 	&-fieldset
+// 		width: 100%
+// 		margin-top: 22px
+		
+// 		&.error
+// 			color: $grey-dark
+// 			border-radius: 5px
+// 			background-image: none
+// 			background-color: transparent
+
+// 		&:first-child
+// 			margin-top: 2px
+
+// 		&.half
+// 			width: perc(143px, 298px)
+// 			float: left
+
+// 			&:nth-child(3),
+// 			&:nth-child(5)
+// 				margin-left: perc(12px, 298px)
+
+// 		&-wrap
+// 			width: 100%
+
+// 		&-label
+// 			line-height: 1
+// 			margin-bottom: 7px
+// 			font-size: 12px
+// 			letter-spacing: .2px
+// 			font-weight: 700
+// 			color: $grey-darker
+// 			text-transform: uppercase
+
+// 		&-input,
+// 		&-select
+// 			width: 100%
+// 			height: 40px
+// 			background-color: $subberwhite
+// 			border: 1px solid $divider
+// 			border-radius: 3px
+// 			box-sizing: border-box
+// 			padding: 12px 11px 010px
+// 			font-size: 14px
+// 			font-weight: 500
+
+// 			.error &
+// 				border-color: #E34B4F
+
+
+
+
+
+// 	&-upsale
+// 		position: relative
+// 		top: 20px
+// 		clear: both
+// 		font-size: 14px
+// 		font-weight: 500
+// 		color: $grey-other
+// 		margin: 40px 0
+// 		+clearfix
+
+// 		&-text
+// 			float: left
+// 			width: 70%
+
+// 	.results
+// 		height: 353px
+
+// 		&:empty
+// 			height: 0
+
+// 	.results-success
+// 		position: absolute
+// 		+valign
+// 		top: 56%
+// 		left: 0
+// 		right: 0
+// 		max-width: 70%
+// 		+center
+// 		font-size: 16px
+// 		text-align: center
+
+// 		p
+// 			margin-bottom: 20px
 
 
 
