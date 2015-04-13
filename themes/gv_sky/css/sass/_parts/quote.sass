@@ -169,16 +169,19 @@
 			z-index: 2
 			line-height: 1
 			margin-bottom: 7px
-			font-size: 11px
+			font-size: 10px
 			font-weight: 600
-			color: $grey-light
-			padding: 8px 11px 0
+			color: $grey-other
+			padding: 10px 12px 0
 			opacity: 0
 			transition: opacity 0.2s
 
 			.focus &
-				color: $primary
+				color: $contrast
+
+			.filled &
 				opacity: 1
+				
 
 		&-input,
 		&-select
@@ -194,8 +197,11 @@
 			font-weight: 500
 			transition: all 0.2s
 
+			.filled &
+				padding: 16px 11px 0
+
 			.focus &
-				padding: 14px 11px 0
+				border-color: $contrast
 
 			.error &
 				border-color: #E34B4F
