@@ -312,6 +312,15 @@ $this = $$(this);
 
 	// });
 
+	jQuery('.get-quote-form .input').each(function(){
+		jQuery(this).focus(function(){
+			jQuery(this).parents('.fieldset').addClass('focus');
+		});
+		jQuery(this).blur(function(){
+			jQuery(this).parents('.fieldset').removeClass('focus');
+		});
+	});
+
 	$$('.get-quote-form-button').click(function(){
 		$$('.get-quote-form').submit();
 	});
