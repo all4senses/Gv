@@ -1,9 +1,6 @@
 .get-quote
 	&-wrapper
 		width: 100%
-		background-color: $subwhite
-		padding: 60px 0 
-		box-sizing: border-box
 
 		+max(920)
 			border-top: 1px solid $divider
@@ -21,19 +18,24 @@
 	
 
 .get-quote
+	background-color: $subwhite
+	padding: 60px 0 
+	box-sizing: border-box
 	width: 100%
 
 	&-title
 		font-size: 32px
-		font-weight: 600
-		line-height: 1
+		max-width: 500px
+		+center
+		font-weight: 400
+		line-height: 1.2
 		text-align: center
 		color: $primary
 
 	&-subtitle
-		margin-top: 10px
+		+center(10px)
 		font-size: 23px
-		font-weight: 600
+		font-weight: 500
 		line-height: 1
 		text-align: center
 		color: $grey
@@ -42,7 +44,8 @@
 
 
 	&-form
-		width: 55%
+		width: 100%
+		max-width: 600px
 		+center
 		padding: 30px
 		background-color: white

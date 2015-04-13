@@ -1,22 +1,27 @@
 /*
-Error: Undefined variable: "$subwhite".
-        on line 4 of /Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass
+Error: Undefined mixin 'max'.
+        on line 5 of /Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass, in `max'
+        from line 5 of /Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass
 
 1: .get-quote
 2: 	&-wrapper
 3: 		width: 100%
-4: 		background-color: $subwhite
-5: 		padding: 60px 0 
-6: 		box-sizing: border-box
+4: 
+5: 		+max(920)
+6: 			border-top: 1px solid $divider
 7: 
-8: 		+max(920)
-9: 			border-top: 1px solid $divider
+8: 		+m(736)
+9: 			display: none !important
+10: 
 
 Backtrace:
-/Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass:4
-/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/script/tree/variable.rb:49:in `_perform'
-/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/script/tree/node.rb:50:in `perform'
-/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/tree/visitors/perform.rb:394:in `visit_prop'
+/Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass:5:in `max'
+/Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass:5
+/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/tree/visitors/perform.rb:348:in `block in visit_mixin'
+/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/stack.rb:98:in `block in with_mixin'
+/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/stack.rb:115:in `with_frame'
+/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/stack.rb:98:in `with_mixin'
+/Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/tree/visitors/perform.rb:346:in `visit_mixin'
 /Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/tree/visitors/base.rb:36:in `visit'
 /Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
 /Applications/CodeKit.app/Contents/Resources/engines/scss/lib/sass/stack.rb:79:in `block in with_base'
@@ -68,4 +73,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$subwhite\".\A         on line 4 of /Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass\A \A 1: .get-quote\A 2: 	&-wrapper\A 3: 		width: 100%\A 4: 		background-color: $subwhite\A 5: 		padding: 60px 0 \A 6: 		box-sizing: border-box\A 7: \A 8: 		+max(920)\A 9: 			border-top: 1px solid $divider"; }
+  content: "Error: Undefined mixin 'max'.\A         on line 5 of /Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass, in `max'\A         from line 5 of /Applications/MAMP/getvoip/gv_main/sites/all/themes/gv_sky/css/sass/_parts/quote.sass\A \A 1: .get-quote\A 2: 	&-wrapper\A 3: 		width: 100%\A 4: \A 5: 		+max(920)\A 6: 			border-top: 1px solid $divider\A 7: \A 8: 		+m(736)\A 9: 			display: none !important\A 10: "; }
