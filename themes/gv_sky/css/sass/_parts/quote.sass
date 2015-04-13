@@ -35,7 +35,14 @@
 
 	&-heading
 		float: left
-		width: 40%
+		width: 43%
+
+		+max(920)
+			float: none
+			width: 100%
+			max-width: 700px
+			+center
+
 
 		&-title
 			font-size: 32px
@@ -44,6 +51,13 @@
 			color: $primary
 			// color: white
 			// color: lighten($primary, 25)
+
+			+max(1024)
+				font-size: 28px
+
+			+max(920)
+				text-align: center
+
 
 			&-highlight
 				color: $grey
@@ -58,14 +72,28 @@
 			color: $grey
 			// color: $grey-other
 
+			+max(1024)
+				font-size: 18px
+
+			+max(920)
+				text-align: center
+				max-width: 80%
+				+center
+
+
+
 
 
 
 	&-form
-		// box-sizing: border-box
-		// padding: 25px 45px 45px
 		width: 55%
 		float: right
+
+		+max(920)
+			float: none
+			width: 100%
+			max-width: 500px
+			+center(28px)
 
 		.step
 			width: 100%

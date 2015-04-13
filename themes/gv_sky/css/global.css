@@ -1228,12 +1228,24 @@ th {
     clear: both; }
   .get-quote-heading {
     float: left;
-    width: 40%; }
+    width: 43%; }
+    @media screen and (max-width: 920px) {
+      .get-quote-heading {
+        float: none;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto; } }
     .get-quote-heading-title {
       font-size: 32px;
       font-weight: 500;
       line-height: 1.3;
       color: #045da0; }
+      @media screen and (max-width: 1024px) {
+        .get-quote-heading-title {
+          font-size: 28px; } }
+      @media screen and (max-width: 920px) {
+        .get-quote-heading-title {
+          text-align: center; } }
       .get-quote-heading-title-highlight {
         color: #777777; }
     .get-quote-heading-subtitle {
@@ -1243,9 +1255,23 @@ th {
       font-weight: 500;
       line-height: 27px;
       color: #777777; }
+      @media screen and (max-width: 1024px) {
+        .get-quote-heading-subtitle {
+          font-size: 18px; } }
+      @media screen and (max-width: 920px) {
+        .get-quote-heading-subtitle {
+          text-align: center;
+          max-width: 80%;
+          margin: 0 auto; } }
   .get-quote-form {
     width: 55%;
     float: right; }
+    @media screen and (max-width: 920px) {
+      .get-quote-form {
+        float: none;
+        width: 100%;
+        max-width: 500px;
+        margin: 28px auto 0; } }
     .get-quote-form .step {
       width: 100%;
       float: none;
