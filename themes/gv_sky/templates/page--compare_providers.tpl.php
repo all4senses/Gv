@@ -88,7 +88,7 @@
     
   
   
-  <footer class="footer" role="contentinfo" class="<?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
+  <footer role="contentinfo" class="footer <?php echo $hide_follow_us_links ? ' no-follow-us-links' : '' ?>">
    <div class="footer-wrap">
 
     <?php
