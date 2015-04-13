@@ -2073,7 +2073,7 @@ function gv_blocks_prefaceHomeMainInHighlightedRegion($key = 'v1') {
         $out .= '
           <h1>VoIP Providers, Best VoIP Service Providers</h1>
           <div class="hero-title">
-          <h2 class="hero-title-heading">' . $data['title']['value'] . '</h2>
+          <h2 class="hero-title-heading">' . strip_tags($data['title']['value'], '<strong>') . '</h2>
           <p class="hero-title-desc">' . $data['features']['value'] . '</p></div>'
         ;
 
