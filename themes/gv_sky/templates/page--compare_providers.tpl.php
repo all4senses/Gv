@@ -76,9 +76,9 @@
 
         
           <?php echo render($page['above_footer']); ?>
-          <?php //echo gv_blocks_getQuotePopup_onLists(); ?>
     </div>
   </main>
+  <?php echo gv_blocks_get_requestQuote_block_v8(); ?>
 
 
   <?php
