@@ -1334,8 +1334,36 @@ th {
       border-radius: 5px;
       background-image: none;
       background-color: transparent; }
+    .get-quote-fieldset:after {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      right: 12px;
+      font-family: gvcons;
+      color: #b2b2b2;
+      line-height: 1;
+      transition: all 0.2s; }
+    .get-quote-fieldset.filled:after {
+      color: #777777; }
     .get-quote-fieldset:nth-child(-n+2) {
       margin-top: 2px; }
+    .get-quote-fieldset:nth-child(2):after {
+      content: "!";
+      font-size: 18px; }
+    .get-quote-fieldset:nth-child(3):after, .get-quote-fieldset:nth-child(4):after {
+      content: "K";
+      font-size: 17px; }
+    .get-quote-fieldset:nth-child(5):after {
+      content: "[";
+      font-size: 18px; }
+    .get-quote-fieldset:nth-child(6):after {
+      content: "H";
+      font-size: 19px;
+      right: 11px; }
     .get-quote-fieldset.half {
       width: 47.9865771812%;
       float: left; }
