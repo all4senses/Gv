@@ -1,6 +1,9 @@
 .get-quote
 	&-wrapper
 		width: 100%
+		background-color: $subwhite
+		padding: 70px 0 
+		box-sizing: border-box
 
 		+max(920)
 			border-top: 1px solid $divider
@@ -18,15 +21,20 @@
 	
 
 .get-quote
-	background-color: $subwhite
-	padding: 60px 0 
-	box-sizing: border-box
 	width: 100%
+	max-width: 640px
+	+center
+	background-color: white
+	border: 1px solid $divider
+	border-radius: 5px
+	overflow: hidden
 
 	&-title
-		font-size: 32px
-		max-width: 500px
+		font-size: 36px
+		// max-width: 500px
+		max-width: 75%
 		+center
+		padding-top: 30px
 		font-weight: 400
 		line-height: 1.2
 		text-align: center
@@ -34,7 +42,7 @@
 
 	&-subtitle
 		+center(10px)
-		font-size: 23px
+		font-size: 24px
 		font-weight: 500
 		line-height: 1
 		text-align: center
@@ -44,15 +52,8 @@
 
 
 	&-form
-		width: 100%
-		max-width: 600px
-		+center
-		padding: 30px
-		background-color: white
-		border: 1px solid $divider
-		border-radius: 5px
-		overflow: hidden
 		box-sizing: border-box
+		padding: 25px 45px 45px
 
 		.step
 			width: 100%
@@ -86,7 +87,7 @@
 				left: 0
 				right: 16px
 				font-size: 22px
-				font-weight: 600
+				font-weight: 400
 				line-height: 1
 				text-align: center
 
@@ -96,8 +97,11 @@
 					top: 0px
 					font-family: gvcons
 					font-size: 19px
-					font-weight: 600
-					letter-spacing: -10px		
+					font-weight: 700
+					letter-spacing: -10px	
+
+				&-highlight
+					font-weight: 700	
 
 
 			&.input
@@ -132,8 +136,9 @@
 			.select &:after
 				content: 'b'
 				position: absolute
-				right: 11px
-				top: 17px
+				right: 12px
+				top: 20px
+				line-height: 1
 				font-family: gvcons
 				font-size: 15px
 
@@ -142,10 +147,10 @@
 			z-index: 2
 			line-height: 1
 			margin-bottom: 7px
-			font-size: 10px
+			font-size: 11px
 			font-weight: 600
-			color: $grey-other
-			padding: 10px 12px 0
+			color: $grey-light
+			padding: 11px 12px 0
 			opacity: 0
 			transition: opacity 0.2s
 
@@ -159,14 +164,14 @@
 		&-input,
 		&-select
 			width: 100%
-			height: 46px
+			height: 52px
 			background-color: $subberwhite
 			border: 1px solid $divider
 			border-radius: 3px
 			box-sizing: border-box
 			padding: 4px 11px 0
 			// line-height: 1
-			font-size: 14px
+			font-size: 16px
 			font-weight: 500
 			transition: all 0.2s
 

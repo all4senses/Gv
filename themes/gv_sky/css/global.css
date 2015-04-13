@@ -1190,7 +1190,10 @@ th {
       color: #045da0; }
 
 .get-quote-wrapper {
-  width: 100%; }
+  width: 100%;
+  background-color: #fbfbfb;
+  padding: 70px 0;
+  box-sizing: border-box; }
   @media screen and (max-width: 920px) {
     .get-quote-wrapper {
       border-top: 1px solid #d1d1d1; } }
@@ -1210,35 +1213,32 @@ th {
       clear: both; }
 
 .get-quote {
-  background-color: #fbfbfb;
-  padding: 60px 0;
-  box-sizing: border-box;
-  width: 100%; }
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  overflow: hidden; }
   .get-quote-title {
-    font-size: 32px;
-    max-width: 500px;
+    font-size: 36px;
+    max-width: 75%;
     margin: 0 auto;
+    padding-top: 30px;
     font-weight: 400;
     line-height: 1.2;
     text-align: center;
     color: #045da0; }
   .get-quote-subtitle {
     margin: 10px auto 0;
-    font-size: 23px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 1;
     text-align: center;
     color: #777777; }
   .get-quote-form {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: white;
-    border: 1px solid #d1d1d1;
-    border-radius: 5px;
-    overflow: hidden;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    padding: 25px 45px 45px; }
     .get-quote-form .step {
       width: 100%;
       float: none;
@@ -1277,7 +1277,7 @@ th {
         left: 0;
         right: 16px;
         font-size: 22px;
-        font-weight: 600;
+        font-weight: 400;
         line-height: 1;
         text-align: center; }
         .get-quote-form-button-text:after {
@@ -1286,8 +1286,10 @@ th {
           top: 0px;
           font-family: gvcons;
           font-size: 19px;
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: -10px; }
+        .get-quote-form-button-text-highlight {
+          font-weight: 700; }
       .get-quote-form-button.input {
         display: none; }
   .get-quote-fieldset {
@@ -1312,8 +1314,9 @@ th {
       .select .get-quote-fieldset-wrap:after {
         content: "b";
         position: absolute;
-        right: 11px;
-        top: 17px;
+        right: 12px;
+        top: 20px;
+        line-height: 1;
         font-family: gvcons;
         font-size: 15px; }
     .get-quote-fieldset-label {
@@ -1321,10 +1324,10 @@ th {
       z-index: 2;
       line-height: 1;
       margin-bottom: 7px;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
-      color: #979797;
-      padding: 10px 12px 0;
+      color: #b2b2b2;
+      padding: 11px 12px 0;
       opacity: 0;
       transition: opacity 0.2s; }
       .focus .get-quote-fieldset-label {
@@ -1333,13 +1336,13 @@ th {
         opacity: 1; }
     .get-quote-fieldset-input, .get-quote-fieldset-select {
       width: 100%;
-      height: 46px;
+      height: 52px;
       background-color: #f8f8f8;
       border: 1px solid #d1d1d1;
       border-radius: 3px;
       box-sizing: border-box;
       padding: 4px 11px 0;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       transition: all 0.2s; }
       .filled .get-quote-fieldset-input, .filled .get-quote-fieldset-select {
