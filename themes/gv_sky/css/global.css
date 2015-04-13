@@ -1741,6 +1741,7 @@ th {
         line-height: 78px;
         box-sizing: border-box; }
     .exit-intent-control-fieldset {
+      position: relative;
       float: left;
       width: 34.5454545455%;
       margin-bottom: 18px;
@@ -1750,10 +1751,36 @@ th {
         border-radius: 5px;
         background-image: none;
         background-color: transparent; }
+      .exit-intent-control-fieldset:after {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 12px;
+        font-family: gvcons;
+        color: #b2b2b2;
+        line-height: 1;
+        transition: all 0.2s; }
       .exit-intent-control-fieldset:nth-child(1), .exit-intent-control-fieldset:nth-child(3) {
         margin-left: 13.8636363636%; }
       .exit-intent-control-fieldset:nth-child(2n) {
         margin-left: 2.2304832714%; }
+      .exit-intent-control-fieldset:nth-child(1):after {
+        content: "!";
+        font-size: 18px; }
+      .step-three .exit-intent-control-fieldset:nth-child(1):after, .step-three .exit-intent-control-fieldset:nth-child(2):after {
+        content: "K";
+        font-size: 17px; }
+      .step-three .exit-intent-control-fieldset:nth-child(4):after {
+        content: "[";
+        font-size: 18px; }
+      .step-three .exit-intent-control-fieldset:nth-child(3):after {
+        content: "H";
+        font-size: 19px;
+        right: 11px; }
       .exit-intent-control-fieldset-wrap {
         position: relative; }
         .select .exit-intent-control-fieldset-wrap:after {
@@ -1765,14 +1792,6 @@ th {
           font-size: 18px; }
           .error .select .exit-intent-control-fieldset-wrap:after {
             color: #E34B4F; }
-        .secure .exit-intent-control-fieldset-wrap:after {
-          content: "T";
-          position: absolute;
-          right: 12px;
-          top: 14px;
-          font-family: gvcons;
-          font-size: 22px;
-          color: #d1d1d1; }
       .exit-intent-control-fieldset-input, .exit-intent-control-fieldset-select {
         width: 100%;
         border: 1px solid #d1d1d1;

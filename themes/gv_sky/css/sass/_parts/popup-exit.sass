@@ -240,6 +240,7 @@
 
 
 		&-fieldset
+			position: relative
 			float: left
 			width: perc(380px, 1100px)
 			margin-bottom: 18px
@@ -251,12 +252,40 @@
 				background-image: none
 				background-color: transparent
 
+			&:after
+				position: absolute
+				+valign
+				right: 12px
+				font-family: gvcons
+				color: $grey-light
+				// color: $grey
+				line-height: 1
+				transition: all 0.2s
+
 			&:nth-child(1),
 			&:nth-child(3),
 				margin-left: perc(152.5px, 1100px)
 
 			&:nth-child(2n)
 				margin-left: perc(18px, 807px)
+
+			&:nth-child(1):after
+				content: '!'
+				font-size: 18px
+
+			.step-three &:nth-child(1):after,
+			.step-three &:nth-child(2):after
+				content: 'K'
+				font-size: 17px
+
+			.step-three  &:nth-child(4):after
+				content: '['
+				font-size: 18px
+
+			.step-three &:nth-child(3):after
+				content: 'H'
+				font-size: 19px
+				right: 11px
 
 			&-wrap
 				position: relative
@@ -272,14 +301,14 @@
 					.error &
 						color: #E34B4F
 
-				.secure &:after
-					content: 'T'
-					position: absolute
-					right: 12px
-					top: 14px
-					font-family: gvcons
-					font-size: 22px
-					color: $divider
+				// .secure &:after
+				// 	content: 'T'
+				// 	position: absolute
+				// 	right: 12px
+				// 	top: 14px
+				// 	font-family: gvcons
+				// 	font-size: 22px
+				// 	color: $divider
 
 
 			&-input,
