@@ -1,16 +1,49 @@
 .get-quote
 	&-wrapper
+		width: 100%
 		background-color: $subwhite
-		padding: 55px 95px
+		padding: 55px 0 65px
+		box-sizing: border-box
+
+		+max(920)
+			border-top: 1px solid $divider
+
+		+m(736)
+			display: none !important
 
 		&-wrap 
 			width: 100%
-			max-width: 1130px
+			max-width: 1170px
+			padding: 0 20px
 			+center
 			+clearfix
+			box-sizing: border-box
+	
+
 	&-values
-		width: 45%
+		width: 52%
 		float: left
+
+		+max(920)
+			width: 40%
+
+		&-title
+			font-size: 35px
+			font-weight: 400
+			
+			+max(920)
+				font-size: 30px
+				font-weight: 500
+
+		&-list
+			margin: 15px
+			list-style: disc
+			&-item
+				margin-top: 10px
+				font-size: 20px
+				
+				+max(920)
+					font-size: 18px
 
 .get-quote
 	width: 45%
@@ -20,23 +53,8 @@
 	border-radius: 5px
 	overflow: hidden
 
-	+m(736)
-		display: none !important
-
-	&.show
-		display: block
-		bottom: 0
-
-	&.closed
-		bottom: -405px
-
-	&.animate
-		display: block
-		transition: bottom 0.5s $ease-in-out-expo
-
-		&.closed
-			bottom: -405px
-
+	+max(920)
+		width: 58%
 
 	&-title
 		position: relative
@@ -78,10 +96,10 @@
 			clear: both
 			display: block
 			width: 100%
+			margin-top: 25px
 			height: 53px
 			border-radius: 3px
 			background-color: $contrast
-			font-size: 19px
 			font-weight: 600
 			line-height: 55px
 			color: white
@@ -94,7 +112,7 @@
 				top: 54%
 				left: 0
 				right: 16px
-				font-size: 19px
+				font-size: 22px
 				font-weight: 600
 				line-height: 1
 				text-align: center
@@ -104,7 +122,7 @@
 					position: absolute
 					top: 0px
 					font-family: gvcons
-					font-size: 16px
+					font-size: 19px
 					font-weight: 600
 					letter-spacing: -10px		
 
@@ -123,19 +141,27 @@
 			background-image: none
 			background-color: transparent
 
-		&:first-child
+		&:nth-child(-n+2)
 			margin-top: 2px
 
 		&.half
 			width: perc(143px, 298px)
 			float: left
 
-			&:nth-child(3),
-			&:nth-child(5)
+			&:nth-child(2n)
 				margin-left: perc(12px, 298px)
 
 		&-wrap
 			width: 100%
+			position: relative
+
+			.select &:after
+				content: 'b'
+				position: absolute
+				right: 11px
+				top: 17px
+				font-family: gvcons
+				font-size: 15px
 
 		&-label
 			line-height: 1
@@ -149,12 +175,13 @@
 		&-input,
 		&-select
 			width: 100%
-			height: 40px
+			height: 46px
 			background-color: $subberwhite
 			border: 1px solid $divider
 			border-radius: 3px
 			box-sizing: border-box
-			padding: 12px 11px 010px
+			padding: 4px 11px 0
+			// line-height: 1
 			font-size: 14px
 			font-weight: 500
 
