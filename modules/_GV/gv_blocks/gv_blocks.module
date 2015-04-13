@@ -2455,9 +2455,9 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
       // foreach ($links as $provider => $link) {
       //   $out .= l($provider, $link['social_url'], array('attributes' => array(/*'target' => '_blank',*/ 'class' => array($provider), 'rel' => 'nofollow'), 'query' => $link['query']));
       // }
-      $out .= '<a href="http://www.facebook.com/sharer.php?u=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item facebook"><span class="social-share-item-text">Facebook</span></a>';
       $out .= '<a href="http://twitter.com/share?text='. $post_title.'&via=getvoipreviews" rel="nofollow" target="_blank" class="social-share-item twitter"><span class="social-share-item-text">Twitter</span></a>';
-      $out .= '<a href="https://plus.google.com/share?url=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item gplus"><span class="social-share-item-text">Google Plus</span></a>';
+      $out .= '<a href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '&title=' . $post_title . '&summary=' . $summary . '" rel="nofollow" target="_blank" class="social-share-item linkedin"><span class="social-share-item-text">Linkedin</span></a>';
+      $out .= '<a href="http://www.facebook.com/sharer.php?u=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item facebook"><span class="social-share-item-text">Facebook</span></a>';
       $out .= '<span class="social-share-item expand"></span>';
       
       
@@ -2465,9 +2465,9 @@ function gv_blocks_getSidebarShareStaticBlock($node = NULL) {
       $out .= '<span class="social-share-items-hidden"><span class="social-share-items-hidden-wrap">';
       
       // $out .= '<a href="mailto:?subject=' . $post_title . '&body=Check Out GetVoIP\'s article:%3Ca%20href=%22' . $post_url . '%22%3E' . $post_title . '%3C/a%3E" rel="nofollow" target="_blank" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
-      $out .= '<a href="mailto:?subject=' . $post_title . '&body=Check Out GetVoIP\'s article \'' . $post_title . '\' at: ' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
-      $out .= '<a href="http://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '&title=' . $post_title . '&summary=' . $summary . '" rel="nofollow" target="_blank" class="social-share-item linkedin"><span class="social-share-item-text">Linkedin</span></a>';
+      $out .= '<a href="https://plus.google.com/share?url=' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item gplus"><span class="social-share-item-text">Google Plus</span></a>';
       $out .= '<a href="http://www.stumbleupon.com/submit?url=' . $post_url . '&title=' . $post_title . '" rel="nofollow" target="_blank" class="social-share-item stumbleupon"><span class="social-share-item-text">Stumbleupon</span></a>';
+      $out .= '<a href="mailto:?subject=' . $post_title . '&body=Check Out GetVoIP\'s article \'' . $post_title . '\' at: ' . $post_url . '" rel="nofollow" target="_blank" class="social-share-item email"><span class="social-share-item-text">Email</span></a>';
       
       $out .= '</span></span>';
 
