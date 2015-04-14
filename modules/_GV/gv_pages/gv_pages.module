@@ -4767,9 +4767,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       }
       
       
-      if ($user->uid == 1) {
-        return;
-      }
       
       // Hide some fields, so that even super admin could not see and change it.
       $form['field_r_rating_overall']['#access'] = FALSE;
@@ -4799,6 +4796,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
         ),
         '#weight' => -15,
       );
+      
+      
+      
+      
+      if ($user->uid == 1) {
+        return;
+      }
       
           $form['about_you']['title']['#markup'] = '';
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
