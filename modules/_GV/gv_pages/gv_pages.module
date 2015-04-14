@@ -7836,7 +7836,10 @@ function gv_pages_node_presave($node) {
     }
     
     // Extract votes data from the local saved field.
-    $saved_ratings = unserialize($node->field_ratings_oprovider['und'][0]['value']);
+    if (empty($node->field_ratings_oprovider['und'][0]['value'])) {
+      return;
+    }
+    $saved_ratings = unserialize(@$node->field_ratings_oprovider['und'][0]['value']);
     $provider_nid = isset($node->field_ref_provider['und'][0]['target_id']) ? $node->field_ref_provider['und'][0]['target_id'] : NULL;
     
     
