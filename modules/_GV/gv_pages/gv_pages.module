@@ -5008,9 +5008,10 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
               );
 
               dpm($form['body']);
-              if ($user->uid != 1) {
+              //if ($user->uid != 1) 
+                {
                   //$form['body']['#weight'] = 2;
-                  $form['body']['und'][0]['value']['#rows'] = 5;
+                  $form['body']['und'][0]['#rows'] = 5; //$form['body']['und'][0]['value']['#rows'] = 5;
                   // Unlink Ckeditor
                   // Bad trial...
                   $form['body']['und'][0]['#type'] = 'textarea';
