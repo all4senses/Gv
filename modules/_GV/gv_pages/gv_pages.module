@@ -5022,8 +5022,8 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
                    $form['body']['und'][0]['#wysiwyg'] = FALSE; // WORKS! Turn off rich editor
                    
-                   //$form['body']['und']['#after_build'][] = 'gv_pages_nodeHideTextSelectFormat';
-                   $form['#after_build'][] = 'gv_pages_nodeHideTextSelectFormat';
+                   $form['body']['und']['#after_build'][] = 'gv_pages_nodeHideTextSelectFormat';
+                   
                    
                   $form['ureview']['u_input']['body'] = $form['body'];
 
@@ -5424,13 +5424,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 
 
 function gv_pages_nodeHideTextSelectFormat (&$form) {
-//  $form[LANGUAGE_NONE][0]['format']['guidelines']['#access'] = FALSE;
-//  $form[LANGUAGE_NONE][0]['format']['format']['#access'] = FALSE;
-//  $form[LANGUAGE_NONE][0]['format']['help']['#access'] = FALSE;
-//  $form[LANGUAGE_NONE][0]['format']['#theme_wrappers'] = NULL;
+  $form['ureview']['u_input']['body']['und']['0']['format']['guidelines']['#access'] = FALSE;
+  $form['ureview']['u_input']['body']['und']['0']['format']['format']['#access'] = FALSE;
+  $form['ureview']['u_input']['body']['und']['0']['format']['help']['#access'] = FALSE;
+  $form['ureview']['u_input']['body']['und']['0']['format']['#theme_wrappers'] = NULL;
 //  return $form; 
   
-  $form['ureview']['u_input']['body']['und']['0']['format']['#access'] = FALSE;
+  //$form['ureview']['u_input']['body']['und']['0']['format']['#access'] = FALSE;
 }
 
 /**
