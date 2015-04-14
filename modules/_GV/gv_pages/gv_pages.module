@@ -4884,11 +4884,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
   
       
       
-      if ($user->uid == 1) {
-        return;
-      }
-      
-      
       $form['provider'] = array(
         '#type' => 'container',
         '#attributes' => array(
@@ -4936,6 +4931,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           
          //dpm($form['provider']); 
       
+      
+      
+      if ($user->uid == 1) {
+        return;
+      }
+      
+          
           
       // Rate and vote group.
       //$rating_options = array('' => '- ' . t('Select a value') . ' -', '20' => 'Really Bad', '40' => 'Bad', '60' => 'OK', '80' => 'Good', '100' => 'Really Good');
