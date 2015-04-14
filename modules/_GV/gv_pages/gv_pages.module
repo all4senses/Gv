@@ -4800,10 +4800,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       
       
       
-      if ($user->uid == 1) {
-        return;
-      }
-      
           $form['about_you']['title']['#markup'] = '';
           // Rebuild fields for fname, lname and email to make it possibele to add a Title attr to a input tag.
           $fields_to_rebuild = array('field_r_fname' => 'John', 'field_r_lname' => 'Doe', 'field_r_email' => 'example@email.com');
@@ -4886,6 +4882,13 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           
           
   
+      
+      
+      if ($user->uid == 1) {
+        return;
+      }
+      
+      
       $form['provider'] = array(
         '#type' => 'container',
         '#attributes' => array(
