@@ -63,7 +63,7 @@ elseif($view_mode == 'servicePage_bottomMainReviewTeaser') {
   $provider_nid = $node->field_ref_provider['und'][0]['target_id'];
   
   
-  $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : $node->body[0]['value'];
+  $body = isset($node->body['und'][0]['value']) ? $node->body['und'][0]['value'] : (isset($node->body[0]['value']) ? $node->body[0]['value'] : '');
   $teaser = strip_tags($body);
   
   $characters_num = 112;
@@ -244,7 +244,12 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
           
             <?php echo render($content['gv_ratings']); ?>
             <div class="reviews-list-item-rating-score">
-                <?php $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']; ?>
+                <?php 
+                  if (!isset($node->gv_rating_overall)) {
+                    $node->gv_rating_overall = NULL;
+                  }
+                  $r = empty($node->field_r_rating_overall['und'][0]['value']) ? $node->field_r_rating_overall[0]['value'] : $node->field_r_rating_overall['und'][0]['value']; 
+                ?>
 
                 <div class="reviews-list-item-rating-score-caption">Overall</div>
                 <div class="reviews-list-item-rating-score-number" rel="v:rating">
