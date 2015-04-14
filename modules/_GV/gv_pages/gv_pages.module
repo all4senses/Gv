@@ -5026,9 +5026,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
               unset($form['body']);
           
           
-          if ($user->uid == 1) {
-            return;
-          }
 
 
           
@@ -6027,7 +6024,7 @@ function gv_page_alterSubmitReviewPage_v1(&$form) {
       } // End of Edit a review page.
       
       
-      
+    
       // Add stars widgets to a Rating block
       $module_path = drupal_get_path('module', 'gv_pages');
       $module_misc_path = drupal_get_path('module', 'gv_misc');
