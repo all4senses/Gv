@@ -5019,7 +5019,10 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
                   ///$form['body']['und'][0]['#format'] = 'gv_full_html'; // link
                    /////$form['body']['und'][0]['#format'] = 'filtered_html'; // unlink
                    $form['body']['und'][0]['#format'] = 'plain_text'; // unlink
-
+                   
+                   $form['body']['und'][0]['#wysiwyg'] = FALSE; 
+                   
+                   
                   $form['ureview']['u_input']['body'] = $form['body'];
 
                   $form['ureview']['u_input']['body']['und'][0]['#attributes']['title'] = 'REVIEW';
