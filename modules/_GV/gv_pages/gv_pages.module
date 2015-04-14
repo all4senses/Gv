@@ -4933,10 +4933,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       
       
       
-      if ($user->uid == 1) {
-        return;
-      }
-      
           
           
       // Rate and vote group.
@@ -5030,7 +5026,11 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
               unset($form['body']);
           
           
-          
+          if ($user->uid == 1) {
+            return;
+          }
+
+
           
               //dpm($form['ureview']);
               
