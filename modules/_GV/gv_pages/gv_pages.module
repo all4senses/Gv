@@ -4702,9 +4702,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
       
       global $user;
       
-      if ($user->uid == 1) {
-        return;
-      }
       if (in_array('administrator', $user->roles)) {
         $current_user_is_admin = TRUE;
       }
@@ -4767,6 +4764,11 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
             '#weight' => 30,
           );
         }
+      }
+      
+      
+      if ($user->uid == 1) {
+        return;
       }
       
       // Hide some fields, so that even super admin could not see and change it.
