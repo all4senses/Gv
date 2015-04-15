@@ -15208,22 +15208,11 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
               'thumbnail_src' => $thumbnail_src,
           );
 
-          //dpm($snippetVideoData);
-           
-          //dpm($data_from);
-          //dpm($data_from->entry->{'media$group'});
-          //dpm($data_from->entry->{'media$group'}->{'media$description'}->{'$t'});
         
       }
 
-
-      ////$body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
-      ////////$body_full_markup = preg_replace('|(\[video:.*http.*\])|', '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject"><span itemprop="name" content="Cisco SPA 303"></span><span itemprop="description" content="Unboxing Cisco SPA 303"></span><meta itemprop="thumbnailUrl" content="/images/posts/CiscoSPA303_outofthebox_0.PNG" ></meta>$1</div>', $body_full_markup);
-
     }
   }
-  // Wistia.com
-  //elseif (preg_match('/.*\/medias\/(.*)\?(.*)\]/is', $videoToken_html_url_fragment, $matches_2)) {
   elseif (
           preg_match('/.*\/medias\/(.*)\?(.*)/is', $videoToken_html_url_fragment, $matches_2)
           ||
@@ -15276,7 +15265,6 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
   
   if (preg_match_all('/\[video:(.*)\]/isU', $body_full_markup, $matches_all)) {
     
-    //dpm($matches_all);
     
     // Go through Every url
     foreach ($matches_all[1] as $key => $match_url) {
@@ -15293,24 +15281,11 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
          http://stackoverflow.com/questions/18886947/schema-org-having-video-object-nested-inside-product
          http://googlewebmastercentral.blogspot.ru/2012/02/using-schemaorg-markup-for-videos.html
         */
-
-        //dpm($thumbnail_src);
-        /*
-        $body_full_markup = preg_replace('|(\[video:.*http.*\])|isU'
-                '<div class="gv-video" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
-                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
-                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
-                  . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
-                  . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
-                  . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
-                  . '$1' 
-              . '</div>', $body_full_markup);
-        */
         
         $body_full_markup = str_replace($matches_all[0][$key], 
                 '<div class="gv-video' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
-                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
-                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
+                  . '<meta itemprop="name" content="' . $snippetVideoData['title'] . '"></meta>' 
+                  . '<meta itemprop="description" content="' . $snippetVideoData['descr'] . '"></meta>' 
                   . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
                   . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
                   . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
@@ -15336,26 +15311,13 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       //dpm($match);
           
       if ($snippetVideoData = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($matches[1][$key])) {
-        //dpm($snippetVideoData);
-        
-        //$body_full_markup = preg_replace('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', 
-        /*
-        $body_full_markup = preg_replace('|' . $match . '|isU', 
-              '<div class="gv-video-iframe' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">'
-                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
-                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
-                  . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
-                  . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
-                  . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>'  
-                . $match 
-            . '</div>', $body_full_markup);
-        */
+
         
         
         $body_full_markup = str_replace($match, 
                 '<div class="gv-video' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
-                  . '<span itemprop="name" content="' . $snippetVideoData['title'] . '"></span>' 
-                  . '<span itemprop="description" content="' . $snippetVideoData['descr'] . '"></span>' 
+                  . '<meta itemprop="name" content="' . $snippetVideoData['title'] . '"></meta>' 
+                  . '<meta itemprop="description" content="' . $snippetVideoData['descr'] . '"></meta>' 
                   . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
                   . '<meta itemprop="duration" content="T' . $snippetVideoData['duration'] . 'S" ></meta>'
                   . '<meta itemprop="contentUrl" content="' . $snippetVideoData['contentUrl'] . '" ></meta>' 
@@ -15368,20 +15330,10 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
       
           dpm('No rich snippet added to the <iframe...> tag with the url ' . $matches[1][$key] . ', because a video provider wasn\'t  identified');
           
-//          $body_full_markup = preg_replace('|' . $match . '|is', 
-//              '<div class="gv-video-iframe" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
-//                . '<span itemprop="name" content="' . /*$title .*/ '"></span>' 
-//                . '<span itemprop="description" content="' . /*$descr .*/ '"></span>' 
-//                . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . /*$thumbnail_src .*/ '" ></meta>'
-//                . '<meta itemprop="duration" content="T' . /*$duration .*/ 'S" ></meta>'
-//                . '<meta itemprop="contentUrl" content="' . /*$contentUrl .*/ '" ></meta>' 
-//                . $match 
-//            . '</div>', $body_full_markup);
           
       }
       
     }
-    //dpm($a);
   }
   
   return $body_full_markup;
@@ -15459,30 +15411,14 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
     
     $contains_snippet = TRUE;
     
-    //dpm($matches);
-    //dpm('a1');
     foreach($matches[0] as $key => $match){
-      //dpm($match);
-      //dpm($matches[1][$key]);
       // Doesn't work!
       //$body_full_markup = preg_replace('|' . $match . '|is', $matches[1][$key], $body_full_markup);
       $body_full_markup = str_replace($match, $matches[1][$key], $body_full_markup);
     }
-    //dpm('a2');
   }
  
-  // form_set_value($form['field_main_image'], array('und' => array(0 => array('value' => serialize($teaser_data['main_image']), 'format' => 'full_html') )), $form_state);
-  
-  
-  
-  // Wrong way!, replace just first occurance
-//  //if (preg_match('/\[video:.*v=(.*)\]/i', $body_full_markup, $matches)) {
-//  elseif (preg_match('/\<div class="gv-video".*(\[.*\])\<\/div\>/is', $body_full_markup, $matches)) {
-//    dpm('c1');
-//    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-//    $body_full_markup = preg_replace('|\<div class="gv-video".*(\[.*\])\<\/div\>|is', '$1', $body_full_markup);
-//  }
-  
+
   
   
   if(preg_match_all('/<div class="gv-video-iframe.*(<iframe.*src=\"(.*)\".*><\/iframe>)<\/div>/isU', $body_full_markup, $matches)) {
