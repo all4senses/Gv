@@ -245,6 +245,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             <?php echo render($content['gv_ratings']); ?>
             <div class="reviews-list-item-rating-score">
                 <?php 
+                dpm($node);
                   if (!isset($node->gv_rating_overall)) {
                     $node->gv_rating_overall = NULL;
                   }
