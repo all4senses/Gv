@@ -14,7 +14,7 @@ if ( current_path() == 'blog' ) {
   drupal_add_js('/sites/all/themes/gv_sky/js/blog.js');
 }
 
-if ( current_path() == 'node/add/review' ) {
+if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== FALSE ) {
   drupal_add_js('/sites/all/themes/gv_sky/js/submit-review.js');
 }
 
