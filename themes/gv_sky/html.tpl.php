@@ -28,7 +28,7 @@
   <?php if ( strpos(request_path(), 'blog/') !== FALSE || strpos(request_path(), 'library/') !== FALSE || strpos(request_path(), 'news/') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
-  <?php if ( current_path() == 'node/add/review' ) {?>
+  <?php if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/submit-review.css">
   <?php } ?>
   <?php if ($is_admin) {?>
