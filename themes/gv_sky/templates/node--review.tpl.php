@@ -245,7 +245,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             <?php echo render($content['gv_ratings']); ?>
             <div class="reviews-list-item-rating-score">
                 <?php 
-                dpm($node);
+                //dpm($node);
                   if (!isset($node->gv_rating_overall)) {
                     $node->gv_rating_overall = NULL;
                   }
@@ -256,7 +256,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                 <div class="reviews-list-item-rating-score-number" rel="v:rating">
                   <span typeof="v:Rating">
                     <span property="v:worst" content="0"></span>
-                    <span property="v:value"> <?php echo $node->gv_rating_overall; ?> </span>
+                    <span property="v:value"> <?php echo $r/*$node->gv_rating_overall*/; ?> </span>
                     <span property="v:best" content="5"></span>
                   </span>
                 </div>
