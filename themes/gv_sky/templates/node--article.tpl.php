@@ -240,7 +240,7 @@
                 </h2>
              <?php endif; ?> 
 
-          <?php print render($title_suffix);
+          <?php //print render($title_suffix);
           if ($page) {
             echo $submitted;
           }
