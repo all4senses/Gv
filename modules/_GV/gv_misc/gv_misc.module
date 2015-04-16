@@ -15294,7 +15294,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         $added_snippet = TRUE;
       }
       else {
-        dpm('No rich snippet added to the [video:...] token with the url ' . $match_url . ', because a video provider wasn\'t  identified');
+        //dpm('No rich snippet added to the [video:...] token with the url ' . $match_url . ', because a video provider wasn\'t  identified');
+        drupal_set_message('No rich snippet added to the [video:...] token with the url ' . $match_url . ', because a video provider wasn\'t  identified', 'warning');
       }
     } // End of foreach ($matches_all[1] as $key => $match_url) {
 
@@ -15315,7 +15316,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         
         
         $body_full_markup = str_replace($match, 
-                '<div class="gv-video-iframe' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                //'<div class="gv-video-iframe' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
+                '<div class="gv-video' . $add_center_class . '" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">' 
                   . '<meta itemprop="name" content="' . $snippetVideoData['title'] . '"></meta>' 
                   . '<meta itemprop="description" content="' . $snippetVideoData['descr'] . '"></meta>' 
                   . '<meta itemprop="thumbnailUrl" content="http://getvoip.com/' . $snippetVideoData['thumbnail_src'] . '" ></meta>'
@@ -15327,10 +15329,8 @@ function gv_misc_addGvVideoGoogleVideoSnippet_toVideoToken_ifPresented($body_ful
         $added_snippet = TRUE;
       }
       else {
-      
-          dpm('No rich snippet added to the <iframe...> tag with the url ' . $matches[1][$key] . ', because a video provider wasn\'t  identified');
-          
-          
+          //dpm('No rich snippet added to the <iframe...> tag with the url ' . $matches[1][$key] . ', because a video provider wasn\'t  identified');
+          drupal_set_message('No rich snippet added to the <iframe...> tag with the url ' . $matches[1][$key] . ', because a video provider wasn\'t  identified');
       }
       
     }

@@ -2973,12 +2973,10 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
         $extra_data = unserialize($form['field_extra_data']['und'][0]['value']['#default_value']);
         //dpm($extra_data);
         
-        dpm($form);
+        //dpm($form);
         
         $form['body']['und'][0]['#default_value'] = gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($form['body']['und'][0]['#default_value']);
       
-        dpm($form['body']);
-        
         if (!empty($form['field_guest_author']['und'][0]['value']['#default_value'])) {
           $guest_author = $form['field_guest_author']['und'][0]['value']['#default_value'];
         }
