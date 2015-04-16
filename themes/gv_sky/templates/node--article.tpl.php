@@ -38,7 +38,6 @@
   }
   
   $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
-              
  
   if($view_mode == 'home_teaser') {
 
@@ -221,7 +220,9 @@
                   }
                   else {
                     if ($node->type == 'article') {
-                      echo 'By' , ': ' , $author_name;
+                      echo $submitted;
+                      echo '<div class="blog-posts-item-meta-author">' . $author_name . '</div>';
+                      echo '<div class="blog-posts-item-meta-date">' . $created_str . '</div>';
                     }
                     else {
                       echo $submitted;
@@ -435,7 +436,7 @@
     
 
 <?php if (!$page): ?>
-  </article> <!-- /.node -->
+  </article>
 <?php endif; ?>
 
   

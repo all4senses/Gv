@@ -311,6 +311,8 @@ $this = $$(this);
 	// 	open = !open;
 
 	// });
+	$$('.get-quote-form input[name="referrer"]').val(document.referrer);
+	$$('.get-quote-form input[name="url"]').val(document.URL);
 
 	jQuery('.get-quote-form .input').each(function(){
 		jQuery(this).focus(function(){
