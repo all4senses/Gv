@@ -5751,30 +5751,12 @@ function gv_blocks_get_requestQuote_block_v8() {
     return NULL;
   }
   
-  
- // drupal_add_library('system', 'ui.core');
- // drupal_add_library('system', 'ui.widget');
-//  drupal_add_library('system', 'ui.position');  
-  
-  
-  // drupal_add_js('sites/all/libraries/jquery.plugins/jquery.hint-with-password.js');
+
   
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   drupal_add_js('sites/all/themes/gv_sky/js/get-quote.js', array('weight' => 5));
-  // drupal_add_js($path_to_custom_js . 'gv_requestquote_v8.js');
-  
-  // $path_to_custom_js = 'sites/all/modules/_JS/multipart_form/';
-  // drupal_add_js($path_to_custom_js . 'jquery.form.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.validate.js');
-  // drupal_add_js($path_to_custom_js . 'jquery.form.wizard-min.js');
-  
-  
-  // $path_to_custom_js = drupal_get_path('module', 'selectmenu') . '/js/jquery.ui.selectmenu/';
-  // drupal_add_js($path_to_custom_js . 'jquery.ui.selectmenu.js');
-  // drupal_add_css($path_to_custom_js . 'jquery.ui.selectmenu.css');
-  
-  
-  // height: 140px; 
+
+
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
