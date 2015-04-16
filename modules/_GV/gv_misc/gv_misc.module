@@ -356,7 +356,7 @@ function gv_misc_imageOptimizeOnServer($file) {
   // Code example from the image_optimize.module
   $dst = drupal_realpath($file['uri']);
   $file_data = print_r($file, TRUE);
-  gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'going to optimize file: ' . $file_data));
+  //gv_misc_sendMessage('new_file_was_uploaded', array('report' => 'going to optimize file: ' . $file_data));
   
   switch ($file['filemime']) {
     case 'image/png':
