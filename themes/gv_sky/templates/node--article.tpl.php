@@ -39,37 +39,7 @@
   
   $extra_data['guest_author'] = $author_name = !empty($extra_data['guest_author']) ? $extra_data['guest_author'] : NULL;
  
-  if($view_mode == 'home_teaser') {
-
-   
-    $author_name = gv_misc_getNodeAuthor($node);
-    
-    echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">By <span class="author">' . $author_name . '</span> / ' . date('F d, Y', $node->created) . '</div>' 
-            . '<div class="teaser">' . $teaser_data['teaser_only_home'] . '</div>';
-
-    return;
-  }
-  elseif($view_mode == 'home_teaser_rotated') {
-
-    if (!empty($extra_data['home_teaser_rotated_image_beautify'])) {
-      echo $extra_data['home_teaser_rotated_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
-    }
-    elseif (!empty($extra_data['home_teaser_image_beautify'])) {
-      echo $extra_data['home_teaser_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
-    }
-    else {
-      echo $extra_data['teaser_main_image_beautify'] . '<h3>'. l($node->title, 'node/' . $node->nid) . '</h3><div class="submitted">' . date('F j\t\h \<\s\p\a\n\>Y\<\/\s\p\a\n\>', $node->created) . '</div>';
-    }
-    
-    return;
-  }
-  elseif ($view_mode == 'side_block_teaser_latestBlogsOnNews') {
-    
-    
-    echo '<div class="block-thumb">' . $extra_data['block_thumb_image_html_beautify'] . '</div>' . l($node->title, 'node/' . $node->nid);
-    return;
-  }
-  elseif($view_mode == 'side_block_teaser') {
+  if($view_mode == 'side_block_teaser') {
       
       // Hide thumbnails
       $teaser_data['side_block_main_image'] = NULL; 
@@ -174,10 +144,7 @@
             
               if ($page) {
                 
-                
-               
                 if ($node->uid) {
-                  
                   global $language;
                   
                   if (!$extra_data['guest_author']) {
@@ -190,10 +157,7 @@
                                   '<div class="article-meta-category ' . $category_class . '" data-category="' . $category_class . '">' . $category_text . '</div>' .
                                   (!$extra_data['guest_author'] ? '<div class="article-meta-author"><a class="article-meta-author-link" href="' . $author_url . '" title="' . $author_title . '" class="username" lang="' . $language->language . '" xml:lang="' . $language->language . '" about="' . $author_url . '" typeof="sioc:UserAccount" property="foaf:name">' . $author_name . '</a>' /*. $gplus_profile*/ : '<div class="article-meta-author guest-author">' . $author_name) . '</div>' .
                                   ($node->type == 'article' ? '' : '<div class="article-meta-date">' . $created_str . '</div>') .
-                          
                                '</div></div>';
-                  
-                 
                 }
                 else {
                   $submitted .= '<span property="dc:date dc:created" content="' . $created_rdf . '" datatype="xsd:dateTime" rel="sioc:has_creator">' .
