@@ -3764,6 +3764,17 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   }
   elseif ($user->uid == 1 && preg_match('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches)) {
     dpm($matches);
+    
+    
+    if($main_image['src'] = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($matches[1], TRUE)) {
+      $found_image = TRUE;
+      
+      dpm($main_image);
+    }
+    //$body_full_markup = preg_replace('|<iframe.*src=\"(.*)\".*><\/iframe>|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
+    
+    
+    
 //    $video_id = $matches[1];
 //    
 //    //if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
@@ -15188,9 +15199,10 @@ function gv_misc_exit() {
 }
 
 
-function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($videoToken_html_url_fragment) {
+function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($videoToken_html_url_fragment, $only_thumbnail = FALSE) {
  
   $snippetVideoData = NULL;
+  $thumbnail_src = NULL;
   
     // YouTube.com
   //if (preg_match('/.*\?v=(.*)\s?.*\]/is', $videoToken_html_url_fragment, $matches_2)) {
@@ -15207,6 +15219,12 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
 
     //if($thumbnail_src = gv_misc_getYoutubeVideoThumb($video_id)) {
     if($thumbnail_src = gv_misc_getVideoThumb($video_id)) {
+      
+      
+      if ($only_thumbnail) {
+        return $thumbnail_src;
+      }
+      
       //dpm('$thumbnail_src = ' . $thumbnail_src);
       // Get YouTube video info via Google API REST
       if ($data_from = gv_misc_getVideoInfo($video_id, 'YouTube')) {
@@ -15241,6 +15259,10 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
 
         if ($thumbnail_src = gv_misc_getVideoThumb($video_id, 'Wistia', $video_data->thumbnail->url)) {
           
+          if ($only_thumbnail) {
+            return $thumbnail_src;
+          }
+
           $snippetVideoData = array( 
             'title' => $video_data->name,
             'descr' => $video_data->description,
@@ -15255,8 +15277,13 @@ function gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullV
     }
 
   }
-    
-  return $snippetVideoData;
+  
+  if ($only_thumbnail) {
+    return $thumbnail_src;
+  }
+  else {  
+    return $snippetVideoData;
+  }
 }
 
 /**
