@@ -355,8 +355,10 @@
           
           echo render($content);
         ?>
-      <!-- </div> -->
       <?php echo (  (current_path() == 'blog' && !empty($extra_data['read_more_html']) ) ? $extra_data['read_more_html'] : ''); ?>
+      <?php if (current_path() == 'blog') { // blog-posts-item-wrap ?>
+        </div>
+      <?php } ?>
       <?php // echo print_r($extra_data) ?>
       </div> <!-- End of content wrap -->
 
