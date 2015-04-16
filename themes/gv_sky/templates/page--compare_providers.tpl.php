@@ -6,7 +6,7 @@
     drupal_static_reset('drupal_add_css');
   }
 ?>
-<link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css">
+
   <header id="header" role="banner">
 
     <nav class="navigation" role="navigation">
