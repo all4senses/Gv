@@ -15408,6 +15408,7 @@ function gv_misc_removeGvVideoGoogleSnippetWrapper_fromVideoToken_ifPresented($b
 
   if (preg_match_all('/<div class="gv-video.*(\[.*\])<\/div>/isU', $body_full_markup, $matches)) {
     
+    dpm($matches);
     
     $contains_snippet = TRUE;
     
