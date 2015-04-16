@@ -66,7 +66,10 @@ function gv_blocks_block_info() {
     'info' => 'Footer menu plain v2 (without Our Team)',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+  $blocks['footer_menu_pl_v3'] = array(
+    'info' => 'Footer menu plain v3 (without Disclosure)',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['header_links'] = array(
     'info' => 'Header links',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -581,6 +584,11 @@ function gv_blocks_block_view($delta = '') {
     case 'footer_menu_pl_v2':
       $block['subject'] = 'Footer menu plain v2 (without Our Team)';
       $block['content'] = gv_blocks_get_footerMenuPlain(2);
+      break;
+    
+    case 'footer_menu_pl_v3':
+      $block['subject'] = 'Footer menu plain v3 (without Disclosure)';
+      $block['content'] = gv_blocks_get_footerMenuPlain(3);
       break;
     
     case 'header_links':
@@ -4302,7 +4310,13 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
   }
   else {
     $menu = menu_build_tree('menu-footer-menu');
+    dpm($menu);
     if ($version == 2) {
+      // Hide Our Team menu item on the /cloud-backup page
+      unset($menu['49955 Our Team 933']);
+      //dpm($menu);
+    }
+    if ($version == 3) {
       // Hide Our Team menu item on the /cloud-backup page
       unset($menu['49955 Our Team 933']);
       //dpm($menu);
