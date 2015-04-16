@@ -3731,7 +3731,7 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
   $matches = NULL;
   $found_image = NULL;
   
-  global $user;
+  //global $user;
   
   if (preg_match('/<img[^>]+>/i', $body_full_markup, $matches)) {
     //dpm($matches);
@@ -3762,26 +3762,17 @@ function gv_misc_getArticleTeaserData($target, $body_full_markup, $nid, $charact
     }
     $body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
   }
-  elseif ($user->uid == 1 && preg_match('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches)) {
-    dpm($matches);
+  elseif (preg_match('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $body_full_markup, $matches)) {
+    //dpm($matches);
     
     
     if($main_image['src'] = gv_misc_videoToken_getOneSnippetVideoData_parseVideoIdLocally_and_PullVideoParamsFromRemoteProvider($matches[1], TRUE)) {
       $found_image = TRUE;
       
-      dpm($main_image);
+      //dpm($main_image);
     }
-    //$body_full_markup = preg_replace('|<iframe.*src=\"(.*)\".*><\/iframe>|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
+    $body_full_markup = preg_replace('|<iframe.*src=\"(.*)\".*><\/iframe>|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
     
-    
-    
-//    $video_id = $matches[1];
-//    
-//    //if($main_image['src'] = gv_misc_getYoutubeVideoThumb($video_id)) {
-//    if($main_image['src'] = gv_misc_getVideoThumb($video_id)) {
-//      $found_image = TRUE;
-//    }
-//    $body_full_markup = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $body_full_markup);
   }
   
   
