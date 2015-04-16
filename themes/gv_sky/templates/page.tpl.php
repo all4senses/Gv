@@ -77,7 +77,7 @@ if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== 
     <?php } ?>
 
     <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page?>
-      <?php drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
+      <?php //drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
       <div class="hero-header center">
         <div class="hero-title">
           <h1 class="hero-title-heading"><?php print ( current_path() == 'node/62' ? 'Contact Us' : 'Advertise With Us' ) ?></h1>
