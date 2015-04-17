@@ -229,13 +229,9 @@
 
                 ?>"><?php if (!isset($node->title_no_link) && !$page): ?><a class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-title-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
                 <?php else: ?><?php print $title; ?><?php endif; ?>
-                
-             <?php if ($page): ?>
-               </h1>
-             <?php elseif ($view_mode == 'side_block_teaser'): ?>
-               </h4>
-             <?php else: ?>
-                </h2>
+             <?php if ($page): ?></h1>
+             <?php elseif ($view_mode == 'side_block_teaser'): ?></h4>
+             <?php else: ?></h2>
              <?php endif; ?> 
 
           <?php //print render($title_suffix);
