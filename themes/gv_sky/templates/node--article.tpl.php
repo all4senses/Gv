@@ -204,14 +204,12 @@
           <?php print render($title_prefix); ?>
           
               <?php if ($page): ?>
-              <h1 class="article-title
-              <?php elseif ($view_mode == 'side_block_teaser'): ?>
-              <h4 class="latest-blog-posts-list-item-title
-              <?php else: ?>
-              <h2 class="blog-posts-item-title
-              <?php endif; ?>
-
-                <?php print ' '; 
+              <h1 class="article-title<?php 
+              elseif ($view_mode == 'side_block_teaser'): ?>
+              <h4 class="latest-blog-posts-list-item-title<?php 
+              else: ?>
+              <h2 class="blog-posts-item-title<?php 
+                endif;  
                 
                 $custom_classes = array();
 
