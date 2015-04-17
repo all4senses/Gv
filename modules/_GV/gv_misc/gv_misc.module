@@ -1032,12 +1032,10 @@ function gv_misc_testPage() {
   }
   */
   
-  $preface = node_load(74);
-  dpm($preface);
-  $preface = node_view($preface, 'teaser');
-  dpm($preface);
-  $out = render($preface);
-  
+  $time = time();
+  dpm($time);
+  $date = date('Y-m-d\TH:i:s', $time);
+  dpm($date);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
