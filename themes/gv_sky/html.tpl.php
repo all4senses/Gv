@@ -17,6 +17,7 @@
   <?php $args = arg(); 
         if ($args[0] == 'node' && (@$args[1] == 'add' || isset($args[2]) && $args[2] == 'edit')) { $top = TRUE; print $scripts; } 
   ?>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/global.css">
   <?php if ($is_front) {?>
