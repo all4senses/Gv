@@ -4323,15 +4323,17 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
   }
   else {
     $menu = menu_build_tree('menu-footer-menu');
-    dpm($menu);
+    //dpm($menu);
     if ($version == 2) {
       // Hide Our Team menu item on the /cloud-backup page
-      unset($menu['49955 Our Team 933']);
+      //unset($menu['49955 Our Team 933']);
+      $menu['49955 Our Team 933']['link']['hidden'] = 1;
       //dpm($menu);
     }
     if ($version == 3) {
       // Hide Our Team menu item on the /cloud-backup page
-      unset($menu['49955 Our Team 933']);
+      //unset($menu['49954 Disclosure 935']);
+      $menu['49954 Disclosure 935']['link']['hidden'] = 1;
       //dpm($menu);
     }
     
