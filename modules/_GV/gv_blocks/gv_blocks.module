@@ -13049,12 +13049,12 @@ function gv_blocks_getMainMenu_splitted() {
  */
 function gv_blocks_getPreface_blogPage() {
   
-  $cid = 'gv_cached_prefaceBlogPage';
-  $cache = cache_get($cid, 'cache');
-
-  if ($cache && !empty($cache->data) && $cache->expire > time()) {
-    return $cache->data;
-  }
+//  $cid = 'gv_cached_prefaceBlogPage';
+//  $cache = cache_get($cid, 'cache');
+//
+//  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+//    return $cache->data;
+//  }
     
   $preface = node_load(74); // Blog page preface node
   //dpm($preface);
@@ -13063,7 +13063,7 @@ function gv_blocks_getPreface_blogPage() {
   //dpm($preface);
   $out = render($preface) . $h1;
   
-  cache_set($cid, $out, 'cache', strtotime('+31 day'));
+  //cache_set($cid, $out, 'cache', strtotime('+31 day'));
   
   return $out;
 }
