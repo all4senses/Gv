@@ -204,11 +204,11 @@
           <?php print render($title_prefix); ?>
           
               <?php if ($page): ?>
-              <h1 class="article-title"
+              <h1 class="article-title
               <?php elseif ($view_mode == 'side_block_teaser'): ?>
-              <h4 class="latest-blog-posts-list-item-title"
+              <h4 class="latest-blog-posts-list-item-title
               <?php else: ?>
-              <h2 class="blog-posts-item-title"
+              <h2 class="blog-posts-item-title
               <?php endif; ?>
 
                 <?php print ' '; 
@@ -217,21 +217,19 @@
 
                 if (!$node->status) {
                   $custom_classes[] = 'not-published';
-                  dpm($node);
-                  dpm($custom_classes);
                 }
                 if (!empty($node->field_invisible['und'][0]['value'])) {
                   $custom_classes[] = 'invisible-in-lists';
                 }
                 if (!empty($custom_classes)) {
-                  echo ' class="' . implode(' ', $custom_classes) . '"';
+                  echo ' ' . implode(' ', $custom_classes);
                 }
                  
                 // $title_shorter = dk_shorten_title($title);
                 $title_shorter = $title;
                 
 
-                ?>><?php if (!isset($node->title_no_link) && !$page): ?><a class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-title-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
+                ?>"><?php if (!isset($node->title_no_link) && !$page): ?><a class="<?php echo ( current_path() == 'blog' ? 'blog-posts-item' : 'latest-blog-posts-list-item' ) ?>-title-link" href="<?php print $node_url; ?>"><?php print $title_shorter; ?></a>
                 <?php else: ?><?php print $title; ?><?php endif; ?>
                 
              <?php if ($page): ?>
