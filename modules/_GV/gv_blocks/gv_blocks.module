@@ -517,6 +517,10 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['preface_blog_page'] = array(
+    'info' => 'Blog page preface pulled to the block',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   return $blocks;
 }
@@ -1054,7 +1058,16 @@ function gv_blocks_block_view($delta = '') {
       $block['subject'] = '';
       $block['content'] = gv_blocks_getMainMenu_splitted();
       break;
-      
+    
+    
+    case 'preface_blog_page':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getPreface_blogPage();
+      break;
+    
+    
+    
+    
   }
 
   return $block;
@@ -13013,6 +13026,9 @@ function gv_blocks_getQuotePopup_onLists($type = 'cc') {
 }
 
 
+/*
+ * 
+ */
 function gv_blocks_getMainMenu_splitted() {
   $main_menu = NULL;
   $block = block_load('nice_menus', 1);  
@@ -13023,4 +13039,18 @@ function gv_blocks_getMainMenu_splitted() {
     $main_menu_inner_ul_removed = $matches[2];
   }
   return $main_menu;
+}
+
+
+/*
+ * 
+ */
+function gv_blocks_getPreface_blogPage() {
+  $preface = node_load(74); // Blog page preface node
+  dpm($preface);
+  $h1 = '<h1 style="display: none;">' . $preface->title . '</h1>';
+  $preface = node_view($preface, 'teaser');
+  dpm($preface);
+  $out = render($preface) . $h1;
+  return $out;
 }
