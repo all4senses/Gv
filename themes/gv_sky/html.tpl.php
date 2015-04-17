@@ -52,6 +52,12 @@
   <?php if ( strpos(request_path(), 'reviews') !== FALSE && strpos(request_path(), 'reviews/phone') === FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/provider.css">
   <?php } ?>
+  <?php $node = menu_get_object() ?>
+  <?php if ( is_object($node) ) { ?>
+    <?php if ( $node->type === 'preface' ) { ?>
+      <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css">
+    <?php } ?>
+  <?php } ?>
 <!--[if IE 8]>
     <script type="text/javascript" src="/sites/all/themes/gv_sky/js/selectivizr-min.js"></script>
     <link rel="stylesheet" href="sites/all/themes/gv_sky/css/ie8.css" />

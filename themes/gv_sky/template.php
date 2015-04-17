@@ -74,7 +74,7 @@ function gv_sky_l($text, $path, array $options = array()) {
   if ($use_theme) {
     // return theme('link', array('text' => $text, 'path' => $path, 'options' => $options));
   }
-  return '<a class="main-menu-item-link" href="' . check_plain(url($path, $options)) . '"' . drupal_attributes($options ['attributes']) . '><span class="main-menu-item-link-text">' . ($options ['html'] ? $text : check_plain($text)) . '</span></a>';
+  return '<a class="main-menu-item-link" href="' . check_plain(url($path, $options)) . '"><span class="main-menu-item-link-text">' . ($options ['html'] ? $text : check_plain($text)) . '</span></a>';
 }
 
   function dk_shorten_title($title){
