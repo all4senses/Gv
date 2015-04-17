@@ -217,6 +217,8 @@
 
                 if (!$node->status) {
                   $custom_classes[] = 'not-published';
+                  dpm($node);
+                  dpm($custom_classes);
                 }
                 if (!empty($node->field_invisible['und'][0]['value'])) {
                   $custom_classes[] = 'invisible-in-lists';
