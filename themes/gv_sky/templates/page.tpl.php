@@ -5,17 +5,21 @@
         drupal_static_reset('drupal_add_css');
       }
 
-if ($is_front) {
-  drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
-}
+      if ($is_front) {
+        drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
+      }
 
-if ( current_path() == 'blog' ) {
-  drupal_add_js('/sites/all/themes/gv_sky/js/blog.js');
-}
+      if ( current_path() == 'blog' ) {
+        drupal_add_js('/sites/all/themes/gv_sky/js/blog.js');
+      }
 
-if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== FALSE ) {
-  drupal_add_js('/sites/all/themes/gv_sky/js/submit-review.js');
-}
+      if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== FALSE ) {
+        drupal_add_js('/sites/all/themes/gv_sky/js/submit-review.js');
+      }
+
+      if ( current_path() === 'node/804' ) {
+        drupal_add_js('/sites/all/themes/gv_sky/js/review.js');
+      }
 
 ?>
   <header id="header" role="banner">
@@ -43,30 +47,17 @@ if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== 
       echo $main_menu_inner_ul_removed;
     ?>
 
-    <?php if ( current_path() == 'node/804' ) { ?>
-      <?php drupal_add_js('/sites/all/themes/gv_sky/js/review.js'); ?>
+    <?php  if ($page['highlighted']): // Home page ?>
+      <div class="hero-header <?php if ($is_front) {echo 'center';} ?>">
+        <?php print render($page['highlighted']); ?>
+      </div>
+    <?php endif;  ?>
+
+    <?php if ( current_path() ==='node/3207' || current_path() === 'node/804' ) { ?>
       <div class="hero-header left">
         <div class="hero-title">
           <h1 class="hero-title-heading"><?php echo (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
           <p class="hero-title-desc"><?php echo (isset($node->field_hero_subtitle['und'][0]['value']) ? $node->field_hero_subtitle['und'][0]['value'] : field_get_items('node',$node, 'body')[0]['value']); ?></p>
-        </div>
-      </div>
-    <?php } ?>
-
-    <?php if ( current_path() == 'node/3207' ) { ?>
-      <div class="hero-header left">
-        <div class="hero-title">
-          <h1 class="hero-title-heading"><?php echo (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
-          <p class="hero-title-desc"><?php echo (isset($node->field_hero_subtitle['und'][0]['value']) ? $node->field_hero_subtitle['und'][0]['value'] : field_get_items('node',$node, 'body')[0]['value']); ?></p>
-        </div>
-      </div>
-    <?php } ?>
-
-    <?php if ( current_path() == 'node/38' ) { // About Page?>
-      <div class="hero-header center">
-        <div class="hero-title">
-          <h1 class="hero-title-heading">Meet the <span class="hero-title-heading-highlight">GetVoIP</span> Team</h1>
-          <p class="hero-title-desc">How did GetVoIP reach its success? Who‘s the brains behind GetVoiP‘s operations? What made GetVoIP standout from the rest of the phone review companies? What‘s our main philosophy and what are our future plans? </p>
         </div>
       </div>
     <?php } ?>
@@ -76,21 +67,14 @@ if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== 
       <div class="hero-header center"></div>
     <?php } ?>
 
-    <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page?>
-      <?php //drupal_add_js('/sites/all/themes/gv_sky/js/contact.js'); ?>
+    <?php if ( current_path() === 'node/38' || current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page and About page ?>
       <div class="hero-header center">
         <div class="hero-title">
-          <h1 class="hero-title-heading"><?php print ( current_path() == 'node/62' ? 'Contact Us' : 'Advertise With Us' ) ?></h1>
-          <p class="hero-title-desc"><?php print ( current_path() == 'node/62' ? 'Questions or Comments?' : 'Want to Advertise?' ) ?> Get In Touch.</p>
+          <h1 class="hero-title-heading"><?php echo (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
+          <p class="hero-title-desc"><?php echo (isset($node->field_hero_subtitle['und'][0]['value']) ? $node->field_hero_subtitle['und'][0]['value'] : field_get_items('node',$node, 'body')[0]['value']); ?></p>
         </div>
       </div>
     <?php } ?>
-
-    <?php  if ($page['highlighted']): ?>
-      <div class="hero-header <?php if ($is_front) {echo 'center';} ?>">
-        <?php print render($page['highlighted']); ?>
-      </div>
-    <?php endif;  ?>
 
   </header>
 
