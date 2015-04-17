@@ -189,91 +189,91 @@
 		height: 100%
 		overflow: hidden
 
-.main-menu-item
-	position: relative
-	float: left
-	width: 100 / 7 * 1%
-	// width: 100 / 8 * 1%
-	height: 100%
-	background-color: $primary
-	text-align: center
-	transition: background-color 0.15s
-	cursor: pointer
-
-	&:hover
-		background-color: $primary-dark
-	
-
-
-	//Acutal Link Element
-	&-link
-		width: 100%
+	.main-menu-item
+		position: relative
+		float: left
+		width: 100 / 7 * 1%
+		// width: 100 / 8 * 1%
 		height: 100%
-		display: block
+		background-color: $primary
+		text-align: center
+		transition: background-color 0.15s
+		cursor: pointer
+
+		&:hover
+			background-color: $primary-dark
+		
 
 
-		&-text
-			position: absolute
-			left: 0
-			right: 0
-			bottom: 45px
+		//Acutal Link Element
+		&-link
+			width: 100%
+			height: 100%
 			display: block
-			width: 95%
-			+center
-			font-size: 15px
-			text-transform: uppercase
-			font-weight: 600
-			letter-spacing: .4px
-			color: white
-			+user-select(none)
 
-			// +m(1171, min)
-			// 	@media screen and (max-width:1260px)
-			// 		font-size: 14px
 
-			&:before
+			&-text
 				position: absolute
 				left: 0
 				right: 0
-				bottom: 60px
+				bottom: 45px
 				display: block
-				font-weight: 400
-				line-height: 0
-				font-family: gvcons
-				text-transform: none
+				width: 95%
+				+center
+				font-size: 15px
+				text-transform: uppercase
+				font-weight: 600
+				letter-spacing: .4px
+				color: white
+				+user-select(none)
+
+				// +m(1171, min)
+				// 	@media screen and (max-width:1260px)
+				// 		font-size: 14px
+
+				&:before
+					position: absolute
+					left: 0
+					right: 0
+					bottom: 60px
+					display: block
+					font-weight: 400
+					line-height: 0
+					font-family: gvcons
+					text-transform: none
 
 
-		&[href="/business"] .main-menu-item-link-text:before
-			content: 'w'
-			font-size: 88px
-			
-		&[href="/hosted-pbx"] .main-menu-item-link-text:before
-			content: 'Y'
-			font-size: 59px
-			
-		&[href="/fax"] .main-menu-item-link-text:before
-			content: 'E'
-			font-size: 63px
+			&[href="/business"] .main-menu-item-link-text:before
+				content: 'w'
+				font-size: 88px
+				
+			&[href="/hosted-pbx"] .main-menu-item-link-text:before
+				content: 'Y'
+				font-size: 59px
+				
+			&[href="/fax"] .main-menu-item-link-text:before
+				content: 'E'
+				font-size: 63px
 
-		&[href="/residential"] .main-menu-item-link-text:before
-			content: '7'
-			font-size: 62px
-			
-		&[href="/sip-trunking"] .main-menu-item-link-text:before
-			content: '2'
-			font-size: 66px
-			
-		&[href="/cloud-contact-center"] .main-menu-item-link-text:before
-			content: 'y'
-			font-size: 82px
-			
-		&[href="/web-conferencing"] .main-menu-item-link-text:before
-			content: 'L'
-			font-size: 99px
+			&[href="/residential"] .main-menu-item-link-text:before
+				content: '7'
+				font-size: 62px
+				
+			&[href="/sip-trunking"] .main-menu-item-link-text:before
+				content: '2'
+				font-size: 66px
+				
+			&[href="/cloud-contact-center"] .main-menu-item-link-text:before
+				content: 'y'
+				font-size: 82px
+				
+			&[href="/web-conferencing"] .main-menu-item-link-text:before
+				content: 'L'
+				font-size: 99px
 
-		// &[href="/cloud-backup"] .main-menu-item-link-text:before
-		// 	content: 'L'
-		// 	font-size: 99px
+			// &[href="/cloud-backup"] .main-menu-item-link-text:before
+			// 	content: 'L'
+			// 	font-size: 99px
 
 
 
@@ -284,48 +284,48 @@
 		&.open
 			height: 150px				
 
-	.main-menu-item
+		.main-menu-item
 
-		&-link-text 
-			bottom: 34px
-			font-size: 14px
+			&-link-text 
+				bottom: 34px
+				font-size: 14px
 
-			&:before
-				bottom: 54px
+				&:before
+					bottom: 54px
 
-		&-link[href="/business"] .main-menu-item-link-text:before
-			content: 'w'
-			font-size: 88px * .8
-			
-		&-link[href="/hosted-pbx"] .main-menu-item-link-text:before
-			content: 'Y'
-			font-size: 59px * .8
-			
-		&-link[href="/fax"] .main-menu-item-link-text:before
-			content: 'E'
-			font-size: 63px * .8
+			&-link[href="/business"] .main-menu-item-link-text:before
+				content: 'w'
+				font-size: 88px * .8
+				
+			&-link[href="/hosted-pbx"] .main-menu-item-link-text:before
+				content: 'Y'
+				font-size: 59px * .8
+				
+			&-link[href="/fax"] .main-menu-item-link-text:before
+				content: 'E'
+				font-size: 63px * .8
 
-		&-link[href="/residential"] .main-menu-item-link-text:before
-			content: '7'
-			font-size: 62px * .84
-			
-		&-link[href="/sip-trunking"] .main-menu-item-link-text:before
-			content: '2'
-			font-size: 66px * .8
-			
-		&-link[href="/cloud-contact-center"] .main-menu-item-link-text:before
-			content: 'y'
-			font-size: 82px * .84
-			
-		&-link[href="/web-conferencing"] .main-menu-item-link-text:before
-			content: 'L'
-			font-size: 99px * .8
-			bottom: 52px
+			&-link[href="/residential"] .main-menu-item-link-text:before
+				content: '7'
+				font-size: 62px * .84
+				
+			&-link[href="/sip-trunking"] .main-menu-item-link-text:before
+				content: '2'
+				font-size: 66px * .8
+				
+			&-link[href="/cloud-contact-center"] .main-menu-item-link-text:before
+				content: 'y'
+				font-size: 82px * .84
+				
+			&-link[href="/web-conferencing"] .main-menu-item-link-text:before
+				content: 'L'
+				font-size: 99px * .8
+				bottom: 52px
 
-		// &-link[href="/cloud-backup"] .main-menu-item-link-text:before
-		// 	content: 'L'
-		// 	font-size: 99px * .8
-		// 	bottom: 52px
+			// &-link[href="/cloud-backup"] .main-menu-item-link-text:before
+			// 	content: 'L'
+			// 	font-size: 99px * .8
+			// 	bottom: 52px
 
 
 
