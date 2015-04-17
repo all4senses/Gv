@@ -195,8 +195,7 @@ if($view_mode == 'home_teaser_rotated') {
                       <li id="tab-1" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">Technical </span>Specs</li>
                       <?php if ($node->extra_data['downloads']): ?><li id="tab-2" class="phone-box-tabs-item">Downloads</li><?php endif; ?>
                       <?php if ($node->extra_data['in_the_box']): ?><li id="tab-3" class="phone-box-tabs-item">In the Box</li><?php endif; ?>
-                      <li id="tab-4" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">User </span>Reviews</li>
-                    </ul>
+                      <?php //<li id="tab-4" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">User </span>Reviews</li> ?>                    </ul>
                 
                     <div class="phone-box-content">
                       <div id="tab-0-c" class="phone-box-content-section phone-box-content-section-review active">
@@ -240,6 +239,8 @@ if($view_mode == 'home_teaser_rotated') {
                           <?php echo $node->extra_data['in_the_box']; ?>
                         </div>
                       <?php endif; ?>
+                      
+                      <?php /*
                       <div id="tab-4-c" class="phone-box-content-section phone-box-content-section-user-reviews">
                         <div class="phone-box-content-section-title user-reviews-title">User Reviews</div>
                         <?php if (isset($content['gv_ratings']) && $content['gv_ratings']): ?>
@@ -278,6 +279,10 @@ if($view_mode == 'home_teaser_rotated') {
                         <?php endif; ?>
 
                       </div> <!-- <div id="tab-4-c"> -->
+                      
+                      */?>
+                      
+                      
                     </div>
                 
               </div> <?php // End of <div class="data tabs"> ?>

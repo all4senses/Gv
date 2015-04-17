@@ -2510,7 +2510,7 @@ function gv_misc_goToExternalUrl2() {
                 $click_page = $_GET['from'];
                 $watch_str = 'from = ' .  $_GET['from'] . ', ' . $watch_str;
               }
-              watchdog('-###> GV click via go/' . $object_name, $watch_str, NULL, WATCHDOG_WARNING);
+              //watchdog('-###> GV click via go/' . $object_name, $watch_str, NULL, WATCHDOG_WARNING);
             }
             
             $referrer = @$_SESSION['gv_current_http_referer'];
@@ -6812,7 +6812,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
   // Map data to remote vars names.
   foreach ($map_main as $getvoip_key => $remote_key) {
     if ($getvoip_key == 'Buying Time Frame') {
-      $data_to[$remote_key] = $map_timeframe[$submission[$getvoip_key]];
+      $data_to[$remote_key] = !empty($map_timeframe[$submission[$getvoip_key]]) ? $map_timeframe[$submission[$getvoip_key]] : $map_timeframe['ASAP'];
     }
     elseif ($getvoip_key == 'Phones needed') {
       $data_to[$remote_key] = @$map_phonesNeeded[@$submission[$getvoip_key]];
@@ -6844,6 +6844,9 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
   
   // New Vonage url
   $url = 'http://ww3.vonagebusiness.com/l/7772/2012-10-01/36gsq6';
+  // This will need to be changed to the below link the evening of Friday 17th April 2015 – NO other changes except for the URL change will need to be made. The change should be done on the 17th anytime from 8pm to Midnight, so whatever leads we send starting on the 18th will go the new link.
+  // http://ww3.business.vonage.com/l/7772/2012-10-01/36gsq6
+  
   
   //$url = 'http://getvoip.com/request-test';
   $curl = curl_init();
@@ -6981,7 +6984,7 @@ function gv_misc_SendRequestToMitel($submission, $op = 'sendIfAllowed') {
     $data_to_str .= ($data_to_str ? '&' : '') . $key . '=' . $value;
   }
   
-  watchdog(' --> Autolead Mitel', $data_to_str . ', ' .  print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
+  //watchdog(' --> Autolead Mitel', $data_to_str . ', ' .  print_r($data_to, TRUE), NULL, WATCHDOG_WARNING);
   
   $url = 'https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
   
