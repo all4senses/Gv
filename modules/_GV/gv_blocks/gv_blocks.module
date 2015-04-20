@@ -9535,20 +9535,20 @@ function gv_blocks_get_requestQuoteForPage_v10_cc() {
                                   <div class="wrap">
                                         <div class="choice input-button first">
                                           <div class="icon-replace"></div>
-                                          <label for="replace">Replace current system</label>
-                                          <input type="radio" class="radio-input input" name="q_for" id="replace" value="Replace current phone system">
+                                          <label for="outbound">Outbound Calling</label>
+                                          <input type="radio" class="radio-input input" name="q_for" id="outbound" value="Outbound Calling">
                                         </div>
 
                                         <div class="choice input-button checked">
                                           <div class="icon-new"></div>
-                                          <label for="new"><span>Find</span> new system &amp; service</label>
-                                          <input type="radio" class="radio-input input" name="q_for" id="new" value="Need a phone system for a new office" checked="checked">
+                                          <label for="both">Both Outbound &amp; Inbound</label>
+                                          <input type="radio" class="radio-input input" name="q_for" id="both" value="Both Outbound and Inbound<" checked="checked">
                                         </div>
 
                                         <div class="choice input-button">
                                           <div class="icon-expand"></div>
-                                          <label for="expand-only">Expand current system</label>
-                                          <input type="radio" class="radio-input input" name="q_for" id="expand-only" value="Expand on our current phone system">
+                                          <label for="inbound">Inbound Calling</label>
+                                          <input type="radio" class="radio-input input" name="q_for" id="inbound" value="Inbound Calling">
                                         </div>
 
                                   </div>
@@ -9663,24 +9663,24 @@ function gv_blocks_get_requestQuoteForPage_v10_cc() {
 
                           <div class="fieldset input-field required first company">
                             <p class="question">Company</p>
-                            <div class="wrap"><input type="text" class="field company input" name="company" id="company"></div>
+                            <div class="wrap"><input type="text" placeholder="Acme, inc." class="field company input" name="company" id="company"></div>
                           </div>
                           <div class="fieldset input-field required half first firstname">
                             <p class="question">First Name</p>
-                            <div class="wrap"><input type="text" class="field firstname input" name="firstname" id="firstname"></div>
+                            <div class="wrap"><input type="text" placeholder="John" class="field firstname input" name="firstname" id="firstname"></div>
                           </div>
                           <div class="fieldset input-field required half first lastname">
                             <p class="question">Last Name</p>
-                            <div class="wrap"><input type="text" class="field lastname input" name="lastname" id="lastname"></div>
+                            <div class="wrap"><input type="text" placeholder="Doe" class="field lastname input" name="lastname" id="lastname"></div>
                           </div>
                           <div class="clearfix-dk"></div>
                           <div class="fieldset input-field required half email">
                             <p class="question">Email Address</p>
-                            <div class="wrap"><input type="text" class="field email input" name="email" id="email"></div>
+                            <div class="wrap"><input type="text" placeholder="john@doe.com" class="field email input" name="email" id="email"></div>
                           </div>
                           <div class="fieldset input-field required half phone">
                             <p class="question">Phone Number</p>
-                            <div class="wrap"><input type="text" class="field phone input" name="phone" id="phone"></div>
+                            <div class="wrap"><input type="text" placeholder="(xxx) xxx-xxxx" class="field phone input" name="phone" id="phone"></div>
                           </div>
                           <div class="clearfix-dk"></div>
                           <div class="fieldset button-field">
@@ -9692,7 +9692,7 @@ function gv_blocks_get_requestQuoteForPage_v10_cc() {
 
                             </div>
                           </div>
-                          <p class="inform-text">You will also receive a FREE 6-Page business VoIP guide to help analyze and compare your results.</p>
+                          <p class="inform-text">You will also receive a FREE 6-Page Cloud Contact Center guide to help analyze and compare your results.</p>
                           ' . ($user->uid == 1 ? '<div class="button back">Back</div>' : '') . '
 
                       </div>

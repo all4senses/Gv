@@ -50,7 +50,7 @@
       
 
       
-      <main class="main section full-height" role="main">
+      <main class="main section full-height cc" role="main">
         
         <?php if (!$final_page): ?>
         
