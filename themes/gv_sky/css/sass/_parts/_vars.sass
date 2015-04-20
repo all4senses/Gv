@@ -52,25 +52,25 @@ $subberwhite: #f8f8f8
   @else
     margin: #{$top} auto #{$bottom}
 
-=valign
-  top: 50%
+=valign($top: 50%)
+  top: $top
   -webkit-transform: translateY(-50%)
   -moz-transform: translateY(-50%)
   -ms-transform: translateY(-50%)
   -o-transform: translateY(-50%)
   transform: translateY(-50%)
 
-=halign
-  left: 50%
+=halign($left: 50%)
+  left: $left
   -webkit-transform: translateX(-50%)
   -moz-transform: translateX(-50%)
   -ms-transform: translateX(-50%)
   -o-transform: translateX(-50%)
   transform: translateX(-50%)
 
-=balign
-  left: 50%
-  top: 50%
+=balign($top: 50%, $left: 50%)
+  top: $top
+  left: $left
   -webkit-transform: translateX(-50%) translateY(-50%)
   -moz-transform: translateX(-50%) translateY(-50%)
   -ms-transform: translateX(-50%) translateY(-50%)
