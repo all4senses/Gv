@@ -59,14 +59,14 @@
         <?php else: ?>
           <div class="form-main pdf-page">
             <div class="title-first pdf">
-              <h1>Download Your Free VoIP Buyer's Guide</h1>
+              <h1>Download Your Free Buyer's Guide</h1>
             </div>
             <form class="form">
               <div class="step one show">
                 <div class="wrap">
                   <a href="http://getvoip.com/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank"><div class="download"><div class="icon-download"></div><span>Download PDF</span></div></a>
                 </div>
-                <p class="thanks"><span>Thank you</span> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote. <br><br>In the meantime, visit <a href="http://getvoip.com/business">GetVoIP.com</a> to browse featured business phone providers.</p>
+                <p class="thanks"><span>Thank you</span> for requesting a quote. A dedicated call center specialist will be calling you very shortly to finalize the quote. <br><br>In the meantime, visit <a href="http://getvoip.com/cloud-contact-center">GetVoIP.com</a> to browse featured call center solution providers</p>
               </div>
             </form>
           </div>
