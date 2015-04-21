@@ -12701,6 +12701,12 @@ function gv_misc_calculateDataForRelatedArticlesBlock($title, $body, $extra_data
   
   $result->title = empty($options['title_not_normalized']) ? $title : htmlspecialchars_decode($title, ENT_QUOTES);
   $result->teaser = empty($options['body_not_stripped']) ? $body : strip_tags($body);
+  
+  if (preg_match('/\[video:.*v=(.*)\]/isU', $result->teaser, $matches)) {
+    // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
+    $result->teaser = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $result->teaser);
+  }
+  
   $result->created = $created;
   
   if(!empty($extra_data['main_image'])) {
