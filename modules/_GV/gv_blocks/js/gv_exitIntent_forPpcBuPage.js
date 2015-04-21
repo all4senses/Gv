@@ -25,7 +25,7 @@
         }); 
         
        
-        $(document).on('mouseleave', function(e) {
+        $(window).on('mouseleave', function(e) {
             
             if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
                 turned_off = true;
