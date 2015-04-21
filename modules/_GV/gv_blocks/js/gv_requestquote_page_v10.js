@@ -55,6 +55,23 @@
         // Prepare form
         $('.lpv10-form').form('prepare');
 
+        $('.lpv10-form .input').each(function(){
+          $(this).focus(function(){
+            $(this).parents('.fieldset').addClass('focus');
+          });
+          $(this).blur(function(){
+            $(this).parents('.fieldset').removeClass('focus');
+          });
+
+          $(this).keyup(function(){
+            if ( $(this).val() === '' ) {
+              $(this).parents('.fieldset').removeClass('filled');
+            } else {
+              $(this).parents('.fieldset').addClass('filled');
+            }
+          });
+        });
+
         $('.lpv10-form .next').click(function(){
           $('.lpv10-form').form('next');
         });

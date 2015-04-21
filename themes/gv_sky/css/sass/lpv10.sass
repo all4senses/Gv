@@ -629,6 +629,38 @@ form
 /* ==========================================================================
    4. Step Four
    ========================================================================== */
+.cc
+
+  .step.four
+    .title-second
+      padding-bottom: 30px
+    h1
+      max-width: 520px
+
+    .fieldset
+      position: relative
+
+    .question
+      position: absolute
+      z-index: 2
+      line-height: 1
+      margin-bottom: 7px
+      font-size: 11px
+      font-weight: 600
+      color: $grey-light
+      padding: 13px 15px 0
+      opacity: 0
+      transition: opacity 0.2s
+
+    .focus .question
+      color: $contrast-color
+
+    .filled .question
+      opacity: 1
+
+    .filled input
+      padding: 17px 13px 0px
+
 
 .fieldset
   width: 100%
@@ -642,6 +674,7 @@ form
     font-size: 16px
     padding: 13px 13px 9px
     font-weight: 500
+    transition: all 0.2s
     
     &:focus
       border: 1px solid $contrast-color
