@@ -12704,7 +12704,8 @@ function gv_misc_calculateDataForRelatedArticlesBlock($title, $body, $extra_data
   
   if (preg_match('/\[video:.*v=(.*)\]/isU', $result->teaser, $matches)) {
     // [video: https://www.youtube.com/watch?v=H1vdPJzzzAY]
-    $result->teaser = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $result->teaser);
+    //$result->teaser = preg_replace('|\[video:.*(http.*)\]|', '<a href="$1"> [Watch a video] </a>', $result->teaser);
+    $result->teaser = preg_replace('|\[video:.*(http.*)\]|', '', $result->teaser);
   }
   
   $result->created = $created;
