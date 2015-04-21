@@ -23,8 +23,23 @@
               event.preventDefault();     // Prevent character input
             }
         }); 
-        
-       
+
+        window.history.replaceState({id: 'gv_exit-init'}, '', '');
+        window.history.pushState({id: 'gv_exit-control'}, '', '');
+
+           
+        $(window).on('popstate', function(e) {
+            
+            if (!turned_off && 'state' in window.history && window.history.state !== null && window.history.state.id !== 'gv_exit-control') {    
+                turned_off = true;
+                console.log(e);
+
+                  $$("body").css('overflow', 'hidden');
+      
+                  $.fn.popup("exit");
+            }
+        });
+
         $(window).on('mouseleave', function(e) {
             
             if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
@@ -35,6 +50,7 @@
                   $.fn.popup("exit");
             }
         });
+
 
         // Prepare form
         $('#exitIntent').form('prepare');
