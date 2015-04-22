@@ -58,7 +58,7 @@
         
         <?php if (!$final_page): ?>
         
-          <?php echo gv_blocks_get_requestQuoteForPage_v10(); ?>
+          <?php echo gv_blocks_get_requestQuoteForPage_v10('us'); ?>
         
         <?php else: ?>
           <div class="form-main pdf-page">
