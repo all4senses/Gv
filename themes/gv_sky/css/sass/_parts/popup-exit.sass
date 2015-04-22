@@ -39,6 +39,9 @@
 				padding-top: 53px
 				font-size: 31px
 
+				+max(736)
+					font-size: 22px
+
 			&.two
 				padding-top: 50px
 				font-size: 20px
@@ -51,14 +54,35 @@
 					+center
 					width: perc(280px, 1100px)
 					border-bottom: 2px solid darken($divider, 10)
+	
+					+max(736)
+						top: 14px
 
 			&.three
 				padding-top: 30px
 				font-size: 23px
 
+				+max(736)
+					padding-top: 40px
+					max-width: 85%
+					+center
+					font-size: 21px
+
+
 		&-line-2
 			font-size: 55px
 			color: $contrast
+
+			+max(736)
+				font-size: 40px
+
+				&.three
+					line-height: 1
+					padding-top: 5px
+
+			+max(350)
+				font-size: 36px
+
 			&.one
 				font-weight: 500
 				margin-top: 5px
@@ -66,6 +90,9 @@
 
 			&.two
 				margin-top: 35px
+
+				+max(736)
+					margin-top: 30px
 
 
 		&-line-3
@@ -89,17 +116,30 @@
 				font-weight: 500
 				color: $contrast
 
+				+max(736)
+					font-size: 48px
+
 			&.two
 				font-size: 65px
 				font-weight: 500
 				text-transform: uppercase
 				color: $primary
 
+				+max(736)
+					font-size: 38px
+
 			&.three
 				font-size: 65px
 				font-weight: 500
 				text-transform: uppercase
 				color: $primary
+
+				+max(736)
+					padding-top: 5px
+					font-size: 38px
+
+					&:after
+						border-bottom: 0
 				
 
 
@@ -108,13 +148,26 @@
 				font-size: 20px
 				margin-top: 30px
 
+				+max(736)
+					font-size: 18px
+					max-width: 80%
+					+center(30px)
+
 
 			&.two
 				font-size: 40px
 
+				+max(736)
+					font-size: 26px
+
 			&.three
 				font-size: 20px
 				margin-top: 30px
+
+				+max(736)
+					font-size: 16px
+					margin-top: 0
+					padding: 0 10px
 
 	
 
@@ -125,10 +178,19 @@
 
 		.step-one &
 			margin-top: 53px
+
 		.step-two &
 			margin-top: 33px
+			+max(736)
+				padding: 0 20px
+				box-sizing: border-box
+				
 		.step-three &
 			margin-top: 23px
+			+max(736)
+				padding: 0 20px
+				box-sizing: border-box
+
 
 		&-button
 			position: relative
@@ -150,12 +212,16 @@
 
 			.step-two &
 				top: 4px
-				width: perc(323px, 807px)
+				width: 100%
+				// max-width: perc(323px, 807px)
+				max-width: 323px
 				clear: both
 				+center
 
 			.step-three &
-				width: perc(423px, 807px)
+				// width: perc(423px, 807px)
+				width: 100%
+				max-width: 423px
 				clear: both
 				+center
 
@@ -169,6 +235,10 @@
 					font-weight: 400
 					letter-spacing: -10px
 
+					+max(736)
+						font-size: 20px
+						// top: 29px
+
 
 			&.no
 				background-color: darken($divider, 5)
@@ -176,8 +246,7 @@
 			
 			&-large
 				position: relative
-				+valign
-				top: 52%
+				+valign(52%)
 				float: left
 				padding: 15px 15px 0 22px
 				border-right: 3px solid darken($contrast, 7)
@@ -185,6 +254,13 @@
 				line-height: 1
 				font-weight: 700
 				text-transform: uppercase
+
+				+max(736)
+					border: 0
+					float: none
+					width: 100%
+					text-align: center
+					padding: 15px 0 0 0 
 
 				.no &
 					border-color: darken($divider, 12)
@@ -200,6 +276,9 @@
 				line-height: 1
 				text-align: left
 				width: 53%
+
+				+max(736)
+					display: none
 
 			&-text
 				position: absolute
@@ -235,6 +314,9 @@
 				font-weight: 700
 				line-height: 78px
 				box-sizing: border-box
+
+				+max(736)
+					font-size: 20px
 		
 
 
@@ -246,16 +328,30 @@
 			margin-bottom: 18px
 			border: 0
 
+			+max(736)
+				width: 48.8%
+
 			&.error
 				color: #E34B4F
 				border-radius: 5px
 				background-image: none
 				background-color: transparent
 
+			&:before
+				content: ''
+				width: 32px
+				height: 95%
+				background-color: white
+				position: absolute
+				right: 4px
+				top: 2px
+				z-index: 2
+
 			&:after
 				position: absolute
 				+valign
 				right: 12px
+				z-index: 3
 				font-family: gvcons
 				color: $grey-light
 				// color: $grey
@@ -266,12 +362,19 @@
 			&:nth-child(3),
 				margin-left: perc(152.5px, 1100px)
 
+				+max(736)
+					margin-left: 0
+
 			&:nth-child(2n)
 				margin-left: perc(18px, 807px)
 
 			&:nth-child(1):after
 				content: '!'
 				font-size: 18px
+
+				+max(350)
+					.step-two &
+						display: none
 
 			.step-three &:nth-child(1):after,
 			.step-three &:nth-child(2):after
@@ -290,11 +393,23 @@
 			&-wrap
 				position: relative
 
+				.select &:before
+					content: ''
+					width: 38px
+					height: 95%
+					background-color: white
+					position: absolute
+					right: 4px
+					top: 2px
+					z-index: 2
+					// top: 18px
+
 				.select &:after
 					content: 'b'
 					position: absolute
 					right: 17px
 					top: 18px
+					z-index: 3
 					font-family: gvcons
 					font-size: 18px
 
@@ -323,6 +438,10 @@
 				font-size: 16px
 				font-weight: 500
 				color: $grey-darker
+
+				+max(736)
+					font-size: 14px
+					padding: 4px 14px 0px
 
 				&:focus
 					border-color: $contrast
