@@ -57,13 +57,13 @@
   <?php if ( is_object($node) ) { ?>
     <?php if ( $node->type === 'preface' ) { ?>
       <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css">
+      <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/popup-exit.css">
     <?php } ?>
   <?php } ?>
 <!--[if IE 8]>
     <script type="text/javascript" src="/sites/all/themes/gv_sky/js/selectivizr-min.js"></script>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/ie8.css" />
 <![endif]--> 
-
 
 
 
