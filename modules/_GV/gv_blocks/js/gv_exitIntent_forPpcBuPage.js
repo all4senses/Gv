@@ -34,7 +34,7 @@
                 turned_off = true;
                 console.log(e);
 
-                  $$("body").css('overflow', 'hidden');
+                  $$("body").addClass('opened-popup');
       
                   $.fn.popup("exit");
             }
@@ -45,7 +45,7 @@
             if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
                 turned_off = true;
 
-                  $$("body").css('overflow', 'hidden');
+                  $$("body").addClass('opened-popup');
       
                   $.fn.popup("exit");
             }

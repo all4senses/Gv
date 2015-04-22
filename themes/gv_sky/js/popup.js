@@ -56,7 +56,7 @@
 				$('.provider-quote .step-one').addClass('show');
 			}
 			$$('.popup, .popup-overlay').removeClass('show quote provider_demo provider_quote exit');
-			$$("body").css('overflow', 'visible');
+			$$("body").removeClass('opened-popup');
 			popOpen = false;
 		}
 

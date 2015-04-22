@@ -6,7 +6,7 @@
         
         jQuery(".quote-trigger").click(function(){
             
-            jQuery("body").css('overflow', 'hidden');
+            jQuery("body").addClass('opened-popup');
 
             jQuery.fn.popup("provider_quote");
            

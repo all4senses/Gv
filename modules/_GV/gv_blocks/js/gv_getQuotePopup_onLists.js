@@ -11,7 +11,7 @@
         
         jQuery(".quote-trigger").click(function(){
             
-            jQuery("body").css('overflow', 'hidden');
+            jQuery("body").addClass('opened-popup');
 
             jQuery.fn.popup("quote");
             
@@ -22,10 +22,10 @@
                 url: '/click', 
                 data: {
                         type: 'quote_popup_on_list_click',
-                        oid: jQuery(this).siblings().find('.nid').html(),
+                        oid: jQuery(this).find('.nid').html(),
                         click_page: window.location.href,
                         url: '',//jQuery(this).attr('href'),
-                        title: jQuery(this).siblings().find('.name').html()
+                        title: jQuery(this).find('.name').html()
                         //,referer: document.referrer
                        
                       }, 
@@ -43,10 +43,10 @@
                      
             }); // end of ($).ajax
 
-            jQuery('.popup-request-intro-title-highlight').html(jQuery(this).siblings().find('.name').html());
+            jQuery('.popup-request-intro-title-highlight').html(jQuery(this).find('.name').html());
             
-            jQuery('.popup-request input[name="provider_id"]').val(jQuery(this).siblings().find('.nid').html());
-            jQuery('.popup-request input[name="provider_name"]').val(jQuery(this).siblings().find('.name').html());
+            jQuery('.popup-request input[name="provider_id"]').val(jQuery(this).find('.nid').html());
+            jQuery('.popup-request input[name="provider_name"]').val(jQuery(this).find('.name').html());
             //});
 
        
