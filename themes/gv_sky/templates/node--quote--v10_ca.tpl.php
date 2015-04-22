@@ -30,6 +30,7 @@
         drupal_add_html_head($tag, 'meta_viewport');
     */
     drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css');
+    drupal_add_css('sites/all/themes/gv_sky/css/popup-exit.css');
   ?>
 
 
