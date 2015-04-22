@@ -1,4 +1,7 @@
   <?php
+      if (!$is_admin) {
+        drupal_static_reset('drupal_add_css');
+      }
     $final_page = (!empty($variables['node']->field_version['und'][1]['value']) && $variables['node']->field_version['und'][1]['value'] == 'final') ? TRUE : FALSE;
     if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
       $version = explode('_', $variables['node']->field_version['und'][0]['value']);
