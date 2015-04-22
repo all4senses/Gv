@@ -2361,7 +2361,7 @@ function gv_blocks_getContactInfo() {
 /**
  * Block with sidebar related posts for a current post.
  */
-function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $block_title = NULL) {
+function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $block_title = NULL, $extra_data = NULL) {
   
   if (!$node) {
     
@@ -2371,15 +2371,16 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
     
     $query = db_select('node', 'n')
       ->fields('n', array('nid', 'type'));
-    $query->join('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
-    $query->addField('ed', 'field_extra_data_value', 'field_extra_data');
-    
+    if (!$extra_data) {
+      $query->join('field_data_field_extra_data', 'ed', 'ed.entity_id = n.nid');
+      $query->addField('ed', 'field_extra_data_value', 'field_extra_data');
+    }
     $query->condition('n.nid', $nid);
 
     $node = $query->execute()->fetchObject();
   }
   
-  gv_misc_addRelatedArticlesToNode($node);
+  gv_misc_addRelatedArticlesToNode($node, $extra_data);
   
   
   if (empty($node->related_articles)) {

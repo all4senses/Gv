@@ -381,7 +381,7 @@
       }
       
       ?>
-      <?php echo gv_blocks_getSidebarRelatedArticlesBlock(); ?>
+      <?php echo gv_blocks_getSidebarRelatedArticlesBlock(NULL, $node, NULL, $extra_data); ?>
 
 
   </div> <!-- article-page-wrapper -->
