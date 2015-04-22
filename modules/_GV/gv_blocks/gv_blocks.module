@@ -2390,9 +2390,19 @@ function gv_blocks_getSidebarRelatedArticlesBlock($nid = NULL, $node = NULL, $bl
   $ui_tabs_nav = '';
   $fragments = '';
 
+  dpm($extra_data);
+  dpm(time()); 
+   
   $count = NULL;
   foreach ($node->related_articles as $related_nid => $related_article) {
     ++$count;
+    
+    if (0) {
+      if (preg_match('/\[video:.*v=(.*)\]/isU', $related_article->teaser, $matches)) {
+        $related_article->teaser = preg_replace('|\[video:.*(http.*)\]|', '', $related_article->teaser);
+      }
+    }
+   
     $content = dk_shorten_body($related_article->teaser);
     $fragments .= '<li class="related-posts-list-item"><article>';
 
