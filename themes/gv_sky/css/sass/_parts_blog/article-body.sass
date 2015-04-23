@@ -199,13 +199,22 @@
 	box-sizing: border-box
 
 	&.cta
-		background-color: $contrast
-		background-image: url("/sites/all/themes/gv_sky_images/8x8_screenshot.png")
-		background-size: cover
-		background-position: 50% 50%
+		background-color: darken($contrast, 10)
+
+		&:before
+			content: ''
+			width: 100%
+			height: 100%
+			background-image: url("/sites/all/themes/gv_sky/images/8x8_screenshot.png")
+			background-size: cover
+			background-position: 50% 50%
+			opacity: .25
 
 		&:after
 			content: '' !important
+
+	&.cta &-text
+		font-weight: 600
 
 
 	// &:before
