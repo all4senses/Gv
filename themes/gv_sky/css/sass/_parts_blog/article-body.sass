@@ -183,6 +183,44 @@
 
 
 
+// ==== Question Dividers =================================================================================
+
+.article-question
+	position: relative
+	display: block
+	width: 100%
+	background-color: $primary
+	padding: 35px 20px
+	box-sizing: border-box
+
+	&:after
+		content: '0'
+		position: absolute
+		bottom: -20px
+		right: -20px
+		font-size: 80px
+		color: darken($primary, 15)
+
+	&-text
+		width: 100%
+		max-width: 550px
+		font-size: 22px
+		line-height: 1.5
+		font-weight: 400
+		color: white
+		text-align: center
+
+
+		+max(736)
+			font-size: 18px
+
+
+
+
+
+
+
+
 
 
 
