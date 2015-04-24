@@ -14,7 +14,7 @@
 
         <div class="navigation-logo">
           <?php
-              if (in_array(@$_SERVER['REDIRECT_URL'], array('/ppc/business-voip', '/canada', '/business') )) {
+              if (in_array(@$_SERVER['REDIRECT_URL'], array('/ppc/business-voip', '/canada') )) {
                 echo '<div class="navigation-logo-link">';
                 echo '<img src="/sites/all/themes/gv_sky/images/getvoip-logo.png" width="206" height="53" class="navigation-logo-link-img" alt="GetVoIP" title="GetVoIP" />';
                 echo '</div>';
