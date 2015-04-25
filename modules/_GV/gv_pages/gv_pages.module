@@ -2231,7 +2231,8 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                               $form['item_' . ($key + 1) . 'd'] = array(
                                                 '#markup' => $data_detailed . '<td class="data">' . $data . '</td>
                                                     <td class="ops">' 
-                                                      . l('Delete', $_GET['q'], array('query' => $delete_url)) 
+                                                      //. l('Delete', $_GET['q'], array('query' => $delete_url, 'attributes' => array('onClick' => 'if (!confirm("Delete submission?") return false;)') )) 
+                                                      . l('Delete', $_GET['q'], array('query' => /*$delete_url*/'', 'attributes' => array('onClick' => 'if (!confirm("Delete submission?") return false;)') )) 
                                                       . render($gv_misc_sendCapturedQuotesToProviders_form_x)
                                                   . '</td>'
                                                   //. '<td class="campaign">' 
