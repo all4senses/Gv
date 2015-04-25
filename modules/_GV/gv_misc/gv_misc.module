@@ -12799,20 +12799,21 @@ function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_
     $class_submitted = 'not-tracked';
   }
   
-  $form['remoteSubmissions_' . $quote_request_data['key']] = array(
+  $submission_id = 'remoteSubmissions_' . $quote_request_data['key'];
+  $form[$submission_id] = array(
     '#type' => 'fieldset',
     '#title' => 'Submit to providers',
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#attributes' => array('class' => array($class_submitted, 'edit-remote-submissions')),
   );
-      $form['remoteSubmittions']['providers'] = array(
+      $form[$submission_id]['providers'] = array(
         '#type' => 'container',
         '#tree' => TRUE,
       );
 
           foreach ($remoteProvidersSubmissionsSettings as $provider => $provider_data) {
-            $form['remoteSubmittions']['providers'][$provider] = array(
+            $form[$submission_id]['providers'][$provider] = array(
               '#type' => 'checkbox',
               '#default_value' => !empty($quote_request_data['sentToRemoteProviders'][$provider]) ? TRUE : FALSE,
               '#title' => $provider == 'Vocalocity' ?  'Vonage' : $provider,
@@ -12820,8 +12821,8 @@ function gv_misc_sendCapturedQuotesToProviders_form($form, &$form_state, $quote_
             );
           }
   
-      $form['remoteSubmittions']['actions'] = array('#type' => 'actions');
-      $form['remoteSubmittions']['actions']['submit'] = array(
+      $form[$submission_id]['actions'] = array('#type' => 'actions');
+      $form[$submission_id]['actions']['submit'] = array(
       //$form['actions'] = array('#type' => 'actions');
       //$form['actions']['submit'] = array(
         '#type' => 'submit',
