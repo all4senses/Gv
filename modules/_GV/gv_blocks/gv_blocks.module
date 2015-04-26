@@ -12857,14 +12857,26 @@ function gv_blocks_getQuotePopup_onLists($type = 'cc') {
  * 
  */
 function gv_blocks_getMainMenu_splitted() {
+  
+  $cid = 'gv_cached_MainNiceMenu_splitted';
+  $cache = cache_get($cid, 'cache');
+
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    return $cache->data;
+  }
+  
   $main_menu = NULL;
   $block = block_load('nice_menus', 1);  
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  dpm($block); dpm($block_array);
   if (preg_match('/(.*)(\<div class=\"solution-nav\"\>.*\<\/div\>)(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
     $main_menu = str_replace($matches[2], '', $block_array['nice_menus_1']['#markup']);
     global $main_menu_inner_ul_removed;
     $main_menu_inner_ul_removed = $matches[2];
   }
+  
+  cache_set($cid, $main_menu, 'cache', strtotime('+31 day'));
+  
   return $main_menu;
 }
 
