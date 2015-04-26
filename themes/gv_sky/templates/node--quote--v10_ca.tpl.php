@@ -18,19 +18,9 @@
       $initialQuotePage_node = $node;
     }
     
-    /*
-        $tag = array(
-          '#type' => 'html_tag',
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'name' =>  'viewport',
-            'content' => 'initial-scale=1.0, width=device-width,  minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
-          ),
-        );
-        drupal_add_html_head($tag, 'meta_viewport');
-    */
-    drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css');
-    drupal_add_css('sites/all/themes/gv_sky/css/popup-exit.css');
+
+    drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css', array('preprocess' => FALSE ));
+    drupal_add_css('sites/all/themes/gv_sky/css/popup-exit.css', array('preprocess' => FALSE ));
   ?>
 
 
