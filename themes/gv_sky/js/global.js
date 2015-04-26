@@ -19,7 +19,10 @@ $this = $$(this);
 		//$$('.solution-nav').insertAfter('.navigation');
 
 		$$('.main-menu-item.first').on('click',function(){
-
+      
+      console.log('menu click');
+      console.log($this);
+      
 			var clicks = $this.data('clicks');
 
 			if (clicks) {
