@@ -12863,20 +12863,18 @@ function gv_blocks_getMainMenu_splitted() {
   
   $cid = 'gv_cached_MainNiceMenu_splitted_' . ($user->uid ? 1 : 0);
   
-  if ($user->uid == 1) {
-    $cache = cache_get($cid, 'cache');
-    if ($cache && !empty($cache->data) && $cache->expire > time()) {
-      // load nice_menus js and css.
-      _load_nice_menus_library();
-      $main_menu_inner_ul_removed = $cache->data['main_menu_inner_ul_removed'];
-      return $cache->data['main_menu'];
-    }
+  $cache = cache_get($cid, 'cache');
+  if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    // load nice_menus js and css.
+    _load_nice_menus_library();
+    $main_menu_inner_ul_removed = $cache->data['main_menu_inner_ul_removed'];
+    return $cache->data['main_menu'];
   }
   
   $main_menu = NULL;
   $block = block_load('nice_menus', 1);  
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  //dpm($block); dpm($block_array);
+
   if (preg_match('/(.*)(\<div class=\"solution-nav\"\>.*\<\/div\>)(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
     $main_menu = str_replace($matches[2], '', $block_array['nice_menus_1']['#markup']);
     $main_menu_inner_ul_removed = $matches[2];
