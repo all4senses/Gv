@@ -12862,13 +12862,15 @@ function gv_blocks_getMainMenu_splitted() {
   $cache = cache_get($cid, 'cache');
 
   if ($cache && !empty($cache->data) && $cache->expire > time()) {
+    // load nice_menus js and css.
+    _load_nice_menus_library();
     return $cache->data;
   }
   
   $main_menu = NULL;
   $block = block_load('nice_menus', 1);  
   $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  dpm($block); dpm($block_array);
+  //dpm($block); dpm($block_array);
   if (preg_match('/(.*)(\<div class=\"solution-nav\"\>.*\<\/div\>)(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
     $main_menu = str_replace($matches[2], '', $block_array['nice_menus_1']['#markup']);
     global $main_menu_inner_ul_removed;
