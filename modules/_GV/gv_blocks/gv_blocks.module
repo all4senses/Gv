@@ -12859,15 +12859,17 @@ function gv_blocks_getQuotePopup_onLists($type = 'cc') {
 function gv_blocks_getMainMenu_splitted() {
   
   global $user;
+  global $main_menu_inner_ul_removed;
   
-  $cid = 'gv_cached_MainNiceMenu_splitted';
+  $cid = 'gv_cached_MainNiceMenu_splitted_' . ($user->uid ? 1 : 0);
   
   if ($user->uid == 1) {
     $cache = cache_get($cid, 'cache');
     if ($cache && !empty($cache->data) && $cache->expire > time()) {
       // load nice_menus js and css.
       _load_nice_menus_library();
-      return $cache->data;
+      $main_menu_inner_ul_removed = $cache->data['main_menu_inner_ul_removed'];
+      return $cache->data['main_menu'];
     }
   }
   
@@ -12877,11 +12879,10 @@ function gv_blocks_getMainMenu_splitted() {
   //dpm($block); dpm($block_array);
   if (preg_match('/(.*)(\<div class=\"solution-nav\"\>.*\<\/div\>)(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
     $main_menu = str_replace($matches[2], '', $block_array['nice_menus_1']['#markup']);
-    global $main_menu_inner_ul_removed;
     $main_menu_inner_ul_removed = $matches[2];
   }
   
-  cache_set($cid, $main_menu, 'cache', strtotime('+31 day'));
+  cache_set($cid, array('main_menu' => $main_menu, 'main_menu_inner_ul_removed' => $main_menu_inner_ul_removed), 'cache', strtotime('+31 day'));
   
   return $main_menu;
 }
