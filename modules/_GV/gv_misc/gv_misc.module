@@ -8541,8 +8541,8 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
     $data_to[$remote_key] = isset($submission[$getvoip_key]) ? $submission[$getvoip_key] : '';
   }
   
-  if (!$data_to['Company']) {
-    !$data_to['Company'] = 'TBD';
+  if (empty($data_to['company'])) {
+    !$data_to['company'] = 'TBD';
   }
   
   
