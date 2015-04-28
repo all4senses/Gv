@@ -4,7 +4,8 @@
   Drupal.behaviors.gv_exitIntent_forPpcBuPage = {
     attach: function (context, settings) {
        
-       
+       var isIE = document.all && !window.atob;
+       var isIE11 = window.navigator.msPointerEnabled;
        
        // Exit intent functionality.
        
@@ -24,21 +25,23 @@
             }
         }); 
 
-        window.history.replaceState({id: 'gv_exit-init'}, '', '');
-        window.history.pushState({id: 'gv_exit-control'}, '', '');
+        if ( !isIE && !isIE11 ) {
+            window.history.replaceState({id: 'gv_exit-init'}, '', '');
+            window.history.pushState({id: 'gv_exit-control'}, '', '');
 
-           
-        $(window).on('popstate', function(e) {
-            
-            if (!turned_off && 'state' in window.history && window.history.state !== null && window.history.state.id !== 'gv_exit-control') {    
-                turned_off = true;
-                console.log(e);
+               
+            $(window).on('popstate', function(e) {
+                
+                if (!turned_off && 'state' in window.history && window.history.state !== null && window.history.state.id !== 'gv_exit-control') {    
+                    turned_off = true;
+                    console.log(e);
 
-                  $$("body").addClass('opened-popup');
-      
-                  $.fn.popup("exit");
-            }
-        });
+                      $$("body").addClass('opened-popup');
+          
+                      $.fn.popup("exit");
+                }
+            });
+        }
 
         $(window).on('mouseleave', function(e) {
             
