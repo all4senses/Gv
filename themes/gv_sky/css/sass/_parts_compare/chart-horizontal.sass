@@ -522,6 +522,10 @@
 	&.show 
 		display: table
 
+	// IE10 and IE11 Hack
+	_:-ms-input-placeholder, :root & 
+		display: none
+
 	// Hide on Reviews page where there are two tables. Loss will be greater than the benefit if I revise the JS sticky header code. Better to hide it.
 	.page-node-98 &,
 	.ie &
