@@ -7095,6 +7095,8 @@ function gv_misc_SendRequestToMitel_callCenter($submission, $op = 'sendIfAllowed
     'Inbound Calling' => 'Inbound',
     'Outbound Calling' => 'Outbound',
     'Both Outbound & Inbound' => 'Blended',
+    'Both Outbound and Inbound' => 'Blended',
+    'Both Outbound and Inbound<' => 'Blended', // fixes a typo in a submission form (before it was fixed)  
   );
  
   $submission['Quote for'] = @$map_quoteFor[@$submission['Quote for']];
@@ -7130,7 +7132,9 @@ function gv_misc_SendRequestToMitel_callCenter($submission, $op = 'sendIfAllowed
     '00Nd0000007PsIv' => 'Direct Cloud', //'US_Region__c' => 'Direct Cloud',
     'Owner' => '00Gd0000001owyL',
       
+    //'recordType' => '012U0000000aMzQ',
     'RecordType' => '012U0000000aMzQ',
+      
     '00Nd0000006rUeW' => 'Web form fillout', //  mkto2__Original_Source_Type__c
     
     //'RecordType' => '012U0000000aMzQ',
@@ -7398,6 +7402,8 @@ function gv_misc_SendRequestTo8x8_callCenter($submission, $op = 'sendIfAllowed')
     'Inbound Calling' => 'Inbound',
     'Outbound Calling' => 'Outbound',
     'Both Outbound & Inbound' => 'Blended',
+    'Both Outbound and Inbound' => 'Blended',
+    'Both Outbound and Inbound<' => 'Blended',  // Fixes a typo in a submission form
   );
  
   $submission['Quote for'] = @$map_quoteFor[@$submission['Quote for']];
