@@ -8524,7 +8524,18 @@ function gv_misc_SendRequestToNextiva($submission, $op = 'sendIfAllowed') {
   elseif ($op == 'sendIfAllowed' && !$allowedToBeSent) {
     return FALSE;
   }
-
+      
+  $map_phonesNeeded = array(
+    '1 - 4' => 3,
+    '5 - 10' => 7,
+    '11 - 20' => 15,
+    '21 - 50' => 25,
+    'More than 50' => 55,
+  );
+  
+  // 7 - default phones
+  $submission['Phones needed'] = !empty($map_phonesNeeded[@$submission['Phones needed']]) ? $map_phonesNeeded[@$submission['Phones needed']] : 10;
+  
   $map_main = array(
     'First Name' => 'first_name',
     'Last Name' => 'last_name',
