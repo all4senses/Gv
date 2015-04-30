@@ -83,8 +83,8 @@
                           </div>
 
                     </div>
-                  </div>
               <?php endif; // end of if (!empty($content['gv_ratings'])): ?>
+                  </div>
           </div>
 
         <div class="provider-box-provider">
@@ -213,9 +213,11 @@
                       echo '<span class="provider-box-data-tabs-item-mobile_hide">Customer </span>Reviews';
                     ?>
                   </li>
-                <?php endif; ?>
-                  
+
                 <li id="tab-1" class="provider-box-data-tabs-item">
+                <?php else: ?>
+                <li id="tab-1" class="provider-box-data-tabs-item active">
+                <?php endif; ?>
                   <?php 
                     echo '<span class="provider-box-data-tabs-item-mobile_hide">Provider </span>Overview';
                   ?>
@@ -253,9 +255,11 @@
                     <?php echo render($content['reviews_entity_view_1']); ?>
                     <div class="reviews-load">Load More</div>
                 </div>
-              <?php endif; ?>
-              
+
               <div id="tab-1-c" class="provider-box-data-content-section">
+              <?php else: ?>
+              <div id="tab-1-c" class="provider-box-data-content-section active">
+              <?php endif; ?>
                 <div class="overview-title">Provider Overview</div>
                 <?php echo render($content['body']); ?>
               </div>
