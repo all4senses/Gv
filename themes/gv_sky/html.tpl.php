@@ -68,6 +68,13 @@
 
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
+  
+  <?php 
+    if ($_SERVER['SERVER_ADDR'] == '45.55.223.66') {
+      echo '<div class="new-server-mark"></div>';
+    }
+  ?>
+  
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
