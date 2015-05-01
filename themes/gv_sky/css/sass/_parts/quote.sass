@@ -11,8 +11,8 @@
 		+max(920)
 			border-top: 1px solid $divider
 
-		+m(736)
-			display: none !important
+		// +m(736)
+		// 	display: none !important
 
 		&-wrap 
 			width: 100%
@@ -175,6 +175,10 @@
 		&:nth-child(-n+2)
 			margin-top: 2px
 
+		&:nth-child(2)
+			+max(480)
+				margin-top: 22px
+
 		&:nth-child(2):after
 			content: '!'
 			font-size: 18px
@@ -200,6 +204,11 @@
 
 			&:nth-child(2n)
 				margin-left: perc(12px, 298px)
+
+			+max(480)
+				width: 100%
+				float: none
+				margin-left: 0 !important
 
 		&-wrap
 			width: 100%
