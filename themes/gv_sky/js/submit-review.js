@@ -80,9 +80,9 @@ jQuery(document).ready(function($){
 		var $formSelect_name = $formSelect.attr('name');
 
 		if ( $preSelected ) {
-			var $newField = '<input class="review-form-rating-item-hidden" type="hidden" value="0" name="' + $formSelect_name + '" />';
-		} else {
 			var $newField = '<input class="review-form-rating-item-hidden" type="hidden" value="' + $itemValue + '" name="' + $formSelect_name + '" />';
+		} else {
+			var $newField = '<input class="review-form-rating-item-hidden" type="hidden" value="0" name="' + $formSelect_name + '" />';
 		}
 		$itemWrap.remove();
 
