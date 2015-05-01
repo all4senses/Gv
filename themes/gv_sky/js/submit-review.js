@@ -67,17 +67,40 @@ jQuery(document).ready(function($){
 	var $fivestar = '<div class="review-form-rating-item-fivestar"><div class="review-form-rating-item-fivestar-item star-1" data-star="1" data-name="Horrible"></div><div class="review-form-rating-item-fivestar-item star-2" data-star="2" data-name="Bad"></div><div class="review-form-rating-item-fivestar-item star-3" data-star="3" data-name="OK"></div><div class="review-form-rating-item-fivestar-item star-4" data-star="4" data-name="Good"></div><div class="review-form-rating-item-fivestar-item star-5" data-star="5" data-name="Excellent"></div></div>';
 
 	// Stars creation and select field conversion
+	if ( window.location.href.search('edit') == -1 ) {
+			var $preSelected = false;
+	} else {
+			var $preSelected = true;
+	}
 	$$('.review-form-rating-item').each(function(){
 		var $itemWrap = $(this).find('.form-item');
 		var $itemName = $(this).find('.review-form-rating-item-name');
+		var $itemValue = $(this).find('select').val();
 		var $formSelect = $(this).find('.form-select');
 		var $formSelect_name = $formSelect.attr('name');
-		var $newField = '<input class="review-form-rating-item-hidden" type="hidden" value="0" name="' + $formSelect_name + '" />';
 
+		if ( $preSelected ) {
+			var $newField = '<input class="review-form-rating-item-hidden" type="hidden" value="0" name="' + $formSelect_name + '" />';
+		} else {
+			var $newField = '<input class="review-form-rating-item-hidden" type="hidden" value="' + $itemValue + '" name="' + $formSelect_name + '" />';
+		}
 		$itemWrap.remove();
 
 		$itemName.before($fivestar);
 		$itemName.before($newField);
+
+		if ($preSelected) {
+			var $selectedStar;
+
+			if ( $itemValue === '20' ) { $selectedStar = '.star-1'; }
+			if ( $itemValue === '40' ) { $selectedStar = '.star-2'; }
+			if ( $itemValue === '60' ) { $selectedStar = '.star-3'; }
+			if ( $itemValue === '80' ) { $selectedStar = '.star-4'; }
+			if ( $itemValue === '100' ) { $selectedStar = '.star-5'; }
+
+			$(this).find($selectedStar).addClass('on');
+			$(this).find($selectedStar).prevAll().addClass('on');
+		}
 	});
 
 
@@ -104,11 +127,11 @@ jQuery(document).ready(function($){
 			$(this).prevAll().addClass('on');
 			$(this).parent().siblings('.review-form-rating-item-name').html($name);	// Append hover name to .review-form-rating-item-name
 
-			if ( $num == '1' ) { $val = '20'; }
-			if ( $num == '2' ) { $val = '40'; }
-			if ( $num == '3' ) { $val = '60'; }
-			if ( $num == '4' ) { $val = '80'; }
-			if ( $num == '5' ) { $val = '100'; }
+			if ( $num === '1' ) { $val = '20'; }
+			if ( $num === '2' ) { $val = '40'; }
+			if ( $num === '3' ) { $val = '60'; }
+			if ( $num === '4' ) { $val = '80'; }
+			if ( $num === '5' ) { $val = '100'; }
 
 			$(this).parent().siblings().val($val);
 	});
