@@ -63,11 +63,16 @@
 		var $topHideAmount = $tableEnd - $windowOffset;
 		
 		if ( $tableOffset - $windowOffset < 0 ) {
-			$$('.sticky-table').addClass('show');
+
+			if ( $windowOffset < $tableEnd ) {
+				$$('.sticky-table').addClass('show');
+			}
+
 		} else {
 			$$('.sticky-table').removeClass('show');
 		}
 
+		// ==== Horizontal =================================================================================
 		if ( $$('.chart').hasClass('horizontal') ) {
 			
 			if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 74 ) {
@@ -84,6 +89,7 @@
 
 		}
 
+		// ==== Vertical =================================================================================
 		if ( $$('.chart').hasClass('vertical') ) {
 
 			if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 168 ) {
