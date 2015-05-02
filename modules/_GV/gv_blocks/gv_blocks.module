@@ -3870,6 +3870,8 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/cloud-contact-center' => 'Call Center Software',
   );
  
+  dpm($_GET);
+  dpm($_SERVER);
   $service_type_name_origin = $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]];
   
   global $language;
