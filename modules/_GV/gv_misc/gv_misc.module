@@ -15519,11 +15519,10 @@ function gv_misc_updateCachedPPCpage_ajax() {
  */
 function gv_misc_init() {
   
-  dpm($_SERVER);
+  // Fix a case when $_SERVER['REDIRECT_URL'] contain index.php instead of the current url.
   if ($_SERVER['REDIRECT_URL'] == $_SERVER['SCRIPT_NAME']) {
     $current_url = '/' . request_path(); // = $_SERVER['REDIRECT_URL'];
     $_SERVER['REDIRECT_URL'] = $current_url;
-    dpm($_SERVER);
   }
   
   gv_misc_writeGvAccessLog('init');

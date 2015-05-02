@@ -2796,7 +2796,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
     );
     
     dpm($_SERVER);
-    $current_url = '/' . request_path(); // = $_SERVER['REDIRECT_URL'];
+    $current_url = $_SERVER['REDIRECT_URL']; //  = '/' . request_path();
     if(!$service_type = @$map_path_to_type[$current_url]) {
       return NULL;
     }
