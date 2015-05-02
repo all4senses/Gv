@@ -441,6 +441,8 @@ function _imagemagick_convert($source, $destination, $args) {
  *   - Error exit status code integer returned by the executable.
  */
 function _imagemagick_convert_exec($command_args, &$output = NULL, &$error = NULL, $convert_path = NULL) {
+  dpm($command_args);
+  dpm($convert_path);
   // $convert_path is only passed from the system-wide image toolkit form, on
   // which the path to convert is configured.
   // @see _imagemagick_check_path()
