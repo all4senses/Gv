@@ -3870,10 +3870,10 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/cloud-contact-center' => 'Call Center Software',
   );
  
-  dpm($_GET);
-  dpm($_SERVER);
-  dpm(request_path());
-  $service_type_name_origin = $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]];
+  //dpm($_SERVER);
+  $current_path = '/' . request_path(); // = $_SERVER['REDIRECT_URL'];
+  
+  $service_type_name_origin = $map_preface_type_to_service_type[$map_path_to_preface_type[$current_path]];
   
   global $language;
   global $user;
@@ -3921,7 +3921,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   
   
   // Find latest reviews
-  if ($map_preface_type_to_latest_reviews[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]]) {
+  if ($map_preface_type_to_latest_reviews[$map_path_to_preface_type[$current_path]]) {
     
     $query = db_select('node', 'n')
             ->fields('n', array('nid', 'created'));
