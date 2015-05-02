@@ -2795,7 +2795,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/cloud-contact-center' => 'cc',// 'page-compare-cc-voip-providers',
     );
     
-    if(!$service_type = @$map_path_to_type[$_SERVER['REDIRECT_URL']]) {
+    $current_url = '/' . request_path(); // = $_SERVER['REDIRECT_URL'];
+    if(!$service_type = @$map_path_to_type[$current_url]) {
       return NULL;
     }
 
@@ -2913,7 +2914,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
         }
       }
       
-      if ($_SERVER['REDIRECT_URL'] == '/ppc/business-voip') {
+      if ($current_url == '/ppc/business-voip') {
         $reviews_link_attributes = array('attributes' => array('class' => array('review-link'), 'target' => '_blank'));
       }
       else {
