@@ -2795,7 +2795,6 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/cloud-contact-center' => 'cc',// 'page-compare-cc-voip-providers',
     );
     
-    dpm($_SERVER);
     $current_url = $_SERVER['REDIRECT_URL']; //  = '/' . request_path();
     if(!$service_type = @$map_path_to_type[$current_url]) {
       return NULL;
