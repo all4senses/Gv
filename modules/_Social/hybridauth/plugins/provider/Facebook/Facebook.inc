@@ -9,6 +9,7 @@
  */
 $plugin = array(
   'configuration_form_callback' => 'hybridauth_provider_facebook_configuration_form_callback',
+  'configuration_callback' => 'hybridauth_provider_facebook_configuration_callback',
 );
 
 function hybridauth_provider_facebook_configuration_form_callback(&$form, $provider_id) {
@@ -40,9 +41,7 @@ function hybridauth_provider_facebook_configuration_form_callback(&$form, $provi
   $form['vtabs']['advanced']['hybridauth_provider_' . $provider_id . '_scope'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Scope'),
-    '#default_value' => variable_get('hybridauth_provider_' . $provider_id . '_scope', array(
-      'email', 'user_about_me', 'user_birthday', 'user_hometown', 'user_website', 'offline_access',
-    )),
+    '#default_value' => variable_get('hybridauth_provider_' . $provider_id . '_scope', hybridauth_provider_facebook_scope_default()),
     '#options' => array(
       // See http://developers.facebook.com/docs/reference/api/permissions/
       // Regular permissions.
@@ -89,4 +88,14 @@ function hybridauth_provider_facebook_configuration_form_callback(&$form, $provi
       'publish_actions'      => '<strong>publish_actions</strong> -- ' . t('Enables your application to publish user scores and achievements.'),
     ),
   );
+}
+
+function hybridauth_provider_facebook_configuration_callback(&$config, $provider_id) {
+  if (empty($config['scope'])) {
+    $config['scope'] = hybridauth_provider_facebook_scope_default();
+  }
+}
+
+function hybridauth_provider_facebook_scope_default() {
+  return array('email', 'user_about_me', 'user_birthday', 'user_hometown', 'user_website', 'offline_access');
 }

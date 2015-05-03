@@ -87,26 +87,33 @@ function template_preprocess_hybridauth_widget(&$vars, $hook) {
         $class_mod[] = 'hybridauth-onclick-popup';
       }
 
+      $text = theme('hybridauth_provider_icon', array(
+        'icon_pack' => $element['#hybridauth_widget_icon_pack'],
+        'provider_id' => $provider_id,
+        'provider_name' => $provider_name,
+      ));
       $path = 'hybridauth/window/' . $provider_id;
-      $providers[] = l(
-        theme('hybridauth_provider_icon', array('icon_pack' => $element['#hybridauth_widget_icon_pack'], 'provider_id' => $provider_id, 'provider_name' => $provider_name)),
-        $path,
-        array(
-          'html' => TRUE,
-          'query' => $query_mod,
-          'attributes' => array(
-            'title' => $provider_name,
-            'class' => $class_mod,
-            'rel' => $rel_mod,
-            'data-hybridauth-provider' => $provider_id,
-            // jQuery Mobile compatibility - so it doesn't use AJAX.
-            'data-ajax' => 'false',
-            // Add authentication window width and height.
-            'data-hybridauth-width' => $window_width,
-            'data-hybridauth-height' => $window_height,
-          ) + ($onclick ? array('onclick' => $onclick) : array()),
-        )
+      $url = url($path, array('query' => $query_mod));
+      if ($element['#hybridauth_widget_hide_links']) {
+        $path = 'user';
+      }
+      $options = array(
+        'html' => TRUE,
+        'query' => $query_mod,
+        'attributes' => array(
+          'title' => $provider_name,
+          'class' => $class_mod,
+          'rel' => $rel_mod,
+          'data-hybridauth-provider' => $provider_id,
+          'data-hybridauth-url' => $url,
+          // jQuery Mobile compatibility - so it doesn't use AJAX.
+          'data-ajax' => 'false',
+          // Add authentication window width and height.
+          'data-hybridauth-width' => $window_width,
+          'data-hybridauth-height' => $window_height,
+        ) + ($onclick ? array('onclick' => $onclick) : array()),
       );
+      $providers[] = l($text, $path, $options);
     }
   }
   else {

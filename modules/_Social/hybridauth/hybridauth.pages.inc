@@ -279,6 +279,12 @@ function _hybridauth_window_process_auth($data) {
         return $additional_info;
       }
 
+      // As we have already checked for the additional info we can unset the plaintext $data['pass'] here.
+      if (isset($data['pass'])) {
+        $user_password = $data['pass'];
+        unset($data['pass']);
+      }
+
       // TODO: remove this global if possible.
       global $_hybridauth_data;
       $_hybridauth_data = $data;
@@ -286,7 +292,7 @@ function _hybridauth_window_process_auth($data) {
       $name = _hybridauth_make_username($data);
       $userinfo = array(
         'name' => $name,
-        'pass' => empty($data['pass']) ? user_password() : $data['pass'],
+        'pass' => empty($user_password) ? user_password() : $user_password,
         'init' => $name,
         'status' => 1,
         'access' => REQUEST_TIME,
@@ -456,7 +462,7 @@ function hybridauth_additional_info_form($form, &$form_state, $data) {
         . t('Spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.'),
     );
     if (module_exists('username_check')) {
-      _username_check_load_resources();
+      _username_check_load_resources('auto');
       $form['fset']['username']['#field_suffix'] = '<span id="username-check-informer">&nbsp;</span>';
       $form['fset']['username']['#suffix'] = '<div id="username-check-message"></div>';
     }
