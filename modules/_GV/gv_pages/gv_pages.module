@@ -8837,11 +8837,11 @@ function gv_pages_node_view($node, $view_mode) {
       // Except of the front page, where it can be set via admin interface of the Metatags.
       // AND except of published prefaces, because thier metatags will be pulled automatically!
 
-      if (isset($node->metatags) && count($node->metatags) && !$node->status) {
+      if (isset($node->metatags['und']) && count($node->metatags['und']) && !$node->status) {
         
-        dpm($node->metatags);
+        //dpm($node->metatags);
         
-        foreach($node->metatags as $metatag_title => $metatag_data) {
+        foreach($node->metatags['und'] as $metatag_title => $metatag_data) {
 
           // We set title while attaching a preface to a view.
           // So skip it here...
