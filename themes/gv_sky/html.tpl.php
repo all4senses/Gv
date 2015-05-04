@@ -70,7 +70,7 @@
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   
   <?php 
-    if ($_SERVER['SERVER_ADDR'] == '45.55.223.66') {
+    if ($_SERVER['SERVER_ADDR'] == '45.55.161.169') {
       echo '<div class="new-server-mark"></div>';
     }
   ?>
