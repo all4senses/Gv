@@ -8441,9 +8441,11 @@ function gv_pages_node_view($node, $view_mode) {
       dpm($node);
       if (!empty($node->metatags['und']['title']['value'])) {
         gv_misc_addMetatag('title', $node->metatags['und']['title']['value']);
+        dpm($node->metatags['und']['title']['value']);
       }
       if (!empty($node->metatags['und']['description']['value'])) {
         gv_misc_addMetatag('description', $node->metatags['und']['description']['value']);
+        dpm($node->metatags['und']['description']['value']);
       }
       
       
