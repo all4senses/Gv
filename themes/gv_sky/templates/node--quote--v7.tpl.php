@@ -1,4 +1,6 @@
   <?php
+    dpm($content);
+    echo render($content['metatags']);
     if ($node->title == 'Request a Quote page v7 Final') {
 //      $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
 //      drupal_add_js($path_to_custom_js . 'gv_brandsCarousel.js');
