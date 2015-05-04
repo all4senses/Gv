@@ -8438,6 +8438,14 @@ function gv_pages_node_view($node, $view_mode) {
       if ($view_mode != 'full') {
         return;
       }
+      dpm($node);
+      if (!empty($node->metatags['und']['title']['value'])) {
+        gv_misc_addMetatag('title', $node->metatags['und']['title']['value']);
+      }
+      if (!empty($node->metatags['und']['description']['value'])) {
+        gv_misc_addMetatag('description', $node->metatags['und']['description']['value']);
+      }
+      
       
       $node->q_data = unserialize($node->field_q_data['und'][0]['value']);
       
