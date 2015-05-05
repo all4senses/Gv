@@ -70,17 +70,11 @@
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   
-  <?php 
-//    if ($_SERVER['SERVER_ADDR'] == '45.55.161.169') {
-//      echo '<div class="new-server-mark"></div>';
-//    }
-  ?>
   
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
   <?php if (!isset($top)) { print $scripts; } ?>
-  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6005656184574&amp;value=0" /></noscript>
   
   <!-- Google Code for Remarketing Tag -->
   <!--------------------------------------------------

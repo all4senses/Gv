@@ -169,47 +169,10 @@
             <!-- inserted by me on 21.01.2014 -->
             <script type="text/javascript"> if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script> <script id="mstag_tops" type="text/javascript" src="//flex.msn.com/mstag/site/b2106e00-2863-40e4-844c-f95b8ba90d29/mstag.js"></script> <script type="text/javascript"> mstag.loadTag("analytics", {dedup:"1",domainId:"1856373",type:"1",actionid:"210748"})</script> 
             <noscript> <iframe src="//flex.msn.com/mstag/tag/b2106e00-2863-40e4-844c-f95b8ba90d29/analytics.html?dedup=1&domainId=1856373&type=1&actionid=210748" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
-            
-
-            
-            
-            <!-- Business.com Conversion Tracking Code for "Network Pixel" -->
-            <script language="JavaScript" src="http://roi.business.com/crm/js/conversion.js"></script>
-            <script language="JavaScript" type="text/javascript">
-
-            var bdc_conversion_value = 80.00;
-            var bdc_conversion_id = "13223";
-            BDC_RecordConversion(bdc_conversion_value, bdc_conversion_id);
-
-            </script>
-            <noscript>
-            <img height=1 width=1 src="http://roi.business.com/crm/images/conversion.gif?bdc_conversion_id=13223&bdc_conversion_value=80.00"/>
-            </noscript>
-
-            
-            
-            
-            <!-- Added 14.08.2014 -->
-            <!-- 7Search Code for Conversion Page (start) -->
-            <script language="JavaScript" type="text/javascript">
-            var _7search_conversion_advid = 221448;
-            var _7search_conversion_type = "lead";
-            var _7search_conversion_value = 1;
-            </script>
-            <script language="JavaScript" type="text/javascript" src="http://conversion.7search.com/conversion/v1/conversion.js"></script>
-            <noscript><img width="1" height="1" border="0" src="http://conversion.7search.com/conversion/v1/?advid=221448&urlid=&type=lead&value=1&noscript=1" /></noscript>
-            <!-- 7Search Code for Conversion Page (end) -->
-
-            
+                        
             
 
             
     
-<?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):
-// So we are on the lending page '/service-quotes' 
-?>
-   
 <?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):?>
   
-
-  <script src="//cdn.optimizely.com/js/786756874.js"></script>
