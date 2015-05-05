@@ -302,6 +302,12 @@ class WebformConditionals {
     }
   }
 
+  
+  // a4s fix part 1
+  function array_walk_recursive_helper(&$status) {
+    $status = WebformConditionals::componentShown;
+  }
+      
   /**
    * Executes the conditionals on a submission, removing any data which should
    * be hidden.
@@ -312,9 +318,14 @@ class WebformConditionals {
     if (!$this->visibilityMap || $page_num == 0) {
       // Create a new visitibily map, with all components shown.
       $this->visibilityMap = $this->pageMap;
-      array_walk_recursive($this->visibilityMap, function (&$status) {
-        $status = WebformConditionals::componentShown;
-      });
+      
+      // a4s fix part 2
+//      array_walk_recursive($this->visibilityMap, function (&$status) {
+//        $status = WebformConditionals::componentShown;
+//      });
+      array_walk_recursive($this->visibilityMap, array($this, 'array_walk_recursive_helper'));
+      
+      
       // Create an empty required map
       $this->requiredMap = array_fill(1, count($this->pageMap), array());
 
