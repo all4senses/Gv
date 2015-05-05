@@ -196,7 +196,7 @@ function template_preprocess_views_view_fields(&$vars) {
       if ($object->element_type) {
         $class = '';
         if ($object->handler->options['element_default_classes']) {
-          $class = 'field-content';
+          $class = 'resources-box-list-item-text';
         }
 
         if ($classes = $object->handler->element_classes($view->row_index)) {
