@@ -4567,13 +4567,21 @@ function webform_components($include_disabled = FALSE, $reset = FALSE) {
       $components += $module_components;
     }
     drupal_alter('webform_component_info', $components);
-    uasort($components, function($a, $b) {
-      return strnatcasecmp($a['label'], $b['label']);
-    });
+    
+    // a4s fix
+//    uasort($components, function($a, $b) {
+//      return strnatcasecmp($a['label'], $b['label']);
+//    });
+    uasort($components, 'webform_component_uasort_helper');
+    
     $enabled = array_diff_key($components, $disabled);
   }
 
   return $include_disabled ? $components : $enabled;
+}
+
+function webform_component_uasort_helper($a, $b) {
+  return strnatcasecmp($a['label'], $b['label']);
 }
 
 /**
