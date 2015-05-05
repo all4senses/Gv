@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/global.css">
   <?php if ($is_front) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/home.css">
+    <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/popup-exit.css">
   <?php } ?>
   <?php if ( current_path() == 'blog' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">

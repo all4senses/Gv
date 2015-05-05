@@ -7,6 +7,7 @@
 
       if ($is_front) {
         drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
+        drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
       }
 
       if ( current_path() == 'blog' ) {
