@@ -34,7 +34,7 @@
         <div class="wrap">
 
           <div class="logo">
-            <img src="/sites/all/themes/gv_sky/images/lpv10/logo-lp.png" width="210" height="58" alt="GetVoIP" title="GetVoIP">
+            <img src="/sites/all/themes/gv_sky/images/lpv10/logo-lp.png" width="206" height="53" alt="GetVoIP" title="GetVoIP">
           </div>
 
           <div class="slogan-wrap">
