@@ -11919,13 +11919,13 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           
           //$iteration_count = $vonage_is_2 = 0;
           if ($user->uid == 1) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root'; 
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root_' . $version; 
           }
           elseif ($user->uid) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn';
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn_' . $version;
           }
           else {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut';
+            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut_' . $version;
           }
           
           $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
