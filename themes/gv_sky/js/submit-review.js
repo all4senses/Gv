@@ -127,11 +127,11 @@ jQuery(document).ready(function($){
 			$(this).prevAll().addClass('on');
 			$(this).parent().siblings('.review-form-rating-item-name').html($name);	// Append hover name to .review-form-rating-item-name
 
-			if ( $num === '1' ) { $val = '20'; }
-			if ( $num === '2' ) { $val = '40'; }
-			if ( $num === '3' ) { $val = '60'; }
-			if ( $num === '4' ) { $val = '80'; }
-			if ( $num === '5' ) { $val = '100'; }
+			if ( $num === 1 ) { $val = '20'; }
+			if ( $num === 2 ) { $val = '40'; }
+			if ( $num === 3 ) { $val = '60'; }
+			if ( $num === 4 ) { $val = '80'; }
+			if ( $num === 5 ) { $val = '100'; }
 
 			$(this).parent().siblings().val($val);
 	});

@@ -49,7 +49,7 @@
 						$(this).parents('.fieldset').addClass('valid').removeClass('error');
 					} else {		
 						$(this).removeClass('checked');
-						$(this).find('.input').prop('checked', true);
+						$(this).find('.input').prop('checked', false);
 						if ( !$(this).hasClass('checked') && !$(this).siblings().hasClass('checked') ) {
 							$(this).parents('.fieldset').removeClass('valid');
 						} else {
