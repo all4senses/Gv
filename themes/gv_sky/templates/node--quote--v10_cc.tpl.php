@@ -24,8 +24,8 @@
       drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
       drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
     }
-    drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css', array('preprocess' => FALSE ));
-    drupal_add_css('sites/all/themes/gv_sky/css/popup-exit.css', array('preprocess' => FALSE ));
+    drupal_add_css('sites/all/themes/gv_sky/css/lpv10.css', array('preprocess' => FALSE, 'type' => 'external' ));
+    drupal_add_css('sites/all/themes/gv_sky/css/popup-exit.css', array('preprocess' => FALSE, 'type' => 'external' ));
   ?>
 
 
