@@ -1,4 +1,7 @@
   <?php
+      if (!$is_admin) {
+        drupal_static_reset('drupal_add_css');
+      }
     $final_page = (!empty($variables['node']->field_version['und'][1]['value']) && $variables['node']->field_version['und'][1]['value'] == 'final') ? TRUE : FALSE;
     if (strpos($variables['node']->field_version['und'][0]['value'], '_')) {
       $version = explode('_', $variables['node']->field_version['und'][0]['value']);
@@ -49,7 +52,6 @@
       
 
       
-      <!-- <main class="main section full-height" role="main" style="height: 728px;/* display: none; */"> -->
       <main class="main section full-height" role="main">
         
         <?php if (!$final_page): ?>
@@ -143,7 +145,6 @@
 <!-- Footer with js codes -->
 <?php if ($final_page): ?> 
 
-          <?php /*if ($_SERVER['HTTP_REFERER'] == 'http://getvoip.com/service-quotes'):*/  /* If we get the final page from the main quote page, what is correct.*/ ?> 
             
             <!-- Google Code for GV Lead - LP Conversion Page -->
             <script type="text/javascript">
@@ -185,12 +186,9 @@
             <img height=1 width=1 src="http://roi.business.com/crm/images/conversion.gif?bdc_conversion_id=13223&bdc_conversion_value=80.00"/>
             </noscript>
 
+                        
             
-            
-            <!-- Added 14.08.2014 -->
-            <!-- <img src='https://trending.revcontent.com/ads/tracker.php?t=MzE5Njs2MjIy'/> -->
-            
-            
+
             <!-- Added 14.08.2014 -->
             <!-- 7Search Code for Conversion Page (start) -->
             <script language="JavaScript" type="text/javascript">
@@ -203,16 +201,13 @@
             <!-- 7Search Code for Conversion Page (end) -->
 
             
-            
-            
-          <?php /*global $user; elseif ($user->uid != 1): // If we get the final page from an other page, what is INCORRECT, we just redirect a user to the main quote page.?>
-            <script>top.location.href="http://getvoip.com/service-quotes";</script>
-          <?php endif;*/?>
+
+
+
     
 <?php else: // Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):
 // So we are on the lending page '/service-quotes' 
 ?>
- 
   
 <?php endif; // End of Else of if ($_SERVER['REDIRECT_URL'] == '/service-quotes-final'):?>
   
