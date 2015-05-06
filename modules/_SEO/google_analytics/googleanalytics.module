@@ -246,7 +246,8 @@ function googleanalytics_page_alter(&$page) {
       // URL changed.
       $query_string = '?' . variable_get('css_js_query_string', '0');
 
-      $script .= '"' . $url . $query_string . '"';
+      // $script .= '"' . $url . $query_string . '"';
+      $script .= '"' . $url . '"';
     }
     else {
       $script .= '"' . $library_tracker_url . '"';
