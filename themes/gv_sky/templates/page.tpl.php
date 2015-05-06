@@ -8,6 +8,7 @@
       if ($is_front) {
         drupal_add_js('/sites/all/themes/gv_sky/js/home.js');
         drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
+         drupal_add_js('/sites/all/themes/gv_sky/js/conversion.js'); 
       }
 
       if ( current_path() == 'blog' ) {

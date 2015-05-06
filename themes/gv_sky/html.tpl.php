@@ -87,7 +87,7 @@
       var google_remarketing_only = true;
       /* ]]> */
   </script>
-  <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+  <script type="text/javascript" src="/sites/all/themes/gv_sky/js/conversion.js">
   </script>
   <noscript>
       <div style="display:inline;">
