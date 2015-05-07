@@ -113,12 +113,18 @@
                     echo '<h1 class="provider-box-provider-details-name">' . $provider_name . '</h1>';
                 ?>                
 
-                  <div class="provider-box-provider-details-info provider-box-provider-details-info_location"><?php echo $node->p_data['info']['i_heads']; ?></div>
-                  <div class="provider-box-provider-details-info provider-box-provider-details-info_website">
+                  <div class="provider-box-provider-details-info provider-box-provider-details-info_location" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <span itemprop="addressLocality"><?php echo $node->p_data['info']['i_heads']; ?></span>
+                  </div>
+        
+                
+                
+                  <div class="provider-box-provider-details-info provider-box-provider-details-info_website" itemprop="url">
                     <?php 
                       if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
                         $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
-                        echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'provider-box-provider-details-info-link', array('key' => 'rel', 'value' => 'v:url nofollow'));
+                        //echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'provider-box-provider-details-info-link', array('key' => 'rel', 'value' => 'v:url nofollow'));
+                        echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'provider-box-provider-details-info-link', array('key' => 'rel', 'value' => 'nofollow'));
                       }
                       ?>
                   </div>
