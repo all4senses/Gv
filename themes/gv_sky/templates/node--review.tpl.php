@@ -211,7 +211,10 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             <div class="reviews-list-item-details-title mobile"><?php echo render($content['body']); ?></div>
             <?php print render($title_suffix); ?>
             <div class="reviews-list-item-details-meta">
-              <span class="reviews-list-item-details-meta-author" property="v:reviewer"><?php echo $reviewer; ?></span>
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span  class="reviews-list-item-details-meta-author" itemprop="name"><?php echo $reviewer; ?></span>
+              </span>
+              <?php /*<span class="reviews-list-item-details-meta-author" property="v:reviewer"><?php echo $reviewer; ?></span> */ ?>
               <span class="reviews-list-item-details-meta-date" property="v:dtreviewed" content="<?php echo date('Y-m-d', $node->created);?>"><?php echo date('F d, Y', $node->created); ?></span>
             </div>
               
