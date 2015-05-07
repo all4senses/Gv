@@ -129,7 +129,7 @@
                       ?>
                   </div>
                   <span  itemprop="makesOffer" content="VoIP"></span>
-                  <div class="provider-box-provider-details-info provider-box-provider-details-info_service">Service Location: 
+                  <div class="provider-box-provider-details-info provider-box-provider-details-info_service"  itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Service Location: 
                     <?php echo '<span  itemprop="availableAtOrFrom">' . $node->p_data['info']['i_availability'] . '</span>'; ?>
                   </div>
                   <ul class="provider-box-provider-details-stats">
@@ -271,9 +271,9 @@
                     <div class="reviews-load">Load More</div>
                 </div>
 
-              <div id="tab-1-c" class="provider-box-data-content-section">
+              <div id="tab-1-c" class="provider-box-data-content-section" itemprop="description">
               <?php else: ?>
-              <div id="tab-1-c" class="provider-box-data-content-section active">
+              <div id="tab-1-c" class="provider-box-data-content-section active" itemprop="description">
               <?php endif; ?>
                 <div class="overview-title">Provider Overview</div>
                 <?php echo render($content['body']); ?>
