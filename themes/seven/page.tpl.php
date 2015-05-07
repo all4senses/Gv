@@ -1,4 +1,7 @@
-
+<?php if ($is_admin) {
+    newrelic_ignore_transaction ();
+  }
+?>
   <div id="branding" class="clearfix">
     <?php print $breadcrumb; ?>
     <?php print render($title_prefix); ?>

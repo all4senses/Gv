@@ -66,7 +66,10 @@
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/ie8.css" />
 <![endif]--> 
 
-
+<?php if ($is_admin) {
+    newrelic_ignore_transaction ();
+  }
+?>
 
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   
