@@ -205,7 +205,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
       }
       ?>
    
-      <?php$reviewer = (isset($node->field_r_fname[0]['value']) ? $node->field_r_fname[0]['value'] : $node->field_r_fname['und'][0]['value'] );?>
+      <?php $reviewer = (isset($node->field_r_fname[0]['value']) ? $node->field_r_fname[0]['value'] : $node->field_r_fname['und'][0]['value'] ); ?>
         <div class="reviews-list-item-details">
             <h3 class="reviews-list-item-details-title desktop"><?php echo ( ($full_title || $page) ? $provider_name . ' - ' : '') . $title; ?></h3>
             <div class="reviews-list-item-details-title mobile"><?php echo render($content['body']); ?></div>
