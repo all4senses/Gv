@@ -8,20 +8,21 @@
           drupal_set_title('Page Not Found. | GetVoIP.com');
         
           // Fix ttp:// urls, i don't understand where they are coming from, but seems that via msie6.0
-          if (strpos($_GET['destination'], 'ttp://') === 0) {
-            $fixed_path = str_replace('ttp://getvoip.com/', '', $_GET['destination']);
+          $dest = @$_GET['destination'];
+          if (strpos($dest, 'ttp://') === 0) {
+            $fixed_path = str_replace('ttp://getvoip.com/', '', $dest);
             unset($_GET['destination']);
             watchdog('GV Redirect ttp:// to http://... 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
             drupal_goto($fixed_path);
           }
-          elseif (strpos($_GET['destination'], '___.html') !== FALSE) {
-            $fixed_path = str_replace('http://getvoip.com/', '', $_GET['destination']);
+          elseif (strpos($dest, '___.html') !== FALSE) {
+            $fixed_path = str_replace('http://getvoip.com/', '', $dest);
             $fixed_path = str_replace('___.html', '', $fixed_path);
             unset($_GET['destination']);
             watchdog('GV Redirect from ___.html 404', $fixed_path . ' ------- >'. print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
             drupal_goto($fixed_path);
           }
-          elseif (strpos($_GET['destination'], 'apple-touch-icon') !== FALSE) {
+          elseif (strpos($dest, 'apple-touch-icon') !== FALSE) {
             watchdog('GV What is apple-touch-icon???? 404', print_r($_GET, TRUE) . ' '. print_r($_SERVER, TRUE), NULL, WATCHDOG_WARNING);
           }
           

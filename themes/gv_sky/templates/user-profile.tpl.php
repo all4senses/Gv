@@ -38,5 +38,5 @@
     
     ?>
   </div>
-  <?php echo $load_more ?>
+  <?php echo @$load_more ?>
  </div>
