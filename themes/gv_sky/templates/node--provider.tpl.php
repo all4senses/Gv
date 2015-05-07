@@ -128,10 +128,14 @@
                       }
                       ?>
                   </div>
-                  <div class="provider-box-provider-details-info provider-box-provider-details-info_service">Service Location: <?php echo $node->p_data['info']['i_availability']; ?></div>
+                  <div class="provider-box-provider-details-info provider-box-provider-details-info_service"  itemprop="offers" itemscope itemtype="http://schema.org/Offer">Service Location: 
+                    <?php echo '<span  itemprop="availableAtOrFrom">' . $node->p_data['info']['i_availability'] . '</span>'; ?>
+                    <span  itemprop="makesOffer" content="VoIP"></span>
+                    <span  itemprop="serviceType" content="VoIP"></span>
+                  </div>
                   <ul class="provider-box-provider-details-stats">
                     <li class="provider-box-provider-details-stats-item">
-                      <span class="provider-box-provider-details-stats-item-number"><?php echo $node->p_data['info']['i_founded']; ?></span>
+                      <span class="provider-box-provider-details-stats-item-number" itemprop="foundingDate"><?php echo $node->p_data['info']['i_founded']; ?></span>
                       <span class="provider-box-provider-details-stats-item-desc">Year Founded</span>
                     </li>
                     <?php if ($node->gv_voters) { ?>
