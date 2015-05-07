@@ -110,7 +110,7 @@
             <div class="provider-box-provider-details"<?php // rel="v:itemreviewed" ?>>
               <div<?php // typeof="Organization" ?>>
                 <?php 
-                    echo '<h1 class="provider-box-provider-details-name" itemprop="name">' . $provider_name . '</h1>';
+                    echo '<h1 class="provider-box-provider-details-name">' . $provider_name . '</h1>';
                 ?>                
 
                   <div class="provider-box-provider-details-info provider-box-provider-details-info_location"><?php echo $node->p_data['info']['i_heads']; ?></div>
