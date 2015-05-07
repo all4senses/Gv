@@ -5233,9 +5233,9 @@ function gv_misc_leadRoute_REST_IN() {
  * Returns json result data with OK or error.
  */
 function gv_misc_makeRequest_ajax($post = NULL) {
+  newrelic_ignore_transaction();
   $status = FALSE;
   $output = '';
-  
   if (!$post) {
     $post = array();
     foreach ($_POST as $key => $value) {
