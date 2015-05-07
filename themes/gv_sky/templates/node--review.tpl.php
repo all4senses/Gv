@@ -281,7 +281,6 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                 
                 <div class="reviews-list-item-rating-score-number" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
                   <span>
-                    <meta itemprop="worstValue" content="0"/>
                     <span itemprop="ratingValue"> <?php echo $r; ?> </span>
                     <meta itemprop="bestRating" content="5"/>
                   </span>
