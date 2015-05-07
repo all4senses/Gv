@@ -188,6 +188,7 @@
                         <!--<div class="provider-box-provider-review-score-number" rel="v:rating">-->
                         <div class="provider-box-provider-review-score-number" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                           <span<?php //typeof="v:Rating" ?>>
+                            <meta itemprop="itemReviewed" content="<?php echo $provider_name; ?>"/>
                             <?php /*<meta<?php //property="v:worst" ?>  itemprop="worstValue" content="0"/> */ ?>
                             <span<?php //property="v:value" ?> itemprop="ratingValue"> <?php echo $node->gv_rating_overall; ?> </span>
                             <meta<?php //property="v:best" ?> itemprop="bestRating" content="5"/>
