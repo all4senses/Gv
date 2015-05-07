@@ -215,7 +215,11 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                 <span  class="reviews-list-item-details-meta-author" itemprop="name"><?php echo $reviewer; ?></span>
               </span>
               <?php /*<span class="reviews-list-item-details-meta-author" property="v:reviewer"><?php echo $reviewer; ?></span> */ ?>
-              <span class="reviews-list-item-details-meta-date" property="v:dtreviewed" content="<?php echo date('Y-m-d', $node->created);?>"><?php echo date('F d, Y', $node->created); ?></span>
+              
+              <?php /* <span class="reviews-list-item-details-meta-date" property="v:dtreviewed" content="<?php echo date('Y-m-d', $node->created);?>"><?php echo date('F d, Y', $node->created); ?></span> */ ?>
+              
+              <span class="reviews-list-item-details-meta-date" itemprop="datePublished" content="<?php echo date('Y-m-d', $node->created);?>"><?php echo date('F d, Y', $node->created); ?></span>
+              
             </div>
               
             <?php 
@@ -232,8 +236,9 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
             <div class="reviews-list-item-details-content">
               
               <?php 
-                echo '<div property="v:description">' . render($content['body']) . '</div>'; 
+                //echo '<div property="v:description">' . render($content['body']) . '</div>'; 
               ?>
+              <div itemprop="reviewBody"><?php echo render($content['body']); ?></div>
               
               <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
                 <div class="reviews-list-item-details-content-summary">
@@ -263,13 +268,26 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
                 ?>
 
                 <div class="reviews-list-item-rating-score-caption">Overall</div>
+                
+                <?php /*
                 <div class="reviews-list-item-rating-score-number" rel="v:rating">
                   <span typeof="v:Rating">
                     <span property="v:worst" content="0"></span>
-                    <span property="v:value"> <?php echo $r/*@$node->gv_rating_overall*/; ?> </span>
+                    <span property="v:value"> <?php echo $r; ?> </span>
                     <span property="v:best" content="5"></span>
                   </span>
                 </div>
+                */ ?>
+                
+                <div class="reviews-list-item-rating-score-number" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                  <span>
+                    <meta itemprop="worstValue" content="0"/>
+                    <span itemprop="ratingValue"> <?php echo $r; ?> </span>
+                    <meta itemprop="bestRating" content="5"/>
+                  </span>
+                </div>
+                
+                
                 </div>
             </div>
           

@@ -185,6 +185,7 @@
                 <div class="provider-box-provider-review"><?php echo render($content['gv_ratings']); ?>
                   <div class="provider-box-provider-review-score">
                         <div class="provider-box-provider-review-score-caption">Overall</div>
+                        
                         <!--<div class="provider-box-provider-review-score-number" rel="v:rating">-->
                         <div class="provider-box-provider-review-score-number" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                           <span<?php //typeof="v:Rating" ?>>
@@ -195,6 +196,7 @@
                             <meta itemprop="ratingCount" content="<?php echo @$node->gv_voters; ?>"/>
                           </span>
                         </div>
+                        
                         <div class="provider-box-provider-review-score-fivestar"> <?php echo theme('gv_misc_fivestar_provider', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))); ?>
                         </div>
 
