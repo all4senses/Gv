@@ -4544,7 +4544,7 @@ function gv_misc_addSocialShareData_toPage($node) {
       '#tag' => 'meta',
       '#attributes' => array(
           'itemprop' => 'name',
-          'content' => $title,
+          'content' => $node->type == 'provider' ? $node->field_p_name['und'][0]['value'] : $title,
       ),
     ),
       

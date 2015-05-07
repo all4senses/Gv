@@ -15,7 +15,7 @@
 <?php endif; ?>
 
    <!-- <div class="provider-box" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"> -->
-   <div class="provider-box" itemscope itemtype="http://schema.org/Organization">
+   <div class="provider-box"<?php //itemscope itemtype="http://schema.org/Organization" ?>>
 
         <?php if (!$page): ?>
 
