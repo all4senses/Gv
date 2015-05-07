@@ -14,10 +14,8 @@
 <?php endif; ?>
 
            
-  <!-- <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"> -->
-  <div class="main-content" itemscope itemtype="http://schema.org/Organization">
-    
-    
+  <div class="main-content" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
+
         <?php if (!$page): ?>
 
           <header>

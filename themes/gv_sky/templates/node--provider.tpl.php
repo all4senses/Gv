@@ -14,8 +14,9 @@
     ?>
 <?php endif; ?>
 
-  <div class="provider-box" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate">
-    
+   <!-- <div class="provider-box" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Review-aggregate"> -->
+   <div class="provider-box" itemscope itemtype="http://schema.org/Organization">
+
         <?php if (!$page): ?>
 
           <header>
@@ -106,8 +107,8 @@
             </div>
 
               
-            <div class="provider-box-provider-details" rel="v:itemreviewed">
-              <div typeof="Organization">
+            <div class="provider-box-provider-details"<?php// rel="v:itemreviewed"?>>
+              <div<?php// typeof="Organization"?>>
                 <?php 
                     echo '<h1 class="provider-box-provider-details-name" property="v:summary">' . $provider_name . '</h1>';
                 ?>                
@@ -184,11 +185,13 @@
                 <div class="provider-box-provider-review"><?php echo render($content['gv_ratings']); ?>
                   <div class="provider-box-provider-review-score">
                         <div class="provider-box-provider-review-score-caption">Overall</div>
-                        <div class="provider-box-provider-review-score-number" rel="v:rating">
-                          <span typeof="v:Rating">
-                            <span property="v:worst" content="0"></span>
-                            <span property="v:value"> <?php echo $node->gv_rating_overall; ?> </span>
-                            <span property="v:best" content="5"></span>
+                        <!--<div class="provider-box-provider-review-score-number" rel="v:rating">-->
+                        <div class="provider-box-provider-review-score-number" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                          <span<?php//typeof="v:Rating"?>>
+                            <meta<?php//property="v:worst"?>  itemprop="worstValue" content="0"/>
+                            <span<?php//property="v:value"?> itemprop="ratingValue"> <?php echo $node->gv_rating_overall; ?> </span>
+                            <meta<?php//property="v:best"?> itemprop="bestRating" content="5"/>
+                            <meta itemprop="ratingCount" content="<?php echo @$node->gv_voters;?>"/>
                           </span>
                         </div>
                         <div class="provider-box-provider-review-score-fivestar"> <?php echo theme('gv_misc_fivestar_provider', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))); ?>
