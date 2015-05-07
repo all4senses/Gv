@@ -110,7 +110,7 @@
             <div class="provider-box-provider-details"<?php // rel="v:itemreviewed" ?>>
               <div<?php // typeof="Organization" ?>>
                 <?php 
-                    echo '<h1 class="provider-box-provider-details-name" property="v:summary">' . $provider_name . '</h1>';
+                    echo '<h1 class="provider-box-provider-details-name" itemprop="name">' . $provider_name . '</h1>';
                 ?>                
 
                   <div class="provider-box-provider-details-info provider-box-provider-details-info_location"><?php echo $node->p_data['info']['i_heads']; ?></div>
@@ -188,7 +188,7 @@
                         <!--<div class="provider-box-provider-review-score-number" rel="v:rating">-->
                         <div class="provider-box-provider-review-score-number" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                           <span<?php //typeof="v:Rating" ?>>
-                            <meta<?php //property="v:worst" ?>  itemprop="worstValue" content="0"/>
+                            <?php /*<meta<?php //property="v:worst" ?>  itemprop="worstValue" content="0"/> */ ?>
                             <span<?php //property="v:value" ?> itemprop="ratingValue"> <?php echo $node->gv_rating_overall; ?> </span>
                             <meta<?php //property="v:best" ?> itemprop="bestRating" content="5"/>
                             <meta itemprop="ratingCount" content="<?php echo @$node->gv_voters; ?>"/>
