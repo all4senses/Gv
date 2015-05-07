@@ -128,9 +128,8 @@
                       }
                       ?>
                   </div>
-                  <span  itemprop="provider" content="VoIP"></span>
                   <span  itemprop="makesOffer" content="VoIP"></span>
-                  <div class="provider-box-provider-details-info provider-box-provider-details-info_service"  itemprop="offers" itemscope itemtype="http://schema.org/Offer">Service Location: 
+                  <div class="provider-box-provider-details-info provider-box-provider-details-info_service">Service Location: 
                     <?php echo '<span  itemprop="availableAtOrFrom">' . $node->p_data['info']['i_availability'] . '</span>'; ?>
                   </div>
                   <ul class="provider-box-provider-details-stats">
