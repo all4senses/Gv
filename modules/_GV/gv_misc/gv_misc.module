@@ -889,9 +889,9 @@ function gv_misc_disqusGetThreadDetails($nid = NULL, $thread = NULL, $threadIdTy
   // Change api_key to api_secret when using your secret key
 
 //                DIFFERENT TYPES OF THREAD LOOKUPS:
-//                1. By DISQUS thread ID (default): thread=%s вЂ” thread IDs are universally unique in DISQUS, so you can remove 'forum' param if you like
-//                2. By identifier: thread:ident=%s вЂ” requires the forum parameter
-//                3. By URL: thread:link=%s вЂ” requires the forum parameter
+//                1. By DISQUS thread ID (default): thread=%s РІР‚вЂќ thread IDs are universally unique in DISQUS, so you can remove 'forum' param if you like
+//                2. By identifier: thread:ident=%s РІР‚вЂќ requires the forum parameter
+//                3. By URL: thread:link=%s РІР‚вЂќ requires the forum parameter
 
 
 
@@ -2345,7 +2345,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
       
       
       
-    // if РѕС‹ has been already loaded, and now we will add it again, it won't work.
+    // if Р С•РЎвЂ№ has been already loaded, and now we will add it again, it won't work.
     // So we prevent it.
     
     static $drupal_alredy_loaded_js;
@@ -5281,7 +5281,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   
   $post['clear_phone'] = $clear_phone;
   $post['new_phone'] = $phone;
-  watchdog('--> GV Request POST', print_r($post, TRUE), NULL, WATCHDOG_WARNING);
+  watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r($_SESSION, TRUE), NULL, WATCHDOG_WARNING);
   
   if (empty($post) 
       || empty($post['source'])
@@ -6847,7 +6847,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
 //  }
 //  else 
   {
-    // This will need to be changed to the below link the evening of Friday 17th April 2015 – NO other changes except for the URL change will need to be made. The change should be done on the 17th anytime from 8pm to Midnight, so whatever leads we send starting on the 18th will go the new link.
+    // This will need to be changed to the below link the evening of Friday 17th April 2015 вЂ“ NO other changes except for the URL change will need to be made. The change should be done on the 17th anytime from 8pm to Midnight, so whatever leads we send starting on the 18th will go the new link.
     $url = 'http://ww3.business.vonage.com/l/7772/2012-10-01/36gsq6';
   }
   
@@ -11829,7 +11829,7 @@ function gv_misc_sortArrayProvidersByErating($a, $b) {
  * 
  * Example of using:
  * 
- * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByРЎlicks');
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByР РЋlicks');
  */
 function gv_misc_sortArrayByClicks($a, $b) {
   if ($a['clicks'] == $b['clicks']) {
