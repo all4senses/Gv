@@ -6759,7 +6759,8 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
   
   // Skip sending if "More than 50".
   if (@$submission['Phones needed'] == 'More than 50') {
-    $allowedToBeSent = FALSE;
+    //$allowedToBeSent = FALSE;
+    $submission['Phones needed'] = '21-50';
   }
   
   
