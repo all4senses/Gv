@@ -5569,7 +5569,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     
     
-    $submission['User IP'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    $submission['User IP'] = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''), //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
     $submission['Time'] = date('Y-m-d, H:i:s', time());
     
     $params['request_data'] = $submission;
