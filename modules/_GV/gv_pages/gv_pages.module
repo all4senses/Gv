@@ -2131,6 +2131,9 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                 $form['bug_fix'] = array('#markup' => '<form><div class="test"></div></form>',);
 
                                 $ucaptured_data_changed = array();
+                                if ($ucaptured->ip == $ucaptured_data['$_SERVER']['SERVER_ADDR'] && !empty($ucaptured_data['$_SERVER']['HTTP_X_FORWARDED_FOR'])) {
+                                  $ucaptured->ip = $ucaptured_data['$_SERVER']['HTTP_X_FORWARDED_FOR']; 
+                                }
                                 $ucaptured_data['IP'] = $ucaptured->ip;
                                 foreach ($ucaptured_data as $title => $value) {
                                       if ($title == 'Submit Time' && is_numeric($value)) {
@@ -2148,7 +2151,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                         $value = $submissions_list;
                                       }
                                       elseif ($title == '$_SERVER') {
-                                        $value = print_r($value, TRUE); // '[hidden]';
+                                        $value = '[hidden]'; //print_r($value, TRUE); // '[hidden]';
                                       }
                                       $ucaptured_data_changed[$title] = $value;
                                       $data .= "<div>$title: $value</div>";
