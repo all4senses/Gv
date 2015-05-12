@@ -5281,7 +5281,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   
   $post['clear_phone'] = $clear_phone;
   $post['new_phone'] = $phone;
-  watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r($_SESSION, TRUE), NULL, WATCHDOG_WARNING);
+  watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
   
   if (empty($post) 
       || empty($post['source'])
