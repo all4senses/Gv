@@ -1,4 +1,4 @@
-<?php if ($is_admin) {
+<?php if ($is_admin && function_exists('newrelic_ignore_transaction')) {
     newrelic_ignore_transaction ();
   }
 ?>

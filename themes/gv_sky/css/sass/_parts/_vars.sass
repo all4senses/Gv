@@ -212,7 +212,38 @@ $subberwhite: #f8f8f8
       border-width: $borderSize + $size
       +arrow_helper($size + $borderSize, $borderColor, $size - $borderSize, $side, $align)
 
-//functions
+=transform($transforms) 
+  -moz-transform: $transforms
+  -o-transform: $transforms
+  -ms-transform: $transforms
+  -webkit-transform: $transforms
+  transform: $transforms
+
+
+=user-select($opt)
+  -webkit-user-select: $opt
+  -khtml-user-select: $opt
+  -moz-user-select: $opt
+  -ms-user-select: $opt
+  user-select: $opt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==== Functions =================================================================================
 
 @function perc($target, $parent)
   @return $target / $parent * 100%
@@ -223,7 +254,21 @@ $subberwhite: #f8f8f8
 @function golden-down($target)
   @return #{$target / 1.618}px
 
-//Easings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==== Easings =================================================================================
 
 // EASE IN
 $ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53)
