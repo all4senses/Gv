@@ -95,7 +95,7 @@
         echo '<div class="footer-wrap-left">' . render($page['footer']) . '</div>';
 
         echo '<div class="footer-wrap-right">';
-        echo '<div class="footer-copyright">© GetVoIP.com 2015 | All Right Reserved</div>';
+        echo '<div class="footer-copyright">© GetVoIP.com 2015 | All Rights Reserved</div>';
         if (!in_array($_SERVER['REQUEST_URI'], array('/ppc/business-voip', '/business', '/canada', '/cloud-contact-center'))) {
           echo gv_blocks_get_headerLinks();
         }
