@@ -11975,39 +11975,30 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   
   global $user;
   
+  $form['#prefix'] = '<div id="subscribe" class="subscribe">';
+  $form['#suffix'] = '</div>';
+
   $form['title'] = array(
     //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
-    '#markup' => '<div class="title"><div>Stay informed - </div>Sign up for our newsletter.</div>',
+    '#markup' => '<div class="subscribe-text">Join thousands of business owners and get actionable strategies and tips delivered to your inbox.</div>',
       
   );
   
   $form['email'] = array(
     '#type' => 'textfield',
-    //'#title' => 'Sign up to receive weekly updates',
-    //'#default_value' => $user->uid ? $user->mail : NULL,
-    //'#description' => '',
-    //'#element_validate' => array('gv_misc_validate_email'),
     '#required' => TRUE,
-    //'#access' => $user->uid ? FALSE : TRUE,
     '#attributes' => array('title' => 'EMAIL'),
+    '#attributes' => array('placeholder' => 'Email Address')
   );
   
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Sign Up'),
+    '#value' => t('Subscribe'),
   ); 
-  
-  
-  // Add stars widgets to a Rating block
+    
   $module_path = drupal_get_path('module', 'gv_misc');
 
-  $form['#attached']['js'] = array(
-    // Add hints inside some fields
-    $module_path . '/js/gv_newsletterSubscribe_fieldHints.js',
-  );
-
-  
   return $form;
 }
 

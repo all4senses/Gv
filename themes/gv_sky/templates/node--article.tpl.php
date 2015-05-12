@@ -367,7 +367,6 @@
       <?php 
         echo gv_blocks_getAboutTheAuthor($node->uid); 
         echo gv_blocks_getTop5Providers_article('bu'); 
-        echo '<div class="scroll-detector"></div>';
       ?>
       </aside>
       <?php      
@@ -381,7 +380,10 @@
       }
       
       ?>
-      <?php echo gv_blocks_getSidebarRelatedArticlesBlock(NULL, $node, NULL, $extra_data); ?>
+      <?php 
+        // echo gv_blocks_newsletter_form();
+        echo gv_blocks_getSidebarRelatedArticlesBlock(NULL, $node, NULL, $extra_data); 
+      ?>
 
 
   </div> <!-- article-page-wrapper -->
