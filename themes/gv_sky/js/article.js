@@ -1,9 +1,40 @@
 /* ==========================================================================
-   Newsletter Block Relocation
+   Newsletter Block Relocation & Logic
    ========================================================================== */
 
-
 	$$('.related-posts').after($$('#subscribe'));
+
+	var $cat = $$('.article-meta-category').data('category');
+	var $subscribeText;
+
+	switch ($cat) {
+		case 'voip':
+			$subscribeText = 'Join 100k readers and get exclusive VoIP industry headlines delivered to your inbox.';
+			break;
+		case 'business':
+			$subscribeText = 'Join 100k business owners and get actionable strategies and exclusive tips delivered to your inbox.';
+			break;
+		case 'cloud':
+			$subscribeText = 'Join 100k readers and get the latest cloud tech headlines delivered to your inbox.';
+			break;
+	}
+
+	$$('.subscribe-text').html($subscribeText);
+
+	var $submitButton = $$('#gv-misc-newslettersubscribe-form').find('#edit-submit');
+
+	$submitButton.on('click', function(e){
+		e.preventDefault();
+		var clicks = $submitButton.data('clicks');
+
+		if (clicks) {
+			$$('#gv-misc-newslettersubscribe-form').submit();
+		} else {
+			$$('.form-item-email').addClass('show');
+			$submitButton.val('Subscribe');
+		}
+		$submitButton.data('clicks', !clicks)
+	});
 
 
 

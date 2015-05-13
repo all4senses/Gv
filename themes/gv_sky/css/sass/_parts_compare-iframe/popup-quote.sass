@@ -1,0 +1,357 @@
+.popup-request
+	position: relative
+	width: 100%
+	max-height: 100vh
+	// height: 100%
+	height: 594px
+
+	+m(736)
+		max-height: none
+		min-height: 594px
+
+	&-ppc,
+	&-form,
+	&-form-wrap
+		height: 100%
+
+
+	.step
+		width: 100%
+		height: 100%
+		border-top: 7px solid $contrast
+		box-sizing: border-box
+
+
+	&-intro
+		background-image: url(/sites/all/themes/gv_sky/images/img-exit-intent.jpg)
+		background-size: cover
+		border-bottom: 1px solid $divider
+		height: perc(452px, 574px)
+
+		&-title
+			font-size: 35px
+			font-weight: 500
+			padding-top: 30px
+			max-width: 550px
+			+center
+
+			&-highlight
+				color: $contrast
+
+				.step-three &
+					color: $primary
+
+			+max(736)
+				font-size: 26px
+
+			&:after
+				content: ''
+				position: relative
+				top: 17px
+				display: block
+				+center
+				width: 135px
+				border-bottom: 2px solid darken($divider, 10)
+
+
+		&-subtitle
+			padding-top: 35px
+			font-size: 20px
+
+			+max(736)
+				font-size: 16px
+
+		&-upsale
+			max-width: 85%
+			+center(270px)
+			font-size: 15px
+			font-weight: 500
+			color: $grey
+
+			+max(480)
+				font-size: 12px
+
+		&-wrap
+			width: 100%
+			max-width: 570px
+			+center
+			padding: 0 20px
+			box-sizing: border-box
+			+clearfix
+
+
+		&-fieldset
+			border: 0
+			text-align: left
+			width: 90%
+			max-width: 430px
+			+center
+			+clearfix
+
+			// &.checkbox,
+			// &.radio
+
+			&.half 
+				float: left
+				width: perc(260px, 530px)
+
+				&:nth-child(1),
+				&:nth-child(2)
+					margin-top: 15px
+
+				&:nth-child(2n)
+					margin-left: perc(10px, 530px)
+
+			&.error
+				color: #E34B4F
+				border-radius: 5px
+				background-image: none
+				background-color: transparent
+
+			&-wrap
+				position: relative
+
+				.select &:after
+					content: 'b'
+					position: absolute
+					right: 7px
+					top: 18px
+					font-family: gvcons
+					font-size: 18px
+					background-color: #fff
+					padding: 0 10px
+
+					.error &
+						color: #E34B4F
+
+				.secure &:after
+					content: 'T'
+					position: absolute
+					right: 12px
+					top: 14px
+					font-family: gvcons
+					font-size: 22px
+					color: $divider
+
+			&-label
+				margin: 30px 0 10px
+				font-size: 15px
+
+			&-radio
+				position: relative
+				float: left
+				background-color: white
+				min-height: 55px
+				padding: 10px
+				border: 1px solid $divider
+				border-radius: 3px
+				box-sizing: border-box
+				color: $grey
+				cursor: pointer
+
+				.needs &
+					width: perc(135px, 430px)
+					margin-right: perc(16px, 574px)
+					height: 87px
+
+					&:before
+						display: block
+						margin: 3px 0 8px
+						text-align: center
+						line-height: 1
+						font-family: gvcons
+						font-weight: 400
+
+					&:nth-child(1):before
+						content: '>'
+						font-size: 27px
+					&:nth-child(2):before
+						content: '?'
+						font-size: 31px
+						margin-bottom: 5px
+					&:nth-child(3):before
+						font-size: 27px
+						content: '@'
+
+				.employees &
+					width: perc(65px, 430px)
+					margin-right: perc(10px, 574px)
+
+
+				&:last-child
+					margin-right: 0
+
+				&.checked
+					color: lighten($primary, 8)
+
+					&:after
+						content: ''
+						position: absolute
+						top: -1px
+						left: -1px
+						border-radius: 3px
+						width: 99%
+						height: 96%
+						border: 2px solid lighten($primary, 8)
+
+				&-text
+					line-height: 1
+					text-transform: uppercase
+					text-align: center
+					+user-select(none)
+
+					.needs &
+						font-size: 12px
+						font-weight: 700
+
+						+max(350)
+							font-size: 11px
+
+					.employees &
+						position: absolute
+						+valign
+						left: 0
+						right: 0
+						font-size: 14px
+						font-weight: 600
+
+					+max(480)
+						.mobile-hidden
+							display: none
+
+
+				input
+					display: none
+
+
+
+			&-checkbox
+				width: 50%
+				float: left
+				margin-top: 13px
+				cursor: pointer
+
+				&-box
+					position: relative
+					float: left
+					+size(19)
+					margin-right: 10px
+					background-color: white
+					border: 1px solid $divider
+					border-radius: 3px
+					box-sizing: border-box
+
+					.checked &:after
+						content: 'M'
+						position: absolute
+						left: 0
+						top: 0
+						width: 19px
+						text-align: center
+						font-family: gvcons
+						color: lighten($primary, 7)
+						font-size: 14px
+
+				&-text
+					position: relative
+					float: left
+					font-weight: 500
+					font-size: 14px
+					line-height: 20px
+
+					+max(480)
+						font-size: 13px
+
+					.error &
+						color: #E34B4F
+
+
+
+				&:nth-child(1),
+				&:nth-child(2)
+					margin-top: 0
+
+				input
+					display: none
+
+			&-input,
+			&-select
+				width: 100%
+				border: 1px solid $divider
+				background-color: white
+				border-radius: 3px
+				height: 55px
+				display: block
+				padding: 12px 17px 8px
+				font-size: 16px
+				font-weight: 500
+				color: $grey-darker
+
+				&:focus
+					border-color: $contrast
+
+				.error &
+					border-color: #E34B4F
+
+
+
+	
+
+	&-control
+		position: relative
+		+clearfix
+		+center
+		height: perc(122px, 574px)
+
+		&-button
+			position: absolute
+			+valign
+			left: 0
+			right: 0
+			width: perc(535px, 807px)
+			height: 55px
+			+center
+			border-radius: 3px
+			background-color: $contrast
+			color: white
+			cursor: pointer
+
+
+
+			&-text
+				position: absolute
+				+valign
+				top: 56%
+				left: 0
+				right: 25px
+				font-size: 25px
+				font-weight: 600
+				line-height: 1
+
+				+max(480)
+					font-size: 20px
+					right: 17px
+
+					.step-two &,
+					.step-three &
+						font-size: 16px
+
+				&:after
+					content: 'aa'
+					position: absolute
+					top: 0px
+					font-family: gvcons
+					font-size: 20px
+					font-weight: 600
+					letter-spacing: -10px	
+
+					+max(480)	
+						font-size: 16px
+
+						.step-two &,
+						.step-three &
+							font-size: 14px
+							font-weight: 400
+
+
+
