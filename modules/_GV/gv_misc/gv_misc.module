@@ -11981,12 +11981,35 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   
   global $user;
   
-  $form['#prefix'] = '<div id="subscribe" class="subscribe">';
+  $form['#prefix'] = '<div id="subscribe" class="subscribe">
+                        <svg class="subscribe-svg" version="1.1"
+                           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                           x="0px" y="0px" width="55px" height="66px" style="enable-background:new 0 0 55 66;" xml:space="preserve">
+                        <defs>
+                        </defs>
+                        <path style="fill:#FFFFFF;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" d="M18,45H1V23.5
+                          C1,18.8,4.8,15,9.5,15h0c4.7,0,8.5,3.8,8.5,8.5V45z"/>
+                        <path style="fill:#FFFFFF;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" d="M46.9,15H10v0
+                          c4.5,0.3,8,3.9,8,8.5V45h12h12h12V22.1C54,18.2,50.8,15,46.9,15z"/>
+                        <path style="fill:#C6E2F7;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" d="M30,31L30,31
+                          c-2.2,0-4-1.8-4-4v0c0-2.2,1.8-4,4-4h0c2.2,0,4,1.8,4,4v0C34,29.2,32.2,31,30,31z"/>
+                        <line style="fill:none;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="30" y1="27" x2="30" y2="4"/>
+                        <polygon style="fill:#C6E2F7;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" points="42,9 30,9 30,1 
+                          42,1 39,5 "/>
+                        <rect x="24" y="45" style="fill:#C6E2F7;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" width="8" height="20"/>
+                        <line style="fill:none;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="29" y1="48" x2="31" y2="48"/>
+                        <line style="fill:none;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="29" y1="51" x2="31" y2="51"/>
+                        <line style="fill:none;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="29" y1="54" x2="31" y2="54"/>
+                        <line style="fill:none;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="29" y1="57" x2="31" y2="57"/>
+                        <line style="fill:none;stroke:#045DA0;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="29" y1="60" x2="31" y2="60"/>
+                        </svg>
+
+  ';
   $form['#suffix'] = '</div>';
 
   $form['title'] = array(
     //'#markup' => '<div class="title">Sign up to receive weekly updates</div>',
-    '#markup' => '<div class="subscribe-text">Join thousands of business owners and get actionable strategies and tips delivered to your inbox.</div>',
+    '#markup' => '<div class="subscribe-text">Join 100k readers and get the latest VoIP & Cloud Tech headlines delivered to your inbox.</div>',
       
   );
   
@@ -12000,7 +12023,7 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Subscribe'),
+    '#value' => t('Subscribe To The Blog'),
   ); 
     
   $module_path = drupal_get_path('module', 'gv_misc');

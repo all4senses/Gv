@@ -1,0 +1,93 @@
+.subscribe
+	clear: both
+	position: relative
+	overflow: hidden
+	width: perc(820px, 1066px)
+	float: right
+	margin-top: 50px
+	border: 1px solid $divider
+	border-radius: 3px
+	padding: 30px 30px 30px 180px
+	// height: 140px
+	box-sizing: border-box
+	+clearfix
+
+	+max(1100)
+		width: 100%
+		max-width: 820px
+		float: none
+		+center
+
+	&-svg
+		position: absolute
+		// left: 50px
+		left: 7%
+		bottom: 31px
+		transform: scale(2.1)
+
+	&-text
+		position: relative
+		top: 15px
+		float: left
+		width: 56%
+		// height: 122px
+		font-size: 21px
+		font-weight: 600
+		// line-height: 1.4
+		// text-align: right
+
+	.form-item-email,
+	.form-submit
+		float: right
+		width: 41%
+
+	.form-item-email
+		position: relative
+		// height: 0
+		overflow: hidden
+		transition: height 0.4s $ease-in-out-circ
+
+		// &.show
+		// 	height: 66px
+
+		&:after
+			content: 'T'
+			position: absolute
+			top: 15px
+			right: 12px
+			font-family: gvcons
+			font-size: 18px
+			line-height: 1
+			color: $grey-light
+
+	#edit-email
+		width: 100%
+		height: 46px
+		padding: 4px 14px 0
+		font-size: 16px
+		border: 1px solid $divider
+		border-radius: 3px
+		color: $black
+
+
+
+	.form-submit
+		position: relative
+		display: block
+		// width: $width
+		margin-top: 10px
+		height: 50px
+		padding-top: 5px
+		background-color: $contrast
+		border-radius: 3px
+		font-size: 18px
+		font-weight: 600
+		line-height: 1
+		color: white
+		transition: all 0.15s
+		box-sizing: border-box
+		+user-select(none)
+
+
+		&:hover
+			background-color: darken($contrast, 8)
