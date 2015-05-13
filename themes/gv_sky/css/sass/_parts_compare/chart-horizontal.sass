@@ -93,6 +93,10 @@
 			&-php-5
 				width: perc(177px, 1130px)
 
+				+max(1024)
+					.bu &
+						width: 21.5%
+
 			&-php-1
 				width: perc(177px, 1130px)
 
@@ -115,6 +119,11 @@
 				width: perc(88px, 1130px)
 
 
+			+max(1024)
+				.bu &-php-3
+					display: none
+
+
 			+m(920)
 				&-php-6
 					width: perc(230px, 930px)
@@ -131,7 +140,7 @@
 				&-php-5
 					width: perc(177px, 930px)
 				
-				&-php-3,
+				// &-php-3,
 				&-php-8,
 				&-php-11
 					display: none
@@ -400,6 +409,10 @@
 			// Setup
 			&-php-3
 				text-transform: uppercase
+
+				+max(1024)
+					.bu &
+						display: none
 
 
 			// Money Back
