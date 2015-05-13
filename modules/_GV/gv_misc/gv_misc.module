@@ -12112,7 +12112,7 @@ function gv_misc_newsletterSubscribe_form_submit(&$form, &$form_state) {
   $blog_cat = 123;
   $nid = str_replace('node/', '', $_GET['q']);
   dpm($nid);
-  if ($nid && is_int($nid)) {
+  if ($nid && is_numeric($nid)) {
     $query = db_select('field_revision_field_blog_category', 'b')
           ->fields('b', array('field_blog_category_value'));
     $query->condition('b.entity_id', $nid);
