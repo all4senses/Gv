@@ -1314,7 +1314,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     if (!empty($_GET['email-contains'])) {
       $query->condition('e.email', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
     }
-    $query->orderBy('e.source'. 'DESC');
+    $query->orderBy('e.source', 'DESC');
 
     //$email = $query->execute()->fetchField();
     //dpm($email);
