@@ -424,6 +424,9 @@ main {
   @media screen and (max-height: 669px) {
     main {
       min-height: 783px; } }
+  @media screen and (max-width: 414px) {
+    main {
+      height: 968px !important; } }
 
 .clearfix-dk {
   clear: both;
@@ -502,7 +505,7 @@ header {
   position: relative; }
   @media screen and (max-width: 520px) {
     header {
-      height: 116px; } }
+      height: 108px; } }
   header .wrap {
     width: 100%;
     height: 87px !important;
@@ -713,6 +716,12 @@ form {
 .title-second {
   padding-bottom: 50px; }
 
+@media screen and (max-width: 520px) {
+  .title-second {
+    padding-bottom: 30px; }
+    .title-second h1 {
+      padding-top: 25px; } }
+
 .checkbox-input,
 .radio-input {
   display: none; }
@@ -897,6 +906,16 @@ form {
   float: left; }
   .step.two .wrap.column.right {
     padding-left: 12px; }
+    @media screen and (max-width: 1024px) {
+      .step.two .wrap.column.right .first {
+        display: none; }
+      .step.two .wrap.column.right .second {
+        margin: 0; } }
+  .step.two .wrap.column.left {
+    padding-left: 12px; }
+    @media screen and (max-width: 1024px) {
+      .step.two .wrap.column.left .third {
+        display: none; } }
 .step.two .choice-checkbox {
   position: relative;
   height: 19px;
@@ -1006,6 +1025,13 @@ form {
   width: 49.1%;
   float: left;
   margin-top: 22px; }
+  @media screen and (max-width: 414px) {
+    .fieldset.half {
+      width: 100%;
+      float: none;
+      margin: 22px 0 0 !important; }
+      .fieldset.half:first-child {
+        margin: 0 !important; } }
   .fieldset.half:nth-of-type(2), .fieldset.half:nth-of-type(5) {
     margin-left: 1.7857142857%; }
     .cc .fieldset.half:nth-of-type(2), .cc .fieldset.half:nth-of-type(5) {

@@ -2,21 +2,22 @@
 @import '_parts/_elements'
 
 // Admin Links position fix
-a[href="/cc"],
-a[href^="/admin/content-gv"]
-	// float: right
-	position: fixed
-	top: 2px
-	right: 240px
-	z-index: 1000
-	color: $contrast
-	font-size: 12px
-	font-weight: 600
-	margin-top: 7px
-	margin-left: 15px
+.navigation-wrap
+	a[href="/cc"],
+	a[href^="/admin/content-gv"]
+		// float: right
+		position: fixed
+		top: 2px
+		right: 240px
+		z-index: 1000
+		color: $contrast
+		font-size: 12px
+		font-weight: 600
+		margin-top: 7px
+		margin-left: 15px
 
-a[href="/cc"]
-	right: 150px
+	a[href="/cc"]
+		right: 150px
 
 
 #admin-menu
@@ -36,89 +37,90 @@ a[href="/cc"]
 	header
 		margin-top: 30px
 
-	input,
-	textarea
-		font-weight: 500
-		font-size: 16px
+	.page-node
+		input,
+		textarea
+			font-weight: 500
+			font-size: 16px
 
-	.form-item input,
-	input.form-submit
-		height: 45px
+		.form-item input,
+		input.form-submit
+			height: 45px
 
-	input[type="checkbox"],
-	input[type="radio"],
-	.form-checkbox,
-	.form-radio
-		height: auto !important
-	
-	input[type="checkbox"],
-	.form-checkbox
-		-webkit-appearance: checkbox !important
-		-moz-appearance: checkbox !important
-		-ms-appearance: checkbox !important
-		appearance: checkbox !important
-
-	input[type="radio"],
-	.form-radio
-		-webkit-appearance: radio !important
-		-moz-appearance: radio !important
-		-ms-appearance: radio !important
-		appearance: radio !important
-
-	.form-item label
-		font-size: 16px
-		font-weight: 600
-		margin-bottom: 10px
-
-	.field-type-list-text,
-	.field-type-list-boolean,
-	.form-type-checkbox
-		label
-			font-size: 14px
-
-	.form-checkbox
-		height: auto
-
-	.form-submit
-		line-height: 48px
-		font-weight: 700
-		width: 23.5%
-		margin-right: 2%
-
-		&#edit-delete
-			margin-right: 0
-
-	#edit-save-draft,
-	#edit-published-but-invisible,
-	#edit-delete
-		margin-top: 15px
-
-	#edit-save-draft,
-	#edit-published-but-invisible,
-	#edit-delete
-		background-color: $grey-light
-
-
-	#edit-filters,
-	#edit-providers,
-	#edit-actions
-		label
-			font-size: 0.923em
-			font-weight: 400
-			margin-bottom: 0
+		input[type="checkbox"],
+		input[type="radio"],
+		.form-checkbox,
+		.form-radio
+			height: auto !important
 		
-		input
+		input[type="checkbox"],
+		.form-checkbox
+			-webkit-appearance: checkbox !important
+			-moz-appearance: checkbox !important
+			-ms-appearance: checkbox !important
+			appearance: checkbox !important
+
+		input[type="radio"],
+		.form-radio
+			-webkit-appearance: radio !important
+			-moz-appearance: radio !important
+			-ms-appearance: radio !important
+			appearance: radio !important
+
+		.form-item label
+			font-size: 16px
+			font-weight: 600
+			margin-bottom: 10px
+
+		.field-type-list-text,
+		.field-type-list-boolean,
+		.form-type-checkbox
+			label
+				font-size: 14px
+
+		.form-checkbox
 			height: auto
 
 		.form-submit
-			width: auto
-			line-height: 1.2em
-			font-weight: 400
-			margin-right: 1em
-			font-size: 1.077em
+			line-height: 48px
+			font-weight: 700
+			width: 23.5%
+			margin-right: 2%
 
-		.form-item-campaign-n-contains label
-			width: 130px
+			&#edit-delete
+				margin-right: 0
+
+		#edit-save-draft,
+		#edit-published-but-invisible,
+		#edit-delete
+			margin-top: 15px
+
+		#edit-save-draft,
+		#edit-published-but-invisible,
+		#edit-delete
+			background-color: $grey-light
+
+
+		#edit-filters,
+		#edit-providers,
+		#edit-actions
+			label
+				font-size: 0.923em
+				font-weight: 400
+				margin-bottom: 0
+			
+			input
+				height: auto
+
+			.form-submit
+				width: auto
+				line-height: 1.2em
+				font-weight: 400
+				margin-right: 1em
+				font-size: 1.077em
+
+			.form-item-campaign-n-contains label
+				width: 130px
 
 
 
