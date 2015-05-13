@@ -1327,7 +1327,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     
     if ($user->uid == 1) {
       
-      $results2 = $query->execute()->fetchAllAssoc('source');
+      $results2 = $query->execute()->fetchAll();
       dpm($results2);
     }
     
