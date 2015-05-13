@@ -12036,7 +12036,7 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
  * Element Validate for email.
  */
 function gv_misc_validate_email($element, &$form_state) {
-   if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $element['#value'])) {
+   if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,6})$/', $element['#value'])) {
      form_error($element, 'Wrong email format!');
    }
 }
@@ -12107,12 +12107,23 @@ function gv_misc_newsletterSubscribe_form_validate(&$form, &$form_state) {
  */
 function gv_misc_newsletterSubscribe_form_submit(&$form, &$form_state) {
   
+  // Get a blog category
+  $blog_cat = NULL;
+  $nid = str_replace('node/', '', $_GET['q']);
+  if ($nid && is_int($nid)) {
+    $query = db_select('field_revision_field_blog_category', 'b')
+          ->fields('b', array('field_blog_category_value'));
+    $query->condition('b.entity_id', $nid);
+    $blog_cat = $query->execute()->fetchField();
+  }  
+  dpm('$blog_cat = ' . $blog_cat);  
   $verification_code = md5(time());
   db_insert('gv_emails_subscribed')
     ->fields(array(
       'email'=> $form_state['values']['email'],
       'timestamp'=> time(),
       'code' => $verification_code,
+      'source' => $blog_cat,
     ))
     ->execute();
     
