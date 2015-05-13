@@ -12050,10 +12050,11 @@ function gv_misc_validate_email($element, &$form_state) {
  */
 function gv_misc_newsletterSubscribe_form_validate(&$form, &$form_state) {
 
-  //drupal_set_message('In Validate!', 'warning');
-  //dpm($form_state['values']);
-  //dpm($form);
-    
+  drupal_set_message('In Validate!', 'warning');
+  dpm($form_state['values']);
+  dpm($form);
+  dpm($_GET);  
+  
   global $user;
   
   // Clear hints, if any.
