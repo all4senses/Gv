@@ -836,7 +836,10 @@ function gv_process_page(&$variables) {
     
   }
   elseif (arg(0) == 'get' && @arg(1) == 'iframe') {
-    module_invoke('admin_menu', 'suppress');
+    
+    //here is too late, because https://github.com/alexweber/admin_menu
+    //module_invoke('admin_menu', 'suppress');
+    
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
     drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
   }
