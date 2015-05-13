@@ -6,6 +6,7 @@
        
        var isIE = document.all && !window.atob;
        var isIE11 = window.navigator.msPointerEnabled;
+       var isMobile = $$('html').hasClass('mobile');
        
        // Exit intent functionality.
        
@@ -25,7 +26,7 @@
             }
         }); 
 
-        if ( !isIE && !isIE11 ) {
+        if ( !isIE && !isIE11 && !isMobile ) {
             window.history.replaceState({id: 'gv_exit-init'}, '', '');
             window.history.pushState({id: 'gv_exit-control'}, '', '');
 
@@ -43,16 +44,20 @@
             });
         }
 
-        $(window).on('mouseleave', function(e) {
-            
-            if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
-                turned_off = true;
+        if ( !isMobile ) {
 
-                  $$("body").addClass('opened-popup');
-      
-                  $.fn.popup("exit");
-            }
-        });
+            $(window).on('mouseleave', function(e) {
+                
+                if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
+                    turned_off = true;
+
+                      $$("body").addClass('opened-popup');
+          
+                      $.fn.popup("exit");
+                }
+            });
+            
+        }
 
 
         // Prepare form
