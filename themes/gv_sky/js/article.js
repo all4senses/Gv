@@ -21,20 +21,20 @@
 
 	$$('.subscribe-text').html($subscribeText);
 
-	var $submitButton = $$('#gv-misc-newslettersubscribe-form').find('#edit-submit');
+	// var $submitButton = $$('#gv-misc-newslettersubscribe-form').find('#edit-submit');
 
-	$submitButton.on('click', function(e){
-		e.preventDefault();
-		var clicks = $submitButton.data('clicks');
+	// $submitButton.on('click', function(e){
+	// 	e.preventDefault();
+	// 	var clicks = $submitButton.data('clicks');
 
-		if (clicks) {
-			$$('#gv-misc-newslettersubscribe-form').submit();
-		} else {
-			$$('.form-item-email').addClass('show');
-			$submitButton.val('Subscribe');
-		}
-		$submitButton.data('clicks', !clicks)
-	});
+	// 	if (clicks) {
+	// 		$$('#gv-misc-newslettersubscribe-form').submit();
+	// 	} else {
+	// 		$$('.form-item-email').addClass('show');
+	// 		$submitButton.val('Subscribe');
+	// 	}
+	// 	$submitButton.data('clicks', !clicks)
+	// });
 
 
 
