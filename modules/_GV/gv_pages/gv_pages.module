@@ -1308,7 +1308,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   if (arg(3) == 'newsletter-emails') {
     
     $query = db_select('gv_emails_subscribed', 'e')
-          ->fields('e', array('email', 'source'));
+          ->fields('e', array('email'));
     //$query->condition('e.source', NULL);
 
     if (!empty($_GET['email-contains'])) {
