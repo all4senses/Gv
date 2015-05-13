@@ -1308,19 +1308,29 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   if (arg(3) == 'newsletter-emails') {
     
     $query = db_select('gv_emails_subscribed', 'e')
-          ->fields('e', array('email'));
+          ->fields('e', array('email', 'source'));
     //$query->condition('e.source', NULL);
 
     if (!empty($_GET['email-contains'])) {
       $query->condition('e.email', '%%' . $_GET['email-contains'] . '%%', 'LIKE');
     }
-    
+    global $user;
+    if ($user->uid == 1) {
+      $query->groupBy('e.source');
+    }
     //$email = $query->execute()->fetchField();
     //dpm($email);
 
-    $email = $query->execute()->fetchField();
+    //$email = $query->execute()->fetchField();
 
     $results = $query->execute();
+    
+    if ($user->uid == 1) {
+      
+      $results2 = $query->execute()->fetchAllAssoc('source');
+      dpm($results2);
+    }
+    
 
     $emails = '<br/><br/>';//'<br/><div><strong>Newsletter emails.</strong></div><br/>';
 
