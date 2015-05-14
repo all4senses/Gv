@@ -15,9 +15,8 @@
         <?php print render($title_prefix); ?>
 
         <?php 
-          dpm($node->field_hero_title['und'][0]['value']);
           $title_tag_inner = (!isset($node->title_no_link) && !$page) ? '<a href="' . $node_url . '">' . $title . '</a>' : $title; 
-          echo $page ? ('<h1>' . $title_tag_inner . '</h1>') : ('<h2>' . $title_tag_inner . '</h2>'); 
+          echo $page ? (!empty($node->field_hero_title['und'][0]['value']) ? '' : '<h1>' . $title_tag_inner . '</h1>') : ('<h2>' . $title_tag_inner . '</h2>'); 
         ?>
           
 
