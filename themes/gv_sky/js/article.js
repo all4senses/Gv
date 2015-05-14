@@ -159,7 +159,7 @@
    Table wrapper add
    ========================================================================== */
 
-   // $$('table').wrap('<div class="table-wrap" />');
+   $$('table').wrap('<div class="table-wrap" />');
 
 
 
