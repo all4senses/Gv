@@ -2,9 +2,9 @@
 	clear: both
 	position: relative
 	overflow: hidden
-	width: perc(820px, 1066px)
-	float: right
-	margin-top: 50px
+	// width: perc(820px, 1066px)
+	width: 100%
+	margin: 30px 0 10px
 	border: 1px solid $divider
 	border-radius: 3px
 	padding: 30px 30px 30px 180px
@@ -12,43 +12,91 @@
 	box-sizing: border-box
 	+clearfix
 
-	+max(1100)
-		width: 100%
-		max-width: 820px
+	+max(736)
+		max-width: 500px
+		+center(30px, 10px)
+		padding: 30px
 		float: none
-		+center
+
 
 	&-svg
 		position: absolute
-		// left: 50px
-		left: 7%
-		bottom: 31px
-		transform: scale(2.1)
+		left: 57px
+		bottom: 52px
+		+transform(scale(1.8))
+
+		+max(736)
+			bottom: auto
+			left: 13.5%
+			top: 45px
+
+		+max(520)
+			+transform(scale(1.6))
+			position: relative
+			top: 0
+			left: 0
+			right: 0
+			+center(15px, 25px)
+			display: block
+
+
+		&-paper
+			+transform(translateY(0))
+			// transition: 0.2s -webkit-transform
+			// transition: 0.2s -ms-transform
+			transition: all 0.2s
+
+	&.hover &-svg-paper
+		+transform(translateY(-9px))
+
+
 
 	&-text
 		position: relative
 		top: 15px
 		float: left
 		width: 56%
-		// height: 122px
 		font-size: 21px
 		font-weight: 600
-		// line-height: 1.4
-		// text-align: right
+
+		+max(920)
+			font-size: 18px
+			line-height: 1.4
+
+		+max(736)
+			float: none
+			margin-left: 33%
+			width: 68%
+			margin-bottom: 70px
+
+		+max(520)
+			font-size: 17px
+			// margin-left: 27%
+			+center(0, 50px)
+			// max-width: 300px
+			text-align: center
+			width: 100%
+
+
 
 	.form-item-email,
 	.form-submit
 		float: right
 		width: 41%
 
+		+max(736)
+			float: none
+			width: 100%
+			max-width: 300px
+			+center
+
+
+
 	.form-item-email
 		position: relative
-		// height: 0
 		overflow: hidden
 		transition: height 0.4s $ease-in-out-circ
 
-		// &.show
-		// 	height: 66px
 
 		&:after
 			content: 'T'
@@ -68,6 +116,13 @@
 		border: 1px solid $divider
 		border-radius: 3px
 		color: $black
+		transition: all 0.2s
+
+		&:focus
+			border-color: $contrast
+
+		&.error
+			border-color: #E34B4F
 
 
 
