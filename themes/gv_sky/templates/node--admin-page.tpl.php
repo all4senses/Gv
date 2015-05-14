@@ -14,21 +14,12 @@
 
         <?php print render($title_prefix); ?>
 
-          <?php if ($page): ?>
-          <h1 <?php else: ?>
-          <h2 <?php endif; ?>
-            
-            <?php if (!isset($node->title_no_link) && !$page): ?>
-              <a href="<?php print $node_url; ?>"><?php print $title; ?></a>
-            <?php else: ?>
-              ><?php print $title; ?>
-            <?php endif; ?>
-              
-          <?php if ($page): ?>
-            </h1>
-          <?php else: ?>
-            </h2>
-          <?php endif; ?>
+        <?php 
+          dpm($node->field_hero_title['und'][0]['value']);
+          $title_tag_inner = (!isset($node->title_no_link) && !$page) ? '<a href="' . $node_url . '">' . $title . '</a>' : $title; 
+          echo $page ? ('<h1>' . $title_tag_inner . '</h1>') : ('<h2>' . $title_tag_inner . '</h2>'); 
+        ?>
+          
 
       <?php if (!$page): ?>
         </header>
