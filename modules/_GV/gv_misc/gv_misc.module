@@ -162,6 +162,13 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['get/iframe/top5bu'] = array(
+    'title' => 'Top 5 Business Providers',
+    'page callback' => 'gv_misc_getIframe_Top5BuBlockSmall',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['get/iframe/exitIntent_lpV4'] = array(
     'title' => 'Quote Request Block',
     'page callback' => 'gv_misc_getIframe_exitIntent_lpV4',
@@ -178,6 +185,12 @@ function gv_misc_menu() {
   
   $items['iframe-test/sip'] = array(
     'page callback' => 'gv_misc_testPage_iframe_sip',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['iframe-test/top5bu'] = array(
+    'page callback' => 'gv_misc_testPage_iframe_top5bu',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -889,9 +902,9 @@ function gv_misc_disqusGetThreadDetails($nid = NULL, $thread = NULL, $threadIdTy
   // Change api_key to api_secret when using your secret key
 
 //                DIFFERENT TYPES OF THREAD LOOKUPS:
-//                1. By DISQUS thread ID (default): thread=%s РІР‚вЂќ thread IDs are universally unique in DISQUS, so you can remove 'forum' param if you like
-//                2. By identifier: thread:ident=%s РІР‚вЂќ requires the forum parameter
-//                3. By URL: thread:link=%s РІР‚вЂќ requires the forum parameter
+//                1. By DISQUS thread ID (default): thread=%s Р Р†Р вЂљРІР‚Сњ thread IDs are universally unique in DISQUS, so you can remove 'forum' param if you like
+//                2. By identifier: thread:ident=%s Р Р†Р вЂљРІР‚Сњ requires the forum parameter
+//                3. By URL: thread:link=%s Р Р†Р вЂљРІР‚Сњ requires the forum parameter
 
 
 
@@ -2345,7 +2358,7 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
       
       
       
-    // if Р С•РЎвЂ№ has been already loaded, and now we will add it again, it won't work.
+    // if Р В РЎвЂўР РЋРІР‚в„– has been already loaded, and now we will add it again, it won't work.
     // So we prevent it.
     
     static $drupal_alredy_loaded_js;
@@ -6233,6 +6246,41 @@ function gv_misc_testPage_iframe_sip() {
   return $out;
   
 }
+
+
+/**
+ * Test page IFRAME for top 5 bu
+ */
+function gv_misc_testPage_iframe_top5bu() {
+
+  
+    $out .= '<iframe id="bu-chart" src="http://getvoip.com/get/iframe/top5bu" scrolling="no" width="360px" height="385px" frameborder="0" seamless="seamless"></iframe>';
+  
+//  $out .= '<SCRIPT>
+//      function setGvIframeSize(pixels){
+//        /*pixels+=32;*/
+//        /*alert(document.getElementById("bu-chart").style.height);*/
+//        /*document.getElementById("bu-chart").style.height=pixels+"px";*/
+//        
+//      }
+//    </SCRIPT>';
+  
+//  $out = '<SCRIPT>
+//      function setGvIframeSize(pixels){
+//        /*pixels+=32;*/
+//        document.getElementById("bu-chart").style.height=pixels+"px";
+//        /*alert(document.getElementById("bu-chart").style.height);*/
+//      }
+//    </SCRIPT>' . $out;
+   
+ 
+  //$out .= '<iframe id="gv-quote-request-block" src="http://getvoip.com/get/iframe/quote-request-block" scrolling="no" width="245px" height="335px" frameborder="0" seamless="seamless"></iframe>';
+  
+  return $out;
+  
+}
+
+
 /*
 function gv_misc_imagemagick_save_alter($image, $context) {
 // dpm($image);
@@ -6683,6 +6731,24 @@ function gv_misc_getIframe_QuoteRequestBlock() {
 
 
 /**
+ * Returns Top5 Bu providers Block for an iframe.
+ */
+function gv_misc_getIframe_Top5BuBlockSmall() {
+
+  //https://github.com/alexweber/admin_menu
+  module_invoke('admin_menu', 'suppress');
+  
+  $block_content = gv_blocks_getTop5Providers_byTypeAndPath('bu');
+  
+  $out = '<aside class="top-providers" role="complementary">
+<h3 class="top-providers-heading">
+<span class="top-providers-heading-text">Top 5 Providers</span></h3>' . $block_content . '</aside>';
+  
+  return $out;
+}
+
+
+/**
  * Returns TopProvidersBu chart for an iframe.
  */
 function gv_misc_getIframe_TopProvidersBu() {
@@ -6854,7 +6920,7 @@ function gv_misc_SendRequestToVocalocity($submission, $op = 'sendIfAllowed') {
 //  }
 //  else 
   {
-    // This will need to be changed to the below link the evening of Friday 17th April 2015 вЂ“ NO other changes except for the URL change will need to be made. The change should be done on the 17th anytime from 8pm to Midnight, so whatever leads we send starting on the 18th will go the new link.
+    // This will need to be changed to the below link the evening of Friday 17th April 2015 РІР‚вЂњ NO other changes except for the URL change will need to be made. The change should be done on the 17th anytime from 8pm to Midnight, so whatever leads we send starting on the 18th will go the new link.
     $url = 'http://ww3.business.vonage.com/l/7772/2012-10-01/36gsq6';
   }
   
@@ -11836,7 +11902,7 @@ function gv_misc_sortArrayProvidersByErating($a, $b) {
  * 
  * Example of using:
  * 
- * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByР РЋlicks');
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayByР В Р Р‹licks');
  */
 function gv_misc_sortArrayByClicks($a, $b) {
   if ($a['clicks'] == $b['clicks']) {
