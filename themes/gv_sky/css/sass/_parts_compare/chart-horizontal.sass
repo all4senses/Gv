@@ -319,13 +319,12 @@
 				 
 				.sprite-div
 					+center
-
-				+m(1024)
-					@media screen and (min-width:737px)
-						.sprite-div
-							-webkit-transform: scale(0.89)
-							-ms-transform: scale(0.89)
-							transform: scale(0.89)
+				
+				+maxmin(1024, 737)
+					.sprite-div
+						-webkit-transform: scale(0.89)
+						-ms-transform: scale(0.89)
+						transform: scale(0.89)
 
 				+m(736)
 					width: 60%

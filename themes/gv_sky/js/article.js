@@ -2,7 +2,8 @@
    Newsletter Block Relocation & Logic
    ========================================================================== */
 
-	$$('.related-posts').after($$('#subscribe'));
+	// $$('.article').after($$('#subscribe'));
+	$$('#subscribe').appendTo($$('.article'));
 
 	var $cat = $$('.article-meta-category').data('category');
 	var $subscribeText;
@@ -21,20 +22,82 @@
 
 	$$('.subscribe-text').html($subscribeText);
 
-	// var $submitButton = $$('#gv-misc-newslettersubscribe-form').find('#edit-submit');
 
-	// $submitButton.on('click', function(e){
-	// 	e.preventDefault();
-	// 	var clicks = $submitButton.data('clicks');
 
-	// 	if (clicks) {
-	// 		$$('#gv-misc-newslettersubscribe-form').submit();
-	// 	} else {
-	// 		$$('.form-item-email').addClass('show');
-	// 		$submitButton.val('Subscribe');
-	// 	}
-	// 	$submitButton.data('clicks', !clicks)
-	// });
+	$$('#subscribe #edit-email').on('change keydown', function(){
+	    var email = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+	    var $this = jQuery(this);
+
+		if ( $this.val() === "" || !email.test($this.val()) ) {
+			$this.removeClass('valid');
+		} else {
+			$this.addClass('valid').removeClass('error');
+		}
+	});
+
+	var $submitButton = $$('#subscribe #edit-submit');
+
+	$submitButton.on('click', function(e){
+		e.preventDefault();
+
+		if ( $$('#subscribe #edit-email').hasClass('valid') ) {
+			$$('#gv-misc-newslettersubscribe-form').submit();
+		} else {
+			$$('#subscribe #edit-email').addClass('error');
+		}
+	});
+
+
+	$$('#subscribe').hover(function(){
+		$$('#subscribe').addClass('hover');
+	}, function(){
+		$$('#subscribe').removeClass('hover');
+	});
+
+
+	// Mobile Scroll trigger
+	var mobile = $$('html').hasClass('mobile');
+	var $subscribeScroll = $$('#subscribe').offset().top;
+	var $height = innerHeight;
+
+	if ( mobile ) {	
+		$window.on('scroll', function(){
+			var $height = innerHeight;
+			var scrolledBefore = window.pageYOffset < $subscribeScroll - ($height/2);
+			var scrolledAt = window.pageYOffset > $subscribeScroll - ($height/2);
+			var scrolledIn = window.pageYOffset < $subscribeScroll - ($height/2) + $$('#subscribe').height();
+			var scrolledAfter = window.pageYOffset > $subscribeScroll - ($height/2) + $$('#subscribe').height();
+
+			if ( scrolledAt && scrolledIn ) {
+				$$('#subscribe').addClass('hover');
+			}
+			if ( scrolledAfter || scrolledBefore ) {
+				$$('#subscribe').removeClass('hover');
+			}
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -46,30 +109,73 @@
    Window Scroll tracking for social share box
    ========================================================================== */
 
-	var $fixedToggle = false;
-	var $height = $window.height();
+	// var $fixedToggle = false;
+	// var $height = $window.height();
 	
-	$window.resize(function(){
-		$height = $window.height();
-	});
+	// $window.resize(function(){
+	// 	$height = $window.height();
+	// });
 
-	if ($height >= 900) {
-		$$('.social-share').addClass('show');
-	}
+	// if ($height >= 900) {
+	// 	$$('.social-share').addClass('show');
+	// }
 	
-	$window.scroll(function(){
-		var $scroll = $window.scrollTop();
-		var $scrollRequired = 860 - $height;
+	// $window.scroll(function(){
+	// 	var $scroll = $window.scrollTop();
+	// 	var $scrollRequired = 860 - $height;
 
-		if ($scroll >= $scrollRequired && $fixedToggle == false && $height <= 900) {
-			$$('.social-share').addClass('show');
-			$fixedToggle = true;
-		} 
-		if ($scroll < $scrollRequired && $fixedToggle == true && $height <= 900) {
-			$$('.social-share').removeClass('show');
-			$fixedToggle = false;
-		}
-	});
+	// 	if ($scroll >= $scrollRequired && $fixedToggle == false && $height <= 900) {
+	// 		$$('.social-share').addClass('show');
+	// 		$fixedToggle = true;
+	// 	} 
+	// 	if ($scroll < $scrollRequired && $fixedToggle == true && $height <= 900) {
+	// 		$$('.social-share').removeClass('show');
+	// 		$fixedToggle = false;
+	// 	}
+	// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Table wrapper add
+   ========================================================================== */
+
+   $$('table').wrap('<div class="table-wrap" />');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -81,6 +187,20 @@
    ========================================================================== */
 
    $$('#disqus_thread').wrap('<div class="disqus-wrap" />');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
