@@ -14,21 +14,25 @@
 		var provider_demo = false;
 		var provider_quote = false;
 		var exit = false;
+		var exit_subscribe = false;
 		var close = false;
 		
-		if ( $arg == "quote" ) { // Comparison Chart Popup
+		if ( $arg === "quote" ) { // Comparison Chart Popup
 			var quote = true;
 		} 
-		if ( $arg == "provider_demo" ) { // Provider Page Demo/Quote Popup
+		if ( $arg === "provider_demo" ) { // Provider Page Demo/Quote Popup
 			var provider_demo = true;
 		}  
-		if ( $arg == "provider_quote" ) { // Provider Page Demo/Quote Popup
+		if ( $arg === "provider_quote" ) { // Provider Page Demo/Quote Popup
 			var provider_quote = true;
 		} 
-		if ( $arg == "exit" ) {
+		if ( $arg === "exit" ) {
 			var exit = true;
 		} 
-		if ( $arg == "close" ) {
+		if ( $arg === "subscribe" ) {
+			var exit_subscribe = true;
+		} 
+		if ( $arg === "close" ) {
 			var close = true;
 		} 
 
@@ -37,7 +41,7 @@
 			$$('.popup-content').find('input').val('');
 			$$('.popup-content').find('.input-button.checked').removeClass('checked');
 			$$('.popup-content').find('.fieldset.valid, .fieldset.error').removeClass('valid error');
-			if ( $$('.popup').hasClass('exit') ) {
+			if ( $$('.popup').hasClass('exit') || $$('.popup').hasClass('exit_subscribe') ) {
 				$('.popup-content').empty();
 			}
 			if ( $$('.popup').hasClass('quote') ) {
@@ -55,12 +59,12 @@
 				$('.provider-quote .step.show').removeClass('show');
 				$('.provider-quote .step-one').addClass('show');
 			}
-			$$('.popup, .popup-overlay').removeClass('show quote provider_demo provider_quote exit');
+			$$('.popup, .popup-overlay').removeClass('show quote provider_demo provider_quote exit exit_subscribe');
 			$$("body").removeClass('opened-popup');
 			popOpen = false;
 		}
 
-		if ( popOpen == false ) {
+		if ( popOpen === false ) {
 			
 			if (quote) {
 				$$('.popup, .popup-overlay').addClass('show quote');
@@ -89,7 +93,14 @@
 
 			if (exit) {
 				$$('.popup, .popup-overlay').addClass('show exit');
-				$('#exitIntent').appendTo($('.popup-content'));
+				$$('#exitIntent').appendTo($('.popup-content'));
+				popOpen = true;
+			}
+
+
+			if (exit_subscribe) {
+				$$('.popup, .popup-overlay').addClass('show exit_subscribe');
+				$$('#exitIntentSub').appendTo($('.popup-content'));
 				popOpen = true;
 			}
 
