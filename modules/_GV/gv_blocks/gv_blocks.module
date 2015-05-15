@@ -1651,7 +1651,7 @@ function gv_blocks_getLatestPostsRotated() {
       $i++;
   }
 
-  $out = '<section class="section four posts"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></div></section>';  
+  $out = '<section class="section four posts"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">Having researched over 300 service providers,В our advisors identify the best solution for each buyer.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></div></section>';  
   return $out;
 
 }
@@ -1827,7 +1827,7 @@ function gv_blocks_getHomeServiceTypes() {
   
   $service_types_home = array('bu' => array('title' => 'Business VoIP', 'key' => 'page-compare-business-voip-providers', 'erating_field' => ''), 'pbx' => array('title' => 'Hosted PBX', 'key' => 'page-compare-pbx-voip-providers', 'erating_field' => 'pbx'), 'sip' => array('title' => 'SIP Trunking', 'key' => 'page-compare-sip-voip-providers', 'erating_field' => 'sip'), 'wc' => array('title' => 'Web Conference', 'key' => 'web-conferencing-voip-providers', 'erating_field' => 'wc'), 're' => array('title' => 'Residential VoIP', 'key' => 'page-compare-residential-voip-providers', 'erating_field' => 'residential'), 'cc' => array('title' => 'Call Centers', 'key' => 'page-compare-cc-voip-providers', 'erating_field' => 'ifa') );
   
-  $out .= '<section class="section one solutions"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading section-title-heading__medium"><span class="section-title-heading-inner">Find</span> Providers</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p></div><ul class="solutions-list">';
+  $out .= '<section class="section one solutions"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading section-title-heading__medium"><span class="section-title-heading-inner">Find</span> Providers</h2><p class="section-title-desc">Having researched over 300 service providers,В our advisors identify the best solution for each buyer.</p></div><ul class="solutions-list">';
 
 
   foreach ($service_types_home as $service_type => $data) {
@@ -2028,7 +2028,7 @@ function gv_blocks_getAboutTheAuthor($uid) {
  */
 function gv_blocks_getFooterAbout() {
   return '<div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
-            <div>© 2015 GetVoIP.com | All Rights Reserved</div>
+            <div>В© 2015 GetVoIP.com | All Rights Reserved</div>
          </div>';
 }
 
@@ -2759,6 +2759,7 @@ function gv_blocks_getTop5Providers_article($service_type = NULL) {
  */
 function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
+  $current_url = $_SERVER['REDIRECT_URL']; //  = '/' . request_path();
   
   if (!$service_type) {
   
@@ -2795,7 +2796,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       '/cloud-contact-center' => 'cc',// 'page-compare-cc-voip-providers',
     );
     
-    $current_url = $_SERVER['REDIRECT_URL']; //  = '/' . request_path();
+    
     if(!$service_type = @$map_path_to_type[$current_url]) {
       return NULL;
     }
@@ -3500,14 +3501,14 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
   }
   
   if ($page_prev !== FALSE) {
-    $page_prev = l('Older Posts ›', $_GET['q'], array('query' => array('page' => $page_prev)));
+    $page_prev = l('Older Posts вЂє', $_GET['q'], array('query' => array('page' => $page_prev)));
   }
   if ($page_next !== FALSE) {
     if (!$page_next) {
-      $page_next = l('‹ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
+      $page_next = l('вЂ№ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
     }
     else {
-      $page_next = l('‹ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
+      $page_next = l('вЂ№ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
     }
   }
   
@@ -4350,13 +4351,13 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
       //dpm($menu);
     }
     
-    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
-  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
   
   return $out;
 }
@@ -4375,13 +4376,13 @@ function gv_blocks_get_footerMenu() {
   }
   else {
     $menu = menu_build_tree('menu-footer-menu');
-    $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
-  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
   
   return $out;
 }
@@ -5036,7 +5037,7 @@ function gv_blocks_get_requestQuote_block_v3() {
                             <div class="bottom-clear"></div>
 
                             <div class="explain p2"><div class="number">2</div><div class="text">Your request will be reviewed by our team of VoIP Experts</div></div>
-                            <div class="explain p3"><div class="number">3</div><div class="text">РЎonnect with leading providers that best match your needs</div></div>
+                            <div class="explain p3"><div class="number">3</div><div class="text">Р РЋonnect with leading providers that best match your needs</div></div>
       
                             <div class="wrapper middle first">
                               <div class="label_before required">' . t('First Name') . ':<span class="form-required">*</span></div>
@@ -9918,7 +9919,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider($case = 'cc') {
                                       </div>
                                   </div>
                                   <div class="popup-request-intro-upsale">
-                                    You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.
+                                    You will also receive a FREE Call Center BuyerвЂ™s guide to help analyze and compare your results.
                                   </div>
                               </div>
                             </div>
@@ -10036,7 +10037,7 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider($case = 'cc') {
                                       </div>
                                   </div>
                                   <div class="popup-request-intro-upsale">
-                                    You will also receive a FREE Call Center Buyer’s guide to help analyze and compare your results.
+                                    You will also receive a FREE Call Center BuyerвЂ™s guide to help analyze and compare your results.
                                   </div>
                               </div>
                             </div>
