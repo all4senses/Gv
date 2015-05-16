@@ -839,11 +839,13 @@ function gv_process_page(&$variables) {
     
     //here is too late, because https://github.com/alexweber/admin_menu
     //module_invoke('admin_menu', 'suppress');
+    $variables['theme_hook_suggestions'][] = 'page__url__iframe';
+    
     if(@arg(2) == 'top5bu') {
+      drupal_add_css(path_to_theme() . '/css/compare.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
     }
     else {
-      $variables['theme_hook_suggestions'][] = 'page__url__iframe';
-      drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+      //drupal_add_css(path_to_theme() . '/css/iframes-n-quotes.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
       drupal_add_css(path_to_theme() . '/css/compare-iframe.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
     }
     
