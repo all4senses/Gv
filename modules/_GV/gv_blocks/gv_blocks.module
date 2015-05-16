@@ -2924,11 +2924,18 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
           $stars = theme('gv_misc_fivestar_dk', array('rating' => $vote['value'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'top-providers-list-item-details-text-stars'));
         }
       }
-      //dpm($current_url);
-      if ($current_url == '/ppc/business-voip' || strpos($current_url, 'iframe') !== FALSE) {
+
+      global $user;
+      if ($user->uid == 1) {
+        dpr($current_url);
+        exit;
+      }
+      if ($current_url == '/ppc/business-voip' || strpos($current_url, 'iframe') !== FALSE) 
+      {
         $reviews_link_attributes = array('attributes' => array('class' => array('review-link'), 'target' => '_blank'));
       }
-      else {
+      else 
+      {
         $reviews_link_attributes = array('attributes' => array('class' => array('review-link')));
       }
       
