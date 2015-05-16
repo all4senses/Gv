@@ -2925,7 +2925,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
         }
       }
       //dpm($current_url);
-      if ($current_url == '/ppc/business-voip') {
+      if ($current_url == '/ppc/business-voip' || strpos($current_url, 'iframe') !== FALSE) {
         $reviews_link_attributes = array('attributes' => array('class' => array('review-link'), 'target' => '_blank'));
       }
       else {
