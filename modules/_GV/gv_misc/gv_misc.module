@@ -12046,6 +12046,82 @@ function gv_blocks_getAddThisButtonsLike() {
  * @return $form
  *   Return nothing.
  */
+function gv_misc_exitSubscribe_form($form, &$form_state) {
+  
+  global $user;
+  
+  $form['#prefix'] = '<div style="display:none;">
+                      <div id="exitIntentSub" class="exit-subscribe">
+                        <div class="exit-subscribe-header">
+
+                          <svg class="exit-subscribe-header-svg" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                             x="0px" y="0px" width="81.4px" height="81.3px" style="enable-background:new 0 0 81.4 81.3;"
+                             xml:space="preserve">
+                          <defs>
+                          </defs>
+                          <g>
+                            <polygon style="fill:#FCFCFC;" points="43.5,58.3 81.4,79.1 81.4,37.3  "/>
+                            <path style="fill:#FCFCFC;" d="M40.7,56.7L40.7,56.7L10.9,40.3v0L40.7,56.7l32.6-18v0l6.9-3.8l-6.9-6.5v-19H55.1L44.1,1.3
+                              c-1.9-1.7-5-1.7-6.9,0L26.3,9.4H8.1v19l-7,6.5L40.7,56.7z M10.9,12.2h11.8h36h11.8v13.7v11.2L40.7,53.6L10.9,37.1V25.9V12.2z"/>
+                            <polygon style="fill:#FCFCFC;" points="0,81.3 79.8,81.3 0,37.4  "/>
+                            <path style="fill:#FCFCFC;" d="M36.6,18.9h8.1c0.7,0,1.4-0.6,1.4-1.4c0-0.7-0.6-1.4-1.4-1.4h-8.1c-0.7,0-1.4,0.6-1.4,1.4
+                              C35.3,18.3,35.9,18.9,36.6,18.9z"/>
+                            <path style="fill:#FCFCFC;" d="M57,36.6h-9.5c-0.7,0-1.4,0.6-1.4,1.4c0,0.7,0.6,1.4,1.4,1.4H57c0.7,0,1.4-0.6,1.4-1.4
+                              C58.3,37.2,57.7,36.6,57,36.6z"/>
+                            <path style="fill:#FCFCFC;" d="M23.1,28.4h6.8c0.7,0,1.4-0.6,1.4-1.4s-0.6-1.4-1.4-1.4h-6.8c-0.7,0-1.4,0.6-1.4,1.4
+                              S22.3,28.4,23.1,28.4z"/>
+                            <path style="fill:#FCFCFC;" d="M39.3,27.1c0,0.7,0.6,1.4,1.4,1.4h10.9c0.7,0,1.4-0.6,1.4-1.4s-0.6-1.4-1.4-1.4H40.7
+                              C39.9,25.7,39.3,26.3,39.3,27.1z"/>
+                            <path style="fill:#FCFCFC;" d="M35.3,28.4c0.4,0,0.7-0.1,1-0.4c0.2-0.3,0.4-0.6,0.4-1c0-0.4-0.1-0.7-0.4-1c-0.5-0.5-1.4-0.5-1.9,0
+                              c-0.2,0.3-0.4,0.6-0.4,1c0,0.4,0.1,0.7,0.4,1C34.6,28.3,34.9,28.4,35.3,28.4z"/>
+                            <path style="fill:#FCFCFC;" d="M42,36.6H28.5c-0.7,0-1.4,0.6-1.4,1.4c0,0.7,0.6,1.4,1.4,1.4H42c0.7,0,1.4-0.6,1.4-1.4
+                              C43.4,37.2,42.8,36.6,42,36.6z"/>
+                            <path style="fill:#FCFCFC;" d="M23.1,39.3c0.4,0,0.7-0.1,1-0.4c0.2-0.3,0.4-0.6,0.4-1c0-0.4-0.1-0.7-0.4-1c-0.5-0.5-1.4-0.5-1.9,0
+                              c-0.2,0.2-0.4,0.6-0.4,1c0,0.4,0.1,0.7,0.4,1C22.4,39.2,22.7,39.3,23.1,39.3z"/>
+                            <path style="fill:#FCFCFC;" d="M57,28.4c0.4,0,0.7-0.1,1-0.4c0.2-0.3,0.4-0.6,0.4-1s-0.1-0.7-0.4-1c-0.5-0.5-1.4-0.5-1.9,0
+                              c-0.2,0.3-0.4,0.6-0.4,1c0,0.4,0.1,0.7,0.4,1C56.3,28.3,56.6,28.4,57,28.4z"/>
+                          </g>
+                          </svg>
+
+                          <div class="exit-subscribe-header-title">Join over 100,000 professionals improving their bottom line.</div>
+                          <div class="exit-subscribe-header-text">We\'ll email you twice a month with our actionable tips, and industry trends fueling business growth, so feel free to sign up.</div>
+                        </div>
+
+
+  ';
+  $form['#suffix'] = '</div></div>';
+
+  // $form['title'] = array(
+  //   '#markup' => '<div class="exit-subscribe-text">We\'ll email you twice a month with our actionable tips, and industry trends fueling business growth, so feel free to sign up.</div>'
+  // );
+  
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#required' => TRUE,
+    '#attributes' => array('title' => 'EMAIL'),
+    '#attributes' => array('placeholder' => 'Email Address')
+  );
+  
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Subscribe to The Blog'),
+    '#prefix' => '<div class="exit-subscribe-assurance">We Don\'t Spam. Ever!</div>'
+  ); 
+    
+  $module_path = drupal_get_path('module', 'gv_misc');
+
+  return $form;
+}
+
+
+/**
+ * Implements hook_form().
+ *
+ * @return $form
+ *   Return nothing.
+ */
 function gv_misc_newsletterSubscribe_form($form, &$form_state) {
   
   global $user;
@@ -12120,7 +12196,6 @@ function gv_misc_newsletterSubscribe_form($form, &$form_state) {
 
   return $form;
 }
-
 
 /**
  * Element Validate for email.

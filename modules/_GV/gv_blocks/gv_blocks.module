@@ -274,6 +274,11 @@ function gv_blocks_block_info() {
     'info' => 'Newsletters subscribe',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+
+  $blocks['exit_newsletters_subscribe'] = array(
+    'info' => 'Newsletters subscribe - Exit Intent',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
       
   $blocks['bu_voip_ads'] = array(
     'info' => 'Business VoIP Ads',
@@ -798,10 +803,15 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType();
       break;
     
-    
     case 'newsletters_subscribe':
       $block['subject'] = 'Newsletter Sign Up';
       $block['content'] = drupal_get_form('gv_misc_newsletterSubscribe_form');
+      break;
+
+    case 'exit_newsletters_subscribe':
+      $block['subject'] = 'Newsletter Sign Up - Exit Intent';
+      $block['content'] = gv_blocks_get_exitIntent_sub();
+      // $block['content'] = drupal_get_form('gv_misc_exitSubscribe_form');
       break;
     
     case 'bu_voip_ads':
@@ -10217,7 +10227,6 @@ function gv_blocks_get_exitIntent_v2() {
 }
 
 
-
 /**
  *  exit intent block v3 for Cloud contact center
  */
@@ -10370,6 +10379,25 @@ function gv_blocks_get_exitIntent_v3() {
 
   return $out;
 }
+
+
+/**
+ *  exit intent block for newsletter subscribtion
+ */
+function gv_blocks_get_exitIntent_sub() {
+
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  $current_js_array = drupal_add_js();
+  // drupal_add_js($path_to_custom_js . 'gv_exitIntent_sub.js', array('weight' => 10))
+  drupal_add_js('sites/all/themes/gv_sky/js/popup.js');
+  drupal_add_js($path_to_custom_js . 'gv_exitIntent_sub.js');
+  // drupal_add_css('sites/all/themes/gv_sky/css/popup-exit-sub.css', array('preprocess' => FALSE, 'type' => 'external' ));
+  
+
+
+  return drupal_get_form('gv_misc_exitSubscribe_form');
+}
+
 
 
 /**
