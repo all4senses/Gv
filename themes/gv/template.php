@@ -944,7 +944,7 @@ function gv_preprocess_node(&$variables) {
                $subversion = NULL;
               }
               $body_classes_add['quote_page'] = 'quote-page v' . $version . (!$subversion ? '' : ' ' . $subversion . ' v' . $version);
-              $variables['theme_hook_suggestions'][] = 'node__quote__v' . $version . (!$subversion ? '' : '_' . $subversion);
+              $variables['theme_hook_suggestions'][] = 'node__quote__v' . $version . (!$subversion ? '' : '_' . str_replace('-', '_', $subversion));
               //dpm($variables['theme_hook_suggestions']);
             }
             elseif($variables['node']->title == 'Request a Quote page v9' || $variables['node']->title == 'Request a Quote page v9 Final') {
