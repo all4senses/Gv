@@ -12,12 +12,7 @@
         var turned_off = null; //true;
         var turned_off_suppressed = null;
         
-        $(".visit-site-btn, table .company a, table a.logo, table a.link").click(function(){
-            turned_off = true;
-            turned_off_suppressed = true;
-        });
-        
-        jQuery('.exit-intent-form').keydown(function (event) { 
+        $('.exit-intent-form').keydown(function (event) { 
 
             // Stop changing focus on the last element in the form section
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
@@ -36,7 +31,7 @@
         //             turned_off = true;
         //             console.log(e);
 
-        //               $("body").addClass('opened-popup');
+        //               $$("body").addClass('opened-popup');
           
         //               $.fn.popup("subscribe");
         //         }
@@ -50,7 +45,7 @@
                 if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
                     turned_off = true;
 
-                      $("body").addClass('opened-popup');
+                      $$("body").addClass('opened-popup');
           
                       $.fn.popup("subscribe");
                 }
@@ -70,7 +65,7 @@
 
         $subscribeFormEmail.on('change keydown', function(){
             var email = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            var $this = jQuery(this);
+            var $this = $(this);
 
             if ( $this.val() === "" || !email.test($this.val()) ) {
                 $this.removeClass('valid');

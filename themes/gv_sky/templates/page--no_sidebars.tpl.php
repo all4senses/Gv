@@ -1,4 +1,5 @@
 <?php 
+  drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
 ?>
 
   <header id="header" role="banner">
