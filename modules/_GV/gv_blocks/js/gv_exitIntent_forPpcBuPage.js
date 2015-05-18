@@ -17,8 +17,12 @@
             turned_off = true;
             turned_off_suppressed = true;
         });
+
+        // if ( $.cookie('exit-bu') === 'off' ) {
+        //     turned_off = true;
+        // }
         
-        jQuery('.exit-intent-form').keydown(function (event) { 
+        $('.exit-intent-form').keydown(function (event) { 
 
             // Stop changing focus on the last element in the form section
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
@@ -26,7 +30,7 @@
             }
         }); 
 
-        if ( !isIE && !isIE11 && !isMobile ) {
+        if ( !isIE && !isIE11 && !isMobile && !turned_off ) {
             window.history.replaceState({id: 'gv_exit-init'}, '', '');
             window.history.pushState({id: 'gv_exit-control'}, '', '');
 
@@ -35,11 +39,11 @@
                 
                 if (!turned_off && 'state' in window.history && window.history.state !== null && window.history.state.id !== 'gv_exit-control') {    
                     turned_off = true;
-                    console.log(e);
 
                       $$("body").addClass('opened-popup');
           
                       $.fn.popup("exit");
+                      // $.cookie('exit-bu', 'off', {path:'/'});
                 }
             });
         }
@@ -54,6 +58,7 @@
                       $$("body").addClass('opened-popup');
           
                       $.fn.popup("exit");
+                      // $.cookie('exit-bu', 'off', {path:'/'});
                 }
             });
             
