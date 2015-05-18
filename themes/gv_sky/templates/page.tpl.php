@@ -2,7 +2,7 @@
 
       drupal_add_js('/sites/all/themes/gv_sky/js/global.js');
       if (!$is_admin) {
-        //drupal_static_reset('drupal_add_css');
+        drupal_static_reset('drupal_add_css');
       }
 
       if ($is_front) {

@@ -841,6 +841,11 @@ function gv_process_page(&$variables) {
     //module_invoke('admin_menu', 'suppress');
     $variables['theme_hook_suggestions'][] = 'page__url__iframe';
     
+    global $user;
+    if (!$user->uid) {
+      drupal_static_reset('drupal_add_css');
+    }
+      
     if(@arg(2) == 'top5bu') {
       drupal_add_css(path_to_theme() . '/css/compare.css', array('group' => CSS_DEFAULT, 'every_page' => TRUE));
     }
