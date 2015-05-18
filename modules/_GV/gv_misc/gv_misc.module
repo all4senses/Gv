@@ -16062,7 +16062,7 @@ function gv_misc_getVideoInfo($video_id, $provider) {
   if ($data_from) {
     $data_from = json_decode($data_from);
     
-    if ($provider == 'Wistia') {
+    if ($provider == 'Wistia' && !empty($data_from->thumbnail->url)) {
       // correct size param
       $thumb_url = explode('image_crop_resized=', $data_from->thumbnail->url);
       //dpm($thumb_url);
