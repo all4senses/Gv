@@ -5,7 +5,7 @@
        
        var isIE = document.all && !window.atob;
        var isIE11 = window.navigator.msPointerEnabled;
-       var isMobile = $$('html').hasClass('mobile');
+       var isMobile = $('html').hasClass('mobile');
        
        // Exit intent functionality.
        
@@ -36,7 +36,7 @@
         //             turned_off = true;
         //             console.log(e);
 
-        //               $$("body").addClass('opened-popup');
+        //               $("body").addClass('opened-popup');
           
         //               $.fn.popup("subscribe");
         //         }
@@ -50,7 +50,7 @@
                 if (!turned_off && e.pageY - $(window).scrollTop() <= 1) {    
                     turned_off = true;
 
-                      $$("body").addClass('opened-popup');
+                      $("body").addClass('opened-popup');
           
                       $.fn.popup("subscribe");
                 }
@@ -64,9 +64,9 @@
             $.fn.popup("close");
         });
 
-        var $subscribeForm = $$('#gv-misc-exitsubscribe-form');
-        var $subscribeFormEmail = $subscribeForm.find('#edit-email');
-        var $subscribeFormSubmit = $subscribeForm.find('#edit-submit');
+        var $subscribeForm = $('#gv-misc-exitsubscribe-form');
+        var $subscribeFormEmail = $subscribeForm.find('.form-text');
+        var $subscribeFormSubmit = $subscribeForm.find('.form-submit');
 
         $subscribeFormEmail.on('change keydown', function(){
             var email = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
