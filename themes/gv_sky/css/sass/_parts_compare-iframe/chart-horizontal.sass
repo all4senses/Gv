@@ -1,3 +1,6 @@
+body
+	overflow: hidden
+
 .chart.horizontal
 	width: 100%
 	background: white
@@ -93,7 +96,8 @@
 				width: perc(177px, 1130px)
 
 			&-php-1
-				width: perc(177px, 1130px)
+				// width: perc(177px, 1130px)
+				width: perc(120px, 1130px)
 
 				// The 'Bottom Line' column on the reviews page
 				.page-node-98 &
@@ -395,6 +399,11 @@
 			// Setup
 			&-php-3
 				text-transform: uppercase
+
+			// Money Back iFrame
+			&-php-1
+				+m(736)
+					display: none
 
 
 			// Money Back
