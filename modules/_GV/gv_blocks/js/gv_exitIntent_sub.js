@@ -18,9 +18,13 @@
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
               event.preventDefault();     // Prevent character input
             }
-        }); 
+        });
 
-        // if ( !isIE && !isIE11 && !isMobile ) {
+        // if ( $.cookie('exit-sub') === 'off' ) {
+        //     turned_off = true;
+        // } 
+
+        // if ( !isIE && !isIE11 && !isMobile && !turned_off) {
         //     window.history.replaceState({id: 'gv_exit-init'}, '', '');
         //     window.history.pushState({id: 'gv_exit-control'}, '', '');
 
@@ -33,7 +37,8 @@
 
         //               $$("body").addClass('opened-popup');
           
-        //               $.fn.popup("subscribe");
+                      // $.fn.popup("subscribe");
+                      // $.cookie('exit-sub', 'off', {path:'/'});
         //         }
         //     });
         // }
@@ -48,6 +53,7 @@
                       $$("body").addClass('opened-popup');
           
                       $.fn.popup("subscribe");
+                      // $.cookie('exit-sub', 'off', {path:'/'});
                 }
             });
             
