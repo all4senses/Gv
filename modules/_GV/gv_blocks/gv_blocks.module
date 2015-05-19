@@ -429,6 +429,16 @@ function gv_blocks_block_info() {
     'info' => 'Home service types',
     'cache' => DRUPAL_NO_CACHE,
   );
+
+  $blocks['how_it_works'] = array(
+    'info' => 'How It Works',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $blocks['home_testimonials'] = array(
+    'info' => 'Home Testimonials',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   $blocks['latest_posts_rotated'] = array(
     'info' => 'Latest Posts rotated',
@@ -966,13 +976,21 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getGoogleRemarketingCode();
       break;
     
-    
     case 'home_service_types':
       $block['subject'] = '';
       $block['content'] = gv_blocks_getHomeServiceTypes();
       break;
-    
-    
+
+    case 'how_it_works':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getHowItWorks();
+      break;
+
+    case 'home_testimonials':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_getTestimonials();
+      break;
+       
     case 'latest_posts_rotated':
       $block['subject'] = '';
       $block['content'] = gv_blocks_getLatestPostsRotated();
@@ -1661,7 +1679,7 @@ function gv_blocks_getLatestPostsRotated() {
       $i++;
   }
 
-  $out = '<section class="section four posts"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">Having researched over 300 service providers,В our advisors identify the best solution for each buyer.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></div></section>';  
+  $out = '<section class="section four posts"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading">Latest Blog Posts</h2><p class="section-title-desc">We know business tech solutions inside and out. Check out our blog to learn more on how you can improve your bottom line.</p><a href="/blog" class="section-title-button"><span class="section-title-button-text">View All Posts</span></a></div><ul class="latest-posts">' . $fragments . '</ul></div></section>';  
   return $out;
 
 }
@@ -1837,7 +1855,7 @@ function gv_blocks_getHomeServiceTypes() {
   
   $service_types_home = array('bu' => array('title' => 'Business VoIP', 'key' => 'page-compare-business-voip-providers', 'erating_field' => ''), 'pbx' => array('title' => 'Hosted PBX', 'key' => 'page-compare-pbx-voip-providers', 'erating_field' => 'pbx'), 'sip' => array('title' => 'SIP Trunking', 'key' => 'page-compare-sip-voip-providers', 'erating_field' => 'sip'), 'wc' => array('title' => 'Web Conference', 'key' => 'web-conferencing-voip-providers', 'erating_field' => 'wc'), 're' => array('title' => 'Residential VoIP', 'key' => 'page-compare-residential-voip-providers', 'erating_field' => 'residential'), 'cc' => array('title' => 'Call Centers', 'key' => 'page-compare-cc-voip-providers', 'erating_field' => 'ifa') );
   
-  $out .= '<section class="section one solutions"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading section-title-heading__medium"><span class="section-title-heading-inner">Find</span> Providers</h2><p class="section-title-desc">Having researched over 300 service providers,В our advisors identify the best solution for each buyer.</p></div><ul class="solutions-list">';
+  $out .= '<section class="section one solutions"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading section-title-heading__medium"><span class="section-title-heading-inner">Find</span> Providers</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p></div><ul class="solutions-list">';
 
 
   foreach ($service_types_home as $service_type => $data) {
@@ -1865,7 +1883,15 @@ function gv_blocks_getHomeServiceTypes() {
   } // End of foreach ($service_types_home as $service_type => $data) {
 
   $out .= '</ul></div></section>';
-  $out .= '
+  
+  return $out;
+}
+/**
+ * How it works block.
+ */
+function gv_blocks_getHowItWorks() {
+
+  $out = '
   <section class="section two steps">
     <div class="section-title section-title__center">
       <h2 class="section-title-heading">How Does GetVoIP Work?</h2>
@@ -1897,8 +1923,16 @@ function gv_blocks_getHomeServiceTypes() {
         <p class="step-desc">Narrow recommendations to your specific needs. Instantly review and signup. </p>
       </div>
     </div>
-  </section>
+  </section>';
+  
+  return $out;
+}
+/**
+ * Home Testimonials block.
+ */
+function gv_blocks_getTestimonials() {
 
+  $out = '
   <section class="section three testimonials">
     <div class="section-title section-title__center">
       <h2 class="section-title-heading">Over <span class="section-title-heading-highlight">1 Million</span> Happy Businesses Served.</h2>
