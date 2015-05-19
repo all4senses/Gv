@@ -75,11 +75,15 @@
    ========================================================================== */
 	
 	$$('.blog-posts-item').each(function(){
-		var $link = jQuery(this).find('.blog-posts-item-title-link').attr('href');
 
 		jQuery(this).find('.blog-posts-item-img-actual').click(function(){
-			window.location = $link;
 		});
+	});
+
+	$$('.blog-posts').on('click', '.blog-posts-item-img-actual', function(){
+		var $link = jQuery(this).parent().parent().find('.blog-posts-item-title-link').attr('href');
+
+		window.location = $link;
 	});
 
 
