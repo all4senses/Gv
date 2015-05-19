@@ -84,15 +84,16 @@
             e.preventDefault();
             
             if ( $subscribeFormEmail.hasClass('valid') ) {
+              
                 //$subscribeForm.submit();
                 
                 (jQuery).ajax({
             
-                url: '/subscr', 
-                data: {
+                    url: '/subscr', 
+                    data: {
                         op: 'newsletter',
                         url: window.location.href,
-                        email: $('#gv-misc-exitsubscribe-form input[name="email"]').val(), //$('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        email: $('#gv-misc-exitsubscribe-form input[name="email"]').val(),
                         referrer: document.referrer
                        
                       }, 
@@ -102,14 +103,13 @@
                     success: function(data) 
                             { 
                                 if(!data.error) {
-                                    console.log('The header is arrived!');
-                                    console.log(data);
+                                    //console.log(data);
                                     $.fn.popup("close");
                                     alert(data.message);
                                 }
                                 return false;
                             } 
-            }); // end of (jQuery).ajax
+                }); // end of (jQuery).ajax
             
             
             
