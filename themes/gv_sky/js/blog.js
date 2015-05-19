@@ -161,6 +161,8 @@ $$('.blog-posts-load').click(function(){
 			filterApplication($loadedReviews, false);
 
 			jQuery($loadedReviews).css('display', 'none').insertBefore('.blog-posts-gap:nth-last-child(2)').slideDown();
+			hideNew($loadedReviews);
+
 			jQuery('.blog-posts-item').after(' ');
 			// fixThirdPostMargin();
 			$$('.blog-posts-load').removeClass('loading');
@@ -233,6 +235,8 @@ function filterApplication($subject, $category) {
 }
 
 function preparePosts4Filter($subject) {
+		// console.log($cat);
+		// console.log($subject);
 		if ( $cat != 'all' ) {
 
 			$subject.each(function(){
@@ -248,5 +252,23 @@ function preparePosts4Filter($subject) {
 		} else {
 			$subject.addClass('show').show('300');
 		}
+}
 
+function hideNew($subject) {
+		if ( $cat != 'all' ) {
+
+			$subject.each(function(){
+				var $item_cat = jQuery(this).find('.blog-posts-item-category').data('category');
+				console.log($item_cat);
+
+				if ( $cat !== $item_cat ) {
+					jQuery(this).removeClass('show').css('display', 'none');
+
+				} else {
+					jQuery(this).addClass('show').css('display', 'inline-block');
+				}
+			});
+		} else {
+			$subject.addClass('show').css('display', 'inline-block');
+		}
 }
