@@ -84,7 +84,33 @@
             e.preventDefault();
             
             if ( $subscribeFormEmail.hasClass('valid') ) {
-                $subscribeForm.submit();
+                //$subscribeForm.submit();
+                
+                (jQuery).ajax({
+            
+                url: '/subscr', 
+                data: {
+                        op: 'newsletter',
+                        url: window.location.href,
+                        email: '', //$('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        referrer: document.referrer
+                       
+                      }, 
+                    type: 'POST', 
+                    dataType: 'json'
+                    , 
+                    success: function(data) 
+                            { 
+                                if(!data.error) {
+                                    console.log('The header is arrived!');
+                                    console.log(data);
+                                }
+                                return false;
+                            } 
+            }); // end of (jQuery).ajax
+            
+            
+            
             } else {
                 $subscribeFormEmail.addClass('error');
             }            

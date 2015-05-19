@@ -103,7 +103,12 @@ function gv_misc_menu() {
   ); 
   
    
-  
+  $items['subscr'] = array(
+    'title' => 'Save a subscribtion email',
+    'page callback' => 'gv_misc_subscribe_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ); 
   
   
   $items['referer'] = array(
@@ -2707,6 +2712,58 @@ function gv_misc_flushCache() {
   
   drupal_set_message('Cache is flushed.', 'warning');
   drupal_goto('');
+}
+
+
+/**
+ * Save a email, ajax
+ */
+function gv_misc_subscribe_ajax() {
+  
+  $message = 'Thank you for subscribing to our newsletter.';
+  
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }   
+
+  /*
+  if (!empty($post['url']) && !empty($post['op']) && !empty($post['email'])) {
+    
+        
+      // Check if submitted email was submitted previously.
+      $query = db_select('gv_emails_subscribed', 'e')  
+            ->fields('e', array('email'));
+      $query->condition('e.email', $form_state['values']['email']);
+      $email = $query->execute()->fetchField();
+      if ($email) {
+        $message = 'Email ' . $form_state['values']['email'] . ' has been submitted already!';
+      }
+      else {
+        // Get a blog category
+        $blog_cat = NULL;
+        $nid = str_replace('node/', '', $_GET['q']);
+        if ($nid && is_numeric($nid)) {
+          $query = db_select('field_revision_field_blog_category', 'b')
+                ->fields('b', array('field_blog_category_value'));
+          $query->condition('b.entity_id', $nid);
+          $blog_cat = $query->execute()->fetchField();
+        }  
+
+        $verification_code = md5(time());
+        db_insert('gv_emails_subscribed')
+          ->fields(array(
+            'email'=> $form_state['values']['email'],
+            'timestamp'=> time(),
+            'code' => $verification_code,
+            'source' => $blog_cat,
+          ))
+          ->execute();
+      }    
+      
+  }
+  */
+  
+  drupal_json_output(array('status' => TRUE, 'post' => $post, 'message' => $message));
 }
 
 
