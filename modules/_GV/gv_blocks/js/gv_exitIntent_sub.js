@@ -92,7 +92,7 @@
                 data: {
                         op: 'newsletter',
                         url: window.location.href,
-                        email: '', //$('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
+                        email: $('#gv-misc-exitsubscribe-form input[name="email"]').val(), //$('input[id="email"]').val() != $('input[id="email"]').attr('title') ? $('input[id="email"]').val() : '',
                         referrer: document.referrer
                        
                       }, 
