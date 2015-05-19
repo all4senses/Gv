@@ -104,6 +104,8 @@
                                 if(!data.error) {
                                     console.log('The header is arrived!');
                                     console.log(data);
+                                    $.fn.popup("close");
+                                    alert(data.message);
                                 }
                                 return false;
                             } 
