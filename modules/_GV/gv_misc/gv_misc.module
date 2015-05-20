@@ -6594,6 +6594,12 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   // dpm($input_providers_data);
   
+  if (strpos($image_style_name, '_retina') == FALSE) {
+    $gap_between_logos = 10;
+  } else {
+    $gap_between_logos = 20;
+  }
+  
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
@@ -6608,7 +6614,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
           $out_size['h'] = $input_image['info'][1];
         }
         else {
-          $out_size['h'] += 10 + $input_image['info'][1];
+          $out_size['h'] += $gap_between_logos + $input_image['info'][1];
         }
         // Set once a width of the sprite by the widest one.
         if (empty($out_size['w']) || $out_size['w'] < $input_image['info'][0]) {
@@ -6634,6 +6640,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     // Reset the sprite data to avoid remaining the old data. 
     $gv_providers_sprites[$providers_logos_sprite_name] = array();
     
+    
     foreach ($providers_logos_sprite as $nid => $provider) {
       // $itokPos = strpos($provider['themed_image_src'], "?itok");
       // $newStr = substr($provider['themed_image_src'], 0, $itokPos);
@@ -6650,7 +6657,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
         $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['h'] = $input_image['info'][1];
         $gv_providers_sprites[$providers_logos_sprite_name]['time'] =  time();
         
-        $current_y += 10 + $input_image['info'][1];
+        $current_y += $gap_between_logos + $input_image['info'][1];
       }
     }
   
