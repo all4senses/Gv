@@ -57,11 +57,13 @@
 
         $('.lpv10-form .input').each(function(){
           $(this).focus(function(){
-            $(this).parents('.fieldset').addClass('focus');
+            $this.parents('.fieldset').addClass('focus');
           });
+
           $(this).blur(function(){
             $(this).parents('.fieldset').removeClass('focus');
           });
+
 
           $(this).keyup(function(){
             if ( $(this).val() === '' ) {

@@ -393,13 +393,21 @@ form
   position: relative
   &.input-field .wrap
     max-height: 55px
+    position: relative
   p.question
     font-weight: 600
     font-size: 16px
     color: $grey-blue
     line-height: 1em
     padding: 0 0 11px
-  input[type="text"],
+
+  input[type="text"]
+    width: 85%
+    height: 100%
+    border: 0
+    background: transparent
+
+  &.input-field .wrap,
   .choice,
   .checkbox-choice
     height: 100%
@@ -735,8 +743,11 @@ form
     font-weight: 500
     transition: all 0.2s
     
-    &:focus
-      border: 1px solid $contrast-color
+    // &:focus
+    //   border: 1px solid $contrast-color
+
+  &.focus .wrap
+    border: 1px solid $contrast-color
 
 .fieldset.half
   width: 49.1%
@@ -873,7 +884,8 @@ label.error
     .question
       color: #e34515
 
-    .input
+    // .input
+    .wrap
       border-color: #e34515
 
 
