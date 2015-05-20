@@ -6495,7 +6495,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     //'top_ifa_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
     'top_ifa_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
       
-    'top_ifa_providers_RETINA' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
+    //'top_ifa_providers_RETINA' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
       
       
       
@@ -6548,7 +6548,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
 //      dpm('new style used');
 //    }
     
-    $image_style_name = $providers_logos_sprite['image_style'];
+    $image_style_name = $providers_logos_sprite['image_style'] . '_retina';
     //dpm($providers_logos_sprite_name . ' => ' . $image_style_name);
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
@@ -10688,7 +10688,7 @@ function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick =
     // else 
     //   {
 
-    if ($gv_providers_sprites[$sprite_name]['data'][$nid]['w'] < 200) {
+    if ($gv_providers_sprites[$sprite_name]['data'][$nid]['h'] < 80) {
       return '<div class="sprite-div" title="Visit ' . $all_data_quick[$nid]['name'] . '" style="width: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['w'] . 'px; height: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['h'] . 'px; background: url('. "'/" . $out_sprite_path . $sprite_name . '.png?' . $gv_providers_sprites[$sprite_name]['time'] . "')" . ' no-repeat 0 -' . $gv_providers_sprites[$sprite_name]['data'][$nid]['y'] . 'px transparent;"></div>';
     }
     else {
@@ -10956,9 +10956,9 @@ function gv_misc_getProviderQuickData($target, $data) {
           
                               '/crm-software' => 'top_crm_providers',
 
-                              //'/fax' => 'top_ifa_providers',
+                              '/fax' => 'top_ifa_providers',
           
-                              '/fax' => 'top_ifa_providers_RETINA',
+                              //'/fax' => 'top_ifa_providers_RETINA',
 
                               '/canada' => 'top_ca_providers',
 
