@@ -206,88 +206,39 @@ iframe[name="google_conversion_frame"]
 		right: 2px
 		top: 8px
 
-// @-webkit-keyframes animateErrorTip
-// 	0%
-// 		width: 0
-// 		left: 0px
-// 		top: 3px
-// 	54%
-// 		width: 0
-// 		left: 0px
-// 		top: 3px
-// 	70%
-// 		width: 14px
-// 		left: -2px
-// 		top: 8px
-// 	84%
-// 		width: 5px
-// 		left: 5px
-// 		top: 10px
-// 	100%
-// 		width: 8px
-// 		left: 3px
-// 		top: 10px
-
-
-// @keyframes animateErrorTip
-// 	0%
-// 		width: 0
-// 		left: 0px
-// 		top: 3px
-// 	54%
-// 		width: 0
-// 		left: 0px
-// 		top: 3px
-// 	70%
-// 		width: 14px
-// 		left: -2px
-// 		top: 8px
-// 	84%
-// 		width: 5px
-// 		left: 5px
-// 		top: 10px
-// 	100%
-// 		width: 8px
-// 		left: 3px
-// 		top: 10px
-
-
-@-webkit-keyframes animateErrorLong
+@-webkit-keyframes animateError
 	0%
-		width: 0
-		right: 12px
-		top: 12px
+		transform: scale(0.4)
+		-webkit-transform: scale(0.4)
+		opacity: 0
 	65%
-		width: 0
-		right: 12px
-		top: 12px
+		transform: scale(0.4)
+		-webkit-transform: scale(0.4)
+		opacity: 0
 	84%
-		width: 14px
-		right: 0px
-		top: 7px
+		transform: scale(1.15)
+		-webkit-transform: scale(1.15)
 	100%
-		width: 12px
-		right: 2px
-		top: 8px
+		transform: scale(1)
+		-webkit-transform: scale(1)
 
 
-@keyframes animateErrorLong
+@keyframes animateError
 	0%
-		width: 0
-		right: 12px
-		top: 12px
+		transform: scale(0.4)
+		-webkit-transform: scale(0.4)
+		opacity: 0
 	65%
-		width: 0
-		right: 12px
-		top: 12px
+		transform: scale(0.4)
+		-webkit-transform: scale(0.4)
+		opacity: 0
 	84%
-		width: 14px
-		right: 0px
-		top: 7px
+		transform: scale(1.15)
+		-webkit-transform: scale(1.15)
 	100%
-		width: 12px
-		right: 4px
-		top: 8px
+		transform: scale(1)
+		-webkit-transform: scale(1)
+
 
 
 @-webkit-keyframes rotatePlaceholder
@@ -408,6 +359,14 @@ iframe[name="google_conversion_frame"]
 			animation: 4.25s ease-in rotatePlaceholder
 			-webkit-animation: 4.25s ease-in rotatePlaceholder
 
+	&-wrap
+		.invalid.animate &
+			position: relative
+			z-index: 2
+			animation: 0.55s animateError
+			-webkit-animation: 0.55s animateError
+			+transform-origin(50% 10px)
+
 
 	&-line
 		position: absolute
@@ -438,9 +397,6 @@ iframe[name="google_conversion_frame"]
 				animation: 0.75s animateSuccessTip
 				-webkit-animation: 0.75s animateSuccessTip
 
-			.invalid.animate &
-				animation: 0.75s animateErrorLong
-				-webkit-animation: 0.75s animateErrorLong
 
 		&.long
 			+transform(rotate(-45deg))
@@ -459,9 +415,9 @@ iframe[name="google_conversion_frame"]
 				animation: 0.75s animateSuccessLong
 				-webkit-animation: 0.75s animateSuccessLong
 
-			.invalid.animate &
-				animation: 0.75s animateErrorLong
-				-webkit-animation: 0.75s animateErrorLong
+			// .invalid.animate &
+			// 	animation: 0.75s animateError ease 0s infinite
+			// 	-webkit-animation: 0.75s animateError ease 0s infinite
 
 
 	&-placeholder
