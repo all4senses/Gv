@@ -6594,12 +6594,13 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   
   // dpm($input_providers_data);
   
-  if (strpos($image_style_name, '_retina') == FALSE) {
-    $gap_between_logos = 10;
-  } else {
-    $gap_between_logos = 20;
-  }
+//  if (strpos($image_style_name, '_retina') === FALSE) {
+//    $gap_between_logos = 10;
+//  } else {
+//    $gap_between_logos = 20;
+//  }
   
+  $gap_between_logos = 10;
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
