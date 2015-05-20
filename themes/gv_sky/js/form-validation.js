@@ -21,10 +21,19 @@
 				if ( $(this).hasClass('required') ) {
 					$(this).find('.input').not('.phone, .email').on('change keydown', function(){
 						if ( $(this).val() === "" || $(this).val() === null) {
-							$(this).parents('.fieldset').removeClass('valid');
+							makeInvalid($(this).parents('.fieldset'));
 						} else{
-							$(this).parents('.fieldset').addClass('valid').removeClass('error');
+							makeValid($(this).parents('.fieldset'));
 						}
+					});
+					$(this).find('.input').on('blur', function(){
+			            var $this = $(this);
+
+			            if ( $this.parents('.fieldset').hasClass('filled') ) {
+			             $this.parents('.fieldset').addClass('animate');
+			            } else {
+			             $this.parents('.fieldset').removeClass('animate');
+			            }
 					});
 				} else {
 					$(this).addClass('valid');
@@ -36,7 +45,7 @@
 					$(this).siblings().removeClass('checked');
 					$(this).addClass('checked');
 					$(this).find('.input').prop('checked', true);
-					$(this).parents('.fieldset').addClass('valid').removeClass('error');
+					makeValid($(this).parents('.fieldset'));
 				});
 			});
 
@@ -46,14 +55,14 @@
 						$(this).addClass('checked');
 						$(this).find('.checkbox').prop('checked', true);
 						$(this).find('.input').prop('checked', true);
-						$(this).parents('.fieldset').addClass('valid').removeClass('error');
+						makeValid($(this).parents('.fieldset'));
 					} else {		
 						$(this).removeClass('checked');
 						$(this).find('.input').prop('checked', false);
 						if ( !$(this).hasClass('checked') && !$(this).siblings().hasClass('checked') ) {
-							$(this).parents('.fieldset').removeClass('valid');
+							makeInvalid($(this).parents('.fieldset'));
 						} else {
-							$(this).parents('.fieldset').addClass('valid');
+							makeValid($(this).parents('.fieldset'));
 						}
 					}
 				});
@@ -62,12 +71,12 @@
 
 			this.find('.phone').each(function(){
 				$(this).keydown(function (event) {
-		            if( !(     event.keyCode === 8                                // backspace
+		            if( !(     event.keyCode === 8                              // backspace
 		                    || event.keyCode === 9 								// tab
-		                    || event.keyCode === 16 								// shift
-		                    || event.keyCode === 17 								// ctrl
-		                    || event.keyCode === 18 								// alt
-		                    || event.keyCode === 46                              // delete
+		                    || event.keyCode === 16 							// shift
+		                    || event.keyCode === 17 							// ctrl
+		                    || event.keyCode === 18 							// alt
+		                    || event.keyCode === 46                             // delete
 		                    || (event.keyCode >= 35 && event.keyCode <= 40)     // arrow keys/home/end
 
 		                    || (event.keyCode >= 48 && event.keyCode <= 57)     // numbers on keyboard
@@ -80,10 +89,10 @@
 			            }
 				});
 				$(this).change(function(){
-					if ( $(this).val() === "" || $(this).val().length < 7 ) {
-						$(this).parents('.fieldset').removeClass('valid');
+					if ( $(this).val() == "" || $(this).val().length < 7 ) {
+						makeInvalid($(this).parents('.fieldset'));
 					} else {
-						$(this).parents('.fieldset').addClass('valid').removeClass('error');
+						makeValid($(this).parents('.fieldset'));
 					}
 				});
 			});
@@ -92,10 +101,10 @@
 				$(this).on('change keydown', function(){
 				    var email = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
-					if ( $(this).val() === "" || !email.test($(this).val()) ) {
-						$(this).parents('.fieldset').removeClass('valid');
+					if ( $(this).val() == "" || !email.test($(this).val()) ) {
+						makeInvalid($(this).parents('.fieldset'));
 					} else {
-						$(this).parents('.fieldset').addClass('valid').removeClass('error');
+						makeValid($(this).parents('.fieldset'));
 					}
 				});
 			});
@@ -117,8 +126,8 @@
 				if ( !$(this).hasClass('valid') ) {
 					problem = true;
 					$(this).addClass('error');
-					console.log('invalid');
-					console.log($(this).attr('class'));
+					// console.log('invalid');
+					// console.log($(this).attr('class'));
 
 				} else {
 					$(this).removeClass('error');
@@ -127,18 +136,16 @@
 
 			if ( problem ) {
 				proceed = false;
-				console.log('stop');
+				// console.log('stop');
 			} else {
 				proceed = true;
-				console.log('proceed');
+				// console.log('proceed');
 			}
 
 			if ( proceed ) {
 				if ( next ) {
 					var $currentStep = this.find('.step.show');
 					var $nextStep = $currentStep.next();
-					console.log($currentStep);
-					console.log($nextStep);
 
 					$currentStep.removeClass('show');
 					$nextStep.addClass('show');
@@ -179,6 +186,13 @@
 
 			$currentStep.removeClass('show');
 			$previousStep.addClass('show');
+		}
+
+		function makeValid($subject) {
+			$subject.addClass('valid').removeClass('invalid error');
+		}
+		function makeInvalid($subject) {
+			$subject.addClass('invalid').removeClass('valid');
 		}
 
 

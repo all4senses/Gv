@@ -102,6 +102,13 @@ iframe[name="google_conversion_frame"]
 	padding: 0 20px
 	box-sizing: border-box
 
+.not-logged-in .main-wrap .tabs-wrapper
+	display: none  
+
+
+
+
+// ==== Animations =================================================================================
 
 @-moz-keyframes spin
 	100% 
@@ -116,35 +123,212 @@ iframe[name="google_conversion_frame"]
 		-webkit-transform: rotate(360deg)
 		transform: rotate(360deg)
 
+@-webkit-keyframes animateSuccessTip
+	0%
+		width: 0
+		left: 0px
+		top: 3px
+	54%
+		width: 0
+		left: 0px
+		top: 3px
+	70%
+		width: 14px
+		left: -2px
+		top: 8px
+	84%
+		width: 5px
+		left: 5px
+		top: 10px
+	100%
+		width: 8px
+		left: 3px
+		top: 10px
 
-.not-logged-in .main-wrap .tabs-wrapper
-	display: none
+
+@keyframes animateSuccessTip
+	0%
+		width: 0
+		left: 0px
+		top: 3px
+	54%
+		width: 0
+		left: 0px
+		top: 3px
+	70%
+		width: 14px
+		left: -2px
+		top: 8px
+	84%
+		width: 5px
+		left: 5px
+		top: 10px
+	100%
+		width: 8px
+		left: 3px
+		top: 10px
 
 
-.new-server-mark
-	width: 100%
-	height: 20px
-	background: rgba(222, 222, 222, 0.8)
+@-webkit-keyframes animateSuccessLong
+	0%
+		width: 0
+		right: 12px
+		top: 12px
+	65%
+		width: 0
+		right: 12px
+		top: 12px
+	84%
+		width: 14px
+		right: 0px
+		top: 7px
+	100%
+		width: 12px
+		right: 2px
+		top: 8px
 
 
+@keyframes animateSuccessLong
+	0%
+		width: 0
+		right: 12px
+		top: 12px
+	65%
+		width: 0
+		right: 12px
+		top: 12px
+	84%
+		width: 14px
+		right: 0px
+		top: 7px
+	100%
+		width: 12px
+		right: 2px
+		top: 8px
+
+// @-webkit-keyframes animateErrorTip
+// 	0%
+// 		width: 0
+// 		left: 0px
+// 		top: 3px
+// 	54%
+// 		width: 0
+// 		left: 0px
+// 		top: 3px
+// 	70%
+// 		width: 14px
+// 		left: -2px
+// 		top: 8px
+// 	84%
+// 		width: 5px
+// 		left: 5px
+// 		top: 10px
+// 	100%
+// 		width: 8px
+// 		left: 3px
+// 		top: 10px
+
+
+// @keyframes animateErrorTip
+// 	0%
+// 		width: 0
+// 		left: 0px
+// 		top: 3px
+// 	54%
+// 		width: 0
+// 		left: 0px
+// 		top: 3px
+// 	70%
+// 		width: 14px
+// 		left: -2px
+// 		top: 8px
+// 	84%
+// 		width: 5px
+// 		left: 5px
+// 		top: 10px
+// 	100%
+// 		width: 8px
+// 		left: 3px
+// 		top: 10px
+
+
+@-webkit-keyframes animateErrorLong
+	0%
+		width: 0
+		right: 12px
+		top: 12px
+	65%
+		width: 0
+		right: 12px
+		top: 12px
+	84%
+		width: 14px
+		right: 0px
+		top: 7px
+	100%
+		width: 12px
+		right: 2px
+		top: 8px
+
+
+@keyframes animateErrorLong
+	0%
+		width: 0
+		right: 12px
+		top: 12px
+	65%
+		width: 0
+		right: 12px
+		top: 12px
+	84%
+		width: 14px
+		right: 0px
+		top: 7px
+	100%
+		width: 12px
+		right: 4px
+		top: 8px
+
+
+@-webkit-keyframes rotatePlaceholder
+	0%
+		transform: rotate(-45deg)
+		-webkit-transform: rotate(-45deg)
+	5%
+		transform: rotate(-45deg)
+		-webkit-transform: rotate(-45deg)
+	12%
+		transform: rotate(-405deg)
+		-webkit-transform: rotate(-405deg)
+	100%
+		transform: rotate(-405deg)
+		-webkit-transform: rotate(-405deg)
+
+
+@keyframes rotatePlaceholder
+	0%
+		transform: rotate(-45deg)
+		-webkit-transform: rotate(-45deg)
+	5%
+		transform: rotate(-45deg)
+		-webkit-transform: rotate(-45deg)
+	12%
+		transform: rotate(-405deg)
+		-webkit-transform: rotate(-405deg)
+	100%
+		transform: rotate(-405deg)
+		-webkit-transform: rotate(-405deg)
 
   
-  
-  
 
+
+
+// ==== iFrame Fixes =================================================================================
 .page-get-iframe #main
 	padding: 0
 
 .page-get-iframe .chart.horizontal.sticky-table
 	display: none
-
-// .page-get-iframe .tbody-item.tbody-item-php
-//   padding: 15px 10px 0 20px
-
-// .page-get-iframe .chart td
-//   padding-bottom: 20px
-
-
   
 
 .page-get-iframe .get-quote-wrapper
@@ -166,3 +350,151 @@ iframe[name="google_conversion_frame"]
 
 .page-get-iframe .get-quote-form-button-text:after 
 	display: none
+
+
+
+
+// ==== Field Checkmarks =================================================================================
+
+
+.checkmark
+	position: absolute
+	right: 12px
+	+valign(52%)
+	+size(20)
+	border-radius: 50%
+	background-color: white
+	display: none
+
+	+transform(scale(0.8))
+	+transform-origin(100% -180%)
+
+	.valid &
+		border: 3px solid $pros
+	.invalid &
+		border: 3px solid $cons
+
+	.animate &
+		display: block
+
+	// .focus &
+	// 	display: none
+
+	&:before
+		content: ''
+		position: absolute
+		top: -4px
+		left: -10px
+		width: 15px
+		height: 30px
+		border-radius: 30px 0 0 30px
+		background: white
+		+transform(rotate(-45deg))
+		+transform-origin(15px 15px 0)
+
+	&:after
+		content: ''
+		position: absolute
+		top: -5px
+		left: 8px
+		width: 15px
+		height: 30px
+		border-radius: 0 30px 30px 0
+		background: white
+		+transform(rotate(-45deg))
+		+transform-origin(0 15px 0)
+
+		.valid.animate &
+			animation: 4.25s ease-in rotatePlaceholder
+			-webkit-animation: 4.25s ease-in rotatePlaceholder
+
+
+	&-line
+		position: absolute
+		z-index: 2
+		display: block
+		height: 3px
+		border-radius: 2px
+
+		.valid &
+			background-color: $pros
+		.invalid &
+			background-color: $cons
+
+		&.short
+			+transform(rotate(45deg))
+
+			.valid &
+				width: 8px
+				left: 3px
+				top: 10px
+
+			.invalid &
+				width: 12px
+				left: 4px
+				top: 8px
+
+			.valid.animate &
+				animation: 0.75s animateSuccessTip
+				-webkit-animation: 0.75s animateSuccessTip
+
+			.invalid.animate &
+				animation: 0.75s animateErrorLong
+				-webkit-animation: 0.75s animateErrorLong
+
+		&.long
+			+transform(rotate(-45deg))
+
+			.valid &
+				width: 12px
+				right: 2px
+				top: 8px
+
+			.invalid &
+				width: 12px
+				left: 4px
+				top: 8px
+
+			.valid.animate &
+				animation: 0.75s animateSuccessLong
+				-webkit-animation: 0.75s animateSuccessLong
+
+			.invalid.animate &
+				animation: 0.75s animateErrorLong
+				-webkit-animation: 0.75s animateErrorLong
+
+
+	&-placeholder
+		position: absolute
+		top: -5px
+		left: -4px
+		top: -4px
+		left: -3px
+		z-index: 2 
+		+size(20)
+		border-radius: 50%
+
+		.valid &
+			border: 3px solid rgba(114,195,34, 0.4)
+		.invalid &
+			border: 3px solid rgba(204,72,32, 0.4)
+
+	&-fix
+		position: absolute
+		z-index: 1
+		// display: none
+		top: -2px
+		left: 6px
+		width: 4px
+		height: 28px
+		background-color: white
+		+transform(rotate(-45deg))
+
+	
+
+	
+
+	
+
+	
+
