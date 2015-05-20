@@ -6558,6 +6558,13 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     $image_style_name = $providers_logos_sprite['image_style'];
     //$image_style_name = $providers_logos_sprite['image_style'] . '_retina';
     
+    if (strpos($image_style_name, '_retina') !== FALSE) {
+      $retina = 1;
+    }else {
+      $retina = 0;
+    }
+    
+    
     //dpm($providers_logos_sprite_name . ' => ' . $image_style_name);
     
     foreach ($providers_logos_sprite['providers_views_displays'] as $providers_views_display) {
@@ -6568,6 +6575,9 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
       if ($view->result) {
         
         foreach ($view->result as $provider) {
+          
+          $input_providers_data[$providers_logos_sprite_name][$provider->nid]['image_style_name'] = $image_style_name;
+          $input_providers_data[$providers_logos_sprite_name][$provider->nid]['retina'] = $retina;
           
           $input_providers_data[$providers_logos_sprite_name][$provider->nid]['name'] = $all_data_quick[$provider->nid]['name'];
           
@@ -6600,7 +6610,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
 //    $gap_between_logos = 20;
 //  }
   
-  $gap_between_logos = 10;
+  //$gap_between_logos = 10;
   foreach ($input_providers_data as $providers_logos_sprite_name => $providers_logos_sprite) {
     
     $out_sprite['file'] = $out_sprite_path . $providers_logos_sprite_name . '.' . $out_sprite_ext;
@@ -6609,6 +6619,8 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     
     foreach ($providers_logos_sprite as $nid => $provider) {
 
+      $gap_between_logos = $provider['retina'] ? 20 : 10;
+      
       if($input_image['info'] = getimagesize($provider['themed_image_src'])) {
         // Set a height (all providers logos height + 10px between each others).
         if (empty($out_size['h'])) {
@@ -6646,17 +6658,20 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
       // $itokPos = strpos($provider['themed_image_src'], "?itok");
       // $newStr = substr($provider['themed_image_src'], 0, $itokPos);
       
-
+      $gap_between_logos = $provider['retina'] ? 20 : 10;
+      
       if ($input_image['img'] = gv_misc_loadImage($provider['themed_image_src'])) {
       // if ($input_image['img'] = gv_misc_loadImage($newStr)) {
         //$input_image['info'] = getimagesize(str_replace('%20', ' ', $provider['themed_image_src']));
         $input_image['info'] = getimagesize(urldecode($provider['themed_image_src']));
         imagecopy($out_sprite['img'], $input_image['img'], 0, $current_y, 0, 0, $input_image['info'][0], $input_image['info'][1]);
         
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['retina'] = $provider['retina'];
+        $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['gap'] = $gap_between_logos;
         $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['y'] = $current_y;
         $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['w'] = $input_image['info'][0];
         $gv_providers_sprites[$providers_logos_sprite_name]['data'][$nid]['h'] = $input_image['info'][1];
-        $gv_providers_sprites[$providers_logos_sprite_name]['time'] =  time();
+        $gv_providers_sprites[$providers_logos_sprite_name]['time'] = time();
         
         $current_y += $gap_between_logos + $input_image['info'][1];
       }
@@ -10988,9 +11003,9 @@ function gv_misc_getProviderQuickData($target, $data) {
           
                               '/crm-software' => 'top_crm_providers',
 
-                              '/fax' => 'top_ifa_providers',
+                              //'/fax' => 'top_ifa_providers',
           
-                              //'/fax' => 'top_ifa_providers_RETINA',
+                              '/fax' => 'top_ifa_providers_RETINA',
 
                               '/canada' => 'top_ca_providers',
 
