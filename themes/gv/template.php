@@ -550,7 +550,8 @@ function gv_html_head_alter(&$head_elements) {
   
   // Quick fix for Metatag, where the local node metatag title for some reason doesnt apply to the page metatag title.
   // Hope it will be solved with the newer version of the Metatag module.
-  if (!empty($head_elements['name']['#attributes']['content'])) {
+  //if (!empty($head_elements['name']['#attributes']['content'])) {
+  if (empty($altered_head_title) && !empty($head_elements['og:title']['#attributes']['content'])) {
     $altered_head_title = $head_elements['name']['#attributes']['content'];
   }
   
