@@ -4396,6 +4396,8 @@ function gv_misc_addSocialShareData_toPage($node) {
     
     if (!empty($node->metatags['title']['value'])) {
       $title = $node->metatags['title']['value'];
+      
+      dpm('title 0 = ' . $title);
     }
     else {
       //Set the right title metatag for the page if it's not defined.
@@ -4407,13 +4409,18 @@ function gv_misc_addSocialShareData_toPage($node) {
 
       if (!empty($global_metatags_config->config['title']['value'])) {
         $title = $global_metatags_config->config['title']['value'];
+        
+        dpm('title 1 = ' . $title);
       }
       else {
         $title = $node->title;
+        
+        dpm('title 2 = ' . $title);
       }
     }
   }
 
+  dpm('title 3 = ' . $title);
   
   switch ($node->type) {
     case 'blog_post':
@@ -4536,7 +4543,7 @@ function gv_misc_addSocialShareData_toPage($node) {
   $title = $altered_head_title = token_replace($title, array('node' => $node), array('language' => $language, 'sanitize' => FALSE)); //token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
   gv_misc_addMetatag('title', $title);
   
-  
+  dpm('title F = ' . $title);
   
   if (!$image){
     // Show default image - the logo.
