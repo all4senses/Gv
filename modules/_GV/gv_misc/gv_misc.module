@@ -1050,7 +1050,11 @@ function gv_misc_testPage() {
   }
   */
   
-  variable_set('image_suppress_itok_output', TRUE);
+  //variable_set('image_suppress_itok_output', TRUE);
+  
+  
+  $nid = 63; // Nextiiva
+  gv_misc_getLatestReviewsForProvider($nid);
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -16515,4 +16519,25 @@ function gv_misc_xmlsitemap_link_alter(array &$link, array $context) {
 //       dpm($link);
 //     }
 //  }
+}
+
+
+function gv_misc_getLatestReviewsForProvider($nid) {
+  
+    $query = db_select('field_data_field_ref_provider', 'r');
+            //->fields('n', array('nid', 'created'));
+    $query->leftJoin('node', 'n', 'n.nid = r.entity_id');
+    
+    $query->condition('r.field_ref_provider_target_id', $nid);
+    
+    $query->condition('n.status', 1);
+    $query->addTag('a4s');
+    $query->addTag('reviews');
+    $query->condition('n.type', 'review');
+    $query->orderBy('n.created', 'DESC');
+    $query->range(0, 3);
+
+    $results = $query->execute()->fetchAllAssoc('entity_id');
+    
+    dpm($results);
 }

@@ -22,7 +22,7 @@
           <header>
         
             <h2<?php 
-                  echo ' property="v:summary"'; 
+                  //echo ' property="v:summary"'; 
                 ?>>
                 <a href="<?php print $node_url; ?>">
                   <?php print $title; ?>
