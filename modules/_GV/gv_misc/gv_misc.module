@@ -16527,7 +16527,7 @@ function gv_misc_getLatestReviewsForProvider($nid) {
     $query = db_select('field_data_field_ref_provider', 'r')
           ->fields('r', array('entity_id'));
     $query->leftJoin('node', 'n', 'n.nid = r.entity_id');
-    $query->fields('n', array('title', 'body'));
+    $query->fields('n', array('title'));
     $query->leftJoin('field_data_field_r_rating_overall', 'o', 'o.entity_id = r.entity_id');
     $query->fields('o', array('field_r_rating_overall_value'));
     
