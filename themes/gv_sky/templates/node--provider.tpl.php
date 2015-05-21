@@ -208,7 +208,6 @@
                         
                         
                         <span itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                          <meta itemprop="itemreviewed" content="<?php echo $provider_name; ?>" />
                           <meta itemprop="rating" content="<?php echo $node->gv_rating_overall; ?>" />
                           <meta itemprop="count" content="<?php echo @$node->gv_voters; ?>" />
                         </span>
