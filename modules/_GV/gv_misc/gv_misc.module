@@ -4359,6 +4359,8 @@ function gv_misc_addSocialShareData_toPage($node) {
     );
     
   }
+  
+  /*
   if (!$title) {
     
     if (!empty($node->metatags['title']['value'])) {
@@ -4366,7 +4368,7 @@ function gv_misc_addSocialShareData_toPage($node) {
     }
     else {
       $title = $node->title;
-      
+       
       //Set the right title metatag for the page if it's not defined.
       if (isset($node->metatags['title']['value'])) {
 
@@ -4388,8 +4390,30 @@ function gv_misc_addSocialShareData_toPage($node) {
       
     }
   }
-
+  */
   
+  if (!$title) {
+    
+    if (!empty($node->metatags['title']['value'])) {
+      $title = $node->metatags['title']['value'];
+    }
+    else {
+      //Set the right title metatag for the page if it's not defined.
+      $global_metatags_config = metatag_config_load('node:' . $node->type);
+      // Use the upper level config if it's not defined for a specific content type.
+      if (!$global_metatags_config || empty($global_metatags_config->config['title']['value'])) {
+        $global_metatags_config = metatag_config_load('node');
+      }
+
+      if (!empty($global_metatags_config->config['title']['value'])) {
+        $title = $global_metatags_config->config['title']['value'];
+      }
+      else {
+        $title = $node->title;
+      }
+    }
+  }
+
   
   switch ($node->type) {
     case 'blog_post':
@@ -4502,10 +4526,17 @@ function gv_misc_addSocialShareData_toPage($node) {
   }
   
   //$title = str_replace('[site:name]', 'GetVoIP.com', $title);
-  $title = token_replace($title);
+  //$title = token_replace($title);
   
   // Strip special symbols from the title.
   //$title = htmlspecialchars_decode($title, ENT_QUOTES);
+  
+  global $language;
+  global $altered_head_title;
+  $title = $altered_head_title = token_replace($title, array('node' => $node), array('language' => $language, 'sanitize' => FALSE)); //token_replace($global_metatags_config->config['title']['value'], array('node' => $node), array('language' => $language, 'sanitize' => FALSE));
+  gv_misc_addMetatag('title', $title);
+  
+  
   
   if (!$image){
     // Show default image - the logo.
