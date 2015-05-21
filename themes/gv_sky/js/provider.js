@@ -30,23 +30,27 @@ $$('.reviews-list-item').unwrap();
 var $tabsScroll = $$('.provider-box-data-tabs').offset().top;
 
 $window.scroll(function(){
-	
-	var $windowScroll = $window.scrollTop();
-	var $scrollDiff = $windowScroll - $tabsScroll + 20;
 
-	if ( $scrollDiff > 0 ) {
-		$$('.provider-box-data-tabs').css('margin-top', $scrollDiff);
-	}
-	if ( $scrollDiff < 0 ) {
-		$$('.provider-box-data-tabs').css('margin-top', 0);
-	}
-	if ( ($scrollDiff - 70) > 0 ) {
-		$$('.provider-box-data-tabs').addClass('move');
-		$$('.provider-box-provider-sticky').addClass('show');
-	}
-	if ( ($scrollDiff - 70) < 0 ) {
-		$$('.provider-box-data-tabs').removeClass('move');
-		$$('.provider-box-provider-sticky').removeClass('show');
+	if (window.innerWidth > 736) { // Tablet and Desktop Only
+
+		var $windowScroll = $window.scrollTop();
+		var $scrollDiff = $windowScroll - $tabsScroll + 20;
+
+		if ( $scrollDiff > 0 ) {
+			$$('.provider-box-data-tabs').css('margin-top', $scrollDiff);
+		}
+		if ( $scrollDiff < 0 ) {
+			$$('.provider-box-data-tabs').css('margin-top', 0);
+		}
+		if ( ($scrollDiff - 70) > 0 ) {
+			$$('.provider-box-data-tabs').addClass('move');
+			$$('.provider-box-provider-sticky').addClass('show');
+		}
+		if ( ($scrollDiff - 70) < 0 ) {
+			$$('.provider-box-data-tabs').removeClass('move');
+			$$('.provider-box-provider-sticky').removeClass('show');
+		}\
+		
 	}
 
 });
