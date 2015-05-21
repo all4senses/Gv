@@ -16524,8 +16524,8 @@ function gv_misc_xmlsitemap_link_alter(array &$link, array $context) {
 
 function gv_misc_getLatestReviewsForProvider($nid) {
   
-    $query = db_select('field_data_field_ref_provider', 'r');
-            //->fields('n', array('nid', 'created'));
+    $query = db_select('field_data_field_ref_provider', 'r')
+            ->fields('r', array('entity_id'));
     $query->leftJoin('node', 'n', 'n.nid = r.entity_id');
     
     $query->condition('r.field_ref_provider_target_id', $nid);
