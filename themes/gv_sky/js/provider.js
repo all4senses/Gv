@@ -49,7 +49,7 @@ $window.scroll(function(){
 		if ( ($scrollDiff - 70) < 0 ) {
 			$$('.provider-box-data-tabs').removeClass('move');
 			$$('.provider-box-provider-sticky').removeClass('show');
-		}\
+		}
 		
 	}
 
