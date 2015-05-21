@@ -206,6 +206,14 @@
                           </span>
                         </div>
                         
+                        
+                        <span itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+                          <meta itemprop="itemreviewed" content="<?php echo $provider_name; ?>" />
+                          <meta itemprop="rating" content="<?php echo $node->gv_rating_overall; ?>" />
+                          <meta itemprop="count" content="<?php echo @$node->gv_voters; ?>" />
+                        </span>
+
+                        
                         <div class="provider-box-provider-review-score-fivestar"> <?php echo theme('gv_misc_fivestar_provider', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))); ?>
                         </div>
 
