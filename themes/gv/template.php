@@ -516,7 +516,7 @@ function gv_preprocess_search_results(&$variables) {
  * We are overwriting the default meta character type tag with HTML5 version.
  */
 function gv_html_head_alter(&$head_elements) {
-  //dpm($head_elements);
+  dpm($head_elements);
   $head_elements['system_meta_content_type']['#attributes'] = array(
     'charset' => 'utf-8'
   );
