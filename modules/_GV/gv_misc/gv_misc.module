@@ -6468,9 +6468,9 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
   $providers_logos_sprites = array(
     'home_top_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_top_business_cmp', 'block_1'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')),
     
-    'top_bu_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
+    //'top_bu_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
     // ???
-    //'top_bu_providers' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
+    'top_bu_providers' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
       
     'top_wc_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_wc_page'), 'listing_pos_fields' => array('field_p_erating_wc')),  
     //'top_wc_providers_vertical_chart' => array('image_style' => 'logo_provider_vertical_chart', 'providers_views_displays' => array('block_p_wc_page'), 'listing_pos_fields' => array('field_p_erating_wc')),  
@@ -10742,7 +10742,7 @@ function gv_misc_getProviderLogoFromSprite($nid, $sprite_name, $all_data_quick =
     else 
       {
       //return '<div class="sprite-div" title="Visit ' . $all_data_quick[$nid]['name'] . '" style="width: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['w']/2 . 'px; height: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['h']/2 . 'px; background: url('. "'/" . $out_sprite_path . $sprite_name . '.png?' . $gv_providers_sprites[$sprite_name]['time'] . "')" . ' no-repeat 0 ' . (!$gv_providers_sprites[$sprite_name]['data'][$nid]['y'] ? 0 : '-' . $gv_providers_sprites[$sprite_name]['data'][$nid]['y']/2) . 'px transparent;"></div>';
-      return '<div class="sprite-div" title="Visit ' . $all_data_quick[$nid]['name'] . '" style="width: ' . $sprite_background[$sprite_background_src]['info'][0]/2 . 'px; height: ' . $gv_providers_sprites[$sprite_name]['data'][$nid]['h']/2 . 'px; background: url('. "'/" . $out_sprite_path . $sprite_name . '.png?' . $gv_providers_sprites[$sprite_name]['time'] . "')" . ' no-repeat 0 ' . (!$gv_providers_sprites[$sprite_name]['data'][$nid]['y'] ? 0 : '-' . ($gv_providers_sprites[$sprite_name]['data'][$nid]['y']/2 - 1) ) . 'px transparent; background-size: 100%;"></div>';
+      return '<div class="sprite-div" title="Visit ' . $all_data_quick[$nid]['name'] . '" style="width: ' . $sprite_background[$sprite_background_src]['info'][0]/2 . 'px; height: ' . ($gv_providers_sprites[$sprite_name]['data'][$nid]['h']/2 + 1). 'px; background: url('. "'/" . $out_sprite_path . $sprite_name . '.png?' . $gv_providers_sprites[$sprite_name]['time'] . "')" . ' no-repeat 0 ' . (!$gv_providers_sprites[$sprite_name]['data'][$nid]['y'] ? 0 : '-' . ($gv_providers_sprites[$sprite_name]['data'][$nid]['y']/2 - 1) ) . 'px transparent; background-size: 100%;"></div>';
     }
     // }
     
