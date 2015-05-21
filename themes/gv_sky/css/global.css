@@ -1618,50 +1618,159 @@ input.error,
   animation-timing-function: linear;
   animation-duration: 200ms; }
 
-@-webkit-keyframes shakey {
-  0% {
-    left: -10px; }
-  25% {
-    left: 10px; }
-  50% {
-    left: -10px; }
-  75% {
-    left: 10px; }
-  100% {
-    left: 0px; } }
-@-moz-keyframes shakey {
-  0% {
-    left: -10px; }
-  25% {
-    left: 10px; }
-  50% {
-    left: -10px; }
-  75% {
-    left: 10px; }
-  100% {
-    left: 0px; } }
-@-ms-keyframes shakey {
-  0% {
-    left: -10px; }
-  25% {
-    left: 10px; }
-  50% {
-    left: -10px; }
-  75% {
-    left: 10px; }
-  100% {
-    left: 0px; } }
-@keyframes shakey {
-  0% {
-    left: -10px; }
-  25% {
-    left: 10px; }
-  50% {
-    left: -10px; }
-  75% {
-    left: 10px; }
-  100% {
-    left: 0px; } }
+.checkmark {
+  position: absolute;
+  right: 12px;
+  top: 52%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  display: none;
+  -moz-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+  transform: scale(0.8);
+  -moz-transform-origin: 100% -180%;
+  -o-transform-origin: 100% -180%;
+  -ms-transform-origin: 100% -180%;
+  -webkit-transform-origin: 100% -180%;
+  transform-origin: 100% -180%; }
+  .valid .checkmark {
+    border: 3px solid #72c322; }
+  .invalid .checkmark {
+    border: 3px solid #cc4820; }
+  .animate .checkmark {
+    display: block; }
+  .checkmark:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -10px;
+    width: 15px;
+    height: 30px;
+    border-radius: 30px 0 0 30px;
+    background: white;
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -moz-transform-origin: 15px 15px 0;
+    -o-transform-origin: 15px 15px 0;
+    -ms-transform-origin: 15px 15px 0;
+    -webkit-transform-origin: 15px 15px 0;
+    transform-origin: 15px 15px 0; }
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 8px;
+    width: 15px;
+    height: 30px;
+    border-radius: 0 30px 30px 0;
+    background: white;
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -moz-transform-origin: 0 15px 0;
+    -o-transform-origin: 0 15px 0;
+    -ms-transform-origin: 0 15px 0;
+    -webkit-transform-origin: 0 15px 0;
+    transform-origin: 0 15px 0; }
+    .valid.animate .checkmark:after {
+      animation: 4.25s ease-in rotatePlaceholder;
+      -webkit-animation: 4.25s ease-in rotatePlaceholder; }
+  .invalid.animate .checkmark-wrap {
+    position: relative;
+    z-index: 2;
+    animation: 0.55s animateError;
+    -webkit-animation: 0.55s animateError;
+    -moz-transform-origin: 50% 10px;
+    -o-transform-origin: 50% 10px;
+    -ms-transform-origin: 50% 10px;
+    -webkit-transform-origin: 50% 10px;
+    transform-origin: 50% 10px; }
+  .checkmark-line {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    height: 3px;
+    border-radius: 2px; }
+    .valid .checkmark-line {
+      background-color: #72c322; }
+    .invalid .checkmark-line {
+      background-color: #cc4820; }
+    .checkmark-line.short {
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg); }
+      .valid .checkmark-line.short {
+        width: 8px;
+        left: 3px;
+        top: 10px; }
+      .invalid .checkmark-line.short {
+        width: 12px;
+        left: 4px;
+        top: 8px; }
+      .valid.animate .checkmark-line.short {
+        animation: 0.75s animateSuccessTip;
+        -webkit-animation: 0.75s animateSuccessTip; }
+    .checkmark-line.long {
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+      .valid .checkmark-line.long {
+        width: 12px;
+        right: 2px;
+        top: 8px; }
+      .invalid .checkmark-line.long {
+        width: 12px;
+        left: 4px;
+        top: 8px; }
+      .valid.animate .checkmark-line.long {
+        animation: 0.75s animateSuccessLong;
+        -webkit-animation: 0.75s animateSuccessLong; }
+  .checkmark-placeholder {
+    position: absolute;
+    top: -5px;
+    left: -4px;
+    top: -4px;
+    left: -3px;
+    z-index: 2;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; }
+    .valid .checkmark-placeholder {
+      border: 3px solid rgba(114, 195, 34, 0.4); }
+    .invalid .checkmark-placeholder {
+      border: 3px solid rgba(204, 72, 32, 0.4); }
+  .checkmark-fix {
+    position: absolute;
+    z-index: 1;
+    top: -2px;
+    left: 6px;
+    width: 4px;
+    height: 28px;
+    background-color: white;
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg); }
+
 @-moz-keyframes spin {
   100% {
     -moz-transform: rotate(360deg); } }
