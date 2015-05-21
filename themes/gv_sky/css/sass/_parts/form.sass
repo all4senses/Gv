@@ -30,6 +30,12 @@ label
 			background-size: cover
 			+center
 
+
+
+input:-webkit-autofill
+	-webkit-box-shadow: 0 0 0px 1000px white inset !important
+
+
 input.error,
 .error input,
 .error select,
@@ -52,70 +58,150 @@ input.error,
 
 
 
-@-webkit-keyframes shakey 
-	0%  
+// ==== Field Checkmarks =================================================================================
+
+
+.checkmark
+	position: absolute
+	right: 12px
+	+valign(52%)
+	+size(20)
+	border-radius: 50%
+	background-color: white
+	display: none
+
+	+transform(scale(0.8))
+	+transform-origin(100% -180%)
+
+	.valid &
+		border: 3px solid $pros
+	.invalid &
+		border: 3px solid $cons
+
+	.animate &
+		display: block
+
+	// .focus &
+	// 	display: none
+
+	&:before
+		content: ''
+		position: absolute
+		top: -4px
 		left: -10px
-	
-	25% 
-		left: 10px
-	
-	50% 
-		left: -10px
-	
-	75% 
-		left: 10px
-	
-	100% 
-		left: 0px
+		width: 15px
+		height: 30px
+		border-radius: 30px 0 0 30px
+		background: white
+		+transform(rotate(-45deg))
+		+transform-origin(15px 15px 0)
+
+	&:after
+		content: ''
+		position: absolute
+		top: -5px
+		left: 8px
+		width: 15px
+		height: 30px
+		border-radius: 0 30px 30px 0
+		background: white
+		+transform(rotate(-45deg))
+		+transform-origin(0 15px 0)
+
+		.valid.animate &
+			animation: 4.25s ease-in rotatePlaceholder
+			-webkit-animation: 4.25s ease-in rotatePlaceholder
+
+	&-wrap
+		.invalid.animate &
+			position: relative
+			z-index: 2
+			animation: 0.55s animateError
+			-webkit-animation: 0.55s animateError
+			+transform-origin(50% 10px)
+
+
+	&-line
+		position: absolute
+		z-index: 2
+		display: block
+		height: 3px
+		border-radius: 2px
+
+		.valid &
+			background-color: $pros
+		.invalid &
+			background-color: $cons
+
+		&.short
+			+transform(rotate(45deg))
+
+			.valid &
+				width: 8px
+				left: 3px
+				top: 10px
+
+			.invalid &
+				width: 12px
+				left: 4px
+				top: 8px
+
+			.valid.animate &
+				animation: 0.75s animateSuccessTip
+				-webkit-animation: 0.75s animateSuccessTip
+
+
+		&.long
+			+transform(rotate(-45deg))
+
+			.valid &
+				width: 12px
+				right: 2px
+				top: 8px
+
+			.invalid &
+				width: 12px
+				left: 4px
+				top: 8px
+
+			.valid.animate &
+				animation: 0.75s animateSuccessLong
+				-webkit-animation: 0.75s animateSuccessLong
+
+			// .invalid.animate &
+			// 	animation: 0.75s animateError ease 0s infinite
+			// 	-webkit-animation: 0.75s animateError ease 0s infinite
+
+
+	&-placeholder
+		position: absolute
+		top: -5px
+		left: -4px
+		top: -4px
+		left: -3px
+		z-index: 2 
+		+size(20)
+		border-radius: 50%
+
+		.valid &
+			border: 3px solid rgba(114,195,34, 0.4)
+		.invalid &
+			border: 3px solid rgba(204,72,32, 0.4)
+
+	&-fix
+		position: absolute
+		z-index: 1
+		// display: none
+		top: -2px
+		left: 6px
+		width: 4px
+		height: 28px
+		background-color: white
+		+transform(rotate(-45deg))
+
 	
 
-@-moz-keyframes shakey 
-	0%  
-		left: -10px
-	
-	25% 
-		left: 10px
-	
-	50% 
-		left: -10px
-	
-	75% 
-		left: 10px
-	
-	100% 
-		left: 0px
 	
 
-@-ms-keyframes shakey 
-	0%  
-		left: -10px
-	
-	25% 
-		left: 10px
-	
-	50% 
-		left: -10px
-	
-	75% 
-		left: 10px
-	
-	100% 
-		left: 0px
 	
 
-@keyframes shakey 
-	0%  
-		left: -10px
-	
-	25% 
-		left: 10px
-	
-	50% 
-		left: -10px
-	
-	75% 
-		left: 10px
-	
-	100% 
-		left: 0px
-	

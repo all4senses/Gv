@@ -81,7 +81,7 @@ $this = $$(this);
 							makeValid($(this).parents('.fieldset'));
 						}
 					});
-					$(this).find('.input').on('blur', function(){
+					$(this).find('.input').on('blur change', function(){
 			            var $this = $(this);
 
 			            if ( $this.parents('.fieldset').hasClass('filled') ) {
