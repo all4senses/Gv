@@ -322,7 +322,7 @@ function requestFullRating($providerHREF, $providerNID, $hoverBox){
 									var $newContent; 
 									
 									if ( $content !== undefined ) {
-										var $newContent = $content.html().substr(0, 105) + '...'; 
+										var $newContent = $content.html().substr(0, 100) + '...'; 
 									}
 
 									$contentParent.html('<p>' + $newContent + '</p>');
