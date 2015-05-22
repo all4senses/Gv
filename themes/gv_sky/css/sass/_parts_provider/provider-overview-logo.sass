@@ -1,0 +1,77 @@
+&-logo
+	position: relative
+	width: perc(200px, 1070px)
+	height: 100%
+	padding-right: perc(30px, 1070px)
+	border-right: 1px solid $divider
+
+	+m(736)
+		height: 80px
+		border-right: 0
+		border-bottom: 1px solid $divider
+		padding-bottom: 20px
+		padding-right: 0
+		+clearfix
+		// box-sizing: border-box
+
+	&-wrap
+		height: perc(183px, 230px)
+
+		+m(736)
+			position: absolute
+			+valign
+			height: auto
+			float: left
+
+		&-img
+			position: relative
+			+valign
+			display: block
+			max-width: 100%
+			+center
+			max-height: 100%
+
+			+m(736)
+				+unvalign
+
+			+m(520)
+				width: 130px
+				// padding-top: 10px
+
+			+m(360)
+				width: 110px
+				// padding-top: 15px
+
+	&-button
+		+button(solid, $primary, 200px, perc(47px, 230px))
+		max-width: 100%
+		+center
+
+		+m(736)
+			+valign
+			width: 160px
+			// position: relative
+			position: absolute
+			right: 0
+			height: 43px
+			float: right
+
+		+m(520)
+			width: 130px
+
+		+m(360)
+			// top: 20px
+			height: 36px
+			width: 100px
+
+		&-text
+			padding-top: 2px
+			text-transform: none
+			font-size: 16px
+			letter-spacing: .4px
+
+			+m(920)
+				font-size: 14px
+
+			+m(360)
+				font-size: 12px

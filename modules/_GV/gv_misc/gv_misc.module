@@ -11250,7 +11250,7 @@ function gv_misc_getProviderQuickData($target, $data) {
               <div class="rating-text tbody-item-rating-text">' . $rating_count . '<span></span></div>' .
               $stars . 
           //'</div><a class="rating-link tbody-item-rating-link" ' . $reviews_link_params . ' ">Read Reviews</a>';
-          '</div><a class="rating-link tbody-item-rating-link" ' . $reviews_link_params . ' ">' . $reviews_link_text . '</a>';
+          '</div><a class="rating-link tbody-item-rating-link" data-nid="'. $data['data']->nid .'" ' . $reviews_link_params . ' ">' . $reviews_link_text . '</a>';
 
       }
       else {

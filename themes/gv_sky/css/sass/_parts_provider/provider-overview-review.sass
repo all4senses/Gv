@@ -1,0 +1,100 @@
+&-review
+	position: relative
+	float: right
+	width: perc(170px, 1070px)
+	height: 100%
+
+	+m(920)
+		position: absolute
+		right: 40px
+		width: 100%
+		height: auto
+
+	+m(736)
+		top: 135px
+
+	+m(480)
+		width: 93%
+		top: 230px
+		height: auto
+
+	&-scores-list
+		+clearfix
+
+		+m(920)
+			display: none
+
+
+		&-item
+			width: 50%
+			float: left
+			text-align: center
+			margin-bottom: 9px
+
+			&-title
+				margin-bottom: 1px
+				font-size: 11px
+				font-weight: 600
+				text-transform: uppercase
+				color: $grey
+
+			&-fivestar
+				+fivestar(12px)
+
+	&-score
+		position: absolute
+		left: 0
+		right: 0
+		bottom: 0
+
+		+m(920)
+			top: 0
+			// right: 70px
+			right: 0
+			left: auto
+
+			+m(480)
+				right: auto
+				left: 50px
+
+		&-caption
+			text-align: center
+			font-size: 16px
+			line-height: 1
+			font-weight: 700
+			letter-spacing: .4px
+			text-transform: uppercase
+			color: $grey
+
+			+m(480)
+				float: left
+				padding: 3px 10px 0 0
+
+		&-number
+			position: relative
+			left: -3px
+			line-height: 1
+			margin-top: 5px
+			font-size: 60px
+			font-weight: 400
+			font-family: helvetica, arial, sans-serif
+			letter-spacing: -3px
+			text-align: center
+			color: $yellow
+
+			+m(480)
+				float: left
+				font-size: 28px
+				font-weight: 600
+				font-family: avenir
+				margin-top: -3px
+				padding: 0 10px
+
+				
+		&-fivestar
+			+fivestar(18px)
+
+			+m(480)
+				position: relative
+				top: -2px
+				float: left

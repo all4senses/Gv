@@ -1,4 +1,6 @@
-// Sidebar Append
+/* ==========================================================================
+   Sidebar Append
+   ========================================================================== */
 
 	$$('.top-providers').prependTo('.field-name-field-preface-bottom > .field-items');
 
@@ -11,7 +13,16 @@
 
 
 
-// Sticky Table Head
+
+
+
+
+
+
+
+/* ==========================================================================
+   Sticky Table Head
+   ========================================================================== */
 
 	var $windowOffset = $window.scrollTop();
 	var $tableOffset = $$('.chart').not('.sticky-table').offset().top;
@@ -114,6 +125,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ==========================================================================
    Vertical chart mobile version markup
    ========================================================================== */
@@ -124,6 +150,26 @@ for (var i = 1; i <= $$('.vertical-tbody-reviews-item-rating').length; i++) {
 	$$('.vertical-thead-logos-item:nth-child('+ n +') .vertical-thead-logos-item-logo').first().clone().appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-logo');
 	$$('.vertical-tbody-option:nth-child(15) .vertical-item:nth-child('+ n +') div:first').clone().addClass('vertical-mobile-tbody-row-price-text').appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-price');
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,15 +206,162 @@ $$('.reviews-list, .reviews-filter, .reviews-title').wrapAll('<div class="review
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Review Stars hover box
+   ========================================================================== */
+var businessPage = window.location.pathname === '/business';
+
+if ( businessPage ) {
+
+	var $hoverBoxMarkup = '<div class="rating_hover"><div class="rating_hover-loading"></div></div>',
+		timeoutShow,
+		timeoutHide,
+		providerCache = {};
+
+	$$('.rating-link').append($hoverBoxMarkup);
+
+
+	$$('.rating-link').on('mouseenter', function(){
+		var $this = jQuery(this);
+		var $hoverBox = $this.children('.rating_hover');
+		var $providerHREF = $this.attr('href');
+		var $providerNID = $this.data('nid');
+
+		$hoverBox.addClass('hover');
+		clearTimeout(timeoutShow);
+		clearTimeout(timeoutHide);
+
+		if ( providerCache[$providerNID] === undefined ) {
+			requestFullRating($providerHREF, $providerNID, $hoverBox);
+		}
+
+		timeoutShow = setTimeout(function() {
+			if ( $hoverBox.hasClass('hover') ) {
+				hideOthers($this);
+				$hoverBox.stop().css('visibility', 'visible').animate({'opacity': 1}, 150);
+			}
+		}, 300);
+	});
+
+
+	$$('.rating-link').on('mouseleave', function(){
+		var $this = jQuery(this);
+		var $hoverBox = $this.children('.rating_hover');
+
+		$hoverBox.removeClass('hover');
+		clearTimeout(timeoutShow);
+		clearTimeout(timeoutHide);
+
+
+		timeoutHide = setTimeout(function() {
+			if ( !$hoverBox.hasClass('hover') ) {
+				$hoverBox.stop().animate({
+					'opacity': 0
+				}, 100, function(){
+					jQuery(this).css('visibility', 'hidden');
+				});
+			}
+		}, 200);
+	});
+}
+
+
+
+
+
+
+
+function hideOthers($this){
+	var $sibling = $$('.rating-link').not($this);
+
+	$sibling.find('.rating_hover').stop().animate({
+			'opacity': 0
+		}, 100, function(){
+			jQuery(this).css('visibility', 'hidden');
+	});
+}
+
+
+function requestFullRating($providerHREF, $providerNID, $hoverBox){
+	var $reviewBox,
+		$userReviews,
+		results;
+
+	results = jQuery.get($providerHREF, {}, function(data){
+		$reviewBox = jQuery(data).find('.provider-box-provider-review');
+		$userReviews = jQuery(data).find('.reviews-list-item')
+								.filter(function(index){
+									return index < 3
+								}).each(function(){
+									var $this = jQuery(this);
+									var $content = $this.find('p');
+									var $newContent = $content.html().substr(0, 105) + '...'; 
+
+									$content.html($newContent);
+								});
+		$reviewBox = '<div class="rating_hover-stars">' + $reviewBox.html() + '</div>';
+		$userReviews = '<div class="rating_hover-reviews">' + $userReviews[0].innerHTML + $userReviews[1].innerHTML + '</div>';
+		catchFullRating( $reviewBox + $userReviews, $providerNID, $hoverBox );
+	});
+
+}
+
+function catchFullRating(results, $providerNID, $hoverBox) {
+	providerCache[$providerNID] = results;
+	$hoverBox.html( providerCache[$providerNID] )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ==========================================================================
    AJAX Loading
    ========================================================================== */
 
 
-
-
-
-// reviews-filter
+// ==== Reviews Filter =================================================================================
 $$('body').data('sort', 'created');
 $$('body').data('order', 'DESC');
 $$('body').data('page', 1);

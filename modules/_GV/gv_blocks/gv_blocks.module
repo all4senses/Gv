@@ -3264,7 +3264,7 @@ function gv_blocks_compareProviders($p_names = NULL, $back_button = NULL, $sprit
 
               theme('gv_misc_fivestar_dk', array('rating' => $provider_rating, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'vertical-tbody-reviews-item-rating')) . '
 
-              <a class="vertical-tbody-reviews-item-read" href="' . url('node/' . $nid) . '">Read Reviews</a>
+              <a class="vertical-tbody-reviews-item-read rating-link" data-nid="'. $nid .'" href="' . url('node/' . $nid) . '">Read Reviews</a>
 
             </td>';
           

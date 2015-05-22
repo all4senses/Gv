@@ -1,0 +1,150 @@
+.rating-link
+	position: relative
+
+.rating_hover
+	position: absolute
+	z-index: 20
+	top: 28px
+	left: 0
+	left: -185px
+	right: 0
+	width: 440px
+	height: 265px
+	+center
+	padding: 18px 4px 15px 10px
+	background-color: white
+	border: 1px solid $divider
+	border-radius: 3px
+	text-align: left
+	text-transform: none
+	color: $grey-darker
+	box-sizing: border-box
+	box-shadow: 0 0 6px rgba(0,0,0, 0.3)
+	opacity: 0
+	visibility: hidden
+	cursor: default
+
+	+arrow('top', 'center', 10px, white, lighten($divider, 5), 3px)
+
+	// &:after
+		// box-shadow: 0 -2px 6px rgba(0,0,0, 0.3)
+
+
+	// tr:first-child &
+	// 	opacity: 1 !important
+	// 	visibility: visible !important
+
+	&-loading
+		position: absolute
+		left: 0
+		right: 0
+		+valign
+		+size(64)
+		+center
+		background-image: url(../images/loading.gif)
+
+	&-stars
+		position: relative
+		float: left
+		height: 100%
+		width: 40%
+
+	&-reviews
+		// overflow: hidden
+		width: 50%
+		height: 100%
+		float: left
+		margin-left: 15px
+		padding-left: 15px
+		border-left: 1px solid  $divider
+
+		&:after // View All Link
+			content: 'View All'
+			position: absolute
+			bottom: 5px
+			right: 10px
+			font-size: 10px
+			font-weight: 700
+			color: $grey-light
+			text-transform: uppercase
+			cursor: pointer
+
+
+	div[itemprop="review"]
+		position: relative
+		margin-bottom: 20px
+		padding-bottom: 17px
+		border-bottom: 1px solid $divider
+
+		&:last-child
+			border-bottom: 0
+			margin-bottom: 0
+
+	.reviews-list-item
+
+		&-details
+			width: 100%
+			min-height: 0
+			float: none
+			border: 0
+
+			&-title
+				font-size: 15px
+				max-width: 80%
+				// max-width: 100%
+
+			&-meta
+				margin: 3px 0
+				font-size: 10px
+
+			&-content
+				font-size: 12px
+				line-height: 1.2
+
+				p
+					// +ellipsis(100%)
+					margin-bottom: 0
+					line-height: 1.4
+
+				&-summary
+					display: none
+
+		&-rating
+			position: absolute
+			top: 0
+			right: 0
+			width: 150px
+			// display: none
+
+			&-score
+				margin-top: 0
+
+				&-caption
+					display: none
+
+				&-number
+					position: relative
+					top: 2px
+					font-size: 20px
+					font-weight: 700
+					letter-spacing: 0
+
+
+			.provider-box-provider-review-scores-list
+				display: none
+
+
+
+
+
+.provider-box-provider
+	@import ../_parts_provider/provider-overview-review
+
+	&-review-scores-list
+		display: block
+	
+	&-review-score
+		bottom: 10px
+		top: auto
+		left: 0
+
