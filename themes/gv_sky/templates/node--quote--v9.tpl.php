@@ -50,9 +50,9 @@
                     <div class="subtitle">In just under 2 minutes we'll match you with pre-screened VoIP providers that offer the best business phone systems for your specific needs.</div>
 
                     <?php  
-                      //echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+                      //echo '<a class="guide" href="/pdfs/hosted-voip-guide-2015.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
                     
-                    echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
+                    echo '<a class="guide" href="/pdfs/hosted-voip-guide-2015.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide'
                             , '<img src="/sites/all/themes/gv_blue/css/images/click-here-button.png" />'
                         , '</a>'
                         , '<div class="quote-final">' 

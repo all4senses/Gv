@@ -44,7 +44,7 @@
     <div class="left">
       <?php 
 //        if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
-//          echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+//          echo '<a class="guide" href="/pdfs/hosted-voip-guide-2015.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
           //echo '<a href="/"><div class="field-name-field-q-image">', theme('image', array( 'path' => $initialQuotePage_node->field_q_image['und'][0]['uri'], 'alt' => $initialQuotePage_node->field_q_image['und'][0]['alt'], 'title' => $initialQuotePage_node->field_q_image['und'][0]['title'])), '</div></a>';
 //        }
 //        else {
@@ -67,7 +67,7 @@
             
             <?php
 //            if ($_SERVER['REDIRECT_URL'] == '/compare-voip-solutions-final') {
-//              echo '<a href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank"><div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div></a>';
+//              echo '<a href="/pdfs/hosted-voip-guide-2015.pdf" target="_blank"><div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div></a>';
 //            }
 //            else {
 //              echo '<div class="guide"><span>Free guide with submission</span> Ditch Your Landline & <br/>Advance Your Business with VoIP</div>';
@@ -91,8 +91,8 @@
         
         <div class="right final">
            <?php  
-           //echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>'; 
-           echo '<a class="guide" href="/pdfs/SMBVOIPAdvantagesWhitePaper.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
+           //echo '<a class="guide" href="/pdfs/hosted-voip-guide-2015.pdf" target="_blank">' . t("Download Your Free VoIP Buyer's Guide Here") . '</a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>'; 
+           echo '<a class="guide" href="/pdfs/hosted-voip-guide-2015.pdf" target="_blank">Download Your Free VoIP Buyer\'s Guide<img src="/sites/all/themes/gv_orange/css/images/click-here-button.png" /></a><div class="quote-final">' . t('<p><strong>Thank you</strong> for taking your time to complete our form. A VoIP Expert will be contacting you shortly to provide you with a personalized VoIP Service quote.</p><p>In the meantime, you can gain a great deal of VoIP information right here at <a href="http://getvoip.com">GetVoIP.com</a></p>') . '</div>';
            ?>
         </div>
         <?php 
