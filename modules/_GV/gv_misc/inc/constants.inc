@@ -445,9 +445,9 @@ $remoteProvidersSubmissionsSettings = array(
     
   'Corvisa' => array('function' => 'gv_misc_SendRequestToCorvisa', 'allowed_sources' => array()),    
   
-  '8x8_CallCenter' => array('function' => 'gv_misc_SendRequestTo8x8_callCenter', 'allowed_sources' => array()),  
+  '8x8_CallCenter' => array('function' => 'gv_misc_SendRequestTo8x8_callCenter', 'allowed_sources' => array('page_10_cc_v1')),  
   
-  'Mitel_CallCenter' => array('function' => 'gv_misc_SendRequestToMitel_callCenter', 'allowed_sources' => array()),
+  'Mitel_CallCenter' => array('function' => 'gv_misc_SendRequestToMitel_callCenter', 'allowed_sources' => array('page_10_cc_v1')),
     
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk', 'page_9_uk', 'page_10_uk')),
   'RingCentral-CA' => array('function' => 'gv_misc_SendRequestToRingCentral_CA', 'allowed_sources' => array('page_7_ca', 'page_8_ca', 'page_9_ca', 'page_10_ca')),
