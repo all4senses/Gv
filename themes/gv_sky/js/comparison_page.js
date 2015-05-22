@@ -317,8 +317,12 @@ function requestFullRating($providerHREF, $providerNID, $hoverBox){
 									return index < 3
 								}).each(function(){
 									var $this = jQuery(this);
-									var $content = $this.find('p');
-									var $newContent = $content.html().substr(0, 105) + '...'; 
+									var $content = $this.find('p').first();
+									var $newContent; 
+									
+									if ( $content ) {
+										var $newContent = $content.html().substr(0, 105) + '...'; 
+									}
 
 									$content.html($newContent);
 								});
