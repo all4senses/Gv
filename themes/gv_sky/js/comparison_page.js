@@ -318,13 +318,14 @@ function requestFullRating($providerHREF, $providerNID, $hoverBox){
 								}).each(function(){
 									var $this = jQuery(this);
 									var $content = $this.find('p').first();
+									var $contentParent = $this.find('.field-item');
 									var $newContent; 
 									
-									if ( $content ) {
+									if ( $content !== undefined ) {
 										var $newContent = $content.html().substr(0, 105) + '...'; 
 									}
 
-									$content.html($newContent);
+									$contentParent.html('<p>' + $newContent + '</p>');
 								});
 		$reviewBox = '<div class="rating_hover-stars">' + $reviewBox.html() + '</div>';
 		$userReviews = '<div class="rating_hover-reviews">' + $userReviews[0].innerHTML + $userReviews[1].innerHTML + '</div>';
