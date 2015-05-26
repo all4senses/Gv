@@ -636,3 +636,35 @@
 		animation: spin 1.5s linear infinite
 
 
+
+.fivestar
+	position: relative
+	cursor: default
+
+	&:after
+		content: '((((('
+		position: absolute
+		left: 0
+		top: 0
+		font-family: gvcons
+		color: $grey-lighter
+		line-height: 1
+
+	&-active
+		position: absolute
+		z-index: 2
+		left: 0
+		top: 0
+		width: 100%
+		height: 100%
+		overflow: hidden
+		display: block
+		&:after
+			content: '((((('
+			position: absolute
+			left: 0
+			top: 0
+			font-family: gvcons
+			font-weight: 400
+			line-height: 1
+			color: $yellow

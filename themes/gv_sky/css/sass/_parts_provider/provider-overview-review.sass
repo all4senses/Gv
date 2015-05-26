@@ -39,7 +39,13 @@
 				color: $grey
 
 			&-fivestar
-				+fivestar(12px)
+				$size: 13.71px
+				$width: $size * 5
+				$height: $size
+				width: $width
+				height: $height
+				font-size: $size
+				+center
 
 	&-score
 		position: absolute
@@ -92,7 +98,13 @@
 
 				
 		&-fivestar
-			+fivestar(18px)
+			$size: 20.57px
+			$width: $size * 5
+			$height: $size
+			width: $width
+			height: $height
+			font-size: $size
+			+center
 
 			+m(480)
 				position: relative

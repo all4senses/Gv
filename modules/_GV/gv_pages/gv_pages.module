@@ -9148,7 +9148,7 @@ function gv_pages_addPhoneRatingsToNodeThemed($node, $votes, $counts = NULL, $se
       }
       $node->content['gv_ratings']['#markup'] .= '<div class="provider-box-provider-review-scores-list-item ' . (in_array($zebra, $zebra_odd) ? 'odd' : 'even') . ' ' . $vote['tag'] .'"><div class="provider-box-provider-review-scores-list-item-title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
-        . theme('gv_misc_fivestar_provider_small', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'stars', 'css' => 'stars.css')))
+        . theme('gv_misc_fivestar_dk', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'provider-box-provider-review-scores-list-item'))
         // Using the original fivestar theme function.
         //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         . '</div>';
@@ -9219,7 +9219,7 @@ function gv_pages_addRatingsToNodeThemed($node, $votes, $counts = NULL, $semicol
       }
       $node->content['gv_ratings']['#markup'] .= '<div class="provider-box-provider-review-scores-list-item ' . (in_array($zebra, $zebra_odd) ? 'odd' : 'even') .'"><div class="provider-box-provider-review-scores-list-item-title">' . t($rating_titles[$vote['tag']]) . $semicolon . '</div>' 
         // Using own theming function for fivestar (replicate of the original fivestar theme function).
-        . theme('gv_misc_fivestar_provider_small', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'stars', 'css' => 'stars.css')))
+        . theme('gv_misc_fivestar_dk', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'provider-box-provider-review-scores-list-item'))
         // Using the original fivestar theme function.
         //. theme('fivestar_static', array('rating' => $vote['value'], 'stars' => 5, 'tag' => $vote['tag'], 'widget' => array('name' => 'hearts', 'css' => 'hearts.css')))
         . '</div>';

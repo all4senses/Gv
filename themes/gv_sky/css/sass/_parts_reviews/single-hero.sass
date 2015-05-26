@@ -217,10 +217,21 @@
 			margin-left: 14px
 			
 			+m(1131, min)
-				+fivestar(21px)
+				+center
+				$size: 25px
+				$width: $size * 5
+				$height: $size
+				width: $width
+				height: $height
+				font-size: $size
 
 			+m(1130, max)
-				+fivestar(17.5px)
+				$size: 20px
+				$width: $size * 5
+				$height: $size
+				width: $width
+				height: $height
+				font-size: $size
 
 			+m(680)
 				left: 11%
@@ -256,7 +267,13 @@
 			color: white
 
 		&-fivestar
-			+fivestar(12px)
+			+center
+			$size: 13.9px
+			$width: $size * 5
+			$height: $size
+			width: $width
+			height: $height
+			font-size: $size
 
 
 	.voice

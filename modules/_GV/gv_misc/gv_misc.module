@@ -9470,6 +9470,9 @@ function gv_misc_theme($existing, $type, $theme, $path) {
     'gv_misc_fivestar_static' => array(
       'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => '')),
     ),
+    'gv_misc_fivestar_dk_old' => array(
+      'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => ''), 'class' => ''),
+    ),
     'gv_misc_fivestar_dk' => array(
       'variables' => array('rating' => NULL, 'stars' => 5, 'tag' => 'vote', 'widget' => array('name' => 'default', 'css' => ''), 'class' => ''),
     ),
@@ -9796,6 +9799,21 @@ function theme_gv_misc_fivestar_static($variables) {
   return $output;
 }
 function theme_gv_misc_fivestar_dk($variables) {
+  $rating  = $variables['rating'];
+  $stars = $variables['stars'];
+  $tag = $variables['tag'];
+  $widget = $variables['widget'];
+  $classname = $variables['class'];
+
+
+  $output = '<div class="' . $classname . '-fivestar fivestar">
+                <div class="' . $classname . '-fivestar-active fivestar-active" style="width:'. $rating .'%"></div>
+             </div>
+  ';
+  
+  return $output;
+}
+function theme_gv_misc_fivestar_dk_old($variables) {
   $rating  = $variables['rating'];
   $stars = $variables['stars'];
   $tag = $variables['tag'];
@@ -11224,7 +11242,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
       if (!empty($data['data']->votingapi_cache_node_percent_overall_average_value)) {
         
-        $stars = theme('gv_misc_fivestar_static', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+        $stars = theme('gv_misc_fivestar_dk', array('rating' => $data['data']->votingapi_cache_node_percent_overall_average_value, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'tbody-item-rating'));
         
         $rating_count = number_format( (0.05 * $data['data']->votingapi_cache_node_percent_overall_average_value), 1 );
         if ($_GET['q'] == 'node/287') {

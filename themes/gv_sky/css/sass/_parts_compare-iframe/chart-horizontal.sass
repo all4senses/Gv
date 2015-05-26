@@ -237,8 +237,14 @@ body
 						color: $primary
 
 				.fivestar
+					+center
 					+m(736, min)
-						+fivestar(14px)
+						$size: 16px
+						$width: $size * 5
+						$height: $size
+						width: $width
+						height: $height
+						font-size: $size
 
 				+m(736)
 					position: relative
@@ -260,8 +266,13 @@ body
 
 
 					.fivestar
+						$size: 12.8px
+						$width: $size * 5
+						$height: $size
+						width: $width
+						height: $height
+						font-size: $size
 						display: inline-block
-						+fivestar(11px)
 						margin-left: 5px
 
 				+m(375)

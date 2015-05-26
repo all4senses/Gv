@@ -80,8 +80,7 @@
                               <span property="v:best" content="5"></span>
                             </span>
                           </div>
-                          <div class="provider-box-provider-review-score-fivestar"> <?php echo theme('gv_misc_fivestar_provider', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))); ?>
-                          </div>
+                          <?php echo theme('gv_misc_fivestar_dk', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'provider-box-provider-review-score')); ?>
 
                     </div>
               <?php endif; // end of if (!empty($content['gv_ratings'])): ?>
@@ -216,8 +215,7 @@
                           </span>
                         </div>  
                         
-                        <div class="provider-box-provider-review-score-fivestar"> <?php echo theme('gv_misc_fivestar_provider', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'))); ?>
-                        </div>
+                        <?php echo theme('gv_misc_fivestar_dk', array('rating' => $node->gv_rating_overall * 20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'provider-box-provider-review-score')); ?>
 
                   </div>
                 </div>
