@@ -12139,6 +12139,12 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
       /**/
       $fixed_ratings = array(4.9, 4.7, 4.6, 4.5, 4.4, 4.2, 3.9, 3.9, 3.7);
       foreach ($view->result as $position => $field) {
+        
+        if (strpos($field->node_title, 'Jive') !== FALSE) {
+          dpm($field->node_title);
+          continue;
+        }
+        
         // Copy of the code at views for reviews in ppc providers: $value = gv_misc_getProviderQuickData('rating', array('data' => $data, 'target' => 'iframe')); // 'target' => 'iframe' is for _blank target for a link
 
         $rating_count = $fixed_ratings[$position];
