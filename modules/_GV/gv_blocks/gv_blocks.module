@@ -12142,13 +12142,14 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         
         // Jive should always has the original rating.
         if (strpos($field->node_title, 'Jive') !== FALSE) {
-          //continue;
+          continue;
         }
         
         // Copy of the code at views for reviews in ppc providers: $value = gv_misc_getProviderQuickData('rating', array('data' => $data, 'target' => 'iframe')); // 'target' => 'iframe' is for _blank target for a link
 
         $rating_count = $fixed_ratings[$position];
-        $stars = theme('gv_misc_fivestar_static', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+        //$stars = theme('gv_misc_fivestar_static', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
+        $stars = theme('gv_misc_fivestar_dk', array('rating' => $rating_count*20, 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css')));
 
         $view->result[$position]->views_php_10 = '
           <div class="rating tbody-item-rating">
