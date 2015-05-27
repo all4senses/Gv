@@ -6,6 +6,7 @@
        var isIE = document.all && !window.atob;
        var isIE11 = window.navigator.msPointerEnabled;
        var isMobile = $('html').hasClass('mobile');
+       var isAdmin = $('body').hasClass('admin');
        
        // Exit intent functionality.
        
@@ -20,9 +21,14 @@
             }
         });
 
-        // if ( $.cookie('exit-sub') === 'off' ) {
-        //     turned_off = true;
-        // } 
+        if (isAdmin && $.cookie('exit-sub') !== 'off') { // Create disabling cookie for admins
+            $.cookie('exit-sub', 'off', {path:'/'});
+        }
+        
+        if ( $.cookie('exit-sub') === 'off' ) {
+            turned_off = true;
+        } 
+
 
         // if ( !isIE && !isIE11 && !isMobile && !turned_off) {
         //     window.history.replaceState({id: 'gv_exit-init'}, '', '');
@@ -106,6 +112,7 @@
                                     //console.log(data);
                                     $.fn.popup("close");
                                     alert(data.message);
+                                    $.cookie('exit-sub', 'off', {path:'/'});
                                 }
                                 return false;
                             } 
