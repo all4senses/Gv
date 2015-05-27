@@ -4,29 +4,6 @@ jQuery(document).ready(function($){
 	!function(n,r){var $={};$$=function(u){var t=$[u];return t!==r?t:$[u]=n(u)},$$.clear=function(n){$[n]=r},$$.fresh=function(n){return $[n]=r,$$(n)}}(jQuery);
 
 
-	// $$('.solution-nav').insertAfter('.navigation');
-
-	// $$('.main-menu-item.first').on('click',function(){
-
-	// 	var clicks = $this.data('clicks');
-
-	// 	if (clicks) {
-	// 		$$('.solution-nav').removeClass('open');
-	// 	} else {
-	// 		$$('.solution-nav').addClass('open');
-	// 	} 
-
-	// 	$this.data('clicks', !clicks);
-	// });
-
-	// $$('.hero-header').on('click, touchstart',function(){
-	// 	var clicks = $$('.main-menu-item.first').data('clicks');
-
-	// 	$$('.solution-nav').removeClass('open');
-	// 	$$('.main-menu-item.first').data('clicks', !clicks);
-	// });
-
-
 
 
 	// ==== Add Privacy Notice after email field =================================================================================
@@ -150,6 +127,17 @@ jQuery(document).ready(function($){
 		$(this).addClass('checked');
 		$(this).find('input').prop('checked', true);
 	});	
+
+	if ( window.location.pathname.indexOf('/edit') !== -1 ) {
+		$$('.form-type-radio').each(function(){
+			var $this = $(this);
+			var checked = $(this).children('.form-radio').prop('checked');
+
+			if (checked) {
+				$(this).addClass('checked');
+			}
+		});
+	}
 
 
 

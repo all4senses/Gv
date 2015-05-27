@@ -66,11 +66,6 @@
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/ie8.css" />
 <![endif]--> 
 
-     <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
-     <script type="text/javascript">
-       takanaClient.run({host: 'localhost:48626'});
-     </script>
-
 <?php if ($is_admin && function_exists('newrelic_ignore_transaction')) {
     newrelic_ignore_transaction ();
   }
