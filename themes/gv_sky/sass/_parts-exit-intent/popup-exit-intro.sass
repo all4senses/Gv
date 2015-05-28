@@ -1,0 +1,155 @@
+&-intro
+	background-image: url(/sites/all/themes/gv_sky/images/img-exit-intent.jpg)
+	background-size: cover
+	border-bottom: 1px solid $divider
+	line-height: initial
+
+	.step-one &
+		height: 343px
+
+	.step-two &
+		height: 250px
+
+	.step-three &
+		height: 282px
+
+	&-line-1
+		&.one
+			padding-top: 53px
+			font-size: 31px
+
+			+max(736)
+				font-size: 22px
+
+		&.two
+			padding-top: 50px
+			font-size: 20px
+
+			&:after
+				content: ''
+				position: relative
+				top: 20px
+				display: block
+				+center
+				width: perc(280px, 1100px)
+				border-bottom: 2px solid darken($divider, 10)
+
+				+max(736)
+					top: 14px
+
+		&.three
+			padding-top: 30px
+			font-size: 23px
+
+			+max(736)
+				padding-top: 40px
+				max-width: 85%
+				+center
+				font-size: 21px
+
+
+	&-line-2
+		font-size: 55px
+		color: $contrast
+
+		+max(736)
+			font-size: 40px
+
+			&.three
+				line-height: 1
+				padding-top: 5px
+
+		+max(350)
+			font-size: 36px
+
+		&.one
+			font-weight: 500
+			margin-top: 5px
+			text-transform: uppercase
+			
+			+max(736)
+				.bu &
+					font-size: 42px
+					max-width: 220px
+					+center
+
+		&.two
+			padding-top: 35px
+
+			+max(736)
+				padding-top: 30px
+
+
+	&-line-3
+		&-highlight
+			color: $primary
+
+		&.one, 
+		&.three
+			&:after
+				content: ''
+				position: relative
+				top: 10px
+				display: block
+				+center
+				width: perc(350px, 1100px)
+				border-bottom: 2px solid darken($divider, 10)
+
+		&.one
+			font-size: 84px
+			line-height: 1.1
+			font-weight: 500
+			color: $contrast
+
+			+max(736)
+				font-size: 48px
+
+		&.two
+			font-size: 65px
+			font-weight: 500
+			text-transform: uppercase
+			color: $primary
+
+			+max(736)
+				font-size: 38px
+
+		&.three
+			font-size: 65px
+			font-weight: 500
+			text-transform: uppercase
+			color: $primary
+
+			+max(736)
+				padding-top: 5px
+				font-size: 38px
+
+				&:after
+					border-bottom: 0
+			
+
+
+	&-line-4
+		&.one
+			font-size: 20px
+			margin-top: 30px
+
+			+max(736)
+				font-size: 18px
+				max-width: 80%
+				+center(30px)
+
+
+		&.two
+			font-size: 40px
+
+			+max(736)
+				font-size: 26px
+
+		&.three
+			font-size: 20px
+			margin-top: 30px
+
+			+max(736)
+				font-size: 16px
+				margin-top: 0
+				padding: 0 10px

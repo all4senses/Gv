@@ -1,9 +1,12 @@
 &-secure
 	position: absolute
-	bottom: 0
-	width: 100%
-	max-width: 360px
-	height: 88px
+	top: 0
+	width: 40%
+	height: 76px
+	overflow: hidden
+	text-align: left
+	border-radius: 50px 50px 0 50px
+	// opacity: .8
 
 	+max(920)
 		display: none
@@ -13,7 +16,7 @@
 		z-index: 2
 		top: 0
 		left: 0
-		+size(88)
+		+size(76)
 		background-color: white
 		border: 4px solid #d5d6d6
 		border-radius: 50%
@@ -23,12 +26,14 @@
 			content: ']'
 			position: absolute
 			+valign
+			left: 2px
 			width: 100%
 			font-family: gvcons
-			font-size: 50px
+			font-size: 44px
 			line-height: 1
 			text-align: center
 			color: $primary
+			// color: #d5d6d6
 
 		&:before
 			content: ''
@@ -36,7 +41,7 @@
 			z-index: 1
 			left: -8px
 			top: -8px
-			+size(96)
+			+size(84)
 			border: 4px solid white
 			border-radius: 50%
 			box-sizing: border-box
@@ -46,13 +51,14 @@
 		z-index: 1
 		top: 0
 		right: 0
+		// right: 95px
 
 	&-text
 		position: absolute
 		z-index: 2
 		+valign(53%)
-		left: 105px
-		font-size: 16px
+		left: 93px
+		font-size: 14px
 		font-weight: 700
 		letter-spacing: .3px
 		color: white

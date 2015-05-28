@@ -126,8 +126,6 @@
 				if ( !$(this).hasClass('valid') ) {
 					problem = true;
 					$(this).addClass('error');
-					// console.log('invalid');
-					// console.log($(this).attr('class'));
 
 				} else {
 					$(this).removeClass('error');
@@ -136,10 +134,8 @@
 
 			if ( problem ) {
 				proceed = false;
-				// console.log('stop');
 			} else {
 				proceed = true;
-				// console.log('proceed');
 			}
 
 			if ( proceed ) {

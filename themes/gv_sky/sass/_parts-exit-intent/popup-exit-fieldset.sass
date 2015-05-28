@@ -1,0 +1,113 @@
+&-fieldset
+	position: relative
+	float: left
+	width: perc(280px, 580px)
+	margin-bottom: 18px
+	border: 0
+
+	+max(736)
+		width: 48.8%
+
+	&.error
+		color: #E34B4F
+		border-radius: 3px
+		background-image: none
+		background-color: transparent
+
+	&:before
+		content: ''
+		width: 32px
+		height: 91%
+		background-color: white
+		position: absolute
+		right: 4px
+		top: 2px
+		z-index: 2
+
+	&:after
+		position: absolute
+		+valign
+		right: 12px
+		z-index: 3
+		font-family: gvcons
+		color: $grey-light
+		line-height: 1
+		transition: all 0.2s
+
+
+	&:nth-child(2n)
+		// margin-left: perc(18px, 807px)
+		margin-left: perc(18px, 580px)
+
+	&:nth-child(1):after
+		content: '!'
+		font-size: 18px
+
+		+max(350)
+			.step-two &
+				display: none
+
+	&:nth-child(3):after,
+	&:nth-child(4):after
+		content: 'K'
+		font-size: 17px
+
+	&:nth-child(6):after
+		content: '['
+		font-size: 18px
+
+	&:nth-child(5):after
+		content: 'H'
+		font-size: 19px
+		right: 11px
+
+	&-wrap
+		position: relative
+
+		.select &:before
+			content: ''
+			width: 38px
+			height: 91%
+			background-color: white
+			position: absolute
+			right: 4px
+			top: 2px
+			z-index: 2
+			// top: 18px
+
+		.select &:after
+			content: 'b'
+			position: absolute
+			right: 17px
+			top: 18px
+			z-index: 3
+			font-family: gvcons
+			font-size: 18px
+
+			.error &
+				color: #E34B4F
+
+
+
+	&-input,
+	&-select
+		width: 100%
+		border: 1px solid $divider
+		background-color: white
+		border-radius: 3px
+		height: 52px
+		display: block
+		padding: 12px 17px 8px
+		font-size: 16px
+		font-weight: 500
+		color: $grey-darker
+
+		+max(736)
+			font-size: 14px
+			padding: 4px 14px 0px
+
+		&:focus
+			border-color: $contrast
+
+		.error &
+			border-color: #E34B4F
