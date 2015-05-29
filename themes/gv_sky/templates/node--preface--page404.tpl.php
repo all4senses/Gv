@@ -32,8 +32,8 @@
           hide($content['links']);
           print render($content);
           
-          echo gv_blocks_getBlockThemed(array('module' => 'search', 'delta' => 'search-form', 'no_subject' => TRUE, 'class' => 'search-on-404', 'shadow' => FALSE)),
-               '<br/><p>Or, try one of the links below.</p>';
+          // echo gv_blocks_getBlockThemed(array('module' => 'search', 'delta' => 'search-form', 'no_subject' => TRUE, 'class' => 'search-on-404', 'shadow' => FALSE)),
+               // '<br/><p>Or, try one of the links below.</p>';
           
           
           // Get content of the Sitemap.
@@ -67,4 +67,3 @@
       
 
   </div> <!-- <div class="main-content"> -->
-
