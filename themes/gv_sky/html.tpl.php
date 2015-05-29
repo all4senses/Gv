@@ -16,10 +16,14 @@
   <?php print $styles; ?>
   <?php $args = arg(); 
         if ($args[0] == 'node' && (@$args[1] == 'add' || isset($args[2]) && $args[2] == 'edit')) { $top = TRUE; print $scripts; } 
+        (drupal_get_http_header("status") === '404 Not Found' ? $is_404 = TRUE : $is_404 = FALSE);
   ?>
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/global.css">
+  <?php if ($is_404) {?>
+  <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/404.css">
+  <?php } ?>
   <?php if ($is_front) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/home.css">
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/popup-exit.css">
@@ -65,7 +69,6 @@
     <script type="text/javascript" src="/sites/all/themes/gv_sky/js/selectivizr-min.js"></script>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/ie8.css" />
 <![endif]--> 
-
 
 <?php if ($is_admin && function_exists('newrelic_ignore_transaction')) {
     newrelic_ignore_transaction ();
