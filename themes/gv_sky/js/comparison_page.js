@@ -38,85 +38,88 @@
 	if ( $$('.chart').hasClass('vertical') ) {
 		var $tableSticky = '<table class="chart vertical sticky-table"></table>';
 	}
+
+	if ( !$$('.chart').data('sticky') ) {
 	
-	if ( $$('.chart').hasClass('cols4') ) {
-		var $cols = 'cols4'
-	}
-	if ( $$('.chart').hasClass('cols5') ) {
-		var $cols = 'cols5'
-	}
-	if ( $$('.chart').hasClass('cols6') ) {
-		var $cols = 'cols6'
-	}
-	if ( $$('.chart').hasClass('cols7') ) {
-		var $cols = 'cols7'
-	}
-	if ( $$('.chart').hasClass('cols8') ) {
-		var $cols = 'cols8'
-	}
-
-	$$('.chart').before($tableSticky);
-	$$('.chart thead').clone().addClass('sticky-table-thead').appendTo('.sticky-table');
-
-	if ( $tableOffset - $windowOffset < 0 && $windowOffset - $tableEnd < 74 ) {
-		$$('.sticky-table').addClass('show');
-	}
-
-	$$('.sticky-table').addClass($cols);
-
-
-	$window.scroll(function(){
-		var $windowOffset = $window.scrollTop();
-		var $tableOffset = $$('.chart').not('.sticky-table').offset().top;
-		var $tableHeight = $$('.chart').not('.sticky-table').height();
-		var $theadHeight = $$('.chart thead').height();
-		var $tableEnd = ($tableOffset + $tableHeight) - $theadHeight;
-		var $topHideAmount = $tableEnd - $windowOffset;
-		
-		if ( $tableOffset - $windowOffset < 0 ) {
-
-			if ( $windowOffset < $tableEnd ) {
-				$$('.sticky-table').addClass('show');
-			}
-
-		} else {
-			$$('.sticky-table').removeClass('show');
+		if ( $$('.chart').hasClass('cols4') ) {
+			var $cols = 'cols4'
+		}
+		if ( $$('.chart').hasClass('cols5') ) {
+			var $cols = 'cols5'
+		}
+		if ( $$('.chart').hasClass('cols6') ) {
+			var $cols = 'cols6'
+		}
+		if ( $$('.chart').hasClass('cols7') ) {
+			var $cols = 'cols7'
+		}
+		if ( $$('.chart').hasClass('cols8') ) {
+			var $cols = 'cols8'
 		}
 
-		// ==== Horizontal =================================================================================
-		if ( $$('.chart').hasClass('horizontal') ) {
+		$$('.chart').before($tableSticky);
+		$$('.chart thead').clone().addClass('sticky-table-thead').appendTo('.sticky-table');
+
+		if ( $tableOffset - $windowOffset < 0 && $windowOffset - $tableEnd < 74 ) {
+			$$('.sticky-table').addClass('show');
+		}
+
+		$$('.sticky-table').addClass($cols);
+
+
+		$window.scroll(function(){
+			var $windowOffset = $window.scrollTop();
+			var $tableOffset = $$('.chart').not('.sticky-table').offset().top;
+			var $tableHeight = $$('.chart').not('.sticky-table').height();
+			var $theadHeight = $$('.chart thead').height();
+			var $tableEnd = ($tableOffset + $tableHeight) - $theadHeight;
+			var $topHideAmount = $tableEnd - $windowOffset;
 			
-			if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 74 ) {
-				$$('.sticky-table').css('top', $topHideAmount);
-			}
+			if ( $tableOffset - $windowOffset < 0 ) {
 
-			if ( $windowOffset - $tableEnd < 0 ) {
-				$$('.sticky-table').css('top', 0);
-			}
+				if ( $windowOffset < $tableEnd ) {
+					$$('.sticky-table').addClass('show');
+				}
 
-			if ( $windowOffset - $tableEnd > 74 ) {
+			} else {
 				$$('.sticky-table').removeClass('show');
 			}
 
-		}
+			// ==== Horizontal =================================================================================
+			if ( $$('.chart').hasClass('horizontal') ) {
+				
+				if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 74 ) {
+					$$('.sticky-table').css('top', $topHideAmount);
+				}
 
-		// ==== Vertical =================================================================================
-		if ( $$('.chart').hasClass('vertical') ) {
+				if ( $windowOffset - $tableEnd < 0 ) {
+					$$('.sticky-table').css('top', 0);
+				}
 
-			if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 168 ) {
-				$$('.sticky-table').css('top', $topHideAmount);
+				if ( $windowOffset - $tableEnd > 74 ) {
+					$$('.sticky-table').removeClass('show');
+				}
+
 			}
 
-			if ( $windowOffset - $tableEnd < 0 ) {
-				$$('.sticky-table').css('top', 0);
-			}
+			// ==== Vertical =================================================================================
+			if ( $$('.chart').hasClass('vertical') ) {
 
-			if ( $windowOffset - $tableEnd > 168 ) {
-				$$('.sticky-table').removeClass('show');
-			}
+				if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 168 ) {
+					$$('.sticky-table').css('top', $topHideAmount);
+				}
 
-		}
-	});
+				if ( $windowOffset - $tableEnd < 0 ) {
+					$$('.sticky-table').css('top', 0);
+				}
+
+				if ( $windowOffset - $tableEnd > 168 ) {
+					$$('.sticky-table').removeClass('show');
+				}
+
+			}
+		});
+	}
 	
 
 
@@ -145,10 +148,10 @@
    ========================================================================== */
 
 
-for (var i = 1; i <= $$('.vertical-tbody-reviews-item-rating').length; i++) {
+for (var i = 1; i <= $$('.vertical-reviews-item-rating').length; i++) {
 	var n = i +1;
-	$$('.vertical-thead-logos-item:nth-child('+ n +') .vertical-thead-logos-item-logo').first().clone().appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-logo');
-	$$('.vertical-tbody-option:nth-child(15) .vertical-item:nth-child('+ n +') div:first').clone().addClass('vertical-mobile-tbody-row-price-text').appendTo('.vertical-mobile-tbody-row:nth-child('+ i +') .vertical-mobile-tbody-row-price');
+	$$('.vertical-thead-logos-item:nth-child('+ n +') .vertical-thead-logos-item-logo').first().clone().appendTo('.vertical-mobile-row:nth-child('+ i +') .vertical-mobile-row-logo');
+	$$('.vertical-option:nth-child(15) .vertical-item:nth-child('+ n +') div:first').clone().addClass('vertical-mobile-row-price-text').appendTo('.vertical-mobile-row:nth-child('+ i +') .vertical-mobile-row-price');
 };
 
 

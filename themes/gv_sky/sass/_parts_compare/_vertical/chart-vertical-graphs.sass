@@ -1,0 +1,94 @@
+&-graphs
+
+	&-legend
+
+		&-list
+			font-size: 14px
+			line-height: 16px
+			font-weight: 600
+			text-transform: none
+
+			&-item
+				position: relative
+				height: 13px
+				margin: 10px 0 0
+				padding-left: 21px
+				box-sizing: border-box
+				+hyphens(none)
+
+				&:nth-child(1)
+					margin: 0
+
+				&:before
+					content: ''
+					position: absolute
+					left: 0
+					top: 0
+					display: block
+					+size(13)
+
+
+				&:nth-child(1):before
+					background-color: $grey-light
+
+				&:nth-child(2):before
+					background-color: $grey-dark
+
+				&:nth-child(3):before
+					background-color: $grey-darker
+
+				&:nth-child(4):before
+					background-color: #85caff
+
+				&:nth-child(5):before
+					background-color: #0984e0
+
+				&:nth-child(6):before
+					background-color: $primary	
+
+	&-item 
+		height: 162px
+		position: relative
+
+		&-wrap
+			position: absolute
+			left: 0
+			right: 0
+			bottom: 0
+			width: 85%
+			max-width: 131px
+			height: perc(120px, 164px)
+			+center
+			+clearfix
+
+
+		&-bar
+			position: absolute
+			float: left
+			vertical-align: bottom
+			width: perc(16px, 131px)
+			// margin-left: perc(7px, 131px)
+			background-color: #000
+
+			&:nth-child(1)
+				background-color: $grey-light
+
+			&:nth-child(2)
+				background-color: $grey-dark
+
+			&:nth-child(3)
+				background-color: $grey-darker
+
+			&:nth-child(4)
+				background-color: #85caff
+
+			&:nth-child(5)
+				background-color: #0984e0
+
+			&:nth-child(6)
+				background-color: $primary
+
+			@for $i from 1 through 6
+				&:nth-child(#{$i})
+					left: (($i * .122137405) + ($i * .053435115) - (.122137405 + .053435115)) * 100%
+					bottom: 0
