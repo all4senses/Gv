@@ -82,6 +82,15 @@ function gv_pages_menu() {
   );
   
   
+   $items['admin/content/create-redirections-in-bulk'] = array(
+    'title' => 'Create Redirections In Bulk to GV other pages',
+    'description' => 'Create Redirections In Bulk page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gv_pages_createRedirectionsInBulk_form'),
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
   /*
   // Deprecated.
   $items['voip-speed-test'] = array(
@@ -9963,4 +9972,137 @@ function gv_pages_gvSettings_form_submit(&$form, &$form_state) {
   //dpm($gv_settings);
   //drupal_goto('node/add/review', array('query' => array('id' => $form_state['values']['id'])));
 }
+
+
+
+// About redirections in .htaccess
+// 
+// https://drupal.org/node/38960
+
+
+/* It disables the default upload button that comes with this #managed_file form */
+function gv_pages_import_my_file_element_process($element, &$form_state, $form) {
+  $element = file_managed_file_process($element, $form_state, $form);
+  $element['upload_button']['#access'] = FALSE;
+ 
+  return $element;
+}
+
+/**
+ * Сreate Redirections In Bulk page.
+ */
+function gv_pages_createRedirectionsInBulk_form($form, &$form_state) {
+   
+//  $form['filter'] = array(
+//    '#type' => 'textfield',
+//    '#title' => 'Filter by: ',
+//    '#default_value' => 'xxx',
+//  );
+  
+  if (@$_GET['action'] == 'done') {
+    $form['submit_again'] = array('#type' => 'submit', '#value' => t('Submit again'));
+  } else {
+    
+    // http://www.lilianagaete.com/how-to-do-a-file-upload-in-drupal-7/
+
+    // Use the #managed_file FAPI element to upload a file.
+    $form['file_fid'] = array(
+      '#title' => t('File'),
+      '#type' => 'managed_file',
+      '#description' => t('The uploaded file will be processed.'),
+      '#default_value' => variable_get('file_fid', ''),
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('csv'),
+        ),
+      '#upload_location' => 'public://redirects-csv/',
+       // Remove the original element "Upload" button.
+      '#process' => array('gv_pages_import_my_file_element_process')
+    );
+    
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Submit'));
+  }
+  
+  $form['#validate'][] = 'gv_pages_createRedirectionsInBulk_formValidate';
+  
+  //dpm($form);
+  
+  return $form;
+}
+
+
+/**
+ * 
+ * @param array &$form
+ *   Array with declared form.
+ *
+ * @param array &$form_state
+ *   Array with current form state.
+
+ * @return void
+ *   Return nothing.
+ */
+function gv_pages_createRedirectionsInBulk_formValidate(&$form, &$form_state) {
+
+  //dpm($_POST);
+  //dpm($form_state);
+  
+  $get = $_GET;
+  unset($get['q'], $get['action']);
+  
+  if ($form_state['values']['op'] == 'Submit') {
+    $get['action'] = 'done';
+    
+    // Load the file.
+    $file = file_load($form_state['values']['file_fid']);
+    //dpm($file);
+    // Change status to permanent.
+    $file->status = FILE_STATUS_PERMANENT;
+    // Save.
+    $uploaded = file_save($file);
+    if ($uploaded == TRUE) {
+      drupal_set_message(t('The file has been uploaded.'));
+      
+      if (($handle = fopen(gv_misc_getPathFromStreamUri($file->uri), "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $file_data[] = $data;
+        }
+        fclose($handle);
+        //dpm($file_data);
+        
+        gv_pages_createRedirectionsInBulk($file_data);
+      }
+      
+    }
+    else {
+      drupal_set_message(t('The file could not be uploaded. Please contact the site administrator.'), 'error');
+    }
+
+    $file_path = $file->uri;
+  }
+  
+  drupal_goto($_GET['q'], array('query' => $get));
+}
+
+
+function gv_pages_createRedirectionsInBulk($data) {
+  
+  foreach ($data as $row) {
+    
+    $redirect = new stdClass();
+    redirect_object_prepare($redirect);
+    $redirect->source = str_replace('http://getvoip.com/', '', $row[0]); //$path['original']['alias'];
+    $redirect->redirect = $row[1]; //$path['source'];
+    $redirect->language = 'und'; //$path['original']['language'];
+    // Check if the redirect exists before saving.
+    $hash = redirect_hash($redirect);
+    if (!redirect_load_by_hash($hash)) {
+      redirect_save($redirect);
+    }
+    
+    //dpm($row);
+    //break;
+    
+  }
+  
+} // End of function gv_pages_createRedirectionsInBulk($data)
 
