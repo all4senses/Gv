@@ -435,7 +435,7 @@ $remoteProvidersSubmissionsSettings = array(
     
   'RingCentral' => array('function' => 'gv_misc_SendRequestToRingCentral', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   
-  'Mitel' => array('function' => 'gv_misc_SendRequestToMitel', 'allowed_sources' => array('page_10')),
+  'Mitel' => array('function' => 'gv_misc_SendRequestToMitel', 'allowed_sources' => array(/*'page_10'*/)),
     
   'Vocalocity' => array('function' => 'gv_misc_SendRequestToVocalocity', 'allowed_sources' => array(/*'page_4', */'page_7', 'page_8'/*, 'page_5-IScope'*/, 'page_9', 'page_10')),
   
