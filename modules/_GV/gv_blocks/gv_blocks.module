@@ -306,6 +306,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
+  $blocks['compare_top5_picks'] = array(
+    'info' => 'Compare Top 5 Picks',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
   $blocks['compare_providers'] = array(
     'info' => 'Compare providers',
     'cache' => DRUPAL_NO_CACHE,
@@ -851,6 +856,11 @@ function gv_blocks_block_view($delta = '') {
       break;
     
     
+    case 'compare_top5_picks':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTop5Picks();
+      break;    
+
     case 'compare_providers':
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareProviders();
@@ -3079,6 +3089,250 @@ function gv_blocks_compareTopProviders($service_type) {
     return $out;
   }
   
+}
+
+
+/**
+ * Returns block with VERTICAL comparing top 5 picks table.
+ */
+function gv_blocks_compareTop5Picks() {
+  $out = '
+    <section class="top-picks">
+      <h2 class="top-picks-title">Get to Know Our Top 5 Picks</h2>
+
+      <table class="chart vertical" data-sticky="off">
+        <thead class="vertical-thead">
+          <tr class="vertical-thead-logos">
+            <td class="vertical-thead-logos-empty vertical-left"></td>
+            <td class="vertical-thead-logos-item vertical-item nextiva">
+              <div class="vertical-thead-logos-item-logo">
+                <div class="vertical-thead-logos-item-logo-img logo-img"></div>
+              </div>
+            </td>
+            <td class="vertical-thead-logos-item vertical-item ringcentral">
+              <div class="vertical-thead-logos-item-logo">
+                <div class="vertical-thead-logos-item-logo-img logo-img"></div>
+              </div>
+            </td>
+            <td class="vertical-thead-logos-item vertical-item mitel">
+              <div class="vertical-thead-logos-item-logo">
+                <div class="vertical-thead-logos-item-logo-img logo-img"></div>
+              </div>
+            </td>
+            <td class="vertical-thead-logos-item vertical-item vonage">
+              <div class="vertical-thead-logos-item-logo">
+                <div class="vertical-thead-logos-item-logo-img logo-img"></div>
+              </div>
+            </td>
+            <td class="vertical-thead-logos-item vertical-item _8x8">
+              <div class="vertical-thead-logos-item-logo">
+                <div class="vertical-thead-logos-item-logo-img logo-img"></div>
+              </div>
+            </td>
+          </tr>
+        </thead>
+
+        <tbody class="vertical-tbody">
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Year Founded</td>
+            
+            <td class="vertical-option-value vertical-item">2005</td>
+            <td class="vertical-option-value vertical-item">2003</td>
+            <td class="vertical-option-value vertical-item">1972</td>
+            <td class="vertical-option-value vertical-item">2003</td>
+            <td class="vertical-option-value vertical-item">1987</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Headquarters</td>
+            
+            <td class="vertical-option-value vertical-item">Scottsdale, AZ</td>
+            <td class="vertical-option-value vertical-item">San Mateo, CA</td>
+            <td class="vertical-option-value vertical-item">Ontario, Canada</td>
+            <td class="vertical-option-value vertical-item">Atlanta, GA</td>
+            <td class="vertical-option-value vertical-item">San Jose, CA</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Customer Service</td>
+            
+            <td class="vertical-option-value vertical-item">US Based, Mon - Fri: 5am-6pm Sat: 9am-1pm MST</td>
+            <td class="vertical-option-value vertical-item">US &amp; Global, 24/7</td>
+            <td class="vertical-option-value vertical-item">US &amp; Global, 24/7</td>
+            <td class="vertical-option-value vertical-item">US Based, Mon-Fri: 9am-9pm EST</td>
+            <td class="vertical-option-value vertical-item">US Based, Mon - Fri 8am-5pm PST</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Most Popular Plan</td>
+            
+            <td class="vertical-option-value vertical-item">Office Pro Plus</td>
+            <td class="vertical-option-value vertical-item">RingCentral Office Standard</td>
+            <td class="vertical-option-value vertical-item">MiCloud Business</td>
+            <td class="vertical-option-value vertical-item">Unlimited Extensions</td>
+            <td class="vertical-option-value vertical-item">Virtual Office Unlimited</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Month to Month Pricing of Popular Plan for a 10 Line System</td>
+            
+            <td class="vertical-option-value vertical-item">$329.50 per month ($32.95 per line)</td>
+            <td class="vertical-option-value vertical-item">$349.90 per month ($34.99 per line)</td>
+            <td class="vertical-option-value vertical-item">No month to month offer</td>
+            <td class="vertical-option-value vertical-item">Request a quote for details as each case is different and various discounts apply to new customers.</td>
+            <td class="vertical-option-value vertical-item">As low as $199.90 per month ($19.99 per line)</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Contract Pricing of Popular Plan for a 10 Line System</td>
+            
+            <td class="vertical-option-value vertical-item">$309.50 per month ($30.95 per line)</td>
+            <td class="vertical-option-value vertical-item">$279.90 per month ($27.99 per line)</td>
+            <td class="vertical-option-value vertical-item">$200 per month ($20 per line)</td>
+            <td class="vertical-option-value vertical-item">No Contracts, all service are month to month.</td>
+            <td class="vertical-option-value vertical-item">As low as $199.90 per month ($19.99 per line)</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">New Customer Promo</td>
+            
+            <td class="vertical-option-value vertical-item">Free Polycom VVX300 Phones ($200 value)</td>
+            <td class="vertical-option-value vertical-item">30 day completely free trial of service and hardware, to all new subscribers with 2 or more users. Any free trial hardware must be returned within 21 days of cancellation.</td>
+            <td class="vertical-option-value vertical-item">3 Months Free</td>
+            <td class="vertical-option-value vertical-item">First Month free always. However other unique discounts are available as well. </td>
+            <td class="vertical-option-value vertical-item">Varies by month, contact sales for current promo</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Number Porting (Is there a cost to transfer my existing phone number?)</td>
+            
+            <td class="vertical-option-value vertical-item">Free</td>
+            <td class="vertical-option-value vertical-item">Free</td>
+            <td class="vertical-option-value vertical-item">Free</td>
+            <td class="vertical-option-value vertical-item">Waived for new customers.</td>
+            <td class="vertical-option-value vertical-item">Fee varies by plan. Fees can be waived for certain deals</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Paperless Faxing Opitons</td>
+            
+            <td class="vertical-option-value vertical-item">Starts at $4.95/mo/500 pages</td>
+            <td class="vertical-option-value vertical-item">Starts at $7.99/mo/500 Pages</td>
+            <td class="vertical-option-value vertical-item">$4.95/mo Unlimited Paperless Fax Only</td>
+            <td class="vertical-option-value vertical-item">$15/mo Unlimited Paperless Fax Only</td>
+            <td class="vertical-option-value vertical-item">$20/mo Unlimited Paperless Fax Only</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Toll Free Number</td>
+            
+            <td class="vertical-option-value vertical-item">Number Provided Free (Incoming calls are $0.02/min)</td>
+            <td class="vertical-option-value vertical-item">$5/mo (1000 Mins Included, Add\'l $0.03/min)</td>
+            <td class="vertical-option-value vertical-item">$4.95/mo per Toll DID ($0.04/min) </td>
+            <td class="vertical-option-value vertical-item">$39.99/mo, No per minute charges</td>
+            <td class="vertical-option-value vertical-item">$25.99/mo (1500 Mins Included, Add\'l $0.03/min)</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Voicemail to Text Transcribtion</td>
+            
+            <td class="vertical-option-value vertical-item"><div class="icon_yes"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_yes"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_no"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_no"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_no"></div></td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Voicemail to Email Transcribtion</td>
+            
+            <td class="vertical-option-value vertical-item"><div class="icon_yes"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_yes"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_no"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_yes"></div></td>
+            <td class="vertical-option-value vertical-item"><div class="icon_no"></div></td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">Free Phone Offer</td>
+            
+            <td class="vertical-option-value vertical-item">Yes, multiple phones to choose from including Polycom, Yealink</td>
+            <td class="vertical-option-value vertical-item">No Free Phones</td>
+            <td class="vertical-option-value vertical-item">No Free Phones</td>
+            <td class="vertical-option-value vertical-item"></td>
+            <td class="vertical-option-value vertical-item">Yes, but varies by month, contact sales for current free phone promo.</td>
+          </tr>
+
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">BYOD Option (Use own/existing phones)</td>
+            
+            <td class="vertical-option-value vertical-item">Yes, Polycom, Cisco, Grandstream, Panasonic, and all other major models.</td>
+            <td class="vertical-option-value vertical-item">Yes, Polycom &amp; Cisco phones only. Also allows BYOD for mobiles, tablets, and laptops.</td>
+            <td class="vertical-option-value vertical-item">No - must get new phones with service.</td>
+            <td class="vertical-option-value vertical-item"></td>
+            <td class="vertical-option-value vertical-item">Yes, but must meet 8x8 standards.</td>
+          </tr>
+
+
+
+          <tr class="vertical-option">
+            <td class="vertical-left">More Details</td>
+            
+            <td class="vertical-option-value vertical-item"><a href="/go/nextiva/bu" class="visit-provider-url">www.nextiva.com</a></td>
+            <td class="vertical-option-value vertical-item"><a href="/go/ringcentral/bu" class="visit-provider-url">www.ringcentral.com</a></td>
+            <td class="vertical-option-value vertical-item"><a href="/go/mitel/bu" class="visit-provider-url">www.mitel.com</a></td>
+            <td class="vertical-option-value vertical-item"><a href="/go/vonage-business-solutions/bu" class="visit-provider-url">www.vonage.com</a></td>
+            <td class="vertical-option-value vertical-item"><a href="/go/8x8-inc/bu" class="visit-provider-url">www.8x8.com</a></td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </section>
+  ';
+
+  return $out;
 }
 
 

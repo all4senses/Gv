@@ -31,15 +31,15 @@
 	var $tableEnd = ($tableOffset + $tableHeight) - $theadHeight;
 	var $topHideAmount = $tableEnd - $windowOffset;
 
-	if ( $$('.chart').hasClass('horizontal') ) {
-		var $tableSticky = '<table class="chart horizontal sticky-table"></table>';
-	}
-
-	if ( $$('.chart').hasClass('vertical') ) {
-		var $tableSticky = '<table class="chart vertical sticky-table"></table>';
-	}
-
 	if ( !$$('.chart').data('sticky') ) {
+
+		if ( $$('.chart').first().hasClass('horizontal') ) {
+			var $tableSticky = '<table class="chart horizontal sticky-table"></table>';
+		}
+
+		if ( $$('.chart').first().hasClass('vertical') ) {
+			var $tableSticky = '<table class="chart vertical sticky-table"></table>';
+		}
 	
 		if ( $$('.chart').hasClass('cols4') ) {
 			var $cols = 'cols4'
@@ -57,8 +57,8 @@
 			var $cols = 'cols8'
 		}
 
-		$$('.chart').before($tableSticky);
-		$$('.chart thead').clone().addClass('sticky-table-thead').appendTo('.sticky-table');
+		$$('.chart').first().before($tableSticky);
+		$$('.chart').first().children('thead').clone().addClass('sticky-table-thead').appendTo('.sticky-table');
 
 		if ( $tableOffset - $windowOffset < 0 && $windowOffset - $tableEnd < 74 ) {
 			$$('.sticky-table').addClass('show');
@@ -86,7 +86,7 @@
 			}
 
 			// ==== Horizontal =================================================================================
-			if ( $$('.chart').hasClass('horizontal') ) {
+			if ( $$('.chart').first().hasClass('horizontal') ) {
 				
 				if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 74 ) {
 					$$('.sticky-table').css('top', $topHideAmount);
@@ -103,7 +103,7 @@
 			}
 
 			// ==== Vertical =================================================================================
-			if ( $$('.chart').hasClass('vertical') ) {
+			if ( $$('.chart').first().hasClass('vertical') ) {
 
 				if ( $windowOffset >= $tableEnd && $windowOffset - $tableEnd < 168 ) {
 					$$('.sticky-table').css('top', $topHideAmount);
@@ -124,6 +124,36 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   Top Picks logos chart
+   ========================================================================== */
+
+var $topPicksProviders = $$('.top-picks').find('.vertical-thead-logos-item-logo-img');
+var $logos = $$('.tbody-item-php-6');
+
+for (var i = 1; i <= $topPicksProviders.length; i++) {
+	var n = i-1;
+	$topPicksProviders.eq(n).append( $logos.eq(n).find('.visit-provider-url').eq(1).html() );
+}
 
 
 
