@@ -152,7 +152,7 @@ var $logos = $$('.tbody-item-php-6');
 
 for (var i = 1; i <= $topPicksProviders.length; i++) {
 	var n = i-1;
-	$topPicksProviders.eq(n).append( $logos.eq(n).find('.visit-provider-url').eq(1).html() );
+	$topPicksProviders.eq(n).append( $logos.eq(n).find('.visit-provider-url').html() );
 }
 
 
