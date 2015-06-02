@@ -306,6 +306,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
+  $blocks['managed_by_author'] = array(
+    'info' => 'Managed By Author',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
   $blocks['compare_top5_picks'] = array(
     'info' => 'Compare Top 5 Picks',
     'cache' => DRUPAL_NO_CACHE,
@@ -855,7 +860,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_getProvidersTableFromViews_withCaching();
       break;
     
-    
+    case 'managed_by_author':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_managedByAuthor();
+      break;   
+
     case 'compare_top5_picks':
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareTop5Picks();
@@ -3092,6 +3101,54 @@ function gv_blocks_compareTopProviders($service_type) {
 }
 
 
+/**
+ * Returns block containing the 'This page is managed by' message.
+ */
+function gv_blocks_managedByAuthor() {
+
+
+  $date_display = date("m/d/Y");
+  $date_today = date("d");
+
+  if ( null !== cache_get('update_date', 'cache') ) {
+    $cache = intval( cache_get('update_date_day', 'cache') );
+    $today = intval( $date_today );
+
+    if ( $today - $cache >= 7 ) {
+      cache_set('update_date', $date_display);
+      cache_set('update_date_day', $date_today);
+    }
+    
+  } else {
+    cache_set('update_date', $date_display);
+    cache_set('update_date_day', $date_today);
+  }
+  cache_set('update_date', $date_display);
+
+
+  $date = cache_get('update_date')->data;
+  // $date = $date_display;
+
+
+
+
+  $out = '
+    <div class="managed">
+      <div class="managed-wrap">
+        <img src="http://getvoip.com/sites/default/files/styles/author_avatar_article_circle/public/avatars/author/reuben-yonatan.jpg" alt="Managed by Reuben Yonatan" class="managed-img">
+        <div class="managed-text">
+          <div class="managed-text-intro">This providers listed on this page have been rigorously tested for reliability, call quality, and other quality of service factors.</div>
+          <div class="managed-text-author">The findings are compiled by: <br />
+            <a href="/staff/reuben-yonatan" class="managed-text-author-link">Reuben Yonatan</a>, VoIP/UC Analyst
+          </div>
+          <div class="managed-text-date">Last updated: '. $date .'</div>
+        </div>
+      </div>
+    </div>';
+
+
+  return $out;
+}
 /**
  * Returns block with VERTICAL comparing top 5 picks table.
  */
