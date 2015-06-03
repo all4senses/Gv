@@ -12,7 +12,12 @@
         $$('.pdf-button').on('click', function(){
             $$("body").addClass('opened-popup');
             $.fn.popup("exit_pdf");
-            $('#exitIntentPDF').form('prepare');
+
+            if ( $.cookie('pdf_complete') === 'true' ) {
+              // TODO: Show download
+            } else {
+              $('#exitIntentPDF').form('prepare');
+            }
         });
 
 
@@ -29,6 +34,7 @@
         $$('#exitIntentPDF').children('form').submit(function(e){
             e.preventDefault();
             $('#exitIntentPDF').form('submit', '/request');
+            $.cookie('pdf_complete', 'true');
         });
         
        
