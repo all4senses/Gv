@@ -8,9 +8,6 @@
 		+section-title-heading($weight: 400, $color: $grey-dark, $size: 35px)
 		margin-bottom: 20px
 
-	tr:last-child
-		.vertical-item
-			border-bottom: 0
 
 	.vertical-thead
 
@@ -19,6 +16,21 @@
 
 		.vertical-item
 			width: 15%
+			border-left: 1px solid $divider
 
 	.vertical-thead-logos-item-logo // Bottom border on logo cells
 		border-bottom: 1px solid $divider
+
+
+
+	tr:last-child // Go-to-provider links
+		.vertical-left
+			padding: 13px 10px 13px 20px
+
+		.vertical-item
+			border-bottom: 0
+			font-size: 16px
+			font-weight: 500
+
+			&:hover
+				text-decoration: underline
