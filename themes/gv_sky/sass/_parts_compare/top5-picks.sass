@@ -12,14 +12,33 @@
 	.vertical-thead
 
 		.vertical-left // Empty top-left cell
-			border-bottom: 1px solid $divider !important
+			border-bottom: 4px solid $primary !important
+
+			&:after // Border (grey) bleed fix
+				content: ''
+				position: absolute
+				bottom: -4px
+				right: -1px
+				height: 4px
+				width: 1px
+				background-color: $primary
 
 		.vertical-item
 			width: 15%
 			border-left: 1px solid $divider
 
 	.vertical-thead-logos-item-logo // Bottom border on logo cells
-		border-bottom: 1px solid $divider
+		border-bottom: 4px solid $primary
+		position: relative
+
+		&:after // Border (grey) bleed fix
+			content: ''
+			position: absolute
+			bottom: -4px
+			right: -1px
+			height: 4px
+			width: 1px
+			background-color: $primary
 
 
 
