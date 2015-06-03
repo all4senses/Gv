@@ -2,7 +2,8 @@
    Sidebar Append
    ========================================================================== */
 
-	$$('.top-providers').prependTo('.field-name-field-preface-bottom > .field-items');
+	$$('.sidebar-wrap').prependTo('.field-name-field-preface-bottom > .field-items');
+	$$('.pdf').prependTo('.sidebar-wrap');
 
 
 

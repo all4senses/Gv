@@ -29,6 +29,9 @@
 		if ( $arg === "exit" ) {
 			var exit = true;
 		} 
+		if ( $arg === "exit_pdf" ) {
+			var exit_pdf = true;
+		} 
 		if ( $arg === "subscribe" ) {
 			var exit_subscribe = true;
 		} 
@@ -94,6 +97,13 @@
 			if (exit) {
 				$$('.popup, .popup-overlay').addClass('show exit');
 				$$('#exitIntent').appendTo($('.popup-content'));
+				popOpen = true;
+			}
+
+
+			if (exit_pdf) {
+				$$('.popup, .popup-overlay').addClass('show exit');
+				$$('#exitIntentPDF').appendTo($('.popup-content'));
 				popOpen = true;
 			}
 

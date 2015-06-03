@@ -501,6 +501,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_NO_CACHE,
   );
   
+  $blocks['exitintent_pdf'] = array(
+    'info' => 'Exit intent PDF Lead Gen.',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
   $blocks['exitintent_v2'] = array(
     'info' => 'Exit intent v2 with quote 3 step',
     'cache' => DRUPAL_NO_CACHE,
@@ -1065,6 +1070,11 @@ function gv_blocks_block_view($delta = '') {
       break;
  
     
+    case 'exitintent_pdf':
+      $block['subject'] = ''; 
+      $block['content'] = gv_blocks_get_exitintent_pdf();
+      break;
+
     case 'exitintent_v2':
       $block['subject'] = ''; 
       $block['content'] = gv_blocks_get_exitIntent_v2();
@@ -2947,7 +2957,8 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $all_data_quick = gv_misc_getProvidersDataQuick();
   
-  $out = '<aside class="top-providers" role="complementary">
+  $out = '<aside class="sidebar-wrap" role="complementary">
+  <div class="top-providers">
   <h3 class="top-providers-heading">
   <span class="top-providers-heading-text">Top 5 Providers</span></h3>' .
   '<ul class="top-providers-list">';
@@ -3013,6 +3024,7 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
   
   $out .= '
     </ul>
+    </div>
   </aside>';
   
   
@@ -3135,7 +3147,7 @@ function gv_blocks_managedByAuthor() {
   $out = '
     <div class="managed">
       <div class="managed-wrap">
-        <img src="http://getvoip.com/sites/default/files/styles/author_avatar_article_circle/public/avatars/author/reuben-yonatan.jpg" alt="Managed by Reuben Yonatan" class="managed-img">
+        <img src="http://getvoip.com/sites/default/files/styles/author_avatar_article_circle/public/avatars/author/reuben-yonatan.jpg" alt="Managed by Reuben Yonatan" class="managed-img" rel="v:photo">
         <div class="managed-text">
           <div class="managed-text-intro">This providers listed on this page have been rigorously tested for reliability, call quality, and other quality of service factors.</div>
           <div class="managed-text-author">The findings are compiled by: <br />
@@ -10481,6 +10493,150 @@ function gv_blocks_get_requestQuote_block_v10_popup_provider($case = 'cc') {
   return $out;
 }
 
+
+/**
+ * PDF White Paper Lead Gen Exit Intent block
+ */
+function gv_blocks_get_exitintent_pdf() {
+
+  
+  $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
+  // drupal_add_js($path_to_custom_js . 'gv_quote_page_field_hints.js');
+  
+  
+  
+  $current_js_array = drupal_add_js();
+  drupal_add_js($path_to_custom_js . 'gv_exitIntent_PDF.js');
+  
+
+  
+  $token = md5(time()); //drupal_get_token('test');
+  $_SESSION['requestQuoteToken'] = $token;
+  
+  $out = '
+  <div class="pdf">
+    <div class="pdf-wrap">
+      <img src="/sites/all/themes/gv_sky/images/pdf_thumb.png" alt="Free VoIP Guide June 2015" width="125" height="162" class="pdf-img">
+      <div class="pdf-text">
+        <div class="pdf-text-title">
+          <span class="pdf-text-title-highlight">Free Guide:</span> June 2015 Edition
+        </div>
+        <div class="pdf-text-subtitle">The Complete Buyer\'s Guide to Business VoIP Phone Services.</div>
+      </div>
+    </div>
+    <div class="pdf-button">
+      <div class="pdf-button-text">
+        Get My <span class="pdf-button-text-highlight">FREE</span> Guide
+      </div>
+    </div>
+    <div class="pdf-notice">Your eBook guide will open in a new window.</div>
+  </div>
+
+
+  <div style="display: none;">
+    <div class="exit-intent" id="exitIntentPDF">         
+        <form class="exit-intent-form js-controlled-form" method="post" action="/request">
+                <div class="exit-intent-form-wrap">
+
+                    <div class="step step-one">
+                          <div class="exit-intent-intro">
+                            <div class="exit-intent-intro-line _pdf">Get Your Essential Buyer\'s Guide to Business VoIP Services — 
+                              <span class="exit-intent-intro-line-highlight">Free!</span>
+                            </div>
+                            <div class="exit-intent-intro-line-4 _pdf">To Download, Tell us:</div>
+                          </div>
+                            
+                          <div class="exit-intent-cta">
+                              <div class="exit-intent-cta-input_wrap">
+                                  <div class="exit-intent-fieldset secure fieldset required">
+                                      <div class="exit-intent-fieldset-wrap">
+                                        <input class="exit-intent-fieldset-input input"  type="text" name="company" id="company" placeholder="Company Name" />
+                                      </div>
+                                  </div>
+                                  <div class="exit-intent-fieldset select fieldset required">
+                                      <div class="exit-intent-fieldset-wrap">
+                                        <select name="phones_amt" id="phones_amt" class="exit-intent-fieldset-select input">
+                                           <option value="">Number of Lines</option>
+                                           <option value="1 - 4">1 - 4</option>
+                                           <option value="5 - 10">5 - 10</option>
+                                           <option value="11 - 20">11 - 20</option>
+                                           <option value="21 - 50">21 - 50</option>
+                                           <option value="More than 50">More than 50</option>
+                                        </select>
+                                      </div>
+
+                                   </div>   
+                                  <div class="exit-intent-fieldset fieldset required">
+                                      <div class="exit-intent-fieldset-wrap">
+                                        <input class="exit-intent-fieldset-input input"  type="text" name="firstname" id="firstname" placeholder="First Name" />
+                                      </div>
+                                  </div>
+
+                                  <div class="exit-intent-fieldset fieldset required">
+                                      <div class="exit-intent-fieldset-wrap">
+                                        <input class="exit-intent-fieldset-input input"  type="text" name="lastname" id="lastname" placeholder="Last Name" />
+                                      </div>
+                                  </div>
+
+                                  <div class="exit-intent-fieldset fieldset required">
+                                      <div class="exit-intent-fieldset-wrap">
+                                        <input class="exit-intent-fieldset-input input email"  type="text" name="email" id="email" placeholder="Email Address" />
+                                      </div>
+                                  </div>
+
+                                  <div class="exit-intent-fieldset fieldset required">
+                                      <div class="exit-intent-fieldset-wrap">
+                                          <input class="exit-intent-fieldset-input input phone"  type="text" name="phone" id="phone" value="" placeholder="Phone Number" />
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="exit-intent-cta-wrap">
+                                 <div class="exit-intent-cta-secure">
+                                    <div class="exit-intent-cta-secure-lock"></div>
+
+                                    <svg version="1.1" class="exit-intent-cta-secure-arrow"
+                                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                                       x="0px" y="0px" width="202px" height="76px" style="enable-background:new 0 0 202 76;"
+                                       xml:space="preserve">
+                                    <defs>
+                                    </defs>
+                                    <polygon style="fill:#D5D6D6;" points="167,76 0,76 0,0 167,0 202,38 "/>
+                                    </svg>
+
+
+                                    <div class="exit-intent-cta-secure-text">Spam-Free <br />Guaranteed.</div>
+                                 </div>
+                                  <div class="exit-intent-cta-button submit">
+                                    <input class="exit-intent-cta-button-input" id="next" value="Get My FREE Guide" type="submit" />
+                                  </div>
+                              </div>
+                       </div>
+                    </div>
+                    
+
+                    <div class="results"></div>
+
+
+
+                    
+                </div> <!-- <div class="exit-intent-form-wrap"></div> -->
+                
+                <input type="hidden" name="token" value="' . $token . '" />
+                <input type="hidden" name="source" value="block" />
+                <input type="hidden" name="version" value="exit-intent-pdf" />
+                <input type="hidden" name="referrer" value="" />
+                <input type="hidden" name="url" value="" />
+                
+        </form>
+
+        <p id="data"></p>
+      </div>
+  </div>
+  ';
+  
+  return $out;
+}
 
 /**
  * Ppc bu page /ppc/business-voip exit intent block.

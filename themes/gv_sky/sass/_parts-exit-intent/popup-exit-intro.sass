@@ -13,6 +13,29 @@
 	.step-three &
 		height: 282px
 
+	#exitIntentPDF &
+		height: 240px
+
+	&-line // PDF exit intent text
+		width: 90%
+		+center
+		padding-top: 35px
+		font-size: 43px
+
+		&-highlight
+			color: $contrast
+			font-weight: 500
+
+		&:after
+			content: ''
+			position: relative
+			top: 18px
+			display: block
+			+center
+			width: perc(280px, 1100px)
+			border-bottom: 2px solid darken($divider, 10)
+
+
 	&-line-1
 		&.one
 			padding-top: 53px
@@ -137,6 +160,15 @@
 				font-size: 18px
 				max-width: 80%
 				+center(30px)
+
+
+		&._pdf
+			font-size: 28px
+			font-weight: 500
+			margin-top: 38px
+
+			+max(736)
+				font-size: 26px
 
 
 		&.two
