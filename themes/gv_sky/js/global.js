@@ -220,7 +220,11 @@ $this = $$(this);
 					$currentStep.removeClass('show');
 
 					$.post($url, data, function(data){
-						$results.html('<div class="results-success">' + data.data + '</div>')
+
+						if ( $('.popup').hasClass('exit_pdf') ) {
+							$.cookie('pdf_complete', 'true');
+						}
+						$results.html('<div class="results-success">' + data.data + '</div>');
 					}, 'json')
 							.fail(function(){
 								$results.html('<div class="loading-title">An unknown error has occured on the server, please contact customer support for help.</div>')

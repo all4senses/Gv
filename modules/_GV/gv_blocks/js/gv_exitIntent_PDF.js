@@ -13,11 +13,18 @@
             $$("body").addClass('opened-popup');
             $.fn.popup("exit_pdf");
 
-            // if ( $.cookie('pdf_complete') === 'true' ) {
-            //   // TODO: Show download
-            // } else {
+            if ( $.cookie('pdf_complete') === 'true' ) {
+              var downloadMsg = '<div class="results"><div class="results-success"><div class="results-success-download"> <a href="http://getvoip.com/pdfs/hosted-voip-guide-2015.pdf" target="_blank"> <div class="results-success-download-wrap"> <div class="results-success-download-icon"></div><span class="results-success-download-text">Download PDF</span></div></a></div><p class="results-success-text"><strong>Thank you</strong> for requesting a quote. A dedicated VoIP specialist will be calling you very shortly to finalize the quote. <br><br>In the meantime, visit <a href="http://getvoip.com/business">GetVoIP.com</a> to browse featured business phone providers.</p></div></div>';
+
+              if ( !$$('.popup .results-success').length ) {
+                $$('.popup-content').addClass('final').html(downloadMsg);
+              } else {
+                $$('.popup-content').addClass('final');
+              }
+
+            } else {
               $('#exitIntentPDF').form('prepare');
-            // }
+            }
         });
 
 
@@ -34,7 +41,7 @@
         $$('#exitIntentPDF').children('form').submit(function(e){
             e.preventDefault();
             $('#exitIntentPDF').form('submit', '/request');
-            $.cookie('pdf_complete', 'true');
+            // $.cookie('pdf_complete', 'true');
         });
         
        

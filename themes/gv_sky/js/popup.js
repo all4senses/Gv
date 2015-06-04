@@ -66,6 +66,7 @@
 				$('.provider-quote .step-one').addClass('show');
 			}
 			$$('.popup, .popup-overlay').removeClass('show quote provider_demo provider_quote exit exit_subscribe exit_pdf');
+			$$('.popup-content').removeClass('final');
 			$$("body").removeClass('opened-popup');
 			popOpen = false;
 		}
