@@ -22,7 +22,7 @@
         //     turned_off = true;
         // }
         
-        jQuery('.exit-intent-form').keydown(function (event) { 
+        jQuery('#exitIntent').keydown(function (event) { 
 
             // Stop changing focus on the last element in the form section
             if(event.keyCode == 9 && (event.target.id == "phones_amt-button" || event.target.id == "phone") ) {
@@ -69,25 +69,25 @@
         // Prepare form
         $('#exitIntent').form('prepare');
 
-        $('.exit-intent-form .next').click(function(){
-          $('.exit-intent-form').form('next');
+        $('#exitIntent .next').click(function(){
+          $('#exitIntent').form('next');
         });
 
-        $(".exit-intent-form .no, .popup-overlay").click(function(){
+        $("#exitIntent .no, .popup-overlay").click(function(){
             $.fn.popup("close");
         });
 
-        $('.exit-intent-form').submit(function(e){
+        $('#exitIntent').submit(function(e){
             e.preventDefault();
-            $('.exit-intent-form').form('submit', '/request');
+            $('#exitIntent').form('submit', '/request');
         });
         
        
        
        
        
-        $('.exit-intent-form input[name="referrer"]').val(document.referrer);
-        $('.exit-intent-form input[name="url"]').val(document.URL);
+        $('#exitIntent input[name="referrer"]').val(document.referrer);
+        $('#exitIntent input[name="url"]').val(document.URL);
        
               
         

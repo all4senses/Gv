@@ -207,6 +207,7 @@ $this = $$(this);
 				}
 
 				if ( submit ) {
+					console.log(this);
 					var $currentStep = this.find('.step.show');
 					var $form = this.parent();
 					var $results = this.find('.results');
