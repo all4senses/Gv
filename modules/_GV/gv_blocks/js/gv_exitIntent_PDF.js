@@ -13,11 +13,11 @@
             $$("body").addClass('opened-popup');
             $.fn.popup("exit_pdf");
 
-            if ( $.cookie('pdf_complete') === 'true' ) {
-              // TODO: Show download
-            } else {
+            // if ( $.cookie('pdf_complete') === 'true' ) {
+            //   // TODO: Show download
+            // } else {
               $('#exitIntentPDF').form('prepare');
-            }
+            // }
         });
 
 
