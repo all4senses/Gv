@@ -207,12 +207,13 @@ $this = $$(this);
 				}
 
 				if ( submit ) {
-					console.log(this);
+					// console.log(this);
+					// thisform = this;
 					var $currentStep = this.find('.step.show');
 					var $form = this.parent();
 					var $results = this.find('.results');
 					var $loading = '<div class="loading"><div class="loading-title">Processing your information...</div><div class="loading-gif"></div></div>';
-					var data = this.serialize();
+					var data = this.find('form').serialize();
 
 					$form.addClass('final');
 					$results.html($loading);
