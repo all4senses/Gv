@@ -6805,6 +6805,10 @@ function gv_misc_disqus_getUsers($next_id = NULL) {
       
       foreach ($data_from->response as $remote_user) {
         if (!empty($remote_user->email) && strpos($remote_user->email, 'getvoip') === FALSE ) {
+          if (isset($remote_user->id) || empty($remote_user->id)) {
+            // Fixes error Notice: Undefined property: stdClass::$id in gv_misc_disqus_getUsers() (line 6808 of /home/gvadmin/public_html/sites/all/modules/_GV/gv_misc/gv_misc.module).
+            $remote_user->id = $remote_user->email;
+          }
           $remote_users[$remote_user->id] = array('name' => $remote_user->name, 'email' => $remote_user->email);
         }
       }
