@@ -450,7 +450,7 @@ $remoteProvidersSubmissionsSettings = array(
   
   'Mitel_CallCenter' => array('function' => 'gv_misc_SendRequestToMitel_callCenter', 'allowed_sources' => array('page_10_cc_v1')),
     
-  'RingCentral-CallCenter' => array('function' => 'gv_misc_SendRequestToRingCentral_callCenter', 'allowed_sources' => array('')),  
+  'RingCentral_CallCenter' => array('function' => 'gv_misc_SendRequestToRingCentral_callCenter', 'allowed_sources' => array('')),  
     
     
   'RingCentral-UK' => array('function' => 'gv_misc_SendRequestToRingCentral_UK', 'allowed_sources' => array('page_6-UK-LP', 'page_7_uk', 'page_8_uk', 'page_9_uk', 'page_10_uk')),
