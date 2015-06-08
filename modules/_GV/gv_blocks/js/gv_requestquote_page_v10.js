@@ -105,7 +105,7 @@
 
         $('.lpv10-form').submit(function(e){
             e.preventDefault();
-            $('.lpv10-form').form('submit', '/request');
+            $('.form-main').form('submit', '/request');
         });
 
 
