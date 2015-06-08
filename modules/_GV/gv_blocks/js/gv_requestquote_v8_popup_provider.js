@@ -31,7 +31,7 @@
 
         jQuery('.provider-quote-form').submit(function(e){
             e.preventDefault();
-            jQuery('.provider-quote-form').form('submit', '/request');
+            jQuery('.provider-quote').form('submit', '/request');
         });
 
 
