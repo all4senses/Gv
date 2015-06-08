@@ -57,7 +57,7 @@
 
         $('.lpv10-form .input').each(function(){
           $(this).focus(function(){
-            $this.parents('.fieldset').addClass('focus');
+            $(this).parents('.fieldset').addClass('focus');
           });
 
           $(this).blur(function(){

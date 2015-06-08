@@ -70,7 +70,7 @@
 
         jQuery('.popup-request-form').submit(function(e){
             e.preventDefault();
-            jQuery('.popup-request-form').form('submit', '/request');
+            jQuery('.provider-popup').form('submit', '/request');
         });
         
        
