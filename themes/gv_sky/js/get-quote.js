@@ -79,5 +79,5 @@
 	$$('.get-quote-form').submit(function(e){
 		// console.log('submit');
 		e.preventDefault();
-		$$('.get-quote-form').form('submit', '/request');
+		$$('.get-quote').form('submit', '/request');
 	});
