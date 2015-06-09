@@ -28,34 +28,34 @@
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/home.css">
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/popup-exit.css">
   <?php } ?>
-  <?php if ( current_path() == 'blog' ) {?>
+  <?php if ( current_path() === 'blog' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
   <?php if ( strpos(request_path(), 'blog/') !== FALSE || strpos(request_path(), 'library/') !== FALSE || strpos(request_path(), 'news/') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/blog.css">
   <?php } ?>
-  <?php if ( current_path() == 'node/add/review' || strpos(request_path(), '/edit') !== FALSE ) {?>
+  <?php if ( current_path() === 'node/add/review' || strpos(request_path(), '/edit') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/submit-review.css">
   <?php } ?>
   <?php if ($is_admin) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/admin.css">
   <?php } ?>
-  <?php if ( strpos(request_path(), 'reviews/phone') !== FALSE ) {?>
+  <?php if ( strpos(request_path(), 'reviews/phone/') !== FALSE || current_path() === 'node/804') {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/review.css">
   <?php } ?>
   <?php if ( strpos(request_path(), 'how-we-rank') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/compare.css">
   <?php } ?>
-  <?php if ( current_path() == 'node/38' ) {?>
+  <?php if ( current_path() === 'node/38' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/about.css">
   <?php } ?>
   <?php if ( strpos(current_path(), 'user/') !== FALSE ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/team-member.css">
   <?php } ?>
-  <?php if ( current_path() == 'node/62' ||  current_path() == 'node/91' ) {?>
+  <?php if ( current_path() === 'node/62' ||  current_path() === 'node/91' ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/contact.css">
   <?php } ?>
-  <?php if ( strpos(request_path(), 'reviews') !== FALSE && strpos(request_path(), 'reviews/phone') === FALSE ) {?>
+  <?php if ( strpos(request_path(), 'reviews') !== FALSE && (strpos(request_path(), 'reviews/phone/') === FALSE && current_path() !== 'node/804') ) {?>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/provider.css">
   <?php } ?>
   <?php $node = menu_get_object() ?>

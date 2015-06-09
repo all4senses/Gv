@@ -78,7 +78,7 @@
           <?php echo render($page['above_footer']); ?>
     </div>
   </main>
-  <?php echo gv_blocks_get_requestQuote_block_v8(); ?>
+  <?php echo gv_blocks_get_requestQuote(); ?>
 
 
   <?php

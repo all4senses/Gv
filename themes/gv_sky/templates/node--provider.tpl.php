@@ -152,26 +152,16 @@
                   <?php echo 
                     (!empty($node->p_data['disable_buttons']['demo']) ? '' : '<div class="provider-box-provider-details-button demo-trigger trigger"><span class="provider-box-provider-details-button-text">Request a Demo</span></div>'), 
                     (!empty($node->p_data['disable_buttons']['demo']) ? '' : '<div class="provider-box-provider-details-button quote-trigger trigger"><span class="provider-box-provider-details-button-text">Request a Quote</span></div>'), 
-                    // l('Request a Demo', '#', array('html' => TRUE, 'attributes' => array('id' => 'request-demo', 'rel' => 'nofollow'))), 
-                    // (!empty($node->p_data['disable_buttons']['quote']) ? '' : l('<span class="provider-box-provider-details-button-text">Request a Quote</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)))) , 
                    
                     l('<span class="provider-box-provider-details-button-text">Write Review</span>', 'node/add/review', array('html' => TRUE, 'attributes' => array('class' => 'provider-box-provider-details-button write-review', 'rel' => 'nofollow'), 'query' => array('id' => $node->nid)));   
-            
-                      // Colorbox for popup window.
-                      // drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
-                      // drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
 
-                      // Exit intent Ad block main js.
-                      // $path_to_custom_js = drupal_get_path('module', 'gv_pages') . '/js/';
-                      // drupal_add_js($path_to_custom_js . 'gv_provider_popup_requestLinks.js');
-                      
                   ?>
           
                           <!-- Popup windows for Request links above -->
                           <div style="display: none;" class="provider-quote-container">
                             <div class="provider-popup provider-quote"> 
                               <?php echo $logo_block2, '<div class="provider-popup-header"><div class="provider-popup-header-wrap"><div class="provider-popup-header-title">Request ', $provider_name, ' Quote</div><div class="provider-popup-header-desc">In order to prepare a quote, we need some information about you.</div></div></div>'; ?>
-                              <?php echo gv_blocks_get_requestQuote_block_v8_popup_provider(); ?>
+                              <?php echo gv_blocks_get_requestQuote_popup_provider(); ?>
                               
                             </div>
                           </div>
@@ -179,7 +169,7 @@
                           <div style="display: none;" class="provider-demo-container">
                             <div class="provider-popup provider-demo"> 
                               <?php echo $logo_block2, '<div class="provider-popup-header"><div class="provider-popup-header-wrap"><div class="provider-popup-header-title">Request ', $provider_name, ' Demo</div><div class="provider-popup-header-desc">In order to schedule your demo, we need some information from you.</div></div></div>'; ?>
-                              <?php echo gv_blocks_get_requestDemo_block_v1_popup_provider(); ?>
+                              <?php echo gv_blocks_get_requestDemo_popup_provider(); ?>
                               
                             </div>
                           </div>
