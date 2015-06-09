@@ -1814,7 +1814,8 @@ function gv_misc_url_outbound_alter(&$path, &$options, $original_path) {
 //  }
   
   if ($path == 'node/add/review') {
-    $path = 'voip-provider-submit-user-review';
+    //$path = 'voip-provider-submit-user-review';
+    $path = 'submit-review';
   }
   elseif ($path == 'node/add/phone-review') {
     $path = 'voip-phone-submit-user-review';
@@ -1836,7 +1837,7 @@ function gv_misc_url_inbound_alter(&$path, $original_path, $path_language) {
 //  $path = 'contact';
 //}
 //else
-  if ($path == 'voip-provider-submit-user-review') {
+  if ($path == 'voip-provider-submit-user-review' || $path == 'submit-review') {
     $path = 'node/add/review';
   }
   elseif ($path == 'voip-phone-submit-user-review') {
@@ -12832,7 +12833,7 @@ function gv_misc_setBreadcrumbs(&$variables) {
     //dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), $variables['node']->title )));
   }
-  elseif (@$_SERVER['REDIRECT_URL'] == '/voip-provider-submit-user-review') {
+  elseif (@$_SERVER['REDIRECT_URL'] == '/voip-provider-submit-user-review' || @$_SERVER['REDIRECT_URL'] == '/submit-review') {
     //dpm('Any other NODE page------------');
     $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => array(l('Home', NULL), 'Submit Review' )));
   }

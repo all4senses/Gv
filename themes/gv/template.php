@@ -43,10 +43,12 @@ function gv_link($variables) {
   }
 
   // Replace voip-provider-submit-user-review?=63 with voip-provider-submit-user-review/63
+  // Replace submit-review?=63 with submit-review/63
   // .htaccess should have a backward conversion
   // # Silently replace voip-provider-submit-user-review/xxx  with voip-provider-submit-user-review?id=xxx  
   // http://www.drupal.ru/node/66578
   // RewriteRule ^(voip-provider-submit-user-review)/([0-9]*)$ index.php?q=$1&id=$2 [L,QSA]
+  // RewriteRule ^(submit-review)/([0-9]*)$ index.php?q=$1&id=$2 [L,QSA]
 
   if ( ($variables['path'] == 'node/add/review') && !empty($variables['options']['query']['id'])) {
     //dpm($variables);
