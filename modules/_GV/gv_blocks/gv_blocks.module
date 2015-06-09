@@ -4970,6 +4970,15 @@ function gv_blocks_get_requestQuote() {
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
 
+  $secureMessage = '
+             <div class="get-quote-secure">
+                <div class="get-quote-secure-lock"></div>
+
+                <svg version="1.1" class="get-quote-secure-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="315px" height="88px" style="enable-background:new 0 0 315 88;" xml:space="preserve"><defs></defs><path style="fill-rule:evenodd;clip-rule:evenodd;fill:#D5D6D6;" d="M0,0h275l40,44l-40,44H0V0z"/></svg>
+
+                <div class="get-quote-secure-text">Safe &amp; Secure <br />No-Spam Guaranteed.</div>
+             </div>';
+
   
   
   
@@ -4982,14 +4991,6 @@ function gv_blocks_get_requestQuote() {
              <div class="get-quote-heading">
                <div class="get-quote-heading-title">Want to See Exactly How Much You Can Save?</div>
                <div class="get-quote-heading-subtitle">Instantly compare bottom line quotes from award-winning providers.</div>
-             </div>
-
-             <div class="get-quote-secure">
-                <div class="get-quote-secure-lock"></div>
-
-                <svg version="1.1" class="get-quote-secure-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="315px" height="88px" style="enable-background:new 0 0 315 88;" xml:space="preserve"><defs></defs><path style="fill-rule:evenodd;clip-rule:evenodd;fill:#D5D6D6;" d="M0,0h275l40,44l-40,44H0V0z"/></svg>
-
-                <div class="get-quote-secure-text">Safe &amp; Secure <br />No-Spam Guaranteed.</div>
              </div>
 
              <form class="get-quote-form" method="post" action="/request">
