@@ -4866,7 +4866,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
                     $avatar = NULL;
                   }
                   
-                  
+                  $avatar_themed = NULL;
                   // Avatar for logged in via social networks.
                   if ($user->hostname == '37.229.169.239') {
                     //dpm($user);
@@ -4877,10 +4877,6 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
                       //dpm($avatar);
                       $avatar_themed = theme('image_style', array( 'path' =>  $avatar->uri, 'style_name' => 'avatar_reviewer', 'alt' => '', 'title' => '', 'attributes' => array('class' => 'avatar reviewer', 'rel' => 'v:photo')));
                     }
-                    else {
-                      $avatar_themed = NULL;
-                    }
-                    
                     
                     
                   }
@@ -5437,7 +5433,7 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
 //
 //      } 
       
-      //dpm($form);
+      dpm($form);
 }
 
 /*
