@@ -4854,7 +4854,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
                   //dpm($_GET);
                   //dpm($_SERVER);
                   
-                  
+                 $form['about_you']['hybridauth'] = array(
+                    '#type' => 'hybridauth_widget',
+                  ); 
                   
                   if (is_object($user->picture)) {
                     $avatar = $user->picture;
