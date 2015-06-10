@@ -5125,9 +5125,9 @@ function gv_page_alterSubmitReviewPage_v2(&$form) {
           //$form['about_you']['field_r_fname']['und'][0]['value']['#default_value'] = $user->field_u_fname['und'][0]['value'];
           //$form['about_you']['field_r_lname']['und'][0]['value']['#default_value'] = $user->field_u_lname['und'][0]['value'];
           //$form['about_you']['field_r_email']['und'][0]['value']['#default_value'] = $user->mail;
-          $form['about_you']['field_r_fname_temp']['#default_value'] = $user->field_u_fname['und'][0]['value'];
-          $form['about_you']['field_r_lname_temp']['#default_value'] = $user->field_u_lname['und'][0]['value'];
-          $form['about_you']['field_r_email_temp']['#default_value'] = $user->mail;
+          $form['about_you']['field_r_fname_temp']['#default_value'] = @$user->field_u_fname['und'][0]['value'];
+          $form['about_you']['field_r_lname_temp']['#default_value'] = @$user->field_u_lname['und'][0]['value'];
+          $form['about_you']['field_r_email_temp']['#default_value'] = @$user->mail;
           
           
           
