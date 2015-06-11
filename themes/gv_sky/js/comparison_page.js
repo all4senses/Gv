@@ -153,6 +153,9 @@ var $logos = $$('.tbody-item-php-6');
 
 for (var i = 1; i <= $topPicksProviders.length; i++) {
 	var n = i-1;
+	
+	if ( i===5 ) n = 6; // Last logo [8x8] position changed fix
+
 	$topPicksProviders.eq(n).append( $logos.eq(n).find('.visit-provider-url').html() );
 }
 
