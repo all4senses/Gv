@@ -3,8 +3,23 @@
   Drupal.behaviors.gv_quoteRequestsAdminPage = {
     attach: function (context, settings) {
        
+       // Delete newsletter subscribed email.
+       console.log();
+       $(".newsletters-emails .nl-email").click(function(){
+          console.log('email click');
+          console.log($(this).text());
+          console.log(jQuery(this)[0].id); 
+          jQuery(this).toggleClass("selected");
+       });
+       
+       
+       
+       
+       
+       // Set quote request campaign name.
+       
        //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
-       console.log(Drupal.settings['gv_campaign_names']);
+       //console.log(Drupal.settings['gv_campaign_names']);
        
        $(".form-item-campaign-n-contains input").autocomplete({
           minLength: 0,

@@ -1285,6 +1285,10 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   
   global $user;
   if ($user->uid == 1) {
+    if ($current_section == 'Newsletter emails') {
+      $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
+      drupal_add_js($path_to_js);
+    }
 //    $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage_extraFilters.js';
 //    drupal_add_js($path_to_js);
 //    
@@ -1317,7 +1321,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   if (arg(3) == 'newsletter-emails') {
     
     $query = db_select('gv_emails_subscribed', 'e')
-          ->fields('e', array('email', 'source'));
+          ->fields('e', array('email', 'source', 'timestamp'));
     //$query->condition('e.source', NULL);
 
     if (!empty($_GET['email-contains'])) {
@@ -1340,7 +1344,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $last_cat = -1;
     foreach ($results as $result) {
       $all_emails[] = $result->email;
-      $emails .= ($last_cat == -1 || $last_cat != $result->source ? '<br/><br/><strong>' . ($result->source ? $result->source : 'Not tagged') . '</strong><br/>' : '') . '<div>' . $result->email . '</div>';
+      $emails .= ($last_cat == -1 || $last_cat != $result->source ? '<br/><br/><strong>' . ($result->source ? $result->source : 'Not tagged') . '</strong><br/>' : '') . '<div id="nl-' . $result->timestamp . '" class="nl-email">' . $result->email . '</div>';
       $last_cat = $result->source;
       $count++;
 
@@ -1352,7 +1356,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     {
       $form['emails'] = array(
         '#type' => 'markup',
-        '#markup' => gv_pages_quoteRequestsList_form_header('Newsletter emails') . $emails,
+        '#markup' => gv_pages_quoteRequestsList_form_header('Newsletter emails') . '<div class="newsletter-emails">' . $emails . '</div>',
       );
     }
 //    else {
