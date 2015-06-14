@@ -7,9 +7,9 @@
        selected_emails = "";
        console.log();
        $(".newsletters-emails .nl-email").click(function(){
-          console.log('email click');
-          console.log($(this).text());
-          console.log(jQuery(this)[0].id); 
+          //console.log('email click');
+          //console.log($(this).text());
+          //console.log(jQuery(this)[0].id); 
           jQuery(this).toggleClass("selected");
           selected_emails = "";
           jQuery(".selected").each(function(){
@@ -25,7 +25,15 @@
           }
        });
        
-       
+       $(".nl-delete-selected").click(function(){
+          console.log('Remove selected...');
+          jQuery(this).hide();
+          selected_emails = "";
+          jQuery(".selected").each(function(){
+            jQuery(this).remove();
+          }); 
+          console.log("Done.");
+       });
        
        
        
