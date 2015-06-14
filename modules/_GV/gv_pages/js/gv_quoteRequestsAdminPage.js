@@ -4,12 +4,25 @@
     attach: function (context, settings) {
        
        // Delete newsletter subscribed email.
+       selected_emails = "";
        console.log();
        $(".newsletters-emails .nl-email").click(function(){
           console.log('email click');
           console.log($(this).text());
           console.log(jQuery(this)[0].id); 
           jQuery(this).toggleClass("selected");
+          selected_emails = "";
+          jQuery(".selected").each(function(){
+            selected_emails += (selected_emails ? "," : "") + jQuery(this)[0].id;
+          }); 
+          if (selected_emails) {
+            console.log(selected_emails);
+            jQuery(".nl-delete-selected").show();
+          }
+          else {
+            console.log("None selected");
+            jQuery(".nl-delete-selected").hide();
+          }
        });
        
        
