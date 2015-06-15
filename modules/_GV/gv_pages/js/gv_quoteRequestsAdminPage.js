@@ -56,7 +56,7 @@
 
                                       }); 
                                       console.log("Done.");
-
+                                      alert(data.message);
                                       $.fn.popup(data.message);
                                   }
                                   return false;
