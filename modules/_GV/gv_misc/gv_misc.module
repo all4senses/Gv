@@ -2816,12 +2816,9 @@ function gv_misc_subscribed_delete_ajax() {
         $email = $query->execute()->fetchField();
         if ($email) {
           
-          $num_deleted = db_delete('gv_emails_subscribed')
-            ->condition('email', $email)
-            ->execute();
-          
-          $emails_deleted[] = $email . ' --->' . $num_deleted;
-          
+          if($num_deleted = db_delete('gv_emails_subscribed')->condition('email', $email)->execute()) {
+            $emails_deleted[] = $email;
+          }
         } // End of if ($email) {
         
       } // End of foreach($ids as $key => $value) { 

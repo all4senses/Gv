@@ -5,6 +5,7 @@
        
        // Delete newsletter subscribed email.
        selected_emails = "";
+       num_of_selected_emails = 0;
        console.log();
        $(".newsletters-emails .nl-email").click(function(){
           //console.log('email click');
@@ -12,11 +13,14 @@
           //console.log(jQuery(this)[0].id); 
           jQuery(this).toggleClass("selected");
           selected_emails = "";
+          num_of_selected_emails = 0;
           jQuery(".selected").each(function(){
             selected_emails += (selected_emails ? "," : "") + jQuery(this)[0].id;
+            num_of_selected_emails++;
           }); 
           if (selected_emails) {
             //console.log(selected_emails);
+            jQuery(".nl-delete-selected").text('Delete ' + num_of_selected_emails + ' selected email(s)');
             jQuery(".nl-delete-selected").show();
           }
           else {
