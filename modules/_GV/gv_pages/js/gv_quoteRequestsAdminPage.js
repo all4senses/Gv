@@ -26,8 +26,42 @@
        });
        
        $(".nl-delete-selected").click(function(){
+         
          if (confirm("Delete ALL selected emails?")) {
-           gv_delete_emails();
+           
+            console.log('Remove selected...');
+            jQuery(this).hide();
+
+            (jQuery).ajax({
+
+                      url: '/subscr/delete', 
+                      data: {
+                          ids: selected_emails
+                        }, 
+                      type: 'POST', 
+                      dataType: 'json'
+                      , 
+                      success: function(data) 
+                              { 
+                                  if(!data.error) {
+                                      console.log(data);
+                                      selected_emails = "";
+                                      jQuery(".selected").each(function(){
+
+                                        //jQuery(this).remove();
+
+                                        jQuery(this).fadeOut(2000, function(){
+                                          jQuery(this).remove();
+                                        });
+
+                                      }); 
+                                      console.log("Done.");
+
+                                      $.fn.popup(data.message);
+                                  }
+                                  return false;
+                              } 
+                }); // end of (jQuery).ajax
          }
        }); // End of $(".nl-delete-selected").click(function(){
        
@@ -46,7 +80,7 @@
        });
        */
 
-       $("select.campaign_name").change(function(){
+       $("select.campaign_name").change(function() {
          
          $("select.campaign_name").attr('disabled', 'disabled');
          
@@ -79,48 +113,9 @@
        //console.log('href = ' + $(this).attr('href'));
        //console.log('title = ' + $(this).attr('title'));
  
-     });
+     }); // End of $("select.campaign_name").change(function(){
 
      
-     
-     function gv_delete_emails() {
-       
-          console.log('Remove selected...');
-          jQuery(this).hide();
-          
-          
-          (jQuery).ajax({
-            
-                    url: '/subscr/delete', 
-                    data: {
-                        ids: selected_emails
-                      }, 
-                    type: 'POST', 
-                    dataType: 'json'
-                    , 
-                    success: function(data) 
-                            { 
-                                if(!data.error) {
-                                    console.log(data);
-                                    selected_emails = "";
-                                    jQuery(".selected").each(function(){
-                                      
-                                      //jQuery(this).remove();
-                                      
-                                      jQuery(this).fadeOut(2000, function(){
-                                        jQuery(this).remove();
-                                      });
-                                      
-                                    }); 
-                                    console.log("Done.");
-          
-                                    $.fn.popup(data.message);
-                                }
-                                return false;
-                            } 
-                }); // end of (jQuery).ajax
-                
-        } // end of function gv_delete_emails()  {
   }
 };
 
