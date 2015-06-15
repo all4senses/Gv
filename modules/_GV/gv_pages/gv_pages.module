@@ -1283,8 +1283,9 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   }
   $out = '<div class="type">' . $out . '</div><br/>';
   
-  global $user;
-  if ($user->uid == 1) {
+//  global $user;
+//  if ($user->uid == 1) 
+    {
     if ($current_section == 'Newsletter emails') {
       $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
       drupal_add_js($path_to_js);
