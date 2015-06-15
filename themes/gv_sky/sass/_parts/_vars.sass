@@ -1,3 +1,15 @@
+// ==== Proper Syntax for background shorthand =================================================================================
+  // background:
+  //   [background-image]
+  //   [background-position]
+  //   [/ background-size]
+  //   [background-repeat]
+  //   [background-attachment]
+  //   [background-origin]
+  //   [background-clip]
+  //   [background-color]
+
+
 // color
 
 $primary: #045da0
@@ -23,6 +35,15 @@ $white: #fff
 $subwhite: #fbfbfb
 $subberwhite: #f8f8f8
 
+$iconfamily: gvcons
+
+
+// snippet mixins
+=overflow-touch
+  -webkit-overflow-scrolling: touch
+
+=tap-color
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
 
 // mixins
 
@@ -234,6 +255,11 @@ $subberwhite: #f8f8f8
   -ms-user-select: $opt
   user-select: $opt
 
+
+=icon($iconname)
+  content: $iconname
+  font-family: $iconfamily
+  line-height: 1
 
 
 
