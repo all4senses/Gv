@@ -1283,8 +1283,13 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
   }
   $out = '<div class="type">' . $out . '</div><br/>';
   
-  global $user;
-  if ($user->uid == 1) {
+//  global $user;
+//  if ($user->uid == 1) 
+    {
+    if ($current_section == 'Newsletter emails') {
+      $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
+      drupal_add_js($path_to_js);
+    }
 //    $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage_extraFilters.js';
 //    drupal_add_js($path_to_js);
 //    
@@ -1317,7 +1322,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
   if (arg(3) == 'newsletter-emails') {
     
     $query = db_select('gv_emails_subscribed', 'e')
-          ->fields('e', array('email', 'source'));
+          ->fields('e', array('email', 'source', 'timestamp'));
     //$query->condition('e.source', NULL);
 
     if (!empty($_GET['email-contains'])) {
@@ -1332,7 +1337,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
 
     
 
-    $emails = '<br/><br/>';//'<br/><div><strong>Newsletter emails.</strong></div><br/>';
+    $emails = '<br/><br/> <div class="newsletters-emails">';//'<br/><div><strong>Newsletter emails.</strong></div><br/>';
 
     
     $count = NULL;
@@ -1340,12 +1345,12 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     $last_cat = -1;
     foreach ($results as $result) {
       $all_emails[] = $result->email;
-      $emails .= ($last_cat == -1 || $last_cat != $result->source ? '<br/><br/><strong>' . ($result->source ? $result->source : 'Not tagged') . '</strong><br/>' : '') . '<div>' . $result->email . '</div>';
+      $emails .= ($last_cat == -1 || $last_cat != $result->source ? '<br/><br/><strong>' . ($result->source ? $result->source : 'Not tagged') . '</strong><br/>' : '') . '<div id="nl-' . $result->timestamp . '" class="nl-email">' . $result->email . '</div>';
       $last_cat = $result->source;
       $count++;
 
     }
-    $emails .= '<br/><div><strong>Amount of emails:</strong> ' . $count . '</div>';
+    $emails .= '<br/></div>   <div><strong>Amount of emails:</strong> ' . $count . '</div> <div class="nl-delete-selected">Delete selected emails</div>';
     $emails .= '<br/><div style="width: 1100px;"><strong>All emails separated by commas:</strong><br/> ' . implode(', ', $all_emails) . '</div>';
 
     //if ($user->uid == 1) 

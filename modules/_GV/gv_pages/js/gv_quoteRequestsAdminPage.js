@@ -3,16 +3,90 @@
   Drupal.behaviors.gv_quoteRequestsAdminPage = {
     attach: function (context, settings) {
        
-       //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
-       console.log(Drupal.settings['gv_campaign_names']);
+       // Delete newsletter subscribed email.
+       selected_emails = "";
+       num_of_selected_emails = 0;
+       console.log();
+       $(".newsletters-emails .nl-email").click(function(){
+          //console.log('email click');
+          //console.log($(this).text());
+          //console.log(jQuery(this)[0].id); 
+          jQuery(this).toggleClass("selected");
+          selected_emails = "";
+          num_of_selected_emails = 0;
+          jQuery(".selected").each(function(){
+            selected_emails += (selected_emails ? "," : "") + jQuery(this)[0].id;
+            num_of_selected_emails++;
+          }); 
+          if (selected_emails) {
+            //console.log(selected_emails);
+            jQuery(".nl-delete-selected").text('Delete ' + num_of_selected_emails + ' selected email(s)');
+            jQuery(".nl-delete-selected").show();
+          }
+          else {
+            //console.log("None selected");
+            jQuery(".nl-delete-selected").hide();
+          }
+       });
        
+       $(".nl-delete-selected").click(function(){
+         
+         if (confirm("Delete ALL selected emails?")) {
+           
+            //console.log('Remove selected...');
+            jQuery(this).hide();
+
+            (jQuery).ajax({
+
+                      url: '/subscr/delete', 
+                      data: {
+                          ids: selected_emails
+                        }, 
+                      type: 'POST', 
+                      dataType: 'json'
+                      , 
+                      success: function(data) 
+                              { 
+                                  if(!data.error) {
+                                      //console.log(data);
+                                      
+                                      //console.log("Done.");
+                                      alert(data.message);
+                                      
+                                      selected_emails = "";
+                                      jQuery(".selected").each(function(){
+
+                                        //jQuery(this).remove();
+
+                                        jQuery(this).fadeOut(2000, function(){
+                                          jQuery(this).remove();
+                                        });
+
+                                      }); 
+                                      
+                                  }
+                                  return false;
+                              } 
+                }); // end of (jQuery).ajax
+         }
+       }); // End of $(".nl-delete-selected").click(function(){
+       
+       
+       
+       // Set quote request campaign name.
+       
+       //console.log(Drupal.settings['gv_misc']['addParamToProviderUrl']['uid']);
+       //console.log(Drupal.settings['gv_campaign_names']);
+       
+       /*
        $(".form-item-campaign-n-contains input").autocomplete({
           minLength: 0,
           //source: [ 'Google US/LP', 'Google UK/LP', '7Search', 'Bing', 'Google PPC/Site', 'Organic', 'Other' ]
           source: Drupal.settings['gv_campaign_names']
        });
+       */
 
-       $("select.campaign_name").change(function(){
+       $("select.campaign_name").change(function() {
          
          $("select.campaign_name").attr('disabled', 'disabled');
          
@@ -45,7 +119,7 @@
        //console.log('href = ' + $(this).attr('href'));
        //console.log('title = ' + $(this).attr('title'));
  
-     });
+     }); // End of $("select.campaign_name").change(function(){
 
      
   }
