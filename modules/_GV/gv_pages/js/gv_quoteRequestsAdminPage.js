@@ -16,11 +16,11 @@
             selected_emails += (selected_emails ? "," : "") + jQuery(this)[0].id;
           }); 
           if (selected_emails) {
-            console.log(selected_emails);
+            //console.log(selected_emails);
             jQuery(".nl-delete-selected").show();
           }
           else {
-            console.log("None selected");
+            //console.log("None selected");
             jQuery(".nl-delete-selected").hide();
           }
        });
@@ -29,7 +29,7 @@
          
          if (confirm("Delete ALL selected emails?")) {
            
-            console.log('Remove selected...');
+            //console.log('Remove selected...');
             jQuery(this).hide();
 
             (jQuery).ajax({
@@ -44,7 +44,11 @@
                       success: function(data) 
                               { 
                                   if(!data.error) {
-                                      console.log(data);
+                                      //console.log(data);
+                                      
+                                      //console.log("Done.");
+                                      alert(data.message);
+                                      
                                       selected_emails = "";
                                       jQuery(".selected").each(function(){
 
@@ -55,9 +59,7 @@
                                         });
 
                                       }); 
-                                      console.log("Done.");
-                                      alert(data.message);
-                                      $.fn.popup(data.message);
+                                      
                                   }
                                   return false;
                               } 
