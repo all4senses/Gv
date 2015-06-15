@@ -110,6 +110,13 @@ function gv_misc_menu() {
     'type' => MENU_CALLBACK,
   ); 
   
+  $items['subscr/delete'] = array(
+    'title' => 'Delete subscribtion emails',
+    'page callback' => 'gv_misc_subscribed_delete_ajax',
+    //'access arguments' => array('access content'),
+      'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_CALLBACK,
+  ); 
   
   $items['referer'] = array(
     'title' => 'Set user external referer',
@@ -2775,6 +2782,58 @@ function gv_misc_subscribe_ajax() {
   }
   else {
     $message = 'Wrong submission!';
+    $status = 'WRONG SUBMISSION';
+  }
+  
+  
+  drupal_json_output(array('status' => $status, 'post' => $post, 'message' => $message));
+}
+
+
+/**
+ * Delete subscribed emails, ajax
+ */
+function gv_misc_subscribed_delete_ajax() {
+  
+  $message = 'Emails have been deleted.';
+  $status = 'OK';
+  
+  foreach ($_POST as $key => $value) {
+    $post[$key] = check_plain(strip_tags($value));
+  }   
+
+  $emails_deleted = array();
+  if (!empty($post['ids'])) {
+    
+      $ids = explode(',', $post['ids']);
+      
+      foreach($ids as $key => $value) {
+        list(, $ids[$key]) = explode('-', $value);
+        
+        $query = db_select('gv_emails_subscribed', 'e')  
+              ->fields('e', array('email'));
+        $query->condition('e.timestamp', $ids[$key]);
+        $email = $query->execute()->fetchField();
+        if ($email) {
+          
+          $num_deleted = db_delete('gv_emails_subscribed')
+            ->condition('email', $email)
+            ->execute();
+          
+          $emails_deleted[] = $email . ' --->' . $num_deleted;
+          
+        } // End of if ($email) {
+        
+      } // End of foreach($ids as $key => $value) { 
+      if (!empty($emails_deleted)) {
+        $message = 'Emails have been deleted: ' . implode(', ', $emails_deleted);
+      }
+      else {
+        $message = 'None of emails have been deleted.';
+      }
+  }
+  else {
+    $message = 'Wrong delete request!';
     $status = 'WRONG SUBMISSION';
   }
   

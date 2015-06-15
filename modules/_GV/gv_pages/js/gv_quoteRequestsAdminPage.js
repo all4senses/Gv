@@ -26,14 +26,10 @@
        });
        
        $(".nl-delete-selected").click(function(){
-          console.log('Remove selected...');
-          jQuery(this).hide();
-          selected_emails = "";
-          jQuery(".selected").each(function(){
-            jQuery(this).remove();
-          }); 
-          console.log("Done.");
-       });
+         if (confirm("Delete ALL selected emails?")) {
+           gv_delete_emails();
+         }
+       }); // End of $(".nl-delete-selected").click(function(){
        
        
        
@@ -86,6 +82,45 @@
      });
 
      
+     
+     function gv_delete_emails() {
+       
+          console.log('Remove selected...');
+          jQuery(this).hide();
+          
+          
+          (jQuery).ajax({
+            
+                    url: '/subscr/delete', 
+                    data: {
+                        ids: selected_emails
+                      }, 
+                    type: 'POST', 
+                    dataType: 'json'
+                    , 
+                    success: function(data) 
+                            { 
+                                if(!data.error) {
+                                    console.log(data);
+                                    selected_emails = "";
+                                    jQuery(".selected").each(function(){
+                                      
+                                      //jQuery(this).remove();
+                                      
+                                      jQuery(this).fadeOut(2000, function(){
+                                        jQuery(this).remove();
+                                      });
+                                      
+                                    }); 
+                                    console.log("Done.");
+          
+                                    $.fn.popup(data.message);
+                                }
+                                return false;
+                            } 
+                }); // end of (jQuery).ajax
+                
+        } // end of function gv_delete_emails()  {
   }
 };
 
