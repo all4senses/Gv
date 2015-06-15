@@ -1288,6 +1288,7 @@ function gv_pages_quoteRequestsList_form_header($current_section) {
     if ($current_section == 'Newsletter emails') {
       $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage.js';
       drupal_add_js($path_to_js);
+      drupal_add_js('/sites/all/themes/gv_sky/js/popup.js');
     }
 //    $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_quoteRequestsAdminPage_extraFilters.js';
 //    drupal_add_js($path_to_js);
