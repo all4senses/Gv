@@ -9444,13 +9444,10 @@ GetVoIP Team
       $message['subject'] = t('GV New Provider review for "!provider" has been submitted', array('!provider' => $params['provider_name']));
       $message['body'][] = t('Dear administrator!
 
-A new review for the provider "!provider" just has been submitted' . ($params['spam'] ? ' (perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') . ':
+A new review for the provider "!provider" just has been submitted !spam_check:
 
-' . 
 
-$params['review'] .
-              
-'
+!review
   
 
 Please approve or discard it at !pending_reviews.
@@ -9459,7 +9456,7 @@ Please, don\'t forget to log in to access this page.
 
 Best wishes,
 Get VoIP team
-', array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!provider' => $params['provider_name']));
+', array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!provider' => $params['provider_name'], '!review' => $params['review'], '!spam_check' => ($params['spam'] ? '(perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') ));
       
       break;
     

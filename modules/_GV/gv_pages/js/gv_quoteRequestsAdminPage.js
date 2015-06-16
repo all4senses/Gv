@@ -6,7 +6,7 @@
        // Delete newsletter subscribed email.
        selected_emails = "";
        num_of_selected_emails = 0;
-       console.log();
+       
        $(".newsletters-emails .nl-email").click(function(){
           //console.log('email click');
           //console.log($(this).text());
