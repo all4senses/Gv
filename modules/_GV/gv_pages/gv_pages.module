@@ -9882,7 +9882,7 @@ function gv_pages_gvSettings_form($node, &$form_state) {
     $gv_settings['Email']['Email_Templates'] = array(
       'descr' => 'Set emails that will be sent to admins and users',
         
-      'Email_Verification_Subject' => array('field_type' => 'textield', 'value' => "Submitted Review Requires One-Click Email Verification"),
+      'Email_Verification_Subject' => array('field_type' => 'textfield', 'value' => "Submitted Review Requires One-Click Email Verification"),
       'Email_Verification_Body' => array('field_type' => 'textarea', 'value' => 'Dear User,
 
 Thank you for taking your time to share your VoIP experience by submitting a review.
@@ -9895,7 +9895,7 @@ Best Wishes,
 GetVoIP Team
 ', 'descr' => 'Use a token "!url" to show to a user the link'),
         
-      'New_Review_Admin_Notify_Subject' => array('field_type' => 'textield', 'value' => 'GV New Provider review for "!provider" has been submitted', 'descr' => 'Use a token "!provider" to show to a provider name to an admin'),
+      'New_Review_Admin_Notify_Subject' => array('field_type' => 'textfield', 'value' => 'GV New Provider review for "!provider" has been submitted', 'descr' => 'Use a token "!provider" to show to a provider name to an admin'),
       'New_Review_Admin_Notify_Body' => array('field_type' => 'textarea', 'value' => 'Dear administrator!
 
 A new review for the provider "!provider" just has been submitted !spam_check:
