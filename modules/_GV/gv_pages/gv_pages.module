@@ -9882,13 +9882,13 @@ function gv_pages_gvSettings_form($node, &$form_state) {
   }
   
   
-   if (empty($gv_settings['Email']['Email_Templates'])) 
+   //if (empty($gv_settings['Email']['Email_Templates'])) 
      {
     $gv_settings['Email']['Email_Templates'] = array(
       'descr' => 'Set emails that will be sent to admins and users',
         
       'Email_Verification_Subject' => array('field_type' => 'textfield', 'value' => "Submitted Review Requires One-Click Email Verification", 'descr' => 'Use a token "!provider"'),
-      'Email_Verification_Body' => array('field_type' => 'textarea', 'value' => 'Dear User,
+      'Email_Verification_Body' => array('field_type' => 'text_format', 'value' => 'Dear User,
 
 Thank you for taking your time to share your VoIP experience by submitting a review.
 
