@@ -9444,10 +9444,19 @@ GetVoIP Team
       $gv_settings = variable_get('gv_settings');
       
       $email_subject = $gv_settings['Email']['Email_Templates']['Email_Verification_Subject']['value'];
-      $email_body = $gv_settings['Email']['Email_Templates']['Email_Verification_Body']['value'];
       
-      $message['subject'] = t($email_subject);
-      $message['body'][] = t($email_body, array('!url' => 'http://getvoip.com/approve/email/' . $params['verification_code']));
+      if ($gv_settings['Email']['Email_Templates']['Email_Verification_Body']['field_type'] == 'text_format') {
+        $email_body = $gv_settings['Email']['Email_Templates']['Email_Verification_Body']['value']['value'];
+        if ($gv_settings['Email']['Email_Templates']['Email_Verification_Body']['value']['format'] == 'plain_text') {
+          $email_body = strip_tags($email_body);
+        }
+      }
+      else {
+        $email_body = $gv_settings['Email']['Email_Templates']['Email_Verification_Body']['value'];
+      }
+      
+      $message['subject'] = t($email_subject, array('!provider' => $params['provider_name']));
+      $message['body'][] = t($email_body, array('!provider' => $params['provider_name'], '!first_name' => $params['first_name'], '!url' => 'http://getvoip.com/approve/email/' . $params['verification_code']));
       
       break;
     
@@ -9478,11 +9487,20 @@ Get VoIP team
       $gv_settings = variable_get('gv_settings');
       
       $email_subject = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Subject']['value'];
-      $email_body = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value']['value'];
+      
+      if ($gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['field_type'] == 'text_format') {
+        $email_body = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value']['value'];
+        if ($gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value']['format'] == 'plain_text') {
+          $email_body = strip_tags($email_body);
+        }
+      }
+      else {
+        $email_body = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value'];
+      }
       
       
       $message['subject'] = t($email_subject, array('!provider' => $params['provider_name']));
-      $message['body'][] = t($email_body, array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!provider' => $params['provider_name'], '!review' => $params['review'], '!spam_check' => ($params['spam'] ? '(perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') ));
+      $message['body'][] = t($email_body, array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!first_name' => $params['first_name'], '!provider' => $params['provider_name'], '!review' => $params['review'], '!spam_check' => ($params['spam'] ? '(perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') ));
       
       break;
     
