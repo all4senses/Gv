@@ -9638,6 +9638,7 @@ function gv_misc_sendMessage($tag, $data = NULL) {
       */
       global $language;
       $params['provider_name'] = $data['provider_name'];
+      $params['first_name'] = $data['first_name'];
       $params['spam'] = $data['spam'];
       $params['review'] = $data['review'];
       
@@ -9653,6 +9654,9 @@ function gv_misc_sendMessage($tag, $data = NULL) {
       
       global $language;
       $params['verification_code'] = $data['verification_code'];
+      $params['provider_name'] = $data['provider_name'];
+      $params['first_name'] = $data['first_name'];
+      
       //drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params, 'GetVoIP.com <contact@getvoip.com>');
       drupal_mail('gv_misc', 'email_verification', $data['email'], $language->language, $params);
       
