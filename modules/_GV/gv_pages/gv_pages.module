@@ -9954,7 +9954,7 @@ Get VoIP team
                 foreach($value_set as $key => $value) {
                   if (is_array($value)) {
                     $field_type = $value['field_type'];
-                    $default_value = $value['value'];
+                    $default_value = $value['field_type'] == 'text_format' ? $value['value']['value'] : $value['value'];
                     $description = @$value['descr'];
                   }
                   else {
