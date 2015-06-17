@@ -9423,6 +9423,8 @@ function gv_misc_mail($key, &$message, $params) {
       break;
     
     case 'email_verification':
+      
+      /*
       $message['subject'] = t('Submitted Review Requires One-Click Email Verification');
       $message['body'][] = t('Dear User,
 
@@ -9436,11 +9438,24 @@ Best Wishes,
 GetVoIP Team
 ', array('!url' => 'http://getvoip.com/approve/email/' . $params['verification_code']));
       
+      */
+      
+      
+      $gv_settings = variable_get('gv_settings');
+      
+      $email_subject = $gv_settings['Email']['Email_Templates']['Email_Verification_Subject']['value'];
+      $email_body = $gv_settings['Email']['Email_Templates']['Email_Verification_Body']['value'];
+      
+      $message['subject'] = t($email_subject);
+      $message['body'][] = t($email_body, array('!url' => 'http://getvoip.com/approve/email/' . $params['verification_code']));
+      
       break;
     
     
     
     case 'new_review_admin_notify':
+      
+      /*
       $message['subject'] = t('GV New Provider review for "!provider" has been submitted', array('!provider' => $params['provider_name']));
       $message['body'][] = t('Dear administrator!
 
@@ -9457,6 +9472,17 @@ Please, don\'t forget to log in to access this page.
 Best wishes,
 Get VoIP team
 ', array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!provider' => $params['provider_name'], '!review' => $params['review'], '!spam_check' => ($params['spam'] ? '(perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') ));
+      
+      */
+      
+      $gv_settings = variable_get('gv_settings');
+      
+      $email_subject = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Subject']['value'];
+      $email_body = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value'];
+      
+      
+      $message['subject'] = t($email_subject, array('!provider' => $params['provider_name']));
+      $message['body'][] = t($email_body, array('!pending_reviews' => 'http://getvoip.com/admin/content/approve-reviews', '!provider' => $params['provider_name'], '!review' => $params['review'], '!spam_check' => ($params['spam'] ? '(perhaps it is SPAM, because the field for OTHER Provider Name is not empty, but in the provider select list NOT the "Other" is selected.)' : '') ));
       
       break;
     
