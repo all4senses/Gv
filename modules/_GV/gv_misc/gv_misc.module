@@ -9635,7 +9635,8 @@ function gv_misc_sendMessage($tag, $data = NULL) {
       
       global $language;
       $params['verification_code'] = $data['verification_code'];
-      drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params, 'GetVoIP.com <contact@getvoip.com>');
+      //drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params, 'GetVoIP.com <contact@getvoip.com>');
+      drupal_mail('gv_misc', 'email_verification', $data['email'], $language->language, $params);
       
       break;
   }
