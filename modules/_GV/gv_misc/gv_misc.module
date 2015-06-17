@@ -9478,7 +9478,7 @@ Get VoIP team
       $gv_settings = variable_get('gv_settings');
       
       $email_subject = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Subject']['value'];
-      $email_body = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value'];
+      $email_body = $gv_settings['Email']['Email_Templates']['New_Review_Admin_Notify_Body']['value']['value'];
       
       
       $message['subject'] = t($email_subject, array('!provider' => $params['provider_name']));
