@@ -9967,7 +9967,7 @@ Get VoIP team
                     '#title' => $title,
                     '#default_value' => $default_value,
                     '#description' => @$description,
-                    '#format' => 'gv_full_html',
+                    '#format' => 'full_html',
                   );
                 }
             }
@@ -9978,6 +9978,8 @@ Get VoIP team
     '#type' => 'submit',
     '#value' => 'Save settings',
   );
+  
+  dpm($form);
   
   return $form;
 }
