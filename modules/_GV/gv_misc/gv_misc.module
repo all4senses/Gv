@@ -9592,7 +9592,7 @@ function theme_gv_misc_requestQuoteCaptured_mail($data) {
 * 
 * No need for this hook if the smtp module is used.
 */
-/*
+
 function gv_misc_mail_alter(&$message){
   $default_from = variable_get('site_mail', ini_get('sendmail_from'));
   
@@ -9601,7 +9601,7 @@ function gv_misc_mail_alter(&$message){
     $message['headers']['From'] = $message['headers']['Sender'] = $message['headers']['Return-Path'] = $message['headers']['Errors-To'] = $message['headers']['Reply-To'] = $message['from'];
   }
 }
-*/
+
 
 
 /**
