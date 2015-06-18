@@ -9882,7 +9882,7 @@ function gv_pages_gvSettings_form($node, &$form_state) {
   }
   
   
-   if (empty($gv_settings['Email']['Email_Templates'])) 
+   //if (empty($gv_settings['Email']['Email_Templates'])) 
      {
     $gv_settings['Email']['Email_Templates'] = array(
       'descr' => 'Set emails that will be sent to admins and users',
@@ -9958,7 +9958,7 @@ Get VoIP team
                 foreach($value_set as $key => $value) {
                   if (is_array($value)) {
                     $field_type = $value['field_type'];
-                    $default_value = $value['field_type'] == 'text_format' ? $value['value']['value'] : $value['value'];
+                    $default_value = ($value['field_type'] == 'text_format' && isset($value['value']['value'])) ? $value['value']['value'] : $value['value'];
                     $description = @$value['descr'];
                     $field_format = $value['field_type'] == 'text_format' ? (!empty($value['value']['format']) ? $value['value']['format'] : 'full_html') : NULL;
                   }
