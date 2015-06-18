@@ -9594,23 +9594,23 @@ function theme_gv_misc_requestQuoteCaptured_mail($data) {
 */
 
 function gv_misc_mail_alter(&$message){
-  $default_from = variable_get('site_mail', ini_get('sendmail_from'));
+  
   
   //dpm($message);
   //watchdog('....1 email sent to ' . $message['to'], print_r($message, TRUE), NULL, WATCHDOG_WARNING);
   
-  if($message['from'] == $default_from){
-    $message['from'] = '"'. variable_get('site_name', 'GetVoIP.com') .'" <'. $default_from .'>';
-    $message['headers']['From'] = $message['headers']['Sender'] = $message['headers']['Return-Path'] = $message['headers']['Errors-To'] = $message['headers']['Reply-To'] = $message['from'];
-    
-    //$message['headers']['Reply-To'] = '"Reuben Yonatan" <reubeny@getvoip.com>';
-    
-//    $message['headers']['MIME-Version'] = '1.0';
-//    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
-//    $message['headers']['Content-Transfer-Encoding'] = '8Bit';
-//            
-//    watchdog('....2 email sent to ' . $message['to'], print_r($message, TRUE), NULL, WATCHDOG_WARNING);
+  if(strpos($message['subject'], 'our Review of') != FALSE){
+    $message['from'] = '"Reuben Yonatan" <reubeny@getvoip.com>';
   }
+  else{
+    $default_from = variable_get('site_mail', ini_get('sendmail_from'));
+    if($message['from'] == $default_from){
+      $message['from'] = '"'. variable_get('site_name', 'GetVoIP.com') .'" <'. $default_from .'>';
+    }
+  }
+  
+  $message['headers']['From'] = $message['headers']['Sender'] = $message['headers']['Return-Path'] = $message['headers']['Errors-To'] = $message['headers']['Reply-To'] = $message['from'];
+   
 }
 
 
