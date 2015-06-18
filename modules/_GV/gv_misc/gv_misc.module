@@ -9603,7 +9603,7 @@ function gv_misc_mail_alter(&$message){
     $message['from'] = '"'. variable_get('site_name', 'GetVoIP.com') .'" <'. $default_from .'>';
     $message['headers']['From'] = $message['headers']['Sender'] = $message['headers']['Return-Path'] = $message['headers']['Errors-To'] = $message['headers']['Reply-To'] = $message['from'];
     
-    $message['headers']['Reply-To'] = '"Reuben Yonatan" <reubeny@getvoip.com>';
+    $message['headers']['Return-Path'] = $message['headers']['Reply-To'] = '"Reuben Yonatan" <reubeny@getvoip.com>';
     
     $message['headers']['MIME-Version'] = '1.0';
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
