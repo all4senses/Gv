@@ -9599,10 +9599,11 @@ function gv_misc_mail_alter(&$message){
   //dpm($message);
   //watchdog('....1 email sent to ' . $message['to'], print_r($message, TRUE), NULL, WATCHDOG_WARNING);
   
-  if(strpos($message['subject'], 'our Review of') != FALSE){
-    $message['from'] = '"Reuben Yonatan" <reubeny@getvoip.com>';
-  }
-  else{
+//  if(strpos($message['subject'], 'our Review of') != FALSE){
+//    $message['from'] = '"Reuben Yonatan" <reubeny@getvoip.com>';
+//  }
+//  else
+    {
     $default_from = variable_get('site_mail', ini_get('sendmail_from'));
     if($message['from'] == $default_from){
       $message['from'] = '"'. variable_get('site_name', 'GetVoIP.com') .'" <'. $default_from .'>';
@@ -9669,7 +9670,7 @@ function gv_misc_sendMessage($tag, $data = NULL) {
       $params['first_name'] = $data['first_name'];
       
       //drupal_mail('gv_misc', 'email_verification', $data['email'], $language, $params, 'GetVoIP.com <contact@getvoip.com>');
-      drupal_mail('gv_misc', 'email_verification', $data['email'], $language->language, $params, 'reubeny@getvoip.com');
+      drupal_mail('gv_misc', 'email_verification', $data['email'], $language->language, $params/*, 'reubeny@getvoip.com'*/);
       
       break;
   }
