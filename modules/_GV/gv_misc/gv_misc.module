@@ -1060,8 +1060,15 @@ function gv_misc_testPage() {
   //variable_set('image_suppress_itok_output', TRUE);
   
   
-  $nid = 63; // Nextiiva
-  gv_misc_getLatestReviewsForProvider($nid);
+//  $nid = 63; // Nextiiva
+//  gv_misc_getLatestReviewsForProvider($nid);
+  
+  global $language;
+  $params['body'] = "Test mail from GV... Drupal mail, local mailserver, Trial #". time();
+  drupal_mail('gv_misc', 'test_via_link', 'all4senses@gmail.com', $language->language, $params);
+  if (!empty($_GET['email'])) {
+    drupal_mail('gv_misc', 'test_via_link', $_GET['email'], $language->language, $params);
+  }
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -9353,6 +9360,11 @@ Data sent to a provider:
  */
 function gv_misc_mail($key, &$message, $params) {
   switch ($key) {
+    
+    case 'test_via_link':
+      $message['subject'] = 'Test via link GV';
+      $message['body'][] = $params['body'];
+      break;
     
     case 'new_file_was_uploaded':
       $message['subject'] = 'GV New file was uploaded';
