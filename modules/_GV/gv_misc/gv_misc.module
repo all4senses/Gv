@@ -1063,12 +1063,36 @@ function gv_misc_testPage() {
 //  $nid = 63; // Nextiiva
 //  gv_misc_getLatestReviewsForProvider($nid);
   
-  global $language;
-  $params['body'] = "Test mail from GV... Drupal mail, local mailserver, Trial #". time();
-  drupal_mail('gv_misc', 'test_via_link', 'all4senses@gmail.com', $language->language, $params);
+ 
+
   if (!empty($_GET['email'])) {
+     global $language;
+    $params['body'] = "Test mail from GV... Drupal mail, local mailserver, Trial #". time();
     drupal_mail('gv_misc', 'test_via_link', $_GET['email'], $language->language, $params);
+    $out .= 'Email has been sent to ' . $_GET['email'];
   }
+  
+  
+  $query = db_select('node', 'n')
+            ->fields('n', array('nid', 'created'));
+    $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
+    
+    //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
+    
+    $query->condition('n.status', 1);
+    //$query->addTag('a4s');
+    //$query->addTag('reviews');
+    $query->condition('n.type', 'review');
+    $query->orderBy('n.created', 'DESC');
+    $query->range(0, 40);
+
+    $results = $query->execute()->fetchAll();
+    
+    dpm($results);
+  
+
+  //file_put_contents(DRUPAL_ROOT . '/tmp/user_reviews_' . date('m-d-Y__H_i_s', time()) . '.csv',  '', FILE_APPEND | LOCK_EX);
+
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
