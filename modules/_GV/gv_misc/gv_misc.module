@@ -1075,14 +1075,14 @@ function gv_misc_testPage() {
   
   $query = db_select('node', 'n')
         ->fields('n', array('nid', 'created'));
-//  $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid')
-//        ->fields('p', array('field_ref_provider_target_id'));
-  $query->leftJoin('field_data_field_r_fname', 'f', 'f.entity_id = n.nid')
-        ->fields('f', array('field_r_fname_value'));
-  $query->leftJoin('field_data_field_r_lname', 'l', 'l.entity_id = n.nid')
-        ->fields('l', array('field_r_lname_value'));
-  $query->leftJoin('field_data_field_r_email', 'e', 'e.entity_id = n.nid')
-        ->fields('e', array('field_r_email_value'));
+  $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
+  $query->fields('p', array('field_ref_provider_target_id'));
+  $query->leftJoin('field_data_field_r_fname', 'f', 'f.entity_id = n.nid');
+  $query->fields('f', array('field_r_fname_value'));
+  $query->leftJoin('field_data_field_r_lname', 'l', 'l.entity_id = n.nid');
+  $query->fields('l', array('field_r_lname_value'));
+  $query->leftJoin('field_data_field_r_email', 'e', 'e.entity_id = n.nid');
+  $query->fields('e', array('field_r_email_value'));
 
 
   //$query->join('field_data_field_p_types', 'pt', "pt.entity_id = p.field_ref_provider_target_id AND pt.field_p_types_value LIKE '%%" . $map_preface_type_to_service_type[$map_path_to_preface_type[$_SERVER['REDIRECT_URL']]] . "%%'");
