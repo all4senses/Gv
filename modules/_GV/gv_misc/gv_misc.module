@@ -1077,6 +1077,9 @@ function gv_misc_testPage() {
         ->fields('n', array('nid', 'created'));
   $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
   $query->fields('p', array('field_ref_provider_target_id'));
+  $query->leftJoin('field_data_field_r_provider_name', 'pn', 'pn.entity_id = n.nid');
+  $query->fields('pn', array('field_r_provider_name'));
+  
   $query->leftJoin('field_data_field_r_fname', 'f', 'f.entity_id = n.nid');
   $query->fields('f', array('field_r_fname_value'));
   $query->leftJoin('field_data_field_r_lname', 'l', 'l.entity_id = n.nid');
@@ -1097,6 +1100,11 @@ function gv_misc_testPage() {
   $results = $query->execute()->fetchAll();
 
   dpm($results);
+  
+  foreach ($results as $result) {
+    $out .= date('m-d-Y H:i:s', $result->created) . ';' . $result->field_r_provider_name . ';' . $result->field_r_fname_value . ';' . $result->field_r_lname_value . ';' . $result->field_r_email_value . '
+';
+  }
   
 
   //file_put_contents(DRUPAL_ROOT . '/tmp/user_reviews_' . date('m-d-Y__H_i_s', time()) . '.csv',  '', FILE_APPEND | LOCK_EX);
