@@ -1078,7 +1078,7 @@ function gv_misc_testPage() {
   $query->leftJoin('field_data_field_ref_provider', 'p', 'p.entity_id = n.nid');
   $query->fields('p', array('field_ref_provider_target_id'));
   $query->leftJoin('field_data_field_r_provider_name', 'pn', 'pn.entity_id = n.nid');
-  $query->fields('pn', array('field_r_provider_name'));
+  $query->fields('pn', array('field_r_provider_name_value'));
   
   $query->leftJoin('field_data_field_r_fname', 'f', 'f.entity_id = n.nid');
   $query->fields('f', array('field_r_fname_value'));
