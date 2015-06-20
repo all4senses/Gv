@@ -1094,9 +1094,10 @@ function gv_misc_testPage() {
   //$query->addTag('a4s');
   //$query->addTag('reviews');
   $query->condition('n.type', 'review');
-  $query->orderBy('n.created', 'DESC');
-  $query->range(0, 40);
   $query->orderBy('pn.field_r_provider_name_value');
+  //$query->orderBy('n.created', 'DESC');
+  $query->range(0, 40);
+  
 
   $results = $query->execute()->fetchAll();
 
