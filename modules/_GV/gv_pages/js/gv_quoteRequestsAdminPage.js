@@ -3,19 +3,14 @@
   Drupal.behaviors.gv_quoteRequestsAdminPage = {
     attach: function (context, settings) {
        
-       // Delete request 
-       
+       // Delete matched requests, by email or ip
        jQuery("#edit-delete-requests a").click(function(){
-          console.log('delete requests click');
           
           with_email_contains = jQuery("#edit-delete-requests .email-contains-delete input").val();
-          console.log(with_email_contains);
           with_ip = jQuery("#edit-delete-requests .ip-delete input").val();
-          console.log(with_ip);
           
           if (with_email_contains || with_ip) {
             hrefToGo = window.location.href + '?op=requests-delete-by' + (with_email_contains ? ('&email-contains=' + with_email_contains) : '') + (with_ip ? ('&ip=' + with_ip) : '');
-            console.log('hrefToGo = ' + hrefToGo);
             if (confirm("Delete ALL matched requests? Are you sure?")) {
               top.location.href = hrefToGo;
             }
