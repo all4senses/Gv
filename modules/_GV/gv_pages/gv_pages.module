@@ -2216,6 +2216,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
                                     //|| 
                                         strpos(@$ucaptured_data['Sumbission page'], 'http') === FALSE
                                     || @$ucaptured_data['Spam'] == 'Yes'
+                                    || preg_match('/[^()\d-+. \s#*]/', $ucaptured_data['Phone #'], $matches)    
                                         
                                    ) {
                                   $spam_class = ' spam'; 

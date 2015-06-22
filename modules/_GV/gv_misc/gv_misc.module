@@ -5455,7 +5455,13 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     $phone = $post['phone_1'] . '-' . $post['phone_2'] . '-' . $post['phone_3'];
   }
   
-  $clear_phone = str_replace(array('(', ')', '-', '_', ' '), '', $phone);
+  $clear_phone = str_replace(array('(', ')', '-', '_', ' ', '+'), '', $phone);
+  
+  $suspect_spam = FALSE;
+  if (preg_match('/[^()\d-+. \s#*]/', $clear_phone, $matches)) {
+    //dpm($matches);
+    $suspect_spam = TRUE;
+  }
   
 //  global $user;
 //  if ($user->uid) 
@@ -5475,7 +5481,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   
   $post['clear_phone'] = $clear_phone;
   $post['new_phone'] = $phone;
-  watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
+  
+  //watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
   
   if (empty($post) 
       || empty($post['source'])
@@ -5801,7 +5808,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     
     
-    if (!$already_sent) {
+    if (!$already_sent && !$suspect_spam) {
       
         //if ($post['version'] != '5-IScope') 
         {
