@@ -1697,7 +1697,7 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       
     }
 
-    unset($_GET['q'], $_GET['email-contains'], $_GET['ip']);
+    unset($_GET['q'], $_GET['op'], $_GET['email-contains'], $_GET['ip']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
   elseif (@$_GET['op'] == 'check' && @$_GET['timestamp']) {
