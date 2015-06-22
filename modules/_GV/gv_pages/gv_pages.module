@@ -1658,6 +1658,48 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
     unset($_GET['q'], $_GET['op'], $_GET['timestamp']);
     drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
   }
+  elseif (@$_GET['op'] == 'requests-delete-by') {
+    
+    if (!@$_GET['email-contains'] && !@$_GET['ip']) {
+      drupal_set_message('You have not set conditions for delete requests.');
+    }
+    else {
+      
+      if (@$_GET['email-contains']) {
+        
+            $result = db_delete('gv_quote_requests')
+              ->condition('email_presented', '%%' . $_GET['email-contains'] . '%%', 'LIKE')
+              ->execute();
+
+            if ($result) {
+              drupal_set_message($result . ' Requests with emails contained "' . $_GET['email-contains'] . '" has been deleted.');
+            }
+            else {
+              drupal_set_message('Requests with emails contained "' . $_GET['email-contains'] . '" has not been found in the database.', 'warning');
+            }
+
+      } // End of if (@$_GET['email-contains']) {
+      
+      if (@$_GET['ip']) {
+        
+            $result = db_delete('gv_quote_requests')
+              ->condition('ip', $_GET['ip'])
+              ->execute();
+
+            if ($result) {
+              drupal_set_message($result . ' Requests with ip "' . $_GET['ip'] . '" has been deleted.');
+            }
+            else {
+              drupal_set_message('Requests with ip "' . $_GET['ip'] . '" has not been found in the database.', 'warning');
+            }
+
+      } // End of if (@$_GET['ip']) {
+      
+    }
+
+    unset($_GET['q'], $_GET['email-contains'], $_GET['ip']);
+    drupal_goto($_SERVER['REDIRECT_URL'], array('query' => $_GET));
+  }
   elseif (@$_GET['op'] == 'check' && @$_GET['timestamp']) {
     
     $result = db_update('gv_quote_requests')

@@ -5,6 +5,24 @@
        
        // Delete request 
        
+       jQuery("#edit-delete-requests a").click(function(){
+          console.log('delete requests click');
+          
+          with_email_contains = jQuery("#edit-delete-requests .email-contains-delete input").val();
+          console.log(with_email_contains);
+          with_ip = jQuery("#edit-delete-requests .ip-delete input").val();
+          console.log(with_ip);
+          
+          if (with_email_contains || with_ip) {
+            hrefToGo = window.location.href + '?op=requests-delete-by' + (with_email_contains ? ('&email-contains=' + with_email_contains) : '') + (with_email_contains ? ('&ip=' + with_email_contains) : '');
+            console.log('hrefToGo = ' + hrefToGo);
+            //top.location.href = hrefToGo;
+          }
+          else {
+            alert('Please set email or ip');
+          }
+          return false;
+       });
        
        
        
