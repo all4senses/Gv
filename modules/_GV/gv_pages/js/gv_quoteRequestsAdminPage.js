@@ -3,6 +3,11 @@
   Drupal.behaviors.gv_quoteRequestsAdminPage = {
     attach: function (context, settings) {
        
+       // Delete request 
+       
+       
+       
+       
        // Delete newsletter subscribed email.
        selected_emails = "";
        num_of_selected_emails = 0;

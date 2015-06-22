@@ -1947,6 +1947,22 @@ function gv_pages_quoteRequestsList_form($form, &$form_state) {
       ->execute();
   
   
+  
+  
+  $form['delete_requests'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Delete requests with...',
+    '#collapsible' => true,
+    '#collapsed' => true,  
+  ); 
+  
+      $form['delete_requests']['fields'] = array(
+        '#markup' => '<div class="email-contains-delete"><div class="descr">...with emails contained:</div><input type="text" id="email-contains-delete" name="email-contains-delete" value="" size="60" maxlength="128" class="form-text"/></div>'
+                   . '<div class="ip-delete"><div class="descr">...with emails contained:</div><input type="text" id="ip-delete" name="ip-delete" value="" size="60" maxlength="128" class="form-text"/></div>'
+                   . '<div class="submit-delete"><a href="#">Delete matched requests</a></div>',
+      ); 
+  
+  
   $form['filters'] = array(
     '#type' => 'container',
     //'#title' => 'Filters',
