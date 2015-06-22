@@ -16,7 +16,9 @@
           if (with_email_contains || with_ip) {
             hrefToGo = window.location.href + '?op=requests-delete-by' + (with_email_contains ? ('&email-contains=' + with_email_contains) : '') + (with_ip ? ('&ip=' + with_ip) : '');
             console.log('hrefToGo = ' + hrefToGo);
-            //top.location.href = hrefToGo;
+            if (confirm("Delete ALL matched requests? Are you sure?")) {
+              top.location.href = hrefToGo;
+            }
           }
           else {
             alert('Please set email or ip');
