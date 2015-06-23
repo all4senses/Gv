@@ -5483,12 +5483,68 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   $post['clear_phone'] = $clear_phone;
   $post['new_phone'] = $phone;
   
+  
+  $current_time = time();
+  $user_ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''); //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+  
+  
+  // Check if current IP is blocked at this moment
+  $query = db_select('gv_blocked', 'b')
+    ->fields('b', array('id', 'type', 'object', 'timestamp_from', 'timestamp_to', 'blocked_count',  'data'));
+  $query->condition('b.object', $user_ip);
+  // Check if a current time is between start and finish blocking time for this IP
+  $query->condition('b.timestamp_from', $current_time, '<');
+  $query->condition('b.timestamp_to', $current_time, '>');
+  if ($gv_blocked = $query->execute()->fetchObject()) {
+      // If current IP is blocked, increment the count of blocked requests from this IP.
+      $result = db_update('gv_blocked')
+          ->fields(array(
+            'blocked_count' => ++$gv_blocked->blocked_count,
+            'last_updated' => $current_time,
+            'data' => serialize(array('last_post' => $post, 'last_SERVER' => $_SERVER)),  
+          ))
+          ->condition('id', $gv_blocked->id)
+          ->execute();
+  } else {
+  
+    // Count request from current IP for the past hour
+    $query = db_select('gv_quote_requests', 'qr')
+      ->fields('qr', array('data', 'ip', 'timestamp'));
+    $query->condition('qr.timestamp', $current_time, '<'); // 1 hour old
+    $query->condition('qr.timestamp', $current_time - 3600, '>'); // 1 hour old
+    $recently_submitted_from_this_ip = $query->execute()->fetchAllAssoc('timestamp');
+    
+    // If there are already critical amount of request from the current IP for the past hour,
+    // block it, that is don't save to DB and don't email notifications.
+    if (count($recently_submitted_from_this_ip) > 10) {
+      $result = db_insert('gv_quote_requests')
+          ->fields(array(
+            'timestamp_from' => $current_time,
+            'timestamp_to' => $current_time + 3600, // Block for 1 hour
+            'type' => 'IP',  
+            'object' => $user_ip,
+            'last_updated' => $current_time,  
+            'blocked_count' => 1,  
+            'data' => serialize(array('last_post' => $post, 'last_SERVER' => $_SERVER)),
+          ))
+          ->execute();
+      
+      $gv_blocked = TRUE;
+      watchdog('--> REQUEST BLOCKED IP for 1h', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
+      drupal_mail('gv_misc', 'request_blocked_alert', 'all4senses@gmail.com', $language->language, array('IP' => $user_ip, 'post' => print_r($post, TRUE)));
+    } // End of if (count($recently_submitted_from_this_ip) > 15) {
+  } // End of else of if ($gv_blocked = $query->execute()->fetchObject()) {       
+          
+  
   //watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
-  if ($suspect_spam || !$phone) {
+  if (!$gv_blocked && ($suspect_spam || !$phone)) {
     watchdog('--> SPAM/ATTACK SUSPECTED - GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
   }
   
-  if (empty($post) 
+  elseif ($gv_blocked){
+    $output = '<p class="error">Thank You.</p>'; 
+  }
+  elseif (empty($post) 
       || empty($post['source'])
       ////|| ($post['source'] == 'block' && strpos($post['url'], 'ttp://') == FALSE) // block spam
       //|| empty($post['phones_amt'])
@@ -5580,7 +5636,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     
 
-    $current_time = time();
+    
     
     // Mapping form data to right named fields.
     
@@ -5682,7 +5738,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
           ->fields(array(
             'timestamp' => $start_submission_time,
             'status' => 2, // Submitted and sent.
-            'ip' =>  isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''), //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+            'ip' => $user_ip, // isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''), //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
             'data' => serialize($save_submission),
             'checked' => 1, // Reviewed, because is sent.
             'email_presented' => $save_submission['Email'],
@@ -5762,7 +5818,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
         ->fields(array(
           'timestamp' => $start_submission_time,
           'status' => 2, // Submitted and sent.
-          'ip' =>  isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''), //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+          'ip' => $user_ip, //isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''), //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
           'data' => serialize($save_submission),
           'checked' => 1, // Reviewed, because is alerted.
           'email_presented' => $save_submission['Email'],
@@ -5774,8 +5830,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     
     
-    $submission['User IP'] = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''); //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
-    $submission['Time'] = date('Y-m-d, H:i:s', time());
+    $submission['User IP'] = $user_ip; //isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''); //isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+    $submission['Time'] = date('Y-m-d, H:i:s', $current_time);
     
     $params['request_data'] = $submission;
     
@@ -9416,6 +9472,13 @@ Data sent to a provider:
  */
 function gv_misc_mail($key, &$message, $params) {
   switch ($key) {
+    
+    case 'request_blocked_alert':
+      $message['subject'] = 'GV Blocked request Alert';
+      $message['body'][] = 'IP: ' . $params['IP'] . '
+
+POST: ' . $params['post'];
+      break;
     
     case 'test_via_link':
       $message['subject'] = 'Test via link GV';
