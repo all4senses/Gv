@@ -69,7 +69,7 @@
       <div class="hero-header center"></div>
     <?php } ?>
 
-    <?php if ( current_path() === 'node/38' || current_path() == 'node/62' ||  current_path() == 'node/91' ) { // Contact and Advertise Page and About page ?>
+    <?php if ( current_path() === 'node/38' || current_path() == 'node/62' ||  current_path() == 'node/91' ||  current_path() == 'node/5370' ) { // Contact and Advertise Page and About page ?>
       <div class="hero-header center">
         <div class="hero-title">
           <h1 class="hero-title-heading"><?php echo (isset($node->field_hero_title['und'][0]['value']) ? $node->field_hero_title['und'][0]['value'] : render($title)); ?></h1>
