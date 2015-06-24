@@ -5496,7 +5496,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   $query->condition('b.timestamp_from', $current_time, '<');
   $query->condition('b.timestamp_to', $current_time, '>');
   if ($gv_blocked = $query->execute()->fetchObject()) {
-      $blocked_count += $gv_blocked->blocked_count;
+      $blocked_count = ++$gv_blocked->blocked_count;
       // If current IP is blocked, increment the count of blocked requests from this IP.
       $result = db_update('gv_blocked')
           ->fields(array(
