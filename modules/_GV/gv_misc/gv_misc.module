@@ -5517,7 +5517,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
     
     // If there are already critical amount of request from the current IP for the past hour,
     // block it, that is don't save to DB and don't email notifications.
-    if ( ($submitted_before_count = count($recently_submitted_from_this_ip)) > 3) {
+    if ( ($submitted_before_count = count($recently_submitted_from_this_ip)) > 10) {
       $result = db_insert('gv_blocked')
           ->fields(array(
             'timestamp_from' => $current_time,
