@@ -5522,7 +5522,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
       $result = db_insert('gv_blocked')
           ->fields(array(
             'timestamp_from' => $current_time,
-            'timestamp_to' => $current_time + 3600, // Block for 1 hour
+            'timestamp_to' => $current_time + 3600, // Block for 1 hour.
             'type' => 'IP',  
             'object' => $user_ip,
             'last_updated' => $current_time,  
