@@ -23,9 +23,9 @@ function gv_pages_menu() {
     'access arguments' => array('access site reports'),
     'weight' => -1,
     //'file' => 'dblog.admin.inc',
-    'file' => '/home/gvadmin/public_html/modules/dblog/dblog.admin.inc'  ,
+    //'file' => '/home/gvadmin/public_html/modules/dblog/dblog.admin.inc'  ,
   );
-  
+    
   $tags_admin_types = array('topics', 'articles', 'news', 'blog');
   foreach ($tags_admin_types as $tags_admin_type) {
     $items[$tags_admin_type . '/tags-admin'] = array(
@@ -10242,6 +10242,9 @@ function gv_pages_createRedirectionsInBulk($data) {
  * @ingroup logging_severity_levels
  */
 function gv_pages_dblog_overview() {
+  
+  module_load_include('inc', 'dblog', 'dblog.admin');
+  
   $filter = dblog_build_filter_query();
   $rows = array();
   $classes = array(
