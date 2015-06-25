@@ -10248,6 +10248,13 @@ function gv_pages_dblog_overview() {
   drupal_add_js($path_to_js);
   
   dpm($_GET);
+  if (!empty($_GET['op'])) {
+    // Redirect back to the current page without extra parameters.
+    $get = $_GET;
+    unset($get['q'], $get['op'], $get['ip'], $get['id']);
+    drupal_goto($_GET['q'], array('query' => $get));
+
+  }
   
   $filter = dblog_build_filter_query();
   $rows = array();
@@ -10290,11 +10297,11 @@ function gv_pages_dblog_overview() {
 
   foreach ($result as $dblog) {
     if (!in_array($dblog->hostname, array('45.55.161.169', '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
-      $add_wd_links = '<a class="block-ip" href="#" title="Block IP">Block</a>'
-                   . '-<a class="unblock-ip" href="#" title="Unblock IP">Unblock</a>'
-                   . '-<a class="include-ip" href="#" title="Show only this IP messages">Include</a>'
-                   . '-<a class="exclude-ip" href="#" title="Exclude this IP messages">Exclude</a>'
-                   . '-<a class="get-info-on-ip" href="#" title="IP Info">Info</a>'
+      $add_wd_links = '<a class="block-ip" href="#" title="Block this IP">Block</a>'
+                   . '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>'
+                   . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
+                   . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
+                   . '-<a class="get-info-on-ip" href="#" title="Get Info about this IP">Info</a>'
                     ;
     }
     else {
