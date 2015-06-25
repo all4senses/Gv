@@ -2786,6 +2786,7 @@ function gv_misc_subscribe_ajax() {
   
   $message = 'Thank you for subscribing to our newsletter.';
   $status = 'OK';
+  $post = array();
   
   foreach ($_POST as $key => $value) {
     $post[$key] = check_plain(strip_tags($value));
