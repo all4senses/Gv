@@ -10244,6 +10244,10 @@ function gv_pages_createRedirectionsInBulk($data) {
 function gv_pages_dblog_overview() {
   
   module_load_include('inc', 'dblog', 'dblog.admin');
+  $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
+  drupal_add_js($path_to_js);
+  
+  dpm($_GET);
   
   $filter = dblog_build_filter_query();
   $rows = array();
