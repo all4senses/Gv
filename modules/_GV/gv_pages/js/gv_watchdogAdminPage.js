@@ -16,7 +16,8 @@
            
            concat_symbol = (window.location.href.indexOf("?") > 0) ? '&' : '?';
            hrefToGo = window.location.href + concat_symbol + 'op=' + jQuery(this)[0].className + '&id=' + jQuery(this).parent()[0].id + '&ip=' + jQuery(this).parent()[0].attributes.ip.value;
-           //console.log(hrefToGo);
+           console.log(hrefToGo);
+           top.location.href = hrefToGo;
            
          } // End of if (confirm("Are You sure to " + $(this).title + "?")) {
          
