@@ -5509,10 +5509,15 @@ function gv_misc_makeRequest_ajax($post = NULL) {
           ->execute();
   } else {
     
-    // Count request from current IP for the past hour
+    // Count request from current IP or with the same email for the past hour
     $query = db_select('gv_quote_requests', 'qr')
-      ->fields('qr', array('data', 'ip', 'timestamp'));
-    $query->condition('qr.ip', $user_ip);
+      ->fields('qr', array('data', 'ip', 'timestamp', 'email_presented'));
+    
+    //$query->condition('qr.ip', $user_ip);
+    $or = db_or()->condition('qr.ip', $user_ip)
+                 ->condition('qr.email_presented', $post['email']);
+    $query->condition($or);
+    
     $query->condition('qr.timestamp', $current_time, '<'); // 1 hour old
     $query->condition('qr.timestamp', $current_time - 3600, '>'); // 1 hour old
     $recently_submitted_from_this_ip = $query->execute()->fetchAllAssoc('timestamp');
