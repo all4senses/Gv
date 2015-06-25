@@ -10291,8 +10291,9 @@ function gv_pages_dblog_overview() {
         t($dblog->type),
         format_date($dblog->timestamp, 'short'),
         theme('dblog_message', array('event' => $dblog, 'link' => TRUE)),
-        theme('username', array('account' => $dblog)) . ', ' . $dblog->hostname,
-        filter_xss($dblog->link),
+        theme('username', array('account' => $dblog)),
+        $dblog->hostname,
+        '<div class="wd-links" id="wid-' . $dblog->wid . '" ip="' . $dblog->hostname . '">' . filter_xss($dblog->link) . '<a class="block-ip" href="#">Block IP</a><a class="unblock-ip" href="#">Unblock IP</a><a class="get-info-on-ip" href="#">Block IP</a></div>',
       ),
       // Attributes for tr
       'class' => array(drupal_html_class('dblog-' . $dblog->type), $classes[$dblog->severity]),
