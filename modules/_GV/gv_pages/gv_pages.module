@@ -10267,6 +10267,7 @@ function gv_pages_dblog_overview() {
     array('data' => t('Date'), 'field' => 'w.wid', 'sort' => 'desc'),
     t('Message'),
     array('data' => t('User'), 'field' => 'u.name'),
+    array('data' => t('IP'), 'field' => 'w.hostname'),  
     array('data' => t('Operations')),
   );
 
@@ -10284,6 +10285,12 @@ function gv_pages_dblog_overview() {
     ->execute();
 
   foreach ($result as $dblog) {
+    if (!in_array($dblog->hostname, array('45.55.161.169', '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
+      $add_wd_links = '<a class="block-ip" href="#">Block IP</a>-<a class="unblock-ip" href="#">Unblock IP</a>-<a class="get-info-on-ip" href="#">Block IP</a>';
+    }
+    else {
+      $add_wd_links = NULL;
+    }
     $rows[] = array('data' =>
       array(
         // Cells
@@ -10293,7 +10300,7 @@ function gv_pages_dblog_overview() {
         theme('dblog_message', array('event' => $dblog, 'link' => TRUE)),
         theme('username', array('account' => $dblog)),
         $dblog->hostname,
-        '<div class="wd-links" id="wid-' . $dblog->wid . '" ip="' . $dblog->hostname . '">' . filter_xss($dblog->link) . '<a class="block-ip" href="#">Block IP</a><a class="unblock-ip" href="#">Unblock IP</a><a class="get-info-on-ip" href="#">Block IP</a></div>',
+        '<div class="wd-links" id="wid-' . $dblog->wid . '" ip="' . $dblog->hostname . '">' . filter_xss($dblog->link) . '</div>',
       ),
       // Attributes for tr
       'class' => array(drupal_html_class('dblog-' . $dblog->type), $classes[$dblog->severity]),
