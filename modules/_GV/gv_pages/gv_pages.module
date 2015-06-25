@@ -10289,7 +10289,7 @@ function gv_pages_dblog_overview() {
         // Cells
         array('class' => 'icon'),
         t($dblog->type),
-        format_date(timestamp, 'short'),
+        format_date($dblog->timestamp, 'short'),
         theme('dblog_message', array('event' => $dblog, 'link' => TRUE)),
         theme('username', array('account' => $dblog)) . ', ' . $dblog->hostname,
         filter_xss($dblog->link),
