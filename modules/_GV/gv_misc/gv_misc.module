@@ -9867,7 +9867,9 @@ function gv_misc_getAdmins() {
  */
 function gv_misc_form_alter(&$form, &$form_state, $form_id) {
   
-  //dpm($form_id);dpm($form);
+  if (isset($_GET['dpm'])) {
+    dpm($form_id); dpm($form);
+  }
   
   // Unlink Ckeditor from the comment input form.
   /*
