@@ -10286,7 +10286,12 @@ function gv_pages_dblog_overview() {
 
   foreach ($result as $dblog) {
     if (!in_array($dblog->hostname, array('45.55.161.169', '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
-      $add_wd_links = '<a class="block-ip" href="#">Block IP</a>-<a class="unblock-ip" href="#">Unblock IP</a>-<a class="get-info-on-ip" href="#">Block IP</a>';
+      $add_wd_links = '<a class="block-ip" href="#" title="Block IP">Block</a>'
+                   . '-<a class="unblock-ip" href="#" title="Unblock IP">Unblock</a>'
+                   . '-<a class="include-ip" href="#" title="Show only this IP messages">Include</a>'
+                   . '-<a class="exclude-ip" href="#" title="Exclude this IP messages">Exclude</a>'
+                   . '-<a class="get-info-on-ip" href="#" title="IP Info">Info</a>'
+                    ;
     }
     else {
       $add_wd_links = NULL;
