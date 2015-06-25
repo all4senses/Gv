@@ -10300,7 +10300,7 @@ function gv_pages_dblog_overview() {
         theme('dblog_message', array('event' => $dblog, 'link' => TRUE)),
         theme('username', array('account' => $dblog)),
         $dblog->hostname,
-        '<div class="wd-links" id="wid-' . $dblog->wid . '" ip="' . $dblog->hostname . '">' . filter_xss($dblog->link) . '</div>',
+        '<div class="wd-links" id="wid-' . $dblog->wid . '" ip="' . $dblog->hostname . '">' . filter_xss($dblog->link) . $add_wd_links . '</div>',
       ),
       // Attributes for tr
       'class' => array(drupal_html_class('dblog-' . $dblog->type), $classes[$dblog->severity]),
