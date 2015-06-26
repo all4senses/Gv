@@ -21,7 +21,7 @@
                       success: function(data) 
                               { 
                                   if(!data.error) {
-                                      onsole.log(data.output);
+                                      console.log(data.output);
                                   }
                                   return false;
                               } 
