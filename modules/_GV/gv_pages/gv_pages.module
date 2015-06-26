@@ -10269,6 +10269,31 @@ function gv_pages_dblog_overview() {
               'ip'=> $_GET['ip'],
             ))
             ->execute();
+          
+          // Get the full Notice data for the future reference
+          $query = db_select('watchdog', 'w');
+          $query->leftJoin('users', 'u', 'w.uid = u.uid');
+          $query->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
+                ->addField('u', 'name');
+          $query->condition('w.hostname', $_GET['ip']);
+          $requested_notice = $query->execute()->fetchObject();
+
+          $current_time = time();
+          // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+          $result = db_insert('gv_blocked')
+            ->fields(array(
+              'timestamp_from' => $current_time,
+              'timestamp_to' => $current_time, 
+              'type' => 'IP',  
+              'object' => $_GET['ip'],
+              'last_updated' => $current_time,  
+              'blocked_count' => 1,  
+              'data' => serialize($requested_notice),
+              'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
+              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $requested_notice->severity .  ')',
+            ))
+            ->execute();
+      
           drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
         }
         break;

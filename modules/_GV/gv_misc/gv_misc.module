@@ -5536,6 +5536,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
             'last_updated' => $current_time,  
             'blocked_count' => 1,  
             'data' => serialize(array('last_post' => $post, 'last_SERVER' => $_SERVER)),
+            'source' => 'Quote request ' . $post['source'] . '-' . $post['version'],
+            'reason' => 'More than 10 submissions from one IP or same email',
           ))
           ->execute();
       
