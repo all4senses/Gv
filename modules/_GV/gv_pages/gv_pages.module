@@ -10248,7 +10248,47 @@ function gv_pages_dblog_overview() {
   drupal_add_js($path_to_js);
   
   dpm($_GET);
-  if (!empty($_GET['op'])) {
+  if (!empty($_GET['op']) && !empty($_GET['ip'])) {
+    
+    if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
+        $query = db_select('blocked_ips', 'b')
+          ->fields('b', array('iid'));
+        $query->condition('b.ip', $_GET['ip']);
+        $iid = $query->execute()->fetchField();
+    }
+    
+    switch ($_GET['op']) {
+      case 'block-ip':
+        
+        if ($iid) {
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been already blocked!', 'warning');
+        }
+        else {
+          db_insert('blocked_ips')
+            ->fields(array(
+              'ip'=> $_GET['ip'],
+            ))
+            ->execute();
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
+        }
+        break;
+      
+        
+      case 'unblock-ip':
+        
+        if (!$iid) {
+          drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
+        }
+        else {
+          db_delete('blocked_ips')
+            ->condition('ip', $_GET['ip'])
+            ->execute();
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
+        }
+        
+        break;
+    }
+    
     // Redirect back to the current page without extra parameters.
     $get = $_GET;
     unset($get['q'], $get['op'], $get['ip'], $get['id']);
@@ -10287,6 +10327,8 @@ function gv_pages_dblog_overview() {
   $query
     ->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
     ->addField('u', 'name');
+  $query->leftJoin('blocked_ips', 'b', 'b.ip = w.hostname');
+  $query->addField('b', 'iid');
   if (!empty($filter['where'])) {
     $query->where($filter['where'], $filter['args']);
   }
@@ -10297,8 +10339,8 @@ function gv_pages_dblog_overview() {
 
   foreach ($result as $dblog) {
     if (!in_array($dblog->hostname, array('45.55.161.169', '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
-      $add_wd_links = '<a class="block-ip" href="#" title="Block this IP">Block</a>'
-                   . '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>'
+      $add_wd_links = ($dblog->iid ? '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
+                   . (!$dblog->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
                    . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
                    . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
                    . '-<a class="get-info-on-ip" href="#" title="Get Info about this IP">Info</a>'
