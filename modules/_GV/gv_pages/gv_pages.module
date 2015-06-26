@@ -10248,7 +10248,7 @@ function gv_pages_dblog_overview() {
   drupal_add_js($path_to_js);
   
   dpm($_GET);
-  if (!empty($_GET['op']))) {
+  if (!empty($_GET['op'])) {
     
     if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
         $query = db_select('blocked_ips', 'b')
