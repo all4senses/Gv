@@ -10247,8 +10247,8 @@ function gv_pages_dblog_overview() {
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
   drupal_add_js($path_to_js);
   
-  //dpm($_GET);
-  if (!empty($_GET['op']) && !empty($_GET['ip'])) {
+  dpm($_GET);
+  if (!empty($_GET['op']))) {
     
     if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
         $query = db_select('blocked_ips', 'b')
@@ -10369,11 +10369,11 @@ function gv_pages_dblog_overview() {
   }
   if (!empty($_GET['include-ip'])) {
     $query->condition('w.hostname', $_GET['include-ip']);
-    drupal_set_message('There are only IP ' . $_GET['ip'] . ' shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+    drupal_set_message('There are only IP ' . $_GET['include-ip'] . ' shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
   elseif (!empty($_GET['exclude-ip'])) {
     $query->condition('w.hostname', $_GET['exclude-ip'], '!=');
-    drupal_set_message('Rows with IP ' . $_GET['ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+    drupal_set_message('Rows with IP ' . $_GET['exclude-ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
   $result = $query
     ->limit(50)
