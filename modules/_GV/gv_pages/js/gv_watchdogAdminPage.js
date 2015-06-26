@@ -6,7 +6,28 @@
        
        jQuery(".wd-links a").click(function(){
          
-         if (confirm("Are You sure to " + jQuery(this)[0].title + "?")) 
+         if (jQuery(this)[0].className == 'get-info-on-ip') {
+           
+           (jQuery).ajax({
+
+                      url: '/get-ip-info', 
+                      data: {
+                          op: 'whois',
+                          ip: jQuery(this).parent()[0].attributes.ip.value
+                        }, 
+                      type: 'POST', 
+                      dataType: 'json'
+                      , 
+                      success: function(data) 
+                              { 
+                                  if(!data.error) {
+                                      alert(data.output);
+                                  }
+                                  return false;
+                              } 
+                }); // end of (jQuery).ajax
+         }
+         else if (confirm("Are You sure to " + jQuery(this)[0].title + "?")) 
          {
            
            //console.log(jQuery(this)[0].title);

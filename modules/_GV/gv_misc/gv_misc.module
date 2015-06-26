@@ -18,6 +18,14 @@ module_load_include('inc', 'gv_misc', 'inc/constants');
 function gv_misc_menu() {
  
   gv_misc_setPagesToShow410($items);
+  
+  $items['get-ip-info'] = array(
+    'title' => 'Get info fro an IP via the local server whois, dig, etc',
+    'page callback' => 'gv_misc_getIpInfo_ajax',
+    'access callback' => 'gv_misc_userIsAdmin',
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['gv-content-set-blog-category'] = array(
     'title' => 'GV content set blog category',
     'page callback' => 'gv_misc_changeBlogCategory_ajax',
@@ -11288,8 +11296,8 @@ function gv_misc_changeBlogCategory_ajax() {
   }
   
   drupal_json_output(array('status' => TRUE, 'post' => $post));
-  
 }
+
 
 /**
  * Return specific variable value from p_data_quick for a provider depending on the filter value (business OR residential, etc)
@@ -17063,4 +17071,27 @@ function gv_misc_getLatestReviewsForProvider($nid) {
     $results = $query->execute()->fetchAllAssoc('entity_id');
     
     dpm($results);
+}
+
+
+/*
+ * Get info fro an IP via the local server whois, dig, etc
+ * 
+ */
+function gv_misc_getIpInfo_ajax() {
+  $status = FALSE;
+  $output = NULL;
+  if (!empty($_POST['op']) && !empty($_POST['ip'])) {
+    $status = TRUE;
+    foreach ($_POST as $key => $value) {
+      $post[$key] = check_plain(strip_tags($value));
+    }
+    switch ($post['op']) {
+      case 'whois':
+        $output = shell_exec('whois ' . $post['ip']);
+        break;
+    }
+  }
+  
+  drupal_json_output(array('status' => TRUE, 'output' => $output));
 }
