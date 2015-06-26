@@ -4,6 +4,18 @@
     attach: function (context, settings) {
        
        
+       jQuery("a.show-all").click(function(){
+
+           concat_symbol = (window.location.href.indexOf("?") > 0) ? '&' : '?';
+           hrefToGo = window.location.href + concat_symbol + 'op=show-all';
+           //console.log(hrefToGo);
+           top.location.href = hrefToGo;
+  
+         return false;
+         
+       }); // End of $(".wd-links a").click(function(){
+       
+       
        jQuery(".wd-links a").click(function(){
          
          if (jQuery(this)[0].className == 'get-info-on-ip') {
@@ -37,7 +49,7 @@
            
            concat_symbol = (window.location.href.indexOf("?") > 0) ? '&' : '?';
            hrefToGo = window.location.href + concat_symbol + 'op=' + jQuery(this)[0].className + '&id=' + jQuery(this).parent()[0].id + '&ip=' + jQuery(this).parent()[0].attributes.ip.value;
-           console.log(hrefToGo);
+           //console.log(hrefToGo);
            top.location.href = hrefToGo;
            
          } // End of if (confirm("Are You sure to " + $(this).title + "?")) {

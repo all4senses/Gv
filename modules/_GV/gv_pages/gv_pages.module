@@ -10318,11 +10318,15 @@ function gv_pages_dblog_overview() {
         }
         
         break;
+     
     }
     
     // Redirect back to the current page without extra parameters.
     $get = $_GET;
-    unset($get['q'], $get['op'], $get['ip'], $get['id']);
+    unset($get['q'], $get['op'], $get['ip'], $get['id'], $get['show-all']);
+    if ($_GET['op'] == 'show-all') {
+      unset($get['include-ip'], $get['exclude-ip']);
+    }
     drupal_goto($_GET['q'], array('query' => $get));
 
   }
@@ -10362,6 +10366,14 @@ function gv_pages_dblog_overview() {
   $query->addField('b', 'iid');
   if (!empty($filter['where'])) {
     $query->where($filter['where'], $filter['args']);
+  }
+  if (!empty($_GET['include-ip'])) {
+    $query->condition('w.hostname', $_GET['include-ip']);
+    drupal_set_message('There are only IP ' . $_GET['ip'] . ' shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+  }
+  elseif (!empty($_GET['exclude-ip'])) {
+    $query->condition('w.hostname', $_GET['exclude-ip'], '!=');
+    drupal_set_message('Rows with IP ' . $_GET['ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
   $result = $query
     ->limit(50)
