@@ -10260,7 +10260,7 @@ function gv_pages_dblog_overview() {
     switch ($_GET['op']) {
       
       case 'get-info-on-ip':
-        $whois_data = shell_exec('whois' . $_GET['ip']);
+        $whois_data = shell_exec('whois ' . $_GET['ip']);
         dpm($whois_data);
         break;
       
