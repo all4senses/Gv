@@ -10247,7 +10247,7 @@ function gv_pages_dblog_overview() {
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
   drupal_add_js($path_to_js);
   
-  dpm($_GET);
+  //dpm($_GET);
   if (!empty($_GET['op'])) {
     
     if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
@@ -10317,6 +10317,14 @@ function gv_pages_dblog_overview() {
           drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
         }
         
+        break;
+        
+      case 'include-ip':
+        $_GET['include-ip'] = $_GET['ip'];
+        break;
+      
+      case 'exclude-ip':
+        $_GET['exclude-ip'] = $_GET['ip'];
         break;
      
     }
