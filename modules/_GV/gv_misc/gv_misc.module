@@ -17088,7 +17088,7 @@ function gv_misc_getIpInfo_ajax() {
     }
     switch ($post['op']) {
       case 'whois':
-        $output = array('IP' => $post['ip'], 'Whois for ' . $post['ip'] => shell_exec('whois ' . $post['ip']));
+        $output = 'Whois for ' . $post['ip']. ': ' .  shell_exec('whois ' . $post['ip']));
         break;
     }
   }
