@@ -15,6 +15,24 @@ $window = $$(window);
 $this = $$(this);
 
 
+// ==== Track click js protection ================================================================
+jQuery(document).ready(function($){ 
+	  
+		$(".visit-provider-url").click(function(){
+         
+      console.log('click track href = ' + $(this).attr('href'));   
+      if(!$(this).attr('href').split('from=')[1]) {
+        $(this).attr('href', $(this).attr('href') + '?from=' + window.location.href + '&ref=' + document.referrer);
+      }
+      
+      console.log('click track 2 href = ' + $(this).attr('href'));
+
+    });
+    
+	});
+  
+  
+  
 // ==== Main Menu =================================================================================
 	jQuery(document).ready(function($){ 
 	  

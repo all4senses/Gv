@@ -2435,18 +2435,14 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
       
       
       
-    // if Р В Р’В Р РЋРІР‚СћР В Р Р‹Р Р†Р вЂљРІвЂћвЂ“ has been already loaded, and now we will add it again, it won't work.
+    // if js has been already loaded, and now we will add it again, it won't work.
     // So we prevent it.
     
-    static $drupal_alredy_loaded_js;
-    //global $user;
+    static $drupal_already_loaded_js;
     
-    if (!$drupal_alredy_loaded_js) {
+    if (!$drupal_already_loaded_js) {
       
       $path_to_js = drupal_get_path('module', 'gv_misc') . '/js/gv_addSourceParamToProviderGoUrl.js';
-      //dpm($path_to_js);
-      
-      
       
   //    drupal_add_js(array('gv_misc' => array(
   //      'addParamToProviderUrl' => array(
@@ -2455,11 +2451,9 @@ function gv_misc_getTrackingUrl($title_or_wrapped_object, $subpath = NULL, $nid 
   //    )), 'setting'); 
       
       
+      $drupal_already_loaded_js = drupal_add_js();
       
-      $drupal_alredy_loaded_js = drupal_add_js();
-      //dpm($drupal_alredy_loaded_js);
-      
-      if (!isset($drupal_alredy_loaded_js[$path_to_js])) {
+      if (!isset($drupal_already_loaded_js[$path_to_js])) {
         drupal_add_js($path_to_js);
       }
 
@@ -2543,7 +2537,8 @@ function gv_misc_goToExternalUrl2() {
 
   $args = arg();
   
-  //dpm($args);
+  dpm($args);
+  dpm($_GET);
   
   //if ($args[1] == 'reviews' && !empty($args[2])) {
   if (!empty($args[1])) {
@@ -2586,17 +2581,12 @@ function gv_misc_goToExternalUrl2() {
             global $user;
             
             $click_page = @$_SERVER['HTTP_REFERER'];
-            
-            if (!$click_page) {
-              
-              $watch_str = 'u' . $user->uid . ', $_server -------> '. print_r($_SERVER, TRUE) . ', $_session -------> '. print_r(@$_SESSION, TRUE);
-              
-              if (!empty($_GET['from'])) {
+            if (!$click_page && !empty($_GET['from'])) {
                 $click_page = $_GET['from'];
                 $watch_str = 'from = ' .  $_GET['from'] . ', ' . $watch_str;
-              }
-              //watchdog('-###> GV click via go/' . $object_name, $watch_str, NULL, WATCHDOG_WARNING);
             }
+            $watch_str = 'u' . $user->uid. ', $_GET -------> '. print_r($_GET, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE) . ', $_session -------> '. print_r(@$_SESSION, TRUE);
+            watchdog('-###> GV click via go/' . $object_name, $watch_str, NULL, WATCHDOG_WARNING);
             
             $referrer = @$_SESSION['gv_current_http_referer'];
             if(!$referrer && !empty($_GET['ref'])) {
@@ -2607,7 +2597,7 @@ function gv_misc_goToExternalUrl2() {
               $referrer = NULL;
             }
             
-            $data = NULL;
+            $data = serialize($_SERVER);
 //            $data = serialize(array(
 //              'referer' => @$_SESSION['gv_current_http_referer'],
 //              'click_on_page' => @$_SERVER['HTTP_REFERER'],
@@ -4363,9 +4353,9 @@ function gv_misc_addZoomableImagesJs() {
   //1, 3, 4, 
   // Fix, workaround: if colorbox has been already loaded, and now we will add it again, it won't work.
   // So we prevent it.
-  $drupal_alredy_loaded_js = drupal_add_js();
-  //dpm($drupal_alredy_loaded_js);
-  if (!isset($drupal_alredy_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) && !isset($drupal_alredy_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js'])) {
+  $drupal_already_loaded_js = drupal_add_js();
+  //dpm($drupal_already_loaded_js);
+  if (!isset($drupal_already_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js']) && !isset($drupal_already_loaded_js['sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox-min.js'])) {
     //dpm('loaded');
     // drupal_add_js('sites/all/libraries/jquery.plugins/colorbox/colorbox/jquery.colorbox.js');
     // drupal_add_css('sites/all/libraries/jquery.plugins/colorbox/example1/colorbox.css', array('preprocess' => FALSE)); // array('group' => CSS_THEME, 'preprocess' => FALSE)
