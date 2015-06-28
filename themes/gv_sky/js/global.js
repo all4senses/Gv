@@ -13,24 +13,6 @@ function css_browser_selector(u){var ua=u.toLowerCase(),is=function(t){return ua
 
 $window = $$(window);
 $this = $$(this);
-
-
-// ==== Track click js protection ================================================================
-jQuery(document).ready(function($){ 
-	  
-		$(".visit-provider-url").click(function(){
-         
-      console.log('click track href = ' + $(this).attr('href'));   
-      if(!$(this).attr('href').split('from=')[1]) {
-        $(this).attr('href', $(this).attr('href') + '?from=' + window.location.href + '&ref=' + document.referrer);
-      }
-      
-      console.log('click track 2 href = ' + $(this).attr('href'));
-
-    });
-    
-	});
-  
   
   
 // ==== Main Menu =================================================================================
@@ -283,8 +265,26 @@ jQuery(document).ready(function($){
 
 
 
+// ==== Track click js protection ================================================================
+(function ($) {
 
+  Drupal.behaviors.gv_addSourceParamToProviderGoUrl = {
+    attach: function (context, settings) {
+       
+        
+          $(".visit-provider-url").click(function(){
 
+            if(!$(this).attr('href').split('from=')[1]) {
+              $(this).attr('href', $(this).attr('href') + '?from=' + window.location.href + '&ref=' + document.referrer);
+            }
+            console.log('click track 2 href = ' + $(this).attr('href'));
+
+          });
+     
+    }
+  };
+
+}(jQuery));
 
 
 

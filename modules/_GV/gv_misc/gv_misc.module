@@ -2538,8 +2538,8 @@ function gv_misc_goToExternalUrl2() {
 
   $args = arg();
   
-  dpm($args);
-  dpm($_GET);
+  //dpm($args);
+  //dpm($_GET);
   
   //if ($args[1] == 'reviews' && !empty($args[2])) {
   if (!empty($args[1])) {
@@ -2586,15 +2586,15 @@ function gv_misc_goToExternalUrl2() {
                 $click_page = $_GET['from'];
             }
             
-            if ($click_page && $click_page != '/home' && $click_page != '/') {
+            if ($click_page && $click_page != 'http://getvoip.com/home' && $click_page != 'http://getvoip.com/') {
               $source_notice =  $_GET['from'] ? ' [js click]' : ' [NO js]';
             }
-            elseif ($click_page == '/home' || $click_page == '/') {
-              $source_notice = ' [ bad /home source!!! - Not saved/not redirected]';
+            elseif ($click_page == 'http://getvoip.com/home' || $click_page == 'http://getvoip.com/') {
+              $source_notice = ' [bad /home source!!! - Not saved/not redirected]';
               $click_page = NULL;
             }
             else {
-              $source_notice = ' [ no source!!! - Not saved/not redirected]';
+              $source_notice = ' [no source!!! - Not saved/not redirected]';
             }
             
             $watch_str = 'u' . $user->uid. ', $_GET -------> ' . print_r($_GET, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE) . ', $_session -------> '. print_r(@$_SESSION, TRUE);
