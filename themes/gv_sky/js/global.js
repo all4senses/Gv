@@ -15,9 +15,29 @@ $window = $$(window);
 $this = $$(this);
   
   
-// ==== Main Menu =================================================================================
+
 	jQuery(document).ready(function($){ 
-	  
+
+
+
+    // ==== Track click js protection ================================================================
+    
+    $(".visit-provider-url").click(function(){
+
+      if(!$(this).attr('href').split('from=')[1]) {
+        $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
+      }
+      //console.log('click track 2 href = ' + $(this).attr('href'));
+
+    });
+    
+    
+    
+    
+    
+    
+    // ==== Main Menu =================================================================================
+
 		//$$('.solution-nav').insertAfter('.navigation');
 
 		$$('.main-menu-item.first').on('click',function(){
@@ -260,38 +280,6 @@ $this = $$(this);
 	}
 
 }(jQuery))
-
-
-
-
-
-// ==== Track click js protection ================================================================
-// (function ($) {
-
-//   Drupal.behaviors.gv_addSourceParamToProviderGoUrl = {
-//     attach: function (context, settings) {
-       
-        
-//           $(".visit-provider-url").click(function(){
-
-//             if(!$(this).attr('href').split('from=')[1]) {
-//               $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
-//             }
-//             //console.log('click track 2 href = ' + $(this).attr('href'));
-
-//           });
-     
-//     }
-//   };
-
-// }(jQuery));
-
-
-
-
-
-
-
 
 
 
