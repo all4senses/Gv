@@ -266,25 +266,25 @@ $this = $$(this);
 
 
 // ==== Track click js protection ================================================================
-(function ($) {
+// (function ($) {
 
-  Drupal.behaviors.gv_addSourceParamToProviderGoUrl = {
-    attach: function (context, settings) {
+//   Drupal.behaviors.gv_addSourceParamToProviderGoUrl = {
+//     attach: function (context, settings) {
        
         
-          $(".visit-provider-url").click(function(){
+//           $(".visit-provider-url").click(function(){
 
-            if(!$(this).attr('href').split('from=')[1]) {
-              $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
-            }
-            //console.log('click track 2 href = ' + $(this).attr('href'));
+//             if(!$(this).attr('href').split('from=')[1]) {
+//               $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
+//             }
+//             //console.log('click track 2 href = ' + $(this).attr('href'));
 
-          });
+//           });
      
-    }
-  };
+//     }
+//   };
 
-}(jQuery));
+// }(jQuery));
 
 
 
