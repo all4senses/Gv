@@ -277,7 +277,7 @@ $this = $$(this);
             if(!$(this).attr('href').split('from=')[1]) {
               $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
             }
-            console.log('click track 2 href = ' + $(this).attr('href'));
+            //console.log('click track 2 href = ' + $(this).attr('href'));
 
           });
      
