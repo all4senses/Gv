@@ -9517,6 +9517,11 @@ Data sent to a provider:
 function gv_misc_mail($key, &$message, $params) {
   switch ($key) {
     
+    case 'gv_admin_mail':
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      break;
+    
     case 'request_blocked_alert':
       $message['subject'] = 'GV Blocked request Alert for IP ' . $params['IP'];
       $message['body'][] = 'IP: ' . $params['IP'] . '
@@ -17104,11 +17109,14 @@ function gv_misc_getIpInfo_ajax() {
 
 
 function gv_misc_watchdog(array $log_entry) {
-  dpm($log_entry);
-  if (strpos($log_entry['type'], '[no source!!!') !== FALSE) {
-    watchdog('-> GV watchdog ', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
-  }
-  if ($log_entry['type'] == 'user') {
-    watchdog('-----> GV watchdog', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
-  }
+  //dpm($log_entry);
+  global $language;
+  drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
+  
+//  if (strpos($log_entry['type'], '[no source!!!') !== FALSE) {
+//    watchdog('-> GV watchdog ', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
+//  }
+//  if ($log_entry['type'] == 'user') {
+//    watchdog('-----> GV watchdog', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
+//  }
 }
