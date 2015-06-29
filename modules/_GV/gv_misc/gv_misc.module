@@ -17109,14 +17109,9 @@ function gv_misc_getIpInfo_ajax() {
 
 
 function gv_misc_watchdog(array $log_entry) {
-  //dpm($log_entry);
-  global $language;
-  drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
   
-//  if (strpos($log_entry['type'], '[no source!!!') !== FALSE) {
-//    watchdog('-> GV watchdog ', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
-//  }
-//  if ($log_entry['type'] == 'user') {
-//    watchdog('-----> GV watchdog', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
-//  }
+  if (strpos($log_entry['type'], 'source!!!') !== FALSE) {
+    global $language;
+    drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
+  }
 }
