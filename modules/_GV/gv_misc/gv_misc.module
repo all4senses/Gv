@@ -17104,8 +17104,8 @@ function gv_misc_getIpInfo_ajax() {
 
 
 function gv_misc_watchdog(array $log_entry) {
-  
-  if (strpos($log_entry['type'], '[no source!!!')) {
+  dpm($log_entry);
+  if (strpos($log_entry['type'], '[no source!!!') !== FALSE) {
     watchdog('-> GV watchdog ', print_r($log_entry, TRUE), NULL, WATCHDOG_WARNING);
   }
 }
