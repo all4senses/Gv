@@ -10465,8 +10465,8 @@ function gv_pages_dblog_overview() {
  */
 function gv_pages_BlockedIPs_overview() {
   
-  module_load_include('inc', 'dblog', 'dblog.admin');
-  $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
+  //module_load_include('inc', 'dblog', 'dblog.admin');
+  $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_blockIPsAdminPage.js';
   drupal_add_js($path_to_js);
   
   //dpm($_GET);
@@ -10624,6 +10624,7 @@ function gv_pages_BlockedIPs_overview() {
     ->orderByHeader($header)
     ->execute();
 
+  $current_time = time(); 
   
   foreach ($result as $blocked_IP) {
 
@@ -10631,9 +10632,26 @@ function gv_pages_BlockedIPs_overview() {
                  . (!$blocked_IP->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
                  . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
                  . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
-                 . '-<a class="get-info-on-ip" href="#" title="Get Info about this IP">Info</a>'
+                 . '-<a class="get-info-on-ip" href="#" title="Get Whois Info about this IP, output to a Browser console">Info</a>'
                   ;
 
+
+    if ($blocked_IP->iid) {
+      if ($current_time > $blocked_IP->timestamp_to) {
+        $row_class = 'blocked perm';
+      }
+      else {
+        $row_class = 'blocked temp';
+      }
+    }
+    else {
+      if ($current_time > $blocked_IP->timestamp_to) {
+        $row_class = 'not-blocked';
+      }
+      else {
+        $row_class = 'blocked submissions-and-tracking';
+      }
+    }
 
     $rows[] = array('data' =>
       array(
@@ -10649,7 +10667,7 @@ function gv_pages_BlockedIPs_overview() {
         '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->ip . '">'  . $op_links . '</div>',
       ),
       // Attributes for tr
-      'class' => array('blocked-row'),
+      'class' => $row_class,
     );
   }
 
