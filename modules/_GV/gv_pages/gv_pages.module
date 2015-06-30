@@ -10644,7 +10644,7 @@ function gv_pages_BlockedIPs_overview() {
         format_date($blocked_IP->timestamp_to, 'short'),   
         $blocked_IP->source,
         $blocked_IP->reason,
-        '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->p . '">'  . $add_wd_links . '</div>',
+        '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->ip . '">'  . $op_links . '</div>',
       ),
       // Attributes for tr
       'class' => array('blocked-row'),
