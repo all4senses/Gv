@@ -10569,8 +10569,8 @@ function gv_pages_BlockedIPs_overview() {
 
   $header = array(
     //'', // Icon column.
-    array('data' => t('ID'), 'field' => 'gb.id'),
-    array('data' => t('IID'), 'field' => 'g.iid'),  
+    array('data' => t('ID'), 'field' => 'gb.id', 'sort' => 'desc'),
+    array('data' => t('IID'), 'field' => 'g.iid', 'sort' => 'desc'),  
     array('data' => t('IP'), 'field' => 'gb.ip'),
     array('data' => t('Date From'), 'field' => 'gb.timestamp_from', 'sort' => 'desc'),
     array('data' => t('Date To'), 'field' => 'gb.timestamp_to', 'sort' => 'desc'),  
@@ -10638,10 +10638,10 @@ function gv_pages_BlockedIPs_overview() {
 
     if ($blocked_IP->iid) {
       if ($current_time > $blocked_IP->timestamp_to) {
-        $row_class = 'blocked perm';
+        $row_class = 'blocked permanently';
       }
       else {
-        $row_class = 'blocked temp';
+        $row_class = 'blocked temporarily';
       }
     }
     else {
@@ -10664,7 +10664,7 @@ function gv_pages_BlockedIPs_overview() {
         format_date($blocked_IP->timestamp_to, 'short'),   
         $blocked_IP->source,
         $blocked_IP->reason,
-        '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->ip . '">'  . $op_links . '</div>',
+        '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->ip . '"><div class="info" style="color: lightgray;">' .$row_class . '</div>'  . $op_links . '</div>',
       ),
       // Attributes for tr
       'class' => array($row_class),
