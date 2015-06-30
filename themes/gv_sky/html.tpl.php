@@ -65,6 +65,15 @@
       <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/popup-exit.css">
     <?php } ?>
   <?php } ?>
+
+  <?php // Dev tool inclusion for Danny's local server only. ?>
+  <?php if ( $_SERVER['SERVER_NAME'] === 'gv.dev' ) { ?>
+       <script type="text/javascript" src="http://localhost:48626/takana.js"></script>
+       <script type="text/javascript">
+         takanaClient.run({host: 'localhost:48626'});
+       </script>
+  <?php } ?>
+
 <!--[if IE 8]>
     <script type="text/javascript" src="/sites/all/themes/gv_sky/js/selectivizr-min.js"></script>
     <link rel="stylesheet" href="/sites/all/themes/gv_sky/css/ie8.css" />
