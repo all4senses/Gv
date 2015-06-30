@@ -25,6 +25,16 @@ function gv_pages_menu() {
     //'file' => 'dblog.admin.inc',
     //'file' => '/home/gvadmin/public_html/modules/dblog/dblog.admin.inc'  ,
   );
+  
+  $items['admin/reports/gv-blocked-ips'] = array(
+    'title' => 'GV Blocked IPs',
+    'description' => 'View blocked IPs',
+    'page callback' => 'gv_pages_BlockedIPs_overview',
+    'access arguments' => array('access site reports'),
+    'weight' => -1,
+  );
+  
+  
     
   $tags_admin_types = array('topics', 'articles', 'news', 'blog');
   foreach ($tags_admin_types as $tags_admin_type) {
@@ -10299,7 +10309,7 @@ function gv_pages_dblog_overview() {
               'timestamp_from' => $current_time,
               'timestamp_to' => $current_time, 
               'type' => 'IP',  
-              'object' => $_GET['ip'],
+              'ip' => $_GET['ip'],
               'last_updated' => $current_time,  
               'blocked_count' => 1,  
               'data' => serialize($requested_notice),
@@ -10432,6 +10442,223 @@ function gv_pages_dblog_overview() {
     '#empty' => t('No log messages available.'),
   );
   $build['dblog_pager'] = array('#theme' => 'pager');
+
+  return $build;
+}
+
+
+/**
+ * 
+ * Altered menu callback function dblog_overview() from the dblog module.
+ * 
+ * Page callback: Displays a listing of database log messages.
+ *
+ * Messages are truncated at 56 chars. Full-length messages can be viewed on the
+ * message details page.
+ *
+ * @see dblog_clear_log_form()
+ * @see dblog_event()
+ * @see dblog_filter_form()
+ * @see dblog_menu()
+ *
+ * @ingroup logging_severity_levels
+ */
+function gv_pages_BlockedIPs_overview() {
+  
+  module_load_include('inc', 'dblog', 'dblog.admin');
+  $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
+  drupal_add_js($path_to_js);
+  
+  //dpm($_GET);
+  if (!empty($_GET['op'])) {
+    
+    if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
+        $query = db_select('blocked_ips', 'b')
+          ->fields('b', array('iid'));
+        $query->condition('b.ip', $_GET['ip']);
+        $iid = $query->execute()->fetchField();
+    }
+    
+    switch ($_GET['op']) {
+      
+      case 'get-info-on-ip':
+        $whois_data = shell_exec('whois ' . $_GET['ip']);
+        dpm($whois_data);
+        break;
+      
+      case 'block-ip':
+        
+        if ($iid) {
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been already blocked!', 'warning');
+        }
+        else {
+          db_insert('blocked_ips')
+            ->fields(array(
+              'ip'=> $_GET['ip'],
+            ))
+            ->execute();
+          
+          // Get the full Notice data for the future reference
+          $query = db_select('watchdog', 'w');
+          $query->leftJoin('users', 'u', 'w.uid = u.uid');
+          $query->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
+                ->addField('u', 'name');
+          $query->condition('w.hostname', $_GET['ip']);
+          $requested_notice = $query->execute()->fetchObject();
+
+          $current_time = time();
+          // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+          $result = db_insert('gv_blocked')
+            ->fields(array(
+              'timestamp_from' => $current_time,
+              'timestamp_to' => $current_time, 
+              'type' => 'IP',  
+              'ip' => $_GET['ip'],
+              'last_updated' => $current_time,  
+              'blocked_count' => 1,  
+              'data' => serialize($requested_notice),
+              'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
+              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $requested_notice->severity .  ')',
+            ))
+            ->execute();
+      
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
+        }
+        break;
+      
+        
+      case 'unblock-ip':
+        
+        if (!$iid) {
+          drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
+        }
+        else {
+          db_delete('blocked_ips')
+            ->condition('ip', $_GET['ip'])
+            ->execute();
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
+        }
+        
+        break;
+        
+      case 'include-ip':
+        $_GET['include-ip'] = $_GET['ip'];
+        break;
+      
+      case 'exclude-ip':
+        $_GET['exclude-ip'] = $_GET['ip'];
+        break;
+     
+    }
+    
+    // Redirect back to the current page without extra parameters.
+    $get = $_GET;
+    unset($get['q'], $get['op'], $get['ip'], $get['id'], $get['show-all']);
+    if ($_GET['op'] == 'show-all') {
+      unset($get['include-ip'], $get['exclude-ip']);
+    }
+    drupal_goto($_GET['q'], array('query' => $get));
+
+  }
+  
+  
+  $rows = array();
+
+  //$build['dblog_filter_form'] = drupal_get_form('dblog_filter_form');
+  //$build['dblog_clear_log_form'] = drupal_get_form('dblog_clear_log_form');
+
+  $header = array(
+    //'', // Icon column.
+    array('data' => t('ID'), 'field' => 'gb.id'),
+    array('data' => t('IP'), 'field' => 'gb.ip'),
+    array('data' => t('Date From'), 'field' => 'gb.timestamp_from', 'sort' => 'desc'),
+    array('data' => t('Date To'), 'field' => 'gb.timestamp_to', 'sort' => 'desc'),  
+    //t('Message'),
+    array('data' => t('Source'), 'field' => 'gb.source'),
+    array('data' => t('Reason'), 'field' => 'gb.reason'),  
+    array('data' => t('Operations')),
+  );
+
+  /*
+  $query = db_select('watchdog', 'w')->extend('PagerDefault')->extend('TableSort');
+  $query->leftJoin('users', 'u', 'w.uid = u.uid');
+  $query
+    ->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
+    ->addField('u', 'name');
+  $query->leftJoin('blocked_ips', 'b', 'b.ip = w.hostname');
+  $query->addField('b', 'iid');
+
+  if (!empty($_GET['include-ip'])) {
+    $query->condition('w.hostname', $_GET['include-ip']);
+    drupal_set_message('There are only IP ' . $_GET['include-ip'] . ' shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+  }
+  elseif (!empty($_GET['exclude-ip'])) {
+    $query->condition('w.hostname', $_GET['exclude-ip'], '!=');
+    drupal_set_message('Rows with IP ' . $_GET['exclude-ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+  }
+  $result = $query
+    ->limit(50)
+    ->orderByHeader($header)
+    ->execute();
+  */
+  
+  $query = db_select('gv_blocked', 'gb')->extend('PagerDefault')->extend('TableSort');
+  $query
+    ->fields('gb', array('id', 'ip', 'email', 'counted_by', 'timestamp_from', 'timestamp_to', 'blocked_count', 'last_updated', 'data', 'source', 'reason'))
+    //->addField('u', 'name')
+    ;
+  $query->leftJoin('blocked_ips', 'b', 'b.ip = gb.ip');
+  $query->addField('b', 'iid');
+
+  if (!empty($_GET['include-ip'])) {
+    $query->condition('gb.ip', $_GET['include-ip']);
+    drupal_set_message('There are only IP ' . $_GET['include-ip'] . ' shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+  }
+  elseif (!empty($_GET['exclude-ip'])) {
+    $query->condition('gb.ip', $_GET['exclude-ip'], '!=');
+    drupal_set_message('Rows with IP ' . $_GET['exclude-ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+  }
+  $result = $query
+    ->limit(5)
+    ->orderByHeader($header)
+    ->execute();
+
+  
+  foreach ($result as $blocked_IP) {
+
+    $op_links = ($blocked_IP->iid ? '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
+                 . (!$blocked_IP->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
+                 . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
+                 . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
+                 . '-<a class="get-info-on-ip" href="#" title="Get Info about this IP">Info</a>'
+                  ;
+
+
+    $rows[] = array('data' =>
+      array(
+        // Cells
+        //array('class' => 'icon'),
+        $blocked_IP->id,
+        $blocked_IP->ip,   
+        format_date($blocked_IP->timestamp_from, 'short'),
+        format_date($blocked_IP->timestamp_to, 'short'),   
+        $blocked_IP->source,
+        $blocked_IP->reason,
+        '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->p . '">'  . $add_wd_links . '</div>',
+      ),
+      // Attributes for tr
+      'class' => array('blocked-row'),
+    );
+  }
+
+  $build['blocked_ips_table'] = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#attributes' => array('id' => 'admin-blocked-ips'),
+    '#empty' => t('No log messages available.'),
+  );
+  $build['blocked_ips_pager'] = array('#theme' => 'pager');
 
   return $build;
 }

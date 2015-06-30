@@ -5515,8 +5515,8 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   
   // Check if current IP is blocked at this moment
   $query = db_select('gv_blocked', 'b')
-    ->fields('b', array('id', 'type', 'object', 'timestamp_from', 'timestamp_to', 'blocked_count',  'data'));
-  $query->condition('b.object', $user_ip);
+    ->fields('b', array('id', 'counted_by', 'email', 'ip', 'timestamp_from', 'timestamp_to', 'blocked_count',  'data'));
+  $query->condition('b.ip', $user_ip);
   // Check if a current time is between start and finish blocking time for this IP
   $query->condition('b.timestamp_from', $current_time, '<');
   $query->condition('b.timestamp_to', $current_time, '>');
@@ -5555,8 +5555,9 @@ function gv_misc_makeRequest_ajax($post = NULL) {
           ->fields(array(
             'timestamp_from' => $current_time,
             'timestamp_to' => $current_time + 3600, // Block for 1 hour.
-            'type' => 'IP',  
-            'object' => $user_ip,
+            'counted_by' => 'IP/email',
+            'email' => $post['email'],  
+            'ip' => $user_ip,
             'last_updated' => $current_time,  
             'blocked_count' => 1,  
             'data' => serialize(array('last_post' => $post, 'last_SERVER' => $_SERVER)),
