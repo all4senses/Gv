@@ -2608,6 +2608,7 @@ function gv_misc_goToExternalUrl2() {
             if (@$report_strange_click) {
               $watch_str = 'u' . $user->uid. ', $_GET -------> ' . print_r($_GET, TRUE) . ', $_server -------> '. print_r($_SERVER, TRUE) . ', $_session -------> '. print_r(@$_SESSION, TRUE);
               watchdog('-###> GV click via go/' . $object_name . $source_notice, $watch_str, NULL, WATCHDOG_WARNING);
+              gv_misc_ipToCountry('set', $_SERVER, 'Bad Track click GV click via go/' . $object_name . $source_notice);
             }
             
             $referrer = @$_SESSION['gv_current_http_referer'];
@@ -5569,10 +5570,12 @@ function gv_misc_makeRequest_ajax($post = NULL) {
       $blocked_count = 1;
       $gv_blocked = TRUE;
       
+      gv_misc_ipToCountry('set', $_SERVER, 'Quote REQUEST BLOCKED IP');
+      
       if (in_array($user_ip, array('45.55.161.169', '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
       // // white listed IPs
         // Skip general IP blocking for the server (and some others) IP, just in case...
-        watchdog('-->>> REQUEST BLOCKED IP for 1h -- WHITELISTED IP!!!', 'Attention!!! The submission has been made from the WHITELISTED IP. Why? It is not generally blocket though, just from submission new requests.   ' . print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
+        watchdog('-->>> Quote REQUEST BLOCKED IP -- WHITELISTED IP!!!', 'Attention!!! The submission has been made from the WHITELISTED IP. Why? It is not generally blocket though, just from submission new requests.   ' . print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
         drupal_mail('gv_misc', 'request_blocked_alert', 'all4senses@gmail.com', $language->language, array('IP' => $user_ip, 'post' => 'Attention!!! The submission has been made from the server local IP 45.55.161.169. Why? It is not generally blocket though, just from submission new requests.   ' . print_r($post, TRUE) . '; blocked_count = ' . $blocked_count));
       }
       else {
@@ -5583,7 +5586,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
           ))
           ->execute();
         
-        watchdog('--> FULL ACCESS SITE BLOCKED IP ' . $user_ip, print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
+        watchdog('--> Quote REQUEST BLOCKED IP ' . $user_ip, print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
         drupal_mail('gv_misc', 'request_blocked_alert', 'all4senses@gmail.com', $language->language, array('IP' => $user_ip, 'post' => 'FULL ACCESS SITE BLOCKED IP' . print_r($post, TRUE) . '; blocked_count = ' . $blocked_count));
       }
       
@@ -5594,6 +5597,7 @@ function gv_misc_makeRequest_ajax($post = NULL) {
   //watchdog('--> GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
   if (!$gv_blocked && ($suspect_spam || !$phone)) {
     watchdog('--> SPAM/ATTACK SUSPECTED - GV Request POST', print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ';  Submitted_before_count = ' . $submitted_before_count . '; Blocked_count = ' . $blocked_count . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
+    gv_misc_ipToCountry('set', $_SERVER, 'SPAM/ATTACK SUSPECTED in a GV quote Request');
   }
   
   elseif ($gv_blocked){
@@ -17129,5 +17133,25 @@ function gv_misc_watchdog(array $log_entry) {
   }
   else {
     
+  }
+}
+
+
+function gv_misc_ipToCountry($op, $server, $source) {
+  $query = db_select('gv_ip_to_country', 'c')->fields('c', array('country'))->condition('ip', $server['HTTP_CF_CONNECTING_IP']);
+  $country = $query->execute()->fetchField();
+  if ($op == 'get') {
+    return $country;
+  }
+  if (!$country) {
+    // Add a new ip info
+    db_insert('gv_ip_to_country')
+      ->fields(array(
+        'ip' => $server['HTTP_CF_CONNECTING_IP'],
+        'country' => $server['HTTP_CF_IPCOUNTRY'],
+        'http_user_agent' => $server['HTTP_USER_AGENT'], 
+        'source' => $source,  
+      ))
+      ->execute();
   }
 }
