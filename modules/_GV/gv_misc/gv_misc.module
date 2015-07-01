@@ -5572,11 +5572,11 @@ function gv_misc_makeRequest_ajax($post = NULL) {
       
       gv_misc_ipToCountry('set', $_SERVER, 'Quote REQUEST BLOCKED IP');
       
-      if (in_array($user_ip, array('45.55.161.169', '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
+      if (in_array($user_ip, array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122'))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
       // // white listed IPs
         // Skip general IP blocking for the server (and some others) IP, just in case...
         watchdog('-->>> Quote REQUEST BLOCKED IP -- WHITELISTED IP!!!', 'Attention!!! The submission has been made from the WHITELISTED IP. Why? It is not generally blocket though, just from submission new requests.   ' . print_r($post, TRUE) . ', $_SERVER: ' . print_r($_SERVER, TRUE) . ', $_SESSION: ' . print_r(@$_SESSION, TRUE), NULL, WATCHDOG_WARNING);
-        drupal_mail('gv_misc', 'request_blocked_alert', 'all4senses@gmail.com', $language->language, array('IP' => $user_ip, 'post' => 'Attention!!! The submission has been made from the server local IP 45.55.161.169. Why? It is not generally blocket though, just from submission new requests.   ' . print_r($post, TRUE) . '; blocked_count = ' . $blocked_count));
+        drupal_mail('gv_misc', 'request_blocked_alert', 'all4senses@gmail.com', $language->language, array('IP' => $user_ip, 'post' => 'Attention!!! The submission has been made from the server local IP ' . $_SERVER['SERVER_ADDR'] . '. Why? It is not generally blocket though, just from submission new requests.   ' . print_r($post, TRUE) . '; blocked_count = ' . $blocked_count));
       }
       else {
         // Block this IP from full site accessing. May be removed at http://getvoip.com/admin/config/people/ip-blocking
@@ -17135,6 +17135,7 @@ function gv_misc_watchdog(array $log_entry) {
   $accessed_to_executables = array('.php', '.cgi');
   $accessed_to_admin_sections = array('admin');
   
+  $is_server_or_admin = in_array($_SERVER['HTTP_CF_CONNECTING_IP'], array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
   
   if (strpos($log_entry['type'], 'source!!!') !== FALSE) {
     // drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
