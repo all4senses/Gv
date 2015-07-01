@@ -17126,13 +17126,14 @@ function gv_misc_getIpInfo_ajax() {
 function gv_misc_watchdog(array $log_entry) {
   
   $denied_urls = array('wp-login.php');
+  global $language;
   
   if (strpos($log_entry['type'], 'source!!!') !== FALSE) {
-//    global $language;
 //    drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
   }
-  else {
-    
+  elseif (in_array($log_entry['message'], $denied_urls)) {
+    gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog, denied url ' .$log_entry['message']);
+    drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog, denied url', 'body' => print_r($log_entry, TRUE)));
   }
 }
 
