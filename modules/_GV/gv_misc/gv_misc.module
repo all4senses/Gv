@@ -17214,7 +17214,7 @@ function gv_misc_ipToCountry($op, $server, $source) {
       ))
       ->execute();
     // Return inserted country code.
-    $country = $server['HTTP_CF_CONNECTING_IP'];
+    $country = $server['HTTP_CF_IPCOUNTRY'];
   }
   return $country;
 }
