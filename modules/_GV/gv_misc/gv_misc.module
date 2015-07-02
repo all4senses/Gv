@@ -17124,6 +17124,7 @@ function gv_misc_getIpInfo_ajax() {
 
 
 /*
+ * Intercepts watchdog messages with errors, warnings, etc.
  * Set some additional info to DB, notify admin or block ip
  * on suspicious errors/warnings sent to watchdog by different modiles
  * 
@@ -17132,19 +17133,20 @@ function gv_misc_watchdog(array $log_entry) {
   
   global $language;
   
-  $ip_whitelisted = in_array($_SERVER['HTTP_CF_CONNECTING_IP'], array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
+  $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+  $ip_whitelisted = in_array($ip, array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
   $suspected_attack_type = FALSE;
   $forbidden_countries = array('CN');
   $forbidden_sections = array(
-    'tried to access executables' => array('.php', '.cgi', '.asp', '.jsp'),
-    'tried to access admin section' => array('admin', 'user/register'),
-    'password brute force' => array('Login attempt failed for'),  
+    'Requested executables' => array('.php', '.cgi', '.asp', '.jsp'),
+    'Requested admin section' => array('admin', 'user/register'),
+    'Password brute force' => array('Login attempt failed for'),  
   );
     
   foreach ($forbidden_sections as $forbidden_section => $substrings) {
     if (gv_misc_stringHasSomeOfSubstrings($log_entry['message'], $substrings)) {
       $suspected_attack_type = $forbidden_section;
-      $country = gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog, ' . $forbidden_section . ': ' . $log_entry['message']);
+      $country = gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog interceptor, ' . $forbidden_section . ': ' . $log_entry['message']);
       break;
     }
   }
@@ -17154,11 +17156,16 @@ function gv_misc_watchdog(array $log_entry) {
     if (in_array($country, $forbidden_countries)) {
       // If we have noticed a bad behavior from a forbidden country,
       // We block this IP jast right now, from the first access time.
-      
+      gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ $suspected_attack_type, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => $log_entry, '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
       // Inform an admin about a new IP blocking.
-      drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog BLOCKED IP from ' . $country . ', ' . $suspected_attack_type, 'body' => print_r($log_entry, TRUE)));
+      drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog Interceptor BLOCKED IP from ' . $country . ', ' . $suspected_attack_type, 'body' => print_r($log_entry, TRUE)));
     }
-  }
+    else {
+      // Find out, how many such errors/warnings have been noticed from this IP for the past hour.
+      // and if there are too many of them (more than a critical amount), we block this IP.
+      
+    }
+  } // End of if ($suspected_attack_type && !$ip_whitelisted) {
   elseif (strpos($log_entry['type'], 'source!!!') !== FALSE) {
     // drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
   }
@@ -17166,6 +17173,10 @@ function gv_misc_watchdog(array $log_entry) {
 }
 
 
+/*
+ * Searches in a string for substrings from an array.
+ * 
+**/
 function gv_misc_stringHasSomeOfSubstrings($string, array $substrings) {
   foreach ($substrings as $substring) {
     if (strpos($string, $substring) !== FALSE) {
@@ -17201,61 +17212,58 @@ function gv_misc_ipToCountry($op, $server, $source) {
 }
 
 
-/*
-function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL) {
-  
 
+function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $blocked_count = NULL, $counted_by = NULL, $email = NULL, $timestamp_from = NULL, $timestamp_to = NULL, $data = NULL, $drupal_set_message = FALSE, $set_by = NULL) {
+  
   $query = db_select('blocked_ips', 'b')
     ->fields('b', array('iid'));
   $query->condition('b.ip', $ip);
   $iid = $query->execute()->fetchField();
 
-    
-    switch ($op) {
-      
- 
-      case 'block':
-        
-        if (!$iid) {
+  if ($op == 'block' && !$iid) {
 
-          db_insert('blocked_ips')
-            ->fields(array(
-              'ip'=> $_GET['ip'],
-            ))
-            ->execute();
-       
-          $current_time = time();
-          // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
-          $result = db_insert('gv_blocked')
-            ->fields(array(
-              'timestamp_from' => $current_time,
-              'timestamp_to' => $current_time, 
-              'type' => 'IP',  
-              'ip' => $_GET['ip'],
-              'last_updated' => $current_time,  
-              'blocked_count' => 1,  
-              'data' => serialize($requested_notice),
-              'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
-              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $requested_notice->severity .  ')',
-            ))
-            ->execute();
-      
-          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
-        }
-        break;
-      
-        
-      case 'unblock-ip':
-        
-        if (!$iid) {
-          drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
-        }
-        else {
-          db_delete('blocked_ips')
-            ->condition('ip', $_GET['ip'])
-            ->execute();
-          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
-        }
+    db_insert('blocked_ips')
+      ->fields(array(
+        'ip'=> $ip,
+      ))
+      ->execute();
+
+    $current_time = time();
+    
+    // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+    $result = db_insert('gv_blocked')
+      ->fields(array(
+        'timestamp_from' => $timestamp_from,
+        'timestamp_to' => $timestamp_to, 
+        'email' => $email,  
+        'ip' => $ip,
+        'last_updated' => $current_time,  
+        'blocked_count' => $blocked_count, 
+        'counted_by' => $counted_by,  
+        'data' => $data ? serialize($data) : NULL,
+        'source' => $source,
+        'reason' => $reason,
+        'set_by' => $set_by,  
+      ))
+      ->execute();
+
+    $period = $timestamp_from ? 'temporarily (' . format_date($timestamp_from, 'short') . ' - ' . format_date($timestamp_to, 'short') . ')': 'permanently';
+    $admin_message = 'The IP ' . $ip . ' has been successfully blocked ' . $period . ' ' . $set_by . '.';
+    watchdog('-> GV Blocked IP ' . $set_by, $admin_message . '. Reason: ' . $reason . '. Source: ' . $source . '. Data: ' . print_r($data, TRUE), NULL, WATCHDOG_WARNING);
+    if ($drupal_set_message) {
+      drupal_set_message($admin_message, 'warning');
     }
+  }
+  elseif ($op == 'unblock' && $iid) {
+    db_delete('blocked_ips')
+      ->condition('ip', $ip)
+      ->execute();
+    
+    $admin_message = 'The IP ' . $ip . ' has been successfully unblocked ' . $set_by . '.';
+    watchdog('-> GV UNblocked IP ' . $set_by, $admin_message . '. Reason: ' . $reason . '. Source: ' . $source . '. Data: ' . print_r($data, TRUE), NULL, WATCHDOG_WARNING);
+    if ($drupal_set_message) {
+      drupal_set_message($admin_message, 'warning');
+    }
+  }
+
 }
-*/
