@@ -17163,8 +17163,16 @@ function gv_misc_watchdog(array $log_entry) {
     else {
       // Find out, how many such errors/warnings have been noticed from this IP for the past hour.
       // and if there are too many of them (more than a critical amount), we block this IP.
-      
-    }
+      $query = db_select('watchdog', 'w');
+      $query->fields('w', array('wid'));
+      $query->condition('w.hostname', $ip);
+      $query->condition('w.timestamp', time() - 3600, '>');
+      $results = $query->execute()->fetchCol();
+      if ( ($requests_count = count($results)) == 2) {
+        drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog Interceptor BLOCKED IP from ' . $country . ', ' . $suspected_attack_type . ', (' . $requests_count . ' requests)', 'body' => print_r($log_entry, TRUE)));
+      }
+    
+    } // End of else of if (in_array($country, $forbidden_countries)) {
   } // End of if ($suspected_attack_type && !$ip_whitelisted) {
   elseif (strpos($log_entry['type'], 'source!!!') !== FALSE) {
     // drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
