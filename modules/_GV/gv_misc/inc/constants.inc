@@ -448,7 +448,7 @@ $remoteProvidersSubmissionsSettings = array(
     
   '8x8_CallCenter' => array('function' => 'gv_misc_SendRequestTo8x8_callCenter', 'allowed_sources' => array('page_10_cc_v1')),  
   
-  'Mitel_CallCenter' => array('function' => 'gv_misc_SendRequestToMitel_callCenter', 'allowed_sources' => array('page_10_cc_v1')),
+  'Mitel_CallCenter' => array('function' => 'gv_misc_SendRequestToMitel_callCenter', 'allowed_sources' => array(/*'page_10_cc_v1'*/)),
     
   'RingCentral_CallCenter' => array('function' => 'gv_misc_SendRequestToRingCentral_callCenter', 'allowed_sources' => array('page_10_cc_v1')),  
     

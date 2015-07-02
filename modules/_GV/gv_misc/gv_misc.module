@@ -17132,31 +17132,44 @@ function gv_misc_watchdog(array $log_entry) {
   
   global $language;
   
-  $accessed_to_executables = array('.php', '.cgi');
-  $accessed_to_admin_sections = array('admin');
+  $ip_whitelisted = in_array($_SERVER['HTTP_CF_CONNECTING_IP'], array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
+  $suspected_attack_type = FALSE;
+  $forbidden_countries = array('CN');
+  $forbidden_sections = array(
+    'tried to access executables' => array('.php', '.cgi', '.asp', '.jsp'),
+    'tried to access admin section' => array('admin', 'user/register'),
+    'password brute force' => array('Login attempt failed for'),  
+  );
+    
+  foreach ($forbidden_sections as $forbidden_section => $substrings) {
+    if (gv_misc_stringHasSomeOfSubstrings($log_entry['message'], $substrings)) {
+      $suspected_attack_type = $forbidden_section;
+      $country = gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog, ' . $forbidden_section . ': ' . $log_entry['message']);
+      break;
+    }
+  }
   
-  $is_server_or_admin = in_array($_SERVER['HTTP_CF_CONNECTING_IP'], array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
-  
-  if (strpos($log_entry['type'], 'source!!!') !== FALSE) {
+  // If we have noticed a bad behavior and an IP is not whitelisted...
+  if ($suspected_attack_type && !$ip_whitelisted) {
+    if (in_array($country, $forbidden_countries)) {
+      // If we have noticed a bad behavior from a forbidden country,
+      // We block this IP jast right now, from the first access time.
+      
+      // Inform an admin about a new IP blocking.
+      drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog BLOCKED IP from ' . $country . ', ' . $suspected_attack_type, 'body' => print_r($log_entry, TRUE)));
+    }
+  }
+  elseif (strpos($log_entry['type'], 'source!!!') !== FALSE) {
     // drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog', 'body' => print_r($log_entry, TRUE)));
   }
-  elseif (gv_misc_stringHasSomeOfSubstrings($log_entry['message'], $accessed_to_executables)) {
-    gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog, accessed to executables: ' .$log_entry['message']);
-    //drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog, accessed to executables', 'body' => print_r($log_entry, TRUE)));
-  }
-  elseif (strpos($log_entry['message'], 'Login attempt failed for') !== FALSE) {
-    gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog, password brute force: ' . $log_entry['message']);
-  }
-  elseif (gv_misc_stringHasSomeOfSubstrings($log_entry['message'], $accessed_to_admin_sections)) {
-    gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog, $accessed to admin sections: ' . $log_entry['message']);
-  }
+  
 }
 
 
 function gv_misc_stringHasSomeOfSubstrings($string, array $substrings) {
   foreach ($substrings as $substring) {
     if (strpos($string, $substring) !== FALSE) {
-      return TRUE;
+      return $substring;
     }
   }
   return FALSE;
@@ -17164,16 +17177,14 @@ function gv_misc_stringHasSomeOfSubstrings($string, array $substrings) {
 
 
 /*
- * Set some additional info to DB about a current user.
+ * Set some additional info to DB about a current user or get a country for an IP if it's already in DB.
  * 
 **/
 function gv_misc_ipToCountry($op, $server, $source) {
   $query = db_select('gv_ip_to_country', 'c')->fields('c', array('country'))->condition('ip', $server['HTTP_CF_CONNECTING_IP']);
   $country = $query->execute()->fetchField();
-  if ($op == 'get') {
-    return $country;
-  }
-  if (!$country) {
+
+  if (!$country && $op == 'set') {
     // Add a new ip info
     db_insert('gv_ip_to_country')
       ->fields(array(
@@ -17183,5 +17194,68 @@ function gv_misc_ipToCountry($op, $server, $source) {
         'source' => $source,  
       ))
       ->execute();
+    // Return inserted country code.
+    $country = $server['HTTP_CF_CONNECTING_IP'];
   }
+  return $country;
 }
+
+
+/*
+function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL) {
+  
+
+  $query = db_select('blocked_ips', 'b')
+    ->fields('b', array('iid'));
+  $query->condition('b.ip', $ip);
+  $iid = $query->execute()->fetchField();
+
+    
+    switch ($op) {
+      
+ 
+      case 'block':
+        
+        if (!$iid) {
+
+          db_insert('blocked_ips')
+            ->fields(array(
+              'ip'=> $_GET['ip'],
+            ))
+            ->execute();
+       
+          $current_time = time();
+          // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+          $result = db_insert('gv_blocked')
+            ->fields(array(
+              'timestamp_from' => $current_time,
+              'timestamp_to' => $current_time, 
+              'type' => 'IP',  
+              'ip' => $_GET['ip'],
+              'last_updated' => $current_time,  
+              'blocked_count' => 1,  
+              'data' => serialize($requested_notice),
+              'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
+              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $requested_notice->severity .  ')',
+            ))
+            ->execute();
+      
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
+        }
+        break;
+      
+        
+      case 'unblock-ip':
+        
+        if (!$iid) {
+          drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
+        }
+        else {
+          db_delete('blocked_ips')
+            ->condition('ip', $_GET['ip'])
+            ->execute();
+          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
+        }
+    }
+}
+*/
