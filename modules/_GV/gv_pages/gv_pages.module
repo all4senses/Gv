@@ -10514,8 +10514,20 @@ function gv_pages_BlockedIPs_overview() {
           $query->condition('w.hostname', $_GET['ip']);
           $requested_notice = $query->execute()->fetchObject();
 
+          
+          $severity_classes = array(
+            WATCHDOG_DEBUG     => 'dblog-debug',
+            WATCHDOG_INFO      => 'dblog-info',
+            WATCHDOG_NOTICE    => 'dblog-notice',
+            WATCHDOG_WARNING   => 'dblog-warning',
+            WATCHDOG_ERROR     => 'dblog-error',
+            WATCHDOG_CRITICAL  => 'dblog-critical',
+            WATCHDOG_ALERT     => 'dblog-alert',
+            WATCHDOG_EMERGENCY => 'dblog-emerg',
+          );
+          
           $current_time = time();
-          // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+          // Add an IP to the GV temporary blocking table for future references (having source and reason  fields  filled).
           $result = db_insert('gv_blocked')
             ->fields(array(
               'timestamp_from' => $current_time,
@@ -10526,7 +10538,7 @@ function gv_pages_BlockedIPs_overview() {
               'blocked_count' => 1,  
               'data' => serialize($requested_notice),
               'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
-              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $requested_notice->severity .  ')',
+              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $severity_classes[$requested_notice->severity] .  ')',
             ))
             ->execute();
       
@@ -10580,6 +10592,7 @@ function gv_pages_BlockedIPs_overview() {
     array('data' => t('ID'), 'field' => 'gb.id', 'sort' => 'desc'),
     array('data' => t('IID'), 'field' => 'g.iid', 'sort' => 'desc'),  
     array('data' => t('IP'), 'field' => 'gb.ip'),
+    array('data' => t('Country'), 'field' => 'c.country'),  
     array('data' => t('Date From'), 'field' => 'gb.timestamp_from', 'sort' => 'desc'),
     array('data' => t('Date To'), 'field' => 'gb.timestamp_to', 'sort' => 'desc'),  
     //t('Message'),
@@ -10618,6 +10631,9 @@ function gv_pages_BlockedIPs_overview() {
     ;
   $query->leftJoin('blocked_ips', 'b', 'b.ip = gb.ip');
   $query->addField('b', 'iid');
+  
+  $query->leftJoin('gv_ip_to_country', 'c', 'c.ip = gb.ip');
+  $query->addField('c', 'country');
 
   if (!empty($_GET['include-ip'])) {
     $query->condition('gb.ip', $_GET['include-ip']);
@@ -10667,7 +10683,8 @@ function gv_pages_BlockedIPs_overview() {
         //array('class' => 'icon'),
         $blocked_IP->id,
         $blocked_IP->iid,  
-        $blocked_IP->ip,   
+        $blocked_IP->ip,
+        $blocked_IP->country,  
         format_date($blocked_IP->timestamp_from, 'short'),
         format_date($blocked_IP->timestamp_to, 'short'),   
         $blocked_IP->source,
