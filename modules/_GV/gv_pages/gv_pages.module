@@ -10393,6 +10393,10 @@ function gv_pages_dblog_overview() {
   $query->leftJoin('blocked_ips', 'b', 'b.ip = w.hostname');
   $query->addField('b', 'iid');
   
+  
+  $query->leftJoin('gv_blocked', 'gb', 'gb.ip = w.hostname');
+  $query->fields('gb', array('id', 'source', 'reason', 'set_by'));
+  
   $query->leftJoin('gv_ip_to_country', 'c', 'c.ip = w.hostname');
   $query->fields('c', array('cid', 'http_user_agent', 'country', 'source'));
   
@@ -10414,7 +10418,7 @@ function gv_pages_dblog_overview() {
 
   foreach ($result as $dblog) {
     if (!in_array($dblog->hostname, array($_SERVER['SERVER_ADDR'], '37.49.222.67'/*, '104.131.94.122'*/))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
-      $add_wd_links = ($dblog->iid ? '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
+      $add_wd_links = ($dblog->iid ? (!$dblog->id ? '' : '<div style="color:lightgray;">' . $dblog->source . '; ' . $dblog->reason . '; set/by ' . $dblog->set_by .  '</div>') . '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
                    . (!$dblog->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
                    . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
                    . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
