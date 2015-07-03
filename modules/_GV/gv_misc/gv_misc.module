@@ -17168,7 +17168,7 @@ function gv_misc_watchdog(array $log_entry) {
       $query->condition('w.hostname', $ip);
       $query->condition('w.timestamp', time() - 3600, '>');
       $results = $query->execute()->fetchCol();
-      if ( ($requests_count = count($results)) == 2) {
+      if ( ($requests_count = count($results)) == 4) {
         drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog Interceptor BLOCKED IP from ' . $country . ', ' . $suspected_attack_type . ', (' . $requests_count . ' requests)', 'body' => print_r($log_entry, TRUE)));
       }
     
