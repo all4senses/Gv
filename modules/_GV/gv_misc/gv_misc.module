@@ -1125,7 +1125,7 @@ function gv_misc_testPage() {
   
   $ip = '119.127.29.151';
   $block_reason = '$suspected_attack_type' . ' from ' . 'CN';
-  gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ '$block_reason', /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => $log_entry, '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
+  gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ '$block_reason', /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => '$log_entry', '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
