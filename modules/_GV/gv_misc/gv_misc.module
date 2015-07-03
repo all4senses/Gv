@@ -17137,30 +17137,40 @@ function gv_misc_watchdog(array $log_entry) {
   $ip_whitelisted = in_array($ip, array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
   $suspected_attack_type = FALSE;
   $forbidden_countries = array('CN');
+  $allowed_countries = array('US', 'UK');
   $forbidden_sections = array(
     'Requested executables' => array('.php', '.cgi', '.asp', '.jsp'),
     'Requested admin section' => array('admin', 'user/register'),
-    'Password brute force' => array('Login attempt failed for'),  
+    'Password brute force' => array('Login attempt failed for'), 
+    'Forbidden user agent' => array('Go 1.1 package http'),
   );
+  $log_entry_types = array(
+    'access' => array('page not found', 'access denied'),
+  );
+
     
   foreach ($forbidden_sections as $forbidden_section => $substrings) {
-    if (gv_misc_stringHasSomeOfSubstrings($log_entry['message'], $substrings)) {
+    $target_string = ($forbidden_section == 'Forbidden user agent') ? $_SERVER['HTTP_USER_AGENT'] : $log_entry['message'];
+    if (gv_misc_stringHasSomeOfSubstrings($target_string, $substrings)) {
       $suspected_attack_type = $forbidden_section;
-      $country = gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog interceptor, ' . $forbidden_section . ': ' . $log_entry['message']);
+      $country = gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog interceptor, ' . $forbidden_section . ': ' . $target_string);
       break;
     }
   }
   
   // If we have noticed a bad behavior and an IP is not whitelisted...
   if ($suspected_attack_type && !$ip_whitelisted) {
-    if (in_array($country, $forbidden_countries)) {
+    if (    in_array($country, $forbidden_countries)    
+        ||  ($suspected_attack_type == 'Forbidden user agent' && !in_array($country, $allowed_countries))   
+       ) {
       // If we have noticed a bad behavior from a forbidden country,
+      // OR submission has disallowed User agent (and it's not from an allowed country)
       // We block this IP jast right now, from the first access time.
-      gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ $suspected_attack_type, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => $log_entry, '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
+      gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ $suspected_attack_type . ' from ' . $country, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => $log_entry, '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
       // Inform an admin about a new IP blocking.
       drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog Interceptor BLOCKED IP from ' . $country . ', ' . $suspected_attack_type, 'body' => print_r($log_entry, TRUE)));
     }
-    else {
+    elseif (in_array($log_entry['type'], $log_entry_types['access'])) {
       // Find out, how many such errors/warnings have been noticed from this IP for the past hour.
       // and if there are too many of them (more than a critical amount), we block this IP.
       $query = db_select('watchdog', 'w');
@@ -17169,7 +17179,8 @@ function gv_misc_watchdog(array $log_entry) {
       $query->condition('w.timestamp', time() - 3600, '>');
       $results = $query->execute()->fetchCol();
       if ( ($requests_count = count($results)) == 4) {
-        drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog Interceptor BLOCKED IP from ' . $country . ', ' . $suspected_attack_type . ', (' . $requests_count . ' requests)', 'body' => print_r($log_entry, TRUE)));
+        gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ $suspected_attack_type . ' (after ' . $requests_count . ' bad requests)', /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => $log_entry, '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
+        drupal_mail('gv_misc', 'gv_admin_mail', 'all4senses@gmail.com', $language->language, array('subject' => 'GV watchdog Interceptor BLOCKED IP from ' . $country . ', ' . $suspected_attack_type . ' (after ' . $requests_count . ' bad requests)', 'body' => print_r($log_entry, TRUE)));
       }
     
     } // End of else of if (in_array($country, $forbidden_countries)) {
