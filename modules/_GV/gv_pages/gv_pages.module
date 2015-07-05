@@ -10302,6 +10302,7 @@ function gv_pages_dblog_overview() {
           $query->condition('w.hostname', $_GET['ip']);
           $requested_notice = $query->execute()->fetchObject();
 
+          global $user;
           $current_time = time();
           // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
           $result = db_insert('gv_blocked')
@@ -10531,6 +10532,7 @@ function gv_pages_BlockedIPs_overview() {
             WATCHDOG_EMERGENCY => 'dblog-emerg',
           );
           
+          global $user;
           $current_time = time();
           // Add an IP to the GV temporary blocking table for future references (having source and reason  fields  filled).
           $result = db_insert('gv_blocked')
