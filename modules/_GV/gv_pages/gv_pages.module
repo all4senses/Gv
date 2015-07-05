@@ -10314,7 +10314,8 @@ function gv_pages_dblog_overview() {
               'blocked_count' => 1,  
               'data' => serialize($requested_notice),
               'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
-              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $requested_notice->severity .  ')',
+              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- severity ' . $requested_notice->severity .  ')',
+              'set_by' => $user->name,
             ))
             ->execute();
       
@@ -10543,6 +10544,7 @@ function gv_pages_BlockedIPs_overview() {
               'data' => serialize($requested_notice),
               'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
               'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $severity_classes[$requested_notice->severity] .  ')',
+              'set_by' => $user->name,  
             ))
             ->execute();
       

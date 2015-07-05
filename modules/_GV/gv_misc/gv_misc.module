@@ -17154,7 +17154,7 @@ function gv_misc_watchdog(array $log_entry) {
 
     
   foreach ($forbidden_sections as $forbidden_section => $substrings) {
-    $target_string = ($forbidden_section == 'Forbidden user agent') ? $_SERVER['HTTP_USER_AGENT'] : $log_entry['message'];
+    $target_string = ($forbidden_section == 'Forbidden user agent') ? @$_SERVER['HTTP_USER_AGENT'] : $log_entry['message'];
     if (gv_misc_stringHasSomeOfSubstrings($target_string, $substrings)) {
       $suspected_attack_type = $forbidden_section;
       $country = gv_misc_ipToCountry('set', $_SERVER, 'GV watchdog interceptor, ' . $forbidden_section . ': ' . $target_string);
@@ -17202,6 +17202,9 @@ function gv_misc_watchdog(array $log_entry) {
  * 
 **/
 function gv_misc_stringHasSomeOfSubstrings($string, array $substrings) {
+  if (!$string || empty($substrings)) {
+    return FALSE;
+  }
   foreach ($substrings as $substring) {
     if (strpos($string, $substring) !== FALSE) {
       return $substring;
