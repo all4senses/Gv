@@ -156,7 +156,10 @@ function gv_blocks_block_info() {
     'info' => 'Bottom section of resellers providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+  $blocks['tc_p_bottom'] = array(
+    'info' => 'Bottom section of Team Collaboration providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['news_tags'] = array(
     'info' => 'Shows a tag cloud for news tags',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -307,6 +310,10 @@ function gv_blocks_block_info() {
   
   $blocks['compare_providers_top_wc'] = array(
     'info' => 'Compare Top WC providers',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['compare_providers_top_tc'] = array(
+    'info' => 'Compare Top Team Collaboration providers',
     'cache' => DRUPAL_NO_CACHE,
   );
   
@@ -652,6 +659,11 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('page-reseller-providers');
       break;
     
+    case 'rsl_p_bottom':
+      $block['subject'] = 'Bottom section of Team Collaboration providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-tc-providers');
+      break;
+    
     case 'cb_p_bottom':
       $block['subject'] = 'Bottom section of CB providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('cloud-backup');
@@ -817,7 +829,10 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_compareTopProviders('wc');
       break;
     
-    
+    case 'compare_providers_top_tc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('tc');
+      break;
   
     case 'reviews_counter':
       $block['subject'] = '';
