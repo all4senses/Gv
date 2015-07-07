@@ -6246,17 +6246,17 @@ function gv_blocks_get_exitintent_pdf() {
   drupal_add_js($path_to_custom_js . 'gv_exitIntent_PDF.js');
   
 
-  
+  $month = date('F');
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
   
   $out = '
   <div class="pdf">
     <div class="pdf-wrap">
-      <img src="/sites/all/themes/gv_sky/images/pdf_thumb.png" alt="Free VoIP Guide June 2015" width="125" height="162" class="pdf-img">
+      <img src="/sites/all/themes/gv_sky/images/pdf_thumb.png" alt="Free VoIP Guide '. $month .'2015" width="125" height="162" class="pdf-img">
       <div class="pdf-text">
         <div class="pdf-text-title">
-          <span class="pdf-text-title-highlight">Free Guide:</span> June 2015 Edition
+          <span class="pdf-text-title-highlight">Free Guide:</span> '. $month .' 2015 Edition
         </div>
         <div class="pdf-text-subtitle">The Complete Buyer\'s Guide to Business VoIP Phone Services.</div>
       </div>
