@@ -10276,15 +10276,17 @@ function gv_pages_dblog_overview() {
     WATCHDOG_EMERGENCY => 'dblog-emerg',
   );
   
-  dpm($_GET);
+  //dpm($_GET);
   if (!empty($_GET['op'])) {
     
+    /*
     if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
         $query = db_select('blocked_ips', 'b')
           ->fields('b', array('iid'));
         $query->condition('b.ip', $_GET['ip']);
         $iid = $query->execute()->fetchField();
     }
+    */
     
     switch ($_GET['op']) {
       
@@ -10295,6 +10297,21 @@ function gv_pages_dblog_overview() {
       
       case 'block-ip':
         
+        global $user;
+        
+        // Get the full Notice data for the future reference
+        $query = db_select('watchdog', 'w');
+        $query->leftJoin('users', 'u', 'w.uid = u.uid');
+        $query->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
+              ->addField('u', 'name');
+        $query->condition('w.hostname', $_GET['ip']);
+        $requested_notice = $query->execute()->fetchObject();
+
+
+        $block_reason = 'Suspected spam/attack (' . $classes[$requested_notice->severity] . ': ' . $requested_notice->type .  ')' . (!empty($_GET['block_explain']) ? '. Admin explained: ' . $_GET['block_explain'] : NULL);
+        gv_misc_IP_blockOrUnblock(/*$op = */'block', $_GET['ip'], /*$source =*/ 'GV Recent logs (watchdog)', /*$reason =*/ $block_reason, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */$requested_notice, /*$drupal_set_message =*/ TRUE, /*$set_by =*/ $user->name);
+        
+        /*
         if ($iid) {
           drupal_set_message('The IP ' . $_GET['ip'] . ' has been already blocked!', 'warning');
         }
@@ -10305,15 +10322,8 @@ function gv_pages_dblog_overview() {
             ))
             ->execute();
           
-          // Get the full Notice data for the future reference
-          $query = db_select('watchdog', 'w');
-          $query->leftJoin('users', 'u', 'w.uid = u.uid');
-          $query->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
-                ->addField('u', 'name');
-          $query->condition('w.hostname', $_GET['ip']);
-          $requested_notice = $query->execute()->fetchObject();
-
-          global $user;
+          
+          
           $current_time = time();
           // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
           $result = db_insert('gv_blocked')
@@ -10333,11 +10343,14 @@ function gv_pages_dblog_overview() {
       
           drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
         }
+        */
         break;
       
         
       case 'unblock-ip':
         
+        gv_misc_IP_blockOrUnblock(/*$op = */'unblock', $ip, /*$source =*/ NULL, /*$reason =*/ NULL, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */NULL, /*$drupal_set_message =*/ TRUE, /*$set_by =*/ NULL);
+        /*
         if (!$iid) {
           drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
         }
@@ -10347,7 +10360,7 @@ function gv_pages_dblog_overview() {
             ->execute();
           drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
         }
-        
+        */
         break;
         
       case 'include-ip':

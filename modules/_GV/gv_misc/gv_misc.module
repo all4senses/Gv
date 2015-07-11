@@ -17247,8 +17247,15 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
   $query->condition('b.ip', $ip);
   $iid = $query->execute()->fetchField();
 
-  if ($op == 'block' && !$iid) {
+  if ($op == 'block') {
 
+    if ($iid) {
+      if ($drupal_set_message) {
+        drupal_set_message('The IP ' . $ip . ' has been already blocked!', 'warning');
+      }
+      return;
+    }
+    
     db_insert('blocked_ips')
       ->fields(array(
         'ip'=> $ip,
@@ -17281,7 +17288,15 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
       drupal_set_message($admin_message, 'warning');
     }
   }
-  elseif ($op == 'unblock' && $iid) {
+  elseif ($op == 'unblock') {
+    
+    if (!$iid) {
+      if ($drupal_set_message) {
+        drupal_set_message('Nothing to do. The IP ' . $ip . ' has NOT been blocked yet!', 'warning');
+      }
+      return;
+    }
+    
     db_delete('blocked_ips')
       ->condition('ip', $ip)
       ->execute();
