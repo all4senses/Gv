@@ -10398,7 +10398,7 @@ function gv_pages_dblog_overview() {
     array('data' => t('User'), 'field' => 'u.name'),
     array('data' => t('IP'), 'field' => 'w.hostname'), 
     t('Country'),
-    t('Http user agent'),  
+    t('Http user agent'),
     array('data' => t('Operations')),
   );
 
@@ -10455,7 +10455,7 @@ function gv_pages_dblog_overview() {
         theme('username', array('account' => $dblog)),
         $dblog->hostname,
         $dblog->country,
-        $dblog->http_user_agent,  
+        $dblog->http_user_agent, 
         '<div class="wd-links" id="wid-' . $dblog->wid . '" ip="' . $dblog->hostname . '">' . filter_xss($dblog->link) . $add_wd_links . '</div>',
       ),
       // Attributes for tr
@@ -10621,6 +10621,7 @@ function gv_pages_BlockedIPs_overview() {
     //t('Message'),
     array('data' => t('Source'), 'field' => 'gb.source'),
     array('data' => t('Reason'), 'field' => 'gb.reason'),  
+    'Data',  
     array('data' => t('Operations')),
   );
 
@@ -10712,6 +10713,7 @@ function gv_pages_BlockedIPs_overview() {
         $blocked_IP->timestamp_to ? format_date($blocked_IP->timestamp_to, 'short')  : '',   
         $blocked_IP->source,
         $blocked_IP->reason,
+        unserialize($blocked_IP->data),  
         '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->ip . '"><div class="info" style="color: lightgray;">' .$row_class . '</div>'  . $op_links . '</div>',
       ),
       // Attributes for tr
