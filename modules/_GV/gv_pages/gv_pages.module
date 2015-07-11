@@ -10265,7 +10265,18 @@ function gv_pages_dblog_overview() {
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
   drupal_add_js($path_to_js);
   
-  //dpm($_GET);
+  $classes = array(
+    WATCHDOG_DEBUG     => 'dblog-debug',
+    WATCHDOG_INFO      => 'dblog-info',
+    WATCHDOG_NOTICE    => 'dblog-notice',
+    WATCHDOG_WARNING   => 'dblog-warning',
+    WATCHDOG_ERROR     => 'dblog-error',
+    WATCHDOG_CRITICAL  => 'dblog-critical',
+    WATCHDOG_ALERT     => 'dblog-alert',
+    WATCHDOG_EMERGENCY => 'dblog-emerg',
+  );
+  
+  dpm($_GET);
   if (!empty($_GET['op'])) {
     
     if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
@@ -10315,7 +10326,7 @@ function gv_pages_dblog_overview() {
               'blocked_count' => 1,  
               'data' => serialize($requested_notice),
               'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
-              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- severity ' . $requested_notice->severity .  ')' . (!empty($_GET['block_explain']) ? '. Admin explained: ' . $_GET['block_explain'] : NULL),
+              'reason' => 'Suspected spam/attack (' . $classes[$requested_notice->severity] . ': ' . $requested_notice->type .  ')' . (!empty($_GET['block_explain']) ? '. Admin explained: ' . $_GET['block_explain'] : NULL),
               'set_by' => $user->name,
             ))
             ->execute();
@@ -10351,7 +10362,7 @@ function gv_pages_dblog_overview() {
     
     // Redirect back to the current page without extra parameters.
     $get = $_GET;
-    unset($get['q'], $get['op'], $get['ip'], $get['id'], $get['show-all']);
+    unset($get['q'], $get['op'], $get['ip'], $get['id'], $get['show-all'], $get['block_explain']);
     if ($_GET['op'] == 'show-all') {
       unset($get['include-ip'], $get['exclude-ip']);
     }
@@ -10361,16 +10372,7 @@ function gv_pages_dblog_overview() {
   
   $filter = dblog_build_filter_query();
   $rows = array();
-  $classes = array(
-    WATCHDOG_DEBUG     => 'dblog-debug',
-    WATCHDOG_INFO      => 'dblog-info',
-    WATCHDOG_NOTICE    => 'dblog-notice',
-    WATCHDOG_WARNING   => 'dblog-warning',
-    WATCHDOG_ERROR     => 'dblog-error',
-    WATCHDOG_CRITICAL  => 'dblog-critical',
-    WATCHDOG_ALERT     => 'dblog-alert',
-    WATCHDOG_EMERGENCY => 'dblog-emerg',
-  );
+  
 
   $build['dblog_filter_form'] = drupal_get_form('dblog_filter_form');
   $build['dblog_clear_log_form'] = drupal_get_form('dblog_clear_log_form');
