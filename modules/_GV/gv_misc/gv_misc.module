@@ -17282,7 +17282,7 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
       ->execute();
 
     $period = $timestamp_from ? 'temporarily (' . format_date($timestamp_from, 'short') . ' - ' . format_date($timestamp_to, 'short') . ')': 'permanently';
-    $admin_message = 'The IP ' . $ip . ' has been successfully blocked ' . $period . ' ' . $set_by . '.';
+    $admin_message = 'The IP ' . $ip . ' has been successfully blocked ' . $period . ', set/by ' . $set_by . '.';
     //watchdog('-> GV Blocked IP ' . $set_by, $admin_message . '. Reason: ' . $reason . '. Source: ' . $source . '. Data: ' . print_r($data, TRUE), NULL, WATCHDOG_WARNING);
     if ($drupal_set_message) {
       drupal_set_message($admin_message, 'warning');
@@ -17301,7 +17301,7 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
       ->condition('ip', $ip)
       ->execute();
     
-    $admin_message = 'The IP ' . $ip . ' has been successfully unblocked ' . $set_by . '.';
+    $admin_message = 'The IP ' . $ip . ' has been successfully unblocked, set/by ' . $set_by . '.';
     //watchdog('-> GV UNblocked IP ' . $set_by, $admin_message . '. Reason: ' . $reason . '. Source: ' . $source . '. Data: ' . print_r($data, TRUE), NULL, WATCHDOG_WARNING);
     if ($drupal_set_message) {
       drupal_set_message($admin_message, 'warning');
