@@ -10315,7 +10315,7 @@ function gv_pages_dblog_overview() {
               'blocked_count' => 1,  
               'data' => serialize($requested_notice),
               'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
-              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- severity ' . $requested_notice->severity .  ')',
+              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- severity ' . $requested_notice->severity .  ')' . (!empty($_GET['block_explain']) ? '. Admin explained: ' . $_GET['block_explain'] : NULL),
               'set_by' => $user->name,
             ))
             ->execute();
