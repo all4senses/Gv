@@ -1794,7 +1794,7 @@ function gv_blocks_getHomeServiceTypes() {
   
   $service_types_home = array('bu' => array('title' => 'Business VoIP', 'key' => 'page-compare-business-voip-providers', 'erating_field' => ''), 'pbx' => array('title' => 'Hosted PBX', 'key' => 'page-compare-pbx-voip-providers', 'erating_field' => 'pbx'), 'sip' => array('title' => 'SIP Trunking', 'key' => 'page-compare-sip-voip-providers', 'erating_field' => 'sip'), 'wc' => array('title' => 'Web Conference', 'key' => 'web-conferencing-voip-providers', 'erating_field' => 'wc'), 're' => array('title' => 'Residential VoIP', 'key' => 'page-compare-residential-voip-providers', 'erating_field' => 'residential'), 'cc' => array('title' => 'Call Centers', 'key' => 'page-compare-cc-voip-providers', 'erating_field' => 'ifa') );
   
-  $out .= '<section class="section one solutions"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading section-title-heading__medium"><span class="section-title-heading-inner">Find</span> Providers</h2><p class="section-title-desc">Having researched over 300 service providers, our advisors identify the best solution for each buyer.</p></div><ul class="solutions-list">';
+  $out .= '<section class="section one solutions"><div class="section-wrap"><div class="section-title section-title__left"><h2 class="section-title-heading section-title-heading__medium"><span class="section-title-heading-inner">Find</span> Providers</h2><p class="section-title-desc">Having researched over 500 service providers, our trusted cloud advisors identify the best solutions for various business communication needs.</p></div><ul class="solutions-list">';
 
 
   foreach ($service_types_home as $service_type => $data) {
@@ -6246,17 +6246,17 @@ function gv_blocks_get_exitintent_pdf() {
   drupal_add_js($path_to_custom_js . 'gv_exitIntent_PDF.js');
   
 
-  
+  $month = date('F');
   $token = md5(time()); //drupal_get_token('test');
   $_SESSION['requestQuoteToken'] = $token;
   
   $out = '
   <div class="pdf">
     <div class="pdf-wrap">
-      <img src="/sites/all/themes/gv_sky/images/pdf_thumb.png" alt="Free VoIP Guide June 2015" width="125" height="162" class="pdf-img">
+      <img src="/sites/all/themes/gv_sky/images/pdf_thumb.png" alt="Free VoIP Guide '. $month .'2015" width="125" height="162" class="pdf-img">
       <div class="pdf-text">
         <div class="pdf-text-title">
-          <span class="pdf-text-title-highlight">Free Guide:</span> June 2015 Edition
+          <span class="pdf-text-title-highlight">Free Guide:</span> '. $month .' 2015 Edition
         </div>
         <div class="pdf-text-subtitle">The Complete Buyer\'s Guide to Business VoIP Phone Services.</div>
       </div>
