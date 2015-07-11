@@ -10349,7 +10349,7 @@ function gv_pages_dblog_overview() {
         
       case 'unblock-ip':
         
-        gv_misc_IP_blockOrUnblock(/*$op = */'unblock', $ip, /*$source =*/ NULL, /*$reason =*/ NULL, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */NULL, /*$drupal_set_message =*/ TRUE, /*$set_by =*/ NULL);
+        gv_misc_IP_blockOrUnblock(/*$op = */'unblock', $_GET['ip'], /*$source =*/ NULL, /*$reason =*/ NULL, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */NULL, /*$drupal_set_message =*/ TRUE, /*$set_by =*/ NULL);
         /*
         if (!$iid) {
           drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');

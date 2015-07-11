@@ -42,24 +42,16 @@
          else if (jQuery(this)[0].className == 'block-ip') {
            
            if ((block_explain = prompt("Are You sure to " + jQuery(this)[0].title + "? \nYou also may add an additional explanation here:") ) !== null) {
-            console.log("block_explain = " + block_explain);
             concat_symbol = (window.location.href.indexOf("?") > 0) ? '&' : '?';
             hrefToGo = window.location.href + concat_symbol + 'op=' + jQuery(this)[0].className + '&id=' + jQuery(this).parent()[0].id + '&ip=' + jQuery(this).parent()[0].attributes.ip.value + '&block_explain=' + block_explain;
-            //console.log(hrefToGo);
             top.location.href = hrefToGo;
           }
            
          } // End of if (confirm("Are You sure to " + $(this).title + "?")) {
          else if (confirm("Are You sure to " + jQuery(this)[0].title + "?")) {
-           
-           //console.log(jQuery(this)[0].title);
-           //console.log(jQuery(this).parent()[0].attributes.ip.value);
-           //console.log(jQuery(this).parent()[0].id);
-           //console.log(jQuery(this)[0].className);
-           
+
            concat_symbol = (window.location.href.indexOf("?") > 0) ? '&' : '?';
            hrefToGo = window.location.href + concat_symbol + 'op=' + jQuery(this)[0].className + '&id=' + jQuery(this).parent()[0].id + '&ip=' + jQuery(this).parent()[0].attributes.ip.value;
-           //console.log(hrefToGo);
            top.location.href = hrefToGo;
            
          } // End of if (confirm("Are You sure to " + $(this).title + "?")) {
