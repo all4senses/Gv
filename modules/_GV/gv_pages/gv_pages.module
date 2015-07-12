@@ -10440,9 +10440,10 @@ function gv_pages_dblog_overview() {
     
     if (!in_array($dblog->hostname, array($_SERVER['SERVER_ADDR'], '37.49.222.67'/*, '104.131.94.122'*/))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
       
-      $add_wd_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('id' => $dblog->id, 'iid' => $dblog->iid, 'source' => $dblog->source, 'reason' => $dblog->reason, 'set/by' => $dblog->set_by));
-      
-//      $add_wd_links = ($dblog->iid ? (!$dblog->id ? '' : '<div style="color:lightgray;">' . $dblog->source . '; ' . $dblog->reason . '; set/by ' . $dblog->set_by .  '</div>') . '<span style="color:red;">BlockedIP</span>' : '<a class="block-ip" href="#" title="Block this IP">BlockIP</a>')
+      $block_info = !$dblog->id ? '' : ('<div style="color:lightgray;">' . $dblog->source . '; ' . $dblog->reason . '; set/by ' . $dblog->set_by .  '</div>');
+      $add_wd_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('iid' => $dblog->iid, 'block_info' => $block_info));
+
+//      $add_wd_links = ($dblog->iid ? $block_info . '<span style="color:red;">BlockedIP</span>' : '<a class="block-ip" href="#" title="Block this IP">BlockIP</a>')
 //                   . (!$dblog->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">UnblockIP</a>')
 //                   . '-<a class="include-ip" href="#" title="Show only messages with this IP">IncludeIP</a>'
 //                   . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">ExcludeIP</a>'
@@ -10686,12 +10687,14 @@ function gv_pages_BlockedIPs_overview() {
   
   foreach ($result as $blocked_IP) {
 
-    $op_links = ($blocked_IP->iid ? '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
-                 . (!$blocked_IP->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
-                 . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
-                 . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
-                 . '-<a class="get-info-on-ip" href="#" title="Get Whois Info about this IP, output to a Browser console">Info</a>'
-                  ;
+    $op_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('iid' => $dblog->iid, 'block_info' => NULL));
+
+//    $op_links = ($blocked_IP->iid ? '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
+//                 . (!$blocked_IP->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
+//                 . '-<a class="include-ip" href="#" title="Show only messages with this IP">Include</a>'
+//                 . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">Exclude</a>'
+//                 . '-<a class="get-info-on-ip" href="#" title="Get Whois Info about this IP, output to a Browser console">Info</a>'
+//                  ;
 
 
     if ($blocked_IP->iid) {
