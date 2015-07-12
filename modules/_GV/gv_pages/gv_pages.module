@@ -10510,110 +10510,113 @@ function gv_pages_BlockedIPs_overview() {
   drupal_add_library('system', 'drupal.collapse');
   
   //dpm($_GET);
-  if (!empty($_GET['op'])) {
-    
-    if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
-        $query = db_select('blocked_ips', 'b')
-          ->fields('b', array('iid'));
-        $query->condition('b.ip', $_GET['ip']);
-        $iid = $query->execute()->fetchField();
-    }
-    
-    switch ($_GET['op']) {
-      
-      case 'get-info-on-ip':
-        $whois_data = shell_exec('whois ' . $_GET['ip']);
-        dpm($whois_data);
-        break;
-      
-      case 'block-ip':
-        
-        if ($iid) {
-          drupal_set_message('The IP ' . $_GET['ip'] . ' has been already blocked!', 'warning');
-        }
-        else {
-          db_insert('blocked_ips')
-            ->fields(array(
-              'ip'=> $_GET['ip'],
-            ))
-            ->execute();
-          
-          // Get the full Notice data for the future reference
-          $query = db_select('watchdog', 'w');
-          $query->leftJoin('users', 'u', 'w.uid = u.uid');
-          $query->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
-                ->addField('u', 'name');
-          $query->condition('w.hostname', $_GET['ip']);
-          $requested_notice = $query->execute()->fetchObject();
-
-          
-          $severity_classes = array(
-            WATCHDOG_DEBUG     => 'dblog-debug',
-            WATCHDOG_INFO      => 'dblog-info',
-            WATCHDOG_NOTICE    => 'dblog-notice',
-            WATCHDOG_WARNING   => 'dblog-warning',
-            WATCHDOG_ERROR     => 'dblog-error',
-            WATCHDOG_CRITICAL  => 'dblog-critical',
-            WATCHDOG_ALERT     => 'dblog-alert',
-            WATCHDOG_EMERGENCY => 'dblog-emerg',
-          );
-          
-          global $user;
-          $current_time = time();
-          // Add an IP to the GV temporary blocking table for future references (having source and reason  fields  filled).
-          $result = db_insert('gv_blocked')
-            ->fields(array(
-              'timestamp_from' => $current_time,
-              'timestamp_to' => $current_time, 
-              'type' => 'IP',  
-              'ip' => $_GET['ip'],
-              'last_updated' => $current_time,  
-              'blocked_count' => 1,  
-              'data' => serialize($requested_notice),
-              'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
-              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $severity_classes[$requested_notice->severity] .  ')',
-              'set_by' => $user->name,  
-            ))
-            ->execute();
-      
-          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
-        }
-        break;
-      
-        
-      case 'unblock-ip':
-        
-        if (!$iid) {
-          drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
-        }
-        else {
-          db_delete('blocked_ips')
-            ->condition('ip', $_GET['ip'])
-            ->execute();
-          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
-        }
-        
-        break;
-        
-      case 'include-ip':
-        $_GET['include-ip'] = $_GET['ip'];
-        break;
-      
-      case 'exclude-ip':
-        $_GET['exclude-ip'] = $_GET['ip'];
-        break;
-     
-    }
-    
-    // Redirect back to the current page without extra parameters.
-    $get = $_GET;
-    unset($get['q'], $get['op'], $get['ip'], $get['id'], $get['show-all']);
-    if ($_GET['op'] == 'show-all') {
-      unset($get['include-ip'], $get['exclude-ip']);
-    }
-    drupal_goto($_GET['q'], array('query' => $get));
-
-  }
+  
+  gv_misc_watchdog_and_BlockedIPs_pages_operations('do-op');
+  
+//  if (!empty($_GET['op'])) {
+//    
+//    if (in_array($_GET['op'], array('block-ip', 'unblock-ip'))){
+//        $query = db_select('blocked_ips', 'b')
+//          ->fields('b', array('iid'));
+//        $query->condition('b.ip', $_GET['ip']);
+//        $iid = $query->execute()->fetchField();
+//    }
+//    
+//    switch ($_GET['op']) {
+//      
+//      case 'get-info-on-ip':
+//        $whois_data = shell_exec('whois ' . $_GET['ip']);
+//        dpm($whois_data);
+//        break;
+//      
+//      case 'block-ip':
+//        
+//        if ($iid) {
+//          drupal_set_message('The IP ' . $_GET['ip'] . ' has been already blocked!', 'warning');
+//        }
+//        else {
+//          db_insert('blocked_ips')
+//            ->fields(array(
+//              'ip'=> $_GET['ip'],
+//            ))
+//            ->execute();
+//          
+//          // Get the full Notice data for the future reference
+//          $query = db_select('watchdog', 'w');
+//          $query->leftJoin('users', 'u', 'w.uid = u.uid');
+//          $query->fields('w', array('wid', 'uid', 'severity', 'type', 'timestamp', 'message', 'variables', 'link', 'hostname'))
+//                ->addField('u', 'name');
+//          $query->condition('w.hostname', $_GET['ip']);
+//          $requested_notice = $query->execute()->fetchObject();
+//
+//          
+//          $severity_classes = array(
+//            WATCHDOG_DEBUG     => 'dblog-debug',
+//            WATCHDOG_INFO      => 'dblog-info',
+//            WATCHDOG_NOTICE    => 'dblog-notice',
+//            WATCHDOG_WARNING   => 'dblog-warning',
+//            WATCHDOG_ERROR     => 'dblog-error',
+//            WATCHDOG_CRITICAL  => 'dblog-critical',
+//            WATCHDOG_ALERT     => 'dblog-alert',
+//            WATCHDOG_EMERGENCY => 'dblog-emerg',
+//          );
+//          
+//          global $user;
+//          $current_time = time();
+//          // Add an IP to the GV temporary blocking table for future references (having source and reason  fields  filled).
+//          $result = db_insert('gv_blocked')
+//            ->fields(array(
+//              'timestamp_from' => $current_time,
+//              'timestamp_to' => $current_time, 
+//              'type' => 'IP',  
+//              'ip' => $_GET['ip'],
+//              'last_updated' => $current_time,  
+//              'blocked_count' => 1,  
+//              'data' => serialize($requested_notice),
+//              'source' => 'Blocked by Admin at Dblog-GV (watchdog)',
+//              'reason' => 'Suspected spam/attack (' . $requested_notice->type . ' -- ' . $severity_classes[$requested_notice->severity] .  ')',
+//              'set_by' => $user->name,  
+//            ))
+//            ->execute();
+//      
+//          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully blocked!', 'warning');
+//        }
+//        break;
+//      
+//        
+//      case 'unblock-ip':
+//        
+//        if (!$iid) {
+//          drupal_set_message('Nothing to do. The IP ' . $_GET['ip'] . ' has NOT been blocked!', 'warning');
+//        }
+//        else {
+//          db_delete('blocked_ips')
+//            ->condition('ip', $_GET['ip'])
+//            ->execute();
+//          drupal_set_message('The IP ' . $_GET['ip'] . ' has been successfully UNblocked!', 'warning');
+//        }
+//        
+//        break;
+//        
+//      case 'include-ip':
+//        $_GET['include-ip'] = $_GET['ip'];
+//        break;
+//      
+//      case 'exclude-ip':
+//        $_GET['exclude-ip'] = $_GET['ip'];
+//        break;
+//     
+//    }
+//    
+//    // Redirect back to the current page without extra parameters.
+//    $get = $_GET;
+//    unset($get['q'], $get['op'], $get['ip'], $get['id'], $get['show-all']);
+//    if ($_GET['op'] == 'show-all') {
+//      unset($get['include-ip'], $get['exclude-ip']);
+//    }
+//    drupal_goto($_GET['q'], array('query' => $get));
+//
+//  }
   
   
   $rows = array();

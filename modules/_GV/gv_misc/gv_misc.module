@@ -17389,7 +17389,7 @@ function gv_misc_watchdog_and_BlockedIPs_pages_operations($action = 'do-op', $da
 
 
         $block_reason = 'Suspected spam/attack (' . $classes[$requested_notice->severity] . ': ' . $requested_notice->type .  ')' . (!empty($_GET['block_explain']) ? '. Admin explained: ' . $_GET['block_explain'] : NULL);
-        gv_misc_IP_blockOrUnblock(/*$op = */'block', $_GET['ip'], /*$source =*/ 'GV Recent logs (watchdog)', /*$reason =*/ $block_reason, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */$requested_notice, /*$drupal_set_message =*/ TRUE, /*$set_by =*/ $user->name);
+        gv_misc_IP_blockOrUnblock(/*$op = */'block', $_GET['ip'], /*$source =*/ $_GET['q'] /*'GV Recent logs (watchdog)'*/, /*$reason =*/ $block_reason, /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */$requested_notice, /*$drupal_set_message =*/ TRUE, /*$set_by =*/ $user->name);
         
         /*
         if ($iid) {
