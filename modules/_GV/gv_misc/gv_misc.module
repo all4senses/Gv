@@ -17329,7 +17329,17 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
  * Accept $_GET params and it it has $op param, do the op and return to the original call page.
  *  
  */
-function gv_misc_watchdog_and_BlockedIPs_pages_operations() {
+function gv_misc_watchdog_and_BlockedIPs_pages_operations($action = 'do-op', $info = NULL) {
+  
+  if ($action == 'get-ops') {
+    $add_wd_links = ($info['iid'] ? (!$info['id'] ? '' : '<div style="color:lightgray;">' . $info['source'] . '; ' . $info['reason'] . '; set/by ' . $info['set_by'] .  '</div>') . '<span style="color:red;">BlockedIP</span>' : '<a class="block-ip" href="#" title="Block this IP">BlockIP</a>')
+                   . (!$info['iid'] ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">UnblockIP</a>')
+                   . '-<a class="include-ip" href="#" title="Show only messages with this IP">IncludeIP</a>'
+                   . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">ExcludeIP</a>'
+                   . '-<a class="get-info-on-ip" href="#" title="Get Whois Info about this IP, output to a Browser console">InfoIP</a>'
+                    ;
+    return $add_wd_links;
+  }
   
   $classes = array(
     WATCHDOG_DEBUG     => 'dblog-debug',

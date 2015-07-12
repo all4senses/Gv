@@ -10265,7 +10265,7 @@ function gv_pages_dblog_overview() {
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_watchdogAdminPage.js';
   drupal_add_js($path_to_js);
   
-  gv_misc_watchdog_and_BlockedIPs_pages_operations();
+  gv_misc_watchdog_and_BlockedIPs_pages_operations('do-op');
   
   
   $classes = array(
@@ -10437,13 +10437,17 @@ function gv_pages_dblog_overview() {
     ->execute();
 
   foreach ($result as $dblog) {
+    
     if (!in_array($dblog->hostname, array($_SERVER['SERVER_ADDR'], '37.49.222.67'/*, '104.131.94.122'*/))) { // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
-      $add_wd_links = ($dblog->iid ? (!$dblog->id ? '' : '<div style="color:lightgray;">' . $dblog->source . '; ' . $dblog->reason . '; set/by ' . $dblog->set_by .  '</div>') . '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
-                   . (!$dblog->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">UnblockIP</a>')
-                   . '-<a class="include-ip" href="#" title="Show only messages with this IP">IncludeIP</a>'
-                   . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">ExcludeIP</a>'
-                   . '-<a class="get-info-on-ip" href="#" title="Get Whois Info about this IP, output to a Browser console">InfoIP</a>'
-                    ;
+      
+      $add_wd_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('id' => $dblog->id, 'iid' => $dblog->iid, 'source' => $dblog->source, 'reason' => $dblog->reason, 'set/by' => $dblog->set_by));
+      
+//      $add_wd_links = ($dblog->iid ? (!$dblog->id ? '' : '<div style="color:lightgray;">' . $dblog->source . '; ' . $dblog->reason . '; set/by ' . $dblog->set_by .  '</div>') . '<span style="color:red;">BlockedIP</span>' : '<a class="block-ip" href="#" title="Block this IP">BlockIP</a>')
+//                   . (!$dblog->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">UnblockIP</a>')
+//                   . '-<a class="include-ip" href="#" title="Show only messages with this IP">IncludeIP</a>'
+//                   . '-<a class="exclude-ip" href="#" title="Exclude messages with this IP">ExcludeIP</a>'
+//                   . '-<a class="get-info-on-ip" href="#" title="Get Whois Info about this IP, output to a Browser console">InfoIP</a>'
+//                    ;
     }
     else {
       $add_wd_links = NULL;
