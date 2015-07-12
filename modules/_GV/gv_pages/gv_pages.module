@@ -10498,6 +10498,9 @@ function gv_pages_BlockedIPs_overview() {
   $path_to_js = drupal_get_path('module', 'gv_pages') . '/js/gv_blockIPsAdminPage.js';
   drupal_add_js($path_to_js);
   
+  //$form['#attached']['library'][] = array('system', 'ui.datepicker', 'drupal.collapse');
+  drupal_add_library('system', 'drupal.collapse');
+  
   //dpm($_GET);
   if (!empty($_GET['op'])) {
     
