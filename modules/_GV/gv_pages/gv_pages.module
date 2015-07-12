@@ -10687,7 +10687,7 @@ function gv_pages_BlockedIPs_overview() {
   
   foreach ($result as $blocked_IP) {
 
-    $op_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('iid' => $dblog->iid, 'block_info' => NULL));
+    $op_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('iid' => $blocked_IP->iid, 'block_info' => NULL));
 
 //    $op_links = ($blocked_IP->iid ? '<span style="color:red;">Blocked</span>' : '<a class="block-ip" href="#" title="Block this IP">Block</a>')
 //                 . (!$blocked_IP->iid ? '' : '-<a class="unblock-ip" href="#" title="Unblock this IP">Unblock</a>')
