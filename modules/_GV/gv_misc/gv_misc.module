@@ -17491,10 +17491,26 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
                 ->isNull('uname');
   $query->condition($or);
 
-  $results = $query->orderBy('timestamp', 'DESC')->range(0, 20)->execute()->fetchAllAssoc('timestamp');;
+  $results = $query->orderBy('timestamp', 'DESC')->range(0, 20)->execute()->fetchAllAssoc('track_id');;
 
   //$total_items = $query->getTotalItemCount();
   
+   
+  $ips = array();  
+
+  foreach ($results as $track_id => $result) {
+    if (in_array($results[$track_id]->ip, $ips)) {
+	unset($results[$track_id]);
+	dpm($ips . ' is duplicated');
+	continue;
+    }	
+    $ips[] = $results[$track_id]->ip;	
+
+    $results[$track_id]->timestamp = date('m\/d\/Y', $results[$track_id]->timestamp);
+    unset($results[$track_id]->uname, $results[$track_id]->track_id, $results[$track_id]->type, $results[$track_id]->object_id);
+    $results[$track_id]->data = unserialize($results[$track_id]->data);
+  }
+
   dpm($results);
   //dpm('$total_items = ' . $total_items);
 }
