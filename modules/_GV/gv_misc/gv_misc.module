@@ -17491,7 +17491,7 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
                 ->isNull('uname');
   $query->condition($or);
 
-  $results = $query->orderBy('timestamp', 'DESC')->limit(20)->execute()->fetchAllAssoc('timestamp');;
+  $results = $query->orderBy('timestamp', 'DESC')->range(0, 20)->execute()->fetchAllAssoc('timestamp');;
 
   $total_items = $query->getTotalItemCount();
   

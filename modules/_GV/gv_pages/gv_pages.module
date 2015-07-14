@@ -510,12 +510,6 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
         }
 
-        $results = 
-          $query
-            ->orderBy($sort, $order)
-            ->limit(20)
-            ->execute();
-
         $results = $query->orderBy($sort, $order)->limit(20)->execute();
 
         $total_items = $query->getTotalItemCount();
