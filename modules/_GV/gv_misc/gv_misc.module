@@ -17146,12 +17146,18 @@ function gv_misc_getIpInfo_ajax() {
 **/
 function gv_misc_watchdog(array $log_entry) {
   
+  // Skip checking for logged in users.
+  global $user;
+  if ($user->uid) {
+    return;
+  }
+  
   global $language;
   
   $found_substring = NULL;
   
   $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-  $ip_whitelisted = in_array($ip, array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122')) ? TRUE: FALSE;  // 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
+  $ip_whitelisted = in_array($ip, array($_SERVER['SERVER_ADDR'], '37.49.222.67', '104.131.94.122', '67.81.246.122')) ? TRUE: FALSE;  // 67.81.246.122 - Ruben/Danny, 104.131.94.122 - Digital Ocean, '37.49.222.67' - a4s
   
   $suspected_attack_type = FALSE;
   
