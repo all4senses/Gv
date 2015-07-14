@@ -17499,16 +17499,15 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
   $results = $query->orderBy('timestamp', 'DESC')
           //->range(0, 20)
           ->execute()->fetchAllAssoc('track_id');;
-
-  //$total_items = $query->getTotalItemCount();
-  
-   
+ 
   $ips = array();  
 
+  $csv = '';
+  
   foreach ($results as $track_id => $result) {
     if (in_array($results[$track_id]->ip, $ips)) {
-      unset($results[$track_id]);
       dpm($results[$track_id]->ip . ' is duplicated');
+      unset($results[$track_id]);
       continue;
     }	
     $ips[] = $results[$track_id]->ip;	
@@ -17516,8 +17515,17 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
     $results[$track_id]->timestamp = date('m\/d\/Y H:i:s', $results[$track_id]->timestamp);
     unset($results[$track_id]->uname, $results[$track_id]->track_id, $results[$track_id]->type, $results[$track_id]->object_id);
     $results[$track_id]->data = unserialize($results[$track_id]->data);
+    
+    $country = !empty($results[$track_id]->data['$_SERVER']['HTTP_CF_IPCOUNTRY']) ? $results[$track_id]->data['$_SERVER']['HTTP_CF_IPCOUNTRY'] : '';
+
+    $source_notice = !empty($results[$track_id]->data['Source notice']) ? $results[$track_id]->data['Source notice'] : '';
+    
+    $csv .= date('m\/d\/Y H:i:s', $result->timestamp) . ';' . $result->ip . ';' . $country . ';' . $result->click_page . ';' . $result->referer . ';' . $source_notice  . '
+';
   }
 
   dpm($results);
-  //dpm('$total_items = ' . $total_items);
+  
+  file_put_contents(DRUPAL_ROOT . '/tmp/report_clicks_' . $provider . '_' . date('m_d_Y', $from) . '_to_' . date('m_d_Y', $to) . '.csv',  $csv, /*FILE_APPEND | */LOCK_EX);
+
 }
