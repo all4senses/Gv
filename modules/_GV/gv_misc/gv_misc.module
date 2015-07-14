@@ -1123,9 +1123,13 @@ function gv_misc_testPage() {
   file_put_contents(DRUPAL_ROOT . '/tmp/user_reviews_' . date('m-d-Y__H_i_s', time()) . '.csv',  $csv, FILE_APPEND | LOCK_EX);
   */
   
-  $ip = '119.127.29.151';
-  $block_reason = '$suspected_attack_type' . ' from ' . 'CN';
-  gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ '$block_reason', /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => '$log_entry', '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
+//  $ip = '119.127.29.151';
+//  $block_reason = '$suspected_attack_type' . ' from ' . 'CN';
+//  gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ '$block_reason', /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => '$log_entry', '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
+  
+  
+  //$to = strtotime(date('m\/d\/Y 00\:00\:00', $time_now));
+  gv_misc_getReport_trackClick('Alliance Phones', '04/01/2015 00:00:00', '05/01/2015 00:00:00');
   
   return $out . '</div>';// . '<br><div>End of Test</div>';
 }
@@ -17462,4 +17466,32 @@ function gv_misc_watchdog_and_BlockedIPs_pages_operations($action = 'do-op', $da
     drupal_goto($_GET['q'], array('query' => $get));
 
   }
+}
+
+
+function gv_misc_getReport_trackClick($provider, $from, $to) {
+  
+  $query = db_select('gv_track_links', 'tl');
+
+  $query->fields('tl');
+
+  $or = db_or()->condition('type', 'provider_link')
+              ->condition('type', 'provider');
+  $query->condition($or);
+
+  $query->condition('object_name', '%%' . $provider . '%%', 'LIKE');
+
+  $query->condition('timestamp', $from, '>=');
+  $query->condition('timestamp', $to, '<=');
+
+  $or = db_or()->condition('uname', '')
+                ->isNull('uname');
+  $query->condition($or);
+
+  $results = $query->orderBy('timestamp', 'DESC')->limit(20)->execute()->fetchAllAssoc('timestamp');;
+
+  $total_items = $query->getTotalItemCount();
+  
+  dpm($results);
+  dpm('$total_items = ' . $total_items);
 }
