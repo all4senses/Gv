@@ -17491,7 +17491,9 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
                 ->isNull('uname');
   $query->condition($or);
 
-  $results = $query->orderBy('timestamp', 'DESC')->range(0, 20)->execute()->fetchAllAssoc('track_id');;
+  $results = $query->orderBy('timestamp', 'DESC')
+          //->range(0, 20)
+          ->execute()->fetchAllAssoc('track_id');;
 
   //$total_items = $query->getTotalItemCount();
   
@@ -17506,7 +17508,7 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
     }	
     $ips[] = $results[$track_id]->ip;	
 
-    $results[$track_id]->timestamp = date('m\/d\/Y', $results[$track_id]->timestamp);
+    $results[$track_id]->timestamp = date('m\/d\/Y H:i:s', $results[$track_id]->timestamp);
     unset($results[$track_id]->uname, $results[$track_id]->track_id, $results[$track_id]->type, $results[$track_id]->object_id);
     $results[$track_id]->data = unserialize($results[$track_id]->data);
   }
