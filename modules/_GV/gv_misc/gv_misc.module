@@ -17471,6 +17471,11 @@ function gv_misc_watchdog_and_BlockedIPs_pages_operations($action = 'do-op', $da
 
 function gv_misc_getReport_trackClick($provider, $from, $to) {
   
+  
+  //gv_misc_getReport_trackClick('Alliance Phones', '04/01/2015 00:00:00', '05/01/2015 00:00:00');
+  $from = '06/01/2015 00:00:00'; //'04/01/2015 00:00:00';
+  $to = '07/01/2015 00:00:00'; //'05/01/2015 00:00:00';
+  
   $from = strtotime($from);
   $to = strtotime($to);
   
@@ -17502,9 +17507,9 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
 
   foreach ($results as $track_id => $result) {
     if (in_array($results[$track_id]->ip, $ips)) {
-	unset($results[$track_id]);
-	dpm($ips . ' is duplicated');
-	continue;
+      unset($results[$track_id]);
+      dpm($results[$track_id]->ip . ' is duplicated');
+      continue;
     }	
     $ips[] = $results[$track_id]->ip;	
 
