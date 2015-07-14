@@ -17493,6 +17493,11 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
 
   $query->fields('tl');
 
+  
+  if (!empty($_GET['r'])) {
+    gv_misc_trackClick_addSpammyPatternFilters($query);
+  }
+  
   $or = db_or()->condition('type', 'provider_link')
               ->condition('type', 'provider');
   $query->condition($or);
@@ -17550,4 +17555,16 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
   
   file_put_contents(DRUPAL_ROOT . '/tmp/report_clicks_' . $provider . '_' . date('m_d_Y', $from) . '_to_' . date('m_d_Y', $to) . '.csv',  $csv, /*FILE_APPEND | */LOCK_EX);
 
+}
+
+/**
+ * Adds some custom spammy pattern filters to the track click reports.
+ *  
+ */
+function gv_misc_trackClick_addSpammyPatternFilters($query) {
+  $forbidden_refferers = array('www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html');
+  foreach ($forbidden_refferers as $forbidden_refferer) {
+    $query->condition('referer', '%%' . $forbidden_refferer . '%%', 'LIKE');
+  }
+  
 }
