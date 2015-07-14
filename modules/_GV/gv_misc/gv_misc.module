@@ -17493,8 +17493,8 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
 
   $results = $query->orderBy('timestamp', 'DESC')->range(0, 20)->execute()->fetchAllAssoc('timestamp');;
 
-  $total_items = $query->getTotalItemCount();
+  //$total_items = $query->getTotalItemCount();
   
   dpm($results);
-  dpm('$total_items = ' . $total_items);
+  //dpm('$total_items = ' . $total_items);
 }
