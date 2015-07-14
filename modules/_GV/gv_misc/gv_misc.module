@@ -17476,6 +17476,10 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
   $from = '06/01/2015 00:00:00'; //'04/01/2015 00:00:00';
   $to = '07/01/2015 00:00:00'; //'05/01/2015 00:00:00';
   
+  $from = '05/01/2015 00:00:00'; //'04/01/2015 00:00:00';
+  $to = '06/01/2015 00:00:00'; //'05/01/2015 00:00:00';
+  
+  
   $from = strtotime($from);
   $to = strtotime($to);
   
@@ -17529,6 +17533,11 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
 ';
   }
 
+  foreach($ips as $key => $value) {
+    if ($value['count'] === 1) {
+      unset($ips[$key]);
+    }
+  }
   dpm('$duplicates_count = ' . $duplicates_count);
   dpm($ips);
   dpm($results);
