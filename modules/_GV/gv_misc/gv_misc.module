@@ -17583,7 +17583,7 @@ function gv_misc_trackClick_addSpammyPatternFilters($query) {
 
     $or_hasJs = db_or()->condition('data', '%%Source notice%%', 'NOT LIKE')
                        //->condition($and_hasJs)
-                       ->condition('data', '%%js click%%', 'LIKE');
+                       ->condition('data', '%%js click%%', 'LIKE')
                        ->isNull('data');
     
     $query->condition($or_hasJs);
