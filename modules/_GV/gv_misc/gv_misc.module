@@ -17575,5 +17575,9 @@ function gv_misc_trackClick_addSpammyPatternFilters($query) {
 //  }
   //$query->condition('referer', 'http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html', '!=');
   
-  $query->condition('referer', $forbidden_refferers, 'NOT IN');
+  //$query->condition('referer', $forbidden_refferers, 'NOT IN');
+  $or = db_or()->condition('referer', $forbidden_refferers, 'NOT IN')
+                ->isNull('referer');
+  
+  $query->condition($or);
 }
