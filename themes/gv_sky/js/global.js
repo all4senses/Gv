@@ -31,7 +31,7 @@ $this = $$(this);
 
     }).css('visibility', 'inherit !important');
     
-    
+    console.log('...' + $(".visit-provider-url").css('visibility'));
     
     
     
