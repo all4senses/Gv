@@ -17576,7 +17576,7 @@ function gv_misc_trackClick_addSpammyPatternFilters($query) {
   $query->condition($or);
   
   
-  if (!empty($_GET[r])) {
+  if (!empty($_GET['r'])) {
     // Exclude newer clicks without js click approving
     $and_hasJs = db_and()->condition('data', '%%Source notice%%', 'LIKE')
                          ->condition('data', '%%[js click]%%', 'NOT LIKE');
