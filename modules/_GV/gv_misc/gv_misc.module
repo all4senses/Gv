@@ -17568,10 +17568,12 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
  *  
  */
 function gv_misc_trackClick_addSpammyPatternFilters($query) {
-//  $forbidden_refferers = array('http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html');
+  $forbidden_refferers = array('http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html');
 //  foreach ($forbidden_refferers as $forbidden_refferer) {
 //    //$query->condition('referer', '%%' . $forbidden_refferer . '%%', 'NOT LIKE');
 //    $query->condition('referer', $forbidden_refferer, '!=');
 //  }
-  $query->condition('referer', 'http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html', '!=');
+  //$query->condition('referer', 'http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html', '!=');
+  
+  $query->condition('referer', $forbidden_refferers, 'NOT IN');
 }
