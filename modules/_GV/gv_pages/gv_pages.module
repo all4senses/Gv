@@ -750,7 +750,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $all_time_providers = array();
           $all_time_providers_by_page = array();
           
-          $by_country['US/CA'] = array();
+          $by_country['US/CA']['all_time_providers'] = array();
+          $by_country['US/CA']['all_time_providers_by_page'] = array();
                   
           foreach ($p_by_ip as $timestamp_key => $p) {
 
