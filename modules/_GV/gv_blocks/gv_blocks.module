@@ -156,10 +156,18 @@ function gv_blocks_block_info() {
     'info' => 'Bottom section of resellers providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
   $blocks['tc_p_bottom'] = array(
     'info' => 'Bottom section of Team Collaboration providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['pms_p_bottom'] = array(
+    'info' => 'Bottom section of Project Management Software providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
+  
   $blocks['news_tags'] = array(
     'info' => 'Shows a tag cloud for news tags',
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -662,6 +670,11 @@ function gv_blocks_block_view($delta = '') {
     case 'tc_p_bottom':
       $block['subject'] = 'Bottom section of Team Collaboration providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('page-tc-providers');
+      break;
+    
+    case 'pms_p_bottom':
+      $block['subject'] = 'Bottom section of Project Management Software providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-pms-providers');
       break;
     
     case 'cb_p_bottom':
