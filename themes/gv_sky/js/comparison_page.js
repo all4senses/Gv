@@ -3,7 +3,8 @@
    ========================================================================== */
 
 	$$('.sidebar-wrap').prependTo('.field-name-field-preface-bottom > .field-items');
-	$$('.pdf').appendTo('.sidebar-wrap');
+	// $$('.pdf').appendTo('.sidebar-wrap');
+	$$('.pdf').prependTo('.sidebar-wrap');
 
 
 
