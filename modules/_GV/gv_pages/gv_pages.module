@@ -785,11 +785,11 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               //$source_notice = !empty($p->data['Source notice']) ? $p->data['Source notice'] : '';
     
               $all_time_providers[] = $p->ip;
-              $all_time_providers_by_page[$click_page] = (isset($all_time_providers_by_page[$click_page]) ? $all_time_providers_by_page[$click_page] + 1 : 1);
+              $all_time_providers_by_page[$click_page] = @$all_time_providers_by_page[$click_page] + 1;
               
               if (in_array($country, array('US', 'CA'))) {
                 $by_country['US/CA']['all_time_providers'][] = $p->ip;
-                $by_country['US/CA']['all_time_providers_by_page'][$click_page] = (isset($all_time_providers_by_page[$click_page]) ? $all_time_providers_by_page[$click_page] + 1 : 1);
+                $by_country['US/CA']['all_time_providers_by_page'][$click_page] = @$by_country['US/CA']['all_time_providers_by_page'][$click_page] + 1;
               }
             }
             
@@ -803,7 +803,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $all_total_items_unique += $total_items_unique;
           
           $by_country['US/CA']['total_items_unique'] = count($by_country['US/CA']['all_time_providers']);
-          $by_country['US/CA']['all_total_items_unique'] += $by_country['US/CA']['total_items_unique'];
+          $by_country['US/CA']['all_total_items_unique'] += @$by_country['US/CA']['total_items_unique'];
           
           
           
@@ -902,7 +902,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $count++;
           
           $selected_provider['by_click_pages'] = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $selected_provider['by_click_pages'] . '</div></fieldset>';
-          
+          $selected_provider['by_country']['US/CA']['by_click_pages'] = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $selected_provider['by_country']['US/CA']['by_click_pages'] . '</div></fieldset>';
+                  
           $form['nid_' . $p_nid . '_data'] = array(
             '#markup' => '<tr class="'. ($tr_class == 'odd' ? $tr_class = 'even' : $tr_class = 'odd') . '">
               <td>' . $count . '</td>
