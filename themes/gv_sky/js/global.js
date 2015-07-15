@@ -29,7 +29,7 @@ $this = $$(this);
       }
       //console.log('click track 2 href = ' + $(this).attr('href'));
 
-    });
+    }).css('visibility', 'inherit !important');
     
     
     
