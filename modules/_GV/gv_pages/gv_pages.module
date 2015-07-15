@@ -696,11 +696,9 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         foreach ($providers as $p_nid => $selected_provider) {
           
           $query = db_select('gv_track_links', 'tl');
-          $query->fields('tl', array('track_id', 'ip', 'timestamp', 'click_page'));
+          $query->fields('tl', array('track_id', 'ip', 'timestamp', 'click_page', 'data'));
 
-          if (!empty($_GET['r'])) {
-            gv_misc_trackClick_addSpammyPatternFilters($query);
-          }
+          gv_misc_trackClick_addSpammyPatternFilters($query);
           
           $query->condition('object_name', '%%' . $selected_provider . '%%', 'LIKE');
 
@@ -739,100 +737,109 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           //print_r($query->arguments());
 
           $results = $query->execute();
-          
-          /*
-          $from_date_str = date('m\/d\/Y', $from);
-          $from_time_str = date('H:i:s', $from);
-          if ($from_time_str == '00:00:00') {
-            $from_time_str = NULL;
-          }
-          */
-          
+
           
           // Workaround for filter same ips for the same provider withing the same day for every days of requestd period.
-          //global $user;
-          //if ($user->uid == 1 )
-            {
-            $p_by_ip = $results->fetchAllAssoc('timestamp');
-            //dpm($p_by_ip);
-            $current_from = $from;
-            $current_timeframe_providers = array();
-            $all_time_providers = array();
-            $day_seconds = 60*60*24;
-            $all_time_providers_by_page = array();
-            foreach ($p_by_ip as $timestamp_key => $p) {
-              
-              $click_page = empty($p->click_page) ? 'Others' : $p->click_page;
-              if (strpos($click_page, '//')) {
-                $click_page = explode('//', $click_page);
-                $click_page = $click_page[1];
-              }
-              if (strpos($click_page, '?')) {
-                $click_page = explode('?', $click_page);
-                $click_page = $click_page[0];
-              }
-              if (strpos($click_page, 'getvoip.com') !== FALSE) {
-                $click_page = str_replace('getvoip.com', '', $click_page);
-              }
-              if ($click_page == '/') {
-                $click_page = '/home';
-              }
-              
-              if ($p->timestamp >= $current_from + $day_seconds) {
-                $current_from += $day_seconds;
-                //dpm($current_timeframe);
-                $current_timeframe_providers = array($p->ip);
-                $all_time_providers[] = $p->ip;
-                
-                $all_time_providers_by_page[$click_page] = (isset($all_time_providers_by_page[$click_page]) ? $all_time_providers_by_page[$click_page] + 1 : 1);
-              }
-              else {
-                if(!in_array($p->ip, $current_timeframe_providers)) {
-                  $current_timeframe_providers[] = $p->ip;
-                  $all_time_providers[] = $p->ip;
-                  $all_time_providers_by_page[$click_page] = (isset($all_time_providers_by_page[$click_page]) ? $all_time_providers_by_page[$click_page] + 1 : 1);
-                }
+          $p_by_ip = $results->fetchAllAssoc('timestamp');
+          //dpm($p_by_ip);
+          $current_from = $from;
+          $current_timeframe_providers = array();
+          $all_time_providers = array();
+          $day_seconds = 60*60*24;
+          $all_time_providers_by_page = array();
+          foreach ($p_by_ip as $timestamp_key => $p) {
+
+            $click_page = empty($p->click_page) ? 'Others' : $p->click_page;
+            if (strpos($click_page, '//')) {
+              $click_page = explode('//', $click_page);
+              $click_page = $click_page[1];
+            }
+            if (strpos($click_page, '?')) {
+              $click_page = explode('?', $click_page);
+              $click_page = $click_page[0];
+            }
+            if (strpos($click_page, 'getvoip.com') !== FALSE) {
+              $click_page = str_replace('getvoip.com', '', $click_page);
+            }
+            if ($click_page == '/') {
+              $click_page = '/home';
+            }
+
+            $count_this_click = FALSE;
+            if ($p->timestamp >= $current_from + $day_seconds) {
+              $current_from += $day_seconds;
+              $current_timeframe_providers = array($p->ip);
+              $count_this_click = TRUE;
+            }
+            else {
+              if(!in_array($p->ip, $current_timeframe_providers)) {
+                $current_timeframe_providers[] = $p->ip;
+                $count_this_click = TRUE;
               }
             }
-            //dpm($all_time_providers);
+            
+            if ($count_this_click) {
+              
+              $p->data = unserialize($p->data);
+              $country = !empty($p->data['$_SERVER']['HTTP_CF_IPCOUNTRY']) ? $p->data['$_SERVER']['HTTP_CF_IPCOUNTRY'] : '';
+              //$source_notice = !empty($p->data['Source notice']) ? $p->data['Source notice'] : '';
+    
+              $all_time_providers[] = $p->ip;
+              $all_time_providers_by_page[$click_page] = (isset($all_time_providers_by_page[$click_page]) ? $all_time_providers_by_page[$click_page] + 1 : 1);
+              
+              if (in_array($country, array('US', 'CA'))) {
+                $by_country['US/CA']['all_time_providers'][] = $p->ip;
+                $by_country['US/CA']['all_time_providers_by_page'][$click_page] = (isset($all_time_providers_by_page[$click_page]) ? $all_time_providers_by_page[$click_page] + 1 : 1);
+              }
+            }
+            
           }
-//          else {
-//            $p_by_ip = $results->fetchAllAssoc('ip');
-//          }
-          
-          //dpm($p_by_ip);
-          
+
           //dpm($all_time_providers_by_page);
           
           $total_items = $results->rowCount();
           $all_total_items += $total_items;
-          //if ($user->uid == 1) 
-            {
-            $total_items_unique = count($all_time_providers);
-          }
-//          else {
-//            $total_items_unique = count($p_by_ip);
-//          }
+          $total_items_unique = count($all_time_providers);
           $all_total_items_unique += $total_items_unique;
           
+          $by_country['US/CA']['total_items_unique'] = count($by_country['US/CA']['all_time_providers']);
+          $by_country['US/CA']['all_total_items_unique'] += $by_country['US/CA']['total_items_unique'];
+          
+          
+          
+          // All clicks.
           $by_click_pages = '';
           if (!empty($all_time_providers_by_page['Others'])) {
+            // Put Others value at the end of the list.
             $others = $all_time_providers_by_page['Others'];
             unset($all_time_providers_by_page['Others']);
             $all_time_providers_by_page['Others'] = $others;
           }
           foreach ($all_time_providers_by_page as $page_url => $page_click_num) {
-//            if ($page_url == 'Others') {
-//              continue;
-//            }
             $by_click_pages .= '<div>' . $page_click_num . ' - ' . $page_url . '</div>';
           }
-//          if (!empty($all_time_providers_by_page['Others'])) {
-//            $by_click_pages .= '<div>Others - ' . $all_time_providers_by_page['Others'] . '</div>';
-//          }
-                  
-          $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 'clicks_unique' => $total_items_unique, 'by_click_pages' => $by_click_pages); 
-          //dpm($providers_clicks[$p_nid]);
+          
+          
+          // Clicks by countries.
+          // US/CA
+          $by_country['US/CA']['by_click_pages'] = '';
+          if (!empty($by_country['US/CA']['all_time_providers_by_page']['Others'])) {
+            // Put Others value at the end of the list.
+            $others = $by_country['US/CA']['all_time_providers_by_page']['Others'];
+            unset($by_country['US/CA']['all_time_providers_by_page']['Others']);
+            $by_country['US/CA']['all_time_providers_by_page']['Others'] = $others;
+          }
+          foreach ($by_country['US/CA']['all_time_providers_by_page'] as $page_url => $page_click_num) {
+            $by_country['US/CA']['by_click_pages'] .= '<div>' . $page_click_num . ' - ' . $page_url . '</div>';
+          }
+          
+          
+          $providers_clicks[$p_nid] = array('name' => $selected_provider, 'clicks' => $total_items, 
+                                                                          'clicks_unique' => $total_items_unique, 
+                                                                          'by_click_pages' => $by_click_pages,
+                                                                          'by_country' => array('US/CA' => array('clicks_unique' => $by_country['US/CA']['total_items_unique'], 'by_click_pages' => $by_country['US/CA']['by_click_pages'])),    
+          ); 
+
           
         } // End of foreach ($providers as $p_nid => $selected_provider) {
         
@@ -863,7 +870,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
         
         
         $form['total_results'] = array(
-          '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . ( (!$all_total_items || $all_total_items == $all_total_items_unique) ? '' : ' (unique: ' .  $all_total_items_unique . ')') . '</div>',
+          //'#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . ' (unique: ' .  $all_total_items_unique . ')' . '</div>',
+          '#markup' => '<div class="total"><strong>Total clicks: </strong>' . $all_total_items . ' (unique: ' .  $all_total_items_unique . ', US/CA unique: ' .  $by_country['US/CA']['all_total_items_unique'] . ')</div>',  
         );
         
         
@@ -876,6 +884,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               <th>Num</th>
               <th class="name">' . $sort_links['object_name'] . '</th>
               <th>' . $sort_links['clicks_unique'] . '</th>
+              <th>US/CA unique clicks</th>  
               <th>' . $sort_links['clicks'] . '</th>
               <th>Operations</th>
             </tr></thead><tbody>',
@@ -899,6 +908,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               <td>' . $count . '</td>
               <td class="name">' . $selected_provider['name'] . '</td>
               <td>' . $selected_provider['clicks_unique'] . $selected_provider['by_click_pages'] . '</td>
+              <td>' . $selected_provider['by_country']['US/CA']['clicks_unique'] . $selected_provider['by_country']['US/CA']['by_click_pages'] . '</td>  
               <td>' . $selected_provider['clicks'] . '</td>',
           );
 

@@ -17498,11 +17498,8 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
   $query = db_select('gv_track_links', 'tl');
 
   $query->fields('tl');
-
-  
-  if (!empty($_GET['r'])) {
-    gv_misc_trackClick_addSpammyPatternFilters($query);
-  }
+ 
+  gv_misc_trackClick_addSpammyPatternFilters($query);
   
   $or = db_or()->condition('type', 'provider_link')
               ->condition('type', 'provider');
@@ -17569,13 +17566,7 @@ function gv_misc_getReport_trackClick($provider, $from, $to) {
  */
 function gv_misc_trackClick_addSpammyPatternFilters($query) {
   $forbidden_refferers = array('http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html');
-//  foreach ($forbidden_refferers as $forbidden_refferer) {
-//    //$query->condition('referer', '%%' . $forbidden_refferer . '%%', 'NOT LIKE');
-//    $query->condition('referer', $forbidden_refferer, '!=');
-//  }
-  //$query->condition('referer', 'http://www.lifehack.org/articles/money/24-easy-ways-make-money-the-internet.html', '!=');
-  
-  //$query->condition('referer', $forbidden_refferers, 'NOT IN');
+  // OR is a workaround for the problem: Without this OR construction (simple != or NOT IN) will exclude also empty referer fields for some reason.
   $or = db_or()->condition('referer', $forbidden_refferers, 'NOT IN')
                 ->isNull('referer');
   
