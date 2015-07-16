@@ -2590,10 +2590,10 @@ function gv_misc_goToExternalUrl2() {
             global $user;
             
             $click_page = @$_GET['from'];
-            // From now 15.07.15 we count only clicks with 'from' params, added by js
-//            if (!$click_page && !empty($_SERVER['HTTP_REFERER'])) {
-//              $click_page = $_SERVER['HTTP_REFERER'];
-//            }
+            // Paused:  From now 15.07.15 we count only clicks with 'from' params, added by js
+            if (!$click_page && !empty($_SERVER['HTTP_REFERER'])) {
+              $click_page = $_SERVER['HTTP_REFERER'];
+            }
             
             if ($click_page) {
               if ($click_page == 'http://getvoip.com/home' || $click_page == 'http://getvoip.com/') {
@@ -2608,8 +2608,8 @@ function gv_misc_goToExternalUrl2() {
               }
             }
             else {
-              $source_notice = ' [NO js]'; //' [no source!!!]';
-              $track_click_ok = FALSE;
+              $source_notice = ' [no source!!!]'; //' [NO js]';
+              $track_click_ok = TRUE; //FALSE;
               $report_strange_click = TRUE;
             }
             
