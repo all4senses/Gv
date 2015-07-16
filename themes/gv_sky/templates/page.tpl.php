@@ -151,7 +151,8 @@
         echo '<div class="footer-wrap-left">' . render($page['footer']) . '</div>';
 
         echo '<div class="footer-wrap-right">';
-        echo '<div class="footer-copyright">© <a href="/" class="footer-copyright-link">GetVoIP.com</a> 2015 | All Rights Reserved</div>';
+        // echo '<div class="footer-copyright">© <a href="/" class="footer-copyright-link">GetVoIP.com</a> 2015 | All Rights Reserved</div>';
+        echo '<div class="footer-copyright">© <span class="footer-copyright-link">GetVoIP.com</span> 2015 | All Rights Reserved</div>';
         echo gv_blocks_get_headerLinks();
         echo '</div>';
     ?>
