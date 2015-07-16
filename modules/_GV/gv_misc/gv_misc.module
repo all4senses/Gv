@@ -2615,7 +2615,7 @@ function gv_misc_goToExternalUrl2() {
             
             // Additional check for User agents, if there is no js approvement
             if (!@$_GET['from']) {
-              $forbidden_agents = array('CloudFlare-AlwaysOnline');
+              $forbidden_agents = array('CloudFlare-AlwaysOnline', 'Apache-HttpClient', 'Httpful', 'cURL', 'PHP');
               if (empty($_GET['HTTP_USER_AGENT']) || gv_misc_stringHasSomeOfSubstrings($_GET['HTTP_USER_AGENT'], $forbidden_agents)) {
                 $source_notice =  empty($_GET['HTTP_USER_AGENT']) ? ' [NO js, Empty User Agent]' : ' [NO js, Forbidden User Agent]';
                 $track_click_ok = FALSE;
@@ -17178,7 +17178,7 @@ function gv_misc_watchdog(array $log_entry) {
     'Requested executables' => array('.php', '.cgi', '.asp', '.jsp'),
     'Requested admin section' => array('admin', 'user/register'),
     'Password brute force' => array('Login attempt failed for'), 
-    'Forbidden user agent' => array('Go 1.1 package http', 'Re-Animator Bot'),
+    'Forbidden user agent' => array('Go 1.1 package', 'Re-Animator', 'Httpful', 'cURL', 'PHP'),
   );
   
   $log_entry_types = array(
