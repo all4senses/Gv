@@ -354,6 +354,12 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
     '#attributes' =>  array('class' =>array('include_logged_in'), 'onChange' => array('javascript:this.form.submit();')),
   );
   
+  $form['header-block']['only_js_clicks'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'JS clicks',
+    '#default_value' => (!isset($_GET['js']) || $_GET['js']) ? 1 : 0,
+    '#attributes' =>  array('class' => array('only_js_clicks'), 'onChange' => array('javascript:this.form.submit();'), 'title' => 'Show only JS approved clicks'),
+  );
   
   $form['header-block']['from'] = array(
     '#type' => 'container',
@@ -1011,6 +1017,9 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     unset($get['include_logged_in']);
   }
   
+  if (isset($get['js_clicks'])) {
+    unset($get['js_clicks']);
+  }
   
   $get['stat_type'] = !empty($form_state['values']['stat_type']) ? $form_state['values']['stat_type'] : 'full';
   $prev_stat_type = empty($_GET['stat_type']) ? 'full' : $_GET['stat_type'];
@@ -1024,7 +1033,12 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
     $get['include_logged_in'] = 1;
   }
   
+    
   $get['only_featured'] = @$form_state['values']['only_featured'];
+  
+  if (!@$form_state['values']['only_js_clicks']) {
+    $get['js_clicks'] = @$form_state['values']['only_js_clicks'];
+  }
   
   $get['filter'] = $form_state['values']['filter'];
   
@@ -3579,7 +3593,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             $form['bottom_text']['center_text'] = array(
               '#type' => 'textarea',
-              '#title' => t('Сenter text'),
+              '#title' => t('РЎenter text'),
               //'#description' => t(''),
               '#default_value' => isset($data['bottom_text']['center_text']) ? $data['bottom_text']['center_text'] : '',
             );
@@ -3762,7 +3776,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               
               $form['s'][$service_type_key] = array(
                 '#type' => 'fieldset',
-                '#title' => "$service_type_title serviсes",
+                '#title' => "$service_type_title serviСЃes",
                 '#collapsible' => TRUE,
                 '#collapsed' => TRUE,
                 '#states' => array(
@@ -10151,7 +10165,7 @@ function gv_pages_import_my_file_element_process($element, &$form_state, $form) 
 }
 
 /**
- * Сreate Redirections In Bulk page.
+ * РЎreate Redirections In Bulk page.
  */
 function gv_pages_createRedirectionsInBulk_form($form, &$form_state) {
    
