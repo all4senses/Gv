@@ -554,7 +554,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
 
           $data = '';
           $result_data = unserialize($result->data);
-          $country = @$result_data['$_SERVER']['HTTP_CF_IPCOUNTRY'];
+          $country = @$result_data['HTTP_CF_IPCOUNTRY'] ? $result_data['HTTP_CF_IPCOUNTRY'] : @$result_data['$_SERVER']['HTTP_CF_IPCOUNTRY'];
           $user_agent = @$result_data['HTTP_USER_AGENT'] ? $result_data['HTTP_USER_AGENT'] : @$result_data['$_SERVER']['HTTP_USER_AGENT'];
           $source_notice = @$result_data['Source notice'];
     
