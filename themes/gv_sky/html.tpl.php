@@ -92,6 +92,18 @@
   <?php print $page_bottom; ?>
   <?php if (!isset($top)) { print $scripts; } ?>
   
+  <script type="text/javascript">
+        jQuery(".visit-provider-url").click(function(){
+
+            if(!jQuery(this).attr('href').split('from=')[1]) {
+              jQuery(this).attr('href', jQuery(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
+            }
+
+        });
+        // To prevent possible clicks before js is fully loaded, we make links hidden originally, and after js is loaded, make them visible. 
+        jQuery(".visit-provider-url").css('visibility', 'inherit');
+  </script>
+       
   <!-- Google Code for Remarketing Tag -->
   <!--------------------------------------------------
   Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
