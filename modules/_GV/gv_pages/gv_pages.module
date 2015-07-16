@@ -539,7 +539,8 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               <th class="page">' . $sort_links['click_page'] . '</th>
               <th>' . $sort_links['ip'] . '</th>
               <th>Country</th>
-              <th>Source notice</th>'
+              <th>Source notice</th>
+              <th>User Agent</th>'
             //. '<th>' . $sort_links['uname'] . '</th>'
             .'<th class="data">Data</th>'
             .'<th>Operations</th>
@@ -554,6 +555,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
           $data = '';
           $result_data = unserialize($result->data);
           $country = @$result_data['$_SERVER']['HTTP_CF_IPCOUNTRY'];
+          $user_agent = @$result_data['HTTP_USER_AGENT'] ? $result_data['HTTP_USER_AGENT'] : @$result_data['$_SERVER']['HTTP_USER_AGENT'];
           $source_notice = @$result_data['Source notice'];
     
           if (!empty($result_data)) {
@@ -582,6 +584,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
               <td>' . ($result->ip ? $result->ip : (!empty($result_data['user']['hostname']) ? $result_data['user']['hostname'] : '') ) . '</td>'
               . '<td>' . $country . '</td>'
               . '<td>' . $source_notice . '</td>'
+              . '<td>' . $user_agent . '</td>'
               //. '<td>' . ($result->uname ? $result->uname : (!empty($result_data['user']['name']) ? $result_data['user']['name'] : '') ) . '</td>',
               . '<td>' . @$data . '</td>',
           );
