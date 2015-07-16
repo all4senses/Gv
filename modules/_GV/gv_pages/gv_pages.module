@@ -357,7 +357,7 @@ function gv_pages_trackClickReport_form($form, &$form_state) {
   $form['header-block']['only_js_clicks'] = array(
     '#type' => 'checkbox',
     '#title' => 'JS clicks',
-    '#default_value' => (!isset($_GET['js']) || $_GET['js']) ? 1 : 0,
+    '#default_value' => (!isset($_GET['js_clicks']) || $_GET['js_clicks']) ? 1 : 0,
     '#attributes' =>  array('class' => array('only_js_clicks'), 'onChange' => array('javascript:this.form.submit();'), 'title' => 'Show only JS approved clicks'),
   );
   
@@ -1037,7 +1037,7 @@ function gv_pages_trackClickReport_formValidate(&$form, &$form_state) {
   $get['only_featured'] = @$form_state['values']['only_featured'];
   
   if (!@$form_state['values']['only_js_clicks']) {
-    $get['js_clicks'] = @$form_state['values']['only_js_clicks'];
+    $get['js_clicks'] = 0;
   }
   
   $get['filter'] = $form_state['values']['filter'];
