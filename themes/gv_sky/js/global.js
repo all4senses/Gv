@@ -22,15 +22,15 @@ $this = $$(this);
 
     // ==== Track click js protection ================================================================
     
-    $(".visit-provider-url").click(function(){
-
-      if(!$(this).attr('href').split('from=')[1]) {
-        $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
-      }
-
-    });
-    // To prevent possible clicks before js is fully loaded, we make links hidden originally, and after js is loaded, make them visible. 
-    $(".visit-provider-url").css('visibility', 'inherit');
+//    $(".visit-provider-url").click(function(){
+//
+//      if(!$(this).attr('href').split('from=')[1]) {
+//        $(this).attr('href', $(this).attr('href') + '?from=' + encodeURIComponent(window.location.href) + '&ref=' + encodeURIComponent(document.referrer));
+//      }
+//
+//    });
+//    // To prevent possible clicks before js is fully loaded, we make links hidden originally, and after js is loaded, make them visible. 
+//    $(".visit-provider-url").css('visibility', 'inherit');
     
     
     
