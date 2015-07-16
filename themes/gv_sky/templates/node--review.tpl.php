@@ -240,7 +240,7 @@ elseif($view_mode == 'teaser_onPrefaceBottomLatest') {
               ?>
               <div itemprop="reviewBody"><?php echo render($content['body']); ?></div>
               
-              <?php if ($content['r_data']['pros'] || $content['r_data']['cons']): ?>
+              <?php if (@$content['r_data']['pros'] || @$content['r_data']['cons']): ?>
                 <div class="reviews-list-item-details-content-summary">
                   <?php
                     

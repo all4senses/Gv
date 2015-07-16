@@ -113,15 +113,15 @@
                 ?>                
 
                   <div class="provider-box-provider-details-info provider-box-provider-details-info_location" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    <span itemprop="addressLocality"><?php echo $node->p_data['info']['i_heads']; ?></span>
+                    <span itemprop="addressLocality"><?php echo @$node->p_data['info']['i_heads']; ?></span>
                   </div>
         
                 
                 
                   <div class="provider-box-provider-details-info provider-box-provider-details-info_website" itemprop="url">
                     <?php 
-                      if (!$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
-                        $goto_link_title = (isset($node->p_data['info']['i_web_display']) && $node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
+                      if (!@$node->p_data['info']['i_web_hide'] && !empty($node->p_data['info']['i_web'])) {
+                        $goto_link_title = !empty($node->p_data['info']['i_web_display']) ? $node->p_data['info']['i_web_display'] : str_replace(array('http://', 'https://'), '', $node->p_data['info']['i_web']);
                         //echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'provider-box-provider-details-info-link', array('key' => 'rel', 'value' => 'v:url nofollow'));
                         echo gv_misc_getTrackingUrl($goto_link_title, NULL, NULL, NULL, 'provider-box-provider-details-info-link', array('key' => 'rel', 'value' => 'nofollow'));
                       }
@@ -129,14 +129,14 @@
                   </div>
                   <span  itemprop="makesOffer" content="VoIP"></span>
                   <div class="provider-box-provider-details-info provider-box-provider-details-info_service">Service Location: 
-                    <?php echo '<span  itemprop="location">' . $node->p_data['info']['i_availability'] . '</span>'; ?>
+                    <?php echo '<span  itemprop="location">' . @$node->p_data['info']['i_availability'] . '</span>'; ?>
                   </div>
                   <ul class="provider-box-provider-details-stats">
                     <li class="provider-box-provider-details-stats-item">
-                      <span class="provider-box-provider-details-stats-item-number" itemprop="foundingDate"><?php echo $node->p_data['info']['i_founded']; ?></span>
+                      <span class="provider-box-provider-details-stats-item-number" itemprop="foundingDate"><?php echo @$node->p_data['info']['i_founded']; ?></span>
                       <span class="provider-box-provider-details-stats-item-desc">Year Founded</span>
                     </li>
-                    <?php if ($node->gv_voters) { ?>
+                    <?php if (@$node->gv_voters) { ?>
                           <li class="provider-box-provider-details-stats-item">
                             <span class="provider-box-provider-details-stats-item-number"><?php echo $node->gv_recommend; ?>%</span>
                             <span class="provider-box-provider-details-stats-item-desc">Recommend</span>
