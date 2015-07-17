@@ -17564,8 +17564,8 @@ function gv_misc_watchdog(array $log_entry) {
   // If we have noticed a bad behavior and an IP is not whitelisted...
   if ($suspected_attack_type && !$ip_whitelisted) {
     if (    in_array($country, $forbidden_countries)    
-        //||  ($suspected_attack_type == 'Forbidden user agent' /*&& !in_array($country, $allowed_countries)*/)   
-        || in_array($suspected_attack_type, array('Forbidden user agent', 'Requested executables'))
+        ||  ($suspected_attack_type == 'Forbidden user agent' /*&& !in_array($country, $allowed_countries)*/)   
+        ||  (gv_misc_stringHasSomeOfSubstrings($log_entry['type'], $log_entry_types['access']) && in_array($suspected_attack_type, array('Requested executables')) )
        ) {
       // If we have noticed a bad behavior from a forbidden country,
       // OR submission has disallowed User agent (and it's not from an allowed country) or request is for executables...
