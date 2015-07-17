@@ -8543,13 +8543,9 @@ function gv_blocks_get_requestQuote_popup_onLists($type = 'cc') {
   // Exit intent Ad block main js.
   $path_to_custom_js = drupal_get_path('module', 'gv_blocks') . '/js/';
   
-  global $user;
-  if (1)
+  //global $user;
   //if ($user->uid == 1) 
     {
-    
-    //return '';
-    
     drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists_2.js');
         
     $out = 
@@ -8559,24 +8555,24 @@ function gv_blocks_get_requestQuote_popup_onLists($type = 'cc') {
      '</div>
     </div>';
   }
-  else {
-    drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
-      
-    
-    //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
-    $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
-    $provider_name = 'Name';
-
-
-    $out = 
-    '<div style="display: none;">
-      <div id="popup-request" class="popup-request quote on-list">' 
-        . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you.</div></div>'
-        . gv_blocks_get_requestQuote_popup_provider() .
-
-      '</div>
-    </div>';
-  }
+//  else {
+//    drupal_add_js($path_to_custom_js . 'gv_getQuotePopup_onLists.js');
+//      
+//    
+//    //$logo_block = '<div class="logo">' . theme('image_style', array( 'path' =>  $content['field_p_logo'][0]['#item']['uri'], 'style_name' => 'logo_provider_page', 'alt' => $provider_name . ' Reviews', 'title' => $provider_name . ' Reviews', 'attributes' => array('rel' => 'v:photo'))) . '</div>';
+//    $logo_block = '<div class="logo">'. 'LOGO' . '</div>';
+//    $provider_name = 'Name';
+//
+//
+//    $out = 
+//    '<div style="display: none;">
+//      <div id="popup-request" class="popup-request quote on-list">' 
+//        . $logo_block. '<div class="header"><div class="title">Request <span>'. $provider_name. '</span> Quote</div><div class="descr">In order to prepare a quote, we need some information about you.</div></div>'
+//        . gv_blocks_get_requestQuote_popup_provider() .
+//
+//      '</div>
+//    </div>';
+//  }
   
   
   

@@ -11524,6 +11524,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       
     
     case 'name_n_logo_chart':
+    case 'name_n_logo_chart_for_providers_list_page':  
       //$count = 1;
       //dpm('name_n_logo_chart ' . $count++);
     
@@ -11546,8 +11547,13 @@ function gv_misc_getProviderQuickData($target, $data) {
         $out .= '<div class="name">' . gv_misc_getTrackingUrl(@$all_data_quick[$data['data']->nid]['name'], NULL, $data['data']->nid, NULL, NULL, NULL, $all_data_quick[$data['data']->nid], @$data['service_type']) . '</div>';
         //$out .= l(@$all_data_quick[$data['data']->nid]['name'], 'node/' . $data['data']->nid); 
       }
-          
+      
+      if ($target != 'name_n_logo_chart_for_providers_list_page') {
+        return $out;
+      }
+      
       return $out;
+      
       
       
       
@@ -12146,9 +12152,10 @@ function gv_misc_getProviderQuickData($target, $data) {
       return $url;
       
       
+   
       
       
-    case 'i_web2':
+   case 'i_web2':
      
       $url = isset($all_data_quick[$data['data']->nid]['i_web']) ? $all_data_quick[$data['data']->nid]['i_web'] : '';
       if ($url) {
@@ -12164,12 +12171,17 @@ function gv_misc_getProviderQuickData($target, $data) {
           
           //$url = gv_misc_getTrackingUrl('Visit Site', NULL, $data['data']->nid, NULL, 'visit-site-btn');
           
-        $url = '<div class="tbody-item-button quote-trigger"><span class="tbody-item-button-text">Get Quote <span class="tbody-item-button-text-icon icon-arrow"></span></span></div>' . '<div class="get_quote_popup"><span class="hidden"><span class="nid">' . $data['data']->nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</span></span></div>';
+        $url = '<div class="tbody-item-button quote-trigger">'
+                . '<span class="tbody-item-button-text">Get Quote '
+                     . '<span class="tbody-item-button-text-icon icon-arrow"></span>'
+                . '</span>'
+                . '<div class="get_quote_popup"><span class="hidden"><span class="nid">' . $data['data']->nid . '</span><span class="logo_link"></span><span class="name">' . $all_data_quick[$data['data']->nid]['name'] . '</span></span></div>'
+             . '</div>';
         // $link_label = '<span class="tbody-item-button-text">Get Quote <span class="tbody-item-button-text-icon icon-arrow"></span></span>'; //@$data['service_type'] == 'wc' ? 'Visit Site' : '';
         // $url = gv_misc_getTrackingUrl($link_label, NULL, $data['data']->nid, NULL, 'visit-site-btn tbody-item-button', NULL, $all_data_quick[$data['data']->nid], @$data['service_type']);
       }
                         
-      return $url;
+      return $url;   
       
       
       
