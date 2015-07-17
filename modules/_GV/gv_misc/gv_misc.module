@@ -17582,7 +17582,7 @@ function gv_misc_watchdog(array $log_entry) {
       $query = db_select('watchdog', 'w');
       $query->fields('w', array('wid'));
       $query->condition('w.hostname', $ip);
-      $query->condition('w.timestamp', time() - 3600, '>');
+      $query->condition('w.timestamp', time() - 7200, '>');
       $results = $query->execute()->fetchCol();
       if ( ($requests_count = count($results)) == 5) {
         $block_reason = $suspected_attack_type . ' (after ' . $requests_count . ' bad requests)';
