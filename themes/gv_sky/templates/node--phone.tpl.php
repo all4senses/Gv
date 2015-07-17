@@ -136,7 +136,7 @@ if($view_mode == 'home_teaser_rotated') {
 
         
 
-               <?php $editor_overall_rating = number_format($node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
+               <?php $editor_overall_rating = number_format(@$node->extra_data['editor_rating_overall'] * 0.05, 1); ?>
               
                <?php if ($page): 
                   // Top share post links.
@@ -172,13 +172,13 @@ if($view_mode == 'home_teaser_rotated') {
               <div class="phone-summary">
                 <div class="phone-summary-fact phone-summary-fact_good">
                   <div class="phone-summary-fact-title phone-summary-fact-title_good">The Good</div>
-                    <?php echo '<div class="phone-summary-fact-content" property="v:summary">', $node->extra_data['pros_and_cons']['The good'], '</div>'; ?>
+                    <?php echo '<div class="phone-summary-fact-content" property="v:summary">', @$node->extra_data['pros_and_cons']['The good'], '</div>'; ?>
                 </div>
                 <div class="phone-summary-fact phone-summary-fact_bad">
-                  <div class="phone-summary-fact-title phone-summary-fact-title_bad">The Bad</div><div class="phone-summary-fact-content"><?php echo $node->extra_data['pros_and_cons']['The bad']; ?></div>
+                  <div class="phone-summary-fact-title phone-summary-fact-title_bad">The Bad</div><div class="phone-summary-fact-content"><?php echo @$node->extra_data['pros_and_cons']['The bad']; ?></div>
                 </div>
                 <div class="phone-summary-fact phone-summary-fact_bottom-line">
-                  <div class="phone-summary-fact-title phone-summary-fact-title_bottom-line">The Bottom Line</div><div class="phone-summary-fact-content"><?php echo $node->extra_data['pros_and_cons']['The bottom line']; ?></div>
+                  <div class="phone-summary-fact-title phone-summary-fact-title_bottom-line">The Bottom Line</div><div class="phone-summary-fact-content"><?php echo @$node->extra_data['pros_and_cons']['The bottom line']; ?></div>
                 </div>
                 
               </div>
@@ -193,8 +193,8 @@ if($view_mode == 'home_teaser_rotated') {
                     <ul class="phone-box-tabs">
                       <li id="tab-0" class="phone-box-tabs-item active">Editor's Review</li>
                       <li id="tab-1" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">Technical </span>Specs</li>
-                      <?php if ($node->extra_data['downloads']): ?><li id="tab-2" class="phone-box-tabs-item">Downloads</li><?php endif; ?>
-                      <?php if ($node->extra_data['in_the_box']): ?><li id="tab-3" class="phone-box-tabs-item">In the Box</li><?php endif; ?>
+                      <?php if (@$node->extra_data['downloads']): ?><li id="tab-2" class="phone-box-tabs-item">Downloads</li><?php endif; ?>
+                      <?php if (@$node->extra_data['in_the_box']): ?><li id="tab-3" class="phone-box-tabs-item">In the Box</li><?php endif; ?>
                       <?php //<li id="tab-4" class="phone-box-tabs-item"><span class="phone-box-tabs-item-mobile_hide">User </span>Reviews</li> ?>                    </ul>
                 
                     <div class="phone-box-content">
@@ -225,15 +225,15 @@ if($view_mode == 'home_teaser_rotated') {
                       </div>
                       <div id="tab-1-c" class="phone-box-content-section phone-box-content-section-specs">
                         <div class="phone-box-content-section-title specs-title">Technical Specs</div>
-                        <?php echo $node->specs; ?>
+                        <?php echo @$node->specs; ?>
                       </div>
-                      <?php if ($node->extra_data['downloads']): ?>
+                      <?php if (@$node->extra_data['downloads']): ?>
                         <div id="tab-2-c" class="phone-box-content-section phone-box-content-section-downloads">
                           <div class="phone-box-content-section-title downloads-title">Downlaods</div>
                           <?php echo $node->extra_data['downloads']; ?>
                         </div>
                       <?php endif; ?>
-                      <?php if ($node->extra_data['in_the_box']): ?>
+                      <?php if (@$node->extra_data['in_the_box']): ?>
                         <div id="tab-3-c" class="phone-box-content-section phone-box-content-section-box">
                           <div class="phone-box-content-section-title box-title">In the Box</div>
                           <?php echo $node->extra_data['in_the_box']; ?>
@@ -347,11 +347,11 @@ if($view_mode == 'home_teaser_rotated') {
                   </a>
               </h3>
               <?php
-                  $stars = theme('gv_misc_fivestar_dk', array('rating' => $node->extra_data['editor_rating_overall'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'review-posts-item-rating'));
+                  $stars = theme('gv_misc_fivestar_dk', array('rating' => @$node->extra_data['editor_rating_overall'], 'stars' => 5, 'tag' => 'overall', 'widget' => array('name' => 'stars', 'css' => 'stars.css'), 'class' => 'review-posts-item-rating'));
                   echo '<div class="review-posts-item-rating">' . $stars . ' <span class="review-posts-item-rating-number">' . $editor_overall_rating . '</span></div>';
               ?>
               <div class="review-posts-item-content">
-                <?php echo dk_shorten_body($node->extra_data['pros_and_cons']['The bottom line']); ?>
+                <?php echo dk_shorten_body(@$node->extra_data['pros_and_cons']['The bottom line']); ?>
               </div>
             
           <?php endif; ?>  <!-- end of else of if ($page): -->
