@@ -10468,7 +10468,7 @@ function gv_pages_dblog_overview() {
   }
   if (!empty($_GET['include-ip'])) {
     $query->condition('w.hostname', $_GET['include-ip']);
-    drupal_set_message('There are only IP ' . $_GET['include-ip'] . ' shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
+    drupal_set_message('There are only IP ' . $_GET['include-ip'] . ' rows shown! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
   elseif (!empty($_GET['exclude-ip'])) {
     $query->condition('w.hostname', $_GET['exclude-ip'], '!=');
