@@ -11575,7 +11575,7 @@ function gv_misc_getProviderQuickData($target, $data) {
         }
       }
       $service_classes = implode(' ', $p_service_types);
-      $out .= '<div class="hidden services ' . $service_classes . '"><span class="nid">' . $data['data']->nid . '</span></div>';
+      $out .= '<div style="display: none;" class="hidden services ' . $service_classes . '"><span class="nid">' . $data['data']->nid . '</span></div>';
       return $out;
       
       
