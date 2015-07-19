@@ -3697,7 +3697,7 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
   
   $providers_types['-all-'] = 'Show all providers';
           
-  $select_providers['all-reviews-select-providers'] = array(
+  $select_service['all-reviews-select-providers'] = array(
       '#type' => 'select',
       '#title' => 'Filter providers by service types provided',
       '#options' => $providers_types,
@@ -3708,9 +3708,8 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
 
   ); 
 
-  $view->attachment_before = render($select_providers);
  
-  return '.' . $providers;
+  return render($select_service) . $providers;
 }
 
 
