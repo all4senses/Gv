@@ -13,7 +13,7 @@
            jQuery(".services").each(function(){
              
              p_tr = jQuery(this).parent().parent();
-             if(jQuery(this).hasClass(service)) {
+             if(service == '-all-' || jQuery(this).hasClass(service)) {
                p_tr.show();
              }
              else {
