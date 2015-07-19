@@ -11558,14 +11558,7 @@ function gv_misc_getProviderQuickData($target, $data) {
       static $all_service_types;
       
       if (!$all_service_types) {
-          $query = db_select('field_config', 'n')
-                  ->fields('n', array('data'));
-          $query->condition('n.field_name', 'field_p_types');
-          $all_service_types = unserialize($query->execute()->fetchField())['settings']['allowed_values'];
-          $all_service_types += array('bu' => $all_service_types['business'], 're' => $all_service_types['residential']);
-          unset($all_service_types['business'], $all_service_types['residential']);
-          $all_service_types = array_keys($all_service_types);
-
+          $all_service_types = array_keys(gv_misc_getProvidersServiceTypesList());
           //dpm($all_service_types);
       }
       $p_service_types = array();
@@ -17547,6 +17540,17 @@ function gv_misc_trackClick_addSpammyPatternFilters($query) {
     $query->condition($or_hasJs);
   }
 }
+
+
+function gv_misc_getProvidersServiceTypesList() {
+  $query = db_select('field_config', 'n')
+          ->fields('n', array('data'));
+  $query->condition('n.field_name', 'field_p_types');
+  $all_service_types = unserialize($query->execute()->fetchField())['settings']['allowed_values'];
+  $all_service_types += array('bu' => $all_service_types['business'], 're' => $all_service_types['residential']);
+  unset($all_service_types['business'], $all_service_types['residential']);
+  return $all_service_types;
+} 
 
 
 /*

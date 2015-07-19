@@ -3685,10 +3685,30 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
 
   if(!$providers = variable_get('gv_providers_table')) {
     $block_data = array('module' => 'views', 'delta' => 'providers-block_providers_list_table', 'shadow' => FALSE);
-    $providers = gv_blocks_getBlockThemed($block_data);
+    $providers = gv_blocks_getlockThemed($block_data);
+    
+    
+    
     variable_set('gv_providers_table', $providers);
     //dpm('new generation');
   }
+  
+  $providers_types = gv_misc_getProvidersServiceTypesList();
+  
+  $providers_types['-all-'] = 'Show all providers';
+          
+  $select_providers['all-reviews-select-providers'] = array(
+      '#type' => 'select',
+      '#title' => 'Filter providers by service types provided',
+      '#options' => $providers_types,
+      '#default_value' => 'Show all providers',
+      '#value' => 'Show all providers',
+      //'#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
+      '#attributes' => array('id' => 'select_service',  'onChange' => "alert(document.getElementById('select_service').selectedIndex)"),
+
+  ); 
+
+  $view->attachment_before = render($select_providers);
  
   return '.' . $providers;
 }
