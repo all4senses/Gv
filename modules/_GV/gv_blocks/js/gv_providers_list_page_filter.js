@@ -8,18 +8,18 @@
        jQuery(".select_service").change(function(){
 
            service = $(this).val;
-           console.log(service);
+           console.log("s = " + service);
            
            jQuery(".services").each(function(){
              
              p_tr = jQuery(this).parent().parent();
              if(jQuery(this).hasClass(service)) {
-               console.log("has " . service);
-               p_tr.show();
+               console.log("has " + service);
+               //jQuery(this).parent().parent().show();
              }
              else {
-               p_tr.hide();
-               console.log("not has " . service);
+               //jQuery(this).parent().parent().hide();
+               console.log("has no " + service);
              }
              
            });
