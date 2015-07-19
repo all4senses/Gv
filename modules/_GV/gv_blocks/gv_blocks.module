@@ -3709,7 +3709,7 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
         '#default_value' => '-all-',
         '#value' => '-all-',
         //'#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
-        '#attributes' => array('class' => 'select_service',  'onChange' => "alert(document.getElementById('select_service').selectedIndex)"),
+        '#attributes' => array('class' => array('select_service'),  'onChange' => "alert(document.getElementById('select_service').selectedIndex)"),
 
     ); 
     
