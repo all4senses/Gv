@@ -3685,7 +3685,7 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
 
   if(!$providers = variable_get('gv_providers_table')) {
     $block_data = array('module' => 'views', 'delta' => 'providers-block_providers_list_table', 'shadow' => FALSE);
-    $providers = gv_blocks_getlockThemed($block_data);
+    $providers = gv_blocks_getBlockThemed($block_data);
     variable_set('gv_providers_table', $providers);
     //dpm('new generation');
   }
