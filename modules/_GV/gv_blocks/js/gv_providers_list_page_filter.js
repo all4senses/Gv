@@ -12,7 +12,7 @@
            
            jQuery(".services").each(function(){
              
-             tr = jQuery(this).parent().parent();
+             tr = jQuery(this).parent().parent().parent();
              if(jQuery(this).hasClass(service)) {
                console.log(service);
                tr.show();
