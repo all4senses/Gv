@@ -7,7 +7,7 @@
         
        jQuery(".select_service").change(function(){
 
-           service = $(this).val;
+           service = $(this).val();
            console.log("s = " + service);
            
            jQuery(".services").each(function(){
