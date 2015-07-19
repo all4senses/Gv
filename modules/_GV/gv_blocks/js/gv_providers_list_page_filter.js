@@ -7,8 +7,21 @@
         
        jQuery(".select_service").change(function(){
 
+           service = $(this).val;
+           console.log(service);
            
-           console.log(this);
+           jQuery(".services").each(function(){
+             
+             tr = jQuery(this).parent().parent();
+             if(jQuery(this).hasClass(service)) {
+               console.log(service);
+               tr.show();
+             }
+             else {
+               tr.hide();
+             }
+             
+           });
            
          return false;
          
