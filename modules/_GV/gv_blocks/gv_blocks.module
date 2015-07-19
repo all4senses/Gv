@@ -3701,8 +3701,8 @@ function gv_blocks_getProvidersTableFromViews_withCaching() {
       '#type' => 'select',
       '#title' => 'Filter providers by service types provided',
       '#options' => $providers_types,
-      '#default_value' => 'Show all providers',
-      '#value' => 'Show all providers',
+      '#default_value' => '-all-',
+      '#value' => '-all-',
       //'#attributes' => array('id' => 'select_provider',  'onChange' => "top.location.href='http://getvoip.com/" . $_GET['q'] . "?provider=' + encodeURIComponent(document.getElementById('select_provider').options[document.getElementById('select_provider').selectedIndex].value) + '$url'"),
       '#attributes' => array('id' => 'select_service',  'onChange' => "alert(document.getElementById('select_service').selectedIndex)"),
 
