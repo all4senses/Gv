@@ -14,12 +14,12 @@
              
              p_tr = jQuery(this).parent().parent();
              if(jQuery(this).hasClass(service)) {
-               console.log("has " + service);
-               //jQuery(this).parent().parent().show();
+               //console.log("has " + service);
+               p_tr.show();
              }
              else {
-               //jQuery(this).parent().parent().hide();
-               console.log("has no " + service);
+               p_tr.hide();
+               //console.log("has no " + service);
              }
              
            });
