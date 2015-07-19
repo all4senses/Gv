@@ -12,13 +12,14 @@
            
            jQuery(".services").each(function(){
              
-             tr = jQuery(this).parent().parent().parent();
+             p_tr = jQuery(this).parent().parent();
              if(jQuery(this).hasClass(service)) {
-               console.log(service);
-               tr.show();
+               console.log("has " . service);
+               p_tr.show();
              }
              else {
-               tr.hide();
+               p_tr.hide();
+               console.log("not has " . service);
              }
              
            });
