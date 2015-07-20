@@ -17627,7 +17627,7 @@ function gv_misc_watchdog(array $log_entry) {
 
 
 function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, $to = NULL) {
-  $provider =  'Mitel'; //'RingCentral';
+  $provider = 'RingCentral';
   $from = strtotime('1/1/14');
   $to = strtotime('6/30/15');
   $query = db_select('gv_quote_requests', 'q');
@@ -17639,9 +17639,18 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
   //dpm($results);
   
   $quotes = NULL;
+  $csv = 'Date Sent;Email Address;Company Name;Phone Number;Lines Requested;First Name;Last Name
+
+          
+';
+  
   foreach ($results as $time => $result) {
     $result->data = unserialize($result->data);
-    $quotes[date('m\/Y', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
+    //$quotes[date('m\/Y', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
+    $quotes[date('m\/d\/Y H:i:s', $time)] = $result;
+    $csv .= date('m\/d\/Y H:i:s', $time) . ';' . $result->data['email'] . ';' . $result->data['Company'] . ';' . $result->data['Phone #'] . ';' . $result->data['Phones needed'] . ';' . $result->data['First Name'] . ';' . $result->data['Last Name'] . '
+';
   }
+  file_put_contents(DRUPAL_ROOT . '/tmp/autoLeads_' . $provider . '_' . date('m_d_Y_', $from) . '_to_' . date('m_d_Y_', $to) . '.csv',  $csv, /*FILE_APPEND | */LOCK_EX);
   dpm($quotes);
 }
