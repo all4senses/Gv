@@ -17637,4 +17637,10 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
   $query->condition('q.data', '%%s:11:"RingCentral";i:1;%%', 'LIKE');
   $results = $query->execute()->fetchAllAssoc('timestamp');
   dpm($results);
+  
+  $quotes = NULL;
+  foreach ($results as $time => $result) {
+    $result->data = unserialize($result->data);
+    $quotes[date('m\/d\/Y H:i:s', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
+  }
 }
