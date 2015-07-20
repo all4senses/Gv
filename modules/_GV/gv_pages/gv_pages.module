@@ -10760,9 +10760,9 @@ function gv_pages_BlockedIPs_overview() {
         $row_class = 'blocked submissions-and-tracking';
       }
     }
-    $data = print_r(unserialize($blocked_IP->data), TRUE);
+    $data = unserialize($blocked_IP->data);
     $user_agent = @$data['$_SERVER']['HTTP_USER_AGENT'];
-    $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $data . '</div></fieldset>';
+    $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . print_r($data, TRUE) . '</div></fieldset>';
     $rows[] = array('data' =>
       array(
         // Cells
