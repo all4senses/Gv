@@ -107,7 +107,11 @@ function gv_blocks_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   $blocks['b_provider_p_bottom2'] = array(
-    'info' => 'Bottom section of Business providers page preface v2 with rotated randomly first 4 providers',
+    'info' => 'Bottom section of Business providers page preface v2 (ppc/business-voip) with rotated randomly',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['b3_provider_p_bottom'] = array(
+    'info' => 'Bottom section of Business providers page preface v3 (bing/business-voip) with rotated randomly',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
   
@@ -617,10 +621,13 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers');
       break;
     case 'b_provider_p_bottom2':
-      $block['subject'] = 'Bottom section of Business providers page preface v2 with rotated randomly first 4 providers';
+      $block['subject'] = 'Bottom section of Business providers page preface v2 (ppc/business-voip) with rotated randomly';
       $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers-v2');
       break;
-    
+    case 'b3_provider_p_bottom':
+      $block['subject'] = 'Bottom section of Business providers page preface v3 (bing/business-voip) with rotated randomly';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-compare-business-voip-providers-v3');
+      break;
     
     case 'r_provider_p_bottom':
       $block['subject'] = 'Bottom section of Residential providers page preface';
@@ -4116,6 +4123,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   $map_path_to_preface_type = array(
     '/business' => 'page-compare-business-voip-providers',
     '/ppc/business-voip' => 'page-compare-business-voip-providers-v2',
+    '/bing/business-voip' => 'page-compare-business-voip-providers-v3',  
     '/residential' => 'page-compare-residential-voip-providers',
     '/sip-trunking' => 'page-compare-sip-voip-providers',
     '/fax' => 'page-compare-ifa-voip-providers',
@@ -4131,6 +4139,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   $map_preface_type_to_service_type = array(
     'page-compare-business-voip-providers' => 'business',
     'page-compare-business-voip-providers-v2' => 'business',
+    'page-compare-business-voip-providers-v3' => 'business',  
     'page-compare-residential-voip-providers' => 'residential',
     'page-compare-sip-voip-providers' => 'sip',
     'page-compare-ifa-voip-providers' => 'ifa',
@@ -4194,6 +4203,7 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
   $map_preface_type_to_latest_reviews = array(
     'page-compare-business-voip-providers' => 3,
     'page-compare-business-voip-providers-v2' => 4,
+    'page-compare-business-voip-providers-v3' => 4,  
     'page-compare-residential-voip-providers' => NULL, //4,
     'page-compare-sip-voip-providers' => 2,
     'page-compare-ifa-voip-providers' => 4,
