@@ -17629,11 +17629,11 @@ function gv_misc_watchdog(array $log_entry) {
 function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, $to = NULL) {
   $provider = 'RingCentral';
   $from = strtotime('1/1/14');
-  $to = strtotime('6/30/15');
+  $to = strtotime('7/1/15');
   $query = db_select('gv_quote_requests', 'q');
   $query->fields('q');
   $query->condition('q.timestamp', $from, '>=');
-  $query->condition('q.timestamp', $to, '<=');
+  $query->condition('q.timestamp', $to, '<');
   $query->condition('q.data', '%%:"' . $provider . '";i:1;%%', 'LIKE');
   $results = $query->execute()->fetchAllAssoc('timestamp');
   //dpm($results);
@@ -17651,6 +17651,6 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
     $csv .= date('m\/d\/Y H:i:s', $time) . ';' . @$result->data['Email'] . ';' . @$result->data['Company'] . ';' . @$result->data['Phone #'] . ';' . @$result->data['Phones needed'] . ';' . @$result->data['First Name'] . ';' . @$result->data['Last Name'] . ';' . @$result->data['First Name'] . ';' . @$result->data['Source'] . '_' . @$result->data['Version'] . '
 ';
   }
-  file_put_contents(DRUPAL_ROOT . '/tmp/autoLeads_' . $provider . '_' . date('m_d_Y_', $from) . '_to_' . date('m_d_Y_', $to) . '.csv',  $csv, /*FILE_APPEND | */LOCK_EX);
+  file_put_contents(DRUPAL_ROOT . '/tmp/autoLeads_' . $provider . '_' . date('m_d_Y_', $from) . '_to_' . date('m_d_Y', $to) . '.csv',  $csv, /*FILE_APPEND | */LOCK_EX);
   dpm($quotes);
 }
