@@ -10732,6 +10732,12 @@ function gv_pages_BlockedIPs_overview() {
 
   $current_time = time(); 
   dpm($results);
+  
+  global $user;
+  if ($user->uid == 1){
+    return $build;
+  }
+  
   foreach ($results as $blocked_IP) {
 
     $op_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('iid' => $blocked_IP->iid, 'block_info' => NULL));
