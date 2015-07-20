@@ -10708,7 +10708,7 @@ function gv_pages_BlockedIPs_overview() {
   
   $query = db_select('gv_blocked', 'gb')->extend('PagerDefault')->extend('TableSort');
   $query
-    ->fields('gb', array('id', 'ip', 'timestamp_from', 'timestamp_to', 'blocked_count', 'last_updated', 'data', 'source', 'reason'))
+    ->fields('gb', array('id', 'ip', 'timestamp_from', 'timestamp_to', 'blocked_count', 'last_updated'/*, 'data'*/, 'source', 'reason'))
     //->addField('u', 'name')
     ;
   $query->leftJoin('blocked_ips', 'b', 'b.ip = gb.ip');
@@ -10762,7 +10762,7 @@ function gv_pages_BlockedIPs_overview() {
         $row_class = 'blocked submissions-and-tracking';
       }
     }
-    $data = unserialize($blocked_IP->data);
+    $data = unserialize(@$blocked_IP->data);
     $user_agent = @$data['$_SERVER']['HTTP_USER_AGENT'];
     $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . print_r($data, TRUE) . '</div></fieldset>';
     $rows[] = array('data' =>
