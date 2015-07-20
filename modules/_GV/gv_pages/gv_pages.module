@@ -10725,14 +10725,14 @@ function gv_pages_BlockedIPs_overview() {
     $query->condition('gb.ip', $_GET['exclude-ip'], '!=');
     drupal_set_message('Rows with IP ' . $_GET['exclude-ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
-  $result = $query
+  $results = $query
     ->limit(20)
     ->orderByHeader($header)
-    ->execute();
+    ->execute()->fetchAllAssoc('id');
 
   $current_time = time(); 
-  
-  foreach ($result as $blocked_IP) {
+  dpm($results);
+  foreach ($results as $blocked_IP) {
 
     $op_links = gv_misc_watchdog_and_BlockedIPs_pages_operations('get-ops', array('iid' => $blocked_IP->iid, 'block_info' => NULL));
 
