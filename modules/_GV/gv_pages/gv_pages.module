@@ -10764,14 +10764,15 @@ function gv_pages_BlockedIPs_overview() {
     }
     
     $data = @$blocked_IP->data;
-    if ($_GET['data'] != 'serialized') {
+    if (@$_GET['data'] != 'serialized') {
       $data = unserialize(@$blocked_IP->data);
       $user_agent = @$data['$_SERVER']['HTTP_USER_AGENT'];
       $data = print_r($data, TRUE);
     }
     else {
       if (preg_match('/HTTP_USER_AGENT";s:.*"(.*)"/isU', $data, $matches)) {
-        dpm($matches);
+        //dpm($matches);
+        $user_agent = $matches[1];
       }
     }
     
