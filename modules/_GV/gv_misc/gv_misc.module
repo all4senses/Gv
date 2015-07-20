@@ -1042,29 +1042,6 @@ function gv_misc_disqusUpdateNodeThread_ifChangedLocally($node, $form_state_valu
 function gv_misc_testPage() {
   $out = '<div>'; //'<div>Start test...</div>';
 
-  
-  
-  
-  // gv_misc_saleseforce_gv_test(array());
-  
-  // $out .= '...ok';
-//  $node = node_load(287);
-//
-//  $field = field_get_items('node',$node, 'field_hero_subtitle');
-//  dpm($field);
-  
-  /*
-  $main_menu = NULL;
-  $block = block_load('nice_menus', 1);  
-  $block_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  if (preg_match('/(.*)(\<div class=\"solution-nav\"\>.*\<\/div\>)(.*)/isU', $block_array['nice_menus_1']['#markup'], $matches)) {
-    $main_menu = str_replace($matches[2], '', $block_array['nice_menus_1']['#markup']);
-    global $main_menu_inner_ul_removed;
-    $main_menu_inner_ul_removed = $matches[2];
-    return $main_menu;
-  }
-  */
-  
   //variable_set('image_suppress_itok_output', TRUE);
   
   
@@ -1080,6 +1057,19 @@ function gv_misc_testPage() {
     $out .= 'Email has been sent to ' . $_GET['email'];
   }
   
+  
+  */
+
+  //$to = strtotime(date('m\/d\/Y 00\:00\:00', $time_now));
+  //gv_misc_report_trackClick('Alliance Phones', '04/01/2015 00:00:00', '05/01/2015 00:00:00');
+  
+  gv_misc_report_quoteRequests_autoleads();
+  
+  return $out . '</div>';// . '<br><div>End of Test</div>';
+}
+
+
+function gv_misc_report_userReviews_providers($target = 'all') {
   
   $query = db_select('node', 'n')
         ->fields('n', array('nid', 'created'));
@@ -1121,20 +1111,7 @@ function gv_misc_testPage() {
   
 
   file_put_contents(DRUPAL_ROOT . '/tmp/user_reviews_' . date('m-d-Y__H_i_s', time()) . '.csv',  $csv, FILE_APPEND | LOCK_EX);
-  */
-  
-//  $ip = '119.127.29.151';
-//  $block_reason = '$suspected_attack_type' . ' from ' . 'CN';
-//  gv_misc_IP_blockOrUnblock(/*$op = */'block', $ip, /*$source =*/ 'GV Watchdog Interceptor', /*$reason =*/ '$block_reason', /*$blocked_count = */NULL, /*$counted_by = */NULL, /*$email = */NULL, /*$timestamp_from = */NULL, /*$timestamp_to = */NULL, /*$data = */array('log_entry' => '$log_entry', '$_SERVER' => $_SERVER), /*$drupal_set_message =*/ FALSE, /*$set_by =*/ 'automatically');
-  
-  
-  //$to = strtotime(date('m\/d\/Y 00\:00\:00', $time_now));
-  gv_misc_getReport_trackClick('Alliance Phones', '04/01/2015 00:00:00', '05/01/2015 00:00:00');
-  
-  return $out . '</div>';// . '<br><div>End of Test</div>';
 }
-
-
 
 /*
  *   Parses dates in formats: 
@@ -17432,10 +17409,10 @@ function gv_misc_watchdog_and_BlockedIPs_pages_operations($action = 'do-op', $da
 }
 
 
-function gv_misc_getReport_trackClick($provider, $from, $to) {
+function gv_misc_report_trackClick($provider, $from, $to) {
   
   
-  //gv_misc_getReport_trackClick('Alliance Phones', '04/01/2015 00:00:00', '05/01/2015 00:00:00');
+  //gv_misc_report_trackClick('Alliance Phones', '04/01/2015 00:00:00', '05/01/2015 00:00:00');
   $from = '06/01/2015 00:00:00'; //'04/01/2015 00:00:00';
   $to = '07/01/2015 00:00:00'; //'05/01/2015 00:00:00';
   
@@ -17646,4 +17623,18 @@ function gv_misc_watchdog(array $log_entry) {
   }
  
   
+}
+
+
+function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, $to = NULL) {
+  $provider = 'RingCentral';
+  $from = '1/1/14';
+  $to = '6/30/15';
+  $query = db_select('gv_quote_requests', 'q');
+  $query->fields('q');
+  $query->condition('q.timestamp', $from, '>=');
+  $query->condition('q.timestamp', $to, '<=');
+  $query->condition('q.data', '%%s:11:"RingCentral";i:1;%%', 'LIKE');
+  $results = $query->execute()->fetchAllAssoc('timestamp');
+  dpm($results);
 }
