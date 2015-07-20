@@ -10726,7 +10726,7 @@ function gv_pages_BlockedIPs_overview() {
     drupal_set_message('Rows with IP ' . $_GET['exclude-ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
   $result = $query
-    ->limit(1000)
+    ->limit(20)
     ->orderByHeader($header)
     ->execute();
 
