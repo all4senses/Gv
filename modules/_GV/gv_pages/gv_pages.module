@@ -10762,10 +10762,19 @@ function gv_pages_BlockedIPs_overview() {
         $row_class = 'blocked submissions-and-tracking';
       }
     }
-    //$data = unserialize(@$blocked_IP->data);
-    $user_agent = @$data['$_SERVER']['HTTP_USER_AGENT'];
-    //$data = print_r($data, TRUE);
+    
     $data = @$blocked_IP->data;
+    if ($_GET['data'] != 'serialized') {
+      $data = unserialize(@$blocked_IP->data);
+      $user_agent = @$data['$_SERVER']['HTTP_USER_AGENT'];
+      $data = print_r($data, TRUE);
+    }
+    else {
+      if (preg_match('/HTTP_USER_AGENT";s:.*"(.*)"/isU', $data, $matches)) {
+        dpm($matches);
+      }
+    }
+    
     $data = '<fieldset class=" collapsible collapsed"><legend><span class="fieldset-legend">+</span></legend><div class="fieldset-wrapper">' . $data . '</div></fieldset>';
     $rows[] = array('data' =>
       array(
