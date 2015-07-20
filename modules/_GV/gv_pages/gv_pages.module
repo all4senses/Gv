@@ -10675,6 +10675,7 @@ function gv_pages_BlockedIPs_overview() {
     array('data' => t('Country'), 'field' => 'c.country'),  
     array('data' => t('Date From'), 'field' => 'gb.timestamp_from', 'sort' => 'desc'),
     array('data' => t('Date To'), 'field' => 'gb.timestamp_to', 'sort' => 'desc'),  
+    array('data' => t('Last Updated'), 'field' => 'gb.last_updated', 'sort' => 'desc'),    
     //t('Message'),
     array('data' => t('Source'), 'field' => 'gb.source'),
     array('data' => t('Reason'), 'field' => 'gb.reason'),  
@@ -10726,7 +10727,7 @@ function gv_pages_BlockedIPs_overview() {
     drupal_set_message('Rows with IP ' . $_GET['exclude-ip'] . ' are excluded! Click <a href=# class="show-all">here</a> to show all rows.', 'warning');
   }
   $results = $query
-    ->limit(10)
+    ->limit(50)
     ->orderByHeader($header)
     ->execute()->fetchAllAssoc('id');
 
@@ -10787,6 +10788,7 @@ function gv_pages_BlockedIPs_overview() {
         $blocked_IP->country,  
         $blocked_IP->timestamp_from ? format_date($blocked_IP->timestamp_from, 'short') : '',
         $blocked_IP->timestamp_to ? format_date($blocked_IP->timestamp_to, 'short')  : '',   
+        $blocked_IP->last_updated ? format_date($blocked_IP->last_updated, 'short')  : '',   
         $blocked_IP->source,
         $blocked_IP->reason,
         @$data,
