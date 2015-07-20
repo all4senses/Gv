@@ -17639,7 +17639,7 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
   //dpm($results);
   
   $quotes = NULL;
-  $csv = 'Date Sent;Email Address;Company Name;Phone Number;Lines Requested;First Name;Last Name
+  $csv = 'Date Sent;Email Address;Company Name;Phone Number;Lines Requested;First Name;Last Name;Source
 
           
 ';
@@ -17648,7 +17648,7 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
     $result->data = unserialize($result->data);
     //$quotes[date('m\/Y', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
     $quotes[date('m\/d\/Y H:i:s', $time)] = $result;
-    $csv .= date('m\/d\/Y H:i:s', $time) . ';' . $result->data['email'] . ';' . $result->data['Company'] . ';' . $result->data['Phone #'] . ';' . $result->data['Phones needed'] . ';' . $result->data['First Name'] . ';' . $result->data['Last Name'] . '
+    $csv .= date('m\/d\/Y H:i:s', $time) . ';' . @$result->data['Email'] . ';' . @$result->data['Company'] . ';' . $result->data['Phone #'] . ';' . $result->data['Phones needed'] . ';' . $result->data['First Name'] . ';' . $result->data['Last Name'] . ';' . $result->data['First Name'] . ';' . $result->data['Source'] . '_' . $result->data['Version'] . '
 ';
   }
   file_put_contents(DRUPAL_ROOT . '/tmp/autoLeads_' . $provider . '_' . date('m_d_Y_', $from) . '_to_' . date('m_d_Y_', $to) . '.csv',  $csv, /*FILE_APPEND | */LOCK_EX);
