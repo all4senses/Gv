@@ -2592,8 +2592,9 @@ function gv_misc_goToExternalUrl2() {
             
             // Additional check for User agents, if there is no js approvement
             if (!@$_GET['from']) {
+              // http://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0
               // Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm), IP 157.55.39.197 
-              $forbidden_agents = array('CloudFlare-AlwaysOnline', 'Apache-HttpClient', 'Httpful', 'bingbot');
+              $forbidden_agents = array('CloudFlare-AlwaysOnline', 'Apache-HttpClient', 'Httpful', 'bingbot', 'msnbot', 'BingPreview', 'Googlebot');
               $forbidden_countries = array('CN', 'RO');
               if (empty($_SERVER['HTTP_USER_AGENT']) || in_array($_SERVER['HTTP_CF_IPCOUNTRY'], $forbidden_countries) || gv_misc_stringHasSomeOfSubstrings($_SERVER['HTTP_USER_AGENT'], $forbidden_agents)) {
                 $source_notice =  empty($_SERVER['HTTP_USER_AGENT']) ? ' [NO js, Empty User Agent]' : (in_array($_SERVER['HTTP_CF_IPCOUNTRY'], $forbidden_countries) ? ' [NO js, Forbidden Country]' :  ' [NO js, Forbidden User Agent]');
@@ -17566,8 +17567,9 @@ function gv_misc_watchdog(array $log_entry) {
     'Forbidden user agent' => array('Go 1.1 package', 'Re-Animator', 'Httpful'),
   );
   
+  // http://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0
   // Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm), IP 157.55.39.197 
-  $allowed_bots_user_agents = array('bingbot', 'CloudFlare-AlwaysOnline');
+  $allowed_bots_user_agents = array('bingbot', 'msnbot', 'BingPreview', 'CloudFlare-AlwaysOnline', 'Googlebot');
   
   $log_entry_types = array(
     'access' => array('page not found', 'access denied', 'user'),
@@ -17587,7 +17589,7 @@ function gv_misc_watchdog(array $log_entry) {
   if ($suspected_attack_type && !$ip_whitelisted && !gv_misc_stringHasSomeOfSubstrings(@$_SERVER['HTTP_USER_AGENT'], $allowed_bots_user_agents)){
     if (    in_array($country, $forbidden_countries)    
         ||  ($suspected_attack_type == 'Forbidden user agent' /*&& !in_array($country, $allowed_countries)*/)   
-        ||  (gv_misc_stringHasSomeOfSubstrings($log_entry['type'], $log_entry_types['access']) && in_array($suspected_attack_type, array('Requested executables'))  )
+        ||  (!in_array($country, $allowed_countries) && gv_misc_stringHasSomeOfSubstrings($log_entry['type'], $log_entry_types['access']) && in_array($suspected_attack_type, array('Requested executables'))  )
        ) {
       // If we have noticed a bad behavior from a forbidden country,
       // OR submission has disallowed User agent (and it's not from an allowed country) or request is for executables...
