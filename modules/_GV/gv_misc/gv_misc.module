@@ -17627,7 +17627,7 @@ function gv_misc_watchdog(array $log_entry) {
 
 
 function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, $to = NULL) {
-  $provider = 'RingCentral';
+  $provider =  'Mitel'; //'RingCentral';
   $from = strtotime('1/1/14');
   $to = strtotime('6/30/15');
   $query = db_select('gv_quote_requests', 'q');
