@@ -10731,7 +10731,7 @@ function gv_pages_BlockedIPs_overview() {
     ->execute()->fetchAllAssoc('id');
 
   $current_time = time(); 
-  //dpm($results);
+  dpm($results);
   
   
   foreach ($results as $blocked_IP) {
