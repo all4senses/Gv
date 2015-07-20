@@ -10777,7 +10777,7 @@ function gv_pages_BlockedIPs_overview() {
         $blocked_IP->timestamp_to ? format_date($blocked_IP->timestamp_to, 'short')  : '',   
         $blocked_IP->source,
         $blocked_IP->reason,
-         '+'. //$data,
+         '+', //$data,
         $user_agent,  
         '<div class="blocked-ops" id="id-' . $blocked_IP->id . '" ip="' . $blocked_IP->ip . '"><div class="info" style="color: lightgray;">' .$row_class . '</div>'  . $op_links . '</div>',
       ),
