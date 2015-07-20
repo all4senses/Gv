@@ -17641,7 +17641,7 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
   $quotes = NULL;
   foreach ($results as $time => $result) {
     $result->data = unserialize($result->data);
-    $quotes[date('m\/d\/Y H:i:s', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
+    $quotes[date('m\/d\/Y', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
   }
   dpm($quotes);
 }
