@@ -6718,7 +6718,7 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     // ???
     'top_bu_providers' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_bu_page', 'block_p_bu_page_cmp'), 'listing_pos_fields' => array('field_p_erating')),
       
-    'top_wc_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_wc_page'), 'listing_pos_fields' => array('field_p_erating_wc')),  
+    ////'top_wc_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_wc_page'), 'listing_pos_fields' => array('field_p_erating_wc')),  
     //'top_wc_providers_vertical_chart' => array('image_style' => 'logo_provider_vertical_chart', 'providers_views_displays' => array('block_p_wc_page'), 'listing_pos_fields' => array('field_p_erating_wc')),  
     'top_wc_providers_vertical_chart' => array('image_style' => 'logo_provider_vertical_chart_retina', 'providers_views_displays' => array('block_p_wc_page'), 'listing_pos_fields' => array('field_p_erating_wc')),  
       
@@ -6738,18 +6738,18 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     'top_pbx_providers' => array('image_style' => 'logo_provider_vertical_chart_retina', 'providers_views_displays' => array('block_p_pbx_page', 'block_p_pbx_page_cmp'), 'listing_pos_fields' => array('field_p_erating_pbx')),
     
     //'top_sip_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_sip_page'), 'listing_pos_fields' => array('field_p_erating_sip')),
-    'top_sip_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_sip_page'), 'listing_pos_fields' => array('field_p_erating_sip')),
+    ////'top_sip_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_sip_page'), 'listing_pos_fields' => array('field_p_erating_sip')),
     
     'top_sip_providers_RETINA' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_sip_page'), 'listing_pos_fields' => array('field_p_erating_sip')),  
       
       
       
-    'top_rsl_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_rsl_page'), 'listing_pos_fields' => array('field_p_erating_rsl')),
+    ////'top_rsl_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_rsl_page'), 'listing_pos_fields' => array('field_p_erating_rsl')),
     
       
       
     //'top_ifa_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
-    'top_ifa_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
+    /////'top_ifa_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
       
     'top_ifa_providers_RETINA' => array('image_style' => 'logo_provider_chart_big_retina', 'providers_views_displays' => array('block_p_ifa_page'), 'listing_pos_fields' => array('field_p_erating_ifa')),
       
@@ -6761,13 +6761,18 @@ function gv_misc_rebuildProvidersLogosSprites($listing_pos_fields = NULL) {
     //'all_reviews_providers' => array('image_style' => 'logo_provider_chart_main', 'providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
     'all_reviews_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_bu_ar', 'block_top_bu_ar_cmp', 'block_top_re_ar'), 'listing_pos_fields' => array('field_p_erating', 'field_p_erating_residential')), 
       
-    'top_cb_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_cb'), 'listing_pos_fields' => array('field_p_erating_cb')),
+    ////'top_cb_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_top_cb'), 'listing_pos_fields' => array('field_p_erating_cb')),
     
-    'top_cc_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_cc_page'), 'listing_pos_fields' => array('field_p_erating_cc')),  
+    //////'top_cc_providers' => array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_cc_page'), 'listing_pos_fields' => array('field_p_erating_cc')),  
     'top_cc_providers_vertical_chart' => array('image_style' => 'logo_provider_vertical_chart', 'providers_views_displays' => array('block_p_cc_page'), 'listing_pos_fields' => array('field_p_erating_cc')), 
     'top_cc_providers_vertical_chart_RETINA' => array('image_style' => 'logo_provider_vertical_chart_retina', 'providers_views_displays' => array('block_p_cc_page'), 'listing_pos_fields' => array('field_p_erating_cc')), 
+
   );
   
+  $other_service_types = array('wc', 'rsl', 'sip', 'ifa', 'cb', 'cc', 'tc', 'pms', 'wbn', 'hdcrm');
+  foreach ($other_service_types as $other_service_type) {
+    $providers_logos_sprites['top_' . $other_service_type . '_providers'] = array('image_style' => 'logo_provider_chart_big', 'providers_views_displays' => array('block_p_' . $other_service_type . '_page'), 'listing_pos_fields' => array('field_p_erating_' . $other_service_type));
+  }
   
   // Skip refreshing sprites without selected listing fields.
   if($listing_pos_fields && $gv_providers_sprites = variable_get('gv_providers_sprites')) {
@@ -11567,7 +11572,9 @@ function gv_misc_getProviderQuickData($target, $data) {
           
                               '/business' => 'top_bu_providers', 
           
-                              '/ppc/business-voip' => 'top_bu_providers', 
+                              '/ppc/business-voip' => 'top_bu_providers',
+          
+                              '/bing/business-voip' => 'top_bu_providers',
                               
                               '/get/iframe/business-voip-chart' => 'top_bu_providers', 
           
@@ -11582,6 +11589,13 @@ function gv_misc_getProviderQuickData($target, $data) {
                               '/sip-trunking' => 'top_sip_providers_RETINA',
           
                               '/web-conferencing' => 'top_wc_providers',
+          
+                              '/team-collaboration' => 'top_tc_providers',
+          
+                              '/webinar-services' => 'top_wbn_providers',
+                              '/help-desk-software' => 'top_hdcrm_providers',          
+                              '/project-management-software' => 'top_pms_providers',          
+          
           
                               '/crm-software' => 'top_crm_providers',
 

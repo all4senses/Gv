@@ -170,6 +170,14 @@ function gv_blocks_block_info() {
     'info' => 'Bottom section of Project Management Software providers page preface',
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['wbn_p_bottom'] = array(
+    'info' => 'Bottom section of Webinar Software providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['hdcrm_p_bottom'] = array(
+    'info' => 'Bottom section of Help Desk CRM Software providers page preface',
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   
   
   $blocks['news_tags'] = array(
@@ -684,6 +692,16 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_misc_getPrefaceBottomSection('page-pms-providers');
       break;
     
+    case 'wbn_p_bottom':
+      $block['subject'] = 'Bottom section of Webinar Software providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-wbn-providers');
+      break;
+    
+    case 'hdcrm_p_bottom':
+      $block['subject'] = 'Bottom section of Help Desk CRM Software providers page preface';
+      $block['content'] = gv_misc_getPrefaceBottomSection('page-hdcrm-providers');
+      break;
+    
     case 'cb_p_bottom':
       $block['subject'] = 'Bottom section of CB providers page preface';
       $block['content'] = gv_misc_getPrefaceBottomSection('cloud-backup');
@@ -849,11 +867,32 @@ function gv_blocks_block_view($delta = '') {
       $block['content'] = gv_blocks_compareTopProviders('wc');
       break;
     
+    case 'compare_providers_top_wc':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('wc');
+      break;
+    
+    
     case 'compare_providers_top_tc':
       $block['subject'] = '';
       $block['content'] = gv_blocks_compareTopProviders('tc');
       break;
   
+    case 'compare_providers_top_pms':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('pms');
+      break;
+    
+    case 'compare_providers_top_wbn':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('wbn');
+      break;
+    
+    case 'compare_providers_top_hdcrm':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_compareTopProviders('hdcrm');
+      break;
+    
     case 'reviews_counter':
       $block['subject'] = '';
       $block['content'] = gv_blocks_reviewsCounter();
@@ -2745,6 +2784,11 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
        //'/small-business-voip' => 'Small Business VoIP',
       '/cloud-backup' => 'Cloud Backup',
       '/cloud-contact-center' => 'Call Center Software',
+        
+      '/webinar-services' => 'Webinar Software',
+      '/help-desk-software' => 'Help Desk CRM', 
+      '/team-collaboration' => 'Team Collaboration',
+      '/project-management-software' => 'Project Management Software',
     );
     
     $map_path_to_type = array(
@@ -2764,6 +2808,11 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       //'/small-business-voip' => 'smbv',
       '/cloud-backup' => 'cb',
       '/cloud-contact-center' => 'cc',// 'page-compare-cc-voip-providers',
+      
+      '/webinar-services' => 'wbn',
+      '/help-desk-software' => 'hdcrm', 
+      '/team-collaboration' => 'tc',
+      '/project-management-software' => 'pms',  
     );
     
     
@@ -2826,6 +2875,23 @@ function gv_blocks_getTop5Providers_byTypeAndPath($service_type = NULL) {
       'rating_table' => 'field_data_field_p_erating_cc',
       'rating_field' => 'field_p_erating_cc_value',
     ),
+      
+    'tc' => array (
+      'rating_table' => 'field_data_field_p_erating_tc',
+      'rating_field' => 'field_p_erating_tc_value',
+    ),
+    'pms' => array (
+      'rating_table' => 'field_data_field_p_erating_pms',
+      'rating_field' => 'field_p_erating_pms_value',
+    ),
+    'wbn' => array (
+      'rating_table' => 'field_data_field_p_erating_wbn',
+      'rating_field' => 'field_p_erating_wbn_value',
+    ),
+    'hdcrm' => array (
+      'rating_table' => 'field_data_field_p_erating_hdcrm',
+      'rating_field' => 'field_p_erating_hdcrm_value',
+    ),  
   );
   
    
@@ -2980,6 +3046,11 @@ function gv_blocks_compareTopProviders($service_type) {
     case 'wc':
       $rating_table = 'field_data_field_p_erating_wc';
       $rating_field = 'field_p_erating_wc_value';
+      $popup_quote = TRUE;
+      break;
+    default:
+      $rating_table = 'field_data_field_p_erating_' . $service_type;
+      $rating_field = 'field_p_erating_' . $service_type . '_value';
       $popup_quote = TRUE;
       break;
   }
@@ -4136,6 +4207,11 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/crm-software' => 'crm-voip-providers',
     '/cloud-backup' => 'cloud-backup',
     '/cloud-contact-center' => 'page-compare-cc-voip-providers',
+      
+    '/webinar-services' => 'page-wbn-providers',
+    '/help-desk-software' => 'page-hdcrm-providers', 
+    '/team-collaboration' => 'page-tc-providers',
+    '/project-management-software' => 'page-pms-providers',  
   );
   
   $map_preface_type_to_service_type = array(
@@ -4152,6 +4228,13 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     'crm-voip-providers' => 'crm',
     'cloud-backup' => 'cb',
     'page-compare-cc-voip-providers' => 'cc',
+      
+    '/webinar-services' => 'wbn',
+    '/help-desk-software' => 'hdcrm', 
+    '/team-collaboration' => 'tc',
+    '/project-management-software' => 'pms',  
+      
+      
   );
   
   $map_path_to_type = array(
@@ -4168,6 +4251,11 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/crm-software' => 'CRM Solutions',
     '/cloud-backup' => 'Cloud Backup Providers',
     '/cloud-contact-center' => 'Call Center Software',
+      
+    '/webinar-services' => 'Webinar Software',
+    '/help-desk-software' => 'Help Desk CRM', 
+    '/team-collaboration' => 'Team Collaboration',
+    '/project-management-software' => 'Project Management Software',  
   );
  
   //dpm($_SERVER);
@@ -4198,6 +4286,11 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     '/crm-software' => 'CRM Solutions',
     '/cloud-backup' => 'Cloud Backup',
     '/cloud-contact-center' => 'Call Center Software',
+      
+    '/webinar-services' => 'Webinar Software',
+    '/help-desk-software' => 'Help Desk CRM', 
+    '/team-collaboration' => 'Team Collaboration',
+    '/project-management-software' => 'Project Management Software',  
   );
  
   
@@ -4217,6 +4310,11 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     'crm-voip-providers' => 2,
     'cloud-backup' => 3,
     'page-compare-cc-voip-providers' => 3,
+      
+    'page-wbn-providers' => 3,
+    'page-hdcrm-providers' => 3, 
+    'page-tc-providers' => 3,
+    'page-pms-providers' => 3, 
   );
   
   
