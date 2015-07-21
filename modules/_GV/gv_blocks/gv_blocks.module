@@ -7631,18 +7631,30 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
       $random_index = array(0, 1, 2, 3, 4, 5, 6);
       //shuffle($random_index);
 
+      $settings_name = 'gv_rotate_data___block_top_bu_ppc__' . $_GET['q'];
+      if ($user->uid == 1) {
+        $settings_name = $settings_name . '__root__' . $version; 
+      }
+      elseif ($user->uid) {
+        $settings_name = $settings_name . '__loggedIn__' . $version;
+      }
+      else {
+        $settings_name = $settings_name . '__loggedOut__' . $version;
+      }
+      
       switch ($version) {
         
         case 'v2':
           
           //$iteration_count = $vonage_is_2 = 0;
-          $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => 0, 'vonage_is_2' => 0));
-          dpm($gv_rotate_data___block_top_bu_ppc);
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, array('iteration_count' => 0, 'vonage_is_2' => 0));
+
           $iteration_count = $gv_rotate_data___block_top_bu_ppc['iteration_count'];
           $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
           if ($vonage_is_2 > 1) {
             $vonage_is_2 = 1;
-            variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+            variable_set($settings_name, array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
           }
 
           $count_cur = 0;
@@ -7741,7 +7753,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           if ($random_index[2] == $fixed_positions['Vonage_key']) {
             $vonage_is_2 +=1;
           }
-          variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+          variable_set($settings_name, array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
 
           
           break; // End of case 'v2':
@@ -7760,7 +7772,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
                 
                 
           //$iteration_count = $vonage_is_2 = 0;
-          $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', NULL);
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
           if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 11) {
 
@@ -7782,7 +7794,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
 //                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
 //                if ($vonage_is_2 > 1) {
 //                  $vonage_is_2 = 1;
-//                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+//                  variable_set($settings_name, array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
 //                }
 
           $count_cur = 0;
@@ -7878,7 +7890,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           //dpm($gv_rotate_data___block_top_bu_ppc);
           //dpm('Random counter = ' . $count_cur);
 
-          variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
           
           break; // End of case 'v3-1':
         
@@ -7900,7 +7912,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
                 
                 
           //$iteration_count = $vonage_is_2 = 0;
-          $gv_rotate_data___block_top_bu_ppc = variable_get('gv_rotate_data___block_top_bu_ppc', NULL);
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
           if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 11) {
 
@@ -7922,7 +7934,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
   //                $vonage_is_2 = $gv_rotate_data___block_top_bu_ppc['vonage_is_2'];
   //                if ($vonage_is_2 > 1) {
   //                  $vonage_is_2 = 1;
-  //                  variable_set('gv_rotate_data___block_top_bu_ppc', array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
+  //                  variable_set($settings_name, array('iteration_count' => $iteration_count, 'vonage_is_2' => $vonage_is_2));
   //                }
 
           $count_cur = 0;
@@ -8018,7 +8030,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           //dpm($gv_rotate_data___block_top_bu_ppc);
           //dpm('Random counter = ' . $count_cur);
 
-          variable_set('gv_rotate_data___block_top_bu_ppc', $gv_rotate_data___block_top_bu_ppc);
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
           
           break; // End of case 'v3-2':
           
@@ -8046,15 +8058,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           //Position 5, 6 ,7 - should evenly rotate between Jive, Nextiva, and Corvisa. 
                 
           //$iteration_count = $vonage_is_2 = 0;
-          if ($user->uid == 1) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root'; 
-          }
-          elseif ($user->uid) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn';
-          }
-          else {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut';
-          }
+          
           
           $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
@@ -8188,15 +8192,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
 
           //- Nextiva and Corvisa should rotate evenly between position 6 and 7 only.  
           
-          if ($user->uid == 1) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root'; 
-          }
-          elseif ($user->uid) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn';
-          }
-          else {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut';
-          }
+          
           
           $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
@@ -8311,15 +8307,6 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
            
           
           //$iteration_count = $vonage_is_2 = 0;
-          if ($user->uid == 1) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__root_' . $version; 
-          }
-          elseif ($user->uid) {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedIn_' . $version;
-          }
-          else {
-            $settings_name = 'gv_rotate_data___block_top_bu_ppc__loggedOut_' . $version;
-          }
           
           $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
