@@ -2070,7 +2070,7 @@ function gv_blocks_getAboutTheAuthor($uid) {
  */
 function gv_blocks_getFooterAbout() {
   return '<div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
-            <div>Р’В© 2015 GetVoIP.com | All Rights Reserved</div>
+            <div>Р вЂ™Р’В© 2015 GetVoIP.com | All Rights Reserved</div>
          </div>';
 }
 
@@ -3868,14 +3868,14 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
   }
   
   if ($page_prev !== FALSE) {
-    $page_prev = l('Older Posts РІР‚С”', $_GET['q'], array('query' => array('page' => $page_prev)));
+    $page_prev = l('Older Posts Р Р†Р вЂљРЎвЂќ', $_GET['q'], array('query' => array('page' => $page_prev)));
   }
   if ($page_next !== FALSE) {
     if (!$page_next) {
-      $page_next = l('РІР‚в„– Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
+      $page_next = l('Р Р†Р вЂљРІвЂћвЂ“ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
     }
     else {
-      $page_next = l('РІР‚в„– Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
+      $page_next = l('Р Р†Р вЂљРІвЂћвЂ“ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
     }
   }
   
@@ -4229,10 +4229,10 @@ function gv_blocks_getLatestReviews_byPathAndPrefaceAsServiceType() {
     'cloud-backup' => 'cb',
     'page-compare-cc-voip-providers' => 'cc',
       
-    '/webinar-services' => 'wbn',
-    '/help-desk-software' => 'hdcrm', 
-    '/team-collaboration' => 'tc',
-    '/project-management-software' => 'pms',  
+    'page-wbn-providers' => 'wbn',
+    'page-hdcrm-providers' => 'hdcrm', 
+    'page-tc-providers' => 'tc',
+    'page-pms-providers' => 'pms',  
       
       
   );
@@ -4748,13 +4748,13 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
       //dpm($menu);
     }
     
-    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">Р вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
-  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
   
   return $out;
 }
@@ -4773,13 +4773,13 @@ function gv_blocks_get_footerMenu() {
   }
   else {
     $menu = menu_build_tree('menu-footer-menu');
-    $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
-  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
   
   return $out;
 }
@@ -6426,7 +6426,7 @@ function gv_blocks_get_exitintent_pdf() {
 
                     <div class="step step-one">
                           <div class="exit-intent-intro">
-                            <div class="exit-intent-intro-line _pdf">Get Your Essential Buyer\'s Guide to Business VoIP Services вЂ” 
+                            <div class="exit-intent-intro-line _pdf">Get Your Essential Buyer\'s Guide to Business VoIP Services РІР‚вЂќ 
                               <span class="exit-intent-intro-line-highlight">Free!</span>
                             </div>
                             <div class="exit-intent-intro-line-4 _pdf">To Download, Tell us:</div>
