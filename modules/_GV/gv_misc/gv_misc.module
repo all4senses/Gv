@@ -2595,7 +2595,8 @@ function gv_misc_goToExternalUrl2() {
               // http://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0
               // Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm), IP 157.55.39.197 
               // AdsBot-Google (+http://www.google.com/adsbot.html) 66.249.91.45
-              $forbidden_agents = array('CloudFlare-AlwaysOnline', 'Apache-HttpClient', 'Httpful', 'bingbot', 'msnbot', 'BingPreview', 'Googlebot', 'AdsBot-Google');
+              // nlcrawler/1.0 (+http://northernlight.com/)
+              $forbidden_agents = array('CloudFlare-AlwaysOnline', 'Apache-HttpClient', 'Httpful', 'bingbot', 'msnbot', 'BingPreview', 'Googlebot', 'AdsBot-Google', 'Twitterbot', 'nlcrawler');
               $forbidden_countries = array('CN', 'RO');
               if (empty($_SERVER['HTTP_USER_AGENT']) || in_array($_SERVER['HTTP_CF_IPCOUNTRY'], $forbidden_countries) || gv_misc_stringHasSomeOfSubstrings($_SERVER['HTTP_USER_AGENT'], $forbidden_agents)) {
                 $source_notice =  empty($_SERVER['HTTP_USER_AGENT']) ? ' [NO js, Empty User Agent]' : (in_array($_SERVER['HTTP_CF_IPCOUNTRY'], $forbidden_countries) ? ' [NO js, Forbidden Country]' :  ' [NO js, Forbidden User Agent]');
@@ -17584,7 +17585,7 @@ function gv_misc_watchdog(array $log_entry) {
   
   // http://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0
   // Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm), IP 157.55.39.197 
-  $allowed_bots_user_agents = array('bingbot', 'msnbot', 'BingPreview', 'CloudFlare-AlwaysOnline', 'Googlebot', 'AdsBot-Google');
+  $allowed_bots_user_agents = array('bingbot', 'msnbot', 'BingPreview', 'CloudFlare-AlwaysOnline', 'Googlebot', 'AdsBot-Google', 'Twitterbot', 'nlcrawler');
   
   $log_entry_types = array(
     'access' => array('page not found', 'access denied', 'user'),

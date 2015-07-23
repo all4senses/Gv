@@ -473,7 +473,7 @@ function gv_blocks_block_info() {
   );
   
   $blocks['buchart_alteredview'] = array(
-    'info' => 'Altered bu chart from view - now with rotated first 4 providers',
+    'info' => 'Altered bu chart from view - now with rotated providers',
     'cache' => DRUPAL_NO_CACHE,
   );
   
@@ -7677,8 +7677,14 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         return;
       }
       
+      dpm($view->result);
       $random_array = array_slice($view->result, 0, 7);
-
+      
+      if ($_GET['q'] != 'bing/business-voip') {
+        unset(@$view->result[7], @$view->result[8], @$view->result[9]);
+      }
+      dpm($view->result);
+      
       foreach ($random_array as $key => $result) {
 
         // Define original providers positions
