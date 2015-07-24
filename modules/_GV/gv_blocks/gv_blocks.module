@@ -7677,13 +7677,11 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         return;
       }
       
-      dpm($view->result);
-      dpm($_GET['q']);
-      $random_array = array_slice($view->result, 0, 7);
+      //$random_array = array_slice($view->result, 0, 7);
+      // Now we take all 10 providers from the views, and unset not used later... in versions, if needed
+      $random_array = array_slice($view->result, 0, 10);
       
-      if ($_GET['q'] != 'bing/business-voip' && $_GET['q'] != 'node/5467') {
-        unset($view->result[7], $view->result[8], $view->result[9]);
-      }
+      
       dpm($view->result);
       
       foreach ($random_array as $key => $result) {
@@ -7726,6 +7724,16 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         elseif ($result->nid == 191) {
           // Jive page nid is 191
           $fixed_positions['Jive_key'] = $key;
+        }
+        
+        elseif ($result->nid == 1387) {
+          $fixed_positions['AlliancePhones_key'] = $key;
+        }
+        elseif ($result->nid == 2054) {
+          $fixed_positions['VoIPstudio_key'] = $key;
+        }
+        elseif ($result->nid == 1377) {
+          $fixed_positions['1-VoIP_key'] = $key;
         }
       }
 
@@ -8392,8 +8400,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           break; // End of case 'v5':
         
 
-          
+        // ONLY ppc/businss-voip
+        // NOT bing/business-voip  
         case 'v6':
+          
           
           
           // Old v4
@@ -8409,7 +8419,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
 //          Position 3 - should remain Vonage (no change)
 //          Position 4 - Corvisa
 //          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
-           
+          
+          // We should have here only 7 providers, unset others if any
+          unset($view->result[7], $view->result[8], $view->result[9]);
+          unset($random_array[7], $random_array[8], $random_array[9]);
           
           //$iteration_count = $vonage_is_2 = 0;
           
@@ -8496,6 +8509,119 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // For bing/business-voip
+        case 'v7':  
+          
+          
+          // Old v4
+//          Position 1 - should remain RingCentral (no change)
+//          Position 2 - should remain Mitel (no change)
+//          Position 3 - should remain Vonage (no change)
+//          Position 4 - Corvisa
+//          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
+//                    
+          // New
+//          Position 1, 2, 3 - even rotation of RC, Mitel, Vonage
+//          Position 4 - should remain Corvisa
+//          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
+//          Position 7, 8, 9 - even rotation of Alliance, VoIPStudio, 1-VoIP
+           
+          
+          //$iteration_count = $vonage_is_2 = 0;
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 9) {
+              
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'Jive' => array('5' => 0, '6' => 0, '7' => 0),
+                        'Nextiva' => array('5' => 0, '6' => 0, '7' => 0),
+                        '8x8' => array('5' => 0, '6' => 0, '7' => 0),
+                      );
+          }
+
+          $random_index = array($fixed_positions['Nextiva_key'], $fixed_positions['8x8_key'], $fixed_positions['Jive_key']);
+          
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+                    if($count_cur++ >10000) {
+                      break;
+                    };
+          }while (
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                       !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][5] < 3) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][6] < 3) || ($random_index[2] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][7] < 3) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      !( ($random_index[0] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][5] < 3) || ($random_index[1] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][6] < 3) || ($random_index[2] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][7] < 3) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[0] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][5] < 3) || ($random_index[1] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 3) || ($random_index[2] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 3) ) 
+                    )
+
+                  );
+
+          $result_index = array(
+              0 => $fixed_positions['RingCentral_key'],
+              1 => $fixed_positions['Mitel_key'],
+              2 => $fixed_positions['Vonage_key'],
+              3 => $fixed_positions['Corvisa_key'],
+              
+              4 => $random_index[0],
+              5 => $random_index[1],
+              6 => $random_index[2],
+          );
+          
+          
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+
+          foreach ($random_index as $random_position => $fixed_index) {
+            switch ($fixed_index) {
+              case $fixed_positions['Nextiva_key']:
+                $gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 5] += 1;
+                break;
+              case $fixed_positions['Jive_key']:
+                $gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 5] += 1;
+                break;
+              case $fixed_positions['8x8_key']:
+                $gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 5] += 1;
+                break;
+            }
+          }
+          
+          $random_index = $result_index;
+          
+          
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          //dpm('Random counter = ' . $count_cur);
+
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v7':
+        
+        
+        
       } // End of switch ($version) {
       
       
@@ -8513,7 +8639,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
       // And correspondingly recreate fields with ratings
       // Uncomment to set fixed scores.
       /**/
-      $fixed_ratings = array(4.9, 4.7, 4.6, 4.5, 4.4, 4.2, 3.9, 3.9, 3.7, 3.5);
+      $fixed_ratings = array(4.9, 4.7, 4.6, 4.5, 4.4, 4.2, 3.9, 3.7, 3.6, 3.3);
       foreach ($view->result as $position => $field) {
         
         // Jive should always has the original rating.
@@ -8645,7 +8771,12 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
         //$version = 'v3-1';
         //$version = 'v4'; //$user->uid == 1 ? 'v4' : 'v3-1'; //$user->uid == 1 ? 'v3-2' : 'v3-1'; //'v3-1';
       
-        $version = 'v6'; //$user->uid ? 'v6' : 'v5'; // 'v5'
+        if ($_GET['q'] == 'bing/business-voip' || $_GET['q'] == 'node/5467') {
+          $version = 'v7';
+        }
+        else {
+          $version = 'v6'; //$user->uid ? 'v6' : 'v5'; // 'v5'
+        }
         break;
       
   }
