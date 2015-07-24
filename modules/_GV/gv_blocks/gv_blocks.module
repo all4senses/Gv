@@ -8569,7 +8569,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           do {
             shuffle($random_index);
             $count_cur++;
-                    if($count_cur++ >200000) {
+                    if($count_cur++ >2000000) {
                       break;
                     };
           }while (
@@ -8665,33 +8665,33 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           foreach ($random_index as $random_position => $fixed_index) {
             switch ($fixed_index) {
               case $fixed_positions['RingCentral_key']:
-                $gv_rotate_data___block_top_bu_ppc['RingCentral'][$random_position + 1] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['RingCentral'][$random_position + 1] += 1;
                 break;
               case $fixed_positions['Mitel_key']:
-                $gv_rotate_data___block_top_bu_ppc['Mitel'][$random_position + 1] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['Mitel'][$random_position + 1] += 1;
                 break;
               case $fixed_positions['Vonage_key']:
-                $gv_rotate_data___block_top_bu_ppc['Vonage'][$random_position + 1] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['Vonage'][$random_position + 1] += 1;
                 break;
               
               case $fixed_positions['Nextiva_key']:
-                $gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 2] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 2] += 1;
                 break;
               case $fixed_positions['Jive_key']:
-                $gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 2] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 2] += 1;
                 break;
               case $fixed_positions['8x8_key']:
-                $gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 2] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 2] += 1;
                 break;
               
               case $fixed_positions['AlliancePhones_key']:
-                $gv_rotate_data___block_top_bu_ppc['AlliancePhones'][$random_position + 2] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['AlliancePhones'][$random_position + 2] += 1;
                 break;
               case $fixed_positions['VoIPstudio_key']:
-                $gv_rotate_data___block_top_bu_ppc['VoIPstudio'][$random_position + 2] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['VoIPstudio'][$random_position + 2] += 1;
                 break;
               case $fixed_positions['1-VoIP_key']:
-                $gv_rotate_data___block_top_bu_ppc['1-VoIP'][$random_position + 2] += 1;
+                @$gv_rotate_data___block_top_bu_ppc['1-VoIP'][$random_position + 2] += 1;
                 break;
             }
           }
