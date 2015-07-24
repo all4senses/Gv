@@ -8564,12 +8564,15 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
                                 $fixed_positions['Nextiva_key'], $fixed_positions['8x8_key'], $fixed_positions['Jive_key'],
                                 $fixed_positions['AlliancePhones_key'], $fixed_positions['VoIPstudio_key'], $fixed_positions['1-VoIP_key']              
                   );
+          $random_index_save = $random_index;
           
           $count_cur = 0;
           do {
             shuffle($random_index);
             $count_cur++;
-                    if($count_cur++ >2000000) {
+                    if($count_cur++ >500000) {
+                      // Left unchanged, not shuffled
+                      $random_index = $random_index_save;
                       break;
                     };
           }while (
