@@ -17681,7 +17681,7 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
   foreach ($results as $result) {
     $result->data = unserialize($result->data);
     //$quotes[date('m\/Y', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
-    $quotes[date('m\/d\/Y H:i:s', $result->timestamp) . ' (' . time() . ')'] = $result;
+    $quotes[date('m\/d\/Y H:i:s', $result->timestamp) . ' (' . rand(1,1000) . ')'] = $result;
     $csv .= date('m\/d\/Y H:i:s', $result->timestamp) . ';' . @$result->data['Email'] . ';' . @$result->data['Company'] . ';' . @$result->data['Phone #'] . ';' . @$result->data['Phones needed'] . ';' . @$result->data['First Name'] . ';' . @$result->data['Last Name'] . ';' . @$result->data['Source'] . '_' . @$result->data['Version'] . ';' . @$result->ip . ';' . @$result->data['$_SERVER']['HTTP_CF_IPCOUNTRY'] . '
 ';
   }
