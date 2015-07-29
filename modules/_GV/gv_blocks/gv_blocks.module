@@ -516,7 +516,10 @@ function gv_blocks_block_info() {
     'info' => 'Get quote popup on providers lists WC',
     'cache' => DRUPAL_NO_CACHE,
   );
-  
+  $blocks['getQuotePopup_onLists_ifa'] = array(
+    'info' => 'Get quote popup on providers lists IFA',
+    'cache' => DRUPAL_NO_CACHE,
+  );
   
   $blocks['main_menu_splitted'] = array(
     'info' => 'Main menu splitted, without removed global $main_menu_inner_ul_removed',
@@ -1083,6 +1086,11 @@ function gv_blocks_block_view($delta = '') {
     case 'getQuotePopup_onLists_wc':
       $block['subject'] = '';
       $block['content'] = gv_blocks_get_requestQuote_popup_onLists('wc');
+      break;
+    
+    case 'getQuotePopup_onLists_ifa':
+      $block['subject'] = '';
+      $block['content'] = gv_blocks_get_requestQuote_popup_onLists('ifa');
       break;
     
     case 'main_menu_splitted':
@@ -6291,7 +6299,7 @@ function gv_blocks_get_requestQuote_popup_onLists_helper($case = 'cc') {
 
 
 
-  if ($case == 'wc') {
+  if ($case == 'wc' || $case == 'ifa') {
 
     $out = 
      '
