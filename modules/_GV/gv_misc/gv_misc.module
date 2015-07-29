@@ -17650,14 +17650,26 @@ function gv_misc_watchdog(array $log_entry) {
 
 function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, $to = NULL) {
   $provider = 'RingCentral';
-  $from = strtotime('1/1/14');
-  $to = strtotime('7/1/15');
+  $from = '1/1/14'; $to = '7/1/15';
+  if (!empty($_GET['from'])) {
+    $from = $_GET['from'];
+  }
+  if (!empty($_GET['to'])) {
+    $to = $_GET['to'];
+  }
+  if (isset($_GET['provider'])) {
+    $provider = $_GET['provider'];
+  }
+  $from = strtotime($from); $to = strtotime($to);
+  
   $query = db_select('gv_quote_requests', 'q');
   $query->fields('q');
   $query->condition('q.timestamp', $from, '>=');
   $query->condition('q.timestamp', $to, '<');
-  $query->condition('q.data', '%%:"' . $provider . '";i:1;%%', 'LIKE');
-  $results = $query->execute()->fetchAllAssoc('timestamp');
+  if ($provider) {
+    $query->condition('q.data', '%%:"' . $provider . '";i:1;%%', 'LIKE');
+  }
+  $results = $query->execute(); //->fetchAllAssoc('timestamp');
   //dpm($results);
   
   $quotes = NULL;
@@ -17666,10 +17678,10 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
           
 ';
   
-  foreach ($results as $time => $result) {
+  foreach ($results as $result) {
     $result->data = unserialize($result->data);
     //$quotes[date('m\/Y', $time)][date('m\/d\/Y H:i:s', $time)] = $result;
-    $quotes[date('m\/d\/Y H:i:s', $time)] = $result;
+    $quotes[date('m\/d\/Y H:i:s', $result->timestamp) . ' (' . time() . ')'] = $result;
     $csv .= date('m\/d\/Y H:i:s', $time) . ';' . @$result->data['Email'] . ';' . @$result->data['Company'] . ';' . @$result->data['Phone #'] . ';' . @$result->data['Phones needed'] . ';' . @$result->data['First Name'] . ';' . @$result->data['Last Name'] . ';' . @$result->data['Source'] . '_' . @$result->data['Version'] . ';' . @$result->ip . ';' . @$result->data['$_SERVER']['HTTP_CF_IPCOUNTRY'] . '
 ';
   }
