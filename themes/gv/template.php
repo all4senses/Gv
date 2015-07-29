@@ -528,6 +528,10 @@ function gv_html_head_alter(&$head_elements) {
   
   $head_elements['system_meta_content_type']['#weight'] = -8;
   
+  // Remove discription dublicates.
+  if (!empty($head_elements['metatag_description']['#value']) && !empty($head_elements['description']['#value'])) {
+    unset($head_elements['description']);
+  }
   
   if (isset($head_elements['metatag_description'])) {
     $head_elements['metatag_description']['#weight'] = -15;
