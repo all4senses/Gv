@@ -518,7 +518,7 @@ function gv_preprocess_search_results(&$variables) {
  * We are overwriting the default meta character type tag with HTML5 version.
  */
 function gv_html_head_alter(&$head_elements) {
-  dpm($head_elements);
+  //dpm($head_elements);
   $head_elements['system_meta_content_type']['#attributes'] = array(
     'charset' => 'utf-8'
   );
@@ -529,7 +529,7 @@ function gv_html_head_alter(&$head_elements) {
   $head_elements['system_meta_content_type']['#weight'] = -8;
   
   // Remove discription dublicates.
-  if (!empty($head_elements['metatag_description']['#value']) && !empty($head_elements['description']['#value'])) {
+  if (!empty($head_elements['metatag_description']['#value']) && !empty($head_elements['description']['#attributes']['content'])) {
     unset($head_elements['description']);
   }
   
@@ -698,7 +698,7 @@ function gv_html_head_alter(&$head_elements) {
     );
   }
   
-    dpm($head_elements);  
+    //dpm($head_elements);  
 }
 
 
