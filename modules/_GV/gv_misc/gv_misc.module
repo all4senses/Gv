@@ -17667,7 +17667,7 @@ function gv_misc_report_quoteRequests_autoleads($provider = NULL, $from = NULL, 
   $query->condition('q.timestamp', $from, '>=');
   $query->condition('q.timestamp', $to, '<');
   if ($provider) {
-    $query->condition('q.data', '%%:"' . $provider . '";.:1;%%', 'LIKE');
+    $query->condition('q.data', '%%:"' . $provider . '";.?:1;%%', 'LIKE');
   }
   $results = $query->execute(); //->fetchAllAssoc('timestamp');
   //dpm($results);
