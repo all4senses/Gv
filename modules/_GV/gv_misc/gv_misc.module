@@ -2517,6 +2517,23 @@ function gv_misc_trackClick_ajax() {
 
 
 /**
+ * Checks if url exists on the site (for tracking clicks additional check), using url_alias table, etc.
+ */
+function gv_misc_urlExists($url) {
+  $url = str_replace('http://getvoip.com/', '', $url);
+  if (strpos($url, '?')) {
+    list($url, ) = explode('?', $url);
+  }
+
+  $query = db_select('url_alias', 'a')
+      ->fields('a', array('source'));
+
+  $query->condition('a.alias', $url);
+  return $query->execute()->fetchField();
+}
+
+
+/**
  * Redirect to an external url and track the data without params.
  */
 function gv_misc_goToExternalUrl2() {
@@ -2573,8 +2590,14 @@ function gv_misc_goToExternalUrl2() {
             }
             
             if ($click_page) {
-              if ($click_page == 'http://getvoip.com/home' || $click_page == 'http://getvoip.com/') {
+              if ($click_page == 'http://getvoip.com/home' || $click_page == 'http://getvoip.com/' ) {
                 $source_notice = ' [bad /home source!!! - Not saved/not redirected]';
+                $click_page = NULL;
+                $report_strange_click = TRUE;
+                $track_click_ok = FALSE;
+              }
+              elseif (!gv_misc_urlExists($click_page)) {
+                $source_notice = ' [bad NOT EXISTING source!!! - Not saved/not redirected]';
                 $click_page = NULL;
                 $report_strange_click = TRUE;
                 $track_click_ok = FALSE;
