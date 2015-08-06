@@ -1344,7 +1344,10 @@ function boost_mkdir($directory) {
 
     // Try to create the directory.
     $mode = variable_get('file_chmod_directory', 0775);
-    if (!mkdir($directory, $mode, TRUE)) {
+    // a4s fix for Warning: mkdir(): File exists in boost_mkdir()
+    // https://www.drupal.org/node/2315043
+    // https://www.drupal.org/node/252955#comment-1151305
+    if (!@mkdir($directory, $mode, TRUE)) {
       watchdog('boost', 'Could not create the directory %dir on your system', array('%dir' => $directory), WATCHDOG_ERROR);
       return FALSE;
     }
