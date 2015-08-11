@@ -8750,6 +8750,10 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
 //          Position 5: Fixed placement for Corvisa
 //          Position 6 and 7: evenly rotate 8x8 and Jive
           
+          // We should have here only 7 providers, unset others if any
+          unset($view->result[7], $view->result[8], $view->result[9]);
+          unset($random_array[7], $random_array[8], $random_array[9]);
+          
           $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
 
           if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 6) 
