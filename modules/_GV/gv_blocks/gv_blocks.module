@@ -8553,7 +8553,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
 //          Position 1, 2, 3 - even rotation of RingCentral, Mitel, Vonage
 //          Position 4 - should remain Corvisa
 //          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
-//          Position 7, 8, 9 - even rotation of AlliancePhones, VoIPstudio, 1-VoIP
+//          Position 8, 9, 10 - even rotation of AlliancePhones, VoIPstudio, 1-VoIP
            
           
           //$iteration_count = $vonage_is_2 = 0;
@@ -8730,6 +8730,165 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         
         
         
+        
+        
+        
+        // For ppc/business-voip
+        case 'v8':  
+          
+       
+          // Old v7
+//          Position 1, 2, 3 - even rotation of RingCentral, Mitel, Vonage
+//          Position 4 - should remain Corvisa
+//          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
+//          Position 8, 9, 10 - even rotation of AlliancePhones, VoIPstudio, 1-VoIP
+     
+          // New
+          
+//          Position 1, 2, 3: evenly rotate Nextiva, RingCentral, Mitel
+//          Position 4: fixed placement for Vonage
+//          Position 5: Fixed placement for Corvisa
+//          Position 6 and 7: evenly rotate 8x8 and Jive
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 6) 
+            {
+              
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'RingCentral' => array('1' => 0, '2' => 0, '3' => 0),
+                        'Mitel' => array('1' => 0, '2' => 0, '3' => 0),
+                        'Nextiva' => array('1' => 0, '2' => 0, '3' => 0),
+                  
+                        'Jive' => array('6' => 0, '7' => 0),
+                        '8x8' => array('6' => 0, '7' => 0),
+                      );
+          }
+
+          $random_index = array($fixed_positions['RingCentral_key'], $fixed_positions['Mitel_key'], $fixed_positions['Nextiva_key'],
+                                $fixed_positions['Jive_key'], $fixed_positions['8x8_key'], 
+                  );
+          $random_index_save = $random_index;
+          
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+                    if($count_cur++ >500000) {
+                      // Left unchanged, not shuffled
+                      $random_index = $random_index_save;
+                      break;
+                    };
+          }while (
+                    (
+                      isset($fixed_positions['RingCentral_key']) 
+                      && 
+                       !( ($random_index[0] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral'][1] < 2) || ($random_index[1] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral'][2] < 2) || ($random_index[2] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral'][3] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Mitel_key']) 
+                      && 
+                      !( ($random_index[0] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][1] < 2) || ($random_index[1] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][2] < 2) || ($random_index[2] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][3] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                     !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][1] < 2) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][2] < 2) || ($random_index[2] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][3] < 2) )
+                    )
+                  
+                  
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 3) || ($random_index[4] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 3) ) 
+                    )
+                    ||  
+                    (
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      !( ($random_index[3] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][6] < 3) || ($random_index[4] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][7] < 3) )
+                    )
+
+                  );
+
+//          $result_index = array(
+//              0 => $fixed_positions['RingCentral_key'],
+//              1 => $fixed_positions['Mitel_key'],
+//              2 => $fixed_positions['Vonage_key'],
+//              3 => $fixed_positions['Corvisa_key'],
+//              
+//              4 => $random_index[0],
+//              5 => $random_index[1],
+//              6 => $random_index[2],
+//          );
+
+          /*
+          $result_index = array(
+              0 => $random_index[0],
+              1 => $random_index[1],
+              2 => $random_index[2],
+              3 => $fixed_positions['Corvisa_key'],
+              
+              4 => $random_index[3],
+              5 => $random_index[4],
+              6 => $random_index[5],
+              
+              7 => $random_index[6],
+              8 => $random_index[7],
+              9 => $random_index[8],
+          );
+          */
+          
+          $result_index = array(
+              0 => $random_index[0],
+              1 => $random_index[1],
+              2 => $random_index[2],
+              
+              3 => $fixed_positions['Vonage_key'], // 4th pos
+              4 => $fixed_positions['Corvisa_key'], // 5th pos
+
+              5 => $random_index[3],
+              6 => $random_index[4],
+          );
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+          //dpm($random_index);
+          foreach ($random_index as $random_position => $fixed_index) {
+            switch ($fixed_index) {
+              case $fixed_positions['RingCentral_key']:
+                @$gv_rotate_data___block_top_bu_ppc['RingCentral'][$random_position + 1] += 1;
+                break;
+              case $fixed_positions['Mitel_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Mitel'][$random_position + 1] += 1;
+                break;
+              case $fixed_positions['Nextiva_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 1] += 1;
+                break;
+              
+              case $fixed_positions['Jive_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 3] += 1;
+                break;
+              case $fixed_positions['8x8_key']:
+                @$gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 3] += 1;
+                break;
+            }
+          }
+          
+          $random_index = $result_index;
+          
+          dpm('Random counter = ' . $count_cur);
+          dpm($gv_rotate_data___block_top_bu_ppc);
+          
+
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v8':
+        
+        
       } // End of switch ($version) {
       
       
@@ -8883,7 +9042,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
           $version = 'v7';
         }
         else {
-          $version = 'v6'; //$user->uid ? 'v6' : 'v5'; // 'v5'
+          $version = $user->uid ? 'v8' : 'v6'; 
         }
         break;
       
