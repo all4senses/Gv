@@ -12637,6 +12637,22 @@ function wdg_misc_elementValidate_url($element, &$form_state) {
 
 
 /**
+ * Helper function for sorting providers by erating with uasort function.
+ * 
+ * Example of using:
+ * 
+ * uasort($array_with_elements_contained_key_name, 'gv_misc_sortArrayBlockedIPsByCountyAmount');
+ */
+function gv_misc_sortArrayBlockedIPsByCountyAmount($a, $b) {
+  $a_amount = count($a); $b_amount = count($b);
+  if ($a_amount == $b_amount) {
+      return 0;
+  }
+  return ($a_amount > $b_amount) ? -1 : 1;
+}
+
+
+/**
  * Helper function for sorting by weight with uasort function.
  * 
  * Example of using:

@@ -2089,7 +2089,7 @@ function gv_blocks_getAboutTheAuthor($uid) {
  */
 function gv_blocks_getFooterAbout() {
   return '<div class="c">GetVoIP.com is an independent provider comparison and shoppers guide, offering unbiased consumer reviews. We monetize from advertisers and affiliates. This does not influence the rankings and reviews on our website. 
-            <div>Р вЂ™Р’В© 2015 GetVoIP.com | All Rights Reserved</div>
+            <div>Р В РІР‚в„ўР вЂ™Р’В© 2015 GetVoIP.com | All Rights Reserved</div>
          </div>';
 }
 
@@ -3887,14 +3887,14 @@ function gv_blocks_libraryArticlesTeasers_customPagesAmountPager() {
   }
   
   if ($page_prev !== FALSE) {
-    $page_prev = l('Older Posts Р Р†Р вЂљРЎвЂќ', $_GET['q'], array('query' => array('page' => $page_prev)));
+    $page_prev = l('Older Posts Р В Р вЂ Р В РІР‚С™Р РЋРІР‚Сњ', $_GET['q'], array('query' => array('page' => $page_prev)));
   }
   if ($page_next !== FALSE) {
     if (!$page_next) {
-      $page_next = l('Р Р†Р вЂљРІвЂћвЂ“ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
+      $page_next = l('Р В Р вЂ Р В РІР‚С™Р Р†РІР‚С›РІР‚вЂњ Newer Posts', $_GET['q'], array('attributes' => array('class' => array('newer'))));
     }
     else {
-      $page_next = l('Р Р†Р вЂљРІвЂћвЂ“ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
+      $page_next = l('Р В Р вЂ Р В РІР‚С™Р Р†РІР‚С›РІР‚вЂњ Newer Posts', $_GET['q'], array('query' => array('page' => $page_next), 'attributes' => array('class' => array('newer'))));
     }
   }
   
@@ -4767,13 +4767,13 @@ function gv_blocks_get_footerMenuPlain($version = 1) {
       //dpm($menu);
     }
     
-    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    $out = theme('gv_misc_footerLinksPlain', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<span> | </span>')); // . '<div class="c">Р В Р’В Р Р†Р вЂљРІвЂћСћР В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
-  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В Р’В Р Р†Р вЂљРІвЂћСћР В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
   
   return $out;
 }
@@ -4792,13 +4792,13 @@ function gv_blocks_get_footerMenu() {
   }
   else {
     $menu = menu_build_tree('menu-footer-menu');
-    $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+    $out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В Р’В Р Р†Р вЂљРІвЂћСћР В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
     
     cache_set($cid, $out, 'cache', strtotime('+31 day'));
   } 
   
   //$menu = menu_build_tree('menu-footer-menu');
-  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
+  //$out = theme('gv_misc_submenuSimple', array('submenu' => array('below' => $menu), 'class' => 'menu', 'delimiter' => '<li> | </li>')); // . '<div class="c">Р В Р’В Р Р†Р вЂљРІвЂћСћР В РІР‚в„ўР вЂ™Р’В© 2012 GetVoIP.com | All Rights Reserved</div>';
   
   return $out;
 }
@@ -6445,7 +6445,7 @@ function gv_blocks_get_exitintent_pdf() {
 
                     <div class="step step-one">
                           <div class="exit-intent-intro">
-                            <div class="exit-intent-intro-line _pdf">Get Your Essential Buyer\'s Guide to Business VoIP Services РІР‚вЂќ 
+                            <div class="exit-intent-intro-line _pdf">Get Your Essential Buyer\'s Guide to Business VoIP Services Р Р†Р вЂљРІР‚Сњ 
                               <span class="exit-intent-intro-line-highlight">Free!</span>
                             </div>
                             <div class="exit-intent-intro-line-4 _pdf">To Download, Tell us:</div>
@@ -8893,6 +8893,187 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
           break; // End of case 'v8':
         
         
+        
+        
+        
+        
+        
+        // For ppc/business-voip
+        case 'v9':  
+          
+       
+          // Old v8
+//          Position 1, 2, 3: evenly rotate Nextiva, RingCentral, Mitel
+//          Position 4: fixed placement for Vonage
+//          Position 5: Fixed placement for Corvisa
+//          Position 6 and 7: evenly rotate 8x8 and Jive
+          
+          // New
+          
+//          Position 1: fixed placement for RingCentral
+//          Position 2, 3, 4: evenly rotate Nextiva, Mitel, Vonage
+//          Position 5: Fixed placement for Corvisa
+//          Position 6 and 7: evenly rotate 8x8 and Jive
+          
+          // We should have here only 7 providers, unset others if any
+          unset($view->result[7], $view->result[8], $view->result[9]);
+          unset($random_array[7], $random_array[8], $random_array[9]);
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 6) 
+            {
+              
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'Vonage' => array('2' => 0, '3' => 0, '4' => 0),
+                        'Mitel' => array('2' => 0, '3' => 0, '4' => 0),
+                        'Nextiva' => array('2' => 0, '3' => 0, '4' => 0),
+                  
+                        'Jive' => array('6' => 0, '7' => 0),
+                        '8x8' => array('6' => 0, '7' => 0),
+                      );
+          }
+
+          $random_index = array($fixed_positions['Vonage_key'], $fixed_positions['Mitel_key'], $fixed_positions['Nextiva_key'],
+                                $fixed_positions['Jive_key'], $fixed_positions['8x8_key'], 
+                  );
+          $random_index_save = $random_index;
+          
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+                    // Overflow protection.
+                    if($count_cur++ > 500000) {
+                      // Left unchanged, not shuffled
+                      $random_index = $random_index_save;
+                      break;
+                    };
+          }while (
+                    (
+                      isset($fixed_positions['Vonage_key']) 
+                      && 
+                       !( ($random_index[0] == $fixed_positions['Vonage_key'] && $gv_rotate_data___block_top_bu_ppc['Vonage'][2] < 2) || ($random_index[1] == $fixed_positions['Vonage_key'] && $gv_rotate_data___block_top_bu_ppc['Vonage'][3] < 2) || ($random_index[2] == $fixed_positions['Vonage_key'] && $gv_rotate_data___block_top_bu_ppc['Vonage'][4] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Mitel_key']) 
+                      && 
+                      !( ($random_index[0] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][2] < 2) || ($random_index[1] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][3] < 2) || ($random_index[2] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][4] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                     !( ($random_index[0] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][2] < 2) || ($random_index[1] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][3] < 2) || ($random_index[2] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][4] < 2) )
+                    )
+                  
+                  
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 3) || ($random_index[4] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 3) ) 
+                    )
+                    ||  
+                    (
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      !( ($random_index[3] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][6] < 3) || ($random_index[4] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][7] < 3) )
+                    )
+
+                  );
+
+//          $result_index = array(
+//              0 => $fixed_positions['RingCentral_key'],
+//              1 => $fixed_positions['Mitel_key'],
+//              2 => $fixed_positions['Vonage_key'],
+//              3 => $fixed_positions['Corvisa_key'],
+//              
+//              4 => $random_index[0],
+//              5 => $random_index[1],
+//              6 => $random_index[2],
+//          );
+
+          /*
+          $result_index = array(
+              0 => $random_index[0],
+              1 => $random_index[1],
+              2 => $random_index[2],
+              3 => $fixed_positions['Corvisa_key'],
+              
+              4 => $random_index[3],
+              5 => $random_index[4],
+              6 => $random_index[5],
+              
+              7 => $random_index[6],
+              8 => $random_index[7],
+              9 => $random_index[8],
+          );
+          */
+          /*
+          $result_index = array(
+              0 => $random_index[0],
+              1 => $random_index[1],
+              2 => $random_index[2],
+              
+              3 => $fixed_positions['Vonage_key'], // 4th pos
+              4 => $fixed_positions['Corvisa_key'], // 5th pos
+
+              5 => $random_index[3],
+              6 => $random_index[4],
+          );
+          */
+          $result_index = array(
+              
+              
+              0 => $fixed_positions['RingCentral_key'], // 1th pos 
+              
+              1 => $random_index[0],
+              2 => $random_index[1],
+              3 => $random_index[2],
+              
+
+              4 => $fixed_positions['Corvisa_key'], // 5th pos
+
+              5 => $random_index[3],
+              6 => $random_index[4],
+          );
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+          //dpm($random_index);
+          foreach ($random_index as $random_position => $fixed_index) {
+            switch ($fixed_index) {
+              case $fixed_positions['Vonage_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Vonage'][$random_position + 2] += 1;
+                break;
+              case $fixed_positions['Mitel_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Mitel'][$random_position + 2] += 1;
+                break;
+              case $fixed_positions['Nextiva_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 2] += 1;
+                break;
+              
+              case $fixed_positions['Jive_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 3] += 1;
+                break;
+              case $fixed_positions['8x8_key']:
+                @$gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 3] += 1;
+                break;
+            }
+          }
+          
+          $random_index = $result_index;
+          
+          //dpm('Random counter = ' . $count_cur);
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          
+
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v9':
+        
       } // End of switch ($version) {
       
       
@@ -9046,7 +9227,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
           $version = 'v7';
         }
         else {
-          $version =  'v8'; //$user->uid ? 'v8' : 'v6'; 
+          $version =  $user->uid ? 'v9' : 'v8'; 
         }
         break;
       

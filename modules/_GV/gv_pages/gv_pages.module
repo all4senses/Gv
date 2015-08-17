@@ -3596,7 +3596,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
             );
             $form['bottom_text']['center_text'] = array(
               '#type' => 'textarea',
-              '#title' => t('РЎenter text'),
+              '#title' => t('Р РЋenter text'),
               //'#description' => t(''),
               '#default_value' => isset($data['bottom_text']['center_text']) ? $data['bottom_text']['center_text'] : '',
             );
@@ -3779,7 +3779,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
               
               $form['s'][$service_type_key] = array(
                 '#type' => 'fieldset',
-                '#title' => "$service_type_title serviСЃes",
+                '#title' => "$service_type_title serviРЎРѓes",
                 '#collapsible' => TRUE,
                 '#collapsed' => TRUE,
                 '#states' => array(
@@ -10168,7 +10168,7 @@ function gv_pages_import_my_file_element_process($element, &$form_state, $form) 
 }
 
 /**
- * РЎreate Redirections In Bulk page.
+ * Р РЋreate Redirections In Bulk page.
  */
 function gv_pages_createRedirectionsInBulk_form($form, &$form_state) {
    
@@ -10810,4 +10810,119 @@ function gv_pages_BlockedIPs_overview() {
   $build['blocked_ips_pager'] = array('#theme' => 'pager');
 
   return $build;
+}
+
+
+function gv_pages_updateBlockedIPsFile() {
+  
+  
+  // Get header, predefined ips and footer files.
+  
+  $target_dir = '/home/gvadmin/_gv_block_ips/'; // '/home/gvadmin/public_html/dev/';
+  
+  
+  $header_data = file_get_contents($target_dir . 'block_ips_header.conf');
+  $predefined_ips_data = file_get_contents($target_dir . 'block_ips_predefined.conf');
+  $footer_data = file_get_contents($target_dir . 'block_ips_footer.conf');
+          
+  if (!$header_data || !$predefined_ips_data || !$footer_data) {
+    dpm('Block IPs file generation: Some source files are empty. Exited.');
+    return;
+  }
+  
+  //dpm($header_data);
+  //dpm($predefined_ips_data);
+  //dpm($footer_data);
+    
+    
+  // Generate IPs list from DB, groupped by type, country, etc.
+  
+  $query = db_select('blocked_ips', 'b');
+  $query->fields('b', array('iid', 'ip'));
+  
+  $query->leftJoin('gv_blocked', 'gb', 'gb.ip = b.ip');
+  $query->fields('gb', array('id', 'ip', 'timestamp_from', 'timestamp_to', 'blocked_count', 'last_updated', 'data', 'source', 'reason'));
+  
+  
+  $query->leftJoin('gv_ip_to_country', 'c', 'c.ip = b.ip');
+  $query->addField('c', 'country');
+
+  $results = $query->execute(); //->fetchAllAssoc('iid');
+  
+  //dpm($results);
+  $ips_by_type = array('Forbidden user agent' => NULL, 'Requested executables wp-login.php' => NULL, 'Requested executables Others' => NULL, 'Password brute force' => NULL, 'Requested admin section' => NULL, 'GV clicks' => NULL, 'Blocked by Admin' => NULL, 'Others' => NULL);
+  foreach ($results as $result) {
+    $result->country = $result->country ? $result->country : 'Others_countries';
+    if (strpos($result->reason, 'Forbidden user agent') !== FALSE) {
+      $ips_by_type['Forbidden user agent'][$result->country][] = $result;
+    }
+    elseif (strpos($result->source, 'Blocked by Admin') !== FALSE || strpos($result->reason, 'Admin explained') !== FALSE) {
+      $ips_by_type['Blocked by Admin'][$result->country][] = $result;
+    }
+    elseif (strpos($result->data, 'GV click') !== FALSE) {
+      $ips_by_type['GV clicks'][$result->country ][] = $result;
+    }
+    elseif (strpos($result->data, 'wp-login.php') !== FALSE) {
+      $ips_by_type['Requested executables wp-login.php'][$result->country][] = $result;
+    }
+    elseif (strpos($result->reason, 'Requested executables') !== FALSE) {
+      $ips_by_type['Requested executables Others'][$result->country][] = $result;
+    }
+    elseif (strpos($result->reason, 'Password brute force') !== FALSE) {
+      $ips_by_type['Password brute force'][$result->country][] = $result;
+    }
+    elseif (strpos($result->reason, 'Requested admin section') !== FALSE || strpos($result->data, 'user/register') !== FALSE || strpos($result->data, '/test') !== FALSE || strpos($result->data, '"message";s:5:"admin"') !== FALSE) {
+      $ips_by_type['Requested admin section'][$result->country][] = $result;
+    }
+    else {
+      $ips_by_type['Others'][$result->country][] = $result;
+    }
+  }
+  
+  //dpm($ips_by_type);
+  
+  $db_IPs_data = NULL;
+  foreach ($ips_by_type as $comment_type => $data) {
+    $ips_amount_by_type = NULL;
+    $comment_countries = '#Countries: ';
+    $str_ips = 'deny from';
+    uasort($data, 'gv_misc_sortArrayBlockedIPsByCountyAmount');
+    foreach ($data as $country => $ips) {
+      $ips_amount_by_country = count($ips);
+      $ips_amount_by_type += $ips_amount_by_country;
+      $comment_countries .= $country . ' - ' . $ips_amount_by_country . ', ';
+      foreach ($ips as $ip) {
+        $str_ips .= ' ' . $ip->ip;
+      }
+    }
+    $db_IPs_data .= '
+  
+
+
+#Threat type: ' . $comment_type . ' - ' . $ips_amount_by_type . '
+  
+' . $comment_countries . '
+  
+' . $str_ips;
+    
+  }
+  
+  //dpm($db_IPs_data);
+  
+  $output .= $header_data . $predefined_ips_data . $db_IPs_data . $footer_data;
+  
+  dpm($output);
+  
+  if (file_put_contents($target_dir . 'block_ips_2.conf', $output)) 
+  {
+    dpm('Success');
+  }
+
+  
+  // Join header, predefined IPs, generated IPs list and footer.
+  
+  
+  // Put the collected data to the file, overwrite mode
+  
+  
 }
