@@ -17306,6 +17306,8 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
     if ($drupal_set_message) {
       drupal_set_message($admin_message, 'warning');
     }
+    
+    gv_pages_updateBlockedIPsFile();
   }
   elseif ($op == 'unblock') {
     

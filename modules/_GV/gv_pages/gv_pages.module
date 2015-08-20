@@ -3055,7 +3055,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //    dpm($form_id);  dpm($form);
 //  }
   
-  //dpm($form_id);  dpm($form);
+  dpm($form_id);  dpm($form);
   // $conf['locale_custom_strings_en']['old string'] = 'new string'
   
   
@@ -10826,7 +10826,8 @@ function gv_pages_updateBlockedIPsFile() {
   $footer_data = file_get_contents($target_dir . 'block_ips_footer.conf');
           
   if (!$header_data || !$predefined_ips_data || !$footer_data) {
-    dpm('Block IPs file generation: Some source files are empty. Exited.');
+    //dpm('Block IPs file generation: Some source files are empty. Exited.');
+    watchdog('GV Block IPs Error', 'Some source files are empty. Exited.', NULL, WATCHDOG_WARNING);
     return;
   }
   
@@ -10911,11 +10912,11 @@ function gv_pages_updateBlockedIPsFile() {
   
   $output .= $header_data . $predefined_ips_data . $db_IPs_data . $footer_data;
   
-  dpm($output);
+  //dpm($output);
   
-  if (file_put_contents($target_dir . 'block_ips_2.conf', $output)) 
-  {
-    dpm('Success');
+  if (file_put_contents($target_dir . 'block_ips_2.conf', $output) && file_put_contents($target_dir . 'update.flag', '...')) {
+    //dpm('Success');
+    watchdog('GV Block IPs', 'The Block IP  file has been updated.', NULL, WATCHDOG_WARNING);
   }
 
   
