@@ -3032,6 +3032,35 @@ function gv_pages_theme($existing, $type, $theme, $path) {
 } 
 
 
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ * 
+ * Intercept the system interface Block IP submit function
+ * and add here custom GV block description, and update Block IPs file.
+ * 
+ */
+function gv_pages_ip_blocking_form_submit(&$form, &$form_state) {
+    dpm($form_state);  dpm($form);
+}
+
+
+/**
+ * Implements hook_form_submit().
+ *
+ * @return $form
+ *   Return nothing.
+ * 
+ * Intercept the system interface Block IP submit function
+ * and add here custom GV block description, and update Block IPs file.
+ * 
+ */
+function gv_pages_ip_blocking_delete_form_submit(&$form, &$form_state) {
+    dpm($form_state);  dpm($form);
+}
+
 
 /**
  * Implements hook_form_alter().
@@ -3055,7 +3084,7 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
 //    dpm($form_id);  dpm($form);
 //  }
   
-  dpm($form_id);  dpm($form);
+  //dpm($form_id);  dpm($form);
   // $conf['locale_custom_strings_en']['old string'] = 'new string'
   
   
@@ -3068,6 +3097,20 @@ function gv_pages_form_alter(&$form, &$form_state, $form_id) {
   // drupal_add_js('/sites/all/themes/gv_sky/js/main-menu-on-edit.js');
       
   switch ($form_id) {
+    
+    case 'system_ip_blocking_form':
+    
+      $form['#submit'][] = 'gv_pages_ip_blocking_form_submit';
+      
+      break;
+    
+    
+    case 'system_ip_blocking_delete':
+    
+      $form['#submit'][] = 'gv_pages_ip_blocking_delete_form_submit';
+      
+      break;
+    
     
     
     case 'user_login':
