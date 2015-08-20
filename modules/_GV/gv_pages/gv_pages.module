@@ -10860,12 +10860,9 @@ function gv_pages_BlockedIPs_overview() {
 
 function gv_pages_updateBlockedIPsFile() {
   
-  
-  // Get header, predefined ips and footer files.
-  
   $target_dir = '/home/gvadmin/_gv_block_ips/'; // '/home/gvadmin/public_html/dev/';
   
-  
+  // Get header, predefined ips and footer files.
   $header_data = file_get_contents($target_dir . 'block_ips_header.conf');
   $predefined_ips_data = file_get_contents($target_dir . 'block_ips_predefined.conf');
   $footer_data = file_get_contents($target_dir . 'block_ips_footer.conf');
@@ -10958,20 +10955,15 @@ function gv_pages_updateBlockedIPsFile() {
   
   //dpm($db_IPs_data);
   
-  $output .= $header_data . $predefined_ips_data . $db_IPs_data . $footer_data;
+  // Join header, predefined IPs, generated IPs list and footer.
+  $output = $header_data . $predefined_ips_data . $db_IPs_data . $footer_data;
   
   //dpm($output);
   
-  if (file_put_contents($target_dir . 'block_ips_2.conf', $output) && file_put_contents($target_dir . 'update.flag', '...')) {
+  // Put the collected data to the file, overwrite mode... and set a flag (by creating a file update.flag)
+  if (file_put_contents($target_dir . 'block_ips.conf', $output) && file_put_contents($target_dir . 'update.flag', '...')) {
     //dpm('Success');
     watchdog('GV Block IPs', 'The Block IP  file has been updated.', NULL, WATCHDOG_WARNING);
   }
 
-  
-  // Join header, predefined IPs, generated IPs list and footer.
-  
-  
-  // Put the collected data to the file, overwrite mode
-  
-  
 }
