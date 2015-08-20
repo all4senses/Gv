@@ -3043,7 +3043,8 @@ function gv_pages_theme($existing, $type, $theme, $path) {
  * 
  */
 function gv_pages_ip_blocking_form_submit(&$form, &$form_state) {
-    dpm($form_state);  dpm($form);
+    //dpm($form_state);  dpm($form);
+    gv_misc_IP_blockOrUnblock('system_interface_block_notify', $form_state['values']['ip']);
 }
 
 
@@ -3058,7 +3059,8 @@ function gv_pages_ip_blocking_form_submit(&$form, &$form_state) {
  * 
  */
 function gv_pages_ip_blocking_delete_form_submit(&$form, &$form_state) {
-    dpm($form_state);  dpm($form);
+    //dpm($form_state);  dpm($form);
+    gv_misc_IP_blockOrUnblock('system_interface_unblock_notify', $form_state['values']['blocked_ip']['ip']);
 }
 
 
@@ -10917,6 +10919,9 @@ function gv_pages_updateBlockedIPsFile() {
     }
     elseif (strpos($result->reason, 'Requested admin section') !== FALSE || strpos($result->data, 'user/register') !== FALSE || strpos($result->data, '/test') !== FALSE || strpos($result->data, '"message";s:5:"admin"') !== FALSE) {
       $ips_by_type['Requested admin section'][$result->country][] = $result;
+    }
+    elseif (strpos($result->source, 'System Interface Block IPs') !== FALSE) {
+      $ips_by_type['System Interface Block IPs'][$result->country][] = $result;
     }
     else {
       $ips_by_type['Others'][$result->country][] = $result;

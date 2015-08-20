@@ -17255,12 +17255,41 @@ function gv_misc_ipToCountry($op, $server, $source) {
 
 function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $blocked_count = NULL, $counted_by = NULL, $email = NULL, $timestamp_from = NULL, $timestamp_to = NULL, $data = NULL, $drupal_set_message = FALSE, $set_by = NULL) {
   
-  $query = db_select('blocked_ips', 'b')
-    ->fields('b', array('iid'));
-  $query->condition('b.ip', $ip);
-  $iid = $query->execute()->fetchField();
-
-  if ($op == 'block') {
+  
+  if ($op == 'system_interface_block_notify') {
+    
+    global $user;
+    
+    $current_time = time();
+    
+    // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+    $result = db_insert('gv_blocked')
+      ->fields(array(
+        'timestamp_from' => NULL,
+        'timestamp_to' => NULL, 
+        'email' => NULL,  
+        'ip' => $ip,
+        'last_updated' => $current_time,  
+        'blocked_count' => NULL, 
+        'counted_by' => NULL,  
+        'data' => NULL,
+        'source' => 'System Interface Block IPs',
+        'reason' => NULL,
+        'set_by' => $user->name,  
+      ))
+      ->execute();
+    
+    gv_pages_updateBlockedIPsFile();
+  }
+  elseif ($op == 'system_interface_unblock_notify') {
+    gv_pages_updateBlockedIPsFile();
+  }
+  elseif ($op == 'block') {
+    
+    $query = db_select('blocked_ips', 'b')
+      ->fields('b', array('iid'));
+    $query->condition('b.ip', $ip);
+    $iid = $query->execute()->fetchField();
 
     if ($iid) {
       if ($drupal_set_message) {
@@ -17311,6 +17340,11 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
   }
   elseif ($op == 'unblock') {
     
+    $query = db_select('blocked_ips', 'b')
+      ->fields('b', array('iid'));
+    $query->condition('b.ip', $ip);
+    $iid = $query->execute()->fetchField();
+    
     if (!$iid) {
       if ($drupal_set_message) {
         drupal_set_message('Nothing to do. The IP ' . $ip . ' has NOT been blocked yet!', 'warning');
@@ -17327,6 +17361,8 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
     if ($drupal_set_message) {
       drupal_set_message($admin_message, 'warning');
     }
+    
+    gv_pages_updateBlockedIPsFile();
   }
 
 }
