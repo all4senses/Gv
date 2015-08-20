@@ -17258,26 +17258,34 @@ function gv_misc_IP_blockOrUnblock($op, $ip, $source = NULL, $reason = NULL, $bl
   
   if ($op == 'system_interface_block_notify') {
     
-    global $user;
     
-    $current_time = time();
-    
-    // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
-    $result = db_insert('gv_blocked')
-      ->fields(array(
-        'timestamp_from' => NULL,
-        'timestamp_to' => NULL, 
-        'email' => NULL,  
-        'ip' => $ip,
-        'last_updated' => $current_time,  
-        'blocked_count' => NULL, 
-        'counted_by' => NULL,  
-        'data' => NULL,
-        'source' => 'System Interface Block IPs',
-        'reason' => NULL,
-        'set_by' => $user->name,  
-      ))
-      ->execute();
+    $query = db_select('gv_blocked', 'b')
+      ->fields('b', array('id'));
+    $query->condition('b.ip', $ip);
+    $id = $query->execute()->fetchField();
+
+    if (!$id) {
+        global $user;
+
+        $current_time = time();
+
+        // Add an IP to the GV temporary blocking table for futere references (having source and reason  fields  filled).
+        $result = db_insert('gv_blocked')
+          ->fields(array(
+            'timestamp_from' => NULL,
+            'timestamp_to' => NULL, 
+            'email' => NULL,  
+            'ip' => $ip,
+            'last_updated' => $current_time,  
+            'blocked_count' => NULL, 
+            'counted_by' => NULL,  
+            'data' => NULL,
+            'source' => 'System Interface Block IPs',
+            'reason' => NULL,
+            'set_by' => $user->name,  
+          ))
+          ->execute();  
+    }
     
     gv_pages_updateBlockedIPsFile();
   }
