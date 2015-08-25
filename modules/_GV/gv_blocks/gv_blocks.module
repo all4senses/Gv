@@ -8731,6 +8731,198 @@ function gv_blocks_chartFromView_altered_rotatedProviders__byType($view_n_displa
         
         
         
+          
+        // For bing/business-voip
+        case 'v7_without_1-VoIP':  
+          
+          
+          // Old v6
+//          Position 1 - should remain RingCentral (no change)
+//          Position 2 - should remain Mitel (no change)
+//          Position 3 - should remain Vonage (no change)
+//          Position 4 - Corvisa
+//          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
+//                    
+          // New
+//          Position 1, 2, 3 - even rotation of RingCentral, Mitel, Vonage
+//          Position 4 - should remain Corvisa
+//          Position 5, 6, 7 - even rotation of Jive, and Nextiva , and 8x8
+//          Position 8, 9, 10 - even rotation of AlliancePhones, VoIPstudio //Position 8, 9, 10 - even rotation of AlliancePhones, VoIPstudio, 1-VoIP
+           
+          
+          //$iteration_count = $vonage_is_2 = 0;
+          
+          $gv_rotate_data___block_top_bu_ppc = variable_get($settings_name, NULL);
+
+          if(!is_array($gv_rotate_data___block_top_bu_ppc) || empty($gv_rotate_data___block_top_bu_ppc) || $gv_rotate_data___block_top_bu_ppc['iteration_count'] >= 6) 
+            {
+              
+              $gv_rotate_data___block_top_bu_ppc = array('iteration_count' => 0, 
+                        'RingCentral' => array('1' => 0, '2' => 0, '3' => 0),
+                        'Mitel' => array('1' => 0, '2' => 0, '3' => 0),
+                        'Vonage' => array('1' => 0, '2' => 0, '3' => 0),
+                    
+                  
+                        'Jive' => array('5' => 0, '6' => 0, '7' => 0),
+                        'Nextiva' => array('5' => 0, '6' => 0, '7' => 0),
+                        '8x8' => array('5' => 0, '6' => 0, '7' => 0),
+                  
+                        'AlliancePhones' => array('8' => 0, '9' => 0),
+                        'VoIPstudio' => array('8' => 0, '9' => 0),
+                        //'1-VoIP' => array('8' => 0, '9' => 0, '10' => 0),
+                      );
+          }
+
+          $random_index = array($fixed_positions['RingCentral_key'], $fixed_positions['Mitel_key'], $fixed_positions['Vonage_key'],
+                                $fixed_positions['Nextiva_key'], $fixed_positions['8x8_key'], $fixed_positions['Jive_key'],
+                                $fixed_positions['AlliancePhones_key'], $fixed_positions['VoIPstudio_key']              
+                  );
+          $random_index_save = $random_index;
+          
+          $count_cur = 0;
+          do {
+            shuffle($random_index);
+            $count_cur++;
+                    if($count_cur++ >500000) {
+                      // Left unchanged, not shuffled
+                      $random_index = $random_index_save;
+                      break;
+                    };
+          }while (
+                    (
+                      isset($fixed_positions['RingCentral_key']) 
+                      && 
+                       !( ($random_index[0] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral'][1] < 2) || ($random_index[1] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral'][2] < 2) || ($random_index[2] == $fixed_positions['RingCentral_key'] && $gv_rotate_data___block_top_bu_ppc['RingCentral'][3] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Mitel_key']) 
+                      && 
+                      !( ($random_index[0] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][1] < 2) || ($random_index[1] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][2] < 2) || ($random_index[2] == $fixed_positions['Mitel_key'] && $gv_rotate_data___block_top_bu_ppc['Mitel'][3] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Vonage_key']) 
+                      && 
+                     !( ($random_index[0] == $fixed_positions['Vonage_key'] && $gv_rotate_data___block_top_bu_ppc['Vonage'][1] < 2) || ($random_index[1] == $fixed_positions['Vonage_key'] && $gv_rotate_data___block_top_bu_ppc['Vonage'][2] < 2) || ($random_index[2] == $fixed_positions['Vonage_key'] && $gv_rotate_data___block_top_bu_ppc['Vonage'][3] < 2) ) 
+                    )
+                  
+                  
+                    ||  
+                    (
+                      isset($fixed_positions['Nextiva_key']) 
+                      && 
+                       !( ($random_index[3] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][5] < 2) || ($random_index[4] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][6] < 2) || ($random_index[5] == $fixed_positions['Nextiva_key'] && $gv_rotate_data___block_top_bu_ppc['Nextiva'][7] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['8x8_key']) 
+                      && 
+                      !( ($random_index[3] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][5] < 2) || ($random_index[4] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][6] < 2) || ($random_index[5] == $fixed_positions['8x8_key'] && $gv_rotate_data___block_top_bu_ppc['8x8'][7] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['Jive_key']) 
+                      && 
+                     !( ($random_index[3] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][5] < 2) || ($random_index[4] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][6] < 2) || ($random_index[5] == $fixed_positions['Jive_key'] && $gv_rotate_data___block_top_bu_ppc['Jive'][7] < 2) ) 
+                    )
+                  
+                  
+                    ||  
+                    (
+                      isset($fixed_positions['AlliancePhones_key']) 
+                      && 
+                       !( ($random_index[6] == $fixed_positions['AlliancePhones_key'] && $gv_rotate_data___block_top_bu_ppc['AlliancePhones'][8] < 2) || ($random_index[7] == $fixed_positions['AlliancePhones_key'] && $gv_rotate_data___block_top_bu_ppc['AlliancePhones'][9] < 2) || ($random_index[8] == $fixed_positions['AlliancePhones_key'] && $gv_rotate_data___block_top_bu_ppc['AlliancePhones'][10] < 2) )
+                    )
+                    ||
+                    (
+                      isset($fixed_positions['VoIPstudio_key']) 
+                      && 
+                      !( ($random_index[6] == $fixed_positions['VoIPstudio_key'] && $gv_rotate_data___block_top_bu_ppc['VoIPstudio'][8] < 2) || ($random_index[7] == $fixed_positions['VoIPstudio_key'] && $gv_rotate_data___block_top_bu_ppc['VoIPstudio'][9] < 2) || ($random_index[8] == $fixed_positions['VoIPstudio_key'] && $gv_rotate_data___block_top_bu_ppc['VoIPstudio'][10] < 2) )
+                    )
+//                    ||
+//                    (
+//                      isset($fixed_positions['1-VoIP_key']) 
+//                      && 
+//                     !( ($random_index[6] == $fixed_positions['1-VoIP_key'] && $gv_rotate_data___block_top_bu_ppc['1-VoIP'][8] < 2) || ($random_index[7] == $fixed_positions['1-VoIP_key'] && $gv_rotate_data___block_top_bu_ppc['1-VoIP'][9] < 2) || ($random_index[8] == $fixed_positions['1-VoIP_key'] && $gv_rotate_data___block_top_bu_ppc['1-VoIP'][10] < 2) ) 
+//                    )
+
+                  );
+
+//          $result_index = array(
+//              0 => $fixed_positions['RingCentral_key'],
+//              1 => $fixed_positions['Mitel_key'],
+//              2 => $fixed_positions['Vonage_key'],
+//              3 => $fixed_positions['Corvisa_key'],
+//              
+//              4 => $random_index[0],
+//              5 => $random_index[1],
+//              6 => $random_index[2],
+//          );
+          
+          $result_index = array(
+              0 => $random_index[0],
+              1 => $random_index[1],
+              2 => $random_index[2],
+              3 => $fixed_positions['Corvisa_key'],
+              
+              4 => $random_index[3],
+              5 => $random_index[4],
+              6 => $random_index[5],
+              
+              7 => $random_index[6],
+              8 => $random_index[7],
+              //9 => $random_index[8],
+          );
+
+
+          $gv_rotate_data___block_top_bu_ppc['iteration_count'] += 1;
+          //dpm($random_index);
+          foreach ($random_index as $random_position => $fixed_index) {
+            switch ($fixed_index) {
+              case $fixed_positions['RingCentral_key']:
+                @$gv_rotate_data___block_top_bu_ppc['RingCentral'][$random_position + 1] += 1;
+                break;
+              case $fixed_positions['Mitel_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Mitel'][$random_position + 1] += 1;
+                break;
+              case $fixed_positions['Vonage_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Vonage'][$random_position + 1] += 1;
+                break;
+              
+              case $fixed_positions['Nextiva_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Nextiva'][$random_position + 2] += 1;
+                break;
+              case $fixed_positions['Jive_key']:
+                @$gv_rotate_data___block_top_bu_ppc['Jive'][$random_position + 2] += 1;
+                break;
+              case $fixed_positions['8x8_key']:
+                @$gv_rotate_data___block_top_bu_ppc['8x8'][$random_position + 2] += 1;
+                break;
+              
+              case $fixed_positions['AlliancePhones_key']:
+                @$gv_rotate_data___block_top_bu_ppc['AlliancePhones'][$random_position + 2] += 1;
+                break;
+              case $fixed_positions['VoIPstudio_key']:
+                @$gv_rotate_data___block_top_bu_ppc['VoIPstudio'][$random_position + 2] += 1;
+                break;
+//              case $fixed_positions['1-VoIP_key']:
+//                @$gv_rotate_data___block_top_bu_ppc['1-VoIP'][$random_position + 2] += 1;
+//                break;
+            }
+          }
+          
+          $random_index = $result_index;
+          
+          //dpm('Random counter = ' . $count_cur);
+          //dpm($gv_rotate_data___block_top_bu_ppc);
+          
+
+          variable_set($settings_name, $gv_rotate_data___block_top_bu_ppc);
+          
+          break; // End of case 'v7':
+        
+        
         
         
         
@@ -9225,7 +9417,7 @@ function gv_blocks_chartFromView_altered_rotatedProviders($view_n_display) {
         //$version = 'v4'; //$user->uid == 1 ? 'v4' : 'v3-1'; //$user->uid == 1 ? 'v3-2' : 'v3-1'; //'v3-1';
       
         if ($_GET['q'] == 'bing/business-voip' || $_GET['q'] == 'node/5467') {
-          $version = 'v7';
+          $version = 'v7_without_1-VoIP'; //'v7';
         }
         else {
           $version = 'v9'; // $user->uid ? 'v9' : 'v8'; 
